@@ -271,7 +271,7 @@
     <string name="poi_traffic_calming_bump">مطب قوي</string>
     <string name="poi_highway_crossing">ممر/خط المشاة</string>
     <string name="poi_post_office">مكتب بريد</string>
-    <string name="poi_water_tower">برج مياه</string>
+    <string name="poi_water_tower">برج خزان مياه</string>
     <string name="poi_bridge">جسر</string>
     <string name="poi_swimming_pool">حوض سباحة</string>
     <string name="poi_power_generator">مولد طاقة</string>
@@ -513,7 +513,7 @@
     <string name="poi_speed_camera">رادار سرعة</string>
     <string name="poi_junction">تقاطع</string>
     <string name="poi_rest_area">منطقة استراحة</string>
-    <string name="poi_water_works">أعمال المياه</string>
+    <string name="poi_water_works">محطة معالجة المياه</string>
     <string name="poi_boatyard">حوض سفن</string>
     <string name="poi_wastewater_plant">محطة الصرف الصحي</string>
     <string name="poi_dam">سد</string>
@@ -564,10 +564,10 @@
     <string name="poi_farmyard">مرافق مزرعة</string>
     <string name="poi_meadow">مرعى/مرج/روضة</string>
     <string name="poi_canal">قناة</string>
-    <string name="poi_surveillance">مراقبة</string>
+    <string name="poi_surveillance">معدة/كاميرا رصد ومراقبة</string>
     <string name="poi_observatory">مرصد</string>
     <string name="poi_astronomical_observatory">فلكي</string>
-    <string name="poi_mast">صاري</string>
+    <string name="poi_mast">عمود/برج عمودي</string>
     <string name="poi_monitoring_station">محطة رصد</string>
     <string name="poi_radar">رادار</string>
     <string name="poi_windmill">طاحونة هوائية</string>
@@ -958,7 +958,7 @@
     <string name="poi_harbour_basin">حوض الميناء</string>
     <string name="poi_seamark_harbour">ميناء/مرفأ</string>
     <string name="poi_signal_station_warning">محطة إشارة، تحذير</string>
-    <string name="poi_military_bunker">وقود السفن العسكرية</string>
+    <string name="poi_military_bunker">مخبأ/ مستودع محصن عسكرية</string>
     <string name="poi_wiki_lang_ce">ويكي الشيشان</string>
     <string name="poi_wiki_lang_ur">ويكي الأردية</string>
     <string name="poi_wiki_lang_oc">ويكي الأوكسيتانية</string>
@@ -1408,7 +1408,7 @@
     <string name="poi_lock_gate">حوض نقل القوارب</string>
     <string name="poi_weir">سدّ غاطس</string>
     <string name="poi_breakwater">كاسر الأمواج</string>
-    <string name="poi_groyne">مِرطَم مَوج</string>
+    <string name="poi_groyne">حاجز للرواسب البحرية</string>
     <string name="poi_power_cable_distribution_cabinet">كبينة توزيع الأسلاك</string>
     <string name="poi_power_pole">عمود كهربائي</string>
     <string name="poi_bell_tower">برج جرس</string>
@@ -1459,7 +1459,7 @@
     <string name="poi_works">أعمال</string>
     <string name="poi_mineshaft">منجم</string>
     <string name="poi_adit">ممر المنجم</string>
-    <string name="poi_gasometer">مقياس الغاز</string>
+    <string name="poi_gasometer">خزان غاز كبير فوق الأرض</string>
     <string name="poi_silo">صومعة</string>
     <string name="poi_bailiff">حاجب محكمة</string>
     <string name="poi_baby_hatch">حضانة</string>
@@ -1560,7 +1560,7 @@
     <string name="poi_squash">سكواش</string>
     <string name="poi_shuffleboard">شافلبورد</string>
     <string name="poi_lacrosse">لاكروس</string>
-    <string name="poi_dyke">دايك</string>
+    <string name="poi_dyke">حاجز/عقم لمنع تدفق المياه</string>
     <string name="poi_dolphin">دولفين</string>
     <string name="poi_feeding_place">مكان لتغذية الحيوان</string>
     <string name="poi_water_place_durability_durable">قدرة تحمل المكان للماء: متين</string>
@@ -1640,7 +1640,7 @@
     <string name="poi_bowls">كرة</string>
     <string name="poi_place_allotments">الحدائق/المزارع المحصصة</string>
     <string name="poi_register_office">مكتب السجل المدني</string>
-    <string name="poi_bunker_silo">غرفة تحميل</string>
+    <string name="poi_bunker_silo">خنادق وأماكن تخزين الصوامع</string>
     <string name="poi_recycling_hardcore">صلب</string>
     <string name="poi_aerialway_pylon">برج الرفع الجوي</string>
     <string name="poi_fuel_coal">الوقود: الفحم</string>
@@ -1697,7 +1697,7 @@
     <string name="poi_seamark_light">ضوء, علامة بحريّة</string>
     <string name="poi_landmark">علامة</string>
     <string name="poi_floating_dock">رصيف عائم</string>
-    <string name="poi_seamark_dyke">حاجز علامة البحر</string>
+    <string name="poi_seamark_dyke">العلامة المائية: حاجز مياه</string>
     <string name="poi_dry_dock">حوض جاف</string>
     <string name="poi_daymark">علامة النهار</string>
     <string name="poi_buoy_special_purpose">عوامة الأغراض الخاصة</string>
@@ -2471,7 +2471,7 @@
     <string name="poi_protection_object_historic">الكيان المحمي: تاريخي</string>
     <string name="poi_protection_title">عنوان الحماية</string>
     <string name="poi_bandy">باندي</string>
-    <string name="poi_street_cabinet">كبينة/خزنة شارع</string>
+    <string name="poi_street_cabinet">كبينة مرافق وخدمات في الشارع</string>
     <string name="poi_firepit">حفرة إشعال نار</string>
     <string name="poi_atm_yes">صراف آلي: نعم</string>
     <string name="poi_inscription_ne">نقش: شمال شرقي</string>
@@ -2655,7 +2655,7 @@
     <string name="poi_social_facility_workshop">ورشة عمل</string>
     <string name="poi_social_facility_ambulatory_care">الرعاية الإسعافية</string>
     <string name="poi_social_facility_shelter">مأوى</string>
-    <string name="poi_social_facility_food_bank">بنك الطعام</string>
+    <string name="poi_social_facility_food_bank">بنك الأغذية</string>
     <string name="poi_social_facility_outreach">التوعية</string>
     <string name="poi_social_facility_assisted_living">مساعدة معيشية</string>
     <string name="poi_social_facility_group_home">دار جماعية</string>
@@ -3658,7 +3658,7 @@
     <string name="poi_water_source_powered_pump">مضخة</string>
     <string name="poi_water_source_water_tank">خزان مياه</string>
     <string name="poi_water_source_tap">حنفية</string>
-    <string name="poi_water_source_water_works">أعمال مياه</string>
+    <string name="poi_water_source_water_works">محطة معالجة المياه</string>
     <string name="poi_water_source_tube_well">شيب مياه</string>
     <string name="poi_vaccination_covid19">لقاح كورونا COVID19</string>
     <string name="poi_health_specialty_vaccination_yes">يتوفر لدهم لقاح</string>

@@ -3974,4 +3974,5 @@
     <string name="poi_memorial_subject">Teema</string>
     <string name="poi_picnic_table_no">Piknikulaud: ei</string>
     <string name="poi_picnic_table_yes">Piknikulaud: jah</string>
+    <string name="poi_outdoor_seating_poi">Istekohad õues</string>
 </resources>

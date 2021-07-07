@@ -4108,25 +4108,25 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Umweltzonen vermeiden</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="search_more">Mehr suchen…</string>
-    <string name="osmand_cloud_authorize_descr">Verlieren Sie niemals Ihre Daten, sichern und stellen Sie alle Informationen problemlos wieder her.</string>
-    <string name="osmand_cloud_create_account_descr">Bitte geben Sie Ihre E-Mail-Adresse ein, alle Ihre Daten werden mit dieser verknüpft.
-\nWir senden Ihnen einen Verifizierungscode an diese E-Mail-Adresse.</string>
+    <string name="osmand_cloud_authorize_descr">Kein Datenverlust mehr, problemlose Sicherung und Wiederherstellung aller Informationen.</string>
+    <string name="osmand_cloud_create_account_descr">Bitte geben Sie Ihre E-Mail Adresse ein. Ein Bestätigungscode wird dorthin gesendet,
+\nund alle Ihre Daten werden damit verknüpft.</string>
     <string name="verification_code_missing_description">Die Wartezeit für den Code kann 10 Minuten betragen, außerdem können Sie Ihren Spamordner überprüfen. Wenn dies nicht hilft, verwenden Sie die Schaltfläche unten.</string>
     <string name="backup_and_restore">Backup und Wiederherstellen</string>
     <string name="last_backup">Letztes Backup</string>
     <string name="duration_ago">vor %1$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="local_backup">Lokales Backup</string>
-    <string name="local_backup_descr">Daten aus/in eine lokale Datei wiederherstellen/sichern.</string>
-    <string name="backup_into_file">Backup in Datei</string>
+    <string name="local_backup_descr">Daten lokal sichern oder wiederherstellen.</string>
+    <string name="backup_into_file">Als Datei sichern</string>
     <string name="restore_from_file">Von Datei wiederherstellen</string>
     <string name="osmand_cloud_help_descr">Sie benötigen Hilfe\? Bitte kontaktieren Sie uns unter %1$s</string>
-    <string name="osmand_cloud_login_descr">Bitte geben Sie die E-Mail-Adresse ein, die Sie für die Registrierung verwendet haben. Wir werden Ihnen ein Einmalpasswort senden, dass Sie im nächsten Schritt benötigen.</string>
-    <string name="verify_email_address">E-Mail-Adresse verifizieren</string>
-    <string name="verify_email_address_descr">Wir haben einen Bestätigungscode an %1$s gesendet, bitte geben Sie ihn unten ein.</string>
+    <string name="osmand_cloud_login_descr">Bitte geben Sie die E-Mail Adresse ein, mit der Sie sich registriert haben. An diese wird ein Einmal-Passwort für den nächsten Schritt gesendet.</string>
+    <string name="verify_email_address">Überprüfen Sie die E-Mail Adresse</string>
+    <string name="verify_email_address_descr">Bestätigungscode wurde an %1$s gesendet. Bitte geben Sie ihn in das Feld unten ein.</string>
     <string name="enter_verification_code">Geben Sie den 4-stelligen Code ein</string>
-    <string name="cloud_email_not_registered">Diese E-Mail wurde noch nicht für OsmAnd Cloud registriert</string>
-    <string name="cloud_email_already_registered">Account mit dieser E-Mail wurde bereits registriert.</string>
+    <string name="cloud_email_not_registered">Diese E-Mail Adresse ist nicht für OsmAnd Cloud registriert</string>
+    <string name="cloud_email_already_registered">Diese E-Mail Adresse ist bereits registriert.</string>
     <string name="resend_verification_code">Code erneut senden</string>
     <string name="verification_code_missing">Ich habe keinen Bestätigungscode erhalten</string>
     <string name="select_nav_profile_dialog_message">Die \'Navigationsart\' bestimmt, wie Routen berechnet werden. Sie können zwischen Offline- und Online-Routenplanern wählen.</string>
@@ -4175,7 +4175,7 @@
     <string name="grey_color_slope">Graue Farbe wird verwendet, wenn die Steigung undefiniert ist.</string>
     <string name="backup_version_history">Versionsgeschichte</string>
     <string name="backup_storage_taken">Belegter Speicher</string>
-    <string name="backup_version_history_delete_descr">Möchten Sie die Änderungshistorie für veraltete Datentypen aus der OsmAnd-Cloud löschen\?</string>
+    <string name="backup_version_history_delete_descr">Die Änderungshistorie für veraltete Datentypen aus der OsmAnd Cloud löschen\?</string>
     <string name="delete_version_history">Versionsgeschichte löschen</string>
     <string name="routing_attr_avoid_tunnels_description">Tunnel vermeiden</string>
     <string name="routing_attr_avoid_tunnels_name">Tunnel vermeiden</string>
@@ -4225,7 +4225,7 @@
     <string name="backup_error_gzip_only_supported_upload">Die Datei sollte im .gzip-Format gesendet werden</string>
     <string name="backup_error_file_not_available">Datei nicht verfügbar</string>
     <string name="backup_error_token_is_not_valid">Etwas stimmt nicht mit der angegebenen Geräte-ID oder dem Token</string>
-    <string name="backup_error_user_is_not_registered">Benutzer mit dieser E-Mail ist nicht registriert</string>
+    <string name="backup_error_user_is_not_registered">Kein Benutzer mit dieser E-Mail Adresse registriert</string>
     <string name="backup_error_token_is_not_valid_or_expired">Ungültiges oder abgelaufenes Token</string>
     <string name="backup_error_no_valid_subscription">Kein gültiges Abonnement vorhanden</string>
 </resources>

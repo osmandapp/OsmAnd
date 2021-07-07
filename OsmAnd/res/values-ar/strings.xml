@@ -3616,10 +3616,10 @@
     <string name="extra_maps_menu_group">خرائط إضافية</string>
     <string name="download_unsupported_action">%1$s إجراء غير معتمد</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">سيتم احتساب الدفع لحساب Google Play الخاص بك في تأكيد الشراء. 
-\n 
-\nيتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل تاريخ التجديد. سيتم تحميل حسابك لفترة التجديد (شهر / ثلاثة أشهر / سنة) فقط في تاريخ التجديد. 
-\n 
+    <string name="osm_live_payment_subscription_management">سيتم احتساب الدفع لحساب Google Play الخاص بك في تأكيد الشراء.
+\n
+\nيتم تجديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل تاريخ التجديد. سيتم تحميل حسابك لفترة التجديد (شهر / ثلاثة أشهر / سنة) فقط في تاريخ التجديد.
+\n
 \nيمكنك إدارة وإلغاء الاشتراكات الخاصة بك عن طريق الذهاب إلى إعدادات Google Play الخاصة بك.</string>
     <string name="search_poi_types">البحث عن أنواع poi</string>
     <string name="search_poi_types_descr">اجمع أنواع النقاط المهمة من فئات مختلفة. اضغط على مفتاح التبديل لتحديد الكل ، ثم انقر على الجانب الأيسر لاختيار الفئة.</string>
@@ -4000,7 +4000,7 @@
     <string name="online_routing_engines">محركات التوجيه عبر الإنترنت</string>
     <string name="shared_string_folders">المجلدات</string>
     <string name="select_folder">تحديد مجلد</string>
-    <string name="select_folder_descr">تحديد مجلد أو إضافة جديد</string>
+    <string name="select_folder_descr">حدد مجلد أو إضافة واحد جديد</string>
     <string name="shared_string_empty">فارغ</string>
     <string name="analyze_by_intervals">التحليل حسب الفواصل الزمنية (الفاصل الزمني)</string>
     <string name="upload_to_openstreetmap">رفع إلى خريطة الشارع المفتوح</string>
@@ -4070,12 +4070,12 @@
     <string name="activity_type_car_name">سيارة</string>
     <string name="copy_poi_name">نسخ اسم POI</string>
     <string name="select_another_colorization">الرجاء اختيار أنواع أخرى من التلوين.</string>
-    <string name="snap_to_road_descr">سيتم محاذاة رمز الموضع الحالي إلى مسار التنقل الحالي</string>
+    <string name="snap_to_road_descr">سيتم محاذاة رمز الموضع الحالي إلى مسار الملاحة الحالي</string>
     <string name="select_segments">حدد الجزء</string>
     <string name="select_segments_description">%1$s يحتوي على أكثر من مقطع ، تحتاج إلى تحديد الجزء المطلوب للتنقل.</string>
     <string name="segments_count">الجزء %1$d</string>
     <string name="temporary_conditional_routing_descr">استخدم قيود الطريق النشطة الآن على الخريطة</string>
-    <string name="routing_attr_short_way_description">طريق أقصر أمثل (توفير الطاقة)</string>
+    <string name="routing_attr_short_way_description">طريق أقصر محسن (توفير الطاقة)</string>
     <string name="routing_attr_driving_style_description">حدد غرض القيادة للحصول على مسار أقصر أو أسرع أو أكثر أمانًا</string>
     <string name="map_orientation_threshold_descr">إذا كانت السرعة أقل من الحد ، لا تقم بتدويرالخريطة</string>
     <string name="restart">اعاده تشغيل</string>
@@ -4089,7 +4089,7 @@
     <string name="on_pause">عند الإيقاف المؤقت</string>
     <string name="app_restart_required">مطلوب إعادة تشغيل التطبيق لتطبيق بعض الإعدادات.</string>
     <string name="routing_attr_height_obstacles_description">التوجيه يمكن أن يتجنب المرتفعات القوية.</string>
-    <string name="quick_action_coordinates_widget_descr">تبديل لإظهار أو إخفاء أداة الإحداثيات على الخريطة.</string>
+    <string name="quick_action_coordinates_widget_descr">إظهار أو إخفاء عرض الإحداثيات على الخريطة.</string>
     <string name="map_widget_distance_by_tap">المسافة عن طريق الضغط</string>
     <string name="latest_openstreetmap_update">آخر تحديث خريطة الشارع المفتوح المتاحة:</string>
     <string name="updated">تحديث: %s</string>
@@ -4193,7 +4193,7 @@
     <string name="verification_code_missing">لم أتلق رمز التحقق</string>
     <string name="verification_code_missing_description">مدة انتظار الرمز قد تصل إلى 10 دقائق ، كما يمكنك التحقق من مجلد البريد العشوائي، استخدم الزر أدناه.</string>
     <string name="restore_from_file">استعادة من ملف</string>
-    <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على كييفية حساب المسارات يمكنك الاختيار بين محركات التوجيه المتصلة وغير المتصلة بالإنترنت.</string>
+    <string name="select_nav_profile_dialog_message">يؤثر \'نوع التنقل\' على كييفية حساب المسارات يمكنك الاختيار بين محركات التوجيه المتصلة وغير المتصلة بالإنترنت.</string>
     <string name="loading_list_of_routing_services">تحميل قائمة خدمات التوجيه المتوفرة</string>
     <string name="shared_string_offline">دون اتصال</string>
     <string name="shared_string_online">عبر الإنترنت</string>
@@ -4234,7 +4234,7 @@
     <string name="restore_from_osmand_cloud">استعادة من سحابة أوسماند</string>
     <string name="choose_what_to_restore">حدد المحتوى الذي تريد استعادته .</string>
     <string name="restore_selected_data">استعادة البيانات المحددة</string>
-    <string name="receiving_data_from_server">استقبال البيانات من السيرفر</string>
+    <string name="receiving_data_from_server">استقبال البيانات من السيرفر…</string>
     <string name="restore_complete">اكتمال الاستعادة</string>
     <string name="grey_color_slope">يستخدم اللون الرمادي عندما يكون المنحدر غير محدد.</string>
     <string name="backup_version_history">تاريخ النسخة</string>
@@ -4289,7 +4289,7 @@
     <string name="backup_error_size_is_exceeded">تجاوزت الحد الأقصى لحجم سحابة أوسماند %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">صيغة الملف المرسل ليست gzip</string>
     <string name="backup_error_file_not_available">الملف غير متوفر</string>
-    <string name="backup_error_token_is_not_valid">معرف الجهاز المتوفر أو الرمز المميز غير صالح</string>
+    <string name="backup_error_token_is_not_valid">معرف الجهاز المتوفر أو الرمزغير صالح</string>
     <string name="backup_error_token_is_not_valid_or_expired">الرمز غير صالح أو منتهي الصلاحية</string>
     <string name="backup_error_user_is_not_registered">المستخدم مع هذا البريد الإلكتروني غير مسجل</string>
     <string name="backup_error_no_valid_subscription">لا يوجد اشتراك صالح</string>
