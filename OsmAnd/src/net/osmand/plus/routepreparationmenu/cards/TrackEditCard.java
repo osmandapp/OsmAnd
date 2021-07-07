@@ -78,7 +78,7 @@ public class TrackEditCard extends MapBaseCard {
 		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
 			int selectedSegmentCount = routeParams.getSelectedSegment() + 1;
 			int totalSegmentCount = routeParams.getFile().getNonEmptyTrkSegments(false).size();
-			title = app.getResources().getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + title;
+			title = app.getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + title;
 		}
 		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, dataItem, false, app);
 

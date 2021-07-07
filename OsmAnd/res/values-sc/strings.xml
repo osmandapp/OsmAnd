@@ -4116,7 +4116,6 @@
     <string name="osmand_cloud_login_descr">Pro praghere inserta su còdighe de posta eletrònica chi as impreadu pro sa registratzione. T\'amus a imbiare una crae temporànea chi t\'at a bisongiare pro su passu imbeniente.</string>
     <string name="verify_email_address">Verìfica s\'indiritzu de posta eletrònica</string>
     <string name="verify_email_address_descr">Amus imbiadu unu còdighe de verìfica a %1$s, pro praghere inserta·lu in su campu inoghe in suta.</string>
-    <string name="enter_verification_code">Inserta su còdighe a 4 tzifras</string>
     <string name="cloud_email_not_registered">Custu indiritzu de posta no est istadu registradu pro OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">B\'at giai unu contu cun custu indiritzu de posta.</string>
     <string name="resend_verification_code">Torra a imbiare su còdighe</string>

@@ -305,7 +305,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			title = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(getGpx().path));
 		}
 		gpxTitle = !isCurrentRecordingTrack() ? title
-				: app.getResources().getString(R.string.shared_string_currently_recording_track);
+				: app.getString(R.string.shared_string_currently_recording_track);
 	}
 
 	public LatLon getLatLon() {

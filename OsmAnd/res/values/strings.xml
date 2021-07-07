@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+
+    <string name="duration_moment_ago">a moment ago</string>
     <string name="release_4_0">
     • Cloud backup\n\n
     • Added night mode for \"Topo\" rendering style\n\n
@@ -124,7 +126,7 @@
     <string name="resend_verification_code">Resend code</string>
     <string name="cloud_email_already_registered">This e-mail address is already registered.</string>
     <string name="cloud_email_not_registered">This e-mail address is not registered for OsmAnd Cloud</string>
-    <string name="enter_verification_code">Enter the 4-digit code</string>
+    <string name="enter_verification_code">Enter one-time password</string>
     <string name="verify_email_address_descr">Verification code sent to %1$s. Please enter it in the field below.</string>
     <string name="verify_email_address">Verify the e-mail address</string>
     <string name="osmand_cloud_login_descr">Please enter the e-mail address you registred with. A one-time password for the next step will be sent to it.</string>

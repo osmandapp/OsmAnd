@@ -4112,7 +4112,6 @@
     <string name="osmand_cloud_login_descr">請輸入您註冊的電子郵件地址。下一步的一次性密碼將傳送給它。</string>
     <string name="verify_email_address">驗證電子郵件地址</string>
     <string name="verify_email_address_descr">驗證碼已傳送至 %1$s。請在下方欄位輸入。</string>
-    <string name="enter_verification_code">輸入 4 位數代碼</string>
     <string name="cloud_email_not_registered">此電子郵件尚未註冊 OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">此電子郵件地址已被註冊。</string>
     <string name="resend_verification_code">重新傳送代碼</string>

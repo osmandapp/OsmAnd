@@ -3950,7 +3950,6 @@
     <string name="route_line_use_gradient_coloring">Rutelinjen er farget av høydeskråning.</string>
     <string name="recorded_description">Innspilt stemme høres bedre ut, men kan kun uttale forhåndsinnspillede setninger: svinginstruksjoner. Kan ikke kunngjøre gatenavn eller interessepunktnavn.</string>
     <string name="shared_string_itinerary">Reiseplan</string>
-    <string name="enter_verification_code">Skriv inn 4-sifret kode</string>
     <string name="cloud_email_not_registered">Dennne e-postadressen har ikke blitt registrert for OsmAnd Sky</string>
     <string name="cloud_email_already_registered">En konto med denne e-postadressen er allerede registrert.</string>
     <string name="resend_verification_code">Send koden igjen</string>

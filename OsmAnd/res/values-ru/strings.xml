@@ -4126,7 +4126,6 @@
     <string name="backup_and_restore">Резервное копирование и восстановление</string>
     <string name="last_backup">Последнее резервное копирование</string>
     <string name="duration_ago">%1$s назад</string>
-    <string name="enter_verification_code">Введите 4-значный код</string>
     <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчета маршрутов. Вы можете выбрать локальный или онлайн маршрутизатор.</string>
     <string name="backup_delete_all_data_warning">Вы собираетесь удалить все данные ранее загруженные в OsmAnd Cloud, включая истории версий.\n\nВы не сможете восстановить удаленные данные.</string>
     <string name="backup_delete_old_data_warning">Вы собираетесь удалить историю изменений для ранее загруженных данных.\n\nТекущая версия данных будет сохранена на сервере, но вы не сможете вернуться к ранее сделанным изменениям.</string>

@@ -4104,7 +4104,6 @@
     <string name="resend_verification_code">Kód újraküldése</string>
     <string name="cloud_email_already_registered">Ez az e-mail-cím már regisztrálva van.</string>
     <string name="cloud_email_not_registered">Ez az e-mail-címe nincs regisztrálva az OsmAnd Cloud szolgáltatásban</string>
-    <string name="enter_verification_code">Írja be a négy számjegyű kódot</string>
     <string name="verify_email_address">E-mail-cím hitelesítése</string>
     <string name="osmand_cloud_login_descr">Kérjük, írja be a regisztrációhoz használt e-mail-címet. A következő lépéshez kap rá egy egyszer használatos jelszót.</string>
     <string name="osmand_cloud_create_account_descr">Kérjük, adja meg az e-mail címét, ahová küldünk egy ellenőrző kódot küldünk,

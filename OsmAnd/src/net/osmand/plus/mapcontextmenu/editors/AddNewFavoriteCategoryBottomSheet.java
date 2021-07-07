@@ -169,7 +169,7 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 
 		view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.add_new_favorite_category, null);
 		nameTextBox = view.findViewById(R.id.name_text_box);
-		nameTextBox.setHint(app.getResources().getString(R.string.favorite_category_name));
+		nameTextBox.setHint(app.getString(R.string.favorite_category_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
 				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
 		nameTextBox.setDefaultHintTextColor(colorStateList);

@@ -4117,7 +4117,6 @@
     <string name="osmand_cloud_login_descr">Введіть адресу е-пошти з якою ви реєструвалися. Одноразовий пароль, необхідний на наступному кроці буде надіслано на неї.</string>
     <string name="verify_email_address">Підтвердити електронну адресу</string>
     <string name="verify_email_address_descr">Код підтвердження надіслано на %1$s. Введіть його в поле знизу.</string>
-    <string name="enter_verification_code">Введіть 4-значний код</string>
     <string name="cloud_email_not_registered">Цю електронну адресу ще не зареєстровано для OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Ця адреса е-пошти вже зареєстрована.</string>
     <string name="resend_verification_code">Надіслати код ще раз</string>
