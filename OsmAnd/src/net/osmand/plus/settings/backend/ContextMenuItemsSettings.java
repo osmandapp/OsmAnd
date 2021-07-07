@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.backend;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
 
@@ -15,13 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
+import androidx.annotation.NonNull;
 
 public class ContextMenuItemsSettings implements Serializable {
 
@@ -30,8 +22,8 @@ public class ContextMenuItemsSettings implements Serializable {
 	private static final String HIDDEN = "hidden";
 	private static final String ORDER = "order";
 
-	private List<String> hiddenIds = new ArrayList<>();
-	private List<String> orderIds = new ArrayList<>();
+	protected List<String> hiddenIds = new ArrayList<>();
+	protected List<String> orderIds = new ArrayList<>();
 
 	public ContextMenuItemsSettings() {
 
@@ -61,18 +53,6 @@ public class ContextMenuItemsSettings implements Serializable {
 	public void readFromJson(JSONObject json, String idScheme) {
 		hiddenIds = readIdsList(json.optJSONArray(HIDDEN), idScheme);
 		orderIds = readIdsList(json.optJSONArray(ORDER), idScheme);
-		if (DRAWER_ITEM_ID_SCHEME.equals(idScheme)) {
-			hideOriginallyCreatedDrawerItems();
-		}
-	}
-
-	private void hideOriginallyCreatedDrawerItems() {
-		for (String defaultHiddenItem : getDrawerHiddenItemsByDefault()) {
-			boolean isNewlyCreated = !hiddenIds.contains(defaultHiddenItem) && !orderIds.contains(defaultHiddenItem);
-			if (isNewlyCreated) {
-				hiddenIds.add(defaultHiddenItem);
-			}
-		}
 	}
 
 	protected List<String> readIdsList(JSONArray jsonArray, @NonNull String idScheme) {
@@ -118,20 +98,5 @@ public class ContextMenuItemsSettings implements Serializable {
 
 	public List<String> getOrderIds() {
 		return Collections.unmodifiableList(orderIds);
-	}
-
-	public static ContextMenuItemsSettings getDrawerDefaultInstance() {
-		return new ContextMenuItemsSettings(getDrawerHiddenItemsByDefault(), new ArrayList<>());
-	}
-
-	private static List<String> getDrawerHiddenItemsByDefault() {
-		List<String> hiddenByDefault = new ArrayList<>();
-		hiddenByDefault.add(DRAWER_DASHBOARD_ID);
-		hiddenByDefault.add(DRAWER_FAVORITES_ID);
-		hiddenByDefault.add(DRAWER_TRACKS_ID);
-		hiddenByDefault.add(DRAWER_AV_NOTES_ID);
-		hiddenByDefault.add(DRAWER_OSM_EDITS_ID);
-		hiddenByDefault.add(DRAWER_BACKUP_RESTORE_ID);
-		return hiddenByDefault;
 	}
 }
