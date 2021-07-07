@@ -11,7 +11,18 @@
 	Thx - Hardy
 
 -->
-
+    <string name="release_4_0">
+    • Cloud backup\n\n
+    • Added night mode for \"Topo\" rendering style\n\n
+    • Added option to download Contour lines in feet\n\n
+    • Tracks can now be colored by altitude, speed, or slope.\n\n
+    • Updated \"Trip recording\" dialog\n\n
+    • Distance by tap moved from the Radius ruler into a separate option\n\n
+    • Plan Route: added ability to change navigation options, accessing configure map and search without leaving plan route\n\n
+    • New \"Purchase\" screen with detailed information about purchasing\n\n
+    • Added option to change the route line appearance.\n\n
+    • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
+    </string>
     <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
     <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>
