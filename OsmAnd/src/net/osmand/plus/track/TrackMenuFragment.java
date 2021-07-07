@@ -37,6 +37,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FileUtils;
 import net.osmand.FileUtils.RenameCallback;
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -100,6 +101,7 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import static net.osmand.GPXUtilities.*;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
 import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
@@ -171,6 +173,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int menuHeaderHeight;
 	private int toolbarHeightPx;
 	private boolean adjustMapPosition = true;
+	private GPXTrackAnalysis analyses;
 
 	public enum TrackMenuType {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
@@ -272,9 +275,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					openMenuHeaderOnly();
 				} else {
 					dismiss();
-					if (FileUtils.isTempFile(app, getGpx().path)) {
-						FileUtils.removeGpxFile(app, new File(getGpx().path));
-					}
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
 						MapContextMenu contextMenu = mapActivity.getContextMenu();
@@ -338,6 +338,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public void setAdjustMapPosition(boolean adjustMapPosition) {
 		this.adjustMapPosition = adjustMapPosition;
+	}
+
+	private void setAnalyses(GPXTrackAnalysis analyses) {
+		this.analyses = analyses;
 	}
 
 	@Override
@@ -425,7 +429,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			addCardViewToHeader(overviewCard);
 		} else {
 			MapActivity mapActivity = requireMapActivity();
-			overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile);
+			overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile, analyses);
 			overviewCard.setListener(this);
 			headerContainer.addView(overviewCard.build(mapActivity));
 		}
@@ -675,6 +679,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		stopLocationUpdate();
 		if (overviewCard != null) {
 			overviewCard.getBlockStatisticsBuilder().stopUpdatingStatBlocks();
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		if (FileUtils.isTempFile(app, getGpx().path)) {
+			FileUtils.removeGpxFile(app, new File(getGpx().path));
 		}
 	}
 
@@ -1376,7 +1388,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, true);
+					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, true, null);
 				}
 				return true;
 			}
@@ -1386,7 +1398,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull SelectedGpxFile selectedGpxFile,
 	                                   @Nullable SelectedGpxPoint gpxPoint) {
-		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, false);
+		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, false, null);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
@@ -1394,7 +1406,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                   @Nullable SelectedGpxPoint gpxPoint,
 	                                   @Nullable String returnScreenName,
 	                                   @Nullable String callingFragmentTag,
-	                                   boolean adjustMapPosition) {
+	                                   boolean adjustMapPosition,
+	                                   GPXTrackAnalysis analyses) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
@@ -1402,6 +1415,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			TrackMenuFragment fragment = new TrackMenuFragment();
 			fragment.setArguments(args);
 			fragment.setRetainInstance(true);
+			fragment.setAnalyses(analyses);
 			fragment.setSelectedGpxFile(selectedGpxFile);
 			fragment.setReturnScreenName(returnScreenName);
 			fragment.setCallingFragmentTag(callingFragmentTag);

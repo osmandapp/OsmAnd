@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Metadata;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
@@ -46,16 +47,18 @@ public class OverviewCard extends MapBaseCard {
 	private final SegmentActionsListener actionsListener;
 	private final SelectedGpxFile selectedGpxFile;
 	private final GpxBlockStatisticsBuilder blockStatisticsBuilder;
+	private final GPXTrackAnalysis analysis;
 
 	public GpxBlockStatisticsBuilder getBlockStatisticsBuilder() {
 		return blockStatisticsBuilder;
 	}
 
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull SegmentActionsListener actionsListener,
-	                    SelectedGpxFile selectedGpxFile) {
+	                    SelectedGpxFile selectedGpxFile, GPXTrackAnalysis analysis) {
 		super(mapActivity);
 		this.actionsListener = actionsListener;
 		this.selectedGpxFile = selectedGpxFile;
+		this.analysis = analysis;
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
 	}
 
@@ -88,7 +91,7 @@ public class OverviewCard extends MapBaseCard {
 				initDirectionsButton(iconColorDef, iconColorPres);
 			}
 		}
-		blockStatisticsBuilder.initStatBlocks(actionsListener, getActiveColor());
+		blockStatisticsBuilder.initStatBlocks(actionsListener, getActiveColor(), analysis);
 
 		if (blocksView.getVisibility() == View.VISIBLE && description.getVisibility() == View.VISIBLE) {
 			AndroidUtils.setPadding(description, 0, 0, 0, dpToPx(app, 12));

@@ -115,8 +115,10 @@ public class GpxBlockStatisticsBuilder {
 		return selectedGpxFile.getGpxFile();
 	}
 
-	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor) {
-		initItems();
+	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor,
+	                           GPXTrackAnalysis analysis) {
+		this.analysis = analysis;
+		initItems(analysis);
 		adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor);
 		adapter.setItems(items);
 		blocksView.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
@@ -153,22 +155,27 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void initItems() {
+		initItems(null);
+	}
+
+	public void initItems(GPXTrackAnalysis analysis) {
 		GPXFile gpxFile = getGPXFile();
 		if (app == null || gpxFile == null) {
 			return;
 		}
-		analysis = null;
 		boolean withoutGaps = true;
-		if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
-			GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
-			analysis = currentGpx.getAnalysis(0);
-			withoutGaps = !selectedGpxFile.isJoinSegments()
-					&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
-		} else {
-			GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
-			if (gpxDisplayItem != null) {
-				analysis = gpxDisplayItem.analysis;
-				withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+		if (analysis == null) {
+			if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
+				GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
+				analysis = currentGpx.getAnalysis(0);
+				withoutGaps = !selectedGpxFile.isJoinSegments()
+						&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
+			} else {
+				GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
+				if (gpxDisplayItem != null) {
+					analysis = gpxDisplayItem.analysis;
+					withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+				}
 			}
 		}
 		items.clear();
