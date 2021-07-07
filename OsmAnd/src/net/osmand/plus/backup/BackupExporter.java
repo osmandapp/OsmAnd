@@ -114,11 +114,11 @@ public class BackupExporter extends Exporter {
 				// ignore
 			}
 		}
+		log.finishOperation();
 		if (!exceptions.isEmpty()) {
 			Throwable t = exceptions.values().iterator().next();
 			throw new IOException(t.getMessage(), t);
 		}
-		log.finishOperation();
 	}
 
 	private void exportItems() throws IOException {

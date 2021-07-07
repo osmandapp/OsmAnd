@@ -2355,12 +2355,13 @@ public class OsmandAidlApi {
 			for (String key : settingsTypesKeys) {
 				settingsTypes.add(ExportSettingsType.valueOf(key));
 			}
+			settingsTypes.remove(ExportSettingsType.PROFILE);
 			List<SettingsItem> settingsItems = new ArrayList<>();
 			settingsItems.add(new ProfileSettingsItem(app, appMode));
 			File exportDir = app.getSettings().getExternalStorageDirectory();
 			String fileName = appMode.toHumanString();
 			FileSettingsHelper settingsHelper = app.getFileSettingsHelper();
-			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, false, true, false));
+			settingsItems.addAll(settingsHelper.getFilteredSettingsItems(settingsTypes, true, false));
 			settingsHelper.exportSettings(exportDir, fileName, null, settingsItems, true);
 			return true;
 		}

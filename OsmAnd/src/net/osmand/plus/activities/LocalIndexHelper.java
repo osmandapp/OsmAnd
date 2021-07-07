@@ -3,13 +3,17 @@ package net.osmand.plus.activities;
 
 import android.content.Context;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.Version;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
@@ -22,14 +26,12 @@ import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 
 public class LocalIndexHelper {
@@ -54,7 +56,7 @@ public class LocalIndexHelper {
 		return android.text.format.DateFormat.getMediumDateFormat(app).format(new Date(t));
 	}
 
-	public void updateDescription(LocalIndexInfo info) {
+	public void updateDescription(@NonNull LocalIndexInfo info) {
 		File f = new File(info.getPathToData());
 		if (info.getType() == LocalIndexType.MAP_DATA) {
 			Map<String, String> ifns = app.getResourceManager().getIndexFileNames();
@@ -183,90 +185,133 @@ public class LocalIndexHelper {
 		return list;
 	}
 
-	public List<LocalIndexInfo> getLocalIndexData(AbstractLoadLocalIndexTask loadTask) {
-		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
+	public List<LocalIndexInfo> getLocalIndexData(boolean readFiles, boolean needDescription,
+												  @Nullable AbstractLoadLocalIndexTask loadTask,
+												  LocalIndexType... indexTypes) {
+		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
+		Map<String, File> indexFiles = app.getResourceManager().getIndexFiles();
 		List<LocalIndexInfo> result = new ArrayList<>();
 
-		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, loadTask, loadedMaps);
-		loadObfData(app.getAppPath(IndexConstants.ROADS_INDEX_DIR), result, false, loadTask, loadedMaps);
-		loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, loadTask);
-		loadSrtmData(app.getAppPath(IndexConstants.SRTM_INDEX_DIR), result, loadTask);
-		loadWikiData(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), result, loadTask);
-		loadTravelData(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), result, loadTask);
-		//loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
-		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
-		loadFontData(app.getAppPath(IndexConstants.FONT_INDEX_DIR), result, false, loadTask);
-		loadObfData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask, loadedMaps);
-
+		LocalIndexType[] types = indexTypes;
+		if (types == null || types.length == 0) {
+			types = LocalIndexType.values();
+		}
+		boolean voicesCollected = false;
+		for (LocalIndexType type : types) {
+			switch (type) {
+				case SRTM_DATA:
+					loadSrtmData(app.getAppPath(IndexConstants.SRTM_INDEX_DIR), result, false, readFiles,
+							needDescription, indexFiles, loadTask);
+					break;
+				case WIKI_DATA:
+					loadWikiData(app.getAppPath(IndexConstants.WIKI_INDEX_DIR), result, false, readFiles,
+							needDescription, indexFiles, loadTask);
+					break;
+				case MAP_DATA:
+					loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, readFiles,
+							needDescription, indexFileNames, indexFiles, loadTask);
+					loadObfData(app.getAppPath(IndexConstants.ROADS_INDEX_DIR), result, false, readFiles,
+							needDescription, indexFileNames, indexFiles, loadTask);
+					break;
+				case TILES_DATA:
+					loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, needDescription, loadTask);
+					break;
+				case TRAVEL_DATA:
+					loadTravelData(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), result, false, readFiles,
+							needDescription, indexFiles, loadTask);
+					break;
+				case TTS_VOICE_DATA:
+				case VOICE_DATA:
+					if (!voicesCollected) {
+						loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, readFiles,
+								needDescription, indexFiles, loadTask);
+						voicesCollected = true;
+					}
+					break;
+				case FONT_DATA:
+					loadFontData(app.getAppPath(IndexConstants.FONT_INDEX_DIR), result, false, readFiles,
+							needDescription, indexFiles, loadTask);
+					break;
+				case DEACTIVATED:
+					loadObfData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, readFiles,
+							needDescription, indexFileNames, indexFiles, loadTask);
+					break;
+			}
+		}
 		return result;
 	}
 
 	public List<LocalIndexInfo> getLocalTravelFiles(AbstractLoadLocalIndexTask loadTask) {
 		List<LocalIndexInfo> result = new ArrayList<>();
-		loadTravelData(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), result, loadTask);
+		loadTravelData(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), result, false, true, true,
+				app.getResourceManager().getIndexFiles(), loadTask);
 		return result;
 	}
 
 	public List<LocalIndexInfo> getLocalFullMaps(AbstractLoadLocalIndexTask loadTask) {
-		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
 		List<LocalIndexInfo> result = new ArrayList<>();
-		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, loadTask, loadedMaps);
-
+		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, true, true,
+				app.getResourceManager().getIndexFileNames(), app.getResourceManager().getIndexFiles(), loadTask);
 		return result;
 	}
 
-	public void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, @Nullable AbstractLoadLocalIndexTask loadTask) {
-		if (voiceDir.canRead()) {
-			//First list TTS files, they are preferred
-			for (File voiceF : listFilesSorted(voiceDir)) {
-				if (voiceF.isDirectory() && (JSTTSCommandPlayerImpl.isMyData(voiceF)
-						|| TTSCommandPlayerImpl.isMyData(voiceF))) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TTS_VOICE_DATA, voiceF, backup, app);
-					updateDescription(info);
-					result.add(info);
-					if (loadTask != null) {
-						loadTask.loadFile(info);
-					}
+	public void loadVoiceData(@NonNull File voiceDir, @NonNull List<LocalIndexInfo> result, boolean backup,
+							  boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+							  @Nullable AbstractLoadLocalIndexTask loadTask) {
+		if ((readFiles || backup) && voiceDir.canRead()) {
+			File[] files = listFilesSorted(voiceDir);
+			if (files.length > 0) {
+				loadVoiceDataImpl(files, result, backup, needDescription, loadTask);
+			}
+		} else {
+			List<File> voiceFiles = new ArrayList<>();
+			for (File file : indexFiles.values()) {
+				if (voiceDir.getPath().equals(file.getParent())) {
+					voiceFiles.add(file);
 				}
 			}
-
-			//Now list recorded voices
-			for (File voiceF : listFilesSorted(voiceDir)) {
-				if (voiceF.isDirectory() && (JSMediaCommandPlayerImpl.isMyData(voiceF)
-						|| MediaCommandPlayerImpl.isMyData(voiceF))) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.VOICE_DATA, voiceF, backup, app);
-					updateDescription(info);
-					result.add(info);
-					if (loadTask != null) {
-						loadTask.loadFile(info);
-					}
-				}
+			if (voiceFiles.size() > 0) {
+				Collections.sort(voiceFiles);
+				loadVoiceDataImpl(voiceFiles.toArray(new File[0]), result, backup, needDescription, loadTask);
 			}
 		}
 	}
 
-	private void loadFontData(File fontDir, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
-		if (fontDir.canRead()) {
-			for (File fontFile : listFilesSorted(fontDir)) {
-				if (fontFile.isFile() && fontFile.getName().endsWith(IndexConstants.FONT_INDEX_EXT)) {
-					LocalIndexType lt = LocalIndexType.FONT_DATA;
-					LocalIndexInfo info = new LocalIndexInfo(lt, fontFile, backup, app);
-					updateDescription(info);
-					result.add(info);
-					loadTask.loadFile(info);
-				}
+	private void loadVoiceDataImpl(@NonNull File[] voiceFiles, @NonNull List<LocalIndexInfo> result,
+								   boolean backup, boolean needDescription, @Nullable AbstractLoadLocalIndexTask loadTask) {
+		List<File> voiceFilesList = new ArrayList<>(Arrays.asList(voiceFiles));
+		//First list TTS files, they are preferred
+		Iterator<File> it = voiceFilesList.iterator();
+		while (it.hasNext()) {
+			File voiceFile = it.next();
+			if (voiceFile.isDirectory() && (JSTTSCommandPlayerImpl.isMyData(voiceFile)
+					|| TTSCommandPlayerImpl.isMyData(voiceFile))) {
+				loadLocalData(voiceFile, LocalIndexType.TTS_VOICE_DATA, result, backup, needDescription, loadTask);
+				it.remove();
+			}
+		}
+		//Now list recorded voices
+		for (File voiceFile : voiceFilesList) {
+			if (voiceFile.isDirectory() && (JSMediaCommandPlayerImpl.isMyData(voiceFile)
+					|| MediaCommandPlayerImpl.isMyData(voiceFile))) {
+				loadLocalData(voiceFile, LocalIndexType.VOICE_DATA, result, backup, needDescription, loadTask);
 			}
 		}
 	}
 
-	private void loadTilesData(File tilesPath, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask) {
+	private void loadFontData(@NonNull File fontPath, @NonNull List<LocalIndexInfo> result, boolean backup,
+							  boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+							  @Nullable AbstractLoadLocalIndexTask loadTask) {
+		loadDataImpl(fontPath, LocalIndexType.FONT_DATA, IndexConstants.FONT_INDEX_EXT,
+				backup, readFiles, needDescription, result, indexFiles, loadTask);
+	}
+
+	private void loadTilesData(@NonNull File tilesPath, @NonNull List<LocalIndexInfo> result, boolean backup,
+							   boolean needDescription, @Nullable AbstractLoadLocalIndexTask loadTask) {
 		if (tilesPath.canRead()) {
 			for (File tileFile : listFilesSorted(tilesPath)) {
 				if (tileFile.isFile() && tileFile.getName().endsWith(SQLiteTileSource.EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, app);
-					updateDescription(info);
-					result.add(info);
-					loadTask.loadFile(info);
+					loadLocalData(tileFile, LocalIndexType.TILES_DATA, result, backup, needDescription, loadTask);
 				} else if (tileFile.isDirectory()) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TILES_DATA, tileFile, backup, app);
 
@@ -275,7 +320,9 @@ public class LocalIndexHelper {
 					}
 					updateDescription(info);
 					result.add(info);
-					loadTask.loadFile(info);
+					if (loadTask != null) {
+						loadTask.loadFile(info);
+					}
 				}
 			}
 		}
@@ -290,66 +337,98 @@ public class LocalIndexHelper {
 		return listFiles;
 	}
 
+	private void loadSrtmData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
+							  boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+							  @Nullable AbstractLoadLocalIndexTask loadTask) {
+		loadDataImpl(dataPath, LocalIndexType.SRTM_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
+				backup, readFiles, needDescription, result, indexFiles, loadTask);
+	}
 
-	private void loadSrtmData(File mapPath, List<LocalIndexInfo> result, AbstractLoadLocalIndexTask loadTask) {
-		if (mapPath.canRead()) {
-			for (File mapFile : listFilesSorted(mapPath)) {
+	private void loadWikiData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
+							  boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+							  @Nullable AbstractLoadLocalIndexTask loadTask) {
+		loadDataImpl(dataPath, LocalIndexType.WIKI_DATA, IndexConstants.BINARY_MAP_INDEX_EXT,
+				backup, readFiles, needDescription, result, indexFiles, loadTask);
+	}
+
+	private void loadTravelData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
+								boolean readFiles, boolean needDescription, @NonNull Map<String, File> indexFiles,
+								@Nullable AbstractLoadLocalIndexTask loadTask) {
+		loadDataImpl(dataPath, LocalIndexType.TRAVEL_DATA, IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT,
+				backup, readFiles, needDescription, result, indexFiles, loadTask);
+	}
+
+	private void loadObfData(@NonNull File dataPath, @NonNull List<LocalIndexInfo> result, boolean backup,
+							 boolean readFiles, boolean needDescription, @NonNull Map<String, String> indexFileNames,
+							 @NonNull Map<String, File> indexFiles, @Nullable AbstractLoadLocalIndexTask loadTask) {
+		if ((readFiles || backup) && dataPath.canRead()) {
+			for (File mapFile : listFilesSorted(dataPath)) {
 				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.SRTM_DATA, mapFile, false, app);
-					updateDescription(info);
-					result.add(info);
-					loadTask.loadFile(info);
+					loadObfDataImpl(mapFile, result, backup, needDescription, indexFileNames, loadTask);
+				}
+			}
+		} else {
+			for (File file : indexFiles.values()) {
+				if (file.isFile() && dataPath.getPath().equals(file.getParent())
+						&& file.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+					loadObfDataImpl(file, result, backup, needDescription, indexFileNames, loadTask);
 				}
 			}
 		}
 	}
 
-	private void loadWikiData(File mapPath, List<LocalIndexInfo> result, AbstractLoadLocalIndexTask loadTask) {
-		if (mapPath.canRead()) {
-			for (File mapFile : listFilesSorted(mapPath)) {
-				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.WIKI_DATA, mapFile, false, app);
-					updateDescription(info);
-					result.add(info);
-					loadTask.loadFile(info);
+	private void loadObfDataImpl(@NonNull File dataFile, @NonNull List<LocalIndexInfo> result, boolean backup,
+								 boolean needDescription, @NonNull Map<String, String> indexFileNames,
+								 @Nullable AbstractLoadLocalIndexTask loadTask) {
+		String fileName = dataFile.getName();
+		LocalIndexType lt = LocalIndexType.MAP_DATA;
+		if (SrtmDownloadItem.isSrtmFile(fileName)) {
+			lt = LocalIndexType.SRTM_DATA;
+		} else if (fileName.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
+			lt = LocalIndexType.WIKI_DATA;
+		}
+		LocalIndexInfo info = new LocalIndexInfo(lt, dataFile, backup, app);
+		if (indexFileNames.containsKey(fileName) && !backup) {
+			info.setLoaded(true);
+		}
+		if (needDescription) {
+			updateDescription(info);
+		}
+		result.add(info);
+		if (loadTask != null) {
+			loadTask.loadFile(info);
+		}
+	}
+
+	private void loadDataImpl(@NonNull File dataPath, @NonNull LocalIndexType indexType, @NonNull String fileExt,
+							  boolean backup, boolean readFiles, boolean needDescription, @NonNull List<LocalIndexInfo> result,
+							  @NonNull Map<String, File> indexFiles, @Nullable AbstractLoadLocalIndexTask loadTask) {
+		if ((readFiles || backup) && dataPath.canRead()) {
+			for (File file : listFilesSorted(dataPath)) {
+				if (file.isFile() && file.getName().endsWith(fileExt)) {
+					loadLocalData(file, indexType, result, backup, needDescription, loadTask);
+				}
+			}
+		} else {
+			for (File file : indexFiles.values()) {
+				if (file.isFile() && file.getPath().startsWith(dataPath.getPath())
+						&& file.getName().endsWith(fileExt)) {
+					loadLocalData(file, indexType, result, backup, needDescription, loadTask);
 				}
 			}
 		}
 	}
 
-	private void loadTravelData(File mapPath, List<LocalIndexInfo> result, AbstractLoadLocalIndexTask loadTask) {
-		if (mapPath.canRead()) {
-			for (File mapFile : listFilesSorted(mapPath)) {
-				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.TRAVEL_DATA, mapFile, false, app);
-					updateDescription(info);
-					result.add(info);
-					loadTask.loadFile(info);
-				}
-			}
+	private void loadLocalData(@NonNull File file, @NonNull LocalIndexType indexType,
+							   @NonNull List<LocalIndexInfo> result, boolean backup, boolean needDescription,
+							   @Nullable AbstractLoadLocalIndexTask loadTask) {
+		LocalIndexInfo info = new LocalIndexInfo(indexType, file, backup, app);
+		if (needDescription) {
+			updateDescription(info);
 		}
-	}
-
-	private void loadObfData(File mapPath, List<LocalIndexInfo> result, boolean backup, AbstractLoadLocalIndexTask loadTask, Map<String, String> loadedMaps) {
-		if (mapPath.canRead()) {
-			for (File mapFile : listFilesSorted(mapPath)) {
-				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					String fileName = mapFile.getName();
-					LocalIndexType lt = LocalIndexType.MAP_DATA;
-					if (SrtmDownloadItem.isSrtmFile(fileName)) {
-						lt = LocalIndexType.SRTM_DATA;
-					} else if (fileName.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
-						lt = LocalIndexType.WIKI_DATA;
-					}
-					LocalIndexInfo info = new LocalIndexInfo(lt, mapFile, backup, app);
-					if (loadedMaps.containsKey(fileName) && !backup) {
-						info.setLoaded(true);
-					}
-					updateDescription(info);
-					result.add(info);
-					loadTask.loadFile(info);
-				}
-			}
+		result.add(info);
+		if (loadTask != null) {
+			loadTask.loadFile(info);
 		}
 	}
 
@@ -368,7 +447,7 @@ public class LocalIndexHelper {
 		@StringRes
 		private final int resId;
 		@DrawableRes
-		private int iconResource;
+		private final int iconResource;
 		private final int orderIndex;
 
 		LocalIndexType(@StringRes int resId, @DrawableRes int iconResource, int orderIndex) {

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnFilesDownloadCallback;
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
@@ -38,6 +39,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -51,6 +53,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -572,14 +575,35 @@ public class BackupHelper {
 				List<LocalFile> result = new ArrayList<>();
 				infos = dbHelper.getUploadedFileInfoMap();
 				List<SettingsItem> localItems = getLocalItems();
+				operationLog.log("getLocalItems");
 				for (SettingsItem item : localItems) {
 					String fileName = BackupHelper.getItemFileName(item);
 					if (item instanceof FileSettingsItem) {
-						File file = ((FileSettingsItem) item).getFile();
+						FileSettingsItem fileItem = (FileSettingsItem) item;
+						File file = fileItem.getFile();
 						if (file.isDirectory()) {
+							if (item instanceof GpxSettingsItem) {
+								continue;
+							} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
+								File jsFile = new File(file, file.getName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+								if (jsFile.exists()) {
+									fileName = jsFile.getPath().replace(app.getAppPath(null).getPath() + "/", "");
+									createLocalFile(result, item, fileName, jsFile, jsFile.lastModified());
+									continue;
+								}
+							} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
+								String langName = file.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
+								File jsFile = new File(file, langName + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+								if (jsFile.exists()) {
+									fileName = jsFile.getPath().replace(app.getAppPath(null).getPath() + "/", "");
+									createLocalFile(result, item, fileName, jsFile, jsFile.lastModified());
+									continue;
+								}
+							}
 							List<File> dirs = new ArrayList<>();
 							dirs.add(file);
 							Algorithms.collectDirs(file, dirs);
+							operationLog.log("collectDirs " + file.getName() + " BEGIN");
 							for (File dir : dirs) {
 								File[] files = dir.listFiles();
 								if (files != null && files.length > 0) {
@@ -589,6 +613,7 @@ public class BackupHelper {
 									}
 								}
 							}
+							operationLog.log("collectDirs " + file.getName() + " END");
 						} else {
 							createLocalFile(result, item, fileName, file, file.lastModified());
 						}
@@ -618,7 +643,14 @@ public class BackupHelper {
 
 			private List<SettingsItem> getLocalItems() {
 				List<ExportSettingsType> types = ExportSettingsType.getEnabledTypes();
-				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true, true);
+				Iterator<ExportSettingsType> it = types.iterator();
+				while (it.hasNext()) {
+					ExportSettingsType type = it.next();
+					if (!getBackupTypePref(type).get()) {
+						it.remove();
+					}
+				}
+				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true);
 			}
 
 			@Override

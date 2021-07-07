@@ -91,6 +91,8 @@ class BackupImporter {
 		if (Algorithms.isEmpty(remoteFiles)) {
 			throw new IllegalArgumentException("No remote files");
 		}
+		OperationLog operationLog = new OperationLog("importItems", BackupHelper.DEBUG);
+		operationLog.startOperation();
 		OsmandApplication app = backupHelper.getApp();
 		File tempDir = FileUtils.getTempDir(app);
 		Map<RemoteFile, SettingsItem> remoteFileItems = new HashMap<>();
@@ -151,6 +153,7 @@ class BackupImporter {
 		for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
 			fileItem.getValue().setLocalModifiedTime(fileItem.getKey().getClienttimems());
 		}
+		operationLog.finishOperation();
 	}
 
 	@NonNull
