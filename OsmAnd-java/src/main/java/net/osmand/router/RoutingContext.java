@@ -596,7 +596,30 @@ public class RoutingContext {
 			boolean sameRoadId = np.connected != null && np.connected.getId() == ro.getId();
 			boolean pointShouldBeAttachedByDist = (mindist < config.directionPointsRadius && mindist < np.distance);
 
+			double npAngle = np.getAngle();
+			boolean restrictionByAngle = !Double.isNaN(npAngle);
+
 			if (pointShouldBeAttachedByDist) {
+				if (restrictionByAngle) {
+					int oneWay = ro.getOneway();// -1 backward, 0 two way, 1 forward
+					double forwardAngle = ro.directionRouteByNeighbours(indexToInsert);
+					if (oneWay == 1 || oneWay == 0) {
+						double diff = Math.abs(npAngle - forwardAngle);
+						if (diff <= DirectionPoint.MAX_ANGLE_DIFF) {
+							restrictionByAngle = false;
+						}
+					}
+					if (restrictionByAngle && (oneWay == -1 || oneWay == 0)) {
+						double backwardAngle = (forwardAngle > 180) ? forwardAngle - 180 : forwardAngle + 180;
+						double diff = Math.abs(npAngle - backwardAngle);
+						if (diff <= DirectionPoint.MAX_ANGLE_DIFF) {
+							restrictionByAngle = false;
+						}
+					}
+				}
+				if (restrictionByAngle) {
+					continue;
+				}
 				if (!sameRoadId) {
 					//System.out.println(String.format("INSERT %s (%d-%d) %.0f m [%.5f, %.5f] - %d, %d ", ro, indexToInsert, indexToInsert + 1, mindist,
 					//		MapUtils.get31LongitudeX(wptX), MapUtils.get31LatitudeY(wptY), wptX, wptY));
