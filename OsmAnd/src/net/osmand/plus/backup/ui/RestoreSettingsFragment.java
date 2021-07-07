@@ -33,7 +33,9 @@ import net.osmand.plus.settings.fragments.ImportSettingsFragment;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class RestoreSettingsFragment extends ImportSettingsFragment {
 
@@ -150,7 +152,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 					if (succeed) {
 						PrepareBackupResult backup = app.getBackupHelper().getBackup();
 						BackupInfo info = backup.getBackupInfo();
-						List<SettingsItem> itemsForRestore = new ArrayList<>();
+						Set<SettingsItem> itemsForRestore = new HashSet<>();
 						if (info != null) {
 							for (RemoteFile remoteFile : info.filesToDownload) {
 								SettingsItem restoreItem = getRestoreItem(items, remoteFile);
@@ -165,7 +167,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 								}
 							}
 						}
-						setSettingsItems(itemsForRestore);
+						setSettingsItems(new ArrayList<>(itemsForRestore));
 						dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false, false);
 						adapter.updateSettingsItems(dataList, selectedItemsMap);
 					}
