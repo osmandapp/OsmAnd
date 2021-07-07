@@ -9,7 +9,6 @@ import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.OperationLog;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupCommand;
-import net.osmand.plus.backup.BackupDbHelper;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
@@ -29,9 +28,10 @@ import java.util.Map;
 
 import static net.osmand.plus.backup.BackupHelper.DELETE_FILE_URL;
 import static net.osmand.plus.backup.BackupHelper.DELETE_FILE_VERSION_URL;
-import static net.osmand.plus.backup.BackupHelper.THREAD_POOL_SIZE;
 
 public abstract class BaseDeleteFilesCommand extends BackupCommand {
+
+	private static final int THREAD_POOL_SIZE = 4;
 
 	private final boolean byVersion;
 	private OnDeleteFilesListener listener;

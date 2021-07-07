@@ -36,6 +36,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
 
@@ -43,7 +52,15 @@ class BackupImporter {
 
 	private static final Log LOG = PlatformUtil.getLog(BackupImporter.class);
 
+	private static final int THREAD_POOL_SIZE = 4;
+
 	private final BackupHelper backupHelper;
+
+	private boolean cancelled;
+
+	private final ExecutorService executor = new AsyncReaderTaskExecutor();
+	private final Map<Future<?>, AsyncReaderTask> tasks = new ConcurrentHashMap<>();
+	private final Map<Future<?>, Throwable> exceptions = new ConcurrentHashMap<>();
 
 	public static class CollectItemsResult {
 		public List<SettingsItem> items;
@@ -93,8 +110,6 @@ class BackupImporter {
 		}
 		OperationLog operationLog = new OperationLog("importItems", BackupHelper.DEBUG);
 		operationLog.startOperation();
-		OsmandApplication app = backupHelper.getApp();
-		File tempDir = FileUtils.getTempDir(app);
 		Map<RemoteFile, SettingsItem> remoteFileItems = new HashMap<>();
 		for (RemoteFile remoteFile : remoteFiles) {
 			SettingsItem item = null;
@@ -107,53 +122,77 @@ class BackupImporter {
 				}
 			}
 			if (item != null && (!item.shouldReadOnCollecting() || forceReadData)) {
-				FileInputStream is = null;
-				try {
-					SettingsItemReader<? extends SettingsItem> reader = item.getReader();
-					if (reader != null) {
-						String fileName = remoteFile.getTypeNamePath();
-						File tempFile = new File(tempDir, fileName);
-						Map<File, RemoteFile> map = new HashMap<>();
-						map.put(tempFile, remoteFile);
-						Map<File, String> errors = backupHelper.downloadFiles(map);
-						if (errors.isEmpty()) {
-							is = new FileInputStream(tempFile);
-							reader.readFromStream(is, remoteFile.getName());
-							if (forceReadData) {
-								item.apply();
-							}
-							backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
-							if (item instanceof FileSettingsItem) {
-								String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
-								if (app.getAppPath(itemFileName).isDirectory()) {
-									backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
-											remoteFile.getClienttimems());
-								}
-							}
-						} else {
-							throw new IOException("Error reading temp item file " + fileName + ": " +
-									errors.values().iterator().next());
-						}
-					}
-					item.applyAdditionalParams();
-				} catch (IllegalArgumentException e) {
-					item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-					LOG.error("Error reading item data: " + item.getName(), e);
-				} catch (IOException e) {
-					item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-					LOG.error("Error reading item data: " + item.getName(), e);
-				} catch (UserNotRegisteredException e) {
-					item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-					LOG.error("Error reading item data: " + item.getName(), e);
-				} finally {
-					Algorithms.closeStream(is);
-				}
+				AsyncReaderTask task = new AsyncReaderTask(remoteFile, item, forceReadData);
+				Future<?> future = executor.submit(task);
+				tasks.put(future, task);
 			}
 		}
+
+		executor.shutdown();
+		boolean finished = false;
+		while (!finished) {
+			try {
+				finished = executor.awaitTermination(100, TimeUnit.MILLISECONDS);
+				if (isCancelled() || isInterrupted()) {
+					for (Future<?> future : tasks.keySet()) {
+						future.cancel(false);
+					}
+				}
+			} catch (InterruptedException e) {
+				// ignore
+			}
+		}
+
 		for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
 			fileItem.getValue().setLocalModifiedTime(fileItem.getKey().getClienttimems());
 		}
 		operationLog.finishOperation();
+	}
+
+	private void importItem(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
+		OsmandApplication app = backupHelper.getApp();
+		File tempDir = FileUtils.getTempDir(app);
+		FileInputStream is = null;
+		try {
+			SettingsItemReader<? extends SettingsItem> reader = item.getReader();
+			if (reader != null) {
+				String fileName = remoteFile.getTypeNamePath();
+				File tempFile = new File(tempDir, fileName);
+				Map<File, RemoteFile> map = new HashMap<>();
+				map.put(tempFile, remoteFile);
+				Map<File, String> errors = backupHelper.downloadFiles(map);
+				if (errors.isEmpty()) {
+					is = new FileInputStream(tempFile);
+					reader.readFromStream(is, remoteFile.getName());
+					if (forceReadData) {
+						item.apply();
+					}
+					backupHelper.updateFileUploadTime(remoteFile.getType(), remoteFile.getName(), remoteFile.getClienttimems());
+					if (item instanceof FileSettingsItem) {
+						String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+						if (app.getAppPath(itemFileName).isDirectory()) {
+							backupHelper.updateFileUploadTime(item.getType().name(), itemFileName,
+									remoteFile.getClienttimems());
+						}
+					}
+				} else {
+					throw new IOException("Error reading temp item file " + fileName + ": " +
+							errors.values().iterator().next());
+				}
+			}
+			item.applyAdditionalParams(reader);
+		} catch (IllegalArgumentException e) {
+			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+			LOG.error("Error reading item data: " + item.getName(), e);
+		} catch (IOException e) {
+			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+			LOG.error("Error reading item data: " + item.getName(), e);
+		} catch (UserNotRegisteredException e) {
+			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+			LOG.error("Error reading item data: " + item.getName(), e);
+		} finally {
+			Algorithms.closeStream(is);
+		}
 	}
 
 	@NonNull
@@ -400,7 +439,7 @@ class BackupImporter {
 						FileInputStream is = new FileInputStream(tempFile);
 						try {
 							reader.readFromStream(is, item.getFileName());
-							item.applyAdditionalParams();
+							item.applyAdditionalParams(reader);
 						} catch (IllegalArgumentException e) {
 							item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 							LOG.error("Error reading item data: " + item.getName(), e);
@@ -433,6 +472,61 @@ class BackupImporter {
 				if (settingsItem instanceof FileSettingsItem) {
 					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
 					fileSettingsItem.setSize(remoteFile.getFilesize());
+				}
+			}
+		}
+	}
+
+	public void setCancelled(boolean cancelled) {
+		this.cancelled = cancelled;
+	}
+
+	public boolean isCancelled() {
+		return cancelled;
+	}
+
+	private boolean isInterrupted() {
+		return !exceptions.isEmpty();
+	}
+
+	private class AsyncReaderTask implements Callable<Void> {
+
+		private final RemoteFile remoteFile;
+		private final SettingsItem item;
+		private final boolean forceReadData;
+
+		public AsyncReaderTask(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
+			this.remoteFile = remoteFile;
+			this.item = item;
+			this.forceReadData = forceReadData;
+		}
+
+		@Override
+		public Void call() throws Exception {
+			importItem(remoteFile, item, forceReadData);
+			return null;
+		}
+	}
+
+	private class AsyncReaderTaskExecutor extends ThreadPoolExecutor {
+
+		public AsyncReaderTaskExecutor() {
+			super(THREAD_POOL_SIZE, THREAD_POOL_SIZE, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
+		}
+
+		protected void afterExecute(Runnable r, Throwable t) {
+			super.afterExecute(r, t);
+			if (r instanceof Future<?>) {
+				if (t == null && ((Future<?>) r).isDone()) {
+					try {
+						((Future<?>) r).get();
+					} catch (CancellationException | InterruptedException e) {
+						// ignore
+					} catch (ExecutionException ee) {
+						exceptions.put((Future<?>) r, ee.getCause());
+					}
+				} else {
+					exceptions.put((Future<?>) r, t);
 				}
 			}
 		}

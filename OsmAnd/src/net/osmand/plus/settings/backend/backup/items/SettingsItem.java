@@ -128,6 +128,10 @@ public abstract class SettingsItem {
 		return false;
 	}
 
+	public boolean isShouldReplace() {
+		return shouldReplace;
+	}
+
 	public void setShouldReplace(boolean shouldReplace) {
 		this.shouldReplace = shouldReplace;
 	}
@@ -146,7 +150,7 @@ public abstract class SettingsItem {
 		// non implemented
 	}
 
-	public void applyAdditionalParams() {
+	public void applyAdditionalParams(@Nullable SettingsItemReader<? extends SettingsItem> reader) {
 		// non implemented
 	}
 

@@ -66,7 +66,6 @@ public class BackupHelper {
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
 	public static final boolean DEBUG = true;
 
-	public static final int THREAD_POOL_SIZE = 4;
 	private final BackupExecutor executor;
 
 	public final static String INFO_EXT = ".info";
