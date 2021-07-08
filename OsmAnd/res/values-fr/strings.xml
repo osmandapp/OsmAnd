@@ -188,7 +188,7 @@
     <string name="unit_of_length_descr">Modifier l\'unité de mesure de distance.</string>
     <string name="unit_of_length">Unités de longueur</string>
     <string name="si_mi_feet">Miles/pieds</string>
-    <string name="si_mi_yard">Miles/yards</string>
+    <string name="si_mi_yard">Miles / yards</string>
     <string name="si_km_m">Kilomètres/mètres</string>
     <string name="yard">yd</string>
     <string name="foot">ft</string>
@@ -923,8 +923,8 @@
     <string name="recording_photo_description">Photo %1$s %2$s</string>
     <string name="av_def_action_picture">Prendre une photo</string>
     <string name="recording_context_menu_precord">Prendre une photo</string>
-    <string name="stop_routing_confirm">Êtes-vous certain de vouloir arrêter le guidage \?</string>
-    <string name="clear_dest_confirm">Souhaitez-vous vraiment supprimer votre arrivée (et vos étapes) \?</string>
+    <string name="stop_routing_confirm">Arrêter le guidage \?</string>
+    <string name="clear_dest_confirm">Souhaitez-vous supprimer votre destination (et vos étapes) \?</string>
     <string name="precise_routing_mode">Routage précis (alpha)</string>
     <string name="precise_routing_mode_descr">Calculer des itinéraires précis et sans surprise. Actuellement fonctionne sur des distances réduites et reste lent.</string>
     <string name="local_indexes_cat_av">Données audio/vidéo</string>
@@ -1065,7 +1065,7 @@
     <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer l\'itinéraire</string>
     <string name="animate_routing_route">Simulation de l\'itinéraire calculé </string>
     <string name="animate_routing_gpx">Simulation suivant une trace GPX</string>
-    <string name="local_osm_changes_delete_all_confirm">Êtes-vous certain(e) de vouloir supprimer %1$d modifications OSM \?</string>
+    <string name="local_osm_changes_delete_all_confirm">Supprimer %1$d modifications OSM \?</string>
     <string name="shared_string_delete_all">Tout supprimer</string>
     <string name="app_mode_hiking">Randonnée</string>
     <string name="app_mode_motorcycle">Moto</string>
@@ -1484,7 +1484,7 @@
     <string name="delay_to_start_navigation_descr">Indiquez le délai d\'affichage de l\'itinéraire détaillé, avant de démarrer la navigation.</string>
     <string name="shared_string_go">Aller</string>
     <string name="confirmation_to_clear_history">Effacer l\'historique ?</string>
-    <string name="local_osm_changes_upload_all_confirm">Êtes-vous certain(e) de vouloir téléverser %1$d modification(s) à OSM \?</string>
+    <string name="local_osm_changes_upload_all_confirm">Envoyer %1$d modification(s) à OSM \?</string>
     <string name="delay_to_start_navigation">Lancer la navigation pas à pas après …</string>
     <string name="osm_changes_added_to_local_edits">Modifications OSM mémorisées localement</string>
     <string name="mark_to_delete">Marquer pour suppression</string>
@@ -1538,7 +1538,7 @@
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Êtes-vous certain(e) de vouloir supprimer %1$d notes \?</string>
+    <string name="local_recordings_delete_all_confirm">Supprimer %1$d notes \?</string>
     <string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
     <string name="disable_recording_once_app_killed">Interdire la journalisation autonome</string>
     <string name="download_wikipedia_files">Télécharger des données Wikipédia supplémentaires (%1$s Mo) ?</string>
@@ -1671,7 +1671,7 @@
     <string name="srtm_plugin_disabled">Courbes de niveau désactivées</string>
     <string name="show_free_version_banner">Afficher le bandeau « Version gratuite »</string>
     <string name="show_free_version_banner_description">Afficher le bandeau « Version gratuite » même dans la version payante</string>
-    <string name="downloading_number_of_files">Téléchargement de %1$d fichiers</string>
+    <string name="downloading_number_of_files">Téléchargement du fichier %1$d …</string>
     <string name="hillshade_layer_disabled">Affichage du relief désactivé</string>
     <string name="buy">Acheter</string>
     <string name="activate_seamarks_plugin">Merci d\'activer le greffon \'Carte marine\'</string>
@@ -1976,7 +1976,7 @@
     <string name="dist_away_from_my_location">Recherche %1$s autour</string>
     <string name="update_all_maps_now">Mettre à jour toutes les cartes maintenant ?</string>
     <string name="clear_tile_data">Supprimer toutes les tuiles</string>
-    <string name="replace_favorite_confirmation">Êtes-vous certain de vouloir remplacer le favori %1$s ?</string>
+    <string name="replace_favorite_confirmation">Remplacer le favori « %1$s » \?</string>
     <string name="shared_string_change">Modifier</string>
     <string name="get_started">Démarrons ensemble</string>
     <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
@@ -2088,7 +2088,7 @@
     <string name="quick_action_add_favorite">Ajouter un favori</string>
     <string name="dialog_add_action_title">Ajouter une action</string>
     <string name="quick_actions_delete">Supprimer l\'action</string>
-    <string name="quick_actions_delete_text">Êtes-vous certain·e de vouloir supprimer l\'action « %s » \?</string>
+    <string name="quick_actions_delete_text">Supprimer l\'action « %s » \?</string>
     <string name="quick_favorites_show_favorites_dialog">Afficher la liste des favoris</string>
     <string name="quick_favorites_name_preset">Nom du réglage</string>
     <string name="shared_string_action_name">Nom de l\'action</string>
@@ -2173,7 +2173,7 @@
     <string name="shared_string_time_span">Amplitude horaire</string>
     <string name="shared_string_gpx_track">Trace</string>
     <string name="points_delete_multiple_succesful">Point(s) supprimé(s) avec succès.</string>
-    <string name="points_delete_multiple">Êtes-vous certain(e) de vouloir supprimer %1$d point(s) \?</string>
+    <string name="points_delete_multiple">Supprimer %1$d point(s) \?</string>
     <string name="add_new_folder">Créer un dossier</string>
     <string name="route_points_category_name">Itinéraire pour emprunter cette route</string>
     <string name="track_points_category_name">Points de passage, points d’intérêt, points remarquables</string>
@@ -2944,7 +2944,7 @@
     <string name="profile_alert_need_save_title">Enregistrer les modifications</string>
     <string name="profile_alert_need_save_msg">Enregistrez d\'abord les modifications apportées au profil</string>
     <string name="profile_alert_delete_title">Supprimer le profil</string>
-    <string name="profile_alert_delete_msg">Êtes-vous certain·e de vouloir supprimer le profil « %s » \?</string>
+    <string name="profile_alert_delete_msg">Supprimer le profil « %s » \?</string>
     <string name="select_base_profile_dialog_title">Sélectionnez un profil avec lequel démarrer</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">icône</string>
@@ -3212,7 +3212,7 @@
     <string name="routing_attr_prefer_unpaved_name">Privilégier les routes non revêtues</string>
     <string name="routing_attr_prefer_unpaved_description">Privilégier les routes non revêtues.</string>
     <string name="update_all_maps">Mettre à jour toutes les cartes</string>
-    <string name="update_all_maps_q">Êtes-vous certain de vouloir mettre à jour les (%1$d) cartes \?</string>
+    <string name="update_all_maps_q">Tout mettre à jour \? (%1$d) cartes)</string>
     <string name="track_storage_directory_descrp">Les traces peuvent être enregistrées dans le dossier \'rec\' ou dans des dossiers mensuels ou journaliers.</string>
     <string name="store_tracks_in_rec_directory">Enregistrer les traces dans le dossier \'rec\'</string>
     <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers journaliers</string>
@@ -3439,7 +3439,7 @@
     <string name="restore_all_profile_settings">Restaurer tous les paramètres du profil \?</string>
     <string name="saving_new_profile">Enregistrement du nouveau profil</string>
     <string name="profile_backup_failed">Impossible de sauvegarder le profil.</string>
-    <string name="clear_recorded_data_warning">Êtes-vous certain de vouloir supprimer les données enregistrées \?</string>
+    <string name="clear_recorded_data_warning">Effacer les données enregistrées \?</string>
     <string name="importing_from">Import de données à partir de %1$s</string>
     <string name="shared_string_importing">Import en cours</string>
     <string name="items_added">Éléments ajoutés</string>
@@ -3629,7 +3629,7 @@
     <string name="default_screen_timeout">Délai par défaut de veille écran</string>
     <string name="export_import_quick_actions_with_profiles_promo">Vous pouvez exporter ou importer les actions rapides avec les profils d’application.</string>
     <string name="shared_string_delete_all_q">Tout supprimer \?</string>
-    <string name="delete_all_actions_message_q">Voulez-vous vraiment supprimer définitivement %d actions rapides \?</string>
+    <string name="delete_all_actions_message_q">Supprimer définitivement %d actions rapides \?</string>
     <string name="screen_timeout">Délai de veille de l’écran</string>
     <string name="height_limit_description">Indiquez la hauteur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules hauts.</string>
     <string name="weight_limit_description">Indiquez le poids de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules lourds.</string>
@@ -3991,9 +3991,9 @@
 \nPour en savoir, consultez http://openplacereviews.org.</string>
     <string name="activity_type_racing_name">Course automobile</string>
     <string name="temporary_conditional_routing_descr">Utilisez les limitations routières actuellement actives sur la carte</string>
-    <string name="track_recording_description">Êtes-vous certain de vouloir interrompre l\'enregistrement \?
-\nToutes les données non sauvegardées seront perdues.</string>
-    <string name="live_update_delete_updates_msg">Êtes-vous certain de vouloir supprimer %s mises à jour temps réel \?</string>
+    <string name="track_recording_description">Arrêter l\'enregistrement \?
+\nToutes les données non enregistrées seront perdues.</string>
+    <string name="live_update_delete_updates_msg">Supprimer les %s mises à jour temps réel \?</string>
     <string name="map_orientation_threshold_descr">Ne pas pivoter la carte si la vitesse est inférieure à un seuil</string>
     <string name="on_pause">En pause</string>
     <string name="app_restart_required">Un redémarrage de l\'application est nécessaire pour appliquer certains paramètres.</string>
@@ -4103,16 +4103,16 @@
     <string name="restore_from_file">Restaurer à partir d\'un fichier</string>
     <string name="osmand_cloud_help_descr">Besoin d\'aide \? Contactez-nous %1$s.</string>
     <string name="verify_email_address">Vérifier l’adresse e-mail</string>
-    <string name="verify_email_address_descr">Nous avons envoyé un code de vérification à %1$s, veuillez le saisir dans le champ ci-dessous.</string>
-    <string name="cloud_email_already_registered">Un compte avec cet email existe déjà.</string>
+    <string name="verify_email_address_descr">Code de vérification envoyé sur %1$s. Veuillez le saisir dans le champ ci-dessous.</string>
+    <string name="cloud_email_already_registered">Il existe déjà un compte pour cet email.</string>
     <string name="resend_verification_code">Renvoyer le code</string>
     <string name="verification_code_missing">Je n\'ai pas reçu le code de vérification</string>
-    <string name="osmand_cloud_authorize_descr">Ne perdez jamais vos données, sauvegardez et restaurez facilement toutes vos informations.</string>
+    <string name="osmand_cloud_authorize_descr">Ne perdez jamais vos données. Sauvegardez et restaurez facilement toutes vos informations.</string>
     <string name="osmand_cloud_create_account_descr">Veuillez saisir votre adresse email, toutes vos données y seront associées.
 \nLe code de vérification vous sera envoyé à cette adresse.</string>
-    <string name="osmand_cloud_login_descr">Veuillez saisir l\'adresse email utilisée à l\'inscription. A l\'étape suivante, vous recevrez un mot de passe à usage unique.</string>
+    <string name="osmand_cloud_login_descr">Veuillez saisir l\'adresse email utilisée à l\'inscription. Vous allez recevoir, à cette adresse, un mot de passe à usage unique.</string>
     <string name="cloud_email_not_registered">Cet email n\'est pas enregistré sur OsmAnd Cloud</string>
-    <string name="backup_into_file">Sauvegarder dans un fichier</string>
+    <string name="backup_into_file">Sauvegarder en tant que fichier</string>
     <string name="verification_code_missing_description">Le délai maximum d\'envoi du code est de 10 minutes. Pensez à vérifier votre dossier \'Pourriel\' sinon utilisez le bouton ci-dessous.</string>
     <string name="select_nav_profile_dialog_message">Le \"type de navigation\" détermine la façon dont les itinéraires sont calculés. Vous pouvez sélectionner un moteur de routage soit hors-ligne soit en ligne.</string>
     <string name="loading_list_of_routing_services">Actualisation des services de routage disponibles</string>
@@ -4155,8 +4155,8 @@
     <string name="restore_from_osmand_cloud">Restaurer à partir d’OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Sélectionnez ce que vous souhaitez restaurer.</string>
     <string name="restore_selected_data">Restaurer les données sélectionnées</string>
-    <string name="receiving_data_from_server">Réception de données du serveur</string>
-    <string name="restore_complete">Restauration terminée</string>
+    <string name="receiving_data_from_server">Réception de données du serveur …</string>
+    <string name="restore_complete">Restauré</string>
     <string name="grey_color_slope">Les pentes inconnues sont de couleur grise.</string>
     <string name="backup_storage_taken">Espace utilisé</string>
     <string name="backup_version_history">Historique des versions</string>
@@ -4179,7 +4179,7 @@
     <string name="shared_string_includes">Inclus</string>
     <string name="complete_purchase">Finaliser l\'achat</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtenez les mises à jour mensuelles pour les cartes hors ligne.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Accédez aux widgets avancés d\'OsmAnd.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Accédez aux widgets avancés OsmAnd.</string>
     <string name="unlimited_map_downloads">Téléchargements illimités de cartes</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia et Wikivoyage hors ligne</string>
     <string name="offline_wikipeadia">Wikipédia hors ligne</string>
@@ -4193,14 +4193,14 @@
     <string name="osmand_maps_plus_tagline">Bénéficiez de fonctionnalités étendues</string>
     <string name="osmand_pro_tagline">Bénéficiez d\'un maximum de fonctionnalités</string>
     <string name="shared_string_learn_more">En savoir plus</string>
-    <string name="cancel_anytime_in_huawei_appgallery">Annulez à tout moment dans Huawei AppGallery</string>
-    <string name="cancel_anytime_in_gplay">Annulez à tout moment dans Google Play.</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Annulez-le à tout moment dans Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Annulez-le à tout moment dans Google Play.</string>
     <string name="shared_string_not_included">Non inclus</string>
     <string name="regular_price">Prix habituel</string>
     <string name="from_with_param">À partir de %1$s</string>
     <string name="backup_delete_types_descr">Souhaitez-vous supprimer du Cloud les données des types désactivés \?</string>
     <string name="backup_version_history_delete_descr">Souhaitez-vous supprimer du Cloud l’historique des modifications pour les types désactivés \?</string>
-    <string name="backup_delete_types">Supprimer les données des types désactivés</string>
+    <string name="backup_delete_types">Supprimer les types de données désactivés</string>
     <string name="shared_string_discussion">Discussion</string>
     <string name="shared_string_view_all">Tout afficher</string>
     <string name="backup_error_subscription_was_expired">Abonnement expiré</string>
@@ -4210,4 +4210,7 @@
     <string name="backup_error_user_is_already_registered">Cet e-mail est utilisé par un autre compte utilisateur</string>
     <string name="backup_error_file_not_available">Fichier non disponible</string>
     <string name="backup_error_token_is_not_valid_or_expired">Jeton non valide ou ayant expiré</string>
+    <string name="enter_verification_code">Entrez le mot de passe à usage unique</string>
+    <string name="backup_error_gzip_only_supported_upload">Le fichier doit être envoyé au format .gzip</string>
+    <string name="duration_moment_ago">il y a un instant</string>
 </resources>
