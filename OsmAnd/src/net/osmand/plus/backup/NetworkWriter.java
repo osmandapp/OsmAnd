@@ -21,6 +21,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NetworkWriter implements AbstractWriter {
 
@@ -28,11 +30,13 @@ public class NetworkWriter implements AbstractWriter {
 	private final OnUploadItemListener listener;
 
 	public interface OnUploadItemListener {
-		void onItemFileUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work);
+		void onItemUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work);
 
-		void onItemFileUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork);
+		void onItemUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork);
 
 		void onItemFileUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error);
+
+		void onItemUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error);
 	}
 
 	public NetworkWriter(@NonNull BackupHelper backupHelper, @Nullable OnUploadItemListener listener) {
@@ -42,10 +46,10 @@ public class NetworkWriter implements AbstractWriter {
 
 	@Override
 	public void write(@NonNull SettingsItem item) throws IOException {
+		String error;
+		long uploadTime = System.currentTimeMillis();
 		String fileName = BackupHelper.getItemFileName(item);
 		SettingsItemWriter<? extends SettingsItem> itemWriter = item.getWriter();
-		long uploadTime = System.currentTimeMillis();
-		String error;
 		if (itemWriter != null) {
 			try {
 				error = uploadEntry(itemWriter, fileName, uploadTime);
@@ -58,6 +62,9 @@ public class NetworkWriter implements AbstractWriter {
 		} else {
 			error = uploadItemInfo(item, fileName + BackupHelper.INFO_EXT, uploadTime);
 		}
+		if (listener != null) {
+			listener.onItemUploadDone(item, fileName, uploadTime, error);
+		}
 		if (error != null) {
 			throw new IOException(error);
 		}
@@ -66,10 +73,9 @@ public class NetworkWriter implements AbstractWriter {
 	private String uploadEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 							   @NonNull String fileName, long uploadTime) throws UserNotRegisteredException, IOException {
 		if (itemWriter.getItem() instanceof FileSettingsItem) {
-			FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
-			return uploadDirWithFiles(itemWriter, fileSettingsItem.getFile(), uploadTime);
+			return uploadDirWithFiles(itemWriter, fileName, uploadTime);
 		} else {
-			return uploadItemFile(itemWriter, fileName, uploadTime);
+			return uploadItemFile(itemWriter, fileName, getUploadFileListener(itemWriter.getItem()), uploadTime);
 		}
 	}
 
@@ -96,36 +102,50 @@ public class NetworkWriter implements AbstractWriter {
 	}
 
 	private String uploadItemFile(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-								  @NonNull String fileName, long uploadTime) throws UserNotRegisteredException, IOException {
+								  @NonNull String fileName, @Nullable OnUploadFileListener listener,
+								  long uploadTime) throws UserNotRegisteredException, IOException {
 		StreamWriter streamWriter = new StreamWriter() {
 			@Override
 			public void write(OutputStream outputStream, IProgress progress) throws IOException {
 				itemWriter.writeToStream(outputStream, progress);
 			}
 		};
-		return backupHelper.uploadFile(fileName, itemWriter.getItem().getType().name(), streamWriter, uploadTime,
-				getUploadFileListener(itemWriter.getItem()));
+		return backupHelper.uploadFile(fileName, itemWriter.getItem().getType().name(), streamWriter, uploadTime, listener);
 	}
 
 	private String uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-									  @NonNull File file, long uploadTime) throws UserNotRegisteredException, IOException {
-		FileSettingsItem fileSettingsItem = (FileSettingsItem) itemWriter.getItem();
+									  @NonNull String fileName, long uploadTime) throws UserNotRegisteredException, IOException {
+		FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
+
+		long[] size = new long[1];
+		List<File> filesToUpload = new ArrayList<>();
+		collectDirFiles(item.getFile(), filesToUpload, size);
+
+		OnUploadFileListener uploadListener = getUploadDirListener(item, fileName, (int) (size[0] / 1024));
+		for (File file : filesToUpload) {
+			String name = BackupHelper.getFileItemName(file, item);
+			item.setInputStream(new FileInputStream(file));
+
+			String error = uploadItemFile(itemWriter, name, uploadListener, uploadTime);
+			if (error != null) {
+				return error;
+			}
+		}
+		return null;
+	}
+
+	private void collectDirFiles(File file, List<File> list, long[] dirSize) {
 		if (file.isDirectory()) {
 			File[] files = file.listFiles();
 			if (files != null) {
 				for (File subfolderFile : files) {
-					String error = uploadDirWithFiles(itemWriter, subfolderFile, uploadTime);
-					if (error != null) {
-						return error;
-					}
+					collectDirFiles(subfolderFile, list, dirSize);
 				}
 			}
 		} else {
-			String fileName = BackupHelper.getFileItemName(file, fileSettingsItem);
-			fileSettingsItem.setInputStream(new FileInputStream(file));
-			return uploadItemFile(itemWriter, fileName, uploadTime);
+			list.add(file);
+			dirSize[0] = dirSize[0] + file.length();
 		}
-		return null;
 	}
 
 	private OnUploadFileListener getUploadFileListener(final @NonNull SettingsItem item) {
@@ -134,14 +154,56 @@ public class NetworkWriter implements AbstractWriter {
 			@Override
 			public void onFileUploadStarted(@NonNull String type, @NonNull String fileName, int work) {
 				if (listener != null) {
-					listener.onItemFileUploadStarted(item, fileName, work);
+					listener.onItemUploadStarted(item, fileName, work);
 				}
 			}
 
 			@Override
 			public void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
 				if (listener != null) {
-					listener.onItemFileUploadProgress(item, fileName, progress, deltaWork);
+					listener.onItemUploadProgress(item, fileName, progress, deltaWork);
+				}
+			}
+
+			@Override
+			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
+				if (item instanceof FileSettingsItem) {
+					String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+					if (backupHelper.getApp().getAppPath(itemFileName).isDirectory()) {
+						backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, uploadTime);
+					}
+				}
+				if (listener != null) {
+					listener.onItemFileUploadDone(item, fileName, uploadTime, error);
+				}
+			}
+		};
+	}
+
+	private OnUploadFileListener getUploadDirListener(@NonNull SettingsItem item, @NonNull String itemFileName, int itemWork) {
+		return new OnUploadFileListener() {
+
+			private int itemProgress = 0;
+			private int deltaProgress = 0;
+			private boolean uploadStarted = false;
+
+			@Override
+			public void onFileUploadStarted(@NonNull String type, @NonNull String fileName, int work) {
+				if (!uploadStarted && listener != null) {
+					uploadStarted = true;
+					listener.onItemUploadStarted(item, itemFileName, itemWork);
+				}
+			}
+
+			@Override
+			public void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				if (listener != null) {
+					deltaProgress += deltaWork;
+					if ((deltaProgress > (itemWork / 100)) || ((itemProgress + deltaProgress) >= itemWork)) {
+						itemProgress += deltaProgress;
+						listener.onItemUploadProgress(item, itemFileName, itemProgress, deltaProgress);
+						deltaProgress = 0;
+					}
 				}
 			}
 
