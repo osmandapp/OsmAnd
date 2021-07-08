@@ -646,7 +646,7 @@
     <string name="poi_context_menu_website">Просмотреть веб-сайт POI</string>
     <string name="poi_context_menu_call">Показать телефон POI</string>
     <string name="website">Веб-сайт</string>
-    <string name="phone">телефон</string>
+    <string name="phone">Телефон</string>
     <string name="download_type_to_filter">фильтровать</string>
     <string name="use_high_res_maps">Дисплей высокого разрешения</string>
     <string name="use_high_res_maps_descr">Не растягивать (с размытием) растровые карты на дисплеях высокого разрешения.</string>
@@ -4190,7 +4190,7 @@
     <string name="offline_wikipeadia">Локальная Википедия</string>
     <string name="offline_wikivoyage">Локальный Викигид</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Карты рельефа местности: контурные линии, затенение рельефа (отмывка), уклоны</string>
-    <string name="terrain_maps">Карты рельефа местности</string>
+    <string name="terrain_maps">Карты рельефа</string>
     <string name="nautical_depth">Морские глубины</string>
     <string name="advanced_widgets">Расширенные виджеты</string>
     <string name="you_can_get_feature_as_part_of_pattern">Вы можете получить «%1$s» как часть плана %2$s. Сравнение планов:</string>
@@ -4201,7 +4201,7 @@
     <string name="osmand_maps_plus_tagline">Получите расширенные возможности</string>
     <string name="osmand_pro_tagline">Получите максимум возможностей</string>
     <string name="shared_string_learn_more">Подробнее</string>
-    <string name="cancel_anytime_in_huawei_appgallery">Отмена в любое время в Huawei AppGallery.</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Отмена в любое время в Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Отмена в любое время в Google Play.</string>
     <string name="shared_string_not_included">Не включает</string>
     <string name="shared_string_includes">Включает</string>
@@ -4212,4 +4212,14 @@
     <string name="backup_delete_types">Удалить данные отключенных типов</string>
     <string name="shared_string_discussion">Обсуждение</string>
     <string name="shared_string_view_all">Посмотреть все</string>
+    <string name="backup_error_subscription_was_used">Подписка или промокод использованы другим аккаунтом %1$s</string>
+    <string name="backup_error_user_is_already_registered">Эта электронная почта используется с другим аккаунтом</string>
+    <string name="backup_error_subscription_was_expired">Подписка закончилась</string>
+    <string name="backup_error_size_is_exceeded">Максимальный размер OsmAnd Cloud превышает %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">Файл должен быть отправлен в формате .gzip</string>
+    <string name="backup_error_file_not_available">Файл недоступен</string>
+    <string name="backup_error_token_is_not_valid">Что-то не так с предоставленным идентификатором устройства или токеном</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Неверный или просроченный токен</string>
+    <string name="backup_error_user_is_not_registered">Пользователь с данным адресом электронной почты не зарегистрирован</string>
+    <string name="backup_error_no_valid_subscription">Нет действующей подписки</string>
 </resources>
