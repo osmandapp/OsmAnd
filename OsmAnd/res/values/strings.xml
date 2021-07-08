@@ -121,7 +121,7 @@
     <string name="shared_string_offline">Offline</string>
     <string name="loading_list_of_routing_services">Loading list of available routing services</string>
     <string name="select_nav_profile_dialog_message">\'Navigation type\' selects how routes are calculated, with available offline and online routing engines.</string>
-    <string name="verification_code_missing_description">Can take 10 minutes. Use the button below if it isn't in your spam folder.</string>
+    <string name="verification_code_missing_description">Can take 10 minutes. Use the button below if it isn\'t in your spam folder.</string>
     <string name="verification_code_missing">I didn\'t receive a verification code</string>
     <string name="resend_verification_code">Resend</string>
     <string name="cloud_email_already_registered">This e-mail address is already registered.</string>
