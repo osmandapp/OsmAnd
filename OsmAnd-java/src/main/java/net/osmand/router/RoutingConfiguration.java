@@ -78,31 +78,24 @@ public class RoutingConfiguration {
 		public final static String TAG = "osmand_dp";
 		public final static String DELETE_TYPE = "osmand_delete_point";
 		public final static String CREATE_TYPE = "osmand_add_point";
+		public final static String ANGLE_TAG = "apply_direction_angle";
 		public final static double MAX_ANGLE_DIFF = 45;//in degrees
 
 		public DirectionPoint(Node n) {
 			super(n, n.getId());
 		}
 
-		// get normalize angle in 0..360 degrees or Double.NaN if empty
+		// get normalize angle in -180..180 degrees or Double.NaN if empty
 		public double getAngle() {
-			String angle = getTag("angle");
+			String angle = getTag(ANGLE_TAG);
 			double result = Double.NaN;
 			if (angle != null) {
 				try {
 					result = Double.parseDouble(angle);
-					int multyplier = 1;
-					if (Math.abs((int) result) / 360 > 0) {
-						multyplier = Math.abs((int) result) % 360;
-					}
-					if (result < 0) {
-						result += 360 * multyplier;
-					}
-					if (result > 360) {
-						result -= 360 * multyplier;
-					}
+					result = MapUtils.alignAngleDifference(result * Math.PI / 180);
+					result = result * 180 / Math.PI;
 				} catch (NumberFormatException e) {
-					e.printStackTrace();
+					throw new RuntimeException(e);
 				}
 			}
 			return result;

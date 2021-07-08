@@ -1010,20 +1010,6 @@ public class RouteDataObject {
 		return Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
 	}
 
-	// 0..360 degrees
-	public double directionRouteByNeighbours(int index) {
-		int sx = (index - 1 >= 0) ? pointsX[index - 1] : pointsX[index];
-		int sy = (index - 1 >= 0) ? pointsY[index - 1] : pointsY[index];
-		int ex = (index + 1 < pointsX.length) ? pointsX[index + 1] : pointsX[index];
-		int ey = (index + 1 < pointsY.length) ? pointsY[index + 1] : pointsY[index];
-
-		double radians = -Math.atan2(sx - ex, sy - ey);
-		if (radians < 0) {
-			radians += Math.PI * 2;
-		}
-		return radians * 180 / Math.PI;
-	}
-
 	private static void assertTrueLength(String vl, float exp) {
 		float dest = parseLength(vl, 0);
 		if (exp != dest) {
