@@ -54,9 +54,9 @@ public class SegmentsCard extends MapBaseCard {
 
 			View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, container, listener, nightMode);
 
-			if (!Algorithms.isBlank(displayItem.segmentName)) {
-				TextView title = segmentView.findViewById(R.id.segment_title);
-				title.setText(displayItem.segmentName);
+			if (!Algorithms.isBlank(displayItem.trackSegmentName)) {
+				TextView title = segmentView.findViewById(R.id.track_segment_title);
+				title.setText(displayItem.trackSegmentName);
 				AndroidUiHelper.updateVisibility(title, true);
 			}
 
