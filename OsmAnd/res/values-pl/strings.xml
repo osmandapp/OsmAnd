@@ -2678,7 +2678,7 @@
     <string name="access_intermediate_arrival_time">Pośredni czas przyjazdu</string>
     <string name="map_widget_intermediate_time">Czas pośredni</string>
     <string name="unirs_render_descr">Modyfikacja domyślnego stylu zwiększająca kontrast dróg pieszych i rowerowych. Używa przestarzałych kolorów stylu „Mapnik”.</string>
-    <string name="off_road_render_descr">Do przejazdów terenowych, oparty na stylu \"Topo\", do użycia z podkładami o barwie zielonej. Zmniejszona szerokość głównych dróg, zwiększona szerokość dróg leśnych i polnych, ścieżek, dróg rowerowych i innych.</string>
+    <string name="off_road_render_descr">Do przejazdów terenowych, oparty na stylu \"topograficzny\", do użycia z podkładami o barwie zielonej. Zmniejszona szerokość głównych dróg, zwiększona szerokość dróg leśnych i polnych, ścieżek, dróg rowerowych i innych.</string>
     <string name="nautical_render_descr">Do nawigacji morskiej. Zawiera boje, latarnie morskie, drogi rzeczne, drogi morskie, porty, obiekty żeglugi i izobaty.</string>
     <string name="ski_map_render_descr">Do narciarstwa. Zawiera trasy zjazdowe, wyciągi narciarskie, trasy biegowe itp. Przyciemnia dodatkowe obiekty mapy.</string>
     <string name="light_rs_render_descr">Prosty styl dla nawigacji drogowej. Delikatny styl nocny, izolinie, kontrastujące drogi w kolorze pomarańczowym, przyciemnione drugoplanowe obiekty mapy.</string>
@@ -3199,7 +3199,7 @@
     <string name="routeInfo_piste_difficulty_name">Trudność stoku</string>
     <string name="routing_attr_width_name">Ograniczenie szerokości</string>
     <string name="routing_attr_width_description">Określa dozwoloną szerokość pojazdu na trasach.</string>
-    <string name="avoid_in_routing_descr_">Unika określonych tras i typów dróg</string>
+    <string name="avoid_in_routing_descr_">Unikaj określonych tras i rodzajów dróg</string>
     <string name="app_mode_utv">Obok siebie</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Transport nadziemny</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Połączenia</string>
@@ -4048,8 +4048,8 @@
     <string name="trip_recording_logging_interval_info">Interwał rejestrowania ustawia okres czasu, w którym OsmAnd będzie żądał danych o aktualnej pozycji.</string>
     <string name="show_start_dialog">Pokaż okno rozpocznij</string>
     <string name="trip_recording_show_start_dialog_setting">Jeśli ta opcja jest wyłączona, nagrywanie rozpocznie się natychmiast po dotknięciu widżetu lub elementu menu, pomijając okno dialogowe potwierdzenia.</string>
-    <string name="customize_route_line">Zmień trasę nawigacji</string>
-    <string name="shared_string_route_line">Trasa nawigacji</string>
+    <string name="customize_route_line">Dostosuj linię trasy</string>
+    <string name="shared_string_route_line">Linia trasy</string>
     <string name="expired">Wygasł</string>
     <string name="release_4_0_beta">- Dodano opcję pobierania linii konturowych w stopach
 \n
@@ -4224,4 +4224,26 @@
     <string name="backup_error_token_is_not_valid_or_expired">Nieprawidłowy lub nieaktualny token</string>
     <string name="backup_error_user_is_not_registered">Brak użytkownika zarejestrowanego z tym adresem e-mail</string>
     <string name="backup_error_no_valid_subscription">Brak ważnej subskrypcji</string>
+    <string name="release_4_0">• Kopia zapasowa w chmurze
+\n
+\n • Dodano tryb nocny dla stylu renderowania \"topograficzny\"
+\n
+\n • Dodano opcję pobierania izolinii w stopach
+\n
+\n • Trasy mogą być teraz pokolorowane według wysokości, prędkości lub nachylenia
+\n
+\n • Zaktualizowano okno dialogowe \"Nagrywanie podróży\"
+\n
+\n • Mierzenie odległości naciśnięciami przesunięte z cyrkla do oddzielnej opcji
+\n
+\n • Planowanie trasy: dodano możliwość zmiany opcji nawigacji, dostęp do konfiguracji mapy i szukanie bez opuszczania planowania trasy
+\n
+\n • Nowy ekran \"Zakup\" ze szczegółowymi informacjami o zakupie
+\n
+\n • Dodano opcję zmiany wyglądu linii trasy
+\n
+\n • Aktualizacje OsmAnd Live przeniesione do \"Pobrane &gt; Aktualizacje\"
+\n
+\n</string>
+    <string name="approximate_route_description">Dołącz trasę do dróg na mapie, aby uzyskać wszystkie zakręty i dodatkowe dane, takie jak gładkość, rodzaje dróg itp.</string>
 </resources>
