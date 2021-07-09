@@ -424,8 +424,8 @@ public class BackupHelper {
 							deltaProgress += deltaWork;
 							if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
 								progress += deltaProgress;
+								listener.onFileUploadProgress(type, fileName, progress, deltaProgress);
 								deltaProgress = 0;
-								listener.onFileUploadProgress(type, fileName, progress, deltaWork);
 							}
 						}
 					}
