@@ -264,7 +264,7 @@
     <string name="poi_courthouse">محكمة</string>
     <string name="poi_restaurant">مطعم</string>
     <string name="poi_place_of_worship">مكان عبادة</string>
-    <string name="poi_government">حكومة</string>
+    <string name="poi_government">مكتب/دائرة حكومية</string>
     <string name="poi_building">مبنى</string>
     <string name="poi_hairdresser">حلاق</string>
     <string name="poi_toilets">دورة مياة; حمام</string>
@@ -3401,7 +3401,7 @@
     <string name="poi_gorge">أخدود/تلعة</string>
     <string name="poi_government_social_services">الخدمات الاجتماعية</string>
     <string name="poi_government_social_security">الضمان الاجتماعي</string>
-    <string name="poi_government_archive">أرشيف</string>
+    <string name="poi_government_archive">أرشيف/محفوظات حكومية</string>
     <string name="poi_network">الشبكة</string>
     <string name="poi_boat_canoe_rental_rental_no">كانوي: لا</string>
     <string name="poi_boat_canoe_rental_rental_yes">كانوي: نعم</string>
@@ -3744,11 +3744,11 @@
     <string name="poi_cannabis">متجر قنب</string>
     <string name="poi_couloir">رواق</string>
     <string name="poi_vhf">قناة تردد عال جدا VHF</string>
-    <string name="poi_government_legislative">مؤسسة تشريعية</string>
-    <string name="poi_government_transportation">مؤسسة النقل</string>
-    <string name="poi_government_treasury">خزينة</string>
+    <string name="poi_government_legislative">مؤسسة تشريعية حكومية</string>
+    <string name="poi_government_transportation">مؤسسة النقل الحكومية</string>
+    <string name="poi_government_treasury">خزينة الدولة</string>
     <string name="poi_government_public_service">خدمة عامة</string>
-    <string name="poi_government_ministry">وزارة</string>
+    <string name="poi_government_ministry">وزارة حكومية</string>
     <string name="poi_music_school">مدرسة موسيقى</string>
     <string name="poi_electronics_repair_tv">إصلاح الالكترونيات: التلفزيون</string>
     <string name="poi_drink_wine_served">النبيذ: تقديم</string>
@@ -3832,4 +3832,5 @@
     <string name="poi_historic_manor">قصر سكني قديم/تاريخي</string>
     <string name="poi_trail_riding_station">سكن للخيول والفرسان</string>
     <string name="poi_shrub">شجيرة</string>
+    <string name="poi_operator_type_government">نوع المشغل: حكومي</string>
 </resources>
