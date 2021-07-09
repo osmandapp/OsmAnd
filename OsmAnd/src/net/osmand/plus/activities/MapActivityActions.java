@@ -435,7 +435,7 @@ public class MapActivityActions implements DialogProvider {
 				&& getMyApplication().getSelectedGpxHelper().getSelectedGPXFile((WptPt) selectedObj) != null) {
 			adapter.addItem(editGpxItem);
 		} else if (!getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
-				|| (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null)) {
+				|| (OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class))) {
 			adapter.addItem(addGpxItem);
 		}
 
@@ -843,7 +843,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		final OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		final OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
 		if (monitoringPlugin != null) {
 			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_widget_monitoring, mapActivity)
 					.setId(DRAWER_TRIP_RECORDING_ID)

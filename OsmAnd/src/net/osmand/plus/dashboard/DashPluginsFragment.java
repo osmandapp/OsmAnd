@@ -99,17 +99,17 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 
 	private void initPlugins() {
-		List<OsmandPlugin> notActivePlugins = OsmandPlugin.getNotEnabledVisiblePlugins();
-		notActivePlugins.remove(OsmandPlugin.getPlugin(SkiMapsPlugin.class));
-		notActivePlugins.remove(OsmandPlugin.getPlugin(NauticalMapsPlugin.class));
-		Collections.shuffle(notActivePlugins);
+		List<OsmandPlugin> notFunctionalPlugins = OsmandPlugin.getNotFunctionalVisiblePlugins();
+		notFunctionalPlugins.remove(OsmandPlugin.getPlugin(SkiMapsPlugin.class));
+		notFunctionalPlugins.remove(OsmandPlugin.getPlugin(NauticalMapsPlugin.class));
+		Collections.shuffle(notFunctionalPlugins);
 
-		List<OsmandPlugin> enabledPlugins = OsmandPlugin.getEnabledVisiblePlugins();
+		List<OsmandPlugin> enabledPlugins = OsmandPlugin.getFunctionalVisiblePlugins();
 		enabledPlugins.remove(OsmandPlugin.getPlugin(SkiMapsPlugin.class));
 		enabledPlugins.remove(OsmandPlugin.getPlugin(NauticalMapsPlugin.class));
 
 		plugins = new ArrayList<OsmandPlugin>();
-		Iterator<OsmandPlugin> nit = notActivePlugins.iterator();
+		Iterator<OsmandPlugin> nit = notFunctionalPlugins.iterator();
 		Iterator<OsmandPlugin> it = enabledPlugins.iterator();
 		addPluginsToLimit(nit, 1);
 		addPluginsToLimit(it, 5);
@@ -142,7 +142,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		CompoundButton enableDisableButton = (CompoundButton) pluginView.findViewById(R.id.plugin_enable_disable);
 		Button getButton = (Button) pluginView.findViewById(R.id.get_plugin);
 		enableDisableButton.setOnCheckedChangeListener(null);
-		if (plugin.needsInstallation()) {
+		if (plugin.isLocked()) {
 			getButton.setVisibility(View.VISIBLE);
 			enableDisableButton.setVisibility(View.GONE);
 		} else {
@@ -190,10 +190,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		enableDisableButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (plugin.isActive() == isChecked || plugin.needsInstallation()) {
-					return;
-				}
-				if (OsmandPlugin.enablePlugin(getActivity(), getMyApplication(), plugin, isChecked)) {
+				if (OsmandPlugin.enablePluginIfNeeded(getActivity(), getMyApplication(), plugin, isChecked)) {
 					updatePluginState(pluginView, plugin);
 				}
 			}

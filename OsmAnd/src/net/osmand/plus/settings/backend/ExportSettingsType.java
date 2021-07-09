@@ -142,12 +142,12 @@ public enum ExportSettingsType {
 
 	public static List<ExportSettingsType> getEnabledTypes() {
 		List<ExportSettingsType> result = new ArrayList<>(Arrays.asList(ExportSettingsType.values()));
-		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getFunctionalPlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin == null) {
 			result.remove(ExportSettingsType.OSM_EDITS);
 			result.remove(ExportSettingsType.OSM_NOTES);
 		}
-		AudioVideoNotesPlugin avNotesPlugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+		AudioVideoNotesPlugin avNotesPlugin = OsmandPlugin.getFunctionalPlugin(AudioVideoNotesPlugin.class);
 		if (avNotesPlugin == null) {
 			result.remove(ExportSettingsType.MULTIMEDIA_NOTES);
 		}

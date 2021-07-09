@@ -345,7 +345,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (mode.isCustomProfile() && !getBackupFileForCustomMode(app, mode.getStringKey()).exists()) {
 			resetToDefault.setVisible(false);
 		} else {
-			OsmandDevelopmentPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class);
+			OsmandDevelopmentPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandDevelopmentPlugin.class);
 			if (plugin != null && mode.getParent() != null) {
 				String baseProfile = "(" + mode.getParent().toHumanString() + ")";
 				String title = getString(R.string.ltr_or_rtl_combine_via_space, getString(R.string.reset_to_default), baseProfile);

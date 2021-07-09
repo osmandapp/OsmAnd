@@ -410,7 +410,7 @@ public class ExternalApiHelper {
 					|| API_CMD_RECORD_VIDEO.equals(cmd)
 					|| API_CMD_RECORD_PHOTO.equals(cmd)
 					|| API_CMD_STOP_AV_REC.equals(cmd)) {
-				AudioVideoNotesPlugin plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = OsmandPlugin.getFunctionalPlugin(AudioVideoNotesPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -526,7 +526,7 @@ public class ExternalApiHelper {
 				showOnMap(lat, lon, null, null);
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_START_GPX_REC.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -539,7 +539,7 @@ public class ExternalApiHelper {
 				}
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_STOP_GPX_REC.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -552,7 +552,7 @@ public class ExternalApiHelper {
 				}
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_SAVE_GPX.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -564,7 +564,7 @@ public class ExternalApiHelper {
 				}
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_CLEAR_GPX.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;

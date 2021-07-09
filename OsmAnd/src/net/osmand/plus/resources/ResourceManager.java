@@ -696,7 +696,7 @@ public class ResourceManager {
 		} else {
 			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), DEFAULT_WIKIVOYAGE_TRAVEL_OBF, files);
 		}
-		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isContourLinesPurchased(context)) {
+		if (OsmandPlugin.isFunctional(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 

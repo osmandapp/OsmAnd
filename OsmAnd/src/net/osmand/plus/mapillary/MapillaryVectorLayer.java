@@ -129,8 +129,8 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		int dzoom = nzoom - TILE_ZOOM;
 		int div = (int) Math.pow(2.0, dzoom);
 
-		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null
-				|| OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
+		boolean useInternet = (OsmandPlugin.isFunctional(OsmandRasterMapsPlugin.class)
+				|| OsmandPlugin.isFunctional(MapillaryPlugin.class))
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 
 		Map<String, GeometryTile> tiles = new HashMap<>();

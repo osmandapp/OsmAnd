@@ -146,10 +146,21 @@ public abstract class OsmandPlugin {
 
 	public void setActive(boolean active) {
 		this.active = active;
+		onActiveStateChanged(active);
 	}
+
+	public void onActiveStateChanged(boolean active) { }
 
 	public boolean isActive() {
 		return active;
+	}
+
+	public boolean isLocked() {
+		return needsInstallation();
+	}
+
+	public boolean isFunctional() {
+		return isActive() && !isLocked();
 	}
 
 	public boolean isVisible() {
@@ -308,7 +319,7 @@ public abstract class OsmandPlugin {
 
 	public static void removeCustomPlugin(@NonNull OsmandApplication app, @NonNull final CustomOsmandPlugin plugin) {
 		allPlugins.remove(plugin);
-		if (plugin.isActive()) {
+		if (plugin.isFunctional()) {
 			plugin.removePluginItems(new CustomOsmandPlugin.PluginItemsListener() {
 				@Override
 				public void onItemsRemoved() {
@@ -444,7 +455,20 @@ public abstract class OsmandPlugin {
 		return isPackageInstalled(plugin.getComponentId1(), app) || isPackageInstalled(plugin.getComponentId2(), app);
 	}
 
-	public static boolean enablePlugin(@Nullable Activity activity, OsmandApplication app, OsmandPlugin plugin, boolean enable) {
+	public static boolean enablePluginIfNeeded(@Nullable Activity activity,
+	                                           OsmandApplication app,
+	                                           OsmandPlugin plugin,
+	                                           boolean enable) {
+		if (plugin != null && plugin.isActive() != enable && (!enable || !plugin.isLocked())) {
+			return enablePlugin(activity, app, plugin, enable);
+		}
+		return false;
+	}
+
+	public static boolean enablePlugin(@Nullable Activity activity,
+	                                   OsmandApplication app,
+	                                   OsmandPlugin plugin,
+	                                   boolean enable) {
 		if (enable) {
 			if (!plugin.init(app, activity)) {
 				plugin.setActive(false);
@@ -612,30 +636,40 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
-	public static List<OsmandPlugin> getEnabledVisiblePlugins() {
+	public static List<OsmandPlugin> getFunctionalPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
-			if (p.isActive() && p.isVisible()) {
+			if (p.isFunctional()) {
 				lst.add(p);
 			}
 		}
 		return lst;
 	}
 
-	public static List<OsmandPlugin> getNotEnabledPlugins() {
+	public static List<OsmandPlugin> getFunctionalVisiblePlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
-			if (!p.isActive()) {
+			if (p.isFunctional() && p.isVisible()) {
 				lst.add(p);
 			}
 		}
 		return lst;
 	}
 
-	public static List<OsmandPlugin> getNotEnabledVisiblePlugins() {
+	public static List<OsmandPlugin> getNotFunctionalPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
-			if (!p.isActive() && p.isVisible()) {
+			if (!p.isFunctional()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
+	public static List<OsmandPlugin> getNotFunctionalVisiblePlugins() {
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (!p.isFunctional() && p.isVisible()) {
 				lst.add(p);
 			}
 		}
@@ -663,8 +697,18 @@ public abstract class OsmandPlugin {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends OsmandPlugin> T getEnabledPlugin(Class<T> clz) {
+	public static <T extends OsmandPlugin> T getEnabledPlugin(Class<T> clz) { // TODO
 		for (OsmandPlugin lr : getEnabledPlugins()) {
+			if (clz.isInstance(lr)) {
+				return (T) lr;
+			}
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T extends OsmandPlugin> T getFunctionalPlugin(Class<T> clz) {
+		for (OsmandPlugin lr : getFunctionalPlugins()) {
 			if (clz.isInstance(lr)) {
 				return (T) lr;
 			}
@@ -691,8 +735,12 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
-	public static <T extends OsmandPlugin> boolean isPluginEnabled(Class<T> clz) {
+	public static <T extends OsmandPlugin> boolean isEnabled(Class<T> clz) {
 		return getEnabledPlugin(clz) != null;
+	}
+
+	public static <T extends OsmandPlugin> boolean isFunctional(Class<T> clz) {
+		return getFunctionalPlugin(clz) != null;
 	}
 
 	public static boolean isPluginDisabledManually(OsmandApplication app, OsmandPlugin plugin) {
@@ -726,7 +774,7 @@ public abstract class OsmandPlugin {
 
 	public static List<String> getDisabledRendererNames() {
 		List<String> l = new ArrayList<String>();
-		for (OsmandPlugin plugin : getNotEnabledPlugins()) {
+		for (OsmandPlugin plugin : getNotFunctionalPlugins()) {
 			l.addAll(plugin.getRendererNames());
 		}
 		return l;
@@ -734,7 +782,7 @@ public abstract class OsmandPlugin {
 
 	public static List<String> getDisabledRouterNames() {
 		List<String> l = new ArrayList<String>();
-		for (OsmandPlugin plugin : getNotEnabledPlugins()) {
+		for (OsmandPlugin plugin : getNotFunctionalPlugins()) {
 			l.addAll(plugin.getRouterNames());
 		}
 		return l;
@@ -870,7 +918,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void registerCustomPoiFilters(List<PoiUIFilter> poiUIFilters) {
-		for (OsmandPlugin p : getEnabledPlugins()) {
+		for (OsmandPlugin p : getFunctionalPlugins()) {
 			poiUIFilters.addAll(p.getCustomPoiFilters());
 		}
 	}
@@ -885,14 +933,14 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void populateContextMenuImageCards(@NonNull List<ImageCard> imageCards, @NonNull Map<String, String> params,
-										  @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
+	                                                 @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
+		for (OsmandPlugin plugin : getFunctionalPlugins()) {
 			imageCards.addAll(plugin.getContextMenuImageCards(params, additionalParams, listener));
 		}
 	}
 
 	public static ImageCard createImageCardForJson(@NonNull JSONObject imageObject) {
-		for (OsmandPlugin plugin : getEnabledPlugins()) {
+		for (OsmandPlugin plugin : getFunctionalPlugins()) {
 			ImageCard imageCard = plugin.createContextMenuImageCard(imageObject);
 			if (imageCard != null) {
 				return imageCard;
@@ -914,7 +962,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public static boolean onMapActivityKeyUp(MapActivity mapActivity, int keyCode) {
-		for (OsmandPlugin p : getEnabledPlugins()) {
+		for (OsmandPlugin p : getFunctionalPlugins()) {
 			if (p.mapActivityKeyUp(mapActivity, keyCode))
 				return true;
 		}
@@ -922,13 +970,13 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void registerQuickActionTypesPlugins(List<QuickActionType> quickActionTypes) {
-		for (OsmandPlugin p : getEnabledPlugins()) {
+		for (OsmandPlugin p : getFunctionalPlugins()) {
 			quickActionTypes.addAll(p.getQuickActionTypes());
 		}
 	}
 
 	public static void updateLocationPlugins(net.osmand.Location location) {
-		for (OsmandPlugin p : getEnabledPlugins()) {
+		for (OsmandPlugin p : getFunctionalPlugins()) {
 			p.updateLocation(location);
 		}
 	}

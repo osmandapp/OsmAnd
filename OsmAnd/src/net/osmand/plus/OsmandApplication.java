@@ -896,7 +896,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
 		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
-		if (OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
+		if (!OsmandPlugin.isFunctional(AccessibilityPlugin.class)) {
 			return false;
 		}
 		if (mode == AccessibilityMode.ON) {

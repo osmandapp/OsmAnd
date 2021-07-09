@@ -325,7 +325,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		AmenityInfoRow cuisineRow = null;
 		List<PoiType> collectedPoiTypes = new ArrayList<>();
 
-		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
+		boolean osmEditingEnabled = OsmandPlugin.isFunctional(OsmEditingPlugin.class);
 
 		for (String key : amenity.getAdditionalInfoKeys()) {
 			int iconId = 0;

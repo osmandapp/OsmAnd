@@ -1163,7 +1163,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			final List<SelectedGpxFile> list
 					= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
 			if ((list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack))
-					&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+					&& OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class)) {
 				GPXFile gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {

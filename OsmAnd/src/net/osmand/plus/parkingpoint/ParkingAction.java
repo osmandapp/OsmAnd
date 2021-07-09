@@ -30,7 +30,7 @@ public class ParkingAction extends QuickAction {
 	@Override
 	public void execute(MapActivity activity) {
 
-		ParkingPositionPlugin plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
+		ParkingPositionPlugin plugin = OsmandPlugin.getFunctionalPlugin(ParkingPositionPlugin.class);
 
 		if (plugin != null) {
 

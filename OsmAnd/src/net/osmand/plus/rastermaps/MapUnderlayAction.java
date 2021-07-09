@@ -109,7 +109,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public void execute(MapActivity activity) {
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();
 			if (sources.size() > 0) {
@@ -126,7 +126,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public void executeWithParams(MapActivity activity, String params) {
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			OsmandSettings settings = activity.getMyApplication().getSettings();
 			boolean hasUnderlay = !params.equals(KEY_NO_UNDERLAY);

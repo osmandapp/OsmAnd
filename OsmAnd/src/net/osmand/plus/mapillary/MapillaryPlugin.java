@@ -133,7 +133,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		if (rasterLayer == null || vectorLayer == null) {
 			createLayers();
 		}
-		if (isActive()) {
+		if (isFunctional()) {
 			ITileSource rasterSource = null;
 			ITileSource vectorSource = null;
 			if (settings.SHOW_MAPILLARY.get() || force) {

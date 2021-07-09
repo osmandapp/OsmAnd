@@ -743,7 +743,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (isActive()) {
+		if (isFunctional()) {
 			if (SHOW_RECORDINGS.get()) {
 				if (audioNotesLayer == null) {
 					registerLayers(activity);
@@ -1796,7 +1796,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				if (rec != null &&
 						(app.getSettings().SAVE_TRACK_TO_GPX.get()
 								|| app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get())
-						&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+						&& OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class)) {
 					String name = f.getName();
 					SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 					savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), null, name, null, 0);

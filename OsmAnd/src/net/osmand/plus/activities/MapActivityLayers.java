@@ -450,7 +450,7 @@ public class MapActivityLayers {
 	}
 
 	public void selectMapLayer(final OsmandMapTileView mapView, @Nullable final ContextMenuItem it, @Nullable final ArrayAdapter<ContextMenuItem> adapter) {
-		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
+		if (!OsmandPlugin.isFunctional(OsmandRasterMapsPlugin.class)) {
 			Toast.makeText(activity, R.string.map_online_plugin_is_not_installed, Toast.LENGTH_LONG).show();
 			return;
 		}

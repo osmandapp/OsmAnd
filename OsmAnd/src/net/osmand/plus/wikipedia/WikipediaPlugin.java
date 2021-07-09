@@ -17,15 +17,14 @@ import net.osmand.data.Amenity;
 import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -101,16 +100,10 @@ public class WikipediaPlugin extends OsmandPlugin {
 		return app.getUIUtilities().getIcon(R.drawable.img_plugin_wikipedia);
 	}
 
-	//
-//	@Override
-//	public boolean isMarketPlugin() {
-//		return true;
-//	}
-//
-//	@Override
-//	public boolean isPaid() {
-//		return true;
-//	}
+	@Override
+	public boolean isPaid() {
+		return true;
+	}
 
 	@Override
 	public void mapActivityResume(MapActivity activity) {
@@ -139,40 +132,16 @@ public class WikipediaPlugin extends OsmandPlugin {
 	protected void registerLayerContextMenuActions(OsmandMapTileView mapView,
 												   ContextMenuAdapter adapter,
 												   final MapActivity mapActivity) {
-		if (!Version.isPaidVersion(app)) {
-			createPromoWikipediaItem(mapView, adapter, mapActivity);
+		if (isLocked()) {
+			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.WIKIPEDIA,
+					R.string.shared_string_wikipedia,
+					R.string.explore_wikipedia_offline);
 		} else {
-			createWikipediaItem(mapView, adapter, mapActivity);
+			createWikipediaItem(adapter, mapActivity);
 		}
 	}
 
-	private void createPromoWikipediaItem(OsmandMapTileView mapView,
-	                                      ContextMenuAdapter adapter,
-	                                      final MapActivity mapActivity) {
-		OsmAndFeature feature = OsmAndFeature.WIKIPEDIA;
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-
-		ItemClickListener listener = (adapter1, itemId, position, isChecked, viewCoordinates) -> {
-			if (mapActivity != null) {
-				ChoosePlanFragment.showInstance(mapActivity, feature);
-			}
-			return false;
-		};
-
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(WIKIPEDIA_ID)
-				.setLayout(R.layout.list_item_promo)
-				.setTitleId(R.string.shared_string_wikipedia, mapActivity)
-				.setDescription(app.getString(R.string.explore_wikipedia_offline))
-				.setIcon(feature.getIconId(nightMode))
-				.setSkipPaintingWithoutColor(true)
-				.setUnsorted(true)
-				.setListener(listener)
-				.createItem());
-	}
-
-	private void createWikipediaItem(OsmandMapTileView mapView,
-	                                 ContextMenuAdapter adapter,
+	private void createWikipediaItem(ContextMenuAdapter adapter,
 	                                 final MapActivity mapActivity) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 
@@ -228,6 +197,13 @@ public class WikipediaPlugin extends OsmandPlugin {
 		poiFilters.add(topWikiPoiFilter);
 
 		return poiFilters;
+	}
+
+	@Override
+	public void onActiveStateChanged(boolean active) {
+		// Reload all POI filters to add or remove top Wikipedia filter
+		// after enable or disable Wikipedia plugin
+		app.getPoiFilters().reloadAllPoiFilters();
 	}
 
 	public void updateWikipediaState() {

@@ -149,13 +149,13 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			createLayers();
 		}
 		overlayLayer.setAlpha(settings.MAP_OVERLAY_TRANSPARENCY.get());
-		if (isActive()) {
+		if (isFunctional()) {
 			updateLayer(mapView, settings, overlayLayer, settings.MAP_OVERLAY, 0.7f, settings.MAP_OVERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(overlayLayer);
 			overlayLayer.setMap(null);
 		}
-		if (isActive()) {
+		if (isFunctional()) {
 			updateLayer(mapView, settings, underlayLayer, settings.MAP_UNDERLAY, -0.5f, settings.MAP_UNDERLAY == settingsToWarnAboutMap);
 		} else {
 			mapView.removeLayer(underlayLayer);

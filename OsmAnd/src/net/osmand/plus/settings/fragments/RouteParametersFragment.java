@@ -328,7 +328,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
 
-		if (OsmandPlugin.isPluginEnabled(OsmandDevelopmentPlugin.class)) {
+		if (OsmandPlugin.isFunctional(OsmandDevelopmentPlugin.class)) {
 			setupDevelopmentCategoryPreferences(screen, am);
 		}
 	}

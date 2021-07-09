@@ -149,7 +149,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (isActive()) {
+		if (isFunctional()) {
 			if (osmBugsLayer == null) {
 				registerLayers(activity);
 			}

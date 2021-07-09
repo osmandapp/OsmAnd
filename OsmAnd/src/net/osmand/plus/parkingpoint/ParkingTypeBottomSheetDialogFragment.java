@@ -53,7 +53,7 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 	}
 
 	private void addParkingPosition(boolean limited) {
-		ParkingPositionPlugin plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
+		ParkingPositionPlugin plugin = OsmandPlugin.getFunctionalPlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			MapActivity mapActivity = (MapActivity) getActivity();
 			Bundle args = getArguments();

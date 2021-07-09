@@ -4,9 +4,16 @@ import android.graphics.Color;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -16,7 +23,9 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PriceButtonsUtils {
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
+
+public class PurchasingUtils {
 
 	public static List<SubscriptionButton> collectSubscriptionButtons(OsmandApplication app,
 																	  InAppPurchaseHelper purchaseHelper,
@@ -109,4 +118,30 @@ public class PriceButtonsUtils {
 		}
 		return null;
 	}
+
+	public static void createPromoItem(@NonNull ContextMenuAdapter adapter,
+	                                   @NonNull MapActivity mapActivity,
+	                                   @NonNull OsmAndFeature feature,
+	                                   @StringRes int titleId,
+	                                   @StringRes int descriptionId) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+
+		ItemClickListener listener = (adapter1, itemId, position, isChecked, viewCoordinates) -> {
+			ChoosePlanFragment.showInstance(mapActivity, feature);
+			return false;
+		};
+
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(WIKIPEDIA_ID)
+				.setLayout(R.layout.list_item_promo)
+				.setTitleId(titleId, mapActivity)
+				.setDescription(app.getString(descriptionId))
+				.setIcon(feature.getIconId(nightMode))
+				.setSkipPaintingWithoutColor(true)
+				.setUnsorted(true)
+				.setListener(listener)
+				.createItem());
+	}
+
 }

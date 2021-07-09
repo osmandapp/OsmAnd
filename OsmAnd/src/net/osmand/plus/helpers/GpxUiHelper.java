@@ -290,7 +290,7 @@ public class GpxUiHelper {
 		int gpxDirLength = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath().length();
 		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 		final List<GPXInfo> list = new ArrayList<>(selectedGpxFiles.size() + 1);
-		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
+		if (!OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class)) {
 			showCurrentGpx = false;
 		}
 		if (!selectedGpxFiles.isEmpty() || showCurrentGpx) {
@@ -646,7 +646,7 @@ public class GpxUiHelper {
 					item.setSelected(!item.getSelected());
 					alertDialogAdapter.notifyDataSetInvalidated();
 					if (position == 0 && showCurrentGpx && item.getSelected()) {
-						OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+						OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
 						if (monitoringPlugin == null) {
 							AlertDialog.Builder confirm = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 							confirm.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {

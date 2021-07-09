@@ -14,16 +14,14 @@ import androidx.appcompat.app.AlertDialog;
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
@@ -249,7 +247,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (settings.TERRAIN.get() && isActive()) {
+		if (settings.TERRAIN.get() && isFunctional()) {
 			removeTerrainLayer(mapView, activity);
 			registerLayers(activity);
 		} else {
@@ -269,36 +267,13 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView,
 	                                            ContextMenuAdapter adapter,
 	                                            MapActivity mapActivity) {
-		if (!Version.isPaidVersion(app)) {
-			createPromoItem(mapView, adapter, mapActivity);
+		if (isLocked()) {
+			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
+					R.string.shared_string_terrain,
+					R.string.contour_lines_hillshades_slope);
 		} else {
 			createContextMenuItems(mapView, adapter, mapActivity);
 		}
-	}
-
-	private void createPromoItem(OsmandMapTileView mapView,
-	                             ContextMenuAdapter adapter,
-	                             MapActivity mapActivity) {
-		OsmAndFeature feature = OsmAndFeature.TERRAIN;
-		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-
-		ItemClickListener listener = (adapter1, itemId, position, isChecked, viewCoordinates) -> {
-			if (mapActivity != null) {
-				ChoosePlanFragment.showInstance(mapActivity, feature);
-			}
-			return false;
-		};
-
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(TERRAIN)
-				.setLayout(R.layout.list_item_promo)
-				.setTitleId(R.string.shared_string_terrain, mapActivity)
-				.setDescription(app.getString(R.string.contour_lines_hillshades_slope))
-				.setIcon(feature.getIconId(nightMode))
-				.setSkipPaintingWithoutColor(true)
-				.setUnsorted(true)
-				.setListener(listener)
-				.createItem());
 	}
 
 	private void createContextMenuItems(OsmandMapTileView mapView,
@@ -335,9 +310,7 @@ public class SRTMPlugin extends OsmandPlugin {
 								boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
 
 								SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-								if (selected && plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
-									OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
-								}
+								OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 
 								ContextMenuItem item = adapter.getItem(position);
 								if (item != null) {
@@ -357,8 +330,8 @@ public class SRTMPlugin extends OsmandPlugin {
 						public void run() {
 							boolean selected = settings.TERRAIN.get();
 							SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-							if (selected && plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
-								OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
+							if (selected) {
+								OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 							}
 							ContextMenuItem item = adapter.getItem(position);
 							if (item != null) {
