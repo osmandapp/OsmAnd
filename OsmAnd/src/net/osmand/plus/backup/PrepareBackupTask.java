@@ -26,7 +26,7 @@ public class PrepareBackupTask {
 
 	private enum TaskType {
 		COLLECT_LOCAL_FILES(null),
-		COLLECT_REMOTE_FILES(new TaskType[]{COLLECT_LOCAL_FILES}),
+		COLLECT_REMOTE_FILES(null),
 		GENERATE_BACKUP_INFO(new TaskType[]{COLLECT_LOCAL_FILES, COLLECT_REMOTE_FILES});
 
 		private final TaskType[] dependentTasks;

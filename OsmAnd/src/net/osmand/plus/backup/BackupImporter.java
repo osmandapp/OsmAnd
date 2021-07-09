@@ -195,14 +195,11 @@ class BackupImporter {
 
 			Map<String, Long> infoMap = backupHelper.getDbHelper().getUploadedFileInfoMap();
 			for (RemoteFile remoteFile : uniqueRemoteFiles) {
-				Long uploadTime = infoMap.get(remoteFile.getType() + "___" + remoteFile.getName());
-				if (uploadTime != null && uploadTime == remoteFile.getClienttimems()) {
-					//operationLog.log("TIME EQ " + remoteFile.getName());
-					//continue;
-				}
 				String fileName = remoteFile.getTypeNamePath();
 				if (fileName.endsWith(INFO_EXT)) {
-					if (readItems) {
+					Long uploadTime = infoMap.get(remoteFile.getType() + "___"
+							+ remoteFile.getName().substring(0, remoteFile.getName().length() - INFO_EXT.length()));
+					if (readItems && (uploadTime == null || uploadTime != remoteFile.getClienttimems())) {
 						remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
 					}
 					String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());

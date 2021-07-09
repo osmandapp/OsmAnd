@@ -685,8 +685,6 @@ public class BackupHelper {
 								info.filesToUpload.add(localFile);
 								info.filesToDownload.add(remoteFile);
 							}
-							//info.filesToUpload.add(localFile);
-							//info.filesToDownload.add(remoteFile);
 						} else {
 							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
 							info.filesToDownload.add(remoteFile);

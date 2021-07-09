@@ -24,6 +24,8 @@ import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
 import net.osmand.plus.backup.PrepareBackupResult;
+import net.osmand.plus.backup.PrepareBackupTask;
+import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
@@ -37,7 +39,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class RestoreSettingsFragment extends ImportSettingsFragment {
+public class RestoreSettingsFragment extends ImportSettingsFragment implements OnPrepareBackupListener {
 
 	public static final String TAG = RestoreSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(RestoreSettingsFragment.class.getSimpleName());
@@ -78,6 +80,18 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 		collectItems();
 
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		app.getBackupHelper().addPrepareBackupListener(this);
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		app.getBackupHelper().removePrepareBackupListener(this);
 	}
 
 	@Override
@@ -128,7 +142,23 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
 	}
 
+	@Override
+	public void onBackupPreparing() {
+	}
+
+	@Override
+	public void onBackupPrepared(@Nullable PrepareBackupResult backupResult) {
+		collectAndReadSettings();
+	}
+
 	private void collectItems() {
+		updateUi(R.string.shared_string_preparing, R.string.shared_string_preparing);
+		if (!app.getBackupHelper().isBackupPreparing()) {
+			collectAndReadSettings();
+		}
+	}
+
+	private void collectAndReadSettings() {
 		settingsHelper.collectSettings("", 0, true, new BackupCollectListener() {
 
 			@Nullable
@@ -160,12 +190,6 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 									itemsForRestore.add(restoreItem);
 								}
 							}
-							for (Pair<LocalFile, RemoteFile> pair : info.filesToMerge) {
-								SettingsItem restoreItem = getRestoreItem(items, pair.second);
-								if (restoreItem != null) {
-									itemsForRestore.add(restoreItem);
-								}
-							}
 						}
 						setSettingsItems(new ArrayList<>(itemsForRestore));
 						dataList = SettingsHelper.getSettingsToOperateByCategory(settingsItems, false, false);
@@ -174,7 +198,6 @@ public class RestoreSettingsFragment extends ImportSettingsFragment {
 				}
 			}
 		});
-		updateUi(R.string.shared_string_preparing, R.string.shared_string_preparing);
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
