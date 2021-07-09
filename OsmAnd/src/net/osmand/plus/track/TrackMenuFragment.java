@@ -377,6 +377,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		setupCards();
 		setupToolbar();
 		updateHeader();
+		updateHeadersBottomShadow();
 		setupButtons(view);
 		updateCardsLayout();
 		if (menuType == TrackMenuType.OVERVIEW && isPortrait()) {
