@@ -49,10 +49,13 @@ public class SegmentsCard extends MapBaseCard {
 		ViewGroup container = (ViewGroup) view;
 		container.removeAllViews();
 		List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
-		for (GpxDisplayItem displayItem : items) {
+		for (int i = 0; i < items.size(); i++) {
+			GpxDisplayItem displayItem = items.get(i);
 			updateLocationOnMap(displayItem);
 
 			View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, container, listener, nightMode);
+
+			AndroidUiHelper.updateVisibility(segmentView.findViewById(R.id.list_item_divider), i != 0);
 
 			if (!Algorithms.isBlank(displayItem.trackSegmentName)) {
 				TextView title = segmentView.findViewById(R.id.track_segment_title);
