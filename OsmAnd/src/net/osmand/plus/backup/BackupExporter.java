@@ -123,14 +123,14 @@ public class BackupExporter extends Exporter {
 		return new OnUploadItemListener() {
 
 			@Override
-			public void onItemFileUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work) {
+			public void onItemUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work) {
 				if (listener != null) {
 					listener.itemExportStarted(item.getType().name(), fileName, work);
 				}
 			}
 
 			@Override
-			public void onItemFileUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork) {
+			public void onItemUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork) {
 				dataProgress[0] += deltaWork;
 				if (listener != null) {
 					listener.updateItemProgress(item.getType().name(), fileName, progress);
@@ -145,6 +145,14 @@ public class BackupExporter extends Exporter {
 					errors.put(type + "/" + fileName, error);
 				} else {
 					checkAndDeleteOldFile(item, fileName, errors);
+				}
+			}
+
+			@Override
+			public void onItemUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error) {
+				String type = item.getType().name();
+				if (!Algorithms.isEmpty(error)) {
+					errors.put(type + "/" + fileName, error);
 				}
 				itemsProgress.add(item);
 				if (listener != null) {
