@@ -368,7 +368,7 @@
     <string name="show_more_map_detail">Mehr Kartendetails anzeigen</string>
     <string name="show_more_map_detail_descr">Einige Vektordaten (Straßen usw.) bereits bei kleineren Vergrößerungen zeigen.</string>
     <string name="favourites_delete_multiple_succesful">Favorit(en) gelöscht.</string>
-    <string name="favorite_delete_multiple">Es sollen %1$d Favorit(en) und %2$d Favoritengruppe(n) gelöscht werden. Fortfahren\?</string>
+    <string name="favorite_delete_multiple">%1$d Favorit(en) und %2$d Favoritengruppe(n) löschen\?</string>
     <string name="favorite_home_category">Zuhause</string>
     <string name="favorite_friends_category">Freunde</string>
     <string name="favorite_places_category">Sehenswertes</string>
@@ -1012,8 +1012,8 @@
     <string name="audionotes_plugin_description">Machen Sie während einer Reise Audio-, Foto- und Video-Notizen, indem Sie entweder eine Karten-Schaltfläche oder ein Standort-Kontextmenü verwenden.</string>
     <string name="audionotes_plugin_name">Audio-/Video-Notizen</string>
     <string name="audionotes_location_not_defined">Benutzen Sie \'Standort verwenden … \', um dem Ort eine Notiz zuzuweisen.</string>
-    <string name="stop_routing_confirm">Sind Sie sicher, dass Sie die Navigation stoppen möchten?</string>
-    <string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihr Ziel (und die Zwischenziele) löschen möchten?</string>
+    <string name="stop_routing_confirm">Navigation stoppen\?</string>
+    <string name="clear_dest_confirm">Ziel (und die Zwischenziele) löschen\?</string>
     <string name="precise_routing_mode_descr">Routen fehlerfrei berechnen. Diese Funktion ist dennoch auf kurze Entfernung begrenzt und langsam.</string>
     <string name="precise_routing_mode">Präzises Routing (experimentell)</string>
     <string name="local_indexes_cat_av">Audio-/Video-Daten</string>
@@ -1139,7 +1139,7 @@
     <string name="app_mode_motorcycle">Motorrad</string>
     <string name="app_mode_boat">Boot</string>
     <string name="app_mode_aircraft">Flugzeug</string>
-    <string name="local_osm_changes_delete_all_confirm">Sie löschen %1$d OSM-Änderung(en). Fortfahren?</string>
+    <string name="local_osm_changes_delete_all_confirm">%1$d OSM Änderung(en) löschen\?</string>
     <string name="shared_string_delete_all">Alle löschen</string>
     <string name="amenity_type_seamark">Schifffahrtsobjekte</string>
     <string name="app_modes_choose_descr">Wählen Sie die anzuzeigenden Profile aus.</string>
@@ -1513,7 +1513,7 @@
     <string name="welcome_header">Willkommen</string>
     <string name="current_route">Aktuelle Route</string>
     <string name="mark_to_delete">Zum Löschen markieren</string>
-    <string name="local_osm_changes_upload_all_confirm">Sind Sie sicher, dass Sie %1$d Änderung(en) zu OSM hochladen möchten\?</string>
+    <string name="local_osm_changes_upload_all_confirm">%1$d Änderung(en) zu OSM hochladen\?</string>
     <string name="confirmation_to_clear_history">Verlauf löschen?</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
@@ -1622,7 +1622,7 @@
     <string name="lang_vo">Volapük</string>
     <string name="lang_new">Newar / Nepal Bhasa</string>
     <string name="lang_ceb">Cebuano</string>
-    <string name="local_recordings_delete_all_confirm">Sind Sie sicher, dass Sie %1$d Notizen löschen möchten\?</string>
+    <string name="local_recordings_delete_all_confirm">%1$d Notizen löschen\?</string>
     <string name="lang_te">Telugu</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Einfärbung gemäß Routennetzwerk</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Einfärbung gemäß OSMC-Wandersymbol</string>
@@ -1768,7 +1768,7 @@
     <string name="poi_dialog_poi_type">Art des POI</string>
     <string name="number_of_rows_in_dash">Anzahl der Zeilen in der Übersichtsseite %1$s</string>
     <string name="downloads_left_template">%1$s Downloads übrig</string>
-    <string name="downloading_number_of_files">Herunterladen - %1$d Datei</string>
+    <string name="downloading_number_of_files">Herunterladen von %1$d Datei…</string>
     <string name="show_free_version_banner">Banner der kostenlosen Version anzeigen</string>
     <string name="activate_seamarks_plugin">Bitte die Erweiterung \'Seekarte\' aktivieren</string>
     <string name="activate_srtm_plugin">Bitte die Erweiterung \'Höhenlinien\' aktivieren</string>
@@ -1995,7 +1995,7 @@
     <string name="route_stops_before">%1$s Haltestellen davor</string>
     <string name="rendering_attr_hideOverground_name">Oberirdische Objekte</string>
     <string name="routing_attr_short_way_name">Kraftstoffsparende Route</string>
-    <string name="replace_favorite_confirmation">Wollen Sie den Favoriten \'%1$s\' wirklich ersetzen?</string>
+    <string name="replace_favorite_confirmation">Den Favoriten \'%1$s\' ersetzen\?</string>
     <string name="shared_string_change">Ändern</string>
     <string name="get_started">Erste Schritte</string>
     <string name="update_all_maps_now">Jetzt alle Karten aktualisieren?</string>
@@ -2102,7 +2102,7 @@
     <string name="quick_action_add_favorite">Favorit hinzufügen</string>
     <string name="dialog_add_action_title">Aktion hinzufügen</string>
     <string name="quick_actions_delete">Aktion löschen</string>
-    <string name="quick_actions_delete_text">Sind Sie sicher, dass Sie die Aktion „%s“ löschen möchten\?</string>
+    <string name="quick_actions_delete_text">Aktion „%s“ löschen\?</string>
     <string name="quick_favorites_show_favorites_dialog">Dialog zu Favoriten anzeigen</string>
     <string name="quick_favorites_name_preset">Name voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
@@ -2188,7 +2188,7 @@
     <string name="average_speed">Durchschnittsgeschwindigkeit</string>
     <string name="shared_string_gpx_track">Track</string>
     <string name="points_delete_multiple_succesful">Punkt(e) gelöscht.</string>
-    <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
+    <string name="points_delete_multiple">%1$d Punkt(e) löschen\?</string>
     <string name="track_points_category_name">Wegpunkte, POI, markierte Orte</string>
     <string name="route_points_category_name">Richtungsänderungen entlang dieser Route</string>
     <string name="add_new_folder">Neuen Ordner hinzufügen</string>
@@ -2972,7 +2972,7 @@
     <string name="profile_alert_need_save_title">Änderungen speichern</string>
     <string name="profile_alert_need_save_msg">Änderungen am Profil zuerst speichern</string>
     <string name="profile_alert_delete_title">Profil löschen</string>
-    <string name="profile_alert_delete_msg">Möchten Sie das Profil „%s“ wirklich löschen</string>
+    <string name="profile_alert_delete_msg">Profil „%s“ löschen</string>
     <string name="select_base_profile_dialog_title">Wählen Sie zunächst ein Profil aus</string>
     <string name="select_base_profile_dialog_message">Bauen Sie ein eigenes Anwendungsprofil auf einem der Standardprofile der App auf. Dieses bestimmt die Grundeinstellungen wie Voreinstellungen zur Sichtbarkeit von Widgets und die Einheiten für Geschwindigkeit und Entfernungen. Dies sind die App-Standardprofile zusammen mit Beispielen für eigene Anwendungsprofile, die erweitert werden können:</string>
     <string name="select_nav_profile_dialog_title">Navigationsart auswählen</string>
@@ -3233,7 +3233,7 @@
     <string name="routing_attr_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
     <string name="routing_attr_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>
     <string name="update_all_maps">Alle Karten aktualisieren</string>
-    <string name="update_all_maps_q">Sind Sie sicher, dass Sie alle (%1$d) Karten aktualisieren möchten\?</string>
+    <string name="update_all_maps_q">Alle (%1$d) Karten aktualisieren\?</string>
     <string name="release_3_5">• Verbesserte Anwendungs- und Profil-Einstellungen. Die Einstellungen sind nun nach Typ geordnet. Jedes Profil kann separat angepasst werden. 
 \n 
 \n • Neuer Karten-Download-Dialog, der während des Stöberns eine Karte zum Download vorschlägt 
@@ -3463,7 +3463,7 @@
 \nDas kann einige Zeit dauern.</string>
     <string name="items_added">Elemente hinzugefügt</string>
     <string name="shared_string_import_complete">Import abgeschlossen</string>
-    <string name="clear_recorded_data_warning">Sind Sie sicher, dass Sie die aufgezeichneten Daten löschen möchten\?</string>
+    <string name="clear_recorded_data_warning">Aufgezeichnete Daten löschen\?</string>
     <string name="select_distance_route_will_recalc">Wählen Sie die Entfernung, nach der die Route neu berechnet wird.</string>
     <string name="recalculate_route_in_deviation">Neuberechnung der Route im Falle einer Abweichung</string>
     <string name="recalculate_route_distance_promo">Die Route wird neu berechnet, wenn die Entfernung von der Route zur aktuellen Position größer als der ausgewählte Wert ist.</string>
@@ -3649,7 +3649,7 @@
     <string name="weight_limit_description">Geben Sie Ihr Fahrzeuggewicht an, für schwere Fahrzeuge können einige Routenbeschränkungen gelten.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Sie können Schnellaktionen mit Anwendungsprofilen exportieren oder importieren.</string>
     <string name="shared_string_delete_all_q">Alles löschen\?</string>
-    <string name="delete_all_actions_message_q">Möchten Sie %d Schnellaktionen wirklich unwiderruflich löschen\?</string>
+    <string name="delete_all_actions_message_q">%d Schnellaktionen unwiderruflich löschen\?</string>
     <string name="shared_string_tones">Tonnen</string>
     <string name="shared_string_meters">Meter</string>
     <string name="screen_timeout">Bildschirm-Zeitlimit</string>
@@ -3732,7 +3732,7 @@
     <string name="add_address">Adresse hinzufügen</string>
     <string name="access_hint_enter_address">Adresse eingeben</string>
     <string name="street_level_imagery">Bilder auf Straßenebene</string>
-    <string name="plan_route_exit_dialog_descr">Sind Sie sicher, dass Sie alle Änderungen an der geplanten Route verwerfen wollen\?</string>
+    <string name="plan_route_exit_dialog_descr">Alle Änderungen an der geplanten Route verwerfen\?</string>
     <string name="plan_route_change_route_type_before">Routentyp davor ändern</string>
     <string name="plan_route_change_route_type_after">Routentyp danach ändern</string>
     <string name="plan_route_trim_before">Davor trimmen</string>
@@ -4029,7 +4029,7 @@
     <string name="routing_attr_driving_style_description">Wählen Sie den Fahrzweck, um eine kürzere, schnellere oder sicherere Route zu erhalten</string>
     <string name="snap_to_road_descr">Das Symbol für den aktuellen Standort wird an die aktuelle Navigationsroute angehängt</string>
     <string name="map_orientation_threshold_descr">Kartenansicht nicht drehen, wenn die Geschwindigkeit kleiner als ein Schwellenwert ist</string>
-    <string name="track_recording_description">Sind Sie sicher, dass Sie die Aufnahme beenden wollen\?
+    <string name="track_recording_description">Aufnahme beenden\?
 \nAlle nicht gespeicherten Daten gehen verloren.</string>
     <string name="on_pause">Pausiert</string>
     <string name="app_restart_required">Neustart der Anwendung erforderlich, um einige Einstellungen zu übernehmen.</string>
@@ -4041,7 +4041,7 @@
     <string name="live_update_frequency_week_variant">Die Kartenaktualisierung wird wöchentlich überprüft. Das nächste Mal %1$s in %2$s.</string>
     <string name="live_update_frequency_day_variant">Die Kartenaktualisierung wird täglich überprüft. Das nächste Mal %1$s in %2$s.</string>
     <string name="live_update_frequency_hour_variant">Die Kartenaktualisierung wird stündlich überprüft. Das nächste Mal %1$s in %2$s.</string>
-    <string name="live_update_delete_updates_msg">Sind Sie sicher, dass Sie alle %s Live-Updates löschen möchten\?</string>
+    <string name="live_update_delete_updates_msg">Alle %s Live-Updates löschen\?</string>
     <string name="select_category_descr">Kategorie auswählen oder eine neue hinzufügen</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Grenzen von Naturschutzgebieten, Schutzgebieten und Nationalparks ausblenden.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Grenzen von Schutzgebieten</string>
@@ -4227,4 +4227,28 @@
     <string name="backup_error_user_is_not_registered">Kein Benutzer mit dieser E-Mail Adresse registriert</string>
     <string name="backup_error_token_is_not_valid_or_expired">Ungültiges oder abgelaufenes Token</string>
     <string name="backup_error_no_valid_subscription">Kein gültiges Abonnement vorhanden</string>
+    <string name="enter_verification_code">Einmalpasswort eingeben</string>
+    <string name="approximate_route_description">Route auf der Straße einrasten, um alle Abbiegungen und zusätzliche Daten, wie Oberflächenbeschaffenheit, Straßentypen usw. zu erhalten.</string>
+    <string name="release_4_0">• Datensicherung in der Cloud
+\n
+\n • Nachtmodus für den Rendering-Stil \"Topo\" hinzugefügt
+\n
+\n • Option zum Herunterladen von Höhenlinien in Fuß zugefügt
+\n
+\n • Tracks können jetzt nach Höhe, Geschwindigkeit oder Neigung eingefärbt werden.
+\n
+\n • Dialog \"Streckenaufzeichnung\" aktualisiert
+\n
+\n • Entfernung durch Antippen aus dem Radiuslineal in eine separate Option verschoben
+\n
+\n • Route planen: Möglichkeit hinzugefügt, Navigationsoptionen zu ändern, auf die Konfiguration der Karte und die Suche zuzugreifen, ohne den Planungsdialog zu verlassen
+\n
+\n • Neuer \"Kaufen\"-Bildschirm mit detaillierten Informationen zum Kauf
+\n
+\n • Option hinzugefügt, um das Aussehen der Routenlinie zu ändern.
+\n
+\n • OsmAnd Live Updates nach \"Downloads &gt; Updates\" verschoben\"
+\n
+\n</string>
+    <string name="duration_moment_ago">gerade eben</string>
 </resources>

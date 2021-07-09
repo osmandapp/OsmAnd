@@ -1098,7 +1098,7 @@
     <string name="bg_service_sleep_mode_on">Ĉesigi\n fon-laboradon de aplikaĵo</string>
     <string name="int_continuosly">Konstanta</string>
     <string name="screen_is_locked">Frapetu la emblemon de pendseruro por malŝlosi</string>
-    <string name="map_widget_top_text">Stratnomo</string>
+    <string name="map_widget_top_text">Nomo de strato</string>
     <string name="map_widget_config">Agordi ekranon</string>
     <string name="map_widget_back_to_loc">Kie mi estas</string>
     <string name="map_widget_lock_screen">Ŝlosi ekranon</string>
@@ -4045,7 +4045,7 @@
     <string name="trip_recording_save_and_continue">Konservi kaj daŭrigi</string>
     <string name="trip_recording_show_start_dialog_setting">Se malaktiva, registrado komenciĝos tuj post frapeto sur la fenestraĵo aŭ menuero, preterlasante la ekranon de konfirmo.</string>
     <string name="show_start_dialog">Montri komencan dialogon</string>
-    <string name="specify_color_for_map_mode">Elektu koloron por map‑reĝimo %1$s.</string>
+    <string name="specify_color_for_map_mode">Elektu koloron por la map‑reĝimo %1$s.</string>
     <string name="customize_route_line">Alĝustigi linion de kurso</string>
     <string name="shared_string_route_line">Linio de kurso</string>
     <string name="release_4_0_beta">• eblo elŝuti nivelkurbojn en futoj
@@ -4096,7 +4096,7 @@
     <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas anonci nomojn de stratoj aŭ de interesejoj.</string>
     <string name="use_system_language">Uzi sisteman lingvon</string>
     <string name="shared_string_itinerary">Kurso</string>
-    <string name="route_line_use_map_style_width">Uzi implicitan larĝon por la map‑stilo %1$s.</string>
+    <string name="route_line_use_map_style_width">Uzi implicitan larĝon de la map‑stilo %1$s.</string>
     <string name="route_line_use_map_style_color">Uzi implicitan koloron de la map‑stilo %1$s.</string>
     <string name="poi_routes">Kursoj</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Eviti zonojn nur por malalte aer‑malpurigantaj veturiloj</string>
@@ -4222,4 +4222,26 @@
     <string name="backup_error_user_is_not_registered">Neniu registrita uzanto kun tiu ĉi retpoŝta adreso</string>
     <string name="backup_error_no_valid_subscription">Neniu valida abono</string>
     <string name="you_can_get_feature_as_part_of_pattern">Vi povas akiri la eblaĵon “%1$s” kiel parto de la plano %2$s. Komparo:</string>
+    <string name="release_4_0">• sekurkopio en nubo
+\n
+\n• nokta reĝimo por la map-stilo “Topo”
+\n
+\n• eblo elŝuto nivelkurbojn en futoj
+\n
+\n• eblo kolorigi spurojn laŭ altitudo, rapido aŭ dekliveco
+\n
+\n• aktualigita fenestro “registri spuron”
+\n
+\n• distanco je frapeto: nun aperas en aparta eblaĵo anstataŭ esti en cirkleto
+\n
+\n• plani kurson: eblo ŝanĝi parametrojn de navigo kaj agordojn de mapo, kaj serĉi sen forlasi la ekranon “plani kurson”
+\n
+\n• nova ekrano “aĉetoj” enhavanta detalajn informojn pri pagendaj eblaĵoj de OsmAnd
+\n
+\n• eblo ŝanĝi aspekton de linio de kurso
+\n
+\n• ĝisdatigoj OsmAnd Live nun aperas en “elŝutoj” → “ĝisdatigoj”
+\n
+\n</string>
+    <string name="duration_moment_ago">antaŭ momento</string>
 </resources>

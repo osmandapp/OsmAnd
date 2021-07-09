@@ -1984,7 +1984,7 @@
     <string name="commit_poi">إنشاء إحداثية POI</string>
     <string name="number_of_rows_in_dash">عدد الصفوف في الدفعة %1$s</string>
     <string name="poi_deleted_localy">سيتم حذف POI بمجرد إرسال التعديلات</string>
-    <string name="downloading_number_of_files">جار التحميل - %1$d ملف</string>
+    <string name="downloading_number_of_files">جار التحميل - %1$d ملف…</string>
     <string name="activate_seamarks_plugin">يرجى تفعيل ملحق المعالم البحرية</string>
     <string name="value_downloaded_of_max">%1$.1f من %2$.1f مب</string>
     <string name="file_size_in_mb">%.1f مب</string>
@@ -4292,4 +4292,28 @@
     <string name="backup_error_token_is_not_valid_or_expired">الرمز غير صالح أو منتهي الصلاحية</string>
     <string name="backup_error_user_is_not_registered">المستخدم مع هذا البريد الإلكتروني غير مسجل</string>
     <string name="backup_error_no_valid_subscription">لا يوجد اشتراك صالح</string>
+    <string name="enter_verification_code">إدخال كلمة مرور لمرة واحدة</string>
+    <string name="approximate_route_description">قم بإرفاق الطريق بالطرق على الخريطة للحصول على جميع المنعطفات والبيانات الإضافية ، مثل السلاسة وأنواع الطرق وما إلى ذلك.</string>
+    <string name="release_4_0">• النسخ الاحتياطي للسحابة
+\n
+\n • تمت إضافة الوضع الليلي لثيم \"Topo\"
+\n
+\n • خيار إضافي لتنزيل خطوط الكنتور بالقدم
+\n
+\n • يمكن الآن تلوين المسارات حسب الارتفاع أو السرعة أو الانحدر.
+\n
+\n • تحديث مربع حوار \"تسجيل الرحلة\"
+\n
+\n • تم نقل المسافة عن طريق النقر من مسطرة نصف القطر إلى خيار منفصل
+\n
+\n • تخطيط الطريق: تمت إضافة القدرة على تغيير خيارات التنقل ، والوصول إلى تكوين الخريطة والبحث دون مغادرة مسار الخطة
+\n
+\n • شاشة \"شراء\" جديدة بمعلومات مفصلة عن الشراء
+\n
+\n • خيار مضاف لتغيير مظهر خط المسار.
+\n
+\n • تم نقل تحديثات أوسماند لايف إلى \"التنزيلات&gt; التحديثات\"
+\n
+\n</string>
+    <string name="duration_moment_ago">قبل قليل</string>
 </resources>
