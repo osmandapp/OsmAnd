@@ -117,7 +117,6 @@ public class GpxBlockStatisticsBuilder {
 
 	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor,
 	                           GPXTrackAnalysis analysis) {
-		this.analysis = analysis;
 		initItems(analysis);
 		adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor);
 		adapter.setItems(items);
@@ -158,13 +157,14 @@ public class GpxBlockStatisticsBuilder {
 		initItems(null);
 	}
 
-	public void initItems(GPXTrackAnalysis analysis) {
+	public void initItems(GPXTrackAnalysis initAnalysis) {
 		GPXFile gpxFile = getGPXFile();
 		if (app == null || gpxFile == null) {
 			return;
 		}
-		boolean withoutGaps = true;
-		if (analysis == null) {
+		boolean withoutGaps = false;
+		if (initAnalysis == null) {
+			withoutGaps = true;
 			if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
 				GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
 				analysis = currentGpx.getAnalysis(0);
@@ -177,6 +177,8 @@ public class GpxBlockStatisticsBuilder {
 					withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
 				}
 			}
+		} else {
+			analysis = initAnalysis;
 		}
 		items.clear();
 		if (analysis != null) {

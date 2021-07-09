@@ -31,6 +31,7 @@ import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -51,6 +52,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
 import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
@@ -1070,6 +1073,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		GPXFile gpxFile = null;
+		boolean hasAltitude = false;
 		if (!segmentList.isEmpty()) {
 			GPXUtilities.Track track = new GPXUtilities.Track();
 			for (BinaryMapDataObject segment : segmentList) {
@@ -1080,6 +1084,18 @@ public class TravelObfHelper implements TravelHelper {
 					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
 					trkSegment.points.add(point);
 				}
+				String ele_graph = segment.getTagValue("ele_graph");
+				if (!Algorithms.isEmpty(ele_graph)) {
+					hasAltitude = true;
+					TIntArrayList heightRes = MapAlgorithms.decodeIntHeightArrayGraph(ele_graph, 3);
+					double startEle = 0;
+					try {
+						startEle = Double.parseDouble(segment.getTagValue("start_ele"));
+					} catch (NumberFormatException e) {
+						LOG.debug(e.getMessage(), e);
+					}
+					MapAlgorithms.augmentTrkSegmentWithAltitudes(trkSegment, heightRes, startEle);
+				}
 				track.segments.add(trkSegment);
 			}
 			gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
@@ -1089,6 +1105,7 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile.tracks = new ArrayList<>();
 			gpxFile.tracks.add(track);
 			gpxFile.setRef(article.ref);
+			gpxFile.hasAltitude = hasAltitude;
 		}
 		if (!pointList.isEmpty()) {
 			if (gpxFile == null) {

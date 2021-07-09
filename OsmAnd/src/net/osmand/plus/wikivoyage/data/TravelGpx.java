@@ -32,15 +32,19 @@ public class TravelGpx extends TravelArticle {
 	@Override
 	public GPXTrackAnalysis getAnalysis() {
 		GPXTrackAnalysis analysis = new GPXTrackAnalysis();
-		analysis.diffElevationDown = diffElevationDown;
-		analysis.diffElevationUp = diffElevationUp;
-		analysis.maxElevation = maxElevation;
-		analysis.minElevation = minElevation;
-		analysis.totalDistance = totalDistance;
-		analysis.totalDistanceWithoutGaps = totalDistance;
-		analysis.avgElevation = avgElevation;
-		if (!Double.isNaN(maxElevation) || !Double.isNaN(minElevation)) {
-			analysis.hasElevationData = true;
+		if(gpxFile.hasAltitude){
+			analysis =  gpxFile.getAnalysis(0);
+		} else {
+			analysis.diffElevationDown = diffElevationDown;
+			analysis.diffElevationUp = diffElevationUp;
+			analysis.maxElevation = maxElevation;
+			analysis.minElevation = minElevation;
+			analysis.totalDistance = totalDistance;
+			analysis.totalDistanceWithoutGaps = totalDistance;
+			analysis.avgElevation = avgElevation;
+			if (!Double.isNaN(maxElevation) || !Double.isNaN(minElevation)) {
+				analysis.hasElevationData = true;
+			}
 		}
 		return analysis;
 	}
