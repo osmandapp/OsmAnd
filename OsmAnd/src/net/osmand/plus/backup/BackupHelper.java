@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
-import net.osmand.AndroidNetworkUtils.OnFilesDownloadCallback;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
@@ -50,12 +49,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class BackupHelper {
 
@@ -506,50 +508,28 @@ public class BackupHelper {
 	}
 
 	@NonNull
-	Map<File, String> downloadFiles(@NonNull final Map<File, RemoteFile> filesMap) throws UserNotRegisteredException {
+	String downloadFile(@NonNull File file, @NonNull RemoteFile remoteFile) throws UserNotRegisteredException {
 		checkRegistered();
 
-		Map<File, String> res = new HashMap<>();
-		Map<String, String> params = new HashMap<>();
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
-		AndroidNetworkUtils.downloadFiles(DOWNLOAD_FILE_URL,
-				new ArrayList<>(filesMap.keySet()), params, new OnFilesDownloadCallback() {
-					OperationLog operationLog;
-
-					@Nullable
-					@Override
-					public Map<String, String> getAdditionalParams(@NonNull File file) {
-						RemoteFile remoteFile = filesMap.get(file);
-						Map<String, String> additionaParams = new HashMap<>();
-						additionaParams.put("name", remoteFile.getName());
-						additionaParams.put("type", remoteFile.getType());
-						return additionaParams;
-					}
-
-					@Override
-					public void onFileDownloadProgress(@NonNull File file, int percent) {
-						if (percent == 0) {
-							operationLog = new OperationLog("downloadFile", DEBUG);
-						}
-					}
-
-					@Override
-					public void onFileDownloadDone(@NonNull File file) {
-						if (operationLog != null) {
-							operationLog.finishOperation(file.getName());
-						}
-					}
-
-					@Override
-					public void onFileDownloadedAsync(@NonNull File file) {
-					}
-
-					@Override
-					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
-						res.putAll(errors);
-					}
-				});
+		OperationLog operationLog = new OperationLog("downloadFile " + file.getName(), DEBUG);
+		String res;
+		try {
+			Map<String, String> params = new HashMap<>();
+			params.put("deviceid", getDeviceId());
+			params.put("accessToken", getAccessToken());
+			params.put("name", remoteFile.getName());
+			params.put("type", remoteFile.getType());
+			StringBuilder sb = new StringBuilder(DOWNLOAD_FILE_URL);
+			boolean firstParam = true;
+			for (Entry<String, String> entry : params.entrySet()) {
+				sb.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+				firstParam = false;
+			}
+			res = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, null);
+		} catch (UnsupportedEncodingException e) {
+			res = "UnsupportedEncodingException";
+		}
+		operationLog.finishOperation();
 		return res;
 	}
 

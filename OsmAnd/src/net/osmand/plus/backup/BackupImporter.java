@@ -36,15 +36,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
 
@@ -52,15 +43,9 @@ class BackupImporter {
 
 	private static final Log LOG = PlatformUtil.getLog(BackupImporter.class);
 
-	private static final int THREAD_POOL_SIZE = 4;
-
 	private final BackupHelper backupHelper;
 
 	private boolean cancelled;
-
-	private final ExecutorService executor = new AsyncReaderTaskExecutor();
-	private final Map<Future<?>, AsyncReaderTask> tasks = new ConcurrentHashMap<>();
-	private final Map<Future<?>, Throwable> exceptions = new ConcurrentHashMap<>();
 
 	public static class CollectItemsResult {
 		public List<SettingsItem> items;
@@ -110,6 +95,7 @@ class BackupImporter {
 		}
 		OperationLog operationLog = new OperationLog("importItems", BackupHelper.DEBUG);
 		operationLog.startOperation();
+		List<ItemFileImportTask> tasks = new ArrayList<>();
 		Map<RemoteFile, SettingsItem> remoteFileItems = new HashMap<>();
 		for (RemoteFile remoteFile : remoteFiles) {
 			SettingsItem item = null;
@@ -122,26 +108,11 @@ class BackupImporter {
 				}
 			}
 			if (item != null && (!item.shouldReadOnCollecting() || forceReadData)) {
-				AsyncReaderTask task = new AsyncReaderTask(remoteFile, item, forceReadData);
-				Future<?> future = executor.submit(task);
-				tasks.put(future, task);
+				tasks.add(new ItemFileImportTask(remoteFile, item, forceReadData));
 			}
 		}
-
-		executor.shutdown();
-		boolean finished = false;
-		while (!finished) {
-			try {
-				finished = executor.awaitTermination(100, TimeUnit.MILLISECONDS);
-				if (isCancelled() || isInterrupted()) {
-					for (Future<?> future : tasks.keySet()) {
-						future.cancel(false);
-					}
-				}
-			} catch (InterruptedException e) {
-				// ignore
-			}
-		}
+		ThreadPoolTaskExecutor<ItemFileImportTask> executor = createExecutor();
+		executor.run(tasks);
 
 		for (Entry<RemoteFile, SettingsItem> fileItem : remoteFileItems.entrySet()) {
 			fileItem.getValue().setLocalModifiedTime(fileItem.getKey().getClienttimems());
@@ -149,7 +120,7 @@ class BackupImporter {
 		operationLog.finishOperation();
 	}
 
-	private void importItem(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
+	private void importItemFile(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
 		OsmandApplication app = backupHelper.getApp();
 		File tempDir = FileUtils.getTempDir(app);
 		FileInputStream is = null;
@@ -158,10 +129,8 @@ class BackupImporter {
 			if (reader != null) {
 				String fileName = remoteFile.getTypeNamePath();
 				File tempFile = new File(tempDir, fileName);
-				Map<File, RemoteFile> map = new HashMap<>();
-				map.put(tempFile, remoteFile);
-				Map<File, String> errors = backupHelper.downloadFiles(map);
-				if (errors.isEmpty()) {
+				String error = backupHelper.downloadFile(tempFile, remoteFile);
+				if (Algorithms.isEmpty(error)) {
 					is = new FileInputStream(tempFile);
 					reader.readFromStream(is, remoteFile.getName());
 					if (forceReadData) {
@@ -176,8 +145,7 @@ class BackupImporter {
 						}
 					}
 				} else {
-					throw new IOException("Error reading temp item file " + fileName + ": " +
-							errors.values().iterator().next());
+					throw new IOException("Error reading temp item file " + fileName + ": " + error);
 				}
 			}
 			item.applyAdditionalParams(reader);
@@ -229,6 +197,7 @@ class BackupImporter {
 			for (RemoteFile remoteFile : uniqueRemoteFiles) {
 				Long uploadTime = infoMap.get(remoteFile.getType() + "___" + remoteFile.getName());
 				if (uploadTime != null && uploadTime == remoteFile.getClienttimems()) {
+					//operationLog.log("TIME EQ " + remoteFile.getName());
 					//continue;
 				}
 				String fileName = remoteFile.getTypeNamePath();
@@ -305,8 +274,6 @@ class BackupImporter {
 			throw new IllegalArgumentException("Error reading items", e);
 		} catch (JSONException e) {
 			throw new IllegalArgumentException("Error parsing items", e);
-		} catch (UserNotRegisteredException e) {
-			throw new IllegalArgumentException("User is not registered", e);
 		} catch (IOException e) {
 			throw new IOException(e);
 		}
@@ -378,9 +345,16 @@ class BackupImporter {
 
 	private void generateItemsJson(@NonNull JSONArray itemsJson,
 								   @NonNull Map<File, RemoteFile> remoteInfoFiles,
-								   @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws UserNotRegisteredException, JSONException, IOException {
-		Map<File, String> errors = backupHelper.downloadFiles(remoteInfoFiles);
-		if (errors.isEmpty()) {
+								   @NonNull List<RemoteFile> noInfoRemoteItemFiles) throws JSONException, IOException {
+		List<FileDownloadTask> tasks = new ArrayList<>();
+		for (Entry<File, RemoteFile> fileEntry : remoteInfoFiles.entrySet()) {
+			tasks.add(new FileDownloadTask(fileEntry.getKey(), fileEntry.getValue()));
+		}
+		ThreadPoolTaskExecutor<FileDownloadTask> executor = createExecutor();
+		executor.run(tasks);
+
+		boolean hasDownloadErrors = hasDownloadErrors(tasks);
+		if (!hasDownloadErrors) {
 			for (File file : remoteInfoFiles.keySet()) {
 				String jsonStr = Algorithms.getFileAsString(file);
 				if (!Algorithms.isEmpty(jsonStr)) {
@@ -425,30 +399,25 @@ class BackupImporter {
 	}
 
 	private void downloadAndReadItemFiles(@NonNull Map<RemoteFile, SettingsItemReader<? extends SettingsItem>> remoteFilesForRead,
-										  @NonNull Map<File, RemoteFile> remoteFilesForDownload) throws UserNotRegisteredException, IOException {
+										  @NonNull Map<File, RemoteFile> remoteFilesForDownload) throws IOException {
 		OsmandApplication app = backupHelper.getApp();
-		Map<File, String> errors = backupHelper.downloadFiles(remoteFilesForDownload);
-		if (errors.isEmpty()) {
+		List<FileDownloadTask> fileDownloadTasks = new ArrayList<>();
+		for (Entry<File, RemoteFile> fileEntry : remoteFilesForDownload.entrySet()) {
+			fileDownloadTasks.add(new FileDownloadTask(fileEntry.getKey(), fileEntry.getValue()));
+		}
+		ThreadPoolTaskExecutor<FileDownloadTask> filesDownloadExecutor = createExecutor();
+		filesDownloadExecutor.run(fileDownloadTasks);
+
+		boolean hasDownloadErrors = hasDownloadErrors(fileDownloadTasks);
+		if (!hasDownloadErrors) {
+			List<ItemFileDownloadTask> itemFileDownloadTasks = new ArrayList<>();
 			for (Entry<File, RemoteFile> entry : remoteFilesForDownload.entrySet()) {
 				File tempFile = entry.getKey();
 				RemoteFile remoteFile = entry.getValue();
 				if (tempFile.exists()) {
 					SettingsItemReader<? extends SettingsItem> reader = remoteFilesForRead.get(remoteFile);
 					if (reader != null) {
-						SettingsItem item = reader.getItem();
-						FileInputStream is = new FileInputStream(tempFile);
-						try {
-							reader.readFromStream(is, item.getFileName());
-							item.applyAdditionalParams(reader);
-						} catch (IllegalArgumentException e) {
-							item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-							LOG.error("Error reading item data: " + item.getName(), e);
-						} catch (IOException e) {
-							item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
-							LOG.error("Error reading item data: " + item.getName(), e);
-						} finally {
-							Algorithms.closeStream(is);
-						}
+						itemFileDownloadTasks.add(new ItemFileDownloadTask(app, tempFile, reader));
 					} else {
 						throw new IOException("No reader for: " + tempFile.getName());
 					}
@@ -456,8 +425,40 @@ class BackupImporter {
 					throw new IOException("No temp item file: " + tempFile.getName());
 				}
 			}
+			ThreadPoolTaskExecutor<ItemFileDownloadTask> itemFilesDownloadExecutor = createExecutor();
+			itemFilesDownloadExecutor.run(itemFileDownloadTasks);
 		} else {
 			throw new IOException("Error downloading temp item files");
+		}
+	}
+
+	private boolean hasDownloadErrors(@NonNull List<FileDownloadTask> tasks) {
+		boolean hasError = false;
+		for (FileDownloadTask task : tasks) {
+			if (!Algorithms.isEmpty(task.error)) {
+				hasError = true;
+				break;
+			}
+		}
+		return hasError;
+	}
+
+	private void downloadItemFile(@NonNull OsmandApplication app, @NonNull File tempFile,
+								  @NonNull SettingsItemReader<? extends SettingsItem> reader) {
+		SettingsItem item = reader.getItem();
+		FileInputStream is = null;
+		try {
+			is = new FileInputStream(tempFile);
+			reader.readFromStream(is, item.getFileName());
+			item.applyAdditionalParams(reader);
+		} catch (IllegalArgumentException e) {
+			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+			LOG.error("Error reading item data: " + item.getName(), e);
+		} catch (IOException e) {
+			item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
+			LOG.error("Error reading item data: " + item.getName(), e);
+		} finally {
+			Algorithms.closeStream(is);
 		}
 	}
 
@@ -485,50 +486,70 @@ class BackupImporter {
 		return cancelled;
 	}
 
-	private boolean isInterrupted() {
-		return !exceptions.isEmpty();
+	private <T extends ThreadPoolTaskExecutor.Task> ThreadPoolTaskExecutor<T> createExecutor() {
+		ThreadPoolTaskExecutor<T> executor = new ThreadPoolTaskExecutor<>(null);
+		executor.setInterruptOnError(true);
+		return executor;
 	}
 
-	private class AsyncReaderTask implements Callable<Void> {
+	private class FileDownloadTask extends ThreadPoolTaskExecutor.Task {
+
+		private final File file;
+		private final RemoteFile remoteFile;
+		private String error;
+
+		public FileDownloadTask(@NonNull File file, @NonNull RemoteFile remoteFile) {
+			this.file = file;
+			this.remoteFile = remoteFile;
+		}
+
+		public String getError() {
+			return error;
+		}
+
+		@Override
+		public Void call() throws Exception {
+			error = backupHelper.downloadFile(file, remoteFile);
+			return null;
+		}
+	}
+
+	private class ItemFileDownloadTask extends ThreadPoolTaskExecutor.Task {
+
+		private final OsmandApplication app;
+		private final File file;
+		private final SettingsItemReader<? extends SettingsItem> reader;
+
+		public ItemFileDownloadTask(@NonNull OsmandApplication app, @NonNull File file,
+									@NonNull SettingsItemReader<? extends SettingsItem> reader) {
+			this.app = app;
+			this.file = file;
+			this.reader = reader;
+		}
+
+		@Override
+		public Void call() {
+			downloadItemFile(app, file, reader);
+			return null;
+		}
+	}
+
+	private class ItemFileImportTask extends ThreadPoolTaskExecutor.Task {
 
 		private final RemoteFile remoteFile;
 		private final SettingsItem item;
 		private final boolean forceReadData;
 
-		public AsyncReaderTask(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
+		public ItemFileImportTask(@NonNull RemoteFile remoteFile, @NonNull SettingsItem item, boolean forceReadData) {
 			this.remoteFile = remoteFile;
 			this.item = item;
 			this.forceReadData = forceReadData;
 		}
 
 		@Override
-		public Void call() throws Exception {
-			importItem(remoteFile, item, forceReadData);
+		public Void call() {
+			importItemFile(remoteFile, item, forceReadData);
 			return null;
-		}
-	}
-
-	private class AsyncReaderTaskExecutor extends ThreadPoolExecutor {
-
-		public AsyncReaderTaskExecutor() {
-			super(THREAD_POOL_SIZE, THREAD_POOL_SIZE, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
-		}
-
-		protected void afterExecute(Runnable r, Throwable t) {
-			super.afterExecute(r, t);
-			if (r instanceof Future<?>) {
-				if (t == null && ((Future<?>) r).isDone()) {
-					try {
-						((Future<?>) r).get();
-					} catch (CancellationException | InterruptedException e) {
-						// ignore
-					} catch (ExecutionException ee) {
-						exceptions.put((Future<?>) r, ee.getCause());
-					}
-				} else {
-					exceptions.put((Future<?>) r, t);
-				}
-			}
 		}
 	}
 }

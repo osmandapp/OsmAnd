@@ -31,8 +31,6 @@ import static net.osmand.plus.backup.BackupHelper.DELETE_FILE_VERSION_URL;
 
 public abstract class BaseDeleteFilesCommand extends BackupCommand {
 
-	private static final int THREAD_POOL_SIZE = 4;
-
 	private final boolean byVersion;
 	private OnDeleteFilesListener listener;
 	private List<DeleteRemoteFileTask> tasks = new ArrayList<>();
@@ -70,7 +68,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 			tasks.add(new DeleteRemoteFileTask(getApp(), r, remoteFile));
 		}
 		ThreadPoolTaskExecutor<DeleteRemoteFileTask> executor =
-				new ThreadPoolTaskExecutor<>(THREAD_POOL_SIZE, new OnThreadPoolTaskExecutorListener<DeleteRemoteFileTask>() {
+				new ThreadPoolTaskExecutor<>(new OnThreadPoolTaskExecutorListener<DeleteRemoteFileTask>() {
 
 					@Override
 					public void onTaskStarted(@NonNull DeleteRemoteFileTask task) {
@@ -165,7 +163,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 		}
 
 		@Override
-		public Void call() throws Exception {
+		public Void call() {
 			OperationLog operationLog = new OperationLog("deleteFile", BackupHelper.DEBUG);
 			AndroidNetworkUtils.sendRequest(app, request, (result, error) ->
 					response = new RequestResponse(request, result, error));
