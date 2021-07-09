@@ -85,20 +85,17 @@ public class RoutingConfiguration {
 			super(n, n.getId());
 		}
 
-		// get normalize angle in -180..180 degrees or Double.NaN if empty
+		// gets angle or Double.NaN if empty
 		public double getAngle() {
 			String angle = getTag(ANGLE_TAG);
-			double result = Double.NaN;
 			if (angle != null) {
 				try {
-					result = Double.parseDouble(angle);
-					result = MapUtils.alignAngleDifference(result * Math.PI / 180);
-					result = result * 180 / Math.PI;
+					return Double.parseDouble(angle);
 				} catch (NumberFormatException e) {
 					throw new RuntimeException(e);
 				}
 			}
-			return result;
+			return Double.NaN;
 		}
 
 	}
