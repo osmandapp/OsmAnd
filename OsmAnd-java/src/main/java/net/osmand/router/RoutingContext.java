@@ -602,8 +602,7 @@ public class RoutingContext {
 			if (pointShouldBeAttachedByDist) {
 				if (restrictionByAngle) {
 					int oneWay = ro.getOneway();// -1 backward, 0 two way, 1 forward
-					double forwardAngle = ro.directionRoute(indexToInsert, true, 5);
-					forwardAngle = forwardAngle * 180 / Math.PI;
+					double forwardAngle = Math.toDegrees(ro.directionRoute(indexToInsert, true));
 					if (oneWay == 1 || oneWay == 0) {
 						double diff = Math.abs(MapUtils.degreesDiff(npAngle, forwardAngle));
 						if (diff <= DirectionPoint.MAX_ANGLE_DIFF) {
