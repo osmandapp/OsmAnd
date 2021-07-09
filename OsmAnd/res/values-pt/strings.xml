@@ -573,7 +573,7 @@
     <string name="show_more_map_detail">Ver mais detalhes do mapa</string>
     <string name="show_more_map_detail_descr">Mostrar detalhes do mapa vetorial (estradas, etc.) já em níveis de ampliação mais distantes.</string>
     <string name="favourites_delete_multiple_succesful">Pontos favoritos eliminados.</string>
-    <string name="favorite_delete_multiple">Quer eliminar %1$d favoritos e %2$d grupos de favoritos\?</string>
+    <string name="favorite_delete_multiple">Eliminar %1$d favoritos e %2$d grupos de favoritos\?</string>
     <string name="favorite_home_category">Casa</string>
     <string name="favorite_friends_category">Amigos</string>
     <string name="favorite_places_category">Locais</string>
@@ -879,8 +879,8 @@
     <string name="max_speed_none">nenhuma</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="local_indexes_cat_av">Dados de áudio/vídeo</string>
-    <string name="stop_routing_confirm">Quer parar a navegação?</string>
-    <string name="clear_dest_confirm">Tem a certeza que quer limpar o seu destino (e destinos intermédios)\?</string>
+    <string name="stop_routing_confirm">Parar a navegação\?</string>
+    <string name="clear_dest_confirm">Limpar o destino (e destinos intermédios)\?</string>
     <string name="precise_routing_mode_descr">Calcula rotas precisas sem falhas, mas tem distância limitada e é lento.</string>
     <string name="precise_routing_mode">Roteamento preciso (alfa)</string>
     <string name="recording_context_menu_precord">Tirar uma fotografia</string>
@@ -1077,7 +1077,7 @@
     <string name="app_mode_motorcycle">Motorizada</string>
     <string name="app_mode_boat">Barco</string>
     <string name="app_mode_aircraft">Aeronave</string>
-    <string name="local_osm_changes_delete_all_confirm">Quer mesmo eliminar %1$d alterações para o OpenStreetMap\?</string>
+    <string name="local_osm_changes_delete_all_confirm">Eliminar %1$d alterações do OpenStreetMap\?</string>
     <string name="shared_string_delete_all">Eliminar tudo</string>
     <string name="amenity_type_osmwiki">Wikipédia (offline)</string>
     <string name="amenity_type_seamark">Marca marítima</string>
@@ -1355,7 +1355,7 @@
     <string name="current_route">Rota atual</string>
     <string name="osm_changes_added_to_local_edits">Alterações no OpenStreetMap adicionadas ao conjunto de alterações local</string>
     <string name="mark_to_delete">Marcar para eliminar</string>
-    <string name="local_osm_changes_upload_all_confirm">Vai enviar %1$d alterações para o OpenStreetMap. Tem a certeza\?</string>
+    <string name="local_osm_changes_upload_all_confirm">Enviar %1$d alterações para o OpenStreetMap\?</string>
     <string name="confirmation_to_clear_history">Limpar histórico\?</string>
     <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para mostrar o ecrã de planeamento de rota.</string>
     <string name="delay_to_start_navigation">Iniciar orientação curva a curva depois de…</string>
@@ -1599,7 +1599,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Cor pela afiliação da rede</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Cor pelo símbolo de caminhada de OSMC</string>
     <string name="shared_string_logoff">Sair</string>
-    <string name="local_recordings_delete_all_confirm">Tem a certeza que quer eliminar %1$d notas\?</string>
+    <string name="local_recordings_delete_all_confirm">Eliminar %1$d notas\?</string>
     <string name="plugin_touringview_descr">Esta opção muda o estilo de mapa do OsmAnd para a \"vista turística\", uma visualização especial do mapa com altos detalhes, para viajantes e motoristas profissionais.
 \n
 \nEsta visualização fornece, em qualquer nível de ampliação do mapa, a quantidade máxima de informação da viagem disponível no mapa (particularmente estradas, trilhos, caminhos e marcas de orientação).
@@ -1788,7 +1788,7 @@
     <string name="get_full_version">Versão completa</string>
     <string name="later">Mais tarde</string>
     <string name="buy">Comprar</string>
-    <string name="downloading_number_of_files">A descarregar - %1$d ficheiros</string>
+    <string name="downloading_number_of_files">A descarregar %1$d ficheiros…</string>
     <string name="show_free_version_banner">Mostrar anúncio da versão gratuita</string>
     <string name="downloads_left_template">%1$s descarregamentos restantes</string>
     <string name="roads">Estradas</string>
@@ -1982,7 +1982,7 @@
     <string name="shared_string_slope">Declive</string>
     <string name="add_new_folder">Adicionar nova pasta</string>
     <string name="points_delete_multiple_succesful">Ponto(s) eliminado(s).</string>
-    <string name="points_delete_multiple">Tem a certeza que quer eliminar %1$d ponto(s)\?</string>
+    <string name="points_delete_multiple">Eliminar %1$d ponto(s)\?</string>
     <string name="route_points_category_name">Mudanças de direção a passar neste percurso</string>
     <string name="track_points_category_name">Pontos de passagem, pontos de interesse, elementos com nome</string>
     <string name="shared_string_gpx_track">Trilho</string>
@@ -2096,7 +2096,7 @@
     <string name="update_all_maps_now">Atualizar todos os mapas agora\?</string>
     <string name="clear_tile_data">Eliminar todos os mosaicos</string>
     <string name="routing_attr_short_way_name">Percurso económico</string>
-    <string name="replace_favorite_confirmation">Tem a certeza que quer substituir o favorito %1$s\?</string>
+    <string name="replace_favorite_confirmation">Substituir o favorito %1$s\?</string>
     <string name="rendering_attr_hideOverground_name">Objetos à superfície</string>
     <string name="get_started">Começar</string>
     <string name="route_stops_before">%1$s paragens anteriores</string>
@@ -2702,7 +2702,7 @@
     <string name="quick_action_add_favorite">Adicionar favorito</string>
     <string name="dialog_add_action_title">Adicionar ação</string>
     <string name="quick_actions_delete">Eliminar botão de ação rápida</string>
-    <string name="quick_actions_delete_text">Tem a certeza de que quer eliminar o botão de ação rápida \"%s\"\?</string>
+    <string name="quick_actions_delete_text">Eliminar a ação rápida \"%s\"\?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar lista dos favoritos</string>
     <string name="quick_favorites_name_preset">Nome do modelo</string>
     <string name="quick_action_add_marker_descr">Um botão para adicionar um marcador no centro do ecrã.</string>
@@ -2975,7 +2975,7 @@
     <string name="profile_alert_need_save_title">Guardar alterações</string>
     <string name="profile_alert_need_save_msg">Guarde primeiro as alterações no perfil</string>
     <string name="profile_alert_delete_title">Eliminar perfil</string>
-    <string name="profile_alert_delete_msg">Tem a certeza que quer eliminar o perfil \"%s\"</string>
+    <string name="profile_alert_delete_msg">Eliminar o perfil \"%s\"</string>
     <string name="select_base_profile_dialog_title">Selecionar o perfil para começar</string>
     <string name="select_base_profile_dialog_message">Baseie o seu perfil personalizado num dos perfis predefinidos, para definir a configuração básica, como a visibilidade predefinida de widgets e unidades de velocidade e distância. Estes são os perfis predefinidos, juntamente com exemplos de perfis personalizados para os quais eles podem ser personalizados:</string>
     <string name="select_nav_profile_dialog_title">Selecione o tipo de navegação</string>
@@ -3230,7 +3230,7 @@
     <string name="routing_attr_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
     <string name="update_all_maps">Atualizar todos os mapas</string>
-    <string name="update_all_maps_q">Tem a certeza que quer atualizar todos os mapas (%1$d)\?</string>
+    <string name="update_all_maps_q">Atualizar todos os mapas (%1$d)\?</string>
     <string name="release_3_5">- Configurações atualizadas da aplicação e do perfil: as definições estão agora organizadas por tipo. Cada perfil pode ser personalizado separadamente.
 \n
 \n - Novo ecrã para descarregar mapas sugerindo um mapa para descarregar enquanto navega
@@ -3347,7 +3347,7 @@
 \nPode demorar algum tempo.</string>
     <string name="shared_string_importing">A importar</string>
     <string name="importing_from">A importar dados de %1$s</string>
-    <string name="clear_recorded_data_warning">Tem a certeza que quer limpar os dados gravados\?</string>
+    <string name="clear_recorded_data_warning">Limpar os dados gravados\?</string>
     <string name="profile_backup_failed">Não foi possível fazer a cópia de segurança do perfil.</string>
     <string name="saving_new_profile">A guardar o novo perfil</string>
     <string name="restore_all_profile_settings">Restaurar todas as configurações do perfil\?</string>
@@ -3623,7 +3623,7 @@
     <string name="weight_limit_description">Forneça o peso do seu veículo, algumas restrições de rotas podem ser aplicadas a veículos pesados.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Pode exportar ou importar ações rápidas através dos perfis da aplicação.</string>
     <string name="shared_string_delete_all_q">Eliminar tudo\?</string>
-    <string name="delete_all_actions_message_q">Tem a certeza que quer eliminar de forma permanente %d ações rápidas\?</string>
+    <string name="delete_all_actions_message_q">Eliminar de forma permanente %d ações rápidas\?</string>
     <string name="screen_timeout">Tempo limite do ecrã</string>
     <string name="shared_string_tones">toneladas</string>
     <string name="shared_string_meters">metros</string>
@@ -3740,7 +3740,7 @@
     <string name="plan_route_change_route_type_before">Alterar o tipo de rota antes</string>
     <string name="plan_route_change_route_type_after">Alterar o tipo de rota após</string>
     <string name="street_level_imagery">Imagens das ruas</string>
-    <string name="plan_route_exit_dialog_descr">Tem a certeza que quer descartar todas as mudanças na rota planeada\?</string>
+    <string name="plan_route_exit_dialog_descr">Descartar todas as alterações na rota planeada\?</string>
     <string name="in_case_of_reverse_direction">Na direção inversa</string>
     <string name="shared_string_gpx_route">Rota de trilho</string>
     <string name="shared_string_gpx_files">Trilhos</string>
@@ -3955,7 +3955,7 @@
     <string name="announcement_time_passing">Ao passar</string>
     <string name="routing_engine_vehicle_type_cycling_electric">Bicicleta elétrica</string>
     <string name="live_update_frequency_hour_variant">As atualizações ao mapa serão verificadas a todas as horas. Próxima %1$s em %2$s.</string>
-    <string name="live_update_delete_updates_msg">Tem a certeza que quer eliminar todas as %s atualizações OsmAnd Live\?</string>
+    <string name="live_update_delete_updates_msg">Eliminar todas as %s atualizações OsmAnd Live\?</string>
     <string name="release_4_0_beta">• Tradução para português europeu completamente revista.
 \n
 \n• Adicionada opção para descarregar curvas de nível na unidade de medida \"pés\".
@@ -4053,7 +4053,7 @@
     <string name="track_recording_stop_without_saving">Parar sem guardar</string>
     <string name="track_recording_save_and_stop">Guardar e parar de gravar</string>
     <string name="track_recording_title">A gravação do trilho parou</string>
-    <string name="track_recording_description">Tem a certeza que quer parar de gravar\?
+    <string name="track_recording_description">Parar de gravar\?
 \nTodos os dados por guardar serão perdidos.</string>
     <string name="on_pause">Em pausa</string>
     <string name="delete_updates">Eliminar atualizações</string>
@@ -4254,4 +4254,6 @@
 \n
 \n</string>
     <string name="approximate_route_description">Atrair a rota às estradas no mapa para obter todas as viragens e dados adicionais, como a suavidade, tipos de estrada, etc.</string>
+    <string name="enter_verification_code">Introduza a palavra-passe de uso único</string>
+    <string name="duration_moment_ago">há um momento atrás</string>
 </resources>
