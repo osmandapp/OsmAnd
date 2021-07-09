@@ -132,7 +132,7 @@
     <string name="live_monitoring_interval">Інтервал надсилання даних</string>
     <string name="live_monitoring_url_descr">Вкажіть вебадресу з такими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Мережеве відстеження вебадрес</string>
-    <string name="gpx_monitoring_disabled_warn">Записувати треки, використовуючи GPX-віджет або вибравши „Запис подорожей“ в Налаштуваннях.</string>
+    <string name="gpx_monitoring_disabled_warn">Записувати треки використовуючи GPX-віджет або вибравши «Записування подорожі» в Налаштуваннях.</string>
     <string name="show_current_gpx_title">Відображати пройдений шлях</string>
     <string name="free_version_message">Ви можете завантажити або оновити %1$s мап.</string>
     <string name="free_version_title">Безкоштовна версія</string>
@@ -222,7 +222,7 @@
     <string name="show_more_map_detail">Показати більше подробиць</string>
     <string name="show_more_map_detail_descr">Відображати деякі подробиці векторної мапи (дороги тощо) на менших рівнях масштабування.</string>
     <string name="favourites_delete_multiple_succesful">Точки Закладок видалені.</string>
-    <string name="favorite_delete_multiple">Ви збираєтесь видалити %1$d Закладок та %2$d груп Закладок. Ви впевнені?</string>
+    <string name="favorite_delete_multiple">Видалити %1$d Закладок та %2$d груп Закладок. Ви впевнені\?</string>
     <string name="favorite_home_category">Вдома</string>
     <string name="favorite_friends_category">Друзі</string>
     <string name="favorite_places_category">Місця</string>
@@ -770,8 +770,8 @@
     <string name="index_name_openmaps">OpenMaps - Європа</string>
     <string name="download_hillshade_maps">Затемнення рельєфу</string>
     <string name="local_indexes_cat_av">Аудіо/Відео дані</string>
-    <string name="stop_routing_confirm">Ви впевнені, що хочете зупинити навігацію?</string>
-    <string name="clear_dest_confirm">Ви впевнені, що хочете вилучити пункт призначення (і проміжні точки)?</string>
+    <string name="stop_routing_confirm">Зупинити навігацію\?</string>
+    <string name="clear_dest_confirm">Вилучити пункт призначення (і проміжні точки)\?</string>
     <string name="recording_context_menu_show">Показати</string>
     <string name="recording_photo_description">Світлина %1$s %2$s</string>
     <string name="av_def_action_picture">Зробити світлину</string>
@@ -882,7 +882,7 @@
     <string name="osmand_plus_short_description_80_chars">Перегляд та навігація в автономному та мережевому режимах мапами ОСМ</string>
     <string name="incomplete_locale">незавершена</string>
     <string name="rendering_attr_noAdminboundaries_description">Приховати регіональні кордони (рівні 5–9).</string>
-    <string name="enable_plugin_monitoring_services">Задійте розширення \"Запис подорожей\", щоб використовувати служби запису позиціювання (запис GPX, мережеве відслідковування)</string>
+    <string name="enable_plugin_monitoring_services">Увімкніть розширення «Записування подорожі», щоб використовувати служби запису позиціювання (запис GPX, мережеве відстежування)</string>
     <string name="filterpoi_activity">Створити фільтр POI</string>
     <string name="select_navigation_mode">Режим пересування:</string>
     <string name="day_night_info_description">Схід: %1$s
@@ -1247,7 +1247,7 @@
     <string name="app_mode_motorcycle">Мотоцикл</string>
     <string name="app_mode_boat">Човен</string>
     <string name="app_mode_aircraft">Літак</string>
-    <string name="local_osm_changes_delete_all_confirm">Ви збираєтесь вилучити %1$d змін OSM. Ви впевнені?</string>
+    <string name="local_osm_changes_delete_all_confirm">Видалити %1$d змін OSM\?</string>
     <string name="shared_string_delete_all">Вилучити все</string>
     <string name="animate_routing_route_not_calculated">Будь ласка, розрахуйте маршрут спершу</string>
     <string name="animate_routing_route">Моделювати за допомогою розрахованого маршруту</string>
@@ -1300,7 +1300,7 @@
     <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна ввімкнути або вимкнути кнопкою запис GPX на екрані з мапою.</string>
     <string name="save_track_interval_globally">Інтервал записування</string>
     <string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та шатлів</string>
-    <string name="record_plugin_name">Запис подорожі</string>
+    <string name="record_plugin_name">Записування подорожі</string>
     <string name="int_hour">г</string>
     <string name="duration">Тривалість</string>
     <string name="distance">Віддаль</string>
@@ -1474,7 +1474,7 @@
     <string name="back_to_map">Повернутись до мапи</string>
     <string name="location_on_map">Координати:↵\n Шир %1$s↵\n Дов %2$s</string>
     <string name="shared_string_release">Дата випуску</string>
-    <string name="local_osm_changes_upload_all_confirm">Ви збираєтесь вивантажити %1$d змін до OSM. Ви впевнені?</string>
+    <string name="local_osm_changes_upload_all_confirm">Вивантажити %1$d змін до OSM\?</string>
     <string name="confirmation_to_clear_history">Очистити історію\?</string>
     <string name="delay_to_start_navigation_descr">Укажіть час очікування для перебування на екрані планування маршруту.</string>
     <string name="shared_string_is_open">Відкрито</string>
@@ -1596,7 +1596,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Забарвлення згідно приналежності мережі</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Розмальовування відповідно пішій символіці OSMC</string>
     <string name="shared_string_logoff">Вийти</string>
-    <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d нотаток. Ви впевнені\?</string>
+    <string name="local_recordings_delete_all_confirm">Видалити %1$d приміток\?</string>
     <string name="download_wikipedia_maps">Вікіпедія</string>
     <string name="rendering_value_default13_name">Типово (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Типово (напівпрозорий блакитний)</string>
@@ -1676,7 +1676,7 @@
     <string name="min_mile">хв/м</string>
     <string name="min_km">хв/км</string>
     <string name="m_s">м/с</string>
-    <string name="shared_string_trip_recording">Запис подорожі</string>
+    <string name="shared_string_trip_recording">Записування подорожі</string>
     <string name="shared_string_navigation">Навігація</string>
     <string name="osmand_running_in_background">Працює у тлі</string>
     <string name="favourites_edit_dialog_title">Відомості про закладки</string>
@@ -1779,7 +1779,7 @@
     <string name="closing_at">Закриття о</string>
     <string name="number_of_rows_in_dash">Кількість рядків на панелі %1$s</string>
     <string name="recent_places">Нещодавні місця</string>
-    <string name="downloading_number_of_files">Завантаження файлу — %1$d</string>
+    <string name="downloading_number_of_files">Завантаження файлу %1$d…</string>
     <string name="show_free_version_banner">Показати банер безкоштовної версії</string>
     <string name="use_dashboard_btn">Використовувати домашню сторінку</string>
     <string name="use_drawer_btn">Використовувати меню</string>
@@ -1982,7 +1982,7 @@
     <string name="gpx_add_track">Додати ще…</string>
     <string name="shared_string_appearance">Зовнішній вигляд</string>
     <string name="trip_rec_notification_settings">Ввімкнути швидкий запуск запису</string>
-    <string name="trip_rec_notification_settings_desc">Показувати сповіщення, яке дозволить почати запис мандрівки.</string>
+    <string name="trip_rec_notification_settings_desc">Показувати сповіщення, яке дозволить почати записування подорожі.</string>
     <string name="shared_string_notifications">Повідомлення</string>
     <string name="shared_string_continue">Продовжити</string>
     <string name="shared_string_pause">Призупинити</string>
@@ -2045,7 +2045,7 @@
     <string name="update_all_maps_now">Оновити усі мапи зараз?</string>
     <string name="clear_tile_data">Очистити кеш мережевих мап</string>
     <string name="routing_attr_short_way_name">Паливно-ефективний шлях</string>
-    <string name="replace_favorite_confirmation">Ви впевнені, що хочете замінити закладку %1$s?</string>
+    <string name="replace_favorite_confirmation">Замінити закладку %1$s\?</string>
     <string name="rendering_attr_hideOverground_name">Надземні об’єкти</string>
     <string name="shared_string_change">Змінити</string>
     <string name="get_started">Почати</string>
@@ -2088,7 +2088,7 @@
     <string name="quick_action_add_favorite">Додати Закладку</string>
     <string name="dialog_add_action_title">Додати дію</string>
     <string name="quick_actions_delete">Вилучити дію</string>
-    <string name="quick_actions_delete_text">Ви впевнені, що хочете вилучити дію „%s“?</string>
+    <string name="quick_actions_delete_text">Видалити дію «%s»\?</string>
     <string name="favorite_empty_place_name">Місце</string>
     <string name="quick_action_poi_show">Показати %1$s</string>
     <string name="quick_action_poi_hide">Приховати %1$s</string>
@@ -2173,7 +2173,7 @@
     <string name="quick_action_add_create_items">Створення елементів</string>
     <string name="add_new_folder">Додати нову теку</string>
     <string name="points_delete_multiple_succesful">Точку(и) вилучено.</string>
-    <string name="points_delete_multiple">Ви збираєтеся вилучити %1$d точку(и). Певні\?</string>
+    <string name="points_delete_multiple">Видалити %1$d точку(и)\?</string>
     <string name="route_points_category_name">Повороти (точки для проходження) на цьому маршруті</string>
     <string name="track_points_category_name">Точки маршруту, цікаві місця та названі можливості</string>
     <string name="shared_string_gpx_track">Трек</string>
@@ -2361,16 +2361,16 @@
 \n</string>
     <string name="osmand_plus_extended_description_part6">Можливості для пішоходів та велосипедистів
 \n• Перегляд прогулянкових маршрутів, пішохідних та велосипедних доріжок, чудово підходить для активного відпочинку
-\n• Особливі режими маршрутизації та відображення для велосипедистів і пішоходів
+\n• Особливі режими маршрутизації та показу для велосипедистів і пішоходів
 \n• Опціональні зупинки громадського транспорту (автобус, трамвай, поїзд), включаючи назви лінії
-\n• Опціональний запис подорожі в локальний GPX-файл чи онлайн-сервіс
-\n• Опціональне відображення швидкості та висотного розташування
-\n• Відображення горизонталей та рельєфу (через додаткове розширення)</string>
-    <string name="osmand_plus_extended_description_part7">Безпосередній вклад у OSM
+\n• Опціональне записування подорожі в локальний GPX-файл чи онлайн-сервіс
+\n• Опціональний показ швидкості та висотного розташування
+\n• Показ горизонталей та рельєфу (через додаткове розширення)</string>
+    <string name="osmand_plus_extended_description_part7">Безпосередній вклад в OSM
 \n• Звітуйте про помилки в даних
 \n• Вивантажуйте GPX-треки в OSM безпосередньо з програми
 \n• Додавайте POI (цікаві точки) та безпосередньо вивантажуйте їх в OSM (чи пізніше, якщо зараз ви в автономному режимі)
-\n• Параметр запису подорожі також і в тлі (коли пристрій перебуває в режимі сну)
+\n• Параметр записування подорожі також і в тлі (коли пристрій перебуває в режимі сну)
 \nOsmAnd — вільне й відкрите програмне забезпечення, що активно розвивається. Кожен може допомогти, звітуючи про помилки, поліпшуючи переклад чи розробляючи нові функції. Також проєкт покладається на фінансові внески для оплати розробки та тестування нових функціональних можливостей.
 \n</string>
     <string name="osmand_plus_extended_description_part8">Приблизне охоплення мап та якість: 
@@ -2972,7 +2972,7 @@
     <string name="profile_alert_need_save_title">Зберегти зміни</string>
     <string name="profile_alert_need_save_msg">Спочатку збережіть зміни в профілі</string>
     <string name="profile_alert_delete_title">Видалити профіль</string>
-    <string name="profile_alert_delete_msg">Ви дійсно хочете видалити профіль «%s»</string>
+    <string name="profile_alert_delete_msg">Видалити профіль «%s»</string>
     <string name="select_base_profile_dialog_title">Виберіть профіль для початку</string>
     <string name="process_downloading_service">Служба завантаження OsmAnd</string>
     <string name="shared_string_color_magenta">Пурпуровий</string>
@@ -3227,7 +3227,7 @@
     <string name="routing_attr_prefer_unpaved_name">Надавати перевагу ґрунтовим дорогам</string>
     <string name="routing_attr_prefer_unpaved_description">Надавати перевагу ґрунтовим дорогам.</string>
     <string name="update_all_maps">Оновити всі мапи</string>
-    <string name="update_all_maps_q">Ви впевнені, що бажаєте оновити всі мапи (%1$d)\?</string>
+    <string name="update_all_maps_q">Оновити всі мапи (%1$d)\?</string>
     <string name="release_3_5">• Оновлені налаштування застосунку та профілю: налаштування тепер упорядковані за типом. Кожен профіль можна налаштувати окремо 
 \n 
 \n • Нове діалогове вікно завантаження мапи, яке пропонує мапу для завантаження під час перегляду 
@@ -3316,7 +3316,7 @@
     <string name="multimedia_notes_prefs_descr">Розмір зображення, якість звуку та відео</string>
     <string name="osm_editing_prefs_descr">Логін, пароль, редагування в безмережному режимі</string>
     <string name="accessibility_prefs_descr">Оберіть значок, колір та назву</string>
-    <string name="live_monitoring_descr">Дозволяє ділитися поточним місцеперебуванням, використовуючи запис поїздки.</string>
+    <string name="live_monitoring_descr">Дозволяє ділитися поточним розташуванням використовуючи записування подорожі.</string>
     <string name="live_monitoring">Мережеве відстеження</string>
     <string name="save_track_logging_accuracy">Точність журналювання</string>
     <string name="tracks_view_descr">Ви можете знайти всі записи в %1$s або в теці OsmAnd за допомогою файлового провідника.</string>
@@ -3448,7 +3448,7 @@
     <string name="restore_all_profile_settings">Відновити всі налаштування профілю\?</string>
     <string name="saving_new_profile">Збереження нового профілю</string>
     <string name="profile_backup_failed">Не вдалося створити резервну копію профілю.</string>
-    <string name="clear_recorded_data_warning">Ви впевнені, що хочете очистити записані дані\?</string>
+    <string name="clear_recorded_data_warning">Очистити записані дані\?</string>
     <string name="importing_from">Імпорт даних з %1$s</string>
     <string name="shared_string_importing">Імпорт</string>
     <string name="checking_for_duplicate_description">OsmAnd перевірить %1$s на наявність подвоєнь із наявними елементами у програмі.
@@ -3638,7 +3638,7 @@
     <string name="default_screen_timeout">Типовий час до вимкнення екрану</string>
     <string name="export_import_quick_actions_with_profiles_promo">Ви можете експортувати або імпортувати швидкі дії з профілями застосунку.</string>
     <string name="shared_string_delete_all_q">Видалити все\?</string>
-    <string name="delete_all_actions_message_q">Ви дійсно бажаєте безповоротно видалити %d швидких дій\?</string>
+    <string name="delete_all_actions_message_q">Видалити %d швидких дій остаточно\?</string>
     <string name="screen_timeout">Час очікування екрана</string>
     <string name="weight_limit_description">Укажіть вагу транспортного засобу тому, що для вантажівок можуть застосовуватися деякі маршрутні обмеження.</string>
     <string name="shared_string_tones">тонни</string>
@@ -3721,7 +3721,7 @@
     <string name="route_between_points_next_segment_button_desc">Лише наступний сегмент буде перераховано за допомогою обраного профілю.</string>
     <string name="route_between_points_desc">Виберіть спосіб з\'єднання точок: прямою лінією чи обчислити маршрут між ними за, як зазначено далі.</string>
     <string name="street_level_imagery">Зображення вулиць</string>
-    <string name="plan_route_exit_dialog_descr">Ви дійсно бажаєте відхилити всі зміни у запланованому маршруті\?</string>
+    <string name="plan_route_exit_dialog_descr">Відхилити всі зміни у запланованому маршруті\?</string>
     <string name="in_case_of_reverse_direction">Для зворотного напрямку</string>
     <string name="shared_string_save_as_gpx">Зберегти як новий файл треку</string>
     <string name="add_segment_to_the_track">Додати у файл треку</string>
@@ -3753,7 +3753,7 @@
     <string name="plan_route_trim_after">Обрізати після</string>
     <string name="plan_route_change_route_type_before">Змінити вид маршруту раніше</string>
     <string name="plan_route_change_route_type_after">Змінити вид маршруту після</string>
-    <string name="save_global_track_interval_descr">Укажіть інтервал для загального запису поїздки (увімкнено через віджет «Запис подорожі» на мапі).</string>
+    <string name="save_global_track_interval_descr">Укажіть інтервал для загального записування подорожі (увімкнено через віджет «Записування подорожі» на мапі).</string>
     <string name="system_default_theme">Типова системна</string>
     <string name="all_next_segments">Всі наступні сегменти</string>
     <string name="previous_segment">Попередній сегмент</string>
@@ -3762,8 +3762,8 @@
     <string name="all_next_segments_will_be_recalc">Усі наступні сегменти буде переобчислено за допомогою вибраного профілю.</string>
     <string name="all_previous_segments_will_be_recalc">Усі попередні сегменти буде переобчислено за допомогою вибраного профілю.</string>
     <string name="number_of_gpx_files_selected_pattern">Вибрано %s файлів треків</string>
-    <string name="gpx_monitoring_stop">Зупинити запис мандрівки</string>
-    <string name="gpx_monitoring_start">Відновити запис мандрівки</string>
+    <string name="gpx_monitoring_stop">Зупинити записування подорожі</string>
+    <string name="gpx_monitoring_start">Відновити записування подорожі</string>
     <string name="open_saved_track">Відкрити збережений трек</string>
     <string name="shared_string_is_saved">збережено</string>
     <string name="one_point_error">Додайте принаймні дві точки.</string>
@@ -4012,7 +4012,7 @@
     <string name="track_recording_stop_without_saving">Зупинити без збереження</string>
     <string name="track_recording_save_and_stop">Зберегти і зупинити запис</string>
     <string name="track_recording_title">Запис треку зупинено</string>
-    <string name="track_recording_description">Ви дійсно бажаєте припинити записування\?
+    <string name="track_recording_description">Припинити записування\?
 \nУсі незбережені дані буде втрачено.</string>
     <string name="on_pause">Під час паузи</string>
     <string name="app_restart_required">Щоб задіяти деякі налаштування, необхідно перезапустити застосунок.</string>
@@ -4027,7 +4027,7 @@
     <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевірятиметься щогодини. Наступного разу %1$s в %2$s.</string>
     <string name="live_update_frequency_day_variant">Наявність оновлень мап перевірятиметься щодня. Наступного разу %1$s в %2$s.</string>
     <string name="delete_updates">Видалити оновлення</string>
-    <string name="live_update_delete_updates_msg">Ви впевнені, що хочете видалити всі %s поточні оновлення\?</string>
+    <string name="live_update_delete_updates_msg">Видалити всі %s поточні оновлення\?</string>
     <string name="purchases">Покупки</string>
     <string name="select_category_descr">Виберіть категорію або додайте нову</string>
     <string name="track_recording_will_be_continued">Записування буде продовжено.</string>
@@ -4057,7 +4057,7 @@
 \n
 \n• Додано можливість зміни зовнішнього вигляду лінії навігації маршрутом
 \n
-\n• Оновлено діалогове вікно «Запис поїздки»
+\n• Оновлено діалогове вікно «Записування подорожі»
 \n
 \n</string>
     <string name="no_purchases">У вас немає покупок</string>
@@ -4117,7 +4117,6 @@
     <string name="osmand_cloud_login_descr">Введіть адресу е-пошти з якою ви реєструвалися. Одноразовий пароль, необхідний на наступному кроці буде надіслано на неї.</string>
     <string name="verify_email_address">Підтвердити електронну адресу</string>
     <string name="verify_email_address_descr">Код підтвердження надіслано на %1$s. Введіть його в поле знизу.</string>
-    <string name="enter_verification_code">Введіть 4-значний код</string>
     <string name="cloud_email_not_registered">Цю електронну адресу ще не зареєстровано для OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Ця адреса е-пошти вже зареєстрована.</string>
     <string name="resend_verification_code">Надіслати код ще раз</string>
@@ -4223,4 +4222,28 @@
     <string name="backup_error_token_is_not_valid_or_expired">Токен недійсний або його термін дії завершився</string>
     <string name="backup_error_user_is_not_registered">Жоден користувач не зареєстрований з цією адресою е-пошти</string>
     <string name="backup_error_no_valid_subscription">Немає дійсної передплати</string>
+    <string name="approximate_route_description">Прикріпіть маршрут до доріг на мапі, щоб отримати всі повороти та додаткові дані про плавність, типи доріг тощо.</string>
+    <string name="release_4_0">• Резервне копіювання до хмари
+\n
+\n • Додано нічний режим для стилю «Topo»
+\n
+\n • Додано можливість завантаження горизонталей у футах
+\n
+\n • Треки тепер можуть бути забарвлені залежно від висоти, швидкості або ухилу.
+\n
+\n • Оновлено діалогове вікно «Запис подорожі»
+\n
+\n • Відстань дотиком переміщено з радіусної лінійки до окремої опції
+\n
+\n • Планування маршруту: додано можливість змінювати параметри навігації, доступ до налаштування мапи та пошуку, безпосередньо з меню планування маршруту
+\n
+\n • Новий екран «Покупка» з докладними відомостями про покупку
+\n
+\n • Додано можливість зміни зовнішнього вигляду смуги маршруту.
+\n
+\n • Оновлення OsmAnd Live переміщено до «Завантаження &gt; Оновлення»
+\n
+\n</string>
+    <string name="enter_verification_code">Введіть одноразовий пароль</string>
+    <string name="duration_moment_ago">щойно</string>
 </resources>

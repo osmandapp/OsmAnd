@@ -193,7 +193,7 @@ public class GpxSelectionHelper {
 		if (selectedGPXFiles.size() == 1) {
 			GPXFile currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 			if (selectedGPXFiles.get(0).getGpxFile() == currentGPX) {
-				return app.getResources().getString(R.string.current_track);
+				return app.getString(R.string.current_track);
 			}
 
 			File file = new File(selectedGPXFiles.get(0).getGpxFile().path);
@@ -201,7 +201,7 @@ public class GpxSelectionHelper {
 		} else if (selectedGPXFiles.size() == 0) {
 			return null;
 		} else {
-			return app.getResources().getString(R.string.number_of_gpx_files_selected_pattern,
+			return app.getString(R.string.number_of_gpx_files_selected_pattern,
 					selectedGPXFiles.size());
 		}
 	}

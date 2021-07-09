@@ -715,10 +715,10 @@
     <string name="poi_accountant">محاسب</string>
     <string name="poi_bitcoin_yes">دفع بالبيتكوين</string>
     <string name="poi_cave_entrance">مدخل كهف</string>
-    <string name="poi_saddle">سرج</string>
+    <string name="poi_saddle">السرج الجبلي (ممر جبلي)</string>
     <string name="poi_volcano">بركان</string>
     <string name="poi_crater">فوهة بركان</string>
-    <string name="poi_ridge">قمة</string>
+    <string name="poi_ridge">سلسلة من القمم الجبلية</string>
     <string name="poi_glacier">نهر جليدي</string>
     <string name="poi_waterfall">شلال</string>
     <string name="poi_stream">مجرى مائي</string>
@@ -958,7 +958,7 @@
     <string name="poi_harbour_basin">حوض الميناء</string>
     <string name="poi_seamark_harbour">ميناء/مرفأ</string>
     <string name="poi_signal_station_warning">محطة إشارة، تحذير</string>
-    <string name="poi_military_bunker">مخبأ/ مستودع محصن عسكرية</string>
+    <string name="poi_military_bunker">مخبأ أو مستودع عسكري محصن</string>
     <string name="poi_wiki_lang_ce">ويكي الشيشان</string>
     <string name="poi_wiki_lang_ur">ويكي الأردية</string>
     <string name="poi_wiki_lang_oc">ويكي الأوكسيتانية</string>
@@ -1868,7 +1868,7 @@
     <string name="poi_surface_snow">السطح: ثلج</string>
     <string name="poi_surface_salt">السطح: ملح</string>
     <string name="poi_surface_ice">السطح: جليد</string>
-    <string name="poi_surface_mud">السطح: طين</string>
+    <string name="poi_surface_mud">السطح: طين (موحل)</string>
     <string name="poi_surface_dirt">السطح: تراب</string>
     <string name="poi_surface_ground">السطح: الأرض</string>
     <string name="poi_surface_grass_paver">السطح: عشب مرصوف</string>
@@ -2129,7 +2129,7 @@
     <string name="poi_information_trail_blaze">درب الحريق</string>
     <string name="poi_information_board">طاولة</string>
     <string name="poi_information_guidepost">علامة إرشاد</string>
-    <string name="poi_water_characteristic_mud">الطين</string>
+    <string name="poi_water_characteristic_mud">وحل</string>
     <string name="poi_water_characteristic_mineral">المعدنيه</string>
     <string name="poi_pump_powered">تعمل بالطاقة</string>
     <string name="poi_pump_manual">يدوي</string>
@@ -2153,7 +2153,7 @@
     <string name="poi_shelter_type_lean_to">ملحق ملاصق للمبنى</string>
     <string name="poi_palm">النخيل</string>
     <string name="poi_beach_rocky">صخري</string>
-    <string name="poi_beach_shingle">لوحه خشبيه</string>
+    <string name="poi_beach_shingle">حصى الشواطئ</string>
     <string name="poi_wetland_mud">وحل</string>
     <string name="poi_wetland_palsa_bog">مستنقع Palsa</string>
     <string name="poi_wetland_fen">مستنقع أعشاب مغذى من المياة الجوفية</string>
@@ -2371,7 +2371,7 @@
     <string name="poi_street_cabinet_power">نوع الكبينة/الخزانة: كهرباء</string>
     <string name="poi_in_service_yes">في الخدمة: نعم</string>
     <string name="poi_water_source_stream">مجرى</string>
-    <string name="poi_water_source_pond">بركه</string>
+    <string name="poi_water_source_pond">بركة</string>
     <string name="poi_water_source_main">رئيسي</string>
     <string name="poi_health_service_child_care_no">الخدمة الصحية: رعاية الأطفال: لا</string>
     <string name="poi_health_service_child_care_yes">الخدمة الصحية: رعاية الأطفال: نعم</string>
@@ -2856,7 +2856,7 @@
     <string name="poi_health_amenity_type_scales">المقاييس العامة</string>
     <string name="poi_health_amenity_type_first_aid_kit">حقيبة إسعاف أولي</string>
     <string name="poi_fire_hydrant_type_wall">حائط</string>
-    <string name="poi_fire_hydrant_type_pond">بركه</string>
+    <string name="poi_fire_hydrant_type_pond">بركة</string>
     <string name="poi_fire_hydrant_type_dry_barrel">برميل جاف</string>
     <string name="poi_fire_hydrant_type_pillar">عمود</string>
     <string name="poi_fire_hydrant_type_underground">تحت الارض</string>
@@ -3347,7 +3347,7 @@
     <string name="poi_volcano_status_dormant">في سبات</string>
     <string name="poi_volcano_status_extinct">منطفئ/خامد</string>
     <string name="poi_volcano_last_eruption">آخر ثوران بركاني</string>
-    <string name="poi_volcano_type_mud">طينيه</string>
+    <string name="poi_volcano_type_mud">طيني (وحل)</string>
     <string name="poi_volcano_type_lava_dome">قبة الحمم البركانية</string>
     <string name="poi_volcano_type_caldera">فوه بركانيه كبيرة</string>
     <string name="poi_volcano_type_maar">لكن</string>
@@ -3831,4 +3831,5 @@
     <string name="poi_refugee_site">مخيم لاجئين</string>
     <string name="poi_historic_manor">قصر سكني قديم/تاريخي</string>
     <string name="poi_trail_riding_station">سكن للخيول والفرسان</string>
+    <string name="poi_shrub">شجيرة</string>
 </resources>

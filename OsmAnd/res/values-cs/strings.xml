@@ -4069,7 +4069,6 @@
     <string name="osmand_cloud_login_descr">Zadejte prosím emailovou adresu, kterou jste použili při registraci. Pošleme vám jednorázové heslo potřebné pro další krok.</string>
     <string name="verify_email_address">Ověřit emailovou adresu</string>
     <string name="verify_email_address_descr">Poslali jsme ověřovací kód na %1$s, zadejte ho prosím do políčka níže.</string>
-    <string name="enter_verification_code">Zadejte 4-místný kód</string>
     <string name="cloud_email_not_registered">Tato emailová adresa nebyla registrovaná pro OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Účet s touto emailovou adresou je už zaregistrovaný.</string>
     <string name="resend_verification_code">Poslat kód znovu</string>

@@ -3950,7 +3950,6 @@
     <string name="route_line_use_gradient_coloring">Rutelinjen er farget av høydeskråning.</string>
     <string name="recorded_description">Innspilt stemme høres bedre ut, men kan kun uttale forhåndsinnspillede setninger: svinginstruksjoner. Kan ikke kunngjøre gatenavn eller interessepunktnavn.</string>
     <string name="shared_string_itinerary">Reiseplan</string>
-    <string name="enter_verification_code">Skriv inn 4-sifret kode</string>
     <string name="cloud_email_not_registered">Dennne e-postadressen har ikke blitt registrert for OsmAnd Sky</string>
     <string name="cloud_email_already_registered">En konto med denne e-postadressen er allerede registrert.</string>
     <string name="resend_verification_code">Send koden igjen</string>
@@ -4052,4 +4051,23 @@
     <string name="verify_email_address_descr">Bekreftelseskode sendt til %1$s. Skriv den inn i feltet nedenfor.</string>
     <string name="delete_version_history">Slett versjonshistorikk</string>
     <string name="nautical_depth">Havdybde</string>
+    <string name="osmand_online_routing_promo">Du kan bruke forhåndsdefinerte maler, eller legge til egendefinert nettbasert ruteberegning. OSRM, GrapHopper, OpenRouteService og GPX støttes.</string>
+    <string name="loading_list_of_routing_services">Laster inn liste over tilgjengelige ruteberegningstjenester</string>
+    <string name="send_logcat_log">Send Logcat-logg</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="on_pause">Satt på pause</string>
+    <string name="track_recording_description">Stopp opptak\?
+\nAll ulagret data vil gå tapt.</string>
+    <string name="restart">Start på ny</string>
+    <string name="track_recording_save_and_stop">Lagre og stopp opptak</string>
+    <string name="contact_support_description">Hvis du har spørsmål kan du kontakte oss på %1$s.</string>
+    <string name="empty_purchases_description">Hvis kjøpene dine ikke vises her kan du trykke «%1$s» eller kontakte vår brukerstøtte.</string>
+    <string name="routing_attr_avoid_tunnels_description">Unngå tunneler</string>
+    <string name="routing_attr_avoid_tunnels_name">Unngå tunneler</string>
+    <string name="backup_promocode">Promokode</string>
+    <string name="send_crash_log">Send krasjlogg</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Du kan få «%1$s» som del av: «%2$s»-planen. Sammenligning:</string>
+    <string name="redeem_promo_code">Løs inn promo-kode</string>
+    <string name="complete_purchase">Fullfør kjøp</string>
+    <string name="duration_moment_ago">et øyeblikk siden</string>
 </resources>

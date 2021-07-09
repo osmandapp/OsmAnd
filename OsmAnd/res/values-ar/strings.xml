@@ -4186,7 +4186,6 @@
     <string name="osmand_cloud_login_descr">الرجاء إدخال عنوان البريد الإلكتروني الذي استخدمته للتسجيل. سنرسل لك كلمة مرور لمرة واحدة مطلوبة في الخطوة التالية.</string>
     <string name="verify_email_address">التحقق من عنوان البريد الإلكتروني</string>
     <string name="verify_email_address_descr">أرسلنا رمز التحقق إلى %1$s ، يرجى إدخاله في الحقل أدناه.</string>
-    <string name="enter_verification_code">أدخل الرمز المكون من 4 أرقام</string>
     <string name="cloud_email_not_registered">هذا البريد الإلكتروني غير مسجل في سحابة أوسماند</string>
     <string name="cloud_email_already_registered">تم تسجيل هذا البريد الإلكتروني بالفعل.</string>
     <string name="resend_verification_code">إعادة إرسال رمز</string>

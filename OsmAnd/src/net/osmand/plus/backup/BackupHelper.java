@@ -495,12 +495,12 @@ public class BackupHelper {
 				});
 	}
 
-	public void deleteAllFiles(@NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteAllFiles(@Nullable List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteAllFilesCommand(this, types));
 	}
 
-	public void deleteOldFiles(@NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteOldFiles(@Nullable List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteOldFilesCommand(this, types));
 	}

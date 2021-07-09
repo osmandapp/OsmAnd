@@ -4118,7 +4118,6 @@
     <string name="osmand_cloud_login_descr">Enigu la retpoŝtan adreson, kiun vi uzis por registriĝi. Dum la sekva etapo unufoja pasvorto estos al ĝi sendita.</string>
     <string name="verify_email_address">Kontroli retpoŝtan adreson</string>
     <string name="verify_email_address_descr">Kontrolkodo sendita al %1$s, enigu ĝin en la kampon sube.</string>
-    <string name="enter_verification_code">Enigu la 4-ciferan kodon</string>
     <string name="cloud_email_already_registered">Tiu ĉi retpoŝta adreso jam estas registrita.</string>
     <string name="resend_verification_code">Resendi kontrolkodon</string>
     <string name="verification_code_missing">Mi ne ricevis kontrolkodon</string>

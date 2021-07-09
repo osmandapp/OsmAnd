@@ -4113,14 +4113,13 @@
     <string name="backup_into_file">Restaurar de um ficheiro</string>
     <string name="restore_from_file">Restaurar de um ficheiro</string>
     <string name="osmand_cloud_help_descr">Precisa de ajuda\? Contacte-nos em %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Introduza o seu endereço de email, todos os seus dados serão ligados a ele.
-\nVamos enviar um código de verificação para este endereço de email.</string>
+    <string name="osmand_cloud_create_account_descr">Introduza o seu endereço de email. Será enviado um código de verificação para esse endereço.
+\nTodos os seus dados serão ligados a ele.</string>
     <string name="osmand_cloud_login_descr">Introduza o endereço de email que usou para o registo da conta. Enviaremos uma palavra-passe única, que será necessária para o próximo passo.</string>
     <string name="verify_email_address">Verifique o endereço de email</string>
-    <string name="verify_email_address_descr">Enviámos um código de verificação para %1$s. Introduza-o no campo abaixo.</string>
-    <string name="enter_verification_code">Introduza o código de 4 dígitos</string>
-    <string name="cloud_email_not_registered">Este email ainda não foi registado no OsmAnd Cloud</string>
-    <string name="cloud_email_already_registered">A conta com este email já está registada.</string>
+    <string name="verify_email_address_descr">Foi enviado um código de verificação para %1$s. Introduza-o no campo abaixo.</string>
+    <string name="cloud_email_not_registered">Este endereço de email ainda não foi registado no OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Este endereço de email já está registado.</string>
     <string name="resend_verification_code">Reenviar código</string>
     <string name="verification_code_missing">Não recebi o código de verificação</string>
     <string name="verification_code_missing_description">O tempo de espera pelo código pode ser de 10 minutos, também pode verificar a sua pasta de spam. Se não o encontrar, use o botão abaixo.</string>
@@ -4138,7 +4137,7 @@
     <string name="osmand_online_routing_promo">Pode usar modelos predefinidos ou adicionar um roteamento online personalizado: OSRM, Graphhopper, OpenRouteService, GPX.</string>
     <string name="shared_string_external">Externo</string>
     <string name="provided_by">Fornecido por %1$s</string>
-    <string name="failed_loading_predefined_engines">Surgiu uma falha ao carregar a lista de modelos predefinidos.
+    <string name="failed_loading_predefined_engines">Não foi possível carregar a lista de modelos predefinidos.
 \nVerifique se está ligado à Internet.</string>
     <string name="shared_string_predefined">Predefinido</string>
     <string name="backup_complete">Cópia de segurança completa</string>
@@ -4177,7 +4176,7 @@
     <string name="grey_color_slope">Os declives desconhecidos são mostrados na cor cinzento.</string>
     <string name="backup_version_history">Histórico de versões</string>
     <string name="backup_storage_taken">Espaço utilizado</string>
-    <string name="backup_version_history_delete_descr">Quer mesmo eliminar o histórico de alterações de tipos em desuso da cloud\?</string>
+    <string name="backup_version_history_delete_descr">Eliminar o histórico de alterações de tipos em desuso da cloud\?</string>
     <string name="delete_version_history">Eliminar histórico de versões</string>
     <string name="routing_attr_avoid_tunnels_description">Evitar túneis</string>
     <string name="routing_attr_avoid_tunnels_name">Evitar túneis</string>
@@ -4231,4 +4230,28 @@
     <string name="backup_error_token_is_not_valid_or_expired">Token inválido ou expirado</string>
     <string name="backup_error_user_is_not_registered">Não está registado nenhum utilizador com esse endereço de email</string>
     <string name="backup_error_no_valid_subscription">Nenhuma assinatura válida presente</string>
+    <string name="release_4_0">- Tradução para português europeu completamente revista
+\n
+\n- Cópia de segurança para a nuvem
+\n
+\n - Adicionado o modo noturno para o estilo de renderização \"Topográfico\"
+\n
+\n - Adicionada a opção de descarregar as linhas de contorno na unidade de medida \"pés\"
+\n
+\n - Os trilhos podem agora ser coloridos conforme a altitude, velocidade ou declive.
+\n
+\n - Ecrã \"Gravar viagem\" atualizado
+\n
+\n - Opção de distância por toque movido da régua de raio para uma opção separada
+\n
+\n - Planear rota: capacidade adicional para alterar as opções de navegação, aceder ao mapa de configuração e pesquisa sem sair do ecrã de planear rota
+\n
+\n - Novo ecrã \"Comprar\" com informações detalhadas sobre compras
+\n
+\n - Adicionada a opção para alterar a aparência da linha de rota.
+\n
+\n - Atualizações OsmAnd Live movidas para \"Descarregar mapas &gt; Atualizações\".
+\n
+\n</string>
+    <string name="approximate_route_description">Atrair a rota às estradas no mapa para obter todas as viragens e dados adicionais, como a suavidade, tipos de estrada, etc.</string>
 </resources>
