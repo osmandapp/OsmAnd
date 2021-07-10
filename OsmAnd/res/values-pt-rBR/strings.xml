@@ -386,7 +386,7 @@
     <string name="rendering_attr_showSurfaces_name">Mostrar superfície da via</string>
     <string name="rendering_attr_showCycleRoutes_name">Mostrar rotas para bicicletas</string>
     <string name="no_index_file_to_download">Downloads não encontrados. Por favor, verifique sua conexão com a Internet.</string>
-    <string name="select_index_file_to_download">Nada foi encontrado. Se você não encontrar a sua região, você pode criá-la (veja https://osmand.net).</string>
+    <string name="select_index_file_to_download">Nada foi encontrado, mas você mesmo pode fazer (consulte https://osmand.net).</string>
     <string name="none_selected_gpx">Especifique um arquivo GPX com um toque longo primeiro.</string>
     <string name="local_index_select_gpx_file">Selecione uma trilha</string>
     <string name="gpx_split_interval">Intervalo de divisão</string>
@@ -985,7 +985,7 @@
     <string name="live_monitoring_url">Endereço web de rastreamento on-line</string>
     <string name="gpx_monitoring_disabled_warn">Registro de trilha usando o widget do GPX ou através das configurações de \'Gravação de viagem\'.</string>
     <string name="show_current_gpx_title">Mostrar trilha atual</string>
-    <string name="free_version_message">Você pode fazer o download ou atualizar os mapas de %1$s.</string>
+    <string name="free_version_message">%1$s mapas para baixar ou atualizar.</string>
     <string name="free_version_title">Versão gratuita</string>
     <string name="poi_context_menu_showdescription">Mostrar descrição do POI.</string>
     <string name="index_name_north_america">América do Norte</string>
@@ -1953,7 +1953,7 @@
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato das coordenadas</string>
     <string name="use_system_keyboard">Usar teclado do sistema</string>
-    <string name="fast_coordinates_input_descr">Selecione o formato de inserção de coordenadas. Você sempre pode alterá-la tocando em \'Opções\'.</string>
+    <string name="fast_coordinates_input_descr">Selecione o formato de entrada de coordenadas. Toque em \'Opções\' para alterá-lo.</string>
     <string name="fast_coordinates_input">Inserção de coordenadas rápida</string>
     <string name="use_location">Usar posição</string>
     <string name="add_location_as_first_point_descr">Adicione a sua posição como ponto de partida para planejar uma rota perfeita.</string>
@@ -2947,7 +2947,7 @@
     <string name="app_mode_subway">Metrô</string>
     <string name="app_mode_horse">Cavalo</string>
     <string name="app_mode_helicopter">Helicóptero</string>
-    <string name="osmand_routing_promo">Você pode adicionar sua própria versão modificada de «routing.xml» no «..osmand/routing»</string>
+    <string name="osmand_routing_promo">Adicione sua própria versão modificada de «routing.xml» no «..osmand/routing»</string>
     <string name="app_mode_skiing">Esqui</string>
     <string name="base_profile_descr_ski">Esqui</string>
     <string name="show_compass_ruler">Mostrar régua de bússola</string>
@@ -3239,7 +3239,7 @@
 \n  • Outras correções de bugs
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Você pode aplicar essa alteração a todos ou apenas ao perfil selecionado.</string>
+    <string name="apply_preference_to_all_profiles">Aplique esta alteração a todos ou ao perfil selecionado.</string>
     <string name="shared_preference">Compartilhado</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefira não pavimentada sobre estradas pavimentadas para o roteamento.</string>
@@ -3356,8 +3356,8 @@
     <string name="multimedia_photo_play_sound">Som do obturador da câmera</string>
     <string name="osm_authorization_success">Autorização bem sucedida</string>
     <string name="rearrange_categories">Reorganizar categorias</string>
-    <string name="create_custom_categories_list_promo">Altere a ordem de classificação da lista, oculte as categorias. Você pode importar ou exportar todas as alterações com perfis.</string>
-    <string name="add_new_custom_category_button_promo">Você pode adicionar uma nova categoria personalizada selecionando uma ou mais categorias.</string>
+    <string name="create_custom_categories_list_promo">Altere a ordem da lista e oculte as categorias. Importe ou exporte todas as alterações como perfis.</string>
+    <string name="add_new_custom_category_button_promo">Adicione uma nova categoria personalizada selecionando uma ou mais categorias.</string>
     <string name="shared_string_available">Disponível</string>
     <string name="add_custom_category">Adicionar categoria personalizada</string>
     <string name="rendering_attr_streetLightingNight_name">Mostrar apenas à noite</string>
@@ -3412,7 +3412,7 @@
     <string name="shared_string_routing">Roteamento</string>
     <string name="shared_string_include_data">Incluir dados adicionais</string>
     <string name="import_profile_dialog_description">O perfil importado contém dados adicionais. Clique em \"Importar\" para importar apenas dados do perfil ou selecione dados adicionais.</string>
-    <string name="export_profile_dialog_description">Você pode selecionar dados adicionais para exportar junto com o perfil.</string>
+    <string name="export_profile_dialog_description">Selecione dados adicionais para exportar junto com o perfil.</string>
     <string name="index_name_antarctica">Antártida</string>
     <string name="shared_string_app_default_w_val">Aplicativo padrão (%s)</string>
     <string name="no_recalculation_setting">Sem recálculo</string>
@@ -3452,7 +3452,7 @@
 \nPode levar algum tempo.</string>
     <string name="items_added">Itens adicionados</string>
     <string name="shared_string_import_complete">Importação concluída</string>
-    <string name="import_complete_description">Todos os dados do %1$s são importados. Você pode usar os botões abaixo para abrir a parte necessária do aplicativo para gerenciá-lo.</string>
+    <string name="import_complete_description">Todos os dados importados de %1$s. Use os botões abaixo para abrir qualquer parte do aplicativo e gerenciá-lo.</string>
     <string name="recalculate_route_distance_promo">A rota será recalculada se a distância da rota até o local atual for maior que o valor selecionado.</string>
     <string name="select_distance_route_will_recalc">Selecione a distância após a qual o percurso será recalculado.</string>
     <string name="recalculate_route_in_deviation">Recalcular rota em caso de desvio</string>
@@ -3461,12 +3461,12 @@
     <string name="slope_description">A inclinação usa cores para visualizar a inclinação do terreno.</string>
     <string name="terrain_slider_description">Defina os níveis mínimo e máximo de zoom nos quais a camada será exibida.</string>
     <string name="hillshade_download_description">Mapas adicionais são necessários para visualizar sombras de relevo no mapa.</string>
-    <string name="slope_download_description">Mapas adicionais são necessários para visualizar as Inclinações no mapa.</string>
-    <string name="slope_read_more">Você pode ler mais sobre pistas em %1$s.</string>
+    <string name="slope_download_description">Mapas adicionais são necessários para visualizar as inclinações no mapa.</string>
+    <string name="slope_read_more">Leia mais sobre pistas em %1$s.</string>
     <string name="shared_string_transparency">Transparência</string>
     <string name="shared_string_zoom_levels">Níveis de zoom</string>
     <string name="shared_string_legend">Legenda</string>
-    <string name="terrain_empty_state_text">Ativar para visualizar mapa de colinas ou declives. Você pode ler mais sobre esses tipos de mapa em nosso site.</string>
+    <string name="terrain_empty_state_text">Mostra sombras de relevo ou declives no mapa. Leia mais sobre esses tipos de mapa em nosso site.</string>
     <string name="shared_string_hillshade">Sombras de relevo</string>
     <string name="n_items_of_z">%1$s de %2$s</string>
     <string name="download_slope_maps">Encostas</string>
@@ -3507,7 +3507,7 @@
     <string name="reset_items_descr">Ocultar configurações redefine-as para o estado original.</string>
     <string name="main_actions_descr">Só tem quatro botões.</string>
     <string name="main_actions">Principais ações</string>
-    <string name="move_inside_category">Você pode mover itens somente dentro desta categoria.</string>
+    <string name="move_inside_category">Os itens só podem ser movidos dentro desta categoria.</string>
     <string name="developer_plugin">Plugin do desenvolvedor</string>
     <string name="shared_string_items">Itens</string>
     <string name="select_wikipedia_article_langs">Selecione os idiomas para os artigos da Wikipédia no mapa. Alterne para qualquer idioma disponível enquanto lê o artigo.</string>
@@ -3581,7 +3581,7 @@
 \n  • Corrigidos bugs com RTL
 \n
 \n</string>
-    <string name="additional_actions_descr">Você pode acessar essas ações tocando no botão “%1$s”.</string>
+    <string name="additional_actions_descr">Acesse essas ações tocando no botão “%1$s”.</string>
     <string name="quick_action_transport_descr">Botão que mostra ou oculta o transporte público no mapa.</string>
     <string name="create_edit_poi">Criar ou editar POI</string>
     <string name="parking_positions">Posições de estacionamento</string>
@@ -3632,7 +3632,7 @@
     <string name="online_map_name_helper_text">Forneça um nome para a fonte do mapa online.</string>
     <string name="online_map_url_helper_text">Digite ou cole o URL da fonte online.</string>
     <string name="edit_online_source">Editar fonte online</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Você pode exportar ou importar ações rápidas com perfis de aplicativos.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Exporte ou importe ações rápidas com perfis de aplicativos.</string>
     <string name="shared_string_delete_all_q">Excluir tudo\?</string>
     <string name="delete_all_actions_message_q">Excluir irrevogavelmente %d ações rápidas\?</string>
     <string name="screen_timeout">Tempo limite da tela</string>
@@ -3647,7 +3647,7 @@
     <string name="add_online_source">Adicionar fonte online</string>
     <string name="clear_tiles_warning">A aplicação dessas alterações limpará os dados em cache dessa origem de bloco</string>
     <string name="vessel_height_warning_link">Definir altura da embarcação</string>
-    <string name="vessel_height_warning">Você pode definir a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
+    <string name="vessel_height_warning">Defina uma altura da embarcação para evitar pontes baixas. Se a ponte for móvel, a altura quando aberta é usada.</string>
     <string name="vessel_height_limit_description">Defina a altura da embarcação para evitar pontes baixas. Lembre-se, se a ponte for móvel, usaremos sua altura no estado aberto.</string>
     <string name="vessel_width_limit_description">Defina a largura da embarcação para evitar pontes estreitas</string>
     <string name="quick_action_showhide_mapillary_descr">Uma alternância para mostrar ou ocultar a camada Mapillary no mapa.</string>
@@ -3690,7 +3690,7 @@
     <string name="set_working_days_to_continue">Defina dias úteis para continuar</string>
     <string name="route_between_points">Rota entre pontos</string>
     <string name="plan_a_route">Planejar uma rota</string>
-    <string name="add_hidden_group_info">O ponto adicionado não será visível no mapa, já que o grupo selecionado está oculto, você pode encontrá-lo em \"%s\".</string>
+    <string name="add_hidden_group_info">O ponto adicionado pode ser encontrado em \"%s\". Reexibir o grupo selecionado para mostrá-lo no mapa.</string>
     <string name="track_show_start_finish_icons">Mostrar ícones de início e fim</string>
     <string name="select_track_width">Selecionar largura</string>
     <string name="gpx_split_interval_descr">Selecione o intervalo no qual as marcas com distância ou tempo na pista serão exibidas.</string>
@@ -3835,10 +3835,10 @@
     <string name="subscription_on_hold_title">A assinatura do OsmAnd Live está em espera</string>
     <string name="login_open_street_map">Entrar com OpenStreetMap</string>
     <string name="login_open_street_map_org">Entrar com OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">Você precisa entrar para carregar de alterações novas ou modificadas.
+    <string name="open_street_map_login_mode">Entre para carregar as alterações novas ou modificadas primeiro.
 \n
-\nVocê pode fazer login usando o método OAuth seguro ou usar sua entrada e senha.</string>
-    <string name="use_login_password">Usar entrada e senha</string>
+\nUse o método OAuth ou seu nome de usuário e senha OSM.</string>
+    <string name="use_login_password">Use nome de usuário e senha</string>
     <string name="login_account">Conta</string>
     <string name="user_login">Entrar</string>
     <string name="sign_in_with_open_street_map">Entrar com o OpenStreetMap</string>
@@ -3851,7 +3851,7 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Rastreável\" significa que o rastreamento não aparece em nenhuma listagem pública, mas os pontos de trilha processados com carimbos de data/hora (que não podem ser associados a você diretamente) são feitos por meio de downloads da API GPS pública.</string>
     <string name="osm_edit_close_note">Fechar nota do OSM</string>
     <string name="osm_edit_comment_note">Comentário de nota do OSM</string>
-    <string name="osm_login_descr">Você pode entrar usando o método OAuth seguro ou usar sua entrada e senha.</string>
+    <string name="osm_login_descr">Entre usando o método OAuth ou seu nome de usuário e senha do OSM.</string>
     <string name="shared_string_add_photo">Adicionar foto</string>
     <string name="register_on_openplacereviews">Cadastre-se em
 \nOpenPlaceReviews.org</string>
@@ -3973,11 +3973,9 @@
     <string name="uploaded_count">Carregado %1$d de %2$d</string>
     <string name="toast_select_edits_for_upload">Selecione as edições para carregamento</string>
     <string name="hillshade_slope_contour_lines">Sombras de relevo / Encostas / Curvas de nível</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews é um projeto conduzido pela comunidade sobre locais públicos como restaurantes, hotéis, museus, pontos de passagem. Ele coleta todas as informações públicas sobre eles, como fotos, comentários, links para outros sistemas, link OpenStreetMap, Wikipédia.
+    <string name="open_place_reviews_plugin_description">Envie fotos, comentários e links sobre locais públicos, como restaurantes, hotéis, museus e pontos de referência como dados abertos https://openplacereviews.org/data/.
 \n
-\nTodos os dados do OpenPlaceReview estão abertos e disponíveis para todos: http://openplacereviews.org/data.
-\n
-\nVocê pode ler mais em: http://openplacereviews.org</string>
+\nLeia mais em http://openplacereviews.org</string>
     <string name="activity_type_motorbike_name">Motorbike</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
@@ -4116,14 +4114,14 @@
     <string name="verify_email_address_descr">Código de verificação enviado para %1$s. Por favor insira-o no campo abaixo.</string>
     <string name="cloud_email_not_registered">Este endereço de e-mail não está registrado para OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Este endereço de e-mail já está registrado.</string>
-    <string name="resend_verification_code">Reenviar código</string>
-    <string name="verification_code_missing">Não recebi o código de verificação</string>
-    <string name="verification_code_missing_description">O tempo de espera pelo código pode ser de 10 minutos, você também pode verificar sua pasta de spam. Se não ajudar, use o botão abaixo.</string>
-    <string name="select_nav_profile_dialog_message">O \'tipo de navegação\' controla como as rotas são calculadas. Você pode selecionar entre mecanismos de roteamento offline e online.</string>
+    <string name="resend_verification_code">Reenviar</string>
+    <string name="verification_code_missing">Não recebi um código de verificação</string>
+    <string name="verification_code_missing_description">Pode demorar 10 minutos. Use o botão abaixo se não estiver na sua pasta de spam.</string>
+    <string name="select_nav_profile_dialog_message">\'Tipo de navegação\' seleciona como as rotas são calculadas, com mecanismos de roteamento online e offline disponíveis.</string>
     <string name="loading_list_of_routing_services">Lista de carregamento de serviços de roteamento disponíveis</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Você pode usar modelos predefinidos ou adicionar roteamento on-line personalizado, suportado: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="osmand_online_routing_promo">Use modelos predefinidos ou adicione roteamento online OSRM, GraphHopper, OpenRouteService ou GPX.</string>
     <string name="shared_string_external">Externo</string>
     <string name="provided_by">Fornecido por %1$s</string>
     <string name="failed_loading_predefined_engines">Não foi possível carregar a lista de modelos predefinidos.
@@ -4190,7 +4188,7 @@
     <string name="terrain_maps">Mapas de terreno</string>
     <string name="nautical_depth">Profundidade náutica</string>
     <string name="advanced_widgets">Widgets avançados</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Pode obter “%1$s” como parte do plano: %2$s. Comparação:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Obtenha “%1$s” como parte do plano: %2$s. Comparação:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
     <string name="continue_with">Continue com %1$s</string>
     <string name="not_available_with">Não disponível com %1$s</string>
