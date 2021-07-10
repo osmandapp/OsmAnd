@@ -3467,7 +3467,7 @@
     <string name="select_distance_route_will_recalc">Wählen Sie die Entfernung, nach der die Route neu berechnet wird.</string>
     <string name="recalculate_route_in_deviation">Neuberechnung der Route im Falle einer Abweichung</string>
     <string name="recalculate_route_distance_promo">Die Route wird neu berechnet, wenn die Entfernung von der Route zur aktuellen Position größer als der ausgewählte Wert ist.</string>
-    <string name="import_complete_description">Alle Daten aus %1$s werden importiert. Sie können die Schaltflächen unten verwenden, um den benötigten Teil der Anwendung zu öffnen und sie zu verwalten.</string>
+    <string name="import_complete_description">Es wurden alle Daten aus dem %1$s importiert. Verwenden Sie die Schaltflächen unten, um einen beliebigen Teil der App zu öffnen und zu verwalten.</string>
     <string name="shared_string_square">Quadrat</string>
     <string name="shared_string_circle">Kreis</string>
     <string name="select_shape">Form auswählen</string>
@@ -3481,7 +3481,7 @@
     <string name="terrain_slider_description">Stellen Sie die minimale und maximale Zoomstufe ein, bei der die Ebene angezeigt wird.</string>
     <string name="shared_string_terrain">Gelände</string>
     <string name="download_slope_maps">Hangneigungen</string>
-    <string name="terrain_empty_state_text">Aktivieren Sie diese Option, um die Relief- oder Hangneigungskarte anzuzeigen. Weitere Informationen zu diesen Kartentypen finden Sie auf unserer Website.</string>
+    <string name="terrain_empty_state_text">Zeigt Relief oder Hangneigung auf der Karte. Weitere Informationen hierzu finden Sie auf unserer Website.</string>
     <string name="shared_string_legend">Legende</string>
     <string name="slope_read_more">Lesen Sie mehr über Hangneigungskarten in %1$s.</string>
     <string name="slope_download_description">Zusätzliche Karten sind erforderlich, um Hangneigungen auf der Karte anzuzeigen.</string>
@@ -3510,7 +3510,7 @@
     <string name="shared_string_hidden">Ausgeblendet</string>
     <string name="reset_items_descr">Das Ausblenden von Einstellungen setzt sie auf ihren ursprünglichen Zustand zurück.</string>
     <string name="main_actions">Hauptaktionen</string>
-    <string name="move_inside_category">Sie können Elemente nur innerhalb dieser Kategorie verschieben.</string>
+    <string name="move_inside_category">Elemente können nur innerhalb dieser Kategorie verschoben werden.</string>
     <string name="shared_string_items">Elemente</string>
     <string name="some_articles_may_not_available_in_lang">Einige Wikipedia-Artikel sind möglicherweise nicht in Ihrer Sprache verfügbar.</string>
     <string name="lang_zhyue">Kantonesisch</string>
@@ -3548,11 +3548,11 @@
     <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die entsprechenden Optionen oder Plugins funktionieren weiterhin.</string>
     <string name="reorder_or_hide_from">Ordnen Sie Elemente aus %1$s neu an oder blenden Sie sie aus.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">Die Bezahlung wird Ihrem Google Play-Konto bei der Bestätigung des Kaufs belastet.
+    <string name="osm_live_payment_subscription_management">Die Zahlung wird von Ihrem Google Play Konto abgebucht, wenn Sie den Kauf bestätigen.
 \n
-\n Das Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird für den Verlängerungszeitraum (Monat / drei Monate / Jahr) nur am Verlängerungsdatum belastet.
+\n Das Abonnement verlängert sich automatisch, sofern es nicht vor dem Verlängerungsdatum gekündigt wird.
 \n
-\n Sie können Ihre Abonnements verwalten und kündigen, indem Sie zu Ihren Google Play-Einstellungen gehen.</string>
+\n Sie können Ihre Abonnements über Ihre Google Play Einstellungen verwalten und kündigen.</string>
     <string name="search_poi_types">Suche nach POI-Typen</string>
     <string name="search_poi_types_descr">Kombinieren Sie POI-Typen aus verschiedenen Kategorien. Tippen Sie auf den Schalter, um alle auszuwählen, tippen Sie auf die linke Seite zur Kategorieauswahl.</string>
     <string name="shared_string_divider">Trenner</string>
@@ -3589,7 +3589,7 @@
 \n
 \n</string>
     <string name="shared_string_resume">Fortfahren</string>
-    <string name="additional_actions_descr">Sie können auf diese Aktionen zugreifen, indem Sie auf die Schaltfläche \"%1$s\" tippen.</string>
+    <string name="additional_actions_descr">Greifen Sie auf diese Aktionen zu, indem Sie auf die Schaltfläche \"%1$s\" tippen.</string>
     <string name="quick_action_transport_descr">Schaltfläche zum Ein- oder Ausblenden der öffentlichen Verkehrsmittel auf der Karte.</string>
     <string name="create_edit_poi">POI erstellen oder bearbeiten</string>
     <string name="parking_positions">Parkpositionen</string>
@@ -3647,7 +3647,7 @@
     <string name="width_limit_description">Geben Sie Ihre Fahrzeugbreite an. Für breite Fahrzeuge können einige Routenbeschränkungen gelten.</string>
     <string name="height_limit_description">Geben Sie Ihre Fahrzeughöhe an, für hohe Fahrzeuge können einige Routenbeschränkungen gelten.</string>
     <string name="weight_limit_description">Geben Sie Ihr Fahrzeuggewicht an, für schwere Fahrzeuge können einige Routenbeschränkungen gelten.</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Sie können Schnellaktionen mit Anwendungsprofilen exportieren oder importieren.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Schnellaktionen mit Anwendungsprofilen exportieren oder importieren.</string>
     <string name="shared_string_delete_all_q">Alles löschen\?</string>
     <string name="delete_all_actions_message_q">%d Schnellaktionen unwiderruflich löschen\?</string>
     <string name="shared_string_tones">Tonnen</string>
@@ -3659,7 +3659,7 @@
     <string name="add_online_source">Online-Quelle hinzufügen</string>
     <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
     <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
-    <string name="vessel_height_warning">Sie können die Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Denken Sie daran, wenn die Brücke beweglich ist, werden wir ihre Höhe im offenen Zustand verwenden.</string>
+    <string name="vessel_height_warning">Stellen Sie die Schiffshöhe ein, um niedrige Brücken zu vermeiden. Wenn die Brücke beweglich ist, wird die Höhe im geöffneten Zustand verwendet.</string>
     <string name="vessel_height_limit_description">Schiffshöhe einstellen, um niedrige Brücken zu vermeiden. Beachten Sie: Wenn die Brücke beweglich ist, verwendet die Berechnung ihre Höhe im geöffneten Zustand.</string>
     <string name="vessel_width_limit_description">Stellen Sie die Schiffsbreite ein, um schmale Brücken zu vermeiden</string>
     <string name="quick_action_showhide_mapillary_descr">Eine Umschaltfläche zum Ein- oder Ausblenden des Mapillary-Layers auf der Karte.</string>
@@ -3702,7 +3702,7 @@
     <string name="route_between_points">Route zwischen Punkten</string>
     <string name="plan_a_route">Eine Route planen</string>
     <string name="add_to_a_track">Zu einem Track hinzufügen</string>
-    <string name="add_hidden_group_info">Der hinzugefügte Punkt wird auf der Karte nicht sichtbar sein, da die ausgewählte Gruppe ausgeblendet ist, Sie können ihn in \"%s\" finden.</string>
+    <string name="add_hidden_group_info">Der hinzugefügte Punkt befindet sich in \"%s\". Blenden Sie die ausgewählte Gruppe ein, um sie in der Karte anzuzeigen.</string>
     <string name="track_show_start_finish_icons">Start- und Ziel-Symbole anzeigen</string>
     <string name="select_track_width">Breite auswählen</string>
     <string name="gpx_split_interval_descr">Wählen Sie das Intervall, in dem Markierungen mit Abstand oder Zeit auf dem Track angezeigt werden.</string>
@@ -3802,11 +3802,11 @@
     <string name="start_finish_icons">Start- und Zielsymbole</string>
     <string name="contour_lines_thanks">Vielen Dank für den Kauf von \'Höhenlinien\'</string>
     <string name="osm_live_payment_desc_hw">Das Abonnement wird für den gewählten Zeitraum berechnet. Sie können es jederzeit in Ihrer AppGallery kündigen.</string>
-    <string name="osm_live_payment_subscription_management_hw">Ihr AppGallery-Konto wird mit der Kaufbestätigung belastet.
+    <string name="osm_live_payment_subscription_management_hw">Die Zahlung wird von Ihrem AppGallery Konto abgebucht, wenn Sie den Kauf bestätigen.
 \n
-\nDas Abonnement verlängert sich automatisch, wenn es nicht vor dem Verlängerungsdatum gekündigt wird. Ihr Konto wird erst am Verlängerungsdatum für den Verlängerungszeitraum (Monat/drei Monate/Jahr) belastet.
+\nDas Abonnement verlängert sich, wenn es nicht vor dem gewählten Verlängerungszeitraum gekündigt wird.
 \n
-\nSie können Ihre Abonnements in Ihren AppGallery-Einstellungen verwalten und kündigen.</string>
+\nSie können Ihre Abonnements in Ihren AppGallery Einstellungen verwalten und kündigen.</string>
     <string name="routing_attr_avoid_footways_description">Vermeidet Fußwege</string>
     <string name="routing_attr_avoid_footways_name">Keine Fußwege</string>
     <string name="development">Entwicklung</string>
@@ -3847,9 +3847,9 @@
     <string name="login_open_street_map">Bei OpenStreetMap anmelden</string>
     <string name="login_open_street_map_org">Bei OpenStreetMap.org anmelden</string>
     <string name="sign_in_with_open_street_map">Anmelden mit OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Sie müssen sich anmelden, um Änderungen hochzuladen.
+    <string name="open_street_map_login_mode">Anmelden, um Änderungen hochzuladen.
 \n
-\nSie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Ihr Passwort verwenden.</string>
+\nVerwenden Sie die OAuth Methode oder Ihren OSM Benutzernamen und Ihr Passwort.</string>
     <string name="use_login_password">Benutzername und Passwort verwenden</string>
     <string name="login_account">Konto</string>
     <string name="user_login">Anmelden</string>
@@ -3862,7 +3862,7 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Verfolgbar\" bedeutet, dass die Spur nicht in öffentlichen Auflistungen auftaucht, aber verarbeitete Trackpunkte mit Zeitstempeln davon (die nicht direkt mit Ihnen in Verbindung gebracht werden können) durch Downloads von der öffentlichen GPS API.</string>
     <string name="osm_edit_close_note">OSM-Hinweis schließen</string>
     <string name="osm_edit_comment_note">OSM-Hinweis kommentieren</string>
-    <string name="osm_login_descr">Sie können sich mit der sicheren OAuth-Methode anmelden oder Ihren Benutzernamen und Ihr Passwort verwenden.</string>
+    <string name="osm_login_descr">Melden Sie sich mit der OAuth Methode oder mit Ihrem OSM Benutzernamen und Passwort an.</string>
     <string name="shared_string_add_photo">Foto hinzufügen</string>
     <string name="register_on_openplacereviews">Registrieren bei
 \nOpenPlaceReviews.org</string>
@@ -3980,11 +3980,9 @@
     <string name="uploaded_count">%1$d von %2$d hochgeladen</string>
     <string name="toast_select_edits_for_upload">Bearbeitungen zum Hochladen auswählen</string>
     <string name="hillshade_slope_contour_lines">Relief / Hangneigung / Höhenlinien</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews ist ein von der Gemeinschaft betriebenes Projekt über öffentliche Orte wie Restaurants, Hotels, Museen, Wegpunkte. Es sammelt alle öffentlichen Informationen über sie wie Fotos, Bewertungen, Links zu anderen Systemen, Link OpenStreetMap, Wikipedia.
+    <string name="open_place_reviews_plugin_description">Senden Sie Fotos, Bewertungen und Links zu öffentlichen Orten wie Restaurants, Hotels, Museen und Wegpunkten als offene Daten an https://openplacereviews.org/data/.
 \n
-\nAlle OpenPlaceReview-Daten sind offen und für jedermann zugänglich: http://openplacereviews.org/data.
-\n
-\nMehr Informationen finden Sie unter: http://openplacereviews.org</string>
+\nLesen Sie mehr unter https://openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">test.openplacereviews.org verwenden</string>
     <string name="login_open_place_reviews">Anmelden bei OpenPlaceReviews</string>
@@ -4111,7 +4109,7 @@
     <string name="osmand_cloud_authorize_descr">Kein Datenverlust mehr, problemlose Sicherung und Wiederherstellung aller Informationen.</string>
     <string name="osmand_cloud_create_account_descr">Bitte geben Sie Ihre E-Mail Adresse ein. Ein Bestätigungscode wird dorthin gesendet,
 \nund alle Ihre Daten werden damit verknüpft.</string>
-    <string name="verification_code_missing_description">Die Wartezeit für den Code kann 10 Minuten betragen, außerdem können Sie Ihren Spamordner überprüfen. Wenn dies nicht hilft, verwenden Sie die Schaltfläche unten.</string>
+    <string name="verification_code_missing_description">Kann 10 Minuten dauern. Verwenden Sie die Schaltfläche unten, wenn sie nicht in Ihrem Spam Ordner ist.</string>
     <string name="backup_and_restore">Backup und Wiederherstellen</string>
     <string name="last_backup">Letztes Backup</string>
     <string name="duration_ago">vor %1$s</string>
@@ -4126,13 +4124,13 @@
     <string name="verify_email_address_descr">Bestätigungscode wurde an %1$s gesendet. Bitte geben Sie ihn in das Feld unten ein.</string>
     <string name="cloud_email_not_registered">Diese E-Mail Adresse ist nicht für OsmAnd Cloud registriert</string>
     <string name="cloud_email_already_registered">Diese E-Mail Adresse ist bereits registriert.</string>
-    <string name="resend_verification_code">Code erneut senden</string>
+    <string name="resend_verification_code">Erneut senden</string>
     <string name="verification_code_missing">Ich habe keinen Bestätigungscode erhalten</string>
-    <string name="select_nav_profile_dialog_message">Die \'Navigationsart\' bestimmt, wie Routen berechnet werden. Sie können zwischen Offline- und Online-Routenplanern wählen.</string>
+    <string name="select_nav_profile_dialog_message">\'Navigationsart\' bestimmt, wie Routen mit den verfügbaren Offline- und Online-Routenplanern berechnet werden.</string>
     <string name="loading_list_of_routing_services">Lade Liste der verfügbaren Routingdienste</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Sie können vordefinierte Vorlagen verwenden oder benutzerdefinierte Online-Routen hinzufügen. Unterstützt wird: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="osmand_online_routing_promo">Verwenden Sie vordefinierte Vorlagen, oder fügen Sie OSRM, GraphHopper, OpenRouteService oder GPX Online-Routing hinzu.</string>
     <string name="shared_string_external">Extern</string>
     <string name="provided_by">Bereitgestellt von %1$s</string>
     <string name="failed_loading_predefined_engines">Die Liste der vordefinierten Vorlagen konnte nicht geladen werden.
@@ -4206,7 +4204,7 @@
     <string name="purchases_feature_desc_advanced_widgets">Erhalten Sie Zugang zu weiterführenden OsmAnd Widgets.</string>
     <string name="purchases_feature_desc_osmand_cloud">Holen Sie sich die OsmAnd Cloud, um alle OsmAnd Daten online zu speichern. Kein Datenverlust nach Neuinstallation. Sichern Sie und stellen Sie alle Infos einfach wieder her.</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Geländekarten: Höhenlinien, Relief, Hangneigung</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Sie erhalten „%1$s“ als Teil des Tarifs %2$s. Vergleich:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Erhalten Sie „%1$s“ als Teil des Tarifs %2$s. Vergleich:</string>
     <string name="not_available_with">Nicht verfügbar mit %1$s</string>
     <string name="redeem_promo_code">Aktionscode einlösen</string>
     <string name="from_with_param">Von %1$s</string>
