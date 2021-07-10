@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -20,15 +21,13 @@ import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
-import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
-import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
+import net.osmand.router.RouteStatisticsHelper.RouteStatisticComputer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -62,22 +61,32 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	                                @NonNull RouteColoringType routeColoringType,
 	                                @Nullable String routeInfoAttribute) {
 		this.needUpdate = this.routeColoringType != routeColoringType
-				|| !Algorithms.objectEquals(this.routeColoringType, routeColoringType);
+				|| routeColoringType == RouteColoringType.ATTRIBUTE
+				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
-		if (!Algorithms.objectEquals(customWidth, width)) {
-			for (GeometryWayStyle<?> style : styleMap.values()) {
-				style.width = width;
-			}
+		boolean widthChanged = !Algorithms.objectEquals(customWidth, width);
+		if (widthChanged) {
+			updateStylesWidth(width);
 		}
+		updatePaints(width, routeColoringType);
+
 		this.customColor = color;
 		this.customWidth = width;
 		this.customPointColor = pointColor;
 		this.routeColoringType = routeColoringType;
 		this.routeInfoAttribute = routeInfoAttribute;
+	}
+
+	private void updateStylesWidth(@Nullable Float newWidth) {
+		for (GeometryWayStyle<?> style : styleMap.values()) {
+			style.width = newWidth;
+		}
+	}
+
+	private void updatePaints(@Nullable Float width, @NonNull RouteColoringType routeColoringType) {
 		if (width != null) {
 			getContext().getAttrs().shadowPaint.setStrokeWidth(width + getContext().getDensity() * 2);
 		}
-
 		Paint.Cap cap = routeColoringType.isGradient() || routeColoringType.isRouteInfoAttribute() ?
 				Paint.Cap.ROUND : getContext().getAttrs().paint.getStrokeCap();
 		getContext().getAttrs().customColorPaint.setStrokeCap(cap);
@@ -127,6 +136,82 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	}
 
 	private void updateSolidMultiColorRoute(RotatedTileBox tileBox, RouteCalculationResult route) {
+		List<Integer> colors = getRouteInfoAttributesColors(route);
+		if (Algorithms.isEmpty(colors)) {
+			updateWay(Collections.emptyList(), Collections.emptyMap(), tileBox);
+			return;
+		}
+
+		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
+
+		for (int i = 0; i < colors.size(); ) {
+			int color = colors.get(i);
+			GeometrySolidWayStyle style = getSolidWayStyle(color);
+			styleMap.put(i, style);
+
+			i++;
+			while (i < colors.size() && colors.get(i) == color) {
+				i++;
+			}
+		}
+
+		updateWay(route.getImmutableAllLocations(), styleMap, tileBox);
+	}
+
+	private List<Integer> getRouteInfoAttributesColors(RouteCalculationResult route) {
+		List<Location> locations = route.getImmutableAllLocations();
+		List<RouteSegmentResult> routeSegments = route.getOriginalRoute();
+		if (Algorithms.isEmpty(routeSegments)) {
+			return Collections.emptyList();
+		}
+
+		int firstSegmentLocationIdx = getIdxOfFirstSegmentLocation(locations, routeSegments);
+
+		RouteStatisticComputer statisticComputer = createRouteStatisticsComputer();
+		List<Integer> colors = new ArrayList<>(locations.size());
+		for (int i = 0; i < routeSegments.size(); i++) {
+			RouteSegmentResult segment = routeSegments.get(i);
+			RouteSegmentAttribute attribute =
+					statisticComputer.classifySegment(routeInfoAttribute, -1, segment.getObject());
+			int color = attribute.getColor();
+
+			if (i == 0) {
+				for (int j = 0; j < firstSegmentLocationIdx; j++) {
+					colors.add(color);
+				}
+			}
+
+			int pointsSize = Math.abs(segment.getStartPointIndex() - segment.getEndPointIndex());
+			for (int j = 0; j < pointsSize; j++) {
+				colors.add(color);
+			}
+
+			if (i == routeSegments.size() - 1) {
+				int start = colors.size();
+				for (int j = start; j < locations.size(); j++) {
+					colors.add(color);
+				}
+			}
+		}
+
+		return colors;
+	}
+
+	private int getIdxOfFirstSegmentLocation(List<Location> locations, List<RouteSegmentResult> routeSegments) {
+		int locationsIdx = 0;
+		LatLon segmentStartPoint = routeSegments.get(0).getStartPoint();
+		while (true) {
+			Location location = locations.get(locationsIdx);
+			if (location.getLatitude() == segmentStartPoint.getLatitude()
+					&& location.getLongitude() == segmentStartPoint.getLongitude()) {
+				break;
+			}
+			locationsIdx++;
+		}
+		return locationsIdx;
+	}
+
+	private RouteStatisticComputer createRouteStatisticsComputer() {
 		OsmandApplication app = getContext().getApp();
 		boolean night = app.getDaynightHelper().isNightModeForMapControls();
 		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
@@ -137,19 +222,8 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		RenderingRuleSearchRequest defaultSearchRequest =
 				maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, night);
 
-		List<RouteSegmentResult> routeSegments = route.getOriginalRoute();
-		List<RouteStatistics> routeStatisticsList = RouteStatisticsHelper.calculateRouteStatistic(routeSegments,
-				Collections.singletonList(routeInfoAttribute), currentRenderer,
-				defaultRenderer, currentSearchRequest, defaultSearchRequest);
-
-		List<Location> locations = new ArrayList<>();
-		RouteStatistics routeStatistics = routeStatisticsList.get(0);
-
-		Map<Integer, GeometryWayStyle<?>> styleMap = new HashMap<>();
-		for (RouteSegmentAttribute attr : routeStatistics.elements) {
-			// TODO
-		}
-		updateWay(locations, styleMap, tileBox);
+		return new RouteStatisticComputer(currentRenderer, defaultRenderer,
+				currentSearchRequest, defaultSearchRequest);
 	}
 
 	@Override
@@ -189,9 +263,10 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				gradientWayStyle.nextColor = nextColor;
 			}
 		} else if (routeColoringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle) {
-			GeometrySolidWayStyle solidWayStyle = (GeometrySolidWayStyle) style;
+			GeometrySolidWayStyle prevStyle = (GeometrySolidWayStyle) style;
 			GeometrySolidWayStyle transparentWayStyle = getSolidWayStyle(Color.TRANSPARENT);
-			solidWayStyle.color = getStyle(startLocationIndex, transparentWayStyle).color;
+			int prevStyleIdx = startLocationIndex > 0 ? startLocationIndex - 1 : 0;
+			prevStyle.color = getStyle(prevStyleIdx, transparentWayStyle).color;
 		}
 		return previousVisible;
 	}

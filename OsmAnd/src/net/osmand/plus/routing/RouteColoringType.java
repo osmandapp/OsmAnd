@@ -122,7 +122,8 @@ public enum RouteColoringType {
 
 		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
 		RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
-		List<String> rendererAttrs = RouteStatisticsHelper.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer);
+		List<String> rendererAttrs = RouteStatisticsHelper
+				.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, true);
 		if (Algorithms.isEmpty(rendererAttrs) || !rendererAttrs.contains(attributeName)) {
 			return false;
 		}

@@ -18,6 +18,7 @@ public class RouteStatisticsHelper {
 
 	public static final String UNDEFINED_ATTR = "undefined";
 	public static final String ROUTE_INFO_PREFIX = "routeInfo_";
+
 	private static final double H_STEP = 5;
 	private static final double H_SLOPE_APPROX = 100;
 	private static final int MIN_INCLINE = -101;
@@ -27,6 +28,8 @@ public class RouteStatisticsHelper {
 	private static final int STEP = 4;
 	private static final int[] BOUNDARIES_ARRAY;
 	private static final String[] BOUNDARIES_CLASS;
+
+	private static final String ROUTE_INFO_STEEPNESS = "routeInfo_steepness";
 
 	static {
 		int NUM = ((MAX_DIVIDED_INCLINE - MIN_DIVIDED_INCLINE) / STEP) + 3;
@@ -100,7 +103,7 @@ public class RouteStatisticsHelper {
 		List<RouteSegmentWithIncline> routeSegmentWithInclines = calculateInclineRouteSegments(route);
 		List<RouteStatistics>  result = new ArrayList<>();
 		if (Algorithms.isEmpty(attributesNames)) {
-			attributesNames = getRouteStatisticAttrsNames(currentRenderer, defaultRenderer);
+			attributesNames = getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, false);
 		}
 		for (String attr : attributesNames) {
 			RouteStatisticComputer statisticComputer =
@@ -115,7 +118,8 @@ public class RouteStatisticsHelper {
 	}
 
 	public static List<String> getRouteStatisticAttrsNames(RenderingRulesStorage currentRenderer,
-	                                                       RenderingRulesStorage defaultRenderer) {
+	                                                       RenderingRulesStorage defaultRenderer,
+	                                                       boolean excludeSteepness) {
 		List<String> attributeNames = new ArrayList<>();
 		if (currentRenderer != null) {
 			for (String s : currentRenderer.getRenderingAttributeNames()) {
@@ -130,6 +134,9 @@ public class RouteStatisticsHelper {
 					attributeNames.add(s);
 				}
 			}
+		}
+		if (excludeSteepness) {
+			attributeNames.remove(ROUTE_INFO_STEEPNESS);
 		}
 		return attributeNames;
 	}
@@ -250,14 +257,14 @@ public class RouteStatisticsHelper {
 	}
 
 
-	private static class RouteStatisticComputer {
+	public static class RouteStatisticComputer {
 
 		final RenderingRulesStorage currentRenderer;
 		final RenderingRulesStorage defaultRenderer;
 		final RenderingRuleSearchRequest currentRenderingRuleSearchRequest;
 		final RenderingRuleSearchRequest defaultRenderingRuleSearchRequest;
 
-		RouteStatisticComputer(RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
+		public RouteStatisticComputer(RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
 		                       RenderingRuleSearchRequest currentRenderingRuleSearchRequest,
 		                       RenderingRuleSearchRequest defaultRenderingRuleSearchRequest) {
 			this.currentRenderer = currentRenderer;
@@ -323,7 +330,7 @@ public class RouteStatisticsHelper {
 			RouteSegmentAttribute prev = null;
 			for (RouteSegmentWithIncline segment : route) {
 				if(segment.slopeClass == null || segment.slopeClass.length == 0) {
-					RouteSegmentAttribute current = classifySegment(attribute, -1, segment);
+					RouteSegmentAttribute current = classifySegment(attribute, -1, segment.obj);
 					current.distance = segment.dist;
 					if (prev != null && prev.getPropertyName() != null &&
 						prev.getPropertyName().equals(current.getPropertyName())) {
@@ -339,7 +346,7 @@ public class RouteStatisticsHelper {
 							prev.incrementDistanceBy(d);
 						} else {
 							RouteSegmentAttribute current = classifySegment(attribute, 
-									segment.slopeClass[i], segment);
+									segment.slopeClass[i], segment.obj);
 							current.distance = d;
 							if (prev != null && prev.getPropertyName() != null &&
 								prev.getPropertyName().equals(current.getPropertyName())) {
@@ -358,17 +365,17 @@ public class RouteStatisticsHelper {
 			return routes;
 		}
 
-
-		public RouteSegmentAttribute classifySegment(String attribute, int slopeClass, RouteSegmentWithIncline segment) {
+		public RouteSegmentAttribute classifySegment(String attribute, int slopeClass, RouteDataObject routeObject) {
 			RouteSegmentAttribute res = new RouteSegmentAttribute(UNDEFINED_ATTR, 0, -1);
 			RenderingRuleSearchRequest currentRequest = 
 					currentRenderer == null ? null : new RenderingRuleSearchRequest(currentRenderingRuleSearchRequest);
-			if (currentRenderer != null && searchRenderingAttribute(attribute, currentRenderer, currentRequest, segment, slopeClass)) {
+			if (currentRenderer != null
+					&& searchRenderingAttribute(attribute, currentRenderer, currentRequest, routeObject, slopeClass)) {
 				res = new RouteSegmentAttribute(currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE),
 						currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE), slopeClass);
 			} else {
 				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderingRuleSearchRequest);
-				if (searchRenderingAttribute(attribute, defaultRenderer, defaultRequest, segment, slopeClass)) {
+				if (searchRenderingAttribute(attribute, defaultRenderer, defaultRequest, routeObject, slopeClass)) {
 					res = new RouteSegmentAttribute(
 							defaultRequest.getStringPropertyValue(defaultRenderer.PROPS.R_ATTR_STRING_VALUE),
 							defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE), slopeClass);
@@ -378,14 +385,13 @@ public class RouteStatisticsHelper {
 		}
 
 		protected boolean searchRenderingAttribute(String attribute, RenderingRulesStorage rrs,
-		                                           RenderingRuleSearchRequest req, RouteSegmentWithIncline segment,
+		                                           RenderingRuleSearchRequest req, RouteDataObject routeObject,
 												   int slopeClass) {
 			//String additional = attrName + "=" + attribute;
 			boolean mainTagAdded = false;
 			StringBuilder additional = new StringBuilder(slopeClass >= 0 ? (BOUNDARIES_CLASS[slopeClass] + ";") : "");
-			RouteDataObject obj = segment.obj;
-			for (int type : obj.getTypes()) {
-				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(type);
+			for (int type : routeObject.getTypes()) {
+				BinaryMapRouteReaderAdapter.RouteTypeRule tp = routeObject.region.quickGetEncodingRule(type);
 				if (tp.getTag().equals("highway") || tp.getTag().equals("route")
 						|| tp.getTag().equals("railway") || tp.getTag().equals("aeroway")
 						|| tp.getTag().equals("aerialway") || tp.getTag().equals("piste:type")) {
