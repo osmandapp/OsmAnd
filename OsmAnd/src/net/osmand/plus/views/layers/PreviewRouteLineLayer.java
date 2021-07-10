@@ -291,7 +291,11 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			int idx = findNextPrevPointIdx(x, y, tx, ty, !rtl);
 			tx.add(idx, x);
 			ty.add(idx, y);
-			colorsArray[idx] = palette.get(i + 1);
+			int color = palette.get(i + 1);
+			colorsArray[idx] = color;
+			if (idx - 2 >= 0 && colorsArray[idx - 1] == 0) {
+				colorsArray[idx - 1] = colorsArray[idx - 2];
+			}
 		}
 
 		distances.clear();

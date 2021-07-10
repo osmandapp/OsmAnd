@@ -69,6 +69,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 			updateStylesWidth(width);
 		}
 		updatePaints(width, routeColoringType);
+		getDrawer().setRouteColoringType(routeColoringType);
 
 		this.customColor = color;
 		this.customWidth = width;
