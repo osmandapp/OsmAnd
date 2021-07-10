@@ -2,7 +2,6 @@ package net.osmand.plus.backup.ui;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,11 +19,9 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.ImportBackupTask;
-import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
 import net.osmand.plus.backup.PrepareBackupResult;
-import net.osmand.plus.backup.PrepareBackupTask;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -72,13 +69,12 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
-
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		toolbar.setTitle(R.string.restore_from_osmand_cloud);
-		description.setText(R.string.choose_what_to_restore);
-
+		if (view != null) {
+			Toolbar toolbar = view.findViewById(R.id.toolbar);
+			toolbar.setTitle(R.string.restore_from_osmand_cloud);
+			description.setText(R.string.choose_what_to_restore);
+		}
 		collectItems();
-
 		return view;
 	}
 

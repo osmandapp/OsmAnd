@@ -117,8 +117,15 @@ public class FileSettingsItem extends StreamSettingsItem {
 						}
 						break;
 					case TTS_VOICE:
-						if (name.startsWith(subtype.subtypeFolder) && name.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
-							return subtype;
+						if (name.startsWith(subtype.subtypeFolder)) {
+							if (name.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
+								return subtype;
+							} else if (name.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+								int lastPathDelimiter = name.lastIndexOf('/');
+								if (lastPathDelimiter != -1 && name.substring(0, lastPathDelimiter).endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
+									return subtype;
+								}
+							}
 						}
 						break;
 					default:

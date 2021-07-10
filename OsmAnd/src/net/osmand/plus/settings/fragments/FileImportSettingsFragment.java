@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

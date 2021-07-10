@@ -213,6 +213,7 @@ class BackupImporter {
 
 			for (Entry<String, RemoteFile> remoteFileEntry : remoteItemFilesMap.entrySet()) {
 				String itemFileName = remoteFileEntry.getKey();
+				RemoteFile remoteFile = remoteFileEntry.getValue();
 				boolean hasInfo = false;
 				for (String remoteInfoName : remoteInfoNames) {
 					if (itemFileName.equals(remoteInfoName) || itemFileName.startsWith(remoteInfoName + "/")) {
@@ -220,8 +221,8 @@ class BackupImporter {
 						break;
 					}
 				}
-				if (!hasInfo) {
-					noInfoRemoteItemFiles.add(remoteFileEntry.getValue());
+				if (!hasInfo && !remoteFile.isRecordedVoiceFile()) {
+					noInfoRemoteItemFiles.add(remoteFile);
 				}
 			}
 			operationLog.log("build noInfoRemoteItemFiles");

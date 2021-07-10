@@ -3,7 +3,6 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IProgress;
 import net.osmand.StreamWriter;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
@@ -20,7 +19,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +68,7 @@ public class NetworkWriter implements AbstractWriter {
 		}
 	}
 
+	@Nullable
 	private String uploadEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 							   @NonNull String fileName, long uploadTime) throws UserNotRegisteredException, IOException {
 		if (itemWriter.getItem() instanceof FileSettingsItem) {
@@ -79,6 +78,7 @@ public class NetworkWriter implements AbstractWriter {
 		}
 	}
 
+	@Nullable
 	private String uploadItemInfo(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime) throws IOException {
 		try {
 			JSONObject json = item.toJsonObj();
@@ -101,31 +101,25 @@ public class NetworkWriter implements AbstractWriter {
 		}
 	}
 
+	@Nullable
 	private String uploadItemFile(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 								  @NonNull String fileName, @Nullable OnUploadFileListener listener,
-								  long uploadTime) throws UserNotRegisteredException, IOException {
-		StreamWriter streamWriter = new StreamWriter() {
-			@Override
-			public void write(OutputStream outputStream, IProgress progress) throws IOException {
-				itemWriter.writeToStream(outputStream, progress);
-			}
-		};
-		return backupHelper.uploadFile(fileName, itemWriter.getItem().getType().name(), streamWriter, uploadTime, listener);
+								  long uploadTime) throws UserNotRegisteredException {
+		return backupHelper.uploadFile(fileName, itemWriter.getItem().getType().name(),
+				itemWriter::writeToStream, uploadTime, listener);
 	}
 
+	@Nullable
 	private String uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 									  @NonNull String fileName, long uploadTime) throws UserNotRegisteredException, IOException {
 		FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
-
 		long[] size = new long[1];
 		List<File> filesToUpload = new ArrayList<>();
 		collectDirFiles(item.getFile(), filesToUpload, size);
-
 		OnUploadFileListener uploadListener = getUploadDirListener(item, fileName, (int) (size[0] / 1024));
 		for (File file : filesToUpload) {
 			String name = BackupHelper.getFileItemName(file, item);
 			item.setInputStream(new FileInputStream(file));
-
 			String error = uploadItemFile(itemWriter, name, uploadListener, uploadTime);
 			if (error != null) {
 				return error;
@@ -148,6 +142,7 @@ public class NetworkWriter implements AbstractWriter {
 		}
 	}
 
+	@NonNull
 	private OnUploadFileListener getUploadFileListener(final @NonNull SettingsItem item) {
 		return new OnUploadFileListener() {
 
@@ -180,6 +175,7 @@ public class NetworkWriter implements AbstractWriter {
 		};
 	}
 
+	@NonNull
 	private OnUploadFileListener getUploadDirListener(@NonNull SettingsItem item, @NonNull String itemFileName, int itemWork) {
 		return new OnUploadFileListener() {
 

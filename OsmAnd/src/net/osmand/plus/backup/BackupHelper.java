@@ -386,6 +386,7 @@ public class BackupHelper {
 		prepareBackupListeners.remove(listener);
 	}
 
+	@Nullable
 	String uploadFile(@NonNull String fileName, @NonNull String type,
 					  @NonNull StreamWriter streamWriter, final long uploadTime,
 					  @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
@@ -671,7 +672,7 @@ public class BackupHelper {
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
 					ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
-					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
+					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType) || remoteFile.isRecordedVoiceFile()) {
 						continue;
 					}
 					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
