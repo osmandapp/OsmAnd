@@ -693,7 +693,7 @@
     <string name="shared_string_download_successful">Heruntergeladen</string>
     <string name="downloading_list_indexes">Die Liste der verfügbaren Regionen wird geladen …</string>
     <string name="list_index_files_was_not_loaded">Liste der Regionen konnte nicht von https://osmand.net abgerufen werden.</string>
-    <string name="select_index_file_to_download">Suche war erfolglos. Karten für nicht vorhandene Regionen können selbst erstellt werden, siehe https://osmand.net.</string>
+    <string name="select_index_file_to_download">Es wurde nichts gefunden, aber Sie können es selbst erstellen (siehe https://osmand.net).</string>
     <string name="fav_points_edited">Favorit wurde bearbeitet</string>
     <string name="fav_points_not_exist">Keine Favoriten vorhanden</string>
     <string name="update_existing">Ersetzen</string>
@@ -2499,7 +2499,7 @@
     <string name="passed">Zuletzt verwendet: %1$s</string>
     <string name="shared_string_markers">Markierungen</string>
     <string name="coordinates_format">Koordinatenformat</string>
-    <string name="fast_coordinates_input_descr">Format zur Koordinateneingabe wählen. Kann durch Anklicken von \'Einstellungen\' jederzeit geändert werden.</string>
+    <string name="fast_coordinates_input_descr">Format zur Koordinateneingabe wählen. Tippen Sie auf \"Optionen\", um es zu ändern.</string>
     <string name="fast_coordinates_input">Schnelle Koordinateneingabe</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Keine Eispisten oder Furten</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Vermeidet Eispisten und Furten.</string>
@@ -2960,7 +2960,7 @@
     <string name="app_mode_subway">U-Bahn</string>
     <string name="app_mode_horse">Pferd</string>
     <string name="app_mode_helicopter">Hubschrauber</string>
-    <string name="osmand_routing_promo">Sie können eine selbst modifizierte Version der Datei „routing.xml“ in „..osmand/routing“ hinzufügen</string>
+    <string name="osmand_routing_promo">Eine eigene modifizierte Version der Datei „routing.xml“ in „..osmand/routing“ hinzufügen</string>
     <string name="app_mode_skiing">Skifahren</string>
     <string name="select_icon_profile_dialog_title">Symbol auswählen</string>
     <string name="routing_profile_ski">Ski</string>
@@ -3251,7 +3251,7 @@
 \n • Weitere Fehlerlösungen
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Sie können diese Änderung auf alle oder nur auf das ausgewählte Profil anwenden.</string>
+    <string name="apply_preference_to_all_profiles">Diese Änderung auf alle oder nur auf das ausgewählte Profil anwenden.</string>
     <string name="shared_preference">Geteilt</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Bei der Navigation unbefestigte Straßen gegenüber befestigten bevorzugen.</string>
@@ -3355,8 +3355,8 @@
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
     <string name="rearrange_categories">Kategorien neu ordnen</string>
-    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierreihenfolge der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen als Profilen importieren oder exportieren.</string>
-    <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere Kategorien auswählen.</string>
+    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierreihenfolge der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen als Profile importieren oder exportieren.</string>
+    <string name="add_new_custom_category_button_promo">Neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
     <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen wurden auf den Standardzustand zurückgesetzt.</string>
     <string name="profile_prefs_reset_successful">Alle Profileinstellungen auf Standard zurückgesetzt.</string>
@@ -3417,7 +3417,7 @@
     <string name="shared_string_routing">Routing</string>
     <string name="shared_string_include_data">Zusätzliche Daten einschließen</string>
     <string name="import_profile_dialog_description">Das importierte Profil enthält zusätzliche Daten. Klicken Sie auf \"Importieren\", um nur Profildaten zu importieren, oder wählen Sie zusätzliche Daten aus.</string>
-    <string name="export_profile_dialog_description">Sie können zusätzliche Daten zum Exportieren zusammen mit dem Profil auswählen.</string>
+    <string name="export_profile_dialog_description">Zusätzliche Daten zum Exportieren zusammen mit dem Profil auswählen.</string>
     <string name="index_name_antarctica">Antarktis</string>
     <string name="osm_edits_view_descr">Betrachten Sie alle Ihre noch nicht hochgeladenen Bearbeitungen oder OSM-Hinweise in %1$s. Bereits hochgeladene Änderungen werden nicht mehr angezeigt.</string>
     <string name="monitoring_min_speed_descr_recommendation">Empfehlung: Versuchen Sie zunächst, die Bewegungserkennung über den Filter zur Mindestabstandsmessung (B) zu verwenden. Das kann zu besseren Ergebnissen führen und Sie werden weniger Daten verlieren. Sollten Ihre Tracks bei niedrigen Geschwindigkeiten ungenau bleiben, versuchen Sie hier Werte ungleich Null. Bitte beachten Sie, dass einige Messungen (einige netzwerkbasierte Methoden) möglicherweise überhaupt keine Geschwindigkeitswerte anzeigen. In diesem Fall wird nichts aufgezeichnet.</string>
