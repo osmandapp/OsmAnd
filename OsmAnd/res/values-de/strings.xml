@@ -264,7 +264,7 @@
     <string name="live_monitoring_start">Online-Aufzeichnung starten</string>
     <string name="live_monitoring_stop">Online-Aufzeichnung beenden</string>
     <string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
-    <string name="free_version_message">Sie können %1$s Karten herunterladen oder aktualisieren.</string>
+    <string name="free_version_message">%1$s Karten zum Herunterladen oder Aktualisieren.</string>
     <string name="free_version_title">Kostenlose Version</string>
     <string name="poi_context_menu_showdescription">POI-Beschreibung anzeigen.</string>
     <string name="index_name_north_america">Nordamerika</string>
@@ -2779,7 +2779,7 @@
     <string name="markers_remove_dialog_msg">Kartenmarkierung „%s“ löschen\?</string>
     <string name="edit_map_marker">Kartenmarkierung bearbeiten</string>
     <string name="third_party_application">Drittanbieter-App</string>
-    <string name="osm_live_plan_pricing">Plan und Preisgestaltung</string>
+    <string name="osm_live_plan_pricing">Tarife und Preise</string>
     <string name="osm_live_payment_monthly_title">Monatlich</string>
     <string name="osm_live_payment_3_months_title">Alle 3 Monate</string>
     <string name="osm_live_payment_annual_title">Jährlich</string>
@@ -3273,7 +3273,7 @@
     <string name="route_start_point">Startpunkt</string>
     <string name="default_speed_dialog_msg">Schätzt die Ankunftszeit für unbekannte Straßentypen und begrenzt die Geschwindigkeit für alle Straßen (kann die Navigation beeinflussen)</string>
     <string name="track_saved">Track gespeichert</string>
-    <string name="empty_filename">Leerer Dateiname</string>
+    <string name="empty_filename">Dateiname leer</string>
     <string name="shared_string_revert">Zurücksetzen</string>
     <string name="clear_confirmation_msg">%1$s löschen\?</string>
     <string name="suggested_maps">Vorgeschlagene Karten</string>
@@ -3355,7 +3355,7 @@
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
     <string name="rearrange_categories">Kategorien neu ordnen</string>
-    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierreihenfolge der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen mit Profilen importieren oder exportieren.</string>
+    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierreihenfolge der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen als Profilen importieren oder exportieren.</string>
     <string name="add_new_custom_category_button_promo">Sie können eine neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
     <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen wurden auf den Standardzustand zurückgesetzt.</string>
