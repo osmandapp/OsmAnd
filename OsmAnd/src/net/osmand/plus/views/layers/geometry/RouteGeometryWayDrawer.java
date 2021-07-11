@@ -57,7 +57,8 @@ public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayCo
 			canvas.drawPath(pathData.path, customPaint);
 		} else if (routeColoringType.isRouteInfoAttribute()) {
 			customPaint.setColor(pathData.style.color);
-			super.drawPath(canvas, pathData);
+			customPaint.setStrokeWidth(pathData.style.width);
+			canvas.drawPath(pathData.path, customPaint);
 		} else {
 			super.drawPath(canvas, pathData);
 		}
