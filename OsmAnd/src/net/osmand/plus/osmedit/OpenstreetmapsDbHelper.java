@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
@@ -16,11 +14,15 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
 
 
 public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
@@ -136,20 +138,19 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			}
 			db.execSQL("DELETE FROM " + OPENSTREETMAP_TABLE_NAME +
 					" WHERE " + OPENSTREETMAP_COL_ID + " = ?", new Object[]{p.getId()});
-			db.execSQL("INSERT INTO " + OPENSTREETMAP_TABLE_NAME +
-							" (" + OPENSTREETMAP_COL_ID + ", " +
-							OPENSTREETMAP_COL_LAT + ", " +
-							OPENSTREETMAP_COL_LON + ", " +
-							OPENSTREETMAP_COL_TAGS + ", " +
-							OPENSTREETMAP_COL_ACTION + ", " +
-							OPENSTREETMAP_COL_COMMENT + ", " +
-							OPENSTREETMAP_COL_CHANGED_TAGS + ", " +
-							OPENSTREETMAP_COL_ENTITY_TYPE + ")" +
-							" VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-					new Object[]{p.getId(), p.getLatitude(), p.getLongitude(), tags.toString(),
-							OsmPoint.stringAction.get(p.getAction()), p.getComment(),
-							chTags == null ? null : changedTags.toString(), Entity.EntityType.valueOf(entity)});
-			
+
+			Map<String, Object> rowsMap = new HashMap<>();
+			rowsMap.put(OPENSTREETMAP_COL_ID, p.getId());
+			rowsMap.put(OPENSTREETMAP_COL_LAT, p.getLatitude());
+			rowsMap.put(OPENSTREETMAP_COL_LON, p.getLongitude());
+			rowsMap.put(OPENSTREETMAP_COL_TAGS, tags.toString());
+			rowsMap.put(OPENSTREETMAP_COL_ACTION, OsmPoint.stringAction.get(p.getAction()));
+			rowsMap.put(OPENSTREETMAP_COL_COMMENT, p.getComment());
+			rowsMap.put(OPENSTREETMAP_COL_CHANGED_TAGS, chTags == null ? null : changedTags.toString());
+			rowsMap.put(OPENSTREETMAP_COL_ENTITY_TYPE, Entity.EntityType.valueOf(entity));
+
+			db.execSQL(Algorithms.createDbInsertQuery(OPENSTREETMAP_TABLE_NAME, rowsMap));
+
 			db.close();
 			checkOpenstreetmapPoints();
 			updateLastModifiedTime();

@@ -331,6 +331,28 @@ public class Algorithms {
 		return "";
 	}
 
+	public static <T> String encodeCollection(Collection<T> collection, String split, boolean shield) {
+		if (collection == null) {
+			return "";
+		}
+		StringBuilder res = new StringBuilder();
+		Iterator<T> iterator = collection.iterator();
+		while (iterator.hasNext()) {
+			T next = iterator.next();
+			if (shield) {
+				res.append("'");
+			}
+			res.append(next);
+			if (shield) {
+				res.append("'");
+			}
+			if (iterator.hasNext()) {
+				res.append(split);
+			}
+		}
+		return res.toString();
+	}
+
 	public static int findFirstNumberEndIndexLegacy(String value) {
 		// keep this method unmodified ! (to check old clients crashes on server side)
 		int i = 0;
@@ -1154,5 +1176,11 @@ public class Algorithms {
 			}
 		}
 		return stringPalette.toString();
+	}
+
+	public static String createDbInsertQuery(String tableName, Map<String, Object> rows) {
+		String keys = encodeCollection(rows.keySet(), ", ", false);
+		String values = encodeCollection(rows.values(), ", ", true);
+		return "INSERT INTO " + tableName + " (" + keys + ") VALUES (" + values + ")";
 	}
 }
