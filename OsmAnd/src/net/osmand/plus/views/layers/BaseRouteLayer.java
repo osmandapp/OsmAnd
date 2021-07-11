@@ -77,8 +77,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		attrs.defaultWidth = (int) (12 * density);
 		attrs.defaultWidth3 = (int) (7 * density);
 		attrs.defaultColor = view.getResources().getColor(R.color.nav_track);
-		attrs.shadowPaint.setColor(0x80000000);
-		attrs.shadowPaint.setStrokeCap(Paint.Cap.ROUND);
 		attrs.paint3.setStrokeCap(Paint.Cap.BUTT);
 		attrs.paint3.setColor(Color.WHITE);
 		attrs.paint2.setStrokeCap(Paint.Cap.BUTT);

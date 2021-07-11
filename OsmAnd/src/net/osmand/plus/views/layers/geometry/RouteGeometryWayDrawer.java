@@ -35,12 +35,11 @@ public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayCo
 	protected void drawFullBorder(Canvas canvas, int zoom, List<DrawPathData> pathsData) {
 		if (drawBorder && zoom < BORDER_TYPE_ZOOM_THRESHOLD
 				&& (routeColoringType.isGradient() || routeColoringType.isRouteInfoAttribute())) {
-			Paint borderPaint = getContext().getAttrs().shadowPaint;
 			Path fullPath = new Path();
 			for (DrawPathData data : pathsData) {
 				fullPath.addPath(data.path);
 			}
-			canvas.drawPath(fullPath, borderPaint);
+			canvas.drawPath(fullPath, getContext().getBorderPaint());
 		}
 	}
 
@@ -68,7 +67,7 @@ public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayCo
 	protected void drawSegmentBorder(Canvas canvas, int zoom, DrawPathData pathData) {
 		if (drawBorder && zoom >= BORDER_TYPE_ZOOM_THRESHOLD
 				&& (routeColoringType.isGradient() || routeColoringType.isRouteInfoAttribute())) {
-			canvas.drawPath(pathData.path, getContext().getAttrs().shadowPaint);
+			canvas.drawPath(pathData.path, getContext().getBorderPaint());
 		}
 	}
 }

@@ -86,7 +86,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 	private void updatePaints(@Nullable Float width, @NonNull RouteColoringType routeColoringType) {
 		if (width != null) {
-			getContext().getAttrs().shadowPaint.setStrokeWidth(width + getContext().getDensity() * 2);
+			getContext().updateBorderWidth(width);
 		}
 		Paint.Cap cap = routeColoringType.isGradient() || routeColoringType.isRouteInfoAttribute() ?
 				Paint.Cap.ROUND : getContext().getAttrs().paint.getStrokeCap();
