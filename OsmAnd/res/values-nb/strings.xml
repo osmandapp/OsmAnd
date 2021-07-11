@@ -2104,7 +2104,7 @@
     <string name="shared_string_markers">Markører</string>
     <string name="coordinates_format">Koordinatformat</string>
     <string name="use_system_keyboard">Bruk systemets tastatur</string>
-    <string name="fast_coordinates_input_descr">Velg format for koordinatinntasting. Du kan alltid endre det ved å trykke \'Alternativer\'.</string>
+    <string name="fast_coordinates_input_descr">Velg format for koordinatinntasting. Trykk \'Alternativer\' for å endre det.</string>
     <string name="fast_coordinates_input">Rask koordinatinntasting</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Ingen veier på is eller vadesteder</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Unngår veier på is og vadesteder.</string>
@@ -3496,7 +3496,7 @@
     <string name="no_recalculation_setting">Ingen ny beregning</string>
     <string name="please_provide_profile_name_message">Angi et navn for profilen</string>
     <string name="select_data_to_import">Velg data å importere.</string>
-    <string name="slope_read_more">Du kan lese mer om helninger på %1$s.</string>
+    <string name="slope_read_more">Les mer om helninger på %1$s.</string>
     <string name="reorder_or_hide_from">Omarranger eller skjul elementer fra %1$s.</string>
     <string name="divider_descr">Elementer under dette punktet er atskilt med en skillelinje.</string>
     <string name="reset_items_descr">Skjuling av innstillinger tilbakestiller dem til opprinnelig tilstand.</string>
@@ -3666,7 +3666,7 @@
     <string name="use_system_screen_timeout_promo">Avskrudd som forvalg: Skjermen vil ikke slås av så lenge OsmAnd kjører i forgrunnen.
 \n
 \nHvis påskrudd vil OsmAnd bruke systemets innstilling for skjermtidsavbrudd.</string>
-    <string name="terrain_empty_state_text">Slå på for å vise relieffskygge- eller bakkehelningskart. Du kan lese mer om disse karttypene på vårt nettsted.</string>
+    <string name="terrain_empty_state_text">Vis relieffskygger eller bakkehelninger på kartet. Les mer om disse karttypene på vårt nettsted.</string>
     <string name="reset_to_default_category_button_promo">«Tilbakestill til forvalg» gjenoppretter sorteringsrekkefølgen til installasjonsforvalg.</string>
     <string name="hillshade_description">Relieffskyggekart bruker mørke skygger for å vise bakkehelninger, topper og lavland.</string>
     <string name="recalculate_route_distance_promo">Ruten blir beregnet på nytt hvis avstanden fra ruten til nåværende posisjon er større enn valgt verdi.</string>
@@ -3777,7 +3777,7 @@
     <string name="message_you_need_add_two_points_to_show_graphs">Legg til minst to punkter</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Sporbar\" betyr at sporet ikke vil vises i offentlige lister, men bearbeidede sporpunkter med tidsstempel (som ikke direkte kan knyttes til deg) vil være tilgjengelig gjennom nedlastinger fra det offentlige GPS-API-et.</string>
     <string name="sign_in_with_open_street_map">Logg inn med OpenStreetMap</string>
-    <string name="use_login_password">Bruk innlogging og passord</string>
+    <string name="use_login_password">Bruk brukernavn og passord</string>
     <string name="login_account">Konto</string>
     <string name="send_files_to_openstreetmap">Send GPX-fil til OpenStreetMap</string>
     <string name="icon_group_amenity">Fasilitet</string>
@@ -3948,7 +3948,7 @@
     <string name="use_system_language">Bruk systemets språk</string>
     <string name="announce_when_exceeded">Annonser når overskredet</string>
     <string name="route_line_use_gradient_coloring">Rutelinjen er farget av høydeskråning.</string>
-    <string name="recorded_description">Innspilt stemme høres bedre ut, men kan kun uttale forhåndsinnspillede setninger: svinginstruksjoner. Kan ikke kunngjøre gatenavn eller interessepunktnavn.</string>
+    <string name="recorded_description">Innspilt tale høres bedre ut, men kan kun uttale forhåndsinnspilte uttrykk: svinginstruksjoner. Kan ikke melde om gatenavn eller interessepunktnavn.</string>
     <string name="shared_string_itinerary">Reiseplan</string>
     <string name="cloud_email_not_registered">Dennne e-postadressen har ikke blitt registrert for OsmAnd Sky</string>
     <string name="cloud_email_already_registered">En konto med denne e-postadressen er allerede registrert.</string>
@@ -4014,7 +4014,7 @@
     <string name="select_backup_data_descr">Velg data og mapper for sikkerhetskopi.</string>
     <string name="backup_restore_data_descr">Gjenopprett data på enheten, ved bruk av nettbaserte sikkerhetskopier.</string>
     <string name="receiving_data_from_server">Mottar data fra tjeneren …</string>
-    <string name="restore_complete">Gjenoppretting fullført</string>
+    <string name="restore_complete">Gjenopprettet</string>
     <string name="grey_color_slope">Grå farge brukes nå helningen ikke er definert.</string>
     <string name="backup_storage_taken">Brukt lagringsplass</string>
     <string name="backup_data">Sikkerhetskopier data</string>
@@ -4070,4 +4070,9 @@
     <string name="redeem_promo_code">Løs inn promo-kode</string>
     <string name="complete_purchase">Fullfør kjøp</string>
     <string name="duration_moment_ago">et øyeblikk siden</string>
+    <string name="poi_routes">Ruter</string>
+    <string name="srtm_download_list_help_message">OsmAnd leverer kotedata i meter og fot. Du må laste ned filen på nytt for å endre formatet.</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Foretrekk vandreruter</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Foretrekk vandreruter</string>
+    <string name="routing_attr_allow_streams_description">Tillat bekker og dreneringsgrøfter</string>
 </resources>

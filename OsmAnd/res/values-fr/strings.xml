@@ -17,7 +17,7 @@
     <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
     <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le composant GPX ou avec l\'option « Enregistrer l\'itinéraire ».</string>
     <string name="show_current_gpx_title">Afficher la trace en cours</string>
-    <string name="free_version_message">La version gratuite d\'OsmAnd est limitée à %1$s téléchargements (un téléchargement correspond à l\'installation ou à la mise à jour d\'une carte).</string>
+    <string name="free_version_message">%1$s cartes à télécharger ou à mettre à jour.</string>
     <string name="free_version_title">Version gratuite</string>
     <string name="poi_context_menu_showdescription">Afficher la description du point d\'intérêt.</string>
     <string name="index_name_north_america">Amérique du Nord</string>
@@ -107,7 +107,7 @@
     <string name="show_more_map_detail">Afficher plus de détails</string>
     <string name="show_more_map_detail_descr">Afficher certains détails des cartes vectorielles (routes, etc.) y compris aux niveaux de zooms inférieurs.</string>
     <string name="favourites_delete_multiple_succesful">Favori(s) supprimé(s).</string>
-    <string name="favorite_delete_multiple">Êtes-vous certain(e) de vouloir supprimer %1$d favoris et %2$d groupes de favoris \?</string>
+    <string name="favorite_delete_multiple">Supprimer %1$d favoris et %2$d groupes de favoris \?</string>
     <string name="favorite_home_category">Domicile</string>
     <string name="favorite_friends_category">Amis</string>
     <string name="favorite_places_category">Lieux</string>
@@ -433,7 +433,7 @@
     <string name="shared_string_download_successful">Téléchargement terminé</string>
     <string name="downloading_list_indexes">Téléchargement de la liste des régions disponibles…</string>
     <string name="list_index_files_was_not_loaded">Impossible d\'accéder à la liste des régions sur https://osmand.net.</string>
-    <string name="select_index_file_to_download">Aucun résultat. Si vous ne trouvez pas votre région, vous pouvez la créer (voir sur https://osmand.net).</string>
+    <string name="select_index_file_to_download">Aucun résultat. Si vous ne trouvez pas votre région, vous pouvez la créer (voir https://osmand.net).</string>
     <string name="fav_points_edited">Le favori a été modifié</string>
     <string name="fav_points_not_exist">Il n\'existe aucun favori</string>
     <string name="update_existing">Remplacer</string>
@@ -2932,7 +2932,7 @@
     <string name="app_mode_subway">Métro</string>
     <string name="app_mode_horse">À cheval</string>
     <string name="app_mode_helicopter">Hélicoptère</string>
-    <string name="osmand_routing_promo">Vous pouvez ajouter votre propre version du fichier routing.xml dans ..osmand/routing</string>
+    <string name="osmand_routing_promo">Ajoutez votre propre version du fichier routing.xml dans ..osmand/routing</string>
     <string name="app_mode_skiing">À ski</string>
     <string name="settings_routing_mode_string">Mode : %s</string>
     <string name="routing_profile_ski">Ski</string>
@@ -3234,7 +3234,7 @@
 \n • Corrections de bugs.
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Vous pouvez appliquer cette modification à tous les profils ou uniquement au profil sélectionné.</string>
+    <string name="apply_preference_to_all_profiles">Appliquez cette modification à tous les profils ou uniquement au profil sélectionné.</string>
     <string name="shared_preference">Partagé</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Privilégier les routes non revêtues</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Privilégier les routes non pavées pour l\'itinéraire.</string>
@@ -3362,7 +3362,7 @@
     <string name="create_custom_categories_list_promo">Modifiez l\'ordre de tri de la liste, masquez des catégories. Vous pouvez importer et exporter toutes vos modifications via les profils.</string>
     <string name="reset_to_default_category_button_promo">Restaurer les valeurs par défaut réinitialisera l\'ordre de tri.</string>
     <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système Android.</string>
-    <string name="add_new_custom_category_button_promo">Vous pouvez ajouter une catégorie personnelle en sélectionnant une ou plusieurs catégories.</string>
+    <string name="add_new_custom_category_button_promo">Ajoutez une nouvelle catégorie personnelle en sélectionnant une ou plusieurs catégories.</string>
     <string name="use_system_screen_timeout">Utiliser le délai système de mise en veille de l\'écran</string>
     <string name="use_system_screen_timeout_promo">Inactif par défaut : lorsqu\'OsmAnd s’exécute en avant-plan, l\'écran reste toujours allumé. 
 \n 
@@ -3407,7 +3407,7 @@
     <string name="shared_string_routing">Calcul d\'itinéraire</string>
     <string name="shared_string_include_data">Inclure des données supplémentaires</string>
     <string name="import_profile_dialog_description">Le profil contient des données supplémentaires. Appuyez sur \"Importer\" pour n\'importer que les données de profil ou sélectionnez les données supplémentaires à importer.</string>
-    <string name="export_profile_dialog_description">Vous pouvez sélectionner des données supplémentaires à exporter en même temps que le profil.</string>
+    <string name="export_profile_dialog_description">Sélectionnez des données supplémentaires à exporter en même temps que le profil.</string>
     <string name="index_name_antarctica">Antarctique</string>
     <string name="shared_string_app_default_w_val">Par défaut pour l\'application (%s)</string>
     <string name="no_recalculation_setting">Sans re-calcul</string>
@@ -3459,7 +3459,7 @@
     <string name="terrain_slider_description">Définissez les niveaux de zoom minimum et maximum pour lesquels la couche sera affichée.</string>
     <string name="hillshade_download_description">Des cartes supplémentaires sont nécessaires pour afficher l\'ombrage du relief sur la carte.</string>
     <string name="slope_download_description">Des cartes supplémentaires sont nécessaires pour afficher les pentes sur la carte.</string>
-    <string name="slope_read_more">Vous pouvez en savoir plus sur les pentes dans %1$s.</string>
+    <string name="slope_read_more">Vous pouvez en apprendre plus sur les pentes dans %1$s.</string>
     <string name="shared_string_transparency">Transparence</string>
     <string name="shared_string_zoom_levels">Niveaux de zoom</string>
     <string name="shared_string_legend">Légende</string>
@@ -3496,7 +3496,7 @@
     <string name="ui_customization_short_descr">Éléments du panneau déroulant, menu contextuel</string>
     <string name="shared_string_drawer">Panneau déroulant</string>
     <string name="reorder_or_hide_from">Réorganisez ou masquez les éléments à partir de %1$s.</string>
-    <string name="move_inside_category">Vous ne pouvez déplacer les éléments qu’à l’intérieur de cette catégorie.</string>
+    <string name="move_inside_category">Les éléments peuvent uniquement être déplacés au sein de la catégorie.</string>
     <string name="ui_customization">Personnalisation de l\'interface utilisateur</string>
     <string name="context_menu_actions">Actions du menu contextuel</string>
     <string name="shared_string_divider">Séparateur</string>
@@ -3576,7 +3576,7 @@
 \n - Correction de bugs avec RTL
 \n
 \n</string>
-    <string name="additional_actions_descr">Vous pouvez accéder à ces actions en appuyant sur le bouton \"%1$s\".</string>
+    <string name="additional_actions_descr">Accédez à ces actions en appuyant sur le bouton \"%1$s\".</string>
     <string name="quick_action_transport_descr">Bouton pour afficher ou masquer les transports publics sur la carte.</string>
     <string name="create_edit_poi">Créer ou modifier un PI</string>
     <string name="parking_positions">Emplacements de stationnement</string>
@@ -3627,7 +3627,7 @@
     <string name="map_source_zoom_levels">Définissez les niveaux de zoom minimum et maximum auxquels la carte en ligne sera affichée ou chargée.</string>
     <string name="tiles_storage_descr">Sélectionnez comment stocker les tuiles téléchargées.</string>
     <string name="default_screen_timeout">Délai par défaut de veille écran</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Vous pouvez exporter ou importer les actions rapides avec les profils d’application.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Vous pouvez exporter et importer les actions rapides via les profils d’application.</string>
     <string name="shared_string_delete_all_q">Tout supprimer \?</string>
     <string name="delete_all_actions_message_q">Supprimer définitivement %d actions rapides \?</string>
     <string name="screen_timeout">Délai de veille de l’écran</string>
@@ -4113,7 +4113,7 @@
     <string name="osmand_cloud_login_descr">Veuillez saisir l\'adresse email utilisée à l\'inscription. Vous allez recevoir, à cette adresse, un mot de passe à usage unique.</string>
     <string name="cloud_email_not_registered">Cet email n\'est pas enregistré sur OsmAnd Cloud</string>
     <string name="backup_into_file">Sauvegarder en tant que fichier</string>
-    <string name="verification_code_missing_description">Le délai maximum d\'envoi du code est de 10 minutes. Pensez à vérifier votre dossier \'Pourriel\' sinon utilisez le bouton ci-dessous.</string>
+    <string name="verification_code_missing_description">Le délai d\'envoi du code est de 10 minutes maximum, vérifiez votre dossier \'Pourriel\'. Vous pouvez aussi utiliser le bouton ci-dessous.</string>
     <string name="select_nav_profile_dialog_message">Le \"type de navigation\" détermine la façon dont les itinéraires sont calculés. Vous pouvez sélectionner un moteur de routage soit hors-ligne soit en ligne.</string>
     <string name="loading_list_of_routing_services">Actualisation des services de routage disponibles</string>
     <string name="backup_delete_all_data_descr">Toutes les données sur OsmAnd Cloud seront supprimées. Les versions locales resteront intactes.</string>

@@ -28,7 +28,7 @@
     <string name="confirm_interrupt_download">Скасувати завантаження\?</string>
     <string name="first_time_msg">Дякуємо за користування OsmAnd. Завантажуйте регіональні дані для користування в автономному режимі за допомогою пункту меню \'Налаштування\' → \'Керування мапами\' для перегляду мап, пошуку адрес, POI, громадського транспорту тощо.</string>
     <string name="basemap_was_selected_to_download">Основна мапа, необхідна для забезпечення основних можливостей, перебуває у черзі завантаження.</string>
-    <string name="select_index_file_to_download">Нічого не знайдено. Якщо Ви не знайшли свій регіон, Ви можете створити його самостійно (див. https://osmand.net).</string>
+    <string name="select_index_file_to_download">Нічого не знайдено, але ви можете створити його самостійно (див. https://osmand.net).</string>
     <string name="local_indexes_cat_tile">Мережеві та кешовані растрові мапи</string>
     <string name="local_indexes_cat_map">Звичайні мапи (векторні)</string>
     <string name="index_settings_descr">Завантаження, перегляд подробиць та керування локальними мапами.</string>
@@ -134,7 +134,7 @@
     <string name="live_monitoring_url">Мережеве відстеження вебадрес</string>
     <string name="gpx_monitoring_disabled_warn">Записувати треки використовуючи GPX-віджет або вибравши «Записування подорожі» в Налаштуваннях.</string>
     <string name="show_current_gpx_title">Відображати пройдений шлях</string>
-    <string name="free_version_message">Ви можете завантажити або оновити %1$s мап.</string>
+    <string name="free_version_message">%1$s мап для завантаження або оновлення.</string>
     <string name="free_version_title">Безкоштовна версія</string>
     <string name="poi_context_menu_showdescription">Показати подробиці цікавої точки.</string>
     <string name="index_name_north_america">Північна Америка</string>
@@ -1525,7 +1525,7 @@
     <string name="storage_directory">Сховище мап</string>
     <string name="shared_string_copy">Копіювати</string>
     <string name="filter_poi_hint">Фільтрувати за назвою</string>
-    <string name="search_poi_category_hint">Введіть запит для пошуку всіх</string>
+    <string name="search_poi_category_hint">Введіть пошуковий запит</string>
     <string name="rendering_value__name">Типово</string>
     <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
     <string name="index_name_netherlands">Європа - Нідерланди</string>
@@ -2507,7 +2507,7 @@
     <string name="shared_string_markers">Позначки</string>
     <string name="coordinates_format">Формат координат</string>
     <string name="use_system_keyboard">Використовувати системну клавіатуру</string>
-    <string name="fast_coordinates_input_descr">Виберіть формат введення координат. Ви завжди можете змінити його, натиснувши „Параметри“.</string>
+    <string name="fast_coordinates_input_descr">Виберіть формат вводу координат. Натисніть «Параметри», щоб змінити їх.</string>
     <string name="fast_coordinates_input">Швидке введення координат</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Уникати льодових доріг і бродів</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Уникає льодових доріг і бродів.</string>
@@ -2951,7 +2951,7 @@
     <string name="app_mode_subway">Метро</string>
     <string name="app_mode_horse">Кінь</string>
     <string name="app_mode_helicopter">Вертиліт</string>
-    <string name="osmand_routing_promo">Ви можете додати власну модифіковану версію файлу routing.xml до теки ..osmand/routing</string>
+    <string name="osmand_routing_promo">Додайте власну модифіковану версію файлу routing.xml до теки ..osmand/routing</string>
     <string name="app_mode_skiing">Лижі</string>
     <string name="base_profile_descr_ski">Лижі</string>
     <string name="show_compass_ruler">Показати компас-лінійку</string>
@@ -3245,7 +3245,7 @@
 \n • Інші виправлення
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Цю зміну можна застосувати до всіх або лише до виділеного профілю.</string>
+    <string name="apply_preference_to_all_profiles">Застосувати ці зміни до всіх або до вибраного профілю.</string>
     <string name="shared_preference">Спільний</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Надавати перевагу ґрунтовим дорогам</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Надати перевагу незаасфальтованим над асфальтованими дорогами для прокладки.</string>
@@ -3360,8 +3360,8 @@
     <string name="multimedia_photo_play_sound">Звук затвору камери</string>
     <string name="osm_authorization_success">Авторизація пройшла успішно</string>
     <string name="rearrange_categories">Перевпорядкування категорій</string>
-    <string name="create_custom_categories_list_promo">Змінюйте впорядкування списку, приховайте непотрібні категорії. Ви можете імпортувати або експортувати всі зміни з профілями.</string>
-    <string name="add_new_custom_category_button_promo">Ви можете додати нову власну категорію, вибравши одну або кілька необхідних категорій.</string>
+    <string name="create_custom_categories_list_promo">Змінюйте порядок списку та ховайте непотрібні категорії. Імпортуйте або експортуйте всі зміни як профілі.</string>
+    <string name="add_new_custom_category_button_promo">Додайте нову власну категорію, вибравши одну або кілька необхідних категорій.</string>
     <string name="shared_string_available">Доступні</string>
     <string name="add_custom_category">Додати власну категорію</string>
     <string name="rendering_attr_streetLightingNight_name">Показувати лише вночі</string>
@@ -3416,7 +3416,7 @@
     <string name="shared_string_routing">Маршрутизація</string>
     <string name="shared_string_include_data">Включати додаткові дані</string>
     <string name="import_profile_dialog_description">Імпортований профіль містить додаткові дані. Натисніть кнопку \"Імпорт\", щоб імпортувати дані профілю, або оберіть додаткові дані.</string>
-    <string name="export_profile_dialog_description">Ви можете вибрати додаткові дані для експорту разом із профілем.</string>
+    <string name="export_profile_dialog_description">Вибрати додаткові дані для експорту разом із профілем.</string>
     <string name="index_name_antarctica">Антарктида</string>
     <string name="shared_string_app_default_w_val">Типовий застосунок (%s)</string>
     <string name="no_recalculation_setting">Без перерахунку</string>
@@ -3456,7 +3456,7 @@
 \nЦе може зайняти деякий час.</string>
     <string name="items_added">Елементи додано</string>
     <string name="shared_string_import_complete">Імпорт завершено</string>
-    <string name="import_complete_description">Усі дані з %1$s імпортовано, ви можете користуватися іншими кнопками, щоб відкрити потрібну частину застосунку для керування нею.</string>
+    <string name="import_complete_description">Усі дані з %1$s імпортовано. Скористайтеся іншими кнопками, щоб відкрити будь-яку частину застосунку для керування нею.</string>
     <string name="recalculate_route_distance_promo">Маршрут буде перераховано, якщо відстань від маршруту до поточного місця розташування перевищує вибране значення.</string>
     <string name="select_distance_route_will_recalc">Виберіть відстань, після якого маршрут буде перераховано.</string>
     <string name="recalculate_route_in_deviation">Перерахунок маршруту у випадку відхилення</string>
@@ -3467,11 +3467,11 @@
     <string name="terrain_slider_description">Установіть найменший та найбільший рівні масштабування, при якому шар буде відображатися.</string>
     <string name="hillshade_download_description">Потрібні додаткові мапи для перегляду пагорбів.</string>
     <string name="slope_download_description">Для перегляду схилів потрібні додаткові мапи.</string>
-    <string name="slope_read_more">Ви можете прочитати більше про схили в %1$s.</string>
+    <string name="slope_read_more">Докладніше про схили у %1$s.</string>
     <string name="shared_string_transparency">Прозорість</string>
     <string name="shared_string_zoom_levels">Рівні масштабування</string>
     <string name="shared_string_legend">Позначення</string>
-    <string name="terrain_empty_state_text">Увімкнути для перегляду мапи пагорбів або схилів. Докладніше про ці види мап Ви можете прочитати на нашому сайті.</string>
+    <string name="terrain_empty_state_text">Показує пагорби або схили на мапі. Докладніше про ці види мап читайте на нашому сайті.</string>
     <string name="shared_string_hillshade">Пагорб</string>
     <string name="n_items_of_z">%1$s з %2$s</string>
     <string name="download_slope_maps">Схили</string>
@@ -3511,7 +3511,7 @@
     <string name="reset_items_descr">Приховування налаштувань призведе до скидання до їхнього початкового стану.</string>
     <string name="main_actions_descr">Має лише 4 кнопки.</string>
     <string name="main_actions">Основні дії</string>
-    <string name="move_inside_category">Ви можете переміщувати елементи лише всередині цієї категорії.</string>
+    <string name="move_inside_category">Елементи можна переміщувати лише в межах цієї категорії.</string>
     <string name="developer_plugin">Розширення розробника</string>
     <string name="shared_string_items">Елементи</string>
     <string name="select_wikipedia_article_langs">Виберіть мови статей Вікіпедії на мапі. Перемикайтеся між усіма доступними мовами під час читання статті.</string>
@@ -3558,11 +3558,11 @@
     <string name="subscription_osmandlive_item">Передплата - OsmAnd Live</string>
     <string name="osmand_purchases_item">OsmAnd покупки</string>
     <string name="legend_item_description">Довідник умовних позначень мапи.</string>
-    <string name="osm_live_payment_subscription_management">Оплату буде здійснено під час підтвердження придбання з пов\'язаного з вашим обліковим записом Google Play рахунку.
+    <string name="osm_live_payment_subscription_management">Оплата стягується з вашого облікового запису Google Play під час підтвердження купівлі.
 \n
-\nПередплата продовжується автоматично, якщо ви не скасуєте її до дати продовження. З вашого рахунку буде стягуватися плата за період продовження (щомісяця/щотримісяці/щорік) разово в день продовження.
+\nПередплата поновлюється, якщо її не скасовано до вибраного періоду поновлення.
 \n
-\nВи можете керувати передплатами та скасовувати їх у налаштуваннях Google Play.</string>
+\nКеруйте або скасовуйте передплати в налаштуваннях Google Play у будь-який час.</string>
     <string name="search_poi_types">Пошук видів POI</string>
     <string name="search_poi_types_descr">Поєднуйте види POI з різних категорій. Торкніться перемикача, щоб вибрати всі, торкніться лівої сторони для вибору категорії.</string>
     <string name="navigation_profiles_item">Профілі навігації</string>
@@ -3591,7 +3591,7 @@
     <string name="add_edit_favorite">Додати чи змінити закладку</string>
     <string name="reset_deafult_order">Відновити типове впорядкування</string>
     <string name="back_to_editing">Повернутися до редагування</string>
-    <string name="additional_actions_descr">Ви можете отримати доступ до цих дій, торкнувшись кнопки “%1$s”.</string>
+    <string name="additional_actions_descr">Доступ до цих дій здійснюється торканням кнопки «%1$s».</string>
     <string name="shared_string_resume">Продовжити</string>
     <string name="quick_action_switch_profile_descr">Перемикання між профілями здійснюється торканням до кнопки дій.</string>
     <string name="shared_string_add_profile">Додати профіль</string>
@@ -3636,7 +3636,7 @@
 \nОдин місяць - 43 829 хвилин.</string>
     <string name="tiles_storage_descr">Виберіть спосіб зберігання завантажених плиток.</string>
     <string name="default_screen_timeout">Типовий час до вимкнення екрану</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Ви можете експортувати або імпортувати швидкі дії з профілями застосунку.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Експортувати або імпортувати швидкі дії з профілями застосунку.</string>
     <string name="shared_string_delete_all_q">Видалити все\?</string>
     <string name="delete_all_actions_message_q">Видалити %d швидких дій остаточно\?</string>
     <string name="screen_timeout">Час очікування екрана</string>
@@ -3651,7 +3651,7 @@
     <string name="add_online_source">Додати мережеве джерело</string>
     <string name="clear_tiles_warning">Застосування цих змін очистить дані, збережені з цього джерела тайлів</string>
     <string name="vessel_height_warning_link">Установити висоту судна</string>
-    <string name="vessel_height_warning">Ви можете встановити висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
+    <string name="vessel_height_warning">Вкажіть висоту судна, щоб уникнути низьких мостів. Якщо міст рухомий, застосовуватиметься його висота у розведеному стані.</string>
     <string name="vessel_height_limit_description">Установіть висоту судна, щоб уникнути низьких мостів. Майте на увазі, якщо міст рухомий, використовуватиметься його висота у відкритому стані.</string>
     <string name="vessel_width_limit_description">Укажіть ширину судна, щоб уникнути вузьких мостів</string>
     <string name="quick_action_showhide_mapillary_descr">Перемикач показує/приховує шар Mapillary на мапі.</string>
@@ -3691,7 +3691,7 @@
     <string name="app_mode_go_cart">Картинг</string>
     <string name="osm_edit_closed_note">Закрита примітка OSM</string>
     <string name="shared_string_custom">Власне</string>
-    <string name="add_hidden_group_info">Додану точку не буде показано на мапі, вся вибрана група є прихованою, ви можете побачити її в \"%s\".</string>
+    <string name="add_hidden_group_info">Додану точку можна знайти у «%s». Показати вибрану групу, щоб вона з\'явилася на мапі.</string>
     <string name="set_working_days_to_continue">Зазначте робочі дні, щоб продовжити</string>
     <string name="route_between_points">Маршрут між точками</string>
     <string name="plan_a_route">Планування маршруту</string>
@@ -3794,11 +3794,11 @@
     <string name="contour_lines_thanks">Дякуємо за придбання «Горизонталей»</string>
     <string name="what_is_new">Що нового</string>
     <string name="osm_live_payment_desc_hw">Передплата стягується раз на вибраний період. Скасуйте її в AppGallery у будь-який час.</string>
-    <string name="osm_live_payment_subscription_management_hw">З вашого рахунку AppGallery буде стягнено плату за підтвердження покупки.
+    <string name="osm_live_payment_subscription_management_hw">Оплата стягується з вашого облікового запису AppGallery під час підтвердження покупки.
 \n
-\nПередплата автоматично поновлюється, якщо її не скасувати до дати поновлення. З вашого рахунку буде стягнено плату за період поновлення (місяць/три місяці/рік) лише на дату поновлення.
+\nПлатіж поновлюється, якщо його не скасовано до вибраного періоду поновлення.
 \n
-\nВи можете керувати та скасовувати передплати у налаштуваннях AppGallery.</string>
+\nКеруйте або скасовуйте передплати в налаштуваннях AppGallery в будь-який час.</string>
     <string name="use_live_routing">OsmAnd дані в реальному часі</string>
     <string name="complex_routing_descr">Двофазна маршрутизація для автомобільної навігації.</string>
     <string name="use_native_pt">Розвиток власного громадського транспорту</string>
@@ -3839,10 +3839,10 @@
     <string name="subscription_on_hold_title">Передплата OsmAnd Live на утриманні</string>
     <string name="login_open_street_map">Увійти до OpenStreetMap.org</string>
     <string name="login_open_street_map_org">Увійти до OpenStreetMap.org</string>
-    <string name="open_street_map_login_mode">Потрібно увійти, щоб вивантажити нові або внесені зміни.
+    <string name="open_street_map_login_mode">Спочатку увійдіть, щоб передати нові або редаговані зміни.
 \n
-\nВи можете увійти за допомогою безпечного методу OAuth, або скористатися своїм іменем користувача та паролем.</string>
-    <string name="use_login_password">Використовувати ім\'я користувача та пароль</string>
+\nЗастосовуйте метод OAuth або ваше ім\'я користувача та пароль OSM.</string>
+    <string name="use_login_password">Ввести ім\'я користувача та пароль</string>
     <string name="login_account">Обліковий запис</string>
     <string name="user_login">Ім\'я користувача</string>
     <string name="sign_in_with_open_street_map">Увійти за допомогою OpenStreetMap</string>
@@ -3855,7 +3855,7 @@
     <string name="gpx_upload_trackable_visibility_descr">«Відстежуваний» означає, що трек не з\'явиться в жодному загальнодоступному списку, але обробка точок з позначками часу від нього (які не можуть бути безпосередньо пов’язані з вами) виконується за допомогою завантажень із загальнодоступного API GPS.</string>
     <string name="osm_edit_close_note">Закрити примітку OSM</string>
     <string name="osm_edit_comment_note">Коментувати примітку OSM</string>
-    <string name="osm_login_descr">Ви можете увійти за допомогою безпечного методу OAuth або за допомогою своїх ім\'я користувача й паролю.</string>
+    <string name="osm_login_descr">Увійдіть за допомогою методу OAuth або за допомогою своїх ім\'я користувача й паролю OSM.</string>
     <string name="shared_string_add_photo">Додати світлини</string>
     <string name="register_on_openplacereviews">Зареєструватися на
 \nOpenPlaceReviews.org</string>
@@ -3977,11 +3977,9 @@
     <string name="uploaded_count">Вивантажено %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Виберіть зміни для вивантаження</string>
     <string name="hillshade_slope_contour_lines">Рельєф місцевості / Схили / Горизонталі</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews — це громадський проєкт про громадські місця, такі як ресторани, готелі, музеї, точки шляху. Він збирає всі загальнодоступні дані про них, такі як світлини, відгуки, посилання на інші системи, посилання OpenStreetMap, Вікіпедія.
+    <string name="open_place_reviews_plugin_description">Надсилайте світлини, відгуки та посилання про громадські місця, як-от ресторани, готелі, музеї та точки шляху відкритими даними https://openplacereviews.org/data/.
 \n
-\nУсі дані OpenPlaceReview відкриті та доступні всім: http://openplacereviews.org/data.
-\n
-\nВи можете прочитати більше за адресою: http://openplacereviews.org</string>
+\nДізнайтеся більше на https://openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Використати test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Увійти до OpenPlaceReviews</string>
@@ -4119,14 +4117,14 @@
     <string name="verify_email_address_descr">Код підтвердження надіслано на %1$s. Введіть його в поле знизу.</string>
     <string name="cloud_email_not_registered">Цю електронну адресу ще не зареєстровано для OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Ця адреса е-пошти вже зареєстрована.</string>
-    <string name="resend_verification_code">Надіслати код ще раз</string>
+    <string name="resend_verification_code">Надіслати ще раз</string>
     <string name="verification_code_missing">Код підтвердження не надійшов</string>
-    <string name="verification_code_missing_description">Час очікування коду може тривати 10 хвилин, також ви можете перевірити теку з небажаним. Якщо це не допомогло, скористайтеся кнопкою знизу.</string>
-    <string name="select_nav_profile_dialog_message">\'Тип навігації\' визначає спосіб обчислення маршрутів. Можна вибирати між автономним та мережним рушіями маршрутизації.</string>
+    <string name="verification_code_missing_description">Може тривати 10 хвилин. Скористайтеся кнопкою внизу, якщо її немає в теці зі спамом.</string>
+    <string name="select_nav_profile_dialog_message">«Тип навігації» вибирає спосіб обчислення маршрутів за допомогою автономних та мережних рушіїв маршрутизації.</string>
     <string name="loading_list_of_routing_services">Список завантаження доступних служб маршрутизації</string>
     <string name="shared_string_offline">Автономно</string>
     <string name="shared_string_online">З мережі</string>
-    <string name="osmand_online_routing_promo">Ви можете користуватися попередньо визначеними шаблонами або додавати власні мережні маршрути, підтримуються: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="osmand_online_routing_promo">Користуйтеся попередньо визначеними шаблонами або додавайте онлайн-маршрутизацію OSRM, GraphHopper, OpenRouteService або GPX.</string>
     <string name="shared_string_external">Зовнішні</string>
     <string name="provided_by">Надано %1$s</string>
     <string name="failed_loading_predefined_engines">Не вдалося завантажити список попередньо визначених шаблонів.
@@ -4193,7 +4191,7 @@
     <string name="terrain_maps">Мапи рельєфу</string>
     <string name="nautical_depth">Глибина водойм</string>
     <string name="advanced_widgets">Додаткові віджети</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Ви можете отримати «%1$s» частиною: тарифного плану %2$s. Порівняння:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Отримайте «%1$s» частиною тарифного плану %2$s. Порівняння:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s або %2$s</string>
     <string name="continue_with">Продовжити з %1$s</string>
     <string name="not_available_with">Недоступно з %1$s</string>
