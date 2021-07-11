@@ -4132,7 +4132,7 @@
     <string name="loading_list_of_routing_services">Ŝargado de listo de disponeblaj navigiloj</string>
     <string name="shared_string_offline">Malkonekta</string>
     <string name="shared_string_online">Enreta</string>
-    <string name="osmand_online_routing_promo">Vi povas uzi antaŭdifinitajn ŝablonojn aŭ aldoni propran enretan navigilon (subtenataj: OSRM, Graphhopper, OpenRouteService, GPX).</string>
+    <string name="osmand_online_routing_promo">Uzi antaŭdifinitajn ŝablonojn, aŭ aldoni enretajn navigilojn OSRM, GraphHopper, OpenRouteService aŭ GPX.</string>
     <string name="shared_string_external">Ekstera</string>
     <string name="provided_by">Liverata de %1$s</string>
     <string name="failed_loading_predefined_engines">Fiaskis enlegi liston de antaŭdifinitaj ŝablonoj.
@@ -4221,7 +4221,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Ĵetono malĝusta aŭ senvalidiĝis</string>
     <string name="backup_error_user_is_not_registered">Neniu registrita uzanto kun tiu ĉi retpoŝta adreso</string>
     <string name="backup_error_no_valid_subscription">Neniu valida abono</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Vi povas akiri la eblaĵon “%1$s” kiel parto de la plano %2$s. Komparo:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Akiru la eblaĵon “%1$s” kiel parto de la plano %2$s. Komparo:</string>
     <string name="release_4_0">• sekurkopio en nubo
 \n
 \n• nokta reĝimo por la map-stilo “Topo”
@@ -4244,4 +4244,5 @@
 \n
 \n</string>
     <string name="duration_moment_ago">antaŭ momento</string>
+    <string name="approximate_route_description">Alproksimigi kurson al vojoj sur la mapo por akiri informojn pri turnoj kaj aliajn datumojn:</string>
 </resources>
