@@ -789,7 +789,7 @@ public class GPXDatabase {
 			rowsMap.put(GPX_COL_AVG_SPEED, trackAnalysis.avgSpeed);
 			rowsMap.put(GPX_COL_POINTS, trackAnalysis.points);
 			rowsMap.put(GPX_COL_WPT_POINTS, trackAnalysis.wptPoints);
-			rowsMap.put(GPX_COL_WPT_CATEGORY_NAMES, Algorithms.encodeStringSet(trackAnalysis.wptCategoryNames));
+			rowsMap.put(GPX_COL_WPT_CATEGORY_NAMES, Algorithms.encodeCollection(trackAnalysis.wptCategoryNames));
 		}
 
 		db.execSQL(Algorithms.createDbInsertQuery(GPX_TABLE_NAME, rowsMap));
@@ -822,7 +822,7 @@ public class GPXDatabase {
 						a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp,
 						a.diffElevationDown, a.avgElevation, a.minElevation, a.maxElevation,
 						a.maxSpeed, a.avgSpeed, a.points, a.wptPoints, fileLastModifiedTime,
-						Algorithms.encodeStringSet(a.wptCategoryNames), fileName, fileDir});
+						Algorithms.encodeCollection(a.wptCategoryNames), fileName, fileDir});
 		item.fileLastModifiedTime = fileLastModifiedTime;
 		item.analysis = a;
 		return true;
