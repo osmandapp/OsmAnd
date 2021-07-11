@@ -2954,7 +2954,7 @@
     <string name="app_mode_subway">Metropolitano</string>
     <string name="app_mode_horse">Cavalo</string>
     <string name="app_mode_helicopter">Helicóptero</string>
-    <string name="osmand_routing_promo">Pode adicionar a sua própria versão alterada do ficheiro routing.xml em ..osmand/routing</string>
+    <string name="osmand_routing_promo">Adicione a sua própria versão alterada do ficheiro \"routing.xml\" em \"..osmand/routing\"</string>
     <string name="app_mode_skiing">Esqui</string>
     <string name="base_profile_descr_ski">Esqui</string>
     <string name="show_compass_ruler">Mostrar régua de compasso</string>
