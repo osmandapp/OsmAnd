@@ -41,6 +41,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 
@@ -428,7 +429,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		lastTimeUpdated = 0;
 		lastPoint = null;
 		execWithClose(createInsertTrackQuery(0, 0, 0, 0, 0,
-				System.currentTimeMillis(), NO_HEADING));
+				System.currentTimeMillis(), NO_HEADING), null);
 		addTrackPoint(null, true, System.currentTimeMillis());
 	}
 
@@ -476,7 +477,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, float heading) {
-		execWithClose(createInsertTrackQuery(lat, lon, alt, speed, hdop, time, heading));
+		execWithClose(createInsertTrackQuery(lat, lon, alt, speed, hdop, time, heading), null);
 		boolean newSegment = false;
 		if (lastPoint == null || (time - lastTimeUpdated) > 180 * 1000) {
 			lastPoint = new LatLon(lat, lon);
@@ -553,7 +554,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		rowsMap.put(POINT_COL_ICON, iconName);
 		rowsMap.put(POINT_COL_BACKGROUND, backgroundName);
 
-		execWithClose(Algorithms.createDbInsertQuery(POINT_NAME, rowsMap));
+		execWithClose(Algorithms.createDbInsertQuery(POINT_NAME, rowsMap), null);
 		return pt;
 	}
 
@@ -677,23 +678,15 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		execWithClose(sb.toString(), params.toArray());
 	}
 
-	private synchronized void execWithClose(String script, Object[] objects) {
+	private synchronized void execWithClose(@NonNull String script, @Nullable Object[] objects) {
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
 			try {
-				db.execSQL(script, objects);
-			} catch (RuntimeException e) {
-				log.error(e.getMessage(), e);
-			} finally {
-				db.close();
-			}
-		}
-	}
-	private synchronized void execWithClose(String script) {
-		SQLiteDatabase db = getWritableDatabase();
-		if (db != null) {
-			try {
-				db.execSQL(script);
+				if (objects == null) {
+					db.execSQL(script);
+				} else {
+					db.execSQL(script, objects);
+				}
 			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
 			} finally {
