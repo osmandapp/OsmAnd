@@ -317,14 +317,10 @@ public class Algorithms {
 	}
 
 	public static <T> String encodeCollection(Collection<T> collection) {
-		return encodeCollection(collection, String.valueOf(CHAR_TO_SPLIT), false);
+		return encodeCollection(collection, String.valueOf(CHAR_TO_SPLIT));
 	}
 
 	public static <T> String encodeCollection(Collection<T> collection, String split) {
-		return encodeCollection(collection, split, false);
-	}
-
-	public static <T> String encodeCollection(Collection<T> collection, String split, boolean shieldItems) {
 		if (collection == null) {
 			return "";
 		}
@@ -332,13 +328,7 @@ public class Algorithms {
 		Iterator<T> iterator = collection.iterator();
 		while (iterator.hasNext()) {
 			T next = iterator.next();
-			if (shieldItems) {
-				res.append("'");
-			}
 			res.append(next);
-			if (shieldItems) {
-				res.append("'");
-			}
 			if (iterator.hasNext()) {
 				res.append(split);
 			}
@@ -1169,11 +1159,5 @@ public class Algorithms {
 			}
 		}
 		return stringPalette.toString();
-	}
-
-	public static String createDbInsertQuery(String tableName, Map<String, Object> rows) {
-		String keys = encodeCollection(rows.keySet(), ", ", false);
-		String values = encodeCollection(rows.values(), ", ", true);
-		return "INSERT INTO " + tableName + " (" + keys + ") VALUES (" + values + ")";
 	}
 }

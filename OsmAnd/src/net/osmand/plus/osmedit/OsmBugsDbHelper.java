@@ -5,8 +5,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.backup.BackupHelper;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -104,7 +104,8 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 			rowsMap.put(OSMBUGS_COL_ACTION, OsmPoint.stringAction.get(p.getAction()));
 			rowsMap.put(OSMBUGS_COL_AUTHOR, p.getAuthor());
 
-			db.execSQL(Algorithms.createDbInsertQuery(OSMBUGS_TABLE_NAME, rowsMap));
+			db.execSQL(AndroidUtils.createDbInsertQuery(OSMBUGS_TABLE_NAME, rowsMap.keySet()),
+					rowsMap.keySet().toArray());
 			checkOsmbugsPoints(db);
 			updateLastModifiedTime();
 			db.close();

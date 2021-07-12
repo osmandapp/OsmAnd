@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -7,7 +8,6 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -251,7 +251,7 @@ public class MapMarkersDbHelper {
 		rowsMap.put(MARKERS_COL_SELECTED, 0);
 		rowsMap.put(MARKERS_COL_MAP_OBJECT_NAME, marker.mapObjectName);
 
-		db.execSQL(Algorithms.createDbInsertQuery(MARKERS_TABLE_NAME, rowsMap));
+		db.execSQL(AndroidUtils.createDbInsertQuery(MARKERS_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 
 		if (marker.history) {
 			updateMarkersHistoryLastModifiedTime();

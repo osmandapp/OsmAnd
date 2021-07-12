@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
@@ -24,7 +25,6 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -41,7 +41,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 
@@ -428,8 +427,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void startNewSegment() {
 		lastTimeUpdated = 0;
 		lastPoint = null;
-		execWithClose(createInsertTrackQuery(0, 0, 0, 0, 0,
-				System.currentTimeMillis(), NO_HEADING), null);
+		executeInsertTrackQuery(0, 0, 0, 0, 0, System.currentTimeMillis(), NO_HEADING);
 		addTrackPoint(null, true, System.currentTimeMillis());
 	}
 
@@ -477,7 +475,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, float heading) {
-		execWithClose(createInsertTrackQuery(lat, lon, alt, speed, hdop, time, heading), null);
+		executeInsertTrackQuery(lat, lon, alt, speed, hdop, time, heading);
 		boolean newSegment = false;
 		if (lastPoint == null || (time - lastTimeUpdated) > 180 * 1000) {
 			lastPoint = new LatLon(lat, lon);
@@ -554,7 +552,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		rowsMap.put(POINT_COL_ICON, iconName);
 		rowsMap.put(POINT_COL_BACKGROUND, backgroundName);
 
-		execWithClose(Algorithms.createDbInsertQuery(POINT_NAME, rowsMap), null);
+		execWithClose(AndroidUtils.createDbInsertQuery(POINT_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 		return pt;
 	}
 
@@ -678,15 +676,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		execWithClose(sb.toString(), params.toArray());
 	}
 
-	private synchronized void execWithClose(@NonNull String script, @Nullable Object[] objects) {
+	private synchronized void execWithClose(@NonNull String script, @NonNull Object[] objects) {
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
 			try {
-				if (objects == null) {
-					db.execSQL(script);
-				} else {
-					db.execSQL(script, objects);
-				}
+				db.execSQL(script, objects);
 			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
 			} finally {
@@ -695,7 +689,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 	}
 
-	private String createInsertTrackQuery(double lat, double lon, double alt, double speed, double hdop, long time, float heading) {
+	private void executeInsertTrackQuery(double lat, double lon, double alt, double speed, double hdop, long time, float heading) {
 		Map<String, Object> rowsMap = new LinkedHashMap<>();
 		rowsMap.put(TRACK_COL_LAT, lat);
 		rowsMap.put(TRACK_COL_LON, lon);
@@ -704,7 +698,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		rowsMap.put(TRACK_COL_HDOP, hdop);
 		rowsMap.put(TRACK_COL_DATE, time);
 		rowsMap.put(TRACK_COL_HEADING, heading);
-		return Algorithms.createDbInsertQuery(TRACK_NAME, rowsMap);
+		execWithClose(AndroidUtils.createDbInsertQuery(TRACK_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}
 
 	public void loadGpxFromDatabase() {

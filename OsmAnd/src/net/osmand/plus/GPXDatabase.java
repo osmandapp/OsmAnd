@@ -1,5 +1,6 @@
 package net.osmand.plus;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
@@ -792,7 +793,7 @@ public class GPXDatabase {
 			rowsMap.put(GPX_COL_WPT_CATEGORY_NAMES, Algorithms.encodeCollection(trackAnalysis.wptCategoryNames));
 		}
 
-		db.execSQL(Algorithms.createDbInsertQuery(GPX_TABLE_NAME, rowsMap));
+		db.execSQL(AndroidUtils.createDbInsertQuery(GPX_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 	}
 
 	public boolean updateAnalysis(GpxDataItem item, GPXTrackAnalysis a) {

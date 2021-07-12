@@ -1,5 +1,6 @@
 package net.osmand.plus.wikivoyage.data;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
@@ -504,7 +505,8 @@ public class TravelLocalDataHelper {
 							rowsMap.put(BOOKMARKS_COL_LAST_MODIFIED, article.getFile().lastModified());
 							rowsMap.put(BOOKMARKS_COL_GPX_GZ, Algorithms.stringToGzip(GPXUtilities.asString(article.gpxFile)));
 
-							conn.execSQL(Algorithms.createDbInsertQuery(BOOKMARKS_TABLE_NAME, rowsMap));
+							conn.execSQL(AndroidUtils.createDbInsertQuery(BOOKMARKS_TABLE_NAME, rowsMap.keySet()),
+									rowsMap.values().toArray());
 						} finally {
 							conn.close();
 						}
