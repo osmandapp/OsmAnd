@@ -1643,15 +1643,11 @@ public class GPXUtilities {
 		public int getNonEmptyTracksCount() {
 			int count = 0;
 			for (Track track : tracks) {
-				boolean hasNonEmptySegment = false;
 				for (TrkSegment segment : track.segments) {
 					if (segment.points.size() > 0) {
-						hasNonEmptySegment = true;
+						count++;
 						break;
 					}
-				}
-				if (hasNonEmptySegment) {
-					count++;
 				}
 			}
 			return count;

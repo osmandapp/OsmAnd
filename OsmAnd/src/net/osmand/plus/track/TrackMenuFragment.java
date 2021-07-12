@@ -435,13 +435,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 	
 	private void showBottomHeaderShadow() {
-		if (app != null) {
-			getBottomContainer().setForeground(app.getUIUtilities().getIcon(R.drawable.bg_contextmenu_shadow));
+		if (getBottomContainer() != null) {
+			getBottomContainer().setForeground(getIcon(R.drawable.bg_contextmenu_shadow));
 		}
 	}
 	
 	private void hideBottomHeaderShadow() {
-		getBottomContainer().setForeground(null);
+		if (getBottomContainer() != null) {
+			getBottomContainer().setForeground(null);
+		}
 	}
 
 	private void updateHeaderCard() {
@@ -635,6 +637,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private void updateCardsLayout() {
 		FrameLayout bottomContainer = getBottomContainer();
+		if (bottomContainer == null) {
+			return;
+		}
 		if (menuType == TrackMenuType.OPTIONS) {
 			AndroidUtils.setBackground(app, bottomContainer, isNightMode(),
 					R.color.list_background_color_light, R.color.list_background_color_dark);

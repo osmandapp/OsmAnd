@@ -299,14 +299,15 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void showBottomHeaderShadow() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			getBottomContainer().setForeground(app.getUIUtilities().getIcon(R.drawable.bg_contextmenu_shadow));
+		if (getBottomContainer() != null) {
+			getBottomContainer().setForeground(getIcon(R.drawable.bg_contextmenu_shadow));
 		}
 	}
 
 	private void hideBottomHeaderShadow() {
-		getBottomContainer().setForeground(null);
+		if (getBottomContainer() != null) {
+			getBottomContainer().setForeground(null);
+		}
 	}
 
 	private void showShadowButton() {
@@ -433,6 +434,9 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			LinearLayout cardsContainer = getCardsContainer();
 			View topShadow = getTopShadow();
 			FrameLayout bottomContainer = getBottomContainer();
+			if (bottomContainer == null) {
+				return;
+			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
 				bottomContainer.setBackgroundDrawable(null);

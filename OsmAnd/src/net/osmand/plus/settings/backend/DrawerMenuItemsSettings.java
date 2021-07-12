@@ -103,8 +103,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 	private void insertItemByOriginalOrder(String idToInsert) {
 		int itemOriginalOrder = originalOrderIds.indexOf(idToInsert);
 
-		int i;
-		for (i = itemOriginalOrder; i > 0; i--) {
+		for (int i = itemOriginalOrder; i > 0; i--) {
 			String prevOriginalItemId = originalOrderIds.get(i - 1);
 
 			if (orderIds.contains(prevOriginalItemId)) {
