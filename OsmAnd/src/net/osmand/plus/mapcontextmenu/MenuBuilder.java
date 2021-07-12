@@ -40,7 +40,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
@@ -71,6 +70,7 @@ import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -1432,7 +1432,8 @@ public class MenuBuilder {
 	}
 
 	protected void buildNearestWikiRow(ViewGroup viewGroup, SearchAmenitiesListener listener) {
-		if (!Version.isPaidVersion(app)) {
+		WikipediaPlugin plugin = WikipediaPlugin.getEnabledPlugin(WikipediaPlugin.class);
+		if (plugin != null && plugin.isLocked()) {
 			buildGetWikipediaBanner(viewGroup);
 		} else if (showNearestWiki && latLon != null && amenity != null) {
 			PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();

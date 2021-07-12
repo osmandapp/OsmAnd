@@ -14,6 +14,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.ContextMenuAdapter;
@@ -30,6 +31,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -103,6 +105,11 @@ public class WikipediaPlugin extends OsmandPlugin {
 	@Override
 	public boolean isPaid() {
 		return true;
+	}
+
+	@Override
+	public boolean isLocked() {
+		return !Version.isPaidVersion(app);
 	}
 
 	@Override
