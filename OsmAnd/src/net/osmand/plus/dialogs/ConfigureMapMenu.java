@@ -256,14 +256,6 @@ public class ConfigureMapMenu {
 				.setListener(l).createItem());
 
 		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
-		boolean srtmDisabled = !OsmandPlugin.isFunctional(SRTMPlugin.class) &&
-				!InAppPurchaseHelper.isContourLinesPurchased(app);
-		if (srtmDisabled) {
-			SRTMPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-			if (srtmPlugin != null) {
-				srtmPlugin.registerLayerContextMenuActions(activity.getMapView(), adapter, activity);
-			}
-		}
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 	}
 

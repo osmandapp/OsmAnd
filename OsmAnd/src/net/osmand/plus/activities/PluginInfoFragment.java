@@ -150,9 +150,11 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		enableDisableButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (plugin.isActive() == isChecked) return;
-				if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked)) return;
-				updateState();
+				if (plugin.isActive() != isChecked) {
+					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked)) {
+						updateState();
+					}
+				}
 			}
 		});
 		Button getButton = mainView.findViewById(R.id.plugin_get);
@@ -199,9 +201,6 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		settingsButton.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_settings), null, null, null);
 		View installHeader = mainView.findViewById(R.id.plugin_install_header);
 
-		enableDisableButton.setVisibility(View.VISIBLE);
-		enableDisableButton.setChecked(plugin.isActive());
-
 		if (plugin.isLocked()) {
 			getButton.setVisibility(View.VISIBLE);
 			settingsButton.setVisibility(View.GONE);
@@ -223,6 +222,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			}
 			installHeader.setVisibility(View.GONE);
 		}
+		enableDisableButton.setChecked(plugin.isActive());
 	}
 
 	@Override

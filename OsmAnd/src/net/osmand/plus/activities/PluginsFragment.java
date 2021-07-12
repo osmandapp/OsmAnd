@@ -212,7 +212,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				final OsmandPlugin plugin = (OsmandPlugin) item;
 				active = plugin.isActive();
 				if (!active) {
-					logoContDescId = plugin.needsInstallation()
+					logoContDescId = plugin.isLocked()
 							? R.string.access_shared_string_not_installed : R.string.shared_string_enable;
 				}
 				name = plugin.getName();

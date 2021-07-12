@@ -223,13 +223,6 @@ public class WikipediaPlugin extends OsmandPlugin {
 		return poiFilters;
 	}
 
-	@Override
-	public void onActiveStateChanged(boolean active) {
-		// Reload all POI filters to add or remove top Wikipedia filter
-		// after enable or disable Wikipedia plugin
-		app.getPoiFilters().reloadAllPoiFilters();
-	}
-
 	public void updateWikipediaState() {
 		if (isShowAllLanguages() || hasLanguagesFilter()) {
 			refreshWikiOnMap();
