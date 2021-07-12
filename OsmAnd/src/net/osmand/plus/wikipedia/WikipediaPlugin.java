@@ -188,6 +188,23 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public List<IndexItem> getSuggestedMaps() {
+		List<IndexItem> suggestedMaps = new ArrayList<>();
+
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		if (!downloadThread.getIndexes().isDownloadedFromInternet && settings.isInternetConnectionAvailable()) {
+			downloadThread.runReloadIndexFiles();
+		}
+
+		if (!downloadThread.shouldDownloadIndexes()) {
+			LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
+			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.WIKIPEDIA_FILE));
+		}
+
+		return suggestedMaps;
+	}
+
+	@Override
 	protected List<PoiUIFilter> getCustomPoiFilters() {
 		List<PoiUIFilter> poiFilters = new ArrayList<>();
 		if (topWikiPoiFilter == null) {

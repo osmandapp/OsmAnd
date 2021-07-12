@@ -15,6 +15,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.data.Amenity;
+import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.activities.MapActivity;
@@ -25,6 +26,8 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.dialogs.PluginDisabledBottomSheet;
 import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -57,6 +60,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -200,6 +204,15 @@ public abstract class OsmandPlugin {
 	}
 
 	public List<IndexItem> getSuggestedMaps() {
+		return Collections.emptyList();
+	}
+
+	protected List<IndexItem> getMapsForType(LatLon latLon, DownloadActivityType type) {
+		try {
+			return DownloadResources.findIndexItemsAt(app, latLon, type);
+		} catch (IOException e) {
+			LOG.error(e);
+		}
 		return Collections.emptyList();
 	}
 
@@ -498,8 +511,8 @@ public abstract class OsmandPlugin {
 				}
 			}
 
-			if (plugin.isMarketPlugin()) {
-				if (plugin.isActive()) {
+			if (plugin.isMarketPlugin() || plugin.isPaid()) {
+				if (plugin.isFunctional()) {
 					plugin.showInstallDialog(activity);
 				} else if (OsmandPlugin.checkPluginPackage(app, plugin)) {
 					plugin.showDisableDialog(activity);

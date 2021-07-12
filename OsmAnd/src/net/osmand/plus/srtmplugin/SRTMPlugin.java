@@ -401,15 +401,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		return suggestedMaps;
 	}
 
-	private List<IndexItem> getMapsForType(LatLon latLon, DownloadActivityType type) {
-		try {
-			return DownloadResources.findIndexItemsAt(app, latLon, type);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return Collections.emptyList();
-	}
-
 	public void toggleContourLines(final MapActivity activity,
 								   final boolean isChecked,
 								   final Runnable callback) {
