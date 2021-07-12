@@ -612,6 +612,14 @@ public class OsmandSettings {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
+	public int getSavedGlobalPrefsCount() {
+		return ((SharedPreferences) globalPreferences).getAll().size();
+	}
+
+	public int getSavedModePrefsCount(@NonNull ApplicationMode mode) {
+		return ((SharedPreferences) getProfilePreferences(mode)).getAll().size();
+	}
+
 	@SuppressWarnings("unchecked")
 	public CommonPreference<Boolean> registerBooleanPreference(String id, boolean defValue) {
 		if (registeredPreferences.containsKey(id)) {

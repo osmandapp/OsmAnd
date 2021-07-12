@@ -1,12 +1,13 @@
 package net.osmand.plus.base;
 
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
+
 import net.osmand.IProgress;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Message;
 
 public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> extends AsyncTask<Params, Progress, Result> implements IProgress {
 	protected String taskName;
@@ -136,7 +137,7 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 	public void setGeneralProgress(String genProgress) {
 	}
 
-	private int normalizeProgress(int progress) {
+	public static int normalizeProgress(int progress) {
 		if (progress < 0) {
 			return 0;
 		} else if (progress <= 100) {

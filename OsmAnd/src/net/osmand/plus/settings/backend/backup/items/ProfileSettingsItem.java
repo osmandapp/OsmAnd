@@ -73,12 +73,17 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 
 	@Override
 	public long getLocalModifiedTime() {
-		return app.getSettings().getLastModePreferencesEditTime(appMode);
+		return getSettings().getLastModePreferencesEditTime(appMode);
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		app.getSettings().setLastModePreferencesEditTime(appMode, lastModifiedTime);
+		getSettings().setLastModePreferencesEditTime(appMode, lastModifiedTime);
+	}
+
+	@Override
+	public long getEstimatedSize() {
+		return getSettings().getSavedModePrefsCount(appMode) * APPROXIMATE_PREFERENCE_SIZE_BYTES;
 	}
 
 	public ApplicationMode getAppMode() {
@@ -180,7 +185,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 					.setIconColor(modeBean.iconColor)
 					.setLocationIcon(modeBean.locIcon)
 					.setNavigationIcon(modeBean.navIcon);
-			app.getSettings().copyPreferencesFromProfile(parent, builder.getApplicationMode());
+			getSettings().copyPreferencesFromProfile(parent, builder.getApplicationMode());
 			appMode = ApplicationMode.saveProfile(builder, app);
 		} else if (!shouldReplace && exists()) {
 			renameProfile();

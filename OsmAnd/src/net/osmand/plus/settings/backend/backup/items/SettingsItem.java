@@ -119,6 +119,8 @@ public abstract class SettingsItem {
 
 	public abstract void setLocalModifiedTime(long lastModifiedTime);
 
+	public abstract long getEstimatedSize();
+
 	public boolean applyFileName(@NonNull String fileName) {
 		String n = getFileName();
 		return n != null && (n.endsWith(fileName) || fileName.startsWith(n + File.separator));

@@ -202,6 +202,19 @@ public class FileUtils {
 		return path != null && path.startsWith(getTempDir(app).getAbsolutePath());
 	}
 
+	public static void getDirectorySize(File file, long[] size) {
+		if (file.isDirectory()) {
+			File[] files = file.listFiles();
+			if (files != null) {
+				for (File subfolderFile : files) {
+					getDirectorySize(subfolderFile, size);
+				}
+			}
+		} else {
+			size[0] = size[0] + file.length();
+		}
+	}
+
 	public interface RenameCallback {
 		void renamedTo(File file);
 	}

@@ -48,6 +48,11 @@ public abstract class StreamSettingsItem extends SettingsItem {
 
 	public abstract long getSize();
 
+	@Override
+	public long getEstimatedSize() {
+		return getSize();
+	}
+
 	@NonNull
 	@Override
 	public String getName() {
