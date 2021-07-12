@@ -25,7 +25,7 @@
     • Plan Route: added ability to change navigation options, accessing configure map and search without leaving plan route.\n
     • New \"Purchase\" screen with detailed info about purchasing.\n
     • Added option to change the route line appearance.\n
-    • OsmAnd Live updates moved to \"Downloads > Updates\".\n
+    • OsmAnd Live updates moved to \"Downloads > Updates\.\n
     </string>
     <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
