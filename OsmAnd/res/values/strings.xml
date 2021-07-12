@@ -620,7 +620,7 @@
     <string name="parking_positions">Parking positions</string>
     <string name="create_edit_poi">Create or edit POI</string>
     <string name="quick_action_transport_descr">Button showing or hiding public transport on the map.</string>
-    <!-- string name="release_3_7">
+    <! --string name="release_3_7">
     • New offline Slope maps\n\n
     • Full customization of Favorites and GPX Waypoints – custom colors, icons, shapes\n\n
     • Customize items order in \"Context Menu\", \"Configure Map\" and \"Drawer\"\n\n
