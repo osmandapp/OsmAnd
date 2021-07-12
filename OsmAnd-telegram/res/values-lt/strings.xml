@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shared_string_suggested">Siūloma</string>
+    <string name="back_to_osmand">Grįžti į OsmAnd</string>
+    <string name="duration_ago">%1$s prieš</string>
+    <string name="last_response_duration">Paskutinis atsakymas: %1$s prieš</string>
+    <string name="last_update_from_telegram_duration">Paskutinis atnaujinimas iš Telegram: %1$s prieš</string>
+    <string name="last_response_date">Paskutinis atsakymas: %1$s</string>
+    <string name="last_update_from_telegram_date">Paskutinis atnaujinimas iš Telegram: %1$s</string>
+    <string name="shared_string_error_short">KLAIDA</string>
+    <string name="shared_string_export">Eksportuoti</string>
+    <string name="logcat_buffer_descr">Patikrinkite ir bendrinkite išsamius programos žurnalus</string>
+</resources>

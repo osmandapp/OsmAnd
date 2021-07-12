@@ -9,6 +9,11 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_DASHBOARD_ID = DRAWER_ITEM_ID_SCHEME + "dashboard";
 	String DRAWER_MAP_MARKERS_ID = DRAWER_ITEM_ID_SCHEME + "map_markers";
 	String DRAWER_MY_PLACES_ID = DRAWER_ITEM_ID_SCHEME + "my_places";
+	String DRAWER_FAVORITES_ID = DRAWER_ITEM_ID_SCHEME + "favorites";
+	String DRAWER_TRACKS_ID = DRAWER_ITEM_ID_SCHEME + "tracks";
+	String DRAWER_AV_NOTES_ID = DRAWER_ITEM_ID_SCHEME + "av_notes";
+	String DRAWER_OSM_EDITS_ID = DRAWER_ITEM_ID_SCHEME + "osm_edits";
+	String DRAWER_BACKUP_RESTORE_ID = DRAWER_ITEM_ID_SCHEME + "backup_restore";
 	String DRAWER_SEARCH_ID = DRAWER_ITEM_ID_SCHEME + "search";
 	String DRAWER_DIRECTIONS_ID = DRAWER_ITEM_ID_SCHEME + "directions";
 	String DRAWER_TRIP_RECORDING_ID = DRAWER_ITEM_ID_SCHEME + "trip_recording";

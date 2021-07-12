@@ -28,24 +28,17 @@ public class LocalBackupViewHolder extends RecyclerView.ViewHolder {
 	private final View localBackup;
 	private final View backupToFile;
 	private final View restoreFromFile;
-	private final TextView title;
-	private final TextView summary;
 
 	private boolean buttonsVisible = true;
 
 	public LocalBackupViewHolder(@NonNull View itemView) {
 		super(itemView);
 		localBackup = itemView.findViewById(R.id.local_backup);
-		title = localBackup.findViewById(android.R.id.title);
-		summary = localBackup.findViewById(android.R.id.summary);
 		backupToFile = itemView.findViewById(R.id.backup_to_file);
 		restoreFromFile = itemView.findViewById(R.id.restore_from_file);
 	}
 
 	public void bindView(@NonNull MapActivity mapActivity, boolean nightMode) {
-		title.setText(R.string.local_backup);
-		summary.setText(R.string.local_backup_descr);
-
 		localBackup.setOnClickListener(v -> {
 			buttonsVisible = !buttonsVisible;
 			updateButtonsVisibility(nightMode);

@@ -31,6 +31,8 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
@@ -42,7 +44,7 @@ import java.util.List;
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getDefaultIconColorId;
 
-public class ChoosePlanFragment extends BasePurchaseDialogFragment {
+public class ChoosePlanFragment extends BasePurchaseDialogFragment implements CardListener {
 
 	public static final String TAG = ChoosePlanFragment.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(ChoosePlanFragment.class);
@@ -165,7 +167,9 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FrameLayout container = mainView.findViewById(R.id.troubleshooting_card);
-			container.addView(new TroubleshootingCard(activity, purchaseHelper, true).build(activity));
+			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, !Version.isGooglePlayEnabled());
+			card.setListener(this);
+			container.addView(card.build(activity));
 		}
 	}
 
@@ -219,25 +223,27 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 		PriceButton<?>[] array = new PriceButton[priceButtons.size()];
 		priceButtons.toArray(array);
 
+		CharSequence price = array.length == 0 ? null : ObjectUtils.min(array).getPrice();
 		updateContinueButton(mainView.findViewById(R.id.button_continue_pro),
 				R.drawable.ic_action_osmand_pro_logo,
 				getString(R.string.osmand_pro),
-				ObjectUtils.min(array).getPrice(),
+				price,
 				v -> OsmAndProPlanFragment.showInstance(requireActivity()),
-				true);
+				Version.isGooglePlayEnabled());
 
 		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper);
 		array = new PriceButton[priceButtons.size()];
 		priceButtons.toArray(array);
 
+		price = array.length == 0 ? null : ObjectUtils.min(array).getPrice();
 		boolean availableInMapsPlus = selectedFeature.isAvailableInMapsPlus();
 		int mapsPlusIconId = availableInMapsPlus ? R.drawable.ic_action_osmand_maps_plus : R.drawable.ic_action_osmand_maps_plus_desaturated;
 		updateContinueButton(mainView.findViewById(R.id.button_continue_maps_plus),
 				mapsPlusIconId,
 				getString(R.string.maps_plus),
-				ObjectUtils.min(array).getPrice(),
+				price,
 				v -> MapsPlusPlanFragment.showInstance(requireActivity()),
-				availableInMapsPlus);
+				availableInMapsPlus && Version.isGooglePlayEnabled());
 	}
 
 	private void updateContinueButton(View view, int iconId, String plan, CharSequence price, OnClickListener listener, boolean available) {
@@ -250,7 +256,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 
 		TextView tvDescription = view.findViewById(R.id.description);
 		String pricePattern = getString(R.string.from_with_param);
-		String description = String.format(pricePattern, price);
+		String description = price != null ? String.format(pricePattern, price) : "";
 		tvDescription.setText(description);
 		tvDescription.setTextColor(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.75f));
 
@@ -264,7 +270,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull OsmAndFeature selectedFeature) {
 		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		if (Version.isAmazon()) {
+		if (Version.isAmazon() && selectedFeature != OsmAndFeature.OSMAND_CLOUD) {
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
 			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			if (AndroidUtils.isIntentSafe(app, intent)) {
@@ -278,5 +284,22 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment {
 				fragment.show(activity.getSupportFragmentManager(), TAG);
 			}
 		}
+	}
+
+	@Override
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+
+	}
+
+	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+		if (card instanceof TroubleshootingCard) {
+			dismiss();
+		}
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+
 	}
 }

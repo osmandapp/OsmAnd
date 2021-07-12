@@ -1,14 +1,122 @@
 package net.osmand.util;
 
+import java.io.File;
 import java.util.Collection;
-import java.util.List;
 
 import gnu.trove.list.TLongList;
+import gnu.trove.list.array.TIntArrayList;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OsmMapUtils;
 
 public class MapAlgorithms {
+	
+	
+	public static void main(String[] args) {
+		int STEP = 30;
+		TIntArrayList altIncs = new TIntArrayList(new int[] {0, 10, -1, 5, -3, 2, 3, -16, -1});
+		
+		String str = encodeIntHeightArrayGraph(STEP, altIncs, 3);
+		TIntArrayList decodedSteps = decodeIntHeightArrayGraph(str, 3);
+		GPXFile gpx = GPXUtilities.loadGPXFile(new File("/Users/victorshcherb/osmand/maps/tracks/rec/2015-01-19_02-43_Mon.gpx"));
+		TrkSegment sgm = gpx.tracks.get(0).segments.get(0);
+		
+		// Algorithm begin
+		double startEle = 130;
+		augmentTrkSegmentWithAltitudes(sgm, decodedSteps, startEle);
+		
+	}
+
+	public static void augmentTrkSegmentWithAltitudes(TrkSegment sgm, TIntArrayList decodedSteps, double startEle) {
+		int stepDist = decodedSteps.get(0);
+		int stepHNextInd = 1;
+		double prevHDistX = 0;
+		sgm.points.get(0).ele = startEle;
+		for (int i = 1; i < sgm.points.size(); i++) {
+			WptPt prev = sgm.points.get(i - 1);
+			WptPt cur = sgm.points.get(i);
+			double origHDistX = prevHDistX;
+			double len = MapUtils.getDistance(prev.getLatitude(), prev.getLongitude(), cur.getLatitude(),
+					cur.getLongitude()) / stepDist;
+			double curHDistX = len + prevHDistX;
+			double hInc = 0;
+			while (curHDistX > stepHNextInd && stepHNextInd < decodedSteps.size()) {
+				if (prevHDistX < stepHNextInd) {
+					hInc += (stepHNextInd - prevHDistX) * decodedSteps.get(stepHNextInd);
+					if (stepHNextInd - prevHDistX > 0.5) {
+						// introduce extra point
+						double fraction = (stepHNextInd - prevHDistX) / (curHDistX - origHDistX);
+						WptPt newPt = new WptPt();
+						newPt.lat = prev.getLatitude() + fraction * (cur.getLatitude() - prev.getLatitude());
+						newPt.lon = prev.getLongitude() + fraction * (cur.getLongitude()- prev.getLongitude());
+						newPt.ele = prev.ele + hInc;
+						sgm.points.add(i, newPt);
+						i++;
+					}
+					prevHDistX = stepHNextInd;
+					
+				}
+				stepHNextInd++;
+			}
+			if (stepHNextInd < decodedSteps.size()) {
+				hInc += (curHDistX - prevHDistX) * decodedSteps.get(stepHNextInd);
+			}
+			cur.ele = prev.ele + hInc;
+			prevHDistX = curHDistX;
+		}
+	}
+	
+	
+	public static TIntArrayList decodeIntHeightArrayGraph(String str, int repeatBits) {
+		int maxRepeats = (1 << repeatBits) - 1;
+		TIntArrayList res = new TIntArrayList();
+		char[] ch = str.toCharArray();
+		res.add(ch[0]);
+		for (int i = 1; i < ch.length; i++) {
+			char c = ch[i];
+			int rept = c & maxRepeats;
+			while (rept > 0) {
+				res.add(0);
+				rept--;
+			}
+			int num = c >> repeatBits;
+			if (num % 2 == 0) {
+				res.add(num >> 1);
+			} else {
+				res.add(-(num >> 1));
+			}
+		}
+		return res;
+	}
+	
+	public static String encodeIntHeightArrayGraph(int step, TIntArrayList array, int repeatBits) {
+		int maxRepeats = (1 << repeatBits) - 1;
+		TIntArrayList ch = new TIntArrayList();
+		ch.add(step);
+		int repeat = 0;
+		for (int i = 0; i < array.size(); i++) {
+			int altInc = array.get(i);
+			if (altInc != 0 || repeat == maxRepeats) {
+				int posAltInc = Math.abs(altInc);
+				int sign = altInc < 0 ? 1 : 0;
+				char c = (char) (((posAltInc << 1) + sign) << repeatBits);
+				c += repeat;
+				ch.add(c);
+				repeat = 0;
+			} else {
+				repeat++;
+			}
+		}
+		char[] c = new char[ch.size()];
+		for (int i = 0; i < ch.size(); i++) {
+			c[i] = (char) ch.get(i);
+		}
+		return new String(c);
+	}
 	
 	public static boolean isClockwiseWay(TLongList c) {
 		if (c.size() == 0) {

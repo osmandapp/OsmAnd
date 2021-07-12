@@ -23,6 +23,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	private final Map<String, ItemProgressInfo> itemsProgress = new HashMap<>();
 	private int generalProgress;
+	private int maxProgress;
 
 	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
@@ -51,6 +52,10 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		return generalProgress;
 	}
 
+	public int getMaxProgress() {
+		return maxProgress;
+	}
+
 	@Nullable
 	public ItemProgressInfo getItemProgressInfo(@NonNull String type, @NonNull String fileName) {
 		return itemsProgress.get(type + fileName);
@@ -71,7 +76,12 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	@Override
 	protected void onPreExecute() {
 		if (listener != null) {
-			listener.onBackupExportStarted(exporter.getItems().size() + exporter.getFilesToDelete().size());
+			int size = 0;
+			for (SettingsItem item : exporter.getItems().values()) {
+				size += item.getEstimatedSize();
+			}
+			maxProgress = size / 1024;
+			listener.onBackupExportStarted();
 		}
 	}
 
@@ -137,7 +147,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 			@Override
 			public void updateGeneralProgress(int uploadedItems, int uploadedKb) {
 				exporter.setCancelled(isCancelled());
-				publishProgress(uploadedItems);
+				publishProgress(uploadedKb);
 			}
 
 			@Override

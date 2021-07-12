@@ -70,14 +70,14 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
+		if (view != null) {
+			toolbarLayout = view.findViewById(R.id.toolbar_layout);
+			buttonsContainer = view.findViewById(R.id.buttons_container);
+			progressBar = view.findViewById(R.id.progress_bar);
 
-		toolbarLayout = view.findViewById(R.id.toolbar_layout);
-		buttonsContainer = view.findViewById(R.id.buttons_container);
-		progressBar = view.findViewById(R.id.progress_bar);
-
-		description = header.findViewById(R.id.description);
-		description.setText(R.string.select_data_to_import);
-
+			description = header.findViewById(R.id.description);
+			description.setText(R.string.select_data_to_import);
+		}
 		return view;
 	}
 
@@ -92,20 +92,17 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 	protected abstract void importFinished(boolean succeed, boolean needRestart, List<SettingsItem> items);
 
 	public ImportListener getImportListener() {
-		return new ImportListener() {
-			@Override
-			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
-				if (succeed) {
-					app.getRendererRegistry().updateExternalRenderers();
-					AppInitializer.loadRoutingFiles(app, null);
-					reloadIndexes(items);
-					AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
-					if (plugin != null) {
-						plugin.indexingFiles(null, true, true);
-					}
+		return (succeed, needRestart, items) -> {
+			if (succeed) {
+				app.getRendererRegistry().updateExternalRenderers();
+				AppInitializer.loadRoutingFiles(app, null);
+				reloadIndexes(items);
+				AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+				if (plugin != null) {
+					plugin.indexingFiles(null, true, true);
 				}
-				importFinished(succeed, needRestart, items);
 			}
+			importFinished(succeed, needRestart, items);
 		};
 	}
 
@@ -138,21 +135,13 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	protected CheckDuplicatesListener getDuplicatesListener() {
-		return new CheckDuplicatesListener() {
-			@Override
-			public void onDuplicatesChecked(@NonNull final List<Object> duplicates, final List<SettingsItem> items) {
-				long spentTime = System.currentTimeMillis() - duplicateStartTime;
-				if (spentTime < MIN_DELAY_TIME_MS) {
-					long delay = MIN_DELAY_TIME_MS - spentTime;
-					app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							processDuplicates(duplicates, items);
-						}
-					}, delay);
-				} else {
-					processDuplicates(duplicates, items);
-				}
+		return (duplicates, items) -> {
+			long spentTime = System.currentTimeMillis() - duplicateStartTime;
+			if (spentTime < MIN_DELAY_TIME_MS) {
+				long delay = MIN_DELAY_TIME_MS - spentTime;
+				app.runInUIThread(() -> processDuplicates(duplicates, items), delay);
+			} else {
+				processDuplicates(duplicates, items);
 			}
 		};
 	}

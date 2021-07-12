@@ -6,17 +6,18 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
-import net.osmand.plus.settings.backend.backup.StreamSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.StreamSettingsItemWriter;
 import net.osmand.util.Algorithms;
 
@@ -26,10 +27,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class FileSettingsItem extends StreamSettingsItem {
 
@@ -116,8 +113,15 @@ public class FileSettingsItem extends StreamSettingsItem {
 						}
 						break;
 					case TTS_VOICE:
-						if (name.startsWith(subtype.subtypeFolder) && name.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
-							return subtype;
+						if (name.startsWith(subtype.subtypeFolder)) {
+							if (name.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
+								return subtype;
+							} else if (name.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+								int lastPathDelimiter = name.lastIndexOf('/');
+								if (lastPathDelimiter != -1 && name.substring(0, lastPathDelimiter).endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
+									return subtype;
+								}
+							}
 						}
 						break;
 					default:
@@ -138,7 +142,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	protected File file;
-	protected File savedFile;
 	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
@@ -244,10 +247,16 @@ public class FileSettingsItem extends StreamSettingsItem {
 	public long getSize() {
 		if (size != 0) {
 			return size;
-		} else if (file != null && !file.isDirectory()) {
-			return file.length();
+		} else if (file != null) {
+			if (file.isDirectory()) {
+				long[] dirSize = new long[1];
+				FileUtils.getDirectorySize(file, dirSize);
+				size = dirSize[0];
+			} else {
+				size = file.length();
+			}
 		}
-		return 0;
+		return size;
 	}
 
 	public void setSize(long size) {
@@ -269,7 +278,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 		return file.exists();
 	}
 
-	private File renameFile(File oldFile) {
+	public File renameFile(File oldFile) {
 		String oldPath = oldFile.getAbsolutePath();
 		String prefix;
 		if (file.isDirectory()) {
@@ -300,37 +309,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Nullable
 	@Override
 	public SettingsItemReader<? extends SettingsItem> getReader() {
-		return new StreamSettingsItemReader(this) {
-			@Override
-			public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
-				OutputStream output;
-				savedFile = FileSettingsItem.this.getFile();
-				if (savedFile.isDirectory()) {
-					savedFile = new File(savedFile, entryName.substring(fileName.length()));
-				}
-				if (savedFile.exists() && !shouldReplace) {
-					savedFile = renameFile(savedFile);
-				}
-				if (savedFile.getParentFile() != null && !savedFile.getParentFile().exists()) {
-					//noinspection ResultOfMethodCallIgnored
-					savedFile.getParentFile().mkdirs();
-				}
-				output = new FileOutputStream(savedFile);
-				byte[] buffer = new byte[SettingsHelper.BUFFER];
-				int count;
-				try {
-					while ((count = inputStream.read(buffer)) != -1) {
-						output.write(buffer, 0, count);
-					}
-					output.flush();
-				} finally {
-					Algorithms.closeStream(output);
-				}
-				if (lastModifiedTime != -1) {
-					savedFile.setLastModified(lastModifiedTime);
-				}
-			}
-		};
+		return new FileSettingsItemReader(this);
 	}
 
 	@Nullable

@@ -12,6 +12,7 @@ import org.mozilla.javascript.ScriptableObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,15 +91,7 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
         if (voiceDir.getName().contains("tts")) {
             return false;
         }
-        File[] files = voiceDir.listFiles();
-        if (files != null) {
-            for (File f : files) {
-                if (f.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return new File(voiceDir, voiceDir.getName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS).exists();
     }
 
 }

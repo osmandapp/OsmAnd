@@ -336,7 +336,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			if (key.equals("image")
 					|| key.equals("mapillary")
 					|| key.equals("subway_region")
-					|| (key.equals("note") && !osmEditingEnabled)) {
+					|| (key.equals("note") && !osmEditingEnabled)
+					|| key.startsWith("lang_yes")) {
 				continue;
 			}
 

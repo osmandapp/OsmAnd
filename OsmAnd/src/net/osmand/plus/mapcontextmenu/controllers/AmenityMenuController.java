@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -29,11 +28,8 @@ import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
-import org.apache.commons.logging.Log;
-
 import java.util.List;
 
-import static net.osmand.plus.wikivoyage.data.TravelHelper.*;
 import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE_POINT;
 
 public class AmenityMenuController extends MenuController {
@@ -149,13 +145,15 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	public static int getRightIconId(Amenity amenity) {
-		String id = null;
-		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-		if (st != null) {
-			if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
-				id = st.getIconKeyName();
-			} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-				id = st.getOsmTag() + "_" + st.getOsmValue();
+		String id = amenity.getGpxIcon();
+		if (id == null) {
+			PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+			if (st != null) {
+				if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
+					id = st.getIconKeyName();
+				} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+					id = st.getOsmTag() + "_" + st.getOsmValue();
+				}
 			}
 		}
 		if (id != null) {

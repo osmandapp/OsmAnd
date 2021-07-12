@@ -34,6 +34,8 @@ import java.util.Map;
 
 public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPoint> {
 
+	private static final int APPROXIMATE_OSM_EDIT_SIZE_BYTES = 500;
+
 	public static final String ID_KEY = "id";
 	public static final String NAME_KEY = "name";
 	public static final String LAT_KEY = "lat";
@@ -120,6 +122,11 @@ public class OsmEditsSettingsItem extends CollectionSettingsItem<OpenstreetmapPo
 	@Override
 	public OpenstreetmapPoint renameItem(@NonNull OpenstreetmapPoint item) {
 		return item;
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull OpenstreetmapPoint item) {
+		return APPROXIMATE_OSM_EDIT_SIZE_BYTES;
 	}
 
 	@NonNull

@@ -62,7 +62,7 @@ public interface TravelHelper {
 	ArrayList<String> getArticleLangs(@NonNull TravelArticleIdentifier articleId);
 
 	@Nullable
-	TravelGpx searchGpx(LatLon location, String fileName, String ref);
+	TravelGpx searchGpx(@NonNull LatLon location, @Nullable String fileName, @Nullable String ref);
 
 	void openTrackMenu(@NonNull TravelArticle article, @NonNull MapActivity mapActivity,
 					   @NonNull String gpxFileName, @NonNull LatLon location);

@@ -1098,7 +1098,7 @@
     <string name="bg_service_sleep_mode_on">Ĉesigi\n fon-laboradon de aplikaĵo</string>
     <string name="int_continuosly">Konstanta</string>
     <string name="screen_is_locked">Frapetu la emblemon de pendseruro por malŝlosi</string>
-    <string name="map_widget_top_text">Stratnomo</string>
+    <string name="map_widget_top_text">Nomo de strato</string>
     <string name="map_widget_config">Agordi ekranon</string>
     <string name="map_widget_back_to_loc">Kie mi estas</string>
     <string name="map_widget_lock_screen">Ŝlosi ekranon</string>
@@ -4045,7 +4045,7 @@
     <string name="trip_recording_save_and_continue">Konservi kaj daŭrigi</string>
     <string name="trip_recording_show_start_dialog_setting">Se malaktiva, registrado komenciĝos tuj post frapeto sur la fenestraĵo aŭ menuero, preterlasante la ekranon de konfirmo.</string>
     <string name="show_start_dialog">Montri komencan dialogon</string>
-    <string name="specify_color_for_map_mode">Elektu koloron por map‑reĝimo %1$s.</string>
+    <string name="specify_color_for_map_mode">Elektu koloron por la map‑reĝimo %1$s.</string>
     <string name="customize_route_line">Alĝustigi linion de kurso</string>
     <string name="shared_string_route_line">Linio de kurso</string>
     <string name="release_4_0_beta">• eblo elŝuti nivelkurbojn en futoj
@@ -4096,7 +4096,7 @@
     <string name="recorded_description">Antaŭregistritaj voĉoj sonas pli bone, sed la aplikaĵo povas nur elparoli gvidiloj pri turnoj. Ĝi ne povas anonci nomojn de stratoj aŭ de interesejoj.</string>
     <string name="use_system_language">Uzi sisteman lingvon</string>
     <string name="shared_string_itinerary">Kurso</string>
-    <string name="route_line_use_map_style_width">Uzi implicitan larĝon por la map‑stilo %1$s.</string>
+    <string name="route_line_use_map_style_width">Uzi implicitan larĝon de la map‑stilo %1$s.</string>
     <string name="route_line_use_map_style_color">Uzi implicitan koloron de la map‑stilo %1$s.</string>
     <string name="poi_routes">Kursoj</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Eviti zonojn nur por malalte aer‑malpurigantaj veturiloj</string>
@@ -4108,33 +4108,31 @@
     <string name="duration_ago">antaŭ %1$s</string>
     <string name="cloud_email_not_registered">Tiu ĉi retpoŝta adreso ne estis registrita en OsmAnd-Nubo</string>
     <string name="osmand_cloud">OsmAnd-Nubo</string>
-    <string name="osmand_cloud_authorize_descr">Neniam perdu viajn datumojn: fari sekurkopiojn kaj restarigi ĉiujn datumojn senprobleme.</string>
+    <string name="osmand_cloud_authorize_descr">Neniam perdu viajn datumojn. Facile faru sekurkopiojn kaj restarigu ĉiujn datumojn.</string>
     <string name="local_backup">Loka sekurkopio</string>
     <string name="local_backup_descr">Fari sekurkopion aŭ restarigi datumojn el loka dosiero.</string>
     <string name="backup_into_file">Konservi al dosiero</string>
     <string name="restore_from_file">Restarigi el dosiero</string>
     <string name="osmand_cloud_help_descr">Ĉu vi bezonas helpon\? Kontaktu nin ĉe %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Enigu vian retpoŝtan adreson, ĉiuj viaj datumoj estos ligitaj kun ĝi.
-\nLa kontrolkodo estos sendita al tiu ĉi retpoŝta adreso.</string>
-    <string name="osmand_cloud_login_descr">Enigu la retpoŝtan adreson, kiun vi uzis por registriĝi. Ni sendos al vi unufojan pasvorton necesan por la sekva etapo.</string>
+    <string name="osmand_cloud_create_account_descr">Enigu vian retpoŝtan adreson, kontrolkodo estos tien sendita kaj ĉiuj viaj datumoj estos al ĝi ligitaj.</string>
+    <string name="osmand_cloud_login_descr">Enigu la retpoŝtan adreson, kiun vi uzis por registriĝi. Dum la sekva etapo unufoja pasvorto estos al ĝi sendita.</string>
     <string name="verify_email_address">Kontroli retpoŝtan adreson</string>
-    <string name="verify_email_address_descr">La kontrolkodo estis sendita al %1$s, enigu ĝin en la lampon sube.</string>
-    <string name="enter_verification_code">Enigu 4-ciferan kodon</string>
-    <string name="cloud_email_already_registered">Konto kun tiu ĉi retpoŝta adreso jam estas registrita.</string>
+    <string name="verify_email_address_descr">Kontrolkodo sendita al %1$s, enigu ĝin en la kampon sube.</string>
+    <string name="cloud_email_already_registered">Tiu ĉi retpoŝta adreso jam estas registrita.</string>
     <string name="resend_verification_code">Resendi kontrolkodon</string>
     <string name="verification_code_missing">Mi ne ricevis kontrolkodon</string>
     <string name="verification_code_missing_description">Necesos atendi eĉ 10 minutojn por ricevi la kodon, bonvolu ankaŭ kontroli vian trudmesaĝujon. Se tio ĉi ne helpos, uzu la butonon sube.</string>
     <string name="select_nav_profile_dialog_message">Elekto de profilo de navigo influas al maniero kiel kalkuli kurson. Eblas elekti malkonektan aŭ enretan navigilon.</string>
-    <string name="restore_complete">Restarigo finita</string>
+    <string name="restore_complete">Restarigita</string>
     <string name="grey_color_slope">Griza koloro estas uzata kiam dekliveco estas nekonata.</string>
     <string name="backup_version_history">Historio de versioj</string>
     <string name="backup_storage_taken">Uzata spaco</string>
-    <string name="backup_version_history_delete_descr">Ĉu vi certe volas forigi historion de ŝanĝitaj specoj el la OsmAnd-Nubo\?</string>
+    <string name="backup_version_history_delete_descr">Ĉu forigi historion de neaktualaj specoj de datumoj el OsmAnd-Nubo\?</string>
     <string name="delete_version_history">Forigi historion de versioj</string>
     <string name="loading_list_of_routing_services">Ŝargado de listo de disponeblaj navigiloj</string>
     <string name="shared_string_offline">Malkonekta</string>
     <string name="shared_string_online">Enreta</string>
-    <string name="osmand_online_routing_promo">Vi povas uzi antaŭdifinitajn ŝablonojn aŭ aldoni propran enretan navigilon (subtenataj: OSRM, Graphhopper, OpenRouteService, GPX).</string>
+    <string name="osmand_online_routing_promo">Uzi antaŭdifinitajn ŝablonojn, aŭ aldoni enretajn navigilojn OSRM, GraphHopper, OpenRouteService aŭ GPX.</string>
     <string name="shared_string_external">Ekstera</string>
     <string name="provided_by">Liverata de %1$s</string>
     <string name="failed_loading_predefined_engines">Fiaskis enlegi liston de antaŭdifinitaj ŝablonoj.
@@ -4171,7 +4169,7 @@
     <string name="restore_from_osmand_cloud">Restarigi el OsmAnd-Nubo</string>
     <string name="choose_what_to_restore">Elektu kion restarigi.</string>
     <string name="restore_selected_data">Restarigi elektitajn datumojn</string>
-    <string name="receiving_data_from_server">Ricevado de datumoj el la servilo</string>
+    <string name="receiving_data_from_server">Ricevado de datumoj el la servilo…</string>
     <string name="routing_attr_avoid_tunnels_description">Eviti tunelojn</string>
     <string name="routing_attr_avoid_tunnels_name">Sen tuneloj</string>
     <string name="send_crash_log">Sendi pane-protokolon</string>
@@ -4191,8 +4189,8 @@
     <string name="complete_purchase">Aĉeti</string>
     <string name="regular_price">Norma prezo</string>
     <string name="from_with_param">De %1$s</string>
-    <string name="backup_delete_types_descr">Ĉu vi volas forigi el la nubo datumojn de malaktivaj elementoj\?</string>
-    <string name="backup_delete_types">Forigi datumojn de malaktivaj specoj</string>
+    <string name="backup_delete_types_descr">Ĉu vi volas forigi el la nubo datumojn de neaktualaj elementoj\?</string>
+    <string name="backup_delete_types">Forigi malaktivajn specojn de datumoj</string>
     <string name="shared_string_discussion">Diskuto</string>
     <string name="shared_string_view_all">Montri ĉiujn</string>
     <string name="purchases_feature_desc_nautical">Akiru aliron al informoj pri mara profundo.</string>
@@ -4204,7 +4202,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Akiru aliron al ĉiumonataj ĝisdatigoj de malkonektaj mapoj.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Akiru aliron al pli oftaj ĝisdatigoj de mapoj: ĉiuhoraj, ĉiutagaj aŭ ĉiusemajnaj. Ne necesas reelŝuti la tutan mapon – ĝisdatigoj enhavas nur ŝanĝitajn objektojn.</string>
     <string name="purchases_feature_desc_advanced_widgets">Akiru aliron al spertulaj fenestraĵoj OsmAnd.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne ĉagreniĝu pri perdi viajn datumojn post reinstalo, kreu kaj restarigu sekurkopiojn de viaj datumoj senprobleme.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Tenu ĉiujn datumojn de OsmAnd enrete en OsmAnd-Nubo. Ne perdu viajn datumojn post reinstalu. Facile kreu kaj restarigu sekurkopiojn de viaj datumoj.</string>
     <string name="unlimited_map_downloads">Senlimaj elŝutoj de mapoj</string>
     <string name="wikipedia_and_wikivoyage_offline">Vikipedo kaj Vikivojaĝo malkonekte</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Terenaj mapoj: nivelkurboj, nivelombrumo, dekliveco</string>
@@ -4213,15 +4211,38 @@
     <string name="terrain_maps">Terenaj mapoj</string>
     <string name="nautical_depth">Maraj profundec-kurboj</string>
     <string name="advanced_widgets">Spertulaj fenestraĵoj</string>
-    <string name="backup_error_user_is_already_registered">Jam ekzistas uzanto kun tiu ĉi retpoŝta adreso</string>
+    <string name="backup_error_user_is_already_registered">Tiu ĉi retpoŝta adreso estas uzata de alia konto</string>
     <string name="backup_error_subscription_was_expired">Abono senvalidiĝis</string>
     <string name="backup_error_subscription_was_used">Abono aŭ reklamkodo estas uzata de alia konto: %1$s</string>
     <string name="backup_error_size_is_exceeded">Superis maksimuman grandon por OsmAnd-Nubo: %1$s</string>
-    <string name="backup_error_gzip_only_supported_upload">Liverita dosiero ne estas en la formo gzip</string>
-    <string name="backup_error_file_not_available">Dosiero ne estas disponebla</string>
-    <string name="backup_error_token_is_not_valid">Identigilo de aparato aŭ ĵetono estas malĝusta</string>
-    <string name="backup_error_token_is_not_valid_or_expired">Ĵetono estas malĝusta aŭ senvalidiĝis</string>
-    <string name="backup_error_user_is_not_registered">Uzanto kun tiu ĉi retpoŝta adreso ne estas registrita</string>
+    <string name="backup_error_gzip_only_supported_upload">Dosiero estu en la formo .gzip</string>
+    <string name="backup_error_file_not_available">Dosiero ne disponebla</string>
+    <string name="backup_error_token_is_not_valid">Io estas erara pri identigilo de la aparato aŭ ĵetono</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Ĵetono malĝusta aŭ senvalidiĝis</string>
+    <string name="backup_error_user_is_not_registered">Neniu registrita uzanto kun tiu ĉi retpoŝta adreso</string>
     <string name="backup_error_no_valid_subscription">Neniu valida abono</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Vi povas akiri la eblaĵon “%1$s” kiel parto de la plano %2$s. Komparo de planoj:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Akiru la eblaĵon “%1$s” kiel parto de la plano %2$s. Komparo:</string>
+    <string name="release_4_0">• sekurkopio en nubo
+\n
+\n• nokta reĝimo por la map-stilo “Topo”
+\n
+\n• eblo elŝuto nivelkurbojn en futoj
+\n
+\n• eblo kolorigi spurojn laŭ altitudo, rapido aŭ dekliveco
+\n
+\n• aktualigita fenestro “registri spuron”
+\n
+\n• distanco je frapeto: nun aperas en aparta eblaĵo anstataŭ esti en cirkleto
+\n
+\n• plani kurson: eblo ŝanĝi parametrojn de navigo kaj agordojn de mapo, kaj serĉi sen forlasi la ekranon “plani kurson”
+\n
+\n• nova ekrano “aĉetoj” enhavanta detalajn informojn pri pagendaj eblaĵoj de OsmAnd
+\n
+\n• eblo ŝanĝi aspekton de linio de kurso
+\n
+\n• ĝisdatigoj OsmAnd Live nun aperas en “elŝutoj” → “ĝisdatigoj”
+\n
+\n</string>
+    <string name="duration_moment_ago">antaŭ momento</string>
+    <string name="approximate_route_description">Alproksimigi kurson al vojoj sur la mapo por akiri informojn pri turnoj kaj aliajn datumojn:</string>
 </resources>

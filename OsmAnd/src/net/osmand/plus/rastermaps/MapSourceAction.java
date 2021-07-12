@@ -13,6 +13,7 @@ import androidx.core.util.Pair;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -60,9 +61,13 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		return app.getSettings().MAP_ONLINE_DATA.get()
-				? app.getSettings().MAP_TILE_SOURCES.get()
-				: MapSourceAction.LAYER_OSM_VECTOR;
+		if (!app.getSettings().MAP_ONLINE_DATA.get()) {
+			return MapSourceAction.LAYER_OSM_VECTOR;
+		}
+		String tileSources = app.getSettings().MAP_TILE_SOURCES.get();
+		return tileSources.endsWith(IndexConstants.SQLITE_EXT)
+				? Algorithms.getFileNameWithoutExtension(tileSources)
+				: tileSources;
 	}
 
 	@Override

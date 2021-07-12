@@ -12,7 +12,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.ItineraryType;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.ExportSettingsType;
@@ -32,6 +31,8 @@ import java.util.List;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
+
+	private static final int APPROXIMATE_HISTORY_MARKER_SIZE_BYTES = 380;
 
 	private MapMarkersHelper markersHelper;
 
@@ -126,15 +127,20 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 			number++;
 			String name = item.getOnlyName() + " " + number;
 			PointDescription description = new PointDescription(PointDescription.POINT_TYPE_LOCATION, name);
-			MapMarker renamedMarker = new MapMarker(item.point, description, item.colorIndex, item.selected, item.index);
+			MapMarker renamedMarker = new MapMarker(item.point, description, item.colorIndex);
 			if (!isDuplicate(renamedMarker)) {
 				renamedMarker.history = true;
+				renamedMarker.selected = item.selected;
 				renamedMarker.visitedDate = item.visitedDate;
 				renamedMarker.creationDate = item.creationDate;
-				renamedMarker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
 				return renamedMarker;
 			}
 		}
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull MapMarker item) {
+		return APPROXIMATE_HISTORY_MARKER_SIZE_BYTES;
 	}
 
 	public MapMarkersGroup getMarkersGroup() {

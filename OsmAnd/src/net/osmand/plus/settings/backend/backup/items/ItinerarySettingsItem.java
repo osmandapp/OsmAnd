@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper.ItineraryGroupInfo;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -31,6 +32,8 @@ import java.util.Map;
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGroup> {
+
+	private static final int APPROXIMATE_ITINERARY_SIZE_BYTES = 285;
 
 	private MapMarkersHelper markersHelper;
 	private ItineraryDataHelper dataHelper;
@@ -126,6 +129,11 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 		return item;
 	}
 
+	@Override
+	public long getEstimatedItemSize(@NonNull MapMarkersGroup item) {
+		return APPROXIMATE_ITINERARY_SIZE_BYTES;
+	}
+
 	@Nullable
 	@Override
 	public SettingsItemReader<ItinerarySettingsItem> getReader() {
@@ -139,8 +147,9 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
 				} else {
+					Map<String, MapMarker> markers = new LinkedHashMap<>();
 					Map<String, MapMarkersGroup> groups = new LinkedHashMap<>();
-					dataHelper.collectMarkersGroups(gpxFile, groups, groupInfos);
+					dataHelper.collectMarkersGroups(gpxFile, groups, groupInfos, markers);
 					items.addAll(groups.values());
 				}
 			}
@@ -150,7 +159,7 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		GPXFile gpxFile = dataHelper.generateGpx(items);
+		GPXFile gpxFile = dataHelper.generateGpx(items, null);
 		return getGpxWriter(gpxFile);
 	}
 }

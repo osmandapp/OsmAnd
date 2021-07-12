@@ -13,6 +13,7 @@ import androidx.core.util.Pair;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -60,7 +61,13 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		return app.getSettings().MAP_OVERLAY.get() != null ? app.getSettings().MAP_OVERLAY.get() : KEY_NO_OVERLAY;
+		String mapOverlay = app.getSettings().MAP_OVERLAY.get();
+		if (mapOverlay == null) {
+			return KEY_NO_OVERLAY;
+		}
+		return mapOverlay.endsWith(IndexConstants.SQLITE_EXT)
+				? Algorithms.getFileNameWithoutExtension(mapOverlay)
+				: mapOverlay;
 	}
 
 	@Override

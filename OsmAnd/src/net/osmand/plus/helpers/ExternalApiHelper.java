@@ -512,7 +512,7 @@ public class ExternalApiHelper {
 						PointDescription.POINT_TYPE_MAP_MARKER, name != null ? name : "");
 
 				MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-				markersHelper.addMapMarker(new LatLon(lat, lon), pd);
+				markersHelper.addMapMarker(new LatLon(lat, lon), pd, null);
 
 				MapMarker marker = markersHelper.getFirstMapMarker();
 				if (marker != null) {

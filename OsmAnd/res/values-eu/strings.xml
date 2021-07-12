@@ -3965,7 +3965,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="osmand_cloud_login_descr">Sartu erregistratzeko erabili zenuen helbide elektronikoa. Bidaliko dizugu hurrengo urratserako behar duzun erabilera bakarreko pasahitza.</string>
     <string name="verify_email_address">Egiaztatu e-posta helbidea</string>
     <string name="verify_email_address_descr">Bidali dugu egiaztatzeko kodea %1$s kontura, sartu beheko eremuan.</string>
-    <string name="enter_verification_code">Sartu 4 digituko kodea</string>
     <string name="cloud_email_not_registered">E-posta hori ez dago erregistratuta OsmAnd Cloud-en</string>
     <string name="cloud_email_already_registered">E-posta hori duen kontu bat dagoeneko erregistratuta dago.</string>
     <string name="resend_verification_code">Birbidali kodea</string>

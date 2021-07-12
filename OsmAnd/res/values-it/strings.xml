@@ -4110,7 +4110,6 @@
     <string name="osmand_cloud_login_descr">Per favore immetti l\'indirizzo email che hai usato per la registrazione. Ti invieremo una password temporanea necessaria per il prossimo passo.</string>
     <string name="verify_email_address">Verifica l\'indirizzo email</string>
     <string name="verify_email_address_descr">Abbiamo inviato un codice di verifica a %1$s, per favore immettilo nel campo sottostante.</string>
-    <string name="enter_verification_code">Immetti un codice di 4 cifre</string>
     <string name="cloud_email_not_registered">Questa mail non è stata registrata per OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Un account con questa mail è già registrato.</string>
     <string name="resend_verification_code">Invia di nuovo il codice</string>
