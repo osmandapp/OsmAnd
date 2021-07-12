@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="logout_from_osmand_cloud_decsr">Are you sure you want to log out?\nYou will need to sign in again to backup or restore the data.</string>
+    <string name="logout_from_osmand_cloud">Logout from OsmAnd Cloud</string>
     <string name="duration_moment_ago">a moment ago</string>
     <string name="release_4_0">
     • Cloud backup\n\n

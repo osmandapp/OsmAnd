@@ -120,9 +120,9 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	}
 
 	@Override
-	public void onBackupExportStarted(int itemsCount) {
+	public void onBackupExportStarted() {
 		if (adapter != null) {
-			adapter.onBackupExportStarted(itemsCount);
+			adapter.onBackupExportStarted();
 		}
 	}
 

@@ -407,7 +407,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 					progressBar.setVisibility(View.INVISIBLE);
 					if (errorCode == dialogType.warningErrorCode) {
 						errorText.setText(dialogType.warningId);
-						AndroidUiHelper.updateVisibility(buttonAuthorize, true);
+						AndroidUiHelper.updateVisibility(buttonAuthorize, !promoCodeSupported());
 					} else {
 						errorText.setText(error.getLocalizedError(app));
 					}

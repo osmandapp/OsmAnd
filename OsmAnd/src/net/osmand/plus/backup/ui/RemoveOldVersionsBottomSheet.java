@@ -17,7 +17,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 
 public class RemoveOldVersionsBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = DeleteAllDataBottomSheet.class.getSimpleName();
+	public static final String TAG = RemoveOldVersionsBottomSheet.class.getSimpleName();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {

@@ -26,6 +26,8 @@ import java.util.List;
 
 public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo> {
 
+	private static final int APPROXIMATE_AVOID_ROAD_SIZE_BYTES = 185;
+
 	private OsmandSettings settings;
 	private AvoidSpecificRoads specificRoads;
 
@@ -115,6 +117,11 @@ public class AvoidRoadsSettingsItem extends CollectionSettingsItem<AvoidRoadInfo
 	@Override
 	public AvoidRoadInfo renameItem(@NonNull AvoidRoadInfo item) {
 		return item;
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull AvoidRoadInfo item) {
+		return APPROXIMATE_AVOID_ROAD_SIZE_BYTES;
 	}
 
 	@Override

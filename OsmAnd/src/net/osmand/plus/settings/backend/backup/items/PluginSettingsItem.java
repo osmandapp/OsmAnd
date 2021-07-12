@@ -20,6 +20,8 @@ import java.util.List;
 
 public class PluginSettingsItem extends SettingsItem {
 
+	private static final int APPROXIMATE_PLUGIN_SIZE_BYTES = 1024;
+
 	private CustomOsmandPlugin plugin;
 	private List<SettingsItem> pluginDependentItems;
 
@@ -72,6 +74,11 @@ public class PluginSettingsItem extends SettingsItem {
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
+	}
+
+	@Override
+	public long getEstimatedSize() {
+		return APPROXIMATE_PLUGIN_SIZE_BYTES;
 	}
 
 	@Override
