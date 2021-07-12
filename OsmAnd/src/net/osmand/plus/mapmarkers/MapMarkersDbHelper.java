@@ -1,7 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
-import androidx.annotation.Nullable;
-
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
@@ -12,7 +11,11 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import androidx.annotation.Nullable;
 
 public class MapMarkersDbHelper {
 
@@ -233,24 +236,22 @@ public class MapMarkersDbHelper {
 					.addNewItemToHistory(marker.getLatitude(), marker.getLongitude(), pointDescription);
 		}
 
-		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " (" +
-						MARKERS_COL_ID + ", " +
-						MARKERS_COL_LAT + ", " +
-						MARKERS_COL_LON + ", " +
-						MARKERS_COL_DESCRIPTION + ", " +
-						MARKERS_COL_ACTIVE + ", " +
-						MARKERS_COL_ADDED + ", " +
-						MARKERS_COL_VISITED + ", " +
-						MARKERS_COL_GROUP_NAME + ", " +
-						MARKERS_COL_GROUP_KEY + ", " +
-						MARKERS_COL_COLOR + ", " +
-						MARKERS_COL_DISABLED + ", " +
-						MARKERS_COL_SELECTED + ", " +
-						MARKERS_COL_MAP_OBJECT_NAME + ") " +
-						"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-				new Object[] {marker.id, marker.getLatitude(), marker.getLongitude(), descr, active,
-						marker.creationDate, marker.visitedDate, marker.groupName, marker.groupKey,
-						marker.colorIndex, 0, 0, marker.mapObjectName});
+		Map<String, Object> rowsMap = new HashMap<>();
+		rowsMap.put(MARKERS_COL_ID, marker.id);
+		rowsMap.put(MARKERS_COL_LAT, marker.getLatitude());
+		rowsMap.put(MARKERS_COL_LON, marker.getLongitude());
+		rowsMap.put(MARKERS_COL_DESCRIPTION, descr);
+		rowsMap.put(MARKERS_COL_ACTIVE, active);
+		rowsMap.put(MARKERS_COL_ADDED, marker.creationDate);
+		rowsMap.put(MARKERS_COL_VISITED, marker.visitedDate);
+		rowsMap.put(MARKERS_COL_GROUP_NAME, marker.groupName);
+		rowsMap.put(MARKERS_COL_GROUP_KEY, marker.groupKey);
+		rowsMap.put(MARKERS_COL_COLOR, marker.colorIndex);
+		rowsMap.put(MARKERS_COL_DISABLED, 0);
+		rowsMap.put(MARKERS_COL_SELECTED, 0);
+		rowsMap.put(MARKERS_COL_MAP_OBJECT_NAME, marker.mapObjectName);
+
+		db.execSQL(AndroidUtils.createDbInsertQuery(MARKERS_TABLE_NAME, rowsMap.keySet()), rowsMap.values().toArray());
 
 		if (marker.history) {
 			updateMarkersHistoryLastModifiedTime();
