@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper.ItineraryGroupInfo;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -139,8 +140,9 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 					warnings.add(app.getString(R.string.settings_item_read_error, String.valueOf(getType())));
 					SettingsHelper.LOG.error("Failed read gpx file", gpxFile.error);
 				} else {
+					Map<String, MapMarker> markers = new LinkedHashMap<>();
 					Map<String, MapMarkersGroup> groups = new LinkedHashMap<>();
-					dataHelper.collectMarkersGroups(gpxFile, groups, groupInfos);
+					dataHelper.collectMarkersGroups(gpxFile, groups, groupInfos, markers);
 					items.addAll(groups.values());
 				}
 			}
@@ -150,7 +152,7 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 	@Nullable
 	@Override
 	public SettingsItemWriter<? extends SettingsItem> getWriter() {
-		GPXFile gpxFile = dataHelper.generateGpx(items);
+		GPXFile gpxFile = dataHelper.generateGpx(items, null);
 		return getGpxWriter(gpxFile);
 	}
 }

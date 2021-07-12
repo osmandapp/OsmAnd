@@ -424,6 +424,8 @@ public class GPXUtilities {
 	}
 
 	public static class TrkSegment extends GPXExtensions {
+
+		public String name = null;
 		public boolean generalSegment = false;
 		public List<WptPt> points = new ArrayList<>();
 
@@ -1189,6 +1191,18 @@ public class GPXUtilities {
 			return Collections.unmodifiableList(points);
 		}
 
+		public List<WptPt> getAllSegmentsPoints() {
+			List<WptPt> points = new ArrayList<>();
+			for (Track track : tracks) {
+				if (track.generalTrack) continue;
+				for (TrkSegment segment : track.segments) {
+					if (segment.generalSegment) continue;
+					points.addAll(segment.points);
+				}
+			}
+			return points;
+		}
+
 		public Map<String, List<WptPt>> getPointsByCategories() {
 			Map<String, List<WptPt>> res = new HashMap<>();
 			for (WptPt pt : points) {
@@ -1812,6 +1826,10 @@ public class GPXUtilities {
 					TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
 		}
 
+		public String getArticleTitle() {
+			return metadata != null ? metadata.getArticleTitle() : null;
+		}
+
 		private int getItemsToWriteSize() {
 			int size = getPointsSize();
 			for (Route route : routes) {
@@ -1963,6 +1981,7 @@ public class GPXUtilities {
 				writeNotNullText(serializer, "desc", track.desc);
 				for (TrkSegment segment : track.segments) {
 					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
+					writeNotNullText(serializer, "name", segment.name);
 					for (WptPt p : segment.points) {
 						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
 						writeWpt(format, serializer, p, progress);
@@ -2435,7 +2454,9 @@ public class GPXUtilities {
 								parserState.push(wptPt);
 							}
 						} else if (parse instanceof TrkSegment) {
-							if (tag.equals("trkpt") || tag.equals("rpt")) {
+							if (tag.equals("name")) {
+								((TrkSegment) parse).name = readText(parser, "name");
+							} else if (tag.equals("trkpt") || tag.equals("rpt")) {
 								WptPt wptPt = parseWptAttributes(parser);
 								((TrkSegment) parse).points.add(wptPt);
 								parserState.push(wptPt);

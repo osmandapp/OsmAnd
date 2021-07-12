@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
@@ -20,9 +21,10 @@ import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.settings.fragments.MainSettingsFragment;
 
 public class ItemViewHolder extends RecyclerView.ViewHolder {
 
@@ -47,13 +49,22 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 
 	protected void setupItemView(@NonNull SettingsItem item) {
 		OsmandApplication app = getApplication();
-		title.setText(item.getPublicName(app));
+		String publicName = item.getPublicName(app);
+		if (item instanceof FileSettingsItem) {
+			FileSettingsItem settingsItem = (FileSettingsItem) item;
+			if (settingsItem.getSubtype() == FileSubtype.VOICE) {
+				publicName += " (" + app.getString(R.string.shared_string_recorded) + ")";
+			} else if (settingsItem.getSubtype() == FileSubtype.TTS_VOICE) {
+				publicName += " (" + app.getString(R.string.tts_title) + ")";
+			}
+		}
+		title.setText(publicName);
 
 		String filename = BackupHelper.getItemFileName(item);
 		String summary = app.getString(R.string.last_backup);
 		UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), filename);
 		if (info != null) {
-			String time = MainSettingsFragment.getLastBackupTimeDescription(app, info.getUploadTime(), app.getString(R.string.shared_string_never));
+			String time = OsmAndFormatter.getFormattedPassedTime(app, info.getUploadTime(), app.getString(R.string.shared_string_never));
 			description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
 		} else {
 			description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, app.getString(R.string.shared_string_never)));

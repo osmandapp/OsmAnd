@@ -603,7 +603,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			while (it.hasNext()) {
 				String category = it.next();
 				if (category.isEmpty()) {
-					category = app.getResources().getString(R.string.shared_string_waypoints);
+					category = app.getString(R.string.shared_string_waypoints);
 				}
 				sb.append(category);
 				if (it.hasNext()) {

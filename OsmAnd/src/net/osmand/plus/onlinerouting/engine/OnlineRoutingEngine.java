@@ -102,6 +102,14 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		}
 	}
 
+	public boolean shouldApproximateRoute() {
+		String value = get(EngineParameter.APPROXIMATE_ROUTE);
+		if (!Algorithms.isEmpty(value)) {
+			return Boolean.parseBoolean(value);
+		}
+		return false;
+	}
+
 	@NonNull
 	public String getFullUrl(@NonNull List<LatLon> path) {
 		StringBuilder sb = new StringBuilder(getBaseUrl());

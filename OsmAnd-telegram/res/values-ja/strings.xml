@@ -260,4 +260,5 @@
     <string name="unit_of_speed_system">速度の単位</string>
     <string name="buffer_time_descr">バッファー内に保存する時間を指定します</string>
     <string name="buffer_time">バッファー有効時間</string>
+    <string name="duration_ago">%1$s前</string>
 </resources>

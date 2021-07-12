@@ -131,7 +131,7 @@ class SettingsImporter {
 						if (reader != null) {
 							reader.readFromStream(ois, fileName);
 						}
-						item.applyAdditionalParams();
+						item.applyAdditionalParams(reader);
 					} catch (IllegalArgumentException e) {
 						item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 						SettingsHelper.LOG.error("Error reading item data: " + item.getName(), e);

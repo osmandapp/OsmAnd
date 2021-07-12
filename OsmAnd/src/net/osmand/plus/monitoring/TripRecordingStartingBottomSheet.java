@@ -1,6 +1,5 @@
 package net.osmand.plus.monitoring;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -11,12 +10,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
-
 import com.google.android.material.slider.RangeSlider;
 
 import net.osmand.plus.NavigationService;
@@ -24,7 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
@@ -33,14 +26,19 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
+
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
-import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createItemActive;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createItem;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createItemActive;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createShowTrackItem;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.updateTrackIcon;
 
-public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragment {
+public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogFragment {
 
 	public static final String TAG = TripRecordingStartingBottomSheet.class.getSimpleName();
 	public static final String UPDATE_LOGGING_INTERVAL = "update_logging_interval";
@@ -248,15 +246,6 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 		if (dialog != null) {
 			dialog.hide();
 		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
 	}
 
 	@Override

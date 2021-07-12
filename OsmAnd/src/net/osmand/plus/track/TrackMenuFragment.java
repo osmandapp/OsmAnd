@@ -261,8 +261,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		} else if (selectedGpxFile != null) {
 			setupDisplayHelper();
 			if (FileUtils.isTempFile(app, getGpx().path)) {
-				boolean gpxFileSelected = !isGpxFileSelected(app, selectedGpxFile.getGpxFile());
-				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), gpxFileSelected, false);
+				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), true, false);
 			}
 		}
 
@@ -301,9 +300,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		}
 		displayHelper.setGpx(selectedGpxFile.getGpxFile());
-		String fileName = Algorithms.getFileWithoutDirs(getGpx().path);
-		gpxTitle = !isCurrentRecordingTrack() ? GpxUiHelper.getGpxTitle(fileName)
-				: app.getResources().getString(R.string.shared_string_currently_recording_track);
+		String title = getGpx().getArticleTitle();
+		if (title == null) {
+			title = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(getGpx().path));
+		}
+		gpxTitle = !isCurrentRecordingTrack() ? title
+				: app.getString(R.string.shared_string_currently_recording_track);
 	}
 
 	public LatLon getLatLon() {
@@ -826,14 +828,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity == null) {
 			return;
 		}
-		final GPXFile gpxFile = getGpx();
+		GPXFile gpxFile = getGpx();
 		if (card instanceof OptionsCard || card instanceof OverviewCard) {
 			if (buttonIndex == SHOW_ON_MAP_BUTTON_INDEX) {
-				boolean gpxFileSelected = !isGpxFileSelected(app, gpxFile);
-				app.getSelectedGpxHelper().selectGpxFile(gpxFile, gpxFileSelected, false);
 				if (FileUtils.isTempFile(app, getGpx().path)) {
-					File file = displayHelper.getFile();
-					onFileMove(file, new File(app.getAppPath(IndexConstants.GPX_TRAVEL_DIR), file.getName()));
+					File srcFile = displayHelper.getFile();
+					File destFIle = new File(app.getAppPath(IndexConstants.GPX_TRAVEL_DIR), srcFile.getName());
+					onFileMove(srcFile, destFIle);
+					gpxFile = getGpx();
+				} else {
+					boolean gpxFileSelected = !isGpxFileSelected(app, gpxFile);
+					app.getSelectedGpxHelper().selectGpxFile(gpxFile, gpxFileSelected, false);
 				}
 				updateContent();
 				mapActivity.refreshMap();
@@ -903,11 +908,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, isNightMode()));
 				builder.setTitle(getString(R.string.delete_confirmation_msg, fileName));
 				builder.setMessage(R.string.are_you_sure);
+				final String gpxFilePath = gpxFile.path;
 				builder.setNegativeButton(R.string.shared_string_cancel, null).setPositiveButton(
 						R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								if (FileUtils.removeGpxFile(app, new File(gpxFile.path))) {
+								if (FileUtils.removeGpxFile(app, new File(gpxFilePath))) {
 									dismiss();
 								}
 							}
