@@ -44,7 +44,7 @@ public class PreviewRouteLineInfo {
 	private int screenHeight;
 
 	public PreviewRouteLineInfo(@ColorInt int customColorDay,
-								@ColorInt int customColorNight,
+	                            @ColorInt int customColorNight,
 	                            @NonNull RouteColoringType coloringType,
 	                            @Nullable String routeInfoAttribute,
 	                            @Nullable String width) {

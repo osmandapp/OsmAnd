@@ -265,8 +265,8 @@ public class RouteStatisticsHelper {
 		final RenderingRuleSearchRequest defaultRenderingRuleSearchRequest;
 
 		public RouteStatisticComputer(RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
-		                       RenderingRuleSearchRequest currentRenderingRuleSearchRequest,
-		                       RenderingRuleSearchRequest defaultRenderingRuleSearchRequest) {
+		                              RenderingRuleSearchRequest currentRenderingRuleSearchRequest,
+		                              RenderingRuleSearchRequest defaultRenderingRuleSearchRequest) {
 			this.currentRenderer = currentRenderer;
 			this.defaultRenderer = defaultRenderer;
 			this.currentRenderingRuleSearchRequest = currentRenderingRuleSearchRequest;
