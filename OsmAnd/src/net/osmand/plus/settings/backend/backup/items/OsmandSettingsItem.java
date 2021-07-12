@@ -11,24 +11,21 @@ import org.json.JSONObject;
 
 public abstract class OsmandSettingsItem extends SettingsItem {
 
-	private final OsmandSettings settings;
+	protected static final int APPROXIMATE_PREFERENCE_SIZE_BYTES = 60;
 
 	protected OsmandSettingsItem(@NonNull OsmandSettings settings) {
 		super(settings.getContext());
-		this.settings = settings;
 	}
 
 	protected OsmandSettingsItem(@NonNull OsmandSettings settings, @Nullable OsmandSettingsItem baseItem) {
 		super(settings.getContext(), baseItem);
-		this.settings = settings;
 	}
 
 	protected OsmandSettingsItem(@NonNull SettingsItemType type, @NonNull OsmandSettings settings, @NonNull JSONObject json) throws JSONException {
 		super(settings.getContext(), json);
-		this.settings = settings;
 	}
 
 	public OsmandSettings getSettings() {
-		return settings;
+		return app.getSettings();
 	}
 }

@@ -32,6 +32,8 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker> {
 
+	private static final int APPROXIMATE_HISTORY_MARKER_SIZE_BYTES = 380;
+
 	private MapMarkersHelper markersHelper;
 
 	public HistoryMarkersSettingsItem(@NonNull OsmandApplication app, @NonNull List<MapMarker> items) {
@@ -134,6 +136,11 @@ public class HistoryMarkersSettingsItem extends CollectionSettingsItem<MapMarker
 				return renamedMarker;
 			}
 		}
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull MapMarker item) {
+		return APPROXIMATE_HISTORY_MARKER_SIZE_BYTES;
 	}
 
 	public MapMarkersGroup getMarkersGroup() {

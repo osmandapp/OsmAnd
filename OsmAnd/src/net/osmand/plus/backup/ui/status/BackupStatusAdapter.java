@@ -139,20 +139,30 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		if (holder instanceof HeaderStatusViewHolder) {
 			HeaderStatusViewHolder viewHolder = (HeaderStatusViewHolder) holder;
-			viewHolder.bindView(this, info, status, nightMode);
+			viewHolder.bindView(this, status, nightMode);
 		} else if (holder instanceof WarningViewHolder) {
+			boolean hideBottomPadding = false;
+			if (items.size() > position + 1) {
+				Object item = items.get(position + 1);
+				hideBottomPadding = Algorithms.objectEquals(item, ACTION_BUTTON_TYPE) || item instanceof SettingsItem || item instanceof Pair;
+			}
 			WarningViewHolder viewHolder = (WarningViewHolder) holder;
-			viewHolder.bindView(status, error);
+			viewHolder.bindView(status, error, hideBottomPadding);
 		} else if (holder instanceof ConflictViewHolder) {
 			Pair<LocalFile, RemoteFile> pair = (Pair<LocalFile, RemoteFile>) items.get(position);
 			ConflictViewHolder viewHolder = (ConflictViewHolder) holder;
 			viewHolder.bindView(pair, exportListener, importListener, nightMode);
 		} else if (holder instanceof ItemViewHolder) {
+			boolean lastBackupItem = false;
+			if (items.size() > position + 1) {
+				Object item = items.get(position + 1);
+				lastBackupItem = !(item instanceof SettingsItem) && !(item instanceof Pair);
+			}
 			ItemViewHolder viewHolder = (ItemViewHolder) holder;
-			viewHolder.bindView((SettingsItem) items.get(position));
+			viewHolder.bindView((SettingsItem) items.get(position), lastBackupItem);
 		} else if (holder instanceof ActionButtonViewHolder) {
 			ActionButtonViewHolder viewHolder = (ActionButtonViewHolder) holder;
-			viewHolder.bindView(status, backup, exportListener, nightMode);
+			viewHolder.bindView(status, backup, exportListener, uploadItemsVisible, nightMode);
 		} else if (holder instanceof LocalBackupViewHolder) {
 			LocalBackupViewHolder viewHolder = (LocalBackupViewHolder) holder;
 			viewHolder.bindView(mapActivity, nightMode);
@@ -190,7 +200,7 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 	}
 
 	@Override
-	public void onBackupExportStarted(int itemsCount) {
+	public void onBackupExportStarted() {
 		notifyItemChanged(items.indexOf(HEADER_TYPE));
 	}
 

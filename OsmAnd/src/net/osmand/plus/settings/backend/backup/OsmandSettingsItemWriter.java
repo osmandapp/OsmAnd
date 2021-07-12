@@ -15,7 +15,8 @@ import org.json.JSONObject;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class OsmandSettingsItemWriter<T extends OsmandSettingsItem> extends SettingsItemWriter<T> {
 
@@ -32,8 +33,8 @@ public abstract class OsmandSettingsItemWriter<T extends OsmandSettingsItem> ext
 	@Override
 	public void writeToStream(@NonNull OutputStream outputStream, @Nullable IProgress progress) throws IOException {
 		JSONObject json = new JSONObject();
-		Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
-		for (OsmandPreference<?> pref : prefs.values()) {
+		List<OsmandPreference<?>> prefs = new ArrayList<>(settings.getRegisteredPreferences().values());
+		for (OsmandPreference<?> pref : prefs) {
 			try {
 				writePreferenceToJson(pref, json);
 			} catch (JSONException e) {

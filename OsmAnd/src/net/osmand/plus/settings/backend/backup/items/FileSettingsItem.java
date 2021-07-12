@@ -6,6 +6,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -17,7 +18,6 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
-import net.osmand.plus.settings.backend.backup.StreamSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.StreamSettingsItemWriter;
 import net.osmand.util.Algorithms;
 
@@ -27,10 +27,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class FileSettingsItem extends StreamSettingsItem {
 
@@ -117,8 +113,15 @@ public class FileSettingsItem extends StreamSettingsItem {
 						}
 						break;
 					case TTS_VOICE:
-						if (name.startsWith(subtype.subtypeFolder) && name.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
-							return subtype;
+						if (name.startsWith(subtype.subtypeFolder)) {
+							if (name.endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
+								return subtype;
+							} else if (name.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
+								int lastPathDelimiter = name.lastIndexOf('/');
+								if (lastPathDelimiter != -1 && name.substring(0, lastPathDelimiter).endsWith(IndexConstants.VOICE_PROVIDER_SUFFIX)) {
+									return subtype;
+								}
+							}
 						}
 						break;
 					default:
@@ -244,10 +247,16 @@ public class FileSettingsItem extends StreamSettingsItem {
 	public long getSize() {
 		if (size != 0) {
 			return size;
-		} else if (file != null && !file.isDirectory()) {
-			return file.length();
+		} else if (file != null) {
+			if (file.isDirectory()) {
+				long[] dirSize = new long[1];
+				FileUtils.getDirectorySize(file, dirSize);
+				size = dirSize[0];
+			} else {
+				size = file.length();
+			}
 		}
-		return 0;
+		return size;
 	}
 
 	public void setSize(long size) {

@@ -21,6 +21,9 @@ import java.util.concurrent.TimeUnit;
 
 public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> extends ThreadPoolExecutor {
 
+	private static final int DEFAULT_THREAD_POOL_SIZE = 4;
+
+	private boolean interruptOnError = false;
 	private final OnThreadPoolTaskExecutorListener<T> listener;
 
 	private boolean cancelled = false;
@@ -49,6 +52,11 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 		}
 	}
 
+	public ThreadPoolTaskExecutor(@Nullable OnThreadPoolTaskExecutorListener<T> listener) {
+		super(DEFAULT_THREAD_POOL_SIZE, DEFAULT_THREAD_POOL_SIZE, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
+		this.listener = listener;
+	}
+
 	public ThreadPoolTaskExecutor(int poolSize, @Nullable OnThreadPoolTaskExecutorListener<T> listener) {
 		super(poolSize, poolSize, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
 		this.listener = listener;
@@ -64,6 +72,18 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 
 	public void setCancelled(boolean cancelled) {
 		this.cancelled = cancelled;
+	}
+
+	private boolean isInterrupted() {
+		return !exceptions.isEmpty();
+	}
+
+	public boolean isInterruptOnError() {
+		return interruptOnError;
+	}
+
+	public void setInterruptOnError(boolean interruptOnError) {
+		this.interruptOnError = interruptOnError;
 	}
 
 	public void run(@NonNull List<T> tasks) {
@@ -96,7 +116,7 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 		while (!finished) {
 			try {
 				finished = awaitTermination(100, TimeUnit.MILLISECONDS);
-				if (isCancelled()) {
+				if (isCancelled() || (interruptOnError && isInterrupted())) {
 					for (Future<?> future : taskMap.keySet()) {
 						future.cancel(false);
 					}

@@ -1984,7 +1984,7 @@
     <string name="commit_poi">إنشاء إحداثية POI</string>
     <string name="number_of_rows_in_dash">عدد الصفوف في الدفعة %1$s</string>
     <string name="poi_deleted_localy">سيتم حذف POI بمجرد إرسال التعديلات</string>
-    <string name="downloading_number_of_files">جار التحميل - %1$d ملف</string>
+    <string name="downloading_number_of_files">جار التحميل - %1$d ملف…</string>
     <string name="activate_seamarks_plugin">يرجى تفعيل ملحق المعالم البحرية</string>
     <string name="value_downloaded_of_max">%1$.1f من %2$.1f مب</string>
     <string name="file_size_in_mb">%.1f مب</string>
@@ -4047,11 +4047,9 @@
     <string name="uploaded_count">تم رفع %1$d من %2$d</string>
     <string name="toast_select_edits_for_upload">تحديد التعديلات للتحميل</string>
     <string name="hillshade_slope_contour_lines">التضاريس / الانحدار / الخطوط المحيطية</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews هو مشروع يحركه المجتمع حول الأماكن العامة مثل المطاعم والفنادق والمتاحف ونقاط الطريق. يقوم بجمع جميع المعلومات العامة المتعلقة بهم مثل الصور والتعليقات والروابط إلى ارتباط الأنظمة الأخرى OpenStreetMap و Wikipedia.
+    <string name="open_place_reviews_plugin_description">أرسل صورًا وتعليقات وروابط حول الأماكن العامة مثل المطاعم والفنادق والمتاحف ونقاط الطريق كبيانات مفتوحة https://openplacereviews.org/data/.
 \n
-\nجميع بيانات OpenPlaceReview مفتوحة ومتاحة للجميع: http://openplacereviews.org/data.
-\n
-\nيمكنك قراءة المزيد على: http://openplacereviews.org</string>
+\nاقرأ المزيد على https://openplacereviews.org</string>
     <string name="open_place_reviews">موقع OpenPlaceReviews</string>
     <string name="opr_use_dev_url">استخدام test.openplacereviews.org</string>
     <string name="login_open_place_reviews">الدخول إلى OpenPlaceReviews</string>
@@ -4196,7 +4194,7 @@
     <string name="loading_list_of_routing_services">تحميل قائمة خدمات التوجيه المتوفرة</string>
     <string name="shared_string_offline">دون اتصال</string>
     <string name="shared_string_online">عبر الإنترنت</string>
-    <string name="osmand_online_routing_promo">يمكنك استخدام قوالب محددة مسبقًا ، أو إضافة توجيه مخصص عبر الإنترنت ، مدعوم: OSRM ، Graphhopper ، OpenRouteService ، GPX.</string>
+    <string name="osmand_online_routing_promo">استخدم قوالب محددة مسبقًا ، أو أضف OSRM، GraphHopper، OpenRouteService أو توجيه مدعم بال GPX عبر الانترنت.</string>
     <string name="shared_string_external">خارجي</string>
     <string name="provided_by">مقدمة من %1$s</string>
     <string name="failed_loading_predefined_engines">فشل تحميل قائمة القوالب المحددة مسبقًا.
@@ -4263,7 +4261,7 @@
     <string name="terrain_maps">خرائط التضاريس</string>
     <string name="nautical_depth">العمق البحري</string>
     <string name="advanced_widgets">الويدجت المتقدمة</string>
-    <string name="you_can_get_feature_as_part_of_pattern">يمكنك الحصول على \"%1$s\" كجزء من: %2$s الخطة. قارن الخطط:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">احصل على \"%1$s\" كجزء من خطة: %2$s . المقارنة:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s من %2$s</string>
     <string name="continue_with">تواصل مع %1$s</string>
     <string name="not_available_with">غير متوفر مع %1$s</string>
@@ -4292,4 +4290,28 @@
     <string name="backup_error_token_is_not_valid_or_expired">الرمز غير صالح أو منتهي الصلاحية</string>
     <string name="backup_error_user_is_not_registered">المستخدم مع هذا البريد الإلكتروني غير مسجل</string>
     <string name="backup_error_no_valid_subscription">لا يوجد اشتراك صالح</string>
+    <string name="enter_verification_code">إدخال كلمة مرور لمرة واحدة</string>
+    <string name="approximate_route_description">قم بإرفاق الطريق بالطرق على الخريطة للحصول على جميع المنعطفات والبيانات الإضافية ، مثل السلاسة وأنواع الطرق وما إلى ذلك.</string>
+    <string name="release_4_0">• النسخ الاحتياطي للسحابة
+\n
+\n • تمت إضافة الوضع الليلي لثيم \"Topo\"
+\n
+\n • خيار إضافي لتنزيل خطوط الكنتور بالقدم
+\n
+\n • يمكن الآن تلوين المسارات حسب الارتفاع أو السرعة أو الانحدر.
+\n
+\n • تحديث مربع حوار \"تسجيل الرحلة\"
+\n
+\n • تم نقل المسافة عن طريق النقر من مسطرة نصف القطر إلى خيار منفصل
+\n
+\n • تخطيط الطريق: تمت إضافة القدرة على تغيير خيارات التنقل ، والوصول إلى تكوين الخريطة والبحث دون مغادرة مسار الخطة
+\n
+\n • شاشة \"شراء\" جديدة بمعلومات مفصلة عن الشراء
+\n
+\n • خيار مضاف لتغيير مظهر خط المسار.
+\n
+\n • تم نقل تحديثات أوسماند لايف إلى \"التنزيلات&gt; التحديثات\"
+\n
+\n</string>
+    <string name="duration_moment_ago">قبل قليل</string>
 </resources>

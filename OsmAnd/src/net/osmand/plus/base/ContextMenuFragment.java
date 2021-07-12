@@ -255,6 +255,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 		return cardsContainer;
 	}
 
+	@Nullable
 	public FrameLayout getBottomContainer() {
 		return bottomContainer;
 	}
