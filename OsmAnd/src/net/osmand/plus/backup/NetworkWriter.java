@@ -27,6 +27,8 @@ public class NetworkWriter implements AbstractWriter {
 	private final BackupHelper backupHelper;
 	private final OnUploadItemListener listener;
 
+	private boolean cancelled;
+
 	public interface OnUploadItemListener {
 		void onItemUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work);
 
@@ -40,6 +42,14 @@ public class NetworkWriter implements AbstractWriter {
 	public NetworkWriter(@NonNull BackupHelper backupHelper, @Nullable OnUploadItemListener listener) {
 		this.backupHelper = backupHelper;
 		this.listener = listener;
+	}
+
+	public boolean isCancelled() {
+		return cancelled;
+	}
+
+	public void setCancelled(boolean cancelled) {
+		this.cancelled = cancelled;
 	}
 
 	@Override
