@@ -21,11 +21,11 @@
     • Added option to download contour lines in feet.\n
     • Tracks can now be colored by altitude, speed, or slope.\n
     • Updated \"Trip recording\" dialog.\n
-    • Distance by tap moved from the Radius ruler into a separate option.\n
+    • Distance by tap moved from the radius ruler into a separate option.\n
     • Plan Route: added ability to change navigation options, accessing configure map and search without leaving plan route.\n
     • New \"Purchase\" screen with detailed info about purchasing.\n
     • Added option to change the route line appearance.\n
-    • OsmAnd Live updates moved to \"Downloads > Updates\.\n
+    • OsmAnd Live updates moved to \'Downloads\' → \'Updates\'.\n
     </string>
     <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
@@ -171,7 +171,7 @@
     <!-- string name="release_4_0_beta">
     • Added option to download Contour lines in feet\n\n
     • Plan Route landscape: added tabs to switch between points or graphs\n\n
-    • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
+    • OsmAnd Live updates moved to \'Downloads\' → \'Updates\'.\n\n
     • Tracks can now be colored by altitude, speed, or slope.\n\n
     • Added option to change the route line appearance.\n\n
     • Updated \"Trip recording\" dialog\n\n
@@ -957,7 +957,7 @@
     <string name="rendering_attr_piste_difficulty_aerialway_name">Aerialway</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Connection</string>
     <string name="avoid_in_routing_descr_">Avoid certain routes and road types</string>
-    <string name="change_data_storage_full_description">Move OsmAnd data files to the new destination?\n%1$s > %2$s</string>
+    <string name="change_data_storage_full_description">Move OsmAnd data files to the new destination?\n\'%1$s\' → \'%2$s\'</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB free (of %2$s GB)</string>
     <string name="enter_path_to_folder">Enter path to the folder</string>
