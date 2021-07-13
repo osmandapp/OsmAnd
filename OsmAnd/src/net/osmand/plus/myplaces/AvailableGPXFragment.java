@@ -237,7 +237,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	public void updateCurrentTrack() {
-		final OsmandMonitoringPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
+		final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (currentGpxView == null || plugin == null) {
 			return;
 		}
@@ -1460,7 +1460,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.create()
 		);
 
-		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getFunctionalPlugin(OsmEditingPlugin.class);
+		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_export)

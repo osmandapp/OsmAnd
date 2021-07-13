@@ -195,7 +195,7 @@ public class DashTrackFragment extends DashBaseFragment {
 	}
 
 	public static void updateCurrentTrack(View v, final Activity ctx, final OsmandApplication app) {
-		final OsmandMonitoringPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
+		final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (v == null || ctx == null || app == null || plugin == null) {
 			return;
 		}

@@ -21,9 +21,12 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class PurchasingUtils {
+
+	public static String PROMO_PREFIX = "promo_";
 
 	public static List<SubscriptionButton> collectSubscriptionButtons(OsmandApplication app,
 																	  InAppPurchaseHelper purchaseHelper,
@@ -132,15 +135,24 @@ public class PurchasingUtils {
 		};
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(id)
+				.setId(PROMO_PREFIX + id)
 				.setLayout(R.layout.list_item_promo)
 				.setTitleId(titleId, mapActivity)
 				.setDescription(app.getString(descriptionId))
 				.setIcon(feature.getIconId(nightMode))
 				.setSkipPaintingWithoutColor(true)
-				.setMarked(true)
 				.setListener(listener)
 				.createItem());
+	}
+
+	public static void removePromoItems(ContextMenuAdapter contextMenuAdapter) {
+		Iterator<ContextMenuItem> iterator = contextMenuAdapter.getItems().listIterator();
+		while (iterator.hasNext()) {
+			ContextMenuItem item = iterator.next();
+			if (item.getId().startsWith(PROMO_PREFIX)) {
+				iterator.remove();
+			}
+		}
 	}
 
 }

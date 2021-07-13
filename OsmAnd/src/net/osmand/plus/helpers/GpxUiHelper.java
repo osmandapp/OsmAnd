@@ -646,7 +646,7 @@ public class GpxUiHelper {
 					item.setSelected(!item.getSelected());
 					alertDialogAdapter.notifyDataSetInvalidated();
 					if (position == 0 && showCurrentGpx && item.getSelected()) {
-						OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
+						OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 						if (monitoringPlugin == null) {
 							AlertDialog.Builder confirm = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 							confirm.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {

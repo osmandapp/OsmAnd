@@ -503,7 +503,7 @@ public class OsmandAidlApi {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				final AudioVideoNotesPlugin plugin = OsmandPlugin.getFunctionalPlugin(AudioVideoNotesPlugin.class);
+				final AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
@@ -520,7 +520,7 @@ public class OsmandAidlApi {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				final AudioVideoNotesPlugin plugin = OsmandPlugin.getFunctionalPlugin(AudioVideoNotesPlugin.class);
+				final AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
@@ -537,7 +537,7 @@ public class OsmandAidlApi {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				final AudioVideoNotesPlugin plugin = OsmandPlugin.getFunctionalPlugin(AudioVideoNotesPlugin.class);
+				final AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
@@ -554,7 +554,7 @@ public class OsmandAidlApi {
 			@Override
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
-				final AudioVideoNotesPlugin plugin = OsmandPlugin.getFunctionalPlugin(AudioVideoNotesPlugin.class);
+				final AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (mapActivity != null && plugin != null) {
 					plugin.stopRecording(mapActivity, false);
 				}
@@ -834,7 +834,7 @@ public class OsmandAidlApi {
 					settings.MAP_OVERLAY_PREVIOUS.set(fileName);
 					MapActivity mapActivity = mapActivityRef.get();
 					if (mapActivity != null) {
-						OsmandRasterMapsPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandRasterMapsPlugin.class);
+						OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 						if (plugin != null) {
 							plugin.updateMapLayers(mapActivity.getMapView(), settings.MAP_OVERLAY, mapActivity.getMapLayers());
 						}
@@ -857,7 +857,7 @@ public class OsmandAidlApi {
 					settings.MAP_OVERLAY_PREVIOUS.set(null);
 					MapActivity mapActivity = mapActivityRef.get();
 					if (mapActivity != null) {
-						OsmandRasterMapsPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandRasterMapsPlugin.class);
+						OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 						if (plugin != null) {
 							plugin.updateMapLayers(mapActivity.getMapView(), settings.MAP_OVERLAY, mapActivity.getMapLayers());
 						}
@@ -1646,7 +1646,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean startGpxRecording() {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.startGPXMonitoring(null);
 			plugin.updateControl();
@@ -1656,7 +1656,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean stopGpxRecording() {
-		OsmandMonitoringPlugin plugin = OsmandPlugin.getFunctionalPlugin(OsmandMonitoringPlugin.class);
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			plugin.stopRecording();
 			plugin.updateControl();

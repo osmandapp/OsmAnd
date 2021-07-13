@@ -931,7 +931,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 				}
 			} else if (buttonIndex == UPLOAD_OSM_BUTTON_INDEX) {
-				OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getFunctionalPlugin(OsmEditingPlugin.class);
+				OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
 					GpxInfo gpxInfo = new GpxInfo();
 					gpxInfo.gpx = gpxFile;

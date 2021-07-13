@@ -27,6 +27,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.DrawerMenuItemsSettings;
@@ -51,7 +52,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
@@ -222,17 +222,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					contextMenuAdapter = menu.getActionsContextMenuAdapter(true);
 					break;
 			}
-			clearMarkedItems();
-		}
-	}
-
-	private void clearMarkedItems() {
-		Iterator<ContextMenuItem> iterator = contextMenuAdapter.getItems().listIterator();
-		while (iterator.hasNext()) {
-			ContextMenuItem item = iterator.next();
-			if (item.isMarked()) {
-				iterator.remove();
-			}
+			PurchasingUtils.removePromoItems(contextMenuAdapter);
 		}
 	}
 
