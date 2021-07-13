@@ -4163,7 +4163,7 @@
     <string name="restore_from_osmand_cloud">Восстановить из OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Выберите данные для восстановления.</string>
     <string name="restore_selected_data">Восстановить выбранные данные</string>
-    <string name="receiving_data_from_server">Получение данных с сервера</string>
+    <string name="receiving_data_from_server">Получение данных с сервера…</string>
     <string name="restore_complete">Восстановление завершено</string>
     <string name="grey_color_slope">Серый цвет используется, когда уклон не определен.</string>
     <string name="backup_storage_taken">Занятое пространство</string>
@@ -4222,4 +4222,28 @@
     <string name="backup_error_token_is_not_valid_or_expired">Неверный или просроченный токен</string>
     <string name="backup_error_user_is_not_registered">Пользователь с данным адресом электронной почты не зарегистрирован</string>
     <string name="backup_error_no_valid_subscription">Нет действующей подписки</string>
+    <string name="duration_moment_ago">минуту назад</string>
+    <string name="approximate_route_description">Прикрепите маршрут к дорогам на карте, чтобы получить данные о всех поворотах, а также о проходимости, типах дорог и т. д.</string>
+    <string name="release_4_0">• Облачное резервное копирование
+\n
+\n• Добавлен ночной режим для стиля рендеринга «Topo»
+\n
+\n• Добавлена возможность загрузки контурных линий в футах
+\n
+\n• Раскраска треков по высоте, скорости или уклону
+\n
+\n• Обновлен диалог «Запись поездки»
+\n
+\n• Расстояние по нажатию перемещено из радиус-линейки в отдельный параметр
+\n
+\n• Планирование маршрута: добавлена возможность изменения параметров навигации, доступ к настройке карты и поиску без выхода из планирования маршрута
+\n
+\n• Новый экран «Покупка» с подробной информацией о планах
+\n
+\n• Добавлена возможность изменения внешнего вида линии маршрута
+\n
+\n• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления»
+\n
+\n</string>
+    <string name="backup_welcome_back_descr">Вы можете восстановить данные на этом устройстве используя существующие бекапы или настроить резервное копирование этого устройства в OsmAnd Cloud.</string>
 </resources>

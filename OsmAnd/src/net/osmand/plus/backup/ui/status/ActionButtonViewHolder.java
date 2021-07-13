@@ -11,10 +11,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -31,9 +36,11 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 		actionButton = itemView.findViewById(R.id.action_button);
 	}
 
-	public void bindView(@NonNull BackupStatus status, @NonNull PrepareBackupResult backup,
+	public void bindView(@NonNull MapActivity mapActivity, @NonNull PrepareBackupResult backup,
 						 @Nullable BackupExportListener exportListener, boolean uploadItemsVisible, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) itemView.getContext().getApplicationContext();
+		BackupStatus status = BackupStatus.getBackupStatus(app, backup);
+
 		if (app.getNetworkSettingsHelper().isBackupExporting()) {
 			actionButton.setOnClickListener(v -> app.getNetworkSettingsHelper().cancelExport());
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
@@ -49,6 +56,15 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 		} else if (status == BackupStatus.NO_INTERNET_CONNECTION || status == BackupStatus.ERROR) {
 			actionButton.setOnClickListener(v -> app.getBackupHelper().prepareBackup());
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.retry);
+		} else if (!InAppPurchaseHelper.isSubscribedToOsmAndPro(app)) {
+			actionButton.setOnClickListener(v -> {
+				if (Version.isGooglePlayEnabled()) {
+					ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.OSMAND_CLOUD);
+				} else {
+					PromoCodeBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
+				}
+			});
+			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.renew_subscription);
 		}
 		AndroidUiHelper.updateVisibility(divider, uploadItemsVisible);
 		AndroidUtils.setBackground(app, actionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);

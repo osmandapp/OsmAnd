@@ -531,6 +531,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			LinearLayout cardsContainer = getCardsContainer();
 			View topShadow = getTopShadow();
 			FrameLayout bottomContainer = getBottomContainer();
+			if (bottomContainer == null) {
+				return;
+			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
 				bottomContainer.setBackgroundDrawable(null);

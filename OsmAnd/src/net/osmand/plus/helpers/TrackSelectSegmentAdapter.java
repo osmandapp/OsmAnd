@@ -7,34 +7,52 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.TrackViewHolder;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHolder> {
 
 	private final OsmandApplication app;
 	private final LayoutInflater themedInflater;
 	private final UiUtilities iconsCache;
-	private final List<TrkSegment> segments;
+	private final List<TitledSegment> titledSegments;
 	private OnItemClickListener onItemClickListener;
 
-	public TrackSelectSegmentAdapter(Context ctx, List<TrkSegment> segments) {
+	public TrackSelectSegmentAdapter(Context ctx, GPXFile gpxFile) {
 		app = (OsmandApplication) ctx.getApplicationContext();
 		themedInflater = UiUtilities.getInflater(ctx, app.getDaynightHelper().isNightModeForMapControls());
 		iconsCache = app.getUIUtilities();
-		this.segments = segments;
+		this.titledSegments = getTitledSegments(gpxFile);
+	}
+
+	@NonNull
+	private List<TitledSegment> getTitledSegments(GPXFile gpxFile) {
+		List<TitledSegment> titledSegments = new ArrayList<>();
+		for (Track track : gpxFile.tracks) {
+			if (track.generalTrack) {
+				continue;
+			}
+			for (TrkSegment segment : track.segments) {
+				String trackSegmentTitle = GpxSelectionHelper.buildTrackSegmentName(gpxFile, track, segment, app);
+				titledSegments.add(new TitledSegment(segment, trackSegmentTitle));
+			}
+		}
+		return titledSegments;
 	}
 
 	@NonNull
@@ -52,15 +70,12 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 	public void onBindViewHolder(@NonNull final TrackViewHolder holder, int position) {
 		holder.iconSegment.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_split_interval));
 
-		TrkSegment segment = segments.get(position);
+		TitledSegment titledSegment = titledSegments.get(position);
 
-		String segmentTitle = Algorithms.isBlank(segment.name)
-				? app.getString(R.string.segments_count, position + 1)
-				: segment.name;
-		holder.name.setText(segmentTitle);
+		holder.name.setText(titledSegment.name);
 
-		double distance = getDistance(segment);
-		long time = getSegmentTime(segment);
+		double distance = getDistance(titledSegment.segment);
+		long time = getSegmentTime(titledSegment.segment);
 		if (time != 1) {
 			holder.timeIcon.setVisibility(View.VISIBLE);
 			holder.time.setText(OsmAndFormatter.getFormattedDurationShort((int) (time / 1000)));
@@ -81,7 +96,7 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 
 	@Override
 	public int getItemCount() {
-		return segments.size();
+		return titledSegments.size();
 	}
 
 	public static long getSegmentTime(TrkSegment segment) {
@@ -136,6 +151,17 @@ public class TrackSelectSegmentAdapter extends RecyclerView.Adapter<TrackViewHol
 			name = itemView.findViewById(R.id.name);
 			distance = itemView.findViewById(R.id.distance);
 			time = itemView.findViewById(R.id.time_interval);
+		}
+	}
+
+	static class TitledSegment {
+
+		TrkSegment segment;
+		String name;
+
+		TitledSegment(TrkSegment segment, String name) {
+			this.segment = segment;
+			this.name = name;
 		}
 	}
 }

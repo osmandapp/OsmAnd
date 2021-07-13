@@ -14,7 +14,9 @@ public class BackupListeners {
 	private final List<OnRegisterDeviceListener> registerDeviceListeners = new ArrayList<>();
 
 	public interface OnDeleteFilesListener {
-		void onFileDeleteProgress(@NonNull RemoteFile file);
+		void onFilesDeleteStarted(@NonNull List<RemoteFile> files);
+
+		void onFileDeleteProgress(@NonNull RemoteFile file, int progress);
 
 		void onFilesDeleteDone(@NonNull Map<RemoteFile, String> errors);
 

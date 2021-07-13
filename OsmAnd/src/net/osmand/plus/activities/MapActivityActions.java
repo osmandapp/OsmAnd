@@ -50,6 +50,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
@@ -860,7 +861,11 @@ public class MapActivityActions implements DialogProvider {
 				.setIcon(R.drawable.ic_action_cloud_upload)
 				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
 					app.logEvent("drawer_backup_restore_open");
-					BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
+					if (app.getBackupHelper().isRegistered()) {
+						BackupAndRestoreFragment.showInstance(mapActivity.getSupportFragmentManager());
+					} else {
+						BackupAuthorizationFragment.showInstance(mapActivity.getSupportFragmentManager());
+					}
 					return true;
 				}).createItem());
 

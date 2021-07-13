@@ -97,7 +97,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(SELECTED_ENTRY_INDEX_KEY, selectedEntryIndex);
 		outState.putBoolean(USE_COLLAPSIBLE_DESCRIPTION, collapsibleDescription);

@@ -72,7 +72,7 @@ public class ExpireTimeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putInt(EXPIRE_VALUE_KEY, getExpireValue());
 		super.onSaveInstanceState(outState);
 	}

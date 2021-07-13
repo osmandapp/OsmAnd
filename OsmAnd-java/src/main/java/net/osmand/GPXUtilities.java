@@ -1255,6 +1255,10 @@ public class GPXUtilities {
 			return "cloudmade".equalsIgnoreCase(author);
 		}
 
+		public boolean hasGeneralTrack() {
+			return generalTrack != null;
+		}
+
 		public void addGeneralTrack() {
 			Track generalTrack = getGeneralTrack();
 			if (generalTrack != null && !tracks.contains(generalTrack)) {
@@ -1634,6 +1638,19 @@ public class GPXUtilities {
 				}
 			}
 			return points.isEmpty() && routes.isEmpty();
+		}
+
+		public int getNonEmptyTracksCount() {
+			int count = 0;
+			for (Track track : tracks) {
+				for (TrkSegment segment : track.segments) {
+					if (segment.points.size() > 0) {
+						count++;
+						break;
+					}
+				}
+			}
+			return count;
 		}
 
 		public int getNonEmptySegmentsCount() {

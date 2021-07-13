@@ -48,7 +48,7 @@ public class HeaderStatusViewHolder extends RecyclerView.ViewHolder {
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_upload));
 
 			int progress = exportTask.getGeneralProgress();
-			int maxProgress = exportTask.getMaxProgress();
+			int maxProgress = (int) exportTask.getMaxProgress();
 			int percentage = BasicProgressAsyncTask.normalizeProgress(progress * 100 / maxProgress);
 
 			String uploading = app.getString(R.string.local_openstreetmap_uploading);

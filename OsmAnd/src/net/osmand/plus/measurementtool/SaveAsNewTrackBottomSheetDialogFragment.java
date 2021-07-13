@@ -268,7 +268,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBoolean(SHOW_ON_MAP_KEY, showOnMap);
 		outState.putBoolean(SIMPLIFIED_TRACK_KEY, simplifiedTrack);
 		outState.putString(FOLDER_NAME_KEY, folderName);

@@ -5,17 +5,23 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.FileUtils;
 import net.osmand.plus.backup.BackupExporter.NetworkExportProgressListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ExportBackupTask extends AsyncTask<Void, Object, String> {
+
+	public static final int APPROXIMATE_FILE_SIZE_BYTES = 100 * 1024;
 
 	private final NetworkSettingsHelper helper;
 	private final BackupExporter exporter;
@@ -23,7 +29,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	private final Map<String, ItemProgressInfo> itemsProgress = new HashMap<>();
 	private int generalProgress;
-	private int maxProgress;
+	private long maxProgress;
 
 	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
@@ -52,7 +58,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		return generalProgress;
 	}
 
-	public int getMaxProgress() {
+	public long getMaxProgress() {
 		return maxProgress;
 	}
 
@@ -63,6 +69,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	@Override
 	protected String doInBackground(Void... voids) {
+		long itemsSize = getEstimatedItemsSize();
+		publishProgress(itemsSize / 1024L);
+
 		String error = null;
 		try {
 			exporter.export();
@@ -73,16 +82,23 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		return error;
 	}
 
-	@Override
-	protected void onPreExecute() {
-		if (listener != null) {
-			int size = 0;
-			for (SettingsItem item : exporter.getItems().values()) {
-				size += item.getEstimatedSize();
+	private long getEstimatedItemsSize() {
+		long size = 0;
+		for (SettingsItem item : exporter.getItems().values()) {
+			if (item instanceof FileSettingsItem) {
+				File itemFile = ((FileSettingsItem) item).getFile();
+				List<File> filesToUpload = new ArrayList<>();
+				FileUtils.collectDirFiles(itemFile, filesToUpload);
+
+				for (File file : filesToUpload) {
+					size += file.length() + APPROXIMATE_FILE_SIZE_BYTES;
+				}
+			} else {
+				size += item.getEstimatedSize() + APPROXIMATE_FILE_SIZE_BYTES;
 			}
-			maxProgress = size / 1024;
-			listener.onBackupExportStarted();
 		}
+		size += exporter.getFilesToDelete().size() * APPROXIMATE_FILE_SIZE_BYTES;
+		return size;
 	}
 
 	@Override
@@ -92,6 +108,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 				if (object instanceof Integer) {
 					generalProgress = (Integer) object;
 					listener.onBackupExportProgressUpdate(generalProgress);
+				} else if (object instanceof Long) {
+					maxProgress = (Long) object;
+					listener.onBackupExportStarted();
 				} else if (object instanceof ItemProgressInfo) {
 					ItemProgressInfo info = (ItemProgressInfo) object;
 

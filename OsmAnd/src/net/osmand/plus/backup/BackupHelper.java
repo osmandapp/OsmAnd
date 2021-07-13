@@ -139,11 +139,12 @@ public class BackupHelper {
 		return backupListeners;
 	}
 
+	@NonNull
 	public PrepareBackupResult getBackup() {
 		return backup;
 	}
 
-	void setBackup(PrepareBackupResult backup) {
+	void setBackup(@NonNull PrepareBackupResult backup) {
 		this.backup = backup;
 	}
 
@@ -292,7 +293,7 @@ public class BackupHelper {
 		return fileName;
 	}
 
-	public void registerUser(@NonNull final String email, @Nullable String promoCode, boolean login) {
+	public void registerUser(@NonNull String email, @Nullable String promoCode, boolean login) {
 		executor.runCommand(new RegisterUserCommand(this, login, email, promoCode));
 	}
 
@@ -300,10 +301,17 @@ public class BackupHelper {
 		executor.runCommand(new RegisterDeviceCommand(this, token));
 	}
 
-	void updateOrderId(@Nullable final OnUpdateOrderIdListener listener) {
+	public void updateOrderIdAsync(@Nullable OnUpdateOrderIdListener listener, @Nullable String orderId) {
+		executor.execute(() -> updateOrderId(listener, orderId));
+	}
+
+	void updateOrderId(@Nullable OnUpdateOrderIdListener listener) {
+		updateOrderId(listener, getOrderId());
+	}
+
+	public void updateOrderId(@Nullable OnUpdateOrderIdListener listener, @Nullable String orderId) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", getEmail());
-		String orderId = getOrderId();
 		if (Algorithms.isEmpty(orderId)) {
 			if (listener != null) {
 				listener.onUpdateOrderId(STATUS_NO_ORDER_ID_ERROR, "Order id is empty", null);

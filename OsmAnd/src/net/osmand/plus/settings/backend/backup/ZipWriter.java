@@ -9,7 +9,6 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -79,7 +78,7 @@ public class ZipWriter extends AbstractWriter {
 			String zipEntryName = Algorithms.isEmpty(subtypeFolder)
 					? file.getName()
 					: file.getPath().substring(file.getPath().indexOf(subtypeFolder) - 1);
-			fileSettingsItem.setInputStream(new FileInputStream(file));
+			fileSettingsItem.setFileToWrite(file);
 			writeItemToStream(itemWriter, zipEntryName, zos);
 		}
 	}
