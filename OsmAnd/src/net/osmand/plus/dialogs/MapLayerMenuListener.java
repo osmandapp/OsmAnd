@@ -147,7 +147,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 		} else if (itemId == R.string.map_markers) {
 			settings.SHOW_MAP_MARKERS.set(isChecked);
 		} else if (itemId == R.string.layer_map) {
-			if (!OsmandPlugin.isFunctional(OsmandRasterMapsPlugin.class)) {
+			if (!OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 				PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 			} else {
 				ContextMenuItem it = adapter.getItem(pos);

@@ -148,12 +148,12 @@ public class DashPluginsFragment extends DashBaseFragment {
 		} else {
 			getButton.setVisibility(View.GONE);
 			enableDisableButton.setVisibility(View.VISIBLE);
-			enableDisableButton.setChecked(plugin.isActive());
+			enableDisableButton.setChecked(plugin.isEnable());
 		}
 		setListener(plugin, enableDisableButton, pluginView);
 
 		ImageButton logoView = (ImageButton) pluginView.findViewById(R.id.plugin_logo);
-		if (plugin.isActive()) {
+		if (plugin.isEnable()) {
 			logoView.setBackgroundResource(R.drawable.bg_plugin_logo_enabled_light);
 			logoView.setContentDescription(getString(R.string.shared_string_disable));
 		} else {

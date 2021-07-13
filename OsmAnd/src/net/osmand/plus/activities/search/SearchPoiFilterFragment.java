@@ -168,7 +168,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 			});
 			filters.addAll(res);
 			filters.add(poiFilters.getSearchByNamePOIFilter());
-			if (OsmandPlugin.isFunctional(OsmandRasterMapsPlugin.class)) {
+			if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 				filters.add(poiFilters.getNominatimPOIFilter());
 				filters.add(poiFilters.getNominatimAddressFilter());
 			}

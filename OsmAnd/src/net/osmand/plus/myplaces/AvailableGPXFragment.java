@@ -335,7 +335,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		View v = inflater.inflate(R.layout.available_gpx, container, false);
 		listView = (ExpandableListView) v.findViewById(android.R.id.list);
 		setHasOptionsMenu(true);
-		if (OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class)) {
+		if (OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			currentGpxView = inflater.inflate(R.layout.current_gpx_item, null, false);
 			createCurrentTrackView();
 			currentGpxView.findViewById(R.id.current_track_info).setOnClickListener(new View.OnClickListener() {

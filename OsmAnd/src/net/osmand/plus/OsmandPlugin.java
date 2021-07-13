@@ -91,7 +91,7 @@ public abstract class OsmandPlugin {
 
 	protected List<OsmandPreference> pluginPreferences = new ArrayList<>();
 
-	private boolean active;
+	private boolean enable;
 	private String installURL = null;
 
 	public OsmandPlugin(OsmandApplication app) {
@@ -148,20 +148,20 @@ public abstract class OsmandPlugin {
 		return true;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setEnable(boolean enable) {
+		this.enable = enable;
 	}
 
-	public boolean isActive() {
-		return active;
+	public boolean isEnable() {
+		return enable;
 	}
 
 	public boolean isLocked() {
 		return needsInstallation();
 	}
 
-	public boolean isFunctional() {
-		return isActive() && !isLocked();
+	public boolean isActive() {
+		return isEnable() && !isLocked();
 	}
 
 	public boolean isEnableByDefault() {
@@ -335,7 +335,7 @@ public abstract class OsmandPlugin {
 
 	public static void removeCustomPlugin(@NonNull OsmandApplication app, @NonNull final CustomOsmandPlugin plugin) {
 		allPlugins.remove(plugin);
-		if (plugin.isFunctional()) {
+		if (plugin.isActive()) {
 			plugin.removePluginItems(new CustomOsmandPlugin.PluginItemsListener() {
 				@Override
 				public void onItemsRemoved() {
@@ -402,7 +402,7 @@ public abstract class OsmandPlugin {
 
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
 		for (OsmandPlugin plugin : allPlugins) {
-			if (enabledPlugins.contains(plugin.getId()) || plugin.isActive()) {
+			if (enabledPlugins.contains(plugin.getId()) || plugin.isEnable()) {
 				initPlugin(app, plugin);
 			}
 		}
@@ -412,7 +412,7 @@ public abstract class OsmandPlugin {
 	private static void initPlugin(OsmandApplication app, OsmandPlugin plugin) {
 		try {
 			if (plugin.init(app, null)) {
-				plugin.setActive(true);
+				plugin.setEnable(true);
 			}
 		} catch (Exception e) {
 			LOG.error("Plugin initialization failed " + plugin.getId(), e);
@@ -442,13 +442,13 @@ public abstract class OsmandPlugin {
 		if (available || (!marketEnabled && !paid)) {
 			if (apkInstalled && !isPluginDisabledManually(app, plugin)) {
 				enabledPlugins.add(plugin.getId());
-				plugin.setActive(true);
+				plugin.setEnable(true);
 			}
 			plugin.setInstallURL(null);
 			processed = true;
 		} else {
 			if (marketEnabled) {
-				plugin.setActive(false);
+				plugin.setEnable(false);
 				if (!isPluginDisabledManually(app, plugin)) {
 					enabledPlugins.remove(plugin.getId());
 				}
@@ -466,7 +466,7 @@ public abstract class OsmandPlugin {
 				plugin.onInstall(app, activity);
 				initPlugin(app, plugin);
 			}
-			if (!plugin.isActive()) {
+			if (!plugin.isEnable()) {
 				updateMarketPlugin(app, enabledPlugins, plugin);
 			}
 		}
@@ -486,7 +486,7 @@ public abstract class OsmandPlugin {
 	                                           @Nullable OsmandPlugin plugin,
 	                                           boolean enable) {
 		if (plugin != null) {
-			boolean stateChanged = enable != plugin.isActive();
+			boolean stateChanged = enable != plugin.isEnable();
 			boolean canChangeState = !enable || !plugin.isLocked();
 			if (stateChanged && canChangeState) {
 				return enablePlugin(activity, app, plugin, enable);
@@ -501,14 +501,14 @@ public abstract class OsmandPlugin {
 	                                   boolean enable) {
 		if (enable) {
 			if (!plugin.init(app, activity)) {
-				plugin.setActive(false);
+				plugin.setEnable(false);
 				return false;
 			} else {
-				plugin.setActive(true);
+				plugin.setEnable(true);
 			}
 		} else {
 			plugin.disable(app);
-			plugin.setActive(false);
+			plugin.setEnable(false);
 		}
 		app.getSettings().enablePlugin(plugin.getId(), enable);
 		app.getQuickActionRegistry().updateActionTypes();
@@ -529,7 +529,7 @@ public abstract class OsmandPlugin {
 			}
 
 			if (plugin.isMarketPlugin() || plugin.isPaid()) {
-				if (plugin.isFunctional()) {
+				if (plugin.isActive()) {
 					plugin.showInstallDialog(activity);
 				} else if (OsmandPlugin.checkPluginPackage(app, plugin)) {
 					plugin.showDisableDialog(activity);
@@ -659,7 +659,7 @@ public abstract class OsmandPlugin {
 	public static List<OsmandPlugin> getEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
-			if (p.isActive()) {
+			if (p.isEnable()) {
 				lst.add(p);
 			}
 		}
@@ -669,7 +669,7 @@ public abstract class OsmandPlugin {
 	public static List<OsmandPlugin> getFunctionalPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
-			if (p.isFunctional()) {
+			if (p.isActive()) {
 				lst.add(p);
 			}
 		}
@@ -679,7 +679,7 @@ public abstract class OsmandPlugin {
 	public static List<OsmandPlugin> getFunctionalVisiblePlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
-			if (p.isFunctional() && p.isVisible()) {
+			if (p.isActive() && p.isVisible()) {
 				lst.add(p);
 			}
 		}
@@ -689,7 +689,7 @@ public abstract class OsmandPlugin {
 	public static List<OsmandPlugin> getNotFunctionalPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
-			if (!p.isFunctional()) {
+			if (!p.isActive()) {
 				lst.add(p);
 			}
 		}
@@ -699,7 +699,7 @@ public abstract class OsmandPlugin {
 	public static List<OsmandPlugin> getNotFunctionalVisiblePlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
-			if (!p.isFunctional() && p.isVisible()) {
+			if (!p.isActive() && p.isVisible()) {
 				lst.add(p);
 			}
 		}
@@ -769,7 +769,7 @@ public abstract class OsmandPlugin {
 		return getEnabledPlugin(clz) != null;
 	}
 
-	public static <T extends OsmandPlugin> boolean isFunctional(Class<T> clz) {
+	public static <T extends OsmandPlugin> boolean isActive(Class<T> clz) {
 		return getFunctionalPlugin(clz) != null;
 	}
 

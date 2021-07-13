@@ -810,7 +810,7 @@ public class MapRenderRepositories {
 			// keep cache
 			// this.prevBmp = null;
 			this.prevBmpLocation = null;
-			if (prefs.DEBUG_RENDERING_INFO.get() && OsmandPlugin.isFunctional(OsmandDevelopmentPlugin.class)) {
+			if (prefs.DEBUG_RENDERING_INFO.get() && OsmandPlugin.isActive(OsmandDevelopmentPlugin.class)) {
 				String timeInfo = "Searching: " + searchTime + " ms"; //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 				if (renderingDebugInfo != null) {
 					timeInfo += "\n" + renderingDebugInfo;

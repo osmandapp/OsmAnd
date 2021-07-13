@@ -113,7 +113,7 @@ public class RenderedObjectMenuController extends MenuController {
 				}
 			}
 
-			boolean osmEditingEnabled = OsmandPlugin.isFunctional(OsmEditingPlugin.class);
+			boolean osmEditingEnabled = OsmandPlugin.isActive(OsmEditingPlugin.class);
 			if (osmEditingEnabled && renderedObject.getId() != null
 					&& renderedObject.getId() > 0 &&
 					(renderedObject.getId() % 2 == MapObject.AMENITY_ID_RIGHT_SHIFT 

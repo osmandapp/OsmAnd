@@ -84,7 +84,7 @@ public class MapDataMenuController extends MenuController {
 			}
 		}
 
-		srtmDisabled = !OsmandPlugin.isFunctional(SRTMPlugin.class)
+		srtmDisabled = !OsmandPlugin.isActive(SRTMPlugin.class)
 				&& !InAppPurchaseHelper.isContourLinesPurchased(app);
 		OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();

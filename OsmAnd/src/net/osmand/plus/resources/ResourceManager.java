@@ -60,7 +60,6 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -705,7 +704,7 @@ public class ResourceManager {
 		} else {
 			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), DEFAULT_WIKIVOYAGE_TRAVEL_OBF, files);
 		}
-		if (OsmandPlugin.isFunctional(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(context)) {
+		if (OsmandPlugin.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 

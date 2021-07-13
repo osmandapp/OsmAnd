@@ -112,7 +112,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	public List<String> getFilteredStyles() {
 
 		List<String> filtered = new ArrayList<>();
-		boolean enabled = OsmandPlugin.isFunctional(NauticalMapsPlugin.class);
+		boolean enabled = OsmandPlugin.isActive(NauticalMapsPlugin.class);
 
 		if (enabled) return loadListFromParams();
 		else {

@@ -200,7 +200,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (isFunctional()) {
+		if (isActive()) {
 			if (parkingPlaceControl == null) {
 				registerWidget(activity);
 			}

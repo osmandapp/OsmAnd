@@ -691,9 +691,9 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	public void initAppStatusVariables() {
 		OsmandApplication app = getMyApplication();
-		srtmDisabled = !OsmandPlugin.isFunctional(SRTMPlugin.class)
+		srtmDisabled = !OsmandPlugin.isActive(SRTMPlugin.class)
 				&& !InAppPurchaseHelper.isContourLinesPurchased(app);
-		nauticalPluginDisabled = !OsmandPlugin.isFunctional(NauticalMapsPlugin.class);
+		nauticalPluginDisabled = !OsmandPlugin.isActive(NauticalMapsPlugin.class);
 		freeVersion = Version.isFreeVersion(app);
 		SRTMPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();

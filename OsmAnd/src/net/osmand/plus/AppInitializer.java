@@ -772,7 +772,7 @@ public class AppInitializer implements IProgress {
 				app.savingTrackHelper.loadGpxFromDatabase();
 			}
 		}
-		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class)) {
+		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			app.startNavigationService(NavigationService.USED_BY_GPX);
 		}
 	}

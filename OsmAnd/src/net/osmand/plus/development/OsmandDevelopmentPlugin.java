@@ -77,7 +77,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (isFunctional()) {
+		if (isActive()) {
 			registerWidget(activity);
 		} else {
 			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();

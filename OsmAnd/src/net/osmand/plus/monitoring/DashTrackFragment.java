@@ -131,7 +131,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			}
 		}
 		
-		if (list.size() == 0 && !OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class)) {
+		if (list.size() == 0 && !OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
 		} else {
@@ -144,7 +144,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		tracks.removeAllViews();
 
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-		if (OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class)) {
+		if (OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
 			createCurrentTrackView(view, app);

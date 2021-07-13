@@ -154,7 +154,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (isFunctional()) {
+		if (isActive()) {
 			if (monitoringControl == null) {
 				registerWidget(activity);
 			}

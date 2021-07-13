@@ -290,7 +290,7 @@ public class GpxUiHelper {
 		int gpxDirLength = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath().length();
 		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 		final List<GPXInfo> list = new ArrayList<>(selectedGpxFiles.size() + 1);
-		if (!OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class)) {
+		if (!OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			showCurrentGpx = false;
 		}
 		if (!selectedGpxFiles.isEmpty() || showCurrentGpx) {

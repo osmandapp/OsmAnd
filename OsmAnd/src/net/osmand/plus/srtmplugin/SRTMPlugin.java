@@ -249,7 +249,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (settings.TERRAIN.get() && isFunctional()) {
+		if (settings.TERRAIN.get() && isActive()) {
 			removeTerrainLayer(mapView, activity);
 			registerLayers(activity);
 		} else {

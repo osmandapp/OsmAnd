@@ -132,7 +132,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	}
 
 	private void enableDisablePlugin(OsmandPlugin plugin) {
-		if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, !plugin.isActive())) {
+		if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, !plugin.isEnable())) {
 			adapter.notifyDataSetChanged();
 		}
 	}
@@ -210,7 +210,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				view.setTag(app);
 			} else if (item instanceof OsmandPlugin) {
 				final OsmandPlugin plugin = (OsmandPlugin) item;
-				active = plugin.isActive();
+				active = plugin.isEnable();
 				if (!active) {
 					logoContDescId = plugin.isLocked()
 							? R.string.access_shared_string_not_installed : R.string.shared_string_enable;
@@ -258,7 +258,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	private void showOptionsMenu(View view, final OsmandPlugin plugin) {
 		final PopupMenu optionsMenu = new PopupMenu(view.getContext(), view);
 		MenuItem enableDisableItem = optionsMenu.getMenu().add(
-				plugin.isActive() ?
+				plugin.isEnable() ?
 						R.string.shared_string_disable :
 						R.string.shared_string_enable);
 		enableDisableItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -271,7 +271,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		});
 
 		final SettingsScreenType settingsScreenType = plugin.getSettingsScreenType();
-		if (settingsScreenType != null && plugin.isFunctional()) {
+		if (settingsScreenType != null && plugin.isActive()) {
 			MenuItem settingsItem = optionsMenu.getMenu().add(R.string.shared_string_settings);
 			settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override

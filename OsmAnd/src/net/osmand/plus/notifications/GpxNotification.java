@@ -93,7 +93,7 @@ public class GpxNotification extends OsmandNotification {
 
 	@Override
 	public boolean isEnabled() {
-		return OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class);
+		return OsmandPlugin.isActive(OsmandMonitoringPlugin.class);
 	}
 
 	@Override

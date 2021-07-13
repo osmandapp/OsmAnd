@@ -446,7 +446,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		boolean record = false;
 		if (location != null && OsmAndLocationProvider.isNotSimulatedLocation(location)
-				&& OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class)) {
+				&& OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			if (isRecordingAutomatically() && locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 				record = true;
 			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
@@ -728,7 +728,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public boolean getIsRecording() {
-		return OsmandPlugin.isFunctional(OsmandMonitoringPlugin.class)
+		return OsmandPlugin.isActive(OsmandMonitoringPlugin.class)
 				&& settings.SAVE_GLOBAL_TRACK_TO_GPX.get() || isRecordingAutomatically();
 	}
 
