@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_ITEM_SIZE_BYTES;
 
 public class FileSettingsItem extends StreamSettingsItem {
 
@@ -275,30 +274,6 @@ public class FileSettingsItem extends StreamSettingsItem {
 			}
 		}
 		return size;
-	}
-
-	@Override
-	public long getEstimatedSize() {
-		if (fileToWrite != null) {
-			return fileToWrite.length() + APPROXIMATE_ITEM_SIZE_BYTES;
-		}
-		if (size != 0) {
-			return size + APPROXIMATE_ITEM_SIZE_BYTES;
-		} else if (file != null) {
-			if (file.isDirectory()) {
-				List<File> filesToUpload = new ArrayList<>();
-				FileUtils.collectDirFiles(file, filesToUpload);
-
-				int estimatedDirSize = 0;
-				for (File file : filesToUpload) {
-					estimatedDirSize += file.length() + APPROXIMATE_ITEM_SIZE_BYTES;
-				}
-				return estimatedDirSize;
-			} else {
-				return file.length() + APPROXIMATE_ITEM_SIZE_BYTES;
-			}
-		}
-		return APPROXIMATE_ITEM_SIZE_BYTES;
 	}
 
 	public void setSize(long size) {

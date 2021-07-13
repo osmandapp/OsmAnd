@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_ITEM_SIZE_BYTES;
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
 
 public class BackupExporter extends Exporter {
 
@@ -148,7 +148,7 @@ public class BackupExporter extends Exporter {
 				} else {
 					checkAndDeleteOldFile(item, fileName, errors);
 				}
-				dataProgress[0] += APPROXIMATE_ITEM_SIZE_BYTES / 1024;
+				dataProgress[0] += APPROXIMATE_FILE_SIZE_BYTES / 1024;
 				if (listener != null) {
 					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
 				}

@@ -18,8 +18,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_ITEM_SIZE_BYTES;
-
 public class PluginSettingsItem extends SettingsItem {
 
 	private static final int APPROXIMATE_PLUGIN_SIZE_BYTES = 1024;
@@ -80,7 +78,7 @@ public class PluginSettingsItem extends SettingsItem {
 
 	@Override
 	public long getEstimatedSize() {
-		return APPROXIMATE_PLUGIN_SIZE_BYTES + APPROXIMATE_ITEM_SIZE_BYTES;
+		return APPROXIMATE_PLUGIN_SIZE_BYTES;
 	}
 
 	@Override

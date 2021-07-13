@@ -33,8 +33,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_ITEM_SIZE_BYTES;
-
 public class ProfileSettingsItem extends OsmandSettingsItem {
 
 	private ApplicationMode appMode;
@@ -85,7 +83,7 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 
 	@Override
 	public long getEstimatedSize() {
-		return getSettings().getSavedModePrefsCount(appMode) * APPROXIMATE_PREFERENCE_SIZE_BYTES + APPROXIMATE_ITEM_SIZE_BYTES;
+		return getSettings().getSavedModePrefsCount(appMode) * APPROXIMATE_PREFERENCE_SIZE_BYTES;
 	}
 
 	public ApplicationMode getAppMode() {

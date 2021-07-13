@@ -18,8 +18,6 @@ import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_ITEM_SIZE_BYTES;
-
 public class GlobalSettingsItem extends OsmandSettingsItem {
 
 	public GlobalSettingsItem(@NonNull OsmandSettings settings) {
@@ -48,7 +46,7 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 
 	@Override
 	public long getEstimatedSize() {
-		return getSettings().getSavedGlobalPrefsCount() * APPROXIMATE_PREFERENCE_SIZE_BYTES + APPROXIMATE_ITEM_SIZE_BYTES;
+		return getSettings().getSavedGlobalPrefsCount() * APPROXIMATE_PREFERENCE_SIZE_BYTES;
 	}
 
 	@NonNull
