@@ -24,15 +24,14 @@ import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -54,19 +53,27 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import gnu.trove.list.array.TIntArrayList;
+
 import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_DIST;
 import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_FIRST_LETTER;
 import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_1;
 import static net.osmand.GPXUtilities.TRAVEL_GPX_CONVERT_MULT_2;
 import static net.osmand.GPXUtilities.writeGpxFile;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.data.Amenity.REF;
 import static net.osmand.data.Amenity.ROUTE_ID;
+import static net.osmand.plus.GpxSelectionHelper.*;
 import static net.osmand.plus.helpers.GpxUiHelper.getGpxTitle;
+import static net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.*;
 import static net.osmand.plus.wikivoyage.data.PopularArticles.ARTICLES_PER_PAGE;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_DOWN;
-import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELE_UP;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.AVERAGE_ELEVATION;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_DOWN;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.DIFF_ELEVATION_UP;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.DISTANCE;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.MAX_ELEVATION;
+import static net.osmand.plus.wikivoyage.data.TravelGpx.MIN_ELEVATION;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ROUTE_TRACK_POINT;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.USER;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
@@ -179,7 +186,7 @@ public class TravelObfHelper implements TravelHelper {
 	}
 
 	@Nullable
-	public synchronized TravelGpx searchGpx(@NonNull LatLon location, @Nullable String routeID, @Nullable String ref) {
+	public synchronized TravelGpx searchGpx(@NonNull LatLon location, @Nullable String filter, @Nullable String ref) {
 		final List<Pair<File, Amenity>> foundAmenities = new ArrayList<>();
 		int searchRadius = ARTICLE_SEARCH_RADIUS;
 		TravelGpx travelGpx = null;
@@ -193,7 +200,8 @@ public class TravelObfHelper implements TravelHelper {
 			}
 			for (Pair<File, Amenity> foundGpx : foundAmenities) {
 				Amenity amenity = foundGpx.second;
-				if (Algorithms.objectEquals(amenity.getRouteId(), routeID)
+				if ((Algorithms.objectEquals(amenity.getRouteId(), filter)
+						|| Algorithms.objectEquals(amenity.getName(), filter))
 						&& Algorithms.objectEquals(amenity.getRef(), ref)) {
 					travelGpx = getTravelGpx(foundGpx.first, amenity);
 					break;
@@ -262,8 +270,11 @@ public class TravelObfHelper implements TravelHelper {
 		travelGpx.ref = Algorithms.emptyIfNull(amenity.getRef());
 		try {
 			travelGpx.totalDistance = Float.parseFloat(Algorithms.emptyIfNull(amenity.getTagContent(DISTANCE)));
-			travelGpx.diffElevationUp = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_UP)));
-			travelGpx.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELE_DOWN)));
+			travelGpx.diffElevationUp = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELEVATION_UP)));
+			travelGpx.diffElevationDown = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(DIFF_ELEVATION_DOWN)));
+			travelGpx.maxElevation = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(MAX_ELEVATION)));
+			travelGpx.minElevation = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(MIN_ELEVATION)));
+			travelGpx.avgElevation = Double.parseDouble(Algorithms.emptyIfNull(amenity.getTagContent(AVERAGE_ELEVATION)));
 			String radius = amenity.getTagContent(ROUTE_RADIUS);
 			if (radius != null) {
 				travelGpx.routeRadius = MapUtils.convertCharToDist(radius.charAt(0), TRAVEL_GPX_CONVERT_FIRST_LETTER,
@@ -601,8 +612,8 @@ public class TravelObfHelper implements TravelHelper {
 				if (gpxFile != null) {
 					OsmandApplication app = mapActivity.getMyApplication();
 					String fileName = gpxFileName;
-					if (!fileName.endsWith(IndexConstants.GPX_FILE_EXT)) {
-						fileName += IndexConstants.GPX_FILE_EXT;
+					if (!fileName.endsWith(GPX_FILE_EXT)) {
+						fileName += GPX_FILE_EXT;
 					}
 					File file = new File(FileUtils.getTempDir(app), fileName);
 					new SaveGpxAsyncTask(file, gpxFile, new SaveGpxAsyncTask.SaveGpxListener() {
@@ -617,10 +628,10 @@ public class TravelObfHelper implements TravelHelper {
 								GPXUtilities.WptPt selectedPoint = new GPXUtilities.WptPt();
 								selectedPoint.lat = latLon.getLatitude();
 								selectedPoint.lon = latLon.getLongitude();
-								app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-								GpxSelectionHelper.SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
-								SelectedGpxMenuController.SelectedGpxPoint selectedGpxPoint = new SelectedGpxMenuController.SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
-								TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
+								SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+								SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint, null, null, Float.NaN);
+								TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
+										null, null, false, article.getAnalysis());
 							} else {
 								LOG.error(errorMessage);
 							}
@@ -954,7 +965,7 @@ public class TravelObfHelper implements TravelHelper {
 	@Override
 	public String getGPXName(@NonNull TravelArticle article) {
 		return article.getTitle().replace('/', '_').replace('\'', '_')
-				.replace('\"', '_') + IndexConstants.GPX_FILE_EXT;
+				.replace('\"', '_') + GPX_FILE_EXT;
 	}
 
 	@NonNull
@@ -1003,7 +1014,8 @@ public class TravelObfHelper implements TravelHelper {
 								public boolean publish(BinaryMapDataObject object) {
 									if (object.getPointsLength() > 1) {
 										if (object.getTagValue(REF).equals(article.ref)
-												&& object.getTagValue(ROUTE_ID).equals(article.routeId)) {
+												&& (object.getTagValue(ROUTE_ID).equals(article.routeId)
+												|| createTitle(object.getName()).equals(article.getTitle()))) {
 											segmentList.add(object);
 										}
 									}
@@ -1061,6 +1073,7 @@ public class TravelObfHelper implements TravelHelper {
 			}
 		}
 		GPXFile gpxFile = null;
+		boolean hasAltitude = false;
 		if (!segmentList.isEmpty()) {
 			GPXUtilities.Track track = new GPXUtilities.Track();
 			for (BinaryMapDataObject segment : segmentList) {
@@ -1071,6 +1084,18 @@ public class TravelObfHelper implements TravelHelper {
 					point.lon = MapUtils.get31LongitudeX(segment.getPoint31XTile(i));
 					trkSegment.points.add(point);
 				}
+				String ele_graph = segment.getTagValue("ele_graph");
+				if (!Algorithms.isEmpty(ele_graph)) {
+					hasAltitude = true;
+					TIntArrayList heightRes = MapAlgorithms.decodeIntHeightArrayGraph(ele_graph, 3);
+					double startEle = 0;
+					try {
+						startEle = Double.parseDouble(segment.getTagValue("start_ele"));
+					} catch (NumberFormatException e) {
+						LOG.debug(e.getMessage(), e);
+					}
+					MapAlgorithms.augmentTrkSegmentWithAltitudes(trkSegment, heightRes, startEle);
+				}
 				track.segments.add(trkSegment);
 			}
 			gpxFile = new GPXFile(article.getTitle(), article.getLang(), article.getContent());
@@ -1080,6 +1105,7 @@ public class TravelObfHelper implements TravelHelper {
 			gpxFile.tracks = new ArrayList<>();
 			gpxFile.tracks.add(track);
 			gpxFile.setRef(article.ref);
+			gpxFile.hasAltitude = hasAltitude;
 		}
 		if (!pointList.isEmpty()) {
 			if (gpxFile == null) {

@@ -204,6 +204,11 @@ public class TravelArticle {
 		return wptPt;
 	}
 
+	@Nullable
+	public GPXTrackAnalysis getAnalysis() {
+		return null;
+	}
+
 	@NonNull
 	public BinaryMapIndexReader.SearchPoiTypeFilter getSearchFilter(String filterSubcategory) {
 		return new BinaryMapIndexReader.SearchPoiTypeFilter() {
