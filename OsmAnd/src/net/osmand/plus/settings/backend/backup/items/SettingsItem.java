@@ -298,4 +298,10 @@ public abstract class SettingsItem {
 				&& item.getName().equals(getName())
 				&& Algorithms.stringsEqual(item.getFileName(), getFileName());
 	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return "SettingsItem { " + getType().name() + ", " + getName() + ", " + getFileName() + " }";
+	}
 }

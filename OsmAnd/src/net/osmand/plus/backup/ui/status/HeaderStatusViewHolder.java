@@ -49,7 +49,7 @@ public class HeaderStatusViewHolder extends RecyclerView.ViewHolder {
 
 			int progress = exportTask.getGeneralProgress();
 			int maxProgress = (int) exportTask.getMaxProgress();
-			int percentage = BasicProgressAsyncTask.normalizeProgress(progress * 100 / maxProgress);
+			int percentage = maxProgress != 0 ? BasicProgressAsyncTask.normalizeProgress(progress * 100 / maxProgress) : 0;
 
 			String uploading = app.getString(R.string.local_openstreetmap_uploading);
 			title.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, uploading, percentage + "%"));

@@ -244,7 +244,13 @@ public class BackupHelper {
 				return true;
 			} else if (item instanceof FileSettingsItem) {
 				FileSettingsItem fileItem = (FileSettingsItem) item;
-				return name.startsWith(fileItem.getSubtype().getSubtypeFolder()) && name.startsWith(itemFileName);
+				if (name.startsWith(fileItem.getSubtype().getSubtypeFolder())) {
+					if (fileItem.getFile().isDirectory() && !itemFileName.endsWith("/")) {
+						return name.startsWith(itemFileName + "/");
+					} else {
+						return name.startsWith(itemFileName);
+					}
+				}
 			}
 		}
 		return false;
