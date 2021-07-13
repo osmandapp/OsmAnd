@@ -4214,6 +4214,9 @@
     <string name="duration_moment_ago">il y a un instant</string>
     <string name="you_can_get_feature_as_part_of_pattern">Obtenez \"%1$s provenant du pack %2$s. Comparaison :</string>
     <string name="backup_error_size_is_exceeded">Taille maximale du Cloud OsmAnd dépassée %1$s</string>
-    <string name="backup_error_token_is_not_valid">Problème avec l\'ID ou le jeton de l\'appareil renseigné</string>
-    <string name="approximate_route_description">Lier l\'itinéraire aux routes sur la carte pour obtenir les intersections et des données additionnelles, comme la régularité du sol, le type de routes, etc...</string>
+    <string name="backup_error_token_is_not_valid">Une erreur s\'est produite avec l\'ID d\'appareil ou le jeton fournit</string>
+    <string name="approximate_route_description">Lier l\'itinéraire aux routes afin d\'obtenir les bifurcations et des données additionnelles comme la régularité du sol, le type de route, etc...</string>
+    <string name="logout_from_osmand_cloud">Se déconnecter de OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Êtes-vous certain de vouloir vous déconnecter \?
+\nVous devrez vous reconnecter pour sauvegarder ou restaurer les données.</string>
 </resources>
