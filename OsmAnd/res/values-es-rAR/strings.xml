@@ -4238,4 +4238,7 @@
 \n
 \n</string>
     <string name="duration_moment_ago">hace instantes</string>
+    <string name="logout_from_osmand_cloud">Cerrar sesión de OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">¿Cerrar la sesión\?
+\nTendrás que volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
 </resources>
