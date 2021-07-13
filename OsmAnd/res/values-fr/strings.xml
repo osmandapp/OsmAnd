@@ -2497,7 +2497,7 @@
     <string name="shared_string_markers">Marques</string>
     <string name="coordinates_format">Format des coordonnées</string>
     <string name="use_system_keyboard">Utiliser le clavier système</string>
-    <string name="fast_coordinates_input_descr">Définissez le format des coordonnées (ce format est modifiable plus tard dans \'Options\').</string>
+    <string name="fast_coordinates_input_descr">Définissez le format des coordonnées. Appuyez sur \'Options\' pour le modifier.</string>
     <string name="fast_coordinates_input">Saisie rapide de coordonnées</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Éviter les routes sur glace, les fjords</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords.</string>
@@ -3463,7 +3463,7 @@
     <string name="shared_string_transparency">Transparence</string>
     <string name="shared_string_zoom_levels">Niveaux de zoom</string>
     <string name="shared_string_legend">Légende</string>
-    <string name="terrain_empty_state_text">Active l\'affichage de l\'ombrage du relief et l\'inclinaison. Vous pouvez en savoir plus sur ces types de cartes sur notre site.</string>
+    <string name="terrain_empty_state_text">Affiche de l\'ombrage du relief ou la pente sur la carte. Vous pouvez en savoir plus sur ces types de cartes sur notre site.</string>
     <string name="shared_string_hillshade">Ombrage du relief</string>
     <string name="download_slope_maps">Pentes</string>
     <string name="quick_action_terrain_descr">Un bouton pour afficher ou masquer la couche terrain sur la carte.</string>
@@ -3642,7 +3642,7 @@
     <string name="add_online_source">Ajouter une source en ligne</string>
     <string name="clear_tiles_warning">Appliquer ces modifications effacera les données mises en cache pour cette source de tuiles</string>
     <string name="vessel_height_warning_link">Définir la hauteur du navire</string>
-    <string name="vessel_height_warning">Vous pouvez définir la hauteur du navire pour éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
+    <string name="vessel_height_warning">Définir la hauteur du navire pour éviter les ponts bas. Si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
     <string name="vessel_height_limit_description">Définit la hauteur du navire afin d\'éviter les ponts bas. Souvenez-vous que si le pont est mobile, nous utiliserons sa hauteur en position ouverte.</string>
     <string name="vessel_width_limit_description">Définir la largeur du navire pour éviter les ponts étroits</string>
     <string name="quick_action_showhide_mapillary_descr">Bouton pour afficher ou masquer la couche Mapillary sur la carte.</string>
@@ -3847,8 +3847,8 @@
     <string name="register_opr_have_account">J\'ai déjà un compte</string>
     <string name="open_street_map_login_mode">Connectez-vous pour envoyer vos modifications,
 \n
-\nsoit avec OAuth soit avec votre identifiant et mot de passe.</string>
-    <string name="osm_login_descr">Vous pouvez vous connecter avec la méthode sécurisée OAuth ou avec votre identifiant et votre mot de passe.</string>
+\nUtilisez soit la méthode OAuth, soit votre identifiant OSM et mot de passe.</string>
+    <string name="osm_login_descr">Connectez-vous avec la méthode sécurisée OAuth ou avec votre identifiant OSM et votre mot de passe.</string>
     <string name="register_on_openplacereviews_desc">Les photos sont fournies par le projet OpenPlaceReviews.org. Vous devez vous connecter au site web pour leur envoyer vos photos.</string>
     <string name="shared_string_search_history">Historique de recherche</string>
     <string name="app_mode_kayak">Kayak</string>
