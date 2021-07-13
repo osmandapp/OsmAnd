@@ -107,6 +107,11 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean isEnableByDefault() {
+		return true;
+	}
+
+	@Override
 	public String getComponentId1() {
 		return SRTM_PLUGIN_COMPONENT_PAID;
 	}

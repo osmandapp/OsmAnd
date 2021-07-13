@@ -164,6 +164,10 @@ public abstract class OsmandPlugin {
 		return isActive() && !isLocked();
 	}
 
+	public boolean isEnableByDefault() {
+		return false;
+	}
+
 	public boolean isVisible() {
 		return true;
 	}
@@ -300,36 +304,21 @@ public abstract class OsmandPlugin {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		allPlugins.clear();
 
-		WikipediaPlugin wikipediaPlugin = new WikipediaPlugin(app);
-		allPlugins.add(wikipediaPlugin);
-		enablePluginByDefault(app, enabledPlugins, wikipediaPlugin);
-
+		allPlugins.add(new WikipediaPlugin(app));
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
-
-		SRTMPlugin srtmPlugin = new SRTMPlugin(app);
 		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app));
-		if (allPlugins.contains(srtmPlugin)) {
-			enablePluginByDefault(app, enabledPlugins, srtmPlugin);
-		}
-
 		checkMarketPlugin(app, enabledPlugins, new NauticalMapsPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new SkiMapsPlugin(app));
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new ParkingPositionPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
-
-		OpenPlaceReviewsPlugin oprPlugin = new OpenPlaceReviewsPlugin(app);
-		enablePluginByDefault(app, enabledPlugins, oprPlugin);
-		allPlugins.add(oprPlugin);
-
-		MapillaryPlugin mapillaryPlugin = new MapillaryPlugin(app);
-		enablePluginByDefault(app, enabledPlugins, mapillaryPlugin);
-		allPlugins.add(mapillaryPlugin);
-
+		allPlugins.add(new OpenPlaceReviewsPlugin(app));
+		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
+		enablePluginsByDefault(app, enabledPlugins);
 		loadCustomPlugins(app);
 		activatePlugins(app, enabledPlugins);
 	}
@@ -400,6 +389,17 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	private static void enablePluginsByDefault(OsmandApplication app, Set<String> enabledPlugins) {
+		for (OsmandPlugin plugin : allPlugins) {
+			if (plugin.isEnableByDefault()
+					&& !enabledPlugins.contains(plugin.getId())
+					&& !isPluginDisabledManually(app, plugin)) {
+				enabledPlugins.add(plugin.getId());
+				app.getSettings().enablePlugin(plugin.getId(), true);
+			}
+		}
+	}
+
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId()) || plugin.isActive()) {
@@ -416,15 +416,6 @@ public abstract class OsmandPlugin {
 			}
 		} catch (Exception e) {
 			LOG.error("Plugin initialization failed " + plugin.getId(), e);
-		}
-	}
-
-	private static void enablePluginByDefault(@NonNull OsmandApplication app,
-	                                          @NonNull Set<String> enabledPlugins,
-	                                          @NonNull OsmandPlugin plugin) {
-		if (!enabledPlugins.contains(plugin.getId()) && !isPluginDisabledManually(app, plugin)) {
-			enabledPlugins.add(plugin.getId());
-			app.getSettings().enablePlugin(plugin.getId(), true);
 		}
 	}
 
@@ -475,7 +466,9 @@ public abstract class OsmandPlugin {
 				plugin.onInstall(app, activity);
 				initPlugin(app, plugin);
 			}
-			updateMarketPlugin(app, enabledPlugins, plugin);
+			if (!plugin.isActive()) {
+				updateMarketPlugin(app, enabledPlugins, plugin);
+			}
 		}
 		app.getQuickActionRegistry().updateActionTypes();
 	}

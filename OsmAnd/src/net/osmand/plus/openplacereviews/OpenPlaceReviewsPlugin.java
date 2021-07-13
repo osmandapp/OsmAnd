@@ -72,6 +72,11 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean isEnableByDefault() {
+		return true;
+	}
+
+	@Override
 	public void mapActivityResume(MapActivity activity) {
 		this.mapActivity = activity;
 	}
