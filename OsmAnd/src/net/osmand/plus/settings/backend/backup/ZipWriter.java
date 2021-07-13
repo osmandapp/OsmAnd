@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class ZipWriter implements AbstractWriter {
+public class ZipWriter extends AbstractWriter {
 
 	private final ZipOutputStream zos;
 	private final IProgress progress;

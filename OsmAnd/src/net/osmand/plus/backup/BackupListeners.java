@@ -2,9 +2,7 @@ package net.osmand.plus.backup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -55,25 +53,18 @@ public class BackupListeners {
 		void onFileUploadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork);
 
 		void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error);
-	}
 
-	public interface OnUploadFilesListener {
-		void onFileUploadProgress(@NonNull File file, int progress);
-
-		void onFileUploadDone(@NonNull File file);
-
-		void onFilesUploadDone(@NonNull Map<File, String> errors);
+		boolean isUploadCancelled();
 	}
 
 	public interface OnDownloadFileListener {
-		void onFileDownloadProgress(@NonNull RemoteFile remoteFile, int progress);
+		void onFileDownloadStarted(@NonNull String type, @NonNull String fileName, int work);
 
-		@WorkerThread
-		void onFileDownloadedAsync(@NonNull File file);
+		void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork);
 
-		void onFileDownloaded(@NonNull File file);
+		void onFileDownloadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error);
 
-		void onFilesDownloadDone(@NonNull Map<File, String> errors);
+		boolean isDownloadCancelled();
 	}
 
 	public List<OnDeleteFilesListener> getDeleteFilesListeners() {

@@ -26,6 +26,7 @@ public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
 	private final Map<String, RemoteFile> filesToDelete = new LinkedHashMap<>();
+	private ThreadPoolTaskExecutor<ItemWriterTask> executor;
 	private final NetworkExportProgressListener listener;
 
 	public interface NetworkExportProgressListener {
@@ -81,7 +82,7 @@ public class BackupExporter extends Exporter {
 		for (SettingsItem item : getItems().values()) {
 			tasks.add(new ItemWriterTask(writer, item));
 		}
-		ThreadPoolTaskExecutor<ItemWriterTask> executor = new ThreadPoolTaskExecutor<>(null);
+		executor = new ThreadPoolTaskExecutor<>(null);
 		executor.setInterruptOnError(true);
 		executor.run(tasks);
 
@@ -116,6 +117,14 @@ public class BackupExporter extends Exporter {
 			backupHelper.deleteFiles(new ArrayList<>(getFilesToDelete().values()), listener);
 		} catch (UserNotRegisteredException e) {
 			throw new IOException(e.getMessage(), e);
+		}
+	}
+
+	@Override
+	public void cancel() {
+		super.cancel();
+		if (executor != null) {
+			executor.cancel();
 		}
 	}
 
@@ -219,6 +228,12 @@ public class BackupExporter extends Exporter {
 		public Void call() throws Exception {
 			writer.write(item);
 			return null;
+		}
+
+		@Override
+		public void cancel() {
+			super.cancel();
+			writer.cancel();
 		}
 	}
 }

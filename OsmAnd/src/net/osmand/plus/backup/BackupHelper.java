@@ -17,10 +17,12 @@ import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
 import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListListener;
+import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
 import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
 import net.osmand.plus.backup.BackupListeners.OnUpdateOrderIdListener;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
@@ -430,6 +432,14 @@ public class BackupHelper {
 							}
 						}
 					}
+
+					@Override
+					public boolean isInterrupted() {
+						if (listener != null) {
+							return listener.isUploadCancelled();
+						}
+						return super.isInterrupted();
+					}
 				});
 		if (error == null) {
 			updateFileUploadTime(type, fileName, uploadTime);
@@ -509,24 +519,60 @@ public class BackupHelper {
 	}
 
 	@NonNull
-	String downloadFile(@NonNull File file, @NonNull RemoteFile remoteFile) throws UserNotRegisteredException {
+	String downloadFile(@NonNull File file, @NonNull RemoteFile remoteFile,
+						@Nullable OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
 		OperationLog operationLog = new OperationLog("downloadFile " + file.getName(), DEBUG);
 		String res;
 		try {
+			String type = remoteFile.getType();
+			String fileName = remoteFile.getName();
 			Map<String, String> params = new HashMap<>();
 			params.put("deviceid", getDeviceId());
 			params.put("accessToken", getAccessToken());
-			params.put("name", remoteFile.getName());
-			params.put("type", remoteFile.getType());
+			params.put("name", fileName);
+			params.put("type", type);
 			StringBuilder sb = new StringBuilder(DOWNLOAD_FILE_URL);
 			boolean firstParam = true;
 			for (Entry<String, String> entry : params.entrySet()) {
 				sb.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				firstParam = false;
 			}
-			res = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, null);
+			res = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, new AbstractProgress() {
+
+				private int work = 0;
+				private int progress = 0;
+				private int deltaProgress = 0;
+
+				@Override
+				public void startWork(int work) {
+					if (listener != null) {
+						this.work = work > 0 ? work : 1;
+						listener.onFileDownloadStarted(type, fileName, work);
+					}
+				}
+
+				@Override
+				public void progress(int deltaWork) {
+					if (listener != null) {
+						deltaProgress += deltaWork;
+						if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
+							progress += deltaProgress;
+							listener.onFileDownloadProgress(type, fileName, progress, deltaProgress);
+							deltaProgress = 0;
+						}
+					}
+				}
+
+				@Override
+				public boolean isInterrupted() {
+					if (listener != null) {
+						return listener.isDownloadCancelled();
+					}
+					return super.isInterrupted();
+				}
+			});
 		} catch (UnsupportedEncodingException e) {
 			res = "UnsupportedEncodingException";
 		}
@@ -662,7 +708,6 @@ public class BackupHelper {
 
 		OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
 		operationLog.startOperation();
-		final long backupLastUploadedTime = settings.BACKUP_LAST_UPLOADED_TIME.get();
 
 		AsyncTask<Void, Void, BackupInfo> task = new AsyncTask<Void, Void, BackupInfo>() {
 			@Override
@@ -697,7 +742,9 @@ public class BackupHelper {
 						}
 					}
 					if (localFile == null && !remoteFile.isDeleted()) {
-						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
+						UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+						// suggest to remove only if file exists in db
+						if (fileInfo != null) {
 							info.filesToDelete.add(remoteFile);
 						}
 						info.filesToDownload.add(remoteFile);

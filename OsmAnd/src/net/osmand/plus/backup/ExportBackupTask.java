@@ -146,7 +146,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 			@Override
 			public void updateGeneralProgress(int uploadedItems, int uploadedKb) {
-				exporter.setCancelled(isCancelled());
+				if (isCancelled()) {
+					exporter.cancel();
+				}
 				publishProgress(uploadedKb);
 			}
 

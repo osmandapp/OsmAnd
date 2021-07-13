@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ConcurrentHashMap;
@@ -45,10 +46,23 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 
 	public abstract static class Task implements Callable<Void> {
 
+		boolean cancelled;
 		boolean finished;
 
 		public boolean isFinished() {
 			return finished;
+		}
+
+		public boolean isCancelled() {
+			return cancelled;
+		}
+
+		public void cancel() {
+			this.cancelled = true;
+		}
+
+		public void setFinished(boolean finished) {
+			this.finished = finished;
 		}
 	}
 
@@ -70,8 +84,8 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 		return cancelled;
 	}
 
-	public void setCancelled(boolean cancelled) {
-		this.cancelled = cancelled;
+	public void cancel() {
+		this.cancelled = true;
 	}
 
 	private boolean isInterrupted() {
@@ -117,8 +131,9 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 			try {
 				finished = awaitTermination(100, TimeUnit.MILLISECONDS);
 				if (isCancelled() || (interruptOnError && isInterrupted())) {
-					for (Future<?> future : taskMap.keySet()) {
-						future.cancel(false);
+					for (Entry<Future<?>, T> futureTask : taskMap.entrySet()) {
+						futureTask.getKey().cancel(false);
+						futureTask.getValue().cancel();
 					}
 				}
 			} catch (InterruptedException e) {
