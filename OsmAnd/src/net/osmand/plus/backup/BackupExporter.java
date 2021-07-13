@@ -193,20 +193,17 @@ public class BackupExporter extends Exporter {
 	}
 
 	private void checkAndDeleteOldFile(@NonNull SettingsItem item, @NonNull String fileName, Map<String, String> errors) {
-		PrepareBackupResult backup = backupHelper.getBackup();
-		if (backup != null) {
-			String type = item.getType().name();
-			try {
-				ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
-				if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
-					RemoteFile remoteFile = backup.getRemoteFile(type, fileName);
-					if (remoteFile != null) {
-						backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
-					}
+		String type = item.getType().name();
+		try {
+			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+			if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
+				RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
+				if (remoteFile != null) {
+					backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
 				}
-			} catch (UserNotRegisteredException e) {
-				errors.put(type + "/" + fileName, e.getMessage());
 			}
+		} catch (UserNotRegisteredException e) {
+			errors.put(type + "/" + fileName, e.getMessage());
 		}
 	}
 
