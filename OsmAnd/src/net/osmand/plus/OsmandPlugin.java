@@ -440,7 +440,7 @@ public abstract class OsmandPlugin {
 	                                          @NonNull Set<String> enabledPlugins,
 	                                          @NonNull OsmandPlugin plugin) {
 		boolean marketEnabled = Version.isMarketEnabled();
-		boolean available = plugin.pluginAvailable(app);
+		boolean available = plugin.isAvailable(app);
 		boolean paid = plugin.isPaid();
 		boolean apkInstalled = checkPluginPackage(app, plugin);
 		boolean processed = false;
@@ -471,7 +471,7 @@ public abstract class OsmandPlugin {
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
-			if (plugin.getInstallURL() != null && plugin.pluginAvailable(app)) {
+			if (plugin.getInstallURL() != null && plugin.isAvailable(app)) {
 				plugin.onInstall(app, activity);
 				initPlugin(app, plugin);
 			}
@@ -480,7 +480,7 @@ public abstract class OsmandPlugin {
 		app.getQuickActionRegistry().updateActionTypes();
 	}
 
-	protected boolean pluginAvailable(OsmandApplication app) {
+	protected boolean isAvailable(OsmandApplication app) {
 		return checkPluginPackage(app, this) || !isPaid();
 	}
 
