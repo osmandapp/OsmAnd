@@ -7,6 +7,7 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -147,7 +148,7 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putParcelable(CURRENT_DIRECTORY, currentDirectory);
 		outState.putParcelable(NEW_DIRECTORY, newDirectory);

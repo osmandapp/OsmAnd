@@ -173,7 +173,7 @@ public class RecalculateRouteInDeviationBottomSheet extends BooleanPreferenceBot
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putFloat(CURRENT_VALUE, currentValue);
 	}

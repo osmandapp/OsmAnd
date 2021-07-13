@@ -3,6 +3,8 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -50,7 +52,7 @@ public class ShareMenuFragment extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		menu.saveMenu(outState);
 	}

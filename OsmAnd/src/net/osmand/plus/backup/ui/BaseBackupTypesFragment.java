@@ -206,7 +206,7 @@ public abstract class BaseBackupTypesFragment extends BaseOsmAndFragment
 	}
 
 	@Override
-	public void onFileDeleteProgress(@NonNull RemoteFile file) {
+	public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
 		updateProgressVisibility(true);
 	}
 

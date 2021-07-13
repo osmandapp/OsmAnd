@@ -79,7 +79,7 @@ public class CustomColorBottomSheet extends MenuBottomSheetDialogFragment implem
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putInt(NEW_SELECTED_COLOR, newColor);
 		if (prevColor != null) {
 			outState.putInt(PREV_SELECTED_COLOR, prevColor);

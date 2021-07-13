@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class SuggestedDownloadsItem extends SettingsItem {
 
 	private static final int APPROXIMATE_SUGGESTED_DOWNLOAD_SIZE_BYTES = 120;

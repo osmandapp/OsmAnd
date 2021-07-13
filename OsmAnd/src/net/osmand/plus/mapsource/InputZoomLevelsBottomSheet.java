@@ -135,7 +135,7 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putInt(MIN_ZOOM_KEY, minZoom);
 		outState.putInt(MAX_ZOOM_KEY, maxZoom);
 		outState.putInt(SLIDER_DESCR_RES_KEY, sliderDescrRes);

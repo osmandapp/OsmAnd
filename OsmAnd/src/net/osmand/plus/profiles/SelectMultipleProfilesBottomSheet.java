@@ -130,7 +130,7 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putStringArrayList(SELECTED_KEYS, new ArrayList<>(selectedProfiles));
 		outState.putStringArrayList(DISABLED_KEYS, new ArrayList<>(disabledProfiles));
