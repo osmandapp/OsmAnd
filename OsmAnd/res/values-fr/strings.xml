@@ -3463,7 +3463,7 @@
     <string name="shared_string_transparency">Transparence</string>
     <string name="shared_string_zoom_levels">Niveaux de zoom</string>
     <string name="shared_string_legend">Légende</string>
-    <string name="terrain_empty_state_text">Affiche de l\'ombrage du relief ou la pente sur la carte. Vous pouvez en savoir plus sur ces types de cartes sur notre site.</string>
+    <string name="terrain_empty_state_text">Affiche l\'ombrage du relief ou la pente sur la carte. Vous pouvez en apprendre plus sur ces types de cartes sur notre site.</string>
     <string name="shared_string_hillshade">Ombrage du relief</string>
     <string name="download_slope_maps">Pentes</string>
     <string name="quick_action_terrain_descr">Un bouton pour afficher ou masquer la couche terrain sur la carte.</string>
