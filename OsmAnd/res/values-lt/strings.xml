@@ -2821,12 +2821,12 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="osmand_maps_plus_tagline">Gauti išplėstines funkcijas</string>
     <string name="osmand_pro_tagline">Gaukite maksimalias funkcijas</string>
     <string name="shared_string_learn_more">Sužinoti daugiau</string>
-    <string name="cancel_anytime_in_huawei_appgallery">Atšaukite bet kuriuo metu Huawei AppGallery</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Atšaukti tai bet kuriuo metu Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Atšaukti bet kada Google Play.</string>
     <string name="shared_string_not_included">Neįtraukta</string>
     <string name="shared_string_includes">Apima</string>
     <string name="complete_purchase">Užbaigti pirkimą</string>
-    <string name="backup_delete_types">Ištrinti neįgalintų tipų duomenis</string>
+    <string name="backup_delete_types">Ištrinti neįgalintų duomenų tipus</string>
     <string name="backup_error_user_is_already_registered">Šis el. pašto adresas naudojamas kitoje paskyroje</string>
     <string name="backup_error_subscription_was_expired">Pasibaigusi prenumerata</string>
     <string name="backup_error_subscription_was_used">Prenumerata arba akcijos kodas, naudojama kitoje paskyroje %1$s</string>
@@ -2860,4 +2860,21 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
 \n
 \n</string>
     <string name="duration_moment_ago">prieš akimirką</string>
+    <string name="backup_version_history">Versijų istorija</string>
+    <string name="delete_version_history">Ištrinti versijų istoriją</string>
+    <string name="routing_attr_avoid_tunnels_description">Vengti tunelių</string>
+    <string name="routing_attr_avoid_tunnels_name">Vengti tunelių</string>
+    <string name="purchases_feature_desc_nautical">Gaukite prieigą prie jūrinio gylio informacijos</string>
+    <string name="purchases_feature_desc_terrain">Reljefo kontūrinės linijos, pilnas kalvų žemėlapis su tamsiais atspalviais ir šlaitų žemėlapiai su spalvomis, rodančiomis viršūnes ir žemumas.</string>
+    <string name="purchases_feature_desc_wikivoyage">Naršykite Wikipedia neprisijungę prie interneto. Straipsniai suskirstyti pagal šalis ir regionus ir pateikiami visomis kalbomis.</string>
+    <string name="purchases_feature_desc_wikipedia">Naršykite Wikipedia neprisijungę prie interneto. Straipsniai suskirstyti pagal šalis ir regionus ir pateikiami visomis kalbomis.</string>
+    <string name="purchases_feature_desc_combined_wiki">Naršykite Wikipedia straipsnius keliaudami, neturėdami interneto ryšio. Duomenys neprisijungus prie interneto suskirstyti pagal šalis ir prieinami visomis kalbomis.</string>
+    <string name="unlimited_map_downloads">Neribotas žemėlapių atsisiuntimas</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipedia ir Wikivoyage be interneto</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Reljefo žemėlapiai: kontūrinės linijos, kalvos, nuolydis</string>
+    <string name="offline_wikipeadia">Wikipedia be interneto</string>
+    <string name="offline_wikivoyage">Wikivoyage be interneto</string>
+    <string name="terrain_maps">Reljefo žemėlapiai</string>
+    <string name="nautical_depth">Jūrinis gylis</string>
+    <string name="units_and_formats">Vienetai ir formatai</string>
 </resources>
