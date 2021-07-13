@@ -14,6 +14,8 @@ import org.json.JSONObject;
 
 import java.io.InputStream;
 
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_ITEM_SIZE_BYTES;
+
 public abstract class StreamSettingsItem extends SettingsItem {
 
 	@Nullable
@@ -50,7 +52,7 @@ public abstract class StreamSettingsItem extends SettingsItem {
 
 	@Override
 	public long getEstimatedSize() {
-		return getSize();
+		return getSize() + APPROXIMATE_ITEM_SIZE_BYTES;
 	}
 
 	@NonNull

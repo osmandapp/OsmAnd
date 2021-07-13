@@ -17,6 +17,8 @@ import java.util.Map;
 
 public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
+	public static final int APPROXIMATE_ITEM_SIZE_BYTES = 100 * 1024;
+
 	private final NetworkSettingsHelper helper;
 	private final BackupExporter exporter;
 	private BackupExportListener listener;
@@ -80,9 +82,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 			for (SettingsItem item : exporter.getItems().values()) {
 				size += item.getEstimatedSize();
 			}
-			for (RemoteFile remoteFile : exporter.getFilesToDelete().values()) {
-				size += remoteFile.getZipSize();
-			}
+			size += exporter.getFilesToDelete().size() * APPROXIMATE_ITEM_SIZE_BYTES;
 			maxProgress = size / 1024;
 			listener.onBackupExportStarted();
 		}

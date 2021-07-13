@@ -3,6 +3,7 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.FileUtils;
 import net.osmand.StreamWriter;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
@@ -20,6 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_ITEM_SIZE_BYTES;
 
 public class NetworkWriter implements AbstractWriter {
 
@@ -122,10 +125,14 @@ public class NetworkWriter implements AbstractWriter {
 	private String uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 									  @NonNull String fileName, long uploadTime) throws UserNotRegisteredException, IOException {
 		FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
-		long[] size = new long[1];
 		List<File> filesToUpload = new ArrayList<>();
-		collectDirFiles(item.getFile(), filesToUpload, size);
-		OnUploadFileListener uploadListener = getUploadDirListener(item, fileName, (int) (size[0] / 1024));
+		FileUtils.collectDirFiles(item.getFile(), filesToUpload);
+
+		long size = 0;
+		for (File file : filesToUpload) {
+			size += file.length() + APPROXIMATE_ITEM_SIZE_BYTES;
+		}
+		OnUploadFileListener uploadListener = getUploadDirListener(item, fileName, (int) (size / 1024));
 		for (File file : filesToUpload) {
 			item.setFileToWrite(file);
 			String name = BackupHelper.getFileItemName(file, item);
@@ -135,20 +142,6 @@ public class NetworkWriter implements AbstractWriter {
 			}
 		}
 		return null;
-	}
-
-	private void collectDirFiles(File file, List<File> list, long[] dirSize) {
-		if (file.isDirectory()) {
-			File[] files = file.listFiles();
-			if (files != null) {
-				for (File subfolderFile : files) {
-					collectDirFiles(subfolderFile, list, dirSize);
-				}
-			}
-		} else {
-			list.add(file);
-			dirSize[0] = dirSize[0] + file.length();
-		}
 	}
 
 	@NonNull

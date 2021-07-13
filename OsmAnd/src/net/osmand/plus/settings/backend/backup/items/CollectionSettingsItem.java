@@ -11,6 +11,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_ITEM_SIZE_BYTES;
+
 public abstract class CollectionSettingsItem<T> extends SettingsItem {
 
 	protected List<T> items;
@@ -78,7 +80,7 @@ public abstract class CollectionSettingsItem<T> extends SettingsItem {
 		for (T item : items) {
 			size += getEstimatedItemSize(item);
 		}
-		return size;
+		return size + APPROXIMATE_ITEM_SIZE_BYTES;
 	}
 
 	public boolean shouldShowDuplicates() {

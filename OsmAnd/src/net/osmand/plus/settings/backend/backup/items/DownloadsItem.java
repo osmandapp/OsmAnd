@@ -22,6 +22,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_ITEM_SIZE_BYTES;
+
 public class DownloadsItem extends SettingsItem {
 
 	private static final int APPROXIMATE_DOWNLOAD_ITEM_SIZE_BYTES = 2048;
@@ -71,7 +73,7 @@ public class DownloadsItem extends SettingsItem {
 
 	@Override
 	public long getEstimatedSize() {
-		return APPROXIMATE_DOWNLOAD_ITEM_SIZE_BYTES;
+		return APPROXIMATE_DOWNLOAD_ITEM_SIZE_BYTES + APPROXIMATE_ITEM_SIZE_BYTES;
 	}
 
 	@Override

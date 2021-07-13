@@ -299,16 +299,8 @@ public class BackupHelper {
 		executor.runCommand(new RegisterDeviceCommand(this, token));
 	}
 
-	@SuppressLint("StaticFieldLeak")
 	public void updateOrderIdAsync(@Nullable OnUpdateOrderIdListener listener, @Nullable String orderId) {
-		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
-			@Override
-			protected Void doInBackground(Void... voids) {
-				updateOrderId(listener, orderId);
-				return null;
-			}
-		};
-		task.executeOnExecutor(executor);
+		executor.execute(() -> updateOrderId(listener, orderId));
 	}
 
 	void updateOrderId(@Nullable OnUpdateOrderIdListener listener) {
