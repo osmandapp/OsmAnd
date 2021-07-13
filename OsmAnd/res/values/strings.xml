@@ -41,7 +41,7 @@
     <string name="shared_string_view_all">View all</string>
     <string name="shared_string_discussion">Discussion</string>
     <string name="backup_delete_types">Delete disabled data types</string>
-    <string name="backup_delete_types_descr">Delete all data for deprecated data types from OsmAnd cloud?</string>
+    <string name="backup_delete_types_descr">Delete all data for deprecated data types from OsmAnd Cloud?</string>
     <string name="from_with_param">From %1$s</string>
     <string name="regular_price">Regular price</string>
     <string name="complete_purchase">Complete purchase</string>
@@ -81,7 +81,7 @@
     <string name="routing_attr_avoid_tunnels_name">Avoid tunnels</string>
     <string name="routing_attr_avoid_tunnels_description">Avoid tunnels</string>
     <string name="delete_version_history">Delete version history</string>
-    <string name="backup_version_history_delete_descr">Delete the changelog for deprecated data types from OsmAnd cloud?</string>
+    <string name="backup_version_history_delete_descr">Delete the changelog for deprecated data types from OsmAnd Cloud?</string>
     <string name="backup_storage_taken">Storage taken</string>
     <string name="backup_version_history">Version history</string>
     <string name="grey_color_slope">Grey color is used when slope is undefined.</string>
