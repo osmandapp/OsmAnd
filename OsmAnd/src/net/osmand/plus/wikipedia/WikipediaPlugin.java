@@ -60,12 +60,11 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
 
 public class WikipediaPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.wikipedia";
-
-	public static final String WIKI_PREFIX = "_wiki";
 
 	private MapActivity mapActivity;
 	private OsmandSettings settings;
@@ -141,6 +140,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 												   final MapActivity mapActivity) {
 		if (isLocked()) {
 			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.WIKIPEDIA,
+					WIKIPEDIA_ID,
 					R.string.shared_string_wikipedia,
 					R.string.explore_wikipedia_offline);
 		} else {
@@ -513,6 +513,6 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	public static boolean containsWikipediaExtension(@NonNull String fileName) {
 		return Algorithms.containsAny(fileName,
-				WIKI_PREFIX, IndexConstants.BINARY_WIKI_MAP_INDEX_EXT);
+				WIKI_NAME , IndexConstants.BINARY_WIKI_MAP_INDEX_EXT);
 	}
 }

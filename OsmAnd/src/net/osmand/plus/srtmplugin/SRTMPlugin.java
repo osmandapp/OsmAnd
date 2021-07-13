@@ -266,6 +266,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	                                            MapActivity mapActivity) {
 		if (isLocked()) {
 			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
+					TERRAIN,
 					R.string.shared_string_terrain,
 					R.string.contour_lines_hillshades_slope);
 		} else {

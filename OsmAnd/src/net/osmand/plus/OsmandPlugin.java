@@ -299,17 +299,34 @@ public abstract class OsmandPlugin {
 	public static void initPlugins(@NonNull OsmandApplication app) {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		allPlugins.clear();
-		enablePluginByDefault(app, enabledPlugins, new WikipediaPlugin(app));
+
+		WikipediaPlugin wikipediaPlugin = new WikipediaPlugin(app);
+		allPlugins.add(wikipediaPlugin);
+		enablePluginByDefault(app, enabledPlugins, wikipediaPlugin);
+
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
-		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app), true);
+
+		SRTMPlugin srtmPlugin = new SRTMPlugin(app);
+		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app));
+		if (allPlugins.contains(srtmPlugin)) {
+			enablePluginByDefault(app, enabledPlugins, srtmPlugin);
+		}
+
 		checkMarketPlugin(app, enabledPlugins, new NauticalMapsPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new SkiMapsPlugin(app));
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, enabledPlugins, new ParkingPositionPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
-		enablePluginByDefault(app, enabledPlugins, new OpenPlaceReviewsPlugin(app));
-		enablePluginByDefault(app, enabledPlugins, new MapillaryPlugin(app));
+
+		OpenPlaceReviewsPlugin oprPlugin = new OpenPlaceReviewsPlugin(app);
+		enablePluginByDefault(app, enabledPlugins, oprPlugin);
+		allPlugins.add(oprPlugin);
+
+		MapillaryPlugin mapillaryPlugin = new MapillaryPlugin(app);
+		enablePluginByDefault(app, enabledPlugins, mapillaryPlugin);
+		allPlugins.add(mapillaryPlugin);
+
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
@@ -405,13 +422,6 @@ public abstract class OsmandPlugin {
 	private static void enablePluginByDefault(@NonNull OsmandApplication app,
 	                                          @NonNull Set<String> enabledPlugins,
 	                                          @NonNull OsmandPlugin plugin) {
-		allPlugins.add(plugin);
-		enablePluginByDefaultImpl(app, enabledPlugins, plugin);
-	}
-
-	private static void enablePluginByDefaultImpl(@NonNull OsmandApplication app,
-	                                              @NonNull Set<String> enabledPlugins,
-	                                              @NonNull OsmandPlugin plugin) {
 		if (!enabledPlugins.contains(plugin.getId()) && !isPluginDisabledManually(app, plugin)) {
 			enabledPlugins.add(plugin.getId());
 			app.getSettings().enablePlugin(plugin.getId(), true);
@@ -421,22 +431,14 @@ public abstract class OsmandPlugin {
 	private static void checkMarketPlugin(@NonNull OsmandApplication app,
 	                                      @NonNull Set<String> enabledPlugins,
 	                                      @NonNull OsmandPlugin plugin) {
-		checkMarketPlugin(app, enabledPlugins, plugin, false);
-	}
-
-	private static void checkMarketPlugin(@NonNull OsmandApplication app,
-	                                      @NonNull Set<String> enabledPlugins,
-	                                      @NonNull OsmandPlugin plugin,
-	                                      boolean enableByDefault) {
-		if (updateMarketPlugin(app, enabledPlugins, plugin, enableByDefault)) {
+		if (updateMarketPlugin(app, enabledPlugins, plugin)) {
 			allPlugins.add(plugin);
 		}
 	}
 
 	private static boolean updateMarketPlugin(@NonNull OsmandApplication app,
 	                                          @NonNull Set<String> enabledPlugins,
-	                                          @NonNull OsmandPlugin plugin,
-	                                          boolean enableByDefault) {
+	                                          @NonNull OsmandPlugin plugin) {
 		boolean marketEnabled = Version.isMarketEnabled();
 		boolean available = plugin.pluginAvailable(app);
 		boolean paid = plugin.isPaid();
@@ -463,9 +465,6 @@ public abstract class OsmandPlugin {
 				processed = true;
 			}
 		}
-		if (processed && enableByDefault) {
-			enablePluginByDefaultImpl(app, enabledPlugins, plugin);
-		}
 		return processed;
 	}
 
@@ -476,7 +475,7 @@ public abstract class OsmandPlugin {
 				plugin.onInstall(app, activity);
 				initPlugin(app, plugin);
 			}
-			updateMarketPlugin(app, enabledPlugins, plugin, plugin.isActive());
+			updateMarketPlugin(app, enabledPlugins, plugin);
 		}
 		app.getQuickActionRegistry().updateActionTypes();
 	}
@@ -490,8 +489,8 @@ public abstract class OsmandPlugin {
 	}
 
 	public static boolean enablePluginIfNeeded(@Nullable Activity activity,
-	                                           OsmandApplication app,
-	                                           OsmandPlugin plugin,
+	                                           @NonNull OsmandApplication app,
+	                                           @Nullable OsmandPlugin plugin,
 	                                           boolean enable) {
 		if (plugin != null) {
 			boolean stateChanged = enable != plugin.isActive();
@@ -504,8 +503,8 @@ public abstract class OsmandPlugin {
 	}
 
 	public static boolean enablePlugin(@Nullable Activity activity,
-	                                   OsmandApplication app,
-	                                   OsmandPlugin plugin,
+	                                   @NonNull OsmandApplication app,
+	                                   @NonNull OsmandPlugin plugin,
 	                                   boolean enable) {
 		if (enable) {
 			if (!plugin.init(app, activity)) {

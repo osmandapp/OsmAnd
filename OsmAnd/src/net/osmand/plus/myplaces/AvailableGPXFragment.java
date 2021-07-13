@@ -1461,7 +1461,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		);
 
 		final OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getFunctionalPlugin(OsmEditingPlugin.class);
-		if (osmEditingPlugin != null && osmEditingPlugin.isFunctional()) {
+		if (osmEditingPlugin != null) {
 			items.add(new PopUpMenuItem.Builder(app)
 					.setTitleId(R.string.shared_string_export)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_export))

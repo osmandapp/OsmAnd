@@ -23,8 +23,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
-
 public class PurchasingUtils {
 
 	public static List<SubscriptionButton> collectSubscriptionButtons(OsmandApplication app,
@@ -122,6 +120,7 @@ public class PurchasingUtils {
 	public static void createPromoItem(@NonNull ContextMenuAdapter adapter,
 	                                   @NonNull MapActivity mapActivity,
 	                                   @NonNull OsmAndFeature feature,
+	                                   @NonNull String id,
 	                                   @StringRes int titleId,
 	                                   @StringRes int descriptionId) {
 		OsmandApplication app = mapActivity.getMyApplication();
@@ -133,13 +132,13 @@ public class PurchasingUtils {
 		};
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setId(WIKIPEDIA_ID)
+				.setId(id)
 				.setLayout(R.layout.list_item_promo)
 				.setTitleId(titleId, mapActivity)
 				.setDescription(app.getString(descriptionId))
 				.setIcon(feature.getIconId(nightMode))
 				.setSkipPaintingWithoutColor(true)
-				.setUnsorted(true)
+				.setMarked(true)
 				.setListener(listener)
 				.createItem());
 	}

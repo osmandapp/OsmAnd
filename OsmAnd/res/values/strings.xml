@@ -13,7 +13,6 @@
 -->
 
     <string name="explore_wikipedia_offline">Explore Wikipedia offline.</string>
-    <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
     <string name="logout_from_osmand_cloud_decsr">Are you sure you want to log out?\nYou will need to sign in again to backup or restore the data.</string>
     <string name="logout_from_osmand_cloud">Logout from OsmAnd Cloud</string>
     <string name="duration_moment_ago">a moment ago</string>

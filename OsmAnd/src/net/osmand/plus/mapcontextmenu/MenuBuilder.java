@@ -1433,12 +1433,14 @@ public class MenuBuilder {
 
 	protected void buildNearestWikiRow(ViewGroup viewGroup, SearchAmenitiesListener listener) {
 		WikipediaPlugin plugin = WikipediaPlugin.getEnabledPlugin(WikipediaPlugin.class);
-		if (plugin != null && plugin.isLocked()) {
-			buildGetWikipediaBanner(viewGroup);
-		} else if (showNearestWiki && latLon != null && amenity != null) {
-			PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
-			if (filter != null) {
-				searchSortedAmenities(filter, latLon, listener);
+		if (plugin != null) {
+			if (plugin.isLocked()) {
+				buildGetWikipediaBanner(viewGroup);
+			} else if (showNearestWiki && latLon != null && amenity != null) {
+				PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
+				if (filter != null) {
+					searchSortedAmenities(filter, latLon, listener);
+				}
 			}
 		}
 	}

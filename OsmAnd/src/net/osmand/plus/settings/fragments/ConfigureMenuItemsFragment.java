@@ -222,15 +222,15 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					contextMenuAdapter = menu.getActionsContextMenuAdapter(true);
 					break;
 			}
-			clearUnsortedItems();
+			clearMarkedItems();
 		}
 	}
 
-	private void clearUnsortedItems() {
+	private void clearMarkedItems() {
 		Iterator<ContextMenuItem> iterator = contextMenuAdapter.getItems().listIterator();
 		while (iterator.hasNext()) {
 			ContextMenuItem item = iterator.next();
-			if (item.isUnsorted()) {
+			if (item.isMarked()) {
 				iterator.remove();
 			}
 		}
