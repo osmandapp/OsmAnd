@@ -340,7 +340,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		this.adjustMapPosition = adjustMapPosition;
 	}
 
-	private void setAnalyses(GPXTrackAnalysis analyses) {
+	private void setAnalyses(@Nullable GPXTrackAnalysis analyses) {
 		this.analyses = analyses;
 	}
 
@@ -1407,7 +1407,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                   @Nullable String returnScreenName,
 	                                   @Nullable String callingFragmentTag,
 	                                   boolean adjustMapPosition,
-	                                   GPXTrackAnalysis analyses) {
+	                                   @Nullable GPXTrackAnalysis analyses) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);

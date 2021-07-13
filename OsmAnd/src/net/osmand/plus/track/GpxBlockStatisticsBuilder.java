@@ -116,7 +116,7 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor,
-	                           GPXTrackAnalysis analysis) {
+	                           @Nullable GPXTrackAnalysis analysis) {
 		initItems(analysis);
 		adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor);
 		adapter.setItems(items);
@@ -157,7 +157,7 @@ public class GpxBlockStatisticsBuilder {
 		initItems(null);
 	}
 
-	public void initItems(GPXTrackAnalysis initAnalysis) {
+	public void initItems(@Nullable GPXTrackAnalysis initAnalysis) {
 		GPXFile gpxFile = getGPXFile();
 		if (app == null || gpxFile == null) {
 			return;

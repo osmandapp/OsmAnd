@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,7 +55,7 @@ public class OverviewCard extends MapBaseCard {
 	}
 
 	public OverviewCard(@NonNull MapActivity mapActivity, @NonNull SegmentActionsListener actionsListener,
-	                    SelectedGpxFile selectedGpxFile, GPXTrackAnalysis analysis) {
+	                    @NonNull SelectedGpxFile selectedGpxFile, @Nullable GPXTrackAnalysis analysis) {
 		super(mapActivity);
 		this.actionsListener = actionsListener;
 		this.selectedGpxFile = selectedGpxFile;
