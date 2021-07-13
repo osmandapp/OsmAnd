@@ -168,10 +168,6 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public boolean isVisible() {
-		return true;
-	}
-
 	public boolean isMarketPlugin() {
 		return false;
 	}
@@ -205,15 +201,6 @@ public abstract class OsmandPlugin {
 	}
 
 	public List<IndexItem> getSuggestedMaps() {
-		return Collections.emptyList();
-	}
-
-	protected List<IndexItem> getMapsForType(LatLon latLon, DownloadActivityType type) {
-		try {
-			return DownloadResources.findIndexItemsAt(app, latLon, type);
-		} catch (IOException e) {
-			LOG.error(e);
-		}
 		return Collections.emptyList();
 	}
 
@@ -307,19 +294,19 @@ public abstract class OsmandPlugin {
 		allPlugins.add(new WikipediaPlugin(app));
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
-		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app));
-		checkMarketPlugin(app, enabledPlugins, new NauticalMapsPlugin(app));
-		checkMarketPlugin(app, enabledPlugins, new SkiMapsPlugin(app));
+		checkMarketPlugin(app, new SRTMPlugin(app));
+		checkMarketPlugin(app, new NauticalMapsPlugin(app));
+		checkMarketPlugin(app, new SkiMapsPlugin(app));
 		allPlugins.add(new AudioVideoNotesPlugin(app));
-		checkMarketPlugin(app, enabledPlugins, new ParkingPositionPlugin(app));
+		checkMarketPlugin(app, new ParkingPositionPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OpenPlaceReviewsPlugin(app));
 		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
-		enablePluginsByDefault(app, enabledPlugins);
 		loadCustomPlugins(app);
+		enablePluginsByDefault(app, enabledPlugins);
 		activatePlugins(app, enabledPlugins);
 	}
 
@@ -389,7 +376,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	private static void enablePluginsByDefault(OsmandApplication app, Set<String> enabledPlugins) {
+	private static void enablePluginsByDefault(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins) {
 		for (OsmandPlugin plugin : allPlugins) {
 			if (plugin.isEnableByDefault()
 					&& !enabledPlugins.contains(plugin.getId())
@@ -420,38 +407,27 @@ public abstract class OsmandPlugin {
 	}
 
 	private static void checkMarketPlugin(@NonNull OsmandApplication app,
-	                                      @NonNull Set<String> enabledPlugins,
 	                                      @NonNull OsmandPlugin plugin) {
-		if (updateMarketPlugin(app, enabledPlugins, plugin)) {
+		if (updateMarketPlugin(app, plugin)) {
 			allPlugins.add(plugin);
 		}
 	}
 
 	private static boolean updateMarketPlugin(@NonNull OsmandApplication app,
-	                                          @NonNull Set<String> enabledPlugins,
 	                                          @NonNull OsmandPlugin plugin) {
 		boolean marketEnabled = Version.isMarketEnabled();
 		boolean available = plugin.isAvailable(app);
 		boolean paid = plugin.isPaid();
-		boolean apkInstalled = checkPluginPackage(app, plugin);
 		boolean processed = false;
 		if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
 			// for test reasons
 			// marketEnabled = false;
 		}
 		if (available || (!marketEnabled && !paid)) {
-			if (apkInstalled && !isPluginDisabledManually(app, plugin)) {
-				enabledPlugins.add(plugin.getId());
-				plugin.setEnable(true);
-			}
 			plugin.setInstallURL(null);
 			processed = true;
 		} else {
 			if (marketEnabled) {
-				plugin.setEnable(false);
-				if (!isPluginDisabledManually(app, plugin)) {
-					enabledPlugins.remove(plugin.getId());
-				}
 				plugin.setInstallURL(Version.getUrlWithUtmRef(app, plugin.getComponentId1()));
 				processed = true;
 			}
@@ -460,15 +436,12 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
 			if (plugin.getInstallURL() != null && plugin.isAvailable(app)) {
 				plugin.onInstall(app, activity);
 				initPlugin(app, plugin);
 			}
-			if (!plugin.isEnable()) {
-				updateMarketPlugin(app, enabledPlugins, plugin);
-			}
+			updateMarketPlugin(app, plugin);
 		}
 		app.getQuickActionRegistry().updateActionTypes();
 	}
@@ -537,6 +510,15 @@ public abstract class OsmandPlugin {
 			}
 		}
 		return true;
+	}
+
+	protected List<IndexItem> getMapsForType(@NonNull LatLon latLon, @NonNull DownloadActivityType type) {
+		try {
+			return DownloadResources.findIndexItemsAt(app, latLon, type);
+		} catch (IOException e) {
+			LOG.error(e);
+		}
+		return Collections.emptyList();
 	}
 
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
@@ -642,20 +624,12 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	@NonNull
 	public static List<OsmandPlugin> getAvailablePlugins() {
 		return allPlugins;
 	}
 
-	public static List<OsmandPlugin> getVisiblePlugins() {
-		List<OsmandPlugin> list = new ArrayList<>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (p.isVisible()) {
-				list.add(p);
-			}
-		}
-		return list;
-	}
-
+	@NonNull
 	public static List<OsmandPlugin> getEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
@@ -666,6 +640,7 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
+	@NonNull
 	public static List<OsmandPlugin> getActivePlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
@@ -676,16 +651,7 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
-	public static List<OsmandPlugin> getActiveVisiblePlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (p.isActive() && p.isVisible()) {
-				lst.add(p);
-			}
-		}
-		return lst;
-	}
-
+	@NonNull
 	public static List<OsmandPlugin> getNotActivePlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
@@ -696,16 +662,7 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
-	public static List<OsmandPlugin> getNotActiveVisiblePlugins() {
-		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
-		for (OsmandPlugin p : allPlugins) {
-			if (!p.isActive() && p.isVisible()) {
-				lst.add(p);
-			}
-		}
-		return lst;
-	}
-
+	@NonNull
 	public static List<OsmandPlugin> getMarketPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
@@ -716,6 +673,7 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
+	@NonNull
 	public static List<CustomOsmandPlugin> getCustomPlugins() {
 		ArrayList<CustomOsmandPlugin> lst = new ArrayList<CustomOsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin plugin : allPlugins) {
@@ -964,13 +922,13 @@ public abstract class OsmandPlugin {
 
 	public static void populateContextMenuImageCards(@NonNull List<ImageCard> imageCards, @NonNull Map<String, String> params,
 	                                                 @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
-		for (OsmandPlugin plugin : getActivePlugins()) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			imageCards.addAll(plugin.getContextMenuImageCards(params, additionalParams, listener));
 		}
 	}
 
 	public static ImageCard createImageCardForJson(@NonNull JSONObject imageObject) {
-		for (OsmandPlugin plugin : getActivePlugins()) {
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			ImageCard imageCard = plugin.createContextMenuImageCard(imageObject);
 			if (imageCard != null) {
 				return imageCard;
@@ -992,7 +950,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public static boolean onMapActivityKeyUp(MapActivity mapActivity, int keyCode) {
-		for (OsmandPlugin p : getActivePlugins()) {
+		for (OsmandPlugin p : getEnabledPlugins()) {
 			if (p.mapActivityKeyUp(mapActivity, keyCode))
 				return true;
 		}
@@ -1000,13 +958,13 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void registerQuickActionTypesPlugins(List<QuickActionType> quickActionTypes) {
-		for (OsmandPlugin p : getActivePlugins()) {
+		for (OsmandPlugin p : getEnabledPlugins()) {
 			quickActionTypes.addAll(p.getQuickActionTypes());
 		}
 	}
 
 	public static void updateLocationPlugins(net.osmand.Location location) {
-		for (OsmandPlugin p : getActivePlugins()) {
+		for (OsmandPlugin p : getEnabledPlugins()) {
 			p.updateLocation(location);
 		}
 	}

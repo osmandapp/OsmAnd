@@ -52,6 +52,7 @@ import net.osmand.util.Algorithms;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -201,19 +202,15 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	@Override
 	public List<IndexItem> getSuggestedMaps() {
-		List<IndexItem> suggestedMaps = new ArrayList<>();
-
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
 		if (!downloadThread.getIndexes().isDownloadedFromInternet && settings.isInternetConnectionAvailable()) {
 			downloadThread.runReloadIndexFiles();
 		}
-
 		if (!downloadThread.shouldDownloadIndexes()) {
 			LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
-			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.WIKIPEDIA_FILE));
+			return getMapsForType(latLon, DownloadActivityType.WIKIPEDIA_FILE);
 		}
-
-		return suggestedMaps;
+		return Collections.emptyList();
 	}
 
 	@Override

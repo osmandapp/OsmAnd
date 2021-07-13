@@ -373,7 +373,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (ctx == null) {
 			return;
 		}
-		List<OsmandPlugin> plugins = OsmandPlugin.getVisiblePlugins();
+		List<OsmandPlugin> plugins = OsmandPlugin.getAvailablePlugins();
 		for (OsmandPlugin plugin : plugins) {
 			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin || plugin.getSettingsScreenType() == null) {
 				continue;
