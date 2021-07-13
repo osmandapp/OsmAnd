@@ -22,8 +22,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_ITEM_SIZE_BYTES;
-
 public class NetworkWriter implements AbstractWriter {
 
 	private final BackupHelper backupHelper;
@@ -130,7 +128,7 @@ public class NetworkWriter implements AbstractWriter {
 
 		long size = 0;
 		for (File file : filesToUpload) {
-			size += file.length() + APPROXIMATE_ITEM_SIZE_BYTES;
+			size += file.length();
 		}
 		OnUploadFileListener uploadListener = getUploadDirListener(item, fileName, (int) (size / 1024));
 		for (File file : filesToUpload) {
