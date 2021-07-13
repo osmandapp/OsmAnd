@@ -16,7 +16,6 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -128,8 +127,8 @@ public class NetworkWriter implements AbstractWriter {
 		collectDirFiles(item.getFile(), filesToUpload, size);
 		OnUploadFileListener uploadListener = getUploadDirListener(item, fileName, (int) (size[0] / 1024));
 		for (File file : filesToUpload) {
+			item.setFileToWrite(file);
 			String name = BackupHelper.getFileItemName(file, item);
-			item.setInputStream(new FileInputStream(file));
 			String error = uploadItemFile(itemWriter, name, uploadListener, uploadTime);
 			if (error != null) {
 				return error;

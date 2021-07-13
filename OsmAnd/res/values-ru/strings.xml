@@ -4222,4 +4222,5 @@
     <string name="backup_error_token_is_not_valid_or_expired">Неверный или просроченный токен</string>
     <string name="backup_error_user_is_not_registered">Пользователь с данным адресом электронной почты не зарегистрирован</string>
     <string name="backup_error_no_valid_subscription">Нет действующей подписки</string>
+    <string name="backup_welcome_back_descr">Вы можете восстановить данные на этом устройстве используя существующие бекапы или настроить резервное копирование этого устройства в OsmAnd Cloud.</string>
 </resources>

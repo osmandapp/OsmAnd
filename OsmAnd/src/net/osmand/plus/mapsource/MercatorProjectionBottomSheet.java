@@ -61,7 +61,7 @@ public class MercatorProjectionBottomSheet extends MenuBottomSheetDialogFragment
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBoolean(ELLIPTIC_KEY, mercatorProjection == MercatorProjection.ELLIPTIC);
 		super.onSaveInstanceState(outState);
 	}

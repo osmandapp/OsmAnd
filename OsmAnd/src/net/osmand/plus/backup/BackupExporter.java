@@ -167,11 +167,16 @@ public class BackupExporter extends Exporter {
 		return new OnDeleteFilesListener() {
 
 			@Override
-			public void onFileDeleteProgress(@NonNull RemoteFile file) {
+			public void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
+
+			}
+
+			@Override
+			public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
 				itemsProgress.add(file);
 				if (listener != null) {
 					listener.itemExportDone(file.getType(), file.getName());
-					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+					listener.updateGeneralProgress(file.getZipSize(), dataProgress[0]);
 				}
 			}
 

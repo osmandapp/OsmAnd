@@ -64,6 +64,8 @@ public class DeleteAllFilesCommand extends BaseDeleteFilesCommand {
 			Object obj = objects[0];
 			if (obj instanceof Map) {
 				listener.onFilesDeleteDone((Map) obj);
+			} else if (obj instanceof List) {
+				listener.onFilesDeleteStarted((List) obj);
 			} else if (obj instanceof Integer && objects.length == 2) {
 				int status = (Integer) obj;
 				String message = (String) objects[1];
@@ -112,6 +114,7 @@ public class DeleteAllFilesCommand extends BaseDeleteFilesCommand {
 					filesToDelete.addAll(remoteFiles);
 				}
 				if (!filesToDelete.isEmpty()) {
+					publishProgress(filesToDelete);
 					deleteFiles(filesToDelete);
 				} else {
 					publishProgress(Collections.emptyMap());

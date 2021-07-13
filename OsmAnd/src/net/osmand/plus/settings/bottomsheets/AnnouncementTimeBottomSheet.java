@@ -75,7 +75,7 @@ public class AnnouncementTimeBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(SELECTED_ENTRY_INDEX_KEY, selectedEntryIndex);
 	}

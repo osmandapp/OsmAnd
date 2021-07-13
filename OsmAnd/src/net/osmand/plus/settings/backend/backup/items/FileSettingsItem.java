@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class FileSettingsItem extends StreamSettingsItem {
 
@@ -142,6 +143,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	protected File file;
+	protected File fileToWrite;
 	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
@@ -182,6 +184,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.FILE;
+	}
+
+	public void setFileToWrite(@NonNull File file) throws IOException {
+		fileToWrite = file;
+		setInputStream(new FileInputStream(file));
 	}
 
 	@NonNull
@@ -245,6 +252,9 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	public long getSize() {
+		if (fileToWrite != null) {
+			return fileToWrite.length();
+		}
 		if (size != 0) {
 			return size;
 		} else if (file != null) {
@@ -266,6 +276,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@NonNull
 	public File getFile() {
 		return file;
+	}
+
+	@Nullable
+	public File getFileToWrite() {
+		return fileToWrite;
 	}
 
 	@NonNull

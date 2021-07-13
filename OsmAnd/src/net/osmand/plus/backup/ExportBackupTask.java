@@ -80,6 +80,9 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 			for (SettingsItem item : exporter.getItems().values()) {
 				size += item.getEstimatedSize();
 			}
+			for (RemoteFile remoteFile : exporter.getFilesToDelete().values()) {
+				size += remoteFile.getZipSize();
+			}
 			maxProgress = size / 1024;
 			listener.onBackupExportStarted();
 		}

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.ViewTreeObserver.OnScrollChangedListener;
 import android.view.Window;
 import android.view.WindowManager;
@@ -111,7 +112,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
 	}
@@ -131,6 +132,19 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		Activity activity = requireActivity();
 		for (BaseBottomSheetItem item : items) {
 			item.inflate(activity, itemsContainer, nightMode);
+		}
+	}
+
+	public void updateMenuItems() {
+		View mainView = getView();
+		if (mainView != null) {
+			items.clear();
+			itemsContainer.removeAllViews();
+			createMenuItems(null);
+			for (BaseBottomSheetItem item : items) {
+				item.inflate(mainView.getContext(), itemsContainer, nightMode);
+			}
+			setupHeightAndBackground(mainView);
 		}
 	}
 
@@ -200,8 +214,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 	}
 
-	protected ViewTreeObserver.OnGlobalLayoutListener getShadowLayoutListener(){
-		return new ViewTreeObserver.OnGlobalLayoutListener() {
+	protected OnGlobalLayoutListener getShadowLayoutListener() {
+		return new OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
 				setShadowOnScrollableView();
@@ -271,15 +285,15 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return R.string.shared_string_cancel;
 	}
 
-	protected int getDismissButtonHeight(){
+	protected int getDismissButtonHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height_small);
 	}
 
-	protected int getRightButtonHeight(){
+	protected int getRightButtonHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height_small);
 	}
 
-	protected int getThirdButtonHeight(){
+	protected int getThirdButtonHeight() {
 		return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height_small);
 	}
 
@@ -460,7 +474,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected LayerDrawable createBackgroundDrawable(@NonNull Context ctx, @DrawableRes int shadowDrawableResId) {
 		Drawable shadowDrawable = ContextCompat.getDrawable(ctx, shadowDrawableResId);
-		Drawable[] layers = new Drawable[]{shadowDrawable, getColoredBg(ctx)};
+		Drawable[] layers = new Drawable[] {shadowDrawable, getColoredBg(ctx)};
 		return new LayerDrawable(layers);
 	}
 
@@ -509,10 +523,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected void setShadowOnScrollableView() {
 		ScrollView scrollView = getView().findViewById(R.id.scroll_view);
-		boolean isScrollable = scrollView.getChildAt(0).getHeight() >= scrollView.getHeight();;
+		boolean isScrollable = scrollView.getChildAt(0).getHeight() >= scrollView.getHeight();
 		if (isScrollable) {
 			drawTopShadow(false);
-			scrollView.getChildAt(0).setPadding(0,8,0,0);
+			scrollView.getChildAt(0).setPadding(0, 8, 0, 0);
 		} else {
 			drawTopShadow(true);
 		}
