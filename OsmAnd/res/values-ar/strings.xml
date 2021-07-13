@@ -4314,4 +4314,7 @@
 \n
 \n</string>
     <string name="duration_moment_ago">قبل قليل</string>
+    <string name="logout_from_osmand_cloud">تسجيل الخروج من سحابة أوسماند</string>
+    <string name="logout_from_osmand_cloud_decsr">هل أنت متأكد من تسجيل الخروج؟
+\nستحتاج إلى تسجيل الدخول مرة أخرى لعملية النسخ الاحتياطي أو استعادة البيانات.</string>
 </resources>
