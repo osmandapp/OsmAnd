@@ -4245,4 +4245,7 @@
 \n• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления»
 \n
 \n</string>
+    <string name="logout_from_osmand_cloud">Выйти из OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Вы уверены, что хотите выйти\?
+\nВам нужно будет снова войти, чтобы создать резервную копию или восстановить данные.</string>
 </resources>
