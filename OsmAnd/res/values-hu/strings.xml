@@ -4239,4 +4239,7 @@
 \n</string>
     <string name="approximate_route_description">Hozzáilleszti az útvonalat a térképen lévő utakhoz, hogy megkapja az összes kanyart és további adatokat (pl. az út simasága, úttípusa stb.).</string>
     <string name="enter_verification_code">Egyszeri jelszó megadása</string>
+    <string name="logout_from_osmand_cloud">Kijelentkezés az OsmAnd Cloudból</string>
+    <string name="logout_from_osmand_cloud_decsr">Biztosan ki akar jelentkezni\?
+\nAz adatok biztonsági mentéséhez vagy visszaállításához újra be kell jelentkeznie.</string>
 </resources>

@@ -3339,7 +3339,7 @@
     <string name="recalculate_route_in_deviation">Recalcular rota em caso de desvio</string>
     <string name="select_distance_route_will_recalc">Selecione a distância após a qual o percurso será recalculado.</string>
     <string name="recalculate_route_distance_promo">A rota será recalculada se a distância da rota até o local atual for maior que o valor selecionado.</string>
-    <string name="import_complete_description">Todos os dados importados de %1$s. Use os botões abaixo para abrir qualquer parte da aplicação para os gerir.</string>
+    <string name="import_complete_description">Todos os dados foram importados de %1$s. Use os botões abaixo para abrir qualquer parte da aplicação para os gerir.</string>
     <string name="shared_string_import_complete">Importação terminada</string>
     <string name="items_added">Itens adicionados</string>
     <string name="checking_for_duplicate_description">O OsmAnd verifica %1$s para ver se existem duplicados na aplicação.
@@ -4252,4 +4252,7 @@
     <string name="approximate_route_description">Atrair a rota às estradas no mapa para obter todas as viragens e dados adicionais, como a suavidade, tipos de estrada, etc.</string>
     <string name="enter_verification_code">Introduza a palavra-passe de uso único</string>
     <string name="duration_moment_ago">há um momento atrás</string>
+    <string name="logout_from_osmand_cloud">Sair do OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Quer terminar a sessão\?
+\nTerá de se autenticar novamente para fazer a cópia de segurança ou restaurar os dados.</string>
 </resources>

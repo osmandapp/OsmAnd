@@ -4241,4 +4241,7 @@
 \n
 \n</string>
     <string name="duration_moment_ago">há um momento atrás</string>
+    <string name="logout_from_osmand_cloud">Sair do OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Tem certeza que deseja sair\?
+\nVocê precisará fazer login novamente para fazer backup ou restaurar a data.</string>
 </resources>

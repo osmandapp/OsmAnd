@@ -261,7 +261,7 @@
     <string name="av_audio_bitrate_descr">Выберите битрейт аудио.</string>
     <string name="shared_string_hide">Скрыть</string>
     <string name="no_address_found">Адрес не определен</string>
-    <string name="shared_string_near">Около</string>
+    <string name="shared_string_near">Рядом с</string>
     <string name="shared_string_location">Местоположение</string>
     <string name="poi_context_menu_modify_osm_change">Изменить POI</string>
     <string name="osm_edit_reopened_note">Заметка OSM открыта снова</string>
@@ -1015,8 +1015,8 @@
     <string name="rendering_attr_hmRendered_description">Показывать больше деталей на карте.</string>
     <string name="rendering_attr_hmRendered_name">Больше деталей</string>
     <string name="route_roundabout">Круговое движение, %1$d съезд</string>
-    <string name="route_kl">Держитесь левее</string>
-    <string name="route_kr">Держитесь правее</string>
+    <string name="route_kl">Держитесь левее ⁠</string>
+    <string name="route_kr">Держитесь правее ⁠</string>
     <string name="asap">Скорее</string>
     <string name="gpxup_public">Общедоступный</string>
     <string name="gpxup_identifiable">Идентифицируемый</string>
@@ -1709,7 +1709,7 @@
     <string name="shared_string_exit">Выход</string>
     <string name="shared_string_show">Показать</string>
     <string name="shared_string_show_all">Показать все</string>
-    <string name="shared_string_show_on_map">Показывать на карте</string>
+    <string name="shared_string_show_on_map">Показать на карте</string>
     <string name="shared_string_map">Карта</string>
     <string name="shared_string_favorite">Сохранено</string>
     <string name="shared_string_favorites">Избранные</string>
@@ -2202,7 +2202,7 @@
     <string name="download_files_question_space_with_temp">Скачать {0} файл(ов)\?
 \nИспользуется {3} МБ временного хранилища и {1} МБ постоянного. (Из {2} МБ)</string>
     <string name="search_my_location">Найти мое местоположение</string>
-    <string name="first_usage_greeting">Стройте маршруты и открывайте новые места без подключения к интернету</string>
+    <string name="first_usage_greeting">Открывайте новые места и стройте маршруты без подключения к интернету</string>
     <string name="allow_access_location">Разрешить доступ к местоположению</string>
     <string name="give_permission">Дать разрешение</string>
     <string name="storage_place_description">Хранилище данных OsmAnd (для карт, файлов треков и пр.): %1$s.</string>
@@ -2278,7 +2278,7 @@
     <string name="mapillary_widget_descr">Позволяет быстро внести свой вклад в Mapillary.</string>
     <string name="mapillary_descr">Фото с улиц онлайн для каждого. Открывайте места, взаимодействуйте, запечатлейте весь мир.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Уличные фотографии для всех. Открывайте для себя места, сотрудничайте, снимайте мир.</string>
+    <string name="plugin_mapillary_descr">Фото с улиц для всех. Открывайте места, сотрудничайте, снимайте мир.</string>
     <string name="save_poi_too_many_uppercase">В названии слишком много заглавных букв. Продолжить\?</string>
     <string name="quick_action_resume_pause_navigation_descr">Кнопка приостановки и возобновления навигации.</string>
     <string name="quick_action_show_navigation_finish_dialog">Показывать диалог завершения навигации</string>
@@ -2726,13 +2726,13 @@
     </string>
     <string name="in_app_purchase_desc_ex">После покупки этот план станет доступен для вас навсегда.</string>
     <string name="wikivoyage_travel_guide">Путеводитель</string>
-    <string name="wikivoyage_travel_guide_descr">Просматривайте путеводители Викигида по самым интересным местам на планете внутри OsmAnd без подключения к интернету.</string>
+    <string name="wikivoyage_travel_guide_descr">Гид по самым интересным местам планеты в OsmAnd без подключения к интернету.</string>
     <string name="travel_card_update_descr">Доступны новые данные Викигида, обновите файл, чтобы увидеть их.</string>
-    <string name="travel_card_download_descr">Скачайте путеводители Викигида для просмотра статей о местах по всему миру без подключения к интернету.</string>
+    <string name="travel_card_download_descr">Скачайте путеводители Викигида и читайте о местах по всему миру без подключения к интернету.</string>
     <string name="update_is_available">Доступно обновление</string>
     <string name="download_file">Скачать файл</string>
     <string name="start_editing_card_image_text">Бесплатный путеводитель по всему миру, который может редактировать каждый.</string>
-    <string name="welcome_to_open_beta_description">В настоящее время путеводители основаны на Викигиде. Проверьте бесплатно все функции во время открытого бета-тестирования.</string>
+    <string name="welcome_to_open_beta_description">В настоящее время путеводители основаны на Викигиде. Попробуйте все функции бесплатно во время открытого бета-тестирования.</string>
     <string name="start_editing_card_description">Вы можете изменять любую статью Викигида, более того, ваше участие в нашем проекте всячески приветствуется! Делитесь знаниями, опытом, талантами и своим вниманием.</string>
     <string name="start_editing">Начать редактирование</string>
     <string name="get_unlimited_access">Получить неограниченный доступ</string>
@@ -4094,9 +4094,9 @@
     <string name="shared_string_min_height">Мин. высота</string>
     <string name="shared_string_max_height">Макс. высота</string>
     <string name="language_description">Выберите предпочтительный язык и тип голосовых подсказок.</string>
-    <string name="tts_description">Синтезатор речи (TTS) умеет произносить все типы инструкций: названия улиц, инструкции для поворотов, названия точек интереса (POI) и т. д.</string>
+    <string name="tts_description">Синтезатор речи (TTS) умеет произносить все типы инструкций: повороты, названия улиц, точек интереса (POI) и пр.</string>
     <string name="tts_title">TTS</string>
-    <string name="recorded_description">Записанный голос звучит лучше, но умеет произносить только заранее записанные фразы: инструкции для поворотов. Не умеет объявлять названия улиц и POI.</string>
+    <string name="recorded_description">Записанный голос звучит лучше, но предупреждает только о поворотах (использует предустановленные фразы). Не умеет объявлять названия улиц и POI.</string>
     <string name="use_system_language">Использовать системный язык</string>
     <string name="shared_string_itinerary">Маркеры</string>
     <string name="route_line_use_map_style_width">Используется толщина линии стиля карты (%1$s).</string>
@@ -4179,7 +4179,7 @@
     <string name="purchases_feature_desc_terrain">Контурные линии, карты затенения рельефа (отмывка) и карты уклонов с цветовой визуализацией, вершины и низменности.</string>
     <string name="purchases_feature_desc_wikivoyage">Изучайте Викигид в режиме офлайн. Статьи разделены по странам и регионам и доступны на всех языках.</string>
     <string name="purchases_feature_desc_wikipedia">Изучайте Википедию в режиме офлайн. Статьи разделены по странам и регионам и доступны на всех языках.</string>
-    <string name="purchases_feature_desc_combined_wiki">Изучайте статьи Википедии и Викигида на ходу, без подключения к Интернету. Локальные данные разделены по странам и доступны на всех языках.</string>
+    <string name="purchases_feature_desc_combined_wiki">Читайте статьи Википедии и Викигида на ходу, без подключения к интернету. Офлайн-данные разделены по странам и доступны на всех языках.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Неограниченные загрузки локальных карт всех континентов и регионов.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Доступ к регулярным ежемесячным обновлениям для локальных карт.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Доступ к более частому обновлению карт, выбирайте между: ежечасными, ежедневными или еженедельными обновлениями. Обновления загружаются постепенно, только для измененной области.</string>
@@ -4245,5 +4245,8 @@
 \n• Обновления OsmAnd Live перемещены в «Загрузка карт» → «Обновления»
 \n
 \n</string>
+    <string name="logout_from_osmand_cloud">Выйти из OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Вы уверены, что хотите выйти\?
+\nВам нужно будет снова войти, чтобы создать резервную копию или восстановить данные.</string>
     <string name="backup_welcome_back_descr">Вы можете восстановить данные на этом устройстве используя существующие бекапы или настроить резервное копирование этого устройства в OsmAnd Cloud.</string>
 </resources>
