@@ -160,7 +160,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 		private List<Object> getFilteredPluginsAndApps() {
 			List<ConnectedApp> connectedApps = app.getAidlApi().getConnectedApps();
-			List<OsmandPlugin> visiblePlugins = OsmandPlugin.getActivePlugins();
+			List<OsmandPlugin> visiblePlugins = OsmandPlugin.getAvailablePlugins();
 
 			for (Iterator<OsmandPlugin> iterator = visiblePlugins.iterator(); iterator.hasNext(); ) {
 				OsmandPlugin plugin = iterator.next();
