@@ -253,11 +253,10 @@ public class GpxDbHelper {
 							if (item == null || item.getFile() == null) {
 								item = new GpxDataItem(gpxFile, analysis);
 								db.insert(item, conn);
-								putToCache(item);
 							} else {
 								db.updateAnalysis(item, analysis, conn);
-								putToCache(item);
 							}
+							putToCache(item);
 						} else {
 							putToCache(item);
 						}

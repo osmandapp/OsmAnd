@@ -9,7 +9,9 @@ import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BackupInfo {
 	public List<RemoteFile> filesToDownload = new ArrayList<>();
@@ -18,29 +20,43 @@ public class BackupInfo {
 	public List<LocalFile> localFilesToDelete = new ArrayList<>();
 	public List<Pair<LocalFile, RemoteFile>> filesToMerge = new ArrayList<>();
 
-	public List<SettingsItem> getItemsToUpload(@NonNull OsmandApplication app) {
-		List<SettingsItem> items = new ArrayList<>();
-		for (LocalFile localFile : getFilteredFilesToUpload(app)) {
+	public List<SettingsItem> itemsToUpload;
+	public List<SettingsItem> itemsToDelete;
+	public List<LocalFile> filteredFilesToUpload;
+	public List<RemoteFile> filteredFilesToDelete;
+	public List<Pair<LocalFile, RemoteFile>> filteredFilesToMerge;
+
+	void createItemCollections(@NonNull OsmandApplication app) {
+		createFilteredFilesToUpload(app);
+		createItemsToUpload();
+		createFilteredFilesToDelete(app);
+		createItemsToDelete();
+		createFilteredFilesToMerge(app);
+	}
+
+	private void createItemsToUpload() {
+		Set<SettingsItem> items = new HashSet<>();
+		for (LocalFile localFile : filteredFilesToUpload) {
 			SettingsItem item = localFile.item;
-			if (item != null && !items.contains(item)) {
+			if (item != null) {
 				items.add(item);
 			}
 		}
-		return items;
+		itemsToUpload = new ArrayList<>(items);
 	}
 
-	public List<SettingsItem> getItemsToDelete(@NonNull OsmandApplication app) {
-		List<SettingsItem> items = new ArrayList<>();
-		for (RemoteFile remoteFile : getFilteredFilesToDelete(app)) {
+	private void createItemsToDelete() {
+		Set<SettingsItem> items = new HashSet<>();
+		for (RemoteFile remoteFile : filteredFilesToDelete) {
 			SettingsItem item = remoteFile.item;
-			if (item != null && !items.contains(item)) {
+			if (item != null) {
 				items.add(item);
 			}
 		}
-		return items;
+		itemsToDelete = new ArrayList<>(items);
 	}
 
-	public List<LocalFile> getFilteredFilesToUpload(@NonNull OsmandApplication app) {
+	private void createFilteredFilesToUpload(@NonNull OsmandApplication app) {
 		List<LocalFile> files = new ArrayList<>();
 		BackupHelper helper = app.getBackupHelper();
 		for (LocalFile localFile : filesToUpload) {
@@ -50,10 +66,10 @@ public class BackupInfo {
 				files.add(localFile);
 			}
 		}
-		return files;
+		filteredFilesToUpload = files;
 	}
 
-	public List<RemoteFile> getFilteredFilesToDelete(@NonNull OsmandApplication app) {
+	private void createFilteredFilesToDelete(@NonNull OsmandApplication app) {
 		List<RemoteFile> files = new ArrayList<>();
 		BackupHelper helper = app.getBackupHelper();
 		for (RemoteFile remoteFile : filesToDelete) {
@@ -62,10 +78,10 @@ public class BackupInfo {
 				files.add(remoteFile);
 			}
 		}
-		return files;
+		filteredFilesToDelete = files;
 	}
 
-	public List<Pair<LocalFile, RemoteFile>> getFilteredFilesToMerge(@NonNull OsmandApplication app) {
+	private void createFilteredFilesToMerge(@NonNull OsmandApplication app) {
 		List<Pair<LocalFile, RemoteFile>> files = new ArrayList<>();
 		BackupHelper helper = app.getBackupHelper();
 		for (Pair<LocalFile, RemoteFile> pair : filesToMerge) {
@@ -74,6 +90,18 @@ public class BackupInfo {
 				files.add(pair);
 			}
 		}
-		return files;
+		filteredFilesToMerge = files;
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return "BackupInfo {" +
+				" filesToDownload=" + filesToDownload.size() +
+				", filesToUpload=" + filesToUpload.size() +
+				", filesToDelete=" + filesToDelete.size() +
+				", localFilesToDelete=" + localFilesToDelete.size() +
+				", filesToMerge=" + filesToMerge.size() +
+				" }";
 	}
 }

@@ -30,6 +30,30 @@
 
 	</net.osmand.plus.widgets.OsmandTextFieldBoxes>
 
+	<net.osmand.plus.widgets.OsmandTextFieldBoxes
+		android:id="@+id/promocode_container"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding_small"
+		android:focusable="true"
+		android:focusableInTouchMode="true"
+		android:minHeight="@dimen/favorites_list_item_height"
+		osmand:labelText="@string/backup_promocode"
+		osmand:primaryColor="@color/coordinate_input_edit_text_activated"
+		osmand:secondaryColor="@color/additional_description_light">
+
+		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+			android:id="@+id/promocode_edit_text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:imeOptions="actionNext"
+			android:inputType="textEmailAddress"
+			android:maxLines="1"
+			android:saveEnabled="false"
+			tools:text="12345" />
+
+	</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/error_text"
 		android:layout_width="match_parent"

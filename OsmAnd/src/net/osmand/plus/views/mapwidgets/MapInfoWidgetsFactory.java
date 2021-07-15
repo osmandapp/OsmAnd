@@ -1,8 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,16 +18,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.jwetherell.openmap.common.LatLonPoint;
@@ -49,12 +37,10 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.RoutingHelperUtils;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
@@ -64,9 +50,12 @@ import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
+import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -79,6 +68,16 @@ import org.apache.commons.logging.Log;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 public class MapInfoWidgetsFactory {
 	public enum TopToolbarControllerType {
@@ -965,6 +964,10 @@ public class MapInfoWidgetsFactory {
 				if (streetName.shieldObject != null && streetName.shieldObject.nameIds != null
 						&& setRoadShield(shieldIcon, streetName.shieldObject)) {
 					AndroidUiHelper.updateVisibility(shieldIcon, true);
+					int indexOf = streetName.text.indexOf("»");
+					if (indexOf > 0) {
+						streetName.text = streetName.text.substring(indexOf);
+					}
 				} else {
 					AndroidUiHelper.updateVisibility(shieldIcon, false);
 				}
@@ -1006,14 +1009,14 @@ public class MapInfoWidgetsFactory {
 			for (int i = 0; i < object.nameIds.length; i++) {
 				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
 				String val = object.names.get(object.nameIds[i]);
-				if (!key.startsWith("road_ref")) {
+				if (!key.endsWith("_ref") && !key.startsWith("route_road")) {
 					additional.append(key).append("=").append(val).append(";");
 				}
 			}
 			for (int i = 0; i < object.nameIds.length; i++) {
 				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
 				String val = object.names.get(object.nameIds[i]);
-				if (key.startsWith("road_ref")) {
+				if (key.startsWith("route_road") && key.endsWith("_ref")) {
 					boolean visible = setRoadShield(view, object, key, val, additional);
 					if (visible) {
 						return true;
@@ -1274,9 +1277,7 @@ public class MapInfoWidgetsFactory {
 		}
 
 		private void copyToClipboard(@NonNull String text) {
-			Object systemService = map.getSystemService(Activity.CLIPBOARD_SERVICE);
-			if (systemService instanceof ClipboardManager) {
-				((ClipboardManager) systemService).setText(text);
+			if (ShareDialog.copyToClipboard(map, text)) {
 				showShareSnackbar(text, map);
 			}
 		}

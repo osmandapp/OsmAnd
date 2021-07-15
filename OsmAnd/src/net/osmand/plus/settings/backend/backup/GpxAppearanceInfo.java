@@ -61,9 +61,12 @@ public class GpxAppearanceInfo {
 		writeParam(json, "split_type", GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
 		writeParam(json, "split_interval", splitInterval);
 		writeParam(json, "gradient_scale_type", scaleType);
-		writeParam(json, GradientScaleType.SPEED.getColorTypeName(), Algorithms.gradientPaletteToString(gradientSpeedPalette));
-		writeParam(json, GradientScaleType.ALTITUDE.getColorTypeName(), Algorithms.gradientPaletteToString(gradientAltitudePalette));
-		writeParam(json, GradientScaleType.SLOPE.getColorTypeName(), Algorithms.gradientPaletteToString(gradientSlopePalette));
+		writeParam(json, GradientScaleType.SPEED.getColorTypeName(),
+				Algorithms.gradientPaletteToString(gradientSpeedPalette, GradientScaleType.SPEED.getColorTypeName()));
+		writeParam(json, GradientScaleType.ALTITUDE.getColorTypeName(),
+				Algorithms.gradientPaletteToString(gradientAltitudePalette, GradientScaleType.ALTITUDE.getColorTypeName()));
+		writeParam(json, GradientScaleType.SLOPE.getColorTypeName(),
+				Algorithms.gradientPaletteToString(gradientSlopePalette, GradientScaleType.SLOPE.getColorTypeName()));
 
 		writeParam(json, "time_span", timeSpan);
 		writeParam(json, "wpt_points", wptPoints);
@@ -72,22 +75,35 @@ public class GpxAppearanceInfo {
 
 	public static GpxAppearanceInfo fromJson(@NonNull JSONObject json) {
 		GpxAppearanceInfo gpxAppearanceInfo = new GpxAppearanceInfo();
+		boolean hasAnyParam = json.has("color");
 		gpxAppearanceInfo.color = json.optInt("color");
+		hasAnyParam |= json.has("width");
 		gpxAppearanceInfo.width = json.optString("width");
+		hasAnyParam |= json.has("show_arrows");
 		gpxAppearanceInfo.showArrows = json.optBoolean("show_arrows");
+		hasAnyParam |= json.has("show_start_finish");
 		gpxAppearanceInfo.showStartFinish = json.optBoolean("show_start_finish");
+		hasAnyParam |= json.has("split_type");
 		gpxAppearanceInfo.splitType = GpxSplitType.getSplitTypeByName(json.optString("split_type")).getType();
+		hasAnyParam |= json.has("split_interval");
 		gpxAppearanceInfo.splitInterval = json.optDouble("split_interval");
+		hasAnyParam |= json.has("gradient_scale_type");
 		gpxAppearanceInfo.scaleType = getScaleType(json.optString("gradient_scale_type"));
+		hasAnyParam |= json.has(GradientScaleType.SPEED.getColorTypeName());
 		gpxAppearanceInfo.gradientSpeedPalette = getGradientPalette(json, GradientScaleType.SPEED);
+		hasAnyParam |= json.has(GradientScaleType.ALTITUDE.getColorTypeName());
 		gpxAppearanceInfo.gradientAltitudePalette = getGradientPalette(json, GradientScaleType.ALTITUDE);
+		hasAnyParam |= json.has(GradientScaleType.SLOPE.getColorTypeName());
 		gpxAppearanceInfo.gradientSlopePalette = getGradientPalette(json, GradientScaleType.SLOPE);
 
+		hasAnyParam |= json.has("time_span");
 		gpxAppearanceInfo.timeSpan = json.optLong("time_span");
+		hasAnyParam |= json.has("wpt_points");
 		gpxAppearanceInfo.wptPoints = json.optInt("wpt_points");
+		hasAnyParam |= json.has("total_distance");
 		gpxAppearanceInfo.totalDistance = (float) json.optDouble("total_distance");
 
-		return gpxAppearanceInfo;
+		return hasAnyParam ? gpxAppearanceInfo : null;
 	}
 
 	private static GradientScaleType getScaleType(String name) {
@@ -101,8 +117,8 @@ public class GpxAppearanceInfo {
 		return null;
 	}
 
-	private static int[] getGradientPalette(JSONObject json, GradientScaleType scaleType) {
-		return Algorithms.stringToGradientPalette(json.optString(scaleType.getColorTypeName()));
+	private static int[] getGradientPalette(@NonNull JSONObject json, @NonNull GradientScaleType scaleType) {
+		return Algorithms.stringToGradientPalette(json.optString(scaleType.getColorTypeName()), scaleType.getColorTypeName());
 	}
 
 	private static void writeParam(@NonNull JSONObject json, @NonNull String name, @Nullable Object value) throws JSONException {

@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.backend;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.PlatformUtil;
 import net.osmand.util.Algorithms;
 
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
+import androidx.annotation.NonNull;
 
 public class ContextMenuItemsSettings implements Serializable {
 
@@ -24,8 +22,8 @@ public class ContextMenuItemsSettings implements Serializable {
 	private static final String HIDDEN = "hidden";
 	private static final String ORDER = "order";
 
-	private List<String> hiddenIds = new ArrayList<>();
-	private List<String> orderIds = new ArrayList<>();
+	protected List<String> hiddenIds = new ArrayList<>();
+	protected List<String> orderIds = new ArrayList<>();
 
 	public ContextMenuItemsSettings() {
 
@@ -100,11 +98,5 @@ public class ContextMenuItemsSettings implements Serializable {
 
 	public List<String> getOrderIds() {
 		return Collections.unmodifiableList(orderIds);
-	}
-
-	public static ContextMenuItemsSettings getDrawerDefaultInstance() {
-		ArrayList<String> hiddenByDefault = new ArrayList<>();
-		hiddenByDefault.add(DRAWER_DASHBOARD_ID);
-		return new ContextMenuItemsSettings(hiddenByDefault, new ArrayList<String>());
 	}
 }

@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.backend.backup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ExportProgressListener;
@@ -53,8 +54,8 @@ public abstract class Exporter {
 		return cancelled;
 	}
 
-	public void setCancelled(boolean cancelled) {
-		this.cancelled = cancelled;
+	public void cancel() {
+		this.cancelled = true;
 	}
 
 	public void addAdditionalParam(String key, String value) {
@@ -63,7 +64,7 @@ public abstract class Exporter {
 
 	public abstract void export() throws JSONException, IOException;
 
-	protected void writeItems(AbstractWriter writer) throws IOException {
+	protected void writeItems(@NonNull AbstractWriter writer) throws IOException {
 		for (SettingsItem item : getItems().values()) {
 			writer.write(item);
 			if (isCancelled()) {

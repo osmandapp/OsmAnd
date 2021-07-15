@@ -102,6 +102,14 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		}
 	}
 
+	public boolean shouldApproximateRoute() {
+		String value = get(EngineParameter.APPROXIMATE_ROUTE);
+		if (!Algorithms.isEmpty(value)) {
+			return Boolean.parseBoolean(value);
+		}
+		return false;
+	}
+
 	@NonNull
 	public String getFullUrl(@NonNull List<LatLon> path) {
 		StringBuilder sb = new StringBuilder(getBaseUrl());
@@ -238,6 +246,10 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	public static boolean isPredefinedEngineKey(@Nullable String stringKey) {
 		return stringKey != null && stringKey.startsWith(PREDEFINED_PREFIX);
+	}
+
+	public static boolean isOnlineEngineKey(@Nullable String stringKey) {
+		return stringKey != null && stringKey.startsWith(ONLINE_ROUTING_ENGINE_PREFIX);
 	}
 
 	public static class OnlineRoutingResponse {

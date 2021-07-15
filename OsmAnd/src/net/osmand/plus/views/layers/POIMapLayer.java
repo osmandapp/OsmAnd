@@ -45,6 +45,9 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.widgets.WebViewEx;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelGpx;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -55,6 +58,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import static net.osmand.AndroidUtils.dpToPx;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_TRACK;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener {
@@ -235,13 +240,15 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 						int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
 								.getLongitude());
 						if (tileBox.containsPoint(x, y, iconSize)) {
-							String id = null;
-							PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
-							if (st != null) {
-								if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
-									id = st.getIconKeyName();
-								} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-									id = st.getOsmTag() + "_" + st.getOsmValue();
+							String id = o.getGpxIcon();
+							if (id == null) {
+								PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
+								if (st != null) {
+									if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
+										id = st.getIconKeyName();
+									} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+										id = st.getOsmTag() + "_" + st.getOsmValue();
+									}
 								}
 							}
 							if (id != null) {
@@ -398,7 +405,31 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public boolean showMenuAction(@Nullable Object o) {
+	public boolean showMenuAction(@Nullable Object object) {
+		OsmandApplication app = view.getApplication();
+		MapActivity mapActivity = (MapActivity) view.getContext();
+		TravelHelper travelHelper = app.getTravelHelper();
+		if (object instanceof Amenity) {
+			Amenity amenity = (Amenity) object;
+			if (amenity.getSubType().equals(ROUTE_TRACK)) {
+				TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());
+				if (travelGpx == null) {
+					return true;
+				}
+				travelHelper.openTrackMenu(travelGpx, mapActivity, amenity.getRouteId(), amenity.getLocation());
+				return true;
+			} else if (amenity.getSubType().equals(ROUTE_ARTICLE)) {
+				String lang = app.getLanguage();
+				lang = amenity.getContentLanguage(Amenity.DESCRIPTION, lang, "en");
+				String name = amenity.getName(lang);
+				TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
+				if (article == null) {
+					return true;
+				}
+				travelHelper.openTrackMenu(article, mapActivity, name, amenity.getLocation());
+				return true;
+			}
+		}
 		return false;
 	}
 

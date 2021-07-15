@@ -34,9 +34,13 @@ import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
 
 import static net.osmand.router.RoutePlannerFrontEnd.*;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
 
 public class NativeLibrary {
 
@@ -151,8 +155,8 @@ public class NativeLibrary {
 	}
 
 	public NativeTransportRoutingResult[] runNativePTRouting(int sx31, int sy31, int ex31, int ey31,
-	                                                         TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
-		return nativeTransportRouting(new int[]{sx31, sy31, ex31, ey31}, cfg, progress);
+		TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
+		return nativeTransportRouting(new int[] { sx31, sy31, ex31, ey31 }, cfg, progress);
 	}
 
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, RouteRegion[] regions, boolean basemap) {
@@ -514,17 +518,22 @@ public class NativeLibrary {
 			return names;
 		}
 
-		public String getFileNameByExtension(String extension) {
-			if (Algorithms.isEmpty(extension) || !extension.startsWith(".")) {
-				return null;
+		public String getRouteID() {
+			for (Map.Entry<String, String> entry : getTags().entrySet()) {
+				if ("route_id".equals(entry.getKey())) {
+					return entry.getValue();
+				}
 			}
+			return null;
+		}
+
+		public String getGpxFileName() {
 			for (String name : getOriginalNames()) {
-				if (name.endsWith(extension)) {
+				if (name.endsWith(GPX_FILE_EXT) || name.endsWith(GPX_GZ_FILE_EXT)) {
 					return name;
 				}
 			}
 			return null;
 		}
 	}
-
 }

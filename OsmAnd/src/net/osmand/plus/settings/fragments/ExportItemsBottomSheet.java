@@ -164,7 +164,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(EXPORT_MODE_KEY, exportMode);
 		outState.putString(SETTINGS_TYPE_KEY, type.name());

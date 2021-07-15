@@ -1003,9 +1003,6 @@
     <string name="map_overlay_descr">Velg overleggskartet</string>
     <string name="audionotes_plugin_name">Audio/video-notater</string>
     <string name="osm_settings">OSM-redigering</string>
-    <string name="osmand_srtm_long_description_1000_chars">Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. 
-\n 
-\nDe globale dataene (mellom 70° nord og 70° sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_ski_name">Skikartvisning</string>
     <string name="osmand_accessibility_description">Gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks. justering av talehastigheten for tekst-til-tale -stemmer, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for forstørrelseskontroll, eller tekst-til-tale-tilbakemelding, f.eks. auto-annonsering av din posisjon.</string>
     <string name="rename_failed">Navneendring feilet.</string>
@@ -2107,7 +2104,7 @@
     <string name="shared_string_markers">Markører</string>
     <string name="coordinates_format">Koordinatformat</string>
     <string name="use_system_keyboard">Bruk systemets tastatur</string>
-    <string name="fast_coordinates_input_descr">Velg format for koordinatinntasting. Du kan alltid endre det ved å trykke \'Alternativer\'.</string>
+    <string name="fast_coordinates_input_descr">Velg format for koordinatinntasting. Trykk \'Alternativer\' for å endre det.</string>
     <string name="fast_coordinates_input">Rask koordinatinntasting</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Ingen veier på is eller vadesteder</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Unngår veier på is og vadesteder.</string>
@@ -3499,7 +3496,7 @@
     <string name="no_recalculation_setting">Ingen ny beregning</string>
     <string name="please_provide_profile_name_message">Angi et navn for profilen</string>
     <string name="select_data_to_import">Velg data å importere.</string>
-    <string name="slope_read_more">Du kan lese mer om helninger på %1$s.</string>
+    <string name="slope_read_more">Les mer om helninger på %1$s.</string>
     <string name="reorder_or_hide_from">Omarranger eller skjul elementer fra %1$s.</string>
     <string name="divider_descr">Elementer under dette punktet er atskilt med en skillelinje.</string>
     <string name="reset_items_descr">Skjuling av innstillinger tilbakestiller dem til opprinnelig tilstand.</string>
@@ -3669,7 +3666,7 @@
     <string name="use_system_screen_timeout_promo">Avskrudd som forvalg: Skjermen vil ikke slås av så lenge OsmAnd kjører i forgrunnen.
 \n
 \nHvis påskrudd vil OsmAnd bruke systemets innstilling for skjermtidsavbrudd.</string>
-    <string name="terrain_empty_state_text">Slå på for å vise relieffskygge- eller bakkehelningskart. Du kan lese mer om disse karttypene på vårt nettsted.</string>
+    <string name="terrain_empty_state_text">Vis relieffskygger eller bakkehelninger på kartet. Les mer om disse karttypene på vårt nettsted.</string>
     <string name="reset_to_default_category_button_promo">«Tilbakestill til forvalg» gjenoppretter sorteringsrekkefølgen til installasjonsforvalg.</string>
     <string name="hillshade_description">Relieffskyggekart bruker mørke skygger for å vise bakkehelninger, topper og lavland.</string>
     <string name="recalculate_route_distance_promo">Ruten blir beregnet på nytt hvis avstanden fra ruten til nåværende posisjon er større enn valgt verdi.</string>
@@ -3780,7 +3777,7 @@
     <string name="message_you_need_add_two_points_to_show_graphs">Legg til minst to punkter</string>
     <string name="gpx_upload_trackable_visibility_descr">\"Sporbar\" betyr at sporet ikke vil vises i offentlige lister, men bearbeidede sporpunkter med tidsstempel (som ikke direkte kan knyttes til deg) vil være tilgjengelig gjennom nedlastinger fra det offentlige GPS-API-et.</string>
     <string name="sign_in_with_open_street_map">Logg inn med OpenStreetMap</string>
-    <string name="use_login_password">Bruk innlogging og passord</string>
+    <string name="use_login_password">Bruk brukernavn og passord</string>
     <string name="login_account">Konto</string>
     <string name="send_files_to_openstreetmap">Send GPX-fil til OpenStreetMap</string>
     <string name="icon_group_amenity">Fasilitet</string>
@@ -3951,9 +3948,8 @@
     <string name="use_system_language">Bruk systemets språk</string>
     <string name="announce_when_exceeded">Annonser når overskredet</string>
     <string name="route_line_use_gradient_coloring">Rutelinjen er farget av høydeskråning.</string>
-    <string name="recorded_description">Innspilt stemme høres bedre ut, men kan kun uttale forhåndsinnspillede setninger: svinginstruksjoner. Kan ikke kunngjøre gatenavn eller interessepunktnavn.</string>
+    <string name="recorded_description">Innspilt tale høres bedre ut, men kan kun uttale forhåndsinnspilte uttrykk: svinginstruksjoner. Kan ikke melde om gatenavn eller interessepunktnavn.</string>
     <string name="shared_string_itinerary">Reiseplan</string>
-    <string name="enter_verification_code">Skriv inn 4-sifret kode</string>
     <string name="cloud_email_not_registered">Dennne e-postadressen har ikke blitt registrert for OsmAnd Sky</string>
     <string name="cloud_email_already_registered">En konto med denne e-postadressen er allerede registrert.</string>
     <string name="resend_verification_code">Send koden igjen</string>
@@ -4018,7 +4014,7 @@
     <string name="select_backup_data_descr">Velg data og mapper for sikkerhetskopi.</string>
     <string name="backup_restore_data_descr">Gjenopprett data på enheten, ved bruk av nettbaserte sikkerhetskopier.</string>
     <string name="receiving_data_from_server">Mottar data fra tjeneren …</string>
-    <string name="restore_complete">Gjenoppretting fullført</string>
+    <string name="restore_complete">Gjenopprettet</string>
     <string name="grey_color_slope">Grå farge brukes nå helningen ikke er definert.</string>
     <string name="backup_storage_taken">Brukt lagringsplass</string>
     <string name="backup_data">Sikkerhetskopier data</string>
@@ -4027,4 +4023,56 @@
     <string name="choose_what_to_restore">Velg hva som skal gjenopprettes.</string>
     <string name="restore_selected_data">Gjenopprett valgt data</string>
     <string name="backup_version_history">Versjonshistorikk</string>
+    <string name="osmand_cloud_login_descr">Skriv inn e-postadressen du brukte for registrering. Du vil bli tilsendt et engangspassord som trengs i neste steg.</string>
+    <string name="file_size_needed_for_import">Trengs for import</string>
+    <string name="toast_select_edits_for_upload">Velg redigeringer å laste opp</string>
+    <string name="map_orientation_threshold_descr">Ikke roter kartvisning hvis hastigheten er mindre enn terskel</string>
+    <string name="offline_wikipeadia">Frakoblet Wikipedia</string>
+    <string name="offline_wikivoyage">Frakoblet Wikivoyage</string>
+    <string name="terrain_maps">Terrengkart</string>
+    <string name="advanced_widgets">Avanserte miniprogrammer</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s eller %2$s</string>
+    <string name="continue_with">Fortsett med %1$s</string>
+    <string name="not_available_with">Ikke tilgjengelig med %1$s</string>
+    <string name="shared_string_learn_more">Lær mer</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Avbryt når som helst i Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Kanseller når som helst på Google Play.</string>
+    <string name="shared_string_not_included">Ikke inkludert</string>
+    <string name="shared_string_includes">Inkluderer</string>
+    <string name="regular_price">Vanlig pris</string>
+    <string name="from_with_param">Fra %1$s</string>
+    <string name="shared_string_discussion">Diskusjon</string>
+    <string name="shared_string_view_all">Vis alle</string>
+    <string name="backup_error_user_is_already_registered">Denne e-postadressen er i bruk på en annen konto</string>
+    <string name="backup_error_subscription_was_expired">Utløpt abonnement</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Ugyldig eller utløpt symbol</string>
+    <string name="backup_error_token_is_not_valid">Noe er galt med angitt enhets-ID eller symbol</string>
+    <string name="local_backup_descr">Sikkerhetskopier eller gjenopprett data fra en lokal fil.</string>
+    <string name="verify_email_address_descr">Bekreftelseskode sendt til %1$s. Skriv den inn i feltet nedenfor.</string>
+    <string name="delete_version_history">Slett versjonshistorikk</string>
+    <string name="nautical_depth">Havdybde</string>
+    <string name="osmand_online_routing_promo">Du kan bruke forhåndsdefinerte maler, eller legge til egendefinert nettbasert ruteberegning. OSRM, GrapHopper, OpenRouteService og GPX støttes.</string>
+    <string name="loading_list_of_routing_services">Laster inn liste over tilgjengelige ruteberegningstjenester</string>
+    <string name="send_logcat_log">Send Logcat-logg</string>
+    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="on_pause">Satt på pause</string>
+    <string name="track_recording_description">Stopp opptak\?
+\nAll ulagret data vil gå tapt.</string>
+    <string name="restart">Start på ny</string>
+    <string name="track_recording_save_and_stop">Lagre og stopp opptak</string>
+    <string name="contact_support_description">Hvis du har spørsmål kan du kontakte oss på %1$s.</string>
+    <string name="empty_purchases_description">Hvis kjøpene dine ikke vises her kan du trykke «%1$s» eller kontakte vår brukerstøtte.</string>
+    <string name="routing_attr_avoid_tunnels_description">Unngå tunneler</string>
+    <string name="routing_attr_avoid_tunnels_name">Unngå tunneler</string>
+    <string name="backup_promocode">Promokode</string>
+    <string name="send_crash_log">Send krasjlogg</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Du kan få «%1$s» som del av: «%2$s»-planen. Sammenligning:</string>
+    <string name="redeem_promo_code">Løs inn promo-kode</string>
+    <string name="complete_purchase">Fullfør kjøp</string>
+    <string name="duration_moment_ago">et øyeblikk siden</string>
+    <string name="poi_routes">Ruter</string>
+    <string name="srtm_download_list_help_message">OsmAnd leverer kotedata i meter og fot. Du må laste ned filen på nytt for å endre formatet.</string>
+    <string name="routing_attr_prefer_hiking_routes_description">Foretrekk vandreruter</string>
+    <string name="routing_attr_prefer_hiking_routes_name">Foretrekk vandreruter</string>
+    <string name="routing_attr_allow_streams_description">Tillat bekker og dreneringsgrøfter</string>
 </resources>

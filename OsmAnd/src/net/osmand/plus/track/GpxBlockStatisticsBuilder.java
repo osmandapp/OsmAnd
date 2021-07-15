@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -81,8 +82,24 @@ public class GpxBlockStatisticsBuilder {
 		this.blocksClickable = blocksClickable;
 	}
 
-	public void setBlocksView(RecyclerView blocksView) {
+	public void setBlocksView(final RecyclerView blocksView, boolean isParentExpandable) {
 		this.blocksView = blocksView;
+		if (isParentExpandable) {
+			blocksView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					if (blocksView.getHeight() != 0) {
+						ViewTreeObserver obs = blocksView.getViewTreeObserver();
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+							obs.removeOnGlobalLayoutListener(this);
+						} else {
+							obs.removeGlobalOnLayoutListener(this);
+						}
+						blocksView.setMinimumHeight(blocksView.getHeight());
+					}
+				}
+			});
+		}
 	}
 
 	public void setTabItem(GPXTabItemType tabItem) {
@@ -98,8 +115,9 @@ public class GpxBlockStatisticsBuilder {
 		return selectedGpxFile.getGpxFile();
 	}
 
-	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor) {
-		initItems();
+	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor,
+	                           @Nullable GPXTrackAnalysis analysis) {
+		initItems(analysis);
 		adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor);
 		adapter.setItems(items);
 		blocksView.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
@@ -136,23 +154,31 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void initItems() {
+		initItems(null);
+	}
+
+	public void initItems(@Nullable GPXTrackAnalysis initAnalysis) {
 		GPXFile gpxFile = getGPXFile();
 		if (app == null || gpxFile == null) {
 			return;
 		}
-		analysis = null;
-		boolean withoutGaps = true;
-		if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
-			GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
-			analysis = currentGpx.getAnalysis(0);
-			withoutGaps = !selectedGpxFile.isJoinSegments()
-					&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
-		} else {
-			GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
-			if (gpxDisplayItem != null) {
-				analysis = gpxDisplayItem.analysis;
-				withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+		boolean withoutGaps = false;
+		if (initAnalysis == null) {
+			withoutGaps = true;
+			if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
+				GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
+				analysis = currentGpx.getAnalysis(0);
+				withoutGaps = !selectedGpxFile.isJoinSegments()
+						&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
+			} else {
+				GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
+				if (gpxDisplayItem != null) {
+					analysis = gpxDisplayItem.analysis;
+					withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+				}
 			}
+		} else {
+			analysis = initAnalysis;
 		}
 		items.clear();
 		if (analysis != null) {

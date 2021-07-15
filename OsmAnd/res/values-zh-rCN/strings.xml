@@ -1606,10 +1606,7 @@
     <string name="record_plugin_description">这个插件在地图屏幕上，并手动轻击 GPX 记录小工具，以启动去录制和保存您轨迹的功能，或是自动记录您所有的导航路线到 GPX 文件。 
 \n
 \n录制的轨迹可以与您的朋友共享或用作为 OSM 的贡献。运动选手可以使用录制的轨迹，监看他们的训练。一些基本的轨迹分析，可以直接在 OsmAnd 进行，如一圈的时间、平均速度等，而轨迹当然也可于事后在专门的第三方分析工具解析。</string>
-    <string name="osmand_srtm_long_description_1000_chars">这个插件同时提供了等高在线层和（地貌）地形阴影层，显示在 OsmAnd 标准地图的顶部。此功能会让运动选手、健行旅游者、背包客，和对起伏的地理构成感兴趣的任何人。 
-\n
-\n全球数据（在北纬 70 度至南纬 70 度之间）的测量基于 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安装在美国太空总署地球观测系统的旗舰卫星 Terra 上的遥测仪器，ASTER 是美国太空总署、日本经济产业省(METI)、日本太空系统 (J-spacesystems)之间的通力合作产物。</string>
-    <string name="srtm_plugin_description">这个插件组件同时提供了等高在线层和（地貌）地形阴影层，显示在 OsmAnd 标准地图的顶部。此功能会让运动选手、健行旅游者、背包客，和对起伏的地理构成感兴趣的任何人。（请注意，等高线和地貌数据是各自独立的，在插件组件启用后可以追加下载。） 
+    <string name="srtm_plugin_description">这个插件组件同时提供了等高在线层和（地貌）地形阴影层，显示在 OsmAnd 标准地图的顶部。此功能会让运动选手、健行旅游者、背包客，和对起伏的地理构成感兴趣的任何人。（请注意，等高线和地貌数据是各自独立的，在插件组件启用后可以追加下载。）
 \n
 \n全球数据（在 70 度以北和 70 度以南之间）的测量基于 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安装在美国太空总署地球观测系统的旗舰卫星 Terra 上的遥测仪器，ASTER 是美国太空总署、日本经济产业省（METI）、日本太空系统（J-spacesystems）之间的通力合作的产物。</string>
     <string name="plugin_touringview_name">旅游地图视图</string>

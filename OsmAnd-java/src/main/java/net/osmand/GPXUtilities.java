@@ -9,6 +9,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
 
+import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -55,6 +57,10 @@ public class GPXUtilities {
 	private static final String PROFILE_TYPE_EXTENSION = "profile";
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
+	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
+	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
+	public static final int TRAVEL_GPX_CONVERT_MULT_1 = 2;
+	public static final int TRAVEL_GPX_CONVERT_MULT_2 = 5;
 
 	public final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
@@ -64,6 +70,7 @@ public class GPXUtilities {
 	// speed, ele, hdop
 	private final static NumberFormat decimalFormat = new DecimalFormat("#.#", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
+	public static final int RADIUS_DIVIDER = 5000;
 
 	public enum GPXColor {
 		BLACK(0xFF000000),
@@ -417,6 +424,8 @@ public class GPXUtilities {
 	}
 
 	public static class TrkSegment extends GPXExtensions {
+
+		public String name = null;
 		public boolean generalSegment = false;
 		public List<WptPt> points = new ArrayList<>();
 
@@ -1182,6 +1191,18 @@ public class GPXUtilities {
 			return Collections.unmodifiableList(points);
 		}
 
+		public List<WptPt> getAllSegmentsPoints() {
+			List<WptPt> points = new ArrayList<>();
+			for (Track track : tracks) {
+				if (track.generalTrack) continue;
+				for (TrkSegment segment : track.segments) {
+					if (segment.generalSegment) continue;
+					points.addAll(segment.points);
+				}
+			}
+			return points;
+		}
+
 		public Map<String, List<WptPt>> getPointsByCategories() {
 			Map<String, List<WptPt>> res = new HashMap<>();
 			for (WptPt pt : points) {
@@ -1232,6 +1253,10 @@ public class GPXUtilities {
 
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
+		}
+
+		public boolean hasGeneralTrack() {
+			return generalTrack != null;
 		}
 
 		public void addGeneralTrack() {
@@ -1615,6 +1640,19 @@ public class GPXUtilities {
 			return points.isEmpty() && routes.isEmpty();
 		}
 
+		public int getNonEmptyTracksCount() {
+			int count = 0;
+			for (Track track : tracks) {
+				for (TrkSegment segment : track.segments) {
+					if (segment.points.size() > 0) {
+						count++;
+						break;
+					}
+				}
+			}
+			return count;
+		}
+
 		public int getNonEmptySegmentsCount() {
 			int count = 0;
 			for (Track t : tracks) {
@@ -1657,54 +1695,42 @@ public class GPXUtilities {
 		}
 
 		public QuadRect getRect() {
-			double left = 0, right = 0;
-			double top = 0, bottom = 0;
+			return getBounds(0, 0);
+		}
+
+		public QuadRect getBounds(double defaultMissingLat, double defaultMissingLon) {
+			QuadRect qr = new QuadRect(defaultMissingLon, defaultMissingLat, defaultMissingLon, defaultMissingLat);
 			for (Track track : tracks) {
 				for (TrkSegment segment : track.segments) {
 					for (WptPt p : segment.points) {
-						if (left == 0 && right == 0) {
-							left = p.getLongitude();
-							right = p.getLongitude();
-							top = p.getLatitude();
-							bottom = p.getLatitude();
-						} else {
-							left = Math.min(left, p.getLongitude());
-							right = Math.max(right, p.getLongitude());
-							top = Math.max(top, p.getLatitude());
-							bottom = Math.min(bottom, p.getLatitude());
-						}
+						updateQR(qr, p, defaultMissingLat, defaultMissingLon);
 					}
 				}
 			}
 			for (WptPt p : points) {
-				if (left == 0 && right == 0) {
-					left = p.getLongitude();
-					right = p.getLongitude();
-					top = p.getLatitude();
-					bottom = p.getLatitude();
-				} else {
-					left = Math.min(left, p.getLongitude());
-					right = Math.max(right, p.getLongitude());
-					top = Math.max(top, p.getLatitude());
-					bottom = Math.min(bottom, p.getLatitude());
-				}
+				updateQR(qr, p, defaultMissingLat, defaultMissingLon);
 			}
 			for (Route route : routes) {
 				for (WptPt p : route.points) {
-					if (left == 0 && right == 0) {
-						left = p.getLongitude();
-						right = p.getLongitude();
-						top = p.getLatitude();
-						bottom = p.getLatitude();
-					} else {
-						left = Math.min(left, p.getLongitude());
-						right = Math.max(right, p.getLongitude());
-						top = Math.max(top, p.getLatitude());
-						bottom = Math.min(bottom, p.getLatitude());
-					}
+					updateQR(qr, p, defaultMissingLat, defaultMissingLon);
 				}
 			}
-			return new QuadRect(left, top, right, bottom);
+			return qr;
+		}
+
+		private void updateQR(QuadRect q, WptPt p, double defLat, double defLon) {
+			if (q.left == defLon && q.top == defLat && 
+					q.right == defLon && q.bottom == defLat) {
+				q.left = p.getLongitude();
+				q.right = p.getLongitude();
+				q.top = p.getLatitude();
+				q.bottom = p.getLatitude();
+			} else {
+				q.left = Math.min(q.left, p.getLongitude());
+				q.right = Math.max(q.right, p.getLongitude());
+				q.top = Math.max(q.top, p.getLatitude());
+				q.bottom = Math.min(q.bottom, p.getLatitude());
+			}			
 		}
 
 		public int[] getGradientScaleColor(String gradientScaleType) {
@@ -1712,11 +1738,12 @@ public class GPXUtilities {
 			if (extensions != null) {
 				clrValue = extensions.get(gradientScaleType);
 			}
-			return Algorithms.stringToGradientPalette(clrValue);
+			return Algorithms.stringToGradientPalette(clrValue, gradientScaleType);
 		}
 
 		public void setGradientScaleColor(String gradientScaleType, int[] gradientScalePalette) {
-			getExtensionsToWrite().put(gradientScaleType, Algorithms.gradientPaletteToString(gradientScalePalette));
+			getExtensionsToWrite().put(gradientScaleType,
+					Algorithms.gradientPaletteToString(gradientScalePalette, gradientScaleType));
 		}
 
 		public String getGradientScaleType() {
@@ -1807,6 +1834,17 @@ public class GPXUtilities {
 				return extensions.get("ref");
 			}
 			return null;
+		}
+
+		public String getOuterRadius() {
+			QuadRect rect = getRect();
+			int radius = (int) MapUtils.getDistance(rect.bottom, rect.left, rect.top, rect.right);
+			return MapUtils.convertDistToChar(radius, TRAVEL_GPX_CONVERT_FIRST_LETTER, TRAVEL_GPX_CONVERT_FIRST_DIST,
+					TRAVEL_GPX_CONVERT_MULT_1, TRAVEL_GPX_CONVERT_MULT_2);
+		}
+
+		public String getArticleTitle() {
+			return metadata != null ? metadata.getArticleTitle() : null;
 		}
 
 		private int getItemsToWriteSize() {
@@ -1960,6 +1998,7 @@ public class GPXUtilities {
 				writeNotNullText(serializer, "desc", track.desc);
 				for (TrkSegment segment : track.segments) {
 					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
+					writeNotNullText(serializer, "name", segment.name);
 					for (WptPt p : segment.points) {
 						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
 						writeWpt(format, serializer, p, progress);
@@ -2432,7 +2471,9 @@ public class GPXUtilities {
 								parserState.push(wptPt);
 							}
 						} else if (parse instanceof TrkSegment) {
-							if (tag.equals("trkpt") || tag.equals("rpt")) {
+							if (tag.equals("name")) {
+								((TrkSegment) parse).name = readText(parser, "name");
+							} else if (tag.equals("trkpt") || tag.equals("rpt")) {
 								WptPt wptPt = parseWptAttributes(parser);
 								((TrkSegment) parse).points.add(wptPt);
 								parserState.push(wptPt);

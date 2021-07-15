@@ -178,19 +178,20 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			}
 		} else if(operationId == INSTALL_BUILD){
 			URLConnection connection = NetworkUtils.getHttpURLConnection(URL_GET_BUILD + currentSelectedBuild.path);
-			if(pathToDownload.exists()){
+			if (pathToDownload.exists()){
 				pathToDownload.delete();
 			}
-			byte[] buffer = new byte[1024];
+			int bufflen = 16000;
+			byte[] buffer = new byte[bufflen];
 			InputStream is = connection.getInputStream();
 			FileOutputStream fout = new FileOutputStream(pathToDownload);
 			try {
 				int totalRead = 0;
 				int read;
-				while((read = is.read(buffer, 0, 1024)) != -1){
+				while ((read = is.read(buffer, 0, bufflen)) != -1){
 					fout.write(buffer, 0, read);
 					totalRead += read;
-					if(totalRead > 1024){
+					if (totalRead > 1024) {
 						progressDlg.incrementProgressBy(totalRead / 1024);
 						totalRead %= 1024;
 					}
@@ -308,7 +309,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 				ex = e;
 			}
 			final Exception e = ex;
-			if(this.activity != null){
+			if (this.activity != null) {
 				this.activity.runOnUiThread(new Runnable() {
 					@Override
 					public void run() {

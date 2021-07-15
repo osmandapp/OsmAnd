@@ -3965,4 +3965,13 @@
     <string name="poi_climbing_grade_saxon_min">Legkönnyebb útvonal (szász skála)</string>
     <string name="poi_power_terminal">Légvezeték végződése</string>
     <string name="poi_fuel_propane">Propángáz</string>
+    <string name="poi_power_portal">Kapuformájú távvezetékoszlop</string>
+    <string name="poi_memorial_subject">Emlékmű tárgya</string>
+    <string name="poi_picnic_table_no">Piknikezőasztal nincs</string>
+    <string name="poi_picnic_table_yes">Piknikezőasztal van</string>
+    <string name="poi_contact_vhf">VHF (URH)</string>
+    <string name="poi_contact_webcam">Webkamera</string>
+    <string name="poi_contact_xing">Xing</string>
+    <string name="poi_contact_linkedin">LinkedIn</string>
+    <string name="poi_outdoor_seating_poi">Terasz (kiülős hely)</string>
 </resources>

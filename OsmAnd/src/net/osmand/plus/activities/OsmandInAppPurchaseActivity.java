@@ -20,7 +20,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseInitCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
-import net.osmand.plus.liveupdates.SubscriptionRestartBottomSheetDialogFragment;
 
 import org.apache.commons.logging.Log;
 
@@ -195,12 +194,6 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (purchaseHelper != null && purchaseHelper.getSubscriptions().containsSku(sku)) {
 			getMyApplication().logEvent("live_osm_subscription_purchased");
-
-			if (!active && !fragmentManager.isStateSaved()) {
-				SubscriptionRestartBottomSheetDialogFragment fragment = new SubscriptionRestartBottomSheetDialogFragment();
-				fragment.setUsedOnMap(this instanceof MapActivity);
-				fragment.show(fragmentManager, SubscriptionRestartBottomSheetDialogFragment.TAG);
-			}
 		}
 		onInAppPurchaseItemPurchased(sku);
 		fireInAppPurchaseItemPurchasedOnFragments(fragmentManager, sku, active);
@@ -244,7 +237,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void fireInAppPurchaseDismissProgressOnFragments(@NonNull FragmentManager fragmentManager,
-														 InAppPurchaseTaskType taskType) {
+															InAppPurchaseTaskType taskType) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {

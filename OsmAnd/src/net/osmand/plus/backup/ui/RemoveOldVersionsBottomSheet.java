@@ -17,7 +17,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 
 public class RemoveOldVersionsBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = DeleteAllDataBottomSheet.class.getSimpleName();
+	public static final String TAG = RemoveOldVersionsBottomSheet.class.getSimpleName();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -59,6 +59,11 @@ public class RemoveOldVersionsBottomSheet extends MenuBottomSheetDialogFragment 
 	@Override
 	protected boolean useVerticalButtons() {
 		return true;
+	}
+
+	@Override
+	public int getFirstDividerHeight() {
+		return getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, Fragment target) {

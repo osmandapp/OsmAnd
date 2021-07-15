@@ -2439,9 +2439,6 @@
 \n
 \nThe global data (between 70 ° north and 70 ° south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
     <string name="srtm_plugin_name">Contour lines</string>
-    <string name="osmand_srtm_long_description_1000_chars">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape.
-\n
-\n The global data (between 70 ° north and 70 ° south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX logging widget on the map, or also to automatically log all of your navigation routes to a GPX file.
@@ -4129,7 +4126,6 @@
     <string name="osmand_cloud_login_descr">Please enter the email address, you used for registration. We will send you a one-time password needed on the next step.</string>
     <string name="verify_email_address">Verify email address</string>
     <string name="verify_email_address_descr">We sent a verification code to %1$s, please enter it in the field below.</string>
-    <string name="enter_verification_code">Enter 4 digit code</string>
     <string name="cloud_email_not_registered">This email has not been registered for OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Account with this email is already registered.</string>
     <string name="resend_verification_code">Resend code</string>

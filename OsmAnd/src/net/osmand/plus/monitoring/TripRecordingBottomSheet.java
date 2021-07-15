@@ -17,21 +17,6 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -45,7 +30,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
@@ -68,6 +53,21 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.AndroidUtils.setPadding;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
@@ -75,7 +75,7 @@ import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
 import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
 import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
-public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment implements SegmentActionsListener {
+public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
 
 	public static final String TAG = TripRecordingBottomSheet.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(TripRecordingBottomSheet.class);
@@ -116,7 +116,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		return app.getLocationProvider().getLastKnownLocation() == null;
 	}
 
-	private boolean wasTrackMonitored() {
+	private boolean isMonitoringTrack() {
 		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 	}
 
@@ -135,7 +135,6 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		selectedGpxFile = helper.getCurrentTrack();
 		LayoutInflater inflater = UiUtilities.getInflater(getContext(), nightMode);
-		final FragmentManager fragmentManager = getFragmentManager();
 
 		View itemView = inflater.inflate(R.layout.trip_recording_fragment, null, false);
 		items.add(new BaseBottomSheetItem.Builder()
@@ -160,65 +159,73 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 
 		RecyclerView statBlocks = itemView.findViewById(R.id.block_statistics);
 		blockStatisticsBuilder = new GpxBlockStatisticsBuilder(app, selectedGpxFile, nightMode);
-		blockStatisticsBuilder.setBlocksView(statBlocks);
+		blockStatisticsBuilder.setBlocksView(statBlocks, false);
 		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
 		blockStatisticsBuilder.initStatBlocks(null,
-				ContextCompat.getColor(app, getActiveTextColorId(nightMode)));
+				ContextCompat.getColor(app, getActiveTextColorId(nightMode)), null);
+	}
 
-		CardView cardLeft = itemView.findViewById(R.id.button_left);
-		createItem(cardLeft, ItemType.CLOSE);
-		cardLeft.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+	@Override
+	protected void setupBottomButtons(ViewGroup view) {
+		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
+		int contentPadding = getDimen(R.dimen.content_padding);
+		View buttonsContainer = themedInflater.inflate(R.layout.preference_button_with_icon_quadruple, null);
+		buttonsContainer.setPadding(contentPadding, contentPadding, contentPadding, contentPadding);
+		view.addView(buttonsContainer);
+
+		setupCloseButton(buttonsContainer);
+		setupResumePauseButton(buttonsContainer);
+		setupFinishButton(buttonsContainer);
+		setupOptionsButton(buttonsContainer);
+	}
+
+	private void setupCloseButton(View container) {
+		CardView closeButton = container.findViewById(R.id.button_left);
+		createItem(closeButton, ItemType.CLOSE);
+		closeButton.setOnClickListener(v -> dismiss());
+	}
+
+	private void setupResumePauseButton(View container) {
+		final CardView resumePauseButton = container.findViewById(R.id.button_center_left);
+		createItem(resumePauseButton, isMonitoringTrack() ? ItemType.PAUSE : ItemType.RESUME);
+		resumePauseButton.setOnClickListener(v -> {
+			boolean isMonitoringTrack = isMonitoringTrack();
+			if (isMonitoringTrack) {
+				blockStatisticsBuilder.stopUpdatingStatBlocks();
+				stopUpdatingGraph();
+			} else {
+				blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
+				runUpdatingGraph();
+			}
+			settings.SAVE_GLOBAL_TRACK_TO_GPX.set(!isMonitoringTrack);
+			updateStatus();
+			createItem(resumePauseButton, !isMonitoringTrack ? ItemType.PAUSE : ItemType.RESUME);
+		});
+	}
+
+	private void setupFinishButton(View container) {
+		CardView finishButton = container.findViewById(R.id.button_center_right);
+		createItem(finishButton, ItemType.FINISH);
+		finishButton.setOnClickListener(v -> {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null && plugin != null && hasDataToSave()) {
+				plugin.saveCurrentTrack(null, mapActivity);
+				app.getNotificationHelper().refreshNotifications();
 				dismiss();
 			}
 		});
+	}
 
-		final CardView cardCenterLeft = itemView.findViewById(R.id.button_center_left);
-		createItem(cardCenterLeft, wasTrackMonitored() ? ItemType.PAUSE : ItemType.RESUME);
-		cardCenterLeft.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean wasTrackMonitored = !wasTrackMonitored();
-				if (!wasTrackMonitored) {
-					blockStatisticsBuilder.stopUpdatingStatBlocks();
-					stopUpdatingGraph();
-				} else {
-					blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
-					runUpdatingGraph();
-				}
-				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(wasTrackMonitored);
-				updateStatus();
-				createItem(cardCenterLeft, wasTrackMonitored ? ItemType.PAUSE : ItemType.RESUME);
+	private void setupOptionsButton(View container) {
+		CardView optionsButton = container.findViewById(R.id.button_right);
+		createItem(optionsButton, ItemType.OPTIONS);
+		optionsButton.setOnClickListener(v -> {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				TripRecordingOptionsBottomSheet.showInstance(fragmentManager, TripRecordingBottomSheet.this);
 			}
 		});
-
-		CardView cardCenterRight = itemView.findViewById(R.id.button_center_right);
-		createItem(cardCenterRight, ItemType.FINISH);
-		cardCenterRight.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null && plugin != null && hasDataToSave()) {
-					plugin.saveCurrentTrack(null, mapActivity);
-					app.getNotificationHelper().refreshNotifications();
-					dismiss();
-				}
-			}
-		});
-
-		CardView cardRight = itemView.findViewById(R.id.button_right);
-		createItem(cardRight, ItemType.OPTIONS);
-		cardRight.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (fragmentManager != null) {
-					TripRecordingOptionsBottomSheet.showInstance(fragmentManager, TripRecordingBottomSheet.this);
-				}
-			}
-		});
-
 	}
 
 	@Override
@@ -337,7 +344,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 		displayHelper.setGpx(gpxFile);
 
 		graphsAdapter = new GPXItemPagerAdapter(app, null, displayHelper, nightMode, this, true);
-		graphsAdapter.setChartHMargin(getResources().getDimensionPixelSize(R.dimen.content_padding));
+		graphsAdapter.setChartHMargin(getDimen(R.dimen.content_padding));
 
 		pager.setAdapter(graphsAdapter);
 		tabLayout.setViewPager(pager);
@@ -348,7 +355,7 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 	private void updateStatus() {
 		TextView statusTitle = statusContainer.findViewById(R.id.text_status);
 		AppCompatImageView statusIcon = statusContainer.findViewById(R.id.icon_status);
-		ItemType status = searchingGPS() ? ItemType.SEARCHING_GPS : !wasTrackMonitored() ? ItemType.ON_PAUSE : ItemType.RECORDING;
+		ItemType status = searchingGPS() ? ItemType.SEARCHING_GPS : !isMonitoringTrack() ? ItemType.ON_PAUSE : ItemType.RECORDING;
 		Integer titleId = status.getTitleId();
 		if (titleId != null) {
 			statusTitle.setText(titleId);
@@ -741,19 +748,5 @@ public class TripRecordingBottomSheet extends MenuBottomSheetDialogFragment impl
 				drawTopShadow(showTopShadow);
 			}
 		});
-	}
-
-	@Override
-	protected boolean hideButtonsContainer() {
-		return true;
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
 	}
 }

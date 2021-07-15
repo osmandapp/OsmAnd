@@ -20,6 +20,8 @@ import java.util.List;
 
 public class PluginSettingsItem extends SettingsItem {
 
+	private static final int APPROXIMATE_PLUGIN_SIZE_BYTES = 1024;
+
 	private CustomOsmandPlugin plugin;
 	private List<SettingsItem> pluginDependentItems;
 
@@ -75,6 +77,11 @@ public class PluginSettingsItem extends SettingsItem {
 	}
 
 	@Override
+	public long getEstimatedSize() {
+		return APPROXIMATE_PLUGIN_SIZE_BYTES;
+	}
+
+	@Override
 	public boolean exists() {
 		return OsmandPlugin.getPlugin(getPluginId()) != null;
 	}
@@ -98,7 +105,7 @@ public class PluginSettingsItem extends SettingsItem {
 					plugin.updateDownloadItems(((DownloadsItem) item).getItems());
 				}
 			}
-			OsmandPlugin.addCustomPlugin(app, plugin);
+			app.runInUIThread(() -> OsmandPlugin.addCustomPlugin(app, plugin));
 		}
 	}
 

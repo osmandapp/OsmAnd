@@ -66,15 +66,14 @@ public class GpxSelectionHelper {
 	private static final String SELECTED_BY_USER = "selected_by_user";
 	private static final String HIDDEN_GROUPS = "hidden_groups";
 
-	private OsmandApplication app;
-	private SavingTrackHelper savingTrackHelper;
+	private final OsmandApplication app;
+	private final SavingTrackHelper savingTrackHelper;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
-	private Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
+	private final Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
 	private SelectGpxTask selectGpxTask;
 	private SelectedGpxFile trackToFollow;
 	private StateChangedListener<String> followTrackListener;
-	private boolean shouldHideTrackToFollow;
 
 	public GpxSelectionHelper(OsmandApplication app, SavingTrackHelper trackHelper) {
 		this.app = app;
@@ -117,26 +116,18 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	public boolean shouldHideTrackToFollow() {
-		return shouldHideTrackToFollow;
-	}
-
 	private StateChangedListener<String> getFollowTrackListener() {
 		if (followTrackListener == null) {
 			followTrackListener = new StateChangedListener<String>() {
 				@Override
 				public void stateChanged(String gpxRoutePath) {
 					if (trackToFollow != null) {
-						if (shouldHideTrackToFollow) {
-							selectGpxFile(trackToFollow.getGpxFile(), false, false);
-							shouldHideTrackToFollow = false;
-						}
+						selectGpxFile(trackToFollow.getGpxFile(), false, trackToFollow.notShowNavigationDialog);
 						trackToFollow = null;
 					}
 					if (!Algorithms.isEmpty(gpxRoutePath)) {
 						trackToFollow = getSelectedFileByPath(gpxRoutePath);
 						if (trackToFollow == null) {
-							shouldHideTrackToFollow = true;
 							File file = new File(gpxRoutePath);
 							if (file.exists() && !file.isDirectory()) {
 								new GpxFileLoaderTask(file, new CallbackWithObject<GPXFile>() {
@@ -148,6 +139,11 @@ public class GpxSelectionHelper {
 								}).execute();
 							}
 						}
+					} else if (gpxRoutePath != null) {
+						GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+						if (routeParams != null && Algorithms.stringsEqual(routeParams.getFile().path, gpxRoutePath)) {
+							trackToFollow = selectGpxFile(routeParams.getFile(), true, true);
+						}
 					}
 				}
 			};
@@ -157,8 +153,8 @@ public class GpxSelectionHelper {
 
 	public static class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
-		private File fileToLoad;
-		private CallbackWithObject<GPXFile> callback;
+		private final File fileToLoad;
+		private final CallbackWithObject<GPXFile> callback;
 
 		public GpxFileLoaderTask(File fileToLoad, CallbackWithObject<GPXFile> callback) {
 			this.fileToLoad = fileToLoad;
@@ -197,7 +193,7 @@ public class GpxSelectionHelper {
 		if (selectedGPXFiles.size() == 1) {
 			GPXFile currentGPX = app.getSavingTrackHelper().getCurrentGpx();
 			if (selectedGPXFiles.get(0).getGpxFile() == currentGPX) {
-				return app.getResources().getString(R.string.current_track);
+				return app.getString(R.string.current_track);
 			}
 
 			File file = new File(selectedGPXFiles.get(0).getGpxFile().path);
@@ -205,7 +201,7 @@ public class GpxSelectionHelper {
 		} else if (selectedGPXFiles.size() == 0) {
 			return null;
 		} else {
-			return app.getResources().getString(R.string.number_of_gpx_files_selected_pattern,
+			return app.getString(R.string.number_of_gpx_files_selected_pattern,
 					selectedGPXFiles.size());
 		}
 	}
@@ -394,6 +390,7 @@ public class GpxSelectionHelper {
 		if (group.track == null) {
 			return;
 		}
+
 		List<GpxDisplayItem> list = group.getModifiableList();
 		String timeSpanClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_time_span_color));
 		String speedClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_speed));
@@ -401,21 +398,24 @@ public class GpxSelectionHelper {
 		String descClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_altitude_desc));
 		String distanceClr = Algorithms.colorToString(ContextCompat.getColor(app, R.color.gpx_distance_color));
 		final float eleThreshold = 3;
-		for (TrkSegment r : group.track.segments) {
-			if (r.points.size() == 0) {
+
+		for (int segmentIdx = 0; segmentIdx < group.track.segments.size(); segmentIdx++) {
+			TrkSegment segment = group.track.segments.get(segmentIdx);
+
+			if (segment.points.size() == 0) {
 				continue;
 			}
 			GPXTrackAnalysis[] as;
 			boolean split = true;
 			if (group.splitDistance > 0) {
-				List<GPXTrackAnalysis> trackSegments = r.splitByDistance(group.splitDistance, joinSegments);
+				List<GPXTrackAnalysis> trackSegments = segment.splitByDistance(group.splitDistance, joinSegments);
 				as = trackSegments.toArray(new GPXTrackAnalysis[0]);
 			} else if (group.splitTime > 0) {
-				List<GPXTrackAnalysis> trackSegments = r.splitByTime(group.splitTime, joinSegments);
+				List<GPXTrackAnalysis> trackSegments = segment.splitByTime(group.splitTime, joinSegments);
 				as = trackSegments.toArray(new GPXTrackAnalysis[0]);
 			} else {
 				split = false;
-				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.segment(0, r)};
+				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.segment(0, segment)};
 			}
 			for (GPXTrackAnalysis analysis : as) {
 				GpxDisplayItem item = new GpxDisplayItem();
@@ -427,12 +427,13 @@ public class GpxSelectionHelper {
 					item.splitName += " (" + formatSecondarySplitName(analysis.secondaryMetricEnd, group, app) + ") ";
 				}
 
+				if (!group.generalTrack && !split) {
+					item.trackSegmentName = buildTrackSegmentName(group.gpx, group.track, segment, app);
+				}
+
 				item.description = GpxUiHelper.getDescription(app, analysis, true);
 				item.analysis = analysis;
 				String name = "";
-//				if(group.track.segments.size() > 1) {
-//					name += t++ + ". ";
-//				}
 				if (!group.isSplitDistance()) {
 					name += GpxUiHelper.getColorValue(distanceClr, OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
 				}
@@ -487,6 +488,46 @@ public class GpxSelectionHelper {
 		}
 	}
 
+	@NonNull
+	public static String buildTrackSegmentName(GPXFile gpxFile, Track track, TrkSegment segment, OsmandApplication app) {
+		String trackTitle = getTrackTitle(gpxFile, track,  app);
+		String segmentTitle = getSegmentTitle(segment, track.segments.indexOf(segment), app);
+
+		boolean oneSegmentPerTrack =
+				gpxFile.getNonEmptySegmentsCount() == gpxFile.getNonEmptyTracksCount();
+		boolean oneOriginalTrack = gpxFile.hasGeneralTrack() && gpxFile.getNonEmptyTracksCount() == 2
+				|| !gpxFile.hasGeneralTrack() && gpxFile.getNonEmptyTracksCount() == 1;
+
+		if (oneSegmentPerTrack) {
+			return trackTitle;
+		} else if (oneOriginalTrack) {
+			return segmentTitle;
+		} else {
+			return app.getString(R.string.ltr_or_rtl_combine_via_dash, trackTitle, segmentTitle);
+		}
+	}
+
+	@NonNull
+	private static String getTrackTitle(GPXFile gpxFile, Track track, OsmandApplication app) {
+		String trackName;
+		if (Algorithms.isBlank(track.name)) {
+			int trackIdx = gpxFile.tracks.indexOf(track);
+			int visibleTrackIdx = gpxFile.hasGeneralTrack() ? trackIdx : trackIdx + 1;
+			trackName = String.valueOf(visibleTrackIdx);
+		} else {
+			trackName = track.name;
+		}
+		String trackString = app.getString(R.string.shared_string_gpx_track);
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, trackString, trackName);
+	}
+
+	@NonNull
+	private static String getSegmentTitle(TrkSegment segment, int segmentIdx, OsmandApplication app) {
+		String segmentName = Algorithms.isBlank(segment.name) ? String.valueOf(segmentIdx + 1) : segment.name;
+		String segmentString = app.getString(R.string.gpx_selection_segment_title);
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, segmentString, segmentName);
+	}
+
 	private static String formatSplitName(double metricEnd, GpxDisplayGroup group, OsmandApplication app) {
 		if (group.isSplitDistance()) {
 			MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
@@ -510,6 +551,7 @@ public class GpxSelectionHelper {
 		}
 	}
 
+	@Nullable
 	public SelectedGpxFile getSelectedFileByPath(String path) {
 		List<SelectedGpxFile> newList = new ArrayList<>(selectedGPXFiles);
 		for (SelectedGpxFile s : newList) {
@@ -520,6 +562,7 @@ public class GpxSelectionHelper {
 		return null;
 	}
 
+	@Nullable
 	public SelectedGpxFile getSelectedFileByName(String path) {
 		for (SelectedGpxFile s : selectedGPXFiles) {
 			if (s.getGpxFile().path.endsWith("/" + path)) {
@@ -529,6 +572,7 @@ public class GpxSelectionHelper {
 		return null;
 	}
 
+	@Nullable
 	public SelectedGpxFile getSelectedCurrentRecordingTrack() {
 		for (SelectedGpxFile s : selectedGPXFiles) {
 			if (s.isShowCurrentTrack()) {
@@ -984,7 +1028,7 @@ public class GpxSelectionHelper {
 
 		private GpxDisplayItemType type = GpxDisplayItemType.TRACK_SEGMENT;
 		private List<GpxDisplayItem> list = new ArrayList<>();
-		private GPXFile gpx;
+		private final GPXFile gpx;
 		private String gpxName;
 		private String name;
 		private String description;
@@ -1114,15 +1158,20 @@ public class GpxSelectionHelper {
 
 		public GPXTrackAnalysis analysis;
 		public GpxDisplayGroup group;
+
 		public WptPt locationStart;
 		public WptPt locationEnd;
+
 		public double splitMetric = -1;
 		public double secondarySplitMetric = -1;
+
+		public String trackSegmentName;
 		public String splitName;
 		public String name;
 		public String description;
 		public String url;
 		public Bitmap image;
+
 		public boolean expanded;
 		public boolean route;
 		public boolean wasHidden = true;
@@ -1159,9 +1208,9 @@ public class GpxSelectionHelper {
 
 	public class SelectGpxTask extends AsyncTask<Void, Void, String> {
 
-		private Set<GPXFile> originalSelectedItems = new HashSet<>();
-		private Map<String, Boolean> selectedItems;
-		private SelectGpxTaskListener gpxTaskListener;
+		private final Set<GPXFile> originalSelectedItems = new HashSet<>();
+		private final Map<String, Boolean> selectedItems;
+		private final SelectGpxTaskListener gpxTaskListener;
 
 		SelectGpxTask(Map<String, Boolean> selectedItems, SelectGpxTaskListener gpxTaskListener) {
 			this.selectedItems = selectedItems;

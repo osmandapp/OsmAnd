@@ -35,7 +35,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnPointsSavedListener;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersSortByDef;
-import net.osmand.plus.mapmarkers.MapMarkersHelper.OnGroupSyncedListener;
+import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;

@@ -62,8 +62,10 @@ class SettingsImporter {
 					try {
 						SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, itemsJson);
 						List<SettingsItem> settingsItemList = itemsFactory.getItems();
-						updateFilesInfo(file, settingsItemList);
-						items.addAll(settingsItemList);
+						if (!settingsItemList.isEmpty()) {
+							updateFilesInfo(file, settingsItemList);
+							items.addAll(settingsItemList);
+						}
 					} catch (IllegalArgumentException e) {
 						SettingsHelper.LOG.error("Error parsing items: " + itemsJson, e);
 						throw new IllegalArgumentException("No items");
@@ -105,10 +107,9 @@ class SettingsImporter {
 		boolean collecting = items == null;
 		if (collecting) {
 			items = getItemsFromJson(file);
-		} else {
-			if (items.size() == 0) {
-				throw new IllegalArgumentException("No items");
-			}
+		}
+		if (items.isEmpty()) {
+			throw new IllegalArgumentException("No items");
 		}
 		ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
 		InputStream ois = new BufferedInputStream(zis);
@@ -130,7 +131,7 @@ class SettingsImporter {
 						if (reader != null) {
 							reader.readFromStream(ois, fileName);
 						}
-						item.applyAdditionalParams();
+						item.applyAdditionalParams(reader);
 					} catch (IllegalArgumentException e) {
 						item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 						SettingsHelper.LOG.error("Error reading item data: " + item.getName(), e);

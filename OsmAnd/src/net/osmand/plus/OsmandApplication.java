@@ -511,6 +511,9 @@ public class OsmandApplication extends MultiDexApplication {
 	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force, final boolean applyAllModes) {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+			if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+				osmandSettings.VOICE_MUTE.setModeValue(applicationMode, true);
+			}
 			if (warningNoneProvider && voiceProvider == null) {
 				if (uiContext instanceof MapActivity) {
 					OsmAndDialogs.showVoiceProviderDialog((MapActivity) uiContext, applicationMode, applyAllModes);
@@ -877,8 +880,8 @@ public class OsmandApplication extends MultiDexApplication {
 	@Nullable
 	public GeneralRouter getRouter(Builder builder, ApplicationMode am) {
 		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
-		if (router == null && am.getParent() != null) {
-			router = builder.getRouter(am.getParent().getStringKey());
+		if (router == null) {
+			router = builder.getRouter(am.getDefaultRoutingProfile());
 		}
 		return router;
 	}

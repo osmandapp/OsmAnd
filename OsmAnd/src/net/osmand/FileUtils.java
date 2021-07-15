@@ -20,6 +20,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class FileUtils {
@@ -196,6 +197,23 @@ public class FileUtils {
 			isWriteable = false;
 		}
 		return isWriteable;
+	}
+
+	public static boolean isTempFile(@NonNull OsmandApplication app, @Nullable String path) {
+		return path != null && path.startsWith(getTempDir(app).getAbsolutePath());
+	}
+
+	public static void collectDirFiles(@NonNull File file, @NonNull List<File> list) {
+		if (file.isDirectory()) {
+			File[] files = file.listFiles();
+			if (files != null) {
+				for (File subfolderFile : files) {
+					collectDirFiles(subfolderFile, list);
+				}
+			}
+		} else {
+			list.add(file);
+		}
 	}
 
 	public interface RenameCallback {

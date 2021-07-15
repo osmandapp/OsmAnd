@@ -3967,4 +3967,13 @@
     <string name="poi_climbing_grade_saxon_min">最簡單的路線（薩克森分級）</string>
     <string name="poi_power_terminal">電力終端</string>
     <string name="poi_fuel_propane">丙烷</string>
+    <string name="poi_power_portal">Power portal</string>
+    <string name="poi_memorial_subject">主題</string>
+    <string name="poi_picnic_table_no">野餐桌：無</string>
+    <string name="poi_picnic_table_yes">野餐桌：有</string>
+    <string name="poi_contact_xing">Xing</string>
+    <string name="poi_contact_vhf">VHF</string>
+    <string name="poi_contact_webcam">網路攝影機</string>
+    <string name="poi_contact_linkedin">LinkedIn</string>
+    <string name="poi_outdoor_seating_poi">戶外座位</string>
 </resources>

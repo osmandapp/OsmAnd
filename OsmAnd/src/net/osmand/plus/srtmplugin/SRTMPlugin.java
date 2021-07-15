@@ -377,11 +377,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			downloadThread.runReloadIndexFiles();
 		}
 
-		boolean downloadIndexes = settings.isInternetConnectionAvailable()
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
-
-		if (!downloadIndexes) {
+		if (!downloadThread.shouldDownloadIndexes()) {
 			LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
 			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SRTM_COUNTRY_FILE));
 			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.HILLSHADE_FILE));

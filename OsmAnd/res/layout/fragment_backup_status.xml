@@ -21,20 +21,15 @@
 		osmand:mpb_useIntrinsicPadding="false"
 		tools:visibility="visible" />
 
-	<ScrollView
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/recycler_view"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:clickable="true"
-		android:fillViewport="true"
-		android:focusable="true">
-
-		<LinearLayout
-			android:id="@+id/cards_container"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:paddingTop="@dimen/list_item_button_padding" />
-
-	</ScrollView>
+		android:clipToPadding="false"
+		android:orientation="vertical"
+		android:paddingTop="@dimen/list_item_button_padding"
+		android:scrollbars="none"
+		tools:itemCount="5"
+		tools:listitem="@layout/backup_type_item" />
 
 </FrameLayout>

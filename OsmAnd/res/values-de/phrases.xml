@@ -3967,4 +3967,13 @@
     <string name="poi_dune">Düne</string>
     <string name="poi_power_terminal">Endpunkt einer Freileitung</string>
     <string name="poi_fuel_propane">Propan</string>
+    <string name="poi_power_portal">Abspannportal</string>
+    <string name="poi_memorial_subject">Thema</string>
+    <string name="poi_picnic_table_no">Picknicktisch: nein</string>
+    <string name="poi_picnic_table_yes">Picknicktisch: ja</string>
+    <string name="poi_contact_xing">Xing</string>
+    <string name="poi_contact_vhf">VHF</string>
+    <string name="poi_contact_webcam">Webcam</string>
+    <string name="poi_contact_linkedin">LinkedIn</string>
+    <string name="poi_outdoor_seating_poi">Sitzgelegenheiten im Freien</string>
 </resources>

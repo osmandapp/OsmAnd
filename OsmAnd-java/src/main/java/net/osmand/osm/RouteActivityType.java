@@ -2,6 +2,7 @@ package net.osmand.osm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class RouteActivityType {
 	private static final List<RouteActivityType> values = new ArrayList<>();
@@ -69,6 +70,14 @@ public class RouteActivityType {
 			}
 		}
 		return activityType;
+	}
+	
+	public static RouteActivityType getTypeFromOSMTags(Map<String, String> tags) {
+		String rt = tags.get("route");
+		if (rt != null) {
+			return convertFromOsmGPXTag(rt);
+		}
+		return null;
 	}
 
 	public static RouteActivityType convertFromOsmGPXTag(String tg) {
@@ -212,6 +221,7 @@ public class RouteActivityType {
 		case "enduro":
 		case "feldwege":
 		case "feldweg":
+		case "rally":
 			return OFFROAD;
 		case "boat": 
 		case "water": 
@@ -263,4 +273,6 @@ public class RouteActivityType {
 			return routeActivityType;
 		}
 	}
+
+	
 }

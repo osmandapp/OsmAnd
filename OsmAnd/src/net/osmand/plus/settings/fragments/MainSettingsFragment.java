@@ -44,8 +44,6 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	public static final String TAG = MainSettingsFragment.class.getName();
 
-	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
-
 	private static final String BACKUP_AND_RESTORE = "backup_and_restore";
 	private static final String CONFIGURE_PROFILE = "configure_profile";
 	private static final String APP_PROFILES = "app_profiles";
@@ -191,19 +189,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 
 	public static String getLastBackupTimeDescription(OsmandApplication app) {
 		long lastUploadedTime = app.getSettings().BACKUP_LAST_UPLOADED_TIME.get();
-		return getLastBackupTimeDescription(app, lastUploadedTime, "");
-	}
-
-	public static String getLastBackupTimeDescription(OsmandApplication app, long lastUploadedTimems, String def) {
-		if (lastUploadedTimems > 0) {
-			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
-			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
-				return OsmAndFormatter.getFormattedDate(app, lastUploadedTimems);
-			} else {
-				return app.getString(R.string.duration_ago, OsmAndFormatter.getFormattedDuration((int) duration, app));
-			}
-		}
-		return def;
+		return OsmAndFormatter.getFormattedPassedTime(app, lastUploadedTime, "");
 	}
 
 	private void profileManagementPref() {

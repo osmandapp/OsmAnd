@@ -2,15 +2,14 @@ package net.osmand.plus.track;
 
 import android.view.View;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import android.widget.TextView;
 
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.myplaces.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.SegmentActionsListener;
@@ -18,8 +17,12 @@ import net.osmand.plus.myplaces.SegmentGPXAdapter;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class SegmentsCard extends MapBaseCard {
 
@@ -46,10 +49,19 @@ public class SegmentsCard extends MapBaseCard {
 		ViewGroup container = (ViewGroup) view;
 		container.removeAllViews();
 		List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
-		for (GpxDisplayItem displayItem : items) {
+		for (int i = 0; i < items.size(); i++) {
+			GpxDisplayItem displayItem = items.get(i);
 			updateLocationOnMap(displayItem);
 
 			View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, container, listener, nightMode);
+
+			AndroidUiHelper.updateVisibility(segmentView.findViewById(R.id.list_item_divider), i != 0);
+
+			if (!Algorithms.isBlank(displayItem.trackSegmentName)) {
+				TextView title = segmentView.findViewById(R.id.track_segment_title);
+				title.setText(displayItem.trackSegmentName);
+				AndroidUiHelper.updateVisibility(title, true);
+			}
 
 			WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 			PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);

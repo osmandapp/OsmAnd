@@ -17,6 +17,11 @@ import android.widget.ArrayAdapter;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+import androidx.appcompat.content.res.AppCompatResources;
+
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -84,12 +89,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresPermission;
-import androidx.appcompat.content.res.AppCompatResources;
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
@@ -734,8 +736,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 				for (RenderedObject renderedObject : renderedObjects) {
 
-					String gpxFileName = renderedObject.getFileNameByExtension(IndexConstants.GPX_FILE_EXT);
-					boolean isGpx = !Algorithms.isEmpty(gpxFileName);
+					String routeID = renderedObject.getRouteID();
+					String fileName = renderedObject.getGpxFileName();
+					String filter = routeID != null ? routeID : fileName;
+					boolean isGpx = !Algorithms.isEmpty(filter);
 					if (!isGpx && (renderedObject.getId() == null || !renderedObject.isVisible()
 							|| renderedObject.isDrawOnPath())) {
 						continue;
@@ -766,8 +770,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					}
 					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
 					if (isGpx) {
-						String ref = Algorithms.emptyIfNull(renderedObject.getTagValue("ref"));
-						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, gpxFileName, ref, null);
+						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, filter,
+								renderedObject.getTagValue("ref"));
 						if (travelGpx != null && isUniqueGpx(selectedObjects, travelGpx)) {
 							WptPt selectedPoint = new WptPt();
 							selectedPoint.lat = pointLatLon.getLatitude();
@@ -824,13 +828,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				showContextMenu(latLon, pointDescription, selectedObj, provider);
 			}
 			return true;
-
 		} else if (selectedObjects.size() > 1) {
-			hideVisibleMenues();
-			selectedObjectContextMenuProvider = null;
 			showContextMenuForSelectedObjects(pointLatLon, selectedObjects);
 			return true;
-
 		} else if (showUnknownLocation) {
 			hideVisibleMenues();
 			selectedObjectContextMenuProvider = null;
@@ -866,7 +866,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private boolean isUniqueGpx(Map<Object, IContextMenuProvider> selectedObjects, TravelGpx travelGpx) {
 		String tracksDir = view.getApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR).getPath();
-		File file = new File(tracksDir, travelGpx.getRouteId() + IndexConstants.GPX_FILE_EXT);
+		File file = new File(tracksDir, travelGpx.getRouteId() + GPX_FILE_EXT);
 		if (file.exists()) {
 			return false;
 		}
@@ -1087,7 +1087,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private void showContextMenuForSelectedObjects(final LatLon latLon, final Map<Object, IContextMenuProvider> selectedObjects) {
+	protected void showContextMenuForSelectedObjects(LatLon latLon, Map<Object, IContextMenuProvider> selectedObjects) {
+		hideVisibleMenues();
+		selectedObjectContextMenuProvider = null;
 		multiSelectionMenu.show(latLon, selectedObjects);
 	}
 

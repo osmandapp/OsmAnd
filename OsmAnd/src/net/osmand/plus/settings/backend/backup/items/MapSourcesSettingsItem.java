@@ -27,6 +27,8 @@ import java.util.List;
 
 public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> {
 
+	private static final int APPROXIMATE_MAP_SOURCES_SIZE_BYTES = 450;
+
 	private List<String> existingItemsNames;
 
 	public MapSourcesSettingsItem(@NonNull OsmandApplication app, @NonNull List<ITileSource> items) {
@@ -120,6 +122,11 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 				}
 			}
 		}
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull ITileSource item) {
+		return APPROXIMATE_MAP_SOURCES_SIZE_BYTES;
 	}
 
 	@Override
