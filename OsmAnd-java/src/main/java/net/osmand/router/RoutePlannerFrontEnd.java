@@ -115,27 +115,18 @@ public class RoutePlannerFrontEnd {
 		public boolean straightLine = false;
 
 		// used in native library
-		public GpxPoint(int ind, double lat, double lon, double cumDist, int targetInd, boolean straightLine,
-		                RouteSegmentPoint pnt) {
+		public GpxPoint(int ind, double lat, double lon, double cumDist, int targetInd, boolean straightLine) {
 			this.ind = ind;
 			this.loc = new LatLon(lat, lon);
 			this.cumDist = cumDist;
 			this.targetInd = targetInd;
 			this.straightLine = straightLine;
-			this.pnt = pnt;
 			routeToTarget = new ArrayList<>();
-			stepBackRoute = new ArrayList<>();
-
 		}
 
 		// used in native library
 		public void addRouteToTarget(RouteSegmentResult routeSegmentResult) {
 			routeToTarget.add(routeSegmentResult);
-		}
-
-		// used in native library
-		public void addStepBackRoute(RouteSegmentResult routeSegmentResult) {
-			stepBackRoute.add(routeSegmentResult);
 		}
 
 		// used in native library
@@ -277,7 +268,7 @@ public class RoutePlannerFrontEnd {
 		long timeToCalculate = System.nanoTime();
 		NativeLibrary nativeLib = gctx.ctx.nativeLib;
 		if (nativeLib != null) {
-			gctx = nativeLib.searchGpxRouteNative(gctx, gpxPoints);
+			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints);
 		} else {
 			gctx.ctx.keepNativeRoutingContext = true;
 			if (gctx.ctx.calculationProgress == null) {
