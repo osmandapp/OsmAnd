@@ -111,13 +111,6 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 	private void updateGradientRoute(RotatedTileBox tb, List<Location> locations) {
 		GPXFile gpxFile = GpxUiHelper.makeGpxFromLocations(locations, getContext().getApp());
-		// Start point can have wrong zero altitude
-		List<GPXUtilities.WptPt> pts = gpxFile.tracks.get(0).segments.get(0).points;
-		GPXUtilities.WptPt firstPt = pts.get(0);
-		if (firstPt.ele == 0) {
-			firstPt.ele = pts.get(1).ele;
-		}
-
 		ColorizationType colorizationType = routeColoringType.toGradientScaleType().toColorizationType();
 		RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, colorizationType, 0);
 		List<RouteColorizationPoint> points = routeColorize.getResult(false);

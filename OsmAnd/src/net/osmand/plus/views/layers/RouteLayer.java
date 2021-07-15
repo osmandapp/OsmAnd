@@ -232,13 +232,23 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	@Override
 	protected void updateTurnArrowColor() {
-		if (routeColoringType.isGradient()
-				&& coloringAvailabilityCache.isColoringAvailable(routeColoringType, null)) {
+		if (routeColoringType.isGradient() && isColoringAvailable(routeColoringType, null)) {
 			customTurnArrowColor = Color.WHITE;
 		} else {
 			customTurnArrowColor = attrs.paint3.getColor();
 		}
 		paintIconAction.setColorFilter(new PorterDuffColorFilter(customTurnArrowColor, PorterDuff.Mode.MULTIPLY));
+	}
+
+	@Override
+	protected void updateIsPaint_1(boolean updatePaints) {
+		if (updatePaints) {
+			attrsIsPaint_1 = attrs.isPaint_1;
+		}
+		if (attrsIsPaint_1 != null) {
+			attrs.isPaint_1 = attrsIsPaint_1 && (routeColoringType.isDefault()
+					|| !isColoringAvailable(routeColoringType, routeInfoAttribute));
+		}
 	}
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
@@ -342,8 +352,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
 
-			RouteColoringType actualColoringType =
-					coloringAvailabilityCache.isColoringAvailable(routeColoringType, routeInfoAttribute) ?
+			RouteColoringType actualColoringType = isColoringAvailable(routeColoringType, routeInfoAttribute) ?
 							routeColoringType : RouteColoringType.DEFAULT;
 			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb),
 					directionArrowsColor, actualColoringType, routeInfoAttribute);
@@ -596,6 +605,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		} catch (IndexOutOfBoundsException e) {
 			// ignore
 		}
+	}
+
+	private boolean isColoringAvailable(@NonNull RouteColoringType routeColoringType,
+	                                    @Nullable String routeInfoAttribute) {
+		return coloringAvailabilityCache
+				.isColoringAvailable(helper.getRoute(), routeColoringType, routeInfoAttribute);
 	}
 
 	@Override

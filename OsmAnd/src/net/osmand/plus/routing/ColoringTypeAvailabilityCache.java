@@ -19,12 +19,12 @@ public class ColoringTypeAvailabilityCache {
 		this.app = app;
 	}
 
-	public boolean isColoringAvailable(@NonNull RouteColoringType routeColoringType,
+	public boolean isColoringAvailable(@NonNull RouteCalculationResult route,
+	                                   @NonNull RouteColoringType routeColoringType,
 	                                   @Nullable String routeInfoAttribute) {
-		RouteCalculationResult currRoute = app.getRoutingHelper().getRoute();
-		if (!currRoute.equals(prevRoute)) {
+		if (!route.equals(prevRoute)) {
 			cache.clear();
-			prevRoute = currRoute;
+			prevRoute = route;
 		}
 
 		String key = routeColoringType.isRouteInfoAttribute() ?
@@ -32,7 +32,7 @@ public class ColoringTypeAvailabilityCache {
 
 		Boolean available = cache.get(key);
 		if (available == null) {
-			available = routeColoringType.isAvailableForDrawing(app, routeInfoAttribute);
+			available = routeColoringType.isAvailableForDrawing(app, route, routeInfoAttribute);
 			cache.put(key, available);
 		}
 		return available;

@@ -41,6 +41,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import static net.osmand.render.RenderingRuleStorageProperties.*;
+
 public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 	private static final Log log = PlatformUtil.getLog(PreviewRouteLineLayer.class);
@@ -354,8 +356,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 	}
 
 	private List<Integer> fetchColorsInternal(RenderingRulesStorage renderer, RenderingRuleSearchRequest request) {
-		List<RenderingRule> renderingRules = request.getStorage()
-				.getRenderingAttributeRule(routeInfoAttribute)
+		List<RenderingRule> renderingRules = renderer.getRenderingAttributeRule(routeInfoAttribute)
 				.getIfElseChildren();
 		if (Algorithms.isEmpty(renderingRules)) {
 			Collections.emptyList();
@@ -390,11 +391,11 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 		for (RenderingRuleProperty property : properties) {
 			String attribute = property.getAttrName();
-			if ("tag".equals(attribute)) {
+			if (TAG.equals(attribute)) {
 				request.setStringFilter(renderer.PROPS.R_TAG, rule.getStringPropertyValue(property.getAttrName()));
-			} else if ("value".equals(attribute)) {
+			} else if (VALUE.equals(attribute)) {
 				request.setStringFilter(renderer.PROPS.R_VALUE, rule.getStringPropertyValue(property.getAttrName()));
-			} else if ("additional".equals(attribute)) {
+			} else if (ADDITIONAL.equals(attribute)) {
 				request.setStringFilter(renderer.PROPS.R_ADDITIONAL, rule.getStringPropertyValue(property.getAttrName()));
 			}
 		}

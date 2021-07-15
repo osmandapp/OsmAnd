@@ -12,6 +12,7 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
+import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 
 import java.util.Collections;
@@ -60,7 +61,7 @@ public enum RouteColoringType {
 
 	@NonNull
 	public String getHumanString(@NonNull Context context, @Nullable String routeInfoAttribute) {
-		return this.isRouteInfoAttribute()
+		return isRouteInfoAttribute()
 				? getHumanStringRouteInfoAttribute(context, routeInfoAttribute)
 				: context.getString(titleId);
 	}
@@ -68,7 +69,7 @@ public enum RouteColoringType {
 	@NonNull
 	private String getHumanStringRouteInfoAttribute(@NonNull Context context, @Nullable String routeInfoAttribute) {
 		String routeInfoPrefix = RouteStatisticsHelper.ROUTE_INFO_PREFIX;
-		if (!this.isRouteInfoAttribute() || routeInfoAttribute == null
+		if (!isRouteInfoAttribute() || routeInfoAttribute == null
 				|| !routeInfoAttribute.startsWith(routeInfoPrefix)) {
 			return "";
 		}
@@ -95,8 +96,9 @@ public enum RouteColoringType {
 		return this == ATTRIBUTE;
 	}
 
-	public boolean isAvailableForDrawing(@NonNull OsmandApplication app, @Nullable String attributeName) {
-		RouteCalculationResult route = app.getRoutingHelper().getRoute();
+	public boolean isAvailableForDrawing(@NonNull OsmandApplication app,
+	                                     @NonNull RouteCalculationResult route,
+	                                     @Nullable String attributeName) {
 		if (isGradient()) {
 			List<Location> locations = route.getImmutableAllLocations();
 			for (Location location : locations) {
@@ -108,14 +110,16 @@ public enum RouteColoringType {
 		}
 
 		if (isRouteInfoAttribute()) {
-			return isAttributeAvailableForDrawing(app, attributeName);
+			return isAttributeAvailableForDrawing(app, route, attributeName);
 		}
 
 		return true;
 	}
 
-	private boolean isAttributeAvailableForDrawing(@NonNull OsmandApplication app, @Nullable String attributeName) {
-		List<RouteSegmentResult> routeSegments = app.getRoutingHelper().getRoute().getOriginalRoute();
+	private boolean isAttributeAvailableForDrawing(@NonNull OsmandApplication app,
+	                                               @NonNull RouteCalculationResult route,
+	                                               @Nullable String attributeName) {
+		List<RouteSegmentResult> routeSegments = route.getOriginalRoute();
 		if (Algorithms.isEmpty(routeSegments) || Algorithms.isEmpty(attributeName)) {
 			return false;
 		}
@@ -135,7 +139,7 @@ public enum RouteColoringType {
 		RenderingRuleSearchRequest defaultSearchRequest =
 				maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, night);
 
-		List<RouteStatisticsHelper.RouteStatistics> routeStatisticsList =
+		List<RouteStatistics> routeStatisticsList =
 				RouteStatisticsHelper.calculateRouteStatistic(routeSegments,
 						Collections.singletonList(attributeName), currentRenderer,
 						defaultRenderer, currentSearchRequest, defaultSearchRequest);

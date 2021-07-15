@@ -308,7 +308,7 @@ public class RenderingRuleSearchRequest {
 		return val == -1 ? defValue : val;
 	}
 	
-	public RenderingRulesStorage getStorage() {
+	RenderingRulesStorage getStorage() {
 		return storage;
 	}
 }
