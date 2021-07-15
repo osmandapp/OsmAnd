@@ -135,14 +135,19 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 			
 			if (query.moveToFirst()) {
 				do {
-					OsmNotesPoint p = new OsmNotesPoint();
+					boolean invalidId = query.getString(0).equals(OSMBUGS_COL_ID);
+					if (invalidId) {
+						continue;
+					}
 
+					OsmNotesPoint p = new OsmNotesPoint();
 					p.setId(query.getLong(0));
 					p.setText(query.getString(1));
 					p.setLatitude(query.getDouble(2));
 					p.setLongitude(query.getDouble(3));
 					p.setAction(query.getString(4));
 					p.setAuthor(query.getString(5));
+
 					cachedOsmbugsPoints.add(p);
 				} while (query.moveToNext());
 			}
