@@ -141,6 +141,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void disable(OsmandApplication app) {
 		super.disable(app);
 		app.getNotificationHelper().refreshNotifications();
+		settings.SAVE_GLOBAL_TRACK_TO_GPX.removeListener(powerChangeOptionListener);
+		settings.POWERCHANGE_SPLIT_RECORDING.removeListener(powerChangeOptionListener);
 		if (powerChangeReceiverRegistered.get()) {
 			app.unregisterReceiver(powerChangeReceiver);
 			powerChangeReceiverRegistered.set(false);
