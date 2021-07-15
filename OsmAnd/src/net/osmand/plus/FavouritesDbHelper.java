@@ -390,13 +390,17 @@ public class FavouritesDbHelper {
 	}
 
 	public boolean addFavourite(FavouritePoint p, boolean saveImmediately) {
+		return addFavourite(p, saveImmediately, true);
+	}
+
+	public boolean addFavourite(FavouritePoint p, boolean saveImmediately, boolean lookupAddress) {
 		if (Double.isNaN(p.getAltitude()) || p.getAltitude() == 0) {
 			p.initAltitude(context);
 		}
 		if (p.getName().isEmpty() && flatGroups.containsKey(p.getCategory())) {
 			return true;
 		}
-		if (!p.isAddressSpecified()) {
+		if (lookupAddress && !p.isAddressSpecified()) {
 			lookupAddress(p);
 		}
 		context.getSettings().SHOW_FAVORITES.set(true);
