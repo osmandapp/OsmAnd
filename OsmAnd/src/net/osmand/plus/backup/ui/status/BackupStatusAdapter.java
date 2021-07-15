@@ -172,8 +172,9 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 				Object item = items.get(position + 1);
 				lastBackupItem = !(item instanceof SettingsItem) && !(item instanceof Pair);
 			}
+			SettingsItem item = (SettingsItem) items.get(position);
 			ItemViewHolder viewHolder = (ItemViewHolder) holder;
-			viewHolder.bindView((SettingsItem) items.get(position), lastBackupItem);
+			viewHolder.bindView(item, lastBackupItem, info.itemsToDelete.contains(item));
 		} else if (holder instanceof ActionButtonViewHolder) {
 			ActionButtonViewHolder viewHolder = (ActionButtonViewHolder) holder;
 			viewHolder.bindView(mapActivity, backup, fragment, uploadItemsVisible, nightMode);
@@ -288,7 +289,10 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 
 	@Override
 	public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
-
+		SettingsItem item = getSettingsItem(file.getType(), file.getName());
+		if (item != null) {
+			notifyItemChanged(items.indexOf(item));
+		}
 	}
 
 	@Override
