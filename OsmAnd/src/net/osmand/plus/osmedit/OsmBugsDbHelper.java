@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -135,8 +136,8 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 			
 			if (query.moveToFirst()) {
 				do {
-					boolean invalidId = query.getString(0).equals(OSMBUGS_COL_ID);
-					if (invalidId) {
+					boolean isValidId = Algorithms.isInt(query.getString(0));
+					if (!isValidId) {
 						continue;
 					}
 
