@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
@@ -112,6 +113,15 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 					return true;
 				}
 				return false;
+			}
+		});
+
+		nameEditText.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					AndroidUtils.showSoftKeyboard(activity, nameEditText);
+				}
 			}
 		});
 
