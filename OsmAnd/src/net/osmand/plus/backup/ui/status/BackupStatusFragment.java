@@ -29,6 +29,8 @@ import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
@@ -36,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BackupStatusFragment extends BaseOsmAndFragment implements BackupExportListener,
-		OnDeleteFilesListener, OnPrepareBackupListener, ImportListener {
+		OnDeleteFilesListener, OnPrepareBackupListener, ImportListener, InAppPurchaseListener {
 
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
@@ -213,5 +215,30 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		if (adapter != null) {
 			adapter.onImportFinished(succeed, needRestart, items);
 		}
+	}
+
+	@Override
+	public void onError(InAppPurchaseTaskType taskType, String error) {
+
+	}
+
+	@Override
+	public void onGetItems() {
+
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		updateAdapter();
+	}
+
+	@Override
+	public void showProgress(InAppPurchaseTaskType taskType) {
+
+	}
+
+	@Override
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
+
 	}
 }
