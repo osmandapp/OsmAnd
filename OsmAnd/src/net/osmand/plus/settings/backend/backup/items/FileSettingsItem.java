@@ -200,7 +200,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 		if (subtype.isMap() || subtype == FileSubtype.TTS_VOICE || subtype == FileSubtype.VOICE) {
 			return FileNameTranslationHelper.getFileNameWithRegion(app, file.getName());
 		} else if (subtype == FileSubtype.MULTIMEDIA_NOTES) {
-			return new Recording(file).getName(app, true);
+			if (file.exists()) {
+				return new Recording(file).getName(app, true);
+			} else {
+				return Recording.getNameForMultimediaFile(app, file.getName(), getLastModifiedTime());
+			}
 		}
 		return super.getPublicName(ctx);
 	}
