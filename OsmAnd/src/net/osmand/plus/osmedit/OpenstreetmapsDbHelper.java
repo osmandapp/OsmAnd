@@ -151,7 +151,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			rowsMap.put(OPENSTREETMAP_COL_ENTITY_TYPE, Entity.EntityType.valueOf(entity));
 
 			db.execSQL(AndroidUtils.createDbInsertQuery(OPENSTREETMAP_TABLE_NAME, rowsMap.keySet()),
-					rowsMap.keySet().toArray());
+					rowsMap.values().toArray());
 
 			db.close();
 			checkOpenstreetmapPoints();
