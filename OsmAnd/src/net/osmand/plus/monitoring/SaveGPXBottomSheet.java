@@ -120,6 +120,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 			if (hasFocus) {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
+					nameEditText.setSelection(nameEditText.getText().length());
 					AndroidUtils.showSoftKeyboard(activity, nameEditText);
 				}
 			}
