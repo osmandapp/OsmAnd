@@ -287,7 +287,7 @@ public class RouteResultPreparation {
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private static final double SLOW_DOWN_SPEED = 2;
 	
-	private void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
 		//for Naismith
 		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
 
