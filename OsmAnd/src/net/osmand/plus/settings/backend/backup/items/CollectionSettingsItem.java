@@ -72,6 +72,15 @@ public abstract class CollectionSettingsItem<T> extends SettingsItem {
 		return res;
 	}
 
+	@Override
+	public long getEstimatedSize() {
+		long size = 0;
+		for (T item : items) {
+			size += getEstimatedItemSize(item);
+		}
+		return size;
+	}
+
 	public boolean shouldShowDuplicates() {
 		return true;
 	}
@@ -85,4 +94,6 @@ public abstract class CollectionSettingsItem<T> extends SettingsItem {
 
 	@NonNull
 	public abstract T renameItem(@NonNull T item);
+
+	public abstract long getEstimatedItemSize(@NonNull T item);
 }

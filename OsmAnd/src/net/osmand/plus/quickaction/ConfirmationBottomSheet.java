@@ -73,7 +73,7 @@ public class ConfirmationBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(TITLE_KEY, title);
 		outState.putCharSequence(MESSAGE_KEY, message);

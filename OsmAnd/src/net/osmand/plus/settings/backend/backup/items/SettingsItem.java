@@ -119,6 +119,8 @@ public abstract class SettingsItem {
 
 	public abstract void setLocalModifiedTime(long lastModifiedTime);
 
+	public abstract long getEstimatedSize();
+
 	public boolean applyFileName(@NonNull String fileName) {
 		String n = getFileName();
 		return n != null && (n.endsWith(fileName) || fileName.startsWith(n + File.separator));
@@ -295,5 +297,11 @@ public abstract class SettingsItem {
 		return item.getType() == getType()
 				&& item.getName().equals(getName())
 				&& Algorithms.stringsEqual(item.getFileName(), getFileName());
+	}
+
+	@NonNull
+	@Override
+	public String toString() {
+		return "SettingsItem { " + getType().name() + ", " + getName() + ", " + getFileName() + " }";
 	}
 }

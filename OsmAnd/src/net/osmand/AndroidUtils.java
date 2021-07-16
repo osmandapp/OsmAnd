@@ -82,6 +82,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import static android.content.Context.POWER_SERVICE;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -994,6 +995,19 @@ public class AndroidUtils {
 			builder.append(w);
 		}
 		return builder;
+	}
+
+	@NonNull
+	public static String createDbInsertQuery(@NonNull String tableName, @NonNull Set<String> rowKeys) {
+		String keys = Algorithms.encodeCollection(rowKeys, ", ");
+		StringBuilder values = new StringBuilder();
+		for (int i = 0; i < rowKeys.size(); i++) {
+			values.append("?");
+			if (i + 1 != rowKeys.size()) {
+				values.append(", ");
+			}
+		}
+		return "INSERT INTO " + tableName + " (" + keys + ") VALUES (" + values.toString() + ")";
 	}
 
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {

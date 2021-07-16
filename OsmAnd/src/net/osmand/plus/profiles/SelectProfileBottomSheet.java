@@ -101,7 +101,7 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		items.add(builder.create());
 	}
 
-	protected void addToggleButton(TextRadioItem selectedItem, TextRadioItem ... radioItems) {
+	protected void addToggleButton(TextRadioItem selectedItem, TextRadioItem... radioItems) {
 		int padding = getDimen(R.dimen.content_padding_small);
 		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		LayoutInflater inflater = UiUtilities.getInflater(themedCtx, nightMode);
@@ -122,8 +122,8 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	protected void addCheckableItem(int titleId,
-	                                boolean isSelected,
-	                                OnClickListener listener) {
+									boolean isSelected,
+									OnClickListener listener) {
 		View itemView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_and_radio_btn, null);
 		itemView.findViewById(R.id.icon).setVisibility(View.GONE);
 		itemView.findViewById(R.id.description).setVisibility(View.GONE);
@@ -243,23 +243,10 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 		return false;
 	}
 
-	protected void refreshView() {
+	@Override
+	public void updateMenuItems() {
 		refreshProfiles();
-		View mainView = getView();
-		Activity activity = getActivity();
-		if (activity != null && mainView != null) {
-			LinearLayout container = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
-					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
-			if (container != null) {
-				container.removeAllViews();
-			}
-			items.clear();
-			createMenuItems(null);
-			for (BaseBottomSheetItem item : items) {
-				item.inflate(activity, container, nightMode);
-			}
-			setupHeightAndBackground(mainView);
-		}
+		super.updateMenuItems();
 	}
 
 	protected abstract void refreshProfiles();

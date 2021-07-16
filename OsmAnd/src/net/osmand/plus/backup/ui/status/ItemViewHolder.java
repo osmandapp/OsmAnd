@@ -33,6 +33,7 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 	private final ImageView icon;
 	private final ImageView secondIcon;
 	private final ProgressBar progressBar;
+	private final View divider;
 
 	public ItemViewHolder(@NonNull View itemView) {
 		super(itemView);
@@ -41,10 +42,12 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		secondIcon = itemView.findViewById(R.id.second_icon);
 		description = itemView.findViewById(R.id.description);
 		progressBar = itemView.findViewById(R.id.progressBar);
+		divider = itemView.findViewById(R.id.bottom_divider);
 	}
 
-	public void bindView(SettingsItem item) {
+	public void bindView(SettingsItem item, boolean lastBackupItem) {
 		setupItemView(item);
+		AndroidUiHelper.updateVisibility(divider, !lastBackupItem);
 	}
 
 	protected void setupItemView(@NonNull SettingsItem item) {

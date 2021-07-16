@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Collection;
@@ -275,14 +276,14 @@ public class Algorithms {
         };
     }
 
-	private static final char CHAR_TOSPLIT = 0x01;
+	private static final char CHAR_TO_SPLIT = 0x01;
 
 	public static Map<String, String> decodeMap(String s) {
 		if (isEmpty(s)) {
 			return Collections.emptyMap();
 		}
 		Map<String, String> names = new HashMap<String, String>();
-		String[] split = s.split(CHAR_TOSPLIT + "");
+		String[] split = s.split(CHAR_TO_SPLIT + "");
 		// last split is an empty string
 		for (int i = 1; i < split.length; i += 2) {
 			names.put(split[i - 1], split[i]);
@@ -296,9 +297,9 @@ public class Algorithms {
 			StringBuilder bld = new StringBuilder();
 			while (it.hasNext()) {
 				Entry<String, String> e = it.next();
-				bld.append(e.getKey()).append(CHAR_TOSPLIT)
-						.append(e.getValue().replace(CHAR_TOSPLIT, (char) (CHAR_TOSPLIT + 1)));
-				bld.append(CHAR_TOSPLIT);
+				bld.append(e.getKey()).append(CHAR_TO_SPLIT)
+						.append(e.getValue().replace(CHAR_TO_SPLIT, (char) (CHAR_TO_SPLIT + 1)));
+				bld.append(CHAR_TO_SPLIT);
 			}
 			return bld.toString();
 		}
@@ -306,11 +307,7 @@ public class Algorithms {
 	}
 
 	public static Set<String> decodeStringSet(String s) {
-		return decodeStringSet(s, String.valueOf(CHAR_TOSPLIT));
-	}
-
-	public static String encodeStringSet(Set<String> set) {
-		return encodeStringSet(set, String.valueOf(CHAR_TOSPLIT));
+		return decodeStringSet(s, String.valueOf(CHAR_TO_SPLIT));
 	}
 
 	public static Set<String> decodeStringSet(String s, String split) {
@@ -320,15 +317,24 @@ public class Algorithms {
 		return new HashSet<>(Arrays.asList(s.split(split)));
 	}
 
-	public static String encodeStringSet(Set<String> set, String split) {
-		if (set != null) {
-			StringBuilder sb = new StringBuilder();
-			for (String s : set) {
-				sb.append(s).append(split);
-			}
-			return sb.toString();
+	public static <T> String encodeCollection(Collection<T> collection) {
+		return encodeCollection(collection, String.valueOf(CHAR_TO_SPLIT));
+	}
+
+	public static <T> String encodeCollection(Collection<T> collection, String split) {
+		if (collection == null) {
+			return "";
 		}
-		return "";
+		StringBuilder res = new StringBuilder();
+		Iterator<T> iterator = collection.iterator();
+		while (iterator.hasNext()) {
+			T next = iterator.next();
+			res.append(next);
+			if (iterator.hasNext()) {
+				res.append(split);
+			}
+		}
+		return res.toString();
 	}
 
 	public static int findFirstNumberEndIndexLegacy(String value) {
@@ -630,6 +636,9 @@ public class Algorithms {
 			if (pg != null && cp > bytesDivisor) {
 				pg.progress(cp / bytesDivisor);
 				cp = cp % bytesDivisor;
+				if (pg.isInterrupted()) {
+					throw new InterruptedIOException();
+				}
 			}
 		}
 	}

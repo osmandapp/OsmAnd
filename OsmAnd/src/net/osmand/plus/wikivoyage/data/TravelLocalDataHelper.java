@@ -1,8 +1,6 @@
 package net.osmand.plus.wikivoyage.data;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
@@ -27,6 +25,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 
 public class TravelLocalDataHelper {
@@ -490,25 +491,22 @@ public class TravelLocalDataHelper {
 					SQLiteConnection conn = openConnection(false);
 					if (conn != null) {
 						try {
-							String query = "INSERT INTO " + BOOKMARKS_TABLE_NAME + " (" +
-									BOOKMARKS_COL_ARTICLE_TITLE + ", " +
-									BOOKMARKS_COL_LANG + ", " +
-									BOOKMARKS_COL_IS_PART_OF + ", " +
-									BOOKMARKS_COL_IMAGE_TITLE + ", " +
-									BOOKMARKS_COL_TRAVEL_BOOK + ", " +
-									BOOKMARKS_COL_LAT + ", " +
-									BOOKMARKS_COL_LON + ", " +
-									BOOKMARKS_COL_ROUTE_ID + ", " +
-									BOOKMARKS_COL_CONTENT_JSON + ", " +
-									BOOKMARKS_COL_CONTENT + ", " +
-									BOOKMARKS_COL_LAST_MODIFIED + ", " +
-									BOOKMARKS_COL_GPX_GZ +
-									") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-							conn.execSQL(query, new Object[] {article.title, article.lang,
-									article.aggregatedPartOf, article.imageTitle,
-									travelBook, article.lat, article.lon, article.routeId, article.contentsJson,
-									article.content, article.getFile().lastModified(),
-									Algorithms.stringToGzip(GPXUtilities.asString(article.gpxFile))});
+							Map<String, Object> rowsMap = new HashMap<>();
+							rowsMap.put(BOOKMARKS_COL_ARTICLE_TITLE, article.title);
+							rowsMap.put(BOOKMARKS_COL_LANG, article.lang);
+							rowsMap.put(BOOKMARKS_COL_IS_PART_OF, article.aggregatedPartOf);
+							rowsMap.put(BOOKMARKS_COL_IMAGE_TITLE, article.imageTitle);
+							rowsMap.put(BOOKMARKS_COL_TRAVEL_BOOK, travelBook);
+							rowsMap.put(BOOKMARKS_COL_LAT, article.lat);
+							rowsMap.put(BOOKMARKS_COL_LON, article.lon);
+							rowsMap.put(BOOKMARKS_COL_ROUTE_ID, article.routeId);
+							rowsMap.put(BOOKMARKS_COL_CONTENT_JSON, article.contentsJson);
+							rowsMap.put(BOOKMARKS_COL_CONTENT, article.content);
+							rowsMap.put(BOOKMARKS_COL_LAST_MODIFIED, article.getFile().lastModified());
+							rowsMap.put(BOOKMARKS_COL_GPX_GZ, Algorithms.stringToGzip(GPXUtilities.asString(article.gpxFile)));
+
+							conn.execSQL(AndroidUtils.createDbInsertQuery(BOOKMARKS_TABLE_NAME, rowsMap.keySet()),
+									rowsMap.values().toArray());
 						} finally {
 							conn.close();
 						}

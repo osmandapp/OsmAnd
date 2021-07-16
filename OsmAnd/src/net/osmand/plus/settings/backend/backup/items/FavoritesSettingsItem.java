@@ -13,7 +13,6 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
@@ -34,6 +33,8 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
 
 public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup> {
+
+	private static final int APPROXIMATE_FAVOURITE_SIZE_BYTES = 470;
 
 	private FavouritesDbHelper favoritesHelper;
 	private FavoriteGroup personalGroup;
@@ -74,7 +75,8 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		File favoritesFile = favoritesHelper.getExternalFile();
 		if (favoritesFile.exists()) {
 			favoritesFile.setLastModified(lastModifiedTime);
-		};
+		}
+		;
 	}
 
 	@NonNull
@@ -118,8 +120,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				if (!isPersonal) {
 					appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
 				} else {
-					for (FavouritePoint item : duplicate.getPoints())
-					{
+					for (FavouritePoint item : duplicate.getPoints()) {
 						if (item.getSpecialPointType() == FavouritePoint.SpecialPointType.PARKING) {
 							ParkingPositionPlugin plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
 							if (plugin != null) {
@@ -177,6 +178,11 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				return renamedItem;
 			}
 		}
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull FavoriteGroup item) {
+		return item.getPoints().size() * APPROXIMATE_FAVOURITE_SIZE_BYTES;
 	}
 
 	@Nullable

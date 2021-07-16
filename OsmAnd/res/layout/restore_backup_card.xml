@@ -5,7 +5,7 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical">
 
-	<include layout="@layout/card_top_divider" />
+	<include layout="@layout/list_item_divider" />
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -43,7 +43,5 @@
 	<include
 		android:id="@+id/restore"
 		layout="@layout/preference_button" />
-
-	<include layout="@layout/card_bottom_divider" />
 
 </LinearLayout>

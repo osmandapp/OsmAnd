@@ -6,6 +6,10 @@
 	android:orientation="vertical">
 
 	<include
+		android:id="@+id/divider"
+		layout="@layout/divider" />
+
+	<include
 		android:id="@+id/action_button"
 		layout="@layout/bottom_sheet_dialog_button"
 		android:layout_width="match_parent"

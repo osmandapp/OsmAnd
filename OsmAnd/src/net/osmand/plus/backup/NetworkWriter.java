@@ -3,6 +3,7 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.FileUtils;
 import net.osmand.StreamWriter;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
@@ -16,13 +17,13 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InterruptedIOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NetworkWriter implements AbstractWriter {
+public class NetworkWriter extends AbstractWriter {
 
 	private final BackupHelper backupHelper;
 	private final OnUploadItemListener listener;
@@ -70,7 +71,8 @@ public class NetworkWriter implements AbstractWriter {
 
 	@Nullable
 	private String uploadEntry(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-							   @NonNull String fileName, long uploadTime) throws UserNotRegisteredException, IOException {
+							   @NonNull String fileName, long uploadTime)
+			throws UserNotRegisteredException, IOException {
 		if (itemWriter.getItem() instanceof FileSettingsItem) {
 			return uploadDirWithFiles(itemWriter, fileName, uploadTime);
 		} else {
@@ -104,42 +106,37 @@ public class NetworkWriter implements AbstractWriter {
 	@Nullable
 	private String uploadItemFile(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
 								  @NonNull String fileName, @Nullable OnUploadFileListener listener,
-								  long uploadTime) throws UserNotRegisteredException {
-		return backupHelper.uploadFile(fileName, itemWriter.getItem().getType().name(),
-				itemWriter::writeToStream, uploadTime, listener);
+								  long uploadTime) throws UserNotRegisteredException, IOException {
+		if (isCancelled()) {
+			throw new InterruptedIOException();
+		} else {
+			return backupHelper.uploadFile(fileName, itemWriter.getItem().getType().name(),
+					itemWriter::writeToStream, uploadTime, listener);
+		}
 	}
 
 	@Nullable
 	private String uploadDirWithFiles(@NonNull SettingsItemWriter<? extends SettingsItem> itemWriter,
-									  @NonNull String fileName, long uploadTime) throws UserNotRegisteredException, IOException {
+									  @NonNull String fileName, long uploadTime)
+			throws UserNotRegisteredException, IOException {
 		FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
-		long[] size = new long[1];
 		List<File> filesToUpload = new ArrayList<>();
-		collectDirFiles(item.getFile(), filesToUpload, size);
-		OnUploadFileListener uploadListener = getUploadDirListener(item, fileName, (int) (size[0] / 1024));
+		FileUtils.collectDirFiles(item.getFile(), filesToUpload);
+
+		long size = 0;
 		for (File file : filesToUpload) {
+			size += file.length();
+		}
+		OnUploadFileListener uploadListener = getUploadDirListener(item, fileName, (int) (size / 1024));
+		for (File file : filesToUpload) {
+			item.setFileToWrite(file);
 			String name = BackupHelper.getFileItemName(file, item);
-			item.setInputStream(new FileInputStream(file));
 			String error = uploadItemFile(itemWriter, name, uploadListener, uploadTime);
 			if (error != null) {
 				return error;
 			}
 		}
 		return null;
-	}
-
-	private void collectDirFiles(File file, List<File> list, long[] dirSize) {
-		if (file.isDirectory()) {
-			File[] files = file.listFiles();
-			if (files != null) {
-				for (File subfolderFile : files) {
-					collectDirFiles(subfolderFile, list, dirSize);
-				}
-			}
-		} else {
-			list.add(file);
-			dirSize[0] = dirSize[0] + file.length();
-		}
 	}
 
 	@NonNull
@@ -171,6 +168,11 @@ public class NetworkWriter implements AbstractWriter {
 				if (listener != null) {
 					listener.onItemFileUploadDone(item, fileName, uploadTime, error);
 				}
+			}
+
+			@Override
+			public boolean isUploadCancelled() {
+				return isCancelled();
 			}
 		};
 	}
@@ -214,6 +216,11 @@ public class NetworkWriter implements AbstractWriter {
 				if (listener != null) {
 					listener.onItemFileUploadDone(item, fileName, uploadTime, error);
 				}
+			}
+
+			@Override
+			public boolean isUploadCancelled() {
+				return isCancelled();
 			}
 		};
 	}

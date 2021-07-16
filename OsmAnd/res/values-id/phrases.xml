@@ -1132,7 +1132,7 @@
     <string name="poi_garden">Taman</string>
     <string name="poi_traffic_signals_sound_no">Suara: tidak</string>
     <string name="poi_traffic_signals_sound_yes">Ya</string>
-    <string name="poi_toll_yes"></string>
+    <string name="poi_toll_yes"/>
     <string name="poi_smoking_isolated">Di ruangan terisolasi</string>
     <string name="poi_smoking_separated">Di ruangan terpisah</string>
     <string name="poi_smoking_yes">Diizinkan</string>
@@ -1211,4 +1211,7 @@
     <string name="poi_books_religion">Agama</string>
     <string name="poi_books_children">Anak-anak</string>
     <string name="poi_books_academic">Akademis</string>
+    <string name="poi_picnic_table_yes">Meja piknik: ya</string>
+    <string name="poi_picnic_table_no">Meja piknik: tidak</string>
+    <string name="poi_contact_linkedin">LinkedIn</string>
 </resources>

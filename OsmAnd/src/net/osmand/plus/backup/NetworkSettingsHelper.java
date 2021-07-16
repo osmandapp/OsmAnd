@@ -21,7 +21,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	ExportBackupTask exportTask;
 
 	public interface BackupExportListener {
-		void onBackupExportStarted(int itemsCount);
+		void onBackupExportStarted();
 
 		void onBackupExportProgressUpdate(int value);
 

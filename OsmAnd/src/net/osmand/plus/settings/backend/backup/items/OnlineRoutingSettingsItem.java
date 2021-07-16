@@ -25,6 +25,8 @@ import java.util.List;
 
 public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRoutingEngine> {
 
+	private static final int APPROXIMATE_ONLINE_ROUTING_SIZE_BYTES = 150;
+
 	private OnlineRoutingHelper helper;
 	private List<OnlineRoutingEngine> otherEngines;
 
@@ -119,6 +121,11 @@ public class OnlineRoutingSettingsItem extends CollectionSettingsItem<OnlineRout
 		renamedItem.remove(EngineParameter.KEY);
 		otherEngines.add(renamedItem);
 		return renamedItem;
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull OnlineRoutingEngine item) {
+		return APPROXIMATE_ONLINE_ROUTING_SIZE_BYTES;
 	}
 
 	@Override

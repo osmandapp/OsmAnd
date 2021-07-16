@@ -427,10 +427,8 @@ public class GpxSelectionHelper {
 					item.splitName += " (" + formatSecondarySplitName(analysis.secondaryMetricEnd, group, app) + ") ";
 				}
 
-				if (!group.track.generalTrack && group.track.segments.size() > 1) {
-					String title = split || Algorithms.isBlank(segment.name) ?
-							String.valueOf(segmentIdx + 1) : segment.name;
-					item.segmentName = formatTitle(app, title);
+				if (!group.generalTrack && !split) {
+					item.trackSegmentName = buildTrackSegmentName(group.gpx, group.track, segment, app);
 				}
 
 				item.description = GpxUiHelper.getDescription(app, analysis, true);
@@ -490,9 +488,44 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	private static String formatTitle(OsmandApplication app, String segmentName) {
-		return app.getString(R.string.ltr_or_rtl_combine_via_colon,
-				app.getString(R.string.gpx_selection_segment_title), segmentName);
+	@NonNull
+	public static String buildTrackSegmentName(GPXFile gpxFile, Track track, TrkSegment segment, OsmandApplication app) {
+		String trackTitle = getTrackTitle(gpxFile, track,  app);
+		String segmentTitle = getSegmentTitle(segment, track.segments.indexOf(segment), app);
+
+		boolean oneSegmentPerTrack =
+				gpxFile.getNonEmptySegmentsCount() == gpxFile.getNonEmptyTracksCount();
+		boolean oneOriginalTrack = gpxFile.hasGeneralTrack() && gpxFile.getNonEmptyTracksCount() == 2
+				|| !gpxFile.hasGeneralTrack() && gpxFile.getNonEmptyTracksCount() == 1;
+
+		if (oneSegmentPerTrack) {
+			return trackTitle;
+		} else if (oneOriginalTrack) {
+			return segmentTitle;
+		} else {
+			return app.getString(R.string.ltr_or_rtl_combine_via_dash, trackTitle, segmentTitle);
+		}
+	}
+
+	@NonNull
+	private static String getTrackTitle(GPXFile gpxFile, Track track, OsmandApplication app) {
+		String trackName;
+		if (Algorithms.isBlank(track.name)) {
+			int trackIdx = gpxFile.tracks.indexOf(track);
+			int visibleTrackIdx = gpxFile.hasGeneralTrack() ? trackIdx : trackIdx + 1;
+			trackName = String.valueOf(visibleTrackIdx);
+		} else {
+			trackName = track.name;
+		}
+		String trackString = app.getString(R.string.shared_string_gpx_track);
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, trackString, trackName);
+	}
+
+	@NonNull
+	private static String getSegmentTitle(TrkSegment segment, int segmentIdx, OsmandApplication app) {
+		String segmentName = Algorithms.isBlank(segment.name) ? String.valueOf(segmentIdx + 1) : segment.name;
+		String segmentString = app.getString(R.string.gpx_selection_segment_title);
+		return app.getString(R.string.ltr_or_rtl_combine_via_colon, segmentString, segmentName);
 	}
 
 	private static String formatSplitName(double metricEnd, GpxDisplayGroup group, OsmandApplication app) {
@@ -1132,7 +1165,7 @@ public class GpxSelectionHelper {
 		public double splitMetric = -1;
 		public double secondarySplitMetric = -1;
 
-		public String segmentName;
+		public String trackSegmentName;
 		public String splitName;
 		public String name;
 		public String description;

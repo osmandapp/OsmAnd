@@ -30,8 +30,8 @@ import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.ui.OnlineRoutingEngineFragment;
 import net.osmand.plus.profiles.data.PredefinedProfilesGroup;
-import net.osmand.plus.profiles.data.ProfilesGroup;
 import net.osmand.plus.profiles.data.ProfileDataObject;
+import net.osmand.plus.profiles.data.ProfilesGroup;
 import net.osmand.plus.profiles.data.RoutingDataObject;
 import net.osmand.plus.profiles.data.RoutingDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -70,10 +70,10 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,
-	                                @Nullable Fragment target,
-	                                ApplicationMode appMode,
-	                                String selectedItemKey,
-	                                boolean usedOnMap) {
+									@Nullable Fragment target,
+									ApplicationMode appMode,
+									String selectedItemKey,
+									boolean usedOnMap) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {
 			SelectNavProfileBottomSheet fragment = new SelectNavProfileBottomSheet();
@@ -125,7 +125,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (predefinedJson != null) {
 			outState.putString(DOWNLOADED_PREDEFINED_JSON, predefinedJson);
@@ -152,7 +152,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 				dialogMode = mode;
 				predefinedGroups = null;
 				triedToDownload = false;
-				refreshView();
+				updateMenuItems();
 				return true;
 			}
 			return false;
@@ -167,7 +167,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 			if (result != null) {
 				predefinedGroups = getDataUtils().parsePredefinedEngines(predefinedJson);
 			}
-			refreshView();
+			updateMenuItems();
 			return true;
 		});
 	}
@@ -207,7 +207,7 @@ public class SelectNavProfileBottomSheet extends SelectProfileBottomSheet {
 				return;
 			}
 			mapActivity.getImportHelper().chooseFileToImport(ROUTING, (CallbackWithObject<Builder>) builder -> {
-				refreshView();
+				updateMenuItems();
 				return false;
 			});
 		});

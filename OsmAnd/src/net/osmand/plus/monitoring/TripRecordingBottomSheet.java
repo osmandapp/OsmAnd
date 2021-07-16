@@ -163,7 +163,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
 		blockStatisticsBuilder.initStatBlocks(null,
-				ContextCompat.getColor(app, getActiveTextColorId(nightMode)));
+				ContextCompat.getColor(app, getActiveTextColorId(nightMode)), null);
 	}
 
 	@Override

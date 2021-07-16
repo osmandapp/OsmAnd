@@ -614,6 +614,14 @@ public class OsmandSettings {
 		settingsAPI.edit(preferences).putLong(LAST_PREFERENCES_EDIT_TIME, time).commit();
 	}
 
+	public int getSavedGlobalPrefsCount() {
+		return ((SharedPreferences) globalPreferences).getAll().size();
+	}
+
+	public int getSavedModePrefsCount(@NonNull ApplicationMode mode) {
+		return ((SharedPreferences) getProfilePreferences(mode)).getAll().size();
+	}
+
 	@SuppressWarnings("unchecked")
 	public CommonPreference<Boolean> registerBooleanPreference(String id, boolean defValue) {
 		if (registeredPreferences.containsKey(id)) {
@@ -793,7 +801,7 @@ public class OsmandSettings {
 			if (!nonexistentAppModesKeys.isEmpty()) {
 				appModesKeys.removeAll(nonexistentAppModesKeys);
 			}
-			set(parseString(Algorithms.encodeStringSet(appModesKeys, ",")));
+			set(parseString(Algorithms.encodeCollection(appModesKeys, ",")));
 		}
 
 	}.makeGlobal().makeShared().cache();
@@ -2708,7 +2716,7 @@ public class OsmandSettings {
 			new ListStringPreference(this, "inactive_poi_filters", null, ",,").makeProfile().cache();
 
 	public final ContextMenuItemsPreference DRAWER_ITEMS =
-			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "drawer_items", DRAWER_ITEM_ID_SCHEME, ContextMenuItemsSettings.getDrawerDefaultInstance())
+			(ContextMenuItemsPreference) new ContextMenuItemsPreference(this, "drawer_items", DRAWER_ITEM_ID_SCHEME, DrawerMenuItemsSettings.getDrawerDefaultInstance())
 					.makeProfile().cache();
 
 	public final ContextMenuItemsPreference CONFIGURE_MAP_ITEMS =

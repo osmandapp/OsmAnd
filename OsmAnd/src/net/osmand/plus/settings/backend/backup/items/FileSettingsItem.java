@@ -6,6 +6,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -17,7 +18,6 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
 import net.osmand.plus.settings.backend.backup.SettingsItemWriter;
-import net.osmand.plus.settings.backend.backup.StreamSettingsItemReader;
 import net.osmand.plus.settings.backend.backup.StreamSettingsItemWriter;
 import net.osmand.util.Algorithms;
 
@@ -27,10 +27,10 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class FileSettingsItem extends StreamSettingsItem {
 
@@ -146,6 +146,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	protected File file;
+	protected File fileToWrite;
 	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
@@ -186,6 +187,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@Override
 	public SettingsItemType getType() {
 		return SettingsItemType.FILE;
+	}
+
+	public void setFileToWrite(@NonNull File file) throws IOException {
+		fileToWrite = file;
+		setInputStream(new FileInputStream(file));
 	}
 
 	@NonNull
@@ -248,13 +254,26 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 	}
 
+	@Override
 	public long getSize() {
+		if (fileToWrite != null) {
+			return fileToWrite.length();
+		}
 		if (size != 0) {
 			return size;
-		} else if (file != null && !file.isDirectory()) {
-			return file.length();
+		} else if (file != null) {
+			if (file.isDirectory()) {
+				List<File> filesToUpload = new ArrayList<>();
+				FileUtils.collectDirFiles(file, filesToUpload);
+
+				for (File file : filesToUpload) {
+					size += file.length();
+				}
+			} else {
+				size = file.length();
+			}
 		}
-		return 0;
+		return size;
 	}
 
 	public void setSize(long size) {
@@ -264,6 +283,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@NonNull
 	public File getFile() {
 		return file;
+	}
+
+	@Nullable
+	public File getFileToWrite() {
+		return fileToWrite;
 	}
 
 	@NonNull

@@ -6,7 +6,6 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.settings.backend.ExportSettingsType;
 
 import java.util.List;
 
@@ -23,6 +22,15 @@ public class DeleteFilesCommand extends BaseDeleteFilesCommand {
 							  boolean byVersion, @Nullable OnDeleteFilesListener listener) {
 		super(helper, byVersion, listener);
 		this.remoteFiles = remoteFiles;
+	}
+
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+
+		for (OnDeleteFilesListener listener : getListeners()) {
+			listener.onFilesDeleteStarted(remoteFiles);
+		}
 	}
 
 	@Override

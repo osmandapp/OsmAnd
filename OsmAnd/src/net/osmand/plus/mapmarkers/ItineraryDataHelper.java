@@ -413,7 +413,7 @@ public class ItineraryDataHelper {
 
 			Set<String> wptCategories = group.getWptCategories();
 			if (!Algorithms.isEmpty(wptCategories)) {
-				groupInfo.categories = Algorithms.encodeStringSet(wptCategories, CATEGORIES_SPLIT);
+				groupInfo.categories = Algorithms.encodeCollection(wptCategories, CATEGORIES_SPLIT);
 			}
 			if (group.getType() == ItineraryType.TRACK) {
 				String path = group.getId();
