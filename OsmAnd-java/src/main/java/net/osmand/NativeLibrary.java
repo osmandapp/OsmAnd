@@ -121,14 +121,53 @@ public class NativeLibrary {
 	}
 
 	public static class NativeGpxPointApproximation {
-		double lat;
-		double lon;
-		double cumDist;
+		public int ind;
+		public double lat;
+		public double lon;
+		public double cumDist;
+		public List<RouteSegmentResult> routeToTarget;
 
 		NativeGpxPointApproximation(GpxPoint gpxPoint) {
 			lat = gpxPoint.loc.getLatitude();
 			lon = gpxPoint.loc.getLongitude();
 			cumDist = gpxPoint.cumDist;
+		}
+
+		public NativeGpxPointApproximation(int ind, double lat, double lon, double cumDist) {
+			this.ind = ind;
+			this.lat = lat;
+			this.lon = lon;
+			this.cumDist = cumDist;
+			routeToTarget = new ArrayList<>();
+		}
+
+		public void addRouteToTarget(RouteSegmentResult routeSegmentResult) {
+			routeToTarget.add(routeSegmentResult);
+		}
+
+		public GpxPoint convertToGpxPoint() {
+			GpxPoint point = new GpxPoint();
+			point.ind = ind;
+			point.loc = new LatLon(lat, lon);
+			point.cumDist = cumDist;
+			point.routeToTarget = new ArrayList<>(routeToTarget);
+			return point;
+		}
+	}
+
+	public static class NativeGpxRouteApproximationResult {
+		public List<NativeGpxPointApproximation> finalPoints = new ArrayList<>();
+		public List<RouteSegmentResult> result = new ArrayList<>();
+
+		public NativeGpxRouteApproximationResult() {
+		}
+
+		public void addFinalPoint(NativeGpxPointApproximation finalPoint) {
+			finalPoints.add(finalPoint);
+		}
+
+		public void addResultSegment(RouteSegmentResult routeSegmentResult) {
+			result.add(routeSegmentResult);
 		}
 	}
 
@@ -177,14 +216,19 @@ public class NativeLibrary {
 				regions, basemap);
 	}
 
-	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
-		RouteRegion[] regions = gctx.ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
+	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints) {
+		RouteRegion[] regions = gCtx.ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
 		int listSize = gpxPoints.size();
 		NativeGpxPointApproximation[] nativePoints = new NativeGpxPointApproximation[listSize];
 		for (int i = 0; i < listSize; i++) {
 			nativePoints[i] = new NativeGpxPointApproximation(gpxPoints.get(i));
 		}
-		return nativeSearchGpxRoute(gctx, nativePoints, regions);
+		NativeGpxRouteApproximationResult nativeResult = nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions);
+		for (NativeGpxPointApproximation point : nativeResult.finalPoints) {
+			gCtx.finalPoints.add(point.convertToGpxPoint());
+		}
+		gCtx.result.addAll(nativeResult.result);
+		return gCtx;
 	}
 
 	public NativeRouteSearchResult loadRouteRegion(RouteSubregion sub, boolean loadObjects) {
@@ -196,9 +240,9 @@ public class NativeLibrary {
 	}
 
 	/**/
-	protected static native GpxRouteApproximation nativeSearchGpxRoute(GpxRouteApproximation gctx,
-	                                                                   NativeGpxPointApproximation[] gpxPoints,
-	                                                                   RouteRegion[] regions);
+	protected static native NativeGpxRouteApproximationResult nativeSearchGpxRoute(RoutingContext c,
+	                                                                               NativeGpxPointApproximation[] gpxPoints,
+	                                                                               RouteRegion[] regions);
 
 	protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int regfp, RouteSubregion subreg,
 	                                                                boolean loadObjects);
