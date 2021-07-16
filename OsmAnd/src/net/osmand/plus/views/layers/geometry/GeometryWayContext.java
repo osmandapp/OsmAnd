@@ -19,17 +19,17 @@ public abstract class GeometryWayContext {
 
 	public static final int DEFAULT_SIMPLIFICATION_ZOOM = 16;
 
-	private Context ctx;
-	private float density;
+	private final Context ctx;
+	private final float density;
 	private boolean nightMode;
 	private int simplificationZoom = DEFAULT_SIMPLIFICATION_ZOOM;
 
-	private Paint paintIcon;
-	private Paint paintIconCustom;
+	private final Paint paintIcon;
+	private final Paint paintIconCustom;
 
 	private RenderingLineAttributes attrs;
 
-	private Bitmap arrowBitmap;
+	private final Bitmap arrowBitmap;
 
 	public GeometryWayContext(Context ctx, float density) {
 		this.ctx = ctx;

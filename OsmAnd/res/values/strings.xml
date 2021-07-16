@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="attribute">Attribute</string>
     <string name="backup_restore_now">Restore now</string>
     <string name="backup_setup">Set up backup</string>
     <string name="backup_welcome_back_descr">You can restore data on this device using existing backups or set up a backup of this device to OsmAnd Cloud.</string>
