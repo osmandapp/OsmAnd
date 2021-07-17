@@ -21,6 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -183,7 +184,7 @@ public class ItineraryDataHelper {
 			FileInputStream is = null;
 			try {
 				is = new FileInputStream(file);
-				String md5 = DigestUtils.md5Hex(is);
+				String md5 = new String(Hex.encodeHex(DigestUtils.md5(is)));
 				String lastMd5 = app.getSettings().ITINERARY_LAST_CALCULATED_MD5.get();
 				if (!md5.equals(lastMd5)) {
 					app.getSettings().ITINERARY_LAST_CALCULATED_MD5.set(md5);
