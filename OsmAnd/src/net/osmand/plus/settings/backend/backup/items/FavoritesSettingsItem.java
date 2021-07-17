@@ -76,7 +76,6 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		if (favoritesFile.exists()) {
 			favoritesFile.setLastModified(lastModifiedTime);
 		}
-		;
 	}
 
 	@NonNull
@@ -140,7 +139,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 			}
 			List<FavouritePoint> favourites = getPointsFromGroups(appliedItems);
 			for (FavouritePoint favourite : favourites) {
-				favoritesHelper.addFavourite(favourite, false);
+				favoritesHelper.addFavourite(favourite, false, false);
 			}
 			favoritesHelper.sortAll();
 			favoritesHelper.saveCurrentPointsIntoFile();

@@ -27,6 +27,10 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class FileSettingsItem extends StreamSettingsItem {
 
@@ -142,6 +146,7 @@ public class FileSettingsItem extends StreamSettingsItem {
 	}
 
 	protected File file;
+	protected File fileToWrite;
 	private final File appPath;
 	protected FileSubtype subtype;
 	private long size;
@@ -184,13 +189,22 @@ public class FileSettingsItem extends StreamSettingsItem {
 		return SettingsItemType.FILE;
 	}
 
+	public void setFileToWrite(@NonNull File file) throws IOException {
+		fileToWrite = file;
+		setInputStream(new FileInputStream(file));
+	}
+
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
 		if (subtype.isMap() || subtype == FileSubtype.TTS_VOICE || subtype == FileSubtype.VOICE) {
 			return FileNameTranslationHelper.getFileNameWithRegion(app, file.getName());
 		} else if (subtype == FileSubtype.MULTIMEDIA_NOTES) {
-			return new Recording(file).getName(app, true);
+			if (file.exists()) {
+				return new Recording(file).getName(app, true);
+			} else {
+				return Recording.getNameForMultimediaFile(app, file.getName(), getLastModifiedTime());
+			}
 		}
 		return super.getPublicName(ctx);
 	}
@@ -244,14 +258,21 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 	}
 
+	@Override
 	public long getSize() {
+		if (fileToWrite != null) {
+			return fileToWrite.length();
+		}
 		if (size != 0) {
 			return size;
 		} else if (file != null) {
 			if (file.isDirectory()) {
-				long[] dirSize = new long[1];
-				FileUtils.getDirectorySize(file, dirSize);
-				size = dirSize[0];
+				List<File> filesToUpload = new ArrayList<>();
+				FileUtils.collectDirFiles(file, filesToUpload);
+
+				for (File file : filesToUpload) {
+					size += file.length();
+				}
 			} else {
 				size = file.length();
 			}
@@ -266,6 +287,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 	@NonNull
 	public File getFile() {
 		return file;
+	}
+
+	@Nullable
+	public File getFileToWrite() {
+		return fileToWrite;
 	}
 
 	@NonNull

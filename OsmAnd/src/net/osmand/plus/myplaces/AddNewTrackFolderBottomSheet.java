@@ -111,7 +111,7 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putString(FOLDER_NAME_KEY, folderName);
 		super.onSaveInstanceState(outState);
 	}

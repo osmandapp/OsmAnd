@@ -91,6 +91,7 @@ import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
@@ -736,7 +737,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				for (RenderedObject renderedObject : renderedObjects) {
 
 					String routeID = renderedObject.getRouteID();
-					boolean isGpx = !Algorithms.isEmpty(routeID);
+					String fileName = renderedObject.getGpxFileName();
+					String filter = routeID != null ? routeID : fileName;
+					boolean isGpx = !Algorithms.isEmpty(filter);
 					if (!isGpx && (renderedObject.getId() == null || !renderedObject.isVisible()
 							|| renderedObject.isDrawOnPath())) {
 						continue;
@@ -767,7 +770,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					}
 					LatLon searchLatLon = objectLatLon != null ? objectLatLon : pointLatLon;
 					if (isGpx) {
-						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, routeID,
+						TravelGpx travelGpx = app.getTravelHelper().searchGpx(pointLatLon, filter,
 								renderedObject.getTagValue("ref"));
 						if (travelGpx != null && isUniqueGpx(selectedObjects, travelGpx)) {
 							WptPt selectedPoint = new WptPt();
@@ -863,7 +866,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private boolean isUniqueGpx(Map<Object, IContextMenuProvider> selectedObjects, TravelGpx travelGpx) {
 		String tracksDir = view.getApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR).getPath();
-		File file = new File(tracksDir, travelGpx.getRouteId() + IndexConstants.GPX_FILE_EXT);
+		File file = new File(tracksDir, travelGpx.getRouteId() + GPX_FILE_EXT);
 		if (file.exists()) {
 			return false;
 		}

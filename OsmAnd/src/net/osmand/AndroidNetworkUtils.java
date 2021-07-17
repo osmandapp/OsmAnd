@@ -25,6 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -46,6 +47,8 @@ public class AndroidNetworkUtils {
 
 	private static final int CONNECTION_TIMEOUT = 15000;
 	private static final Log LOG = PlatformUtil.getLog(AndroidNetworkUtils.class);
+
+	public static final String CANCELLED_MSG = "cancelled";
 
 	public interface OnRequestResultListener {
 		void onResult(@Nullable String result, @Nullable String error);
@@ -134,12 +137,9 @@ public class AndroidNetworkUtils {
 						publishProgress(request);
 						final String[] response = {null, null};
 						sendRequest(ctx, request.getUrl(), request.getParameters(),
-								request.getUserOperation(), request.isToastAllowed(), request.isPost(), new OnRequestResultListener() {
-									@Override
-									public void onResult(@Nullable String result, @Nullable String error) {
-										response[0] = result;
-										response[1] = error;
-									}
+								request.getUserOperation(), request.isToastAllowed(), request.isPost(), (result, error) -> {
+									response[0] = result;
+									response[1] = error;
 								});
 						requestResponse = new RequestResponse(request, response[0], response[1]);
 					} catch (Exception e) {
@@ -198,12 +198,9 @@ public class AndroidNetworkUtils {
 			protected String[] doInBackground(Void... params) {
 				final String[] res = {null, null};
 				try {
-					sendRequest(ctx, url, parameters, userOperation, toastAllowed, post, new OnRequestResultListener() {
-						@Override
-						public void onResult(@Nullable String result, @Nullable String error) {
-							res[0] = result;
-							res[1] = error;
-						}
+					sendRequest(ctx, url, parameters, userOperation, toastAllowed, post, (result, error) -> {
+						res[0] = result;
+						res[1] = error;
 					});
 				} catch (Exception e) {
 					// ignore
@@ -558,6 +555,9 @@ public class AndroidNetworkUtils {
 			LOG.error("UnknownHostException, cannot download file " + url + " " + error);
 		} catch (Exception e) {
 			error = e.getMessage();
+			if (error == null && e instanceof InterruptedIOException) {
+				error = CANCELLED_MSG;
+			}
 			LOG.warn("Cannot download file: " + url, e);
 		}
 		return error;
@@ -602,13 +602,10 @@ public class AndroidNetworkUtils {
 									@Nullable Map<String, String> headers,
 									@Nullable IProgress progress) {
 		BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
-		StreamWriter streamWriter = new StreamWriter() {
-			@Override
-			public void write(OutputStream outputStream, IProgress progress) throws IOException {
-				Algorithms.streamCopy(bis, outputStream, progress, 1024);
-				outputStream.flush();
-				Algorithms.closeStream(bis);
-			}
+		StreamWriter streamWriter = (outputStream, pr) -> {
+			Algorithms.streamCopy(bis, outputStream, pr, 1024);
+			outputStream.flush();
+			Algorithms.closeStream(bis);
 		};
 		return uploadFile(urlText, streamWriter, fileName, gzip, additionalParams, headers, progress);
 	}
@@ -693,8 +690,12 @@ public class AndroidNetworkUtils {
 			LOG.info("Response : " + response);
 			return null;
 		} catch (IOException e) {
-			LOG.error(e.getMessage(), e);
-			return e.getMessage();
+			String message = e.getMessage();
+			if (message == null && e instanceof InterruptedIOException) {
+				message = CANCELLED_MSG;
+			}
+			LOG.error(message, e);
+			return message;
 		}
 	}
 
@@ -797,13 +798,10 @@ public class AndroidNetworkUtils {
 										final Executor executor) {
 
 		BufferedInputStream bis = new BufferedInputStream(inputStream, 20 * 1024);
-		StreamWriter streamWriter = new StreamWriter() {
-			@Override
-			public void write(OutputStream outputStream, IProgress progress) throws IOException {
-				Algorithms.streamCopy(bis, outputStream, progress, 1024);
-				outputStream.flush();
-				Algorithms.closeStream(bis);
-			}
+		StreamWriter streamWriter = (outputStream, progress) -> {
+			Algorithms.streamCopy(bis, outputStream, progress, 1024);
+			outputStream.flush();
+			Algorithms.closeStream(bis);
 		};
 		uploadFileAsync(url, streamWriter, fileName, gzip, parameters, headers, callback, executor);
 	}

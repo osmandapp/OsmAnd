@@ -282,18 +282,22 @@ public class RouteCalculationResult {
 		return routeVisibleAngle;
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute() {
 		return getOriginalRoute(0);
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute(int startIndex) {
 		return getOriginalRoute(startIndex, segments.size(), true);
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute(int startIndex, boolean includeFirstSegment) {
 		return getOriginalRoute(startIndex, segments.size(), includeFirstSegment);
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute(int startIndex, int endIndex, boolean includeFirstSegment) {
 		if (segments.size() == 0) {
 			return null;
@@ -783,6 +787,12 @@ public class RouteCalculationResult {
 	private static boolean introduceFirstPoint(List<Location> locations, List<RouteDirectionInfo> directions,
 	                                           List<RouteSegmentResult> segs, Location start) {
 		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS) {
+			// Start location can have wrong altitude
+			double firstValidAltitude = getFirstValidAltitude(locations);
+			if (!Double.isNaN(firstValidAltitude)) {
+				start.setAltitude(firstValidAltitude);
+			}
+
 			// add start point
 			locations.add(0, start);
 			if (segs != null) {
@@ -800,6 +810,15 @@ public class RouteCalculationResult {
 			return true;
 		}
 		return false;
+	}
+
+	private static double getFirstValidAltitude(List<Location> locations) {
+		for (Location location : locations) {
+			if (location.hasAltitude()) {
+				return location.getAltitude();
+			}
+		}
+		return Double.NaN;
 	}
 
 	private static boolean introduceLastPoint(List<Location> locations, List<RouteDirectionInfo> directions,

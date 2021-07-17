@@ -3926,7 +3926,7 @@
     <string name="shared_strings_all_regions">Alle regioner</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Skjul grenser for naturreservat, beskyttede områder og nasjonalparker.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgrenser</string>
-    <string name="hillshade_slope_contour_lines">Relieffskygge / Bakkehelling / Koter</string>
+    <string name="hillshade_slope_contour_lines">Relieffskygge/bakkehelling/koter</string>
     <string name="activity_type_riding_name">Ridning</string>
     <string name="activity_type_hiking_name">Turgåing</string>
     <string name="activity_type_running_name">Løping</string>
@@ -3950,7 +3950,7 @@
     <string name="route_line_use_gradient_coloring">Rutelinjen er farget av høydeskråning.</string>
     <string name="recorded_description">Innspilt tale høres bedre ut, men kan kun uttale forhåndsinnspilte uttrykk: svinginstruksjoner. Kan ikke melde om gatenavn eller interessepunktnavn.</string>
     <string name="shared_string_itinerary">Reiseplan</string>
-    <string name="cloud_email_not_registered">Dennne e-postadressen har ikke blitt registrert for OsmAnd Sky</string>
+    <string name="cloud_email_not_registered">Dennne e-postadressen er ikke registrert for OsmAnd Sky</string>
     <string name="cloud_email_already_registered">En konto med denne e-postadressen er allerede registrert.</string>
     <string name="resend_verification_code">Send koden igjen</string>
     <string name="verification_code_missing">Jeg mottok ingen bekreftelseskode</string>
@@ -4075,4 +4075,21 @@
     <string name="routing_attr_prefer_hiking_routes_description">Foretrekk vandreruter</string>
     <string name="routing_attr_prefer_hiking_routes_name">Foretrekk vandreruter</string>
     <string name="routing_attr_allow_streams_description">Tillat bekker og dreneringsgrøfter</string>
+    <string name="backup_delete_types_descr">Slett all data for foreldede datatyper fra OsmAnd Sky\?</string>
+    <string name="backup_error_size_is_exceeded">Maksimal størrelse for OsmAnd Sky oversteget %1$s</string>
+    <string name="release_4_0">• Skysikkerhetskopi
+\n • Nattmodus for «Topo»-opptegningsstil
+\n • Mulighet for nedlasting av konturlinjer i fot
+\n • Spor kan nå fargelegges etter høyde, hastighet, eller helning.
+\n • Oppdatert «Sporopptak»-dialog
+\n • Distanse ved trykk flyttet fra radius-linjal inn i eget valg
+\n • Planlegg rute: Tillagt mulighet for å endre navigasjonsvalg, tilgjengelig oppsettskart og søk uten å forlate ruteplanlegging
+\n • Ny «Kjøp»-skjerm med detaljert info om kjøp
+\n • Tillagt alternativ for å endre rutelinjeutseende
+\n • OsmAnd Live-oppdateringer flyttet til «Nedlastinger»→«Oppdateringer»
+\n
+\n</string>
+    <string name="logout_from_osmand_cloud">Logg ut fra OsmAnd Sky</string>
+    <string name="logout_from_osmand_cloud_decsr">Logg ut\?
+\nDu vil måtte logge inn igjen for å sikkerhetskopiere eller gjenopprette data.</string>
 </resources>

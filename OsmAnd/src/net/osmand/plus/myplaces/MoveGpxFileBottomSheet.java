@@ -135,7 +135,7 @@ public class MoveGpxFileBottomSheet extends MenuBottomSheetDialogFragment implem
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(FILE_PATH_KEY, filePath);
 		outState.putBoolean(SHOW_ALL_FOLDERS_KEY, showAllFolders);

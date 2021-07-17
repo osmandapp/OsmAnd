@@ -43,7 +43,11 @@ public class WarningViewHolder extends RecyclerView.ViewHolder {
 			title.setText(R.string.subscribe_email_error);
 			description.setText(error);
 		}
-		icon.setImageDrawable(getContentIcon(status.warningIconRes));
+		if (status != BackupStatus.SUBSCRIPTION_EXPIRED) {
+			icon.setImageDrawable(getContentIcon(status.warningIconRes));
+		} else {
+			icon.setImageDrawable(getApplication().getUIUtilities().getIcon(status.warningIconRes));
+		}
 		setupWarningRoundedBg(hideBottomPadding);
 	}
 
@@ -66,15 +70,20 @@ public class WarningViewHolder extends RecyclerView.ViewHolder {
 		AndroidUtils.setMargins(params, params.leftMargin, params.topMargin, params.rightMargin, bottomMargin);
 	}
 
+	@NonNull
+	private OsmandApplication getApplication() {
+		return (OsmandApplication) itemView.getContext().getApplicationContext();
+	}
+
 	@Nullable
 	private Drawable getContentIcon(@DrawableRes int icon) {
-		OsmandApplication app = (OsmandApplication) itemView.getContext().getApplicationContext();
+		OsmandApplication app = getApplication();
 		return app.getUIUtilities().getIcon(icon, R.color.description_font_and_bottom_sheet_icons);
 	}
 
 	@Nullable
 	private Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
-		OsmandApplication app = (OsmandApplication) itemView.getContext().getApplicationContext();
+		OsmandApplication app = getApplication();
 		return app.getUIUtilities().getPaintedIcon(id, color);
 	}
 }
