@@ -79,15 +79,31 @@ public class SubscriptionsListCard extends MapBaseCard {
 			if (purchase instanceof InAppSubscription) {
 				setupSubscriptionCard((InAppSubscription) purchase, card);
 			} else {
-				TextView purchaseType = card.findViewById(R.id.purchase_type);
-				purchaseType.setText(R.string.in_app_purchase_desc);
-				AndroidUiHelper.updateVisibility(purchaseType, true);
+				setupPurchaseCard(purchase, card);
 			}
 
 			int dividerLayout = i + 1 == subscriptions.size() ? R.layout.simple_divider_item : R.layout.divider_half_item;
 			View divider = inflater.inflate(dividerLayout, (ViewGroup) view, false);
 			((ViewGroup) view).addView(divider);
 		}
+	}
+
+	private void setupPurchaseCard(@NonNull InAppPurchase purchase, @NonNull View card) {
+		TextView purchaseType = card.findViewById(R.id.purchase_type);
+		purchaseType.setText(R.string.in_app_purchase_desc);
+
+		TextView purchaseDate = card.findViewById(R.id.next_billing_date);
+		long purchaseTime = purchase.getPurchaseInfo().getPurchaseTime();
+		if (purchaseTime > 0) {
+			String dateStr = dateFormat.format(purchaseTime);
+			String purchased = app.getString(R.string.shared_string_purchased);
+			purchaseDate.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, purchased, dateStr));
+			AndroidUiHelper.updateVisibility(purchaseDate, true);
+		} else {
+			AndroidUiHelper.updateVisibility(purchaseDate, false);
+		}
+		AndroidUiHelper.updateVisibility(purchaseType, true);
+		AndroidUiHelper.updateVisibility(card.findViewById(R.id.status), false);
 	}
 
 	private void setupSubscriptionCard(@NonNull InAppSubscription subscription, @NonNull View card) {

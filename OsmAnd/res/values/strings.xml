@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="shared_string_purchased">Purchased</string>
     <string name="attribute">Attribute</string>
     <string name="backup_restore_now">Restore now</string>
     <string name="backup_setup">Set up backup</string>
