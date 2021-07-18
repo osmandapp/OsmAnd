@@ -158,9 +158,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private CommonPreference<Integer> currentTrackColorPref;
 	private CommonPreference<GradientScaleType> currentTrackScaleType;
-	private CommonPreference<String> currentTrackSpeedGradientPalette;
-	private CommonPreference<String> currentTrackAltitudeGradientPalette;
-	private CommonPreference<String> currentTrackSlopeGradientPalette;
 	private CommonPreference<String> currentTrackWidthPref;
 	private CommonPreference<Boolean> currentTrackShowArrowsPref;
 	private CommonPreference<Boolean> currentTrackShowStartFinishPref;
@@ -175,9 +172,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		currentTrackColorPref = view.getSettings().CURRENT_TRACK_COLOR;
 		currentTrackScaleType = view.getSettings().CURRENT_TRACK_COLORIZATION;
-		currentTrackSpeedGradientPalette = view.getSettings().CURRENT_TRACK_SPEED_GRADIENT_PALETTE;
-		currentTrackAltitudeGradientPalette = view.getSettings().CURRENT_TRACK_ALTITUDE_GRADIENT_PALETTE;
-		currentTrackSlopeGradientPalette = view.getSettings().CURRENT_TRACK_SLOPE_GRADIENT_PALETTE;
 		currentTrackWidthPref = view.getSettings().CURRENT_TRACK_WIDTH;
 		currentTrackShowArrowsPref = view.getSettings().CURRENT_TRACK_SHOW_ARROWS;
 		currentTrackShowStartFinishPref = view.getSettings().CURRENT_TRACK_SHOW_START_FINISH;
@@ -739,9 +733,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private List<TrkSegment> getCachedSegments(SelectedGpxFile selectedGpxFile, GradientScaleType scaleType) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 		CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
-		return cachedTrack.getCachedSegments(view.getZoom(), scaleType, getColorizationPalette(gpxFile, scaleType));
+		return cachedTrack.getCachedSegments(view.getZoom(), scaleType);
 	}
 
 	private float getTrackWidth(String width, float defaultTrackWidth) {
@@ -791,33 +784,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 		return null;
-	}
-
-	private int[] getColorizationPalette(GPXFile gpxFile, GradientScaleType scaleType) {
-		if (hasTrackDrawInfoForTrack(gpxFile)) {
-			return trackDrawInfo.getGradientPalette(scaleType);
-		} else if (gpxFile.showCurrentTrack) {
-			String palette;
-			if (scaleType == GradientScaleType.SPEED) {
-				palette = currentTrackSpeedGradientPalette.get();
-			} else if (scaleType == GradientScaleType.ALTITUDE) {
-				palette = currentTrackAltitudeGradientPalette.get();
-			} else {
-				palette = currentTrackSlopeGradientPalette.get();
-			}
-			return Algorithms.stringToArray(palette);
-		}
-		GpxDataItem dataItem = gpxDbHelper.getItem(new File(gpxFile.path));
-		if (dataItem == null) {
-			return scaleType == GradientScaleType.SLOPE ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
-		}
-		if (scaleType == GradientScaleType.SPEED) {
-			return dataItem.getGradientSpeedPalette();
-		} else if (scaleType == GradientScaleType.ALTITUDE) {
-			return dataItem.getGradientAltitudePalette();
-		} else {
-			return dataItem.getGradientSlopePalette();
-		}
 	}
 
 	private String getTrackWidthName(GPXFile gpxFile, String defaultWidth) {
@@ -1304,36 +1270,30 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			this.selectedGpxFile = selectedGpxFile;
 		}
 
-		public List<TrkSegment> getCachedSegments(int zoom, @NonNull GradientScaleType scaleType,
-												  int[] gradientPalette) {
+		public List<TrkSegment> getCachedSegments(int zoom, @NonNull GradientScaleType scaleType) {
 			GPXFile gpxFile = selectedGpxFile.getGpxFile();
 			String trackId = zoom + "_" + scaleType.toString();
 			if (prevModifiedTime == gpxFile.modifiedTime) {
 				List<TrkSegment> segments = cache.get(trackId);
 				if (segments == null) {
-					segments = calculateGradientTrack(selectedGpxFile, zoom, scaleType, gradientPalette);
+					segments = calculateGradientTrack(selectedGpxFile, zoom, scaleType);
 					cache.put(trackId, segments);
 				}
 				return segments;
 			} else {
 				cache.clear();
 				prevModifiedTime = gpxFile.modifiedTime;
-				List<TrkSegment> segments = calculateGradientTrack(selectedGpxFile, zoom, scaleType, gradientPalette);
+				List<TrkSegment> segments = calculateGradientTrack(selectedGpxFile, zoom, scaleType);
 				cache.put(trackId, segments);
 				return segments;
 			}
 		}
 
 		private List<TrkSegment> calculateGradientTrack(SelectedGpxFile selectedGpxFile, int zoom,
-														GradientScaleType scaleType, int[] gradientPalette) {
+														GradientScaleType scaleType) {
 			GPXFile gpxFile = selectedGpxFile.getGpxFile();
 			RouteColorize colorize = new RouteColorize(zoom, gpxFile, selectedGpxFile.getTrackAnalysis(app),
 					scaleType.toColorizationType(), app.getSettings().getApplicationMode().getMaxSpeed());
-			if (scaleType == GradientScaleType.SLOPE) {
-				colorize.palette = RouteColorize.SLOPE_PALETTE;
-			} else {
-				colorize.setPalette(gradientPalette);
-			}
 			List<RouteColorizationPoint> colorsOfPoints = colorize.getResult(true);
 			return createSimplifiedSegments(selectedGpxFile.getGpxFile(), colorsOfPoints, scaleType);
 		}

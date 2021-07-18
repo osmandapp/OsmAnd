@@ -1733,19 +1733,6 @@ public class GPXUtilities {
 			}			
 		}
 
-		public int[] getGradientScaleColor(String gradientScaleType) {
-			String clrValue = null;
-			if (extensions != null) {
-				clrValue = extensions.get(gradientScaleType);
-			}
-			return Algorithms.stringToGradientPalette(clrValue, gradientScaleType);
-		}
-
-		public void setGradientScaleColor(String gradientScaleType, int[] gradientScalePalette) {
-			getExtensionsToWrite().put(gradientScaleType,
-					Algorithms.gradientPaletteToString(gradientScalePalette, gradientScaleType));
-		}
-
 		public String getGradientScaleType() {
 			if (extensions != null) {
 				return extensions.get("gradient_scale_type");

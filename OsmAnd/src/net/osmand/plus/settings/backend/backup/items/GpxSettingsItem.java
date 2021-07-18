@@ -102,9 +102,6 @@ public class GpxSettingsItem extends FileSettingsItem {
 		gpxDbHelper.updateShowStartFinish(dataItem, appearanceInfo.showStartFinish);
 		gpxDbHelper.updateSplit(dataItem, splitType, appearanceInfo.splitInterval);
 		gpxDbHelper.updateGradientScaleType(dataItem, appearanceInfo.scaleType);
-		gpxDbHelper.updateGradientScalePalette(dataItem, GradientScaleType.SPEED, appearanceInfo.gradientSpeedPalette);
-		gpxDbHelper.updateGradientScalePalette(dataItem, GradientScaleType.ALTITUDE, appearanceInfo.gradientAltitudePalette);
-		gpxDbHelper.updateGradientScalePalette(dataItem, GradientScaleType.SLOPE, appearanceInfo.gradientSlopePalette);
 	}
 
 	private void createGpxAppearanceInfo() {

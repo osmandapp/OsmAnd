@@ -184,9 +184,6 @@ public class GPXDatabase {
 		private String width;
 		private int color;
 		private GradientScaleType gradientScaleType;
-		private int[] gradientSpeedPalette;
-		private int[] gradientAltitudePalette;
-		private int[] gradientSlopePalette;
 		private int splitType;
 		private double splitInterval;
 		private long fileLastModifiedTime;
@@ -222,9 +219,6 @@ public class GPXDatabase {
 			width = gpxFile.getWidth(null);
 			showArrows = gpxFile.isShowArrows();
 			showStartFinish = gpxFile.isShowStartFinish();
-			gradientSpeedPalette = gpxFile.getGradientScaleColor(GradientScaleType.SPEED.getColorTypeName());
-			gradientSlopePalette = gpxFile.getGradientScaleColor(GradientScaleType.SLOPE.getColorTypeName());
-			gradientAltitudePalette = gpxFile.getGradientScaleColor(GradientScaleType.ALTITUDE.getColorTypeName());
 
 			if (!Algorithms.isEmpty(gpxFile.getSplitType()) && gpxFile.getSplitInterval() > 0) {
 				GpxSplitType gpxSplitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType());
@@ -251,18 +245,6 @@ public class GPXDatabase {
 
 		public GradientScaleType getGradientScaleType() {
 			return gradientScaleType;
-		}
-
-		public int[] getGradientSpeedPalette() {
-			return gradientSpeedPalette;
-		}
-
-		public int[] getGradientAltitudePalette() {
-			return gradientAltitudePalette;
-		}
-
-		public int[] getGradientSlopePalette() {
-			return gradientSlopePalette;
 		}
 
 		public String getWidth() {
@@ -534,35 +516,6 @@ public class GPXDatabase {
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[] { (color == 0 ? "" : Algorithms.colorToString(color)), fileName, fileDir });
 				item.color = color;
-			} finally {
-				db.close();
-			}
-			return true;
-		}
-		return false;
-	}
-
-	public boolean updateGradientScaleColor(@NonNull GpxDataItem item, @NonNull GradientScaleType gradientScaleType, int[] gradientScalePalette) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				String fileName = getFileName(item.file);
-				String fileDir = getFileDir(item.file);
-				String columnName = null;
-				if (GradientScaleType.SPEED == gradientScaleType) {
-					columnName = GPX_COL_GRADIENT_SPEED_COLOR;
-					item.gradientSpeedPalette = gradientScalePalette;
-				} else if (GradientScaleType.ALTITUDE == gradientScaleType) {
-					columnName = GPX_COL_GRADIENT_ALTITUDE_COLOR;
-					item.gradientAltitudePalette = gradientScalePalette;
-				} else if (GradientScaleType.SLOPE == gradientScaleType) {
-					columnName = GPX_COL_GRADIENT_SLOPE_COLOR;
-					item.gradientSlopePalette = gradientScalePalette;
-				}
-				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " + columnName + " = ? " +
-								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
-						new Object[] {Algorithms.gradientPaletteToString(gradientScalePalette,
-								gradientScaleType.getColorTypeName()), fileName, fileDir});
 			} finally {
 				db.close();
 			}
@@ -877,9 +830,6 @@ public class GPXDatabase {
 		boolean showArrows = query.getInt(27) == 1;
 		boolean showStartFinish = query.getInt(28) == 1;
 		String width = query.getString(29);
-		String gradientSpeedPalette = query.getString(30);
-		String gradientAltitudePalette = query.getString(31);
-		String gradientSlopePalette = query.getString(32);
 		String gradientScaleType = query.getString(33);
 
 		GPXTrackAnalysis a = new GPXTrackAnalysis();
@@ -922,12 +872,6 @@ public class GPXDatabase {
 		item.showArrows = showArrows;
 		item.showStartFinish = showStartFinish;
 		item.width = width;
-		item.gradientSpeedPalette = Algorithms.stringToGradientPalette(gradientSpeedPalette,
-				GradientScaleType.SPEED.getColorTypeName());
-		item.gradientAltitudePalette = Algorithms.stringToGradientPalette(gradientAltitudePalette,
-				GradientScaleType.ALTITUDE.getColorTypeName());
-		item.gradientSlopePalette = Algorithms.stringToGradientPalette(gradientSlopePalette,
-				GradientScaleType.SLOPE.getColorTypeName());
 
 		try {
 			item.gradientScaleType = GradientScaleType.getGradientTypeByName(gradientScaleType);
