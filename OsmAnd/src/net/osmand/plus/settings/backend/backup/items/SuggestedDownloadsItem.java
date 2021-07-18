@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.CustomOsmandPlugin;
+import net.osmand.plus.CustomOsmandPlugin.SuggestedDownloadItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -21,9 +21,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class SuggestedDownloadsItem extends SettingsItem {
 
-	private List<CustomOsmandPlugin.SuggestedDownloadItem> items;
+	private static final int APPROXIMATE_SUGGESTED_DOWNLOAD_SIZE_BYTES = 120;
+
+	private List<SuggestedDownloadItem> items;
 
 	public SuggestedDownloadsItem(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 		super(app, json);
@@ -53,7 +56,7 @@ public class SuggestedDownloadsItem extends SettingsItem {
 		return ctx.getString(R.string.suggested_maps);
 	}
 
-	public List<CustomOsmandPlugin.SuggestedDownloadItem> getItems() {
+	public List<SuggestedDownloadItem> getItems() {
 		return items;
 	}
 
@@ -64,6 +67,11 @@ public class SuggestedDownloadsItem extends SettingsItem {
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
+	}
+
+	@Override
+	public long getEstimatedSize() {
+		return APPROXIMATE_SUGGESTED_DOWNLOAD_SIZE_BYTES;
 	}
 
 	@Override
@@ -86,7 +94,7 @@ public class SuggestedDownloadsItem extends SettingsItem {
 						names.add(namesArray.getString(j));
 					}
 				}
-				CustomOsmandPlugin.SuggestedDownloadItem suggestedDownload = new CustomOsmandPlugin.SuggestedDownloadItem(scopeId, searchType, names, limit);
+				SuggestedDownloadItem suggestedDownload = new SuggestedDownloadItem(scopeId, searchType, names, limit);
 				items.add(suggestedDownload);
 			}
 		} catch (JSONException e) {
@@ -101,7 +109,7 @@ public class SuggestedDownloadsItem extends SettingsItem {
 		JSONArray jsonArray = new JSONArray();
 		if (!items.isEmpty()) {
 			try {
-				for (CustomOsmandPlugin.SuggestedDownloadItem downloadItem : items) {
+				for (SuggestedDownloadItem downloadItem : items) {
 					JSONObject jsonObject = new JSONObject();
 					jsonObject.put("scope-id", downloadItem.getScopeId());
 					if (downloadItem.getLimit() != -1) {

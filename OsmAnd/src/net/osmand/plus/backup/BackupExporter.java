@@ -14,32 +14,22 @@ import net.osmand.util.Algorithms;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
 
 public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
 	private final Map<String, RemoteFile> filesToDelete = new LinkedHashMap<>();
+	private ThreadPoolTaskExecutor<ItemWriterTask> executor;
 	private final NetworkExportProgressListener listener;
-
-	private final ExecutorService executor = new AsyncWriterTaskExecutor();
-	private final Map<Future<?>, AsyncWriterTask> tasks = new ConcurrentHashMap<>();
-	private final Map<Future<?>, Throwable> exceptions = new ConcurrentHashMap<>();
 
 	public interface NetworkExportProgressListener {
 		void itemExportStarted(@NonNull String type, @NonNull String fileName, int work);
@@ -70,10 +60,6 @@ public class BackupExporter extends Exporter {
 		filesToDelete.put(file.getName(), file);
 	}
 
-	private boolean isInterrupted() {
-		return !exceptions.isEmpty();
-	}
-
 	@Override
 	public void export() throws IOException {
 		exportItems();
@@ -94,31 +80,19 @@ public class BackupExporter extends Exporter {
 			throw new IOException(orderIdUpdateError.toString());
 		}
 
-		Collection<SettingsItem> items = getItems().values();
-		for (SettingsItem item : items) {
-			AsyncWriterTask task = new AsyncWriterTask(writer, item);
-			Future<?> future = executor.submit(task);
-			tasks.put(future, task);
+		List<ItemWriterTask> tasks = new ArrayList<>();
+		for (SettingsItem item : getItems().values()) {
+			tasks.add(new ItemWriterTask(writer, item));
 		}
-		executor.shutdown();
-		boolean finished = false;
-		while (!finished) {
-			try {
-				finished = executor.awaitTermination(100, TimeUnit.MILLISECONDS);
-				if (isCancelled() || isInterrupted()) {
-					for (Future<?> future : tasks.keySet()) {
-						future.cancel(false);
-					}
-				}
-			} catch (InterruptedException e) {
-				// ignore
-			}
-		}
-		if (!exceptions.isEmpty()) {
-			Throwable t = exceptions.values().iterator().next();
+		executor = new ThreadPoolTaskExecutor<>(null);
+		executor.setInterruptOnError(true);
+		executor.run(tasks);
+
+		log.finishOperation();
+		if (!executor.getExceptions().isEmpty()) {
+			Throwable t = executor.getExceptions().values().iterator().next();
 			throw new IOException(t.getMessage(), t);
 		}
-		log.finishOperation();
 	}
 
 	private void exportItems() throws IOException {
@@ -148,18 +122,26 @@ public class BackupExporter extends Exporter {
 		}
 	}
 
+	@Override
+	public void cancel() {
+		super.cancel();
+		if (executor != null) {
+			executor.cancel();
+		}
+	}
+
 	private OnUploadItemListener getOnUploadItemListener(Set<Object> itemsProgress, int[] dataProgress, Map<String, String> errors) {
 		return new OnUploadItemListener() {
 
 			@Override
-			public void onItemFileUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work) {
+			public void onItemUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work) {
 				if (listener != null) {
 					listener.itemExportStarted(item.getType().name(), fileName, work);
 				}
 			}
 
 			@Override
-			public void onItemFileUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork) {
+			public void onItemUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork) {
 				dataProgress[0] += deltaWork;
 				if (listener != null) {
 					listener.updateItemProgress(item.getType().name(), fileName, progress);
@@ -175,6 +157,18 @@ public class BackupExporter extends Exporter {
 				} else {
 					checkAndDeleteOldFile(item, fileName, errors);
 				}
+				dataProgress[0] += APPROXIMATE_FILE_SIZE_BYTES / 1024;
+				if (listener != null) {
+					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+				}
+			}
+
+			@Override
+			public void onItemUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error) {
+				String type = item.getType().name();
+				if (!Algorithms.isEmpty(error)) {
+					errors.put(type + "/" + fileName, error);
+				}
 				itemsProgress.add(item);
 				if (listener != null) {
 					listener.itemExportDone(item.getType().name(), fileName);
@@ -188,11 +182,16 @@ public class BackupExporter extends Exporter {
 		return new OnDeleteFilesListener() {
 
 			@Override
-			public void onFileDeleteProgress(@NonNull RemoteFile file) {
+			public void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
+
+			}
+
+			@Override
+			public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
 				itemsProgress.add(file);
 				if (listener != null) {
 					listener.itemExportDone(file.getType(), file.getName());
-					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+					listener.updateGeneralProgress(file.getZipSize(), dataProgress[0]);
 				}
 			}
 
@@ -209,29 +208,26 @@ public class BackupExporter extends Exporter {
 	}
 
 	private void checkAndDeleteOldFile(@NonNull SettingsItem item, @NonNull String fileName, Map<String, String> errors) {
-		PrepareBackupResult backup = backupHelper.getBackup();
-		if (backup != null) {
-			String type = item.getType().name();
-			try {
-				ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
-				if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
-					RemoteFile remoteFile = backup.getRemoteFile(type, fileName);
-					if (remoteFile != null) {
-						backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
-					}
+		String type = item.getType().name();
+		try {
+			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+			if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
+				RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
+				if (remoteFile != null) {
+					backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
 				}
-			} catch (UserNotRegisteredException e) {
-				errors.put(type + "/" + fileName, e.getMessage());
 			}
+		} catch (UserNotRegisteredException e) {
+			errors.put(type + "/" + fileName, e.getMessage());
 		}
 	}
 
-	private static class AsyncWriterTask implements Callable<Void> {
+	private static class ItemWriterTask extends ThreadPoolTaskExecutor.Task {
 
 		private final AbstractWriter writer;
 		private final SettingsItem item;
 
-		public AsyncWriterTask(@NonNull AbstractWriter writer, @NonNull SettingsItem item) {
+		public ItemWriterTask(@NonNull AbstractWriter writer, @NonNull SettingsItem item) {
 			this.writer = writer;
 			this.item = item;
 		}
@@ -241,29 +237,11 @@ public class BackupExporter extends Exporter {
 			writer.write(item);
 			return null;
 		}
-	}
 
-	private class AsyncWriterTaskExecutor extends ThreadPoolExecutor {
-
-		public AsyncWriterTaskExecutor() {
-			super(4, 4, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
-		}
-
-		protected void afterExecute(Runnable r, Throwable t) {
-			super.afterExecute(r, t);
-			if (r instanceof Future<?>) {
-				if (t == null && ((Future<?>) r).isDone()) {
-					try {
-						((Future<?>) r).get();
-					} catch (CancellationException | InterruptedException e) {
-						// ignore
-					} catch (ExecutionException ee) {
-						exceptions.put((Future<?>) r, ee.getCause());
-					}
-				} else {
-					exceptions.put((Future<?>) r, t);
-				}
-			}
+		@Override
+		public void cancel() {
+			super.cancel();
+			writer.cancel();
 		}
 	}
 }

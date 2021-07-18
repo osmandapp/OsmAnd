@@ -47,7 +47,7 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putBoolean(PROFILE_DEPENDENT, profileDependent);
 		if (appMode != null) {

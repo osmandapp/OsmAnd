@@ -105,6 +105,8 @@
 		android:layout_marginBottom="@dimen/content_padding"
 		android:visibility="gone" />
 
-	<include layout="@layout/divider_half_item_with_background" />
+	<include
+		android:id="@+id/bottom_divider"
+		layout="@layout/divider_half_item_with_background" />
 
 </LinearLayout>

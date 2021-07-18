@@ -28,6 +28,8 @@ import java.util.List;
 
 public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction> {
 
+	private static final int APPROXIMATE_QUICK_ACTION_SIZE_BYTES = 135;
+
 	private QuickActionRegistry actionRegistry;
 
 	public QuickActionsSettingsItem(@NonNull OsmandApplication app, @NonNull List<QuickAction> items) {
@@ -74,6 +76,11 @@ public class QuickActionsSettingsItem extends CollectionSettingsItem<QuickAction
 	@Override
 	public QuickAction renameItem(@NonNull QuickAction item) {
 		return actionRegistry.generateUniqueName(item, app);
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull QuickAction item) {
+		return APPROXIMATE_QUICK_ACTION_SIZE_BYTES;
 	}
 
 	@Override

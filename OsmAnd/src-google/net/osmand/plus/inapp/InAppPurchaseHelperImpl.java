@@ -415,6 +415,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 			// Do we have the live updates?
 			boolean subscribedToLiveUpdates = false;
+			boolean subscribedToOsmAndPro = false;
 			List<Purchase> subscriptionPurchases = new ArrayList<>();
 			for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 				Purchase purchase = getPurchase(s.getSku());
@@ -422,19 +423,29 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					if (purchase != null) {
 						subscriptionPurchases.add(purchase);
 					}
-					if (!subscribedToLiveUpdates
-							&& (purchases.isLiveUpdatesSubscription(s) || purchases.isOsmAndProSubscription(s))) {
+					if (!subscribedToLiveUpdates && purchases.isLiveUpdatesSubscription(s)) {
 						subscribedToLiveUpdates = true;
+					}
+					if (!subscribedToOsmAndPro && purchases.isOsmAndProSubscription(s)) {
+						subscribedToOsmAndPro = true;
 					}
 				}
 			}
 			if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
-				if (!isDepthContoursPurchased(ctx)) {
-					ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
+				if (!subscribedToOsmAndPro) {
+					onSubscriptionExpired();
 				}
 			} else if (subscribedToLiveUpdates) {
 				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+			}
+			if (!subscribedToOsmAndPro && ctx.getSettings().OSMAND_PRO_PURCHASED.get()) {
+				ctx.getSettings().OSMAND_PRO_PURCHASED.set(false);
+				if (!subscribedToLiveUpdates) {
+					onSubscriptionExpired();
+				}
+			} else if (subscribedToOsmAndPro) {
+				ctx.getSettings().OSMAND_PRO_PURCHASED.set(true);
 			}
 
 			lastValidationCheckTime = System.currentTimeMillis();
@@ -460,6 +471,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				purchaseInfoList.add(getPurchaseInfo(purchase));
 			}
 			onSkuDetailsResponseDone(purchaseInfoList);
+		}
+
+		private void onSubscriptionExpired() {
+			if (!isDepthContoursPurchased(ctx)) {
+				ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
+			}
 		}
 	};
 

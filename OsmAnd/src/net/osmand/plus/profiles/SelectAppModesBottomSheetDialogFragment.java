@@ -100,7 +100,7 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (appMode != null) {
 			outState.putString(APP_MODE_KEY, appMode.getStringKey());

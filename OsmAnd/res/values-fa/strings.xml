@@ -4074,7 +4074,7 @@
 \n
 \n• طراحی مسیر در حالت افقی: زبانه‌هایی برای جابه‌جایی بین نقطه‌ها و نمودارها اضافه شد.
 \n
-\n• روزآمدسازه‌های OsmAnd Live منتقل شد به Downloads ‏&gt; Updates
+\n • گزینهٔ روزآمدسازی‌های زندهٔ OsmAnd در «دانلودها &gt; روزآمدسازی‌ها» قرار گرفت
 \n
 \n• اکنون می‌توان ردها را بر اساس ارتفاع، سرعت یا شیب رنگ کرد.
 \n
@@ -4087,7 +4087,7 @@
     <string name="no_purchases">شما هیچ خریدی نکرده‌اید</string>
     <string name="new_device_account">دستگاه جدید / حساب جدید</string>
     <string name="contact_support_description">اگر هر گونه پرسشی دارید، لطفاً از طریق %1$s با ما تماس بگیرید.</string>
-    <string name="empty_purchases_description">اگر خریدهای شما اینجا نمایش داده نمی‌شود، روی «%1$s» بزنید یا با تیم پشتیبانی ما تماس بگیرید.</string>
+    <string name="empty_purchases_description">اگر خریدهای خود را اینجا نمی‌بینید، روی «%1$s» بزنید یا با تیم پشتیبانی ما تماس بگیرید.</string>
     <string name="contact_support">تماس با پشتیبانی</string>
     <string name="troubleshooting">عیب‌یابی</string>
     <string name="troubleshooting_description">اگر در خرید با مسئله‌ای مواجه هستید این پیوند را دنبال کنید.</string>
@@ -4140,7 +4140,6 @@
     <string name="osmand_cloud_login_descr">لطفاً نشانی ایمیلی که برای ثبت‌نام استفاده کردید را وارد نمایید. گذرواژهٔ یک‌بارمصرفی برایتان می‌فرستیم که در مرحلهٔ بعد به آن نیاز خواهید داشت.</string>
     <string name="verify_email_address">نشانی ایمیل را تأیید کنید</string>
     <string name="verify_email_address_descr">کد تأیید را به %1$s فرستادیم. لطفاً آن را در خانهٔ زیر بنویسید.</string>
-    <string name="enter_verification_code">کد ۴رقمی را وارد کنید</string>
     <string name="cloud_email_not_registered">این ایمیل برای ابر OsmAnd ثبت نشده است</string>
     <string name="cloud_email_already_registered">با این ایمیل حساب کاربری وجود دارد.</string>
     <string name="resend_verification_code">بازارسال کد</string>
@@ -4198,4 +4197,25 @@
     <string name="backup_error_token_is_not_valid_or_expired">توکن نامعتبر است یا منقضی شده است</string>
     <string name="backup_error_user_is_not_registered">کاربری با این ایمیل ثبت‌نام نکرده است</string>
     <string name="backup_error_no_valid_subscription">اشتراک معتبری وجود ندارد</string>
+    <string name="release_4_0">• پشتیبان‌گیری ابری افزوده شد
+\n
+\n • حالت شب برای سبک رندرینگ Topo افزوده شد
+\n
+\n • گزینه‌ای برای دانلود خطوط میزان با یکای فوت افزوده شد
+\n
+\n • ردها را می‌توان بر اساس ارتفاع، سرعت یا شیب رنگ کرد
+\n
+\n • کادر «ضبط سفر» روزآمد شد
+\n
+\n • گزینهٔ «مسافت با لمس» از قسمت خط‌کش شعاعی برداشته شد و در یک گزینهٔ مجزا قرار گرفت
+\n
+\n • طراحی مسیر: تغییر گزینه‌های ناوبری، دسترسی به جستجو و پیکربندی نقشه، بدون ترک طراحی مسیر، ممکن شد
+\n
+\n • صفحهٔ «خرید» نو شد و حالا ریز اطلاعات خرید را نشان می‌دهد
+\n
+\n • گزینه‌ای برای تغییردادن ظاهر خط مسیر افزوده شد
+\n
+\n • گزینهٔ روزآمدسازی‌های زندهٔ OsmAnd در «دانلودها &gt; روزآمدسازی‌ها» قرار گرفت
+\n
+\n</string>
 </resources>

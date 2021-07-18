@@ -22,7 +22,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DownloadsItem extends SettingsItem {
+
+	private static final int APPROXIMATE_DOWNLOAD_ITEM_SIZE_BYTES = 2048;
 
 	private List<WorldRegion> items;
 
@@ -65,6 +68,11 @@ public class DownloadsItem extends SettingsItem {
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
+	}
+
+	@Override
+	public long getEstimatedSize() {
+		return APPROXIMATE_DOWNLOAD_ITEM_SIZE_BYTES;
 	}
 
 	@Override

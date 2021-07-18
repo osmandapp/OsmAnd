@@ -35,13 +35,12 @@ import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmD
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDeleteFilesListener,
@@ -149,17 +148,21 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		ImageView icon = container.findViewById(android.R.id.icon);
 		icon.setImageDrawable(getIcon(R.drawable.ic_action_logout, R.color.color_osm_edit_delete));
 
-		container.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
-					backupHelper.logout();
-					activity.onBackPressed();
-				}
+		container.setOnClickListener(v -> {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				LogoutBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
 			}
 		});
 		setupSelectableBackground(container);
+	}
+
+	protected void logout() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			backupHelper.logout();
+			activity.onBackPressed();
+		}
 	}
 
 	private void setupVersionHistory(View view) {
@@ -211,9 +214,13 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		container.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentManager fragmentManager = getFragmentManager();
-				if (fragmentManager != null) {
-					DeleteAllDataBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
+				if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles())) {
+					FragmentManager fragmentManager = getFragmentManager();
+					if (fragmentManager != null) {
+						DeleteAllDataBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
+					}
+				} else {
+					app.showShortToastMessage(R.string.backup_data_removed);
 				}
 			}
 		});
@@ -234,9 +241,13 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		container.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentManager fragmentManager = getFragmentManager();
-				if (fragmentManager != null) {
-					RemoveOldVersionsBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
+				if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles(RemoteFilesType.OLD))) {
+					FragmentManager fragmentManager = getFragmentManager();
+					if (fragmentManager != null) {
+						RemoveOldVersionsBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
+					}
+				} else {
+					app.showShortToastMessage(R.string.backup_version_history_removed);
 				}
 			}
 		});
@@ -269,7 +280,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	private void deleteAllFiles() {
 		try {
 			updateProgressVisibility(true);
-			backupHelper.deleteAllFiles(Arrays.asList(ExportSettingsType.values()));
+			backupHelper.deleteAllFiles(null);
 		} catch (UserNotRegisteredException e) {
 			updateProgressVisibility(false);
 			log.error(e);
@@ -279,7 +290,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	protected void deleteOldFiles() {
 		try {
 			updateProgressVisibility(true);
-			backupHelper.deleteOldFiles(Arrays.asList(ExportSettingsType.values()));
+			backupHelper.deleteOldFiles(null);
 		} catch (UserNotRegisteredException e) {
 			updateProgressVisibility(false);
 			log.error(e);
@@ -291,7 +302,15 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	}
 
 	@Override
-	public void onFileDeleteProgress(@NonNull RemoteFile file) {
+	public void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			DeleteProgressBottomSheet.showInstance(activity.getSupportFragmentManager(), files.size());
+		}
+	}
+
+	@Override
+	public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
 
 	}
 

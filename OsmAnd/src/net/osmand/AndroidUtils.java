@@ -82,6 +82,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import static android.content.Context.POWER_SERVICE;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -242,23 +243,21 @@ public class AndroidUtils {
 		return DateFormat.getTimeFormat(ctx).format(new Date(time));
 	}
 
-
 	public static String formatSize(Context ctx, long sizeBytes) {
-		int sizeKb = (int) ((sizeBytes + 512) >> 10);
-		if (sizeKb > 0) {
-
+		if (sizeBytes > 0) {
+			int sizeKb = (int) ((sizeBytes + 512) >> 10);
 			String size = "";
 			String numSuffix = "MB";
 			if (sizeKb > 1 << 20) {
-				size = formatGb.format(new Object[]{(float) sizeKb / (1 << 20)});
+				size = formatGb.format(new Object[] {(float) sizeKb / (1 << 20)});
 				numSuffix = "GB";
 			} else if (sizeBytes > (100 * (1 << 10))) {
-				size = formatMb.format(new Object[]{(float) sizeBytes / (1 << 20)});
+				size = formatMb.format(new Object[] {(float) sizeBytes / (1 << 20)});
 			} else {
-				size = formatKb.format(new Object[]{(float) sizeBytes / (1 << 10)});
+				size = formatKb.format(new Object[] {(float) sizeBytes / (1 << 10)});
 				numSuffix = "kB";
 			}
-			if(ctx == null) {
+			if (ctx == null) {
 				return size + " " + numSuffix;
 			}
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, numSuffix);
@@ -274,11 +273,11 @@ public class AndroidUtils {
 	public static View findParentViewById(View view, int id) {
 		ViewParent viewParent = view.getParent();
 
-		while (viewParent != null && viewParent instanceof View) {
+		while (viewParent instanceof View) {
 			View parentView = (View) viewParent;
-			if (parentView.getId() == id)
+			if (parentView.getId() == id) {
 				return parentView;
-
+			}
 			viewParent = parentView.getParent();
 		}
 
@@ -998,6 +997,19 @@ public class AndroidUtils {
 		return builder;
 	}
 
+	@NonNull
+	public static String createDbInsertQuery(@NonNull String tableName, @NonNull Set<String> rowKeys) {
+		String keys = Algorithms.encodeCollection(rowKeys, ", ");
+		StringBuilder values = new StringBuilder();
+		for (int i = 0; i < rowKeys.size(); i++) {
+			values.append("?");
+			if (i + 1 != rowKeys.size()) {
+				values.append(", ");
+			}
+		}
+		return "INSERT INTO " + tableName + " (" + keys + ") VALUES (" + values.toString() + ")";
+	}
+
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {
 		String value = getStringByProperty(ctx, "routing_attr_" + propertyName + "_name");
 		return value != null ? value : defValue;
@@ -1023,6 +1035,7 @@ public class AndroidUtils {
 		return value != null ? value : propertyName;
 	}
 
+	@NonNull
 	public static String getRenderingStringPropertyValue(Context ctx, String propertyValue) {
 		if (propertyValue == null) {
 			return "";
@@ -1032,6 +1045,7 @@ public class AndroidUtils {
 		return value != null ? value : propertyValue;
 	}
 
+	@NonNull
 	public static String getStringRouteInfoPropertyValue(Context ctx, String propertyValue) {
 		if (propertyValue == null) {
 			return "";
@@ -1047,6 +1061,7 @@ public class AndroidUtils {
 		return value != null ? value : defValue;
 	}
 
+	@Nullable
 	private static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
 		try {
 			Field field = R.string.class.getField(property);
@@ -1057,6 +1072,7 @@ public class AndroidUtils {
 		return null;
 	}
 
+	@Nullable
 	private static String getStringForField(@NonNull Context ctx, @Nullable Field field) throws IllegalAccessException {
 		if (field != null) {
 			Integer in = (Integer) field.get(null);

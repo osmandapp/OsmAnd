@@ -9,7 +9,6 @@ import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.OperationLog;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupCommand;
-import net.osmand.plus.backup.BackupDbHelper;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
@@ -24,18 +23,20 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static net.osmand.plus.backup.BackupHelper.DELETE_FILE_URL;
 import static net.osmand.plus.backup.BackupHelper.DELETE_FILE_VERSION_URL;
-import static net.osmand.plus.backup.BackupHelper.THREAD_POOL_SIZE;
 
 public abstract class BaseDeleteFilesCommand extends BackupCommand {
 
 	private final boolean byVersion;
 	private OnDeleteFilesListener listener;
 	private List<DeleteRemoteFileTask> tasks = new ArrayList<>();
+	private final Set<Object> itemsProgress = new HashSet<>();
 
 	public BaseDeleteFilesCommand(@NonNull BackupHelper helper, boolean byVersion) {
 		super(helper);
@@ -70,7 +71,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 			tasks.add(new DeleteRemoteFileTask(getApp(), r, remoteFile));
 		}
 		ThreadPoolTaskExecutor<DeleteRemoteFileTask> executor =
-				new ThreadPoolTaskExecutor<>(THREAD_POOL_SIZE, new OnThreadPoolTaskExecutorListener<DeleteRemoteFileTask>() {
+				new ThreadPoolTaskExecutor<>(new OnThreadPoolTaskExecutorListener<DeleteRemoteFileTask>() {
 
 					@Override
 					public void onTaskStarted(@NonNull DeleteRemoteFileTask task) {
@@ -102,7 +103,8 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 			Object obj = objects[0];
 			if (obj instanceof DeleteRemoteFileTask) {
 				RemoteFile remoteFile = ((DeleteRemoteFileTask) obj).remoteFile;
-				listener.onFileDeleteProgress(remoteFile);
+				itemsProgress.add(remoteFile);
+				listener.onFileDeleteProgress(remoteFile, itemsProgress.size());
 			}
 		}
 	}
@@ -165,7 +167,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 		}
 
 		@Override
-		public Void call() throws Exception {
+		public Void call() {
 			OperationLog operationLog = new OperationLog("deleteFile", BackupHelper.DEBUG);
 			AndroidNetworkUtils.sendRequest(app, request, (result, error) ->
 					response = new RequestResponse(request, result, error));

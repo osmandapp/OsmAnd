@@ -8,15 +8,15 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.backup.BackupInfo;
+import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
+import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.util.Algorithms;
@@ -38,23 +38,25 @@ public class HeaderStatusViewHolder extends RecyclerView.ViewHolder {
 		progressBar = itemView.findViewById(R.id.progress_bar);
 	}
 
-	public void bindView(@NonNull BackupStatusAdapter adapter, @Nullable BackupInfo info,
-						 @NonNull BackupStatus status, boolean nightMode) {
-		if (info != null) {
-			progressBar.setMax(info.filteredFilesToUpload.size() + info.filteredFilesToDelete.size());
-		}
-
+	public void bindView(@NonNull BackupStatusAdapter adapter, @NonNull BackupStatus status, boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
-		if (settingsHelper.getExportTask() != null) {
+
+		ExportBackupTask exportTask = settingsHelper.getExportTask();
+		if (exportTask != null) {
 			title.setText(R.string.uploading);
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_upload));
 
-			int progress = settingsHelper.getExportTask().getGeneralProgress();
-			String uploading = app.getString(R.string.local_openstreetmap_uploading);
-			title.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, uploading, String.valueOf(progress)));
+			int progress = exportTask.getGeneralProgress();
+			int maxProgress = (int) exportTask.getMaxProgress();
+			int percentage = maxProgress != 0 ? BasicProgressAsyncTask.normalizeProgress(progress * 100 / maxProgress) : 0;
 
+			String uploading = app.getString(R.string.local_openstreetmap_uploading);
+			title.setText(app.getString(R.string.ltr_or_rtl_combine_via_space, uploading, percentage + "%"));
+
+			progressBar.setMax(maxProgress);
 			progressBar.setProgress(progress);
+
 			AndroidUiHelper.updateVisibility(description, false);
 			AndroidUiHelper.updateVisibility(progressBar, true);
 		} else {

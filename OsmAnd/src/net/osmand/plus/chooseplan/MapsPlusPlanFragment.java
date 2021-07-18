@@ -9,7 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.button.OneTimePaymentButton;
 import net.osmand.plus.chooseplan.button.PriceButton;
-import net.osmand.plus.chooseplan.button.PriceButtonsUtils;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -70,8 +70,8 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 
 	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
 		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
-		List<PriceButton<?>> priceButtons = new ArrayList<>(PriceButtonsUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions));
-		OneTimePaymentButton oneTimePaymentButton = PriceButtonsUtils.getOneTimePaymentButton(app);
+		List<PriceButton<?>> priceButtons = new ArrayList<>(PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions));
+		OneTimePaymentButton oneTimePaymentButton = PurchasingUtils.getOneTimePaymentButton(app);
 		if (oneTimePaymentButton != null) {
 			priceButtons.add(oneTimePaymentButton);
 		}

@@ -13,11 +13,13 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
+import net.osmand.plus.routing.RouteColoringType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.track.GradientScaleType;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
@@ -46,10 +48,10 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	protected boolean nightMode;
 
 	protected PreviewRouteLineInfo previewRouteLineInfo;
-	protected GradientScaleType gradientScaleType;
+	protected RouteColoringType routeColoringType = RouteColoringType.DEFAULT;
+	protected String routeInfoAttribute;
 
 	protected RenderingLineAttributes attrs;
-	protected boolean useAttrRouteColor = true;
 	protected int routeLineColor;
 	protected Integer directionArrowsColor;
 	protected int customTurnArrowColor = 0;
@@ -75,8 +77,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		attrs.defaultWidth = (int) (12 * density);
 		attrs.defaultWidth3 = (int) (7 * density);
 		attrs.defaultColor = view.getResources().getColor(R.color.nav_track);
-		attrs.shadowPaint.setColor(0x80000000);
-		attrs.shadowPaint.setStrokeCap(Paint.Cap.ROUND);
 		attrs.paint3.setStrokeCap(Paint.Cap.BUTT);
 		attrs.paint3.setColor(Color.WHITE);
 		attrs.paint2.setStrokeCap(Paint.Cap.BUTT);
@@ -94,39 +94,44 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	}
 
 	protected void updateRouteColors(boolean night) {
-		Integer color;
-		if (previewRouteLineInfo != null) {
-			color = previewRouteLineInfo.getColor(night);
+		if (routeColoringType.isCustomColor()) {
+			updateCustomColor(night);
 		} else {
-			CommonPreference<Integer> colorPreference = night ?
-					view.getSettings().ROUTE_LINE_COLOR_NIGHT :
-					view.getSettings().ROUTE_LINE_COLOR_DAY;
-			int storedValue = colorPreference.getModeValue(getAppMode());
-			color = storedValue != 0 ? storedValue : null;
-		}
-		if (color == null) {
-			useAttrRouteColor = gradientScaleType == null;
 			directionArrowsColor = null;
 			updateAttrs(new DrawSettings(night), view.getCurrentRotatedTileBox());
-			color = attrs.paint.getColor();
-		} else if (routeLineColor != color) {
-			useAttrRouteColor = false;
-			directionArrowsColor = UiUtilities.getContrastColor(view.getContext(), color, false);
-			updateIsPaint_1(false);
+			routeLineColor = attrs.paint.getColor();
 		}
-		routeLineColor = color;
 		updateTurnArrowColor();
 	}
 
-	protected boolean updateRouteGradient() {
-		GradientScaleType prev = gradientScaleType;
+	private void updateCustomColor(boolean night) {
+		int customColor;
 		if (previewRouteLineInfo != null) {
-			gradientScaleType = previewRouteLineInfo.getGradientScaleType();
+			customColor = previewRouteLineInfo.getCustomColor(night);
+		} else {
+			CommonPreference<Integer> colorPreference = night
+					? view.getSettings().CUSTOM_ROUTE_COLOR_NIGHT
+					: view.getSettings().CUSTOM_ROUTE_COLOR_DAY;
+			customColor = colorPreference.getModeValue(getAppMode());
+		}
+
+		if (routeLineColor != customColor) {
+			directionArrowsColor = UiUtilities.getContrastColor(view.getContext(), customColor, false);
+			updateIsPaint_1(false);
+		}
+		routeLineColor = customColor;
+	}
+
+	protected void updateRouteColoringType() {
+		if (previewRouteLineInfo != null) {
+			routeColoringType = previewRouteLineInfo.getRouteColoringType();
+			routeInfoAttribute = previewRouteLineInfo.getRouteInfoAttribute();
 		} else {
 			ApplicationMode mode = view.getApplication().getRoutingHelper().getAppMode();
-			gradientScaleType = view.getSettings().ROUTE_LINE_GRADIENT.getModeValue(mode);
+			OsmandSettings settings = view.getSettings();
+			routeColoringType = settings.ROUTE_COLORING_TYPE.getModeValue(mode);
+			routeInfoAttribute = settings.ROUTE_INFO_ATTRIBUTE.getModeValue(mode);
 		}
-		return prev != gradientScaleType;
 	}
 
 	protected void updateIsPaint_1(boolean updatePaints) {
@@ -134,7 +139,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 			attrsIsPaint_1 = attrs.isPaint_1;
 		}
 		if (attrsIsPaint_1 != null) {
-			attrs.isPaint_1 = attrsIsPaint_1 && useAttrRouteColor;
+			attrs.isPaint_1 = attrsIsPaint_1 && routeColoringType.isDefault();
 		}
 	}
 
@@ -232,7 +237,15 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		this.previewRouteLineInfo = previewInfo;
 	}
 
-	private ApplicationMode getAppMode() {
+	@Nullable
+	protected MapActivity getMapActivity() {
+		if (view.getContext() instanceof MapActivity) {
+			return (MapActivity) view.getContext();
+		}
+		return null;
+	}
+
+	protected ApplicationMode getAppMode() {
 		return view.getApplication().getRoutingHelper().getAppMode();
 	}
 

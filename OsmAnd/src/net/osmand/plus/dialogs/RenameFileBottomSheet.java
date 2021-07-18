@@ -116,7 +116,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putString(SOURCE_FILE_NAME_KEY, file.getAbsolutePath());
 		outState.putString(SELECTED_FILE_NAME_KEY, selectedFileName);
 		super.onSaveInstanceState(outState);

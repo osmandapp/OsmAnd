@@ -48,7 +48,8 @@ public class IndexConstants {
 
 	public static final String RENDERER_INDEX_EXT = ".render.xml"; //$NON-NLS-1$
 
-	public static final String GPX_FILE_EXT = ".gpx"; //$NON-NLS-1$
+	public static final String GPX_FILE_EXT = ".gpx";
+	public static final String GPX_GZ_FILE_EXT = ".gpx.gz";
 
 	public static final String WPT_CHART_FILE_EXT = ".wpt.chart";
 	public static final String SQLITE_CHART_FILE_EXT = ".3d.chart";

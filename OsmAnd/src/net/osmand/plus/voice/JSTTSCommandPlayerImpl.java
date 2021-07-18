@@ -13,6 +13,7 @@ import org.mozilla.javascript.ScriptableObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 
 public class JSTTSCommandPlayerImpl extends TTSCommandPlayerImpl {
     private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(JSTTSCommandPlayerImpl.class);
@@ -56,11 +57,7 @@ public class JSTTSCommandPlayerImpl extends TTSCommandPlayerImpl {
         if (!voiceDir.getName().contains("tts")) {
             return false;
         }
-        for (File f : voiceDir.listFiles()) {
-            if (f.getName().endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS)) {
-                return true;
-            }
-        }
-        return false;
+        String langName = voiceDir.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
+        return new File(voiceDir, langName + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS).exists();
     }
 }

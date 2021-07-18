@@ -5,25 +5,34 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.NonNull;
-
+import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 
 public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
+
+	private static final Log log = PlatformUtil.getLog(OpenstreetmapsDbHelper.class);
 
 	private static final int DATABASE_VERSION = 6;
 	public static final String OPENSTREETMAP_DB_NAME = "openstreetmap"; //$NON-NLS-1$
@@ -136,20 +145,20 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			}
 			db.execSQL("DELETE FROM " + OPENSTREETMAP_TABLE_NAME +
 					" WHERE " + OPENSTREETMAP_COL_ID + " = ?", new Object[]{p.getId()});
-			db.execSQL("INSERT INTO " + OPENSTREETMAP_TABLE_NAME +
-							" (" + OPENSTREETMAP_COL_ID + ", " +
-							OPENSTREETMAP_COL_LAT + ", " +
-							OPENSTREETMAP_COL_LON + ", " +
-							OPENSTREETMAP_COL_TAGS + ", " +
-							OPENSTREETMAP_COL_ACTION + ", " +
-							OPENSTREETMAP_COL_COMMENT + ", " +
-							OPENSTREETMAP_COL_CHANGED_TAGS + ", " +
-							OPENSTREETMAP_COL_ENTITY_TYPE + ")" +
-							" VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-					new Object[]{p.getId(), p.getLatitude(), p.getLongitude(), tags.toString(),
-							OsmPoint.stringAction.get(p.getAction()), p.getComment(),
-							chTags == null ? null : changedTags.toString(), Entity.EntityType.valueOf(entity)});
-			
+
+			Map<String, Object> rowsMap = new HashMap<>();
+			rowsMap.put(OPENSTREETMAP_COL_ID, p.getId());
+			rowsMap.put(OPENSTREETMAP_COL_LAT, p.getLatitude());
+			rowsMap.put(OPENSTREETMAP_COL_LON, p.getLongitude());
+			rowsMap.put(OPENSTREETMAP_COL_TAGS, tags.toString());
+			rowsMap.put(OPENSTREETMAP_COL_ACTION, OsmPoint.stringAction.get(p.getAction()));
+			rowsMap.put(OPENSTREETMAP_COL_COMMENT, p.getComment());
+			rowsMap.put(OPENSTREETMAP_COL_CHANGED_TAGS, chTags == null ? null : changedTags.toString());
+			rowsMap.put(OPENSTREETMAP_COL_ENTITY_TYPE, Entity.EntityType.valueOf(entity));
+
+			db.execSQL(AndroidUtils.createDbInsertQuery(OPENSTREETMAP_TABLE_NAME, rowsMap.keySet()),
+					rowsMap.values().toArray());
+
 			db.close();
 			checkOpenstreetmapPoints();
 			updateLastModifiedTime();
@@ -171,7 +180,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		return false;
 	}
 	
-	private List<OpenstreetmapPoint> checkOpenstreetmapPoints(){
+	private List<OpenstreetmapPoint> checkOpenstreetmapPoints() {
 		SQLiteDatabase db = getReadableDatabase();
 		List<OpenstreetmapPoint> points = new ArrayList<OpenstreetmapPoint>();
 		if (db != null) {
@@ -188,13 +197,13 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			if (query.moveToFirst()) {
 				do {
 					OpenstreetmapPoint p = new OpenstreetmapPoint();
-					String entityType = query.getString(7);
+					Entity.EntityType entityType = parseEntityType(query.getString(7));
 					Entity entity = null;
-					if (entityType != null && Entity.EntityType.valueOf(entityType) == Entity.EntityType.NODE) {
+					if (entityType == Entity.EntityType.NODE) {
 						entity = new Node(query.getDouble(1),
 								query.getDouble(2),
 								query.getLong(0));
-					} else if (entityType != null && Entity.EntityType.valueOf(entityType) == Entity.EntityType.WAY) {
+					} else if (entityType == Entity.EntityType.WAY) {
 						entity = new Way(query.getLong(0), null,
 								query.getDouble(1),
 								query.getDouble(2));
@@ -223,6 +232,19 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		return points;
 	}
 
+	@Nullable
+	private Entity.EntityType parseEntityType(@Nullable String entityType) {
+		if (entityType == null) {
+			return null;
+		}
+		try {
+			return Entity.EntityType.valueOf(entityType);
+		} catch (IllegalArgumentException e) {
+			log.error(e);
+			return null;
+		}
+	}
+
 	public long getMinID() {
 		SQLiteDatabase db = getReadableDatabase();
 		long minID = 0;
@@ -235,5 +257,4 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		}
 		return minID;
 	}
-
 }

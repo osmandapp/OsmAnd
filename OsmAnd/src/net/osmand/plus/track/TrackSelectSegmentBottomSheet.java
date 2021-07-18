@@ -107,8 +107,7 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setNestedScrollingEnabled(false);
 
-		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
-		TrackSelectSegmentAdapter adapterSegments = new TrackSelectSegmentAdapter(context, segments);
+		TrackSelectSegmentAdapter adapterSegments = new TrackSelectSegmentAdapter(context, gpxFile);
 		adapterSegments.setAdapterListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {

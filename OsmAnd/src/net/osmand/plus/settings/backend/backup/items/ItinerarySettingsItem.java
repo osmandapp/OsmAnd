@@ -33,6 +33,8 @@ import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
 public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGroup> {
 
+	private static final int APPROXIMATE_ITINERARY_SIZE_BYTES = 285;
+
 	private MapMarkersHelper markersHelper;
 	private ItineraryDataHelper dataHelper;
 
@@ -125,6 +127,11 @@ public class ItinerarySettingsItem extends CollectionSettingsItem<MapMarkersGrou
 	@Override
 	public MapMarkersGroup renameItem(@NonNull MapMarkersGroup item) {
 		return item;
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull MapMarkersGroup item) {
+		return APPROXIMATE_ITINERARY_SIZE_BYTES;
 	}
 
 	@Nullable

@@ -78,12 +78,11 @@ public class ExportFileTask extends AsyncTask<Void, Integer, Boolean> {
 	}
 
 	private ExportProgressListener getProgressListener() {
-		return new ExportProgressListener() {
-			@Override
-			public void updateProgress(int value) {
-				exporter.setCancelled(isCancelled());
-				publishProgress(value);
+		return value -> {
+			if (isCancelled()) {
+				exporter.cancel();
 			}
+			publishProgress(value);
 		};
 	}
 }

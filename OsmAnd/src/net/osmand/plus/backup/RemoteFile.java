@@ -2,6 +2,8 @@ package net.osmand.plus.backup;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.IndexConstants;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
@@ -81,6 +83,12 @@ public class RemoteFile {
 
 	public boolean isInfoFile() {
 		return name != null && name.endsWith(BackupHelper.INFO_EXT);
+	}
+
+	public boolean isRecordedVoiceFile() {
+		return name != null
+				&& name.startsWith(FileSettingsItem.FileSubtype.VOICE.getSubtypeFolder())
+				&& !name.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_JS);
 	}
 
 	public String getType() {

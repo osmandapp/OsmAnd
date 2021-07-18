@@ -2460,7 +2460,6 @@
     <string name="osmand_extended_description_part4">Скијање
 \n OsmAnd додатак за скијашке мапе Вам омогућава да видите стазе за скијање уз њихову тежину и додатне информације, као што су положај ски лифтова и осталих објеката.</string>
     <string name="osmand_extended_description_part8">ОсмАнд је софтвер отвореног кода на коме се активно ради. Свако може да допринесе апликација тако што ће да пријављује грешке, побољшава преводе или да програмира нове функционалности. Додатно, пројекат се ослања на новчане прилоге да би се финансирао развој и тестирање нових функција.
-\n
 \n Приближна покривеност карте и квалитет:
 \n • Западна Европа: ****
 \n • Источна Европа: ***
@@ -4110,12 +4109,11 @@
     <string name="backup_into_file">Прављење резервне копије у датотеци</string>
     <string name="restore_from_file">Врати из датотеке</string>
     <string name="osmand_cloud_help_descr">Потребна помоћ\? Молимо контактирајте нас на %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Унесите своју адресу е-поште, сви ваши подаци ће бити повезани са њом.
-\nНа ову адресу е-поште послаћемо вам верификациони код.</string>
+    <string name="osmand_cloud_create_account_descr">Унесите своју адресу е-поште, тамо ће вам бити послан верификациони код,
+\nи сви ваши подаци ће бити повезани са њом.</string>
     <string name="osmand_cloud_login_descr">Унесите адресу е-поште коју сте користили за регистрацију. Послаћемо вам једнократну лозинку потребну за следећи корак.</string>
-    <string name="verify_email_address">Верификујте емаил адресу</string>
-    <string name="verify_email_address_descr">Послали смо верификациони код на %1$s, унесите га у поље испод.</string>
-    <string name="enter_verification_code">Унесите четвороцифрени код</string>
+    <string name="verify_email_address">Потврдите адресу е-поште</string>
+    <string name="verify_email_address_descr">Верификациони код је послат на %1$s, унесите га у поље испод.</string>
     <string name="cloud_email_not_registered">Ова адреса е-поште није регистрована за ОсмАнд облак</string>
     <string name="cloud_email_already_registered">Налог са овом е-поштом је већ регистрован.</string>
     <string name="resend_verification_code">Поново пошаљи код</string>
@@ -4162,8 +4160,8 @@
     <string name="restore_from_osmand_cloud">Врати са ОсмАнд клоуда</string>
     <string name="choose_what_to_restore">Изаберите шта желите да вратите.</string>
     <string name="restore_selected_data">Врати изабране податке</string>
-    <string name="receiving_data_from_server">Пријем података са сервера</string>
-    <string name="restore_complete">Враћање је готово</string>
+    <string name="receiving_data_from_server">Пријем података са сервера…</string>
+    <string name="restore_complete">Враћено</string>
     <string name="grey_color_slope">Сива боја се користи када је нагиб недефинисан.</string>
     <string name="backup_version_history">Историја верзија</string>
     <string name="backup_storage_taken">Заузето складиште</string>
@@ -4201,7 +4199,7 @@
     <string name="osmand_pro_tagline">Добавите максималне функције</string>
     <string name="shared_string_learn_more">Сазнајте више</string>
     <string name="cancel_anytime_in_huawei_appgallery">Откажите било када у Хуавеи АпГалерији</string>
-    <string name="cancel_anytime_in_gplay">Откажите било када на Гугл Плају.</string>
+    <string name="cancel_anytime_in_gplay">Откажите било када на Гугл Плеју.</string>
     <string name="shared_string_not_included">Не укључује</string>
     <string name="shared_string_includes">Укључује</string>
     <string name="complete_purchase">Комплетна куповина</string>
@@ -4211,4 +4209,14 @@
     <string name="backup_delete_types">Избриши податке о онемогућеним типовима</string>
     <string name="shared_string_discussion">Дискусија</string>
     <string name="shared_string_view_all">Погледати све</string>
+    <string name="backup_error_user_is_already_registered">Ова адреса е-поште се користи на другом налогу</string>
+    <string name="backup_error_subscription_was_expired">Истекла претплата</string>
+    <string name="backup_error_subscription_was_used">Претплату или промоцију користи други налог %1$s</string>
+    <string name="backup_error_size_is_exceeded">Премашена је максимална величина ОсмАнд клоуда %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">Датотеку треба послати у .gzip формату</string>
+    <string name="backup_error_file_not_available">Датотека није доступна</string>
+    <string name="backup_error_token_is_not_valid">Нешто није у реду са наведеним ИД-ом уређаја или токеном</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Неважећи или истекао токен</string>
+    <string name="backup_error_user_is_not_registered">Ниједан корисник није регистрован са том адресом е-поште</string>
+    <string name="backup_error_no_valid_subscription">Нема важеће претплате</string>
 </resources>

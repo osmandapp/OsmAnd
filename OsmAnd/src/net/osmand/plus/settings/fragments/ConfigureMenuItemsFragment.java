@@ -27,8 +27,10 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.DrawerMenuItemsSettings;
 import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -220,6 +222,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					contextMenuAdapter = menu.getActionsContextMenuAdapter(true);
 					break;
 			}
+			PurchasingUtils.removePromoItems(contextMenuAdapter);
 		}
 	}
 
@@ -277,7 +280,9 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 				}
 				FragmentManager fm = getFragmentManager();
 				final ContextMenuItemsSettings prefToSave;
-				if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
+				if (screenType == ScreenType.DRAWER) {
+					prefToSave = new DrawerMenuItemsSettings(hiddenMenuItems, ids);
+				} else if (screenType == ScreenType.CONTEXT_MENU_ACTIONS) {
 					prefToSave = new MainContextMenuItemsSettings(mainActionItems, hiddenMenuItems, ids);
 				} else {
 					prefToSave = new ContextMenuItemsSettings(hiddenMenuItems, ids);

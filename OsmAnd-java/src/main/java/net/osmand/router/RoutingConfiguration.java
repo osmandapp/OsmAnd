@@ -78,11 +78,26 @@ public class RoutingConfiguration {
 		public final static String TAG = "osmand_dp";
 		public final static String DELETE_TYPE = "osmand_delete_point";
 		public final static String CREATE_TYPE = "osmand_add_point";
+		public final static String ANGLE_TAG = "apply_direction_angle";
+		public final static double MAX_ANGLE_DIFF = 45;//in degrees
 
 		public DirectionPoint(Node n) {
 			super(n, n.getId());
 		}
-		
+
+		// gets angle or Double.NaN if empty
+		public double getAngle() {
+			String angle = getTag(ANGLE_TAG);
+			if (angle != null) {
+				try {
+					return Double.parseDouble(angle);
+				} catch (NumberFormatException e) {
+					throw new RuntimeException(e);
+				}
+			}
+			return Double.NaN;
+		}
+
 	}
 
 	public NativeLibrary.NativeDirectionPoint[] getNativeDirectionPoints() {

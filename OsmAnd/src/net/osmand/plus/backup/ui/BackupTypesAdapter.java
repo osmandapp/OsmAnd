@@ -223,10 +223,6 @@ public class BackupTypesAdapter extends OsmandBaseExpandableListAdapter {
 					}
 				}
 			}
-			if (itemsSize > 0 && type == ExportSettingsType.ACTIVE_MARKERS) {
-				String itemsDescr = app.getString(R.string.shared_string_items);
-				return app.getString(R.string.ltr_or_rtl_combine_via_colon, itemsDescr, String.valueOf(itemsSize));
-			}
 			String description;
 			if (selectedTypes == items.size()) {
 				description = app.getString(R.string.shared_string_all);

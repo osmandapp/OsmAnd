@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shared_string_suggested">Siūloma</string>
+    <string name="back_to_osmand">Grįžti į OsmAnd</string>
+    <string name="duration_ago">%1$s prieš</string>
+    <string name="last_response_duration">Paskutinis atsakymas: %1$s prieš</string>
+    <string name="last_update_from_telegram_duration">Paskutinis atnaujinimas iš Telegram: %1$s prieš</string>
+    <string name="last_response_date">Paskutinis atsakymas: %1$s</string>
+    <string name="last_update_from_telegram_date">Paskutinis atnaujinimas iš Telegram: %1$s</string>
+    <string name="shared_string_error_short">KLAIDA</string>
+    <string name="shared_string_export">Eksportuoti</string>
+    <string name="logcat_buffer_descr">Patikrinkite ir bendrinkite išsamius programos žurnalus</string>
+    <string name="bearing">Guolis</string>
+    <string name="altitude">Aukštis</string>
+    <string name="precision">Tikslumas</string>
+    <string name="direction">Kelionės nuoroda</string>
+    <string name="privacy">Privatumas</string>
+    <string name="proxy_disconnected">Atsijungta</string>
+    <string name="proxy_connected">Prisijungta</string>
+    <string name="shared_string_enable">Įjungti</string>
+    <string name="shared_string_connection">Ryšys</string>
+    <string name="proxy_server">Serveris</string>
+    <string name="proxy_username">Vartotojo vardas</string>
+    <string name="proxy_password">Slaptažodis</string>
+    <string name="proxy_key">Raktas</string>
+    <string name="gpx_settings">GPX nustatymai</string>
+    <string name="shared_string_select">Pasirinkti</string>
+    <string name="timeline_no_data">Nėra duomenų</string>
+    <string name="timeline_no_data_descr">Pasirinktos dienos duomenų neturime</string>
+    <string name="start_end_date">Pradžios - pabaigos data</string>
+    <string name="shared_string_apply">Taikyti</string>
+    <string name="shared_string_start">Pradėti</string>
+    <string name="shared_string_end">Baigti</string>
+    <string name="saved_messages">Išsaugoti pranešimai</string>
+    <string name="unit_of_speed_system">Greičio matavimo vienetas</string>
+    <string name="unit_of_length">Ilgio matavimo vienetai</string>
+    <string name="units_and_formats">Vienetai ir formatai</string>
+    <string name="time_zone">Laiko juosta</string>
+    <string name="time_zone_descr">Pasirinkti laiko juostą, kuri bus rodoma jūsų vietovės pranešimuose.</string>
+    <string name="send_report">Siųsti pranešimą</string>
+</resources>

@@ -1,6 +1,5 @@
 package net.osmand.plus.wikivoyage.article;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -26,7 +25,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ProgressItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -107,7 +105,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putParcelable(ARTICLE_ID_KEY, articleId);
 		outState.putString(SELECTED_LANG_KEY, selectedLang);
@@ -128,9 +126,9 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fm,
-	                                   @Nullable Fragment targetFragment,
-	                                   @NonNull TravelArticleIdentifier articleId,
-	                                   @NonNull String selectedLang) {
+									   @Nullable Fragment targetFragment,
+									   @NonNull TravelArticleIdentifier articleId,
+									   @NonNull String selectedLang) {
 		try {
 			Bundle args = new Bundle();
 			args.putParcelable(ARTICLE_ID_KEY, articleId);
@@ -260,7 +258,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 			indicator.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(isExpanded){
+					if (isExpanded) {
 						expListView.collapseGroup(groupPosition);
 					} else {
 						expListView.expandGroup(groupPosition);
@@ -278,24 +276,6 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		@Override
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
-		}
-	}
-
-	public void updateMenu() {
-		Activity activity = getActivity();
-		View mainView = getView();
-		if (activity != null && mainView != null) {
-			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
-					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
-			if (itemsContainer != null) {
-				itemsContainer.removeAllViews();
-			}
-			items.clear();
-			createMenuItems(null);
-			for (BaseBottomSheetItem item : items) {
-				item.inflate(activity, itemsContainer, nightMode);
-			}
-			setupHeightAndBackground(mainView);
 		}
 	}
 
@@ -357,7 +337,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		@Override
 		protected void onPostExecute(Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap) {
 			WikivoyageArticleNavigationFragment.this.navigationMap = navigationMap;
-			updateMenu();
+			updateMenuItems();
 		}
 	}
 }

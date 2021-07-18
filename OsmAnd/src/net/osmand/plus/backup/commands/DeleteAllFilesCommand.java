@@ -34,13 +34,13 @@ public class DeleteAllFilesCommand extends BaseDeleteFilesCommand {
 	private final List<ExportSettingsType> types;
 
 	public DeleteAllFilesCommand(@NonNull BackupHelper helper,
-								 @NonNull List<ExportSettingsType> types) {
+								 @Nullable List<ExportSettingsType> types) {
 		super(helper, true);
 		this.types = types;
 	}
 
 	public DeleteAllFilesCommand(@NonNull BackupHelper helper,
-								 @NonNull List<ExportSettingsType> types,
+								 @Nullable List<ExportSettingsType> types,
 								 @Nullable OnDeleteFilesListener listener) {
 		super(helper, true, listener);
 		this.types = types;
@@ -64,6 +64,8 @@ public class DeleteAllFilesCommand extends BaseDeleteFilesCommand {
 			Object obj = objects[0];
 			if (obj instanceof Map) {
 				listener.onFilesDeleteDone((Map) obj);
+			} else if (obj instanceof List) {
+				listener.onFilesDeleteStarted((List) obj);
 			} else if (obj instanceof Integer && objects.length == 2) {
 				int status = (Integer) obj;
 				String message = (String) objects[1];
@@ -101,13 +103,18 @@ public class DeleteAllFilesCommand extends BaseDeleteFilesCommand {
 				publishProgress(status, message);
 			} else {
 				List<RemoteFile> filesToDelete = new ArrayList<>();
-				for (RemoteFile file : remoteFiles) {
-					ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
-					if (types.contains(exportType)) {
-						filesToDelete.add(file);
+				if (types != null) {
+					for (RemoteFile file : remoteFiles) {
+						ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(file);
+						if (types.contains(exportType)) {
+							filesToDelete.add(file);
+						}
 					}
+				} else {
+					filesToDelete.addAll(remoteFiles);
 				}
 				if (!filesToDelete.isEmpty()) {
+					publishProgress(filesToDelete);
 					deleteFiles(filesToDelete);
 				} else {
 					publishProgress(Collections.emptyMap());

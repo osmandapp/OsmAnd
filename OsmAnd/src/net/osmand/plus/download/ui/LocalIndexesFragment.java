@@ -207,12 +207,20 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 	public class LoadLocalIndexTask extends AsyncTask<Void, LocalIndexInfo, List<LocalIndexInfo>>
 			implements AbstractLoadLocalIndexTask {
 
+		private boolean readFiles = true;
 		private List<LocalIndexInfo> result;
+
+		public LoadLocalIndexTask() {
+		}
+
+		public LoadLocalIndexTask(boolean readFiles) {
+			this.readFiles = readFiles;
+		}
 
 		@Override
 		protected List<LocalIndexInfo> doInBackground(Void... params) {
 			LocalIndexHelper helper = new LocalIndexHelper(getMyApplication());
-			return helper.getLocalIndexData(this);
+			return helper.getLocalIndexData(readFiles, true, this);
 		}
 
 		@Override

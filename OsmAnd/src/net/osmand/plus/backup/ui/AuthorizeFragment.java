@@ -394,7 +394,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 					if (!fragmentManager.isStateSaved()) {
 						fragmentManager.popBackStack(BaseSettingsFragment.SettingsScreenType.BACKUP_AUTHORIZATION.name(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
 					}
-					BackupAndRestoreFragment.showInstance(fragmentManager);
+					BackupAndRestoreFragment.showInstance(fragmentManager, signIn ? LoginDialogType.SIGN_IN : LoginDialogType.SIGN_UP);
 				} else {
 					errorText.setText(error != null ? error.getLocalizedError(app) : message);
 					buttonContinue.setEnabled(false);
@@ -407,7 +407,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 					progressBar.setVisibility(View.INVISIBLE);
 					if (errorCode == dialogType.warningErrorCode) {
 						errorText.setText(dialogType.warningId);
-						AndroidUiHelper.updateVisibility(buttonAuthorize, true);
+						AndroidUiHelper.updateVisibility(buttonAuthorize, !promoCodeSupported());
 					} else {
 						errorText.setText(error.getLocalizedError(app));
 					}
@@ -447,7 +447,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		supportDescription.setOnClickListener(v -> app.sendSupportEmail(getString(R.string.backup_and_restore)));
 	}
 
-	private enum LoginDialogType {
+	public enum LoginDialogType {
 
 		SIGN_IN(R.id.sign_in_container, R.string.user_login, R.string.osmand_cloud_login_descr,
 				R.string.cloud_email_not_registered, SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED, SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED),

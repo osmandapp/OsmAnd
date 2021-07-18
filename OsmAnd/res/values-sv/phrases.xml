@@ -3975,4 +3975,5 @@
     <string name="poi_memorial_subject">Ämne</string>
     <string name="poi_picnic_table_no">Picknickbord: nej</string>
     <string name="poi_picnic_table_yes">Picknickbord: ja</string>
+    <string name="poi_outdoor_seating_poi">Uteservering</string>
 </resources>

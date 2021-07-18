@@ -26,6 +26,8 @@ import java.util.List;
 
 public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> {
 
+	private static final int APPROXIMATE_OSM_NOTE_SIZE_BYTES = 250;
+
 	public static final String TEXT_KEY = "text";
 	public static final String LAT_KEY = "lat";
 	public static final String LON_KEY = "lon";
@@ -113,6 +115,11 @@ public class OsmNotesSettingsItem extends CollectionSettingsItem<OsmNotesPoint> 
 	@Override
 	public OsmNotesPoint renameItem(@NonNull OsmNotesPoint item) {
 		return item;
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull OsmNotesPoint item) {
+		return APPROXIMATE_OSM_NOTE_SIZE_BYTES;
 	}
 
 	@NonNull

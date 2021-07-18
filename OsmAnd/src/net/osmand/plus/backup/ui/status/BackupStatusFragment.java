@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,8 +25,12 @@ import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.backup.ServerError;
+import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
+import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
@@ -33,7 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BackupStatusFragment extends BaseOsmAndFragment implements BackupExportListener,
-		OnDeleteFilesListener, OnPrepareBackupListener, ImportListener {
+		OnDeleteFilesListener, OnPrepareBackupListener, ImportListener, InAppPurchaseListener {
 
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
@@ -66,7 +71,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 
 		progressBar = view.findViewById(R.id.progress_bar);
 
-		adapter = new BackupStatusAdapter(getMapActivity(), this, this, nightMode);
+		adapter = new BackupStatusAdapter(getMapActivity(), this, nightMode);
 
 		RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -90,6 +95,22 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		super.onPause();
 		settingsHelper.updateExportListener(null);
 		backupHelper.removePrepareBackupListener(this);
+	}
+
+	@Nullable
+	public LoginDialogType getDialogType() {
+		Fragment parent = getParentFragment();
+		if (parent instanceof BackupAndRestoreFragment) {
+			return ((BackupAndRestoreFragment) parent).getDialogType();
+		}
+		return null;
+	}
+
+	public void removeDialogType() {
+		Fragment parent = getParentFragment();
+		if (parent instanceof BackupAndRestoreFragment) {
+			((BackupAndRestoreFragment) parent).removeDialogType();
+		}
 	}
 
 	private void updateAdapter() {
@@ -120,9 +141,9 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	}
 
 	@Override
-	public void onBackupExportStarted(int itemsCount) {
+	public void onBackupExportStarted() {
 		if (adapter != null) {
-			adapter.onBackupExportStarted(itemsCount);
+			adapter.onBackupExportStarted();
 		}
 	}
 
@@ -164,9 +185,14 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	}
 
 	@Override
-	public void onFileDeleteProgress(@NonNull RemoteFile file) {
+	public void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
+
+	}
+
+	@Override
+	public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
 		if (adapter != null) {
-			adapter.onFileDeleteProgress(file);
+			adapter.onFileDeleteProgress(file, progress);
 		}
 	}
 
@@ -189,5 +215,30 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		if (adapter != null) {
 			adapter.onImportFinished(succeed, needRestart, items);
 		}
+	}
+
+	@Override
+	public void onError(InAppPurchaseTaskType taskType, String error) {
+
+	}
+
+	@Override
+	public void onGetItems() {
+
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		updateAdapter();
+	}
+
+	@Override
+	public void showProgress(InAppPurchaseTaskType taskType) {
+
+	}
+
+	@Override
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
+
 	}
 }

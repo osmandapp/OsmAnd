@@ -3055,7 +3055,6 @@
     <string name="osmand_cloud_login_descr">Kirjoita sähköpostiosoite, jota käytit rekisteröitymiseen. Lähetämme sinulle seuraavassa vaiheessa tarvittavan kertakäyttösalasanan.</string>
     <string name="verify_email_address">Vahvista sähköpostiosoite</string>
     <string name="verify_email_address_descr">Lähetimme vahvistuskoodin osoitteeseen %1$s, kirjoita se alla olevaan kenttään.</string>
-    <string name="enter_verification_code">Syötä nelinumeroinen koodi</string>
     <string name="cloud_email_not_registered">Tätä sähköpostia ei ole rekisteröity OsmAnd Cloud -palveluun</string>
     <string name="cloud_email_already_registered">Tällä sähköpostilla on jo rekisteröity tili.</string>
     <string name="resend_verification_code">Lähetä koodi uudelleen</string>
@@ -3620,4 +3619,23 @@
     <string name="live_update_frequency_day_variant">Karttapäivitykset tarkistetaan joka päivä. Seuraavan kerran %1$s, %2$s päästä.</string>
     <string name="live_update_frequency_hour_variant">Karttapäivitykset tarkistetaan joka tunti. Seuraavan kerran %1$s, %2$s päästä.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Luonnon rajat</string>
+    <string name="routeInfo_surface_name">Pinta</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Luokka 4</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Tasainen</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Luokka 3</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Luokka 2</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Mäkinen</string>
+    <string name="rendering_attr_surface_ground_name">Maa</string>
+    <string name="rendering_attr_piste_type_skitour_name">Hiihtoretki</string>
+    <string name="rendering_attr_surface_dirt_name">Lika</string>
+    <string name="routing_attr_piste_type_skitour_name">Hiihtomatkailu</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Luokka 1</string>
+    <string name="routing_attr_avoid_bus_name">Ei busseja</string>
+    <string name="routeInfo_roadClass_name">Tien tyyppi</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Luokka 5</string>
+    <string name="routing_attr_avoid_ferry_name">Ei lauttoja</string>
+    <string name="routing_attr_avoid_train_name">Ei junia</string>
+    <string name="app_mode_camper">Asuntovaunu</string>
+    <string name="map_widget_intermediate_time">Väliaika</string>
+    <string name="access_intermediate_arrival_time">Välietapin saapumisaika</string>
 </resources>

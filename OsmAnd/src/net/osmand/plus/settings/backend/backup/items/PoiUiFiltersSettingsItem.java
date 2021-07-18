@@ -32,6 +32,8 @@ import java.util.Map;
 
 public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter> {
 
+	private static final int APPROXIMATE_POI_UI_FILTER_SIZE_BYTES = 500;
+
 	public PoiUiFiltersSettingsItem(@NonNull OsmandApplication app, @NonNull List<PoiUIFilter> items) {
 		super(app, null, items);
 	}
@@ -106,6 +108,11 @@ public class PoiUiFiltersSettingsItem extends CollectionSettingsItem<PoiUIFilter
 				return renamedItem;
 			}
 		}
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull PoiUIFilter item) {
+		return APPROXIMATE_POI_UI_FILTER_SIZE_BYTES;
 	}
 
 	@NonNull

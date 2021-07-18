@@ -10,17 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
-import net.osmand.AndroidNetworkUtils.OnFilesDownloadCallback;
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
 import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListListener;
+import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
 import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
 import net.osmand.plus.backup.BackupListeners.OnUpdateOrderIdListener;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
@@ -38,6 +40,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.plus.settings.backend.backup.items.CollectionSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -48,11 +51,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class BackupHelper {
 
@@ -63,7 +70,6 @@ public class BackupHelper {
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
 	public static final boolean DEBUG = true;
 
-	public static final int THREAD_POOL_SIZE = 4;
 	private final BackupExecutor executor;
 
 	public final static String INFO_EXT = ".info";
@@ -133,11 +139,12 @@ public class BackupHelper {
 		return backupListeners;
 	}
 
+	@NonNull
 	public PrepareBackupResult getBackup() {
 		return backup;
 	}
 
-	void setBackup(PrepareBackupResult backup) {
+	void setBackup(@NonNull PrepareBackupResult backup) {
 		this.backup = backup;
 	}
 
@@ -237,7 +244,13 @@ public class BackupHelper {
 				return true;
 			} else if (item instanceof FileSettingsItem) {
 				FileSettingsItem fileItem = (FileSettingsItem) item;
-				return name.startsWith(fileItem.getSubtype().getSubtypeFolder()) && name.startsWith(itemFileName);
+				if (name.startsWith(fileItem.getSubtype().getSubtypeFolder())) {
+					if (fileItem.getFile().isDirectory() && !itemFileName.endsWith("/")) {
+						return name.startsWith(itemFileName + "/");
+					} else {
+						return name.startsWith(itemFileName);
+					}
+				}
 			}
 		}
 		return false;
@@ -286,7 +299,7 @@ public class BackupHelper {
 		return fileName;
 	}
 
-	public void registerUser(@NonNull final String email, @Nullable String promoCode, boolean login) {
+	public void registerUser(@NonNull String email, @Nullable String promoCode, boolean login) {
 		executor.runCommand(new RegisterUserCommand(this, login, email, promoCode));
 	}
 
@@ -294,10 +307,17 @@ public class BackupHelper {
 		executor.runCommand(new RegisterDeviceCommand(this, token));
 	}
 
-	void updateOrderId(@Nullable final OnUpdateOrderIdListener listener) {
+	public void updateOrderIdAsync(@Nullable OnUpdateOrderIdListener listener, @Nullable String orderId) {
+		executor.execute(() -> updateOrderId(listener, orderId));
+	}
+
+	void updateOrderId(@Nullable OnUpdateOrderIdListener listener) {
+		updateOrderId(listener, getOrderId());
+	}
+
+	public void updateOrderId(@Nullable OnUpdateOrderIdListener listener, @Nullable String orderId) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", getEmail());
-		String orderId = getOrderId();
 		if (Algorithms.isEmpty(orderId)) {
 			if (listener != null) {
 				listener.onUpdateOrderId(STATUS_NO_ORDER_ID_ERROR, "Order id is empty", null);
@@ -382,6 +402,7 @@ public class BackupHelper {
 		prepareBackupListeners.remove(listener);
 	}
 
+	@Nullable
 	String uploadFile(@NonNull String fileName, @NonNull String type,
 					  @NonNull StreamWriter streamWriter, final long uploadTime,
 					  @Nullable final OnUploadFileListener listener) throws UserNotRegisteredException {
@@ -420,10 +441,18 @@ public class BackupHelper {
 							deltaProgress += deltaWork;
 							if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
 								progress += deltaProgress;
+								listener.onFileUploadProgress(type, fileName, progress, deltaProgress);
 								deltaProgress = 0;
-								listener.onFileUploadProgress(type, fileName, progress, deltaWork);
 							}
 						}
+					}
+
+					@Override
+					public boolean isInterrupted() {
+						if (listener != null) {
+							return listener.isUploadCancelled();
+						}
+						return super.isInterrupted();
 					}
 				});
 		if (error == null) {
@@ -493,61 +522,75 @@ public class BackupHelper {
 				});
 	}
 
-	public void deleteAllFiles(@NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteAllFiles(@Nullable List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteAllFilesCommand(this, types));
 	}
 
-	public void deleteOldFiles(@NonNull List<ExportSettingsType> types) throws UserNotRegisteredException {
+	public void deleteOldFiles(@Nullable List<ExportSettingsType> types) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteOldFilesCommand(this, types));
 	}
 
 	@NonNull
-	Map<File, String> downloadFiles(@NonNull final Map<File, RemoteFile> filesMap) throws UserNotRegisteredException {
+	String downloadFile(@NonNull File file, @NonNull RemoteFile remoteFile,
+						@Nullable OnDownloadFileListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 
-		Map<File, String> res = new HashMap<>();
-		Map<String, String> params = new HashMap<>();
-		params.put("deviceid", getDeviceId());
-		params.put("accessToken", getAccessToken());
-		AndroidNetworkUtils.downloadFiles(DOWNLOAD_FILE_URL,
-				new ArrayList<>(filesMap.keySet()), params, new OnFilesDownloadCallback() {
-					OperationLog operationLog;
+		OperationLog operationLog = new OperationLog("downloadFile " + file.getName(), DEBUG);
+		String res;
+		try {
+			String type = remoteFile.getType();
+			String fileName = remoteFile.getName();
+			Map<String, String> params = new HashMap<>();
+			params.put("deviceid", getDeviceId());
+			params.put("accessToken", getAccessToken());
+			params.put("name", fileName);
+			params.put("type", type);
+			StringBuilder sb = new StringBuilder(DOWNLOAD_FILE_URL);
+			boolean firstParam = true;
+			for (Entry<String, String> entry : params.entrySet()) {
+				sb.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+				firstParam = false;
+			}
+			res = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, new AbstractProgress() {
 
-					@Nullable
-					@Override
-					public Map<String, String> getAdditionalParams(@NonNull File file) {
-						RemoteFile remoteFile = filesMap.get(file);
-						Map<String, String> additionaParams = new HashMap<>();
-						additionaParams.put("name", remoteFile.getName());
-						additionaParams.put("type", remoteFile.getType());
-						return additionaParams;
+				private int work = 0;
+				private int progress = 0;
+				private int deltaProgress = 0;
+
+				@Override
+				public void startWork(int work) {
+					if (listener != null) {
+						this.work = work > 0 ? work : 1;
+						listener.onFileDownloadStarted(type, fileName, work);
 					}
+				}
 
-					@Override
-					public void onFileDownloadProgress(@NonNull File file, int percent) {
-						if (percent == 0) {
-							operationLog = new OperationLog("downloadFile", DEBUG);
+				@Override
+				public void progress(int deltaWork) {
+					if (listener != null) {
+						deltaProgress += deltaWork;
+						if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
+							progress += deltaProgress;
+							listener.onFileDownloadProgress(type, fileName, progress, deltaProgress);
+							deltaProgress = 0;
 						}
 					}
+				}
 
-					@Override
-					public void onFileDownloadDone(@NonNull File file) {
-						if (operationLog != null) {
-							operationLog.finishOperation(file.getName());
-						}
+				@Override
+				public boolean isInterrupted() {
+					if (listener != null) {
+						return listener.isDownloadCancelled();
 					}
-
-					@Override
-					public void onFileDownloadedAsync(@NonNull File file) {
-					}
-
-					@Override
-					public void onFilesDownloadDone(@NonNull Map<File, String> errors) {
-						res.putAll(errors);
-					}
-				});
+					return super.isInterrupted();
+				}
+			});
+		} catch (UnsupportedEncodingException e) {
+			res = "UnsupportedEncodingException";
+		}
+		operationLog.finishOperation();
 		return res;
 	}
 
@@ -572,14 +615,35 @@ public class BackupHelper {
 				List<LocalFile> result = new ArrayList<>();
 				infos = dbHelper.getUploadedFileInfoMap();
 				List<SettingsItem> localItems = getLocalItems();
+				operationLog.log("getLocalItems");
 				for (SettingsItem item : localItems) {
 					String fileName = BackupHelper.getItemFileName(item);
 					if (item instanceof FileSettingsItem) {
-						File file = ((FileSettingsItem) item).getFile();
+						FileSettingsItem fileItem = (FileSettingsItem) item;
+						File file = fileItem.getFile();
 						if (file.isDirectory()) {
+							if (item instanceof GpxSettingsItem) {
+								continue;
+							} else if (fileItem.getSubtype() == FileSubtype.VOICE) {
+								File jsFile = new File(file, file.getName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+								if (jsFile.exists()) {
+									fileName = jsFile.getPath().replace(app.getAppPath(null).getPath() + "/", "");
+									createLocalFile(result, item, fileName, jsFile, jsFile.lastModified());
+									continue;
+								}
+							} else if (fileItem.getSubtype() == FileSubtype.TTS_VOICE) {
+								String langName = file.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
+								File jsFile = new File(file, langName + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+								if (jsFile.exists()) {
+									fileName = jsFile.getPath().replace(app.getAppPath(null).getPath() + "/", "");
+									createLocalFile(result, item, fileName, jsFile, jsFile.lastModified());
+									continue;
+								}
+							}
 							List<File> dirs = new ArrayList<>();
 							dirs.add(file);
 							Algorithms.collectDirs(file, dirs);
+							operationLog.log("collectDirs " + file.getName() + " BEGIN");
 							for (File dir : dirs) {
 								File[] files = dir.listFiles();
 								if (files != null && files.length > 0) {
@@ -589,6 +653,7 @@ public class BackupHelper {
 									}
 								}
 							}
+							operationLog.log("collectDirs " + file.getName() + " END");
 						} else {
 							createLocalFile(result, item, fileName, file, file.lastModified());
 						}
@@ -618,7 +683,14 @@ public class BackupHelper {
 
 			private List<SettingsItem> getLocalItems() {
 				List<ExportSettingsType> types = ExportSettingsType.getEnabledTypes();
-				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true, true);
+				Iterator<ExportSettingsType> it = types.iterator();
+				while (it.hasNext()) {
+					ExportSettingsType type = it.next();
+					if (!getBackupTypePref(type).get()) {
+						it.remove();
+					}
+				}
+				return app.getFileSettingsHelper().getFilteredSettingsItems(types, true, true);
 			}
 
 			@Override
@@ -650,7 +722,6 @@ public class BackupHelper {
 
 		OperationLog operationLog = new OperationLog("generateBackupInfo", DEBUG, 200);
 		operationLog.startOperation();
-		final long backupLastUploadedTime = settings.BACKUP_LAST_UPLOADED_TIME.get();
 
 		AsyncTask<Void, Void, BackupInfo> task = new AsyncTask<Void, Void, BackupInfo>() {
 			@Override
@@ -660,7 +731,7 @@ public class BackupHelper {
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
 					ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(remoteFile);
-					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType)) {
+					if (exportType == null || !ExportSettingsType.isTypeEnabled(exportType) || remoteFile.isRecordedVoiceFile()) {
 						continue;
 					}
 					LocalFile localFile = localFiles.get(remoteFile.getTypeNamePath());
@@ -674,8 +745,6 @@ public class BackupHelper {
 								info.filesToUpload.add(localFile);
 								info.filesToDownload.add(remoteFile);
 							}
-							//info.filesToUpload.add(localFile);
-							//info.filesToDownload.add(remoteFile);
 						} else {
 							info.filesToMerge.add(new Pair<>(localFile, remoteFile));
 							info.filesToDownload.add(remoteFile);
@@ -687,7 +756,9 @@ public class BackupHelper {
 						}
 					}
 					if (localFile == null && !remoteFile.isDeleted()) {
-						if (backupLastUploadedTime > 0 && backupLastUploadedTime >= remoteFile.getClienttimems()) {
+						UploadedFileInfo fileInfo = dbHelper.getUploadedFileInfo(remoteFile.getType(), remoteFile.getName());
+						// suggest to remove only if file exists in db
+						if (fileInfo != null) {
 							info.filesToDelete.add(remoteFile);
 						}
 						info.filesToDownload.add(remoteFile);

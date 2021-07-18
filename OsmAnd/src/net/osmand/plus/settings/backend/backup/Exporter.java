@@ -54,8 +54,8 @@ public abstract class Exporter {
 		return cancelled;
 	}
 
-	public void setCancelled(boolean cancelled) {
-		this.cancelled = cancelled;
+	public void cancel() {
+		this.cancelled = true;
 	}
 
 	public void addAdditionalParam(String key, String value) {

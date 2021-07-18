@@ -48,6 +48,8 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.liveupdates.LiveUpdatesClearBottomSheet.RefreshLiveUpdates;
 import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper.LiveUpdateListener;
@@ -63,7 +65,7 @@ import java.util.List;
 import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
 import static net.osmand.plus.liveupdates.LiveUpdatesFragment.updateCountEnabled;
 
-public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, RefreshLiveUpdates, LiveUpdateListener {
+public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
 	private static final int RELOAD_ID = 5;
 	private UpdateIndexAdapter listAdapter;
 	private String errorMessage;
@@ -286,6 +288,33 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		}
 	}
 
+	@Override
+	public void onError(InAppPurchaseTaskType taskType, String error) {
+
+	}
+
+	@Override
+	public void onGetItems() {
+
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		invalidateListView(getMyActivity());
+		updateUpdateAllButton();
+		startLoadLiveMapsAsyncTask(getMyApplication());
+	}
+
+	@Override
+	public void showProgress(InAppPurchaseTaskType taskType) {
+
+	}
+
+	@Override
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
+
+	}
+
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> implements LocalIndexInfoAdapter {
 
 		static final int INDEX_ITEM = 0;
@@ -363,7 +392,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 					OsmandApplication app = getMyApplication();
 					boolean nightMode = !app.getSettings().isLightContent();
 					if (showSubscriptionPurchaseBanner) {
-						view = inflater.inflate(R.layout.osm_live_banner_list_item, parent, false);
+						view = inflater.inflate(R.layout.osm_subscription_banner_list_item, parent, false);
 						ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,
 								R.color.switch_button_active_light, R.color.switch_button_active_stroke_light,
 								R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);

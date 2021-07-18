@@ -43,8 +43,6 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	private static final Log log = PlatformUtil.getLog(PurchasesFragment.class);
 	public static final String TAG = PurchasesFragment.class.getName();
 
-	public static final String KEY_IS_SUBSCRIBER = "action_is_new";
-
 	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases";
 
 	private OsmandApplication app;
@@ -54,7 +52,6 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	private SubscriptionsCard subscriptionsCard;
 
 	private boolean nightMode;
-	private Boolean isPaidVersion;
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
 		try {
@@ -78,7 +75,6 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		app = getMyApplication();
-		isPaidVersion = Version.isPaidVersion(app);
 		nightMode = !app.getSettings().isLightContent();
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 
@@ -104,33 +100,19 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 			return;
 		}
 
-		boolean hasSubscriptions = !Algorithms.isEmpty(purchaseHelper.getEverMadeSubscriptions());
-		if (hasSubscriptions) {
+		boolean hasPurchases = !Algorithms.isEmpty(purchaseHelper.getEverMadeMainPurchases());
+		if (hasPurchases) {
 			subscriptionsCard = new SubscriptionsCard(mapActivity, this, purchaseHelper);
 			cardsContainer.addView(subscriptionsCard.build(mapActivity));
 		}
 
 		BaseCard purchaseCard;
-		if (isPaidVersion) {
+		if (Version.isPaidVersion(app) || hasPurchases) {
 			purchaseCard = new TroubleshootingCard(mapActivity, purchaseHelper, false);
 		} else {
 			purchaseCard = new PurchasingCard(mapActivity, purchaseHelper);
 		}
 		cardsContainer.addView(purchaseCard.build(mapActivity));
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(KEY_IS_SUBSCRIBER, isPaidVersion);
-	}
-
-	@Override
-	public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-		super.onViewStateRestored(savedInstanceState);
-		if (savedInstanceState != null) {
-			isPaidVersion = savedInstanceState.getBoolean(KEY_IS_SUBSCRIBER);
-		}
 	}
 
 	@Nullable
@@ -182,15 +164,11 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 	@Override
 	public void onGetItems() {
-		if (app != null) {
-			isPaidVersion = Version.isPaidVersion(app);
-		}
 		updateCards();
 	}
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
-		isPaidVersion = true;
 		if (purchaseHelper != null) {
 			purchaseHelper.requestInventory();
 		}

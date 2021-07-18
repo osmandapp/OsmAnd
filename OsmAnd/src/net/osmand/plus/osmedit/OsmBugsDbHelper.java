@@ -1,17 +1,21 @@
 package net.osmand.plus.osmedit;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.NonNull;
-
+import net.osmand.AndroidUtils;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.util.Algorithms;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import androidx.annotation.NonNull;
 
 public class OsmBugsDbHelper extends SQLiteOpenHelper {
 
@@ -93,11 +97,16 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 	public boolean addOsmbugs(OsmNotesPoint p) {
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
-			db.execSQL(
-					"INSERT INTO " + OSMBUGS_TABLE_NAME + " (" + OSMBUGS_COL_ID + ", " + OSMBUGS_COL_TEXT + ", " + OSMBUGS_COL_LAT + ","
-							+ OSMBUGS_COL_LON + "," + OSMBUGS_COL_ACTION + "," + OSMBUGS_COL_AUTHOR + ")" + " VALUES (?, ?, ?, ?, ?, ?)",
-							new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), 
-							OsmPoint.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
+			Map<String, Object> rowsMap = new HashMap<>();
+			rowsMap.put(OSMBUGS_COL_ID, p.getId());
+			rowsMap.put(OSMBUGS_COL_TEXT, p.getText());
+			rowsMap.put(OSMBUGS_COL_LAT, p.getLatitude());
+			rowsMap.put(OSMBUGS_COL_LON, p.getLongitude());
+			rowsMap.put(OSMBUGS_COL_ACTION, OsmPoint.stringAction.get(p.getAction()));
+			rowsMap.put(OSMBUGS_COL_AUTHOR, p.getAuthor());
+
+			db.execSQL(AndroidUtils.createDbInsertQuery(OSMBUGS_TABLE_NAME, rowsMap.keySet()),
+					rowsMap.values().toArray());
 			checkOsmbugsPoints(db);
 			updateLastModifiedTime();
 			db.close();
@@ -127,14 +136,19 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 			
 			if (query.moveToFirst()) {
 				do {
-					OsmNotesPoint p = new OsmNotesPoint();
+					boolean isValidId = Algorithms.isInt(query.getString(0));
+					if (!isValidId) {
+						continue;
+					}
 
+					OsmNotesPoint p = new OsmNotesPoint();
 					p.setId(query.getLong(0));
 					p.setText(query.getString(1));
 					p.setLatitude(query.getDouble(2));
 					p.setLongitude(query.getDouble(3));
 					p.setAction(query.getString(4));
 					p.setAuthor(query.getString(5));
+
 					cachedOsmbugsPoints.add(p);
 				} while (query.moveToNext());
 			}

@@ -7,6 +7,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -22,12 +23,12 @@ import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 public class EditPoiData {
 	private static final Log LOG = PlatformUtil.getLog(EditPoiData.class);
 	private Set<TagsChangedListener> mListeners = new HashSet<>();
-	private final LinkedHashMap<String, String> tagValues = new LinkedHashMap<String, String>();
+	private final LinkedHashMap<String, String> tagValues = new LinkedHashMap<>();
+	private final LinkedHashMap<String, String> initTagValues = new LinkedHashMap<>();
 	private boolean isInEdit = false;
 	private Entity entity;
 
 	public static final String REMOVE_TAG_VALUE = "DELETE";
-	private boolean hasChangesBeenMade = false;
 	private Map<String, PoiType> allTranslatedSubTypes;
 	private PoiCategory category;
 	private PoiType currentPoiType;
@@ -105,6 +106,11 @@ public class EditPoiData {
 		retrieveType();
 	}
 
+	public void setupInitPoint() {
+		initTagValues.clear();
+		initTagValues.putAll(tagValues);
+	}
+
 	private void retrieveType() {
 		String tp = tagValues.get(POI_TYPE_TAG);
 		if(tp != null) {
@@ -178,9 +184,6 @@ public class EditPoiData {
 	}
 
 	private void notifyDatasetChanged(String tag) {
-		if (mListeners.size() > 0) {
-			hasChangesBeenMade = true;
-		}
 		for (TagsChangedListener listener : mListeners) {
 			listener.onTagsChanged(tag);
 		}
@@ -200,8 +203,8 @@ public class EditPoiData {
 		
 	}
 
-	public boolean hasChangesBeenMade() {
-		return hasChangesBeenMade;
+	public boolean hasChanges() {
+		return !Algorithms.objectEquals(initTagValues, tagValues);
 	}
 
 	public void updateTypeTag(String string, boolean userChanges) {

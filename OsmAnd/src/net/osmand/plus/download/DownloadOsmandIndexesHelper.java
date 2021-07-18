@@ -211,7 +211,8 @@ public class DownloadOsmandIndexesHelper {
 		List<IndexItem> customTTS = new ArrayList<>();
 		long installDate = getInstallDate(app);
 
-		localIndexHelper.loadVoiceData(voiceDirPath, localIndexes, false, null);
+		localIndexHelper.loadVoiceData(voiceDirPath, localIndexes, false, true, true,
+				app.getResourceManager().getIndexFiles(), null);
 		for (LocalIndexInfo indexInfo : localIndexes) {
 			if (!indexInfo.getFileName().contains("tts")) {
 				continue;

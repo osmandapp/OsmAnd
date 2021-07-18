@@ -24,7 +24,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.routing.ColoringTypeAvailabilityCache;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RouteColoringType;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
@@ -71,11 +73,14 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	private RouteGeometryWay routeGeometry;
 	private PublicTransportGeometryWay publicTransportRouteGeometry;
 
+	private final ColoringTypeAvailabilityCache coloringAvailabilityCache;
+
 	private LayerDrawable projectionIcon;
 
 	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
 		this.transportHelper = helper.getTransportRoutingHelper();
+		coloringAvailabilityCache = new ColoringTypeAvailabilityCache(helper.getApplication());
 	}
 
 	public RoutingHelper getHelper() {
@@ -148,7 +153,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				(helper.getFinalLocation() != null && helper.getRoute().isCalculated()) ||
 				isPlanRouteGraphsAvailable()) {
 
-			updateRouteGradient();
+			updateRouteColoringType();
 			updateAttrs(settings, tileBox);
 			updateRouteColors(nightMode);
 			
@@ -203,14 +208,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		return false;
 	}
 
-	@Nullable
-	private MapActivity getMapActivity() {
-		if (view.getContext() instanceof MapActivity) {
-			return (MapActivity) view.getContext();
-		}
-		return null;
-	}
-
 	@Override
 	protected void updateAttrs(DrawSettings settings, RotatedTileBox tileBox) {
 		boolean updatePaints = attrs.updatePaints(view.getApplication(), settings, tileBox);
@@ -235,18 +232,23 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	@Override
 	protected void updateTurnArrowColor() {
-		if (gradientScaleType != null) {
-			List<Location> locations = helper.getRoute().getImmutableAllLocations();
-			for (Location location : locations) {
-				if (location.hasAltitude()) {
-					customTurnArrowColor = Color.WHITE;
-				}
-			}
-		}
-		if (gradientScaleType == null || customTurnArrowColor == 0) {
+		if (routeColoringType.isGradient() && isColoringAvailable(routeColoringType, null)) {
+			customTurnArrowColor = Color.WHITE;
+		} else {
 			customTurnArrowColor = attrs.paint3.getColor();
 		}
 		paintIconAction.setColorFilter(new PorterDuffColorFilter(customTurnArrowColor, PorterDuff.Mode.MULTIPLY));
+	}
+
+	@Override
+	protected void updateIsPaint_1(boolean updatePaints) {
+		if (updatePaints) {
+			attrsIsPaint_1 = attrs.isPaint_1;
+		}
+		if (attrsIsPaint_1 != null) {
+			attrs.isPaint_1 = attrsIsPaint_1 && (routeColoringType.isDefault()
+					|| !isColoringAvailable(routeColoringType, routeInfoAttribute));
+		}
 	}
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
@@ -349,8 +351,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			boolean directTo = route.getRouteService() == RouteService.DIRECT_TO;
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
-			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb), directionArrowsColor, gradientScaleType);
-			routeGeometry.updateRoute(tb, route, view.getApplication());
+
+			RouteColoringType actualColoringType = isColoringAvailable(routeColoringType, routeInfoAttribute) ?
+							routeColoringType : RouteColoringType.DEFAULT;
+			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb),
+					directionArrowsColor, actualColoringType, routeInfoAttribute);
+			routeGeometry.updateRoute(tb, route);
+
 			if (directTo) {
 				routeGeometry.drawSegments(tb, canvas, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 						null, 0);
@@ -598,6 +605,12 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		} catch (IndexOutOfBoundsException e) {
 			// ignore
 		}
+	}
+
+	private boolean isColoringAvailable(@NonNull RouteColoringType routeColoringType,
+	                                    @Nullable String routeInfoAttribute) {
+		return coloringAvailabilityCache
+				.isColoringAvailable(helper.getRoute(), routeColoringType, routeInfoAttribute);
 	}
 
 	@Override

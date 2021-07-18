@@ -79,7 +79,7 @@ public class DashParkingFragment extends DashLocationFragment {
 
 	@Override
 	public void onOpenDash() {
-		plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
+		plugin = OsmandPlugin.getActivePlugin(ParkingPositionPlugin.class);
 		updateParkingPosition();
 	}
 

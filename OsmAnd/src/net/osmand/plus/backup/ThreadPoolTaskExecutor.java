@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ConcurrentHashMap;
@@ -21,6 +22,9 @@ import java.util.concurrent.TimeUnit;
 
 public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> extends ThreadPoolExecutor {
 
+	private static final int DEFAULT_THREAD_POOL_SIZE = 4;
+
+	private boolean interruptOnError = false;
 	private final OnThreadPoolTaskExecutorListener<T> listener;
 
 	private boolean cancelled = false;
@@ -42,11 +46,29 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 
 	public abstract static class Task implements Callable<Void> {
 
+		boolean cancelled;
 		boolean finished;
 
 		public boolean isFinished() {
 			return finished;
 		}
+
+		public boolean isCancelled() {
+			return cancelled;
+		}
+
+		public void cancel() {
+			this.cancelled = true;
+		}
+
+		public void setFinished(boolean finished) {
+			this.finished = finished;
+		}
+	}
+
+	public ThreadPoolTaskExecutor(@Nullable OnThreadPoolTaskExecutorListener<T> listener) {
+		super(DEFAULT_THREAD_POOL_SIZE, DEFAULT_THREAD_POOL_SIZE, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>());
+		this.listener = listener;
 	}
 
 	public ThreadPoolTaskExecutor(int poolSize, @Nullable OnThreadPoolTaskExecutorListener<T> listener) {
@@ -62,8 +84,20 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 		return cancelled;
 	}
 
-	public void setCancelled(boolean cancelled) {
-		this.cancelled = cancelled;
+	public void cancel() {
+		this.cancelled = true;
+	}
+
+	private boolean isInterrupted() {
+		return !exceptions.isEmpty();
+	}
+
+	public boolean isInterruptOnError() {
+		return interruptOnError;
+	}
+
+	public void setInterruptOnError(boolean interruptOnError) {
+		this.interruptOnError = interruptOnError;
 	}
 
 	public void run(@NonNull List<T> tasks) {
@@ -96,9 +130,10 @@ public class ThreadPoolTaskExecutor<T extends ThreadPoolTaskExecutor.Task> exten
 		while (!finished) {
 			try {
 				finished = awaitTermination(100, TimeUnit.MILLISECONDS);
-				if (isCancelled()) {
-					for (Future<?> future : taskMap.keySet()) {
-						future.cancel(false);
+				if (isCancelled() || (interruptOnError && isInterrupted())) {
+					for (Entry<Future<?>, T> futureTask : taskMap.entrySet()) {
+						futureTask.getKey().cancel(false);
+						futureTask.getValue().cancel();
 					}
 				}
 			} catch (InterruptedException e) {
