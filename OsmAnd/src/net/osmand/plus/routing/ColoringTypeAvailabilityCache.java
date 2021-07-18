@@ -32,7 +32,7 @@ public class ColoringTypeAvailabilityCache {
 
 		Boolean available = cache.get(key);
 		if (available == null) {
-			available = routeColoringType.isAvailableForDrawing(app, route, routeInfoAttribute);
+			available = routeColoringType.isAvailableForDrawingRoute(app, route, routeInfoAttribute);
 			cache.put(key, available);
 		}
 		return available;

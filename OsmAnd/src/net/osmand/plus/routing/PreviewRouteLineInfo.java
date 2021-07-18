@@ -168,7 +168,7 @@ public class PreviewRouteLineInfo {
 		if (bundle.containsKey(CUSTOM_COLOR_NIGHT)) {
 			customColorNight = bundle.getInt(CUSTOM_COLOR_NIGHT);
 		}
-		coloringType = ColoringType.getColoringTypeByName(bundle.getString(ROUTE_COLORING_TYPE));
+		coloringType = ColoringType.getRouteColoringTypeByName(bundle.getString(ROUTE_COLORING_TYPE));
 		routeInfoAttribute = bundle.getString(ROUTE_INFO_ATTRIBUTE);
 		width = bundle.getString(LINE_WIDTH);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);

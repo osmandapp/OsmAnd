@@ -3,18 +3,23 @@ package net.osmand.plus.routing;
 import android.content.Context;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.Location;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteExporter;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,14 +28,33 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-
 public enum ColoringType {
 
+	// For route only
 	DEFAULT("default", R.string.map_widget_renderer, R.drawable.ic_action_map_style),
 	CUSTOM_COLOR("custom_color", R.string.shared_string_custom, R.drawable.ic_action_settings),
+	// For gpx track only
+	SPEED("speed", R.string.map_widget_speed, R.drawable.ic_action_speed),
+	// For both route and gpx file
 	ALTITUDE("altitude", R.string.altitude, R.drawable.ic_action_hillshade_dark),
 	SLOPE("slope", R.string.shared_string_slope, R.drawable.ic_action_altitude_ascent),
 	ATTRIBUTE("attribute", R.string.attribute, R.drawable.ic_action_hillshade_dark);
+
+	private static final List<ColoringType> ROUTE_COLORING_TYPES = new ArrayList<>();
+	private static final List<ColoringType> TRACK_COLORING_TYPES = new ArrayList<>();
+
+	static {
+		ROUTE_COLORING_TYPES.add(DEFAULT);
+		ROUTE_COLORING_TYPES.add(CUSTOM_COLOR);
+		ROUTE_COLORING_TYPES.add(ALTITUDE);
+		ROUTE_COLORING_TYPES.add(SLOPE);
+		ROUTE_COLORING_TYPES.add(ATTRIBUTE);
+
+		TRACK_COLORING_TYPES.add(SPEED);
+		TRACK_COLORING_TYPES.add(ALTITUDE);
+		TRACK_COLORING_TYPES.add(SLOPE);
+		TRACK_COLORING_TYPES.add(ATTRIBUTE);
+	}
 
 	private final String name;
 	@StringRes
@@ -89,16 +113,16 @@ public enum ColoringType {
 	}
 
 	public boolean isGradient() {
-		return this == ALTITUDE || this == SLOPE;
+		return this == SPEED || this == ALTITUDE || this == SLOPE;
 	}
 
 	public boolean isRouteInfoAttribute() {
 		return this == ATTRIBUTE;
 	}
 
-	public boolean isAvailableForDrawing(@NonNull OsmandApplication app,
-	                                     @NonNull RouteCalculationResult route,
-	                                     @Nullable String attributeName) {
+	public boolean isAvailableForDrawingRoute(@NonNull OsmandApplication app,
+	                                          @NonNull RouteCalculationResult route,
+											  @Nullable String attributeName) {
 		if (isGradient()) {
 			List<Location> locations = route.getImmutableAllLocations();
 			for (Location location : locations) {
@@ -109,17 +133,50 @@ public enum ColoringType {
 			return false;
 		}
 
-		if (isRouteInfoAttribute()) {
-			return isAttributeAvailableForDrawing(app, route, attributeName);
+		if (isRouteInfoAttribute() && !Algorithms.isEmpty(route.getOriginalRoute())) {
+			return isAttributeAvailableForDrawing(app, route.getOriginalRoute(), attributeName);
 		}
 
 		return true;
 	}
 
+	public boolean isAvailableForDrawingTrack(@NonNull OsmandApplication app,
+	                                          @NonNull SelectedGpxFile selectedGpxFile,
+	                                          @Nullable String attributeName) {
+		if (isGradient()) {
+			return selectedGpxFile.getTrackAnalysis(app)
+					.isColorizationTypeAvailable(toGradientScaleType().toColorizationType());
+		}
+
+		if (isRouteInfoAttribute()) {
+			List<RouteSegmentResult> routeSegments = getRouteSegmentsInTrack(selectedGpxFile.getGpxFile());
+			if (Algorithms.isEmpty(routeSegments)) {
+				return false;
+			}
+			return isAttributeAvailableForDrawing(app, routeSegments, attributeName);
+		}
+
+		return true;
+	}
+
+	@Nullable
+	private List<RouteSegmentResult> getRouteSegmentsInTrack(@NonNull GPXFile gpxFile) {
+		if (!RouteExporter.OSMAND_ROUTER_V2.equals(gpxFile.author)) {
+			return null;
+		}
+		List<RouteSegmentResult> routeSegments = new ArrayList<>();
+		for (int i = 0; i < gpxFile.getNonEmptyTrkSegments(false).size(); i++) {
+			TrkSegment segment = gpxFile.getNonEmptyTrkSegments(false).get(i);
+			if (segment.hasRoute()) {
+				routeSegments.addAll(RouteProvider.parseOsmAndGPXRoute(new ArrayList<>(), gpxFile, new ArrayList<>(), i));
+			}
+		}
+		return routeSegments;
+	}
+
 	private boolean isAttributeAvailableForDrawing(@NonNull OsmandApplication app,
-	                                               @NonNull RouteCalculationResult route,
-	                                               @Nullable String attributeName) {
-		List<RouteSegmentResult> routeSegments = route.getOriginalRoute();
+												   @NonNull List<RouteSegmentResult> routeSegments,
+												   @Nullable String attributeName) {
 		if (Algorithms.isEmpty(routeSegments) || Algorithms.isEmpty(attributeName)) {
 			return false;
 		}
@@ -158,15 +215,34 @@ public enum ColoringType {
 	}
 
 	@NonNull
-	public static ColoringType getColoringTypeByName(@Nullable String name) {
+	public static ColoringType getRouteColoringTypeByName(@Nullable String name) {
+		ColoringType defined = getColoringTypeByName(ROUTE_COLORING_TYPES, name);
+		return defined == null ? DEFAULT : defined;
+	}
+
+	@Nullable
+	public static ColoringType getTrackColoringTypeByName(@Nullable String name) {
+		return getColoringTypeByName(TRACK_COLORING_TYPES, name);
+	}
+
+	@Nullable
+	private static ColoringType getColoringTypeByName(List<ColoringType> from, @Nullable String name) {
 		if (!Algorithms.isEmpty(name) && name.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX)) {
 			return ATTRIBUTE;
 		}
-		for (ColoringType coloringType : ColoringType.values()) {
+		for (ColoringType coloringType : from) {
 			if (coloringType.name.equalsIgnoreCase(name)) {
 				return coloringType;
 			}
 		}
-		return DEFAULT;
+		return null;
+	}
+
+	public static List<ColoringType> getRouteColoringTypes() {
+		return Collections.unmodifiableList(ROUTE_COLORING_TYPES);
+	}
+
+	public static List<ColoringType> getTrackColoringTypes() {
+		return Collections.unmodifiableList(TRACK_COLORING_TYPES);
 	}
 }

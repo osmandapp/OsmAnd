@@ -299,7 +299,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 		private List<String> listStaticColoringTypes() {
 			List<String> coloringTypes = new ArrayList<>();
-			for (ColoringType coloringType : ColoringType.values()) {
+			for (ColoringType coloringType : ColoringType.getRouteColoringTypes()) {
 				if (!coloringType.isRouteInfoAttribute()) {
 					coloringTypes.add(coloringType.getName());
 				}
@@ -333,7 +333,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		@Override
 		public void onBindViewHolder(@NonNull final AppearanceViewHolder holder, int position) {
 			String coloringTypeName = coloringTypes.get(position);
-			ColoringType coloringType = ColoringType.getColoringTypeByName(coloringTypeName);
+			ColoringType coloringType = ColoringType.getRouteColoringTypeByName(coloringTypeName);
 
 			holder.title.setText(coloringType.getHumanString(app, coloringTypeName));
 			updateButtonBg(holder, coloringType, coloringTypeName);

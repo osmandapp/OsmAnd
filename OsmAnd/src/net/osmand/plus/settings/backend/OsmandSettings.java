@@ -2826,7 +2826,8 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> CUSTOM_ROUTE_COLOR_NIGHT = new IntPreference(this,
 			"route_line_color_night", ColorDialogs.pallette[0]).cache().makeProfile();
 	public final CommonPreference<ColoringType> ROUTE_COLORING_TYPE = new EnumStringPreference<>(this,
-			"route_line_coloring_type", ColoringType.DEFAULT, ColoringType.values()).cache().makeProfile();
+			"route_line_coloring_type", ColoringType.DEFAULT,
+			ColoringType.getRouteColoringTypes().toArray(new ColoringType[0])).cache().makeProfile();
 	public final CommonPreference<String> ROUTE_INFO_ATTRIBUTE = new StringPreference(this, "route_info_attribute", null)
 			.cache().makeProfile();
 	public final CommonPreference<String> ROUTE_LINE_WIDTH = new StringPreference(this, "route_line_width", null).makeProfile();
