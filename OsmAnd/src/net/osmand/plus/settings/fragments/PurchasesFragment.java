@@ -100,14 +100,14 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 			return;
 		}
 
-		boolean hasSubscriptions = !Algorithms.isEmpty(purchaseHelper.getEverMadeMainPurchases());
-		if (hasSubscriptions) {
+		boolean hasPurchases = !Algorithms.isEmpty(purchaseHelper.getEverMadeMainPurchases());
+		if (hasPurchases) {
 			subscriptionsCard = new SubscriptionsCard(mapActivity, this, purchaseHelper);
 			cardsContainer.addView(subscriptionsCard.build(mapActivity));
 		}
 
 		BaseCard purchaseCard;
-		if (Version.isPaidVersion(app) || hasSubscriptions) {
+		if (Version.isPaidVersion(app) || hasPurchases) {
 			purchaseCard = new TroubleshootingCard(mapActivity, purchaseHelper, false);
 		} else {
 			purchaseCard = new PurchasingCard(mapActivity, purchaseHelper);

@@ -57,9 +57,9 @@ public class SubscriptionsListCard extends MapBaseCard {
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		((ViewGroup) view).removeAllViews();
 
-		List<InAppPurchase> subscriptions = purchaseHelper.getEverMadeMainPurchases();
-		for (int i = 0; i < subscriptions.size(); i++) {
-			InAppPurchase purchase = subscriptions.get(i);
+		List<InAppPurchase> mainPurchases = purchaseHelper.getEverMadeMainPurchases();
+		for (int i = 0; i < mainPurchases.size(); i++) {
+			InAppPurchase purchase = mainPurchases.get(i);
 
 			View card = inflater.inflate(R.layout.subscription_layout, null, false);
 			((ViewGroup) view).addView(card);
@@ -82,7 +82,7 @@ public class SubscriptionsListCard extends MapBaseCard {
 				setupPurchaseCard(purchase, card);
 			}
 
-			int dividerLayout = i + 1 == subscriptions.size() ? R.layout.simple_divider_item : R.layout.divider_half_item;
+			int dividerLayout = i + 1 == mainPurchases.size() ? R.layout.simple_divider_item : R.layout.divider_half_item;
 			View divider = inflater.inflate(dividerLayout, (ViewGroup) view, false);
 			((ViewGroup) view).addView(divider);
 		}
