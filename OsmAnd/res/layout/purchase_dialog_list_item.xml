@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minHeight="@dimen/bottom_sheet_list_item_height"
     android:background="@color/color_transparent"
     android:orientation="horizontal">
 
@@ -42,6 +43,8 @@
                     android:layout_weight="1"
                     android:lineSpacingMultiplier="1.1"
                     android:textColor="?android:textColorPrimary"
+                    android:paddingTop="@dimen/content_padding_small"
+                    android:paddingBottom="@dimen/content_padding_small"
                     android:textSize="@dimen/default_list_text_size"
                     osmand:typeface="@string/font_roboto_regular"
                     tools:text="@string/osmand_cloud" />

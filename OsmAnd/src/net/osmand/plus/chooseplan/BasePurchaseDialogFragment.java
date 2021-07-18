@@ -37,8 +37,8 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
 
-public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragment implements InAppPurchaseListener,
-		OnOffsetChangedListener, OnScrollChangedListener {
+public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragment
+		implements InAppPurchaseListener, OnOffsetChangedListener, OnScrollChangedListener {
 
 	public static final String SCROLL_POSITION = "scroll_position";
 
@@ -54,6 +54,17 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	private int lastScrollY;
 	private int lastKnownToolbarOffset;
+
+	protected enum ButtonBackground {
+		ROUNDED(R.drawable.rectangle_rounded),
+		ROUNDED_SMALL(R.drawable.rectangle_rounded_small);
+
+		ButtonBackground(int drawableId) {
+			this.drawableId = drawableId;
+		}
+
+		private int drawableId;
+	}
 
 	@ColorRes
 	protected int getStatusBarColorId() {
@@ -216,17 +227,18 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		updateToolbar(lastKnownToolbarOffset);
 	}
 
-	protected void setupRoundedBackground(@NonNull View view) {
-		setupRoundedBackground(view, ContextCompat.getColor(app, getActiveColorId(nightMode)));
+	protected void setupRoundedBackground(@NonNull View view, ButtonBackground background) {
+		setupRoundedBackground(view, ContextCompat.getColor(app, getActiveColorId(nightMode)), background);
 	}
 
-	protected void setupRoundedBackground(@NonNull View view, @ColorInt int color) {
-		Drawable normal = createRoundedDrawable(UiUtilities.getColorWithAlpha(color, 0.1f));
-		setupRoundedBackground(view, normal, color);
+	protected void setupRoundedBackground(@NonNull View view, @ColorInt int color, ButtonBackground background) {
+		Drawable normal = createRoundedDrawable(UiUtilities.getColorWithAlpha(color, 0.1f), background);
+		setupRoundedBackground(view, normal, color, background);
 	}
 
-	protected void setupRoundedBackground(@NonNull View view, @NonNull Drawable normal, @ColorInt int color) {
-		Drawable selected = createRoundedDrawable(UiUtilities.getColorWithAlpha(color, 0.5f));
+	protected void setupRoundedBackground(@NonNull View view, @NonNull Drawable normal,
+	                                      @ColorInt int color, ButtonBackground background) {
+		Drawable selected = createRoundedDrawable(UiUtilities.getColorWithAlpha(color, 0.5f), background);
 		setupRoundedBackground(view, normal, selected);
 	}
 
@@ -249,7 +261,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		return AppCompatResources.getDrawable(app, nightMode ? R.drawable.purchase_button_ripple_dark : R.drawable.purchase_button_ripple_light);
 	}
 
-	protected Drawable createRoundedDrawable(@ColorInt int color) {
-		return UiUtilities.createTintedDrawable(app, R.drawable.rectangle_rounded, color);
+	protected Drawable createRoundedDrawable(@ColorInt int color, ButtonBackground background) {
+		return UiUtilities.createTintedDrawable(app, background.drawableId, color);
 	}
 }
