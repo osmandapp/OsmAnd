@@ -548,9 +548,9 @@
     <string name="map_online_data_descr">Używa map online (pobiera i przechowuje kafelki na karcie pamięci).</string>
     <string name="shared_string_online_maps">Mapy online</string>
     <string name="online_map_settings_descr">Wybierz źródła kafelków online i offline.</string>
-    <string name="osmand_rastermaps_plugin_description">Umożliwia uzyskanie dostępu do wielu rodzajów map online (tzw. kafelki lub raster), od gotowych kafelków OpenStreetMap (jak Mapnik) do zdjęć satelitarnych i specjalnych warstw map pogodowych, map klimatycznych, map geologicznych, warstw cieniowania rzeźby terenu itp. 
+    <string name="osmand_rastermaps_plugin_description">Umożliwia uzyskanie dostępu do wielu rodzajów map online (tzw. kafelki lub raster), od gotowych kafelków OpenStreetMap (jak Mapnik) do zdjęć satelitarnych i specjalnych warstw map pogodowych, map klimatycznych, map geologicznych, warstw mapy cieniowanej itp.
 \n
-\n Każda z tych map może być wykorzystana jako główna (podstawowa) mapa lub jako nakładka, lub podkład do innej mapy podstawowej (takich jak standardowe mapy offline OsmAnd). Niektóre elementy map wektorowych OsmAnd można łatwo ukryć poprzez menu \'Konfiguracja mapy\' zgodnie z zapotrzebowaniem aby mapa podkładowa była lepiej widoczna. 
+\n Każda z tych map może być wykorzystana jako główna (podstawowa) mapa lub jako nakładka, lub podkład do innej mapy podstawowej (takich jak standardowe mapy offline OsmAnd). Niektóre elementy map wektorowych OsmAnd można łatwo ukryć poprzez menu „Konfiguracja mapy” zgodnie z zapotrzebowaniem, aby mapa podkładowa była lepiej widoczna.
 \n
 \n Mapy kafelkowe można pobierać bezpośrednio z zasobów sieciowych, jak i przygotować je do użytku w trybie offline (i ręcznie skopiować do katalogu danych OsmAnd) jako bazy danych SQLite, które mogą być przygotowane przez niezależnych dostawców map.</string>
     <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w tle poprzez okresowe wybudzanie urządzenia GPS (przy wyłączonym ekranie).</string>
@@ -687,7 +687,7 @@
     <string name="rendering_attr_appMode_name">Tryb renderowania</string>
     <string name="rendering_attr_appMode_description">Optymalizuj mapę dla</string>
     <string name="rendering_attr_contourLines_description">Wyświetl od stopnia przybliżenia (wymaga danych poziomic):</string>
-    <string name="rendering_attr_contourLines_name">Wyświetl izolinie</string>
+    <string name="rendering_attr_contourLines_name">Wyświetl poziomice</string>
     <string name="rendering_attr_hmRendered_description">Zwiększ liczbę szczegółów pokazywanych na mapie.</string>
     <string name="rendering_attr_hmRendered_name">Wyświetl więcej szczegółów na mapie</string>
     <string name="route_roundabout">Na rondzie wybierz %1$d zjazd</string>
@@ -878,13 +878,13 @@
     <string name="rendering_attr_noAdminboundaries_name">Granice</string>
     <string name="rendering_attr_noAdminboundaries_description">Pomiń wyświetlenie granic regionalnych (poziomy administratora 5-9).</string>
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
-    <string name="download_srtm_maps">Izolinie</string>
+    <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
-    <string name="srtm_plugin_name">Izolinie</string>
-    <string name="srtm_plugin_description">Dostarcza warstwy izolinii i cieniowania rzeźby terenu wyświetlanych na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu. (Proszę zauważyć, że dane izolinii i cieniowania terenu należy osobno pobrać po aktywacji wtyczki.)
+    <string name="srtm_plugin_name">Poziomice</string>
+    <string name="srtm_plugin_description">Dostarcza nakładkę poziomicy i warstwę mapy cieniowanej wyświetlanych na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu. (Proszę zauważyć, że dane izolinii i cieniowania terenu należy osobno pobrać po aktywacji wtyczki.)
 \n
 \nŚwiatowe dane (między 70° szerokości północnej a 70° szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems).</string>
-    <string name="index_srtm_ele">Izolinie</string>
+    <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
     <string name="audionotes_plugin_description">Twórz uwagi audio/zdjęcia/wideo podczas podróży, korzystając z przycisku mapy lub menu kontekstowego lokalizacji.</string>
     <string name="audionotes_plugin_name">Uwagi audio/wideo</string>
@@ -916,13 +916,13 @@
     <string name="shared_string_control_stop">Zakończ</string>
     <string name="shared_string_control_start">Start</string>
     <string name="map_widget_av_notes">Uwagi audio/wideo</string>
-    <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd dla izolinii w trybie offline</string>
+    <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd dla poziomic w trybie offline</string>
     <string name="map_widget_distancemeasurement">Pomiar odległości</string>
     <string name="dropbox_plugin_description">Synchronizuj trasy i uwagi audio/wideo ze swoim kontem Dropbox.</string>
     <string name="dropbox_plugin_name">Wtyczka Dropbox</string>
     <string name="intermediate_points_change_order">Zmień kolejność</string>
-    <string name="srtm_paid_version_msg">Rozważ zakup wtyczki dodającej izolinie, aby wspomóc dalszy rozwój.</string>
-    <string name="srtm_paid_version_title">Wtyczka izolinii</string>
+    <string name="srtm_paid_version_msg">Rozważ zakup wtyczki dodającej poziomice, aby wspomóc dalszy rozwój.</string>
+    <string name="srtm_paid_version_title">Wtyczka poziomic</string>
     <string name="recording_context_menu_arecord">Zrób uwagę audio</string>
     <string name="recording_context_menu_vrecord">Zrób uwagę wideo</string>
     <string name="recording_context_menu_show">Wyświetlanie</string>
@@ -935,7 +935,7 @@
     <string name="precise_routing_mode_descr">Obliczanie precyzyjnych tras w nawigacji. Funkcja nadal jest dość powolna i ograniczona odległością.</string>
     <string name="local_indexes_cat_av">Dane audio/video</string>
     <string name="support_new_features_descr">Wesprzyj prace nad nowymi funkcjami przez przekazanie darowizny.</string>
-    <string name="download_hillshade_maps">Cieniowanie rzeźby terenu</string>
+    <string name="download_hillshade_maps">Mapy cieniowane</string>
     <string name="av_use_external_camera_descr">Robi zdjęcia przy użyciu aplikacji systemowej.</string>
     <string name="av_use_external_camera">Używanie aplikacji aparatu</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -949,7 +949,7 @@
     <string name="av_def_action_choose">Na żądanie\?</string>
     <string name="access_arrival_time">Czas przybycia</string>
     <string name="map_widget_gps_info">Dane GPS</string>
-    <string name="layer_hillshade">Cieniowanie rzeźby terenu</string>
+    <string name="layer_hillshade">Warstwa mapy cieniowanej</string>
     <string name="osmand_play_title_30_chars">OsmAnd Mapy i nawigacja</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ mapy i nawigacja</string>
     <string name="street_name">Nazwa ulicy</string>
@@ -973,7 +973,7 @@
     <string name="available_downloads_left">%1$d dostępnych plików do pobrania</string>
     <string name="use_magnetic_sensor_descr">Wykorzystuje czujnik pola magnetycznego zamiast czujnika orientacji, w celu określania kierunku kompasu.</string>
     <string name="use_magnetic_sensor">Używanie czujnika magnetycznego</string>
-    <string name="local_indexes_cat_srtm">Izolinie</string>
+    <string name="local_indexes_cat_srtm">Poziomice</string>
     <string name="use_kalman_filter_compass_descr">Zmniejsza hałas w odczytach kompasu, ale dodaje bezwładność.</string>
     <string name="use_kalman_filter_compass">Używanie filtra Kalmana</string>
     <string name="wait_current_task_finished">Proszę zaczekać, aż bieżące zadanie zostanie zakończone</string>
@@ -1679,15 +1679,15 @@
     <string name="regions">Regiony</string>
     <string name="region_maps">Mapy regionu</string>
     <string name="world_maps">Mapy świata</string>
-    <string name="hillshade_layer_disabled">Wyłączona warstwa cieniowania rzeźby terenu</string>
-    <string name="srtm_plugin_disabled">Wyłączone izolinie</string>
+    <string name="hillshade_layer_disabled">Wyłączona warstwa mapy cieniowanej</string>
+    <string name="srtm_plugin_disabled">Wyłączone poziomice</string>
     <string name="favourites_edit_dialog_title">Informacje ulubione</string>
     <string name="downloading_number_of_files">Pobieranie %1$d plik…</string>
     <string name="show_free_version_banner">Baner darmowej wersji</string>
     <string name="show_free_version_banner_description">Wyświetla baner wersji darmowej w przypadku zainstalowania wersji płatnej.</string>
     <string name="buy">Kup</string>
     <string name="activate_seamarks_plugin">Aktywuj wtyczkę \"Widok mapy morskiej\"</string>
-    <string name="activate_srtm_plugin">Aktywuj wtyczkę \"Izolinie\"</string>
+    <string name="activate_srtm_plugin">Aktywuj wtyczkę „Poziomice”</string>
     <string name="later">Później</string>
     <string name="get_full_version">Pełna wersja</string>
     <string name="downloads">Pobierz</string>
@@ -2034,11 +2034,11 @@
     <string name="search_hint">Proszę wprowadzić miasto, adres, nazwę użytecznego miejsca</string>
     <string name="rendering_value_light_brown_name">Jasnobrązowy</string>
     <string name="rendering_value_dark_brown_name">Ciemnobrązowy</string>
-    <string name="rendering_attr_contourColorScheme_name">Zestaw kolorów izolinii</string>
+    <string name="rendering_attr_contourColorScheme_name">Zestaw kolorów poziomic</string>
     <string name="rendering_attr_surfaceIntegrity_name">Spójność nawierzchni dróg</string>
     <string name="christmas_poi">Bożonarodzeniowe miejsca</string>
     <string name="save_track_min_speed_descr">Filtr: nie rejestruje punktów przed osiągnięciem określonej prędkości.</string>
-    <string name="rendering_attr_contourColorScheme_description">Zestaw kolorów izolinii</string>
+    <string name="rendering_attr_contourColorScheme_description">Zestaw kolorów poziomic</string>
     <string name="save_track_min_speed">Najmniejsza rejestrowana prędkość</string>
     <string name="save_track_min_distance">Najmniejsza zmiana położenia</string>
     <string name="save_track_min_distance_descr">Filtr: ustala minimalną odległość od poprzedniego punktu do nowo rejestrowanego.</string>
@@ -2229,7 +2229,7 @@
     <string name="select_city">Wybierz miasto</string>
     <string name="select_postcode">Szukaj kodu pocztowego</string>
     <string name="subscribe_email_desc">Zapisz się do naszej subskrypcji dotyczącej rabatów na aplikację i zgarnij 3 dodatkowe pobrania map!</string>
-    <string name="depth_contour_descr">Izolinie głębokości morza i znaki orientacyjne.</string>
+    <string name="depth_contour_descr">Poziomice głębokości morza i znaki orientacyjne.</string>
     <string name="sea_depth_thanks">Dziękujemy za zakup \"Izobat\"</string>
     <string name="index_item_depth_contours_osmand_ext">Izobaty</string>
     <string name="index_item_depth_points_southern_hemisphere">Mapa batymetryczna półkuli południowej</string>
@@ -2271,9 +2271,9 @@
     <string name="shared_string_plugin">Wtyczka</string>
     <string name="srtm_menu_download_descr">Pobierz mapę \"Izolinie\" do użycia dla tego obszaru.</string>
     <string name="hide_from_zoom_level">Ukrywaj, zaczynając od poziomu przybliżenia</string>
-    <string name="hillshade_purchase_header">Zainstaluj wtyczkę \"Izolinie\", aby wyświetlić stopniowane obszary pionowe.</string>
-    <string name="hillshade_menu_download_descr">Pobierz mapę \"Cieniowanie Rzeźby Terenu\", by wyświetlić cieniowanie pionowe.</string>
-    <string name="srtm_purchase_header">Kup i zainstaluj wtyczkę \"Izolinie\", aby wyświetlić stopniowane obszary pionowe.</string>
+    <string name="hillshade_purchase_header">Zainstaluj wtyczkę „Poziomice”, aby wyświetlić stopniowane obszary pionowe.</string>
+    <string name="hillshade_menu_download_descr">Pobierz nakładkę mapy „Mapa cieniowana”, aby wyświetlić cieniowanie pionowe.</string>
+    <string name="srtm_purchase_header">Kup i zainstaluj wtyczkę „Poziomice”, aby wyświetlić stopniowane obszary pionowe.</string>
     <string name="osmand_plus_extended_description_part8">Przybliżony zasięg i jakość mapy: 
 \n • Europa Zachodnia: **** 
 \n • Europa Wschodnia: *** 
@@ -2681,12 +2681,12 @@
     <string name="off_road_render_descr">Do przejazdów terenowych, oparty na stylu \"topograficzny\", do użycia z podkładami o barwie zielonej. Zmniejszona szerokość głównych dróg, zwiększona szerokość dróg leśnych i polnych, ścieżek, dróg rowerowych i innych.</string>
     <string name="nautical_render_descr">Do nawigacji morskiej. Zawiera boje, latarnie morskie, drogi rzeczne, drogi morskie, porty, obiekty żeglugi i izobaty.</string>
     <string name="ski_map_render_descr">Do narciarstwa. Zawiera trasy zjazdowe, wyciągi narciarskie, trasy biegowe itp. Przyciemnia dodatkowe obiekty mapy.</string>
-    <string name="light_rs_render_descr">Prosty styl dla nawigacji drogowej. Delikatny styl nocny, izolinie, kontrastujące drogi w kolorze pomarańczowym, przyciemnione drugoplanowe obiekty mapy.</string>
+    <string name="light_rs_render_descr">Prosty styl dla nawigacji drogowej. Delikatny styl nocny, poziomice, kontrastujące drogi w kolorze pomarańczowym, przyciemnione drugoplanowe obiekty mapy.</string>
     <string name="topo_render_descr">Do uprawiania turystyki pieszej, trekkingu i kolarstwa przyrodniczego. Czytelny na zewnątrz. Kontrastujące drogi i naturalne obiekty, różne rodzaje tras, zaawansowane opcje izolinii, dodatkowe szczegóły. Regulacja integralności powierzchni odróżnia jakość drogi. Brak trybu nocnego.</string>
     <string name="mapnik_render_descr">Stary, domyślny styl „Mapnik”. Kolory podobne do „Mapnika”.</string>
     <string name="touring_view_render_descr">Styl turystyczny o wysokim kontraście i maksymalnej szczegółowości. Zawiera wszystkie opcje domyślnego stylu OsmAnd, wyświetlając jak najwięcej szczegółów, w szczególności drogi, ścieżki i inne sposoby podróżowania. Czyste rozróżnienie typów dróg jak w atlasie turystycznym. Nadaje się do użytku w dzień, w nocy i na zewnątrz.</string>
-    <string name="default_render_descr">Styl ogólnego przeznaczenia. Wyraźnie pokazuje w gęsto zaludnionych miastach. Zawiera izolinie, drogi, jakość nawierzchni, ograniczenia dostępu, oznaczenia dróg, renderowanie ścieżek z uwzględnieniem klasyfikacji trudności, obiekty sportów spływowych.</string>
-    <string name="contour_lines_hillshade_maps">Mapy izolinii i cieniowania wzniesień</string>
+    <string name="default_render_descr">Styl ogólnego przeznaczenia. Wyraźnie pokazuje w gęsto zaludnionych miastach. Zawiera poziomice, drogi, jakość nawierzchni, ograniczenia dostępu, oznaczenia dróg, renderowanie ścieżek z uwzględnieniem klasyfikacji trudności, obiekty sportów spływowych.</string>
+    <string name="contour_lines_hillshade_maps">Poziomice i mapy cieniowane</string>
     <string name="get_osmand_live">Zdobądź OsmAnd Live i odblokuj wszystkie funkcjonalności: dzienne uaktualnienia map z nieograniczoną liczbą pobrań, wszystkie płatne i nieodpłatne wtyczki, Wikipedię, przewodniki Wikipodróży i wiele innych.</string>
     <string name="purchase_dialog_travel_description">Kup jedną z poniższych opcji, aby otrzymać funkcję przewodnika offline:</string>
     <string name="open_wikipedia_link_online">Otwórz odnośnik do Wikipedii online</string>
@@ -3223,7 +3223,7 @@
     <string name="shared_string_memory_used_gb_desc">Wykorzystuje %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Wykorzystuje %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Wykorzystuje %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Izolinie i cieniowanie wzniesień</string>
+    <string name="contour_lines_and_hillshade">Poziomice i mapa cieniowana</string>
     <string name="routing_attr_prefer_unpaved_name">Preferowanie nieutwardzonych dróg</string>
     <string name="routing_attr_prefer_unpaved_description">Preferuj drogi nieutwardzone.</string>
     <string name="update_all_maps">Zaktualizuj wszystkie mapy</string>
@@ -3250,7 +3250,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferuje drogi nieutwardzone.</string>
     <string name="layer_osm_edits">Zmiany OSM</string>
     <string name="quick_action_contour_lines_descr">Przycisk wyświetlający lub ukrywający izolinie na mapie.</string>
-    <string name="quick_action_hillshade_descr">Przycisk do pokazywania lub ukrywania cieniowania terenu na mapie.</string>
+    <string name="quick_action_hillshade_descr">Przycisk do pokazywania lub ukrywania cieniowania na mapie.</string>
     <string name="tts_initialization_error">Nie można uruchomić mechanizmu zamiany tekstu na mowę.</string>
     <string name="shared_preference">Wspólne</string>
     <string name="simulate_your_location_gpx_descr">Symuluje położenie, używając zarejestrowanej trasy GPX.</string>
@@ -3464,7 +3464,7 @@
     <string name="delete_description">Usuń opis</string>
     <string name="quick_action_terrain_descr">Przycisk do wyświetlania lub ukrywania warstwy terenu na mapie.</string>
     <string name="download_slope_maps">Nachylenie</string>
-    <string name="terrain_empty_state_text">Wyświetla cieniowanie wzniesień lub nachylenia na mapie. Przeczytaj więcej o tego rodzaju mapach na naszej stronie.</string>
+    <string name="terrain_empty_state_text">Wyświetla cieniowania lub nachylenia na mapie. Przeczytaj więcej o tego rodzaju mapach na naszej stronie.</string>
     <string name="shared_string_legend">Legenda</string>
     <string name="shared_string_zoom_levels">Poziom powiększenia</string>
     <string name="shared_string_transparency">Przejrzystość</string>
@@ -3472,14 +3472,14 @@
     <string name="slope_download_description">Do wyświetlania nachylenia terenu wymagane są dodatkowe mapy.</string>
     <string name="terrain_slider_description">Ustaw minimalny i maksymalny poziom powiększenia, na których będzie wyświetlana warstwa.</string>
     <string name="slope_description">Nachylenie używa kolorów do wizualizacji stromości terenu.</string>
-    <string name="hillshade_description">Cieniowanie wzniesień wykorzystuje ciemne odcienie do pokazania stoków, szczytów i nizin.</string>
+    <string name="hillshade_description">Mapa cieniowana wykorzystuje ciemne odcienie do wyświetlania stoków, szczytów i nizin.</string>
     <string name="shared_string_terrain">Teren</string>
     <string name="n_items_of_z">%1$s z %2$s</string>
     <string name="shared_string_square">Kwadrat</string>
     <string name="shared_string_circle">Okrąg</string>
     <string name="select_shape">Wybierz kształt</string>
-    <string name="hillshade_download_description">Cieniowanie wzniesień wymaga dodatkowych map.</string>
-    <string name="shared_string_hillshade">Cieniowanie wzniesień</string>
+    <string name="hillshade_download_description">Potrzebne są dodatkowe mapy, aby wyświetlić cieniowanie na mapie.</string>
+    <string name="shared_string_hillshade">Mapa cieniowana</string>
     <string name="checking_for_duplicate_description">OsmAnd wyszukuje duplikaty %1$s wśród istniejących elementów. 
 \n 
 \nTo może zająć chwilę.</string>
@@ -3793,7 +3793,7 @@
     <string name="sort_name_ascending">Nazwa: A – Z</string>
     <string name="what_is_new">Co nowego</string>
     <string name="start_finish_icons">Ikony startu i końca</string>
-    <string name="contour_lines_thanks">Dziękujemy za zakup \"Izolinii\"</string>
+    <string name="contour_lines_thanks">Dziękujemy za zakup „Poziomice”</string>
     <string name="osm_live_payment_desc_hw">Subskrypcja jest naliczana za wybrany okres. Anuluj go w AppGallery w dowolnym momencie.</string>
     <string name="osm_live_payment_subscription_management_hw">Płatność jest pobierana z Twojego konta AppGallery podczas potwierdzania zakupu.
 \n
@@ -3974,7 +3974,7 @@
     <string name="uploading_count">Przesyłanie %1$d z %2$d</string>
     <string name="uploaded_count">Przesłano %1$d z %2$d</string>
     <string name="toast_select_edits_for_upload">Wybierz zmiany do przesłania</string>
-    <string name="hillshade_slope_contour_lines">Cieniowanie wzniesień / Nachylenie / Izolinie</string>
+    <string name="hillshade_slope_contour_lines">Mapa cieniowana / Nachylenie / Poziomice</string>
     <string name="open_place_reviews_plugin_description">Wysyłaj zdjęcia, recenzje i linki dotyczące miejsc publicznych, takich jak restauracje, hotele, muzea i punkty trasy jako otwarte dane https://openplacereviews.org/data/.
 \n
 \nCzytaj więcej na https://openplacereviews.org</string>
@@ -4079,8 +4079,8 @@
     <string name="announce_when_exceeded">Ogłoś, gdy zostanie przekroczony</string>
     <string name="user_points">Punkty użytkownika</string>
     <string name="output">Wyjście</string>
-    <string name="srtm_unit_format">Wariant jednostkowy izolinii</string>
-    <string name="srtm_download_list_help_message">OsmAnd udostępnia dane izolinii w metrach i stopach. Aby zmienić format, należy ponownie pobrać plik.</string>
+    <string name="srtm_unit_format">Wariant jednostkowy poziomic</string>
+    <string name="srtm_download_list_help_message">OsmAnd udostępnia dane poziomic w metrach i stopach. Aby zmienić format, należy ponownie pobrać plik.</string>
     <string name="srtm_download_single_help_message">Proszę wybrać wariant. Aby zmienić format, należy ponownie pobrać plik.</string>
     <string name="route_line_use_gradient_coloring">Linia trasy jest kolorowana według nachylenia wzniesień.</string>
     <string name="shared_string_min_height">Min. wysokość</string>
@@ -4190,7 +4190,7 @@
     <string name="complete_purchase">Zakończ zakup</string>
     <string name="regular_price">Zwykła cena</string>
     <string name="purchases_feature_desc_nautical">Uzyskaj dostęp do informacji o głębokości morskiej</string>
-    <string name="purchases_feature_desc_terrain">Izolinie terenu, pełna mapa z cieniowaniem rzeźby terenu w ciemnych odcieniach oraz mapy nachylenia z kolorami do wyświetlenia, szczytami i nizinami.</string>
+    <string name="purchases_feature_desc_terrain">Poziomice terenu, pełna mapa cieniowana w ciemnych odcieniach oraz mapy nachylenia z kolorami do wyświetlenia, szczytami i nizinami.</string>
     <string name="purchases_feature_desc_wikivoyage">Przeglądaj Wikipedię w trybie offline. Artykuły podzielone według krajów i regionów, dostępne we wszystkich językach.</string>
     <string name="purchases_feature_desc_wikipedia">Przeglądaj Wikipedię w trybie offline. Artykuły podzielone według krajów i regionów, dostępne we wszystkich językach.</string>
     <string name="purchases_feature_desc_combined_wiki">Przeglądaj artykuły z Wikipedii w podróży, bez połączenia z Internetem. Dane w trybie offline podzielone według krajów i dostępne we wszystkich językach.</string>
@@ -4204,7 +4204,7 @@
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia i Wikipodróże w trybie offline</string>
     <string name="offline_wikipeadia">Wikipedia w trybie offline</string>
     <string name="offline_wikivoyage">Wikipodróże w trybie offline</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Mapy terenu: izolinie, cieniowanie wzniesień, nachylenie</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Mapy terenu: poziomice, mapy cieniowane, nachylenie</string>
     <string name="terrain_maps">Mapy terenu</string>
     <string name="nautical_depth">Głębokość morska</string>
     <string name="advanced_widgets">Zaawansowane widżety</string>
@@ -4249,4 +4249,22 @@
     <string name="logout_from_osmand_cloud">Wyloguj się z OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Czy na pewno chcesz się wylogować\?
 \nMusisz zalogować się ponownie, aby wykonać kopię zapasową lub przywrócić dane.</string>
+    <string name="backup_deleting_all_data_descr">Proszę zaczekać, aż OsmAnd usunie wszystkie Twoje dane z chmury. Wszystkie dane na urządzeniu pozostają nietknięte.</string>
+    <string name="backup_error_subscription_was_expired_descr">Twoja subskrypcja OsmAnd Pro wygasła - odnów ją, aby korzystać z kopii zapasowej. Nadal możesz przywracać dane z chmury.</string>
+    <string name="backup_deleting_all_data">Usuwanie wszystkich danych</string>
+    <string name="backup_deleted_all_data">Usunięto wszystkie dane</string>
+    <string name="backup_deleted_all_data_descr">Wszystkie Twoje dane zostały usunięte z OsmAnd Cloud.</string>
+    <string name="backup_version_history_removed">Cała historia wersji jest usunięta</string>
+    <string name="backup_data_removed">Wszystkie dane są usunięte</string>
+    <string name="shared_string_progress">Postęp</string>
+    <string name="backup_do_not_have_any">Nie masz jeszcze żadnej kopii zapasowej online</string>
+    <string name="backup_dont_have_any_descr">Skonfiguruj automatyczną kopię zapasową, aby nie martwić się o utratę danych.</string>
+    <string name="backup_welcome_back">Witamy ponownie!</string>
+    <string name="backup_welcome_back_descr">Możesz przywrócić dane na tym urządzeniu za pomocą istniejących kopii zapasowych lub skonfigurować kopię zapasową tego urządzenia do OsmAnd Cloud.</string>
+    <string name="backup_setup">Skonfiguruj kopię zapasową</string>
+    <string name="backup_restore_now">Przywróć teraz</string>
+    <string name="attribute">Atrybut</string>
+    <string name="shared_string_purchased">Zakupiono</string>
+    <string name="explore_wikipedia_offline">Przeglądaj Wikipedię w trybie offline.</string>
+    <string name="contour_lines_hillshades_slope">Poziomice, mapy cieniowane, nachylenie</string>
 </resources>
