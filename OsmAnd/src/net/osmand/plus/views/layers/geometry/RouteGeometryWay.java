@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -13,7 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RouteColoringType;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -45,7 +44,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	private Integer customColor;
 	private Float customWidth;
 	private Integer customPointColor;
-	private RouteColoringType routeColoringType;
+	private ColoringType routeColoringType;
 	private String routeInfoAttribute;
 
 	private boolean needUpdate;
@@ -58,10 +57,10 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	public void setRouteStyleParams(@Nullable @ColorInt Integer color,
 	                                @Nullable Float width,
 	                                @Nullable @ColorInt Integer pointColor,
-	                                @NonNull RouteColoringType routeColoringType,
+	                                @NonNull ColoringType routeColoringType,
 	                                @Nullable String routeInfoAttribute) {
 		this.needUpdate = this.routeColoringType != routeColoringType
-				|| routeColoringType == RouteColoringType.ATTRIBUTE
+				|| routeColoringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
 		boolean widthChanged = !Algorithms.objectEquals(customWidth, width);
@@ -84,7 +83,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		}
 	}
 
-	private void updatePaints(@Nullable Float width, @NonNull RouteColoringType routeColoringType) {
+	private void updatePaints(@Nullable Float width, @NonNull ColoringType routeColoringType) {
 		if (width != null) {
 			getContext().updateBorderWidth(width);
 		}

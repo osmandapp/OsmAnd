@@ -20,7 +20,7 @@ public class ColoringTypeAvailabilityCache {
 	}
 
 	public boolean isColoringAvailable(@NonNull RouteCalculationResult route,
-	                                   @NonNull RouteColoringType routeColoringType,
+	                                   @NonNull ColoringType routeColoringType,
 	                                   @Nullable String routeInfoAttribute) {
 		if (!route.equals(prevRoute)) {
 			cache.clear();

@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Shader;
 
-import net.osmand.plus.routing.RouteColoringType;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay.GeometryGradientWayStyle;
 
@@ -20,14 +20,14 @@ public class RouteGeometryWayDrawer extends GeometryWayDrawer<RouteGeometryWayCo
 
 	private final boolean drawBorder;
 
-	private RouteColoringType routeColoringType = RouteColoringType.DEFAULT;
+	private ColoringType routeColoringType = ColoringType.DEFAULT;
 
 	public RouteGeometryWayDrawer(RouteGeometryWayContext context, boolean drawBorder) {
 		super(context);
 		this.drawBorder = drawBorder;
 	}
 
-	public void setRouteColoringType(@NonNull RouteColoringType coloringType) {
+	public void setRouteColoringType(@NonNull ColoringType coloringType) {
 		this.routeColoringType = coloringType;
 	}
 

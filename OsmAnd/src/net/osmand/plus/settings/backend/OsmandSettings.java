@@ -54,7 +54,7 @@ import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.routing.RouteColoringType;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
 import net.osmand.plus.track.GradientScaleType;
@@ -2825,8 +2825,8 @@ public class OsmandSettings {
 			"route_line_color", ColorDialogs.pallette[0]).cache().makeProfile();
 	public final CommonPreference<Integer> CUSTOM_ROUTE_COLOR_NIGHT = new IntPreference(this,
 			"route_line_color_night", ColorDialogs.pallette[0]).cache().makeProfile();
-	public final CommonPreference<RouteColoringType> ROUTE_COLORING_TYPE = new EnumStringPreference<>(this,
-			"route_line_coloring_type", RouteColoringType.DEFAULT, RouteColoringType.values()).cache().makeProfile();
+	public final CommonPreference<ColoringType> ROUTE_COLORING_TYPE = new EnumStringPreference<>(this,
+			"route_line_coloring_type", ColoringType.DEFAULT, ColoringType.values()).cache().makeProfile();
 	public final CommonPreference<String> ROUTE_INFO_ATTRIBUTE = new StringPreference(this, "route_info_attribute", null)
 			.cache().makeProfile();
 	public final CommonPreference<String> ROUTE_LINE_WIDTH = new StringPreference(this, "route_line_width", null).makeProfile();

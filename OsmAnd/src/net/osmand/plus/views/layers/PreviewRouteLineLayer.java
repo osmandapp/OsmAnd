@@ -16,7 +16,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
-import net.osmand.plus.routing.RouteColoringType;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.views.layers.geometry.GeometryWayStyle;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay.GeometryGradientWayStyle;
@@ -178,9 +178,9 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			for (int i = 0; i < tx.size(); i++) {
 				styles.add(previewLineGeometry.getDefaultWayStyle());
 			}
-		} else if (routeColoringType == RouteColoringType.ALTITUDE) {
+		} else if (routeColoringType == ColoringType.ALTITUDE) {
 			fillAltitudeGradientArrays(distances, styles);
-		} else if (routeColoringType == RouteColoringType.SLOPE) {
+		} else if (routeColoringType == ColoringType.SLOPE) {
 			fillSlopeGradientArrays(tx, ty, angles, distances, styles);
 		} else if (routeColoringType.isRouteInfoAttribute()) {
 			boolean success = fillRouteInfoAttributeArrays(tx, ty, angles, distances, styles);

@@ -24,7 +24,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 
-public enum RouteColoringType {
+public enum ColoringType {
 
 	DEFAULT("default", R.string.map_widget_renderer, R.drawable.ic_action_map_style),
 	CUSTOM_COLOR("custom_color", R.string.shared_string_custom, R.drawable.ic_action_settings),
@@ -38,7 +38,7 @@ public enum RouteColoringType {
 	@DrawableRes
 	private final int iconId;
 
-	RouteColoringType(String name, int titleId, int iconId) {
+	ColoringType(String name, int titleId, int iconId) {
 		this.name = name;
 		this.titleId = titleId;
 		this.iconId = iconId;
@@ -158,11 +158,11 @@ public enum RouteColoringType {
 	}
 
 	@NonNull
-	public static RouteColoringType getColoringTypeByName(@Nullable String name) {
+	public static ColoringType getColoringTypeByName(@Nullable String name) {
 		if (!Algorithms.isEmpty(name) && name.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX)) {
 			return ATTRIBUTE;
 		}
-		for (RouteColoringType coloringType : RouteColoringType.values()) {
+		for (ColoringType coloringType : ColoringType.values()) {
 			if (coloringType.name.equalsIgnoreCase(name)) {
 				return coloringType;
 			}
