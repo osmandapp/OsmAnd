@@ -33,7 +33,7 @@ public class ConflictViewHolder extends ItemViewHolder {
 		OsmandApplication app = getApplication();
 		SettingsItem item = pair.first.item;
 
-		setupItemView(item);
+		setupItemView(item, false);
 
 		View localVersionButton = itemView.findViewById(R.id.local_version_button);
 		localVersionButton.setOnClickListener(v -> app.getNetworkSettingsHelper().exportSettings(exportListener, item));

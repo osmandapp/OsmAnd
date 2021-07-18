@@ -1,12 +1,14 @@
 package net.osmand.plus.backup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.FileUtils;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -129,7 +131,7 @@ class BackupImporter {
 			if (reader != null) {
 				String fileName = remoteFile.getTypeNamePath();
 				File tempFile = new File(tempDir, fileName);
-				String error = backupHelper.downloadFile(tempFile, remoteFile);
+				String error = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadFileListener());
 				if (Algorithms.isEmpty(error)) {
 					is = new FileInputStream(tempFile);
 					reader.readFromStream(is, remoteFile.getName());
@@ -476,18 +478,39 @@ class BackupImporter {
 		}
 	}
 
-	public void setCancelled(boolean cancelled) {
-		this.cancelled = cancelled;
-	}
-
 	public boolean isCancelled() {
 		return cancelled;
+	}
+
+	public void cancel() {
+		this.cancelled = true;
 	}
 
 	private <T extends ThreadPoolTaskExecutor.Task> ThreadPoolTaskExecutor<T> createExecutor() {
 		ThreadPoolTaskExecutor<T> executor = new ThreadPoolTaskExecutor<>(null);
 		executor.setInterruptOnError(true);
 		return executor;
+	}
+
+	private OnDownloadFileListener getOnDownloadFileListener() {
+		return new OnDownloadFileListener() {
+			@Override
+			public void onFileDownloadStarted(@NonNull String type, @NonNull String fileName, int work) {
+			}
+
+			@Override
+			public void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+			}
+
+			@Override
+			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
+			}
+
+			@Override
+			public boolean isDownloadCancelled() {
+				return isCancelled();
+			}
+		};
 	}
 
 	private class FileDownloadTask extends ThreadPoolTaskExecutor.Task {
@@ -507,7 +530,7 @@ class BackupImporter {
 
 		@Override
 		public Void call() throws Exception {
-			error = backupHelper.downloadFile(file, remoteFile);
+			error = backupHelper.downloadFile(file, remoteFile, getOnDownloadFileListener());
 			return null;
 		}
 	}

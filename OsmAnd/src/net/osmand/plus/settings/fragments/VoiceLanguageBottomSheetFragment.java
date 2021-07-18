@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -11,6 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -47,11 +51,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
@@ -135,26 +134,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	@Override
 	public void onUpdatedIndexesList() {
-		updateItems();
-	}
-
-	private void updateItems() {
-		Activity activity = getActivity();
-		View mainView = getView();
-		if (activity != null && mainView != null) {
-			Context context = requireContext();
-			LinearLayout itemsContainer = mainView.findViewById(useScrollableItemsContainer()
-					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
-			if (itemsContainer != null) {
-				itemsContainer.removeAllViews();
-			}
-			items.clear();
-			createMenuItems(null);
-			for (BaseBottomSheetItem item : items) {
-				item.inflate(context, itemsContainer, nightMode);
-			}
-			setupHeightAndBackground(mainView);
-		}
+		updateMenuItems();
 	}
 
 	@Override
@@ -188,7 +168,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		if (indexToSelectAfterDownload != null && indexToSelectAfterDownload.isDownloaded()) {
 			updateVoiceProvider(indexToSelectAfterDownload, false);
 		}
-		updateItems();
+		updateMenuItems();
 	}
 
 	private View createTitleAndDescription(LayoutInflater inflater) {
@@ -237,7 +217,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 			@Override
 			public boolean onRadioItemClick(RadioItem radioItem, View view) {
 				selectedVoiceType = voiceType;
-				updateItems();
+				updateMenuItems();
 				return true;
 			}
 		});
@@ -306,7 +286,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void cancelIndexDownload(IndexItem indexItem, View progressBar,
-	                                 View textDescription, ImageView secondaryIcon) {
+									 View textDescription, ImageView secondaryIcon) {
 		downloadThread.cancelDownload(indexItem);
 		if (indexItem.equals(indexToSelectAfterDownload)) {
 			indexToSelectAfterDownload = null;
@@ -317,7 +297,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void startIndexDownload(IndexItem indexItem, ProgressBar progressBar,
-	                                View textDescription, ImageView secondaryIcon) {
+									View textDescription, ImageView secondaryIcon) {
 		AndroidUiHelper.updateVisibility(progressBar, true);
 		AndroidUiHelper.updateVisibility(textDescription, false);
 		progressBar.setIndeterminate(downloadThread.isDownloading());

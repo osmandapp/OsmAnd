@@ -367,6 +367,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		if (editPoiData.hasEmptyValue()) {
 			viewPager.setCurrentItem(ADVANCED_TAB);
 		}
+		editPoiData.setupInitPoint();
 		return view;
 	}
 
@@ -568,12 +569,16 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	private void dismissCheckForChanges() {
-		if (editPoiData.hasChangesBeenMade()) {
-			new AreYouSureDialogFragment().show(getChildFragmentManager(),
-					"AreYouSureDialogFragment");
+		if (editPoiData.hasChanges()) {
+			showExitDialog();
 		} else {
 			dismiss();
 		}
+	}
+
+	private void showExitDialog() {
+		DialogFragment dialog = new AreYouSureDialogFragment();
+		dialog.show(getChildFragmentManager(), "AreYouSureDialogFragment");
 	}
 
 	public EditPoiData getEditPoiData() {

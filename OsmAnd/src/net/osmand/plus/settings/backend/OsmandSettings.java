@@ -36,6 +36,7 @@ import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
 import net.osmand.plus.audionotes.NotesSortByMode;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.AngularConstants;
@@ -53,6 +54,7 @@ import net.osmand.plus.profiles.NavigationIcon;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.routing.RouteColoringType;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
 import net.osmand.plus.track.GradientScaleType;
@@ -1234,7 +1236,8 @@ public class OsmandSettings {
 	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN_UPDATE_TIME = new StringPreference(this, "backup_access_token_update_time", "").makeGlobal();
 
 	public final OsmandPreference<Long> FAVORITES_LAST_UPLOADED_TIME = new LongPreference(this, "favorites_last_uploaded_time", 0L).makeGlobal();
-	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal().makeShared();
+	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal();
+	public final OsmandPreference<String> ITINERARY_LAST_CALCULATED_MD5 = new StringPreference(this, "itinerary_last_calculated_md5", "").makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> USER_OSM_BUG_NAME =
@@ -2818,9 +2821,14 @@ public class OsmandSettings {
 	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference(this, "routing_straight_angle", 30.f).makeProfile();
 
 	public final ListStringPreference CUSTOM_ROUTE_LINE_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_route_line_colors", null, ",").makeShared().makeGlobal();
-	public final CommonPreference<Integer> ROUTE_LINE_COLOR_DAY = new IntPreference(this, "route_line_color", 0).cache().makeProfile();
-	public final CommonPreference<Integer> ROUTE_LINE_COLOR_NIGHT = new IntPreference(this, "route_line_color_night", 0).cache().makeProfile();
-	public final CommonPreference<GradientScaleType> ROUTE_LINE_GRADIENT = new EnumStringPreference<>(this, "route_line_gradient", null, new GradientScaleType[] {GradientScaleType.ALTITUDE, GradientScaleType.SLOPE}).cache().makeProfile();
+	public final CommonPreference<Integer> CUSTOM_ROUTE_COLOR_DAY = new IntPreference(this,
+			"route_line_color", ColorDialogs.pallette[0]).cache().makeProfile();
+	public final CommonPreference<Integer> CUSTOM_ROUTE_COLOR_NIGHT = new IntPreference(this,
+			"route_line_color_night", ColorDialogs.pallette[0]).cache().makeProfile();
+	public final CommonPreference<RouteColoringType> ROUTE_COLORING_TYPE = new EnumStringPreference<>(this,
+			"route_line_coloring_type", RouteColoringType.DEFAULT, RouteColoringType.values()).cache().makeProfile();
+	public final CommonPreference<String> ROUTE_INFO_ATTRIBUTE = new StringPreference(this, "route_info_attribute", null)
+			.cache().makeProfile();
 	public final CommonPreference<String> ROUTE_LINE_WIDTH = new StringPreference(this, "route_line_width", null).makeProfile();
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference(this, "enable_osmc_routing", true).makeProfile();

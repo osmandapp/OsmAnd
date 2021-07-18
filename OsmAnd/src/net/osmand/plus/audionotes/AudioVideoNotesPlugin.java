@@ -517,6 +517,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 			return additional.toString();
 		}
+
+		public static String getNameForMultimediaFile(@NonNull OsmandApplication app, @NonNull String fileName, long lastModified) {
+			if (fileName.endsWith(IMG_EXTENSION)) {
+				return app.getString(R.string.shared_string_photo) + " " + formatDateTime(app, lastModified);
+			} else if (fileName.endsWith(MPEG4_EXTENSION)) {
+				return app.getString(R.string.shared_string_video) + " " + formatDateTime(app, lastModified);
+			} else if (fileName.endsWith(THREEGP_EXTENSION)) {
+				return app.getString(R.string.shared_string_audio) + " " + formatDateTime(app, lastModified);
+			}
+			return "";
+		}
 	}
 
 	public static int getIconIdForRecordingFile(@NonNull File file) {

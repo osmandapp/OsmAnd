@@ -426,8 +426,8 @@
     <string name="current_route">Nuna kurso</string>
     <string name="osm_changes_added_to_local_edits">OSM-ŝanĝoj aldonitaj al loka ŝanĝaro</string>
     <string name="mark_to_delete">Marki por forigi</string>
-    <string name="local_recordings_delete_all_confirm">Ĉu vi volas forigi %1$d notojn\?</string>
-    <string name="local_osm_changes_upload_all_confirm">Ĉu vi volas alŝuti %1$d ŝanĝo(j)n al OSM\?</string>
+    <string name="local_recordings_delete_all_confirm">Ĉu forigi %1$d notojn\?</string>
+    <string name="local_osm_changes_upload_all_confirm">Ĉu alŝuti %1$d ŝanĝo(j)n al OSM\?</string>
     <string name="confirmation_to_clear_history">Ĉu forviŝi la historion?</string>
     <string name="delay_to_start_navigation">Ekigi gvidadon turnon-post-turno post…</string>
     <string name="shared_string_go">Ekigi</string>
@@ -828,7 +828,7 @@
     <string name="app_mode_motorcycle">Motorciklo</string>
     <string name="app_mode_boat">Boato</string>
     <string name="app_mode_aircraft">Aviadilo</string>
-    <string name="local_osm_changes_delete_all_confirm">Ĉu vi certe volas forigi %1$d OSM‑redaktojn\?</string>
+    <string name="local_osm_changes_delete_all_confirm">Ĉu forigi %1$d OSM‑redaktojn\?</string>
     <string name="animate_routing_route_not_calculated">Bonvolu antaŭe kalkuli la kurson</string>
     <string name="follow_us">Observi nin</string>
     <string name="animate_routing_route">Simuli uzante kalkulitan kurson</string>
@@ -940,8 +940,8 @@
     <string name="download_wikipedia_maps">Vikipedio</string>
     <string name="download_hillshade_maps">Nivelombrumo</string>
     <string name="local_indexes_cat_av">Sonaj/videaj datumoj</string>
-    <string name="stop_routing_confirm">Ĉu vi certe volas ĉesigi navigadon?</string>
-    <string name="clear_dest_confirm">Ĉu vi certe volas forviŝi la celon (kaj intercelojn)?</string>
+    <string name="stop_routing_confirm">Ĉu ĉesigi navigadon\?</string>
+    <string name="clear_dest_confirm">Ĉu forigi la celon (kaj intercelojn)\?</string>
     <string name="precise_routing_mode">Precizaj kursoj (alfa)</string>
     <string name="precise_routing_mode_descr">Kalkuli precizajn senerarajn kursojn. Nuntempe ĝi estas malrapida kaj nur por limigitaj distancoj.</string>
     <string name="recording_context_menu_show">Montri</string>
@@ -1302,7 +1302,7 @@
     <string name="current_track">Nuna spuro</string>
     <string name="gpx_monitoring_disabled_warn">Konservu kurson uzante GPX-fenestraĵon aŭ per \'Registrado de kurso\' agordoj.</string>
     <string name="show_current_gpx_title">Montri nunan kurson</string>
-    <string name="free_version_message">Vi povas elŝuti aŭ ĝisdatigi %1$s mapojn.</string>
+    <string name="free_version_message">%1$s mapo(j) por elŝuti aŭ ĝisdatigi.</string>
     <string name="poi_context_menu_showdescription">Montri priskribon de la interesejo.</string>
     <string name="index_name_wiki">Tutmondaj Vikipediaj interesejoj</string>
     <string name="index_name_voice">Voĉaj anoncoj (antaŭregistritaj, limigitaj ebloj)</string>
@@ -1374,7 +1374,7 @@
     <string name="show_more_map_detail">Montri pli map-detalojn</string>
     <string name="show_more_map_detail_descr">Montri kelkajn vektorajn detalojn (vojojn, ktp.) ĉe map-pligrandigo.</string>
     <string name="favourites_delete_multiple_succesful">Forigis ŝatatajn punktojn.</string>
-    <string name="favorite_delete_multiple">Ĉu certe forigi %1$d ŝatatajn ejojn kaj %2$d ŝatatajn grupojn?</string>
+    <string name="favorite_delete_multiple">Ĉu forigi %1$d ŝatatajn ejojn kaj %2$d ŝatatajn grupojn\?</string>
     <string name="favorite_friends_category">Amikoj</string>
     <string name="favorite_places_category">Ejoj</string>
     <string name="shared_string_others">Aliaj</string>
@@ -1885,7 +1885,7 @@
     <string name="unsaved_changes_will_be_lost">Ĉiuj nekonservitaj ŝanĝoj estos forigitaj. Ĉu pluigi?</string>
     <string name="downloads_left_template">ankoraŭ %1$s elŝutoj</string>
     <string name="roads">Vojoj</string>
-    <string name="downloading_number_of_files">Elŝutado – %1$d dosiero</string>
+    <string name="downloading_number_of_files">Elŝutado de %1$d dosieroj…</string>
     <string name="show_free_version_banner">Montri reklamaĵon de senpaga versio</string>
     <string name="show_free_version_banner_description">Montri reklamaĵon de senpaga versio, eĉ se vi havas pagan version.</string>
     <string name="activate_seamarks_plugin">Bonvolu aktivigi la kromprogramon “mara map-vido”</string>
@@ -1987,7 +1987,7 @@
     <string name="shared_string_change">Ŝanĝi</string>
     <string name="get_started">Ekigi</string>
     <string name="routing_attr_short_way_name">Brulaĵ-ŝparema kurso</string>
-    <string name="replace_favorite_confirmation">Ĉu vi volas anstataŭigi la ŝatatan ejon %1$s?</string>
+    <string name="replace_favorite_confirmation">Ĉu anstataŭigi la ŝatatan ejon “%1$s”\?</string>
     <string name="clear_tile_data">Forviŝi ĉiujn kahelojn</string>
     <string name="update_all_maps_now">Ĉu ĝisdatigi ĉiujn mapojn nun?</string>
     <string name="skip_map_downloading">Transsalti elŝuton de mapoj</string>
@@ -2096,7 +2096,7 @@
     <string name="quick_action_add_favorite">Aldoni ŝatatan ejon</string>
     <string name="dialog_add_action_title">Aldoni agon</string>
     <string name="quick_actions_delete">Forigi agon</string>
-    <string name="quick_actions_delete_text">Ĉu vi certe volas forigi la agon “%s”?</string>
+    <string name="quick_actions_delete_text">Ĉu forigi la agon “%s”\?</string>
     <string name="quick_favorites_show_favorites_dialog">Montri fenestron de ŝatataj ejoj</string>
     <string name="quick_favorites_name_preset">Nomo</string>
     <string name="quick_action_add_marker_descr">Butono por aldoni map‑markon al la ekrana centro.</string>
@@ -2182,7 +2182,7 @@
     <string name="shared_string_gpx_track">Spuro</string>
     <string name="add_new_folder">Aldoni novan dosierujon</string>
     <string name="points_delete_multiple_succesful">Forigis punkto(j)n.</string>
-    <string name="points_delete_multiple">Ĉu vi certe volas forigi %1$d punkto(j)n\?</string>
+    <string name="points_delete_multiple">Ĉu forigi %1$d punkto(j)n\?</string>
     <string name="route_points_category_name">Turniĝoj sur tiu ĉi kurso</string>
     <string name="track_points_category_name">Navigadpunktoj, interesejoj, objektoj nomitaj</string>
     <string name="shared_string_slope">Dekliveco</string>
@@ -2561,9 +2561,9 @@
     <string name="shared_string_more_without_dots">Pli</string>
     <string name="empty_state_osm_edits">Krei aŭ redakti OpenStreetMap-objektojn</string>
     <string name="empty_state_osm_edits_descr">Kreu aŭ redaktu OpenStreetMap-punktojn, kreu aŭ komentu OSM-rimarkojn kaj kontribuu per registritaj GPX-spuroj.</string>
-    <string name="shared_string_deleted">Forigita</string>
-    <string name="shared_string_edited">Redaktita</string>
-    <string name="shared_string_added">Aldonita</string>
+    <string name="shared_string_deleted">Forigita(j)</string>
+    <string name="shared_string_edited">Redaktita(j)</string>
+    <string name="shared_string_added">Aldonita(j)</string>
     <string name="marker_activated">Aktivis markon %s.</string>
     <string name="one_tap_active_descr">Per frapeti markon sur la mapo, movi ĝin al komenco de la listo senmalfermante kuntekstan menuon.</string>
     <string name="one_tap_active">Aktivigi per unu frapeto</string>
@@ -2969,7 +2969,7 @@
     <string name="profile_alert_need_save_title">Konservi ŝanĝojn</string>
     <string name="profile_alert_need_save_msg">Unue konservu ŝanĝojn al la profilo</string>
     <string name="profile_alert_delete_title">Forigi profilon</string>
-    <string name="profile_alert_delete_msg">Ĉu vi certe volas forigi la profilon “%s”\?</string>
+    <string name="profile_alert_delete_msg">Ĉu forigi la profilon “%s”\?</string>
     <string name="select_base_profile_dialog_title">Elektu komencan profilon</string>
     <string name="select_base_profile_dialog_message">Via propra profilo estos bazita sur iu implicita aplikaĵa profilo, kiu difinos bazajn agordojn kiel videblon de fenestraĵoj, unuojn de rapido kaj distanco. Jen implicitaj profiloj kaj ekzemplaj profiloj por krei:</string>
     <string name="select_nav_profile_dialog_title">Elekti profilon de navigo</string>
@@ -3223,7 +3223,7 @@
     <string name="routing_attr_prefer_unpaved_name">Preferi tervojojn</string>
     <string name="routing_attr_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
     <string name="update_all_maps">Ĝisdatigi ĉiujn mapojn</string>
-    <string name="update_all_maps_q">Ĉu vi certe volas ĝisdatigi ĉiujn (%1$d) mapojn\?</string>
+    <string name="update_all_maps_q">Ĉu ĝisdatigi ĉiujn (%1$d) mapojn\?</string>
     <string name="release_3_5">• ĝisdatigitaj agordoj de aplikaĵo kaj de profiloj: oportuna ordigo laŭ speco, eblaĵo alĝustigi ĉiun profilon
 \n 
 \n• nova ekrano de map‑elŝuto, propono elŝuti rilatan mapon dum foliumi mapon
@@ -3241,7 +3241,7 @@
 \n• riparoj de aliaj eraroj
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Vi povas apliki tiun ĉi ŝanĝon al ĉiuj aŭ nur al la elektita profilo.</string>
+    <string name="apply_preference_to_all_profiles">Apliki tiun ĉi ŝanĝon al ĉiuj aŭ al la elektita profilo.</string>
     <string name="shared_preference">Komuna</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferi tervojojn</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
@@ -3366,7 +3366,7 @@
     <string name="live_monitoring_tracking_interval">Registrada intertempo</string>
     <string name="search_offline_geo_error">Ne povas pritrakti koordinat‑peton “%s”.</string>
     <string name="rearrange_categories">Reordigi kategoriojn</string>
-    <string name="create_custom_categories_list_promo">Ŝanĝi ordigon de la listo, kaŝi kategoriojn. Vi povas enporti aŭ elporti ĉiujn ŝanĝojn kun profiloj.</string>
+    <string name="create_custom_categories_list_promo">Vi povas ŝanĝi ordigon de la listo aŭ kaŝi kategoriojn. Ĉiuj ŝanĝoj estas enporteblaj/elporteblaj kiel profiloj.</string>
     <string name="add_new_custom_category_button_promo">Vi povas aldoni novan propran kategorion per elekti unu aŭ pli kategoriojn.</string>
     <string name="reset_to_default_category_button_promo">Frapetu “restarigi implicitajn” por ke la ordigo de elementoj revenu al la postinstalada stato.</string>
     <string name="accessibility_mode_disabled">Alirebleca reĝimo malaktivigita en Android.</string>
@@ -3414,7 +3414,7 @@
     <string name="shared_string_routing">Kurs‑difinado</string>
     <string name="shared_string_include_data">Ampleksi kromajn datumojn</string>
     <string name="import_profile_dialog_description">La enportata profilo enhavas kromajn datumojn. Frapetu “enporti” por enporti nur profilajn datumojn aŭ elektu kromajn datumojn por enporti.</string>
-    <string name="export_profile_dialog_description">Vi povas elekti kromajn datumojn por elporti kune kun la profilo.</string>
+    <string name="export_profile_dialog_description">Elekti kromajn datumojn por elporti kune kun la profilo.</string>
     <string name="index_name_antarctica">Antarkto</string>
     <string name="shared_string_app_default_w_val">Implicita valoro (%s)</string>
     <string name="no_recalculation_setting">Sen rekalkulado</string>
@@ -3446,7 +3446,7 @@
     <string name="restore_all_profile_settings">Ĉu restarigi ĉiujn agordojn de la profilo\?</string>
     <string name="saving_new_profile">Konservado de nova profilo</string>
     <string name="profile_backup_failed">Ne povas sekurkopii profilon.</string>
-    <string name="clear_recorded_data_warning">Ĉu vi certe volas forigi registritajn datumojn\?</string>
+    <string name="clear_recorded_data_warning">Ĉu forigi registritajn datumojn\?</string>
     <string name="importing_from">Enportado de datumoj el %1$s</string>
     <string name="shared_string_importing">Enportado</string>
     <string name="checking_for_duplicate_description">Kontrolado de %1$s pri duplikatoj kontraŭ la ekzistaj elementoj en la aplikaĵo.
@@ -3454,14 +3454,14 @@
 \nPovas okupi iom da tempo.</string>
     <string name="items_added">Elementoj aldonitaj</string>
     <string name="shared_string_import_complete">Enportado finita</string>
-    <string name="import_complete_description">Ĉiuj datumoj el %1$s estas enportitaj, uzu la butonojn sube por malfermi la taŭgan parton de la aplikaĵo por administri ilin.</string>
+    <string name="import_complete_description">Ĉiuj datumoj el %1$s estas enportitaj. Uzu la butonojn sube por malfermi iun parton de la aplikaĵo por administri ilin.</string>
     <string name="recalculate_route_distance_promo">La kurso estos rekalkulita se la distanco inter la kurso kaj la nuna pozicio superas la enigitan valoron.</string>
     <string name="select_distance_route_will_recalc">Enigu la distancon super kiu la kurso estos rekalkulita.</string>
     <string name="recalculate_route_in_deviation">Rekalkuli kurson kiam devojiĝi</string>
     <string name="shared_string_terrain">Tereno</string>
     <string name="slope_download_description">Kromaj mapoj estas necesaj por vidigi deklivecon sur la mapo.</string>
     <string name="slope_read_more">Pliaj informoj pri dekliveco en %1$s.</string>
-    <string name="terrain_empty_state_text">Aktivigu por vidigi nivelombrumon (reliefon) aŭ deklivecon. Pliaj informoj pri tiuj ĉi tipoj de mapoj troviĝas sur nia retpaĝo.</string>
+    <string name="terrain_empty_state_text">Montras nivelombrumon (reliefon) aŭ deklivecon sur la mapo. Pliaj informoj pri tiuj ĉi tipoj de mapoj troviĝas sur nia retpaĝo.</string>
     <string name="download_slope_maps">Dekliveco</string>
     <string name="hillshade_description">Uzas tonojn de grizo por vidigi altaĵojn, montpintojn kaj malaltaĵojn.</string>
     <string name="slope_description">Uzas kolorojn por vidigi angulon de dekliveco.</string>
@@ -3547,7 +3547,7 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">La pago estos prenita el via konto Google Play post konfirmi aĉeton.
 \n
-\nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
+\nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo.
 \n
 \nVi povas administri kaj rezigni viajn abonojn per agordoj de Google Play.</string>
     <string name="search_poi_types_descr">Miksi specojn de interesejoj el diversaj kategorioj. Frapetu ŝaltilon por elekti la tutan kategorion, frapetu ĉe maldekstre por elekti detala(j)n objekto(j)n el la kategorio.</string>
@@ -3583,7 +3583,7 @@
 \n • riparitaj eraroj pri lingvoj skribataj dekstre-maldekstren
 \n
 \n</string>
-    <string name="additional_actions_descr">Vi povas ekigi tiujn agojn per frapeti la butonon “%1$s”.</string>
+    <string name="additional_actions_descr">Vi povas ekigi tiujn ĉi agojn per frapeti la butonon “%1$s”.</string>
     <string name="quick_action_transport_descr">Butono por montri/kaŝi publikan transporton sur la mapo.</string>
     <string name="create_edit_poi">Krei aŭ redakti interesejon</string>
     <string name="add_edit_favorite">Aldoni aŭ forigi ŝatatan ejojn</string>
@@ -3635,9 +3635,9 @@
     <string name="tiles_storage_descr">Elekti kiel konservi elŝutitajn kahelojn.</string>
     <string name="default_screen_timeout">Implicita aktiveco de ekrano</string>
     <string name="screen_timeout">Aktiveca periodo de ekrano</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Vi povas enporti aŭ elporti rapidajn agojn kune kun profiloj de aplikaĵo.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Vi povas enporti aŭ elporti rapidajn agojn kune kun profiloj de la aplikaĵo.</string>
     <string name="shared_string_delete_all_q">Ĉu forigi ĉiujn\?</string>
-    <string name="delete_all_actions_message_q">Ĉu vi certe volas neinversigeble forigi %d rapidajn agojn\?</string>
+    <string name="delete_all_actions_message_q">Ĉu neinversigeble forigi %d rapidajn agojn\?</string>
     <string name="width_limit_description">Enigu larĝon de via veturilo, iuj vojaj limigoj aplikas al larĝaj veturiloj.</string>
     <string name="height_limit_description">Enigu alton de via veturilo, iuj vojaj limigoj aplikas al altaj veturiloj.</string>
     <string name="weight_limit_description">Enigu pezon de via veturilo, iuj vojaj limigoj aplikas al pezaj veturiloj.</string>
@@ -3649,7 +3649,7 @@
     <string name="clear_tiles_warning">Per apliki tiujn ĉi ŝanĝojn, la kaŝmemorigitaj datumoj por tiu ĉi fonto de kaheloj forviŝiĝos</string>
     <string name="add_online_source">Aldoni enretan fonton</string>
     <string name="vessel_height_warning_link">Enigu alton de akvoveturilo</string>
-    <string name="vessel_height_warning">Vi povas enigi alton de via akvoveturilo por eviti malaltajn pontojn. Estu konscia, ke se ponto estas movebla, la alto en ĝia malfermita stato estos uzata.</string>
+    <string name="vessel_height_warning">Enigu alton de via akvoveturilo por eviti malaltajn pontojn. Se ponto estas movebla, la alto en ĝia malfermita stato estos uzata.</string>
     <string name="vessel_height_limit_description">Enigu alton de akvoveturilo por eviti malaltajn pontojn. Estu konscia, ke se ponto estas movebla, la alto en ĝia malfermita stato estos uzata.</string>
     <string name="vessel_width_limit_description">Enigu larĝon de akvoveturilo por eviti mallarĝajn pontojn</string>
     <string name="quick_action_showhide_mapillary_descr">Ŝaltilo por montri aŭ kaŝi tavolon de Mapillary sur la mapo.</string>
@@ -3688,7 +3688,7 @@
     <string name="app_mode_wheelchair_forward">Rulseĝo (klinita)</string>
     <string name="app_mode_go_cart">Gokarto</string>
     <string name="osm_edit_closed_note">Fermita OSM‑rimarko</string>
-    <string name="add_hidden_group_info">La aldonita punkto ne estos videbla sur la mapo, ĉar la elektita grupo estas kaŝita, vi povas trovi ĝin en “%s”.</string>
+    <string name="add_hidden_group_info">La aldonita punkto montriĝos en “%s”. Malkaŝu la elektitan grupon por montri ĝin sur la mapo.</string>
     <string name="set_working_days_to_continue">Enigu tagojn de malfermo por pluigi</string>
     <string name="route_between_points">Kurso inter punktoj</string>
     <string name="plan_a_route">Plani kurson</string>
@@ -3721,7 +3721,7 @@
     <string name="navigation_profile">Profilo de navigo</string>
     <string name="route_between_points_add_track_desc">Elektu dosieron de spuro al kiu nova segmento estos aldonita.</string>
     <string name="street_level_imagery">Strat-nivela fotaro</string>
-    <string name="plan_route_exit_dialog_descr">Ĉu vi certe volas forĵeti ĉiujn ŝanĝojn en la planita kurso\?</string>
+    <string name="plan_route_exit_dialog_descr">Ĉu forĵeti ĉiujn ŝanĝojn en la planita kurso\?</string>
     <string name="in_case_of_reverse_direction">Kiam en inversa direkto</string>
     <string name="save_track_to_gpx">Aŭtomate registri spuron dum navigi</string>
     <string name="shared_string_save_as_gpx">Konservi kiel novan dosieron de spuro</string>
@@ -3794,7 +3794,7 @@
     <string name="what_is_new">Kio estas nova</string>
     <string name="osm_live_payment_subscription_management_hw">La pago estos prenita el via konto AppGallery post konfirmi aĉeton.
 \n
-\nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo. La pago estos prenita por la renoviĝa periodo (monato/tri monatoj/jaro) nur je la dato de renoviĝo.
+\nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo.
 \n
 \nVi povas administri kaj rezigni viajn abonojn per la agordoj de AppGallery.</string>
     <string name="start_finish_icons">Emblemoj de komenco kaj fino</string>
@@ -3841,10 +3841,10 @@
     <string name="login_open_street_map">Ensaluti al OpenStreetMap</string>
     <string name="login_open_street_map_org">Ensaluti al OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Ensaluti per OpenStreetMap</string>
-    <string name="open_street_map_login_mode">Vi devas ensaluti por alŝuti novajn aŭ modifitajn ŝanĝojn.
+    <string name="open_street_map_login_mode">Unue ensalutu por alŝuti novajn aŭ modifitajn ŝanĝojn.
 \n
-\nVi povas ensaluti per la sekura metodo OAuth aŭ per enigi salutnomon kaj pasvorton.</string>
-    <string name="use_login_password">Ensaluti per salutnomo kaj pasvorto</string>
+\nUzu la metodon OAuth aŭ vian uzantnomon kaj pasvorton al openstreetmap.org.</string>
+    <string name="use_login_password">Uzi uzantnomon kaj pasvorton</string>
     <string name="login_account">Konto</string>
     <string name="user_login">Salutnomo</string>
     <string name="markers_history">Historio de markoj</string>
@@ -3856,7 +3856,7 @@
     <string name="gpx_upload_trackable_visibility_descr">“Spurebla” signifas, ke la GPX‑spuro ne montriĝos en publikaj listoj, sed pritraktitaj punktoj kun tempindikoj el ĝi (kiuj ne povos esti senpere ligitaj al vi) estos elŝuteblaj per la publika API GPS.</string>
     <string name="osm_edit_close_note">Fermi OSM-rimarkon</string>
     <string name="osm_edit_comment_note">Komenti OSM-rimarkon</string>
-    <string name="osm_login_descr">Vi povas ensalutii per la sekura metodo OAuth aŭ per uzi salutnomon kaj pasvorton.</string>
+    <string name="osm_login_descr">Ensalutu per la metodo OAuth aŭ per uzi uzantnomon kaj pasvorton al OSM.</string>
     <string name="shared_string_add_photo">Aldoni foton</string>
     <string name="register_on_openplacereviews">Registri ĉe
 \nOpenPlaceReviews.org</string>
@@ -3978,11 +3978,9 @@
     <string name="uploaded_count">Sendis %1$d el %2$d</string>
     <string name="toast_select_edits_for_upload">Elektu redaktojn por sendi</string>
     <string name="hillshade_slope_contour_lines">Nivelombrumo / dekliveco / nivelkurboj</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews estas komunuma projekto pri publikaj lokoj, kiel restoracioj, hoteloj, muzeoj, rekoniloj, ktp. Ĝi kolektas diversajn publikajn informojn pri tiuj punktoj: fotojn, opiniojn, ligilojn al OpenStreetMap kaj Vikipedio.
+    <string name="open_place_reviews_plugin_description">Sendi fotojn, recenzojn kaj ligilojn pri publikaj ejoj – hoteloj, muzeoj kaj vidindaĵoj, datumoj estos malfermaj: https://openplacereviews.org/data/
 \n
-\nĈiuj OpenPlaceReview‑datumoj estas malfermaj kaj disponeblaj por ĉiu: http://openplacereviews.org/data
-\n
-\nPliaj informoj ĉe http://openplacereviews.org</string>
+\nPliaj informoj ĉe https://openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Uzi test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Ensaluti al OpenPlaceReviews</string>
@@ -4007,7 +4005,7 @@
     <string name="track_recording_stop_without_saving">Ĉesigi sen konservi</string>
     <string name="track_recording_save_and_stop">Konservi kaj ĉesigi registri</string>
     <string name="track_recording_title">Registrado de spuro ĉesigita</string>
-    <string name="track_recording_description">Ĉu vi certe volas ĉesigi registradon\?
+    <string name="track_recording_description">Ĉu ĉesigi registradon\?
 \nĈiuj nekonservitaj datumoj perdiĝos.</string>
     <string name="on_pause">Paŭzigita</string>
     <string name="app_restart_required">Restarto de aplikaĵo estas necesa por apliki kelkajn agordojn.</string>
@@ -4017,7 +4015,7 @@
     <string name="live_update_frequency_week_variant">Kontrolos pri map‑ĝisdatigoj ĉiusemajne. Sekva ĝisdatigo okazos %1$s je %2$s.</string>
     <string name="live_update_frequency_day_variant">Kontrolos pri map‑ĝisdatigoj ĉiutage. Sekva ĝisdatigo okazos %1$s je %2$s.</string>
     <string name="live_update_frequency_hour_variant">Kontrolos pri map‑ĝisdatigoj ĉiuhore. Sekva ĝisdatigo okazos %1$s je %2$s.</string>
-    <string name="live_update_delete_updates_msg">Ĉu vi certe volas forigi ĉiujn %s ĝisdatigojn OsmAnd Live\?</string>
+    <string name="live_update_delete_updates_msg">Ĉu forigi ĉiujn %s ĝisdatigojn OsmAnd Live\?</string>
     <string name="track_recording_will_be_continued">La registrado pluos.</string>
     <string name="track_has_no_altitude">La spuro ne enhavas datumojn pri altitudo.</string>
     <string name="track_has_no_speed">La spuro ne enhavas datumojn pri rapido.</string>
@@ -4119,10 +4117,10 @@
     <string name="verify_email_address">Kontroli retpoŝtan adreson</string>
     <string name="verify_email_address_descr">Kontrolkodo sendita al %1$s, enigu ĝin en la kampon sube.</string>
     <string name="cloud_email_already_registered">Tiu ĉi retpoŝta adreso jam estas registrita.</string>
-    <string name="resend_verification_code">Resendi kontrolkodon</string>
+    <string name="resend_verification_code">Resendi</string>
     <string name="verification_code_missing">Mi ne ricevis kontrolkodon</string>
     <string name="verification_code_missing_description">Necesos atendi eĉ 10 minutojn por ricevi la kodon, bonvolu ankaŭ kontroli vian trudmesaĝujon. Se tio ĉi ne helpos, uzu la butonon sube.</string>
-    <string name="select_nav_profile_dialog_message">Elekto de profilo de navigo influas al maniero kiel kalkuli kurson. Eblas elekti malkonektan aŭ enretan navigilon.</string>
+    <string name="select_nav_profile_dialog_message">Profilo de navigo influas al la maniero kiel kalkuli kurson; eblas elekti malkonektan aŭ enretan navigilon.</string>
     <string name="restore_complete">Restarigita</string>
     <string name="grey_color_slope">Griza koloro estas uzata kiam dekliveco estas nekonata.</string>
     <string name="backup_version_history">Historio de versioj</string>
@@ -4132,7 +4130,7 @@
     <string name="loading_list_of_routing_services">Ŝargado de listo de disponeblaj navigiloj</string>
     <string name="shared_string_offline">Malkonekta</string>
     <string name="shared_string_online">Enreta</string>
-    <string name="osmand_online_routing_promo">Uzi antaŭdifinitajn ŝablonojn, aŭ aldoni enretajn navigilojn OSRM, GraphHopper, OpenRouteService aŭ GPX.</string>
+    <string name="osmand_online_routing_promo">Vi povas uzi antaŭdifinitajn ŝablonojn, aŭ aldoni enretajn navigilojn OSRM, GraphHopper, OpenRouteService aŭ GPX.</string>
     <string name="shared_string_external">Ekstera</string>
     <string name="provided_by">Liverata de %1$s</string>
     <string name="failed_loading_predefined_engines">Fiaskis enlegi liston de antaŭdifinitaj ŝablonoj.
@@ -4244,5 +4242,6 @@
 \n
 \n</string>
     <string name="duration_moment_ago">antaŭ momento</string>
-    <string name="approximate_route_description">Alproksimigi kurson al vojoj sur la mapo por akiri informojn pri turnoj kaj aliajn datumojn:</string>
+    <string name="approximate_route_description">Alproksimigi kurson al vojoj sur la mapo por akiri informojn pri turnoj kaj aliajn datumojn: dekliveco, specoj de vojoj kaj pli.</string>
+    <string name="enter_verification_code">Enigu unufojan pasvorton</string>
 </resources>

@@ -45,12 +45,12 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		divider = itemView.findViewById(R.id.bottom_divider);
 	}
 
-	public void bindView(SettingsItem item, boolean lastBackupItem) {
-		setupItemView(item);
+	public void bindView(SettingsItem item, boolean lastBackupItem, boolean deleteItem) {
+		setupItemView(item, deleteItem);
 		AndroidUiHelper.updateVisibility(divider, !lastBackupItem);
 	}
 
-	protected void setupItemView(@NonNull SettingsItem item) {
+	protected void setupItemView(@NonNull SettingsItem item, boolean deleteItem) {
 		OsmandApplication app = getApplication();
 		String publicName = item.getPublicName(app);
 		if (item instanceof FileSettingsItem) {
@@ -97,8 +97,9 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 				AndroidUiHelper.updateVisibility(secondIcon, false);
 			}
 		} else {
+			AndroidUiHelper.updateVisibility(secondIcon, deleteItem);
 			AndroidUiHelper.updateVisibility(progressBar, false);
-			AndroidUiHelper.updateVisibility(secondIcon, false);
+			secondIcon.setImageDrawable(getContentIcon(deleteItem ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_cloud_done));
 		}
 		itemView.setTag(item);
 	}

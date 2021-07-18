@@ -97,7 +97,7 @@
     <string name="timeline_available_for_free_now">La timeline est maintenant disponible gratuitement.</string>
     <string name="disable_monitoring">Désactiver le suivi</string>
     <string name="timeline_description">Activer le suivi pour enregistrer tous les emplacements dans l\'historique.</string>
-    <string name="app_name_short">Tracker OsmAnd</string>
+    <string name="app_name_short">Suivi de position par OsmAnd</string>
     <string name="privacy_policy_use_telegram">Telegram (l\'application de messagerie) est utilisée pour se connecter et communiquer avec d\'autres personnes.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker est l\'un des clients qui utilise la plateforme ouverte Telegram. Vos contacts peuvent utiliser n\'importe quel autre client Telegram.</string>
     <string name="privacy_policy_agree">En appuyant sur « Continuer », vous acceptez les conditions des politiques de confidentialité de Telegram et d\'OsmAnd.</string>
