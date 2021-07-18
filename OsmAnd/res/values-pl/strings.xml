@@ -4246,4 +4246,7 @@
     <string name="approximate_route_description">Dołącz trasę do dróg na mapie, aby uzyskać wszystkie zakręty i dodatkowe dane, takie jak gładkość, rodzaje dróg itp.</string>
     <string name="enter_verification_code">Wprowadź jednorazowe hasło</string>
     <string name="duration_moment_ago">przed chwilą</string>
+    <string name="logout_from_osmand_cloud">Wyloguj się z OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Czy na pewno chcesz się wylogować\?
+\nMusisz zalogować się ponownie, aby wykonać kopię zapasową lub przywrócić dane.</string>
 </resources>

@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Collection;
@@ -477,6 +478,39 @@ public class Algorithms {
 		return ((ch1 << 8) + ch2);
 	}
 
+	public static boolean startsWithAny(String s, String ... args) {
+		if (!isEmpty(s) && args != null && args.length > 0) {
+			for (String arg : args) {
+				if (s.startsWith(arg)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean containsAny(String s, String ... args) {
+		if (!isEmpty(s) && args != null && args.length > 0) {
+			for (String arg : args) {
+				if (s.contains(arg)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean endsWithAny(String s, String ... args) {
+		if (!isEmpty(s) && args != null && args.length > 0) {
+			for (String arg : args) {
+				if (s.endsWith(arg)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
 			// not very efficient algorithm
@@ -635,6 +669,9 @@ public class Algorithms {
 			if (pg != null && cp > bytesDivisor) {
 				pg.progress(cp / bytesDivisor);
 				cp = cp % bytesDivisor;
+				if (pg.isInterrupted()) {
+					throw new InterruptedIOException();
+				}
 			}
 		}
 	}

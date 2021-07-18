@@ -81,7 +81,7 @@
 						android:id="@+id/icon_view"
 						android:layout_width="@dimen/map_widget_icon"
 						android:layout_height="@dimen/map_widget_icon"
-						android:layout_marginTop="@dimen/context_menu_second_line_top_margin"
+						android:layout_gravity="end|center_vertical"
 						android:tint="?attr/default_icon_color"
 						osmand:srcCompat="@drawable/ic_action_polygom_dark" />
 
@@ -103,8 +103,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:background="?attr/activity_background_basic"
-			android:foreground="@drawable/bg_contextmenu_shadow"
-			android:foregroundGravity="top|fill_horizontal">
+			android:foregroundGravity="top|fill_horizontal"
+			tools:foreground="@drawable/bg_contextmenu_shadow">
 
 			<net.osmand.plus.LockableScrollView
 				android:id="@+id/route_menu_bottom_scroll"

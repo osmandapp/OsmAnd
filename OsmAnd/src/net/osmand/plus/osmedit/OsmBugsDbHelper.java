@@ -105,7 +105,7 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 			rowsMap.put(OSMBUGS_COL_AUTHOR, p.getAuthor());
 
 			db.execSQL(AndroidUtils.createDbInsertQuery(OSMBUGS_TABLE_NAME, rowsMap.keySet()),
-					rowsMap.keySet().toArray());
+					rowsMap.values().toArray());
 			checkOsmbugsPoints(db);
 			updateLastModifiedTime();
 			db.close();

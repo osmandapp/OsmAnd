@@ -42,7 +42,7 @@ public class SubscriptionsCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		if (purchaseHelper == null || Algorithms.isEmpty(purchaseHelper.getEverMadeSubscriptions())) {
+		if (purchaseHelper == null || Algorithms.isEmpty(purchaseHelper.getEverMadeMainPurchases())) {
 			AndroidUiHelper.updateVisibility(view, false);
 			return;
 		} else {

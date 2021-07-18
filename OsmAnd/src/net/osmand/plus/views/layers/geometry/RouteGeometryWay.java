@@ -1,22 +1,32 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RouteColoringType;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.track.GradientScaleType;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
+import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.router.RouteColorize.RouteColorizationPoint;
+import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
+import net.osmand.router.RouteStatisticsHelper.RouteStatisticComputer;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +45,8 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	private Integer customColor;
 	private Float customWidth;
 	private Integer customPointColor;
-	private GradientScaleType scaleType;
+	private RouteColoringType routeColoringType;
+	private String routeInfoAttribute;
 
 	private boolean needUpdate;
 
@@ -47,52 +58,64 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 	public void setRouteStyleParams(@Nullable @ColorInt Integer color,
 	                                @Nullable Float width,
 	                                @Nullable @ColorInt Integer pointColor,
-	                                @Nullable GradientScaleType scaleType) {
-		this.needUpdate = this.scaleType != scaleType;
+	                                @NonNull RouteColoringType routeColoringType,
+	                                @Nullable String routeInfoAttribute) {
+		this.needUpdate = this.routeColoringType != routeColoringType
+				|| routeColoringType == RouteColoringType.ATTRIBUTE
+				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
-		if (scaleType != null && !Algorithms.objectEquals(customWidth, width)) {
-			for (GeometryWayStyle<?> style : styleMap.values()) {
-				style.width = width;
-			}
+		boolean widthChanged = !Algorithms.objectEquals(customWidth, width);
+		if (widthChanged) {
+			updateStylesWidth(width);
 		}
+		updatePaints(width, routeColoringType);
+		getDrawer().setRouteColoringType(routeColoringType);
+
 		this.customColor = color;
 		this.customWidth = width;
 		this.customPointColor = pointColor;
-		this.scaleType = scaleType;
-		if (width != null) {
-			getContext().getAttrs().shadowPaint.setStrokeWidth(width + getContext().getDensity() * 2);
-		}
-		getContext().getAttrs().customColorPaint.setStrokeCap(scaleType != null ? Paint.Cap.ROUND : Paint.Cap.BUTT);
+		this.routeColoringType = routeColoringType;
+		this.routeInfoAttribute = routeInfoAttribute;
 	}
 
-	public void updateRoute(RotatedTileBox tb, RouteCalculationResult route, OsmandApplication app) {
+	private void updateStylesWidth(@Nullable Float newWidth) {
+		for (GeometryWayStyle<?> style : styleMap.values()) {
+			style.width = newWidth;
+		}
+	}
+
+	private void updatePaints(@Nullable Float width, @NonNull RouteColoringType routeColoringType) {
+		if (width != null) {
+			getContext().updateBorderWidth(width);
+		}
+		Paint.Cap cap = routeColoringType.isGradient() || routeColoringType.isRouteInfoAttribute() ?
+				Paint.Cap.ROUND : getContext().getAttrs().paint.getStrokeCap();
+		getContext().getAttrs().customColorPaint.setStrokeCap(cap);
+	}
+
+	public void updateRoute(@NonNull RotatedTileBox tb, @NonNull RouteCalculationResult route) {
 		if (needUpdate || tb.getMapDensity() != getMapDensity() || this.route != route) {
 			this.route = route;
-			List<Location> locations = route != null ? route.getImmutableAllLocations() : Collections.<Location>emptyList();
-
 			needUpdate = false;
-			if (scaleType == null || locations.size() < 2) {
+			List<Location> locations = route.getImmutableAllLocations();
+
+			if (routeColoringType.isGradient()) {
+				updateGradientRoute(tb, locations);
+			} else if (routeColoringType.isRouteInfoAttribute()) {
+				updateSolidMultiColorRoute(tb, route);
+			} else {
 				updateWay(locations, tb);
-				return;
 			}
-			GPXFile gpxFile = GpxUiHelper.makeGpxFromLocations(locations, app);
-			if (!gpxFile.hasAltitude) {
-				updateWay(locations, tb);
-				return;
-			}
-
-			// Start point can have wrong zero altitude
-			List<GPXUtilities.WptPt> pts = gpxFile.tracks.get(0).segments.get(0).points;
-			GPXUtilities.WptPt firstPt = pts.get(0);
-			if (firstPt.ele == 0) {
-				firstPt.ele = pts.get(1).ele;
-			}
-
-			RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, scaleType.toColorizationType(), 0);
-			List<RouteColorizationPoint> points = routeColorize.getResult(false);
-
-			updateWay(new GradientGeometryWayProvider(routeColorize, points), createGradientStyles(points), tb);
 		}
+	}
+
+	private void updateGradientRoute(RotatedTileBox tb, List<Location> locations) {
+		GPXFile gpxFile = GpxUiHelper.makeGpxFromLocations(locations, getContext().getApp());
+		ColorizationType colorizationType = routeColoringType.toGradientScaleType().toColorizationType();
+		RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, colorizationType, 0);
+		List<RouteColorizationPoint> points = routeColorize.getResult(false);
+
+		updateWay(new GradientGeometryWayProvider(routeColorize, points), createGradientStyles(points), tb);
 	}
 
 	private Map<Integer, GeometryWayStyle<?>> createGradientStyles(List<RouteColorizationPoint> points) {
@@ -104,6 +127,97 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 			styleMap.put(i, style);
 		}
 		return styleMap;
+	}
+
+	private void updateSolidMultiColorRoute(RotatedTileBox tileBox, RouteCalculationResult route) {
+		List<Integer> colors = getRouteInfoAttributesColors(route);
+		if (Algorithms.isEmpty(colors)) {
+			updateWay(Collections.emptyList(), Collections.emptyMap(), tileBox);
+			return;
+		}
+
+		Map<Integer, GeometryWayStyle<?>> styleMap = new TreeMap<>();
+
+		for (int i = 0; i < colors.size(); ) {
+			int color = colors.get(i);
+			GeometrySolidWayStyle style = getSolidWayStyle(color);
+			styleMap.put(i, style);
+
+			i++;
+			while (i < colors.size() && colors.get(i) == color) {
+				i++;
+			}
+		}
+
+		updateWay(route.getImmutableAllLocations(), styleMap, tileBox);
+	}
+
+	private List<Integer> getRouteInfoAttributesColors(RouteCalculationResult route) {
+		List<Location> locations = route.getImmutableAllLocations();
+		List<RouteSegmentResult> routeSegments = route.getOriginalRoute();
+		if (Algorithms.isEmpty(routeSegments)) {
+			return Collections.emptyList();
+		}
+
+		int firstSegmentLocationIdx = getIdxOfFirstSegmentLocation(locations, routeSegments);
+
+		RouteStatisticComputer statisticComputer = createRouteStatisticsComputer();
+		List<Integer> colors = new ArrayList<>(locations.size());
+		for (int i = 0; i < routeSegments.size(); i++) {
+			RouteSegmentResult segment = routeSegments.get(i);
+			RouteSegmentAttribute attribute =
+					statisticComputer.classifySegment(routeInfoAttribute, -1, segment.getObject());
+			int color = attribute.getColor();
+
+			if (i == 0) {
+				for (int j = 0; j < firstSegmentLocationIdx; j++) {
+					colors.add(color);
+				}
+			}
+
+			int pointsSize = Math.abs(segment.getStartPointIndex() - segment.getEndPointIndex());
+			for (int j = 0; j < pointsSize; j++) {
+				colors.add(color);
+			}
+
+			if (i == routeSegments.size() - 1) {
+				int start = colors.size();
+				for (int j = start; j < locations.size(); j++) {
+					colors.add(color);
+				}
+			}
+		}
+
+		return colors;
+	}
+
+	private int getIdxOfFirstSegmentLocation(List<Location> locations, List<RouteSegmentResult> routeSegments) {
+		int locationsIdx = 0;
+		LatLon segmentStartPoint = routeSegments.get(0).getStartPoint();
+		while (true) {
+			Location location = locations.get(locationsIdx);
+			if (location.getLatitude() == segmentStartPoint.getLatitude()
+					&& location.getLongitude() == segmentStartPoint.getLongitude()) {
+				break;
+			}
+			locationsIdx++;
+		}
+		return locationsIdx;
+	}
+
+	private RouteStatisticComputer createRouteStatisticsComputer() {
+		OsmandApplication app = getContext().getApp();
+		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
+		MapRenderRepositories maps = app.getResourceManager().getRenderer();
+		RenderingRuleSearchRequest currentSearchRequest =
+				maps.getSearchRequestWithAppliedCustomRules(currentRenderer, night);
+		RenderingRuleSearchRequest defaultSearchRequest =
+				maps.getSearchRequestWithAppliedCustomRules(defaultRenderer, night);
+
+		return new RouteStatisticComputer(currentRenderer, defaultRenderer,
+				currentSearchRequest, defaultSearchRequest);
 	}
 
 	@Override
@@ -142,15 +256,20 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				gradientWayStyle.currColor = RouteColorize.getIntermediateColor(prevColor, nextColor, percent);
 				gradientWayStyle.nextColor = nextColor;
 			}
+		} else if (routeColoringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle) {
+			GeometrySolidWayStyle prevStyle = (GeometrySolidWayStyle) style;
+			GeometrySolidWayStyle transparentWayStyle = getSolidWayStyle(Color.TRANSPARENT);
+			int prevStyleIdx = startLocationIndex > 0 ? startLocationIndex - 1 : 0;
+			prevStyle.color = getStyle(prevStyleIdx, transparentWayStyle).color;
 		}
 		return previousVisible;
 	}
 
 	@Override
 	protected boolean shouldSkipLocation(TByteArrayList simplification, Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
-		return scaleType == null ?
-				super.shouldSkipLocation(simplification, styleMap, locationIdx) :
-				simplification.getQuick(locationIdx) == 0;
+		return routeColoringType.isGradient()
+				? simplification.getQuick(locationIdx) == 0
+				: super.shouldSkipLocation(simplification, styleMap, locationIdx);
 	}
 
 	public void clearRoute() {
@@ -166,11 +285,20 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		Paint paint = getContext().getAttrs().paint;
 		int color = customColor != null ? customColor : paint.getColor();
 		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
-		return scaleType == null || gradientColoringUnavailable()
-				? new GeometrySolidWayStyle(getContext(), color, width, customPointColor)
-				: new GeometryGradientWayStyle(getContext(), color, width);
+		if (routeColoringType.isGradient()) {
+			return new GeometryGradientWayStyle(getContext(), color, width);
+		}
+		return new GeometrySolidWayStyle(getContext(), color, width, customPointColor);
 	}
 
+	@NonNull
+	public GeometrySolidWayStyle getSolidWayStyle(int lineColor) {
+		Paint paint = getContext().getAttrs().paint;
+		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
+		return new GeometrySolidWayStyle(getContext(), lineColor, width, customPointColor);
+	}
+
+	@NonNull
 	public GeometryGradientWayStyle getGradientWayStyle() {
 		Paint paint = getContext().getAttrs().paint;
 		int color = customColor != null ? customColor : paint.getColor();
@@ -189,21 +317,16 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 	@Override
 	protected PathGeometryZoom getGeometryZoom(RotatedTileBox tb) {
-		if (scaleType == null || gradientColoringUnavailable()) {
-			return super.getGeometryZoom(tb);
+		if (routeColoringType.isGradient()) {
+			int zoom = tb.getZoom();
+			PathGeometryZoom zm = zooms.get(zoom);
+			if (zm == null) {
+				zm = new GradientPathGeometryZoom(getLocationProvider(), tb, true);
+				zooms.put(zoom, zm);
+			}
+			return zm;
 		}
-		int zoom = tb.getZoom();
-		PathGeometryZoom zm = zooms.get(zoom);
-		if (zm == null) {
-			zm = new GradientPathGeometryZoom(getLocationProvider(), tb, true);
-			zooms.put(zoom, zm);
-		}
-		return zm;
-	}
-
-	private boolean gradientColoringUnavailable() {
-		GeometryWayProvider provider = getLocationProvider();
-		return !(provider instanceof GradientGeometryWayProvider) && provider != null;
+		return super.getGeometryZoom(tb);
 	}
 
 	private static class GradientGeometryWayProvider implements GeometryWayProvider {
@@ -294,13 +417,13 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 		}
 	}
 
-	private static class GeometrySolidWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
+	public static class GeometrySolidWayStyle extends GeometryWayStyle<RouteGeometryWayContext> {
 
-		private final Integer pointColor;
+		private final Integer directionArrowsColor;
 
-		GeometrySolidWayStyle(RouteGeometryWayContext context, Integer color, Float width, Integer pointColor) {
+		GeometrySolidWayStyle(RouteGeometryWayContext context, Integer color, Float width, Integer directionArrowsColor) {
 			super(context, color, width);
-			this.pointColor = pointColor;
+			this.directionArrowsColor = directionArrowsColor;
 		}
 
 		@Override
@@ -310,7 +433,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 
 		@Override
 		public Integer getPointColor() {
-			return pointColor;
+			return directionArrowsColor;
 		}
 
 		@Override
@@ -325,7 +448,7 @@ public class RouteGeometryWay extends GeometryWay<RouteGeometryWayContext, Route
 				return false;
 			}
 			GeometrySolidWayStyle o = (GeometrySolidWayStyle) other;
-			return Algorithms.objectEquals(pointColor, o.pointColor);
+			return Algorithms.objectEquals(directionArrowsColor, o.directionArrowsColor);
 		}
 	}
 }

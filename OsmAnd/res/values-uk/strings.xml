@@ -4244,4 +4244,7 @@
 \n</string>
     <string name="enter_verification_code">Введіть одноразовий пароль</string>
     <string name="duration_moment_ago">щойно</string>
+    <string name="logout_from_osmand_cloud">Вийти з OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Ви дійсно бажаєте вийти із системи\?
+\nЩоб створити резервну копію даних або відновити їх, потрібно буде ввійти ще раз.</string>
 </resources>

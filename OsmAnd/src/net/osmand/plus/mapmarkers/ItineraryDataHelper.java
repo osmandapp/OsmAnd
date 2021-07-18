@@ -21,12 +21,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.Version;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -174,8 +177,27 @@ public class ItineraryDataHelper {
 	}
 
 	public Exception saveFile(@NonNull File file, @NonNull List<MapMarkersGroup> groups, @Nullable List<MapMarker> sortedMarkers) {
+		long lastModifiedTime = getLastModifiedTime();
 		GPXFile gpxFile = generateGpx(groups, sortedMarkers);
-		return GPXUtilities.writeGpxFile(file, gpxFile);
+		Exception exception = GPXUtilities.writeGpxFile(file, gpxFile);
+		if (exception == null) {
+			FileInputStream is = null;
+			try {
+				is = new FileInputStream(file);
+				String md5 = new String(Hex.encodeHex(DigestUtils.md5(is)));
+				String lastMd5 = app.getSettings().ITINERARY_LAST_CALCULATED_MD5.get();
+				if (!md5.equals(lastMd5)) {
+					app.getSettings().ITINERARY_LAST_CALCULATED_MD5.set(md5);
+				} else {
+					setLastModifiedTime(lastModifiedTime);
+				}
+			} catch (IOException e) {
+				app.getSettings().ITINERARY_LAST_CALCULATED_MD5.set("");
+			} finally {
+				Algorithms.closeStream(is);
+			}
+		}
+		return exception;
 	}
 
 	private void assignExtensionWriter(GPXFile gpxFile, Collection<ItineraryGroupInfo> groups) {

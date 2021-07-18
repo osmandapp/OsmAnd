@@ -118,7 +118,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(SELECTED_STYLE_KEY, selectedStyle);
 	}

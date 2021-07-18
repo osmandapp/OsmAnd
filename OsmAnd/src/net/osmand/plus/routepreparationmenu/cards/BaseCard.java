@@ -5,6 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -13,9 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 
 public abstract class BaseCard {
 
@@ -170,4 +171,9 @@ public abstract class BaseCard {
 		this.transparentBackground = transparentBackground;
 	}
 
+	public void updateVisibility(boolean show) {
+		if (view != null) {
+			AndroidUiHelper.updateVisibility(view, show);
+		}
+	}
 }

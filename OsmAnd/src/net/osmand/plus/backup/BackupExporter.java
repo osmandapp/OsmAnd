@@ -22,10 +22,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
+
 public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
 	private final Map<String, RemoteFile> filesToDelete = new LinkedHashMap<>();
+	private ThreadPoolTaskExecutor<ItemWriterTask> executor;
 	private final NetworkExportProgressListener listener;
 
 	public interface NetworkExportProgressListener {
@@ -81,7 +84,7 @@ public class BackupExporter extends Exporter {
 		for (SettingsItem item : getItems().values()) {
 			tasks.add(new ItemWriterTask(writer, item));
 		}
-		ThreadPoolTaskExecutor<ItemWriterTask> executor = new ThreadPoolTaskExecutor<>(null);
+		executor = new ThreadPoolTaskExecutor<>(null);
 		executor.setInterruptOnError(true);
 		executor.run(tasks);
 
@@ -119,6 +122,14 @@ public class BackupExporter extends Exporter {
 		}
 	}
 
+	@Override
+	public void cancel() {
+		super.cancel();
+		if (executor != null) {
+			executor.cancel();
+		}
+	}
+
 	private OnUploadItemListener getOnUploadItemListener(Set<Object> itemsProgress, int[] dataProgress, Map<String, String> errors) {
 		return new OnUploadItemListener() {
 
@@ -146,6 +157,10 @@ public class BackupExporter extends Exporter {
 				} else {
 					checkAndDeleteOldFile(item, fileName, errors);
 				}
+				dataProgress[0] += APPROXIMATE_FILE_SIZE_BYTES / 1024;
+				if (listener != null) {
+					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+				}
 			}
 
 			@Override
@@ -167,11 +182,16 @@ public class BackupExporter extends Exporter {
 		return new OnDeleteFilesListener() {
 
 			@Override
-			public void onFileDeleteProgress(@NonNull RemoteFile file) {
+			public void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
+
+			}
+
+			@Override
+			public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
 				itemsProgress.add(file);
 				if (listener != null) {
 					listener.itemExportDone(file.getType(), file.getName());
-					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+					listener.updateGeneralProgress(file.getZipSize(), dataProgress[0]);
 				}
 			}
 
@@ -188,20 +208,17 @@ public class BackupExporter extends Exporter {
 	}
 
 	private void checkAndDeleteOldFile(@NonNull SettingsItem item, @NonNull String fileName, Map<String, String> errors) {
-		PrepareBackupResult backup = backupHelper.getBackup();
-		if (backup != null) {
-			String type = item.getType().name();
-			try {
-				ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
-				if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
-					RemoteFile remoteFile = backup.getRemoteFile(type, fileName);
-					if (remoteFile != null) {
-						backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
-					}
+		String type = item.getType().name();
+		try {
+			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+			if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
+				RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
+				if (remoteFile != null) {
+					backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
 				}
-			} catch (UserNotRegisteredException e) {
-				errors.put(type + "/" + fileName, e.getMessage());
 			}
+		} catch (UserNotRegisteredException e) {
+			errors.put(type + "/" + fileName, e.getMessage());
 		}
 	}
 
@@ -219,6 +236,12 @@ public class BackupExporter extends Exporter {
 		public Void call() throws Exception {
 			writer.write(item);
 			return null;
+		}
+
+		@Override
+		public void cancel() {
+			super.cancel();
+			writer.cancel();
 		}
 	}
 }

@@ -230,7 +230,7 @@
     <string name="shared_string_download_successful">Descarregado</string>
     <string name="downloading_list_indexes">A descarregar a lista de regiões disponíveis…</string>
     <string name="list_index_files_was_not_loaded">Não foi possível obter uma lista de regiões de https://osmand.net.</string>
-    <string name="select_index_file_to_download">Nada encontrado. Se não conseguir encontrar a sua região, pode fazê-lo por si mesmo (ver https://osmand.net).</string>
+    <string name="select_index_file_to_download">Não foi encontrado nada mas pode fazê-lo por si mesmo (ver https://osmand.net).</string>
     <string name="fav_points_edited">O ponto favorito foi editado</string>
     <string name="fav_points_not_exist">Não existem pontos favoritos</string>
     <string name="update_existing">Substituir</string>
@@ -499,7 +499,7 @@
     <string name="live_monitoring_url">Endereço web de rastreamento online</string>
     <string name="gpx_monitoring_disabled_warn">Registo de trajeto usando widget GPX ou via \'Gravar viagem\' nas configurações.</string>
     <string name="show_current_gpx_title">Mostrar rota atual</string>
-    <string name="free_version_message">Pode descarregar ou atualizar %1$s mapas.</string>
+    <string name="free_version_message">%1$s mapas para descarregar ou atualizar.</string>
     <string name="free_version_title">Versão gratuita</string>
     <string name="poi_context_menu_showdescription">Mostrar descrição do POI.</string>
     <string name="index_name_north_america">América do Norte</string>
@@ -1098,7 +1098,7 @@
     <string name="voice_pref_title">Voz</string>
     <string name="misc_pref_title">Diversos</string>
     <string name="localization_pref_title">Localização</string>
-    <string name="index_item_nation_addresses">moradas nacionais</string>
+    <string name="index_item_nation_addresses">endereços de todo o país</string>
     <string name="index_item_world_altitude_correction">Correção de altitude mundial</string>
     <string name="index_item_world_seamarks">Marcas marítimas mundiais</string>
     <string name="index_item_world_bitcoin_payments">Pagamentos de bitcoin do mundo</string>
@@ -1808,7 +1808,7 @@
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato de coordenadas</string>
     <string name="use_system_keyboard">Usar teclado do sistema</string>
-    <string name="fast_coordinates_input_descr">Escolher formato de introdução de coordenada. Poderá sempre alterá-lo ao selecionar \'Opções\'.</string>
+    <string name="fast_coordinates_input_descr">Selecione o formato de introdução de coordenadas. Toque em \'Opções\' para o alterar.</string>
     <string name="fast_coordinates_input">Introdução rápida de coordenadas</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar estradas de gelo e vaus</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus (passagens em riachos baixos).</string>
@@ -3339,7 +3339,7 @@
     <string name="recalculate_route_in_deviation">Recalcular rota em caso de desvio</string>
     <string name="select_distance_route_will_recalc">Selecione a distância após a qual o percurso será recalculado.</string>
     <string name="recalculate_route_distance_promo">A rota será recalculada se a distância da rota até o local atual for maior que o valor selecionado.</string>
-    <string name="import_complete_description">Todos os dados importados de %1$s. Use os botões abaixo para abrir qualquer parte da aplicação para os gerir.</string>
+    <string name="import_complete_description">Todos os dados foram importados de %1$s. Use os botões abaixo para abrir qualquer parte da aplicação para os gerir.</string>
     <string name="shared_string_import_complete">Importação terminada</string>
     <string name="items_added">Itens adicionados</string>
     <string name="checking_for_duplicate_description">O OsmAnd verifica %1$s para ver se existem duplicados na aplicação.
@@ -3534,11 +3534,11 @@
     <string name="navigation_profiles_item">Perfis de navegação</string>
     <string name="search_poi_types">Pesquisar categorias de POI</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">O pagamento será debitado na sua conta Google Play ao confirmar a compra.
+    <string name="osm_live_payment_subscription_management">O pagamento é cobrado da sua conta Google Play ao confirmar a compra.
 \n
-\nA subscrição é renovada automaticamente, a não ser que seja cancelada antes da data de renovação. A prestação será debitada da sua conta pelo período de renovação (mês/três meses/ano) apenas na data de renovação.
+\nÉ renovado automaticamente, a não ser que seja cancelado antes do período de renovação selecionado.
 \n
-\nPode gerir e cancelar as suas subscrições, acedendo às suas definições do Google Play.</string>
+\nFaça a gestão ou cancele as suas subscrições a partir das suas definições no Google Play em qualquer altura.</string>
     <string name="download_unsupported_action">Ação %1$s não suportada</string>
     <string name="extra_maps_menu_group">Mapas adicionais</string>
     <string name="some_articles_may_not_available_in_lang">Alguns artigos da Wikipédia podem não estar disponíveis no seu idioma.</string>
@@ -3796,11 +3796,11 @@
     <string name="start_finish_icons">Ícones de início e fim</string>
     <string name="contour_lines_thanks">Obrigado por comprar \'Curvas de nível\'</string>
     <string name="osm_live_payment_desc_hw">A subscrição é cobrada pelo período selecionado. Cancele-a na sua AppGallery a qualquer momento.</string>
-    <string name="osm_live_payment_subscription_management_hw">Ao confirmar a sua subscrição, será debitado na sua conta AppGallery.
+    <string name="osm_live_payment_subscription_management_hw">O pagamento é cobrado da sua conta AppGallery ao confirmar a compra.
 \n
-\nA subscrição é renovada automaticamente, a não ser que seja cancelada antes da data de renovação. A prestação será debitada da sua conta pelo período de renovação (mês/três meses/ano) apenas na data de renovação.
+\nÉ renovado automaticamente, a não ser que seja cancelado antes do período de renovação selecionado.
 \n
-\nPode gerir e cancelar as suas subscrições nas definições da sua AppGallery.</string>
+\nFaça a gestão ou cancele as suas subscrições a partir das suas configurações na AppGallery a qualquer momento.</string>
     <string name="routing_attr_avoid_footways_description">Evitar vias pedonais</string>
     <string name="routing_attr_avoid_footways_name">Evitar vias pedonais</string>
     <string name="what_is_new">Novidades</string>
@@ -4252,4 +4252,7 @@
     <string name="approximate_route_description">Atrair a rota às estradas no mapa para obter todas as viragens e dados adicionais, como a suavidade, tipos de estrada, etc.</string>
     <string name="enter_verification_code">Introduza a palavra-passe de uso único</string>
     <string name="duration_moment_ago">há um momento atrás</string>
+    <string name="logout_from_osmand_cloud">Sair do OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Quer terminar a sessão\?
+\nTerá de se autenticar novamente para fazer a cópia de segurança ou restaurar os dados.</string>
 </resources>

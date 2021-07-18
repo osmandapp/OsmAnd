@@ -100,7 +100,7 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 			((ItemMenuBottomSheetDialogFragment) itemMenu).setListener(createItemMenuFragmentListener());
 		}
 
-		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+		plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 		setHasOptionsMenu(true);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);

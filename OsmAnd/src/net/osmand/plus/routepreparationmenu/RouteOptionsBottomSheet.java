@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -8,8 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -60,11 +63,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.ColorInt;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 import static net.osmand.plus.settings.fragments.RouteParametersFragment.RELIEF_SMOOTHNESS_FACTOR;
@@ -255,7 +253,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		boolean changedState = app.getSettings().VOICE_MUTE.getModeValue(applicationMode);
 		if (changedState != currentMuteState) {
 			currentMuteState = changedState;
-			updateParameters();
+			updateMenuItems();
 			updateMenu();
 		}
 	}
@@ -264,7 +262,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		boolean changedState = useHeightPref.getModeValue(applicationMode);
 		if (changedState != currentUseHeightState) {
 			currentUseHeightState = changedState;
-			updateParameters();
+			updateMenuItems();
 			updateMenu();
 		}
 	}
@@ -710,24 +708,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
-		}
-	}
-
-	public void updateParameters() {
-		Activity activity = getActivity();
-		View mainView = getView();
-		if (activity != null && mainView != null) {
-			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
-					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
-			if (itemsContainer != null) {
-				itemsContainer.removeAllViews();
-			}
-			items.clear();
-			createMenuItems(null);
-			for (BaseBottomSheetItem item : items) {
-				item.inflate(activity, itemsContainer, nightMode);
-			}
-			setupHeightAndBackground(mainView);
 		}
 	}
 

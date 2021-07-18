@@ -36,9 +36,7 @@ class SqliteTileImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		if (error == null) {
 			FragmentActivity activity = activityRef.get();
 			OsmandRasterMapsPlugin plugin = OsmandPlugin.getPlugin(OsmandRasterMapsPlugin.class);
-			if (plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
-				OsmandPlugin.enablePlugin(activity, app, plugin, true);
-			}
+			OsmandPlugin.enablePluginIfNeeded(activity, app, plugin, true);
 			if (activity instanceof MapActivity) {
 				MapActivity mapActivity = (MapActivity) activity;
 				mapActivity.getMapLayers().selectMapLayer(mapActivity.getMapView(), null, null);

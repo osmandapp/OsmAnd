@@ -39,10 +39,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.ShareDialog;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.UploadPhotosAsyncTask.UploadPhotosListener;
@@ -67,6 +70,7 @@ import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -366,7 +370,7 @@ public class MenuBuilder {
 	protected void buildNearestWikiRow(ViewGroup viewGroup) {
 		final int position = viewGroup.getChildCount();
 		final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
-		buildNearestWikiRow(new SearchAmenitiesListener() {
+		buildNearestWikiRow(viewGroup, new SearchAmenitiesListener() {
 			@Override
 			public void onFinish(List<Amenity> amenities) {
 				ViewGroup viewGroup = viewGroupRef.get();
@@ -1427,13 +1431,45 @@ public class MenuBuilder {
 		return button;
 	}
 
-	protected void buildNearestWikiRow(SearchAmenitiesListener listener) {
-		if (showNearestWiki && latLon != null && amenity != null) {
-			PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
-			if (filter != null) {
-				searchSortedAmenities(filter, latLon, listener);
+	protected void buildNearestWikiRow(ViewGroup viewGroup, SearchAmenitiesListener listener) {
+		WikipediaPlugin plugin = WikipediaPlugin.getEnabledPlugin(WikipediaPlugin.class);
+		if (plugin != null) {
+			if (plugin.isLocked()) {
+				buildGetWikipediaBanner(viewGroup);
+			} else if (showNearestWiki && latLon != null && amenity != null) {
+				PoiUIFilter filter = app.getPoiFilters().getTopWikiPoiFilter();
+				if (filter != null) {
+					searchSortedAmenities(filter, latLon, listener);
+				}
 			}
 		}
+	}
+
+	private void buildGetWikipediaBanner(ViewGroup viewGroup) {
+		OsmAndFeature feature = OsmAndFeature.WIKIPEDIA;
+		LinearLayout view = buildCollapsableContentView(app, false, true);
+
+		View banner = UiUtilities.getInflater(app, !light)
+				.inflate(R.layout.get_wikipedia_context_menu_banner, view, false);
+
+		ImageView ivIcon = banner.findViewById(R.id.icon);
+		ivIcon.setImageResource(feature.getIconId(!light));
+
+		View btnGet = banner.findViewById(R.id.button_get);
+		UiUtilities.setupDialogButton(!light, btnGet, DialogButtonType.PRIMARY, R.string.get_plugin);
+		btnGet.setOnClickListener(v -> {
+			if (mapActivity != null) {
+				ChoosePlanFragment.showInstance(mapActivity, feature);
+			}
+		});
+
+		View row = createRowContainer(app, NEAREST_WIKI_KEY);
+		view.addView(banner);
+		String text = app.getString(R.string.wiki_around);
+		CollapsableView collapsableView = new CollapsableView(view, this, false);
+		buildRow(row, R.drawable.ic_action_wikipedia, null, text, 0, true, collapsableView,
+				false, 0, false, null, false);
+		viewGroup.addView(row);
 	}
 
 	protected void buildNearestPoiRow(SearchAmenitiesListener listener) {

@@ -155,7 +155,7 @@ public class MapTileLayer extends BaseMapLayer {
 		int tiles = (width + ADDITIONAL_TILE_CACHE) * (height + ADDITIONAL_TILE_CACHE);
 		mgr.setMapTileLayerSizes(this, tiles);
 
-		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
+		boolean useInternet = (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class) || OsmandPlugin.isActive(MapillaryPlugin.class))
 				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 		int maxLevel = map.getMaximumZoomSupported();
 		int tileSize = map.getTileSize();

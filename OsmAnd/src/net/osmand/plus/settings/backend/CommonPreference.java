@@ -213,7 +213,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		if (setValue(prefs, obj)) {
 			cachedValue = obj;
 			cachedPreference = prefs;
-			if (changed && !shared) {
+			if (changed && isShared()) {
 				settings.updateLastPreferencesEditTime(prefs);
 			}
 			fireEvent(obj);

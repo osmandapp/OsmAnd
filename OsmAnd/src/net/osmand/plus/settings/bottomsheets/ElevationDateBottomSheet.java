@@ -183,7 +183,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 								((BaseSettingsFragment) target).updateSetting(useHeightPref.getId());
 							}
 							if (target instanceof RouteOptionsBottomSheet) {
-								((RouteOptionsBottomSheet) target).updateParameters();
+								((RouteOptionsBottomSheet) target).updateMenuItems();
 							}
 							updateReliefButtons();
 							app.runInUIThread(new Runnable() {
@@ -200,7 +200,7 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(APP_MODE_KEY, appMode.getStringKey());
 	}

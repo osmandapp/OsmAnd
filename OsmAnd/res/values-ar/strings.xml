@@ -4190,7 +4190,7 @@
     <string name="verification_code_missing">لم أتلق رمز التحقق</string>
     <string name="verification_code_missing_description">مدة انتظار الرمز قد تصل إلى 10 دقائق ، كما يمكنك التحقق من مجلد البريد العشوائي، استخدم الزر أدناه.</string>
     <string name="restore_from_file">استعادة من ملف</string>
-    <string name="select_nav_profile_dialog_message">يؤثر \'نوع التنقل\' على كييفية حساب المسارات يمكنك الاختيار بين محركات التوجيه المتصلة وغير المتصلة بالإنترنت.</string>
+    <string name="select_nav_profile_dialog_message">\'نوع التنقل\' يحدد كيفية حساب المسارات عبر محركات توجيه متاحة بالانترنت و بدونها.</string>
     <string name="loading_list_of_routing_services">تحميل قائمة خدمات التوجيه المتوفرة</string>
     <string name="shared_string_offline">دون اتصال</string>
     <string name="shared_string_online">عبر الإنترنت</string>
@@ -4314,4 +4314,7 @@
 \n
 \n</string>
     <string name="duration_moment_ago">قبل قليل</string>
+    <string name="logout_from_osmand_cloud">تسجيل الخروج من سحابة أوسماند</string>
+    <string name="logout_from_osmand_cloud_decsr">هل أنت متأكد من تسجيل الخروج؟
+\nستحتاج إلى تسجيل الدخول مرة أخرى لعملية النسخ الاحتياطي أو استعادة البيانات.</string>
 </resources>

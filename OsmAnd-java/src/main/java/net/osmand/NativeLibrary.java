@@ -34,15 +34,21 @@ import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
+
+import static net.osmand.router.RoutePlannerFrontEnd.*;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
 
 public class NativeLibrary {
 
 
-    public NativeLibrary() {
-    }
+	public NativeLibrary() {
+	}
 
-    public static class RenderingGenerationResult {
+	public static class RenderingGenerationResult {
 		public RenderingGenerationResult(ByteBuffer bitmap) {
 			bitmapBuffer = bitmap;
 		}
@@ -114,12 +120,63 @@ public class NativeLibrary {
 		}
 	}
 
+	public static class NativeGpxPointApproximation {
+		public int ind;
+		public double lat;
+		public double lon;
+		public double cumDist;
+		public List<RouteSegmentResult> routeToTarget;
+
+		NativeGpxPointApproximation(GpxPoint gpxPoint) {
+			lat = gpxPoint.loc.getLatitude();
+			lon = gpxPoint.loc.getLongitude();
+			cumDist = gpxPoint.cumDist;
+		}
+
+		public NativeGpxPointApproximation(int ind, double lat, double lon, double cumDist) {
+			this.ind = ind;
+			this.lat = lat;
+			this.lon = lon;
+			this.cumDist = cumDist;
+			routeToTarget = new ArrayList<>();
+		}
+
+		public void addRouteToTarget(RouteSegmentResult routeSegmentResult) {
+			routeToTarget.add(routeSegmentResult);
+		}
+
+		public GpxPoint convertToGpxPoint() {
+			GpxPoint point = new GpxPoint();
+			point.ind = ind;
+			point.loc = new LatLon(lat, lon);
+			point.cumDist = cumDist;
+			point.routeToTarget = new ArrayList<>(routeToTarget);
+			return point;
+		}
+	}
+
+	public static class NativeGpxRouteApproximationResult {
+		public List<NativeGpxPointApproximation> finalPoints = new ArrayList<>();
+		public List<RouteSegmentResult> result = new ArrayList<>();
+
+		public NativeGpxRouteApproximationResult() {
+		}
+
+		public void addFinalPoint(NativeGpxPointApproximation finalPoint) {
+			finalPoints.add(finalPoint);
+		}
+
+		public void addResultSegment(RouteSegmentResult routeSegmentResult) {
+			result.add(routeSegmentResult);
+		}
+	}
+
 	/**
-	 * @param
-	 *            - must be null if there is no need to append to previous results returns native handle to results
+	 * @param - must be null if there is no need to append to previous results returns native handle to results
 	 */
 	public NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom,
-			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField, String msgIfNothingFound) {
+	                                                    RenderingRuleSearchRequest request, boolean skipDuplicates,
+	                                                    Object objectWithInterruptedField, String msgIfNothingFound) {
 		int renderRouteDataFile = 0;
 		if (request.searchRenderingAttribute("showRoadMapsAttribute")) {
 			renderRouteDataFile = request.getIntPropertyValue(request.ALL.R_ATTR_INT_VALUE);
@@ -149,8 +206,8 @@ public class NativeLibrary {
 	}
 
 	public NativeTransportRoutingResult[] runNativePTRouting(int sx31, int sy31, int ex31, int ey31,
-		TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
-		return nativeTransportRouting(new int[] { sx31, sy31, ex31, ey31 }, cfg, progress);
+	                                                         TransportRoutingConfiguration cfg, RouteCalculationProgress progress) {
+		return nativeTransportRouting(new int[]{sx31, sy31, ex31, ey31}, cfg, progress);
 	}
 
 	public RouteSegmentResult[] runNativeRouting(RoutingContext c, RouteRegion[] regions, boolean basemap) {
@@ -159,6 +216,20 @@ public class NativeLibrary {
 				regions, basemap);
 	}
 
+	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints) {
+		RouteRegion[] regions = gCtx.ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
+		int listSize = gpxPoints.size();
+		NativeGpxPointApproximation[] nativePoints = new NativeGpxPointApproximation[listSize];
+		for (int i = 0; i < listSize; i++) {
+			nativePoints[i] = new NativeGpxPointApproximation(gpxPoints.get(i));
+		}
+		NativeGpxRouteApproximationResult nativeResult = nativeSearchGpxRoute(gCtx.ctx, nativePoints, regions);
+		for (NativeGpxPointApproximation point : nativeResult.finalPoints) {
+			gCtx.finalPoints.add(point.convertToGpxPoint());
+		}
+		gCtx.result.addAll(nativeResult.result);
+		return gCtx;
+	}
 
 	public NativeRouteSearchResult loadRouteRegion(RouteSubregion sub, boolean loadObjects) {
 		NativeRouteSearchResult lr = loadRoutingData(sub.routeReg, sub.routeReg.getName(), sub.routeReg.getFilePointer(), sub, loadObjects);
@@ -169,11 +240,15 @@ public class NativeLibrary {
 	}
 
 	/**/
+	protected static native NativeGpxRouteApproximationResult nativeSearchGpxRoute(RoutingContext c,
+	                                                                               NativeGpxPointApproximation[] gpxPoints,
+	                                                                               RouteRegion[] regions);
+
 	protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int regfp, RouteSubregion subreg,
-			boolean loadObjects);
-	
+	                                                                boolean loadObjects);
+
 	public static native void deleteNativeRoutingContext(long handle);
-	
+
 	protected static native void deleteRenderingContextHandle(long handle);
 
 	protected static native void deleteRouteSearchResult(long searchResultHandle);
@@ -508,12 +583,20 @@ public class NativeLibrary {
 
 		public String getRouteID() {
 			for (Map.Entry<String, String> entry : getTags().entrySet()) {
-				if("route_id".equals(entry.getKey())) {
+				if ("route_id".equals(entry.getKey())) {
 					return entry.getValue();
 				}
 			}
 			return null;
 		}
-	}
 
+		public String getGpxFileName() {
+			for (String name : getOriginalNames()) {
+				if (name.endsWith(GPX_FILE_EXT) || name.endsWith(GPX_GZ_FILE_EXT)) {
+					return name;
+				}
+			}
+			return null;
+		}
+	}
 }

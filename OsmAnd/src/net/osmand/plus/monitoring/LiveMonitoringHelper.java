@@ -50,7 +50,7 @@ public class LiveMonitoringHelper {
 		long locationTime = System.currentTimeMillis();
 		if (location != null && isLiveMonitoringEnabled()
 				&& OsmAndLocationProvider.isNotSimulatedLocation(location)
-				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+				&& OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			OsmandSettings settings = app.getSettings();
 			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
 				record = true;

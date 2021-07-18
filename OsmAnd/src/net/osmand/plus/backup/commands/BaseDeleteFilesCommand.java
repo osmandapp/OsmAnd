@@ -23,8 +23,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static net.osmand.plus.backup.BackupHelper.DELETE_FILE_URL;
 import static net.osmand.plus.backup.BackupHelper.DELETE_FILE_VERSION_URL;
@@ -34,6 +36,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 	private final boolean byVersion;
 	private OnDeleteFilesListener listener;
 	private List<DeleteRemoteFileTask> tasks = new ArrayList<>();
+	private final Set<Object> itemsProgress = new HashSet<>();
 
 	public BaseDeleteFilesCommand(@NonNull BackupHelper helper, boolean byVersion) {
 		super(helper);
@@ -100,7 +103,8 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 			Object obj = objects[0];
 			if (obj instanceof DeleteRemoteFileTask) {
 				RemoteFile remoteFile = ((DeleteRemoteFileTask) obj).remoteFile;
-				listener.onFileDeleteProgress(remoteFile);
+				itemsProgress.add(remoteFile);
+				listener.onFileDeleteProgress(remoteFile, itemsProgress.size());
 			}
 		}
 	}
