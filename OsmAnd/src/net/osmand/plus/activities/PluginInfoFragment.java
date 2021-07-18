@@ -150,7 +150,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		enableDisableButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (plugin.isEnable() != isChecked) {
+				if (plugin.isEnabled() != isChecked) {
 					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked)) {
 						updateState();
 					}
@@ -222,7 +222,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			}
 			installHeader.setVisibility(View.GONE);
 		}
-		enableDisableButton.setChecked(plugin.isEnable());
+		enableDisableButton.setChecked(plugin.isEnabled());
 	}
 
 	@Override

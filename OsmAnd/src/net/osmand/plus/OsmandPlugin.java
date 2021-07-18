@@ -10,6 +10,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -69,13 +76,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 public abstract class OsmandPlugin {
 
 	public static final String PLUGIN_ID_KEY = "plugin_id";
@@ -91,7 +91,7 @@ public abstract class OsmandPlugin {
 
 	protected List<OsmandPreference> pluginPreferences = new ArrayList<>();
 
-	private boolean enable;
+	private boolean enabled;
 	private String installURL = null;
 
 	public OsmandPlugin(OsmandApplication app) {
@@ -148,12 +148,12 @@ public abstract class OsmandPlugin {
 		return true;
 	}
 
-	public void setEnable(boolean enable) {
-		this.enable = enable;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
-	public boolean isEnable() {
-		return enable;
+	public boolean isEnabled() {
+		return enabled;
 	}
 
 	public boolean isLocked() {
@@ -161,7 +161,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public boolean isActive() {
-		return isEnable() && !isLocked();
+		return isEnabled() && !isLocked();
 	}
 
 	public boolean isEnableByDefault() {
@@ -389,7 +389,7 @@ public abstract class OsmandPlugin {
 
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
 		for (OsmandPlugin plugin : allPlugins) {
-			if (enabledPlugins.contains(plugin.getId()) || plugin.isEnable()) {
+			if (enabledPlugins.contains(plugin.getId()) || plugin.isEnabled()) {
 				initPlugin(app, plugin);
 			}
 		}
@@ -399,7 +399,7 @@ public abstract class OsmandPlugin {
 	private static void initPlugin(OsmandApplication app, OsmandPlugin plugin) {
 		try {
 			if (plugin.init(app, null)) {
-				plugin.setEnable(true);
+				plugin.setEnabled(true);
 			}
 		} catch (Exception e) {
 			LOG.error("Plugin initialization failed " + plugin.getId(), e);
@@ -459,7 +459,7 @@ public abstract class OsmandPlugin {
 	                                           @Nullable OsmandPlugin plugin,
 	                                           boolean enable) {
 		if (plugin != null) {
-			boolean stateChanged = enable != plugin.isEnable();
+			boolean stateChanged = enable != plugin.isEnabled();
 			boolean canChangeState = !enable || !plugin.isLocked();
 			if (stateChanged && canChangeState) {
 				return enablePlugin(activity, app, plugin, enable);
@@ -474,14 +474,14 @@ public abstract class OsmandPlugin {
 	                                   boolean enable) {
 		if (enable) {
 			if (!plugin.init(app, activity)) {
-				plugin.setEnable(false);
+				plugin.setEnabled(false);
 				return false;
 			} else {
-				plugin.setEnable(true);
+				plugin.setEnabled(true);
 			}
 		} else {
 			plugin.disable(app);
-			plugin.setEnable(false);
+			plugin.setEnabled(false);
 		}
 		app.getSettings().enablePlugin(plugin.getId(), enable);
 		app.getQuickActionRegistry().updateActionTypes();
@@ -633,7 +633,7 @@ public abstract class OsmandPlugin {
 	public static List<OsmandPlugin> getEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
-			if (p.isEnable()) {
+			if (p.isEnabled()) {
 				lst.add(p);
 			}
 		}
