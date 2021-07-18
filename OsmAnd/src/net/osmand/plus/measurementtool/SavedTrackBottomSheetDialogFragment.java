@@ -121,7 +121,7 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putString(FILE_NAME_KEY, fileName);
 		super.onSaveInstanceState(outState);
 	}

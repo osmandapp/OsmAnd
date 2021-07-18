@@ -3967,4 +3967,13 @@
     <string name="poi_climbing_grade_uiaa_min">Најлакша рута (UIAA класа)</string>
     <string name="poi_climbing_grade_french_min">Најлакша рута (француска класа)</string>
     <string name="poi_climbing_grade_saxon_min">Најлакши пут (саксонска класа)</string>
+    <string name="poi_contact_xing">Ксинг</string>
+    <string name="poi_contact_vhf">VHF</string>
+    <string name="poi_contact_webcam">Веб камера</string>
+    <string name="poi_contact_linkedin">ЛинкдИн</string>
+    <string name="poi_power_portal">Портал стуб</string>
+    <string name="poi_memorial_subject">Предмет</string>
+    <string name="poi_picnic_table_no">Сто за пикник: не</string>
+    <string name="poi_picnic_table_yes">Сто за пикник: да</string>
+    <string name="poi_outdoor_seating_poi">Седење напољу</string>
 </resources>

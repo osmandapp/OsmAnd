@@ -4,8 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:orientation="vertical"
-	android:paddingBottom="@dimen/content_padding">
+	android:orientation="vertical">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -86,13 +85,11 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/content_padding_small_half"
-		android:layout_marginBottom="@dimen/dialog_content_margin"
+		android:layout_marginBottom="@dimen/content_padding_half"
 		android:clipToPadding="false"
 		android:orientation="horizontal"
 		tools:itemCount="4"
 		tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
 		tools:listitem="@layout/item_gpx_stat_block" />
-
-	<include layout="@layout/preference_button_with_icon_quadruple" />
 
 </LinearLayout>

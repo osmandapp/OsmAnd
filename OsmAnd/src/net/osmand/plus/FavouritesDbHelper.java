@@ -352,11 +352,31 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	public void setSpecialPoint(@NonNull LatLon latLon, FavouritePoint.SpecialPointType specialType, @Nullable String address) {
+	public void setParkingPoint(@NonNull LatLon latLon, @Nullable String address, long pickupTimestamp, boolean addToCalendar) {
+		SpecialPointType specialType = SpecialPointType.PARKING;
+		FavouritePoint point = getSpecialPoint(specialType);
+		if (point != null) {
+			point.setIconId(specialType.getIconId(context));
+			point.setTimestamp(pickupTimestamp);
+			point.setCalendarEvent(addToCalendar);
+			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
+			lookupAddress(point);
+		} else {
+			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
+			point.setAddress(address);
+			point.setTimestamp(pickupTimestamp);
+			point.setCalendarEvent(addToCalendar);
+			point.setIconId(specialType.getIconId(context));
+			addFavourite(point);
+		}
+	}
+
+	public void setSpecialPoint(@NonNull LatLon latLon, SpecialPointType specialType, @Nullable String address) {
 		FavouritePoint point = getSpecialPoint(specialType);
 		if (point != null) {
 			point.setIconId(specialType.getIconId(context));
 			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
+			lookupAddress(point);
 		} else {
 			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
@@ -370,13 +390,17 @@ public class FavouritesDbHelper {
 	}
 
 	public boolean addFavourite(FavouritePoint p, boolean saveImmediately) {
+		return addFavourite(p, saveImmediately, true);
+	}
+
+	public boolean addFavourite(FavouritePoint p, boolean saveImmediately, boolean lookupAddress) {
 		if (Double.isNaN(p.getAltitude()) || p.getAltitude() == 0) {
 			p.initAltitude(context);
 		}
 		if (p.getName().isEmpty() && flatGroups.containsKey(p.getCategory())) {
 			return true;
 		}
-		if (!p.isAddressSpecified()) {
+		if (lookupAddress && !p.isAddressSpecified()) {
 			lookupAddress(p);
 		}
 		context.getSettings().SHOW_FAVORITES.set(true);
@@ -384,7 +408,7 @@ public class FavouritesDbHelper {
 
 		if (!p.getName().isEmpty()) {
 			p.setVisible(group.visible);
-			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
+			if (SpecialPointType.PARKING == p.getSpecialPointType()) {
 				p.setColor(ContextCompat.getColor(context, R.color.parking_icon_background));
 			} else {
 				if (p.getColor() == 0) {
@@ -528,7 +552,7 @@ public class FavouritesDbHelper {
 			}
 			FavoriteGroup pg = getOrCreateGroup(p, 0);
 			p.setVisible(pg.visible);
-			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
+			if (SpecialPointType.PARKING == p.getSpecialPointType()) {
 				p.setColor(ContextCompat.getColor(context, R.color.parking_icon_background));
 			} else {
 				if (p.getColor() == 0) {
@@ -554,7 +578,7 @@ public class FavouritesDbHelper {
 	}
 
 	public boolean favouritePassed(@NonNull FavouritePoint point, boolean passed, boolean saveImmediately) {
-		point.setPassedTimestamp(passed ? System.currentTimeMillis() : 0);
+		point.setVisitedDate(passed ? System.currentTimeMillis() : 0);
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
 		}

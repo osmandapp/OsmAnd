@@ -11,25 +11,36 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.TabActivity.OsmandFragmentPagerAdapter;
 import net.osmand.plus.activities.TabActivity.TabItem;
+import net.osmand.plus.backup.NetworkSettingsHelper;
+import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
+import net.osmand.plus.backup.ui.status.BackupStatusFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BackupAndRestoreFragment extends BaseOsmAndFragment {
+public class BackupAndRestoreFragment extends BaseOsmAndFragment implements InAppPurchaseListener {
 
 	public static final String TAG = BackupAndRestoreFragment.class.getSimpleName();
+
+	private static final String DIALOG_TYPE_KEY = "dialog_type_key";
+
+	private LoginDialogType dialogType;
 
 	private boolean nightMode;
 
@@ -38,10 +49,23 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
+	@Nullable
+	public LoginDialogType getDialogType() {
+		return dialogType;
+	}
+
+	public void removeDialogType() {
+		dialogType = null;
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		nightMode = !requireMyApplication().getSettings().isLightContent();
+
+		if (savedInstanceState != null && savedInstanceState.containsKey(DIALOG_TYPE_KEY)) {
+			dialogType = LoginDialogType.valueOf(savedInstanceState.getString(DIALOG_TYPE_KEY));
+		}
 	}
 
 	@Nullable
@@ -54,9 +78,21 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment {
 		setupTabs(view);
 		setupToolbar(view);
 
-		requireMyApplication().getBackupHelper().prepareBackup();
+		OsmandApplication app = requireMyApplication();
+		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
+		if (!settingsHelper.isBackupExporting()) {
+			app.getBackupHelper().prepareBackup();
+		}
 
 		return view;
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (dialogType != null) {
+			outState.putString(DIALOG_TYPE_KEY, dialogType.name());
+		}
 	}
 
 	private void setupToolbar(View view) {
@@ -94,13 +130,47 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment {
 		pagerSlidingTabStrip.setViewPager(viewPager);
 	}
 
-	public static void showInstance(FragmentManager fragmentManager) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		showInstance(fragmentManager, null);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable LoginDialogType dialogType) {
 		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 			BackupAndRestoreFragment fragment = new BackupAndRestoreFragment();
+			fragment.dialogType = dialogType;
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
+					.commit();
 		}
+	}
+
+	@Override
+	public void onError(InAppPurchaseTaskType taskType, String error) {
+
+	}
+
+	@Override
+	public void onGetItems() {
+
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		for (Fragment fragment : getChildFragmentManager().getFragments()) {
+			if (fragment instanceof InAppPurchaseListener && fragment.isAdded()) {
+				((BackupStatusFragment) fragment).onItemPurchased(sku, active);
+			}
+		}
+	}
+
+	@Override
+	public void showProgress(InAppPurchaseTaskType taskType) {
+
+	}
+
+	@Override
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
+
 	}
 }

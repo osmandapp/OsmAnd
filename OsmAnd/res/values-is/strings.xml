@@ -1015,7 +1015,7 @@
     <string name="recent_places">Nýlegir staðir</string>
     <string name="saved_at_time">Núna vistað í: %1$s</string>
     <string name="unsaved_changes_will_be_lost">Allar óvistaðar breytingar munu tapast. Halda áfram?</string>
-    <string name="downloading_number_of_files">Sæki - %1$d skrá</string>
+    <string name="downloading_number_of_files">Sæki %1$d skrá…</string>
     <string name="get_full_version">Full útgáfa</string>
     <string name="update_all">Uppfæra allt (%1$s MB)</string>
     <string name="enter_country_name">Settu heiti lands</string>
@@ -1234,7 +1234,7 @@
     <string name="keep_intermediate_points">Halda milliáföngum</string>
     <string name="new_directions_point_dialog">Þú ert nú þegar með milliáfanga stillta.</string>
     <string name="intermediate_items_sort_return">Bestuð röð milliáfanga á leiðinni frá núverandi staðsetningu að áfangastaðnum.</string>
-    <string name="clear_dest_confirm">Ertu viss um að þú viljir eyða áfangastaðnum (og milliáföngum)?</string>
+    <string name="clear_dest_confirm">Á að eyða áfangastaðnum (og milliáföngum)\?</string>
     <string name="intermediate_point">Milliáfangi %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Bæta við sem síðasta milliáfanga</string>
     <string name="context_menu_item_first_intermediate_point">Bæta við sem fyrsta milliáfanga</string>
@@ -1374,7 +1374,7 @@
     <string name="get_it">Ná í það</string>
     <string name="get_for">Ná í það fyrir %1$s</string>
     <string name="routing_attr_short_way_name">Leið með hagkvæmri eldsneytisnýtingu</string>
-    <string name="replace_favorite_confirmation">Ertu viss að þú viljir skipta út eftirlætinu %1$s?</string>
+    <string name="replace_favorite_confirmation">Á að skipta út eftirlætinu \"%1$s\"\?</string>
     <string name="confirmation_to_delete_history_items">Fjarlægja valin atriði úr breytingaskránni?</string>
     <string name="change_markers_position">Breyta staðsetningu kortamerkis</string>
     <string name="access_no_destination">Stillingaviðbót fyrir altækan aðgang: Áfangastaður er ekki stilltur</string>
@@ -1686,10 +1686,10 @@
     <string name="rendering_attr_contourWidth_description">Breidd hæðarlína</string>
     <string name="rendering_attr_contourWidth_name">Breidd hæðarlína</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vatn</string>
-    <string name="local_recordings_delete_all_confirm">Þú ert að fara að eyða %1$d minnispunktum. Ertu viss?</string>
+    <string name="local_recordings_delete_all_confirm">Á að eyða %1$d minnispunktum\?</string>
     <string name="audionotes_plugin_name">Hljóð/myndskeiðs-minnispunktar</string>
     <string name="speech_rate_descr">Tilgreindu talhraða fyrir talgervil.</string>
-    <string name="stop_routing_confirm">Ertu viss um að þú viljir stöðva leiðsögnina?</string>
+    <string name="stop_routing_confirm">Á að stöðva leiðsögnina\?</string>
     <string name="precise_routing_mode_descr">Reikna nákvæmar leiðir án hnökra. Er ennþá takmarkað út frá vegalengdum og fremur hægvirkt.</string>
     <string name="precise_routing_mode">Nákvæmt leiðaval (alfa-tilraunaútgáfa)</string>
     <string name="dropbox_plugin_description">Gerir þér kleift að samstilla ferla og minnispunkta við hljóð/myndskeið með því að nota Dropbox-aðganginn þinn.</string>
@@ -1796,7 +1796,7 @@
     <string name="quick_action_add_favorite">Bæta við sem eftirlæti</string>
     <string name="dialog_add_action_title">Bæta við aðgerð</string>
     <string name="quick_actions_delete">Eyða aðgerð</string>
-    <string name="quick_actions_delete_text">Ertu viss um að þú viljir eyða aðgerðinni \"%s\"?</string>
+    <string name="quick_actions_delete_text">Eyða \"%s\" aðgerðinni\?</string>
     <string name="quick_favorites_show_favorites_dialog">Birta glugga með eftirlætisstöðum</string>
     <string name="quick_favorites_name_preset">Forstilling á nafni</string>
     <string name="favorite_autofill_toast_text">" vistað í "</string>
@@ -1847,7 +1847,7 @@
     <string name="shared_string_slope">Halli</string>
     <string name="add_new_folder">Bæta við nýrri möppu</string>
     <string name="points_delete_multiple_succesful">Punkti/punktum eytt.</string>
-    <string name="points_delete_multiple">Ertu viss um að þú viljir eyða %1$d punkt(i/um) \?</string>
+    <string name="points_delete_multiple">Á að eyða %1$d punkti/punktum\?</string>
     <string name="track_points_category_name">Vegpunktar, merkisstaðir, nefnd fyrirbæri</string>
     <string name="shared_string_gpx_track">Ferill</string>
     <string name="max_speed">Hámarkshraði</string>
@@ -1925,7 +1925,7 @@
     <string name="access_disable_wrong_direction_recalc">Ekki endurreikna leið þegar stefnt er í öfuga átt</string>
     <string name="simulate_your_location_stop_descr">Hætta að herma staðsetningu þína.</string>
     <string name="simulate_your_location_descr">Herma eftir staðsetningu með því að nota reiknaða leið eða skráðan GPX-feril.</string>
-    <string name="local_osm_changes_upload_all_confirm">Þú ert að fara að senda %1$d breytingu/breytingar inn til OSM. Ertu viss?</string>
+    <string name="local_osm_changes_upload_all_confirm">Á að senda %1$d breytingu/breytingar inn til OSM\?</string>
     <string name="navigate_point_olc_info_invalid">Ógildur OLC-kóði
 \n</string>
     <string name="navigate_point_olc_info_short">Stuttur OLC-kóði
@@ -1939,7 +1939,7 @@
     <string name="none_selected_gpx">Veldu GPX-skrá með því að ýta fyrst og halda niðri.</string>
     <string name="gpx_split_interval">Skipta millibili</string>
     <string name="gpx_timespan">Tímarammi: %1$s</string>
-    <string name="local_osm_changes_delete_all_confirm">Þú ert að fara að eyða %1$d breytingum í OSM. Ertu viss?</string>
+    <string name="local_osm_changes_delete_all_confirm">Á að eyða %1$d breytingum í OSM\?</string>
     <string name="animate_routing_route">Herma með því að nota reiknaða leið</string>
     <string name="search_street_in_neighborhood_cities">Leita að götu í nágrannabæjum</string>
     <string name="gpx_saved_sucessfully">GPX-skráin vistuð í {0}</string>
@@ -1963,7 +1963,7 @@
     <string name="old_poi_file_should_be_deleted">Gagnaskrá merkisstaðarins \'%1$s\' er úrelt og má því eyða.</string>
     <string name="update_poi_file_not_found">Staðvær skrá til að halda utan um breytingar á merkisstöðum fannst ekki og var ekki hægt að útbúa hana.</string>
     <string name="show_more_map_detail_descr">Sýna fleiri smáatriði á vektorkorti (vegi o.þ.h.) við minni aðdrátt.</string>
-    <string name="favorite_delete_multiple">Ertu viss um að þú viljir eyða %1$d eftirlætum og %2$d eftirlætahópum\?</string>
+    <string name="favorite_delete_multiple">Eyða %1$d eftirlætum og %2$d eftirlætahópum\?</string>
     <string name="internet_connection_required_for_online_route">Nettengd leiðsagnarþjónusta virkar ekki án nettengingar.</string>
     <string name="tts_language_not_supported">Valið tungumál er ekki stutt af uppsetta Android TTS (text-to-speech) talgervlinum, forstillt TTS-tungumál hans verður því notað. Viltu athuga með annan TTS-talgervil á markaðnum\?</string>
     <string name="tts_missing_language_data">Viltu fara á markaðinn og sækja valið tungumál?</string>
@@ -2151,7 +2151,7 @@
     <string name="show_on_map_after_saving">Sýna í korti eftir vistun</string>
     <string name="measurement_tool">Mæla vegalengd</string>
     <string name="store_tracks_in_monthly_directories_descrp">Geyma skráða ferla í undirmöppum fyrir hvern skráningamánuð (svo sem 2018-01).</string>
-    <string name="empty_state_osm_edits">Búa til eða breyta OSM-hlutum</string>
+    <string name="empty_state_osm_edits">Búa til eða breyta OpenStreetMap-hlutum</string>
     <string name="shared_string_deleted">Eytt</string>
     <string name="shared_string_edited">Breytt</string>
     <string name="shared_string_added">Bætt við</string>
@@ -2356,10 +2356,7 @@
 \nHvert þessara korta má nota sem aðalkort (grunnkort) til birtingar á kortaskjá OsmAnd, eða sem yfir- eða undirlag (þekjur) á öðru grunnkorti (eins og stöðluðu ónettengdu OsmAnd kortunum). Til að gera undirlagskort sýnilegri, er einfalt að fela eftir þörfum ýmis einindi OsmAnd vigurkortanna með því að fara í valmyndina \'Stilla kort\'. 
 \n 
 \nTígluð kort er hægt að sækja beint frá gagnagjöfum á netinu, en einnig er hægt að undirbúa þau fyrir ónettengda notkun (og afrita síðan handvirkt í gagnamöppu OsmAnd) sem SQLite-gagnagrunn, sem er hægt að útbúa í fjölmörgum utanaðkomandi kortaumsýslutólum.</string>
-    <string name="osmand_srtm_long_description_1000_chars">Þessi viðbót kemur með bæði yfirlag/þekju fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins.
-\n
-\nAlmennt byggjast þessi gögn (milli 70 breiddargráðu norður og 70 breiddargráðu suður) á mælingum frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), og frá myndgreiningartækjum um borð í Terra, aðalgervihnetti Earth Observing System hjá NASA. ASTER er samvinnuverkefni NASA, Ráðuneytis efnahags, viðskipta og iðnaðar í Japan (METI), og Japan Space Systems (J-spacesystems).</string>
-    <string name="srtm_plugin_description">Þessi viðbót kemur með bæði yfirlag/þekju fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. (Taktu eftir því að hæðarlínu- og skyggingargögnin eru aðskildir pakkar sem þarf að sækja eftir að viðbótin hefur verið gerð virk.) 
+    <string name="srtm_plugin_description">Þessi viðbót kemur með bæði yfirlag/þekju fyrir hæðarlínur og lag fyrir hæðaskyggingu (relief hillshade), sem bæði birtast ofan á staðalkortum OsmAnd\'. Þessir eiginleikar eru gjarnan í miklum metum hjá íþróttafólki, göngufólki, ferðamönnum og öðrum þeim sem áhuga hafa á uppbyggingu landsins. (Taktu eftir því að hæðarlínu- og skyggingargögnin eru aðskildir pakkar sem þarf að sækja eftir að viðbótin hefur verið gerð virk.)
 \n 
 \nAlmennt byggjast þessi gögn (milli 70 breiddargráðu norður og 70 breiddargráðu suður) á mælingum frá SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), og frá myndgreiningartækjum um borð í Terra, aðalgervihnetti Earth Observing System hjá NASA. ASTER er samvinnuverkefni NASA, Ráðuneytis efnahags, viðskipta og iðnaðar í Japan (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_nautical_descr">Þessi viðbót bætir eiginleikum inn í landakort OsmAnd og leiðsagnarforritið þannig að úr verði sjókort til skemmtisiglinga, fyrir seglbáta og fleiri tegundir vatnaíþrótta. 
@@ -2370,7 +2367,7 @@
     <string name="plugin_ski_descr">Þessi viðbót fyrir OsmAnd setur við fingurgóma þína allskyns smáatriði varðandi skíðabrekkur, gönguskíðabrautir, fjallaskíðaleiðir, kláfa og skíðalyftur. Leiðir og brautir eru með litakóða eftir erfiðleikastigi, og birtast í sérstökum \'Vetrar\'-kortastíl sem líkir eftir snævi þöktu landslagi. 
 \n
 \nVirkjun á þessari sýn breytirstíl kortsins yfir í \'Vetur og skíði\', þar sem allt landslag birtist í vetraraðstæðum. Til að snúa aftur í hefðbundnari kortastíla OsmAnd, þarf einfaldlega að gera viðbótina óvirka aftur eða breyta stílnum í \'Stíll korts\' í \'Stilla kort\' valmyndinni.</string>
-    <string name="select_index_file_to_download">Ekkert fannst. Ef þú finnur ekki héraðið þitt, geturðu útbúið það sjálf(ur) (skoðaðu https://osmand.net).</string>
+    <string name="select_index_file_to_download">Ekkert fannst, en þú getur aftur útbúið það sjálf(ur) (skoðaðu https://osmand.net).</string>
     <string name="index_item_world_bitcoin_payments">Bitcoin-greiðslur um víða veröld</string>
     <string name="app_modes_choose_descr">Veldu notkunarsnið sem á að birta.</string>
     <string name="edit_tilesource_successfully">Vistaði %1$s sem gagnagjafa tígla</string>
@@ -2398,7 +2395,7 @@
 \n Bæði staðurinn og tíminn eru sýnileg á stjórnborðinu rétt eins og í sérstökum viðmótshluta kortaskjásins. Hægt er að bæta áminningu inn í Android dagatalið.</string>
     <string name="empty_state_markers_active_desc">Ýta og halda eða stutt bank á \'Staðir\', ýttu síðan á hnappinn í merkiflagginu.</string>
     <string name="tap_on_map_to_hide_interface_descr">Bank á kortið víxlar stjórnhnöppum og viðmótshlutum af eða á.</string>
-    <string name="fast_coordinates_input_descr">Veldu inntakssnið hnita. Þú getur alltaf breytt því í stillingunum.</string>
+    <string name="fast_coordinates_input_descr">Veldu inntakssnið hnita. Ýttu á \'Valkostir\' til að breyta því.</string>
     <string name="quick_action_resume_pause_navigation_descr">Ýttu á þennan hnapp til að setja leiðsögn í bið eða halda áfram með hana.</string>
     <string name="quick_action_showhide_osmbugs_descr">Hnappur til að birta eða fela OSM-minnispunkta á kortinu.</string>
     <string name="quick_action_auto_zoom_desc">Hnappur til að kveikja/slökkva á sjálfvirkum aðdrætti miðað við hraða.</string>
@@ -2422,7 +2419,7 @@
     <string name="non_optimal_route_calculation">Reikna leiðir yfir langar fjarlægðir sem hugsanlega eru ekki þær bestu</string>
     <string name="av_locations_selected_desc">GPX-skrá með hnitum og gögnum valinna minnispunkta.</string>
     <string name="av_locations_all_desc">GPX-skrá með hnitum og gögnum allra minnispunkta.</string>
-    <string name="empty_state_osm_edits_descr">Búðu til eða breyttu merkisstöðum í OSM (POI), opnaðu eða gerðu athugasemdir á OSM-minnispunkta og sendu inn skráða ferla í GPX-skrám.</string>
+    <string name="empty_state_osm_edits_descr">Búðu til eða breyttu merkisstöðum í OpenStreetMap (POI), opnaðu eða gerðu athugasemdir á OSM-minnispunkta og sendu inn skráða ferla í GPX-skrám.</string>
     <string name="one_tap_active_descr">Ýttu á merki á kortinu til að færa það efst í virk kortamerki án þess að opna samhengisvalmyndina.</string>
     <string name="empty_state_av_notes_desc">Bættu minnispunkti með hljóði, ljósmynd eða myndskeiði á punkta á kortinu, með hjálp viðmótshluta eða samhengisvalmyndar.</string>
     <string name="add_track_to_markers_descr">Veldu feril til að bæta ferilpunktum í kortamerki hans.</string>
@@ -2488,7 +2485,7 @@
     <string name="show_closed_notes">Sýna lokaða minnispunkta</string>
     <string name="switch_osm_notes_visibility_desc">Birta eða fela OSM-minnispunkta á kortinu.</string>
     <string name="gpx_file_desc">GPX - hentar til útflutnings fyrir JOSM eða aðra OSM-ritla.</string>
-    <string name="osc_file_desc">OSC - hentar til útflutnings í OSM.</string>
+    <string name="osc_file_desc">OSC - hentar til útflutnings í OpenStreetMap.</string>
     <string name="osm_edits_export_desc">Flytja út sem OSM-minnispunkta, merkisstaði, eða bæði.</string>
     <string name="osm_notes">OSM-minnispunktar</string>
     <string name="rec_split">Skipta upptöku</string>
@@ -2970,7 +2967,7 @@
     <string name="privacy_and_security_change_descr">Ýttu á \'Leyfa\' til að samþykkja %1$s</string>
     <string name="settings_privacy_and_security_desc">Veldu þau gögn sem þú vilt deila með okkur</string>
     <string name="app_mode_shuttle_bus">Tengirúta</string>
-    <string name="osmand_routing_promo">Þú getur bætt við þinni eigin sérsniðnu útgáfu af routing.xml í ..osmand/routing</string>
+    <string name="osmand_routing_promo">Bættu við þinni eigin sérsniðnu útgáfu af routing.xml í ..osmand/routing</string>
     <string name="hide_compass_ruler">Fela áttavitastiku</string>
     <string name="settings_derived_routing_mode_string">Notandahamur, afleiddur af: %s</string>
     <string name="profile_type_base_string">Grunnsnið</string>
@@ -2980,7 +2977,7 @@
     <string name="profile_alert_duplicate_name_msg">Þegar er til notkunarsnið með þessu nafni</string>
     <string name="profile_alert_cant_delete_base">Þú getur ekki eytt grunnsniðum OsmAnd</string>
     <string name="profile_alert_need_save_msg">Vistaðu breytingar á notkunarsniðinu áður en haldið er áfram</string>
-    <string name="profile_alert_delete_msg">Ertu viss um að þú viljir eyða notkunarsniðinu \"%s\"</string>
+    <string name="profile_alert_delete_msg">Eyða notkunarsniðinu \"%s\"</string>
     <string name="select_base_profile_dialog_title">Veldu snið til að byrja með</string>
     <string name="base_profile_descr_car">Bílar, trukkar, mótorhjól</string>
     <string name="base_profile_descr_bicycle">Fjallahjól, skellinöðrur, hestar</string>
@@ -3233,7 +3230,7 @@
     <string name="routing_attr_prefer_unpaved_name">Velja vegi með óbundnu slitlagi</string>
     <string name="routing_attr_prefer_unpaved_description">Velja frekar vegi með óbundnu slitlagi.</string>
     <string name="update_all_maps">Uppfæra öll kort</string>
-    <string name="update_all_maps_q">Ertu viss um að þú viljir uppfæra öll (%1$d) kort\?</string>
+    <string name="update_all_maps_q">Á að uppfæra öll (%1$d) kort\?</string>
     <string name="release_3_5">• Uppfærðar stillingar fyrir forrit og notkunarsnið: Stillingar eru núna flokkaðar eftir gerð þeirra. Hægt er að sérsníða hvert notkunarsnið sérstaklega. 
 \n 
 \n • Nýr niðurhalsgluggi fyrir landakort sem stingur upp á hvaða kort ætti að sækja 
@@ -3456,7 +3453,7 @@
     <string name="restore_all_profile_settings">Endurstilla allar stillingar sniðsins\?</string>
     <string name="saving_new_profile">Vista nýtt snið</string>
     <string name="profile_backup_failed">Gat ekki öryggisafritað sniðið.</string>
-    <string name="clear_recorded_data_warning">Ertu viss um að þú viljir hreinsa skráð gögn\?</string>
+    <string name="clear_recorded_data_warning">Á að hreinsa skráð gögn\?</string>
     <string name="importing_from">Flyt inn gögn frá %1$s</string>
     <string name="shared_string_importing">Innflutningur í gangi</string>
     <string name="checking_for_duplicate_description">OsmAnd athugar hvort %1$s sé með tvítök miðað við fyrirliggjandi atriði í forritinu.
@@ -3476,7 +3473,7 @@
     <string name="shared_string_transparency">Gegnsæi</string>
     <string name="shared_string_zoom_levels">Aðdráttarstig</string>
     <string name="shared_string_legend">Skýring</string>
-    <string name="terrain_empty_state_text">Virkja til að sjá hæðaskyggingar eða brekkur á korti. Þú getur lesið meira um þessa eiginleika á vefnum okkar.</string>
+    <string name="terrain_empty_state_text">Birtu hæðaskyggingar eða brekkur á korti. Þú getur lesið meira um þessa eiginleika á vefnum okkar.</string>
     <string name="shared_string_hillshade">Hæðaskygging</string>
     <string name="download_slope_maps">Brekkur</string>
     <string name="quick_action_terrain_descr">Hnappur til að birta eða fela yfirborðslag á kortinu.</string>
@@ -3503,7 +3500,7 @@
     <string name="shared_string_languages">Tungumál</string>
     <string name="shared_string_language">Tungumál</string>
     <string name="shared_string_all_languages">Öll tungumál</string>
-    <string name="move_inside_category">Þú getur aðeins fært atriði innan þessa flokks.</string>
+    <string name="move_inside_category">Aðeins er hægt að færa atriði innan þessa flokks.</string>
     <string name="hidden_items_descr">Þessi atriði eru falin á valmyndinni, en valkostirnir eða viðbæturnar sem þau standa fyrir munu virka áfram.</string>
     <string name="ui_customization_description">Sérsníddu fjölda atriða í sleðanum, í uppsetningu landakorts og í samhengisvalmynd.
 \n 
@@ -3725,7 +3722,7 @@
 \n</string>
     <string name="gpx_split_interval_descr">Veldu bilið þar sem merki með tíma eða vegalengd á ferlinum verða birt.</string>
     <string name="attach_to_the_roads">Tengja við vegina</string>
-    <string name="plan_route_exit_dialog_descr">Ertu viss um að þú viljir henda öllum óvistuðum breytingum í skipulögðu leiðinni\?</string>
+    <string name="plan_route_exit_dialog_descr">Henda öllum óvistuðum breytingum í skipulögðu leiðinni\?</string>
     <string name="marker_save_as_track">Vista sem ferilskrá</string>
     <string name="threshold_distance">Þolvik vegalengdar</string>
     <string name="save_track_to_gpx_globally">Skrifa feril í GPX-skrá</string>
@@ -3823,7 +3820,7 @@
     <string name="use_two_phase_routing">Nota 2-umferða A* leiðararútreikning</string>
     <string name="osm_live_payment_subscription_management_hw">Greiðsla verður gjaldfærð á AppGallery reikninginn þinn við staðfestingu á kaupunum.
 \n
-\nÁskrift endurnýjast sjálfkrafa nema hún sé felld niður fyrir endurnýjunardag. Reikningur þinn verður einungis gjaldfærður fyrir endurnýjunartímabil (mánuður / þrír mánuðir / ár) á endurnýjunardegi.
+\nÁskrift endurnýjast sjálfkrafa nema hún sé felld niður fyrir endurnýjunardag.
 \n
 \nÞú getur stýrt og aflýst áskriftunum þínum með því að fara í AppGallery stillingarnar þínar.</string>
     <string name="shared_string_graph">Graf</string>
@@ -3839,7 +3836,7 @@
     <string name="icon_group_travel">Ferðalög</string>
     <string name="open_street_map_login_mode">Þú þarft að skrá þig inn til að geta sent inn ný atriði eða breytingar.
 \n
-\nÞú getur skráð þig inn með öruggu OAuth-aðferðinni eða notað notandanafn og lykilorð innskráningar.</string>
+\nSkráðu þig inn með öruggu OAuth-aðferðinni eða með notandanafni og lykilorði á OSM.</string>
     <string name="subscription_payment_issue_title">Smelltu á hnappinn til að setja upp greiðslumáta á Google Play áskriftarinnar og laga þar áskriftina þína.</string>
     <string name="use_login_password">Nota notandanafn og lykilorð</string>
     <string name="login_open_street_map">Skrá inn á OpenStreetMap</string>
@@ -3869,7 +3866,7 @@
     <string name="register_on_openplacereviews">Skráðu þig á
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Búa til nýjan notandaaðgang</string>
-    <string name="osm_login_descr">Þú getur skráð þig inn með öruggu OAuth-aðferðinni eða notað notandanafn og lykilorð innskráningar.</string>
+    <string name="osm_login_descr">Skráðu þig inn með öruggu OAuth-aðferðinni eða með OSM-notandanafni og lykilorði.</string>
     <string name="app_mode_motorboat">Vélbátar</string>
     <string name="register_on_openplacereviews_desc">Ljósmyndir eru í boði frá opna gagnaverkefninu OpenPlaceReviews.org. Til að geta sent inn myndir þarftu að skrá þig á vefsvæðinu þeirra.</string>
     <string name="osm_edit_comment_note">Gera athugasemd við OSM-minnispunkt</string>
@@ -4025,7 +4022,7 @@
     <string name="track_recording_stop_without_saving">Stöðva án þess að vista</string>
     <string name="track_recording_save_and_stop">Vista og stöðva upptöku</string>
     <string name="track_recording_title">Upptaka ferils stöðvuð</string>
-    <string name="track_recording_description">Ertu viss um að þú viljir stöðva þessa upptöku\?
+    <string name="track_recording_description">Stöðva þessa upptöku\?
 \nÖll óvistuð gögn munu tapast.</string>
     <string name="on_pause">Við bið</string>
     <string name="app_restart_required">Endurræsingar forrits er krafist til að virkja sumar stillingar.</string>
@@ -4037,7 +4034,7 @@
     <string name="live_update_frequency_day_variant">Uppfærslur korta verða athugaðar á hverjum degi. Næsta skipti %1$s eftir %2$s.</string>
     <string name="live_update_frequency_hour_variant">Uppfærslur korta verða athugaðar á klukkustundar fresti. Næsta skipti %1$s eftir %2$s.</string>
     <string name="delete_updates">Eyða uppfærslum</string>
-    <string name="live_update_delete_updates_msg">Ertu viss um að þú viljir eyða öllum %s raunuppfærslum\?</string>
+    <string name="live_update_delete_updates_msg">Eyða öllum %s rauntímauppfærslum\?</string>
     <string name="purchases">Innkaup</string>
     <string name="track_recording_will_be_continued">Upptökunni verður haldið áfram.</string>
     <string name="copy_poi_name">Afrita heiti POI-merkisstaðar</string>
@@ -4105,7 +4102,7 @@
     <string name="recorded_description">Raddupptökur hljóma betur, en geta aðeins borið fram foruppteknar setningar eins og ábendingar um beygjur. Þær ná ekki að bera fram götuheiti eða nöfn merkisstaða.</string>
     <string name="use_system_language">Nota tungumál kerfis</string>
     <string name="shared_string_itinerary">Ferðaáætlun</string>
-    <string name="search_more">Leita betur…</string>
+    <string name="search_more">Leita áfram…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="route_line_use_map_style_width">Nota kortastíl (%1$s) sjálfgefna breidd.</string>
     <string name="route_line_use_map_style_color">Nota kortastíl (%1$s) sjálfgefinn lit.</string>
@@ -4113,12 +4110,12 @@
     <string name="routing_attr_avoid_low_emission_zone_description">Forðast svæði með takmörkunum á útblæstri</string>
     <string name="routing_attr_avoid_low_emission_zone_name">Forðast svæði með takmörkunum á útblæstri</string>
     <string name="osmand_cloud_help_descr">Þarftu aðstoð\? Hafðu samband við okkur á %1$s</string>
-    <string name="osmand_cloud_create_account_descr">Settu inn tölvupóstfangið þitt, öll gögnin þín munu tengjast því.
-\nVið munum senda þér sannvottunarkóða á þetta tölvupóstfang.</string>
-    <string name="osmand_cloud_login_descr">Settu inn tölvupóstfangið sem þú notaðir við skráningu. Við munum senda þér eins-skiptis lykilorð til að nota í næsta skrefi.</string>
-    <string name="verify_email_address_descr">Við sendum sannvottunarkóða á %1$s, settu kóðann inn í reitinn hér fyrir neðan.</string>
-    <string name="cloud_email_not_registered">Þetta tölvupóstfang hefur ekki verið skráð fyrir OsmAnd Cloud-tölvuskýið</string>
-    <string name="cloud_email_already_registered">Aðgangur með þessu tölvupóstfang er nú þegar skráð.</string>
+    <string name="osmand_cloud_create_account_descr">Settu inn tölvupóstfangið þitt, þú munt fá sendan sannvottunarkóða á það
+\nog öll gögnin þín munu tengjast því.</string>
+    <string name="osmand_cloud_login_descr">Settu inn tölvupóstfangið sem þú notaðir við skráningu. Eins-skiptis lykilorð til að nota í næsta skrefi verður sent á það.</string>
+    <string name="verify_email_address_descr">Sannvottunarkóði var sendur á %1$s. Settu kóðann inn í reitinn hér fyrir neðan.</string>
+    <string name="cloud_email_not_registered">Þetta tölvupóstfang er ekki skráð fyrir OsmAnd Cloud-tölvuskýið</string>
+    <string name="cloud_email_already_registered">Þetta tölvupóstfang er nú þegar skráð.</string>
     <string name="verification_code_missing">Ég fékk ekki neinn sannvottunarkóða</string>
     <string name="backup_and_restore">Afrita og endurheimta</string>
     <string name="last_backup">Síðasta öryggisafrit</string>
@@ -4128,8 +4125,89 @@
     <string name="local_backup_descr">Öryggisafritun eða endurheimting úr skrá á tækinu.</string>
     <string name="backup_into_file">Öryggisafritun í skrá</string>
     <string name="restore_from_file">Endurheimta úr skrá</string>
-    <string name="verify_email_address">Sannreyna tölvupóstfang</string>
-    <string name="enter_verification_code">Settu inn 4-stafa kóða</string>
-    <string name="resend_verification_code">Endursenda kóða</string>
+    <string name="verify_email_address">Sannreyndu tölvupóstfangið</string>
+    <string name="resend_verification_code">Endursenda</string>
     <string name="select_nav_profile_dialog_message">Gerð leiðsagnar hefur áhrif á reglur þær sem notaðar eru við útreikning leiða. Þú getur valið á milli nettengdra og ónettengdra leiðargerða.</string>
+    <string name="loading_list_of_routing_services">Hleð inn lista yfir tiltækar beiningarþjónustur</string>
+    <string name="failed_loading_predefined_engines">Það tókst ekki að sækja lista yfir forákvörðuð sniðmát.
+\nAthugaðu með nettenginguna þína.</string>
+    <string name="shared_string_offline">Ónettengt</string>
+    <string name="shared_string_online">Nettengt</string>
+    <string name="shared_string_external">Utanaðkomandi</string>
+    <string name="provided_by">Kemur frá %1$s</string>
+    <string name="shared_string_predefined">Forákvarðað</string>
+    <string name="backup_complete">Öryggisafritun lokið</string>
+    <string name="backup_now">Taka öryggisafrit núna</string>
+    <string name="make_backup">Gera öryggisafrit</string>
+    <string name="backup_conflicts">Árekstrar</string>
+    <string name="backup_view_conflicts">Skoða árekstra</string>
+    <string name="backup_no_internet_descr">Athugaðu hvort það sé allt í lagi með nettenginguna og reyndu niðurhal aftur.</string>
+    <string name="backup_pause_all">Setja allt í bið</string>
+    <string name="upload_local_version">Sækja útgáfu á tækinu</string>
+    <string name="download_server_version">Sækja útgáfu netþjóns</string>
+    <string name="shared_string_logout">Skrá út</string>
+    <string name="backup_delete_all_data">Eyða öllum mínum gögnum</string>
+    <string name="backup_danger_zone">Hættusvæði</string>
+    <string name="delete_all_confirmation">Já, eyða öllu</string>
+    <string name="backup_delete_old_data">Fjarlægja eldri útgáfur</string>
+    <string name="backup_data">Gögn öryggisafrits</string>
+    <string name="select_backup_data_descr">Veldu gögn og möppur til að taka öryggisafrit af.</string>
+    <string name="backup_restore_data_descr">Endurheimta gögn á tækinu með nettengdum öryggisafritum.</string>
+    <string name="backup_restore_data">Endurheimta gögn</string>
+    <string name="restore_from_osmand_cloud">Endurheimta úr OsmAnd Cloud-tölvuskýi</string>
+    <string name="choose_what_to_restore">Veldu það sem á að endurheimta.</string>
+    <string name="restore_selected_data">Endurheimta valin gögn</string>
+    <string name="receiving_data_from_server">Tek á móti gögnum frá netþjóninum…</string>
+    <string name="restore_complete">Endurheimt</string>
+    <string name="grey_color_slope">Grár litur er notaður þegar brekka er óskilgreind.</string>
+    <string name="backup_version_history">Útgáfuferli</string>
+    <string name="backup_storage_taken">Geymslurými upptekið</string>
+    <string name="delete_version_history">Eyða útgáfuferli</string>
+    <string name="routing_attr_avoid_tunnels_description">Forðast veggöng</string>
+    <string name="routing_attr_avoid_tunnels_name">Forðast veggöng</string>
+    <string name="backup_promocode">Afsláttarkóði</string>
+    <string name="send_crash_log">Senda hrunskýrslu</string>
+    <string name="send_logcat_log">Senda logcat-atvikaskrá</string>
+    <string name="backup_delete_all_data_descr">Öllum gögnum á OsmAnd Cloud tölvuskýi verður eytt. Útgáfur á tækinu haldast óbreyttar.</string>
+    <string name="purchases_feature_desc_nautical">Fáðu aðgang að upplýsingum um dýpt sjávar</string>
+    <string name="purchases_feature_desc_terrain">Hæðarlínur og hæðaskyggingakort sem styðjast við dökka skugga til að sýna brekkur, tinda og láglendi.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Fáðu mánaðarlegar uppfærslur á ónettengdum kortum.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Fáðu aðgang að ítarlegum OsmAnd-viðmótshlutum.</string>
+    <string name="unlimited_map_downloads">Ótakmörkuð niðurhöl korta</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage ónettengt</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Yfirborðskort: Hæðarlínur, hæðaskyggingar, brekkur</string>
+    <string name="offline_wikipeadia">Ónettengd Wikipedia</string>
+    <string name="offline_wikivoyage">Ónettengdar Wikiferðir</string>
+    <string name="terrain_maps">Yfirborðskort</string>
+    <string name="nautical_depth">Dýpt sjávar</string>
+    <string name="advanced_widgets">Ítarlegir viðmótshlutar</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s eða %2$s</string>
+    <string name="continue_with">Halda áfram með %1$s</string>
+    <string name="not_available_with">Ekki tiltækt með %1$s</string>
+    <string name="shared_string_learn_more">Kanna nánar</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Hættu hvenær sem er í Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Hættu hvenær sem er í Google Play.</string>
+    <string name="shared_string_not_included">Ekki taka með</string>
+    <string name="shared_string_includes">inniheldur</string>
+    <string name="complete_purchase">Ljúka kaupum</string>
+    <string name="regular_price">Venjulegt verð</string>
+    <string name="from_with_param">Frá %1$s</string>
+    <string name="backup_delete_types_descr">Viltu eyða gögnum frá úreltum gagnagerðum úr OsmAnd-tölvuskýi\?</string>
+    <string name="backup_delete_types">Eyða óvirkum gagnagerðum</string>
+    <string name="shared_string_discussion">Umræða</string>
+    <string name="shared_string_view_all">Skoða allt</string>
+    <string name="enter_verification_code">Settu inn eins-skiptis lykilorð</string>
+    <string name="backup_version_history_delete_descr">Viltu eyða atvikaskrám fyrir úreltar gagnagerðir úr OsmAnd-tölvuskýi\?</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Fáðu “%1$s” sem hluta af %2$s áskriftarleiðinni. Samanburður:</string>
+    <string name="redeem_promo_code">Virkjaðu afsláttarkóða</string>
+    <string name="backup_error_user_is_already_registered">Þetta tölvupóstfang er þegar virkt á öðrum notandaaðgangi</string>
+    <string name="backup_error_subscription_was_expired">Útrunnin áskrift</string>
+    <string name="backup_error_size_is_exceeded">Hámarksstærð OsmAnd Cloud tölvuskýsins fór fram yfir %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">Senda ætti skrána á .gzip sniði</string>
+    <string name="backup_error_file_not_available">Skrá ekki tiltæk</string>
+    <string name="backup_error_token_is_not_valid">Eitthvað er ekki í lagi með uppgefið auðkenni eða teikn tækis</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Ógilt eða útrunnið teikn</string>
+    <string name="backup_error_user_is_not_registered">Enginn notandi er skráður með þetta tölvupóstfang</string>
+    <string name="backup_error_no_valid_subscription">Engin gild áskrift til staðar</string>
+    <string name="duration_moment_ago">fyrir augnabliki síðan</string>
 </resources>

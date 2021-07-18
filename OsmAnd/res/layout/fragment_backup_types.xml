@@ -19,17 +19,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent">
 
-		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
-			android:id="@+id/progress_bar"
-			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
-			android:layout_width="match_parent"
-			android:layout_height="4dp"
-			android:indeterminate="true"
-			android:visibility="invisible"
-			osmand:mpb_progressStyle="horizontal"
-			osmand:mpb_setBothDrawables="true"
-			osmand:mpb_useIntrinsicPadding="false" />
-
 		<ExpandableListView
 			android:id="@+id/list"
 			android:layout_width="match_parent"
@@ -40,6 +29,17 @@
 			android:focusable="false"
 			android:groupIndicator="@android:color/transparent"
 			android:listSelector="@android:color/transparent" />
+
+		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
+			android:id="@+id/progress_bar"
+			style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="4dp"
+			android:indeterminate="true"
+			android:visibility="invisible"
+			osmand:mpb_progressStyle="horizontal"
+			osmand:mpb_setBothDrawables="true"
+			osmand:mpb_useIntrinsicPadding="false" />
 
 	</FrameLayout>
 

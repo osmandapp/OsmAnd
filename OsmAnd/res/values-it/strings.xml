@@ -855,9 +855,6 @@
     <string name="audionotes_plugin_name">Note audio/video</string>
     <string name="audionotes_location_not_defined">Tocca \'Utilizza posizione...\' per aggiungere una posizione alla nota.</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd per le curve di livello offline</string>
-    <string name="osmand_srtm_long_description_1000_chars">Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzate nelle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio. 
-\n 
-\nI dati globali (fra i 70° nord e 70° sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Misurazione della distanza</string>
     <string name="map_widget_audionotes">Note audio</string>
     <string name="av_def_action_video">Registra video</string>
@@ -4113,7 +4110,6 @@
     <string name="osmand_cloud_login_descr">Per favore immetti l\'indirizzo email che hai usato per la registrazione. Ti invieremo una password temporanea necessaria per il prossimo passo.</string>
     <string name="verify_email_address">Verifica l\'indirizzo email</string>
     <string name="verify_email_address_descr">Abbiamo inviato un codice di verifica a %1$s, per favore immettilo nel campo sottostante.</string>
-    <string name="enter_verification_code">Immetti un codice di 4 cifre</string>
     <string name="cloud_email_not_registered">Questa mail non è stata registrata per OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Un account con questa mail è già registrato.</string>
     <string name="resend_verification_code">Invia di nuovo il codice</string>

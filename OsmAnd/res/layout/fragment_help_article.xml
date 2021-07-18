@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:title="@string/shared_string_help"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:theme="?attr/toolbar_theme"
+        android:theme="?attr/toolbar_theme"
         android:background="?attr/pstsTabBackground"/>
 
     <net.osmand.plus.widgets.WebViewEx

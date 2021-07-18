@@ -411,4 +411,17 @@ public class BinaryMapDataObject {
 		}
 		return "";
 	}
+
+	public String getAdditionalTagValue(String tag) {
+		if (mapIndex == null) {
+			return "";
+		}
+		for (int type : additionalTypes) {
+			TagValuePair tp = mapIndex.decodeType(type);
+			if (tag.equals(tp.tag)) {
+				return tp.value;
+			}
+		}
+		return "";
+	}
 }

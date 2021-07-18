@@ -11,8 +11,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -38,12 +36,13 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.AttachTrackToRoadsCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.ImportTrackCard;
 import net.osmand.plus.routepreparationmenu.cards.NavigateTrackOptionsCard;
@@ -54,7 +53,6 @@ import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
-import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
@@ -507,7 +505,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						importHelper.setGpxImportCompleteListener(null);
 					}
 				});
-				importHelper.handleGpxImport(uri, true, false);
+				importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT, true);
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);
@@ -533,6 +531,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			LinearLayout cardsContainer = getCardsContainer();
 			View topShadow = getTopShadow();
 			FrameLayout bottomContainer = getBottomContainer();
+			if (bottomContainer == null) {
+				return;
+			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
 				bottomContainer.setBackgroundDrawable(null);

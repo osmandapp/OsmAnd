@@ -63,6 +63,11 @@ public class RenderingRuleSearchRequest {
 		values[p.getId()] = filter ? RenderingRuleProperty.TRUE_VALUE : RenderingRuleProperty.FALSE_VALUE;
 	}
 
+	public void setFloatFilter(RenderingRuleProperty p, float filter) {
+		assert p.isInputProperty();
+		fvalues[p.getId()] = filter;
+	}
+
 	public void saveState() {
 		savedValues = new int[values.length];
 		savedFvalues = new float[fvalues.length];
@@ -303,8 +308,7 @@ public class RenderingRuleSearchRequest {
 		return val == -1 ? defValue : val;
 	}
 	
-	/**/ RenderingRulesStorage getStorage() {
+	RenderingRulesStorage getStorage() {
 		return storage;
 	}
-
 }

@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,7 +83,7 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 			toolbarLayout.setTitle(getString(toolbarTitleRes));
 			description.setText(UiUtilities.createSpannableString(
 					String.format(getString(descriptionRes), fileName),
-					new StyleSpan(Typeface.BOLD), fileName
+					Typeface.BOLD, fileName
 			));
 			buttonsContainer.setVisibility(View.GONE);
 			progressBar.setVisibility(View.VISIBLE);

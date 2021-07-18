@@ -11,7 +11,9 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
 import net.osmand.plus.settings.backend.backup.SettingsItemType;
@@ -32,7 +34,10 @@ import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
 
 public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup> {
 
+	private static final int APPROXIMATE_FAVOURITE_SIZE_BYTES = 470;
+
 	private FavouritesDbHelper favoritesHelper;
+	private FavoriteGroup personalGroup;
 
 	public FavoritesSettingsItem(@NonNull OsmandApplication app, @NonNull List<FavoriteGroup> items) {
 		super(app, null, items);
@@ -70,7 +75,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 		File favoritesFile = favoritesHelper.getExternalFile();
 		if (favoritesFile.exists()) {
 			favoritesFile.setLastModified(lastModifiedTime);
-		};
+		}
 	}
 
 	@NonNull
@@ -93,11 +98,16 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 	@Override
 	public void apply() {
 		List<FavoriteGroup> newItems = getNewItems();
+		if (personalGroup != null) {
+			duplicateItems.add(personalGroup);
+		}
 		if (!newItems.isEmpty() || !duplicateItems.isEmpty()) {
 			appliedItems = new ArrayList<>(newItems);
 
 			for (FavoriteGroup duplicate : duplicateItems) {
-				if (shouldReplace) {
+				boolean isPersonal = duplicate.isPersonal();
+				boolean replace = shouldReplace || isPersonal;
+				if (replace) {
 					FavoriteGroup existingGroup = favoritesHelper.getGroup(duplicate.getName());
 					if (existingGroup != null) {
 						List<FavouritePoint> favouritePoints = new ArrayList<>(existingGroup.getPoints());
@@ -106,20 +116,44 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 						}
 					}
 				}
-				appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
+				if (!isPersonal) {
+					appliedItems.add(shouldReplace ? duplicate : renameItem(duplicate));
+				} else {
+					for (FavouritePoint item : duplicate.getPoints()) {
+						if (item.getSpecialPointType() == FavouritePoint.SpecialPointType.PARKING) {
+							ParkingPositionPlugin plugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
+							if (plugin != null) {
+								plugin.clearParkingPosition();
+								boolean isTimeRestricted = item.getTimestamp() > 0;
+								plugin.setParkingType(isTimeRestricted);
+								plugin.setParkingTime(isTimeRestricted ? item.getTimestamp() : 0);
+								plugin.setParkingPosition(item.getLatitude(), item.getLongitude());
+								plugin.addOrRemoveParkingEvent(item.getCalendarEvent());
+								if (item.getCalendarEvent()) {
+									plugin.addCalendarEvent(app);
+								}
+							}
+						}
+					}
+				}
 			}
 			List<FavouritePoint> favourites = getPointsFromGroups(appliedItems);
 			for (FavouritePoint favourite : favourites) {
-				favoritesHelper.addFavourite(favourite, false);
+				favoritesHelper.addFavourite(favourite, false, false);
 			}
 			favoritesHelper.sortAll();
 			favoritesHelper.saveCurrentPointsIntoFile();
+			favoritesHelper.loadFavorites();
 		}
 	}
 
 	@Override
 	public boolean isDuplicate(@NonNull FavoriteGroup favoriteGroup) {
 		String name = favoriteGroup.getName();
+		if (favoriteGroup.isPersonal()) {
+			personalGroup = favoriteGroup;
+			return false;
+		}
 		for (FavoriteGroup group : existingItems) {
 			if (group.getName().equals(name)) {
 				return true;
@@ -143,6 +177,11 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 				return renamedItem;
 			}
 		}
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull FavoriteGroup item) {
+		return item.getPoints().size() * APPROXIMATE_FAVOURITE_SIZE_BYTES;
 	}
 
 	@Nullable

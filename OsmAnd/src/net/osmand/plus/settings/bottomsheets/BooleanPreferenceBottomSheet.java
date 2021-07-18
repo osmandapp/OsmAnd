@@ -33,7 +33,6 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActivePrimaryColorId;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
 public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
@@ -145,9 +144,9 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			selectedColor = UiUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
 		} else {
 			bgColor = ContextCompat.getColor(app, checked
-					? getActivePrimaryColorId(nightMode) : getSecondaryIconColorId(nightMode));
+					? getActiveColorId(nightMode) : getSecondaryIconColorId(nightMode));
 			selectedColor = UiUtilities.getColorWithAlpha(
-					ContextCompat.getColor(app, getActivePrimaryColorId(nightMode)), checked ? 0.3f : 0.5f);
+					ContextCompat.getColor(app, getActiveColorId(nightMode)), checked ? 0.3f : 0.5f);
 		}
 
 		int bgResId = isLayoutRtl ? R.drawable.rectangle_rounded_left : R.drawable.rectangle_rounded_right;

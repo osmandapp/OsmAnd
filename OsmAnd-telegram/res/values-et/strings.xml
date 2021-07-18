@@ -231,10 +231,10 @@
     <string name="initialization">Alustamine</string>
     <string name="logging_out">Välja logimine</string>
     <string name="closing">Sulgemine</string>
-    <string name="gps_network_not_enabled">Kas lülitame asukohateenuse sisse\?</string>
+    <string name="gps_network_not_enabled">Lülitada asukohateenus sisse\?</string>
     <string name="not_logged_in">Sa ei ole sisse logitud</string>
     <string name="no_location_permission">Rakendusel puudub juurdepääs asukohaandmetele.</string>
-    <string name="gps_not_available">Palun lülita süsteemi seadetes sisse \"Asukoht\"</string>
+    <string name="gps_not_available">Palun luba süsteemi seadetes \"Asukoht\"</string>
     <string name="location_service_no_gps_available">Vali oma asukoha jagamiseks üks asukoha pakkujatest.</string>
     <string name="osmand_service_descr">OsmAnd töötab taustal, ekraan välja lülitatud.</string>
     <string name="shared_string_distance">Kaugus</string>

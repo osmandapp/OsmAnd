@@ -5,9 +5,11 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -84,5 +86,4 @@ public abstract class DownloadItem {
 		String size = String.format(Locale.US, "%.2f", sizeInMb);
 		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, "MB");
 	}
-
 }

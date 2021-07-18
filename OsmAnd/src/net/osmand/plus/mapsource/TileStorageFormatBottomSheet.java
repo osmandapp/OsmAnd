@@ -66,7 +66,7 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBoolean(SQLITE_DB_KEY, tileStorageFormat == TileStorageFormat.SQLITE_DB);
 		outState.putBoolean(NEW_MAP_SOURCE_KEY, newMapSource);
 		super.onSaveInstanceState(outState);

@@ -109,7 +109,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(ARTICLE_URL_KEY, articleUrl);
 		outState.putString(WIKI_REGION, wikiRegion);

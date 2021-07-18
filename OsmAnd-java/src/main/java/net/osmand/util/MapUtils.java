@@ -182,12 +182,17 @@ public class MapUtils {
 		return (2 * R * 1000 * Math.asin(Math.sqrt(a)));
 	}
 
-
-	
 	/**
 	 * Gets distance in meters
 	 */
 	public static double getDistance(LatLon l1, LatLon l2) {
+		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
+	}
+
+	/**
+	 * Gets distance in meters
+	 */
+	public static double getDistance(Location l1, Location l2) {
 		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
 	}
 
@@ -742,5 +747,48 @@ public class MapUtils {
 
 	public static double getSqrtDistance(float startX, float startY, float endX, float endY) {
 		return Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
+	}
+
+	/**
+	 * convert distance to char to store in the obf file
+	 *
+	 * @param dist        integer distance in meters
+	 * @param firstLetter first letter to start sequence
+	 * @param firstDist   distance to start sequence
+	 * @param mult1       first multiplier
+	 * @param mult2       second multiplier
+	 * @return String
+	 * for firstLetter = A, firstDist = 5000, mult1 = 2, mult2 = 5 return letter will be depends on distance
+	 * A <= 5 km, B <= 10 km, C <= 50 km, D <= 100 km, E <= 500 km, F <= 1000 km, G <= 5000 km, H <= 10000 km
+	 */
+
+	public static String convertDistToChar(int dist, char firstLetter, int firstDist, int mult1, int mult2) {
+		int iteration = 0;
+		while (dist - firstDist > 0) {
+			iteration++;
+			firstDist = firstDist * (iteration % 2 == 1 ? mult1 : mult2);
+		}
+		return String.valueOf((char) (firstLetter + iteration));
+	}
+
+	/**
+	 * convert char to distance
+	 *
+	 * @param ch          input char
+	 * @param firstLetter first letter to start sequence
+	 * @param firstDist   distance to start sequence
+	 * @param mult1       first multiplier
+	 * @param mult2       second multiplier
+	 * @return integer distance in meters
+	 * for firstLetter = A, firstDist = 5000, mult1 = 2, mult2 = 5 return will be depends on input char
+	 * *  A = 5000, B = 10000, C = 50000, D = 100000, E = 500000, F = 1000000, G = 5000000, H = 10000000
+	 */
+
+	public static int convertCharToDist(char ch, char firstLetter, int firstDist, int mult1, int mult2) {
+		int dist = firstDist;
+		for (int iteration = 1; iteration < ch - firstLetter + 1; iteration++) {
+			dist = dist * (iteration % 2 == 1 ? mult1 : mult2);
+		}
+		return dist;
 	}
 }

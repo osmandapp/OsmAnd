@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
+import net.osmand.AndroidNetworkUtils.Request;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -213,6 +214,20 @@ public abstract class InAppPurchaseHelper {
 			}
 		}
 		return subscriptions;
+	}
+
+	public static void subscribe(@NonNull Activity activity, @NonNull InAppPurchaseHelper purchaseHelper, @NonNull String sku) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		OsmandSettings settings = app.getSettings();
+		if (settings.isInternetConnectionAvailable(true)) {
+			purchaseHelper.purchaseSubscription(activity, sku,
+					settings.BILLING_USER_EMAIL.get(),
+					settings.BILLING_USER_NAME.get(),
+					settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
+					settings.BILLING_HIDE_USER_NAME.get());
+		} else {
+			app.showToastMessage(R.string.internet_not_available);
+		}
 	}
 
 	public abstract void isInAppPurchaseSupported(@NonNull final Activity activity, @Nullable final InAppPurchaseInitCallback callback);
@@ -658,7 +673,7 @@ public abstract class InAppPurchaseHelper {
 		try {
 			String url = "https://osmand.net/subscription/purchased";
 			String userOperation = "Sending purchase info...";
-			final List<AndroidNetworkUtils.Request> requests = new ArrayList<>();
+			final List<Request> requests = new ArrayList<>();
 			for (PurchaseInfo info : purchaseInfoList) {
 				Map<String, String> parameters = new HashMap<>();
 				parameters.put("userid", userId);
@@ -668,9 +683,12 @@ public abstract class InAppPurchaseHelper {
 				parameters.put("email", email);
 				parameters.put("token", token);
 				addUserInfo(parameters);
-				requests.add(new AndroidNetworkUtils.Request(url, parameters, userOperation, true, true));
+				requests.add(new Request(url, parameters, userOperation, true, true));
 			}
 			AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnSendRequestsListener() {
+				@Override
+				public void onRequestSending(@NonNull Request request) {
+				}
 
 				@Override
 				public void onRequestSent(@NonNull RequestResponse response) {

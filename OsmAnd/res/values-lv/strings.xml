@@ -1039,9 +1039,6 @@
 ……… * Nospiediet uz kartes un paturiet, lai noņemtu iepriekšējo punktu.\n…
 ……… * Nospiediet uz punkta un paturiet, lai pievienotu un lasītu aprakstu.\n…
 ……… * Nospiediet uz mērlineāla, lai izvēlētos citas darbības.</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Šis spraudnis iespējo kontūrlīniju un reljefu pārklājus uz OsmAnd standarta kartēm.
-\n
-\n Globālie dati (starp 70 Z un 70 D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems). "</string>
     <string name="osb_author_dialog_password">OSM parole (optionāla)</string>
     <string name="speech_rate_descr">TTS (runas robots) balss ātrums</string>
     <string name="speech_rate">Vārdu ātrums</string>

@@ -958,7 +958,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (containerView != null) {
 			String modeName = appMode.toHumanString();
 			String text = app.getString(R.string.changes_applied_to_profile, modeName);
-			SpannableString message = UiUtilities.createSpannableString(text, new StyleSpan(Typeface.BOLD), modeName);
+			SpannableString message = UiUtilities.createSpannableString(text, Typeface.BOLD, modeName);
 			Snackbar snackbar = Snackbar.make(containerView, message, Snackbar.LENGTH_LONG)
 					.setAction(R.string.apply_to_all_profiles, new View.OnClickListener() {
 						@Override

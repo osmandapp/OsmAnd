@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -34,10 +35,6 @@ import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class RouteCalculationResult {
 	private final static Log log = PlatformUtil.getLog(RouteCalculationResult.class);
-
-	// Evaluates street name that the route follows after turn within specified distance.
-	// It is useful to find names for short segments on intersections and roundabouts.
-	private static float distanceSeekStreetName = 150;
 
 	private static double distanceClosestToIntermediate = 3000;
 	private static double distanceThresholdToIntermediate = 25;
@@ -296,18 +293,22 @@ public class RouteCalculationResult {
 		return routeVisibleAngle;
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute() {
 		return getOriginalRoute(0);
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute(int startIndex) {
 		return getOriginalRoute(startIndex, segments.size(), true);
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute(int startIndex, boolean includeFirstSegment) {
 		return getOriginalRoute(startIndex, segments.size(), includeFirstSegment);
 	}
 
+	@Nullable
 	public List<RouteSegmentResult> getOriginalRoute(int startIndex, int endIndex, boolean includeFirstSegment) {
 		if (segments.size() == 0) {
 			return null;
@@ -406,51 +407,31 @@ public class RouteCalculationResult {
 						// Consider roundabout end.
 						info.routeEndPointOffset = roundAboutEnd;
 					}
-					RouteSegmentResult next = list.get(lind);
-					String ref = next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
-							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection());
-					info.setRef(ref);
-					String streetName = next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
-							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
-					if (Algorithms.isEmpty(streetName)) {
-						// try to get street names from following segments
-						float distanceFromTurn = next.getDistance();
-						for (int n = lind + 1; n + 1 < list.size(); n++) {
-							RouteSegmentResult s1 = list.get(n);
-							// scan the list only until the next turn
-							if (s1.getTurnType() != null || distanceFromTurn > distanceSeekStreetName ||
-									!Algorithms.isEmpty(streetName)) {
-								break;
-							}
-							streetName = s1.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
-									ctx.getSettings().MAP_TRANSLITERATE_NAMES.get());
-							distanceFromTurn += s1.getDistance();
-						}
-					}
-					info.setStreetName(streetName);
-					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
-							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
-					if (s.getObject().isExitPoint() && next.getObject().getHighway().equals("motorway_link")) {
+					RouteSegmentResult current = (routeInd == lind) ? s : list.get(lind);
+					String lang = ctx.getSettings().MAP_PREFERRED_LOCALE.get();
+					boolean transliterate = ctx.getSettings().MAP_TRANSLITERATE_NAMES.get();
+					info.setStreetName(current.getStreetName(lang, transliterate, list, lind));
+					info.setDestinationName(current.getDestinationName(lang, transliterate, list, lind));
+
+					//if (s.getObject().isExitPoint() && current.getObject().getHighway().equals("motorway_link")) {
+					if (s.getObject().isExitPoint()) {
 						ExitInfo exitInfo = new ExitInfo();
-						exitInfo.setRef(next.getObject().getExitRef());
-						exitInfo.setExitStreetName(next.getObject().getExitName());
+						exitInfo.setRef(current.getObject().getExitRef());
+						exitInfo.setExitStreetName(current.getObject().getExitName());
 						info.setExitInfo(exitInfo);
 					}
 
-					if (ref != null) {
-						RouteDataObject nextRoad = next.getObject();
-						info.setRouteDataObject(nextRoad);
+					if (routeInd > 0) {
+						RouteSegmentResult previous;
+						previous = list.get(routeInd - 1);
+						info.setRef(previous.getRef(lang, transliterate));
 
-						boolean isNextShieldFound = nextRoad.hasNameTagStartsWith("road_ref");
-						for (int ind = lind; ind < list.size() && !isNextShieldFound; ind++) {
-							if (list.get(ind).getTurnType() != null) {
-								isNextShieldFound = true;
+						if (info.getRef() != null) {
+							RouteDataObject rdoWithShield = previous.getObjectWithShield(list, lind);
+							if (rdoWithShield != null) {
+								info.setRouteDataObject(rdoWithShield);
 							} else {
-								RouteDataObject obj = list.get(ind).getObject();
-								if (obj.hasNameTagStartsWith("road_ref")) {
-									info.setRouteDataObject(obj);
-									isNextShieldFound = true;
-								}
+								info.setRouteDataObject(previous.getObject());
 							}
 						}
 					}
@@ -817,6 +798,12 @@ public class RouteCalculationResult {
 	private static boolean introduceFirstPoint(List<Location> locations, List<RouteDirectionInfo> directions,
 	                                           List<RouteSegmentResult> segs, Location start) {
 		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > DISTANCE_THRESHOLD_TO_INTRODUCE_FIRST_AND_LAST_POINTS) {
+			// Start location can have wrong altitude
+			double firstValidAltitude = getFirstValidAltitude(locations);
+			if (!Double.isNaN(firstValidAltitude)) {
+				start.setAltitude(firstValidAltitude);
+			}
+
 			// add start point
 			locations.add(0, start);
 			if (segs != null) {
@@ -834,6 +821,15 @@ public class RouteCalculationResult {
 			return true;
 		}
 		return false;
+	}
+
+	private static double getFirstValidAltitude(List<Location> locations) {
+		for (Location location : locations) {
+			if (location.hasAltitude()) {
+				return location.getAltitude();
+			}
+		}
+		return Double.NaN;
 	}
 
 	private static boolean introduceLastPoint(List<Location> locations, List<RouteDirectionInfo> directions,

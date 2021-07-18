@@ -131,9 +131,6 @@
     <string name="shared_string_control_start">Старт</string>
     <string name="map_widget_av_notes">Аудио/видео бележки</string>
     <string name="osmand_srtm_short_description_80_chars">Добавка на OsmAnd за офлайн контурни линии</string>
-    <string name="osmand_srtm_long_description_1000_chars">Тази добавка изчертава линии на релефа върху основните карти на OsmAnd. Това е особено полезно за туристи и хора интересуващи се от релефа на местността.
-\n
-\nГлобалната карта (между 70° северна ширина и 70° южна ширина) се базира на измервания от SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), устройство за изображения на борда на Terra, най-добрият спътник на програмата на NASA Earth Observing System. ASTER е съвместен проект на NASA, Японското правителство и японската компания Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Измерване на дистанции</string>
     <string name="audionotes_location_not_defined">Докоснете \"Използване на мястото...\" за да добавите бележка там.</string>
     <string name="map_widget_audionotes">Аудио бележки</string>
@@ -2323,7 +2320,6 @@
     <string name="osmand_cloud_login_descr">Моля, въведете имейл адреса, който сте използвали при регистрацията. На следващата стъпка ще ви изпратим необходимата еднократна парола.</string>
     <string name="verify_email_address">Проверка на имейл адреса</string>
     <string name="verify_email_address_descr">Изпратихме код за проверка на %1$s, моля, въведете го в полето по-долу.</string>
-    <string name="enter_verification_code">Въведете 4-цифрен код</string>
     <string name="cloud_email_not_registered">Този имейл не е регистриран в OsmAnd Cloud</string>
     <string name="cloud_email_already_registered">Профилът с този имейл вече е регистриран.</string>
     <string name="resend_verification_code">Изпращане на кода отново</string>

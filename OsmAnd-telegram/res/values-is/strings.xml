@@ -127,7 +127,7 @@
     <string name="start_location_sharing">Deila staðsetningu</string>
     <string name="foot">ft</string>
     <string name="shared_string_name">Nafn</string>
-    <string name="duration_ago">%1$s síðan</string>
+    <string name="duration_ago">fyrir %1$s síðan</string>
     <string name="location_sharing_description">Veldu notendur eða hópa til að deila með staðsetningu þinni.</string>
     <string name="do_not_have_telegram">Ég er ekki með Telegram-aðgang</string>
     <string name="monitoring_is_enabled">Vöktun er virk</string>
@@ -152,7 +152,7 @@
     <string name="shared_string_exit">Hætta</string>
     <string name="shared_string_appearance">Útlit</string>
     <string name="shared_string_date">Dagsetning</string>
-    <string name="shared_string_later">Síðar</string>
+    <string name="shared_string_later">Seinna</string>
     <string name="bearing">Stefna</string>
     <string name="unit_of_speed_system">Hraðaeining</string>
     <string name="shared_string_map">Kort</string>
@@ -220,7 +220,7 @@
     <string name="gps_not_available">Virkjaðu \"Staðsetning\" í stillingunum stýrikerfisins</string>
     <string name="live_now_description">Tengiliðir og hópar sem deila staðsetningu til þín.</string>
     <string name="logout_no_internet_msg">Tengstu við internetið til að geta skráð þig til fulls út úr Telegram.</string>
-    <string name="privacy_policy_agree">Með því að smella á \'Halda áfram\', samþykkir þú ákvæði og skilyrði varðandi gagnaleynd hjá Telegram og OsmAnd.</string>
+    <string name="privacy_policy_agree">Með því að ýta á \'Halda áfram\', samþykkir þú ákvæði og skilyrði varðandi gagnaleynd hjá Telegram og OsmAnd.</string>
     <string name="buffer_time">Gildistími biðminnis</string>
     <string name="sharing_time">Tími deilingar</string>
     <string name="send_location_as_descr">Veldu hvernig skilaboð með staðsetningu þinni líti út.</string>

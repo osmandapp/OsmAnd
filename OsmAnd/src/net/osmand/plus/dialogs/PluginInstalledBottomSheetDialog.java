@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
@@ -136,8 +135,8 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	@Override
-	public void newDownloadIndexes() {
-		updateItems();
+	public void onUpdatedIndexesList() {
+		updateMenuItems();
 	}
 
 	@Override
@@ -172,7 +171,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void downloadHasFinished() {
-		updateItems();
+		updateMenuItems();
 	}
 
 	@Override
@@ -205,7 +204,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(PLUGIN_ID_KEY, pluginId);
 	}
@@ -306,25 +305,6 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 					.setCustomView(view)
 					.create();
 			items.add(mapIndexItem);
-		}
-	}
-
-	private void updateItems() {
-		Activity activity = getActivity();
-		Context themedCtx = UiUtilities.getThemedContext(activity, nightMode);
-		View mainView = getView();
-		if (activity != null && mainView != null) {
-			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
-					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
-			if (itemsContainer != null) {
-				itemsContainer.removeAllViews();
-			}
-			items.clear();
-			createMenuItems(null);
-			for (BaseBottomSheetItem item : items) {
-				item.inflate(themedCtx, itemsContainer, nightMode);
-			}
-			setupHeightAndBackground(mainView);
 		}
 	}
 

@@ -6,5 +6,6 @@ public enum EngineParameter {
 	CUSTOM_NAME,
 	NAME_INDEX,
 	CUSTOM_URL,
+	APPROXIMATE_ROUTE,
 	API_KEY
 }

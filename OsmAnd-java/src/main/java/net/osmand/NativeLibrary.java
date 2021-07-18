@@ -34,7 +34,11 @@ import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
+
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
 
 public class NativeLibrary {
 
@@ -506,17 +510,22 @@ public class NativeLibrary {
 			return names;
 		}
 
-		public String getFileNameByExtension(String extension) {
-			if (Algorithms.isEmpty(extension) || !extension.startsWith(".")) {
-				return null;
+		public String getRouteID() {
+			for (Map.Entry<String, String> entry : getTags().entrySet()) {
+				if ("route_id".equals(entry.getKey())) {
+					return entry.getValue();
+				}
 			}
+			return null;
+		}
+
+		public String getGpxFileName() {
 			for (String name : getOriginalNames()) {
-				if (name.endsWith(extension)) {
+				if (name.endsWith(GPX_FILE_EXT) || name.endsWith(GPX_GZ_FILE_EXT)) {
 					return name;
 				}
 			}
 			return null;
 		}
 	}
-
 }

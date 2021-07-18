@@ -12,6 +12,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -22,21 +23,24 @@ import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.List;
 
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE_POINT;
+
 public class AmenityMenuController extends MenuController {
 
 	private Amenity amenity;
 	private MapMarker marker;
-
 	private TransportStopController transportStopController;
 
 	public AmenityMenuController(@NonNull MapActivity mapActivity,
-								 @NonNull PointDescription pointDescription,
-								 @NonNull final Amenity amenity) {
+	                             @NonNull PointDescription pointDescription,
+	                             @NonNull final Amenity amenity) {
 		super(new AmenityMenuBuilder(mapActivity, amenity), pointDescription, mapActivity);
 		this.amenity = amenity;
 		if (amenity.getType().getKeyName().equals("transportation")) {
@@ -66,6 +70,19 @@ public class AmenityMenuController extends MenuController {
 					new MapMarkerMenuController(mapActivity, marker.getPointDescription(mapActivity), marker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
+		} else if (amenity.getSubType().equals(ROUTE_ARTICLE_POINT)) {
+			TitleButtonController openTrackButtonController = new TitleButtonController() {
+				@Override
+				public void buttonPressed() {
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						openTrack();
+					}
+				}
+			};
+			openTrackButtonController.startIconId = R.drawable.ic_action_polygom_dark;
+			openTrackButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
+			leftTitleButtonController = openTrackButtonController;
 		} else if (amenity.getType().isWiki()) {
 			leftTitleButtonController = new TitleButtonController() {
 				@Override
@@ -83,6 +100,17 @@ public class AmenityMenuController extends MenuController {
 		openingHoursInfo = OpeningHoursParser.getInfo(amenity.getOpeningHours());
 	}
 
+	void openTrack() {
+		OsmandApplication app = getMapActivity().getMyApplication();
+		TravelHelper travelHelper = app.getTravelHelper();
+		String lang = amenity.getTagSuffix(Amenity.LANG_YES + ":");
+		String name = amenity.getTagContent(Amenity.ROUTE_NAME);
+		TravelArticle article = travelHelper.getArticleByTitle(name, lang, true, null);
+		if (article != null) {
+			travelHelper.openTrackMenu(article, getMapActivity(), name, amenity.getLocation());
+		}
+	}
+
 	@Override
 	protected void setObject(Object object) {
 		if (object instanceof Amenity) {
@@ -96,7 +124,7 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	@Override
- 	protected Object getCorrespondingMapObject() {
+	protected Object getCorrespondingMapObject() {
 		return marker;
 	}
 
@@ -117,13 +145,15 @@ public class AmenityMenuController extends MenuController {
 	}
 
 	public static int getRightIconId(Amenity amenity) {
-		String id = null;
-		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
-		if (st != null) {
-			if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
-				id = st.getIconKeyName();
-			} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-				id = st.getOsmTag() + "_" + st.getOsmValue();
+		String id = amenity.getGpxIcon();
+		if (id == null) {
+			PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+			if (st != null) {
+				if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
+					id = st.getIconKeyName();
+				} else if (RenderingIcons.containsBigIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+					id = st.getOsmTag() + "_" + st.getOsmValue();
+				}
 			}
 		}
 		if (id != null) {

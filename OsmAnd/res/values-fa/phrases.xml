@@ -1500,4 +1500,6 @@
     <string name="poi_socket">سوکت</string>
     <string name="poi_socket_type2_output_filter">خروجی نوع 2</string>
     <string name="poi_socket_chademo_output_filter">خروجی CHAdeMO</string>
+    <string name="reddit">ردیت</string>
+    <string name="twitter">توییتر</string>
 </resources>

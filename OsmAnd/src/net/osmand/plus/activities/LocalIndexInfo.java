@@ -10,7 +10,7 @@ import java.io.File;
 
 public class LocalIndexInfo implements Comparable<LocalIndexInfo> {
 
-	private LocalIndexType type;
+	private final LocalIndexType type;
 	private String description = "";
 	private String name;
 

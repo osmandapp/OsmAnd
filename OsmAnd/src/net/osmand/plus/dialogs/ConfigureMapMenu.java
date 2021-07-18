@@ -191,7 +191,7 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.SHOW_FAVORITES))
 				.setListener(l)
 				.createItem());
-		boolean hasPoiData = !Algorithms.isEmpty(resourceManager.getAddressRepositories())
+		boolean hasPoiData = !Algorithms.isEmpty(resourceManager.getAmenityRepositories())
 				|| !Algorithms.isEmpty(resourceManager.getTravelRepositories());
 		if (hasPoiData) {
 			PoiUIFilter wiki = app.getPoiFilters().getTopWikiPoiFilter();

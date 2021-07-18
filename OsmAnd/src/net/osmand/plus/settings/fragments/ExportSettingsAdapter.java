@@ -16,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
@@ -292,6 +293,8 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 				itemsSize += ((FileSettingsItem) item).getSize();
 			} else if (item instanceof File) {
 				itemsSize += ((File) item).length();
+			} else if (item instanceof RemoteFile) {
+				itemsSize += ((RemoteFile) item).getZipSize();
 			}
 		}
 		return itemsSize;

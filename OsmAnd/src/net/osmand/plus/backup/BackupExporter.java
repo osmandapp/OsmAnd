@@ -3,9 +3,11 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.plus.backup.BackupHelper.OnDeleteFilesListener;
+import net.osmand.OperationLog;
+import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkWriter.OnUploadItemListener;
 import net.osmand.plus.settings.backend.ExportSettingsType;
+import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.Exporter;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -16,13 +18,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
 
 public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
 	private final Map<String, RemoteFile> filesToDelete = new LinkedHashMap<>();
+	private ThreadPoolTaskExecutor<ItemWriterTask> executor;
 	private final NetworkExportProgressListener listener;
 
 	public interface NetworkExportProgressListener {
@@ -59,6 +65,36 @@ public class BackupExporter extends Exporter {
 		exportItems();
 	}
 
+	@Override
+	protected void writeItems(@NonNull AbstractWriter writer) throws IOException {
+		OperationLog log = new OperationLog("writeItems", true);
+		log.startOperation();
+
+		StringBuilder orderIdUpdateError = new StringBuilder();
+		backupHelper.updateOrderId((status, message, err) -> {
+			if (err != null) {
+				orderIdUpdateError.append(err);
+			}
+		});
+		if (orderIdUpdateError.length() > 0) {
+			throw new IOException(orderIdUpdateError.toString());
+		}
+
+		List<ItemWriterTask> tasks = new ArrayList<>();
+		for (SettingsItem item : getItems().values()) {
+			tasks.add(new ItemWriterTask(writer, item));
+		}
+		executor = new ThreadPoolTaskExecutor<>(null);
+		executor.setInterruptOnError(true);
+		executor.run(tasks);
+
+		log.finishOperation();
+		if (!executor.getExceptions().isEmpty()) {
+			Throwable t = executor.getExceptions().values().iterator().next();
+			throw new IOException(t.getMessage(), t);
+		}
+	}
+
 	private void exportItems() throws IOException {
 		int[] dataProgress = {0};
 		Set<Object> itemsProgress = new HashSet<>();
@@ -86,18 +122,26 @@ public class BackupExporter extends Exporter {
 		}
 	}
 
+	@Override
+	public void cancel() {
+		super.cancel();
+		if (executor != null) {
+			executor.cancel();
+		}
+	}
+
 	private OnUploadItemListener getOnUploadItemListener(Set<Object> itemsProgress, int[] dataProgress, Map<String, String> errors) {
 		return new OnUploadItemListener() {
 
 			@Override
-			public void onItemFileUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work) {
+			public void onItemUploadStarted(@NonNull SettingsItem item, @NonNull String fileName, int work) {
 				if (listener != null) {
 					listener.itemExportStarted(item.getType().name(), fileName, work);
 				}
 			}
 
 			@Override
-			public void onItemFileUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork) {
+			public void onItemUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork) {
 				dataProgress[0] += deltaWork;
 				if (listener != null) {
 					listener.updateItemProgress(item.getType().name(), fileName, progress);
@@ -113,6 +157,18 @@ public class BackupExporter extends Exporter {
 				} else {
 					checkAndDeleteOldFile(item, fileName, errors);
 				}
+				dataProgress[0] += APPROXIMATE_FILE_SIZE_BYTES / 1024;
+				if (listener != null) {
+					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+				}
+			}
+
+			@Override
+			public void onItemUploadDone(@NonNull SettingsItem item, @NonNull String fileName, long uploadTime, @Nullable String error) {
+				String type = item.getType().name();
+				if (!Algorithms.isEmpty(error)) {
+					errors.put(type + "/" + fileName, error);
+				}
 				itemsProgress.add(item);
 				if (listener != null) {
 					listener.itemExportDone(item.getType().name(), fileName);
@@ -126,11 +182,16 @@ public class BackupExporter extends Exporter {
 		return new OnDeleteFilesListener() {
 
 			@Override
-			public void onFileDeleteProgress(@NonNull RemoteFile file) {
+			public void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
+
+			}
+
+			@Override
+			public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
 				itemsProgress.add(file);
 				if (listener != null) {
 					listener.itemExportDone(file.getType(), file.getName());
-					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+					listener.updateGeneralProgress(file.getZipSize(), dataProgress[0]);
 				}
 			}
 
@@ -147,20 +208,40 @@ public class BackupExporter extends Exporter {
 	}
 
 	private void checkAndDeleteOldFile(@NonNull SettingsItem item, @NonNull String fileName, Map<String, String> errors) {
-		PrepareBackupResult backup = backupHelper.getBackup();
-		if (backup != null) {
-			String type = item.getType().name();
-			try {
-				ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
-				if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
-					RemoteFile remoteFile = backup.getRemoteFile(type, fileName);
-					if (remoteFile != null) {
-						backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
-					}
+		String type = item.getType().name();
+		try {
+			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+			if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
+				RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
+				if (remoteFile != null) {
+					backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
 				}
-			} catch (UserNotRegisteredException e) {
-				errors.put(type + "/" + fileName, e.getMessage());
 			}
+		} catch (UserNotRegisteredException e) {
+			errors.put(type + "/" + fileName, e.getMessage());
+		}
+	}
+
+	private static class ItemWriterTask extends ThreadPoolTaskExecutor.Task {
+
+		private final AbstractWriter writer;
+		private final SettingsItem item;
+
+		public ItemWriterTask(@NonNull AbstractWriter writer, @NonNull SettingsItem item) {
+			this.writer = writer;
+			this.item = item;
+		}
+
+		@Override
+		public Void call() throws Exception {
+			writer.write(item);
+			return null;
+		}
+
+		@Override
+		public void cancel() {
+			super.cancel();
+			writer.cancel();
 		}
 	}
 }

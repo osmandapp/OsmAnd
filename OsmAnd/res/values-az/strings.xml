@@ -772,7 +772,6 @@
     <string name="altitude_descent">Eniş</string>
     <string name="altitude_ascent">Yoxuş</string>
     <string name="routing_attr_height_obstacles_name">Yüksəklik məlumatlarını istifadə et</string>
-
     <string name="rendering_attr_depthContours_description">Dərinlik konturlarını və nöqtələrini göstər.</string>
     <string name="rendering_attr_depthContours_name">Dəniz dərinliyi konturları</string>
     <string name="rendering_attr_contourDensity_description">Kontur xəttinin sıxlığı</string>
@@ -1258,7 +1257,7 @@
     <string name="access_disable_offroute_recalc">Çıxanda marşrut yenidən hesablanmasın</string>
     <string name="access_disable_wrong_direction_recalc">Əks istiqamət üçün marşrut yenidən hesablanmasın</string>
     <string name="recalculate_route">Marşrutu yenidən hesabla</string>
-    <string name="use_fast_recalculation_desc">Marşrutun yalnız başlanğıc hissəsini yenidən hesablayır. Uzun səyahətlər üçün istifadə edilə bilər.</string>
+    <string name="use_fast_recalculation_desc">Marşrutun yalnız başlanğıc hissəsini yenidən hesablayır, uzun səyahətlər üçün faydalıdır.</string>
     <string name="planning_trip_item">Səyahət planlaşdırma</string>
     <string name="map_viewing_item">Xəritəyə baxış</string>
     <string name="quick_action_map_style_switch">Xəritə stili “%s” olaraq dəyişdirildi.</string>
@@ -2152,4 +2151,10 @@
     <string name="shared_string_custom">Xüsusi</string>
     <string name="plan_route_last_edited">Son düzəliş</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="copy_poi_name">POI adını kopyala</string>
+    <string name="new_device_account">Yeni cihaz / yeni hesab</string>
+    <string name="use_system_language">Sistem dilini istifadə et</string>
+    <string name="duration_ago">%1$s əvvəl</string>
+    <string name="backup_no_internet_descr">İnternet bağlantınızı yoxlayın və yenidən endirin.</string>
+    <string name="delete_all_confirmation">Bəli, hamısını sil</string>
 </resources>

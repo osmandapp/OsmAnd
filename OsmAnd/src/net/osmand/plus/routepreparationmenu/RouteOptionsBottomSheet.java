@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -25,7 +23,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -54,6 +51,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.VoiceLanguageBottomSheetFragment;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
@@ -255,7 +253,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		boolean changedState = app.getSettings().VOICE_MUTE.getModeValue(applicationMode);
 		if (changedState != currentMuteState) {
 			currentMuteState = changedState;
-			updateParameters();
+			updateMenuItems();
 			updateMenu();
 		}
 	}
@@ -264,7 +262,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		boolean changedState = useHeightPref.getModeValue(applicationMode);
 		if (changedState != currentUseHeightState) {
 			currentUseHeightState = changedState;
-			updateParameters();
+			updateMenuItems();
 			updateMenu();
 		}
 	}
@@ -297,7 +295,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
 				String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 				if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-					OsmAndDialogs.showVoiceProviderDialog(mapActivity, applicationMode, false);
+					VoiceLanguageBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(),
+							RouteOptionsBottomSheet.this, applicationMode, usedOnMap);
 				} else {
 					cb.setChecked(!active);
 					icon.setImageDrawable(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
@@ -709,24 +708,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
-		}
-	}
-
-	public void updateParameters() {
-		Activity activity = getActivity();
-		View mainView = getView();
-		if (activity != null && mainView != null) {
-			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
-					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
-			if (itemsContainer != null) {
-				itemsContainer.removeAllViews();
-			}
-			items.clear();
-			createMenuItems(null);
-			for (BaseBottomSheetItem item : items) {
-				item.inflate(activity, itemsContainer, nightMode);
-			}
-			setupHeightAndBackground(mainView);
 		}
 	}
 

@@ -26,6 +26,8 @@ import java.util.List;
 
 public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEntry> {
 
+	private static final int APPROXIMATE_SEARCH_HISTORY_SIZE_BYTES = 320;
+
 	private SearchHistoryHelper searchHistoryHelper;
 
 	public SearchHistorySettingsItem(@NonNull OsmandApplication app, @NonNull List<HistoryEntry> items) {
@@ -168,6 +170,11 @@ public class SearchHistorySettingsItem extends CollectionSettingsItem<HistoryEnt
 	@Override
 	public HistoryEntry renameItem(@NonNull HistoryEntry item) {
 		return item;
+	}
+
+	@Override
+	public long getEstimatedItemSize(@NonNull HistoryEntry item) {
+		return APPROXIMATE_SEARCH_HISTORY_SIZE_BYTES;
 	}
 
 	@Nullable
