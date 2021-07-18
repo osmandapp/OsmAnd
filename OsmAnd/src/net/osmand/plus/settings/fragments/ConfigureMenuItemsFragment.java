@@ -27,6 +27,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
 import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.DrawerMenuItemsSettings;
@@ -221,6 +222,7 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 					contextMenuAdapter = menu.getActionsContextMenuAdapter(true);
 					break;
 			}
+			PurchasingUtils.removePromoItems(contextMenuAdapter);
 		}
 	}
 

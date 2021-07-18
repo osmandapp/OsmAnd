@@ -39,7 +39,7 @@ public class RasterMapMenu {
 										  final RasterMapType type) {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
-		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		assert plugin != null;
 		final CommonPreference<Integer> mapTransparencyPreference;
 		final CommonPreference<String> mapTypePreference;

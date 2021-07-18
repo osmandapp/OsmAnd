@@ -131,8 +131,8 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		adapter.notifyDataSetChanged();
 	}
 
-	private void enableDisablePlugin(OsmandPlugin plugin, boolean enable) {
-		if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, enable)) {
+	private void enableDisablePlugin(OsmandPlugin plugin) {
+		if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, !plugin.isEnabled())) {
 			adapter.notifyDataSetChanged();
 		}
 	}
@@ -160,7 +160,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 		private List<Object> getFilteredPluginsAndApps() {
 			List<ConnectedApp> connectedApps = app.getAidlApi().getConnectedApps();
-			List<OsmandPlugin> visiblePlugins = OsmandPlugin.getVisiblePlugins();
+			List<OsmandPlugin> visiblePlugins = OsmandPlugin.getAvailablePlugins();
 
 			for (Iterator<OsmandPlugin> iterator = visiblePlugins.iterator(); iterator.hasNext(); ) {
 				OsmandPlugin plugin = iterator.next();
@@ -204,20 +204,15 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				name = app.getName();
 				pluginDescription.setText(R.string.third_party_application);
 				pluginLogo.setImageDrawable(app.getIcon());
-				pluginLogo.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						switchEnabled(app);
-					}
-				});
+				pluginLogo.setOnClickListener(v -> switchEnabled(app));
 				pluginOptions.setVisibility(View.GONE);
 				pluginOptions.setOnClickListener(null);
 				view.setTag(app);
 			} else if (item instanceof OsmandPlugin) {
 				final OsmandPlugin plugin = (OsmandPlugin) item;
-				active = plugin.isActive();
+				active = plugin.isEnabled();
 				if (!active) {
-					logoContDescId = plugin.needsInstallation()
+					logoContDescId = plugin.isLocked()
 							? R.string.access_shared_string_not_installed : R.string.shared_string_enable;
 				}
 				name = plugin.getName();
@@ -232,19 +227,12 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				pluginLogo.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if (plugin.isActive() || !plugin.needsInstallation()) {
-							enableDisablePlugin(plugin, !plugin.isActive());
-						}
+						enableDisablePlugin(plugin);
 					}
 				});
 				pluginOptions.setVisibility(View.VISIBLE);
 				pluginOptions.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
-				pluginOptions.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						showOptionsMenu(v, plugin);
-					}
-				});
+				pluginOptions.setOnClickListener(v -> showOptionsMenu(v, plugin));
 				view.setTag(plugin);
 			}
 
@@ -269,19 +257,18 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 	private void showOptionsMenu(View view, final OsmandPlugin plugin) {
 		final PopupMenu optionsMenu = new PopupMenu(view.getContext(), view);
-		if (plugin.isActive() || !plugin.needsInstallation()) {
-			MenuItem enableDisableItem = optionsMenu.getMenu().add(
-					plugin.isActive() ? R.string.shared_string_disable
-							: R.string.shared_string_enable);
-			enableDisableItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					enableDisablePlugin(plugin, !plugin.isActive());
-					optionsMenu.dismiss();
-					return true;
-				}
-			});
-		}
+		MenuItem enableDisableItem = optionsMenu.getMenu().add(
+				plugin.isEnabled() ?
+						R.string.shared_string_disable :
+						R.string.shared_string_enable);
+		enableDisableItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				enableDisablePlugin(plugin);
+				optionsMenu.dismiss();
+				return true;
+			}
+		});
 
 		final SettingsScreenType settingsScreenType = plugin.getSettingsScreenType();
 		if (settingsScreenType != null && plugin.isActive()) {

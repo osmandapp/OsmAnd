@@ -126,6 +126,7 @@ public class PoiFiltersHelper {
 		return customPOIFilter;
 	}
 
+	@Nullable
 	public PoiUIFilter getTopWikiPoiFilter() {
 		if (topWikiPoiFilter == null) {
 			String wikiFilterId = PoiUIFilter.STD_PREFIX + "osmwiki";

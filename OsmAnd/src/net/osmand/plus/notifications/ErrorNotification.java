@@ -63,7 +63,7 @@ public class ErrorNotification extends OsmandNotification {
 		boolean planning = routingHelper.isRoutePlanningMode();
 		boolean pause = routingHelper.isPauseNavigation();
 
-		boolean gpxEnabled = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null;
+		boolean gpxEnabled = OsmandPlugin.isActive(OsmandMonitoringPlugin.class);
 		String usedBy = service != null ? "" + service.getUsedBy() : "X";
 
 		notificationText = "Info: " + (following ? "1" : "") + (planning ? "2" : "") + (pause ? "3" : "") + (gpxEnabled ? "4" : "") + "-" + usedBy + ". "

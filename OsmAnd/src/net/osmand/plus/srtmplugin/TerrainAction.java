@@ -36,8 +36,8 @@ public class TerrainAction extends QuickAction {
 			plugin.toggleTerrain(activity, !plugin.isTerrainLayerEnabled(), new Runnable() {
 				@Override
 				public void run() {
-					if (plugin.isTerrainLayerEnabled() && !plugin.isActive() && !plugin.needsInstallation()) {
-						OsmandPlugin.enablePlugin(activity, activity.getMyApplication(), plugin, true);
+					if (plugin.isTerrainLayerEnabled()) {
+						OsmandPlugin.enablePluginIfNeeded(activity, activity.getMyApplication(), plugin, true);
 					}
 					plugin.updateLayers(activity.getMapView(), activity);
 					activity.refreshMapComplete();

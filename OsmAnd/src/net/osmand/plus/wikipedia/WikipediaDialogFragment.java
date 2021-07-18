@@ -177,7 +177,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		sb.append("<h1>").append(title).append("</h1>");
 		sb.append(article);
 		sb.append(FOOTER_INNER);
-		if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
+		if (OsmandPlugin.isActive(OsmandDevelopmentPlugin.class)) {
 			writeOutHTML(sb, new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html"));
 		}
 		return sb.toString();
