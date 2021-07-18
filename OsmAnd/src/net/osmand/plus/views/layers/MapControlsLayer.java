@@ -1029,7 +1029,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		});
 
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
-		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
+		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
 				showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
 			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
@@ -1040,7 +1040,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void updateTransparencySlider() {
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
-		if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
+		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
 				transparencySlider.setValue(settings.MAP_OVERLAY_TRANSPARENCY.get());
 			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {

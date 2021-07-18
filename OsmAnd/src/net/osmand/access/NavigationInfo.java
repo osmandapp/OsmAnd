@@ -283,7 +283,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 			if (targetDirectionFlag && ((inclination == null) || (inclination != 0))) {
 				targetDirectionFlag = false;
 				if (settings.DIRECTION_AUDIO_FEEDBACK.get()) {
-					AccessibilityPlugin accessibilityPlugin = OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class);
+					AccessibilityPlugin accessibilityPlugin = OsmandPlugin.getActivePlugin(AccessibilityPlugin.class);
 					if (accessibilityPlugin != null) {
 						if (inclination == null) {
 							accessibilityPlugin.playSoundIcon(AccessibilityPlugin.DIRECTION_NOTIFICATION);

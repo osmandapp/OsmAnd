@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="explore_wikipedia_offline">Explore Wikipedia offline.</string>
     <string name="shared_string_purchased">Purchased</string>
     <string name="attribute">Attribute</string>
     <string name="backup_restore_now">Restore now</string>
@@ -43,6 +44,7 @@
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
     </string>
     <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
+    <string name="contour_lines_hillshades_slope">Contour lines, hillshades, slope</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
     <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>
     <string name="backup_error_token_is_not_valid_or_expired">Invalid or expired token</string>

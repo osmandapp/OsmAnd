@@ -691,13 +691,12 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	public void initAppStatusVariables() {
 		OsmandApplication app = getMyApplication();
-		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null
+		srtmDisabled = !OsmandPlugin.isActive(SRTMPlugin.class)
 				&& !InAppPurchaseHelper.isContourLinesPurchased(app);
-		nauticalPluginDisabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null;
+		nauticalPluginDisabled = !OsmandPlugin.isActive(NauticalMapsPlugin.class);
 		freeVersion = Version.isFreeVersion(app);
 		SRTMPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
-
 	}
 
 	public static class AskMapDownloadFragment extends BottomSheetDialogFragment {

@@ -231,7 +231,7 @@ public abstract class SettingsHelper {
 				myPlacesItems.put(ExportSettingsType.TRACKS, files);
 			}
 		}
-		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null) {
 			List<OsmNotesPoint> notesPointList = settingsTypes == null || settingsTypes.contains(ExportSettingsType.OSM_NOTES)
 					? osmEditingPlugin.getDBBug().getOsmbugsPoints()
@@ -246,7 +246,7 @@ public abstract class SettingsHelper {
 				myPlacesItems.put(ExportSettingsType.OSM_EDITS, editsPointList);
 			}
 		}
-		AudioVideoNotesPlugin avNotesPlugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+		AudioVideoNotesPlugin avNotesPlugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 		if (avNotesPlugin != null) {
 			List<File> files = new ArrayList<>();
 			if (settingsTypes == null || settingsTypes.contains(ExportSettingsType.MULTIMEDIA_NOTES)) {

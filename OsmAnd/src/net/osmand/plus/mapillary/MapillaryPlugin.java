@@ -102,6 +102,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean isEnableByDefault() {
+		return true;
+	}
+
+	@Override
 	public boolean init(@NonNull OsmandApplication app, Activity activity) {
 		if (activity instanceof MapActivity) {
 			mapActivity = (MapActivity) activity;

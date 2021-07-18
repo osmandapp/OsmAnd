@@ -152,13 +152,15 @@ public class SrtmDownloadItem extends DownloadItem {
 	}
 
 	public static boolean containsSrtmExtension(@NonNull String fileName) {
-		return fileName.contains(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
-				|| fileName.contains(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT);
+		return Algorithms.containsAny(fileName,
+				IndexConstants.BINARY_SRTM_MAP_INDEX_EXT,
+				IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT);
 	}
 
 	public static boolean isSrtmFile(@NonNull String fileName) {
-		return fileName.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
-				|| fileName.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT);
+		return Algorithms.endsWithAny(fileName,
+				IndexConstants.BINARY_SRTM_MAP_INDEX_EXT,
+				IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT);
 	}
 
 	@NonNull

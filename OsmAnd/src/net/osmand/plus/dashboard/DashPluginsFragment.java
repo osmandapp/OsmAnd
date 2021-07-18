@@ -99,17 +99,17 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 
 	private void initPlugins() {
-		List<OsmandPlugin> notActivePlugins = OsmandPlugin.getNotEnabledVisiblePlugins();
-		notActivePlugins.remove(OsmandPlugin.getPlugin(SkiMapsPlugin.class));
-		notActivePlugins.remove(OsmandPlugin.getPlugin(NauticalMapsPlugin.class));
-		Collections.shuffle(notActivePlugins);
+		List<OsmandPlugin> notFunctionalPlugins = OsmandPlugin.getNotActivePlugins();
+		notFunctionalPlugins.remove(OsmandPlugin.getPlugin(SkiMapsPlugin.class));
+		notFunctionalPlugins.remove(OsmandPlugin.getPlugin(NauticalMapsPlugin.class));
+		Collections.shuffle(notFunctionalPlugins);
 
-		List<OsmandPlugin> enabledPlugins = OsmandPlugin.getEnabledVisiblePlugins();
+		List<OsmandPlugin> enabledPlugins = OsmandPlugin.getActivePlugins();
 		enabledPlugins.remove(OsmandPlugin.getPlugin(SkiMapsPlugin.class));
 		enabledPlugins.remove(OsmandPlugin.getPlugin(NauticalMapsPlugin.class));
 
 		plugins = new ArrayList<OsmandPlugin>();
-		Iterator<OsmandPlugin> nit = notActivePlugins.iterator();
+		Iterator<OsmandPlugin> nit = notFunctionalPlugins.iterator();
 		Iterator<OsmandPlugin> it = enabledPlugins.iterator();
 		addPluginsToLimit(nit, 1);
 		addPluginsToLimit(it, 5);
@@ -142,25 +142,25 @@ public class DashPluginsFragment extends DashBaseFragment {
 		CompoundButton enableDisableButton = (CompoundButton) pluginView.findViewById(R.id.plugin_enable_disable);
 		Button getButton = (Button) pluginView.findViewById(R.id.get_plugin);
 		enableDisableButton.setOnCheckedChangeListener(null);
-		if (plugin.needsInstallation()) {
+		if (plugin.isLocked()) {
 			getButton.setVisibility(View.VISIBLE);
 			enableDisableButton.setVisibility(View.GONE);
 		} else {
 			getButton.setVisibility(View.GONE);
 			enableDisableButton.setVisibility(View.VISIBLE);
-			enableDisableButton.setChecked(plugin.isActive());
+			enableDisableButton.setChecked(plugin.isEnabled());
 		}
 		setListener(plugin, enableDisableButton, pluginView);
 
 		ImageButton logoView = (ImageButton) pluginView.findViewById(R.id.plugin_logo);
-		if (plugin.isActive()) {
+		if (plugin.isEnabled()) {
 			logoView.setBackgroundResource(R.drawable.bg_plugin_logo_enabled_light);
 			logoView.setContentDescription(getString(R.string.shared_string_disable));
 		} else {
 			TypedArray attributes = getActivity().getTheme().obtainStyledAttributes(
 					new int[]{R.attr.bg_plugin_logo_disabled});
 			logoView.setBackgroundDrawable(attributes.getDrawable(0));
-			logoView.setContentDescription(getString(plugin.needsInstallation() ? R.string.access_shared_string_not_installed : R.string.shared_string_enable));
+			logoView.setContentDescription(getString(plugin.isLocked() ? R.string.access_shared_string_not_installed : R.string.shared_string_enable));
 			attributes.recycle();
 		}
 	}
@@ -190,10 +190,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		enableDisableButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (plugin.isActive() == isChecked || plugin.needsInstallation()) {
-					return;
-				}
-				if (OsmandPlugin.enablePlugin(getActivity(), getMyApplication(), plugin, isChecked)) {
+				if (OsmandPlugin.enablePluginIfNeeded(getActivity(), getMyApplication(), plugin, isChecked)) {
 					updatePluginState(pluginView, plugin);
 				}
 			}
