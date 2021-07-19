@@ -14,10 +14,6 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 	private List<WptPt> points;
 
-	private float trackWidth;
-	private int trackColor;
-	private int arrowColor;
-
 	private static class GeometryWayWptPtProvider implements GeometryWayProvider {
 		private List<WptPt> points;
 
@@ -45,16 +41,10 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		super(context, new GpxGeometryWayDrawer(context));
 	}
 
-	public void setTrackStyleParams(int arrowColor, int trackColor, float trackWidth) {
-		this.arrowColor = arrowColor;
-		this.trackColor = trackColor;
-		this.trackWidth = trackWidth;
-	}
-
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
-		return new GeometryArrowsStyle(getContext(), arrowColor, trackColor, trackWidth);
+		return new GeometryArrowsStyle(getContext(), customDirectionArrowColor, customColor, customWidth);
 	}
 
 	public void updatePoints(RotatedTileBox tb, List<WptPt> points) {

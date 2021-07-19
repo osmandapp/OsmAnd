@@ -282,20 +282,6 @@ public abstract class MultiColoringGeometryWay
 		return (GradientGeometryWayProvider) getLocationProvider();
 	}
 
-	@Override
-	protected PathGeometryZoom getGeometryZoom(RotatedTileBox tb) {
-		if (coloringType.isGradient()) {
-			int zoom = tb.getZoom();
-			PathGeometryZoom zm = zooms.get(zoom);
-			if (zm == null) {
-				zm = new GradientPathGeometryZoom(getLocationProvider(), tb, true);
-				zooms.put(zoom, zm);
-			}
-			return zm;
-		}
-		return super.getGeometryZoom(tb);
-	}
-
 	private static class GradientGeometryWayProvider implements GeometryWayProvider {
 
 		private final RouteColorize routeColorize;
@@ -331,7 +317,7 @@ public abstract class MultiColoringGeometryWay
 		}
 	}
 
-	private static class GradientPathGeometryZoom extends PathGeometryZoom {
+	protected static class GradientPathGeometryZoom extends PathGeometryZoom {
 
 		public GradientPathGeometryZoom(GeometryWayProvider locationProvider, RotatedTileBox tb, boolean simplify) {
 			super(locationProvider, tb, simplify);

@@ -159,7 +159,7 @@ public class Renderable {
             if (geometryWay != null) {
                 List<WptPt> points = getPointsForDrawing();
                 if (!Algorithms.isEmpty(points)) {
-                    geometryWay.setTrackStyleParams(arrowColor, trackColor, trackWidth);
+                    geometryWay.setStyleParams(trackColor, trackWidth, arrowColor, coloringType, routeInfoAttribute);
                     geometryWay.updatePoints(tileBox, points);
                     geometryWay.drawSegments(tileBox, canvas, quadRect.top, quadRect.left, quadRect.bottom, quadRect.right, null, 0);
                 }

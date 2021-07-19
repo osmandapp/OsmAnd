@@ -49,6 +49,20 @@ public class RouteGeometryWay extends
 	}
 
 	@Override
+	protected PathGeometryZoom getGeometryZoom(RotatedTileBox tb) {
+		if (coloringType.isGradient()) {
+			int zoom = tb.getZoom();
+			PathGeometryZoom zm = zooms.get(zoom);
+			if (zm == null) {
+				zm = new GradientPathGeometryZoom(getLocationProvider(), tb, true);
+				zooms.put(zoom, zm);
+			}
+			return zm;
+		}
+		return super.getGeometryZoom(tb);
+	}
+
+	@Override
 	public Location getNextVisiblePoint() {
 		return helper.getRoute().getCurrentStraightAnglePoint();
 	}
