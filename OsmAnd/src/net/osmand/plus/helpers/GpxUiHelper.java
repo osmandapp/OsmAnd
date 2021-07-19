@@ -106,7 +106,6 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSplitType;
-import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.render.RenderingRuleProperty;
@@ -2379,8 +2378,8 @@ public class GpxUiHelper {
 		if (dataItem.getWidth() != null) {
 			gpxFile.setWidth(dataItem.getWidth());
 		}
-		if (dataItem.getGradientScaleType() != null) {
-			gpxFile.setGradientScaleType(dataItem.getGradientScaleType().name());
+		if (dataItem.getColoringType() != null) {
+			gpxFile.setColoringType(dataItem.getColoringType());
 		}
 	}
 

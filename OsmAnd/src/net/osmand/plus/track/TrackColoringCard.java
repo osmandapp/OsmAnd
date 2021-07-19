@@ -18,6 +18,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routing.ColoringType;
 
 import org.apache.commons.logging.Log;
 
@@ -75,9 +76,12 @@ public class TrackColoringCard extends MapBaseCard {
 		}
 	}
 
-	public GradientScaleType getSelectedScaleType() {
-		String attrName = selectedAppearanceItem.getAttrName();
-		return attrName.equals(SOLID_COLOR) ? null : GradientScaleType.valueOf(attrName.toUpperCase());
+	public ColoringType getSelectedColoringType() {
+		return ColoringType.getTrackColoringTypeByName(selectedAppearanceItem.getAttrName());
+	}
+
+	public String getRouteInfoAttribute() {
+		return ColoringType.getRouteInfoAttribute(selectedAppearanceItem.getAttrName());
 	}
 
 	private List<TrackAppearanceItem> getTrackAppearanceItems() {
@@ -93,7 +97,8 @@ public class TrackColoringCard extends MapBaseCard {
 
 	private TrackAppearanceItem getSelectedAppearanceItem() {
 		if (selectedAppearanceItem == null) {
-			GradientScaleType scaleType = trackDrawInfo.getGradientScaleType();
+			ColoringType coloringType = trackDrawInfo.getColoringType();
+			GradientScaleType scaleType = null;
 			for (TrackAppearanceItem item : appearanceItems) {
 				if (scaleType == null && item.getAttrName().equals(SOLID_COLOR)
 						|| scaleType != null && scaleType.getTypeName().equals(item.getAttrName())) {
@@ -118,12 +123,14 @@ public class TrackColoringCard extends MapBaseCard {
 		descriptionView.setText(getSelectedAppearanceItem().getLocalizedValue());
 	}
 
-	public void setGradientScaleType(TrackAppearanceItem item) {
+	public void setColoringType(TrackAppearanceItem item) {
 		selectedAppearanceItem = item;
 		if (item.getAttrName().equals(SOLID_COLOR)) {
-			trackDrawInfo.setGradientScaleType(null);
+			trackDrawInfo.setColoringType(null);
+			trackDrawInfo.setRouteInfoAttribute(null);
 		} else {
-			trackDrawInfo.setGradientScaleType(GradientScaleType.valueOf(item.getAttrName().toUpperCase()));
+			trackDrawInfo.setColoringType(ColoringType.getTrackColoringTypeByName(item.getAttrName()));
+			trackDrawInfo.setRouteInfoAttribute(ColoringType.getRouteInfoAttribute(item.getAttrName()));
 		}
 		mapActivity.refreshMap();
 
@@ -132,7 +139,7 @@ public class TrackColoringCard extends MapBaseCard {
 
 	private class TrackColoringAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
 
-		private List<TrackAppearanceItem> items;
+		private final List<TrackAppearanceItem> items;
 
 		private TrackColoringAdapter(List<TrackAppearanceItem> items) {
 			this.items = items;
@@ -173,7 +180,7 @@ public class TrackColoringCard extends MapBaseCard {
 					selectedAppearanceItem = items.get(holder.getAdapterPosition());
 					notifyItemChanged(holder.getAdapterPosition());
 					notifyItemChanged(prevSelectedPosition);
-					setGradientScaleType(selectedAppearanceItem);
+					setColoringType(selectedAppearanceItem);
 					if (getListener() != null) {
 						getListener().onCardPressed(TrackColoringCard.this);
 					}

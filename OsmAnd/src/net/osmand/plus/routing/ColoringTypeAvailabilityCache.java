@@ -27,8 +27,7 @@ public class ColoringTypeAvailabilityCache {
 			prevRoute = route;
 		}
 
-		String key = routeColoringType.isRouteInfoAttribute() ?
-				routeInfoAttribute : routeColoringType.getName();
+		String key = routeColoringType.getName(routeInfoAttribute);
 
 		Boolean available = cache.get(key);
 		if (available == null) {

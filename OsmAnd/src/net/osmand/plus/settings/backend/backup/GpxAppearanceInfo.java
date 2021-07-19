@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.util.Algorithms;
@@ -15,7 +16,7 @@ import org.json.JSONObject;
 public class GpxAppearanceInfo {
 
 	public String width;
-	public GradientScaleType scaleType;
+	public String coloringType;
 	public int color;
 	public int splitType;
 	public double splitInterval;
@@ -36,7 +37,7 @@ public class GpxAppearanceInfo {
 		showStartFinish = dataItem.isShowStartFinish();
 		splitType = dataItem.getSplitType();
 		splitInterval = dataItem.getSplitInterval();
-		scaleType = dataItem.getGradientScaleType();
+		coloringType = dataItem.getColoringType();
 
 		GPXTrackAnalysis analysis = dataItem.getAnalysis();
 		if (analysis != null) {
@@ -53,7 +54,7 @@ public class GpxAppearanceInfo {
 		writeParam(json, "show_start_finish", showStartFinish);
 		writeParam(json, "split_type", GpxSplitType.getSplitTypeByTypeId(splitType).getTypeName());
 		writeParam(json, "split_interval", splitInterval);
-		writeParam(json, "gradient_scale_type", scaleType);
+		writeParam(json, "coloring_type", coloringType);
 
 		writeParam(json, "time_span", timeSpan);
 		writeParam(json, "wpt_points", wptPoints);
@@ -74,8 +75,15 @@ public class GpxAppearanceInfo {
 		gpxAppearanceInfo.splitType = GpxSplitType.getSplitTypeByName(json.optString("split_type")).getType();
 		hasAnyParam |= json.has("split_interval");
 		gpxAppearanceInfo.splitInterval = json.optDouble("split_interval");
-		hasAnyParam |= json.has("gradient_scale_type");
-		gpxAppearanceInfo.scaleType = getScaleType(json.optString("gradient_scale_type"));
+		hasAnyParam |= json.has("coloring_type");
+		gpxAppearanceInfo.coloringType = json.optString("coloring_type");
+		if (ColoringType.getTrackColoringTypeByName(gpxAppearanceInfo.coloringType) == null) {
+			hasAnyParam |= json.has("gradient_scale_type");
+			GradientScaleType scaleType = getScaleType(json.optString("gradient_scale_type"));
+			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
+			gpxAppearanceInfo.coloringType = coloringType == null
+					? null : coloringType.getName(null);
+		}
 
 		hasAnyParam |= json.has("time_span");
 		gpxAppearanceInfo.timeSpan = json.optLong("time_span");

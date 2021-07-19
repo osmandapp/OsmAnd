@@ -301,7 +301,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			List<String> coloringTypes = new ArrayList<>();
 			for (ColoringType coloringType : ColoringType.getRouteColoringTypes()) {
 				if (!coloringType.isRouteInfoAttribute()) {
-					coloringTypes.add(coloringType.getName());
+					coloringTypes.add(coloringType.getName(null));
 				}
 			}
 			return coloringTypes;

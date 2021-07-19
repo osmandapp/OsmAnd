@@ -40,6 +40,7 @@ import net.osmand.plus.monitoring.TripRecordingBottomSheet;
 import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.SplitTrackAsyncTask.SplitTrackListener;
@@ -159,7 +160,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			if (selectedGpxFile.isShowCurrentTrack()) {
 				trackDrawInfo = new TrackDrawInfo(true);
 				trackDrawInfo.setColor(app.getSettings().CURRENT_TRACK_COLOR.get());
-				trackDrawInfo.setGradientScaleType(app.getSettings().CURRENT_TRACK_COLORIZATION.get());
+				trackDrawInfo.setColoringType(app.getSettings().CURRENT_TRACK_COLORING_TYPE.get());
+				trackDrawInfo.setRouteInfoAttribute(app.getSettings().CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get());
 				trackDrawInfo.setWidth(app.getSettings().CURRENT_TRACK_WIDTH.get());
 				trackDrawInfo.setShowArrows(app.getSettings().CURRENT_TRACK_SHOW_ARROWS.get());
 				trackDrawInfo.setShowStartFinish(app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.get());
@@ -343,14 +345,18 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			if (card instanceof SplitIntervalCard) {
 				SplitIntervalBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), trackDrawInfo, this);
 			} else if (card instanceof TrackColoringCard) {
-				GradientScaleType currentScaleType = ((TrackColoringCard) card).getSelectedScaleType();
-				trackDrawInfo.setGradientScaleType(currentScaleType);
+				TrackColoringCard trackColoringCard = ((TrackColoringCard) card);
+				ColoringType currentColoringType = trackColoringCard.getSelectedColoringType();
+				trackDrawInfo.setColoringType(currentColoringType);
+				trackDrawInfo.setRouteInfoAttribute(trackColoringCard.getRouteInfoAttribute());
 				mapActivity.refreshMap();
 				if (gradientCard != null) {
-					gradientCard.setSelectedScaleType(currentScaleType);
+					GradientScaleType scaleType = currentColoringType == null ?
+							null : currentColoringType.toGradientScaleType();
+					gradientCard.setSelectedScaleType(scaleType);
 				}
 				if (colorsCard != null) {
-					AndroidUiHelper.updateVisibility(colorsCard.getView(), currentScaleType == null);
+					AndroidUiHelper.updateVisibility(colorsCard.getView(), currentColoringType == null);
 				}
 			} else if (card instanceof ColorsCard) {
 				int color = ((ColorsCard) card).getSelectedColor();
@@ -583,7 +589,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 		if (gpxFile.showCurrentTrack) {
 			app.getSettings().CURRENT_TRACK_COLOR.set(trackDrawInfo.getColor());
-			app.getSettings().CURRENT_TRACK_COLORIZATION.set(trackDrawInfo.getGradientScaleType());
+			app.getSettings().CURRENT_TRACK_COLORING_TYPE.set(trackDrawInfo.getColoringType());
+			app.getSettings().CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.set(trackDrawInfo.getRouteInfoAttribute());
 			app.getSettings().CURRENT_TRACK_WIDTH.set(trackDrawInfo.getWidth());
 			app.getSettings().CURRENT_TRACK_SHOW_ARROWS.set(trackDrawInfo.isShowArrows());
 			app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.set(trackDrawInfo.isShowStartFinish());
@@ -594,7 +601,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDbHelper.updateShowArrows(gpxDataItem, trackDrawInfo.isShowArrows());
 //			gpxDbHelper.updateShowStartFinish(gpxDataItem, trackDrawInfo.isShowStartFinish());
 			gpxDbHelper.updateSplit(gpxDataItem, splitType, trackDrawInfo.getSplitInterval());
-			gpxDbHelper.updateGradientScaleType(gpxDataItem, trackDrawInfo.getGradientScaleType());
+			if (trackDrawInfo.getColoringType() == null) {
+				gpxDbHelper.updateColoringType(gpxDataItem, null);
+			} else {
+				ColoringType coloringType = trackDrawInfo.getColoringType();
+				String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
+				gpxDbHelper.updateColoringType(gpxDataItem, coloringType.getName(routeInfoAttribute));
+			}
 		}
 	}
 
@@ -667,7 +680,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			setupColorsCard(cardsContainer);
 
-			gradientCard = new GradientCard(mapActivity, selectedGpxFile.getTrackAnalysis(app), trackDrawInfo.getGradientScaleType());
+			GradientScaleType scaleType = trackDrawInfo.getColoringType() == null ?
+					null : trackDrawInfo.getColoringType().toGradientScaleType();
+			gradientCard = new GradientCard(mapActivity, selectedGpxFile.getTrackAnalysis(app), scaleType);
 			cardsContainer.addView(gradientCard.build(mapActivity));
 
 			trackWidthCard = new TrackWidthCard(mapActivity, trackDrawInfo, new OnNeedScrollListener() {
@@ -696,7 +711,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			List<Integer> colors = getTrackColors();
 			colorsCard = new ColorsCard(mapActivity, trackDrawInfo.getColor(), this, colors, app.getSettings().CUSTOM_TRACK_COLORS, null);
 			colorsCard.setListener(this);
-			AndroidUiHelper.updateVisibility(colorsCard.build(mapActivity), trackDrawInfo.getGradientScaleType() == null);
+			AndroidUiHelper.updateVisibility(colorsCard.build(mapActivity), trackDrawInfo.getColoringType() == null);
 			cardsContainer.addView(colorsCard.getView());
 		}
 	}

@@ -68,9 +68,13 @@ public enum ColoringType {
 		this.iconId = iconId;
 	}
 
-	@NonNull
-	public String getName() {
-		return name;
+	@Nullable
+	public String getName(@Nullable String routeInfoAttribute) {
+		if (!isRouteInfoAttribute()) {
+			return name;
+		} else {
+			return Algorithms.isEmpty(routeInfoAttribute) ? null : routeInfoAttribute;
+		}
 	}
 
 	@StringRes
@@ -205,13 +209,33 @@ public enum ColoringType {
 
 	@Nullable
 	public GradientScaleType toGradientScaleType() {
-		if (this == ALTITUDE) {
+		if (this == SPEED) {
+			return GradientScaleType.SPEED;
+		} else if (this == ALTITUDE) {
 			return GradientScaleType.ALTITUDE;
 		} else if (this == SLOPE) {
 			return GradientScaleType.SLOPE;
 		} else {
 			return null;
 		}
+	}
+
+	@Nullable
+	public static ColoringType fromGradientScaleType(@Nullable GradientScaleType scaleType) {
+		if (scaleType == GradientScaleType.SPEED) {
+			return SPEED;
+		} else if (scaleType == GradientScaleType.ALTITUDE) {
+			return ALTITUDE;
+		} else if (scaleType == GradientScaleType.SLOPE) {
+			return SLOPE;
+		}
+		return null;
+	}
+
+	@Nullable
+	public static String getRouteInfoAttribute(@Nullable String name) {
+		return !Algorithms.isEmpty(name) && name.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX) ?
+				name : null;
 	}
 
 	@NonNull
@@ -227,11 +251,11 @@ public enum ColoringType {
 
 	@Nullable
 	private static ColoringType getColoringTypeByName(List<ColoringType> from, @Nullable String name) {
-		if (!Algorithms.isEmpty(name) && name.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX)) {
+		if (!Algorithms.isEmpty(getRouteInfoAttribute(name))) {
 			return ATTRIBUTE;
 		}
 		for (ColoringType coloringType : from) {
-			if (coloringType.name.equalsIgnoreCase(name)) {
+			if (coloringType.name.equalsIgnoreCase(name) && coloringType != ATTRIBUTE) {
 				return coloringType;
 			}
 		}

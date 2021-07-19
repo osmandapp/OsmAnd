@@ -11,6 +11,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
 import net.osmand.util.Algorithms;
@@ -28,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class Renderable {
 
@@ -70,7 +72,9 @@ public class Renderable {
         protected AsynchronousResampler culler = null;                        // The currently active resampler
         protected Paint paint = null;                               // MUST be set by 'updateLocalPaint' before use
         protected Paint borderPaint;
-        protected GradientScaleType scaleType = null;
+
+        protected ColoringType coloringType = null;
+        protected String routeInfoAttribute = null;
         protected boolean drawBorder = false;
 
         protected GpxGeometryWay geometryWay;
@@ -90,13 +94,17 @@ public class Renderable {
             }
             paint.setColor(p.getColor());
             paint.setStrokeWidth(p.getStrokeWidth());
-            if (scaleType != null) {
+            if (coloringType != null && coloringType.isGradient()) {
                 paint.setAlpha(0xFF);
             }
         }
 
-        public void setGradientTrackParams(GradientScaleType gradientScaleType, @NonNull Paint borderPaint, boolean shouldDrawBorder) {
-            this.scaleType = gradientScaleType;
+        public void setTrackColoringParams(@Nullable ColoringType coloringType,
+                                           @Nullable String routeInfoAttribute,
+                                           @NonNull Paint borderPaint,
+                                           boolean shouldDrawBorder) {
+            this.coloringType = coloringType;
+            this.routeInfoAttribute = routeInfoAttribute;
             this.borderPaint = borderPaint;
             this.drawBorder = shouldDrawBorder;
         }
@@ -118,7 +126,7 @@ public class Renderable {
 
             updateLocalPaint(p);
             canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-            if (scaleType != null) {
+            if (coloringType != null && coloringType.isGradient()) {
                 if (drawBorder && zoom < BORDER_TYPE_ZOOM_THRESHOLD) {
                     drawSolid(points, borderPaint, canvas, tileBox);
                 }
@@ -131,7 +139,7 @@ public class Renderable {
 
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) { // is visible?
-                if (scaleType == null) {
+                if (coloringType == null) {
                     startCuller(zoom);
                 }
                 drawSingleSegment(zoom, p, canvas, tileBox);
@@ -191,6 +199,7 @@ public class Renderable {
         protected void drawGradient(double zoom, List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             QuadRect tileBounds = tileBox.getLatLonBounds();
             boolean drawSegmentBorder = drawBorder && zoom >= BORDER_TYPE_ZOOM_THRESHOLD;
+            GradientScaleType scaleType = coloringType.toGradientScaleType();
             Path path = new Path();
             boolean recalculateLastXY = true;
             WptPt lastPt = pts.get(0);
