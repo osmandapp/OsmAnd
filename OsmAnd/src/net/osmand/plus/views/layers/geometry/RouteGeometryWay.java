@@ -38,9 +38,9 @@ public class RouteGeometryWay extends
 			needUpdate = false;
 			List<Location> locations = route.getImmutableAllLocations();
 
-			if (routeColoringType.isGradient()) {
+			if (coloringType.isGradient()) {
 				updateGradientRoute(tb, locations);
-			} else if (routeColoringType.isRouteInfoAttribute()) {
+			} else if (coloringType.isRouteInfoAttribute()) {
 				updateSolidMultiColorRoute(tb, route);
 			} else {
 				updateWay(locations, tb);

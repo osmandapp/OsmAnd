@@ -41,8 +41,8 @@ public abstract class MultiColoringGeometryWay
 
 	protected Integer customColor;
 	protected Float customWidth;
-	protected Integer customPointColor;
-	protected ColoringType routeColoringType;
+	protected Integer customDirectionArrowColor;
+	protected ColoringType coloringType;
 	protected String routeInfoAttribute;
 
 	protected boolean needUpdate;
@@ -51,12 +51,13 @@ public abstract class MultiColoringGeometryWay
 		super(context, drawer);
 	}
 
-	public void setRouteStyleParams(@Nullable @ColorInt Integer color,
-									@Nullable Float width,
-									@Nullable @ColorInt Integer pointColor,
-									@NonNull ColoringType routeColoringType,
-									@Nullable String routeInfoAttribute) {
-		this.needUpdate = this.routeColoringType != routeColoringType
+
+	public void setStyleParams(int color,
+							   float width,
+							   @Nullable @ColorInt Integer directionArrowColor,
+							   @NonNull ColoringType routeColoringType,
+							   @Nullable String routeInfoAttribute) {
+		this.needUpdate = this.coloringType != routeColoringType
 				|| routeColoringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 
@@ -69,8 +70,8 @@ public abstract class MultiColoringGeometryWay
 
 		this.customColor = color;
 		this.customWidth = width;
-		this.customPointColor = pointColor;
-		this.routeColoringType = routeColoringType;
+		this.customDirectionArrowColor = directionArrowColor;
+		this.coloringType = routeColoringType;
 		this.routeInfoAttribute = routeInfoAttribute;
 	}
 
@@ -88,7 +89,7 @@ public abstract class MultiColoringGeometryWay
 
 	protected void updateGradientRoute(RotatedTileBox tb, List<Location> locations) {
 		GPXFile gpxFile = GpxUiHelper.makeGpxFromLocations(locations, getContext().getApp());
-		ColorizationType colorizationType = routeColoringType.toGradientScaleType().toColorizationType();
+		ColorizationType colorizationType = coloringType.toGradientScaleType().toColorizationType();
 		RouteColorize routeColorize = new RouteColorize(tb.getZoom(), gpxFile, null, colorizationType, 0);
 		List<RouteColorizationPoint> points = routeColorize.getResult(false);
 
@@ -117,7 +118,7 @@ public abstract class MultiColoringGeometryWay
 
 		for (int i = 0; i < colors.size(); ) {
 			int color = colors.get(i);
-			GeometrySolidWayStyle style = getSolidWayStyle(color);
+			GeometrySolidWayStyle<?> style = getSolidWayStyle(color);
 			styleMap.put(i, style);
 
 			i++;
@@ -233,9 +234,9 @@ public abstract class MultiColoringGeometryWay
 				gradientWayStyle.currColor = RouteColorize.getIntermediateColor(prevColor, nextColor, percent);
 				gradientWayStyle.nextColor = nextColor;
 			}
-		} else if (routeColoringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle) {
-			GeometrySolidWayStyle prevStyle = (GeometrySolidWayStyle) style;
-			GeometrySolidWayStyle transparentWayStyle = getSolidWayStyle(Color.TRANSPARENT);
+		} else if (coloringType.isRouteInfoAttribute() && style instanceof GeometrySolidWayStyle) {
+			GeometrySolidWayStyle<?> prevStyle = (GeometrySolidWayStyle<?>) style;
+			GeometrySolidWayStyle<?> transparentWayStyle = getSolidWayStyle(Color.TRANSPARENT);
 			int prevStyleIdx = startLocationIndex > 0 ? startLocationIndex - 1 : 0;
 			prevStyle.color = getStyle(prevStyleIdx, transparentWayStyle).color;
 		}
@@ -244,28 +245,28 @@ public abstract class MultiColoringGeometryWay
 
 	@Override
 	protected boolean shouldSkipLocation(TByteArrayList simplification, Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
-		return routeColoringType.isGradient()
+		return coloringType.isGradient()
 				? simplification.getQuick(locationIdx) == 0
 				: super.shouldSkipLocation(simplification, styleMap, locationIdx);
 	}
 
 	@NonNull
 	@Override
-	public GeometryWayStyle<MultiColoringGeometryWayContext> getDefaultWayStyle() {
+	public GeometryWayStyle<?> getDefaultWayStyle() {
 		Paint paint = getContext().getAttrs().paint;
 		int color = customColor != null ? customColor : paint.getColor();
 		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
-		if (routeColoringType.isGradient()) {
+		if (coloringType.isGradient()) {
 			return new GeometryGradientWayStyle(getContext(), color, width);
 		}
-		return new GeometrySolidWayStyle(getContext(), color, width, customPointColor);
+		return new GeometrySolidWayStyle<>(getContext(), color, width, customDirectionArrowColor);
 	}
 
 	@NonNull
-	public GeometrySolidWayStyle getSolidWayStyle(int lineColor) {
+	public GeometrySolidWayStyle<C> getSolidWayStyle(int lineColor) {
 		Paint paint = getContext().getAttrs().paint;
 		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
-		return new GeometrySolidWayStyle(getContext(), lineColor, width, customPointColor);
+		return new GeometrySolidWayStyle<>(getContext(), lineColor, width, customDirectionArrowColor);
 	}
 
 	@NonNull
@@ -282,7 +283,7 @@ public abstract class MultiColoringGeometryWay
 
 	@Override
 	protected PathGeometryZoom getGeometryZoom(RotatedTileBox tb) {
-		if (routeColoringType.isGradient()) {
+		if (coloringType.isGradient()) {
 			int zoom = tb.getZoom();
 			PathGeometryZoom zm = zooms.get(zoom);
 			if (zm == null) {
@@ -382,11 +383,11 @@ public abstract class MultiColoringGeometryWay
 		}
 	}
 
-	public static class GeometrySolidWayStyle extends GeometryWayStyle<MultiColoringGeometryWayContext> {
+	public static class GeometrySolidWayStyle<T extends MultiColoringGeometryWayContext> extends GeometryWayStyle<T> {
 
 		private final Integer directionArrowsColor;
 
-		GeometrySolidWayStyle(MultiColoringGeometryWayContext context, Integer color, Float width, Integer directionArrowsColor) {
+		GeometrySolidWayStyle(T context, Integer color, Float width, Integer directionArrowsColor) {
 			super(context, color, width);
 			this.directionArrowsColor = directionArrowsColor;
 		}
@@ -412,7 +413,7 @@ public abstract class MultiColoringGeometryWay
 			if (!(other instanceof GeometrySolidWayStyle)) {
 				return false;
 			}
-			GeometrySolidWayStyle o = (GeometrySolidWayStyle) other;
+			GeometrySolidWayStyle<?> o = (GeometrySolidWayStyle<?>) other;
 			return Algorithms.objectEquals(directionArrowsColor, o.directionArrowsColor);
 		}
 	}

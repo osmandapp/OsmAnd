@@ -10,7 +10,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 
-public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryWayDrawer<GpxGeometryWayContext>> {
+public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayContext, GpxGeometryWayDrawer> {
 
 	private List<WptPt> points;
 
@@ -75,17 +75,17 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 		}
 	}
 
-	public static class GeometryArrowsStyle extends GeometryWayStyle<GpxGeometryWayContext> {
+	public static class GeometryArrowsStyle extends GeometrySolidWayStyle<GpxGeometryWayContext> {
 
 		private static final float TRACK_WIDTH_THRESHOLD_DP = 8f;
 		private static final float ARROW_DISTANCE_MULTIPLIER = 1.5f;
 		private static final float SPECIAL_ARROW_DISTANCE_MULTIPLIER = 10f;
 		private final float TRACK_WIDTH_THRESHOLD_PIX;
 
-		private Bitmap arrowBitmap;
+		private final Bitmap arrowBitmap;
 
 		public static final int OUTER_CIRCLE_COLOR = 0x33000000;
-		protected int pointColor;
+		protected int directionArrowColor;
 		protected int trackColor;
 		protected float trackWidth;
 
@@ -98,10 +98,11 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 			innerCircleRadius = AndroidUtils.dpToPx(context.getCtx(), 7);
 		}
 
-		GeometryArrowsStyle(GpxGeometryWayContext context, Bitmap arrowBitmap, int arrowColor, int trackColor, float trackWidth) {
-			super(context);
+		GeometryArrowsStyle(GpxGeometryWayContext context, Bitmap arrowBitmap, int directionArrowColor,
+							int trackColor, float trackWidth) {
+			super(context, trackColor, trackWidth, directionArrowColor);
 			this.arrowBitmap = arrowBitmap;
-			this.pointColor = arrowColor;
+			this.directionArrowColor = directionArrowColor;
 			this.trackColor = trackColor;
 			this.trackWidth = trackWidth;
 			TRACK_WIDTH_THRESHOLD_PIX = AndroidUtils.dpToPx(context.getCtx(), TRACK_WIDTH_THRESHOLD_DP);
@@ -133,7 +134,7 @@ public class GpxGeometryWay extends GeometryWay<GpxGeometryWayContext, GeometryW
 
 		@Override
 		public Integer getPointColor() {
-			return pointColor;
+			return directionArrowColor;
 		}
 
 		public int getTrackColor() {
