@@ -223,6 +223,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	@Override
 	public void onInAppPurchaseGetItems() {
+		super.onInAppPurchaseGetItems();
 		visibleBanner.updateFreeVersionBanner();
 		initAppStatusVariables();
 	}
