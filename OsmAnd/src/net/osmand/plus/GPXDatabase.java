@@ -230,7 +230,7 @@ public class GPXDatabase {
 			if (!Algorithms.isEmpty(gpxFile.getColoringType())) {
 				coloringType = gpxFile.getColoringType();
 			} else if (!Algorithms.isEmpty(gpxFile.getGradientScaleType())) {
-				GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(gpxFile.getColoringType());
+				GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(gpxFile.getGradientScaleType());
 				ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);
 				this.coloringType = coloringType == null ? null : coloringType.getName(null);
 			}
