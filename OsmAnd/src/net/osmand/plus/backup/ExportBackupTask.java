@@ -140,6 +140,10 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	@Override
 	protected void onPostExecute(String error) {
 		helper.exportTask = null;
+
+		BackupHelper backupHelper = helper.getApp().getBackupHelper();
+		backupHelper.getBackup().setError(error);
+
 		if (listener != null) {
 			listener.onBackupExportFinished(error);
 		}
