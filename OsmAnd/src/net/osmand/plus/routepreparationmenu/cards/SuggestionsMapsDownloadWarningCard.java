@@ -2,6 +2,8 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -10,13 +12,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MultipleSelectionBottomSheet;
-import net.osmand.plus.base.SelectionBottomSheet;
 import net.osmand.plus.base.SelectionBottomSheet.DialogStateListener;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.util.Algorithms;
 
@@ -26,8 +29,8 @@ import java.util.List;
 
 import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
 
-public class SuggestionsMapsDownloadWarningCard extends WarningCard {
-	private SelectionBottomSheet dialog;
+public class SuggestionsMapsDownloadWarningCard extends WarningCard implements DownloadEvents {
+	private MultipleSelectionBottomSheet dialog;
 	private final List<WorldRegion> suggestedMaps;
 	private final boolean hasPrecalculatedMissingMaps;
 	private final boolean suggestedMapsOnlineSearch;
@@ -53,32 +56,62 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 	}
 
 	private void showMultipleSelectionDialog() {
-		List<DownloadItem> downloadItems = getSuggestedMapDownloadItems();
-		List<SelectableItem> allItems = new ArrayList<>();
-		List<SelectableItem> selectedItems = new ArrayList<>();
-		for (DownloadItem di : downloadItems) {
-			boolean isMap = di.getType().getTag().equals("map");
-			SelectableItem si = createSelectableItem(di);
-			if (isMap) {
-				allItems.add(si);
-				selectedItems.add(si);
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		boolean internetConnectionAvailable = mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable();
+		boolean downloadIndexes = false;
+		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+			if (internetConnectionAvailable) {
+				downloadThread.runReloadIndexFiles();
+				downloadIndexes = true;
 			}
 		}
-
+		List<SelectableItem> allItems = new ArrayList<>();
+		List<SelectableItem> selectedItems = new ArrayList<>();
+		if (!downloadIndexes) {
+			List<SelectableItem> mapItems = getSelectableMaps();
+			allItems.addAll(mapItems);
+			selectedItems.addAll(mapItems);
+		}
 		MultipleSelectionBottomSheet msDialog =
 				MultipleSelectionBottomSheet.showInstance(mapActivity, allItems, selectedItems, true);
 		this.dialog = msDialog;
+		boolean downloadingIndexes = downloadIndexes;
 		msDialog.setDialogStateListener(new DialogStateListener() {
 			@Override
 			public void onDialogCreated() {
 				dialog.setTitle(app.getString(R.string.welmode_download_maps));
+				if (!internetConnectionAvailable) {
+					LayoutInflater inflater = UiUtilities.getInflater(dialog.getContext(), nightMode);
+					View view = inflater.inflate(R.layout.bottom_sheet_no_internet_connection_view, null);
+					View tryAgainButton = view.findViewById(R.id.try_again_button);
+					UiUtilities.setupDialogButton(nightMode, tryAgainButton, UiUtilities.DialogButtonType.SECONDARY, R.string.try_again);
+					tryAgainButton.setOnClickListener(v -> {
+						if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+							if (mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable()) {
+								downloadThread.runReloadIndexFiles();
+								setupDownoadingIndexesView();
+							}
+						}
+					});
+					AndroidUiHelper.updateVisibility(tryAgainButton, true);
+					dialog.setCustomView(view);
+				} else if (downloadingIndexes) {
+					setupDownoadingIndexesView();
+				}
+			}
+
+			private void setupDownoadingIndexesView() {
 				LayoutInflater inflater = UiUtilities.getInflater(dialog.getContext(), nightMode);
 				View view = inflater.inflate(R.layout.bottom_sheet_with_progress_bar, null);
-
-				uploadedPhotosTitle = view.findViewById(R.id.title);
-				uploadedPhotosCounter = view.findViewById(R.id.description);
-				progressBar = view.findViewById(R.id.progress_bar);
-				progressBar.setMax(maxProgress);
+				TextView title = view.findViewById(R.id.title);
+				title.setVisibility(View.GONE);
+				TextView description = view.findViewById(R.id.description);
+				description.setText(R.string.downloading_list_indexes);
+				view.findViewById(R.id.progress_bar).setVisibility(View.GONE);
+				ProgressBar progressBar = view.findViewById(R.id.progress_bar_top);
+				progressBar.setIndeterminate(true);
+				progressBar.setVisibility(View.VISIBLE);
+				dialog.setCustomView(view);
 			}
 
 			@Override
@@ -98,6 +131,21 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 			IndexItem[] indexesArray = new IndexItem[indexes.size()];
 			new DownloadValidationManager(app).startDownload(mapActivity, indexes.toArray(indexesArray));
 		});
+	}
+
+	@NonNull
+	private List<SelectableItem> getSelectableMaps() {
+		List<SelectableItem> res = new ArrayList<>();
+		List<DownloadItem> downloadItems;
+		downloadItems = getSuggestedMapDownloadItems();
+		for (DownloadItem di : downloadItems) {
+			boolean isMap = di.getType().getTag().equals("map");
+			SelectableItem si = createSelectableItem(di);
+			if (isMap) {
+				res.add(si);
+			}
+		}
+		return res;
 	}
 
 	private void updateSize() {
@@ -124,19 +172,8 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 
 	@NonNull
 	public List<DownloadItem> getSuggestedMapDownloadItems() {
-		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-			if (mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable()) {
-				downloadThread.runReloadIndexFiles();
-			}
-		}
-
-		boolean downloadIndexes = app.getSettings().isInternetConnectionAvailable()
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
-
 		List<DownloadItem> suggestedDownloadsMaps = new ArrayList<>();
-		if (!downloadIndexes && !Algorithms.isEmpty(suggestedMaps)) {
+		if (!Algorithms.isEmpty(suggestedMaps)) {
 			for (WorldRegion suggestedDownloadMap : suggestedMaps) {
 				suggestedDownloadsMaps.addAll(app.getDownloadThread().getIndexes().getDownloadItems(suggestedDownloadMap));
 			}
@@ -176,5 +213,28 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard {
 		showMultipleSelectionDialog();
 	}
 
+	@Override
+	public void onUpdatedIndexesList() {
+		List<SelectableItem> allItems = new ArrayList<>();
+		if (!app.getDownloadThread().shouldDownloadIndexes()) {
+			List<SelectableItem> mapItems = getSelectableMaps();
+			allItems.addAll(mapItems);
+		}
+		if (dialog != null) {
+			dialog.setCustomView(null);
+			dialog.setSelectedItems(allItems);
+			dialog.setItems(allItems);
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+
+	}
+
+	@Override
+	public void downloadHasFinished() {
+
+	}
 }
 

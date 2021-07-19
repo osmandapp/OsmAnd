@@ -153,12 +153,14 @@ public abstract class SelectionBottomSheet extends MenuBottomSheetDialogFragment
 		}
 	}
 
-	public void setCustomView(@NonNull View view) {
+	public void setCustomView(@Nullable View view) {
 		if (listContainer != null) {
 			allItems.clear();
 			listViews.clear();
 			listContainer.removeAllViews();
-			listContainer.addView(view);
+			if (view != null) {
+				listContainer.addView(view);
+			}
 		}
 	}
 
