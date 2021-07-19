@@ -108,9 +108,9 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 		BaseCard purchaseCard;
 		if (Version.isPaidVersion(app) || hasPurchases) {
-			purchaseCard = new TroubleshootingCard(mapActivity, purchaseHelper, false);
+			purchaseCard = new TroubleshootingCard(mapActivity, purchaseHelper, false, false);
 		} else {
-			purchaseCard = new PurchasingCard(mapActivity, purchaseHelper);
+			purchaseCard = new PurchasingCard(mapActivity, purchaseHelper, false);
 		}
 		cardsContainer.addView(purchaseCard.build(mapActivity));
 	}

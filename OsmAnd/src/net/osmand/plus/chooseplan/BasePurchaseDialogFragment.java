@@ -51,6 +51,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	protected LayoutInflater themedInflater;
 
 	protected boolean nightMode;
+	protected boolean usedOnMap;
 
 	private int lastScrollY;
 	private int lastKnownToolbarOffset;
@@ -76,7 +77,8 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		super.onCreate(savedInstanceState);
 		app = getMyApplication();
 		purchaseHelper = app.getInAppPurchaseHelper();
-		nightMode = isNightMode(getMapActivity() != null);
+		usedOnMap = getMapActivity() != null;
+		nightMode = isNightMode(usedOnMap);
 		themedInflater = UiUtilities.getInflater(app, nightMode);
 	}
 

@@ -166,7 +166,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FrameLayout container = mainView.findViewById(R.id.troubleshooting_card);
-			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, !Version.isGooglePlayEnabled());
+			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, !Version.isGooglePlayEnabled(), usedOnMap);
 			card.setListener(this);
 			container.addView(card.build(activity));
 		}
