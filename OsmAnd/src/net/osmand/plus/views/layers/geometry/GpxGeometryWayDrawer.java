@@ -11,10 +11,17 @@ import android.graphics.PorterDuffColorFilter;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay.GeometryArrowsStyle;
 
-public class GpxGeometryWayDrawer extends GeometryWayDrawer<GpxGeometryWayContext> {
+public class GpxGeometryWayDrawer extends MultiColoringGeometryWayDrawer<GpxGeometryWayContext> {
 
 	public GpxGeometryWayDrawer(GpxGeometryWayContext context) {
 		super(context);
+	}
+
+	@Override
+	public void drawPath(Canvas canvas, DrawPathData pathData) {
+		if (routeColoringType != null && routeColoringType.isRouteInfoAttribute()) {
+			drawCustomSolid(canvas, pathData);
+		}
 	}
 
 	@Override
