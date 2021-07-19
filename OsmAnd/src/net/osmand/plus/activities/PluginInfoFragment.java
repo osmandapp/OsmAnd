@@ -36,6 +36,7 @@ import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog.PluginStateListe
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 
 import org.apache.commons.logging.Log;
 
@@ -149,15 +150,11 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		enableDisableButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				if (plugin.isActive() == isChecked) {
-					return;
+				if (plugin.isEnabled() != isChecked) {
+					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked)) {
+						updateState();
+					}
 				}
-
-				boolean ok = OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked);
-				if (!ok) {
-					return;
-				}
-				updateState();
 			}
 		});
 		Button getButton = mainView.findViewById(R.id.plugin_get);
@@ -165,17 +162,23 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		getButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				try {
-					if (plugin instanceof SRTMPlugin) {
-						FragmentActivity activity = getActivity();
-						if (activity != null) {
-							ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
-						}
-					} else {
-						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+				OsmAndFeature feature = null;
+				if (plugin instanceof SRTMPlugin) {
+					feature = OsmAndFeature.TERRAIN;
+				} else if (plugin instanceof WikipediaPlugin) {
+					feature = OsmAndFeature.WIKIPEDIA;
+				} else {
+					FragmentActivity activity = getActivity();
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
+					if (activity != null && AndroidUtils.isIntentSafe(activity, intent)) {
+						startActivity(intent);
 					}
-				} catch (Exception e) {
-					//ignored
+				}
+				if (feature != null) {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						ChoosePlanFragment.showInstance(activity, feature);
+					}
 				}
 			}
 		});
@@ -198,9 +201,8 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		settingsButton.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_settings), null, null, null);
 		View installHeader = mainView.findViewById(R.id.plugin_install_header);
 
-		if (plugin.needsInstallation()) {
+		if (plugin.isLocked()) {
 			getButton.setVisibility(View.VISIBLE);
-			enableDisableButton.setVisibility(View.GONE);
 			settingsButton.setVisibility(View.GONE);
 			installHeader.setVisibility(View.VISIBLE);
 			View worldGlobeIcon = installHeader.findViewById(R.id.ic_world_globe);
@@ -212,8 +214,6 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			}
 		} else {
 			getButton.setVisibility(View.GONE);
-			enableDisableButton.setVisibility(View.VISIBLE);
-			enableDisableButton.setChecked(plugin.isActive());
 
 			if (plugin.getSettingsScreenType() == null || !plugin.isActive()) {
 				settingsButton.setVisibility(View.GONE);
@@ -222,6 +222,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			}
 			installHeader.setVisibility(View.GONE);
 		}
+		enableDisableButton.setChecked(plugin.isEnabled());
 	}
 
 	@Override

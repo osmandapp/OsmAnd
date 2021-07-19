@@ -325,7 +325,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		AmenityInfoRow cuisineRow = null;
 		List<PoiType> collectedPoiTypes = new ArrayList<>();
 
-		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
+		boolean osmEditingEnabled = OsmandPlugin.isActive(OsmEditingPlugin.class);
 
 		for (String key : amenity.getAdditionalInfoKeys()) {
 			int iconId = 0;
@@ -676,7 +676,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	private void buildNearestWiki(ViewGroup viewGroup) {
 		final int position = viewGroup.getChildCount();
 		final WeakReference<ViewGroup> viewGroupRef = new WeakReference<>(viewGroup);
-		buildNearestWikiRow(new SearchAmenitiesListener() {
+		buildNearestWikiRow(viewGroup, new SearchAmenitiesListener() {
 			@Override
 			public void onFinish(List<Amenity> amenities) {
 				ViewGroup viewGroup = viewGroupRef.get();

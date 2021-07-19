@@ -261,7 +261,7 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	private BaseBottomSheetItem createUploadOsmItem() {
-		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null && selectedGpxFile.getTrackAnalysis(app).isTimeMoving()) {
 			return new SimpleBottomSheetItem.Builder()
 					.setIcon(getActiveIcon(R.drawable.ic_action_export))

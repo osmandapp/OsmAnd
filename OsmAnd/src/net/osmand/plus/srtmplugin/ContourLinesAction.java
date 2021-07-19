@@ -46,10 +46,8 @@ public class ContourLinesAction extends QuickAction {
 					RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 					if (contourLinesProp != null) {
 						final CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
-						boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
-
-						if (selected && !plugin.isActive() && !plugin.needsInstallation()) {
-							OsmandPlugin.enablePlugin(activity, app, plugin, true);
+						if (!pref.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
+							OsmandPlugin.enablePluginIfNeeded(activity, app, plugin, true);
 						}
 						activity.refreshMapComplete();
 					}

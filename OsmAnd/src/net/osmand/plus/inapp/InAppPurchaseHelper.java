@@ -147,7 +147,8 @@ public abstract class InAppPurchaseHelper {
 
 	public static boolean isSubscribedToOsmAndPro(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx)
-				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get();
+				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get()
+				|| ctx.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
 	}
 
 	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {
@@ -209,11 +210,22 @@ public abstract class InAppPurchaseHelper {
 	public List<InAppSubscription> getEverMadeSubscriptions() {
 		List<InAppSubscription> subscriptions = new ArrayList<>();
 		for (InAppSubscription subscription : getSubscriptions().getVisibleSubscriptions()) {
-			if (subscription.isPurchased() ||  subscription.getState() != SubscriptionState.UNDEFINED) {
+			if (subscription.isPurchased() || subscription.getState() != SubscriptionState.UNDEFINED) {
 				subscriptions.add(subscription);
 			}
 		}
 		return subscriptions;
+	}
+
+	@NonNull
+	public List<InAppPurchase> getEverMadeMainPurchases() {
+		List<InAppPurchase> purchases = new ArrayList<>(getEverMadeSubscriptions());
+
+		InAppPurchase fullVersion = getFullVersion();
+		if (fullVersion.isPurchased()) {
+			purchases.add(fullVersion);
+		}
+		return purchases;
 	}
 
 	public static void subscribe(@NonNull Activity activity, @NonNull InAppPurchaseHelper purchaseHelper, @NonNull String sku) {
@@ -461,7 +473,7 @@ public abstract class InAppPurchaseHelper {
 							parameters, "Requesting subscriptions state...", false, false);
 				}
 
-				return new String[] { activeSubscriptionsIds, subscriptionsState };
+				return new String[] {activeSubscriptionsIds, subscriptionsState};
 			} catch (Exception e) {
 				logError("sendRequest Error", e);
 			}

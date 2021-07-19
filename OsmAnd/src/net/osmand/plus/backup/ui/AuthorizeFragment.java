@@ -352,6 +352,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void registerUser() {
+		settings.BACKUP_PROMOCODE.set(promoCode);
 		boolean login = dialogType == LoginDialogType.SIGN_IN || signIn;
 		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), promoCode, login);
 	}

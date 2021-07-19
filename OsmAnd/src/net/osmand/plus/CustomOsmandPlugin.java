@@ -467,15 +467,6 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		customRegions = new ArrayList<>(items);
 	}
 
-	private List<IndexItem> getMapsForType(LatLon latLon, DownloadActivityType type) {
-		try {
-			return DownloadResources.findIndexItemsAt(app, latLon, type);
-		} catch (IOException e) {
-			LOG.error(e);
-		}
-		return Collections.emptyList();
-	}
-
 	private List<IndexItem> getMapsForType(List<String> names, DownloadActivityType type, int limit) {
 		return DownloadResources.findIndexItemsAt(app, names, type, false, limit);
 	}

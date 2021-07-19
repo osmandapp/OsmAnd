@@ -774,7 +774,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (visibleType == DashboardType.CONTOUR_LINES || visibleType == DashboardType.TERRAIN) {
 			refreshContent(true);
 			if (visibleType == DashboardType.TERRAIN) {
-				SRTMPlugin plugin = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class);
+				SRTMPlugin plugin = OsmandPlugin.getActivePlugin(SRTMPlugin.class);
 				if (plugin != null && plugin.isTerrainLayerEnabled()) {
 					plugin.registerLayers(mapActivity);
 				}

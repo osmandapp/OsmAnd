@@ -631,6 +631,25 @@ public class InAppPurchasesImpl extends InAppPurchases {
 			return false;
 		}
 
+		@Override
+		public int getDiscountPercent(@NonNull InAppSubscription monthlyLiveUpdates) {
+			InAppSubscriptionIntroductoryInfo introductoryInfo = getIntroductoryInfo();
+			if (introductoryInfo != null) {
+				double regularPrice = getPriceValue();
+				double introductoryPrice = introductoryInfo.getIntroductoryPriceValue();
+				if (introductoryPrice >= 0 && introductoryPrice < regularPrice) {
+					return (int) ((1 - introductoryPrice / regularPrice) * 100d);
+				}
+			}
+			return 0;
+		}
+
+		@Override
+		public String getRegularPrice(@NonNull Context ctx, @NonNull InAppSubscription monthlyLiveUpdates) {
+			double regularPrice = getPriceValue();
+			return getFormattedPrice(ctx, regularPrice, getPriceCurrencyCode());
+		}
+
 		@Nullable
 		@Override
 		protected InAppSubscription newInstance(@NonNull String sku) {

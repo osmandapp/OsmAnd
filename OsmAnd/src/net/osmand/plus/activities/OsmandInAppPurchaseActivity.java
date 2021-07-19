@@ -48,8 +48,8 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	private void initInAppPurchaseHelper() {
 		deinitInAppPurchaseHelper();
+		OsmandApplication app = getMyApplication();
 		if (purchaseHelper == null) {
-			OsmandApplication app = getMyApplication();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (app.getSettings().isInternetConnectionAvailable()
 					&& isInAppPurchaseAllowed()
@@ -75,6 +75,8 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 				public void onFail() {
 				}
 			});
+		} else {
+			app.getBackupHelper().updatePromoCodeAsync(null);
 		}
 	}
 
@@ -262,7 +264,8 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void onInAppPurchaseGetItems() {
-		// not implemented
+		OsmandApplication app = getMyApplication();
+		app.getBackupHelper().updatePromoCodeAsync(null);
 	}
 
 	public void onInAppPurchaseItemPurchased(String sku) {

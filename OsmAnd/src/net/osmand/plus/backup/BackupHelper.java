@@ -225,6 +225,7 @@ public class BackupHelper {
 	}
 
 	public void logout() {
+		settings.BACKUP_PROMOCODE.resetToDefault();
 		settings.BACKUP_DEVICE_ID.resetToDefault();
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
 	}
@@ -307,8 +308,15 @@ public class BackupHelper {
 		executor.runCommand(new RegisterDeviceCommand(this, token));
 	}
 
-	public void updateOrderIdAsync(@Nullable OnUpdateOrderIdListener listener, @Nullable String orderId) {
-		executor.execute(() -> updateOrderId(listener, orderId));
+	public void updatePromoCodeAsync(@Nullable OnUpdateOrderIdListener listener) {
+		OnUpdateOrderIdListener promocodeListener = (status, message, error) -> {
+			settings.BACKUP_PROMOCODE_ACTIVE.set(status == STATUS_SUCCESS);
+
+			if (listener != null) {
+				listener.onUpdateOrderId(status, message, error);
+			}
+		};
+		executor.execute(() -> updateOrderId(promocodeListener, settings.BACKUP_PROMOCODE.get()));
 	}
 
 	void updateOrderId(@Nullable OnUpdateOrderIdListener listener) {
