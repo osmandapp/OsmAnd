@@ -147,7 +147,8 @@ public abstract class InAppPurchaseHelper {
 
 	public static boolean isSubscribedToOsmAndPro(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx)
-				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get();
+				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get()
+				|| ctx.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
 	}
 
 	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {
