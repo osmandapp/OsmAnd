@@ -4218,4 +4218,5 @@
 \n • گزینهٔ روزآمدسازی‌های زندهٔ OsmAnd در «دانلودها &gt; روزآمدسازی‌ها» قرار گرفت
 \n
 \n</string>
+    <string name="send_logcat_log">ارسال logcat</string>
 </resources>
