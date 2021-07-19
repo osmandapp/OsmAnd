@@ -30,10 +30,16 @@ public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		OsmandApplication app = requiredMyApplication();
+
 		items.add(new TitleItem(getString(R.string.backup_promocode)));
 
-		String promoCode = savedInstanceState != null ? savedInstanceState.getString(PROMOCODE_KEY) : null;
-
+		String promoCode;
+		if (savedInstanceState == null) {
+			promoCode = app.getSettings().BACKUP_PROMOCODE.get();
+		} else {
+			promoCode = savedInstanceState.getString(PROMOCODE_KEY);
+		}
 		Context ctx = requireContext();
 		View view = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.preference_edit_text_box, null);
 		editText = view.findViewById(R.id.edit_text);
@@ -68,7 +74,7 @@ public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			OnUpdateOrderIdListener listener = (status, message, error) -> {
+			OnUpdateOrderIdListener listener = (status, message, error) -> app.runInUIThread(() -> {
 				if (status == BackupHelper.STATUS_SUCCESS) {
 					app.getBackupHelper().prepareBackup();
 				} else {
@@ -77,9 +83,10 @@ public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 						app.showShortToastMessage(text);
 					}
 				}
-			};
+			});
 			String promoCode = editText.getText().toString();
-			app.getBackupHelper().updateOrderIdAsync(listener, promoCode);
+			app.getSettings().BACKUP_PROMOCODE.set(promoCode);
+			app.getBackupHelper().updatePromoCodeAsync(listener);
 		}
 		dismiss();
 	}

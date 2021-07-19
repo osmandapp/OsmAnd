@@ -8,8 +8,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.PrepareBackupResult;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.backup.ServerError;
 import net.osmand.util.Algorithms;
+
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
 
 public enum BackupStatus {
 	BACKUP_COMPLETE(R.string.backup_complete, R.drawable.ic_action_cloud_done, -1, -1, -1, R.string.backup_now),
@@ -44,9 +46,14 @@ public enum BackupStatus {
 
 	public static BackupStatus getBackupStatus(@NonNull OsmandApplication app, @NonNull PrepareBackupResult backup) {
 		BackupInfo info = backup.getBackupInfo();
-		if (!InAppPurchaseHelper.isSubscribedToOsmAndPro(app)) {
-			return BackupStatus.SUBSCRIPTION_EXPIRED;
-		} else if (info != null) {
+
+		if (!Algorithms.isEmpty(backup.getError())) {
+			ServerError error = new ServerError(backup.getError());
+			if (error.getCode() == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT) {
+				return BackupStatus.SUBSCRIPTION_EXPIRED;
+			}
+		}
+		if (info != null) {
 			if (!Algorithms.isEmpty(info.filteredFilesToMerge)) {
 				return BackupStatus.CONFLICTS;
 			} else if (!Algorithms.isEmpty(info.itemsToUpload)

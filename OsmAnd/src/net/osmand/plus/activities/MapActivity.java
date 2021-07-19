@@ -2359,6 +2359,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void onInAppPurchaseGetItems() {
+		super.onInAppPurchaseGetItems();
 		DiscountHelper.checkAndDisplay(this);
 	}
 
