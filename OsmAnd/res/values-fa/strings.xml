@@ -4161,7 +4161,7 @@
     <string name="make_backup_descr">تغییرات زیادی در این دستگاه وجود دارد، لطفاً از این داده‌ها نسخهٔ پشتیبان تهیه کنید تا آن‌ها را از دست ندهید.</string>
     <string name="backup_confilcts_descr">برخی از پرونده‌ها نمی‌توانند در سرور بارگذاری شوند زیرا نسخه جدیدتری در سرور ذخیره شده است.</string>
     <string name="backup_no_internet_descr">اتصال اینترنت خود را بررسی کنید و دوباره بارگیری کنید.</string>
-    <string name="backup_pause_all">توقف همه</string>
+    <string name="backup_pause_all">مکث همه</string>
     <string name="upload_local_version">نسخه محلی را بارگذاری کنید</string>
     <string name="download_server_version">نسخه سرور را بارگیری کنید</string>
     <string name="shared_string_logout">خروج</string>
