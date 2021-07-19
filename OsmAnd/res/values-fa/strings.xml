@@ -37,7 +37,7 @@
     <string name="access_arrival_time">زمان رسیدن</string>
     <string name="shared_string_map">نقشه</string>
     <string name="stop_routing_confirm">آیا ناوبری را قطع می‌کنید؟</string>
-    <string name="clear_dest_confirm">آیا از پاک‌کردن مقصد (و مقصدهای میانی) مطمئن هستید؟</string>
+    <string name="clear_dest_confirm">آیا مقصد (و مقصدهای میانی) را حذف می‌کنید؟</string>
     <string name="intermediate_points_change_order">تغییر ترتیب</string>
     <string name="av_def_action_video">فیلم‌برداری</string>
     <string name="av_def_action_audio">صدابرداری</string>
@@ -379,7 +379,7 @@
     <string name="local_openstreetmap_upload">آپلود ویرایش به OSM</string>
     <string name="local_openstreetmap_delete">حذف ویرایش</string>
     <string name="local_openstreetmap_descr_title">ویرایش ناهمزمان OSM:</string>
-    <string name="free_version_message">شما می‌توانید %1$s نقشه دانلود یا روزآمد کنید.</string>
+    <string name="free_version_message">%1$s نقشه برای دانلود یا روزآمدسازی.</string>
     <string name="free_version_title">نسخهٔ رایگان</string>
     <string name="poi_context_menu_showdescription">نمایش توضیحات POI.</string>
     <string name="index_name_north_america">آمریکای شمالی</string>
@@ -625,7 +625,7 @@
     <string name="gpxup_identifiable">قابل‌شناسایی</string>
     <string name="navigate_point_format">قالب</string>
     <string name="basemap_was_selected_to_download">نقشهٔ پایه برای کارکرد اولیه موردنیاز است و در صف دانلود قرار گرفت.</string>
-    <string name="select_index_file_to_download">چیزی پیدا نشد. اگر نمی‌توانید منطقهٔ خود را پیدا کنید، خودتان آن را بسازید (https://osmand.net را ببینید).</string>
+    <string name="select_index_file_to_download">چیزی پیدا نشد، اما خودتان می‌توانید آن را بسازید (https://osmand.net را ببینید).</string>
     <string name="local_indexes_cat_tile">نقشه‌های کاشی‌وار آنلاین و ذخیره‌شده</string>
     <string name="map_online_data">نقشه‌های کاشی‌وار و آنلاین</string>
     <string name="map_online_data_descr">از نقشه‌های آنلاین استفاده کنید (کاشی‌های نقشه را دانلود و روی کارت حافظه ذخیره کنید).</string>
@@ -703,7 +703,7 @@
     <string name="local_index_mi_upload_gpx">ارسال به OSM</string>
     <string name="show_more_map_detail_descr">برخی جزئیات نقشهٔ بُرداری (جاده‌ها و...) را در زوم‌های کمتر نشان می‌دهد.</string>
     <string name="favourites_delete_multiple_succesful">نقطه‌های موردعلاقه حذف شد.</string>
-    <string name="favorite_delete_multiple">آیا از حذف %1$d علاقه‌مندی و %2$d گروه علاقه‌مندی مطمئن هستید؟</string>
+    <string name="favorite_delete_multiple">آیا %1$d علاقه‌مندی و %2$d گروه علاقه‌مندی حذف شود؟</string>
     <string name="basemap_missing">نقشه پایهٔ جهان را دانلود کنید تا نمایی از سراسر جهان در زوم‌های کم داشته باشید.</string>
     <string name="local_index_installed">نسخهٔ محلی</string>
     <string name="installing_new_resources">در حال گشودن دادهٔ جدید…</string>
@@ -1084,7 +1084,7 @@
     <string name="auto_zoom_far">نمای میانه</string>
     <string name="auto_zoom_farthest">نمای دور</string>
     <string name="shared_string_delete_all">حذف همه</string>
-    <string name="local_osm_changes_delete_all_confirm">از حذف %1$d تغییر OSM مطمئن هستید؟‍</string>
+    <string name="local_osm_changes_delete_all_confirm">آیا %1$d تغییر OSM حذف شود؟</string>
     <string name="route_descr_destination">مقصد</string>
     <string name="create_poi_link_to_osm_doc">طبقه‌بندی نقشهٔ <u>آنلاین OSM</u> همراه با تصاویر.</string>
     <string name="app_mode_hiking">پیاده‌گردی</string>
@@ -1474,7 +1474,7 @@
     <string name="current_route">مسیر فعلی</string>
     <string name="osm_changes_added_to_local_edits">تغییرات OSM به بستهٔ تغییر محلی اضافه شد</string>
     <string name="mark_to_delete">برای حذف‌کردن علامت بزنید</string>
-    <string name="local_osm_changes_upload_all_confirm">از آپلود این %1$d تغییر در OSM مطمئن هستید؟</string>
+    <string name="local_osm_changes_upload_all_confirm">آیا %1$d تغییر در OSM آپلود شود؟</string>
     <string name="confirmation_to_clear_history">سوابق را پاک می‌کنید؟</string>
     <string name="delay_to_start_navigation_descr">زمان انتظار برای ماندن در صفحهٔ طراحی مسیر را مشخص کنید.</string>
     <string name="delay_to_start_navigation">آغاز راهنمایی پیچ به پیچ پس از…</string>
@@ -1642,7 +1642,7 @@
     <string name="update_all_maps_now">اکنون همهٔ نقشه‌ها را روزآمد می‌کنید؟</string>
     <string name="clear_tile_data">پاک‌کردن همهٔ کاشی‌ها</string>
     <string name="routing_attr_short_way_name">راه صرفه‌جویی سوخت</string>
-    <string name="replace_favorite_confirmation">آیا این نقطهٔ جدید را جانشین «%1$s» می‌کنید؟</string>
+    <string name="replace_favorite_confirmation">"آیا  «%1$s» علاقه‌مندی جانشین شود؟"</string>
     <string name="rendering_attr_hideOverground_name">اشیای روی زمین</string>
     <string name="shared_string_change">تغییر</string>
     <string name="get_started">شروع</string>
@@ -1790,7 +1790,7 @@
     <string name="routing_attr_driving_style_safety_name">ترجیح راه‌های فرعی‌تر</string>
     <string name="relief_smoothness_factor_descr">اولویت ساختار زمین: هموار یا پرتپه.</string>
     <string name="shared_string_slope">شیب</string>
-    <string name="points_delete_multiple">آیا از حذف این %1$d نقطه مطمئن هستید؟</string>
+    <string name="points_delete_multiple">آیا %1$d نقطه حذف شود؟</string>
     <string name="track_points_category_name">راه‌نشان‌ها، نقاط توجه، عارضه‌های نام‌دار</string>
     <string name="shared_string_gpx_track">رد</string>
     <string name="shared_string_time_span">مدت‌زمان</string>
@@ -2007,7 +2007,7 @@
     <string name="shared_string_import2osmand">درون‌برد به OsmAnd</string>
     <string name="read_full_article">مقالهٔ کامل را بخوانید (آنلاین)</string>
     <string name="shared_string_wikipedia">ویکی‌پدیا</string>
-    <string name="local_recordings_delete_all_confirm">از حدف این %1$d یادداشت مطمئن هستید؟</string>
+    <string name="local_recordings_delete_all_confirm">آیا %1$d یادداشت حذف شود؟</string>
     <string name="osmand_parking_hour">س</string>
     <string name="osmand_parking_minute">min</string>
     <string name="shared_string_collapse">مخفی شود</string>
@@ -2084,7 +2084,7 @@
     <string name="unsaved_changes_will_be_lost">تغییراتی که ذخیره نکرده‌اید، از دست می‌رود. ادامه می‌دهید؟</string>
     <string name="downloads_left_template">%1$s دانلود باقی مانده است</string>
     <string name="roads">جاده‌ها</string>
-    <string name="downloading_number_of_files">در حال دانلود - %1$d پرونده</string>
+    <string name="downloading_number_of_files">در حال دانلود %1$d پرونده…</string>
     <string name="show_free_version_banner">نمایش بنر نسخهٔ رایگان</string>
     <string name="show_free_version_banner_description">در نسخهٔ خریداری‌شده نیز بنر نسخهٔ رایگان را نشان بده.</string>
     <string name="buy">خرید</string>
@@ -2155,7 +2155,7 @@
     <string name="quick_action_add_favorite">افزودن علاقه‌مندی</string>
     <string name="dialog_add_action_title">افزودن کنش</string>
     <string name="quick_actions_delete">حذف کنش</string>
-    <string name="quick_actions_delete_text">آیا از حذف کنش «%s» مطمئن هستید؟</string>
+    <string name="quick_actions_delete_text">آیا کنش «%s» حذف شود؟</string>
     <string name="quick_favorites_show_favorites_dialog">کادر علاقه‌مندی‌ها را نشان بده</string>
     <string name="quick_action_add_marker_descr">دکمه‌ای برای ایجاد یک نشانه در مرکز صفحه.</string>
     <string name="quick_action_take_audio_note_descr">دکمه‌ای برای ایجاد یک یادداشت صوتی در مرکز صفحه.</string>
@@ -2210,7 +2210,7 @@
     <string name="make_round_trip">ایجاد سفر رفت‌وبرگشتی</string>
     <string name="coordinates_format">قالب مختصات</string>
     <string name="use_system_keyboard">صفحه‌کلید سیستم</string>
-    <string name="fast_coordinates_input_descr">قالب مختصات ورودی را انتخاب کنید. هر زمان که بخواهید از طریق «تنظیمات» قابل‌تغییر است.</string>
+    <string name="fast_coordinates_input_descr">قالب مختصات ورودی را انتخاب کنید. روی «تنظیمات» بزنید تا آن را تغییر دهید.</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">گُدار یا راه یخی</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">از راه‌های یخی و گدارها پرهیز می‌کند.</string>
     <string name="use_location">استفاده از موقعیت</string>
@@ -2979,7 +2979,7 @@
     <string name="profile_alert_need_save_title">ذخیرهٔ تغییرات</string>
     <string name="profile_alert_need_save_msg">ابتدا تغییرات پروفایل را ذخیره کنید</string>
     <string name="profile_alert_delete_title">حذف پروفایل</string>
-    <string name="profile_alert_delete_msg">آیا از حذف پروفایل «%s» اطمینان دارید</string>
+    <string name="profile_alert_delete_msg">حذف پروفایل «%s»</string>
     <string name="select_base_profile_dialog_title">پروفایل پایه را انتخاب کنید</string>
     <string name="select_base_profile_dialog_message">پروفایل سفارشی خود را بر پایهٔ یکی از پروفایل‌های برنامه بسازید. با این کار برخی چیزهای ابتدایی مانند نمایانی ابزارک‌ها و یکای سرعت و مسافت تنظیم می‌شود. پروفایل‌های پیشفرض برنامه و چند نمونه پروفایل سفارشی که بر پایهٔ آن‌ها ساخته شده، در زیر آمده:</string>
     <string name="select_nav_profile_dialog_title">انتخاب نوع ناوبری</string>
@@ -3036,7 +3036,7 @@
     <string name="privacy_and_security_change_descr">اگر %1$s ما را می‌پذیرید «اجازه می‌دهم» را برگزینید</string>
     <string name="settings_privacy_and_security_desc">انتخاب داده‌ای که هم‌رسانی می‌کنید</string>
     <string name="shared_string_allow">اجازه می‌دهم</string>
-    <string name="osmand_routing_promo">می‌توانید نسخهٔ اصلاح‌شدهٔ خودتان از پروندهٔ routing.xml را در ‎..osmand/routing اضافه کنید</string>
+    <string name="osmand_routing_promo">نسخهٔ اصلاح‌شدهٔ خودتان از پروندهٔ routing.xml را در ‎..osmand/routing اضافه کنید</string>
     <string name="show_compass_ruler">با درجه‌بندی قطب‌نما</string>
     <string name="hide_compass_ruler">بدون درجه‌بندی قطب‌نما</string>
     <string name="settings_routing_mode_string">حالت: %s</string>
@@ -3259,7 +3259,7 @@
 \n• اصلاح سایر باگ‌ها
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">این تنظیم را می‌توانید بر همهٔ پروفایل‌ها یا فقط بر پروفایل جاری به کار ببندید.</string>
+    <string name="apply_preference_to_all_profiles">این تنظیم را بر همهٔ پروفایل‌ها یا بر پروفایل جاری به کار ببندید.</string>
     <string name="shared_preference">مشترک</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">ترجیح جاده‌های روسازی‌نشده</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">در مسیریابی، جاده‌های روسازی‌نشده را به روسازی‌شده ترجیح می‌دهد.</string>
@@ -3380,8 +3380,8 @@
     <string name="multimedia_photo_play_sound">صدای شاتر دوربین</string>
     <string name="osm_authorization_success">احراز هویت موفقیت‌آمیز بود</string>
     <string name="rearrange_categories">مرتب‌سازی دسته‌ها</string>
-    <string name="create_custom_categories_list_promo">ترتیب لیست را تغییر دهید و دسته‌ها را مخفی کنید. می‌توانید همهٔ تغییرات را همراه پروفایل‌ها برون‌برد یا درون‌برد کنید.</string>
-    <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دسته می‌توانید یک دستهٔ شخصیِ تازه بیفزایید.</string>
+    <string name="create_custom_categories_list_promo">ترتیب لیست را تغییر دهید و دسته‌ها را مخفی کنید. همهٔ تغییرات در قالب پروفایل‌ها درون‌برد یا برون‌برد کنید.</string>
+    <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دسته، یک دستهٔ شخصیِ تازه بیفزایید.</string>
     <string name="reset_to_default_category_button_promo">«بازنشانی به پیشفرض»، ترتیب را به حالت اولیهٔ پس از نصب برمی‌گرداند.</string>
     <string name="add_custom_category">افزودن دستهٔ سفارشی</string>
     <string name="rendering_attr_streetLightingNight_name">فقط هنگام شب نشان بده</string>
@@ -3436,7 +3436,7 @@
     <string name="shared_string_routing">مسیریابی</string>
     <string name="shared_string_include_data">شامل دادهٔ افزوده</string>
     <string name="import_profile_dialog_description">پروفایلِ درون‌بردی حاوی دادهٔ افزوده است. «درون‌برد» را بزنید تا فقط دادهٔ پروفایل درون‌برد شود، یا «دادهٔ افزوده» را انتخاب کنید تا آن را نیز درون‌برد کنید.</string>
-    <string name="export_profile_dialog_description">می‌توانید همراه پروفایل، دادهٔ افزوده را نیز برون‌برد کنید.</string>
+    <string name="export_profile_dialog_description">همراه پروفایل، دادهٔ افزوده را نیز برون‌برد کنید.</string>
     <string name="index_name_antarctica">جنوبگان</string>
     <string name="accessibility_announce">اعلام</string>
     <string name="shared_string_app_default_w_val">پیشفرض برنامه (%s)</string>
@@ -3467,11 +3467,11 @@
     <string name="restore_all_profile_settings">همهٔ تنظیمات پروفایل بازگردد؟</string>
     <string name="saving_new_profile">در حال ذخیرهٔ پروفایل تازه</string>
     <string name="profile_backup_failed">نمی‌توان از پروفایل پشتیبان گرفت.</string>
-    <string name="clear_recorded_data_warning">آیا از پاک‌کردن دادهٔ ضبط‌شده مطمئن هستید؟</string>
+    <string name="clear_recorded_data_warning">آیا دادهٔ ضبط‌شده پاک شود؟</string>
     <string name="importing_from">درون‌برد داده از %1$s</string>
     <string name="shared_string_importing">در حال درون‌برد</string>
     <string name="shared_string_import_complete">درون‌برد کامل شد</string>
-    <string name="import_complete_description">همهٔ داده از %1$s درون‌برد شد. با استفاده از دکمه‌های زیر می‌توانید بخش موردنیاز برنامه را برای مدیریت آن باز کنید.</string>
+    <string name="import_complete_description">همهٔ داده از %1$s درون‌برد شد. با استفاده از دکمه‌های زیر، هر بخش از برنامه را برای مدیریت آن باز کنید.</string>
     <string name="shared_string_poi_types">گونه‌های POI</string>
     <string name="listed_exist">%1$s که در زیر آمده، هم‌اکنون در OsmAnd وجود دارد.</string>
     <string name="checking_for_duplicate_description">‏OsmAnd در حال بررسی ‏%1$s برای چیزهای تکراری موجود در برنامه است.
@@ -3489,11 +3489,11 @@
     <string name="terrain_slider_description">کمینه و بیشینهٔ زوم برای نمایش لایه را مشخص کنید.</string>
     <string name="hillshade_download_description">باید نقشهٔ دیگری را نیز دانلود کنید تا سایه‌روشن‌ها را روی نقشه ببینید.</string>
     <string name="slope_download_description">برای مشاهدهٔ شیب‌ها روی نقشه باید نقشهٔ دیگری را نیز دانلود کنید.</string>
-    <string name="slope_read_more">دربارهٔ شیب‌ها می‌توانید در %1$s بیشتر بخوانید.</string>
+    <string name="slope_read_more">دربارهٔ شیب‌ها در %1$s بیشتر بخوانید.</string>
     <string name="shared_string_transparency">شفافیت</string>
     <string name="shared_string_zoom_levels">زوم نمایش</string>
     <string name="shared_string_legend">کلید</string>
-    <string name="terrain_empty_state_text">فعال کنید تا نقشهٔ سایه‌روشن یا شیب را ببینید. در وبسایت ما دربارهٔ این نقشه‌ها بخوانید.</string>
+    <string name="terrain_empty_state_text">سایه‌روشن‌ها یا شیب‌ها را نشان می‌دهد. در وبسایت ما دربارهٔ این نقشه‌ها بیشتر بخوانید.</string>
     <string name="shared_string_hillshade">سایه‌روشن</string>
     <string name="n_items_of_z">%1$s از %2$s</string>
     <string name="download_slope_maps">شیب‌ها</string>
@@ -3547,9 +3547,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">هنگام تأیید خرید، بها از حساب گوگل‌پلی شما پرداخت می‌شود.
 \n
-\nاشتراک شما به‌طور خودکار تمدید خواهد شد مگر اینکه پیش از تاریخ تمدید، اشتراک خود را از تنظیمات گوگل‌پلی لغو کرده باشید. فقط در موعد تمدید اشتراک، برای دورهٔ تمدید (ماهانه/سه‌ماهه/سالانه) از حسابتان برداشت می‌شود.
+\nاشتراک شما به‌طور خودکار تمدید می‌شود مگر اینکه پیش از دورهٔ تمدید انتخاب‌شده لغو شود.
 \n
-\nبرای مدیریت یا لغو اشتراک خود، به تنظیمات گوگل‌پلی بروید.</string>
+\nهر زمان که خواستید از طریق تنظیمات گوگل‌پلی اشتراک خود را مدیریت یا لغو کنید.</string>
     <string name="tracker_item">OsmAnd tracker</string>
     <string name="legend_item_description">راهنمای نمادشناسی نقشه.</string>
     <string name="navigation_profiles_item">پروفایل‌های ناوبری</string>
@@ -3608,7 +3608,7 @@
     <string name="back_to_editing">بازگشت به ویرایش</string>
     <string name="create_edit_poi">ایجاد یا ویرایش POI</string>
     <string name="add_edit_favorite">افزودن یا ویرایش علاقه‌مندی</string>
-    <string name="additional_actions_descr">برای دسترسی به این کنش‌ها می‌توانید روی دکمهٔ «%1$s» بزنید.</string>
+    <string name="additional_actions_descr">برای دسترسی به این کنش‌ها روی دکمهٔ «%1$s» بزنید.</string>
     <string name="quick_action_transport_descr">دکمه‌ای برای آشکار یا پنهان کردن حمل‌ونقل عمومی روی نقشه.</string>
     <string name="quick_action_switch_profile_descr">با لمس دکمهٔ عملیاتی بین پروفایل‌های انتخاب‌شده جابه‌جا شوید.</string>
     <string name="shared_string_add_profile">افزودن پروفایل</string>
@@ -3657,7 +3657,7 @@
 \nیک ماه ۴۳ ۸۲۹ دقیقه است.</string>
     <string name="tiles_storage_descr">شیوهٔ ذخیره‌سازی کاشی‌های دانلودشده را انتخاب کنید.</string>
     <string name="default_screen_timeout">زمان پیشفرض خاموشی صفحه</string>
-    <string name="export_import_quick_actions_with_profiles_promo">می‌توانید کنش‌های فوری را همراه با پروفایل‌های برنامه برون‌برد یا درون‌برد کنید.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">کنش‌های فوری را همراه با پروفایل‌های برنامه برون‌برد یا درون‌برد کنید.</string>
     <string name="shared_string_delete_all_q">همه حذف شود؟</string>
     <string name="delete_all_actions_message_q">آیا %d کنش فوری را حذف می‌کنید؟ (برگشت‌ناپذیر است)</string>
     <string name="screen_timeout">زمان خاموشی صفحه</string>
@@ -3675,7 +3675,7 @@
     <string name="add_online_source">افزودن منبع آنلاین</string>
     <string name="clear_tiles_warning">به‌کارگیری این تغییرات، دادهٔ ذخیره‌شده برای این منبعِ کاشی را پاک می‌کند</string>
     <string name="vessel_height_warning_link">تنظیم ارتفاع کشتی</string>
-    <string name="vessel_height_warning">می‌توانید ارتفاع کشتی را برای پرهیز از پل‌های کوتاه وارد کنید. به یاد داشته باشید که اگر پل متحرک است، در حالت باز نیز ارتفاع کشتی را در نظر می‌گیریم.</string>
+    <string name="vessel_height_warning">ارتفاعی برای کشتی تنظیم کنید تا از پل‌های کم‌ارتفاع دوری شود. اگر پل متحرک است، در حالت باز نیز آن ارتفاع لحاظ می‌شود.</string>
     <string name="vessel_height_limit_description">ارتفاع کشتی را برای پرهیز از پل‌های کوتاه وارد کنید. به یاد داشته باشید که اگر پل متحرک است، در حالت باز نیز ارتفاع کشتی را در نظر می‌گیریم.</string>
     <string name="vessel_width_limit_description">عرض کشتی را برای پرهیز از پل های باریک وارد کنید</string>
     <string name="quick_action_showhide_mapillary_descr">دکمه‌ای برای آشکار/پنهان کردن لایهٔ مپیلاری روی نقشه.</string>
@@ -3707,7 +3707,7 @@
     <string name="plugin_wikipedia_description">دربارهٔ نقاط توجه، از ویکی‌پدیا اطلاعات کسب کنید. یک راهنمای آفلاینِ جیبی که مقاله‌هایی دربارهٔ مکان‌ها و مقصدها دارد.</string>
     <string name="app_mode_wheelchair">صندلی چرخ‌دار</string>
     <string name="osm_edit_closed_note">یادداشت اُاِس‌اِمی بسته</string>
-    <string name="add_hidden_group_info">نقطهٔ اضافه‌شده روی نقشه دیده نمی‌شود، زیرا گروه انتخاب‌شده پنهان است. آن را در «%s» پیدا می‌کنید.</string>
+    <string name="add_hidden_group_info">نقطهٔ اضافه‌شده را می‌توانید در «%s» پیدا کنید. گروه انتخاب‌شده را آشکار کنید تا آن را روی نقشه ببینید.</string>
     <string name="set_working_days_to_continue">برای ادامه روزهای کاری را تنظیم کنید</string>
     <string name="route_between_points">مسیر بین نقطه‌ها</string>
     <string name="plan_a_route">طراحی مسیر</string>
@@ -3767,7 +3767,7 @@
     <string name="navigation_profile">پروفایل ناوبری</string>
     <string name="route_between_points_add_track_desc">یک پروندهٔ رد انتخاب کنید تا پارهٔ جدید را به آن بیفزایید.</string>
     <string name="street_level_imagery">تصاویر سطح خیابان</string>
-    <string name="plan_route_exit_dialog_descr">آیا می‌خواهید همهٔ تغییرات در مسیر طراحی‌شده از بین برود؟</string>
+    <string name="plan_route_exit_dialog_descr">آیا همهٔ تغییرات در مسیر طراحی‌شده از بین برود؟</string>
     <string name="in_case_of_reverse_direction">اگر برعکس حرکت کردم</string>
     <string name="start_of_the_track">ابتدای رد</string>
     <string name="follow_track_descr">انتخاب پروندهٔ رد برای دنبال‌کردن</string>
@@ -3846,9 +3846,9 @@
     <string name="login_open_street_map">ورود به اوپن‌استریت‌مپ</string>
     <string name="login_open_street_map_org">ورود به OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">ورود از طریق اوپن‌استریت‌مپ</string>
-    <string name="open_street_map_login_mode">برای آپلود تغییرات جدید باید وارد شوید (login).
+    <string name="open_street_map_login_mode">برای آپلود تغییرات جدید یا اصلاحی وارد حساب کاربری شوید.
 \n
-\nبرای ورود می‌توانید از روش امن OAuth یا روش نام کاربری و گذرواژه استفاده کنید.</string>
+\nاز روش OAuth یا روش نام کاربری و گذرواژه استفاده کنید.</string>
     <string name="use_login_password">استفاده از نام کاربری و گذرواژه</string>
     <string name="login_account">حساب</string>
     <string name="user_login">ورود</string>
@@ -3894,7 +3894,7 @@
     <string name="enter_text_separated">برچسب‌ها را بنویسید و با کاما جدا کنید.</string>
     <string name="osm_edit_close_note">بستن یادداشت OSM</string>
     <string name="osm_edit_comment_note">نظردادن به یادداشت OSM</string>
-    <string name="osm_login_descr">می‌توانید با روش ایمن OAuth وارد شوید یا از نام کاربری و گذرواژه‌تان استفاده کنید.</string>
+    <string name="osm_login_descr">با روش OAuth وارد شوید یا از نام کاربری و گذرواژه‌تان استفاده کنید.</string>
     <string name="app_mode_motorboat">قایق‌موتوری</string>
     <string name="cannot_upload_image">آپلود عکس ناموفق بود، لطفاً بعداً دوباره امتحان کنید</string>
     <string name="select_picture">انتخاب تصویر</string>
@@ -3925,7 +3925,7 @@
     <string name="live_update_frequency_day_variant">روزآمدی نقشه هر روز بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
     <string name="live_update_frequency_hour_variant">روزآمدی نقشه هر ساعت بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
     <string name="delete_updates">حذف روزآمدسازه‌ها</string>
-    <string name="live_update_delete_updates_msg">آیا از حذف هر %s روزآمدسازهٔ زنده مطمئن هستید؟</string>
+    <string name="live_update_delete_updates_msg">آیا هر %s روزآمدسازهٔ زنده حذف شود؟</string>
     <string name="update_frequency">تکرار روزآمدسازی</string>
     <string name="select_category_descr">دسته را انتخاب نمایید یا یکی جدید اضافه کنید</string>
     <string name="track_recording_will_be_continued">ضبط ادامه می‌یابد.</string>
@@ -3967,9 +3967,7 @@
     <string name="uploaded_count">%1$d از %2$d آپلود شد</string>
     <string name="toast_select_edits_for_upload">ویرایش‌ها را برای آپلود انتخاب کنید</string>
     <string name="hillshade_slope_contour_lines">سایه‌روشن / شیب / منحنی‌های میزان</string>
-    <string name="open_place_reviews_plugin_description">‏OpenPlaceReviews پروژه‌ای جامعه‌محور با موضوع مکان‌های عمومی مانند رستوران‌ها، هتل‌ها، موزه‌ها و نقاط بین‌راهی است که همهٔ اطلاعات عمومی دربارهٔ آن‌ها را جمع‌آوری می‌کند؛ اطلاعاتی مانند نگاره، دیدگاه و پیوند به سایر سامانه‌ها همچون اوپن‌استریت‌مپ و ویکی‌پدیا.
-\n
-\nتمام دادهٔ OpenPlaceReview باز و در دسترس همگان است: http://openplacereviews.org/data.
+    <string name="open_place_reviews_plugin_description">برای مکان‌های عمومی مانند رستوران‌ها، هتل‌ها، موزه‌ها و نقاط بین‌راهی نگاره بفرستید، دیدگاه بنویسید و پیوند ثبت کنید؛ همگی این‌ها به‌عنوان دادهٔ باز ثبت خواهد شد. http://openplacereviews.org/data
 \n
 \nاینجا بیشتر بخوانید: http://openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
@@ -3996,7 +3994,7 @@
     <string name="track_recording_stop_without_saving">توقف بدون ذخیره‌سازی</string>
     <string name="track_recording_save_and_stop">ذخیره‌سازی و توقف ضبط</string>
     <string name="track_recording_title">ضبط رد متوقف شد</string>
-    <string name="track_recording_description">آیا برای توقف ضبط مطمئن هستید؟
+    <string name="track_recording_description">آیا ضبط متوقف شود؟
 \nهرچه که ذخیره نشده، از دست خواهد رفت.</string>
     <string name="shared_string_subtype">زیرنوع</string>
     <string name="use_native_pt">پیاده‌سازی Native حمل‌ونقل عمومی</string>
@@ -4026,9 +4024,9 @@
     <string name="osm_live_payment_desc_hw">هزینهٔ اشتراک با رسیدن موعد دورهٔ انتخابی از حسابتان پرداخت می‌شود. هر زمان که خواستید در AppGallery آن را لغو کنید.</string>
     <string name="osm_live_payment_subscription_management_hw">هنگام تأیید خرید، بها از حساب AppGallery شما پرداخت می‌شود.
 \n
-\nاشتراک شما به‌طور خودکار ادامه می‌یابد مگر اینکه پیش از تاریخ تمدید، اشتراک خود را لغو کرده باشید. فقط در موعد تمدید اشتراک، برای دورهٔ تمدید (ماهانه / سه‌ماهه / سالانه) از حسابتان برداشت می‌شود.
+\nاشتراک شما به‌طور خودکار تمدید می‌شود مگر اینکه پیش از دورهٔ تمدید انتخاب‌شده لغو شود.
 \n
-\nبرای مدیریت یا لغو اشتراک خود، به تنظیمات AppGallery بروید.</string>
+\nهر زمان که خواستید از طریق تنظیمات AppGallery اشتراک خود را مدیریت یا لغو کنید.</string>
     <string name="subscription_expired_title">اشتراک OsmAnd Live لغو شده است (expired)</string>
     <string name="subscription_paused_title">اشتراک OsmAnd Live موقتاً متوقف شده است (paused)</string>
     <string name="subscription_on_hold_title">اشتراک OsmAnd Live در وضعیت تعلیق است (on hold)</string>
@@ -4129,24 +4127,24 @@
     <string name="last_backup">آخرین پشتیبان</string>
     <string name="duration_ago">‏%1$s پیش</string>
     <string name="osmand_cloud">ابر OsmAnd</string>
-    <string name="osmand_cloud_authorize_descr">هیچ‌گاه داده‌هایتان را از دست ندهید. تمام اطلاعات را بی‌دردسر پشتیبان بگیرید و بازیابی کنید.</string>
+    <string name="osmand_cloud_authorize_descr">هیچ‌گاه داده‌هایتان را از دست ندهید. تمام اطلاعات را به‌آسانی پشتیبان بگیرید و بازیابی کنید.</string>
     <string name="local_backup">پشتیبان محلی</string>
     <string name="local_backup_descr">بازیابی/پشتیبان‌گیری داده از/در پروندهٔ محلی.</string>
     <string name="backup_into_file">پشتیبان‌گیری در پرونده</string>
     <string name="restore_from_file">بازیابی از پرونده</string>
     <string name="osmand_cloud_help_descr">کمک می‌خواهید؟ از طریق %1$s با ما تماس بگیرید</string>
-    <string name="osmand_cloud_create_account_descr">لطفاً نشانی ایمیل خود را وارد کنید. تمام دادهٔ مربوط به شما به این ایمیل متصل خواهد شد.
-\nیک کد تأیید به این ایمیل برایتان می‌فرستیم.</string>
-    <string name="osmand_cloud_login_descr">لطفاً نشانی ایمیلی که برای ثبت‌نام استفاده کردید را وارد نمایید. گذرواژهٔ یک‌بارمصرفی برایتان می‌فرستیم که در مرحلهٔ بعد به آن نیاز خواهید داشت.</string>
+    <string name="osmand_cloud_create_account_descr">لطفاً نشانی ایمیل خود را وارد کنید. یک کد تأیید به این ایمیل می‌فرستیم.
+\nتمام دادهٔ مربوط به شما به این ایمیل متصل خواهد شد.</string>
+    <string name="osmand_cloud_login_descr">لطفاً نشانی ایمیلی که با آن ثبت‌نام استفاده کردید را وارد نمایید. گذرواژهٔ یک‌بارمصرفی به آن فرستاده می‌شود که برای مرحلهٔ بعد لازم است.</string>
     <string name="verify_email_address">نشانی ایمیل را تأیید کنید</string>
-    <string name="verify_email_address_descr">کد تأیید را به %1$s فرستادیم. لطفاً آن را در خانهٔ زیر بنویسید.</string>
-    <string name="cloud_email_not_registered">این ایمیل برای ابر OsmAnd ثبت نشده است</string>
-    <string name="cloud_email_already_registered">با این ایمیل حساب کاربری وجود دارد.</string>
-    <string name="resend_verification_code">بازارسال کد</string>
-    <string name="verification_code_missing">کد تأیید را دریافت نکردم</string>
-    <string name="verification_code_missing_description">زمان انتظار برای دریافت کد تا ۱۰ دقیقه ممکن است برسد. همچنین لطفا پوشهٔ هرزنامه را بررسی کنید. در غیر این صورت دکمهٔ زیر را بزنید.</string>
-    <string name="select_nav_profile_dialog_message">«نوع ناوبری» نحوهٔ محاسبهٔ مسیر را کنترل می‌کند. می‌توانید از بین موتورهای مسیریابی آنلاین و آفلاین انتخاب کنید.</string>
-    <string name="restore_complete">بازیابی کامل است</string>
+    <string name="verify_email_address_descr">کد تأیید به %1$s فرستاده شد. لطفاً آن را در خانهٔ زیر بنویسید.</string>
+    <string name="cloud_email_not_registered">این نشانی ایمیل برای ابر OsmAnd ثبت نشده است</string>
+    <string name="cloud_email_already_registered">این نشانی ایمیل در حال حاضر ثبت نام شده است.</string>
+    <string name="resend_verification_code">بازارسال</string>
+    <string name="verification_code_missing">کد تأییدی دریافت نکردم</string>
+    <string name="verification_code_missing_description">ممکن است ۱۰ دقیقه طول بکشد. اگر در پوشهٔ هرزنامه هم نیست دکمهٔ زیر را بزنید.</string>
+    <string name="select_nav_profile_dialog_message">«نوع ناوبری» با موتورهای مسیریابی آنلاین و آفلاین موجود، نحوهٔ محاسبهٔ مسیر را انتخاب می‌کند.</string>
+    <string name="restore_complete">بازیابی شد</string>
     <string name="backup_data">از داده‌ها پشتیبان بگیرید</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="loading_list_of_routing_services">در حال بارکردن لیست خدمات مسیریابی موجود</string>
@@ -4154,7 +4152,7 @@
     <string name="shared_string_online">آنلاین</string>
     <string name="shared_string_external">خارجی</string>
     <string name="provided_by">تهیه‌شده توسط %1$s</string>
-    <string name="failed_loading_predefined_engines">لیست الگوهای از پیش تعریف شده بارگیری نشد.
+    <string name="failed_loading_predefined_engines">نمی‌توان لیست الگوهای از پیش تعریف شده را بار کرد.
 \nلطفا اتصال اینترنت خود را بررسی کنید.</string>
     <string name="shared_string_predefined">از پیش تعریف شده</string>
     <string name="backup_complete">پشتیبان‌گیری کامل شد</string>
@@ -4177,9 +4175,9 @@
     <string name="backup_restore_data_descr">با استفاده از پشتیبان‌های آنلاین، داده‌ها را در دستگاه بازیابی کنید.</string>
     <string name="backup_restore_data">بازیابی داده‌ها</string>
     <string name="restore_from_osmand_cloud">بازیابی از ابر OsmAnd</string>
-    <string name="choose_what_to_restore">انتخاب‌کنید چه چیزی را بازیابی کنید.</string>
+    <string name="choose_what_to_restore">انتخاب‌کنید چه چیزی بازیابی شود.</string>
     <string name="restore_selected_data">داده‌های انتخاب‌شده را بازیابی کنید</string>
-    <string name="receiving_data_from_server">دریافت داده از سرور</string>
+    <string name="receiving_data_from_server">در حال دریافت داده از سرور…</string>
     <string name="backup_version_history">تاریخچه نسخه</string>
     <string name="backup_storage_taken">ذخیره‌سازی انجام‌شد</string>
     <string name="delete_version_history">تاریخچه نسخه را حذف کنید</string>
@@ -4187,15 +4185,15 @@
     <string name="routing_attr_avoid_tunnels_name">تونل‌ها</string>
     <string name="backup_promocode">کد تبلیغاتی</string>
     <string name="send_crash_log">ارسال گزارش خرابی</string>
-    <string name="cancel_anytime_in_gplay">هر زمان که خواستید در گوگل‌پلی لغو کنید.</string>
+    <string name="cancel_anytime_in_gplay">هر زمان که خواستید در گوگل‌پلی لغوش کنید.</string>
     <string name="shared_string_not_included">شامل نمی‌شود</string>
     <string name="shared_string_includes">شامل می‌شود</string>
     <string name="complete_purchase">تکمیل خرید</string>
     <string name="from_with_param">از %1$s</string>
     <string name="shared_string_view_all">دیدن همه</string>
-    <string name="backup_error_token_is_not_valid">توکن یا شناسهٔ دستگاه نامعتبر است</string>
-    <string name="backup_error_token_is_not_valid_or_expired">توکن نامعتبر است یا منقضی شده است</string>
-    <string name="backup_error_user_is_not_registered">کاربری با این ایمیل ثبت‌نام نکرده است</string>
+    <string name="backup_error_token_is_not_valid">توکن یا شناسهٔ دستگاه مشکلی دارد</string>
+    <string name="backup_error_token_is_not_valid_or_expired">توکن نامعتبر یا منقضی</string>
+    <string name="backup_error_user_is_not_registered">کاربری با آن نشانی ایمیل ثبت‌نام نکرده است</string>
     <string name="backup_error_no_valid_subscription">اشتراک معتبری وجود ندارد</string>
     <string name="release_4_0">• پشتیبان‌گیری ابری افزوده شد
 \n
@@ -4219,4 +4217,70 @@
 \n
 \n</string>
     <string name="send_logcat_log">ارسال logcat</string>
+    <string name="osmand_online_routing_promo">از الگوهای از پیش تعریف شده استفاده کنید یا از خدمات مسیریابی آنلاین OSRM،‏ GrapgHopper،‏ OpenRouteService یا GPX اضافه نمایید.</string>
+    <string name="backup_view_conflicts">دیدن تداخل‌ها</string>
+    <string name="backup_delete_old_data_warning">در حال حذف سابقهٔ تغییر مربوط به داده‌های پیش‌تر بارشده هستید.
+\n
+\nنسخهٔ کنونی داده‌ها در سرور ذخیره خواهد شد اما قادر نخواهید بود به تغییرات گذشته واگردانی کنید.</string>
+    <string name="grey_color_slope">اگر شیب نامشخص باشد از رنگ خاکستری استفاده می‌شود.</string>
+    <string name="purchases_feature_desc_nautical">دسترسی به اطلاعات عمقی دریا</string>
+    <string name="purchases_feature_desc_terrain">خطوط میزان ناهمواری‌ها، نقشهٔ کامل سایه‌روشن با سایه‌های تیره و نقشه‌های شیب با رنگ‌بندی جهت نمایش قله‌ها و پستی‌ها.</string>
+    <string name="purchases_feature_desc_wikivoyage">ویکی‌سفر را آفلاین کاوش کنید. مقاله‌ها بر اساس کشور و منطقه تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>
+    <string name="purchases_feature_desc_wikipedia">ویکی‌پدیا را آفلاین کاوش کنید. مقاله‌ها بر اساس کشور و منطقه تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>
+    <string name="purchases_feature_desc_combined_wiki">در هر لحظه و بدون نیاز به اتصال اینترنتی میان مقاله‌های ویکی‌پدیا کاوش کنید. داده‌های آفلاین بر اساس کشور تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">امکان دانلودهای نامحدود برای نقشهٔ آفلاین همهٔ قاره‌ها و مناطق.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">دسترسی به روزآمدسازی‌های منظم ماهانه برای نقشه‌های آفلاین.</string>
+    <string name="unlimited_map_downloads">دانلودهای نامحدود نقشه</string>
+    <string name="wikipedia_and_wikivoyage_offline">ویکی‌پدیا و ویکی‌سفر آفلاین</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">نقشه‌های ناهمواری‌ها: خطوط میزان، سایه‌روشن‌ها، شیب</string>
+    <string name="offline_wikipeadia">ویکی‌پدیای آفلاین</string>
+    <string name="offline_wikivoyage">ویکی‌سفر آفلاین</string>
+    <string name="purchases_feature_desc_advanced_widgets">دسترسی به ابزارک‌های پیشرفتهٔ OsmAnd.</string>
+    <string name="advanced_widgets">ابزارک‌های پیشرفته</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s یا %2$s</string>
+    <string name="continue_with">ادامه دهید با %1$s</string>
+    <string name="backup_error_size_is_exceeded"></string>
+    <string name="osmand_maps_plus_tagline">دریافت قابلیت‌های افزوده</string>
+    <string name="osmand_pro_tagline">دریافت بیشترین قابلیت‌ها</string>
+    <string name="shared_string_learn_more">بیشتر بدانید</string>
+    <string name="cancel_anytime_in_huawei_appgallery">هر زمان که خواستید در Huawei AppGallery لغوش کنید.</string>
+    <string name="backup_delete_types">حذف انواع غیرفعال داده</string>
+    <string name="shared_string_discussion">بحث</string>
+    <string name="backup_error_user_is_already_registered">این نشانی ایمیل برای حساب دیگری در حال استفاده است</string>
+    <string name="backup_error_subscription_was_expired">اشتراک منقضی</string>
+    <string name="backup_error_subscription_was_used">اشتراک یا کد تبلیغی را حساب دیگری استفاده کرده است %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">پرونده باید در قالب ‎.gzip فرستاده شود</string>
+    <string name="backup_error_file_not_available">پرونده در دسترس نیست</string>
+    <string name="contour_lines_hillshades_slope">خطوط میزان، سایه‌روشن‌ها، شیب</string>
+    <string name="duration_moment_ago">لحظه‌ای پیش</string>
+    <string name="backup_deleting_all_data">در حال حذف همهٔ داده‌ها</string>
+    <string name="backup_data_removed">همهٔ داده‌ها حذف شد</string>
+    <string name="backup_version_history_removed">همهٔ سابقهٔ نسخه حذف شد</string>
+    <string name="backup_deleted_all_data">همهٔ داده‌ها حذف شد</string>
+    <string name="shared_string_progress">پیشرفت</string>
+    <string name="backup_do_not_have_any">هنوز هیچ پشتیبان آنلاینی ندارید</string>
+    <string name="backup_dont_have_any_descr">پشتیبان‌گیری خودکار را تنظیم کنید تا نگران ازدست‌دادن داده نباشید.</string>
+    <string name="backup_welcome_back">خوش برگشتید!</string>
+    <string name="backup_setup">تنظیم پشتیبان</string>
+    <string name="backup_delete_all_data_warning">در حال حذف تمام داده‌ای هستید که قبلاً به ابر OsmAnd آپلود شده است، شامل سابقهٔ نسخه.
+\n
+\nقادر به بازگرداندن دادهٔ حذف‌شده نخواهید بود.</string>
+    <string name="backup_delete_types_descr">تمام دادهٔ مربوط به انواع منسوخ داده از ابر OsmAnd حذف شود؟</string>
+    <string name="backup_version_history_delete_descr">گزارش سابقهٔ مربوط به انواع منسوخ داده از ابر OsmAnd حذف شود؟</string>
+    <string name="logout_from_osmand_cloud">خروج از حساب ابر OsmAnd</string>
+    <string name="backup_deleting_all_data_descr">لطفاً صبر کنید تا OsmAnd تمام داده‌های شما را از ابر حذف کند. همهٔ داده‌های موجود روی دستگاه دست‌نخورده باقی می‌ماند.</string>
+    <string name="backup_deleted_all_data_descr">تمام داده‌های شما با موفقیت از ابر OsmAnd حذف شد.</string>
+    <string name="backup_restore_now">اکنون بازیابی کن</string>
+    <string name="backup_welcome_back_descr">می‌توانید از طریق پشتیبان‌های موجود روی این دستگاه داده‌ها را بازیابی کنید یا از این دستگاه در ابر OsmAnd پشتیبان بگیرید.</string>
+    <string name="logout_from_osmand_cloud_decsr">آیا از حساب کاربری خارج می‌شوید؟
+\nبرای پشتیبان‌گیری یا بازیابی داده لازم است دوباره وارد شوید.</string>
+    <string name="backup_error_subscription_was_expired_descr">اشتراک OsmAnd Pro شما منقضی شده است. برای پشتیبان‌گیری آن را تمدید کنید. هنوز می‌توانید داده‌ها را از ابر بازیابی کنید.</string>
+    <string name="purchases_feature_desc_osmand_cloud">ابر OsmAnd را فعال کنید تا تمام دادهٔ OsmAnd را آنلاین ذخیره کنید. داده‌ها بعد از نصب مجدد از دست نخواهد رفت. همهٔ اطلاعات را به‌آسانی پشتیبان بگیرید و بازیابی کنید.</string>
+    <string name="shared_string_purchased">خریداری‌شده</string>
+    <string name="explore_wikipedia_offline">ویکی‌پدیا را آفلاین کاوش کنید.</string>
+    <string name="app_mode_go_cart">خودروی کارتینگ</string>
+    <string name="backup_conflicts">تداخل‌ها</string>
+    <string name="terrain_maps">نقشه‌های ناهمواری‌ها</string>
+    <string name="nautical_depth">عمق دریا</string>
+    <string name="enter_verification_code">گذرواژهٔ یک‌بارمصرف را وارد کنید</string>
 </resources>
