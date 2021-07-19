@@ -3,9 +3,7 @@ package net.osmand.plus.track;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
@@ -14,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.squareup.picasso.Callback;
@@ -24,17 +20,14 @@ import com.squareup.picasso.RequestCreator;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PicassoUtils;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.WebViewEx;
+import net.osmand.plus.wikivoyage.ArticleWebViewClient;
 import net.osmand.plus.wikivoyage.WikivoyageUtils;
 import net.osmand.util.Algorithms;
 
@@ -53,9 +46,6 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 	private static final String TITLE_KEY = "title_key";
 	private static final String IMAGE_URL_KEY = "image_url_key";
 	private static final String CONTENT_KEY = "content_key";
-
-	private static final String PREFIX_GEO = "geo:";
-	private static final String PREFIX_TEL = "tel:";
 
 	private WebViewEx webView;
 
@@ -79,6 +69,7 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			if (displayHelper != null) {
 				gpxFile = displayHelper.getGpx();
 			}
+			((TrackMenuFragment) targetFragment).dismiss();
 		}
 	}
 
@@ -202,65 +193,20 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		webView.getSettings().setDomStorageEnabled(true);
 		webView.getSettings().setLoadWithOverviewMode(true);
 		webView.getSettings().setRenderPriority(WebSettings.RenderPriority.HIGH);
-		webView.setWebViewClient(createWebViewClient(view));
+		setupWebViewClient(view);
 		loadWebviewData();
-	}
-
-	private WebViewClient createWebViewClient(final View view) {
-		return new WebViewClient() {
-			@Override
-			public void onPageCommitVisible(WebView webView, String url) {
-				super.onPageCommitVisible(webView, url);
-				if (getActivity() != null) {
-					setupDependentViews(view);
-				}
-			}
-
-			@Override
-			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				FragmentActivity activity = getActivity();
-				if (activity == null) {
-					return false;
-				}
-				OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-
-				if (url.contains(PREFIX_TEL)) {
-					Intent intent = new Intent(Intent.ACTION_DIAL);
-					intent.setData(Uri.parse(url));
-					startActivity(intent);
-					return true;
-				} else if (url.contains(PREFIX_GEO)) {
-					if (gpxFile != null) {
-						String coordinates = url.replace(PREFIX_GEO, "");
-						WptPt gpxPoint = WikivoyageUtils.findNearestPoint(gpxFile.getPoints(), coordinates);
-						if (gpxPoint != null) {
-							OsmandSettings settings = app.getSettings();
-							settings.setMapLocationToShow(gpxPoint.getLatitude(), gpxPoint.getLongitude(),
-									settings.getLastKnownMapZoom(),
-									new PointDescription(PointDescription.POINT_TYPE_WPT, gpxPoint.name),
-									false,
-									gpxPoint);
-
-							MapActivity.launchMapActivityMoveToTop(activity);
-							dismiss();
-						}
-					}
-					return true;
-				} else {
-					Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-					if (AndroidUtils.isIntentSafe(activity, i)) {
-						activity.startActivity(i);
-						return true;
-					}
-				}
-				return false;
-			}
-		};
 	}
 
 	public void updateContent(String content) {
 		contentHtml = content;
 		loadWebviewData();
+	}
+
+	public void setupWebViewClient(View view) {
+		FragmentActivity activity = getActivity();
+		if (activity != null && gpxFile != null) {
+			webView.setWebViewClient(new ArticleWebViewClient(this, activity, gpxFile, view, true));
+		}
 	}
 
 	private void loadWebviewData() {
@@ -272,7 +218,7 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	private void setupDependentViews(final View view) {
+	public void setupDependentViews(final View view) {
 		View editBtn = view.findViewById(R.id.btn_edit);
 
 		Context ctx = editBtn.getContext();

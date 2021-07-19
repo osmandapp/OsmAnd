@@ -67,14 +67,7 @@ public class WikivoyageWebViewClient extends WebViewClient {
 		url = WikiArticleHelper.normalizeFileUrl(url);
 		boolean isWebPage = url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS);
 		if (url.contains(WIKIVOYAGE_DOMAIN) && isWebPage) {
-			String lang = WikiArticleHelper.getLang(url);
-			String articleName = WikiArticleHelper.getArticleNameFromUrl(url, lang);
-			TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(articleName, lang);
-			if (articleId != null) {
-				WikivoyageArticleDialogFragment.showInstance(app, fragmentManager, articleId, lang);
-			} else {
-				WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
-			}
+			WikivoyageUtils.processWikivoyageDomain(activity, url, nightMode);
 			return true;
 		} else if (url.contains(WIKI_DOMAIN) && isWebPage && article != null) {
 			LatLon articleCoordinates = parseCoordinates(url);
