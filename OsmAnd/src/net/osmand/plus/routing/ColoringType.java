@@ -34,6 +34,7 @@ public enum ColoringType {
 	DEFAULT("default", R.string.map_widget_renderer, R.drawable.ic_action_map_style),
 	CUSTOM_COLOR("custom_color", R.string.shared_string_custom, R.drawable.ic_action_settings),
 	// For gpx track only
+	TRACK_SOLID("solid", R.string.track_coloring_solid, R.drawable.ic_action_circle),
 	SPEED("speed", R.string.map_widget_speed, R.drawable.ic_action_speed),
 	// For both route and gpx file
 	ALTITUDE("altitude", R.string.altitude, R.drawable.ic_action_hillshade_dark),
@@ -50,6 +51,7 @@ public enum ColoringType {
 		ROUTE_COLORING_TYPES.add(SLOPE);
 		ROUTE_COLORING_TYPES.add(ATTRIBUTE);
 
+		TRACK_COLORING_TYPES.add(TRACK_SOLID);
 		TRACK_COLORING_TYPES.add(SPEED);
 		TRACK_COLORING_TYPES.add(ALTITUDE);
 		TRACK_COLORING_TYPES.add(SLOPE);
@@ -112,8 +114,12 @@ public enum ColoringType {
 		return this == CUSTOM_COLOR;
 	}
 
+	public boolean isTrackSolid() {
+		return this == TRACK_SOLID;
+	}
+
 	public boolean isSolidSingleColor() {
-		return isDefault() || isCustomColor();
+		return isDefault() || isCustomColor() || isTrackSolid();
 	}
 
 	public boolean isGradient() {
@@ -244,8 +250,14 @@ public enum ColoringType {
 		return defined == null ? DEFAULT : defined;
 	}
 
+	@NonNull
+	public static ColoringType getNonNullTrackColoringTypeByName(@Nullable String name) {
+		ColoringType defined = getColoringTypeByName(TRACK_COLORING_TYPES, name);
+		return defined == null ? TRACK_SOLID : defined;
+	}
+
 	@Nullable
-	public static ColoringType getTrackColoringTypeByName(@Nullable String name) {
+	public static ColoringType getNullableTrackColoringTypeByName(@Nullable String name) {
 		return getColoringTypeByName(TRACK_COLORING_TYPES, name);
 	}
 

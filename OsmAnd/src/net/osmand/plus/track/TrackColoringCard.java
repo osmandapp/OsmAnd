@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
@@ -20,7 +19,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.routing.ColoringType.*;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteStatisticsHelper;
 
@@ -42,7 +40,6 @@ import static net.osmand.plus.routing.ColoringType.SPEED;
 
 public class TrackColoringCard extends MapBaseCard {
 
-	private final static String SOLID_COLOR = "solid_color";
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
 
 	private final SelectedGpxFile selectedGpxFile;
@@ -86,7 +83,7 @@ public class TrackColoringCard extends MapBaseCard {
 	}
 
 	public ColoringType getSelectedColoringType() {
-		return ColoringType.getTrackColoringTypeByName(selectedAppearanceItem.getAttrName());
+		return ColoringType.getNonNullTrackColoringTypeByName(selectedAppearanceItem.getAttrName());
 	}
 
 	public String getRouteInfoAttribute() {
@@ -95,7 +92,6 @@ public class TrackColoringCard extends MapBaseCard {
 
 	private List<TrackAppearanceItem> listTrackAppearanceItems() {
 		List<TrackAppearanceItem> items = new ArrayList<>();
-		items.add(new TrackAppearanceItem(SOLID_COLOR, app.getString(R.string.track_coloring_solid), R.drawable.ic_action_circle, true));
 		items.addAll(listStaticAppearanceItems());
 		items.addAll(listRouteInfoAttributes());
 		return items;
@@ -138,9 +134,7 @@ public class TrackColoringCard extends MapBaseCard {
 			ColoringType coloringType = trackDrawInfo.getColoringType();
 			String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
 			for (TrackAppearanceItem item : appearanceItems) {
-				if (coloringType == null && item.getAttrName().equals(SOLID_COLOR)
-						|| coloringType != null
-						&& item.getAttrName().equals(coloringType.getName(routeInfoAttribute))) {
+				if (item.getAttrName().equals(coloringType.getName(routeInfoAttribute))) {
 					selectedAppearanceItem = item;
 					break;
 				}
@@ -164,13 +158,8 @@ public class TrackColoringCard extends MapBaseCard {
 
 	public void setColoringType(TrackAppearanceItem item) {
 		selectedAppearanceItem = item;
-		if (item.getAttrName().equals(SOLID_COLOR)) {
-			trackDrawInfo.setColoringType(null);
-			trackDrawInfo.setRouteInfoAttribute(null);
-		} else {
-			trackDrawInfo.setColoringType(ColoringType.getTrackColoringTypeByName(item.getAttrName()));
-			trackDrawInfo.setRouteInfoAttribute(ColoringType.getRouteInfoAttribute(item.getAttrName()));
-		}
+		trackDrawInfo.setColoringType(ColoringType.getNonNullTrackColoringTypeByName(item.getAttrName()));
+		trackDrawInfo.setRouteInfoAttribute(ColoringType.getRouteInfoAttribute(item.getAttrName()));
 		mapActivity.refreshMap();
 
 		updateHeader();
@@ -276,7 +265,7 @@ public class TrackColoringCard extends MapBaseCard {
 				textColorId = iconColorId;
 			}
 
-			if (item.getAttrName().equals(SOLID_COLOR)) {
+			if (item.getAttrName().equals(ColoringType.TRACK_SOLID.getName(null))) {
 				iconColorId = trackDrawInfo.getColor();
 			}
 

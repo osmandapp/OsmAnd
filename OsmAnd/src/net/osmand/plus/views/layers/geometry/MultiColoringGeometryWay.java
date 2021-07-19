@@ -42,6 +42,7 @@ public abstract class MultiColoringGeometryWay
 	protected Integer customColor;
 	protected Float customWidth;
 	protected Integer customDirectionArrowColor;
+	@NonNull
 	protected ColoringType coloringType;
 	protected String routeInfoAttribute;
 
@@ -49,8 +50,8 @@ public abstract class MultiColoringGeometryWay
 
 	public MultiColoringGeometryWay(C context, D drawer) {
 		super(context, drawer);
+		coloringType = context.getDefaultColoringType();
 	}
-
 
 	public void setStyleParams(int color,
 							   float width,
@@ -66,7 +67,7 @@ public abstract class MultiColoringGeometryWay
 			updateStylesWidth(width);
 		}
 		updatePaints(width, routeColoringType);
-		getDrawer().setRouteColoringType(routeColoringType);
+		getDrawer().setColoringType(routeColoringType);
 
 		this.customColor = color;
 		this.customWidth = width;

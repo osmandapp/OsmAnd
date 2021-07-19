@@ -9,7 +9,9 @@ import android.graphics.Paint.Style;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.routing.ColoringType;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
@@ -31,6 +33,12 @@ public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
 	@Override
 	public Paint getStrokePaint() {
 		return strokePaint;
+	}
+
+	@NonNull
+	@Override
+	protected ColoringType getDefaultColoringType() {
+		return ColoringType.TRACK_SOLID;
 	}
 
 	@Override

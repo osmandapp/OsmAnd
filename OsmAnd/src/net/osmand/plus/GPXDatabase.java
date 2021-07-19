@@ -878,7 +878,7 @@ public class GPXDatabase {
 		item.showStartFinish = showStartFinish;
 		item.width = width;
 
-		if (ColoringType.getTrackColoringTypeByName(coloringTypeName) != null) {
+		if (ColoringType.getNullableTrackColoringTypeByName(coloringTypeName) != null) {
 			item.coloringType = coloringTypeName;
 		} else if (GradientScaleType.getGradientTypeByName(coloringTypeName) != null) {
 			GradientScaleType scaleType = GradientScaleType.getGradientTypeByName(coloringTypeName);

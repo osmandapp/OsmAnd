@@ -57,7 +57,6 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
-import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -1495,7 +1494,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,
-			"current_track_coloring_type", null,
+			"current_track_coloring_type", ColoringType.TRACK_SOLID,
 			ColoringType.getTrackColoringTypes().toArray(new ColoringType[0])).makeGlobal().makeShared().cache();
 	public final CommonPreference<String> CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE = new StringPreference(this,
 			"current_track_route_info_attribute", null);

@@ -19,7 +19,7 @@ public class GpxGeometryWayDrawer extends MultiColoringGeometryWayDrawer<GpxGeom
 
 	@Override
 	public void drawPath(Canvas canvas, DrawPathData pathData) {
-		if (routeColoringType != null && routeColoringType.isRouteInfoAttribute()) {
+		if (coloringType.isRouteInfoAttribute()) {
 			drawCustomSolid(canvas, pathData);
 		}
 	}

@@ -12,7 +12,7 @@ import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGr
 
 import java.util.List;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayContext>
 		extends GeometryWayDrawer<T> {
@@ -20,15 +20,16 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	private static final int BORDER_TYPE_ZOOM_THRESHOLD = MapTileLayer.DEFAULT_MAX_ZOOM + MapTileLayer.OVERZOOM_IN;
 	private static final boolean DRAW_BORDER = true;
 
-	@Nullable
-	protected ColoringType routeColoringType = null;
+	@NonNull
+	protected ColoringType coloringType;
 
 	public MultiColoringGeometryWayDrawer(T context) {
 		super(context);
+		coloringType = context.getDefaultColoringType();
 	}
 
-	public void setRouteColoringType(@Nullable ColoringType coloringType) {
-		this.routeColoringType = coloringType;
+	public void setColoringType(@NonNull ColoringType coloringType) {
+		this.coloringType = coloringType;
 	}
 
 	@Override
@@ -46,12 +47,11 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	public void drawPath(Canvas canvas, DrawPathData pathData) {
 		Paint strokePaint = getContext().getStrokePaint();
 
-		if (routeColoringType == null || routeColoringType.isCustomColor()
-				|| routeColoringType.isRouteInfoAttribute()) {
+		if (coloringType.isCustomColor() || coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
 			drawCustomSolid(canvas, pathData);
-		} else if (routeColoringType.isDefault()) {
+		} else if (coloringType.isDefault()) {
 			super.drawPath(canvas, pathData);
-		} else if (routeColoringType.isGradient()) {
+		} else if (coloringType.isGradient()) {
 			GeometryGradientWayStyle style = (GeometryGradientWayStyle) pathData.style;
 			LinearGradient gradient = new LinearGradient(pathData.start.x, pathData.start.y,
 					pathData.end.x, pathData.end.y, style.currColor, style.nextColor, Shader.TileMode.CLAMP);
@@ -77,7 +77,6 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	}
 
 	private boolean shouldDrawBorder() {
-		return routeColoringType != null
-				&& (routeColoringType.isGradient() || routeColoringType.isRouteInfoAttribute());
+		return coloringType.isGradient() || coloringType.isRouteInfoAttribute();
 	}
 }

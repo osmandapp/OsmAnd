@@ -77,7 +77,7 @@ public class GpxAppearanceInfo {
 		gpxAppearanceInfo.splitInterval = json.optDouble("split_interval");
 		hasAnyParam |= json.has("coloring_type");
 		gpxAppearanceInfo.coloringType = json.optString("coloring_type");
-		if (ColoringType.getTrackColoringTypeByName(gpxAppearanceInfo.coloringType) == null) {
+		if (ColoringType.getNullableTrackColoringTypeByName(gpxAppearanceInfo.coloringType) == null) {
 			hasAnyParam |= json.has("gradient_scale_type");
 			GradientScaleType scaleType = getScaleType(json.optString("gradient_scale_type"));
 			ColoringType coloringType = ColoringType.fromGradientScaleType(scaleType);

@@ -73,7 +73,8 @@ public class Renderable {
         protected Paint paint = null;                               // MUST be set by 'updateLocalPaint' before use
         protected Paint borderPaint;
 
-        protected ColoringType coloringType = null;
+        @NonNull
+        protected ColoringType coloringType = ColoringType.TRACK_SOLID;
         protected String routeInfoAttribute = null;
         protected boolean drawBorder = false;
 
@@ -94,12 +95,12 @@ public class Renderable {
             }
             paint.setColor(p.getColor());
             paint.setStrokeWidth(p.getStrokeWidth());
-            if (coloringType != null && coloringType.isGradient()) {
+            if (coloringType.isGradient()) {
                 paint.setAlpha(0xFF);
             }
         }
 
-        public void setTrackColoringParams(@Nullable ColoringType coloringType,
+        public void setTrackColoringParams(@NonNull ColoringType coloringType,
                                            @Nullable String routeInfoAttribute,
                                            @NonNull Paint borderPaint,
                                            boolean shouldDrawBorder) {
@@ -126,7 +127,7 @@ public class Renderable {
 
             updateLocalPaint(p);
             canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-            if (coloringType != null && coloringType.isGradient()) {
+            if (coloringType.isGradient()) {
                 if (drawBorder && zoom < BORDER_TYPE_ZOOM_THRESHOLD) {
                     drawSolid(points, borderPaint, canvas, tileBox);
                 }
@@ -139,7 +140,7 @@ public class Renderable {
 
         public void drawSegment(double zoom, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             if (QuadRect.trivialOverlap(tileBox.getLatLonBounds(), trackBounds)) { // is visible?
-                if (coloringType == null) {
+                if (coloringType.isTrackSolid()) {
                     startCuller(zoom);
                 }
                 drawSingleSegment(zoom, p, canvas, tileBox);

@@ -46,7 +46,7 @@ public class TrackDrawInfo {
 		filePath = gpxDataItem.getFile().getPath();
 		width = gpxDataItem.getWidth();
 		color = gpxDataItem.getColor();
-		coloringType = ColoringType.getTrackColoringTypeByName(gpxDataItem.getColoringType());
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxDataItem.getColoringType());
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxDataItem.getColoringType());
 		splitType = gpxDataItem.getSplitType();
 		splitInterval = gpxDataItem.getSplitInterval();
@@ -68,8 +68,9 @@ public class TrackDrawInfo {
 		this.width = width;
 	}
 
+	@NonNull
 	public ColoringType getColoringType() {
-		return coloringType;
+		return coloringType == null ? ColoringType.TRACK_SOLID : coloringType;
 	}
 
 	public String getRouteInfoAttribute() {
@@ -135,7 +136,7 @@ public class TrackDrawInfo {
 	private void readBundle(@NonNull Bundle bundle) {
 		filePath = bundle.getString(TRACK_FILE_NAME);
 		width = bundle.getString(TRACK_WIDTH);
-		coloringType = ColoringType.getTrackColoringTypeByName(bundle.getString(TRACK_COLORING_TYPE));
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(bundle.getString(TRACK_COLORING_TYPE));
 		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(TRACK_COLORING_TYPE));
 		color = bundle.getInt(TRACK_COLOR);
 		splitType = bundle.getInt(TRACK_SPLIT_TYPE);

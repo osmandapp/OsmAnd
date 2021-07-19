@@ -3,6 +3,8 @@ package net.osmand.plus.views.layers.geometry;
 import android.content.Context;
 import android.graphics.Paint;
 
+import net.osmand.plus.routing.ColoringType;
+
 import androidx.annotation.NonNull;
 
 public abstract class MultiColoringGeometryWayContext extends GeometryWayContext {
@@ -17,6 +19,9 @@ public abstract class MultiColoringGeometryWayContext extends GeometryWayContext
 	}
 
 	public abstract Paint getStrokePaint();
+
+	@NonNull
+	protected abstract ColoringType getDefaultColoringType();
 
 	private Paint createBorderPaint() {
 		Paint borderPaint = new Paint();

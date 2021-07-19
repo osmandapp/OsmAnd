@@ -601,13 +601,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			gpxDbHelper.updateShowArrows(gpxDataItem, trackDrawInfo.isShowArrows());
 //			gpxDbHelper.updateShowStartFinish(gpxDataItem, trackDrawInfo.isShowStartFinish());
 			gpxDbHelper.updateSplit(gpxDataItem, splitType, trackDrawInfo.getSplitInterval());
-			if (trackDrawInfo.getColoringType() == null) {
-				gpxDbHelper.updateColoringType(gpxDataItem, null);
-			} else {
-				ColoringType coloringType = trackDrawInfo.getColoringType();
-				String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
-				gpxDbHelper.updateColoringType(gpxDataItem, coloringType.getName(routeInfoAttribute));
-			}
+			ColoringType coloringType = trackDrawInfo.getColoringType();
+			String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
+			gpxDbHelper.updateColoringType(gpxDataItem, coloringType.getName(routeInfoAttribute));
 		}
 	}
 
@@ -680,8 +676,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			setupColorsCard(cardsContainer);
 
-			GradientScaleType scaleType = trackDrawInfo.getColoringType() == null ?
-					null : trackDrawInfo.getColoringType().toGradientScaleType();
+			GradientScaleType scaleType = trackDrawInfo.getColoringType().toGradientScaleType();
 			gradientCard = new GradientCard(mapActivity, selectedGpxFile.getTrackAnalysis(app), scaleType);
 			cardsContainer.addView(gradientCard.build(mapActivity));
 
@@ -711,7 +706,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			List<Integer> colors = getTrackColors();
 			colorsCard = new ColorsCard(mapActivity, trackDrawInfo.getColor(), this, colors, app.getSettings().CUSTOM_TRACK_COLORS, null);
 			colorsCard.setListener(this);
-			AndroidUiHelper.updateVisibility(colorsCard.build(mapActivity), trackDrawInfo.getColoringType() == null);
+			AndroidUiHelper.updateVisibility(colorsCard.build(mapActivity), trackDrawInfo.getColoringType().isTrackSolid());
 			cardsContainer.addView(colorsCard.getView());
 		}
 	}
