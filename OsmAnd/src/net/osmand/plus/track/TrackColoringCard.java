@@ -13,12 +13,16 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.routing.ColoringType.*;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteStatisticsHelper;
 
 import org.apache.commons.logging.Log;
 
@@ -31,12 +35,17 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static net.osmand.plus.routing.ColoringType.ALTITUDE;
+import static net.osmand.plus.routing.ColoringType.ATTRIBUTE;
+import static net.osmand.plus.routing.ColoringType.SLOPE;
+import static net.osmand.plus.routing.ColoringType.SPEED;
+
 public class TrackColoringCard extends MapBaseCard {
 
 	private final static String SOLID_COLOR = "solid_color";
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
 
-	private final GPXTrackAnalysis gpxTrackAnalysis;
+	private final SelectedGpxFile selectedGpxFile;
 	private final TrackDrawInfo trackDrawInfo;
 
 	private TrackColoringAdapter coloringAdapter;
@@ -44,12 +53,12 @@ public class TrackColoringCard extends MapBaseCard {
 	private List<TrackAppearanceItem> appearanceItems;
 
 	public TrackColoringCard(@NonNull MapActivity mapActivity,
-	                         @NonNull GPXTrackAnalysis gpxTrackAnalysis,
+	                         @NonNull SelectedGpxFile selectedGpxFile,
 	                         @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
-		this.gpxTrackAnalysis = gpxTrackAnalysis;
-		appearanceItems = getTrackAppearanceItems();
+		this.selectedGpxFile = selectedGpxFile;
+		appearanceItems = listTrackAppearanceItems();
 	}
 
 	@Override
@@ -84,24 +93,54 @@ public class TrackColoringCard extends MapBaseCard {
 		return ColoringType.getRouteInfoAttribute(selectedAppearanceItem.getAttrName());
 	}
 
-	private List<TrackAppearanceItem> getTrackAppearanceItems() {
+	private List<TrackAppearanceItem> listTrackAppearanceItems() {
 		List<TrackAppearanceItem> items = new ArrayList<>();
 		items.add(new TrackAppearanceItem(SOLID_COLOR, app.getString(R.string.track_coloring_solid), R.drawable.ic_action_circle, true));
-		for (GradientScaleType scaleType : GradientScaleType.values()) {
-			boolean isAvailable = gpxTrackAnalysis.isColorizationTypeAvailable(scaleType.toColorizationType());
-			items.add(new TrackAppearanceItem(scaleType.getTypeName(), scaleType.getHumanString(app),
-					scaleType.getIconId(), isAvailable || trackDrawInfo.isCurrentRecording()));
-		}
+		items.addAll(listStaticAppearanceItems());
+		items.addAll(listRouteInfoAttributes());
 		return items;
+	}
+
+	private List<TrackAppearanceItem> listStaticAppearanceItems() {
+		List<TrackAppearanceItem> staticItems = new ArrayList<>();
+		for (ColoringType coloringType : ColoringType.getTrackColoringTypes()) {
+			if (coloringType.isRouteInfoAttribute()) {
+				continue;
+			}
+			boolean isAvailable = coloringType.isAvailableForDrawingTrack(app, selectedGpxFile, null);
+			staticItems.add(new TrackAppearanceItem(coloringType.getName(null),
+					coloringType.getHumanString(app, null),
+					coloringType.getIconId(), isAvailable || trackDrawInfo.isCurrentRecording()));
+		}
+		return staticItems;
+	}
+
+	private List<TrackAppearanceItem> listRouteInfoAttributes() {
+		List<TrackAppearanceItem> routeInfoAttributes = new ArrayList<>();
+		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
+		List<String> attributes = RouteStatisticsHelper
+				.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, true);
+
+		for (String attribute : attributes) {
+			boolean isAvailable = ATTRIBUTE.isAvailableForDrawingTrack(app, selectedGpxFile, attribute);
+			String property = attribute.replace(RouteStatisticsHelper.ROUTE_INFO_PREFIX, "");
+			routeInfoAttributes.add(new TrackAppearanceItem(attribute,
+					AndroidUtils.getStringRouteInfoPropertyValue(app, property),
+					ATTRIBUTE.getIconId(), isAvailable));
+		}
+
+		return routeInfoAttributes;
 	}
 
 	private TrackAppearanceItem getSelectedAppearanceItem() {
 		if (selectedAppearanceItem == null) {
 			ColoringType coloringType = trackDrawInfo.getColoringType();
-			GradientScaleType scaleType = null;
+			String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
 			for (TrackAppearanceItem item : appearanceItems) {
-				if (scaleType == null && item.getAttrName().equals(SOLID_COLOR)
-						|| scaleType != null && scaleType.getTypeName().equals(item.getAttrName())) {
+				if (coloringType == null && item.getAttrName().equals(SOLID_COLOR)
+						|| coloringType != null
+						&& item.getAttrName().equals(coloringType.getName(routeInfoAttribute))) {
 					selectedAppearanceItem = item;
 					break;
 				}
@@ -152,6 +191,7 @@ public class TrackColoringCard extends MapBaseCard {
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
 			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
 			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
+			((TextView) view.findViewById(R.id.groupName)).setMaxLines(1);
 			return new AppearanceViewHolder(view);
 		}
 
@@ -248,8 +288,15 @@ public class TrackColoringCard extends MapBaseCard {
 			if (view == null || mapActivity == null) {
 				return;
 			}
-			String text = attrName.equals(GradientScaleType.SPEED.getTypeName()) ?
-					app.getString(R.string.track_has_no_speed) : app.getString(R.string.track_has_no_altitude);
+			String text = "";
+			if (attrName.equals(SPEED.getName(null))) {
+				text = app.getString(R.string.track_has_no_speed);
+			} else if (attrName.equals(ALTITUDE.getName(null))
+					|| attrName.equals(SLOPE.getName(null))) {
+				text = app.getString(R.string.track_has_no_altitude);
+			} else if (attrName.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX)) {
+				text = app.getString(R.string.track_has_no_needed_data);
+			}
 			text += " " + app.getString(R.string.select_another_colorization);
 			Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
 					.setAnchorView(mapActivity.findViewById(R.id.dismiss_button));

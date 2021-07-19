@@ -674,7 +674,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			showStartFinishCard.setListener(this);
 			cardsContainer.addView(showStartFinishCard.build(mapActivity));
 
-			trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile.getTrackAnalysis(app), trackDrawInfo);
+			trackColoringCard = new TrackColoringCard(mapActivity, selectedGpxFile, trackDrawInfo);
 			trackColoringCard.setListener(this);
 			cardsContainer.addView(trackColoringCard.build(mapActivity));
 

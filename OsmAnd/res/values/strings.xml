@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="track_has_no_needed_data">The track does not contain needed data.</string>
     <string name="attribute">Attribute</string>
     <string name="backup_restore_now">Restore now</string>
     <string name="backup_setup">Set up backup</string>
