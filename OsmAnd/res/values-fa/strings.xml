@@ -29,7 +29,7 @@
     <string name="contribution_activity">نصب نسخه</string>
     <string name="choose_osmand_theme_descr">ظاهر برنامه را به‌دلخواه تنظیم کنید.</string>
     <string name="choose_osmand_theme">پوستهٔ برنامه</string>
-    <string name="accessibility_options">تنظیمات قابلیت دسترسی</string>
+    <string name="accessibility_options">گزینه‌های قابلیت دسترسی</string>
     <string name="select_address_activity">مشخص‌کردن نشانی</string>
     <string name="favourites_list_activity">انتخاب علاقه‌مندی</string>
     <string name="local_openstreetmap_act_title">تغییرات OsmAnd</string>
@@ -686,7 +686,7 @@
     <string name="auto_follow_route_navigation">ناوبری فقط با حالت خودکار-مرکز</string>
     <string name="auto_follow_route_navigation_descr">نمای خودکار-مرکز برای نقشه فقط در زمان ناوبری فعال باشد.</string>
     <string name="auto_follow_location_enabled">نمای نقشه خودکار-مرکز است.</string>
-    <string name="pref_vector_rendering">تنظیمات مربوط به رندرکنندهٔ بُرداری</string>
+    <string name="pref_vector_rendering">گزینه‌های مربوط به رندرکنندهٔ بُرداری</string>
     <string name="pref_overlay">لایهٔ رویی/لایهٔ زیری</string>
     <string name="pref_raster_map">تنظیمات منبع نقشه</string>
     <string name="pref_vector_map">تنظیمات نقشهٔ بُرداری</string>
@@ -1755,7 +1755,7 @@
     <string name="right_side_navigation">رانندگی از راست</string>
     <string name="driving_region_automatic">خودکار</string>
     <string name="do_not_show_startup_messages">پیام‌های آغازین را نشان نده</string>
-    <string name="parking_options">تنظیمات پارکینگ</string>
+    <string name="parking_options">گزینه‌های پارکینگ</string>
     <string name="full_version_thanks">سپاسگزاریم که نسخهٔ پولی OsmAnd را خریدید.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">پُرتپه</string>
     <string name="routing_attr_driving_style_speed_name">مسیرهای کوتاه‌تر</string>
@@ -2210,7 +2210,7 @@
     <string name="make_round_trip">ایجاد سفر رفت‌وبرگشتی</string>
     <string name="coordinates_format">قالب مختصات</string>
     <string name="use_system_keyboard">صفحه‌کلید سیستم</string>
-    <string name="fast_coordinates_input_descr">قالب مختصات ورودی را انتخاب کنید. روی «تنظیمات» بزنید تا آن را تغییر دهید.</string>
+    <string name="fast_coordinates_input_descr">قالب مختصات ورودی را انتخاب کنید. روی «گزینه‌ها» بزنید تا آن را تغییر دهید.</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">گُدار یا راه یخی</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">از راه‌های یخی و گدارها پرهیز می‌کند.</string>
     <string name="use_location">استفاده از موقعیت</string>
@@ -2746,7 +2746,7 @@
     <string name="nautical_render_descr">مناسب برای ناوبری دریایی. به‌طور ویژه شناوه‌ها، فانوس‌های دریایی، راه‌های رودخانه‌ای، خطوط عبوری و نشانه‌های دریایی، بندرگاه‌ها، خدمات ساحلی و منحنی‌های میزان عمقی را نمایش می‌دهد.</string>
     <string name="ski_map_render_descr">برای اسکی. پیست‌ها، تله‌اسکی‌ها، مسیرهای کراس‌کانتری و... را به‌طور ویژه نمایش می‌دهد. اجزای ثانویهٔ نقشه کم‌فروغ هستند.</string>
     <string name="light_rs_render_descr">سبکی ساده و پادنما برای ناوبری خودرویی. دارای حالت ملایم برای شب‌هنگام، منحنی‌های میزان و جاده‌های نارنجی‌رنگ و پادنما. عارضه‌های ثانویهٔ نقشه کم‌فروغ هستند.</string>
-    <string name="topo_render_descr">مخصوص پیاده‌گردی، راه‌نوردی و دوچرخه‌سواری در طبیعت. در روشنایی بیرون خواناست. جاده‌ها و عارضه‌های طبیعی پادنما، انواع مختلف مسیرها، منحنی‌های میزان با تنظیمات پیشرفته، جزئیات بیشتر. نمایش انواع سطوح که در نتیجه راه‌ها را بر اساس کیفیت سطحشان مجزا می‌کند. حالت شب ندارد.</string>
+    <string name="topo_render_descr">مخصوص پیاده‌گردی، راه‌نوردی و دوچرخه‌سواری در طبیعت. در روشنایی بیرون خواناست. جاده‌ها و عارضه‌های طبیعی پادنما، انواع مختلف مسیرها، گزینه‌های پیشرفتهٔ منحنی‌های میزان، جزئیات بیشتر. نمایش انواع سطوح که در نتیجه راه‌ها را بر اساس کیفیت سطحشان مجزا می‌کند. حالت شب ندارد.</string>
     <string name="mapnik_render_descr">سبک پیشفرض قدیمی و مپنیک‌مانند. رنگ‌بندی مشابه سبک مپنیک.</string>
     <string name="default_render_descr">سبکی مناسب برای استفادهٔ معمولی. شهرهای متراکم واضح نمایش می‌یابند. توجه ویژه به منحنی‌های میزان، مسیرها، کیفیت سطوح، محدودیت‌های دسترسی، شمارهٔ راه‌ها، رسم مسیرها طبق درجه‌بندی SAC، خصوصیات ورزش‌های آب‌های خروشان از ویژگی‌های آن است.</string>
     <string name="read_wikipedia_offline_description">برای مطالعهٔ آفلاین مقاله‌های ویکی‌پدیا و ویکی‌سفر مشترک OsmAnd Live شوید.</string>
@@ -4216,7 +4216,7 @@
 \n • گزینهٔ روزآمدسازی‌های زندهٔ OsmAnd در «دانلودها &gt; روزآمدسازی‌ها» قرار گرفت
 \n
 \n</string>
-    <string name="send_logcat_log">ارسال logcat</string>
+    <string name="send_logcat_log">ارسال گزارش logcat</string>
     <string name="osmand_online_routing_promo">از الگوهای از پیش تعریف شده استفاده کنید یا از خدمات مسیریابی آنلاین OSRM،‏ GrapgHopper،‏ OpenRouteService یا GPX اضافه نمایید.</string>
     <string name="backup_view_conflicts">دیدن تداخل‌ها</string>
     <string name="backup_delete_old_data_warning">در حال حذف سابقهٔ تغییر مربوط به داده‌های پیش‌تر بارشده هستید.
@@ -4239,7 +4239,7 @@
     <string name="advanced_widgets">ابزارک‌های پیشرفته</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s یا %2$s</string>
     <string name="continue_with">ادامه دهید با %1$s</string>
-    <string name="backup_error_size_is_exceeded"></string>
+    <string name="backup_error_size_is_exceeded"/>
     <string name="osmand_maps_plus_tagline">دریافت قابلیت‌های افزوده</string>
     <string name="osmand_pro_tagline">دریافت بیشترین قابلیت‌ها</string>
     <string name="shared_string_learn_more">بیشتر بدانید</string>
