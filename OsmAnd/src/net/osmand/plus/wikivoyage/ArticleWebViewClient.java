@@ -61,6 +61,7 @@ public class ArticleWebViewClient extends WebViewClient {
 		boolean isWebPage = url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS);
 		if (url.contains(WIKIVOYAGE_DOMAIN) && isWebPage) {
 			WikivoyageUtils.processWikivoyageDomain(activity, url, isNightMode());
+			fragment.dismiss();
 			return true;
 		} else if (url.contains(PREFIX_TEL)) {
 			Intent intent = new Intent(Intent.ACTION_DIAL);
@@ -68,7 +69,7 @@ public class ArticleWebViewClient extends WebViewClient {
 			startActivity(intent);
 			return true;
 		} else if (url.contains(PREFIX_GEO)) {
-			fragment.dismissTargetFragment();
+			fragment.closeAll();
 			String coordinates = url.replace(PREFIX_GEO, "");
 			WptPt gpxPoint = WikivoyageUtils.findNearestPoint(gpxFile.getPoints(), coordinates);
 			if (gpxPoint != null) {
@@ -80,7 +81,6 @@ public class ArticleWebViewClient extends WebViewClient {
 						gpxPoint);
 
 				MapActivity.launchMapActivityMoveToTop(activity);
-				fragment.dismiss();
 			}
 			return true;
 		} else {

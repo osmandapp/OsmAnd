@@ -247,11 +247,12 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		return "<body style=\"color:white;\">\n" + content + "</body>\n";
 	}
 
-	public void dismissTargetFragment() {
+	public void closeAll() {
 		Fragment target = getTargetFragment();
 		if (target instanceof TrackMenuFragment) {
 			((TrackMenuFragment) target).dismiss();
 		}
+		dismiss();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,

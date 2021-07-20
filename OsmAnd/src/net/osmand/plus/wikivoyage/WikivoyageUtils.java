@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage;
 
+import android.content.Intent;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
@@ -13,12 +15,15 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
+import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
 import java.util.List;
 
+import static net.osmand.plus.wikivoyage.article.WikivoyageArticleNavigationFragment.ARTICLE_ID_KEY;
+import static net.osmand.plus.wikivoyage.article.WikivoyageArticleNavigationFragment.SELECTED_LANG_KEY;
 import static net.osmand.util.MapUtils.ROUNDING_ERROR;
 
 public class WikivoyageUtils {
@@ -65,7 +70,14 @@ public class WikivoyageUtils {
 		String articleName = WikiArticleHelper.getArticleNameFromUrl(url, lang);
 		TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(articleName, lang);
 		if (articleId != null) {
-			WikivoyageArticleDialogFragment.showInstance(app, activity.getSupportFragmentManager(), articleId, lang);
+			if (activity instanceof WikivoyageExploreActivity) {
+				WikivoyageArticleDialogFragment.showInstance(app, activity.getSupportFragmentManager(), articleId, lang);
+			} else {
+				Intent intent = new Intent(activity, WikivoyageExploreActivity.class);
+				intent.putExtra(ARTICLE_ID_KEY, articleId);
+				intent.putExtra(SELECTED_LANG_KEY, lang);
+				activity.startActivity(intent);
+			}
 		} else {
 			WikiArticleHelper.warnAboutExternalLoad(url, activity, nightMode);
 		}
