@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.R;
 import net.osmand.plus.backup.ui.AuthorizeFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class TroubleshootingCard extends BasePurchasingCard {
@@ -16,7 +17,7 @@ public class TroubleshootingCard extends BasePurchasingCard {
 	public TroubleshootingCard(@NonNull FragmentActivity activity,
 							   @NonNull InAppPurchaseHelper purchaseHelper,
 							   boolean showPromoCodeBtn,
-	                           boolean usedOnMap) {
+							   boolean usedOnMap) {
 		super(activity, purchaseHelper, usedOnMap);
 		this.showPromoCodeBtn = showPromoCodeBtn;
 	}
@@ -34,7 +35,6 @@ public class TroubleshootingCard extends BasePurchasingCard {
 
 	protected void setupRedeemPromoCodeBtn() {
 		View redeemPromoCode = view.findViewById(R.id.redeem_promo_code);
-		redeemPromoCode.setVisibility(showPromoCodeBtn ? View.VISIBLE : View.GONE);
 		redeemPromoCode.setOnClickListener(v -> {
 			CardListener listener = getListener();
 			if (listener != null) {
@@ -42,5 +42,7 @@ public class TroubleshootingCard extends BasePurchasingCard {
 			}
 			AuthorizeFragment.showInstance(activity.getSupportFragmentManager(), true);
 		});
+		AndroidUiHelper.updateVisibility(redeemPromoCode, showPromoCodeBtn);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.redeem_promo_code_divider), showPromoCodeBtn);
 	}
 }
