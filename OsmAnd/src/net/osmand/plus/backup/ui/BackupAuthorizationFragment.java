@@ -19,10 +19,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ExportSettingsFragment;
@@ -30,7 +32,7 @@ import net.osmand.plus.settings.fragments.ExportSettingsFragment;
 import static net.osmand.plus.UiUtilities.setupDialogButton;
 import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
 
-public class BackupAuthorizationFragment extends BaseSettingsFragment {
+public class BackupAuthorizationFragment extends BaseSettingsFragment implements InAppPurchaseListener {
 
 	private static final String AUTHORIZE = "authorize";
 	private static final String LOCAL_BACKUP = "local_backup";
@@ -182,5 +184,30 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment {
 					.addToBackStack(SettingsScreenType.BACKUP_AUTHORIZATION.name())
 					.commit();
 		}
+	}
+
+	@Override
+	public void onError(InAppPurchaseTaskType taskType, String error) {
+
+	}
+
+	@Override
+	public void onGetItems() {
+
+	}
+
+	@Override
+	public void onItemPurchased(String sku, boolean active) {
+		updatePreference(findPreference(AUTHORIZE));
+	}
+
+	@Override
+	public void showProgress(InAppPurchaseTaskType taskType) {
+
+	}
+
+	@Override
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
+
 	}
 }
