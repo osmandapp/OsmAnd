@@ -46,7 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|center_vertical"
         android:textColor="?android:textColorSecondary"
-        android:layout_marginTop="@dimen/text_margin_small"
+        android:layout_marginTop="@dimen/map_small_button_margin"
+        android:lineSpacingMultiplier="@dimen/bottom_sheet_text_spacing_multiplier"
         android:textSize="@dimen/default_list_text_size"
         osmand:typeface="@string/font_roboto_regular"
         tools:text="@string/purchases_feature_desc_osmand_cloud" />

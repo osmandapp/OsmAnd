@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
@@ -229,16 +228,13 @@ public abstract class InAppPurchases {
 					expiredSubscriptions.add(s);
 				}
 			}
-			Collections.sort(expiredSubscriptions, new Comparator<InAppSubscription>() {
-				@Override
-				public int compare(InAppSubscription s1, InAppSubscription s2) {
-					int orderS1 = s1.getState().ordinal();
-					int orderS2 = s2.getState().ordinal();
-					if (orderS1 != orderS2) {
-						return (orderS1 < orderS2) ? -1 : ((orderS1 == orderS2) ? 0 : 1);
-					}
-					return Double.compare(s1.getMonthlyPriceValue(), s2.getMonthlyPriceValue());
+			Collections.sort(expiredSubscriptions, (s1, s2) -> {
+				int orderS1 = s1.getState().ordinal();
+				int orderS2 = s2.getState().ordinal();
+				if (orderS1 != orderS2) {
+					return (orderS1 < orderS2) ? -1 : ((orderS1 == orderS2) ? 0 : 1);
 				}
+				return Double.compare(s1.getMonthlyPriceValue(), s2.getMonthlyPriceValue());
 			});
 			return expiredSubscriptions.isEmpty() ? null : expiredSubscriptions.get(0);
 		}
@@ -469,15 +465,15 @@ public abstract class InAppPurchases {
 
 	public static class InAppSubscriptionIntroductoryInfo {
 
-		private InAppSubscription subscription;
+		private final InAppSubscription subscription;
 
-		private String introductoryPrice;
-		private long introductoryPriceAmountMicros;
-		private String introductoryPeriodString;
-		private int introductoryCycles;
+		private final String introductoryPrice;
+		private final long introductoryPriceAmountMicros;
+		private final String introductoryPeriodString;
+		private final int introductoryCycles;
 
-		private double introductoryPriceValue;
-		private Period introductoryPeriod;
+		private final double introductoryPriceValue;
+		private final Period introductoryPeriod;
 
 		public InAppSubscriptionIntroductoryInfo(@NonNull InAppSubscription subscription,
 												 String introductoryPrice,
@@ -646,6 +642,8 @@ public abstract class InAppPurchases {
 	}
 
 	public static abstract class InAppSubscription extends InAppPurchase {
+
+		private final static int MIN_SHOWN_DISCOUNT_PERCENT = 10;
 
 		private final Map<String, InAppSubscription> upgrades = new ConcurrentHashMap<>();
 		private final String skuNoVersion;
@@ -858,7 +856,7 @@ public abstract class InAppPurchases {
 			/*
 			try {
 				if (subscriptionPeriod != null && subscriptionPeriod.getUnit() == PeriodUnit.YEAR) {
-					introductoryInfo = new InAppSubscriptionIntroductoryInfo(this, "30 грн.", 30000000L, "P1Y", "1");
+					introductoryInfo = new InAppSubscriptionIntroductoryInfo(this, "50 EUR", 50000000L, "P1Y", 1);
 				}
 			} catch (ParseException e) {
 				//
@@ -897,12 +895,12 @@ public abstract class InAppPurchases {
 
 		public String getDiscountTitle(@NonNull Context ctx, @NonNull InAppSubscription monthlyLiveUpdates) {
 			int discountPercent = getDiscountPercent(monthlyLiveUpdates);
-			return discountPercent > 0 ? ctx.getString(R.string.osm_live_payment_discount_descr, discountPercent + "%") : "";
+			return discountPercent > MIN_SHOWN_DISCOUNT_PERCENT ? ctx.getString(R.string.osm_live_payment_discount_descr, discountPercent + "%") : "";
 		}
 
 		public String getDiscount(@NonNull InAppSubscription monthlyLiveUpdates) {
 			int discountPercent = getDiscountPercent(monthlyLiveUpdates);
-			return discountPercent > 0 ? "-" + discountPercent + "%" : "";
+			return discountPercent > MIN_SHOWN_DISCOUNT_PERCENT ? "-" + discountPercent + "%" : "";
 		}
 
 		public int getDiscountPercent(@NonNull InAppSubscription monthlyLiveUpdates) {
@@ -990,12 +988,12 @@ public abstract class InAppPurchases {
 
 		@Override
 		public String getDefaultPrice(Context ctx) {
-			return ctx.getString(R.string.osm_live_monthly_price);
+			return ctx.getString(R.string.osm_pro_monthly_price);
 		}
 
 		@Override
 		public String getDefaultMonthlyPrice(Context ctx) {
-			return ctx.getString(R.string.osm_live_monthly_price);
+			return ctx.getString(R.string.osm_pro_monthly_price);
 		}
 
 		@Override
@@ -1091,12 +1089,12 @@ public abstract class InAppPurchases {
 
 		@Override
 		public String getDefaultPrice(Context ctx) {
-			return ctx.getString(R.string.osm_live_annual_price);
+			return ctx.getString(R.string.osm_pro_annual_price);
 		}
 
 		@Override
 		public String getDefaultMonthlyPrice(Context ctx) {
-			return ctx.getString(R.string.osm_live_annual_monthly_price);
+			return ctx.getString(R.string.osm_pro_annual_monthly_price);
 		}
 
 		@Override
