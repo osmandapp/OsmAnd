@@ -511,6 +511,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 			return false;
 		}
 
+		@Override
+		public String getDefaultPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_monthly_price);
+		}
+
+		@Override
+		public String getDefaultMonthlyPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_monthly_price);
+		}
+
 		@Nullable
 		@Override
 		protected InAppSubscription newInstance(@NonNull String sku) {
@@ -539,6 +549,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		@Override
 		public boolean isLegacy() {
 			return false;
+		}
+
+		@Override
+		public String getDefaultPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_monthly_price);
+		}
+
+		@Override
+		public String getDefaultMonthlyPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_monthly_price);
 		}
 
 		@Nullable
@@ -571,6 +591,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 			return false;
 		}
 
+		@Override
+		public String getDefaultPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_annual_price);
+		}
+
+		@Override
+		public String getDefaultMonthlyPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_annual_monthly_price);
+		}
+
 		@Nullable
 		@Override
 		protected InAppSubscription newInstance(@NonNull String sku) {
@@ -601,6 +631,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 			return false;
 		}
 
+		@Override
+		public String getDefaultPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_annual_price);
+		}
+
+		@Override
+		public String getDefaultMonthlyPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_annual_monthly_price);
+		}
+
 		@Nullable
 		@Override
 		protected InAppSubscription newInstance(@NonNull String sku) {
@@ -629,6 +669,16 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		@Override
 		public boolean isLegacy() {
 			return false;
+		}
+
+		@Override
+		public String getDefaultPrice(Context ctx) {
+			return ctx.getString(R.string.osm_maps_plus_annual_price);
+		}
+
+		@Override
+		public String getDefaultMonthlyPrice(Context ctx) {
+			return ctx.getString(R.string.osm_maps_plus_annual_monthly_price);
 		}
 
 		@Override
