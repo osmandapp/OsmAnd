@@ -272,7 +272,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void setupVerifyEmailContainer(View view) {
-		TextView errorText = view.findViewById(R.id.error_text);
+		errorText = view.findViewById(R.id.error_text);
 		EditText editText = view.findViewById(R.id.edit_text);
 		View resendButton = view.findViewById(R.id.button);
 		View codeMissingButton = view.findViewById(R.id.code_missing_button);
