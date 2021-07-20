@@ -33,9 +33,9 @@ public class RouteGeometryWay extends
 	}
 
 	public void updateRoute(@NonNull RotatedTileBox tb, @NonNull RouteCalculationResult route) {
-		if (needUpdate || tb.getMapDensity() != getMapDensity() || this.route != route) {
+		if (coloringChanged || tb.getMapDensity() != getMapDensity() || this.route != route) {
 			this.route = route;
-			needUpdate = false;
+			coloringChanged = false;
 			List<Location> locations = route.getImmutableAllLocations();
 
 			if (coloringType.isGradient()) {

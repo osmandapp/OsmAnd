@@ -51,7 +51,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	}
 
 	public void updateSegment(RotatedTileBox tb, List<WptPt> points, List<RouteSegmentResult> routeSegments) {
-		if (tb.getMapDensity() != getMapDensity() || this.points != points || this.routeSegments != routeSegments) {
+		if (coloringChanged || tb.getMapDensity() != getMapDensity() || this.points != points || this.routeSegments != routeSegments) {
 			this.points = points;
 			this.routeSegments = routeSegments;
 

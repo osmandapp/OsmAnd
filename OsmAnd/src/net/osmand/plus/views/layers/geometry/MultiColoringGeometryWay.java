@@ -45,7 +45,7 @@ public abstract class MultiColoringGeometryWay
 	protected ColoringType coloringType;
 	protected String routeInfoAttribute;
 
-	protected boolean needUpdate;
+	protected boolean coloringChanged;
 
 	public MultiColoringGeometryWay(C context, D drawer) {
 		super(context, drawer);
@@ -57,7 +57,7 @@ public abstract class MultiColoringGeometryWay
 							   @Nullable @ColorInt Integer directionArrowColor,
 							   @NonNull ColoringType routeColoringType,
 							   @Nullable String routeInfoAttribute) {
-		this.needUpdate = this.coloringType != routeColoringType
+		this.coloringChanged = this.coloringType != routeColoringType
 				|| routeColoringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
 

@@ -458,7 +458,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				boolean showArrows = isShowArrowsForTrack(selectedGpxFile.getGpxFile());
-				String coloringTypeName = getAvailableColoringType(selectedGpxFile);
+				String coloringTypeName = getAvailableOrDefaultColoringType(selectedGpxFile);
 				ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
 
 				if (!showArrows || coloringType.isRouteInfoAttribute()
@@ -698,7 +698,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 										  Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 		QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
-		String coloringTypeName = getAvailableColoringType(selectedGpxFile);
+		String coloringTypeName = getAvailableOrDefaultColoringType(selectedGpxFile);
 		ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
 		String routeIndoAttribute = ColoringType.getRouteInfoAttribute(coloringTypeName);
 
@@ -771,15 +771,20 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return color != 0 ? color : defaultColor;
 	}
 
-	private String getAvailableColoringType(SelectedGpxFile selectedGpxFile) {
+	private String getAvailableOrDefaultColoringType(SelectedGpxFile selectedGpxFile) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+
+		if (hasTrackDrawInfoForTrack(gpxFile)) {
+			return trackDrawInfo.getColoringType().getName(trackDrawInfo.getRouteInfoAttribute());
+		}
+
 		GpxDataItem dataItem = null;
+		String defaultColoringType = ColoringType.TRACK_SOLID.getName(null);
 		ColoringType coloringType = null;
 		String routeInfoAttribute = null;
 		boolean isCurrentTrack = gpxFile.showCurrentTrack;
-		if (hasTrackDrawInfoForTrack(gpxFile)) {
-			return trackDrawInfo.getColoringType().getName(trackDrawInfo.getRouteInfoAttribute());
-		} else if (isCurrentTrack) {
+
+		if (isCurrentTrack) {
 			coloringType = currentTrackColoringTypePref.get();
 			routeInfoAttribute = currentTrackRouteInfoAttributePref.get();
 		} else {
@@ -789,21 +794,17 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				routeInfoAttribute = ColoringType.getRouteInfoAttribute(dataItem.getColoringType());
 			}
 		}
+
 		if (coloringType == null) {
-			return null;
-		} else if (coloringType.isGradient()
-				&& getCachedTrack(selectedGpxFile).isScaleTypeAvailable(coloringType.toGradientScaleType())) {
-			return coloringType.getName(null);
-		} else if (coloringType.isRouteInfoAttribute()) {
-			// todo
+			return defaultColoringType;
+		} else if (getCachedTrack(selectedGpxFile).isColoringTypeAvailable(coloringType, routeInfoAttribute)) {
+			return coloringType.getName(routeInfoAttribute);
 		} else {
-			if (isCurrentTrack) {
-				return null;
-			} else {
-				gpxDbHelper.updateColoringType(dataItem, null);
+			if (!isCurrentTrack) {
+				gpxDbHelper.updateColoringType(dataItem, defaultColoringType);
 			}
+			return defaultColoringType;
 		}
-		return null;
 	}
 
 	private String getTrackWidthName(GPXFile gpxFile, String defaultWidth) {

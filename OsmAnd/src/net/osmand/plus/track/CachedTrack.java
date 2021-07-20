@@ -1,16 +1,18 @@
 package net.osmand.plus.track;
 
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RouteStatisticsHelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class CachedTrack {
 
@@ -28,7 +31,7 @@ public class CachedTrack {
 	private final SelectedGpxFile selectedGpxFile;
 
 	private final Map<String, List<TrkSegment>> segmentsCache = new HashMap<>();
-	private Set<GradientScaleType> availableScaleTypes = null;
+	private Set<String> availableColoringTypes = null;
 
 	private final Map<Integer, List<RouteSegmentResult>> routeCache = new HashMap<>();
 
@@ -117,23 +120,45 @@ public class CachedTrack {
 		return simplifiedSegments;
 	}
 
-	public boolean isScaleTypeAvailable(@NonNull GradientScaleType scaleType) {
-		if (prevModifiedTime != selectedGpxFile.getGpxFile().modifiedTime || availableScaleTypes == null) {
-			defineAvailableScaleTypes();
+	public boolean isColoringTypeAvailable(@NonNull ColoringType coloringType, @Nullable String routeInfoAttribute) {
+		if (prevModifiedTime != selectedGpxFile.getGpxFile().modifiedTime || availableColoringTypes == null) {
+			availableColoringTypes = listAvailableColoringTypes();
 		}
-		return availableScaleTypes.contains(scaleType);
+		return availableColoringTypes.contains(coloringType.getName(routeInfoAttribute));
 	}
 
-	private void defineAvailableScaleTypes() {
-		GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(app);
-		availableScaleTypes = new HashSet<>();
-		if (analysis.isColorizationTypeAvailable(GradientScaleType.SPEED.toColorizationType())) {
-			availableScaleTypes.add(GradientScaleType.SPEED);
+	private Set<String> listAvailableColoringTypes() {
+		Set<String> availableColoringTypes = new HashSet<>();
+		availableColoringTypes.addAll(listAvailableStaticColoringTypes());
+		availableColoringTypes.addAll(listAvailableRouteInfoAttributes());
+		return availableColoringTypes;
+	}
+
+	private Set<String> listAvailableStaticColoringTypes() {
+		Set<String> availableStaticTypes = new HashSet<>();
+		for (ColoringType coloringType : ColoringType.getTrackColoringTypes()) {
+			if (!coloringType.isRouteInfoAttribute()
+					&& coloringType.isAvailableForDrawingTrack(app, selectedGpxFile, null)) {
+				availableStaticTypes.add(coloringType.getName(null));
+			}
 		}
-		if (analysis.isColorizationTypeAvailable(GradientScaleType.ALTITUDE.toColorizationType())) {
-			availableScaleTypes.add(GradientScaleType.ALTITUDE);
-			availableScaleTypes.add(GradientScaleType.SLOPE);
+		return availableStaticTypes;
+	}
+
+	private Set<String> listAvailableRouteInfoAttributes() {
+		Set<String> availableRouteInfoAttributes = new HashSet<>();
+		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
+		List<String> rendererRouteInfoAttribute =
+				RouteStatisticsHelper.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, true);
+
+		for (String routeInfoAttribute : rendererRouteInfoAttribute) {
+			if (ColoringType.ALTITUDE.isAvailableForDrawingTrack(app, selectedGpxFile, routeInfoAttribute)) {
+				availableRouteInfoAttributes.add(routeInfoAttribute);
+			}
 		}
+
+		return availableRouteInfoAttributes;
 	}
 
 	private void clearCaches() {
