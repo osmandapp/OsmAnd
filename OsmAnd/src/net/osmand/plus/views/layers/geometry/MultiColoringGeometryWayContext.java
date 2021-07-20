@@ -18,7 +18,11 @@ public abstract class MultiColoringGeometryWayContext extends GeometryWayContext
 		borderPaint = createBorderPaint();
 	}
 
-	public abstract Paint getStrokePaint();
+	@NonNull
+	public abstract Paint getCustomPaint();
+
+	@NonNull
+	public abstract Paint getDefaultPaint();
 
 	@NonNull
 	protected abstract ColoringType getDefaultColoringType();

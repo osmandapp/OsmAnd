@@ -16,8 +16,14 @@ public class RouteGeometryWayContext extends MultiColoringGeometryWayContext {
 
 	@NonNull
 	@Override
-	public Paint getStrokePaint() {
+	public Paint getCustomPaint() {
 		return getAttrs().customColorPaint;
+	}
+
+	@NonNull
+	@Override
+	public Paint getDefaultPaint() {
+		return getAttrs().paint;
 	}
 
 	@NonNull

@@ -30,8 +30,15 @@ public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
 		specialArrowBitmap = AndroidUtils.drawableToBitmap(ContextCompat.getDrawable(ctx, R.drawable.mm_special_arrow_up));
 	}
 
+	@NonNull
 	@Override
-	public Paint getStrokePaint() {
+	public Paint getCustomPaint() {
+		return strokePaint;
+	}
+
+	@NonNull
+	@Override
+	public Paint getDefaultPaint() {
 		return strokePaint;
 	}
 

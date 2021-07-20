@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.routing.RouteProvider;
+import net.osmand.router.RouteSegmentResult;
 
 import java.util.List;
 
@@ -13,9 +15,10 @@ import androidx.annotation.NonNull;
 public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayContext, GpxGeometryWayDrawer> {
 
 	private List<WptPt> points;
+	private List<RouteSegmentResult> routeSegments;
 
 	private static class GeometryWayWptPtProvider implements GeometryWayProvider {
-		private List<WptPt> points;
+		private final List<WptPt> points;
 
 		public GeometryWayWptPtProvider(@NonNull List<WptPt> points) {
 			this.points = points;
@@ -47,21 +50,33 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		return new GeometryArrowsStyle(getContext(), customDirectionArrowColor, customColor, customWidth);
 	}
 
-	public void updatePoints(RotatedTileBox tb, List<WptPt> points) {
-		if (tb.getMapDensity() != getMapDensity() || this.points != points) {
+	public void updateSegment(RotatedTileBox tb, List<WptPt> points, List<RouteSegmentResult> routeSegments) {
+		if (tb.getMapDensity() != getMapDensity() || this.points != points || this.routeSegments != routeSegments) {
 			this.points = points;
-			if (points != null) {
-				updateWay(new GeometryWayWptPtProvider(points), tb);
-			} else {
-				clearWay();
+			this.routeSegments = routeSegments;
+
+			if (coloringType.isTrackSolid() || coloringType.isGradient()) {
+				if (points != null) {
+					updateWay(new GeometryWayWptPtProvider(points), tb);
+				} else {
+					clearWay();
+				}
+			} else if (coloringType.isRouteInfoAttribute()) {
+				if (points != null && routeSegments != null) {
+					updateSolidMultiColorRoute(tb, RouteProvider.locationsFromWpts(points), routeSegments);
+				} else {
+					clearWay();
+				}
 			}
 		}
 	}
 
-	public void clearPoints() {
-		if (points != null) {
+	@Override
+	public void clearWay() {
+		if (points != null || routeSegments != null) {
 			points = null;
-			clearWay();
+			routeSegments = null;
+			super.clearWay();
 		}
 	}
 

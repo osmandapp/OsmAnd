@@ -15,16 +15,9 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.util.Pair;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
@@ -73,9 +66,6 @@ import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteColorize;
-import net.osmand.router.RouteColorize.ColorizationType;
-import net.osmand.router.RouteColorize.RouteColorizationPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -85,11 +75,16 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 
 import static net.osmand.GPXUtilities.calculateTrackBounds;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
@@ -463,16 +458,17 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 			for (SelectedGpxFile selectedGpxFile : selectedGPXFiles) {
 				boolean showArrows = isShowArrowsForTrack(selectedGpxFile.getGpxFile());
-				if (!showArrows || !QuadRect.trivialOverlap(correctedQuadRect, calculateTrackBounds(selectedGpxFile.getPointsToDisplay()))) {
+				String coloringTypeName = getAvailableColoringType(selectedGpxFile);
+				ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
+
+				if (!showArrows || coloringType.isRouteInfoAttribute()
+						|| !QuadRect.trivialOverlap(correctedQuadRect, calculateTrackBounds(selectedGpxFile.getPointsToDisplay()))) {
 					continue;
 				}
 				String width = getTrackWidthName(selectedGpxFile.getGpxFile(), defaultTrackWidthPref.get());
 				float trackWidth = getTrackWidth(width, defaultTrackWidth);
 				int trackColor = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
 				int arrowColor = UiUtilities.getContrastColor(view.getApplication(), trackColor, false);
-				String coloringTypeName = getAvailableColoringType(selectedGpxFile);
-				ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
-				String routeInfoAttribute = ColoringType.getRouteInfoAttribute(coloringTypeName);
 				List<TrkSegment> segments = coloringType.isGradient()
 						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType())
 						: selectedGpxFile.getPointsToDisplay();
@@ -701,11 +697,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack,
 										  Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		QuadRect correctedQuadRect = getCorrectedQuadRect(tileBox.getLatLonBounds());
 		String coloringTypeName = getAvailableColoringType(selectedGpxFile);
 		ColoringType coloringType = ColoringType.getNonNullTrackColoringTypeByName(coloringTypeName);
 		String routeIndoAttribute = ColoringType.getRouteInfoAttribute(coloringTypeName);
 
-		boolean visible = QuadRect.trivialOverlap(tileBox.getLatLonBounds(), calculateTrackBounds(selectedGpxFile.getPointsToDisplay()));
+		boolean visible = QuadRect.trivialOverlap(tileBox.getLatLonBounds(),
+				calculateTrackBounds(selectedGpxFile.getPointsToDisplay()));
 		if (!gpxFile.hasTrkPt() && coloringType.isGradient() || !visible) {
 			segmentsCache.remove(selectedGpxFile.getGpxFile().path);
 			return;
@@ -718,7 +716,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			segments.addAll(getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType()));
 		}
 
-		for (TrkSegment ts : segments) {
+		for (int segmentIdx = 0; segmentIdx < segments.size(); segmentIdx++) {
+			TrkSegment ts = segments.get(segmentIdx);
+
 			String width = getTrackWidthName(gpxFile, defaultTrackWidthPref.get());
 			int color = getTrackColor(gpxFile, ts.getColor(cachedColor));
 			if (ts.renderer == null && !ts.points.isEmpty()) {
@@ -734,15 +734,21 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			updatePaints(color, width, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox);
 			if (ts.renderer instanceof Renderable.RenderableSegment) {
 				Renderable.RenderableSegment renderableSegment = (Renderable.RenderableSegment) ts.renderer;
-				renderableSegment.setTrackColoringParams(coloringType, routeIndoAttribute, borderPaint, true);
-				renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
+				renderableSegment.setTrackColoringParams(coloringType, routeIndoAttribute, borderPaint);
+				if (coloringType.isRouteInfoAttribute()) {
+					renderableSegment.setRoute(getCachedTrack(selectedGpxFile).getCachedRouteSegments(segmentIdx));
+					renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect, 0,
+							paint.getColor(), paint.getStrokeWidth());
+				} else {
+					renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
+				}
 			}
 		}
 	}
 
 	private List<TrkSegment> getCachedSegments(SelectedGpxFile selectedGpxFile, GradientScaleType scaleType) {
 		CachedTrack cachedTrack = getCachedTrack(selectedGpxFile);
-		return cachedTrack.getCachedSegments(view.getZoom(), scaleType);
+		return cachedTrack.getCachedTrackSegments(view.getZoom(), scaleType);
 	}
 
 	private float getTrackWidth(String width, float defaultTrackWidth) {
@@ -861,6 +867,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return false;
 	}
 
+	@NonNull
 	private CachedTrack getCachedTrack(SelectedGpxFile selectedGpxFile) {
 		String path = selectedGpxFile.getGpxFile().path;
 		CachedTrack cachedTrack = segmentsCache.get(path);

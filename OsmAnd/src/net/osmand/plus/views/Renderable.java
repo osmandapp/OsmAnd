@@ -14,6 +14,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.views.layers.geometry.GpxGeometryWay;
+import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -59,6 +60,8 @@ public class Renderable {
 
     public static abstract class RenderableSegment {
 
+        private static final boolean DRAW_BORDER = true;
+
         protected static final int MIN_CULLER_ZOOM = 16;
         protected static final int BORDER_TYPE_ZOOM_THRESHOLD = MapTileLayer.DEFAULT_MAX_ZOOM + MapTileLayer.OVERZOOM_IN;
 
@@ -66,6 +69,8 @@ public class Renderable {
         protected List<WptPt> culled = new ArrayList<>();           // Reduced/resampled list of points
         protected int pointSize;
         protected double segmentSize;
+
+        protected List<RouteSegmentResult> routeSegments;
 
         protected QuadRect trackBounds;
         protected double zoom = -1;
@@ -76,7 +81,6 @@ public class Renderable {
         @NonNull
         protected ColoringType coloringType = ColoringType.TRACK_SOLID;
         protected String routeInfoAttribute = null;
-        protected boolean drawBorder = false;
 
         protected GpxGeometryWay geometryWay;
 
@@ -102,12 +106,10 @@ public class Renderable {
 
         public void setTrackColoringParams(@NonNull ColoringType coloringType,
                                            @Nullable String routeInfoAttribute,
-                                           @NonNull Paint borderPaint,
-                                           boolean shouldDrawBorder) {
+                                           @NonNull Paint borderPaint) {
             this.coloringType = coloringType;
             this.routeInfoAttribute = routeInfoAttribute;
             this.borderPaint = borderPaint;
-            this.drawBorder = shouldDrawBorder;
         }
 
         public GpxGeometryWay getGeometryWay() {
@@ -128,7 +130,7 @@ public class Renderable {
             updateLocalPaint(p);
             canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
             if (coloringType.isGradient()) {
-                if (drawBorder && zoom < BORDER_TYPE_ZOOM_THRESHOLD) {
+                if (DRAW_BORDER && zoom < BORDER_TYPE_ZOOM_THRESHOLD) {
                     drawSolid(points, borderPaint, canvas, tileBox);
                 }
                 drawGradient(zoom, points, paint, canvas, tileBox);
@@ -155,12 +157,16 @@ public class Renderable {
             return culled.isEmpty() ? points : culled;
         }
 
+        public void setRoute(List<RouteSegmentResult> routeSegments) {
+            this.routeSegments = routeSegments;
+        }
+
         public void drawGeometry(Canvas canvas, RotatedTileBox tileBox, QuadRect quadRect, int arrowColor, int trackColor, float trackWidth) {
             if (geometryWay != null) {
-                List<WptPt> points = getPointsForDrawing();
+                List<WptPt> points = coloringType.isRouteInfoAttribute() ? this.points : getPointsForDrawing();
                 if (!Algorithms.isEmpty(points)) {
                     geometryWay.setStyleParams(trackColor, trackWidth, arrowColor, coloringType, routeInfoAttribute);
-                    geometryWay.updatePoints(tileBox, points);
+                    geometryWay.updateSegment(tileBox, points, routeSegments);
                     geometryWay.drawSegments(tileBox, canvas, quadRect.top, quadRect.left, quadRect.bottom, quadRect.right, null, 0);
                 }
             }
@@ -199,7 +205,7 @@ public class Renderable {
 
         protected void drawGradient(double zoom, List<WptPt> pts, Paint p, Canvas canvas, RotatedTileBox tileBox) {
             QuadRect tileBounds = tileBox.getLatLonBounds();
-            boolean drawSegmentBorder = drawBorder && zoom >= BORDER_TYPE_ZOOM_THRESHOLD;
+            boolean drawSegmentBorder = DRAW_BORDER && zoom >= BORDER_TYPE_ZOOM_THRESHOLD;
             GradientScaleType scaleType = coloringType.toGradientScaleType();
             Path path = new Path();
             boolean recalculateLastXY = true;

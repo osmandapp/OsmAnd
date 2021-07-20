@@ -45,7 +45,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 	@Override
 	public void drawPath(Canvas canvas, DrawPathData pathData) {
-		Paint strokePaint = getContext().getStrokePaint();
+		Paint strokePaint = getContext().getCustomPaint();
 
 		if (coloringType.isCustomColor() || coloringType.isTrackSolid() || coloringType.isRouteInfoAttribute()) {
 			drawCustomSolid(canvas, pathData);
@@ -63,7 +63,7 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 	}
 
 	protected void drawCustomSolid(Canvas canvas, DrawPathData pathData) {
-		Paint paint = getContext().getStrokePaint();
+		Paint paint = getContext().getCustomPaint();
 		paint.setColor(pathData.style.color);
 		paint.setStrokeWidth(pathData.style.width);
 		canvas.drawPath(pathData.path, paint);

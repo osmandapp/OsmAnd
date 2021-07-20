@@ -6,9 +6,11 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.RouteProvider;
 import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.router.RouteColorize.RouteColorizationPoint;
+import net.osmand.router.RouteSegmentResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,8 +26,11 @@ public class CachedTrack {
 	private final OsmandApplication app;
 
 	private final SelectedGpxFile selectedGpxFile;
-	private final Map<String, List<TrkSegment>> cache = new HashMap<>();
+
+	private final Map<String, List<TrkSegment>> segmentsCache = new HashMap<>();
 	private Set<GradientScaleType> availableScaleTypes = null;
+
+	private final Map<Integer, List<RouteSegmentResult>> routeCache = new HashMap<>();
 
 	private long prevModifiedTime = -1;
 
@@ -34,21 +39,43 @@ public class CachedTrack {
 		this.selectedGpxFile = selectedGpxFile;
 	}
 
-	public List<TrkSegment> getCachedSegments(int zoom, @NonNull GradientScaleType scaleType) {
+	public List<RouteSegmentResult> getCachedRouteSegments(int nonEmptySegmentIdx) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+
+		if (prevModifiedTime == gpxFile.modifiedTime) {
+			List<RouteSegmentResult> routeSegments = routeCache.get(nonEmptySegmentIdx);
+			if (routeSegments == null) {
+				routeSegments = RouteProvider.parseOsmAndGPXRoute(new ArrayList<>(), gpxFile,
+						new ArrayList<>(), nonEmptySegmentIdx);
+				routeCache.put(nonEmptySegmentIdx, routeSegments);
+			}
+			return routeSegments;
+		} else {
+			clearCaches();
+			prevModifiedTime = gpxFile.modifiedTime;
+			List<RouteSegmentResult> routeSegments = RouteProvider.parseOsmAndGPXRoute(new ArrayList<>(),
+					gpxFile, new ArrayList<>(), nonEmptySegmentIdx);
+			routeCache.put(nonEmptySegmentIdx, routeSegments);
+			return routeSegments;
+		}
+	}
+
+	public List<TrkSegment> getCachedTrackSegments(int zoom, @NonNull GradientScaleType scaleType) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 		String trackId = zoom + "_" + scaleType.toString();
+
 		if (prevModifiedTime == gpxFile.modifiedTime) {
-			List<TrkSegment> segments = cache.get(trackId);
+			List<TrkSegment> segments = segmentsCache.get(trackId);
 			if (segments == null) {
 				segments = calculateGradientTrack(selectedGpxFile, zoom, scaleType);
-				cache.put(trackId, segments);
+				segmentsCache.put(trackId, segments);
 			}
 			return segments;
 		} else {
-			cache.clear();
+			clearCaches();
 			prevModifiedTime = gpxFile.modifiedTime;
 			List<TrkSegment> segments = calculateGradientTrack(selectedGpxFile, zoom, scaleType);
-			cache.put(trackId, segments);
+			segmentsCache.put(trackId, segments);
 			return segments;
 		}
 	}
@@ -107,5 +134,10 @@ public class CachedTrack {
 			availableScaleTypes.add(GradientScaleType.ALTITUDE);
 			availableScaleTypes.add(GradientScaleType.SLOPE);
 		}
+	}
+
+	private void clearCaches() {
+		segmentsCache.clear();
+		routeCache.clear();
 	}
 }

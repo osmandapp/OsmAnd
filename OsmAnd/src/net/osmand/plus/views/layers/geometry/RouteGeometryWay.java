@@ -41,7 +41,7 @@ public class RouteGeometryWay extends
 			if (coloringType.isGradient()) {
 				updateGradientRoute(tb, locations);
 			} else if (coloringType.isRouteInfoAttribute()) {
-				updateSolidMultiColorRoute(tb, route);
+				updateSolidMultiColorRoute(tb, locations, route.getOriginalRoute());
 			} else {
 				updateWay(locations, tb);
 			}

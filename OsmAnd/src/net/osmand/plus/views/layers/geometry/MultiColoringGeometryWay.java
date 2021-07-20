@@ -12,7 +12,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteColorize;
@@ -108,8 +107,9 @@ public abstract class MultiColoringGeometryWay
 		return styleMap;
 	}
 
-	protected void updateSolidMultiColorRoute(RotatedTileBox tileBox, RouteCalculationResult route) {
-		List<Integer> colors = getRouteInfoAttributesColors(route);
+	protected void updateSolidMultiColorRoute(RotatedTileBox tileBox, List<Location> locations,
+											  List<RouteSegmentResult> routeSegments) {
+		List<Integer> colors = getRouteInfoAttributesColors(locations, routeSegments);
 		if (Algorithms.isEmpty(colors)) {
 			updateWay(Collections.emptyList(), Collections.emptyMap(), tileBox);
 			return;
@@ -128,12 +128,10 @@ public abstract class MultiColoringGeometryWay
 			}
 		}
 
-		updateWay(route.getImmutableAllLocations(), styleMap, tileBox);
+		updateWay(locations, styleMap, tileBox);
 	}
 
-	private List<Integer> getRouteInfoAttributesColors(RouteCalculationResult route) {
-		List<Location> locations = route.getImmutableAllLocations();
-		List<RouteSegmentResult> routeSegments = route.getOriginalRoute();
+	private List<Integer> getRouteInfoAttributesColors(List<Location> locations, List<RouteSegmentResult> routeSegments) {
 		if (Algorithms.isEmpty(routeSegments)) {
 			return Collections.emptyList();
 		}
@@ -170,10 +168,10 @@ public abstract class MultiColoringGeometryWay
 		return colors;
 	}
 
-	private int getIdxOfFirstSegmentLocation(List<Location> locations, List<RouteSegmentResult> routeSegments) {
+	protected int getIdxOfFirstSegmentLocation(List<Location> locations, List<RouteSegmentResult> routeSegments) {
 		int locationsIdx = 0;
 		LatLon segmentStartPoint = routeSegments.get(0).getStartPoint();
-		while (true) {
+		while (locationsIdx < locations.size()) {
 			Location location = locations.get(locationsIdx);
 			if (location.getLatitude() == segmentStartPoint.getLatitude()
 					&& location.getLongitude() == segmentStartPoint.getLongitude()) {
@@ -181,7 +179,7 @@ public abstract class MultiColoringGeometryWay
 			}
 			locationsIdx++;
 		}
-		return locationsIdx;
+		return locationsIdx == locations.size() ? 0 : locationsIdx;
 	}
 
 	private RouteStatisticComputer createRouteStatisticsComputer() {
@@ -254,7 +252,7 @@ public abstract class MultiColoringGeometryWay
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
-		Paint paint = getContext().getAttrs().paint;
+		Paint paint = getContext().getDefaultPaint();
 		int color = customColor != null ? customColor : paint.getColor();
 		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
 		if (coloringType.isGradient()) {
@@ -265,14 +263,14 @@ public abstract class MultiColoringGeometryWay
 
 	@NonNull
 	public GeometrySolidWayStyle<C> getSolidWayStyle(int lineColor) {
-		Paint paint = getContext().getAttrs().paint;
+		Paint paint = getContext().getDefaultPaint();
 		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
 		return new GeometrySolidWayStyle<>(getContext(), lineColor, width, customDirectionArrowColor);
 	}
 
 	@NonNull
 	public GeometryGradientWayStyle getGradientWayStyle() {
-		Paint paint = getContext().getAttrs().paint;
+		Paint paint = getContext().getDefaultPaint();
 		int color = customColor != null ? customColor : paint.getColor();
 		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
 		return new GeometryGradientWayStyle(getContext(), color, width);
