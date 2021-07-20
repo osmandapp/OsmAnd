@@ -106,14 +106,14 @@
 		<attr name="wikivoyage_travel_card_stroke_bg" format="reference"/>
 		<attr name="wikivoyage_secondary_btn_bg" format="reference"/>
 		<attr name="wikivoyage_primary_btn_bg" format="reference"/>
+
         <attr name="purchase_dialog_shadow_btn_bg" format="reference"/>
 		<attr name="purchase_dialog_outline_btn_bg" format="reference"/>
+        <attr name="purchase_dialog_active_card_bg" format="reference"/>
 
         <attr name="bottom_bar_background_color" format="color" />
 
         <attr name="bottom_nav_shadow" format="reference"/>
-
-        <attr name="purchase_dialog_active_card_bg" format="reference"/>
 
 		<attr name="text_rounded_bg_regular" format="reference" />
 		<attr name="text_rounded_bg_active" format="reference" />

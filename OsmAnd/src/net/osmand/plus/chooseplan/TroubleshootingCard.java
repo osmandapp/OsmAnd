@@ -15,8 +15,9 @@ public class TroubleshootingCard extends BasePurchasingCard {
 
 	public TroubleshootingCard(@NonNull FragmentActivity activity,
 							   @NonNull InAppPurchaseHelper purchaseHelper,
-							   boolean showPromoCodeBtn) {
-		super(activity, purchaseHelper);
+							   boolean showPromoCodeBtn,
+	                           boolean usedOnMap) {
+		super(activity, purchaseHelper, usedOnMap);
 		this.showPromoCodeBtn = showPromoCodeBtn;
 	}
 

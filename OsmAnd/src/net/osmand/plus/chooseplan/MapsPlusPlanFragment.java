@@ -44,11 +44,6 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 	}
 
 	@Override
-	protected int getHeaderBgColorId() {
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-	}
-
-	@Override
 	protected String getHeader() {
 		return getString(R.string.maps_plus);
 	}
@@ -61,11 +56,6 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 	@Override
 	protected int getHeaderIconId() {
 		return R.drawable.ic_action_osmand_maps_plus;
-	}
-
-	@Override
-	protected Drawable getPreviewListCheckmark() {
-		return getContentIcon(R.drawable.ic_action_done);
 	}
 
 	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {

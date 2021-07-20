@@ -23,8 +23,10 @@ public abstract class BasePurchasingCard extends BaseCard {
 
 	protected InAppPurchaseHelper purchaseHelper;
 
-	public BasePurchasingCard(@NonNull FragmentActivity activity, @NonNull InAppPurchaseHelper purchaseHelper) {
-		super(activity, false);
+	public BasePurchasingCard(@NonNull FragmentActivity activity,
+	                          @NonNull InAppPurchaseHelper purchaseHelper,
+	                          boolean usedOnMap) {
+		super(activity, usedOnMap);
 		this.purchaseHelper = purchaseHelper;
 	}
 

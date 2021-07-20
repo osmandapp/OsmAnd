@@ -205,7 +205,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		ImageView ivCheckmark = itemView.findViewById(R.id.checkmark);
 		if (includedFeatures.contains(feature)) {
 			ivCheckmark.setVisibility(View.VISIBLE);
-			ivCheckmark.setImageDrawable(getPreviewListCheckmark());
+			ivCheckmark.setImageDrawable(getCheckmark());
 		} else {
 			ivCheckmark.setVisibility(View.GONE);
 		}
@@ -268,7 +268,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 				ivCheckmark.setImageDrawable(getEmptyCheckmark());
 				normal = new ColorDrawable(Color.TRANSPARENT);
 			}
-			setupRoundedBackground(itemView, normal, colorNoAlpha);
+			setupRoundedBackground(itemView, normal, colorNoAlpha, ButtonBackground.ROUNDED);
 		}
 
 		if (selectedPriceButton != null) {
@@ -291,9 +291,8 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		});
 
 		int activeColor = ContextCompat.getColor(app, getActiveColorId(nightMode));
-		Drawable normal = createRoundedDrawable(activeColor);
-		;
-		setupRoundedBackground(itemView, normal, activeColor);
+		Drawable normal = createRoundedDrawable(activeColor, ButtonBackground.ROUNDED_SMALL);
+		setupRoundedBackground(itemView, normal, activeColor, ButtonBackground.ROUNDED_SMALL);
 	}
 
 	private void setupDescription() {
@@ -312,7 +311,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	private void setupRestoreButton() {
 		View button = mainView.findViewById(R.id.button_restore);
 		button.setOnClickListener(v -> purchaseHelper.requestInventory());
-		setupRoundedBackground(button);
+		setupRoundedBackground(button, ButtonBackground.ROUNDED_SMALL);
 	}
 
 	private void createIncludesList() {
@@ -355,7 +354,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 				R.color.maps_plus_item_bg :
 				R.color.osmand_pro_item_bg);
 		int color = UiUtilities.getColorWithAlpha(iconBgColor, 0.2f);
-		AndroidUtils.setBackground(itemView.findViewById(R.id.icon_background), createRoundedDrawable(color));
+		AndroidUtils.setBackground(itemView.findViewById(R.id.icon_background), createRoundedDrawable(color, ButtonBackground.ROUNDED));
 	}
 
 	protected Drawable getCheckmark() {
@@ -376,13 +375,13 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		return nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
 	}
 
+	protected int getHeaderBgColorId() {
+		return nightMode ? R.color.purchase_sc_feature_list_bg_dark : R.color.purchase_sc_feature_list_bg_light;
+	}
+
 	protected abstract void collectPriceButtons(List<PriceButton<?>> priceButtons);
 
 	protected abstract void collectFeatures();
-
-	protected abstract Drawable getPreviewListCheckmark();
-
-	protected abstract int getHeaderBgColorId();
 
 	protected abstract String getHeader();
 
