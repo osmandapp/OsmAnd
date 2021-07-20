@@ -230,7 +230,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
-		updateAdapter();
+		backupHelper.prepareBackup();
 	}
 
 	@Override

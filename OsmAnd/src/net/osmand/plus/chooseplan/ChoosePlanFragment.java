@@ -60,7 +60,6 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		return R.layout.fragment_choose_plan;
 	}
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -138,7 +137,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 
 		FrameLayout iconBg = mainView.findViewById(R.id.header_icon_background);
 		int color = AndroidUtils.getColorFromAttr(mainView.getContext(), R.attr.activity_background_color);
-		AndroidUtils.setBackground(iconBg, createRoundedDrawable(color));
+		AndroidUtils.setBackground(iconBg, createRoundedDrawable(color, ButtonBackground.ROUNDED));
 	}
 
 	@Override
@@ -160,14 +159,14 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	private void setupLaterButton() {
 		View button = mainView.findViewById(R.id.button_later);
 		button.setOnClickListener(v -> dismiss());
-		setupRoundedBackground(button);
+		setupRoundedBackground(button, ButtonBackground.ROUNDED_SMALL);
 	}
 
 	private void createTroubleshootingCard() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FrameLayout container = mainView.findViewById(R.id.troubleshooting_card);
-			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, !Version.isGooglePlayEnabled());
+			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, !Version.isGooglePlayEnabled(), usedOnMap);
 			card.setListener(this);
 			container.addView(card.build(activity));
 		}
@@ -263,7 +262,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageResource(iconId);
 
-		setupRoundedBackground(view, colorNoAlpha);
+		setupRoundedBackground(view, colorNoAlpha, ButtonBackground.ROUNDED_SMALL);
 		view.setOnClickListener(listener);
 		view.setEnabled(available);
 	}

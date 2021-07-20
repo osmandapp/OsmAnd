@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
@@ -989,12 +988,12 @@ public abstract class InAppPurchases {
 
 		@Override
 		public String getDefaultPrice(Context ctx) {
-			return ctx.getString(R.string.osm_live_monthly_price);
+			return ctx.getString(R.string.osm_pro_monthly_price);
 		}
 
 		@Override
 		public String getDefaultMonthlyPrice(Context ctx) {
-			return ctx.getString(R.string.osm_live_monthly_price);
+			return ctx.getString(R.string.osm_pro_monthly_price);
 		}
 
 		@Override
@@ -1090,12 +1089,12 @@ public abstract class InAppPurchases {
 
 		@Override
 		public String getDefaultPrice(Context ctx) {
-			return ctx.getString(R.string.osm_live_annual_price);
+			return ctx.getString(R.string.osm_pro_annual_price);
 		}
 
 		@Override
 		public String getDefaultMonthlyPrice(Context ctx) {
-			return ctx.getString(R.string.osm_live_annual_monthly_price);
+			return ctx.getString(R.string.osm_pro_annual_monthly_price);
 		}
 
 		@Override
