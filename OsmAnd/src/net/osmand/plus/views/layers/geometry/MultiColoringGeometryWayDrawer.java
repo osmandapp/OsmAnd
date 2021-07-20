@@ -34,10 +34,12 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 	@Override
 	protected void drawFullBorder(Canvas canvas, int zoom, List<DrawPathData> pathsData) {
-		if (DRAW_BORDER && zoom < BORDER_TYPE_ZOOM_THRESHOLD && shouldDrawBorder()) {
+		if (DRAW_BORDER && zoom < BORDER_TYPE_ZOOM_THRESHOLD && requireDrawingBorder()) {
 			Path fullPath = new Path();
 			for (DrawPathData data : pathsData) {
-				fullPath.addPath(data.path);
+				if (data.style.color != 0) {
+					fullPath.addPath(data.path);
+				}
 			}
 			canvas.drawPath(fullPath, getContext().getBorderPaint());
 		}
@@ -71,12 +73,14 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 	@Override
 	protected void drawSegmentBorder(Canvas canvas, int zoom, DrawPathData pathData) {
-		if (DRAW_BORDER && zoom >= BORDER_TYPE_ZOOM_THRESHOLD && shouldDrawBorder()) {
-			canvas.drawPath(pathData.path, getContext().getBorderPaint());
+		if (DRAW_BORDER && zoom >= BORDER_TYPE_ZOOM_THRESHOLD && requireDrawingBorder()) {
+			if (pathData.style.color != 0) {
+				canvas.drawPath(pathData.path, getContext().getBorderPaint());
+			}
 		}
 	}
 
-	private boolean shouldDrawBorder() {
+	private boolean requireDrawingBorder() {
 		return coloringType.isGradient() || coloringType.isRouteInfoAttribute();
 	}
 }
