@@ -69,7 +69,6 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 			if (displayHelper != null) {
 				gpxFile = displayHelper.getGpx();
 			}
-			((TrackMenuFragment) targetFragment).dismiss();
 		}
 	}
 
@@ -246,6 +245,13 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 
 	private String getColoredContent(String content) {
 		return "<body style=\"color:white;\">\n" + content + "</body>\n";
+	}
+
+	public void dismissTargetFragment() {
+		Fragment target = getTargetFragment();
+		if (target instanceof TrackMenuFragment) {
+			((TrackMenuFragment) target).dismiss();
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity,

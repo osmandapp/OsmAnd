@@ -68,6 +68,7 @@ public class ArticleWebViewClient extends WebViewClient {
 			startActivity(intent);
 			return true;
 		} else if (url.contains(PREFIX_GEO)) {
+			fragment.dismissTargetFragment();
 			String coordinates = url.replace(PREFIX_GEO, "");
 			WptPt gpxPoint = WikivoyageUtils.findNearestPoint(gpxFile.getPoints(), coordinates);
 			if (gpxPoint != null) {
