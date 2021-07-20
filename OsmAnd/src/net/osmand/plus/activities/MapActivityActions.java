@@ -901,7 +901,7 @@ public class MapActivityActions implements DialogProvider {
 					}).createItem());
 		}
 
-		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_navigation, mapActivity)
 				.setId(DRAWER_DIRECTIONS_ID)
 				.setIcon(R.drawable.ic_action_gdirections_dark)
 				.setListener(new ItemClickListener() {
