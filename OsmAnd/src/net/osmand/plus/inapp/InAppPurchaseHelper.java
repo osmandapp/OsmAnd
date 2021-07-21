@@ -90,6 +90,7 @@ public abstract class InAppPurchaseHelper {
 
 	static class SubscriptionStateHolder {
 		SubscriptionState state = SubscriptionState.UNDEFINED;
+		long startTime = 0;
 		long expireTime = 0;
 	}
 
@@ -520,14 +521,12 @@ public abstract class InAppPurchaseHelper {
 				JSONObject subObj = subArrJson.getJSONObject(i);
 				String sku = subObj.getString("sku");
 				String state = subObj.getString("state");
-				long expireTime = 0;
-				if (subObj.has("expire_time")) {
-					expireTime = subObj.getLong("expire_time");
-				}
+
 				if (!Algorithms.isEmpty(sku) && !Algorithms.isEmpty(state)) {
 					SubscriptionStateHolder stateHolder = new SubscriptionStateHolder();
 					stateHolder.state = SubscriptionState.getByStateStr(state);
-					stateHolder.expireTime = expireTime;
+					stateHolder.startTime = subObj.optLong("start_time");
+					stateHolder.expireTime = subObj.optLong("expire_time");
 					subscriptionStateMap.put(sku, stateHolder);
 				}
 			}
@@ -585,7 +584,12 @@ public abstract class InAppPurchaseHelper {
 					if (subscriptionsState != null) {
 						Map<String, SubscriptionStateHolder> subscriptionStateMap = parseSubscriptionStates(subscriptionsState);
 						SubscriptionStateHolder promoState = subscriptionStateMap.get("promo_website");
-						return promoState != null && promoState.state.isActive();
+						if (promoState != null) {
+							ctx.getSettings().BACKUP_PROMOCODE_STATE.set(promoState.state);
+							ctx.getSettings().BACKUP_PROMOCODE_START_TIME.set(promoState.startTime);
+							ctx.getSettings().BACKUP_PROMOCODE_EXPIRE_TIME.set(promoState.expireTime);
+							return promoState.state.isActive();
+						}
 					}
 				}
 				return false;

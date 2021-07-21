@@ -18,7 +18,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -30,17 +29,17 @@ import net.osmand.plus.chooseplan.PurchasingCard;
 import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
+import java.util.List;
 
 public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
 
-	private static final Log log = PlatformUtil.getLog(PurchasesFragment.class);
 	public static final String TAG = PurchasesFragment.class.getName();
 
 	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases";
@@ -49,41 +48,36 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	private InAppPurchaseHelper purchaseHelper;
 
 	private ViewGroup cardsContainer;
-	private SubscriptionsCard subscriptionsCard;
 
 	private boolean nightMode;
 
-	public static boolean showInstance(FragmentManager fragmentManager) {
-		try {
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 			PurchasesFragment fragment = new PurchasesFragment();
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			log.error(e);
-			return false;
 		}
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		app = requireMyApplication();
+		nightMode = !app.getSettings().isLightContent();
 	}
 
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		app = getMyApplication();
-		nightMode = !app.getSettings().isLightContent();
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 
-		View mainView = themedInflater.inflate(R.layout.purchases_layout, container, false);
-		AndroidUtils.addStatusBarPadding21v(getActivity(), mainView);
-		createToolbar(mainView, nightMode);
-		cardsContainer = mainView.findViewById(R.id.cards_container);
+		View view = themedInflater.inflate(R.layout.purchases_layout, container, false);
+		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+		createToolbar(view, nightMode);
+		cardsContainer = view.findViewById(R.id.cards_container);
 
-		return mainView;
+		return view;
 	}
 
 	@Override
@@ -95,19 +89,23 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	private void updateCards() {
 		MapActivity mapActivity = getMapActivity();
 		purchaseHelper = getInAppPurchaseHelper();
-		cardsContainer.removeAllViews();
 		if (mapActivity == null || purchaseHelper == null) {
 			return;
 		}
+		cardsContainer.removeAllViews();
 
-		boolean hasPurchases = !Algorithms.isEmpty(purchaseHelper.getEverMadeMainPurchases());
-		if (hasPurchases) {
-			subscriptionsCard = new SubscriptionsCard(mapActivity, this, purchaseHelper);
-			cardsContainer.addView(subscriptionsCard.build(mapActivity));
+		List<InAppPurchase> mainPurchases = purchaseHelper.getEverMadeMainPurchases();
+		for (int i = 0; i < mainPurchases.size(); i++) {
+			InAppPurchase purchase = mainPurchases.get(i);
+			cardsContainer.addView(new InAppPurchaseCard(mapActivity, purchaseHelper, purchase).build(mapActivity));
+		}
+		boolean promoActive = app.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
+		if (promoActive) {
+			cardsContainer.addView(new PromoPurchaseCard(mapActivity).build(mapActivity));
 		}
 
 		BaseCard purchaseCard;
-		if (Version.isPaidVersion(app) || hasPurchases) {
+		if (Version.isPaidVersion(app) || !Algorithms.isEmpty(mainPurchases) || !promoActive) {
 			purchaseCard = new TroubleshootingCard(mapActivity, purchaseHelper, false, false);
 		} else {
 			purchaseCard = new PurchasingCard(mapActivity, purchaseHelper, false);
