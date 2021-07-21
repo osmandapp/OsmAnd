@@ -737,7 +737,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				renderableSegment.setTrackColoringParams(coloringType, routeIndoAttribute, borderPaint);
 				if (coloringType.isRouteInfoAttribute()) {
 					renderableSegment.setRoute(getCachedTrack(selectedGpxFile).getCachedRouteSegments(segmentIdx));
-					renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect, 0,
+					renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect, Color.BLACK,
 							paint.getColor(), paint.getStrokeWidth());
 				} else {
 					renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);

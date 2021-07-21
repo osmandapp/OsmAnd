@@ -1,6 +1,7 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -9,6 +10,7 @@ import android.graphics.Shader;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
@@ -82,5 +84,28 @@ public class MultiColoringGeometryWayDrawer<T extends MultiColoringGeometryWayCo
 
 	private boolean requireDrawingBorder() {
 		return coloringType.isGradient() || coloringType.isRouteInfoAttribute();
+	}
+
+	@Override
+	protected PathPoint getArrowPathPoint(float iconx, float icony, GeometryWayStyle<?> style, double angle) {
+		return new ColorDependentArrowPathPoint(iconx, icony, angle, style);
+	}
+
+	protected static class ColorDependentArrowPathPoint extends PathPoint {
+
+		public ColorDependentArrowPathPoint(float x, float y, double angle, GeometryWayStyle<?> style) {
+			super(x, y, angle, style);
+		}
+
+		@Override
+		void draw(Canvas canvas, GeometryWayContext context) {
+			if (shouldDrawArrow()) {
+				super.draw(canvas, context);
+			}
+		}
+
+		protected boolean shouldDrawArrow() {
+			return !Algorithms.objectEquals(style.color, Color.TRANSPARENT);
+		}
 	}
 }

@@ -29,7 +29,7 @@ public class GpxGeometryWayDrawer extends MultiColoringGeometryWayDrawer<GpxGeom
 		return new ArrowPathPoint(iconx, icony, angle, style);
 	}
 
-	private static class ArrowPathPoint extends PathPoint {
+	private static class ArrowPathPoint extends ColorDependentArrowPathPoint {
 
 		ArrowPathPoint(float x, float y, double angle, GeometryWayStyle<?> style) {
 			super(x, y, angle, style);
@@ -37,7 +37,7 @@ public class GpxGeometryWayDrawer extends MultiColoringGeometryWayDrawer<GpxGeom
 
 		@Override
 		void draw(Canvas canvas, GeometryWayContext context) {
-			if (style instanceof GeometryArrowsStyle) {
+			if (style instanceof GeometryArrowsStyle && shouldDrawArrow()) {
 				Context ctx = style.getCtx();
 				GeometryArrowsStyle arrowsWayStyle = (GeometryArrowsStyle) style;
 				Bitmap bitmap = style.getPointBitmap();
