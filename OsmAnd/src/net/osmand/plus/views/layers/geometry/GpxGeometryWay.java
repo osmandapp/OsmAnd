@@ -94,9 +94,6 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 		public static final int OUTER_CIRCLE_COLOR = 0x33000000;
 
-		protected int directionArrowColor;
-		protected int trackColor;
-		protected float trackWidth;
 		protected boolean hasPathLine;
 
 		private final float trackWidthThresholdPix;
@@ -107,9 +104,6 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 							int trackColor, float trackWidth, boolean hasPathLine) {
 			super(context, trackColor, trackWidth, directionArrowColor);
 
-			this.directionArrowColor = directionArrowColor;
-			this.trackColor = trackColor;
-			this.trackWidth = trackWidth;
 			this.hasPathLine = hasPathLine;
 
 			this.innerCircleRadius = AndroidUtils.dpToPx(context.getCtx(), 7);
@@ -140,15 +134,15 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 		@Override
 		public Integer getPointColor() {
-			return directionArrowColor;
+			return directionArrowsColor;
 		}
 
 		public int getTrackColor() {
-			return trackColor;
+			return color;
 		}
 
 		public float getTrackWidth() {
-			return trackWidth;
+			return width;
 		}
 
 		public float getOuterCircleRadius() {
@@ -160,14 +154,14 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		}
 
 		public boolean useSpecialArrow() {
-			return trackWidth <= trackWidthThresholdPix;
+			return getTrackWidth() <= trackWidthThresholdPix;
 		}
 
 		@Override
 		public double getPointStepPx(double zoomCoef) {
 			return useSpecialArrow() ?
 					getPointBitmap().getHeight() * SPECIAL_ARROW_DISTANCE_MULTIPLIER :
-					getPointBitmap().getHeight() + trackWidth * ARROW_DISTANCE_MULTIPLIER;
+					getPointBitmap().getHeight() + getTrackWidth() * ARROW_DISTANCE_MULTIPLIER;
 		}
 	}
 }

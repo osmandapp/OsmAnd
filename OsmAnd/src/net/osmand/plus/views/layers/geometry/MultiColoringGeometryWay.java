@@ -38,8 +38,8 @@ public abstract class MultiColoringGeometryWay
 		<C extends MultiColoringGeometryWayContext, D extends MultiColoringGeometryWayDrawer<C>> extends
 		GeometryWay<C, D> {
 
-	protected Integer customColor;
-	protected Float customWidth;
+	protected int customColor;
+	protected float customWidth;
 	protected Integer customDirectionArrowColor;
 	@NonNull
 	protected ColoringType coloringType;
@@ -252,28 +252,20 @@ public abstract class MultiColoringGeometryWay
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
-		Paint paint = getContext().getDefaultPaint();
-		int color = customColor != null ? customColor : paint.getColor();
-		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
 		if (coloringType.isGradient()) {
-			return new GeometryGradientWayStyle(getContext(), color, width);
+			return new GeometryGradientWayStyle(getContext(), customColor, customWidth);
 		}
-		return new GeometrySolidWayStyle<>(getContext(), color, width, customDirectionArrowColor);
+		return new GeometrySolidWayStyle<>(getContext(), customColor, customWidth, customDirectionArrowColor);
 	}
 
 	@NonNull
 	public GeometrySolidWayStyle<C> getSolidWayStyle(int lineColor) {
-		Paint paint = getContext().getDefaultPaint();
-		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
-		return new GeometrySolidWayStyle<>(getContext(), lineColor, width, customDirectionArrowColor);
+		return new GeometrySolidWayStyle<>(getContext(), lineColor, customWidth, customDirectionArrowColor);
 	}
 
 	@NonNull
 	public GeometryGradientWayStyle getGradientWayStyle() {
-		Paint paint = getContext().getDefaultPaint();
-		int color = customColor != null ? customColor : paint.getColor();
-		float width = customWidth != null ? customWidth : paint.getStrokeWidth();
-		return new GeometryGradientWayStyle(getContext(), color, width);
+		return new GeometryGradientWayStyle(getContext(), customColor, customWidth);
 	}
 
 	private GradientGeometryWayProvider getGradientLocationProvider() {
@@ -370,7 +362,7 @@ public abstract class MultiColoringGeometryWay
 
 	public static class GeometrySolidWayStyle<T extends MultiColoringGeometryWayContext> extends GeometryWayStyle<T> {
 
-		private final Integer directionArrowsColor;
+		protected final Integer directionArrowsColor;
 
 		GeometrySolidWayStyle(T context, Integer color, Float width, Integer directionArrowsColor) {
 			super(context, color, width);
