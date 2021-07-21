@@ -14,6 +14,7 @@
     <string name="osm_live">OsmAnd Live</string>
     <string name="osmand_pro">OsmAnd Pro</string>
     <string name="maps_plus">Maps+</string>
+    <string name="promo">Promo</string>
     <string name="openstreetmap_copyright"><a href="https://www.openstreetmap.org/copyright">&#169; OpenStreetMap</a></string>
     <string name="support_email">support@osmand.net</string>
     <string name="preferred_locale_no_translate">Display language</string>
