@@ -1187,7 +1187,7 @@
     <string name="voice_pref_title">گفتار</string>
     <string name="misc_pref_title">متفرقه</string>
     <string name="localization_pref_title">بومی‌سازی</string>
-    <string name="interrupt_music_descr">پیام‌های گفتاری پخش موسیقی را قطع می‌کند.</string>
+    <string name="interrupt_music_descr">پیام‌های گفتاری پخش موسیقی را نگه می‌دارد.</string>
     <string name="interrupt_music">مکث موسیقی</string>
     <string name="share_route_as_gpx">هم‌رسانی مسیر در قالب پروندهٔ GPX</string>
     <string name="share_route_subject">مسیر از طریق OsmAnd هم‌رسانی شد</string>
@@ -4144,7 +4144,7 @@
     <string name="verification_code_missing">کد تأییدی دریافت نکردم</string>
     <string name="verification_code_missing_description">ممکن است ۱۰ دقیقه طول بکشد. اگر در پوشهٔ هرزنامه هم نیست دکمهٔ زیر را بزنید.</string>
     <string name="select_nav_profile_dialog_message">«نوع ناوبری» با موتورهای مسیریابی آنلاین و آفلاین موجود، نحوهٔ محاسبهٔ مسیر را انتخاب می‌کند.</string>
-    <string name="restore_complete">بازیابی کامل</string>
+    <string name="restore_complete">بازیابی شد</string>
     <string name="backup_data">از داده‌ها پشتیبان بگیرید</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="loading_list_of_routing_services">در حال بارکردن لیست خدمات مسیریابی موجود</string>
@@ -4161,7 +4161,7 @@
     <string name="make_backup_descr">تغییرات زیادی در این دستگاه وجود دارد، لطفاً از این داده‌ها نسخهٔ پشتیبان تهیه کنید تا آن‌ها را از دست ندهید.</string>
     <string name="backup_confilcts_descr">برخی از پرونده‌ها نمی‌توانند در سرور بارگذاری شوند زیرا نسخه جدیدتری در سرور ذخیره شده است.</string>
     <string name="backup_no_internet_descr">اتصال اینترنت خود را بررسی کنید و دوباره بارگیری کنید.</string>
-    <string name="backup_pause_all">توقف همه</string>
+    <string name="backup_pause_all">مکث همه</string>
     <string name="upload_local_version">نسخه محلی را بارگذاری کنید</string>
     <string name="download_server_version">نسخه سرور را بارگیری کنید</string>
     <string name="shared_string_logout">خروج</string>
@@ -4239,7 +4239,7 @@
     <string name="advanced_widgets">ابزارک‌های پیشرفته</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s یا %2$s</string>
     <string name="continue_with">ادامه دهید با %1$s</string>
-    <string name="backup_error_size_is_exceeded"/>
+    <string name="backup_error_size_is_exceeded">از حداکثر حجم ابر OsmAnd به میزان %1$s گذشته است</string>
     <string name="osmand_maps_plus_tagline">دریافت قابلیت‌های افزوده</string>
     <string name="osmand_pro_tagline">دریافت بیشترین قابلیت‌ها</string>
     <string name="shared_string_learn_more">بیشتر بدانید</string>
@@ -4283,4 +4283,9 @@
     <string name="terrain_maps">نقشه‌های ناهمواری‌ها</string>
     <string name="nautical_depth">عمق دریا</string>
     <string name="enter_verification_code">گذرواژهٔ یک‌بارمصرف را وارد کنید</string>
+    <string name="purchases_feature_desc_hourly_map_updates">به روزآمدسازی‌های زودرس‌تر دسترسی پیدا کنید. روزآمدسازی‌های ساعتی، روزانه یا هفتگی. روزآمدسازها به‌تدریج و فقط برای محدودهٔ تغییرکرده دانلود می‌شوند.</string>
+    <string name="you_can_get_feature_as_part_of_pattern">‏«%1$s» را به‌عنوان بخشی از طرح %2$s بگیرید. مقایسه:</string>
+    <string name="not_available_with">با %1$s در دسترس نیست</string>
+    <string name="redeem_promo_code">آزادسازی کد تبلیغی</string>
+    <string name="regular_price">قیمت پایه</string>
 </resources>

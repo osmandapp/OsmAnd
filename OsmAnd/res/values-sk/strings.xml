@@ -166,7 +166,7 @@
     <string name="live_monitoring_url">Webová adresa stopovania naživo</string>
     <string name="gpx_monitoring_disabled_warn">Zaznamenajte stopu pomocou GPX nástroja alebo cez nastavenia \"Záznamenávanie výletu\".</string>
     <string name="show_current_gpx_title">Zobraziť aktuálnu stopu</string>
-    <string name="free_version_message">Môžete stiahnuť alebo aktualizovať %1$s máp.</string>
+    <string name="free_version_message">%1$s máp na stiahnutie alebo aktualizáciu.</string>
     <string name="free_version_title">Bezplatná verzia</string>
     <string name="poi_context_menu_showdescription">Zobraziť popis POI.</string>
     <string name="index_name_us">Severná Amerika - Spojené Štáty</string>
@@ -557,7 +557,7 @@
     <string name="address">Adresa</string>
     <string name="downloading_list_indexes">Sťahuje sa zoznam dostupných oblastí…</string>
     <string name="list_index_files_was_not_loaded">Nepodarilo sa stiahnuť zoznam oblastí z https://osmand.net.</string>
-    <string name="select_index_file_to_download">Nič sa nenašlo. Ak nemôžete ručne nájsť Vašu oblasť, môžete si ju vlastnoručne vytvoriť (pozri https://osmand.net).</string>
+    <string name="select_index_file_to_download">Nič sa nenašlo, ale môžete oblasť vlastnoručne vytvoriť (pozri https://osmand.net).</string>
     <string name="fav_points_edited">Obľúbený bod bol upravený</string>
     <string name="fav_points_not_exist">Neexistujú žiadne Obľúbené miesta</string>
     <string name="update_existing">Nahradiť</string>
@@ -2485,7 +2485,7 @@
     <string name="shared_string_markers">Značky</string>
     <string name="coordinates_format">Formát súradníc</string>
     <string name="use_system_keyboard">Použiť systémovú klávesnicu</string>
-    <string name="fast_coordinates_input_descr">Zvoľte formát zadávania súradníc. Môžete ich potom zmeniť v \"Nastaveniach\".</string>
+    <string name="fast_coordinates_input_descr">Zvoľte formát zadávania súradníc. Pre ich zmenu použite \"Nastavenia\".</string>
     <string name="fast_coordinates_input">Rýchle zadávanie súradníc</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Žiadne ľadové cesty, brody</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Vyhnúť sa ľadovým cestám a brodom.</string>
@@ -2947,7 +2947,7 @@
     <string name="app_mode_subway">Metro</string>
     <string name="app_mode_horse">Kôň</string>
     <string name="app_mode_helicopter">Vrtuľník</string>
-    <string name="osmand_routing_promo">Môžete pridať vlastnú upravenú verziu súboru routing.xml do ..osmand/routing</string>
+    <string name="osmand_routing_promo">Pridajte vlastnú upravenú verziu súboru routing.xml do ..osmand/routing</string>
     <string name="app_mode_skiing">Lyžovanie</string>
     <string name="base_profile_descr_ski">Lyžovanie</string>
     <string name="show_compass_ruler">Zobraziť stupnicu kompasu</string>
@@ -3240,7 +3240,7 @@
 \n • Opravy iných chýb
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Túto zmenu môžete aplikovať na všetky alebo len práve zvolený profil.</string>
+    <string name="apply_preference_to_all_profiles">Aplikovať túto zmenu na všetky alebo len práve zvolený profil.</string>
     <string name="shared_preference">Zdieľané</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferovať nespevnené cesty</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferovať pri navigácii cesty s nespevneným povrchom nad spevnenými.</string>
@@ -3349,8 +3349,8 @@
     <string name="multimedia_photo_play_sound">Zvuk spúšte fotoaparátu</string>
     <string name="osm_authorization_success">Prihlásenie je úspešné</string>
     <string name="rearrange_categories">Usporiadať kategórie</string>
-    <string name="create_custom_categories_list_promo">Zmeňte poradie triedenia zoznamu, skryte kategórie. Môžete importovať a exportovať všetky zmeny s profilmi.</string>
-    <string name="add_new_custom_category_button_promo">Môžete pridať novú kategóriu zvolením jednej alebo viacerých existujúcich.</string>
+    <string name="create_custom_categories_list_promo">Zmeňte poradie zoznamu a skryte kategórie. Importovať alebo exportujte všetky zmeny ako profily.</string>
+    <string name="add_new_custom_category_button_promo">Pridajte novú kategóriu zvolením jednej alebo viacerých existujúcich.</string>
     <string name="reset_to_default_category_button_promo">\"Obnovenie do východzieho nastavenia\" obnoví poradie triedenia ako po novej inštalácii.</string>
     <string name="shared_string_available">Dostupné</string>
     <string name="add_custom_category">Pridať vlastnú kategóriu</string>
@@ -3424,7 +3424,7 @@
     <string name="shared_string_routing">Navigácia</string>
     <string name="shared_string_include_data">Zahrnúť dodatočné údaje</string>
     <string name="import_profile_dialog_description">Importovaný profil obsahuje dodatočné údaje. Kliknite \"Import\" pre importovanie len údajov profilu, alebo zvoľte dodatočné údaje.</string>
-    <string name="export_profile_dialog_description">Môžete zvoliť dodatočné údaje na importovanie spolu s profilom.</string>
+    <string name="export_profile_dialog_description">Zvoľte dodatočné údaje na importovanie spolu s profilom.</string>
     <string name="index_name_antarctica">Antarktída</string>
     <string name="no_recalculation_setting">Žiadne prepočítavanie</string>
     <string name="route_recalculation_dist_title">Minimálna vzdialenosť pre prepočítanie trasy</string>
@@ -3460,7 +3460,7 @@
     <string name="terrain_slider_description">Nastavte minimálnu a maximálnu úroveň priblíženia kedy bude vrstva zobrazená.</string>
     <string name="hillshade_download_description">Pre zobrazenie tieňovaných svahov sú potrebné ďalšie mapy.</string>
     <string name="slope_download_description">Pre zobrazenie sklonov svahov sú potrebné ďalšie mapy.</string>
-    <string name="slope_read_more">Môžete si prečítať viac o sklonoch svahov na %1$s.</string>
+    <string name="slope_read_more">Prečítajte si viac o sklonoch svahov na %1$s.</string>
     <string name="shared_string_transparency">Priehľadnosť</string>
     <string name="shared_string_zoom_levels">Úrovne priblíženia</string>
     <string name="shared_string_legend">Legenda</string>
@@ -4203,4 +4203,18 @@
     <string name="backup_error_user_is_not_registered">S touto emailovou adresou nie je zaregistrovaný žiadny používateľ</string>
     <string name="backup_error_no_valid_subscription">Neexistuje platné predplatné</string>
     <string name="enter_verification_code">Zadajte jednorazové heslo</string>
+    <string name="backup_deleting_all_data_descr">Prosím čakajte kým OsmAnd odstráni všetky vaše údaje z cloudu. Údaje na zariadení zostanú nedotknuté.</string>
+    <string name="backup_deleted_all_data_descr">Všetky vaše údaje boli úspešne odstránené z OsmAnd Cloudu.</string>
+    <string name="backup_version_history_removed">História verzií odstránená</string>
+    <string name="backup_data_removed">Všetky údaje odstránené</string>
+    <string name="shared_string_progress">Postup</string>
+    <string name="backup_do_not_have_any">Zatiaľ nemáte žiadne online zálohy</string>
+    <string name="backup_dont_have_any_descr">Nastavte automatické zálohovanie, aby ste nemuseli mať starosť o stratu údajov.</string>
+    <string name="backup_welcome_back">Vitajte späť!</string>
+    <string name="backup_welcome_back_descr">Môžete obnoviť údaje na tomto zariadení pomocou existujúcej zálohy, alebo nastaviť zálohovanie tohto zariadenia do OsmAnd Cloudu.</string>
+    <string name="backup_setup">Nastaviť zálohovanie</string>
+    <string name="backup_restore_now">Obnoviť teraz</string>
+    <string name="attribute">Vlastnosť</string>
+    <string name="shared_string_purchased">Zakúpené</string>
+    <string name="explore_wikipedia_offline">Preskúmajte Wikipédiu offline.</string>
 </resources>
