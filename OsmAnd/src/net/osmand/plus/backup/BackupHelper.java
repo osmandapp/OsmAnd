@@ -308,24 +308,11 @@ public class BackupHelper {
 		executor.runCommand(new RegisterDeviceCommand(this, token));
 	}
 
-	public void updatePromoCodeAsync(@Nullable OnUpdateOrderIdListener listener) {
-		OnUpdateOrderIdListener promocodeListener = (status, message, error) -> {
-			settings.BACKUP_PROMOCODE_ACTIVE.set(status == STATUS_SUCCESS);
-
-			if (listener != null) {
-				listener.onUpdateOrderId(status, message, error);
-			}
-		};
-		executor.execute(() -> updateOrderId(promocodeListener, settings.BACKUP_PROMOCODE.get()));
-	}
-
 	void updateOrderId(@Nullable OnUpdateOrderIdListener listener) {
-		updateOrderId(listener, getOrderId());
-	}
-
-	public void updateOrderId(@Nullable OnUpdateOrderIdListener listener, @Nullable String orderId) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", getEmail());
+
+		String orderId = getOrderId();
 		if (Algorithms.isEmpty(orderId)) {
 			if (listener != null) {
 				listener.onUpdateOrderId(STATUS_NO_ORDER_ID_ERROR, "Order id is empty", null);
