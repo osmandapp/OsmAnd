@@ -830,8 +830,8 @@ public class RouteProvider {
 	}
 
 	public static List<RouteSegmentResult> parseOsmAndGPXRoute(List<Location> points, GPXFile gpxFile,
-																  List<Location> segmentEndpoints,
-																  int selectedSegment) {
+	                                                           List<Location> segmentEndpoints,
+	                                                           int selectedSegment) {
 		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
 		if (selectedSegment != -1 && segments.size() > selectedSegment) {
 			TrkSegment segment = segments.get(selectedSegment);

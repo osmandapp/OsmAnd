@@ -131,8 +131,8 @@ public enum ColoringType {
 	}
 
 	public boolean isAvailableForDrawingRoute(@NonNull OsmandApplication app,
-	                                          @NonNull RouteCalculationResult route,
-											  @Nullable String attributeName) {
+											  @NonNull RouteCalculationResult route,
+	                                          @Nullable String attributeName) {
 		if (isGradient()) {
 			List<Location> locations = route.getImmutableAllLocations();
 			for (Location location : locations) {
@@ -185,8 +185,8 @@ public enum ColoringType {
 	}
 
 	private boolean isAttributeAvailableForDrawing(@NonNull OsmandApplication app,
-												   @NonNull List<RouteSegmentResult> routeSegments,
-												   @Nullable String attributeName) {
+	                                               @NonNull List<RouteSegmentResult> routeSegments,
+	                                               @Nullable String attributeName) {
 		if (Algorithms.isEmpty(routeSegments) || Algorithms.isEmpty(attributeName)) {
 			return false;
 		}

@@ -2,7 +2,6 @@ package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.Paint;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -53,10 +52,10 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	public void setStyleParams(int color,
-							   float width,
-							   @Nullable @ColorInt Integer directionArrowColor,
-							   @NonNull ColoringType routeColoringType,
-							   @Nullable String routeInfoAttribute) {
+	                           float width,
+	                           @Nullable @ColorInt Integer directionArrowColor,
+	                           @NonNull ColoringType routeColoringType,
+	                           @Nullable String routeInfoAttribute) {
 		this.coloringChanged = this.coloringType != routeColoringType
 				|| routeColoringType == ColoringType.ATTRIBUTE
 				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
@@ -108,7 +107,7 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	protected void updateSolidMultiColorRoute(RotatedTileBox tileBox, List<Location> locations,
-											  List<RouteSegmentResult> routeSegments) {
+	                                          List<RouteSegmentResult> routeSegments) {
 		List<Integer> colors = getRouteInfoAttributesColors(locations, routeSegments);
 		if (Algorithms.isEmpty(colors)) {
 			updateWay(Collections.emptyList(), Collections.emptyMap(), tileBox);
@@ -198,8 +197,10 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	@Override
-	protected void addLocation(RotatedTileBox tb, int locationIdx, GeometryWayStyle<?> style, List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances, double dist, List<GeometryWayStyle<?>> styles) {
-		super.addLocation(tb, locationIdx, style, tx, ty, angles, distances, dist, styles);
+	protected void addLocation(RotatedTileBox tb, int locationIdx, double dist, GeometryWayStyle<?> style,
+	                           List<Float> tx, List<Float> ty, List<Double> angles,
+	                           List<Double> distances, List<GeometryWayStyle<?>> styles) {
+		super.addLocation(tb, locationIdx, dist, style, tx, ty, angles, distances, styles);
 		if (style instanceof GeometryGradientWayStyle && styles.size() > 1) {
 			GeometryGradientWayStyle prevStyle = (GeometryGradientWayStyle) styles.get(styles.size() - 2);
 			GeometryGradientWayStyle currStyle = (GeometryGradientWayStyle) style;
@@ -208,9 +209,9 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	@Override
-	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude, double bottomLatitude,
-									  double rightLongitude, GeometryWayStyle<?> style, boolean previousVisible,
-									  Location lastPoint, int startLocationIndex) {
+	protected boolean addInitialPoint(RotatedTileBox tb, double topLatitude, double leftLongitude,
+	                                  double bottomLatitude, double rightLongitude, GeometryWayStyle<?> style,
+	                                  boolean previousVisible, Location lastPoint, int startLocationIndex) {
 		previousVisible = super.addInitialPoint(tb, topLatitude, leftLongitude, bottomLatitude, rightLongitude,
 				style, previousVisible, lastPoint, startLocationIndex);
 		if (style instanceof GeometryGradientWayStyle) {
@@ -243,7 +244,8 @@ public abstract class MultiColoringGeometryWay
 	}
 
 	@Override
-	protected boolean shouldSkipLocation(TByteArrayList simplification, Map<Integer, GeometryWayStyle<?>> styleMap, int locationIdx) {
+	protected boolean shouldSkipLocation(TByteArrayList simplification, Map<Integer,
+	                                     GeometryWayStyle<?>> styleMap, int locationIdx) {
 		return coloringType.isGradient()
 				? simplification.getQuick(locationIdx) == 0
 				: super.shouldSkipLocation(simplification, styleMap, locationIdx);

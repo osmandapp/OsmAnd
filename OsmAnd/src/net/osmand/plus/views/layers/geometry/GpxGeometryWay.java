@@ -68,13 +68,13 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
-		return new GeometryArrowsStyle(getContext(), customDirectionArrowColor, customColor, customWidth, false);
+		return new GeometryArrowsStyle(getContext(), customColor, customWidth, customDirectionArrowColor, false);
 	}
 
 	@NonNull
 	@Override
 	public GeometrySolidWayStyle<GpxGeometryWayContext> getSolidWayStyle(int lineColor) {
-		return new GeometryArrowsStyle(getContext(), customDirectionArrowColor, lineColor, customWidth, true);
+		return new GeometryArrowsStyle(getContext(), lineColor, customWidth, customDirectionArrowColor, true);
 	}
 
 	@Override
@@ -100,8 +100,8 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		private final float outerCircleRadius;
 		private final float innerCircleRadius;
 
-		GeometryArrowsStyle(GpxGeometryWayContext context, int directionArrowColor,
-							int trackColor, float trackWidth, boolean hasPathLine) {
+		GeometryArrowsStyle(GpxGeometryWayContext context, int trackColor, float trackWidth,
+		                    int directionArrowColor, boolean hasPathLine) {
 			super(context, trackColor, trackWidth, directionArrowColor);
 
 			this.hasPathLine = hasPathLine;
