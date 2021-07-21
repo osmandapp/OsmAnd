@@ -379,10 +379,11 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
 			setupOsmLiveForPublicTransportPref();
 			setupNativePublicTransport();
-		}
-		if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+		} else {
 			setupOsmLiveForRoutingPref();
-			setupDisableComplexRoutingPref();
+			if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+				setupDisableComplexRoutingPref();
+			}
 		}
 		setupFastRecalculationPref();
 	}
