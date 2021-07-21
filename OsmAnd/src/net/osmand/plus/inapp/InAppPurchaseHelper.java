@@ -454,15 +454,16 @@ public abstract class InAppPurchaseHelper {
 
 		@Override
 		protected String[] doInBackground(Void... params) {
+			String activeSubscriptionsIds = null;
+			String subscriptionsState = null;
 			try {
 				Map<String, String> parameters = new HashMap<>();
 				parameters.put("androidPackage", ctx.getPackageName());
 				addUserInfo(parameters);
-				String activeSubscriptionsIds = AndroidNetworkUtils.sendRequest(ctx,
+				activeSubscriptionsIds = AndroidNetworkUtils.sendRequest(ctx,
 						"https://osmand.net/api/subscriptions/active",
 						parameters, "Requesting active subscriptions...", false, false);
 
-				String subscriptionsState = null;
 				String userId = ctx.getSettings().BILLING_USER_ID.get();
 				String userToken = ctx.getSettings().BILLING_USER_TOKEN.get();
 				if (!Algorithms.isEmpty(userId) && !Algorithms.isEmpty(userToken)) {
@@ -472,12 +473,10 @@ public abstract class InAppPurchaseHelper {
 							"https://osmand.net/api/subscriptions/get",
 							parameters, "Requesting subscriptions state...", false, false);
 				}
-
-				return new String[] {activeSubscriptionsIds, subscriptionsState};
 			} catch (Exception e) {
 				logError("sendRequest Error", e);
 			}
-			return null;
+			return new String[] {activeSubscriptionsIds, subscriptionsState};
 		}
 
 		@Override

@@ -16,8 +16,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
-import net.osmand.plus.chooseplan.ChoosePlanFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
@@ -58,7 +57,7 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 		} else if (status == BackupStatus.SUBSCRIPTION_EXPIRED) {
 			actionButton.setOnClickListener(v -> {
 				if (Version.isGooglePlayEnabled()) {
-					ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.OSMAND_CLOUD);
+					OsmAndProPlanFragment.showInstance(mapActivity);
 				} else {
 					PromoCodeBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 				}
