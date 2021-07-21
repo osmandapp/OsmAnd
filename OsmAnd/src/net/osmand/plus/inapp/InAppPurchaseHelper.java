@@ -16,6 +16,7 @@ import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
 import net.osmand.AndroidNetworkUtils.Request;
 import net.osmand.AndroidNetworkUtils.RequestResponse;
+import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -505,31 +506,101 @@ public abstract class InAppPurchaseHelper {
 			}
 			if (subscriptionsStateJson != null) {
 				inventoryRequested = true;
-				Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
-				try {
-					JSONArray subArrJson = new JSONArray(subscriptionsStateJson);
-					for (int i = 0; i < subArrJson.length(); i++) {
-						JSONObject subObj = subArrJson.getJSONObject(i);
-						String sku = subObj.getString("sku");
-						String state = subObj.getString("state");
-						long expireTime = 0;
-						if (subObj.has("expire_time")) {
-							expireTime = subObj.getLong("expire_time");
-						}
-						if (!Algorithms.isEmpty(sku) && !Algorithms.isEmpty(state)) {
-							SubscriptionStateHolder stateHolder = new SubscriptionStateHolder();
-							stateHolder.state = SubscriptionState.getByStateStr(state);
-							stateHolder.expireTime = expireTime;
-							subscriptionStateMap.put(sku, stateHolder);
-						}
-					}
-				} catch (JSONException e) {
-					logError("Json parsing error", e);
-				}
-				InAppPurchaseHelper.this.subscriptionStateMap = subscriptionStateMap;
+				subscriptionStateMap = parseSubscriptionStates(subscriptionsStateJson);
 			}
 			exec(InAppPurchaseTaskType.REQUEST_INVENTORY, getRequestInventoryCommand());
 		}
+	}
+
+	public Map<String, SubscriptionStateHolder> parseSubscriptionStates(@NonNull String subscriptionsStateJson) {
+		Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
+		try {
+			JSONArray subArrJson = new JSONArray(subscriptionsStateJson);
+			for (int i = 0; i < subArrJson.length(); i++) {
+				JSONObject subObj = subArrJson.getJSONObject(i);
+				String sku = subObj.getString("sku");
+				String state = subObj.getString("state");
+				long expireTime = 0;
+				if (subObj.has("expire_time")) {
+					expireTime = subObj.getLong("expire_time");
+				}
+				if (!Algorithms.isEmpty(sku) && !Algorithms.isEmpty(state)) {
+					SubscriptionStateHolder stateHolder = new SubscriptionStateHolder();
+					stateHolder.state = SubscriptionState.getByStateStr(state);
+					stateHolder.expireTime = expireTime;
+					subscriptionStateMap.put(sku, stateHolder);
+				}
+			}
+		} catch (JSONException e) {
+			logError("Json parsing error", e);
+		}
+		return subscriptionStateMap;
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	public void checkPromoAsync(@Nullable CallbackWithObject<Boolean> listener) {
+		AsyncTask<Void, Void, Boolean> task = new AsyncTask<Void, Void, Boolean>() {
+			@Override
+			protected Boolean doInBackground(Void... voids) {
+				boolean promoSubscription = false;
+				boolean activeSubscription = false;
+				try {
+					promoSubscription = checkPromoSubscription();
+					activeSubscription = validateUserSubscription();
+				} catch (Exception e) {
+					logError("checkPromoAsync Error", e);
+				}
+				return promoSubscription | activeSubscription;
+			}
+
+			private boolean validateUserSubscription() {
+				boolean[] activePromo = new boolean[1];
+				String deviceId = ctx.getSettings().BACKUP_DEVICE_ID.get();
+				String accessToken = ctx.getSettings().BACKUP_ACCESS_TOKEN.get();
+				if (!Algorithms.isEmpty(deviceId) && !Algorithms.isEmpty(accessToken)) {
+					Map<String, String> params = new HashMap<>();
+					params.put("deviceid", deviceId);
+					params.put("accessToken", accessToken);
+					AndroidNetworkUtils.sendRequest(ctx, "https://osmand.net/userdata/user-validate-sub",
+							params, "Validate user subscription", false, false, (result, error) -> {
+								if (Algorithms.isEmpty(error)) {
+									activePromo[0] = true;
+								} else {
+									logError(error);
+
+								}
+							});
+				}
+				return activePromo[0];
+			}
+
+			private boolean checkPromoSubscription() {
+				String promocode = ctx.getSettings().BACKUP_PROMOCODE.get();
+				if (!Algorithms.isEmpty(promocode)) {
+					Map<String, String> params = new HashMap<>();
+					params.put("orderId", promocode);
+					String subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, "https://osmand.net/api/subscriptions/get",
+							params, "Requesting promo subscription state", false, false);
+
+					if (subscriptionsState != null) {
+						Map<String, SubscriptionStateHolder> subscriptionStateMap = parseSubscriptionStates(subscriptionsState);
+						SubscriptionStateHolder promoState = subscriptionStateMap.get("promo_website");
+						return promoState != null && promoState.state.isActive();
+					}
+				}
+				return false;
+			}
+
+			@Override
+			protected void onPostExecute(Boolean active) {
+				ctx.getSettings().BACKUP_PROMOCODE_ACTIVE.set(active);
+
+				if (listener != null) {
+					listener.processResult(active);
+				}
+			}
+		};
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	protected abstract InAppCommand getRequestInventoryCommand() throws UnsupportedOperationException;
@@ -858,5 +929,4 @@ public abstract class InAppPurchaseHelper {
 	protected void logError(String msg, Throwable e) {
 		Log.e(TAG, "Error: " + msg, e);
 	}
-
 }
