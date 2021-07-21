@@ -10,15 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.BackupListeners.OnUpdateOrderIdListener;
-import net.osmand.plus.backup.ServerError;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -74,19 +73,17 @@ public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			OnUpdateOrderIdListener listener = (status, message, error) -> app.runInUIThread(() -> {
-				if (status == BackupHelper.STATUS_SUCCESS) {
-					app.getBackupHelper().prepareBackup();
-				} else {
-					String text = error != null ? new ServerError(error).getLocalizedError(app) : message;
-					if (text != null) {
-						app.showShortToastMessage(text);
-					}
-				}
-			});
 			String promoCode = editText.getText().toString();
 			app.getSettings().BACKUP_PROMOCODE.set(promoCode);
-			app.getBackupHelper().updatePromoCodeAsync(listener);
+
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null) {
+				CallbackWithObject<Boolean> listener = result -> {
+					app.runInUIThread(() -> app.getBackupHelper().prepareBackup());
+					return true;
+				};
+				purchaseHelper.checkPromoAsync(listener);
+			}
 		}
 		dismiss();
 	}
