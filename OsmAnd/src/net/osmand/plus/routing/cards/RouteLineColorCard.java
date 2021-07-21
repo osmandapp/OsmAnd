@@ -53,7 +53,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	private static final int NIGHT_TITLE_ID = R.string.night;
 
 	private final Fragment targetFragment;
-	private HeaderUiAdapter headerUiAdapter;
+	private final HeaderUiAdapter headerUiAdapter;
 
 	private ColorsCard colorsCard;
 	private GradientCard gradientCard;
@@ -65,8 +65,8 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 	private ColoringType selectedType;
 	private String selectedRouteInfoAttribute;
-	private PreviewRouteLineInfo previewRouteLineInfo;
-	private DayNightMode initMapTheme;
+	private final PreviewRouteLineInfo previewRouteLineInfo;
+	private final DayNightMode initMapTheme;
 	private DayNightMode selectedMapTheme;
 
 	public RouteLineColorCard(@NonNull MapActivity mapActivity,
@@ -114,28 +114,11 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	private void modeChanged() {
-		if (selectedType.isDefault()) {
-			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
-			colorsCard.updateVisibility(false);
-			gradientCard.updateVisibility(false);
-			changeMapTheme(initMapTheme);
-		} else if (selectedType.isCustomColor()) {
-			AndroidUiHelper.updateVisibility(themeToggleContainer, true);
-			colorsCard.updateVisibility(true);
-			gradientCard.updateVisibility(false);
-			changeMapTheme(isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY);
-		} else if (selectedType.isGradient()) {
-			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
-			gradientCard.setSelectedScaleType(selectedType.toGradientScaleType());
-			colorsCard.updateVisibility(false);
-			gradientCard.updateVisibility(true);
-			changeMapTheme(initMapTheme);
-		} else {
-			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
-			colorsCard.updateVisibility(false);
-			gradientCard.updateVisibility(false);
-			changeMapTheme(initMapTheme);
-		}
+		AndroidUiHelper.updateVisibility(themeToggleContainer, selectedType.isCustomColor());
+		colorsCard.updateVisibility(selectedType.isCustomColor());
+		gradientCard.setSelectedScaleType(selectedType.toGradientScaleType());
+		changeMapTheme(!selectedType.isCustomColor() ? initMapTheme : isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY);
+
 		previewRouteLineInfo.setRouteColoringType(selectedType);
 		previewRouteLineInfo.setRouteInfoAttribute(selectedRouteInfoAttribute);
 		updateColorItems();

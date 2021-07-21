@@ -351,12 +351,15 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				trackDrawInfo.setRouteInfoAttribute(trackColoringCard.getRouteInfoAttribute());
 				mapActivity.refreshMap();
 				if (gradientCard != null) {
-					GradientScaleType scaleType = currentColoringType == null ?
-							null : currentColoringType.toGradientScaleType();
+					GradientScaleType scaleType = currentColoringType.isGradient() ?
+							currentColoringType.toGradientScaleType() : null;
 					gradientCard.setSelectedScaleType(scaleType);
 				}
 				if (colorsCard != null) {
-					AndroidUiHelper.updateVisibility(colorsCard.getView(), currentColoringType == null);
+					AndroidUiHelper.updateVisibility(colorsCard.getView(), currentColoringType.isTrackSolid());
+				}
+				if (trackWidthCard != null) {
+					trackWidthCard.updateTopDividerVisibility(!currentColoringType.isRouteInfoAttribute());
 				}
 			} else if (card instanceof ColorsCard) {
 				int color = ((ColorsCard) card).getSelectedColor();

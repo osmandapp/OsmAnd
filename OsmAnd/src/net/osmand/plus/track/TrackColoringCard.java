@@ -29,6 +29,7 @@ import java.util.List;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -82,10 +83,12 @@ public class TrackColoringCard extends MapBaseCard {
 		}
 	}
 
+	@NonNull
 	public ColoringType getSelectedColoringType() {
 		return ColoringType.getNonNullTrackColoringTypeByName(selectedAppearanceItem.getAttrName());
 	}
 
+	@Nullable
 	public String getRouteInfoAttribute() {
 		return ColoringType.getRouteInfoAttribute(selectedAppearanceItem.getAttrName());
 	}
