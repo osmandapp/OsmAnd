@@ -131,8 +131,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			}
 		}
 		
-		if (list.size() == 0 && 
-				OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) == null) {
+		if (list.size() == 0 && !OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
 			return;
 		} else {
@@ -145,7 +144,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		tracks.removeAllViews();
 
 		LayoutInflater inflater = getActivity().getLayoutInflater();
-		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+		if (OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
 			createCurrentTrackView(view, app);
@@ -196,7 +195,7 @@ public class DashTrackFragment extends DashBaseFragment {
 	}
 
 	public static void updateCurrentTrack(View v, final Activity ctx, final OsmandApplication app) {
-		final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		final OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (v == null || ctx == null || app == null || plugin == null) {
 			return;
 		}

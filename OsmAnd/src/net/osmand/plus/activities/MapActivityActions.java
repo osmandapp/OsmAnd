@@ -447,7 +447,7 @@ public class MapActivityActions implements DialogProvider {
 				&& getMyApplication().getSelectedGpxHelper().getSelectedGPXFile((WptPt) selectedObj) != null) {
 			adapter.addItem(editGpxItem);
 		} else if (!getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
-				|| (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null)) {
+				|| (OsmandPlugin.isActive(OsmandMonitoringPlugin.class))) {
 			adapter.addItem(addGpxItem);
 		}
 
@@ -847,11 +847,11 @@ public class MapActivityActions implements DialogProvider {
 				R.drawable.ic_action_folder_favorites, DRAWER_FAVORITES_ID);
 		addMyPlacesTabToDrawer(optionsMenuHelper, R.string.shared_string_tracks,
 				R.drawable.ic_action_folder_tracks, DRAWER_TRACKS_ID);
-		if (OsmandPlugin.isPluginEnabled(AudioVideoNotesPlugin.class)) {
+		if (OsmandPlugin.isActive(AudioVideoNotesPlugin.class)) {
 			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.notes,
 					R.drawable.ic_action_folder_av_notes, DRAWER_AV_NOTES_ID);
 		}
-		if (OsmandPlugin.isPluginEnabled(OsmEditingPlugin.class)) {
+		if (OsmandPlugin.isActive(OsmEditingPlugin.class)) {
 			addMyPlacesTabToDrawer(optionsMenuHelper, R.string.osm_edits,
 					R.drawable.ic_action_folder_osm_notes, DRAWER_OSM_EDITS_ID);
 		}
@@ -881,7 +881,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		final OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		final OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 		if (monitoringPlugin != null) {
 			optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.map_widget_monitoring, mapActivity)
 					.setId(DRAWER_TRIP_RECORDING_ID)
@@ -901,7 +901,7 @@ public class MapActivityActions implements DialogProvider {
 					}).createItem());
 		}
 
-		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_navigation, mapActivity)
 				.setId(DRAWER_DIRECTIONS_ID)
 				.setIcon(R.drawable.ic_action_gdirections_dark)
 				.setListener(new ItemClickListener() {

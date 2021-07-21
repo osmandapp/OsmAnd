@@ -34,7 +34,7 @@ public class ShowHideOSMBugAction extends QuickAction {
 		activity.getMyApplication().getSettings().SHOW_OSM_BUGS.set(
 				!activity.getMyApplication().getSettings().SHOW_OSM_BUGS.get());
 
-		OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
 			plugin.updateLayers(activity.getMapView(), activity);
 			activity.getMapView().refreshMap(true);

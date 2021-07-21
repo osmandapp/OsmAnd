@@ -8,7 +8,7 @@
     <!-- Not translatable -->
     <string name="github">GitHub</string>
     <string name="telegram">Telegram</string>
-    <string name="full_version_price">€7,99</string>
+    <string name="full_version_price">€24,99</string>
     <string name="srtm_plugin_price">€2,99</string>
     <string name="sea_depth_maps_price">€1,39</string>
     <string name="osm_live">OsmAnd Live</string>
@@ -33,8 +33,8 @@
     <string name="osm_pro_monthly_price">€2.99</string>
     <string name="osm_pro_annual_price">€29.99</string>
     <string name="osm_pro_annual_monthly_price">€2.49</string>
-    <string name="osm_maps_plus_annual_price">€24.99</string>
-    <string name="osm_maps_plus_annual_monthly_price">€2.08</string>
+    <string name="osm_maps_plus_annual_price">€9.99</string>
+    <string name="osm_maps_plus_annual_monthly_price">€0.83</string>
     <string name="twitter_address">https://twitter.com/osmandapp</string>
     <string name="reddit_address">https://www.reddit.com/r/OsmAnd</string>
     <string name="facebook_address">https://www.facebook.com/osmandapp</string>

@@ -35,7 +35,7 @@
       android:strokeColor="#ffffff"/>
   <path
       android:strokeWidth="1"
-      android:pathData="M4.5,7.5V4.5H6.7929L8.2929,6L6.7929,7.5H4.5Z"
+      android:pathData="M4.5,7.5V4.5H8.5V6V7.5H4.5Z"
       android:fillColor="#ffffff"
       android:strokeColor="#ffffff"/>
 </vector>

@@ -1233,6 +1233,8 @@ public class OsmandSettings {
 	public final OsmandPreference<String> BACKUP_NATIVE_DEVICE_ID = new StringPreference(this, "backup_native_device_id", "").makeGlobal();
 	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN = new StringPreference(this, "backup_access_token", "").makeGlobal();
 	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN_UPDATE_TIME = new StringPreference(this, "backup_access_token_update_time", "").makeGlobal();
+	public final OsmandPreference<String> BACKUP_PROMOCODE = new StringPreference(this, "backup_promocode", "").makeGlobal();
+	public final OsmandPreference<Boolean> BACKUP_PROMOCODE_ACTIVE = new BooleanPreference(this, "backup_promocode_active", false).makeGlobal();
 
 	public final OsmandPreference<Long> FAVORITES_LAST_UPLOADED_TIME = new LongPreference(this, "favorites_last_uploaded_time", 0L).makeGlobal();
 	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal();

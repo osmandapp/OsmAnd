@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -135,14 +136,19 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 			
 			if (query.moveToFirst()) {
 				do {
-					OsmNotesPoint p = new OsmNotesPoint();
+					boolean isValidId = Algorithms.isInt(query.getString(0));
+					if (!isValidId) {
+						continue;
+					}
 
+					OsmNotesPoint p = new OsmNotesPoint();
 					p.setId(query.getLong(0));
 					p.setText(query.getString(1));
 					p.setLatitude(query.getDouble(2));
 					p.setLongitude(query.getDouble(3));
 					p.setAction(query.getString(4));
 					p.setAuthor(query.getString(5));
+
 					cachedOsmbugsPoints.add(p);
 				} while (query.moveToNext());
 			}

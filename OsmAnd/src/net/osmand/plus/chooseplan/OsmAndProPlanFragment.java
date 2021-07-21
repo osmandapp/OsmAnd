@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.button.PriceButton;
-import net.osmand.plus.chooseplan.button.PriceButtonsUtils;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -36,11 +36,6 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 	}
 
 	@Override
-	protected int getHeaderBgColorId() {
-		return nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
-	}
-
-	@Override
 	protected String getHeader() {
 		return getString(R.string.osmand_pro);
 	}
@@ -55,14 +50,9 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 		return R.drawable.ic_action_osmand_pro_logo;
 	}
 
-	@Override
-	protected Drawable getPreviewListCheckmark() {
-		return getCheckmark();
-	}
-
 	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
 		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
-		return new ArrayList<>(PriceButtonsUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions));
+		return new ArrayList<>(PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions));
 	}
 
 	public static List<InAppSubscription> getVisibleSubscriptions(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
