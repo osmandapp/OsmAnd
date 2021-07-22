@@ -652,6 +652,7 @@ public abstract class InAppPurchases {
 		private boolean upgrade = false;
 		private SubscriptionState state = SubscriptionState.UNDEFINED;
 		private SubscriptionState previousState = SubscriptionState.UNDEFINED;
+		private long startTime = 0;
 		private long expireTime = 0;
 
 		private InAppSubscriptionIntroductoryInfo introductoryInfo;
@@ -818,6 +819,32 @@ public abstract class InAppPurchases {
 
 		void storeExpireTime(@NonNull Context ctx, long expireTime) {
 			getExpireTimePref(ctx).set(expireTime);
+		}
+
+		public long getStartTime() {
+			return startTime;
+		}
+
+		public void setStartTime(@NonNull Context ctx, long expireTime) {
+			this.startTime = expireTime;
+			storeStartTime(ctx, expireTime);
+		}
+
+		private CommonPreference<Long> getStartTimePref(@NonNull Context ctx) {
+			return getSettings(ctx).registerLongPreference(getSku() + "_start_time", 0L).makeGlobal();
+		}
+
+		boolean restoreStartTime(@NonNull Context ctx) {
+			Long expireTime = getStartTimePref(ctx).get();
+			if (expireTime != null) {
+				this.startTime = expireTime;
+				return true;
+			}
+			return false;
+		}
+
+		void storeStartTime(@NonNull Context ctx, long expireTime) {
+			getStartTimePref(ctx).set(expireTime);
 		}
 
 		public boolean isAnyPurchased() {

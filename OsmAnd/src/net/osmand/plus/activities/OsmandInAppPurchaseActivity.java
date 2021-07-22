@@ -76,7 +76,11 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 				}
 			});
 		} else {
-			app.getBackupHelper().updatePromoCodeAsync(null);
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null && isInAppPurchaseAllowed()
+					&& app.getSettings().isInternetConnectionAvailable()) {
+				purchaseHelper.checkPromoAsync(null);
+			}
 		}
 	}
 
@@ -265,7 +269,10 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	public void onInAppPurchaseGetItems() {
 		OsmandApplication app = getMyApplication();
-		app.getBackupHelper().updatePromoCodeAsync(null);
+		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			purchaseHelper.checkPromoAsync(null);
+		}
 	}
 
 	public void onInAppPurchaseItemPurchased(String sku) {
