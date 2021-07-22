@@ -59,6 +59,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private View controlButtons;
 	private View toolbarContainer;
 	private View headerContainer;
+	private View saveButton;
 	private TextView headerTitle;
 	private TextView headerDescr;
 
@@ -250,7 +251,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private void setupButtons(View view) {
 		View buttonsContainer = view.findViewById(R.id.buttons_container);
 		buttonsContainer.setBackgroundColor(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.bg_color));
-		View saveButton = view.findViewById(R.id.right_bottom_button);
+		saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -464,6 +465,10 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		}
 		if (getMapActivity() != null) {
 			getMapActivity().refreshMap();
+		}
+		if (colorCard != null && saveButton != null) {
+			boolean selectedModeAvailable = colorCard.isSelectedModeAvailable();
+			saveButton.setEnabled(selectedModeAvailable);
 		}
 	}
 

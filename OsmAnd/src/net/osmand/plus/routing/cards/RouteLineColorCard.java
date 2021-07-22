@@ -13,9 +13,11 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -57,6 +59,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 	private ColorsCard colorsCard;
 	private GradientCard gradientCard;
+	private PromoBannerCard promoCard;
 	private ColorTypeAdapter colorAdapter;
 	private RecyclerView groupRecyclerView;
 	private TextView tvDescription;
@@ -114,32 +117,54 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	private void modeChanged() {
-		if (selectedType.isDefault()) {
+		if (!isSelectedModeAvailable()) {
 			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
 			colorsCard.updateVisibility(false);
 			gradientCard.updateVisibility(false);
+			promoCard.updateVisibility(true);
+			changeMapTheme(initMapTheme);
+		} else if (selectedType.isDefault()) {
+			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
+			colorsCard.updateVisibility(false);
+			gradientCard.updateVisibility(false);
+			promoCard.updateVisibility(false);
 			changeMapTheme(initMapTheme);
 		} else if (selectedType.isCustomColor()) {
 			AndroidUiHelper.updateVisibility(themeToggleContainer, true);
 			colorsCard.updateVisibility(true);
 			gradientCard.updateVisibility(false);
+			promoCard.updateVisibility(false);
 			changeMapTheme(isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY);
 		} else if (selectedType.isGradient()) {
 			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
 			gradientCard.setSelectedScaleType(selectedType.toGradientScaleType());
 			colorsCard.updateVisibility(false);
 			gradientCard.updateVisibility(true);
+			promoCard.updateVisibility(false);
 			changeMapTheme(initMapTheme);
 		} else {
 			AndroidUiHelper.updateVisibility(themeToggleContainer, false);
 			colorsCard.updateVisibility(false);
 			gradientCard.updateVisibility(false);
+			promoCard.updateVisibility(false);
 			changeMapTheme(initMapTheme);
 		}
 		previewRouteLineInfo.setRouteColoringType(selectedType);
 		previewRouteLineInfo.setRouteInfoAttribute(selectedRouteInfoAttribute);
 		updateColorItems();
 		updateDescription();
+	}
+
+	public boolean isSelectedModeAvailable() {
+		boolean proSubscription = InAppPurchaseHelper.isSubscribedToOsmAndPro(app);
+		if (!proSubscription) {
+			if (selectedType.isRouteInfoAttribute()) {
+				return selectedRouteInfoAttribute != null
+						&& !Algorithms.containsAny(selectedRouteInfoAttribute, "_roadClass", "_surface");
+			}
+			return selectedType != RouteColoringType.SLOPE;
+		}
+		return true;
 	}
 
 	private void setupRadioGroup(LinearLayout buttonsContainer) {
@@ -192,6 +217,9 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 			gradientCard = new GradientCard(mapActivity, previewRouteLineInfo.getRouteColoringType().toGradientScaleType());
 			container.addView(gradientCard.build(mapActivity));
+
+			promoCard = new PromoBannerCard(mapActivity, true);
+			container.addView(promoCard.build(mapActivity));
 		}
 	}
 
