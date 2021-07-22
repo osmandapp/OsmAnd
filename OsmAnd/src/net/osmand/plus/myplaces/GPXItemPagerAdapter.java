@@ -173,24 +173,26 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return dataSets;
 	}
 
+	@Nullable
 	private TrkSegment getTrackSegment(LineChart chart) {
 		if (segment == null) {
 			LineData lineData = chart.getLineData();
 			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
-			if (ds != null && ds.size() > 0) {
+			if (!Algorithms.isEmpty(ds)) {
 				segment = getSegmentForAnalysis(gpxItem, analysis);
 			}
 		}
 		return segment;
 	}
 
+	@Nullable
 	private WptPt getPoint(LineChart chart, float pos) {
 		WptPt wpt = null;
 		LineData lineData = chart.getLineData();
-		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
-		if (ds != null && ds.size() > 0) {
-			TrkSegment segment = getTrackSegment(chart);
-			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+		List<ILineDataSet> dataSets = lineData != null ? lineData.getDataSets() : null;
+		TrkSegment segment = getTrackSegment(chart);
+		if (!Algorithms.isEmpty(dataSets) && segment != null) {
+			OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 				float time = pos * 1000;
 				for (WptPt p : segment.points) {
@@ -833,6 +835,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 	}
 
+	@Nullable
 	public static TrkSegment getSegmentForAnalysis(GpxDisplayItem gpxItem, GPXTrackAnalysis analysis) {
 		for (Track track : gpxItem.group.getGpx().tracks) {
 			for (TrkSegment segment : track.segments) {
