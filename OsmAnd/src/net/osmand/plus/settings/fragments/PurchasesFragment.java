@@ -84,6 +84,10 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	public void onResume() {
 		super.onResume();
 		updateCards();
+
+		if (purchaseHelper != null) {
+			purchaseHelper.requestInventory();
+		}
 	}
 
 	private void updateCards() {
