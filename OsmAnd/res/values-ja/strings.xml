@@ -4161,7 +4161,6 @@ POIの更新は利用できません</string>
     <string name="offline_wikivoyage">オフラインWikivoyage</string>
     <string name="terrain_maps">地形マップ</string>
     <string name="nautical_depth">水深</string>
-    <string name="advanced_widgets">高度なウィジェット</string>
     <string name="you_can_get_feature_as_part_of_pattern">%2$sプランの一部として\"%1$s\"を入手できます。比較:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$sまたは%2$s</string>
     <string name="not_available_with">%1$s機能は利用できません</string>

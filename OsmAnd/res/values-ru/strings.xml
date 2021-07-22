@@ -4192,7 +4192,6 @@
     <string name="terrain_maps_contour_lines_hillshade_slope">Карты рельефа местности: контурные линии, затенение рельефа (отмывка), уклоны</string>
     <string name="terrain_maps">Карты рельефа</string>
     <string name="nautical_depth">Морские глубины</string>
-    <string name="advanced_widgets">Расширенные виджеты</string>
     <string name="you_can_get_feature_as_part_of_pattern">Вы можете получить «%1$s» как часть плана %2$s. Сравнение планов:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s или %2$s</string>
     <string name="continue_with">Продолжить с %1$s</string>
