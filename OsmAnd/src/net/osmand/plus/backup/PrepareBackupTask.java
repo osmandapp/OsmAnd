@@ -3,6 +3,8 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
@@ -117,6 +119,27 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectLocalFiles() {
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializeListener() {
+				@Override
+				public void onStart(AppInitializer init) {
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					collectLocalFilesImpl();
+				}
+			});
+		} else {
+			collectLocalFilesImpl();
+		}
+	}
+
+	private void collectLocalFilesImpl() {
 		backupHelper.collectLocalFiles(new OnCollectLocalFilesListener() {
 			@Override
 			public void onFileCollected(@NonNull LocalFile localFile) {

@@ -47,7 +47,7 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 				BackupInfo info = backup.getBackupInfo();
 				List<SettingsItem> items = info.itemsToUpload;
 				if (!items.isEmpty() || !Algorithms.isEmpty(info.filteredFilesToDelete)) {
-					app.getNetworkSettingsHelper().exportSettings(items, info.filteredFilesToDelete, exportListener);
+					app.getNetworkSettingsHelper().exportSettings(items, info.itemsToDelete, exportListener);
 				}
 			});
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.backup_now);
