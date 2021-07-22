@@ -120,9 +120,7 @@ public class NetworkWriter extends AbstractWriter {
 									  @NonNull String fileName, long uploadTime)
 			throws UserNotRegisteredException, IOException {
 		FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
-		List<File> filesToUpload = new ArrayList<>();
-		FileUtils.collectDirFiles(item.getFile(), filesToUpload);
-
+		List<File> filesToUpload = backupHelper.collectItemFilesForUpload(item);
 		long size = 0;
 		for (File file : filesToUpload) {
 			size += file.length();

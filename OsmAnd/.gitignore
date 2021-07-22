@@ -64,6 +64,7 @@ assets/help/images
 assets/help/screens
 assets/OsmAndCore_ResourcesBundle.index
 assets/OsmAndCore_ResourcesBundle/
+assets/ui-fonts/*
 
 # Android Studio
 /.idea

@@ -143,7 +143,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 
 		BaseBottomSheetItem directions = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark))
-				.setTitle(getString(R.string.get_directions))
+				.setTitle(getString(R.string.shared_string_navigation))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
