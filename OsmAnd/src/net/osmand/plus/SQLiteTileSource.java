@@ -348,6 +348,7 @@ public class SQLiteTileSource implements ITileSource {
 	public void updateFromTileSourceTemplate(TileSourceTemplate r) {
 		boolean openedBefore = isDbOpened();
 		SQLiteConnection db = getDatabase();
+		boolean changed = false;
 		if (!onlyReadonlyAvailable && db != null) {
 			int maxZoom = r.getMaximumZoomSupported();
 			int minZoom = r.getMinimumZoomSupported();
@@ -358,22 +359,30 @@ public class SQLiteTileSource implements ITileSource {
 			}
 			if (getUrlTemplate() != null && !getUrlTemplate().equals(r.getUrlTemplate())) {
 				db.execSQL("update info set " + URL + " = '" + r.getUrlTemplate() + "'");
+				changed = true;
 			}
 			if (minZoom != this.minZoom) {
 				db.execSQL("update info set " + MIN_ZOOM + " = '" + minZoom + "'");
+				changed = true;
 			}
 			if (maxZoom != this.maxZoom) {
 				db.execSQL("update info set " + MAX_ZOOM + " = '" + maxZoom + "'");
+				changed = true;
 			}
 			if (r.isEllipticYTile() != isEllipticYTile()) {
 				db.execSQL("update info set " + ELLIPSOID + " = '" + (r.isEllipticYTile() ? 1 : 0) + "'");
+				changed = true;
 			}
 			if (r.getExpirationTimeMinutes() != getExpirationTimeMinutes()) {
 				db.execSQL("update info set " + EXPIRE_MINUTES + " = '" + r.getExpirationTimeMinutes() + "'");
+				changed = true;
 			}
 		}
 		if (db != null && !openedBefore) {
 			db.close();
+		}
+		if (changed) {
+			file.setLastModified(System.currentTimeMillis());
 		}
 	}
 

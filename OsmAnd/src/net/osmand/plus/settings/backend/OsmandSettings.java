@@ -1864,48 +1864,6 @@ public class OsmandSettings {
 		return true;
 	}
 
-	public long getTileSourcesLastModifiedTime() {
-		long lastModified = 0;
-		File tilesDir = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		if (tilesDir != null && tilesDir.canRead()) {
-			List<File> dirs = new ArrayList<>();
-			dirs.add(tilesDir);
-			Algorithms.collectDirs(tilesDir, dirs);
-			for (File dir : dirs) {
-				File[] files = dir.listFiles();
-				if (files != null && files.length > 0) {
-					for (File file : files) {
-						long l = file.lastModified();
-						if (l > lastModified) {
-							lastModified = l;
-						}
-					}
-				}
-			}
-		}
-		return lastModified;
-	}
-
-	public void setTileSourcesLastModifiedTime(long lastModifiedTime) {
-		File tilesDir = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		if (tilesDir != null && tilesDir.canRead()) {
-			List<File> dirs = new ArrayList<>();
-			dirs.add(tilesDir);
-			Algorithms.collectDirs(tilesDir, dirs);
-			for (File dir : dirs) {
-				File[] files = dir.listFiles();
-				if (files != null && files.length > 0) {
-					for (File file : files) {
-						long l = file.lastModified();
-						if (l > lastModifiedTime) {
-							file.setLastModified(lastModifiedTime);
-						}
-					}
-				}
-			}
-		}
-	}
-
 	public Map<String, String> getTileSourceEntries() {
 		return getTileSourceEntries(true);
 	}
