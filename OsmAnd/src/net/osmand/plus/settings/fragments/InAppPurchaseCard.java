@@ -161,7 +161,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 				nextBillingDate.setText(app.getString(R.string.next_billing_date, expiredTimeStr));
 				AndroidUiHelper.updateVisibility(nextBillingDate, true);
 			}
-		} else {
+		} else if (state != SubscriptionState.ACTIVE && state != SubscriptionState.CANCELLED) {
 			View renewContainer = view.findViewById(R.id.renewContainer);
 			AndroidUiHelper.updateVisibility(renewContainer, true);
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

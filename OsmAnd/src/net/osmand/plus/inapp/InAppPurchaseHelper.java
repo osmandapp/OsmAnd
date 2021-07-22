@@ -541,15 +541,19 @@ public abstract class InAppPurchaseHelper {
 		AsyncTask<Void, Void, Boolean> task = new AsyncTask<Void, Void, Boolean>() {
 			@Override
 			protected Boolean doInBackground(Void... voids) {
-				boolean promoSubscription = false;
-				boolean activeSubscription = false;
+				boolean promoActive = false;
 				try {
-					promoSubscription = checkPromoSubscription();
-					activeSubscription = validateUserSubscription();
+					String promocode = ctx.getSettings().BACKUP_PROMOCODE.get();
+					if (!Algorithms.isEmpty(promocode)) {
+						promoActive = checkPromoSubscription(promocode);
+					}
+					if (!promoActive) {
+						promoActive = validateUserSubscription();
+					}
 				} catch (Exception e) {
 					logError("checkPromoAsync Error", e);
 				}
-				return promoSubscription | activeSubscription;
+				return promoActive;
 			}
 
 			private boolean validateUserSubscription() {
@@ -563,33 +567,39 @@ public abstract class InAppPurchaseHelper {
 					AndroidNetworkUtils.sendRequest(ctx, "https://osmand.net/userdata/user-validate-sub",
 							params, "Validate user subscription", false, false, (result, error) -> {
 								if (Algorithms.isEmpty(error)) {
-									activePromo[0] = true;
+									if (result != null) {
+										try {
+											JSONObject obj = new JSONObject(result);
+											String orderId = obj.optString("orderid");
+											if (!Algorithms.isEmpty(orderId)) {
+												activePromo[0] = checkPromoSubscription(orderId);
+											}
+										} catch (JSONException e) {
+											logError("Json parsing error", e);
+										}
+									}
 								} else {
 									logError(error);
-
 								}
 							});
 				}
 				return activePromo[0];
 			}
 
-			private boolean checkPromoSubscription() {
-				String promocode = ctx.getSettings().BACKUP_PROMOCODE.get();
-				if (!Algorithms.isEmpty(promocode)) {
-					Map<String, String> params = new HashMap<>();
-					params.put("orderId", promocode);
-					String subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, "https://osmand.net/api/subscriptions/get",
-							params, "Requesting promo subscription state", false, false);
+			private boolean checkPromoSubscription(@NonNull String orderId) {
+				Map<String, String> params = new HashMap<>();
+				params.put("orderId", orderId);
+				String subscriptionsState = AndroidNetworkUtils.sendRequest(ctx, "https://osmand.net/api/subscriptions/get",
+						params, "Requesting promo subscription state", false, false);
 
-					if (subscriptionsState != null) {
-						Map<String, SubscriptionStateHolder> subscriptionStateMap = parseSubscriptionStates(subscriptionsState);
-						SubscriptionStateHolder promoState = subscriptionStateMap.get("promo_website");
-						if (promoState != null) {
-							ctx.getSettings().BACKUP_PROMOCODE_STATE.set(promoState.state);
-							ctx.getSettings().BACKUP_PROMOCODE_START_TIME.set(promoState.startTime);
-							ctx.getSettings().BACKUP_PROMOCODE_EXPIRE_TIME.set(promoState.expireTime);
-							return promoState.state.isActive();
-						}
+				if (subscriptionsState != null) {
+					Map<String, SubscriptionStateHolder> subscriptionStateMap = parseSubscriptionStates(subscriptionsState);
+					SubscriptionStateHolder promoState = subscriptionStateMap.get("promo_website");
+					if (promoState != null) {
+						ctx.getSettings().BACKUP_PROMOCODE_STATE.set(promoState.state);
+						ctx.getSettings().BACKUP_PROMOCODE_START_TIME.set(promoState.startTime);
+						ctx.getSettings().BACKUP_PROMOCODE_EXPIRE_TIME.set(promoState.expireTime);
+						return promoState.state.isActive();
 					}
 				}
 				return false;
