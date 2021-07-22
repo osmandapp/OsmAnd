@@ -4207,7 +4207,6 @@
     <string name="terrain_maps_contour_lines_hillshade_slope">Mapy terenu: izolinie, cieniowanie wzniesień, nachylenie</string>
     <string name="terrain_maps">Mapy terenu</string>
     <string name="nautical_depth">Głębokość morska</string>
-    <string name="advanced_widgets">Zaawansowane widżety</string>
     <string name="shared_string_view_all">Wyświetl wszystko</string>
     <string name="backup_delete_types">Usuń wyłączone typy danych</string>
     <string name="backup_delete_types_descr">Usunąć wszystkie dane z chmury OsmAnd Cloud dla nieaktualnych typów\?</string>

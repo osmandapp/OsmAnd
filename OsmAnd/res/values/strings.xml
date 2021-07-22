@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="pro_widgets">Pro Widgets</string>
+    <string name="option_available_only_in_osmand_pro">The option available as part of OsmAnd Pro subscription.</string>
     <string name="track_has_no_needed_data">The track does not contain needed data.</string>
     <string name="promo_subscription">Promo subscription</string>
     <string name="active_till">Active till %1$s</string>
@@ -79,7 +81,6 @@
     <string name="continue_with">Continue with %1$s</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s or %2$s</string>
     <string name="you_can_get_feature_as_part_of_pattern">Get “%1$s” as part of the %2$s plan. Comparison:</string>
-    <string name="advanced_widgets">Advanced widgets</string>
     <string name="nautical_depth">Nautical depth</string>
     <string name="terrain_maps">Terrain maps</string>
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
