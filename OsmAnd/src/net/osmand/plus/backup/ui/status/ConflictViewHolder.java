@@ -22,7 +22,6 @@ import java.util.Collections;
 
 public class ConflictViewHolder extends ItemViewHolder {
 
-
 	public ConflictViewHolder(View itemView) {
 		super(itemView);
 	}

@@ -11,11 +11,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
@@ -298,6 +300,28 @@ public class BackupHelper {
 			fileName = fileName.substring(1);
 		}
 		return fileName;
+	}
+
+	public static boolean isLimitedFilesCollectionItem(@NonNull FileSettingsItem item) {
+		return item.getSubtype() == FileSubtype.VOICE;
+	}
+
+	@NonNull
+	public List<File> collectItemFilesForUpload(@NonNull FileSettingsItem item) {
+		List<File> filesToUpload = new ArrayList<>();
+		BackupInfo info = getBackup().getBackupInfo();
+		if (!BackupHelper.isLimitedFilesCollectionItem(item)
+				&& info != null && !Algorithms.isEmpty(info.filesToUpload)) {
+			for (LocalFile localFile : info.filesToUpload) {
+				File file = localFile.file;
+				if (item.equals(localFile.item) && file != null) {
+					filesToUpload.add(file);
+				}
+			}
+		} else {
+			FileUtils.collectDirFiles(item.getFile(), filesToUpload);
+		}
+		return filesToUpload;
 	}
 
 	public void registerUser(@NonNull String email, @Nullable String promoCode, boolean login) {
@@ -647,6 +671,8 @@ public class BackupHelper {
 									createLocalFile(result, item, fileName, jsFile, jsFile.lastModified());
 									continue;
 								}
+							} else if (fileItem.getSubtype() == FileSubtype.TILES_MAP) {
+								continue;
 							}
 							List<File> dirs = new ArrayList<>();
 							dirs.add(file);
@@ -656,12 +682,18 @@ public class BackupHelper {
 								File[] files = dir.listFiles();
 								if (files != null && files.length > 0) {
 									for (File f : files) {
-										fileName = f.getPath().replace(app.getAppPath(null).getPath() + "/", "");
-										createLocalFile(result, item, fileName, f, f.lastModified());
+										if (!f.isDirectory()) {
+											fileName = f.getPath().replace(app.getAppPath(null).getPath() + "/", "");
+											createLocalFile(result, item, fileName, f, f.lastModified());
+										}
 									}
 								}
 							}
 							operationLog.log("collectDirs " + file.getName() + " END");
+						} else if (fileItem.getSubtype() == FileSubtype.TILES_MAP) {
+							if (file.getName().endsWith(SQLiteTileSource.EXT)) {
+								createLocalFile(result, item, fileName, file, file.lastModified());
+							}
 						} else {
 							createLocalFile(result, item, fileName, file, file.lastModified());
 						}
