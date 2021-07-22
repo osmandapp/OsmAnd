@@ -13,9 +13,11 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -57,6 +59,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 	private ColorsCard colorsCard;
 	private GradientCard gradientCard;
+	private PromoBannerCard promoCard;
 	private ColorTypeAdapter colorAdapter;
 	private RecyclerView groupRecyclerView;
 	private TextView tvDescription;
@@ -125,6 +128,18 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		updateDescription();
 	}
 
+	public boolean isSelectedModeAvailable() {
+		boolean proSubscription = InAppPurchaseHelper.isSubscribedToOsmAndPro(app);
+		if (!proSubscription) {
+			if (selectedType.isRouteInfoAttribute()) {
+				return selectedRouteInfoAttribute != null
+						&& !Algorithms.containsAny(selectedRouteInfoAttribute, "_roadClass", "_surface");
+			}
+			return selectedType != RouteColoringType.SLOPE;
+		}
+		return true;
+	}
+
 	private void setupRadioGroup(LinearLayout buttonsContainer) {
 		TextRadioItem day = createMapThemeButton(false);
 		TextRadioItem night = createMapThemeButton(true);
@@ -175,6 +190,9 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 			gradientCard = new GradientCard(mapActivity, previewRouteLineInfo.getRouteColoringType().toGradientScaleType());
 			container.addView(gradientCard.build(mapActivity));
+
+			promoCard = new PromoBannerCard(mapActivity, true);
+			container.addView(promoCard.build(mapActivity));
 		}
 	}
 
