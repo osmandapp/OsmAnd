@@ -4255,7 +4255,7 @@
     <string name="shared_string_progress">Progresso</string>
     <string name="backup_do_not_have_any">Você ainda não tem nenhum backup online</string>
     <string name="backup_dont_have_any_descr">Configure um backup automático para não se preocupar com a perda de dados.</string>
-    <string name="backup_welcome_back">Bem vindo de volta!</string>
+    <string name="backup_welcome_back">Bem-vindo de volta!</string>
     <string name="backup_welcome_back_descr">Você pode restaurar dados neste dispositivo usando backups existentes ou configurar um backup deste dispositivo para OsmAnd Cloud.</string>
     <string name="backup_setup">Configurar backup</string>
     <string name="backup_restore_now">Restaurar agora</string>
