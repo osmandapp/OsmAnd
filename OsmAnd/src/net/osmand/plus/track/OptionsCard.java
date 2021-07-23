@@ -282,7 +282,7 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	private BaseBottomSheetItem createEditItem() {
-		Drawable editIcon = getActiveIcon(R.drawable.ic_action_edit_dark);
+		Drawable editIcon = getActiveIcon(R.drawable.ic_action_edit_track);
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(AndroidUtils.getDrawableForDirection(app, editIcon))
 				.setTitle(app.getString(R.string.edit_track))
