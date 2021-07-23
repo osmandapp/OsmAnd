@@ -211,12 +211,32 @@ public class FileSettingsItem extends StreamSettingsItem {
 
 	@Override
 	public long getLocalModifiedTime() {
-		return file.lastModified();
+		if (subtype == FileSubtype.VOICE) {
+			return new File(file, file.getName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS).lastModified();
+		} else if (subtype == FileSubtype.TTS_VOICE) {
+			String langName = file.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
+			return new File(file, langName + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS).lastModified();
+		} else {
+			return file.lastModified();
+		}
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		file.setLastModified(lastModifiedTime);
+		if (subtype == FileSubtype.VOICE) {
+			File jsFile = new File(file, file.getName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+			if (jsFile.exists()) {
+				jsFile.setLastModified(lastModifiedTime);
+			}
+		} else if (subtype == FileSubtype.TTS_VOICE) {
+			String langName = file.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
+			File jsFile = new File(file, langName + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+			if (jsFile.exists()) {
+				jsFile.setLastModified(lastModifiedTime);
+			}
+		} else {
+			file.setLastModified(lastModifiedTime);
+		}
 	}
 
 	public File getPluginPath() {
