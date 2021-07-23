@@ -16,6 +16,7 @@ import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -46,15 +47,8 @@ public class WikivoyageUtils {
 	}
 
 	public static WptPt findNearestPoint(@NonNull List<WptPt> points, @NonNull String coordinates) {
-		double lat;
-		double lon;
-		try {
-			lat = Double.parseDouble(coordinates.substring(0, coordinates.indexOf(",")));
-			lon = Double.parseDouble(coordinates.substring(coordinates.indexOf(",") + 1));
-		} catch (NumberFormatException e) {
-			LOG.debug(e.getMessage(), e);
-			return null;
-		}
+		double lat = Algorithms.parseDoubleSilently(coordinates.substring(0, coordinates.indexOf(",")), 0);
+		double lon = Algorithms.parseDoubleSilently(coordinates.substring(coordinates.indexOf(",") + 1), 0);;
 		for (WptPt point : points) {
 			if (MapUtils.getDistance(point.getLatitude(), point.getLongitude(), lat, lon) < ROUNDING_ERROR) {
 				return point;
