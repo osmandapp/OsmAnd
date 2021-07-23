@@ -4211,4 +4211,14 @@
     <string name="backup_delete_types">Iscantzella sas castas de datos disabilitadas</string>
     <string name="shared_string_discussion">Arresonu</string>
     <string name="shared_string_view_all">Pòmpia totu</string>
+    <string name="backup_welcome_back">Bene torradu!</string>
+    <string name="backup_welcome_back_descr">Podes ripristinare sos datos in custu dispositivu impreende còpias de seguresa chi esistint giai o impostende·nde una dae custu dispositivu a OsmAnd Cloud.</string>
+    <string name="backup_setup">Imposta sa còpia de seguresa</string>
+    <string name="backup_restore_now">Riprìstina como</string>
+    <string name="attribute">Propiedades</string>
+    <string name="shared_string_purchased">Comporadu</string>
+    <string name="explore_wikipedia_offline">Esplora Wikipedia chene lìnia.</string>
+    <string name="on_hold_since">In isetu dae su %1$s</string>
+    <string name="active_till">Ativu finas a su %1$s</string>
+    <string name="promo_subscription">Abbonamentu promotzionale</string>
 </resources>
