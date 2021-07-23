@@ -38,12 +38,12 @@
     • Cloud backup\n\n
     • Added night mode for \"Topo\" rendering style\n\n
     • Added option to download Contour lines in feet\n\n
-    • Tracks can now be colored by altitude, speed, or slope.\n\n
+    • Tracks can now be colored by altitude, speed, or slope\n\n
     • Updated \"Trip recording\" dialog\n\n
     • Distance by tap moved from the Radius ruler into a separate option\n\n
     • Plan Route: added ability to change navigation options, accessing configure map and search without leaving plan route\n\n
     • New \"Purchase\" screen with detailed information about purchasing\n\n
-    • Added option to change the route line appearance.\n\n
+    • Added option to change the route line appearance\n\n
     • OsmAnd Live updates moved to \"Downloads > Updates\"\n\n
     </string>
     <string name="approximate_route_description">Attach the route to roads on the map to get all turns and additional data, like smoothness, road types etc.</string>
@@ -93,8 +93,8 @@
     <string name="purchases_feature_desc_unlimited_map_download">Get unlimited downloads for all continents and regions offline maps.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore Wikipedia articles on the go, without an internet connection. Offline data divided by countries and available in all languages.</string>
     <string name="purchases_feature_desc_wikipedia">Explore Wikipedia offline. Articles divided by countries and regions and available in all languages.</string>
-    <string name="purchases_feature_desc_wikivoyage">Explore Wikipedia offline. Articles divided by countries and regions and available in all languages.</string>
-    <string name="purchases_feature_desc_terrain">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show, peaks and lowlands.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explore Wikivoyage offline. Articles divided by countries and regions and available in all languages.</string>
+    <string name="purchases_feature_desc_terrain">Terrain contour lines, full hillshade map with dark shades and slope maps with colors to show peaks and lowlands.</string>
     <string name="purchases_feature_desc_nautical">Get access to nautical depth information</string>
     <string name="send_logcat_log">Send logcat log</string>
     <string name="send_crash_log">Send crash log</string>
