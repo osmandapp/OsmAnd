@@ -2218,7 +2218,7 @@
     <string name="unsaved_changes_will_be_lost">שינויים לא נשמרו יוסרו. להמשיך?</string>
     <string name="downloads_left_template">נותרו %1$s הורדות</string>
     <string name="roads">דרכים</string>
-    <string name="downloading_number_of_files">בהורדה - קובץ %1$d</string>
+    <string name="downloading_number_of_files">קובץ %1$d בהורדה…</string>
     <string name="show_free_version_banner">הצגת חלונית גרסה חופשית</string>
     <string name="show_free_version_banner_description">הצגת חלונית הגרסה החינמית גם בגרסה בתשלום.</string>
     <string name="buy">רכישה</string>
@@ -4168,7 +4168,7 @@
     <string name="restore_from_osmand_cloud">שחזור מ־OsmAnd Cloud</string>
     <string name="choose_what_to_restore">נא לבחור מה לשחזר.</string>
     <string name="restore_selected_data">שחזור הנתונים הנבחרים</string>
-    <string name="receiving_data_from_server">מתקבלים נתונים מהשרת</string>
+    <string name="receiving_data_from_server">מתקבלים נתונים מהשרת…</string>
     <string name="restore_complete">השחזור הושלם</string>
     <string name="grey_color_slope">בצבע האפור נעשה שימוש כשלא מוגדר מדרון.</string>
     <string name="backup_version_history">היסטוריית גרסאות</string>
@@ -4191,9 +4191,9 @@
     <string name="osmand_maps_plus_tagline">קבלת יכולות נרחבות</string>
     <string name="osmand_pro_tagline">קבלת פסגת היכולות</string>
     <string name="shared_string_learn_more">מידע נוסף</string>
-    <string name="cancel_anytime_in_huawei_appgallery">ניתן לבטל בכל עת בחנות Huawei AppGallery</string>
-    <string name="cancel_anytime_in_gplay">ניתן לבטל בכל עת בחנות Google Play.</string>
-    <string name="backup_delete_types_descr">למחוק את כל הנתונים על סוגים מושבתים מהענן\?</string>
+    <string name="cancel_anytime_in_huawei_appgallery">ניתן לבטל זאת בכל עת בחנות Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">ניתן לבטל זאת בכל עת דרך Google Play.</string>
+    <string name="backup_delete_types_descr">למחוק את כל הנתונים על סוגי נתונים בלתי פעילים מ־OsmAnd cloud\?</string>
     <string name="backup_delete_types">מחיקת סוגי נתונים מושבתים</string>
     <string name="offline_wikipeadia">ויקיפדיה בלתי־מקוונת</string>
     <string name="offline_wikivoyage">ויקימסע בלתי־מקוון</string>
@@ -4201,7 +4201,7 @@
     <string name="wikipedia_and_wikivoyage_offline">ויקיפדיה וויקימסע בלתי־מקוונות</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">מפות תוואי שטח: קווי מתאר, הצללות הרים, מדרון</string>
     <string name="purchases_feature_desc_nautical">קבלת גישה לפרטי עומק ימי</string>
-    <string name="purchases_feature_desc_wikivoyage">קריאה בוויקיפדיה ללא אינטרנט. ערכים, בחלוקה למדינות ולמחוזות, זמינים בכל השפות.</string>
+    <string name="purchases_feature_desc_wikivoyage">קריאה בוויקימסע ללא אינטרנט. ערכים, בחלוקה למדינות ולמחוזות, זמינים בכל השפות.</string>
     <string name="purchases_feature_desc_wikipedia">קריאה בוויקיפדיה ללא אינטרנט. ערכים, בחלוקה למדינות ולמחוזות, זמינים בכל השפות.</string>
     <string name="purchases_feature_desc_combined_wiki">ניתן לקרוא ערכים מוויקיפדיה בדרכים, ללא חיבור לאינטרנט. נתונים בלתי מקוונים בחלוקה למדינות זמינים בכל השפות.</string>
     <string name="purchases_feature_desc_unlimited_map_download">קבלת הורדות בלתי מוגבלות לכל המפות הבלתי מקוונות של היבשות והמחוזות.</string>
@@ -4215,4 +4215,14 @@
     <string name="backup_error_user_is_not_registered">לא רשום משתמש עם כתובת הדוא״ל הזאת</string>
     <string name="backup_error_no_valid_subscription">לא קיים מינוי בתוקף</string>
     <string name="duration_moment_ago">לפני רגע קט</string>
+    <string name="backup_welcome_back">ברוך שובך!</string>
+    <string name="backup_welcome_back_descr">ניתן לשחזר נתונים למכשיר הזה באמצעות גיבויים קיימים או להקים גיבוי למכשיר הזה ל־OsmAnd Cloud.</string>
+    <string name="backup_setup">הקמת גיבוי</string>
+    <string name="backup_restore_now">לשחזר כעת</string>
+    <string name="attribute">מאפיין</string>
+    <string name="shared_string_purchased">נרכש</string>
+    <string name="explore_wikipedia_offline">עיון בוויקיפדיה ללא אינטרנט.</string>
+    <string name="on_hold_since">מוקפא עד %1$s</string>
+    <string name="active_till">פעיל עד %1$s</string>
+    <string name="promo_subscription">מינוי פרומו</string>
 </resources>
