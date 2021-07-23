@@ -4104,8 +4104,8 @@
     <string name="attribute">Attributt</string>
     <string name="shared_string_purchased">Kjøpt</string>
     <string name="explore_wikipedia_offline">Utforsk frakoblet Wikipedia.</string>
-    <string name="route_line_use_map_style_width">Bruk kartstilens forvalgsbredden (%1$s)</string>
-    <string name="route_line_use_map_style_color">Bruk kartstilens forvalgsfarge (%1$s).</string>
+    <string name="route_line_use_map_style_width">Bruk standardbredde for kartstil (%1$s).</string>
+    <string name="route_line_use_map_style_color">Bruk standardfarge for kartstil (%1$s).</string>
     <string name="backup_and_restore">Sikkerhetskopiering og gjenoppretting</string>
     <string name="osmand_cloud_authorize_descr">Aldri mist data. Sikkerhetskopier og gjenopprett enkelt.</string>
     <string name="osmand_cloud_create_account_descr">Skriv inn e-postadresse for forsendelse av bekreftelseskode,

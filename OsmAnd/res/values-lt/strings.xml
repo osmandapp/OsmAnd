@@ -2877,4 +2877,14 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="terrain_maps">Reljefo žemėlapiai</string>
     <string name="nautical_depth">Jūrinis gylis</string>
     <string name="units_and_formats">Vienetai ir formatai</string>
+    <string name="backup_version_history_removed">Pašalinama visa versijų istorija</string>
+    <string name="backup_data_removed">Visi duomenys pašalinami</string>
+    <string name="shared_string_progress">Progresas</string>
+    <string name="backup_do_not_have_any">Dar neturite jokios atsarginės kopijos internete</string>
+    <string name="backup_dont_have_any_descr">Nustatykite automatinę atsarginę kopiją, kad nereikėtų nerimauti dėl prarastų duomenų.</string>
+    <string name="backup_welcome_back">Sveiki sugrįžę!</string>
+    <string name="backup_welcome_back_descr">Galite atkurti šio prietaiso duomenis naudodami esamas atsargines kopijas arba sukurti šio prietaiso atsarginę kopiją „OsmAnd Cloud“.</string>
+    <string name="backup_setup">Nustatyti atsarginę kopiją</string>
+    <string name="backup_restore_now">Atkurti dabar</string>
+    <string name="shared_string_purchased">Įsigyta</string>
 </resources>

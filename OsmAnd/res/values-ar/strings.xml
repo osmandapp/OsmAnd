@@ -4317,4 +4317,22 @@
     <string name="logout_from_osmand_cloud">تسجيل الخروج من سحابة أوسماند</string>
     <string name="logout_from_osmand_cloud_decsr">هل أنت متأكد من تسجيل الخروج؟
 \nستحتاج إلى تسجيل الدخول مرة أخرى لعملية النسخ الاحتياطي أو استعادة البيانات.</string>
+    <string name="backup_error_subscription_was_expired_descr">انتهت صلاحية اشتراكك في أوسماند برو ، قم بتجديده لاستخدام النسخ الاحتياطي. لا يزال بإمكانك استعادة البيانات من السحابة.</string>
+    <string name="contour_lines_hillshades_slope">خطوط الكنتور ، التلال ، المنحدر</string>
+    <string name="backup_deleting_all_data">حذف جميع البيانات</string>
+    <string name="backup_deleted_all_data">حذف جميع البيانات</string>
+    <string name="backup_deleting_all_data_descr">يرجى الانتظار للحصول على نظام تشغيل الأوامر لإزالة جميع البيانات من السحابة .جميع البيانات على الجهاز لا تزال دون تغيير .</string>
+    <string name="backup_deleted_all_data_descr">تم حذف جميع بياناتك بنجاح من سحابة أوسماند.</string>
+    <string name="backup_version_history_removed">تمت إزالة كافة محفوظات الإصدار</string>
+    <string name="backup_data_removed">تتم إزالة كافة البيانات</string>
+    <string name="shared_string_progress">تقدم</string>
+    <string name="backup_do_not_have_any">ليس لديك أي نسخة احتياطية عبر الإنترنت حتى الآن</string>
+    <string name="backup_dont_have_any_descr">قم بإعداد نسخة احتياطية تلقائية حتى لا تقلق بشأن فقدان البيانات.</string>
+    <string name="backup_welcome_back">مرحبا بعودتك!</string>
+    <string name="backup_welcome_back_descr">يمكنك استعادة البيانات الموجودة على هذا الجهاز باستخدام النسخ الاحتياطية الموجودة أو إعداد نسخة احتياطية من هذا الجهاز إلى سحابة أوسماند.</string>
+    <string name="backup_setup">إنشاء نسخة احتياطية</string>
+    <string name="backup_restore_now">استعادة الآن</string>
+    <string name="attribute">ميزة</string>
+    <string name="shared_string_purchased">المشتريات</string>
+    <string name="explore_wikipedia_offline">استكشف ويكيبيديا دون اتصال بالإنترنت.</string>
 </resources>

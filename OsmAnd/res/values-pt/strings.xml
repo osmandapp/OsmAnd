@@ -4255,4 +4255,11 @@
     <string name="logout_from_osmand_cloud">Sair do OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Quer terminar a sessão\?
 \nTerá de se autenticar novamente para fazer a cópia de segurança ou restaurar os dados.</string>
+    <string name="backup_welcome_back">Bem-vindo(a) de volta!</string>
+    <string name="backup_welcome_back_descr">Pode restaurar dados neste dispositivo usando as cópias de segurança existentes ou configurar uma cópia de segurança deste dispositivo para o OsmAnd Cloud.</string>
+    <string name="backup_setup">Configurar cópia de segurança</string>
+    <string name="backup_restore_now">Restaurar agora</string>
+    <string name="attribute">Atributo</string>
+    <string name="shared_string_purchased">Comprado</string>
+    <string name="explore_wikipedia_offline">Explore a Wikipédia offline.</string>
 </resources>
