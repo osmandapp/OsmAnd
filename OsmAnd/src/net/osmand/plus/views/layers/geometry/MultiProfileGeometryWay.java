@@ -165,15 +165,16 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		double currLat = provider.getLatitude(currLocationIdx);
 		double currLon = provider.getLongitude(currLocationIdx);
 
-		int nextIdx = currLocationIdx;
-		for (int i = nextIdx + 1; i < simplification.size(); i++) {
+		int nextSurvivedIdx = currLocationIdx;
+		for (int i = nextSurvivedIdx + 1; i < simplification.size(); i++) {
 			if (simplification.getQuick(i) == 1) {
-				nextIdx = i;
+				nextSurvivedIdx = i;
+				break;
 			}
 		}
 
-		double nextLat = provider.getLatitude(nextIdx);
-		double nextLon = provider.getLongitude(nextIdx);
+		double nextLat = provider.getLatitude(nextSurvivedIdx);
+		double nextLon = provider.getLongitude(nextSurvivedIdx);
 		return Math.min(currLon, nextLon) < rightLon && Math.max(currLon, nextLon) > leftLon
 				&& Math.min(currLat, nextLat) < topLat && Math.max(currLat, nextLat) > bottomLat;
 	}
