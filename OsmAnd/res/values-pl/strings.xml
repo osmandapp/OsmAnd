@@ -65,7 +65,7 @@
     <string name="local_index_items_deleted">Usunięto %1$d z %2$d elementów.</string>
     <string name="local_index_items_restored">Uaktywniono %1$d z %2$d elementów.</string>
     <string name="local_index_no_items_to_do">Brak elementów do %1$s</string>
-    <string name="local_index_action_do">Zostanie %1$s %2$s elementów. Kontynuować?</string>
+    <string name="local_index_action_do">Zostanie %1$s %2$s element(y/ów). Kontynuować\?</string>
     <string name="local_index_descr_title">Zarządzaj plikami map.</string>
     <string name="local_index_mi_restore">Aktywuj</string>
     <string name="local_index_mi_backup">Dezaktywuj</string>
@@ -206,8 +206,8 @@
     <string name="daynight_mode_sensor">Czujnik światła</string>
     <string name="daynight_descr">Dostosuj przełączanie pomiędzy trybem dnia i nocy.</string>
     <string name="daynight">Tryb dzienny/nocny</string>
-    <string name="download_files_question">Pobrać {0} plik(ów) ({1} MB)?</string>
-    <string name="items_were_selected">zaznaczono {0} element(ów)</string>
+    <string name="download_files_question">Pobrać {0} plik(i/ów) ({1} MB)\?</string>
+    <string name="items_were_selected">zaznaczono {0} element(y/ów)</string>
     <string name="filter_existing_indexes">Pobrane</string>
     <string name="shared_string_select_all">Zaznacz wszystko</string>
     <string name="shared_string_refresh">Wczytaj ponownie</string>
@@ -299,8 +299,8 @@
     <string name="hide_poi_filter">Ukryj filtr</string>
     <string name="show_poi_filter">Wyświetl filtr</string>
     <string name="search_poi_filter">Filtr</string>
-    <string name="menu_mute_off">Wyłącz dźwięk</string>
-    <string name="menu_mute_on">Włącz dźwięk</string>
+    <string name="menu_mute_off">Dźwięk jest włączony</string>
+    <string name="menu_mute_on">Dźwięk jest wyłączony</string>
     <string name="voice_provider_descr">Wybiera głos komunikatów nawigacji.</string>
     <string name="voice_provider">Głos komunikatów</string>
     <string name="voice_data_initializing">Inicjowanie danych głosowych…</string>
@@ -668,7 +668,7 @@
     <string name="global_settings">Ustawienia ogólne</string>
     <string name="global_app_settings">Ustawienia ogólne</string>
     <string name="download_files_not_enough_space">Nie ma wystarczająco miejsca, aby pobrać %1$s MB (dostępne miejsce: %2$s).</string>
-    <string name="download_files_question_space">Czy pobrać {0} plik(-i/-ów)\?
+    <string name="download_files_question_space">Czy pobrać {0} plik(i/ów)\?
 \nZostanie użyte {1} MB (z {2} MB).</string>
     <string name="poi_query_by_name_matches_categories">Znaleziono wiele kategorii miejsc użytecznych odpowiadających zapytaniu.</string>
     <string name="shared_string_name">Nazwa</string>
@@ -762,8 +762,8 @@
     <string name="bg_service_sleep_mode_on">Zakończ
 \n działanie aplikacji w tle</string>
     <string name="filterpoi_activity">Utwórz filtr użytecznych miejsc</string>
-    <string name="day_night_info_description">Wschód: %1$s
-\nZachód: %2$s</string>
+    <string name="day_night_info_description">Wschód Słońca: %1$s
+\nZachód Słońca: %2$s</string>
     <string name="map_widget_renderer">Styl mapy</string>
     <string name="layer_map_appearance">Skonfiguruj ekran</string>
     <string name="avoid_unpaved">Omijanie dróg nieutwardzonych</string>
@@ -1481,7 +1481,7 @@
     <string name="proxy_port_descr">Określ numer portu serwera proxy (np. 8118).</string>
     <string name="shared_string_release">Data wydania</string>
     <string name="get_plugin">Pobierz</string>
-    <string name="local_osm_changes_upload_all_confirm">Wysłać %1$d zmian do OSM\?</string>
+    <string name="local_osm_changes_upload_all_confirm">Wysłać %1$d zmian(ę/y) do OSM\?</string>
     <string name="confirmation_to_clear_history">Wyczyścić historię?</string>
     <string name="delay_to_start_navigation_descr">Określa czas wyświetlania ekranu planowania trasy.</string>
     <string name="delay_to_start_navigation">Rozpocznij nawigację zakręt-po-zakręcie po…</string>
@@ -1843,7 +1843,7 @@
     <string name="download_files_error_not_enough_space">Za mało miejsca!
 \nWymagane jest {3} MB tymczasowo i {1} MB na stałe.
 \n(Tylko {2} MB jest dostępne.)</string>
-    <string name="download_files_question_space_with_temp">Czy pobrać {0} plik(-i/-ów)\?
+    <string name="download_files_question_space_with_temp">Czy pobrać {0} plik(i/ów)\?
 \nWymagane jest {3} MB tymczasowo i {1} MB na stałe. (Z {2} MB.)</string>
     <string name="upload_osm_note_description">Przesyłanie uwag OSM anonimowo lub używając profilu na OpenStreetMap.org.</string>
     <string name="upload_osm_note">Wysyłanie uwagi OSM</string>
@@ -2012,7 +2012,7 @@
     <string name="search_my_location">Wyszukaj aktualne położenie</string>
     <string name="update_all_maps_now">Uaktualnić wszystkie mapy?</string>
     <string name="clear_tile_data">Wyczyść wszystkie kafelki</string>
-    <string name="osm_live_payment_desc">Subskrypcja naliczona za wybrany okres. Anuluj go w Google Play w dowolnym momencie.</string>
+    <string name="osm_live_payment_desc">Subskrypcja naliczana za wybrany okres. Anuluj ją w Google Play w dowolnym momencie.</string>
     <string name="donation_to_osm">Darowizna na rzecz społeczności OSM</string>
     <string name="donation_to_osm_desc">Część z dotacji jest przekazywana darczyńcom OSM. Koszt subskrypcji pozostaje taki sam.</string>
     <string name="osm_live_subscription_desc">Subskrypcje pozwalają na cogodzinne, codzienne i cotygodniowe uaktualnienia i nieograniczone liczbą pobieranie map całego świata.</string>
@@ -2023,7 +2023,7 @@
     <string name="save_filter">Zapisz filtr</string>
     <string name="delete_filter">Usuń filtr</string>
     <string name="new_filter">Nowy filtr</string>
-    <string name="new_filter_desc">Proszę wprowadzić nazwę nowego filtra. Zostanie on dodany do karty \"Kategorie\".</string>
+    <string name="new_filter_desc">Wprowadź nazwę nowego filtra. Zostanie on dodany do karty „Kategorie”.</string>
     <string name="selected_categories">Wybrane kategorie</string>
     <string name="create_custom_poi">Tworzenie własnego filtra</string>
     <string name="custom_search">Własne wyszukiwanie</string>
@@ -2183,8 +2183,8 @@
     <string name="max_speed">Maksymalna prędkość</string>
     <string name="average_speed">Średnia prędkość</string>
     <string name="shared_string_gpx_track">Trasa</string>
-    <string name="points_delete_multiple_succesful">Usunięto punkty.</string>
-    <string name="points_delete_multiple">Usunąć %1$d punkt(ów)\?</string>
+    <string name="points_delete_multiple_succesful">Usunięto punkt(y).</string>
+    <string name="points_delete_multiple">Usunąć %1$d punkt(y/ów)\?</string>
     <string name="track_points_category_name">Punkty trasy, użyteczne miejsca i nazwane funkcje</string>
     <string name="route_points_category_name">Zakręty na tej trasie</string>
     <string name="add_new_folder">Dodaj nowy katalog</string>
@@ -2678,7 +2678,7 @@
     <string name="access_intermediate_arrival_time">Pośredni czas przyjazdu</string>
     <string name="map_widget_intermediate_time">Czas pośredni</string>
     <string name="unirs_render_descr">Modyfikacja domyślnego stylu zwiększająca kontrast dróg pieszych i rowerowych. Używa przestarzałych kolorów stylu „Mapnik”.</string>
-    <string name="off_road_render_descr">Do przejazdów terenowych, oparty na stylu \"topograficzny\", do użycia z podkładami o barwie zielonej. Zmniejszona szerokość głównych dróg, zwiększona szerokość dróg leśnych i polnych, ścieżek, dróg rowerowych i innych.</string>
+    <string name="off_road_render_descr">Do jazdy off-road, oparty na stylu „Topo” i do użycia z zielonym podkładem. Zmniejszona szerokość głównych dróg, zwiększona szerokość szlaków, ścieżek, dróg rowerowych itp.</string>
     <string name="nautical_render_descr">Do nawigacji morskiej. Zawiera boje, latarnie morskie, drogi rzeczne, drogi morskie, porty, obiekty żeglugi i izobaty.</string>
     <string name="ski_map_render_descr">Do narciarstwa. Zawiera trasy zjazdowe, wyciągi narciarskie, trasy biegowe itp. Przyciemnia dodatkowe obiekty mapy.</string>
     <string name="light_rs_render_descr">Prosty styl dla nawigacji drogowej. Delikatny styl nocny, poziomice, kontrastujące drogi w kolorze pomarańczowym, przyciemnione drugoplanowe obiekty mapy.</string>
@@ -3032,7 +3032,7 @@
     <string name="app_mode_personal_transporter">Transporter osobisty</string>
     <string name="precision_hdop_and_vdop">Precyzja w poziomie: %1$s, w pionie: %2$s</string>
     <string name="precision_hdop">Precyzja w poziomie: %s</string>
-    <string name="app_mode_offroad">off-road</string>
+    <string name="app_mode_offroad">Off-road</string>
     <string name="edit_profile_setup_subtitle">Profil zachowa własne ustawienia</string>
     <string name="edit_profile_setup_map_subtitle">Wybiera opcje mapy dla profilu</string>
     <string name="edit_profile_screen_options_subtitle">Wybiera opcje ekranu</string>
@@ -3991,7 +3991,7 @@
     <string name="activity_type_running_name">Bieganie</string>
     <string name="activity_type_walking_name">Chodzenie</string>
     <string name="activity_type_motorbike_name">Motocykl</string>
-    <string name="activity_type_offroad_name">Poza drogą</string>
+    <string name="activity_type_offroad_name">Off-road</string>
     <string name="activity_type_car_name">Samochód</string>
     <string name="select_segments">Wybierz segmenty</string>
     <string name="temporary_conditional_routing_descr">Użyj ograniczeń drogowych, które są aktywne w danej chwili na mapie</string>
@@ -4190,8 +4190,8 @@
     <string name="complete_purchase">Zakończ zakup</string>
     <string name="regular_price">Zwykła cena</string>
     <string name="purchases_feature_desc_nautical">Uzyskaj dostęp do informacji o głębokości morskiej</string>
-    <string name="purchases_feature_desc_terrain">Poziomice terenu, pełna mapa cieniowana w ciemnych odcieniach oraz mapy nachylenia z kolorami do wyświetlenia, szczytami i nizinami.</string>
-    <string name="purchases_feature_desc_wikivoyage">Przeglądaj Wikipedię w trybie offline. Artykuły podzielone według krajów i regionów, dostępne we wszystkich językach.</string>
+    <string name="purchases_feature_desc_terrain">Poziomice terenu, pełna mapa cieniowana w ciemnych odcieniach oraz mapy nachylenia z kolorami pokazującymi szczyty i niziny.</string>
+    <string name="purchases_feature_desc_wikivoyage">Przeglądaj Wikipodróże w trybie offline. Artykuły podzielone według krajów i regionów, dostępne we wszystkich językach.</string>
     <string name="purchases_feature_desc_wikipedia">Przeglądaj Wikipedię w trybie offline. Artykuły podzielone według krajów i regionów, dostępne we wszystkich językach.</string>
     <string name="purchases_feature_desc_combined_wiki">Przeglądaj artykuły z Wikipedii w podróży, bez połączenia z Internetem. Dane w trybie offline podzielone według krajów i dostępne we wszystkich językach.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Uzyskaj nieograniczone pobierania map offline dla wszystkich kontynentów i regionów.</string>
@@ -4224,23 +4224,23 @@
     <string name="backup_error_no_valid_subscription">Brak ważnej subskrypcji</string>
     <string name="release_4_0">• Kopia zapasowa w chmurze
 \n
-\n • Dodano tryb nocny dla stylu renderowania \"topograficzny\"
+\n • Dodano tryb nocny dla stylu renderowania „Topo”
 \n
-\n • Dodano opcję pobierania izolinii w stopach
+\n • Dodano opcję pobierania poziomic w stopach
 \n
 \n • Trasy mogą być teraz pokolorowane według wysokości, prędkości lub nachylenia
 \n
-\n • Zaktualizowano okno dialogowe \"Nagrywanie podróży\"
+\n • Zaktualizowano okno dialogowe „Nagrywanie podróży”
 \n
 \n • Mierzenie odległości naciśnięciami przesunięte z cyrkla do oddzielnej opcji
 \n
 \n • Planowanie trasy: dodano możliwość zmiany opcji nawigacji, dostęp do konfiguracji mapy i szukanie bez opuszczania planowania trasy
 \n
-\n • Nowy ekran \"Zakup\" ze szczegółowymi informacjami o zakupie
+\n • Nowy ekran „Zakup” ze szczegółowymi informacjami o zakupie
 \n
 \n • Dodano opcję zmiany wyglądu linii trasy
 \n
-\n • Aktualizacje OsmAnd Live przeniesione do \"Pobrane &gt; Aktualizacje\"
+\n • Aktualizacje OsmAnd Live przeniesione do „Pobrane &gt; Aktualizacje”
 \n
 \n</string>
     <string name="approximate_route_description">Dołącz trasę do dróg na mapie, aby uzyskać wszystkie zakręty i dodatkowe dane, takie jak gładkość, rodzaje dróg itp.</string>
@@ -4267,4 +4267,7 @@
     <string name="shared_string_purchased">Zakupiono</string>
     <string name="explore_wikipedia_offline">Przeglądaj Wikipedię w trybie offline.</string>
     <string name="contour_lines_hillshades_slope">Poziomice, mapy cieniowane, nachylenie</string>
+    <string name="on_hold_since">Wstrzymana od %1$s</string>
+    <string name="active_till">Aktywna do %1$s</string>
+    <string name="promo_subscription">Subskrypcja promocyjna</string>
 </resources>
