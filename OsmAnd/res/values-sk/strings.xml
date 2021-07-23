@@ -4217,4 +4217,49 @@
     <string name="attribute">Vlastnosť</string>
     <string name="shared_string_purchased">Zakúpené</string>
     <string name="explore_wikipedia_offline">Preskúmajte Wikipédiu offline.</string>
+    <string name="routing_attr_avoid_tunnels_description">Vyhnúť sa tunelom</string>
+    <string name="routing_attr_avoid_tunnels_name">Vyhnúť sa tunelom</string>
+    <string name="backup_promocode">Promokód</string>
+    <string name="send_crash_log">Odoslať záznam o páde aplikácie</string>
+    <string name="send_logcat_log">Odoslať záznam logcat</string>
+    <string name="purchases_feature_desc_nautical">Získajte prístup k údajom o námornej hĺbke</string>
+    <string name="purchases_feature_desc_terrain">Terénne vrstevnice, mapy s tieňovanými svahmi a mapy sklonov s farbami na zvýraznenie vrcholov a nížin.</string>
+    <string name="purchases_feature_desc_wikivoyage">Skúmajte sprievodcov Wikivoyage offline. Články rozdelené podľa krajín a regiónov a dostupné vo všetkých jazykoch.</string>
+    <string name="purchases_feature_desc_wikipedia">Skúmajte Wikipédiu offline. Články rozdelené podľa krajín a regiónov a dostupné vo všetkých jazykoch.</string>
+    <string name="release_4_0">• Zálohovanie do Cloudu
+\n
+\n • Pridaný nočný režim pre vykresľovací štýl \"Topo\"
+\n
+\n • Pridaná možnosť stiahnuť vrstevnice v stopách namiesto metrov
+\n
+\n • Stopy môžu byť vyfarbené podľa výšky, rýchlosti alebo sklonu.
+\n
+\n • Vylepšené okno \"Záznam výletu\"
+\n
+\n • Meranie vzdialenosti stlačením presunuté z polomerového pravítka do samostatnej možnosti
+\n
+\n • Plánovanie trasy: pridaná možnosť zmeniť navigačné nastavenia, nastavenie mapy a hľadať bez opustenia plánovania trasy
+\n
+\n • Nová obrazovka \"Nákupy\" s informáciami o nákupe funkcií
+\n
+\n • Pridaná možnosť zmeniť vzhľad navigačnej čiary.
+\n
+\n • Aktualizácie OsmAnd Live presunuté do \"Sťahovania &gt; Aktualizácie\"
+\n
+\n</string>
+    <string name="purchases_feature_desc_combined_wiki">Skúmajte články Wikipédie bez pripojenia na internet. Offline údaje rozdelené podľa krajín a dostupné vo všetkých jazykoch.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Získajte neobmedzené sťahovania všetkých kontinentov a regiónov offline máp.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Získajte prístup k pravidelným mesačným aktualizáciám pre offline mapy.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Získajte prístup k častejším aktualizáciám máp. Hodinové, denné alebo týždenné aktualizácie. Aktualizácie sú sťahované postupne, len pre zmenenú oblasť.</string>
+    <string name="purchases_feature_desc_advanced_widgets">Získajte prístup k pokročilým nástrojom OsmAnd.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Získajte OsmAnd Cloud na uloženie všetkých údajov OsmAnd na serveri. Po preinštalovaní nestratíte údaje. Zálohujte a obnovte ľahko všetky informácie.</string>
+    <string name="backup_error_subscription_was_expired_descr">Vaše predplatné OsmAnd Pro expirovalo, obnovte ho pre použitie zálohovania. Napriek tom môžete obnoviť údaje z Cloudu.</string>
+    <string name="contour_lines_hillshades_slope">Vrstevnice, tieňované svahy, sklony</string>
+    <string name="approximate_route_description">Pripojiť trasu k cestám na mape pre získanie zákrut a doplňujúcich údajov ako hladkosť povrchu, typy ciest, atď.</string>
+    <string name="duration_moment_ago">pred chvíľou</string>
+    <string name="logout_from_osmand_cloud">Odhlásiť z OsmAnd Cloudu</string>
+    <string name="logout_from_osmand_cloud_decsr">Naozaj sa chcete odhlásiť\?
+\nPred ďalším zálohovaním alebo obnovením údajov sa budete musieť znovu prihlásiť.</string>
+    <string name="backup_deleting_all_data">Odstraňujú sa všetky údaje</string>
+    <string name="backup_deleted_all_data">Všetky údaje odstránené</string>
 </resources>
