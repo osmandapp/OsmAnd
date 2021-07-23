@@ -70,7 +70,7 @@ public class BackupHelper {
 	private final BackupDbHelper dbHelper;
 
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
-	public static final boolean DEBUG = OsmandPlugin.isDevelopment();
+	public static boolean DEBUG = false;
 
 	private final BackupExecutor executor;
 
