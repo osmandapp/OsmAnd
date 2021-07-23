@@ -2253,7 +2253,7 @@
     <string name="quick_action_add_favorite">Добавить в избранные</string>
     <string name="dialog_add_action_title">Добавить</string>
     <string name="quick_actions_delete">Удалить действие</string>
-    <string name="quick_actions_delete_text">Вы уверены, что хотите удалить действие «%s»\?</string>
+    <string name="quick_actions_delete_text">Удалить действие «%s»\?</string>
     <string name="quick_action_poi_show">Показать %1$s</string>
     <string name="quick_action_poi_hide">Скрыть %1$s</string>
     <string name="quick_action_add_configure_map">Настройки карты</string>
@@ -4208,7 +4208,7 @@
     <string name="complete_purchase">Оформить покупку</string>
     <string name="regular_price">Обычная цена</string>
     <string name="from_with_param">За %1$s</string>
-    <string name="backup_delete_types_descr">Вы хотите удалить из облака данные для отключенных типов\?</string>
+    <string name="backup_delete_types_descr">Удалить из облака данные для устаревших типов\?</string>
     <string name="backup_delete_types">Удалить данные отключенных типов</string>
     <string name="shared_string_discussion">Обсуждение</string>
     <string name="shared_string_view_all">Посмотреть все</string>
@@ -4265,4 +4265,7 @@
     <string name="backup_do_not_have_any">У вас еще нет облачных резервных копий</string>
     <string name="backup_dont_have_any_descr">Настройте автоматическое резервное копирование, чтобы не беспокоиться о потере данных.</string>
     <string name="backup_setup">Настроить резервное копирование</string>
+    <string name="promo_subscription">Промо-подписка</string>
+    <string name="on_hold_since">Приостановлена с %1$s</string>
+    <string name="active_till">Активна до %1$s</string>
 </resources>
