@@ -224,7 +224,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 
 		CharSequence price = array.length == 0 ? null : ObjectUtils.min(array).getPrice();
 		updateContinueButton(mainView.findViewById(R.id.button_continue_pro),
-				R.drawable.ic_action_osmand_pro_logo,
+				R.drawable.ic_action_osmand_pro_logo_colored,
 				getString(R.string.osmand_pro),
 				price,
 				v -> OsmAndProPlanFragment.showInstance(requireActivity()),
