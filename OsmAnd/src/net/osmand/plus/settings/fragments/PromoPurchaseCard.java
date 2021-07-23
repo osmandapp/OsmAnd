@@ -31,7 +31,7 @@ public class PromoPurchaseCard extends MapBaseCard {
 
 		title.setText(R.string.promo);
 		purchaseType.setText(R.string.promo_subscription);
-		icon.setImageDrawable(getIcon(R.drawable.ic_action_osmand_pro_logo));
+		icon.setImageDrawable(getIcon(R.drawable.ic_action_osmand_pro_logo_colored));
 
 		AndroidUiHelper.updateVisibility(purchaseType, true);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.osmand_live), false);
