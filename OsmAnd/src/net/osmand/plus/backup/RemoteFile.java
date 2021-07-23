@@ -29,7 +29,7 @@ public class RemoteFile {
 
 	public SettingsItem item;
 
-	public RemoteFile(@NonNull JSONObject json) throws JSONException, ParseException {
+	public RemoteFile(@NonNull JSONObject json) throws JSONException {
 		if (json.has("userid")) {
 			userid = json.getInt("userid");
 		}
@@ -157,6 +157,6 @@ public class RemoteFile {
 	@NonNull
 	@Override
 	public String toString() {
-		return "type " + type + ", name " + name + "";
+		return type + "/" + name + " (" + filesize + ") clientTime=" + clienttimems + " updateTime=" + updatetimems;
 	}
 }

@@ -17,6 +17,7 @@ import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
@@ -55,7 +56,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -70,7 +70,7 @@ public class BackupHelper {
 	private final BackupDbHelper dbHelper;
 
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = OsmandPlugin.isDevelopment();
 
 	private final BackupExecutor executor;
 
@@ -526,7 +526,7 @@ public class BackupHelper {
 							message = "Total files: " + totalFiles + " " +
 									"Total zip size: " + AndroidUtils.formatSize(app, Long.parseLong(totalZipSize)) + " " +
 									"Total file versions: " + totalFileVersions;
-						} catch (JSONException | ParseException e) {
+						} catch (JSONException e) {
 							status = STATUS_PARSE_JSON_ERROR;
 							message = "Download file list error: json parsing";
 						}
@@ -754,6 +754,21 @@ public class BackupHelper {
 			@Override
 			protected BackupInfo doInBackground(Void... voids) {
 				BackupInfo info = new BackupInfo();
+				operationLog.log("=== localFiles ===");
+				for (LocalFile localFile : localFiles.values()) {
+					operationLog.log(localFile.toString());
+				}
+				operationLog.log("=== localFiles ===");
+				operationLog.log("=== uniqueRemoteFiles ===");
+				for (RemoteFile remoteFile : uniqueRemoteFiles.values()) {
+					operationLog.log(remoteFile.toString());
+				}
+				operationLog.log("=== uniqueRemoteFiles ===");
+				operationLog.log("=== deletedRemoteFiles ===");
+				for (RemoteFile remoteFile : deletedRemoteFiles.values()) {
+					operationLog.log(remoteFile.toString());
+				}
+				operationLog.log("=== deletedRemoteFiles ===");
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
@@ -806,6 +821,27 @@ public class BackupHelper {
 					}
 				}
 				info.createItemCollections(app);
+
+				operationLog.log("=== filesToUpload ===");
+				for (LocalFile localFile : info.filesToUpload) {
+					operationLog.log(localFile.toString());
+				}
+				operationLog.log("=== filesToUpload ===");
+				operationLog.log("=== filesToDownload ===");
+				for (RemoteFile remoteFile : info.filesToDownload) {
+					operationLog.log(remoteFile.toString());
+				}
+				operationLog.log("=== filesToDownload ===");
+				operationLog.log("=== filesToDelete ===");
+				for (RemoteFile remoteFile : info.filesToDelete) {
+					operationLog.log(remoteFile.toString());
+				}
+				operationLog.log("=== filesToDelete ===");
+				operationLog.log("=== filesToMerge ===");
+				for (Pair<LocalFile, RemoteFile> filePair : info.filesToMerge) {
+					operationLog.log("LOCAL=" + filePair.first.toString() + " REMOTE=" + filePair.second.toString());
+				}
+				operationLog.log("=== filesToMerge ===");
 				return info;
 			}
 
