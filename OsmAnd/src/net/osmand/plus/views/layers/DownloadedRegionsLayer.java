@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryMapDataObject;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -30,11 +31,13 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.ui.DownloadMapToolbarController;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -281,12 +284,13 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			IndexItem indexItem = null;
 			String name = null;
 			Map.Entry<WorldRegion, BinaryMapDataObject> res = app.getRegions().getSmallestBinaryMapDataObjectAt(selectedObjects);
+			DownloadIndexesThread downloadThread = app.getDownloadThread();
+			DownloadResources indexes = downloadThread.getIndexes();
 			if (res != null && res.getKey() != null) {
 				WorldRegion regionData  = res.getKey();
-				DownloadIndexesThread downloadThread = app.getDownloadThread();
-				List<IndexItem> indexItems = downloadThread.getIndexes().getIndexItems(regionData);
+				List<IndexItem> indexItems = indexes.getIndexItems(regionData);
 				if (indexItems.size() == 0) {
-					if (!downloadThread.getIndexes().isDownloadedFromInternet && app.getSettings().isInternetConnectionAvailable()) {
+					if (!indexes.isDownloadedFromInternet && app.getSettings().isInternetConnectionAvailable()) {
 						downloadThread.runReloadIndexFilesSilent();
 					}
 				} else {
@@ -301,7 +305,25 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				}
 			}
 			if (indexItem != null && !Algorithms.isEmpty(name)) {
-				showDownloadMapToolbar(indexItem, name);
+				boolean hasExternalMap = false;
+				for (BinaryMapReaderResource reader : app.getResourceManager().getFileReaders()) {
+					String fileName = reader.getFileName();
+					if (!fileName.startsWith("World_") && fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
+							&& !indexes.isDownloadedFile(fileName)) {
+						BinaryMapIndexReader shallowReader = reader.getShallowReader();
+						if (shallowReader != null) {
+							if (shallowReader.containsMapData(cx, cy, cx, cy, zoom)) {
+								hasExternalMap = true;
+								break;
+							}
+						}
+					}
+				}
+				if (!hasExternalMap) {
+					showDownloadMapToolbar(indexItem, name);
+				} else {
+					hideDownloadMapToolbar();
+				}
 			} else {
 				hideDownloadMapToolbar();
 			}
@@ -312,15 +334,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	private void showDownloadMapToolbar(final @NonNull IndexItem indexItem, final @NonNull String regionName) {
 		if (!regionName.equals(DownloadMapToolbarController.getLastProcessedRegionName())) {
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					if (!regionName.equals(DownloadMapToolbarController.getLastProcessedRegionName())) {
-						TopToolbarController controller = mapActivity.getTopToolbarController(TopToolbarControllerType.DOWNLOAD_MAP);
-						if (controller == null || !((DownloadMapToolbarController) controller).getRegionName().equals(regionName)) {
-							controller = new DownloadMapToolbarController(mapActivity, indexItem, regionName);
-							mapActivity.showTopToolbar(controller);
-						}
+			app.runInUIThread(() -> {
+				if (!regionName.equals(DownloadMapToolbarController.getLastProcessedRegionName())) {
+					TopToolbarController controller = mapActivity.getTopToolbarController(TopToolbarControllerType.DOWNLOAD_MAP);
+					if (controller == null || !((DownloadMapToolbarController) controller).getRegionName().equals(regionName)) {
+						controller = new DownloadMapToolbarController(mapActivity, indexItem, regionName);
+						mapActivity.showTopToolbar(controller);
 					}
 				}
 			});
@@ -328,12 +347,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	private void hideDownloadMapToolbar() {
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				mapActivity.hideTopToolbar(TopToolbarControllerType.DOWNLOAD_MAP);
-			}
-		});
+		app.runInUIThread(() -> mapActivity.hideTopToolbar(TopToolbarControllerType.DOWNLOAD_MAP));
 	}
 
 	private void removeObjectsFromList(List<BinaryMapDataObject> list, List<BinaryMapDataObject> objects) {
