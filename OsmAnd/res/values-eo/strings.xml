@@ -4268,4 +4268,5 @@
     <string name="on_hold_since">Ĉesigita ekde %1$s</string>
     <string name="active_till">Aktiva ĝis %1$s</string>
     <string name="promo_subscription">Reklamkoda abono</string>
+    <string name="track_has_no_needed_data">La spuro enhavas ne enhavas bezonatajn datumojn.</string>
 </resources>
