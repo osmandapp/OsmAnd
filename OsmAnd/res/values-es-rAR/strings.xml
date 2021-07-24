@@ -4177,8 +4177,8 @@
     <string name="send_crash_log">Enviar informe de errores</string>
     <string name="send_logcat_log">Enviar informe de logcat</string>
     <string name="purchases_feature_desc_nautical">Obtén acceso a la información de profundidad náutica</string>
-    <string name="purchases_feature_desc_terrain">Curvas de nivel del terreno, mapa completo de sombreados con tonos oscuros y mapas de pendientes con colores para mostrar, picos y tierras bajas.</string>
-    <string name="purchases_feature_desc_wikivoyage">Explora Wikipedia sin conexión. Artículos divididos por países y regiones y disponibles en todos los idiomas.</string>
+    <string name="purchases_feature_desc_terrain">Curvas de nivel del terreno, mapa completo de sombreados con tonos oscuros y mapas de pendientes con colores para mostrar picos y tierras bajas.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explora Wikiviajes sin conexión. Artículos divididos por países y regiones y disponibles en todos los idiomas.</string>
     <string name="purchases_feature_desc_wikipedia">Explora Wikipedia sin conexión. Artículos divididos por países y regiones y disponibles en todos los idiomas.</string>
     <string name="purchases_feature_desc_combined_wiki">Explora los artículos de Wikipedia sobre la marcha, sin conexión a Internet. Datos sin conexión divididos por países y disponibles en todos los idiomas.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Obtén acceso sin conexión a descargas ilimitadas para todos los continentes y mapas de regiones.</string>
@@ -4206,7 +4206,7 @@
     <string name="cancel_anytime_in_gplay">Puedes cancelarlo cuando quieras en Google Play.</string>
     <string name="shared_string_not_included">No incluido</string>
     <string name="shared_string_includes">Incluido</string>
-    <string name="complete_purchase">Compra completa</string>
+    <string name="complete_purchase">Completar compra</string>
     <string name="regular_price">Precio normal</string>
     <string name="from_with_param">De %1$s</string>
     <string name="backup_delete_types_descr">¿Borrar todos los tipos de datos obsoletos en la nube\?</string>
@@ -4268,4 +4268,7 @@
     <string name="attribute">Atributo</string>
     <string name="shared_string_purchased">Comprado</string>
     <string name="explore_wikipedia_offline">Explorar Wikipedia sin conexión.</string>
+    <string name="on_hold_since">En espera desde %1$s</string>
+    <string name="active_till">Activa hasta %1$s</string>
+    <string name="promo_subscription">Suscripción promocional</string>
 </resources>
