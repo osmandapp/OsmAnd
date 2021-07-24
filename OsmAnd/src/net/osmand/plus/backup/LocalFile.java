@@ -79,6 +79,6 @@ public class LocalFile {
 	@NonNull
 	@Override
 	public String toString() {
-		return getFileName();
+		return getFileName() + " (" + (file != null ? file.length() : -1) + ") localTime=" + localModifiedTime + " uploadTime=" + uploadTime;
 	}
 }
