@@ -124,7 +124,7 @@ public class Version {
 				|| InAppPurchaseHelper.isFullVersionPurchased(ctx)
 				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(ctx)
 				|| InAppPurchaseHelper.isSubscribedToMaps(ctx)
-				|| InAppPurchaseHelper.isSubscribedToOsmAndPro(ctx);
+				|| InAppPurchaseHelper.isOsmAndProAvailable(ctx);
 	}
 	
 	public static boolean isDeveloperVersion(OsmandApplication ctx){

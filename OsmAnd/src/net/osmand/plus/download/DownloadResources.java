@@ -42,6 +42,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	public OsmandApplication app;
 	private Map<String, String> indexFileNames = new LinkedHashMap<>();
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
+	private List<String> indexDownloadedFileNames = new ArrayList<>();
 	private List<IndexItem> rawResources;
 	private Map<WorldRegion, List<IndexItem>> groupByRegion;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
@@ -160,6 +161,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
 		this.indexActivatedFileNames = indexActivatedFileNames;
+		this.indexDownloadedFileNames = new ArrayList<>();
 	}
 
 	public boolean checkIfItemOutdated(IndexItem item, java.text.DateFormat format) {
@@ -172,6 +174,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		if (indexActivatedDate == null && indexFilesDate == null) {
 			return false;
 		}
+		indexDownloadedFileNames.add(sfName);
 		item.setDownloaded(true);
 		String date = item.getDate(format);
 		boolean parsed = false;
@@ -243,6 +246,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		item.setOutdated(outdated);
 		return outdated;
+	}
+
+	public boolean isDownloadedFile(@NonNull String fileName) {
+		return indexDownloadedFileNames.contains(fileName);
 	}
 
 	private void logItemUpdateInfo(IndexItem item, DateFormat format, long itemSize, long oldItemSize) {

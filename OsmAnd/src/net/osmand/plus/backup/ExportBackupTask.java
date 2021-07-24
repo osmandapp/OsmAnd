@@ -33,7 +33,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
-					 @NonNull List<RemoteFile> filesToDelete,
+					 @NonNull List<SettingsItem> itemsToDelete,
 					 @Nullable BackupExportListener listener) {
 		this.helper = helper;
 		this.listener = listener;
@@ -41,8 +41,8 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		for (SettingsItem item : items) {
 			exporter.addSettingsItem(item);
 		}
-		for (RemoteFile file : filesToDelete) {
-			exporter.addFileToDelete(file);
+		for (SettingsItem item : itemsToDelete) {
+			exporter.addItemToDelete(item);
 		}
 	}
 
@@ -86,10 +86,8 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		long size = 0;
 		for (SettingsItem item : exporter.getItems().values()) {
 			if (item instanceof FileSettingsItem) {
-				File itemFile = ((FileSettingsItem) item).getFile();
-				List<File> filesToUpload = new ArrayList<>();
-				FileUtils.collectDirFiles(itemFile, filesToUpload);
-
+				List<File> filesToUpload = helper.getApp().getBackupHelper()
+						.collectItemFilesForUpload((FileSettingsItem) item);
 				for (File file : filesToUpload) {
 					size += file.length() + APPROXIMATE_FILE_SIZE_BYTES;
 				}
@@ -97,7 +95,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 				size += item.getEstimatedSize() + APPROXIMATE_FILE_SIZE_BYTES;
 			}
 		}
-		size += exporter.getFilesToDelete().size() * APPROXIMATE_FILE_SIZE_BYTES;
+		size += exporter.getItemsToDelete().size() * APPROXIMATE_FILE_SIZE_BYTES;
 		return size;
 	}
 

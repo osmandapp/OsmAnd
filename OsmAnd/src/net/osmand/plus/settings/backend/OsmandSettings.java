@@ -46,6 +46,7 @@ import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.mapmarkers.MapMarkersMode;
 import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
@@ -1233,8 +1234,12 @@ public class OsmandSettings {
 	public final OsmandPreference<String> BACKUP_NATIVE_DEVICE_ID = new StringPreference(this, "backup_native_device_id", "").makeGlobal();
 	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN = new StringPreference(this, "backup_access_token", "").makeGlobal();
 	public final OsmandPreference<String> BACKUP_ACCESS_TOKEN_UPDATE_TIME = new StringPreference(this, "backup_access_token_update_time", "").makeGlobal();
+
 	public final OsmandPreference<String> BACKUP_PROMOCODE = new StringPreference(this, "backup_promocode", "").makeGlobal();
 	public final OsmandPreference<Boolean> BACKUP_PROMOCODE_ACTIVE = new BooleanPreference(this, "backup_promocode_active", false).makeGlobal();
+	public final OsmandPreference<Long> BACKUP_PROMOCODE_START_TIME = new LongPreference(this, "promo_website_start_time", 0L).makeGlobal();
+	public final OsmandPreference<Long> BACKUP_PROMOCODE_EXPIRE_TIME = new LongPreference(this, "promo_website_expire_time", 0L).makeGlobal();
+	public final CommonPreference<SubscriptionState> BACKUP_PROMOCODE_STATE = new EnumStringPreference<>(this, "promo_website_state", SubscriptionState.UNDEFINED, SubscriptionState.values()).makeGlobal();
 
 	public final OsmandPreference<Long> FAVORITES_LAST_UPLOADED_TIME = new LongPreference(this, "favorites_last_uploaded_time", 0L).makeGlobal();
 	public final OsmandPreference<Long> BACKUP_LAST_UPLOADED_TIME = new LongPreference(this, "backup_last_uploaded_time", 0L).makeGlobal();
@@ -1857,48 +1862,6 @@ public class OsmandSettings {
 			}
 		}
 		return true;
-	}
-
-	public long getTileSourcesLastModifiedTime() {
-		long lastModified = 0;
-		File tilesDir = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		if (tilesDir != null && tilesDir.canRead()) {
-			List<File> dirs = new ArrayList<>();
-			dirs.add(tilesDir);
-			Algorithms.collectDirs(tilesDir, dirs);
-			for (File dir : dirs) {
-				File[] files = dir.listFiles();
-				if (files != null && files.length > 0) {
-					for (File file : files) {
-						long l = file.lastModified();
-						if (l > lastModified) {
-							lastModified = l;
-						}
-					}
-				}
-			}
-		}
-		return lastModified;
-	}
-
-	public void setTileSourcesLastModifiedTime(long lastModifiedTime) {
-		File tilesDir = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-		if (tilesDir != null && tilesDir.canRead()) {
-			List<File> dirs = new ArrayList<>();
-			dirs.add(tilesDir);
-			Algorithms.collectDirs(tilesDir, dirs);
-			for (File dir : dirs) {
-				File[] files = dir.listFiles();
-				if (files != null && files.length > 0) {
-					for (File file : files) {
-						long l = file.lastModified();
-						if (l > lastModifiedTime) {
-							file.setLastModified(lastModifiedTime);
-						}
-					}
-				}
-			}
-		}
 	}
 
 	public Map<String, String> getTileSourceEntries() {

@@ -109,7 +109,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 		View signUpButton = holder.itemView.findViewById(R.id.sign_up_button);
 		View signInButton = holder.itemView.findViewById(R.id.sign_in_button);
 
-		boolean subscribed = InAppPurchaseHelper.isSubscribedToOsmAndPro(app);
+		boolean subscribed = InAppPurchaseHelper.isOsmAndProAvailable(app);
 		if (subscribed) {
 			setupAuthorizeButton(signUpButton, DialogButtonType.PRIMARY, R.string.register_opr_create_new_account, true);
 		} else {

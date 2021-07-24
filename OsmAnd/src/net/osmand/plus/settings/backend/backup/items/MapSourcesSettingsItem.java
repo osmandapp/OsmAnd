@@ -57,12 +57,39 @@ public class MapSourcesSettingsItem extends CollectionSettingsItem<ITileSource> 
 
 	@Override
 	public long getLocalModifiedTime() {
-		return app.getSettings().getTileSourcesLastModifiedTime();
+		long lastModifiedTime = 0;
+		for (ITileSource source : items) {
+			if (source instanceof SQLiteTileSource) {
+				long lastModified = app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName()
+						+ IndexConstants.SQLITE_EXT).lastModified();
+				if (lastModified > lastModifiedTime) {
+					lastModifiedTime = lastModified;
+				}
+			} else if (source instanceof TileSourceManager.TileSourceTemplate) {
+				long lastModified = new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName()), ".metainfo").lastModified();
+				if (lastModified > lastModifiedTime) {
+					lastModifiedTime = lastModified;
+				}
+			}
+		}
+		return lastModifiedTime;
 	}
 
 	@Override
 	public void setLocalModifiedTime(long lastModifiedTime) {
-		app.getSettings().setTileSourcesLastModifiedTime(lastModifiedTime);
+		for (ITileSource source : items) {
+			if (source instanceof SQLiteTileSource) {
+				File file = app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName() + IndexConstants.SQLITE_EXT);
+				if (file.lastModified() > lastModifiedTime) {
+					file.setLastModified(lastModifiedTime);
+				}
+			} else if (source instanceof TileSourceManager.TileSourceTemplate) {
+				File file = new File(app.getAppPath(IndexConstants.TILES_INDEX_DIR + source.getName()), ".metainfo");
+				if (file.lastModified() > lastModifiedTime) {
+					file.setLastModified(lastModifiedTime);
+				}
+			}
+		}
 	}
 
 	@Override

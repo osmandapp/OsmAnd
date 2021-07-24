@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.OperationLog;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkWriter.OnUploadItemListener;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.Exporter;
@@ -27,7 +28,7 @@ import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTE
 public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
-	private final Map<String, RemoteFile> filesToDelete = new LinkedHashMap<>();
+	private final Map<String, SettingsItem> itemsToDelete = new LinkedHashMap<>();
 	private ThreadPoolTaskExecutor<ItemWriterTask> executor;
 	private final NetworkExportProgressListener listener;
 
@@ -49,15 +50,15 @@ public class BackupExporter extends Exporter {
 		this.listener = listener;
 	}
 
-	public Map<String, RemoteFile> getFilesToDelete() {
-		return filesToDelete;
+	public Map<String, SettingsItem> getItemsToDelete() {
+		return itemsToDelete;
 	}
 
-	public void addFileToDelete(RemoteFile file) throws IllegalArgumentException {
-		if (filesToDelete.containsKey(file.getTypeNamePath())) {
-			throw new IllegalArgumentException("Already has such file: " + file.getTypeNamePath());
+	public void addItemToDelete(SettingsItem item) throws IllegalArgumentException {
+		if (itemsToDelete.containsKey(item.getName())) {
+			throw new IllegalArgumentException("Already has such item: " + item.getName());
 		}
-		filesToDelete.put(file.getName(), file);
+		itemsToDelete.put(item.getName(), item);
 	}
 
 	@Override
@@ -116,7 +117,18 @@ public class BackupExporter extends Exporter {
 
 	protected void deleteFiles(OnDeleteFilesListener listener) throws IOException {
 		try {
-			backupHelper.deleteFiles(new ArrayList<>(getFilesToDelete().values()), listener);
+			List<RemoteFile> remoteFiles = new ArrayList<>();
+			Map<String, RemoteFile> remoteFilesMap = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE);
+			if (remoteFilesMap != null) {
+				for (RemoteFile remoteFile : remoteFilesMap.values()) {
+					for (SettingsItem item : itemsToDelete.values()) {
+						if (item.equals(remoteFile.item)) {
+							remoteFiles.add(remoteFile);
+						}
+					}
+				}
+				backupHelper.deleteFiles(remoteFiles, listener);
+			}
 		} catch (UserNotRegisteredException e) {
 			throw new IOException(e.getMessage(), e);
 		}
