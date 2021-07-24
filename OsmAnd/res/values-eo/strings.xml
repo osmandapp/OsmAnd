@@ -4067,7 +4067,7 @@
     <string name="osmand_live_cancelled">Nuligita</string>
     <string name="renew_subscription">Renovigi abonon</string>
     <string name="in_grace_period">En prokrastoperiodo</string>
-    <string name="on_hold">En atendo</string>
+    <string name="on_hold">Ĉesigita</string>
     <string name="expired">Eksvalidiĝita</string>
     <string name="contact_support_description">Se vi havas demandojn, bonvolu kontakti nin ĉe %1$s.</string>
     <string name="contact_support">Kontakti subtenon</string>
@@ -4265,4 +4265,7 @@
     <string name="attribute">Atributo</string>
     <string name="shared_string_purchased">Aĉetita</string>
     <string name="explore_wikipedia_offline">Esplori Vikipedion malkonekte.</string>
+    <string name="on_hold_since">Ĉesigita ekde %1$s</string>
+    <string name="active_till">Aktiva ĝis %1$s</string>
+    <string name="promo_subscription">Reklamkoda abono</string>
 </resources>
