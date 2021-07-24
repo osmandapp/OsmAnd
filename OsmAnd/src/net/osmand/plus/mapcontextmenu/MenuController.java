@@ -33,7 +33,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -44,6 +43,7 @@ import net.osmand.plus.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
@@ -69,6 +69,7 @@ import net.osmand.plus.mapcontextmenu.controllers.WptPtMenuController;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.mapillary.MapillaryImage;
 import net.osmand.plus.mapillary.MapillaryMenuController;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.osmedit.EditPOIMenuController;
 import net.osmand.plus.osmedit.OsmBugMenuController;
 import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
@@ -90,8 +91,6 @@ import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
-import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
 
 public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
@@ -295,7 +294,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected void addSpeedToPlainItems() {
 		final MapActivity mapActivity = getMapActivity();
-		if (getMapActivity() != null) {
+		if (mapActivity != null) {
 			final OsmandApplication app = mapActivity.getMyApplication();
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasSpeed() && l.getSpeed() > 0f) {
@@ -307,7 +306,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected void addAltitudeToPlainItems() {
 		final MapActivity mapActivity = getMapActivity();
-		if (getMapActivity() != null) {
+		if (mapActivity != null) {
 			final OsmandApplication app = mapActivity.getMyApplication();
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasAltitude()) {
@@ -319,7 +318,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	protected void addPrecisionToPlainItems() {
 		final MapActivity mapActivity = getMapActivity();
-		if (getMapActivity() != null ) {
+		if (mapActivity != null ) {
 			final OsmandApplication app = mapActivity.getMyApplication();
 			Location l = app.getLocationProvider().getLastKnownLocation();
 			if (l != null && l.hasAccuracy()) {
@@ -779,7 +778,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		public abstract void buttonPressed();
 	}
 
-	public abstract class TitleProgressController {
+	public abstract static class TitleProgressController {
 		public String caption = "";
 		public int progress = 0;
 		public boolean indeterminate;
@@ -848,7 +847,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public static class ContextMenuToolbarController extends TopToolbarController {
 
-		private MenuController menuController;
+		private final MenuController menuController;
 
 		public ContextMenuToolbarController(MenuController menuController) {
 			super(TopToolbarControllerType.CONTEXT_MENU);
@@ -928,11 +927,13 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	private static class SearchOsmandRegionTask extends AsyncTask<Void, Void, BinaryMapDataObject> {
 
-		private WeakReference<MenuController> controllerRef;
+		private final WeakReference<MenuController> controllerRef;
 		private final LatLon latLon;
-		ResourceManager rm;
-		OsmandRegions osmandRegions;
-		String selectedFullName;
+		private int zoom;
+		private ResourceManager rm;
+		private OsmandRegions osmandRegions;
+		private DownloadResources downloadResources;
+		private String selectedFullName;
 
 		SearchOsmandRegionTask(@NonNull MenuController controller, LatLon latLon) {
 			this.controllerRef = new WeakReference<>(controller);
@@ -957,20 +958,28 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			if (mapActivity != null) {
 				rm = mapActivity.getMyApplication().getResourceManager();
 				osmandRegions = rm.getOsmandRegions();
+				downloadResources = mapActivity.getMyApplication().getDownloadThread().getIndexes();
+				zoom = mapActivity.getMapView().getZoom();
 			}
 		}
 
 		@Override
 		protected BinaryMapDataObject doInBackground(Void... voids) {
-
+			if (osmandRegions == null) {
+				return null;
+			}
 			int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
+			if (downloadResources.hasExternalFileAt(point31x, point31y, zoom)) {
+				return null;
+			}
 
-			List<BinaryMapDataObject> mapDataObjects = null;
+			List<BinaryMapDataObject> mapDataObjects;
 			try {
 				mapDataObjects = osmandRegions.query(point31x, point31x, point31y, point31y);
 			} catch (IOException e) {
-				e.printStackTrace();
+				LOG.error(e.getMessage(), e);
+				return null;
 			}
 
 			BinaryMapDataObject binaryMapDataObject = null;
@@ -1019,7 +1028,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 					}
 				}
 			}
-
 			return binaryMapDataObject;
 		}
 
