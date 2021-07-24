@@ -17,7 +17,6 @@ import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
@@ -62,6 +61,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 
 public class BackupHelper {
 
@@ -95,6 +96,7 @@ public class BackupHelper {
 	public final static int STATUS_EMPTY_RESPONSE_ERROR = 2;
 	public final static int STATUS_SERVER_ERROR = 3;
 	public final static int STATUS_NO_ORDER_ID_ERROR = 4;
+	public final static int STATUS_EXECUTION_ERROR = 5;
 
 	public static final int SERVER_ERROR_CODE_EMAIL_IS_INVALID = 101;
 	public static final int SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION = 102;
@@ -484,15 +486,23 @@ public class BackupHelper {
 		return error;
 	}
 
-	void deleteFiles(@NonNull List<RemoteFile> remoteFiles,
-					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
-		deleteFiles(remoteFiles, false, listener);
-	}
-
 	void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
 					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
+	}
+
+	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
+						 @Nullable Executor executor, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+		try {
+			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
+					.executeOnExecutor(executor == null ? this.executor : executor).get();
+		} catch (ExecutionException | InterruptedException e) {
+			if (listener != null) {
+				app.runInUIThread(() -> listener.onFilesDeleteError(STATUS_EXECUTION_ERROR, "Execution error while deleting files"));
+			}
+		}
 	}
 
 	void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
@@ -754,21 +764,6 @@ public class BackupHelper {
 			@Override
 			protected BackupInfo doInBackground(Void... voids) {
 				BackupInfo info = new BackupInfo();
-				operationLog.log("=== localFiles ===");
-				for (LocalFile localFile : localFiles.values()) {
-					operationLog.log(localFile.toString());
-				}
-				operationLog.log("=== localFiles ===");
-				operationLog.log("=== uniqueRemoteFiles ===");
-				for (RemoteFile remoteFile : uniqueRemoteFiles.values()) {
-					operationLog.log(remoteFile.toString());
-				}
-				operationLog.log("=== uniqueRemoteFiles ===");
-				operationLog.log("=== deletedRemoteFiles ===");
-				for (RemoteFile remoteFile : deletedRemoteFiles.values()) {
-					operationLog.log(remoteFile.toString());
-				}
-				operationLog.log("=== deletedRemoteFiles ===");
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
