@@ -3382,7 +3382,7 @@
     <string name="rearrange_categories">مرتب‌سازی دسته‌ها</string>
     <string name="create_custom_categories_list_promo">ترتیب لیست را تغییر دهید و دسته‌ها را مخفی کنید. همهٔ تغییرات در قالب پروفایل‌ها درون‌برد یا برون‌برد کنید.</string>
     <string name="add_new_custom_category_button_promo">با انتخاب یک یا چند دسته، یک دستهٔ شخصیِ تازه بیفزایید.</string>
-    <string name="reset_to_default_category_button_promo">«بازنشانی به پیشفرض»، ترتیب را به حالت اولیهٔ پس از نصب برمی‌گرداند.</string>
+    <string name="reset_to_default_category_button_promo">«بازنشانی به پیشفرض» ترتیب را به حالت اولیهٔ پس از نصب برمی‌گرداند.</string>
     <string name="add_custom_category">افزودن دستهٔ سفارشی</string>
     <string name="rendering_attr_streetLightingNight_name">فقط هنگام شب نشان بده</string>
     <string name="plugin_prefs_reset_successful">همهٔ تنظیمات افزونه به حالت پیشفرض بازگشت.</string>
@@ -4288,4 +4288,6 @@
     <string name="not_available_with">با %1$s در دسترس نیست</string>
     <string name="redeem_promo_code">آزادسازی کد تبلیغی</string>
     <string name="regular_price">قیمت پایه</string>
+    <string name="on_hold_since">در تعلیق از %1$s</string>
+    <string name="active_till">فعال تا %1$s</string>
 </resources>
