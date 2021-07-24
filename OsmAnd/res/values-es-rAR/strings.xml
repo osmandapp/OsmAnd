@@ -4271,4 +4271,5 @@
     <string name="on_hold_since">En espera desde %1$s</string>
     <string name="active_till">Activa hasta %1$s</string>
     <string name="promo_subscription">Suscripción promocional</string>
+    <string name="track_has_no_needed_data">La traza no contiene los datos necesarios.</string>
 </resources>
