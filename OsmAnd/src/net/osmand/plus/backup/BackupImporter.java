@@ -196,12 +196,21 @@ class BackupImporter {
 			operationLog.log("build uniqueRemoteFiles");
 
 			Map<String, Long> infoMap = backupHelper.getDbHelper().getUploadedFileInfoMap();
+			BackupInfo backupInfo = backupHelper.getBackup().getBackupInfo();
+			List<RemoteFile> filesToDelete = backupInfo != null ? backupInfo.filesToDelete : Collections.emptyList();
 			for (RemoteFile remoteFile : uniqueRemoteFiles) {
 				String fileName = remoteFile.getTypeNamePath();
 				if (fileName.endsWith(INFO_EXT)) {
-					Long uploadTime = infoMap.get(remoteFile.getType() + "___"
-							+ remoteFile.getName().substring(0, remoteFile.getName().length() - INFO_EXT.length()));
-					if (readItems && (uploadTime == null || uploadTime != remoteFile.getClienttimems())) {
+					boolean delete = false;
+					String origFileName = remoteFile.getName().substring(0, remoteFile.getName().length() - INFO_EXT.length());
+					for (RemoteFile file : filesToDelete) {
+						if (file.getName().equals(origFileName)) {
+							delete = true;
+							break;
+						}
+					}
+					Long uploadTime = infoMap.get(remoteFile.getType() + "___" + origFileName);
+					if (readItems && (uploadTime == null || uploadTime != remoteFile.getClienttimems() || delete)) {
 						remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
 					}
 					String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());
