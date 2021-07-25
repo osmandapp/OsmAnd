@@ -204,26 +204,33 @@ public class SelectedGpxMenuController extends MenuController {
 
 	public static class SelectedGpxPoint {
 
+		private final SelectedGpxFile selectedGpxFile;
+		private final WptPt selectedPoint;
 		private final WptPt prevPoint;
 		private final WptPt nextPoint;
-		private final WptPt selectedPoint;
-		private final SelectedGpxFile selectedGpxFile;
 		private final float bearing;
+		private final boolean forTrackPointMenu;
 
-		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint, WptPt nextPoint, float bearing) {
+		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint) {
+			this(selectedGpxFile, selectedPoint, null, null, Float.NaN, false);
+		}
+
+		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint,
+		                        WptPt nextPoint, float bearing, boolean forTrackPointMenu) {
 			this.prevPoint = prevPoint;
 			this.nextPoint = nextPoint;
 			this.selectedPoint = selectedPoint;
 			this.selectedGpxFile = selectedGpxFile;
 			this.bearing = bearing;
-		}
-
-		public WptPt getSelectedPoint() {
-			return selectedPoint;
+			this.forTrackPointMenu = forTrackPointMenu;
 		}
 
 		public SelectedGpxFile getSelectedGpxFile() {
 			return selectedGpxFile;
+		}
+
+		public WptPt getSelectedPoint() {
+			return selectedPoint;
 		}
 
 		public float getBearing() {
@@ -236,6 +243,10 @@ public class SelectedGpxMenuController extends MenuController {
 
 		public WptPt getNextPoint() {
 			return nextPoint;
+		}
+
+		public boolean forTrackPointMenu() {
+			return forTrackPointMenu;
 		}
 	}
 }
