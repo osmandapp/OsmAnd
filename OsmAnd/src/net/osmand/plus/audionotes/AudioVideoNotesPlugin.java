@@ -613,9 +613,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_PHOTO_PLAY_SOUND.addListener(new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				if (AV_PHOTO_PLAY_SOUND.get() && soundPool == null) {
-					loadCameraSound();
-				}
+				app.runInUIThread(() -> {
+					if (AV_PHOTO_PLAY_SOUND.get() && soundPool == null) {
+						loadCameraSound();
+					}
+				});
 			}
 		});
 //		initializeRemoteControlRegistrationMethods();

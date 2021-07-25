@@ -4233,7 +4233,7 @@
 \n
 \n • Option zum Herunterladen von Höhenlinien in Fuß zugefügt
 \n
-\n • Tracks können jetzt nach Höhe, Geschwindigkeit oder Neigung eingefärbt werden.
+\n • Tracks können jetzt nach Höhe, Geschwindigkeit oder Neigung eingefärbt werden
 \n
 \n • Dialog \"Streckenaufzeichnung\" aktualisiert
 \n
@@ -4243,13 +4243,13 @@
 \n
 \n • Neuer \"Kaufen\"-Bildschirm mit detaillierten Informationen zum Kauf
 \n
-\n • Option hinzugefügt, um das Aussehen der Routenlinie zu ändern.
+\n • Option hinzugefügt, um das Aussehen der Routenlinie zu ändern
 \n
 \n • OsmAnd Live Updates nach \"Downloads &gt; Updates\" verschoben\"
 \n
 \n</string>
     <string name="duration_moment_ago">gerade eben</string>
-    <string name="purchases_feature_desc_wikivoyage">Erkunden Sie Wikipedia offline. Artikel sind nach Ländern und Regionen unterteilt und in allen Sprachen verfügbar.</string>
+    <string name="purchases_feature_desc_wikivoyage">Erkunden Sie Wikivoyage offline. Artikel sind nach Ländern und Regionen unterteilt und in allen Sprachen verfügbar.</string>
     <string name="backup_error_subscription_was_expired_descr">Ihr OsmAnd Pro Abonnement ist abgelaufen. Erneuern Sie es, um die Datensicherung zu nutzen. Sie können weiterhin Daten aus der Cloud wiederherstellen.</string>
     <string name="contour_lines_hillshades_slope">Höhenlinien, Relief, Hangneigung</string>
     <string name="logout_from_osmand_cloud">Abmelden aus der OsmAnd Cloud</string>
@@ -4271,4 +4271,8 @@
     <string name="attribute">Attribut</string>
     <string name="shared_string_purchased">Gekauft</string>
     <string name="explore_wikipedia_offline">Wikipedia offline entdecken.</string>
+    <string name="on_hold_since">Ausgesetzt seit %1$s</string>
+    <string name="active_till">Aktiv bis %1$s</string>
+    <string name="promo_subscription">Promo Abonnement</string>
+    <string name="track_has_no_needed_data">Der Track enthält keine benötigten Daten.</string>
 </resources>

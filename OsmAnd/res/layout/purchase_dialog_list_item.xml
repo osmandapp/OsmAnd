@@ -65,7 +65,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/content_padding"
                     android:layout_marginRight="@dimen/content_padding"
-                    osmand:srcCompat="@drawable/ic_action_osmand_pro_logo" />
+                    osmand:srcCompat="@drawable/ic_action_osmand_pro_logo_colored" />
 
             </LinearLayout>
 

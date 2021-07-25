@@ -95,7 +95,7 @@ public class DeleteOldFilesCommand extends BaseDeleteFilesCommand {
 					}
 					status = STATUS_SUCCESS;
 					message = "OK";
-				} catch (JSONException | ParseException e) {
+				} catch (JSONException e) {
 					status = STATUS_PARSE_JSON_ERROR;
 					message = "Download file list error: json parsing";
 				}

@@ -1555,9 +1555,9 @@
     <string name="duration">Продолжительность</string>
     <string name="save_track_interval_globally">Интервал записи</string>
     <string name="save_track_to_gpx_globally_descr">Ведение записи местоположений в файл GPX можно включить или выключить с помощью виджета записи GPX на карте.</string>
-    <string name="record_plugin_description">Активирует функции для записи и сохранения ваших треков вручную нажатием на виджет записи GPX на карте, или также автоматически записывает все ваши маршруты навигации в файл GPX.
+    <string name="record_plugin_description">Активирует функции для записи и сохранения ваших треков нажатием на карте на виджет записи GPX, а также автоматически записывает все маршруты навигации в GPX-файл (при включении соответствующей опции).
 \n
-\nЗаписанными треками можно поделиться с вашими друзьями или использовать их для вклада в OSM. Спортсмены могут использовать записанные треки для контроля за тренировками. Некоторый базовый анализ треков может быть выполнен непосредственно в OsmAnd, например, время прохождения круга, средняя скорость и т.д., треки, конечно, позднее также могут быть проанализированы в специальных инструментах анализа сторонних производителей.</string>
+\nЗаписанными треками можно поделиться с друзьями или использовать их для вклада в OSM. Спортсмены могут использовать записанные треки для контроля за тренировками. Некоторый базовый анализ треков может быть выполнен непосредственно в OsmAnd, например, время прохождения круга, средняя скорость и т.д., и, конечно, треки также могут быть позже проанализированы в специальных инструментах анализа сторонних производителей.</string>
     <string name="create_poi_link_to_osm_doc"><u>Онлайн OSM</u> классификация карт с изображениями.</string>
     <string name="confirm_every_run">Всегда спрашивать</string>
     <string name="save_global_track_interval">Общий интервал записи трека</string>
@@ -2253,7 +2253,7 @@
     <string name="quick_action_add_favorite">Добавить в избранные</string>
     <string name="dialog_add_action_title">Добавить</string>
     <string name="quick_actions_delete">Удалить действие</string>
-    <string name="quick_actions_delete_text">Вы уверены, что хотите удалить действие «%s»\?</string>
+    <string name="quick_actions_delete_text">Удалить действие «%s»\?</string>
     <string name="quick_action_poi_show">Показать %1$s</string>
     <string name="quick_action_poi_hide">Скрыть %1$s</string>
     <string name="quick_action_add_configure_map">Настройки карты</string>
@@ -2435,10 +2435,10 @@
     <string name="favourites_group">Категория избранных</string>
     <string name="add_group">Добавить группу</string>
     <string name="add_group_descr">Импортировать группу из избранных или путевых точек GPX.</string>
-    <string name="empty_state_markers_active">Создайте маркеры карт!</string>
+    <string name="empty_state_markers_active">Создавайте маркеры карт!</string>
     <string name="empty_state_markers_active_desc">Длинное или короткое нажатие на нужное место, а затем на флажок маркера.</string>
-    <string name="empty_state_markers_groups">Импорт групп</string>
-    <string name="empty_state_markers_groups_desc">Импортировать группы избранных или путевых точек как маркеры.</string>
+    <string name="empty_state_markers_groups">Импортируйте группы</string>
+    <string name="empty_state_markers_groups_desc">Импортируйте группы избранных или путевых точек как маркеры.</string>
     <string name="empty_state_markers_history_desc">На этом экране появятся маркеры, отмеченные как пройденные.</string>
     <string name="shared_string_two">Два</string>
     <string name="shared_string_one">Один</string>
@@ -2566,7 +2566,7 @@
     <string name="save_route_point">Сохранить точку маршрута</string>
     <string name="waypoint_one">Путевая точка 1</string>
     <string name="route_point_one">Точка маршрута 1</string>
-    <string name="empty_state_favourites">Добавьте избранные</string>
+    <string name="empty_state_favourites">Добавляйте избранные</string>
     <string name="empty_state_favourites_desc">Импортируйте избранные или создавайте их, отмечая точки на карте.</string>
     <string name="import_track">Импортировать файл GPX</string>
     <string name="move_point">Переместить точку</string>
@@ -2598,7 +2598,7 @@
 \n • Возможность записи путешествие в фоновом режиме (в то время, как устройство находится в спящем режиме) 
 \n OsmAnd это активно развивающееся программное обеспечение с открытым исходным кодом. Каждый может внести свой вклад в приложение, сообщая об ошибках, улучшая переводы или кодируя новые функции. Кроме того, проект опирается на финансовые взносы для финансирования разработки и тестирования новых функциональных возможностей.
 \n</string>
-    <string name="empty_state_osm_edits">Создайте или измените объекты OpenStreetMap</string>
+    <string name="empty_state_osm_edits">Создавайте или изменяйте объекты OSM</string>
     <string name="empty_state_osm_edits_descr">Добавляйте и редактируйте POI, сообщайте о неточностях на карте в OSM-заметках, делитесь записанными треками.</string>
     <string name="shared_string_deleted">Удалено</string>
     <string name="shared_string_edited">Отредактировано</string>
@@ -4189,7 +4189,7 @@
     <string name="wikipedia_and_wikivoyage_offline">Локальные Википедия и Викигид</string>
     <string name="offline_wikipeadia">Локальная Википедия</string>
     <string name="offline_wikivoyage">Локальный Викигид</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Карты рельефа местности: контурные линии, затенение рельефа (отмывка), уклоны</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Карты рельефа: контурные линии, затенение рельефа (отмывка), уклоны</string>
     <string name="terrain_maps">Карты рельефа</string>
     <string name="nautical_depth">Морские глубины</string>
     <string name="advanced_widgets">Расширенные виджеты</string>
@@ -4208,7 +4208,7 @@
     <string name="complete_purchase">Оформить покупку</string>
     <string name="regular_price">Обычная цена</string>
     <string name="from_with_param">За %1$s</string>
-    <string name="backup_delete_types_descr">Вы хотите удалить из облака данные для отключенных типов\?</string>
+    <string name="backup_delete_types_descr">Удалить из облака данные для устаревших типов\?</string>
     <string name="backup_delete_types">Удалить данные отключенных типов</string>
     <string name="shared_string_discussion">Обсуждение</string>
     <string name="shared_string_view_all">Посмотреть все</string>
@@ -4265,4 +4265,9 @@
     <string name="backup_do_not_have_any">У вас еще нет облачных резервных копий</string>
     <string name="backup_dont_have_any_descr">Настройте автоматическое резервное копирование, чтобы не беспокоиться о потере данных.</string>
     <string name="backup_setup">Настроить резервное копирование</string>
+    <string name="promo_subscription">Промо-подписка</string>
+    <string name="on_hold_since">Приостановлена с %1$s</string>
+    <string name="active_till">Активна до %1$s</string>
+    <string name="backup_deleted_all_data">Все данные удалены</string>
+    <string name="track_has_no_needed_data">Трек не содержит необходимых данных.</string>
 </resources>

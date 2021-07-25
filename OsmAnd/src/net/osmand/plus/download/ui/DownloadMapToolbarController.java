@@ -25,18 +25,18 @@ import net.osmand.util.Algorithms;
 
 public class DownloadMapToolbarController extends TopToolbarController {
 
-	private MapActivity mapActivity;
-	private DownloadValidationManager downloadValidationManager;
+	private final MapActivity mapActivity;
+	private final DownloadValidationManager downloadValidationManager;
 
-	private boolean nightMode;
+	private final boolean nightMode;
 
-	private View btnClose;
-	private View btnDownload;
-	private TextView tvDescription;
-	private TextView tvSize;
+	private final View btnClose;
+	private final View btnDownload;
+	private final TextView tvDescription;
+	private final TextView tvSize;
 
-	private IndexItem indexItem;
-	private String regionName;
+	private final IndexItem indexItem;
+	private final String regionName;
 
 	private static String lastProcessedRegionName;
 
@@ -102,21 +102,13 @@ public class DownloadMapToolbarController extends TopToolbarController {
 			String size = indexItem.getSizeDescription(mapActivity);
 			tvSize.setText(size);
 
-			btnDownload.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					downloadValidationManager.startDownload(mapActivity, indexItem);
-					dismiss();
-				}
+			btnDownload.setOnClickListener(v -> {
+				downloadValidationManager.startDownload(mapActivity, indexItem);
+				dismiss();
 			});
 		}
 
-		btnClose.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		btnClose.setOnClickListener(v -> dismiss());
 	}
 
 	private void dismiss() {

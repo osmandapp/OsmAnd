@@ -4169,8 +4169,8 @@
     <string name="send_logcat_log">傳送 logcat 紀錄檔</string>
     <string name="backup_promocode">促銷代碼</string>
     <string name="purchases_feature_desc_nautical">取得航海深度資訊</string>
-    <string name="purchases_feature_desc_terrain">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖，山峰與低地。</string>
-    <string name="purchases_feature_desc_wikivoyage">離線瀏覽維基百科。文章按國家與區域劃分，並以所有語言提供。</string>
+    <string name="purchases_feature_desc_terrain">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖來顯示山峰與低地。</string>
+    <string name="purchases_feature_desc_wikivoyage">離線瀏覽維基導遊。文章按國家與區域劃分，並以所有語言提供。</string>
     <string name="purchases_feature_desc_wikipedia">離線瀏覽維基百科。文章按國家與區域劃分，並以所有語言提供。</string>
     <string name="purchases_feature_desc_combined_wiki">隨時瀏覽維基百科，不需要網際網路連線。離線資料按國家劃分，並以所有語言提供。</string>
     <string name="purchases_feature_desc_unlimited_map_download">取得所有大洲與區域的無限制下載離線地圖。</string>
@@ -4223,7 +4223,7 @@
 \n
 \n • 新增了以英呎為單位下載等高線的選項
 \n
-\n • 軌跡現在可以按照高度、速度或坡度上色了。
+\n • 軌跡現在可以按照高度、速度或坡度上色了
 \n
 \n • 更新了「旅程錄製」對話框
 \n
@@ -4233,7 +4233,7 @@
 \n
 \n • 新的「購買」畫面，包含了關於購買的更詳細資訊
 \n
-\n • 新增變更路線外觀的選項。
+\n • 新增變更路線外觀的選項
 \n
 \n • OsmAnd Live 更新移動至「下載」→「更新」
 \n
@@ -4260,4 +4260,8 @@
     <string name="attribute">屬性</string>
     <string name="shared_string_purchased">已購買</string>
     <string name="explore_wikipedia_offline">離線探索維基百科。</string>
+    <string name="on_hold_since">自 %1$s 起暫停</string>
+    <string name="active_till">有效至 %1$s</string>
+    <string name="promo_subscription">促銷訂閱</string>
+    <string name="track_has_no_needed_data">軌跡不包含所需的資料。</string>
 </resources>

@@ -21,6 +21,22 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.transition.AutoTransition;
+import androidx.transition.Scene;
+import androidx.transition.Transition;
+import androidx.transition.TransitionListenerAdapter;
+import androidx.transition.TransitionManager;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
@@ -119,22 +135,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.transition.AutoTransition;
-import androidx.transition.Scene;
-import androidx.transition.Transition;
-import androidx.transition.TransitionListenerAdapter;
-import androidx.transition.TransitionManager;
-
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
 	private static final Log LOG = PlatformUtil.getLog(MapRouteInfoMenu.class);
@@ -221,13 +221,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		onStateChangedListener = new StateChangedListener<Void>() {
 			@Override
 			public void stateChanged(Void change) {
-				updateMenu();
+				if (app != null) {
+					app.runInUIThread(() -> updateMenu());
+				}
 			}
 		};
 		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				updateWhenMuteChanged();
+				if (app != null) {
+					app.runInUIThread(() -> updateWhenMuteChanged());
+				}
 			}
 		};
 	}

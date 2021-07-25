@@ -694,7 +694,7 @@
     <string name="gpxup_public">publique</string>
     <string name="gpxup_identifiable">Identifiable</string>
     <string name="gpxup_trackable">Traçable</string>
-    <string name="gpxup_private">privée</string>
+    <string name="gpxup_private">Privée</string>
     <string name="osmand_parking_event">Récupérer le véhicule au parking</string>
     <string name="osmand_parking_warning">Avertissement</string>
     <string name="osmand_parking_warning_text">Un rappel pour récupérer votre véhicule a été ajouté à votre agenda. Vous pouvez modifier ou supprimer ce rappel.</string>
@@ -1458,7 +1458,7 @@
     <string name="short_location_on_map">Lat. %1$s\nLon. %2$s</string>
     <string name="tips_and_tricks_descr">Questions fréquentes, notes de version et autres informations.</string>
     <string name="routing_settings_2">Paramètres de guidage</string>
-    <string name="general_settings_2">Paramètres généraux</string>
+    <string name="general_settings_2">Paramètres globaux</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Désélectionner</string>
     <string name="shared_string_deselect_all">Tout désélectionner</string>
@@ -4165,7 +4165,7 @@
     <string name="send_crash_log">Envoyer le journal des plantages</string>
     <string name="send_logcat_log">Envoyer le journal logcat</string>
     <string name="backup_promocode">Code promo</string>
-    <string name="purchases_feature_desc_wikivoyage">Consultez les articles Wikipédia sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explorez Wikivoyage sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_wikipedia">Consultez les articles Wikipédia sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_combined_wiki">Consultez les articles Wikipédia sans connexion Internet. Les données hors ligne sont découpées par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Accédez à des mises à jour de cartes plus fréquentes : horaire, quotidienne ou hebdomadaires Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
@@ -4173,7 +4173,7 @@
     <string name="nautical_depth">Profondeur bathymétrique</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Cartes du relief : courbes de niveaux, ombrages, pentes</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
-    <string name="purchases_feature_desc_terrain">Cartes avec courbes de niveaux, ombrage du relief, pentes et des couleurs mettant en valeur les sommets et plaines.</string>
+    <string name="purchases_feature_desc_terrain">Cartes avec courbes de niveaux, ombrage du relief, pentes et couleurs mettant en valeur sommets et plaines.</string>
     <string name="purchases_feature_desc_nautical">Accédez aux informations de profondeur bathymétrique</string>
     <string name="shared_string_includes">Inclus</string>
     <string name="complete_purchase">Finaliser l\'achat</string>
@@ -4238,4 +4238,8 @@
     <string name="attribute">Propriétés</string>
     <string name="shared_string_purchased">Acheté</string>
     <string name="explore_wikipedia_offline">Explorez Wikipédia hors ligne.</string>
+    <string name="on_hold_since">En attente depuis %1$s</string>
+    <string name="active_till">Actif jusqu\'au %1$s</string>
+    <string name="promo_subscription">Abonnement promotionnel</string>
+    <string name="track_has_no_needed_data">Il manque des données nécessaires dans la trace.</string>
 </resources>

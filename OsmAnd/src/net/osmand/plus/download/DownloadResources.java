@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -13,6 +14,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
 
@@ -42,6 +45,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	public OsmandApplication app;
 	private Map<String, String> indexFileNames = new LinkedHashMap<>();
 	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<>();
+	private List<String> indexDownloadedFileNames = new ArrayList<>();
 	private List<IndexItem> rawResources;
 	private Map<WorldRegion, List<IndexItem>> groupByRegion;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
@@ -160,6 +164,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		app.getResourceManager().getBackupIndexes(indexFileNames);
 		this.indexFileNames = indexFileNames;
 		this.indexActivatedFileNames = indexActivatedFileNames;
+		this.indexDownloadedFileNames = new ArrayList<>();
 	}
 
 	public boolean checkIfItemOutdated(IndexItem item, java.text.DateFormat format) {
@@ -172,6 +177,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		if (indexActivatedDate == null && indexFilesDate == null) {
 			return false;
 		}
+		indexDownloadedFileNames.add(sfName);
 		item.setDownloaded(true);
 		String date = item.getDate(format);
 		boolean parsed = false;
@@ -243,6 +249,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		}
 		item.setOutdated(outdated);
 		return outdated;
+	}
+
+	public boolean isDownloadedFile(@NonNull String fileName) {
+		return indexDownloadedFileNames.contains(fileName);
 	}
 
 	private void logItemUpdateInfo(IndexItem item, DateFormat format, long itemSize, long oldItemSize) {
@@ -625,6 +635,21 @@ public class DownloadResources extends DownloadResourceGroup {
 			}
 		}
 		return res;
+	}
+
+	public boolean hasExternalFileAt(int x31, int y31, int zoom) {
+		for (BinaryMapReaderResource reader : app.getResourceManager().getFileReaders()) {
+			String fileName = reader.getFileName();
+			if (!fileName.startsWith("World_") && fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) && !isDownloadedFile(fileName)) {
+				BinaryMapIndexReader shallowReader = reader.getShallowReader();
+				if (shallowReader != null) {
+					if (shallowReader.containsMapData(x31, y31, x31, y31, zoom)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	private static IndexItem getSmallestIndexItem(@NonNull IndexItem item1, @NonNull IndexItem item2) {

@@ -56,7 +56,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 		TextView title = view.findViewById(R.id.title);
 		if (purchases.isOsmAndProSubscription(purchase)) {
 			title.setText(R.string.osmand_pro);
-			icon.setImageDrawable(getIcon(R.drawable.ic_action_osmand_pro_logo));
+			icon.setImageDrawable(getIcon(R.drawable.ic_action_osmand_pro_logo_colored));
 		} else if (purchases.isLiveUpdatesSubscription(purchase)) {
 			title.setText(R.string.osm_live);
 			icon.setImageDrawable(getIcon(R.drawable.ic_action_subscription_osmand_live));
