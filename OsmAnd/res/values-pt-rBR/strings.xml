@@ -4172,7 +4172,7 @@
     <string name="backup_promocode">Código promocional</string>
     <string name="purchases_feature_desc_nautical">Tenha acesso a informações de profundidade náutica</string>
     <string name="purchases_feature_desc_terrain">Curvas de nível do terreno, mapa em sombras de relevo com tons escuros e mapas de declive com cores para mostrar, picos e planícies.</string>
-    <string name="purchases_feature_desc_wikivoyage">Explore a Wikipédia offline. Os artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explore a Wikivoyage offline. Os artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_wikipedia">Explore a Wikipédia offline. Artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore os artigos da Wikipédia em qualquer lugar, sem uma conexão à Internet. Estes dados offline estão divididos por países e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Obtenha downloads ilimitados para todos os mapas offline de continentes e regiões.</string>
@@ -4233,7 +4233,7 @@
 \n
 \n - Planear rota: capacidade adicional para alterar as opções de navegação, aceder ao mapa de configuração e pesquisa sem sair do ecrã de planear rota
 \n
-\n - Nova tela \"Comprar\" com informações detalhadas sobre compras
+\n - Nova tela \"Comprar\" com informações detalhadas sobre compras.
 \n
 \n - Adicionada a opção para alterar a aparência da linha de rota.
 \n
@@ -4262,4 +4262,8 @@
     <string name="attribute">Atributo</string>
     <string name="shared_string_purchased">Comprado</string>
     <string name="explore_wikipedia_offline">Explore a Wikipedia offline.</string>
+    <string name="on_hold_since">Em espera desde %1$s</string>
+    <string name="active_till">Ativo até %1$s</string>
+    <string name="promo_subscription">Assinatura promocional</string>
+    <string name="track_has_no_needed_data">A trilha não contém os dados necessários.</string>
 </resources>

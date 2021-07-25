@@ -694,7 +694,7 @@
     <string name="gpxup_public">publique</string>
     <string name="gpxup_identifiable">Identifiable</string>
     <string name="gpxup_trackable">Traçable</string>
-    <string name="gpxup_private">privée</string>
+    <string name="gpxup_private">Privée</string>
     <string name="osmand_parking_event">Récupérer le véhicule au parking</string>
     <string name="osmand_parking_warning">Avertissement</string>
     <string name="osmand_parking_warning_text">Un rappel pour récupérer votre véhicule a été ajouté à votre agenda. Vous pouvez modifier ou supprimer ce rappel.</string>
@@ -4241,4 +4241,5 @@
     <string name="on_hold_since">En attente depuis %1$s</string>
     <string name="active_till">Actif jusqu\'au %1$s</string>
     <string name="promo_subscription">Abonnement promotionnel</string>
+    <string name="track_has_no_needed_data">Il manque des données nécessaires dans la trace.</string>
 </resources>

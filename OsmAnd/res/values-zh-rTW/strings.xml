@@ -4263,4 +4263,5 @@
     <string name="on_hold_since">自 %1$s 起暫停</string>
     <string name="active_till">有效至 %1$s</string>
     <string name="promo_subscription">促銷訂閱</string>
+    <string name="track_has_no_needed_data">軌跡不包含所需的資料。</string>
 </resources>

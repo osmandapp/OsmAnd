@@ -3763,7 +3763,7 @@
     <string name="route_between_points">المسار بين النقاط</string>
     <string name="plan_a_route">قياس المسافة</string>
     <string name="add_to_a_track">إضافة إلى مسار</string>
-    <string name="add_hidden_group_info">لن تكون النقطة المضافة مرئية على الخريطة، نظرًا لأن المجموعة المحددة مخفية، يمكنك العثور عليها في \"%s\".</string>
+    <string name="add_hidden_group_info">يمكن العثور على النقطة المضافة في %s . قم باظهار المجموعة المحددة لإظهارها على الخريطة.</string>
     <string name="track_show_start_finish_icons">إظهار رموز البدء والانتهاء</string>
     <string name="select_track_width">حدد العرض</string>
     <string name="gpx_split_interval_descr">حدد الفاصل الزمني الذي سيتم عرض العلامات مع المسافة أو الوقت على المسار.</string>
@@ -3790,7 +3790,7 @@
     <string name="route_between_points_warning_desc">بعد ذلك، قم بمحاذاة المسار إلى أقرب طريق مسموح به باستخدام أحد ملفات تعريف التنقل لاستخدام هذا الخيار.</string>
     <string name="threshold_distance">بداية المسافة</string>
     <string name="street_level_imagery">صور للشارع</string>
-    <string name="plan_route_exit_dialog_descr">هل أنت متأكد أنك تريد إغلاق مسار الرحلة دون حفظ؟ سوف تفقد كل التغييرات؟</string>
+    <string name="plan_route_exit_dialog_descr">هل تريد تجاهل كافة التغييرات في المسار المخطط؟</string>
     <string name="in_case_of_reverse_direction">في حالة الاتجاه المعاكس</string>
     <string name="save_track_to_gpx">تسجيل المسار أثناء الملاحة</string>
     <string name="shared_string_save_as_gpx">حفظ كملف مسار جديد</string>
@@ -3909,10 +3909,10 @@
     <string name="subscription_on_hold_title">اشتراك OsmAnd Live معلق</string>
     <string name="login_open_street_map">تسجيل الدخول لخريطة الشارع المفتوح</string>
     <string name="login_open_street_map_org">تسجيل الدخول إلى خريطة الشارع المفتوح</string>
-    <string name="open_street_map_login_mode">قم بتسجيل الدخول لرفع التغييرات الجديدة أو المعدلة. 
-\n 
-\nإما باستخدام المصادقة أو باستخدام اسم المستخدم وكلمة المرور.</string>
-    <string name="use_login_password">سجل الدخول باسم المستخدم وكلمة المرور</string>
+    <string name="open_street_map_login_mode">قم بتسجيل الدخول لرفع التغييرات الجديدة أو المعدلة.
+\n
+\nإما باستخدام المصادقة الآمنة OAuth اسم مستخدم OSM وكلمة المرور.</string>
+    <string name="use_login_password">استخدم اسم المستخدم وكلمة المرور</string>
     <string name="login_account">الحساب</string>
     <string name="user_login">تسجيل الدخول</string>
     <string name="gpx_upload_trackable_visibility_descr">\"قابل للتتبع\" يعني أن التتبع لا يظهر في أي قوائم عامة ، ولكن نقاط التتبع التي تمت معالجتها باستخدام الطوابع الزمنية منه (التي لا يمكن ربطها بك مباشرةً) تتم من خلال التنزيلات من واجهة برمجة تطبيقات GPS العامة.</string>
@@ -3925,7 +3925,7 @@
     <string name="gpx_upload_identifiable_visibility_descr">\"يمكن تحديده\" يعني أنه سيتم عرض التتبع بشكل عام في تتبعات GPS الخاصة بك وفي قوائم تتبع GPS العامة ، أي سيتمكن المستخدمون الآخرون من تنزيل التتبع الأولي وربطه باسم المستخدم الخاص بك. ستشير بيانات نقطة التتبع العامة ذات الطابع الزمني من واجهة برمجة تطبيقات GPS التي يتم تقديمها عبر واجهة برمجة تطبيقات نقاط التتبع إلى صفحة التتبع الأصلية.</string>
     <string name="osm_edit_close_note">أغلاق ملاحظة OSM</string>
     <string name="osm_edit_comment_note">تعليق ملاحظة OSM</string>
-    <string name="osm_login_descr">قم بتسجيل الدخول باستخدام طريقة المصادقة الآمنة أو استخدم اسم المستخدم وكلمة المرور.</string>
+    <string name="osm_login_descr">سجل دخولك باستخدام طريقة المصادقة الآمنة OAuth أو استخدم اسم مستخدم OSM وكلمة المرور.</string>
     <string name="shared_string_add_photo">إضافة صورة</string>
     <string name="register_on_openplacereviews">سجل في 
 \nOpenPlaceReviews.org</string>
@@ -4082,7 +4082,7 @@
     <string name="track_recording_stop_without_saving">توقف بدون حفظ</string>
     <string name="track_recording_save_and_stop">حفظ و إيقاف التسجيل</string>
     <string name="track_recording_title">توقف تسجيل المسار</string>
-    <string name="track_recording_description">هل أنت متأكد أنك تريد إيقاف التسجيل؟
+    <string name="track_recording_description">إيقاف التسجيل؟
 \nستفقد جميع البيانات غير المحفوظة.</string>
     <string name="on_pause">عند الإيقاف المؤقت</string>
     <string name="app_restart_required">مطلوب إعادة تشغيل التطبيق لتطبيق بعض الإعدادات.</string>
@@ -4096,7 +4096,7 @@
     <string name="live_update_frequency_week_variant">سيتم فحص تحديثات الخريطة كل أسبوع. المرة القادمة %1$s في %2$s.</string>
     <string name="live_update_frequency_day_variant">سيتم التحقق من تحديثات الخرائط كل يوم. في المرة القادمة%1$s في %2$s.</string>
     <string name="live_update_frequency_hour_variant">سيتم التحقق من تحديثات الخرائط كل ساعة. في المرة القادمة%1$s في %2$s.</string>
-    <string name="live_update_delete_updates_msg">هل أنت متأكد من أنك تريد حذف كافة %s التحديثات المباشرة؟</string>
+    <string name="live_update_delete_updates_msg">حذف كافة %s تحديثات آنية؟</string>
     <string name="delete_updates">حذف التحديثات</string>
     <string name="purchases">المشتريات</string>
     <string name="select_category_descr">تحديد أو إضافة فئة جديدة</string>
@@ -4186,9 +4186,9 @@
     <string name="verify_email_address_descr">أرسلنا رمز التحقق إلى %1$s ، يرجى إدخاله في الحقل أدناه.</string>
     <string name="cloud_email_not_registered">هذا البريد الإلكتروني غير مسجل في سحابة أوسماند</string>
     <string name="cloud_email_already_registered">تم تسجيل هذا البريد الإلكتروني بالفعل.</string>
-    <string name="resend_verification_code">إعادة إرسال رمز</string>
-    <string name="verification_code_missing">لم أتلق رمز التحقق</string>
-    <string name="verification_code_missing_description">مدة انتظار الرمز قد تصل إلى 10 دقائق ، كما يمكنك التحقق من مجلد البريد العشوائي، استخدم الزر أدناه.</string>
+    <string name="resend_verification_code">إعادة إرسال</string>
+    <string name="verification_code_missing">لم أتلق رمز تحقق</string>
+    <string name="verification_code_missing_description">قد تستغرق إلى 10 دقائق ، استخدم الزر أدناه إذا لم يكن موجودا في مجلد البريد العشوائي.</string>
     <string name="restore_from_file">استعادة من ملف</string>
     <string name="select_nav_profile_dialog_message">\'نوع التنقل\' يحدد كيفية حساب المسارات عبر محركات توجيه متاحة بالانترنت و بدونها.</string>
     <string name="loading_list_of_routing_services">تحميل قائمة خدمات التوجيه المتوفرة</string>
@@ -4244,8 +4244,8 @@
     <string name="send_logcat_log">إرسال سجل السجلات</string>
     <string name="backup_promocode">الرمز الترويجي</string>
     <string name="purchases_feature_desc_nautical">الحصول على معلومات العمق البحري</string>
-    <string name="purchases_feature_desc_terrain">خطوط محيطية والتضاريس وخريطة التلال الكاملة وخرائط المنحدرات والقمم والأراضي المنخفضة وإظهارها بألوان مختلفة .</string>
-    <string name="purchases_feature_desc_wikivoyage">استكشف ويكيبيديا دون اتصال بالإنترنت. المقالات مقسمة حسب البلدان والمناطق ومتاحة بجميع اللغات.</string>
+    <string name="purchases_feature_desc_terrain">خطوط محيطية، التضاريس، خريطة التلال الكاملة، خرائط المنحدرات، القمم والأراضي المنخفضة وإظهارها بألوان مختلفة .</string>
+    <string name="purchases_feature_desc_wikivoyage">استكشف Wikivoyage دون اتصال بالإنترنت. المقالات مقسمة حسب البلدان والمناطق ومتاحة بجميع اللغات.</string>
     <string name="purchases_feature_desc_wikipedia">استكشف ويكيبيديا في وضع عدم الاتصال. مقالات مقسمة حسب البلدان والمناطق ومتاحة بجميع اللغات.</string>
     <string name="purchases_feature_desc_combined_wiki">استكشف مقالات ويكيبيديا أثناء التنقل ، بدون اتصال بالإنترنت. البيانات غير المتصلة بالإنترنت مقسمة على البلدان ومتاحة بجميع اللغات.</string>
     <string name="purchases_feature_desc_unlimited_map_download">احصل على تنزيلات غير محدودة لجميع خرائط القارات والمناطق غير المتصلة بالإنترنت.</string>
@@ -4304,13 +4304,13 @@
 \n
 \n • تم نقل المسافة عن طريق النقر من مسطرة نصف القطر إلى خيار منفصل
 \n
-\n • تخطيط الطريق: تمت إضافة القدرة على تغيير خيارات التنقل ، والوصول إلى تكوين الخريطة والبحث دون مغادرة مسار الخطة
+\n • تخطيط الطريق: تمت إضافة القدرة على تغيير خيارات الملاحة، والوصول إلى تكوين الخريطة والبحث دون مغادرة مسار الخطة
 \n
 \n • شاشة \"شراء\" جديدة بمعلومات مفصلة عن الشراء
 \n
 \n • خيار مضاف لتغيير مظهر خط المسار.
 \n
-\n • تم نقل تحديثات أوسماند لايف إلى \"التنزيلات&gt; التحديثات\"
+\n • تم نقل التحديثات الآنية إلى \"التنزيلات&gt; التحديثات\"
 \n
 \n</string>
     <string name="duration_moment_ago">قبل قليل</string>
@@ -4338,4 +4338,5 @@
     <string name="on_hold_since">معلقة منذ %1$s</string>
     <string name="active_till">نشط حتى %1$s</string>
     <string name="promo_subscription">اشتراك برومو</string>
+    <string name="track_has_no_needed_data">لا يحتوي المسار على البيانات المطلوبة.</string>
 </resources>

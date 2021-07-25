@@ -4232,7 +4232,7 @@
 \n
 \n • Pridaná možnosť stiahnuť vrstevnice v stopách namiesto metrov
 \n
-\n • Stopy môžu byť vyfarbené podľa výšky, rýchlosti alebo sklonu.
+\n • Stopy môžu byť vyfarbené podľa výšky, rýchlosti alebo sklonu
 \n
 \n • Vylepšené okno \"Záznam výletu\"
 \n
@@ -4242,7 +4242,7 @@
 \n
 \n • Nová obrazovka \"Nákupy\" s informáciami o nákupe funkcií
 \n
-\n • Pridaná možnosť zmeniť vzhľad navigačnej čiary.
+\n • Pridaná možnosť zmeniť vzhľad navigačnej čiary
 \n
 \n • Aktualizácie OsmAnd Live presunuté do \"Sťahovania &gt; Aktualizácie\"
 \n
@@ -4262,4 +4262,8 @@
 \nPred ďalším zálohovaním alebo obnovením údajov sa budete musieť znovu prihlásiť.</string>
     <string name="backup_deleting_all_data">Odstraňujú sa všetky údaje</string>
     <string name="backup_deleted_all_data">Všetky údaje odstránené</string>
+    <string name="promo_subscription">Propagačné predplatné</string>
+    <string name="on_hold_since">Pozastavené od %1$s</string>
+    <string name="active_till">Aktívne do %1$s</string>
+    <string name="track_has_no_needed_data">Stopa neobsahuje potrebné údaje.</string>
 </resources>

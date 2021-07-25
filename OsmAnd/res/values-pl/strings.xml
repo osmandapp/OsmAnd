@@ -216,7 +216,7 @@
     <string name="index_settings_descr">Pobiera i zarządza plikami map przechowywanymi na urządzeniu.</string>
     <string name="index_settings">Zarządzaj mapami</string>
     <string name="osmand_service">Tryb tła</string>
-    <string name="osmand_service_descr">Działanie aplikacji w tle, gdy ekran jest wygaszony.</string>
+    <string name="osmand_service_descr">OsmAnd działa w tle z wyłączonym ekranem.</string>
     <string name="fast_route_mode">Najszybsza trasa</string>
     <string name="fast_route_mode_descr">Wyznacza najszybszą trasę zamiast ekonomicznej.</string>
     <string name="tiles_to_download_estimated_size">Do pobrania {1} kafelków na poziomie {0} ({2} MB)</string>
@@ -3667,7 +3667,7 @@
     <string name="item_deleted">Usunięto %1$s</string>
     <string name="speed_cameras_restart_descr">Uruchom ponownie aplikację, aby usunąć wszystkie dane o fotoradarach.</string>
     <string name="shared_string_uninstall_and_restart">Odinstaluj i zrestartuj</string>
-    <string name="tracker_item">Tracker OsmAnd</string>
+    <string name="tracker_item">OsmAnd Tracker</string>
     <string name="lenght_limit_description">Podaj długość pojazdu, niektóre ograniczenia tras mogą być stosowane dla długich pojazdów.</string>
     <string name="speed_cameras_removed_descr">To urządzenie nie ma fotoradarów.</string>
     <string name="quick_action_remove_next_destination">Usuń najbliższy punkt docelowy</string>
@@ -4041,8 +4041,8 @@
     <string name="select_another_colorization">Wybierz inny rodzaj kolorystyki.</string>
     <string name="shared_string_interval">Interwał</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Naturalne granice</string>
-    <string name="track_has_no_altitude">Trasa nie zawiera danych o wysokości.</string>
-    <string name="track_has_no_speed">Trasa nie zawiera informacji o prędkości.</string>
+    <string name="track_has_no_altitude">Trasa nie zawiera danych dotyczących wysokości.</string>
+    <string name="track_has_no_speed">Trasa nie zawiera danych dotyczących prędkości.</string>
     <string name="trip_recording_logging_interval_info">Interwał rejestrowania ustawia okres czasu, w którym OsmAnd będzie żądał danych o aktualnej pozycji.</string>
     <string name="show_start_dialog">Pokaż okno rozpocznij</string>
     <string name="trip_recording_show_start_dialog_setting">Jeśli ta opcja jest wyłączona, nagrywanie rozpocznie się natychmiast po dotknięciu widżetu lub elementu menu, pomijając okno dialogowe potwierdzenia.</string>
@@ -4270,4 +4270,5 @@
     <string name="on_hold_since">Wstrzymana od %1$s</string>
     <string name="active_till">Aktywna do %1$s</string>
     <string name="promo_subscription">Subskrypcja promocyjna</string>
+    <string name="track_has_no_needed_data">Trasa nie zawiera potrzebnych danych.</string>
 </resources>
