@@ -8,6 +8,7 @@ import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.backup.SettingsItemReader;
@@ -195,7 +196,7 @@ class BackupImporter {
 			}
 			operationLog.log("build uniqueRemoteFiles");
 
-			Map<String, Long> infoMap = backupHelper.getDbHelper().getUploadedFileInfoMap();
+			Map<String, UploadedFileInfo> infoMap = backupHelper.getDbHelper().getUploadedFileInfoMap();
 			BackupInfo backupInfo = backupHelper.getBackup().getBackupInfo();
 			List<RemoteFile> filesToDelete = backupInfo != null ? backupInfo.filesToDelete : Collections.emptyList();
 			for (RemoteFile remoteFile : uniqueRemoteFiles) {
@@ -209,8 +210,9 @@ class BackupImporter {
 							break;
 						}
 					}
-					Long uploadTime = infoMap.get(remoteFile.getType() + "___" + origFileName);
-					if (readItems && (uploadTime == null || uploadTime != remoteFile.getClienttimems() || delete)) {
+					UploadedFileInfo fileInfo = infoMap.get(remoteFile.getType() + "___" + origFileName);
+					long uploadTime = fileInfo != null ? fileInfo.getUploadTime() : 0;
+					if (readItems && (uploadTime != remoteFile.getClienttimems() || delete)) {
 						remoteInfoFilesMap.put(new File(tempDir, fileName), remoteFile);
 					}
 					String itemFileName = fileName.substring(0, fileName.length() - INFO_EXT.length());

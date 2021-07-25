@@ -239,6 +239,11 @@ public class FileSettingsItem extends StreamSettingsItem {
 		}
 	}
 
+	@Override
+	public boolean needMd5Digest() {
+		return subtype == FileSubtype.TTS_VOICE || subtype == FileSubtype.VOICE;
+	}
+
 	public File getPluginPath() {
 		String pluginId = getPluginId();
 		if (!Algorithms.isEmpty(pluginId)) {
