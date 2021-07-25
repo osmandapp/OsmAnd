@@ -1454,7 +1454,7 @@
     <string name="short_location_on_map">Шир %1$s\nДов %2$s</string>
     <string name="tips_and_tricks_descr">Запитання та відповіді, останні зміни та інше.</string>
     <string name="routing_settings_2">Налаштування навігації</string>
-    <string name="general_settings_2">Загальні параметри</string>
+    <string name="general_settings_2">Загальні налаштування</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_selected">Вибрані</string>
     <string name="shared_string_deselect">Зняти виділення</string>

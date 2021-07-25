@@ -1467,7 +1467,7 @@
 \nDĺžka %2$s</string>
     <string name="tips_and_tricks_descr">Často kladené otázky, nedávne zmeny a iné.</string>
     <string name="routing_settings_2">Navigačné nastavenia</string>
-    <string name="general_settings_2">Všeobecné nastavenia</string>
+    <string name="general_settings_2">Globálne nastavenia</string>
     <string name="shared_string_clear_all">Vymazať všetko</string>
     <string name="shared_string_my_location">Moja poloha</string>
     <string name="shared_string_my_favorites">Obľúbené</string>
