@@ -82,9 +82,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 			@Override
 			public void stateChanged(Void change) {
-				if(mapView != null) {
-					mapView.refreshMap();
-				}
+				app.runInUIThread(() -> {
+					if (mapView != null) {
+						mapView.refreshMap();
+					}
+				});
 			}
 		});
 	}

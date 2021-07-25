@@ -121,30 +121,32 @@ public class GpxSelectionHelper {
 			followTrackListener = new StateChangedListener<String>() {
 				@Override
 				public void stateChanged(String gpxRoutePath) {
-					if (trackToFollow != null) {
-						selectGpxFile(trackToFollow.getGpxFile(), false, trackToFollow.notShowNavigationDialog);
-						trackToFollow = null;
-					}
-					if (!Algorithms.isEmpty(gpxRoutePath)) {
-						trackToFollow = getSelectedFileByPath(gpxRoutePath);
-						if (trackToFollow == null) {
-							File file = new File(gpxRoutePath);
-							if (file.exists() && !file.isDirectory()) {
-								new GpxFileLoaderTask(file, new CallbackWithObject<GPXFile>() {
-									@Override
-									public boolean processResult(GPXFile result) {
-										trackToFollow = selectGpxFile(result, true, false);
-										return true;
-									}
-								}).execute();
+					app.runInUIThread(() -> {
+						if (trackToFollow != null) {
+							selectGpxFile(trackToFollow.getGpxFile(), false, trackToFollow.notShowNavigationDialog);
+							trackToFollow = null;
+						}
+						if (!Algorithms.isEmpty(gpxRoutePath)) {
+							trackToFollow = getSelectedFileByPath(gpxRoutePath);
+							if (trackToFollow == null) {
+								File file = new File(gpxRoutePath);
+								if (file.exists() && !file.isDirectory()) {
+									new GpxFileLoaderTask(file, new CallbackWithObject<GPXFile>() {
+										@Override
+										public boolean processResult(GPXFile result) {
+											trackToFollow = selectGpxFile(result, true, false);
+											return true;
+										}
+									}).execute();
+								}
+							}
+						} else if (gpxRoutePath != null) {
+							GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
+							if (routeParams != null && Algorithms.stringsEqual(routeParams.getFile().path, gpxRoutePath)) {
+								trackToFollow = selectGpxFile(routeParams.getFile(), true, true);
 							}
 						}
-					} else if (gpxRoutePath != null) {
-						GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
-						if (routeParams != null && Algorithms.stringsEqual(routeParams.getFile().path, gpxRoutePath)) {
-							trackToFollow = selectGpxFile(routeParams.getFile(), true, true);
-						}
-					}
+					});
 				}
 			};
 		}

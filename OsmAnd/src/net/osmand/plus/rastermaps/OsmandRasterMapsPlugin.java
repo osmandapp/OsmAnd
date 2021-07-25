@@ -109,8 +109,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		underlayListener = new StateChangedListener<String>() {
 			@Override
 			public void stateChanged(String change) {
-				hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
-				hideWaterPolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+				app.runInUIThread(() -> {
+					hidePolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+					hideWaterPolygonsPref.set(settings.MAP_UNDERLAY.get() != null);
+				});
 			}
 		};
 		settings.MAP_UNDERLAY.addListener(underlayListener);
@@ -129,7 +131,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		overlayLayerListener = new StateChangedListener<Integer>() {
 			@Override
 			public void stateChanged(Integer change) {
-				overlayLayer.setAlpha(change);
+				app.runInUIThread(() -> overlayLayer.setAlpha(change));
 			}
 		};
 		// mapView.addLayer(overlayLayer, 0.7f);
