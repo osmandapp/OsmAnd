@@ -91,13 +91,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		booleanRoutingPrefListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				recalculateRoute(app, getSelectedAppMode());
+				app.runInUIThread(() -> recalculateRoute(app, getSelectedAppMode()));
 			}
 		};
 		customRoutingPrefListener = new StateChangedListener<String>() {
 			@Override
 			public void stateChanged(String change) {
-				recalculateRoute(app, getSelectedAppMode());
+				app.runInUIThread(() -> recalculateRoute(app, getSelectedAppMode()));
 			}
 		};
 	}
