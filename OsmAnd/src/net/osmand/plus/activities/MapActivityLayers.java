@@ -27,9 +27,6 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
@@ -41,7 +38,13 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.DistanceRulerControlLayer;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer;
 import net.osmand.plus.views.layers.FavouritesLayer;
 import net.osmand.plus.views.layers.GPXLayer;
@@ -51,15 +54,12 @@ import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.layers.MapMarkersLayer;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
 import net.osmand.plus.views.layers.MapTextLayer;
-import net.osmand.plus.views.MapTileLayer;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.POIMapLayer;
 import net.osmand.plus.views.layers.PointLocationLayer;
 import net.osmand.plus.views.layers.PointNavigationLayer;
 import net.osmand.plus.views.layers.PreviewRouteLineLayer;
-import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer;
-import net.osmand.plus.views.layers.DistanceRulerControlLayer;
+import net.osmand.plus.views.layers.RouteLayer;
 import net.osmand.plus.views.layers.TransportStopsLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
@@ -198,9 +198,11 @@ public class MapActivityLayers {
 		transparencyListener = new StateChangedListener<Integer>() {
 			@Override
 			public void stateChanged(Integer change) {
-				mapTileLayer.setAlpha(change);
-				mapVectorLayer.setAlpha(change);
-				mapView.refreshMap();
+				app.runInUIThread(() -> {
+					mapTileLayer.setAlpha(change);
+					mapVectorLayer.setAlpha(change);
+					mapView.refreshMap();
+				});
 			}
 		};
 		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
