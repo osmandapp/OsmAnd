@@ -764,6 +764,23 @@ public class BackupHelper {
 			@Override
 			protected BackupInfo doInBackground(Void... voids) {
 				BackupInfo info = new BackupInfo();
+
+				operationLog.log("=== localFiles ===");
+				for (LocalFile localFile : localFiles.values()) {
+					operationLog.log(localFile.toString());
+				}
+				operationLog.log("=== localFiles ===");
+				operationLog.log("=== uniqueRemoteFiles ===");
+				for (RemoteFile remoteFile : uniqueRemoteFiles.values()) {
+					operationLog.log(remoteFile.toString());
+				}
+				operationLog.log("=== uniqueRemoteFiles ===");
+				operationLog.log("=== deletedRemoteFiles ===");
+				for (RemoteFile remoteFile : deletedRemoteFiles.values()) {
+					operationLog.log(remoteFile.toString());
+				}
+				operationLog.log("=== deletedRemoteFiles ===");
+
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
