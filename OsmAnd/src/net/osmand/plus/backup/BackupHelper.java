@@ -45,14 +45,19 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.StreamSettingsItem;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -222,6 +227,10 @@ public class BackupHelper {
 
 	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName, long updateTime) {
 		dbHelper.updateFileUploadTime(type, fileName, updateTime);
+	}
+
+	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName, @NonNull String md5Hex) {
+		dbHelper.updateFileMd5Digest(type, fileName, md5Hex);
 	}
 
 	public void updateBackupUploadTime() {
@@ -631,7 +640,7 @@ public class BackupHelper {
 
 			BackupDbHelper dbHelper;
 			SQLiteConnection db;
-			Map<String, Long> infos;
+			Map<String, UploadedFileInfo> infos;
 
 			@Override
 			protected void onPreExecute() {
@@ -709,9 +718,29 @@ public class BackupHelper {
 				localFile.fileName = fileName;
 				localFile.localModifiedTime = lastModifiedTime;
 				if (infos != null) {
-					Long uploadTime = infos.get(item.getType().name() + "___" + fileName);
-					if (uploadTime != null) {
-						localFile.uploadTime = uploadTime;
+					UploadedFileInfo fileInfo = infos.get(item.getType().name() + "___" + fileName);
+					if (fileInfo != null) {
+						localFile.uploadTime = fileInfo.getUploadTime();
+						String lastMd5 = fileInfo.getMd5Digest();
+						boolean needM5Digest = item instanceof StreamSettingsItem
+								&& ((StreamSettingsItem) item).needMd5Digest()
+								&& localFile.uploadTime < lastModifiedTime
+								&& !Algorithms.isEmpty(lastMd5);
+						if (needM5Digest && file != null && file.exists()) {
+							FileInputStream is = null;
+							try {
+								is = new FileInputStream(file);
+								String md5 = new String(Hex.encodeHex(DigestUtils.md5(is)));
+								if (md5.equals(lastMd5)) {
+									item.setLocalModifiedTime(localFile.uploadTime);
+									localFile.localModifiedTime = localFile.uploadTime;
+								}
+							} catch (IOException e) {
+								LOG.error(e.getMessage(), e);
+							} finally {
+								Algorithms.closeStream(is);
+							}
+						}
 					}
 				}
 				result.add(localFile);
@@ -764,7 +793,7 @@ public class BackupHelper {
 			@Override
 			protected BackupInfo doInBackground(Void... voids) {
 				BackupInfo info = new BackupInfo();
-
+				/*
 				operationLog.log("=== localFiles ===");
 				for (LocalFile localFile : localFiles.values()) {
 					operationLog.log(localFile.toString());
@@ -780,7 +809,7 @@ public class BackupHelper {
 					operationLog.log(remoteFile.toString());
 				}
 				operationLog.log("=== deletedRemoteFiles ===");
-
+				*/
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
