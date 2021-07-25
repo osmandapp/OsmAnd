@@ -4268,4 +4268,6 @@
     <string name="promo_subscription">Промо-подписка</string>
     <string name="on_hold_since">Приостановлена с %1$s</string>
     <string name="active_till">Активна до %1$s</string>
+    <string name="backup_deleted_all_data">Все данные удалены</string>
+    <string name="track_has_no_needed_data">Трек не содержит необходимых данных.</string>
 </resources>
