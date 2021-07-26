@@ -4176,4 +4176,7 @@
     <string name="send_crash_log">Odeslat záznam o pádu</string>
     <string name="send_logcat_log">Odeslat záznam z logcatu</string>
     <string name="backup_promocode">Promokód</string>
+    <string name="backup_restore_now">Obnovit nyní</string>
+    <string name="shared_string_purchased">Zakoupeno</string>
+    <string name="explore_wikipedia_offline">Prozkoumejte Wikipedii offline.</string>
 </resources>

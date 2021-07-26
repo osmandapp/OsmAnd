@@ -145,6 +145,7 @@
 	<string name="poi_diplomatic_services_immigrant_visas_filter">Immigrant visas</string>
 	<string name="poi_diplomatic_services_citizen_services_filter">Citizen services</string>
 	<string name="poi_bay_filter">Bay type</string>
+	<string name="poi_access_general">General access</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4449,6 +4450,8 @@
 	<string name="poi_contact_xing">Xing</string>
 
 	<string name="poi_outdoor_seating_poi">Outdoor seating</string>
+
+	<string name="poi_internet_access_ssid">SSID</string>
 
 
 </resources>

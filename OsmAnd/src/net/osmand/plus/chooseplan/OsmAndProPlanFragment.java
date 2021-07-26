@@ -47,7 +47,7 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected int getHeaderIconId() {
-		return R.drawable.ic_action_osmand_pro_logo;
+		return R.drawable.ic_action_osmand_pro_logo_colored;
 	}
 
 	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {

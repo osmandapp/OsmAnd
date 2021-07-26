@@ -66,7 +66,7 @@
 \nLongitude %2$s</string>
     <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras.</string>
     <string name="routing_settings_2">Configurações de navegação</string>
-    <string name="general_settings_2">Configurações gerais</string>
+    <string name="general_settings_2">Configurações globais</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">OK</string>
     <string name="shared_string_cancel">Cancelar</string>
@@ -4172,7 +4172,7 @@
     <string name="backup_promocode">Código promocional</string>
     <string name="purchases_feature_desc_nautical">Tenha acesso a informações de profundidade náutica</string>
     <string name="purchases_feature_desc_terrain">Curvas de nível do terreno, mapa em sombras de relevo com tons escuros e mapas de declive com cores para mostrar, picos e planícies.</string>
-    <string name="purchases_feature_desc_wikivoyage">Explore a Wikipédia offline. Os artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explore a Wikivoyage offline. Os artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_wikipedia">Explore a Wikipédia offline. Artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore os artigos da Wikipédia em qualquer lugar, sem uma conexão à Internet. Estes dados offline estão divididos por países e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Obtenha downloads ilimitados para todos os mapas offline de continentes e regiões.</string>
@@ -4231,7 +4231,7 @@
 \n
 \n - Planear rota: capacidade adicional para alterar as opções de navegação, aceder ao mapa de configuração e pesquisa sem sair do ecrã de planear rota
 \n
-\n - Nova tela \"Comprar\" com informações detalhadas sobre compras
+\n - Nova tela \"Comprar\" com informações detalhadas sobre compras.
 \n
 \n - Adicionada a opção para alterar a aparência da linha de rota.
 \n
@@ -4242,4 +4242,26 @@
     <string name="logout_from_osmand_cloud">Sair do OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Tem certeza que deseja sair\?
 \nVocê precisará fazer login novamente para fazer backup ou restaurar a data.</string>
+    <string name="backup_deleted_all_data">Excluir todos os dados</string>
+    <string name="backup_error_subscription_was_expired_descr">Sua assinatura do OsmAnd Pro expirou, renove-a para usar o backup. Você ainda pode restaurar dados da nuvem.</string>
+    <string name="contour_lines_hillshades_slope">Curvas de nível, sombras de relevo, inclinação</string>
+    <string name="backup_deleting_all_data">Excluindo todos os dados</string>
+    <string name="backup_deleting_all_data_descr">Por favor, espere até OsmAnd deletar todos os seus dados da nuvem. Todos os dados do dispositivo permanecem intactos.</string>
+    <string name="backup_deleted_all_data_descr">Todos os seus dados foram excluídos com sucesso de OsmAnd Cloud.</string>
+    <string name="backup_version_history_removed">Todo o histórico da versão foi removido</string>
+    <string name="backup_data_removed">Todos os dados foram removidos</string>
+    <string name="shared_string_progress">Progresso</string>
+    <string name="backup_do_not_have_any">Você ainda não tem nenhum backup online</string>
+    <string name="backup_dont_have_any_descr">Configure um backup automático para não se preocupar com a perda de dados.</string>
+    <string name="backup_welcome_back">Bem-vindo de volta!</string>
+    <string name="backup_welcome_back_descr">Você pode restaurar dados neste dispositivo usando backups existentes ou configurar um backup deste dispositivo para OsmAnd Cloud.</string>
+    <string name="backup_setup">Configurar backup</string>
+    <string name="backup_restore_now">Restaurar agora</string>
+    <string name="attribute">Atributo</string>
+    <string name="shared_string_purchased">Comprado</string>
+    <string name="explore_wikipedia_offline">Explore a Wikipedia offline.</string>
+    <string name="on_hold_since">Em espera desde %1$s</string>
+    <string name="active_till">Ativo até %1$s</string>
+    <string name="promo_subscription">Assinatura promocional</string>
+    <string name="track_has_no_needed_data">A trilha não contém os dados necessários.</string>
 </resources>
