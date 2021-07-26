@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="purchases_feature_desc_pro_widgets">Get access to OsmAnd Pro features. Route colorization and more.</string>
     <string name="pro_widgets">Pro Widgets</string>
     <string name="option_available_only_in_osmand_pro">The option available as part of OsmAnd Pro subscription.</string>
     <string name="promo_subscription">Promo subscription</string>
@@ -88,7 +89,6 @@
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia and Wikivoyage offline</string>
     <string name="unlimited_map_downloads">Unlimited map downloads</string>
     <string name="purchases_feature_desc_osmand_cloud">Get OsmAnd Cloud to store all OsmAnd data online. No lost data after reinstalling. Back up and restore all info easily.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Get access to advanced OsmAnd widgets.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Get access to more frequent map updates. Hourly, daily, or weekly updates. Updates are downloaded incrementally, only for the changed area.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Get access to regular monthly updates for offline maps.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Get unlimited downloads for all continents and regions offline maps.</string>

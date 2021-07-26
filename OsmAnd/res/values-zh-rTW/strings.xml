@@ -4176,7 +4176,6 @@
     <string name="purchases_feature_desc_unlimited_map_download">取得所有大洲與區域的無限制下載離線地圖。</string>
     <string name="purchases_feature_desc_monthly_map_updates">取得每月定期更新的離線地圖。</string>
     <string name="purchases_feature_desc_hourly_map_updates">存取更頻繁的地圖更新。每小時、每天或每週更新。更新會以增量的方式下載，僅用於已變更的區域。</string>
-    <string name="purchases_feature_desc_advanced_widgets">存取進階 OsmAnd 小工具。</string>
     <string name="purchases_feature_desc_osmand_cloud">取得 OsmAnd 以將所有 OsmAnd 的資料儲存到線上。重新安裝後資料也不會遺失。輕鬆備份並輕鬆復原。</string>
     <string name="unlimited_map_downloads">無限制的地圖下載</string>
     <string name="wikipedia_and_wikivoyage_offline">離線的維基百科與維基導遊</string>

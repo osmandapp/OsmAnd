@@ -4180,7 +4180,6 @@
     <string name="purchases_feature_desc_unlimited_map_download">Набавите неограничена преузимања офлајн мапа за све континенте и регионе.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Обезбедите приступ редовним месечним исправкама за офлајн мапе.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Обезбедите приступ чешћем ажурирању мапа, изаберите између: ажурирања по сату, дневно или недељно. Ажурирања се преузимају постепено, само за промењено подручје.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Приступите напредним ОсмАнд виџетима.</string>
     <string name="purchases_feature_desc_osmand_cloud">Набавите ОсмАнд клоуд за складиштење свих података ОсмАнд-а на мрежи. Заборавите на губитак података након поновне инсталације, направите резервне копије и вратите све податаке без проблема.</string>
     <string name="unlimited_map_downloads">Неограничено преузимање мапа</string>
     <string name="wikipedia_and_wikivoyage_offline">Википедиа и Викивојаж ван мреже</string>
