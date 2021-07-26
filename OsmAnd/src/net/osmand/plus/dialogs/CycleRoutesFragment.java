@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -38,23 +39,27 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 	private boolean nightMode;
 
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		settings = app.getSettings();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
+	}
 
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) requireMyActivity();
 		LayoutInflater themedInflater = UiUtilities.getInflater(mapActivity, nightMode);
 		View view = themedInflater.inflate(R.layout.map_route_types_fragment, container, false);
 
-		setupPreferenceHeader(view, mapActivity);
-		setupTypesCard(view, mapActivity);
+		setupHeader(view);
+		setupTypesCard(view);
 		setupBottomEmptySpace(view);
 
 		return view;
 	}
 
-	private void setupPreferenceHeader(@NonNull View view, @NonNull MapActivity mapActivity) {
+	private void setupHeader(@NonNull View view) {
 		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(SHOW_CYCLE_ROUTES_ATTR);
 
 		View container = view.findViewById(R.id.preference_container);
@@ -64,8 +69,9 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		TextView description = container.findViewById(R.id.description);
 
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
+		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.default_icon_color);
 		title.setText(AndroidUtils.getRenderingStringPropertyName(app, SHOW_CYCLE_ROUTES_ATTR, SHOW_CYCLE_ROUTES_ATTR));
-		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bicycle_dark, selectedColor));
+		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_bicycle_dark, pref.get() ? selectedColor : disabledColor));
 		description.setText(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 
 		CompoundButton button = container.findViewById(R.id.toggle_item);
@@ -77,19 +83,22 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		container.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				boolean checked = !pref.get();
-				pref.set(checked);
-				button.setChecked(checked);
-				description.setText(checked ? R.string.shared_string_enabled : R.string.shared_string_disabled);
-
-				mapActivity.refreshMapComplete();
-				mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+				pref.set(!pref.get());
+				View view = getView();
+				if (view != null) {
+					setupHeader(view);
+				}
+				MapActivity mapActivity = (MapActivity) getMyActivity();
+				if (mapActivity != null) {
+					mapActivity.refreshMapComplete();
+					mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+				}
 			}
 		});
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.divider), false);
 	}
 
-	private void setupTypesCard(@NonNull View view, @NonNull MapActivity mapActivity) {
+	private void setupTypesCard(@NonNull View view) {
 		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(CYCLE_NODE_NETWORK_ROUTES_ATTR);
 
 		View container = view.findViewById(R.id.card_container);
@@ -101,16 +110,15 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		type.setText(pref.get() ? R.string.rendering_value_walkingRoutesOSMCNodes_name : R.string.layer_route);
 		description.setText(pref.get() ? R.string.rendering_value_walkingRoutesOSMCNodes_description : R.string.walking_route_osmc_description);
 
-		TextRadioItem relation = createRadioButton(mapActivity, pref, false, R.string.layer_route);
-		TextRadioItem nodeNetworks = createRadioButton(mapActivity, pref, true, R.string.rendering_value_walkingRoutesOSMCNodes_name);
+		TextRadioItem relation = createRadioButton(pref, false, R.string.layer_route);
+		TextRadioItem nodeNetworks = createRadioButton(pref, true, R.string.rendering_value_walkingRoutesOSMCNodes_name);
 
 		TextToggleButton radioGroup = new TextToggleButton(app, view.findViewById(R.id.custom_radio_buttons), nightMode);
 		radioGroup.setItems(relation, nodeNetworks);
 		radioGroup.setSelectedItem(pref.get() ? nodeNetworks : relation);
 	}
 
-	private TextRadioItem createRadioButton(@NonNull MapActivity mapActivity, @NonNull CommonPreference<Boolean> pref,
-											boolean enabled, int titleId) {
+	private TextRadioItem createRadioButton(@NonNull CommonPreference<Boolean> pref, boolean enabled, int titleId) {
 		TextRadioItem item = new TextRadioItem(getString(titleId));
 		item.setOnClickListener(new OnRadioItemClickListener() {
 			@Override
@@ -118,10 +126,13 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 				pref.set(enabled);
 				View mainView = getView();
 				if (mainView != null) {
-					setupTypesCard(mainView, mapActivity);
+					setupTypesCard(mainView);
 				}
-				mapActivity.refreshMapComplete();
-				mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+				MapActivity mapActivity = (MapActivity) getMyActivity();
+				if (mapActivity != null) {
+					mapActivity.refreshMapComplete();
+					mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+				}
 				return true;
 			}
 		});

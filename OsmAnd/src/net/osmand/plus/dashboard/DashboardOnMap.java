@@ -32,6 +32,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -64,6 +65,7 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.CycleRoutesFragment;
 import net.osmand.plus.dialogs.HikingRoutesFragment;
 import net.osmand.plus.dialogs.RasterMapMenu;
+import net.osmand.plus.dialogs.TravelRoutesFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
@@ -178,7 +180,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		WIKIPEDIA,
 		TERRAIN,
 		CYCLE_ROUTES,
-		HIKING_ROUTES
+		HIKING_ROUTES,
+		TRAVEL_ROUTES
 	}
 
 	private final Map<DashboardActionButtonType, DashboardActionButton> actionButtons = new HashMap<>();
@@ -331,6 +334,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			tv.setText(R.string.rendering_attr_showCycleRoutes_name);
 		} else if (visibleType == DashboardType.HIKING_ROUTES) {
 			tv.setText(R.string.rendering_attr_hikingRoutesOSMC_name);
+		} else if (visibleType == DashboardType.TRAVEL_ROUTES) {
+			tv.setText(R.string.travel_routes);
 		}
 		ImageView edit = dashboardView.findViewById(R.id.toolbar_edit);
 		edit.setVisibility(View.GONE);
@@ -607,6 +612,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					|| visibleType == DashboardType.MAPILLARY
 					|| visibleType == DashboardType.CYCLE_ROUTES
 					|| visibleType == DashboardType.HIKING_ROUTES
+					|| visibleType == DashboardType.TRAVEL_ROUTES
 					|| visibleType == DashboardType.TERRAIN) {
 				if (visibleType == DashboardType.DASHBOARD) {
 					addOrUpdateDashboardFragments();
@@ -621,6 +627,10 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				} else if (visibleType == DashboardType.HIKING_ROUTES) {
 					mapActivity.getSupportFragmentManager().beginTransaction()
 							.replace(R.id.content, new HikingRoutesFragment(), HikingRoutesFragment.TAG)
+							.commit();
+				} else if (visibleType == DashboardType.TRAVEL_ROUTES) {
+					mapActivity.getSupportFragmentManager().beginTransaction()
+							.replace(R.id.content, new TravelRoutesFragment(), TravelRoutesFragment.TAG)
 							.commit();
 				} else {
 					mapActivity.getSupportFragmentManager().beginTransaction()
@@ -701,6 +711,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 				&& visibleType != DashboardType.TERRAIN
 				&& visibleType != DashboardType.CYCLE_ROUTES
 				&& visibleType != DashboardType.HIKING_ROUTES
+				&& visibleType != DashboardType.TRAVEL_ROUTES
 				&& visibleType != DashboardType.OSM_NOTES
 				&& visibleType != DashboardType.WIKIPEDIA) {
 			listView.setDivider(dividerDrawable);
@@ -801,13 +812,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	}
 
 	public void refreshContent(boolean force) {
-		if (visibleType == DashboardType.MAPILLARY) {
-			Fragment mapillaryFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapillaryFiltersFragment.TAG);
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.detach(mapillaryFragment)
-					.attach(mapillaryFragment)
-					.commit();
-		} else if (visibleType == DashboardType.CONFIGURE_SCREEN || force) {
+		if (visibleType == DashboardType.CONFIGURE_SCREEN || force) {
 			updateListAdapter();
 		} else if (visibleType == DashboardType.CONFIGURE_MAP || visibleType == DashboardType.ROUTE_PREFERENCES) {
 			int index = listView.getFirstVisiblePosition();
@@ -815,32 +820,29 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			int top = (v == null) ? 0 : (v.getTop() - listView.getPaddingTop());
 			updateListAdapter();
 			listView.setSelectionFromTop(index, top);
+		} else if (visibleType == DashboardType.MAPILLARY) {
+			refreshFragment((MapillaryFiltersFragment.TAG));
 		} else if (visibleType == DashboardType.TERRAIN) {
-			Fragment terrainFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(TerrainFragment.TAG);
-			if (terrainFragment != null) {
-				mapActivity.getSupportFragmentManager().beginTransaction()
-						.detach(terrainFragment)
-						.attach(terrainFragment)
-						.commit();
-			}
+			refreshFragment(TerrainFragment.TAG);
 		} else if (visibleType == DashboardType.CYCLE_ROUTES) {
-			Fragment cycleRoutesFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(CycleRoutesFragment.TAG);
-			if (cycleRoutesFragment != null) {
-				mapActivity.getSupportFragmentManager().beginTransaction()
-						.detach(cycleRoutesFragment)
-						.attach(cycleRoutesFragment)
-						.commit();
-			}
+			refreshFragment(CycleRoutesFragment.TAG);
 		} else if (visibleType == DashboardType.HIKING_ROUTES) {
-			Fragment hikingRoutesFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(HikingRoutesFragment.TAG);
-			if (hikingRoutesFragment != null) {
-				mapActivity.getSupportFragmentManager().beginTransaction()
-						.detach(hikingRoutesFragment)
-						.attach(hikingRoutesFragment)
-						.commit();
-			}
+			refreshFragment(HikingRoutesFragment.TAG);
+		} else if (visibleType == DashboardType.TRAVEL_ROUTES) {
+			refreshFragment(TravelRoutesFragment.TAG);
 		} else {
 			listAdapter.notifyDataSetChanged();
+		}
+	}
+
+	private void refreshFragment(@NonNull String tag) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		Fragment fragment = fragmentManager.findFragmentByTag(tag);
+		if (fragment != null) {
+			fragmentManager.beginTransaction()
+					.detach(fragment)
+					.attach(fragment)
+					.commit();
 		}
 	}
 

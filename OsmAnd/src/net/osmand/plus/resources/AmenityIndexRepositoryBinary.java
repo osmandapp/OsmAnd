@@ -1,5 +1,6 @@
 package net.osmand.plus.resources;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
@@ -134,6 +135,16 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		return map;
 	}
 
+	@NonNull
+	public synchronized List<String> getSubCategoriesByCategoryName(@Nullable String query, @NonNull List<String> list) {
+		try {
+			BinaryMapIndexReader reader = getOpenFile();
+			return reader != null ? reader.getSubCategoriesByCategoryName(query, list) : new ArrayList<>();
+		} catch (IOException e) {
+			log.error("Error searching subcategories", e);
+		}
+		return list;
+	}
 
 	public synchronized List<Amenity> searchAmenitiesByName(int x, int y, int l, int t, int r, int b, String query, ResultMatcher<Amenity> resulMatcher) {
 		long now = System.currentTimeMillis();

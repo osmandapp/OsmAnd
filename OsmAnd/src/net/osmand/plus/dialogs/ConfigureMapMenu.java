@@ -40,6 +40,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
@@ -89,6 +90,7 @@ public class ConfigureMapMenu {
 	public static final String CURRENT_TRACK_WIDTH_ATTR = "currentTrackWidth";
 	public static final String COLOR_ATTR = "color";
 	public static final String ROAD_STYLE_ATTR = "roadStyle";
+	public static final String TRAVEL_ROUTES = "travel_routes";
 
 	public interface OnClickListener {
 		void onClick();
@@ -236,6 +238,46 @@ public class ConfigureMapMenu {
 				}
 			}
 		}
+		ResourceManager resourceManager = activity.getMyApplication().getResourceManager();
+		Set<String> routesTypes = resourceManager.searchSubCategoriesByCategoryName(UI_CATEGORY_ROUTES);
+		if (!Algorithms.isEmpty(routesTypes)) {
+			adapter.addItem(createTravelRoutesItem(activity, nightMode));
+		}
+	}
+
+	private ContextMenuItem createTravelRoutesItem(@NonNull MapActivity activity, boolean nightMode) {
+		OsmandSettings settings = activity.getMyApplication().getSettings();
+		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(TRAVEL_ROUTES);
+
+		return new ContextMenuItem.ItemBuilder()
+				.setId(ROUTES_ID + TRAVEL_ROUTES)
+				.setTitle(activity.getString(R.string.travel_routes))
+				.setIcon(getIconIdForAttr(TRAVEL_ROUTES))
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setSelected(pref.get())
+				.setColor(pref.get() ? settings.APPLICATION_MODE.get().getProfileColor(nightMode) : null)
+				.setListener(new OnRowItemClick() {
+
+					@Override
+					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+						activity.getDashboard().setDashboardVisibility(true, DashboardType.TRAVEL_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
+						return false;
+					}
+
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+						pref.set(!pref.get());
+						ContextMenuItem item = adapter.getItem(position);
+						if (item != null) {
+							item.setSelected(isChecked);
+							item.setColor(activity, isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						}
+						adapter.notifyDataSetChanged();
+						activity.refreshMapComplete();
+						activity.getMapLayers().updateLayers(activity.getMapView());
+						return false;
+					}
+				}).createItem();
 	}
 
 	private ContextMenuItem createCycleRoutesItem(@NonNull MapActivity activity, @NonNull RenderingRuleProperty property, boolean nightMode) {
@@ -328,6 +370,8 @@ public class ConfigureMapMenu {
 				return R.drawable.ic_action_trekking_dark;
 			case PISTE_ROUTES_ATTR:
 				return R.drawable.ic_action_skiing;
+			case TRAVEL_ROUTES:
+				return R.drawable.mm_routes;
 		}
 		return ContextMenuItem.INVALID_ID;
 	}

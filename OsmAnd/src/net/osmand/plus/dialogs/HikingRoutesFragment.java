@@ -89,10 +89,11 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 		boolean enabled = isEnabled();
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
+		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.default_icon_color);
 		String propertyName = AndroidUtils.getRenderingStringPropertyName(app, HIKING_ROUTES_OSMC_ATTR, property.getName());
 
 		title.setText(propertyName);
-		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, selectedColor));
+		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, enabled ? selectedColor : disabledColor));
 		description.setText(enabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 
 		CompoundButton button = container.findViewById(R.id.toggle_item);
