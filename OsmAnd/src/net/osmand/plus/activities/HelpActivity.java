@@ -15,6 +15,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -28,12 +34,6 @@ import net.osmand.plus.development.BaseLogcatActivity;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 
 import java.io.File;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
@@ -300,8 +300,9 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				"feature_articles/installation-and-troubleshooting.html"));
 		contextMenuAdapter.addItem(createItem(R.string.versions_item, NULL_ID,
 				"feature_articles/changes.html"));
-		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID,
-				"feature_articles/osmand-android-4-0-released"));
+
+		// also edit here after version update https://github.com/osmandapp/Osmand/blob/fec2f0d522571d612cef7e8aae3a127402618d6e/OsmAnd/build-common.gradle#L199
+		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID,"feature_articles/osmand-android-4-0-released.html"));
 
 		String releaseDate = "";
 		if (!getString(R.string.app_edition).isEmpty()) {
