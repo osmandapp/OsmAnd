@@ -14,7 +14,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -484,7 +483,7 @@ public class RoutingOptionsHelper {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route,
 						app.getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
 			}
-			if (!rparams.isUseIntermediatePointsRTE()) {
+			if (!rparams.useIntermediateRtePoints()) {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_from_start_point,
 						app.getString(R.string.gpx_option_from_start_point), rparams.isPassWholeRoute()));
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_calculate_first_last_segment,

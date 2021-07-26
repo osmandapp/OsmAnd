@@ -59,7 +59,7 @@ public class GPXRouteParams {
 		reverse = builder.reverse;
 		passWholeRoute = builder.passWholeRoute;
 		calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
-		useIntermediatePointsRTE = builder.isUseIntermediatePointsRTE();
+		useIntermediatePointsRTE = builder.useIntermediateRtePoints();
 		builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 		if (!file.isPointsEmpty()) {
 			wpt = new ArrayList<>(file.getPoints().size());
@@ -145,7 +145,7 @@ public class GPXRouteParams {
 			this.calculateOsmAndRouteParts = calculateOsmAndRouteParts;
 		}
 
-		public boolean isUseIntermediatePointsRTE() {
+		public boolean useIntermediateRtePoints() {
 			return file.hasRtePt() && !file.hasTrkPt();
 		}
 
