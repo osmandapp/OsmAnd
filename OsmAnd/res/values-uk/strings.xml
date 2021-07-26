@@ -4181,7 +4181,6 @@
     <string name="purchases_feature_desc_unlimited_map_download">Отримайте необмежені завантаження для всіх офлайн-мап континентів і регіонів.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Отримайте доступ до регулярних щомісячних оновлень для офлайн-мап.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Отримайте доступ до часто оновлюваних мап. Щогодинні, щоденні або щотижневі оновлення. Завантажуються поступово, лише для зміненої ділянки.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Отримайте доступ до додаткових віджетів OsmAnd.</string>
     <string name="purchases_feature_desc_osmand_cloud">Отримайте OsmAnd Cloud для зберігання всіх даних OsmAnd в Інтернеті. Не втрачайте дані після перевстановлення. Легко створюйте резервні копії та відновлюйте всі дані.</string>
     <string name="unlimited_map_downloads">Необмежена кількість завантажень мап</string>
     <string name="wikipedia_and_wikivoyage_offline">Вікіпедія і Вікімандри в автономному режимі</string>

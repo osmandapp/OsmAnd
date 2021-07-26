@@ -4187,7 +4187,6 @@
     <string name="purchases_feature_desc_unlimited_map_download">Obtenha descarregamentos ilimitados para todos os mapas offline de continentes e regiões.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtenha acesso a atualizações mensais regulares para mapas offline.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Tenha acesso a atualizações de mapas com mais frequência. Atualizações de hora em hora, diárias ou semanais. As atualizações são descarregadas de forma incremental, apenas para a área alterada.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Obtenha acesso ao OsmAnd avançado e aos widgets.</string>
     <string name="purchases_feature_desc_osmand_cloud">Obtenha o OsmAnd Cloud para armazenar todos os dados do OsmAnd online. Não perca os seus dados após reinstalações. Faça cópias de segurança e restaure todas as informações facilmente.</string>
     <string name="unlimited_map_downloads">Descarregamentos ilimitados de mapas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia e Wikivoyage offline</string>

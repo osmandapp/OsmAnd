@@ -4027,7 +4027,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="purchases_feature_desc_unlimited_map_download">Lortu kontinente eta eskualde guztietarako lineaz kanpoko mapen deskarga mugagabeak.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Lortu lineaz kanpoko mapen hileroko eguneratzeak.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Lortu sarrien erabiltzen dituzun mapen eguneraketak, aukeratu: orduko, eguneroko edo asteko eguneratzeak. Eguneratzeak modu mailakatuan deskargatzen dira, aldatutako eremurako soilik.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Eskura izan OsmAnd-en trepeta aurreratuak.</string>
     <string name="purchases_feature_desc_osmand_cloud">Lortu OsmAnd Cloud OsmAnd datu guztiak linean gordetzeko. Ez duzu informaziorik galduko berrinstalatzean, egin babeskopia eta leheneratu informazio guztia arazorik gabe.</string>
     <string name="unlimited_map_downloads">Mapen deskarga mugagabea</string>
     <string name="wikipedia_and_wikivoyage_offline">Lineaz kanpoko Wikipedia eta Wikivoyage</string>

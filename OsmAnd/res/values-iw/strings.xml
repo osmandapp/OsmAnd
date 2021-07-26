@@ -4205,7 +4205,6 @@
     <string name="purchases_feature_desc_combined_wiki">ניתן לקרוא ערכים מוויקיפדיה בדרכים, ללא חיבור לאינטרנט. נתונים בלתי מקוונים בחלוקה למדינות זמינים בכל השפות.</string>
     <string name="purchases_feature_desc_unlimited_map_download">קבלת הורדות בלתי מוגבלות לכל המפות הבלתי מקוונות של היבשות והמחוזות.</string>
     <string name="purchases_feature_desc_monthly_map_updates">קבלת גישה לעדכונים חודשיים מתחדשים למפות בלתי־מקוונות.</string>
-    <string name="purchases_feature_desc_advanced_widgets">קבלת גישה לווידג׳טים מתקדמים של OsmAnd.</string>
     <string name="unlimited_map_downloads">הורדת מפות ללא הגבלה</string>
     <string name="backup_error_gzip_only_supported_upload">יש להגיש את הקובץ בתור ‎.gzip</string>
     <string name="backup_error_file_not_available">הקובץ אינו זמין</string>

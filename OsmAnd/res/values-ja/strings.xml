@@ -4214,7 +4214,6 @@ POIの更新は利用できません</string>
     <string name="approximate_route_description">マップ上の道路にルートを貼り付けると、各移動方向や平滑具合、道路種類などの追加データを得ることができます。</string>
     <string name="duration_moment_ago">すこし前</string>
     <string name="purchases_feature_desc_hourly_map_updates">より短い頻度でマップ更新が可能になります。時間ごと、日ごと、週ごとの更新。更新は変更されたエリアに対してのみ、段階的にダウンロードされます。</string>
-    <string name="purchases_feature_desc_advanced_widgets">より高度なOsmAndウィジェットにアクセスしましょう。</string>
     <string name="purchases_feature_desc_nautical">水深に関する情報を入手しましょう</string>
     <string name="purchases_feature_desc_terrain">地形の等高線、地形の起伏を影で表現する陰影起伏図、色で判別できる傾斜マップ、山頂と低地などが含まれます。</string>
     <string name="purchases_feature_desc_wikivoyage">オフラインでもWikivoyage を参考に探索することが可能になります。記事は国や地域ごとに分けられ、言語に寄らず利用できます。</string>

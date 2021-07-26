@@ -4197,7 +4197,6 @@
     <string name="purchases_feature_desc_unlimited_map_download">Uzyskaj nieograniczone pobierania map offline dla wszystkich kontynentów i regionów.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Uzyskaj dostęp do regularnych, comiesięcznych aktualizacji dla map offline.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Uzyskaj dostęp do częstszych aktualizacji map. Cogodzinne, dzienne lub tygodniowe. Aktualizacje są pobierane przyrostowo, tylko dla zmienionego obszaru.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Uzyskaj dostęp do zaawansowanych widżetów OsmAnd.</string>
     <string name="purchases_feature_desc_osmand_cloud">Otrzymaj OsmAnd Cloud, aby przechowywać wszystkie dane OsmAnd w trybie online. Bez utraty danych po reinstalacji. Z łatwością twórz kopie zapasowe i przywracaj wszystkie informacje.</string>
     <string name="unlimited_map_downloads">Nieograniczone pobieranie map</string>
     <string name="you_can_get_feature_as_part_of_pattern">Otrzymaj \"%1$s\" jako część planu %2$s. Porównanie:</string>

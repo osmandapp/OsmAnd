@@ -4251,7 +4251,6 @@
     <string name="purchases_feature_desc_unlimited_map_download">احصل على تنزيلات غير محدودة لجميع خرائط القارات والمناطق غير المتصلة بالإنترنت.</string>
     <string name="purchases_feature_desc_monthly_map_updates">احصل على التحديثات الشهرية المنتظمة للخرائط غير المتصلة بالإنترنت.</string>
     <string name="purchases_feature_desc_hourly_map_updates">احصل على إمكانية الوصول إلى تحديث الخرائط بشكل متكرر، اختر بين: تحديثات كل ساعة أو يومية أو أسبوعية. يتم تحميل التحديثات بشكل متزايد، فقط للمنطقة التي تم تغييرها.</string>
-    <string name="purchases_feature_desc_advanced_widgets">الوصول إلى أدوات ويدجت أوسماند المتقدمة.</string>
     <string name="purchases_feature_desc_osmand_cloud">احصل على سحابة أوسماند لتخزين جميع بياناتك على التطبيق عبر الإنترنت. في حال نسيان أو فقدان البيانات الخاصة بك بعد إعادة التثبيت ، ويتيح لك النسخ الاحتياطي واستعادة جميع المعلومات دون مشكلة.</string>
     <string name="unlimited_map_downloads">تحميلات غير محدودة</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia و Wikivoyage غير متصل بالإنترنت</string>

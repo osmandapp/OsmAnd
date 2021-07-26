@@ -11,7 +11,7 @@ import java.util.List;
 public enum OsmAndFeature {
 
 	OSMAND_CLOUD(R.string.osmand_cloud, R.string.purchases_feature_desc_osmand_cloud, R.drawable.ic_action_cloud_upload_colored_day, R.drawable.ic_action_cloud_upload_colored_night),
-	ADVANCED_WIDGETS(R.string.pro_widgets, R.string.purchases_feature_desc_advanced_widgets, R.drawable.ic_action_pro_features_colored, R.drawable.ic_action_pro_features_colored_night),
+	ADVANCED_WIDGETS(R.string.pro_widgets, R.string.purchases_feature_desc_pro_widgets, R.drawable.ic_action_pro_features_colored, R.drawable.ic_action_pro_features_colored_night),
 	HOURLY_MAP_UPDATES(R.string.daily_map_updates, R.string.purchases_feature_desc_hourly_map_updates, R.drawable.ic_action_map_updates_colored_day, R.drawable.ic_action_map_updates_colored_night),
 	MONTHLY_MAP_UPDATES(R.string.monthly_map_updates, R.string.purchases_feature_desc_monthly_map_updates, R.drawable.ic_action_monthly_map_updates_colored_day, R.drawable.ic_action_monthly_map_updates_colored_night),
 	UNLIMITED_MAP_DOWNLOADS(R.string.unlimited_map_downloads, R.string.purchases_feature_desc_unlimited_map_download, R.drawable.ic_action_unlimited_downloads_colored_day, R.drawable.ic_action_unlimited_download_colored_night),

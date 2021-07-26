@@ -4116,7 +4116,6 @@
     <string name="send_crash_log">Saada krahhilogi</string>
     <string name="send_logcat_log">Saada logcat logi</string>
     <string name="purchases_feature_desc_nautical">Juurdepääs meresügavuse teabele</string>
-    <string name="purchases_feature_desc_advanced_widgets">Hangi juurdepääs täiustatud OsmAnd vidinatele.</string>
     <string name="unlimited_map_downloads">Piiramatu kaartide allalaadimine</string>
     <string name="wikipedia_and_wikivoyage_offline">Vikipeedia ja Wikivoyage ei ole võrgus</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Maastikukaardid: kontuurjooned, mäenõlvad, kallakud</string>
