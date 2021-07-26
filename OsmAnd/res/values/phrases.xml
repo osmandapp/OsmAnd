@@ -4450,5 +4450,7 @@
 
 	<string name="poi_outdoor_seating_poi">Outdoor seating</string>
 
+	<string name="poi_internet_access_ssid">SSID</string>
+
 
 </resources>
