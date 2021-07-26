@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.widget.ImageView;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreferenceCompat;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.dialogs.ConfigureMapUtils;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
@@ -20,11 +25,6 @@ import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreferenceCompat;
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
@@ -390,8 +390,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				ctx.getString(R.string.lang_zh_cn) + incompleteSuffix,
 				ctx.getString(R.string.lang_zh_tw)};
 
-		String[] valuesPl = ConfigureMapMenu.getSortedMapNamesIds(ctx, entries, entries);
-		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(ctx, entryValues, entries);
+		String[] valuesPl = ConfigureMapUtils.getSortedMapNamesIds(ctx, entries, entries);
+		String[] idsPl = ConfigureMapUtils.getSortedMapNamesIds(ctx, entryValues, entries);
 
 		return Pair.create(valuesPl, idsPl);
 	}

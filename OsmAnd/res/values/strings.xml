@@ -12,6 +12,12 @@
 
 -->
 
+    <string name="walking_route_osmc_description">Assign color for routes based on their individually locally assigned color (if present on OpenStreetMap)  and type (international, regional, local)</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Assign color for routes based on node network type (international, regional, local) they belong to</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Color by network affiliation</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Assign color for routes basedon their individually locally assigned color (if present on OpenStreetMap) and hiking shield symbol</string>
+    <string name="shared_string_relation">Relation</string>
+    <string name="routes_color_by_type">Routes color by</string>
     <string name="track_has_no_needed_data">The track does not contain needed data.</string>
     <string name="promo_subscription">Promo subscription</string>
     <string name="active_till">Active till %1$s</string>
@@ -2119,7 +2125,7 @@
     <string name="map_markers">Map markers</string>
     <string name="map_marker">Map marker</string>
     <string name="consider_turning_polygons_off">It is recommended to turn off polygon rendering.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Show mountain bike trails</string>
+    <string name="rendering_attr_showMtbRoutes_name">Mountain bike routes</string>
     <string name="show_polygons">Show polygons</string>
     <!-- string name="underlay_transparency">Underlay transparency</string -->
     <string name="find_parking">Find parking</string>
@@ -2356,8 +2362,8 @@
     <string name="shared_string_show_details">Show details</string>
     <string name="osm_edit_context_menu_delete">Delete OSM edit</string>
     <string name="rendering_value_disabled_name">Disabled</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Color by network affiliation</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Color by OSMC hiking symbol</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Network affiliation</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Log Off</string>
     <string name="rendering_attr_hideHouseNumbers_name">House numbers</string>
     <string name="application_dir_change_warning3">Move OsmAnd data files to the new destination?</string>
@@ -2720,7 +2726,7 @@
     <string name="rendering_attr_showAccess_name">Show access restrictions and toll</string>
     <string name="rendering_attr_showSurfaceGrade_name">Show road quality</string>
     <string name="rendering_attr_showSurfaces_name">Show road surface</string>
-    <string name="rendering_attr_showCycleRoutes_name">Show cycle routes</string>
+    <string name="rendering_attr_showCycleRoutes_name">Cycle routes</string>
     <string name="no_index_file_to_download">Downloads not found, please check your connection to the Internet.</string>
     <string name="select_index_file_to_download">Nothing was found, but you can make it yourself (see https://osmand.net).</string>
     <string name="none_selected_gpx">Specify a GPX file by long-tapping first.</string>
@@ -3071,7 +3077,7 @@
     <string name="download_roads_only_maps">Roads-only map</string>
     <string name="rendering_attr_alpineHiking_name">Alpine hiking scale (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Render paths according to the SAC scale.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Hiking symbol overlay</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Hiking routes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Render paths according to OSMC traces.</string>
     <string name="rendering_attr_noAdminboundaries_name">Boundaries</string>
     <string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5–9).</string>

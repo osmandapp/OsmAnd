@@ -30,13 +30,13 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRuleStorageProperties;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
 import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 
 public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
@@ -83,8 +83,8 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		if (properties == null || preferences == null) {
 			properties = new ArrayList<>();
 			preferences = new ArrayList<>();
-			List<RenderingRuleProperty> customRules = ConfigureMapMenu.getCustomRules(app,
-					RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
+			List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
+					UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 			for (RenderingRuleProperty pr : customRules) {
 				if (UI_CATEGORY_DETAILS.equals(pr.getCategory()) && pr.isBoolean()) {
 					properties.add(pr);
