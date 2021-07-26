@@ -33,7 +33,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.chooseplan.PromoBannerCard;
-import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
@@ -535,7 +534,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (trackColoringCard != null) {
 			ColoringType currentColoringType = trackColoringCard.getSelectedColoringType();
 			String routeInfoAttribute = trackColoringCard.getRouteInfoAttribute();
-			return PurchasingUtils.isAvailableColorType(app, currentColoringType, routeInfoAttribute);
+			return currentColoringType.isAvailableInSubscription(app, routeInfoAttribute);
 		}
 		return false;
 	}

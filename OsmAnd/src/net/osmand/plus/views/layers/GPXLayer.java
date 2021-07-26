@@ -773,6 +773,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private String getAvailableOrDefaultColoringType(SelectedGpxFile selectedGpxFile) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		OsmandApplication app = (OsmandApplication) view.getContext().getApplicationContext();
 
 		if (hasTrackDrawInfoForTrack(gpxFile)) {
 			return trackDrawInfo.getColoringType().getName(trackDrawInfo.getRouteInfoAttribute());
@@ -795,7 +796,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			}
 		}
 
-		if (coloringType == null) {
+		if (coloringType == null || !coloringType.isAvailableInSubscription(app, routeInfoAttribute)) {
 			return defaultColoringType;
 		} else if (getCachedTrack(selectedGpxFile).isColoringTypeAvailable(coloringType, routeInfoAttribute)) {
 			return coloringType.getName(routeInfoAttribute);

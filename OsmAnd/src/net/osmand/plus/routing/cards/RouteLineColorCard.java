@@ -14,7 +14,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.PromoBannerCard;
-import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
@@ -143,7 +142,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	public boolean isSelectedModeAvailable() {
-		return PurchasingUtils.isAvailableColorType(app, selectedType, selectedRouteInfoAttribute);
+		return selectedType.isAvailableInSubscription(app, selectedRouteInfoAttribute);
 	}
 
 	private void setupRadioGroup(LinearLayout buttonsContainer) {
