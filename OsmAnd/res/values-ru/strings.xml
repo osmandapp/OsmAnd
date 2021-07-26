@@ -226,7 +226,7 @@
     <string name="save_filter">Сохранить фильтр</string>
     <string name="delete_filter">Удалить фильтр</string>
     <string name="new_filter">Новый фильтр</string>
-    <string name="change_markers_position">Переместить точку или маркер</string>
+    <string name="change_markers_position">Переместить точку/маркер</string>
     <string name="current_track">Текущий путь</string>
     <string name="use_osm_live_routing">Навигация OsmAnd Live</string>
     <string name="map_widget_battery">Уровень заряда батареи</string>
@@ -2276,9 +2276,9 @@
     <string name="mapillary_action_descr">Поделитесь своими уличными видами через Mapillary.</string>
     <string name="mapillary_widget">Виджет Mapillary</string>
     <string name="mapillary_widget_descr">Позволяет быстро внести свой вклад в Mapillary.</string>
-    <string name="mapillary_descr">Фото местности онлайн для всех. Открывайте места, сотрудничайте, снимайте мир.</string>
+    <string name="mapillary_descr">Просмотр и создание панорам онлайн. Открывайте места, сотрудничайте, снимайте мир.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Фотографии местности для всех. Открывайте места, сотрудничайте, снимайте мир.</string>
+    <string name="plugin_mapillary_descr">Панорамы местности для всех. Открывайте места, сотрудничайте, снимайте мир.</string>
     <string name="save_poi_too_many_uppercase">В названии слишком много заглавных букв. Продолжить\?</string>
     <string name="quick_action_resume_pause_navigation_descr">Кнопка приостановки и возобновления навигации.</string>
     <string name="quick_action_show_navigation_finish_dialog">Показывать диалог завершения навигации</string>

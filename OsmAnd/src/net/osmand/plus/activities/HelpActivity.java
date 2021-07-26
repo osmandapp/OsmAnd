@@ -15,8 +15,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmandApplication;
@@ -26,14 +33,11 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.development.BaseLogcatActivity;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.io.File;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
+import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class HelpActivity extends BaseLogcatActivity implements OnItemClickListener, OnItemLongClickListener {
 
@@ -300,8 +304,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				"feature_articles/installation-and-troubleshooting.html"));
 		contextMenuAdapter.addItem(createItem(R.string.versions_item, NULL_ID,
 				"feature_articles/changes.html"));
-		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID,
-				"feature_articles/osmand-android-4-0-released"));
+
+		contextMenuAdapter.addItem(createItem(R.string.what_is_new, NULL_ID, LATEST_CHANGES_URL));
 
 		String releaseDate = "";
 		if (!getString(R.string.app_edition).isEmpty()) {
@@ -352,8 +356,8 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	}
 
 	private ContextMenuItem createSocialItem(String title,
-	                                         String url,
-	                                         @DrawableRes int icon) {
+											 String url,
+											 @DrawableRes int icon) {
 		return new ContextMenuItem.ItemBuilder()
 				.setTitle(title)
 				.setDescription(url)
@@ -393,28 +397,35 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 	protected void onLogEntryAdded() {
 	}
 
-	private static class ShowArticleOnTouchListener implements ContextMenuAdapter.ItemClickListener {
-		private final String filename;
+	private static class ShowArticleOnTouchListener implements ItemClickListener {
+
+		private final String path;
 		private final FragmentActivity ctx;
 		private final String mTitle;
 
-		private ShowArticleOnTouchListener(String filename, FragmentActivity ctx) {
-			this.filename = filename;
+		private ShowArticleOnTouchListener(String path, FragmentActivity ctx) {
+			this.path = path;
 			this.ctx = ctx;
 			mTitle = null;
 		}
 
-		private ShowArticleOnTouchListener(String filename, FragmentActivity ctx, String title) {
-			this.filename = filename;
+		private ShowArticleOnTouchListener(String path, FragmentActivity ctx, String title) {
+			this.path = path;
 			this.ctx = ctx;
 			mTitle = title;
 		}
 
 		@Override
 		public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-			String title = mTitle == null ? adapter.getItem(position).getTitle() : mTitle;
-			HelpArticleDialogFragment.instantiateWithAsset(filename, title)
-					.show(ctx.getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");
+			if (LATEST_CHANGES_URL.equals(path)) {
+				OsmandApplication app = (OsmandApplication) ctx.getApplication();
+				boolean nightMode = !app.getSettings().isLightContent();
+				WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(LATEST_CHANGES_URL), nightMode);
+			} else {
+				String title = mTitle == null ? adapter.getItem(position).getTitle() : mTitle;
+				HelpArticleDialogFragment.instantiateWithAsset(path, title)
+						.show(ctx.getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");
+			}
 			return false;
 		}
 	}
