@@ -14,10 +14,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.PromoBannerCard;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -124,20 +124,26 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 		previewRouteLineInfo.setRouteColoringType(selectedType);
 		previewRouteLineInfo.setRouteInfoAttribute(selectedRouteInfoAttribute);
+		updatePromoCardVisibility();
 		updateColorItems();
 		updateDescription();
 	}
 
-	public boolean isSelectedModeAvailable() {
-		boolean proSubscription = InAppPurchaseHelper.isSubscribedToOsmAndPro(app);
-		if (!proSubscription) {
-			if (selectedType.isRouteInfoAttribute()) {
-				return selectedRouteInfoAttribute != null
-						&& !Algorithms.containsAny(selectedRouteInfoAttribute, "_roadClass", "_surface");
-			}
-			return selectedType != RouteColoringType.SLOPE;
+	private void updatePromoCardVisibility() {
+		boolean available = isSelectedModeAvailable();
+		if (!available) {
+			promoCard.updateVisibility(true);
+			gradientCard.updateVisibility(false);
+			colorsCard.updateVisibility(false);
+		} else {
+			promoCard.updateVisibility(false);
+			gradientCard.updateVisibility(gradientCard.isVisible());
+			colorsCard.updateVisibility(colorsCard.isVisible());
 		}
-		return true;
+	}
+
+	public boolean isSelectedModeAvailable() {
+		return PurchasingUtils.isAvailableColorType(app, selectedType, selectedRouteInfoAttribute);
 	}
 
 	private void setupRadioGroup(LinearLayout buttonsContainer) {

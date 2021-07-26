@@ -18,6 +18,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -153,6 +154,20 @@ public class PurchasingUtils {
 				iterator.remove();
 			}
 		}
+	}
+
+	public static boolean isAvailableColorType(@NonNull OsmandApplication app,
+	                                           @NonNull ColoringType selectedType,
+	                                           @Nullable String selectedRouteInfoAttribute) {
+		boolean proSubscription = InAppPurchaseHelper.isSubscribedToOsmAndPro(app);
+		if (!proSubscription) {
+			if (selectedType.isRouteInfoAttribute()) {
+				return selectedRouteInfoAttribute != null
+						&& !Algorithms.containsAny(selectedRouteInfoAttribute, "_roadClass", "_surface");
+			}
+			return selectedType != ColoringType.SLOPE;
+		}
+		return true;
 	}
 
 }
