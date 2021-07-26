@@ -3842,7 +3842,7 @@
     <string name="open_street_map_login_mode">Необходимо войти в систему, чтобы отправить новые данные или правки.
 \n
 \nМожно войти в систему, используя безопасный метод OAuth или свои имя пользователя и пароль.</string>
-    <string name="use_login_password">Использовать имя/пароль</string>
+    <string name="use_login_password">Использовать имя и пароль</string>
     <string name="login_open_street_map">Вход в OpenStreetMap</string>
     <string name="login_open_street_map_org">Вход в OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Войти через OpenStreetMap</string>
@@ -3877,7 +3877,7 @@
     <string name="select_groups_for_import">Выберите импортируемые группы.</string>
     <string name="select_items_for_import">Выберите импортируемые элементы.</string>
     <string name="use_dev_url">Использовать dev.openstreetmap.org</string>
-    <string name="osm_login_descr">Можно войти в систему с помощью безопасного метода OAuth или используя свои имя пользователя и пароль.</string>
+    <string name="osm_login_descr">Войди в систему с помощью безопасного метода OAuth или используя свои имя пользователя и пароль.</string>
     <string name="subscription_payment_issue_title">Нажмите кнопку, чтобы перейти к настройкам подписки Google Play и исправить вашу подписку.</string>
     <string name="osm_edit_comment_note">Комментировать заметку OSM</string>
     <string name="use_dev_url_descr">Переключиться на использование dev.openstreetmap.org вместо openstreetmap.org для тестирования отправки заметок OSM / POI / GPX.</string>
@@ -4010,7 +4010,7 @@
     <string name="live_update_frequency_day_variant">Обновления карт будут проверяться каждый день. Следующий раз %1$s в %2$s.</string>
     <string name="live_update_frequency_hour_variant">Обновления карт будут проверяться каждый час. Следующий раз %1$s в %2$s.</string>
     <string name="delete_updates">Удалить обновления</string>
-    <string name="live_update_delete_updates_msg">Вы уверены, что хотите удалить все live-обновления для %s\?</string>
+    <string name="live_update_delete_updates_msg">Удалить все live-обновления для %s\?</string>
     <string name="purchases">Покупки</string>
     <string name="quick_action_show_hide_title">Показать/скрыть</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Природные границы</string>
@@ -4030,7 +4030,7 @@
     <string name="track_recording_stop_without_saving">Остановить без сохранения</string>
     <string name="track_recording_save_and_stop">Сохранить и остановить запись</string>
     <string name="track_recording_title">Запись трека остановлена</string>
-    <string name="track_recording_description">Вы уверены, что хотите остановить запись\?
+    <string name="track_recording_description">Остановить запись\?
 \nВсе несохраненные данные будут потеряны.</string>
     <string name="on_pause">На паузе</string>
     <string name="routing_attr_height_obstacles_description">Позволяет избегать больших подъемов при навигации.</string>
@@ -4115,20 +4115,20 @@
 \n%1$s</string>
     <string name="osmand_cloud_create_account_descr">Введите адрес электронной почты и все ваши данные будут привязаны к нему.
 \nМы вышлем вам проверочный код на указанный адрес электронной почты.</string>
-    <string name="osmand_cloud_login_descr">Введите адрес электронной почты, который вы использовали при регистрации. Мы вышлем вам одноразовый пароль, необходимый на следующем шаге.</string>
+    <string name="osmand_cloud_login_descr">Введите адрес электронной почты, который вы использовали при регистрации. На него будет выслан одноразовый код для следующего шага.</string>
     <string name="verify_email_address">Подтверждение адреса электронной почты</string>
-    <string name="verify_email_address_descr">Мы отправили проверочный код на %1$s, пожалуйста, введите его в поле ниже.</string>
+    <string name="verify_email_address_descr">Проверочный код отправлен на %1$s. Пожалуйста, введите его в поле ниже.</string>
     <string name="cloud_email_not_registered">Данный адрес электронной почты не был зарегистрирован в OsmAnd Cloud</string>
-    <string name="cloud_email_already_registered">Учетная запись с данным адресом электронной почты уже зарегистрирована.</string>
-    <string name="resend_verification_code">Отправить код повторно</string>
+    <string name="cloud_email_already_registered">Данный адрес электронной почты уже зарегистрирован.</string>
+    <string name="resend_verification_code">Отправить повторно</string>
     <string name="verification_code_missing">Я не получил код подтверждения</string>
     <string name="verification_code_missing_description">Время ожидания кода может составлять 10 минут, также вы можете проверить папку со спамом. Если это не помогло, воспользуйтесь кнопкой ниже.</string>
     <string name="local_backup">Локальное резервное копирование</string>
-    <string name="osmand_cloud_authorize_descr">Никогда не теряйте свои данные, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
+    <string name="osmand_cloud_authorize_descr">Никогда не теряйте свои данные. Легко создавайте и восстанавливайте резервные копии.</string>
     <string name="backup_and_restore">Резервное копирование и восстановление</string>
     <string name="last_backup">Последнее резервное копирование</string>
     <string name="duration_ago">%1$s назад</string>
-    <string name="select_nav_profile_dialog_message">Режим навигации определяет правила расчета маршрутов. Вы можете выбрать локальный или онлайн маршрутизатор.</string>
+    <string name="select_nav_profile_dialog_message">«Режим навигации» определяет правила расчета маршрутов, с доступными офлайн или онлайн-механизмами маршрутизации.</string>
     <string name="backup_delete_all_data_warning">Вы собираетесь удалить все данные, загруженные в OsmAnd Cloud ранее, включая историю версий.
 \n
 \nВы не сможете восстановить удалённые данные.</string>
@@ -4149,7 +4149,7 @@
     <string name="loading_list_of_routing_services">Загрузка списка доступных сервисов маршрутизации</string>
     <string name="shared_string_offline">Офлайн</string>
     <string name="shared_string_online">Онлайн</string>
-    <string name="osmand_online_routing_promo">Вы можете использовать предопределенные шаблоны или добавить настраиваемую онлайн-маршрутизацию: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="osmand_online_routing_promo">Использовать предопределенные шаблоны или добавить онлайн-маршрутизацию OSRM, GraphHopper, OpenRouteService или GPX.</string>
     <string name="shared_string_external">Внешний</string>
     <string name="provided_by">Предоставлен %1$s</string>
     <string name="failed_loading_predefined_engines">Не удалось загрузить список предопределенных шаблонов.
@@ -4170,27 +4170,27 @@
     <string name="choose_what_to_restore">Выберите данные для восстановления.</string>
     <string name="restore_selected_data">Восстановить выбранные данные</string>
     <string name="receiving_data_from_server">Получение данных с сервера…</string>
-    <string name="restore_complete">Восстановление завершено</string>
+    <string name="restore_complete">Восстановлено</string>
     <string name="grey_color_slope">Серый цвет используется, когда уклон не определен.</string>
     <string name="backup_storage_taken">Занятое пространство</string>
     <string name="backup_version_history">История версий</string>
-    <string name="backup_version_history_delete_descr">Вы хотите удалить историю изменений для отключенных типов из облака\?</string>
+    <string name="backup_version_history_delete_descr">Удалить историю изменений для устаревших типов данных из облака\?</string>
     <string name="delete_version_history">Удалить историю версий</string>
     <string name="routing_attr_avoid_tunnels_description">Исключить тоннели</string>
     <string name="routing_attr_avoid_tunnels_name">Без тоннелей</string>
     <string name="send_crash_log">Отправить журнал сбоев</string>
     <string name="send_logcat_log">Отправить журнал logcat</string>
     <string name="backup_promocode">Промокод</string>
-    <string name="purchases_feature_desc_nautical">Доступ к информации о морских глубинах</string>
+    <string name="purchases_feature_desc_nautical">Информация о морских глубинах</string>
     <string name="purchases_feature_desc_terrain">Контурные линии, карты затенения рельефа (отмывка) и карты уклонов с цветовой визуализацией, вершины и низменности.</string>
-    <string name="purchases_feature_desc_wikivoyage">Изучайте Викигид в режиме офлайн. Статьи разделены по странам и регионам и доступны на всех языках.</string>
-    <string name="purchases_feature_desc_wikipedia">Изучайте Википедию в режиме офлайн. Статьи разделены по странам и регионам и доступны на всех языках.</string>
+    <string name="purchases_feature_desc_wikivoyage">Изучайте Викигид офлайн. Статьи разделены по странам и регионам и доступны на всех языках.</string>
+    <string name="purchases_feature_desc_wikipedia">Изучайте Википедию офлайн. Статьи разделены по странам и регионам и доступны на всех языках.</string>
     <string name="purchases_feature_desc_combined_wiki">Читайте статьи Википедии и Викигида на ходу, без подключения к интернету. Офлайн-данные разделены по странам и доступны на всех языках.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Неограниченные загрузки локальных карт всех континентов и регионов.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Доступ к регулярным ежемесячным обновлениям для локальных карт.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Доступ к более частому обновлению карт, выбирайте между: ежечасными, ежедневными или еженедельными обновлениями. Обновления загружаются постепенно, только для измененной области.</string>
     <string name="purchases_feature_desc_advanced_widgets">Доступ к расширенным виджетам OsmAnd.</string>
-    <string name="purchases_feature_desc_osmand_cloud">OsmAnd Cloud для хранения всех данных OsmAnd в облаке. Забудьте о потере данных после переустановки, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Облачное хранилище OsmAnd Cloud для хранения всех данных приложения. Забудьте о потере данных после переустановки, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
     <string name="unlimited_map_downloads">Неограниченные загрузки карт</string>
     <string name="wikipedia_and_wikivoyage_offline">Локальные Википедия и Викигид</string>
     <string name="offline_wikipeadia">Локальная Википедия</string>
@@ -4199,7 +4199,7 @@
     <string name="terrain_maps">Карты рельефа</string>
     <string name="nautical_depth">Морские глубины</string>
     <string name="advanced_widgets">Расширенные виджеты</string>
-    <string name="you_can_get_feature_as_part_of_pattern">Вы можете получить «%1$s» как часть плана %2$s. Сравнение планов:</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Получить «%1$s» как часть тарифного плана %2$s. Сравнение планов:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s или %2$s</string>
     <string name="continue_with">Продолжить с %1$s</string>
     <string name="not_available_with">Недоступно с %1$s</string>
@@ -4232,7 +4232,7 @@
     <string name="approximate_route_description">Прикрепите маршрут к дорогам на карте, чтобы получить данные о всех поворотах, а также о проходимости, типах дорог и т. д.</string>
     <string name="release_4_0">• Облачное резервное копирование
 \n
-\n• Добавлен ночной режим для стиля рендеринга «Topo»
+\n• Добавлен ночной режим для стиля карты «Topo»
 \n
 \n• Добавлена возможность загрузки контурных линий в футах
 \n
@@ -4276,4 +4276,5 @@
     <string name="active_till">Активна до %1$s</string>
     <string name="backup_deleted_all_data">Все данные удалены</string>
     <string name="track_has_no_needed_data">Трек не содержит необходимых данных.</string>
+    <string name="enter_verification_code">Введите одноразовый пароль</string>
 </resources>
