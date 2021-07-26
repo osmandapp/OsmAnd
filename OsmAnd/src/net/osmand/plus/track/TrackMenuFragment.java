@@ -39,7 +39,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FileUtils;
 import net.osmand.FileUtils.RenameCallback;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -140,6 +139,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private SelectedGpxFile selectedGpxFile;
 
 	private TrackMenuType menuType = TrackMenuType.OVERVIEW;
+	private boolean menuTypeChanged = false;
 	private SegmentsCard segmentsCard;
 	private OptionsCard optionsCard;
 	private DescriptionCard descriptionCard;
@@ -683,14 +683,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int currentMenuState, int previousMenuState) {
 		super.onContextMenuStateChanged(fragment, currentMenuState, previousMenuState);
 
-		boolean changed = currentMenuState != previousMenuState;
-		if (changed) {
+		boolean menuStateChanged = currentMenuState != previousMenuState;
+		if (menuStateChanged) {
 			updateControlsVisibility(true);
 			boolean backButtonVisible = !Algorithms.isEmpty(returnScreenName) && currentMenuState == MenuState.HALF_SCREEN;
 			AndroidUiHelper.updateVisibility(backButtonContainer, backButtonVisible);
 		}
-		if (currentMenuState != MenuState.FULL_SCREEN && (changed || adjustMapPosition)) {
+		if (currentMenuState != MenuState.FULL_SCREEN && (menuStateChanged || adjustMapPosition)
+				&& !menuTypeChanged) {
 			adjustMapPosition(getMenuStatePosY(currentMenuState));
+		}
+		if (menuStateChanged) {
+			menuTypeChanged = false;
 		}
 	}
 
@@ -1098,6 +1102,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 				for (TrackMenuType type : TrackMenuType.values()) {
 					if (type.menuItemId == item.getItemId()) {
+						menuTypeChanged = menuType != type;
 						menuType = type;
 						setupCards();
 						updateHeader();
