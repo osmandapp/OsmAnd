@@ -586,8 +586,9 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 			for (int n = routeInd + 1; n + 1 < list.size(); n++) {
 				RouteSegmentResult s1 = list.get(n);
 				String s1DnRef = s1.getObject().getDestinationRef(lang,	transliterate, isForwardDirection());
-				boolean dnRefIsEquals = !Algorithms.isEmpty(s1DnRef) && !Algorithms.isEmpty(dnRef) && s1DnRef.equals(dnRef);
-				if (distanceFromTurn < DIST_TO_SEEK_DEST && (s1.getObject().getHighway().equals("motorway_link") || dnRefIsEquals)
+				boolean dnRefIsEqual = !Algorithms.isEmpty(s1DnRef) && !Algorithms.isEmpty(dnRef) && s1DnRef.equals(dnRef);
+				String highway = s1.getObject().getHighway();
+				if (distanceFromTurn < DIST_TO_SEEK_DEST && ("motorway_link".equals(highway) || dnRefIsEqual)
 						&& Algorithms.isEmpty(destinationName)) {
 					destinationName = s1.getObject().getDestinationName(lang, transliterate, s1.isForwardDirection());
 				}
