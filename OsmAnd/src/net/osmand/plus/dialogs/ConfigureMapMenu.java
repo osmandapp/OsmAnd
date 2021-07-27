@@ -267,6 +267,7 @@ public class ConfigureMapMenu {
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setSelected(pref.get())
 				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
+				.setDescription(app.getString(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled))
 				.setListener(new OnRowItemClick() {
 
 					@Override
@@ -284,13 +285,14 @@ public class ConfigureMapMenu {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-						pref.set(!pref.get());
+						pref.set(isChecked);
 						ContextMenuItem item = adapter.getItem(position);
 						if (item != null) {
 							item.setSelected(isChecked);
 							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+							adapter.notifyDataSetChanged();
 						}
-						adapter.notifyDataSetChanged();
 						if (property != null) {
 							activity.refreshMapComplete();
 							activity.getMapLayers().updateLayers(activity.getMapView());
@@ -319,6 +321,7 @@ public class ConfigureMapMenu {
 				.setIcon(getIconIdForAttr(attrName))
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setSelected(enabled)
+				.setDescription(app.getString(enabled ? R.string.shared_string_enabled : R.string.shared_string_disabled))
 				.setColor(enabled ? app.getSettings().getApplicationMode().getProfileColor(nightMode) : null)
 				.setListener(new OnRowItemClick() {
 
@@ -335,8 +338,9 @@ public class ConfigureMapMenu {
 						if (item != null) {
 							item.setSelected(isChecked);
 							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+							adapter.notifyDataSetChanged();
 						}
-						adapter.notifyDataSetChanged();
 						activity.refreshMapComplete();
 						activity.getMapLayers().updateLayers(activity.getMapView());
 						return false;
@@ -355,6 +359,7 @@ public class ConfigureMapMenu {
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setSelected(pref.get())
 				.setColor(pref.get() ? settings.APPLICATION_MODE.get().getProfileColor(nightMode) : null)
+				.setDescription(activity.getString(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled))
 				.setListener(new OnRowItemClick() {
 
 					@Override
@@ -370,6 +375,7 @@ public class ConfigureMapMenu {
 						if (item != null) {
 							item.setSelected(isChecked);
 							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+							item.setDescription(activity.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
 						}
 						adapter.notifyDataSetChanged();
 						activity.refreshMapComplete();
@@ -755,12 +761,14 @@ public class ConfigureMapMenu {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						pref.set(isChecked);
 						ContextMenuItem item = adapter.getItem(pos);
 						if (item != null) {
 							item.setSelected(isChecked);
 							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+							adapter.notifyDataSetChanged();
 						}
-						pref.set(!pref.get());
 						if (property != null) {
 							activity.refreshMapComplete();
 						} else {
@@ -774,6 +782,7 @@ public class ConfigureMapMenu {
 				})
 				.setSelected(pref.get())
 				.setColor(pref.get() ? settings.getApplicationMode().getProfileColor(nightMode) : null)
+				.setDescription(app.getString(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled))
 				.setIcon(icon)
 				.createItem();
 	}
