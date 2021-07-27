@@ -384,7 +384,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				if (trackWidthCard != null) {
 					trackWidthCard.updateTopDividerVisibility(!currentColoringType.isRouteInfoAttribute());
 				}
-				onColoringTypeChanged();
+				updatePromoCardVisibility();
 			} else if (card instanceof ColorsCard) {
 				int color = ((ColorsCard) card).getSelectedColor();
 				trackDrawInfo.setColor(color);
@@ -515,7 +515,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		}
 	}
 
-	private void onColoringTypeChanged() {
+	private void updatePromoCardVisibility() {
 		boolean available = isAvailableColoringType();
 		if (!available) {
 			promoCard.updateVisibility(true);
@@ -523,8 +523,6 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			colorsCard.updateVisibility(false);
 		} else {
 			promoCard.updateVisibility(false);
-			gradientCard.updateVisibility(gradientCard.isVisible());
-			colorsCard.updateVisibility(colorsCard.isVisible());
 		}
 		View saveButton = view.findViewById(R.id.right_bottom_button);
 		saveButton.setEnabled(available);
@@ -751,7 +749,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			});
 			trackWidthCard.setListener(this);
 			cardsContainer.addView(trackWidthCard.build(mapActivity));
-			onColoringTypeChanged();
+			updatePromoCardVisibility();
 		}
 	}
 

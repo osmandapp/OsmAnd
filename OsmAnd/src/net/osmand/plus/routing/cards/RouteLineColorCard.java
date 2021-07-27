@@ -136,8 +136,6 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			colorsCard.updateVisibility(false);
 		} else {
 			promoCard.updateVisibility(false);
-			gradientCard.updateVisibility(gradientCard.isVisible());
-			colorsCard.updateVisibility(colorsCard.isVisible());
 		}
 	}
 
