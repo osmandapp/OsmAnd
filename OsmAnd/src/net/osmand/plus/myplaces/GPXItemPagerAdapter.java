@@ -69,10 +69,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private static final int CHART_LABEL_COUNT = 4;
 
-	private OsmandApplication app;
-	private UiUtilities iconsCache;
-	private TrackDisplayHelper displayHelper;
-	private Map<GPXTabItemType, List<ILineDataSet>> dataSetsMap = new HashMap<>();
+	private final OsmandApplication app;
+	private final UiUtilities iconsCache;
+	private final TrackDisplayHelper displayHelper;
+	private final Map<GPXTabItemType, List<ILineDataSet>> dataSetsMap = new HashMap<>();
 
 	private WptPt selectedWpt;
 	private TrkSegment segment;
@@ -191,13 +191,16 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		TrkSegment segment = getTrackSegment(chart);
 		if (!Algorithms.isEmpty(dataSets) && segment != null) {
 			GPXFile gpxFile = gpxItem.group.getGpx();
+			boolean joinSegments = displayHelper.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 				float time = pos * 1000;
-				return GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, false);
+				return GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, false,
+						joinSegments);
 			} else {
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
 				float distance = dataSet.getDivX() * pos;
-				return GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, false);
+				return GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, false,
+						joinSegments);
 			}
 		}
 		return null;
