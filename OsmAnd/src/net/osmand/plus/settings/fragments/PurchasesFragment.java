@@ -32,7 +32,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
@@ -108,13 +107,10 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 			cardsContainer.addView(new PromoPurchaseCard(mapActivity).build(mapActivity));
 		}
 
-		BaseCard purchaseCard;
-		if (Version.isPaidVersion(app) || !Algorithms.isEmpty(mainPurchases) || !promoActive) {
-			purchaseCard = new TroubleshootingCard(mapActivity, purchaseHelper, false, false);
-		} else {
-			purchaseCard = new PurchasingCard(mapActivity, purchaseHelper, false);
+		if (!Version.isPaidVersion(app) || Algorithms.isEmpty(mainPurchases)) {
+			cardsContainer.addView(new PurchasingCard(mapActivity, false).build(mapActivity));
 		}
-		cardsContainer.addView(purchaseCard.build(mapActivity));
+		cardsContainer.addView(new TroubleshootingCard(mapActivity, purchaseHelper, false).build(mapActivity));
 	}
 
 	@Nullable

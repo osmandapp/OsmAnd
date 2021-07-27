@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="explore_osmnad_plans_to_find_suitable">Explore OsmAnd Plans to find suitable for you.</string>
     <string name="purchases_feature_desc_pro_widgets">Get access to OsmAnd Pro features. Route colorization and more.</string>
     <string name="pro_widgets">Pro Widgets</string>
     <string name="option_available_only_in_osmand_pro">The option available as part of OsmAnd Pro subscription.</string>
