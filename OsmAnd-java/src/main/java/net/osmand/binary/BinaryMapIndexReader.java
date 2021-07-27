@@ -1369,24 +1369,6 @@ public class BinaryMapIndexReader {
 		return map;
 	}
 
-	public List<String> getSubCategoriesByCategoryName(String query, List<String> list) throws IOException {
-		if (query == null || query.length() == 0) {
-			throw new IllegalArgumentException();
-		}
-		Collator collator = OsmAndCollator.primaryCollator();
-		for (PoiRegion poiIndex : poiIndexes) {
-			poiAdapter.initCategories(poiIndex);
-			for (int i = 0; i < poiIndex.categories.size(); i++) {
-				String category = poiIndex.categories.get(i);
-				if (CollatorStringMatcher.cmatches(collator, category, query, StringMatcherMode.CHECK_EQUALS)) {
-					list.addAll(poiIndex.subcategories.get(i));
-					break;
-				}
-			}
-		}
-		return list;
-	}
-
 	public List<Amenity> searchPoi(SearchRequest<Amenity> req) throws IOException {
 		req.numberOfVisitedObjects = 0;
 		req.numberOfAcceptedObjects = 0;
