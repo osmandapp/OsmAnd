@@ -373,7 +373,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 					int code = error.getCode();
 					choosePlanVisible = !promoCodeSupported()
 							&& (code == SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION
-							|| code == SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED
 							|| code == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT);
 				}
 				errorText.setText(error != null ? error.getLocalizedError(app) : message);
