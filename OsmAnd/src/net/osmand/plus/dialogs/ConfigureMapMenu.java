@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -21,6 +23,7 @@ import net.osmand.plus.ContextMenuItem.ItemBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.helpers.enums.DayNightMode;
@@ -31,6 +34,7 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportLinesMenu;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.SunriseSunset;
 
@@ -269,10 +273,7 @@ public class ConfigureMapMenu {
 						if (property != null) {
 							activity.getDashboard().setDashboardVisibility(true, DashboardType.CYCLE_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
 						} else {
-							String name = getRendererNameForAttr(app, attrName);
-							if (name != null) {
-								app.showShortToastMessage(R.string.setting_supported_by_style, name);
-							}
+							showRendererSnackbarForAttr(activity, attrName, nightMode);
 						}
 						return false;
 					}
@@ -291,10 +292,7 @@ public class ConfigureMapMenu {
 							activity.refreshMapComplete();
 							activity.getMapLayers().updateLayers(activity.getMapView());
 						} else {
-							String name = getRendererNameForAttr(app, attrName);
-							if (name != null) {
-								app.showShortToastMessage(R.string.setting_supported_by_style, name);
-							}
+							showRendererSnackbarForAttr(activity, attrName, nightMode);
 						}
 						return false;
 					}
@@ -365,9 +363,8 @@ public class ConfigureMapMenu {
 	}
 
 	@Nullable
-	private String getRendererNameForAttr(@NonNull OsmandApplication app, @NonNull String attrName) {
-		String renderName = getRoutesDefaultAttrs().get(attrName);
-		return renderName != null ? RendererRegistry.getRendererName(app, renderName) : null;
+	private String getRendererForAttr(@NonNull String attrName) {
+		return getRoutesDefaultAttrs().get(attrName);
 	}
 
 	@DrawableRes
@@ -729,10 +726,7 @@ public class ConfigureMapMenu {
 						if (property != null) {
 							activity.refreshMapComplete();
 						} else {
-							String name = getRendererNameForAttr(app, attrName);
-							if (name != null) {
-								app.showShortToastMessage(R.string.setting_supported_by_style, name);
-							}
+							showRendererSnackbarForAttr(activity, attrName, nightMode);
 						}
 						return false;
 					}
@@ -742,5 +736,31 @@ public class ConfigureMapMenu {
 				.setDescription(app.getString(pref.get() ? R.string.shared_string_enabled : R.string.shared_string_disabled))
 				.setIcon(icon)
 				.createItem();
+	}
+
+	private void showRendererSnackbarForAttr(@NonNull MapActivity activity, @NonNull String attrName, boolean nightMode) {
+		String renderer = getRendererForAttr(attrName);
+		if (renderer != null) {
+			OsmandApplication app = activity.getMyApplication();
+			String rendererName = RendererRegistry.getRendererName(app, renderer);
+			String text = app.getString(R.string.setting_supported_by_style, rendererName);
+			Snackbar snackbar = Snackbar.make(activity.getLayout(), text, Snackbar.LENGTH_LONG)
+					.setAction(R.string.shared_string_change, new View.OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
+							if (loaded != null) {
+								app.getSettings().RENDERER.set(renderer);
+								app.getRendererRegistry().setCurrentSelectedRender(loaded);
+								activity.refreshMapComplete();
+								activity.getDashboard().updateListAdapter(createListAdapter(activity));
+							} else {
+								app.showShortToastMessage(R.string.renderer_load_exception);
+							}
+						}
+					});
+			UiUtilities.setupSnackbar(snackbar, nightMode);
+			snackbar.show();
+		}
 	}
 }
