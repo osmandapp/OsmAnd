@@ -72,13 +72,10 @@ public class GpxSelectionHelper {
 	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
 	private final Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
 	private SelectGpxTask selectGpxTask;
-	private SelectedGpxFile trackToFollow;
-	private StateChangedListener<String> followTrackListener;
 
 	public GpxSelectionHelper(OsmandApplication app, SavingTrackHelper trackHelper) {
 		this.app = app;
 		savingTrackHelper = trackHelper;
-		app.getSettings().FOLLOW_THE_GPX_ROUTE.addListener(getFollowTrackListener());
 	}
 
 	public void clearAllGpxFilesToShow(boolean backupSelection) {
@@ -114,36 +111,6 @@ public class GpxSelectionHelper {
 			}
 			saveCurrentSelections();
 		}
-	}
-
-	private StateChangedListener<String> getFollowTrackListener() {
-		if (followTrackListener == null) {
-			followTrackListener = gpxRoutePath -> app.runInUIThread(() -> {
-				trackToFollow = null;
-
-				if (!Algorithms.isEmpty(gpxRoutePath)) {
-					trackToFollow = getSelectedFileByPath(gpxRoutePath);
-					if (trackToFollow == null) {
-						File file = new File(gpxRoutePath);
-						if (file.exists() && !file.isDirectory()) {
-							new GpxFileLoaderTask(file, new CallbackWithObject<GPXFile>() {
-								@Override
-								public boolean processResult(GPXFile result) {
-									trackToFollow = selectGpxFile(result, true, false);
-									return true;
-								}
-							}).execute();
-						}
-					}
-				} else if (gpxRoutePath != null) {
-					GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
-					if (routeParams != null && Algorithms.stringsEqual(routeParams.getFile().path, gpxRoutePath)) {
-						trackToFollow = selectGpxFile(routeParams.getFile(), true, true);
-					}
-				}
-			});
-		}
-		return followTrackListener;
 	}
 
 	public static class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
