@@ -312,20 +312,22 @@ public class TrackDetailsMenu {
 		LineData lineData = chart.getLineData();
 		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 		GpxDisplayItem gpxItem = getGpxItem();
-		if (!Algorithms.isEmpty(ds) && gpxItem != null) {
+		if (!Algorithms.isEmpty(ds) && gpxItem != null && selectedGpxFile != null) {
 			TrkSegment segment = getTrackSegment(chart);
 			if (segment == null) {
 				return null;
 			}
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
 			GPXFile gpxFile = gpxItem.group.getGpx();
+			boolean joinSegments = selectedGpxFile.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
 				float time = pos * 1000;
-				point = GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, true);
+				point = GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, true, joinSegments);
 			} else {
 				float distance = pos * dataSet.getDivX();
-				point = GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, true);
+				point = GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, true,
+						joinSegments);
 			}
 		}
 		return point == null ? null : new LatLon(point.lat, point.lon);

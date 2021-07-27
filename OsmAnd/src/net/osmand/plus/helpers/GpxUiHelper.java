@@ -2405,8 +2405,8 @@ public class GpxUiHelper {
 
 	@Nullable
 	public static WptPt getSegmentPointByTime(@NonNull TrkSegment segment, @NonNull GPXFile gpxFile,
-	                                          float time, boolean preciseLocation) {
-		if (!segment.generalSegment) {
+	                                          float time, boolean preciseLocation, boolean joinSegments) {
+		if (!segment.generalSegment || joinSegments) {
 			return getSegmentPointByTime(segment, time, 0, preciseLocation);
 		}
 
@@ -2463,10 +2463,11 @@ public class GpxUiHelper {
 
 	@Nullable
 	public static WptPt getSegmentPointByDistance(@NonNull TrkSegment segment, @NonNull GPXFile gpxFile,
-	                                              float distanceToPoint, boolean preciseLocation) {
+	                                              float distanceToPoint, boolean preciseLocation,
+	                                              boolean joinSegments) {
 		double passedDistance = 0;
 
-		if (!segment.generalSegment) {
+		if (!segment.generalSegment || joinSegments) {
 			WptPt prevPoint = null;
 			for (int i = 0; i < segment.points.size(); i++) {
 				WptPt currPoint = segment.points.get(i);
