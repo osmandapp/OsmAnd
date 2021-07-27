@@ -72,13 +72,10 @@ public class GpxSelectionHelper {
 	private List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>();
 	private final Map<GPXFile, Long> selectedGpxFilesBackUp = new HashMap<>();
 	private SelectGpxTask selectGpxTask;
-	private SelectedGpxFile trackToFollow;
-	private StateChangedListener<String> followTrackListener;
 
 	public GpxSelectionHelper(OsmandApplication app, SavingTrackHelper trackHelper) {
 		this.app = app;
 		savingTrackHelper = trackHelper;
-		app.getSettings().FOLLOW_THE_GPX_ROUTE.addListener(getFollowTrackListener());
 	}
 
 	public void clearAllGpxFilesToShow(boolean backupSelection) {
@@ -114,41 +111,6 @@ public class GpxSelectionHelper {
 			}
 			saveCurrentSelections();
 		}
-	}
-
-	private StateChangedListener<String> getFollowTrackListener() {
-		if (followTrackListener == null) {
-			followTrackListener = new StateChangedListener<String>() {
-				@Override
-				public void stateChanged(String gpxRoutePath) {
-					if (trackToFollow != null) {
-						selectGpxFile(trackToFollow.getGpxFile(), false, trackToFollow.notShowNavigationDialog);
-						trackToFollow = null;
-					}
-					if (!Algorithms.isEmpty(gpxRoutePath)) {
-						trackToFollow = getSelectedFileByPath(gpxRoutePath);
-						if (trackToFollow == null) {
-							File file = new File(gpxRoutePath);
-							if (file.exists() && !file.isDirectory()) {
-								new GpxFileLoaderTask(file, new CallbackWithObject<GPXFile>() {
-									@Override
-									public boolean processResult(GPXFile result) {
-										trackToFollow = selectGpxFile(result, true, false);
-										return true;
-									}
-								}).execute();
-							}
-						}
-					} else if (gpxRoutePath != null) {
-						GPXRouteParamsBuilder routeParams = app.getRoutingHelper().getCurrentGPXRoute();
-						if (routeParams != null && Algorithms.stringsEqual(routeParams.getFile().path, gpxRoutePath)) {
-							trackToFollow = selectGpxFile(routeParams.getFile(), true, true);
-						}
-					}
-				}
-			};
-		}
-		return followTrackListener;
 	}
 
 	public static class GpxFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
@@ -629,7 +591,8 @@ public class GpxSelectionHelper {
 						} else if (obj.has(BACKUP)) {
 							selectedGpxFilesBackUp.put(gpx, gpx.modifiedTime);
 						} else {
-							SelectedGpxFile file = selectGpxFile(gpx, true, false, true, selectedByUser, false, false);
+							save = true;
+							SelectedGpxFile file = selectGpxFile(gpx, true, false, true, selectedByUser, false, false, false);
 							if (obj.has(HIDDEN_GROUPS)) {
 								readHiddenGroups(file, obj.getString(HIDDEN_GROUPS));
 							}
@@ -816,9 +779,12 @@ public class GpxSelectionHelper {
 	                                     boolean notShowNavigationDialog,
 	                                     boolean syncGroup,
 	                                     boolean selectedByUser,
-	                                     boolean addToHistory) {
+	                                     boolean addToHistory,
+										 boolean saveSelection) {
 		SelectedGpxFile sf = selectGpxFileImpl(gpx, dataItem, show, notShowNavigationDialog, syncGroup, selectedByUser, addToHistory);
-		saveCurrentSelections();
+		if (saveSelection) {
+			saveCurrentSelections();
+		}
 		return sf;
 	}
 
@@ -828,7 +794,7 @@ public class GpxSelectionHelper {
 	                                     boolean syncGroup,
 	                                     boolean selectedByUser,
 	                                     boolean canAddToMarkers) {
-		return selectGpxFile(gpx, show, notShowNavigationDialog, syncGroup, selectedByUser, canAddToMarkers, true);
+		return selectGpxFile(gpx, show, notShowNavigationDialog, syncGroup, selectedByUser, canAddToMarkers, true, true);
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx,
@@ -837,12 +803,13 @@ public class GpxSelectionHelper {
 	                                     boolean syncGroup,
 	                                     boolean selectedByUser,
 	                                     boolean canAddToMarkers,
-	                                     boolean addToHistory) {
+	                                     boolean addToHistory,
+										 boolean saveSelection) {
 		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpx.path));
 		if (canAddToMarkers && show && dataItem != null && dataItem.isShowAsMarkers()) {
 			app.getMapMarkersHelper().addOrEnableGroup(gpx);
 		}
-		return selectGpxFile(gpx, dataItem, show, notShowNavigationDialog, syncGroup, selectedByUser, addToHistory);
+		return selectGpxFile(gpx, dataItem, show, notShowNavigationDialog, syncGroup, selectedByUser, addToHistory, saveSelection);
 	}
 
 	public void clearPoints(GPXFile gpxFile) {

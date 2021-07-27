@@ -17,7 +17,6 @@ import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
@@ -46,14 +45,19 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.StreamSettingsItem;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -62,6 +66,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 
 public class BackupHelper {
 
@@ -95,6 +101,7 @@ public class BackupHelper {
 	public final static int STATUS_EMPTY_RESPONSE_ERROR = 2;
 	public final static int STATUS_SERVER_ERROR = 3;
 	public final static int STATUS_NO_ORDER_ID_ERROR = 4;
+	public final static int STATUS_EXECUTION_ERROR = 5;
 
 	public static final int SERVER_ERROR_CODE_EMAIL_IS_INVALID = 101;
 	public static final int SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION = 102;
@@ -220,6 +227,10 @@ public class BackupHelper {
 
 	public void updateFileUploadTime(@NonNull String type, @NonNull String fileName, long updateTime) {
 		dbHelper.updateFileUploadTime(type, fileName, updateTime);
+	}
+
+	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName, @NonNull String md5Hex) {
+		dbHelper.updateFileMd5Digest(type, fileName, md5Hex);
 	}
 
 	public void updateBackupUploadTime() {
@@ -484,15 +495,23 @@ public class BackupHelper {
 		return error;
 	}
 
-	void deleteFiles(@NonNull List<RemoteFile> remoteFiles,
-					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
-		deleteFiles(remoteFiles, false, listener);
-	}
-
 	void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
 					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
+	}
+
+	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
+						 @Nullable Executor executor, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+		try {
+			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
+					.executeOnExecutor(executor == null ? this.executor : executor).get();
+		} catch (ExecutionException | InterruptedException e) {
+			if (listener != null) {
+				app.runInUIThread(() -> listener.onFilesDeleteError(STATUS_EXECUTION_ERROR, "Execution error while deleting files"));
+			}
+		}
 	}
 
 	void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
@@ -621,7 +640,7 @@ public class BackupHelper {
 
 			BackupDbHelper dbHelper;
 			SQLiteConnection db;
-			Map<String, Long> infos;
+			Map<String, UploadedFileInfo> infos;
 
 			@Override
 			protected void onPreExecute() {
@@ -699,9 +718,29 @@ public class BackupHelper {
 				localFile.fileName = fileName;
 				localFile.localModifiedTime = lastModifiedTime;
 				if (infos != null) {
-					Long uploadTime = infos.get(item.getType().name() + "___" + fileName);
-					if (uploadTime != null) {
-						localFile.uploadTime = uploadTime;
+					UploadedFileInfo fileInfo = infos.get(item.getType().name() + "___" + fileName);
+					if (fileInfo != null) {
+						localFile.uploadTime = fileInfo.getUploadTime();
+						String lastMd5 = fileInfo.getMd5Digest();
+						boolean needM5Digest = item instanceof StreamSettingsItem
+								&& ((StreamSettingsItem) item).needMd5Digest()
+								&& localFile.uploadTime < lastModifiedTime
+								&& !Algorithms.isEmpty(lastMd5);
+						if (needM5Digest && file != null && file.exists()) {
+							FileInputStream is = null;
+							try {
+								is = new FileInputStream(file);
+								String md5 = new String(Hex.encodeHex(DigestUtils.md5(is)));
+								if (md5.equals(lastMd5)) {
+									item.setLocalModifiedTime(localFile.uploadTime);
+									localFile.localModifiedTime = localFile.uploadTime;
+								}
+							} catch (IOException e) {
+								LOG.error(e.getMessage(), e);
+							} finally {
+								Algorithms.closeStream(is);
+							}
+						}
 					}
 				}
 				result.add(localFile);
@@ -754,6 +793,7 @@ public class BackupHelper {
 			@Override
 			protected BackupInfo doInBackground(Void... voids) {
 				BackupInfo info = new BackupInfo();
+				/*
 				operationLog.log("=== localFiles ===");
 				for (LocalFile localFile : localFiles.values()) {
 					operationLog.log(localFile.toString());
@@ -769,6 +809,7 @@ public class BackupHelper {
 					operationLog.log(remoteFile.toString());
 				}
 				operationLog.log("=== deletedRemoteFiles ===");
+				*/
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {

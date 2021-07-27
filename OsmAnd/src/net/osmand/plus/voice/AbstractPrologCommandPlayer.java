@@ -9,12 +9,12 @@ import androidx.core.app.NotificationManagerCompat;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.api.AudioFocusHelper;
+import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
@@ -132,17 +132,19 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	@Override
 	public void stateChanged(ApplicationMode change) {
-		if(prologSystem != null) {
-			try {
-				prologSystem.getTheoryManager().retract(new Struct("appMode", new Var()));
-			} catch (Exception e) {
-				log.error("Retract error: ", e);
+		ctx.runInUIThread(() -> {
+			if (prologSystem != null) {
+				try {
+					prologSystem.getTheoryManager().retract(new Struct("appMode", new Var()));
+				} catch (Exception e) {
+					log.error("Retract error: ", e);
+				}
+				prologSystem.getTheoryManager()
+						.assertA(
+								new Struct("appMode", new Struct(ctx.getSettings().APPLICATION_MODE.get().getStringKey()
+										.toLowerCase())), true, "", true);
 			}
-			prologSystem.getTheoryManager()
-				.assertA(
-						new Struct("appMode", new Struct(ctx.getSettings().APPLICATION_MODE.get().getStringKey()
-								.toLowerCase())), true, "", true);
-		}
+		});
 	}
 	
 	private void init(String voiceProvider, OsmandSettings settings, String configFile) throws CommandPlayerException {

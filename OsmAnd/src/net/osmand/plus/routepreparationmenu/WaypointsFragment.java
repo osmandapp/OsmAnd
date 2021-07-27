@@ -83,7 +83,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 	private CountDownTimer cTimer = null;
 
-	private final int[] running = new int[]{-1};
+	private final int[] running = new int[] {-1};
 
 	private boolean portrait;
 	private boolean nightMode;
@@ -95,8 +95,9 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, final Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) requireActivity();
+		OsmandApplication app = mapActivity.getMyApplication();
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
 		view = inflater.inflate(R.layout.route_waypoints_fragment, parent, false);
 		if (view == null) {
@@ -169,7 +170,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			int width = getResources().getDimensionPixelSize(R.dimen.dashboard_land_width) - getResources().getDimensionPixelSize(R.dimen.dashboard_land_shadow_width);
 			FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-			params.gravity = Gravity.BOTTOM|Gravity.START;
+			params.gravity = Gravity.BOTTOM | Gravity.START;
 			view.findViewById(R.id.control_buttons).setLayoutParams(params);
 		}
 
@@ -249,12 +250,9 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
-					app.getTargetPointsHelper().clearAllPoints(true);
-					updateTitle();
-					reloadAdapter();
-				}
+				app.getTargetPointsHelper().clearAllPoints(true);
+				updateTitle();
+				reloadAdapter();
 			}
 		});
 
@@ -285,8 +283,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		onStateChangedListener = new StateChangedListener<Void>() {
 			@Override
 			public void stateChanged(Void change) {
-				reloadAdapter();
-				updateTitle();
+				app.runInUIThread(() -> {
+					reloadAdapter();
+					updateTitle();
+				});
 			}
 		};
 
@@ -467,7 +467,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	public AdapterView.OnItemClickListener getDrawerItemClickListener(final FragmentActivity ctx, final int[] running,
-	                                                                  final ArrayAdapter<Object> listAdapter) {
+																	  final ArrayAdapter<Object> listAdapter) {
 		return new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int item, long l) {
@@ -714,10 +714,10 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private View updateWaypointItemView(final boolean edit, final List<LocationPointWrapper> deletedPoints,
-	                                           final MapActivity mapActivity, View v,
-	                                           final LocationPointWrapper point,
-	                                           final ArrayAdapter adapter, final boolean nightMode,
-	                                           final boolean flat, final int position) {
+										final MapActivity mapActivity, View v,
+										final LocationPointWrapper point,
+										final ArrayAdapter adapter, final boolean nightMode,
+										final boolean flat, final int position) {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final WaypointDialogHelper helper = mapActivity.getDashboard().getWaypointDialogHelper();
 		if (v == null || v.findViewById(R.id.info_close) == null) {
@@ -788,9 +788,9 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private static void updatePointInfoView(final MapActivity mapActivity,
-	                                        View localView, final LocationPointWrapper ps,
-	                                        final boolean mapCenter, final boolean nightMode,
-	                                        final boolean edit, final boolean topBar) {
+											View localView, final LocationPointWrapper ps,
+											final boolean mapCenter, final boolean nightMode,
+											final boolean edit, final boolean topBar) {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		WaypointHelper wh = mapActivity.getMyApplication().getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
