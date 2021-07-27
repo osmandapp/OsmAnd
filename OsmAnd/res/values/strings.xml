@@ -2734,7 +2734,7 @@
     <string name="show_zoom_buttons_navigation">Show zoom buttons</string>
     <string name="save_as_favorites_points">Save as group of Favorites</string>
     <string name="select_destination_and_intermediate_points">Set destinations</string>
-    <string name="layer_amenity_label">POI overlay labels</string>
+    <string name="layer_amenity_label">Point Labels (POI, Favorites)</string>
     <string name="loading_smth">Loading %1$s…</string>
     <string name="map_widget_plain_time">Current time</string>
     <string name="shared_string_waypoint">Waypoint</string>
