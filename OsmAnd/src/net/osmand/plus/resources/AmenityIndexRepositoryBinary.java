@@ -1,5 +1,6 @@
 package net.osmand.plus.resources;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
@@ -133,7 +134,6 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		}
 		return map;
 	}
-
 
 	public synchronized List<Amenity> searchAmenitiesByName(int x, int y, int l, int t, int r, int b, String query, ResultMatcher<Amenity> resulMatcher) {
 		long now = System.currentTimeMillis();
