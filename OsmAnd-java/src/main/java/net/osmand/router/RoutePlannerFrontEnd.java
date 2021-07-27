@@ -32,7 +32,7 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public boolean useSmartRouteRecalculation = true;
-	public static final boolean USE_NATIVE_APPROXIMATION = false;
+	public static final boolean USE_NATIVE_APPROXIMATION = true;
 
 	
 	public RoutePlannerFrontEnd() {
