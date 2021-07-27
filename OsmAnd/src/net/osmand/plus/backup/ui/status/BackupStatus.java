@@ -8,15 +8,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.PrepareBackupResult;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.backup.ServerError;
 import net.osmand.util.Algorithms;
+
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
 
 public enum BackupStatus {
 	BACKUP_COMPLETE(R.string.backup_complete, R.drawable.ic_action_cloud_done, -1, -1, -1, R.string.backup_now),
 	MAKE_BACKUP(R.string.last_backup, R.drawable.ic_action_cloud, R.drawable.ic_action_alert_circle, R.string.make_backup, R.string.make_backup_descr, R.string.backup_now),
 	CONFLICTS(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_alert, R.string.backup_conflicts, R.string.backup_confilcts_descr, R.string.backup_view_conflicts),
 	NO_INTERNET_CONNECTION(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_wifi_off, R.string.no_inet_connection, R.string.backup_no_internet_descr, R.string.retry),
-	SUBSCRIPTION_EXPIRED(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_osmand_pro_logo, R.string.backup_error_subscription_was_expired, R.string.backup_error_subscription_was_expired_descr, R.string.renew_subscription),
+	SUBSCRIPTION_EXPIRED(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_osmand_pro_logo_colored, R.string.backup_error_subscription_was_expired, R.string.backup_error_subscription_was_expired_descr, R.string.renew_subscription),
 	ERROR(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_alert, -1, -1, R.string.retry);
 
 	@StringRes
@@ -44,9 +46,14 @@ public enum BackupStatus {
 
 	public static BackupStatus getBackupStatus(@NonNull OsmandApplication app, @NonNull PrepareBackupResult backup) {
 		BackupInfo info = backup.getBackupInfo();
-		if (!InAppPurchaseHelper.isSubscribedToOsmAndPro(app)) {
-			return BackupStatus.SUBSCRIPTION_EXPIRED;
-		} else if (info != null) {
+
+		if (!Algorithms.isEmpty(backup.getError())) {
+			ServerError error = new ServerError(backup.getError());
+			if (error.getCode() == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT) {
+				return BackupStatus.SUBSCRIPTION_EXPIRED;
+			}
+		}
+		if (info != null) {
 			if (!Algorithms.isEmpty(info.filteredFilesToMerge)) {
 				return BackupStatus.CONFLICTS;
 			} else if (!Algorithms.isEmpty(info.itemsToUpload)

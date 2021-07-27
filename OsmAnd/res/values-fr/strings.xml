@@ -694,7 +694,7 @@
     <string name="gpxup_public">publique</string>
     <string name="gpxup_identifiable">Identifiable</string>
     <string name="gpxup_trackable">Traçable</string>
-    <string name="gpxup_private">privée</string>
+    <string name="gpxup_private">Privée</string>
     <string name="osmand_parking_event">Récupérer le véhicule au parking</string>
     <string name="osmand_parking_warning">Avertissement</string>
     <string name="osmand_parking_warning_text">Un rappel pour récupérer votre véhicule a été ajouté à votre agenda. Vous pouvez modifier ou supprimer ce rappel.</string>
@@ -1458,7 +1458,7 @@
     <string name="short_location_on_map">Lat. %1$s\nLon. %2$s</string>
     <string name="tips_and_tricks_descr">Questions fréquentes, notes de version et autres informations.</string>
     <string name="routing_settings_2">Paramètres de guidage</string>
-    <string name="general_settings_2">Paramètres généraux</string>
+    <string name="general_settings_2">Paramètres globaux</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Désélectionner</string>
     <string name="shared_string_deselect_all">Tout désélectionner</string>
@@ -3359,7 +3359,7 @@
     <string name="sunset_at">Coucher de soleil à %1$s</string>
     <string name="sunrise_at">Lever de soleil à %1$s</string>
     <string name="rearrange_categories">Réorganiser les catégories</string>
-    <string name="create_custom_categories_list_promo">Modifiez l\'ordre de tri de la liste, masquez des catégories. Vous pouvez importer et exporter toutes vos modifications via les profils.</string>
+    <string name="create_custom_categories_list_promo">Modifiez l\'ordre de tri dans la liste, masquez des catégories. Vous pouvez importer et exporter toutes vos modifications via les profils.</string>
     <string name="reset_to_default_category_button_promo">Restaurer les valeurs par défaut réinitialisera l\'ordre de tri.</string>
     <string name="accessibility_mode_disabled">Le mode d\'accessibilité est désactivé dans votre système Android.</string>
     <string name="add_new_custom_category_button_promo">Ajoutez une nouvelle catégorie personnelle en sélectionnant une ou plusieurs catégories.</string>
@@ -3447,7 +3447,7 @@
     <string name="checking_for_duplicate_description">OsmAnd vérifie que l\'élément %1$s n\'existe pas déjà dans l\'application.
 \n
 \nCela peut prendre un certain temps.</string>
-    <string name="import_complete_description">Les données de %1$s ont été importées, vous pouvez utiliser les boutons ci-dessous pour ouvrir la partie adéquate de l\'application pour les gérer.</string>
+    <string name="import_complete_description">Les données ont été importées depuis %1$s. Utilisez les boutons ci-dessous pour ouvrir la partie adéquate de l\'application afin de les gérer.</string>
     <string name="recalculate_route_distance_promo">L\'itinéraire sera recalculé lorsque la distance entre l\'itinéraire et votre position est supérieure à la valeur indiquée.</string>
     <string name="select_distance_route_will_recalc">Sélectionnez la distance au-delà de laquelle l’itinéraire sera recalculé.</string>
     <string name="recalculate_route_in_deviation">Recalculer l\'itinéraire en cas d\'écart de route</string>
@@ -3537,11 +3537,11 @@
     <string name="download_unsupported_action">Action %1$s non prise en charge</string>
     <string name="lang_ky">Kirghize</string>
     <string name="lang_gu">Gujarati</string>
-    <string name="osm_live_payment_subscription_management">Le paiement sera prélevé de votre compte Google Play dès confirmation de l\'achat.
+    <string name="osm_live_payment_subscription_management">Le paiement sera débité de votre compte Google Play après confirmation de l\'achat.
 \n
-\nA moins qu\'il ne soit annulé avant sa date de renouvellement, l\'abonnement sera automatiquement prélevé à chaque échéance (mensuelle / trimestrielle / annuelle).
+\nA moins qu\'il ne soit annulé avant sa date de renouvellement, l\'abonnement sera automatiquement débité à chaque échéance (mensuelle / trimestrielle / annuelle).
 \n
-\nVous pouvez gérer et annuler vos abonnements en vous rendant dans les paramètres Google Play.</string>
+\nVous pouvez gérer et annuler à tout moment vos abonnements dans vos paramètres Google Play.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="search_poi_types_descr">Combinez des PI de différentes catégories. Appuyez sur \"basculer\" pour tout sélectionner, le côté gauche sélectionne une catégorie.</string>
     <string name="search_poi_types">Rechercher des types de PI</string>
@@ -3634,7 +3634,7 @@
     <string name="height_limit_description">Indiquez la hauteur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules hauts.</string>
     <string name="weight_limit_description">Indiquez le poids de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules lourds.</string>
     <string name="width_limit_description">Indiquez la largeur de votre véhicule, certaines restrictions d\'itinéraire peuvent s\'appliquer aux véhicules larges.</string>
-    <string name="shared_string_tones">sonneries</string>
+    <string name="shared_string_tones">tonnes</string>
     <string name="shared_string_meters">mètres</string>
     <string name="details_dialog_decr">Afficher ou masquer les autres détails sur la carte</string>
     <string name="shared_string_night_map">Carte nocturne</string>
@@ -3686,7 +3686,7 @@
     <string name="plan_a_route">Planifier un itinéraire</string>
     <string name="add_to_a_track">Ajouter à une trace</string>
     <string name="shared_string_custom">Personnalisé</string>
-    <string name="add_hidden_group_info">Le point ajouté ne sera pas visible sur la carte car le groupe sélectionné est masqué. Vous pouvez le trouver dans \"%s\".</string>
+    <string name="add_hidden_group_info">Le point ajouté se trouve dans \"%s\". Afficher ce groupe pour rendre le point visible sur la carte.</string>
     <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle d\'affichage sur la trace des marques de distance ou de durée.</string>
     <string name="gpx_split_interval_none_descr">Sélectionner l\'option de découpage : durée ou distance.</string>
     <string name="track_coloring_solid">Continu</string>
@@ -3712,7 +3712,7 @@
     <string name="threshold_distance">Seuil de distance</string>
     <string name="navigation_profile">Profil de navigation</string>
     <string name="street_level_imagery">Photos des rues</string>
-    <string name="plan_route_exit_dialog_descr">Souhaitez-vous vraiment ignorer toutes les modifications apportées à cet itinéraire \?</string>
+    <string name="plan_route_exit_dialog_descr">Ignorer toutes les modifications apportées à cet itinéraire \?</string>
     <string name="in_case_of_reverse_direction">Inverser le sens</string>
     <string name="pass_whole_track_descr">Point de la trace vers lequel naviguer</string>
     <string name="shared_string_gpx_route">Enregistrer le parcours</string>
@@ -3800,11 +3800,11 @@
     <string name="osm_edit_logout_success">Déconnecté</string>
     <string name="file_already_imported">Le fichier est déjà importé dans OsmAnd</string>
     <string name="use_two_phase_routing">Utiliser un algorithme de routage A* à 2 phases</string>
-    <string name="osm_live_payment_subscription_management_hw">Le paiement sera débité de votre compte AppGallery dès confirmation de l\'achat.
+    <string name="osm_live_payment_subscription_management_hw">Le paiement sera débité de votre compte AppGallery après confirmation de l\'achat.
 \n
 \nA moins qu\'il ne soit annulé avant sa date de renouvellement, l\'abonnement sera automatiquement débité à chaque échéance (mensuelle / trimestrielle / annuelle).
 \n
-\nVous pouvez gérer et annuler vos abonnements dans vos paramètres AppGallery.</string>
+\nVous pouvez gérer et annuler à tout moment vos abonnements dans vos paramètres AppGallery.</string>
     <string name="message_need_calculate_route_before_show_graph">Seulement %1$s données disponibles sur les routes, calculez l\'itinéraire via \"Itinéraire entre 2 points\" pour voir les graphiques.</string>
     <string name="message_graph_will_be_available_after_recalculation">Attendez svp.
 \nLe graphique sera disponible à l\'issue du calcul de l\'itinéraire.</string>
@@ -3845,9 +3845,9 @@
 \nOpenPlaceReviews.org</string>
     <string name="register_opr_create_new_account">Créer un nouveau compte</string>
     <string name="register_opr_have_account">J\'ai déjà un compte</string>
-    <string name="open_street_map_login_mode">Connectez-vous pour envoyer vos modifications,
+    <string name="open_street_map_login_mode">Connectez-vous afin d\'envoyer vos modifications.
 \n
-\nUtilisez soit la méthode OAuth, soit votre identifiant OSM et mot de passe.</string>
+\nUtilisez soit la méthode OAuth soit vos identifiants OSM (utilisateur et mot de passe).</string>
     <string name="osm_login_descr">Connectez-vous avec la méthode sécurisée OAuth ou avec votre identifiant OSM et votre mot de passe.</string>
     <string name="register_on_openplacereviews_desc">Les photos sont fournies par le projet OpenPlaceReviews.org. Vous devez vous connecter au site web pour leur envoyer vos photos.</string>
     <string name="shared_string_search_history">Historique de recherche</string>
@@ -4165,7 +4165,7 @@
     <string name="send_crash_log">Envoyer le journal des plantages</string>
     <string name="send_logcat_log">Envoyer le journal logcat</string>
     <string name="backup_promocode">Code promo</string>
-    <string name="purchases_feature_desc_wikivoyage">Consultez les articles Wikipédia sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explorez Wikivoyage sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_wikipedia">Consultez les articles Wikipédia sans connexion Internet. Les articles sont découpés par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_combined_wiki">Consultez les articles Wikipédia sans connexion Internet. Les données hors ligne sont découpées par pays et disponibles dans toutes les langues.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Accédez à des mises à jour de cartes plus fréquentes : horaire, quotidienne ou hebdomadaires Pour les zones déjà téléchargées, les mises à jour sont de taille réduite grâce à une diffusion incrémentielle.</string>
@@ -4173,7 +4173,7 @@
     <string name="nautical_depth">Profondeur bathymétrique</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Cartes du relief : courbes de niveaux, ombrages, pentes</string>
     <string name="purchases_feature_desc_unlimited_map_download">Téléchargez en illimité des cartes hors ligne pour tous les continents et toutes les régions.</string>
-    <string name="purchases_feature_desc_terrain">Cartes avec courbes de niveaux, ombrage du relief, pentes et des couleurs mettant en valeur les sommets et plaines.</string>
+    <string name="purchases_feature_desc_terrain">Cartes avec courbes de niveaux, ombrage du relief, pentes et couleurs mettant en valeur sommets et plaines.</string>
     <string name="purchases_feature_desc_nautical">Accédez aux informations de profondeur bathymétrique</string>
     <string name="shared_string_includes">Inclus</string>
     <string name="complete_purchase">Finaliser l\'achat</string>
@@ -4219,4 +4219,27 @@
     <string name="logout_from_osmand_cloud">Se déconnecter de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Êtes-vous certain de vouloir vous déconnecter \?
 \nVous devrez vous reconnecter pour sauvegarder ou restaurer les données.</string>
+=======
+    <string name="backup_welcome_back_descr">Vous pouvez restaurer les données sur cet appareil en utilisant les sauvegardes existantes ou paramétrer une nouvelle sauvegarde de cet appareil sur OsmAnd Cloud.</string>
+    <string name="backup_error_subscription_was_expired_descr">Votre abonnement OsmAnd Pro a expiré, renouvelez-le pour utiliser la sauvegarde. Vous pouvez toujours restaurer des données à partir du Cloud.</string>
+    <string name="contour_lines_hillshades_slope">Courbes de niveau, ombrage, pente</string>
+    <string name="backup_deleting_all_data">Suppression de toutes les données</string>
+    <string name="backup_deleted_all_data">Données supprimées</string>
+    <string name="backup_deleting_all_data_descr">Veuillez attendre qu\'OsmAnd supprime toutes vos données du Cloud. Les données sur l\'appareil restent, elles, inchangées.</string>
+    <string name="backup_deleted_all_data_descr">Toutes vos données ont été supprimées avec succès de OsmAnd Cloud.</string>
+    <string name="backup_version_history_removed">Tout l’historique des versions est supprimé</string>
+    <string name="backup_data_removed">Toutes les données sont supprimées</string>
+    <string name="shared_string_progress">Avancement</string>
+    <string name="backup_do_not_have_any">Vous n\'avez pas encore de sauvegarde en ligne</string>
+    <string name="backup_dont_have_any_descr">Paramétrez une sauvegarde automatique pour éviter de perdre vos données.</string>
+    <string name="backup_welcome_back">Content de vous revoir !</string>
+    <string name="backup_setup">Paramétrer la sauvegarde</string>
+    <string name="backup_restore_now">Restaurer maintenant</string>
+    <string name="attribute">Propriétés</string>
+    <string name="shared_string_purchased">Acheté</string>
+    <string name="explore_wikipedia_offline">Explorez Wikipédia hors ligne.</string>
+    <string name="on_hold_since">En attente depuis %1$s</string>
+    <string name="active_till">Actif jusqu\'au %1$s</string>
+    <string name="promo_subscription">Abonnement promotionnel</string>
+    <string name="track_has_no_needed_data">Il manque des données nécessaires dans la trace.</string>
 </resources>

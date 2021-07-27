@@ -83,11 +83,16 @@ public class BackupInfo {
 
 	private void createFilteredFilesToMerge(@NonNull OsmandApplication app) {
 		List<Pair<LocalFile, RemoteFile>> files = new ArrayList<>();
+		Set<SettingsItem> items = new HashSet<>();
 		BackupHelper helper = app.getBackupHelper();
 		for (Pair<LocalFile, RemoteFile> pair : filesToMerge) {
-			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(pair.second);
-			if (exportType != null && helper.getBackupTypePref(exportType).get()) {
-				files.add(pair);
+			SettingsItem item = pair.first.item;
+			if (!items.contains(item)) {
+				ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForRemoteFile(pair.second);
+				if (exportType != null && helper.getBackupTypePref(exportType).get()) {
+					files.add(pair);
+					items.add(item);
+				}
 			}
 		}
 		filteredFilesToMerge = files;

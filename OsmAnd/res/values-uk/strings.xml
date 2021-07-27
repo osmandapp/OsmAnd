@@ -1454,7 +1454,7 @@
     <string name="short_location_on_map">Шир %1$s\nДов %2$s</string>
     <string name="tips_and_tricks_descr">Запитання та відповіді, останні зміни та інше.</string>
     <string name="routing_settings_2">Налаштування навігації</string>
-    <string name="general_settings_2">Загальні параметри</string>
+    <string name="general_settings_2">Загальні налаштування</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_selected">Вибрані</string>
     <string name="shared_string_deselect">Зняти виділення</string>
@@ -4174,8 +4174,8 @@
     <string name="send_logcat_log">Надіслати вміст журналу</string>
     <string name="backup_promocode">Промокод</string>
     <string name="purchases_feature_desc_nautical">Отримайте доступ до даних про морську глибину</string>
-    <string name="purchases_feature_desc_terrain">Горизонталі рельєфу, повноколірна мапа горбів з темними відтінками та мапами схилів з кольорами для відображення, піками й низинами.</string>
-    <string name="purchases_feature_desc_wikivoyage">Переглядайте Вікіпедію в автономному режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
+    <string name="purchases_feature_desc_terrain">Горизонталі рельєфу, повноколірна мапа горбів з темними відтінками та мапами схилів з кольорами для показу, піками й низинами.</string>
+    <string name="purchases_feature_desc_wikivoyage">Переглядайте Вікімандри в автономному режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
     <string name="purchases_feature_desc_wikipedia">Переглядайте Вікіпедію в автономному режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
     <string name="purchases_feature_desc_combined_wiki">Переглядайте статті Вікіпедії в дорозі, без з’єднання з Інтернетом. Дані в автономному режимі, розділені за країнами та доступні всіма мовами.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Отримайте необмежені завантаження для всіх офлайн-мап континентів і регіонів.</string>
@@ -4221,25 +4221,25 @@
     <string name="backup_error_user_is_not_registered">Жоден користувач не зареєстрований з цією адресою е-пошти</string>
     <string name="backup_error_no_valid_subscription">Немає дійсної передплати</string>
     <string name="approximate_route_description">Прикріпіть маршрут до доріг на мапі, щоб отримати всі повороти та додаткові дані про плавність, типи доріг тощо.</string>
-    <string name="release_4_0">• Резервне копіювання до хмари
+    <string name="release_4_0">• Резервне копіювання в хмарі
 \n
-\n • Додано нічний режим для стилю «Topo»
+\n• Додано стиль нічного режиму «Topo»
 \n
-\n • Додано можливість завантаження горизонталей у футах
+\n• Додана можливість завантаження горизонталей у футах
 \n
-\n • Треки тепер можуть бути забарвлені залежно від висоти, швидкості або ухилу.
+\n• Треки можна забарвлювати за висотою, швидкістю або нахилом
 \n
-\n • Оновлено діалогове вікно «Запис подорожі»
+\n• Оновлено діалогове вікно «Записування поїздки»
 \n
-\n • Відстань дотиком переміщено з радіусної лінійки до окремої опції
+\n• Відстань дотиком переміщено з радіусної лінійки до окремого параметра
 \n
-\n • Планування маршруту: додано можливість змінювати параметри навігації, доступ до налаштування мапи та пошуку, безпосередньо з меню планування маршруту
+\n• План маршруту: додана можливість змінювати параметри навігації, доступ до налаштувань мапи та пошуку, не виходячи з плану маршруту
 \n
-\n • Новий екран «Покупка» з докладними відомостями про покупку
+\n• Нове меню «Покупка» з подробицями про покупку
 \n
-\n • Додано можливість зміни зовнішнього вигляду смуги маршруту.
+\n• Додана можливість зміни зовнішнього вигляду лінії маршруту
 \n
-\n • Оновлення OsmAnd Live переміщено до «Завантаження &gt; Оновлення»
+\n• Оновлення OsmAnd Live перенесено з Завантаження до Оновлення
 \n
 \n</string>
     <string name="enter_verification_code">Введіть одноразовий пароль</string>
@@ -4247,4 +4247,26 @@
     <string name="logout_from_osmand_cloud">Вийти з OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Ви дійсно бажаєте вийти із системи\?
 \nЩоб створити резервну копію даних або відновити їх, потрібно буде ввійти ще раз.</string>
+    <string name="backup_error_subscription_was_expired_descr">Термін дії передплати osmAnd Pro завершився, поновіть її, щоб користуватись резервним копіюванням. Ви досі можете відновити дані з Хмари.</string>
+    <string name="contour_lines_hillshades_slope">Горизонталі, горби, нахил</string>
+    <string name="backup_deleting_all_data">Видалення всіх даних</string>
+    <string name="backup_deleted_all_data">Видалено всі дані</string>
+    <string name="backup_deleting_all_data_descr">Зачекайте, поки OsmAnd видалить усі ваші дані з хмари. Усі дані на пристрої залишаються незмінними.</string>
+    <string name="backup_deleted_all_data_descr">Усі ваші дані було успішно видалено з OsmAnd Cloud.</string>
+    <string name="backup_version_history_removed">Усю історію версій вилучено</string>
+    <string name="backup_data_removed">Усі дані вилучено</string>
+    <string name="shared_string_progress">Виконання</string>
+    <string name="backup_do_not_have_any">У вас ще немає резервної копії в Інтернеті</string>
+    <string name="backup_dont_have_any_descr">Налаштуйте автоматичне резервне копіювання, щоб не втратити дані.</string>
+    <string name="backup_welcome_back">З поверненням!</string>
+    <string name="backup_welcome_back_descr">Ви можете відновити дані на цьому пристрої за допомогою наявних резервних копій або налаштувати резервну копію цього пристрою в OsmAnd Cloud.</string>
+    <string name="backup_setup">Налаштувати резервне копіювання</string>
+    <string name="backup_restore_now">Відновити зараз</string>
+    <string name="attribute">Атрибут</string>
+    <string name="shared_string_purchased">Придбано</string>
+    <string name="explore_wikipedia_offline">Переглядайте Вікіпедію офлайн.</string>
+    <string name="on_hold_since">Призупинено з %1$s</string>
+    <string name="active_till">Активна до %1$s</string>
+    <string name="promo_subscription">Промо-передплата</string>
+    <string name="track_has_no_needed_data">Трек не містить потрібних даних.</string>
 </resources>

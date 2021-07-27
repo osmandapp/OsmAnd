@@ -145,3 +145,8 @@
 	- Panama_City_DEM_1276: Amante, C.J., M.R. Love, L.A. Taylor, and B.W. Eakins, 2011. Digital Elevation Models of Panama City, Florida: Procedures, Data Sources and Analysis, NOAA Technical Memorandum NESDIS NGDC-50, U.S. Dept. of Commerce, Boulder, CO, 46 pp. 
 	- Great Lakes: National Centers for Environmental Information (NCEI)
 	
+    * DEM (DSM) data
+	- ALOS DEM: The original data used for this product have been supplied by JAXA’s AW3D.
+	- MERIT DEM (available at http://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_DEM)
+	- ArcticDEM: Porter, Claire; Morin, Paul; Howat, Ian; Noh, Myoung-Jon; Bates, Brian; Peterman, Kenneth; Keesey, Scott; Schlenk, Matthew; Gardiner, Judith; Tomko, Karen; Willis, Michael; Kelleher, Cole; Cloutier, Michael; Husby, Eric; Foga, Steven; Nakamura, Hitomi; Platson, Melisa; Wethington, Michael, Jr.; Williamson, Cathleen; Bauer, Gregory; Enos, Jeremy; Arnold, Galen; Kramer, William; Becker, Peter; Doshi, Abhijit; D’Souza, Cristelle; Cummens, Pat; Laurier, Fabien; Bojesen, Mikkel, 2018, “ArcticDEM”, https://doi.org/10.7910/DVN/OHHUKH, Harvard Dataverse, V1
+	- OpenDataPortal: https://data.opendataportal.at/dataset/dtm-europe

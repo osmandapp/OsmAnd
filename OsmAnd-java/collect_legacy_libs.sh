@@ -22,10 +22,12 @@ function copyLibs {
 function compile {
 	"$CORE_LOC/externals/configure.sh"
 	ARCH=$1
-	if [ ! -d "$CORE_LOC/targets/$ARCH-linux-gcc-$ARCH-linux-gcc-release.baked" ]; then 
-		"$CORE_LOC/targets/$ARCH-linux-gcc.sh" release
+	#COMPILER=gcc
+	COMPILER=clang
+	if [ ! -d "$CORE_LOC/targets/$ARCH-linux-$COMPILER-$ARCH-linux-$COMPILER-release.baked" ]; then 
+		"$CORE_LOC/targets/$ARCH-linux-$COMPILER.sh" release
 	fi
-	(cd "$CORE_LOC/targets/$ARCH-linux-gcc-$ARCH-linux-gcc-release.baked" && make -j$OSMAND_BUILD_CPU_CORES_NUM)
+	(cd "$CORE_LOC/targets/$ARCH-linux-$COMPILER-$ARCH-linux-$COMPILER-release.baked" && make -j$OSMAND_BUILD_CPU_CORES_NUM)
 
 }
 

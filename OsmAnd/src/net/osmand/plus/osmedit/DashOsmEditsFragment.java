@@ -56,7 +56,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 	@Override
 	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		TextView header = ((TextView) view.findViewById(R.id.fav_text));
@@ -77,7 +77,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 	@Override
 	public void onOpenDash() {
 		if (plugin == null) {
-			plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+			plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		}
 		setupEditings();
 	}

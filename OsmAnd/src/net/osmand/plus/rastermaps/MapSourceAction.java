@@ -116,7 +116,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public void execute(MapActivity activity) {
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();
 			if (sources.size() > 0) {
@@ -151,7 +151,9 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 		if (item.equals(LAYER_OSM_VECTOR)) {
 			return context.getString(R.string.vector_data);
 		} else {
-			return item;
+			return item.endsWith(IndexConstants.SQLITE_EXT)
+					? Algorithms.getFileNameWithoutExtension(item)
+					: item;
 		}
 	}
 

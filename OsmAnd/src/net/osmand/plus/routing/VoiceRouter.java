@@ -113,9 +113,11 @@ public class VoiceRouter {
 		settings.VOICE_MUTE.addListener(new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				if (!isMute() && soundPool == null) {
-					loadCameraSound();
-				}
+				app.runInUIThread(() -> {
+					if (!isMute() && soundPool == null) {
+						loadCameraSound();
+					}
+				});
 			}
 		});
 	}

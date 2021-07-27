@@ -216,9 +216,28 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	public MapRouteInfoMenu() {
-		onMarkerSelectListener = this::selectMapMarker;
-		onStateChangedListener = change -> updateMenu();
-		voiceMuteChangeListener = change -> updateWhenMuteChanged();
+		onMarkerSelectListener = new OnMarkerSelectListener() {
+			@Override
+			public void onSelect(int index, PointType pointType) {
+				selectMapMarker(index, pointType);
+			}
+		};
+		onStateChangedListener = new StateChangedListener<Void>() {
+			@Override
+			public void stateChanged(Void change) {
+				if (app != null) {
+					app.runInUIThread(() -> updateMenu());
+				}
+			}
+		};
+		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				if (app != null) {
+					app.runInUIThread(() -> updateWhenMuteChanged());
+				}
+			}
+		};
 	}
 
 	public void setMapActivity(@Nullable MapActivity mapActivity) {

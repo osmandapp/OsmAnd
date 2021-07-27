@@ -20,6 +20,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseInitCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
@@ -48,10 +49,11 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	private void initInAppPurchaseHelper() {
 		deinitInAppPurchaseHelper();
+		OsmandApplication app = getMyApplication();
+		OsmandSettings settings = app.getSettings();
 		if (purchaseHelper == null) {
-			OsmandApplication app = getMyApplication();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-			if (app.getSettings().isInternetConnectionAvailable()
+			if (settings.isInternetConnectionAvailable()
 					&& isInAppPurchaseAllowed()
 					&& isInAppPurchaseSupported()) {
 				this.purchaseHelper = purchaseHelper;
@@ -75,6 +77,11 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 				public void onFail() {
 				}
 			});
+		} else if (isInAppPurchaseAllowed() && settings.isInternetConnectionAvailable()) {
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null && purchaseHelper.needRequestPromo()) {
+				purchaseHelper.checkPromoAsync(null);
+			}
 		}
 	}
 

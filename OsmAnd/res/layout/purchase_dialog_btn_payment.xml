@@ -13,7 +13,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/content_padding"
         android:layout_marginLeft="@dimen/content_padding"
-        android:paddingBottom="@dimen/content_padding"
+        android:paddingBottom="@dimen/content_padding_medium"
         android:layout_weight="1"
         android:orientation="vertical">
 
@@ -30,7 +30,7 @@
                 android:layout_weight="1"
                 android:letterSpacing="@dimen/text_button_letter_spacing"
                 android:lineSpacingMultiplier="@dimen/info_description_line_spacing_multiplier"
-                android:paddingTop="@dimen/content_padding_small"
+                android:paddingTop="@dimen/content_padding_medium"
                 android:textColor="?attr/active_color_basic"
                 android:textSize="@dimen/default_list_text_size"
                 osmand:typeface="@string/font_roboto_medium"

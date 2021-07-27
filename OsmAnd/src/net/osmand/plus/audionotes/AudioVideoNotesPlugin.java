@@ -613,9 +613,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_PHOTO_PLAY_SOUND.addListener(new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				if (AV_PHOTO_PLAY_SOUND.get() && soundPool == null) {
-					loadCameraSound();
-				}
+				app.runInUIThread(() -> {
+					if (AV_PHOTO_PLAY_SOUND.get() && soundPool == null) {
+						loadCameraSound();
+					}
+				});
 			}
 		});
 //		initializeRemoteControlRegistrationMethods();
@@ -1807,7 +1809,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				if (rec != null &&
 						(app.getSettings().SAVE_TRACK_TO_GPX.get()
 								|| app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get())
-						&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+						&& OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 					String name = f.getName();
 					SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 					savingTrackHelper.insertPointData(rec.lat, rec.lon, System.currentTimeMillis(), null, name, null, 0);

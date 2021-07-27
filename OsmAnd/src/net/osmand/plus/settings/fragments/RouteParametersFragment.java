@@ -91,13 +91,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		booleanRoutingPrefListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				recalculateRoute(app, getSelectedAppMode());
+				app.runInUIThread(() -> recalculateRoute(app, getSelectedAppMode()));
 			}
 		};
 		customRoutingPrefListener = new StateChangedListener<String>() {
 			@Override
 			public void stateChanged(String change) {
-				recalculateRoute(app, getSelectedAppMode());
+				app.runInUIThread(() -> recalculateRoute(app, getSelectedAppMode()));
 			}
 		};
 	}
@@ -328,7 +328,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
 
-		if (OsmandPlugin.isPluginEnabled(OsmandDevelopmentPlugin.class)) {
+		if (OsmandPlugin.isActive(OsmandDevelopmentPlugin.class)) {
 			setupDevelopmentCategoryPreferences(screen, am);
 		}
 	}
@@ -379,10 +379,11 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
 			setupOsmLiveForPublicTransportPref();
 			setupNativePublicTransport();
-		}
-		if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+		} else {
 			setupOsmLiveForRoutingPref();
-			setupDisableComplexRoutingPref();
+			if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+				setupDisableComplexRoutingPref();
+			}
 		}
 		setupFastRecalculationPref();
 	}

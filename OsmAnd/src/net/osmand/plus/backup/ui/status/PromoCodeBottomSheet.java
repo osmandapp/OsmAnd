@@ -10,15 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.backup.BackupHelper;
-import net.osmand.plus.backup.BackupListeners.OnUpdateOrderIdListener;
-import net.osmand.plus.backup.ServerError;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -30,10 +29,16 @@ public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		OsmandApplication app = requiredMyApplication();
+
 		items.add(new TitleItem(getString(R.string.backup_promocode)));
 
-		String promoCode = savedInstanceState != null ? savedInstanceState.getString(PROMOCODE_KEY) : null;
-
+		String promoCode;
+		if (savedInstanceState == null) {
+			promoCode = app.getSettings().BACKUP_PROMOCODE.get();
+		} else {
+			promoCode = savedInstanceState.getString(PROMOCODE_KEY);
+		}
 		Context ctx = requireContext();
 		View view = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.preference_edit_text_box, null);
 		editText = view.findViewById(R.id.edit_text);
@@ -68,18 +73,17 @@ public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			OnUpdateOrderIdListener listener = (status, message, error) -> {
-				if (status == BackupHelper.STATUS_SUCCESS) {
-					app.getBackupHelper().prepareBackup();
-				} else {
-					String text = error != null ? new ServerError(error).getLocalizedError(app) : message;
-					if (text != null) {
-						app.showShortToastMessage(text);
-					}
-				}
-			};
 			String promoCode = editText.getText().toString();
-			app.getBackupHelper().updateOrderIdAsync(listener, promoCode);
+			app.getSettings().BACKUP_PROMOCODE.set(promoCode);
+
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null) {
+				CallbackWithObject<Boolean> listener = result -> {
+					app.runInUIThread(() -> app.getBackupHelper().prepareBackup());
+					return true;
+				};
+				purchaseHelper.checkPromoAsync(listener);
+			}
 		}
 		dismiss();
 	}
