@@ -1135,7 +1135,6 @@ public class MapActivityActions implements DialogProvider {
 	public void stopNavigationWithoutConfirm() {
 		getMyApplication().stopNavigation();
 		mapActivity.updateApplicationModeSettings();
-		mapActivity.getDashboard().clearDeletedPoints();
 		List<ApplicationMode> modes = ApplicationMode.values(getMyApplication());
 		for (ApplicationMode mode : modes) {
 			if (settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(mode)) {

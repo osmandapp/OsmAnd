@@ -542,6 +542,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return "";
 	}
 
+	public boolean shouldShowContextMarker() {
+		return true;
+	}
+
 	@ColorRes
 	public int getAdditionalInfoColorId() {
 		if (openingHoursInfo != null) {

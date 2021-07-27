@@ -50,7 +50,7 @@ public class WptPtMenuController extends MenuController {
 					GpxSelectionHelper selectionHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
 					SelectedGpxFile selectedGpxFile = selectionHelper.getSelectedGPXFile(wpt);
 					if (selectedGpxFile != null) {
-						SelectedGpxPoint gpxPoint = new SelectedGpxPoint(selectedGpxFile, wpt, null, null, Float.NaN);
+						SelectedGpxPoint gpxPoint = new SelectedGpxPoint(selectedGpxFile, wpt);
 						TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, gpxPoint);
 					}
 				}
