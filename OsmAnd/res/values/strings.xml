@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="setting_supported_by_style">This setting is supported by map style \'%1$s\'</string>
     <string name="travel_routes">Travel routes</string>
     <string name="walking_route_osmc_description">Assign color for routes based on their individually locally assigned color (if present on OpenStreetMap)  and type (international, regional, local)</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Assign color for routes based on node network type (international, regional, local) they belong to</string>
