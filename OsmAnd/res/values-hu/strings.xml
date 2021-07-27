@@ -3994,7 +3994,7 @@
     <string name="map_widget_distance_by_tap">Távolságmérés koppintással</string>
     <string name="shared_string_interval">Intervallum</string>
     <string name="update_frequency">Frissítés gyakorisága</string>
-    <string name="updated">Frissítésve: %s</string>
+    <string name="updated">Frissítve: %s</string>
     <string name="last_time_checked">Legutóbb ellenőrizve: %s</string>
     <string name="latest_openstreetmap_update">Legutóbbi elérhető OpenStreetMap-frissítés:</string>
     <string name="quick_action_coordinates_widget_descr">A térképen lévő koordináta-widgetet megjelenítő vagy elrejtő kapcsoló.</string>
