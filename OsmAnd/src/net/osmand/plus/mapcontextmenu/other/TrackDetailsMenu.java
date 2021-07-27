@@ -48,7 +48,6 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -308,27 +307,60 @@ public class TrackDetailsMenu {
 
 	@Nullable
 	private LatLon getLocationAtPos(LineChart chart, float pos) {
-		WptPt point = null;
+		LatLon latLon = null;
 		LineData lineData = chart.getLineData();
 		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 		GpxDisplayItem gpxItem = getGpxItem();
-		if (!Algorithms.isEmpty(ds) && gpxItem != null) {
+		if (ds != null && ds.size() > 0 && gpxItem != null) {
 			TrkSegment segment = getTrackSegment(chart);
 			if (segment == null) {
 				return null;
 			}
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
-			GPXFile gpxFile = gpxItem.group.getGpx();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
 				float time = pos * 1000;
-				point = GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, true);
+				WptPt previousPoint = null;
+				for (WptPt currentPoint : segment.points) {
+					long totalTime = currentPoint.time - gpxItem.analysis.startTime;
+					if (totalTime >= time) {
+						if (previousPoint != null) {
+							double percent = 1 - (totalTime - time) / (currentPoint.time - previousPoint.time);
+							double dLat = (currentPoint.lat - previousPoint.lat) * percent;
+							double dLon = (currentPoint.lon - previousPoint.lon) * percent;
+							latLon = new LatLon(previousPoint.lat + dLat, previousPoint.lon + dLon);
+						} else {
+							latLon = new LatLon(currentPoint.lat, currentPoint.lon);
+						}
+						break;
+					}
+					previousPoint = currentPoint;
+				}
 			} else {
 				float distance = pos * dataSet.getDivX();
-				point = GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, true);
+				double totalDistance = 0;
+				WptPt previousPoint = null;
+				for (int i = 0; i < segment.points.size(); i++) {
+					WptPt currentPoint = segment.points.get(i);
+					if (previousPoint != null) {
+						totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
+					}
+					if (currentPoint.distance >= distance || totalDistance >= distance) {
+						if (previousPoint != null && currentPoint.distance >= distance) {
+							double percent = 1 - (totalDistance - distance) / (currentPoint.distance - previousPoint.distance);
+							double dLat = (currentPoint.lat - previousPoint.lat) * percent;
+							double dLon = (currentPoint.lon - previousPoint.lon) * percent;
+							latLon = new LatLon(previousPoint.lat + dLat, previousPoint.lon + dLon);
+						} else {
+							latLon = new LatLon(currentPoint.lat, currentPoint.lon);
+						}
+						break;
+					}
+					previousPoint = currentPoint;
+				}
 			}
 		}
-		return point == null ? null : new LatLon(point.lat, point.lon);
+		return latLon;
 	}
 
 	private QuadRect getRect(LineChart chart, float startPos, float endPos) {

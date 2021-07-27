@@ -48,6 +48,7 @@ import net.osmand.plus.track.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -172,35 +173,49 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return dataSets;
 	}
 
-	@Nullable
 	private TrkSegment getTrackSegment(LineChart chart) {
 		if (segment == null) {
 			LineData lineData = chart.getLineData();
 			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
-			if (!Algorithms.isEmpty(ds)) {
+			if (ds != null && ds.size() > 0) {
 				segment = getSegmentForAnalysis(gpxItem, analysis);
 			}
 		}
 		return segment;
 	}
 
-	@Nullable
 	private WptPt getPoint(LineChart chart, float pos) {
+		WptPt wpt = null;
 		LineData lineData = chart.getLineData();
-		List<ILineDataSet> dataSets = lineData != null ? lineData.getDataSets() : null;
-		TrkSegment segment = getTrackSegment(chart);
-		if (!Algorithms.isEmpty(dataSets) && segment != null) {
-			GPXFile gpxFile = gpxItem.group.getGpx();
+		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
+		if (ds != null && ds.size() > 0) {
+			TrkSegment segment = getTrackSegment(chart);
+			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 				float time = pos * 1000;
-				return GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, false);
+				for (WptPt p : segment.points) {
+					if (p.time - analysis.startTime >= time) {
+						wpt = p;
+						break;
+					}
+				}
 			} else {
-				OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
-				float distance = dataSet.getDivX() * pos;
-				return GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, false);
+				float distance = pos * dataSet.getDivX();
+				double totalDistance = 0;
+				for (int i = 0; i < segment.points.size(); i++) {
+					WptPt currentPoint = segment.points.get(i);
+					if (i != 0) {
+						WptPt previousPoint = segment.points.get(i - 1);
+						totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
+					}
+					if (currentPoint.distance >= distance || Math.abs(totalDistance - distance) < 0.1) {
+						wpt = currentPoint;
+						break;
+					}
+				}
 			}
 		}
-		return null;
+		return wpt;
 	}
 
 	@Override
@@ -818,7 +833,6 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 	}
 
-	@Nullable
 	public static TrkSegment getSegmentForAnalysis(GpxDisplayItem gpxItem, GPXTrackAnalysis analysis) {
 		for (Track track : gpxItem.group.getGpx().tracks) {
 			for (TrkSegment segment : track.segments) {
