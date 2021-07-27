@@ -176,4 +176,8 @@ public abstract class BaseCard {
 			AndroidUiHelper.updateVisibility(view, show);
 		}
 	}
+
+	public boolean isVisible() {
+		return view != null && view.getVisibility() == View.VISIBLE;
+	}
 }

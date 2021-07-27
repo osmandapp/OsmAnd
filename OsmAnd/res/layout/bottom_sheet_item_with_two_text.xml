@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:letterSpacing="@dimen/description_letter_spacing"
+            android:letterSpacing="@dimen/text_button_letter_spacing"
             android:paddingLeft="@dimen/content_padding"
             android:paddingRight="@dimen/content_padding"
             android:textColor="?android:textColorPrimary"

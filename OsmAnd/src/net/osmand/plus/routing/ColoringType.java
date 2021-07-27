@@ -9,6 +9,7 @@ import net.osmand.Location;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -166,6 +167,19 @@ public enum ColoringType {
 			return isAttributeAvailableForDrawing(app, routeSegments, attributeName);
 		}
 
+		return true;
+	}
+
+	public boolean isAvailableInSubscription(@NonNull OsmandApplication app,
+	                                         @Nullable String attributeName) {
+		boolean proSubscription = InAppPurchaseHelper.isSubscribedToOsmAndPro(app);
+		if (!proSubscription) {
+			if (isRouteInfoAttribute()) {
+				return attributeName != null
+						&& !Algorithms.containsAny(attributeName, "_roadClass", "_surface");
+			}
+			return this != ColoringType.SLOPE;
+		}
 		return true;
 	}
 

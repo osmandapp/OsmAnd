@@ -4251,7 +4251,6 @@
     <string name="purchases_feature_desc_unlimited_map_download">احصل على تنزيلات غير محدودة لجميع خرائط القارات والمناطق غير المتصلة بالإنترنت.</string>
     <string name="purchases_feature_desc_monthly_map_updates">احصل على التحديثات الشهرية المنتظمة للخرائط غير المتصلة بالإنترنت.</string>
     <string name="purchases_feature_desc_hourly_map_updates">احصل على إمكانية الوصول إلى تحديث الخرائط بشكل متكرر، اختر بين: تحديثات كل ساعة أو يومية أو أسبوعية. يتم تحميل التحديثات بشكل متزايد، فقط للمنطقة التي تم تغييرها.</string>
-    <string name="purchases_feature_desc_advanced_widgets">الوصول إلى أدوات ويدجت أوسماند المتقدمة.</string>
     <string name="purchases_feature_desc_osmand_cloud">احصل على سحابة أوسماند لتخزين جميع بياناتك على التطبيق عبر الإنترنت. في حال نسيان أو فقدان البيانات الخاصة بك بعد إعادة التثبيت ، ويتيح لك النسخ الاحتياطي واستعادة جميع المعلومات دون مشكلة.</string>
     <string name="unlimited_map_downloads">تحميلات غير محدودة</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia و Wikivoyage غير متصل بالإنترنت</string>
@@ -4260,7 +4259,6 @@
     <string name="offline_wikivoyage">Wikivoyage غير متصل</string>
     <string name="terrain_maps">خرائط التضاريس</string>
     <string name="nautical_depth">العمق البحري</string>
-    <string name="advanced_widgets">الويدجت المتقدمة</string>
     <string name="you_can_get_feature_as_part_of_pattern">احصل على \"%1$s\" كجزء من خطة: %2$s . المقارنة:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s من %2$s</string>
     <string name="continue_with">تواصل مع %1$s</string>

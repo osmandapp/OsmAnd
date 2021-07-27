@@ -47,6 +47,7 @@ import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.track.CachedTrack;
 import net.osmand.plus.track.GradientScaleType;
@@ -270,7 +271,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		Iterator<SelectedGpxFile> iterator = selectedGPXFiles.iterator();
 		while (iterator.hasNext()) {
 			SelectedGpxFile selectedGpxFile = iterator.next();
-			if (selectedGpxFile.isFollowTrack(view.getApplication()) && !showTrackToFollow()) {
+			RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
+			boolean isRouting = routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode();
+			if (isRouting && selectedGpxFile.isFollowTrack(view.getApplication()) && !showTrackToFollow()) {
 				iterator.remove();
 			}
 		}
@@ -797,6 +800,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		if (coloringType == null) {
 			return defaultColoringType;
+		} else if (!coloringType.isAvailableInSubscription(view.getApplication(), routeInfoAttribute)) {
+			return defaultColoringType;
 		} else if (getCachedTrack(selectedGpxFile).isColoringTypeAvailable(coloringType, routeInfoAttribute)) {
 			return coloringType.getName(routeInfoAttribute);
 		} else {
@@ -925,7 +930,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	public void getTracksFromPoint(RotatedTileBox tb, PointF point, List<Object> res) {
+	public void getTracksFromPoint(RotatedTileBox tb, PointF point, List<Object> res, boolean showTrackPointMenu) {
 		int r = getScaledTouchRadius(view.getApplication(), getDefaultRadiusPoi(tb));
 		int mx = (int) point.x;
 		int my = (int) point.y;
@@ -934,7 +939,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			Pair<WptPt, WptPt> points = findPointsNearSegments(selectedGpxFile.getPointsToDisplay(), tb, r, mx, my);
 			if (points != null) {
 				LatLon latLon = tb.getLatLonFromPixel(mx, my);
-				res.add(createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon));
+				res.add(createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon,
+						showTrackPointMenu));
 			}
 		}
 	}
@@ -1004,7 +1010,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return null;
 	}
 
-	private SelectedGpxPoint createSelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
+	private SelectedGpxPoint createSelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint,
+	                                                WptPt nextPoint, LatLon latLon, boolean showTrackPointMenu) {
 		WptPt projectionPoint = createProjectionPoint(prevPoint, nextPoint, latLon);
 
 		Location prevPointLocation = new Location("");
@@ -1017,7 +1024,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		float bearing = prevPointLocation.bearingTo(nextPointLocation);
 
-		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, prevPoint, nextPoint, bearing);
+		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, prevPoint, nextPoint, bearing,
+				showTrackPointMenu);
 	}
 
 	public static WptPt createProjectionPoint(WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
@@ -1103,7 +1111,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 		if (tileBox.getZoom() >= START_ZOOM) {
 			List<Object> res = new ArrayList<>();
-			getTracksFromPoint(tileBox, point, res);
+			getTracksFromPoint(tileBox, point, res, false);
 			return !Algorithms.isEmpty(res);
 		}
 		return false;
@@ -1120,10 +1128,11 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	@Override
-	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res, boolean unknownLocation) {
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
+	                                    boolean unknownLocation) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			getWptFromPoint(tileBox, point, res);
-			getTracksFromPoint(tileBox, point, res);
+			getTracksFromPoint(tileBox, point, res, false);
 		}
 	}
 
@@ -1156,15 +1165,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			List<Object> trackPoints = new ArrayList<>();
-			getTracksFromPoint(tileBox, point, trackPoints);
+			getTracksFromPoint(tileBox, point, trackPoints, true);
 
 			if (!Algorithms.isEmpty(trackPoints)) {
-				MapActivity mapActivity = (MapActivity) view.getContext();
 				LatLon latLon = tileBox.getLatLonFromPixel(point.x, point.y);
-				ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
 				if (trackPoints.size() == 1) {
 					SelectedGpxPoint gpxPoint = (SelectedGpxPoint) trackPoints.get(0);
-					contextMenuLayer.showContextMenu(latLon, getObjectName(gpxPoint), gpxPoint, this);
+					contextMenuLayer.showContextMenu(latLon, getObjectName(gpxPoint), gpxPoint, null);
 				} else if (trackPoints.size() > 1) {
 					Map<Object, IContextMenuProvider> selectedObjects = new HashMap<>();
 					for (Object object : trackPoints) {
@@ -1191,8 +1198,14 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return true;
 		} else if (object instanceof SelectedGpxPoint) {
 			SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;
-			SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-			TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
+			if (selectedGpxPoint.shouldShowTrackPointMenu()) {
+				WptPt selectedWptPt = selectedGpxPoint.getSelectedPoint();
+				LatLon latLon = new LatLon(selectedWptPt.lat, selectedWptPt.lon);
+				contextMenuLayer.showContextMenu(latLon, getObjectName(selectedGpxPoint), selectedGpxPoint, null);
+			} else {
+				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
+				TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
+			}
 			return true;
 		}
 		return false;

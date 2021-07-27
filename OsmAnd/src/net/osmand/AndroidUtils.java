@@ -1046,6 +1046,16 @@ public class AndroidUtils {
 	}
 
 	@NonNull
+	public static String getRenderingStringPropertyDescription(Context ctx, String propertyValue) {
+		if (propertyValue == null) {
+			return "";
+		}
+		String propertyValueReplaced = propertyValue.replaceAll("\\s+", "_");
+		String value = getStringByProperty(ctx, "rendering_value_" + propertyValueReplaced + "_description");
+		return value != null ? value : propertyValue;
+	}
+
+	@NonNull
 	public static String getStringRouteInfoPropertyValue(Context ctx, String propertyValue) {
 		if (propertyValue == null) {
 			return "";

@@ -4235,8 +4235,6 @@
     <string name="terrain_maps_contour_lines_hillshade_slope">نقشه‌های ناهمواری‌ها: خطوط میزان، سایه‌روشن‌ها، شیب</string>
     <string name="offline_wikipeadia">ویکی‌پدیای آفلاین</string>
     <string name="offline_wikivoyage">ویکی‌سفر آفلاین</string>
-    <string name="purchases_feature_desc_advanced_widgets">دسترسی به ابزارک‌های پیشرفتهٔ OsmAnd.</string>
-    <string name="advanced_widgets">ابزارک‌های پیشرفته</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s یا %2$s</string>
     <string name="continue_with">با %1$s ادامه دهید</string>
     <string name="backup_error_size_is_exceeded">از حداکثر حجم ابر OsmAnd به میزان %1$s گذشته است</string>
