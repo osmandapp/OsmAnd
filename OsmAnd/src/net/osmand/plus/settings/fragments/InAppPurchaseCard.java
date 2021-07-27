@@ -100,7 +100,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 
 		title.setText(R.string.live_updates);
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_osm_live));
-		AndroidUiHelper.updateVisibility(osmandLive, true);
+		AndroidUiHelper.updateVisibility(osmandLive, purchases.isLiveUpdatesSubscription(purchase));
 	}
 
 	private void setupPurchaseCard(@NonNull InAppPurchase purchase) {
