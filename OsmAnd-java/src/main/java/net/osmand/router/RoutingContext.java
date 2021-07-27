@@ -290,8 +290,8 @@ public class RoutingContext {
 						if (type != -1) {
 							d.types.add(type);
 						}
-						d.types.add(createType);
 					}
+					d.types.add(createType);
 				}
 			}
 
