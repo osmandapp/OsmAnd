@@ -43,7 +43,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private Bitmap applyingPointIcon;
 	private Paint bitmapPaint;
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
-	private final RenderingLineAttributes multiProfileLineAttrs = new RenderingLineAttributes("multiProfileMeasureDistanceLine");
 
 	private MultiProfileGeometryWay multiProfileGeometry;
 	private MultiProfileGeometryWayContext multiProfileGeometryWayContext;
@@ -74,17 +73,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		pointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_day);
 		applyingPointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_move_day);
 
-		float density = view.getDensity();
-		multiProfileLineAttrs.isPaint_1 = false;
-		multiProfileLineAttrs.paint_1.setColor(0xFFFFFFFF);
-		multiProfileLineAttrs.paint_1.setStyle(Paint.Style.FILL);
-		multiProfileLineAttrs.paint.setStrokeWidth(density * 14);
-		multiProfileLineAttrs.paint2.setStrokeWidth(density * 10);
-		multiProfileLineAttrs.isPaint3 = false;
-		multiProfileLineAttrs.paint3.setStrokeWidth(density * 2);
-
-		multiProfileGeometryWayContext = new MultiProfileGeometryWayContext(
-				view.getContext(), view.getApplication().getUIUtilities(),  density);
+		multiProfileGeometryWayContext = new MultiProfileGeometryWayContext(view.getContext(),
+				view.getApplication().getUIUtilities(), view.getDensity());
 		multiProfileGeometry = new MultiProfileGeometryWay(multiProfileGeometryWayContext);
 
 		bitmapPaint = new Paint();
@@ -219,7 +209,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			}
 
 			if (editingCtx.isInMultiProfileMode()) {
-				multiProfileGeometryWayContext.updatePaints(settings.isNightMode(), multiProfileLineAttrs);
+				multiProfileGeometryWayContext.setNightMode(settings.isNightMode());
 				multiProfileGeometry.updateRoute(tb, editingCtx.getRoadSegmentData(), editingCtx.getBeforeSegments(), editingCtx.getAfterSegments());
 				multiProfileGeometry.drawSegments(canvas, tb);
 			} else {
@@ -399,8 +389,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 		float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
 		if (editingCtx.isInMultiProfileMode()) {
-			canvas.drawBitmap(multiProfileGeometryWayContext.getPointIcon(), locX - multiProfileGeometryWayContext.pointIconSize / 2,
-					locY - multiProfileGeometryWayContext.pointIconSize / 2, bitmapPaint);
+			canvas.drawBitmap(multiProfileGeometryWayContext.getUserPointIcon(),
+					locX - multiProfileGeometryWayContext.userPointIconSizePx / 2,
+					locY - multiProfileGeometryWayContext.userPointIconSizePx / 2, bitmapPaint);
 		} else {
 			if (tb.containsPoint(locX, locY, 0)) {
 				canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);

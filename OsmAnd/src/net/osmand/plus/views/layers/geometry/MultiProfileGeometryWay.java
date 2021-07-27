@@ -20,6 +20,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -164,15 +165,16 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		double currLat = provider.getLatitude(currLocationIdx);
 		double currLon = provider.getLongitude(currLocationIdx);
 
-		int nextIdx = currLocationIdx;
-		for (int i = nextIdx + 1; i < simplification.size(); i++) {
+		int nextSurvivedIdx = currLocationIdx;
+		for (int i = nextSurvivedIdx + 1; i < simplification.size(); i++) {
 			if (simplification.getQuick(i) == 1) {
-				nextIdx = i;
+				nextSurvivedIdx = i;
+				break;
 			}
 		}
 
-		double nextLat = provider.getLatitude(nextIdx);
-		double nextLon = provider.getLongitude(nextIdx);
+		double nextLat = provider.getLatitude(nextSurvivedIdx);
+		double nextLon = provider.getLongitude(nextSurvivedIdx);
 		return Math.min(currLon, nextLon) < rightLon && Math.max(currLon, nextLon) > leftLon
 				&& Math.min(currLat, nextLat) < topLat && Math.max(currLat, nextLat) > bottomLat;
 	}
@@ -196,25 +198,26 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 	}
 
 	private Pair<Integer, Integer> getProfileData(String profileKey) {
-		boolean night = getContext().isNightMode();
+		MultiProfileGeometryWayContext context = getContext();
 		ApplicationMode mode = ApplicationMode.valueOfStringKey(profileKey, ApplicationMode.DEFAULT);
 		return ApplicationMode.DEFAULT.getStringKey().equals(mode.getStringKey()) ?
-				new Pair<>(ContextCompat.getColor(getContext().getCtx(), ProfileIconColors.DARK_YELLOW.getColor(night)), R.drawable.ic_action_split_interval) :
-				new Pair<>(mode.getProfileColor(night), mode.getIconRes());
+				new Pair<>(context.getStraightLineColor(), context.getStraightLineIconRes()) :
+				new Pair<>(mode.getProfileColor(context.isNightMode()), mode.getIconRes());
 	}
 
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
-		return null;
+		return new GeometryMultiProfileWayStyle(getContext(), Collections.emptyList(),
+				getContext().getStraightLineColor(), getContext().getStraightLineIconRes());
 	}
 
 	public static class GeometryMultiProfileWayStyle extends GeometryWayStyle<MultiProfileGeometryWayContext> {
 
 		@ColorInt
-		private final int lineColor;
+		private final int pathColor;
 		@ColorInt
-		private final int borderColor;
+		private final int pathBorderColor;
 		@DrawableRes
 		private final int profileIconRes;
 
@@ -227,12 +230,11 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 											boolean isGap) {
 			super(context);
 			this.routePoints = routePoints;
-			this.lineColor = profileColor;
-			this.borderColor = ColorUtils.blendARGB(profileColor, Color.BLACK, 0.2f);
+			this.pathColor = profileColor;
+			this.pathBorderColor = ColorUtils.blendARGB(profileColor, Color.BLACK, 0.2f);
 			this.profileIconRes = profileIconRes;
 			this.isGap = isGap;
 		}
-
 
 		public GeometryMultiProfileWayStyle(MultiProfileGeometryWayContext context, List<LatLon> routePoints,
 											@ColorInt int profileColor, @DrawableRes int profileIconRes) {
@@ -240,18 +242,18 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		}
 
 		@ColorInt
-		public int getBorderColor() {
-			return borderColor;
+		public int getPathBorderColor() {
+			return pathBorderColor;
 		}
 
 		@ColorInt
-		public int getLineColor() {
-			return lineColor;
+		public int getPathColor() {
+			return pathColor;
 		}
 
 		@Override
 		public Bitmap getPointBitmap() {
-			return getContext().getProfileIconBitmap(profileIconRes, borderColor);
+			return getContext().getProfileIconBitmap(profileIconRes, pathBorderColor);
 		}
 
 		public List<LatLon> getRoutePoints() {

@@ -47,6 +47,7 @@ import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.track.CachedTrack;
 import net.osmand.plus.track.GradientScaleType;
@@ -270,7 +271,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		Iterator<SelectedGpxFile> iterator = selectedGPXFiles.iterator();
 		while (iterator.hasNext()) {
 			SelectedGpxFile selectedGpxFile = iterator.next();
-			if (selectedGpxFile.isFollowTrack(view.getApplication()) && !showTrackToFollow()) {
+			RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
+			boolean isRouting = routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode();
+			if (isRouting && selectedGpxFile.isFollowTrack(view.getApplication()) && !showTrackToFollow()) {
 				iterator.remove();
 			}
 		}
@@ -796,6 +799,8 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 
 		if (coloringType == null) {
+			return defaultColoringType;
+		} else if (!coloringType.isAvailableInSubscription(view.getApplication(), routeInfoAttribute)) {
 			return defaultColoringType;
 		} else if (getCachedTrack(selectedGpxFile).isColoringTypeAvailable(coloringType, routeInfoAttribute)) {
 			return coloringType.getName(routeInfoAttribute);

@@ -13,6 +13,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.PromoBannerCard;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.enums.DayNightMode;
@@ -57,6 +58,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 	private ColorsCard colorsCard;
 	private GradientCard gradientCard;
+	private PromoBannerCard promoCard;
 	private ColorTypeAdapter colorAdapter;
 	private RecyclerView groupRecyclerView;
 	private TextView tvDescription;
@@ -121,8 +123,24 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 		previewRouteLineInfo.setRouteColoringType(selectedType);
 		previewRouteLineInfo.setRouteInfoAttribute(selectedRouteInfoAttribute);
+		updatePromoCardVisibility();
 		updateColorItems();
 		updateDescription();
+	}
+
+	private void updatePromoCardVisibility() {
+		boolean available = isSelectedModeAvailable();
+		if (!available) {
+			promoCard.updateVisibility(true);
+			gradientCard.updateVisibility(false);
+			colorsCard.updateVisibility(false);
+		} else {
+			promoCard.updateVisibility(false);
+		}
+	}
+
+	public boolean isSelectedModeAvailable() {
+		return selectedType.isAvailableInSubscription(app, selectedRouteInfoAttribute);
 	}
 
 	private void setupRadioGroup(LinearLayout buttonsContainer) {
@@ -175,6 +193,9 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 
 			gradientCard = new GradientCard(mapActivity, previewRouteLineInfo.getRouteColoringType().toGradientScaleType());
 			container.addView(gradientCard.build(mapActivity));
+
+			promoCard = new PromoBannerCard(mapActivity, true);
+			container.addView(promoCard.build(mapActivity));
 		}
 	}
 
