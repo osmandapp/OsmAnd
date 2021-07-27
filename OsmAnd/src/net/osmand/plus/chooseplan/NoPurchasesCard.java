@@ -13,10 +13,10 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
-public class PurchasingCard extends BaseCard {
+public class NoPurchasesCard extends BaseCard {
 
-	public PurchasingCard(@NonNull FragmentActivity activity,
-	                      boolean usedOnMap) {
+	public NoPurchasesCard(@NonNull FragmentActivity activity,
+	                       boolean usedOnMap) {
 		super(activity, usedOnMap);
 	}
 
