@@ -540,9 +540,11 @@ public class ApplicationMode {
 			iconNameListener = new StateChangedListener<String>() {
 				@Override
 				public void stateChanged(String change) {
-					for (ApplicationMode mode : allPossibleValues()) {
-						mode.updateAppModeIcon();
-					}
+					app.runInUIThread(() -> {
+						for (ApplicationMode mode : allPossibleValues()) {
+							mode.updateAppModeIcon();
+						}
+					});
 				}
 			};
 			app.getSettings().ICON_RES_NAME.addListener(iconNameListener);

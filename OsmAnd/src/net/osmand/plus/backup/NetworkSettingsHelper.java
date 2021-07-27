@@ -131,9 +131,9 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	public void exportSettings(@NonNull List<SettingsItem> items,
-							   @NonNull List<RemoteFile> filesToDelete,
+							   @NonNull List<SettingsItem> itemsToDelete,
 							   @Nullable BackupExportListener listener) {
-		ExportBackupTask exportTask = new ExportBackupTask(this, items, filesToDelete, listener);
+		ExportBackupTask exportTask = new ExportBackupTask(this, items, itemsToDelete, listener);
 		this.exportTask = exportTask;
 		exportTask.executeOnExecutor(getBackupHelper().getExecutor());
 	}

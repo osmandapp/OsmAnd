@@ -392,7 +392,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 					OsmandApplication app = getMyApplication();
 					boolean nightMode = !app.getSettings().isLightContent();
 					if (showSubscriptionPurchaseBanner) {
-						view = inflater.inflate(R.layout.osm_live_banner_list_item, parent, false);
+						view = inflater.inflate(R.layout.osm_subscription_banner_list_item, parent, false);
 						ColorStateList stateList = AndroidUtils.createPressedColorStateList(app, nightMode,
 								R.color.switch_button_active_light, R.color.switch_button_active_stroke_light,
 								R.color.switch_button_active_dark, R.color.switch_button_active_stroke_dark);

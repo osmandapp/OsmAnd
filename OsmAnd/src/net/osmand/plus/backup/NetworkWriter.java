@@ -3,7 +3,6 @@ package net.osmand.plus.backup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.FileUtils;
 import net.osmand.StreamWriter;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
@@ -20,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class NetworkWriter extends AbstractWriter {
@@ -120,9 +118,7 @@ public class NetworkWriter extends AbstractWriter {
 									  @NonNull String fileName, long uploadTime)
 			throws UserNotRegisteredException, IOException {
 		FileSettingsItem item = (FileSettingsItem) itemWriter.getItem();
-		List<File> filesToUpload = new ArrayList<>();
-		FileUtils.collectDirFiles(item.getFile(), filesToUpload);
-
+		List<File> filesToUpload = backupHelper.collectItemFilesForUpload(item);
 		long size = 0;
 		for (File file : filesToUpload) {
 			size += file.length();
@@ -160,9 +156,13 @@ public class NetworkWriter extends AbstractWriter {
 			@Override
 			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
 				if (item instanceof FileSettingsItem) {
-					String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+					FileSettingsItem fileItem = (FileSettingsItem) item;
+					String itemFileName = BackupHelper.getFileItemName(fileItem);
 					if (backupHelper.getApp().getAppPath(itemFileName).isDirectory()) {
 						backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, uploadTime);
+					}
+					if (fileItem.needMd5Digest() && !Algorithms.isEmpty(fileItem.getMd5Digest())) {
+						backupHelper.updateFileMd5Digest(item.getType().name(), fileName, fileItem.getMd5Digest());
 					}
 				}
 				if (listener != null) {
@@ -208,9 +208,13 @@ public class NetworkWriter extends AbstractWriter {
 			@Override
 			public void onFileUploadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
 				if (item instanceof FileSettingsItem) {
-					String itemFileName = BackupHelper.getFileItemName((FileSettingsItem) item);
+					FileSettingsItem fileItem = (FileSettingsItem) item;
+					String itemFileName = BackupHelper.getFileItemName(fileItem);
 					if (backupHelper.getApp().getAppPath(itemFileName).isDirectory()) {
 						backupHelper.updateFileUploadTime(item.getType().name(), itemFileName, uploadTime);
+					}
+					if (fileItem.needMd5Digest() && !Algorithms.isEmpty(fileItem.getMd5Digest())) {
+						backupHelper.updateFileMd5Digest(item.getType().name(), fileName, fileItem.getMd5Digest());
 					}
 				}
 				if (listener != null) {

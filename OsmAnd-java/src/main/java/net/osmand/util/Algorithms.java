@@ -478,6 +478,39 @@ public class Algorithms {
 		return ((ch1 << 8) + ch2);
 	}
 
+	public static boolean startsWithAny(String s, String ... args) {
+		if (!isEmpty(s) && args != null && args.length > 0) {
+			for (String arg : args) {
+				if (s.startsWith(arg)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean containsAny(String s, String ... args) {
+		if (!isEmpty(s) && args != null && args.length > 0) {
+			for (String arg : args) {
+				if (s.contains(arg)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean endsWithAny(String s, String ... args) {
+		if (!isEmpty(s) && args != null && args.length > 0) {
+			for (String arg : args) {
+				if (s.endsWith(arg)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public static String capitalizeFirstLetterAndLowercase(String s) {
 		if (s != null && s.length() > 1) {
 			// not very efficient algorithm

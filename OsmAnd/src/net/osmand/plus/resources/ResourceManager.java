@@ -51,6 +51,7 @@ import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.router.TransportStopsRouteReader;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -59,7 +60,6 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -489,7 +489,7 @@ public class ResourceManager {
 							conf = conf.exists() ? conf : new File(f, "_ttsconfig.p");
 						}
 						if (conf.exists()) {
-							indexFileNames.put(f.getName(), dateFormat.format(conf.lastModified())); 
+							indexFileNames.put(f.getName(), dateFormat.format(conf.lastModified()));
 							indexFiles.put(f.getName(), f);
 						}
 					}
@@ -712,7 +712,7 @@ public class ResourceManager {
 		} else {
 			collectFiles(context.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), DEFAULT_WIKIVOYAGE_TRAVEL_OBF, files);
 		}
-		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isContourLinesPurchased(context)) {
+		if (OsmandPlugin.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(context)) {
 			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 
@@ -761,7 +761,8 @@ public class ResourceManager {
 
 		java.text.DateFormat dateFormat = getDateFormat();
 		for (File f : files) {
-			progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); 
+			String fileName = f.getName();
+			progress.startTask(context.getString(R.string.indexing_map) + " " + fileName, -1);
 			try {
 				BinaryMapIndexReader mapReader = null;
 				try {
@@ -770,15 +771,15 @@ public class ResourceManager {
 						mapReader = null;
 					}
 				} catch (IOException e) {
-					log.error(String.format("File %s could not be read", f.getName()), e);
+					log.error(String.format("File %s could not be read", fileName), e);
 				}
-				boolean wikiMap = (f.getName().contains("_wiki") || f.getName().contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
-				boolean srtmMap = SrtmDownloadItem.containsSrtmExtension(f.getName());
-				if (mapReader == null || (!Version.isPaidVersion(context) && wikiMap && !f.getName().equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF))) {
-					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); 
+				boolean wikiMap = WikipediaPlugin.containsWikipediaExtension(fileName);
+				boolean srtmMap = SrtmDownloadItem.containsSrtmExtension(fileName);
+				if (mapReader == null || (!Version.isPaidVersion(context) && wikiMap && !fileName.equals(DEFAULT_WIKIVOYAGE_TRAVEL_OBF))) {
+					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), fileName)); //$NON-NLS-1$
 				} else {
 					if (mapReader.isBasemap()) {
-						basemapFileNames.put(f.getName(), f.getName());
+						basemapFileNames.put(fileName, fileName);
 					}
 					long dateCreated = mapReader.getDateCreated();
 					if (dateCreated == 0) {
@@ -797,17 +798,17 @@ public class ResourceManager {
 					} else if (!wikiMap && !srtmMap) {
 						changesManager.indexMainMap(f, dateCreated);
 					}
-					indexFileNames.put(f.getName(), dateFormat.format(dateCreated)); 
-					indexFiles.put(f.getName(), f); 
-					if (!depthContours && f.getName().toLowerCase().startsWith("depth_")) {
+					indexFileNames.put(fileName, dateFormat.format(dateCreated));
+					indexFiles.put(fileName, f);
+					if (!depthContours && fileName.toLowerCase().startsWith("depth_")) {
 						depthContours = true;
 					}
 					renderer.initializeNewResource(progress, f, mapReader);
 					BinaryMapReaderResource resource = new BinaryMapReaderResource(f, mapReader);
 					if (mapReader.containsPoiData()) {
-						amenityRepositories.put(f.getName(), new AmenityIndexRepositoryBinary(resource, context));
+						amenityRepositories.put(fileName, new AmenityIndexRepositoryBinary(resource, context));
 					}
-					fileReaders.put(f.getName(), resource);
+					fileReaders.put(fileName, resource);
 					if (resource.getFileName().endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
 						travelRepositories.put(resource.getFileName(), resource);
 						// travel files should be indexed separately (so it's possible to turn on / off)
@@ -815,10 +816,10 @@ public class ResourceManager {
 					}
 					if (!mapReader.getRegionNames().isEmpty()) {
 						RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(this, resource);
-						addressMap.put(f.getName(), rarb);
+						addressMap.put(fileName, rarb);
 					}
 					if (mapReader.hasTransportData()) {
-						transportRepositories.put(f.getName(), resource);
+						transportRepositories.put(fileName, resource);
 					}
 					// disable osmc for routing temporarily due to some bugs
 					if (mapReader.containsRouteData() && (!f.getParentFile().equals(liveDir) ||
@@ -831,11 +832,11 @@ public class ResourceManager {
 					}
 				}
 			} catch (SQLiteException e) {
-				log.error("Exception reading " + f.getAbsolutePath(), e); 
-				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); 
+				log.error("Exception reading " + f.getAbsolutePath(), e);
+				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), fileName));
 			} catch (OutOfMemoryError oome) {
-				log.error("Exception reading " + f.getAbsolutePath(), oome); 
-				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_big_for_memory), f.getName()));
+				log.error("Exception reading " + f.getAbsolutePath(), oome);
+				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_big_for_memory), fileName));
 			}
 		}
 		Map<PoiCategory, Map<String, PoiType>> toAddPoiTypes = new HashMap<>();

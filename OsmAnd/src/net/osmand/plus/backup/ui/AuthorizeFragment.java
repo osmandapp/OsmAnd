@@ -133,8 +133,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		progressBar = view.findViewById(R.id.progress_bar);
 		buttonContinue = view.findViewById(R.id.continue_button);
 		buttonChoosePlan = view.findViewById(R.id.get_button);
-		errorText = view.findViewById(R.id.error_text);
-		buttonAuthorize = view.findViewById(R.id.button);
 
 		setupToolbar();
 		setupTextWatchers();
@@ -229,6 +227,9 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void setupAuthorizeContainer(View view, LoginDialogType nextType) {
+		errorText = view.findViewById(R.id.error_text);
+		buttonAuthorize = view.findViewById(R.id.button);
+
 		EditText editText = view.findViewById(R.id.edit_text);
 		EditText promoEditText = view.findViewById(R.id.promocode_edit_text);
 
@@ -271,7 +272,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void setupVerifyEmailContainer(View view) {
-		TextView errorText = view.findViewById(R.id.error_text);
+		errorText = view.findViewById(R.id.error_text);
 		EditText editText = view.findViewById(R.id.edit_text);
 		View resendButton = view.findViewById(R.id.button);
 		View codeMissingButton = view.findViewById(R.id.code_missing_button);
@@ -352,6 +353,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void registerUser() {
+		settings.BACKUP_PROMOCODE.set(promoCode);
 		boolean login = dialogType == LoginDialogType.SIGN_IN || signIn;
 		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), promoCode, login);
 	}

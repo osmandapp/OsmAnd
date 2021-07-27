@@ -64,7 +64,7 @@
 
 	<include
 		android:id="@+id/osmand_live"
-		layout="@layout/osm_live_banner_list_item" />
+		layout="@layout/osm_subscription_banner_list_item" />
 
 	<include
 		layout="@layout/divider_half_item" />

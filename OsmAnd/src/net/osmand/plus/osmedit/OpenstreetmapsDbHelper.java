@@ -6,11 +6,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,9 +27,12 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 
 public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
+
+	private static final Log log = PlatformUtil.getLog(OpenstreetmapsDbHelper.class);
 
 	private static final int DATABASE_VERSION = 6;
 	public static final String OPENSTREETMAP_DB_NAME = "openstreetmap"; //$NON-NLS-1$
@@ -174,7 +180,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		return false;
 	}
 	
-	private List<OpenstreetmapPoint> checkOpenstreetmapPoints(){
+	private List<OpenstreetmapPoint> checkOpenstreetmapPoints() {
 		SQLiteDatabase db = getReadableDatabase();
 		List<OpenstreetmapPoint> points = new ArrayList<OpenstreetmapPoint>();
 		if (db != null) {
@@ -191,13 +197,13 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 			if (query.moveToFirst()) {
 				do {
 					OpenstreetmapPoint p = new OpenstreetmapPoint();
-					String entityType = query.getString(7);
+					Entity.EntityType entityType = parseEntityType(query.getString(7));
 					Entity entity = null;
-					if (entityType != null && Entity.EntityType.valueOf(entityType) == Entity.EntityType.NODE) {
+					if (entityType == Entity.EntityType.NODE) {
 						entity = new Node(query.getDouble(1),
 								query.getDouble(2),
 								query.getLong(0));
-					} else if (entityType != null && Entity.EntityType.valueOf(entityType) == Entity.EntityType.WAY) {
+					} else if (entityType == Entity.EntityType.WAY) {
 						entity = new Way(query.getLong(0), null,
 								query.getDouble(1),
 								query.getDouble(2));
@@ -226,6 +232,19 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		return points;
 	}
 
+	@Nullable
+	private Entity.EntityType parseEntityType(@Nullable String entityType) {
+		if (entityType == null) {
+			return null;
+		}
+		try {
+			return Entity.EntityType.valueOf(entityType);
+		} catch (IllegalArgumentException e) {
+			log.error(e);
+			return null;
+		}
+	}
+
 	public long getMinID() {
 		SQLiteDatabase db = getReadableDatabase();
 		long minID = 0;
@@ -238,5 +257,4 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		}
 		return minID;
 	}
-
 }

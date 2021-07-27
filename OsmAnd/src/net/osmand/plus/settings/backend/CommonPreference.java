@@ -1,6 +1,9 @@
 package net.osmand.plus.settings.backend;
 
+import android.util.Log;
+
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.util.Algorithms;
 
@@ -211,6 +214,9 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		Object prefs = getPreferences();
 		boolean changed = !Algorithms.objectEquals(obj, getValue(prefs, obj));
 		if (setValue(prefs, obj)) {
+			if (changed && isShared() && isGlobal() && OsmandPlugin.isDevelopment()) {
+				Log.d("CommonPreference", "SET GLOBAL id=" + getId() + " value=" + obj + " cached=" + cachedValue);
+			}
 			cachedValue = obj;
 			cachedPreference = prefs;
 			if (changed && isShared()) {

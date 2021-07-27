@@ -152,7 +152,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		}
 
 		setHasOptionsMenu(true);
-		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 
 		View view = inflater.inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
@@ -738,7 +738,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			final OsmEditsFragment parentFragment = (OsmEditsFragment) getParentFragment();
-			final OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+			final OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 			@SuppressWarnings("unchecked")
 			final ArrayList<OsmPoint> points = (ArrayList<OsmPoint>) getArguments().getSerializable(POINTS_LIST);
 

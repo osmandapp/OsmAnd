@@ -472,7 +472,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			addCardViewToHeader(overviewCard);
 		} else {
 			MapActivity mapActivity = requireMapActivity();
-			overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile, analyses);
+			overviewCard = new OverviewCard(mapActivity, this, selectedGpxFile, analyses, this);
 			overviewCard.setListener(this);
 			headerContainer.addView(overviewCard.build(mapActivity));
 		}
@@ -620,7 +620,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					}
 					cardsContainer.addView(descriptionCard.getView());
 				} else {
-					descriptionCard = new DescriptionCard(getMapActivity(), displayHelper.getGpx());
+					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx());
 					cardsContainer.addView(descriptionCard.build(mapActivity));
 				}
 			} else if (menuType == TrackMenuType.POINTS) {
@@ -943,7 +943,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
 				}
 			} else if (buttonIndex == UPLOAD_OSM_BUTTON_INDEX) {
-				OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+				OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 				if (osmEditingPlugin != null) {
 					GpxInfo gpxInfo = new GpxInfo();
 					gpxInfo.gpx = gpxFile;
@@ -1387,8 +1387,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 	}
 
-	private static void loadSelectedGpxFile(@NonNull MapActivity mapActivity, @Nullable String path,
-											boolean showCurrentTrack, final CallbackWithObject<SelectedGpxFile> callback) {
+	public static void loadSelectedGpxFile(@NonNull MapActivity mapActivity, @Nullable String path,
+	                                       boolean showCurrentTrack,
+	                                       final CallbackWithObject<SelectedGpxFile> callback) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		SelectedGpxFile selectedGpxFile;
 		if (showCurrentTrack) {

@@ -49,7 +49,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+		plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
 		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
@@ -65,7 +65,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	@Override
 	public void onOpenDash() {
 		if (plugin == null) {
-			plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+			plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 		}
 		setupNotes();
 	}

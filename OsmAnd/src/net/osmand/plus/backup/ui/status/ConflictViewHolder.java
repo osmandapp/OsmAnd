@@ -22,7 +22,6 @@ import java.util.Collections;
 
 public class ConflictViewHolder extends ItemViewHolder {
 
-
 	public ConflictViewHolder(View itemView) {
 		super(itemView);
 	}
@@ -45,7 +44,6 @@ public class ConflictViewHolder extends ItemViewHolder {
 		});
 		AndroidUiHelper.updateVisibility(serverButton, true);
 		AndroidUiHelper.updateVisibility(localVersionButton, true);
-		AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.second_icon), true);
 		UiUtilities.setupDialogButton(nightMode, localVersionButton, DialogButtonType.SECONDARY, R.string.upload_local_version);
 		UiUtilities.setupDialogButton(nightMode, serverButton, DialogButtonType.SECONDARY, R.string.download_server_version);
 		AndroidUtils.setBackground(app, localVersionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
