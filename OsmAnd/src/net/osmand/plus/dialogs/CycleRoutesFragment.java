@@ -103,11 +103,9 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 
 		View container = view.findViewById(R.id.card_container);
 		TextView title = container.findViewById(R.id.title);
-		TextView type = container.findViewById(R.id.descr);
 		TextView description = container.findViewById(R.id.description);
 
 		title.setText(R.string.routes_color_by_type);
-		type.setText(pref.get() ? R.string.rendering_value_walkingRoutesOSMCNodes_name : R.string.layer_route);
 		description.setText(pref.get() ? R.string.rendering_value_walkingRoutesOSMCNodes_description : R.string.walking_route_osmc_description);
 
 		TextRadioItem relation = createRadioButton(pref, false, R.string.layer_route);
@@ -116,6 +114,7 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		TextToggleButton radioGroup = new TextToggleButton(app, view.findViewById(R.id.custom_radio_buttons), nightMode);
 		radioGroup.setItems(relation, nodeNetworks);
 		radioGroup.setSelectedItem(pref.get() ? nodeNetworks : relation);
+		AndroidUiHelper.updateVisibility(container.findViewById(R.id.descr), false);
 	}
 
 	private TextRadioItem createRadioButton(@NonNull CommonPreference<Boolean> pref, boolean enabled, int titleId) {
