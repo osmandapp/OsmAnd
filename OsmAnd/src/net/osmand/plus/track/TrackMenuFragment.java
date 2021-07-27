@@ -137,9 +137,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private OsmandApplication app;
 	private TrackDisplayHelper displayHelper;
 	private SelectedGpxFile selectedGpxFile;
+	private GPXTrackAnalysis analyses;
 
 	private TrackMenuType menuType = TrackMenuType.OVERVIEW;
-	private boolean menuTypeChanged = false;
 	private SegmentsCard segmentsCard;
 	private OptionsCard optionsCard;
 	private DescriptionCard descriptionCard;
@@ -176,7 +176,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int menuHeaderHeight;
 	private int toolbarHeightPx;
 	private boolean adjustMapPosition = true;
-	private GPXTrackAnalysis analyses;
+	private boolean menuTypeChanged = false;
 
 	public enum TrackMenuType {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),

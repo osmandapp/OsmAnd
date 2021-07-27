@@ -925,7 +925,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		}
 	}
 
-	public void getTracksFromPoint(RotatedTileBox tb, PointF point, List<Object> res, boolean forTrackPointMenu) {
+	public void getTracksFromPoint(RotatedTileBox tb, PointF point, List<Object> res, boolean showTrackPointMenu) {
 		int r = getScaledTouchRadius(view.getApplication(), getDefaultRadiusPoi(tb));
 		int mx = (int) point.x;
 		int my = (int) point.y;
@@ -935,7 +935,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (points != null) {
 				LatLon latLon = tb.getLatLonFromPixel(mx, my);
 				res.add(createSelectedGpxPoint(selectedGpxFile, points.first, points.second, latLon,
-						forTrackPointMenu));
+						showTrackPointMenu));
 			}
 		}
 	}
@@ -1006,7 +1006,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private SelectedGpxPoint createSelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint,
-	                                                WptPt nextPoint, LatLon latLon, boolean forTrackPointMenu) {
+	                                                WptPt nextPoint, LatLon latLon, boolean showTrackPointMenu) {
 		WptPt projectionPoint = createProjectionPoint(prevPoint, nextPoint, latLon);
 
 		Location prevPointLocation = new Location("");
@@ -1020,7 +1020,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		float bearing = prevPointLocation.bearingTo(nextPointLocation);
 
 		return new SelectedGpxPoint(selectedGpxFile, projectionPoint, prevPoint, nextPoint, bearing,
-				forTrackPointMenu);
+				showTrackPointMenu);
 	}
 
 	public static WptPt createProjectionPoint(WptPt prevPoint, WptPt nextPoint, LatLon latLon) {
@@ -1193,7 +1193,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			return true;
 		} else if (object instanceof SelectedGpxPoint) {
 			SelectedGpxPoint selectedGpxPoint = (SelectedGpxPoint) object;
-			if (selectedGpxPoint.forTrackPointMenu()) {
+			if (selectedGpxPoint.shouldShowTrackPointMenu()) {
 				WptPt selectedWptPt = selectedGpxPoint.getSelectedPoint();
 				LatLon latLon = new LatLon(selectedWptPt.lat, selectedWptPt.lon);
 				contextMenuLayer.showContextMenu(latLon, getObjectName(selectedGpxPoint), selectedGpxPoint, null);
