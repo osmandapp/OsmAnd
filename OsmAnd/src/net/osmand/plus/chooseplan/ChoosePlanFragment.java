@@ -166,7 +166,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FrameLayout container = mainView.findViewById(R.id.troubleshooting_card);
-			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, !Version.isGooglePlayEnabled(), usedOnMap);
+			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, usedOnMap);
 			card.setListener(this);
 			container.addView(card.build(activity));
 		}
@@ -265,6 +265,10 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		setupRoundedBackground(view, colorNoAlpha, ButtonBackground.ROUNDED_SMALL);
 		view.setOnClickListener(listener);
 		view.setEnabled(available);
+	}
+
+	public static void showDefaultInstance(@NonNull FragmentActivity activity) {
+		showInstance(activity, OsmAndFeature.values()[0]);
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull OsmAndFeature selectedFeature) {
