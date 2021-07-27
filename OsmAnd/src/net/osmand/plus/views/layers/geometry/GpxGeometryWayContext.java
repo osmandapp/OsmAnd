@@ -30,6 +30,25 @@ public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
 		specialArrowBitmap = AndroidUtils.drawableToBitmap(ContextCompat.getDrawable(ctx, R.drawable.mm_special_arrow_up));
 	}
 
+	private Paint createCirclePaint() {
+		Paint circlePaint = new Paint();
+		circlePaint.setDither(true);
+		circlePaint.setAntiAlias(true);
+		circlePaint.setStyle(Paint.Style.FILL);
+		circlePaint.setColor(0x33000000);
+		return circlePaint;
+	}
+
+	private Paint createStrokePaint() {
+		Paint strokePaint = new Paint();
+		strokePaint.setDither(true);
+		strokePaint.setAntiAlias(true);
+		strokePaint.setStyle(Style.STROKE);
+		strokePaint.setStrokeCap(Cap.ROUND);
+		strokePaint.setStrokeJoin(Join.ROUND);
+		return strokePaint;
+	}
+
 	@NonNull
 	@Override
 	public Paint getCustomPaint() {
@@ -59,24 +78,5 @@ public class GpxGeometryWayContext extends MultiColoringGeometryWayContext {
 
 	public Paint getCirclePaint() {
 		return circlePaint;
-	}
-
-	private Paint createCirclePaint() {
-		Paint circlePaint = new Paint();
-		circlePaint.setDither(true);
-		circlePaint.setAntiAlias(true);
-		circlePaint.setStyle(Paint.Style.FILL);
-		circlePaint.setColor(0x33000000);
-		return circlePaint;
-	}
-
-	private Paint createStrokePaint() {
-		Paint strokePaint = new Paint();
-		strokePaint.setDither(true);
-		strokePaint.setAntiAlias(true);
-		strokePaint.setStyle(Style.STROKE);
-		strokePaint.setStrokeCap(Cap.ROUND);
-		strokePaint.setStrokeJoin(Join.ROUND);
-		return strokePaint;
 	}
 }
