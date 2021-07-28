@@ -40,6 +40,7 @@ import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
@@ -51,8 +52,7 @@ import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
 
-public abstract class ContextMenuFragment extends BaseOsmAndFragment
-		implements MapControlsLayer.MapControlsThemeInfoProvider {
+public abstract class ContextMenuFragment extends BaseOsmAndFragment implements MapControlsThemeInfoProvider {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;

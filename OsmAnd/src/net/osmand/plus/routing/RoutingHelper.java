@@ -228,6 +228,14 @@ public class RoutingHelper {
 		transportRoutingHelper.clearCurrentRoute(newFinalLocation);
 	}
 
+	public synchronized boolean isMissingMapsOnlineSearching() {
+		return routeRecalculationHelper.isMissingMapsSearching();
+	}
+
+	public synchronized boolean startMissingMapsOnlineSearch() {
+		return routeRecalculationHelper.startMissingMapsOnlineSearch();
+	}
+
 	private synchronized void finishCurrentRoute() {
 		routeWasFinished = true;
 		app.runInUIThread(new Runnable() {
@@ -412,7 +420,7 @@ public class RoutingHelper {
 
 			// 0. Route empty or needs to be extended? Then re-calculate route.
 			if (route.isEmpty()) {
-				calculateRoute = true;
+				calculateRoute = !route.hasMissingMaps();
 			} else {
 				// 1. Update current route position status according to latest received location
 				boolean finished = updateCurrentRouteStatus(currentLocation, posTolerance);
