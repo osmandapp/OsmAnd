@@ -113,7 +113,9 @@
 
 	</LinearLayout>
 
-	<include layout="@layout/simple_divider_item" />
+	<include
+		android:id="@+id/card_divider"
+		layout="@layout/simple_divider_item" />
 
 	<include
 		android:id="@+id/manage_subscription"

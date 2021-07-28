@@ -123,7 +123,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		objects.clear();
 		for (Map.Entry<Object, IContextMenuProvider> e : selectedObjects.entrySet()) {
 			Object selectedObj = e.getKey();
-			IContextMenuProvider contextObject = selectedObjects.get(selectedObj);
+			IContextMenuProvider contextObject = e.getValue();
 			LatLon ll = null;
 			PointDescription pointDescription = null;
 

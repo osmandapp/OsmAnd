@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,6 +19,7 @@ import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
+import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.util.Algorithms;
 
@@ -28,9 +27,6 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class InAppPurchaseCard extends MapBaseCard {
-
-	private static final String PLAY_STORE_SUBSCRIPTION_URL = "https://play.google.com/store/account/subscriptions";
-	private static final String PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL = "https://play.google.com/store/account/subscriptions?sku=%s&package=%s";
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d, yyyy", Locale.getDefault());
 
@@ -69,19 +65,25 @@ public class InAppPurchaseCard extends MapBaseCard {
 		} else {
 			setupPurchaseCard(purchase);
 		}
-		setupManageButton();
-		setupLiveButton();
+
+		boolean manageVisible = purchase instanceof InAppSubscription;
+		boolean liveVisible = purchases.isLiveUpdatesSubscription(purchase);
+
+		setupLiveButton(liveVisible);
+		setupManageButton(manageVisible);
+
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_divider), manageVisible || liveVisible);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), manageVisible && liveVisible);
 	}
 
-	private void setupManageButton() {
+	private void setupManageButton(boolean visible) {
 		View manageSubscription = view.findViewById(R.id.manage_subscription);
 		manageSubscription.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setData(Uri.parse(getSubscriptionUrl()));
-				if (AndroidUtils.isIntentSafe(mapActivity, intent)) {
-					mapActivity.startActivity(intent);
+				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+				if (purchaseHelper != null) {
+					purchaseHelper.manageSubscription(activity, purchase.getSku());
 				}
 			}
 		});
@@ -90,18 +92,15 @@ public class InAppPurchaseCard extends MapBaseCard {
 
 		TextView title = manageSubscription.findViewById(android.R.id.title);
 		title.setText(R.string.manage_subscription);
+		AndroidUiHelper.updateVisibility(manageSubscription, visible);
 	}
 
-	private void setupLiveButton() {
+	private void setupLiveButton(boolean visible) {
 		View osmandLive = view.findViewById(R.id.osmand_live);
 		osmandLive.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setData(Uri.parse(getSubscriptionUrl()));
-				if (AndroidUtils.isIntentSafe(mapActivity, intent)) {
-					mapActivity.startActivity(intent);
-				}
+				LiveUpdatesFragment.showInstance(activity.getSupportFragmentManager(), null);
 			}
 		});
 		ImageView icon = osmandLive.findViewById(android.R.id.icon);
@@ -109,7 +108,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 
 		title.setText(R.string.live_updates);
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_osm_live));
-		AndroidUiHelper.updateVisibility(osmandLive, purchases.isLiveUpdatesSubscription(purchase));
+		AndroidUiHelper.updateVisibility(osmandLive, visible);
 	}
 
 	private void setupPurchaseCard(@NonNull InAppPurchase purchase) {
@@ -214,16 +213,5 @@ public class InAppPurchaseCard extends MapBaseCard {
 	@DrawableRes
 	private static int getBackgroundRes(@NonNull SubscriptionState state) {
 		return state.isActive() ? R.drawable.bg_osmand_live_active : R.drawable.bg_osmand_live_cancelled;
-	}
-
-	private String getSubscriptionUrl() {
-		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-		if (purchaseHelper != null && purchaseHelper.getFullVersion() != null) {
-			String sku = purchaseHelper.getFullVersion().getSku();
-			return String.format(PLAY_STORE_SUBSCRIPTION_DEEPLINK_URL,
-					sku, mapActivity.getPackageName());
-		} else {
-			return PLAY_STORE_SUBSCRIPTION_URL;
-		}
 	}
 }

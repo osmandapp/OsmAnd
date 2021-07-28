@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
 	<string name="map_widget_map_rendering">Pasqyrim i hartës</string>
     <string name="app_mode_hiking">Eskursion</string>
     <string name="app_mode_motorcycle">Motoçikletë</string>

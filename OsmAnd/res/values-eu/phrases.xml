@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shop">Denda</string>
     <string name="poi_shop_food">Auzoko denda eta supermerkatua</string>
@@ -79,7 +79,7 @@
     <string name="poi_curtain">Errezel-denda</string>
     <string name="poi_doors">Ateak</string>
     <string name="poi_erotic">Denda erotikoa</string>
-    <string name="poi_fashion">Moda denda</string>
+    
     <string name="poi_florist">Loradenda</string>
     <string name="poi_furniture">Altzari denda</string>
     <string name="poi_gift">Opari denda</string>
@@ -450,7 +450,7 @@
     <string name="poi_parking_surface">Mota: gainazala</string>
     <string name="poi_military_danger_area">Zonalde arriskutsua</string>
     <string name="poi_highway_crossing">Zebrabidea</string>
-    <string name="poi_tableware">Ontziteria denda</string>
+    
     <string name="poi_traffic_calming_choker">Estutzea</string>
     <string name="poi_energy">Energia hornitzailea</string>
     <string name="poi_atv">Quad denda</string>
@@ -496,7 +496,7 @@
     <string name="poi_bailiff">Udaltzaina</string>
     <string name="poi_prosecutor">Fiskala</string>
     <string name="poi_pension_fund">Pentsio fondoa</string>
-    <string name="poi_office_administrative">Administrazioaren bulegoa</string>
+    
     <string name="poi_customs">Aduana</string>
     <string name="poi_country">Herrialdea</string>
     <string name="poi_city">Hiria</string>
@@ -1730,7 +1730,7 @@
     <string name="poi_water_works">Edateko uren araztegia</string>
     <string name="poi_waterway_turning_point">Ubidearen biraketa puntua</string>
     <string name="poi_groyne">Olatu horma</string>
-    <string name="poi_power_cable_distribution_cabinet">Kableen banatze armairua</string>
+    
     <string name="poi_brownfield">Kutsaturiko orubea</string>
     <string name="poi_greenfield">Orubea</string>
     <string name="poi_mineshaft">Meazulo</string>
@@ -3457,7 +3457,7 @@
     <string name="poi_forestry_allotment">Seinale zutoina: baso banaketa</string>
     <string name="poi_nuclear_explosion_salvo_first_detonation">Leherketa salbuespena: salbuespen test baten lehenengo detonazioa</string>
     <string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Eztanda salbuespena: salbuespen proba baten bigarren edo geroago detonazioa</string>
-    <string name="poi_mdf">Banaketa-marko nagusia</string>
+    
     <string name="poi_climbing_boulder_yes">Boulder: bai</string>
     <string name="poi_climbing_boulder_no">Boulder: ez</string>
     <string name="poi_climbing_summit_log_yes">Eskalatutako tontorreko liburua: bai</string>

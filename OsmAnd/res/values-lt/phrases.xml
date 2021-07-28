@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shop">Parduotuvė</string>
     <string name="poi_shop_food">Maisto parduotuvė ir supermarketas</string>
@@ -97,7 +97,7 @@
     <string name="poi_copyshop">Kopijavimas</string>
     <string name="poi_fabric">Audinių parduotuvė</string>
     <string name="poi_doityourself">Statybinių prekių parduotuvė</string>
-    <string name="poi_fashion">Rūbų parduotuvė</string>
+    
     <string name="poi_fishing">Žvejybos reikmenys</string>
     <string name="poi_free_flying">Laisvo kritimo skrydžio prekės</string>
     <string name="poi_garden_centre">Sodo prekės</string>
@@ -376,7 +376,7 @@
     <string name="poi_second_hand">Naudotų daiktų parduotuvė</string>
     <string name="poi_scuba_diving_shop">Nardymo prekių parduotuvė</string>
     <string name="poi_ship_chandler">Laivų aptrūpinimo agentas</string>
-    <string name="poi_tableware">Stalo įrankių parduotuvė</string>
+    
     <string name="poi_trade">Turgelis</string>
     <string name="poi_tyres">Padangų parduotuvė</string>
     <string name="poi_animal_shelter_purpose">Tikslas</string>

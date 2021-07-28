@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_palaeontological_site">Jaciment paleontològic</string>
     <string name="poi_bakery">Fleca</string>
@@ -131,7 +131,7 @@
     <string name="poi_bicycle_parking">Aparcament per bicicletes</string>
     <string name="poi_houseware">Complements per la llar</string>
     <string name="poi_stationery">Papereria</string>
-    <string name="poi_tableware">Parament de la taula</string>
+    
     <string name="poi_toys">Botiga de joguines</string>
     <string name="poi_trade">Materials de construcció</string>
     <string name="poi_variety_store">Botiga de descompte</string>
@@ -425,7 +425,7 @@
     <string name="poi_gasometer">Gasòmetre</string>
     <string name="poi_silo">Sitja</string>
     <string name="poi_storage_tank">Dipòsit d\'emmagatzematge</string>
-    <string name="poi_office_administrative">Administració local</string>
+    
     <string name="poi_quarter">Barri</string>
     <string name="poi_neighbourhood">Veïnatge</string>
     <string name="poi_locality">Assentament</string>
@@ -805,7 +805,7 @@
     <string name="poi_entrance_exit">Sortida</string>
     <string name="poi_coffee">Coffee shop</string>
     <string name="poi_pasta">Botiga de pasta</string>
-    <string name="poi_fashion">Botiga de moda</string>
+    
     <string name="poi_free_flying">Botiga de vol lliure</string>
     <string name="poi_garden_furniture">Mobles de jardí</string>
     <string name="poi_music">Botiga de música</string>
@@ -827,7 +827,7 @@
     <string name="poi_kent_carriage_gap">Pas exclusiu per a carruatges</string>
     <string name="poi_breakwater">Escullera</string>
     <string name="poi_groyne">Espigó</string>
-    <string name="poi_power_cable_distribution_cabinet">Quadre elèctric</string>
+    
     <string name="poi_crane">Grua</string>
     <string name="poi_cutline">Tallafoc</string>
     <string name="poi_tree">Arbre</string>
@@ -2641,7 +2641,7 @@
     <string name="poi_aquaculture_shrimp">Aqüicultura: gambes</string>
     <string name="poi_aquaculture_fish">Aqüicultura: peix</string>
     <string name="poi_aquaculture_mussels">Aqüicultura: musclos</string>
-    <string name="poi_mdf">Central de comunicacions</string>
+    
     <string name="poi_traffic_mirror">Mirall convex</string>
     <string name="poi_fire_operator">Codi de bombers</string>
     <string name="poi_public_bookcase_type_phone_box">Tipus: cabina telefònica</string>
