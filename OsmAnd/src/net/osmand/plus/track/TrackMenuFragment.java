@@ -388,7 +388,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (menuType == TrackMenuType.OVERVIEW && isPortrait()) {
 			calculateLayoutAndShowHeader();
 		} else {
-			calculateLayoutAndUpdateMenuState();
+			calculateLayoutAndUpdateMenuState(null);
 		}
 	}
 
@@ -1111,8 +1111,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		bottomNav.setOnNavigationItemSelectedListener(item -> {
 			for (TrackMenuType type : TrackMenuType.values()) {
 				if (type.menuItemId == item.getItemId()) {
-					menuTypeChanged = menuType != type;
+					TrackMenuType prevMenuType = menuType;
 					menuType = type;
+					menuTypeChanged = prevMenuType != type;
 					setupCards();
 					updateHeader();
 					updateHeadersBottomShadow();
@@ -1121,7 +1122,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 							&& getCurrentMenuState() != MenuState.FULL_SCREEN) {
 						calculateLayoutAndShowHeader();
 					} else {
-						calculateLayoutAndUpdateMenuState();
+						calculateLayoutAndUpdateMenuState(prevMenuType);
 					}
 					break;
 				}
@@ -1130,7 +1131,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		});
 	}
 
-	private void calculateLayoutAndUpdateMenuState() {
+	private void calculateLayoutAndUpdateMenuState(@Nullable TrackMenuType prevMenuType) {
+		if (getCurrentMenuState() == 2 && overviewInitialHeight && prevMenuType == TrackMenuType.OVERVIEW) {
+			slideDown();
+		}
 		runLayoutListener(new Runnable() {
 			@Override
 			public void run() {
