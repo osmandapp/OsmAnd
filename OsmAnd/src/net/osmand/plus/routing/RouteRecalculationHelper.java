@@ -1,9 +1,12 @@
 package net.osmand.plus.routing;
 
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -27,6 +30,7 @@ class RouteRecalculationHelper {
 
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2 * 60 * 1000;
+	private static final long SUGGEST_MAPS_ONLINE_SEARCH_WAITING_TIME = 60000;
 
 	private final OsmandApplication app;
 	private final RoutingHelper routingHelper;
@@ -75,13 +79,24 @@ class RouteRecalculationHelper {
 		evalWaitInterval = 0;
 	}
 
-	void stopCalculation() {
+	public boolean isMissingMapsSearching() {
 		synchronized (routingHelper) {
-			for (Entry<Future<?>, RouteRecalculationTask> taskFuture : tasksMap.entrySet()) {
-				taskFuture.getValue().stopCalculation();
-				taskFuture.getKey().cancel(false);
+			RouteRecalculationTask lastTask = this.lastTask;
+			if (isRouteBeingCalculated() && lastTask != null) {
+				return lastTask.isMissingMapsSearching();
 			}
 		}
+		return false;
+	}
+
+	boolean startMissingMapsOnlineSearch() {
+		synchronized (routingHelper) {
+			RouteRecalculationTask lastTask = this.lastTask;
+			if (isRouteBeingCalculated() && lastTask != null) {
+				return lastTask.startMissingMapsOnlineSearch();
+			}
+		}
+		return false;
 	}
 
 	void stopCalculationIfParamsNotChanged() {
@@ -98,6 +113,15 @@ class RouteRecalculationHelper {
 				if (isFollowingMode()) {
 					getVoiceRouter().announceBackOnRoute();
 				}
+			}
+		}
+	}
+
+	void stopCalculation() {
+		synchronized (routingHelper) {
+			for (Entry<Future<?>, RouteRecalculationTask> taskFuture : tasksMap.entrySet()) {
+				taskFuture.getValue().stopCalculation();
+				taskFuture.getKey().cancel(false);
 			}
 		}
 	}
@@ -237,25 +261,31 @@ class RouteRecalculationHelper {
 			progressRoute = this.progressRoute;
 		}
 		if (progressRoute != null) {
-			app.runInUIThread(new Runnable() {
-
-				@Override
-				public void run() {
-					RouteCalculationProgress calculationProgress = params.calculationProgress;
-					if (isRouteBeingCalculated()) {
-						if (lastTask != null && lastTask.params == params) {
-							progressRoute.updateProgress((int) calculationProgress.getLinearProgress());
-							if (calculationProgress.requestPrivateAccessRouting) {
-								progressRoute.requestPrivateAccessRouting();
-							}
-							updateProgress(params);
-						}
-					} else {
+			app.runInUIThread(() -> {
+				RouteCalculationProgress calculationProgress = params.calculationProgress;
+				if (isRouteBeingCalculated()) {
+					boolean routeCalculationStarted = calculationProgress.routeCalculationStartTime != 0;
+					if (lastTask != null && lastTask.params == params) {
+						progressRoute.updateProgress((int) calculationProgress.getLinearProgress());
 						if (calculationProgress.requestPrivateAccessRouting) {
 							progressRoute.requestPrivateAccessRouting();
 						}
-						progressRoute.finish();
+						if (routeCalculationStarted) {
+							if (lastTask.missingMaps != null) {
+								progressRoute.updateMissingMaps(lastTask.missingMaps, true);
+							} else if (System.currentTimeMillis() > calculationProgress.routeCalculationStartTime + SUGGEST_MAPS_ONLINE_SEARCH_WAITING_TIME) {
+								progressRoute.updateMissingMaps(null, true);
+							} else if (calculationProgress.missingMaps != null) {
+								progressRoute.updateMissingMaps(calculationProgress.missingMaps, false);
+							}
+						}
+						updateProgress(params);
 					}
+				} else {
+					if (calculationProgress.requestPrivateAccessRouting) {
+						progressRoute.requestPrivateAccessRouting();
+					}
+					progressRoute.finish();
 				}
 			}, 300);
 		}
@@ -273,13 +303,16 @@ class RouteRecalculationHelper {
 		}
 	}
 
-	private static class RouteRecalculationTask implements Runnable  {
+	private static class RouteRecalculationTask implements Runnable {
 
 		private final RouteRecalculationHelper routingThreadHelper;
 		private final RoutingHelper routingHelper;
 		private final RouteCalculationParams params;
 		private final boolean paramsChanged;
 		private final boolean updateProgress;
+
+		private MissingMapsOnlineSearchTask missingMapsOnlineSearchTask;
+		private List<WorldRegion> missingMaps;
 
 		String routeCalcError;
 		String routeCalcErrorShort;
@@ -302,8 +335,23 @@ class RouteRecalculationHelper {
 			return paramsChanged;
 		}
 
+		public boolean isMissingMapsSearching() {
+			return missingMapsOnlineSearchTask != null && missingMaps == null;
+		}
+
 		public void stopCalculation() {
 			params.calculationProgress.isCancelled = true;
+		}
+
+		public boolean startMissingMapsOnlineSearch() {
+			if (missingMapsOnlineSearchTask == null) {
+				missingMapsOnlineSearchTask = new MissingMapsOnlineSearchTask(params, missingMaps -> {
+					RouteRecalculationTask.this.missingMaps = missingMaps;
+				});
+				missingMapsOnlineSearchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				return true;
+			}
+			return false;
 		}
 
 		private OsmandSettings getSettings() {
@@ -312,12 +360,7 @@ class RouteRecalculationHelper {
 
 		private void showMessage(final String msg) {
 			final OsmandApplication app = routingHelper.getApplication();
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					app.showToastMessage(msg);
-				}
-			});
+			app.runInUIThread(() -> app.showToastMessage(msg));
 		}
 
 		@Override
@@ -337,7 +380,7 @@ class RouteRecalculationHelper {
 			}
 			RouteCalculationResult prev = routingHelper.getRoute();
 			OsmandApplication app = routingHelper.getApplication();
-			if (res.isCalculated()) {
+			if (res.isCalculated() || res.hasMissingMaps()) {
 				if (params.alternateResultListener != null) {
 					params.alternateResultListener.onRouteCalculated(res);
 				} else {

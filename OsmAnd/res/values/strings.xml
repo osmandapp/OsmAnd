@@ -11,7 +11,11 @@
 	Thx - Hardy
 
 -->
-
+    <string name="online_maps_searching_descr">Online maps search is running.</string>
+    <string name="online_maps_required_descr">Unfortunately, OsmAnd could not find (calculate) a route suitable for your settings.\n\nPerhaps some maps are not loaded. You can run online checking the necessary maps.</string>
+    <string name="offline_maps_required_descr">Additional offline maps are required to calculate the route.</string>
+    <string name="online_direct_line_maps_link">Check the necessary maps</string>
+    <string name="direct_line_maps_required_descr">Route calculation takes longer than usual. \n\nPerhaps some maps are not loaded.</string>
     <string name="setting_supported_by_style">This setting is supported by map style \'%1$s\'</string>
     <string name="travel_routes">Travel routes</string>
     <string name="walking_route_osmc_description">Assign color for routes based on their individually locally assigned color (if present on OpenStreetMap)  and type (international, regional, local)</string>

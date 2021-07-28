@@ -35,6 +35,15 @@
 		android:minHeight="0dp"
 		android:visibility="visible" />
 
+	<ProgressBar
+		android:id="@+id/progress_bar_top"
+		style="?android:attr/progressBarStyleHorizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding_small"
+		android:minHeight="0dp"
+		android:visibility="gone" />
+
 	<net.osmand.plus.widgets.TextViewEx
 		android:id="@+id/description"
 		android:layout_width="match_parent"

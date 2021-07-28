@@ -30,8 +30,7 @@
 			android:textSize="@dimen/default_list_text_size"
 			android:layout_width="wrap_content"
 			android:textColor="?android:textColorPrimary"
-			android:layout_height="wrap_content"
-			tools:text="@string/lorem_ipsum"/>
+			android:layout_height="wrap_content"/>
 
 		<LinearLayout
 			android:layout_width="fill_parent"
@@ -53,7 +52,6 @@
 				android:layout_height="wrap_content"
 				android:textColor="@color/color_distance"
 				android:textSize="@dimen/default_sub_text_size"
-				tools:text="@string/lorem_ipsum"
 				android:maxLines="1"/>
 
 			<TextView
@@ -62,7 +60,6 @@
 				android:layout_height="wrap_content"
 				android:textSize="@dimen/default_sub_text_size"
 				android:textColor="@color/color_ok"
-				tools:text="@string/lorem_ipsum"
 				android:visibility="gone"
 				android:maxLines="1"/>
 

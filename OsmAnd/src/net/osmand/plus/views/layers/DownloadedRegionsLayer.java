@@ -221,7 +221,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					List<BinaryMapDataObject> downloadedObjects = new ArrayList<>();
 					List<BinaryMapDataObject> backupedObjects = new ArrayList<>();
 					for (BinaryMapDataObject o : currentObjects) {
-						boolean downloaded = checkIfObjectDownloaded(osmandRegions.getDownloadName(o));
+						boolean downloaded = rm.checkIfObjectDownloaded(osmandRegions.getDownloadName(o));
 						boolean backuped = checkIfObjectBackuped(osmandRegions.getDownloadName(o));
 						if (downloaded) {
 							downloadedObjects.add(o);
@@ -266,7 +266,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				if (regionData != null && regionData.isRegionMapDownload()) {
 					String regionDownloadName = regionData.getRegionDownloadName();
 					if (regionDownloadName != null) {
-						if (checkIfObjectDownloaded(regionDownloadName)) {
+						if (rm.checkIfObjectDownloaded(regionDownloadName)) {
 							hideDownloadMapToolbar();
 							return;
 						} else {
@@ -357,14 +357,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			}
 		}
 		canvas.drawPath(path, paint);
-	}
-
-	private boolean checkIfObjectDownloaded(String downloadName) {
-		final String regionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName)
-				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		final String roadsRegionName = Algorithms.capitalizeFirstLetterAndLowercase(downloadName) + ".road"
-				+ IndexConstants.BINARY_MAP_INDEX_EXT;
-		return rm.getIndexFileNames().containsKey(regionName) || rm.getIndexFileNames().containsKey(roadsRegionName);
 	}
 
 	private boolean checkIfObjectBackuped(String downloadName) {
@@ -479,7 +471,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 						WorldRegion rd = osmandRegions.getRegionData(fullName);
 						if (rd != null && rd.isRegionMapDownload() && rd.getRegionDownloadName() != null) {
 							String name = rd.getLocaleName();
-							if (checkIfObjectDownloaded(rd.getRegionDownloadName())) {
+							if (rm.checkIfObjectDownloaded(rd.getRegionDownloadName())) {
 								return null;
 							}
 							if (!set.add(name)) {

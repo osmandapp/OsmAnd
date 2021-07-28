@@ -95,8 +95,7 @@
                     osmand:drawableEndCompat="@drawable/ic_action_arrow_drop_down"
                     android:hint="@string/poi_dialog_poi_type"
                     android:imeOptions="actionSend"
-                    android:inputType="text"
-                    tools:text="@string/lorem_ipsum" />
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

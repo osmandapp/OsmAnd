@@ -63,6 +63,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -582,6 +583,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						dlg.show();
 					}
 				}
+			}
+
+			@Override
+			public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+				mapRouteInfoMenu.updateSuggestedMissingMaps(missingMaps, onlineSearch);
 			}
 
 			@Override
