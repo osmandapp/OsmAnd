@@ -65,11 +65,18 @@ public class InAppPurchaseCard extends MapBaseCard {
 		} else {
 			setupPurchaseCard(purchase);
 		}
-		setupManageButton();
-		setupLiveButton();
+
+		boolean manageVisible = purchase instanceof InAppSubscription;
+		boolean liveVisible = purchases.isLiveUpdatesSubscription(purchase);
+
+		setupLiveButton(liveVisible);
+		setupManageButton(manageVisible);
+
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_divider), manageVisible || liveVisible);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), manageVisible && liveVisible);
 	}
 
-	private void setupManageButton() {
+	private void setupManageButton(boolean visible) {
 		View manageSubscription = view.findViewById(R.id.manage_subscription);
 		manageSubscription.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -85,9 +92,10 @@ public class InAppPurchaseCard extends MapBaseCard {
 
 		TextView title = manageSubscription.findViewById(android.R.id.title);
 		title.setText(R.string.manage_subscription);
+		AndroidUiHelper.updateVisibility(manageSubscription, visible);
 	}
 
-	private void setupLiveButton() {
+	private void setupLiveButton(boolean visible) {
 		View osmandLive = view.findViewById(R.id.osmand_live);
 		osmandLive.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -100,7 +108,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 
 		title.setText(R.string.live_updates);
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_osm_live));
-		AndroidUiHelper.updateVisibility(osmandLive, purchases.isLiveUpdatesSubscription(purchase));
+		AndroidUiHelper.updateVisibility(osmandLive, visible);
 	}
 
 	private void setupPurchaseCard(@NonNull InAppPurchase purchase) {
