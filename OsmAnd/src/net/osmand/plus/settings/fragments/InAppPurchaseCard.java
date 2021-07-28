@@ -85,6 +85,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 
 		TextView title = manageSubscription.findViewById(android.R.id.title);
 		title.setText(R.string.manage_subscription);
+		AndroidUiHelper.updateVisibility(manageSubscription, purchase instanceof InAppSubscription);
 	}
 
 	private void setupLiveButton() {
