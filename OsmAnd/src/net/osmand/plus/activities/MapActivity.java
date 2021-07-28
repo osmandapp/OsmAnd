@@ -534,9 +534,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
 					dashboardOnMap.updateRouteCalculationProgress(0);
 				}
-				if (mapRouteInfoMenu.getSuggestedMaps() != null) {
-					mapRouteInfoMenu.clearSuggestedMissingMaps();
-				}
 			}
 
 			@Override

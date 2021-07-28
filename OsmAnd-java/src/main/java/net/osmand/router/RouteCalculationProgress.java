@@ -44,7 +44,6 @@ public class RouteCalculationProgress {
 
 	public long routeCalculationStartTime;
 	public List<WorldRegion> missingMaps;
-	public boolean missingMapsOnlineSearchGranted;
 
 	private static final float INITIAL_PROGRESS = 0.05f;
 	private static final float FIRST_ITERATION = 0.72f;

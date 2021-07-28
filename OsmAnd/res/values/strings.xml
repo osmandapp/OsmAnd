@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="online_maps_searching_descr">Online maps search is running.</string>
     <string name="online_maps_required_descr">Unfortunately, OsmAnd could not find (calculate) a route suitable for your settings.\n\nPerhaps some maps are not loaded. You can run online checking the necessary maps.</string>
     <string name="offline_maps_required_descr">Additional offline maps are required to calculate the route.</string>
     <string name="online_direct_line_maps_link">Check the necessary maps</string>

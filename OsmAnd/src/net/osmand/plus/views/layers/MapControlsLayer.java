@@ -453,6 +453,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		MapActivity.clearPrevActivityIntent();
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+			mapRouteInfoMenu.clearSuggestedMissingMaps();
 			TargetPoint start = getTargets().getPointToStart();
 			if (start != null) {
 				mapActivity.getMapActions().enterRoutePlanningMode(

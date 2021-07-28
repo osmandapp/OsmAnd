@@ -1,5 +1,6 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -34,21 +35,30 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 	private final List<WorldRegion> suggestedMaps;
 	private final boolean hasPrecalculatedMissingMaps;
 	private final boolean suggestedMapsOnlineSearch;
+	private final boolean missingMapsOnlineSearching;
 
 	public SuggestionsMapsDownloadWarningCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
 		MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
-		hasPrecalculatedMissingMaps = !Algorithms.isEmpty(mapRouteInfoMenu.getSuggestedMaps());
+		List<WorldRegion> precalculatedMissingMaps = mapRouteInfoMenu.getSuggestedMaps();
+		List<WorldRegion> calculatedMissingMaps = app.getRoutingHelper().getRoute().getMissingMaps();
+		hasPrecalculatedMissingMaps = !Algorithms.isEmpty(precalculatedMissingMaps);
 		suggestedMapsOnlineSearch = mapRouteInfoMenu.isSuggestedMapsOnlineSearch();
-		if (hasPrecalculatedMissingMaps || suggestedMapsOnlineSearch) {
-			suggestedMaps = mapActivity.getMapRouteInfoMenu().getSuggestedMaps();
+		missingMapsOnlineSearching = app.getRoutingHelper().isMissingMapsOnlineSearching();
+		if (missingMapsOnlineSearching) {
+			this.suggestedMaps = null;
 			imageId = R.drawable.ic_action_time_span;
-			title = suggestedMapsOnlineSearch
-					? mapActivity.getString(R.string.online_maps_required_descr)
-					: mapActivity.getString(R.string.direct_line_maps_required_descr);
-			linkText = mapActivity.getString(R.string.online_direct_line_maps_link);
+			title = mapActivity.getString(R.string.online_maps_searching_descr);
+			linkText = "";
+		} else if (suggestedMapsOnlineSearch) {
+			this.suggestedMaps = precalculatedMissingMaps;
+			imageId = R.drawable.ic_action_time_span;
+			title = mapActivity.getString(!hasPrecalculatedMissingMaps
+					? R.string.online_maps_required_descr : R.string.direct_line_maps_required_descr);
+			linkText = mapActivity.getString(!hasPrecalculatedMissingMaps
+					? R.string.online_direct_line_maps_link : R.string.welmode_download_maps);
 		} else {
-			suggestedMaps = app.getRoutingHelper().getRoute().getMissingMaps();
+			this.suggestedMaps = hasPrecalculatedMissingMaps ? precalculatedMissingMaps : calculatedMissingMaps;
 			imageId = R.drawable.ic_map;
 			title = mapActivity.getString(R.string.offline_maps_required_descr);
 			linkText = mapActivity.getString(R.string.welmode_download_maps);
@@ -121,6 +131,9 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 		});
 		msDialog.setSelectionUpdateListener(this::updateSize);
 		msDialog.setOnApplySelectionListener(selItems -> {
+			mapActivity.getMapLayers().getMapControlsLayer().stopNavigationWithoutConfirm();
+			mapActivity.getMapRouteInfoMenu().resetRouteCalculation();
+
 			List<IndexItem> indexes = new ArrayList<>();
 			for (SelectableItem item : selItems) {
 				IndexItem index = getIndexItem((DownloadItem) item.getObject());
@@ -130,6 +143,10 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 			}
 			IndexItem[] indexesArray = new IndexItem[indexes.size()];
 			new DownloadValidationManager(app).startDownload(mapActivity, indexes.toArray(indexesArray));
+
+			Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getDownloadActivity());
+			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			mapActivity.startActivity(newIntent);
 		});
 	}
 
@@ -208,9 +225,15 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 	@Override
 	protected void onLinkClicked() {
 		if (suggestedMapsOnlineSearch) {
-			app.getRoutingHelper().startMissingMapsOnlineSearch();
+			if (!hasPrecalculatedMissingMaps) {
+				app.getRoutingHelper().startMissingMapsOnlineSearch();
+				mapActivity.getMapRouteInfoMenu().updateMenu();
+			} else {
+				showMultipleSelectionDialog();
+			}
+		} else if (!missingMapsOnlineSearching) {
+			showMultipleSelectionDialog();
 		}
-		showMultipleSelectionDialog();
 	}
 
 	@Override
@@ -224,6 +247,8 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 			dialog.setCustomView(null);
 			dialog.setSelectedItems(allItems);
 			dialog.setItems(allItems);
+			dialog.onSelectedItemsChanged();
+			updateSize();
 		}
 	}
 

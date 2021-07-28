@@ -30,7 +30,7 @@ class RouteRecalculationHelper {
 
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2 * 60 * 1000;
-	private static final long SUGGEST_MAPS_ONLINE_SEARCH_WAITING_TIME = 6000;
+	private static final long SUGGEST_MAPS_ONLINE_SEARCH_WAITING_TIME = 60000;
 
 	private final OsmandApplication app;
 	private final RoutingHelper routingHelper;
@@ -275,9 +275,6 @@ class RouteRecalculationHelper {
 								progressRoute.updateMissingMaps(lastTask.missingMaps, true);
 							} else if (System.currentTimeMillis() > calculationProgress.routeCalculationStartTime + SUGGEST_MAPS_ONLINE_SEARCH_WAITING_TIME) {
 								progressRoute.updateMissingMaps(null, true);
-								if (calculationProgress.missingMapsOnlineSearchGranted) {
-									lastTask.startMissingMapsOnlineSearch();
-								}
 							} else if (calculationProgress.missingMaps != null) {
 								progressRoute.updateMissingMaps(calculationProgress.missingMaps, false);
 							}

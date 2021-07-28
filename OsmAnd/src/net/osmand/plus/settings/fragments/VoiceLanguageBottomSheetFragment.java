@@ -76,17 +76,13 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private IndexItem indexToSelectAfterDownload = null;
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, ApplicationMode appMode, boolean usedOnMap) {
-		try {
-			if (!fm.isStateSaved()) {
-				VoiceLanguageBottomSheetFragment fragment = new VoiceLanguageBottomSheetFragment();
-				fragment.setRetainInstance(true);
-				fragment.setAppMode(appMode);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+		if (!fm.isStateSaved()) {
+			VoiceLanguageBottomSheetFragment fragment = new VoiceLanguageBottomSheetFragment();
+			fragment.setRetainInstance(true);
+			fragment.setAppMode(appMode);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fm, TAG);
 		}
 	}
 

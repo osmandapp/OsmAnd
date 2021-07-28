@@ -712,7 +712,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				menuCards.add(new PublicTransportBetaWarningCard(mapActivity));
 			} else if (app.getRoutingHelper().isBoatMode()) {
 				menuCards.add(new NauticalBridgeHeightWarningCard(mapActivity));
-			} else if (hasPrecalculatedMissingMaps) {
+			} else if (hasPrecalculatedMissingMaps || suggestedMapsOnlineSearch) {
 				menuCards.add(new SuggestionsMapsDownloadWarningCard(mapActivity));
 			} else if (app.getTargetPointsHelper().hasTooLongDistanceToNavigate() && !hasCalculatedMissingMaps) {
 				menuCards.add(new LongDistanceWarningCard(mapActivity));
@@ -1560,9 +1560,13 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getMapControlsLayer().stopNavigation();
-			setRouteCalculationInProgress(false);
-			restoreCollapsedButtons();
+			resetRouteCalculation();
 		}
+	}
+
+	public void resetRouteCalculation() {
+		setRouteCalculationInProgress(false);
+		restoreCollapsedButtons();
 	}
 
 	private void clickRouteParams() {

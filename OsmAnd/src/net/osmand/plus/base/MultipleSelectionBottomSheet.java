@@ -92,7 +92,7 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 		super.notifyUiCreated();
 	}
 
-	private void onSelectedItemsChanged() {
+	public void onSelectedItemsChanged() {
 		updateSelectAllButton();
 		updateSelectedSizeView();
 		updateApplyButtonEnable();
