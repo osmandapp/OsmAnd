@@ -13,6 +13,7 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
+import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -118,18 +119,22 @@ public class RouteProvider {
 				if (calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute) {
 					res = calculateGpxRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
-					MissingMapsHelper missingMapsHelper = new MissingMapsHelper(params);
-					List<Location> points = missingMapsHelper.getStartFinishIntermediatePoints();
-					List<WorldRegion> missingMaps = missingMapsHelper.getMissingMaps(points);
-					List<Location> pathPoints = missingMapsHelper.getDistributedPathPoints(points);
-					if (!Algorithms.isEmpty(missingMaps)) {
-						res = new RouteCalculationResult("Additional maps available");
-						res.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
-					} else {
-						if (!missingMapsHelper.isAnyPointOnWater(pathPoints)) {
-							params.calculationProgress.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
-						}
+					if (params.inPublicTransportMode) {
 						res = findVectorMapsRoute(params, calcGPXRoute);
+					} else {
+						MissingMapsHelper missingMapsHelper = new MissingMapsHelper(params);
+						List<Location> points = missingMapsHelper.getStartFinishIntermediatePoints();
+						List<WorldRegion> missingMaps = missingMapsHelper.getMissingMaps(points);
+						List<Location> pathPoints = missingMapsHelper.getDistributedPathPoints(points);
+						if (!Algorithms.isEmpty(missingMaps)) {
+							res = new RouteCalculationResult("Additional maps available");
+							res.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
+						} else {
+							if (!missingMapsHelper.isAnyPointOnWater(pathPoints)) {
+								params.calculationProgress.missingMaps = missingMapsHelper.getMissingMaps(pathPoints);
+							}
+							res = findVectorMapsRoute(params, calcGPXRoute);
+						}
 					}
 				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
