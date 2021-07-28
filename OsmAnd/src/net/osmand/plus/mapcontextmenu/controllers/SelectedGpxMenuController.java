@@ -179,6 +179,11 @@ public class SelectedGpxMenuController extends MenuController {
 	}
 
 	@Override
+	public boolean shouldShowContextMarker() {
+		return false;
+	}
+
+	@Override
 	public Drawable getRightIcon() {
 		int color = isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 		return getIcon(R.drawable.ic_action_polygom_dark, color);
@@ -204,26 +209,33 @@ public class SelectedGpxMenuController extends MenuController {
 
 	public static class SelectedGpxPoint {
 
+		private final SelectedGpxFile selectedGpxFile;
+		private final WptPt selectedPoint;
 		private final WptPt prevPoint;
 		private final WptPt nextPoint;
-		private final WptPt selectedPoint;
-		private final SelectedGpxFile selectedGpxFile;
 		private final float bearing;
+		private final boolean showTrackPointMenu;
 
-		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint, WptPt nextPoint, float bearing) {
+		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint) {
+			this(selectedGpxFile, selectedPoint, null, null, Float.NaN, false);
+		}
+
+		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint,
+		                        WptPt nextPoint, float bearing, boolean showTrackPointMenu) {
 			this.prevPoint = prevPoint;
 			this.nextPoint = nextPoint;
 			this.selectedPoint = selectedPoint;
 			this.selectedGpxFile = selectedGpxFile;
 			this.bearing = bearing;
-		}
-
-		public WptPt getSelectedPoint() {
-			return selectedPoint;
+			this.showTrackPointMenu = showTrackPointMenu;
 		}
 
 		public SelectedGpxFile getSelectedGpxFile() {
 			return selectedGpxFile;
+		}
+
+		public WptPt getSelectedPoint() {
+			return selectedPoint;
 		}
 
 		public float getBearing() {
@@ -236,6 +248,10 @@ public class SelectedGpxMenuController extends MenuController {
 
 		public WptPt getNextPoint() {
 			return nextPoint;
+		}
+
+		public boolean shouldShowTrackPointMenu() {
+			return showTrackPointMenu;
 		}
 	}
 }

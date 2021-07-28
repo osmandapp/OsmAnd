@@ -39,7 +39,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FileUtils;
 import net.osmand.FileUtils.RenameCallback;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -138,6 +137,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private OsmandApplication app;
 	private TrackDisplayHelper displayHelper;
 	private SelectedGpxFile selectedGpxFile;
+	private GPXTrackAnalysis analyses;
 
 	private TrackMenuType menuType = TrackMenuType.OVERVIEW;
 	private SegmentsCard segmentsCard;
@@ -176,9 +176,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int menuHeaderHeight;
 	private int toolbarHeightPx;
 	private boolean adjustMapPosition = true;
+	private boolean menuTypeChanged = false;
 	private boolean overviewInitialHeight = true;
 	private int overviewInitialPosY;
-	private GPXTrackAnalysis analyses;
 
 	public enum TrackMenuType {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
@@ -684,14 +684,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int currentMenuState, int previousMenuState) {
 		super.onContextMenuStateChanged(fragment, currentMenuState, previousMenuState);
 
-		boolean changed = currentMenuState != previousMenuState;
-		if (changed) {
+		boolean menuStateChanged = currentMenuState != previousMenuState;
+		if (menuStateChanged) {
 			updateControlsVisibility(true);
 			boolean backButtonVisible = !Algorithms.isEmpty(returnScreenName) && currentMenuState == MenuState.HALF_SCREEN;
 			AndroidUiHelper.updateVisibility(backButtonContainer, backButtonVisible);
 		}
-		if (currentMenuState != MenuState.FULL_SCREEN && (changed || adjustMapPosition)) {
+		if (currentMenuState != MenuState.FULL_SCREEN && (menuStateChanged || adjustMapPosition)
+				&& !menuTypeChanged) {
 			adjustMapPosition(getMenuStatePosY(currentMenuState));
+		}
+		if (menuStateChanged) {
+			menuTypeChanged = false;
 		}
 	}
 
@@ -1107,6 +1111,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		bottomNav.setOnNavigationItemSelectedListener(item -> {
 			for (TrackMenuType type : TrackMenuType.values()) {
 				if (type.menuItemId == item.getItemId()) {
+					menuTypeChanged = menuType != type;
 					menuType = type;
 					setupCards();
 					updateHeader();
