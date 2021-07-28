@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="transport_Routes">راستے</string>
     <string name="transport_Stop">رکو</string>
@@ -9,6 +9,6 @@
     <string name="shared_string_min_height">کم سے کم اونچائی</string>
     <string name="shared_string_max_height">زیادہ سے زیادہ اونچائی</string>
     <string name="use_system_language">سسٹم کی زبان استعمال کریں</string>
-    <string name="language_description"></string>
+    <string name="language_description"/>
     <string name="tts_description">ٹیکسٹ-ٹو-سپیچ(ٹی- ٹی ایس) تمام قسم کے گلی ناموں، موڑ کی ھدایات، پی او آئ کے ناموں وغیرہ کا تلفظ کر سکتا ھے۔</string>
 </resources>

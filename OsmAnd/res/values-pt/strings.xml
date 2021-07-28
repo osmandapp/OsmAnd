@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barreira</string>
@@ -3915,7 +3915,7 @@
     <string name="routing_engine_vehicle_type_foot">A pé</string>
     <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
     <string name="routing_engine_vehicle_type_car">Carro</string>
-    <string name="message_error_recheck_parameters">Erro, verifique novamente os parâmetros</string>
+    
     <string name="copy_address">Copiar endereço</string>
     <string name="online_routing_engine">Mecanismo de roteamento online</string>
     <string name="online_routing_engines">Mecanismos de roteamento online</string>

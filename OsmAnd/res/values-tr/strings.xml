@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="close_changeset">Değişiklik listesini kapat</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması yüklü değil. Google Play\'de ara\?</string>
@@ -4084,7 +4084,7 @@
     <string name="announce_when_exceeded">Aşıldığında duyur</string>
     <string name="user_points">Kullanıcı puanları</string>
     <string name="output">Çıkış</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
+    
     <string name="shared_string_feet">fit</string>
     <string name="srtm_unit_format">Eş yükselti eğrileri birimi çeşidi</string>
     <string name="srtm_download_list_help_message">OsmAnd, metre ve fit cinsinden eş yükselti eğrileri verileri sağlar. Biçimi değiştirmek için dosyayı yeniden indirmeniz gerekecek.</string>

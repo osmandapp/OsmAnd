@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="speak_pedestrian">Piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styl aŭtadaroh</string>
