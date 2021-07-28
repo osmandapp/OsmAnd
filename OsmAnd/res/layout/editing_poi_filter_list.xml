@@ -22,6 +22,5 @@
 		android:layout_width="fill_parent"
         android:layout_height="wrap_content"
 		android:ellipsize="end"
-		android:maxLines="1"
-		tools:text="@string/lorem_ipsum"/>
+		android:maxLines="1"/>
 </LinearLayout>

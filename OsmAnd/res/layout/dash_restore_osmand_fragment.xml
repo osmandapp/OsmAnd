@@ -38,8 +38,7 @@
     android:layout_marginStart="@dimen/subHeaderMarginLeft"
     android:layout_marginLeft="@dimen/subHeaderMarginLeft"
     android:layout_marginEnd="@dimen/subHeaderMarginRight"
-    android:layout_weight="1"
-    tools:text="@string/lorem_ipsum"/>
+    android:layout_weight="1"/>
   <View
     android:layout_width="match_parent"
     android:layout_height="1dp"

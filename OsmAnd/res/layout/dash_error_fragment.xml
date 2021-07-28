@@ -40,8 +40,7 @@
 			android:layout_gravity="center_horizontal"
 			android:layout_marginBottom="@dimen/subHeaderPadding"
 			android:layout_marginTop="@dimen/subHeaderPadding"
-			android:textColor="?android:textColorPrimary"
-			tools:text="@string/lorem_ipsum"/>
+			android:textColor="?android:textColorPrimary"/>
 	</LinearLayout>
 
 	<View

@@ -95,8 +95,7 @@
 								android:paddingEnd="@dimen/content_padding_small"
 								android:paddingRight="@dimen/content_padding_small"
 								android:scrollHorizontally="false"
-								android:textSize="@dimen/default_list_text_size"
-								tools:text="@string/lorem_ipsum" />
+								android:textSize="@dimen/default_list_text_size" />
 
 						</com.google.android.material.textfield.TextInputLayout>
 
@@ -148,8 +147,7 @@
 							android:paddingLeft="@dimen/content_padding_small"
 							android:paddingEnd="@dimen/content_padding_small"
 							android:paddingRight="@dimen/content_padding_small"
-							android:textSize="@dimen/default_list_text_size"
-							tools:text="@string/lorem_ipsum" />
+							android:textSize="@dimen/default_list_text_size" />
 
 					</com.google.android.material.textfield.TextInputLayout>
 				</LinearLayout>
@@ -241,8 +239,7 @@
 							android:paddingLeft="@dimen/content_padding_small"
 							android:paddingEnd="@dimen/content_padding_small"
 							android:paddingRight="@dimen/content_padding_small"
-							android:textSize="@dimen/default_list_text_size"
-							tools:text="@string/lorem_ipsum" />
+							android:textSize="@dimen/default_list_text_size"/>
 
 					</com.google.android.material.textfield.TextInputLayout>
 				</LinearLayout>
