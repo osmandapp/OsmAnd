@@ -386,7 +386,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public void contextMenuFragment(final FragmentActivity activity, final Fragment fragment, final Object info, ContextMenuAdapter adapter) {
 		if (fragment instanceof AvailableGPXFragment) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, activity)
-					.setIcon(R.drawable.ic_action_export)
+					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 
 						@Override
@@ -403,14 +403,14 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		if (fragment instanceof AvailableGPXFragment) {
 			final AvailableGPXFragment f = ((AvailableGPXFragment) fragment);
 			optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.local_index_mi_upload_gpx, activity)
-					.setIcon(R.drawable.ic_action_export)
+					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
 					.setColor(app, R.color.color_white)
 					.setListener(new ItemClickListener() {
 
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-							f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_export,
-									R.drawable.ic_action_export, new OnClickListener() {
+							f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
+									R.drawable.ic_action_upload_to_openstreetmap, new OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
 											List<GpxInfo> selectedItems = f.getSelectedItems();

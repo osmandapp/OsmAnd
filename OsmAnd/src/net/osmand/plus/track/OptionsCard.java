@@ -264,7 +264,7 @@ public class OptionsCard extends MapBaseCard {
 		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null && selectedGpxFile.getTrackAnalysis(app).isTimeMoving()) {
 			return new SimpleBottomSheetItem.Builder()
-					.setIcon(getActiveIcon(R.drawable.ic_action_export))
+					.setIcon(getActiveIcon(R.drawable.ic_action_upload_to_openstreetmap))
 					.setTitle(app.getString(R.string.upload_to_openstreetmap))
 					.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 					.setOnClickListener(new OnClickListener() {

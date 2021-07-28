@@ -98,16 +98,23 @@ public class MissingMapsHelper {
 			final Location l = points.get(i);
 			LatLon latLonPoint = new LatLon(l.getLatitude(), l.getLongitude());
 			List<WorldRegion> worldRegions = params.ctx.getRegions().getWorldRegionsAt(latLonPoint);
+			Set<WorldRegion> regions = new LinkedHashSet<>();
 			for (WorldRegion region : worldRegions) {
 				String mapName = region.getRegionDownloadName();
 				String countryMapName = region.getSuperregion().getRegionDownloadName();
 				List<WorldRegion> subregions = region.getSubregions();
 				boolean isDownloaded = params.ctx.getResourceManager().checkIfObjectDownloaded(mapName);
 				boolean isCountry = Algorithms.isEmpty(countryMapName) && !subregions.isEmpty();
-				if (!isDownloaded && !isCountry) {
-					result.add(region);
+				if (!isCountry) {
+					if (!isDownloaded) {
+						regions.add(region);
+					} else {
+						regions.clear();
+						break;
+					}
 				}
 			}
+			result.addAll(regions);
 		}
 		return new ArrayList<>(result);
 	}
