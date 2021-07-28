@@ -268,15 +268,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		List<SelectedGpxFile> selectedGPXFiles = new ArrayList<>(selectedGpxHelper.getSelectedGPXFiles());
 
-		Iterator<SelectedGpxFile> iterator = selectedGPXFiles.iterator();
-		while (iterator.hasNext()) {
-			SelectedGpxFile selectedGpxFile = iterator.next();
-			RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
-			boolean isRouting = routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode();
-			if (isRouting && selectedGpxFile.isFollowTrack(view.getApplication()) && !showTrackToFollow()) {
-				iterator.remove();
-			}
-		}
 		cache.clear();
 		removeCachedUnselectedTracks(selectedGPXFiles);
 		if (!selectedGPXFiles.isEmpty()) {
