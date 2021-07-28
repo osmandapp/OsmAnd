@@ -34,9 +34,6 @@ public class InAppPurchaseCard extends MapBaseCard {
 	private final InAppPurchaseHelper purchaseHelper;
 	private final InAppPurchases purchases;
 
-	private View osmandLive;
-	private View manageSubscription;
-
 	public InAppPurchaseCard(@NonNull MapActivity mapActivity, @NonNull InAppPurchaseHelper purchaseHelper, @NonNull InAppPurchase purchase) {
 		super(mapActivity);
 		this.purchase = purchase;
@@ -68,17 +65,19 @@ public class InAppPurchaseCard extends MapBaseCard {
 		} else {
 			setupPurchaseCard(purchase);
 		}
-		setupManageButton();
-		setupLiveButton();
 
-		boolean liveVisible = osmandLive.getVisibility() == View.VISIBLE;
-		boolean manageVisible = manageSubscription.getVisibility() == View.VISIBLE;
+		boolean manageVisible = purchase instanceof InAppSubscription;
+		boolean liveVisible = purchases.isLiveUpdatesSubscription(purchase);
+
+		setupLiveButton(liveVisible);
+		setupManageButton(manageVisible);
+
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_divider), manageVisible || liveVisible);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), manageVisible && liveVisible);
 	}
 
-	private void setupManageButton() {
-		manageSubscription = view.findViewById(R.id.manage_subscription);
+	private void setupManageButton(boolean visible) {
+		View manageSubscription = view.findViewById(R.id.manage_subscription);
 		manageSubscription.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -93,11 +92,11 @@ public class InAppPurchaseCard extends MapBaseCard {
 
 		TextView title = manageSubscription.findViewById(android.R.id.title);
 		title.setText(R.string.manage_subscription);
-		AndroidUiHelper.updateVisibility(manageSubscription, purchase instanceof InAppSubscription);
+		AndroidUiHelper.updateVisibility(manageSubscription, visible);
 	}
 
-	private void setupLiveButton() {
-		osmandLive = view.findViewById(R.id.osmand_live);
+	private void setupLiveButton(boolean visible) {
+		View osmandLive = view.findViewById(R.id.osmand_live);
 		osmandLive.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -109,7 +108,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 
 		title.setText(R.string.live_updates);
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_osm_live));
-		AndroidUiHelper.updateVisibility(osmandLive, purchases.isLiveUpdatesSubscription(purchase));
+		AndroidUiHelper.updateVisibility(osmandLive, visible);
 	}
 
 	private void setupPurchaseCard(@NonNull InAppPurchase purchase) {
