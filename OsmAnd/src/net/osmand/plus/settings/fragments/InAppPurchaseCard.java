@@ -34,6 +34,9 @@ public class InAppPurchaseCard extends MapBaseCard {
 	private final InAppPurchaseHelper purchaseHelper;
 	private final InAppPurchases purchases;
 
+	private View osmandLive;
+	private View manageSubscription;
+
 	public InAppPurchaseCard(@NonNull MapActivity mapActivity, @NonNull InAppPurchaseHelper purchaseHelper, @NonNull InAppPurchase purchase) {
 		super(mapActivity);
 		this.purchase = purchase;
@@ -67,10 +70,15 @@ public class InAppPurchaseCard extends MapBaseCard {
 		}
 		setupManageButton();
 		setupLiveButton();
+
+		boolean liveVisible = osmandLive.getVisibility() == View.VISIBLE;
+		boolean manageVisible = manageSubscription.getVisibility() == View.VISIBLE;
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_divider), manageVisible || liveVisible);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), manageVisible && liveVisible);
 	}
 
 	private void setupManageButton() {
-		View manageSubscription = view.findViewById(R.id.manage_subscription);
+		manageSubscription = view.findViewById(R.id.manage_subscription);
 		manageSubscription.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -89,7 +97,7 @@ public class InAppPurchaseCard extends MapBaseCard {
 	}
 
 	private void setupLiveButton() {
-		View osmandLive = view.findViewById(R.id.osmand_live);
+		osmandLive = view.findViewById(R.id.osmand_live);
 		osmandLive.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
