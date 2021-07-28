@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="asap">Швидко</string>
     <string name="route_roundabout">Круговий рух : Прямуйте до %1$d з’їзду та продовжуйте рух</string>

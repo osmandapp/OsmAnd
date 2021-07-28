@@ -26,7 +26,7 @@ import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListListener;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
 import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
-import net.osmand.plus.backup.BackupListeners.OnUpdateOrderIdListener;
+import net.osmand.plus.backup.BackupListeners.OnUpdateSubscriptionListener;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.commands.DeleteAllFilesCommand;
@@ -199,7 +199,7 @@ public class BackupHelper {
 	@Nullable
 	public String getOrderId() {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-		InAppSubscription purchasedSubscription = purchaseHelper.getAnyPurchasedSubscription();
+		InAppSubscription purchasedSubscription = purchaseHelper.getAnyPurchasedOsmAndProSubscription();
 		return purchasedSubscription != null ? purchasedSubscription.getOrderId() : null;
 	}
 
@@ -343,14 +343,37 @@ public class BackupHelper {
 		executor.runCommand(new RegisterDeviceCommand(this, token));
 	}
 
-	void updateOrderId(@Nullable OnUpdateOrderIdListener listener) {
+	void checkSubscriptions(@Nullable OnUpdateSubscriptionListener listener) {
+		boolean subscriptionActive = false;
+		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			OperationLog operationLog = new OperationLog("checkSubscriptions", DEBUG);
+			String error = "";
+			try {
+				subscriptionActive = purchaseHelper.checkBackupSubscriptions();
+			} catch (Exception e) {
+				error = e.getMessage();
+			}
+			operationLog.finishOperation(subscriptionActive + " " + error);
+		}
+		if (subscriptionActive) {
+			if (listener != null) {
+				listener.onUpdateSubscription(STATUS_SUCCESS, "Subscriptions have been checked successfully", null);
+			}
+		} else {
+			updateOrderId(listener);
+		}
+	}
+
+	void updateOrderId(@Nullable OnUpdateSubscriptionListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", getEmail());
 
 		String orderId = getOrderId();
 		if (Algorithms.isEmpty(orderId)) {
 			if (listener != null) {
-				listener.onUpdateOrderId(STATUS_NO_ORDER_ID_ERROR, "Order id is empty", null);
+				String error = "Order id is empty";
+				listener.onUpdateSubscription(STATUS_NO_ORDER_ID_ERROR, error, error);
 			}
 			return;
 		} else {
@@ -386,7 +409,7 @@ public class BackupHelper {
 				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
 			if (listener != null) {
-				listener.onUpdateOrderId(status, message, error);
+				listener.onUpdateSubscription(status, message, error);
 			}
 			operationLog.finishOperation(status + " " + message);
 		});

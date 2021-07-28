@@ -18,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
@@ -28,6 +29,7 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
+import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
@@ -150,8 +152,26 @@ public class NativeLibrary {
 			point.ind = ind;
 			point.loc = new LatLon(lat, lon);
 			point.cumDist = cumDist;
+
+			if (routeToTarget.size() > 0 && routeToTarget.get(0).getObject().region == null) {
+				fixStraightLineRegion();
+			}
+
 			point.routeToTarget = new ArrayList<>(routeToTarget);
 			return point;
+		}
+
+		private void fixStraightLineRegion() {
+			RouteRegion reg = new RouteRegion();
+			reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
+			for (int i = 0; i < routeToTarget.size(); i++) {
+				RouteDataObject rdo = new RouteDataObject(reg);
+				rdo.pointsX = routeToTarget.get(i).getObject().pointsX;
+				rdo.pointsY = routeToTarget.get(i).getObject().pointsY;
+				rdo.types = routeToTarget.get(i).getObject().getTypes();
+				rdo.id = -1;
+				routeToTarget.get(i).setObject(rdo);
+			}
 		}
 	}
 
@@ -218,6 +238,17 @@ public class NativeLibrary {
 
 	public GpxRouteApproximation runNativeSearchGpxRoute(GpxRouteApproximation gCtx, List<GpxPoint> gpxPoints) {
 		RouteRegion[] regions = gCtx.ctx.reverseMap.keySet().toArray(new RouteRegion[0]);
+		for (RouteRegion region : regions) {
+			BinaryMapIndexReader reader = gCtx.ctx.reverseMap.get(region);
+			if (reader != null) {
+				try {
+					reader.initRouteRegion(region);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
 		int listSize = gpxPoints.size();
 		NativeGpxPointApproximation[] nativePoints = new NativeGpxPointApproximation[listSize];
 		for (int i = 0; i < listSize; i++) {

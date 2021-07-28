@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="use_transparent_map_theme">Przezroczysty motyw</string>
     <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -4062,7 +4062,7 @@
 \n - Zaktualizowane okno dialogowe \"Zapis podróży\".
 \n
 \n</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
+    
     <string name="edit_online_routing_engine">Edytuj silnik wyznaczania tras online</string>
     <string name="select_segments_description">%1$s zawiera więcej niż jeden segment, musisz wybrać wymagany element nawigacji.</string>
     <string name="segments_count">Segment %1$d</string>

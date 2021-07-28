@@ -31,8 +31,8 @@ public class BackupListeners {
 		void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error);
 	}
 
-	public interface OnUpdateOrderIdListener {
-		void onUpdateOrderId(int status, @Nullable String message, @Nullable String error);
+	public interface OnUpdateSubscriptionListener {
+		void onUpdateSubscription(int status, @Nullable String message, @Nullable String error);
 	}
 
 	public interface OnDownloadFileListListener {

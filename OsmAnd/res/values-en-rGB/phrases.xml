@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
 	<!--
 		Our app defaults to American English with default strings in res/values
@@ -28,7 +28,7 @@
 	<string name="poi_curtain">Curtain shop</string>
 	<string name="poi_fabric">Drapery shop</string>
 	<string name="poi_erotic">Erotic shop</string>
-	<string name="poi_fashion">Fashion shop</string>
+	
     <string name="poi_furniture">Furniture shop</string>
 	<string name="poi_garden_centre">Garden centre</string>
 	<string name="poi_garden_furniture">Garden furniture shop</string>
@@ -51,7 +51,7 @@
 	<string name="poi_second_hand">Second hand shop</string>
 	<string name="poi_scuba_diving_shop">Scuba diving goods shop</string>
 	<string name="poi_stationery">Stationery shop</string>
-	<string name="poi_tableware">Tableware shop</string>
+	
 	<string name="poi_tobacco">Tobacco shop</string>
 	<string name="poi_tyres">Tyre store</string>
 	<string name="poi_vacuum_cleaner">Vacuum cleaner shop</string>

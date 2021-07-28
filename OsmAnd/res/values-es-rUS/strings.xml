@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="copying_osmand_file_failed">Fallo al mover archivos</string>
@@ -3930,7 +3930,7 @@
     <string name="routing_engine_vehicle_type_foot">Peatón</string>
     <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
     <string name="routing_engine_vehicle_type_car">Automóvil</string>
-    <string name="message_error_recheck_parameters"/>
+    
     <string name="copy_address">Copiar dirección</string>
     <string name="online_routing_engine">Motor de navegación en línea</string>
     <string name="online_routing_engines">Motores de navegación en línea</string>
@@ -4083,7 +4083,7 @@
     <string name="announce_when_exceeded">Anunciar al excederse</string>
     <string name="user_points">Puntos de usuario</string>
     <string name="output">Salida</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
+    
     <string name="shared_string_feet">pies</string>
     <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
     <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>

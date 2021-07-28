@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources><string name="poi_palaeontological_site">Palaeontological 사이트</string>
 
     <string name="poi_bakery">베이커리</string>
@@ -73,7 +73,7 @@
 	<string name="poi_ship_chandler">배 잡화상</string>
 	<string name="poi_sports">스포츠 용품</string>
 	<string name="poi_stationery">문구용품 가게</string>
-	<string name="poi_tableware">식기 상점</string>
+	
 	<string name="poi_ticket">티켓 판매소</string>
 	<string name="poi_tobacco">담배 상점</string>
 	<string name="poi_toys">장난감 가게</string>
@@ -233,7 +233,7 @@
 	<string name="poi_pension_fund">연금 기금</string>
 	<string name="poi_migration">마이그레이션</string>
 	<string name="poi_tax_inspection">세금 검사</string>
-	<string name="poi_office_administrative">관리 사무실</string>
+	
 	<string name="poi_customs">세관</string>
 	<string name="poi_city">도시</string>
 	<string name="poi_town">도시</string>
@@ -792,7 +792,7 @@
 	<string name="poi_pastry">제과점</string>
 	<string name="poi_camera">카메라와 렌즈</string>
 	<string name="poi_candles">양초 가게</string>
-	<string name="poi_fashion">패션 상점</string>
+	
 	<string name="poi_free_flying">무료 비행 용품 가게</string>
     <string name="poi_garden_furniture">정원 가구점</string>
 	<string name="poi_leather">가죽 상점</string>
@@ -812,7 +812,7 @@
     <string name="poi_breakwater">방파제</string>
 	<string name="poi_groyne">방사제</string>
 
-    <string name="poi_power_cable_distribution_cabinet">케이블 분배 캐비닛</string>
+    
 	<string name="poi_basin">분지</string>
     <string name="poi_crane">크레인</string>
 	<string name="poi_country">국가</string>

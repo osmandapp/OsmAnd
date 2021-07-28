@@ -316,7 +316,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		voicePromptsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.VOICE_ANNOUNCES);
+				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.VOICE_ANNOUNCES, applicationMode);
 				dismiss();
 			}
 		});

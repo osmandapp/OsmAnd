@@ -197,8 +197,7 @@
 				android:layout_marginRight="@dimen/content_padding"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"
-				osmand:typeface="@string/font_roboto_regular"
-				tools:text="@string/lorem_ipsum" />
+				osmand:typeface="@string/font_roboto_regular" />
 
 		</LinearLayout>
 

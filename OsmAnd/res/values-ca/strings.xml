@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="show_warnings_title">Mostra alertes…</string>
     <string name="map_widget_fluorescent">Rutes amb fluorescència</string>

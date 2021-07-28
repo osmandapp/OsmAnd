@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="auto_zoom_none">Без аўтаматычнага маштабавання</string>
     <string name="auto_zoom_close">Буйней</string>
@@ -3941,7 +3941,7 @@
 \nMapillary - выявы вуліц;
 \nWeb / Wikimedia - фотаздымкі POI паводле даных з OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="elevation_data">Вы можаце выкарыстоўваць даныя пра вышыні, каб улічыць ўздымы/спускі падчас вашай паездкі</string>
+    
     <string name="app_mode_light_aircraft">Лёгкі самалёт</string>
     <string name="plan_route_join_segments">Аб\'яднаць сегменты</string>
     <string name="plan_route_split_before">Падзяліць да</string>

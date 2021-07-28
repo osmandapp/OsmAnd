@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="recording_context_menu_show">أظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>

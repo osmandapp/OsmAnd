@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_palaeontological_site">محوطه دیرینه شناسی</string>
     <string name="poi_bakery">نانوایی</string>
@@ -72,7 +72,7 @@
     <string name="poi_ship_chandler">کشتی</string>
     <string name="poi_sports">لوازم ورزشی</string>
     <string name="poi_stationery">فروشگاه نوشت افزار</string>
-    <string name="poi_tableware">فروشگاه ظروف غذاخوری</string>
+    
     <string name="poi_ticket">بلیت فروشی</string>
     <string name="poi_tobacco">دخانیات</string>
     <string name="poi_toys">اسباب بازی فروشی</string>
@@ -225,7 +225,7 @@
     <string name="poi_pension_fund">صندوق بازنشستگی</string>
     <string name="poi_migration">سازمان مهاجرت</string>
     <string name="poi_tax_inspection">اداره مالیات</string>
-    <string name="poi_office_administrative">اداره حکومتی</string>
+    
     <string name="poi_customs">گمرک</string>
     <string name="poi_city">شهر</string>
     <string name="poi_town">شهر</string>
@@ -804,7 +804,7 @@
     <string name="poi_animal_shelter_purpose">کاربری</string>
     <string name="poi_man_made">سازه انسانی</string>
     <string name="poi_finance">مالی</string>
-    <string name="poi_fashion">فروشگاه مد</string>
+    
     <string name="poi_free_flying">فروشگاه لوازم پرواز آزاد</string>
     <string name="poi_scuba_diving_shop">فروشگاه لوازم غواصی اسکوبا</string>
     <string name="poi_fuel_octane_80">اکتان ۸۰</string>

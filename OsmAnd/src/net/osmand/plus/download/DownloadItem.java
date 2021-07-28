@@ -65,7 +65,7 @@ public abstract class DownloadItem {
 	@Nullable
 	public abstract String getAdditionalDescription(Context ctx);
 
-	protected abstract double getSizeToDownloadInMb();
+	public abstract double getSizeToDownloadInMb();
 
 	public abstract double getArchiveSizeMB();
 

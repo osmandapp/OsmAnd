@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_palaeontological_site">Giassu paleontològicu</string>
     <string name="poi_bakery">Furru de su pane</string>
@@ -177,7 +177,7 @@
     <string name="poi_prosecutor">Pùblicu ministeru</string>
     <string name="poi_migration">Ufìtziu migratzione</string>
     <string name="poi_tax_inspection">Guàrdia de finàntzia</string>
-    <string name="poi_office_administrative">Ufìtziu amministrativu</string>
+    
     <string name="poi_city">Tzitade cabu-de-logu de provìntzia</string>
     <string name="poi_town">Tzitade</string>
     <string name="poi_village">Bidda</string>
@@ -439,7 +439,7 @@
     <string name="poi_military_nuclear_explosion_site">Giassu esplosiones nucleares</string>
     <string name="poi_kiosk">Chioscu</string>
     <string name="poi_houseware">Butega de artìculos pro sa domo</string>
-    <string name="poi_tableware">Butega de artìculos pro sa mesa</string>
+    
     <string name="poi_variety_store">Butega de ogetos baratos</string>
     <string name="poi_grit_bin">Cassione de arena</string>
     <string name="poi_ambulance_station">Istatzione ambulàntzias</string>
@@ -726,7 +726,7 @@
     <string name="poi_pastry">Pastisseria</string>
     <string name="poi_camera">Càmeras e lentes</string>
     <string name="poi_candles">Butega de candelas</string>
-    <string name="poi_fashion">Butega de moda</string>
+    
     <string name="poi_free_flying">Artìculos pro Freefly (paracadutismu)</string>
     <string name="poi_garden_furniture">Butega de artìculos pro su giardinu</string>
     <string name="poi_leather">Butega de còrgiu</string>
@@ -787,7 +787,7 @@
     <string name="poi_aerialway_pylon">Turre de sa funivia</string>
     <string name="poi_breakwater">Paraundas</string>
     <string name="poi_groyne">Paraundas (Groyne)</string>
-    <string name="poi_power_cable_distribution_cabinet">Cabina de distributzione (elètrica o àteru)</string>
+    
     <string name="poi_power_tower">Turre de s’alta tensione</string>
     <string name="poi_power_pole">Palu de potèntzia</string>
     <string name="poi_cooling_tower">Turre de isfritamentu</string>
@@ -2911,7 +2911,7 @@
     <string name="poi_aquaculture_shrimp">Abbacultura: gàmberos</string>
     <string name="poi_aquaculture_fish">Abbacultura: pische</string>
     <string name="poi_aquaculture_mussels">Abbacultura: cotzas</string>
-    <string name="poi_mdf">Permutadore (MDF)</string>
+    
     <string name="poi_min_age">Edade mìnima</string>
     <string name="poi_organic_yes">Eja</string>
     <string name="poi_organic_no">Nono</string>

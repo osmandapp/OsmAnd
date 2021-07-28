@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_aerodrome">空港</string>
     <string name="poi_bank">銀行</string>
@@ -132,7 +132,7 @@
     <string name="poi_ship_chandler">船舶雑貨商</string>
     <string name="poi_sports">スポーツ用品</string>
     <string name="poi_stationery">文房具店</string>
-    <string name="poi_tableware">食器店</string>
+    
     <string name="poi_ticket">チケットショップ</string>
     <string name="poi_tobacco">煙草屋</string>
     <string name="poi_toys">おもちゃ屋</string>
@@ -319,7 +319,7 @@
     <string name="poi_prosecutor">検察官</string>
     <string name="poi_pension_fund">年金基金</string>
     <string name="poi_tax_inspection">税務調査</string>
-    <string name="poi_office_administrative">地方自治体</string>
+    
     <string name="poi_customs">税関</string>
     <string name="poi_town">町</string>
     <string name="poi_village">村</string>
@@ -744,7 +744,7 @@
     <string name="poi_camera">カメラ店</string>
     <string name="poi_candles">ろうそく店・キャンドルショップ</string>
     <string name="poi_doors">ドア店</string>
-    <string name="poi_fashion">ファッション店</string>
+    
     <string name="poi_free_flying">フリーフライング用品店(スカイスポーツ用品店)</string>
     <string name="poi_garden_furniture">ガーデニングショップ</string>
     <string name="poi_leather">レザー製品店</string>
@@ -765,7 +765,7 @@
     <string name="poi_aerialway_pylon">索道支柱</string>
     <string name="poi_breakwater">防波堤</string>
     <string name="poi_groyne">防波堤</string>
-    <string name="poi_power_cable_distribution_cabinet">分電盤・キュービクル</string>
+    
     <string name="poi_power_tower">送電鉄塔</string>
     <string name="poi_power_pole">電柱</string>
     <string name="poi_cooling_tower">冷却塔</string>
@@ -2185,7 +2185,7 @@
     <string name="poi_greenhouse_horticulture">温室栽培地</string>
     <string name="poi_kiln">窯</string>
     <string name="poi_logging">伐採区域</string>
-    <string name="poi_mdf">主配線盤</string>
+    
     <string name="poi_plant_nursery">苗床</string>
     <string name="poi_pumping_station">ポンプ場</string>
     <string name="poi_retail">店舗に付随する駐車場等の関連施設</string>

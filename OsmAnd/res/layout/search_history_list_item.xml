@@ -47,8 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/default_list_text_size"
-                tools:text="@string/lorem_ipsum" />
+                android:textSize="@dimen/default_list_text_size" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_bakery">Пякарня</string>
     <string name="poi_alcohol">Вінна-гарэлкавая крама</string>
@@ -74,7 +74,7 @@
     <string name="poi_ship_chandler">Яхты, запчасткі, абсталяванне</string>
     <string name="poi_sports">Спорттавары</string>
     <string name="poi_stationery">Канцылярскія тавары</string>
-    <string name="poi_tableware">Посуд</string>
+    
     <string name="poi_ticket">Продаж квіткоў</string>
     <string name="poi_tobacco">Тытунь</string>
     <string name="poi_toys">Цацкі</string>
@@ -226,7 +226,7 @@
     <string name="poi_pension_fund">Пенсіённы фонд</string>
     <string name="poi_migration">Міграцыйная служба</string>
     <string name="poi_tax_inspection">Падатковая</string>
-    <string name="poi_office_administrative">Адміністрацыйная ўстанова</string>
+    
     <string name="poi_customs">Мытны пункт</string>
     <string name="poi_city">Горад</string>
     <string name="poi_town">Мястэчка</string>
@@ -801,7 +801,7 @@
     <string name="poi_leather">Скураныя вырабы</string>
     <string name="poi_swimming_pool_shop">Тавары для басейна</string>
     <string name="poi_model">Мадэлістам</string>
-    <string name="poi_fashion">Крама моды</string>
+    
     <string name="poi_scuba_diving_shop">Крама тавараў для дайвінгу</string>
     <string name="poi_trophy">Узнагароды, прызы</string>
     <string name="poi_height_restrictor">Абмежавальнік вышыні</string>
@@ -837,7 +837,7 @@
     <string name="poi_website">Вэб-сайт</string>
     <string name="poi_operator">Аператар</string>
     <string name="poi_brand">Брэнд</string>
-    <string name="poi_power_cable_distribution_cabinet">Размеркавальная скрыня</string>
+    
     <string name="poi_basin">Штучны вадаём</string>
     <string name="poi_crane">Кран</string>
     <string name="poi_country">Краіна</string>
@@ -2704,7 +2704,7 @@
     <string name="poi_aquaculture_shrimp">Гадоўля крэветак</string>
     <string name="poi_aquaculture_fish">Гадоўля рыбы</string>
     <string name="poi_aquaculture_mussels">Гадоўля малюскаў</string>
-    <string name="poi_mdf">Галоўны крос</string>
+    
     <string name="poi_min_age">Мінімальны ўзрост</string>
     <string name="poi_organic_yes">Так</string>
     <string name="poi_organic_no">Не</string>
