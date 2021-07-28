@@ -47,6 +47,7 @@ public class RouteColorize {
     public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, GREEN_SLOPE}, {0.0, WHITE}, {0.125, YELLOW_SLOPE}, {0.25, RED_SLOPE}, {SLOPE_MAX_VALUE, PURPLE_SLOPE}};
 
     private static final float DEFAULT_BASE = 17.2f;
+    public static double MAX_CORRECT_ELEVATION_DISTANCE = 100.0;
 
     public enum ColorizationType {
         ELEVATION,
@@ -163,7 +164,7 @@ public class RouteColorize {
      * @return slopes array, in the begin and the end present NaN values!
      */
     public double[] calculateSlopesByElevations(double[] latitudes, double[] longitudes, double[] elevations, double slopeRange) {
-
+        correctElevations(latitudes, longitudes, elevations);
         double[] newElevations = elevations;
         for (int i = 2; i < elevations.length - 2; i++) {
             newElevations[i] = elevations[i - 2]
@@ -198,6 +199,53 @@ public class RouteColorize {
             }
         }
         return slopes;
+    }
+
+    private void correctElevations(double[] latitudes, double[] longitudes, double[] elevations) {
+        for (int i = 0; i < elevations.length; i++) {
+            if (Double.isNaN(elevations[i])) {
+                double leftDist = MAX_CORRECT_ELEVATION_DISTANCE;
+                double rightDist = MAX_CORRECT_ELEVATION_DISTANCE;
+                double leftElevation = Double.NaN;
+                double rightElevation = Double.NaN;
+                for (int left = i - 1; left > 0 && leftDist <= MAX_CORRECT_ELEVATION_DISTANCE; left--) {
+                    if (!Double.isNaN(elevations[left])) {
+                        double dist = MapUtils.getDistance(latitudes[left], longitudes[left], latitudes[i], longitudes[i]);
+                        if (dist < leftDist) {
+                            leftDist = dist;
+                            leftElevation = elevations[left];
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                for (int right = i + 1; right < elevations.length && rightDist <= MAX_CORRECT_ELEVATION_DISTANCE; right++) {
+                    if (!Double.isNaN(elevations[right])) {
+                        double dist = MapUtils.getDistance(latitudes[right], longitudes[right], latitudes[i], longitudes[i]);
+                        if (dist < rightDist) {
+                            rightElevation = elevations[right];
+                            rightDist = dist;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                if (!Double.isNaN(leftElevation) && !Double.isNaN(rightElevation)) {
+                    elevations[i] = (leftElevation + rightElevation) / 2;
+                } else if (Double.isNaN(leftElevation) && !Double.isNaN(rightElevation)) {
+                    elevations[i] = rightElevation;
+                } else if (!Double.isNaN(leftElevation) && Double.isNaN(rightElevation)) {
+                    elevations[i] = leftElevation;
+                } else {
+                    for (int right = i + 1; right < elevations.length; right++) {
+                        if (!Double.isNaN(elevations[right])) {
+                            elevations[i] = elevations[right];
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public List<RouteColorizationPoint> getResult(boolean simplify) {
