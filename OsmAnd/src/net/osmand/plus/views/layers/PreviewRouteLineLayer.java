@@ -297,8 +297,11 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			ty.add(idx, y);
 			int color = palette.get(i + 1);
 			colorsArray[idx] = color;
-			if (idx - 2 >= 0 && colorsArray[idx - 1] == 0) {
-				colorsArray[idx - 1] = colorsArray[idx - 2];
+		}
+
+		for (int colorIdx = 1; colorIdx < colorsArray.length; colorIdx++) {
+			if (colorsArray[colorIdx] == 0) {
+				colorsArray[colorIdx] = colorsArray[colorIdx - 1];
 			}
 		}
 
