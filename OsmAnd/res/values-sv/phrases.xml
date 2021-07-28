@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shoes">Skoaffär</string>
     <string name="poi_computer">Datorbutik</string>
@@ -196,7 +196,7 @@
     <string name="poi_doityourself">Hemförbättringsbutik</string>
     <string name="poi_doors">Dörrar</string>
     <string name="poi_erotic">Erotisk butik</string>
-    <string name="poi_fashion">Modebutik</string>
+    
     <string name="poi_fishing">Fiskeredskap</string>
     <string name="poi_florist">Blomsteraffär</string>
     <string name="poi_frame">Ramaffär</string>
@@ -234,7 +234,7 @@
     <string name="poi_ship_chandler">Skeppshandlaren</string>
     <string name="poi_sports">Sportartiklar</string>
     <string name="poi_stationery">Pappershandel</string>
-    <string name="poi_tableware">Servisbutik</string>
+    
     <string name="poi_ticket">Biljettförsäljning</string>
     <string name="poi_tobacco">Tobakshandel</string>
     <string name="poi_toys">Leksaksaffär</string>
@@ -382,7 +382,7 @@
     <string name="poi_groyne">Vågbrytare</string>
     <string name="poi_power_substation">Transformatorstation</string>
     <string name="poi_power_transformer">Transformator</string>
-    <string name="poi_power_cable_distribution_cabinet">Kabeldistributionsskåp</string>
+    
     <string name="poi_power_plant">Kraftverk</string>
     <string name="poi_power_generator">Elgenerator</string>
     <string name="poi_power_tower">Kraftledningsstolpe</string>
@@ -524,7 +524,7 @@
     <string name="poi_pension_fund">Pensionsfond</string>
     <string name="poi_migration">Migration</string>
     <string name="poi_tax_inspection">Skattemyndigheten</string>
-    <string name="poi_office_administrative">Administrativt kontor</string>
+    
     <string name="poi_customs">Tull</string>
     <string name="poi_country">Land</string>
     <string name="poi_city">Stad</string>
@@ -3211,7 +3211,7 @@
     <string name="poi_fire_operator">Brandoperatör</string>
     <string name="poi_diplomatic_high_commission">Hög provision</string>
     <string name="poi_diplomatic_permanent_mission">Permanent representation</string>
-    <string name="poi_mdf">Huvudfördelningsram</string>
+    
     <string name="poi_generator_output_electricity_no">Effekt (el): nej</string>
     <string name="poi_atm_yes">ATM: ja</string>
     <string name="poi_health_specialty_radiotherapy_yes">Strålbehandling</string>

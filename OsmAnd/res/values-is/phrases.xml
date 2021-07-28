@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_traffic_signals_sound">Hljóð</string>
     <string name="poi_bicycle_parking_type">Tegund</string>
@@ -236,7 +236,7 @@
     <string name="poi_boutique">Tískusérverslun</string>
     <string name="poi_camera">Myndavélar og linsur</string>
     <string name="poi_shoes">Skóbúð</string>
-    <string name="poi_fashion">Tískuverslun</string>
+    
     <string name="poi_furniture">Húsgagnaverslun</string>
     <string name="poi_shop_yes">Almenn verslun</string>
     <string name="poi_gift">Gjafavöruverslun</string>
@@ -1793,7 +1793,7 @@
     <string name="poi_scuba_diving_shop">Verslun með loftpípuköfunardót</string>
     <string name="poi_ship_chandler">Skipaverslun</string>
     <string name="poi_sports">Íþróttavöruverslun</string>
-    <string name="poi_tableware">Borðbúnaðarverslun</string>
+    
     <string name="poi_vacuum_cleaner">Ryksuguverslun</string>
     <string name="poi_video">Myndbandaverslun</string>
     <string name="poi_department_store">Verslunarmiðstöð</string>
@@ -1837,7 +1837,7 @@
     <string name="poi_breakwater">Brimvarnargarður</string>
     <string name="poi_groyne">Öldubrjótur</string>
     <string name="poi_power_substation">Spennivirki</string>
-    <string name="poi_power_cable_distribution_cabinet">Kapaltengiskápur</string>
+    
     <string name="poi_power_plant">Aflstöð</string>
     <string name="poi_power_generator">Aflgjafi</string>
     <string name="poi_club_motorcycle">Mótorhjólaklúbbur</string>
@@ -1900,7 +1900,7 @@
     <string name="poi_club_scout">Skátafélag</string>
     <string name="poi_farmyard">Hlað</string>
     <string name="poi_pension_fund">Eftirlaunasjóður</string>
-    <string name="poi_office_administrative">Stjórnsýsluskrifstofa</string>
+    
     <string name="poi_isolated_dwelling">Einangraður bústaður</string>
     <string name="poi_notary">Lögbókandi</string>
     <string name="poi_tax_advisor">Skrifstofa skattaráðgjafa</string>
@@ -2941,7 +2941,7 @@
     <string name="poi_recreation_center">Leikjamiðstöð</string>
     <string name="poi_payment_troika_yes">Troika</string>
     <string name="poi_payment_troika_no">Ekki tekið við Troika-kortum</string>
-    <string name="poi_mdf">Aðaltengivirki</string>
+    
     <string name="poi_lighting">Ljósafestingar</string>
     <string name="poi_energy_supplier">Skrifstofa orkusala</string>
     <string name="poi_electronics_repair_computer">Raftækjaviðgerðir: tölvur</string>

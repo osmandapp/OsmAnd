@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_rtsa_scale_1a">1A</string>
     <string name="poi_socket_type3_yes">Math 3</string>
