@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_10pin">Bowling américain</string>
     <string name="poi_9pin">Bowling à 9 quilles</string>
@@ -460,7 +460,7 @@
     <string name="poi_herbalist">Herboriste</string>
     <string name="poi_kitchen">Magasin de cuisines</string>
     <string name="poi_stationery">Papèterie</string>
-    <string name="poi_tableware">Magasin de vaisselle</string>
+    
     <string name="poi_ticket">Billetterie</string>
     <string name="poi_vacuum_cleaner">Magasin d\'aspirateurs</string>
     <string name="poi_mountain_pass">Col</string>
@@ -473,7 +473,7 @@
     <string name="poi_astronomical_observatory">Astronomique</string>
     <string name="poi_orchard">Verger</string>
     <string name="poi_prosecutor">Procureur</string>
-    <string name="poi_office_administrative">Administration publique locale</string>
+    
     <string name="poi_seamark_rock">Rocher (amer)</string>
     <string name="poi_distance_mark">Borne</string>
     <string name="poi_craft_upholsterer">Tapissier</string>
@@ -795,7 +795,7 @@
     <string name="poi_chocolate">Chocolatier</string>
     <string name="poi_coffee">Magasin de cafés</string>
     <string name="poi_candles">Magasin de bougies</string>
-    <string name="poi_fashion">Boutique de mode</string>
+    
     <string name="poi_music">Disquaire</string>
     <string name="poi_watches">Horloger</string>
     <string name="poi_games">Magasin de jeux</string>
@@ -817,7 +817,7 @@
     <string name="poi_pyrotechnics">Magasin de pyrotechnie</string>
     <string name="poi_weapons">Armurerie</string>
     <string name="poi_breakwater">Brise-lames</string>
-    <string name="poi_power_cable_distribution_cabinet">Armoire de distribution électrique</string>
+    
     <string name="poi_basin">Bassin de rétention d\'eau</string>
     <string name="poi_crane">Grue</string>
     <string name="poi_wiki_lang_ceb">Wiki cébouano</string>
@@ -2189,7 +2189,7 @@
     <string name="poi_greenhouse_horticulture">Zone de cultures sous serre</string>
     <string name="poi_ventilation_shaft">Bouche de ventilation</string>
     <string name="poi_boat_storage">Stockage de bateaux</string>
-    <string name="poi_mdf">Central téléphonique</string>
+    
     <string name="poi_plant_nursery">Pépinière</string>
     <string name="poi_spoil_heap">Terril</string>
     <string name="poi_street_cabinet">Armoire de rue</string>

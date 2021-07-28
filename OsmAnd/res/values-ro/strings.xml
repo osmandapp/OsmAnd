@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="background_service_is_enabled_question">Serviciul de fundal OsmAnd încă funcționează. Doriți să-l opriți\?</string>
     <string name="close_changeset">Închideți setul de modificări</string>

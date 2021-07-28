@@ -130,11 +130,9 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 			}
 
 			TextView title = container.findViewById(R.id.title);
-			TextView type = container.findViewById(R.id.descr);
 			TextView description = container.findViewById(R.id.description);
 
 			title.setText(R.string.routes_color_by_type);
-			type.setText(AndroidUtils.getRenderingStringPropertyValue(app, pref.get()));
 			description.setText(AndroidUtils.getRenderingStringPropertyDescription(app, pref.get()));
 
 			TextToggleButton radioGroup = new TextToggleButton(app, view.findViewById(R.id.custom_radio_buttons), nightMode);
@@ -142,6 +140,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 			radioGroup.setSelectedItem(selectedItem);
 		}
 		AndroidUiHelper.updateVisibility(container, enabled);
+		AndroidUiHelper.updateVisibility(container.findViewById(R.id.descr), false);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.topShadowView), enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_bottom_divider), enabled);
 	}

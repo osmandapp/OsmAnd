@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Si le mode d\'édition hors-ligne est activé, les modifications seront enregistrées localement puis envoyées à la demande. Sinon, les modifications seront envoyées immédiatement.</string>

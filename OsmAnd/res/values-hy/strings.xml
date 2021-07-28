@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="download_hillshade_maps">Տարածքի մգեցված ռելիեֆով քարտեզներ (Hillshades)</string>
     <string name="local_indexes_cat_av">Ձայնա/Տեսանյութեր</string>

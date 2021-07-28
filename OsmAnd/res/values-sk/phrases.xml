@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shop">Obchod</string>
     <string name="poi_emergency">Núdzová situácia/Záchrana</string>
@@ -235,7 +235,7 @@
     <string name="poi_prison">Väzenie</string>
     <string name="poi_embassy">Veľvyslanectvo</string>
     <string name="poi_government">Vládne orgány</string>
-    <string name="poi_office_administrative">Lokálne úrady</string>
+    
     <string name="poi_customs">Colná správa</string>
     <string name="poi_city">Veľkomesto</string>
     <string name="poi_town">Mesto</string>
@@ -493,7 +493,7 @@
     <string name="poi_cafe_and_restaurant">Kaviareň a reštaurácia</string>
     <string name="poi_craft">Remeslo</string>
     <string name="poi_medical_supply">Zdravotnícke potreby</string>
-    <string name="poi_tableware">Stolovacie potreby</string>
+    
     <string name="poi_sewing">Potreby na šitie</string>
     <string name="poi_ambulance_station">Stanovište sanitiek</string>
     <string name="poi_rest_area">Odpočívadlo</string>
@@ -795,7 +795,7 @@
     <string name="poi_pasta">Obchod s cestovinami</string>
     <string name="poi_pastry">Obchod so zákuskami</string>
     <string name="poi_candles">Obchod so sviečkami</string>
-    <string name="poi_fashion">Módny butik</string>
+    
     <string name="poi_garden_furniture">Obchod so záhradným nábytkom</string>
     <string name="poi_leather">Obchod s kožou</string>
     <string name="poi_music">Hudobniny</string>
@@ -812,7 +812,7 @@
     <string name="poi_swimming_pool_shop">Kúpacie potreby</string>
     <string name="poi_breakwater">Vlnolam</string>
     <string name="poi_groyne">Pobrežná hrádza</string>
-    <string name="poi_power_cable_distribution_cabinet">Káblová rozvodná skriňa</string>
+    
     <string name="poi_basin">Nádrž na dažďovú vodu</string>
     <string name="poi_crane">Žeriav</string>
     <string name="poi_cutline">Výsek lesa</string>
@@ -3316,7 +3316,7 @@
     <string name="poi_health_facility_type_first_aid">Typ zdravotníckeho zariadenia: prvá pomoc</string>
     <string name="poi_health_facility_type_nursing_home">Typ zdravotníckeho zariadenia: dom s opatrovateľskou službou</string>
     <string name="poi_health_facility_type_support_group_home">Typ zdravotníckeho zariadenia: skupinový domov s podporou</string>
-    <string name="poi_mdf">Hlavný rozvádzač</string>
+    
     <string name="poi_gambling_pachinko">Automaty Pachinko</string>
     <string name="poi_motorcycle_type_scooter">Skúter</string>
     <string name="poi_motorcycle_type_sportbike">Závodný</string>

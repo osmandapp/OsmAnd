@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="shared_string_my_places">Meus lugares</string>
     <string name="days_behind">dias atrás</string>
@@ -4076,7 +4076,7 @@
     <string name="announce_when_exceeded">Anunciar quando ultrapassado</string>
     <string name="user_points">Pontos do usuário</string>
     <string name="output">Saída</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
+    
     <string name="shared_string_feet">pés</string>
     <string name="srtm_unit_format">Variante da unidade de curvas de nível</string>
     <string name="srtm_download_list_help_message">OsmAnd fornece dados de linhas de contorno em metros e pés. Você precisará baixar novamente o arquivo para alterar o formato.</string>

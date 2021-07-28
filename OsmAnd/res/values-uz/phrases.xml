@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources><string name="poi_shop">Дўкон</string>
 		<string name="poi_shop_food">Озиқ-овқат дўкони</string>
 	<string name="poi_emergency">Шошилинч ёрдам маркази</string>
@@ -91,7 +91,7 @@
 <string name="poi_dive">Шўнғиш ускунаси</string>
 	<string name="poi_doityourself">Асбоб-ускуна ва қурилиш моллари дўкони</string>
 	<string name="poi_doors">Эшиклар</string>
-	<string name="poi_fashion">Мода дўкони</string>
+	
 	<string name="poi_fishing">Балиқ овлашга оид дўкон</string>
 	<string name="poi_florist">Гул дўкони</string>
 	<string name="poi_frame">Сурат роми дўкони</string>
@@ -133,7 +133,7 @@
 	<string name="poi_scuba_diving_shop">Аквалангчилар моллари дўкони</string>
 	<string name="poi_sports">Спорт моллари</string>
 	<string name="poi_stationery">Канцелярия дўкони</string>
-	<string name="poi_tableware">Идиш-товоқлар дўкони</string>
+	
 	<string name="poi_ticket">Чиптахона</string>
 	<string name="poi_tobacco">Тамаки дўкони</string>
 	<string name="poi_toys">Ўйинчоқлар дўкони</string>

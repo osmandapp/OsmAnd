@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shop_food">חנות נוחות וסופרמרקט</string>
     <string name="poi_shop">חנות</string>
@@ -90,7 +90,7 @@
     <string name="poi_doityourself">עשה זאת בעצמך</string>
     <string name="poi_doors">חנות דלתות</string>
     <string name="poi_erotic">חנות סקס</string>
-    <string name="poi_fashion">חנות אופנה</string>
+    
     <string name="poi_fishing">ציוד דייג</string>
     <string name="poi_florist">חנות פרחים</string>
     <string name="poi_frame">חנות מסגרות</string>
@@ -125,7 +125,7 @@
     <string name="poi_scuba_diving_shop">חנות ציוד צלילה</string>
     <string name="poi_sports">מוצרי ספורט</string>
     <string name="poi_stationery">מוצרי סדקית</string>
-    <string name="poi_tableware">חנות כלי שולחן</string>
+    
     <string name="poi_ticket">משרד כרטיסים</string>
     <string name="poi_tobacco">חנות עישון</string>
     <string name="poi_toys">חנות צעצועים</string>
@@ -924,7 +924,7 @@
     <string name="poi_cuisine_sagardotegia">מבשלת סיידר</string>
     <string name="poi_cuisine_sub">כריך באגט</string>
     <string name="poi_cuisine_pita">פיתה</string>
-    <string name="poi_mdf">רכזת</string>
+    
     <string name="poi_cuisine_buschenschank">בושנשנק (טברנה אוסטרית עממית)</string>
     <string name="poi_fuel_e10">E10</string>
     <string name="poi_fuel_e20">E20</string>
@@ -1706,7 +1706,7 @@
     <string name="poi_memorial_obelisk">אובליסק</string>
     <string name="poi_memorial_column">עמוד</string>
     <string name="poi_memorial_stupa">סטופה</string>
-    <string name="poi_power_cable_distribution_cabinet">ארון חשמל חיצוני</string>
+    
     <string name="poi_telephone_exchange">מרכזייה</string>
     <string name="poi_recycling_sheet_metal">פח</string>
     <string name="poi_recycling_hardcore">תוצרי בנייה</string>
@@ -1724,7 +1724,7 @@
     <string name="poi_prosecutor">תובע</string>
     <string name="poi_pension_fund">קרן פנסיה</string>
     <string name="poi_tax_inspection">חקירת מס</string>
-    <string name="poi_office_administrative">משרד ניהולי</string>
+    
     <string name="poi_association">משרד אגודה</string>
     <string name="poi_ice_stock">קרלינג בווארי</string>
     <string name="poi_paragliding">מצנחי רחיפה</string>

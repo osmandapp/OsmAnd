@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
     <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi.</string>
@@ -4073,7 +4073,7 @@
     <string name="announce_when_exceeded">Annuncia quando si supera</string>
     <string name="user_points">Punti utente</string>
     <string name="output">Output</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
+    
     <string name="in_grace_period">In periodo di grazia</string>
     <string name="shared_string_feet">piedi</string>
     <string name="srtm_unit_format">Unità di misura delle linee di contorno</string>

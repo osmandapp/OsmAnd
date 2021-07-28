@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_fuel_type">Tipu de combustible</string>
     <string name="poi_fuel_avia_type">Tipu de combustible p\'aviación</string>
