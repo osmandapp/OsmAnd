@@ -1682,6 +1682,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		getMapView().refreshMap();
 	}
 
+	public void updateLayers() {
+		getMapLayers().updateLayers(getMapView());
+	}
+
 	public void refreshMapComplete() {
 		getMyApplication().getResourceManager().getRenderer().clearCache();
 		updateMapSettings();

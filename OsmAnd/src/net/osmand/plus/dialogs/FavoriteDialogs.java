@@ -97,7 +97,7 @@ public class FavoriteDialogs {
 						}
 						mapActivity.getContextMenu()
 								.show(new LatLon(point.getLatitude(), point.getLongitude()), fp.getPointDescription(activity), fp);
-						mapActivity.getMapView().refreshMap();
+						mapActivity.refreshMap();
 					}
 				}
 			}
