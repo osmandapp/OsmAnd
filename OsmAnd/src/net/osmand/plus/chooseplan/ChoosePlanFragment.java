@@ -136,8 +136,8 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		restoreBtn.setOnClickListener(v -> purchaseHelper.requestInventory());
 
 		FrameLayout iconBg = mainView.findViewById(R.id.header_icon_background);
-		int color = AndroidUtils.getColorFromAttr(mainView.getContext(), R.attr.activity_background_color);
-		AndroidUtils.setBackground(iconBg, createRoundedDrawable(color, ButtonBackground.ROUNDED));
+		int color = AndroidUtils.getColorFromAttr(mainView.getContext(), R.attr.purchase_sc_header_icon_bg);
+		AndroidUtils.setBackground(iconBg, createRoundedDrawable(color, ButtonBackground.ROUNDED_LARGE));
 	}
 
 	@Override
