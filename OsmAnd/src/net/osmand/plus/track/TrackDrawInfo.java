@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
 
 import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
@@ -42,7 +41,7 @@ public class TrackDrawInfo {
 		readBundle(bundle);
 	}
 
-	public TrackDrawInfo(@NonNull OsmandApplication app, @NonNull GpxDataItem gpxDataItem, boolean currentRecording) {
+	public TrackDrawInfo(@NonNull GpxDataItem gpxDataItem, boolean currentRecording) {
 		filePath = gpxDataItem.getFile().getPath();
 		width = gpxDataItem.getWidth();
 		color = gpxDataItem.getColor();
@@ -131,6 +130,18 @@ public class TrackDrawInfo {
 
 	public boolean isCurrentRecording() {
 		return currentRecording;
+	}
+
+	public void resetParams() {
+		width = null;
+		color = 0;
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
+		splitType = GpxSplitType.NO_SPLIT.getType();
+		splitInterval = 0;
+		joinSegments = false;
+		showArrows = false;
+		showStartFinish = true;
 	}
 
 	private void readBundle(@NonNull Bundle bundle) {
