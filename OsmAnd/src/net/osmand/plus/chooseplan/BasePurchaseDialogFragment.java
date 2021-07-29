@@ -58,7 +58,8 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	protected enum ButtonBackground {
 		ROUNDED(R.drawable.rectangle_rounded),
-		ROUNDED_SMALL(R.drawable.rectangle_rounded_small);
+		ROUNDED_SMALL(R.drawable.rectangle_rounded_small),
+		ROUNDED_LARGE(R.drawable.rectangle_rounded_large);
 
 		ButtonBackground(int drawableId) {
 			this.drawableId = drawableId;

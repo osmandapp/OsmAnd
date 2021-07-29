@@ -19,6 +19,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_TRIP_RECORDING_ID = DRAWER_ITEM_ID_SCHEME + "trip_recording";
 	String DRAWER_CONFIGURE_MAP_ID = DRAWER_ITEM_ID_SCHEME + "configure_map";
 	String DRAWER_DOWNLOAD_MAPS_ID = DRAWER_ITEM_ID_SCHEME + "download_maps";
+	String DRAWER_LIVE_UPDATES_ID = DRAWER_ITEM_ID_SCHEME + "live_updates";
 	String DRAWER_OSMAND_LIVE_ID = DRAWER_ITEM_ID_SCHEME + "osmand_live";
 	String DRAWER_TRAVEL_GUIDES_ID = DRAWER_ITEM_ID_SCHEME + "travel_guides";
 	String DRAWER_MEASURE_DISTANCE_ID = DRAWER_ITEM_ID_SCHEME + "measure_distance";

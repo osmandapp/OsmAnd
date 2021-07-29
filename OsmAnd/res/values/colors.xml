@@ -47,6 +47,10 @@
 	<color name="maps_plus_item_bg">#FFA64D</color>
 	<color name="purchase_sc_feature_list_bg_dark">@color/list_background_color_dark</color>
 	<color name="purchase_sc_feature_list_bg_light">#f3f4f5</color>
+	<color name="purchase_sc_selected_plan_bg_dark">@color/activity_background_color_dark</color>
+	<color name="purchase_sc_selected_plan_bg_light">@color/list_background_color_light</color>
+	<color name="purchase_sc_header_icon_bg_dark">@color/inactive_buttons_and_links_bg_dark</color>
+	<color name="purchase_sc_header_icon_bg_light">@color/activity_background_color_light</color>
 	<color name="purchase_sc_toolbar_active_dark">#FFC30D</color>
 	<color name="purchase_sc_toolbar_active_light">#223EA4</color>
 	<color name="purchase_sc_discount">#EE5622</color>
