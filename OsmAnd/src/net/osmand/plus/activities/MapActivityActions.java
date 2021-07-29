@@ -960,7 +960,7 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 						LiveUpdatesFragment.showInstance(mapActivity.getSupportFragmentManager(), null);
-						return false;
+						return true;
 					}
 				}).createItem()
 		);
