@@ -14,7 +14,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
@@ -511,7 +510,7 @@ public class DownloadResources extends DownloadResourceGroup {
 						srtmIndexes.add((IndexItem) item);
 					}
 				}
-				if (srtmIndexes.size() > 1) {
+				if (srtmIndexes.size() > 0) {
 					individualItems.removeAll(srtmIndexes);
 					group.addItem(new SrtmDownloadItem(srtmIndexes, useMetersByDefault));
 				}

@@ -102,7 +102,7 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import static net.osmand.GPXUtilities.*;
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
 import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
@@ -437,13 +437,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			scrollView.getViewTreeObserver().addOnGlobalLayoutListener(scrollViewLayoutListener);
 		}
 	}
-	
+
 	private void showBottomHeaderShadow() {
 		if (getBottomContainer() != null) {
 			getBottomContainer().setForeground(getIcon(R.drawable.bg_contextmenu_shadow));
 		}
 	}
-	
+
 	private void hideBottomHeaderShadow() {
 		if (getBottomContainer() != null) {
 			getBottomContainer().setForeground(null);
@@ -1393,8 +1393,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public static void loadSelectedGpxFile(@NonNull MapActivity mapActivity, @Nullable String path,
-	                                       boolean showCurrentTrack,
-	                                       final CallbackWithObject<SelectedGpxFile> callback) {
+										   boolean showCurrentTrack,
+										   final CallbackWithObject<SelectedGpxFile> callback) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		SelectedGpxFile selectedGpxFile;
 		if (showCurrentTrack) {
@@ -1405,23 +1405,22 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (selectedGpxFile != null) {
 			callback.processResult(selectedGpxFile);
 		} else if (!Algorithms.isEmpty(path)) {
-			String title = app.getString(R.string.loading_smth, "");
-			final ProgressDialog progress = ProgressDialog.show(mapActivity, title, app.getString(R.string.loading_data));
+			final ProgressDialog[] progress = new ProgressDialog[1];
+			if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+				String title = app.getString(R.string.loading_smth, "");
+				progress[0] = ProgressDialog.show(mapActivity, title, app.getString(R.string.loading_data));
+			}
 			final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
-
 			GpxFileLoaderTask gpxFileLoaderTask = new GpxFileLoaderTask(new File(path), new CallbackWithObject<GPXFile>() {
 				@Override
 				public boolean processResult(GPXFile result) {
-					MapActivity mapActivity = mapActivityRef.get();
-					if (mapActivity != null) {
-						OsmandApplication app = mapActivity.getMyApplication();
-						SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(result, true, false);
-						if (selectedGpxFile != null) {
-							callback.processResult(selectedGpxFile);
-						}
+					SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(result, true, false);
+					if (selectedGpxFile != null) {
+						callback.processResult(selectedGpxFile);
 					}
-					if (progress != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
-						progress.dismiss();
+					MapActivity mapActivity = mapActivityRef.get();
+					if (progress[0] != null && AndroidUtils.isActivityNotDestroyed(mapActivity)) {
+						progress[0].dismiss();
 					}
 					return true;
 				}
@@ -1449,18 +1448,18 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
-	                                   @NonNull SelectedGpxFile selectedGpxFile,
-	                                   @Nullable SelectedGpxPoint gpxPoint) {
+									   @NonNull SelectedGpxFile selectedGpxFile,
+									   @Nullable SelectedGpxPoint gpxPoint) {
 		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, false, null);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
-	                                   @NonNull SelectedGpxFile selectedGpxFile,
-	                                   @Nullable SelectedGpxPoint gpxPoint,
-	                                   @Nullable String returnScreenName,
-	                                   @Nullable String callingFragmentTag,
-	                                   boolean adjustMapPosition,
-	                                   @Nullable GPXTrackAnalysis analyses) {
+									   @NonNull SelectedGpxFile selectedGpxFile,
+									   @Nullable SelectedGpxPoint gpxPoint,
+									   @Nullable String returnScreenName,
+									   @Nullable String callingFragmentTag,
+									   boolean adjustMapPosition,
+									   @Nullable GPXTrackAnalysis analyses) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
