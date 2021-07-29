@@ -312,14 +312,14 @@ public class TrackDetailsMenu {
 		LineData lineData = chart.getLineData();
 		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 		GpxDisplayItem gpxItem = getGpxItem();
-		if (!Algorithms.isEmpty(ds) && gpxItem != null && selectedGpxFile != null) {
+		if (!Algorithms.isEmpty(ds) && gpxItem != null) {
 			TrkSegment segment = getTrackSegment(chart);
 			if (segment == null) {
 				return null;
 			}
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
 			GPXFile gpxFile = gpxItem.group.getGpx();
-			boolean joinSegments = selectedGpxFile.isJoinSegments();
+			boolean joinSegments = selectedGpxFile != null && selectedGpxFile.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
 				float time = pos * 1000;

@@ -262,7 +262,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			QuadRect prevPointRect = null;
 			for (int i = 0; i < xAxisPoints.size(); i++) {
 				LatLon axisPoint = xAxisPoints.get(i);
-				if (axisPoint.getLatitude() >= latLonBounds.bottom
+				if (axisPoint != null
+						&& axisPoint.getLatitude() >= latLonBounds.bottom
 						&& axisPoint.getLatitude() <= latLonBounds.top
 						&& axisPoint.getLongitude() >= latLonBounds.left
 						&& axisPoint.getLongitude() <= latLonBounds.right) {
