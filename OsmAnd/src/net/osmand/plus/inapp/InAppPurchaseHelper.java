@@ -135,9 +135,9 @@ public abstract class InAppPurchaseHelper {
 
 	public static boolean isSubscribedToAny(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx)
-				|| ctx.getSettings().OSMAND_MAPS_PURCHASED.get()
-				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get()
-				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get();
+				|| isSubscribedToMaps(ctx)
+				|| isOsmAndProAvailable(ctx)
+				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
 	public static boolean isSubscribedToMaps(@NonNull OsmandApplication ctx) {
@@ -148,10 +148,10 @@ public abstract class InAppPurchaseHelper {
 	public static boolean isSubscribedToLiveUpdates(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx)
 				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get()
-				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get();
+				|| isOsmAndProAvailable(ctx);
 	}
 
-	public static boolean isSubscribedToOsmAndPro(@NonNull OsmandApplication ctx) {
+	private static boolean isSubscribedToOsmAndPro(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx)
 				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get();
 	}
