@@ -153,7 +153,7 @@ public class RasterMapMenu {
 						public boolean onIntegerValueChangedListener(int newValue) {
 							mapTransparencyPreference.set(newValue);
 							mapActivity.getMapLayers().getMapControlsLayer().updateTransparencySlider();
-							mapActivity.getMapView().refreshMap();
+							mapActivity.refreshMap();
 							return false;
 						}
 					};

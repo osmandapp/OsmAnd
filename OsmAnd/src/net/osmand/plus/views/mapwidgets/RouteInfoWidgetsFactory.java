@@ -221,7 +221,7 @@ public class RouteInfoWidgetsFactory {
 			public void onClick(View v) {
 				showArrival.set(!showArrival.get());
 				setTimeControlIcons(leftTimeControl, showArrival.get(), intermediate);
-				map.getMapView().refreshMap();
+				map.refreshMap();
 			}
 			
 		});
