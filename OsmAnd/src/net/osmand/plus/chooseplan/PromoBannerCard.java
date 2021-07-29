@@ -14,8 +14,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 
 public class PromoBannerCard extends BaseCard {
 
-	public PromoBannerCard(@NonNull FragmentActivity activity,
-	                       boolean usedOnMap) {
+	public PromoBannerCard(@NonNull FragmentActivity activity, boolean usedOnMap) {
 		super(activity, usedOnMap);
 	}
 
@@ -26,13 +25,11 @@ public class PromoBannerCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
-		OsmAndFeature feature = OsmAndFeature.ADVANCED_WIDGETS;
-
 		View btnLearnMore = view.findViewById(R.id.button_learn_more);
 		UiUtilities.setupDialogButton(nightMode, btnLearnMore, DialogButtonType.PRIMARY, R.string.shared_string_learn_more);
 		btnLearnMore.setOnClickListener(v -> {
 			if (activity != null) {
-				ChoosePlanFragment.showInstance(activity, feature);
+				ChoosePlanFragment.showInstance(activity, OsmAndFeature.ADVANCED_WIDGETS);
 			}
 		});
 
@@ -42,5 +39,4 @@ public class PromoBannerCard extends BaseCard {
 		Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
 		AndroidUtils.setBackground(background, bgDrawable);
 	}
-
 }
