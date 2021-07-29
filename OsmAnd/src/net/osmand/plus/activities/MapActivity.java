@@ -276,6 +276,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		boolean largeDevice = AndroidUiHelper.isXLargeDevice(this);
 		landscapeLayout = !portraitMode && !largeDevice;
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
+
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		int w = metrics.widthPixels;
+		int h = metrics.heightPixels - AndroidUtils.getStatusBarHeight(this);
+		mapView = new OsmandMapTileView(this, w, h);
+
 		mapContextMenu.setMapActivity(this);
 		mapRouteInfoMenu.setMapActivity(this);
 		trackDetailsMenu.setMapActivity(this);
@@ -292,14 +299,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
 		}
 
-		int statusBarHeight = AndroidUtils.getStatusBarHeight(this);
-
-		DisplayMetrics dm = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		int w = dm.widthPixels;
-		int h = dm.heightPixels - statusBarHeight;
-
-		mapView = new OsmandMapTileView(this, w, h);
 		if (app.getAppInitializer().checkAppVersionChanged() && WhatsNewDialogFragment.SHOW) {
 			SecondSplashScreenFragment.SHOW = false;
 			WhatsNewDialogFragment.SHOW = false;
