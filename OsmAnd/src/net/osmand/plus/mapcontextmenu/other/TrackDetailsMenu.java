@@ -279,7 +279,7 @@ public class TrackDetailsMenu {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
 			mapActivity.getMapView().setMapPositionX(0);
-			mapActivity.getMapView().refreshMap();
+			mapActivity.refreshMap();
 		}
 		if (hidding) {
 			hidding = false;
@@ -312,14 +312,14 @@ public class TrackDetailsMenu {
 		LineData lineData = chart.getLineData();
 		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 		GpxDisplayItem gpxItem = getGpxItem();
-		if (!Algorithms.isEmpty(ds) && gpxItem != null && selectedGpxFile != null) {
+		if (!Algorithms.isEmpty(ds) && gpxItem != null) {
 			TrkSegment segment = getTrackSegment(chart);
 			if (segment == null) {
 				return null;
 			}
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
 			GPXFile gpxFile = gpxItem.group.getGpx();
-			boolean joinSegments = selectedGpxFile.isJoinSegments();
+			boolean joinSegments = selectedGpxFile != null && selectedGpxFile.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
 				float time = pos * 1000;

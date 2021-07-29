@@ -103,7 +103,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 			@Override
 			public void layerOnPostExecute() {
-				activity.getMapView().refreshMap();
+				activity.refreshMap();
 			}
 
 			@Override

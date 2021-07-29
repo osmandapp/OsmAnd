@@ -95,7 +95,9 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	@Override
 	public void loginValidationFinished(String warning) {
-		updateAllSettings();
+		if (isAdded()) {
+			updateAllSettings();
+		}
 	}
 
 	private void setupLoginPref() {

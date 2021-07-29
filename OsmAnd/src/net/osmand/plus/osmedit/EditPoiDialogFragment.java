@@ -406,13 +406,13 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	@Override
 	public void show(FragmentManager manager, String tag) {
-		if (manager.findFragmentByTag(TAG) == null) {
+		if (!manager.isStateSaved() && manager.findFragmentByTag(TAG) == null) {
 			super.show(manager, TAG);
 		}
 	}
 
 	@Override
-	public int show(FragmentTransaction transaction, String tag) {
+	public int show(@NonNull FragmentTransaction transaction, String tag) {
 		throw new UnsupportedOperationException("Please use show(FragmentManager manager, String tag)");
 	}
 
