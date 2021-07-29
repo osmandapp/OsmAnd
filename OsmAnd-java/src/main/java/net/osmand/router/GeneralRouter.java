@@ -484,8 +484,13 @@ public class GeneralRouter implements VehicleRouter {
 	public float defineRoutingSpeed(RouteDataObject road) {
 		Float definedSpd = getCache(RouteDataObjectAttribute.ROAD_SPEED, road);
 		if (definedSpd == null) {
-			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
-			definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
+			float speed;
+			if ("motorway_link".equals(road.getHighway())) {
+				speed = maxSpeed;
+			} else {
+				speed = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
+			}
+			definedSpd = Math.max(Math.min(speed, maxSpeed), minSpeed);
 			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, definedSpd);
 		}
 		return definedSpd;

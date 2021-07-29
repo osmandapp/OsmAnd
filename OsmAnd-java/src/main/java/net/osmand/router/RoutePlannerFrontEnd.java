@@ -364,7 +364,7 @@ public class RoutePlannerFrontEnd {
 
 	private void calculateGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints) {
 		RouteRegion reg = new RouteRegion();
-		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
+		reg.initStraightLineRule();
 		List<LatLon> lastStraightLine = null;
 		GpxPoint straightPointStart = null;
 		for (int i = 0; i < gpxPoints.size() && !gctx.ctx.calculationProgress.isCancelled; ) {
@@ -408,7 +408,7 @@ public class RoutePlannerFrontEnd {
 
 	public static RouteSegmentResult generateStraightLineSegment(float averageSpeed, List<LatLon> points) {
 		RouteRegion reg = new RouteRegion();
-		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
+		reg.initStraightLineRule();
 		RouteDataObject rdo = new RouteDataObject(reg);
 		int size = points.size();
 		TIntArrayList x = new TIntArrayList(size);

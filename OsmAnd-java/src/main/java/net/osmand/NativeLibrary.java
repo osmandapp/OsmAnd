@@ -2,9 +2,7 @@ package net.osmand;
 
 import gnu.trove.list.array.TIntArrayList;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +27,6 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.NativeTransportRoutingResult;
 import net.osmand.router.RouteCalculationProgress;
-import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
@@ -163,7 +160,7 @@ public class NativeLibrary {
 
 		private void fixStraightLineRegion() {
 			RouteRegion reg = new RouteRegion();
-			reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
+			reg.initStraightLineRule();
 			for (int i = 0; i < routeToTarget.size(); i++) {
 				RouteDataObject rdo = new RouteDataObject(reg);
 				rdo.pointsX = routeToTarget.get(i).getObject().pointsX;
