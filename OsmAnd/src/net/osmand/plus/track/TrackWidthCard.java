@@ -18,6 +18,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -37,20 +38,23 @@ public class TrackWidthCard extends MapBaseCard {
 	private final static int CUSTOM_WIDTH_MIN = 1;
 	private final static int CUSTOM_WIDTH_MAX = 24;
 
-	private TrackDrawInfo trackDrawInfo;
-	private OnNeedScrollListener onNeedScrollListener;
+	private final TrackDrawInfo trackDrawInfo;
+	private final SelectedGpxFile selectedGpxFile;
+	private final OnNeedScrollListener onNeedScrollListener;
 
 	private AppearanceListItem selectedItem;
-	private List<AppearanceListItem> appearanceItems;
+	private final List<AppearanceListItem> appearanceItems;
 
 	private GpxWidthAdapter widthAdapter;
 	private View sliderContainer;
 	private RecyclerView groupRecyclerView;
 
 	public TrackWidthCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo,
-	                      @NonNull OnNeedScrollListener onNeedScrollListener) {
+						  @NonNull SelectedGpxFile selectedGpxFile,
+						  @NonNull OnNeedScrollListener onNeedScrollListener) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
+		this.selectedGpxFile = selectedGpxFile;
 		this.onNeedScrollListener = onNeedScrollListener;
 		appearanceItems = getWidthAppearanceItems();
 	}
@@ -189,7 +193,7 @@ public class TrackWidthCard extends MapBaseCard {
 
 	private class GpxWidthAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
 
-		private List<AppearanceListItem> items;
+		private final List<AppearanceListItem> items;
 
 		private GpxWidthAdapter(List<AppearanceListItem> items) {
 			this.items = items;
@@ -250,6 +254,9 @@ public class TrackWidthCard extends MapBaseCard {
 				color = AndroidUtils.getColorFromAttr(holder.itemView.getContext(), R.attr.active_color_basic);
 			} else {
 				iconId = TrackAppearanceFragment.getWidthIconId(item.getValue());
+			}
+			if (color == 0) {
+				color = TrackAppearanceFragment.getTrackColor(app, selectedGpxFile);
 			}
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconId, color));
 		}

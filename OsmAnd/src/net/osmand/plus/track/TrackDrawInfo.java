@@ -132,6 +132,18 @@ public class TrackDrawInfo {
 		return currentRecording;
 	}
 
+	public void resetParams() {
+		width = null;
+		color = 0;
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
+		splitType = GpxSplitType.NO_SPLIT.getType();
+		splitInterval = 0;
+		joinSegments = false;
+		showArrows = false;
+		showStartFinish = true;
+	}
+
 	private void readBundle(@NonNull Bundle bundle) {
 		filePath = bundle.getString(TRACK_FILE_NAME);
 		width = bundle.getString(TRACK_WIDTH);
