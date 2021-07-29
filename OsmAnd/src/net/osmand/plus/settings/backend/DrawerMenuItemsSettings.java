@@ -17,6 +17,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DOWNLOAD_MAPS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_HELP_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_LIVE_UPDATES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MAP_MARKERS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MEASURE_DISTANCE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_MY_PLACES_ID;
@@ -127,6 +128,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 		hiddenByDefault.add(DRAWER_AV_NOTES_ID);
 		hiddenByDefault.add(DRAWER_OSM_EDITS_ID);
 		hiddenByDefault.add(DRAWER_BACKUP_RESTORE_ID);
+		hiddenByDefault.add(DRAWER_LIVE_UPDATES_ID);
 		return hiddenByDefault;
 	}
 }
