@@ -46,7 +46,6 @@
             android:nextFocusUp="@id/searchEditText"
             android:textColor="?android:textColorPrimary"
             android:imeOptions="actionSearch"
-            tools:text="@string/lorem_ipsum"
 	        android:layout_marginEnd="@dimen/list_content_padding">
         </EditText>
 

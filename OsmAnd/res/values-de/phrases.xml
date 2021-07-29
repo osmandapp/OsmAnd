@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_10pin">Bowling</string>
     <string name="poi_9pin">Kegeln</string>
     <string name="poi_accountant">Buchhalter</string>
     <string name="poi_adit">Stollen</string>
-    <string name="poi_office_administrative">Verwaltungsstelle</string>
+    
     <string name="poi_advertising_agency">Werbeagentur</string>
     <string name="poi_aerialway_cable_car">Seilbahn</string>
     <string name="poi_aerialway_chair_lift">Sessellift</string>
@@ -514,7 +514,7 @@
     <string name="poi_swimming">Schwimmen</string>
     <string name="poi_swimming_pool">Schwimmbecken</string>
     <string name="poi_table_tennis">Tischtennis</string>
-    <string name="poi_tableware">Tafelgeschirrgeschäft</string>
+    
     <string name="poi_craft_tailor">Schneider</string>
     <string name="poi_tattoo">Tattoo-Studio</string>
     <string name="poi_tax_inspection">Steuerprüfung</string>
@@ -797,7 +797,7 @@
     <string name="poi_pasta">Nudelgeschäft</string>
     <string name="poi_pastry">Konditorei</string>
     <string name="poi_candles">Kerzengeschäft</string>
-    <string name="poi_fashion">Modegeschäft</string>
+    
     <string name="poi_garden_furniture">Gartenmöbelladen</string>
     <string name="poi_leather">Ledergeschäft</string>
     <string name="poi_music">Musikgeschäft</string>
@@ -813,7 +813,7 @@
     <string name="poi_weapons">Waffengeschäft</string>
     <string name="poi_breakwater">Wellenbrecher</string>
     <string name="poi_groyne">Buhne</string>
-    <string name="poi_power_cable_distribution_cabinet">Verteilerkasten</string>
+    
     <string name="poi_basin">Wasserbecken</string>
     <string name="poi_crane">Kran</string>
     <string name="poi_country">Land</string>
@@ -2718,7 +2718,7 @@
     <string name="poi_aquaculture_shrimp">Aquakultur: Garnelen</string>
     <string name="poi_aquaculture_fish">Aquakultur: Fisch</string>
     <string name="poi_aquaculture_mussels">Aquakultur: Muscheln</string>
-    <string name="poi_mdf">Hauptverteiler</string>
+    
     <string name="poi_organic_yes">ja</string>
     <string name="poi_organic_no">nein</string>
     <string name="poi_organic_only">Ausschließlich</string>

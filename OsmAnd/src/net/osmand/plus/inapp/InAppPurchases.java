@@ -94,10 +94,10 @@ public abstract class InAppPurchases {
 	}
 
 	@Nullable
-	public InAppSubscription getAnyPurchasedSubscription() {
+	public InAppSubscription getAnyPurchasedOsmAndProSubscription() {
 		List<InAppSubscription> allSubscriptions = subscriptions.getAllSubscriptions();
 		for (InAppSubscription subscription : allSubscriptions) {
-			if (subscription.isPurchased()) {
+			if (isOsmAndProSubscription(subscription) && subscription.isPurchased()) {
 				return subscription;
 			}
 		}

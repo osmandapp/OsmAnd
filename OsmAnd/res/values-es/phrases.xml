@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shop">Tienda</string>
     <string name="poi_shop_food">Tienda de comestibles y supermercado</string>
@@ -195,7 +195,7 @@
     <string name="poi_prison">Prisión</string>
     <string name="poi_embassy">Embajada</string>
     <string name="poi_migration">Migración</string>
-    <string name="poi_office_administrative">Oficina administrativa</string>
+    
     <string name="poi_city">Ciudad</string>
     <string name="poi_town">Pueblo</string>
     <string name="poi_village">Villa</string>
@@ -420,7 +420,7 @@
     <string name="poi_bed">Muebles de dormitorio</string>
     <string name="poi_fabric">Mercería</string>
     <string name="poi_ship_chandler">Proveedor naval</string>
-    <string name="poi_tableware">Tienda de vajillas</string>
+    
     <string name="poi_window_blind">Tienda de persianas</string>
     <string name="poi_atv">Cuatriciclos</string>
     <string name="poi_fire_flapper">Batefuegos</string>
@@ -786,7 +786,7 @@
     <string name="poi_pasta">Tienda de pasta</string>
     <string name="poi_pastry">Pastelería</string>
     <string name="poi_candles">Tienda de velas</string>
-    <string name="poi_fashion">Tienda de moda</string>
+    
     <string name="poi_free_flying">Artículos de paracaidismo</string>
     <string name="poi_garden_furniture">Muebles de jardín</string>
     <string name="poi_leather">Marroquinería</string>
@@ -827,7 +827,7 @@
     <string name="poi_horse_stile">Portilla equina</string>
     <string name="poi_breakwater">Rompeolas</string>
     <string name="poi_groyne">Rompeolas</string>
-    <string name="poi_power_cable_distribution_cabinet">Gabinete de distribución cableada</string>
+    
     <string name="poi_basin">Cuenca</string>
     <string name="poi_crane">Grúa</string>
     <string name="poi_cutline">Cortafuegos forestal</string>
@@ -2720,7 +2720,7 @@
     <string name="poi_aquaculture_shrimp">Acuicultura: gambas</string>
     <string name="poi_aquaculture_fish">Acuicultura: peces</string>
     <string name="poi_aquaculture_mussels">Acuicultura: mejillones</string>
-    <string name="poi_mdf">Red de distribución principal (MDF)</string>
+    
     <string name="poi_min_age">Edad mínima</string>
     <string name="poi_organic_yes">Sí</string>
     <string name="poi_organic_no">No</string>

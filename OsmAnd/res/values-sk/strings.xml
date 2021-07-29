@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -4076,7 +4076,7 @@
     <string name="announce_when_exceeded">Hlásiť keď je prekročené</string>
     <string name="user_points">Body používateľa</string>
     <string name="output">Výstup</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
+    
     <string name="shared_string_feet">stopy</string>
     <string name="srtm_unit_format">Variant jednotiek vrstevníc</string>
     <string name="srtm_download_list_help_message">OsmAnd poskytuje údaje vrstevníc v metroch a stopách. Budete musieť znovu stiahnuť súbor pre zmenu formátu.</string>
@@ -4172,7 +4172,6 @@
     <string name="offline_wikivoyage">Offline Wikivoyage</string>
     <string name="terrain_maps">Mapy terénu</string>
     <string name="nautical_depth">Námorná hĺbka</string>
-    <string name="advanced_widgets">Rozšírené nástroje</string>
     <string name="you_can_get_feature_as_part_of_pattern">Získajte “%1$s” ako súčasť: predplatné %2$s. Porovnanie:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s alebo %2$s</string>
     <string name="continue_with">Pokračovať s %1$s</string>

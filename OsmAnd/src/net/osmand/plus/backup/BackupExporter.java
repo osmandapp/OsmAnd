@@ -86,14 +86,14 @@ public class BackupExporter extends Exporter {
 		OperationLog log = new OperationLog("writeItems", true);
 		log.startOperation();
 
-		StringBuilder orderIdUpdateError = new StringBuilder();
-		backupHelper.updateOrderId((status, message, err) -> {
+		StringBuilder subscriptionError = new StringBuilder();
+		backupHelper.checkSubscriptions((status, message, err) -> {
 			if (err != null) {
-				orderIdUpdateError.append(err);
+				subscriptionError.append(err);
 			}
 		});
-		if (orderIdUpdateError.length() > 0) {
-			throw new IOException(orderIdUpdateError.toString());
+		if (subscriptionError.length() > 0) {
+			throw new IOException(subscriptionError.toString());
 		}
 
 		List<ItemWriterTask> tasks = new ArrayList<>();

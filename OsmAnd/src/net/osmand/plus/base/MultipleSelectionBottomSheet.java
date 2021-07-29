@@ -3,7 +3,6 @@ package net.osmand.plus.base;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,19 +36,16 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 	@Override
 	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		selectAllButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				checkBox.performClick();
-				boolean checked = checkBox.getState() == CHECKED;
-				if (checked) {
-					selectedItems.addAll(allItems);
-				} else {
-					selectedItems.clear();
-				}
-				onSelectedItemsChanged();
-				updateItemsSelection(checked);
+		selectAllButton.setOnClickListener(v -> {
+			checkBox.performClick();
+			boolean checked = checkBox.getState() == CHECKED;
+			if (checked) {
+				selectedItems.addAll(allItems);
+			} else {
+				selectedItems.clear();
 			}
+			onSelectedItemsChanged();
+			updateItemsSelection(checked);
 		});
 	}
 
@@ -70,18 +66,15 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 		checkBox.setChecked(checked);
 		CompoundButtonCompat.setButtonTintList(checkBox, AndroidUtils.createCheckedColorStateList(app, secondaryColorRes, activeColorRes));
 
-		view.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean checked = !checkBox.isChecked();
-				checkBox.setChecked(checked);
-				if (checked) {
-					selectedItems.add(item);
-				} else {
-					selectedItems.remove(item);
-				}
-				onSelectedItemsChanged();
+		view.setOnClickListener(v -> {
+			boolean chk = !checkBox.isChecked();
+			checkBox.setChecked(chk);
+			if (chk) {
+				selectedItems.add(item);
+			} else {
+				selectedItems.remove(item);
 			}
+			onSelectedItemsChanged();
 		});
 		title.setText(item.getTitle());
 		description.setText(item.getDescription());
@@ -99,7 +92,7 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 		super.notifyUiCreated();
 	}
 
-	private void onSelectedItemsChanged() {
+	public void onSelectedItemsChanged() {
 		updateSelectAllButton();
 		updateSelectedSizeView();
 		updateApplyButtonEnable();
@@ -143,7 +136,7 @@ public class MultipleSelectionBottomSheet extends SelectionBottomSheet {
 		}
 	}
 
-	protected void setSelectedItems(List<SelectableItem> selected) {
+	public void setSelectedItems(List<SelectableItem> selected) {
 		selectedItems.clear();
 		if (!Algorithms.isEmpty(selected)) {
 			selectedItems.addAll(selected);

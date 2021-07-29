@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_fuel_type">Τύπος καυσίμου</string>
     <string name="poi_fuel_avia_type">Τύπος καυσίμου (αεροπορία)</string>
@@ -194,7 +194,7 @@
     <string name="poi_dive">Καταδυτικός εξοπλισμός</string>
     <string name="poi_doityourself">Ανακαίνιση</string>
     <string name="poi_doors">Θύρες</string>
-    <string name="poi_fashion">Κατάστημα μόδας</string>
+    
     <string name="poi_fishing">Εξοπλισμός ψαρέματος</string>
     <string name="poi_florist">Ανθοπωλείο</string>
     <string name="poi_frame">Κατάστημα κορνιζών</string>
@@ -236,7 +236,7 @@
     <string name="poi_scuba_diving_shop">Είδη αυτόνομης κατάδυσης</string>
     <string name="poi_ship_chandler">Προμηθευτής πλοίων</string>
     <string name="poi_sports">Αθλητικά είδη</string>
-    <string name="poi_tableware">Επιτραπέζια σκεύη</string>
+    
     <string name="poi_cuisine_deli">Εδεσματοπωλείο</string>
     <string name="poi_stationery">Είδη γραφείου</string>
     <string name="poi_ticket">Εισιτήρια</string>
@@ -395,7 +395,7 @@
     <string name="poi_power_tower">Ηλεκτρικός πυλώνας</string>
     <string name="poi_traffic_calming_choker">Σαμαράκι (στραγγαλιστής)</string>
     <string name="poi_aerialway_pylon">Πυλώνας εναέριου αναβατήρα</string>
-    <string name="poi_power_cable_distribution_cabinet">Ερμάριο καλωδιακής διανομής</string>
+    
     <string name="poi_communication_tower">Πύργος επικοινωνιών</string>
     <string name="poi_observation_tower">Παρατηρητήριο</string>
     <string name="poi_bell_tower">Καμπαναριό</string>
@@ -547,7 +547,7 @@
     <string name="poi_pension_fund">Ταμείο συντάξεων</string>
     <string name="poi_migration">Μετανάστευση</string>
     <string name="poi_tax_inspection">Φορολογική επιθεώρηση</string>
-    <string name="poi_office_administrative">Γραφείο διοίκησης</string>
+    
     <string name="poi_customs">Τελωνεία</string>
     <string name="poi_country">Ύπαιθρος</string>
     <string name="poi_city">Πόλη</string>
@@ -2857,7 +2857,7 @@
     <string name="poi_aquaculture_shrimp">Υδατοκαλλιέργεια: γαρίδα</string>
     <string name="poi_aquaculture_fish">Υδατοκαλλιέργεια: ψάρια</string>
     <string name="poi_aquaculture_mussels">Υδατοκαλλιέργεια: μύδια</string>
-    <string name="poi_mdf">Κύριο πλαίσιο διανομής</string>
+    
     <string name="poi_min_age">Ελάχιστη ηλικία</string>
     <string name="poi_organic_yes">Ναι</string>
     <string name="poi_organic_no">Όχι</string>

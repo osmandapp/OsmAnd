@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?><resources><string name="rendering_attr_coloredBuildings_name">Farga bygningar</string>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="rendering_attr_coloredBuildings_name">Farga bygningar</string>
     <string name="continue_navigation">Hald fram navigering</string>
     <string name="pause_navigation">Stopp navigering mellombels</string>
     <string name="rendering_attr_subwayMode_name">T-banemodus</string>

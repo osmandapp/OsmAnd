@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shop">Loja</string>
     <string name="poi_shop_food">Loja de conveniência e supermercado</string>
@@ -130,7 +130,7 @@
     <string name="poi_electronics">Loja de eletrônicos</string>
     <string name="poi_fuel_octane_80">Octano 80</string>
     <string name="poi_public_transport_platform_trolleybus">Ponto de trólebus</string>
-    <string name="poi_tableware">Loja de talheres</string>
+    
     <string name="poi_ticket">Bilheteria</string>
     <string name="poi_tobacco">Tabacaria</string>
     <string name="poi_toys">Loja de brinquedos</string>
@@ -351,7 +351,7 @@
     <string name="poi_pension_fund">Fundo de pensão</string>
     <string name="poi_migration">Migração</string>
     <string name="poi_tax_inspection">Inspeção fiscal</string>
-    <string name="poi_office_administrative">Escritório administrativo</string>
+    
     <string name="poi_customs">Aduana</string>
     <string name="poi_city">Cidade grande</string>
     <string name="poi_town">Cidade menor</string>
@@ -812,7 +812,7 @@
     <string name="poi_pasta">Loja de massas</string>
     <string name="poi_pastry">Pastelaria</string>
     <string name="poi_candles">Loja de velas</string>
-    <string name="poi_fashion">Loja de moda</string>
+    
     <string name="poi_free_flying">Artigos de voo livre</string>
     <string name="poi_garden_furniture">Móveis para jardim</string>
     <string name="poi_leather">Artigos de couro</string>
@@ -830,7 +830,7 @@
     <string name="poi_swimming_pool_shop">Artigos de piscina</string>
     <string name="poi_breakwater">Quebra-mar</string>
     <string name="poi_groyne">Estacada</string>
-    <string name="poi_power_cable_distribution_cabinet">Cabine de distribuição elétrica</string>
+    
     <string name="poi_basin">Bacia</string>
     <string name="poi_crane">Guindaste</string>
     <string name="poi_tree">Árvore</string>
@@ -2907,7 +2907,7 @@
     <string name="poi_office_psychologist">Escritório de psicólogo</string>
     <string name="poi_office_midwife">Escritório de parteira</string>
     <string name="poi_payment_troika_no">Cartão Troika não aceito</string>
-    <string name="poi_mdf">Quadro de distribuição principal</string>
+    
     <string name="poi_diplomatic_ambassadors_residence">Residência do embaixador</string>
     <string name="poi_diplomatic_high_commission">Alto comissariado</string>
     <string name="poi_fire_operator">Operador do corpo de bombeiros</string>

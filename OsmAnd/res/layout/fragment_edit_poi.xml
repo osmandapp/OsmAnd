@@ -65,8 +65,7 @@
                         android:background="@color/color_transparent"
                         android:imeOptions="actionNext"
                         android:importantForAutofill="noExcludeDescendants"
-                        android:inputType="textCapSentences"
-                        tools:text="@string/lorem_ipsum"/>
+                        android:inputType="textCapSentences"/>
 
                 </net.osmand.plus.widgets.OsmandTextFieldBoxes>
             </LinearLayout>
@@ -109,8 +108,7 @@
                         android:imeOptions="actionSend"
                         android:importantForAutofill="noExcludeDescendants"
                         android:inputType="text"
-                        android:paddingBottom="@dimen/text_margin_small"
-                        tools:text="@string/lorem_ipsum" />
+                        android:paddingBottom="@dimen/text_margin_small" />
 
                 </net.osmand.plus.widgets.OsmandTextFieldBoxes>
 

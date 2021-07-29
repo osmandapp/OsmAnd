@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Si le mode d\'édition hors-ligne est activé, les modifications seront enregistrées localement puis envoyées à la demande. Sinon, les modifications seront envoyées immédiatement.</string>
@@ -4178,13 +4178,11 @@
     <string name="shared_string_includes">Inclus</string>
     <string name="complete_purchase">Finaliser l\'achat</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtenez les mises à jour mensuelles pour les cartes hors ligne.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Accédez aux widgets avancés OsmAnd.</string>
     <string name="unlimited_map_downloads">Téléchargements illimités de cartes</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia et Wikivoyage hors ligne</string>
     <string name="offline_wikipeadia">Wikipédia hors ligne</string>
     <string name="offline_wikivoyage">Wikivoyage hors ligne</string>
     <string name="terrain_maps">Cartes du terrain</string>
-    <string name="advanced_widgets">Widgets avancés</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s ou %2$s</string>
     <string name="continue_with">Continuer avec %1$s</string>
     <string name="not_available_with">Non disponible avec %1$s</string>

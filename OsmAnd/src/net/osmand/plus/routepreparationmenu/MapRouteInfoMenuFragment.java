@@ -23,17 +23,18 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.track.TrackMenuFragment;
-import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
+import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.widgets.TextViewExProgress;
 
 import static net.osmand.plus.track.TrackMenuFragment.startNavigationForGPX;
 
-public class MapRouteInfoMenuFragment extends ContextMenuFragment implements TrackSelectSegmentBottomSheet.OnSegmentSelectedListener {
+public class MapRouteInfoMenuFragment extends ContextMenuFragment
+		implements OnSegmentSelectedListener, DownloadEvents {
 	public static final String TAG = MapRouteInfoMenuFragment.class.getName();
 
 	@Nullable
@@ -113,12 +114,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 			modesLayoutListContainer = view.findViewById(R.id.modes_layout_list_container);
 			modesLayout = view.findViewById(R.id.modes_layout);
 
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dismiss();
-				}
-			});
+			view.setOnClickListener(v -> dismiss());
 
 			buildBottomView();
 
@@ -188,12 +184,15 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 
 	@Override
 	protected void updateMenuState(int currentMenuState, int newMenuState) {
-		if (getMyApplication().getRoutingHelper().isRouteCalculated()) {
-			ApplicationMode mV = getMyApplication().getRoutingHelper().getAppMode();
-			if (newMenuState == MenuState.HEADER_ONLY && currentMenuState == MenuState.HALF_SCREEN) {
-				getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.setModeValue(mV, true);
-			} else if (currentMenuState == MenuState.HEADER_ONLY && newMenuState == MenuState.HALF_SCREEN) {
-				getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.resetModeToDefault(mV);
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			if (app.getRoutingHelper().isRouteCalculated()) {
+				ApplicationMode mV = app.getRoutingHelper().getAppMode();
+				if (newMenuState == MenuState.HEADER_ONLY && currentMenuState == MenuState.HALF_SCREEN) {
+					app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.setModeValue(mV, true);
+				} else if (currentMenuState == MenuState.HEADER_ONLY && newMenuState == MenuState.HALF_SCREEN) {
+					app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.resetModeToDefault(mV);
+				}
 			}
 		}
 	}
@@ -244,15 +243,14 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 			return;
 		}
 		int y = getViewY();
+		ViewGroup parent = (ViewGroup) modesLayout.getParent();
 		if (y < getFullScreenTopPosY()) {
-			ViewGroup parent = (ViewGroup) modesLayout.getParent();
 			if (parent != null && parent != modesLayoutToolbarContainer) {
 				parent.removeView(modesLayout);
 				((ViewGroup) modesLayoutToolbarContainer).addView(modesLayout);
 			}
 			modesLayoutToolbar.setVisibility(View.VISIBLE);
 		} else {
-			ViewGroup parent = (ViewGroup) modesLayout.getParent();
 			if (parent != null && parent != modesLayoutListContainer) {
 				parent.removeView(modesLayout);
 				((ViewGroup) modesLayoutListContainer).addView(modesLayout);
@@ -469,7 +467,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 		((TextView) mainView.findViewById(R.id.ViaSubView)).setTextColor(descriptionColor);
 		((TextView) mainView.findViewById(R.id.toTitle)).setTextColor(descriptionColor);
 
-		ctx.setupRouteCalculationProgressBar((ProgressBar) mainView.findViewById(R.id.progress_bar));
+		ctx.setupRouteCalculationProgressBar(mainView.findViewById(R.id.progress_bar));
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity, int initialMenuState) {
@@ -512,14 +510,36 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 	public void onSegmentSelect(GPXUtilities.GPXFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMyApplication().getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
+			OsmandApplication app = mapActivity.getMyApplication();
+			app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
 			startNavigationForGPX(gpxFile, mapActivity.getMapActions(), mapActivity);
-			GPXRouteParams.GPXRouteParamsBuilder paramsBuilder = getMyApplication().getRoutingHelper().getCurrentGPXRoute();
+			GPXRouteParams.GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 			if (paramsBuilder != null) {
 				paramsBuilder.setSelectedSegment(selectedSegment);
-				getMyApplication().getRoutingHelper().onSettingsChanged(true);
+				app.getRoutingHelper().onSettingsChanged(true);
 			}
 			dismiss();
+		}
+	}
+
+	@Override
+	public void onUpdatedIndexesList() {
+		if (menu != null) {
+			menu.onUpdatedIndexesList();
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+		if (menu != null) {
+			menu.downloadInProgress();
+		}
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		if (menu != null) {
+			menu.downloadHasFinished();
 		}
 	}
 }

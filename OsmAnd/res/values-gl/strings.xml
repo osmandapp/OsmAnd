@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="fav_point_dublicate_message">Favorito renomeado a %1$s para evitar a duplicación.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>

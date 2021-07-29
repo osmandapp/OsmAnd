@@ -2,6 +2,11 @@ package net.osmand.plus.routing;
 
 import android.content.Context;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -9,6 +14,7 @@ import net.osmand.Location;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.track.GradientScaleType;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -22,11 +28,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 public enum ColoringType {
 
@@ -166,6 +167,19 @@ public enum ColoringType {
 			return isAttributeAvailableForDrawing(app, routeSegments, attributeName);
 		}
 
+		return true;
+	}
+
+	public boolean isAvailableInSubscription(@NonNull OsmandApplication app,
+	                                         @Nullable String attributeName) {
+		boolean proSubscription = InAppPurchaseHelper.isOsmAndProAvailable(app);
+		if (!proSubscription) {
+			if (isRouteInfoAttribute()) {
+				return attributeName != null
+						&& !Algorithms.containsAny(attributeName, "_roadClass", "_surface");
+			}
+			return this != ColoringType.SLOPE;
+		}
 		return true;
 	}
 

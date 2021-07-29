@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_bakery">Pekarna</string>
     <string name="poi_mall">Nakupovalno središče</string>
@@ -286,7 +286,7 @@
     <string name="poi_prosecutor">Tožilec</string>
     <string name="poi_pension_fund">Pokojninski sklad</string>
     <string name="poi_tax_inspection">Davčni inšpekcijski organi</string>
-    <string name="poi_office_administrative">Upravni urad</string>
+    
     <string name="poi_customs">Carina</string>
     <string name="poi_hamlet">Zaselek</string>
     <string name="poi_isolated_dwelling">Izolirano bivališče</string>
@@ -382,7 +382,7 @@
     <string name="poi_craft_photographer">Fotograf</string>
     <string name="poi_craft_photographic_laboratory">Fotografski laboratorij</string>
     <string name="poi_candles">Svečarna</string>
-    <string name="poi_fashion">Modna trgovina</string>
+    
     <string name="poi_entrance_exit">Izhod</string>
     <string name="poi_barrier_entrance">Prehod v zidu ali ograji</string>
     <string name="poi_entrance_main">Glavni vhod</string>

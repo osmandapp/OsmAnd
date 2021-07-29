@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shop">wobchod</string>
     <string name="poi_shop_food">žiwidłowy wobchod a superwiki</string>
@@ -82,7 +82,7 @@
     <string name="poi_doityourself">Wobchod za twaršćizny</string>
     <string name="poi_doors">Durje</string>
     <string name="poi_erotic">Seks-wobchod</string>
-    <string name="poi_fashion">Modowy wobchod</string>
+    
     <string name="poi_fishing">Wudźerske potrjeby</string>
     <string name="poi_florist">Kwětkarnja</string>
     <string name="poi_frame">Wobrazowe ramiki</string>
@@ -1470,7 +1470,7 @@
     <string name="poi_convenience">wobchodźik</string>
     <string name="poi_pasta">pasta</string>
     <string name="poi_sports">sportowe wuhotowanje</string>
-    <string name="poi_tableware">grat a sudobjo</string>
+    
     <string name="poi_swimming_pool_shop">tekstilije</string>
     <string name="poi_games">hrajki</string>
     <string name="poi_lighthouse">swětłownja</string>

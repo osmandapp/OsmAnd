@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_bakery">Pekařství</string>
     <string name="poi_alcohol">Obchod s alkoholem</string>
@@ -285,7 +285,7 @@
     <string name="poi_paint">Barvy laky</string>
     <string name="poi_photo">Fotografie</string>
     <string name="poi_radiotechnics">Elektronické součástky</string>
-    <string name="poi_tableware">Nádobí</string>
+    
     <string name="poi_ticket">Vstupenky</string>
     <string name="poi_vacuum_cleaner">Vysavače</string>
     <string name="poi_variety_store">Vše za xx</string>
@@ -418,7 +418,7 @@
     <string name="poi_pension_fund">Penzijní fond</string>
     <string name="poi_migration">Imigrační úřad</string>
     <string name="poi_tax_inspection">Daňová kontrola</string>
-    <string name="poi_office_administrative">Místní úřady</string>
+    
     <string name="poi_customs">Celní správa</string>
     <string name="poi_city">Velké město</string>
     <string name="poi_town">Město</string>
@@ -780,7 +780,7 @@
     <string name="poi_cheese">Obchod sýrem</string>
     <string name="poi_chocolate">Obchod čokoládou</string>
     <string name="poi_coffee">Obchod kávou</string>
-    <string name="poi_fashion">Obchod módou</string>
+    
     <string name="poi_garden_furniture">Obchod zahradním nábytkem</string>
     <string name="poi_leather">Obchod kůží</string>
     <string name="poi_watches">Hodinářství</string>
@@ -800,7 +800,7 @@
     <string name="poi_weapons">Obchod se zbraněmi</string>
     <string name="poi_breakwater">Vlnolam</string>
     <string name="poi_groyne">Pobřežní hráz</string>
-    <string name="poi_power_cable_distribution_cabinet">Kabelová rozvodní skříň</string>
+    
     <string name="poi_basin">Nádrž na dešťovou vodu</string>
     <string name="poi_crane">Jeřáb</string>
     <string name="poi_religious">Náboženská oblast</string>
@@ -1539,7 +1539,7 @@
     <string name="poi_aquaculture_shrimp">Akvakultura: garnát</string>
     <string name="poi_aquaculture_fish">Akvakultura: ryby</string>
     <string name="poi_aquaculture_mussels">Akvakultura: mušle</string>
-    <string name="poi_mdf">Hlavní rozvaděč</string>
+    
     <string name="poi_min_age">Minimální věk</string>
     <string name="poi_organic_yes">Ano</string>
     <string name="poi_organic_no">Ne</string>

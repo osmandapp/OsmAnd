@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="shared_string_no">לא</string>
     <string name="shared_string_yes">כן</string>
@@ -4183,7 +4183,6 @@
     <string name="complete_purchase">רכישה מלאה</string>
     <string name="regular_price">מחיר רגיל</string>
     <string name="nautical_depth">עומק ימי</string>
-    <string name="advanced_widgets">וידג׳טים מתקדמים</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s או %2$s</string>
     <string name="continue_with">להמשיך עם %1$s</string>
     <string name="not_available_with">לא זמין עם %1$s</string>
@@ -4206,7 +4205,6 @@
     <string name="purchases_feature_desc_combined_wiki">ניתן לקרוא ערכים מוויקיפדיה בדרכים, ללא חיבור לאינטרנט. נתונים בלתי מקוונים בחלוקה למדינות זמינים בכל השפות.</string>
     <string name="purchases_feature_desc_unlimited_map_download">קבלת הורדות בלתי מוגבלות לכל המפות הבלתי מקוונות של היבשות והמחוזות.</string>
     <string name="purchases_feature_desc_monthly_map_updates">קבלת גישה לעדכונים חודשיים מתחדשים למפות בלתי־מקוונות.</string>
-    <string name="purchases_feature_desc_advanced_widgets">קבלת גישה לווידג׳טים מתקדמים של OsmAnd.</string>
     <string name="unlimited_map_downloads">הורדת מפות ללא הגבלה</string>
     <string name="backup_error_gzip_only_supported_upload">יש להגיש את הקובץ בתור ‎.gzip</string>
     <string name="backup_error_file_not_available">הקובץ אינו זמין</string>

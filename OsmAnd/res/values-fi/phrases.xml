@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shop">Kauppa</string>
     <string name="poi_shop_food">Lähikauppa ja supermarket</string>
@@ -169,7 +169,7 @@
     <string name="poi_dive">Sukellustarvikkeet</string>
     <string name="poi_doors">Ovet</string>
     <string name="poi_erotic">Aikuisviihde</string>
-    <string name="poi_fashion">Muotikauppa</string>
+    
     <string name="poi_fishing">Kalastusvälineet</string>
     <string name="poi_florist">Kukkakauppa</string>
     <string name="poi_furniture">Huonekalukauppa</string>
@@ -944,7 +944,7 @@
     <string name="poi_trophy">Pokaalit, palkinnot</string>
     <string name="poi_meadow">Niitty</string>
     <string name="poi_register_office">Väestörekisteritoimisto</string>
-    <string name="poi_office_administrative">Hallinnollinen toimisto</string>
+    
     <string name="poi_suburb">Lähiö</string>
     <string name="poi_employment_agency">Työvoimatoimisto</string>
     <string name="poi_office_religion">Uskonnollinen toimisto</string>

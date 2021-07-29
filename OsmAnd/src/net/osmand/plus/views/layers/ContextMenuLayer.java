@@ -62,6 +62,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
@@ -277,7 +278,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			mAddGpxPointBottomSheetHelper.onDraw(box);
 		} else if (!markerCustomized) {
 			LatLon latLon = null;
-			if (menu.isActive()) {
+			boolean shouldShowContextMarker = menu.getMenuController() != null
+					&& menu.getMenuController().shouldShowContextMarker();
+			if (menu.isActive() && shouldShowContextMarker) {
 				latLon = menu.getLatLon();
 			} else if (activity.getTrackMenuFragment() != null) {
 				latLon = activity.getTrackMenuFragment().getLatLon();
@@ -777,7 +780,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 							selectedPoint.lat = pointLatLon.getLatitude();
 							selectedPoint.lon = pointLatLon.getLongitude();
 							SelectedGpxPoint selectedGpxPoint =
-									new SelectedGpxPoint(null, selectedPoint, null, null, Float.NaN);
+									new SelectedGpxPoint(null, selectedPoint);
 							selectedObjects.put(new Pair<>(travelGpx, selectedGpxPoint), gpxMenuProvider);
 						}
 					} else {
