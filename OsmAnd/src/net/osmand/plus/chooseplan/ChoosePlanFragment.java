@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static net.osmand.plus.chooseplan.TroubleshootingCard.PURCHASES_RESTORE_BUTTON_INDEX;
+import static net.osmand.plus.chooseplan.TroubleshootingCard.REDEEM_PROMO_CODE_BUTTON_INDEX;
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getDefaultIconColorId;
 
@@ -166,7 +168,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FrameLayout container = mainView.findViewById(R.id.troubleshooting_card);
-			TroubleshootingCard card = new TroubleshootingCard(activity, purchaseHelper, usedOnMap);
+			TroubleshootingCard card = new TroubleshootingCard(activity, usedOnMap);
 			card.setListener(this);
 			container.addView(card.build(activity));
 		}
@@ -296,13 +298,17 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 
 	@Override
 	public void onCardPressed(@NonNull BaseCard card) {
-		if (card instanceof TroubleshootingCard) {
-			dismiss();
-		}
+
 	}
 
 	@Override
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
-
+		if (card instanceof TroubleshootingCard) {
+			if (buttonIndex == PURCHASES_RESTORE_BUTTON_INDEX) {
+				purchaseHelper.requestInventory();
+			} else if (buttonIndex == REDEEM_PROMO_CODE_BUTTON_INDEX) {
+				dismiss();
+			}
+		}
 	}
 }

@@ -29,15 +29,20 @@ import net.osmand.plus.chooseplan.NoPurchasesCard;
 import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
-import net.osmand.plus.liveupdates.CountrySelectionFragment;
+import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
+import static net.osmand.plus.chooseplan.TroubleshootingCard.PURCHASES_RESTORE_BUTTON_INDEX;
+
+public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener, OnFragmentInteractionListener, CardListener {
 
 	public static final String TAG = PurchasesFragment.class.getName();
 
@@ -49,6 +54,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	private ViewGroup cardsContainer;
 
 	private boolean nightMode;
+	private boolean toastAllowed;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
 		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
@@ -83,10 +89,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	public void onResume() {
 		super.onResume();
 		updateCards();
-
-		if (purchaseHelper != null) {
-			purchaseHelper.requestInventory();
-		}
+		requestInventory();
 	}
 
 	private void updateCards() {
@@ -110,7 +113,9 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		if (!Version.isPaidVersion(app) || Algorithms.isEmpty(mainPurchases)) {
 			cardsContainer.addView(new NoPurchasesCard(mapActivity, false).build(mapActivity));
 		}
-		cardsContainer.addView(new TroubleshootingCard(mapActivity, purchaseHelper, false).build(mapActivity));
+		TroubleshootingCard troubleshootingCard = new TroubleshootingCard(mapActivity, false);
+		troubleshootingCard.setListener(this);
+		cardsContainer.addView(troubleshootingCard.build(mapActivity));
 	}
 
 	@Nullable
@@ -156,32 +161,44 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		appbar.addView(toolbar);
 	}
 
-	@Override
-	public void onError(InAppPurchaseHelper.InAppPurchaseTaskType taskType, String error) {
-	}
-
-	@Override
-	public void onGetItems() {
-		updateCards();
-	}
-
-	@Override
-	public void onItemPurchased(String sku, boolean active) {
+	protected void requestInventory() {
 		if (purchaseHelper != null) {
 			purchaseHelper.requestInventory();
 		}
 	}
 
 	@Override
-	public void showProgress(InAppPurchaseHelper.InAppPurchaseTaskType taskType) {
+	public void onError(InAppPurchaseTaskType taskType, String error) {
+		if (toastAllowed && !Algorithms.isEmpty(error)) {
+			toastAllowed = false;
+			app.showShortToastMessage(error);
+		}
 	}
 
 	@Override
-	public void dismissProgress(InAppPurchaseHelper.InAppPurchaseTaskType taskType) {
+	public void onGetItems() {
+		if (toastAllowed) {
+			toastAllowed = false;
+			app.showShortToastMessage(R.string.purchases_restored);
+		}
+		updateCards();
 	}
 
 	@Override
-	public void onSearchResult(CountrySelectionFragment.CountryItem name) {
+	public void onItemPurchased(String sku, boolean active) {
+		requestInventory();
+	}
+
+	@Override
+	public void showProgress(InAppPurchaseTaskType taskType) {
+	}
+
+	@Override
+	public void dismissProgress(InAppPurchaseTaskType taskType) {
+	}
+
+	@Override
+	public void onSearchResult(CountryItem name) {
 
 	}
 
@@ -192,5 +209,25 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 	private MapActivity getMapActivity() {
 		return (MapActivity) getActivity();
+	}
+
+	@Override
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+
+	}
+
+	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		if (card instanceof TroubleshootingCard) {
+			if (buttonIndex == PURCHASES_RESTORE_BUTTON_INDEX) {
+				toastAllowed = true;
+				requestInventory();
+			}
+		}
 	}
 }
