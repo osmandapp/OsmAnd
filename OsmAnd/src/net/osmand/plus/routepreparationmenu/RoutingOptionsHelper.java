@@ -283,6 +283,8 @@ public class RoutingOptionsHelper {
 			} else if (gpxParam.id == R.string.calculate_osmand_route_gpx) {
 				settings.GPX_ROUTE_CALC.set(selected);
 				rp.setCalculateOsmAndRoute(selected);
+			} else if (gpxParam.id == R.string.connect_track_points_as) {
+				rp.setConnectPointStraightly(selected);
 			}
 		}
 		if (gpxParam.id == R.string.calculate_osmand_route_without_internet) {

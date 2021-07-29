@@ -274,10 +274,11 @@ public class RouteProvider {
 		}
 
 		if (routeParams.gpxRoute.useIntermediatePointsRTE) {
-			return calculateOsmAndRouteWithIntermediatePoints(routeParams, gpxParams.points);
+			return calculateOsmAndRouteWithIntermediatePoints(routeParams, gpxParams.points,
+					gpxParams.connectPointsStraightly);
 		}
 
-		List<Location> gpxRoute ;
+		List<Location> gpxRoute;
 		int[] startI = new int[]{0};
 		int[] endI = new int[]{gpxParams.points.size()};
 		if (calcWholeRoute) {
@@ -310,7 +311,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult calculateOsmAndRouteWithIntermediatePoints(RouteCalculationParams routeParams,
-			final List<Location> intermediates) throws IOException {
+			final List<Location> intermediates, boolean connectPointsStraightly) throws IOException {
 		RouteCalculationParams rp = new RouteCalculationParams();
 		rp.calculationProgress = routeParams.calculationProgress;
 		rp.ctx = routeParams.ctx;
@@ -346,8 +347,9 @@ public class RouteProvider {
 			} catch (SAXException e) {
 				throw new IOException(e);
 			}
-		} else if (routeParams.mode.getRouteService() == RouteService.STRAIGHT ||
-				routeParams.mode.getRouteService() == RouteService.DIRECT_TO) {
+		} else if (routeParams.mode.getRouteService() == RouteService.STRAIGHT
+				|| routeParams.mode.getRouteService() == RouteService.DIRECT_TO
+				|| connectPointsStraightly) {
 			return findStraightRoute(rp);
 		}
 		return findVectorMapsRoute(rp, false);

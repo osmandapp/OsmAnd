@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="connect_track_points_as">Connect track points as</string>
     <string name="track_has_no_needed_data">The track does not contain needed data.</string>
     <string name="promo_subscription">Promo subscription</string>
     <string name="active_till">Active till %1$s</string>

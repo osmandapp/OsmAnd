@@ -79,9 +79,7 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 				cardsContainer.addView(attachTrackCard.build(mapActivity));
 			}
 
-			if (!rparams.useIntermediateRtePoints()) {
-				setupNavigateOptionsCard(cardsContainer, rparams);
-			}
+			setupNavigateOptionsCard(cardsContainer, rparams);
 		}
 	}
 
@@ -108,8 +106,14 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 		LocalRoutingParameter navigationType = new OtherLocalRoutingParameter(navigationTypeId,
 				app.getString(navigationTypeId), routeParamsBuilder.isCalculateOsmAndRouteParts());
 
+
+		int connectTrackPointsId = R.string.connect_track_points_as;
+		LocalRoutingParameter connectTrackPointStraightly = new OtherLocalRoutingParameter(connectTrackPointsId,
+				app.getString(connectTrackPointsId), routeParamsBuilder.shouldConnectPointsStraightly());
+
 		NavigateTrackOptionsCard navigateTrackCard = new NavigateTrackOptionsCard(mapActivity,
-				passWholeRoute, navigationType);
+				passWholeRoute, navigationType, connectTrackPointStraightly,
+				routeParamsBuilder.useIntermediateRtePoints());
 		navigateTrackCard.setListener(target);
 		cardsContainer.addView(navigateTrackCard.build(mapActivity));
 	}
