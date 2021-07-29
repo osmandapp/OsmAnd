@@ -423,4 +423,8 @@
 	<dimen name="descriptionLineSpacingExtra">3sp</dimen>
 
 	<dimen name="list_item_triple_row_height">80dp</dimen>
+
+	<dimen name="radius_normal">6dp</dimen>
+	<dimen name="radius_small">3dp</dimen>
+	<dimen name="radius_large">9dp</dimen>
 </resources>
