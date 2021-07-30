@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="available_until">Available until %1$s</string>
     <string name="use_login_and_password">Use login and password</string>
     <string name="benefits_for_contributors_secondary_descr">Sign in to OpenStreetMap and check if you are eligible to get unlimited monthly &amp; hourly map updates. </string>
     <string name="benefits_for_contributors_primary_descr">You could benefit hourly unlimited map updates without limitation if you are an active contributor to OpenStreetMap.org.</string>

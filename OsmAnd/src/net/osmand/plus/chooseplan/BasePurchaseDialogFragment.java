@@ -1,5 +1,7 @@
 package net.osmand.plus.chooseplan;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
@@ -34,8 +36,6 @@ import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
-
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
 
 public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragment
 		implements InAppPurchaseListener, OnOffsetChangedListener, OnScrollChangedListener {
@@ -80,7 +80,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 		purchaseHelper = app.getInAppPurchaseHelper();
 		usedOnMap = getMapActivity() != null;
 		nightMode = isNightMode(usedOnMap);
-		themedInflater = UiUtilities.getInflater(app, nightMode);
+		themedInflater = UiUtilities.getInflater(getMyActivity(), nightMode);
 	}
 
 	@NonNull
@@ -240,7 +240,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	}
 
 	protected void setupRoundedBackground(@NonNull View view, @NonNull Drawable normal,
-	                                      @ColorInt int color, ButtonBackground background) {
+										  @ColorInt int color, ButtonBackground background) {
 		Drawable selected = createRoundedDrawable(UiUtilities.getColorWithAlpha(color, 0.5f), background);
 		setupRoundedBackground(view, normal, selected);
 	}

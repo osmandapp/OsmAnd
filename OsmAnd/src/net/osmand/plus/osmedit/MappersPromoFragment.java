@@ -1,5 +1,7 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
+
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -22,6 +25,9 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.chooseplan.BasePurchaseDialogFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
+import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +36,15 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 
 	public static final String TAG = MappersPromoFragment.class.getSimpleName();
 
+	private OsmOAuthHelper authHelper;
 	private LinearLayout listContainer;
 	private final List<OsmAndFeature> allFeatures = new ArrayList<>();
 
-	public static void showInstance(@NonNull FragmentActivity activity) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
+	public static void showInstance(@NonNull FragmentActivity activity, @Nullable Fragment target) {
+		FragmentManager manager = activity.getSupportFragmentManager();
+		if (!manager.isStateSaved() && manager.findFragmentByTag(TAG) == null) {
 			MappersPromoFragment fragment = new MappersPromoFragment();
+			fragment.setTargetFragment(target, 0);
 			fragment.show(activity.getSupportFragmentManager(), TAG);
 		}
 	}
@@ -49,6 +57,7 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		authHelper = app.getOsmOAuthHelper();
 		allFeatures.add(OsmAndFeature.HOURLY_MAP_UPDATES);
 		allFeatures.add(OsmAndFeature.MONTHLY_MAP_UPDATES);
 		allFeatures.add(OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
@@ -57,8 +66,8 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
-	                         @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
+							 @Nullable ViewGroup container,
+							 @Nullable Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		listContainer = mainView.findViewById(R.id.list_container);
 
@@ -117,7 +126,13 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 		int normal = getColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		int pressed = getColor(nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light);
 		setupButtonBackground(button, normal, pressed);
-		button.setOnClickListener(v -> app.showShortToastMessage("sing in"));
+		button.setOnClickListener(v -> {
+			Fragment fragment = getTargetFragment();
+			if (fragment instanceof OsmAuthorizationListener) {
+				authHelper.addListener((OsmAuthorizationListener) fragment);
+			}
+			authHelper.startOAuth((ViewGroup) v, nightMode);
+		});
 	}
 
 	private void setupUseLoginAndPasswordButton() {
@@ -125,7 +140,12 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 		int normal = getColor(nightMode ? R.color.inactive_buttons_and_links_bg_dark : R.color.profile_button_gray);
 		int pressed = getColor(nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light);
 		setupButtonBackground(button, normal, pressed);
-		button.setOnClickListener(v -> app.showShortToastMessage("log in with password"));
+		button.setOnClickListener(v -> {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				OsmLoginDataBottomSheet.showInstance(fragmentManager, OSM_LOGIN_DATA, getTargetFragment(), usedOnMap, null);
+			}
+		});
 	}
 
 	private void setupButtonBackground(@NonNull View button, @ColorInt int normalColor, @ColorInt int pressedColor) {
