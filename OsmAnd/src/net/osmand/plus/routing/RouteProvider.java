@@ -13,7 +13,6 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
-import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -789,7 +788,8 @@ public class RouteProvider {
 					params.ctx.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());							
+							log.error("Runtime error: " + e.getMessage(), e);
+							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());
 						}
 					});
 					result = router.searchRoute(ctx, st, en, inters);

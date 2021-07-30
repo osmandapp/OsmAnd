@@ -62,7 +62,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
-import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
@@ -496,8 +495,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 				if (!routeCalculationInProgress) {
 					fragment.hideRouteCalculationProgressBar();
-					if (!app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.
-							getModeValue(app.getRoutingHelper().getAppMode())) {
+					if (!app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.getModeValue(app.getRoutingHelper().getAppMode())
+							|| app.getRoutingHelper().getRoute().hasMissingMaps()) {
 						fragment.openMenuHalfScreen();
 					} else {
 						fragment.openMenuHeaderOnly();
@@ -1247,7 +1246,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					if (mapActivity1 != null) {
 						mapActivity1.getMyApplication().getPoiFilters()
 								.removeSelectedPoiFilter(poiUIFilter);
-						mapActivity1.getMapView().refreshMap();
+						mapActivity1.refreshMap();
 						updateOptionsButtons();
 					}
 				});
@@ -1331,7 +1330,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					if (app.getAvoidSpecificRoads().getImpassableRoads().isEmpty() && getAvoidedParameters(app).isEmpty()) {
 						mode.parameters.remove(parameter);
 					}
-					mapActivity1.getMapView().refreshMap();
+					mapActivity1.refreshMap();
 					if (mode.parameters.size() > 2) {
 						item.removeView(v);
 					} else {
@@ -2285,7 +2284,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (fragment instanceof MapRouteInfoMenuFragment) {
 				cancelButtonsAnimations();
 				mapActivity.getMapView().setMapPositionX(0);
-				mapActivity.getMapView().refreshMap();
+				mapActivity.refreshMap();
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_route_land_left_margin), false);
 				AndroidUiHelper.updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), true);
 				if (switched) {

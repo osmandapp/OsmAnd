@@ -21,14 +21,15 @@ import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
+import static net.osmand.plus.backup.BackupHelper.STATUS_NO_ORDER_ID_ERROR;
 
-public class ServerError {
+public class BackupError {
 
 	private final String error;
 	private String message;
 	private int code;
 
-	public ServerError(@NonNull String error) {
+	public BackupError(@NonNull String error) {
 		this.error = error;
 		parseError(error);
 	}
@@ -104,6 +105,8 @@ public class ServerError {
 				return app.getString(R.string.backup_error_subscription_was_expired);
 			case SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED:
 				return app.getString(R.string.backup_error_user_is_already_registered);
+			case STATUS_NO_ORDER_ID_ERROR:
+				return app.getString(R.string.backup_error_no_subscription);
 		}
 		return message != null ? message : error;
 	}

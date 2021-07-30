@@ -344,7 +344,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private void refreshMap() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMapView().refreshMap();
+			mapActivity.refreshMap();
 		}
 	}
 

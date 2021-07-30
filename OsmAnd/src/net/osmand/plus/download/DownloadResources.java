@@ -14,7 +14,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
@@ -511,7 +510,7 @@ public class DownloadResources extends DownloadResourceGroup {
 						srtmIndexes.add((IndexItem) item);
 					}
 				}
-				if (srtmIndexes.size() > 1) {
+				if (srtmIndexes.size() > 0) {
 					individualItems.removeAll(srtmIndexes);
 					group.addItem(new SrtmDownloadItem(srtmIndexes, useMetersByDefault));
 				}
@@ -637,13 +636,25 @@ public class DownloadResources extends DownloadResourceGroup {
 		return res;
 	}
 
-	public boolean hasExternalFileAt(int x31, int y31, int zoom) {
+	public boolean hasExternalMapFileAt(int x31, int y31, int zoom) {
+		return hasExternalFileAt(x31, y31, zoom, false);
+	}
+
+	public boolean hasExternalRouteFileAt(int x31, int y31, int zoom) {
+		return hasExternalFileAt(x31, y31, zoom, true);
+	}
+
+	public boolean hasExternalFileAt(int x31, int y31, int zoom, boolean routeData) {
 		for (BinaryMapReaderResource reader : app.getResourceManager().getFileReaders()) {
 			String fileName = reader.getFileName();
 			if (!fileName.startsWith("World_") && fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) && !isDownloadedFile(fileName)) {
 				BinaryMapIndexReader shallowReader = reader.getShallowReader();
 				if (shallowReader != null) {
-					if (shallowReader.containsMapData(x31, y31, x31, y31, zoom)) {
+					if (routeData) {
+						if (shallowReader.containsRouteData(x31, y31, x31, y31, zoom)) {
+							return true;
+						}
+					} else if (shallowReader.containsMapData(x31, y31, x31, y31, zoom)) {
 						return true;
 					}
 				}

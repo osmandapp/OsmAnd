@@ -211,9 +211,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		zoomPaddingTop = dpToPx(ZOOM_PADDING_TOP_DP);
 
 		view = inflater.inflate(R.layout.map_context_menu_fragment, container, false);
-		if (!menu.isActive()) {
-			return view;
-		}
 		AndroidUtils.addStatusBarPadding21v(mapActivity, view);
 
 		nightMode = menu.isNightMode();

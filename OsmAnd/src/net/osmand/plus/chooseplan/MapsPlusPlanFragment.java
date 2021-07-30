@@ -1,7 +1,5 @@
 package net.osmand.plus.chooseplan;
 
-import android.graphics.drawable.Drawable;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 

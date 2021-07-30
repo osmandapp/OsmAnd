@@ -1,12 +1,13 @@
 package net.osmand.search.core;
 
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
-
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.util.MapUtils;
+
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 // immutable object
 public class SearchSettings {
@@ -193,7 +195,10 @@ public class SearchSettings {
 		WorldRegion region = null;
 		try {
 			if (regions != null) {
-				region = this.regions.getSmallestBinaryMapDataObjectAt(l).getKey();
+				Map.Entry<WorldRegion, BinaryMapDataObject> entry = regions.getSmallestBinaryMapDataObjectAt(l);
+				if (entry != null) {
+					region = entry.getKey();
+				}
 			}
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
