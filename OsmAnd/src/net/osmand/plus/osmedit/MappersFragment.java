@@ -41,6 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
@@ -54,6 +55,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 
 	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM", Locale.US);
+	private static final int CHANGES_FOR_MAPPER_PROMO = 15;
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -230,7 +232,41 @@ public class MappersFragment extends BaseOsmAndFragment {
 	}
 
 	public void refreshContributions() {
+		downloadChangesInfo(result -> {
+			changesInfo = result;
+			checkLastChanges(result);
+			return true;
+		});
+	}
 
+	private void checkLastChanges(@NonNull Map<String, Integer> map) {
+		int size = getChangesSize(map);
+		if (size >= CHANGES_FOR_MAPPER_PROMO) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.MONTH, 1);
+			calendar.set(Calendar.DAY_OF_MONTH, 16);
+			calendar.set(Calendar.HOUR_OF_DAY, 0);
+			calendar.set(Calendar.MINUTE, 0);
+			calendar.set(Calendar.SECOND, 0);
+			settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.set(calendar.getTimeInMillis());
+		}
+	}
+
+	private int getChangesSize(@NonNull Map<String, Integer> map) {
+		int changesSize = 0;
+		Calendar calendar = Calendar.getInstance();
+		String date = DATE_FORMAT.format(calendar.getTimeInMillis());
+
+		Integer changesForMonth = map.get(date);
+		changesSize += changesForMonth != null ? changesForMonth : 0;
+
+		calendar.add(Calendar.MONTH, -1);
+		date = DATE_FORMAT.format(calendar.getTimeInMillis());
+
+		changesForMonth = map.get(date);
+		changesSize += changesForMonth != null ? changesForMonth : 0;
+
+		return changesSize;
 	}
 
 	public void downloadChangesInfo(@NonNull CallbackWithObject<Map<String, Integer>> callback) {
