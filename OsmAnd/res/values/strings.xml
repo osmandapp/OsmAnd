@@ -11,6 +11,18 @@
 	Thx - Hardy
 
 -->
+
+    <string name="map_updates_are_unavailable_yet">Map updates are unavailable yet :-(</string>
+    <string name="contributions_may_calculate_with_delay">Contributions might be calculated with several hour delays.</string>
+    <string name="shared_string_contributions">Contributions</string>
+    <string name="not_enough_contributions_descr">You need to do at least 10 map contributions to OpenStreetMap for last 30 days.</string>
+    <string name="enough_contributions_descr">Congratulations you have done enough contributions to OpenStreetMap and could enjoy unlimited map updates.</string>
+    <string name="available_until">Available until %1$s</string>
+    <string name="use_login_and_password">Use login and password</string>
+    <string name="benefits_for_contributors_secondary_descr">Sign in to OpenStreetMap and check if you are eligible to get unlimited monthly &amp; hourly map updates. </string>
+    <string name="benefits_for_contributors_primary_descr">You could benefit hourly unlimited map updates without limitation if you are an active contributor to OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors">Benefits for active OSM contributors</string>
+    <string name="map_updates_for_mappers">Map updates for Mappers</string>
     <string name="backup_error_no_subscription">No subscription present</string>
     <string name="reset_to_original">Reset to original</string>
     <string name="online_maps_searching_descr">Online maps search is running.</string>

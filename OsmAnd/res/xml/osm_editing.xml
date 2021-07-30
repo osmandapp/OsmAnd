@@ -41,6 +41,14 @@
 		tools:icon="@drawable/ic_action_laptop" />
 
 	<Preference
+		android:key="map_updates_for_mappers"
+		android:layout="@layout/preference_active_descr"
+		android:persistent="false"
+		android:icon="@drawable/ic_action_map_update"
+		android:title="@string/map_updates_for_mappers"
+		android:summary="@string/shared_string_learn_more"/>
+
+	<Preference
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
