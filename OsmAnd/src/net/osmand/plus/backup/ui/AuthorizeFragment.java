@@ -10,8 +10,10 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -138,6 +140,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		setupTextWatchers();
 		updateContent();
 		setupSupportButton();
+		setupKeyboardListener();
 
 		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.get_plugin);
 		UiUtilities.setupDialogButton(nightMode, buttonContinue, DialogButtonType.PRIMARY, R.string.shared_string_continue);
@@ -447,6 +450,35 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		TextView supportDescription = mainView.findViewById(R.id.contact_support_button);
 		supportDescription.setText(createColoredSpannable(R.string.osmand_cloud_help_descr, OSMAND_EMAIL));
 		supportDescription.setOnClickListener(v -> app.sendSupportEmail(getString(R.string.backup_and_restore)));
+	}
+
+	private void setupKeyboardListener() {
+		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+
+			private int previousKeyboardHeight = 0;
+
+			@Override
+			public void onGlobalLayout() {
+				View keyboardSpace = mainView.findViewById(R.id.keyboard_space);
+				View space = mainView.findViewById(R.id.space);
+				int keyboardHeight = AndroidUtils.getSoftKeyboardHeight(mainView);
+				boolean heightChanged = previousKeyboardHeight != keyboardHeight;
+				if (!heightChanged) {
+					return;
+				}
+
+				previousKeyboardHeight = keyboardHeight;
+				if (keyboardHeight > 0) {
+					space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, space.getHeight()));
+					keyboardSpace.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+							keyboardHeight));
+					AndroidUiHelper.updateVisibility(keyboardSpace, true);
+				} else {
+					space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 0, 1));
+					AndroidUiHelper.updateVisibility(keyboardSpace, false);
+				}
+			}
+		});
 	}
 
 	public enum LoginDialogType {
