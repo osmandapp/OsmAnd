@@ -13,7 +13,7 @@ import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.backup.ServerError;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.ThreadPoolTaskExecutor;
 import net.osmand.plus.backup.ThreadPoolTaskExecutor.OnThreadPoolTaskExecutorListener;
 import net.osmand.util.Algorithms;
@@ -121,7 +121,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 				if (response != null) {
 					String errorStr = response.getError();
 					if (!Algorithms.isEmpty(errorStr)) {
-						message = new ServerError(errorStr).toString();
+						message = new BackupError(errorStr).toString();
 						success = false;
 					} else {
 						String responseStr = response.getResponse();
