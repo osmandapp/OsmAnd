@@ -56,7 +56,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	private int lastScrollY;
 	private int lastKnownToolbarOffset;
 
-	protected enum ButtonBackground {
+	public enum ButtonBackground {
 		ROUNDED(R.drawable.rectangle_rounded),
 		ROUNDED_SMALL(R.drawable.rectangle_rounded_small),
 		ROUNDED_LARGE(R.drawable.rectangle_rounded_large);
@@ -65,7 +65,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 			this.drawableId = drawableId;
 		}
 
-		private int drawableId;
+		public int drawableId;
 	}
 
 	@ColorRes
