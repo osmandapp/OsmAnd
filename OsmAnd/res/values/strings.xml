@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="connect_track_points_as">Connect track points as</string>
     <string name="map_updates_are_unavailable_yet">Map updates are unavailable yet :-(</string>
     <string name="contributions_may_calculate_with_delay">Contributions might be calculated with several hour delays.</string>
     <string name="shared_string_contributions">Contributions</string>
