@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="use_login_and_password">Use login and password</string>
+    <string name="benefits_for_contributors_secondary_descr">Sign in to OpenStreetMap and check if you are eligible to get unlimited monthly &amp; hourly map updates. </string>
+    <string name="benefits_for_contributors_primary_descr">You could benefit hourly unlimited map updates without limitation if you are an active contributor to OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors">Benefits for active OSM contributors</string>
+    <string name="map_updates_for_mappers">Map updates for Mappers</string>
     <string name="reset_to_original">Reset to original</string>
     <string name="online_maps_searching_descr">Online maps search is running.</string>
     <string name="online_maps_required_descr">Unfortunately, OsmAnd could not find (calculate) a route suitable for your settings.\n\nPerhaps some maps are not loaded. You can run online checking the necessary maps.</string>

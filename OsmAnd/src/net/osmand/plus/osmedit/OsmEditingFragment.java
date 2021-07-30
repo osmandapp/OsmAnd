@@ -41,6 +41,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
 	public static final String OSM_LOGIN_DATA = "osm_login_data";
 	private static final String OSM_EDITING_INFO = "osm_editing_info";
+	private static final String MAP_UPDATES_FOR_MAPPERS = "map_updates_for_mappers";
 
 	private OsmOAuthHelper authHelper;
 
@@ -71,6 +72,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 		setupOfflineEditingPref();
 		setupUseDevUrlPref();
+		setupMapForMappersPref();
 		setupOsmEditsDescrPref();
 		setupOsmEditsPref();
 	}
@@ -152,6 +154,12 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		}
 	}
 
+	private void setupMapForMappersPref() {
+		Preference mapsForMappersPref = findPreference(MAP_UPDATES_FOR_MAPPERS);
+		Drawable icon = getPersistentPrefIcon(R.drawable.ic_action_map_update);
+		mapsForMappersPref.setIcon(icon);
+	}
+
 	private void setupOsmEditsDescrPref() {
 		String menu = getString(R.string.shared_string_menu);
 		String myPlaces = getString(R.string.shared_string_my_places);
@@ -208,6 +216,10 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		} else if (OSM_LOGOUT.equals(prefId)) {
 			osmLogout();
 			return true;
+		} else if (MAP_UPDATES_FOR_MAPPERS.equals(prefId)) {
+			if (getActivity() != null) {
+				MappersPromoFragment.showInstance(getActivity());
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}

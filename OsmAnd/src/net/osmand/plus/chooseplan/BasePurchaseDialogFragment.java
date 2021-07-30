@@ -267,4 +267,9 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	protected Drawable createRoundedDrawable(@ColorInt int color, ButtonBackground background) {
 		return UiUtilities.createTintedDrawable(app, background.drawableId, color);
 	}
+
+	@ColorInt
+	protected int getColor(@ColorRes int colorId) {
+		return ContextCompat.getColor(app, colorId);
+	}
 }
