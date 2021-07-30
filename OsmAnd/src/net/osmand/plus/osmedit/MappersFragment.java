@@ -40,16 +40,17 @@ import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class MappersFragment extends BaseOsmAndFragment {
 
@@ -59,11 +60,13 @@ public class MappersFragment extends BaseOsmAndFragment {
 	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
 	private static final String CONTRIBUTIONS_URL = "https://www.openstreetmap.org/user/";
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM", Locale.US);
+	private static final SimpleDateFormat MONTH_FORMAT = new SimpleDateFormat("MMMM", Locale.US);
+	private static final SimpleDateFormat CONTRIBUTION_FORMAT = new SimpleDateFormat("MMMM yyyy", Locale.US);
 	private static final int CHANGES_FOR_MAPPER_PROMO = 15;
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	private Map<String, Contribution> changesInfo = new TreeMap<>();
+	private Map<String, Contribution> changesInfo = new LinkedHashMap<>();
 
 	private View mainView;
 	private boolean nightMode;
@@ -200,7 +203,12 @@ public class MappersFragment extends BaseOsmAndFragment {
 		TextView tvInterval = container.findViewById(R.id.interval);
 		TextView tvCount = container.findViewById(R.id.total_contributions);
 
-		tvInterval.setText("Last 2 month");
+		Calendar calendar = Calendar.getInstance();
+		String currentMonth = MONTH_FORMAT.format(calendar.getTimeInMillis());
+		calendar.add(Calendar.MONTH, -1);
+		String prevMonth = MONTH_FORMAT.format(calendar.getTimeInMillis());
+
+		tvInterval.setText(getString(R.string.ltr_or_rtl_combine_via_dash, prevMonth, currentMonth));
 		tvCount.setText(String.valueOf(getChangesSize(changesInfo)));
 	}
 
@@ -208,23 +216,25 @@ public class MappersFragment extends BaseOsmAndFragment {
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		LinearLayout list = mainView.findViewById(R.id.contributions_list);
 		list.removeAllViews();
+
 		List<Contribution> contributions = new ArrayList<>(changesInfo.values());
-		for (int i = 0; i < 6 && i < contributions.size(); i++) {
-			int index = contributions.size() - 1 - i;
-			Contribution contribution = contributions.get(index);
+		for (int i = 0; i < contributions.size() && i < 6; i++) {
+			Contribution contribution = contributions.get(i);
 			View view = inflater.inflate(R.layout.osm_contribution_item, list, false);
+
 			TextView tvTitle = view.findViewById(R.id.title);
-			tvTitle.setText(contribution.getDate());
 			TextView tvCount = view.findViewById(R.id.count);
-			tvCount.setText(String.valueOf(contribution.getCount()));
+
+			tvTitle.setText(CONTRIBUTION_FORMAT.format(contribution.date));
+			tvCount.setText(String.valueOf(contribution.count));
 			list.addView(view);
 		}
 	}
 
 	protected void dismiss() {
-		FragmentManager fm = getFragmentManager();
-		if (fm != null && !fm.isStateSaved()) {
-			getFragmentManager().popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		FragmentManager manager = getFragmentManager();
+		if (manager != null && !manager.isStateSaved()) {
+			manager.popBackStack(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
 	}
 
@@ -291,13 +301,13 @@ public class MappersFragment extends BaseOsmAndFragment {
 		String date = DATE_FORMAT.format(calendar.getTimeInMillis());
 
 		Contribution contribution = map.get(date);
-		changesSize += contribution != null ? contribution.getCount() : 0;
+		changesSize += contribution != null ? contribution.count : 0;
 
 		calendar.add(Calendar.MONTH, -1);
 		date = DATE_FORMAT.format(calendar.getTimeInMillis());
 
 		contribution = map.get(date);
-		changesSize += contribution != null ? contribution.getCount() : 0;
+		changesSize += contribution != null ? contribution.count : 0;
 
 		return changesSize;
 	}
@@ -322,11 +332,12 @@ public class MappersFragment extends BaseOsmAndFragment {
 							JSONObject res = new JSONObject(resultJson);
 							JSONObject objectChanges = res.getJSONObject("objectChanges");
 							for (Iterator<String> it = objectChanges.keys(); it.hasNext(); ) {
-								String date = it.next();
-								int changesCount = objectChanges.optInt(date);
-								map.put(date, new Contribution(date, changesCount));
+								String dateStr = it.next();
+								Date date = DATE_FORMAT.parse(dateStr);
+								int changesCount = objectChanges.optInt(dateStr);
+								map.put(dateStr, new Contribution(date, changesCount));
 							}
-						} catch (JSONException e) {
+						} catch (JSONException | ParseException e) {
 							log.error(e);
 						}
 					}
@@ -334,21 +345,14 @@ public class MappersFragment extends BaseOsmAndFragment {
 				});
 	}
 
-	public static class Contribution {
-		String date;
-		int count;
+	private static class Contribution {
 
-		public Contribution(String date, int count) {
+		private final Date date;
+		private final int count;
+
+		public Contribution(Date date, int count) {
 			this.date = date;
 			this.count = count;
-		}
-
-		public String getDate() {
-			return date;
-		}
-
-		public int getCount() {
-			return count;
 		}
 	}
 }
