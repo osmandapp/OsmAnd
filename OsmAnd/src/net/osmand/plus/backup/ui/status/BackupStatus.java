@@ -1,5 +1,8 @@
 package net.osmand.plus.backup.ui.status;
 
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
+import static net.osmand.plus.backup.BackupHelper.STATUS_NO_ORDER_ID_ERROR;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -8,10 +11,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.PrepareBackupResult;
-import net.osmand.plus.backup.ServerError;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.util.Algorithms;
-
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
 
 public enum BackupStatus {
 	BACKUP_COMPLETE(R.string.backup_complete, R.drawable.ic_action_cloud_done, -1, -1, -1, R.string.backup_now),
@@ -48,8 +49,10 @@ public enum BackupStatus {
 		BackupInfo info = backup.getBackupInfo();
 
 		if (!Algorithms.isEmpty(backup.getError())) {
-			ServerError error = new ServerError(backup.getError());
-			if (error.getCode() == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT) {
+			BackupError error = new BackupError(backup.getError());
+			int errorCode = error.getCode();
+			if (errorCode == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT
+					|| errorCode == STATUS_NO_ORDER_ID_ERROR) {
 				return BackupStatus.SUBSCRIPTION_EXPIRED;
 			}
 		}

@@ -8,7 +8,7 @@ import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.backup.ServerError;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.util.Algorithms;
 
@@ -16,7 +16,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -81,7 +80,7 @@ public class DeleteOldFilesCommand extends BaseDeleteFilesCommand {
 			List<RemoteFile> remoteFiles = new ArrayList<>();
 			if (!Algorithms.isEmpty(error)) {
 				status = STATUS_SERVER_ERROR;
-				message = "Download file list error: " + new ServerError(error);
+				message = "Download file list error: " + new BackupError(error);
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
 					JSONObject result = new JSONObject(resultJson);

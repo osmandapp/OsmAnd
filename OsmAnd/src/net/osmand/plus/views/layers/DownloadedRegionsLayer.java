@@ -300,7 +300,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				}
 			}
 			if (indexItem != null && !Algorithms.isEmpty(name)) {
-				if (!indexes.hasExternalFileAt(cx, cy, zoom)) {
+				if (!indexes.hasExternalMapFileAt(cx, cy, zoom)) {
 					showDownloadMapToolbar(indexItem, name);
 				} else {
 					hideDownloadMapToolbar();

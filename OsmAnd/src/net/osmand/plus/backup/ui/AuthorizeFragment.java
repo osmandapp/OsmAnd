@@ -36,7 +36,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupListeners.OnRegisterUserListener;
-import net.osmand.plus.backup.ServerError;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -359,7 +359,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	@Override
-	public void onRegisterUser(int status, @Nullable String message, @Nullable ServerError error) {
+	public void onRegisterUser(int status, @Nullable String message, @Nullable BackupError error) {
 		FragmentActivity activity = getActivity();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			progressBar.setVisibility(View.INVISIBLE);
@@ -385,7 +385,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	@Override
-	public void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error) {
+	public void onRegisterDevice(int status, @Nullable String message, @Nullable BackupError error) {
 		FragmentActivity activity = getActivity();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			int errorCode = error != null ? error.getCode() : -1;

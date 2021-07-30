@@ -18,7 +18,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import net.osmand.GPXUtilities.WptPt;
-import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
@@ -974,7 +973,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			}
 			int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
-			if (downloadResources.hasExternalFileAt(point31x, point31y, zoom)) {
+			if (downloadResources.hasExternalMapFileAt(point31x, point31y, zoom)) {
 				return null;
 			}
 
