@@ -189,7 +189,7 @@
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_desc_text_size"
                         osmand:typeface="@string/font_roboto_regular"
-                        tools:text="@string/contributions_may_calculate_with_delay" />
+                        android:text="@string/contributions_may_calculate_with_delay" />
 
                 </LinearLayout>
 

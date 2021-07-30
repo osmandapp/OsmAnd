@@ -1,7 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
-
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -43,9 +41,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
@@ -62,7 +63,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
-	private Map<String, Integer> changesInfo = new TreeMap<>();
+	private Map<String, Contribution> changesInfo = new TreeMap<>();
 
 	private View mainView;
 	private boolean nightMode;
@@ -74,7 +75,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 			fragment.setRetainInstance(true);
 			fm.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(SETTINGS_LIST_TAG)
+					.addToBackStack(TAG)
 					.commit();
 		}
 	}
@@ -117,12 +118,12 @@ public class MappersFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-
 		if (Algorithms.isEmpty(changesInfo)) {
-			downloadChangesInfo(new CallbackWithObject<Map<String, Integer>>() {
+			downloadChangesInfo(new CallbackWithObject<Map<String, Contribution>>() {
 				@Override
-				public boolean processResult(Map<String, Integer> result) {
+				public boolean processResult(Map<String, Contribution> result) {
 					changesInfo = result;
+					fullUpdate();
 					return true;
 				}
 			});
@@ -195,12 +196,29 @@ public class MappersFragment extends BaseOsmAndFragment {
 	}
 
 	private void updateLastInterval() {
+		View container = mainView.findViewById(R.id.contributions_header);
+		TextView tvInterval = container.findViewById(R.id.interval);
+		TextView tvCount = container.findViewById(R.id.total_contributions);
 
+		tvInterval.setText("Last 2 month");
+		tvCount.setText(String.valueOf(getChangesSize(changesInfo)));
 	}
 
 	private void updateContributionsList() {
+		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 		LinearLayout list = mainView.findViewById(R.id.contributions_list);
 		list.removeAllViews();
+		List<Contribution> contributions = new ArrayList<>(changesInfo.values());
+		for (int i = 0; i < 6 && i < contributions.size(); i++) {
+			int index = contributions.size() - 1 - i;
+			Contribution contribution = contributions.get(index);
+			View view = inflater.inflate(R.layout.osm_contribution_item, list, false);
+			TextView tvTitle = view.findViewById(R.id.title);
+			tvTitle.setText(contribution.getDate());
+			TextView tvCount = view.findViewById(R.id.count);
+			tvCount.setText(String.valueOf(contribution.getCount()));
+			list.addView(view);
+		}
 	}
 
 	protected void dismiss() {
@@ -249,11 +267,12 @@ public class MappersFragment extends BaseOsmAndFragment {
 		downloadChangesInfo(result -> {
 			changesInfo = result;
 			checkLastChanges(result);
+			fullUpdate();
 			return true;
 		});
 	}
 
-	private void checkLastChanges(@NonNull Map<String, Integer> map) {
+	private void checkLastChanges(@NonNull Map<String, Contribution> map) {
 		int size = getChangesSize(map);
 		if (size >= CHANGES_FOR_MAPPER_PROMO) {
 			Calendar calendar = Calendar.getInstance();
@@ -266,19 +285,19 @@ public class MappersFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private int getChangesSize(@NonNull Map<String, Integer> map) {
+	private int getChangesSize(@NonNull Map<String, Contribution> map) {
 		int changesSize = 0;
 		Calendar calendar = Calendar.getInstance();
 		String date = DATE_FORMAT.format(calendar.getTimeInMillis());
 
-		Integer changesForMonth = map.get(date);
-		changesSize += changesForMonth != null ? changesForMonth : 0;
+		Contribution contribution = map.get(date);
+		changesSize += contribution != null ? contribution.getCount() : 0;
 
 		calendar.add(Calendar.MONTH, -1);
 		date = DATE_FORMAT.format(calendar.getTimeInMillis());
 
-		changesForMonth = map.get(date);
-		changesSize += changesForMonth != null ? changesForMonth : 0;
+		contribution = map.get(date);
+		changesSize += contribution != null ? contribution.getCount() : 0;
 
 		return changesSize;
 	}
@@ -288,13 +307,13 @@ public class MappersFragment extends BaseOsmAndFragment {
 		return validToken ? settings.OSM_USER_DISPLAY_NAME.get() : settings.OSM_USER_NAME.get();
 	}
 
-	public void downloadChangesInfo(@NonNull CallbackWithObject<Map<String, Integer>> callback) {
+	public void downloadChangesInfo(@NonNull CallbackWithObject<Map<String, Contribution>> callback) {
 		String userName = getUserName();
 		Map<String, String> params = new HashMap<>();
 		params.put("name", userName);
 		AndroidNetworkUtils.sendRequestAsync(app, USER_CHANGES_URL, params, "Download object changes list", false, false,
 				(resultJson, error) -> {
-					Map<String, Integer> map = new TreeMap<>();
+					Map<String, Contribution> map = new LinkedHashMap<>();
 					if (!Algorithms.isEmpty(error)) {
 						log.error(error);
 						app.showShortToastMessage(error);
@@ -305,7 +324,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 							for (Iterator<String> it = objectChanges.keys(); it.hasNext(); ) {
 								String date = it.next();
 								int changesCount = objectChanges.optInt(date);
-								map.put(date, changesCount);
+								map.put(date, new Contribution(date, changesCount));
 							}
 						} catch (JSONException e) {
 							log.error(e);
@@ -313,5 +332,23 @@ public class MappersFragment extends BaseOsmAndFragment {
 					}
 					callback.processResult(map);
 				});
+	}
+
+	public static class Contribution {
+		String date;
+		int count;
+
+		public Contribution(String date, int count) {
+			this.date = date;
+			this.count = count;
+		}
+
+		public String getDate() {
+			return date;
+		}
+
+		public int getCount() {
+			return count;
+		}
 	}
 }
