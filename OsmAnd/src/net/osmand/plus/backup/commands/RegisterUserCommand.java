@@ -8,7 +8,7 @@ import net.osmand.OperationLog;
 import net.osmand.plus.backup.BackupCommand;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnRegisterUserListener;
-import net.osmand.plus.backup.ServerError;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -57,10 +57,10 @@ public class RegisterUserCommand extends BackupCommand {
 		AndroidNetworkUtils.sendRequest(getApp(), USER_REGISTER_URL, params, "Register user", false, true, (resultJson, error) -> {
 			int status;
 			String message;
-			ServerError serverError = null;
+			BackupError backupError = null;
 			if (!Algorithms.isEmpty(error)) {
-				serverError = new ServerError(error);
-				message = "User registration error: " + serverError + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
+				backupError = new BackupError(error);
+				message = "User registration error: " + backupError + "\nEmail=" + email + "\nOrderId=" + orderId + "\nDeviceId=" + deviceId;
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
@@ -80,7 +80,7 @@ public class RegisterUserCommand extends BackupCommand {
 				message = "User registration error: empty response";
 				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
-			publishProgress(status, message, serverError);
+			publishProgress(status, message, backupError);
 			operationLog.finishOperation(status + " " + message);
 		});
 		return null;
@@ -91,8 +91,8 @@ public class RegisterUserCommand extends BackupCommand {
 		for (OnRegisterUserListener listener : getListeners()) {
 			int status = (Integer) values[0];
 			String message = (String) values[1];
-			ServerError serverError = (ServerError) values[2];
-			listener.onRegisterUser(status, message, serverError);
+			BackupError backupError = (BackupError) values[2];
+			listener.onRegisterUser(status, message, backupError);
 		}
 	}
 }
