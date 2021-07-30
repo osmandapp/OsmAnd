@@ -232,9 +232,9 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				if (!isValidToken() && !isLoginExists()) {
-					MappersFragment.showInstance(getActivity());
-				} else {
 					MappersPromoFragment.showInstance(activity, this);
+				} else {
+					MappersFragment.showInstance(activity);
 				}
 				return true;
 			}

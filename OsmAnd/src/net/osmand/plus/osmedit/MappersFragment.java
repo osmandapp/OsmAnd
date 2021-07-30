@@ -1,5 +1,7 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
+
 import android.annotation.TargetApi;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -21,7 +23,10 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -29,18 +34,33 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.BasePurchaseDialogFragment.ButtonBackground;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
+import org.apache.commons.logging.Log;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class MappersFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = MappersFragment.class.getSimpleName();
+	private static final Log log = PlatformUtil.getLog(MappersFragment.class);
 
-	protected OsmandApplication app;
-	protected OsmandSettings settings;
+	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM", Locale.US);
+
+	private OsmandApplication app;
+	private OsmandSettings settings;
+	private Map<String, Integer> changesInfo = new TreeMap<>();
 
 	private View mainView;
-	protected boolean nightMode;
+	private boolean nightMode;
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
 		FragmentManager fm = activity.getSupportFragmentManager();
@@ -50,7 +70,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 			fm.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(SETTINGS_LIST_TAG)
-					.commitAllowingStateLoss();
+					.commit();
 		}
 	}
 
@@ -89,6 +109,21 @@ public class MappersFragment extends BaseOsmAndFragment {
 		return mainView;
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		if (Algorithms.isEmpty(changesInfo)) {
+			downloadChangesInfo(new CallbackWithObject<Map<String, Integer>>() {
+				@Override
+				public boolean processResult(Map<String, Integer> result) {
+					changesInfo = result;
+					return true;
+				}
+			});
+		}
+	}
+
 	private void setupToolbar() {
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		int iconId = AndroidUtils.getNavigationIconResId(app);
@@ -104,7 +139,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 		int normal = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		int pressed = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light);
 		setupButtonBackground(button, normal, pressed);
-		button.setOnClickListener(v -> app.showShortToastMessage("refresh"));
+		button.setOnClickListener(v -> refreshContributions());
 	}
 
 	private void setupContributionsBtn() {
@@ -194,4 +229,35 @@ public class MappersFragment extends BaseOsmAndFragment {
 		return nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 	}
 
+	public void refreshContributions() {
+
+	}
+
+	public void downloadChangesInfo(@NonNull CallbackWithObject<Map<String, Integer>> callback) {
+		boolean validToken = app.getOsmOAuthHelper().isValidToken();
+		String userName = validToken ? settings.OSM_USER_DISPLAY_NAME.get() : settings.OSM_USER_NAME.get();
+		Map<String, String> params = new HashMap<>();
+		params.put("name", userName);
+		AndroidNetworkUtils.sendRequestAsync(app, USER_CHANGES_URL, params, "Download object changes list", false, false,
+				(resultJson, error) -> {
+					Map<String, Integer> map = new TreeMap<>();
+					if (!Algorithms.isEmpty(error)) {
+						log.error(error);
+						app.showShortToastMessage(error);
+					} else if (!Algorithms.isEmpty(resultJson)) {
+						try {
+							JSONObject res = new JSONObject(resultJson);
+							JSONObject objectChanges = res.getJSONObject("objectChanges");
+							for (Iterator<String> it = objectChanges.keys(); it.hasNext(); ) {
+								String date = it.next();
+								int changesCount = objectChanges.optInt(date);
+								map.put(date, changesCount);
+							}
+						} catch (JSONException e) {
+							log.error(e);
+						}
+					}
+					callback.processResult(map);
+				});
+	}
 }
