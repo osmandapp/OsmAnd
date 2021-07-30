@@ -104,7 +104,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		}
 		Map<String, RemoteFile> remoteFilesMap = backupHelper.getBackup().getRemoteFiles(PrepareBackupResult.RemoteFilesType.UNIQUE);
 		if (remoteFilesMap != null) {
-			Collection<SettingsItem> itemsToDelete = exporter.getItemsToDelete().values();
+			List<SettingsItem> itemsToDelete = exporter.getItemsToDelete();
 			for (RemoteFile remoteFile : remoteFilesMap.values()) {
 				for (SettingsItem item : itemsToDelete) {
 					if (item.equals(remoteFile.item)) {
@@ -112,7 +112,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 					}
 				}
 			}
-			Collection<SettingsItem> oldItemsToDelete = exporter.getOldItemsToDelete().values();
+			List<SettingsItem> oldItemsToDelete = exporter.getOldItemsToDelete();
 			for (RemoteFile remoteFile : remoteFilesMap.values()) {
 				for (SettingsItem item : oldItemsToDelete) {
 					SettingsItem remoteFileItem = remoteFile.item;
