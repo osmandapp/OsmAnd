@@ -3,7 +3,9 @@ package net.osmand.plus.osmedit;
 import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -54,6 +56,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	private static final Log log = PlatformUtil.getLog(MappersFragment.class);
 
 	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
+	private static final String CONTRIBUTIONS_URL = "https://www.openstreetmap.org/user/";
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM", Locale.US);
 	private static final int CHANGES_FOR_MAPPER_PROMO = 15;
 
@@ -146,7 +149,18 @@ public class MappersFragment extends BaseOsmAndFragment {
 
 	private void setupContributionsBtn() {
 		View button = mainView.findViewById(R.id.contributions_button);
-		button.setOnClickListener(v -> app.showShortToastMessage("go to contributions"));
+		button.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				String userName = getUserName();
+				String url = CONTRIBUTIONS_URL + userName + "/history";
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse(url));
+				if (AndroidUtils.isIntentSafe(app, intent)) {
+					startActivity(intent);
+				}
+			}
+		});
 	}
 
 	private void fullUpdate() {
@@ -269,9 +283,13 @@ public class MappersFragment extends BaseOsmAndFragment {
 		return changesSize;
 	}
 
-	public void downloadChangesInfo(@NonNull CallbackWithObject<Map<String, Integer>> callback) {
+	private String getUserName() {
 		boolean validToken = app.getOsmOAuthHelper().isValidToken();
-		String userName = validToken ? settings.OSM_USER_DISPLAY_NAME.get() : settings.OSM_USER_NAME.get();
+		return validToken ? settings.OSM_USER_DISPLAY_NAME.get() : settings.OSM_USER_NAME.get();
+	}
+
+	public void downloadChangesInfo(@NonNull CallbackWithObject<Map<String, Integer>> callback) {
+		String userName = getUserName();
 		Map<String, String> params = new HashMap<>();
 		params.put("name", userName);
 		AndroidNetworkUtils.sendRequestAsync(app, USER_CHANGES_URL, params, "Download object changes list", false, false,
