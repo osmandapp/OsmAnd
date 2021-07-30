@@ -144,8 +144,9 @@ public enum ColoringType {
 			return false;
 		}
 
-		if (isRouteInfoAttribute() && !Algorithms.isEmpty(route.getOriginalRoute())) {
-			return isAttributeAvailableForDrawing(app, route.getOriginalRoute(), attributeName);
+		if (isRouteInfoAttribute()) {
+			return !Algorithms.isEmpty(route.getOriginalRoute())
+					&& isAttributeAvailableForDrawing(app, route.getOriginalRoute(), attributeName);
 		}
 
 		return true;

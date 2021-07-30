@@ -1,12 +1,5 @@
 package net.osmand.plus.settings.backend;
 
-import net.osmand.util.Algorithms;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import androidx.annotation.NonNull;
-
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
@@ -29,6 +22,13 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
 
+import androidx.annotation.NonNull;
+
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 
 	private static final List<String> originalOrderIds = new ArrayList<>();
@@ -47,6 +47,7 @@ public class DrawerMenuItemsSettings extends ContextMenuItemsSettings {
 		originalOrderIds.add(DRAWER_DIRECTIONS_ID);
 		originalOrderIds.add(DRAWER_CONFIGURE_MAP_ID);
 		originalOrderIds.add(DRAWER_DOWNLOAD_MAPS_ID);
+		originalOrderIds.add(DRAWER_LIVE_UPDATES_ID);
 		originalOrderIds.add(DRAWER_TRAVEL_GUIDES_ID);
 		originalOrderIds.add(DRAWER_MEASURE_DISTANCE_ID);
 		originalOrderIds.add(DRAWER_DIVIDER_ID);

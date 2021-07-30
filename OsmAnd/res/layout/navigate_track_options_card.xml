@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:background="?attr/bg_color"
@@ -35,14 +36,27 @@
 			layout="@layout/radio_buttons_with_descr"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/content_padding_half" />
+			android:layout_marginBottom="@dimen/content_padding_half"
+			android:visibility="gone"
+			tools:visibility="visible"/>
 
 		<include
 			android:id="@+id/navigation_type_container"
 			layout="@layout/radio_buttons_with_descr"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/content_padding" />
+			android:layout_marginBottom="@dimen/content_padding"
+			android:visibility="gone"
+			tools:visibility="visible"/>
+
+		<include
+			android:id="@+id/connect_track_points_container"
+			layout="@layout/radio_buttons_with_descr"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/content_padding"
+			android:visibility="gone"
+			tools:visibility="visible"/>
 
 	</LinearLayout>
 
