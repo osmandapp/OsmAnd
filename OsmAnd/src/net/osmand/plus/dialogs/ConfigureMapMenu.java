@@ -283,14 +283,13 @@ public class ConfigureMapMenu {
 						pref.set(isChecked);
 						ContextMenuItem item = adapter.getItem(position);
 						if (item != null) {
-							item.setSelected(isChecked);
 							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
 							adapter.notifyDataSetChanged();
 						}
 						if (property != null) {
-							activity.refreshMapComplete();
-							activity.getMapLayers().updateLayers(activity.getMapView());
+							activity.refreshMap();
+							activity.updateLayers();
 						} else {
 							showRendererSnackbarForAttr(activity, attrName, nightMode);
 						}
@@ -328,13 +327,12 @@ public class ConfigureMapMenu {
 						pref.set(isChecked ? previousValue : "");
 						ContextMenuItem item = adapter.getItem(position);
 						if (item != null) {
-							item.setSelected(isChecked);
 							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
 							adapter.notifyDataSetChanged();
 						}
-						activity.refreshMapComplete();
-						activity.getMapLayers().updateLayers(activity.getMapView());
+						activity.refreshMap();
+						activity.updateLayers();
 						return false;
 					}
 				}).createItem();
@@ -718,13 +716,13 @@ public class ConfigureMapMenu {
 						pref.set(isChecked);
 						ContextMenuItem item = adapter.getItem(pos);
 						if (item != null) {
-							item.setSelected(isChecked);
 							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
 							adapter.notifyDataSetChanged();
 						}
 						if (property != null) {
-							activity.refreshMapComplete();
+							activity.refreshMap();
+							activity.updateLayers();
 						} else {
 							showRendererSnackbarForAttr(activity, attrName, nightMode);
 						}

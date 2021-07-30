@@ -279,7 +279,7 @@ public class TrackDetailsMenu {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
 			mapActivity.getMapView().setMapPositionX(0);
-			mapActivity.getMapView().refreshMap();
+			mapActivity.refreshMap();
 		}
 		if (hidding) {
 			hidding = false;

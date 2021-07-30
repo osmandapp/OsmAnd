@@ -155,8 +155,8 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			}
 		}
 		adapter.notifyDataSetChanged();
-		mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
-		mapActivity.getMapView().refreshMap();
+		mapActivity.updateLayers();
+		mapActivity.refreshMap();
 		return false;
 	}
 
