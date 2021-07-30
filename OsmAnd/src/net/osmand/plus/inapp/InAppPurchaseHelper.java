@@ -137,6 +137,7 @@ public abstract class InAppPurchaseHelper {
 		return Version.isDeveloperBuild(ctx)
 				|| isSubscribedToMaps(ctx)
 				|| isOsmAndProAvailable(ctx)
+				|| isSubscribedToMapperUpdates(ctx)
 				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
@@ -148,6 +149,7 @@ public abstract class InAppPurchaseHelper {
 	public static boolean isSubscribedToLiveUpdates(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx)
 				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get()
+				|| isSubscribedToMapperUpdates(ctx)
 				|| isOsmAndProAvailable(ctx);
 	}
 
@@ -156,9 +158,12 @@ public abstract class InAppPurchaseHelper {
 				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get();
 	}
 
+	private static boolean isSubscribedToMapperUpdates(@NonNull OsmandApplication ctx) {
+		return ctx.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.get() > System.currentTimeMillis();
+	}
+
 	public static boolean isSubscribedToPromo(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| ctx.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
+		return ctx.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
 	}
 
 	public static boolean isOsmAndProAvailable(@NonNull OsmandApplication ctx) {
