@@ -7,7 +7,7 @@ import net.osmand.OperationLog;
 import net.osmand.plus.backup.BackupCommand;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
-import net.osmand.plus.backup.ServerError;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -55,10 +55,10 @@ public class RegisterDeviceCommand extends BackupCommand {
 		AndroidNetworkUtils.sendRequest(getApp(), DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error) -> {
 			int status;
 			String message;
-			ServerError serverError = null;
+			BackupError backupError = null;
 			if (!Algorithms.isEmpty(error)) {
-				serverError = new ServerError(error);
-				message = "Device registration error: " + serverError;
+				backupError = new BackupError(error);
+				message = "Device registration error: " + backupError;
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				OsmandSettings settings = getApp().getSettings();
@@ -80,7 +80,7 @@ public class RegisterDeviceCommand extends BackupCommand {
 				message = "Device registration error: empty response";
 				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
-			publishProgress(status, message, serverError);
+			publishProgress(status, message, backupError);
 			operationLog.finishOperation(status + " " + message);
 		});
 		return null;
@@ -91,8 +91,8 @@ public class RegisterDeviceCommand extends BackupCommand {
 		for (OnRegisterDeviceListener listener : getListeners()) {
 			int status = (Integer) values[0];
 			String message = (String) values[1];
-			ServerError serverError = (ServerError) values[2];
-			listener.onRegisterDevice(status, message, serverError);
+			BackupError backupError = (BackupError) values[2];
+			listener.onRegisterDevice(status, message, backupError);
 		}
 	}
 }
