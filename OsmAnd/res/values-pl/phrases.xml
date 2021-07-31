@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_bakery">Piekarnia</string>
     <string name="poi_alcohol">Sklep monopolowy</string>
@@ -72,7 +72,6 @@
     <string name="poi_ship_chandler">Armator</string>
     <string name="poi_sports">Sklep sportowy</string>
     <string name="poi_stationery">Sklep papierniczy</string>
-    
     <string name="poi_ticket">Sprzedaż biletów</string>
     <string name="poi_tobacco">Sklep z wyrobami tytoniowymi</string>
     <string name="poi_toys">Sklep z zabawkami</string>
@@ -222,7 +221,6 @@
     <string name="poi_prosecutor">Prokurator</string>
     <string name="poi_pension_fund">Fundusz emerytalny</string>
     <string name="poi_tax_inspection">Urząd skarbowy</string>
-    
     <string name="poi_customs">Urząd celny</string>
     <string name="poi_city">Miasto</string>
     <string name="poi_town">Małe miasto</string>
@@ -804,7 +802,6 @@
     <string name="poi_religious">Obszar religijny</string>
     <string name="poi_leather">Galanteria skórzana</string>
     <string name="poi_scuba_diving_shop">Sklep z wyposażeniem dla nurków</string>
-    
     <string name="poi_free_flying">Sklep ze sprzętem do sportów spadochronowych</string>
     <string name="poi_energy">Sklep energetyczny</string>
     <string name="poi_swimming_pool_shop">Sklep z akcesoriami basenowymi</string>
@@ -1082,7 +1079,6 @@
     <string name="poi_traffic_calming_island">Wysepka spowalniająca</string>
     <string name="poi_power_tower">Słup wysokiego napięcia</string>
     <string name="poi_denomination_greek_catholic">Grekokatolicki</string>
-    
     <string name="poi_recycling_fridge_and_freezer">Lodówka z zamrażarką</string>
     <string name="poi_monitoring_station">Stacja monitoringu</string>
     <string name="poi_office_religion">Biuro religijne</string>
@@ -1916,7 +1912,6 @@
     <string name="poi_architect_name">Architekt</string>
     <string name="poi_aquaculture">Akwakultura</string>
     <string name="poi_greenhouse_horticulture">Szklarnie</string>
-    
     <string name="poi_bicycle_repair_station">Stacja naprawy rowerów; Stacja samodzielnej naprawy rowerów</string>
     <string name="poi_escape_lane">Miejsce do bezpiecznego wytracenia prędkości</string>
     <string name="poi_historic_yes">Obiekt zabytkowy</string>
@@ -3949,4 +3944,6 @@
     <string name="poi_hoops">Liczba koszy</string>
     <string name="poi_local_ref">Lokalny numer referencyjny</string>
     <string name="poi_mobile_library">Przystanek bibliobusu</string>
+    <string name="poi_service_vehicle_inspection_yes">Stacja kontroli pojazdów</string>
+    <string name="poi_trolley_bay">Zatoka wózków</string>
 </resources>
