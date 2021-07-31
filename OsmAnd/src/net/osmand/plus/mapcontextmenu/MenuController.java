@@ -958,7 +958,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		@Override
 		protected void onPreExecute() {
 			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
+			if (mapActivity != null && mapActivity.getMapView() != null) {
 				rm = mapActivity.getMyApplication().getResourceManager();
 				osmandRegions = rm.getOsmandRegions();
 				downloadResources = mapActivity.getMyApplication().getDownloadThread().getIndexes();

@@ -42,13 +42,11 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -57,12 +55,16 @@ public class MappersFragment extends BaseOsmAndFragment {
 	public static final String TAG = MappersFragment.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(MappersFragment.class);
 
-	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
-	private static final String CONTRIBUTIONS_URL = "https://www.openstreetmap.org/user/";
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM", Locale.US);
 	private static final SimpleDateFormat MONTH_FORMAT = new SimpleDateFormat("MMMM", Locale.US);
 	private static final SimpleDateFormat CONTRIBUTION_FORMAT = new SimpleDateFormat("MMMM yyyy", Locale.US);
+
+	private static final String CONTRIBUTIONS_URL = "https://www.openstreetmap.org/user/";
+	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
+
+	private static final int VISIBLE_MONTHS_COUNT = 6;
 	private static final int CHANGES_FOR_MAPPER_PROMO = 15;
+	private static final int DAYS_FOR_MAPPER_PROMO_CHECK = 60;
 
 	private OsmandApplication app;
 	private OsmandSettings settings;
@@ -185,9 +187,12 @@ public class MappersFragment extends BaseOsmAndFragment {
 			title = getString(R.string.available_until, date);
 			description = getString(R.string.enough_contributions_descr);
 		} else {
+			int size = getChangesSize(changesInfo);
 			titleColor = ContextCompat.getColor(app, getPrimaryTextColorId());
 			title = getString(R.string.map_updates_are_unavailable_yet);
-			description = getString(R.string.not_enough_contributions_descr);
+			description = getString(R.string.not_enough_contributions_descr,
+					String.valueOf(CHANGES_FOR_MAPPER_PROMO - size),
+					String.valueOf(DAYS_FOR_MAPPER_PROMO_CHECK));
 		}
 
 		TextView tvTitle = mainView.findViewById(R.id.header_title);
@@ -217,16 +222,19 @@ public class MappersFragment extends BaseOsmAndFragment {
 		LinearLayout list = mainView.findViewById(R.id.contributions_list);
 		list.removeAllViews();
 
-		List<Contribution> contributions = new ArrayList<>(changesInfo.values());
-		for (int i = 0; i < contributions.size() && i < 6; i++) {
-			Contribution contribution = contributions.get(i);
-			View view = inflater.inflate(R.layout.osm_contribution_item, list, false);
+		Calendar calendar = Calendar.getInstance();
+		for (int i = 0; i < VISIBLE_MONTHS_COUNT; i++) {
+			long time = calendar.getTimeInMillis();
+			calendar.add(Calendar.MONTH, -1);
+			Contribution contribution = changesInfo.get(DATE_FORMAT.format(time));
+			int changesSize = contribution != null ? contribution.count : 0;
 
+			View view = inflater.inflate(R.layout.osm_contribution_item, list, false);
 			TextView tvTitle = view.findViewById(R.id.title);
 			TextView tvCount = view.findViewById(R.id.count);
 
-			tvTitle.setText(CONTRIBUTION_FORMAT.format(contribution.date));
-			tvCount.setText(String.valueOf(contribution.count));
+			tvTitle.setText(CONTRIBUTION_FORMAT.format(time));
+			tvCount.setText(String.valueOf(changesSize));
 			list.addView(view);
 		}
 	}
@@ -292,6 +300,8 @@ public class MappersFragment extends BaseOsmAndFragment {
 			calendar.set(Calendar.MINUTE, 0);
 			calendar.set(Calendar.SECOND, 0);
 			settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.set(calendar.getTimeInMillis());
+		} else {
+			settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
 		}
 	}
 

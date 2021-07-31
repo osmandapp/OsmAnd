@@ -16,7 +16,7 @@
     <string name="map_updates_are_unavailable_yet">Map updates are unavailable yet :-(</string>
     <string name="contributions_may_calculate_with_delay">Contributions might be calculated with several hour delays.</string>
     <string name="shared_string_contributions">Contributions</string>
-    <string name="not_enough_contributions_descr">You need to do at least 10 map contributions to OpenStreetMap for last 30 days.</string>
+    <string name="not_enough_contributions_descr">You need to do at least %1$s map contributions to OpenStreetMap for last %2$s days.</string>
     <string name="enough_contributions_descr">Congratulations you have done enough contributions to OpenStreetMap and could enjoy unlimited map updates.</string>
     <string name="available_until">Available until %1$s</string>
     <string name="use_login_and_password">Use login and password</string>
