@@ -17,15 +17,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
@@ -49,6 +40,15 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
@@ -75,8 +75,9 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 	private View mainView;
 	private Toolbar toolbar;
+	private TextView toolbarTitle;
 	private ProgressBar progressBar;
-	private TextView title;
+	private TextView headerTitle;
 	private TextView description;
 	private View buttonContinue;
 	private View buttonChoosePlan;
@@ -128,7 +129,8 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		View view = themedInflater.inflate(R.layout.fragment_cloud_authorize, container, false);
 		AndroidUtils.addStatusBarPadding21v(app, view);
 
-		title = view.findViewById(R.id.title);
+		toolbarTitle = view.findViewById(R.id.toolbar_title);
+		headerTitle = view.findViewById(R.id.header_title);
 		toolbar = view.findViewById(R.id.toolbar);
 		mainView = view.findViewById(R.id.main_view);
 		description = view.findViewById(R.id.description);
@@ -140,7 +142,11 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		setupTextWatchers();
 		updateContent();
 		setupSupportButton();
-		setupKeyboardListener();
+		if (AndroidUiHelper.isOrientationPortrait(requireActivity())) {
+			setupKeyboardListener();
+		}
+		setupAppbarOffsetChangedListener();
+
 
 		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.get_plugin);
 		UiUtilities.setupDialogButton(nightMode, buttonContinue, DialogButtonType.PRIMARY, R.string.shared_string_continue);
@@ -206,7 +212,9 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void updateContent() {
-		title.setText(dialogType.titleId);
+		toolbarTitle.setText(dialogType.titleId);
+		headerTitle.setText(dialogType.titleId);
+		
 		updateDescription();
 
 		for (LoginDialogType type : LoginDialogType.values()) {
@@ -459,6 +467,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 			@Override
 			public void onGlobalLayout() {
+				AppBarLayout appbar = mainView.findViewById(R.id.appbar);
 				View keyboardSpace = mainView.findViewById(R.id.keyboard_space);
 				View space = mainView.findViewById(R.id.space);
 				int keyboardHeight = AndroidUtils.getSoftKeyboardHeight(mainView);
@@ -473,11 +482,28 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 					keyboardSpace.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 							keyboardHeight));
 					AndroidUiHelper.updateVisibility(keyboardSpace, true);
+					appbar.setExpanded(false);
 				} else {
 					space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 0, 1));
 					AndroidUiHelper.updateVisibility(keyboardSpace, false);
+					appbar.setExpanded(true);
 				}
 			}
+		});
+	}
+
+	private void setupAppbarOffsetChangedListener() {
+		AppBarLayout appbar = mainView.findViewById(R.id.appbar);
+		appbar.addOnOffsetChangedListener((appBar, verticalOffset) -> {
+			float absOffset = Math.abs(verticalOffset);
+			float totalScrollRange = appBar.getTotalScrollRange();
+			float alpha = UiUtilities.getProportionalAlpha(totalScrollRange * 0.25f,
+					totalScrollRange * 0.9f, absOffset);
+			float inverseAlpha = 1.0f - UiUtilities.getProportionalAlpha(totalScrollRange * 0.5f,
+					totalScrollRange, absOffset);
+
+			toolbarTitle.setAlpha(inverseAlpha);
+			headerTitle.setAlpha(alpha);
 		});
 	}
 
