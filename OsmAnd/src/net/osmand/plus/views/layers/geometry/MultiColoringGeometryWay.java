@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import gnu.trove.list.array.TByteArrayList;
@@ -39,7 +38,6 @@ public abstract class MultiColoringGeometryWay
 
 	protected int customColor;
 	protected float customWidth;
-	protected Integer customDirectionArrowColor;
 	@NonNull
 	protected ColoringType coloringType;
 	protected String routeInfoAttribute;
@@ -51,30 +49,7 @@ public abstract class MultiColoringGeometryWay
 		coloringType = context.getDefaultColoringType();
 	}
 
-	public void setStyleParams(int color,
-	                           float width,
-	                           @Nullable @ColorInt Integer directionArrowColor,
-	                           @NonNull ColoringType routeColoringType,
-	                           @Nullable String routeInfoAttribute) {
-		this.coloringChanged = this.coloringType != routeColoringType
-				|| routeColoringType == ColoringType.ATTRIBUTE
-				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
-
-		boolean widthChanged = !Algorithms.objectEquals(customWidth, width);
-		if (widthChanged) {
-			updateStylesWidth(width);
-		}
-		updatePaints(width, routeColoringType);
-		getDrawer().setColoringType(routeColoringType);
-
-		this.customColor = color;
-		this.customWidth = width;
-		this.customDirectionArrowColor = directionArrowColor;
-		this.coloringType = routeColoringType;
-		this.routeInfoAttribute = routeInfoAttribute;
-	}
-
-	private void updateStylesWidth(@Nullable Float newWidth) {
+	protected void updateStylesWidth(@Nullable Float newWidth) {
 		for (GeometryWayStyle<?> style : styleMap.values()) {
 			style.width = newWidth;
 		}
@@ -253,17 +228,10 @@ public abstract class MultiColoringGeometryWay
 
 	@NonNull
 	@Override
-	public GeometryWayStyle<?> getDefaultWayStyle() {
-		if (coloringType.isGradient()) {
-			return new GeometryGradientWayStyle(getContext(), customColor, customWidth);
-		}
-		return new GeometrySolidWayStyle<>(getContext(), customColor, customWidth, customDirectionArrowColor);
-	}
+	public abstract GeometryWayStyle<?> getDefaultWayStyle();
 
 	@NonNull
-	public GeometrySolidWayStyle<C> getSolidWayStyle(int lineColor) {
-		return new GeometrySolidWayStyle<>(getContext(), lineColor, customWidth, customDirectionArrowColor);
-	}
+	public abstract GeometrySolidWayStyle<C> getSolidWayStyle(int lineColor);
 
 	@NonNull
 	public GeometryGradientWayStyle getGradientWayStyle() {
@@ -364,11 +332,11 @@ public abstract class MultiColoringGeometryWay
 
 	public static class GeometrySolidWayStyle<T extends MultiColoringGeometryWayContext> extends GeometryWayStyle<T> {
 
-		protected final Integer directionArrowsColor;
+		protected final Integer directionArrowColor;
 
-		GeometrySolidWayStyle(T context, Integer color, Float width, Integer directionArrowsColor) {
+		GeometrySolidWayStyle(T context, Integer color, Float width, Integer directionArrowColor) {
 			super(context, color, width);
-			this.directionArrowsColor = directionArrowsColor;
+			this.directionArrowColor = directionArrowColor;
 		}
 
 		@Override
@@ -378,7 +346,7 @@ public abstract class MultiColoringGeometryWay
 
 		@Override
 		public Integer getPointColor() {
-			return directionArrowsColor;
+			return directionArrowColor;
 		}
 
 		@Override
@@ -393,7 +361,7 @@ public abstract class MultiColoringGeometryWay
 				return false;
 			}
 			GeometrySolidWayStyle<?> o = (GeometrySolidWayStyle<?>) other;
-			return Algorithms.objectEquals(directionArrowsColor, o.directionArrowsColor);
+			return Algorithms.objectEquals(directionArrowColor, o.directionArrowColor);
 		}
 	}
 }

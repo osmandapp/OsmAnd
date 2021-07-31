@@ -462,14 +462,13 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				String width = getTrackWidthName(selectedGpxFile.getGpxFile(), defaultTrackWidthPref.get());
 				float trackWidth = getTrackWidth(width, defaultTrackWidth);
 				int trackColor = getTrackColor(selectedGpxFile.getGpxFile(), cachedColor);
-				int arrowColor = UiUtilities.getContrastColor(view.getApplication(), trackColor, false);
 				List<TrkSegment> segments = coloringType.isGradient()
 						? getCachedSegments(selectedGpxFile, coloringType.toGradientScaleType())
 						: selectedGpxFile.getPointsToDisplay();
 				for (TrkSegment segment : segments) {
 					if (segment.renderer instanceof Renderable.RenderableSegment) {
 						((Renderable.RenderableSegment) segment.renderer)
-								.drawGeometry(canvas, tileBox, correctedQuadRect, arrowColor, trackColor, trackWidth);
+								.drawGeometry(canvas, tileBox, correctedQuadRect, trackColor, trackWidth, true);
 					}
 				}
 			}
@@ -731,8 +730,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				renderableSegment.setTrackColoringParams(coloringType, routeIndoAttribute, borderPaint);
 				if (coloringType.isRouteInfoAttribute()) {
 					renderableSegment.setRoute(getCachedTrack(selectedGpxFile).getCachedRouteSegments(segmentIdx));
-					renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect, Color.BLACK,
-							paint.getColor(), paint.getStrokeWidth());
+					boolean drawArrows = isShowArrowsForTrack(selectedGpxFile.getGpxFile());
+					renderableSegment.drawGeometry(canvas, tileBox, correctedQuadRect,
+							paint.getColor(), paint.getStrokeWidth(), drawArrows);
 				} else {
 					renderableSegment.drawSegment(view.getZoom(), paint, canvas, tileBox);
 				}

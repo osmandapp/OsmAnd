@@ -74,6 +74,7 @@ import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
 import net.osmand.plus.resources.OsmandRegionSearcher;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -863,8 +864,9 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 	public void requestMapDownloadInfo(final LatLon latLon) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			int zoom = mapActivity.getMapView().getCurrentRotatedTileBox().getZoom();
+		OsmandMapTileView mapView = mapActivity != null ? mapActivity.getMapView() : null;
+		if (mapView != null) {
+			int zoom = mapView.getCurrentRotatedTileBox().getZoom();
 			new SearchOsmandRegionTask(this, latLon, zoom).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}

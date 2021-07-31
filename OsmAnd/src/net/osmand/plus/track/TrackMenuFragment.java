@@ -177,6 +177,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private int toolbarHeightPx;
 	private boolean adjustMapPosition = true;
 	private boolean menuTypeChanged = false;
+	private boolean overviewInitialHeight = true;
+	private int overviewInitialPosY;
 
 	public enum TrackMenuType {
 		OVERVIEW(R.id.action_overview, R.string.shared_string_overview),
@@ -192,7 +194,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		public final int menuItemId;
 		public final int titleId;
 	}
-
 
 	@Override
 	public int getMainLayoutId() {
@@ -387,7 +388,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (menuType == TrackMenuType.OVERVIEW && isPortrait()) {
 			calculateLayoutAndShowHeader();
 		} else {
-			calculateLayoutAndUpdateMenuState();
+			calculateLayoutAndUpdateMenuState(null);
 		}
 	}
 
@@ -695,6 +696,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		if (menuStateChanged) {
 			menuTypeChanged = false;
+		}
+	}
+
+	@Override
+	public void onContextMenuYPosChanged(@NonNull ContextMenuFragment fragment, int y, boolean needMapAdjust, boolean animated) {
+		super.onContextMenuYPosChanged(fragment, y, needMapAdjust, animated);
+		if (animated && menuType == TrackMenuType.OVERVIEW) {
+			if (y != overviewInitialPosY) {
+				overviewInitialHeight = false;
+			}
 		}
 	}
 
@@ -1097,27 +1108,33 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		bottomNav.setItemIconTintList(navColorStateList);
 		bottomNav.setItemTextColor(navColorStateList);
 		bottomNav.setSelectedItemId(R.id.action_overview);
-		bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-			@Override
-			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-				for (TrackMenuType type : TrackMenuType.values()) {
-					if (type.menuItemId == item.getItemId()) {
-						menuTypeChanged = menuType != type;
-						menuType = type;
-						setupCards();
-						updateHeader();
-						updateHeadersBottomShadow();
-						updateCardsLayout();
-						calculateLayoutAndUpdateMenuState();
-						break;
+		bottomNav.setOnNavigationItemSelectedListener(item -> {
+			for (TrackMenuType type : TrackMenuType.values()) {
+				if (type.menuItemId == item.getItemId()) {
+					TrackMenuType prevMenuType = menuType;
+					menuType = type;
+					menuTypeChanged = prevMenuType != type;
+					setupCards();
+					updateHeader();
+					updateHeadersBottomShadow();
+					updateCardsLayout();
+					if (type == TrackMenuType.OVERVIEW && isPortrait() && overviewInitialHeight
+							&& getCurrentMenuState() != MenuState.FULL_SCREEN) {
+						calculateLayoutAndShowHeader();
+					} else {
+						calculateLayoutAndUpdateMenuState(prevMenuType);
 					}
+					break;
 				}
-				return true;
 			}
+			return true;
 		});
 	}
 
-	private void calculateLayoutAndUpdateMenuState() {
+	private void calculateLayoutAndUpdateMenuState(@Nullable TrackMenuType prevMenuType) {
+		if (getCurrentMenuState() == 2 && overviewInitialHeight && prevMenuType == TrackMenuType.OVERVIEW) {
+			slideDown();
+		}
 		runLayoutListener(new Runnable() {
 			@Override
 			public void run() {
@@ -1132,12 +1149,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		runLayoutListener(new Runnable() {
 			@Override
 			public void run() {
-				int posY = getViewHeight() - menuHeaderHeight - menuTitleHeight - getShadowHeight();
-				if (posY < getViewY()) {
-					updateMainViewLayout(posY);
+				if (overviewInitialPosY == 0) {
+					overviewInitialPosY = getViewHeight() - menuHeaderHeight - menuTitleHeight - getShadowHeight();
 				}
-				animateMainView(posY, false, getCurrentMenuState(), getCurrentMenuState());
-				updateMapControlsPos(TrackMenuFragment.this, posY, true);
+				if (overviewInitialPosY < getViewY()) {
+					updateMainViewLayout(overviewInitialPosY);
+				}
+				animateMainView(overviewInitialPosY, false, getCurrentMenuState(), getCurrentMenuState());
+				updateMapControlsPos(TrackMenuFragment.this, overviewInitialPosY, true);
 			}
 		});
 	}

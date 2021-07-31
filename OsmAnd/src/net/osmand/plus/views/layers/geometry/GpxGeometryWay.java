@@ -5,17 +5,24 @@ import android.graphics.Bitmap;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayContext, GpxGeometryWayDrawer> {
 
 	private List<WptPt> points;
 	private List<RouteSegmentResult> routeSegments;
+
+	private boolean drawDirectionArrows;
 
 	private static class GeometryWayWptPtProvider implements GeometryWayProvider {
 		private final List<WptPt> points;
@@ -44,8 +51,31 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 		super(context, new GpxGeometryWayDrawer(context));
 	}
 
+	public void setTrackStyleParams(int trackColor,
+	                                float trackWidth,
+	                                boolean drawDirectionArrows,
+	                                @NonNull ColoringType routeColoringType,
+	                                @Nullable String routeInfoAttribute) {
+		this.coloringChanged = this.coloringType != routeColoringType
+				|| routeColoringType == ColoringType.ATTRIBUTE
+				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
+
+		if (customWidth != trackWidth) {
+			updateStylesWidth(trackWidth);
+		}
+		updatePaints(trackWidth, routeColoringType);
+		getDrawer().setColoringType(routeColoringType);
+
+		this.customColor = trackColor;
+		this.customWidth = trackWidth;
+		this.drawDirectionArrows = drawDirectionArrows;
+		this.coloringType = routeColoringType;
+		this.routeInfoAttribute = routeInfoAttribute;
+	}
+
 	public void updateSegment(RotatedTileBox tb, List<WptPt> points, List<RouteSegmentResult> routeSegments) {
-		if (coloringChanged || tb.getMapDensity() != getMapDensity() || this.points != points || this.routeSegments != routeSegments) {
+		if (coloringChanged || tb.getMapDensity() != getMapDensity() || this.points != points
+				|| this.routeSegments != routeSegments) {
 			this.points = points;
 			this.routeSegments = routeSegments;
 
@@ -68,13 +98,25 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 	@NonNull
 	@Override
 	public GeometryWayStyle<?> getDefaultWayStyle() {
-		return new GeometryArrowsStyle(getContext(), customColor, customWidth, customDirectionArrowColor, false);
+		return new GeometryArrowsStyle(getContext(), customColor, customWidth,
+				getTrackContrastColor(customColor), false);
 	}
 
 	@NonNull
 	@Override
 	public GeometrySolidWayStyle<GpxGeometryWayContext> getSolidWayStyle(int lineColor) {
-		return new GeometryArrowsStyle(getContext(), lineColor, customWidth, customDirectionArrowColor, true);
+		return new GeometryArrowsStyle(getContext(), lineColor, customWidth,
+				getTrackContrastColor(lineColor), true);
+	}
+
+	@ColorInt
+	private int getTrackContrastColor(@ColorInt int trackColor) {
+		return UiUtilities.getContrastColor(getContext().getCtx(), trackColor, false);
+	}
+
+	@Override
+	protected boolean shouldDrawArrows() {
+		return drawDirectionArrows;
 	}
 
 	@Override
@@ -94,7 +136,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 		public static final int OUTER_CIRCLE_COLOR = 0x33000000;
 
-		protected boolean hasPathLine;
+		private final boolean hasPathLine;
 
 		private final float trackWidthThresholdPix;
 		private final float outerCircleRadius;
@@ -132,9 +174,10 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 			return useSpecialArrow() ? getContext().getSpecialArrowBitmap() : getContext().getArrowBitmap();
 		}
 
+		@NonNull
 		@Override
 		public Integer getPointColor() {
-			return directionArrowsColor;
+			return directionArrowColor;
 		}
 
 		public int getTrackColor() {
