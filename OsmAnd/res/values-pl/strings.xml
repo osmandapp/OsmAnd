@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="use_transparent_map_theme">Przezroczysty motyw</string>
     <string name="native_library_not_supported">To urządzenie nie obsługuje biblioteki renderowania natywnego.</string>
@@ -1227,7 +1227,7 @@
     <string name="shared_string_waypoint">Punkt trasy</string>
     <string name="save_as_favorites_points">Zapisz jako grupę ulubionych</string>
     <string name="select_destination_and_intermediate_points">Wybierz cele docelowe</string>
-    <string name="layer_amenity_label">Etykiety nakładek użytecznych miejsc</string>
+    <string name="layer_amenity_label">Etykiety punktów (POI, Ulubione)</string>
     <string name="show_zoom_buttons_navigation_descr">Pokaż przyciski powiększania podczas nawigacji.</string>
     <string name="show_zoom_buttons_navigation">Przyciski zbliżania</string>
     <string name="sort_by_distance">Sortuj wg odległości</string>
@@ -1263,7 +1263,7 @@
     <string name="rendering_attr_showAccess_name">Ograniczenia dostępu i opłaty</string>
     <string name="rendering_attr_showSurfaceGrade_name">Jakość dróg</string>
     <string name="rendering_attr_showSurfaces_name">Nawierzchnia dróg</string>
-    <string name="rendering_attr_showCycleRoutes_name">Ścieżki rowerowe</string>
+    <string name="rendering_attr_showCycleRoutes_name">Trasy rowerowe</string>
     <string name="lang_al">Albański</string>
     <string name="lang_ar">Arabski</string>
     <string name="lang_fa">Perski</string>
@@ -1283,7 +1283,7 @@
     <string name="pause_navigation">Zatrzymaj nawigację</string>
     <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności wspinaczki alpinistycznej (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki zgodnie ze skalą SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Nakładka symboli szlaków turystycznych</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Szlaki turystyczne</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderowanie szlaków według śladów OSMC.</string>
     <string name="arrival_distance_factor_early">Wcześnie</string>
     <string name="arrival_distance_factor_normally">Normalnie</string>
@@ -1537,7 +1537,7 @@
     <string name="use_fast_recalculation">Inteligentne przeliczanie trasy</string>
     <string name="use_fast_recalculation_desc">Przelicza tylko początkową część trasy, która jest przydatna podczas długich podróży.</string>
     <string name="shared_string_logoff">Wyloguj się</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Linia w kolorze oznakowania OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="rendering_value_disabled_name">Wyłączenie</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Linia w kolorze przeznaczenia</string>
     <string name="osm_edit_context_menu_delete">Usuń edycje OSM</string>
@@ -1863,7 +1863,7 @@
     <string name="map_markers">Znaczniki mapy</string>
     <string name="map_marker">Znacznik mapy</string>
     <string name="consider_turning_polygons_off">Zaleca się wyłączenie renderowania wielokątów.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Pokaż trasy rowerów górskich</string>
+    <string name="rendering_attr_showMtbRoutes_name">Górskie trasy rowerowe</string>
     <string name="show_polygons">Wielokąty</string>
     <string name="find_parking">Znajdź parking</string>
     <string name="shared_string_status">Status</string>
@@ -4062,7 +4062,6 @@
 \n - Zaktualizowane okno dialogowe \"Zapis podróży\".
 \n
 \n</string>
-    
     <string name="edit_online_routing_engine">Edytuj silnik wyznaczania tras online</string>
     <string name="select_segments_description">%1$s zawiera więcej niż jeden segment, musisz wybrać wymagany element nawigacji.</string>
     <string name="segments_count">Segment %1$d</string>
@@ -4269,4 +4268,29 @@
     <string name="active_till">Aktywna do %1$s</string>
     <string name="promo_subscription">Subskrypcja promocyjna</string>
     <string name="track_has_no_needed_data">Trasa nie zawiera potrzebnych danych.</string>
+    <string name="option_available_only_in_osmand_pro">Opcja dostępna w ramach subskrypcji OsmAnd Pro.</string>
+    <string name="pro_widgets">Widżety Pro</string>
+    <string name="purchases_feature_desc_pro_widgets">Uzyskaj dostęp do funkcji OsmAnd Pro. Kolorowanie trasy i nie tylko.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Poznaj plany OsmAnd, aby znaleźć odpowiednie dla Ciebie.</string>
+    <string name="travel_routes">Trasy podróży</string>
+    <string name="setting_supported_by_style">To ustawienie jest obsługiwane przez styl mapy \'%1$s\'</string>
+    <string name="direct_line_maps_required_descr">Obliczanie trasy trwa dłużej niż zwykle.
+\n
+\nByć może niektóre mapy nie są wczytane.</string>
+    <string name="online_direct_line_maps_link">Sprawdź niezbędne mapy</string>
+    <string name="offline_maps_required_descr">Do wyznaczenia trasy wymagane są dodatkowe mapy offline.</string>
+    <string name="online_maps_required_descr">Niestety OsmAnd nie mógł znaleźć (obliczyć) trasy odpowiedniej dla Twoich ustawień.
+\n
+\nByć może niektóre mapy nie są załadowane. Możesz uruchomić online sprawdzając potrzebne mapy.</string>
+    <string name="online_maps_searching_descr">Trwa wyszukiwanie map online.</string>
+    <string name="reset_to_original">Przywrócenie ustawień początkowych</string>
+    <string name="backup_error_no_subscription">Brak ważnej subskrypcji</string>
+    <string name="map_updates_for_mappers">Aktualizacje map dla twórców map</string>
+    <string name="benefits_for_contributors">Korzyści dla aktywnych współpracowników OSM</string>
+    <string name="benefits_for_contributors_secondary_descr">Zaloguj się do OpenStreetMap i sprawdź, czy jesteś uprawniony do otrzymywania nieograniczonych miesięcznych i godzinnych aktualizacji map.</string>
+    <string name="use_login_and_password">Użyj loginu i hasła</string>
+    <string name="available_until">Dostępne do %1$s</string>
+    <string name="enough_contributions_descr">Gratulacje, dokonałeś wystarczającego wkładu w OpenStreetMap i możesz cieszyć się nieograniczonymi aktualizacjami map.</string>
+    <string name="map_updates_are_unavailable_yet">Aktualizacje map są jeszcze niedostępne :-(</string>
+    <string name="connect_track_points_as">Połącz punkty trasy</string>
 </resources>
