@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_routes">Маршруты</string>
     <string name="day">День</string>
@@ -1820,7 +1820,7 @@
     <string name="local_indexes_cat_wiki">Википедия</string>
     <string name="shared_string_show_details">Показать детали</string>
     <string name="download_wikipedia_maps">Википедия</string>
-    <string name="read_full_article">Читать полный текст статьи (онлайн)</string>
+    <string name="read_full_article">Открыть в Википедии</string>
     <string name="shared_string_import2osmand">Импорт в OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Вы уверены, что хотите удалить %1$d заметок\?</string>
     <string name="gps_network_not_enabled">Служба определения местоположения выключена. Включить?</string>
@@ -2619,7 +2619,7 @@
     <string name="parked_at">припаркован в</string>
     <string name="pick_up_till">Забрать до</string>
     <string name="without_time_limit">Без ограничения по времени</string>
-    <string name="context_menu_read_full_article">Читать статью целиком</string>
+    <string name="context_menu_read_full_article">Полный текст статьи</string>
     <string name="context_menu_read_article">Читать статью</string>
     <string name="context_menu_points_of_group">Все точки группы</string>
     <string name="open_from">Открыто с</string>
@@ -2738,12 +2738,12 @@
     <string name="get_unlimited_access">Получить неограниченный доступ</string>
     <string name="welcome_to_open_beta">Добро пожаловать на открытое бета-тестирование</string>
     <string name="contour_lines_hillshade_maps">Карты горизонталей и затенение рельефа</string>
-    <string name="download_wikipedia_description">Скачать статьи Википедии для %1$s, чтобы читать их в автономном режиме.</string>
+    <string name="download_wikipedia_description">Скачать статьи Википедии для %1$s, чтобы читать их без интернета.</string>
     <string name="download_wikipedia_label">Загрузка данных Википедии</string>
     <string name="open_in_browser_wiki">Открыть статью в интернете</string>
-    <string name="open_in_browser_wiki_description">Просмотреть статью в браузере.</string>
+    <string name="open_in_browser_wiki_description">Открыть статью в браузере.</string>
     <string name="download_wiki_region_placeholder">этот регион</string>
-    <string name="wiki_article_search_text">Поиск соответствующей статьи в вики</string>
+    <string name="wiki_article_search_text">Поиск соответствующей вики-статьи</string>
     <string name="wiki_article_not_found">Статья не найдена</string>
     <string name="how_to_open_wiki_title">Как открыть статьи Википедии?</string>
     <string name="popular_destinations">Популярные направления</string>
@@ -3520,7 +3520,7 @@
     <string name="main_actions">Основные действия</string>
     <string name="move_inside_category">Перемещать элементы можно только внутри данной категории.</string>
     <string name="developer_plugin">Плагин для разработчиков</string>
-    <string name="select_wikipedia_article_langs">Выберите языки, на которых статьи Википедии будут отображаться на карте. Вы сможете переключаться между всеми доступными языками при чтении статьи.</string>
+    <string name="select_wikipedia_article_langs">Выберите языки, на которых статьи Википедии будут отображаться на карте. При чтении вы можете переключаться между доступными языками.</string>
     <string name="lang_yo">Йоруба</string>
     <string name="custom_color">Пользовательский цвет</string>
     <string name="some_articles_may_not_available_in_lang">Некоторые статьи Википедии могут быть недоступны на вашем языке.</string>
@@ -3704,7 +3704,7 @@
     <string name="gpx_split_interval_descr">Интервал между метками расстояния или времени на треке.</string>
     <string name="shared_string_custom">Своё значение</string>
     <string name="add_hidden_group_info">Добавленная точка не будет видна на карте, так как выбранная группа скрыта, найти ее можно в «%s».</string>
-    <string name="track_show_start_finish_icons">Показывать значки старта и финиша</string>
+    <string name="track_show_start_finish_icons">Значки старта и финиша</string>
     <string name="select_track_width">Толщина линии</string>
     <string name="gpx_direction_arrows">Стрелки направления</string>
     <string name="track_coloring_solid">Сплошной</string>
@@ -3765,7 +3765,7 @@
     <string name="number_of_gpx_files_selected_pattern">Выбрано файлов треков: %s</string>
     <string name="save_global_track_interval_descr">Укажите интервал общей записи трека (включается через виджет «Запись поездки» на карте).</string>
     <string name="gpx_monitoring_stop">Остановить запись</string>
-    <string name="gpx_monitoring_start">Возобновить запись поездки</string>
+    <string name="gpx_monitoring_start">Возобновить запись</string>
     <string name="system_default_theme">По выбору системы</string>
     <string name="all_next_segments">Все последующие сегменты</string>
     <string name="previous_segment">Предыдущий сегмент</string>
@@ -4277,4 +4277,5 @@
     <string name="backup_deleted_all_data">Все данные удалены</string>
     <string name="track_has_no_needed_data">Трек не содержит необходимых данных.</string>
     <string name="enter_verification_code">Введите одноразовый пароль</string>
+    <string name="reset_to_original">Сбросить к начальному значению</string>
 </resources>
