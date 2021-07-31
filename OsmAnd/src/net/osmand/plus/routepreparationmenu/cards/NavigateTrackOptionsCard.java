@@ -64,7 +64,7 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 		UiUtilities.updateCustomRadioButtons(app, buttonsView, nightMode, buttonType);
 
 		ApplicationMode routingProfile = app.getRoutingHelper().getAppMode();
-		leftButton.setText(routingProfile.getUserProfileName());
+		leftButton.setText(routingProfile.toHumanString());
 		rightButton.setText(R.string.routing_profile_straightline);
 		description.setText(R.string.connect_track_points_as);
 
