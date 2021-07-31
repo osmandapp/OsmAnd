@@ -1480,7 +1480,7 @@
     <string name="delay_to_start_navigation">آغاز راهنمایی گام‌به‌گام پس از…</string>
     <string name="shared_string_go">برو</string>
     <string name="osmand_parking_overdue">تأخیر دارید</string>
-    <string name="general_settings_2">تنظیمات کلی</string>
+    <string name="general_settings_2">تنظیمات سراسری</string>
     <string name="routing_settings_2">تنظیمات ناوبری</string>
     <string name="shared_string_do_not_use">استفاده نشود</string>
     <string name="rendering_attr_OSMMapperAssistant_name">دستیار نقشه‌کش OSM</string>
@@ -4018,7 +4018,7 @@
     <string name="shared_string_sec">sec</string>
     <string name="routing_engine_vehicle_type_scooter">اسکوتر</string>
     <string name="context_menu_read_full">تمام‌صفحه</string>
-    <string name="select_another_colorization">لطفاً گونهٔ رنگ‌بندی دیگری انتخاب کنید.</string>
+    <string name="select_another_colorization">لطفاً گونهٔ دیگری از رنگ‌بندی انتخاب کنید.</string>
     <string name="lang_de_casual">آلمانی (خودمانی)</string>
     <string name="snowmobile_render_descr">مناسب برای اسنوموبیل‌سواری (برف‌روسواری) است. دارای مسیرها و جاده‌های ویژه.</string>
     <string name="osm_live_payment_desc_hw">هزینهٔ اشتراک با رسیدن موعد دورهٔ انتخابی از حسابتان پرداخت می‌شود. هر زمان که خواستید در AppGallery آن را لغو کنید.</string>
