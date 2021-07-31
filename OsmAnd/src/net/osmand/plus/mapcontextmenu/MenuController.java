@@ -23,7 +23,6 @@ import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapDataObject;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -42,7 +41,6 @@ import net.osmand.plus.audionotes.AudioVideoNoteMenuController;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
@@ -74,20 +72,16 @@ import net.osmand.plus.osmedit.OsmBugMenuController;
 import net.osmand.plus.osmedit.OsmBugsLayer.OpenStreetNote;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.parkingpoint.ParkingPositionMenuController;
-import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.resources.OsmandRegionSearcher;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.layers.DownloadedRegionsLayer.DownloadMapObject;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 
 import org.apache.commons.logging.Log;
 
-import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -868,7 +862,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	}
 
 	public void requestMapDownloadInfo(final LatLon latLon) {
-		new SearchOsmandRegionTask(this, latLon).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			int zoom = mapActivity.getMapView().getCurrentRotatedTileBox().getZoom();
+			new SearchOsmandRegionTask(this, latLon, zoom).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
 	}
 
 	private void createMapDownloadControls(BinaryMapDataObject binaryMapDataObject, String selectedFullName) {
@@ -932,16 +930,13 @@ public abstract class MenuController extends BaseMenuController implements Colla
 
 		private final WeakReference<MenuController> controllerRef;
 		private final LatLon latLon;
-		private int zoom;
-		private ResourceManager rm;
-		private OsmandRegions osmandRegions;
-		private DownloadResources downloadResources;
-		private String selectedFullName;
+		private final int zoom;
+		private OsmandRegionSearcher regionSearcher;
 
-		SearchOsmandRegionTask(@NonNull MenuController controller, LatLon latLon) {
+		SearchOsmandRegionTask(@NonNull MenuController controller, @NonNull LatLon latLon, int zoom) {
 			this.controllerRef = new WeakReference<>(controller);
 			this.latLon = latLon;
-			selectedFullName = "";
+			this.zoom = zoom;
 		}
 
 		@Nullable
@@ -958,99 +953,26 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		@Override
 		protected void onPreExecute() {
 			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null && mapActivity.getMapView() != null) {
-				rm = mapActivity.getMyApplication().getResourceManager();
-				osmandRegions = rm.getOsmandRegions();
-				downloadResources = mapActivity.getMyApplication().getDownloadThread().getIndexes();
-				zoom = mapActivity.getMapView().getZoom();
+			if (mapActivity != null) {
+				regionSearcher = new OsmandRegionSearcher(mapActivity.getMyApplication(), latLon, zoom);
 			}
 		}
 
 		@Override
 		protected BinaryMapDataObject doInBackground(Void... voids) {
-			if (osmandRegions == null) {
+			if (regionSearcher == null) {
 				return null;
 			}
-			int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
-			int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
-			if (downloadResources.hasExternalMapFileAt(point31x, point31y, zoom)) {
-				return null;
-			}
-
-			List<BinaryMapDataObject> mapDataObjects;
-			try {
-				mapDataObjects = osmandRegions.query(point31x, point31x, point31y, point31y);
-			} catch (IOException e) {
-				LOG.error(e.getMessage(), e);
-				return null;
-			}
-
-			BinaryMapDataObject binaryMapDataObject = null;
-			if (mapDataObjects != null) {
-				Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
-				while (it.hasNext()) {
-					BinaryMapDataObject o = it.next();
-					if (o.getTypes() != null) {
-						boolean isRegion = true;
-						for (int i = 0; i < o.getTypes().length; i++) {
-							TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
-							if ("boundary".equals(tp.value)) {
-								isRegion = false;
-								break;
-							}
-						}
-						if (!isRegion || !osmandRegions.contain(o, point31x, point31y)) {
-							it.remove();
-						}
-					}
-				}
-				double smallestArea = -1;
-				for (BinaryMapDataObject o : mapDataObjects) {
-					String downloadName = osmandRegions.getDownloadName(o);
-					if (!Algorithms.isEmpty(downloadName)) {
-						boolean downloaded = checkIfObjectDownloaded(rm, downloadName);
-						if (downloaded) {
-							binaryMapDataObject = null;
-							break;
-						} else {
-							String fullName = osmandRegions.getFullName(o);
-							WorldRegion region = osmandRegions.getRegionData(fullName);
-							if (region != null && region.isRegionMapDownload()) {
-								double area = OsmandRegions.getArea(o);
-								if (smallestArea == -1) {
-									smallestArea = area;
-									selectedFullName = fullName;
-									binaryMapDataObject = o;
-								} else if (area < smallestArea) {
-									smallestArea = area;
-									selectedFullName = fullName;
-									binaryMapDataObject = o;
-								}
-							}
-						}
-					}
-				}
-			}
-			return binaryMapDataObject;
+			regionSearcher.search();
+			return regionSearcher.getBinaryMapDataObject();
 		}
 
 		@Override
 		protected void onPostExecute(BinaryMapDataObject binaryMapDataObject) {
 			MenuController controller = getController();
-			if (controller != null) {
-				controller.createMapDownloadControls(binaryMapDataObject, selectedFullName);
+			if (controller != null && regionSearcher != null) {
+				controller.createMapDownloadControls(binaryMapDataObject, regionSearcher.getRegionFullName());
 			}
-		}
-
-		private boolean checkIfObjectDownloaded(ResourceManager rm, String downloadName) {
-			boolean downloaded = rm.checkIfObjectDownloaded(downloadName);
-			if (!downloaded) {
-				WorldRegion region = rm.getOsmandRegions().getRegionDataByDownloadName(downloadName);
-				if (region != null && region.getSuperregion() != null && region.getSuperregion().isRegionMapDownload()) {
-					return checkIfObjectDownloaded(rm, region.getSuperregion().getRegionDownloadName());
-				}
-			}
-			return downloaded;
 		}
 	}
 }

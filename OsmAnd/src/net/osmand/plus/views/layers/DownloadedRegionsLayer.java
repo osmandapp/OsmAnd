@@ -258,6 +258,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				&& !view.isAnimatingMapMove()
 				&& currentObjects != null) {
 
+			DownloadIndexesThread downloadThread = app.getDownloadThread();
+			DownloadResources indexes = downloadThread.getIndexes();
+			if (!indexes.getExternalMapFileNamesAt(cx, cy, zoom, false).isEmpty()) {
+				hideDownloadMapToolbar();
+				return;
+			}
 			Map<WorldRegion, BinaryMapDataObject> selectedObjects = new LinkedHashMap<>();
 			for (int i = 0; i < currentObjects.size(); i++) {
 				final BinaryMapDataObject o = currentObjects.get(i);
@@ -279,8 +285,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			IndexItem indexItem = null;
 			String name = null;
 			Map.Entry<WorldRegion, BinaryMapDataObject> res = app.getRegions().getSmallestBinaryMapDataObjectAt(selectedObjects);
-			DownloadIndexesThread downloadThread = app.getDownloadThread();
-			DownloadResources indexes = downloadThread.getIndexes();
 			if (res != null && res.getKey() != null) {
 				WorldRegion regionData  = res.getKey();
 				List<IndexItem> indexItems = indexes.getIndexItems(regionData);
@@ -300,11 +304,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 				}
 			}
 			if (indexItem != null && !Algorithms.isEmpty(name)) {
-				if (!indexes.hasExternalMapFileAt(cx, cy, zoom)) {
-					showDownloadMapToolbar(indexItem, name);
-				} else {
-					hideDownloadMapToolbar();
-				}
+				showDownloadMapToolbar(indexItem, name);
 			} else {
 				hideDownloadMapToolbar();
 			}

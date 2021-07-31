@@ -104,11 +104,9 @@ public class MissingMapsHelper {
 			Location l = points.get(i);
 			int point31x = MapUtils.get31TileNumberX(l.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(l.getLatitude());
-			if (downloadResources.hasExternalRouteFileAt(point31x, point31y, 15)) {
-				continue;
-			}
-			LatLon latLonPoint = new LatLon(l.getLatitude(), l.getLongitude());
-			List<WorldRegion> worldRegions = params.ctx.getRegions().getWorldRegionsAt(latLonPoint);
+			List<String> mapFiles = downloadResources.getExternalMapFileNamesAt(point31x, point31y, 15, true);
+			LatLon latLon = new LatLon(l.getLatitude(), l.getLongitude());
+			List<WorldRegion> worldRegions = params.ctx.getRegions().getWorldRegionsAt(latLon);
 			for (WorldRegion region : worldRegions) {
 				String mapName = region.getRegionDownloadName();
 				String countryMapName = region.getSuperregion().getRegionDownloadName();
