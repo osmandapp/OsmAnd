@@ -161,13 +161,15 @@ public class Renderable {
             this.routeSegments = routeSegments;
         }
 
-        public void drawGeometry(Canvas canvas, RotatedTileBox tileBox, QuadRect quadRect, int arrowColor, int trackColor, float trackWidth) {
+        public void drawGeometry(Canvas canvas, RotatedTileBox tileBox, QuadRect quadRect,
+                                 int trackColor, float trackWidth, boolean drawArrows) {
             if (geometryWay != null) {
                 List<WptPt> points = coloringType.isRouteInfoAttribute() ? this.points : getPointsForDrawing();
                 if (!Algorithms.isEmpty(points)) {
-                    geometryWay.setStyleParams(trackColor, trackWidth, arrowColor, coloringType, routeInfoAttribute);
+                    geometryWay.setTrackStyleParams(trackColor, trackWidth, drawArrows, coloringType, routeInfoAttribute);
                     geometryWay.updateSegment(tileBox, points, routeSegments);
-                    geometryWay.drawSegments(tileBox, canvas, quadRect.top, quadRect.left, quadRect.bottom, quadRect.right, null, 0);
+                    geometryWay.drawSegments(tileBox, canvas, quadRect.top, quadRect.left, quadRect.bottom,
+                            quadRect.right, null, 0);
                 }
             }
         }

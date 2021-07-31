@@ -355,7 +355,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 			ColoringType actualColoringType = isColoringAvailable(routeColoringType, routeInfoAttribute) ?
 							routeColoringType : ColoringType.DEFAULT;
-			routeGeometry.setStyleParams(getRouteLineColor(), getRouteLineWidth(tb),
+			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb),
 					directionArrowsColor, actualColoringType, routeInfoAttribute);
 			routeGeometry.updateRoute(tb, route);
 
