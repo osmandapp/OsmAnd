@@ -2042,6 +2042,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					bottom = Math.min(bottom, l.getLatitude());
 				}
 				List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+				if (rh.getRoute().hasMissingMaps()) {
+					TargetPoint pointToStart = app.getTargetPointsHelper().getPointToStart();
+					if (pointToStart != null) {
+						targetPoints.add(pointToStart);
+					}
+				}
 				for (TargetPoint l : targetPoints) {
 					left = Math.min(left, l.getLongitude());
 					right = Math.max(right, l.getLongitude());
