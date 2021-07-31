@@ -32,6 +32,7 @@ public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugRes
 		if (osmBugResult.warning != null) {
 			app.getSettings().OSM_USER_NAME.resetToDefault();
 			app.getSettings().OSM_USER_PASSWORD.resetToDefault();
+			app.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
 			app.showToastMessage(osmBugResult.warning);
 		} else {
 			app.showToastMessage(R.string.osm_authorization_success);

@@ -27,7 +27,6 @@ import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
