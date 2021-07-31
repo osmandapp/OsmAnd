@@ -1227,7 +1227,7 @@
     <string name="shared_string_waypoint">Punkt trasy</string>
     <string name="save_as_favorites_points">Zapisz jako grupę ulubionych</string>
     <string name="select_destination_and_intermediate_points">Wybierz cele docelowe</string>
-    <string name="layer_amenity_label">Etykiety punktów (POI, Ulubione)</string>
+    <string name="layer_amenity_label">Etykiety punktów (użyteczne miejsca, ulubione)</string>
     <string name="show_zoom_buttons_navigation_descr">Pokaż przyciski powiększania podczas nawigacji.</string>
     <string name="show_zoom_buttons_navigation">Przyciski zbliżania</string>
     <string name="sort_by_distance">Sortuj wg odległości</string>
@@ -1291,7 +1291,7 @@
     <string name="arrival_distance_factor_at_last">Tuż przed przybyciem</string>
     <string name="av_camera_pic_size">Rozmiar obrazu aparatu</string>
     <string name="av_camera_pic_size_descr">Wybierz rozmiar obrazu aparatu</string>
-    <string name="rendering_attr_publicTransportMode_name">Linie autobusowe, trolejbusowe, transportowe</string>
+    <string name="rendering_attr_publicTransportMode_name">Linie autobusowe, trolejbusowe, wahadłowe</string>
     <string name="record_plugin_name">Nagrywanie podróży</string>
     <string name="int_hour">h</string>
     <string name="duration">Czas trwania</string>
@@ -1349,7 +1349,7 @@
     <string name="rendering_attr_trainLightrailRoutes_name">Trasy pociągów</string>
     <string name="rendering_attr_tramRoutes_name">Trasy tramwajowe</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Udostępniaj trasy taxi</string>
-    <string name="rendering_attr_trolleybusRoutes_name">Trasy trolejbusowe</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Linie trolejbusowe</string>
     <string name="rendering_attr_busRoutes_name">Trasy autobusowe</string>
     <string name="rendering_category_hide">Ukrywanie</string>
     <string name="lock_screen_request_explanation">%1$s potrzebuje uprawnień do wyłączenia ekranu dla funkcji oszczędzania energii.</string>
@@ -4273,7 +4273,7 @@
     <string name="purchases_feature_desc_pro_widgets">Uzyskaj dostęp do funkcji OsmAnd Pro. Kolorowanie trasy i nie tylko.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Poznaj plany OsmAnd, aby znaleźć odpowiednie dla Ciebie.</string>
     <string name="travel_routes">Trasy podróży</string>
-    <string name="setting_supported_by_style">To ustawienie jest obsługiwane przez styl mapy \'%1$s\'</string>
+    <string name="setting_supported_by_style">To ustawienie jest obsługiwane przez styl mapy „%1$s”</string>
     <string name="direct_line_maps_required_descr">Obliczanie trasy trwa dłużej niż zwykle.
 \n
 \nByć może niektóre mapy nie są wczytane.</string>
@@ -4283,7 +4283,7 @@
 \n
 \nByć może niektóre mapy nie są załadowane. Możesz uruchomić online sprawdzając potrzebne mapy.</string>
     <string name="online_maps_searching_descr">Trwa wyszukiwanie map online.</string>
-    <string name="reset_to_original">Przywrócenie ustawień początkowych</string>
+    <string name="reset_to_original">Przywróć do ustawień początkowych</string>
     <string name="backup_error_no_subscription">Brak ważnej subskrypcji</string>
     <string name="map_updates_for_mappers">Aktualizacje map dla twórców map</string>
     <string name="benefits_for_contributors">Korzyści dla aktywnych współpracowników OSM</string>
