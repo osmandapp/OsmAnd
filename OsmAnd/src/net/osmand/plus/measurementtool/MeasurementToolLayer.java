@@ -388,14 +388,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		}
 		float locX = tb.getPixXFromLatLon(pt.lat, pt.lon);
 		float locY = tb.getPixYFromLatLon(pt.lat, pt.lon);
-		if (editingCtx.isInMultiProfileMode()) {
-			canvas.drawBitmap(multiProfileGeometryWayContext.getUserPointIcon(),
-					locX - multiProfileGeometryWayContext.userPointIconSizePx / 2,
-					locY - multiProfileGeometryWayContext.userPointIconSizePx / 2, bitmapPaint);
-		} else {
-			if (tb.containsPoint(locX, locY, 0)) {
-				canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
-			}
+		if (tb.containsPoint(locX, locY, 0)) {
+			canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 		}
 		if (rotate) {
 			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
