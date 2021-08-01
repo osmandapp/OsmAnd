@@ -104,9 +104,11 @@ public class MissingMapsHelper {
 			Location l = points.get(i);
 			int point31x = MapUtils.get31TileNumberX(l.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(l.getLatitude());
-			List<String> mapFiles = downloadResources.getExternalMapFileNamesAt(point31x, point31y, 15, true);
 			LatLon latLon = new LatLon(l.getLatitude(), l.getLongitude());
 			List<WorldRegion> worldRegions = params.ctx.getRegions().getWorldRegionsAt(latLon);
+			Set<WorldRegion> regions = new LinkedHashSet<>();
+			boolean hasAnyRegionDownloaded =
+					!downloadResources.getExternalMapFileNamesAt(point31x, point31y, 15, true).isEmpty();
 			for (WorldRegion region : worldRegions) {
 				String mapName = region.getRegionDownloadName();
 				String countryMapName = region.getSuperregion().getRegionDownloadName();
@@ -115,15 +117,20 @@ public class MissingMapsHelper {
 				boolean isCountry = Algorithms.isEmpty(countryMapName) && !subregions.isEmpty();
 				if (!isCountry) {
 					if (!isDownloaded) {
-						result.add(region);
+						regions.add(region);
 					} else {
 						downloadedRegions.add(region);
+						hasAnyRegionDownloaded = true;
 					}
 				} else {
 					if (isDownloaded) {
 						downloadedCountries.add(region);
+						hasAnyRegionDownloaded = true;
 					}
 				}
+			}
+			if (!hasAnyRegionDownloaded) {
+				result.addAll(regions);
 			}
 		}
 		for (WorldRegion country : downloadedCountries) {

@@ -341,8 +341,9 @@ public class RouteProvider {
 		rp.leftSide = routeParams.leftSide;
 		rp.fast = routeParams.fast;
 		rp.onlyStartPointChanged = routeParams.onlyStartPointChanged;
-		rp.previousToRecalculate =  routeParams.previousToRecalculate;
-		rp.intermediates = new ArrayList<LatLon>();
+		rp.previousToRecalculate = routeParams.previousToRecalculate;
+		rp.extraIntermediates = true;
+		rp.intermediates = new ArrayList<>();
 		int closest = 0;
 		double maxDist = Double.POSITIVE_INFINITY;
 		for (int i = 0; i < intermediates.size(); i++) {
@@ -1216,7 +1217,10 @@ public class RouteProvider {
 		points.add(new Location("pnt", params.start.getLatitude(), params.start.getLongitude()));
 		if (params.intermediates != null) {
 			for (LatLon l : params.intermediates) {
-				points.add(new Location("pnt", l.getLatitude(), l.getLongitude()));
+				points.add(new Location(params.extraIntermediates ? "" : "pnt", l.getLatitude(), l.getLongitude()));
+			}
+			if (params.extraIntermediates) {
+				params.intermediates = null;
 			}
 		}
 		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
@@ -1239,6 +1243,6 @@ public class RouteProvider {
 				points.add(0, mp);
 			}
 		}
-		return new RouteCalculationResult(segments, computeDirections, params, null, false);
+		return new RouteCalculationResult(segments, computeDirections, params, null, params.extraIntermediates);
 	}
 }
