@@ -4149,4 +4149,16 @@
     <string name="direct_line_maps_required_descr">Ruteberegning tar lengre tid enn vanlig.
 \n
 \nKanskje noen kart ikke er lastet.</string>
+    <string name="enough_contributions_descr">Gratulerer, du har nok bidrag til OpenStreetMap og kan nyte godt av ubegrensede kartoppdateringer.</string>
+    <string name="contributions_may_calculate_with_delay">Utregning av bidrag kan være flere timer forsinket.</string>
+    <string name="map_updates_are_unavailable_yet">Kartoppdateringer er ikke tilgjengelig enda :(</string>
+    <string name="pro_features">Pro-funksjoner</string>
+    <string name="upload_photo">Laster opp …</string>
+    <string name="upload_photo_completed">Opplastet</string>
+    <string name="uploaded_count">Lastet opp %1$d av %2$d</string>
+    <string name="benefits_for_contributors">Fordeler for aktive OSM-bidragsytere</string>
+    <string name="use_login_and_password">Bruk innlogging og passord</string>
+    <string name="available_until">Tilgjengelig til %1$s</string>
+    <string name="not_enough_contributions_descr">Du trenger minst %1$s kartbidrag til OpenStreetMap de siste %2$s dagene.</string>
+    <string name="shared_string_contributions">Bidrag</string>
 </resources>
