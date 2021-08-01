@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="recording_context_menu_show">أظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
@@ -975,7 +975,7 @@
     <string name="configure_map">ضبط الخريطة</string>
     <string name="layer_map">مصدر الخريطة…</string>
     <string name="map_source">مصدر الخريطة</string>
-    <string name="layer_amenity_label">عرض أسماء المفضلة</string>
+    <string name="layer_amenity_label">تسميات النقاط ، أسماء المفضلة</string>
     <string name="map_locale">لغة الخريطة</string>
     <string name="rendering_category_details">تفاصيل إضافية</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
@@ -4337,4 +4337,39 @@
     <string name="active_till">نشط حتى %1$s</string>
     <string name="promo_subscription">اشتراك برومو</string>
     <string name="track_has_no_needed_data">لا يحتوي المسار على البيانات المطلوبة.</string>
+    <string name="option_available_only_in_osmand_pro">الخيار متاح كجزء من اشتراك أوسماند برو.</string>
+    <string name="pro_widgets">ويدجت برو</string>
+    <string name="purchases_feature_desc_pro_widgets">احصل على إمكانية الوصول إلى ميزات أوسماند برو. تلوين المسار وأكثر من ذلك.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">استكشف خطط أوسماند لتجد ما يناسبك.</string>
+    <string name="routes_color_by_type">لون المسارات حسب</string>
+    <string name="shared_string_relation">علاقه</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">تعيين لون للطرق استنادا إلى لونها المعين محليا بشكل فردي (إذا كان موجودا على خريطة الشارع المفتوحة) ورمز وقاية المشي لمسافات طويلة</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">تلوين وفق الانتماء للشبكة</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">تعيين لون للمسارات استنادا إلى نوع شبكة النقاط(الدولية والإقليمية والمحلية) التي تنتمي إليها</string>
+    <string name="walking_route_osmc_description">تعيين لون للمسارات استنادا إلى لونها المعين محليا بشكل فردي (إذا كان موجودا على خريطة الشارع المفتوحة) والنوع (دولي وإقليمي ومحلي)</string>
+    <string name="travel_routes">طرق السفر</string>
+    <string name="setting_supported_by_style">هذا الإعداد مدعوم بنمط الخريطة \"%1$s\"</string>
+    <string name="direct_line_maps_required_descr">يستغرق حساب المسار وقتًا أطول من المعتاد.
+\n
+\nربما لم يتم تحميل بعض الخرائط.</string>
+    <string name="online_direct_line_maps_link">التحقق من الخرائط اللازمة</string>
+    <string name="offline_maps_required_descr">هناك حاجة إلى خرائط إضافية غير متصلة بالإنترنت لحساب المسار.</string>
+    <string name="online_maps_required_descr">لسوء الحظ ، لم يتمكن OsmAnd من العثور على (حساب) مسارًا مناسبًا لإعداداتك.
+\n
+\nربما لم يتم تحميل بعض الخرائط. يمكنك تشغيل عبر الإنترنت للتحقق من الخرائط الضرورية.</string>
+    <string name="online_maps_searching_descr">البحث في الخرائط على الإنترنت قيد التشغيل.</string>
+    <string name="reset_to_original">إعادة الضبط إلى الأصلي</string>
+    <string name="backup_error_no_subscription">لا يوجد اشتراك موجود</string>
+    <string name="map_updates_for_mappers">تحديثات الخرائط لمصممي الخرائط</string>
+    <string name="benefits_for_contributors">فوائد للمساهمين النشطين في OSM</string>
+    <string name="benefits_for_contributors_primary_descr">يمكنك الاستفادة من تحديثات الخرائط غير المحدودة كل ساعة دون قيود إذا كنت مساهمًا نشطًا في OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">سجل الدخول إلى خريطة الشارع المفتوح وتحقق مما إذا كنت مؤهلا للحصول على تحديثات خرائط شهرية وكل ساعة غير محدودة.</string>
+    <string name="use_login_and_password">استخدام تسجيل الدخول وكلمة المرور</string>
+    <string name="available_until">متاح حتى %1$s</string>
+    <string name="enough_contributions_descr">تهانينا ، لقد قدمت مساهمات كافية في خريطة الشارع المفتوحة ويمكنك الاستمتاع بتحديثات خرائط غير محدودة.</string>
+    <string name="not_enough_contributions_descr">يجب أن تقوم بما لا يقل عن %1$s من مساهمات الخريطة في خريطة الشارع المفتوح لآخر%2$s يوم.</string>
+    <string name="shared_string_contributions">مساهمات</string>
+    <string name="contributions_may_calculate_with_delay">حساب الاشتراكات قد يتأخر لعدة ساعات .</string>
+    <string name="map_updates_are_unavailable_yet">تحديث الخريطة غير متوفرة بعد : - )</string>
+    <string name="connect_track_points_as">ربط نقاط الطريق</string>
 </resources>
