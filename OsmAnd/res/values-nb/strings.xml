@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
@@ -633,7 +633,7 @@
     <string name="map_preferred_locale_descr">Foretrukket språk for påskrifter på kartet (hvis utilgjengelig brukes engelsk eller lokale navn).</string>
     <string name="map_preferred_locale">Foretrukket språk på kart</string>
     <string name="home">Dashbord</string>
-    <string name="rendering_attr_showCycleRoutes_name">Vis sykkelruter</string>
+    <string name="rendering_attr_showCycleRoutes_name">Sykkelruter</string>
     <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapper under navigering.</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapper</string>
     <string name="map_widget_plain_time">Gjeldende tid</string>
@@ -712,7 +712,7 @@
     <string name="rendering_attr_showSurfaceGrade_name">Vis veikvalitet</string>
     <string name="rendering_attr_showSurfaces_name">Vis veidekke</string>
     <string name="select_destination_and_intermediate_points">Velg reisemål</string>
-    <string name="layer_amenity_label">Overleggspåskrifter for interessepunkter</string>
+    <string name="layer_amenity_label">Punktpåskrifter (interessepunkter, favoritter)</string>
     <string name="shared_string_waypoint">Rutepunkt</string>
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
@@ -1371,7 +1371,7 @@
     <string name="active_markers">Aktive markører</string>
     <string name="map_markers">Kartmarkører</string>
     <string name="map_marker">Kartmarkør</string>
-    <string name="rendering_attr_showMtbRoutes_name">Vis terrengsykkelruter</string>
+    <string name="rendering_attr_showMtbRoutes_name">Terrengsykkelruter</string>
     <string name="show_polygons">Vis polygoner</string>
     <string name="find_parking">Finn parkeringsplass</string>
     <string name="shared_string_status">Status</string>
@@ -1422,7 +1422,7 @@
     <string name="osm_live_enter_user_name">Oppfør offentlig navn</string>
     <string name="osm_live_subscription_settings">Abonnementsinnstillinger</string>
     <string name="shared_string_logoff">Logg av</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Fargelegging i henhold til OSMC-vandresymbol</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="proxy_pref_title">Mellomtjener</string>
     <string name="gpx_selection_number_of_points">%1$s punkter</string>
     <string name="accessibility_options">Tilgjengelighetsalternativer</string>
@@ -3947,7 +3947,7 @@
     <string name="tts_description">Tekst-til-tale (TTS) kan uttale alle typer instruksjoner: veinavn, svingeinstruksjoner, interessepunktnavn osv.</string>
     <string name="use_system_language">Bruk systemets språk</string>
     <string name="announce_when_exceeded">Annonser når overskredet</string>
-    <string name="route_line_use_gradient_coloring">Rutelinjen er farget av høydeskråning.</string>
+    <string name="route_line_use_gradient_coloring">Rutelinjen er farget i henhold til helningen.</string>
     <string name="recorded_description">Innspilt tale høres bedre ut, men kan kun uttale forhåndsinnspilte uttrykk: svinginstruksjoner. Kan ikke melde om gatenavn eller interessepunktnavn.</string>
     <string name="shared_string_itinerary">Reiseplan</string>
     <string name="cloud_email_not_registered">Dennne e-postadressen er ikke registrert for OsmAnd Sky</string>
@@ -4015,7 +4015,7 @@
     <string name="backup_restore_data_descr">Gjenopprett data på enheten, ved bruk av nettbaserte sikkerhetskopier.</string>
     <string name="receiving_data_from_server">Mottar data fra tjeneren …</string>
     <string name="restore_complete">Gjenopprettet</string>
-    <string name="grey_color_slope">Grå farge brukes nå helningen ikke er definert.</string>
+    <string name="grey_color_slope">Grå farge brukes når helningen ikke er definert.</string>
     <string name="backup_storage_taken">Brukt lagringsplass</string>
     <string name="backup_data">Sikkerhetskopier data</string>
     <string name="backup_restore_data">Gjenopprett data</string>
@@ -4139,4 +4139,14 @@
     <string name="osmand_maps_plus_tagline">Få utvidede funksjoner</string>
     <string name="osmand_pro_tagline">Få alle funksjonene</string>
     <string name="backup_delete_types">Slett avskrudde datatyper</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Terrengkart: koter, relieffskygger, bakkehelling</string>
+    <string name="contour_lines_hillshades_slope">Koter, relieffskygger, bakkehelling</string>
+    <string name="active_till">Aktiv til %1$s</string>
+    <string name="track_recording_title">Sporopptak stoppet</string>
+    <string name="track_has_no_needed_data">Sporet inneholder ikke nødvendige data.</string>
+    <string name="travel_routes">Reiseruter</string>
+    <string name="setting_supported_by_style">Denne innstillingen støttes av kartstilen \'%1$s\'</string>
+    <string name="direct_line_maps_required_descr">Ruteberegning tar lengre tid enn vanlig.
+\n
+\nKanskje noen kart ikke er lastet.</string>
 </resources>
