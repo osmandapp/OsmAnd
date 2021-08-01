@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_shop">Pood</string>
     <string name="poi_emergency">Hädaabi</string>
@@ -88,7 +88,6 @@
     <string name="poi_doityourself">Ehitustarvete pood</string>
     <string name="poi_doors">Uksed</string>
     <string name="poi_erotic">Erootikapood</string>
-    
     <string name="poi_fishing">Kalastustarbed</string>
     <string name="poi_florist">Lillepood</string>
     <string name="poi_frame">Pildiraamid</string>
@@ -129,7 +128,6 @@
     <string name="poi_ship_chandler">Laeva varustaja</string>
     <string name="poi_sports">Spordikaubad</string>
     <string name="poi_stationery">Kirjatarvete pood</string>
-    
     <string name="poi_ticket">Piletimüük</string>
     <string name="poi_tobacco">Tubaka pood</string>
     <string name="poi_toys">Mänguasjapood</string>
@@ -484,7 +482,6 @@
     <string name="poi_bicycle_track">Jalgrattarada</string>
     <string name="poi_horse_track">Hobuste rada</string>
     <string name="poi_raceway">Võistlusrada</string>
-    
     <string name="poi_office_telecommunication">Telekommunikatsioonibüroo</string>
     <string name="poi_research">Uurimisbüroo</string>
     <string name="poi_it">IT-kontor</string>
@@ -536,7 +533,6 @@
     <string name="poi_fuel_electricity">Elekter</string>
     <string name="poi_breakwater">Lainemurdja</string>
     <string name="poi_groyne">Groin</string>
-    
     <string name="poi_basin">Jõgikond</string>
     <string name="poi_crane">Kraana</string>
     <string name="poi_country">Riik</string>
@@ -2847,7 +2843,6 @@
     <string name="poi_aquaculture_shrimp">Vesiviljelus: krevetid</string>
     <string name="poi_aquaculture_fish">Vesiviljelus: kalad</string>
     <string name="poi_aquaculture_mussels">Vesiviljelus: rannakarbid</string>
-    
     <string name="poi_min_age">Vanuse alammäär</string>
     <string name="poi_organic_yes">Jah</string>
     <string name="poi_organic_no">Ei</string>
@@ -3976,4 +3971,6 @@
     <string name="poi_picnic_table_yes">Piknikulaud: jah</string>
     <string name="poi_outdoor_seating_poi">Istekohad õues</string>
     <string name="poi_power_terminal">Toiteterminal</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_access_general">Avalik juurdepääs</string>
 </resources>

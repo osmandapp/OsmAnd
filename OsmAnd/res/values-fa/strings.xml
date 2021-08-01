@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OSM ناموفق بود.</string>
     <string name="plugin_distance_point_time">زمان</string>
@@ -1241,7 +1241,7 @@
 \nرد %2$s</string>
     <string name="save_as_favorites_points">ذخیره به‌عنوان گروه علاقه‌مندی‌ها</string>
     <string name="select_destination_and_intermediate_points">تنظیم مقصدها</string>
-    <string name="layer_amenity_label">برچسب‌های لایهٔ POI</string>
+    <string name="layer_amenity_label">نام نقطه‌ها (نقاط توجه، علاقه‌مندی‌ها)</string>
     <string name="show_zoom_buttons_navigation_descr">هنگام ناوبری دکمه‌های زوم را نشان بده.</string>
     <string name="show_zoom_buttons_navigation">نمایش دکمه‌های زوم</string>
     <string name="sort_by_distance">ترتیب بر اساس مسافت</string>
@@ -1561,8 +1561,8 @@
     <string name="shared_string_show_details">نمایش جزئیات</string>
     <string name="lang_tl">تاگالوگ</string>
     <string name="rendering_value_disabled_name">غیرفعال</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">رنگ‌بندی براساس وابستگی شبکه</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">رنگ‌بندی بر اساس نماد پیاده‌گردی OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">وابستگی شبکه</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="no_address_found">آدرسی پیدا نشد</string>
     <string name="shared_string_near">نزدیک</string>
     <string name="shared_string_hide">نشان نده</string>
@@ -1593,7 +1593,7 @@
     <string name="routing_attr_height_description">ارتفاع مجاز خودرو در مسیرها را مشخص کنید.</string>
     <string name="download_wikipedia_maps">ویکی‌پدیا</string>
     <string name="rendering_attr_alpineHiking_description">راه‌ها بر اساس درجه‌بندی SAC رسم شوند.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">لایهٔ نمادهای پیاده‌گردی</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">مسیرهای پیاده‌گردی</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">راه‌ها بر اساس مسیرهای OSMC رسم شوند.</string>
     <string name="map_widget_battery">میزان شارژ باطری</string>
     <string name="change_markers_position">تغییر موقعیت نشانه</string>
@@ -1642,7 +1642,7 @@
     <string name="update_all_maps_now">اکنون همهٔ نقشه‌ها را روزآمد می‌کنید؟</string>
     <string name="clear_tile_data">پاک‌کردن همهٔ کاشی‌ها</string>
     <string name="routing_attr_short_way_name">راه صرفه‌جویی سوخت</string>
-    <string name="replace_favorite_confirmation">"آیا  «%1$s» علاقه‌مندی جانشین شود؟"</string>
+    <string name="replace_favorite_confirmation">آیا «%1$s» علاقه‌مندی جانشین شود؟</string>
     <string name="rendering_attr_hideOverground_name">اشیای روی زمین</string>
     <string name="shared_string_change">تغییر</string>
     <string name="get_started">شروع</string>
@@ -3925,7 +3925,7 @@
     <string name="live_update_frequency_day_variant">روزآمدی نقشه هر روز بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
     <string name="live_update_frequency_hour_variant">روزآمدی نقشه هر ساعت بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
     <string name="delete_updates">حذف روزآمدسازه‌ها</string>
-    <string name="live_update_delete_updates_msg">آیا هر %s روزآمدسازهٔ زنده حذف شود؟</string>
+    <string name="live_update_delete_updates_msg">آیا همهٔ روزآمدسازه‌های زندهٔ %s حذف شود؟</string>
     <string name="update_frequency">تکرار روزآمدسازی</string>
     <string name="select_category_descr">دسته را انتخاب نمایید یا یکی جدید اضافه کنید</string>
     <string name="track_recording_will_be_continued">ضبط ادامه می‌یابد.</string>
@@ -4223,13 +4223,13 @@
 \n
 \nنسخهٔ کنونی داده‌ها در سرور ذخیره خواهد شد اما قادر نخواهید بود به تغییرات گذشته واگردانی کنید.</string>
     <string name="grey_color_slope">اگر شیب نامشخص باشد از رنگ خاکستری استفاده می‌شود.</string>
-    <string name="purchases_feature_desc_nautical">دسترسی به اطلاعات عمق دریایی</string>
+    <string name="purchases_feature_desc_nautical">به اطلاعات عمق دریایی دست یابید.</string>
     <string name="purchases_feature_desc_terrain">نمایش بلندی‌ها و پستی‌ها با کمک خطوط میزان ناهمواری‌ها، نقشهٔ کامل سایه‌روشن با سایه‌های تیره و نقشه‌های رنگی شیب.</string>
     <string name="purchases_feature_desc_wikivoyage">ویکی‌سفر را آفلاین کاوش کنید. مقاله‌ها بر اساس کشور و منطقه تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>
     <string name="purchases_feature_desc_wikipedia">ویکی‌پدیا را آفلاین کاوش کنید. مقاله‌ها بر اساس کشور و منطقه تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>
     <string name="purchases_feature_desc_combined_wiki">در هر لحظه و بدون نیاز به اتصال اینترنتی میان مقاله‌های ویکی‌پدیا کاوش کنید. داده‌های آفلاین بر اساس کشور تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>
     <string name="purchases_feature_desc_unlimited_map_download">امکان دانلودهای نامحدود برای نقشهٔ آفلاین همهٔ قاره‌ها و مناطق.</string>
-    <string name="purchases_feature_desc_monthly_map_updates">دسترسی به روزآمدسازی‌های منظم ماهانه برای نقشه‌های آفلاین.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">به روزآمدسازی‌های منظم ماهانه برای نقشه‌های آفلاین دست یابید.</string>
     <string name="unlimited_map_downloads">دانلودهای نامحدود نقشه</string>
     <string name="wikipedia_and_wikivoyage_offline">ویکی‌پدیا و ویکی‌سفر آفلاین</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">نقشه‌های ناهمواری‌ها: خطوط میزان، سایه‌روشن‌ها، شیب</string>
@@ -4281,7 +4281,7 @@
     <string name="terrain_maps">نقشه‌های ناهمواری‌ها</string>
     <string name="nautical_depth">عمق دریایی</string>
     <string name="enter_verification_code">گذرواژهٔ یک‌بارمصرف را وارد کنید</string>
-    <string name="purchases_feature_desc_hourly_map_updates">به روزآمدسازی‌های زودرس‌تر دسترسی پیدا کنید. روزآمدسازی‌های ساعتی، روزانه یا هفتگی. روزآمدسازها به‌تدریج و فقط برای محدودهٔ تغییرکرده دانلود می‌شوند.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">به روزآمدسازی‌های زودرس‌تر دست یابید. روزآمدسازی‌های ساعتی، روزانه یا هفتگی. روزآمدسازها به‌تدریج و فقط برای محدودهٔ تغییرکرده دانلود می‌شوند.</string>
     <string name="you_can_get_feature_as_part_of_pattern">‏«%1$s» را به‌عنوان بخشی از طرح %2$s بگیرید. مقایسه:</string>
     <string name="not_available_with">با %1$s در دسترس نیست</string>
     <string name="redeem_promo_code">آزادسازی کد تبلیغی</string>
@@ -4292,4 +4292,39 @@
     <string name="attribute">خصوصیت</string>
     <string name="promo_subscription">اشتراک با کد تبلیغی</string>
     <string name="track_has_no_needed_data">دادهٔ موردنیاز در این رد وجود ندارد.</string>
+    <string name="pro_widgets">Pro Widgets</string>
+    <string name="option_available_only_in_osmand_pro">این گزینه با اشتراک OsmAnd Pro فعال می‌شود.</string>
+    <string name="purchases_feature_desc_pro_widgets">به قابلیت‌های OsmAnd Pro دست یابید. رنگ‌بندی مسیر و بیشتر.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">در میان طرح‌های OsmAnd کاوش کنید تا طرح مناسب خود را بیابید.</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">اختصاص رنگ به مسیرها بر اساس رنگ محلی و جداگانه‌ای که به آن‌ها داده شده (اگر در اوپن‌استریت‌مپ موجود باشد) و نماد پلاک پیاده‌گردی</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">رنگ‌بندی بر اساس وابستگی شبکه</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">اختصاص رنگ به مسیرها بر اساس نوع شبکهٔ گره (بین‌المللی، منطقه‌ای، محلی) که به آن تعلق دارند</string>
+    <string name="walking_route_osmc_description">اختصاص رنگ به مسیرها بر اساس رنگ محلی و جداگانه‌ای که به آن‌ها داده شده (اگر در اوپن‌استریت‌مپ موجود باشد) و نوع (بین‌المللی، منطقه‌ای، محلی)</string>
+    <string name="connect_track_points_as">اتصال نقطه‌های مسیر</string>
+    <string name="travel_routes">مسیرهای مسافرت</string>
+    <string name="routes_color_by_type">رنگ‌بندی مسیرها بر اساس</string>
+    <string name="shared_string_relation">رابطه</string>
+    <string name="setting_supported_by_style">این تنظیم در سبک نقشهٔ «%1$s» پشتیبانی می‌شود</string>
+    <string name="direct_line_maps_required_descr">محاسبهٔ مسیر بیش از حد معمول طول می‌کشد.
+\n
+\nممکن است برخی نقشه‌ها بار نشده باشد.</string>
+    <string name="online_direct_line_maps_link">بررسی نقشه‌های موردنیاز</string>
+    <string name="offline_maps_required_descr">برای محاسبهٔ مسیر به نقشه‌های آفلاین اضافه‌تری نیاز است.</string>
+    <string name="online_maps_required_descr">متأسفانه OsmAnd نتوانست مسیری متناسب با تنظیمات شما بیابد.
+\n
+\nممکن است برخی نقشه‌ها بار نشده باشند. می‌توانید نقشه‌های موردنیاز را آنلاین بررسی کنید.</string>
+    <string name="online_maps_searching_descr">جست‌وجوی نقشه‌های آنلاین در حال اجراست.</string>
+    <string name="use_login_and_password">استفاده از نام کاربری و گذرواژه</string>
+    <string name="reset_to_original">بازنشانی به اصل</string>
+    <string name="backup_error_no_subscription">اشتراکی وجود ندارد</string>
+    <string name="map_updates_for_mappers">روزآمدسازی‌های نقشه برای نقشه‌کشان</string>
+    <string name="benefits_for_contributors">مزایا برای مشارکت‌کنندگان فعال OSM</string>
+    <string name="benefits_for_contributors_primary_descr">اگر مشارکت‌کنندۀ فعال در OpenStreetMap.org باشید می‌توانید از روزآمدسازی‌های نامحدود ساعتی نقشه بهره‌مند شوید.</string>
+    <string name="benefits_for_contributors_secondary_descr">به حساب اوپن‌استریت‌مپ خود وارد شوید تا ببینید آیا شرایط دریافت روزآمدسازی‌های نامحدود ماهانه و ساعتی را دارید.</string>
+    <string name="available_until">در دسترس تا %1$s</string>
+    <string name="enough_contributions_descr">تبریک! شما به میزان کافی در اوپن‌استریت‌مپ مشارکت کرده‌اید و می‌توانید از روزآمدسازی‌های نامحدود نقشه لذت ببرید.</string>
+    <string name="not_enough_contributions_descr">لازم است حداقل %1$s بار در %2$s روز اخیر در اوپن‌استریت‌مپ مشارکت کرده باشید.</string>
+    <string name="shared_string_contributions">مشارکت‌ها</string>
+    <string name="contributions_may_calculate_with_delay">مشارکت‌ها ممکن است با چندین ساعت تأخیر محاسبه شود.</string>
+    <string name="map_updates_are_unavailable_yet">روزآمدسازه‌های نقشه هنوز در دسترس نیست :-(</string>
 </resources>

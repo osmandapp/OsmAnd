@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="copying_osmand_file_failed">Fallo al mover archivos</string>
@@ -253,7 +253,7 @@
     <string name="show_zoom_buttons_navigation_descr">Muestra los botones de zoom durante la navegación.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botones de zoom</string>
     <string name="select_destination_and_intermediate_points">Definir destinos</string>
-    <string name="layer_amenity_label">Nombres de PDI superpuestos</string>
+    <string name="layer_amenity_label">Nombres de puntos (PDI, favoritos)</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Hora actual</string>
     <string name="shared_string_waypoint">Punto de referencia</string>
@@ -681,7 +681,7 @@
     <string name="download_roads_only_maps">Mapa sólo vial</string>
     <string name="rendering_attr_alpineHiking_name">Escala de senderismo alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Superponer símbolo de senderismo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Rutas de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Fronteras</string>
     <string name="rendering_attr_noAdminboundaries_description">Ocultar fronteras regionales (niveles administrativos 5 – 9).</string>
@@ -1537,8 +1537,8 @@
     <string name="use_fast_recalculation_desc">Recalcula sólo la parte inicial de la ruta, útil para viajes largos.</string>
     <string name="shared_string_logoff">Cerrar sesión</string>
     <string name="rendering_value_disabled_name">Desactivado</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Color por red de afiliación</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Color por símbolo de senderismo OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Red de afiliación</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">Borrar edición de OSM</string>
     <string name="read_full_article">Leer artículo completo (en línea)</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
@@ -1850,7 +1850,7 @@
     <string name="shared_string_email_address">Correo electrónico</string>
     <string name="find_parking">Encontrar estacionamiento</string>
     <string name="show_polygons">Mostrar polígonos</string>
-    <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas para bicicleta de montaña</string>
+    <string name="rendering_attr_showMtbRoutes_name">Rutas para bicicleta de montaña</string>
     <string name="shared_string_reverse_order">Invertir orden</string>
     <string name="show_map_markers_description">Activa la función de marcadores del mapa.</string>
     <string name="clear_active_markers_q">¿Quitar todos los marcadores activos?</string>
@@ -3930,7 +3930,6 @@
     <string name="routing_engine_vehicle_type_foot">Peatón</string>
     <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
     <string name="routing_engine_vehicle_type_car">Automóvil</string>
-    
     <string name="copy_address">Copiar dirección</string>
     <string name="online_routing_engine">Motor de navegación en línea</string>
     <string name="online_routing_engines">Motores de navegación en línea</string>
@@ -4083,7 +4082,6 @@
     <string name="announce_when_exceeded">Anunciar al excederse</string>
     <string name="user_points">Puntos de usuario</string>
     <string name="output">Salida</string>
-    
     <string name="shared_string_feet">pies</string>
     <string name="srtm_unit_format">Variante de unidad de las curvas de nivel</string>
     <string name="srtm_download_list_help_message">OsmAnd proporciona datos de curvas de nivel en metros y pies. Deberás volver a descargar el archivo para cambiar el formato.</string>
@@ -4271,4 +4269,39 @@
     <string name="active_till">Activa hasta %1$s</string>
     <string name="promo_subscription">Suscripción promocional</string>
     <string name="track_has_no_needed_data">La traza no contiene los datos necesarios.</string>
+    <string name="option_available_only_in_osmand_pro">Opción disponible como parte de la suscripción a OsmAnd Pro.</string>
+    <string name="pro_widgets">Widgets avanzados</string>
+    <string name="purchases_feature_desc_pro_widgets">Obtén acceso a las funciones de OsmAnd Pro. Coloración de rutas y más.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Explora los planes de OsmAnd para encontrar el que más te convenga.</string>
+    <string name="routes_color_by_type">Colorear rutas por</string>
+    <string name="shared_string_relation">Relación</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Colorea las rutas en función del color asignado localmente (si está presente en OpenStreetMap) y el símbolo del escudo de senderismo</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Color por red de afiliación</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Colorea las rutas en función del tipo de red de nodos (internacional, regional, local) a la que pertenecen</string>
+    <string name="walking_route_osmc_description">Colorea las rutas en función de su color asignado localmente (si está presente en OpenStreetMap) y del tipo (internacional, regional, local)</string>
+    <string name="travel_routes">Rutas turísticas</string>
+    <string name="setting_supported_by_style">Este ajuste es compatible con el estilo de mapa «%1$s»</string>
+    <string name="direct_line_maps_required_descr">El cálculo de la ruta tarda más de lo habitual.
+\n
+\nQuizás algunos mapas no estén cargados.</string>
+    <string name="online_direct_line_maps_link">Consulta los mapas necesarios</string>
+    <string name="offline_maps_required_descr">Para calcular la ruta se necesitan mapas sin conexión adicionales.</string>
+    <string name="online_maps_required_descr">Lamentablemente, OsmAnd no ha podido encontrar (calcular) una ruta adecuada a sus ajustes.
+\n
+\nQuizás algunos mapas no están cargados. Puedes ejecutar en línea la comprobación de los mapas necesarios.</string>
+    <string name="online_maps_searching_descr">La búsqueda de mapas en línea se está ejecutando.</string>
+    <string name="reset_to_original">Restablecer al original</string>
+    <string name="backup_error_no_subscription">Sin suscripción válida</string>
+    <string name="map_updates_for_mappers">Actualizaciones de mapas para cartógrafos</string>
+    <string name="benefits_for_contributors">Beneficios para colaboradores activos de OSM</string>
+    <string name="benefits_for_contributors_primary_descr">Podrás beneficiarte cada hora de actualizaciones ilimitadas de los mapas, si eres un colaborador activo de OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">Accede a OpenStreetMap y comprueba si eres elegible para recibir actualizaciones ilimitadas de los mapas, en forma mensual y por hora.</string>
+    <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
+    <string name="available_until">Disponible hasta el %1$s</string>
+    <string name="enough_contributions_descr">Felicitaciones, has hecho suficientes contribuciones a OpenStreetMap y podrás disfrutar de actualizaciones ilimitadas de los mapas.</string>
+    <string name="not_enough_contributions_descr">Debes hacer al menos %1$s contribuciones al mapa de OpenStreetMap durante los últimos %2$s días.</string>
+    <string name="shared_string_contributions">Contribuciones</string>
+    <string name="contributions_may_calculate_with_delay">Las contribuciones pueden calcularse con varias horas de retraso.</string>
+    <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
+    <string name="connect_track_points_as">Conectar puntos de ruta</string>
 </resources>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
@@ -1185,7 +1185,7 @@
     <string name="gpx_info_waypoints">航點：%1$s</string>
     <string name="save_as_favorites_points">另存群組為我的收藏</string>
     <string name="select_destination_and_intermediate_points">設定目的地</string>
-    <string name="layer_amenity_label">POI 覆蓋標籤</string>
+    <string name="layer_amenity_label">POI 標籤（POI、收藏）</string>
     <string name="show_zoom_buttons_navigation_descr">在導航期間顯示縮放按鈕。</string>
     <string name="show_zoom_buttons_navigation">顯示縮放按鈕</string>
     <string name="create_poi_link_to_osm_doc"><u>線上 OSM</u> 地圖的分類與影像。</string>
@@ -1206,7 +1206,7 @@
     <string name="rendering_attr_showAccess_name">顯示進入限制和收費</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示路面</string>
-    <string name="rendering_attr_showCycleRoutes_name">顯示自行車路線</string>
+    <string name="rendering_attr_showCycleRoutes_name">自行車路線</string>
     <string name="map_preferred_locale">偏好的地圖語言</string>
     <string name="local_map_names">當地的名稱</string>
     <string name="lang_sw">斯瓦希里</string>
@@ -1235,7 +1235,7 @@
     <string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
     <string name="rendering_attr_alpineHiking_name">登山健行等級（SAC）</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">登山健行符號上層</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">登山健行路線</string>
     <string name="rendering_attr_alpineHiking_description">依據 SAC 評級繪製路徑。</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">依據 OSMC 軌跡繪製路徑。</string>
     <string name="arrival_distance_factor_early">提早</string>
@@ -1531,8 +1531,8 @@
     <string name="use_fast_recalculation_desc">僅重新計算路線的初始部份，對長途旅行很有用。</string>
     <string name="shared_string_logoff">登出</string>
     <string name="rendering_value_disabled_name">已停用</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">依網絡從屬著色</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">依據 OSMC 登山健行標誌著色</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">網路從屬</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">刪除 OSM 的編輯</string>
     <string name="read_full_article">閱讀全部文章 (線上)</string>
     <string name="shared_string_wikipedia">維基百科</string>
@@ -1844,7 +1844,7 @@
     <string name="shared_string_save_changes">儲存更改</string>
     <string name="find_parking">找停車場</string>
     <string name="show_polygons">顯示多邊形</string>
-    <string name="rendering_attr_showMtbRoutes_name">顯示山地自行車車道</string>
+    <string name="rendering_attr_showMtbRoutes_name">山地自行車路線</string>
     <string name="select_map_markers">選擇地圖標記</string>
     <string name="shared_string_reverse_order">順序相反</string>
     <string name="show_map_markers_description">啟動地圖標記功能。</string>
@@ -4074,7 +4074,6 @@
     <string name="announce_when_exceeded">超過時宣佈</string>
     <string name="user_points">使用者點</string>
     <string name="output">輸出</string>
-    
     <string name="shared_string_feet">英呎</string>
     <string name="srtm_unit_format">等高線單位變體</string>
     <string name="srtm_download_list_help_message">OsmAnd 提供以公尺與英呎為單位的等高線資料。您將必須重新下載檔案以變更格式。</string>
@@ -4262,4 +4261,39 @@
     <string name="active_till">有效至 %1$s</string>
     <string name="promo_subscription">促銷訂閱</string>
     <string name="track_has_no_needed_data">軌跡不包含所需的資料。</string>
+    <string name="option_available_only_in_osmand_pro">此選項作為 OsmAnd Pro 訂閱的一部分提供。</string>
+    <string name="pro_widgets">Pro 小工具</string>
+    <string name="purchases_feature_desc_pro_widgets">存取 OsmAnd Pro 功能。路線著色等。</string>
+    <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd 方案以找到適合您的。</string>
+    <string name="routes_color_by_type">路線顏色</string>
+    <string name="shared_string_relation">關係</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">根據路線在當地單獨分配的顏色（若 OpenStreetMap 上有的話）與遠足盾牌符號來為路線分配顏色</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">按網路關係分配著色</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">根據它們所屬的節點網路類型（國際、區域、當地）為路線分配顏色</string>
+    <string name="walking_route_osmc_description">根據在當地單獨分配的顏色（如果存在於 OpenStreetMap 上）與類型（國際、區域、當地）</string>
+    <string name="travel_routes">旅行路線</string>
+    <string name="setting_supported_by_style">地圖樣式「%1$s」支援此設定</string>
+    <string name="direct_line_maps_required_descr">路線計算需要比平常還要久的時間。
+\n
+\n也許某些地圖未載入。</string>
+    <string name="online_direct_line_maps_link">檢查必要的地圖</string>
+    <string name="offline_maps_required_descr">需要其他離線地圖來計算路線。</string>
+    <string name="online_maps_required_descr">不幸的是，OsmAnd 找不到（無法計算）適合您設定的路線。
+\n
+\n也許有些地圖未被載入。您可以線上執行檢查必要的地圖。</string>
+    <string name="online_maps_searching_descr">正在執行線上地圖搜尋。</string>
+    <string name="reset_to_original">重設為原始設定</string>
+    <string name="backup_error_no_subscription">無訂閱</string>
+    <string name="map_updates_for_mappers">圖客的地圖更新</string>
+    <string name="benefits_for_contributors">活躍 OSM 貢獻者的好處</string>
+    <string name="benefits_for_contributors_primary_descr">如果您是 OpenStreetMap.org 活躍貢獻者，您可以無限制更新地圖。</string>
+    <string name="benefits_for_contributors_secondary_descr">登入 OpenStreetMap 並檢查您是否有資格取得無限制的每月或每小時地圖更新。</string>
+    <string name="use_login_and_password">使用帳號與密碼</string>
+    <string name="available_until">可用至 %1$s</string>
+    <string name="enough_contributions_descr">恭喜您為 OpenStreetMap 做出了夠多的貢獻，所以可以享受無限的地圖更新。</string>
+    <string name="not_enough_contributions_descr">在過去的%2$s天內，您必須至少對 OpenStreetMap 有 %1$s 次的地圖貢獻。</string>
+    <string name="shared_string_contributions">貢獻</string>
+    <string name="contributions_may_calculate_with_delay">貢獻的計算可能會延遲數小時。</string>
+    <string name="map_updates_are_unavailable_yet">地圖更新尚不可用 :-(</string>
+    <string name="connect_track_points_as">連結路線點</string>
 </resources>

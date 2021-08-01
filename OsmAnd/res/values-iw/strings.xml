@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="shared_string_no">לא</string>
     <string name="shared_string_yes">כן</string>
@@ -4244,4 +4244,9 @@
     <string name="backup_do_not_have_any">עדיין אין לך גיבוי מקוון</string>
     <string name="backup_dont_have_any_descr">ניתן להקים גיבוי אוטומטי כדי שנתונים אבודים לא יטרידו אותך.</string>
     <string name="track_has_no_needed_data">המסלול לא כולל את הנתונים הדרושים.</string>
+    <string name="online_maps_searching_descr">מתבצע חיפוש במפות המקוונות.</string>
+    <string name="reset_to_original">איפוס למקור</string>
+    <string name="backup_error_no_subscription">לא קיים מינוי</string>
+    <string name="map_updates_for_mappers">עדכוני מפות לממפים</string>
+    <string name="benefits_for_contributors">הטבות למתנדבים פעילים ב־OSM</string>
 </resources>

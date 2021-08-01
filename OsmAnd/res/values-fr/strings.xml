@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Si le mode d\'édition hors-ligne est activé, les modifications seront enregistrées localement puis envoyées à la demande. Sinon, les modifications seront envoyées immédiatement.</string>
@@ -1256,7 +1256,7 @@
     <string name="rendering_attr_showAccess_name">Afficher les accès restreints et les péages</string>
     <string name="rendering_attr_showSurfaceGrade_name">Afficher la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
-    <string name="rendering_attr_showCycleRoutes_name">Afficher les pistes cyclables</string>
+    <string name="rendering_attr_showCycleRoutes_name">Pistes cyclables</string>
     <string name="lang_fa">Persan</string>
     <string name="lang_al">Albanais</string>
     <string name="lang_ar">Arabe</string>
@@ -1269,7 +1269,7 @@
     <string name="rendering_attr_subwayMode_name">Lignes de métro</string>
     <string name="rendering_attr_alpineHiking_name">Difficulté des chemins de randonnée (échelle CAS)</string>
     <string name="rendering_attr_alpineHiking_description">Afficher la difficulté des chemins selon l\'échelle du CAS.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Légende de la sur-couche de randonnée</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Itinéraires de randonnée</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Afficher les chemins de randonnée d\'après les traces OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Bâtiments colorés par type</string>
     <string name="arrival_distance_factor_early">Tôt</string>
@@ -1529,7 +1529,7 @@
     <string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire (utile pour les longs trajets).</string>
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Couleur de l\'itinéraire basée sur les symboles de randonnée OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Couleur selon l\'affiliation de l\'itinéraire</string>
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>
     <string name="shared_string_show_details">Afficher les détails</string>
@@ -1841,7 +1841,7 @@
     <string name="shared_string_save_changes">Enregistrer les modifications</string>
     <string name="show_polygons">Afficher les polygones</string>
     <string name="find_parking">Rechercher un stationnement</string>
-    <string name="rendering_attr_showMtbRoutes_name">Afficher les chemins pour VTT</string>
+    <string name="rendering_attr_showMtbRoutes_name">Itinéraires pour VTT</string>
     <string name="shared_string_reverse_order">Inverser l\'ordre</string>
     <string name="shared_string_toolbar">Barre d\'outils</string>
     <string name="shared_string_widgets">Widgets</string>
@@ -4240,4 +4240,23 @@
     <string name="active_till">Actif jusqu\'au %1$s</string>
     <string name="promo_subscription">Abonnement promotionnel</string>
     <string name="track_has_no_needed_data">Il manque des données nécessaires dans la trace.</string>
+    <string name="connect_track_points_as">Relier les points de passage</string>
+    <string name="direct_line_maps_required_descr">Le calcul d\'itinéraire prend plus de temps que d\'habitude.
+\n
+\nPeut-être que certaines cartes ne sont pas chargées.</string>
+    <string name="pro_widgets">Widgets Pro</string>
+    <string name="routes_color_by_type">Itinéraires colorés par</string>
+    <string name="shared_string_relation">Relation</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Couleur par affiliation au réseau</string>
+    <string name="travel_routes">Itinéraires de voyage</string>
+    <string name="setting_supported_by_style">Ce paramètre est pris en charge par le style de carte \"%1$s\"</string>
+    <string name="online_direct_line_maps_link">Vérifier les cartes nécessaires</string>
+    <string name="offline_maps_required_descr">Des cartes hors ligne supplémentaires sont nécessaires pour calculer l\'itinéraire.</string>
+    <string name="online_maps_searching_descr">La recherche de cartes en ligne est en cours.</string>
+    <string name="reset_to_original">Revenir à l\'original</string>
+    <string name="benefits_for_contributors">Avantages pour les contributeurs réguliers à OSM</string>
+    <string name="use_login_and_password">Utiliser un login et un mot de passe</string>
+    <string name="available_until">Disponible jusqu\'au %1$s</string>
+    <string name="shared_string_contributions">Contributions</string>
+    <string name="map_updates_are_unavailable_yet">Les mises à jour de la carte sont indisponibles pour l\'instant</string>
 </resources>

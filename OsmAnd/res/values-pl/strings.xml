@@ -617,7 +617,7 @@
     <string name="direction_style_sidewise">Przeciwnie do ruchu wskazówek zegara (8 sektorów)</string>
     <string name="direction_style_clockwise">Zgodnie z ruchem zegara (12 sektorów)</string>
     <string name="settings_direction_style">Styl celu</string>
-    <string name="settings_direction_style_descr">Wybiera styl określania kierunków względnych podczas ruchu</string>
+    <string name="settings_direction_style_descr">Wybierz styl określania kierunków względnych podczas ruchu</string>
     <string name="auto_announce_on">Włącz automatyczne ogłaszanie</string>
     <string name="auto_announce_off">Wyłącz automatyczne ogłaszanie</string>
     <string name="i_am_here">Jestem tutaj</string>
@@ -1539,7 +1539,7 @@
     <string name="shared_string_logoff">Wyloguj się</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="rendering_value_disabled_name">Wyłączenie</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Linia w kolorze przeznaczenia</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Przeznaczenie trasy</string>
     <string name="osm_edit_context_menu_delete">Usuń edycje OSM</string>
     <string name="lang_th">Tajski</string>
     <string name="lang_nn">Norweski Nynorsk</string>
@@ -4279,9 +4279,9 @@
 \nByć może niektóre mapy nie są wczytane.</string>
     <string name="online_direct_line_maps_link">Sprawdź niezbędne mapy</string>
     <string name="offline_maps_required_descr">Do wyznaczenia trasy wymagane są dodatkowe mapy offline.</string>
-    <string name="online_maps_required_descr">Niestety OsmAnd nie mógł znaleźć (obliczyć) trasy odpowiedniej dla Twoich ustawień.
+    <string name="online_maps_required_descr">Niestety, OsmAnd nie mógł znaleźć (obliczyć) trasy odpowiedniej dla Twoich ustawień.
 \n
-\nByć może niektóre mapy nie są załadowane. Możesz uruchomić online sprawdzając potrzebne mapy.</string>
+\nByć może niektóre mapy nie są załadowane. Możesz uruchomić online, sprawdzając potrzebne mapy.</string>
     <string name="online_maps_searching_descr">Trwa wyszukiwanie map online.</string>
     <string name="reset_to_original">Przywróć do ustawień początkowych</string>
     <string name="backup_error_no_subscription">Brak ważnej subskrypcji</string>
@@ -4293,4 +4293,14 @@
     <string name="enough_contributions_descr">Gratulacje, dokonałeś wystarczającego wkładu w OpenStreetMap i możesz cieszyć się nieograniczonymi aktualizacjami map.</string>
     <string name="map_updates_are_unavailable_yet">Aktualizacje map są jeszcze niedostępne :-(</string>
     <string name="connect_track_points_as">Połącz punkty trasy</string>
+    <string name="routes_color_by_type">Koloruj trasy wg</string>
+    <string name="shared_string_relation">Relacja</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i symbolu odznaki turystycznej</string>
+    <string name="walking_route_osmc_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i typu (międzynarodowe, regionalne, lokalne)</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Przypisz kolor trasom na podstawie typu sieci węzłów (międzynarodowa, regionalna, lokalna), do której należą</string>
+    <string name="benefits_for_contributors_primary_descr">Możesz zyskać nieograniczone, cogodzinne aktualizacje map, jeśli jesteś aktywnym współautorem OpenStreetMap.org.</string>
+    <string name="not_enough_contributions_descr">Musisz zrobić co najmniej %1$s wkłady(-ów) w rozwój map OpenStreetMap przez ostatnie %2$s dni.</string>
+    <string name="shared_string_contributions">Wkłady w rozwój</string>
+    <string name="contributions_may_calculate_with_delay">Wkłady mogą być obliczane z kilkugodzinnymi opóźnieniami.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Koloruj wg przeznaczenia trasy</string>
 </resources>
