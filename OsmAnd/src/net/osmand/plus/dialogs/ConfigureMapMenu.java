@@ -117,7 +117,10 @@ public class ConfigureMapMenu {
 				.setId(APP_PROFILES_ID)
 				.setTitleId(R.string.app_modes_choose, mapActivity)
 				.setLayout(R.layout.mode_toggles).createItem());
-		adapter.setChangeAppModeListener(() -> mapActivity.getDashboard().updateListAdapter(createListAdapter(mapActivity)));
+		adapter.setChangeAppModeListener(() -> {
+			mapActivity.updateApplicationModeSettings();
+			mapActivity.getDashboard().updateListAdapter(createListAdapter(mapActivity));
+		});
 
 		List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
 				UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
