@@ -1061,6 +1061,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
+	public void onApplicationModeSettingsUpdated() {
+		if (DashboardType.CONFIGURE_MAP.equals(visibleType)) {
+			updateListAdapter(new ConfigureMapMenu().createListAdapter(mapActivity));
+		}
+	}
+
 	public void updateMenuItems() {
 		if (listAdapter != null) {
 			for (int i = 0; i < listAdapter.getCount(); i++) {
