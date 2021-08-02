@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_10pin">Bowling</string>
     <string name="poi_9pin">Kegeln</string>
     <string name="poi_accountant">Buchhalter</string>
     <string name="poi_adit">Stollen</string>
-    
     <string name="poi_advertising_agency">Werbeagentur</string>
     <string name="poi_aerialway_cable_car">Seilbahn</string>
     <string name="poi_aerialway_chair_lift">Sessellift</string>
@@ -514,7 +513,6 @@
     <string name="poi_swimming">Schwimmen</string>
     <string name="poi_swimming_pool">Schwimmbecken</string>
     <string name="poi_table_tennis">Tischtennis</string>
-    
     <string name="poi_craft_tailor">Schneider</string>
     <string name="poi_tattoo">Tattoo-Studio</string>
     <string name="poi_tax_inspection">Steuerprüfung</string>
@@ -797,7 +795,6 @@
     <string name="poi_pasta">Nudelgeschäft</string>
     <string name="poi_pastry">Konditorei</string>
     <string name="poi_candles">Kerzengeschäft</string>
-    
     <string name="poi_garden_furniture">Gartenmöbelladen</string>
     <string name="poi_leather">Ledergeschäft</string>
     <string name="poi_music">Musikgeschäft</string>
@@ -813,7 +810,6 @@
     <string name="poi_weapons">Waffengeschäft</string>
     <string name="poi_breakwater">Wellenbrecher</string>
     <string name="poi_groyne">Buhne</string>
-    
     <string name="poi_basin">Wasserbecken</string>
     <string name="poi_crane">Kran</string>
     <string name="poi_country">Land</string>
@@ -2718,7 +2714,6 @@
     <string name="poi_aquaculture_shrimp">Aquakultur: Garnelen</string>
     <string name="poi_aquaculture_fish">Aquakultur: Fisch</string>
     <string name="poi_aquaculture_mussels">Aquakultur: Muscheln</string>
-    
     <string name="poi_organic_yes">ja</string>
     <string name="poi_organic_no">nein</string>
     <string name="poi_organic_only">Ausschließlich</string>
@@ -3606,7 +3601,7 @@
     <string name="poi_vehicle_military">Zufahrt Fahrzeuge: militärisch</string>
     <string name="poi_vehicle_delivery">Zufahrt Fahrzeuge: Lieferung</string>
     <string name="poi_vehicle_forestry">Zufahrt Fahrzeuge: Forstwirtschaft</string>
-    <string name="poi_motorcar_yes">Zufahrt Pkw: ja</string>
+    <string name="poi_motorcar_yes">Ja</string>
     <string name="poi_motorcar_private">Zufahrt Pkw: privat</string>
     <string name="poi_motorcar_no">Zufahrt Pkw: nein</string>
     <string name="poi_motorcar_destination">Zufahrt Pkw: für Anlieger</string>
@@ -3976,4 +3971,34 @@
     <string name="poi_contact_webcam">Webcam</string>
     <string name="poi_contact_linkedin">LinkedIn</string>
     <string name="poi_outdoor_seating_poi">Sitzgelegenheiten im Freien</string>
+    <string name="poi_authentication_none_yes">Ja</string>
+    <string name="poi_authentication_none_no">Authentifizierung nicht erforderlich: nein</string>
+    <string name="poi_authentication_short_message_text">Zur Authentifizierung verwendeter SMS Text</string>
+    <string name="poi_authentication_short_message_number">Zur Authentifizierung verwendete SMS Nummer</string>
+    <string name="poi_authentication_short_message_yes">Ja</string>
+    <string name="poi_authentication_short_message_no">Authentifizierung durch SMS: nein</string>
+    <string name="poi_authentication_phone_call_number">Zur Authentifizierung verwendete Telefonnummer</string>
+    <string name="poi_authentication_phone_call_yes">Ja</string>
+    <string name="poi_authentication_phone_call_no">Authentifizierung durch Anruf: nein</string>
+    <string name="poi_authentication_app_yes">Ja</string>
+    <string name="poi_authentication_app_no">Authentifizierung durch App: nein</string>
+    <string name="poi_authentication_key_yes">Ja</string>
+    <string name="poi_authentication_key_no">Authentifizierung durch Schlüssel: nein</string>
+    <string name="poi_authentication_chip_card_yes">Ja</string>
+    <string name="poi_authentication_chip_card_no">Authentifizierung durch Chipkarte: nein</string>
+    <string name="poi_authentication_contactless_yes">Ja</string>
+    <string name="poi_authentication_contactless_no">Kontaktlose Authentifizierung: nein</string>
+    <string name="poi_share_taxi_yes">Sammeltaxi: ja</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_authentication_none">Authentifizierung nicht notwendig</string>
+    <string name="poi_authentication_short_message">Authentifizierung durch SMS</string>
+    <string name="poi_authentication_phone_call">Authentifizierung durch Anruf</string>
+    <string name="poi_authentication_app">Authentifizierung durch App</string>
+    <string name="poi_authentication_key">Authentifizierung durch Schlüssel</string>
+    <string name="poi_authentication_chip_card">Authentifizierung durch Chipkarte</string>
+    <string name="poi_authentication_contactless">Kontaktlose Authentifizierung</string>
+    <string name="poi_access_scooter">Erlaubt für Motorroller</string>
+    <string name="poi_access_bicycle">Erlaubt für Fahrräder</string>
+    <string name="poi_access_motorcar">Erlaubt für Autos</string>
+    <string name="poi_access_general">Allgemeiner Zugang</string>
 </resources>
