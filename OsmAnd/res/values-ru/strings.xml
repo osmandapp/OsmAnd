@@ -4278,4 +4278,16 @@
     <string name="track_has_no_needed_data">Трек не содержит необходимых данных.</string>
     <string name="enter_verification_code">Введите одноразовый пароль</string>
     <string name="reset_to_original">Сбросить к начальному значению</string>
+    <string name="backup_error_no_subscription">Подписка отсутствует</string>
+    <string name="map_updates_for_mappers">Обновления карт для картографов</string>
+    <string name="benefits_for_contributors">Преимущества для активных участников OSM</string>
+    <string name="benefits_for_contributors_primary_descr">Являясь активным участником OpenStreetMap.org, вы можете получать ежечасные обновления карт без ограничений.</string>
+    <string name="shared_string_contributions">Вклады</string>
+    <string name="contributions_may_calculate_with_delay">Вклады могут рассчитываться с задержкой в несколько часов.</string>
+    <string name="benefits_for_contributors_secondary_descr">Войдите в OpenStreetMap и проверьте, имеете ли вы право на неограниченное ежемесячное и ежечасное обновление карт.</string>
+    <string name="use_login_and_password">Используйте логин и пароль</string>
+    <string name="available_until">Доступно до %1$s</string>
+    <string name="enough_contributions_descr">Поздравляем, вы сделали достаточный вклад в OpenStreetMap и можете пользоваться неограниченным количеством обновлений карт.</string>
+    <string name="not_enough_contributions_descr">Вам необходимо сделать не менее %1$s правок карт в OpenStreetMap за последние %2$s дней.</string>
+    <string name="map_updates_are_unavailable_yet">Обновления карты пока недоступны :-(</string>
 </resources>
