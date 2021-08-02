@@ -197,7 +197,7 @@
 \n
 \n Descărcați hărțile de tip tile direct online sau le-ați pregătit pentru utilizare offline (copiate manual în dosarul de date al OsmAnd) sub forma unei baze de date SQLite care poate fi produsă de o varietate de instrumente de pregătire a hărților de la terți.</string>
     <string name="osmand_background_plugin_description">Arată setări pentru activarea navigării cu dispozitivul în standby (ecran închis/blocat) prin accesarea periodică a modulului GPS.</string>
-    <string name="osmand_accessibility_description">Arată setări pentru caracteristici speciale de accesibilitate.</string>
+    <string name="osmand_accessibility_description">Face ca funcțiile de accesibilitate ale dispozitivului să fie disponibile direct în OsmAnd. Aceasta facilitează, de exemplu, ajustarea ratei de vorbire pentru vocile text-to-speech, configurarea navigației prin D-pad, utilizarea unui trackball pentru controlul zoom-ului sau feedback text-to-speech, de exemplu pentru a vă anunța automat poziția.</string>
     <string name="osmand_development_plugin_description">Arată setări pentru dezvoltarea și testarea de noi funcționalități precum simularea navigării sau afișarea performanței randării.</string>
     <string name="plugins_screen">Manager de plugin-uri</string>
     <string name="prefs_plugins_descr">Plugin-urile activează setări în modul expert și furnizează funcționalități suplimentare precum hărți raster, înregistrare trasee, funcționarea în standby, setări de accesibilitate și altele</string>
@@ -729,7 +729,7 @@
     <string name="osm_settings_descr">Specifică setările Openstreetmap.org (OSM) necesare pentru trimiterea erorilor hărții</string>
     <string name="data_settings_descr">Limbă, descărcare/reîncărcare date</string>
     <string name="data_settings">Date</string>
-    <string name="osm_settings">Editare OSM</string>
+    <string name="osm_settings">Editare OpenStreetMap</string>
     <string name="additional_settings">Setări adiționale</string>
     <string name="shared_string_settings">Setări</string>
     <string name="save_current_track_descr">Salvează traseul curent ca fișier GPX acum.</string>
