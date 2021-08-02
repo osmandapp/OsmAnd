@@ -15,12 +15,12 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
-import net.osmand.plus.routing.RouteColoringType;
 import net.osmand.plus.views.layers.geometry.GeometryWayStyle;
+import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometryGradientWayStyle;
+import net.osmand.plus.views.layers.geometry.MultiColoringGeometryWay.GeometrySolidWayStyle;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWay;
-import net.osmand.plus.views.layers.geometry.RouteGeometryWay.GeometryGradientWayStyle;
-import net.osmand.plus.views.layers.geometry.RouteGeometryWay.GeometrySolidWayStyle;
 import net.osmand.plus.views.layers.geometry.RouteGeometryWayContext;
 import net.osmand.render.RenderingRule;
 import net.osmand.render.RenderingRuleProperty;
@@ -41,7 +41,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
-import static net.osmand.render.RenderingRuleStorageProperties.*;
+import static net.osmand.render.RenderingRuleStorageProperties.ADDITIONAL;
+import static net.osmand.render.RenderingRuleStorageProperties.TAG;
+import static net.osmand.render.RenderingRuleStorageProperties.VALUE;
 
 public class PreviewRouteLineLayer extends BaseRouteLayer {
 
@@ -178,9 +180,9 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			for (int i = 0; i < tx.size(); i++) {
 				styles.add(previewLineGeometry.getDefaultWayStyle());
 			}
-		} else if (routeColoringType == RouteColoringType.ALTITUDE) {
+		} else if (routeColoringType == ColoringType.ALTITUDE) {
 			fillAltitudeGradientArrays(distances, styles);
-		} else if (routeColoringType == RouteColoringType.SLOPE) {
+		} else if (routeColoringType == ColoringType.SLOPE) {
 			fillSlopeGradientArrays(tx, ty, angles, distances, styles);
 		} else if (routeColoringType.isRouteInfoAttribute()) {
 			boolean success = fillRouteInfoAttributeArrays(tx, ty, angles, distances, styles);
@@ -295,8 +297,11 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			ty.add(idx, y);
 			int color = palette.get(i + 1);
 			colorsArray[idx] = color;
-			if (idx - 2 >= 0 && colorsArray[idx - 1] == 0) {
-				colorsArray[idx - 1] = colorsArray[idx - 2];
+		}
+
+		for (int colorIdx = 1; colorIdx < colorsArray.length; colorIdx++) {
+			if (colorsArray[colorIdx] == 0) {
+				colorsArray[colorIdx] = colorsArray[colorIdx - 1];
 			}
 		}
 

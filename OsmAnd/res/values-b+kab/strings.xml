@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="rendering_value_car_name">Takeṛṛust</string>
     <string name="rendering_value_bicycle_name">Azlalam</string>
@@ -1121,11 +1121,11 @@
     <string name="local_indexes_cat_backup">Tamahilt-agi tensa akka tura.</string>
     <string name="local_index_map_data">Takarḍa</string>
     <string name="local_index_poi_data">Isefka</string>
-    <string name="local_index_items_restored"><ph id="mtc_1" equiv-text="base64:JTEkZA=="/> seg <ph id="mtc_2" equiv-text="base64:JTIkZA=="/> n yiferdisen remden akken iwata.</string>
-    <string name="local_index_items_deleted"><ph id="mtc_1" equiv-text="base64:JTEkZA=="/> seg <ph id="mtc_2" equiv-text="base64:JTIkZA=="/> n yiferdisen ttwakksen akken iwata.</string>
-    <string name="local_index_items_backuped"><ph id="mtc_1" equiv-text="base64:JTEkZA=="/> seg <ph id="mtc_2" equiv-text="base64:JTIkZA=="/> n yiferdisen nsan akken iwata.</string>
+    <string name="local_index_items_restored"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen remden akken iwata.</string>
+    <string name="local_index_items_deleted"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen ttwakksen akken iwata.</string>
+    <string name="local_index_items_backuped"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen nsan akken iwata.</string>
     <string name="local_index_mi_upload_gpx">Azen i...</string>
-    <string name="local_index_items_uploaded"><ph id="mtc_1" equiv-text="base64:JTEkZA=="/> seg <ph id="mtc_2" equiv-text="base64:JTIkZA=="/> n yiferdisen ulin akken iwata.</string>
+    <string name="local_index_items_uploaded"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen ulin akken iwata.</string>
     <string name="file_with_name_already_exists">Tabzimt s yisem-agi tella yakan.</string>
     <string name="file_can_not_be_renamed">Ur yezmir ara ad ibeddel isem ufaylu \"$1\" ar \"$2\".</string>
     <string name="free_version_title">lqem</string>

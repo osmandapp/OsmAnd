@@ -1,5 +1,8 @@
 package net.osmand.plus.backup.ui.status;
 
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
+import static net.osmand.plus.backup.BackupHelper.STATUS_NO_ORDER_ID_ERROR;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -8,7 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupInfo;
 import net.osmand.plus.backup.PrepareBackupResult;
-import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.util.Algorithms;
 
 public enum BackupStatus {
@@ -16,7 +19,7 @@ public enum BackupStatus {
 	MAKE_BACKUP(R.string.last_backup, R.drawable.ic_action_cloud, R.drawable.ic_action_alert_circle, R.string.make_backup, R.string.make_backup_descr, R.string.backup_now),
 	CONFLICTS(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_alert, R.string.backup_conflicts, R.string.backup_confilcts_descr, R.string.backup_view_conflicts),
 	NO_INTERNET_CONNECTION(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_wifi_off, R.string.no_inet_connection, R.string.backup_no_internet_descr, R.string.retry),
-	SUBSCRIPTION_EXPIRED(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_osmand_pro_logo, R.string.backup_error_subscription_was_expired, R.string.backup_error_subscription_was_expired_descr, R.string.renew_subscription),
+	SUBSCRIPTION_EXPIRED(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_osmand_pro_logo_colored, R.string.backup_error_subscription_was_expired, R.string.backup_error_subscription_was_expired_descr, R.string.renew_subscription),
 	ERROR(R.string.last_backup, R.drawable.ic_action_cloud_alert, R.drawable.ic_action_alert, -1, -1, R.string.retry);
 
 	@StringRes
@@ -44,9 +47,16 @@ public enum BackupStatus {
 
 	public static BackupStatus getBackupStatus(@NonNull OsmandApplication app, @NonNull PrepareBackupResult backup) {
 		BackupInfo info = backup.getBackupInfo();
-		if (!InAppPurchaseHelper.isSubscribedToOsmAndPro(app)) {
-			return BackupStatus.SUBSCRIPTION_EXPIRED;
-		} else if (info != null) {
+
+		if (!Algorithms.isEmpty(backup.getError())) {
+			BackupError error = new BackupError(backup.getError());
+			int errorCode = error.getCode();
+			if (errorCode == SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT
+					|| errorCode == STATUS_NO_ORDER_ID_ERROR) {
+				return BackupStatus.SUBSCRIPTION_EXPIRED;
+			}
+		}
+		if (info != null) {
 			if (!Algorithms.isEmpty(info.filteredFilesToMerge)) {
 				return BackupStatus.CONFLICTS;
 			} else if (!Algorithms.isEmpty(info.itemsToUpload)

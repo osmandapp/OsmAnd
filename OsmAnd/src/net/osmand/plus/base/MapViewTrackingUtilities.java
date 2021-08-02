@@ -82,9 +82,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 			@Override
 			public void stateChanged(Void change) {
-				if(mapView != null) {
-					mapView.refreshMap();
-				}
+				app.runInUIThread(() -> {
+					if (mapView != null) {
+						mapView.refreshMap();
+					}
+				});
 			}
 		});
 	}
@@ -263,7 +265,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	public static boolean isSmallSpeedForAnimation(Location location) {
-		return !location.hasSpeed() || location.getSpeed() < 1.5;
+		return !location.hasSpeed() || Float.isNaN(location.getSpeed()) || location.getSpeed() < 1.5;
 	}
 
 	public boolean isShowViewAngle() {

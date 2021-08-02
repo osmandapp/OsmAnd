@@ -151,13 +151,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				updateWhenMuteChanged();
+				app.runInUIThread(() -> updateWhenMuteChanged());
 			}
 		};
 		useHeightChangeListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				updateWhenUseHeightChanged();
+				app.runInUIThread(() -> updateWhenUseHeightChanged());
 			}
 		};
 		useHeightPref = settings.getCustomRoutingBooleanProperty(USE_HEIGHT_OBSTACLES, false);
@@ -316,7 +316,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		voicePromptsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.VOICE_ANNOUNCES);
+				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.VOICE_ANNOUNCES, applicationMode);
 				dismiss();
 			}
 		});

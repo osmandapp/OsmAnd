@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_fuel_type">Врста горива</string>
     <string name="poi_payment_type">Начин плаћања</string>
@@ -149,7 +149,7 @@
     <string name="poi_fabric">Продавница тканине</string>
     <string name="poi_doors">Врата</string>
     <string name="poi_erotic">Секс шоп</string>
-    <string name="poi_fashion">Модна продавница</string>
+    
     <string name="poi_florist">Цвећара</string>
     <string name="poi_frame">Продавница рамова</string>
     <string name="poi_gift">Продавница поклона</string>
@@ -516,7 +516,7 @@
     <string name="poi_bailiff">Судски извршитељ</string>
     <string name="poi_migration">Миграционо</string>
     <string name="poi_tax_inspection">Пореска инспекција</string>
-    <string name="poi_office_administrative">Администрација</string>
+    
     <string name="poi_isolated_dwelling">Изоловано место становања</string>
     <string name="poi_quarter">Четврт</string>
     <string name="poi_neighbourhood">Комшилук</string>
@@ -1466,7 +1466,7 @@
     <string name="poi_radiotechnics">Радиотехничка продавница</string>
     <string name="poi_ship_chandler">Бродска опрема</string>
     <string name="poi_stationery">Продавница канцеларијске опреме</string>
-    <string name="poi_tableware">Продавница прибора за јело</string>
+    
     <string name="poi_trade">Трговачки терминал</string>
     <string name="poi_variety_store">Продавница мешане робе</string>
     <string name="poi_window_blind">Продавница прозорских застора</string>
@@ -1510,7 +1510,7 @@
     <string name="poi_weir">Ниска брана</string>
     <string name="poi_groyne">Седиментна брана</string>
     <string name="poi_power_substation">Подстаница</string>
-    <string name="poi_power_cable_distribution_cabinet">Одељење кабловског развода</string>
+    
     <string name="poi_power_tower">Електрични торањ</string>
     <string name="poi_power_pole">Електрични стуб</string>
     <string name="poi_bell_tower">Телефонски торањ</string>
@@ -3096,7 +3096,7 @@
     <string name="poi_organic_no">Не</string>
     <string name="poi_organic_yes">Да</string>
     <string name="poi_min_age">Минимална старост</string>
-    <string name="poi_mdf">Главни дистрибуциони оквир</string>
+    
     <string name="poi_aquaculture_mussels">Аквакултура: дагње</string>
     <string name="poi_aquaculture_fish">Аквакултура: риба</string>
     <string name="poi_aquaculture_shrimp">Аквакултура: шкампи</string>

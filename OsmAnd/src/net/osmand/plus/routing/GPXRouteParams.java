@@ -22,7 +22,7 @@ import static net.osmand.router.RouteExporter.OSMAND_ROUTER_V2;
 
 public class GPXRouteParams {
 
-	private static final String OSMAND_ROUTER = "OsmAndRouter";
+	public static final String OSMAND_ROUTER = "OsmAndRouter";
 
 	protected List<LocationPoint> wpt;
 	protected List<RouteSegmentResult> route;
@@ -33,6 +33,7 @@ public class GPXRouteParams {
 	protected boolean reverse;
 	protected boolean passWholeRoute;
 	protected boolean calculateOsmAndRoute;
+	protected boolean connectPointsStraightly;
 	protected boolean useIntermediatePointsRTE;
 	protected boolean calculateOsmAndRouteParts;
 
@@ -59,7 +60,8 @@ public class GPXRouteParams {
 		reverse = builder.reverse;
 		passWholeRoute = builder.passWholeRoute;
 		calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
-		useIntermediatePointsRTE = builder.isUseIntermediatePointsRTE();
+		connectPointsStraightly = builder.connectPointsStraightly;
+		useIntermediatePointsRTE = builder.useIntermediateRtePoints();
 		builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 		if (!file.isPointsEmpty()) {
 			wpt = new ArrayList<>(file.getPoints().size());
@@ -126,6 +128,7 @@ public class GPXRouteParams {
 		private boolean reverse;
 		private boolean passWholeRoute;
 		private boolean calculateOsmAndRouteParts;
+		private boolean connectPointsStraightly;
 		private int selectedSegment = -1;
 
 		public GPXRouteParamsBuilder(GPXFile file, OsmandSettings settings) {
@@ -145,7 +148,7 @@ public class GPXRouteParams {
 			this.calculateOsmAndRouteParts = calculateOsmAndRouteParts;
 		}
 
-		public boolean isUseIntermediatePointsRTE() {
+		public boolean useIntermediateRtePoints() {
 			return file.hasRtePt() && !file.hasTrkPt();
 		}
 
@@ -155,6 +158,14 @@ public class GPXRouteParams {
 
 		public void setCalculateOsmAndRoute(boolean calculateOsmAndRoute) {
 			this.calculateOsmAndRoute = calculateOsmAndRoute;
+		}
+
+		public boolean shouldConnectPointsStraightly() {
+			return connectPointsStraightly;
+		}
+
+		public void setConnectPointStraightly(boolean connectPointStraightly) {
+			this.connectPointsStraightly = connectPointStraightly;
 		}
 
 		public int getSelectedSegment() {

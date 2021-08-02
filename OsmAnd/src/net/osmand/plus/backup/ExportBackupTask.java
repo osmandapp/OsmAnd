@@ -5,16 +5,17 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.FileUtils;
 import net.osmand.plus.backup.BackupExporter.NetworkExportProgressListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
+import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,16 +34,22 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
-					 @NonNull List<RemoteFile> filesToDelete,
+					 @NonNull List<SettingsItem> itemsToDelete,
 					 @Nullable BackupExportListener listener) {
 		this.helper = helper;
 		this.listener = listener;
-		this.exporter = new BackupExporter(helper.getApp().getBackupHelper(), getProgressListener());
+		BackupHelper backupHelper = helper.getApp().getBackupHelper();
+		this.exporter = new BackupExporter(backupHelper, getProgressListener());
 		for (SettingsItem item : items) {
 			exporter.addSettingsItem(item);
+
+			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+			if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
+				exporter.addOldItemToDelete(item);
+			}
 		}
-		for (RemoteFile file : filesToDelete) {
-			exporter.addFileToDelete(file);
+		for (SettingsItem item : itemsToDelete) {
+			exporter.addItemToDelete(item);
 		}
 	}
 
@@ -84,12 +91,10 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	private long getEstimatedItemsSize() {
 		long size = 0;
+		BackupHelper backupHelper = helper.getApp().getBackupHelper();
 		for (SettingsItem item : exporter.getItems().values()) {
 			if (item instanceof FileSettingsItem) {
-				File itemFile = ((FileSettingsItem) item).getFile();
-				List<File> filesToUpload = new ArrayList<>();
-				FileUtils.collectDirFiles(itemFile, filesToUpload);
-
+				List<File> filesToUpload = backupHelper.collectItemFilesForUpload((FileSettingsItem) item);
 				for (File file : filesToUpload) {
 					size += file.length() + APPROXIMATE_FILE_SIZE_BYTES;
 				}
@@ -97,7 +102,32 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 				size += item.getEstimatedSize() + APPROXIMATE_FILE_SIZE_BYTES;
 			}
 		}
-		size += exporter.getFilesToDelete().size() * APPROXIMATE_FILE_SIZE_BYTES;
+		Map<String, RemoteFile> remoteFilesMap = backupHelper.getBackup().getRemoteFiles(PrepareBackupResult.RemoteFilesType.UNIQUE);
+		if (remoteFilesMap != null) {
+			List<SettingsItem> itemsToDelete = exporter.getItemsToDelete();
+			for (RemoteFile remoteFile : remoteFilesMap.values()) {
+				for (SettingsItem item : itemsToDelete) {
+					if (item.equals(remoteFile.item)) {
+						size += APPROXIMATE_FILE_SIZE_BYTES;
+					}
+				}
+			}
+			List<SettingsItem> oldItemsToDelete = exporter.getOldItemsToDelete();
+			for (RemoteFile remoteFile : remoteFilesMap.values()) {
+				for (SettingsItem item : oldItemsToDelete) {
+					SettingsItem remoteFileItem = remoteFile.item;
+					if (remoteFileItem != null && item.getType() == remoteFileItem.getType()) {
+						String itemFileName = item.getFileName();
+						if (itemFileName != null && itemFileName.startsWith("/")) {
+							itemFileName = itemFileName.substring(1);
+						}
+						if (Algorithms.stringsEqual(itemFileName, remoteFileItem.getFileName())) {
+							size += APPROXIMATE_FILE_SIZE_BYTES;
+						}
+					}
+				}
+			}
+		}
 		return size;
 	}
 
@@ -140,6 +170,10 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	@Override
 	protected void onPostExecute(String error) {
 		helper.exportTask = null;
+
+		BackupHelper backupHelper = helper.getApp().getBackupHelper();
+		backupHelper.getBackup().setError(error);
+
 		if (listener != null) {
 			listener.onBackupExportFinished(error);
 		}

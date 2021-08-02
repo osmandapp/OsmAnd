@@ -27,7 +27,6 @@ public class DeleteFilesCommand extends BaseDeleteFilesCommand {
 	@Override
 	protected void onPreExecute() {
 		super.onPreExecute();
-
 		for (OnDeleteFilesListener listener : getListeners()) {
 			listener.onFilesDeleteStarted(remoteFiles);
 		}

@@ -205,6 +205,10 @@
         <item name="purchase_dialog_active_card_bg">@drawable/dialog_active_card_bg_light</item>
         <item name="purchase_dialog_shadow_btn_bg">@drawable/purchase_dialog_shadow_btn_bg_light</item>
         <item name="purchase_dialog_outline_btn_bg">@drawable/purchase_dialog_outline_btn_bg_light</item>
+        <item name="purchase_sc_feature_list_bg">@color/purchase_sc_feature_list_bg_light</item>
+        <item name="purchase_sc_selected_plan_bg">@color/purchase_sc_selected_plan_bg_light</item>
+        <item name="purchase_sc_header_icon_bg">@color/purchase_sc_header_icon_bg_light</item>
+        <item name="promo_banner_title_color">@color/osmand_pro_item_bg</item>
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_day</item>
 
@@ -254,8 +258,8 @@
         <item name="image_help_announcement_time">@drawable/img_help_announcement_time_day</item>
         <item name="switch_button_active">@color/switch_button_active_light</item>
         <item name="bottom_navigation_item_background">@drawable/bottom_navigation_item_bg_light</item>
-
         <item name="android:forceDarkAllowed">false</item>
+        <item name="ic_action_osmand_pro_logo_colored">@drawable/ic_action_osmand_pro_logo_colored</item>
     </style>
 
     <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -510,6 +514,10 @@
         <item name="purchase_dialog_active_card_bg">@drawable/dialog_active_card_bg_dark</item>
         <item name="purchase_dialog_shadow_btn_bg">@drawable/purchase_dialog_shadow_btn_bg_dark</item>
         <item name="purchase_dialog_outline_btn_bg">@drawable/purchase_dialog_outline_btn_bg_dark</item>
+        <item name="purchase_sc_feature_list_bg">@color/purchase_sc_feature_list_bg_dark</item>
+        <item name="purchase_sc_selected_plan_bg">@color/purchase_sc_selected_plan_bg_dark</item>
+        <item name="purchase_sc_header_icon_bg">@color/purchase_sc_header_icon_bg_dark</item>
+        <item name="promo_banner_title_color">@color/active_color_primary_dark</item>
 
         <item name="bottom_nav_shadow">@drawable/bg_bottom_bar_shadow_with_line_night</item>
 
@@ -559,8 +567,8 @@
         <item name="image_help_announcement_time">@drawable/img_help_announcement_time_night</item>
         <item name="switch_button_active">@color/switch_button_active_dark</item>
         <item name="bottom_navigation_item_background">@drawable/bottom_navigation_item_bg_dark</item>
-
         <item name="android:forceDarkAllowed">false</item>
+        <item name="ic_action_osmand_pro_logo_colored">@drawable/ic_action_osmand_pro_logo_colored_night</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

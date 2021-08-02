@@ -166,7 +166,7 @@ public class OptionsCard extends MapBaseCard {
 	private BaseBottomSheetItem createDirectionsItem() {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getActiveIcon(R.drawable.ic_action_gdirections_dark))
-				.setTitle(app.getString(R.string.get_directions))
+				.setTitle(app.getString(R.string.shared_string_navigation))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -264,7 +264,7 @@ public class OptionsCard extends MapBaseCard {
 		OsmEditingPlugin osmEditingPlugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (osmEditingPlugin != null && selectedGpxFile.getTrackAnalysis(app).isTimeMoving()) {
 			return new SimpleBottomSheetItem.Builder()
-					.setIcon(getActiveIcon(R.drawable.ic_action_export))
+					.setIcon(getActiveIcon(R.drawable.ic_action_upload_to_openstreetmap))
 					.setTitle(app.getString(R.string.upload_to_openstreetmap))
 					.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 					.setOnClickListener(new OnClickListener() {
@@ -282,7 +282,7 @@ public class OptionsCard extends MapBaseCard {
 	}
 
 	private BaseBottomSheetItem createEditItem() {
-		Drawable editIcon = getActiveIcon(R.drawable.ic_action_edit_dark);
+		Drawable editIcon = getActiveIcon(R.drawable.ic_action_edit_track);
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(AndroidUtils.getDrawableForDirection(app, editIcon))
 				.setTitle(app.getString(R.string.edit_track))

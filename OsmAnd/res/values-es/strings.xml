@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
@@ -3963,7 +3963,7 @@
     <string name="shared_string_api_key">Clave API</string>
     <string name="uploaded_count">Subido %1$d de %2$d</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Límites de reservas naturales</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
+    
     <string name="shared_string_subtype">Subtipo</string>
     <string name="shared_string_vehicle">Vehículo</string>
     <string name="shared_string_server_url">URL del servidor</string>

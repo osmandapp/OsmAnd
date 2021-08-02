@@ -453,6 +453,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		MapActivity.clearPrevActivityIntent();
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (!routingHelper.isFollowingMode() && !routingHelper.isRoutePlanningMode()) {
+			mapRouteInfoMenu.clearSuggestedMissingMaps();
 			TargetPoint start = getTargets().getPointToStart();
 			if (start != null) {
 				mapActivity.getMapActions().enterRoutePlanningMode(
@@ -1023,7 +1024,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 				if (transparencySetting != null) {
 					transparencySetting.set((int) value);
-					mapActivity.getMapView().refreshMap();
+					mapActivity.refreshMap();
 				}
 			}
 		});

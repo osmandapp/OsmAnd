@@ -63,6 +63,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -140,7 +141,6 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
 import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
-import net.osmand.plus.settings.fragments.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -249,14 +249,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private StateChangedListener<Integer> mapScreenOrientationSettingListener = new StateChangedListener<Integer>() {
 		@Override
 		public void stateChanged(Integer change) {
-			applyScreenOrientation();
+			app.runInUIThread(() -> applyScreenOrientation());
 		}
 	};
 
 	private StateChangedListener<Boolean> useSystemScreenTimeoutListener = new StateChangedListener<Boolean>() {
 		@Override
 		public void stateChanged(Boolean change) {
-			changeKeyguardFlags();
+			app.runInUIThread(() -> changeKeyguardFlags());
 		}
 	};
 	private MapActivityKeyListener mapActivityKeyListener;
@@ -276,6 +276,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		boolean largeDevice = AndroidUiHelper.isXLargeDevice(this);
 		landscapeLayout = !portraitMode && !largeDevice;
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
+
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		int w = metrics.widthPixels;
+		int h = metrics.heightPixels - AndroidUtils.getStatusBarHeight(this);
+		mapView = new OsmandMapTileView(this, w, h);
+
 		mapContextMenu.setMapActivity(this);
 		mapRouteInfoMenu.setMapActivity(this);
 		trackDetailsMenu.setMapActivity(this);
@@ -292,14 +299,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
 		}
 
-		int statusBarHeight = AndroidUtils.getStatusBarHeight(this);
-
-		DisplayMetrics dm = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(dm);
-		int w = dm.widthPixels;
-		int h = dm.heightPixels - statusBarHeight;
-
-		mapView = new OsmandMapTileView(this, w, h);
 		if (app.getAppInitializer().checkAppVersionChanged() && WhatsNewDialogFragment.SHOW) {
 			SecondSplashScreenFragment.SHOW = false;
 			WhatsNewDialogFragment.SHOW = false;
@@ -586,6 +585,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 
 			@Override
+			public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+				mapRouteInfoMenu.updateSuggestedMissingMaps(missingMaps, onlineSearch);
+			}
+
+			@Override
 			public void finish() {
 				mapRouteInfoMenu.routeCalculationFinished();
 				dashboardOnMap.routeCalculationFinished();
@@ -767,7 +771,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		applicationModeListener = new StateChangedListener<ApplicationMode>() {
 			@Override
 			public void stateChanged(ApplicationMode change) {
-				updateApplicationModeSettings();
+				app.runInUIThread(() -> updateApplicationModeSettings());
 			}
 		};
 		settings.APPLICATION_MODE.addListener(applicationModeListener);
@@ -1457,7 +1461,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			@Override
 			public void stateChanged(Boolean change) {
-				getMapView().refreshMap(true);
+				app.runInUIThread(() -> getMapView().refreshMap(true));
 			}
 		});
 		getMapView().refreshMap(true);
@@ -1675,6 +1679,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void refreshMap() {
 		getMapView().refreshMap();
+	}
+
+	public void updateLayers() {
+		getMapLayers().updateLayers(getMapView());
 	}
 
 	public void refreshMapComplete() {
@@ -2019,49 +2027,60 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		refreshMap();
 		RoutingHelper rh = app.getRoutingHelper();
 		if (newRoute && rh.isRoutePlanningMode() && mapView != null) {
-			Location lt = rh.getLastProjection();
-			if (lt == null) {
-				lt = app.getTargetPointsHelper().getPointToStartLocation();
-			}
-			if (lt != null) {
-				double left = lt.getLongitude(), right = lt.getLongitude();
-				double top = lt.getLatitude(), bottom = lt.getLatitude();
-				List<Location> list = rh.getCurrentCalculatedRoute();
-				for (Location l : list) {
-					left = Math.min(left, l.getLongitude());
-					right = Math.max(right, l.getLongitude());
-					top = Math.max(top, l.getLatitude());
-					bottom = Math.min(bottom, l.getLatitude());
-				}
-				List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-				for (TargetPoint l : targetPoints) {
-					left = Math.min(left, l.getLongitude());
-					right = Math.max(right, l.getLongitude());
-					top = Math.max(top, l.getLatitude());
-					bottom = Math.min(bottom, l.getLatitude());
-				}
-
-				RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
-				int tileBoxWidthPx = 0;
-				int tileBoxHeightPx = 0;
-
-				WeakReference<MapRouteInfoMenuFragment> fragmentRef = mapRouteInfoMenu.findMenuFragment();
-				if (fragmentRef != null) {
-					MapRouteInfoMenuFragment f = fragmentRef.get();
-					if (!f.isPortrait()) {
-						tileBoxWidthPx = tb.getPixWidth() - f.getWidth();
-					} else {
-						tileBoxHeightPx = tb.getPixHeight() - f.getHeight();
-					}
-				}
-				mapView.fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
-			}
+			app.runInUIThread(this::fitCurrentRouteToMap, 300);
 		}
 		if (app.getSettings().simulateNavigation) {
 			OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 			if (newRoute && rh.isFollowingMode() && !sim.isRouteAnimating()) {
 				sim.startStopRouteAnimation(this);
 			}
+		}
+	}
+
+	private void fitCurrentRouteToMap() {
+		RoutingHelper rh = app.getRoutingHelper();
+		Location lt = rh.getLastProjection();
+		if (lt == null) {
+			lt = app.getTargetPointsHelper().getPointToStartLocation();
+		}
+		if (lt != null) {
+			double left = lt.getLongitude(), right = lt.getLongitude();
+			double top = lt.getLatitude(), bottom = lt.getLatitude();
+			List<Location> list = rh.getCurrentCalculatedRoute();
+			for (Location l : list) {
+				left = Math.min(left, l.getLongitude());
+				right = Math.max(right, l.getLongitude());
+				top = Math.max(top, l.getLatitude());
+				bottom = Math.min(bottom, l.getLatitude());
+			}
+			List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+			if (rh.getRoute().hasMissingMaps()) {
+				TargetPoint pointToStart = app.getTargetPointsHelper().getPointToStart();
+				if (pointToStart != null) {
+					targetPoints.add(pointToStart);
+				}
+			}
+			for (TargetPoint l : targetPoints) {
+				left = Math.min(left, l.getLongitude());
+				right = Math.max(right, l.getLongitude());
+				top = Math.max(top, l.getLatitude());
+				bottom = Math.min(bottom, l.getLatitude());
+			}
+
+			RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+			int tileBoxWidthPx = 0;
+			int tileBoxHeightPx = 0;
+
+			WeakReference<MapRouteInfoMenuFragment> fragmentRef = mapRouteInfoMenu.findMenuFragment();
+			if (fragmentRef != null) {
+				MapRouteInfoMenuFragment f = fragmentRef.get();
+				if (!f.isPortrait()) {
+					tileBoxWidthPx = tb.getPixWidth() - f.getWidth();
+				} else {
+					tileBoxHeightPx = tb.getPixHeight() - f.getHeight();
+				}
+			}
+			mapView.fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
 		}
 	}
 

@@ -1362,7 +1362,6 @@ public class BinaryMapIndexReader {
 								list.add(subcats.get(j));
 							}
 						}
-
 					}
 				}
 			}

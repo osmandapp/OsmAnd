@@ -232,6 +232,7 @@ public class OsmandApplication extends MultiDexApplication {
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 
 		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
+		BackupHelper.DEBUG = true;//OsmandPlugin.isDevelopment();
 	}
 
 	public boolean isPlusVersionInApp() {

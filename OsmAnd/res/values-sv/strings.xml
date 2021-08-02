@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
@@ -1125,7 +1125,7 @@
     <string name="rendering_value_brown_name">brun</string>
     <string name="osmo_edit_color">Visningsfärg</string>
     <string name="gpx_file_is_empty">GPX-spåret är tomt</string>
-    <string name="loading_smth">Läser in %1$s …</string>
+    <string name="loading_smth">Laddar %1$s …</string>
     <string name="map_widget_plain_time">Aktuell tid</string>
     <string name="shared_string_waypoint">Vägpunkt</string>
     <string name="selected_gpx_info_show">"

@@ -1,7 +1,5 @@
 package net.osmand.plus.chooseplan;
 
-import android.graphics.drawable.Drawable;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
@@ -36,11 +34,6 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 	}
 
 	@Override
-	protected int getHeaderBgColorId() {
-		return nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
-	}
-
-	@Override
 	protected String getHeader() {
 		return getString(R.string.osmand_pro);
 	}
@@ -52,12 +45,9 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
 	@Override
 	protected int getHeaderIconId() {
-		return R.drawable.ic_action_osmand_pro_logo;
-	}
-
-	@Override
-	protected Drawable getPreviewListCheckmark() {
-		return getCheckmark();
+		return isNightMode(usedOnMap) ?
+				R.drawable.ic_action_osmand_pro_logo_colored_night :
+				R.drawable.ic_action_osmand_pro_logo_colored;
 	}
 
 	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {

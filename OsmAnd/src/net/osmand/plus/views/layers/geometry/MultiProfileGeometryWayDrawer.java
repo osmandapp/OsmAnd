@@ -1,17 +1,19 @@
 package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.PointF;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.OsmandMapLayer.RenderingLineAttributes;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay.GeometryMultiProfileWayStyle;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfileGeometryWayContext> {
 
@@ -22,15 +24,17 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 	@Override
 	public void drawPath(Canvas canvas, DrawPathData pathData) {
 		Path path = pathData.path;
-		GeometryWayStyle<?> style = pathData.style;
-		if (style instanceof GeometryMultiProfileWayStyle && !((GeometryMultiProfileWayStyle) style).isGap()) {
-			RenderingLineAttributes attrs = getContext().getAttrs();
+		GeometryMultiProfileWayStyle style = pathData.style instanceof GeometryMultiProfileWayStyle
+				? (GeometryMultiProfileWayStyle) pathData.style
+				: null;
+		if (style != null && !style.isGap()) {
+			Paint pathBorderPaint = getContext().getPathBorderPaint();
+			pathBorderPaint.setColor(style.getPathBorderColor());
+			canvas.drawPath(path, pathBorderPaint);
 
-			attrs.paint.setColor(((GeometryMultiProfileWayStyle) style).getBorderColor());
-			canvas.drawPath(path, attrs.paint);
-
-			attrs.paint2.setColor(((GeometryMultiProfileWayStyle) style).getLineColor());
-			canvas.drawPath(path, attrs.paint2);
+			Paint pathPaint = getContext().getPathPaint();
+			pathPaint.setColor(style.getPathColor());
+			canvas.drawPath(path, pathPaint);
 		}
 	}
 
@@ -39,22 +43,26 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 		Path path = new Path();
 		PathMeasure pathMeasure = new PathMeasure();
 		MultiProfileGeometryWayContext context = getContext();
-		GeometryMultiProfileWayStyle style = null;
+		GeometryMultiProfileWayStyle prevStyle = null;
 
 		for (int i = 0; i < styles.size(); i++) {
-			GeometryWayStyle<?> s = styles.get(i);
-			if (s != null && !s.equals(style) || !((GeometryMultiProfileWayStyle) s).isGap()) {
-				style = (GeometryMultiProfileWayStyle) styles.get(i);
+			GeometryMultiProfileWayStyle style = styles.get(i) instanceof GeometryMultiProfileWayStyle
+					? (GeometryMultiProfileWayStyle) styles.get(i)
+					: null;
+
+			if (style != null && !style.equals(prevStyle) && !style.isGap()) {
 				PointF center = getIconCenter(tb, style.getRoutePoints(), path, pathMeasure);
-				if (center != null && tb.containsPoint(center.x, center.y, context.circleSize)) {
-					float x = center.x - context.circleSize / 2;
-					float y = center.y - context.circleSize / 2;
+				if (center != null && tb.containsPoint(center.x, center.y, context.profileIconFrameSizePx)) {
+					float x = center.x - context.profileIconFrameSizePx / 2;
+					float y = center.y - context.profileIconFrameSizePx / 2;
 					canvas.drawBitmap(style.getPointBitmap(), x, y, null);
 				}
 			}
+			prevStyle = style;
 		}
 	}
 
+	@Nullable
 	private PointF getIconCenter(RotatedTileBox tileBox, List<LatLon> routePoints, Path path, PathMeasure pathMeasure) {
 		if (Algorithms.isEmpty(routePoints)) {
 			return null;
@@ -70,7 +78,7 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 
 		pathMeasure.setPath(path, false);
 		float routeLength = pathMeasure.getLength();
-		if ((routeLength - getContext().circleSize) / 2 < getContext().minIconMargin) {
+		if ((routeLength - getContext().profileIconFrameSizePx) / 2 < getContext().minProfileIconMarginPx) {
 			return null;
 		}
 

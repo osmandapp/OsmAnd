@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources><string name="poi_shop">Dyqan</string>
 		<string name="poi_shop_food">Ushqimore</string>
 	<string name="poi_emergency">Urgjenca</string>
@@ -93,7 +93,7 @@
     <string name="poi_dive">Produkte polumbari</string>
 	<string name="poi_doityourself">Dyqan produkte shtëpie</string>
 	<string name="poi_erotic">Dyqan erotik</string>
-	<string name="poi_fashion">Dyqan mode</string>
+	
 	<string name="poi_fishing">Dyqan peshkimi</string>
 	<string name="poi_florist">Dyqan lulesh</string>
 	<string name="poi_frame">Dyqan korniza pikture</string>

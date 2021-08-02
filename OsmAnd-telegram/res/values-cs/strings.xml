@@ -102,4 +102,6 @@
     <string name="send_report">Odeslat hlášení</string>
     <string name="status_widget_title">Stav OsmAnd Tracker</string>
     <string name="shared_string_logout">Odhlásit se</string>
+    <string name="min_logging_accuracy">Minimální přesnost zaznamenání</string>
+    <string name="min_logging_distance">Minimální vzdálenost zaznamenání</string>
 </resources>

@@ -145,6 +145,17 @@
 	<string name="poi_diplomatic_services_immigrant_visas_filter">Immigrant visas</string>
 	<string name="poi_diplomatic_services_citizen_services_filter">Citizen services</string>
 	<string name="poi_bay_filter">Bay type</string>
+	<string name="poi_access_general">General access</string>
+	<string name="poi_access_motorcar">Motorcar access</string>
+	<string name="poi_access_bicycle">Bicycle access</string>
+	<string name="poi_access_scooter">Scooter access</string>
+	<string name="poi_authentication_contactless">Contactless auth</string>
+	<string name="poi_authentication_chip_card">Auth by chip card</string>
+	<string name="poi_authentication_key">Auth by key</string>
+	<string name="poi_authentication_app">Auth by app</string>
+	<string name="poi_authentication_phone_call">Auth by phone call</string>
+	<string name="poi_authentication_short_message">Auth by short message</string>
+	<string name="poi_authentication_none">Auth not required</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3651,13 +3662,11 @@
 	<string name="poi_socket_as3112_current">Socket: AS/NZS 3112: current</string>
 	<string name="poi_socket_as3112_output">Socket: AS/NZS 3112: output</string>
 
-	<string name="poi_car_yes">Car: yes</string>
 	<string name="poi_car_no">Car: no</string>
 	<string name="poi_bicycle_yes">Bicycle: yes</string>
 	<string name="poi_bicycle_no">Bicycle: no</string>
 	<string name="poi_scooter_yes">Scooter: yes</string>
 	<string name="poi_scooter_no">Scooter: no</string>
-	<string name="poi_truck_yes">Truck: yes</string>
 	<string name="poi_truck_no">Truck: no</string>
 
 	<string name="poi_parking_fee_yes">Parking fee: yes</string>
@@ -3996,7 +4005,7 @@
 	<string name="poi_vehicle_delivery">Vehicle access: delivery</string>
 	<string name="poi_vehicle_forestry">Vehicle access: forestry</string>
 
-	<string name="poi_motorcar_yes">Motorcar access: yes</string>
+	<string name="poi_motorcar_yes">Yes</string>
 	<string name="poi_motorcar_private">Motorcar access: private</string>
 	<string name="poi_motorcar_no">Motorcar access: no</string>
 	<string name="poi_motorcar_destination">Motorcar access: destination</string>
@@ -4449,6 +4458,28 @@
 	<string name="poi_contact_xing">Xing</string>
 
 	<string name="poi_outdoor_seating_poi">Outdoor seating</string>
+
+	<string name="poi_internet_access_ssid">SSID</string>
+
+	<string name="poi_share_taxi_yes">Share taxi: yes</string>
+
+	<string name="poi_authentication_contactless_no">Contactless auth: no</string>
+	<string name="poi_authentication_contactless_yes">Yes</string>
+	<string name="poi_authentication_chip_card_no">Auth by chip card: no</string>
+	<string name="poi_authentication_chip_card_yes">Yes</string>
+	<string name="poi_authentication_key_no">Auth by key: no</string>
+	<string name="poi_authentication_key_yes">Yes</string>
+	<string name="poi_authentication_app_no">Auth by app: no</string>
+	<string name="poi_authentication_app_yes">Yes</string>
+	<string name="poi_authentication_phone_call_no">Auth by phone call: no</string>
+	<string name="poi_authentication_phone_call_yes">Yes</string>
+	<string name="poi_authentication_phone_call_number">Phone number used for auth</string>
+	<string name="poi_authentication_short_message_no">Auth by short message: no</string>
+	<string name="poi_authentication_short_message_yes">Yes</string>
+	<string name="poi_authentication_short_message_number">Short message number used for auth</string>
+	<string name="poi_authentication_short_message_text">Short message text used for auth</string>
+	<string name="poi_authentication_none_no">Auth not required: no</string>
+	<string name="poi_authentication_none_yes">Yes</string>
 
 
 </resources>

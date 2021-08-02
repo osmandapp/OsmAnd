@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="search_map_hint">Borg eða hérað</string>
     <string name="shared_string_appearance">Útlit</string>
@@ -4088,7 +4088,7 @@
     <string name="output">Útkeyrsla</string>
     <string name="announce_when_exceeded">Tilkynna þegar farið er yfir</string>
     <string name="user_points">Punktar notanda</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
+    
     <string name="shared_string_feet">fet</string>
     <string name="srtm_unit_format">Tilbrigði eininga hæðarlína</string>
     <string name="srtm_download_list_help_message">OsmAnd býður upp á hæðalínugögn í metrum og fetum. Þú þarft að sækja skrána aftur til að breyta sniðinu.</string>
@@ -4172,7 +4172,6 @@
     <string name="purchases_feature_desc_nautical">Fáðu aðgang að upplýsingum um dýpt sjávar</string>
     <string name="purchases_feature_desc_terrain">Hæðarlínur og hæðaskyggingakort sem styðjast við dökka skugga til að sýna brekkur, tinda og láglendi.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Fáðu mánaðarlegar uppfærslur á ónettengdum kortum.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Fáðu aðgang að ítarlegum OsmAnd-viðmótshlutum.</string>
     <string name="unlimited_map_downloads">Ótakmörkuð niðurhöl korta</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage ónettengt</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Yfirborðskort: Hæðarlínur, hæðaskyggingar, brekkur</string>
@@ -4180,7 +4179,6 @@
     <string name="offline_wikivoyage">Ónettengdar Wikiferðir</string>
     <string name="terrain_maps">Yfirborðskort</string>
     <string name="nautical_depth">Dýpt sjávar</string>
-    <string name="advanced_widgets">Ítarlegir viðmótshlutar</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s eða %2$s</string>
     <string name="continue_with">Halda áfram með %1$s</string>
     <string name="not_available_with">Ekki tiltækt með %1$s</string>

@@ -26,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
@@ -50,6 +51,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 
 	private OsmandApplication app;
 	private BackupHelper backupHelper;
+	private NetworkSettingsHelper settingsHelper;
 
 	private Map<String, RemoteFile> oldRemoteFiles = new HashMap<>();
 
@@ -77,6 +79,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		backupHelper = app.getBackupHelper();
+		settingsHelper = app.getNetworkSettingsHelper();
 		nightMode = !app.getSettings().isLightContent();
 	}
 
@@ -214,13 +217,15 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		container.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles())) {
-					FragmentManager fragmentManager = getFragmentManager();
-					if (fragmentManager != null) {
-						DeleteAllDataBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
+				if (!settingsHelper.isBackupExporting()) {
+					if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles())) {
+						FragmentManager fragmentManager = getFragmentManager();
+						if (fragmentManager != null) {
+							DeleteAllDataBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
+						}
+					} else {
+						app.showShortToastMessage(R.string.backup_data_removed);
 					}
-				} else {
-					app.showShortToastMessage(R.string.backup_data_removed);
 				}
 			}
 		});
@@ -241,13 +246,15 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		container.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles(RemoteFilesType.OLD))) {
-					FragmentManager fragmentManager = getFragmentManager();
-					if (fragmentManager != null) {
-						RemoveOldVersionsBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
+				if (!settingsHelper.isBackupExporting()) {
+					if (!Algorithms.isEmpty(backupHelper.getBackup().getRemoteFiles(RemoteFilesType.OLD))) {
+						FragmentManager fragmentManager = getFragmentManager();
+						if (fragmentManager != null) {
+							RemoveOldVersionsBottomSheet.showInstance(fragmentManager, BackupSettingsFragment.this);
+						}
+					} else {
+						app.showShortToastMessage(R.string.backup_version_history_removed);
 					}
-				} else {
-					app.showShortToastMessage(R.string.backup_version_history_removed);
 				}
 			}
 		});
@@ -303,9 +310,11 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 
 	@Override
 	public void onFilesDeleteStarted(@NonNull List<RemoteFile> files) {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
-			DeleteProgressBottomSheet.showInstance(activity.getSupportFragmentManager(), files.size());
+		if (!settingsHelper.isBackupExporting()) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				DeleteProgressBottomSheet.showInstance(activity.getSupportFragmentManager(), files.size());
+			}
 		}
 	}
 

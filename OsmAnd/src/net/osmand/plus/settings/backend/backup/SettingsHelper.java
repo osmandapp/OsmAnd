@@ -223,7 +223,7 @@ public abstract class SettingsHelper {
 			List<File> files = new ArrayList<>();
 			for (GpxDataItem gpxItem : gpxItems) {
 				File file = gpxItem.getFile();
-				if (file.exists()) {
+				if (file.exists() && !file.isDirectory()) {
 					files.add(file);
 				}
 			}

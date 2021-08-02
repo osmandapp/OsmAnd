@@ -24,7 +24,7 @@ import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.backup.ServerError;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -157,10 +157,11 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	@Override
 	public void onBackupExportFinished(@Nullable String error) {
 		if (error != null) {
-			String err = new ServerError(error).getLocalizedError(app);
-			app.showShortToastMessage(err);
+			updateAdapter();
+			app.showShortToastMessage(new BackupError(error).getLocalizedError(app));
+		} else {
+			backupHelper.prepareBackup();
 		}
-		backupHelper.prepareBackup();
 	}
 
 	@Override
@@ -229,7 +230,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
-		updateAdapter();
+		backupHelper.prepareBackup();
 	}
 
 	@Override

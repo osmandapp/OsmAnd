@@ -1,10 +1,13 @@
 package net.osmand.plus.download;
 
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -13,6 +16,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper.AssetIndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.resources.ResourceManager.BinaryMapReaderResource;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.util.Algorithms;
 
@@ -30,8 +34,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS;
 
 public class DownloadResources extends DownloadResourceGroup {
 	private static final String TAG = DownloadResources.class.getSimpleName();
@@ -501,7 +503,7 @@ public class DownloadResources extends DownloadResourceGroup {
 						srtmIndexes.add((IndexItem) item);
 					}
 				}
-				if (srtmIndexes.size() > 1) {
+				if (srtmIndexes.size() > 0) {
 					individualItems.removeAll(srtmIndexes);
 					group.addItem(new SrtmDownloadItem(srtmIndexes, useMetersByDefault));
 				}
@@ -625,6 +627,39 @@ public class DownloadResources extends DownloadResourceGroup {
 			}
 		}
 		return res;
+	}
+
+	public List<String> getExternalMapFileNamesAt(int x31, int y31, int zoom, boolean routeData) {
+		List<String> res = new ArrayList<>();
+		for (BinaryMapReaderResource reader : app.getResourceManager().getFileReaders()) {
+			String fileName = reader.getFileName();
+			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
+					&& !fileName.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
+					&& !fileName.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)) {
+				BinaryMapIndexReader shallowReader = reader.getShallowReader();
+				if (shallowReader != null && !shallowReader.isBasemap()) {
+					if (routeData && !shallowReader.containsRouteData()) {
+						continue;
+					}
+					if (shallowReader.containsMapData() && !isOsmandRegion(fileName)) {
+						if (routeData) {
+							if (shallowReader.containsRouteData(x31, y31, x31, y31, zoom)) {
+								res.add(fileName);
+							}
+						} else if (shallowReader.containsMapData(x31, y31, x31, y31, zoom)) {
+							res.add(fileName);
+						}
+					}
+				}
+			}
+		}
+		return res;
+	}
+
+	public boolean isOsmandRegion(@NonNull String mapFileName) {
+		OsmandRegions osmandRegions = app.getRegions();
+		String downloadName = WorldRegion.getRegionDownloadName(mapFileName);
+		return osmandRegions.getRegionDataByDownloadName(downloadName) != null;
 	}
 
 	private static IndexItem getSmallestIndexItem(@NonNull IndexItem item1, @NonNull IndexItem item2) {

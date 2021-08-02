@@ -20,19 +20,20 @@ public class ColoringTypeAvailabilityCache {
 	}
 
 	public boolean isColoringAvailable(@NonNull RouteCalculationResult route,
-	                                   @NonNull RouteColoringType routeColoringType,
+	                                   @NonNull ColoringType routeColoringType,
 	                                   @Nullable String routeInfoAttribute) {
 		if (!route.equals(prevRoute)) {
 			cache.clear();
 			prevRoute = route;
 		}
 
-		String key = routeColoringType.isRouteInfoAttribute() ?
-				routeInfoAttribute : routeColoringType.getName();
+		String key = routeColoringType.getName(routeInfoAttribute);
 
 		Boolean available = cache.get(key);
 		if (available == null) {
-			available = routeColoringType.isAvailableForDrawing(app, route, routeInfoAttribute);
+			boolean drawing = routeColoringType.isAvailableForDrawingRoute(app, route, routeInfoAttribute);
+			boolean subscription = routeColoringType.isAvailableInSubscription(app, routeInfoAttribute);
+			available = drawing && subscription;
 			cache.put(key, available);
 		}
 		return available;

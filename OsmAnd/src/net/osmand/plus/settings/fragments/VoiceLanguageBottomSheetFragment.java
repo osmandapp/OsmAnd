@@ -52,6 +52,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
@@ -75,17 +76,13 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private IndexItem indexToSelectAfterDownload = null;
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, ApplicationMode appMode, boolean usedOnMap) {
-		try {
-			if (!fm.isStateSaved()) {
-				VoiceLanguageBottomSheetFragment fragment = new VoiceLanguageBottomSheetFragment();
-				fragment.setRetainInstance(true);
-				fragment.setAppMode(appMode);
-				fragment.setUsedOnMap(usedOnMap);
-				fragment.setTargetFragment(target, 0);
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+		if (!fm.isStateSaved()) {
+			VoiceLanguageBottomSheetFragment fragment = new VoiceLanguageBottomSheetFragment();
+			fragment.setRetainInstance(true);
+			fragment.setAppMode(appMode);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
+			fragment.show(fm, TAG);
 		}
 	}
 
@@ -93,13 +90,22 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
+		settings = app.getSettings();
+		selectedVoiceType = defineSelectedVoiceType();
 		downloadThread = app.getDownloadThread();
+	}
+
+	private InfoType defineSelectedVoiceType() {
+		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(getAppMode());
+		return Algorithms.isEmpty(voiceProvider) || voiceProvider.endsWith(VOICE_PROVIDER_SUFFIX)
+				|| voiceProvider.equals(OsmandSettings.VOICE_PROVIDER_NOT_USE)
+				? InfoType.TTS
+				: InfoType.RECORDED;
 	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = requireContext();
-		settings = app.getSettings();
 		int padding = getDimen(R.dimen.content_padding_small);
 		LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 

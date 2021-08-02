@@ -36,7 +36,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupListeners.OnRegisterUserListener;
-import net.osmand.plus.backup.ServerError;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -133,8 +133,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		progressBar = view.findViewById(R.id.progress_bar);
 		buttonContinue = view.findViewById(R.id.continue_button);
 		buttonChoosePlan = view.findViewById(R.id.get_button);
-		errorText = view.findViewById(R.id.error_text);
-		buttonAuthorize = view.findViewById(R.id.button);
 
 		setupToolbar();
 		setupTextWatchers();
@@ -229,6 +227,9 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void setupAuthorizeContainer(View view, LoginDialogType nextType) {
+		errorText = view.findViewById(R.id.error_text);
+		buttonAuthorize = view.findViewById(R.id.button);
+
 		EditText editText = view.findViewById(R.id.edit_text);
 		EditText promoEditText = view.findViewById(R.id.promocode_edit_text);
 
@@ -271,7 +272,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void setupVerifyEmailContainer(View view) {
-		TextView errorText = view.findViewById(R.id.error_text);
+		errorText = view.findViewById(R.id.error_text);
 		EditText editText = view.findViewById(R.id.edit_text);
 		View resendButton = view.findViewById(R.id.button);
 		View codeMissingButton = view.findViewById(R.id.code_missing_button);
@@ -352,12 +353,13 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void registerUser() {
+		settings.BACKUP_PROMOCODE.set(promoCode);
 		boolean login = dialogType == LoginDialogType.SIGN_IN || signIn;
 		backupHelper.registerUser(settings.BACKUP_USER_EMAIL.get(), promoCode, login);
 	}
 
 	@Override
-	public void onRegisterUser(int status, @Nullable String message, @Nullable ServerError error) {
+	public void onRegisterUser(int status, @Nullable String message, @Nullable BackupError error) {
 		FragmentActivity activity = getActivity();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			progressBar.setVisibility(View.INVISIBLE);
@@ -383,7 +385,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	@Override
-	public void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error) {
+	public void onRegisterDevice(int status, @Nullable String message, @Nullable BackupError error) {
 		FragmentActivity activity = getActivity();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			int errorCode = error != null ? error.getCode() : -1;

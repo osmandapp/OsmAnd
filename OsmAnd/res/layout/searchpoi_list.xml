@@ -37,8 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:maxLines="2"
-            tools:text="@string/lorem_ipsum" />
+            android:maxLines="2" />
 
         <LinearLayout
             android:layout_width="fill_parent"

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="address_search_desc">Mencari alamat</string>
     <string name="navpoint_search_desc">Koordinat</string>
@@ -1981,4 +1981,23 @@
     <string name="backup_error_token_is_not_valid_or_expired">Token tidak valid atau kedaluwarsa</string>
     <string name="backup_error_user_is_not_registered">Tak ada pengguna yang terdaftar dengan alamat surel tersebut</string>
     <string name="duration_moment_ago">beberapa saat yang lalu</string>
+    <string name="logout_from_osmand_cloud">Keluar dari OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Apakah Anda yakin ingin keluar\?
+\nAnda harus masuk lagi untuk mencadangkan atau memulihkan data.</string>
+    <string name="backup_deleting_all_data">Menghapus semua data</string>
+    <string name="backup_deleted_all_data">Semua data dihapus</string>
+    <string name="backup_deleting_all_data_descr">Harap tunggu sampai OsmAnd selesai menghapus semua data Anda dari cloud. Semua data pada perangkat tidak disentuh.</string>
+    <string name="backup_deleted_all_data_descr">Semua data Anda berhasil dihapus dari OsmAnd Cloud.</string>
+    <string name="backup_version_history_removed">Semua riwayat versi dihapus</string>
+    <string name="backup_data_removed">Semua data dihapus</string>
+    <string name="backup_do_not_have_any">Anda belum memiliki pencadangan daring</string>
+    <string name="backup_dont_have_any_descr">Siapkan pencadangan otomatis sehingga Anda tidak perlu mengkhawatirkan tentang hilangnya data.</string>
+    <string name="backup_welcome_back">Selamat datang kembali!</string>
+    <string name="backup_setup">Siapkan pencadangan</string>
+    <string name="backup_restore_now">Pulihkan sekarang</string>
+    <string name="attribute">Atribut</string>
+    <string name="shared_string_purchased">Telah dibeli</string>
+    <string name="explore_wikipedia_offline">Jelajahi Wikipedia luring.</string>
+    <string name="on_hold_since">Ditahan sejak %1$s</string>
+    <string name="active_till">Aktif hingga %1$s</string>
 </resources>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shop">Vendejo</string>
     <string name="poi_shop_food">Butiko oportuna kaj superbazaro</string>
@@ -124,7 +124,7 @@
     <string name="poi_doityourself">Memfaradil-vendejo</string>
     <string name="poi_doors">Pord-vendejo</string>
     <string name="poi_erotic">Seksumil-vendejo</string>
-    <string name="poi_fashion">Vest‑vendejo</string>
+    
     <string name="poi_fishing">Fiŝkaptil-vendejo</string>
     <string name="poi_florist">Florvendejo</string>
     <string name="poi_frame">Kadroj-de-pentraĵoj-vendejo</string>
@@ -206,7 +206,7 @@
     <string name="poi_ship_chandler">Ŝipekipistejo</string>
     <string name="poi_sports">Sportovendejo</string>
     <string name="poi_stationery">Papervar-vendejo</string>
-    <string name="poi_tableware">Manĝil-vendejo</string>
+    
     <string name="poi_ticket">Bilet-butiko</string>
     <string name="poi_tobacco">Tabak-vendejo</string>
     <string name="poi_toys">Ludil-vendejo</string>
@@ -387,7 +387,7 @@
     <string name="poi_groyne">Ondorompileto</string>
     <string name="poi_power_substation">Elektrosubcentralo</string>
     <string name="poi_power_transformer">Transformilo</string>
-    <string name="poi_power_cable_distribution_cabinet">Ŝranko distribua (elektro)</string>
+    
     <string name="poi_power_generator">Elektrogenerilo</string>
     <string name="poi_power_tower">Elektrofosto (alttensia k meztensia)</string>
     <string name="poi_power_pole">Elektrofosto (baztensia)</string>
@@ -507,7 +507,7 @@
     <string name="poi_pension_fund">Oficejo de pensiado</string>
     <string name="poi_migration">Oficejo de enmigrado</string>
     <string name="poi_tax_inspection">Oficejo de impostado</string>
-    <string name="poi_office_administrative">Administra oficejo</string>
+    
     <string name="poi_customs">Doganejo</string>
     <string name="poi_isolated_dwelling">Solstaranta domo</string>
     <string name="poi_quarter">Kvartalo</string>
@@ -2560,7 +2560,7 @@
     <string name="poi_aquaculture_shrimp">Akvokulturo: salikokoj</string>
     <string name="poi_aquaculture_fish">Akvokulturo: fiŝoj</string>
     <string name="poi_aquaculture_mussels">Akvokulturo: moluskoj</string>
-    <string name="poi_mdf">Telefon-diskonektig-stacio</string>
+    
     <string name="poi_diplomatic_consulate">konsulejo</string>
     <string name="poi_diplomatic_consulate_general">konsulejo ĝenerala</string>
     <string name="poi_diplomatic_honorary_consulate">konsulejo honora</string>

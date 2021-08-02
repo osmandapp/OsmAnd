@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -303,13 +302,22 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 				.setIcon(getIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete))
 				.setTitle(UiUtilities.createCustomFontSpannable(typeface, delete, delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						deleteGroupItems();
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						showDeleteConfirmationDialog(activity);
 					}
 				})
 				.create();
+	}
+
+	private void showDeleteConfirmationDialog(@NonNull FragmentActivity activity) {
+		Context themedCtx = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder b = new AlertDialog.Builder(themedCtx);
+		b.setTitle(app.getString(R.string.are_you_sure));
+		b.setPositiveButton(R.string.shared_string_delete, (dialog, which) -> deleteGroupItems());
+		b.setNegativeButton(R.string.shared_string_cancel, null);
+		b.show();
 	}
 
 	private void deleteGroupItems() {

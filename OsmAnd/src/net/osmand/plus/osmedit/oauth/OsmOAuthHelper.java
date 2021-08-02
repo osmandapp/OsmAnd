@@ -61,6 +61,7 @@ public class OsmOAuthHelper {
 			settings.OSM_USER_NAME.resetToDefault();
 			settings.OSM_USER_PASSWORD.resetToDefault();
 		}
+		settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
 		updateAdapter();
 	}
 

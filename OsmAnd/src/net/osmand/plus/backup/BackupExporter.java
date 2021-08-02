@@ -1,11 +1,16 @@
 package net.osmand.plus.backup;
 
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
+
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.OperationLog;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkWriter.OnUploadItemListener;
+import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.AbstractWriter;
 import net.osmand.plus.settings.backend.backup.Exporter;
@@ -15,21 +20,21 @@ import net.osmand.util.Algorithms;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
-	private final Map<String, RemoteFile> filesToDelete = new LinkedHashMap<>();
+	private final List<SettingsItem> itemsToDelete = new ArrayList<>();
+	private final List<SettingsItem> oldItemsToDelete = new ArrayList<>();
 	private ThreadPoolTaskExecutor<ItemWriterTask> executor;
 	private final NetworkExportProgressListener listener;
+	private final List<RemoteFile> oldFilesToDelete = Collections.synchronizedList(new ArrayList<>());
 
 	public interface NetworkExportProgressListener {
 		void itemExportStarted(@NonNull String type, @NonNull String fileName, int work);
@@ -49,15 +54,22 @@ public class BackupExporter extends Exporter {
 		this.listener = listener;
 	}
 
-	public Map<String, RemoteFile> getFilesToDelete() {
-		return filesToDelete;
+	@NonNull
+	public List<SettingsItem> getItemsToDelete() {
+		return itemsToDelete;
 	}
 
-	public void addFileToDelete(RemoteFile file) throws IllegalArgumentException {
-		if (filesToDelete.containsKey(file.getTypeNamePath())) {
-			throw new IllegalArgumentException("Already has such file: " + file.getTypeNamePath());
-		}
-		filesToDelete.put(file.getName(), file);
+	@NonNull
+	public List<SettingsItem> getOldItemsToDelete() {
+		return oldItemsToDelete;
+	}
+
+	public void addItemToDelete(@NonNull SettingsItem item) throws IllegalArgumentException {
+		itemsToDelete.add(item);
+	}
+
+	public void addOldItemToDelete(@NonNull SettingsItem item) throws IllegalArgumentException {
+		oldItemsToDelete.add(item);
 	}
 
 	@Override
@@ -70,14 +82,14 @@ public class BackupExporter extends Exporter {
 		OperationLog log = new OperationLog("writeItems", true);
 		log.startOperation();
 
-		StringBuilder orderIdUpdateError = new StringBuilder();
-		backupHelper.updateOrderId((status, message, err) -> {
+		StringBuilder subscriptionError = new StringBuilder();
+		backupHelper.checkSubscriptions((status, message, err) -> {
 			if (err != null) {
-				orderIdUpdateError.append(err);
+				subscriptionError.append(err);
 			}
 		});
-		if (orderIdUpdateError.length() > 0) {
-			throw new IOException(orderIdUpdateError.toString());
+		if (subscriptionError.length() > 0) {
+			throw new IOException(subscriptionError.toString());
 		}
 
 		List<ItemWriterTask> tasks = new ArrayList<>();
@@ -96,16 +108,17 @@ public class BackupExporter extends Exporter {
 	}
 
 	private void exportItems() throws IOException {
-		int[] dataProgress = {0};
-		Set<Object> itemsProgress = new HashSet<>();
-		Map<String, String> errors = new HashMap<>();
+		AtomicInteger dataProgress = new AtomicInteger(0);
+		Set<Object> itemsProgress = Collections.synchronizedSet(new HashSet<>());
+		Map<String, String> errors = new ConcurrentHashMap<>();
 
 		OnUploadItemListener uploadItemListener = getOnUploadItemListener(itemsProgress, dataProgress, errors);
-		OnDeleteFilesListener deleteFilesListener = getOnDeleteFilesListener(itemsProgress, dataProgress, errors);
+		OnDeleteFilesListener deleteFilesListener = getOnDeleteFilesListener(itemsProgress, dataProgress);
 
 		NetworkWriter networkWriter = new NetworkWriter(backupHelper, uploadItemListener);
 		writeItems(networkWriter);
 		deleteFiles(deleteFilesListener);
+		deleteOldFiles(deleteFilesListener);
 		if (!isCancelled()) {
 			backupHelper.updateBackupUploadTime();
 		}
@@ -116,7 +129,31 @@ public class BackupExporter extends Exporter {
 
 	protected void deleteFiles(OnDeleteFilesListener listener) throws IOException {
 		try {
-			backupHelper.deleteFiles(new ArrayList<>(getFilesToDelete().values()), listener);
+			List<RemoteFile> remoteFiles = new ArrayList<>();
+			Map<String, RemoteFile> remoteFilesMap = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE);
+			if (remoteFilesMap != null) {
+				List<SettingsItem> itemsToDelete = this.itemsToDelete;
+				for (RemoteFile remoteFile : remoteFilesMap.values()) {
+					for (SettingsItem item : itemsToDelete) {
+						if (item.equals(remoteFile.item)) {
+							remoteFiles.add(remoteFile);
+						}
+					}
+				}
+				if (!Algorithms.isEmpty(remoteFiles)) {
+					backupHelper.deleteFilesSync(remoteFiles, false, AsyncTask.THREAD_POOL_EXECUTOR, listener);
+				}
+			}
+		} catch (UserNotRegisteredException e) {
+			throw new IOException(e.getMessage(), e);
+		}
+	}
+
+	protected void deleteOldFiles(OnDeleteFilesListener listener) throws IOException {
+		try {
+			if (!Algorithms.isEmpty(oldFilesToDelete)) {
+				backupHelper.deleteFilesSync(oldFilesToDelete, true, AsyncTask.THREAD_POOL_EXECUTOR, listener);
+			}
 		} catch (UserNotRegisteredException e) {
 			throw new IOException(e.getMessage(), e);
 		}
@@ -130,7 +167,7 @@ public class BackupExporter extends Exporter {
 		}
 	}
 
-	private OnUploadItemListener getOnUploadItemListener(Set<Object> itemsProgress, int[] dataProgress, Map<String, String> errors) {
+	private OnUploadItemListener getOnUploadItemListener(Set<Object> itemsProgress, AtomicInteger dataProgress, Map<String, String> errors) {
 		return new OnUploadItemListener() {
 
 			@Override
@@ -142,10 +179,10 @@ public class BackupExporter extends Exporter {
 
 			@Override
 			public void onItemUploadProgress(@NonNull SettingsItem item, @NonNull String fileName, int progress, int deltaWork) {
-				dataProgress[0] += deltaWork;
+				int p = dataProgress.addAndGet(deltaWork);
 				if (listener != null) {
 					listener.updateItemProgress(item.getType().name(), fileName, progress);
-					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+					listener.updateGeneralProgress(itemsProgress.size(), p);
 				}
 			}
 
@@ -155,11 +192,11 @@ public class BackupExporter extends Exporter {
 				if (!Algorithms.isEmpty(error)) {
 					errors.put(type + "/" + fileName, error);
 				} else {
-					checkAndDeleteOldFile(item, fileName, errors);
+					markOldFileForDeletion(item, fileName);
 				}
-				dataProgress[0] += APPROXIMATE_FILE_SIZE_BYTES / 1024;
+				int p = dataProgress.addAndGet(APPROXIMATE_FILE_SIZE_BYTES / 1024);
 				if (listener != null) {
-					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+					listener.updateGeneralProgress(itemsProgress.size(), p);
 				}
 			}
 
@@ -172,13 +209,13 @@ public class BackupExporter extends Exporter {
 				itemsProgress.add(item);
 				if (listener != null) {
 					listener.itemExportDone(item.getType().name(), fileName);
-					listener.updateGeneralProgress(itemsProgress.size(), dataProgress[0]);
+					listener.updateGeneralProgress(itemsProgress.size(), dataProgress.get());
 				}
 			}
 		};
 	}
 
-	private OnDeleteFilesListener getOnDeleteFilesListener(Set<Object> itemsProgress, int[] dataProgress, Map<String, String> errors) {
+	private OnDeleteFilesListener getOnDeleteFilesListener(Set<Object> itemsProgress, AtomicInteger dataProgress) {
 		return new OnDeleteFilesListener() {
 
 			@Override
@@ -188,10 +225,11 @@ public class BackupExporter extends Exporter {
 
 			@Override
 			public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
+				int p = dataProgress.addAndGet(APPROXIMATE_FILE_SIZE_BYTES / 1024);
 				itemsProgress.add(file);
 				if (listener != null) {
 					listener.itemExportDone(file.getType(), file.getName());
-					listener.updateGeneralProgress(file.getZipSize(), dataProgress[0]);
+					listener.updateGeneralProgress(itemsProgress.size(), p);
 				}
 			}
 
@@ -207,18 +245,14 @@ public class BackupExporter extends Exporter {
 		};
 	}
 
-	private void checkAndDeleteOldFile(@NonNull SettingsItem item, @NonNull String fileName, Map<String, String> errors) {
+	private void markOldFileForDeletion(@NonNull SettingsItem item, @NonNull String fileName) {
 		String type = item.getType().name();
-		try {
-			ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
-			if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
-				RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
-				if (remoteFile != null) {
-					backupHelper.deleteFiles(Collections.singletonList(remoteFile), true, null);
-				}
+		ExportSettingsType exportType = ExportSettingsType.getExportSettingsTypeForItem(item);
+		if (exportType != null && !backupHelper.getVersionHistoryTypePref(exportType).get()) {
+			RemoteFile remoteFile = backupHelper.getBackup().getRemoteFile(type, fileName);
+			if (remoteFile != null) {
+				oldFilesToDelete.add(remoteFile);
 			}
-		} catch (UserNotRegisteredException e) {
-			errors.put(type + "/" + fileName, e.getMessage());
 		}
 	}
 

@@ -1097,7 +1097,7 @@
     <string name="rendering_attr_showAccess_name">Показати обмеження доступу та збір</string>
     <string name="rendering_attr_showSurfaceGrade_name">Показувати якість доріг</string>
     <string name="rendering_attr_showSurfaces_name">Показати тип покриття</string>
-    <string name="rendering_attr_showCycleRoutes_name">Показати веломаршрути</string>
+    <string name="rendering_attr_showCycleRoutes_name">Веломаршрути</string>
     <string name="no_index_file_to_download">Завантажень не знайдено. Будь ласка, перевірте з’єднання з Інтернет.</string>
     <string name="none_selected_gpx">Не вибрано GPX-файл. Виберіть один довгим натисненням.</string>
     <string name="local_index_select_gpx_file">Виберіть трек</string>
@@ -1108,7 +1108,7 @@
     <string name="show_zoom_buttons_navigation">Показувати кнопки зміни масштабу</string>
     <string name="save_as_favorites_points">Зберегти як групу Закладок</string>
     <string name="select_destination_and_intermediate_points">Виберіть призначення</string>
-    <string name="layer_amenity_label">Підписи до цікавих місць</string>
+    <string name="layer_amenity_label">Мітки точок (POI, Закладки)</string>
     <string name="loading_smth">Завантаження %1$s…</string>
     <string name="map_widget_plain_time">Поточний час</string>
     <string name="shared_string_waypoint">Маршрутна точка</string>
@@ -1280,7 +1280,7 @@
     <string name="rendering_attr_subwayMode_name">Маршрути метро</string>
     <string name="rendering_attr_alpineHiking_name">Піший гірський туризм (шкала SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Візуалізація шляху за шкалою SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Шар символів для пішого туризму</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Пішохідні маршрути</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Візуалізація шляху відповідно до треків OSMC.</string>
     <string name="arrival_distance_factor_early">Раніше</string>
     <string name="arrival_distance_factor_normally">Звичайно</string>
@@ -1454,7 +1454,7 @@
     <string name="short_location_on_map">Шир %1$s\nДов %2$s</string>
     <string name="tips_and_tricks_descr">Запитання та відповіді, останні зміни та інше.</string>
     <string name="routing_settings_2">Налаштування навігації</string>
-    <string name="general_settings_2">Загальні параметри</string>
+    <string name="general_settings_2">Загальні налаштування</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_selected">Вибрані</string>
     <string name="shared_string_deselect">Зняти виділення</string>
@@ -1593,8 +1593,8 @@
     <string name="shared_string_show_details">Показати подробиці</string>
     <string name="osm_edit_context_menu_delete">Видалити OSM-редагування</string>
     <string name="rendering_value_disabled_name">Вимкнено</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Забарвлення згідно приналежності мережі</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Розмальовування відповідно пішій символіці OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Належність до мережі</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Вийти</string>
     <string name="local_recordings_delete_all_confirm">Видалити %1$d приміток\?</string>
     <string name="download_wikipedia_maps">Вікіпедія</string>
@@ -1845,7 +1845,7 @@
     <string name="dashboard_or_drawer_title">Стільниця або меню керування</string>
     <string name="live_update">Оновлення</string>
     <string name="reports_for">Відзвітувати</string>
-    <string name="rendering_attr_showMtbRoutes_name">Показувати гірськовелосипедні маршрути</string>
+    <string name="rendering_attr_showMtbRoutes_name">Гірські велосипедні маршрути</string>
     <string name="show_on_start_description">\"Вимкнено\" запускає мапу безпосередньо.</string>
     <string name="add_points_to_map_markers_q">Додати всі точки як позначки мапи\?</string>
     <string name="shared_string_add_to_map_markers">Додати до позначок мапи</string>
@@ -4174,14 +4174,13 @@
     <string name="send_logcat_log">Надіслати вміст журналу</string>
     <string name="backup_promocode">Промокод</string>
     <string name="purchases_feature_desc_nautical">Отримайте доступ до даних про морську глибину</string>
-    <string name="purchases_feature_desc_terrain">Горизонталі рельєфу, повноколірна мапа горбів з темними відтінками та мапами схилів з кольорами для відображення, піками й низинами.</string>
-    <string name="purchases_feature_desc_wikivoyage">Переглядайте Вікіпедію в автономному режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
+    <string name="purchases_feature_desc_terrain">Горизонталі рельєфу, повноколірна мапа горбів з темними відтінками та мапами схилів з кольорами для показу, піками й низинами.</string>
+    <string name="purchases_feature_desc_wikivoyage">Переглядайте Вікімандри в автономному режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
     <string name="purchases_feature_desc_wikipedia">Переглядайте Вікіпедію в автономному режимі. Статті, розділені за країнами та регіонами й доступні всіма мовами.</string>
     <string name="purchases_feature_desc_combined_wiki">Переглядайте статті Вікіпедії в дорозі, без з’єднання з Інтернетом. Дані в автономному режимі, розділені за країнами та доступні всіма мовами.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Отримайте необмежені завантаження для всіх офлайн-мап континентів і регіонів.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Отримайте доступ до регулярних щомісячних оновлень для офлайн-мап.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Отримайте доступ до часто оновлюваних мап. Щогодинні, щоденні або щотижневі оновлення. Завантажуються поступово, лише для зміненої ділянки.</string>
-    <string name="purchases_feature_desc_advanced_widgets">Отримайте доступ до додаткових віджетів OsmAnd.</string>
     <string name="purchases_feature_desc_osmand_cloud">Отримайте OsmAnd Cloud для зберігання всіх даних OsmAnd в Інтернеті. Не втрачайте дані після перевстановлення. Легко створюйте резервні копії та відновлюйте всі дані.</string>
     <string name="unlimited_map_downloads">Необмежена кількість завантажень мап</string>
     <string name="wikipedia_and_wikivoyage_offline">Вікіпедія і Вікімандри в автономному режимі</string>
@@ -4190,7 +4189,6 @@
     <string name="offline_wikivoyage">Автономні Вікімандри</string>
     <string name="terrain_maps">Мапи рельєфу</string>
     <string name="nautical_depth">Глибина водойм</string>
-    <string name="advanced_widgets">Додаткові віджети</string>
     <string name="you_can_get_feature_as_part_of_pattern">Отримайте «%1$s» частиною тарифного плану %2$s. Порівняння:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$s або %2$s</string>
     <string name="continue_with">Продовжити з %1$s</string>
@@ -4221,25 +4219,25 @@
     <string name="backup_error_user_is_not_registered">Жоден користувач не зареєстрований з цією адресою е-пошти</string>
     <string name="backup_error_no_valid_subscription">Немає дійсної передплати</string>
     <string name="approximate_route_description">Прикріпіть маршрут до доріг на мапі, щоб отримати всі повороти та додаткові дані про плавність, типи доріг тощо.</string>
-    <string name="release_4_0">• Резервне копіювання до хмари
+    <string name="release_4_0">• Резервне копіювання в хмарі
 \n
-\n • Додано нічний режим для стилю «Topo»
+\n• Додано стиль нічного режиму «Topo»
 \n
-\n • Додано можливість завантаження горизонталей у футах
+\n• Додана можливість завантаження горизонталей у футах
 \n
-\n • Треки тепер можуть бути забарвлені залежно від висоти, швидкості або ухилу.
+\n• Треки можна забарвлювати за висотою, швидкістю або нахилом
 \n
-\n • Оновлено діалогове вікно «Запис подорожі»
+\n• Оновлено діалогове вікно «Записування поїздки»
 \n
-\n • Відстань дотиком переміщено з радіусної лінійки до окремої опції
+\n• Відстань дотиком переміщено з радіусної лінійки до окремого параметра
 \n
-\n • Планування маршруту: додано можливість змінювати параметри навігації, доступ до налаштування мапи та пошуку, безпосередньо з меню планування маршруту
+\n• План маршруту: додана можливість змінювати параметри навігації, доступ до налаштувань мапи та пошуку, не виходячи з плану маршруту
 \n
-\n • Новий екран «Покупка» з докладними відомостями про покупку
+\n• Нове меню «Покупка» з подробицями про покупку
 \n
-\n • Додано можливість зміни зовнішнього вигляду смуги маршруту.
+\n• Додана можливість зміни зовнішнього вигляду лінії маршруту
 \n
-\n • Оновлення OsmAnd Live переміщено до «Завантаження &gt; Оновлення»
+\n• Оновлення OsmAnd Live перенесено з Завантаження до Оновлення
 \n
 \n</string>
     <string name="enter_verification_code">Введіть одноразовий пароль</string>
@@ -4247,4 +4245,61 @@
     <string name="logout_from_osmand_cloud">Вийти з OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Ви дійсно бажаєте вийти із системи\?
 \nЩоб створити резервну копію даних або відновити їх, потрібно буде ввійти ще раз.</string>
+    <string name="backup_error_subscription_was_expired_descr">Термін дії передплати osmAnd Pro завершився, поновіть її, щоб користуватись резервним копіюванням. Ви досі можете відновити дані з Хмари.</string>
+    <string name="contour_lines_hillshades_slope">Горизонталі, горби, нахил</string>
+    <string name="backup_deleting_all_data">Видалення всіх даних</string>
+    <string name="backup_deleted_all_data">Видалено всі дані</string>
+    <string name="backup_deleting_all_data_descr">Зачекайте, поки OsmAnd видалить усі ваші дані з хмари. Усі дані на пристрої залишаються незмінними.</string>
+    <string name="backup_deleted_all_data_descr">Усі ваші дані було успішно видалено з OsmAnd Cloud.</string>
+    <string name="backup_version_history_removed">Усю історію версій вилучено</string>
+    <string name="backup_data_removed">Усі дані вилучено</string>
+    <string name="shared_string_progress">Виконання</string>
+    <string name="backup_do_not_have_any">У вас ще немає резервної копії в Інтернеті</string>
+    <string name="backup_dont_have_any_descr">Налаштуйте автоматичне резервне копіювання, щоб не втратити дані.</string>
+    <string name="backup_welcome_back">З поверненням!</string>
+    <string name="backup_welcome_back_descr">Ви можете відновити дані на цьому пристрої за допомогою наявних резервних копій або налаштувати резервну копію цього пристрою в OsmAnd Cloud.</string>
+    <string name="backup_setup">Налаштувати резервне копіювання</string>
+    <string name="backup_restore_now">Відновити зараз</string>
+    <string name="attribute">Атрибут</string>
+    <string name="shared_string_purchased">Придбано</string>
+    <string name="explore_wikipedia_offline">Переглядайте Вікіпедію офлайн.</string>
+    <string name="on_hold_since">Призупинено з %1$s</string>
+    <string name="active_till">Активна до %1$s</string>
+    <string name="promo_subscription">Промо-передплата</string>
+    <string name="track_has_no_needed_data">Трек не містить потрібних даних.</string>
+    <string name="benefits_for_contributors_primary_descr">Ви можете скористатися погодинною необмеженою кількістю оновлень мапи без обмежень, якщо ви активний учасник OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">Увійдіть в OpenStreetMap і перевірте, чи маєте ви право отримувати необмежені щомісячні та погодинні оновлення мапи.</string>
+    <string name="use_login_and_password">Застосувати ім\'я користувача та пароль</string>
+    <string name="available_until">Доступно до %1$s</string>
+    <string name="enough_contributions_descr">Вітаємо! Ви зробили достатньо внесків у OpenStreetMap і можете насолоджуватися необмеженою кількістю оновлень мап.</string>
+    <string name="not_enough_contributions_descr">Вам потрібно зробити принаймні %1$s внески до мап OpenStreetMap за останні %2$s дні.</string>
+    <string name="shared_string_contributions">Внески</string>
+    <string name="contributions_may_calculate_with_delay">Внески можуть обчислюватися з кількагодинною затримкою.</string>
+    <string name="map_updates_are_unavailable_yet">Оновлення мап поки недоступні :-(</string>
+    <string name="connect_track_points_as">З\'єднати точки маршруту</string>
+    <string name="option_available_only_in_osmand_pro">Опція доступна в рамках передплати OsmAnd Pro.</string>
+    <string name="pro_widgets">Віджети Pro</string>
+    <string name="purchases_feature_desc_pro_widgets">Отримайте доступ до можливостей OsmAnd Pro. Забарвлення маршруту та багато іншого.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Ознайомтеся з планами OsmAnd, щоб знайти відповідний для вас.</string>
+    <string name="routes_color_by_type">Кольори маршрутів за</string>
+    <string name="shared_string_relation">Зв\'язки</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Призначте колір для маршрутів на основі їхнього індивідуально місцевого кольору (якщо він присутній в OpenStreetMap) і символу туристичного щита</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Колір за мережевою належністю</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Призначити колір маршрутів на основі типу мережі вузлів (міжнародної, регіональної, місцевої), до яких вони належать</string>
+    <string name="walking_route_osmc_description">Призначте колір маршрутам на основі їхнього локально індивідуально призначеного кольору (якщо він наявний в OpenStreetMap) і типу (міжнародний, регіональний, місцевий)</string>
+    <string name="travel_routes">Туристичні маршрути</string>
+    <string name="setting_supported_by_style">Це налаштування підтримується стилем мапи «%1$s»</string>
+    <string name="direct_line_maps_required_descr">Обчислення маршруту триває довше ніж зазвичай.
+\n
+\nМожливо, деякі мапи не завантажені.</string>
+    <string name="online_direct_line_maps_link">Перевірте необхідні мапи</string>
+    <string name="offline_maps_required_descr">Для обчислення маршруту потрібні додаткові автономні мапи.</string>
+    <string name="online_maps_required_descr">На жаль, OsmAnd не вдалося знайти (обчислити) маршрут, згідно з вашими налаштуваннями.
+\n
+\nМожливо, деякі мапи не завантажені. Ви можете запустити онлайн-перевірку необхідних мап.</string>
+    <string name="online_maps_searching_descr">Триває пошук онлайнових мап.</string>
+    <string name="reset_to_original">Відновити початкові значення</string>
+    <string name="backup_error_no_subscription">Немає передплати</string>
+    <string name="map_updates_for_mappers">Оновлення мап для творців мап</string>
+    <string name="benefits_for_contributors">Переваги для активних учасників OSM</string>
 </resources>

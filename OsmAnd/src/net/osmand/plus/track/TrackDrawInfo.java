@@ -5,8 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.util.Algorithms;
+import net.osmand.plus.routing.ColoringType;
 
 import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
 import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
@@ -14,7 +13,7 @@ import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 public class TrackDrawInfo {
 
 	private static final String TRACK_WIDTH = "track_width";
-	private static final String TRACK_GRADIENT_SCALE_TYPE = "track_gradient_scale_type";
+	private static final String TRACK_COLORING_TYPE = "track_coloring_type";
 	private static final String TRACK_COLOR = "track_color";
 	private static final String TRACK_SPLIT_TYPE = "track_split_type";
 	private static final String TRACK_SPLIT_INTERVAL = "track_split_interval";
@@ -24,11 +23,9 @@ public class TrackDrawInfo {
 
 	private String filePath;
 	private String width;
-	private GradientScaleType gradientScaleType;
+	private ColoringType coloringType;
+	private String routeInfoAttribute;
 	private int color;
-	private int[] speedGradientPalette;
-	private int[] altitudeGradientPalette;
-	private int[] slopeGradientPalette;
 	private int splitType;
 	private double splitInterval;
 	private boolean joinSegments;
@@ -44,14 +41,12 @@ public class TrackDrawInfo {
 		readBundle(bundle);
 	}
 
-	public TrackDrawInfo(@NonNull OsmandApplication app, @NonNull GpxDataItem gpxDataItem, boolean currentRecording) {
+	public TrackDrawInfo(@NonNull GpxDataItem gpxDataItem, boolean currentRecording) {
 		filePath = gpxDataItem.getFile().getPath();
 		width = gpxDataItem.getWidth();
 		color = gpxDataItem.getColor();
-		gradientScaleType = gpxDataItem.getGradientScaleType();
-		speedGradientPalette = gpxDataItem.getGradientSpeedPalette();
-		altitudeGradientPalette = gpxDataItem.getGradientAltitudePalette();
-		slopeGradientPalette = gpxDataItem.getGradientSlopePalette();
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxDataItem.getColoringType());
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxDataItem.getColoringType());
 		splitType = gpxDataItem.getSplitType();
 		splitInterval = gpxDataItem.getSplitInterval();
 		joinSegments = gpxDataItem.isJoinSegments();
@@ -72,12 +67,21 @@ public class TrackDrawInfo {
 		this.width = width;
 	}
 
-	public GradientScaleType getGradientScaleType() {
-		return gradientScaleType;
+	@NonNull
+	public ColoringType getColoringType() {
+		return coloringType == null ? ColoringType.TRACK_SOLID : coloringType;
 	}
 
-	public void setGradientScaleType(GradientScaleType gradientScaleType) {
-		this.gradientScaleType = gradientScaleType;
+	public String getRouteInfoAttribute() {
+		return routeInfoAttribute;
+	}
+
+	public void setColoringType(ColoringType coloringType) {
+		this.coloringType = coloringType;
+	}
+
+	public void setRouteInfoAttribute(String routeInfoAttribute) {
+		this.routeInfoAttribute = routeInfoAttribute;
 	}
 
 	public int getColor() {
@@ -86,40 +90,6 @@ public class TrackDrawInfo {
 
 	public void setColor(int color) {
 		this.color = color;
-	}
-
-	public int[] getGradientPalette(@NonNull GradientScaleType scaleType) {
-		if (scaleType == GradientScaleType.SPEED) {
-			return speedGradientPalette;
-		} else if (scaleType == GradientScaleType.ALTITUDE) {
-			return altitudeGradientPalette;
-		} else {
-			return slopeGradientPalette;
-		}
-	}
-
-	public int[] getSpeedGradientPalette() {
-		return speedGradientPalette;
-	}
-
-	public int[] getAltitudeGradientPalette() {
-		return altitudeGradientPalette;
-	}
-
-	public int[] getSlopeGradientPalette() {
-		return slopeGradientPalette;
-	}
-
-	public void setSpeedGradientPalette(int[] palette) {
-		this.speedGradientPalette = palette;
-	}
-
-	public void setAltitudeGradientPalette(int[] palette) {
-		this.altitudeGradientPalette = palette;
-	}
-
-	public void setSlopeGradientPalette(int[] palette) {
-		this.slopeGradientPalette = palette;
 	}
 
 	public int getSplitType() {
@@ -162,13 +132,23 @@ public class TrackDrawInfo {
 		return currentRecording;
 	}
 
+	public void resetParams() {
+		width = null;
+		color = 0;
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
+		splitType = GpxSplitType.NO_SPLIT.getType();
+		splitInterval = 0;
+		joinSegments = false;
+		showArrows = false;
+		showStartFinish = true;
+	}
+
 	private void readBundle(@NonNull Bundle bundle) {
 		filePath = bundle.getString(TRACK_FILE_NAME);
 		width = bundle.getString(TRACK_WIDTH);
-		String gradientScaleTypeName = bundle.getString(TRACK_GRADIENT_SCALE_TYPE);
-		if (!Algorithms.isEmpty(gradientScaleTypeName)) {
-			gradientScaleType = GradientScaleType.getGradientTypeByName(gradientScaleTypeName);
-		}
+		coloringType = ColoringType.getNonNullTrackColoringTypeByName(bundle.getString(TRACK_COLORING_TYPE));
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(TRACK_COLORING_TYPE));
 		color = bundle.getInt(TRACK_COLOR);
 		splitType = bundle.getInt(TRACK_SPLIT_TYPE);
 		splitInterval = bundle.getDouble(TRACK_SPLIT_INTERVAL);
@@ -181,7 +161,7 @@ public class TrackDrawInfo {
 	protected void saveToBundle(@NonNull Bundle bundle) {
 		bundle.putString(TRACK_FILE_NAME, filePath);
 		bundle.putString(TRACK_WIDTH, width);
-		bundle.putString(TRACK_GRADIENT_SCALE_TYPE, gradientScaleType != null ? gradientScaleType.getTypeName() : "");
+		bundle.putString(TRACK_COLORING_TYPE, coloringType != null ? coloringType.getName(routeInfoAttribute) : "");
 		bundle.putInt(TRACK_COLOR, color);
 		bundle.putInt(TRACK_SPLIT_TYPE, splitType);
 		bundle.putDouble(TRACK_SPLIT_INTERVAL, splitInterval);

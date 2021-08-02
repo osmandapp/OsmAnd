@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="auto_zoom_none">Без аўтаматычнага маштабавання</string>
     <string name="auto_zoom_close">Буйней</string>
@@ -2752,7 +2752,7 @@
     <string name="select_travel_book">Абраць дзённік падарожжаў</string>
     <string name="shared_string_travel_book">Дзённік падарожжаў</string>
     <string name="download_images">Спампаваць выявы</string>
-    <string name="download_wikipedia_description">Спампаваць артыкулы Вікіпедыі для %1$s для аўтаномнага чытання.</string>
+    <string name="download_wikipedia_description">Спампаваць артыкулы Вікіпедыі для %1$s, каб чытаць іх у аўтаномным рэжыме.</string>
     <string name="download_wikipedia_label">Спампаваць даныя Вікіпедыі</string>
     <string name="open_in_browser_wiki">Адкрыць артыкул у сеціве</string>
     <string name="open_in_browser_wiki_description">Праглядзець артыкул у браўзеры.</string>
@@ -3941,7 +3941,7 @@
 \nMapillary - выявы вуліц;
 \nWeb / Wikimedia - фотаздымкі POI паводле даных з OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    <string name="elevation_data">Вы можаце выкарыстоўваць даныя пра вышыні, каб улічыць ўздымы/спускі падчас вашай паездкі</string>
+    
     <string name="app_mode_light_aircraft">Лёгкі самалёт</string>
     <string name="plan_route_join_segments">Аб\'яднаць сегменты</string>
     <string name="plan_route_split_before">Падзяліць да</string>

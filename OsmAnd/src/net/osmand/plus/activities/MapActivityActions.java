@@ -56,6 +56,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.liveupdates.LiveUpdatesFragment;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -108,6 +109,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_I
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIRECTIONS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_LIVE_UPDATES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRIP_RECORDING_ID;
@@ -901,7 +903,7 @@ public class MapActivityActions implements DialogProvider {
 					}).createItem());
 		}
 
-		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_navigation, mapActivity)
 				.setId(DRAWER_DIRECTIONS_ID)
 				.setIcon(R.drawable.ic_action_gdirections_dark)
 				.setListener(new ItemClickListener() {
@@ -950,6 +952,18 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).createItem());
+
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.live_updates, mapActivity)
+				.setId(DRAWER_LIVE_UPDATES_ID)
+				.setIcon(R.drawable.ic_action_map_update)
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+						LiveUpdatesFragment.showInstance(mapActivity.getSupportFragmentManager(), null);
+						return true;
+					}
+				}).createItem()
+		);
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitle(getString(R.string.shared_string_travel_guides) + " (Beta)")
 				.setId(DRAWER_TRAVEL_GUIDES_ID)
@@ -1135,7 +1149,6 @@ public class MapActivityActions implements DialogProvider {
 	public void stopNavigationWithoutConfirm() {
 		getMyApplication().stopNavigation();
 		mapActivity.updateApplicationModeSettings();
-		mapActivity.getDashboard().clearDeletedPoints();
 		List<ApplicationMode> modes = ApplicationMode.values(getMyApplication());
 		for (ApplicationMode mode : modes) {
 			if (settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(mode)) {

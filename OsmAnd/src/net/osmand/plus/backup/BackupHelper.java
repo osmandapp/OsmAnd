@@ -11,11 +11,13 @@ import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
+import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.StreamWriter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupExecutor.BackupExecutorListener;
@@ -24,7 +26,7 @@ import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListListener;
 import net.osmand.plus.backup.BackupListeners.OnDownloadFileListener;
 import net.osmand.plus.backup.BackupListeners.OnGenerateBackupInfoListener;
-import net.osmand.plus.backup.BackupListeners.OnUpdateOrderIdListener;
+import net.osmand.plus.backup.BackupListeners.OnUpdateSubscriptionListener;
 import net.osmand.plus.backup.BackupListeners.OnUploadFileListener;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.commands.DeleteAllFilesCommand;
@@ -43,23 +45,29 @@ import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.StreamSettingsItem;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 
 public class BackupHelper {
 
@@ -68,7 +76,7 @@ public class BackupHelper {
 	private final BackupDbHelper dbHelper;
 
 	public static final Log LOG = PlatformUtil.getLog(BackupHelper.class);
-	public static final boolean DEBUG = true;
+	public static boolean DEBUG = false;
 
 	private final BackupExecutor executor;
 
@@ -93,6 +101,7 @@ public class BackupHelper {
 	public final static int STATUS_EMPTY_RESPONSE_ERROR = 2;
 	public final static int STATUS_SERVER_ERROR = 3;
 	public final static int STATUS_NO_ORDER_ID_ERROR = 4;
+	public final static int STATUS_EXECUTION_ERROR = 5;
 
 	public static final int SERVER_ERROR_CODE_EMAIL_IS_INVALID = 101;
 	public static final int SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION = 102;
@@ -190,7 +199,7 @@ public class BackupHelper {
 	@Nullable
 	public String getOrderId() {
 		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-		InAppSubscription purchasedSubscription = purchaseHelper.getAnyPurchasedSubscription();
+		InAppSubscription purchasedSubscription = purchaseHelper.getAnyPurchasedOsmAndProSubscription();
 		return purchasedSubscription != null ? purchasedSubscription.getOrderId() : null;
 	}
 
@@ -220,11 +229,16 @@ public class BackupHelper {
 		dbHelper.updateFileUploadTime(type, fileName, updateTime);
 	}
 
+	public void updateFileMd5Digest(@NonNull String type, @NonNull String fileName, @NonNull String md5Hex) {
+		dbHelper.updateFileMd5Digest(type, fileName, md5Hex);
+	}
+
 	public void updateBackupUploadTime() {
 		settings.BACKUP_LAST_UPLOADED_TIME.set(System.currentTimeMillis() + 1);
 	}
 
 	public void logout() {
+		settings.BACKUP_PROMOCODE.resetToDefault();
 		settings.BACKUP_DEVICE_ID.resetToDefault();
 		settings.BACKUP_ACCESS_TOKEN.resetToDefault();
 	}
@@ -299,6 +313,28 @@ public class BackupHelper {
 		return fileName;
 	}
 
+	public static boolean isLimitedFilesCollectionItem(@NonNull FileSettingsItem item) {
+		return item.getSubtype() == FileSubtype.VOICE;
+	}
+
+	@NonNull
+	public List<File> collectItemFilesForUpload(@NonNull FileSettingsItem item) {
+		List<File> filesToUpload = new ArrayList<>();
+		BackupInfo info = getBackup().getBackupInfo();
+		if (!BackupHelper.isLimitedFilesCollectionItem(item)
+				&& info != null && !Algorithms.isEmpty(info.filesToUpload)) {
+			for (LocalFile localFile : info.filesToUpload) {
+				File file = localFile.file;
+				if (item.equals(localFile.item) && file != null) {
+					filesToUpload.add(file);
+				}
+			}
+		} else {
+			FileUtils.collectDirFiles(item.getFile(), filesToUpload);
+		}
+		return filesToUpload;
+	}
+
 	public void registerUser(@NonNull String email, @Nullable String promoCode, boolean login) {
 		executor.runCommand(new RegisterUserCommand(this, login, email, promoCode));
 	}
@@ -307,20 +343,38 @@ public class BackupHelper {
 		executor.runCommand(new RegisterDeviceCommand(this, token));
 	}
 
-	public void updateOrderIdAsync(@Nullable OnUpdateOrderIdListener listener, @Nullable String orderId) {
-		executor.execute(() -> updateOrderId(listener, orderId));
+	void checkSubscriptions(@Nullable OnUpdateSubscriptionListener listener) {
+		boolean subscriptionActive = false;
+		InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+		if (purchaseHelper != null) {
+			OperationLog operationLog = new OperationLog("checkSubscriptions", DEBUG);
+			String error = "";
+			try {
+				subscriptionActive = purchaseHelper.checkBackupSubscriptions();
+			} catch (Exception e) {
+				error = e.getMessage();
+			}
+			operationLog.finishOperation(subscriptionActive + " " + error);
+		}
+		if (subscriptionActive) {
+			if (listener != null) {
+				listener.onUpdateSubscription(STATUS_SUCCESS, "Subscriptions have been checked successfully", null);
+			}
+		} else {
+			updateOrderId(listener);
+		}
 	}
 
-	void updateOrderId(@Nullable OnUpdateOrderIdListener listener) {
-		updateOrderId(listener, getOrderId());
-	}
-
-	public void updateOrderId(@Nullable OnUpdateOrderIdListener listener, @Nullable String orderId) {
+	void updateOrderId(@Nullable OnUpdateSubscriptionListener listener) {
 		Map<String, String> params = new HashMap<>();
 		params.put("email", getEmail());
+
+		String orderId = getOrderId();
 		if (Algorithms.isEmpty(orderId)) {
 			if (listener != null) {
-				listener.onUpdateOrderId(STATUS_NO_ORDER_ID_ERROR, "Order id is empty", null);
+				String message = "Order id is empty";
+				String error = "{\"error\":{\"errorCode\":" + STATUS_NO_ORDER_ID_ERROR + ",\"message\":\"" + message + "\"}}";
+				listener.onUpdateSubscription(STATUS_NO_ORDER_ID_ERROR, message, error);
 			}
 			return;
 		} else {
@@ -335,7 +389,7 @@ public class BackupHelper {
 			int status;
 			String message;
 			if (!Algorithms.isEmpty(error)) {
-				message = "Update order id error: " + new ServerError(error);
+				message = "Update order id error: " + new BackupError(error);
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
@@ -356,7 +410,7 @@ public class BackupHelper {
 				status = STATUS_EMPTY_RESPONSE_ERROR;
 			}
 			if (listener != null) {
-				listener.onUpdateOrderId(status, message, error);
+				listener.onUpdateSubscription(status, message, error);
 			}
 			operationLog.finishOperation(status + " " + message);
 		});
@@ -461,19 +515,27 @@ public class BackupHelper {
 		if (listener != null) {
 			listener.onFileUploadDone(type, fileName, uploadTime, error);
 		}
-		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + new ServerError(error) : " OK"));
+		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + new BackupError(error) : " OK"));
 		return error;
-	}
-
-	void deleteFiles(@NonNull List<RemoteFile> remoteFiles,
-					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
-		deleteFiles(remoteFiles, false, listener);
 	}
 
 	void deleteFiles(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
 					 @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
 		checkRegistered();
 		executor.runCommand(new DeleteFilesCommand(this, remoteFiles, byVersion, listener));
+	}
+
+	void deleteFilesSync(@NonNull List<RemoteFile> remoteFiles, boolean byVersion,
+						 @Nullable Executor executor, @Nullable final OnDeleteFilesListener listener) throws UserNotRegisteredException {
+		checkRegistered();
+		try {
+			new DeleteFilesCommand(this, remoteFiles, byVersion, listener)
+					.executeOnExecutor(executor == null ? this.executor : executor).get();
+		} catch (ExecutionException | InterruptedException e) {
+			if (listener != null) {
+				app.runInUIThread(() -> listener.onFilesDeleteError(STATUS_EXECUTION_ERROR, "Execution error while deleting files"));
+			}
+		}
 	}
 
 	void downloadFileList(@Nullable final OnDownloadFileListListener listener) throws UserNotRegisteredException {
@@ -492,7 +554,7 @@ public class BackupHelper {
 					List<RemoteFile> remoteFiles = new ArrayList<>();
 					if (!Algorithms.isEmpty(error)) {
 						status = STATUS_SERVER_ERROR;
-						message = "Download file list error: " + new ServerError(error);
+						message = "Download file list error: " + new BackupError(error);
 					} else if (!Algorithms.isEmpty(resultJson)) {
 						try {
 							JSONObject res = new JSONObject(resultJson);
@@ -507,7 +569,7 @@ public class BackupHelper {
 							message = "Total files: " + totalFiles + " " +
 									"Total zip size: " + AndroidUtils.formatSize(app, Long.parseLong(totalZipSize)) + " " +
 									"Total file versions: " + totalFileVersions;
-						} catch (JSONException | ParseException e) {
+						} catch (JSONException e) {
 							status = STATUS_PARSE_JSON_ERROR;
 							message = "Download file list error: json parsing";
 						}
@@ -602,7 +664,7 @@ public class BackupHelper {
 
 			BackupDbHelper dbHelper;
 			SQLiteConnection db;
-			Map<String, Long> infos;
+			Map<String, UploadedFileInfo> infos;
 
 			@Override
 			protected void onPreExecute() {
@@ -639,6 +701,8 @@ public class BackupHelper {
 									createLocalFile(result, item, fileName, jsFile, jsFile.lastModified());
 									continue;
 								}
+							} else if (fileItem.getSubtype() == FileSubtype.TILES_MAP) {
+								continue;
 							}
 							List<File> dirs = new ArrayList<>();
 							dirs.add(file);
@@ -648,12 +712,18 @@ public class BackupHelper {
 								File[] files = dir.listFiles();
 								if (files != null && files.length > 0) {
 									for (File f : files) {
-										fileName = f.getPath().replace(app.getAppPath(null).getPath() + "/", "");
-										createLocalFile(result, item, fileName, f, f.lastModified());
+										if (!f.isDirectory()) {
+											fileName = f.getPath().replace(app.getAppPath(null).getPath() + "/", "");
+											createLocalFile(result, item, fileName, f, f.lastModified());
+										}
 									}
 								}
 							}
 							operationLog.log("collectDirs " + file.getName() + " END");
+						} else if (fileItem.getSubtype() == FileSubtype.TILES_MAP) {
+							if (file.getName().endsWith(SQLiteTileSource.EXT)) {
+								createLocalFile(result, item, fileName, file, file.lastModified());
+							}
 						} else {
 							createLocalFile(result, item, fileName, file, file.lastModified());
 						}
@@ -672,9 +742,29 @@ public class BackupHelper {
 				localFile.fileName = fileName;
 				localFile.localModifiedTime = lastModifiedTime;
 				if (infos != null) {
-					Long uploadTime = infos.get(item.getType().name() + "___" + fileName);
-					if (uploadTime != null) {
-						localFile.uploadTime = uploadTime;
+					UploadedFileInfo fileInfo = infos.get(item.getType().name() + "___" + fileName);
+					if (fileInfo != null) {
+						localFile.uploadTime = fileInfo.getUploadTime();
+						String lastMd5 = fileInfo.getMd5Digest();
+						boolean needM5Digest = item instanceof StreamSettingsItem
+								&& ((StreamSettingsItem) item).needMd5Digest()
+								&& localFile.uploadTime < lastModifiedTime
+								&& !Algorithms.isEmpty(lastMd5);
+						if (needM5Digest && file != null && file.exists()) {
+							FileInputStream is = null;
+							try {
+								is = new FileInputStream(file);
+								String md5 = new String(Hex.encodeHex(DigestUtils.md5(is)));
+								if (md5.equals(lastMd5)) {
+									item.setLocalModifiedTime(localFile.uploadTime);
+									localFile.localModifiedTime = localFile.uploadTime;
+								}
+							} catch (IOException e) {
+								LOG.error(e.getMessage(), e);
+							} finally {
+								Algorithms.closeStream(is);
+							}
+						}
 					}
 				}
 				result.add(localFile);
@@ -727,6 +817,23 @@ public class BackupHelper {
 			@Override
 			protected BackupInfo doInBackground(Void... voids) {
 				BackupInfo info = new BackupInfo();
+				/*
+				operationLog.log("=== localFiles ===");
+				for (LocalFile localFile : localFiles.values()) {
+					operationLog.log(localFile.toString());
+				}
+				operationLog.log("=== localFiles ===");
+				operationLog.log("=== uniqueRemoteFiles ===");
+				for (RemoteFile remoteFile : uniqueRemoteFiles.values()) {
+					operationLog.log(remoteFile.toString());
+				}
+				operationLog.log("=== uniqueRemoteFiles ===");
+				operationLog.log("=== deletedRemoteFiles ===");
+				for (RemoteFile remoteFile : deletedRemoteFiles.values()) {
+					operationLog.log(remoteFile.toString());
+				}
+				operationLog.log("=== deletedRemoteFiles ===");
+				*/
 				List<RemoteFile> remoteFiles = new ArrayList<>(uniqueRemoteFiles.values());
 				remoteFiles.addAll(deletedRemoteFiles.values());
 				for (RemoteFile remoteFile : remoteFiles) {
@@ -779,6 +886,27 @@ public class BackupHelper {
 					}
 				}
 				info.createItemCollections(app);
+
+				operationLog.log("=== filesToUpload ===");
+				for (LocalFile localFile : info.filesToUpload) {
+					operationLog.log(localFile.toString());
+				}
+				operationLog.log("=== filesToUpload ===");
+				operationLog.log("=== filesToDownload ===");
+				for (RemoteFile remoteFile : info.filesToDownload) {
+					operationLog.log(remoteFile.toString());
+				}
+				operationLog.log("=== filesToDownload ===");
+				operationLog.log("=== filesToDelete ===");
+				for (RemoteFile remoteFile : info.filesToDelete) {
+					operationLog.log(remoteFile.toString());
+				}
+				operationLog.log("=== filesToDelete ===");
+				operationLog.log("=== filesToMerge ===");
+				for (Pair<LocalFile, RemoteFile> filePair : info.filesToMerge) {
+					operationLog.log("LOCAL=" + filePair.first.toString() + " REMOTE=" + filePair.second.toString());
+				}
+				operationLog.log("=== filesToMerge ===");
 				return info;
 			}
 

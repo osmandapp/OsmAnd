@@ -26,7 +26,7 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routing.ColoringTypeAvailabilityCache;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RouteColoringType;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
@@ -262,7 +262,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			QuadRect prevPointRect = null;
 			for (int i = 0; i < xAxisPoints.size(); i++) {
 				LatLon axisPoint = xAxisPoints.get(i);
-				if (axisPoint.getLatitude() >= latLonBounds.bottom
+				if (axisPoint != null
+						&& axisPoint.getLatitude() >= latLonBounds.bottom
 						&& axisPoint.getLatitude() <= latLonBounds.top
 						&& axisPoint.getLongitude() >= latLonBounds.left
 						&& axisPoint.getLongitude() <= latLonBounds.right) {
@@ -352,8 +353,8 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			boolean straight = route.getRouteService() == RouteService.STRAIGHT;
 			publicTransportRouteGeometry.clearRoute();
 
-			RouteColoringType actualColoringType = isColoringAvailable(routeColoringType, routeInfoAttribute) ?
-							routeColoringType : RouteColoringType.DEFAULT;
+			ColoringType actualColoringType = isColoringAvailable(routeColoringType, routeInfoAttribute) ?
+							routeColoringType : ColoringType.DEFAULT;
 			routeGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tb),
 					directionArrowsColor, actualColoringType, routeInfoAttribute);
 			routeGeometry.updateRoute(tb, route);
@@ -607,7 +608,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 	}
 
-	private boolean isColoringAvailable(@NonNull RouteColoringType routeColoringType,
+	private boolean isColoringAvailable(@NonNull ColoringType routeColoringType,
 	                                    @Nullable String routeInfoAttribute) {
 		return coloringAvailabilityCache
 				.isColoringAvailable(helper.getRoute(), routeColoringType, routeInfoAttribute);

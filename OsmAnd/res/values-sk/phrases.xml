@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="poi_shop">Obchod</string>
     <string name="poi_emergency">Núdzová situácia/Záchrana</string>
@@ -235,7 +235,7 @@
     <string name="poi_prison">Väzenie</string>
     <string name="poi_embassy">Veľvyslanectvo</string>
     <string name="poi_government">Vládne orgány</string>
-    <string name="poi_office_administrative">Lokálne úrady</string>
+    
     <string name="poi_customs">Colná správa</string>
     <string name="poi_city">Veľkomesto</string>
     <string name="poi_town">Mesto</string>
@@ -493,7 +493,7 @@
     <string name="poi_cafe_and_restaurant">Kaviareň a reštaurácia</string>
     <string name="poi_craft">Remeslo</string>
     <string name="poi_medical_supply">Zdravotnícke potreby</string>
-    <string name="poi_tableware">Stolovacie potreby</string>
+    
     <string name="poi_sewing">Potreby na šitie</string>
     <string name="poi_ambulance_station">Stanovište sanitiek</string>
     <string name="poi_rest_area">Odpočívadlo</string>
@@ -795,7 +795,7 @@
     <string name="poi_pasta">Obchod s cestovinami</string>
     <string name="poi_pastry">Obchod so zákuskami</string>
     <string name="poi_candles">Obchod so sviečkami</string>
-    <string name="poi_fashion">Módny butik</string>
+    
     <string name="poi_garden_furniture">Obchod so záhradným nábytkom</string>
     <string name="poi_leather">Obchod s kožou</string>
     <string name="poi_music">Hudobniny</string>
@@ -812,7 +812,7 @@
     <string name="poi_swimming_pool_shop">Kúpacie potreby</string>
     <string name="poi_breakwater">Vlnolam</string>
     <string name="poi_groyne">Pobrežná hrádza</string>
-    <string name="poi_power_cable_distribution_cabinet">Káblová rozvodná skriňa</string>
+    
     <string name="poi_basin">Nádrž na dažďovú vodu</string>
     <string name="poi_crane">Žeriav</string>
     <string name="poi_cutline">Výsek lesa</string>
@@ -3316,7 +3316,7 @@
     <string name="poi_health_facility_type_first_aid">Typ zdravotníckeho zariadenia: prvá pomoc</string>
     <string name="poi_health_facility_type_nursing_home">Typ zdravotníckeho zariadenia: dom s opatrovateľskou službou</string>
     <string name="poi_health_facility_type_support_group_home">Typ zdravotníckeho zariadenia: skupinový domov s podporou</string>
-    <string name="poi_mdf">Hlavný rozvádzač</string>
+    
     <string name="poi_gambling_pachinko">Automaty Pachinko</string>
     <string name="poi_motorcycle_type_scooter">Skúter</string>
     <string name="poi_motorcycle_type_sportbike">Závodný</string>
@@ -3798,4 +3798,25 @@
     <string name="poi_cliff_diving">Skoky z útesu do vody</string>
     <string name="poi_bobsleigh">Boby</string>
     <string name="poi_bullfighting">Býčie zápasy</string>
+    <string name="poi_pump_type_beam_pump">Typ pumpy: vahadlová</string>
+    <string name="poi_bay_filter">Typ zátoky</string>
+    <string name="poi_pump_status_missing_beam">Stav pumpy: chýba rukoväť</string>
+    <string name="poi_give_box">Miesto na darovanie vecí</string>
+    <string name="poi_mobile_money_agent">Mobilná zmenáreň</string>
+    <string name="poi_nurse">Zdravotná sestra</string>
+    <string name="poi_gladed_yes">Obsahuje stromy: áno</string>
+    <string name="poi_mobile_library">Miesto zastavenia mobilnej knižnice</string>
+    <string name="poi_hoops">Počet košov</string>
+    <string name="poi_power_terminal">Elektrický terminál/koncový bod</string>
+    <string name="poi_contact_xing">Xing</string>
+    <string name="poi_contact_vhf">Kanál VHF rádia</string>
+    <string name="poi_contact_webcam">Webkamera</string>
+    <string name="poi_contact_linkedin">LinkedIn</string>
+    <string name="poi_power_portal">Portálový stožiar</string>
+    <string name="poi_memorial_subject">Predmet pomníku</string>
+    <string name="poi_picnic_table_no">Piknikový stôl: nie</string>
+    <string name="poi_picnic_table_yes">Piknikový stôl: áno</string>
+    <string name="poi_fuel_propane">Propán</string>
+    <string name="poi_outdoor_seating_poi">Vonkajšie sedenie</string>
+    <string name="poi_motorcycle_type_chopper">Chopper motorka</string>
 </resources>

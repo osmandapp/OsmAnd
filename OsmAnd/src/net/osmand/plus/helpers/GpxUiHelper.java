@@ -106,7 +106,6 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSplitType;
-import net.osmand.plus.track.GradientScaleType;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.render.RenderingRuleProperty;
@@ -342,7 +341,7 @@ public class GpxUiHelper {
 											  final File dir, String filename, final int position) {
 		final Application app = activity.getApplication();
 		final File f = new File(dir, filename);
-		loadGPXFileInDifferentThread(activity, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+		loadGPXFileInDifferentThread(activity, new CallbackWithObject<GPXFile[]>() {
 
 			@Override
 			public boolean processResult(GPXFile[] result) {
@@ -2152,15 +2151,16 @@ public class GpxUiHelper {
 		}
 	}
 
-
+	@NonNull
 	public static GPXFile makeGpxFromRoute(RouteCalculationResult route, OsmandApplication app) {
 		return makeGpxFromLocations(route.getRouteLocations(), app);
 	}
 
+	@NonNull
 	public static GPXFile makeGpxFromLocations(List<Location> locations, OsmandApplication app) {
 		double lastHeight = HEIGHT_UNDEFINED;
 		double lastValidHeight = Double.NaN;
-		GPXFile gpx = new GPXUtilities.GPXFile(Version.getFullVersion(app));
+		GPXFile gpx = new GPXFile(Version.getFullVersion(app));
 		if (locations != null) {
 			Track track = new Track();
 			TrkSegment seg = new TrkSegment();
@@ -2379,11 +2379,8 @@ public class GpxUiHelper {
 		if (dataItem.getWidth() != null) {
 			gpxFile.setWidth(dataItem.getWidth());
 		}
-		gpxFile.setGradientScaleColor(GradientScaleType.SPEED.getColorTypeName(), dataItem.getGradientSpeedPalette());
-		gpxFile.setGradientScaleColor(GradientScaleType.SLOPE.getColorTypeName(), dataItem.getGradientSlopePalette());
-		gpxFile.setGradientScaleColor(GradientScaleType.ALTITUDE.getColorTypeName(), dataItem.getGradientAltitudePalette());
-		if (dataItem.getGradientScaleType() != null) {
-			gpxFile.setGradientScaleType(dataItem.getGradientScaleType().name());
+		if (dataItem.getColoringType() != null) {
+			gpxFile.setColoringType(dataItem.getColoringType());
 		}
 	}
 
@@ -2405,6 +2402,132 @@ public class GpxUiHelper {
 	public static String getGpxFileRelativePath(@NonNull OsmandApplication app, @NonNull String fullPath) {
 		String rootGpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath() + '/';
 		return fullPath.replace(rootGpxDir, "");
+	}
+
+	@Nullable
+	public static WptPt getSegmentPointByTime(@NonNull TrkSegment segment, @NonNull GPXFile gpxFile,
+	                                          float time, boolean preciseLocation, boolean joinSegments) {
+		if (!segment.generalSegment || joinSegments) {
+			return getSegmentPointByTime(segment, time, 0, preciseLocation);
+		}
+
+		long passedSegmentsTime = 0;
+		for (Track track : gpxFile.tracks) {
+			if (track.generalTrack) {
+				continue;
+			}
+
+			for (TrkSegment seg : track.segments) {
+				WptPt point = getSegmentPointByTime(seg, time, passedSegmentsTime, preciseLocation);
+				if (point != null) {
+					return point;
+				}
+
+				long segmentStartTime = Algorithms.isEmpty(seg.points) ? 0 : seg.points.get(0).time;
+				long segmentEndTime = Algorithms.isEmpty(seg.points) ?
+						0 : seg.points.get(seg.points.size() - 1).time;
+				passedSegmentsTime += segmentEndTime - segmentStartTime;
+			}
+		}
+
+		return null;
+	}
+
+	@Nullable
+	private static WptPt getSegmentPointByTime(@NonNull TrkSegment segment, float timeToPoint,
+	                                           long passedSegmentsTime, boolean preciseLocation) {
+		WptPt previousPoint = null;
+		long segmentStartTime = segment.points.get(0).time;
+		for (WptPt currentPoint : segment.points) {
+			long totalPassedTime = passedSegmentsTime + currentPoint.time - segmentStartTime;
+			if (totalPassedTime >= timeToPoint) {
+				return preciseLocation && previousPoint != null
+						? getIntermediatePointByTime(totalPassedTime, timeToPoint, previousPoint, currentPoint)
+						: currentPoint;
+			}
+			previousPoint = currentPoint;
+		}
+		return null;
+	}
+
+	@NonNull
+	private static WptPt getIntermediatePointByTime(double passedTime, double timeToPoint,
+	                                                WptPt prevPoint, WptPt currPoint) {
+		double percent = 1 - (passedTime - timeToPoint) / (currPoint.time - prevPoint.time);
+		double dLat = (currPoint.lat - prevPoint.lat) * percent;
+		double dLon = (currPoint.lon - prevPoint.lon) * percent;
+		WptPt intermediatePoint = new WptPt();
+		intermediatePoint.lat = prevPoint.lat + dLat;
+		intermediatePoint.lon = prevPoint.lon + dLon;
+		return intermediatePoint;
+	}
+
+	@Nullable
+	public static WptPt getSegmentPointByDistance(@NonNull TrkSegment segment, @NonNull GPXFile gpxFile,
+	                                              float distanceToPoint, boolean preciseLocation,
+	                                              boolean joinSegments) {
+		double passedDistance = 0;
+
+		if (!segment.generalSegment || joinSegments) {
+			WptPt prevPoint = null;
+			for (int i = 0; i < segment.points.size(); i++) {
+				WptPt currPoint = segment.points.get(i);
+				if (prevPoint != null) {
+					passedDistance += MapUtils.getDistance(prevPoint.lat, prevPoint.lon, currPoint.lat, currPoint.lon);
+				}
+				if (currPoint.distance >= distanceToPoint || Math.abs(passedDistance - distanceToPoint) < 0.1) {
+					return preciseLocation && prevPoint != null && currPoint.distance >= distanceToPoint
+							? getIntermediatePointByDistance(passedDistance, distanceToPoint, currPoint, prevPoint)
+							: currPoint;
+				}
+				prevPoint = currPoint;
+			}
+		}
+
+		double passedSegmentsPointsDistance = 0;
+		WptPt prevPoint = null;
+		for (Track track : gpxFile.tracks) {
+			if (track.generalTrack) {
+				continue;
+			}
+
+			for (TrkSegment seg : track.segments) {
+				for (WptPt currPoint : seg.points) {
+
+					if (prevPoint != null) {
+						passedDistance += MapUtils.getDistance(prevPoint.lat, prevPoint.lon,
+								currPoint.lat, currPoint.lon);
+					}
+
+					if (passedSegmentsPointsDistance + currPoint.distance >= distanceToPoint
+							|| Math.abs(passedDistance - distanceToPoint) < 0.1) {
+						return preciseLocation && prevPoint != null
+								&& currPoint.distance + passedSegmentsPointsDistance >= distanceToPoint
+								? getIntermediatePointByDistance(passedDistance, distanceToPoint, currPoint, prevPoint)
+								: currPoint;
+					}
+
+					prevPoint = currPoint;
+				}
+
+				prevPoint = null;
+				passedSegmentsPointsDistance += seg.points.get(seg.points.size() - 1).distance;
+			}
+		}
+
+		return null;
+	}
+
+	@NonNull
+	private static WptPt getIntermediatePointByDistance(double passedDistance, double distanceToPoint,
+	                                                    WptPt currPoint, WptPt prevPoint) {
+		double percent = 1 - (passedDistance - distanceToPoint) / (currPoint.distance - prevPoint.distance);
+		double dLat = (currPoint.lat - prevPoint.lat) * percent;
+		double dLon = (currPoint.lon - prevPoint.lon) * percent;
+		WptPt intermediatePoint = new WptPt();
+		intermediatePoint.lat = prevPoint.lat + dLat;
+		intermediatePoint.lon = prevPoint.lon + dLon;
+		return intermediatePoint;
 	}
 
 	public static class GPXInfo {

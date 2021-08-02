@@ -13,7 +13,7 @@ import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.backup.ServerError;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.ThreadPoolTaskExecutor;
 import net.osmand.plus.backup.ThreadPoolTaskExecutor.OnThreadPoolTaskExecutorListener;
 import net.osmand.util.Algorithms;
@@ -68,7 +68,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 				parameters.put("updatetime", String.valueOf(remoteFile.getUpdatetimems()));
 			}
 			Request r = new Request(byVersion ? DELETE_FILE_VERSION_URL : DELETE_FILE_URL, parameters, null, false, true);
-			tasks.add(new DeleteRemoteFileTask(getApp(), r, remoteFile));
+			tasks.add(new DeleteRemoteFileTask(getApp(), r, remoteFile, byVersion));
 		}
 		ThreadPoolTaskExecutor<DeleteRemoteFileTask> executor =
 				new ThreadPoolTaskExecutor<>(new OnThreadPoolTaskExecutorListener<DeleteRemoteFileTask>() {
@@ -121,7 +121,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 				if (response != null) {
 					String errorStr = response.getError();
 					if (!Algorithms.isEmpty(errorStr)) {
-						message = new ServerError(errorStr).toString();
+						message = new BackupError(errorStr).toString();
 						success = false;
 					} else {
 						String responseStr = response.getResponse();
@@ -157,13 +157,15 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 		private final OsmandApplication app;
 		private final Request request;
 		private final RemoteFile remoteFile;
+		private final boolean byVersion;
 		private RequestResponse response;
 
 		public DeleteRemoteFileTask(@NonNull OsmandApplication app, @NonNull Request request,
-									@NonNull RemoteFile remoteFile) {
+									@NonNull RemoteFile remoteFile, boolean byVersion) {
 			this.app = app;
 			this.request = request;
 			this.remoteFile = remoteFile;
+			this.byVersion = byVersion;
 		}
 
 		@Override
@@ -171,7 +173,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 			OperationLog operationLog = new OperationLog("deleteFile", BackupHelper.DEBUG);
 			AndroidNetworkUtils.sendRequest(app, request, (result, error) ->
 					response = new RequestResponse(request, result, error));
-			if (response.getError() == null) {
+			if (response.getError() == null && !byVersion) {
 				app.getBackupHelper().getDbHelper().removeUploadedFileInfo(
 						new UploadedFileInfo(remoteFile.getType(), remoteFile.getName()));
 			}

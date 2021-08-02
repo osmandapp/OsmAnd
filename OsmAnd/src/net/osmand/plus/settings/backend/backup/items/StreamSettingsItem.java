@@ -18,6 +18,7 @@ public abstract class StreamSettingsItem extends SettingsItem {
 
 	@Nullable
 	private InputStream inputStream;
+	private String md5Digest = "";
 	protected String name;
 
 	public StreamSettingsItem(@NonNull OsmandApplication app, @NonNull String name) {
@@ -69,6 +70,19 @@ public abstract class StreamSettingsItem extends SettingsItem {
 	@Override
 	public String getDefaultFileExtension() {
 		return "";
+	}
+
+	public boolean needMd5Digest() {
+		return false;
+	}
+
+	@NonNull
+	public String getMd5Digest() {
+		return md5Digest;
+	}
+
+	public void setMd5Digest(@NonNull String md5Digest) {
+		this.md5Digest = md5Digest;
 	}
 
 	@Override

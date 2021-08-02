@@ -116,7 +116,6 @@
     <string name="poi_ship_chandler">船具商</string>
     <string name="poi_sports">運動用品</string>
     <string name="poi_stationery">文具店</string>
-    <string name="poi_tableware">餐具店</string>
     <string name="poi_ticket">售票處</string>
     <string name="poi_tobacco">煙酒專賣店</string>
     <string name="poi_toys">玩具店</string>
@@ -312,7 +311,6 @@
     <string name="poi_pension_fund">退休基金</string>
     <string name="poi_migration">遷移</string>
     <string name="poi_tax_inspection">稅務稽查</string>
-    <string name="poi_office_administrative">行政辦公室</string>
     <string name="poi_customs">海關</string>
     <string name="poi_city">城市</string>
     <string name="poi_town">鄉鎮</string>
@@ -812,7 +810,6 @@
     <string name="poi_pasta">麵食店</string>
     <string name="poi_pastry">糕點店</string>
     <string name="poi_candles">燈具店</string>
-    <string name="poi_fashion">時尚服飾店</string>
     <string name="poi_garden_furniture">園藝器具店</string>
     <string name="poi_free_flying">自由飛行用品店</string>
     <string name="poi_leather">皮革製品店</string>
@@ -830,7 +827,6 @@
     <string name="poi_weapons">武器商店</string>
     <string name="poi_breakwater">防波堤</string>
     <string name="poi_groyne">丁壩</string>
-    <string name="poi_power_cable_distribution_cabinet">電纜配線箱</string>
     <string name="poi_basin">盆地</string>
     <string name="poi_crane">起重機</string>
     <string name="poi_cutline">圖例</string>
@@ -2865,7 +2861,6 @@
     <string name="poi_support_suspended">支撐︰懸掛</string>
     <string name="poi_support_roof">支撐︰屋頂</string>
     <string name="poi_support_tower">支撐︰塔樓</string>
-    <string name="poi_mdf">主要配電架</string>
     <string name="poi_fire_operator">消防員</string>
     <string name="poi_water_tank">水箱</string>
     <string name="poi_toilets_disposal_flush">廁所處理：沖洗</string>
@@ -3976,4 +3971,6 @@
     <string name="poi_contact_webcam">網路攝影機</string>
     <string name="poi_contact_linkedin">LinkedIn</string>
     <string name="poi_outdoor_seating_poi">戶外座位</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_access_general">一般存取</string>
 </resources>
