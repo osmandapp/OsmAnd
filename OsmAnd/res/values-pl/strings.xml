@@ -77,7 +77,7 @@
     <string name="local_indexes_cat_backup">Nieaktywny</string>
     <string name="local_indexes_cat_tts">Komunikaty głosowe (syntezowane)</string>
     <string name="local_indexes_cat_voice">Komunikaty głosowe (nagrane)</string>
-    <string name="local_indexes_cat_tile">Mapy online i buforowane kafelki</string>
+    <string name="local_indexes_cat_tile">Mapy online i z buforowanymi kafelkami</string>
     <string name="local_indexes_cat_map">Mapy zwykłe (wektorowe)</string>
     <string name="local_indexes_cat_poi">Dane użytecznych miejsc</string>
     <string name="ttsvoice">Głos syntezowany</string>
@@ -94,7 +94,7 @@
     <string name="tts_missing_language_data">Czy chcesz odwiedzić sklep, by zainstalować wybrany język?</string>
     <string name="gpx_option_reverse_route">Odwróć kierunek trasy</string>
     <string name="gpx_option_destination_point">Użyj bieżącego celu</string>
-    <string name="switch_to_raster_map_to_see">Pobierz mapę wektorową offline tego położenia w „Ustawieniach” (\"Zarządzaj mapami\") lub przełącz na wtyczkę \"Mapy online\".</string>
+    <string name="switch_to_raster_map_to_see">Pobierz mapę wektorową offline dla tego położenia w Ustawieniach („Zarządzaj plikami map”) lub przełącz się na wtyczkę „Mapy online”.</string>
     <string name="switch_to_vector_map_to_see">Dla bieżącego położenia dostępna jest wektorowa mapa offline.
 \n
 \nAby jej użyć wybierz „Menu” → „Skonfiguruj mapę” → „Źródło mapy…” → „Wektorowe mapy offline”.</string>
@@ -107,12 +107,12 @@
     <string name="overlay_transparency_descr">Dopasuj przezroczystość nakładki.</string>
     <string name="overlay_transparency">Przezroczystość nakładki</string>
     <string name="map_transparency_descr">Zmodyfikuj przezroczystość mapy podstawowej.</string>
-    <string name="map_transparency">Przezroczystość warstwy bazowej</string>
+    <string name="map_transparency">Przezroczystość mapy podstawowej</string>
     <string name="modify_transparency">Wybierz przezroczystość (0 - przezroczysty, 255 - nieprzezroczysty)</string>
-    <string name="layer_underlay">Mapa podstawowa…</string>
+    <string name="layer_underlay">Podkład mapy</string>
     <string name="map_underlay">Mapa podstawowa</string>
     <string name="map_underlay_descr">Wybierz mapę podstawową (underlay)</string>
-    <string name="layer_overlay">Nakładka mapy…</string>
+    <string name="layer_overlay">Nakładka mapy</string>
     <string name="shared_string_none">Brak</string>
     <string name="map_overlay">Nakładka mapy</string>
     <string name="map_overlay_descr">Wybierz nakładkę mapy</string>
@@ -214,7 +214,7 @@
     <string name="general_settings_descr">Skonfiguruj wyświetlanie i wspólne ustawienia dla aplikacji.</string>
     <string name="general_settings">Ogólne</string>
     <string name="index_settings_descr">Pobiera i zarządza plikami map przechowywanymi na urządzeniu.</string>
-    <string name="index_settings">Zarządzaj mapami</string>
+    <string name="index_settings">Zarządzaj plikami map</string>
     <string name="osmand_service">Tryb tła</string>
     <string name="osmand_service_descr">OsmAnd działa w tle z wyłączonym ekranem.</string>
     <string name="fast_route_mode">Najszybsza trasa</string>
@@ -273,7 +273,7 @@
     <string name="layer_route">Trasa</string>
     <string name="shared_string_favorites">Ulubione</string>
     <string name="layer_osm_bugs">Uwagi OSM (online)</string>
-    <string name="layer_poi">Nakładka użytecznego miejsca…</string>
+    <string name="layer_poi">Nakładka użytecznego miejsca</string>
     <string name="layer_map">Zasób mapy…</string>
     <string name="menu_layers">Warstwy mapy</string>
     <string name="context_menu_item_search_poi">Szukaj Użytecznych Miejsc</string>
@@ -431,7 +431,7 @@
     <string name="additional_settings">Dodatkowe ustawienia</string>
     <string name="settings_preset_descr">Ustala domyślny profil widoku mapy i ustawień nawigacji.</string>
     <string name="settings_preset">Domyślny profil</string>
-    <string name="shared_string_settings">Opcje</string>
+    <string name="shared_string_settings">Ustawienia</string>
     <string name="save_current_track_descr">Zapisz bieżącą trasę jako plik GPX.</string>
     <string name="save_current_track">Zapisz bieżącą trasę</string>
     <string name="save_track_interval_descr">Określ interwał nagrywania tras podczas nawigacji</string>
@@ -511,7 +511,7 @@
     <string name="favourites_remove_dialog_msg">Usunąć ulubione miejsce \"%s\"\?</string>
     <string name="favourites_remove_dialog_success">Usunięto ulubione miejsce {0}.</string>
     <string name="osb_comment_dialog_message">Wiadomość</string>
-    <string name="osb_comment_dialog_author">Autor</string>
+    <string name="osb_comment_dialog_author">Nazwa autora</string>
     <string name="osb_comment_dialog_success">Dodano komentarz</string>
     <string name="osb_comment_dialog_error">Nie dodano komentarza.</string>
     <string name="poi_edit_title">Edytowanie użytecznego miejsca</string>
@@ -542,17 +542,17 @@
     <string name="left_side_navigation_descr">Dla krajów, w których jeździ się po lewej stronie ulicy.</string>
     <string name="unknown_from_location">Nie ustalono jeszcze punktu początkowego.</string>
     <string name="confirm_interrupt_download">Anulować pobieranie pliku?</string>
-    <string name="basemap_was_selected_to_download">Mapa bazowa potrzebna do zapewnienia podstawowej funkcjonalności znajduje się w kolejce pobierania.</string>
-    <string name="map_online_plugin_is_not_installed">Aktywuj wtyczkę \"Mapy online\", aby wybrać inne źródła mapy</string>
-    <string name="map_online_data">Mapy online i kafelki</string>
-    <string name="map_online_data_descr">Używa map online (pobiera i przechowuje kafelki na karcie pamięci).</string>
+    <string name="basemap_was_selected_to_download">Mapa podstawowa potrzebna do zapewnienia podstawowych funkcjonalności znajduje się w kolejce pobierania.</string>
+    <string name="map_online_plugin_is_not_installed">Włącz wtyczkę „Mapy online”, aby wybrać różne źródła map</string>
+    <string name="map_online_data">Mapy online i kafelkowe</string>
+    <string name="map_online_data_descr">Korzystaj z map online (pobieraj i przechowuj kafelki na karcie pamięci).</string>
     <string name="shared_string_online_maps">Mapy online</string>
     <string name="online_map_settings_descr">Wybierz źródła kafelków online i offline.</string>
-    <string name="osmand_rastermaps_plugin_description">Umożliwia uzyskanie dostępu do wielu rodzajów map online (tzw. kafelki lub raster), od gotowych kafelków OpenStreetMap (jak Mapnik) do zdjęć satelitarnych i specjalnych warstw map pogodowych, map klimatycznych, map geologicznych, warstw mapy cieniowanej itp.
+    <string name="osmand_rastermaps_plugin_description">Umożliwia dostęp do wielu rodzajów map online (tzw. kafelkowych lub rastrowych), od predefiniowanych kafelków OSM (jak Mapnik) po zdjęcia satelitarne, i warstw specjalnego przeznaczenia, takich jak mapy pogodowe, mapy klimatyczne, mapy geologiczne, warstwy mapy cieniowanej itd.
 \n
-\n Każda z tych map może być wykorzystana jako główna (podstawowa) mapa lub jako nakładka, lub podkład do innej mapy podstawowej (takich jak standardowe mapy offline OsmAnd). Niektóre elementy map wektorowych OsmAnd można łatwo ukryć poprzez menu „Konfiguracja mapy” zgodnie z zapotrzebowaniem, aby mapa podkładowa była lepiej widoczna.
+\nKażda z tych map może być używana jako główna (podstawowa) mapa, która ma być wyświetlana jako nakładka lub podkład do innej mapy podstawowej (jak standardowe mapy offline OsmAnd). Niektóre elementy map wektorowych OsmAnd można ukryć za pomocą menu „Skonfiguruj mapę”, aby podkład był bardziej widoczny.
 \n
-\n Mapy kafelkowe można pobierać bezpośrednio z zasobów sieciowych, jak i przygotować je do użytku w trybie offline (i ręcznie skopiować do katalogu danych OsmAnd) jako bazy danych SQLite, które mogą być przygotowane przez niezależnych dostawców map.</string>
+\nPobieraj mapy kafelkowe bezpośrednio online albo przygotuj je do użytku w trybie offline (ręcznie skopiowane do katalogu danych OsmAnd) jako baza danych SQLite, którą można utworzyć za pomocą różnych narzędzi do przygotowywania map od innych firm.</string>
     <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w tle poprzez okresowe wybudzanie urządzenia GPS (przy wyłączonym ekranie).</string>
     <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Pozwala na np. dostosowanie szybkości mowy syntezowanych komunikatów głosowych, skonfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany przybliżenia lub syntezowanych komunikatów głosowych np. do automatycznego powiadamiania o położeniu.</string>
     <string name="osmand_development_plugin_description">Ustawienia funkcji programowania i debugowania, takie jak symulacja nawigacji, wydajność renderowania lub komunikaty głosowe. Przeznaczony dla programistów, niepotrzebny do normalnego użytkowania aplikacji.</string>
@@ -739,7 +739,7 @@
     <string name="show_traffic_warnings">Ostrzeżenia drogowe</string>
     <string name="avoid_toll_roads">Bez płatnych dróg</string>
     <string name="map_widget_top_text">Ulica</string>
-    <string name="map_widget_config">Wygląd ekranu</string>
+    <string name="map_widget_config">Skonfiguruj ekranu</string>
     <string name="map_widget_back_to_loc">Gdzie jestem?</string>
     <string name="map_widget_lock_screen">Zablokuj ekran</string>
     <string name="map_widget_compass">Kompas</string>
@@ -771,7 +771,7 @@
     <string name="avoid_in_routing_title">Unikaj…</string>
     <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
     <string name="show_warnings_descr">Skonfiguruj ostrzeżenia o ruchu (ograniczenia prędkości, wymuszone zatrzymania, progi zwalniające, tunele), ostrzeżenia o fotoradarach i informacje o pasach.</string>
-    <string name="osmand_short_description_80_chars">Mapy dla całego świata i nawigacja działająca w oparciu o stacjonarne jak i sieciowe mapy OSM</string>
+    <string name="osmand_short_description_80_chars">Mapy dla całego świata i nawigacja dla map OSM offline i online</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatyczna nawigacja do celu) 
 \n 
 \nOsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu do użytku offline. OsmAnd oferuje również nawigację w trybie offline i online zawierającą zapowiedzi głosowe. 
@@ -794,7 +794,7 @@
 \n - Brak dostępu do Użytecznych miejsc z Wikipedii w trybie offline 
 \n 
 \nOsmAnd jest aktywnie rozwijany i dalszy rozwój jest uzależniony od wkładu pieniężnego na finansowanie rozwoju i testowania nowych funkcjonalności. Proszę rozważyć zakup OsmAnd+, lub finansowanie konkretnych nowych funkcji lub dokonania ogólnej darowizny na https://osmand.net.</string>
-    <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
+    <string name="osmand_plus_short_description_80_chars">Mapy dla całego świata i nawigacja dla map OSM offline i online</string>
     <string name="avoid_motorway">Bez autostrad</string>
     <string name="snap_to_road">Przyciąganie do drogi</string>
     <string name="day_night_info">Informacja o dniu/nocy</string>
@@ -1348,7 +1348,7 @@
     <string name="rendering_attr_tramTrainRoutes_name">Linie tramwajowe i kolejowe</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Trasy pociągów</string>
     <string name="rendering_attr_tramRoutes_name">Trasy tramwajowe</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">Udostępniaj trasy taxi</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">Trasy taksówek zbiorowych</string>
     <string name="rendering_attr_trolleybusRoutes_name">Linie trolejbusowe</string>
     <string name="rendering_attr_busRoutes_name">Trasy autobusowe</string>
     <string name="rendering_category_hide">Ukrywanie</string>
@@ -1726,7 +1726,7 @@
     <string name="other_menu_group">Inne</string>
     <string name="plugins_menu_group">Wtyczki</string>
     <string name="first_usage_item">Pierwsze użycie</string>
-    <string name="first_usage_item_description">Jak pobrać mapy, ustawić podstawowe opcje.</string>
+    <string name="first_usage_item_description">Jak pobierać mapy, ustawiać podstawowe ustawienia.</string>
     <string name="navigation_item_description">Konfiguracja nawigacji.</string>
     <string name="planning_trip_item">Planowanie podróży</string>
     <string name="faq_item">Częste pytania</string>
@@ -1980,7 +1980,7 @@
     <string name="share_history_subject">udostępnione przez OsmAnd</string>
     <string name="show_something_on_map">Wyświetl %1$s na mapie</string>
     <string name="dist_away_from_my_location">Szukaj w odległości %1$s</string>
-    <string name="confirmation_to_delete_history_items">Usunąć wybrane elementy z \"Historii\"?</string>
+    <string name="confirmation_to_delete_history_items">Usunąć wybrane elementy z historii\?</string>
     <string name="back_to_search">Powrót do wyszukiwania</string>
     <string name="coords_search">Wyszukiwanie współrzędnych</string>
     <string name="advanced_coords_search">Zaawansowane wyszukiwanie współrzędnych</string>
@@ -2104,7 +2104,7 @@
     <string name="shared_string_action_name">Nazwa czynności</string>
     <string name="favorite_empty_place_name">Miejsce</string>
     <string name="quick_action_add_category">Dodaj kategorię</string>
-    <string name="quick_action_add_configure_map">Konfigurowanie mapy</string>
+    <string name="quick_action_add_configure_map">Skonfiguruj mapę</string>
     <string name="quick_action_poi_show">Wyświetl %1$s</string>
     <string name="quick_action_poi_hide">Ukryj %1$s</string>
     <string name="quick_action_add_navigation">Nawigacja</string>
@@ -2948,7 +2948,7 @@
     <string name="shared_string_allow">Zezwól</string>
     <string name="profile_name_hint">Nazwa profilu</string>
     <string name="nav_type_hint">Rodzaj nawigacji</string>
-    <string name="app_mode_taxi">Taxi</string>
+    <string name="app_mode_taxi">Taksówka</string>
     <string name="app_mode_shuttle_bus">Autobus wahadłowy</string>
     <string name="app_mode_subway">Metro</string>
     <string name="app_mode_horse">Konie</string>
@@ -3133,7 +3133,7 @@
     <string name="apply_to_current_profile">Zastosuj tylko do %1$s</string>
     <string name="apply_to_all_profiles">Zastosuj we wszystkich profilach</string>
     <string name="units_and_formats">Jednostki i formaty</string>
-    <string name="map_look_descr">Konfiguruje wygląd mapy</string>
+    <string name="map_look_descr">Wygląd mapy</string>
     <string name="map_look">Wygląd mapy</string>
     <string name="list_of_installed_plugins">Zainstalowane wtyczki</string>
     <string name="general_settings_profile_descr">Motyw aplikacji, jednostki, region</string>
@@ -3954,7 +3954,7 @@
     <string name="routing_engine_vehicle_type_cycling_mountain">Kolarstwo górskie</string>
     <string name="routing_engine_vehicle_type_cycling_road">Kolarstwo szosowe</string>
     <string name="routing_engine_vehicle_type_cycling_regular">Regularna jazda na rowerze</string>
-    <string name="routing_engine_vehicle_type_hgv">HGV</string>
+    <string name="routing_engine_vehicle_type_hgv">Duży pojazd dostawczy</string>
     <string name="routing_engine_vehicle_type_small_truck">Mała ciężarówka</string>
     <string name="routing_engine_vehicle_type_truck">Ciężarówka</string>
     <string name="routing_engine_vehicle_type_scooter">Skuter</string>
@@ -4281,7 +4281,7 @@
     <string name="offline_maps_required_descr">Do wyznaczenia trasy wymagane są dodatkowe mapy offline.</string>
     <string name="online_maps_required_descr">Niestety, OsmAnd nie mógł znaleźć (obliczyć) trasy odpowiedniej dla Twoich ustawień.
 \n
-\nByć może niektóre mapy nie są załadowane. Możesz uruchomić online, sprawdzając potrzebne mapy.</string>
+\nByć może niektóre mapy nie są załadowane. Możesz uruchomić sprawdzenie online potrzebnych map.</string>
     <string name="online_maps_searching_descr">Trwa wyszukiwanie map online.</string>
     <string name="reset_to_original">Przywróć do ustawień początkowych</string>
     <string name="backup_error_no_subscription">Brak ważnej subskrypcji</string>
@@ -4303,4 +4303,5 @@
     <string name="shared_string_contributions">Wkłady w rozwój</string>
     <string name="contributions_may_calculate_with_delay">Wkłady mogą być obliczane z kilkugodzinnymi opóźnieniami.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Koloruj wg przeznaczenia trasy</string>
+    <string name="pro_features">Funkcje Pro</string>
 </resources>
