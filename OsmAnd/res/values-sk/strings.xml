@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="recording_context_menu_show">Zobraziť</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
@@ -1174,7 +1174,7 @@
     <string name="gpx_selection_track">%1$s \nStopa %2$s</string>
     <string name="save_as_favorites_points">Uložiť ako skupinu Obľúbených</string>
     <string name="select_destination_and_intermediate_points">Určite ciele</string>
-    <string name="layer_amenity_label">Prekrývacie popisy bodov</string>
+    <string name="layer_amenity_label">Popisy bodov (Body záujmu, Obľúbené)</string>
     <string name="show_zoom_buttons_navigation_descr">Zobraziť tlačidlá priblíženia počas navigácie.</string>
     <string name="show_zoom_buttons_navigation">Zobraziť tlačidlá priblíženia</string>
     <string name="sort_by_distance">Zoradiť podľa vzdialenosti</string>
@@ -1210,7 +1210,7 @@
     <string name="rendering_attr_showAccess_name">Zobraziť obmedzenia prístupu a mýto</string>
     <string name="rendering_attr_showSurfaceGrade_name">Zobraziť kvalitu ciest</string>
     <string name="rendering_attr_showSurfaces_name">Zobraziť povrch ciest</string>
-    <string name="rendering_attr_showCycleRoutes_name">Zobraziť cyklotrasy</string>
+    <string name="rendering_attr_showCycleRoutes_name">Cyklotrasy</string>
     <string name="lang_fa">Perzsky</string>
     <string name="keep_navigation_service">Ponechať</string>
     <string name="rendering_attr_subwayMode_name">Linky metra</string>
@@ -1224,7 +1224,7 @@
     <string name="pause_navigation">Pozastaviť navigáciu</string>
     <string name="rendering_attr_alpineHiking_name">Alpinistická stupnica (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Kresliť chodníky podľa stupnice SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Zobraziť turistické značky</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Kresliť chodníky podľa značenia OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Vyfarbiť budovy podľa typu</string>
     <string name="arrival_distance_factor_early">Skoro</string>
@@ -1534,8 +1534,8 @@
     <string name="use_fast_recalculation_desc">Prepočíta iba začiatočný úsek trasy. Môže byť použité pre dlhé výlety.</string>
     <string name="shared_string_logoff">Odhlásiť</string>
     <string name="rendering_value_disabled_name">Vypnuté</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Zafarbenie podľa príslušnosti k sieti</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Zafarbenie podľa turistickej značky OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Príslušnosť k sieti</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">Odstrániť OSM zmenu</string>
     <string name="read_full_article">Prečítať celý článok (online)</string>
     <string name="shared_string_wikipedia">Wikipédia</string>
@@ -1847,7 +1847,7 @@
     <string name="shared_string_read_more">Prečítať viac</string>
     <string name="find_parking">Nájsť parkovanie</string>
     <string name="show_polygons">Zobraziť polygóny</string>
-    <string name="rendering_attr_showMtbRoutes_name">Zobraziť trasy pre horské bicykle</string>
+    <string name="rendering_attr_showMtbRoutes_name">Trasy pre horské bicykle</string>
     <string name="select_map_marker">Zvoľte mapovú značku</string>
     <string name="map_markers_other">Iné značky</string>
     <string name="download_files_error_not_enough_space">Nedostatok miesta!
@@ -4076,7 +4076,6 @@
     <string name="announce_when_exceeded">Hlásiť keď je prekročené</string>
     <string name="user_points">Body používateľa</string>
     <string name="output">Výstup</string>
-    
     <string name="shared_string_feet">stopy</string>
     <string name="srtm_unit_format">Variant jednotiek vrstevníc</string>
     <string name="srtm_download_list_help_message">OsmAnd poskytuje údaje vrstevníc v metroch a stopách. Budete musieť znovu stiahnuť súbor pre zmenu formátu.</string>
@@ -4265,4 +4264,10 @@
     <string name="on_hold_since">Pozastavené od %1$s</string>
     <string name="active_till">Aktívne do %1$s</string>
     <string name="track_has_no_needed_data">Stopa neobsahuje potrebné údaje.</string>
+    <string name="not_enough_contributions_descr">Musíte vykonať aspoň %1$s príspevkov do máp OpenStreetMap za posledných %2$s dní.</string>
+    <string name="shared_string_contributions">Príspevky</string>
+    <string name="contributions_may_calculate_with_delay">Príspevky môžu byť počítané s oneskorením niekoľkých hodín.</string>
+    <string name="map_updates_are_unavailable_yet">Aktualizácie máp ešte nie sú dostupné :-(</string>
+    <string name="connect_track_points_as">Spojiť body trasy</string>
+    <string name="pro_features">Pokročilé funkcie</string>
 </resources>

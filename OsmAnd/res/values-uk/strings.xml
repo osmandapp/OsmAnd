@@ -4302,4 +4302,5 @@
     <string name="backup_error_no_subscription">Немає передплати</string>
     <string name="map_updates_for_mappers">Оновлення мап для творців мап</string>
     <string name="benefits_for_contributors">Переваги для активних учасників OSM</string>
+    <string name="pro_features">Можливості Pro</string>
 </resources>

@@ -296,7 +296,7 @@
     <string name="transport_searching_route">Transports possibles ({0} pour rejoindre l\'arrivée) :</string>
     <string name="transport_search_again">Réinitialiser la recherche de transport</string>
     <string name="voice">Voix enregistrée</string>
-    <string name="no_vector_map_loaded">Aucune carte vectorielle n\'a été chargée</string>
+    <string name="no_vector_map_loaded">Les cartes vectorielles sont absentes</string>
     <string name="gpx_files_not_found">Aucun fichier GPX n\'a été trouvé dans le dossier de traces</string>
     <string name="error_reading_gpx">Impossible de lire les données GPX.</string>
     <string name="vector_data">Cartes vectorielles OSM</string>
@@ -565,7 +565,7 @@
     <string name="poi_action_succeded_template">Action {0} terminée.</string>
     <string name="poi_error_unexpected_template">Impossible de réaliser l\'action {0}.</string>
     <string name="poi_error_io_error_template">Erreur d\'entrée/sortie lors de l\'action {0}.</string>
-    <string name="poi_error_info_not_loaded">Les informations sur l\'objet n\'ont pas étés chargés</string>
+    <string name="poi_error_info_not_loaded">Les informations sur le nœud n\'ont pas étés chargées</string>
     <string name="poi_dialog_opening_hours">Ouvert</string>
     <string name="poi_dialog_comment">Commentaire</string>
     <string name="poi_dialog_comment_default">Modification point d\'intérêt</string>
@@ -1219,7 +1219,7 @@
     <string name="loading_smth">Chargement de %1$s…</string>
     <string name="save_as_favorites_points">Enregistrer comme groupe de favoris</string>
     <string name="select_destination_and_intermediate_points">Définissez les étapes</string>
-    <string name="layer_amenity_label">Libellés de la sur-couche des points d\'intérêt</string>
+    <string name="layer_amenity_label">Libellés des points (Favoris, Points d\'Intérêt)</string>
     <string name="route_descr_destination">Arrivée</string>
     <string name="show_zoom_buttons_navigation_descr">Afficher les boutons de zoom pendant la navigation.</string>
     <string name="show_zoom_buttons_navigation">Afficher les boutons de zoom</string>
@@ -1530,7 +1530,7 @@
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Couleur selon l\'affiliation de l\'itinéraire</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Affiliation de l\'itinéraire</string>
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>
     <string name="shared_string_show_details">Afficher les détails</string>
     <string name="read_full_article">Lire l\'article complet (en ligne)</string>
@@ -3274,7 +3274,7 @@
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les nœuds du réseau cyclable</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_name">Nœuds de transport</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Nœud de réseaux</string>
     <string name="personal_category_name">Personnel</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
@@ -4243,7 +4243,7 @@
     <string name="connect_track_points_as">Relier les points de passage</string>
     <string name="direct_line_maps_required_descr">Le calcul d\'itinéraire prend plus de temps que d\'habitude.
 \n
-\nPeut-être que certaines cartes ne sont pas chargées.</string>
+\nPeut-être que certaines cartes sont absentes.</string>
     <string name="pro_widgets">Widgets Pro</string>
     <string name="routes_color_by_type">Itinéraires colorés par</string>
     <string name="shared_string_relation">Relation</string>
@@ -4259,4 +4259,21 @@
     <string name="available_until">Disponible jusqu\'au %1$s</string>
     <string name="shared_string_contributions">Contributions</string>
     <string name="map_updates_are_unavailable_yet">Les mises à jour de la carte sont indisponibles pour l\'instant</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Attribuer une couleur aux itinéraires en fonction de leur couleur locale (si elle est connue de OpenStreetMap) et du marquage des chemins de randonnée.</string>
+    <string name="online_maps_required_descr">Malheureusement, OsmAnd n\'a pas trouvé d\'itinéraire adapté à vos paramètres.
+\n
+\nPeut-être que certaines cartes sont absentes. Vous pouvez vérifier en ligne, les cartes nécessaires.</string>
+    <string name="option_available_only_in_osmand_pro">L\'option est disponible avec un abonnement à OsmAnd Pro.</string>
+    <string name="purchases_feature_desc_pro_widgets">Accédez aux fonctionnalités d\'OsmAnd Pro comme les itinéraires colorés et bien plus encore.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Explorez les offres OsmAnd pour trouver celle qui vous convient.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Attribuez une couleur aux itinéraires en fonction du type de réseau (international, régional, local) auquel ils appartiennent.</string>
+    <string name="walking_route_osmc_description">Attribuez une couleur aux itinéraires en fonction de la couleur définie localement (si elle est connue de OpenStreetMap) et du type d\'itinéraire (international, régional, local).</string>
+    <string name="backup_error_no_subscription">Aucun abonnement en cours</string>
+    <string name="map_updates_for_mappers">Mises à jour des cartes pour les contributeurs OSM</string>
+    <string name="benefits_for_contributors_primary_descr">Vous pouvez bénéficier de mises à jour illimitées des cartes à condition d\'être un contributeur OpenStreetMap.org actif.</string>
+    <string name="benefits_for_contributors_secondary_descr">Connectez-vous à OpenStreetMap et vérifiez si vous êtes éligible aux mises à jour illimitées.</string>
+    <string name="enough_contributions_descr">Félicitations, vous avez suffisamment contribué à OpenStreetMap pour profiter de mises à jour illimitées des cartes.</string>
+    <string name="not_enough_contributions_descr">Vous devez avoir effectué au moins %1$s contributions à OpenStreetMap au cours des %2$s derniers jours.</string>
+    <string name="contributions_may_calculate_with_delay">Les contributions peuvent être calculées avec plusieurs heures de retard.</string>
+    <string name="pro_features">Fonctionnalités Pro</string>
 </resources>

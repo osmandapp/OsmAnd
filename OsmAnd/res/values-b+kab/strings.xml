@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rendering_value_car_name">Takeṛṛust</string>
     <string name="rendering_value_bicycle_name">Azlalam</string>
@@ -1333,4 +1333,8 @@
     <string name="shared_string_is_saved">Ittwasekles</string>
     <string name="profile_type_osmand_string">Amaɣnu OsmAnd</string>
     <string name="profile_type_user_string">Amaɣnu n useqdac</string>
+    <string name="shared_string_logout">Tuffɣa</string>
+    <string name="duration_ago">%1$s aya</string>
+    <string name="logcat_buffer">Logcat buffer</string>
+    <string name="logcat_buffer_descr">Senqed daɣen bḍu iɣmisen lqayen n usnas</string>
 </resources>
