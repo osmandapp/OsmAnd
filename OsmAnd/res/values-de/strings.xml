@@ -56,7 +56,7 @@
     <string name="stop_navigation_service">Beenden</string>
     <string name="rendering_attr_alpineHiking_name">Alpine Tourenskala (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Wege entsprechend der SAC-Wanderskala darstellen.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Wandersymboleinblendung</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Wanderrouten</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Wandersymbole anzeigen (OSMC).</string>
     <string name="arrival_distance_factor_early">Früh</string>
     <string name="arrival_distance_factor_normally">Normal</string>
@@ -588,7 +588,7 @@
     <string name="shared_string_favorites">Favoriten</string>
     <string name="layer_osm_bugs">OSM-Hinweise (online)</string>
     <string name="layer_poi">POI-Overlay …</string>
-    <string name="layer_amenity_label">POI-Overlay-Bezeichnungen</string>
+    <string name="layer_amenity_label">Punktbeschriftungen (POI, Favoriten)</string>
     <string name="layer_map">Kartenquelle …</string>
     <string name="menu_layers">Kartenebenen</string>
     <string name="context_menu_item_search_poi">Suche nach POI</string>
@@ -1228,7 +1228,7 @@
     <string name="rendering_attr_showAccess_name">Zufahrtsbeschränkungen und Maut anzeigen</string>
     <string name="rendering_attr_showSurfaceGrade_name">Straßenqualität anzeigen</string>
     <string name="rendering_attr_showSurfaces_name">Straßenoberfläche anzeigen</string>
-    <string name="rendering_attr_showCycleRoutes_name">Fahrrad-Routen anzeigen</string>
+    <string name="rendering_attr_showCycleRoutes_name">Fahrrad Routen</string>
     <string name="map_preferred_locale_descr">Bevorzugte Sprache für Beschriftungen auf der Karte (ist diese nicht verfügbar, wird auf Englisch oder lokale Namen gewechselt).</string>
     <string name="map_preferred_locale">Bevorzugte Sprache für Kartenbeschriftung</string>
     <string name="local_map_names">Lokale Namen</string>
@@ -1624,8 +1624,8 @@
     <string name="lang_ceb">Cebuano</string>
     <string name="local_recordings_delete_all_confirm">%1$d Notizen löschen\?</string>
     <string name="lang_te">Telugu</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Einfärbung gemäß Routennetzwerk</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Einfärbung gemäß OSMC-Wandersymbol</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Routennetzwerk Zugehörigkeit</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="do_you_like_osmand">Gefällt Ihnen OsmAnd?</string>
     <string name="rate_this_app">Bewerten Sie diese App</string>
     <string name="rate_this_app_long">Bitte bewerten Sie OsmAnd auf Google Play</string>
@@ -1859,7 +1859,7 @@
     <string name="shared_string_email_address">E-Mail-Adresse</string>
     <string name="find_parking">Parkplatz finden</string>
     <string name="show_polygons">Flächen anzeigen</string>
-    <string name="rendering_attr_showMtbRoutes_name">Mountainbike-Routen anzeigen</string>
+    <string name="rendering_attr_showMtbRoutes_name">Mountainbike Routen</string>
     <string name="shared_string_reverse_order">Reihenfolge umkehren</string>
     <string name="map_marker_1st">Erste Kartenmarkierung</string>
     <string name="map_marker_2nd">Zweite Kartenmarkierung</string>
@@ -4273,4 +4273,39 @@
     <string name="active_till">Aktiv bis %1$s</string>
     <string name="promo_subscription">Promo Abonnement</string>
     <string name="track_has_no_needed_data">Der Track enthält keine benötigten Daten.</string>
+    <string name="option_available_only_in_osmand_pro">Diese Option ist im Rahmen des OsmAnd Pro Abonnements verfügbar.</string>
+    <string name="purchases_feature_desc_pro_widgets">Erhalten Sie Zugang zu den Funktionen von OsmAnd Pro. Routeneinfärbung und mehr.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">OsmAnd Angebote entdecken, um das Passende für Sie zu finden.</string>
+    <string name="routes_color_by_type">Routenfarbe nach</string>
+    <string name="shared_string_relation">Relation</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Zuweisung von Farben für Routen auf der Grundlage ihrer lokal zugewiesenen Farbe (falls in OpenStreetMap vorhanden) und der Wandermarkierungen</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Einfärbung gemäß Routennetzwerk</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Zuweisung von Farben für Routen basierend auf dem Typ des Knotennetzes (international, regional, lokal), zu dem sie gehören</string>
+    <string name="walking_route_osmc_description">Zuweisung von Farben für Routen auf der Grundlage ihrer lokal zugewiesenen Farbe (falls in OpenStreetMap vorhanden) und ihres Typs (international, regional, lokal)</string>
+    <string name="travel_routes">Reiserouten</string>
+    <string name="setting_supported_by_style">Diese Einstellung wird vom Kartenstil \'%1$s\' unterstützt</string>
+    <string name="direct_line_maps_required_descr">Die Routenberechnung dauert länger als üblich.
+\n
+\nVielleicht wurden einige Karten nicht geladen.</string>
+    <string name="online_direct_line_maps_link">Erforderliche Karten überprüfen</string>
+    <string name="offline_maps_required_descr">Für die Berechnung der Route werden zusätzliche Offline Karten benötigt.</string>
+    <string name="online_maps_required_descr">Leider konnte OsmAnd keine Route finden (berechnen), die zu Ihren Einstellungen passt.
+\n
+\nVielleicht sind einige Karten nicht geladen. Sie können eine Online Überprüfung der erforderlichen Karten durchführen.</string>
+    <string name="online_maps_searching_descr">Online Kartensuche läuft.</string>
+    <string name="reset_to_original">Auf Original zurücksetzen</string>
+    <string name="backup_error_no_subscription">Kein Abonnement vorhanden</string>
+    <string name="map_updates_for_mappers">Kartenaktualisierungen für Mapper</string>
+    <string name="benefits_for_contributors">Vorteile für aktive OSM-Beitragende</string>
+    <string name="benefits_for_contributors_primary_descr">Sie können von stündlichen, unbegrenzten Kartenaktualisierungen profitieren, wenn Sie aktiv zu OpenStreetMap.org beitragen.</string>
+    <string name="benefits_for_contributors_secondary_descr">Bei OpenStreetMap anmelden und prüfen, ob Sie berechtigt sind, unbegrenzte monatliche und stündliche Kartenaktualisierungen zu erhalten.</string>
+    <string name="use_login_and_password">Benutzername und Passwort verwenden</string>
+    <string name="available_until">Verfügbar bis %1$s</string>
+    <string name="enough_contributions_descr">Herzlichen Glückwunsch, Sie haben genügend Beiträge zu OpenStreetMap geleistet und können unbegrenzte Kartenaktualisierungen genießen.</string>
+    <string name="not_enough_contributions_descr">Es müssen mindestens %1$s Kartenbeiträge zu OpenStreetMap innerhalb der letzten %2$s Tage verfasst werden.</string>
+    <string name="shared_string_contributions">Beiträge</string>
+    <string name="contributions_may_calculate_with_delay">Beiträge können mit mehrstündiger Verzögerung berechnet werden.</string>
+    <string name="map_updates_are_unavailable_yet">Kartenupdates sind noch nicht verfügbar :-(</string>
+    <string name="connect_track_points_as">Routenpunkte verbinden</string>
+    <string name="pro_features">Pro Funktionen</string>
 </resources>
