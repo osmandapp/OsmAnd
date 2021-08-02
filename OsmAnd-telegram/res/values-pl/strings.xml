@@ -98,7 +98,7 @@
     <string name="shared_string_continue">Kontynuuj</string>
     <string name="shared_string_cancel">Anuluj</string>
     <string name="gps_network_not_enabled">Włączyć lokalizację\?</string>
-    <string name="shared_string_settings">Opcje</string>
+    <string name="shared_string_settings">Ustawienia</string>
     <string name="no_location_permission">Aplikacja nie ma uprawnień dostępu do danych o położeniu.</string>
     <string name="gps_not_available">Włącz \"Lokalizacja\" w ustawieniach systemu</string>
     <string name="location_service_no_gps_available">Wybierz jednego z dostawców lokalizacji, aby udostępnić swoją lokalizację.</string>
