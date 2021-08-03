@@ -1,5 +1,6 @@
 package net.osmand.plus.backup.ui;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -7,6 +8,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.AppBarLayout.Behavior;
+import com.google.android.material.appbar.AppBarLayout.Behavior.DragCallback;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -45,6 +49,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -138,6 +143,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		buttonContinue = view.findViewById(R.id.continue_button);
 		buttonChoosePlan = view.findViewById(R.id.get_button);
 
+		setupAppbar();
 		setupToolbar();
 		setupTextWatchers();
 		updateContent();
@@ -145,8 +151,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		if (AndroidUiHelper.isOrientationPortrait(requireActivity())) {
 			setupKeyboardListener();
 		}
-		setupAppbarOffsetChangedListener();
-
 
 		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.get_plugin);
 		UiUtilities.setupDialogButton(nightMode, buttonContinue, DialogButtonType.PRIMARY, R.string.shared_string_continue);
@@ -186,6 +190,38 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				promoCodeEditText.addTextChangedListener(getPromoTextWatcher(editText));
 			}
 		}
+	}
+
+	private void setupAppbar() {
+		AppBarLayout appbar = mainView.findViewById(R.id.appbar);
+
+		appbar.addOnOffsetChangedListener((appBar, verticalOffset) -> {
+			float absOffset = Math.abs(verticalOffset);
+			float totalScrollRange = appBar.getTotalScrollRange();
+			float alpha = UiUtilities.getProportionalAlpha(totalScrollRange * 0.25f,
+					totalScrollRange * 0.9f, absOffset);
+			float inverseAlpha = 1.0f - UiUtilities.getProportionalAlpha(totalScrollRange * 0.5f,
+					totalScrollRange, absOffset);
+
+			toolbarTitle.setAlpha(inverseAlpha);
+			headerTitle.setAlpha(alpha);
+		});
+
+		forbidAppbarDragging(appbar);
+	}
+
+	private void forbidAppbarDragging(AppBarLayout appbar) {
+		CoordinatorLayout.LayoutParams appBarParams = (CoordinatorLayout.LayoutParams) appbar.getLayoutParams();
+		if (appBarParams.getBehavior() == null) {
+			appBarParams.setBehavior(new AppBarLayout.Behavior());
+		}
+		AppBarLayout.Behavior appBarBehaviour = (Behavior) appBarParams.getBehavior();
+		appBarBehaviour.setDragCallback(new DragCallback() {
+			@Override
+			public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
+				return false;
+			}
+		});
 	}
 
 	private void setupToolbar() {
@@ -492,21 +528,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		});
 	}
 
-	private void setupAppbarOffsetChangedListener() {
-		AppBarLayout appbar = mainView.findViewById(R.id.appbar);
-		appbar.addOnOffsetChangedListener((appBar, verticalOffset) -> {
-			float absOffset = Math.abs(verticalOffset);
-			float totalScrollRange = appBar.getTotalScrollRange();
-			float alpha = UiUtilities.getProportionalAlpha(totalScrollRange * 0.25f,
-					totalScrollRange * 0.9f, absOffset);
-			float inverseAlpha = 1.0f - UiUtilities.getProportionalAlpha(totalScrollRange * 0.5f,
-					totalScrollRange, absOffset);
-
-			toolbarTitle.setAlpha(inverseAlpha);
-			headerTitle.setAlpha(alpha);
-		});
-	}
-
 	public enum LoginDialogType {
 
 		SIGN_IN(R.id.sign_in_container, R.string.user_login, R.string.osmand_cloud_login_descr,
@@ -541,6 +562,38 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 					replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
+		}
+	}
+
+	public static class FixScrollingFooterBehaviour extends AppBarLayout.ScrollingViewBehavior {
+
+		private AppBarLayout appBar;
+
+		public FixScrollingFooterBehaviour() {
+			super();
+		}
+
+		public FixScrollingFooterBehaviour(Context context, AttributeSet attrs) {
+			super(context, attrs);
+		}
+
+		@Override
+		public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
+			if (appBar == null) {
+				appBar = ((AppBarLayout) dependency);
+			}
+
+			boolean viewChanged = super.onDependentViewChanged(parent, child, dependency);
+			int bottomPadding = appBar.getTop() + appBar.getTotalScrollRange()
+					- AndroidUtils.getStatusBarHeight(parent.getContext());
+			boolean paddingChanged = bottomPadding != child.getPaddingBottom();
+			if (paddingChanged) {
+				child.setPadding(child.getPaddingLeft(), child.getPaddingTop(), child.getPaddingRight(),
+						bottomPadding);
+				child.requestLayout();
+			}
+
+			return paddingChanged || viewChanged;
 		}
 	}
 }

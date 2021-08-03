@@ -51,7 +51,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="@dimen/toolbar_height"
 				osmand:layout_collapseMode="pin"
-				osmand:layout_scrollFlags="scroll|enterAlways|exitUntilCollapsed"
 				osmand:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 				<LinearLayout
@@ -91,7 +90,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical"
-		osmand:layout_behavior="@string/appbar_scrolling_view_behavior">
+		osmand:layout_behavior=".backup.ui.AuthorizeFragment$FixScrollingFooterBehaviour">
 
 		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 			android:id="@+id/progress_bar"
