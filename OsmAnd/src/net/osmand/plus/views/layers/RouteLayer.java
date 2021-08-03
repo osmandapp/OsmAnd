@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.graphics.Paint.Cap;
 import android.graphics.Path;
 import android.graphics.PointF;
@@ -19,14 +18,15 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
+import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.ColoringTypeAvailabilityCache;
 import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
@@ -59,10 +59,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	// keep array lists created
 	private final List<Location> actionPoints = new ArrayList<>();
 
-	private Paint paintGridOuterCircle;
-	private Paint paintGridCircle;
-
-	private LayerDrawable selectedPoint;
+	private final ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
 
 	private RenderingLineAttributes attrsPT;
@@ -80,6 +77,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	public RouteLayer(RoutingHelper helper) {
 		this.helper = helper;
 		this.transportHelper = helper.getTransportRoutingHelper();
+		chartPointsHelper = new ChartPointsHelper(helper.getApplication());
 		coloringAvailabilityCache = new ColoringTypeAvailabilityCache(helper.getApplication());
 	}
 
@@ -125,28 +123,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		publicTransportRouteGeometry = new PublicTransportGeometryWay(publicTransportWayContext);
 	}
 
-	protected void initPaints() {
-		super.initPaints();
-
-		paintGridCircle = new Paint();
-		paintGridCircle.setStyle(Paint.Style.FILL_AND_STROKE);
-		paintGridCircle.setAntiAlias(true);
-		paintGridCircle.setColor(attrs.defaultColor);
-		paintGridCircle.setAlpha(255);
-
-		paintGridOuterCircle = new Paint();
-		paintGridOuterCircle.setStyle(Paint.Style.FILL_AND_STROKE);
-		paintGridOuterCircle.setAntiAlias(true);
-		paintGridOuterCircle.setColor(Color.WHITE);
-		paintGridOuterCircle.setAlpha(204);
-	}
-
-	@Override
-	protected void initIcons() {
-		super.initIcons();
-		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), R.drawable.map_location_default);
-	}
-
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
@@ -176,21 +152,16 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			if (trackChartPoints != null) {
 				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-				drawXAxisPoints(canvas, tileBox);
-				LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
-				if (highlightedPoint != null
-						&& highlightedPoint.getLatitude() >= latlonRect.bottom
-						&& highlightedPoint.getLatitude() <= latlonRect.top
-						&& highlightedPoint.getLongitude() >= latlonRect.left
-						&& highlightedPoint.getLongitude() <= latlonRect.right) {
-					float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
-					float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
-					selectedPoint.setBounds((int) x - selectedPoint.getIntrinsicWidth() / 2,
-							(int) y - selectedPoint.getIntrinsicHeight() / 2,
-							(int) x + selectedPoint.getIntrinsicWidth() / 2,
-							(int) y + selectedPoint.getIntrinsicHeight() / 2);
-					selectedPoint.draw(canvas);
+				List<LatLon> xAxisPoints = trackChartPoints.getXAxisPoints();
+				if (!Algorithms.isEmpty(xAxisPoints)) {
+					chartPointsHelper.drawXAxisPoints(xAxisPoints, attrs.defaultColor, canvas, tileBox);
 				}
+
+				LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
+				if (highlightedPoint != null) {
+					chartPointsHelper.drawHighlightedPoint(highlightedPoint, canvas, tileBox);
+				}
+
 				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}
 		}
@@ -248,35 +219,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		if (attrsIsPaint_1 != null) {
 			attrs.isPaint_1 = attrsIsPaint_1 && (routeColoringType.isDefault()
 					|| !isColoringAvailable(routeColoringType, routeInfoAttribute));
-		}
-	}
-
-	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
-		QuadRect latLonBounds = tileBox.getLatLonBounds();
-		List<LatLon> xAxisPoints = trackChartPoints.getXAxisPoints();
-		if (xAxisPoints != null) {
-			float r = 3 * tileBox.getDensity();
-			float density = (float) Math.ceil(tileBox.getDensity());
-			float outerRadius = r + 2 * density;
-			float innerRadius = r + density;
-			QuadRect prevPointRect = null;
-			for (int i = 0; i < xAxisPoints.size(); i++) {
-				LatLon axisPoint = xAxisPoints.get(i);
-				if (axisPoint != null
-						&& axisPoint.getLatitude() >= latLonBounds.bottom
-						&& axisPoint.getLatitude() <= latLonBounds.top
-						&& axisPoint.getLongitude() >= latLonBounds.left
-						&& axisPoint.getLongitude() <= latLonBounds.right) {
-					float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-					float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-					QuadRect pointRect = new QuadRect(x - outerRadius, y - outerRadius, x + outerRadius, y + outerRadius);
-					if (prevPointRect == null || !QuadRect.intersects(prevPointRect, pointRect)) {
-						canvas.drawCircle(x, y, outerRadius, paintGridOuterCircle);
-						canvas.drawCircle(x, y, innerRadius, paintGridCircle);
-						prevPointRect = pointRect;
-					}
-				}
-			}
 		}
 	}
 
