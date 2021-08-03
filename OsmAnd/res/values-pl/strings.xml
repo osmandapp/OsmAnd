@@ -2334,7 +2334,7 @@
     <string name="ascent_descent">Podjazd/zjazd</string>
     <string name="moving_time">Czas w ruchu</string>
     <string name="max_min">Maks./min.</string>
-    <string name="quick_action_resume_pause_navigation">Wstrzymaj/wznów nawigację</string>
+    <string name="quick_action_resume_pause_navigation">Zatrzymaj/wznów nawigację</string>
     <string name="quick_action_resume_pause_navigation_descr">Przycisk do wstrzymania lub wznowienia nawigacji.</string>
     <string name="quick_action_start_stop_navigation">Rozpocznij/zakończ nawigację</string>
     <string name="quick_action_start_stop_navigation_descr">Przycisk rozpoczęcia lub zakończenia nawigacji.</string>
