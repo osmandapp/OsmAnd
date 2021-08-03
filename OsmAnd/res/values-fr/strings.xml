@@ -4263,9 +4263,9 @@
     <string name="online_maps_required_descr">Malheureusement, OsmAnd n\'a pas trouvé d\'itinéraire adapté à vos paramètres.
 \n
 \nPeut-être que certaines cartes sont absentes. Vous pouvez vérifier en ligne, les cartes nécessaires.</string>
-    <string name="option_available_only_in_osmand_pro">L\'option est disponible avec un abonnement à OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">L\'option est disponible avec un abonnement OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Accédez aux fonctionnalités d\'OsmAnd Pro comme les itinéraires colorés et bien plus encore.</string>
-    <string name="explore_osmnad_plans_to_find_suitable">Explorez les offres OsmAnd pour trouver celle qui vous convient.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Explorez les offres OsmAnd et trouvez celle qui vous convient.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Attribuez une couleur aux itinéraires en fonction du type de réseau (international, régional, local) auquel ils appartiennent.</string>
     <string name="walking_route_osmc_description">Attribuez une couleur aux itinéraires en fonction de la couleur définie localement (si elle est connue de OpenStreetMap) et du type d\'itinéraire (international, régional, local).</string>
     <string name="backup_error_no_subscription">Aucun abonnement en cours</string>
