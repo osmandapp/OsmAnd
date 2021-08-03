@@ -3935,7 +3935,7 @@
     <string name="rename_track">Zmień nazwę trasy</string>
     <string name="change_folder">Zmień folder</string>
     <string name="shared_string_sec">sek</string>
-    <string name="announcement_time_passing">Omijanie</string>
+    <string name="announcement_time_passing">Przekazywanie</string>
     <string name="announcement_time_approach">Podejście</string>
     <string name="announcement_time_prepare_long">Długie przygotowanie</string>
     <string name="announcement_time_prepare">Przygotuj</string>
