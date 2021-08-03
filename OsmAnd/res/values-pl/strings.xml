@@ -1236,7 +1236,7 @@
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
     <string name="no_index_file_to_download">Nie znaleziono pobranych danych, proszę sprawdzić połączenie internetowe.</string>
     <string name="keep_navigation_service">Utrzymuj</string>
-    <string name="stop_navigation_service">Wyłącz</string>
+    <string name="stop_navigation_service">Zakończ</string>
     <string name="enable_sleep_mode">Włącz tryb działania GPS w tle</string>
     <string name="gps_wake_up_timer">Częstość wybudzania GPS</string>
     <string name="sleep_mode_stop_dialog">Wyłączyć tryb działania GPS w tle?</string>
@@ -1280,7 +1280,7 @@
     <string name="rendering_value_pedestrian_name">Pieszo</string>
     <string name="rendering_attr_coloredBuildings_name">Różne kolory typów budynków</string>
     <string name="continue_navigation">Kontynuuj nawigację</string>
-    <string name="pause_navigation">Zatrzymaj nawigację</string>
+    <string name="pause_navigation">Wstrzymaj nawigację</string>
     <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności wspinaczki alpinistycznej (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki zgodnie ze skalą SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Szlaki turystyczne</string>
@@ -1307,7 +1307,7 @@
     <string name="record_plugin_description">Aktywuje funkcje nagrywania i zapisywania tras za pomocą widżetu nagrywania tras GPX na mapie lub automatyczne nagrywa przebiegi wszystkich tras do plików GPX.
 \n
 \nNagrane trasy można udostępnić znajomym lub wykorzystać na rzecz rozwoju mapy OpenStreetMap. Sportowcy mogą korzystać tras do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje, takie jak czasy okrążeń, średnia prędkość itp. Trasy mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców oprogramowania.</string>
-    <string name="confirm_every_run">Ponawianie pytania</string>
+    <string name="confirm_every_run">Zawsze pytaj</string>
     <string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
     <string name="traffic_warning_speed_limit">Ograniczenie prędkości</string>
     <string name="traffic_warning_border_control">Kontrola graniczna</string>
@@ -2047,7 +2047,7 @@
     <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki, itp.</string>
     <string name="christmas_desc_q">Wyświetlać świąteczne miejsca?</string>
     <string name="shared_string_continue">Kontynuuj</string>
-    <string name="shared_string_pause">Zatrzymaj</string>
+    <string name="shared_string_pause">Wstrzymaj</string>
     <string name="shared_string_trip">Podróż</string>
     <string name="shared_string_recorded">Zarejestrowany</string>
     <string name="shared_string_record">Rejestruj</string>
@@ -3758,7 +3758,7 @@
     <string name="simplified_track_description">Zapisana zostanie tylko linia trasy, punkty trasy zostaną usunięte.</string>
     <string name="shared_string_file_name">Nazwa pliku</string>
     <string name="number_of_gpx_files_selected_pattern">%s wybrane pliki trasy</string>
-    <string name="save_global_track_interval_descr">Wybierz interwał rejestrowania trasy (włączanego za pomocą widżetu rejestrowania podróży na mapie).</string>
+    <string name="save_global_track_interval_descr">Określ interwał dla nagrywania trasy (włączonego przez widżet „Nagrywanie podróży” na mapie).</string>
     <string name="gpx_monitoring_stop">Wstrzymaj nagrywanie podróży</string>
     <string name="gpx_monitoring_start">Wznów nagrywanie podróży</string>
     <string name="system_default_theme">Domyślny systemowy</string>
@@ -4268,10 +4268,10 @@
     <string name="active_till">Aktywna do %1$s</string>
     <string name="promo_subscription">Subskrypcja promocyjna</string>
     <string name="track_has_no_needed_data">Trasa nie zawiera potrzebnych danych.</string>
-    <string name="option_available_only_in_osmand_pro">Opcja dostępna w ramach subskrypcji OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">Opcja jest dostępna w ramach subskrypcji OsmAnd Pro.</string>
     <string name="pro_widgets">Widżety Pro</string>
     <string name="purchases_feature_desc_pro_widgets">Uzyskaj dostęp do funkcji OsmAnd Pro. Kolorowanie trasy i nie tylko.</string>
-    <string name="explore_osmnad_plans_to_find_suitable">Poznaj plany OsmAnd, aby znaleźć odpowiednie dla Ciebie.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Poznaj plany OsmAnd, aby znaleźć odpowiedni dla Ciebie.</string>
     <string name="travel_routes">Trasy podróży</string>
     <string name="setting_supported_by_style">To ustawienie jest obsługiwane przez styl mapy „%1$s”</string>
     <string name="direct_line_maps_required_descr">Obliczanie trasy trwa dłużej niż zwykle.
