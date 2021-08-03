@@ -100,6 +100,7 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -2287,14 +2288,15 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile, boolean fromRoute) {
+	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile,
+	                                                ChartPointLayer chartPointLayer) {
 		GpxSelectionHelper helper = app.getSelectedGpxHelper();
 		String groupName = helper.getGroupName(gpxFile);
 		GpxDisplayGroup group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
 		if (group != null && group.getModifiableList().size() > 0) {
 			GpxDisplayItem gpxItem = group.getModifiableList().get(0);
 			if (gpxItem != null) {
-				gpxItem.route = fromRoute;
+				gpxItem.chartPointLayer = chartPointLayer;
 			}
 			return gpxItem;
 		}

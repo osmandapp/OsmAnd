@@ -30,6 +30,7 @@ import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
 import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
@@ -292,7 +293,9 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 		OsmandApplication app = getMyApplication();
 		gpxFile = getGpxFile();
 		analysis = gpxFile != null ? gpxFile.getAnalysis(0) : null;
-		gpxItem = gpxFile != null ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile, true) : null;
+		gpxItem = gpxFile != null
+				? GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.MEASUREMENT_TOOL)
+				: null;
 		if (gpxItem != null) {
 			trackDetailsMenu.setGpxItem(gpxItem);
 		}

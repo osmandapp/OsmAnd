@@ -7,9 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
@@ -17,7 +14,9 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -26,10 +25,15 @@ import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWayContext;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final int POINTS_TO_DRAW = 50;
@@ -64,9 +68,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private boolean tapsDisabled;
 	private MeasurementEditingContext editingCtx;
 
+	private ChartPointsHelper chartPointsHelper;
+	private TrackChartPoints trackChartPoints;
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
+		this.chartPointsHelper = new ChartPointsHelper(view.getContext());
 
 		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
 		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
@@ -115,6 +123,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	void setInMeasurementMode(boolean inMeasurementMode) {
 		this.inMeasurementMode = inMeasurementMode;
+	}
+
+	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
+		this.trackChartPoints = trackChartPoints;
 	}
 
 	public void setTapsDisabled(boolean tapsDisabled) {
@@ -228,6 +240,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			}
 
 			drawPoints(canvas, tb);
+			if (trackChartPoints != null) {
+				drawTrackChartPoints(trackChartPoints, canvas, tb);
+			}
 		}
 	}
 
@@ -279,6 +294,18 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		QuadRect latLonBounds = tb.getLatLonBounds();
 		return point.getLatitude() >= latLonBounds.bottom && point.getLatitude() <= latLonBounds.top
 				&& point.getLongitude() >= latLonBounds.left && point.getLongitude() <= latLonBounds.right;
+	}
+
+	private void drawTrackChartPoints(@NonNull TrackChartPoints trackChartPoints, Canvas canvas, RotatedTileBox tileBox) {
+		LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
+		if (highlightedPoint != null) {
+			chartPointsHelper.drawHighlightedPoint(highlightedPoint, canvas, tileBox);
+		}
+
+		List<LatLon> xAxisPoint = trackChartPoints.getXAxisPoints();
+		if (!Algorithms.isEmpty(xAxisPoint)) {
+			chartPointsHelper.drawXAxisPoints(xAxisPoint, lineAttrs.defaultColor, canvas, tileBox);
+		}
 	}
 
 	private void drawPoints(Canvas canvas, RotatedTileBox tb) {

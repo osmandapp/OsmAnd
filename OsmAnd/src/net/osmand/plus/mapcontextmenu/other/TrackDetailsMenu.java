@@ -225,7 +225,7 @@ public class TrackDetailsMenu {
 		if (mapActivity != null && gpxItem != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			GPXFile groupGpx = gpxItem.group.getGpx();
-			if (groupGpx != null && !gpxItem.route) {
+			if (groupGpx != null && gpxItem.chartPointLayer == ChartPointLayer.GPX) {
 				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(groupGpx.path) == null;
 				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
 			}
@@ -268,7 +268,8 @@ public class TrackDetailsMenu {
 		GpxDisplayItem gpxItem = getGpxItem();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (gpxItem != null && !gpxItem.route && gpxItem.wasHidden && gpxItem.group != null && gpxItem.group.getGpx() != null) {
+			if (gpxItem != null && gpxItem.chartPointLayer == ChartPointLayer.GPX && gpxItem.wasHidden
+					&& gpxItem.group != null && gpxItem.group.getGpx() != null) {
 				mapActivity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpxItem.group.getGpx(), false, false);
 			}
 			TrackDetailsBarController toolbarController = this.toolbarController;
@@ -494,10 +495,12 @@ public class TrackDetailsMenu {
 		if (shouldShowXAxisPoints()) {
 			trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
 		}
-		if (gpxItem.route) {
-			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
-		} else {
+		if (gpxItem.chartPointLayer == ChartPointLayer.ROUTE) {
+			mapActivity.getMapLayers().getRouteLayer().setTrackChartPoints(trackChartPoints);
+		} else if (gpxItem.chartPointLayer == ChartPointLayer.GPX) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
+		} else if (gpxItem.chartPointLayer == ChartPointLayer.MEASUREMENT_TOOL) {
+			mapActivity.getMapLayers().getMeasurementToolLayer().setTrackChartPoints(trackChartPoints);
 		}
 		if (location != null) {
 			mapActivity.refreshMap();
@@ -844,6 +847,12 @@ public class TrackDetailsMenu {
 				chart.highlightValue(null);
 			}
 		}
+	}
+
+	public enum ChartPointLayer {
+		GPX,
+		ROUTE,
+		MEASUREMENT_TOOL
 	}
 
 	private static class TrackDetailsBarController extends TopToolbarController {
