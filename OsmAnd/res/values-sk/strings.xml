@@ -4272,7 +4272,7 @@
     <string name="pro_features">Pokročilé (Pro) funkcie</string>
     <string name="purchases_feature_desc_pro_widgets">Získajte prístup k pokročilým (Pro) funkciám OsmAnd. Farbenie trás a ďalšie.</string>
     <string name="option_available_only_in_osmand_pro">Voľba je dostupná v predplatnom OsmAnd Pro.</string>
-    <string name="explore_osmnad_plans_to_find_suitable">Preskúmajte predplatné OsmAnd a nájdite vhodné pre vás.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Preskúmajte predplatné OsmAnd a nájdite to vhodné pre vás.</string>
     <string name="routes_color_by_type">Farby trás podľa</string>
     <string name="shared_string_relation">Relácia</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Priradiť farby trasám podľa ich vlastných farieb (ak sú zadané v OpenStreetMap) a turistického symbolu</string>
