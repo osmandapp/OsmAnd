@@ -37,12 +37,12 @@
     <string name="walking_route_osmc_description">Assign color for routes based on their individually locally assigned color (if present on OpenStreetMap)  and type (international, regional, local)</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Assign color for routes based on node network type (international, regional, local) they belong to</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Color by network affiliation</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">Assign color for routes basedon their individually locally assigned color (if present on OpenStreetMap) and hiking shield symbol</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Assign color for routes based on their individually locally assigned color (if present on OpenStreetMap) and hiking shield symbol</string>
     <string name="shared_string_relation">Relation</string>
     <string name="routes_color_by_type">Routes color by</string>
-    <string name="explore_osmnad_plans_to_find_suitable">Explore OsmAnd Plans to find suitable for you.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Explore OsmAnd Plans to find one suitable for you.</string>
     <string name="purchases_feature_desc_pro_widgets">Get access to OsmAnd Pro features. Route colorization and more.</string>
-    <string name="option_available_only_in_osmand_pro">The option available as part of OsmAnd Pro subscription.</string>
+    <string name="option_available_only_in_osmand_pro">The option is available as part of OsmAnd Pro subscription.</string>
     <string name="track_has_no_needed_data">The track does not contain needed data.</string>
     <string name="promo_subscription">Promo subscription</string>
     <string name="active_till">Active till %1$s</string>
