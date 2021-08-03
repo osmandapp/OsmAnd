@@ -170,7 +170,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 				@Override
 				public void onClick(View v) {
 					restorePurchasesView.findViewById(R.id.progressBar).setVisibility(View.VISIBLE);
-					purchaseHelper.requestInventory();
+					purchaseHelper.requestInventory(true);
 				}
 			});
 			listView.addFooterView(restorePurchasesView);

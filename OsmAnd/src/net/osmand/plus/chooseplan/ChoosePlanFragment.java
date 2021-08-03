@@ -1,5 +1,8 @@
 package net.osmand.plus.chooseplan;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
+import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getDefaultIconColorId;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -40,9 +43,6 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getDefaultIconColorId;
 
 public class ChoosePlanFragment extends BasePurchaseDialogFragment implements CardListener {
 
@@ -133,7 +133,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		backBtn.setOnClickListener(v -> dismiss());
 
 		ImageView restoreBtn = mainView.findViewById(R.id.button_reset);
-		restoreBtn.setOnClickListener(v -> purchaseHelper.requestInventory());
+		restoreBtn.setOnClickListener(v -> purchaseHelper.requestInventory(true));
 
 		FrameLayout iconBg = mainView.findViewById(R.id.header_icon_background);
 		int color = AndroidUtils.getColorFromAttr(mainView.getContext(), R.attr.purchase_sc_header_icon_bg);

@@ -71,6 +71,7 @@ public abstract class InAppPurchaseHelper {
 
 	protected long lastPromoCheckTime;
 	protected boolean promoRequested;
+	protected boolean toastAllowed;
 
 	public interface InAppPurchaseListener {
 
@@ -354,7 +355,8 @@ public abstract class InAppPurchaseHelper {
 		return !promoRequested || System.currentTimeMillis() - lastPromoCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC;
 	}
 
-	public void requestInventory() {
+	public void requestInventory(boolean toastAllowed) {
+		this.toastAllowed = toastAllowed;
 		notifyShowProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
 		new RequestInventoryTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 		new CheckPromoTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
@@ -697,6 +699,9 @@ public abstract class InAppPurchaseHelper {
 				notifyGetItems();
 				stop(true);
 				logDebug("Initial inapp query finished");
+				if (toastAllowed) {
+					showToast(ctx.getString(R.string.purchases_restored));
+				}
 			}
 		};
 
@@ -828,7 +833,7 @@ public abstract class InAppPurchaseHelper {
 		}
 		if (inventoryRequestPending) {
 			inventoryRequestPending = false;
-			requestInventory();
+			requestInventory(toastAllowed);
 		}
 	}
 
