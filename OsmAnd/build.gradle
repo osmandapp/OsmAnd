@@ -189,6 +189,7 @@ dependencies {
 	openglImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 
 	huaweiImplementation 'com.huawei.hms:iap:5.0.2.300'
+	huaweiImplementation 'com.huawei.hms:appservice:5.0.4.303'
 
 	gplayFreeImplementation 'com.google.android.gms:play-services-location:18.0.0'
 	gplayFullImplementation 'com.google.android.gms:play-services-location:18.0.0'
