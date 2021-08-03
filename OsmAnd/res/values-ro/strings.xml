@@ -182,7 +182,7 @@
     <string name="confirm_interrupt_download">Doriți să întrerupeți descărcarea fișierului?</string>
     <string name="first_time_msg">Mulțumim pentru că folosiți OsmAnd. Pentru a beneficia de toate funcționalitățile acestei aplicații aveți nevoie de un set de date regionale pe care le puteți descărca via \'Setări\' -&gt; \'Organizează fișierele cu hărți\'. După aceea veți putea să vizualizați hărți, să găsiți adrese, să localizați puncte de interes (POI), și să găsiți transport public.</string>
     <string name="basemap_was_selected_to_download">Harta de bază (basemap) este necesară pentru corecta funcționare a aplicației și a fost automat selectată pentru descărcare.</string>
-    <string name="select_index_file_to_download">Nu s-a găsit nimic. Dacă nu puteți localiza harta regiunii care vă interesează, o puteți crea dvs. (vedeți https://osmand.net).</string>
+    <string name="select_index_file_to_download">Nu s-a găsit nimic, dar îl puteți face singur (vezi https://osmand.net).</string>
     <string name="local_indexes_cat_tile">Hărți raster și online</string>
     <string name="local_indexes_cat_map">Hărți offline (vectoriale)</string>
     <string name="index_settings_descr">Descărcați și gestionați fișiere de hărți offline stocate pe dispozitiv.</string>
@@ -198,11 +198,11 @@
 \n Descărcați hărțile de tip tile direct online sau le-ați pregătit pentru utilizare offline (copiate manual în dosarul de date al OsmAnd) sub forma unei baze de date SQLite care poate fi produsă de o varietate de instrumente de pregătire a hărților de la terți.</string>
     <string name="osmand_background_plugin_description">Arată setări pentru activarea navigării cu dispozitivul în standby (ecran închis/blocat) prin accesarea periodică a modulului GPS.</string>
     <string name="osmand_accessibility_description">Face ca funcțiile de accesibilitate ale dispozitivului să fie disponibile direct în OsmAnd. Aceasta facilitează, de exemplu, ajustarea ratei de vorbire pentru vocile text-to-speech, configurarea navigației prin D-pad, utilizarea unui trackball pentru controlul zoom-ului sau feedback text-to-speech, de exemplu pentru a vă anunța automat poziția.</string>
-    <string name="osmand_development_plugin_description">Arată setări pentru dezvoltarea și testarea de noi funcționalități precum simularea navigării sau afișarea performanței randării.</string>
+    <string name="osmand_development_plugin_description">Setări pentru caracteristicile de dezvoltare și de depanare, cum ar fi simularea navigației, performanța de redare sau solicitarea vocală. Destinate dezvoltatorilor, nu sunt necesare pentru utilizarea normală a aplicației.</string>
     <string name="plugins_screen">Manager de plugin-uri</string>
     <string name="prefs_plugins_descr">Plugin-urile activează setări în modul expert și furnizează funcționalități suplimentare precum hărți raster, înregistrare trasee, funcționarea în standby, setări de accesibilitate și altele</string>
     <string name="prefs_plugins">Manager de plugin-uri</string>
-    <string name="osm_editing_plugin_description">Arată setările necesare pentru colectarea/modificarea de date openstreetmaps.org (POI, bug-uri, trasee) - necesită specificarea datelor de acces la OSM.</string>
+    <string name="osm_editing_plugin_description">Contribuții OSM, cum ar fi crearea sau modificarea obiectelor POI OSM, deschiderea sau comentarea notelor OSM și contribuția la fișierele GPX înregistrate în OsmAnd, furnizând numele de utilizator și parola. OpenStreetMap.org este un proiect de cartografiere a domeniului public global, condus de comunitate.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Hărțile vectoriale se afișează mai rapid de regulă. Posibil să nu funcționeze bine pe anumite dispozitive.</string>
     <string name="play_commands_of_currently_selected_voice">Selectează o voce și testează redând anunțuri:</string>
     <string name="debugging_and_development">Dezvoltare OsmAnd</string>
@@ -735,7 +735,7 @@
     <string name="save_current_track_descr">Salvează traseul curent ca fișier GPX acum.</string>
     <string name="save_current_track">Salvează traseul curent</string>
     <string name="save_track_interval">Interval de salvare a poziției in timpul navigării</string>
-    <string name="save_track_interval_descr">Alegeți intervalul de logare pentru înregistrarea traseului în timpul navigării.</string>
+    <string name="save_track_interval_descr">Alegeți intervalul de logare pentru înregistrarea traseului în timpul navigării</string>
     <string name="save_track_to_gpx_descrp">Traseele vor fi salvate în directorul traseelor în timpul navigării.</string>
     <string name="save_track_to_gpx">Înregistrează automat traseul în timpul navigării</string>
     <string name="update_tile">Actualizare hartă</string>
@@ -1034,10 +1034,10 @@
     <string name="traffic_warning_border_control">Control graniță</string>
     <string name="traffic_warning_payment">Cabina de taxă</string>
     <string name="traffic_warning_stop">Stop</string>
-    <string name="traffic_warning_calming">Limitator viteză</string>
+    <string name="traffic_warning_calming">Calmarea traficului</string>
     <string name="traffic_warning_speed_camera">Cameră trafic</string>
     <string name="traffic_warning">Avertizare trafic</string>
-    <string name="speak_favorites">Favorite apropiate</string>
+    <string name="speak_favorites">favorite apropiate</string>
     <string name="speak_poi">Puncte de interes apropiate</string>
     <string name="way_alarms">Avertizări trafic</string>
     <string name="sleep_mode_stop_dialog">Opriți modul de fundal GPS\?</string>
@@ -1045,11 +1045,11 @@
     <string name="confirm_every_run">Intreabă intotdeauna</string>
     <string name="save_global_track_interval">Interval general de logare</string>
     <string name="enable_sleep_mode">Activați modul de fundal GPS</string>
-    <string name="save_track_to_gpx_globally_descr">Salvarea pozitiei generale într-un fișier GPX poate fi activată prin intermediul widget-ului de inregistrare GPX de pe fereastra hărții.</string>
+    <string name="save_track_to_gpx_globally_descr">Înregistrarea generală a poziției într-un fișier GPX poate fi activată sau dezactivată cu ajutorul widget-ului de înregistrare GPX de pe hartă.</string>
     <string name="save_track_interval_globally">Interval de salvare</string>
     <string name="rendering_attr_publicTransportMode_name">Autobuz, troleibuz, rute de transfer</string>
     <string name="monitoring_settings">Înregistrare călătorie</string>
-    <string name="monitoring_settings_descr">Configurare mod înregistrare călătorii.</string>
+    <string name="monitoring_settings_descr">Stabiliți cum să vă înregistrați călătoriile.</string>
     <string name="int_hour">h</string>
     <string name="duration">Durată</string>
     <string name="distance">Distanță</string>
@@ -1060,7 +1060,7 @@
     <string name="rendering_value_browse_map_name">Derulează hartă</string>
     <string name="rendering_value_car_name">Mașină</string>
     <string name="rendering_value_bicycle_name">Bicicletă</string>
-    <string name="rendering_value_pedestrian_name">Pieton</string>
+    <string name="rendering_value_pedestrian_name">Pe jos</string>
     <string name="rendering_attr_coloredBuildings_name">Colorare clădiri după tip</string>
     <string name="continue_navigation">Coninuați navigația</string>
     <string name="pause_navigation">Întrerupeți navigația</string>
@@ -1074,7 +1074,7 @@
     <string name="map_preferred_locale_descr">Limba preferată pentru etichetele de pe hartă (dacă nu sunt disponibile, vor fi utilizate numele în limba engleză sau denumirile locale).</string>
     <string name="forward">Înainte</string>
     <string name="home">Acasă</string>
-    <string name="live_monitoring_m_descr">Se trimit datele de monitorizarea către un serviciu web dacă înregistrarea GPX este activată.</string>
+    <string name="live_monitoring_m_descr">Trimite datele de urmărire către un serviciu web specificat, dacă înregistrarea GPX este activată.</string>
     <string name="live_monitoring_m">Monitorizare online (GPS necesar)</string>
     <string name="live_monitoring_start">Porniți monitorizarea online</string>
     <string name="live_monitoring_stop">Opriți monitorizarea online</string>
@@ -1089,21 +1089,21 @@
     <string name="rendering_attr_showAccess_name">Arată restricțiile de acces și taxele de trecere</string>
     <string name="rendering_attr_showSurfaceGrade_name">Arată calitatea drumului</string>
     <string name="rendering_attr_showSurfaces_name">Arată suprafața drumului</string>
-    <string name="rendering_attr_showCycleRoutes_name">Arată rutele pentru biciclete</string>
+    <string name="rendering_attr_showCycleRoutes_name">Traseele pentru biciclete</string>
     <string name="no_index_file_to_download">Descărcările nu au fost găsite, verificați conexiunea la Internet.</string>
-    <string name="local_index_select_gpx_file">Selectați pentru afișare</string>
+    <string name="local_index_select_gpx_file">Selectați un track</string>
     <string name="gpx_split_interval">Intervalul de împărțire</string>
     <string name="sort_by_distance">Sortare după distanță</string>
     <string name="sort_by_name">Sortare după nume</string>
     <string name="show_zoom_buttons_navigation_descr">Arată butoanele de zoom în timpul navigării.</string>
     <string name="show_zoom_buttons_navigation">Arată butoanele de zoom</string>
     <string name="save_as_favorites_points">Salvează ca grup de Favorite</string>
-    <string name="select_destination_and_intermediate_points">Selectați destinațiile</string>
+    <string name="select_destination_and_intermediate_points">Setați destinațiile</string>
     <string name="layer_amenity_label">Etichete deasupra POI</string>
     <string name="loading_smth">Încărcare %1$s…</string>
     <string name="map_widget_plain_time">Ora curentă</string>
     <string name="shared_string_waypoint">Punct de reper</string>
-    <string name="none_selected_gpx">Nu s-au selectat fișiere GPX. Selectează unul printr-o atingere lungă.</string>
+    <string name="none_selected_gpx">Specificați mai întâi un fișier GPX prin apăsare lungă.</string>
     <string name="selected_gpx_info_show">"
 \n
 \nApăsați lung pentru a vizualiza pe hartă"</string>
@@ -1144,8 +1144,8 @@
     <string name="rendering_value_pink_name">Roz</string>
     <string name="rendering_value_brown_name">Maro</string>
     <string name="osmo_edit_color">Culoare afișare</string>
-    <string name="fav_point_dublicate">Nume puncte favorite duplicate</string>
-    <string name="fav_point_dublicate_message">Numele Favorit specificat este deja în uz, a fost schimbat în %1$s pentru a evita duplicarea.</string>
+    <string name="fav_point_dublicate">Nume favorit duplicat specificat</string>
+    <string name="fav_point_dublicate_message">Favorit redenumit în %1$s pentru a evita duplicarea.</string>
     <string name="text_size_descr">Setați mărimea textului pe hartă.</string>
     <string name="text_size">Mărimea textului</string>
     <string name="rendering_attr_streetLighting_name">Lumină stradală</string>
@@ -1211,7 +1211,7 @@
     <string name="enable_proxy_title">Activați proxy-ul HTTP</string>
     <string name="proxy_host_title">Gazdă Proxy</string>
     <string name="proxy_port_title">Port Proxy</string>
-    <string name="proxy_port_descr">Configurați numărul portului proxy (de ex. 8118).</string>
+    <string name="proxy_port_descr">Specificați numărul de port al proxy-ului dumneavoastră (de exemplu, 8118).</string>
     <string name="lang_sw">Swahili</string>
     <string name="lang_he">Ebraică</string>
     <string name="gpx_timemoving">Timpul în mişcare: %1$s</string>
@@ -1224,7 +1224,7 @@
     <string name="version_settings">Versiuni</string>
     <string name="rendering_attr_tramRoutes_name">Rute tramvai</string>
     <string name="enable_proxy_descr">Configurați un proxy HTTP pentru toate solicitările de rețea.</string>
-    <string name="proxy_host_descr">Configurează gazda proxy-ului (de ex. 127.0.0.1).</string>
+    <string name="proxy_host_descr">Specificați numele de gazdă al proxy-ului dvs. (de exemplu, 127.0.0.0.1).</string>
     <string name="int_days">zile</string>
     <string name="osmo_connect_menu">Conectare</string>
     <string name="always_center_position_on_map">Arată întotdeauna poziția în centru</string>
@@ -2013,7 +2013,7 @@
 \n Lat %1$s
 \n Lon %2$s</string>
     <string name="watch">Urmărește</string>
-    <string name="notes">Note</string>
+    <string name="notes">A/V note</string>
     <string name="online_map">Hartă online</string>
     <string name="roads_only">Doar drumurile</string>
     <string name="rendering_attr_pisteRoutes_name">Pârtii de ski</string>
@@ -2027,7 +2027,7 @@
     <string name="average">Mediu</string>
     <string name="of">%1$d din %2$d</string>
     <string name="ascent_descent">Urcare/Coborâre</string>
-    <string name="moving_time">Timp în mișcare</string>
+    <string name="moving_time">Durata în mișcare</string>
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
     <string name="lang_en_gb">Engleză (Regatul Unit)</string>
@@ -2283,7 +2283,7 @@
     <string name="navigation_over_track">Pornesc navigarea de-a lungul traseului\?</string>
     <string name="navigate_point_olc_info_invalid">OLC invalid
 \n</string>
-    <string name="speed_limit_exceed_message">Selectați marja de toleranță la limita de viteză, deasupra căreia veți primi un avertisment vocal.</string>
+    <string name="speed_limit_exceed_message">Alegeți marja de toleranță a limitei de viteză, peste care veți primi un avertisment vocal.</string>
     <string name="routing_attr_height_description">Specificați înălțimea vehiculului care va fi permisă pe rute.</string>
     <string name="speak_descr">Configurați pentru a anunța numele străzilor, avertismentele de trafic (opriri forțate, limitatoare de viteza), avertizări radar, limitele de viteză.</string>
     <string name="use_kalman_filter_compass_descr">Reduce zgomotul în citirile busolei, dar adaugă inerție.</string>

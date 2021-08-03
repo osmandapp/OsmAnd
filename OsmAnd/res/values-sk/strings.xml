@@ -4269,5 +4269,34 @@
     <string name="contributions_may_calculate_with_delay">Príspevky môžu byť počítané s oneskorením niekoľkých hodín.</string>
     <string name="map_updates_are_unavailable_yet">Aktualizácie máp ešte nie sú dostupné :-(</string>
     <string name="connect_track_points_as">Spojiť body trasy</string>
-    <string name="pro_features">Pokročilé funkcie</string>
+    <string name="pro_features">Pokročilé (Pro) funkcie</string>
+    <string name="purchases_feature_desc_pro_widgets">Získajte prístup k pokročilým (Pro) funkciám OsmAnd. Farbenie trás a ďalšie.</string>
+    <string name="option_available_only_in_osmand_pro">Voľba je dostupná v predplatnom OsmAnd Pro.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Preskúmajte predplatné OsmAnd a nájdite vhodné pre vás.</string>
+    <string name="routes_color_by_type">Farby trás podľa</string>
+    <string name="shared_string_relation">Relácia</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Priradiť farby trasám podľa ich vlastných farieb (ak sú zadané v OpenStreetMap) a turistického symbolu</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Farba podľa príslušnosti k sieti</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Priradiť farby trasám podľa typu siete (medzinárodná, regionálna, lokálna), do ktorej patria</string>
+    <string name="walking_route_osmc_description">Priradiť farby trasám podľa ich vlastných farieb (ak sú zadané v OpenStreetMap) a typu (medzinárodné, regionálne, lokálne)</string>
+    <string name="travel_routes">Cestovné trasy</string>
+    <string name="setting_supported_by_style">Toto nastavenie je podporované mapovým štýlom \'%1$s\'</string>
+    <string name="direct_line_maps_required_descr">Výpočet trasy trvá dlhšie ako je bežné.
+\n
+\nMožno nie sú načítané niektoré mapy.</string>
+    <string name="online_direct_line_maps_link">Skontrolovať potrebné mapy</string>
+    <string name="offline_maps_required_descr">Pre výpočet trasy sú potrebné ďalšie offline mapy.</string>
+    <string name="online_maps_required_descr">Žiaľ, OsmAnd nemohol nájsť (vypočítať) vhodnú trasu pre vaše nastavenia.
+\n
+\nMôžno nie sú načítané nejaké mapy. Môžete spustiť hľadanie potrebných máp online.</string>
+    <string name="online_maps_searching_descr">Prebieha online vyhľadávanie máp.</string>
+    <string name="reset_to_original">Obnoviť na pôvodné</string>
+    <string name="backup_error_no_subscription">Neexistuje žiadne predplatné</string>
+    <string name="map_updates_for_mappers">Aktualizácie máp pre maperov</string>
+    <string name="benefits_for_contributors">Výhody pre aktívnych prispievateľov do OSM</string>
+    <string name="benefits_for_contributors_primary_descr">Môžete mať neobmedzené hodinové aktualizácie máp ak ste aktívnym prispievateľom do OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">Prihláste sa do OpenStreetMap, aby ste zistili, či máte nárok na neobmedzené mesačné a hodinové aktualizácie máp.</string>
+    <string name="use_login_and_password">Použiť meno a heslo</string>
+    <string name="available_until">Dostupné do %1$s</string>
+    <string name="enough_contributions_descr">Gratulujeme, vykonali ste dostatok príspevkov do OpenStreetMap a môžete využiť neobmedzené aktualizácie máp.</string>
 </resources>
