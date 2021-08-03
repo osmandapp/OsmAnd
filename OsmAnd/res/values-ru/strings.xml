@@ -4303,4 +4303,5 @@
 \nЗапустите онлайн-проверку карт.</string>
     <string name="online_direct_line_maps_link">Проверить карты</string>
     <string name="offline_maps_required_descr">Для расчета маршрута требуются дополнительные офлайн-карты.</string>
+    <string name="pro_features">Возможности Pro</string>
 </resources>
