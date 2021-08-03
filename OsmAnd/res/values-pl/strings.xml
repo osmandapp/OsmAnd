@@ -4066,7 +4066,7 @@
     <string name="select_segments_description">%1$s zawiera więcej niż jeden segment, musisz wybrać wymagany element nawigacji.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="track_recording_save_and_stop">Zapisz i zatrzymaj nagrywanie</string>
-    <string name="track_recording_title">Zatrzymane nagrywanie trasy</string>
+    <string name="track_recording_title">Nagrywanie trasy zatrzymane</string>
     <string name="track_recording_description">Zatrzymać nagrywanie\?
 \nWszystkie niezapisane dane zostaną utracone.</string>
     <string name="on_pause">W trakcie wstrzymania</string>
