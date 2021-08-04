@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -129,7 +128,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 			public boolean onTouch(View v, MotionEvent event) {
 				int action = event.getAction();
 
-				switch(action) {
+				switch (action) {
 					case (MotionEvent.ACTION_DOWN):
 						initialY = event.getY();
 					case (MotionEvent.ACTION_UP):
@@ -148,7 +147,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 					readFullArticleButton.setVisibility(View.GONE);
 				}
 
-				return false; 
+				return false;
 			}
 		});
 
@@ -244,15 +243,12 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	}
 
 	public static void showFullArticle(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-					.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light))
-					.build();
+		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+				.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light))
+				.build();
+		customTabsIntent.intent.setData(uri);
+		if (AndroidUtils.isIntentSafe(context, customTabsIntent.intent)) {
 			customTabsIntent.launchUrl(context, uri);
-		} else {
-			Intent i = new Intent(Intent.ACTION_VIEW);
-			i.setData(uri);
-			context.startActivity(i);
 		}
 	}
 

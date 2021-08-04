@@ -103,13 +103,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	private MenuAction searchDoneAction;
 
-	private LinkedList<MapContextMenuData> historyStack = new LinkedList<>();
+	private final LinkedList<MapContextMenuData> historyStack = new LinkedList<>();
 
 	public static class MapContextMenuData {
-		private LatLon latLon;
-		private PointDescription pointDescription;
-		private Object object;
-		private boolean backAction;
+
+		private final LatLon latLon;
+		private final PointDescription pointDescription;
+		private final Object object;
+		private final boolean backAction;
 
 		public MapContextMenuData(LatLon latLon, PointDescription pointDescription, Object object, boolean backAction) {
 			this.latLon = latLon;
