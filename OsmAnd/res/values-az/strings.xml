@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="nothing_found">Heç nə tapılmadı</string>
     <string name="restart_search">Axtarışı yenidən başlat</string>
@@ -706,7 +706,7 @@
     <string name="favourites">Favoritlər</string>
     <string name="saved_at_time">Yadda saxlandı: %1$s</string>
     <string name="are_you_sure">Əminsiniz?</string>
-    <string name="downloading_number_of_files">%1$d fayl endirilir</string>
+    <string name="downloading_number_of_files">%1$d fayl endirilir…</string>
     <string name="buy">Al</string>
     <string name="later">Sonra</string>
     <string name="get_full_version">Tam versiya</string>
@@ -907,7 +907,7 @@
     <string name="relief_smoothness_factor_descr">Üstün tutulan relyef: düzənlik və ya dağlıq.</string>
     <string name="shared_string_slope">Yamac</string>
     <string name="points_delete_multiple_succesful">Nöqtə(lər) silindi.</string>
-    <string name="points_delete_multiple">%1$d nöqtəni silmək üzrəsiniz. Əminsiniz?</string>
+    <string name="points_delete_multiple">%1$d nöqtə silinsin\?</string>
     <string name="shared_string_time_span">Ümumi vaxt</string>
     <string name="lang_bn">Benqalca</string>
     <string name="lang_sq">Albanca</string>
@@ -1470,7 +1470,7 @@
     <string name="osb_comment_dialog_error">Rəy əlavə edilə bilmədi.</string>
     <string name="share_osm_edits_subject">OSM düzəlişləri OsmAnd ilə paylaşılıb</string>
     <string name="rendering_attr_hideProposed_name">Təklif olunan obyektlər</string>
-    <string name="local_recordings_delete_all_confirm">%1$d qeydi silmək üzrəsiniz. Əminsiniz?</string>
+    <string name="local_recordings_delete_all_confirm">%1$d qeyd silinsin\?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d dəyişikliyi OSM-a yükləmək üzrəsiniz. Əminsiniz?</string>
     <string name="osm_live_subscription">OsmAnd Live abunəliyi</string>
     <string name="osm_live_thanks">OsmAnd-ı dəstəklədiyiniz üçün təşəkkür edirik. Bütün yeni xüsusiyyətləri aktivləşdirmək üçün OsmAnd-ı yenidən başladın.</string>
@@ -1714,7 +1714,7 @@
     <string name="quick_action_edit_action">Fəaliyyətə düzəliş et</string>
     <string name="dialog_add_action_title">Fəaliyyət əlavə et</string>
     <string name="quick_actions_delete">Fəaliyyəti sil</string>
-    <string name="quick_actions_delete_text">“%s” fəaliyyətini silmək istədiyinizə əminsiniz?</string>
+    <string name="quick_actions_delete_text">“%s” fəaliyyəti silinsin\?</string>
     <string name="quick_favorites_show_favorites_dialog">Favoritlər dialoqunu göstər</string>
     <string name="rendering_value_darkyellow_name">Tünd sarı</string>
     <string name="shared_string_more_actions">Digər fəaliyyətlər</string>
@@ -2157,4 +2157,7 @@
     <string name="duration_ago">%1$s əvvəl</string>
     <string name="backup_no_internet_descr">İnternet bağlantınızı yoxlayın və yenidən endirin.</string>
     <string name="delete_all_confirmation">Bəli, hamısını sil</string>
+    <string name="delete_number_files_question">%1$d fayl silinsin\?</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s və ya %2$s</string>
+    <string name="from_with_param">%1$s-dan</string>
 </resources>
