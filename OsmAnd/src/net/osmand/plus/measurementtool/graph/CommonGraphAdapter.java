@@ -12,6 +12,7 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.OsmandApplication;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +23,8 @@ public class CommonGraphAdapter extends BaseGraphAdapter<LineChart, LineData, Gp
 	private Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
 	private ExternalGestureListener externalGestureListener;
 
-	public CommonGraphAdapter(LineChart chart, boolean usedOnMap) {
-		super(chart, usedOnMap);
+	public CommonGraphAdapter(OsmandApplication app, LineChart chart, boolean usedOnMap) {
+		super(app, chart, usedOnMap);
 	}
 
 	@Override
