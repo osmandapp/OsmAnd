@@ -3986,4 +3986,5 @@
     <string name="poi_authentication_contactless">Érintésmentes azonosítás</string>
     <string name="poi_access_bicycle">Kerékpárral használható</string>
     <string name="poi_access_general">Általánosan használható</string>
+    <string name="poi_access_scooter">Rollerrel használható</string>
 </resources>
