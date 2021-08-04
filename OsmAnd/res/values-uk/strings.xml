@@ -4284,7 +4284,7 @@
     <string name="routes_color_by_type">Кольори маршрутів за</string>
     <string name="shared_string_relation">Зв\'язки</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Призначте колір для маршрутів на основі їхнього індивідуально місцевого кольору (якщо він присутній в OpenStreetMap) і символу туристичного щита</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_description">Колір за мережевою належністю</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Забарвлення згідно з належністю до мережі</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Призначити колір маршрутів на основі типу мережі вузлів (міжнародної, регіональної, місцевої), до яких вони належать</string>
     <string name="walking_route_osmc_description">Призначте колір маршрутам на основі їхнього локально індивідуально призначеного кольору (якщо він наявний в OpenStreetMap) і типу (міжнародний, регіональний, місцевий)</string>
     <string name="travel_routes">Туристичні маршрути</string>

@@ -4268,4 +4268,28 @@ POIの更新は利用できません</string>
     <string name="srtm_download_single_help_message">必要なSRTMバリアントを選択してください。フォーマットを変更するには、ファイルを再ダウンロードする必要があります。</string>
     <string name="purchases_feature_desc_unlimited_map_download">すべての大陸と地域のオフラインマップを制限無くダウンロードできます。</string>
     <string name="purchases_feature_desc_monthly_map_updates">オフラインマップの定期および月毎更新が可能になります。</string>
+    <string name="direct_line_maps_required_descr">ルート計算には通常より時間がかかります。
+\n
+\n一部マップが読み込めていない可能性があります。</string>
+    <string name="online_direct_line_maps_link">必要なマップを確認</string>
+    <string name="offline_maps_required_descr">ルートを計算するには、追加のオフラインマップが必要です。</string>
+    <string name="online_maps_required_descr">残念ながら、OsmAndは設定に適したルートを見つける(計算する)ことができませんでした。
+\n
+\n一部マップが読み込めていない可能性があります。オンラインで実行することで必要なマップを確認できます。</string>
+    <string name="online_maps_searching_descr">オンラインマップ検索を実行中です。</string>
+    <string name="reset_to_original">初期値へリセット</string>
+    <string name="backup_error_no_subscription">サブスクリプションがありません</string>
+    <string name="map_updates_for_mappers">マッパーのためのマップ更新</string>
+    <string name="benefits_for_contributors">アクティブなOSM貢献者へのメリット</string>
+    <string name="benefits_for_contributors_primary_descr">OpenStreetMap.orgへ積極的に貢献している場合は、1時間ごとの無制限マップ更新を利用できます。</string>
+    <string name="benefits_for_contributors_secondary_descr">OpenStreetMapにサインインして、月毎および時毎のマップ更新を無制限に利用できるかどうかを確認します。</string>
+    <string name="use_login_and_password">パスワードを使用したログイン</string>
+    <string name="available_until">まで利用可能</string>
+    <string name="enough_contributions_descr">おめでとうございます。OpenStreetMapに十分な貢献をしたと判断され、無制限のマップ更新を受けることが可能になりました。</string>
+    <string name="not_enough_contributions_descr">過去％2 $ s日間、OpenStreetMapに少なくとも％1 $ sのマップコントリビューションを行う必要があります。</string>
+    <string name="shared_string_contributions">貢献</string>
+    <string name="contributions_may_calculate_with_delay">貢献度は、数時間の遅延で計算される場合があります。</string>
+    <string name="map_updates_are_unavailable_yet">マップ更新はまだ利用できません(T-T )</string>
+    <string name="connect_track_points_as">ルート地点間の接続</string>
+    <string name="pro_features">Pro版</string>
 </resources>

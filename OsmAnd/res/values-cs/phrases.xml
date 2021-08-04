@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_bakery">Pekařství</string>
     <string name="poi_alcohol">Obchod s alkoholem</string>
@@ -285,7 +285,6 @@
     <string name="poi_paint">Barvy laky</string>
     <string name="poi_photo">Fotografie</string>
     <string name="poi_radiotechnics">Elektronické součástky</string>
-    
     <string name="poi_ticket">Vstupenky</string>
     <string name="poi_vacuum_cleaner">Vysavače</string>
     <string name="poi_variety_store">Vše za xx</string>
@@ -418,7 +417,6 @@
     <string name="poi_pension_fund">Penzijní fond</string>
     <string name="poi_migration">Imigrační úřad</string>
     <string name="poi_tax_inspection">Daňová kontrola</string>
-    
     <string name="poi_customs">Celní správa</string>
     <string name="poi_city">Velké město</string>
     <string name="poi_town">Město</string>
@@ -780,7 +778,6 @@
     <string name="poi_cheese">Obchod sýrem</string>
     <string name="poi_chocolate">Obchod čokoládou</string>
     <string name="poi_coffee">Obchod kávou</string>
-    
     <string name="poi_garden_furniture">Obchod zahradním nábytkem</string>
     <string name="poi_leather">Obchod kůží</string>
     <string name="poi_watches">Hodinářství</string>
@@ -800,7 +797,6 @@
     <string name="poi_weapons">Obchod se zbraněmi</string>
     <string name="poi_breakwater">Vlnolam</string>
     <string name="poi_groyne">Pobřežní hráz</string>
-    
     <string name="poi_basin">Nádrž na dešťovou vodu</string>
     <string name="poi_crane">Jeřáb</string>
     <string name="poi_religious">Náboženská oblast</string>
@@ -1539,7 +1535,6 @@
     <string name="poi_aquaculture_shrimp">Akvakultura: garnát</string>
     <string name="poi_aquaculture_fish">Akvakultura: ryby</string>
     <string name="poi_aquaculture_mussels">Akvakultura: mušle</string>
-    
     <string name="poi_min_age">Minimální věk</string>
     <string name="poi_organic_yes">Ano</string>
     <string name="poi_organic_no">Ne</string>
@@ -3601,7 +3596,7 @@
     <string name="poi_vehicle_military">Přístup vozidel: vojenské</string>
     <string name="poi_vehicle_delivery">Přístup vozidel: zásobování</string>
     <string name="poi_vehicle_forestry">Přístup vozidel: lesnictví</string>
-    <string name="poi_motorcar_yes">Přístup aut: ano</string>
+    <string name="poi_motorcar_yes">Ano</string>
     <string name="poi_motorcar_private">Přístup aut: soukromý</string>
     <string name="poi_motorcar_no">Přístup aut: ne</string>
     <string name="poi_motorcar_destination">Přístup aut: cíl</string>
@@ -3973,4 +3968,34 @@
     <string name="poi_memorial_subject">Předmět</string>
     <string name="poi_outdoor_seating_poi">Venkovní sezení</string>
     <string name="poi_power_portal">Energetický portál</string>
+    <string name="poi_authentication_none_yes">Ano</string>
+    <string name="poi_authentication_none_no">Autentizace není vyžadována: ne</string>
+    <string name="poi_authentication_short_message_text">Text pro autentizaci krátkou zprávou</string>
+    <string name="poi_authentication_short_message_number">Telefonní číslo pro autentizaci krátkou zprávou</string>
+    <string name="poi_authentication_short_message_yes">Ano</string>
+    <string name="poi_authentication_short_message_no">Autentizace krátkou zprávou: ne</string>
+    <string name="poi_authentication_phone_call_number">Telefonní číslo pro autentizaci</string>
+    <string name="poi_authentication_phone_call_yes">Ano</string>
+    <string name="poi_authentication_phone_call_no">Autentizace telefonním hovorem: ne</string>
+    <string name="poi_authentication_app_yes">Ano</string>
+    <string name="poi_authentication_app_no">Autentizace aplikací: ne</string>
+    <string name="poi_authentication_key_yes">Ano</string>
+    <string name="poi_authentication_key_no">Autentizace klíčem: ne</string>
+    <string name="poi_authentication_chip_card_yes">Ano</string>
+    <string name="poi_authentication_chip_card_no">Autentizace čipovou kartou: ne</string>
+    <string name="poi_authentication_contactless_yes">Ano</string>
+    <string name="poi_authentication_contactless_no">Bezkontaktní autentizace: ne</string>
+    <string name="poi_share_taxi_yes">Sdílené taxi: ano</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_authentication_none">Autentizace není vyžadována</string>
+    <string name="poi_authentication_short_message">Autentizace krátkou zprávou</string>
+    <string name="poi_authentication_phone_call">Autentizace telefonním hovorem</string>
+    <string name="poi_authentication_app">Autentizace aplikací</string>
+    <string name="poi_authentication_key">Autentizace klíčem</string>
+    <string name="poi_authentication_chip_card">Autentizace čipovou kartou</string>
+    <string name="poi_authentication_contactless">Bezkontaktní autentizace</string>
+    <string name="poi_access_scooter">Přístup pro skútry</string>
+    <string name="poi_access_bicycle">Přístup pro jízdní kola</string>
+    <string name="poi_access_motorcar">Přístup pro motorová vozidla</string>
+    <string name="poi_access_general">Obecný přístup</string>
 </resources>

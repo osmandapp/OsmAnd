@@ -914,7 +914,7 @@
     <string name="recording_description">Nagranie %1$s %3$s %2$s</string>
     <string name="recording_default_name">Nagranie</string>
     <string name="shared_string_control_stop">Zakończ</string>
-    <string name="shared_string_control_start">Start</string>
+    <string name="shared_string_control_start">Rozpocznij</string>
     <string name="map_widget_av_notes">Uwagi audio/wideo</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd dla poziomic w trybie offline</string>
     <string name="map_widget_distancemeasurement">Pomiar odległości</string>
@@ -929,7 +929,7 @@
     <string name="recording_photo_description">Zdjęcie %1$s %2$s</string>
     <string name="av_def_action_picture">Zrobienie zdjęcia</string>
     <string name="recording_context_menu_precord">Zrób zdjęcie</string>
-    <string name="stop_routing_confirm">Zatrzymać nawigację\?</string>
+    <string name="stop_routing_confirm">Zakończyć nawigację\?</string>
     <string name="clear_dest_confirm">Usunąć cel trasy i jej cele pośrednie\?</string>
     <string name="precise_routing_mode">Precyzyjne trasy (alpha)</string>
     <string name="precise_routing_mode_descr">Obliczanie precyzyjnych tras w nawigacji. Funkcja nadal jest dość powolna i ograniczona odległością.</string>
@@ -1280,7 +1280,7 @@
     <string name="rendering_value_pedestrian_name">Pieszo</string>
     <string name="rendering_attr_coloredBuildings_name">Różne kolory typów budynków</string>
     <string name="continue_navigation">Kontynuuj nawigację</string>
-    <string name="pause_navigation">Wstrzymaj nawigację</string>
+    <string name="pause_navigation">Zatrzymaj nawigację</string>
     <string name="rendering_attr_alpineHiking_name">Klasyfikacja trudności wspinaczki alpinistycznej (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Renderuj ścieżki zgodnie ze skalą SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Szlaki turystyczne</string>
@@ -2047,7 +2047,7 @@
     <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki, itp.</string>
     <string name="christmas_desc_q">Wyświetlać świąteczne miejsca?</string>
     <string name="shared_string_continue">Kontynuuj</string>
-    <string name="shared_string_pause">Wstrzymaj</string>
+    <string name="shared_string_pause">Zatrzymaj</string>
     <string name="shared_string_trip">Podróż</string>
     <string name="shared_string_recorded">Zarejestrowany</string>
     <string name="shared_string_record">Rejestruj</string>
@@ -2335,7 +2335,7 @@
     <string name="moving_time">Czas w ruchu</string>
     <string name="max_min">Maks./min.</string>
     <string name="quick_action_resume_pause_navigation">Zatrzymaj/wznów nawigację</string>
-    <string name="quick_action_resume_pause_navigation_descr">Przycisk do wstrzymania lub wznowienia nawigacji.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Przycisk do zatrzymania lub wznowienia nawigacji.</string>
     <string name="quick_action_start_stop_navigation">Rozpocznij/zakończ nawigację</string>
     <string name="quick_action_start_stop_navigation_descr">Przycisk rozpoczęcia lub zakończenia nawigacji.</string>
     <string name="quick_action_show_navigation_finish_dialog">Wyświetl ekran końca nawigacji</string>
@@ -3284,7 +3284,7 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Sieci węzłów</string>
     <string name="add_new_profile_q">Dodać nowy profil „%1$s”\?</string>
     <string name="save_heading">Dołączenie kierunku</string>
-    <string name="save_heading_descr">Zapisuje podczas rejestrowania kierunek do każdego punktu trasy.</string>
+    <string name="save_heading_descr">Zapisuj kierunek do każdego punktu trasy podczas nagrywania.</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="ltr_or_rtl_combine_via_comma">%1$s, %2$s</string>
     <string name="personal_category_name">Osobiste</string>
@@ -3759,7 +3759,7 @@
     <string name="shared_string_file_name">Nazwa pliku</string>
     <string name="number_of_gpx_files_selected_pattern">%s wybrane pliki trasy</string>
     <string name="save_global_track_interval_descr">Określ interwał dla nagrywania trasy (włączonego przez widżet „Nagrywanie podróży” na mapie).</string>
-    <string name="gpx_monitoring_stop">Wstrzymaj nagrywanie podróży</string>
+    <string name="gpx_monitoring_stop">Zatrzymaj nagrywanie podróży</string>
     <string name="gpx_monitoring_start">Wznów nagrywanie podróży</string>
     <string name="system_default_theme">Domyślny systemowy</string>
     <string name="all_next_segments">Wszystkie kolejne segmenty</string>
@@ -3935,7 +3935,7 @@
     <string name="rename_track">Zmień nazwę trasy</string>
     <string name="change_folder">Zmień folder</string>
     <string name="shared_string_sec">sek</string>
-    <string name="announcement_time_passing">Omijanie</string>
+    <string name="announcement_time_passing">Przekazywanie</string>
     <string name="announcement_time_approach">Podejście</string>
     <string name="announcement_time_prepare_long">Długie przygotowanie</string>
     <string name="announcement_time_prepare">Przygotuj</string>
@@ -4135,7 +4135,7 @@
     <string name="backup_confilcts_descr">Niektóre pliki nie mogły zostać przesłane na serwer, ponieważ na serwerze znajduje się ich nowsza wersja.</string>
     <string name="backup_view_conflicts">Wyświetl konflikty</string>
     <string name="backup_no_internet_descr">Sprawdź połączenie internetowe i pobierz ponownie.</string>
-    <string name="backup_pause_all">Wstrzymaj wszystko</string>
+    <string name="backup_pause_all">Zatrzymaj wszystko</string>
     <string name="upload_local_version">Prześlij wersję lokalną</string>
     <string name="download_server_version">Pobierz wersję serwerową</string>
     <string name="shared_string_logout">Wyloguj</string>

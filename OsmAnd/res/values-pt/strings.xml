@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barreira</string>
@@ -3915,7 +3915,6 @@
     <string name="routing_engine_vehicle_type_foot">A pé</string>
     <string name="routing_engine_vehicle_type_bike">Bicicleta</string>
     <string name="routing_engine_vehicle_type_car">Carro</string>
-    
     <string name="copy_address">Copiar endereço</string>
     <string name="online_routing_engine">Mecanismo de roteamento online</string>
     <string name="online_routing_engines">Mecanismos de roteamento online</string>
@@ -4275,4 +4274,37 @@
     <string name="active_till">Ativa até %1$s</string>
     <string name="promo_subscription">Subscrição promocional</string>
     <string name="track_has_no_needed_data">O trilho não contém os dados necessários.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Cor por afiliação de rede</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Atribuir cor a rotas com base no tipo de rede do nó (internacional, regional, local) a que pertencem</string>
+    <string name="walking_route_osmc_description">Atribua uma cor às rotas com base na sua cor individualmente atribuída localmente (se existir no OpenStreetMap) e tipo (internacional, regional, local)</string>
+    <string name="travel_routes">Rotas de viagem</string>
+    <string name="setting_supported_by_style">Esta configuração é suportada pelo estilo de mapa \"%1$s\'\"</string>
+    <string name="direct_line_maps_required_descr">O cálculo da rota leva mais tempo do que o normal.
+\n
+\nTalvez alguns mapas não estejam carregados.</string>
+    <string name="online_direct_line_maps_link">Verifique os mapas necessários</string>
+    <string name="offline_maps_required_descr">São necessários mapas offline adicionais para calcular a rota.</string>
+    <string name="online_maps_required_descr">Infelizmente o OsmAnd não conseguiu encontrar (calcular) uma rota adequada para suas configurações.
+\n
+\nTalvez alguns mapas não estejam carregados. Pode executar a verificação online dos mapas necessários.</string>
+    <string name="online_maps_searching_descr">A pesquisa de mapas online está em execução.</string>
+    <string name="reset_to_original">Repor o original</string>
+    <string name="benefits_for_contributors">Benefícios para contribuidores do OpenStreetMap ativos</string>
+    <string name="benefits_for_contributors_primary_descr">Pode se beneficiar de atualizações ilimitadas de mapas por hora, sem limitação, se for um contribuidor ativo do OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">Autentique-se no OpenStreetMap e verifique se está qualificado para obter atualizações de mapas mensais e por hora ilimitadas.</string>
+    <string name="use_login_and_password">Usar nome de utilizador e palavra-passe</string>
+    <string name="available_until">Disponível até %1$s</string>
+    <string name="enough_contributions_descr">Parabéns! Fez contribuições suficientes para o OpenStreetMap e pode desfrutar de atualizações ilimitadas de mapas.</string>
+    <string name="not_enough_contributions_descr">Tem de fazer pelo menos %1$s contribuições no mapa do OpenStreetMap nos últimos %2$s dias.</string>
+    <string name="shared_string_contributions">Contribuições</string>
+    <string name="contributions_may_calculate_with_delay">As contribuições podem ser calculadas com atrasos de algumas horas.</string>
+    <string name="map_updates_are_unavailable_yet">As atualizações do mapa ainda não estão disponíveis :-(</string>
+    <string name="connect_track_points_as">Conectar pontos de rota</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Explore os planos do OsmAnd para encontrar um adequado para si.</string>
+    <string name="routes_color_by_type">Rotas coloridas por</string>
+    <string name="shared_string_relation">Relação</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Atribua uma cor para rotas com base na sua cor individualmente atribuída localmente (se exisitr no OpenStreetMap) e símbolo de escudo de caminhada</string>
+    <string name="backup_error_no_subscription">Sem subscrição presente</string>
+    <string name="map_updates_for_mappers">Atualizações de mapas para mapeadores</string>
+    <string name="pro_features">Recursos Pro</string>
 </resources>

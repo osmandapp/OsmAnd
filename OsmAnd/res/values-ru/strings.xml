@@ -4289,4 +4289,19 @@
     <string name="enough_contributions_descr">Поздравляем, вы сделали достаточный вклад в OpenStreetMap и можете пользоваться неограниченным количеством обновлений карт.</string>
     <string name="not_enough_contributions_descr">Вам необходимо сделать не менее %1$s правок карт в OpenStreetMap за последние %2$s дней.</string>
     <string name="map_updates_are_unavailable_yet">Обновления карты пока недоступны :-(</string>
+    <string name="online_maps_searching_descr">Выполняется онлайн-поиск карт.</string>
+    <string name="walking_route_osmc_description">Раскраска маршрутов на основе индивидуального цвета (если задано на OpenStreetMap) и типа (международный, региональный, местный)</string>
+    <string name="purchases_feature_desc_pro_widgets">Получите доступ к функциям OsmAnd Pro. Раскраска маршрутов и многое другое.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Изучите планы OsmAnd, чтобы выбрать подходящий.</string>
+    <string name="option_available_only_in_osmand_pro">Опция доступна в рамках подписки OsmAnd Pro.</string>
+    <string name="shared_string_relation">Отношение</string>
+    <string name="routes_color_by_type">Раскраска маршрутов</string>
+    <string name="setting_supported_by_style">Этот параметр поддерживается стилем карты \'%1$s\'</string>
+    <string name="online_maps_required_descr">Не удалось рассчитать подходящий маршрут.
+\n
+\nПохоже, не загружены необходимые карты.
+\nЗапустите онлайн-проверку карт.</string>
+    <string name="online_direct_line_maps_link">Проверить карты</string>
+    <string name="offline_maps_required_descr">Для расчета маршрута требуются дополнительные офлайн-карты.</string>
+    <string name="pro_features">Возможности Pro</string>
 </resources>

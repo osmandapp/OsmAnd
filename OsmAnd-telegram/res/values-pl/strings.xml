@@ -243,9 +243,9 @@
     <string name="gpx_settings">Ustawienia GPX</string>
     <string name="timeline_no_data_descr">Nie zebraliśmy danych dla wybranego dnia</string>
     <string name="timeline_no_data">Brak danych</string>
-    <string name="shared_string_end">Koniec</string>
+    <string name="shared_string_end">Zakończenie</string>
     <string name="shared_string_apply">Zastosuj</string>
-    <string name="shared_string_start">Start</string>
+    <string name="shared_string_start">Rozpoczęcie</string>
     <string name="set_time_timeline_descr">Wybierz czas wyświetlania</string>
     <string name="start_end_date">Daty rozpoczęcia i zakończenia</string>
     <string name="saved_messages">Zapisane wiadomości</string>

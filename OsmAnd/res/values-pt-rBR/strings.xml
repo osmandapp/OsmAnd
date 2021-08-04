@@ -4272,7 +4272,7 @@
     <string name="option_available_only_in_osmand_pro">A opção disponível como parte da assinatura do OsmAnd Pro.</string>
     <string name="pro_widgets">Pro Widgets</string>
     <string name="purchases_feature_desc_pro_widgets">Tenha acesso aos recursos do OsmAnd Pro. Colorização de rotas e muito mais.</string>
-    <string name="explore_osmnad_plans_to_find_suitable">Explore os planos do OsmAnd para encontrar os adequados para você.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Explore os planos do OsmAnd para encontrar um adequado para você.</string>
     <string name="routes_color_by_type">Rotas coloridas por</string>
     <string name="shared_string_relation">Relação</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Atribua cor para rotas com base em sua cor individualmente atribuída localmente (se presente no OpenStreetMap) e símbolo de escudo de caminhada</string>
