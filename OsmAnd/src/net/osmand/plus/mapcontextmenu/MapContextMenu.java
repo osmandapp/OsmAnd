@@ -80,7 +80,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private MapMarkerEditor mapMarkerEditor;
 
 	private boolean active;
-	@Nullable
 	private LatLon latLon;
 	private PointDescription pointDescription;
 	@Nullable
