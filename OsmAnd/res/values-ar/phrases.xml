@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_shop">متجر</string>
     <string name="poi_personal_transport">نقل شخصي</string>
@@ -82,7 +82,6 @@
     <string name="poi_fabric">متجر الأقمشة</string>
     <string name="poi_dive">معدات الغطس</string>
     <string name="poi_doors">أبواب</string>
-    
     <string name="poi_fishing">معدات الصيد</string>
     <string name="poi_florist">محل بيع الزهور</string>
     <string name="poi_frame">متجر اطارات الصور</string>
@@ -191,7 +190,6 @@
     <string name="poi_water_tank">خزان ماء</string>
     <string name="poi_diplomatic_honorary_consulate">قنصلية شرفية</string>
     <string name="poi_radiotechnics">متجر تقنيات الراديو</string>
-    
     <string name="poi_ticket">بيع التذاكر</string>
     <string name="poi_tobacco">متجر تبغ</string>
     <string name="poi_trade">مبسط تجاري</string>
@@ -299,7 +297,6 @@
     <string name="poi_theatre">مسرح</string>
     <string name="poi_dentist">طبيب أسنان</string>
     <string name="poi_craft_photographer">مصور</string>
-    
     <string name="poi_townhall">مَبنى البَلدِيّة</string>
     <string name="poi_fountain">نافورة مياه</string>
     <string name="poi_memorial">معلم تذكاري</string>
@@ -1409,7 +1406,6 @@
     <string name="poi_weir">سدّ غاطس</string>
     <string name="poi_breakwater">كاسر الأمواج</string>
     <string name="poi_groyne">حاجز للرواسب البحرية</string>
-    
     <string name="poi_power_pole">عمود كهربائي</string>
     <string name="poi_bell_tower">برج جرس</string>
     <string name="poi_telephone_exchange">مقسم الهاتف</string>
@@ -2261,7 +2257,6 @@
     <string name="poi_organic_only">فقط</string>
     <string name="poi_organic_no">لا</string>
     <string name="poi_organic_yes">نعم</string>
-    
     <string name="poi_passenger_information_display_no">عرض معلومات الركاب: نعم</string>
     <string name="poi_passenger_information_display_yes">عرض معلومات الركاب: نعم</string>
     <string name="poi_support_tower">الحامل/تستند إلى: برج</string>
@@ -3833,4 +3828,6 @@
     <string name="poi_trail_riding_station">سكن للخيول والفرسان</string>
     <string name="poi_shrub">شجيرة</string>
     <string name="poi_operator_type_government">نوع المشغل: حكومي</string>
+    <string name="poi_picnic_table_no">طاولة نزهة : غير موجودة</string>
+    <string name="poi_picnic_table_yes">طاولة نزهة: موجودة</string>
 </resources>
