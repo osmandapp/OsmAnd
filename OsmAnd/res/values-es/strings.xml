@@ -4064,13 +4064,17 @@
     <string name="in_grace_period">En periodo de gracia</string>
     <string name="on_hold">En espera</string>
     <string name="expired">Expirado</string>
-    <string name="release_4_0_beta">- Las actualizaciones de OsmAnd Live se han movido a \"Descargas &gt; Actualizaciones\".
+    <string name="release_4_0_beta">• Se ha añadido la opción para descargar las curvas de nivel en pies.
 \n
-\n - Los tracks ahora pueden ser coloreados por altitud, velocidad o pendiente.
+\n• Paisaje del plan de ruta: se añadieron pestañas para alternar entre puntos o gráficos
 \n
-\n - Añadida la opción de cambiar la apariencia de la línea de la ruta de navegación
+\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones».
 \n
-\n - Actualizado el cuadro de diálogo \"Grabación del viaje\".
+\n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente.
+\n
+\n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta.
+\n
+\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»
 \n
 \n</string>
     <string name="update_all_maps_added">¿Actualizar todos los mapas añadidos a %1$s\?</string>
@@ -4083,15 +4087,24 @@
     <string name="shared_string_max_height">Altura mínima</string>
     <string name="shared_string_itinerary">Itinerario</string>
     <string name="release_4_0">• Copia de seguridad en la nube.
-\n• Se ha añadido el modo nocturno para el estilo visual «Topográfico».
+\n
+\n• Se ha añadido el modo nocturno para el estilo de mapa «Topo».
+\n
 \n• Se ha añadido la opción de descargar las curvas de nivel en pies.
+\n
 \n• Las trazas ahora pueden ser coloreadas por altitud, velocidad o pendiente.
+\n
 \n• Se ha actualizado el cuadro de diálogo «Grabación de viaje».
-\n• La «distancia al pulsar» se ha movido de la regla radial a una opción separada.
-\n• Planificar ruta: se ha añadido la capacidad de cambiar los ajustes de navegación, en la configuración del mapa y buscar, sin salir de la planificación de ruta.
-\n• Nueva pantalla de «Compra» con información detallada sobre las compras.
+\n
+\n• La «Distancia al pulsar» se ha movido de la regla radial a una opción separada.
+\n
+\n• Planificar ruta: Ahora puedes cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta.
+\n
+\n• Se ha añadido la opción de «Compra» con información detallada de las compras.
+\n
 \n• Se ha añadido la opción de cambiar el aspecto de la línea de la ruta.
-\n• Las actualizaciones de OsmAnd Live se han movido a \"Descargas &gt; Actualizaciones\".
+\n
+\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones».
 \n
 \n</string>
     <string name="duration_moment_ago">hace un momento</string>
@@ -4153,4 +4166,5 @@
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de los mapas aún no están disponibles :-(</string>
     <string name="connect_track_points_as">Сonectar puntos de ruta</string>
     <string name="pro_features">Características Pro</string>
+    <string name="use_system_language">Usar idioma del sistema</string>
 </resources>

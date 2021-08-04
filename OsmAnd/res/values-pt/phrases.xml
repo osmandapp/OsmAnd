@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_shop">Loja</string>
     <string name="poi_shop_food">Mercearia e supermercado</string>
@@ -92,7 +92,6 @@
     <string name="poi_doityourself">Loja de bricolagem</string>
     <string name="poi_doors">Portas</string>
     <string name="poi_erotic">Loja de artigos eróticos / sex shop</string>
-    
     <string name="poi_fishing">Equipamento de pesca</string>
     <string name="poi_florist">Florista</string>
     <string name="poi_frame">Loja de molduras</string>
@@ -150,7 +149,6 @@
     <string name="poi_ship_chandler">Fornecedor equipamento para barcos</string>
     <string name="poi_sports">Artigos desportivos</string>
     <string name="poi_stationery">Papelaria</string>
-    
     <string name="poi_ticket">Bilheteira</string>
     <string name="poi_toys">Loja de brinquedos</string>
     <string name="poi_trade">Entreposto comercial</string>
@@ -418,7 +416,6 @@
     <string name="poi_groyne">Espigão marítimo</string>
     <string name="poi_power_substation">Subestação de eletricidade</string>
     <string name="poi_power_transformer">Transformador</string>
-    
     <string name="poi_power_plant">Central elétrica</string>
     <string name="poi_power_generator">Gerador de energia</string>
     <string name="poi_power_tower">Torre de eletricidade</string>
@@ -558,7 +555,6 @@
     <string name="poi_prosecutor">Procurador de justiça</string>
     <string name="poi_migration">Migração</string>
     <string name="poi_tax_inspection">Inspeção fiscal</string>
-    
     <string name="poi_customs">Alfândega</string>
     <string name="poi_country">País</string>
     <string name="poi_city">Capital de distrito</string>
@@ -2864,7 +2860,6 @@
     <string name="poi_aquaculture_shrimp">Aquicultura: camarão</string>
     <string name="poi_aquaculture_fish">Aquicultura: peixes</string>
     <string name="poi_aquaculture_mussels">Aquicultura: mexilhões</string>
-    
     <string name="poi_min_age">Idade mínima</string>
     <string name="poi_organic_yes">Produtos orgânicos: sim</string>
     <string name="poi_organic_no">Produtos orgânicos: não</string>
@@ -3604,7 +3599,7 @@
     <string name="poi_vehicle_military">Acesso a veículos: militar</string>
     <string name="poi_vehicle_delivery">Acesso a veículos: entregas</string>
     <string name="poi_vehicle_forestry">Acesso a veículos: florestal</string>
-    <string name="poi_motorcar_yes">Acesso a automóveis: sim</string>
+    <string name="poi_motorcar_yes">Sim</string>
     <string name="poi_motorcar_private">Acesso a automóveis: privado</string>
     <string name="poi_motorcar_no">Acesso a automóveis: não</string>
     <string name="poi_motorcar_destination">Acesso a automóveis: para trânsito local</string>
@@ -3976,4 +3971,34 @@
     <string name="poi_contact_vhf">VHF</string>
     <string name="poi_contact_linkedin">LinkedIn</string>
     <string name="poi_outdoor_seating_poi">Esplanada</string>
+    <string name="poi_authentication_none_yes">Sim</string>
+    <string name="poi_authentication_none_no">Autenticação não requerida: não</string>
+    <string name="poi_authentication_short_message_text">Texto SMS usado para autenticação</string>
+    <string name="poi_authentication_short_message_number">Número SMS usado para autenticação</string>
+    <string name="poi_authentication_short_message_yes">Sim</string>
+    <string name="poi_authentication_short_message_no">Autenticação via SMS: não</string>
+    <string name="poi_authentication_phone_call_number">Número de telefone usado para autenticação</string>
+    <string name="poi_authentication_phone_call_yes">Sim</string>
+    <string name="poi_authentication_phone_call_no">Autenticação via telemóvel: não</string>
+    <string name="poi_authentication_app_yes">Sim</string>
+    <string name="poi_authentication_app_no">Autenticação via aplicação: não</string>
+    <string name="poi_authentication_key_yes">Sim</string>
+    <string name="poi_authentication_key_no">Autenticação via chave: não</string>
+    <string name="poi_authentication_chip_card_yes">Sim</string>
+    <string name="poi_authentication_chip_card_no">Autenticação via cartão com chip: não</string>
+    <string name="poi_authentication_contactless_yes">Sim</string>
+    <string name="poi_authentication_contactless_no">Autenticação sem contacto: não</string>
+    <string name="poi_share_taxi_yes">Táxi partilhado: sim</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_authentication_none">Autenticação não requerida</string>
+    <string name="poi_authentication_short_message">Autenticação via SMS</string>
+    <string name="poi_authentication_phone_call">Autenticação via telemóvel</string>
+    <string name="poi_authentication_app">Autenticação via aplicação</string>
+    <string name="poi_authentication_key">Autenticação via chave</string>
+    <string name="poi_authentication_chip_card">Autenticação via cartão com chip</string>
+    <string name="poi_authentication_contactless">Autenticação sem contacto</string>
+    <string name="poi_access_scooter">Acesso a lambretas</string>
+    <string name="poi_access_bicycle">Acesso a bicicletas</string>
+    <string name="poi_access_motorcar">Acesso a automóveis</string>
+    <string name="poi_access_general">Acesso geral</string>
 </resources>
