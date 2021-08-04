@@ -2495,8 +2495,10 @@ public class GpxUiHelper {
 			}
 
 			for (TrkSegment seg : track.segments) {
+				if (Algorithms.isEmpty(seg.points)) {
+					continue;
+				}
 				for (WptPt currPoint : seg.points) {
-
 					if (prevPoint != null) {
 						passedDistance += MapUtils.getDistance(prevPoint.lat, prevPoint.lon,
 								currPoint.lat, currPoint.lon);
@@ -2509,15 +2511,12 @@ public class GpxUiHelper {
 								? getIntermediatePointByDistance(passedDistance, distanceToPoint, currPoint, prevPoint)
 								: currPoint;
 					}
-
 					prevPoint = currPoint;
 				}
-
 				prevPoint = null;
 				passedSegmentsPointsDistance += seg.points.get(seg.points.size() - 1).distance;
 			}
 		}
-
 		return null;
 	}
 

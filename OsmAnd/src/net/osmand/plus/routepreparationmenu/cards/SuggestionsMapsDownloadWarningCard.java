@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
+
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,8 +29,6 @@ import net.osmand.util.Algorithms;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.download.MultipleDownloadItem.getIndexItem;
 
 public class SuggestionsMapsDownloadWarningCard extends WarningCard implements DownloadEvents {
 	private MultipleSelectionBottomSheet dialog;
@@ -243,7 +243,7 @@ public class SuggestionsMapsDownloadWarningCard extends WarningCard implements D
 			List<SelectableItem> mapItems = getSelectableMaps();
 			allItems.addAll(mapItems);
 		}
-		if (dialog != null) {
+		if (dialog != null && dialog.isAdded()) {
 			dialog.setCustomView(null);
 			dialog.setSelectedItems(allItems);
 			dialog.setItems(allItems);
