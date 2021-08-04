@@ -4304,4 +4304,5 @@
     <string name="contributions_may_calculate_with_delay">Las contribuciones pueden calcularse con varias horas de retraso.</string>
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
+    <string name="pro_features">Funciones «Pro»</string>
 </resources>

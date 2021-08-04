@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="installing_new_resources">新しいデータを展開中…</string>
     <string name="internet_connection_required_for_online_route">オンラインナビゲーションはオフラインでは機能しません。</string>
@@ -541,7 +541,10 @@ POIの更新は利用できません</string>
     <string name="gpx_saved_sucessfully">GPXファイルは正常に {0} に保存されました</string>
     <string name="osmand_distance_planning_plugin_description">マップ画面をタップするか既存のGPXファイルを使用、または変更して道のりを作成し、旅程の計画や地点間の距離を計ることができます。結果はGPXファイルとして保存しあとで案内用として使用できます。</string>
     <string name="osmand_distance_planning_plugin_name">距離の計算と計画ツール</string>
-    <string name="use_distance_measurement_help">* 地点をマークするにはタップして下さい。 * マップ上でロングタップすると以前の地点を削除できます。 * 地点をロングタップすると詳細を見ることができます。 * 測定ウィジェットをタップするとより多くのアクションを行うことができます。</string>
+    <string name="use_distance_measurement_help">* 地点をマークするにはタップして下さい。
+\n * マップ上でロングタップすると以前の地点を削除できます。
+\n * 地点をロングタップすると詳細を見ることができます。
+\n * 測定ウィジェットをタップするとより多くのアクションを行うことができます。</string>
     <string name="shared_string_do_not_show_again">これ以降表示しない</string>
     <string name="distance_measurement_start_editing">編集を開始</string>
     <string name="distance_measurement_finish_editing">編集を終了</string>
@@ -743,7 +746,7 @@ POIの更新は利用できません</string>
     <string name="select_animate_speedup">ルートシミュレーション速度:</string>
     <string name="global_app_allocated_memory_descr">確保メモリ %1$s MB (Androidの制限値 %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">割り当てメモリ</string>
-    <string name="native_app_allocated_memory_descr">アプリに割り当てられたネイティブメモリ %1$s MB (Dalvik %2$s MB, 他 %3$s MB)
+    <string name="native_app_allocated_memory_descr">アプリへの割当ネイティブメモリ %1$s MB (Dalvik %2$s MB, 他 %3$s MB)
 \n関連メモリ %4$s MB (Android 制限値 %5$s MB, Dalvik %6$s MB)</string>
     <string name="native_app_allocated_memory">総ネイティブメモリ</string>
     <string name="starting_point_too_far">出発地点が最寄りの道路から離れすぎています。</string>
@@ -804,7 +807,7 @@ POIの更新は利用できません</string>
     <string name="osmand_accessibility_description">デバイスのアクセシビリティ機能をOsmAndで利用可能にします。例えばテキスト読み上げ音声の読み上げ速度の調整(対応している場合のみ)、方向パッドによるナビゲーションの設定、トラックボールを使用したズーム制御、テキスト読み上げフィードバックなどをナビ実行時の時々に合わせて利用することができます。</string>
     <string name="osmand_development_plugin_description">ナビゲーション時のシミュレーション、レンダリングパフォーマンス確認、音声指示の確認などの開発およびデバッグ機能の利用や設定がおこなえます。開発者向けで通常アプリの使用には必要ありません。</string>
     <string name="plugins_screen">プラグイン</string>
-    <string name="prefs_plugins_descr">プラグインの有効化で、より高度な設定や各プラグインの追加機能を利用可能になります</string>
+    <string name="prefs_plugins_descr">プラグインの有効化で、より高度な設定や各プラグインの追加機能を利用可能になります。</string>
     <string name="prefs_plugins">プラグイン</string>
     <string name="vector_maps_may_display_faster_on_some_devices">ベクター形式のマップはすばやく表示されます。一部のデバイスではうまく動作しない場合があります。</string>
     <string name="play_commands_of_currently_selected_voice">任意の案内用音声を選択し、再生テストをおこないます:</string>
@@ -1699,7 +1702,7 @@ POIの更新は利用できません</string>
     <string name="downloads_left_template">残りダウンロード %1$s</string>
     <string name="roads">道路</string>
     <string name="downloading_number_of_files">%1$d 個のファイルをダウンロード中…</string>
-    <string name="show_free_version_banner">無料版のバナーを表示</string>
+    <string name="show_free_version_banner">無料版の広告を表示</string>
     <string name="show_free_version_banner_description">有料版でも、ダウンロード画面の無料版バナー広告を見ることが出来ます</string>
     <string name="buy">購入</string>
     <string name="activate_seamarks_plugin">\'航路マップ表示\'プラグインを有効化してください</string>
@@ -2242,12 +2245,12 @@ POIの更新は利用できません</string>
     <string name="get_for">%1$sで入手</string>
     <string name="first_usage_wizard_desc">OsmAndに現在地を取得させると、その地域のマップダウンロードを提案することができます。</string>
     <string name="coords_search">座標検索</string>
-    <string name="advanced_coords_search">高度な座標検索</string>
+    <string name="advanced_coords_search">拡張座標検索</string>
     <string name="lang_ber">ベルベル諸語</string>
     <string name="route_is_too_long_v2">このルートは長すぎて計算できません。 10分以内にルート検索が終わらない場合は、出発地点と目的地の間に経由地点をいくつか追加してみてください。</string>
     <string name="osmand_extended_description_part1">OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOSMデータ』を使用した、地図＆ナビゲーションアプリです。 
 \n音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。</string>
-    <string name="osmand_extended_description_part2">"GPSナビゲーション 
+    <string name="osmand_extended_description_part2">GPSナビゲーション 
 \n • オフライン(海外の場合はローミング料金が不要に)、またはオンライン(高速)モードのいずれかを選択できます 
 \n • ターンバイターン形式の音声案内が、道中のあなたを案内します(録音された音声とリアルタイムで合成される音声を選択できます） 
 \n • 予定のルートから大きく外れるとルートが再検索されます 
@@ -2257,7 +2260,8 @@ POIの更新は利用できません</string>
 \n • 移動速度に伴ったマップのズームを行えます 
 \n • 目的地を住所、種類(駐車場、レストラン、ホテル、ガソリンスタンド、博物館など)、座標の数値でも検索することもできます 
 \n • 旅程上の経由地点をサポートします。 
-\n • GPX経路を自分で使う為の記録や、アップロードしたり等の機能も備えています "</string>
+\n • GPX経路を自分で使う為の記録や、アップロードしたり等の機能も備えています
+\n</string>
     <string name="osmand_extended_description_part3">マップ機能
 \n • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます
 \n • 進行方向に応じてマップの表示向きの変更も出来ます(コンパスを基本にも出来ます)
@@ -4163,8 +4167,8 @@ POIの更新は利用できません</string>
     <string name="nautical_depth">水深</string>
     <string name="you_can_get_feature_as_part_of_pattern">%2$sプランの一部として\"%1$s\"を入手できます。比較:</string>
     <string name="ltr_or_rtl_combine_via_or">%1$sまたは%2$s</string>
-    <string name="not_available_with">%1$s機能は利用できません</string>
-    <string name="continue_with">%1$sを続行</string>
+    <string name="not_available_with">%1$sは利用できません</string>
+    <string name="continue_with">%1$sへの手続きに進む</string>
     <string name="redeem_promo_code">プロモーションコードを利用</string>
     <string name="osmand_maps_plus_tagline">より拡張された機能を手に入れる</string>
     <string name="osmand_pro_tagline">全ての機能を手に入れる</string>
@@ -4196,7 +4200,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_includes">含む</string>
     <string name="complete_purchase">全て含む</string>
     <string name="regular_price">通常価格</string>
-    <string name="from_with_param">%1$sより</string>
+    <string name="from_with_param">%1$s～</string>
     <string name="backup_delete_types_descr">推奨されない種類のデータすべてをOsmAndクラウドから削除しますか？</string>
     <string name="backup_delete_types">無効な種類のデータを削除</string>
     <string name="shared_string_discussion">ディスカッション</string>

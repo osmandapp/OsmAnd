@@ -13,12 +13,14 @@ import net.osmand.plus.OsmandApplication;
 public abstract class BaseGraphAdapter<_Chart extends Chart, _ChartData extends ChartData, _Data> {
 
 	private Highlight lastKnownHighlight;
+	protected OsmandApplication app;
 	protected _Chart chart;
 	protected _ChartData chartData;
 	protected _Data additionalData;
 	protected boolean usedOnMap;
 
-	public BaseGraphAdapter(_Chart chart, boolean usedOnMap) {
+	public BaseGraphAdapter(OsmandApplication app, _Chart chart, boolean usedOnMap) {
+		this.app = app;
 		this.chart = chart;
 		this.usedOnMap = usedOnMap;
 		prepareChartView();
@@ -54,16 +56,9 @@ public abstract class BaseGraphAdapter<_Chart extends Chart, _ChartData extends 
 	public abstract void updateView();
 
 	protected boolean isNightMode() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			return usedOnMap ? app.getDaynightHelper().isNightModeForMapControls()
-					: !app.getSettings().isLightContent();
-		}
-		return false;
-	}
-
-	protected OsmandApplication getMyApplication() {
-		return (OsmandApplication) chart.getContext().getApplicationContext();
+		return usedOnMap ?
+				app.getDaynightHelper().isNightModeForMapControls() :
+				!app.getSettings().isLightContent();
 	}
 
 	public interface ExternalValueSelectedListener {
