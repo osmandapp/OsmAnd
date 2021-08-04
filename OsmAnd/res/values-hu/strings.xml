@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
@@ -1186,7 +1186,7 @@
     <string name="show_zoom_buttons_navigation">Zoom gombok megjelenítése</string>
     <string name="save_as_favorites_points">Mentés Kedvencek csoportként</string>
     <string name="select_destination_and_intermediate_points">Célpontok megadása</string>
-    <string name="layer_amenity_label">POI-rátétréteg feliratai</string>
+    <string name="layer_amenity_label">Pontfeliratok (érdekes pontok, kedvencek)</string>
     <string name="map_widget_plain_time">Jelenlegi idő</string>
     <string name="shared_string_waypoint">Útpont</string>
     <string name="selected_gpx_info_show">\n\nTérképen megtekintéshez nyomd meg hosszan</string>
@@ -1255,7 +1255,7 @@
     <string name="rendering_attr_showAccess_name">Behajtási korlátozások és útdíj megjelenítése</string>
     <string name="rendering_attr_showSurfaceGrade_name">Útminőség megjelenítése</string>
     <string name="rendering_attr_showSurfaces_name">Útfelszín megjelenítése</string>
-    <string name="rendering_attr_showCycleRoutes_name">Kerékpárutak megjelenítése</string>
+    <string name="rendering_attr_showCycleRoutes_name">Kerékpárutak</string>
     <string name="home">Műszerfal</string>
     <string name="lang_fa">perzsa</string>
     <string name="rendering_attr_coloredBuildings_name">Épületek színezése típus szerint</string>
@@ -1270,7 +1270,7 @@
     <string name="lang_zh_tw">kínai (hagyományos)</string>
     <string name="rendering_attr_alpineHiking_name">Alpesi túra nehézségi szint (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Ösvények megjelenítése az SAC nehézségi skála szerint.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Turistajelzés-rátétréteg</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Turistautak</string>
     <string name="arrival_distance_factor_early">Korán</string>
     <string name="arrival_distance_factor_normally">Rendesen</string>
     <string name="arrival_distance_factor_late">Későn</string>
@@ -1531,8 +1531,8 @@
     <string name="use_fast_recalculation_desc">Csak az útvonal kezdeti részét számítja újra; hosszú utaknál hasznos.</string>
     <string name="shared_string_logoff">Naplózás ki</string>
     <string name="rendering_value_disabled_name">Letiltva</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Színezés hálózathoz tartozás szerint</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Színezés az OSMC túraszimbólum szerint</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Hálózathoz tartozás</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC turistaútjelzés</string>
     <string name="osm_edit_context_menu_delete">OSM szerkesztés törlése</string>
     <string name="shared_string_show_details">Részletek megjelenítése</string>
     <string name="read_full_article">Teljes cikk elolvasása (online)</string>
@@ -2210,7 +2210,7 @@
     <string name="quick_action_add_destination_desc">Gomb, amely beállítja a képernyő középpontját úti célnak, a korábban beállított célpont utolsó köztes célpont lesz.</string>
     <string name="quick_action_replace_destination_desc">Váltógomb, amely a képernyő középpontját beállítja új úti célként, lecserélve korábban kiválasztott célpontot (ha volt).</string>
     <string name="quick_action_add_first_intermediate_desc">Gomb, amely beállítja a képernyő közepét első köztes célpontnak.</string>
-    <string name="no_overlay">Nincs rátétréteg</string>
+    <string name="no_overlay">Nincs fedőréteg</string>
     <string name="no_underlay">Nincs alátétréteg</string>
     <string name="subscribe_email_error">Hiba</string>
     <string name="subscribe_email_desc">Iratkozzon fel az alkalmazás akciókról szóló hírlevelünkre és kap további 3 térképletöltést!</string>
@@ -3520,9 +3520,9 @@
 \n</string>
     <string name="unsupported_type_error">Nem támogatott típus</string>
     <string name="shared_string_resume">Folytatás</string>
-    <string name="map_source_zoom_levels_descr">Ezek a paraméterek a térképként vagy rátét/alátétként való használatkor befolyásolják a megjelenítést.
+    <string name="map_source_zoom_levels_descr">Ezek a paraméterek a térképként vagy fedő-/alátétrétegként való használatkor befolyásolják a megjelenítést.
 \n
-\n%1$s: A térkép ezen nagyítási szintek közé lesz kotlátozva.
+\n%1$s: A térkép ezen nagyítási szintek közé lesz korlátozva.
 \n
 \n%2$s: Ezen nagyítási szintek között az eredeti csempék jelennek meg, ezeken kívül pedig felskálázásra vagy leskálázásra kerülnek.</string>
     <string name="shared_string_always">Mindig</string>
@@ -4262,4 +4262,14 @@
     <string name="backup_deleted_all_data_descr">Minden adata sikeresen törlődött az OsmAnd Cloudból.</string>
     <string name="backup_version_history_removed">Az összes verzióelőzmény eltávolíttatik</string>
     <string name="backup_data_removed">Minden adat eltávolíttatik</string>
+    <string name="benefits_for_contributors">Előnyök az OSM aktív szerkesztőinek</string>
+    <string name="benefits_for_contributors_primary_descr">Óránként korlátlanul frissítheti a térképeket, ha aktív szerkesztő az OpenStreetMap.org-on.</string>
+    <string name="benefits_for_contributors_secondary_descr">Jelentkezzék be az OpenStreetMapre, és ellenőrizze, hogy jogosult-e korlátlan havi és óránkénti térképfrissítésre.</string>
+    <string name="enough_contributions_descr">Gratulálunk! Ön elegendő szerkesztést végzett az OpenStreetMapen, így korlátlanul élvezheti a térképfrissítéseket.</string>
+    <string name="not_enough_contributions_descr">Az elmúlt %2$s nap alatt legalább %1$s térképszerkesztést kell végeznie az OpenStreetMapen.</string>
+    <string name="shared_string_contributions">Szerkesztések</string>
+    <string name="contributions_may_calculate_with_delay">Lehet, hogy a szerkesztések csak több óra késéssel lesznek kiszámítva.</string>
+    <string name="map_updates_are_unavailable_yet">Még nem érhető el térképfrissítés :-(</string>
+    <string name="connect_track_points_as">Útvonalpontok összekapcsolása</string>
+    <string name="pro_features">Pro funkciók</string>
 </resources>
