@@ -3,6 +3,9 @@ package net.osmand.plus.views.layers.geometry;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Path;
+import android.graphics.PathMeasure;
+import android.graphics.PointF;
 import android.util.Pair;
 
 import net.osmand.GPXUtilities.TrkSegment;
@@ -13,9 +16,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
-import net.osmand.plus.R;
 import net.osmand.plus.measurementtool.RoadSegmentData;
-import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
@@ -28,7 +29,7 @@ import java.util.TreeMap;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
+import androidx.annotation.Nullable;
 import androidx.core.graphics.ColorUtils;
 import gnu.trove.list.array.TByteArrayList;
 
@@ -210,6 +211,39 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 	public GeometryWayStyle<?> getDefaultWayStyle() {
 		return new GeometryMultiProfileWayStyle(getContext(), Collections.emptyList(),
 				getContext().getStraightLineColor(), getContext().getStraightLineIconRes());
+	}
+
+	@Nullable
+	public static PointF getIconCenter(RotatedTileBox tileBox, List<LatLon> routePoints, Path path, PathMeasure pathMeasure) {
+		if (Algorithms.isEmpty(routePoints)) {
+			return null;
+		}
+
+		path.reset();
+		PointF first = getPoint(tileBox, routePoints.get(0));
+		path.moveTo(first.x, first.y);
+		for (int i = 1; i < routePoints.size(); i++) {
+			PointF pt = getPoint(tileBox, routePoints.get(i));
+			path.lineTo(pt.x, pt.y);
+		}
+
+		pathMeasure.setPath(path, false);
+		float routeLength = pathMeasure.getLength();
+		float density = tileBox.getDensity();
+		float profileIconSize = MultiProfileGeometryWayContext.getProfileIconSizePx(density);
+		float minProfileIconMargin = MultiProfileGeometryWayContext.getMinProfileIconMarginPx(density);
+		if ((routeLength - profileIconSize) / 2 < minProfileIconMargin) {
+			return null;
+		}
+
+		float[] xy = new float[2];
+		pathMeasure.getPosTan(routeLength * 0.5f, xy, null);
+		return new PointF(xy[0], xy[1]);
+	}
+
+	private static PointF getPoint(RotatedTileBox tileBox, LatLon latLon) {
+		return new PointF(tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude()),
+				tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude()));
 	}
 
 	public static class GeometryMultiProfileWayStyle extends GeometryWayStyle<MultiProfileGeometryWayContext> {
