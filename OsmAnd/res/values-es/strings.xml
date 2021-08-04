@@ -4153,4 +4153,5 @@
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de los mapas aún no están disponibles :-(</string>
     <string name="connect_track_points_as">Сonectar puntos de ruta</string>
     <string name="pro_features">Características Pro</string>
+    <string name="use_system_language">Usar lengua del sistema</string>
 </resources>
