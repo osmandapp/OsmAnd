@@ -1827,7 +1827,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onUpdatedIndexesList() {
 		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-			if (fragment instanceof DownloadEvents) {
+			if (fragment instanceof DownloadEvents && fragment.isAdded()) {
 				((DownloadEvents) fragment).onUpdatedIndexesList();
 			}
 		}
@@ -1840,7 +1840,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void downloadInProgress() {
 		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-			if (fragment instanceof DownloadEvents) {
+			if (fragment instanceof DownloadEvents && fragment.isAdded()) {
 				((DownloadEvents) fragment).downloadInProgress();
 			}
 		}
@@ -1852,7 +1852,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void downloadHasFinished() {
 		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-			if (fragment instanceof DownloadEvents) {
+			if (fragment instanceof DownloadEvents && fragment.isAdded()) {
 				((DownloadEvents) fragment).downloadHasFinished();
 			}
 		}

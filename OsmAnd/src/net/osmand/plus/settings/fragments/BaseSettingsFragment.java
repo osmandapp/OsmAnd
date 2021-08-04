@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.ColorStateList;
@@ -9,7 +11,6 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,8 +85,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
 import java.util.Set;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange {
@@ -639,11 +638,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public void updateAllSettings() {
-		PreferenceScreen screen = getPreferenceScreen();
-		if (screen != null) {
-			screen.removeAll();
+		if (getContext() != null) {
+			PreferenceScreen screen = getPreferenceScreen();
+			if (screen != null) {
+				screen.removeAll();
+			}
+			updatePreferencesScreen();
 		}
-		updatePreferencesScreen();
 	}
 
 	public boolean shouldDismissOnChange() {

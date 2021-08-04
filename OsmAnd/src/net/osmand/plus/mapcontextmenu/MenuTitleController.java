@@ -31,6 +31,7 @@ public abstract class MenuTitleController {
 	@Nullable
 	public abstract MapActivity getMapActivity();
 
+	@Nullable
 	public abstract LatLon getLatLon();
 
 	public abstract PointDescription getPointDescription();
