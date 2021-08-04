@@ -1739,7 +1739,7 @@
     <string name="feedback">Opinie</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Legenda mapy</string>
-    <string name="save_poi_without_poi_type_message">Zapisać użyteczne miejsce bez określonego rodzaju?</string>
+    <string name="save_poi_without_poi_type_message">Zapisać POI bez podawania typu\?</string>
     <string name="access_from_map_description">Przycisk menu uruchamia kokpit zamiast menu</string>
     <string name="access_from_map">Dostęp z mapy</string>
     <string name="copied_to_clipboard">Skopiowane do schowka</string>
@@ -4244,17 +4244,17 @@
     <string name="enter_verification_code">Wprowadź jednorazowe hasło</string>
     <string name="duration_moment_ago">przed chwilą</string>
     <string name="logout_from_osmand_cloud">Wyloguj się z OsmAnd Cloud</string>
-    <string name="logout_from_osmand_cloud_decsr">Czy na pewno chcesz się wylogować\?
-\nMusisz zalogować się ponownie, aby wykonać kopię zapasową lub przywrócić dane.</string>
+    <string name="logout_from_osmand_cloud_decsr">Wylogowałeś się\?
+\nAby utworzyć kopię zapasową lub przywrócić dane, konieczne będzie ponowne zalogowanie się.</string>
     <string name="backup_deleting_all_data_descr">Proszę zaczekać, aż OsmAnd usunie wszystkie Twoje dane z chmury. Wszystkie dane na urządzeniu pozostają nietknięte.</string>
     <string name="backup_error_subscription_was_expired_descr">Twoja subskrypcja OsmAnd Pro wygasła - odnów ją, aby korzystać z kopii zapasowej. Nadal możesz przywracać dane z chmury.</string>
-    <string name="backup_deleting_all_data">Usuwanie wszystkich danych</string>
-    <string name="backup_deleted_all_data">Usunięto wszystkie dane</string>
-    <string name="backup_deleted_all_data_descr">Wszystkie Twoje dane zostały usunięte z OsmAnd Cloud.</string>
-    <string name="backup_version_history_removed">Cała historia wersji jest usunięta</string>
-    <string name="backup_data_removed">Wszystkie dane są usunięte</string>
+    <string name="backup_deleting_all_data">Usuwanie wszystkich danych…</string>
+    <string name="backup_deleted_all_data">Usunięto wszystkie dane.</string>
+    <string name="backup_deleted_all_data_descr">Wszystkie Twoje dane zostały pomyślnie usunięte z OsmAnd Cloud.</string>
+    <string name="backup_version_history_removed">Cała historia wersji została usunięta.</string>
+    <string name="backup_data_removed">Wszystkie dane zostały usunięte.</string>
     <string name="shared_string_progress">Postęp</string>
-    <string name="backup_do_not_have_any">Nie masz jeszcze żadnej kopii zapasowej online</string>
+    <string name="backup_do_not_have_any">Nie masz jeszcze kopii zapasowej online.</string>
     <string name="backup_dont_have_any_descr">Skonfiguruj automatyczną kopię zapasową, aby nie martwić się o utratę danych.</string>
     <string name="backup_welcome_back">Witamy ponownie!</string>
     <string name="backup_welcome_back_descr">Możesz przywrócić dane na tym urządzeniu za pomocą istniejących kopii zapasowych lub skonfigurować kopię zapasową tego urządzenia do OsmAnd Cloud.</string>
@@ -4277,31 +4277,31 @@
     <string name="direct_line_maps_required_descr">Obliczanie trasy trwa dłużej niż zwykle.
 \n
 \nByć może niektóre mapy nie są wczytane.</string>
-    <string name="online_direct_line_maps_link">Sprawdź niezbędne mapy</string>
-    <string name="offline_maps_required_descr">Do wyznaczenia trasy wymagane są dodatkowe mapy offline.</string>
+    <string name="online_direct_line_maps_link">Sprawdź niezbędne mapy.</string>
+    <string name="offline_maps_required_descr">Brakuje niektórych map offline potrzebnych do pokonania tej trasy.</string>
     <string name="online_maps_required_descr">Niestety, OsmAnd nie mógł znaleźć (obliczyć) trasy odpowiedniej dla Twoich ustawień.
 \n
 \nByć może niektóre mapy nie są załadowane. Możesz uruchomić sprawdzenie online potrzebnych map.</string>
-    <string name="online_maps_searching_descr">Trwa wyszukiwanie map online.</string>
+    <string name="online_maps_searching_descr">Wyszukiwanie online…</string>
     <string name="reset_to_original">Przywróć do ustawień początkowych</string>
     <string name="backup_error_no_subscription">Brak ważnej subskrypcji</string>
     <string name="map_updates_for_mappers">Aktualizacje map dla twórców map</string>
     <string name="benefits_for_contributors">Korzyści dla aktywnych współpracowników OSM</string>
     <string name="benefits_for_contributors_secondary_descr">Zaloguj się do OpenStreetMap i sprawdź, czy jesteś uprawniony do otrzymywania nieograniczonych miesięcznych i godzinnych aktualizacji map.</string>
-    <string name="use_login_and_password">Użyj loginu i hasła</string>
+    <string name="use_login_and_password">Użyj nazwy użytkownika i hasła</string>
     <string name="available_until">Dostępne do %1$s</string>
-    <string name="enough_contributions_descr">Gratulacje, dokonałeś wystarczającego wkładu w OpenStreetMap i możesz cieszyć się nieograniczonymi aktualizacjami map.</string>
-    <string name="map_updates_are_unavailable_yet">Aktualizacje map są jeszcze niedostępne :-(</string>
+    <string name="enough_contributions_descr">Gratulacje, wniosłeś wystarczający wkład w OpenStreetMap i możesz teraz cieszyć się nieograniczonymi aktualizacjami map OsmAnd!</string>
+    <string name="map_updates_are_unavailable_yet">Aktualizacje map nie są jeszcze dostępne :-(</string>
     <string name="connect_track_points_as">Połącz punkty trasy</string>
-    <string name="routes_color_by_type">Koloruj trasy wg</string>
+    <string name="routes_color_by_type">Kolor trasy według…</string>
     <string name="shared_string_relation">Relacja</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i symbolu odznaki turystycznej</string>
     <string name="walking_route_osmc_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i typu (międzynarodowe, regionalne, lokalne)</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_description">Przypisz kolor trasom na podstawie typu sieci węzłów (międzynarodowa, regionalna, lokalna), do której należą</string>
-    <string name="benefits_for_contributors_primary_descr">Możesz zyskać nieograniczone, cogodzinne aktualizacje map, jeśli jesteś aktywnym współautorem OpenStreetMap.org.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolor trasy według typu sieci węzłów (międzynarodowy, regionalny, lokalny).</string>
+    <string name="benefits_for_contributors_primary_descr">Możesz być uprawniony do nieograniczonych aktualizacji map co godzinę, jeśli jesteś aktywnym współtwórcą OpenStreetMap.org.</string>
     <string name="not_enough_contributions_descr">Musisz zrobić co najmniej %1$s wkłady(-ów) w rozwój map OpenStreetMap przez ostatnie %2$s dni.</string>
     <string name="shared_string_contributions">Wkłady w rozwój</string>
     <string name="contributions_may_calculate_with_delay">Wkłady mogą być obliczane z kilkugodzinnymi opóźnieniami.</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_description">Koloruj wg przeznaczenia trasy</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolor wg przeznaczenia trasy.</string>
     <string name="pro_features">Funkcje Pro</string>
 </resources>
