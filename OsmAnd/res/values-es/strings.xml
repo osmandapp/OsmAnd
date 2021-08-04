@@ -3910,7 +3910,7 @@
     <string name="routing_attr_allow_streams_description">Permitir arroyos y desagües</string>
     <string name="routing_attr_allow_streams_name">Permitir arroyos y desagües</string>
     <string name="routing_attr_allow_intermittent_description">Permitir vías de agua intermitentes</string>
-    <string name="voice_prompts_timetable">Tiempo de indicaciones por voz</string>
+    <string name="voice_prompts_timetable">Tiempo de los avisos por voz</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews es un proyecto impulsado por la comunidad sobre lugares públicos como restaurantes, hoteles, museos, puntos de referencia. Recoge toda la información pública sobre ellos como fotos, reseñas, enlaces a otros servicios como OpenStreetMap y Wikipedia.
 \n
