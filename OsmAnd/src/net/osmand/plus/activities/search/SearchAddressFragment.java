@@ -56,7 +56,6 @@ public class SearchAddressFragment extends Fragment {
 	private LatLon searchPoint = null;
 
 	private View view;
-	
 
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.search_address, container, false);
@@ -70,8 +69,6 @@ public class SearchAddressFragment extends Fragment {
 		setHasOptionsMenu(true);
 		return view;
 	}
-
-
 
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
@@ -278,7 +275,6 @@ public class SearchAddressFragment extends Fragment {
 			return ai;
 		}
 		
-		
 		public static AddressInformation buildBuilding(Context ctx, OsmandSettings settings){
 			AddressInformation ai = new AddressInformation();
 			String cityName = getCityName(settings);
@@ -422,13 +418,12 @@ public class SearchAddressFragment extends Fragment {
 		updateBuildingSection();
 	}
 
-
-
 	private String getRegionName() {
-		RegionAddressRepository reg = getApplication().getResourceManager().getRegionRepository(region);
-		if(reg != null) {
-			return FileNameTranslationHelper.getFileName(getApplication(), 
-					getApplication().getResourceManager().getOsmandRegions(), reg.getFileName());
+		OsmandApplication app = getApplication();
+		RegionAddressRepository reg = app.getResourceManager().getRegionRepository(region);
+		if (reg != null) {
+			return FileNameTranslationHelper.getFileName(app,
+					app.getResourceManager().getOsmandRegions(), reg.getFileName());
 		} else {
 			return region;
 		}
@@ -458,7 +453,6 @@ public class SearchAddressFragment extends Fragment {
 		}
 	}
 	
-	
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -471,9 +465,5 @@ public class SearchAddressFragment extends Fragment {
 		region = osmandSettings.getLastSearchedRegion();
 		loadData();
 		updateUI();
-		
 	}
-
-	
-	
 }
