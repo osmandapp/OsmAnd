@@ -1,27 +1,37 @@
 package net.osmand.plus.backup.ui;
 
-import android.content.Context;
-import android.net.Uri;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.SOFT_KEYBOARD_MIN_DETECTION_SIZE;
+
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.AppBarLayout.Behavior;
-import com.google.android.material.appbar.AppBarLayout.Behavior.DragCallback;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -30,35 +40,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.Version;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupListeners.OnRegisterUserListener;
-import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
 
 public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterUserListener, OnRegisterDeviceListener {
 
@@ -67,7 +61,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	public static final String TAG = AuthorizeFragment.class.getSimpleName();
 
 	private static final String OSMAND_EMAIL = "support@osmand.net";
-	private static final String OSMAND_DOCS = "https://docs.osmand.net/en/main@latest/osmand/purchases/android";
 
 	private static final String LOGIN_DIALOG_TYPE_KEY = "login_dialog_type_key";
 	private static final String SIGN_IN_KEY = "sign_in_key";
@@ -80,14 +73,14 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 
 	private View mainView;
 	private Toolbar toolbar;
-	private TextView toolbarTitle;
 	private ProgressBar progressBar;
-	private TextView headerTitle;
 	private TextView description;
 	private View buttonContinue;
 	private View buttonChoosePlan;
 	private TextView errorText;
 	private View buttonAuthorize;
+	private View keyboardSpace;
+	private View space;
 
 	private LoginDialogType dialogType = LoginDialogType.SIGN_UP;
 
@@ -134,23 +127,20 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		View view = themedInflater.inflate(R.layout.fragment_cloud_authorize, container, false);
 		AndroidUtils.addStatusBarPadding21v(app, view);
 
-		toolbarTitle = view.findViewById(R.id.toolbar_title);
-		headerTitle = view.findViewById(R.id.header_title);
+		space = view.findViewById(R.id.space);
 		toolbar = view.findViewById(R.id.toolbar);
 		mainView = view.findViewById(R.id.main_view);
 		description = view.findViewById(R.id.description);
 		progressBar = view.findViewById(R.id.progress_bar);
 		buttonContinue = view.findViewById(R.id.continue_button);
 		buttonChoosePlan = view.findViewById(R.id.get_button);
+		keyboardSpace = view.findViewById(R.id.keyboard_space);
 
-		setupAppbar();
 		setupToolbar();
 		setupTextWatchers();
 		updateContent();
 		setupSupportButton();
-		if (AndroidUiHelper.isOrientationPortrait(requireActivity())) {
-			setupKeyboardListener();
-		}
+		setupKeyboardListener();
 
 		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.get_plugin);
 		UiUtilities.setupDialogButton(nightMode, buttonContinue, DialogButtonType.PRIMARY, R.string.shared_string_continue);
@@ -192,38 +182,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		}
 	}
 
-	private void setupAppbar() {
-		AppBarLayout appbar = mainView.findViewById(R.id.appbar);
-
-		appbar.addOnOffsetChangedListener((appBar, verticalOffset) -> {
-			float absOffset = Math.abs(verticalOffset);
-			float totalScrollRange = appBar.getTotalScrollRange();
-			float alpha = UiUtilities.getProportionalAlpha(totalScrollRange * 0.25f,
-					totalScrollRange * 0.9f, absOffset);
-			float inverseAlpha = 1.0f - UiUtilities.getProportionalAlpha(totalScrollRange * 0.5f,
-					totalScrollRange, absOffset);
-
-			toolbarTitle.setAlpha(inverseAlpha);
-			headerTitle.setAlpha(alpha);
-		});
-
-		forbidAppbarDragging(appbar);
-	}
-
-	private void forbidAppbarDragging(AppBarLayout appbar) {
-		CoordinatorLayout.LayoutParams appBarParams = (CoordinatorLayout.LayoutParams) appbar.getLayoutParams();
-		if (appBarParams.getBehavior() == null) {
-			appBarParams.setBehavior(new AppBarLayout.Behavior());
-		}
-		AppBarLayout.Behavior appBarBehaviour = (Behavior) appBarParams.getBehavior();
-		appBarBehaviour.setDragCallback(new DragCallback() {
-			@Override
-			public boolean canDrag(@NonNull AppBarLayout appBarLayout) {
-				return false;
-			}
-		});
-	}
-
 	private void setupToolbar() {
 		AppBarLayout appBarLayout = mainView.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appBarLayout, 5.0f);
@@ -236,21 +194,10 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				activity.onBackPressed();
 			}
 		});
-		ImageView actionButton = toolbar.findViewById(R.id.action_button);
-		actionButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_help_online));
-		actionButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				WikipediaDialogFragment.showFullArticle(activity, Uri.parse(OSMAND_DOCS), nightMode);
-			}
-		});
-		AndroidUiHelper.updateVisibility(toolbar.findViewById(R.id.toolbar_switch_container), false);
 	}
 
 	private void updateContent() {
-		toolbarTitle.setText(dialogType.titleId);
-		headerTitle.setText(dialogType.titleId);
-		
+		toolbar.setTitle(dialogType.titleId);
 		updateDescription();
 
 		for (LoginDialogType type : LoginDialogType.values()) {
@@ -497,35 +444,32 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	private void setupKeyboardListener() {
-		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+		if (AndroidUiHelper.isOrientationPortrait(requireActivity())) {
+			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 
-			private int previousKeyboardHeight = 0;
+				private int previousKeyboardHeight = 0;
 
-			@Override
-			public void onGlobalLayout() {
-				AppBarLayout appbar = mainView.findViewById(R.id.appbar);
-				View keyboardSpace = mainView.findViewById(R.id.keyboard_space);
-				View space = mainView.findViewById(R.id.space);
-				int keyboardHeight = AndroidUtils.getSoftKeyboardHeight(mainView);
-				boolean heightChanged = previousKeyboardHeight != keyboardHeight;
-				if (!heightChanged) {
-					return;
+				@Override
+				public void onGlobalLayout() {
+					Rect r = new Rect();
+					mainView.getWindowVisibleDisplayFrame(r);
+					int screenHeight = mainView.getRootView().getHeight();
+					int keypadHeight = screenHeight - r.bottom;
+					boolean softKeyboardVisible = keypadHeight > screenHeight * SOFT_KEYBOARD_MIN_DETECTION_SIZE;
+
+					if (previousKeyboardHeight != keypadHeight) {
+						previousKeyboardHeight = keypadHeight;
+						if (softKeyboardVisible) {
+							space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, space.getHeight()));
+							keyboardSpace.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, keypadHeight));
+						} else {
+							space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 0, 1));
+						}
+						AndroidUiHelper.updateVisibility(keyboardSpace, softKeyboardVisible);
+					}
 				}
-
-				previousKeyboardHeight = keyboardHeight;
-				if (keyboardHeight > 0) {
-					space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, space.getHeight()));
-					keyboardSpace.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-							keyboardHeight));
-					AndroidUiHelper.updateVisibility(keyboardSpace, true);
-					appbar.setExpanded(false);
-				} else {
-					space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 0, 1));
-					AndroidUiHelper.updateVisibility(keyboardSpace, false);
-					appbar.setExpanded(true);
-				}
-			}
-		});
+			});
+		}
 	}
 
 	public enum LoginDialogType {
@@ -562,38 +506,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 					replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-		}
-	}
-
-	public static class FixScrollingFooterBehaviour extends AppBarLayout.ScrollingViewBehavior {
-
-		private AppBarLayout appBar;
-
-		public FixScrollingFooterBehaviour() {
-			super();
-		}
-
-		public FixScrollingFooterBehaviour(Context context, AttributeSet attrs) {
-			super(context, attrs);
-		}
-
-		@Override
-		public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
-			if (appBar == null) {
-				appBar = ((AppBarLayout) dependency);
-			}
-
-			boolean viewChanged = super.onDependentViewChanged(parent, child, dependency);
-			int bottomPadding = appBar.getTop() + appBar.getTotalScrollRange()
-					- AndroidUtils.getStatusBarHeight(parent.getContext());
-			boolean paddingChanged = bottomPadding != child.getPaddingBottom();
-			if (paddingChanged) {
-				child.setPadding(child.getPaddingLeft(), child.getPaddingTop(), child.getPaddingRight(),
-						bottomPadding);
-				child.requestLayout();
-			}
-
-			return paddingChanged || viewChanged;
 		}
 	}
 }

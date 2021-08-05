@@ -99,7 +99,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public static final String ADDED_POINTS_NUMBER_KEY = "added_points_number_key";
 
 	private static final String SELECTED_POINT_KEY = "selected_point_key";
-	private static final double SOFT_KEYBOARD_MIN_DETECTION_SIZE = 0.15;
+	public static final double SOFT_KEYBOARD_MIN_DETECTION_SIZE = 0.15;
 
 	private GPXFile newGpxFile;
 	private OnPointsSavedListener listener;

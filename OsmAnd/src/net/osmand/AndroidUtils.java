@@ -13,7 +13,6 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ClipDrawable;
@@ -138,15 +137,7 @@ public class AndroidUtils {
 				}
 			}
 		}
-	}
 
-	public static int getSoftKeyboardHeight(@NonNull View rootView) {
-		Context context = rootView.getContext();
-		Rect visibleBounds = new Rect();
-		rootView.getWindowVisibleDisplayFrame(visibleBounds);
-		int windowCoveredHeight = rootView.getHeight() - visibleBounds.height() - getStatusBarHeight(context);
-		int supposedKeyboardMinHeight = dpToPx(context, 50);
-		return windowCoveredHeight > supposedKeyboardMinHeight ? windowCoveredHeight : 0;
 	}
 
 	public static Bitmap scaleBitmap(Bitmap bm, int newWidth, int newHeight, boolean keepOriginalBitmap) {
