@@ -1414,7 +1414,7 @@
     <string name="osn_close_dialog_error">Nota nu a putut fi închisă.</string>
     <string name="shared_string_commit">Comite</string>
     <string name="context_menu_item_delete_waypoint">Ștergi punctul de referință GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Editează punctul de referință GPX</string>
+    <string name="context_menu_item_edit_waypoint">Editare punct de trecere GPX</string>
     <string name="shared_string_location">Locație</string>
     <string name="share_osm_edits_subject">Editări OSM distribuite prin OsmAnd</string>
     <string name="lang_nds">Minim în limba germană</string>

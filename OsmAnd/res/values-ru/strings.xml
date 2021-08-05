@@ -2012,7 +2012,7 @@
     <string name="downloading_number_of_files">Загрузка файла — %1$d</string>
     <string name="read_more">Подробнее</string>
     <string name="whats_new">Что нового в</string>
-    <string name="save_poi_without_poi_type_message">Вы действительно хотите сохранить POI без указания типа?</string>
+    <string name="save_poi_without_poi_type_message">Сохранить POI без указания типа\?</string>
     <string name="route_distance">Расстояние:</string>
     <string name="route_duration">Время:</string>
     <string name="access_from_map_description">Кнопка меню открывает панель управления, а не меню</string>
@@ -4304,4 +4304,12 @@
     <string name="online_direct_line_maps_link">Проверить карты</string>
     <string name="offline_maps_required_descr">Для расчета маршрута требуются дополнительные офлайн-карты.</string>
     <string name="pro_features">Возможности Pro</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Окраска согласно принадлежности к сети.</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Окраска маршрутов согласно их индивидуальным местным цветом (если он присутствует в OpenStreetMap) и символа туристического щита.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Окраска маршрутов согласно типу сети узлов (международной, региональной, местной).</string>
+    <string name="travel_routes">Туристические маршруты</string>
+    <string name="direct_line_maps_required_descr">Вычисления маршрута длится дольше чем обычно.
+\n
+\nВозможно, некоторые карты не загружены.</string>
+    <string name="connect_track_points_as">Соедините точки маршрута</string>
 </resources>
