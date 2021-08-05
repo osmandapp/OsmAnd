@@ -27,6 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
 import net.osmand.plus.routing.RoutingHelper;
 
@@ -52,7 +53,7 @@ public class RouteStatisticCard extends MapBaseCard {
 		super(mapActivity);
 		this.gpx = gpx;
 		this.onAnalyseClickListener = onAnalyseClickListener;
-		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, true);
+		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
 	}
 
 	@Nullable

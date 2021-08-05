@@ -44,6 +44,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.track.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
@@ -121,7 +122,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			GPXFile gpxFile = displayHelper.getGpx();
 			if (gpxFile != null && !gpxFile.isEmpty()) {
 				analysis = gpxFile.getAnalysis(0);
-				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, false);
+				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX);
 			}
 		} else {
 			if (gpxItem != null) {
