@@ -60,7 +60,7 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupHeader(@NonNull View view) {
-		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(SHOW_CYCLE_ROUTES_ATTR);
+		CommonPreference<Boolean> pref = getPreference();
 
 		View container = view.findViewById(R.id.preference_container);
 
@@ -87,11 +87,12 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 				View view = getView();
 				if (view != null) {
 					setupHeader(view);
+					setupTypesCard(view);
 				}
 				MapActivity mapActivity = (MapActivity) getMyActivity();
 				if (mapActivity != null) {
-					mapActivity.refreshMapComplete();
-					mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+					mapActivity.refreshMap();
+					mapActivity.updateLayers();
 				}
 			}
 		});
@@ -114,7 +115,11 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		TextToggleButton radioGroup = new TextToggleButton(app, view.findViewById(R.id.custom_radio_buttons), nightMode);
 		radioGroup.setItems(relation, nodeNetworks);
 		radioGroup.setSelectedItem(pref.get() ? nodeNetworks : relation);
+		boolean enabled = getPreference().get();
+		AndroidUiHelper.updateVisibility(container, enabled);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.topShadowView), enabled);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.descr), false);
+		AndroidUiHelper.updateVisibility(view.findViewById(R.id.card_bottom_divider), enabled);
 	}
 
 	private TextRadioItem createRadioButton(@NonNull CommonPreference<Boolean> pref, boolean enabled, int titleId) {
@@ -144,5 +149,9 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
 		params.height = height;
 		bottomView.setLayoutParams(params);
+	}
+
+	private CommonPreference<Boolean> getPreference() {
+		return settings.getCustomRenderBooleanProperty(SHOW_CYCLE_ROUTES_ATTR);
 	}
 }
