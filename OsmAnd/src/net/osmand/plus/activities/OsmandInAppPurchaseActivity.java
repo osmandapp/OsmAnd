@@ -68,7 +68,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 					if (!activityDestroyed && AndroidUtils.isActivityNotDestroyed(activity)) {
 						purchaseHelper.setUiActivity(activity);
 						if (purchaseHelper.needRequestInventory()) {
-							purchaseHelper.requestInventory();
+							purchaseHelper.requestInventory(false);
 						}
 					}
 				}
