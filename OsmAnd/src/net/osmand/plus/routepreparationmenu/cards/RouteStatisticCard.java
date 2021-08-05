@@ -213,7 +213,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	private void buildHeader(GPXTrackAnalysis analysis) {
 		LineChart mChart = (LineChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
-		graphAdapter = new CommonGraphAdapter(mChart, true);
+		graphAdapter = new CommonGraphAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();

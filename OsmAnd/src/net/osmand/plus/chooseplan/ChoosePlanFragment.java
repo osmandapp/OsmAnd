@@ -222,13 +222,16 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		PriceButton<?>[] array = new PriceButton[priceButtons.size()];
 		priceButtons.toArray(array);
 
+		int osmAndProIconId = nightMode ?
+				R.drawable.ic_action_osmand_pro_logo_colored_night :
+				R.drawable.ic_action_osmand_pro_logo_colored;
 		CharSequence price = array.length == 0 ? null : ObjectUtils.min(array).getPrice();
 		updateContinueButton(mainView.findViewById(R.id.button_continue_pro),
-				R.drawable.ic_action_osmand_pro_logo_colored,
+				osmAndProIconId,
 				getString(R.string.osmand_pro),
 				price,
 				v -> OsmAndProPlanFragment.showInstance(requireActivity()),
-				Version.isGooglePlayEnabled());
+				Version.isInAppPurchaseSupported());
 
 		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper);
 		array = new PriceButton[priceButtons.size()];
@@ -242,7 +245,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 				getString(R.string.maps_plus),
 				price,
 				v -> MapsPlusPlanFragment.showInstance(requireActivity()),
-				availableInMapsPlus && Version.isGooglePlayEnabled());
+				availableInMapsPlus && Version.isInAppPurchaseSupported());
 	}
 
 	private void updateContinueButton(View view, int iconId, String plan, CharSequence price, OnClickListener listener, boolean available) {

@@ -37,6 +37,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.myplaces.DeletePointsTask;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.EditTrackGroupDialogFragment;
@@ -111,7 +112,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			addActions(inflater);
 			addWaypointAction(inflater);
 		}
-		if (!adapter.isEmpty() && deleteWaypointActionView == null){
+		if (!adapter.isEmpty() && deleteWaypointActionView == null) {
 			AndroidUiHelper.updateVisibility(addWaypointActionView.findViewById(R.id.divider), true);
 			deleteWaypointAction(inflater);
 		} else if (adapter.isEmpty() && deleteWaypointActionView != null) {
@@ -214,10 +215,12 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			if (cardListener != null) {
 				cardListener.onCardButtonPressed(this, OPEN_WAYPOINT_INDEX);
 			}
-
 			LatLon location = new LatLon(item.locationStart.lat, item.locationStart.lon);
 			PointDescription description = new PointDescription(PointDescription.POINT_TYPE_WPT, item.name);
-			mapActivity.getContextMenu().show(location, description, item.locationStart);
+
+			MapContextMenu contextMenu = mapActivity.getContextMenu();
+			contextMenu.setCenterMarker(true);
+			contextMenu.show(location, description, item.locationStart);
 		}
 		return true;
 	}

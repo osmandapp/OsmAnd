@@ -55,7 +55,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (settings.isInternetConnectionAvailable()
 					&& isInAppPurchaseAllowed()
-					&& isInAppPurchaseSupported()) {
+					&& Version.isInAppPurchaseSupported()) {
 				this.purchaseHelper = purchaseHelper;
 			}
 		}
@@ -159,10 +159,6 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	public boolean isInAppPurchaseAllowed() {
 		return false;
-	}
-
-	public boolean isInAppPurchaseSupported() {
-		return Version.isGooglePlayEnabled() || Version.isHuawei();
 	}
 
 	@Override
