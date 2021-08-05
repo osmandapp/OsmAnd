@@ -4283,29 +4283,29 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Einfärbung von Routen nach dem Typ ihres Knotennetzes (international, regional, lokal).</string>
     <string name="walking_route_osmc_description">Einfärbung von Routen nach ihrer individuellen lokalen Farbe (falls in OpenStreetMap vorhanden) und ihrem Typ (international, regional, lokal).</string>
     <string name="travel_routes">Reiserouten</string>
-    <string name="setting_supported_by_style">Diese Einstellung wird vom Kartenstil \'%1$s\' unterstützt</string>
+    <string name="setting_supported_by_style">Diese Einstellung wird vom Kartenstil \'%1$s\' bereitgestellt</string>
     <string name="direct_line_maps_required_descr">Die Routenberechnung dauert länger als üblich.
 \n
 \nVielleicht wurden einige Karten nicht geladen.</string>
-    <string name="online_direct_line_maps_link">Erforderliche Karten überprüfen</string>
-    <string name="offline_maps_required_descr">Für die Berechnung der Route werden zusätzliche Offline Karten benötigt.</string>
+    <string name="online_direct_line_maps_link">Erforderliche Karten überprüfen.</string>
+    <string name="offline_maps_required_descr">Für die Berechnung der Route werden zusätzliche Offline-Karten benötigt.</string>
     <string name="online_maps_required_descr">Leider konnte OsmAnd keine Route finden (berechnen), die zu Ihren Einstellungen passt.
 \n
-\nVielleicht sind einige Karten nicht geladen. Sie können eine Online Überprüfung der erforderlichen Karten durchführen.</string>
-    <string name="online_maps_searching_descr">Online Kartensuche läuft.</string>
+\nVielleicht sind einige Karten nicht geladen, Sie können eine Online Überprüfung der erforderlichen Karten durchführen.</string>
+    <string name="online_maps_searching_descr">Online-Suche läuft…</string>
     <string name="reset_to_original">Auf Original zurücksetzen</string>
     <string name="backup_error_no_subscription">Kein Abonnement vorhanden</string>
     <string name="map_updates_for_mappers">Kartenaktualisierungen für Mapper</string>
     <string name="benefits_for_contributors">Vorteile für aktive OSM-Beitragende</string>
     <string name="benefits_for_contributors_primary_descr">Sie können von stündlichen, unbegrenzten Kartenaktualisierungen profitieren, wenn Sie aktiv zu OpenStreetMap.org beitragen.</string>
-    <string name="benefits_for_contributors_secondary_descr">Bei OpenStreetMap anmelden und prüfen, ob Sie berechtigt sind, unbegrenzte monatliche und stündliche Kartenaktualisierungen zu erhalten.</string>
+    <string name="benefits_for_contributors_secondary_descr">Bei OpenStreetMap anmelden um zu prüfen, ob Sie berechtigt sind, unbegrenzte monatliche und stündliche Kartenaktualisierungen zu erhalten.</string>
     <string name="use_login_and_password">Benutzername und Passwort verwenden</string>
     <string name="available_until">Verfügbar bis %1$s</string>
-    <string name="enough_contributions_descr">Herzlichen Glückwunsch, Sie haben genügend Beiträge zu OpenStreetMap geleistet und können unbegrenzte Kartenaktualisierungen genießen.</string>
-    <string name="not_enough_contributions_descr">Es müssen mindestens %1$s Kartenbeiträge zu OpenStreetMap innerhalb der letzten %2$s Tage verfasst werden.</string>
+    <string name="enough_contributions_descr">Herzlichen Glückwunsch, Sie haben genügend Beiträge zu OpenStreetMap geleistet und können nun unbegrenzte Kartenaktualisierungen genießen!</string>
+    <string name="not_enough_contributions_descr">Mindestens %1$s Kartenbeiträge zu OpenStreetMap müssen innerhalb der letzten %2$s Tage verfasst worden sein.</string>
     <string name="shared_string_contributions">Beiträge</string>
-    <string name="contributions_may_calculate_with_delay">Beiträge können mit mehrstündiger Verzögerung berechnet werden.</string>
+    <string name="contributions_may_calculate_with_delay">Das Berechnen der Beiträge könnte mehrere Stunden dauern.</string>
     <string name="map_updates_are_unavailable_yet">Kartenupdates sind noch nicht verfügbar :-(</string>
     <string name="connect_track_points_as">Routenpunkte verbinden</string>
-    <string name="pro_features">Pro Funktionen</string>
+    <string name="pro_features">Pro-Funktionen</string>
 </resources>
