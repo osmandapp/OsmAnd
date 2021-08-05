@@ -1741,7 +1741,7 @@
     <string name="lang_mk">Macedónsky</string>
     <string name="lang_fy">Frízsky</string>
     <string name="lang_als">Albánsky (Tosk)</string>
-    <string name="save_poi_without_poi_type_message">Naozaj chcete uložiť bod záujmu bez uvedenia typu?</string>
+    <string name="save_poi_without_poi_type_message">Uložiť bod záujmu bez uvedenia typu\?</string>
     <string name="shared_string_location">Poloha</string>
     <string name="poi_context_menu_modify_osm_change">Upraviť zmenu OSM</string>
     <string name="context_menu_item_delete_waypoint">Odstrániť bod GPX?</string>
@@ -4162,7 +4162,7 @@
     <string name="grey_color_slope">Sivá farba sa použije, keď sklon nie je určený.</string>
     <string name="backup_version_history">História verzií</string>
     <string name="backup_storage_taken">Použité miesto</string>
-    <string name="backup_version_history_delete_descr">Vymazať históriu zmien pre zastaralé dátové typy z OsmAnd cloudu\?</string>
+    <string name="backup_version_history_delete_descr">Vymazať históriu zmien pre zastaralé dátové typy z OsmAnd Cloudu\?</string>
     <string name="delete_version_history">Vymazať históriu verzií</string>
     <string name="unlimited_map_downloads">Neobmedzený počet stiahnutých máp</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia a Wikivoyage offline</string>
@@ -4186,7 +4186,7 @@
     <string name="complete_purchase">Dokončiť nákup</string>
     <string name="regular_price">Bežná cena</string>
     <string name="from_with_param">Od %1$s</string>
-    <string name="backup_delete_types_descr">Vymazať všetky údaje zastaralých typov z OsmAnd cloudu\?</string>
+    <string name="backup_delete_types_descr">Vymazať všetky údaje zastaralých typov z OsmAnd Cloudu\?</string>
     <string name="backup_delete_types">Vymazať vypnuté typy údajov</string>
     <string name="shared_string_discussion">Diskusia</string>
     <string name="shared_string_view_all">Zobraziť všetko</string>
@@ -4203,13 +4203,13 @@
     <string name="enter_verification_code">Zadajte jednorazové heslo</string>
     <string name="backup_deleting_all_data_descr">Prosím čakajte kým OsmAnd odstráni všetky vaše údaje z cloudu. Údaje na zariadení zostanú nedotknuté.</string>
     <string name="backup_deleted_all_data_descr">Všetky vaše údaje boli úspešne odstránené z OsmAnd Cloudu.</string>
-    <string name="backup_version_history_removed">História verzií odstránená</string>
-    <string name="backup_data_removed">Všetky údaje odstránené</string>
+    <string name="backup_version_history_removed">História verzií bola odstránená.</string>
+    <string name="backup_data_removed">Všetky údaje boli odstránené.</string>
     <string name="shared_string_progress">Postup</string>
-    <string name="backup_do_not_have_any">Zatiaľ nemáte žiadne online zálohy</string>
-    <string name="backup_dont_have_any_descr">Nastavte automatické zálohovanie, aby ste nemuseli mať starosť o stratu údajov.</string>
+    <string name="backup_do_not_have_any">Zatiaľ nemáte žiadne online zálohy.</string>
+    <string name="backup_dont_have_any_descr">Naplánujte automatické zálohovanie a nikdy nestraťte údaje.</string>
     <string name="backup_welcome_back">Vitajte späť!</string>
-    <string name="backup_welcome_back_descr">Môžete obnoviť údaje na tomto zariadení pomocou existujúcej zálohy, alebo nastaviť zálohovanie tohto zariadenia do OsmAnd Cloudu.</string>
+    <string name="backup_welcome_back_descr">Obnovte údaje na tomto zariadení pomocou existujúcej zálohy alebo zálohujte údaje do OsmAnd Cloudu.</string>
     <string name="backup_setup">Nastaviť zálohovanie</string>
     <string name="backup_restore_now">Obnoviť teraz</string>
     <string name="attribute">Vlastnosť</string>
@@ -4226,7 +4226,7 @@
     <string name="purchases_feature_desc_wikipedia">Skúmajte Wikipédiu offline. Články rozdelené podľa krajín a regiónov a dostupné vo všetkých jazykoch.</string>
     <string name="release_4_0">• Zálohovanie do Cloudu
 \n
-\n • Pridaný nočný režim pre vykresľovací štýl \"Topo\"
+\n • Pridaný nočný režim pre mapový štýl \"Topo\"
 \n
 \n • Pridaná možnosť stiahnuť vrstevnice v stopách namiesto metrov
 \n
@@ -4236,7 +4236,7 @@
 \n
 \n • Meranie vzdialenosti stlačením presunuté z polomerového pravítka do samostatnej možnosti
 \n
-\n • Plánovanie trasy: pridaná možnosť zmeniť navigačné nastavenia, nastavenie mapy a hľadať bez opustenia plánovania trasy
+\n • Plánovanie trasy: môžete zmeniť navigačné nastavenia, nastaviť mapu a hľadať bez opustenia plánovania trasy
 \n
 \n • Nová obrazovka \"Nákupy\" s informáciami o nákupe funkcií
 \n
@@ -4256,47 +4256,48 @@
     <string name="approximate_route_description">Pripojiť trasu k cestám na mape pre získanie zákrut a doplňujúcich údajov ako hladkosť povrchu, typy ciest, atď.</string>
     <string name="duration_moment_ago">pred chvíľou</string>
     <string name="logout_from_osmand_cloud">Odhlásiť z OsmAnd Cloudu</string>
-    <string name="logout_from_osmand_cloud_decsr">Naozaj sa chcete odhlásiť\?
+    <string name="logout_from_osmand_cloud_decsr">Odhlásiť sa\?
 \nPred ďalším zálohovaním alebo obnovením údajov sa budete musieť znovu prihlásiť.</string>
-    <string name="backup_deleting_all_data">Odstraňujú sa všetky údaje</string>
-    <string name="backup_deleted_all_data">Všetky údaje odstránené</string>
+    <string name="backup_deleting_all_data">Odstraňujú sa všetky údaje…</string>
+    <string name="backup_deleted_all_data">Všetky údaje odstránené.</string>
     <string name="promo_subscription">Propagačné predplatné</string>
     <string name="on_hold_since">Pozastavené od %1$s</string>
     <string name="active_till">Aktívne do %1$s</string>
     <string name="track_has_no_needed_data">Stopa neobsahuje potrebné údaje.</string>
-    <string name="not_enough_contributions_descr">Musíte vykonať aspoň %1$s príspevkov do máp OpenStreetMap za posledných %2$s dní.</string>
+    <string name="not_enough_contributions_descr">Vyžaduje sa aspoň %1$s príspevkov do OpenStreetMap za posledných %2$s dní.</string>
     <string name="shared_string_contributions">Príspevky</string>
-    <string name="contributions_may_calculate_with_delay">Príspevky môžu byť počítané s oneskorením niekoľkých hodín.</string>
+    <string name="contributions_may_calculate_with_delay">Výpočet príspevkov môže trvať niekoľko hodín.</string>
     <string name="map_updates_are_unavailable_yet">Aktualizácie máp ešte nie sú dostupné :-(</string>
     <string name="connect_track_points_as">Spojiť body trasy</string>
     <string name="pro_features">Pokročilé (Pro) funkcie</string>
-    <string name="purchases_feature_desc_pro_widgets">Získajte prístup k pokročilým (Pro) funkciám OsmAnd. Farbenie trás a ďalšie.</string>
+    <string name="purchases_feature_desc_pro_widgets">Získajte prístup k pokročilým (Pro) funkciám OsmAnd: Vyfarbenie trás a ďalšie.</string>
     <string name="option_available_only_in_osmand_pro">Voľba je dostupná v predplatnom OsmAnd Pro.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Preskúmajte predplatné OsmAnd a nájdite to vhodné pre vás.</string>
-    <string name="routes_color_by_type">Farby trás podľa</string>
+    <string name="routes_color_by_type">Vyfarbiť trasy podľa…</string>
     <string name="shared_string_relation">Relácia</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">Priradiť farby trasám podľa ich vlastných farieb (ak sú zadané v OpenStreetMap) a turistického symbolu</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_description">Farba podľa príslušnosti k sieti</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_description">Priradiť farby trasám podľa typu siete (medzinárodná, regionálna, lokálna), do ktorej patria</string>
-    <string name="walking_route_osmc_description">Priradiť farby trasám podľa ich vlastných farieb (ak sú zadané v OpenStreetMap) a typu (medzinárodné, regionálne, lokálne)</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Vyfarbiť trasy podľa ich vlastných farieb (ak sú zadané v OpenStreetMap) a turistického symbolu.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Farba podľa príslušnosti k sieti.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Vyfarbiť trasy podľa ich typu siete (medzinárodná, regionálna, lokálna).</string>
+    <string name="walking_route_osmc_description">Vyfarbiť trasy podľa ich vlastných farieb (ak sú zadané v OpenStreetMap) a typu (medzinárodné, regionálne, lokálne).</string>
     <string name="travel_routes">Cestovné trasy</string>
-    <string name="setting_supported_by_style">Toto nastavenie je podporované mapovým štýlom \'%1$s\'</string>
+    <string name="setting_supported_by_style">Toto nastavenie je poskytované mapovým štýlom \'%1$s\'</string>
     <string name="direct_line_maps_required_descr">Výpočet trasy trvá dlhšie ako je bežné.
 \n
 \nMožno nie sú načítané niektoré mapy.</string>
-    <string name="online_direct_line_maps_link">Skontrolovať potrebné mapy</string>
-    <string name="offline_maps_required_descr">Pre výpočet trasy sú potrebné ďalšie offline mapy.</string>
-    <string name="online_maps_required_descr">Žiaľ, OsmAnd nemohol nájsť (vypočítať) vhodnú trasu pre vaše nastavenia.
+    <string name="online_direct_line_maps_link">Skontrolovať potrebné mapy.</string>
+    <string name="offline_maps_required_descr">Pre výpočet tejto trasy chýbajú ďalšie offline mapy.</string>
+    <string name="online_maps_required_descr">Žiaľ, OsmAnd nemohol určiť vhodnú trasu pre vaše nastavenia.
 \n
-\nMôžno nie sú načítané nejaké mapy. Môžete spustiť hľadanie potrebných máp online.</string>
-    <string name="online_maps_searching_descr">Prebieha online vyhľadávanie máp.</string>
+\nMožno nie sú načítané nejaké mapy. Môžete spustiť hľadanie potrebných máp online.</string>
+    <string name="online_maps_searching_descr">Hľadá sa online…</string>
     <string name="reset_to_original">Obnoviť na pôvodné</string>
     <string name="backup_error_no_subscription">Neexistuje žiadne predplatné</string>
     <string name="map_updates_for_mappers">Aktualizácie máp pre maperov</string>
     <string name="benefits_for_contributors">Výhody pre aktívnych prispievateľov do OSM</string>
-    <string name="benefits_for_contributors_primary_descr">Môžete mať neobmedzené hodinové aktualizácie máp ak ste aktívnym prispievateľom do OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">Môžete mať nárok na neobmedzené hodinové aktualizácie máp ak ste aktívnym prispievateľom do OpenStreetMap.org.</string>
     <string name="benefits_for_contributors_secondary_descr">Prihláste sa do OpenStreetMap, aby ste zistili, či máte nárok na neobmedzené mesačné a hodinové aktualizácie máp.</string>
-    <string name="use_login_and_password">Použiť meno a heslo</string>
+    <string name="use_login_and_password">Použiť prihlasovacie meno a heslo</string>
     <string name="available_until">Dostupné do %1$s</string>
-    <string name="enough_contributions_descr">Gratulujeme, vykonali ste dostatok príspevkov do OpenStreetMap a môžete využiť neobmedzené aktualizácie máp.</string>
+    <string name="enough_contributions_descr">Gratulujeme, vykonali ste dostatok príspevkov do OpenStreetMap a teraz môžete využiť neobmedzené aktualizácie máp v OsmAnd!</string>
+    <string name="purchases_restored">Nákupy obnovené</string>
 </resources>
