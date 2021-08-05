@@ -59,16 +59,15 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
-		TextView header = ((TextView) view.findViewById(R.id.fav_text));
+		TextView header = view.findViewById(R.id.fav_text);
 		header.setText(TITLE_ID);
-		Button manage = ((Button) view.findViewById(R.id.show_all));
+		Button manage = view.findViewById(R.id.show_all);
 		manage.setText(R.string.shared_string_manage);
-		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startFavoritesActivity(R.string.osm_edits);
-				closeDashboard();
+		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
+			if (getActivity() != null) {
+				startFavoritesActivity(getActivity(), R.string.osm_edits);
 			}
+			closeDashboard();
 		});
 
 		return view;

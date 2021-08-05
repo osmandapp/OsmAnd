@@ -10,18 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import com.google.android.material.snackbar.Snackbar;
 
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.widgets.InterceptorFrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public abstract class DashBaseFragment extends Fragment {
 	protected DashboardOnMap dashboard;
@@ -30,6 +30,7 @@ public abstract class DashBaseFragment extends Fragment {
 		void onDismiss();
 	}
 
+	@Nullable
 	public OsmandApplication getMyApplication() {
 		if (getActivity() == null) {
 			return null;
@@ -46,7 +47,7 @@ public abstract class DashBaseFragment extends Fragment {
 		}
 	}
 
-	@Nullable
+	@NonNull
 	@Override
 	final public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
 								   @Nullable Bundle savedInstanceState) {
@@ -140,13 +141,13 @@ public abstract class DashBaseFragment extends Fragment {
 		}
 	}
 
-	protected void startFavoritesActivity(int tab) {
-		Activity activity = getActivity();
-		OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-		final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
+	protected void startFavoritesActivity(@NonNull Activity currentActivity, int tab) {
+		OsmandApplication app = (OsmandApplication) currentActivity.getApplication();
+		OsmAndAppCustomization appCustomization = app.getAppCustomization();
+		final Intent favorites = new Intent(currentActivity, appCustomization.getFavoritesActivity());
 		favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-		getMyApplication().getSettings().FAVORITES_TAB.set(tab);
-		activity.startActivity(favorites);
+		app.getSettings().FAVORITES_TAB.set(tab);
+		currentActivity.startActivity(favorites);
 	}
 
 	protected View getParentView() {

@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -24,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by Denis
@@ -52,12 +52,11 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
-		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startFavoritesActivity(AudioVideoNotesPlugin.NOTES_TAB);
-				closeDashboard();
+		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
+			if (getActivity() != null) {
+				startFavoritesActivity(getActivity(), AudioVideoNotesPlugin.NOTES_TAB);
 			}
+			closeDashboard();
 		});
 		return view;
 	}
