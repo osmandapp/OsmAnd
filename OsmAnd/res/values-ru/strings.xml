@@ -2012,7 +2012,7 @@
     <string name="downloading_number_of_files">Загрузка файла — %1$d</string>
     <string name="read_more">Подробнее</string>
     <string name="whats_new">Что нового в</string>
-    <string name="save_poi_without_poi_type_message">Вы действительно хотите сохранить POI без указания типа?</string>
+    <string name="save_poi_without_poi_type_message">Сохранить POI без указания типа\?</string>
     <string name="route_distance">Расстояние:</string>
     <string name="route_duration">Время:</string>
     <string name="access_from_map_description">Кнопка меню открывает панель управления, а не меню</string>
