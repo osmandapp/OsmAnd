@@ -4276,4 +4276,5 @@
     <string name="not_enough_contributions_descr">Vous devez avoir effectué au moins %1$s contributions à OpenStreetMap au cours des %2$s derniers jours.</string>
     <string name="contributions_may_calculate_with_delay">Le calcul des contributions peut prendre plusieurs heures.</string>
     <string name="pro_features">Fonctionnalités Pro</string>
+    <string name="purchases_restored">Achats restaurés</string>
 </resources>
