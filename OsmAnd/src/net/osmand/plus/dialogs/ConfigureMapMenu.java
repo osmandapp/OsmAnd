@@ -715,15 +715,17 @@ public class ConfigureMapMenu {
 						pref.set(isChecked);
 						ContextMenuItem item = adapter.getItem(pos);
 						if (item != null) {
+							if (property != null) {
+								activity.refreshMap();
+								activity.updateLayers();
+							} else {
+								isChecked = false;
+								item.setSelected(isChecked);
+								showRendererSnackbarForAttr(activity, attrName, nightMode);
+							}
 							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
 							adapter.notifyDataSetChanged();
-						}
-						if (property != null) {
-							activity.refreshMap();
-							activity.updateLayers();
-						} else {
-							showRendererSnackbarForAttr(activity, attrName, nightMode);
 						}
 						return false;
 					}
