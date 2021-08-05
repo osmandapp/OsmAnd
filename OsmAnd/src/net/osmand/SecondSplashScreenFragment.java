@@ -111,7 +111,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 				R.color.text_color_tertiary_dark :
 				R.color.text_color_tertiary_light;
 		if (Version.isFreeVersion(app)) {
-			if (InAppPurchaseHelper.isSubscribedToOsmAndPro(app)) {
+			if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
 				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_pro, textColorId));
 			} else if (InAppPurchaseHelper.isSubscribedToMaps(app)) {
 				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_maps_plus, textColorId));
@@ -123,7 +123,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand, textColorId));
 			}
 		} else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
-			if (InAppPurchaseHelper.isSubscribedToOsmAndPro(app)) {
+			if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
 				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_plus_pro, textColorId));
 			} if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_plus_osmlive, textColorId));

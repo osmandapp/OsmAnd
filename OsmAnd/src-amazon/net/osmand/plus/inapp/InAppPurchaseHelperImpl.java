@@ -53,7 +53,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
-	protected InAppCommand getRequestInventoryCommand() throws UnsupportedOperationException {
+	protected InAppCommand getRequestInventoryCommand(boolean userRequested) throws UnsupportedOperationException {
 		return null;
 	}
 

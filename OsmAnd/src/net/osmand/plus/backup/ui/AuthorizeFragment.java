@@ -1,6 +1,12 @@
 package net.osmand.plus.backup.ui;
 
-import android.net.Uri;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.SOFT_KEYBOARD_MIN_DETECTION_SIZE;
+
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
@@ -10,8 +16,9 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -33,25 +40,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.Version;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
 import net.osmand.plus.backup.BackupListeners.OnRegisterUserListener;
-import net.osmand.plus.backup.ServerError;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
-
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
 
 public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterUserListener, OnRegisterDeviceListener {
 
@@ -60,7 +61,6 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	public static final String TAG = AuthorizeFragment.class.getSimpleName();
 
 	private static final String OSMAND_EMAIL = "support@osmand.net";
-	private static final String OSMAND_DOCS = "https://docs.osmand.net/en/main@latest/osmand/purchases/android";
 
 	private static final String LOGIN_DIALOG_TYPE_KEY = "login_dialog_type_key";
 	private static final String SIGN_IN_KEY = "sign_in_key";
@@ -74,12 +74,13 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	private View mainView;
 	private Toolbar toolbar;
 	private ProgressBar progressBar;
-	private TextView title;
 	private TextView description;
 	private View buttonContinue;
 	private View buttonChoosePlan;
 	private TextView errorText;
 	private View buttonAuthorize;
+	private View keyboardSpace;
+	private View space;
 
 	private LoginDialogType dialogType = LoginDialogType.SIGN_UP;
 
@@ -126,18 +127,20 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		View view = themedInflater.inflate(R.layout.fragment_cloud_authorize, container, false);
 		AndroidUtils.addStatusBarPadding21v(app, view);
 
-		title = view.findViewById(R.id.title);
+		space = view.findViewById(R.id.space);
 		toolbar = view.findViewById(R.id.toolbar);
 		mainView = view.findViewById(R.id.main_view);
 		description = view.findViewById(R.id.description);
 		progressBar = view.findViewById(R.id.progress_bar);
 		buttonContinue = view.findViewById(R.id.continue_button);
 		buttonChoosePlan = view.findViewById(R.id.get_button);
+		keyboardSpace = view.findViewById(R.id.keyboard_space);
 
 		setupToolbar();
 		setupTextWatchers();
 		updateContent();
 		setupSupportButton();
+		setupKeyboardListener();
 
 		UiUtilities.setupDialogButton(nightMode, buttonChoosePlan, DialogButtonType.SECONDARY, R.string.get_plugin);
 		UiUtilities.setupDialogButton(nightMode, buttonContinue, DialogButtonType.PRIMARY, R.string.shared_string_continue);
@@ -191,19 +194,10 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				activity.onBackPressed();
 			}
 		});
-		ImageView actionButton = toolbar.findViewById(R.id.action_button);
-		actionButton.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_help_online));
-		actionButton.setOnClickListener(v -> {
-			FragmentActivity activity = getActivity();
-			if (activity != null) {
-				WikipediaDialogFragment.showFullArticle(activity, Uri.parse(OSMAND_DOCS), nightMode);
-			}
-		});
-		AndroidUiHelper.updateVisibility(toolbar.findViewById(R.id.toolbar_switch_container), false);
 	}
 
 	private void updateContent() {
-		title.setText(dialogType.titleId);
+		toolbar.setTitle(dialogType.titleId);
 		updateDescription();
 
 		for (LoginDialogType type : LoginDialogType.values()) {
@@ -359,7 +353,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	@Override
-	public void onRegisterUser(int status, @Nullable String message, @Nullable ServerError error) {
+	public void onRegisterUser(int status, @Nullable String message, @Nullable BackupError error) {
 		FragmentActivity activity = getActivity();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			progressBar.setVisibility(View.INVISIBLE);
@@ -385,7 +379,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	@Override
-	public void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error) {
+	public void onRegisterDevice(int status, @Nullable String message, @Nullable BackupError error) {
 		FragmentActivity activity = getActivity();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			int errorCode = error != null ? error.getCode() : -1;
@@ -447,6 +441,35 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		TextView supportDescription = mainView.findViewById(R.id.contact_support_button);
 		supportDescription.setText(createColoredSpannable(R.string.osmand_cloud_help_descr, OSMAND_EMAIL));
 		supportDescription.setOnClickListener(v -> app.sendSupportEmail(getString(R.string.backup_and_restore)));
+	}
+
+	private void setupKeyboardListener() {
+		if (AndroidUiHelper.isOrientationPortrait(requireActivity())) {
+			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+
+				private int previousKeyboardHeight = 0;
+
+				@Override
+				public void onGlobalLayout() {
+					Rect r = new Rect();
+					mainView.getWindowVisibleDisplayFrame(r);
+					int screenHeight = mainView.getRootView().getHeight();
+					int keypadHeight = screenHeight - r.bottom;
+					boolean softKeyboardVisible = keypadHeight > screenHeight * SOFT_KEYBOARD_MIN_DETECTION_SIZE;
+
+					if (previousKeyboardHeight != keypadHeight) {
+						previousKeyboardHeight = keypadHeight;
+						if (softKeyboardVisible) {
+							space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, space.getHeight()));
+							keyboardSpace.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, keypadHeight));
+						} else {
+							space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 0, 1));
+						}
+						AndroidUiHelper.updateVisibility(keyboardSpace, softKeyboardVisible);
+					}
+				}
+			});
+		}
 	}
 
 	public enum LoginDialogType {

@@ -30,6 +30,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
@@ -1140,12 +1141,12 @@ public class GpxSelectionHelper {
 		public Bitmap image;
 
 		public boolean expanded;
-		public boolean route;
 		public boolean wasHidden = true;
 
 		public WptPt locationOnMap;
 		public GPXDataSetType[] chartTypes;
 		public GPXDataSetAxisType chartAxisType = GPXDataSetAxisType.DISTANCE;
+		public ChartPointLayer chartPointLayer = ChartPointLayer.GPX;
 
 		public Matrix chartMatrix;
 		public float chartHighlightPos = -1f;

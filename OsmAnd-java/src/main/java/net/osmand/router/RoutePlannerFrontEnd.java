@@ -990,7 +990,7 @@ public class RoutePlannerFrontEnd {
 		List<RouteSegmentResult> results = new ArrayList<RouteSegmentResult>();
 		for (int i = 0; i < points.size() - 1; i++) {
 			RoutingContext local = new RoutingContext(ctx);
-			if (i == 0) {
+			if (i == 0 && ctx.nativeLib == null) {
 				if (useSmartRouteRecalculation) {
 					local.previouslyCalculatedRoute = firstPartRecalculatedRoute;
 				}

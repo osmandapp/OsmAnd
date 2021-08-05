@@ -1,5 +1,7 @@
 package net.osmand.plus.backup;
 
+import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
+
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -17,23 +19,19 @@ import net.osmand.util.Algorithms;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static net.osmand.plus.backup.ExportBackupTask.APPROXIMATE_FILE_SIZE_BYTES;
-
 public class BackupExporter extends Exporter {
 
 	private final BackupHelper backupHelper;
-	private final Map<String, SettingsItem> itemsToDelete = new LinkedHashMap<>();
-	private final Map<String, SettingsItem> oldItemsToDelete = new LinkedHashMap<>();
+	private final List<SettingsItem> itemsToDelete = new ArrayList<>();
+	private final List<SettingsItem> oldItemsToDelete = new ArrayList<>();
 	private ThreadPoolTaskExecutor<ItemWriterTask> executor;
 	private final NetworkExportProgressListener listener;
 	private final List<RemoteFile> oldFilesToDelete = Collections.synchronizedList(new ArrayList<>());
@@ -56,24 +54,22 @@ public class BackupExporter extends Exporter {
 		this.listener = listener;
 	}
 
-	public Map<String, SettingsItem> getItemsToDelete() {
+	@NonNull
+	public List<SettingsItem> getItemsToDelete() {
 		return itemsToDelete;
 	}
 
-	public Map<String, SettingsItem> getOldItemsToDelete() {
+	@NonNull
+	public List<SettingsItem> getOldItemsToDelete() {
 		return oldItemsToDelete;
 	}
 
-	public void addItemToDelete(SettingsItem item) throws IllegalArgumentException {
-		if (!itemsToDelete.containsKey(item.getName())) {
-			itemsToDelete.put(item.getName(), item);
-		}
+	public void addItemToDelete(@NonNull SettingsItem item) throws IllegalArgumentException {
+		itemsToDelete.add(item);
 	}
 
-	public void addOldItemToDelete(SettingsItem item) throws IllegalArgumentException {
-		if (!oldItemsToDelete.containsKey(item.getName())) {
-			oldItemsToDelete.put(item.getName(), item);
-		}
+	public void addOldItemToDelete(@NonNull SettingsItem item) throws IllegalArgumentException {
+		oldItemsToDelete.add(item);
 	}
 
 	@Override
@@ -97,7 +93,7 @@ public class BackupExporter extends Exporter {
 		}
 
 		List<ItemWriterTask> tasks = new ArrayList<>();
-		for (SettingsItem item : getItems().values()) {
+		for (SettingsItem item : getItems()) {
 			tasks.add(new ItemWriterTask(writer, item));
 		}
 		executor = new ThreadPoolTaskExecutor<>(null);
@@ -136,7 +132,7 @@ public class BackupExporter extends Exporter {
 			List<RemoteFile> remoteFiles = new ArrayList<>();
 			Map<String, RemoteFile> remoteFilesMap = backupHelper.getBackup().getRemoteFiles(RemoteFilesType.UNIQUE);
 			if (remoteFilesMap != null) {
-				Collection<SettingsItem> itemsToDelete = this.itemsToDelete.values();
+				List<SettingsItem> itemsToDelete = this.itemsToDelete;
 				for (RemoteFile remoteFile : remoteFilesMap.values()) {
 					for (SettingsItem item : itemsToDelete) {
 						if (item.equals(remoteFile.item)) {

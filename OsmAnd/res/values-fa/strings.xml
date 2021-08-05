@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OSM ناموفق بود.</string>
     <string name="plugin_distance_point_time">زمان</string>
@@ -455,7 +455,7 @@
     <string name="arrived_at_intermediate_point">به مقصد میانی رسیدید</string>
     <string name="context_menu_item_intermediate_point">افزودن به‌عنوان مقصد میانی</string>
     <string name="add_waypoint_dialog_added">راه‌نشان GPX، ‏«{0}»، افزوده شد</string>
-    <string name="add_waypoint_dialog_title">افزودن راه‌نشان به GPX ضبط‌شده</string>
+    <string name="add_waypoint_dialog_title">افزودن راه‌نشان به رد GPX ضبط‌شده</string>
     <string name="amenity_type_administrative">اداری</string>
     <string name="amenity_type_barrier">مانع</string>
     <string name="amenity_type_education">آموزشی</string>
@@ -557,7 +557,7 @@
     <string name="unzipping_file">در حال استخراج پرونده…</string>
     <string name="network_provider">شبکه</string>
     <string name="int_seconds">ثانیه</string>
-    <string name="int_min">min.</string>
+    <string name="int_min">دق‍</string>
     <string name="show_route">جزئیات مسیر</string>
     <string name="poi_context_menu_modify">اصلاح POI</string>
     <string name="poi_context_menu_delete">حذف POI</string>
@@ -1016,7 +1016,7 @@
     <string name="download_type_to_filter">بنویسید تا پالایش شود</string>
     <string name="transport_context_menu">جست‌وجوی حمل‌ونقل در ایستگاه</string>
     <string name="rotate_map_to_bearing_descr">نحوهٔ چرخش نقشه:</string>
-    <string name="layer_poi">لایهٔ POI…</string>
+    <string name="layer_poi">لایهٔ نقاط توجه (POI)…</string>
     <string name="gps_provider">GPS</string>
     <string name="route_head">ادامه دهید به</string>
     <string name="opening_hours_not_supported">قالب ساعت کاری تغییردادنی نیست.</string>
@@ -1241,7 +1241,7 @@
 \nرد %2$s</string>
     <string name="save_as_favorites_points">ذخیره به‌عنوان گروه علاقه‌مندی‌ها</string>
     <string name="select_destination_and_intermediate_points">تنظیم مقصدها</string>
-    <string name="layer_amenity_label">برچسب‌های لایهٔ POI</string>
+    <string name="layer_amenity_label">نام نقطه‌ها (نقاط توجه، علاقه‌مندی‌ها)</string>
     <string name="show_zoom_buttons_navigation_descr">هنگام ناوبری دکمه‌های زوم را نشان بده.</string>
     <string name="show_zoom_buttons_navigation">نمایش دکمه‌های زوم</string>
     <string name="sort_by_distance">ترتیب بر اساس مسافت</string>
@@ -1480,7 +1480,7 @@
     <string name="delay_to_start_navigation">آغاز راهنمایی گام‌به‌گام پس از…</string>
     <string name="shared_string_go">برو</string>
     <string name="osmand_parking_overdue">تأخیر دارید</string>
-    <string name="general_settings_2">تنظیمات کلی</string>
+    <string name="general_settings_2">تنظیمات سراسری</string>
     <string name="routing_settings_2">تنظیمات ناوبری</string>
     <string name="shared_string_do_not_use">استفاده نشود</string>
     <string name="rendering_attr_OSMMapperAssistant_name">دستیار نقشه‌کش OSM</string>
@@ -1561,8 +1561,8 @@
     <string name="shared_string_show_details">نمایش جزئیات</string>
     <string name="lang_tl">تاگالوگ</string>
     <string name="rendering_value_disabled_name">غیرفعال</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">رنگ‌بندی براساس وابستگی شبکه</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">رنگ‌بندی بر اساس نماد پیاده‌گردی OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">وابستگی شبکه</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="no_address_found">آدرسی پیدا نشد</string>
     <string name="shared_string_near">نزدیک</string>
     <string name="shared_string_hide">نشان نده</string>
@@ -1579,7 +1579,7 @@
     <string name="feedback">بازخورد</string>
     <string name="contact_us">تماس</string>
     <string name="map_legend">کلید نقشه</string>
-    <string name="save_poi_without_poi_type_message">‏POI را بدون مشخص‌کردن نوعش ذخیره می‌کنید؟</string>
+    <string name="save_poi_without_poi_type_message">نقطهٔ توجه را بدون مشخص‌کردن نوعش ذخیره می‌کنید؟</string>
     <string name="navigation_item_description">تنظیمات ناوبری را انجام دهید.</string>
     <string name="planning_trip_item">طراحی سفر</string>
     <string name="faq_item">سؤالات رایج</string>
@@ -1593,7 +1593,7 @@
     <string name="routing_attr_height_description">ارتفاع مجاز خودرو در مسیرها را مشخص کنید.</string>
     <string name="download_wikipedia_maps">ویکی‌پدیا</string>
     <string name="rendering_attr_alpineHiking_description">راه‌ها بر اساس درجه‌بندی SAC رسم شوند.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">لایهٔ نمادهای پیاده‌گردی</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">مسیرهای پیاده‌گردی</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">راه‌ها بر اساس مسیرهای OSMC رسم شوند.</string>
     <string name="map_widget_battery">میزان شارژ باطری</string>
     <string name="change_markers_position">تغییر موقعیت نشانه</string>
@@ -1642,7 +1642,7 @@
     <string name="update_all_maps_now">اکنون همهٔ نقشه‌ها را روزآمد می‌کنید؟</string>
     <string name="clear_tile_data">پاک‌کردن همهٔ کاشی‌ها</string>
     <string name="routing_attr_short_way_name">راه صرفه‌جویی سوخت</string>
-    <string name="replace_favorite_confirmation">"آیا  «%1$s» علاقه‌مندی جانشین شود؟"</string>
+    <string name="replace_favorite_confirmation">آیا «%1$s» علاقه‌مندی جانشین شود؟</string>
     <string name="rendering_attr_hideOverground_name">اشیای روی زمین</string>
     <string name="shared_string_change">تغییر</string>
     <string name="get_started">شروع</string>
@@ -3925,7 +3925,7 @@
     <string name="live_update_frequency_day_variant">روزآمدی نقشه هر روز بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
     <string name="live_update_frequency_hour_variant">روزآمدی نقشه هر ساعت بررسی می‌شود. زمان بعدی %1$s در %2$s.</string>
     <string name="delete_updates">حذف روزآمدسازه‌ها</string>
-    <string name="live_update_delete_updates_msg">آیا هر %s روزآمدسازهٔ زنده حذف شود؟</string>
+    <string name="live_update_delete_updates_msg">آیا همهٔ روزآمدسازه‌های زندهٔ %s حذف شود؟</string>
     <string name="update_frequency">تکرار روزآمدسازی</string>
     <string name="select_category_descr">دسته را انتخاب نمایید یا یکی جدید اضافه کنید</string>
     <string name="track_recording_will_be_continued">ضبط ادامه می‌یابد.</string>
@@ -4018,7 +4018,7 @@
     <string name="shared_string_sec">sec</string>
     <string name="routing_engine_vehicle_type_scooter">اسکوتر</string>
     <string name="context_menu_read_full">تمام‌صفحه</string>
-    <string name="select_another_colorization">لطفاً گونهٔ رنگ‌بندی دیگری انتخاب کنید.</string>
+    <string name="select_another_colorization">لطفاً گونهٔ دیگری از رنگ‌بندی انتخاب کنید.</string>
     <string name="lang_de_casual">آلمانی (خودمانی)</string>
     <string name="snowmobile_render_descr">مناسب برای اسنوموبیل‌سواری (برف‌روسواری) است. دارای مسیرها و جاده‌های ویژه.</string>
     <string name="osm_live_payment_desc_hw">هزینهٔ اشتراک با رسیدن موعد دورهٔ انتخابی از حسابتان پرداخت می‌شود. هر زمان که خواستید در AppGallery آن را لغو کنید.</string>
@@ -4197,7 +4197,7 @@
     <string name="backup_error_no_valid_subscription">اشتراک معتبری وجود ندارد</string>
     <string name="release_4_0">• پشتیبان‌گیری ابری افزوده شد
 \n
-\n • حالت شب برای سبک رندرینگ Topo افزوده شد
+\n • حالت شب برای سبک نقشهٔ Topo افزوده شد
 \n
 \n • گزینه‌ای برای دانلود خطوط میزان با یکای فوت افزوده شد
 \n
@@ -4209,7 +4209,7 @@
 \n
 \n • طراحی مسیر: اکنون می‌توانید بدون ترک طراحی مسیر، گزینه‌های ناوبری را تغییر دهید و به جستجو و پیکربندی نقشه دسترسی پیدا کنید
 \n
-\n • صفحهٔ «خرید» نو شد و حالا ریز اطلاعات خرید را نشان می‌دهد
+\n • صفحهٔ «خرید» نو شد و ریز اطلاعات خرید را نشان می‌دهد
 \n
 \n • گزینه‌ای برای تغییردادن ظاهر خط مسیر افزوده شد
 \n
@@ -4223,13 +4223,13 @@
 \n
 \nنسخهٔ کنونی داده‌ها در سرور ذخیره خواهد شد اما قادر نخواهید بود به تغییرات گذشته واگردانی کنید.</string>
     <string name="grey_color_slope">اگر شیب نامشخص باشد از رنگ خاکستری استفاده می‌شود.</string>
-    <string name="purchases_feature_desc_nautical">دسترسی به اطلاعات عمق دریایی</string>
+    <string name="purchases_feature_desc_nautical">به اطلاعات عمق دریایی دست یابید.</string>
     <string name="purchases_feature_desc_terrain">نمایش بلندی‌ها و پستی‌ها با کمک خطوط میزان ناهمواری‌ها، نقشهٔ کامل سایه‌روشن با سایه‌های تیره و نقشه‌های رنگی شیب.</string>
     <string name="purchases_feature_desc_wikivoyage">ویکی‌سفر را آفلاین کاوش کنید. مقاله‌ها بر اساس کشور و منطقه تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>
     <string name="purchases_feature_desc_wikipedia">ویکی‌پدیا را آفلاین کاوش کنید. مقاله‌ها بر اساس کشور و منطقه تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>
     <string name="purchases_feature_desc_combined_wiki">در هر لحظه و بدون نیاز به اتصال اینترنتی میان مقاله‌های ویکی‌پدیا کاوش کنید. داده‌های آفلاین بر اساس کشور تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>
     <string name="purchases_feature_desc_unlimited_map_download">امکان دانلودهای نامحدود برای نقشهٔ آفلاین همهٔ قاره‌ها و مناطق.</string>
-    <string name="purchases_feature_desc_monthly_map_updates">دسترسی به روزآمدسازی‌های منظم ماهانه برای نقشه‌های آفلاین.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">به روزآمدسازی‌های منظم ماهانه برای نقشه‌های آفلاین دست یابید.</string>
     <string name="unlimited_map_downloads">دانلودهای نامحدود نقشه</string>
     <string name="wikipedia_and_wikivoyage_offline">ویکی‌پدیا و ویکی‌سفر آفلاین</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">نقشه‌های ناهمواری‌ها: خطوط میزان، سایه‌روشن‌ها، شیب</string>
@@ -4251,13 +4251,13 @@
     <string name="backup_error_file_not_available">پرونده در دسترس نیست</string>
     <string name="contour_lines_hillshades_slope">خطوط میزان، سایه‌روشن‌ها، شیب</string>
     <string name="duration_moment_ago">لحظه‌ای پیش</string>
-    <string name="backup_deleting_all_data">در حال حذف همهٔ داده‌ها</string>
-    <string name="backup_data_removed">همهٔ داده‌ها حذف شد</string>
-    <string name="backup_version_history_removed">همهٔ سابقهٔ نسخه حذف شد</string>
-    <string name="backup_deleted_all_data">همهٔ داده‌ها حذف شد</string>
+    <string name="backup_deleting_all_data">در حال حذف همهٔ داده‌ها…</string>
+    <string name="backup_data_removed">همهٔ داده‌ها حذف شد.</string>
+    <string name="backup_version_history_removed">همهٔ سابقهٔ نسخه حذف شد.</string>
+    <string name="backup_deleted_all_data">همهٔ داده‌ها حذف شد.</string>
     <string name="shared_string_progress">پیشرفت</string>
-    <string name="backup_do_not_have_any">هنوز هیچ پشتیبان آنلاینی ندارید</string>
-    <string name="backup_dont_have_any_descr">پشتیبان‌گیری خودکار را تنظیم کنید تا نگران ازدست‌دادن داده نباشید.</string>
+    <string name="backup_do_not_have_any">هنوز هیچ پشتیبان آنلاینی ندارید.</string>
+    <string name="backup_dont_have_any_descr">برای پشتیبان‌گیری خودکار زمان‌بندی بگذارید و هیچ‌گاه داده‌ها را از دست ندهید.</string>
     <string name="backup_welcome_back">خوش برگشتید!</string>
     <string name="backup_setup">تنظیم پشتیبان</string>
     <string name="backup_delete_all_data_warning">در حال حذف تمام داده‌ای هستید که قبلاً به ابر OsmAnd آپلود شده است، شامل سابقهٔ نسخه.
@@ -4269,8 +4269,8 @@
     <string name="backup_deleting_all_data_descr">لطفاً صبر کنید تا OsmAnd تمام داده‌های شما را از ابر حذف کند. همهٔ داده‌های موجود روی دستگاه دست‌نخورده باقی می‌ماند.</string>
     <string name="backup_deleted_all_data_descr">تمام داده‌های شما با موفقیت از ابر OsmAnd حذف شد.</string>
     <string name="backup_restore_now">اکنون بازیابی کن</string>
-    <string name="backup_welcome_back_descr">می‌توانید از طریق پشتیبان‌های موجود روی این دستگاه داده‌ها را بازیابی کنید یا از این دستگاه در ابر OsmAnd پشتیبان بگیرید.</string>
-    <string name="logout_from_osmand_cloud_decsr">آیا از حساب کاربری خارج می‌شوید؟
+    <string name="backup_welcome_back_descr">از طریق پشتیبان‌های موجود داده‌ها را به این دستگاه بازیابی کنید یا داده‌ها را در ابر OsmAnd پشتیبان بگیرید.</string>
+    <string name="logout_from_osmand_cloud_decsr">از حساب کاربری خارج می‌شوید؟
 \nبرای پشتیبان‌گیری یا بازیابی داده لازم است دوباره وارد شوید.</string>
     <string name="backup_error_subscription_was_expired_descr">اشتراک OsmAnd Pro شما منقضی شده است. برای پشتیبان‌گیری آن را تمدید کنید. هنوز می‌توانید داده‌ها را از ابر بازیابی کنید.</string>
     <string name="purchases_feature_desc_osmand_cloud">ابر OsmAnd را فعال کنید تا تمام دادهٔ OsmAnd را آنلاین ذخیره کنید. داده‌ها بعد از نصب مجدد از دست نخواهد رفت. همهٔ اطلاعات را به‌آسانی پشتیبان بگیرید و بازیابی کنید.</string>
@@ -4281,7 +4281,7 @@
     <string name="terrain_maps">نقشه‌های ناهمواری‌ها</string>
     <string name="nautical_depth">عمق دریایی</string>
     <string name="enter_verification_code">گذرواژهٔ یک‌بارمصرف را وارد کنید</string>
-    <string name="purchases_feature_desc_hourly_map_updates">به روزآمدسازی‌های زودرس‌تر دسترسی پیدا کنید. روزآمدسازی‌های ساعتی، روزانه یا هفتگی. روزآمدسازها به‌تدریج و فقط برای محدودهٔ تغییرکرده دانلود می‌شوند.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">به روزآمدسازی‌های زودرس‌تر دست یابید. روزآمدسازی‌های ساعتی، روزانه یا هفتگی. روزآمدسازها به‌تدریج و فقط برای محدودهٔ تغییرکرده دانلود می‌شوند.</string>
     <string name="you_can_get_feature_as_part_of_pattern">‏«%1$s» را به‌عنوان بخشی از طرح %2$s بگیرید. مقایسه:</string>
     <string name="not_available_with">با %1$s در دسترس نیست</string>
     <string name="redeem_promo_code">آزادسازی کد تبلیغی</string>
@@ -4292,4 +4292,40 @@
     <string name="attribute">خصوصیت</string>
     <string name="promo_subscription">اشتراک با کد تبلیغی</string>
     <string name="track_has_no_needed_data">دادهٔ موردنیاز در این رد وجود ندارد.</string>
+    <string name="pro_widgets">Pro Widgets</string>
+    <string name="option_available_only_in_osmand_pro">این گزینه با اشتراک OsmAnd Pro فعال می‌شود.</string>
+    <string name="purchases_feature_desc_pro_widgets">به قابلیت‌های OsmAnd Pro دست یابید: رنگ مسیر و بیشتر.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">در میان طرح‌های OsmAnd کاوش کنید تا طرح مناسب خود را بیابید.</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">مسیرها را بر اساس رنگ محلی و جداگانه‌ای که به آن‌ها داده شده (اگر در اوپن‌استریت‌مپ موجود است) و نماد پلاک پیاده‌گردی رنگ‌آمیزی کن.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">بر اساس وابستگی شبکه رنگ‌آمیزی کن.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">مسیرها را بر اساس نوع شبکهٔ گره آن‌ها (بین‌المللی، منطقه‌ای، محلی) رنگ‌آمیزی کن.</string>
+    <string name="walking_route_osmc_description">مسیرها را بر اساس رنگ محلی و جداگانه‌ای که به آن‌ها داده شده (اگر در اوپن‌استریت‌مپ موجود است) و نوع (بین‌المللی، منطقه‌ای، محلی) رنگ‌آمیزی کن.</string>
+    <string name="connect_track_points_as">اتصال نقطه‌های مسیر</string>
+    <string name="travel_routes">مسیرهای مسافرت</string>
+    <string name="routes_color_by_type">رنگ‌بندی مسیرها بر اساس…</string>
+    <string name="shared_string_relation">رابطه</string>
+    <string name="setting_supported_by_style">این تنظیم از طریق سبک نقشهٔ «%1$s» ارائه شده است</string>
+    <string name="direct_line_maps_required_descr">محاسبهٔ مسیر بیش از حد معمول طول می‌کشد.
+\n
+\nممکن است برخی نقشه‌ها بار نشده باشد.</string>
+    <string name="online_direct_line_maps_link">نقشه‌های موردنیاز را بررسی کنید.</string>
+    <string name="offline_maps_required_descr">برخی نقشه‌های آفلاین موردنیاز برای این مسیر وجود ندارد.</string>
+    <string name="online_maps_required_descr">متأسفانه OsmAnd نتوانست با تنظیمات شما مسیری بیابد.
+\n
+\nممکن است برخی نقشه‌ها بار نشده باشند. می‌توانید برای نقشه‌های موردنیاز بررسی آنلاین انجام دهید.</string>
+    <string name="online_maps_searching_descr">در حال جست‌وجوی آنلاین…</string>
+    <string name="use_login_and_password">استفاده از نام کاربری و گذرواژه</string>
+    <string name="reset_to_original">بازنشانی به اصل</string>
+    <string name="backup_error_no_subscription">اشتراکی وجود ندارد</string>
+    <string name="map_updates_for_mappers">روزآمدسازی‌های نقشه برای نقشه‌کشان</string>
+    <string name="benefits_for_contributors">مزایا برای مشارکت‌کنندگان فعال OSM</string>
+    <string name="benefits_for_contributors_primary_descr">اگر مشارکت‌کنندهٔ فعالی در OpenStreetMap.org باشید ممکن است روزآمدسازی‌های نامحدود ساعتی نقشه به شما اعطا شود.</string>
+    <string name="benefits_for_contributors_secondary_descr">به حساب اوپن‌استریت‌مپ خود وارد شوید تا ببینید آیا شرایط دریافت روزآمدسازی‌های نامحدود ماهانه و ساعتی را دارید.</string>
+    <string name="available_until">در دسترس تا %1$s</string>
+    <string name="enough_contributions_descr">تبریک، شما به میزان کافی در اوپن‌استریت‌مپ مشارکت کرده‌اید و اکنون می‌توانید از روزآمدسازی‌های نامحدود نقشه در OsmAnd لذت ببرید!</string>
+    <string name="not_enough_contributions_descr">حداقل %1$s مشارکت در اوپن‌استریت‌مپ به‌مدت %2$s روز لازم است.</string>
+    <string name="shared_string_contributions">مشارکت‌ها</string>
+    <string name="contributions_may_calculate_with_delay">محاسبهٔ مشارکت‌ها ممکن است چندین ساعت زمان ببرد.</string>
+    <string name="map_updates_are_unavailable_yet">روزآمدسازه‌های نقشه هنوز در دسترس نیست :-(</string>
+    <string name="pro_features">قابلیت‌های Pro</string>
 </resources>

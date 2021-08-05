@@ -1998,4 +1998,6 @@
     <string name="attribute">Atribut</string>
     <string name="shared_string_purchased">Telah dibeli</string>
     <string name="explore_wikipedia_offline">Jelajahi Wikipedia luring.</string>
+    <string name="on_hold_since">Ditahan sejak %1$s</string>
+    <string name="active_till">Aktif hingga %1$s</string>
 </resources>

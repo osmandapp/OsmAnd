@@ -3,7 +3,6 @@ package net.osmand.plus.routepreparationmenu.cards;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -11,20 +10,23 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.FollowTrackFragment;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
-import net.osmand.plus.routing.GPXRouteParams;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
+import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 import androidx.annotation.NonNull;
 
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherLocalRoutingParameter;
+
 public class SelectedTrackToFollowCard extends MapBaseCard {
 
 	final FollowTrackFragment target;
 	final GPXFile gpxFile;
 
-	public SelectedTrackToFollowCard(@NonNull MapActivity mapActivity, @NonNull FollowTrackFragment target, @NonNull GPXFile gpxFile) {
+	public SelectedTrackToFollowCard(@NonNull MapActivity mapActivity, @NonNull FollowTrackFragment target,
+	                                 @NonNull GPXFile gpxFile) {
 		super(mapActivity);
 		this.target = target;
 		this.gpxFile = gpxFile;
@@ -37,15 +39,12 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		view.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-			@Override
-			public void onScrollChanged() {
-				boolean bottomScrollAvailable = view.canScrollVertically(1);
-				if (bottomScrollAvailable) {
-					target.showShadowButton();
-				} else {
-					target.hideShadowButton();
-				}
+		view.getViewTreeObserver().addOnScrollChangedListener(() -> {
+			boolean bottomScrollAvailable = view.canScrollVertically(1);
+			if (bottomScrollAvailable) {
+				target.showShadowButton();
+			} else {
+				target.hideShadowButton();
 			}
 		});
 
@@ -63,7 +62,7 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 		ApplicationMode mode = app.getRoutingHelper().getAppMode();
 
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		GPXRouteParams.GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
+		GPXRouteParamsBuilder rparams = routingHelper.getCurrentGPXRoute();
 		boolean osmandRouter = mode.getRouteService() == RouteService.OSMAND;
 		if (rparams != null && osmandRouter) {
 			cardsContainer.addView(buildDividerView(cardsContainer, false));
@@ -79,9 +78,8 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 				attachTrackCard.setListener(target);
 				cardsContainer.addView(attachTrackCard.build(mapActivity));
 			}
-			if (!rparams.isUseIntermediatePointsRTE()) {
-				setupNavigateOptionsCard(cardsContainer, rparams);
-			}
+
+			setupNavigateOptionsCard(cardsContainer, rparams);
 		}
 	}
 
@@ -91,23 +89,31 @@ public class SelectedTrackToFollowCard extends MapBaseCard {
 
 		ViewGroup.LayoutParams params = divider.getLayoutParams();
 		if (needMargin && params instanceof ViewGroup.MarginLayoutParams) {
-			AndroidUtils.setMargins((ViewGroup.MarginLayoutParams) params, AndroidUtils.dpToPx(mapActivity, 64), 0, 0, 0);
+			AndroidUtils.setMargins((ViewGroup.MarginLayoutParams) params,
+					AndroidUtils.dpToPx(mapActivity, 64), 0, 0, 0);
 			divider.setLayoutParams(params);
 		}
 
 		return divider;
 	}
 
-	private void setupNavigateOptionsCard(ViewGroup cardsContainer, GPXRouteParams.GPXRouteParamsBuilder rparams) {
+	private void setupNavigateOptionsCard(ViewGroup cardsContainer, GPXRouteParamsBuilder routeParamsBuilder) {
 		int passRouteId = R.string.gpx_option_from_start_point;
-		RoutingOptionsHelper.LocalRoutingParameter passWholeRoute = new RoutingOptionsHelper.OtherLocalRoutingParameter(passRouteId,
-				app.getString(passRouteId), rparams.isPassWholeRoute());
+		LocalRoutingParameter passWholeRoute = new OtherLocalRoutingParameter(passRouteId,
+				app.getString(passRouteId), routeParamsBuilder.isPassWholeRoute());
 
 		int navigationTypeId = R.string.gpx_option_calculate_first_last_segment;
-		RoutingOptionsHelper.LocalRoutingParameter navigationType = new RoutingOptionsHelper.OtherLocalRoutingParameter(navigationTypeId,
-				app.getString(navigationTypeId), rparams.isCalculateOsmAndRouteParts());
+		LocalRoutingParameter navigationType = new OtherLocalRoutingParameter(navigationTypeId,
+				app.getString(navigationTypeId), routeParamsBuilder.isCalculateOsmAndRouteParts());
 
-		NavigateTrackOptionsCard navigateTrackCard = new NavigateTrackOptionsCard(mapActivity, passWholeRoute, navigationType);
+
+		int connectTrackPointsId = R.string.connect_track_points_as;
+		LocalRoutingParameter connectTrackPointStraightly = new OtherLocalRoutingParameter(connectTrackPointsId,
+				app.getString(connectTrackPointsId), routeParamsBuilder.shouldConnectPointsStraightly());
+
+		NavigateTrackOptionsCard navigateTrackCard = new NavigateTrackOptionsCard(mapActivity,
+				passWholeRoute, navigationType, connectTrackPointStraightly,
+				routeParamsBuilder.useIntermediateRtePoints());
 		navigateTrackCard.setListener(target);
 		cardsContainer.addView(navigateTrackCard.build(mapActivity));
 	}

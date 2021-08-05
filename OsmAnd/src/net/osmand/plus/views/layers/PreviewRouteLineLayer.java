@@ -135,7 +135,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		List<Double> angles = new ArrayList<>();
 		List<Double> distances = new ArrayList<>();
 		List<GeometryWayStyle<?>> styles = new ArrayList<>();
-		previewLineGeometry.setStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox),
+		previewLineGeometry.setRouteStyleParams(getRouteLineColor(), getRouteLineWidth(tileBox),
 				directionArrowsColor, routeColoringType, routeInfoAttribute);
 		fillPreviewLineArrays(tx, ty, angles, distances, styles);
 		canvas.rotate(+tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -297,8 +297,11 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 			ty.add(idx, y);
 			int color = palette.get(i + 1);
 			colorsArray[idx] = color;
-			if (idx - 2 >= 0 && colorsArray[idx - 1] == 0) {
-				colorsArray[idx - 1] = colorsArray[idx - 2];
+		}
+
+		for (int colorIdx = 1; colorIdx < colorsArray.length; colorIdx++) {
+			if (colorsArray[colorIdx] == 0) {
+				colorsArray[colorIdx] = colorsArray[colorIdx - 1];
 			}
 		}
 

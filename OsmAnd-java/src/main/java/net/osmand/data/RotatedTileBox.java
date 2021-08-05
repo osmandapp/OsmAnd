@@ -178,15 +178,16 @@ public class RotatedTileBox {
 		tileRT = new QuadPointDouble(x2, y2);
 		tileRB = new QuadPointDouble(x3, y3);
 		tileLB = new QuadPointDouble(x4, y4);
-		double l = Math.min(Math.min(x1, x2), Math.min(x3, x4)) ;
-		double r = Math.max(Math.max(x1, x2), Math.max(x3, x4)) ;
-		double t = Math.min(Math.min(y1, y2), Math.min(y3, y4)) ;
-		double b = Math.max(Math.max(y1, y2), Math.max(y3, y4)) ;
-		tileBounds = new QuadRect((float)l, (float)t,(float) r, (float)b);
-		float top = (float) MapUtils.getLatitudeFromTile(zoom, alignTile(tileBounds.top));
-		float left = (float) MapUtils.getLongitudeFromTile(zoom, alignTile(tileBounds.left));
-		float bottom = (float) MapUtils.getLatitudeFromTile(zoom, alignTile(tileBounds.bottom));
-		float right = (float) MapUtils.getLongitudeFromTile(zoom, alignTile(tileBounds.right));
+		double l = Math.min(Math.min(x1, x2), Math.min(x3, x4));
+		double r = Math.max(Math.max(x1, x2), Math.max(x3, x4));
+		double t = Math.min(Math.min(y1, y2), Math.min(y3, y4));
+		double b = Math.max(Math.max(y1, y2), Math.max(y3, y4));
+		QuadRect bounds = new QuadRect((float) l, (float) t, (float) r, (float) b);
+		float top = (float) MapUtils.getLatitudeFromTile(zoom, alignTile(bounds.top));
+		float left = (float) MapUtils.getLongitudeFromTile(zoom, alignTile(bounds.left));
+		float bottom = (float) MapUtils.getLatitudeFromTile(zoom, alignTile(bounds.bottom));
+		float right = (float) MapUtils.getLongitudeFromTile(zoom, alignTile(bounds.right));
+		tileBounds = bounds;
 		latLonBounds = new QuadRect(left, top, right, bottom);
 	}
 	

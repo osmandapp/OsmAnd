@@ -27,6 +27,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
 import net.osmand.plus.routing.RoutingHelper;
 
@@ -52,7 +53,7 @@ public class RouteStatisticCard extends MapBaseCard {
 		super(mapActivity);
 		this.gpx = gpx;
 		this.onAnalyseClickListener = onAnalyseClickListener;
-		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, true);
+		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
 	}
 
 	@Nullable
@@ -212,7 +213,7 @@ public class RouteStatisticCard extends MapBaseCard {
 	private void buildHeader(GPXTrackAnalysis analysis) {
 		LineChart mChart = (LineChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
-		graphAdapter = new CommonGraphAdapter(mChart, true);
+		graphAdapter = new CommonGraphAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();

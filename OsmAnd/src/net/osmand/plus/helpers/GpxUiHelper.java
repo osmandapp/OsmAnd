@@ -1,5 +1,18 @@
 package net.osmand.plus.helpers;
 
+import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
+import static net.osmand.plus.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+import static net.osmand.plus.dialogs.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -100,6 +113,7 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -129,19 +143,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
-
-import static com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
-import static net.osmand.plus.OsmAndFormatter.FEET_IN_ONE_METER;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_MILE;
-import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
-import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.SHOW_START_FINISH_ATTR;
 
 public class GpxUiHelper {
 
@@ -2287,14 +2288,18 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile, boolean fromRoute) {
-		GpxSelectionHelper helper = app.getSelectedGpxHelper();
-		String groupName = helper.getGroupName(gpxFile);
-		GpxDisplayGroup group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
+	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile,
+	                                                ChartPointLayer chartPointLayer) {
+		GpxDisplayGroup group = null;
+		if (!Algorithms.isEmpty(gpxFile.tracks)) {
+			GpxSelectionHelper helper = app.getSelectedGpxHelper();
+			String groupName = helper.getGroupName(gpxFile);
+			group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
+		}
 		if (group != null && group.getModifiableList().size() > 0) {
 			GpxDisplayItem gpxItem = group.getModifiableList().get(0);
 			if (gpxItem != null) {
-				gpxItem.route = fromRoute;
+				gpxItem.chartPointLayer = chartPointLayer;
 			}
 			return gpxItem;
 		}
@@ -2492,8 +2497,10 @@ public class GpxUiHelper {
 			}
 
 			for (TrkSegment seg : track.segments) {
+				if (Algorithms.isEmpty(seg.points)) {
+					continue;
+				}
 				for (WptPt currPoint : seg.points) {
-
 					if (prevPoint != null) {
 						passedDistance += MapUtils.getDistance(prevPoint.lat, prevPoint.lon,
 								currPoint.lat, currPoint.lon);
@@ -2506,15 +2513,12 @@ public class GpxUiHelper {
 								? getIntermediatePointByDistance(passedDistance, distanceToPoint, currPoint, prevPoint)
 								: currPoint;
 					}
-
 					prevPoint = currPoint;
 				}
-
 				prevPoint = null;
 				passedSegmentsPointsDistance += seg.points.get(seg.points.size() - 1).distance;
 			}
 		}
-
 		return null;
 	}
 

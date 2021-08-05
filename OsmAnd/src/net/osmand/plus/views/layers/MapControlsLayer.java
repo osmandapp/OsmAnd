@@ -1024,7 +1024,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
 				if (transparencySetting != null) {
 					transparencySetting.set((int) value);
-					mapActivity.getMapView().refreshMap();
+					mapActivity.refreshMap();
 				}
 			}
 		});

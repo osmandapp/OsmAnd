@@ -59,8 +59,8 @@ public class GpxGeometryWayDrawer extends MultiColoringGeometryWayDrawer<GpxGeom
 				}
 
 				Paint paint = context.getPaintIconCustom();
-				Integer pointColor = style.getPointColor();
-				paint.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.SRC_IN));
+				int arrowColor = arrowsWayStyle.getPointColor();
+				paint.setColorFilter(new PorterDuffColorFilter(arrowColor, PorterDuff.Mode.SRC_IN));
 				canvas.drawBitmap(bitmap, matrix, paint);
 			}
 		}

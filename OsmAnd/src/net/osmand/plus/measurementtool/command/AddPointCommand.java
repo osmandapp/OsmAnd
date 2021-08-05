@@ -62,8 +62,9 @@ public class AddPointCommand extends MeasurementModeCommand {
 	@Override
 	public void undo() {
 		MeasurementEditingContext ctx = getEditingCtx();
-		if (position > 0) {
-			WptPt prevPt = ctx.getPoints().get(position - 1);
+		List<WptPt> points = ctx.getPoints();
+		if (position > 0 && points.size() >= position) {
+			WptPt prevPt = points.get(position - 1);
 			if (prevPointProfile != null) {
 				prevPt.setProfileType(prevPointProfile);
 			} else {

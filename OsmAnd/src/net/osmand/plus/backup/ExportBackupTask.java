@@ -15,7 +15,6 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,7 +91,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	private long getEstimatedItemsSize() {
 		long size = 0;
 		BackupHelper backupHelper = helper.getApp().getBackupHelper();
-		for (SettingsItem item : exporter.getItems().values()) {
+		for (SettingsItem item : exporter.getItems()) {
 			if (item instanceof FileSettingsItem) {
 				List<File> filesToUpload = backupHelper.collectItemFilesForUpload((FileSettingsItem) item);
 				for (File file : filesToUpload) {
@@ -104,7 +103,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 		}
 		Map<String, RemoteFile> remoteFilesMap = backupHelper.getBackup().getRemoteFiles(PrepareBackupResult.RemoteFilesType.UNIQUE);
 		if (remoteFilesMap != null) {
-			Collection<SettingsItem> itemsToDelete = exporter.getItemsToDelete().values();
+			List<SettingsItem> itemsToDelete = exporter.getItemsToDelete();
 			for (RemoteFile remoteFile : remoteFilesMap.values()) {
 				for (SettingsItem item : itemsToDelete) {
 					if (item.equals(remoteFile.item)) {
@@ -112,7 +111,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 					}
 				}
 			}
-			Collection<SettingsItem> oldItemsToDelete = exporter.getOldItemsToDelete().values();
+			List<SettingsItem> oldItemsToDelete = exporter.getOldItemsToDelete();
 			for (RemoteFile remoteFile : remoteFilesMap.values()) {
 				for (SettingsItem item : oldItemsToDelete) {
 					SettingsItem remoteFileItem = remoteFile.item;

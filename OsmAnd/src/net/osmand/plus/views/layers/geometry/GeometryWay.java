@@ -258,6 +258,10 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return previousVisible;
 	}
 
+	protected boolean shouldDrawArrows() {
+		return true;
+	}
+
 	private void clearArrays() {
 		tx.clear();
 		ty.clear();
@@ -388,7 +392,9 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				context.clearCustomColor();
 				context.clearCustomShader();
 			}
-			drawer.drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
+			if (shouldDrawArrows()) {
+				drawer.drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
+			}
 		} finally {
 			if (hasPathLine) {
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
