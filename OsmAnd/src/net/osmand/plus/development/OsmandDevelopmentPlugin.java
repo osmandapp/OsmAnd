@@ -1,5 +1,7 @@
 package net.osmand.plus.development;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -15,12 +17,10 @@ import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
@@ -115,6 +115,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		final OsmandMapTileView mv = activity.getMapView();
 		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
 			FPSTextInfoWidget fps = new FPSTextInfoWidget(mv, activity);
+			fps.setIcons(R.drawable.widget_fps_day, R.drawable.widget_fps_night);
 			mapInfoLayer.registerSideWidget(fps, R.drawable.ic_action_fps,
 					R.string.map_widget_fps_info, "fps", false, 50);
 			mapInfoLayer.recreateControls();
