@@ -1844,7 +1844,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if (mapActivity.getContextMenu().getObject() == r) {
 				mapActivity.getContextMenu().close();
 			}
-			mapActivity.getMapView().refreshMap();
+			mapActivity.refreshMap();
 		}
 	}
 

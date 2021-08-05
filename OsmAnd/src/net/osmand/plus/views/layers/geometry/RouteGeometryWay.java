@@ -7,9 +7,11 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -19,9 +21,34 @@ public class RouteGeometryWay extends
 	private final RoutingHelper helper;
 	private RouteCalculationResult route;
 
+	private Integer customDirectionArrowColor;
+
 	public RouteGeometryWay(RouteGeometryWayContext context) {
 		super(context, new MultiColoringGeometryWayDrawer<>(context));
 		this.helper = context.getApp().getRoutingHelper();
+	}
+
+	public void setRouteStyleParams(int pathColor,
+	                                float pathWidth,
+	                                @Nullable @ColorInt Integer directionArrowColor,
+	                                @NonNull ColoringType routeColoringType,
+	                                @Nullable String routeInfoAttribute) {
+		this.coloringChanged = this.coloringType != routeColoringType
+				|| routeColoringType == ColoringType.ATTRIBUTE
+				&& !Algorithms.objectEquals(this.routeInfoAttribute, routeInfoAttribute);
+
+		boolean widthChanged = !Algorithms.objectEquals(customWidth, pathWidth);
+		if (widthChanged) {
+			updateStylesWidth(pathWidth);
+		}
+		updatePaints(pathWidth, routeColoringType);
+		getDrawer().setColoringType(routeColoringType);
+
+		this.customColor = pathColor;
+		this.customWidth = pathWidth;
+		this.customDirectionArrowColor = directionArrowColor;
+		this.coloringType = routeColoringType;
+		this.routeInfoAttribute = routeInfoAttribute;
 	}
 
 	@Override
@@ -46,6 +73,21 @@ public class RouteGeometryWay extends
 				updateWay(locations, tb);
 			}
 		}
+	}
+
+	@NonNull
+	@Override
+	public GeometryWayStyle<?> getDefaultWayStyle() {
+		if (coloringType.isGradient()) {
+			return new GeometryGradientWayStyle(getContext(), customColor, customWidth);
+		}
+		return new GeometrySolidWayStyle<>(getContext(), customColor, customWidth, customDirectionArrowColor);
+	}
+
+	@NonNull
+	@Override
+	public GeometrySolidWayStyle<RouteGeometryWayContext> getSolidWayStyle(int lineColor) {
+		return new GeometrySolidWayStyle<>(getContext(), lineColor, customWidth, customDirectionArrowColor);
 	}
 
 	@Override

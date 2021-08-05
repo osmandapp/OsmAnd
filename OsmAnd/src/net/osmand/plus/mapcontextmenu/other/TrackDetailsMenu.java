@@ -46,6 +46,7 @@ import net.osmand.plus.myplaces.GPXItemPagerAdapter;
 import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
 import net.osmand.util.Algorithms;
@@ -279,7 +280,7 @@ public class TrackDetailsMenu {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
 			mapActivity.getMapView().setMapPositionX(0);
-			mapActivity.getMapView().refreshMap();
+			mapActivity.refreshMap();
 		}
 		if (hidding) {
 			hidding = false;
@@ -860,9 +861,9 @@ public class TrackDetailsMenu {
 		}
 
 		@Override
-		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
+		public void updateToolbar(TopToolbarView view) {
 			super.updateToolbar(view);
-			view.getShadowView().setVisibility(View.GONE);
+			AndroidUiHelper.updateVisibility(view.getShadowView(), false);
 		}
 
 		@Override

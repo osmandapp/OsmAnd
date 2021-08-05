@@ -51,7 +51,7 @@ public abstract class InAppPurchaseHelper {
 	// Debug tag, for logging
 	protected static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(InAppPurchaseHelper.class);
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
-	private boolean mDebugLog = false;
+	private final boolean mDebugLog = false;
 
 	protected InAppPurchases purchases;
 	protected long lastValidationCheckTime;
@@ -106,12 +106,16 @@ public abstract class InAppPurchaseHelper {
 		PURCHASE_CONTOUR_LINES
 	}
 
-	public abstract class InAppCommand {
+	public abstract static class InAppCommand {
 
 		InAppCommandResultHandler resultHandler;
 
 		// return true if done and false if async task started
 		abstract void run(InAppPurchaseHelper helper);
+
+		protected boolean userRequested() {
+			return false;
+		}
 
 		protected void commandDone() {
 			InAppCommandResultHandler resultHandler = this.resultHandler;
@@ -137,6 +141,7 @@ public abstract class InAppPurchaseHelper {
 		return Version.isDeveloperBuild(ctx)
 				|| isSubscribedToMaps(ctx)
 				|| isOsmAndProAvailable(ctx)
+				|| isSubscribedToMapperUpdates(ctx)
 				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 
@@ -148,6 +153,7 @@ public abstract class InAppPurchaseHelper {
 	public static boolean isSubscribedToLiveUpdates(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx)
 				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get()
+				|| isSubscribedToMapperUpdates(ctx)
 				|| isOsmAndProAvailable(ctx);
 	}
 
@@ -156,9 +162,12 @@ public abstract class InAppPurchaseHelper {
 				|| ctx.getSettings().OSMAND_PRO_PURCHASED.get();
 	}
 
+	private static boolean isSubscribedToMapperUpdates(@NonNull OsmandApplication ctx) {
+		return ctx.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.get() > System.currentTimeMillis();
+	}
+
 	public static boolean isSubscribedToPromo(@NonNull OsmandApplication ctx) {
-		return Version.isDeveloperBuild(ctx)
-				|| ctx.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
+		return ctx.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
 	}
 
 	public static boolean isOsmAndProAvailable(@NonNull OsmandApplication ctx) {
@@ -349,9 +358,9 @@ public abstract class InAppPurchaseHelper {
 		return !promoRequested || System.currentTimeMillis() - lastPromoCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC;
 	}
 
-	public void requestInventory() {
+	public void requestInventory(boolean userRequested) {
 		notifyShowProgress(InAppPurchaseTaskType.REQUEST_INVENTORY);
-		new RequestInventoryTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		new RequestInventoryTask(userRequested).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 		new CheckPromoTask(null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
@@ -470,7 +479,10 @@ public abstract class InAppPurchaseHelper {
 	@SuppressLint("StaticFieldLeak")
 	private class RequestInventoryTask extends AsyncTask<Void, Void, String[]> {
 
-		RequestInventoryTask() {
+		private final boolean userRequested;
+
+		RequestInventoryTask(boolean userRequested) {
+			this.userRequested = userRequested;
 		}
 
 		@Override
@@ -528,7 +540,7 @@ public abstract class InAppPurchaseHelper {
 				inventoryRequested = true;
 				subscriptionStateMap = parseSubscriptionStates(subscriptionsStateJson);
 			}
-			exec(InAppPurchaseTaskType.REQUEST_INVENTORY, getRequestInventoryCommand());
+			exec(InAppPurchaseTaskType.REQUEST_INVENTORY, getRequestInventoryCommand(userRequested));
 		}
 	}
 
@@ -682,9 +694,9 @@ public abstract class InAppPurchaseHelper {
 		return null;
 	}
 
-	protected abstract InAppCommand getRequestInventoryCommand() throws UnsupportedOperationException;
+	protected abstract InAppCommand getRequestInventoryCommand(boolean userRequested) throws UnsupportedOperationException;
 
-	protected void onSkuDetailsResponseDone(List<PurchaseInfo> purchaseInfoList) {
+	protected void onSkuDetailsResponseDone(@NonNull List<PurchaseInfo> purchaseInfoList, boolean userRequested) {
 		final OnRequestResultListener listener = new OnRequestResultListener() {
 			@Override
 			public void onResult(@Nullable String result, @Nullable String error) {
@@ -692,6 +704,9 @@ public abstract class InAppPurchaseHelper {
 				notifyGetItems();
 				stop(true);
 				logDebug("Initial inapp query finished");
+				if (userRequested) {
+					showToast(ctx.getString(R.string.purchases_restored));
+				}
 			}
 		};
 
@@ -823,7 +838,7 @@ public abstract class InAppPurchaseHelper {
 		}
 		if (inventoryRequestPending) {
 			inventoryRequestPending = false;
-			requestInventory();
+			requestInventory(false);
 		}
 	}
 

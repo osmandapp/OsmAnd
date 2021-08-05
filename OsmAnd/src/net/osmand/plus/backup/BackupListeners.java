@@ -24,11 +24,11 @@ public class BackupListeners {
 	}
 
 	public interface OnRegisterUserListener {
-		void onRegisterUser(int status, @Nullable String message, @Nullable ServerError error);
+		void onRegisterUser(int status, @Nullable String message, @Nullable BackupError error);
 	}
 
 	public interface OnRegisterDeviceListener {
-		void onRegisterDevice(int status, @Nullable String message, @Nullable ServerError error);
+		void onRegisterDevice(int status, @Nullable String message, @Nullable BackupError error);
 	}
 
 	public interface OnUpdateSubscriptionListener {

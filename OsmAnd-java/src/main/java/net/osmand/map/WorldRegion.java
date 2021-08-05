@@ -1,5 +1,6 @@
 package net.osmand.map;
 
+import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
@@ -80,8 +81,6 @@ public class WorldRegion implements Serializable {
 		}
 	}
 
-
-
 	public boolean isRegionMapDownload() {
 		return regionMapDownload;
 	}
@@ -128,7 +127,6 @@ public class WorldRegion implements Serializable {
 		return subregions;
 	}
 
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -148,7 +146,7 @@ public class WorldRegion implements Serializable {
 		this.regionFullName = regionFullName;
 		this.regionDownloadName = downloadName;
 		superregion = null;
-		subregions = new LinkedList<WorldRegion>();
+		subregions = new LinkedList<>();
 
 	}
 	public WorldRegion(String id) {
@@ -232,5 +230,33 @@ public class WorldRegion implements Serializable {
 		}
 		copy.removeAll(duplicates);
 		return copy;
+	}
+
+	public String getObfFileName() {
+		return getObfFileName(regionDownloadName);
+	}
+
+	public String getRoadObfFileName() {
+		return getRoadObfFileName(regionDownloadName);
+	}
+
+	public static String getObfFileName(String regionDownloadName) {
+		return Algorithms.capitalizeFirstLetterAndLowercase(regionDownloadName) + IndexConstants.BINARY_MAP_INDEX_EXT;
+	}
+
+	public static String getRoadObfFileName(String regionDownloadName) {
+		return Algorithms.capitalizeFirstLetterAndLowercase(regionDownloadName) + ".road" + IndexConstants.BINARY_MAP_INDEX_EXT;
+	}
+
+	public static String getRegionDownloadName(String obfFileName) {
+		String obfExt = IndexConstants.BINARY_MAP_INDEX_EXT;
+		String roadObfExt = ".road" + IndexConstants.BINARY_MAP_INDEX_EXT;
+		if (obfFileName.endsWith(roadObfExt)) {
+			return obfFileName.toLowerCase().substring(0, obfFileName.length() - roadObfExt.length());
+		} else if (obfFileName.endsWith(obfExt)) {
+			return obfFileName.toLowerCase().substring(0, obfFileName.length() - obfExt.length());
+		} else {
+			return obfFileName.toLowerCase();
+		}
 	}
 }

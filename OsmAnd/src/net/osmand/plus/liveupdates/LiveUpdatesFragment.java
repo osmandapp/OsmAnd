@@ -1,5 +1,21 @@
 package net.osmand.plus.liveupdates;
 
+import static net.osmand.AndroidUtils.getSecondaryTextColorId;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getTertiaryTextColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getActiveTextColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
+
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -32,6 +48,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -47,6 +64,8 @@ import net.osmand.plus.UiUtilities.CompoundButtonType;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -75,22 +94,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import static net.osmand.AndroidUtils.getSecondaryTextColorId;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getTertiaryTextColorId;
-import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getActiveTextColorId;
-import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
-import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
 public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnLiveUpdatesForLocalChange, LiveUpdateListener {
 
@@ -321,8 +324,13 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 						switchOnLiveUpdates();
 						updateToolbarSwitch(true);
 					} else {
-						app.showToastMessage(getString(R.string.osm_live_ask_for_purchase));
 						updateToolbarSwitch(false);
+						app.showToastMessage(getString(R.string.osm_live_ask_for_purchase));
+
+						FragmentActivity activity = getActivity();
+						if (activity != null) {
+							ChoosePlanFragment.showInstance(activity, OsmAndFeature.HOURLY_MAP_UPDATES);
+						}
 					}
 				} else {
 					settings.IS_LIVE_UPDATES_ON.set(false);

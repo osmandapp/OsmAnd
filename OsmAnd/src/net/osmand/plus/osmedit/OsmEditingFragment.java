@@ -1,5 +1,8 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -10,11 +13,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -31,9 +36,6 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
-
 public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged, ValidateOsmLoginListener,
 		OsmAuthorizationListener {
 
@@ -41,6 +43,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
 	public static final String OSM_LOGIN_DATA = "osm_login_data";
 	private static final String OSM_EDITING_INFO = "osm_editing_info";
+	private static final String MAP_UPDATES_FOR_MAPPERS = "map_updates_for_mappers";
 
 	private OsmOAuthHelper authHelper;
 
@@ -71,6 +74,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 		setupOfflineEditingPref();
 		setupUseDevUrlPref();
+		setupMapForMappersPref();
 		setupOsmEditsDescrPref();
 		setupOsmEditsPref();
 	}
@@ -95,7 +99,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	@Override
 	public void loginValidationFinished(String warning) {
-		updateAllSettings();
+		authorizationFinished();
 	}
 
 	private void setupLoginPref() {
@@ -147,6 +151,24 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 			useDevUrlPref.setIcon(icon);
 		} else {
 			useDevUrlPref.setVisible(false);
+		}
+	}
+
+	private void setupMapForMappersPref() {
+		Preference mapsForMappersPref = findPreference(MAP_UPDATES_FOR_MAPPERS);
+		if (!isValidToken() && !isLoginExists()) {
+			mapsForMappersPref.setSummary(R.string.shared_string_learn_more);
+			mapsForMappersPref.setIcon(getContentIcon(R.drawable.ic_action_map_update));
+		} else {
+			long expireTime = settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.get();
+			if (expireTime > System.currentTimeMillis()) {
+				String date = OsmAndFormatter.getFormattedDate(app, expireTime);
+				mapsForMappersPref.setSummary(getString(R.string.available_until, date));
+				mapsForMappersPref.setIcon(getActiveIcon(R.drawable.ic_action_map_update));
+			} else {
+				mapsForMappersPref.setSummary(R.string.recording_unavailable);
+				mapsForMappersPref.setIcon(getContentIcon(R.drawable.ic_action_map_update));
+			}
 		}
 	}
 
@@ -206,6 +228,16 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		} else if (OSM_LOGOUT.equals(prefId)) {
 			osmLogout();
 			return true;
+		} else if (MAP_UPDATES_FOR_MAPPERS.equals(prefId)) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				if (!isValidToken() && !isLoginExists()) {
+					MappersPromoFragment.showInstance(activity, this);
+				} else {
+					MappersFragment.showInstance(activity);
+				}
+				return true;
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -226,10 +258,21 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		updateAllSettings();
 	}
 
+	private void authorizationFinished() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			updateAllSettings();
+
+			FragmentManager manager = activity.getSupportFragmentManager();
+			DialogFragment fragment = (DialogFragment) manager.findFragmentByTag(MappersPromoFragment.TAG);
+			if (fragment != null) {
+				fragment.dismissAllowingStateLoss();
+			}
+		}
+	}
+
 	@Override
 	public void authorizationCompleted() {
-		if (getContext() != null) {
-			updateAllSettings();
-		}
+		authorizationFinished();
 	}
 }

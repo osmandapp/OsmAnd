@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool.graph;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -47,8 +48,8 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 		GONE
 	}
 
-	public CustomGraphAdapter(HorizontalBarChart chart, boolean usedOnMap) {
-		super(chart, usedOnMap);
+	public CustomGraphAdapter(OsmandApplication app, HorizontalBarChart chart, boolean usedOnMap) {
+		super(app, chart, usedOnMap);
 	}
 
 	@Override
@@ -139,8 +140,8 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 
 	private void attachLegend(List<RouteSegmentAttribute> list,
 	                          String propertyNameToFullSpan) {
-		OsmandApplication app = getMyApplication();
-		LayoutInflater inflater = UiUtilities.getInflater(app, isNightMode());
+		Context themedCtx = UiUtilities.getThemedContext(app, isNightMode());
+		LayoutInflater inflater = LayoutInflater.from(themedCtx);
 		for (RouteSegmentAttribute segment : list) {
 			View view = inflater.inflate(R.layout.route_details_legend, legendContainer, false);
 			int segmentColor = segment.getColor();
@@ -148,9 +149,9 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 			ImageView legendIcon = (ImageView) view.findViewById(R.id.legend_icon_color);
 			legendIcon.setImageDrawable(circle);
 			double contrastRatio = ColorUtils.calculateContrast(segmentColor,
-					AndroidUtils.getColorFromAttr(app, R.attr.card_and_list_background_basic));
+					AndroidUtils.getColorFromAttr(themedCtx, R.attr.card_and_list_background_basic));
 			if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
-				legendIcon.setBackgroundResource(AndroidUtils.resolveAttribute(app, R.attr.bg_circle_contour));
+				legendIcon.setBackgroundResource(AndroidUtils.resolveAttribute(themedCtx, R.attr.bg_circle_contour));
 			}
 			String propertyName = segment.getUserPropertyName();
 			String name = AndroidUtils.getRenderingStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
@@ -166,7 +167,7 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 	private Spannable getSpanLegend(String title,
 	                                RouteSegmentAttribute segment,
 	                                boolean fullSpan) {
-		String formattedDistance = OsmAndFormatter.getFormattedDistance(segment.getDistance(), getMyApplication());
+		String formattedDistance = OsmAndFormatter.getFormattedDistance(segment.getDistance(), app);
 		title = Algorithms.capitalizeFirstLetter(title);
 		SpannableStringBuilder spannable = new SpannableStringBuilder(title);
 		spannable.append(": ");

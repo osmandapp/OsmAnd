@@ -85,7 +85,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 		updateCards();
 
 		if (purchaseHelper != null) {
-			purchaseHelper.requestInventory();
+			purchaseHelper.requestInventory(false);
 		}
 	}
 
@@ -168,7 +168,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
 		if (purchaseHelper != null) {
-			purchaseHelper.requestInventory();
+			purchaseHelper.requestInventory(false);
 		}
 	}
 

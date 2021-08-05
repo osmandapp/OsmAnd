@@ -8,6 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
@@ -27,13 +34,6 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import static net.osmand.plus.routing.ColoringType.ALTITUDE;
 import static net.osmand.plus.routing.ColoringType.ATTRIBUTE;
 import static net.osmand.plus.routing.ColoringType.SLOPE;
@@ -51,8 +51,8 @@ public class TrackColoringCard extends MapBaseCard {
 	private List<TrackAppearanceItem> appearanceItems;
 
 	public TrackColoringCard(@NonNull MapActivity mapActivity,
-	                         @NonNull SelectedGpxFile selectedGpxFile,
-	                         @NonNull TrackDrawInfo trackDrawInfo) {
+							 @NonNull SelectedGpxFile selectedGpxFile,
+							 @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
 		this.selectedGpxFile = selectedGpxFile;
@@ -271,7 +271,9 @@ public class TrackColoringCard extends MapBaseCard {
 			if (item.getAttrName().equals(ColoringType.TRACK_SOLID.getName(null))) {
 				iconColorId = trackDrawInfo.getColor();
 			}
-
+			if (iconColorId == 0) {
+				iconColorId = TrackAppearanceFragment.getTrackColor(app, selectedGpxFile);
+			}
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.getIconId(), iconColorId));
 			holder.title.setTextColor(textColorId);
 		}

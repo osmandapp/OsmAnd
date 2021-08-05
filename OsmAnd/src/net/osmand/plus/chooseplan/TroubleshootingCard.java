@@ -64,7 +64,7 @@ public class TroubleshootingCard extends BaseCard {
 		View purchasesRestore = view.findViewById(R.id.restore_purchases);
 		purchasesRestore.setOnClickListener(v -> {
 			if (purchaseHelper != null) {
-				purchaseHelper.requestInventory();
+				purchaseHelper.requestInventory(true);
 			}
 		});
 	}

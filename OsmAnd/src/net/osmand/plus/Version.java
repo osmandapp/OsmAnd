@@ -39,6 +39,10 @@ public class Version {
 		return isGooglePlayEnabled() || isAmazon();
 	}
 
+	public static boolean isInAppPurchaseSupported() {
+		return isGooglePlayEnabled() || isHuawei();
+	}
+
 	public static boolean isGooglePlayInstalled(@NonNull OsmandApplication ctx) {
 		try {
 			ctx.getPackageManager().getPackageInfo("com.android.vending", 0);

@@ -372,8 +372,9 @@ public class BackupHelper {
 		String orderId = getOrderId();
 		if (Algorithms.isEmpty(orderId)) {
 			if (listener != null) {
-				String error = "Order id is empty";
-				listener.onUpdateSubscription(STATUS_NO_ORDER_ID_ERROR, error, error);
+				String message = "Order id is empty";
+				String error = "{\"error\":{\"errorCode\":" + STATUS_NO_ORDER_ID_ERROR + ",\"message\":\"" + message + "\"}}";
+				listener.onUpdateSubscription(STATUS_NO_ORDER_ID_ERROR, message, error);
 			}
 			return;
 		} else {
@@ -388,7 +389,7 @@ public class BackupHelper {
 			int status;
 			String message;
 			if (!Algorithms.isEmpty(error)) {
-				message = "Update order id error: " + new ServerError(error);
+				message = "Update order id error: " + new BackupError(error);
 				status = STATUS_SERVER_ERROR;
 			} else if (!Algorithms.isEmpty(resultJson)) {
 				try {
@@ -514,7 +515,7 @@ public class BackupHelper {
 		if (listener != null) {
 			listener.onFileUploadDone(type, fileName, uploadTime, error);
 		}
-		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + new ServerError(error) : " OK"));
+		operationLog.finishOperation(type + " " + fileName + (error != null ? " Error: " + new BackupError(error) : " OK"));
 		return error;
 	}
 
@@ -553,7 +554,7 @@ public class BackupHelper {
 					List<RemoteFile> remoteFiles = new ArrayList<>();
 					if (!Algorithms.isEmpty(error)) {
 						status = STATUS_SERVER_ERROR;
-						message = "Download file list error: " + new ServerError(error);
+						message = "Download file list error: " + new BackupError(error);
 					} else if (!Algorithms.isEmpty(resultJson)) {
 						try {
 							JSONObject res = new JSONObject(resultJson);

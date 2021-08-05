@@ -8,8 +8,6 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.huawei.hmf.tasks.OnFailureListener;
-import com.huawei.hmf.tasks.OnSuccessListener;
 import com.huawei.hmf.tasks.Task;
 import com.huawei.hms.iap.Iap;
 import com.huawei.hms.iap.IapClient;
@@ -184,21 +182,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				req.setType(StartIapActivityReq.TYPE_SUBSCRIBE_MANAGER_ACTIVITY);
 			}
 			Task<StartIapActivityResult> task = getIapClient().startIapActivity(req);
-			task.addOnSuccessListener(new OnSuccessListener<StartIapActivityResult>() {
-				@Override
-				public void onSuccess(StartIapActivityResult result) {
-					logDebug("startIapActivity: onSuccess");
-					Activity activity = (Activity) uiActivity;
-					if (result != null && AndroidUtils.isActivityNotDestroyed(activity)) {
-						result.startActivity(activity);
-					}
+			task.addOnSuccessListener(result -> {
+				logDebug("startIapActivity: onSuccess");
+				Activity activity = (Activity) uiActivity;
+				if (result != null && AndroidUtils.isActivityNotDestroyed(activity)) {
+					result.startActivity(activity);
 				}
-			}).addOnFailureListener(new OnFailureListener() {
-				@Override
-				public void onFailure(Exception e) {
-					logDebug("startIapActivity: onFailure");
-				}
-			});
+			}).addOnFailureListener(e -> logDebug("startIapActivity: onFailure"));
 		}
 	}
 
@@ -331,7 +321,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
-	protected InAppCommand getRequestInventoryCommand() {
+	protected InAppCommand getRequestInventoryCommand(boolean userRequested) {
 		return new InAppCommand() {
 
 			@Override
@@ -536,24 +526,37 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 				// Do we have the live updates?
 				boolean subscribedToLiveUpdates = false;
+				boolean subscribedToOsmAndPro = false;
 				List<InAppPurchaseData> subscriptionPurchases = new ArrayList<>();
 				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					InAppPurchaseData purchaseData = getPurchaseData(s.getSku());
-					if (purchaseData != null) {
-						subscriptionPurchases.add(purchaseData);
-						if (!subscribedToLiveUpdates
-								&& (purchases.isLiveUpdatesSubscription(s) || purchases.isOsmAndProSubscription(s))) {
+					if (purchaseData != null || s.getState().isActive()) {
+						if (purchaseData != null) {
+							subscriptionPurchases.add(purchaseData);
+						}
+						if (!subscribedToLiveUpdates && purchases.isLiveUpdatesSubscription(s)) {
 							subscribedToLiveUpdates = true;
+						}
+						if (!subscribedToOsmAndPro && purchases.isOsmAndProSubscription(s)) {
+							subscribedToOsmAndPro = true;
 						}
 					}
 				}
 				if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
 					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
-					if (!isDepthContoursPurchased(ctx)) {
-						ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
+					if (!subscribedToOsmAndPro) {
+						onSubscriptionExpired();
 					}
 				} else if (subscribedToLiveUpdates) {
 					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+				}
+				if (!subscribedToOsmAndPro && ctx.getSettings().OSMAND_PRO_PURCHASED.get()) {
+					ctx.getSettings().OSMAND_PRO_PURCHASED.set(false);
+					if (!subscribedToLiveUpdates) {
+						onSubscriptionExpired();
+					}
+				} else if (subscribedToOsmAndPro) {
+					ctx.getSettings().OSMAND_PRO_PURCHASED.set(true);
 				}
 
 				lastValidationCheckTime = System.currentTimeMillis();
@@ -590,7 +593,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				for (InAppPurchaseData purchase : tokensToSend) {
 					purchaseInfoList.add(getPurchaseInfo(purchase));
 				}
-				onSkuDetailsResponseDone(purchaseInfoList);
+				onSkuDetailsResponseDone(purchaseInfoList, userRequested);
+			}
+
+			private void onSubscriptionExpired() {
+				if (!isDepthContoursPurchased(ctx)) {
+					ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
+				}
 			}
 		};
 	}

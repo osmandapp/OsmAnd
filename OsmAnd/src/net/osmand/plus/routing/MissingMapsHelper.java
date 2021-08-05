@@ -1,26 +1,29 @@
 package net.osmand.plus.routing;
 
+import static net.osmand.util.MapUtils.calculateMidPoint;
+
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import static net.osmand.util.MapUtils.calculateMidPoint;
 
 public class MissingMapsHelper {
 	private final static Log LOG = PlatformUtil.getLog(MissingMapsHelper.class);
@@ -93,12 +96,19 @@ public class MissingMapsHelper {
 
 	@NonNull
 	public List<WorldRegion> getMissingMaps(@NonNull List<Location> points) throws IOException {
+		DownloadResources downloadResources = params.ctx.getDownloadThread().getIndexes();
+		Set<WorldRegion> downloadedCountries = new LinkedHashSet<>();
+		Set<WorldRegion> downloadedRegions = new LinkedHashSet<>();
 		Set<WorldRegion> result = new LinkedHashSet<>();
 		for (int i = 0; i < points.size(); i++) {
-			final Location l = points.get(i);
-			LatLon latLonPoint = new LatLon(l.getLatitude(), l.getLongitude());
-			List<WorldRegion> worldRegions = params.ctx.getRegions().getWorldRegionsAt(latLonPoint);
+			Location l = points.get(i);
+			int point31x = MapUtils.get31TileNumberX(l.getLongitude());
+			int point31y = MapUtils.get31TileNumberY(l.getLatitude());
+			LatLon latLon = new LatLon(l.getLatitude(), l.getLongitude());
+			List<WorldRegion> worldRegions = params.ctx.getRegions().getWorldRegionsAt(latLon);
 			Set<WorldRegion> regions = new LinkedHashSet<>();
+			boolean hasAnyRegionDownloaded =
+					!downloadResources.getExternalMapFileNamesAt(point31x, point31y, 15, true).isEmpty();
 			for (WorldRegion region : worldRegions) {
 				String mapName = region.getRegionDownloadName();
 				String countryMapName = region.getSuperregion().getRegionDownloadName();
@@ -109,12 +119,41 @@ public class MissingMapsHelper {
 					if (!isDownloaded) {
 						regions.add(region);
 					} else {
-						regions.clear();
-						break;
+						downloadedRegions.add(region);
+						hasAnyRegionDownloaded = true;
+					}
+				} else {
+					if (isDownloaded) {
+						downloadedCountries.add(region);
+						hasAnyRegionDownloaded = true;
 					}
 				}
 			}
-			result.addAll(regions);
+			if (!hasAnyRegionDownloaded) {
+				result.addAll(regions);
+			}
+		}
+		for (WorldRegion country : downloadedCountries) {
+			List<WorldRegion> subregions = country.getSubregions();
+			Iterator<WorldRegion> it = result.iterator();
+			while (it.hasNext()) {
+				WorldRegion region = it.next();
+				if (subregions.contains(region)) {
+					it.remove();
+				}
+			}
+		}
+		List<WorldRegion> regions = new ArrayList<>(result);
+		regions.addAll(downloadedRegions);
+		Iterator<WorldRegion> it = result.iterator();
+		while (it.hasNext()) {
+			WorldRegion region = it.next();
+			for (int i = 0; i < regions.size(); i++) {
+				WorldRegion r = regions.get(i);
+				if (!r.equals(region) && r.containsRegion(region)) {
+					it.remove();
+				}
+			}
 		}
 		return new ArrayList<>(result);
 	}
@@ -124,8 +163,8 @@ public class MissingMapsHelper {
 		List<Location> mapsBasedOnPoints = new ArrayList<>();
 		if (!routeLocation.isEmpty()) {
 			mapsBasedOnPoints.add(routeLocation.get(0));
-			for (int i = 0, j = i + 1; j < routeLocation.size() - 1; j++) {
-				if (routeLocation.get(i).distanceTo(routeLocation.get(j)) >= MIN_STRAIGHT_DIST) {
+			for (int i = 0, j = i + 1; j < routeLocation.size(); j++) {
+				if (j == routeLocation.size() - 1 || routeLocation.get(i).distanceTo(routeLocation.get(j)) >= MIN_STRAIGHT_DIST) {
 					mapsBasedOnPoints.add(routeLocation.get(j));
 					i = j;
 				}

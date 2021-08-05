@@ -13,7 +13,6 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.LocationsHolder;
-import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -295,10 +294,11 @@ public class RouteProvider {
 		}
 
 		if (routeParams.gpxRoute.useIntermediatePointsRTE) {
-			return calculateOsmAndRouteWithIntermediatePoints(routeParams, gpxParams.points);
+			return calculateOsmAndRouteWithIntermediatePoints(routeParams, gpxParams.points,
+					gpxParams.connectPointsStraightly);
 		}
 
-		List<Location> gpxRoute ;
+		List<Location> gpxRoute;
 		int[] startI = new int[]{0};
 		int[] endI = new int[]{gpxParams.points.size()};
 		if (calcWholeRoute) {
@@ -331,7 +331,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult calculateOsmAndRouteWithIntermediatePoints(RouteCalculationParams routeParams,
-			final List<Location> intermediates) throws IOException {
+			final List<Location> intermediates, boolean connectPointsStraightly) throws IOException {
 		RouteCalculationParams rp = new RouteCalculationParams();
 		rp.calculationProgress = routeParams.calculationProgress;
 		rp.ctx = routeParams.ctx;
@@ -341,8 +341,9 @@ public class RouteProvider {
 		rp.leftSide = routeParams.leftSide;
 		rp.fast = routeParams.fast;
 		rp.onlyStartPointChanged = routeParams.onlyStartPointChanged;
-		rp.previousToRecalculate =  routeParams.previousToRecalculate;
-		rp.intermediates = new ArrayList<LatLon>();
+		rp.previousToRecalculate = routeParams.previousToRecalculate;
+		rp.extraIntermediates = true;
+		rp.intermediates = new ArrayList<>();
 		int closest = 0;
 		double maxDist = Double.POSITIVE_INFINITY;
 		for (int i = 0; i < intermediates.size(); i++) {
@@ -367,8 +368,9 @@ public class RouteProvider {
 			} catch (SAXException e) {
 				throw new IOException(e);
 			}
-		} else if (routeParams.mode.getRouteService() == RouteService.STRAIGHT ||
-				routeParams.mode.getRouteService() == RouteService.DIRECT_TO) {
+		} else if (routeParams.mode.getRouteService() == RouteService.STRAIGHT
+				|| routeParams.mode.getRouteService() == RouteService.DIRECT_TO
+				|| connectPointsStraightly) {
 			return findStraightRoute(rp);
 		}
 		return findVectorMapsRoute(rp, false);
@@ -787,7 +789,8 @@ public class RouteProvider {
 					params.ctx.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());							
+							log.error("Runtime error: " + e.getMessage(), e);
+							params.ctx.showToastMessage(R.string.complex_route_calculation_failed, e.getMessage());
 						}
 					});
 					result = router.searchRoute(ctx, st, en, inters);
@@ -1214,7 +1217,10 @@ public class RouteProvider {
 		points.add(new Location("pnt", params.start.getLatitude(), params.start.getLongitude()));
 		if (params.intermediates != null) {
 			for (LatLon l : params.intermediates) {
-				points.add(new Location("pnt", l.getLatitude(), l.getLongitude()));
+				points.add(new Location(params.extraIntermediates ? "" : "pnt", l.getLatitude(), l.getLongitude()));
+			}
+			if (params.extraIntermediates) {
+				params.intermediates = null;
 			}
 		}
 		points.add(new Location("", params.end.getLatitude(), params.end.getLongitude()));
@@ -1237,6 +1243,6 @@ public class RouteProvider {
 				points.add(0, mp);
 			}
 		}
-		return new RouteCalculationResult(segments, computeDirections, params, null, false);
+		return new RouteCalculationResult(segments, computeDirections, params, null, params.extraIntermediates);
 	}
 }

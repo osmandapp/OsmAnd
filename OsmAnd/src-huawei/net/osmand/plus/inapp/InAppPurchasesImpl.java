@@ -44,7 +44,11 @@ public class InAppPurchasesImpl extends InAppPurchases {
 	private static final InAppSubscription[] SUBSCRIPTIONS_FREE = new InAppSubscription[]{
 			new InAppPurchaseLiveUpdatesMonthlyFree(),
 			new InAppPurchaseLiveUpdates3MonthsFree(),
-			new InAppPurchaseLiveUpdatesAnnualFree()
+			new InAppPurchaseLiveUpdatesAnnualFree(),
+
+			new InAppPurchaseOsmAndProMonthlyFree(),
+			new InAppPurchaseOsmAndProAnnualFree(),
+			new InAppPurchaseMapsAnnualFree()
 	};
 
 	public InAppPurchasesImpl(OsmandApplication ctx) {
@@ -181,7 +185,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 		@Override
 		public boolean isLegacy() {
-			return false;
+			return true;
 		}
 
 		@Nullable
@@ -211,7 +215,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 		@Override
 		public boolean isLegacy() {
-			return false;
+			return true;
 		}
 
 		@Nullable
@@ -241,7 +245,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 		@Override
 		public boolean isLegacy() {
-			return false;
+			return true;
 		}
 
 		@Nullable
@@ -268,7 +272,7 @@ public class InAppPurchasesImpl extends InAppPurchases {
 
 		@Override
 		public boolean isLegacy() {
-			return false;
+			return true;
 		}
 
 		@Override
@@ -295,6 +299,145 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		@Override
 		protected InAppSubscription newInstance(@NonNull String sku) {
 			return null;
+		}
+	}
+
+	private static class InAppPurchaseOsmAndProMonthlyFree extends InAppPurchaseMonthlySubscription {
+
+		private static final String SKU_OSMAND_PRO_MONTHLY_FREE = "net.osmand.huawei.monthly.pro";
+
+		InAppPurchaseOsmAndProMonthlyFree() {
+			super(OSMAND_PRO_ID, SKU_OSMAND_PRO_MONTHLY_FREE, 1);
+		}
+
+		private InAppPurchaseOsmAndProMonthlyFree(@NonNull String sku) {
+			super(OSMAND_PRO_ID, sku);
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return OSMAND_PRO_SCOPE;
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
+		}
+
+		@Override
+		public String getDefaultPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_monthly_price);
+		}
+
+		@Override
+		public String getDefaultMonthlyPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_monthly_price);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseOsmAndProMonthlyFree(sku) : null;
+		}
+	}
+
+	private static class InAppPurchaseOsmAndProAnnualFree extends InAppPurchaseAnnualSubscription {
+
+		private static final String SKU_OSMAND_PRO_ANNUAL_FREE = "net.osmand.huawei.annual.pro";
+
+		InAppPurchaseOsmAndProAnnualFree() {
+			super(OSMAND_PRO_ID, SKU_OSMAND_PRO_ANNUAL_FREE, 1);
+		}
+
+		private InAppPurchaseOsmAndProAnnualFree(@NonNull String sku) {
+			super(OSMAND_PRO_ID, sku);
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return OSMAND_PRO_SCOPE;
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
+		}
+
+		@Override
+		public String getDefaultPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_annual_price);
+		}
+
+		@Override
+		public String getDefaultMonthlyPrice(Context ctx) {
+			return ctx.getString(R.string.osm_pro_annual_monthly_price);
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseOsmAndProAnnualFree(sku) : null;
+		}
+	}
+
+	private static class InAppPurchaseMapsAnnualFree extends InAppPurchaseAnnualSubscription {
+
+		private static final String SKU_MAPS_ANNUAL_FREE = "net.osmand.huawei.annual.maps";
+
+		InAppPurchaseMapsAnnualFree() {
+			super(MAPS_ID, SKU_MAPS_ANNUAL_FREE, 1);
+		}
+
+		private InAppPurchaseMapsAnnualFree(@NonNull String sku) {
+			super(MAPS_ID, sku);
+		}
+
+		@NonNull
+		@Override
+		public int[] getScope() {
+			return MAPS_SCOPE;
+		}
+
+		@Override
+		public boolean isLegacy() {
+			return false;
+		}
+
+		@Override
+		public String getDefaultPrice(Context ctx) {
+			return ctx.getString(R.string.osm_maps_plus_annual_price);
+		}
+
+		@Override
+		public String getDefaultMonthlyPrice(Context ctx) {
+			return ctx.getString(R.string.osm_maps_plus_annual_monthly_price);
+		}
+
+		@Override
+		public int getDiscountPercent(@NonNull InAppSubscription monthlyLiveUpdates) {
+			InAppSubscriptionIntroductoryInfo introductoryInfo = getIntroductoryInfo();
+			if (introductoryInfo != null) {
+				double regularPrice = getPriceValue();
+				double introductoryPrice = introductoryInfo.getIntroductoryPriceValue();
+				if (introductoryPrice >= 0 && introductoryPrice < regularPrice) {
+					return (int) ((1 - introductoryPrice / regularPrice) * 100d);
+				}
+			}
+			return 0;
+		}
+
+		@Override
+		public String getRegularPrice(@NonNull Context ctx, @NonNull InAppSubscription monthlyLiveUpdates) {
+			double regularPrice = getPriceValue();
+			return getFormattedPrice(ctx, regularPrice, getPriceCurrencyCode());
+		}
+
+		@Nullable
+		@Override
+		protected InAppSubscription newInstance(@NonNull String sku) {
+			return sku.startsWith(getSkuNoVersion()) ? new InAppPurchaseMapsAnnualFree(sku) : null;
 		}
 	}
 
