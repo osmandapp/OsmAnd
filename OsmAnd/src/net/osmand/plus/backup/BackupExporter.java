@@ -93,7 +93,7 @@ public class BackupExporter extends Exporter {
 		}
 
 		List<ItemWriterTask> tasks = new ArrayList<>();
-		for (SettingsItem item : getItems().values()) {
+		for (SettingsItem item : getItems()) {
 			tasks.add(new ItemWriterTask(writer, item));
 		}
 		executor = new ThreadPoolTaskExecutor<>(null);

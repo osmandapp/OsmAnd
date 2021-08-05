@@ -56,7 +56,7 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.retry);
 		} else if (status == BackupStatus.SUBSCRIPTION_EXPIRED) {
 			actionButton.setOnClickListener(v -> {
-				if (Version.isGooglePlayEnabled()) {
+				if (Version.isInAppPurchaseSupported()) {
 					OsmAndProPlanFragment.showInstance(mapActivity);
 				} else {
 					PromoCodeBottomSheet.showInstance(mapActivity.getSupportFragmentManager());

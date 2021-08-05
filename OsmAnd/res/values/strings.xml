@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="purchases_restored">Purchases restored</string>
+    <string name="pro_features">Pro features</string>
     <string name="connect_track_points_as">Сonnect route points</string>
     <string name="map_updates_are_unavailable_yet">Map updates are unavailable yet :-(</string>
     <string name="contributions_may_calculate_with_delay">Contributions might be calculated with several hour delays.</string>
@@ -41,7 +43,6 @@
     <string name="routes_color_by_type">Routes color by</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explore OsmAnd Plans to find suitable for you.</string>
     <string name="purchases_feature_desc_pro_widgets">Get access to OsmAnd Pro features. Route colorization and more.</string>
-    <string name="pro_widgets">Pro Widgets</string>
     <string name="option_available_only_in_osmand_pro">The option available as part of OsmAnd Pro subscription.</string>
     <string name="track_has_no_needed_data">The track does not contain needed data.</string>
     <string name="promo_subscription">Promo subscription</string>

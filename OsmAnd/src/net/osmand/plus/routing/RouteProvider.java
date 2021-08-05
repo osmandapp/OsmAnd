@@ -1106,7 +1106,7 @@ public class RouteProvider {
 	private static List<LatLon> getPathFromParams(RouteCalculationParams params) {
 		List<LatLon> points = new ArrayList<>();
 		points.add(new LatLon(params.start.getLatitude(), params.start.getLongitude()));
-		if (Algorithms.isEmpty(params.intermediates)) {
+		if (!Algorithms.isEmpty(params.intermediates)) {
 			points.addAll(params.intermediates);
 		}
 		points.add(params.end);

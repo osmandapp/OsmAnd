@@ -201,7 +201,7 @@ public class DiscountHelper {
 						} else {
 							InAppPurchaseHelper purchaseHelper = mapActivity.getPurchaseHelper();
 							if (purchaseHelper != null) {
-								purchaseHelper.requestInventory();
+								purchaseHelper.requestInventory(false);
 							}
 							showDiscountBanner(mapActivity, data);
 						}

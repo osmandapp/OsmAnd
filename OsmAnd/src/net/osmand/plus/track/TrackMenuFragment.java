@@ -253,7 +253,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				@Override
 				public boolean processResult(SelectedGpxFile result) {
 					setSelectedGpxFile(result);
-					setupDisplayHelper();
+					onSelectedGpxFileAvailable();
 					if (getView() != null) {
 						initContent(getView());
 					}
@@ -266,7 +266,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				latLon = new LatLon(latitude, longitude);
 			}
 		} else if (selectedGpxFile != null) {
-			setupDisplayHelper();
+			onSelectedGpxFileAvailable();
 			if (FileUtils.isTempFile(app, getGpx().path)) {
 				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), true, false);
 			}
@@ -297,6 +297,11 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		});
 	}
 
+	private void onSelectedGpxFileAvailable() {
+		setupDisplayHelper();
+		updateGpxTitle();
+	}
+
 	private void setupDisplayHelper() {
 		if (!selectedGpxFile.isShowCurrentTrack()) {
 			File file = new File(selectedGpxFile.getGpxFile().path);
@@ -304,12 +309,16 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			displayHelper.setGpxDataItem(app.getGpxDbHelper().getItem(file));
 		}
 		displayHelper.setGpx(selectedGpxFile.getGpxFile());
-		String title = getGpx().getArticleTitle();
-		if (title == null) {
-			title = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(getGpx().path));
+	}
+
+	private void updateGpxTitle() {
+		if (isCurrentRecordingTrack()) {
+			gpxTitle = app.getString(R.string.shared_string_currently_recording_track);
+		} else if (!Algorithms.isBlank(getGpx().getArticleTitle())) {
+			gpxTitle = getGpx().getArticleTitle();
+		} else {
+			gpxTitle = GpxUiHelper.getGpxTitle(Algorithms.getFileWithoutDirs(getGpx().path));
 		}
-		gpxTitle = !isCurrentRecordingTrack() ? title
-				: app.getString(R.string.shared_string_currently_recording_track);
 	}
 
 	public LatLon getLatLon() {
@@ -828,6 +837,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private void updateFile(File file) {
 		displayHelper.setFile(file);
 		displayHelper.updateDisplayGroups();
+		updateGpxTitle();
+		toolbarTextView.setText(gpxTitle);
 		updateHeader();
 		updateContent();
 	}

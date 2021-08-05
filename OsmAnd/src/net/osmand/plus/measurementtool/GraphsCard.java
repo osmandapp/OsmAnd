@@ -98,8 +98,8 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 		messageContainer = view.findViewById(R.id.message_container);
 		LineChart lineChart = (LineChart) view.findViewById(R.id.line_chart);
 		HorizontalBarChart barChart = (HorizontalBarChart) view.findViewById(R.id.horizontal_chart);
-		commonGraphAdapter = new CommonGraphAdapter(lineChart, true);
-		customGraphAdapter = new CustomGraphAdapter(barChart, true);
+		commonGraphAdapter = new CommonGraphAdapter(app, lineChart, true);
+		customGraphAdapter = new CustomGraphAdapter(app, barChart, true);
 
 		customGraphAdapter.setLegendContainer((ViewGroup) view.findViewById(R.id.route_legend));
 		customGraphAdapter.setLayoutChangeListener(new BaseGraphAdapter.LayoutChangeListener() {

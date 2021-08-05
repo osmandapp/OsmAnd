@@ -1,5 +1,9 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
+import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -58,9 +62,6 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -69,6 +70,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -77,6 +79,8 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
+import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -89,10 +93,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.plus.mapcontextmenu.MenuBuilder.SHADOW_HEIGHT_TOP_DP;
-import static net.osmand.plus.settings.fragments.ConfigureMenuItemsFragment.MAIN_BUTTONS_QUANTITY;
 
 
 public class MapContextMenuFragment extends BaseOsmAndFragment implements DownloadEvents {
@@ -245,10 +245,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		if (!customMapCenter) {
 			mapCenter = box.getCenterLatLon();
 			menu.setMapCenter(mapCenter);
-			double markerLat = menu.getLatLon().getLatitude();
-			double markerLon = menu.getLatLon().getLongitude();
-			origMarkerX = (int) box.getPixXFromLatLon(markerLat, markerLon);
-			origMarkerY = (int) box.getPixYFromLatLon(markerLat, markerLon);
+			LatLon latLon = menu.getLatLon();
+			if (latLon == null) {
+				origMarkerX = box.getCenterPixelX();
+				origMarkerY = box.getCenterPixelY();
+			} else {
+				double markerLat = latLon.getLatitude();
+				double markerLon = latLon.getLongitude();
+				origMarkerX = (int) box.getPixXFromLatLon(markerLat, markerLon);
+				origMarkerY = (int) box.getPixYFromLatLon(markerLat, markerLon);
+			}
 		} else {
 			mapCenter = menu.getMapCenter();
 			origMarkerX = box.getCenterPixelX();
@@ -1375,7 +1381,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (!menu.isActive() || (mapActivity.getMapRouteInfoMenu().isVisible()) || MapRouteInfoMenu.waypointsVisible) {
+			if (!menu.isActive() || menu.getLatLon() == null || MapRouteInfoMenu.waypointsVisible
+					|| mapActivity.getMapRouteInfoMenu().isVisible()) {
 				dismissMenu();
 				return;
 			}
