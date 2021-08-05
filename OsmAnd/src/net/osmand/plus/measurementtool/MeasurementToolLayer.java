@@ -239,10 +239,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				}
 			}
 
+			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			drawPoints(canvas, tb);
 			if (trackChartPoints != null) {
 				drawTrackChartPoints(trackChartPoints, canvas, tb);
 			}
+			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		}
 	}
 
@@ -309,8 +311,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	private void drawPoints(Canvas canvas, RotatedTileBox tb) {
-		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-
 		WptPt lastBeforePoint = null;
 		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
 		if (points.size() > 0) {
@@ -345,8 +345,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				drawPointIcon(canvas, tb, pt, false);
 			}
 		}
-
-		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
 	private void drawBeforeAfterPath(Canvas canvas, RotatedTileBox tb) {
