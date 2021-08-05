@@ -321,7 +321,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
-	protected InAppCommand getRequestInventoryCommand() {
+	protected InAppCommand getRequestInventoryCommand(boolean userRequested) {
 		return new InAppCommand() {
 
 			@Override
@@ -593,7 +593,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				for (InAppPurchaseData purchase : tokensToSend) {
 					purchaseInfoList.add(getPurchaseInfo(purchase));
 				}
-				onSkuDetailsResponseDone(purchaseInfoList);
+				onSkuDetailsResponseDone(purchaseInfoList, userRequested);
 			}
 
 			private void onSubscriptionExpired() {

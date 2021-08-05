@@ -1,5 +1,7 @@
 package net.osmand.plus.chooseplan;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
+
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -38,8 +40,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
 
 public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 
@@ -310,7 +310,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 
 	private void setupRestoreButton() {
 		View button = mainView.findViewById(R.id.button_restore);
-		button.setOnClickListener(v -> purchaseHelper.requestInventory());
+		button.setOnClickListener(v -> purchaseHelper.requestInventory(true));
 		setupRoundedBackground(button, ButtonBackground.ROUNDED_SMALL);
 	}
 
