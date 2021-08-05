@@ -470,6 +470,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					openSelectedPointMenu(mapActivity);
 				}
 			}
+
+			@Override
+			public void onSelectProfileIcon(int startPointPos) {
+				if (startPointPos != -1) {
+					onChangeRouteTypeAfter();
+				}
+			}
 		});
 
 		measurementLayer.setOnMeasureDistanceToCenterListener(new MeasurementToolLayer.OnMeasureDistanceToCenter() {

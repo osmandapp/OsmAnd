@@ -115,7 +115,7 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 	private void setStylesInternal(List<WptPt> points, int idx, List<Way> ways, List<GeometryWayStyle<?>> styles) {
 		WptPt startPt = points.get(idx);
 		WptPt endPt = points.get(idx + 1);
-		List<LatLon> routePoints = getRoutePoints(startPt, endPt);
+		List<LatLon> routePoints = getRoutePoints(startPt, endPt, segmentData);
 		boolean isSecondToLast = idx + 2 == points.size();
 
 		Way way = new Way(-1);
@@ -134,7 +134,8 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 		}
 	}
 
-	private List<LatLon> getRoutePoints(WptPt start, WptPt end) {
+	public static List<LatLon> getRoutePoints(WptPt start, WptPt end,
+	                                          Map<Pair<WptPt, WptPt>, RoadSegmentData> segmentData) {
 		Pair<WptPt, WptPt> userLine = new Pair<>(start, end);
 		RoadSegmentData roadSegmentData = segmentData.get(userLine);
 		List<LatLon> routePoints = new ArrayList<>();
@@ -259,9 +260,11 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 
 		private final List<LatLon> routePoints;
 
-		public GeometryMultiProfileWayStyle(MultiProfileGeometryWayContext context, List<LatLon> routePoints,
-											@ColorInt int profileColor, @DrawableRes int profileIconRes,
-											boolean isGap) {
+		public GeometryMultiProfileWayStyle(@NonNull MultiProfileGeometryWayContext context,
+		                                    @NonNull List<LatLon> routePoints,
+											@ColorInt int profileColor,
+		                                    @DrawableRes int profileIconRes,
+		                                    boolean isGap) {
 			super(context);
 			this.routePoints = routePoints;
 			this.pathColor = profileColor;
@@ -270,8 +273,10 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 			this.isGap = isGap;
 		}
 
-		public GeometryMultiProfileWayStyle(MultiProfileGeometryWayContext context, List<LatLon> routePoints,
-											@ColorInt int profileColor, @DrawableRes int profileIconRes) {
+		public GeometryMultiProfileWayStyle(@NonNull MultiProfileGeometryWayContext context,
+		                                    @NonNull List<LatLon> routePoints,
+		                                    @ColorInt int profileColor,
+		                                    @DrawableRes int profileIconRes) {
 			this(context, routePoints, profileColor, profileIconRes, false);
 		}
 
@@ -290,6 +295,7 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 			return getContext().getProfileIconBitmap(profileIconRes, pathBorderColor);
 		}
 
+		@NonNull
 		public List<LatLon> getRoutePoints() {
 			return routePoints;
 		}
