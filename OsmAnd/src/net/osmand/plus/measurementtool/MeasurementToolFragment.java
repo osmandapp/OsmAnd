@@ -1689,10 +1689,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return Algorithms.objectEquals(currentInfoType, type);
 	}
 
-	public boolean hasVisibleGraph() {
-		return graphsCard != null && graphsCard.hasVisibleGraph();
-	}
-
 	private String getSuggestedFileName() {
 		GpxData gpxData = editingCtx.getGpxData();
 		String displayedName = null;
