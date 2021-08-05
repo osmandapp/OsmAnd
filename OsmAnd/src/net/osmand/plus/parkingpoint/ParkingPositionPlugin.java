@@ -370,8 +370,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				cal.add(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
 				cal.add(Calendar.MINUTE, timePicker.getCurrentMinute());
 				setParkingTime(cal.getTimeInMillis());
-				mapActivity.getMyApplication().getFavorites().getSpecialPoint(SpecialPointType.PARKING).setTimestamp(cal.getTimeInMillis());
-				mapActivity.getMyApplication().getFavorites().saveCurrentPointsIntoFile();
+				app.getFavorites().setParkingPoint(getParkingPosition(), null, getParkingTime(), isParkingEventAdded());
 				CheckBox addCalendarEvent = (CheckBox) setTimeParking.findViewById(R.id.check_event_in_calendar);
 				if (addCalendarEvent.isChecked()) {
 					addCalendarEvent(setTimeParking.getContext());
