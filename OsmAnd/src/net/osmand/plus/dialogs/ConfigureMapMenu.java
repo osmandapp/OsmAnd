@@ -712,20 +712,23 @@ public class ConfigureMapMenu {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
-						pref.set(isChecked);
-						ContextMenuItem item = adapter.getItem(pos);
-						if (item != null) {
-							if (property != null) {
-								activity.refreshMap();
-								activity.updateLayers();
-							} else {
-								isChecked = false;
-								item.setSelected(isChecked);
-								showRendererSnackbarForAttr(activity, attrName, nightMode);
+						if (property != null) {
+							pref.set(isChecked);
+							ContextMenuItem item = adapter.getItem(pos);
+							if (item != null) {
+								item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+								item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+								adapter.notifyDataSetChanged();
 							}
-							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
-							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
-							adapter.notifyDataSetChanged();
+							activity.refreshMap();
+							activity.updateLayers();
+						} else {
+							ContextMenuItem item = adapter.getItem(pos);
+							if (item != null) {
+								item.setSelected(pref.get());
+								adapter.notifyDataSetChanged();
+							}
+							showRendererSnackbarForAttr(activity, attrName, nightMode);
 						}
 						return false;
 					}

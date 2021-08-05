@@ -60,7 +60,7 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupHeader(@NonNull View view) {
-		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(SHOW_CYCLE_ROUTES_ATTR);
+		CommonPreference<Boolean> pref = getPreference();
 
 		View container = view.findViewById(R.id.preference_container);
 
@@ -115,7 +115,7 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		TextToggleButton radioGroup = new TextToggleButton(app, view.findViewById(R.id.custom_radio_buttons), nightMode);
 		radioGroup.setItems(relation, nodeNetworks);
 		radioGroup.setSelectedItem(pref.get() ? nodeNetworks : relation);
-		boolean enabled = isEnabled();
+		boolean enabled = getPreference().get();
 		AndroidUiHelper.updateVisibility(container, enabled);
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.topShadowView), enabled);
 		AndroidUiHelper.updateVisibility(container.findViewById(R.id.descr), false);
@@ -151,8 +151,7 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 		bottomView.setLayoutParams(params);
 	}
 
-	private boolean isEnabled() {
-		CommonPreference<Boolean> pref = settings.getCustomRenderBooleanProperty(SHOW_CYCLE_ROUTES_ATTR);
-		return pref.get();
+	private CommonPreference<Boolean> getPreference() {
+		return settings.getCustomRenderBooleanProperty(SHOW_CYCLE_ROUTES_ATTR);
 	}
 }
