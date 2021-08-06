@@ -74,20 +74,9 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		app = requireMyApplication();
-
-		Bundle args = getArguments();
-		if (args == null || !args.containsKey(EXTRA_PLUGIN_ID)) {
-			log.error("Required extra '" + EXTRA_PLUGIN_ID + "' is missing");
-			return null;
-		}
-		String pluginId = args.getString(EXTRA_PLUGIN_ID);
-		if (pluginId == null) {
-			log.error("Extra '" + EXTRA_PLUGIN_ID + "' is null");
-			return null;
-		}
-		plugin = OsmandPlugin.getPlugin(pluginId);
+		plugin = getPluginFromArgs();
 		if (plugin == null) {
-			log.error("Plugin '" + EXTRA_PLUGIN_ID + "' not found");
+			dismiss();
 			return null;
 		}
 
@@ -152,7 +141,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (plugin.isEnabled() != isChecked) {
 					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked)) {
-						updateState();
+						updateState(plugin);
 					}
 				}
 			}
@@ -183,18 +172,40 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			}
 		});
 
-		updateState();
+		updateState(plugin);
 		return mainView;
+	}
+
+	@Nullable
+	private OsmandPlugin getPluginFromArgs() {
+		Bundle args = getArguments();
+		if (args == null || !args.containsKey(EXTRA_PLUGIN_ID)) {
+			log.error("Required extra '" + EXTRA_PLUGIN_ID + "' is missing");
+			return null;
+		}
+		String pluginId = args.getString(EXTRA_PLUGIN_ID);
+		if (pluginId == null) {
+			log.error("Extra '" + EXTRA_PLUGIN_ID + "' is null");
+			return null;
+		}
+		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginId);
+		if (plugin == null) {
+			log.error("Plugin '" + EXTRA_PLUGIN_ID + "' not found");
+			return null;
+		}
+		return plugin;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		OsmandPlugin.checkInstalledMarketPlugins(app, getActivity());
-		updateState();
+		if (plugin != null) {
+			updateState(plugin);
+		}
 	}
 
-	private void updateState() {
+	private void updateState(@NonNull OsmandPlugin plugin) {
 		CompoundButton enableDisableButton = mainView.findViewById(R.id.plugin_enable_disable);
 		Button getButton = mainView.findViewById(R.id.plugin_get);
 		Button settingsButton = mainView.findViewById(R.id.plugin_settings);
@@ -226,8 +237,8 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	}
 
 	@Override
-	public void onPluginStateChanged(OsmandPlugin plugin) {
-		updateState();
+	public void onPluginStateChanged(@NonNull OsmandPlugin plugin) {
+		updateState(plugin);
 	}
 
 	public void dismiss() {
@@ -241,7 +252,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		}
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, OsmandPlugin plugin) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull OsmandPlugin plugin) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(EXTRA_PLUGIN_ID, plugin.getId());

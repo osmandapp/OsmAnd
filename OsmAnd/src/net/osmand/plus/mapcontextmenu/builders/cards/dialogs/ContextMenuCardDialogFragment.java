@@ -8,6 +8,13 @@ import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.util.Algorithms;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -15,13 +22,6 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-
-import net.osmand.AndroidUtils;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.util.Algorithms;
 
 public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	public static final String TAG = "ContextMenuCardDialogFragment";
@@ -36,6 +36,9 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		if (savedInstanceState != null && getActivity() instanceof MapActivity) {
 			dialog = ContextMenuCardDialog.restoreMenu(savedInstanceState, (MapActivity) getActivity());
 		}
+		if (dialog == null) {
+			dismiss();
+		}
 	}
 
 	@Nullable
@@ -48,34 +51,26 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 			view.findViewById(R.id.dialog_layout)
 					.setBackgroundColor(ContextCompat.getColor(activity, R.color.mapillary_action_bar));
 		}
-		contentLayout = (LinearLayout) view.findViewById(R.id.content);
+		contentLayout = view.findViewById(R.id.content);
 		contentView = dialog.getContentView();
 		if (contentView != null) {
 			contentLayout.addView(contentView);
 		}
-		view.findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		view.findViewById(R.id.close_button).setOnClickListener(v -> dismiss());
 		if (!Algorithms.isEmpty(dialog.getTitle())) {
 			((TextView) view.findViewById(R.id.title)).setText(dialog.getTitle());
 		}
 		if (!Algorithms.isEmpty(dialog.getDescription())) {
 			((TextView) view.findViewById(R.id.description)).setText(dialog.getDescription());
 		}
-		AppCompatImageView moreButton = (AppCompatImageView) view.findViewById(R.id.more_button);
+		AppCompatImageView moreButton = view.findViewById(R.id.more_button);
 		if (dialog.haveMenuItems()) {
 			moreButton.setVisibility(View.VISIBLE);
-			moreButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					final PopupMenu optionsMenu = new PopupMenu(v.getContext(), v);
-					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-					dialog.createMenuItems(optionsMenu.getMenu());
-					optionsMenu.show();
-				}
+			moreButton.setOnClickListener(v -> {
+				final PopupMenu optionsMenu = new PopupMenu(v.getContext(), v);
+				DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+				dialog.createMenuItems(optionsMenu.getMenu());
+				optionsMenu.show();
 			});
 		} else {
 			moreButton.setVisibility(View.GONE);
@@ -112,7 +107,9 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		dialog.saveMenu(outState);
+		if (dialog != null) {
+			dialog.saveMenu(outState);
+		}
 	}
 
 	@Override
@@ -123,7 +120,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		return -1;
 	}
 
-	public static void showInstance(ContextMenuCardDialog menu) {
+	public static void showInstance(@NonNull ContextMenuCardDialog menu) {
 		ContextMenuCardDialogFragment fragment = new ContextMenuCardDialogFragment();
 		fragment.dialog = menu;
 		menu.getMapActivity().getSupportFragmentManager().beginTransaction()
@@ -132,7 +129,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	}
 
 	public void dismiss() {
-		MapActivity activity = dialog.getMapActivity();
+		FragmentActivity activity = dialog != null ? dialog.getMapActivity() : getActivity();
 		if (activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			if (!fragmentManager.isStateSaved()) {
