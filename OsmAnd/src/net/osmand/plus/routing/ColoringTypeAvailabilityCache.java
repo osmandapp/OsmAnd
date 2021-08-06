@@ -32,7 +32,7 @@ public class ColoringTypeAvailabilityCache {
 		Boolean available = cache.get(key);
 		if (available == null) {
 			boolean drawing = routeColoringType.isAvailableForDrawingRoute(app, route, routeInfoAttribute);
-			boolean subscription = routeColoringType.isAvailableInSubscription(app, routeInfoAttribute);
+			boolean subscription = routeColoringType.isAvailableInSubscription(app, routeInfoAttribute, true);
 			available = drawing && subscription;
 			cache.put(key, available);
 		}

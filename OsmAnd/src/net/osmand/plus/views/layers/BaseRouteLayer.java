@@ -55,7 +55,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	protected int routeLineColor;
 	protected Integer directionArrowsColor;
 	protected int customTurnArrowColor = 0;
-	protected Boolean attrsIsPaint_1 = null;
 
 	private final Map<String, Float> cachedRouteLineWidth = new HashMap<>();
 
@@ -117,7 +116,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 		if (routeLineColor != customColor) {
 			directionArrowsColor = UiUtilities.getContrastColor(view.getContext(), customColor, false);
-			updateIsPaint_1(false);
 		}
 		routeLineColor = customColor;
 	}
@@ -131,15 +129,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 			OsmandSettings settings = view.getSettings();
 			routeColoringType = settings.ROUTE_COLORING_TYPE.getModeValue(mode);
 			routeInfoAttribute = settings.ROUTE_INFO_ATTRIBUTE.getModeValue(mode);
-		}
-	}
-
-	protected void updateIsPaint_1(boolean updatePaints) {
-		if (updatePaints) {
-			attrsIsPaint_1 = attrs.isPaint_1;
-		}
-		if (attrsIsPaint_1 != null) {
-			attrs.isPaint_1 = attrsIsPaint_1 && routeColoringType.isDefault();
 		}
 	}
 
