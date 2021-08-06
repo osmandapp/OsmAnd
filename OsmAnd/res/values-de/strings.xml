@@ -3655,7 +3655,7 @@
     <string name="screen_timeout">Bildschirm-Zeitlimit</string>
     <string name="details_dialog_decr">Zusätzliche Kartendetails anzeigen oder ausblenden</string>
     <string name="shared_string_night_map">Nachtkarte</string>
-    <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert \'Bildschirm eingeschaltet lassen\' unter \'Timeout nach dem Aufwachen\'.</string>
+    <string name="turn_screen_on_power_button_disabled">Deaktiviert. Erfordert \'Bildschirm eingeschaltet lassen\' unter \'Zeitüberschreitung nach dem Aufwachen\'.</string>
     <string name="add_online_source">Online-Quelle hinzufügen</string>
     <string name="clear_tiles_warning">Durch die Anwendung dieser Änderungen werden die zwischengespeicherten Daten für diese Kachelquelle gelöscht</string>
     <string name="vessel_height_warning_link">Schiffshöhe einstellen</string>
@@ -4260,7 +4260,7 @@
     <string name="backup_version_history_removed">Die gesamte Versionshistorie wurde entfernt.</string>
     <string name="backup_data_removed">Alle Daten wurden entfernt.</string>
     <string name="shared_string_progress">Fortschritt</string>
-    <string name="backup_do_not_have_any">Sie haben noch keine Online Datensicherung</string>
+    <string name="backup_do_not_have_any">Sie haben noch keine Online Datensicherung.</string>
     <string name="backup_dont_have_any_descr">Planen Sie automatische Backups und verlieren Sie keine Daten.</string>
     <string name="backup_welcome_back">Willkommen zurück!</string>
     <string name="backup_welcome_back_descr">Daten auf diesem Gerät mit Hilfe vorhandener Sicherungen wiederherstellen oder Daten in der OsmAnd Cloud sichern.</string>
