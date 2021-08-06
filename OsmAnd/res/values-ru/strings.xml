@@ -2999,7 +2999,7 @@
     <string name="profile_alert_need_save_title">Сохранить изменения</string>
     <string name="profile_alert_need_save_msg">Сначала необходимо сохранить изменения в профиле</string>
     <string name="profile_alert_delete_title">Удалить профиль</string>
-    <string name="profile_alert_delete_msg">Вы действительно хотите удалить профиль «%s»</string>
+    <string name="profile_alert_delete_msg">Удалить профиль «%s»\?</string>
     <string name="select_base_profile_dialog_title">Выберите профиль для начала</string>
     <string name="select_base_profile_dialog_message">Основывайте свой пользовательский профиль на одном из профилей приложения по умолчанию, это определяет базовые настройки, такие как видимость виджетов по умолчанию и выбор единиц измерения скорости и расстояния. Ниже перечислены профили приложений по умолчанию, а также примеры пользовательских профилей, на которые они могут быть расширены:</string>
     <string name="select_nav_profile_dialog_title">Выберите режим навигации</string>
@@ -4288,7 +4288,7 @@
     <string name="available_until">Доступно до %1$s</string>
     <string name="enough_contributions_descr">Вы внесли достойный вклад в OpenStreetMap и теперь можете обновлять карты OsmAnd без ограничений!</string>
     <string name="not_enough_contributions_descr">У вас должно быть не менее %1$s правок на OpenStreetMap за последние %2$s дней.</string>
-    <string name="map_updates_are_unavailable_yet">Обновления карты пока недоступны :-(</string>
+    <string name="map_updates_are_unavailable_yet">Обновления карт пока недоступны :-(</string>
     <string name="online_maps_searching_descr">Выполняется онлайн-поиск карт.</string>
     <string name="walking_route_osmc_description">Раскраска маршрутов на основе индивидуального цвета (если задано на OpenStreetMap) и типа (международный, региональный, местный)</string>
     <string name="purchases_feature_desc_pro_widgets">Получите доступ к функциям OsmAnd Pro. Раскраска маршрутов и многое другое.</string>
@@ -4303,7 +4303,7 @@
 \nЗапустите онлайн-проверку карт.</string>
     <string name="online_direct_line_maps_link">Проверить карты</string>
     <string name="offline_maps_required_descr">Для расчета маршрута требуются дополнительные офлайн-карты.</string>
-    <string name="pro_features">Возможности Pro</string>
+    <string name="pro_features">Функции Pro</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Окраска согласно принадлежности к сети.</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Окраска маршрутов согласно их индивидуальным местным цветом (если он присутствует в OpenStreetMap) и символа туристического щита.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Окраска маршрутов согласно типу сети узлов (международной, региональной, местной).</string>
