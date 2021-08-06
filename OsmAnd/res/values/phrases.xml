@@ -157,6 +157,7 @@
 	<string name="poi_authentication_short_message">Auth by short message</string>
 	<string name="poi_authentication_none">Auth not required</string>
 	<string name="poi_permanent_camping">Permanent camping</string>
+	<string name="poi_shelter_filter">Shelter</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4497,6 +4498,9 @@
 	<string name="poi_direction_southwest">Southwest direction</string>
 
 	<string name="poi_lounger">Lounger</string>
+
+	<string name="poi_shelter_no">Shelter: no</string>
+	<string name="poi_shelter_yes">Yes</string>
 
 
 </resources>
