@@ -4496,5 +4496,7 @@
 	<string name="poi_direction_southeast">Southeast direction</string>
 	<string name="poi_direction_southwest">Southwest direction</string>
 
+	<string name="poi_lounger">Lounger</string>
+
 
 </resources>
