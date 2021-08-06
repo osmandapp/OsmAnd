@@ -4162,4 +4162,27 @@
     <string name="not_enough_contributions_descr">Du trenger minst %1$s kartbidrag til OpenStreetMap de siste %2$s dagene.</string>
     <string name="shared_string_contributions">Bidrag</string>
     <string name="connect_track_points_as">Forbind rutepunkter</string>
+    <string name="offline_maps_required_descr">Noen frakoblede kart mangler for denne ruten.</string>
+    <string name="online_maps_required_descr">Osman kan ikke finne en rute som passer med innstillingene dine.
+\n
+\nKanskje noen kart ikke er innlastet. Du kan se etter nødvendige kart på nett.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Utforsk OsmAnd abonnementer for å finne et som passer deg.</string>
+    <string name="option_available_only_in_osmand_pro">Dette er tilgjengelig som del av OsmAnd Pro-abonnementet.</string>
+    <string name="purchases_feature_desc_pro_widgets">Få tilgang til OsmAnd Pro-funksjoner. Rutefargelegging med mer.</string>
+    <string name="update_frequency">Oppdateringsfrekvens</string>
+    <string name="live_update_delete_updates_msg">Slett alle %s sanntidsoppdateringer\?</string>
+    <string name="on_hold_since">På vent siden %1$s</string>
+    <string name="promo_subscription">Promo-abonnement</string>
+    <string name="routes_color_by_type">Fargelegg ruter etter …</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Fargelegg ruter i henhold til deres individuelle lokale farge (hvis den finnes på OpenStreetMap) og turgåingsskjold-symbol.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Fargelegg etter nettverkstilhørighet.</string>
+    <string name="shared_string_relation">Relasjon</string>
+    <string name="online_direct_line_maps_link">Sjekk de nødvendige kartene.</string>
+    <string name="online_maps_searching_descr">Søker på nett …</string>
+    <string name="reset_to_original">Tilbakestill til forvalg</string>
+    <string name="backup_error_no_subscription">Mangler abonnement</string>
+    <string name="map_updates_for_mappers">Kartoppdateringer for kartografer</string>
+    <string name="benefits_for_contributors_primary_descr">Det kan hende du har gjort deg fortjent til timevise kartoppdateringer hvis du er en aktiv bidragsytere på OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">Logg inn på OpenStreetMap for å sjekke at du kan få ubegrensede månedlige og timevise kartoppdateringer.</string>
+    <string name="purchases_restored">Kjøp gjenopprettet</string>
 </resources>
