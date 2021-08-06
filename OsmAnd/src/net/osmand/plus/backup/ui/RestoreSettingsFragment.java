@@ -130,8 +130,8 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 	}
 
 	private void importItems() {
-		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
 		if (settingsItems != null) {
+			List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
 			duplicateStartTime = System.currentTimeMillis();
 			settingsHelper.checkDuplicates(settingsItems, selectedItems, getDuplicatesListener());
 		}

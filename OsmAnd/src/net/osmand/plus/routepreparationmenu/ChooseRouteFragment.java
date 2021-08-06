@@ -851,18 +851,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, int routeIndex) {
-		try {
-			ChooseRouteFragment fragment = new ChooseRouteFragment();
-			Bundle args = new Bundle();
-			args.putInt(ROUTE_INDEX_KEY, routeIndex);
-			fragment.setArguments(args);
-			fragmentManager.beginTransaction()
-					.add(R.id.routeMenuContainer, fragment, TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+		Bundle args = new Bundle();
+		args.putInt(ROUTE_INDEX_KEY, routeIndex);
+		return showInstance(fragmentManager, args);
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, int routeIndex, int initialMenuState) {

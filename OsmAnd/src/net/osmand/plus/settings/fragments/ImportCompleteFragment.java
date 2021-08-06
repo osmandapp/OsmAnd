@@ -5,20 +5,11 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -44,6 +35,14 @@ import net.osmand.plus.settings.fragments.ImportedSettingsItemsAdapter.OnItemCli
 
 import java.util.List;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
 
@@ -51,7 +50,11 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
 
+	private static final String KEY_SOURCE_NAME = "key_source_name";
+	private static final String KEY_NEED_RESTART = "key_need_restart";
+
 	private OsmandApplication app;
+	@Nullable
 	private List<SettingsItem> settingsItems;
 
 	private RecyclerView recyclerView;
@@ -62,9 +65,9 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
 									@NonNull String sourceName, boolean needRestart) {
 		ImportCompleteFragment fragment = new ImportCompleteFragment();
+		fragment.setRetainInstance(true);
 		fragment.setSettingsItems(settingsItems);
 		fragment.setSourceName(sourceName);
-		fragment.setRetainInstance(true);
 		fragment.setNeedRestart(needRestart);
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
@@ -83,6 +86,10 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				dismissFragment();
 			}
 		});
+		if (savedInstanceState != null) {
+			sourceName = savedInstanceState.getString(KEY_SOURCE_NAME);
+			needRestart = savedInstanceState.getBoolean(KEY_NEED_RESTART);
+		}
 	}
 
 	@Nullable
@@ -154,6 +161,13 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (fm != null && !fm.isStateSaved()) {
 			fm.popBackStack(SETTINGS_LIST_TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(KEY_SOURCE_NAME, sourceName);
+		outState.putBoolean(KEY_NEED_RESTART, needRestart);
 	}
 
 	private void navigateTo(ExportSettingsType type) {

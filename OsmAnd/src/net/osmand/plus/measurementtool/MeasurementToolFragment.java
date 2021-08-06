@@ -123,6 +123,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
 
+	private static final String KEY_INITIAL_POINT_LAT = "key_initial_point_lat";
+	private static final String KEY_INITIAL_POINT_LON = "key_initial_point_lon";
+	private static final String KEY_MODES = "key_modes";
+	private static final String KEY_GPX_FILE_NAME = "key_gpx_file_name";
+	private static final String KEY_SHOW_SNAP_WARNING = "key_show_snap_warning";
+
 	private String previousToolBarTitle = "";
 	private MeasurementToolBarController toolBarController;
 	private TextView distanceTv;
@@ -593,6 +599,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		} else {
 			measurementLayer.setTapsDisabled(savedInstanceState.getBoolean(TAPS_DISABLED_KEY));
+			if (initialPoint == null && savedInstanceState.containsKey(KEY_INITIAL_POINT_LAT)
+					&& savedInstanceState.containsKey(KEY_INITIAL_POINT_LON)) {
+				double lat = savedInstanceState.getDouble(KEY_INITIAL_POINT_LAT);
+				double lon = savedInstanceState.getDouble(KEY_INITIAL_POINT_LON);
+				initialPoint = new LatLon(lat, lon);
+			}
+			modes = savedInstanceState.getInt(KEY_MODES);
+			showSnapWarning = savedInstanceState.getBoolean(KEY_SHOW_SNAP_WARNING);
+			if (savedInstanceState.containsKey(KEY_GPX_FILE_NAME)) {
+				fileName = savedInstanceState.getString(KEY_GPX_FILE_NAME);
+				addNewGpxData(getGpxFile(fileName));
+			}
 		}
 
 		return view;
@@ -1264,6 +1282,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			outState.putBoolean(TAPS_DISABLED_KEY, measurementLayer.isTapsDisabled());
+		}
+		if (initialPoint != null) {
+			outState.putDouble(KEY_INITIAL_POINT_LAT, initialPoint.getLatitude());
+			outState.putDouble(KEY_INITIAL_POINT_LON, initialPoint.getLongitude());
+		}
+		outState.putInt(KEY_MODES, modes);
+		outState.putBoolean(KEY_SHOW_SNAP_WARNING, showSnapWarning);
+		if (fileName != null) {
+			outState.putString(KEY_GPX_FILE_NAME, fileName);
+		} else if (editingCtx.getGpxData() != null && editingCtx.getGpxData().getGpxFile() != null) {
+			String fullPath = editingCtx.getGpxData().getGpxFile().path;
+			String fileName = Algorithms.getFileWithoutDirs(fullPath);
+			outState.putString(KEY_GPX_FILE_NAME, fileName);
 		}
 	}
 
