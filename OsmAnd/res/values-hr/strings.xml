@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
@@ -36,7 +36,7 @@
     <string name="recording_context_menu_play">Pokreni</string>
     <string name="recording_description">Snimanje %1$s %2$s of %3$s</string>
     <string name="recording_default_name">snimanje</string>
-    <string name="shared_string_control_stop">stani</string>
+    <string name="shared_string_control_stop">Zaustavi</string>
     <string name="shared_string_control_start">Započni</string>
     <string name="map_widget_av_notes">Zvučni i video zapisi</string>
     <string name="map_widget_distancemeasurement">Mjerenje udaljenosti</string>

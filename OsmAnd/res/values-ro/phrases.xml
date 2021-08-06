@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="poi_payment_fuel_type">Carduri de combustibil</string>
+    <string name="poi_payment_type">Tip de plată</string>
+    <string name="poi_fuel_avia_type">Tipul de combustibil (avia)</string>
+    <string name="poi_fuel_type">Tip de combustibil</string>
+    <string name="reddit">Reddit</string>
+    <string name="twitter">Twitter</string>
+    <string name="facebook">Facebook</string>
+</resources>

@@ -4271,7 +4271,7 @@
 \nTalvez alguns mapas não estejam carregados, você pode executar uma verificação online dos mapas necessários.</string>
     <string name="option_available_only_in_osmand_pro">A opção disponível como parte da assinatura do OsmAnd Pro.</string>
     <string name="pro_widgets">Pro Widgets</string>
-    <string name="purchases_feature_desc_pro_widgets">Tenha acesso aos recursos do OsmAnd Pro. Colorização de rotas e muito mais.</string>
+    <string name="purchases_feature_desc_pro_widgets">Tenha acesso aos recursos do OsmAnd Pro: Coloração de rotas e muito mais.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explore os planos do OsmAnd para encontrar um adequado para você.</string>
     <string name="routes_color_by_type">Rotas de cores por…</string>
     <string name="shared_string_relation">Relação</string>
@@ -4299,4 +4299,5 @@
     <string name="map_updates_are_unavailable_yet">As atualizações do mapa ainda não estão disponíveis :-(</string>
     <string name="connect_track_points_as">Conectar pontos de rota</string>
     <string name="pro_features">Recursos Pro</string>
+    <string name="purchases_restored">Compras restauradas</string>
 </resources>

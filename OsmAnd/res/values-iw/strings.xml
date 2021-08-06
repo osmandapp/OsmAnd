@@ -4249,4 +4249,10 @@
     <string name="backup_error_no_subscription">לא קיים מינוי</string>
     <string name="map_updates_for_mappers">עדכוני מפות לממפים</string>
     <string name="benefits_for_contributors">הטבות למתנדבים פעילים ב־OSM</string>
+    <string name="shared_string_contributions">תרומות</string>
+    <string name="contributions_may_calculate_with_delay">חישוב התרומות עשוי לארוך מספר שעות.</string>
+    <string name="map_updates_are_unavailable_yet">עדכוני מפה עדיין לא זמינים. :-(</string>
+    <string name="connect_track_points_as">חיבור נקודות מסלול</string>
+    <string name="pro_features">יכולות פרו</string>
+    <string name="purchases_restored">הרכישות שוחזרו</string>
 </resources>

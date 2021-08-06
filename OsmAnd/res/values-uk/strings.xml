@@ -3515,7 +3515,7 @@
     <string name="developer_plugin">Розширення розробника</string>
     <string name="shared_string_items">Елементи</string>
     <string name="select_wikipedia_article_langs">Виберіть мови статей Вікіпедії на мапі. Перемикайтеся між усіма доступними мовами під час читання статті.</string>
-    <string name="some_articles_may_not_available_in_lang">Деякі статті у Вікіпедії можуть бути недоступними вашою мовою.</string>
+    <string name="some_articles_may_not_available_in_lang">Деякі статті Вікіпедії можуть бути недоступні вашою мовою.</string>
     <string name="lang_zhyue">Кантонська</string>
     <string name="lang_zhminnan">Південний Мін</string>
     <string name="lang_yo">Йоруба</string>
@@ -4303,4 +4303,5 @@
     <string name="map_updates_for_mappers">Оновлення мап для творців мап</string>
     <string name="benefits_for_contributors">Переваги для активних учасників OSM</string>
     <string name="pro_features">Можливості Pro</string>
+    <string name="purchases_restored">Покупки відновлено</string>
 </resources>

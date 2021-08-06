@@ -3519,7 +3519,7 @@
     <string name="shared_string_language">Idioma</string>
     <string name="shared_string_all_languages">Todos os idiomas</string>
     <string name="wiki_menu_download_descr">São necessários mapas adicionais para visualizar os POIs da Wikipédia no mapa.</string>
-    <string name="select_wikipedia_article_langs">Selecione os idiomas dos artigos da Wikipédia no mapa. Mude para qualquer idioma disponível enquanto lê um artigo da Wikipédia.</string>
+    <string name="select_wikipedia_article_langs">Selecione os idiomas dos artigos da Wikipédia no mapa. Pode mudar para qualquer idioma disponível enquanto lê um artigo da Wikipédia.</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="tracker_item">OsmAnd Tracker</string>
     <string name="quick_action_item">Botão de ações rápidas</string>
@@ -4309,4 +4309,5 @@
     <string name="pro_features">Recursos Pro</string>
     <string name="option_available_only_in_osmand_pro">A opção está disponível na subscrição do OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Obtenha acesso às funcionalidades OsmAnd Pro: coloração de rotas e mais.</string>
+    <string name="purchases_restored">Compras restauradas</string>
 </resources>

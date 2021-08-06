@@ -326,7 +326,7 @@
     <string name="index_name_oceania">Australia și Oceania</string>
     <string name="index_name_other">Hărți ale lumii și hărți specifice</string>
     <string name="index_name_wiki">Wikipedia mondială</string>
-    <string name="index_name_voice">Voci înregistrate (înregistrate, funcționalitate limitată)</string>
+    <string name="index_name_voice">Indicații vocale (înregistrate, caracteristici limitate)</string>
     <string name="index_name_tts_voice">Indicații vocale (TTS, de preferat)</string>
     <string name="amenity_type_osmwiki">Wikipedia (deconectat)</string>
     <string name="amenity_type_user_defined">Obiective utilizator</string>
@@ -347,8 +347,8 @@
     <string name="osmand_service">Modul de fundal</string>
     <string name="osmand_service_descr">OsmAnd rulează în fundal cu ecranul închis.</string>
     <string name="download_files_not_enough_space">Nu există spațiu suficient pentru descărcarea a %1$s MB (liber: %2$s).</string>
-    <string name="download_files_question_space">"Descarc {0} fișiere\?
-\n  Necesită {1} MB (din {2} MB disponibili)."</string>
+    <string name="download_files_question_space">Descărcați {0} fișier(e)\?
+\n {1} MB (din {2} MB) vor fi utilizați.</string>
     <string name="use_transparent_map_theme">Temă transparentă</string>
     <string name="native_library_not_supported">Librăria nativă nu este suportată de acest dispozitiv.</string>
     <string name="init_native_library">Se inițializează librăria nativă…</string>
@@ -433,7 +433,7 @@
     <string name="map_text_size_descr">Mărimea textului pentru denumirile afișate pe hartă:</string>
     <string name="map_text_size">Mărime font hartă</string>
     <string name="trace_rendering">Info depanare randare</string>
-    <string name="trace_rendering_descr">Afișare date despre performanțele procesului de randare</string>
+    <string name="trace_rendering_descr">Afișează performanța de redare.</string>
     <string name="installing_new_resources">Dezarhivare date noi…</string>
     <string name="internet_connection_required_for_online_route">Navigația online nu funcționează offline.</string>
     <string name="tts_language_not_supported_title">Limba neacceptată</string>
@@ -442,7 +442,7 @@
     <string name="tts_missing_language_data">Mergeți la market pentru a descărca limba selectată\?</string>
     <string name="gpx_option_reverse_route">Inversarea direcției de rulare</string>
     <string name="gpx_option_destination_point">Folosește destinația curentă</string>
-    <string name="gpx_option_from_start_point">Parcurge întreg traseul</string>
+    <string name="gpx_option_from_start_point">Parcurgeți întregul traseu</string>
     <string name="switch_to_vector_map_to_see">Hartă vectorială offline prezentă pentru această locație.
 \n\t
 \n\tPentru a o utiliza, activați \'Menu\' → \'Configure map\' → \'Map Source…\' → \'Offline vector maps\'.</string>
@@ -478,10 +478,10 @@
     <string name="shared_string_next">Următorul</string>
     <string name="shared_string_previous">Precedentul</string>
     <string name="unit_of_length_descr">Modificați în ce se măsoară distanța.</string>
-    <string name="unit_of_length">Unități de măsură</string>
-    <string name="si_mi_feet">Mile/picioare</string>
-    <string name="si_mi_yard">Mile/yarzi</string>
-    <string name="si_km_m">Kilometri/metri</string>
+    <string name="unit_of_length">Unități de lungime</string>
+    <string name="si_mi_feet">Mile/picior</string>
+    <string name="si_mi_yard">Mile/iarzi</string>
+    <string name="si_km_m">Km/metri</string>
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile_per_hour">mph</string>
@@ -1446,8 +1446,8 @@
     <string name="favorite_category_select">Alegeți categorie</string>
     <string name="default_speed_system_descr">Definiți unitatea de măsură a vitezei.</string>
     <string name="default_speed_system">Unitate de viteză</string>
-    <string name="si_nm">Mile marine</string>
-    <string name="si_kmh">Kilometri pe oră</string>
+    <string name="si_nm">Mile nautice</string>
+    <string name="si_kmh">Kilometrii pe oră</string>
     <string name="si_mph">Mile pe oră</string>
     <string name="si_m_s">Metri pe secundă</string>
     <string name="si_min_km">Minute pe kilometru</string>
@@ -1527,7 +1527,7 @@
     <string name="shared_string_manage">Administrează</string>
     <string name="shared_string_edit">Editează</string>
     <string name="shared_string_places">Locații</string>
-    <string name="shared_string_search">Căutare</string>
+    <string name="shared_string_search">Căutați</string>
     <string name="shared_string_show_description">Arată descrierea.</string>
     <string name="shared_string_message">Mesaj</string>
     <string name="agps_data_last_downloaded">Datele A-GPS descărcate: %1$s</string>
@@ -1570,9 +1570,9 @@
     <string name="map_markers_other">Alți marcatori</string>
     <string name="upload_anonymously">Încarcă anonim</string>
     <string name="show_transparency_seekbar">Afișați bara de căutare transparentă</string>
-    <string name="download_files_error_not_enough_space">"Spațiu insuficient!
-\n  E nevoie de {3} MB temporar și {1} MB permanent. 
-\n  În prezent, sunt doar {2} MB disponibili."</string>
+    <string name="download_files_error_not_enough_space">Nu este suficient spațiu!
+\n {3} MB este necesar temporar, {1} MB permanent.
+\n (Sunt disponibili doar {2} MB.)</string>
     <string name="download_files_question_space_with_temp">Descărcați {0} fișier(e)\?
 \n {3} MB este folosit temporar, {1} MB permanent. (Din {2} MB.)</string>
     <string name="upload_osm_note_description">Încărcați anonim notele d-voastră OSM sau prin folosirea profilului d-voastră OpenStreetMap.org.</string>
@@ -1975,7 +1975,7 @@
     <string name="save_filter">Salvează filtrul</string>
     <string name="delete_filter">Șterge filtrul</string>
     <string name="new_filter">Filtru nou</string>
-    <string name="si_mi_meters">Mile/metrii</string>
+    <string name="si_mi_meters">Mile/metri</string>
     <string name="search_another_country">Alege altă regiune</string>
     <string name="search_map">Se caută hărți…</string>
     <string name="location_not_found">Locația nu a fost găsită</string>
@@ -2287,7 +2287,7 @@
     <string name="edit_map_marker">Editați marcajul de pe hartă</string>
     <string name="third_party_application">Aplicații terțe</string>
     <string name="search_street">Căutați strada</string>
-    <string name="start_search_from_city">Specificați mai întâi orașul/orașul/localitatea</string>
+    <string name="start_search_from_city">Specificați mai întâi municipiul/orașul/localitatea</string>
     <string name="shared_string_restore">Restaurați</string>
     <string name="ask_for_location_permission">Acordați OsmAnd acces la locație pentru a continua.</string>
     <string name="thank_you_for_feedback">Mulțumim pentru părerea dvs</string>
@@ -2430,10 +2430,12 @@
     <string name="unirs_render_descr">Modifica stilul implicit pentru a crește contrastul dintre drumurile pietonale și biciclete. Utilizează culori Mapnik.</string>
     <string name="error_notification_desc">Trimite o copie a ecranului al acestei notificări către suport@osmand.net</string>
     <string name="coord_input_save_as_track_descr">Ai adăugat puncte%1$s. Scrie un nume de fișier și apăsați \"Salvează\".</string>
-    <string name="send_search_query_description">Cererea de căutare va fi trimisă la: \"%1$s\", împreună cu locația dumneavoastră.
-\nInformaţiile personale nu sunt colectate, doar datele de căutare necesare pentru a îmbunătăţi căutarea.</string>
+    <string name="send_search_query_description">Cererea dvs. de căutare va fi trimisă la: \"%1$s\", împreună cu locația dumneavoastră.
+\n
+\n Nu se colectează informații personale, ci doar datele de căutare necesare pentru a îmbunătăți căutarea.</string>
     <string name="send_search_query">Trimiţi interogare de căutare\?</string>
-    <string name="search_no_results_feedback">Nu există Rezultate\? Oferiți feedback</string>
+    <string name="search_no_results_feedback">Nu există rezultate de căutare\?
+\nFurnizați feedback</string>
     <string name="more_transport_on_stop_hint">Mai multe optiuni de transport disponibile de la această oprire.</string>
     <string name="keep_passed_markers_descr">Marcajele adăugate ca grup de Favorite sau GPX waypoints marcate vor rămâne pe hartă.Dacă grupul nu este activ, markerii vor dispărea din hartă.</string>
     <string name="keep_passed_markers">Păstraţi markerii trecuţi pe hartă</string>
@@ -2554,7 +2556,7 @@
     <string name="copy_from_other_profile">Copiați din alt profil</string>
     <string name="turn_screen_on">Porniți ecranul</string>
     <string name="map_during_navigation_info">Harta în timpul navigării</string>
-    <string name="map_during_navigation">Harta în timpul navigării</string>
+    <string name="map_during_navigation">Hartă în timpul navigării</string>
     <string name="shared_string_other">Altele</string>
     <string name="vehicle_parameters_descr">Greutate, înălțime, lungime, viteză</string>
     <string name="vehicle_parameters">Parametrii vehicul</string>
@@ -2910,7 +2912,7 @@
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="backup_and_restore">Copie de rezervă &amp; Restaurare</string>
     <string name="last_backup">Ultima copie de rezervă</string>
-    <string name="duration_ago">Acum %1$s</string>
+    <string name="duration_ago">%1$s acum</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="osmand_cloud_authorize_descr">Nu vă pierdeți niciodată datele. Faceți copii de rezervă și restaurați toate informațiile cu ușurință.</string>
     <string name="local_backup">Copie de rezervă locală</string>
@@ -2950,7 +2952,7 @@
     <string name="backup_pause_all">Pauză toate</string>
     <string name="upload_local_version">Încărcați versiunea locală</string>
     <string name="download_server_version">Descărcați versiunea pentru server</string>
-    <string name="shared_string_logout">Deconectați-vă</string>
+    <string name="shared_string_logout">Deconectare</string>
     <string name="backup_delete_all_data">Ștergeți toate datele mele</string>
     <string name="backup_delete_all_data_descr">Toate datele din OsmAnd Cloud vor fi șterse. Versiunile locale vor rămâne neatinse.</string>
     <string name="backup_delete_all_data_warning">Sunteți pe cale să ștergeți toate datele încărcate anterior în OsmAnd Cloud, inclusiv istoricul versiunilor.
@@ -3135,7 +3137,7 @@
     <string name="shared_string_save_as_gpx">Salvare ca fișier nou al pistei</string>
     <string name="add_segment_to_the_track">Adăugare la un fișier track</string>
     <string name="shared_string_gpx_files">Piste</string>
-    <string name="show_gpx">Piste</string>
+    <string name="show_gpx">Track-uri</string>
     <string name="save_track_to_gpx_globally">Înregistrați traseul în fișierul GPX</string>
     <string name="shared_string_gpx_route">Traseu de cale ferată</string>
     <string name="empty_state_my_tracks">Adăugați fișiere de track-uri</string>
@@ -3348,7 +3350,7 @@
     <string name="cannot_upload_image">Nu se poate încărca imaginea, vă rugăm să încercați din nou mai târziu</string>
     <string name="select_picture">Selectați imaginea</string>
     <string name="shared_string_resources">Resurse</string>
-    <string name="approximate_file_size">Dimensiunea aproximativă a fișierului</string>
+    <string name="approximate_file_size">Dimensiunea aproximativă fișier</string>
     <string name="select_data_to_export">Selectați datele care urmează să fie exportate în fișier.</string>
     <string name="file_size_needed_for_import">Necesar pentru import</string>
     <string name="export_not_enough_space_descr">Dispozitivul dvs. are doar %1$s liberi. Vă rugăm să eliberați spațiu sau să deselectați unele elemente pentru export.</string>
@@ -3575,7 +3577,7 @@
     <string name="download_hillshade_maps">Nuanțe de deal</string>
     <string name="layer_hillshade">Strat Hillshade</string>
     <string name="sett_parrot_ext_input">Papagal</string>
-    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_wunderlinq_ext_input">MiracolLINQ</string>
     <string name="external_input_device_descr">Selectați un dispozitiv de control extern, cum ar fi o tastatură sau WunderLINQ.</string>
     <string name="download_using_mobile_internet">Nu este conectat la Wi-Fi. Utilizați conexiunea curentă la internet pentru a descărca\?</string>
     <string name="use_magnetic_sensor_descr">Pentru citirea busolei, utilizați senzorul magnetic în loc de senzorul de orientare.</string>
@@ -3899,7 +3901,7 @@
     <string name="search_poi_types_descr">Combinați tipuri de POI din diferite categorii. Atingeți comutatorul pentru a le selecta pe toate, atingeți partea stângă pentru a selecta categoria.</string>
     <string name="extra_maps_menu_group">Hărți suplimentare</string>
     <string name="download_unsupported_action">Acțiune neacceptată %1$s</string>
-    <string name="tracker_item">OsmAnd tracker</string>
+    <string name="tracker_item">OsmAnd monitor</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
     <string name="quick_action_item">Acțiune rapidă</string>
     <string name="radius_ruler_item">Rigla de rază</string>
@@ -4161,7 +4163,7 @@
     <string name="open_in_browser_wiki_description">Vizualizați articolul într-un browser web.</string>
     <string name="open_in_browser_wiki">Deschideți articolul online</string>
     <string name="download_wikipedia_label">Descărcați datele Wikipedia</string>
-    <string name="download_wikipedia_description">Descărcați articolele din Wikipedia pentru %1$s pentru citirea lor offline.</string>
+    <string name="download_wikipedia_description">Descărcați articolele din Wikipedia pentru %1$s a le citi offline.</string>
     <string name="show_tunnels">Tuneluri</string>
     <string name="tunnel_warning">Tunel în față</string>
     <string name="toast_empty_name_error">Locație fără nume</string>
@@ -4307,4 +4309,5 @@
     <string name="gpx_monitoring_stop">Pauză la înregistrarea călătoriei</string>
     <string name="gpx_monitoring_start">Reluarea înregistrării călătoriei</string>
     <string name="pro_features">Caracteristici Pro</string>
+    <string name="purchases_restored">Achiziții restaurate</string>
 </resources>
