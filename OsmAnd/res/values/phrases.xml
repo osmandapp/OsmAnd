@@ -156,6 +156,7 @@
 	<string name="poi_authentication_phone_call">Auth by phone call</string>
 	<string name="poi_authentication_short_message">Auth by short message</string>
 	<string name="poi_authentication_none">Auth not required</string>
+	<string name="poi_permanent_camping">Permanent camping</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4480,6 +4481,20 @@
 	<string name="poi_authentication_short_message_text">Short message text used for auth</string>
 	<string name="poi_authentication_none_no">Auth not required: no</string>
 	<string name="poi_authentication_none_yes">Yes</string>
+
+	<string name="poi_permanent_camping_yes">Yes</string>
+	<string name="poi_permanent_camping_no">No</string>
+	<string name="poi_permanent_camping_only">Only</string>
+
+	<string name="poi_destination">Destination</string>
+	<string name="poi_direction_north">North direction</string>
+	<string name="poi_direction_east">East direction</string>
+	<string name="poi_direction_south">South direction</string>
+	<string name="poi_direction_west">West direction</string>
+	<string name="poi_direction_northeast">Northeast direction</string>
+	<string name="poi_direction_northwest">Northwest direction</string>
+	<string name="poi_direction_southeast">Southeast direction</string>
+	<string name="poi_direction_southwest">Southwest direction</string>
 
 
 </resources>
