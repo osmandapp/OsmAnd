@@ -4295,7 +4295,7 @@
     <string name="backup_error_no_subscription">Sin suscripción válida</string>
     <string name="map_updates_for_mappers">Actualizaciones de mapas para cartógrafos</string>
     <string name="benefits_for_contributors">Beneficios para colaboradores activos de OSM</string>
-    <string name="benefits_for_contributors_primary_descr">Puede tener derecho a actualizaciones ilimitadas del mapa cada hora, si es un colaborador activo de OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">Puedes tener derecho a actualizaciones ilimitadas del mapa cada hora, si es un colaborador activo de OpenStreetMap.org.</string>
     <string name="benefits_for_contributors_secondary_descr">Accede a OpenStreetMap para comprobar si tienes derecho a actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta el %1$s</string>
