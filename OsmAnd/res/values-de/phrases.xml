@@ -4002,4 +4002,20 @@
     <string name="poi_access_motorcar">Erlaubt für Autos</string>
     <string name="poi_access_general">Allgemeiner Zugang</string>
     <string name="poi_destination">Ziel</string>
+    <string name="poi_shelter_yes">Ja</string>
+    <string name="poi_shelter_no">Unterstand: nein</string>
+    <string name="poi_lounger">Liegestuhl</string>
+    <string name="poi_direction_southwest">Richtung Südwesten</string>
+    <string name="poi_direction_southeast">Richtung Südosten</string>
+    <string name="poi_direction_northwest">Richtung Nordwesten</string>
+    <string name="poi_direction_northeast">Richtung Nordosten</string>
+    <string name="poi_direction_west">Richtung Westen</string>
+    <string name="poi_direction_south">Richtung Süden</string>
+    <string name="poi_direction_east">Richtung Osten</string>
+    <string name="poi_direction_north">Richtung Norden</string>
+    <string name="poi_permanent_camping_only">Ausschließlich</string>
+    <string name="poi_permanent_camping_no">Nein</string>
+    <string name="poi_permanent_camping_yes">Ja</string>
+    <string name="poi_shelter_filter">Unterstand</string>
+    <string name="poi_permanent_camping">Dauerstellplätze</string>
 </resources>
