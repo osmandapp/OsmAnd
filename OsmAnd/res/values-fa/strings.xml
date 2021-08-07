@@ -2634,7 +2634,7 @@
     <string name="shared_string_gpx_file">پروندهٔ GPX</string>
     <string name="osc_file">پروندهٔ OSC</string>
     <string name="choose_file_type">انتخاب قالب پرونده</string>
-    <string name="osm_edits_export_desc">برون‌برد در قالب یادداشت‌های OSM،‏ POIها یا هر دو.</string>
+    <string name="osm_edits_export_desc">برون‌برد یادداشت‌های OSM، نقاط توجه (POI) یا هر دو.</string>
     <string name="all_data">همهٔ داده</string>
     <string name="osm_notes">یادداشت‌های OSM</string>
     <string name="tunnel_warning">تونل</string>
