@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="add_opening_hours">Lisa lahioleku ajad</string>
     <string name="shared_string_description">Kirjeldus</string>
@@ -1237,7 +1237,7 @@
     <string name="download_tab_downloads">Kõik allalaadimised</string>
     <string name="download_tab_updates">Uuendused</string>
     <string name="download_tab_local">Kohalik</string>
-    <string name="no_internet_connection">Ei õnnestu alla laadida, palun kontrolli internetiühenduse olemasolu.</string>
+    <string name="no_internet_connection">Ei õnnestu alla laadida, palun kontrolli internetiühendust.</string>
     <string name="everything_up_to_date">Kõik andmed on ajakohased</string>
     <string name="use_opengl_render">Kasuta OpenGL kujutamist</string>
     <string name="error_avoid_specific_road">Kõrvalteed ei leidu</string>
@@ -1352,7 +1352,7 @@
     <string name="show_zoom_buttons_navigation">Kuva suurendamise nupud</string>
     <string name="save_as_favorites_points">Salvesta lemmikute grupina</string>
     <string name="select_destination_and_intermediate_points">Määra sihtkohad</string>
-    <string name="layer_amenity_label">Huvipunktide ülekatte sildid</string>
+    <string name="layer_amenity_label">Punktide sildid (huvipunktid, lemmikud)</string>
     <string name="loading_smth">%1$s laadimine…</string>
     <string name="map_widget_plain_time">Praegune aeg</string>
     <string name="selected_gpx_info_show">"
@@ -3988,9 +3988,7 @@
     <string name="select_segments_description">Failis %1$s on mitu segmendi. Navigeerimiseks pead sa valima sobiva osa.</string>
     <string name="segments_count">Segment %1$d</string>
     <string name="hillshade_slope_contour_lines">Reljeefi varjutus / Nõlv / Kontuurjooned</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews on kogukonna juhitud projekt avalikest kohtadest nagu restoranid, hotellid, muuseumid ja kontrollpunktid. See kogub nende kohta igasugu avalikku teavet nagu fotod, ülevaated ja viited teistesse süsteemidesse nagu OpenStreetMap või Wikipeedia.
-\n
-\nKõik OpenPlaceReview andmed on avalikud ja kõigile kättesaadavad aadressil http://openplacereviews.org/data.
+    <string name="open_place_reviews_plugin_description">Saada fotosid, ülevaateid ja viitu avalikest kohtadest nagu restranid, hotellid, muuseumid ja teeviidad kui avalikud andmed http://openplacereviews.org/data/.
 \n
 \nTäiendavalt saad lugeda aadressil http://openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
@@ -4252,4 +4250,21 @@
 \n</string>
     <string name="duration_moment_ago">hetk tagasi</string>
     <string name="search_more">Otsi veel …</string>
+    <string name="online_maps_searching_descr">Internetist otsimine…</string>
+    <string name="reset_to_original">Lähtesta originaalile</string>
+    <string name="backup_error_no_subscription">Puudub kehtiv tellimus</string>
+    <string name="map_updates_for_mappers">Kaardi värskendused kaardistajatele</string>
+    <string name="benefits_for_contributors">Aktiivse OSM kaastöötaja eelised</string>
+    <string name="benefits_for_contributors_primary_descr">Aktiivse kaastöötajana võid omada õigust igatunnistele kaardivärskendustele.</string>
+    <string name="benefits_for_contributors_secondary_descr">Logi OpenStreetMapi sisse, et kontrollida, kas sul on piiramatu õigus igakuistele ja igatunnistele kaardivärskendustele.</string>
+    <string name="use_login_and_password">Kasuta kasutajanime ja parooli</string>
+    <string name="available_until">Saadaval kuni %1$s</string>
+    <string name="enough_contributions_descr">Õnnitleme! Olete teinud OpenStreetMapile piisavalt kaastööd ja saate nüüd nautida piiramatult OsmAnd kaardivärskendusi!</string>
+    <string name="not_enough_contributions_descr">Nõutav on vähemalt %1$s OpenStreetMapi kaastööd %2$s päeva jooksul.</string>
+    <string name="contributions_may_calculate_with_delay">Kaastööde arvutamine võib võtta mitu tundi.</string>
+    <string name="shared_string_contributions">Kaastööd</string>
+    <string name="map_updates_are_unavailable_yet">Kaardi värskendused pole veel saadaval. :-(</string>
+    <string name="connect_track_points_as">Marsruudi punktide ühendamine</string>
+    <string name="pro_features">Pro funktsioonid</string>
+    <string name="purchases_restored">Ostud taastatud</string>
 </resources>
