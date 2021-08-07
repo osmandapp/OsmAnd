@@ -827,8 +827,8 @@
     <string name="data_settings">Data</string>
     <string name="osm_settings">OpenStreetMap-redigering</string>
     <string name="additional_settings">Ytterligare inställningar</string>
-    <string name="save_current_track_descr">Spara aktuellt spår till SD-kortet nu.</string>
-    <string name="save_current_track">Spara aktuellt GPX-spår</string>
+    <string name="save_current_track_descr">Spara aktuellt spår som GPX-fil nu.</string>
+    <string name="save_current_track">Spara aktuellt spår</string>
     <string name="save_track_interval">Loggningsintervall under navigering</string>
     <string name="save_track_interval_descr">Ange loggningsintervallet för spårinspelning under navigering</string>
     <string name="save_track_to_gpx_descrp">Ett GPX-spår sparas automatiskt i spårmappen under navigering.</string>
@@ -935,7 +935,7 @@
     <string name="gpx_file_name">GPX-filnamn</string>
     <string name="gpx_saved_sucessfully">GPX-filen sparad till {0}</string>
     <string name="osmand_distance_planning_plugin_description">Skapa spår genom att trycka på kartan, eller genom att använda eller modifiera befintliga GPX-filer, för att planera en resa samt att mäta avståndet mellan punkter. Resultatet kan sparas som en GPX-fil för senare användning för guidning.</string>
-    <string name="osmand_distance_planning_plugin_name">Avståndskalkylator &amp; planeringsverktyg</string>
+    <string name="osmand_distance_planning_plugin_name">Avståndskalkylator och planeringsverktyg</string>
     <string name="use_distance_measurement_help">* Tryck på kartan för att markera en punkt.
 \n * Tryck och håll på kartan för att ta bort en tidigare punkt.
 \n * Tryck och håll på en punkt för att visa den och lägga till en beskrivning.
@@ -1219,7 +1219,7 @@
     <string name="av_camera_pic_size_descr">Ställ in kamerans bildstorlek</string>
     <string name="rendering_value_car_name">Bil</string>
     <string name="rendering_value_bicycle_name">Cykel</string>
-    <string name="rendering_value_pedestrian_name">Fotgängare</string>
+    <string name="rendering_value_pedestrian_name">Till fots</string>
     <string name="rendering_value_browse_map_name">Titta på kartan</string>
     <string name="download_additional_maps">Hämta kartor som saknas %1$s (%2$d MB)?</string>
     <string name="shared_string_waypoints">Vägpunkter</string>
@@ -1250,7 +1250,7 @@
     <string name="local_index_description">Tryck på en post för att se fler detaljer, tryck och håll för att inaktivera eller ta bort. Data på enheten (%1$s ledigt):</string>
     <string name="text_size_descr">Ange textstorlek på kartan.</string>
     <string name="text_size">Textstorlek</string>
-    <string name="fav_point_dublicate">Duplicerat namn på favoritpunkt</string>
+    <string name="fav_point_dublicate">Duplicerat namn på favorit angivet</string>
     <string name="fav_point_dublicate_message">Favorit omdöpt till %1$s för att undvika dubbletter.</string>
     <string name="print_route">Skriv ut rutt</string>
     <string name="fav_point_emoticons_message">Favorit omdöpt till %1$s för att spara strängen som innehåller emoticons till en fil.</string>
@@ -1291,7 +1291,7 @@
     <string name="shared_string_dismiss">Avböj</string>
     <string name="everything_up_to_date">Alla filer är uppdaterade</string>
     <string name="use_opengl_render">Använd OpenGL-rendering</string>
-    <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (fungerar kanske inte på vissa enheter).</string>
+    <string name="use_opengl_render_descr">Använd hårdvaruaccelererad OpenGL-rendering (kan förbruka mer batteri och fungerar kanske inte på väldigt gamla enheter).</string>
     <string name="no_internet_connection">Kan inte hämta, kontrollera din internetsanslutning.</string>
     <string name="rendering_attr_roadStyle_name">Vägtyp</string>
     <string name="rendering_value_default_name">Standard</string>
@@ -1304,7 +1304,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vägkarta</string>
     <string name="routing_attr_no_new_routing_name">Inga regler från version 1.9-ruttning</string>
     <string name="routing_attr_no_new_routing_description">Använd inte de ruttningsregler som infördes i version 1.9.</string>
-    <string name="dash_download_msg_none">Vill du hämta offline-kartor?</string>
+    <string name="dash_download_msg_none">Hämta offline-kartor\?</string>
     <string name="dash_download_msg">Du har hämtat %1$s kartor</string>
     <string name="dash_download_new_one">Hämta ny karta</string>
     <string name="dash_download_manage">Hantera</string>
@@ -1322,7 +1322,7 @@
     <string name="avoid_roads_msg">Ändra till en alternativ rutt genom att välja vägar att undvika</string>
     <string name="save_track_to_gpx_globally_headline">Spårloggning på begäran</string>
     <string name="proxy_pref_title">Proxy</string>
-    <string name="proxy_pref_descr">Ange en Internet-proxy.</string>
+    <string name="proxy_pref_descr">Ange en proxyserver.</string>
     <string name="settings_privacy">Anonymitet</string>
     <string name="rendering_attr_streetLighting_name">Gatubelysning</string>
     <string name="enable_proxy_title">Aktivera HTTP-proxy</string>
@@ -1661,8 +1661,8 @@
     <string name="value_downloaded_of_max">%1$.1f av %2$.1f MB</string>
     <string name="update_all">Uppdatera alla (%1$s MB)</string>
     <string name="free_downloads_used">Gratis nedladdningar hämtade</string>
-    <string name="free_downloads_used_description">Visar antalet gratisnedladdningar du gjort.</string>
-    <string name="downloading_number_of_files">Hämtar - %1$d fil(er)</string>
+    <string name="free_downloads_used_description">Visar antalet gratisnedladdningar du har kvar.</string>
+    <string name="downloading_number_of_files">Hämtar - %1$d fil(er)…</string>
     <string name="share_geo">geo:</string>
     <string name="application_dir_description">Välj var du vill spara kartor och andra datafiler.</string>
     <string name="share_menu_location">Dela platsen</string>
@@ -1691,7 +1691,7 @@
     <string name="instalation_troubleshooting_item">Installation och problemlösning</string>
     <string name="techical_articles_item">Tekniska artiklar</string>
     <string name="versions_item">Versioner</string>
-    <string name="contact_us">Kontakta oss</string>
+    <string name="contact_us">Kontakt</string>
     <string name="osm_edit_created_poi">Skapat en OSM POI</string>
     <string name="world_map_download_descr">Världskarta (täcker hela världen vid låg zoomnivå) saknas eller är föråldrad. Överväg att ladda ner den för en global översikt.</string>
     <string name="shared_string_upload">Skicka</string>
@@ -1706,7 +1706,7 @@
     <string name="lang_fy">Frisiska</string>
     <string name="lang_als">Albanska (Toskiska)</string>
     <string name="share_osm_edits_subject">OSM-redigeringar delade via OsmAnd</string>
-    <string name="save_poi_without_poi_type_message">Vill du verkligen spara denna POI utan att ange typ?</string>
+    <string name="save_poi_without_poi_type_message">Spara denna POI utan att ange typ\?</string>
     <string name="shared_string_location">Plats</string>
     <string name="poi_context_menu_modify_osm_change">Modifiera OSM-ändring</string>
     <string name="copied_to_clipboard">Kopierat till Urklipp</string>
@@ -1765,7 +1765,7 @@
     <string name="update_now">Uppdatera nu</string>
     <string name="route_distance">Avstånd:</string>
     <string name="route_duration">Tid:</string>
-    <string name="missing_write_external_storage_permission">Appen har inte tillåtelse att använda SD-kortet</string>
+    <string name="missing_write_external_storage_permission">OsmAnd saknar tillåtelse att använda minneskortet</string>
     <string name="no_location_permission">Ge platsåtkomst.</string>
     <string name="no_camera_permission">Ge kameraåtkomst.</string>
     <string name="no_microphone_permission">Ge mikrofonåtkomst.</string>
@@ -1905,7 +1905,7 @@
     <string name="access_no_destination">Tillgänglighetsplugin: Ingen destination inställd</string>
     <string name="map_widget_magnetic_bearing">Magnetisk bäring</string>
     <string name="rec_split_clip_length">Klipplängd</string>
-    <string name="file_name_containes_illegal_char">Filnamnet innehåller ogiltiga tecken</string>
+    <string name="file_name_containes_illegal_char">Ogiltigt tecken i filnamnet</string>
     <string name="move_marker_bottom_sheet_title">Flytta på kartan för att ändra markörens position</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Följ oss</string>
@@ -2035,9 +2035,9 @@
     <string name="rendering_attr_hideWaterPolygons_name">Dölj vatten</string>
     <string name="quick_action_item_screen">Skärm %d</string>
     <string name="quick_action_add_marker">Lägg till kartmarkör</string>
-    <string name="quick_action_add_poi">Lägg till POI</string>
+    <string name="quick_action_add_poi">Lägg till intressepunkt</string>
     <string name="quick_action_map_style">Byt kartstil</string>
-    <string name="quick_action_map_style_switch">Kartstilen har ändrats till \"%s\".</string>
+    <string name="quick_action_map_style_switch">Kartstilen ändrad till \"%s\".</string>
     <string name="quick_action_add_osm_bug">Lägg till OSM-anteckning</string>
     <string name="quick_action_navigation_voice">Röst på/av</string>
     <string name="quick_action_navigation_voice_off">Röst är av</string>
@@ -2054,14 +2054,14 @@
     <string name="quick_action_add_navigation">Navigering</string>
     <string name="quick_action_bug_message">Meddelande</string>
     <string name="quick_action_btn_tutorial_title">Ändra knapplacering</string>
-    <string name="quick_action_map_source_switch">Kartkällan har ändrats till \"%s\".</string>
+    <string name="quick_action_map_source_switch">Kartkällan ändrad till \"%s\".</string>
     <string name="quick_action_map_source_action">Lägg till kartkälla</string>
     <string name="quick_action_map_source_title">Kartkällor</string>
     <string name="quick_action_map_source">Ändra kartkälla</string>
     <string name="quick_action_map_underlay_action">Lägg till underlägg</string>
     <string name="quick_action_map_underlay_title">Kartunderlägg</string>
     <string name="quick_action_map_underlay">Ändra kartunderlägg</string>
-    <string name="quick_action_map_underlay_switch">Kartunderlägget har ändrats till \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Kartunderlägget ändrat till \"%s\".</string>
     <string name="rendering_attr_depthContours_name">Konturer för sjödjup</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="navigate_point_olc">Öppna platskod</string>
@@ -2091,14 +2091,14 @@
     <string name="lang_sr_latn">Serbiska (latin)</string>
     <string name="configure_screen_quick_action">Snabbåtgärd</string>
     <string name="quick_action_item_action">Åtgärd %d</string>
-    <string name="quick_action_take_audio_note">Ta ljudanteckning</string>
-    <string name="quick_action_take_video_note">Ta videoanteckning</string>
-    <string name="quick_action_take_photo_note">Ta fotoanteckning</string>
+    <string name="quick_action_take_audio_note">Ny ljudanteckning</string>
+    <string name="quick_action_take_video_note">Ny videoanteckning</string>
+    <string name="quick_action_take_photo_note">Ny fotoanteckning</string>
     <string name="quick_action_new_action">Lägg till åtgärd</string>
     <string name="quick_action_edit_action">Redigera åtgärd</string>
     <string name="dialog_add_action_title">Lägg till åtgärd</string>
     <string name="quick_actions_delete">Ta bort åtgärd</string>
-    <string name="quick_actions_delete_text">Är du säker på att du vill ta bort åtgärden \"%s\"?</string>
+    <string name="quick_actions_delete_text">Ta bort åtgärden \"%s\"\?</string>
     <string name="quick_favorites_show_favorites_dialog">Visa dialogen Favoriter</string>
     <string name="quick_favorites_name_preset">Förinställt namn</string>
     <string name="quick_action_add_marker_descr">En knapp för att sägga en kartmarkör i centrum av skärmen.</string>
@@ -2112,7 +2112,7 @@
     <string name="quick_action_map_overlay_title">Kartöverlägg</string>
     <string name="quick_action_map_overlay_action">Lägg till överlägg</string>
     <string name="quick_action_map_overlay_switch">Kartöverlägget har ändrats till \"%s\".</string>
-    <string name="quick_action_btn_tutorial_descr">Tryck länge och dra knappen för att ändra dess position på skärmen.</string>
+    <string name="quick_action_btn_tutorial_descr">Genom att trycka länge och dra knappen ändras dess position på skärmen.</string>
     <string name="routing_attr_height_obstacles_name">Använd höjddata</string>
     <string name="rendering_attr_depthContours_description">Visa djupkonturer och punkter.</string>
     <string name="shared_string_slope">Sluttning</string>
@@ -2437,7 +2437,7 @@
     <string name="average">Genomsnitt</string>
     <string name="of">%1$d av %2$d</string>
     <string name="ascent_descent">Uppstigning/nedstigning</string>
-    <string name="moving_time">Förflyttningstid</string>
+    <string name="moving_time">Tid i rörelse</string>
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
     <string name="route_is_too_long_v2">För långa avständ: vänligen lägg till mellanliggande destinationer om ingen rutt hittas inom 10 minuter.</string>
@@ -2551,21 +2551,21 @@
     <string name="live_monitoring_max_interval_to_send_desrc">Ange en tidsbuffert för att behålla platser att skicka utan anslutning</string>
     <string name="show_free_version_banner">Visa gratisversion-banner</string>
     <string name="show_free_version_banner_description">Visa gratisversion-banner även i den betalda versionen.</string>
-    <string name="save_poi_too_many_uppercase">Namnet innehåller för många versaler. Vill du fortsätta?</string>
+    <string name="save_poi_too_many_uppercase">Namnet innehåller för många versaler. Fortsätt\?</string>
     <string name="quick_action_add_gpx_descr">En knapp för att lägga till en GPX-vägpunkt vid skärmens mitt.</string>
-    <string name="quick_action_take_audio_note_descr">Knackning på åtgärdsknappen kommer att lägga en ljudanteckning vid skärmens mitt.</string>
-    <string name="quick_action_take_video_note_descr">Att trycka på denna åtgärdsknapp lägger till en videoanteckning mitt på skärmen.</string>
-    <string name="quick_action_take_photo_note_descr">Knackning på åtgärdsknappen kommer att lägga till en fotoanteckning vid skärmens mitt.</string>
-    <string name="quick_action_add_osm_bug_descr">Knackning på åtgärdsknappen kommer att lägga till en OSM-anteckning vid skärmens mitt.</string>
-    <string name="quick_action_add_poi_descr">Knackning på åtgärdsknappen kommer att lägga till en Intressepunkt vid skärmens mitt.</string>
+    <string name="quick_action_take_audio_note_descr">En knapp för att lägga en ljudanteckning mitt på skärmen.</string>
+    <string name="quick_action_take_video_note_descr">En knapp för att lägga till en videoanteckning mitt på skärmen.</string>
+    <string name="quick_action_take_photo_note_descr">En knapp för att lägga till en fotoanteckning mitt på skärmen.</string>
+    <string name="quick_action_add_osm_bug_descr">En knapp för att lägga till en OSM-anteckning mitt på skärmen.</string>
+    <string name="quick_action_add_poi_descr">En knapp för att lägga till en Intressepunkt mitt på skärmen.</string>
     <string name="quick_action_navigation_voice_descr">Knackning på åtgärdsknappen kommer att inaktivera eller aktivera röstvägledning under navigering.</string>
     <string name="quick_action_add_parking_descr">En knapp för att lägga till en parkeringsplats vid skärmens mitt.</string>
     <string name="quick_action_interim_dialog">Visa en tillfällig dialogruta</string>
-    <string name="quick_action_duplicates">Angivna snabbåtgärdsnamn är redan i bruk, ändrades till %1$s för att undvika dubblett.</string>
+    <string name="quick_action_duplicates">Snabbåtgärdens namn ändrades till %1$s för att undvika dubblett.</string>
     <string name="quick_action_duplicate">Dublett av snabbåtgärdsnamn</string>
     <string name="quick_action_showhide_favorites_descr">Knackning på åtgärdsknappen visar eller döljer Favoriter på kartan.</string>
     <string name="quick_action_showhide_poi_descr">Knackning på åtgärdsknappen visar eller döljer Intressepunkter på kartan.</string>
-    <string name="quick_action_fav_name_descr">Lämna tomt för att automatiskt använda adressen eller platsens namn.</string>
+    <string name="quick_action_fav_name_descr">Lämna tomt för att använda adressen eller platsens namn.</string>
     <string name="show_tunnels">Tunnlar</string>
     <string name="wikivoyage_search_hint">Sök efter land, stad, eller region</string>
     <string name="shared_string_read">Läs</string>
@@ -2700,7 +2700,7 @@
     <string name="quick_action_empty_param_error">Fyll i alla parametrar</string>
     <string name="quick_action_map_styles">Kartstilar</string>
     <string name="quick_action_map_overlay">Ändra kartöversikt</string>
-    <string name="mappilary_no_internet_desc">Du måste vara ansluten till Internet för att visa foton från Mapillary.</string>
+    <string name="mappilary_no_internet_desc">Foton från Mapillary är bara tillgängliga online.</string>
     <string name="add_route_points">Lägg till ruttpunkter</string>
     <string name="add_waypoint">Lägg till vägpunkt</string>
     <string name="add_line">Lägg till rad</string>
@@ -2709,8 +2709,8 @@
     <string name="waypoint_one">Vägpunkt 1</string>
     <string name="route_point_one">Ruttpunkt 1</string>
     <string name="empty_state_favourites">Lägg Till Favoriter</string>
-    <string name="empty_state_favourites_desc">Importera eller markera favoriter på kartan.</string>
-    <string name="import_track">Importera spår</string>
+    <string name="empty_state_favourites_desc">Importera favoriter eller lägg till dem genom att markera punkter på kartan.</string>
+    <string name="import_track">Importera GPX-fil</string>
     <string name="import_track_desc">Filen %1$s innehåller inte vägpunkter, importera det som ett spår?</string>
     <string name="move_point">Flytta punkt</string>
     <string name="osm_recipients_label">OSM-mottagare</string>
@@ -2718,9 +2718,9 @@
     <string name="winter_and_ski_renderer">Vinter och skidor</string>
     <string name="touring_view_renderer">Touringvy</string>
     <string name="nautical_renderer">Nautisk</string>
-    <string name="copy_location_name">Kopia punkt/POI namn</string>
+    <string name="copy_location_name">Kopiera plats-/intressepunktsnamn</string>
     <string name="toast_empty_name_error">Ej namngiven plats</string>
-    <string name="tunnel_warning">Tunnel framför</string>
+    <string name="tunnel_warning">Tunnel framöver</string>
     <string name="download_wikipedia_description">Hämta Wikipedia-artiklar om %1$s för att läsa dem offline.</string>
     <string name="download_wikipedia_label">Hämta Wikipedia-data</string>
     <string name="open_in_browser_wiki">Öppna artikeln online</string>
@@ -2738,7 +2738,7 @@
     <string name="quick_action_edit_actions">Redigera åtgärder</string>
     <string name="get_osmand_live">Skaffa OsmAnd Live för att låsa upp alla funktioner: Dagliga kartuppdateringar med obegränsat antal hämtningar, alla betal-och gratisinsticksmoduler, Wikipedia, Wikivoyage och mycket mer.</string>
     <string name="unirs_render_descr">Ändring av standardstilen för att öka kontrasten av gång och cykelvägar. Använder färger från tidigare versioner av Mapink.</string>
-    <string name="quick_action_page_list_descr">Att trycka på denna åtgärdsknapp bläddrar genom listan nedan.</string>
+    <string name="quick_action_page_list_descr">En knapp för att bläddra igenom listan nedan.</string>
     <string name="poi_cannot_be_found">Kunde inte hitta nod eller väg.</string>
     <string name="search_no_results_feedback">Inga sökresultat?
 \nGe oss feedback</string>
@@ -2992,7 +2992,7 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Spårbar\" betyder att spåret inte visas i några offentliga listor, men bearbetade spårpunkter tillsammans med respektive tidsstämplar (som inte kan kopplas direkt till dig) görs genom nedladdningar från det offentliga GPS-API: et.</string>
     <string name="osm_edit_close_note">Stäng OSM Anteckningar</string>
     <string name="osm_edit_comment_note">Kommentera OSM Anteckningar</string>
-    <string name="osm_login_descr">Du kan logga in antingen med OAuth metoden (högre säkerhet) eller genom att använda ditt användarnamn och lösenord.</string>
+    <string name="osm_login_descr">Logga in antingen med OAuth-metoden eller med ditt OSM-användarnamn och lösenord.</string>
     <string name="shared_string_add_photo">Lägg till bild</string>
     <string name="register_on_openplacereviews">Registrera dig hos
 \nOpenPlaceReviews.org</string>
@@ -3079,7 +3079,7 @@
     <string name="login_open_street_map">Logga in till OpenStreetMap</string>
     <string name="login_open_street_map_org">Logga in på OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">Logga in på OpenStreetMap</string>
-    <string name="use_login_password">Användarnamn och lösenord</string>
+    <string name="use_login_password">Använd användarnamn och lösenord</string>
     <string name="login_account">Konto</string>
     <string name="markers_history">Markörhistorik</string>
     <string name="user_login">Inloggning</string>
@@ -3098,7 +3098,7 @@
     <string name="next_segment">Nästa segment</string>
     <string name="navigation_profile">Navigationsprofil</string>
     <string name="street_level_imagery">Bilder på gatunivå</string>
-    <string name="plan_route_exit_dialog_descr">Är du säker på att du vill avfärda alla ändringar i den plannerade färdvägen\?</string>
+    <string name="plan_route_exit_dialog_descr">Avfärda alla ändringar i den plannerade färdvägen\?</string>
     <string name="map_widget_monitoring">Inspelning av resa</string>
     <string name="follow_track">Följ färdväg</string>
     <string name="select_another_track">välj en annan färdväg</string>
@@ -3298,7 +3298,7 @@
     <string name="temporary_conditional_routing_descr">Använd vägbegränsningar som är aktiva nu på kartan</string>
     <string name="routing_attr_short_way_description">Optimerad kortare rutt (energibesparing)</string>
     <string name="routing_attr_driving_style_description">Välj körsyfte för att få kortare, snabbare eller säkrare rutt</string>
-    <string name="snap_to_road_descr">Ikonen för aktuell plats snappas till den aktuella navigeringsvägen</string>
+    <string name="snap_to_road_descr">Ikonen för aktuell plats kommer att fästa mot den aktuella navigeringsvägen</string>
     <string name="map_orientation_threshold_descr">Rotera inte kartvyn om hastigheten är mindre än en tröskelvärde</string>
     <string name="restart">Omstart</string>
     <string name="shared_strings_all_regions">Alla regioner</string>
@@ -3306,7 +3306,7 @@
     <string name="track_recording_stop_without_saving">Stoppa utan att spara</string>
     <string name="track_recording_save_and_stop">Spara och stoppa inspelningen</string>
     <string name="track_recording_title">Spårinspelningen stoppades</string>
-    <string name="track_recording_description">Är du säker på att du vill stoppa inspelningen\?
+    <string name="track_recording_description">Stoppa inspelningen\?
 \nAll osparad data kommer att gå förlorad.</string>
     <string name="on_pause">Pausad</string>
     <string name="app_restart_required">Omstart av program krävs för att tillämpa vissa inställningar.</string>
@@ -3323,12 +3323,12 @@
     <string name="delete_updates">Ta bort uppdateringar</string>
     <string name="live_update_delete_updates_msg">Ta bort alla %s liveuppdateringar\?</string>
     <string name="purchases">Inköp</string>
-    <string name="select_category_descr">Välj en kategori eller skapa en ny</string>
+    <string name="select_category_descr">Välj en kategori eller lägg till en ny</string>
     <string name="track_recording_will_be_continued">Inspelningen kommer fortsätta.</string>
     <string name="copy_poi_name">Kopiera POI namn</string>
     <string name="quick_action_show_hide_title">Visa/Göm</string>
     <string name="shared_string_interval">Intervall</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Dölj naturreservat, skyddade områden och nationalparkgränser</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Dölj naturreservat, skyddade områden och nationalparkgränser.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgränser</string>
     <string name="track_has_no_altitude">Spåret innehåller inte höjddata.</string>
     <string name="track_has_no_speed">Spåret innehåller inte hastighetsdata.</string>
@@ -3338,7 +3338,7 @@
     <string name="trip_recording_logging_interval_info">Loggningsintervall ställde in den tidsperiod under vilken OsmAnd kommer att be om aktuell positionspositionsdata.</string>
     <string name="trip_recording_save_and_continue">Spara och fortsätt</string>
     <string name="lost_data_warning">All osparad data kommer att försvinna.</string>
-    <string name="specify_color_for_map_mode">Ange färg för kartläget: %1$s.</string>
+    <string name="specify_color_for_map_mode">Ange färg för kartläge %1$s.</string>
     <string name="no_purchases">Du har inga inköp</string>
     <string name="new_device_account">Ny enhet / nytt konto</string>
     <string name="contact_support_description">Om du har några frågor kan du kontakta oss på %1$s.</string>
@@ -3382,7 +3382,7 @@
     <string name="app_mode_wheelchair">Rullstol</string>
     <string name="app_mode_wheelchair_forward">Rullstol framåt</string>
     <string name="show_start_dialog">Visa startdialogrutan</string>
-    <string name="trip_recording_show_start_dialog_setting">Om den är inaktiverad startar inspelningen direkt efter att du har tryckt på widgeten eller menyalternativet och hoppat över bekräftelsedialogrutan.</string>
+    <string name="trip_recording_show_start_dialog_setting">Om den är inaktiverad startar inspelningen direkt efter att du har tryckt på widgeten eller menyalternativet och hoppar över bekräftelsedialogrutan.</string>
     <string name="customize_route_line">Anpassa ruttlinjen</string>
     <string name="shared_string_route_line">Ruttlinje</string>
     <string name="expired">Upphörd</string>
@@ -3713,4 +3713,18 @@
     <string name="rendering_attr_highway_class_cycleway_name">Cykelväg</string>
     <string name="rendering_attr_highway_class_steps_name">Trappa</string>
     <string name="rendering_attr_highway_class_bridleway_name">Ridväg</string>
+    <string name="quick_action_day_night_switch_mode">Växla mellan dag-/nattläge</string>
+    <string name="quick_action_switch_night_mode">Nattläge</string>
+    <string name="quick_action_switch_day_mode">Dagläge</string>
+    <string name="routeInfo_steepness_name">Lutning</string>
+    <string name="routeInfo_surface_name">Vägbeläggning</string>
+    <string name="routeInfo_roadClass_name">Vägtyp</string>
+    <string name="routing_attr_avoid_sett_description">Undviker kullersten och gatsten</string>
+    <string name="routing_attr_avoid_sett_name">Ingen kullersten eller gatsten</string>
+    <string name="benefits_for_contributors">Fördelar för dem som bidrar aktivt till OSM</string>
+    <string name="use_login_and_password">Använd användarnamn och lösenord</string>
+    <string name="available_until">Tillgänglig till %1$s</string>
+    <string name="enough_contributions_descr">Grattis, du har bidragit tillräckligt mycket till OpenStreetMap och kan nu dra nytta av obegränsade kartuppdateringar i OsmAnd!</string>
+    <string name="not_enough_contributions_descr">Minst %1$s bidrag till OpenStreetMap inom %2$s dagar krävs.</string>
+    <string name="map_updates_are_unavailable_yet">Kartuppdateringar är ännu inte tillgängliga. :-(</string>
 </resources>
