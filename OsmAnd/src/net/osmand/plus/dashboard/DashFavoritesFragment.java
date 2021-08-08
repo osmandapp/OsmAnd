@@ -60,9 +60,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
-			if (getActivity() != null) {
-				startFavoritesActivity(getActivity(), FavoritesActivity.FAV_TAB);
-			}
+			startFavoritesActivity(FavoritesActivity.FAV_TAB);
 			closeDashboard();
 		});
 		return view;

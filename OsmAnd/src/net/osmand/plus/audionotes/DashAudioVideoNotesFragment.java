@@ -53,9 +53,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
 		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
-			if (getActivity() != null) {
-				startFavoritesActivity(getActivity(), AudioVideoNotesPlugin.NOTES_TAB);
-			}
+			startFavoritesActivity(AudioVideoNotesPlugin.NOTES_TAB);
 			closeDashboard();
 		});
 		return view;

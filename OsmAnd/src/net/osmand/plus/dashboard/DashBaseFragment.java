@@ -141,13 +141,17 @@ public abstract class DashBaseFragment extends Fragment {
 		}
 	}
 
-	protected void startFavoritesActivity(@NonNull Activity currentActivity, int tab) {
-		OsmandApplication app = (OsmandApplication) currentActivity.getApplication();
+	protected void startFavoritesActivity(int tab) {
+		Activity activity = getActivity();
+		if (activity == null) {
+			return;
+		}
+		OsmandApplication app = getMyApplication();
 		OsmAndAppCustomization appCustomization = app.getAppCustomization();
-		final Intent favorites = new Intent(currentActivity, appCustomization.getFavoritesActivity());
+		final Intent favorites = new Intent(activity, appCustomization.getFavoritesActivity());
 		favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		app.getSettings().FAVORITES_TAB.set(tab);
-		currentActivity.startActivity(favorites);
+		activity.startActivity(favorites);
 	}
 
 	protected View getParentView() {

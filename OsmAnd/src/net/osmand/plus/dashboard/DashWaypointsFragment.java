@@ -135,13 +135,10 @@ public class DashWaypointsFragment extends DashLocationFragment {
 					getThemedIcon(optionsVisible ? R.drawable.ic_overflow_menu_white :
 							R.drawable.ic_action_remove_dark));
 			options.setOnClickListener(v -> {
-				if (getActivity() == null) {
-					return;
-				}
 				if (optionsVisible) {
-					selectTargetModel(getActivity(), point, v);
+					selectTargetModel(point, v);
 				} else {
-					deletePointConfirm(point, v, getMyApplication());
+					deletePointConfirm(point, v);
 				}
 			});
 			
@@ -164,24 +161,31 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		this.distances = distances;
 	}
 	
-	protected void deletePointConfirm(final TargetPoint point, View view, final OsmandApplication app) {
+	protected void deletePointConfirm(final TargetPoint point, View view) {
+		final OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
 		final boolean target = point == app.getTargetPointsHelper().getPointToNavigate();
 		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 		// Stop the navigation
 		builder.setTitle(getString(R.string.delete_target_point));
-		builder.setMessage(PointDescription.getSimpleName(point, getActivity()));
+		builder.setMessage(PointDescription.getSimpleName(point, app));
 		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
-			app.getTargetPointsHelper().removeWayPoint(true, target ? -1 :  point.index);
+			app.getTargetPointsHelper().removeWayPoint(true, target ? -1 : point.index);
 			setupView();
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.show();		
 	}
 
-	private void selectTargetModel(final Activity activity, final TargetPoint point, final View view) {
-		final OsmandApplication app = (OsmandApplication) activity.getApplication();
+	private void selectTargetModel(final TargetPoint point, final View view) {
+		final OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
 		final UiUtilities iconsCache = app.getUIUtilities();
-		final PopupMenu optionsMenu = new PopupMenu(activity, view);
+		final PopupMenu optionsMenu = new PopupMenu(requireActivity(), view);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem item; 
 		final boolean target = point == app.getTargetPointsHelper().getPointToNavigate();
@@ -217,7 +221,7 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		item = optionsMenu.getMenu().add(R.string.shared_string_remove)
 				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
 		item.setOnMenuItemClickListener(menuItem -> {
-			deletePointConfirm(point, view, app);
+			deletePointConfirm(point, view);
 			return true;
 		});
 		optionsMenu.show();
