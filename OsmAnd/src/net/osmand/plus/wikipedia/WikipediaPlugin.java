@@ -118,6 +118,11 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public void mapActivityCreate(MapActivity activity) {
+		this.mapActivity = activity;
+	}
+
+	@Override
 	public void mapActivityResume(MapActivity activity) {
 		this.mapActivity = activity;
 	}
