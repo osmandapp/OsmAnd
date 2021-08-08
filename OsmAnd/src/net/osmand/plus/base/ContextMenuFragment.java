@@ -598,9 +598,11 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		super.onResume();
 		paused = false;
 		dismissing = false;
-		ViewParent parent = view.getParent();
-		if (parent != null && containerLayoutListener != null) {
-			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
+		if (view != null) {
+			ViewParent parent = view.getParent();
+			if (parent != null && containerLayoutListener != null) {
+				((View) parent).addOnLayoutChangeListener(containerLayoutListener);
+			}
 		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {

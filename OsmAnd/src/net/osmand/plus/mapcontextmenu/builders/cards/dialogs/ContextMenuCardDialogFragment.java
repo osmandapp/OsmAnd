@@ -36,14 +36,15 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		if (savedInstanceState != null && getActivity() instanceof MapActivity) {
 			dialog = ContextMenuCardDialog.restoreMenu(savedInstanceState, (MapActivity) getActivity());
 		}
-		if (dialog == null) {
-			dismiss();
-		}
 	}
 
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		if (dialog == null) {
+			return null;
+		}
+
 		View view = inflater.inflate(R.layout.context_menu_card_dialog, container, false);
 		FragmentActivity activity = requireActivity();
 		AndroidUtils.addStatusBarPadding21v(activity, view);
@@ -83,6 +84,8 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		super.onResume();
 		if (dialog != null) {
 			dialog.onResume();
+		} else {
+			dismiss();
 		}
 	}
 

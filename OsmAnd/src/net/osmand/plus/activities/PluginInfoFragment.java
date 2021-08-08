@@ -76,7 +76,6 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		app = requireMyApplication();
 		plugin = getPluginFromArgs();
 		if (plugin == null) {
-			dismiss();
 			return null;
 		}
 
@@ -141,7 +140,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (plugin.isEnabled() != isChecked) {
 					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked)) {
-						updateState(plugin);
+						updateState();
 					}
 				}
 			}
@@ -172,7 +171,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 			}
 		});
 
-		updateState(plugin);
+		updateState();
 		return mainView;
 	}
 
@@ -199,13 +198,15 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	@Override
 	public void onResume() {
 		super.onResume();
-		OsmandPlugin.checkInstalledMarketPlugins(app, getActivity());
-		if (plugin != null) {
-			updateState(plugin);
+		if (plugin == null) {
+			dismiss();
+		} else {
+			OsmandPlugin.checkInstalledMarketPlugins(app, getActivity());
+			updateState();
 		}
 	}
 
-	private void updateState(@NonNull OsmandPlugin plugin) {
+	private void updateState() {
 		CompoundButton enableDisableButton = mainView.findViewById(R.id.plugin_enable_disable);
 		Button getButton = mainView.findViewById(R.id.plugin_get);
 		Button settingsButton = mainView.findViewById(R.id.plugin_settings);
@@ -238,7 +239,9 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 
 	@Override
 	public void onPluginStateChanged(@NonNull OsmandPlugin plugin) {
-		updateState(plugin);
+		if (this.plugin != null && this.plugin.getId().equals(plugin.getId())) {
+			updateState();
+		}
 	}
 
 	public void dismiss() {
