@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.router.RouteSegmentResult;
@@ -111,7 +111,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 	@ColorInt
 	private int getTrackContrastColor(@ColorInt int trackColor) {
-		return UiUtilities.getContrastColor(getContext().getCtx(), trackColor, false);
+		return ColorUtilities.getContrastColor(getContext().getCtx(), trackColor, false);
 	}
 
 	@Override

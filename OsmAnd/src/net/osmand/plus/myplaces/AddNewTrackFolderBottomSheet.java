@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -58,8 +59,7 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		nameTextBox = view.findViewById(R.id.name_text_box);
 		nameTextBox.setBoxBackgroundColorResource(nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light);
 		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_name));
-		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
-				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
+		ColorStateList colorStateList = ColorStateList.valueOf(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
 		editText = view.findViewById(R.id.name_edit_text);
 		editText.setText(folderName);

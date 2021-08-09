@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -33,7 +34,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
 
-import static net.osmand.AndroidUtils.getPrimaryTextColorId;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.UPDATE_DYNAMIC_ITEMS;
 
 public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragment implements DismissTargetFragment {
@@ -98,7 +98,7 @@ public class TripRecordingOptionsBottomSheet extends MenuBottomSheetDialogFragme
 
 		items.add(new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.shared_string_options))
-				.setTitleColorId(getPrimaryTextColorId(nightMode))
+				.setTitleColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_title)
 				.create());
 

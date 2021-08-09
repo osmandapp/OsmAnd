@@ -25,11 +25,20 @@ import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.Toast;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -39,16 +48,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
-import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
-
-import androidx.annotation.IdRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
 
@@ -310,7 +310,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 		if (getTopViewId() != 0) {
 			topView = view.findViewById(getTopViewId());
-			AndroidUtils.setBackground(app, topView, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+			AndroidUtils.setBackground(app, topView, ColorUtilities.getCardAndListBackgroundColorId(nightMode));
 		}
 		if (!portrait) {
 			currentMenuState = MenuState.FULL_SCREEN;

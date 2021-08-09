@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -113,7 +114,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		AndroidUiHelper.updateVisibility(addNewCategoryView.findViewById(R.id.description), false);
 		BaseBottomSheetItem addNewFolderItem = new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.favorite_category_add_new))
-				.setTitleColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
+				.setTitleColorId(ColorUtilities.getActiveColorId(nightMode))
 				.setIcon(getActiveIcon(R.drawable.ic_action_folder_add))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)
 				.setOnClickListener(new View.OnClickListener() {
@@ -183,8 +184,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		LinearLayout descriptionContainer = itemView.findViewById(R.id.descriptionContainer);
 		descriptionContainer.setPadding(dp16, 0, dp16, 0);
 		itemView.setPadding(0, 0, 0, 0);
-		int activeColorId = nightMode ?
-				R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 
 		if (isHidden) {
 			button.setImageResource(R.drawable.ic_action_hide);

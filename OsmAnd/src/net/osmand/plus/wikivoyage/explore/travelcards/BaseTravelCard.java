@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
@@ -62,13 +63,8 @@ public abstract class BaseTravelCard {
 	@ColorRes
 	protected int getPrimaryBtnTextColorRes(boolean enabled) {
 		if (enabled) {
-			return nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
+			return ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		}
 		return R.color.wikivoyage_secondary_text;
-	}
-
-	@ColorRes
-	protected int getPrimaryTextColorRes() {
-		return nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 	}
 }

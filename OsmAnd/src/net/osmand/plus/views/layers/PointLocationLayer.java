@@ -23,9 +23,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -194,7 +194,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			if (locationIcon != null) {
 				DrawableCompat.setTint(DrawableCompat.wrap(locationIcon.getDrawable(1)), color);
 			}
-			area.setColor(UiUtilities.getColorWithAlpha(color, 0.16f));
+			area.setColor(ColorUtilities.getColorWithAlpha(color, 0.16f));
 			aroundArea.setColor(color);
 		}
 	}

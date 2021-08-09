@@ -1,11 +1,13 @@
 package net.osmand.plus.dialogs;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -54,10 +56,13 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
+		Context ctx = getContext();
+		if (ctx == null) return;
+
 		items.add(new TitleItem(getString(R.string.import_file)));
 
-		int nameColor = getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-		int descrColor = getResolvedColor(nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		int nameColor = ColorUtilities.getActiveColor(ctx, nightMode);
+		int descrColor = ColorUtilities.getSecondaryTextColor(ctx, nightMode);
 		String descr = getString(R.string.import_gpx_file_description);
 		if (!descr.contains("%s")) {
 			descr = "%s " + descr;

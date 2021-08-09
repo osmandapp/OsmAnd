@@ -30,6 +30,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
@@ -113,7 +114,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			}
 		});
 
-		int searchColorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+		int searchColorId = ColorUtilities.getSecondaryTextColorId(nightMode);
 		((TextView) findViewById(R.id.search_hint)).setTextColor(getResolvedColor(searchColorId));
 		((ImageView) findViewById(R.id.search_icon))
 				.setImageDrawable(getIcon(R.drawable.ic_action_search_dark, searchColorId));

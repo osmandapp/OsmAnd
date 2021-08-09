@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.ColorStateList;
@@ -53,6 +51,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilitySettingsFragment;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -85,6 +84,8 @@ import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
 import java.util.Set;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener, OnConfirmPreferenceChange {
@@ -312,7 +313,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
 				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 			}
-			return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+			return ColorUtilities.getListBgColorId(nightMode);
 		} else {
 			return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 		}
@@ -550,8 +551,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (profileButton != null && currentScreenType != null) {
 			int toolbarRes = currentScreenType.toolbarResId;
 			int iconColor = getActiveProfileColor();
-			int bgColor = UiUtilities.getColorWithAlpha(iconColor, 0.1f);
-			int selectedColor = UiUtilities.getColorWithAlpha(iconColor, 0.3f);
+			int bgColor = ColorUtilities.getColorWithAlpha(iconColor, 0.1f);
+			int selectedColor = ColorUtilities.getColorWithAlpha(iconColor, 0.3f);
 
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 				int bgResId = 0;
@@ -689,22 +690,22 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@ColorRes
 	protected int getActiveColorRes() {
-		return isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		return ColorUtilities.getActiveColorId(isNightMode());
 	}
 
 	@ColorRes
 	protected int getBackgroundColorRes() {
-		return isNightMode() ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		return ColorUtilities.getListBgColorId(isNightMode());
 	}
 
 	@ColorInt
 	protected int getActiveTextColor() {
-		return ContextCompat.getColor(app, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		return ColorUtilities.getPrimaryTextColor(app, isNightMode());
 	}
 
 	@ColorInt
 	protected int getDisabledTextColor() {
-		return ContextCompat.getColor(app, isNightMode() ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		return ColorUtilities.getSecondaryTextColor(app, isNightMode());
 	}
 
 	protected void registerPreference(Preference preference) {
@@ -833,7 +834,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		Drawable icon = AndroidUtils.createEnabledStateListDrawable(disabled, enabled);
 
 		if (Build.VERSION.SDK_INT < 21) {
-			int defaultColor = ContextCompat.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+			int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
 			ColorStateList colorStateList = AndroidUtils.createEnabledColorIntStateList(defaultColor, getActiveProfileColor());
 			icon = DrawableCompat.wrap(icon);
 			DrawableCompat.setTintList(icon, colorStateList);
@@ -936,7 +937,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
 		if (selectableView != null) {
 			int color = AndroidUtils.getColorFromAttr(holder.itemView.getContext(), R.attr.activity_background_color);
-			int selectedColor = UiUtilities.getColorWithAlpha(getActiveProfileColor(), 0.3f);
+			int selectedColor = ColorUtilities.getColorWithAlpha(getActiveProfileColor(), 0.3f);
 
 			Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, color);
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {

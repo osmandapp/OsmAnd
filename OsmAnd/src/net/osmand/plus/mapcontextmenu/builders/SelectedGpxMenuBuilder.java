@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -188,7 +189,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		int gpxSmallTextMargin = (int) ll.getResources().getDimension(R.dimen.gpx_small_text_margin);
 		float gpxTextSize = ll.getResources().getDimension(R.dimen.default_desc_text_size);
 
-		int textColor = ContextCompat.getColor(ll.getContext(), light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
+		int textColor = ColorUtilities.getPrimaryTextColor(ll.getContext(), !light);
 
 		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_action_distance_16);
 		buildTextView(ll, gpxSmallTextMargin, gpxTextSize, textColor,

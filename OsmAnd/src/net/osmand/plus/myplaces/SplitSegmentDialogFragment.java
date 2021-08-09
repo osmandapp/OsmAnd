@@ -35,6 +35,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -99,9 +100,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		listView.setBackgroundColor(getResources().getColor(
-				app.getSettings().isLightContent() ? R.color.activity_background_color_light
-						: R.color.activity_background_color_dark));
+		boolean nightMode = !app.getSettings().isLightContent();
+		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
 	@Override
@@ -280,14 +280,13 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		final TextView title = (TextView) view.findViewById(R.id.split_interval_title);
 		final TextView text = (TextView) view.findViewById(R.id.split_interval_text);
 		final ImageView img = (ImageView) view.findViewById(R.id.split_interval_arrow);
+		boolean nightMode = !app.getSettings().isLightContent();
 		int colorId;
 		final List<GpxDisplayGroup> groups = getDisplayGroups();
 		if (groups.size() > 0) {
-			colorId = app.getSettings().isLightContent() ?
-					R.color.text_color_primary_light : R.color.text_color_primary_dark;
+			colorId = ColorUtilities.getPrimaryTextColorId(nightMode);
 		} else {
-			colorId = app.getSettings().isLightContent() ?
-					R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
+			colorId = ColorUtilities.getSecondaryTextColorId(nightMode);
 		}
 		int color = app.getResources().getColor(colorId);
 		title.setTextColor(color);
@@ -431,6 +430,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				convertView = trackActivity.getLayoutInflater().inflate(R.layout.gpx_split_segment_fragment, parent, false);
 			}
 			convertView.setOnClickListener(null);
+			boolean nightMode = !app.getSettings().isLightContent();
+			int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 			TextView overviewTextView = (TextView) convertView.findViewById(R.id.overview_text);
 			ImageView overviewImageView = (ImageView) convertView.findViewById(R.id.overview_image);
 			if (position == 0) {
@@ -446,9 +447,9 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				}
 			} else {
 				if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
-					overviewTextView.setTextColor(app.getSettings().isLightContent() ? app.getResources().getColor(R.color.active_color_primary_light) : app.getResources().getColor(R.color.active_color_primary_dark));
+					overviewTextView.setTextColor(app.getResources().getColor(activeColorId));
 					if (currentGpxDisplayItem.group.isSplitDistance()) {
-						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
+						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, activeColorId));
 						overviewTextView.setText("");
 						double metricStart = currentGpxDisplayItem.analysis.metricEnd - currentGpxDisplayItem.analysis.totalDistance;
 						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) metricStart, app));
@@ -456,7 +457,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.metricEnd, app));
 						overviewTextView.append("  (" + Integer.toString(currentGpxDisplayItem.analysis.points) + ")");
 					} else if (currentGpxDisplayItem.group.isSplitTime()) {
-						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
+						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, activeColorId));
 						overviewTextView.setText("");
 						double metricStart = currentGpxDisplayItem.analysis.metricEnd - (currentGpxDisplayItem.analysis.timeSpan / 1000);
 						overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) metricStart, app));

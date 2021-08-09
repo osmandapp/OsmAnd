@@ -45,6 +45,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -151,7 +152,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				nightMode ? R.color.app_bar_color_dark : R.color.list_background_color_light));
 		toolbar.setTitle(getToolbarTitle());
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
-				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.description_font_and_bottom_sheet_icons);
+				ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -176,7 +177,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			}
 		});
 
-		final int activeColorResId = getActiveColorRes();
+		final int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 		ImageView toolbarAction = view.findViewById(R.id.toolbar_action);
 		view.findViewById(R.id.background_layout).setBackgroundResource(nightMode
 				? R.color.app_bar_color_dark : R.color.list_background_color_light);
@@ -401,7 +402,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		} else {
 			iconId = R.drawable.ic_action_description_16;
 		}
-		Drawable icon = app.getUIUtilities().getIcon(iconId, getActiveColorRes());
+		int activeColor = ColorUtilities.getActiveColorId(nightMode);
+		Drawable icon = app.getUIUtilities().getIcon(iconId, activeColor);
 		addDelDescription.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 	}
 
@@ -451,11 +453,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 	boolean isDescriptionAvailable() {
 		return descriptionCaption.getVisibility() == View.VISIBLE;
-	}
-
-	@ColorRes
-	private int getActiveColorRes() {
-		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 	}
 
 	private void createGroupSelector() {
@@ -783,7 +780,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
 			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	@Override
@@ -1009,7 +1006,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		@Override
 		public GroupsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 			View view;
-			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 			view = LayoutInflater.from(parent.getContext()).inflate(R.layout.point_editor_group_select_item, parent, false);
 			if (viewType != VIEW_TYPE_CELL) {
 				Drawable iconAdd = app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId);
@@ -1059,8 +1056,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				int strokeColor;
 				int strokeWidth;
 				if (selectedItemName != null && selectedItemName.equals(items.get(position))) {
-					strokeColor = ContextCompat.getColor(app, nightMode ?
-							R.color.active_color_primary_dark : R.color.active_color_primary_light);
+					strokeColor = ColorUtilities.getActiveColor(app, nightMode);
 					strokeWidth = 2;
 				} else {
 					strokeColor = ContextCompat.getColor(app, nightMode ? R.color.stroked_buttons_and_links_outline_dark

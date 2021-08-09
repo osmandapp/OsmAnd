@@ -18,6 +18,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -166,7 +167,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		items.add(new TitleItem(app.getString(R.string.shared_string_settings), nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+		items.add(new TitleItem(app.getString(R.string.shared_string_settings), ColorUtilities.getActiveColorId(nightMode)));
 
 		List<LocalRoutingParameter> list = getRoutingParameters(applicationMode);
 		for (final LocalRoutingParameter optionsItem : list) {
@@ -503,10 +504,10 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		String description = null;
 		int descriptionColorId;
 		if (routeParamsBuilder == null) {
-			descriptionColorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+			descriptionColorId = ColorUtilities.getSecondaryTextColorId(nightMode);
 			description = mapActivity.getString(R.string.follow_track_descr);
 		} else {
-			descriptionColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			descriptionColorId = ColorUtilities.getActiveColorId(nightMode);
 			GPXFile gpxFile = routeParamsBuilder.getFile();
 			if (!Algorithms.isEmpty(gpxFile.path)) {
 				description = new File(gpxFile.path).getName();

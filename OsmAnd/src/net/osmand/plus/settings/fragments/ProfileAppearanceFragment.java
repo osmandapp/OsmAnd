@@ -41,6 +41,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -264,7 +265,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			saveButton.setVisibility(View.VISIBLE);
 			buttonsContainer.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 
-			AndroidUtils.setBackground(getContext(), buttonsContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
+			AndroidUtils.setBackground(getContext(), buttonsContainer, ColorUtilities.getListBgColorId(isNightMode()));
 
 			UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 			UiUtilities.setupDialogButton(isNightMode(), saveButton, DialogButtonType.PRIMARY, R.string.shared_string_save);
@@ -353,7 +354,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		if (profileButton != null) {
 			int iconColor = changedProfile.getActualColor();
 			AndroidUtils.setBackground(profileButton, UiUtilities.tintDrawable(AppCompatResources.getDrawable(app,
-					R.drawable.circle_background_light), UiUtilities.getColorWithAlpha(iconColor, 0.1f)));
+					R.drawable.circle_background_light), ColorUtilities.getColorWithAlpha(iconColor, 0.1f)));
 			ImageView profileIcon = view.findViewById(R.id.profile_icon);
 			if (profileIcon != null) {
 				profileIcon.setImageDrawable(getPaintedIcon(changedProfile.iconRes, iconColor));
@@ -519,7 +520,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		ImageView coloredCircle = iconItemView.findViewById(R.id.background);
 		AndroidUtils.setBackground(coloredCircle,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.circle_background_light),
-						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		coloredCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -541,7 +542,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		checkMark.setImageDrawable(app.getUIUtilities().getIcon(changedProfile.iconRes, R.color.icon_color_default_light));
 		AndroidUtils.setBackground(iconItem.findViewById(R.id.background),
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.circle_background_light),
-						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		changedProfile.iconRes = iconRes;
 		updateProfileButton();
 	}
@@ -561,7 +562,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		ImageView coloredRect = locationIconView.findViewById(R.id.backgroundRect);
 		AndroidUtils.setBackground(coloredRect,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
-						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		coloredRect.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -609,7 +610,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		ImageView coloredRect = navigationIconView.findViewById(R.id.backgroundRect);
 		AndroidUtils.setBackground(coloredRect,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
-						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		coloredRect.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -653,7 +654,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			int newColor = changedProfile.getActualColor();
 			AndroidUtils.setBackground(iconItem.findViewById(R.id.background),
 					UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.circle_background_light),
-							UiUtilities.getColorWithAlpha(newColor, 0.1f)));
+							ColorUtilities.getColorWithAlpha(newColor, 0.1f)));
 			ImageView outlineCircle = iconItem.findViewById(R.id.outline);
 			GradientDrawable circleContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.circle_contour_bg_light);
 			if (circleContourDrawable != null) {

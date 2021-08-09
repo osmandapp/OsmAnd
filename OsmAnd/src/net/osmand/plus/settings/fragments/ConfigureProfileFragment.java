@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -76,7 +77,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	@ColorRes
 	protected int getBackgroundColorRes() {
-		return isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+		return ColorUtilities.getActivityBgColorId(isNightMode());
 	}
 
 	@Override
@@ -336,7 +337,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void setupCopyProfileSettingsPref() {
 		Preference copyProfilePrefs = findPreference(COPY_PROFILE_SETTINGS);
 		copyProfilePrefs.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_copy,
-				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+				ColorUtilities.getActiveColorId(isNightMode())));
 	}
 
 	private void setupResetToDefaultPref() {
@@ -352,20 +353,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				resetToDefault.setTitle(title);
 			}
 			resetToDefault.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,
-					isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+					ColorUtilities.getActiveColorId(isNightMode())));
 		}
 	}
 
 	private void setupExportProfilePref() {
 		Preference exportProfile = findPreference(EXPORT_PROFILE);
 		exportProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_app_configuration,
-				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+				ColorUtilities.getActiveColorId(isNightMode())));
 	}
 
 	private void setupDeleteProfilePref() {
 		Preference deleteProfile = findPreference(DELETE_PROFILE);
 		deleteProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark,
-				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+				ColorUtilities.getActiveColorId(isNightMode())));
 	}
 
 	private void setupOsmandPluginsPref(PreferenceCategory preferenceCategory) {

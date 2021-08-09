@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -61,12 +62,12 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		editor.updateNightMode();
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), !editor.isLight() ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
+		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(getContext(), !editor.isLight()));
 		toolbar.setTitle(getToolbarTitle());
 
 		OsmandApplication app = requireMyApplication();
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
-				!editor.isLight() ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
+				ColorUtilities.getActiveButtonsAndLinksTextColorId(!editor.isLight()));
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setTitleTextColor(getResources().getColor(getResIdFromAttribute(getMapActivity(), R.attr.pstsTextColor)));
@@ -77,10 +78,10 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		int activeColorResId = !editor.isLight() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColor = ColorUtilities.getActiveColor(app, !editor.isLight());
 
 		Button saveButton = (Button) view.findViewById(R.id.save_button);
-		saveButton.setTextColor(getResources().getColor(activeColorResId));
+		saveButton.setTextColor(activeColor);
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -89,7 +90,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		});
 
 		Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
-		cancelButton.setTextColor(getResources().getColor(activeColorResId));
+		cancelButton.setTextColor(activeColor);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -99,7 +100,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		});
 
 		Button deleteButton = (Button) view.findViewById(R.id.delete_button);
-		deleteButton.setTextColor(getResources().getColor(activeColorResId));
+		deleteButton.setTextColor(activeColor);
 		deleteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -113,10 +114,12 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 			deleteButton.setVisibility(View.VISIBLE);
 		}
 
-		view.findViewById(R.id.background_layout).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
-		view.findViewById(R.id.buttons_layout).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
-		view.findViewById(R.id.title_view).setBackgroundResource(!editor.isLight() ? R.color.list_background_color_dark : R.color.list_background_color_light);
-		view.findViewById(R.id.description_info_view).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
+		int activityBgColorId = ColorUtilities.getActivityBgColorId(!editor.isLight());
+		int listBgColorId = ColorUtilities.getListBgColorId(!editor.isLight());
+		view.findViewById(R.id.background_layout).setBackgroundResource(activityBgColorId);
+		view.findViewById(R.id.buttons_layout).setBackgroundResource(activityBgColorId);
+		view.findViewById(R.id.title_view).setBackgroundResource(listBgColorId);
+		view.findViewById(R.id.description_info_view).setBackgroundResource(activityBgColorId);
 
 		TextView nameCaption = (TextView) view.findViewById(R.id.name_caption);
 		AndroidUtils.setTextSecondaryColor(view.getContext(), nameCaption, !editor.isLight());
@@ -190,7 +193,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	public Drawable getRowIcon(int iconId) {
 		PointEditor editor = getEditor();
 		boolean light = editor == null || editor.isLight();
-		return getIcon(iconId, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
+		return getIcon(iconId, ColorUtilities.getDefaultIconColorId(!light));
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -50,7 +51,7 @@ public class SelectWptCategoriesBottomSheetDialogFragment extends MenuBottomShee
 		if (gpxFile == null) {
 			return;
 		}
-		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 		isUpdateMode = getArguments().getBoolean(UPDATE_CATEGORIES_KEY);
 		List<String> categories = getArguments().getStringArrayList(ACTIVE_CATEGORIES_KEY);
 

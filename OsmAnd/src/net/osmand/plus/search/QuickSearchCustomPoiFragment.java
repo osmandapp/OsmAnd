@@ -40,6 +40,7 @@ import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -127,6 +128,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 			Bundle savedInstanceState) {
 		LayoutInflater layoutInflater = UiUtilities.getInflater(app, nightMode);
 		helper = app.getPoiFilters();
+		boolean nightMode = !app.getSettings().isLightContent();
 		if (getArguments() != null) {
 			filterId = getArguments().getString(QUICK_SEARCH_CUSTOM_POI_FILTER_ID_KEY);
 		} else if (savedInstanceState != null) {
@@ -144,8 +146,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 		view = layoutInflater.inflate(R.layout.search_custom_poi, container, false);
 		searchProgressBar = view.findViewById(R.id.searchProgressBar);
 		Toolbar toolbar = view.findViewById(R.id.toolbar);
-		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark,
-				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, color);
 		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -158,17 +160,15 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				}
 			}
 		});
-		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
-		toolbar.setTitleTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light));
+		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
+		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
 		TextView title = view.findViewById(R.id.title);
 		if (editMode) {
 			title.setText(filter.getName());
 		}
 
 		listView = view.findViewById(android.R.id.list);
-		listView.setBackgroundColor(getResources().getColor(
-				app.getSettings().isLightContent() ? R.color.activity_background_color_light
-						: R.color.activity_background_color_dark));
+		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 
 		headerShadow = layoutInflater.inflate(R.layout.list_shadow_header, null);
 		headerDescription = layoutInflater.inflate(R.layout.list_item_description, null);
@@ -622,7 +622,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment implements OnFi
 				bottomBar.setVisibility(View.GONE);
 			} else {
 				UiUtilities.setMargins(button, 0, 0, 0, 0);
-				button.setBackgroundResource(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+				button.setBackgroundResource(ColorUtilities.getActiveColorId(nightMode));
 				barTitle.setText(R.string.shared_string_show);
 				barSubTitle.setVisibility(View.VISIBLE);
 				barSubTitle.setText(ctx.getString(R.string.selected_categories) + ": " + filter.getAcceptedTypesCount());

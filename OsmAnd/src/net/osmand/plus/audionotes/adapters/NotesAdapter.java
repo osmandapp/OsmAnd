@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -215,7 +216,7 @@ public class NotesAdapter extends ArrayAdapter<Object> {
 			holder.description.setText(recording.getExtendedDescription(app));
 			int iconRes = recording.isAudio() ? R.drawable.ic_type_audio
 					: (recording.isVideo() ? R.drawable.ic_type_video : R.drawable.ic_type_img);
-			int colorRes = app.getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+			int colorRes = ColorUtilities.getDefaultIconColorId(!app.getSettings().isLightContent());
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, colorRes));
 		}
 

@@ -5,13 +5,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -99,14 +99,10 @@ public class LocalBackupViewHolder extends RecyclerView.ViewHolder {
 		return (OsmandApplication) itemView.getContext().getApplicationContext();
 	}
 
-	@ColorRes
-	private int getActiveColorId(boolean nightMode) {
-		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-	}
-
 	@Nullable
 	private Drawable getActiveIcon(@DrawableRes int icon, boolean nightMode) {
 		OsmandApplication app = getApplication();
-		return app.getUIUtilities().getIcon(icon, getActiveColorId(nightMode));
+		int color = ColorUtilities.getActiveColorId(nightMode);
+		return app.getUIUtilities().getIcon(icon, color);
 	}
 }

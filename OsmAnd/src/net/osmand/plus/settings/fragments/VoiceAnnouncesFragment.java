@@ -8,7 +8,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreferenceCompat;
+
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -20,13 +28,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.AnnouncementTimeBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreferenceCompat;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 
@@ -59,7 +60,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment implements OnPr
 		super.updateToolbar();
 		View view = getView();
 		ImageView profileIcon = view.findViewById(R.id.profile_icon);
-		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, isNightMode() ? R.color.icon_color_default_dark : R.color.icon_color_default_light));
+		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, ColorUtilities.getDefaultIconColorId(isNightMode())));
 		profileIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

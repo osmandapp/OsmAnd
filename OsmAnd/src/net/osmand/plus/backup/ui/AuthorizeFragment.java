@@ -26,7 +26,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -35,6 +34,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -432,7 +432,7 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 		SpannableString spannable = new SpannableString(text);
 		int startIndex = text.indexOf(link);
 		int endIndex = startIndex + link.length();
-		int color = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int color = ColorUtilities.getActiveColor(app, nightMode);
 		spannable.setSpan(new ForegroundColorSpan(color), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		return spannable;
 	}

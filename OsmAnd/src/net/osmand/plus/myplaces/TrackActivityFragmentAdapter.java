@@ -39,6 +39,7 @@ import net.osmand.GPXUtilities.Metadata;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PicassoUtils;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.OsmandApplication;
@@ -106,6 +107,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {
+		boolean nightMode = !app.getSettings().isLightContent();
 		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 			@Override
 			public void onScrollStateChanged(AbsListView absListView, int i) {
@@ -121,8 +123,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
 			}
 		});
-		listView.setBackgroundColor(ContextCompat.getColor(app, app.getSettings().isLightContent()
-				? R.color.activity_background_color_light : R.color.activity_background_color_dark));
+		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
 	public void onCreateView(@NonNull View view) {
@@ -459,8 +460,8 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 
 	private View createArticleCard(final Context context, String title, String content, String geoDescription, final String imageUrl, View.OnClickListener readBtnClickListener) {
 		View card = LayoutInflater.from(context).inflate(R.layout.wikivoyage_article_card, null);
-		card.findViewById(R.id.background_view).setBackgroundColor(ContextCompat.getColor(context,
-				app.getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
+		boolean nightMode = !app.getSettings().isLightContent();
+		card.findViewById(R.id.background_view).setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 
 		if (!TextUtils.isEmpty(title)) {
 			((TextView) card.findViewById(R.id.title)).setText(title);
@@ -498,11 +499,11 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	}
 
 	private View createDescriptionCard(final Context context, @NonNull final String descHtml) {
+		boolean nightMode = !app.getSettings().isLightContent();
 		String desc = Html.fromHtml(descHtml).toString().trim();
 		if (!TextUtils.isEmpty(desc)) {
 			View card = LayoutInflater.from(context).inflate(R.layout.gpx_description_card, null);
-			card.findViewById(R.id.background_view).setBackgroundColor(ContextCompat.getColor(context,
-					app.getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
+			card.findViewById(R.id.background_view).setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 			((TextView) card.findViewById(R.id.description)).setText(desc);
 			TextView readBtn = (TextView) card.findViewById(R.id.read_button);
 			readBtn.setCompoundDrawablesWithIntrinsicBounds(getReadIcon(), null, null, null);

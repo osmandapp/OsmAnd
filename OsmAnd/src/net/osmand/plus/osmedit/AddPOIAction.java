@@ -37,6 +37,7 @@ import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -343,10 +344,9 @@ public class AddPOIAction extends QuickAction {
 			}
 		});
 
-		final int colorId = isLightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
-		final int color = activity.getResources().getColor(colorId);
-		onlineDocumentationButton.setImageDrawable(activity.getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, color));
-//            poiTypeEditText.setCompoundDrawables(null, null, activity.getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_arrow_drop_down, color), null);
+		final int activeColor = ColorUtilities.getActiveColor(activity, !isLightTheme);
+		onlineDocumentationButton.setImageDrawable(activity.getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, activeColor));
+//            poiTypeEditText.setCompoundDrawables(null, null, activity.getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_arrow_drop_down, activeColor), null);
 
 //            Button addTypeButton = (Button) view.findViewById(R.id.addTypeButton);
 //            addTypeButton.setOnClickListener(new View.OnClickListener() {

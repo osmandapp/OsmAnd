@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -65,11 +66,10 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		TextView textView = holder.buttonText;
 		int innerPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		textView.setPadding(innerPadding, 0, innerPadding, 0);
-		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		if (item.equals(selectedItem) && item.isEnabled()) {
 			AndroidUtils.setBackground(holder.button, UiUtilities.createTintedDrawable(app,
-							R.drawable.bg_select_icon_group_button,
-							ContextCompat.getColor(app, activeColorResId)));
+							R.drawable.bg_select_icon_group_button, activeColor));
 			textView.setTextColor(ContextCompat.getColor(app, R.color.color_white));
 		} else {
 			if (!item.isEnabled()) {

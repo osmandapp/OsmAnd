@@ -15,6 +15,7 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SwitchPreferenceCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
@@ -97,8 +98,8 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnPref
 		String key = preference.getKey();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
 			if (SHOW_ROUTING_ALARMS_INFO.equals(key)) {
-				int colorRes = isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
-				holder.itemView.setBackgroundColor(ContextCompat.getColor(app, colorRes));
+				int color = ColorUtilities.getActivityBgColor(app, isNightMode());
+				holder.itemView.setBackgroundColor(color);
 			} else if (SCREEN_ALERTS_IMAGE.equals(key)) {
 				ImageView deviceImage = (ImageView) holder.itemView.findViewById(R.id.device_image);
 				ImageView warningIcon = (ImageView) holder.itemView.findViewById(R.id.warning_icon);

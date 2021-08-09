@@ -19,6 +19,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -120,7 +121,7 @@ public class WaypointDialogHelper {
 				String devStr = "+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
 				textDeviation.setText(devStr);
 				if (!topBar) {
-					int colorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+					int colorId = ColorUtilities.getSecondaryTextColorId(nightMode);
 					AndroidUtils.setTextSecondaryColor(activity, textDeviation, nightMode);
 					if (ps.deviationDirectionRight) {
 						textDeviation.setCompoundDrawablesWithIntrinsicBounds(

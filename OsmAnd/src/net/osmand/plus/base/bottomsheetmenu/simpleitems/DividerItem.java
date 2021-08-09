@@ -9,6 +9,7 @@ import androidx.annotation.ColorRes;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 
@@ -89,6 +90,6 @@ public class DividerItem extends BaseBottomSheetItem {
 		if (colorId != INVALID_ID) {
 			return colorId;
 		}
-		return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
+		return ColorUtilities.getDividerColorId(nightMode);
 	}
 }

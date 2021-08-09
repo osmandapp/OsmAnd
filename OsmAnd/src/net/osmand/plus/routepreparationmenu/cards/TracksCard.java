@@ -16,6 +16,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -88,7 +89,7 @@ public class TracksCard extends MapBaseCard {
 
 		int mainFontColor = getMainFontColor();
 		int descriptionColor = getSecondaryColor();
-		int dividerColor = ContextCompat.getColor(mapActivity, nightMode ? R.color.divider_color_dark : R.color.divider_color_light);
+		int dividerColor = ColorUtilities.getDividerColor(mapActivity, nightMode);
 
 		int i = 0;
 		boolean showLimitExceeds = list.size() > 4;

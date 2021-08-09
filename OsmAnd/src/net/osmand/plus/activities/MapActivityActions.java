@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -782,9 +784,8 @@ public class MapActivityActions implements DialogProvider {
 					.createItem());
 		}
 
-		int activeColorPrimaryResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.profile_list_item)
-				.setColor(app, activeColorPrimaryResId)
+				.setColor(ColorUtilities.getActiveColor(app, nightMode))
 				.setTag(PROFILES_CONTROL_BUTTON_TAG)
 				.setTitle(getString(R.string.shared_string_manage))
 				.setListener(new ItemClickListener() {
@@ -1194,11 +1195,8 @@ public class MapActivityActions implements DialogProvider {
 	protected void updateDrawerMenu() {
 		final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
-		if (nightMode) {
-			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.list_background_color_dark));
-		} else {
-			menuItemsListView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.list_background_color_light));
-		}
+		int listBgColor = ColorUtilities.getListBgColor(mapActivity, nightMode);
+		menuItemsListView.setBackgroundColor(listBgColor);
 		menuItemsListView.removeHeaderView(drawerLogoHeader);
 		Bitmap navDrawerLogo = getMyApplication().getAppCustomization().getNavDrawerLogo();
 

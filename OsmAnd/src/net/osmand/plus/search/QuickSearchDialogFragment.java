@@ -71,6 +71,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
@@ -900,6 +901,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateToolbarButton() {
+		boolean nightMode = !app.getSettings().isLightContent();
 		SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
 		if (foundPartialLocation) {
 			buttonToolbarText.setText(app.getString(R.string.advanced_coords_search).toUpperCase());
@@ -924,8 +926,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarFilter.setVisibility(filterButtonVisible ? View.VISIBLE : View.GONE);
 		if (filterButtonVisible) {
 			if (word.getResult().object instanceof PoiUIFilter) {
-				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
-						app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
+				buttonToolbarFilter.setImageDrawable(app.getUIUtilities()
+						.getIcon(R.drawable.ic_action_filter, ColorUtilities.getActiveColorId(nightMode)));
 			} else{
 				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_filter));
 			}

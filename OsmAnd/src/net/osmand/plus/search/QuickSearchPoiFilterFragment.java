@@ -37,6 +37,7 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -105,6 +106,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 
 		if (getArguments() != null) {
 			filterId = getArguments().getString(QUICK_SEARCH_POI_FILTER_ID_KEY);
@@ -147,8 +149,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		description.setText(filter.getName());
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark,
-				isLightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+		int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightTheme);
+		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, colorId);
 		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -157,8 +159,8 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 				dismiss();
 			}
 		});
-		toolbar.setBackgroundColor(ContextCompat.getColor(app, isLightTheme ? R.color.app_bar_color_light : R.color.app_bar_color_dark));
-		toolbar.setTitleTextColor(ContextCompat.getColor(app, isLightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark));
+		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, !isLightTheme));
+		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, !isLightTheme));
 
 		ImageButton moreButton = (ImageButton) view.findViewById(R.id.moreButton);
 		moreButton.setOnClickListener(new View.OnClickListener() {
@@ -213,9 +215,7 @@ public class QuickSearchPoiFilterFragment extends DialogFragment {
 		});
 
 		listView = (ListView) view.findViewById(android.R.id.list);
-		listView.setBackgroundColor(getResources().getColor(
-				app.getSettings().isLightContent() ? R.color.activity_background_color_light
-						: R.color.activity_background_color_dark));
+		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 
 		View editTextView = inflater.inflate(R.layout.poi_filter_list_item, listView, false);
 		editText = (EditText) editTextView.findViewById(R.id.editText);

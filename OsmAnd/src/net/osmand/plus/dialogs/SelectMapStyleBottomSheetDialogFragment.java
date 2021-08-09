@@ -19,6 +19,7 @@ import androidx.core.widget.NestedScrollView;
 
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -231,7 +232,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	private int getStyleTitleColor(boolean selected) {
 		int colorId = selected
 				? getActiveColorId()
-				: nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+				: ColorUtilities.getPrimaryTextColorId(nightMode);
 		return getResolvedColor(colorId);
 	}
 

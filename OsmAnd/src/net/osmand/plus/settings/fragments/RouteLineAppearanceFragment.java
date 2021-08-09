@@ -14,6 +14,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -447,8 +448,9 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
+				int listBgColor = ColorUtilities.getListBgColorId(isNightMode());
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, listBgColor);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, listBgColor);
 			}
 		}
 	}

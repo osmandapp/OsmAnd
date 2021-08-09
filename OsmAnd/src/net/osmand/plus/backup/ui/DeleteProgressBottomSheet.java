@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
@@ -69,7 +70,7 @@ public class DeleteProgressBottomSheet extends MenuBottomSheetDialogFragment imp
 		int descriptionId = deletionFinished ? R.string.backup_deleted_all_data_descr : R.string.backup_deleting_all_data_descr;
 		BaseBottomSheetItem descriptionItem = new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(descriptionId))
-				.setTitleColorId(nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)
+				.setTitleColorId(ColorUtilities.getSecondaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_title_long)
 				.create();
 		items.add(descriptionItem);

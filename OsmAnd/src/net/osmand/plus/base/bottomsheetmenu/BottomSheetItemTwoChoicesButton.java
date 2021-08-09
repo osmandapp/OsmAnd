@@ -13,14 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorRes;
-import androidx.annotation.DimenRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 
@@ -95,15 +93,11 @@ public class BottomSheetItemTwoChoicesButton extends BottomSheetItemWithCompound
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);
 		bottomBtnBgRadius = AndroidUtils.dpToPx(context, 4);
-		bottomBtnTextColor = ContextCompat.getColor(context, nightMode
-				? R.color.text_color_primary_dark
-				: R.color.text_color_primary_light);
-		activeColor = ContextCompat.getColor(context, nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light);
+		bottomBtnTextColor = ColorUtilities.getPrimaryTextColor(context, nightMode);
+		activeColor = ColorUtilities.getActiveColor(context, nightMode);
 		bottomBtnBg = new GradientDrawable();
-		bottomBtnBg.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
-		bottomBtnBg.setStroke(AndroidUtils.dpToPx(context, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
+		bottomBtnBg.setColor(ColorUtilities.getColorWithAlpha(activeColor, 0.1f));
+		bottomBtnBg.setStroke(AndroidUtils.dpToPx(context, 1), ColorUtilities.getColorWithAlpha(activeColor, 0.5f));
 
 		bottomButtons = view.findViewById(R.id.bottom_btns);
 		leftBtnContainer = view.findViewById(R.id.left_btn_container);

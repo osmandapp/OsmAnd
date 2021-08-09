@@ -24,6 +24,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -353,7 +354,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
-				return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
+				return ColorUtilities.getDividerColorId(nightMode);
 			} else {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -540,8 +541,9 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
+				int listBgColor = ColorUtilities.getListBgColorId(isNightMode());
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, listBgColor);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, listBgColor);
 			}
 		}
 	}

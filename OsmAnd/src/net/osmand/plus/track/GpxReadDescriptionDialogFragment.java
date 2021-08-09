@@ -21,6 +21,7 @@ import com.squareup.picasso.RequestCreator;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PicassoUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -238,8 +239,7 @@ public class GpxReadDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 		});
 		AndroidUiHelper.setVisibility(View.VISIBLE,
 				editBtn, view.findViewById(R.id.divider), view.findViewById(R.id.bottom_empty_space));
-		int backgroundColor = isNightMode(false) ?
-				R.color.activity_background_color_dark : R.color.activity_background_color_light;
+		int backgroundColor = ColorUtilities.getActivityBgColorId(isNightMode(false));
 		view.findViewById(R.id.root).setBackgroundResource(backgroundColor);
 	}
 

@@ -35,6 +35,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -261,9 +262,10 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		ActionBar actionBar = getMyActivity().getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 
 		if (app.getAppCustomization().showDownloadExtraActions()) {
-			int colorResId = app.getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+			int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 			MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
 			Drawable icRefresh = app.getUIUtilities().getIcon(R.drawable.ic_action_refresh_dark, colorResId);
 			item.setIcon(icRefresh);
@@ -417,7 +419,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						countView = view.findViewById(R.id.description);
 						AndroidUtils.setTextSecondaryColor(app, countView, nightMode);
 						Drawable additionalIconDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_action_update);
-						UiUtilities.tintDrawable(additionalIconDrawable, ContextCompat.getColor(app, getDefaultIconColorId(nightMode)));
+						UiUtilities.tintDrawable(additionalIconDrawable, ColorUtilities.getDefaultIconColor(app, nightMode));
 						((ImageView) view.findViewById(R.id.additional_button_icon)).setImageDrawable(additionalIconDrawable);
 						LinearLayout additionalButton = view.findViewById(R.id.additional_button);
 						TypedValue typedValue = new TypedValue();
@@ -452,10 +454,5 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	@Override
 	public List<LocalIndexInfo> getMapsToUpdate() {
 		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.mapsList, settings);
-	}
-
-	@ColorRes
-	public static int getDefaultIconColorId(boolean nightMode) {
-		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 	}
 }

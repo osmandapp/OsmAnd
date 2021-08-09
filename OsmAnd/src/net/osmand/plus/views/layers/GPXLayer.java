@@ -27,6 +27,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
@@ -385,7 +386,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					paintInnerRect.setColor(color);
 					paintInnerRect.setAlpha(179);
 
-					int contrastColor = UiUtilities.getContrastColor(app, color, false);
+					int contrastColor = ColorUtilities.getContrastColor(app, color, false);
 					paintTextIcon.setColor(contrastColor);
 					paintOuterRect.setColor(contrastColor);
 

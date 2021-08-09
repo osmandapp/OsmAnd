@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -328,7 +329,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	@ColorInt
 	protected int getItemIconColor(OsmandApplication app, T item) {
 		boolean nightMode = !app.getSettings().isLightContent();
-		int colorRes = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
 		return ContextCompat.getColor(app, colorRes);
 	}
 

@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -140,12 +141,12 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		int selectedColor;
 		if (mode != null) {
 			int color = checked ? mode.getProfileColor(nightMode) : AndroidUtils.getColorFromAttr(themedCtx, R.attr.divider_color_basic);
-			bgColor = UiUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
-			selectedColor = UiUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
+			bgColor = ColorUtilities.getColorWithAlpha(color, checked ? 0.1f : 0.5f);
+			selectedColor = ColorUtilities.getColorWithAlpha(color, checked ? 0.3f : 0.5f);
 		} else {
 			bgColor = ContextCompat.getColor(app, checked
 					? getActiveColorId(nightMode) : getSecondaryIconColorId(nightMode));
-			selectedColor = UiUtilities.getColorWithAlpha(
+			selectedColor = ColorUtilities.getColorWithAlpha(
 					ContextCompat.getColor(app, getActiveColorId(nightMode)), checked ? 0.3f : 0.5f);
 		}
 

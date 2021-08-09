@@ -24,7 +24,6 @@ import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.slider.Slider;
@@ -44,7 +43,6 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -295,7 +293,7 @@ public class ContextMenuAdapter {
 				}
 
 				Drawable selectableBg = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
-				Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.15f)), selectableBg};
+				Drawable[] layers = {new ColorDrawable(ColorUtilities.getColorWithAlpha(colorNoAlpha, 0.15f)), selectableBg};
 				LayerDrawable layerDrawable = new LayerDrawable(layers);
 
 				AndroidUtils.setBackground(convertView, layerDrawable);
@@ -329,7 +327,7 @@ public class ContextMenuAdapter {
 					desc.setText(item.getDescription());
 					boolean selectedMode = tag == PROFILES_CHOSEN_PROFILE_TAG;
 					if (selectedMode) {
-						Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.15f)), drawable};
+						Drawable[] layers = {new ColorDrawable(ColorUtilities.getColorWithAlpha(colorNoAlpha, 0.15f)), drawable};
 						drawable = new LayerDrawable(layers);
 					}
 				}
@@ -377,7 +375,7 @@ public class ContextMenuAdapter {
 
 			if (this.layoutId == R.layout.simple_list_menu_item) {
 				@ColorRes
-				int color = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+				int color = ColorUtilities.getDefaultIconColorId(!lightTheme);
 				Drawable drawable = item.getIcon() != ContextMenuItem.INVALID_ID
 						? mIconsCache.getIcon(item.getIcon(), color) : null;
 				if (drawable != null && tv != null) {
@@ -396,7 +394,7 @@ public class ContextMenuAdapter {
 					Integer color = item.getColor();
 					Drawable drawable;
 					if (color == null) {
-						int colorRes = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+						int colorRes = ColorUtilities.getDefaultIconColorId(!lightTheme);
 						colorRes = item.shouldSkipPainting() ? 0 : colorRes;
 						drawable = mIconsCache.getIcon(item.getIcon(), colorRes);
 					} else if (profileDependent) {
@@ -417,9 +415,9 @@ public class ContextMenuAdapter {
 				@ColorRes
 				int colorRes;
 				if (secondaryDrawable == R.drawable.ic_action_additional_option) {
-					colorRes = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+					colorRes = ColorUtilities.getDefaultIconColorId(!lightTheme);
 				} else {
-					colorRes = lightTheme ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+					colorRes = ColorUtilities.getDefaultIconColorId(!lightTheme);
 				}
 				Drawable drawable = mIconsCache.getIcon(item.getSecondaryIcon(), colorRes);
 				ImageView imageView = (ImageView) convertView.findViewById(R.id.secondary_icon);

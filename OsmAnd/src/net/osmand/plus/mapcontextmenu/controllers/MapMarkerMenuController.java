@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.settings.backend.OsmandPreference;
@@ -47,8 +48,9 @@ public class MapMarkerMenuController extends MenuController {
 				}
 			}
 		};
+		int activeColorId = ColorUtilities.getActiveColorId(!isLight());
 		leftTitleButtonController.caption = mapActivity.getString(mapMarker.history ? R.string.shared_string_restore : R.string.mark_passed);
-		leftTitleButtonController.startIcon = createPassedIcon(getPassedIconBgNormalColorId());
+		leftTitleButtonController.startIcon = createPassedIcon(activeColorId);
 
 		if (!mapMarker.history) {
 			rightTitleButtonController = new TitleButtonController() {
@@ -69,12 +71,8 @@ public class MapMarkerMenuController extends MenuController {
 				}
 			};
 			rightTitleButtonController.caption = mapActivity.getString(R.string.make_active);
-			rightTitleButtonController.startIcon = createShowOnTopbarIcon(getDeviceTopNormalColorId());
+			rightTitleButtonController.startIcon = createShowOnTopbarIcon(ColorUtilities.getDefaultIconColorId(!isLight()));
 		}
-	}
-
-	private int getPassedIconBgNormalColorId() {
-		return isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
 	}
 
 	@Nullable
@@ -88,10 +86,6 @@ public class MapMarkerMenuController extends MenuController {
 		} else {
 			return null;
 		}
-	}
-
-	private int getDeviceTopNormalColorId() {
-		return isLight() ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 	}
 
 	private LayerDrawable createShowOnTopbarIcon(int bgColorRes) {

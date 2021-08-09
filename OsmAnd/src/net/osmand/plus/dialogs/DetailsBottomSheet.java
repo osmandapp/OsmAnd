@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -109,14 +110,14 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		title.setTypeface(FontCache.getRobotoMedium(app));
 		title.setText(R.string.rendering_category_details);
 		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
-		title.setTextColor(nightMode ? ContextCompat.getColor(app, R.color.text_color_primary_dark) : ContextCompat.getColor(app, R.color.text_color_primary_light));
+		title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 
 		TextView description = new TextView(app);
 		description.setLineSpacing(spacing, 1.0f);
 		description.setPadding(padding, 0, padding, paddingSmall);
 		description.setText(R.string.details_dialog_decr);
 		description.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
-		description.setTextColor(nightMode ? ContextCompat.getColor(app, R.color.text_color_secondary_dark) : ContextCompat.getColor(app, R.color.text_color_secondary_light));
+		description.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		linearLayout.addView(title);
 		linearLayout.addView(description);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(linearLayout).create());

@@ -16,6 +16,7 @@ import android.view.Window;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -94,8 +95,8 @@ public class GpxEditDescriptionDialogFragment extends BaseOsmAndDialogFragment {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
 			if (Build.VERSION.SDK_INT >= 21) {
-				int statusBarColor = isNightMode(true) ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
-				window.setStatusBarColor(ContextCompat.getColor(ctx, statusBarColor));
+				int statusBarColor = ColorUtilities.getActivityBgColor(ctx, isNightMode(true));
+				window.setStatusBarColor(statusBarColor);
 			}
 		}
 		return dialog;

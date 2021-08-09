@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -107,9 +108,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 
 		ImageView text = new ImageView(activity);
 		text.setId(TEXT_ID);
-		int textColorId = systemDefaultNightMode ?
-				R.color.text_color_tertiary_dark :
-				R.color.text_color_tertiary_light;
+		int textColorId = ColorUtilities.getTertiaryTextColorId(systemDefaultNightMode);
 		if (Version.isFreeVersion(app)) {
 			if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
 				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_pro, textColorId));

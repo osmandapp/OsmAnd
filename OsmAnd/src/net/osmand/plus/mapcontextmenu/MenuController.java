@@ -30,6 +30,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -766,11 +767,11 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		}
 
 		private Drawable getDisabledIcon(@DrawableRes int iconResId) {
-			return getIcon(iconResId, isLight() ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark);
+			return getIcon(iconResId, ColorUtilities.getDefaultIconColorId(!isLight()));
 		}
 
 		private Drawable getNormalIcon(@DrawableRes int iconResId) {
-			return getIcon(iconResId, isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
+			return getIcon(iconResId, ColorUtilities.getActiveColorId(!isLight()));
 		}
 
 		public abstract void buttonPressed();

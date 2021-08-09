@@ -11,11 +11,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -92,12 +92,11 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		if (pluginIcon.getConstantState() != null) {
 			pluginIcon = pluginIcon.getConstantState().newDrawable().mutate();
 		}
-		pluginIcon = UiUtilities.tintDrawable(pluginIcon, ContextCompat.getColor(
-				context, nightMode ? R.color.icon_color_default_light : R.color.icon_color_default_dark));
+		pluginIcon = UiUtilities.tintDrawable(pluginIcon, ColorUtilities.getDefaultIconColor(app, nightMode));
 
 		BaseBottomSheetItem pluginTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(pluginTitleSpan)
-				.setTitleColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
+				.setTitleColorId(ColorUtilities.getActiveColorId(nightMode))
 				.setIcon(pluginIcon)
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.create();

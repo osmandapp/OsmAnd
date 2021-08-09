@@ -41,6 +41,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
@@ -282,7 +283,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
-				return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
+				return ColorUtilities.getDividerColorId(nightMode);
 			} else {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -299,7 +300,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 
 	public boolean isPaused() {
@@ -507,8 +508,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 		ImageView shareRoute = (ImageView) view.findViewById(R.id.share_as_gpx);
 		ImageView shareRouteFlow = (ImageView) view.findViewById(R.id.share_as_gpx_flow);
-		Drawable shareIcon = getIcon(R.drawable.ic_action_gshare_dark, nightMode ?
-				R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		Drawable shareIcon = getIcon(R.drawable.ic_action_gshare_dark, ColorUtilities.getSecondaryTextColorId(nightMode));
 		shareIcon = AndroidUtils.getDrawableForDirection(app, shareIcon);
 		shareRoute.setImageDrawable(shareIcon);
 		shareRouteFlow.setImageDrawable(shareIcon);

@@ -19,6 +19,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -227,7 +228,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
-				return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
+				return ColorUtilities.getDividerColorId(nightMode);
 			} else {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -426,16 +427,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		}
 		updateNightMode();
 
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), isNightMode(),
-				R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.toLayoutDivider), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
+		int dividerColorId = ColorUtilities.getDividerColorId(isNightMode());
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), dividerColorId);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), dividerColorId);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.toLayoutDivider), dividerColorId);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), dividerColorId);
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), dividerColorId);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), isNightMode(),
@@ -447,17 +444,17 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 		if (getTopView() != null) {
 			View topView = getTopView();
-			AndroidUtils.setBackground(ctx, topView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+			AndroidUtils.setBackground(ctx, topView, ColorUtilities.getCardAndListBackgroundColorId(isNightMode()));
 		}
 
-		int activeColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int activeColor = ContextCompat.getColor(ctx, ColorUtilities.getActiveColorId(isNightMode()));
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.from_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.via_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.to_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.map_options_route_button_title)).setTextColor(activeColor);
 
-		int mainFontColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		int mainFontColor = ColorUtilities.getPrimaryTextColor(ctx, isNightMode());
 		((TextView) mainView.findViewById(R.id.fromText)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.toText)).setTextColor(mainFontColor);

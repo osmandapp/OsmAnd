@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -25,8 +26,6 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.AndroidUtils.getPrimaryTextColorId;
-import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
@@ -62,7 +61,7 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 
 		items.add(new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.delete_updates))
-				.setTitleColorId(getPrimaryTextColorId(nightMode))
+				.setTitleColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_title)
 				.create());
 
@@ -72,7 +71,7 @@ public class LiveUpdatesClearBottomSheet extends MenuBottomSheetDialogFragment {
 
 		items.add(new LongDescriptionItem.Builder()
 				.setDescription(message)
-				.setDescriptionColorId(getSecondaryTextColorId(nightMode))
+				.setDescriptionColorId(ColorUtilities.getSecondaryTextColorId(nightMode))
 				.setDescriptionMaxLines(5)
 				.setLayoutId(R.layout.bottom_sheet_item_description_long)
 				.create());

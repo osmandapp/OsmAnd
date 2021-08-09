@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -136,8 +137,8 @@ public class QuickSearchSubCategoriesFragment extends BaseOsmAndDialogFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View root = inflater.inflate(R.layout.fragment_subcategories, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
-		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back,
-				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, color);
 		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {

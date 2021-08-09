@@ -1,8 +1,5 @@
 package net.osmand.plus.chooseplan;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getDefaultIconColorId;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -22,12 +19,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -145,8 +142,8 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		float absOffset = Math.abs(verticalOffset);
 		float totalScrollRange = appBar.getTotalScrollRange();
 
-		float alpha = UiUtilities.getProportionalAlpha(totalScrollRange * 0.25f, totalScrollRange * 0.9f, absOffset);
-		float inverseAlpha = 1.0f - UiUtilities.getProportionalAlpha(totalScrollRange * 0.5f, totalScrollRange, absOffset);
+		float alpha = ColorUtilities.getProportionalAlpha(totalScrollRange * 0.25f, totalScrollRange * 0.9f, absOffset);
+		float inverseAlpha = 1.0f - ColorUtilities.getProportionalAlpha(totalScrollRange * 0.5f, totalScrollRange, absOffset);
 
 		TextView tvTitle = mainView.findViewById(R.id.toolbar_title);
 		tvTitle.setText(getString(selectedFeature.getTitleId()));
@@ -207,8 +204,8 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		for (View view : AndroidUtils.getChildrenViews(listContainer)) {
 			OsmAndFeature feature = (OsmAndFeature) view.getTag();
 			boolean selected = feature == selectedFeature;
-			int activeColor = ContextCompat.getColor(app, getActiveColorId(nightMode));
-			int colorWithAlpha = UiUtilities.getColorWithAlpha(activeColor, 0.1f);
+			int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+			int colorWithAlpha = ColorUtilities.getColorWithAlpha(activeColor, 0.1f);
 			int bgColor = selected ? colorWithAlpha : Color.TRANSPARENT;
 
 			Drawable selectableBg = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.5f);
@@ -249,7 +246,9 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	}
 
 	private void updateContinueButton(View view, int iconId, String plan, CharSequence price, OnClickListener listener, boolean available) {
-		int colorNoAlpha = ContextCompat.getColor(app, available ? getActiveColorId(nightMode) : getDefaultIconColorId(nightMode));
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		int colorNoAlpha = available ? activeColor : defaultIconColor;
 
 		int pattern = available ? R.string.continue_with : R.string.not_available_with;
 		TextView tvTitle = view.findViewById(R.id.title);
@@ -260,7 +259,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 		String pricePattern = getString(R.string.from_with_param);
 		String description = price != null ? String.format(pricePattern, price) : "";
 		tvDescription.setText(description);
-		tvDescription.setTextColor(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.75f));
+		tvDescription.setTextColor(ColorUtilities.getColorWithAlpha(colorNoAlpha, 0.75f));
 
 		ImageView ivIcon = view.findViewById(R.id.icon);
 		ivIcon.setImageResource(iconId);

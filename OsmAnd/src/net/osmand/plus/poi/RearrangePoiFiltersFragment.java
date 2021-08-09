@@ -34,6 +34,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -318,7 +319,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 			int iconColor = getSelectedAppMode().getProfileColor(nightMode);
 			int bgColor = ContextCompat.getColor(app, nightMode ?
 					R.color.divider_color_dark : R.color.active_buttons_and_links_text_light);
-			int selectedColor = UiUtilities.getColorWithAlpha(iconColor, 0.3f);
+			int selectedColor = ColorUtilities.getColorWithAlpha(iconColor, 0.3f);
 
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 				int bgResId = R.drawable.circle_background_light;
@@ -612,7 +613,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		public void onBindViewHolder(final @NonNull RecyclerView.ViewHolder holder, int position) {
 			ListItem item = items.get(position);
 			boolean nightMode = isNightMode(app, usedOnMap);
-			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 			if (holder instanceof PoiViewHolder) {
 				PoiViewHolder h = (PoiViewHolder) holder;
 				PoiUIFilterDataObject poiInfo = (PoiUIFilterDataObject) item.value;

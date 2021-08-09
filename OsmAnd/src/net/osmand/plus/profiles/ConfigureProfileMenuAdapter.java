@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -56,9 +57,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 		this.bottomButton = !Algorithms.isEmpty(bottomButtonText);
 		this.bottomButtonText = bottomButtonText;
 		this.nightMode = nightMode;
-		int selectedIconColorRes = nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light;
+		int selectedIconColorRes = ColorUtilities.getActiveColorId(nightMode);
 		selectedIconColor = ContextCompat.getColor(app, selectedIconColorRes);
 	}
 
@@ -98,6 +97,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 	@Override
 	public void onBindViewHolder(@NonNull final ConfigureProfileViewHolder holder, int position) {
 		Object obj = items.get(position);
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		holder.dividerUp.setVisibility(View.INVISIBLE);
 		if (obj instanceof ApplicationMode) {
 			holder.dividerBottom.setVisibility(View.VISIBLE);
@@ -122,10 +122,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 			holder.descr.setVisibility(View.GONE);
 			holder.compoundButton.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
-			holder.title.setTextColor(app.getResources().getColor(
-				nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light));
+			holder.title.setTextColor(activeColor);
 			holder.title.setText(bottomButtonText);
 		}
 	}

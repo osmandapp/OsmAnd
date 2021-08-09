@@ -155,7 +155,7 @@ public class UiUtilities {
 	}
 
 	public Drawable getIcon(@DrawableRes int id, boolean light) {
-		return getDrawable(id, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
+		return getDrawable(id, ColorUtilities.getDefaultIconColorId(!light));
 	}
 
 	public Drawable getMapIcon(@DrawableRes int id, boolean light) {
@@ -175,10 +175,10 @@ public class UiUtilities {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 			Drawable bg = getSelectableDrawable(ctx);
 			if (bg != null) {
-				drawable = tintDrawable(bg, getColorWithAlpha(color, alpha));
+				drawable = tintDrawable(bg, ColorUtilities.getColorWithAlpha(color, alpha));
 			}
 		} else {
-			drawable = AndroidUtils.createPressedStateListDrawable(new ColorDrawable(Color.TRANSPARENT), new ColorDrawable(getColorWithAlpha(color, alpha)));
+			drawable = AndroidUtils.createPressedStateListDrawable(new ColorDrawable(Color.TRANSPARENT), new ColorDrawable(ColorUtilities.getColorWithAlpha(color, alpha)));
 		}
 		return drawable;
 	}
@@ -200,83 +200,6 @@ public class UiUtilities {
 		}
 
 		return coloredDrawable;
-	}
-
-	@ColorRes
-	public static int getDefaultColorRes(Context context) {
-		final OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-		boolean light = app.getSettings().isLightContent();
-		return light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
-	}
-
-	@ColorInt
-	public static int getContrastColor(Context context, @ColorInt int color, boolean transparent) {
-		// Counting the perceptive luminance - human eye favors green color...
-		double luminance = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255;
-		return luminance < 0.5 ? transparent ? ContextCompat.getColor(context, R.color.color_black_transparent) : Color.BLACK : Color.WHITE;
-	}
-
-	public static float getProportionalAlpha(float startValue,
-	                                         float endValue,
-	                                         float currentValue) {
-		currentValue = Math.min(currentValue, endValue);
-		float proportion = (endValue - startValue) / 100;
-		if (currentValue > startValue) {
-			float currentInRange = currentValue - startValue;
-			return 1.0f - (currentInRange / proportion) / 100;
-		}
-		return 1.0f;
-	}
-
-	@ColorInt
-	public static int getProportionalColorMix(@ColorInt int startColor,
-	                                          @ColorInt int endColor,
-	                                          float startValue,
-	                                          float endValue,
-	                                          float currentValue) {
-		currentValue = Math.min(currentValue, endValue);
-		float proportion = (endValue - startValue) / 100;
-		if (currentValue > startValue) {
-			float currentInRange = currentValue - startValue;
-			float amount = (currentInRange / proportion) / 100;
-			return UiUtilities.mixTwoColors(endColor, startColor, amount);
-		}
-		return startColor;
-	}
-
-	@ColorInt
-	public static int getColorWithAlpha(@ColorInt int color, float ratio) {
-		int alpha = Math.round(Color.alpha(color) * ratio);
-		int r = Color.red(color);
-		int g = Color.green(color);
-		int b = Color.blue(color);
-		return Color.argb(alpha, r, g, b);
-	}
-
-	@ColorInt
-	public static int removeAlpha(@ColorInt int color) {
-		return Color.rgb(Color.red(color), Color.green(color), Color.blue(color));
-	}
-
-	@ColorInt
-	public static int mixTwoColors(@ColorInt int color1, @ColorInt int color2, float amount) {
-		final byte ALPHA_CHANNEL = 24;
-		final byte RED_CHANNEL   = 16;
-		final byte GREEN_CHANNEL =  8;
-		final byte BLUE_CHANNEL  =  0;
-
-		final float inverseAmount = 1.0f - amount;
-
-		int a = ((int)(((float)(color1 >> ALPHA_CHANNEL & 0xff )*amount) +
-				((float)(color2 >> ALPHA_CHANNEL & 0xff )*inverseAmount))) & 0xff;
-		int r = ((int)(((float)(color1 >> RED_CHANNEL & 0xff )*amount) +
-				((float)(color2 >> RED_CHANNEL & 0xff )*inverseAmount))) & 0xff;
-		int g = ((int)(((float)(color1 >> GREEN_CHANNEL & 0xff )*amount) +
-				((float)(color2 >> GREEN_CHANNEL & 0xff )*inverseAmount))) & 0xff;
-		int b = ((int)(((float)(color1 & 0xff )*amount) +
-				((float)(color2 & 0xff )*inverseAmount))) & 0xff;
-
-		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
 	}
 
 	public UpdateLocationViewCache getUpdateLocationViewCache() {
@@ -429,12 +352,11 @@ public class UiUtilities {
 		TextView tvMessage = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_text);
 		TextView tvAction = (TextView) view.findViewById(com.google.android.material.R.id.snackbar_action);
 		if (messageColor == null) {
-			messageColor = nightMode ? R.color.active_buttons_and_links_text_dark
-					: R.color.active_buttons_and_links_text_light;
+			messageColor = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		}
 		tvMessage.setTextColor(ContextCompat.getColor(ctx, messageColor));
 		if (actionColor == null) {
-			actionColor = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			actionColor = ColorUtilities.getActiveColorId(nightMode);
 		}
 		tvAction.setTextColor(ContextCompat.getColor(ctx, actionColor));
 		if (maxLines != null) {
@@ -481,12 +403,8 @@ public class UiUtilities {
 
 	public static void updateCustomRadioButtons(Context app, View buttonsView, boolean nightMode,
 	                                            CustomRadioButtonType buttonType) {
-		int activeColor = ContextCompat.getColor(app, nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light);
-		int textColor = ContextCompat.getColor(app, nightMode
-				? R.color.text_color_primary_dark
-				: R.color.text_color_primary_light);
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int textColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int radius = AndroidUtils.dpToPx(app, 4);
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
 
@@ -495,8 +413,8 @@ public class UiUtilities {
 		View endButtonContainer = buttonsView.findViewById(R.id.right_button_container);
 
 		GradientDrawable background = new GradientDrawable();
-		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
-		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
+		background.setColor(ColorUtilities.getColorWithAlpha(activeColor, 0.1f));
+		background.setStroke(AndroidUtils.dpToPx(app, 1), ColorUtilities.getColorWithAlpha(activeColor, 0.5f));
 		if (buttonType == CustomRadioButtonType.START) {
 			if (isLayoutRtl) {
 				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
@@ -557,7 +475,7 @@ public class UiUtilities {
 	}
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
-		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+		int inactiveColor = ColorUtilities.getDefaultIconColor(ctx, nightMode);
 		int[][] states = new int[][]{
 				new int[]{-android.R.attr.state_checked},
 				new int[]{android.R.attr.state_checked}
@@ -572,7 +490,7 @@ public class UiUtilities {
         }
 	    Context ctx = compoundButton.getContext();
 		int inactiveColorPrimary = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
-		int inactiveColorSecondary = getColorWithAlpha(inactiveColorPrimary, 0.45f);
+		int inactiveColorSecondary = ColorUtilities.getColorWithAlpha(inactiveColorPrimary, 0.45f);
 		setupCompoundButton(compoundButton, activeColor, inactiveColorPrimary, inactiveColorSecondary);
 	}
 
@@ -581,9 +499,9 @@ public class UiUtilities {
 			return;
 		}
 		OsmandApplication app = (OsmandApplication) compoundButton.getContext().getApplicationContext();
-		@ColorInt int activeColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		@ColorInt int inactiveColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
-		@ColorInt int inactiveColorSecondary = getColorWithAlpha(inactiveColorPrimary, 0.45f);
+		@ColorInt int inactiveColorSecondary = ColorUtilities.getColorWithAlpha(inactiveColorPrimary, 0.45f);
 		switch (type) {
 			case PROFILE_DEPENDENT:
 				ApplicationMode appMode = app.getSettings().getApplicationMode();
@@ -592,7 +510,7 @@ public class UiUtilities {
 			case TOOLBAR:
 				activeColor = Color.WHITE;
 				inactiveColorPrimary = activeColor;
-				inactiveColorSecondary = UiUtilities.getColorWithAlpha(Color.BLACK, 0.25f);
+				inactiveColorSecondary = ColorUtilities.getColorWithAlpha(Color.BLACK, 0.25f);
 				break;
 		}
 		setupCompoundButton(compoundButton, activeColor, inactiveColorPrimary, inactiveColorSecondary);
@@ -665,9 +583,9 @@ public class UiUtilities {
 		if (activeColor == null) {
 			activeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.active_color_basic);
 		}
-		int activeDisableColor = getColorWithAlpha(activeColor, 0.25f);
+		int activeDisableColor = ColorUtilities.getColorWithAlpha(activeColor, 0.25f);
 		ColorStateList activeCsl = new ColorStateList(states, new int[] {activeColor, activeDisableColor});
-		int inactiveColor = getColorWithAlpha(activeColor, 0.5f);
+		int inactiveColor = ColorUtilities.getColorWithAlpha(activeColor, 0.5f);
 		int inactiveDisableColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
 		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {inactiveColor, inactiveDisableColor});
 		slider.setTrackActiveTintList(activeCsl);
@@ -676,7 +594,7 @@ public class UiUtilities {
 		slider.setThumbTintList(activeCsl);
 		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
 		int ticksColor = showTicks ?
-				(nightMode ? colorBlack : getColorWithAlpha(colorBlack, 0.5f)) :
+				(nightMode ? colorBlack : ColorUtilities.getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;
 		slider.setTickTintList(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
 
@@ -706,7 +624,7 @@ public class UiUtilities {
 		if (activeColor == null) {
 			activeColor = AndroidUtils.getColorFromAttr(ctx, R.attr.active_color_basic);
 		}
-		int activeDisableColor = getColorWithAlpha(activeColor, 0.25f);
+		int activeDisableColor = ColorUtilities.getColorWithAlpha(activeColor, 0.25f);
 		ColorStateList activeCsl = new ColorStateList(states, new int[] {activeColor, activeDisableColor});
 		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
 		ColorStateList inactiveCsl = new ColorStateList(states, new int[] {activeDisableColor, inactiveColor});
@@ -716,7 +634,7 @@ public class UiUtilities {
 		slider.setThumbTintList(activeCsl);
 		int colorBlack = ContextCompat.getColor(ctx, R.color.color_black);
 		int ticksColor = showTicks ?
-				(nightMode ? colorBlack : getColorWithAlpha(colorBlack, 0.5f)) :
+				(nightMode ? colorBlack : ColorUtilities.getColorWithAlpha(colorBlack, 0.5f)) :
 				Color.TRANSPARENT;
 		slider.setTickTintList(new ColorStateList(states, new int[] {ticksColor, ticksColor}));
 

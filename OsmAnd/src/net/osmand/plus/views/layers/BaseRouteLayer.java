@@ -11,8 +11,8 @@ import android.graphics.drawable.Drawable;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
@@ -115,7 +115,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		}
 
 		if (routeLineColor != customColor) {
-			directionArrowsColor = UiUtilities.getContrastColor(view.getContext(), customColor, false);
+			directionArrowsColor = ColorUtilities.getContrastColor(view.getContext(), customColor, false);
 		}
 		routeLineColor = customColor;
 	}

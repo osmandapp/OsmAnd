@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -98,15 +100,14 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		Context ctx = requireContext();
 		View root = mInflater.inflate(R.layout.fragment_ui_customization, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
 		TextView toolbarTitle = root.findViewById(R.id.toolbar_title);
 		TextView toolbarSubTitle = root.findViewById(R.id.toolbar_subtitle);
 		ImageButton toolbarButton = root.findViewById(R.id.close_button);
 		RecyclerView recyclerView = root.findViewById(R.id.list);
-		toolbar.setBackgroundColor(nightMode
-				? getResources().getColor(R.color.list_background_color_dark)
-				: getResources().getColor(R.color.list_background_color_light));
+		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(ctx, nightMode));
 		toolbarTitle.setTextColor(nightMode
 				? getResources().getColor(R.color.text_color_primary_dark)
 				: getResources().getColor(R.color.list_background_color_dark));
@@ -268,9 +269,7 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 				spannableString.setSpan(clickableSpan, startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				textView.setText(spannableString);
 				textView.setMovementMethod(LinkMovementMethod.getInstance());
-				textView.setHighlightColor(nightMode
-						? getResources().getColor(R.color.active_color_primary_dark)
-						: getResources().getColor(R.color.active_color_primary_light));
+				textView.setHighlightColor(ColorUtilities.getActiveColor(app, nightMode));
 			} catch (RuntimeException e) {
 				LOG.error("Error trying to find index of " + clickableText + " " + e);
 			}

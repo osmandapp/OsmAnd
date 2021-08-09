@@ -28,6 +28,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
@@ -600,8 +601,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 														  final ValueHolder<Integer> v,
 														  final boolean showTrackSelection, boolean nightMode) {
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		int textColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
-		int textColorSecondary = ContextCompat.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		int textColorPrimary = ColorUtilities.getPrimaryTextColor(app, nightMode);
+		int textColorSecondary = ColorUtilities.getSecondaryTextColor(app, nightMode);
 		int selectedModeColor = appMode.getProfileColor(nightMode);
 		LinearLayout ll = new LinearLayout(uiCtx);
 		final int dp24 = AndroidUtils.dpToPx(uiCtx, 24f);
@@ -683,7 +684,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(uiCtx, 1f));
 			AndroidUtils.setMargins(lp, 0, dp8 * 2, 0, 0);
 			divider.setLayoutParams(lp);
-			divider.setBackgroundColor(uiCtx.getResources().getColor(nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
+			divider.setBackgroundColor(ColorUtilities.getDividerColor(uiCtx, nightMode));
 			ll.addView(divider);
 
 			final AppCompatCheckBox cb = new AppCompatCheckBox(uiCtx);

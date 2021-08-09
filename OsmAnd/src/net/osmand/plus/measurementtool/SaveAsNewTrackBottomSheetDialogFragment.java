@@ -29,6 +29,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -106,8 +107,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		nameTextBox = editNameView.findViewById(R.id.name_text_box);
 		nameTextBox.setBoxBackgroundColorResource(highlightColorId);
 		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_file_name));
-		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
-				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
+		ColorStateList colorStateList = ColorStateList.valueOf(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
 		TextInputEditText nameText = editNameView.findViewById(R.id.name_edit_text);
 		nameText.setText(fileName);
@@ -171,7 +171,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin)));
 		}
 
-		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 
 		if (showSimplifiedButton) {
 			final BottomSheetItemWithCompoundButton[] simplifiedTrackItem = new BottomSheetItemWithCompoundButton[1];
@@ -413,7 +413,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@Override
 	protected int getBgColorId() {
-		return nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light;
+		return ColorUtilities.getActivityBgColorId(nightMode);
 	}
 
 	@Override

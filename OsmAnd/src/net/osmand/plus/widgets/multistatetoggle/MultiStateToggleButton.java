@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -111,12 +112,14 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 	}
 
 	public void updateView(boolean isEnabled) {
-		int activeColor = ContextCompat.getColor(app, nightMode
-				? isEnabled ? R.color.active_color_primary_dark : R.color.icon_color_default_dark
-				: isEnabled ? R.color.active_color_primary_light : R.color.icon_color_default_light);
-		int textColor = ContextCompat.getColor(app, nightMode
-				? isEnabled ? R.color.text_color_primary_dark : R.color.text_color_secondary_dark
-				: isEnabled ? R.color.text_color_primary_light : R.color.text_color_secondary_light);
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		int activatedColor = isEnabled ? activeColor : defaultColor;
+
+		int textColorPrimary = ColorUtilities.getPrimaryTextColor(app, nightMode);
+		int textColorSecondary = ColorUtilities.getSecondaryTextColor(app, nightMode);
+		int textColor = isEnabled ? textColorPrimary : textColorSecondary;
+
 		int radius = AndroidUtils.dpToPx(app, 4);
 		float[] leftBtnRadii = new float[]{radius, radius, 0, 0, 0, 0, radius, radius};
 		float[] rightBtnRadii = new float[]{0, 0, radius, radius, radius, radius, 0, 0};
@@ -124,8 +127,8 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
 
 		GradientDrawable background = new GradientDrawable();
-		background.setColor(UiUtilities.getColorWithAlpha(activeColor, 0.1f));
-		background.setStroke(AndroidUtils.dpToPx(app, 1), UiUtilities.getColorWithAlpha(activeColor, 0.5f));
+		background.setColor(ColorUtilities.getColorWithAlpha(activatedColor, 0.1f));
+		background.setStroke(AndroidUtils.dpToPx(app, 1), ColorUtilities.getColorWithAlpha(activatedColor, 0.5f));
 
 		showAllDividers();
 		for (int i = 0; i < items.size(); i++) {
@@ -147,7 +150,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 				updateItemView(container, item, textColor);
 			} else {
 				container.setBackgroundColor(Color.TRANSPARENT);
-				updateItemView(container, item, activeColor);
+				updateItemView(container, item, activatedColor);
 			}
 		}
 	}
