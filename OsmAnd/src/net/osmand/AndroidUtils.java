@@ -197,7 +197,7 @@ public class AndroidUtils {
 		}
 	}
 
-	public static void startActivityForResultIfSave(@NonNull Activity activity, @NonNull Intent intent,
+	public static void startActivityForResultIfSafe(@NonNull Activity activity, @NonNull Intent intent,
 	                                                int requestCode) {
 		if (isIntentSafe(activity, intent)) {
 			activity.startActivityForResult(intent, requestCode);

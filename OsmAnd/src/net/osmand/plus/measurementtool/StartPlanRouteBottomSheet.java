@@ -1,7 +1,6 @@
 package net.osmand.plus.measurementtool;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -159,7 +158,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 		Intent intent = ImportHelper.getImportTrackIntent();
 		Activity activity = getActivity();
 		if (activity != null) {
-			AndroidUtils.startActivityForResultIfSave(activity, intent, OPEN_GPX_DOCUMENT_REQUEST);
+			AndroidUtils.startActivityForResultIfSafe(activity, intent, OPEN_GPX_DOCUMENT_REQUEST);
 		}
 	}
 

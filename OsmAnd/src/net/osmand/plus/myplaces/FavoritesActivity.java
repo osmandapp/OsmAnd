@@ -1,7 +1,6 @@
 package net.osmand.plus.myplaces;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -107,12 +106,12 @@ public class FavoritesActivity extends TabActivity {
 
 	public void addTrack() {
 		Intent intent = ImportHelper.getImportTrackIntent();
-		AndroidUtils.startActivityForResultIfSave(this, intent, OPEN_GPX_DOCUMENT_REQUEST);
+		AndroidUtils.startActivityForResultIfSafe(this, intent, OPEN_GPX_DOCUMENT_REQUEST);
 	}
 
 	public void importFavourites() {
 		Intent intent = ImportHelper.getImportTrackIntent();
-		AndroidUtils.startActivityForResultIfSave(this, intent, IMPORT_FAVOURITES_REQUEST);
+		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FAVOURITES_REQUEST);
 	}
 
 	@Override

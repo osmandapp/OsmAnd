@@ -1,7 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -477,7 +476,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	public void importTrack() {
 		Intent intent = ImportHelper.getImportTrackIntent();
 		if (getActivity() != null) {
-			AndroidUtils.startActivityForResultIfSave(getActivity(), intent, ImportHelper.IMPORT_FILE_REQUEST);
+			AndroidUtils.startActivityForResultIfSafe(getActivity(), intent, ImportHelper.IMPORT_FILE_REQUEST);
 		}
 	}
 

@@ -912,7 +912,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		// start the image capture Intent
-		AndroidUtils.startActivityForResultIfSave(mapActivity, intent, 105);
+		AndroidUtils.startActivityForResultIfSafe(mapActivity, intent, 105);
 	}
 
 	public void captureVideoExternal(double lat, double lon, final MapActivity mapActivity) {
@@ -925,7 +925,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 		intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // set the video image quality to high
 		// start the video capture Intent
-		AndroidUtils.startActivityForResultIfSave(mapActivity, intent, 205);
+		AndroidUtils.startActivityForResultIfSafe(mapActivity, intent, 205);
 	}
 
 	@Override
@@ -1591,7 +1591,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 		takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 		try {
-			AndroidUtils.startActivityForResultIfSave(mapActivity, takePictureIntent, 205);
+			AndroidUtils.startActivityForResultIfSafe(mapActivity, takePictureIntent, 205);
 		} catch (Exception e) {
 			log.error("Error taking a picture ", e);
 			Toast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
