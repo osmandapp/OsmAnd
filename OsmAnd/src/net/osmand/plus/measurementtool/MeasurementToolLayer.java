@@ -74,6 +74,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
 
+	private final Path multiProfilePath = new Path();
+	private final PathMeasure multiProfilePathMeasure = new PathMeasure();
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
@@ -166,12 +169,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	private int getPointIdxByProfileIconOnMap(PointF point, RotatedTileBox tileBox) {
-		double selectionRadius = view.getResources().getDimension(R.dimen.measurement_tool_select_radius);
+		multiProfilePath.reset();
+		multiProfilePathMeasure.setPath(path, false);
 		Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = editingCtx.getRoadSegmentData();
 		List<WptPt> points = editingCtx.getPoints();
-		Path path = new Path();
-		PathMeasure pathMeasure = new PathMeasure();
 
+		double minDist = view.getResources().getDimension(R.dimen.measurement_tool_select_radius);
+		int indexOfMinDist = -1;
 		for (int i = 0; i < points.size() - 1; i++) {
 			WptPt currentPoint = points.get(i);
 			WptPt nextPoint = points.get(i + 1);
@@ -182,16 +186,17 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			List<LatLon> routeBetweenPoints = MultiProfileGeometryWay.getRoutePoints(
 					currentPoint, nextPoint, roadSegmentData);
 			PointF profileIconPos = MultiProfileGeometryWay.getIconCenter(tileBox, routeBetweenPoints,
-					path, pathMeasure);
+					path, multiProfilePathMeasure);
 			if (profileIconPos != null) {
 				double dist = MapUtils.getSqrtDistance(point.x, point.y, profileIconPos.x, profileIconPos.y);
-				if (dist < selectionRadius) {
-					return i;
+				if (dist < minDist) {
+					indexOfMinDist = i;
+					minDist = dist;
 				}
 			}
 		}
 
-		return -1;
+		return indexOfMinDist;
 	}
 
 	@Override
