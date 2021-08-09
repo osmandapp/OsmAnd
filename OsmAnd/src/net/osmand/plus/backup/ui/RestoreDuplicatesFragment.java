@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.ImportBackupTask;
@@ -21,11 +22,14 @@ import net.osmand.plus.settings.fragments.FileImportDuplicatesFragment;
 import net.osmand.plus.settings.fragments.ImportDuplicatesFragment;
 import net.osmand.plus.settings.fragments.ImportSettingsFragment;
 
+import org.apache.commons.logging.Log;
+
 import java.util.List;
 
 public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 
 	public static final String TAG = FileImportDuplicatesFragment.class.getSimpleName();
+	public static final Log LOG = PlatformUtil.getLog(RestoreDuplicatesFragment.class);
 
 	private NetworkSettingsHelper settingsHelper;
 
@@ -61,8 +65,12 @@ public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 		if (settingsItems != null) {
 			Fragment target = getTargetFragment();
 			if (target instanceof ImportSettingsFragment) {
-				ImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
-				settingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, false, importListener);
+				try {
+					ImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
+					settingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, false, importListener);
+				} catch (IllegalArgumentException e) {
+					LOG.error(e.getMessage(), e);
+				}
 			}
 		}
 	}

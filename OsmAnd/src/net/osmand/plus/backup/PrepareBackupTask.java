@@ -5,6 +5,7 @@ import static net.osmand.plus.backup.NetworkSettingsHelper.PREPARE_BACKUP_KEY;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmandApplication;
@@ -12,12 +13,16 @@ import net.osmand.plus.backup.BackupListeners.OnCollectLocalFilesListener;
 import net.osmand.plus.backup.PrepareBackupResult.RemoteFilesType;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 public class PrepareBackupTask {
+
+	private static final Log log = PlatformUtil.getLog(PrepareBackupTask.class);
 
 	private final OsmandApplication app;
 	private final BackupHelper backupHelper;
@@ -156,16 +161,25 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectRemoteFiles() {
-		app.getNetworkSettingsHelper().collectSettings(PREPARE_BACKUP_KEY, false, (succeed, empty, items, remoteFiles) -> {
-					if (succeed) {
-						backup.setSettingsItems(items);
-						backup.setRemoteFiles(remoteFiles);
-					} else {
-						onError("Download remote items error");
+		try {
+			app.getNetworkSettingsHelper().collectSettings(PREPARE_BACKUP_KEY, false,
+					(succeed, empty, items, remoteFiles) -> {
+						if (succeed) {
+							backup.setSettingsItems(items);
+							backup.setRemoteFiles(remoteFiles);
+						} else {
+							onError("Download remote items error");
+						}
+						onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
 					}
-					onTaskFinished(TaskType.COLLECT_REMOTE_FILES);
-				}
-		);
+			);
+		} catch (IllegalArgumentException e) {
+			String message = e.getMessage();
+			if (message != null) {
+				onError(message);
+			}
+			log.error(message, e);
+		}
 	}
 
 	private void doGenerateBackupInfo() {

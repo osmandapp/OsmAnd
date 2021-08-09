@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -22,9 +23,13 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
+import org.apache.commons.logging.Log;
+
 import java.util.Collections;
 
 public class ConflictViewHolder extends ItemViewHolder {
+
+	private static final Log log = PlatformUtil.getLog(ConflictViewHolder.class);
 
 	private final View serverButton;
 	private final View localVersionButton;
@@ -47,13 +52,21 @@ public class ConflictViewHolder extends ItemViewHolder {
 		updateButtonsState(settingsHelper, fileName);
 
 		localVersionButton.setOnClickListener(v -> {
-			settingsHelper.exportSettings(fileName, exportListener, item);
+			try {
+				settingsHelper.exportSettings(fileName, exportListener, item);
+			} catch (IllegalArgumentException e) {
+				log.error(e.getMessage(), e);
+			}
 			updateButtonsState(settingsHelper, fileName);
 		});
 		serverButton.setOnClickListener(v -> {
-			SettingsItem settingsItem = pair.second.item;
-			settingsItem.setShouldReplace(true);
-			settingsHelper.importSettings(fileName, Collections.singletonList(settingsItem), true, importListener);
+			try {
+				SettingsItem settingsItem = pair.second.item;
+				settingsItem.setShouldReplace(true);
+				settingsHelper.importSettings(fileName, Collections.singletonList(settingsItem), true, importListener);
+			} catch (IllegalArgumentException e) {
+				log.error(e.getMessage(), e);
+			}
 			updateButtonsState(settingsHelper, fileName);
 		});
 		AndroidUiHelper.updateVisibility(serverButton, true);

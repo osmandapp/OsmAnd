@@ -114,13 +114,6 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	void finishExport(@Nullable BackupExportListener listener, @NonNull List<SettingsItem> items) {
-		String error = collectFormattedWarnings(items);
-		if (listener != null) {
-			listener.onBackupExportFinished(error);
-		}
-	}
-
 	private String collectFormattedWarnings(@NonNull List<SettingsItem> items) {
 		List<String> warnings = new ArrayList<>();
 		for (SettingsItem item : items) {
@@ -134,7 +127,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	public void collectSettings(@NonNull String key, boolean readData,
-								@Nullable BackupCollectListener listener) {
+								@Nullable BackupCollectListener listener) throws IllegalStateException {
 		if (!importAsyncTasks.containsKey(key)) {
 			ImportBackupTask importTask = new ImportBackupTask(key, this, listener, readData);
 			importAsyncTasks.put(key, importTask);
@@ -147,7 +140,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void checkDuplicates(@NonNull String key,
 								@NonNull List<SettingsItem> items,
 								@NonNull List<SettingsItem> selectedItems,
-								CheckDuplicatesListener listener) {
+								CheckDuplicatesListener listener) throws IllegalStateException {
 		if (!importAsyncTasks.containsKey(key)) {
 			ImportBackupTask importTask = new ImportBackupTask(key, this, items, selectedItems, listener);
 			importAsyncTasks.put(key, importTask);
@@ -160,7 +153,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void importSettings(@NonNull String key,
 							   @NonNull List<SettingsItem> items,
 							   boolean forceReadData,
-							   @Nullable ImportListener listener) {
+							   @Nullable ImportListener listener) throws IllegalStateException {
 		if (!importAsyncTasks.containsKey(key)) {
 			ImportBackupTask importTask = new ImportBackupTask(key, this, items, listener, forceReadData);
 			importAsyncTasks.put(key, importTask);
@@ -173,7 +166,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void exportSettings(@NonNull String key,
 							   @NonNull List<SettingsItem> items,
 							   @NonNull List<SettingsItem> itemsToDelete,
-							   @Nullable BackupExportListener listener) {
+							   @Nullable BackupExportListener listener) throws IllegalStateException {
 		if (!exportAsyncTasks.containsKey(key)) {
 			ExportBackupTask exportTask = new ExportBackupTask(key, this, items, itemsToDelete, listener);
 			exportAsyncTasks.put(key, exportTask);
@@ -184,7 +177,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	public void exportSettings(@NonNull String key, @Nullable BackupExportListener listener,
-							   @NonNull SettingsItem... items) {
+							   @NonNull SettingsItem... items) throws IllegalStateException {
 		exportSettings(key, new ArrayList<>(Arrays.asList(items)), Collections.emptyList(), listener);
 	}
 }

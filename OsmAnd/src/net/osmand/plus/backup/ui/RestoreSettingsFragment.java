@@ -62,7 +62,11 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 			if (duplicates == null) {
 				importTask.setDuplicatesListener(getDuplicatesListener());
 			} else if (duplicates.isEmpty() && selectedItems != null) {
-				settingsHelper.importSettings(RESTORE_ITEMS_KEY, selectedItems, false, getImportListener());
+				try {
+					settingsHelper.importSettings(RESTORE_ITEMS_KEY, selectedItems, false, getImportListener());
+				} catch (IllegalArgumentException e) {
+					LOG.error(e.getMessage(), e);
+				}
 			}
 		}
 	}
@@ -114,7 +118,11 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 			if (isAdded()) {
 				updateUi(R.string.shared_string_restore, R.string.receiving_data_from_server);
 			}
-			settingsHelper.importSettings(RESTORE_ITEMS_KEY, items, false, getImportListener());
+			try {
+				settingsHelper.importSettings(RESTORE_ITEMS_KEY, items, false, getImportListener());
+			} catch (IllegalArgumentException e) {
+				LOG.error(e.getMessage(), e);
+			}
 		} else if (fragmentManager != null && !isStateSaved()) {
 			RestoreDuplicatesFragment.showInstance(fragmentManager, duplicates, items, this);
 		}
@@ -132,10 +140,14 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 	}
 
 	private void importItems() {
-		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
 		if (settingsItems != null) {
-			duplicateStartTime = System.currentTimeMillis();
-			settingsHelper.checkDuplicates(RESTORE_ITEMS_KEY, settingsItems, selectedItems, getDuplicatesListener());
+			try {
+				duplicateStartTime = System.currentTimeMillis();
+				List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
+				settingsHelper.checkDuplicates(RESTORE_ITEMS_KEY, settingsItems, selectedItems, getDuplicatesListener());
+			} catch (IllegalArgumentException e) {
+				LOG.error(e.getMessage(), e);
+			}
 		}
 		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
 	}
@@ -157,7 +169,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 	}
 
 	private void collectAndReadSettings() {
-		settingsHelper.collectSettings(RESTORE_ITEMS_KEY, true, new BackupCollectListener() {
+		BackupCollectListener collectListener = new BackupCollectListener() {
 
 			@Nullable
 			private SettingsItem getRestoreItem(@NonNull List<SettingsItem> items, @NonNull RemoteFile remoteFile) {
@@ -195,7 +207,12 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 					}
 				}
 			}
-		});
+		};
+		try {
+			settingsHelper.collectSettings(RESTORE_ITEMS_KEY, true, collectListener);
+		} catch (IllegalArgumentException e) {
+			LOG.error(e.getMessage(), e);
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
