@@ -601,7 +601,7 @@
     <string name="no_fav_to_save">Nu există puncte Favorite de salvat</string>
     <string name="shared_string_import">Importă</string>
     <string name="error_occurred_loading_gpx">Nu s-a putut încărca GPX.</string>
-    <string name="send_report">Trimite raport de eroare</string>
+    <string name="send_report">Trimiteți raportul</string>
     <string name="none_region_found">Nu a putut găsi nicio hartă descărcată pe cardul de memorie.</string>
     <string name="poi_namefinder_query_empty">Tastați pentru a găsi un POI</string>
     <string name="any_poi">Oricare</string>
@@ -825,8 +825,8 @@
     <string name="context_menu_item_create_poi">Creează POI</string>
     <string name="shared_string_yes">Da</string>
     <string name="shared_string_cancel">Anulați</string>
-    <string name="shared_string_apply">Aplică</string>
-    <string name="shared_string_add">Adaugă</string>
+    <string name="shared_string_apply">Aplicați</string>
+    <string name="shared_string_add">Adăugați</string>
     <string name="shared_string_no">Nu</string>
     <string name="add_favorite_dialog_top_text">Introduceți numele Favorit</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorite</string>
@@ -1422,7 +1422,7 @@
     <string name="read_more">Citește mai multe</string>
     <string name="whats_new">Ce-i nou în</string>
     <string name="rendering_attr_hideProposed_name">Obiecte propuse</string>
-    <string name="shared_string_update">Actualizează</string>
+    <string name="shared_string_update">Actualizare</string>
     <string name="shared_string_upload">Încarcă (upload)</string>
     <string name="osm_edit_created_poi">Punct de interes OSM creat</string>
     <string name="world_map_download_descr">Harta de bază mondială (care acoperă întreaga lume la un nivel de zoom redus) lipsește sau este depășită. Vă rugăm să luați în considerare posibilitatea de a-l descărca pentru o imagine de ansamblu la nivel mondial.</string>
@@ -1602,7 +1602,7 @@
     <string name="clear_updates_proposition_message">Eliminați actualizările descărcate și reveniți la harta originală</string>
     <string name="add_time_span">Adaugă intervalul de timp</string>
     <string name="road_blocked">Drum blocat</string>
-    <string name="shared_string_select">Selectează</string>
+    <string name="shared_string_select">Selectați</string>
     <string name="switch_start_finish">Inversați punctul de plecare &amp; destinația</string>
     <string name="rendering_attr_hideIcons_name">Pictograme POI</string>
     <string name="delay_to_start_navigation_descr">Specifică timpul de așteptare pentru a rămâne pe ecran planificarea traseului.</string>
@@ -1629,14 +1629,14 @@
     <string name="general_settings_2">Setări globale</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_do_not_use">Nu folosiți</string>
-    <string name="shared_string_enable">Permite</string>
+    <string name="shared_string_enable">Activează</string>
     <string name="shared_string_disable">Dezactiv</string>
     <string name="shared_string_enabled">Activat</string>
     <string name="shared_string_disabled">Dezactivat</string>
     <string name="shared_string_deselect">Deselectați</string>
     <string name="shared_string_deselect_all">Deselect tot</string>
     <string name="shared_string_share">Distribuiți</string>
-    <string name="shared_string_export">Export</string>
+    <string name="shared_string_export">Exportați</string>
     <string name="shared_string_unexpected_error">Eroare neașteptată</string>
     <string name="shared_string_action_template">Acțiunea {0}</string>
     <string name="shared_string_collapse">Colapsați</string>
@@ -1948,7 +1948,7 @@
     <string name="route_altitude">Elevație rută</string>
     <string name="altitude_descent">Coborâre</string>
     <string name="altitude_ascent">Urcare</string>
-    <string name="average_altitude">Altitudine medie</string>
+    <string name="average_altitude">Altitudinea medie</string>
     <string name="rendering_value_medium_w_name">Mediu</string>
     <string name="rendering_attr_hideWaterPolygons_description">Apă</string>
     <string name="rendering_attr_hideWaterPolygons_name">Ascunde apa</string>
@@ -2444,7 +2444,7 @@
     <string name="configure_profile">Configurează profilul</string>
     <string name="switch_profile">Schimbă profilul</string>
     <string name="application_profile_changed">Profilul aplicației s-a modificat la \"%s\"</string>
-    <string name="logcat_buffer">Tampon logcat</string>
+    <string name="logcat_buffer">Buffer Logcat</string>
     <string name="plugins_settings">Setări plugin</string>
     <string name="shared_string_by_default">În mod implicit</string>
     <string name="download_detailed_map">Descărcați harta detaliată %s, pentru a vizualiza această zonă.</string>

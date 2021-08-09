@@ -4001,4 +4001,21 @@
     <string name="poi_access_bicycle">Acesso a bicicletas</string>
     <string name="poi_access_motorcar">Acesso a automóveis</string>
     <string name="poi_access_general">Acesso geral</string>
+    <string name="poi_lounger">Espreguiçadeira</string>
+    <string name="poi_permanent_camping">Parque de campismo permanente</string>
+    <string name="poi_shelter_yes">Sim</string>
+    <string name="poi_shelter_no">Abrigo: não</string>
+    <string name="poi_direction_southwest">Direção sudoeste</string>
+    <string name="poi_direction_southeast">Direção sudeste</string>
+    <string name="poi_direction_northwest">Direção noroeste</string>
+    <string name="poi_direction_northeast">Direção nordeste</string>
+    <string name="poi_direction_west">Direção oeste</string>
+    <string name="poi_direction_south">Direção sul</string>
+    <string name="poi_direction_east">Direção este</string>
+    <string name="poi_direction_north">Direção norte</string>
+    <string name="poi_destination">Destino</string>
+    <string name="poi_permanent_camping_only">Unicamente</string>
+    <string name="poi_permanent_camping_no">Não</string>
+    <string name="poi_permanent_camping_yes">Sim</string>
+    <string name="poi_shelter_filter">Abrigo</string>
 </resources>

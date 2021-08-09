@@ -4001,4 +4001,20 @@
     <string name="poi_access_bicycle">Aðgangur reiðhjóla</string>
     <string name="poi_access_motorcar">Aðgangur bifreiða</string>
     <string name="poi_access_general">Almennur aðgangur</string>
+    <string name="poi_shelter_yes">Já</string>
+    <string name="poi_shelter_no">Skýli: nei</string>
+    <string name="poi_direction_southwest">Suðvesturátt</string>
+    <string name="poi_direction_southeast">Suðausturátt</string>
+    <string name="poi_direction_northwest">Norðvesturátt</string>
+    <string name="poi_direction_northeast">Norðausturátt</string>
+    <string name="poi_direction_west">Vesturátt</string>
+    <string name="poi_direction_south">Suðurátt</string>
+    <string name="poi_direction_east">Austurátt</string>
+    <string name="poi_direction_north">Norðurátt</string>
+    <string name="poi_destination">Áfangastaður</string>
+    <string name="poi_permanent_camping_only">Einungis</string>
+    <string name="poi_permanent_camping_no">Nei</string>
+    <string name="poi_permanent_camping_yes">Já</string>
+    <string name="poi_shelter_filter">Skýli</string>
+    <string name="poi_permanent_camping">Langleigutjaldstæði</string>
 </resources>

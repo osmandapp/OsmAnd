@@ -1760,7 +1760,7 @@
     <string name="rendering_attr_currentTrackWidth_description">GPX vastagsága</string>
     <string name="rendering_attr_roadStyle_description">Útstílus</string>
     <string name="poi_dialog_reopen">Újranyitás</string>
-    <string name="save_poi_without_poi_type_message">Biztosan elmented a POI-t típus nélkül?</string>
+    <string name="save_poi_without_poi_type_message">Típus nélkül menti a POI-t\?</string>
     <string name="poi_context_menu_modify_osm_change">OSM-szerkesztés módosítása</string>
     <string name="shared_string_card_was_hidden">Kártya el lett rejtve</string>
     <string name="please_specify_poi_type_only_from_list">Kérjük, adja meg a helyes POI-típust, vagy hagyja ki ezt a lépést.</string>
@@ -4160,7 +4160,7 @@
     <string name="restore_complete">Visszaállítva</string>
     <string name="grey_color_slope">A szürke szín ott fordul elő, ahol a lejtés nincs meghatározva.</string>
     <string name="backup_version_history">Verzióelőzmények</string>
-    <string name="backup_version_history_delete_descr">Törli az elavult adattípusok változásnaplóját az OsmAnd cloudból\?</string>
+    <string name="backup_version_history_delete_descr">Törli az elavult adattípusok változásnaplóját az OsmAnd Cloudból\?</string>
     <string name="backup_storage_taken">Foglalt tárhely</string>
     <string name="delete_version_history">Verziótörténet törlése</string>
     <string name="routing_attr_avoid_tunnels_description">Alagutak elkerülése</string>
@@ -4174,7 +4174,7 @@
     <string name="shared_string_view_all">Összes megtekintése</string>
     <string name="shared_string_discussion">Megbeszélés</string>
     <string name="backup_delete_types">Letiltott adattípusok törlése</string>
-    <string name="backup_delete_types_descr">Törölje az összes elavult adattípus adatát az OsmAnd felhőből\?</string>
+    <string name="backup_delete_types_descr">Törli az összes elavult adattípus adatát az OsmAnd Cloudból\?</string>
     <string name="from_with_param">Ennyitől: %1$s</string>
     <string name="regular_price">Rendes ár</string>
     <string name="complete_purchase">Vásárlás befejezése</string>
@@ -4216,7 +4216,7 @@
     <string name="duration_moment_ago">egy pillanattal ezelőtt</string>
     <string name="release_4_0">• Felhőalapú biztonsági mentés
 \n
-\n • Éjszakai üzemmód hozzáadása a „Topo” megjelenítési stílushoz
+\n • Éjszakai üzemmód hozzáadása a „Topo” térképstílushoz
 \n
 \n • Szintvonalak letöltése lábban (a méter mellett)
 \n
@@ -4226,7 +4226,7 @@
 \n
 \n • A koppintással mért távolság átkerült a Sugárvonalból egy önálló beállításba
 \n
-\n • Útvonaltervezés: navigációs beállítások módosítására, térkép konfigurálása és keresés az útvonaltervezés elhagyása nélkül
+\n • Útvonaltervezés: Mostantól az útvonaltervezés elhagyása nélkül is módosíthatja a navigációs beállításokat, elérheti a térkép konfigurációját és a keresést.
 \n
 \n • Új „Vásárlás” képernyő részletes információkkal
 \n
@@ -4238,13 +4238,13 @@
     <string name="approximate_route_description">Hozzáilleszti az útvonalat a térképen lévő utakhoz, hogy megkapja az összes kanyart és további adatokat (pl. az út simasága, úttípusa stb.).</string>
     <string name="enter_verification_code">Egyszeri jelszó megadása</string>
     <string name="logout_from_osmand_cloud">Kijelentkezés az OsmAnd Cloudból</string>
-    <string name="logout_from_osmand_cloud_decsr">Biztosan ki akar jelentkezni\?
+    <string name="logout_from_osmand_cloud_decsr">Kijelentkezik\?
 \nAz adatok biztonsági mentéséhez vagy visszaállításához újra be kell jelentkeznie.</string>
     <string name="shared_string_progress">Haladás</string>
-    <string name="backup_do_not_have_any">Még nincs online biztonsági mentése</string>
-    <string name="backup_dont_have_any_descr">Állítson be automatikus biztonsági mentést, hogy ne kelljen aggódnia az elveszett adatok miatt.</string>
+    <string name="backup_do_not_have_any">Még nincs online biztonsági mentése.</string>
+    <string name="backup_dont_have_any_descr">Ütemezzen be automatikus biztonsági mentéseket, hogy soha ne veszítsen adatokat.</string>
     <string name="backup_welcome_back">Isten hozta újra!</string>
-    <string name="backup_welcome_back_descr">A meglévő biztonsági mentések segítségével visszaállíthatja az adatokat ezen az eszközön, vagy biztonsági mentést készíthet erről az eszközről az OsmAnd Cloudba.</string>
+    <string name="backup_welcome_back_descr">Az eszközön lévő adatok visszaállítása meglévő biztonsági másolatok használatával, vagy biztonsági másolat készítése az OsmAnd Cloud-ra.</string>
     <string name="backup_setup">Biztonsági mentés beállítása</string>
     <string name="backup_restore_now">Visszaállítás most</string>
     <string name="attribute">Tulajdonság</string>
@@ -4256,20 +4256,46 @@
     <string name="track_has_no_needed_data">A nyomvonal nem tartalmazza a szükséges adatokat.</string>
     <string name="backup_error_subscription_was_expired_descr">Az OsmAnd Pro előfizetése lejárt; a biztonsági mentés használatához meg kell újítania. A felhőből továbbra is visszaállíthatja az adatokat.</string>
     <string name="contour_lines_hillshades_slope">Szintvonalak, domborzat, lejtés</string>
-    <string name="backup_deleting_all_data">Minden adat törlődik</string>
-    <string name="backup_deleted_all_data">Minden adat törölve</string>
-    <string name="backup_deleting_all_data_descr">Kérjük, várjon, amíg az OsmAnd az összes adatát törli a felhőből. A készüléken lévő adatok érintetlen maradnak.</string>
+    <string name="backup_deleting_all_data">Minden adat törlődik…</string>
+    <string name="backup_deleted_all_data">Minden adat törölve.</string>
+    <string name="backup_deleting_all_data_descr">Kérjük, várjon, amíg az OsmAnd törli adatait a felhőből. Az eszközön lévő összes adat érintetlenül marad.</string>
     <string name="backup_deleted_all_data_descr">Minden adata sikeresen törlődött az OsmAnd Cloudból.</string>
-    <string name="backup_version_history_removed">Az összes verzióelőzmény eltávolíttatik</string>
-    <string name="backup_data_removed">Minden adat eltávolíttatik</string>
+    <string name="backup_version_history_removed">Az összes verzióelőzmény el lett távolítva.</string>
+    <string name="backup_data_removed">Minden adat el lett távolítva.</string>
     <string name="benefits_for_contributors">Előnyök az OSM aktív szerkesztőinek</string>
-    <string name="benefits_for_contributors_primary_descr">Óránként korlátlanul frissítheti a térképeket, ha aktív szerkesztő az OpenStreetMap.org-on.</string>
-    <string name="benefits_for_contributors_secondary_descr">Jelentkezzék be az OpenStreetMapre, és ellenőrizze, hogy jogosult-e korlátlan havi és óránkénti térképfrissítésre.</string>
-    <string name="enough_contributions_descr">Gratulálunk! Ön elegendő szerkesztést végzett az OpenStreetMapen, így korlátlanul élvezheti a térképfrissítéseket.</string>
-    <string name="not_enough_contributions_descr">Az elmúlt %2$s nap alatt legalább %1$s térképszerkesztést kell végeznie az OpenStreetMapen.</string>
+    <string name="benefits_for_contributors_primary_descr">Korlátlan óránkénti térképfrissítésre lehet jogosult, ha aktívan hozzájárul az OpenStreetMap.org-hoz.</string>
+    <string name="benefits_for_contributors_secondary_descr">Jelentkezzen be az OpenStreetMapre, hogy ellenőrizze, jogosult-e korlátlan havi és óránkénti térképfrissítésre.</string>
+    <string name="enough_contributions_descr">Gratulálunk, elegendő szerkesztést végzett az OpenStreetMapen, így mostantól korlátlanul élvezheti az OsmAnd térképfrissítéseit!</string>
+    <string name="not_enough_contributions_descr">%2$s napon belül legalább %1$s OpenStreetMap-szerkesztés szükséges.</string>
     <string name="shared_string_contributions">Szerkesztések</string>
-    <string name="contributions_may_calculate_with_delay">Lehet, hogy a szerkesztések csak több óra késéssel lesznek kiszámítva.</string>
+    <string name="contributions_may_calculate_with_delay">A szerkesztések kiszámítása több órát is igénybe vehet.</string>
     <string name="map_updates_are_unavailable_yet">Még nem érhető el térképfrissítés :-(</string>
     <string name="connect_track_points_as">Útvonalpontok összekapcsolása</string>
     <string name="pro_features">Pro funkciók</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Útvonalak színezése egyedi helyi színük (ha az OpenStreetMapen meg van adva) és turistaútjelzésük szerint.</string>
+    <string name="walking_route_osmc_description">Útvonalak színezése egyedi helyi színük (ha az OpenStreetMapen meg van adva) és típusuk (helyi, regionális, nemzetközi) szerint.</string>
+    <string name="option_available_only_in_osmand_pro">Ez a beállítás csak OsmAnd Pro előfizetéssel érhető el.</string>
+    <string name="purchases_feature_desc_pro_widgets">Szerezze meg az OsmAnd Pro funkcióit is: útvonalak színezése és még sok más.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Ismerje meg az OsmAnd előfizetési csomagjait, és találja meg az Önnek megfelelőt.</string>
+    <string name="routes_color_by_type">Útvonalak színezése…</string>
+    <string name="shared_string_relation">Kapcsolat</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Színezés hálózati hovatartozás szerint.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Útvonalak színezése a csomóponthálózat típusa szerint (hely, regionális, nemzetközi).</string>
+    <string name="travel_routes">Utazási útvonalak</string>
+    <string name="setting_supported_by_style">Ez a beállítást a következő térképstílusnál érhető el: „%1$s”</string>
+    <string name="direct_line_maps_required_descr">Az útvonal kiszámítása a szokásosnál tovább tart.
+\n
+\nTalán néhány térkép nincs betöltve.</string>
+    <string name="online_direct_line_maps_link">Ellenőrizze a szükséges térképeket.</string>
+    <string name="offline_maps_required_descr">Hiányzik néhány térkép, amely szükséges lenne az útvonalhoz.</string>
+    <string name="online_maps_required_descr">Sajnos az OsmAnd nem tudott útvonalat meghatározni az Ön beállításaival.
+\n
+\nLehet, hogy néhány térkép nincs betöltve. A szükséges térképekért lefuttathat egy online ellenőrzést.</string>
+    <string name="online_maps_searching_descr">Online keresés…</string>
+    <string name="reset_to_original">Visszaállítás az eredetire</string>
+    <string name="backup_error_no_subscription">Nincs előfizetés</string>
+    <string name="map_updates_for_mappers">Térképfrissítések térképészeknek</string>
+    <string name="use_login_and_password">Felhasználónév és jelszó használata</string>
+    <string name="available_until">Elérhető eddig: %1$s</string>
+    <string name="purchases_restored">Visszaállított vásárlások</string>
 </resources>

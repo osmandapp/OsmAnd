@@ -4001,4 +4001,21 @@
     <string name="poi_access_scooter">速克達通過</string>
     <string name="poi_access_bicycle">腳踏車通過</string>
     <string name="poi_access_motorcar">汽車通過</string>
+    <string name="poi_shelter_yes">是</string>
+    <string name="poi_shelter_no">避難所：否</string>
+    <string name="poi_lounger">躺椅</string>
+    <string name="poi_direction_southwest">西北向</string>
+    <string name="poi_direction_southeast">東南向</string>
+    <string name="poi_direction_northwest">西北向</string>
+    <string name="poi_direction_northeast">東北向</string>
+    <string name="poi_direction_west">西向</string>
+    <string name="poi_direction_south">南向</string>
+    <string name="poi_direction_east">東向</string>
+    <string name="poi_direction_north">北向</string>
+    <string name="poi_destination">目的地</string>
+    <string name="poi_permanent_camping_only">僅有</string>
+    <string name="poi_permanent_camping_no">否</string>
+    <string name="poi_permanent_camping_yes">是</string>
+    <string name="poi_shelter_filter">避難所</string>
+    <string name="poi_permanent_camping">永久露營</string>
 </resources>

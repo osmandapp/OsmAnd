@@ -4255,4 +4255,6 @@
     <string name="map_updates_for_mappers">Uppfærslur korta fyrir kortagerðarfólk</string>
     <string name="shared_string_contributions">Framlög</string>
     <string name="connect_track_points_as">Tengja leiðarpunkta</string>
+    <string name="option_available_only_in_osmand_pro">Þessi valkostur et tiltækur sem hluti af OsmAnd Pro áskrift.</string>
+    <string name="purchases_restored">Endurheimt kaup</string>
 </resources>

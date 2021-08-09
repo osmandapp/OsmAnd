@@ -185,7 +185,7 @@
     <string name="index_name_other">Verdens- og emnekart</string>
     <string name="index_name_wiki">Verdensomspennende Wikipedia-interessepunkter</string>
     <string name="index_name_voice">Talemeldinger (opptak, begrenset funksjonalitet)</string>
-    <string name="index_name_tts_voice">Talemeldinger (TTS-syntetisert, anbefales)</string>
+    <string name="index_name_tts_voice">Talemeldinger (TTS, anbefales)</string>
     <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
     <string name="amenity_type_user_defined">Brukerdefinert</string>
     <string name="fav_export_confirmation">Fil inneholdende tidligere eksporterte favoritter finnes allerede. Vil du erstatte den\?</string>
@@ -2564,7 +2564,7 @@
     <string name="record_plugin_description">Dette programtillegget aktiverer funksjoner for å ta opp og lagre sporene dine ved å manuelt trykke på miniprogrammet for GPX-logging på kartet, eller også for å automatisk logge alle dine navigeringsruter til en GPX-fil. 
 \n 
 \nSpor som er tatt opp kan deles med dine venner eller brukes som OSM-bidrag. Idrettsutøvere kan bruke innspilte spor til å følge treningen sin. Noe grunnleggende sporingsanalyse kan utføres direkte i OsmAnd, som rundetider, gjennomsnittshastighet etc., og spor kan selvfølgelig også analyseres senere i spesielle tredjeparts analyseprogrammer.</string>
-    <string name="osmand_development_plugin_description">Dette programtillegget viser innstillinger for utvikling og feilrettingsfunksjoner som testing eller simulering av ruteberegning, opptegningsytelse eller kunngjøringer. Disse innstillingene er ment for utviklere og trengs ikke for vanlige brukere.</string>
+    <string name="osmand_development_plugin_description">Innstillinger for utvikling og avlusingsfunksjoner som navigasjonssimulering, opptegningsytelse, eller talemeldinger. Ment for utviklere og trengs ikke for vanlige brukere.</string>
     <string name="osmand_extended_description_part2">GPS-navigering 
 \n • Velg mellom frakoblet modus (ingen roaming-kostnader når du er utenlands) eller nettbasert modus (raskere) 
 \n • Taleveiledning sving-for-sving leder deg langs veien (innspilt og syntetisert tale) 
@@ -3872,7 +3872,7 @@
     <string name="announcement_time_arrive">Ankom målet</string>
     <string name="shared_string_turn">Sving</string>
     <string name="announcement_time_intervals">Tid og avstandsintervaller</string>
-    <string name="announcement_time_descr">Kunngjøringstid for forskjellige talemeldinger avhenger av meldingstype, gjeldende navigasjonshastighet og standard-navigasjonshastighet.</string>
+    <string name="announcement_time_descr">Kunngjøringstid for forskjellige talemeldinger avhenger av meldingstype, gjeldende navigasjonshastighet og forvalgt navigasjonshastighet.</string>
     <string name="routing_engine_vehicle_type_hiking">Turgåing</string>
     <string name="routing_engine_vehicle_type_walking">Gåing</string>
     <string name="shared_string_sec">sek</string>
@@ -3926,7 +3926,7 @@
     <string name="shared_strings_all_regions">Alle regioner</string>
     <string name="rendering_attr_noNatureReserveBoundaries_description">Skjul grenser for naturreservat, beskyttede områder og nasjonalparker.</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Naturgrenser</string>
-    <string name="hillshade_slope_contour_lines">Relieffskygge/bakkehelling/koter</string>
+    <string name="hillshade_slope_contour_lines">Relieffskygge/bakkehelning/koter</string>
     <string name="activity_type_riding_name">Ridning</string>
     <string name="activity_type_hiking_name">Turgåing</string>
     <string name="activity_type_running_name">Løping</string>
@@ -4139,8 +4139,8 @@
     <string name="osmand_maps_plus_tagline">Få utvidede funksjoner</string>
     <string name="osmand_pro_tagline">Få alle funksjonene</string>
     <string name="backup_delete_types">Slett avskrudde datatyper</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrengkart: koter, relieffskygger, bakkehelling</string>
-    <string name="contour_lines_hillshades_slope">Koter, relieffskygger, bakkehelling</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Terrengkart: koter, relieffskygger, bakkehelning</string>
+    <string name="contour_lines_hillshades_slope">Koter, relieffskygger, bakkehelning</string>
     <string name="active_till">Aktiv til %1$s</string>
     <string name="track_recording_title">Sporopptak stoppet</string>
     <string name="track_has_no_needed_data">Sporet inneholder ikke nødvendige data.</string>
@@ -4185,4 +4185,51 @@
     <string name="benefits_for_contributors_primary_descr">Det kan hende du har gjort deg fortjent til timevise kartoppdateringer hvis du er en aktiv bidragsytere på OpenStreetMap.org.</string>
     <string name="benefits_for_contributors_secondary_descr">Logg inn på OpenStreetMap for å sjekke at du kan få ubegrensede månedlige og timevise kartoppdateringer.</string>
     <string name="purchases_restored">Kjøp gjenopprettet</string>
+    <string name="release_4_0_beta">• Mulighet for nedlasting av kotelinjer i fot.
+\n
+\n • Planlegging av rutelandskap: Faner for å bygge mellom punkter og diagrammer.
+\n
+\n • OsmAnd Live-oppdateringer flyttet til «Nedlastinger → Oppdateringer».
+\n
+\n • Spor kan nå fargelegges etter høyde, hastighet, eller helning.
+\n
+\n • Tillagt valg for å endre rutelinjeutseende.
+\n
+\n • Oppdatert «Sporopptaks»-dialog.
+\n
+\n</string>
+    <string name="routing_engine_vehicle_type_mtb">MTB</string>
+    <string name="activity_type_racing_name">Kappløp</string>
+    <string name="exit_number">Avkjøringsnummer</string>
+    <string name="purchases_feature_desc_terrain">Terrengkoter, full relieffskyggekart med mørke skygger og helningskart med farger for å vise topper og lavland.</string>
+    <string name="quick_action_coordinates_widget_descr">Glidebryter for å vise eler skjule koordinat-miniprogram på kartet.</string>
+    <string name="activity_type_offroad_name">Terreng</string>
+    <string name="routing_engine_vehicle_type_scooter">Scooter</string>
+    <string name="output">Resultat</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Få ubegrensede nedlastinger for alle kontinenter og regionale frakoblede kart.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Få tilgang til hyppige kartoppdateringer. Timevise, daglige, eller ukentlige oppdateringer. Oppdateringer lastes ned i rekkefølge, kun for endret område.</string>
+    <string name="approximate_route_description">Legg ved ruten til veier på kartet for å få alle svinger og ytterligere data, som veijevnhet, veityper, osv.</string>
+    <string name="select_segments_description">%1$s inneholder mer enn ett segment. Du må angi delen som skal brukes for navigasjon.</string>
+    <string name="gpx_upload_private_visibility_descr">«Privat» betyr at sporet ikke vises i noen offentlige oppføringer, men sporingspunkter fra dem i ukronologisk rekkefølge er tilgjengelig gjennom det offentlige GPS-API-et uten tidsstempler.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">«Identifiserbart» betyr at sporet vises offentlig i dine GPS-spor og i offentlige GPS-sporingsoppføringer. Altså vil andre kunne laste ned rå sporingsdata og tilknytte den til brukernavnet ditt. Sporingspunktsdata med offentlige tidsstempel fra GPS-API-et servert via sporingspunkts-API-et vil vise til din opprinnelige sporingsside.</string>
+    <string name="trip_recording_logging_interval_info">Loggingsintervall setter tidsperioden mellom hver gang OsmAnd forespør nåværende posisjonsdata.</string>
+    <string name="gpx_upload_public_visibility_descr">«Offentlig» betyr at sporet vises offentlig i dine GPS-spor og i offentlige GPS-sporingsoppføringer, og i den offentlige spor-listen med tidsstempler i rå form. Data servert via API-et viser ikke til sporsiden din. Tidsstempler fra sporingspunkter er ikke tilgjengelig gjennom det offentlige GPS-API-et, og sporingspunkter sorteres ikke kronologisk.</string>
+    <string name="backup_error_subscription_was_expired_descr">Ditt OsmAnd Pro-abonnement har utløpt. Forny det nå for å bruke sikkerhetskopi. Du kan fremdeles gjenopprette data fra OsmAnd Sky.</string>
+    <string name="use_dev_url_descr">Bytt til dev.openstreetmap.org istedenfor openstreetmap.org for testopplasting av OSM-notat/POI/GPX.</string>
+    <string name="open_place_reviews_plugin_description">Send bilder, vurderinger og lenker om offentlige steder, som restauranter, hoteller, museer og rutepunkter som åpen data på https://openplacereviews.org/data/.
+\n
+\nLes mer på https://openplacereviews.org</string>
+    <string name="login_open_place_reviews">Logg inn på OpenPlaceReviews</string>
+    <string name="temporary_conditional_routing_descr">Bruk veibegrensninger som er aktive nå på kartet</string>
+    <string name="routing_attr_driving_style_description">Velg kjøreformål for å få kortere, raskere, eller tryggere rute</string>
+    <string name="app_restart_required">Programomstart kreves for å bruke noen innstillinger.</string>
+    <string name="live_update_frequency_hour_variant">Ser etter kart hver time. Neste gang %1$s om %2$s.</string>
+    <string name="voice_prompts_timetable">Talemeldingstider</string>
+    <string name="live_update_frequency_week_variant">Ser etter kart hver uke. Neste gang %1$s om %2$s.</string>
+    <string name="live_update_frequency_day_variant">Ser etter kart hver dag. Neste gang %1$s om %2$s.</string>
+    <string name="update_all_maps_added">Oppdater alle kart lagt til i %1$s\?</string>
+    <string name="purchases_feature_desc_wikivoyage">Utforsk Wikivoyage frakoblet. Artikler inndelt etter land og regioner og tilgjengelig på alle språk.</string>
+    <string name="purchases_feature_desc_wikipedia">Utforsk Wikipedia frakoblet. Artikler inndelt etter land og regioner og tilgjengelig på alle språk.</string>
+    <string name="walking_route_osmc_description">Fargelegg ruter i henhold til deres individuelle lokale farge (hvis den forefinnes i OpenStreetMap) og type (internasjonal, regional, lokal).</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Fargelegg ruter i henhold til deres nodenettverkstype (internasjonal, regional, lokal).</string>
 </resources>

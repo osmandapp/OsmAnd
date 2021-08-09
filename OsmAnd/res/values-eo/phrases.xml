@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_shop">Vendejo</string>
     <string name="poi_shop_food">Butiko oportuna kaj superbazaro</string>
@@ -124,7 +124,6 @@
     <string name="poi_doityourself">Memfaradil-vendejo</string>
     <string name="poi_doors">Pord-vendejo</string>
     <string name="poi_erotic">Seksumil-vendejo</string>
-    
     <string name="poi_fishing">Fiŝkaptil-vendejo</string>
     <string name="poi_florist">Florvendejo</string>
     <string name="poi_frame">Kadroj-de-pentraĵoj-vendejo</string>
@@ -206,7 +205,6 @@
     <string name="poi_ship_chandler">Ŝipekipistejo</string>
     <string name="poi_sports">Sportovendejo</string>
     <string name="poi_stationery">Papervar-vendejo</string>
-    
     <string name="poi_ticket">Bilet-butiko</string>
     <string name="poi_tobacco">Tabak-vendejo</string>
     <string name="poi_toys">Ludil-vendejo</string>
@@ -387,7 +385,6 @@
     <string name="poi_groyne">Ondorompileto</string>
     <string name="poi_power_substation">Elektrosubcentralo</string>
     <string name="poi_power_transformer">Transformilo</string>
-    
     <string name="poi_power_generator">Elektrogenerilo</string>
     <string name="poi_power_tower">Elektrofosto (alttensia k meztensia)</string>
     <string name="poi_power_pole">Elektrofosto (baztensia)</string>
@@ -507,7 +504,6 @@
     <string name="poi_pension_fund">Oficejo de pensiado</string>
     <string name="poi_migration">Oficejo de enmigrado</string>
     <string name="poi_tax_inspection">Oficejo de impostado</string>
-    
     <string name="poi_customs">Doganejo</string>
     <string name="poi_isolated_dwelling">Solstaranta domo</string>
     <string name="poi_quarter">Kvartalo</string>
@@ -1083,13 +1079,13 @@
     <string name="poi_wheelchair_no">ne</string>
     <string name="poi_wheelchair_limited">parta</string>
     <string name="poi_wholesale">Pogranda komerco</string>
-    <string name="poi_access_private">Aliro nur laŭ privata permeso</string>
-    <string name="poi_access_no">Sen aliro</string>
-    <string name="poi_access_customers">Aliro nur por klientoj</string>
-    <string name="poi_access_destination">Aliro nur al celo</string>
-    <string name="poi_access_permissive">Verŝajne alirebla</string>
-    <string name="poi_access_delivery">Aliro nur por liverantoj</string>
-    <string name="poi_access_agricultural">Aliro nur por agrokulturaj maŝinoj</string>
+    <string name="poi_access_private">nur laŭ privata permeso</string>
+    <string name="poi_access_no">ne</string>
+    <string name="poi_access_customers">nur por klientoj</string>
+    <string name="poi_access_destination">nur al celo</string>
+    <string name="poi_access_permissive">verŝajne alirebla</string>
+    <string name="poi_access_delivery">nur por liverantoj</string>
+    <string name="poi_access_agricultural">nur por agrokulturaj maŝinoj</string>
     <string name="poi_content_silage">Enhavo: insilaĵo</string>
     <string name="poi_content_water">Enhavo: akvo</string>
     <string name="poi_content_slurry">Enhavo: ŝlimo</string>
@@ -2560,7 +2556,6 @@
     <string name="poi_aquaculture_shrimp">Akvokulturo: salikokoj</string>
     <string name="poi_aquaculture_fish">Akvokulturo: fiŝoj</string>
     <string name="poi_aquaculture_mussels">Akvokulturo: moluskoj</string>
-    
     <string name="poi_diplomatic_consulate">konsulejo</string>
     <string name="poi_diplomatic_consulate_general">konsulejo ĝenerala</string>
     <string name="poi_diplomatic_honorary_consulate">konsulejo honora</string>
@@ -3604,7 +3599,7 @@
     <string name="poi_vehicle_military">Aliro por veturiloj: nur armeaj</string>
     <string name="poi_vehicle_delivery">Aliro por veturiloj: nur liverado</string>
     <string name="poi_vehicle_forestry">Aliro por veturiloj: nur arbara servo</string>
-    <string name="poi_motorcar_yes">Aliro por aŭtoj: jes</string>
+    <string name="poi_motorcar_yes">jes</string>
     <string name="poi_motorcar_private">Aliro por aŭtoj: nur laŭ privata permeso</string>
     <string name="poi_motorcar_no">Aliro por aŭtoj: ne</string>
     <string name="poi_motorcar_destination">Aliro por aŭtoj: nur al celo</string>
@@ -3976,4 +3971,51 @@
     <string name="poi_contact_webcam">Retkamerao</string>
     <string name="poi_contact_linkedin">LinkedIn</string>
     <string name="poi_outdoor_seating_poi">Seĝoj ekstere</string>
+    <string name="poi_shelter_yes">jes</string>
+    <string name="poi_shelter_no">Ŝirmejo: ne</string>
+    <string name="poi_lounger">Kuŝseĝo</string>
+    <string name="poi_direction_southwest">sud-okcidenta direkto</string>
+    <string name="poi_direction_southeast">sud-orienta direkto</string>
+    <string name="poi_direction_northwest">nord-okcidenta direkto</string>
+    <string name="poi_direction_northeast">nord-orienta direkto</string>
+    <string name="poi_direction_west">okcidenta direkto</string>
+    <string name="poi_direction_south">suda direkto</string>
+    <string name="poi_direction_east">orienta direkto</string>
+    <string name="poi_direction_north">norda direkto</string>
+    <string name="poi_destination">Celloko</string>
+    <string name="poi_permanent_camping_only">nur</string>
+    <string name="poi_permanent_camping_no">ne</string>
+    <string name="poi_permanent_camping_yes">jes</string>
+    <string name="poi_authentication_none_yes">jes</string>
+    <string name="poi_authentication_none_no">Aŭtentigo necesa</string>
+    <string name="poi_authentication_short_message_text">Enhavo de SMS por aŭtentigo</string>
+    <string name="poi_authentication_short_message_number">Telefonnumero por aŭtentigo (SMS)</string>
+    <string name="poi_authentication_phone_call_number">Telefonnumero por aŭtentigo (voko)</string>
+    <string name="poi_authentication_short_message_yes">jes</string>
+    <string name="poi_authentication_short_message_no">Aŭtentigo per SMS: ne</string>
+    <string name="poi_authentication_phone_call_yes">jes</string>
+    <string name="poi_authentication_phone_call_no">Aŭtentigo per telefonvoko: ne</string>
+    <string name="poi_authentication_phone_call">Aŭtentigo per telefonvoko</string>
+    <string name="poi_authentication_app_yes">jes</string>
+    <string name="poi_authentication_app_no">Aŭtentigo per aplikaĵo: ne</string>
+    <string name="poi_authentication_key_yes">jes</string>
+    <string name="poi_authentication_key_no">Aŭtentigo per ŝlosilo: ne</string>
+    <string name="poi_authentication_chip_card_yes">jes</string>
+    <string name="poi_authentication_chip_card_no">Aŭtentigo per IC-parto: ne</string>
+    <string name="poi_authentication_contactless_yes">jes</string>
+    <string name="poi_authentication_contactless_no">Aŭtentigo senkontakta: ne</string>
+    <string name="poi_share_taxi_yes">Komuna taksio: jes</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_shelter_filter">Ŝirmejo</string>
+    <string name="poi_permanent_camping">Kampadejo por longdaŭra luo</string>
+    <string name="poi_authentication_none">Aŭtentigo malnecesa</string>
+    <string name="poi_authentication_short_message">Aŭtentigo per SMS</string>
+    <string name="poi_authentication_app">Aŭtentigo per aplikaĵo</string>
+    <string name="poi_authentication_key">Aŭtentigo per ŝlosilo</string>
+    <string name="poi_authentication_chip_card">Aŭtentigo per IC-karto</string>
+    <string name="poi_authentication_contactless">Aŭtentigo senkontakta</string>
+    <string name="poi_access_scooter">Aliro por skoteroj</string>
+    <string name="poi_access_bicycle">Aliro por bicikloj</string>
+    <string name="poi_access_motorcar">Aliro por aŭtomobiloj</string>
+    <string name="poi_access_general">Aliro</string>
 </resources>
