@@ -38,4 +38,21 @@
     <string name="time_zone">Laiko juosta</string>
     <string name="time_zone_descr">Pasirinkti laiko juostą, kuri bus rodoma jūsų vietovės pranešimuose.</string>
     <string name="send_report">Siųsti pranešimą</string>
+    <string name="shared_string_later">Vėliau</string>
+    <string name="initializing">Pradedama</string>
+    <string name="shared_string_hide">Slėpti</string>
+    <string name="shared_string_add">Pridėti</string>
+    <string name="shared_string_text">Tekstas</string>
+    <string name="shared_string_map">Žemėlapis</string>
+    <string name="shared_string_date">Data</string>
+    <string name="shared_string_update">Atnaujinti</string>
+    <string name="shared_string_appearance">Išvaizda</string>
+    <string name="shared_string_accept">Priimti</string>
+    <string name="shared_string_telegram">Telegram</string>
+    <string name="shared_string_ok">Gerai</string>
+    <string name="shared_string_search">Ieškoti</string>
+    <string name="proxy">Tarpinis serveris</string>
+    <string name="proxy_port">Prievadas</string>
+    <string name="my_location">Mano buvimo vieta</string>
+    <string name="timeline">Laiko juosta</string>
 </resources>
