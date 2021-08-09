@@ -428,9 +428,9 @@
     <string name="rendering_attr_appMode_name">وضع التقديم</string>
     <string name="rendering_attr_appMode_description">تحسين الخريطة ل</string>
     <string name="poi_search_desc">بحث عن النقاط المهمة</string>
-    <string name="left_side_navigation">القيادة بيد اليسار</string>
+    <string name="left_side_navigation">القيادة على اليسار</string>
     <string name="left_side_navigation_descr">حدد للبلدان التي فيها حركة المرور على اليسار.</string>
-    <string name="unknown_location">الموقع لم يحدد.</string>
+    <string name="unknown_location">الموقف غير معروف بعد.</string>
     <string name="modify_transparency">تعديل الشفافية (0 - شفاف ، 255 - معتم )</string>
     <string name="confirm_interrupt_download">إلغاء التحميل؟</string>
     <string name="first_time_msg">نشكرك على استخدام أوسماند. الكثير من مميزات هذا البرنامج بحاجة إلى بعض البيانات الإقليمية التي يمكنك تحميلها عبر \'إعدادات\'← \'إدارة البيانات\'. بعد ذلك سوف تكون قادرا على عرض الخرائط، و تحديد العناوين ، والبحث عن النقاط المهمة ، والعثور على وسائل النقل العام .</string>
@@ -471,10 +471,10 @@
     <string name="index_name_asia">آسيا</string>
     <string name="index_name_oceania">أستراليا و أوقيانوسيا</string>
     <string name="routing_settings">التوجيه مع الطرق</string>
-    <string name="routing_settings_descr">ضبط خاص لكل وضع من أوضاع الملاحة.</string>
+    <string name="routing_settings_descr">حدد خيارات التنقل.</string>
     <string name="index_settings">إدارة بيانات الخرائط</string>
     <string name="general_settings">إعدادات عامة</string>
-    <string name="general_settings_descr">العرض، اللغة، الوحدات، التخزين، السمة ..إلخ.</string>
+    <string name="general_settings_descr">قم بإعداد العرض والإعدادات العامة للتطبيق.</string>
     <string name="open_street_map_login_descr">مطلوب للمساهمة في Open Street Map (Osm).</string>
     <string name="local_openstreetmap_uploading">يتم الرفع…</string>
     <string name="local_openstreetmap_uploadall">رفع الكل</string>
@@ -536,7 +536,7 @@
     <string name="av_camera_focus_edof">وضع التركيز الكلي (عن قرب)</string>
     <string name="edit_filter_create_message">عامل تصفية %1$s تم إنشاؤه</string>
     <string name="edit_filter_delete_message">عامل تصفية %1$s تم حذفه</string>
-    <string name="edit_filter_delete_dialog_title">حذف عامل التصفية المحدد؟</string>
+    <string name="edit_filter_delete_dialog_title">حذف هذا الفلتر؟</string>
     <string name="oclock">o\'على مدار الساعة</string>
     <string name="auto_announce_off">إيقاف التنبيه التلقائي</string>
     <string name="auto_announce_on">تفعيل التنبيه التلقائي</string>
@@ -624,7 +624,7 @@
     <string name="user_name">اسم المستخدم</string>
     <string name="user_password">كلمة المرور</string>
     <string name="osmand_service">حالة وضع السكون</string>
-    <string name="osmand_service_descr">استخدمها لتشغيل أوسماند عندما تكون الشاشة مُطفأة.</string>
+    <string name="osmand_service_descr">OSMAnd يشتغل في الخلفية بينما الشاشة مطفأة.</string>
     <string name="download_files_not_enough_space">لا يوجد مساحة كافية لتحميل %1$s م.ب المساحة الخالية: %2$s.</string>
     <string name="download_files_question_space">تحميل {0} ملف(ات) ؟ 
 \n مساحة التخزين المستخدمة هي {1} مب (المساحة المتوفرة هي {2} مب).</string>
@@ -713,7 +713,7 @@
     <string name="trace_rendering">تقديم معلومات التصحيح</string>
     <string name="trace_rendering_descr">عرض أداء معلومات التصحيح (غير مستحسن).</string>
     <string name="installing_new_resources">يثبت البيانات الجديدة…</string>
-    <string name="internet_connection_required_for_online_route">خدمة الملاحة على الإنترنت محدّدة ولكن لا اتصال متاح بالإنترنت.</string>
+    <string name="internet_connection_required_for_online_route">خدمة الملاحة عبر الإنترنت غير متاحة دون انترنت.</string>
     <string name="tts_language_not_supported_title">لغة غير مدعومة</string>
     <string name="tts_language_not_supported">اللغة المحددة غير مدعومة من قبل محرك أندرويد لتحويل النص إلى كلام (TTS). ستُستخدم اللغة السابقة في المحرك ، هل تريد البحث عن محركات أخرى في السوق؟</string>
     <string name="tts_missing_language_data_title">البيانات ناقصة</string>
@@ -725,7 +725,7 @@
 \n 
 \n\'القائمة\' ← \'ضبط الخريطة\' ← \'مصدر الخريطة\' ← \'الخريطة المحملة\'.</string>
     <string name="choose_audio_stream">مصدر التوجيه الصوتي</string>
-    <string name="choose_audio_stream_descr">اختيار قناة لتشغيل التوجيه الصوتي.</string>
+    <string name="choose_audio_stream_descr">حدد مكبر الصوت للحصول على التوجيه الصوتي.</string>
     <string name="voice_stream_voice_call">صوت المكالمة الهاتفية ( كما يحاول قطع ستريو بلوتوث السيارة )</string>
     <string name="voice_stream_notification">صوت الاشعارات</string>
     <string name="voice_stream_music">صوت الوسائط</string>
@@ -980,7 +980,7 @@
     <string name="rendering_category_details">تفاصيل إضافية</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
     <string name="rotate_map_to_bearing">اتجاه الخريطة</string>
-    <string name="rotate_map_bearing_opt">اتجاه الحركة في الأعلى</string>
+    <string name="rotate_map_bearing_opt">اتجاه الحركة</string>
     <string name="rotate_map_none_opt">الشمال في الأعلى</string>
     <string name="rotate_map_compass_opt">حسب البوصلة</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
@@ -1339,10 +1339,10 @@
     <string name="downloading_list_indexes">جار تحميل قائمة المناطق المتاحة…</string>
     <string name="list_index_files_was_not_loaded">لم يتم تحميل قائمة المناطق من osmand.net.</string>
     <string name="error_occurred_saving_gpx">خطأ أثناء حفظ GPX.</string>
-    <string name="error_calculating_route">لا يمكن حساب الطريق.</string>
+    <string name="error_calculating_route">تعذر حساب المسار.</string>
     <string name="error_calculating_route_occured">حدث خطأ أثناء حساب الطريق.</string>
-    <string name="empty_route_calculated">خطأ: الطريق المحسوب فارغ.</string>
-    <string name="arrived_at_destination">تم الوصول.</string>
+    <string name="empty_route_calculated">المسار المحسوب فارغ.</string>
+    <string name="arrived_at_destination">لقد وصلت.</string>
     <string name="go_back_to_osmand">عُد إلى خريطة أوسماند</string>
     <string name="loading_data">تحميل البيانات…</string>
     <string name="reading_indexes">قراءة البيانات المحلية…</string>
@@ -2448,7 +2448,7 @@
     <string name="none_point_error">الرجاء إضافة نقطة واحدة على الأقل.</string>
     <string name="enter_gpx_name">اسم مسار GPX :</string>
     <string name="show_on_map_after_saving">عرض على الخريطة بعد الحفظ</string>
-    <string name="add_waypoint">إضافة نقطة</string>
+    <string name="add_waypoint">إضافة نقطة عبر الطريق</string>
     <string name="save_gpx_waypoint">حفظ نقطة GPX</string>
     <string name="save_route_point">حفظ نقطة مسار</string>
     <string name="waypoint_one">النقطة 1</string>
@@ -2470,7 +2470,7 @@
     <string name="empty_state_favourites_desc">استيراد المفضلة ، أو إضافة عبر نقاط على الخريطة.</string>
     <string name="import_track">استيراد مسار</string>
     <string name="import_track_desc">الملف %1$s لا يحتوي على نقاط وجهة، هل تود إدخاله كمسار؟</string>
-    <string name="move_point">تحريك نقطة</string>
+    <string name="move_point">نقل نقطة</string>
     <string name="map_orientation_change_in_accordance_with_speed">عتبة توجيه الخريطة</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">حدد سرعة تبديل الاتجاه من \"اتجاه الحركة\" إلى \"اتجاه البوصلة\" أدناه.</string>
     <string name="all_markers_moved_to_history">تم نقل جميع العلامات إلى السجل</string>
@@ -3304,7 +3304,7 @@
     <string name="application_profiles_descr">حدد الأوضاع لتكون مرئية في التطبيق.</string>
     <string name="application_profiles">أوضاع التطبيق</string>
     <string name="quick_action_need_to_add_item_to_list">أضف عنصراً واحداً على الأقل إلى القائمة في إعدادات \"الاختصار السريع\"</string>
-    <string name="routing_attr_piste_type_downhill_name">جبال الألب والتزلج علي المنحدرات</string>
+    <string name="routing_attr_piste_type_downhill_name">التزلج على المنحدرات وجبال الألب</string>
     <string name="routing_attr_piste_type_downhill_description">التزلج على جبال الألب أو الانحدار.</string>
     <string name="routing_attr_piste_type_nordic_name">التزلج عبر الريف والشمال</string>
     <string name="routing_attr_piste_type_nordic_description">مسارات للتزلج الشمالي أو الريفي علي الثلج.</string>
