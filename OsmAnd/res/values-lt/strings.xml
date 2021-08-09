@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
-    <string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
+    <string name="starting_point_too_far">Išvykimo taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
     <string name="osmand_parking_warning">Dėmesio</string>
     <string name="osmand_parking_warning_text">Perspėjimas pasiimti automobilį jau buvo įtrauktas į jūsų kalendorių. Perspėjimas ten liks tol, kol jį panaikinsite.</string>
@@ -69,7 +69,7 @@
 \nKiekvienas iš šių žemėlapių gali būti atvaizduotas OsmAnd ekrane kaip pagrindinis (bazinis) arba kaip papildomas antsluoksnis ar posluoksnis kitame baziniame žemėlapyje (pvz., OsmAnd parsiųstuose žemėlapiuose). Tam, kad posluoksninis žemėlapis būtų aiškiai matomas, galima išjungti OsmAnd vektorinių žemėlapių tam tikrus elementus meniu \"Konfigūruoti žemėlapį\".
 \n
 \nŽemėlapius lakštus galima atsisiųsti iš interneto arba paruošti naudojimui neprisijungus (ir rankiniu būdu įkelti į OsmAnd duomenų katalogą) kaip SQLite duomenų bazę, kurią galima paruošti įvairiais trečių šalių įrankiais.</string>
-    <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai foniniame režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
+    <string name="osmand_background_plugin_description">Rodo nustatymus, skirtus įjungti foninį stebėjimą ir navigaciją periodiškai žadinant GPS prietaisą (kai ekranas išjungtas).</string>
     <string name="osmand_accessibility_description">Šis įskiepis įgalina įrenginio specialiuosius nustatymus tiesiai OsmAnd. Tai, pavyzdžiui, palengvina TTS balso greičio reguliavimą, navigacijos ekrano kryptį, mąstelio reguliavimą.</string>
     <string name="osmand_development_plugin_description">Įskiepis rodo nustatymus kūrimo ir klaidų paieškos funkcionalumui: patikrinti arba imituoti navigaciją, ekrano generavimo efektyvumo, balso pranešimų patikrinimui. Šie nustatymui akrtualūs programuotojui ir nėra įdomūs eiliniam vartotojui.</string>
     <string name="plugins_screen">Įskiepių valdymas</string>
@@ -608,7 +608,7 @@
     <string name="data_settings_descr">Nurodyti kalbą, parsiųsti/atnaujinti duomenis.</string>
     <string name="data_settings">Data</string>
     <string name="osm_settings">OSM redagavimas</string>
-    <string name="auto_zoom_map_descr">Automatiškai priderinti žemėlapio mastelį pagal jūsų greitį.</string>
+    <string name="auto_zoom_map_descr">Priderinti žemėlapio mastelį pagal jūsų greitį (kai žemėlapis sinchronizuojamas su esama padėtimi).</string>
     <string name="auto_zoom_map">Automatiškai keisti mastelį</string>
     <string name="additional_settings">Papildomi nustatymai</string>
     <string name="shared_string_settings">Nustatymai</string>
@@ -730,7 +730,7 @@
     <string name="continue_follow_previous_route_auto">Tęsti paskutinį neužbaigtą maršrutą? (%1$s sekundės)</string>
     <string name="show_cameras">Greičio radarai</string>
     <string name="show_traffic_warnings">Greičio ribojimai</string>
-    <string name="avoid_toll_roads">Vengti mokamų kelių</string>
+    <string name="avoid_toll_roads">Jokių mokamų kelių</string>
     <string name="map_widget_top_text">Gatvės pavadinimas</string>
     <string name="map_widget_config">Konfigūruoti ekraną</string>
     <string name="map_widget_back_to_loc">Kur aš esu</string>
@@ -749,7 +749,7 @@
     <string name="bg_service_screen_lock">Užrakinti</string>
     <string name="bg_service_screen_lock_toast">Ekranas užrakintas</string>
     <string name="bg_service_interval">Nustatyti prabudimo intervalą:</string>
-    <string name="screen_is_locked">Norėdami atrakinti ekraną, palieskite užrakto piktogramą</string>
+    <string name="screen_is_locked">Norėdami atrakinti, palieskite užrakto piktogramą</string>
     <string name="bg_service_screen_unlock">Atrakinti</string>
     <string name="bg_service_sleep_mode_off">Įjungti\n foninį režimą</string>
     <string name="bg_service_sleep_mode_on">Išjungti\n foninį režimą</string>
@@ -758,11 +758,11 @@
     <string name="email">el. paštas</string>
     <string name="layer_map_appearance">Konfigūruoti ekraną</string>
     <string name="show_lanes">Juostos</string>
-    <string name="avoid_unpaved">Vengti negrįstų kelių</string>
-    <string name="avoid_ferries">Vengti keltų</string>
+    <string name="avoid_unpaved">Jokių negrįstų kelių</string>
+    <string name="avoid_ferries">Jokių keltų</string>
     <string name="avoid_in_routing_title">Vengti…</string>
     <string name="show_warnings_title">Rodyti įspėjimus…</string>
-    <string name="show_warnings_descr">Rodyti srauto perspėjimus (greičio ribojimus, greičio ribojimo gūbrelius, tunelius), greičio matuoklių aptikimo pranešimus, kelio juostos informaciją.</string>
+    <string name="show_warnings_descr">Nustatyti srauto perspėjimus (greičio ribojimus, greičio ribojimo kalnelius, tunelius), greičio matuoklių aptikimo pranešimus, kelio juostos informaciją.</string>
     <string name="map_widget_fluorescent">Fluorescenciniai maršrutai</string>
     <string name="map_widget_view_direction">Žiūrėjimo kryptis</string>
     <string name="map_widget_transparent">Permatomi įrankiai</string>
@@ -773,7 +773,7 @@
     <string name="map_widget_vector_attributes">Atvaizduojami atributai</string>
     <string name="map_widget_renderer">Atvaizdavimo stilius</string>
     <string name="osmand_short_description_80_chars">OsmAnd - atviro kodo navigacijos programa su interneto/parsiųstais žemėlapius</string>
-    <string name="avoid_motorway">Vengti greitkelių</string>
+    <string name="avoid_motorway">Jokių greitkelių</string>
     <string name="snap_to_road">Rodyti ant kelio</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
@@ -818,7 +818,7 @@
     <string name="target_point">Tikslas %1$s</string>
     <string name="shared_string_target_points">Tikslai</string>
     <string name="intermediate_point_too_far">Tarpinis tikslas %1$s yra per toli nuo artimiausio kelio.</string>
-    <string name="arrived_at_intermediate_point">Jūs atvykote į tarpinį tikslą</string>
+    <string name="arrived_at_intermediate_point">Tarpinis tikslas pasiektas</string>
     <string name="context_menu_item_intermediate_point">Pridėti tarpinį tikslą</string>
     <string name="map_widget_intermediate_distance">Tarpinis tikslas</string>
     <string name="ending_point_too_far">Pradžios taškas per toli nuo artimiausio kelio.</string>
@@ -845,8 +845,8 @@
     <string name="close_changeset">Uždaryti pakeitimus</string>
     <string name="safe_mode_description">Vykdyti programą saugiu režimu (naudoti Android kodą vietoje aparatinio).</string>
     <string name="safe_mode">Saugus režimas</string>
-    <string name="native_library_not_running">Programa veikia saugiu režimu (išjunkite jį \"Nustatymuose\").</string>
-    <string name="background_service_is_enabled_question">OsmAnd foninis režimas vis dar veikia. Ar norite ir jį nutraukti?</string>
+    <string name="native_library_not_running">Programa veikia saugiu režimu (išjunkite jį „Nustatymuose“).</string>
+    <string name="background_service_is_enabled_question">OsmAnd foninis režimas vis dar veikia. Ar ir jį nutraukti\?</string>
     <string name="route_descr_lat_lon">Plat. %1$.3f ilg. %2$.3f</string>
     <string name="no_buildings_found">Pastatų nerasta.</string>
     <string name="search_villages_and_postcodes">Ieškoti daugiau kaimų/pašto kodų</string>
@@ -861,17 +861,17 @@
     <string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai).</string>
     <string name="index_srtm_parts">dalys</string>
     <string name="index_srtm_ele">Aukščio kontūrų linijos</string>
-    <string name="srtm_plugin_description">Šis įskiepis įgalina tiek aukščio kontūrų linijų tiek ir (reljefo) kalnų šešėlių sluoksnių atvaizdavimą and OsmAnd žemėlapių. Ši funkcija gali būti naudinga atletams, keliautojams ir visiems, kas aktuali reljefo struktūra. (Atkreipkite dėmesį į tai kad kontūrų linijos ir/arba reljefo duomenys yra atskiri, papildomi parsiuntimai prieinami aktyvavus įskiepį)
+    <string name="srtm_plugin_description">Šis įskiepis įgalina tiek aukščio kontūrų linijų tiek ir (reljefo) kalnų šešėlių sluoksnių atvaizdavimą ant OsmAnd žemėlapių. Ši funkcija gali būti naudinga atletams, keliautojams ir visiems, kas aktuali reljefo struktūra. (Atkreipkite dėmesį į tai kad kontūrų linijos ir/arba reljefo duomenys yra atskiri, papildomi parsiuntimai prieinami aktyvavus įskiepį)
 \n
 \nPasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumento Terra, NASA Earth Observing System palydovo, matavimais. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas.</string>
-    <string name="srtm_plugin_name">SRTM įskiepis</string>
+    <string name="srtm_plugin_name">Kontūrinės linijos</string>
     <string name="download_select_map_types">Kiti žemėlapiai</string>
     <string name="download_srtm_maps">SRTM žemėlapiai</string>
-    <string name="audionotes_plugin_description">Šis įskiepis leidžia įrašinėti garsą ir vaizdą bei fotografuoti kelionės metu paspaudus mygtuką žemėlapio ekrane arba tiesiai iš kontekstinio meniu bt kurioje žemėlapio vietoje.</string>
+    <string name="audionotes_plugin_description">Padarykite garso / nuotraukų / vaizdo įrašus kelionės metu naudodami žemėlapio mygtuką arba vietos kontekstinį meniu.</string>
     <string name="audionotes_plugin_name">Audio užrašų įskiepis</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd įskiepis, skirtas aukščio kontūrų linijoms</string>
     <string name="map_widget_distancemeasurement">Atstumo matavimas</string>
-    <string name="audionotes_location_not_defined">Vieta, kuriai skiriama ši pastaba, nenustatyta. Pasirinkite \"Naudoti vietą …\" priskirti pastabą specifinei vietai.</string>
+    <string name="audionotes_location_not_defined">Pasirinkite „Naudoti vietą …“ pridėti pastabą specifinei vietai.</string>
     <string name="map_widget_audionotes">Audio užrašai</string>
     <string name="av_def_action_video">Įrašyti vaizdą</string>
     <string name="av_def_action_audio">Įrašyti garsą</string>
@@ -881,19 +881,19 @@
     <string name="av_video_format">Vaizdo įrašo formatas</string>
     <string name="av_use_external_recorder_descr">Naudoti sistemos vaizdo įrašymo įrankį.</string>
     <string name="av_use_external_recorder">Naudoti sisteminį įrašymo įrankį</string>
-    <string name="av_settings_descr">Konfigūruoti vaizdo ir garso parametrus.</string>
+    <string name="av_settings_descr">Nustatyti vaizdo ir garso parametrus.</string>
     <string name="av_settings">Garso/vaizdo nustatymai </string>
     <string name="recording_error">Įrašymo klaida</string>
     <string name="recording_camera_not_available">Kamera neprieinama</string>
     <string name="recording_is_recorded">Įrašinėjamas garsas/vaizdas. Norėdami sustabdyti palieskite įrankio mygtuką.</string>
     <string name="recording_playing">Grojamas pasirinktas garso įrašas.\n%1$s</string>
     <string name="recording_open_external_player">Atverti kitą grotuvą</string>
-    <string name="recording_delete_confirm">Ištrinti šį įrašą?</string>
+    <string name="recording_delete_confirm">Ištrinti šį elementą\?</string>
     <string name="recording_unavailable">neprieinama</string>
     <string name="recording_context_menu_arecord">Įrašyti audio žinutę</string>
     <string name="recording_context_menu_vrecord">Įrašyti vaizdo žinutę</string>
     <string name="layer_recordings">Įrašų sluoksnis</string>
-    <string name="recording_can_not_be_played">Įrašo neina pagroti</string>
+    <string name="recording_can_not_be_played">Įrašo nepavyko atkurti.</string>
     <string name="recording_context_menu_delete">Ištrinti įrašą</string>
     <string name="recording_context_menu_play">Groti</string>
     <string name="recording_description">Įrašas %1$s %3$s %2$s</string>
@@ -901,18 +901,18 @@
     <string name="shared_string_control_start">Įrašyti</string>
     <string name="map_widget_av_notes">Audio užrašai</string>
     <string name="shared_string_control_stop">Stop</string>
-    <string name="srtm_paid_version_msg">Prašome pirkti kontūrinių linijų įskiepį Android Play parduotuvėje. Taip paremsite tolesnį programos vystymą.</string>
+    <string name="srtm_paid_version_msg">Apsvarstykite galimybę sumokėti už „Kontūrinių linijų“ įskiepį. Taip paremsite tolesnį programos vystymą.</string>
     <string name="srtm_paid_version_title">Kontūrinių linijų įskiepis</string>
-    <string name="dropbox_plugin_description">Dropbox įskiepis leidžia sinchronizuoti išsaugotus kelionių maršrutus ir video/audio užrašus su jūsų Dropbox paskyra.</string>
+    <string name="dropbox_plugin_description">Sinchronizuoti išsaugotus kelionių maršrutus ir video/audio užrašus su jūsų Dropbox paskyra.</string>
     <string name="dropbox_plugin_name">Dropbox įskiepis</string>
     <string name="intermediate_points_change_order">Pakeisti tvarką</string>
     <string name="recording_context_menu_show">Rodyti</string>
     <string name="recording_photo_description">Nuotrauka %1$s %2$s</string>
     <string name="av_def_action_picture">Fotografuoti</string>
     <string name="recording_context_menu_precord">Fotografuoti</string>
-    <string name="stop_routing_confirm">Ar tikrai norite sustabdyti navigaciją?</string>
-    <string name="clear_dest_confirm">Ar tikrai norite panaikinti savo kelionės tikslą (ir tarpinius taškus)?</string>
-    <string name="precise_routing_mode_descr">Igalinti tikslų maršruto skaičiavimą be trikdžių. Jis naudotinas labai ribotam atstumui ir veikia lėtai.</string>
+    <string name="stop_routing_confirm">Sustabdyti navigaciją\?</string>
+    <string name="clear_dest_confirm">Panaikinti savo kelionės tikslą (ir tarpinius taškus)\?</string>
+    <string name="precise_routing_mode_descr">Apskaičiuoti tikslius maršrutus be klaidų. Jis naudotinas labai ribotam atstumui ir veikia lėtai.</string>
     <string name="precise_routing_mode">Tikslus maršruto skaičiavias (alpha)</string>
     <string name="download_hillshade_maps">Kalnų šešėlių žemėlapiai</string>
     <string name="local_indexes_cat_av">Audio/Video duomenys</string>
@@ -937,10 +937,10 @@
     <string name="hno">Namo numeris</string>
     <string name="monitoring_settings">Kelionės įrašymas</string>
     <string name="monitoring_settings_descr">Nustatykite kaip įrašinėti savo maršrutus.</string>
-    <string name="choose_osmand_theme_descr">Pasirinkite išvaizdos temą.</string>
+    <string name="choose_osmand_theme_descr">Pritaikykite programėlės išvaizdą.</string>
     <string name="choose_osmand_theme">Išv. tema</string>
     <string name="accessibility_options">Prieigos nustatymai</string>
-    <string name="select_address_activity">Pasirinkti adresą</string>
+    <string name="select_address_activity">Nurodyti adresą</string>
     <string name="favourites_list_activity">Pasirinkti įsimintą vietą</string>
     <string name="local_openstreetmap_act_title">OSM pakeitimai</string>
     <string name="shared_string_more_actions">Kiti veiksmai</string>
@@ -970,11 +970,11 @@
     <string name="plugin_distance_point">Taškas</string>
     <string name="gpx_file_name">GPX failo pavadinimas</string>
     <string name="gpx_saved_sucessfully">GPX failas išsaugotas {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Įskiepis prideda programėle žemėlapio ekrane, kuri leidžia kurti maršrutus spūstelėjus žemėlapį, taip pat naudoti/keisti egzistuojančius GPX failus, planuoti maršrutus bei matuoti atstumus tarp taškų. Išsaugotą GPX failą galima naudoti maršruto planavimui.</string>
+    <string name="osmand_distance_planning_plugin_description">Kurkite kelius bakstelėdami žemėlapį arba naudodami ar keisdami esamus GPX failus, kad suplanuotumėte kelionę ir išmatuotumėte atstumą tarp taškų. Rezultatą galima išsaugoti kaip GPX failą ir vėliau naudoti kaip gaires.</string>
     <string name="osmand_distance_planning_plugin_name">Atstumo skaičiavimo ir planavimo įrankis</string>
-    <string name="use_distance_measurement_help">* Palieskite taškui pažymėti. 
-\n* Paspauskite ant žemėlapio ir laikykite ankstesnio taško pašalinimui. 
-\n* Paspauskite ant taško ir laikykite aprašymo peržiūrai ar sukūrimui. 
+    <string name="use_distance_measurement_help">* Palieskite taškui pažymėti.
+\n* Paspauskite ant žemėlapio ir laikykite ankstesnio taško pašalinimui.
+\n* Paspauskite ant taško ir laikykite aprašymo peržiūrai ar sukūrimui.
 \n* Paspauskite ant matavimo įrankio kitiems veiksmams.</string>
     <string name="shared_string_do_not_show_again">Daugiau neberodyti</string>
     <string name="distance_measurement_start_editing">Pradėti redagavimą</string>
@@ -985,7 +985,7 @@
     <string name="search_street_in_neighborhood_cities">Ieškoti gatvės gretimuose miestuose</string>
     <string name="intermediate_items_sort_return">Tarpiniai taškai sudėlioti optimaliu maršrutu pakeliui iš esamos vietos į kelionės tikslą.</string>
     <string name="intermediate_items_sort_by_distance">Rūšiuoti nuo durų iki durų</string>
-    <string name="please_select_address">Pasirinkit pirmiausia miestą ar gatvę</string>
+    <string name="please_select_address">Pirmiausia nustatykite miestą arba gatvę</string>
     <string name="destination_point">Kelionės tikslas %1$s</string>
     <string name="context_menu_item_destination_point">Nustatyti kelionės tikslu</string>
     <string name="map_widget_fps_info">Kadrai/s info</string>
@@ -997,7 +997,7 @@
     <string name="driving_region_europe_asia">Europa, Azija, Lotynų Amerika ir panašiai</string>
     <string name="driving_region_uk">JK, Indija ir kitos</string>
     <string name="speak_title">Pranešti…</string>
-    <string name="speak_descr">Nustatyti gatvių pavadinimų, eismo perspėjimų (priverstinių sustojimų, greičio ribotuvų), greičio radarų, greičio apribojimų įgarsinimą.</string>
+    <string name="speak_descr">Nustatyti gatvių pavadinimų, eismo perspėjimų (priverstinių sustojimų, greičio ribotuvų), greičio radarų, greičio apribojimų pranešimą.</string>
     <string name="speak_street_names">Gatvių pavadinimai (TTS)</string>
     <string name="speak_speed_limit">Greičio apribojimai</string>
     <string name="speak_cameras">Greičio radarai</string>
@@ -1026,19 +1026,19 @@
     <string name="about_version">Versija:</string>
     <string name="shared_string_about">Apie</string>
     <string name="about_settings_descr">Versijos informacija, licencijos, projekto nariai</string>
-    <string name="local_index_tile_data_zooms">Parsiųsti mąsteliai: %1$s</string>
-    <string name="local_index_tile_data_expire">Nustos galioti (minutės): %1$s</string>
+    <string name="local_index_tile_data_zooms">Parsiųsti mastelio lygiai: %1$s</string>
+    <string name="local_index_tile_data_expire">Galiojimo laikas (minutėmis): %1$s</string>
     <string name="local_index_tile_data_downloadable">Prieinami parsiuntimui: %1$s</string>
     <string name="local_index_tile_data_maxzoom">Didžiausias mąstelis: %1$s</string>
     <string name="local_index_tile_data_minzoom">Mažiausias mąstelis: %1$s</string>
     <string name="local_index_tile_data_name">Žemėlapių lakštų duomenys: %1$s</string>
     <string name="edit_tilesource_successfully">Žemėlapių lakštų šaltinis %1$s išsaugotas</string>
-    <string name="edit_tilesource_elliptic_tile">Eliptinis merkatorius</string>
-    <string name="edit_tilesource_maxzoom">Maksimalus mąstelis</string>
-    <string name="edit_tilesource_expiration_time">Nustos galioti (minutės)</string>
-    <string name="edit_tilesource_minzoom">Mažiausias mąstelis</string>
+    <string name="edit_tilesource_elliptic_tile">Elipsinė Merkatoriaus projekcija</string>
+    <string name="edit_tilesource_maxzoom">Didžiausias priartinimas</string>
+    <string name="edit_tilesource_expiration_time">Galiojimo laikas (minutėmis)</string>
+    <string name="edit_tilesource_minzoom">Mažiausias priartinimas</string>
     <string name="edit_tilesource_url_to_load">Nuoroda</string>
-    <string name="edit_tilesource_choose_existing">Pasirinkti iš turimų…</string>
+    <string name="edit_tilesource_choose_existing">Pasirinkti iš esamų…</string>
     <string name="maps_define_edit">Nustatyti/redaguoti…</string>
     <string name="base_world_map">Bazinis pasaulio žemėlapis</string>
     <string name="map_magnifier">Žemėlapio padidinimo stiklas</string>
@@ -1057,7 +1057,7 @@
     <string name="app_mode_motorcycle">Motociklas</string>
     <string name="app_mode_boat">Valtis</string>
     <string name="app_mode_aircraft">Lėktuvas</string>
-    <string name="local_osm_changes_delete_all_confirm">Jūs ištrinsite %1$d OSM pakeitimus. Ar tikrai norite?</string>
+    <string name="local_osm_changes_delete_all_confirm">Ištrinti %1$d OSM pakeitimus\?</string>
     <string name="shared_string_delete_all">Viską ištrinti</string>
     <string name="amenity_type_seamark">Jūros navigacijos ženklas</string>
     <string name="app_modes_choose_descr">Pasirinkite programos veikimo profilius, kurie bus rodomi programoje.</string>
@@ -2877,4 +2877,15 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="terrain_maps">Reljefo žemėlapiai</string>
     <string name="nautical_depth">Jūrinis gylis</string>
     <string name="units_and_formats">Vienetai ir formatai</string>
+    <string name="backup_version_history_removed">Pašalinama visa versijų istorija</string>
+    <string name="backup_data_removed">Visi duomenys pašalinami</string>
+    <string name="shared_string_progress">Progresas</string>
+    <string name="backup_do_not_have_any">Dar neturite jokios atsarginės kopijos internete</string>
+    <string name="backup_dont_have_any_descr">Nustatykite automatinę atsarginę kopiją, kad nereikėtų nerimauti dėl prarastų duomenų.</string>
+    <string name="backup_welcome_back">Sveiki sugrįžę!</string>
+    <string name="backup_welcome_back_descr">Galite atkurti šio prietaiso duomenis naudodami esamas atsargines kopijas arba sukurti šio prietaiso atsarginę kopiją „OsmAnd Cloud“.</string>
+    <string name="backup_setup">Nustatyti atsarginę kopiją</string>
+    <string name="backup_restore_now">Atkurti dabar</string>
+    <string name="shared_string_purchased">Įsigyta</string>
+    <string name="layer_gpx_layer">Maršrutai</string>
 </resources>

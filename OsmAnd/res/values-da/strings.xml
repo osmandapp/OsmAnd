@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="srtm_paid_version_msg">Overvej at betale for \'Højdekurve\' udvidelsen for at støtte videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
@@ -3938,4 +3938,34 @@
     <string name="restore_complete">Gendannelse fuldført</string>
     <string name="grey_color_slope">Grå farve anvendes, når hældningen er udefineret.</string>
     <string name="backup_version_history">Versionshistorik</string>
+    <string name="backup_error_no_subscription">Mangler abonnement</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Farvelægning efter netværkstilhørsforhold.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Farvelæg ruter efter deres knudepunktsnetværkstype (international, regional, lokal).</string>
+    <string name="walking_route_osmc_description">Farvelæg ruter efter deres individuelle lokale farve (hvis de findes på OpenStreetMap) og type (international, regional, lokal).</string>
+    <string name="travel_routes">Rejseruter</string>
+    <string name="setting_supported_by_style">Denne indstilling leveres af kortstilen \'%1$s\'</string>
+    <string name="direct_line_maps_required_descr">Ruteberegning tager længere tid end normalt.
+\n
+\nMåske er nogle kort ikke indlæst.</string>
+    <string name="online_direct_line_maps_link">Kontroller de nødvendige kort.</string>
+    <string name="offline_maps_required_descr">Nogle offline-kort, der er nødvendige for denne rute, mangler.</string>
+    <string name="online_maps_required_descr">OsmAnd kunne desværre ikke finde en rute for dine indstillinger.
+\n
+\nMåske er nogle kort ikke indlæst, du kan køre en online kontrol efter de nødvendige kort.</string>
+    <string name="online_maps_searching_descr">Søger online…</string>
+    <string name="reset_to_original">Nulstil til oprindelig</string>
+    <string name="map_updates_for_mappers">Kortopdateringer til kortlæggerne</string>
+    <string name="benefits_for_contributors">Fordele for aktive OSM-bidragsydere</string>
+    <string name="benefits_for_contributors_primary_descr">Du kan være berettiget til ubegrænsede kortopdateringer hver time, hvis du er en aktiv bidragyder til OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">Log ind på OpenStreetMap for at tjekke, om du er berettiget til ubegrænsede månedlige og ugentlige kortopdateringer.</string>
+    <string name="use_login_and_password">Benyt brugernavn og adgangskode</string>
+    <string name="available_until">Tilgængelig indtil %1$s</string>
+    <string name="enough_contributions_descr">Tillykke, du har lavet nok bidrag til OpenStreetMap og kan nu nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
+    <string name="not_enough_contributions_descr">Der kræves mindst %1$s OpenStreetMap-bidrag inden for %2$s dage.</string>
+    <string name="shared_string_contributions">Bidrag</string>
+    <string name="contributions_may_calculate_with_delay">Beregning af bidragene kan tage adskillige timer.</string>
+    <string name="map_updates_are_unavailable_yet">Kortopdateringer er endnu ikke tilgængelige. :-(</string>
+    <string name="connect_track_points_as">Forbind rutepunkter</string>
+    <string name="pro_features">Pro-funktioner</string>
+    <string name="purchases_restored">Køb gendannet</string>
 </resources>

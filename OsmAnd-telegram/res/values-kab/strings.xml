@@ -47,7 +47,7 @@
     <string name="received_gps_points">Agazen GPX i d-yettwaremsen: %1$s</string>
     <string name="osmand_privacy_policy">Tasertit tabaḍnit n OsmAnd</string>
     <string name="telegram_privacy_policy">Tasertit tabaḍnit n Telegram</string>
-    <string name="privacy_policy_agree">S utekki ɣef \"Kemmel\" ad tqebleḍ tiwtilin n Telegram- akked tasertit tabaḍnit OsmAnd.</string>
+    <string name="privacy_policy_agree">S utekki ɣef \"Kemmel\" ad tqebleḍ tiwtilin n Telegram akked tasertit tabaḍnit OsmAnd.</string>
     <string name="privacy_policy_telegram_client">Aneḍfaṛ OsmAnd d yiwen seg yimsaɣen i iseqdacen tiɣerɣert yeldin Telegram. Inermisen-ik zemren ad sqedcen yal amsaɣ-nniḍen Telegram.</string>
     <string name="privacy_policy_use_telegram">Telegram (d asnas n yiznan) yettwaseqdec i tuqqna d teywalt d yimdanen.</string>
     <string name="shared_string_telegram">Telegram</string>
@@ -82,7 +82,7 @@
     <string name="last_update_from_telegram_duration">Lqem aneggaru n Telegram: %1$s aya</string>
     <string name="last_response_date">Tiririt taneggarut: %1$s</string>
     <string name="last_update_from_telegram_date">Lqem aneggaru n Telegram: %1$s</string>
-    <string name="duration_ago">%1$S</string>
+    <string name="duration_ago">%1$s aya</string>
     <string name="shared_string_suggested">Yettesumer</string>
     <string name="time_zone">Iẓḍi usrig</string>
     <string name="shared_string_enabled">Urmid</string>
@@ -144,7 +144,7 @@
     <string name="add_device">Rnu ibenk</string>
     <string name="shared_string_save">Sekles</string>
     <string name="shared_string_disable">Désactiver</string>
-    <string name="no_internet_connection">Ulac tuqqna n Internet</string>
+    <string name="no_internet_connection">Ulac tuqqna Internet</string>
     <string name="shared_string_status">Addad</string>
     <string name="not_found_yet">ulac-it</string>
     <string name="shared_string_later">Ticki</string>
@@ -228,8 +228,8 @@
     <string name="osmand_service_descr">Aneḍfaṛ OsmAnd yesselkam deg ugilal deg ugdil isekwṛen.</string>
     <string name="location_service_no_gps_available">Fren yiwen seg yisaǧǧawen n adig akken ad tebḍuḍ adig-ik.</string>
     <string name="gps_not_available">Ttixil-k rmed \"adig\" deg yiɣewwaṛen n unagraw</string>
-    <string name="no_location_permission">Asnas ixuṣ tisirag i unekcum ɣer yisefka n wadig.</string>
-    <string name="gps_network_not_enabled">Rmed \"adig\"\?</string>
+    <string name="no_location_permission">Asnas ixuṣ tisirag nunekcum ɣer yisefka n wadig.</string>
+    <string name="gps_network_not_enabled">Rmed tifin n wadig\?</string>
     <string name="password_descr">Awal uffir Telegram</string>
     <string name="authentication_code_descr">Telegram yuzen-ak-d tangalt akken OsmAnd ad yeqqen ɣer umiḍan.</string>
     <string name="phone_number_descr">Uṭṭun n tiliɣri s umasal agraɣlan</string>
@@ -267,4 +267,8 @@
     <string name="disable_all_sharing">Sens akk beṭṭu</string>
     <string name="disable_all_sharing_desc">Sens beṭṭu n wadig i meṛṛa asqerdec yettwafernen (%1$d).</string>
     <string name="choose_osmand">Fren lqem OsmAnd ara tesqedceḍ</string>
+    <string name="shared_string_export">Sifeḍ</string>
+    <string name="logcat_buffer">Logcat buffer</string>
+    <string name="logcat_buffer_descr">Senqed daɣen bḍu iɣmisen lqayen n usnas</string>
+    <string name="send_report">Azen aneqqis</string>
 </resources>

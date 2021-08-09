@@ -557,7 +557,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		if (trackColoringCard != null) {
 			ColoringType currentColoringType = trackColoringCard.getSelectedColoringType();
 			String routeInfoAttribute = trackColoringCard.getRouteInfoAttribute();
-			return currentColoringType.isAvailableInSubscription(app, routeInfoAttribute);
+			return currentColoringType.isAvailableInSubscription(app, routeInfoAttribute, false);
 		}
 		return false;
 	}

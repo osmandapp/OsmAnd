@@ -192,13 +192,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	                         Bundle savedInstanceState) {
 
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity == null) {
+		menu = mapActivity != null ? mapActivity.getContextMenu() : null;
+		if (menu == null || menu.getLatLon() == null) {
 			return null;
 		}
 
 		processScreenHeight(container);
 
-		menu = mapActivity.getContextMenu();
 		OsmandApplication app = mapActivity.getMyApplication();
 		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
 

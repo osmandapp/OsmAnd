@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_shop">Loja</string>
     <string name="poi_shop_food">Loja de conveniência e supermercado</string>
@@ -130,7 +130,6 @@
     <string name="poi_electronics">Loja de eletrônicos</string>
     <string name="poi_fuel_octane_80">Octano 80</string>
     <string name="poi_public_transport_platform_trolleybus">Ponto de trólebus</string>
-    
     <string name="poi_ticket">Bilheteria</string>
     <string name="poi_tobacco">Tabacaria</string>
     <string name="poi_toys">Loja de brinquedos</string>
@@ -351,7 +350,6 @@
     <string name="poi_pension_fund">Fundo de pensão</string>
     <string name="poi_migration">Migração</string>
     <string name="poi_tax_inspection">Inspeção fiscal</string>
-    
     <string name="poi_customs">Aduana</string>
     <string name="poi_city">Cidade grande</string>
     <string name="poi_town">Cidade menor</string>
@@ -812,7 +810,6 @@
     <string name="poi_pasta">Loja de massas</string>
     <string name="poi_pastry">Pastelaria</string>
     <string name="poi_candles">Loja de velas</string>
-    
     <string name="poi_free_flying">Artigos de voo livre</string>
     <string name="poi_garden_furniture">Móveis para jardim</string>
     <string name="poi_leather">Artigos de couro</string>
@@ -830,7 +827,6 @@
     <string name="poi_swimming_pool_shop">Artigos de piscina</string>
     <string name="poi_breakwater">Quebra-mar</string>
     <string name="poi_groyne">Estacada</string>
-    
     <string name="poi_basin">Bacia</string>
     <string name="poi_crane">Guindaste</string>
     <string name="poi_tree">Árvore</string>
@@ -2907,7 +2903,6 @@
     <string name="poi_office_psychologist">Escritório de psicólogo</string>
     <string name="poi_office_midwife">Escritório de parteira</string>
     <string name="poi_payment_troika_no">Cartão Troika não aceito</string>
-    
     <string name="poi_diplomatic_ambassadors_residence">Residência do embaixador</string>
     <string name="poi_diplomatic_high_commission">Alto comissariado</string>
     <string name="poi_fire_operator">Operador do corpo de bombeiros</string>
@@ -3605,7 +3600,7 @@
     <string name="poi_vehicle_military">Acesso de veículos: militar</string>
     <string name="poi_vehicle_delivery">Acesso de veículos: entrega</string>
     <string name="poi_vehicle_forestry">Acesso de veículos: florestal</string>
-    <string name="poi_motorcar_yes">Acesso de automóveis: sim</string>
+    <string name="poi_motorcar_yes">Sim</string>
     <string name="poi_motorcar_private">Acesso de automóveis: privado</string>
     <string name="poi_motorcar_no">Acesso de automóveis: não</string>
     <string name="poi_motorcar_destination">Acesso de automóveis: para trânsito local</string>
@@ -3976,4 +3971,50 @@
     <string name="poi_contact_webcam">Webcam</string>
     <string name="poi_contact_linkedin">LinkedIn</string>
     <string name="poi_outdoor_seating_poi">Lugar ao ar livre</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_access_general">Acesso geral</string>
+    <string name="poi_access_scooter">Acesso de lambreta</string>
+    <string name="poi_authentication_short_message_text">Texto SMS é usado para autenticação</string>
+    <string name="poi_authentication_short_message_number">SMS é usado para autenticação</string>
+    <string name="poi_authentication_short_message_no">Autenticação via SMS: não</string>
+    <string name="poi_authentication_contactless_no">Autenticação sem contato: não</string>
+    <string name="poi_share_taxi_yes">Táxi compartilhado: sim</string>
+    <string name="poi_authentication_short_message">Autenticação via SMS</string>
+    <string name="poi_access_bicycle">Acesso de bicicleta</string>
+    <string name="poi_access_motorcar">Acesso de automóveis</string>
+    <string name="poi_authentication_none_yes">Sim</string>
+    <string name="poi_authentication_none_no">Autenticação não requerida: não</string>
+    <string name="poi_authentication_short_message_yes">Sim</string>
+    <string name="poi_authentication_phone_call_number">Número de telefone usado para autenticação</string>
+    <string name="poi_authentication_phone_call_yes">Sim</string>
+    <string name="poi_authentication_phone_call_no">Autenticação via celular: não</string>
+    <string name="poi_authentication_app_yes">Sim</string>
+    <string name="poi_authentication_app_no">Autenticação via aplicativo: não</string>
+    <string name="poi_authentication_key_yes">Sim</string>
+    <string name="poi_authentication_key_no">Autenticação via chave: não</string>
+    <string name="poi_authentication_chip_card_yes">Sim</string>
+    <string name="poi_authentication_chip_card_no">Autenticação via cartão com chip: não</string>
+    <string name="poi_authentication_contactless_yes">Sim</string>
+    <string name="poi_authentication_none">Autenticação não requerida</string>
+    <string name="poi_authentication_phone_call">Autenticação via celular</string>
+    <string name="poi_authentication_app">Autenticação via aplicativo</string>
+    <string name="poi_authentication_key">Autenticação via chave</string>
+    <string name="poi_authentication_chip_card">Autenticação via cartão com chip</string>
+    <string name="poi_authentication_contactless">Autenticação sem contato</string>
+    <string name="poi_shelter_yes">Sim</string>
+    <string name="poi_shelter_no">Abrigo: não</string>
+    <string name="poi_direction_southwest">Direção sudoeste</string>
+    <string name="poi_direction_southeast">Direção sudeste</string>
+    <string name="poi_direction_northwest">Direção noroeste</string>
+    <string name="poi_direction_northeast">Direção nordeste</string>
+    <string name="poi_direction_west">Direção oeste</string>
+    <string name="poi_direction_south">Direção sul</string>
+    <string name="poi_direction_east">Direção leste</string>
+    <string name="poi_direction_north">Direção norte</string>
+    <string name="poi_destination">Destino</string>
+    <string name="poi_permanent_camping_only">Somente</string>
+    <string name="poi_permanent_camping_no">Não</string>
+    <string name="poi_permanent_camping_yes">Sim</string>
+    <string name="poi_shelter_filter">Abrigo</string>
+    <string name="poi_permanent_camping">Acampamento permanente</string>
 </resources>

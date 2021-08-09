@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
@@ -1185,7 +1185,7 @@
     <string name="gpx_info_waypoints">航點：%1$s</string>
     <string name="save_as_favorites_points">另存群組為我的收藏</string>
     <string name="select_destination_and_intermediate_points">設定目的地</string>
-    <string name="layer_amenity_label">POI 覆蓋標籤</string>
+    <string name="layer_amenity_label">POI 標籤（POI、收藏）</string>
     <string name="show_zoom_buttons_navigation_descr">在導航期間顯示縮放按鈕。</string>
     <string name="show_zoom_buttons_navigation">顯示縮放按鈕</string>
     <string name="create_poi_link_to_osm_doc"><u>線上 OSM</u> 地圖的分類與影像。</string>
@@ -1206,7 +1206,7 @@
     <string name="rendering_attr_showAccess_name">顯示進入限制和收費</string>
     <string name="rendering_attr_showSurfaceGrade_name">顯示道路品質</string>
     <string name="rendering_attr_showSurfaces_name">顯示路面</string>
-    <string name="rendering_attr_showCycleRoutes_name">顯示自行車路線</string>
+    <string name="rendering_attr_showCycleRoutes_name">自行車路線</string>
     <string name="map_preferred_locale">偏好的地圖語言</string>
     <string name="local_map_names">當地的名稱</string>
     <string name="lang_sw">斯瓦希里</string>
@@ -1235,7 +1235,7 @@
     <string name="continue_navigation">繼續導航</string>
     <string name="pause_navigation">暫停導航</string>
     <string name="rendering_attr_alpineHiking_name">登山健行等級（SAC）</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">登山健行符號上層</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">登山健行路線</string>
     <string name="rendering_attr_alpineHiking_description">依據 SAC 評級繪製路徑。</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">依據 OSMC 軌跡繪製路徑。</string>
     <string name="arrival_distance_factor_early">提早</string>
@@ -1467,7 +1467,7 @@
 \n經度 %2$s</string>
     <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其它。</string>
     <string name="routing_settings_2">導航設定</string>
-    <string name="general_settings_2">一般設定</string>
+    <string name="general_settings_2">全域設定</string>
     <string name="waypoint_visit_after">隨後造訪</string>
     <string name="waypoint_visit_before">先造訪</string>
     <string name="shared_string_dismiss">退出</string>
@@ -1531,8 +1531,8 @@
     <string name="use_fast_recalculation_desc">僅重新計算路線的初始部份，對長途旅行很有用。</string>
     <string name="shared_string_logoff">登出</string>
     <string name="rendering_value_disabled_name">已停用</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">依網絡從屬著色</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">依據 OSMC 登山健行標誌著色</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">網路從屬</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">刪除 OSM 的編輯</string>
     <string name="read_full_article">閱讀全部文章 (線上)</string>
     <string name="shared_string_wikipedia">維基百科</string>
@@ -1738,7 +1738,7 @@
     <string name="lang_fy">菲士蘭</string>
     <string name="lang_als">阿爾巴尼亞 (Tosk)</string>
     <string name="share_osm_edits_subject">透過 OsmAnd 共用以編輯 OSM</string>
-    <string name="save_poi_without_poi_type_message">您真的想要儲存沒有類型的 POI 嗎？</string>
+    <string name="save_poi_without_poi_type_message">儲存沒有類型的 POI 嗎？</string>
     <string name="shared_string_location">位置</string>
     <string name="poi_context_menu_modify_osm_change">修改 OSM 的變更</string>
     <string name="context_menu_item_delete_waypoint">要刪除 GPX 的航點嗎？</string>
@@ -1844,7 +1844,7 @@
     <string name="shared_string_save_changes">儲存更改</string>
     <string name="find_parking">找停車場</string>
     <string name="show_polygons">顯示多邊形</string>
-    <string name="rendering_attr_showMtbRoutes_name">顯示山地自行車車道</string>
+    <string name="rendering_attr_showMtbRoutes_name">山地自行車路線</string>
     <string name="select_map_markers">選擇地圖標記</string>
     <string name="shared_string_reverse_order">順序相反</string>
     <string name="show_map_markers_description">啟動地圖標記功能。</string>
@@ -4074,7 +4074,6 @@
     <string name="announce_when_exceeded">超過時宣佈</string>
     <string name="user_points">使用者點</string>
     <string name="output">輸出</string>
-    
     <string name="shared_string_feet">英呎</string>
     <string name="srtm_unit_format">等高線單位變體</string>
     <string name="srtm_download_list_help_message">OsmAnd 提供以公尺與英呎為單位的等高線資料。您將必須重新下載檔案以變更格式。</string>
@@ -4161,7 +4160,7 @@
     <string name="grey_color_slope">當斜率未被定義時則使用灰色。</string>
     <string name="backup_version_history">版本歷史紀錄</string>
     <string name="backup_storage_taken">用掉的儲存空間</string>
-    <string name="backup_version_history_delete_descr">要從 OsmAnd 雲端刪除已棄用資料類型的變更紀錄嗎？</string>
+    <string name="backup_version_history_delete_descr">要從 OsmAnd Cloud 刪除已棄用資料類型的變更紀錄嗎？</string>
     <string name="delete_version_history">刪除版本歷史紀錄</string>
     <string name="routing_attr_avoid_tunnels_description">避開隧道</string>
     <string name="routing_attr_avoid_tunnels_name">避開隧道</string>
@@ -4169,8 +4168,8 @@
     <string name="send_logcat_log">傳送 logcat 紀錄檔</string>
     <string name="backup_promocode">促銷代碼</string>
     <string name="purchases_feature_desc_nautical">取得航海深度資訊</string>
-    <string name="purchases_feature_desc_terrain">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖，山峰與低地。</string>
-    <string name="purchases_feature_desc_wikivoyage">離線瀏覽維基百科。文章按國家與區域劃分，並以所有語言提供。</string>
+    <string name="purchases_feature_desc_terrain">地形等高線，帶有深色陰影的完整山體陰影圖，以及帶有顏色的坡度圖來顯示山峰與低地。</string>
+    <string name="purchases_feature_desc_wikivoyage">離線瀏覽維基導遊。文章按國家與區域劃分，並以所有語言提供。</string>
     <string name="purchases_feature_desc_wikipedia">離線瀏覽維基百科。文章按國家與區域劃分，並以所有語言提供。</string>
     <string name="purchases_feature_desc_combined_wiki">隨時瀏覽維基百科，不需要網際網路連線。離線資料按國家劃分，並以所有語言提供。</string>
     <string name="purchases_feature_desc_unlimited_map_download">取得所有大洲與區域的無限制下載離線地圖。</string>
@@ -4199,7 +4198,7 @@
     <string name="complete_purchase">完整購買</string>
     <string name="regular_price">一般價格</string>
     <string name="from_with_param">來自 %1$s</string>
-    <string name="backup_delete_types_descr">要從 OsmAnd 雲端刪除已器用資料類型的所有資料嗎？</string>
+    <string name="backup_delete_types_descr">要從 OsmAnd Cloud 刪除已器用資料類型的所有資料嗎？</string>
     <string name="backup_delete_types">刪除已停用的資料類型</string>
     <string name="shared_string_discussion">討論</string>
     <string name="shared_string_view_all">檢視全部</string>
@@ -4217,24 +4216,86 @@
     <string name="approximate_route_description">將路線附加到地圖上的道路以取得所有轉彎與其他資料，如平滑度、道路類型等。</string>
     <string name="release_4_0">• 雲端備份
 \n
-\n • 為「Topo」彩現樣式新增了夜間模式
+\n • 為「Topo」地圖樣式新增了夜間模式
 \n
 \n • 新增了以英呎為單位下載等高線的選項
 \n
-\n • 軌跡現在可以按照高度、速度或坡度上色了。
+\n • 軌跡現在可以按照高度、速度或坡度上色了
 \n
 \n • 更新了「旅程錄製」對話框
 \n
 \n • 點擊距離從半徑尺規移動至單獨的選項
 \n
-\n • 計畫路線：新增了變更導航的選項，不需要離開計畫路線就可以存取地圖設定與搜尋
+\n • 計畫路線：您現在不需要離開計畫路線模式模式就可以變更導航選項、存取地圖設定與搜尋
 \n
-\n • 新的「購買」畫面，包含了關於購買的更詳細資訊
+\n • 新的「購買」畫面，包含了關於更詳細的購買資訊
 \n
-\n • 新增變更路線外觀的選項。
+\n • 新增變更路線外觀的選項
 \n
 \n • OsmAnd Live 更新移動至「下載」→「更新」
 \n
 \n</string>
     <string name="duration_moment_ago">剛才</string>
+    <string name="backup_error_subscription_was_expired_descr">您的 OsmAnd Pro 訂閱已過期，請續訂以使用備份。您仍然可以從雲端還原資料。</string>
+    <string name="contour_lines_hillshades_slope">等高線、地形陰影、坡度</string>
+    <string name="logout_from_osmand_cloud">從 OsmAnd Cloud 登出</string>
+    <string name="logout_from_osmand_cloud_decsr">登出？
+\n您必須重新登入才能備份或還原資料。</string>
+    <string name="backup_deleting_all_data">正在刪除所有資料……</string>
+    <string name="backup_deleted_all_data">已刪除所有資料。</string>
+    <string name="backup_deleting_all_data_descr">請等候 OsmAnd 刪除您雲端上的資料。裝置上的所有資料都將不會變動。</string>
+    <string name="backup_deleted_all_data_descr">您所有的資料都已成功從 OsmAnd Cloud 刪除了。</string>
+    <string name="backup_version_history_removed">已移除所有版本歷史紀錄。</string>
+    <string name="backup_data_removed">已移除所有資料。</string>
+    <string name="shared_string_progress">進度</string>
+    <string name="backup_do_not_have_any">您還沒有線上備份。</string>
+    <string name="backup_dont_have_any_descr">安排自動備份，永不遺失資料。</string>
+    <string name="backup_welcome_back">歡迎回來！</string>
+    <string name="backup_welcome_back_descr">使用現有備份來還原此裝置上的資料，或是備份資料至 OsmAnd Cloud。</string>
+    <string name="backup_setup">設定備份</string>
+    <string name="backup_restore_now">立刻還原</string>
+    <string name="attribute">屬性</string>
+    <string name="shared_string_purchased">已購買</string>
+    <string name="explore_wikipedia_offline">離線探索維基百科。</string>
+    <string name="on_hold_since">自 %1$s 起暫停</string>
+    <string name="active_till">有效至 %1$s</string>
+    <string name="promo_subscription">促銷訂閱</string>
+    <string name="track_has_no_needed_data">軌跡不包含所需的資料。</string>
+    <string name="option_available_only_in_osmand_pro">此選項作為 OsmAnd Pro 訂閱的一部分提供。</string>
+    <string name="pro_widgets">Pro 小工具</string>
+    <string name="purchases_feature_desc_pro_widgets">存取 OsmAnd Pro 功能：路線著色等。</string>
+    <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd 方案以找到適合您的。</string>
+    <string name="routes_color_by_type">使用……為路線著色</string>
+    <string name="shared_string_relation">關係</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">根據其各自的當地顏色（如果存在於 OpenStreetMap 之上的話）與健行盾牌符號為路線著色。</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">按網路關係分配著色。</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">根據其節點網路類型（國際、區域、當地）為路線著色。</string>
+    <string name="walking_route_osmc_description">根據其各自的當地顏色（如果存在於 OpenStreetMap 之上的話）與類型（國際、區域、當地）為路線著色。</string>
+    <string name="travel_routes">旅行路線</string>
+    <string name="setting_supported_by_style">地圖樣式「%1$s」提供此設定</string>
+    <string name="direct_line_maps_required_descr">路線計算需要比平常還要久的時間。
+\n
+\n可能有某些地圖未載入。</string>
+    <string name="online_direct_line_maps_link">檢查必要的地圖。</string>
+    <string name="offline_maps_required_descr">缺少此路線需要的部份離線地圖。</string>
+    <string name="online_maps_required_descr">不幸的是，OsmAnd 無法根據您的設定決定路線。
+\n
+\n或許部份地圖未載入，您可以線上檢查需要的地圖。</string>
+    <string name="online_maps_searching_descr">正在線上搜尋……</string>
+    <string name="reset_to_original">重設為原始設定</string>
+    <string name="backup_error_no_subscription">無訂閱</string>
+    <string name="map_updates_for_mappers">圖客的地圖更新</string>
+    <string name="benefits_for_contributors">活躍 OSM 貢獻者的好處</string>
+    <string name="benefits_for_contributors_primary_descr">如果您是 OpenStreetMap.org 活躍貢獻者，您或許可以獲得無限制的每小時地圖更新。</string>
+    <string name="benefits_for_contributors_secondary_descr">登入 OpenStreetMap 以檢查您是否有資格獲得無限制的每月或每小時地圖更新。</string>
+    <string name="use_login_and_password">使用使用者名稱與密碼</string>
+    <string name="available_until">可用至 %1$s</string>
+    <string name="enough_contributions_descr">恭喜您為 OpenStreetMap 提供了夠多的貢獻，現在可以享受無限的 OsmAnd 地圖更新了！</string>
+    <string name="not_enough_contributions_descr">在%2$s天內至少需要 %1$s 次 OpenStreetMap 貢獻。</string>
+    <string name="shared_string_contributions">貢獻</string>
+    <string name="contributions_may_calculate_with_delay">計算貢獻可能需要數小時。</string>
+    <string name="map_updates_are_unavailable_yet">地圖更新尚不可用 :-(</string>
+    <string name="connect_track_points_as">連結路線點</string>
+    <string name="pro_features">Pro 功能</string>
+    <string name="purchases_restored">購買已復原</string>
 </resources>

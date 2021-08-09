@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="shared_string_topbar">Supra breto</string>
     <string name="recalculate_route">Rekalkuli kurson</string>
@@ -48,7 +48,7 @@
     <string name="shared_string_toolbar">Ilobreto</string>
     <string name="shared_string_widgets">Fenestraĵoj</string>
     <string name="consider_turning_polygons_off">Oni rekomendas malaktivigi bildigadon de pluranguloj.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Montri montbiciklajn kursojn</string>
+    <string name="rendering_attr_showMtbRoutes_name">Montbiciklaj kursoj</string>
     <string name="show_polygons">Pluranguloj</string>
     <string name="shared_string_status">Stato</string>
     <string name="find_parking">Trovi parkumejon</string>
@@ -99,7 +99,7 @@
     <string name="no_microphone_permission">Donu permeson por aliri mikrofonon.</string>
     <string name="route_distance">Distanco:</string>
     <string name="route_duration">Tempo:</string>
-    <string name="rendering_attr_horseRoutes_name">Ĉevalvojoj</string>
+    <string name="rendering_attr_horseRoutes_name">Ĉevalaj kursoj</string>
     <string name="shared_string_near">Proksime</string>
     <string name="no_address_found">Neniu adreso difinita</string>
     <string name="shared_string_hide">Kaŝi</string>
@@ -308,8 +308,8 @@
     <string name="shared_string_show_details">Montri detalojn</string>
     <string name="osm_edit_context_menu_delete">Forigi OSM-redaktojn</string>
     <string name="rendering_value_disabled_name">Malaktiva</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Kolorigi laŭ speco de kurs-reto</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Kolorigi laŭ OSMC piedirada simbolo</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">prizorganto</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">reala koloro kaj emblemo</string>
     <string name="shared_string_logoff">Elsaluti</string>
     <string name="rendering_attr_hideHouseNumbers_name">Numeroj de domoj</string>
     <string name="application_dir_change_warning3">Ĉu movi dosierojn de OsmAnd-datumoj al la nova loko\?</string>
@@ -640,7 +640,7 @@
     <string name="rendering_attr_showAccess_name">Aliraj baroj kaj pagendaj ejoj</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kvalito de vojoj</string>
     <string name="rendering_attr_showSurfaces_name">Pavimo de vojoj</string>
-    <string name="rendering_attr_showCycleRoutes_name">Biciklovojoj</string>
+    <string name="rendering_attr_showCycleRoutes_name">Biciklaj kursoj</string>
     <string name="srtm_paid_version_title">Nivelkurba kromprogramo</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo por desegni nivelkurbojn malkonekte</string>
     <string name="srtm_plugin_name">Nivelkurboj</string>
@@ -708,7 +708,7 @@
     <string name="lang_cy">Kimra</string>
     <string name="no_waypoints_found">Ne trovis navigadpunktojn</string>
     <string name="no_map_markers_found">Bonvolu aldoni markojn per mapo</string>
-    <string name="layer_amenity_label">Etikedoj de interesejoj</string>
+    <string name="layer_amenity_label">Etikedoj de punktoj (interesejoj, ŝatataj)</string>
     <string name="loading_smth">Ŝargado de %1$s…</string>
     <string name="map_widget_plain_time">Nuna tempo</string>
     <string name="shared_string_waypoint">Navigadpunkto</string>
@@ -995,7 +995,7 @@
     <string name="download_roads_only_maps">Nur-voja mapo</string>
     <string name="rendering_attr_alpineHiking_name">Montogrimpada skalo (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Bildigi vojojn laŭ skalo de SAC (Svisa Alpismo-Klubo).</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Piedirada tavolo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Turismaj kursoj</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Bildigi vojojn laŭ OSMC-kursoj.</string>
     <string name="rendering_attr_noAdminboundaries_name">Limoj</string>
     <string name="rendering_attr_noAdminboundaries_description">Ne montri regionajn limojn (administraciaj niveloj 5–9).</string>
@@ -1918,7 +1918,7 @@
     <string name="feedback">Sendi opinion</string>
     <string name="contact_us">Kontakti</string>
     <string name="map_legend">Mapklarigo</string>
-    <string name="save_poi_without_poi_type_message">Ĉu vere konservi interesejon sen determinita speco?</string>
+    <string name="save_poi_without_poi_type_message">Ĉu konservi interesejon sen determinita speco\?</string>
     <string name="poi_context_menu_modify_osm_change">Modifi OSM ŝanĝoj</string>
     <string name="use_dashboard_btn">Uzi stirpanelon</string>
     <string name="use_drawer_btn">Uzi menuon</string>
@@ -3084,7 +3084,7 @@
     <string name="rendering_attr_tracktype_grade5_name">Malfirmaj</string>
     <string name="routeInfo_tracktype_name">Kvalito de vojoj</string>
     <string name="shared_string_file_is_saved">%s estas konservita</string>
-    <string name="shared_string_open_track">Malfermita kurso</string>
+    <string name="shared_string_open_track">Malfermi kurson</string>
     <string name="shared_string_track_is_saved">Kurso %s estas konservita</string>
     <string name="gpx_join_gaps">Kombini interspacojn</string>
     <string name="app_mode_camper">Kampad‑postveturilo</string>
@@ -3271,7 +3271,7 @@
     <string name="download_map_dialog">Fenestro elŝuti mapojn</string>
     <string name="dialogs_and_notifications_title">Fenestroj kaj sciigoj</string>
     <string name="dialogs_and_notifications_descr">Administri (ŝpruc)fenestrojn kaj sciigojn.</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_name">Retoj de nodoj</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">reto</string>
     <string name="suggested_maps">Proponataj mapoj</string>
     <string name="suggested_maps_descr">Tiuj ĉi mapoj estas postulataj de la kromprogramo.</string>
     <string name="added_profiles">Aldonitaj profiloj</string>
@@ -4067,7 +4067,7 @@
     <string name="osmand_live_cancelled">Nuligita</string>
     <string name="renew_subscription">Renovigi abonon</string>
     <string name="in_grace_period">En prokrastoperiodo</string>
-    <string name="on_hold">En atendo</string>
+    <string name="on_hold">Ĉesigita</string>
     <string name="expired">Eksvalidiĝita</string>
     <string name="contact_support_description">Se vi havas demandojn, bonvolu kontakti nin ĉe %1$s.</string>
     <string name="contact_support">Kontakti subtenon</string>
@@ -4187,7 +4187,7 @@
     <string name="complete_purchase">Aĉeti</string>
     <string name="regular_price">Norma prezo</string>
     <string name="from_with_param">De %1$s</string>
-    <string name="backup_delete_types_descr">Ĉu vi volas forigi el la nubo datumojn de neaktualaj elementoj\?</string>
+    <string name="backup_delete_types_descr">Ĉu vi volas forigi el OsmAnd-Nubo datumojn de neaktualaj elementoj\?</string>
     <string name="backup_delete_types">Forigi malaktivajn specojn de datumoj</string>
     <string name="shared_string_discussion">Diskuto</string>
     <string name="shared_string_view_all">Montri ĉiujn</string>
@@ -4242,4 +4242,65 @@
     <string name="duration_moment_ago">antaŭ momento</string>
     <string name="approximate_route_description">Alproksimigi kurson al vojoj sur la mapo por akiri informojn pri turnoj kaj aliajn datumojn: dekliveco, specoj de vojoj kaj pli.</string>
     <string name="enter_verification_code">Enigu unufojan pasvorton</string>
+    <string name="backup_error_subscription_was_expired_descr">Via abono OsmAnd Pro senvalidiĝis – reaboni ĝin por povi uzi sekurkopion. Vi plue povas restarigi datumojn el la nubo.</string>
+    <string name="contour_lines_hillshades_slope">Nivelkurboj, nivelombrumo, dekliveco</string>
+    <string name="logout_from_osmand_cloud">Elsaluti el OsmAnd-Nubo</string>
+    <string name="logout_from_osmand_cloud_decsr">Ĉu elsaluti\?
+\nVi devos reensaluti por fari sekurkopion aŭ restarigi datumojn.</string>
+    <string name="backup_deleting_all_data">Forigado de ĉiuj datumoj…</string>
+    <string name="backup_deleted_all_data">Forigis ĉiujn datumojn.</string>
+    <string name="backup_deleting_all_data_descr">Atendu ĝis OsmAnd forigos ĉiujn viajn datumojn el OsmAnd-Nubo. Neniuj datumoj en via aparato estos forigitaj.</string>
+    <string name="backup_deleted_all_data_descr">Ĉiuj viaj datumoj estas sukcese forigitaj el la OsmAnd-Nubo.</string>
+    <string name="backup_version_history_removed">Forigis ĉiujn historion de versioj.</string>
+    <string name="backup_data_removed">Forigis ĉiujn datumojn.</string>
+    <string name="shared_string_progress">Progreso</string>
+    <string name="backup_do_not_have_any">Vi ankoraŭ havas neniun sekurkopion.</string>
+    <string name="backup_dont_have_any_descr">Plani aŭtomatajn sekurkopiojn por eviti perdi datumojn.</string>
+    <string name="backup_welcome_back">Bonvenon ree!</string>
+    <string name="backup_welcome_back_descr">Restarigi datumojn al tiu ĉi aparato uzante ekzistajn sekurkopiojn aŭ fari sekurkopion al OsmAnd-Nubo.</string>
+    <string name="backup_setup">Agordi sekurkopion</string>
+    <string name="backup_restore_now">Restarigi nun</string>
+    <string name="attribute">Atributo</string>
+    <string name="shared_string_purchased">Aĉetita</string>
+    <string name="explore_wikipedia_offline">Esplori Vikipedion malkonekte.</string>
+    <string name="on_hold_since">Ĉesigita ekde %1$s</string>
+    <string name="active_till">Aktiva ĝis %1$s</string>
+    <string name="promo_subscription">Reklamkoda abono</string>
+    <string name="track_has_no_needed_data">La spuro enhavas ne enhavas bezonatajn datumojn.</string>
+    <string name="routes_color_by_type">Kolorigi turismajn kursojn laŭ…</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Kolorigi turismajn kursojn laŭ iliaj koloroj kaj emblemoj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”).</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolorigi turismajn kursojn laŭ prizorganto.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolorigi turismajn kursojn laŭ speco de reto (interŝtata, regiona, loka).</string>
+    <string name="walking_route_osmc_description">Kolorigi turismajn kursojn laŭ iliaj koloroj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”) aŭ laŭ ilia speco (interŝtata, regiona, loka).</string>
+    <string name="option_available_only_in_osmand_pro">Eblaĵo disponebla por abonantoj de la plano OsmAnd Pro.</string>
+    <string name="purchases_feature_desc_pro_widgets">Akiru aliron al altnivelaj agordoj: kolorigo de kursoj kaj pli.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Ekkonu kun planoj de OsmAnd por trovi la plej taŭgan por vi.</string>
+    <string name="shared_string_relation">Rilato</string>
+    <string name="travel_routes">Vojaĝaj kursoj</string>
+    <string name="setting_supported_by_style">Tiu ĉi agordo estas liverata de la map-stilo “%1$s”</string>
+    <string name="direct_line_maps_required_descr">Kalkulado de kurso okupas pli da tempo ol norme.
+\n
+\nEble iuj mapoj ne enlegiĝis.</string>
+    <string name="online_direct_line_maps_link">Kontroli pri necesaj mapoj.</string>
+    <string name="offline_maps_required_descr">Iuj malkonektaj mapoj postulataj por tiu ĉi kurso mankas.</string>
+    <string name="online_maps_required_descr">Bedaŭrinde OsmAnd ne povas kalkuli kurson por viaj agordoj.
+\n
+\nEble iuj mapoj ne enlegiĝis – vi povas kontroli enrete pri necesaj mapoj.</string>
+    <string name="online_maps_searching_descr">Serĉado enrete…</string>
+    <string name="reset_to_original">Restarigi implicitajn</string>
+    <string name="backup_error_no_subscription">Neniu abono</string>
+    <string name="map_updates_for_mappers">Map-ĝisdatigoj por mapigistoj</string>
+    <string name="benefits_for_contributors">Profitoj por aktivaj kontribuantoj al OSM</string>
+    <string name="benefits_for_contributors_primary_descr">Vi povas akiri senlimajn ĉiuhorajn ĝisdatigojn de mapoj, se vi aktive kontribuas al OpenStreetMap.</string>
+    <string name="benefits_for_contributors_secondary_descr">Ensalutu al OpenStreetMap por kontroli ĉu vi povas akiri senlimajn ĉiumonataj kaj ĉiuhorajn ĝisdatigojn de mapoj.</string>
+    <string name="use_login_and_password">Uzi uzantnomon kaj pasvorton</string>
+    <string name="available_until">Disponeblaj ĝis %1$s</string>
+    <string name="enough_contributions_descr">Gratulon, vi sufiĉe kontribuis al OpenStreetMap kaj nun povas ĝui senlimajn ĝisdatigojn de mapoj!</string>
+    <string name="not_enough_contributions_descr">Almenaŭ %1$s kontribuoj al OpenStreetMap dum %2$s tagoj estas postulataj.</string>
+    <string name="shared_string_contributions">Kontribuoj</string>
+    <string name="contributions_may_calculate_with_delay">Kalkulado de kontribuoj povas okupi kelkajn horojn.</string>
+    <string name="map_updates_are_unavailable_yet">Ĝisdatigoj de mapoj ankoraŭ ne estas disponeblaj :-(</string>
+    <string name="connect_track_points_as">Kunigi punktojn de kurso</string>
+    <string name="pro_features">Altnivelaj eblaĵoj</string>
+    <string name="purchases_restored">Aĉetoj restarigitaj</string>
 </resources>

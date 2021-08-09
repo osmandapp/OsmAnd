@@ -140,7 +140,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	public boolean isSelectedModeAvailable() {
-		return selectedType.isAvailableInSubscription(app, selectedRouteInfoAttribute);
+		return selectedType.isAvailableInSubscription(app, selectedRouteInfoAttribute, true);
 	}
 
 	private void setupRadioGroup(LinearLayout buttonsContainer) {

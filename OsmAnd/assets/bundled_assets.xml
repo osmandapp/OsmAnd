@@ -107,6 +107,7 @@
 	<asset source="fonts/55_NotoSansTibetan-Regular.ttf" destination="fonts/55_NotoSansTibetan-Regular.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/60_NotoSansTibetan-Bold.ttf" destination="fonts/60_NotoSansTibetan-Bold.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/65_NotoSansNastaliqUrdu-Regular.ttf" destination="fonts/65_NotoSansNastaliqUrdu-Regular.ttf" mode="alwaysOverwriteOrCopy" />
+	<asset source="fonts/DroidSansFallback.ttf" destination="fonts/DroidSansFallback.ttf" mode="alwaysOverwriteOrCopy" />
 
 	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="copyOnlyIfDoesNotExist" />
 
