@@ -32,8 +32,6 @@ import java.util.Map;
 
 public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implements BackupExportListener, OnDeleteFilesListener, ImportListener {
 
-	public static final String BACKUP_ITEMS_KEY = "backup_items_key";
-
 	public static final int HEADER_TYPE = 0;
 	public static final int WARNING_TYPE = 1;
 	public static final int UPLOAD_TYPE = 2;

@@ -1,6 +1,6 @@
 package net.osmand.plus.backup.ui;
 
-import static net.osmand.plus.backup.ui.RestoreSettingsFragment.RESTORE_ITEMS_KEY;
+import static net.osmand.plus.backup.NetworkSettingsHelper.RESTORE_ITEMS_KEY;
 import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
 
 import android.graphics.Typeface;

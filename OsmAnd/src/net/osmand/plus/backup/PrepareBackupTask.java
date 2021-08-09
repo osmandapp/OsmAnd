@@ -1,5 +1,7 @@
 package net.osmand.plus.backup;
 
+import static net.osmand.plus.backup.NetworkSettingsHelper.PREPARE_BACKUP_KEY;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -154,7 +156,7 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectRemoteFiles() {
-		app.getNetworkSettingsHelper().collectSettings("prepare_backup", false, (succeed, empty, items, remoteFiles) -> {
+		app.getNetworkSettingsHelper().collectSettings(PREPARE_BACKUP_KEY, false, (succeed, empty, items, remoteFiles) -> {
 					if (succeed) {
 						backup.setSettingsItems(items);
 						backup.setRemoteFiles(remoteFiles);

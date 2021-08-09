@@ -1,5 +1,7 @@
 package net.osmand.plus.backup.ui;
 
+import static net.osmand.plus.backup.NetworkSettingsHelper.RESTORE_ITEMS_KEY;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -40,7 +42,6 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 
 	public static final String TAG = RestoreSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(RestoreSettingsFragment.class.getSimpleName());
-	public static final String RESTORE_ITEMS_KEY = "restore_items_key";
 
 	private NetworkSettingsHelper settingsHelper;
 

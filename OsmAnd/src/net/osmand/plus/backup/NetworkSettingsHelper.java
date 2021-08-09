@@ -20,6 +20,10 @@ import java.util.Map;
 
 public class NetworkSettingsHelper extends SettingsHelper {
 
+	public static final String BACKUP_ITEMS_KEY = "backup_items_key";
+	public static final String RESTORE_ITEMS_KEY = "restore_items_key";
+	public static final String PREPARE_BACKUP_KEY = "prepare_backup_key";
+
 	final Map<String, ImportBackupTask> importAsyncTasks = new HashMap<>();
 	final Map<String, ExportBackupTask> exportAsyncTasks = new HashMap<>();
 
@@ -101,47 +105,70 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	void finishImport(@Nullable ImportListener listener, boolean success, @NonNull List<SettingsItem> items, boolean needRestart) {
-		List<String> warnings = new ArrayList<>();
-		for (SettingsItem item : items) {
-			warnings.addAll(item.getWarnings());
-		}
-		if (!warnings.isEmpty()) {
-			getApp().showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
+		String error = collectFormattedWarnings(items);
+		if (!Algorithms.isEmpty(error)) {
+			getApp().showToastMessage(error);
 		}
 		if (listener != null) {
 			listener.onImportFinished(success, needRestart, items);
 		}
 	}
 
+	void finishExport(@Nullable BackupExportListener listener, @NonNull List<SettingsItem> items) {
+		String error = collectFormattedWarnings(items);
+		if (listener != null) {
+			listener.onBackupExportFinished(error);
+		}
+	}
+
+	private String collectFormattedWarnings(@NonNull List<SettingsItem> items) {
+		List<String> warnings = new ArrayList<>();
+		for (SettingsItem item : items) {
+			warnings.addAll(item.getWarnings());
+		}
+		String error = null;
+		if (!Algorithms.isEmpty(warnings)) {
+			error = AndroidUtils.formatWarnings(warnings).toString();
+		}
+		return error;
+	}
+
 	public void collectSettings(@NonNull String key, boolean readData,
 								@Nullable BackupCollectListener listener) {
-		new ImportBackupTask(key, this, listener, readData)
-				.executeOnExecutor(getBackupHelper().getExecutor());
+		if (!importAsyncTasks.containsKey(key)) {
+			new ImportBackupTask(key, this, listener, readData)
+					.executeOnExecutor(getBackupHelper().getExecutor());
+		}
 	}
 
 	public void checkDuplicates(@NonNull String key,
 								@NonNull List<SettingsItem> items,
 								@NonNull List<SettingsItem> selectedItems,
 								CheckDuplicatesListener listener) {
-		new ImportBackupTask(key, this, items, selectedItems, listener)
-				.executeOnExecutor(getBackupHelper().getExecutor());
+		if (!importAsyncTasks.containsKey(key)) {
+			new ImportBackupTask(key, this, items, selectedItems, listener)
+					.executeOnExecutor(getBackupHelper().getExecutor());
+		}
 	}
 
 	public void importSettings(@NonNull String key,
 							   @NonNull List<SettingsItem> items,
 							   boolean forceReadData,
 							   @Nullable ImportListener listener) {
-		ImportBackupTask importTask = new ImportBackupTask(key, this, items, listener, forceReadData);
-		importTask.executeOnExecutor(getBackupHelper().getExecutor());
+		if (!importAsyncTasks.containsKey(key)) {
+			ImportBackupTask importTask = new ImportBackupTask(key, this, items, listener, forceReadData);
+			importTask.executeOnExecutor(getBackupHelper().getExecutor());
+		}
 	}
 
 	public void exportSettings(@NonNull String key,
 							   @NonNull List<SettingsItem> items,
 							   @NonNull List<SettingsItem> itemsToDelete,
 							   @Nullable BackupExportListener listener) {
-		ExportBackupTask exportTask = new ExportBackupTask(key, this, items, itemsToDelete, listener);
-		exportAsyncTasks.put(key, exportTask);
-		exportTask.executeOnExecutor(getBackupHelper().getExecutor());
+		if (!exportAsyncTasks.containsKey(key)) {
+			ExportBackupTask exportTask = new ExportBackupTask(key, this, items, itemsToDelete, listener);
+			exportTask.executeOnExecutor(getBackupHelper().getExecutor());
+		}
 	}
 
 	public void exportSettings(@NonNull String key, @Nullable BackupExportListener listener,

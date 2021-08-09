@@ -91,8 +91,7 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	protected void onPreExecute() {
 		ImportBackupTask importTask = helper.getImportTask(key);
 		if (importTask != null && !importTask.importDone) {
-			helper.importAsyncTasks.remove(key);
-			helper.finishImport(importListener, false, items, false);
+			helper.finishImport(importTask.importListener, false, importTask.items, false);
 		}
 		helper.importAsyncTasks.put(key, this);
 	}
