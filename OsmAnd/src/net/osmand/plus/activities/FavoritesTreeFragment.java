@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -708,7 +709,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			@Override
 			protected void onPostExecute(Void res) {
 				hideProgressBar();
-				if (getActivity() == null) {
+				Activity activity = getActivity();
+				if (activity == null) {
 					// user quit application
 					return;
 				}
@@ -723,9 +725,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 							.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), dst))
 							.setType("text/plain")
 							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					startActivity(sendIntent);
+					AndroidUtils.startActivityIfSafe(getActivity(), sendIntent);
 				} catch (IOException e) {
-					Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+					Toast.makeText(activity, "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_SHORT).show();
 					e.printStackTrace();
 				}
 			}

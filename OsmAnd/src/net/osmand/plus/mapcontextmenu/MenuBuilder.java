@@ -944,22 +944,23 @@ public class MenuBuilder {
 	}
 
 	protected void showDialog(String text, final String actionType, final String dataPrefix, final View v) {
+		final Context context = v.getContext();
 		final String[] items = text.split("[,;]");
 		final Intent intent = new Intent(actionType);
 		if (items.length > 1) {
 			for (int i = 0; i < items.length; i++) {
 				items[i] = items[i].trim();
 			}
-			AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
+			AlertDialog.Builder dlg = new AlertDialog.Builder(context);
 			dlg.setNegativeButton(R.string.shared_string_cancel, null);
 			dlg.setItems(items, (dialog, which) -> {
 				intent.setData(Uri.parse(dataPrefix + items[which]));
-				AndroidUtils.startActivityIfSafe(v.getContext(), intent);
+				AndroidUtils.startActivityIfSafe(context, intent);
 			});
 			dlg.show();
 		} else {
 			intent.setData(Uri.parse(dataPrefix + text));
-			v.getContext().startActivity(intent);
+			AndroidUtils.startActivityIfSafe(context, intent);
 		}
 	}
 

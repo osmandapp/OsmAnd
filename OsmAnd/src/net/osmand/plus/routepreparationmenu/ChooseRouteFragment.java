@@ -516,34 +516,34 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			@Override
 			public void onClick(View v) {
 				OsmandApplication app = getMyApplication();
-				if (app != null) {
-					RoutingHelper routingHelper = app.getRoutingHelper();
-					final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
-					final GPXUtilities.GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
-					final Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.path));
-					File dir = new File(app.getCacheDir(), "share");
-					if (!dir.exists()) {
-						dir.mkdir();
-					}
-					File dst = new File(dir, "route.gpx");
-					try {
-						FileWriter fw = new FileWriter(dst);
-						GPXUtilities.writeGpx(fw, gpx, null);
-						fw.close();
-						final Intent sendIntent = new Intent();
-						sendIntent.setAction(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
-								routingHelper.getGeneralRouteInformation()).toString()));
-						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
-						sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
-						sendIntent.setType("text/plain");
-						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						startActivity(sendIntent);
-					} catch (IOException e) {
-						// Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(),
-						// Toast.LENGTH_LONG).show();
-					}
+				if (app == null) {
+					return;
+				}
+
+				RoutingHelper routingHelper = app.getRoutingHelper();
+				final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
+				final GPXUtilities.GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
+				final Uri fileUri = AndroidUtils.getUriForFile(app, new File(gpx.path));
+				File dir = new File(app.getCacheDir(), "share");
+				if (!dir.exists()) {
+					dir.mkdir();
+				}
+				File dst = new File(dir, "route.gpx");
+				try {
+					FileWriter fw = new FileWriter(dst);
+					GPXUtilities.writeGpx(fw, gpx, null);
+					fw.close();
+					final Intent sendIntent = new Intent();
+					sendIntent.setAction(Intent.ACTION_SEND);
+					sendIntent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(generateHtml(routingHelper.getRouteDirections(),
+							routingHelper.getGeneralRouteInformation()).toString()));
+					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_route_subject));
+					sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
+					sendIntent.setType("text/plain");
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					AndroidUtils.startActivityIfSafe(getActivity(), sendIntent);
+				} catch (IOException e) {
 				}
 			}
 		};
@@ -568,16 +568,19 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		File file = generateRouteInfoHtml(routingHelper.getRouteDirections(), routingHelper.getGeneralRouteInformation());
 		if (file != null && file.exists()) {
 			Uri uri = AndroidUtils.getUriForFile(app, file);
-			Intent browserIntent;
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { // use Android Print Framework
-				browserIntent = new Intent(getActivity(), PrintDialogActivity.class)
-						.setDataAndType(uri, "text/html");
-			} else { // just open html document
-				browserIntent = new Intent(Intent.ACTION_VIEW).setDataAndType(
-						uri, "text/html");
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+				// Use Android Print Framework
+				Intent browserIntent = new Intent(getActivity(), PrintDialogActivity.class)
+						.setDataAndType(uri, "text/html")
+						.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				startActivity(browserIntent);
+			} else {
+				// Just open html document
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW)
+						.setDataAndType(uri, "text/html")
+						.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				AndroidUtils.startActivityIfSafe(app, browserIntent);
 			}
-			browserIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			startActivity(browserIntent);
 		}
 	}
 

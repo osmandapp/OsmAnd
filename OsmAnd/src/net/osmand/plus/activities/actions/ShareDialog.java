@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -150,32 +151,32 @@ public class ShareDialog {
 			}
 		});
     	builder.show();
-
-		
 	}
 	
-	public static void sendSms(Activity a, String sms) {
+	public static void sendSms(Activity activity, String sms) {
 		Intent sendIntent = new Intent(Intent.ACTION_VIEW);
 		sendIntent.putExtra("sms_body", sms); 
 		sendIntent.setType("vnd.android-dir/mms-sms");
-		a.startActivity(sendIntent);
+		AndroidUtils.startActivityIfSafe(activity, sendIntent);
 	}
 	
-	public static void sendEmail(Activity a, String email, String title) {
+	public static void sendEmail(Activity activity, String email, String title) {
 		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
-		intent.putExtra(Intent.EXTRA_SUBJECT, "Location"); //$NON-NLS-1$
+		intent.setType("vnd.android.cursor.dir/email");
+		intent.putExtra(Intent.EXTRA_SUBJECT, "Location");
 		intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email));
 		intent.setType("text/html");
-		a.startActivity(Intent.createChooser(intent, a.getString(R.string.send_location)));
+		Intent chooserIntent = Intent.createChooser(intent, activity.getString(R.string.send_location));
+		AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
 	}
 	
-	public static void sendMessage(Activity a, String msg) {
+	public static void sendMessage(Activity activity, String msg) {
 		Intent intent = new Intent(Intent.ACTION_SEND);
 		intent.setAction(Intent.ACTION_SEND);
 		intent.putExtra(Intent.EXTRA_TEXT, msg);
 		intent.setType("text/plain");
-		a.startActivity(Intent.createChooser(intent, a.getString(R.string.send_location)));
+		Intent chooserIntent = Intent.createChooser(intent, activity.getString(R.string.send_location));
+		AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
 	}
 	
 	public static void sendQRCode(final Activity activity, String encodeType, Bundle encodeData, String strEncodeData) {
@@ -192,20 +193,16 @@ public class ShareDialog {
 			}
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-			activity.startActivity(intent);
+			AndroidUtils.startActivityIfSafe(activity, intent);
 		} else {
 			if (Version.isMarketEnabled()) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 				builder.setMessage(activity.getString(R.string.zxing_barcode_scanner_not_found));
-				builder.setPositiveButton(activity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef((OsmandApplication) activity.getApplication(), ZXING_BARCODE_SCANNER_COMPONENT)));
-						try {
-							activity.startActivity(intent);
-						} catch (ActivityNotFoundException e) {
-						}
-					}
+				builder.setPositiveButton(activity.getString(R.string.shared_string_yes), (dialog, which) -> {
+					OsmandApplication app = ((OsmandApplication) activity.getApplication());
+					Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, ZXING_BARCODE_SCANNER_COMPONENT));
+					Intent viewIntent = new Intent(Intent.ACTION_VIEW, uri);
+					AndroidUtils.startActivityIfSafe(activity, viewIntent);
 				});
 				builder.setNegativeButton(activity.getString(R.string.shared_string_no), null);
 				builder.show();

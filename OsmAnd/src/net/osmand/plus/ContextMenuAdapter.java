@@ -355,10 +355,12 @@ public class ContextMenuAdapter {
 						null);
 				final String email = app.getString(R.string.support_email);
 				contactUsButton.setOnClickListener(v -> {
-					Intent intent = new Intent(Intent.ACTION_SENDTO);
-					intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-					intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
-					AndroidUtils.startActivityIfSafe(getContext(), intent);
+					if (getContext() != null) {
+						Intent intent = new Intent(Intent.ACTION_SENDTO);
+						intent.setData(Uri.parse("mailto:"));
+						intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
+						AndroidUtils.startActivityIfSafe(getContext(), intent);
+					}
 				});
 				return convertView;
 			}
