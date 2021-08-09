@@ -16,6 +16,7 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupInfo;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
@@ -41,15 +42,19 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 		OsmandApplication app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		BackupStatus status = BackupStatus.getBackupStatus(app, backup);
 
-		if (app.getNetworkSettingsHelper().isBackupExporting()) {
-			actionButton.setOnClickListener(v -> app.getNetworkSettingsHelper().cancelExport());
+		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
+		if (settingsHelper.isBackupExporting()) {
+			actionButton.setOnClickListener(v -> {
+				settingsHelper.cancelImport();
+				settingsHelper.cancelExport();
+			});
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 		} else if (status == BackupStatus.MAKE_BACKUP || status == BackupStatus.CONFLICTS) {
 			actionButton.setOnClickListener(v -> {
 				BackupInfo info = backup.getBackupInfo();
 				List<SettingsItem> items = info.itemsToUpload;
 				if (!items.isEmpty() || !Algorithms.isEmpty(info.filteredFilesToDelete)) {
-					app.getNetworkSettingsHelper().exportSettings(BACKUP_ITEMS_KEY, items, info.itemsToDelete, exportListener);
+					settingsHelper.exportSettings(BACKUP_ITEMS_KEY, items, info.itemsToDelete, exportListener);
 				}
 			});
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.backup_now);

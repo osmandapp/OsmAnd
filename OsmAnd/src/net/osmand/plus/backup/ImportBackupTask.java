@@ -7,6 +7,9 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.backup.BackupImporter.CollectItemsResult;
+import net.osmand.plus.backup.BackupImporter.NetworkImportProgressListener;
+import net.osmand.plus.backup.ExportBackupTask.ItemProgressInfo;
+import net.osmand.plus.backup.ImportBackupItemsTask.ImportItemsListener;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupCollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.CheckDuplicatesListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
@@ -18,14 +21,14 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> {
+public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<SettingsItem>> {
 
 	private final NetworkSettingsHelper helper;
 	private final OsmandApplication app;
-	private String latestChanges;
-	private int version;
 
 	private ImportListener importListener;
 	private BackupCollectListener collectListener;
@@ -38,54 +41,60 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 
 	private List<RemoteFile> remoteFiles;
 
+	private final String key;
+	private final Map<String, ItemProgressInfo> itemsProgress = new HashMap<>();
 	private final ImportType importType;
 	private boolean importDone;
 
-	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
-					 String latestChanges, int version, boolean readData,
-					 @Nullable BackupCollectListener collectListener) {
+	ImportBackupTask(@NonNull String key,
+					 @NonNull NetworkSettingsHelper helper,
+					 @Nullable BackupCollectListener collectListener,
+					 boolean readData) {
+		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.collectListener = collectListener;
-		this.latestChanges = latestChanges;
-		this.version = version;
-		importer = new BackupImporter(app.getBackupHelper());
+		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = readData ? ImportType.COLLECT_AND_READ : ImportType.COLLECT;
 	}
 
-	ImportBackupTask(@NonNull NetworkSettingsHelper helper, boolean forceReadData,
-				   @NonNull List<SettingsItem> items, String latestChanges, int version,
-				   @Nullable ImportListener importListener) {
+	ImportBackupTask(@NonNull String key,
+					 @NonNull NetworkSettingsHelper helper,
+					 @NonNull List<SettingsItem> items,
+					 @Nullable ImportListener importListener,
+					 boolean forceReadData) {
+		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.importListener = importListener;
 		this.items = items;
-		this.latestChanges = latestChanges;
-		this.version = version;
-		importer = new BackupImporter(app.getBackupHelper());
+		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = forceReadData ? ImportType.IMPORT_FORCE_READ : ImportType.IMPORT;
 	}
 
-	ImportBackupTask(@NonNull NetworkSettingsHelper helper,
-				   @NonNull List<SettingsItem> items,
-				   @NonNull List<SettingsItem> selectedItems,
-				   @Nullable CheckDuplicatesListener duplicatesListener) {
+	ImportBackupTask(@NonNull String key,
+					 @NonNull NetworkSettingsHelper helper,
+					 @NonNull List<SettingsItem> items,
+					 @NonNull List<SettingsItem> selectedItems,
+					 @Nullable CheckDuplicatesListener duplicatesListener) {
+		this.key = key;
 		this.helper = helper;
 		this.app = helper.getApp();
 		this.items = items;
 		this.duplicatesListener = duplicatesListener;
 		this.selectedItems = selectedItems;
-		importer = new BackupImporter(app.getBackupHelper());
+		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = ImportType.CHECK_DUPLICATES;
 	}
 
 	@Override
 	protected void onPreExecute() {
-		ImportBackupTask importTask = helper.getImportTask();
+		ImportBackupTask importTask = helper.getImportTask(key);
 		if (importTask != null && !importTask.importDone) {
+			helper.importAsyncTasks.remove(key);
 			helper.finishImport(importListener, false, items, false);
 		}
-		helper.setImportTask(this);
+		helper.importAsyncTasks.put(key, this);
 	}
 
 	@Override
@@ -139,21 +148,54 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 			case COLLECT_AND_READ:
 				importDone = true;
 				collectListener.onBackupCollectFinished(items != null, false, this.items, remoteFiles);
+				helper.importAsyncTasks.remove(key);
 				break;
 			case CHECK_DUPLICATES:
 				importDone = true;
 				if (duplicatesListener != null) {
 					duplicatesListener.onDuplicatesChecked(duplicates, selectedItems);
 				}
+				helper.importAsyncTasks.remove(key);
 				break;
 			case IMPORT:
 			case IMPORT_FORCE_READ:
 				if (items != null && items.size() > 0) {
-					new ImportBackupItemsTask(helper, importType == ImportType.IMPORT_FORCE_READ, importListener, items)
+					boolean forceReadData = importType == ImportType.IMPORT_FORCE_READ;
+					ImportItemsListener itemsListener = (succeed, needRestart) -> {
+						helper.importAsyncTasks.remove(key);
+						helper.finishImport(importListener, succeed, items, needRestart);
+					};
+					new ImportBackupItemsTask(app, importer, items, itemsListener, forceReadData)
 							.executeOnExecutor(app.getBackupHelper().getExecutor());
 				}
 				break;
 		}
+	}
+
+	@Override
+	protected void onProgressUpdate(ItemProgressInfo... progressInfos) {
+		if (importListener != null) {
+			for (ItemProgressInfo info : progressInfos) {
+				ItemProgressInfo prevInfo = getItemProgressInfo(info.type, info.fileName);
+				if (prevInfo != null) {
+					info.setWork(prevInfo.getWork());
+				}
+				itemsProgress.put(info.type + info.fileName, info);
+
+				if (info.isFinished()) {
+					importListener.onImportItemFinished(info.type, info.fileName);
+				} else if (info.getValue() == 0) {
+					importListener.onImportItemStarted(info.type, info.fileName, info.getWork());
+				} else {
+					importListener.onImportItemProgress(info.type, info.fileName, info.getValue());
+				}
+			}
+		}
+	}
+
+	@Nullable
+	public ItemProgressInfo getItemProgressInfo(@NonNull String type, @NonNull String fileName) {
+		return itemsProgress.get(type + fileName);
 	}
 
 	public List<SettingsItem> getItems() {
@@ -204,5 +246,28 @@ public class ImportBackupTask extends AsyncTask<Void, Void, List<SettingsItem>> 
 			}
 		}
 		return duplicateItems;
+	}
+
+	private NetworkImportProgressListener getProgressListener() {
+		return new NetworkImportProgressListener() {
+
+			@Override
+			public void itemExportStarted(@NonNull String type, @NonNull String fileName, int work) {
+				publishProgress(new ItemProgressInfo(type, fileName, 0, work, false));
+			}
+
+			@Override
+			public void updateItemProgress(@NonNull String type, @NonNull String fileName, int progress) {
+				publishProgress(new ItemProgressInfo(type, fileName, progress, 0, false));
+			}
+
+			@Override
+			public void itemExportDone(@NonNull String type, @NonNull String fileName) {
+				publishProgress(new ItemProgressInfo(type, fileName, 0, 0, true));
+				if (isCancelled()) {
+					importer.cancel();
+				}
+			}
+		};
 	}
 }

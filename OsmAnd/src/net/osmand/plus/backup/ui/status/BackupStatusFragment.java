@@ -212,8 +212,31 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	}
 
 	@Override
-	public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+	public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
 		if (adapter != null) {
+			adapter.onImportItemStarted(type, fileName, work);
+		}
+	}
+
+	@Override
+	public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		if (adapter != null) {
+			adapter.onImportItemProgress(type, fileName, value);
+		}
+	}
+
+	@Override
+	public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+		if (adapter != null) {
+			adapter.onImportItemFinished(type, fileName);
+		}
+	}
+
+	@Override
+	public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+		if (!settingsHelper.isBackupExporting() && !settingsHelper.isBackupImporting()) {
+			backupHelper.prepareBackup();
+		} else {
 			adapter.onImportFinished(succeed, needRestart, items);
 		}
 	}

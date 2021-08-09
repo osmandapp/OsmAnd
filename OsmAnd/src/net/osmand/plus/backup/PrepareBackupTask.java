@@ -29,7 +29,7 @@ public class PrepareBackupTask {
 	private enum TaskType {
 		COLLECT_LOCAL_FILES(null),
 		COLLECT_REMOTE_FILES(null),
-		GENERATE_BACKUP_INFO(new TaskType[]{COLLECT_LOCAL_FILES, COLLECT_REMOTE_FILES});
+		GENERATE_BACKUP_INFO(new TaskType[] {COLLECT_LOCAL_FILES, COLLECT_REMOTE_FILES});
 
 		private final TaskType[] dependentTasks;
 
@@ -154,7 +154,7 @@ public class PrepareBackupTask {
 	}
 
 	private void doCollectRemoteFiles() {
-		app.getNetworkSettingsHelper().collectSettings("", 0, false, (succeed, empty, items, remoteFiles) -> {
+		app.getNetworkSettingsHelper().collectSettings("prepare_backup", false, (succeed, empty, items, remoteFiles) -> {
 					if (succeed) {
 						backup.setSettingsItems(items);
 						backup.setRemoteFiles(remoteFiles);

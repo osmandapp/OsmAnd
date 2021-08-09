@@ -13,6 +13,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.ExportBackupTask;
+import net.osmand.plus.backup.ImportBackupTask;
 import net.osmand.plus.backup.LocalFile;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
@@ -52,7 +53,7 @@ public class ConflictViewHolder extends ItemViewHolder {
 		serverButton.setOnClickListener(v -> {
 			SettingsItem settingsItem = pair.second.item;
 			settingsItem.setShouldReplace(true);
-			settingsHelper.importSettings(Collections.singletonList(settingsItem), "", 1, true, importListener);
+			settingsHelper.importSettings(fileName, Collections.singletonList(settingsItem), true, importListener);
 			updateButtonsState(settingsHelper, fileName);
 		});
 		AndroidUiHelper.updateVisibility(serverButton, true);
@@ -64,10 +65,11 @@ public class ConflictViewHolder extends ItemViewHolder {
 	}
 
 	private void updateButtonsState(@NonNull NetworkSettingsHelper helper, @NonNull String fileName) {
+		ImportBackupTask importTask = helper.getImportTask(fileName);
 		ExportBackupTask exportTask = helper.getExportTask(fileName);
-		boolean exporting = exportTask != null;
+		boolean enabled = exportTask == null && importTask == null;
 
-		serverButton.setEnabled(!exporting);
-		localVersionButton.setEnabled(!exporting);
+		serverButton.setEnabled(enabled);
+		localVersionButton.setEnabled(enabled);
 	}
 }

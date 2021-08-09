@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class NetworkSettingsHelper extends SettingsHelper {
 
-	ImportBackupTask importTask;
+	final Map<String, ImportBackupTask> importAsyncTasks = new HashMap<>();
 	final Map<String, ExportBackupTask> exportAsyncTasks = new HashMap<>();
 
 	public interface BackupExportListener {
@@ -51,12 +51,8 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	@Nullable
-	public ImportBackupTask getImportTask() {
-		return importTask;
-	}
-
-	public void setImportTask(ImportBackupTask importTask) {
-		this.importTask = importTask;
+	public ImportBackupTask getImportTask(@NonNull String key) {
+		return importAsyncTasks.get(key);
 	}
 
 	@Nullable
@@ -65,14 +61,9 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	@Nullable
-	public ImportType getImportTaskType() {
-		ImportBackupTask importTask = this.importTask;
+	public ImportType getImportTaskType(@NonNull String key) {
+		ImportBackupTask importTask = getImportTask(key);
 		return importTask != null ? importTask.getImportType() : null;
-	}
-
-	public boolean isImportDone() {
-		ImportBackupTask importTask = this.importTask;
-		return importTask == null || importTask.isImportDone();
 	}
 
 	public boolean cancelExport() {
@@ -85,12 +76,22 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		return cancelled;
 	}
 
+	public boolean cancelImport() {
+		boolean cancelled = false;
+		for (ImportBackupTask importTask : importAsyncTasks.values()) {
+			if (importTask != null && (importTask.getStatus() == AsyncTask.Status.RUNNING)) {
+				cancelled |= importTask.cancel(true);
+			}
+		}
+		return cancelled;
+	}
+
 	public boolean isBackupExporting() {
 		return !Algorithms.isEmpty(exportAsyncTasks);
 	}
 
 	public boolean isBackupImporting() {
-		return importTask != null;
+		return !Algorithms.isEmpty(importAsyncTasks);
 	}
 
 	public void updateExportListener(@Nullable BackupExportListener listener) {
@@ -100,7 +101,6 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	void finishImport(@Nullable ImportListener listener, boolean success, @NonNull List<SettingsItem> items, boolean needRestart) {
-		importTask = null;
 		List<String> warnings = new ArrayList<>();
 		for (SettingsItem item : items) {
 			warnings.addAll(item.getWarnings());
@@ -113,25 +113,26 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
-	public void collectSettings(String latestChanges, int version, boolean readData,
+	public void collectSettings(@NonNull String key, boolean readData,
 								@Nullable BackupCollectListener listener) {
-		new ImportBackupTask(this, latestChanges, version, readData, listener)
+		new ImportBackupTask(key, this, listener, readData)
 				.executeOnExecutor(getBackupHelper().getExecutor());
 	}
 
-	public void checkDuplicates(@NonNull List<SettingsItem> items,
+	public void checkDuplicates(@NonNull String key,
+								@NonNull List<SettingsItem> items,
 								@NonNull List<SettingsItem> selectedItems,
 								CheckDuplicatesListener listener) {
-		new ImportBackupTask(this, items, selectedItems, listener)
+		new ImportBackupTask(key, this, items, selectedItems, listener)
 				.executeOnExecutor(getBackupHelper().getExecutor());
 	}
 
-	public void importSettings(@NonNull List<SettingsItem> items,
-							   String latestChanges, int version,
+	public void importSettings(@NonNull String key,
+							   @NonNull List<SettingsItem> items,
 							   boolean forceReadData,
 							   @Nullable ImportListener listener) {
-		new ImportBackupTask(this, forceReadData, items, latestChanges, version, listener)
-				.executeOnExecutor(getBackupHelper().getExecutor());
+		ImportBackupTask importTask = new ImportBackupTask(key, this, items, listener, forceReadData);
+		importTask.executeOnExecutor(getBackupHelper().getExecutor());
 	}
 
 	public void exportSettings(@NonNull String key,

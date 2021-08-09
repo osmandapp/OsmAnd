@@ -148,7 +148,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 					ItemProgressInfo prevInfo = getItemProgressInfo(info.type, info.fileName);
 					if (prevInfo != null) {
-						info.work = prevInfo.work;
+						info.setWork(prevInfo.work);
 					}
 					itemsProgress.put(info.type + info.fileName, info);
 
@@ -216,8 +216,8 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	public static class ItemProgressInfo {
 
-		private final String type;
-		private final String fileName;
+		protected final String type;
+		protected final String fileName;
 
 		private int work;
 		private final int value;
@@ -233,6 +233,10 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 		public int getWork() {
 			return work;
+		}
+
+		public void setWork(int work) {
+			this.work = work;
 		}
 
 		public int getValue() {

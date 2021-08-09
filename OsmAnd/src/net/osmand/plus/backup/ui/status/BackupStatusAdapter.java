@@ -221,6 +221,13 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 		return items.size();
 	}
 
+	private void updateItem(@NonNull String type, @NonNull String fileName) {
+		Object item = getBackupItem(type, fileName);
+		if (item != null) {
+			notifyItemChanged(items.indexOf(item));
+		}
+	}
+
 	@Override
 	public void onBackupExportStarted() {
 		notifyItemChanged(items.indexOf(HEADER_TYPE));
@@ -239,26 +246,17 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 
 	@Override
 	public void onBackupExportItemStarted(@NonNull String type, @NonNull String fileName, int max) {
-		Object item = getBackupItem(type, fileName);
-		if (item != null) {
-			notifyItemChanged(items.indexOf(item));
-		}
+		updateItem(type, fileName);
 	}
 
 	@Override
 	public void onBackupExportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
-		Object item = getBackupItem(type, fileName);
-		if (item != null) {
-			notifyItemChanged(items.indexOf(item));
-		}
+		updateItem(type, fileName);
 	}
 
 	@Override
 	public void onBackupExportItemFinished(@NonNull String type, @NonNull String fileName) {
-		Object item = getBackupItem(type, fileName);
-		if (item != null) {
-			notifyItemChanged(items.indexOf(item));
-		}
+		updateItem(type, fileName);
 	}
 
 	@Nullable
@@ -275,8 +273,8 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 				}
 			}
 			for (Pair<LocalFile, RemoteFile> pair : info.filteredFilesToMerge) {
-				SettingsItem item = pair.first.item;
-				if (item != null && BackupHelper.applyItem(item, type, fileName)) {
+				if (pair.first.item != null && BackupHelper.applyItem(pair.first.item, type, fileName)
+						|| pair.second.item != null && BackupHelper.applyItem(pair.second.item, type, fileName)) {
 					return pair;
 				}
 			}
@@ -291,10 +289,7 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 
 	@Override
 	public void onFileDeleteProgress(@NonNull RemoteFile file, int progress) {
-		Object item = getBackupItem(file.getType(), file.getName());
-		if (item != null) {
-			notifyItemChanged(items.indexOf(item));
-		}
+		updateItem(file.getType(), file.getName());
 	}
 
 	@Override
@@ -308,7 +303,28 @@ public class BackupStatusAdapter extends RecyclerView.Adapter<ViewHolder> implem
 	}
 
 	@Override
-	public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+	public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+		updateItem(type, fileName);
+	}
 
+	@Override
+	public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		updateItem(type, fileName);
+	}
+
+	@Override
+	public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+		updateItem(type, fileName);
+	}
+
+	@Override
+	public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> settingsItems) {
+		for (SettingsItem settingsItem : settingsItems) {
+			String fileName = BackupHelper.getItemFileName(settingsItem);
+			Object item = getBackupItem(settingsItem.getType().name(), fileName);
+			if (item != null) {
+				notifyItemChanged(items.indexOf(item));
+			}
+		}
 	}
 }

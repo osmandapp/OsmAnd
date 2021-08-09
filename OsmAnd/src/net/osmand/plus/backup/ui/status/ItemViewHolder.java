@@ -20,6 +20,7 @@ import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.ExportBackupTask.ItemProgressInfo;
+import net.osmand.plus.backup.ImportBackupTask;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -78,33 +79,45 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		icon.setImageDrawable(getItemIcon(item));
 
 		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
+		ImportBackupTask importTask = settingsHelper.getImportTask(exportKey);
 		ExportBackupTask exportTask = settingsHelper.getExportTask(exportKey);
-		if (exportTask != null) {
-			ItemProgressInfo progressInfo = exportTask.getItemProgressInfo(item.getType().name(), fileName);
-			if (progressInfo != null) {
-				if (progressInfo.isFinished()) {
-					secondIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_done));
-					AndroidUiHelper.updateVisibility(secondIcon, true);
-					AndroidUiHelper.updateVisibility(progressBar, false);
-					AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.server_button), false);
-					AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.local_version_button), false);
-				} else {
-					progressBar.setMax(progressInfo.getWork());
-					progressBar.setProgress(progressInfo.getValue());
 
-					AndroidUiHelper.updateVisibility(progressBar, true);
-					AndroidUiHelper.updateVisibility(secondIcon, false);
-				}
-			} else {
-				AndroidUiHelper.updateVisibility(progressBar, false);
-				AndroidUiHelper.updateVisibility(secondIcon, false);
-			}
-		} else {
+		if (exportTask == null && importTask == null) {
 			AndroidUiHelper.updateVisibility(secondIcon, deleteItem);
 			AndroidUiHelper.updateVisibility(progressBar, false);
 			secondIcon.setImageDrawable(getContentIcon(deleteItem ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_cloud_done));
+		} else {
+			ItemProgressInfo progressInfo = null;
+			if (exportTask != null) {
+				progressInfo = exportTask.getItemProgressInfo(item.getType().name(), fileName);
+			}
+			if (importTask != null) {
+				progressInfo = importTask.getItemProgressInfo(item.getType().name(), fileName);
+			}
+			setupProgress(progressInfo);
 		}
 		itemView.setTag(item);
+	}
+
+	private void setupProgress(@Nullable ItemProgressInfo progressInfo) {
+		if (progressInfo != null) {
+			if (progressInfo.isFinished()) {
+				secondIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_done));
+				AndroidUiHelper.updateVisibility(secondIcon, true);
+				AndroidUiHelper.updateVisibility(progressBar, false);
+				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.server_button), false);
+				AndroidUiHelper.updateVisibility(itemView.findViewById(R.id.local_version_button), false);
+			} else {
+				progressBar.setMax(progressInfo.getWork());
+				progressBar.setProgress(progressInfo.getValue());
+
+				AndroidUiHelper.updateVisibility(progressBar, true);
+				AndroidUiHelper.updateVisibility(secondIcon, false);
+			}
+		} else {
+			AndroidUiHelper.updateVisibility(progressBar, false);
+			AndroidUiHelper.updateVisibility(secondIcon, false);
+		}
 	}
 
 	@Nullable

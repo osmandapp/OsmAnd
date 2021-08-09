@@ -1,8 +1,10 @@
 package net.osmand.plus.backup.ui;
 
+import static net.osmand.plus.backup.ui.RestoreSettingsFragment.RESTORE_ITEMS_KEY;
+import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.style.StyleSpan;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,8 +23,6 @@ import net.osmand.plus.settings.fragments.ImportSettingsFragment;
 
 import java.util.List;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
-
 public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 
 	public static final String TAG = FileImportDuplicatesFragment.class.getSimpleName();
@@ -34,7 +34,7 @@ public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 		super.onCreate(savedInstanceState);
 
 		settingsHelper = app.getNetworkSettingsHelper();
-		ImportBackupTask importTask = settingsHelper.getImportTask();
+		ImportBackupTask importTask = settingsHelper.getImportTask(RESTORE_ITEMS_KEY);
 		if (importTask != null) {
 			if (settingsItems == null) {
 				settingsItems = importTask.getSelectedItems();
@@ -52,7 +52,7 @@ public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 
 	@Override
 	protected ImportType getImportTaskType() {
-		return settingsHelper.getImportTaskType();
+		return settingsHelper.getImportTaskType(RESTORE_ITEMS_KEY);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 			Fragment target = getTargetFragment();
 			if (target instanceof ImportSettingsFragment) {
 				ImportListener importListener = ((ImportSettingsFragment) target).getImportListener();
-				settingsHelper.importSettings(settingsItems, "", 1, false, importListener);
+				settingsHelper.importSettings(RESTORE_ITEMS_KEY, settingsItems, false, importListener);
 			}
 		}
 	}

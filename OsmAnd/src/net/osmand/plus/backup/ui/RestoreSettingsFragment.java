@@ -40,6 +40,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 
 	public static final String TAG = RestoreSettingsFragment.class.getSimpleName();
 	public static final Log LOG = PlatformUtil.getLog(RestoreSettingsFragment.class.getSimpleName());
+	public static final String RESTORE_ITEMS_KEY = "restore_items_key";
 
 	private NetworkSettingsHelper settingsHelper;
 
@@ -50,7 +51,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 		exportMode = false;
 		settingsHelper = app.getNetworkSettingsHelper();
 
-		ImportBackupTask importTask = settingsHelper.getImportTask();
+		ImportBackupTask importTask = settingsHelper.getImportTask(RESTORE_ITEMS_KEY);
 		if (importTask != null) {
 			if (settingsItems == null) {
 				settingsItems = importTask.getItems();
@@ -60,7 +61,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 			if (duplicates == null) {
 				importTask.setDuplicatesListener(getDuplicatesListener());
 			} else if (duplicates.isEmpty() && selectedItems != null) {
-				settingsHelper.importSettings(selectedItems, "", 1, false, getImportListener());
+				settingsHelper.importSettings(RESTORE_ITEMS_KEY, selectedItems, false, getImportListener());
 			}
 		}
 	}
@@ -112,7 +113,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 			if (isAdded()) {
 				updateUi(R.string.shared_string_restore, R.string.receiving_data_from_server);
 			}
-			settingsHelper.importSettings(items, "", 1, false, getImportListener());
+			settingsHelper.importSettings(RESTORE_ITEMS_KEY, items, false, getImportListener());
 		} else if (fragmentManager != null && !isStateSaved()) {
 			RestoreDuplicatesFragment.showInstance(fragmentManager, duplicates, items, this);
 		}
@@ -133,7 +134,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
 		if (settingsItems != null) {
 			duplicateStartTime = System.currentTimeMillis();
-			settingsHelper.checkDuplicates(settingsItems, selectedItems, getDuplicatesListener());
+			settingsHelper.checkDuplicates(RESTORE_ITEMS_KEY, settingsItems, selectedItems, getDuplicatesListener());
 		}
 		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
 	}
@@ -155,7 +156,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 	}
 
 	private void collectAndReadSettings() {
-		settingsHelper.collectSettings("", 0, true, new BackupCollectListener() {
+		settingsHelper.collectSettings(RESTORE_ITEMS_KEY, true, new BackupCollectListener() {
 
 			@Nullable
 			private SettingsItem getRestoreItem(@NonNull List<SettingsItem> items, @NonNull RemoteFile remoteFile) {
