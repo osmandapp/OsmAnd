@@ -1256,7 +1256,7 @@
     <string name="index_name_netherlands">أوربا - هولندا</string>
     <string name="keep_informing">إعادة تعليمات الملاحة</string>
     <string name="shared_string_release">تم</string>
-    <string name="get_plugin">تحميل</string>
+    <string name="get_plugin">الحصول على</string>
     <string name="plugin_install_needs_network">تحتاج إلى اتصال إنترنت لثبيت الملحق.</string>
     <string name="navigation_intent_invalid">صيغة خاطئة: %s</string>
     <string name="av_camera_pic_size_descr">حدد حجم صورة الكاميرا الداخلية</string>
@@ -2017,7 +2017,7 @@
     <string name="osm_live_banner_desc">الحصول على عدد غير محدود من تحميلات الخرائط والتحديثات في الشهر : أسبوعياً، يومياً أو كل ساعة.</string>
     <string name="osmand_plus_banner_desc">نسخة كاملة من تطبيق أوسماند مع تحميل غير محدود وتحديثات شهرية للخرائط .</string>
     <string name="si_mi_meters">ميل ، م</string>
-    <string name="get_it">تحميل</string>
+    <string name="get_it">الحصول على</string>
     <string name="osm_live_payment_desc">رسوم الاشتراك ستفرض كل شهر. يمكنك إلغاء اشتراكك متى أردت عبر Google play.</string>
     <string name="donation_to_osm">التبرع لمجتمع OSM</string>
     <string name="donation_to_osm_desc">يتم إرسال جزء من تبرعك إلى رسامي الخرائط OSM. تكلفة الاشتراك لا تزال هي نفسها.</string>
@@ -3747,7 +3747,7 @@
     <string name="app_mode_inline_skates">أحذية تزلج</string>
     <string name="use_volume_buttons_as_zoom_descr">تمكين التحكم في مستوى التكبير/التصغير بالخريطة باستخدام أزرار مستوى صوت الجهاز.</string>
     <string name="use_volume_buttons_as_zoom">أزرار مستوى الصوت</string>
-    <string name="lenght_limit_description">إعطاء معلومات وزن مركبتك ،قد يتم تطبيق بعض القيود على المركبات الثقيلة.</string>
+    <string name="lenght_limit_description">الإفصاح عن معلومات وزن مركبتك ،قد يتم تطبيق بعض القيود على المركبات الثقيلة.</string>
     <string name="quick_action_remove_next_destination">حذف نقطة الوجهة التالية</string>
     <string name="please_provide_point_name_error">يرجى إعطاء اسم للنقطة</string>
     <string name="quick_action_remove_next_destination_descr">سيتم حذف نقطة الوجهة الحالية على المسار. إذا كانت هي الوجهة الرئيسية، سوف تتوقف الملاحة.</string>
