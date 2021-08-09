@@ -294,10 +294,10 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		ClickableSpan clickableSpan = new ClickableSpan() {
 			@Override
 			public void onClick(@NonNull View view) {
-				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.setData(Uri.parse(url));
-				if (AndroidUtils.isIntentSafe(app, i)) {
-					startActivity(i);
+				if (getActivity() != null) {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse(url));
+					AndroidUtils.startActivityIfSafe(getActivity(), intent);
 				}
 			}
 

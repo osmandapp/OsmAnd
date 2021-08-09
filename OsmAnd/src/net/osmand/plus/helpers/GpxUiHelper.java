@@ -2402,9 +2402,7 @@ public class GpxUiHelper {
 		if (context instanceof OsmandApplication) {
 			sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		}
-		if (AndroidUtils.isIntentSafe(context, sendIntent)) {
-			context.startActivity(sendIntent);
-		}
+		AndroidUtils.startActivityIfSafe(context, sendIntent);
 	}
 
 	@NonNull

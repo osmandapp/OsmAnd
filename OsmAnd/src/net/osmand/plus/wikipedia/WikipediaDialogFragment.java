@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -249,6 +250,8 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		customTabsIntent.intent.setData(uri);
 		if (AndroidUtils.isIntentSafe(context, customTabsIntent.intent)) {
 			customTabsIntent.launchUrl(context, uri);
+		} else {
+			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 		}
 	}
 

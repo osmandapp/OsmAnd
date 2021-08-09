@@ -35,13 +35,10 @@ public class ScreenTimeoutBottomSheet extends BooleanPreferenceBottomSheet {
 				.setIcon(getContentIcon(R.drawable.ic_action_external_link))
 				.setTitleColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
 				.setLayoutId(R.layout.bottom_sheet_item_simple_right_icon)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
+				.setOnClickListener(v -> {
+					if (getActivity() != null) {
 						Intent intent = new Intent(Settings.ACTION_DISPLAY_SETTINGS);
-						if (AndroidUtils.isIntentSafe(v.getContext(), intent)) {
-							startActivity(intent);
-						}
+						AndroidUtils.startActivityIfSafe(getActivity(), intent);
 					}
 				})
 				.create();

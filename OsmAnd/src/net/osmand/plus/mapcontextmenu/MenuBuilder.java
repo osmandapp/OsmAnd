@@ -499,6 +499,8 @@ public class MenuBuilder {
 							Intent chooserIntent = Intent.createChooser(intent,
 									mapActivity.getString(R.string.select_picture));
 							mapActivity.startActivityForResult(chooserIntent, PICK_IMAGE);
+						} else {
+							app.showToastMessage(R.string.no_activity_for_intent);
 						}
 					});
 				} else {

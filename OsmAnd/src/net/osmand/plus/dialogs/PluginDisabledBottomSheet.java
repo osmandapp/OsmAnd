@@ -97,8 +97,8 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = getMyApplication();
 		Intent intent = getPluginSettingsIntent();
-		if (app != null && AndroidUtils.isIntentSafe(app, intent)) {
-			startActivity(intent);
+		if (app != null) {
+			AndroidUtils.startActivityIfSafe(app, intent);
 		}
 		dismiss();
 	}

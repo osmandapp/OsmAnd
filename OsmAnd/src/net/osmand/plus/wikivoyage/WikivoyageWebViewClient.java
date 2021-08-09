@@ -105,10 +105,8 @@ public class WikivoyageWebViewClient extends WebViewClient {
 				}
 			}
 		} else {
-			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-			if (AndroidUtils.isIntentSafe(activity, i)) {
-				activity.startActivity(i);
-			}
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+			AndroidUtils.startActivityIfSafe(activity, intent);
 		}
 		return true;
 	}

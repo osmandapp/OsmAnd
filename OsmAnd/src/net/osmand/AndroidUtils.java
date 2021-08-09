@@ -185,7 +185,7 @@ public class AndroidUtils {
 	}
 
 	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent,
-	                                       @Nullable Intent chooserIntent) {
+	                                          @Nullable Intent chooserIntent) {
 		if (isIntentSafe(context, intent)) {
 			Intent toStart = chooserIntent != null ? chooserIntent : intent;
 			context.startActivity(toStart);
