@@ -4267,11 +4267,11 @@
     <string name="active_till">Aktiva ĝis %1$s</string>
     <string name="promo_subscription">Reklamkoda abono</string>
     <string name="track_has_no_needed_data">La spuro enhavas ne enhavas bezonatajn datumojn.</string>
-    <string name="routes_color_by_type">Kolorigi turismajn kursojn laŭ…</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">Kolorigi turismajn kursojn laŭ iliaj koloroj kaj emblemoj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”).</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolorigi turismajn kursojn laŭ prizorganto.</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolorigi turismajn kursojn laŭ speco de reto (interŝtata, regiona, loka).</string>
-    <string name="walking_route_osmc_description">Kolorigi turismajn kursojn laŭ iliaj koloroj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”) aŭ laŭ ilia speco (interŝtata, regiona, loka).</string>
+    <string name="routes_color_by_type">Kolorigi kursojn laŭ…</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Kolorigi kursojn laŭ iliaj koloroj kaj emblemoj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”).</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolorigi kursojn laŭ prizorganto.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolorigi kursojn laŭ speco de reto (interŝtata, regiona, loka).</string>
+    <string name="walking_route_osmc_description">Kolorigi kursojn laŭ iliaj koloroj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”) aŭ laŭ ilia speco (interŝtata, regiona, loka).</string>
     <string name="option_available_only_in_osmand_pro">Eblaĵo disponebla por abonantoj de la plano OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Akiru aliron al altnivelaj agordoj: kolorigo de kursoj kaj pli.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Ekkonu kun planoj de OsmAnd por trovi la plej taŭgan por vi.</string>
