@@ -3499,7 +3499,7 @@
     <string name="shared_string_profiles">الأوضاع</string>
     <string name="replace_all_desc">سيتم استبدال العناصر الحالية بالعناصر التي في الملف</string>
     <string name="replace_all">استبدل الكل</string>
-    <string name="get_discount_title">احصل على %1$d %2$s لكل %3$s أقل.</string>
+    <string name="get_discount_title">احصل على %1$d %2$s لكل %3$s مقابل.</string>
     <string name="get_discount_first_part">%1$s لأول %2$s</string>
     <string name="get_discount_first_few_part">%1$s لأول %2$s</string>
     <string name="price_and_discount">%1$s • وفر %2$s</string>
