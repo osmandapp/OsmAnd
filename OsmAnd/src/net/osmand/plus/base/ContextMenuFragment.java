@@ -1,5 +1,7 @@
 package net.osmand.plus.base;
 
+import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
+
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
@@ -25,6 +27,14 @@ import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.Toast;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -39,18 +49,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
-import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
-
-import androidx.annotation.IdRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
 
 public abstract class ContextMenuFragment extends BaseOsmAndFragment implements MapControlsThemeInfoProvider {
 
@@ -598,11 +597,9 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		super.onResume();
 		paused = false;
 		dismissing = false;
-		if (view != null) {
-			ViewParent parent = view.getParent();
-			if (parent != null && containerLayoutListener != null) {
-				((View) parent).addOnLayoutChangeListener(containerLayoutListener);
-			}
+		ViewParent parent = view != null ? view.getParent() : null;
+		if (parent != null && containerLayoutListener != null) {
+			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
 		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {

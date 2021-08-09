@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -10,6 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -33,18 +44,8 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ImportedSettingsItemsAdapter.OnItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
 
 public class ImportCompleteFragment extends BaseOsmAndFragment {
 
@@ -54,8 +55,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	private static final String KEY_NEED_RESTART = "key_need_restart";
 
 	private OsmandApplication app;
-	@Nullable
-	private List<SettingsItem> settingsItems;
+	private List<SettingsItem> settingsItems = new ArrayList<>();
 
 	private RecyclerView recyclerView;
 	private String sourceName;
@@ -65,9 +65,9 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
 									@NonNull String sourceName, boolean needRestart) {
 		ImportCompleteFragment fragment = new ImportCompleteFragment();
-		fragment.setRetainInstance(true);
-		fragment.setSettingsItems(settingsItems);
+		fragment.settingsItems.addAll(settingsItems);
 		fragment.setSourceName(sourceName);
+		fragment.setRetainInstance(true);
 		fragment.setNeedRestart(needRestart);
 		fm.beginTransaction()
 				.replace(R.id.fragmentContainer, fragment, TAG)
@@ -288,10 +288,6 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	@Override
 	public int getStatusBarColorId() {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
-	}
-
-	public void setSettingsItems(List<SettingsItem> settingsItems) {
-		this.settingsItems = settingsItems;
 	}
 
 	public void setSourceName(String sourceName) {

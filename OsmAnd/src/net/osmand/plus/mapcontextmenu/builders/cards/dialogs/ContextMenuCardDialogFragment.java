@@ -8,13 +8,6 @@ import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.util.Algorithms;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -22,6 +15,13 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
+import net.osmand.AndroidUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.util.Algorithms;
 
 public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	public static final String TAG = "ContextMenuCardDialogFragment";
@@ -44,7 +44,6 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		if (dialog == null) {
 			return null;
 		}
-
 		View view = inflater.inflate(R.layout.context_menu_card_dialog, container, false);
 		FragmentActivity activity = requireActivity();
 		AndroidUtils.addStatusBarPadding21v(activity, view);
@@ -132,7 +131,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	}
 
 	public void dismiss() {
-		FragmentActivity activity = dialog != null ? dialog.getMapActivity() : getActivity();
+		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			if (!fragmentManager.isStateSaved()) {

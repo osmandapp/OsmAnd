@@ -1,5 +1,8 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.plus.measurementtool.ProfileCard.ProfileCardListener;
+import static net.osmand.plus.measurementtool.SliderCard.SliderCardListener;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -40,9 +43,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.measurementtool.ProfileCard.ProfileCardListener;
-import static net.osmand.plus.measurementtool.SliderCard.SliderCardListener;
 
 public class GpxApproximationFragment extends ContextMenuScrollFragment
 		implements SliderCardListener, ProfileCardListener {
@@ -123,11 +123,8 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		if (locationsHolders == null) {
-			return null;
-		}
 		View mainView = super.onCreateView(inflater, container, savedInstanceState);
-		if (mainView == null) {
+		if (mainView == null || locationsHolders == null) {
 			return null;
 		}
 		if (savedInstanceState != null) {
@@ -400,15 +397,13 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	public void onSliderChange(int sliderValue) {
 		if (distanceThreshold != sliderValue) {
 			distanceThreshold = sliderValue;
-			if (locationsHolders != null) {
-				calculateGpxApproximation(true);
-			}
+			calculateGpxApproximation(true);
 		}
 	}
 
 	@Override
 	public void onProfileSelect(ApplicationMode applicationMode) {
-		if (setSnapToRoadAppMode(applicationMode) && locationsHolders != null) {
+		if (setSnapToRoadAppMode(applicationMode)) {
 			calculateGpxApproximation(true);
 		}
 	}
@@ -421,7 +416,11 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		return false;
 	}
 
-	public void setLocationsHolders(List<LocationsHolder> locationsHolders) {
+	public List<LocationsHolder> getLocationsHolders() {
+		return locationsHolders;
+	}
+
+	public void setLocationsHolders(@NonNull List<LocationsHolder> locationsHolders) {
 		this.locationsHolders = locationsHolders;
 	}
 

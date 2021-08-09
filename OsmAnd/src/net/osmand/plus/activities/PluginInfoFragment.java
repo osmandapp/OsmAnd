@@ -30,13 +30,14 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -198,11 +199,11 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (plugin == null) {
-			dismiss();
-		} else {
+		if (plugin != null) {
 			OsmandPlugin.checkInstalledMarketPlugins(app, getActivity());
 			updateState();
+		} else {
+			dismiss();
 		}
 	}
 
@@ -238,8 +239,8 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	}
 
 	@Override
-	public void onPluginStateChanged(@NonNull OsmandPlugin plugin) {
-		if (this.plugin != null && this.plugin.getId().equals(plugin.getId())) {
+	public void onPluginStateChanged(@NonNull OsmandPlugin osmandPlugin) {
+		if (Algorithms.stringsEqual(plugin.getId(), osmandPlugin.getId())) {
 			updateState();
 		}
 	}

@@ -1,5 +1,17 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
+import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -104,18 +116,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.ADD_TO_TRACK;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.SelectFileListener;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.AFTER;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.ALL;
-import static net.osmand.plus.measurementtool.command.ClearPointsCommand.ClearCommandMode.BEFORE;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
 		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider {
@@ -123,11 +123,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
 
-	private static final String KEY_INITIAL_POINT_LAT = "key_initial_point_lat";
-	private static final String KEY_INITIAL_POINT_LON = "key_initial_point_lon";
-	private static final String KEY_MODES = "key_modes";
-	private static final String KEY_GPX_FILE_NAME = "key_gpx_file_name";
-	private static final String KEY_SHOW_SNAP_WARNING = "key_show_snap_warning";
+	private static final String MODES_KEY = "modes_key";
+	private static final String INITIAL_POINT_KEY = "initial_point_key";
+	private static final String SHOW_SNAP_WARNING_KEY = "show_snap_warning_key";
 
 	private String previousToolBarTitle = "";
 	private MeasurementToolBarController toolBarController;
@@ -599,18 +597,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		} else {
 			measurementLayer.setTapsDisabled(savedInstanceState.getBoolean(TAPS_DISABLED_KEY));
-			if (initialPoint == null && savedInstanceState.containsKey(KEY_INITIAL_POINT_LAT)
-					&& savedInstanceState.containsKey(KEY_INITIAL_POINT_LON)) {
-				double lat = savedInstanceState.getDouble(KEY_INITIAL_POINT_LAT);
-				double lon = savedInstanceState.getDouble(KEY_INITIAL_POINT_LON);
-				initialPoint = new LatLon(lat, lon);
+			if (initialPoint == null && savedInstanceState.containsKey(INITIAL_POINT_KEY)) {
+				initialPoint = (LatLon) savedInstanceState.getSerializable(INITIAL_POINT_KEY);
 			}
-			modes = savedInstanceState.getInt(KEY_MODES);
-			showSnapWarning = savedInstanceState.getBoolean(KEY_SHOW_SNAP_WARNING);
-			if (savedInstanceState.containsKey(KEY_GPX_FILE_NAME)) {
-				fileName = savedInstanceState.getString(KEY_GPX_FILE_NAME);
-				addNewGpxData(getGpxFile(fileName));
-			}
+			modes = savedInstanceState.getInt(MODES_KEY);
+			showSnapWarning = savedInstanceState.getBoolean(SHOW_SNAP_WARNING_KEY);
 		}
 
 		return view;
@@ -749,7 +740,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
 
 	public boolean isShowSnapWarning() {
 		return this.showSnapWarning;
@@ -1283,18 +1273,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (measurementLayer != null) {
 			outState.putBoolean(TAPS_DISABLED_KEY, measurementLayer.isTapsDisabled());
 		}
+		outState.putInt(MODES_KEY, modes);
+		outState.putBoolean(SHOW_SNAP_WARNING_KEY, showSnapWarning);
 		if (initialPoint != null) {
-			outState.putDouble(KEY_INITIAL_POINT_LAT, initialPoint.getLatitude());
-			outState.putDouble(KEY_INITIAL_POINT_LON, initialPoint.getLongitude());
-		}
-		outState.putInt(KEY_MODES, modes);
-		outState.putBoolean(KEY_SHOW_SNAP_WARNING, showSnapWarning);
-		if (fileName != null) {
-			outState.putString(KEY_GPX_FILE_NAME, fileName);
-		} else if (editingCtx.getGpxData() != null && editingCtx.getGpxData().getGpxFile() != null) {
-			String fullPath = editingCtx.getGpxData().getGpxFile().path;
-			String fileName = Algorithms.getFileWithoutDirs(fullPath);
-			outState.putString(KEY_GPX_FILE_NAME, fileName);
+			outState.putSerializable(INITIAL_POINT_KEY, initialPoint);
 		}
 	}
 

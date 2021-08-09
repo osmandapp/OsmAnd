@@ -1,5 +1,13 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -99,14 +107,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.TrackMenuFragment.openTrack;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback {
@@ -1531,9 +1531,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		@Override
 		protected void onPostExecute(String result) {
 			hideProgressBar();
-			if (getActivity() != null) {
-				Toast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
-			}
+			app.showToastMessage(result);
 		}
 	}
 
