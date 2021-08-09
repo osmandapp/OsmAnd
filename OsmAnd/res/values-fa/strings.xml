@@ -307,7 +307,7 @@
     <string name="route_general_information">مسافت کل %1$s، مدت سفر %2$d ساعت و %3$d دقیقه.</string>
     <string name="shared_string_next">بعدی</string>
     <string name="shared_string_previous">قبلی</string>
-    <string name="unit_of_length_descr">یکاهای طول را تغییر دهید.</string>
+    <string name="unit_of_length_descr">یکاهای فاصله را تغییر دهید.</string>
     <string name="unit_of_length">یکاهای طول</string>
     <string name="local_index_descr_title">مدیریت پرونده‌های نقشه</string>
     <string name="local_index_mi_restore">فعال‌سازی</string>
