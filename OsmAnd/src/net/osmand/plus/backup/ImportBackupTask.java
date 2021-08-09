@@ -44,7 +44,6 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 	private final String key;
 	private final Map<String, ItemProgressInfo> itemsProgress = new HashMap<>();
 	private final ImportType importType;
-	private boolean importDone;
 
 	ImportBackupTask(@NonNull String key,
 					 @NonNull NetworkSettingsHelper helper,
@@ -85,15 +84,6 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		this.selectedItems = selectedItems;
 		importer = new BackupImporter(app.getBackupHelper(), getProgressListener());
 		importType = ImportType.CHECK_DUPLICATES;
-	}
-
-	@Override
-	protected void onPreExecute() {
-		ImportBackupTask importTask = helper.getImportTask(key);
-		if (importTask != null && !importTask.importDone) {
-			helper.finishImport(importTask.importListener, false, importTask.items, false);
-		}
-		helper.importAsyncTasks.put(key, this);
 	}
 
 	@Override
@@ -145,12 +135,10 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 		switch (importType) {
 			case COLLECT:
 			case COLLECT_AND_READ:
-				importDone = true;
 				collectListener.onBackupCollectFinished(items != null, false, this.items, remoteFiles);
 				helper.importAsyncTasks.remove(key);
 				break;
 			case CHECK_DUPLICATES:
-				importDone = true;
 				if (duplicatesListener != null) {
 					duplicatesListener.onDuplicatesChecked(duplicates, selectedItems);
 				}
@@ -211,10 +199,6 @@ public class ImportBackupTask extends AsyncTask<Void, ItemProgressInfo, List<Set
 
 	ImportType getImportType() {
 		return importType;
-	}
-
-	boolean isImportDone() {
-		return importDone;
 	}
 
 	public List<Object> getDuplicates() {

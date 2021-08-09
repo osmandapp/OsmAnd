@@ -136,8 +136,11 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	public void collectSettings(@NonNull String key, boolean readData,
 								@Nullable BackupCollectListener listener) {
 		if (!importAsyncTasks.containsKey(key)) {
-			new ImportBackupTask(key, this, listener, readData)
-					.executeOnExecutor(getBackupHelper().getExecutor());
+			ImportBackupTask importTask = new ImportBackupTask(key, this, listener, readData);
+			importAsyncTasks.put(key, importTask);
+			importTask.executeOnExecutor(getBackupHelper().getExecutor());
+		} else {
+			throw new IllegalStateException("Already importing " + key);
 		}
 	}
 
@@ -146,8 +149,11 @@ public class NetworkSettingsHelper extends SettingsHelper {
 								@NonNull List<SettingsItem> selectedItems,
 								CheckDuplicatesListener listener) {
 		if (!importAsyncTasks.containsKey(key)) {
-			new ImportBackupTask(key, this, items, selectedItems, listener)
-					.executeOnExecutor(getBackupHelper().getExecutor());
+			ImportBackupTask importTask = new ImportBackupTask(key, this, items, selectedItems, listener);
+			importAsyncTasks.put(key, importTask);
+			importTask.executeOnExecutor(getBackupHelper().getExecutor());
+		} else {
+			throw new IllegalStateException("Already importing " + key);
 		}
 	}
 
@@ -157,7 +163,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 							   @Nullable ImportListener listener) {
 		if (!importAsyncTasks.containsKey(key)) {
 			ImportBackupTask importTask = new ImportBackupTask(key, this, items, listener, forceReadData);
+			importAsyncTasks.put(key, importTask);
 			importTask.executeOnExecutor(getBackupHelper().getExecutor());
+		} else {
+			throw new IllegalStateException("Already importing " + key);
 		}
 	}
 
@@ -167,7 +176,10 @@ public class NetworkSettingsHelper extends SettingsHelper {
 							   @Nullable BackupExportListener listener) {
 		if (!exportAsyncTasks.containsKey(key)) {
 			ExportBackupTask exportTask = new ExportBackupTask(key, this, items, itemsToDelete, listener);
+			exportAsyncTasks.put(key, exportTask);
 			exportTask.executeOnExecutor(getBackupHelper().getExecutor());
+		} else {
+			throw new IllegalStateException("Already exporting " + key);
 		}
 	}
 
