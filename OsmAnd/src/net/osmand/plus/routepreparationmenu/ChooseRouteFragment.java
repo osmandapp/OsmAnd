@@ -1,5 +1,12 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
@@ -57,8 +64,8 @@ import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
-import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -78,13 +85,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 
 public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
 		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener {
@@ -846,26 +846,17 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		dismiss();
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
 		return showInstance(fragmentManager, 0);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, int routeIndex) {
-		try {
-			ChooseRouteFragment fragment = new ChooseRouteFragment();
-			Bundle args = new Bundle();
-			args.putInt(ROUTE_INDEX_KEY, routeIndex);
-			fragment.setArguments(args);
-			fragmentManager.beginTransaction()
-					.add(R.id.routeMenuContainer, fragment, TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, int routeIndex) {
+		Bundle args = new Bundle();
+		args.putInt(ROUTE_INDEX_KEY, routeIndex);
+		return showInstance(fragmentManager, args);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
 		Bundle args = new Bundle();
 		args.putInt(ROUTE_INDEX_KEY, routeIndex);
 		args.putInt(INITIAL_MENU_STATE_KEY, initialMenuState);
@@ -873,7 +864,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return showInstance(fragmentManager, args);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, Bundle args) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, Bundle args) {
 		try {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			fragment.setArguments(args);

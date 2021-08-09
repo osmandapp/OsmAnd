@@ -147,7 +147,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	}
 
 	@Override
-	public void onPluginStateChanged(OsmandPlugin plugin) {
+	public void onPluginStateChanged(@NonNull OsmandPlugin plugin) {
 		adapter.notifyDataSetChanged();
 	}
 
