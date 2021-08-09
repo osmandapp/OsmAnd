@@ -11,7 +11,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.LocalFile;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.RemoteFile;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -22,25 +25,35 @@ import java.util.Collections;
 
 public class ConflictViewHolder extends ItemViewHolder {
 
+	private final View serverButton;
+	private final View localVersionButton;
+
 	public ConflictViewHolder(View itemView) {
 		super(itemView);
+		serverButton = itemView.findViewById(R.id.server_button);
+		localVersionButton = itemView.findViewById(R.id.local_version_button);
 	}
 
 	public void bindView(@NonNull Pair<LocalFile, RemoteFile> pair,
 						 @Nullable BackupExportListener exportListener,
 						 @Nullable ImportListener importListener, boolean nightMode) {
 		OsmandApplication app = getApplication();
+		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
 		SettingsItem item = pair.first.item;
 
-		setupItemView(item, false);
+		String fileName = BackupHelper.getItemFileName(item);
+		setupItemView(fileName, item, false);
+		updateButtonsState(settingsHelper, fileName);
 
-		View localVersionButton = itemView.findViewById(R.id.local_version_button);
-		localVersionButton.setOnClickListener(v -> app.getNetworkSettingsHelper().exportSettings(exportListener, item));
-		View serverButton = itemView.findViewById(R.id.server_button);
+		localVersionButton.setOnClickListener(v -> {
+			settingsHelper.exportSettings(fileName, exportListener, item);
+			updateButtonsState(settingsHelper, fileName);
+		});
 		serverButton.setOnClickListener(v -> {
 			SettingsItem settingsItem = pair.second.item;
 			settingsItem.setShouldReplace(true);
-			app.getNetworkSettingsHelper().importSettings(Collections.singletonList(settingsItem), "", 1, true, importListener);
+			settingsHelper.importSettings(Collections.singletonList(settingsItem), "", 1, true, importListener);
+			updateButtonsState(settingsHelper, fileName);
 		});
 		AndroidUiHelper.updateVisibility(serverButton, true);
 		AndroidUiHelper.updateVisibility(localVersionButton, true);
@@ -48,5 +61,13 @@ public class ConflictViewHolder extends ItemViewHolder {
 		UiUtilities.setupDialogButton(nightMode, serverButton, DialogButtonType.SECONDARY, R.string.download_server_version);
 		AndroidUtils.setBackground(app, localVersionButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
 		AndroidUtils.setBackground(app, serverButton, nightMode, R.drawable.dlg_btn_transparent_light, R.drawable.dlg_btn_transparent_dark);
+	}
+
+	private void updateButtonsState(@NonNull NetworkSettingsHelper helper, @NonNull String fileName) {
+		ExportBackupTask exportTask = helper.getExportTask(fileName);
+		boolean exporting = exportTask != null;
+
+		serverButton.setEnabled(!exporting);
+		localVersionButton.setEnabled(!exporting);
 	}
 }

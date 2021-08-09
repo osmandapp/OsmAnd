@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkSettingsHelper;
@@ -24,7 +25,6 @@ import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -159,7 +159,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		if (error != null) {
 			updateAdapter();
 			app.showShortToastMessage(new BackupError(error).getLocalizedError(app));
-		} else {
+		} else if (!settingsHelper.isBackupExporting()) {
 			backupHelper.prepareBackup();
 		}
 	}

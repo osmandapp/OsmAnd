@@ -1,5 +1,7 @@
 package net.osmand.plus.backup.ui.status;
 
+import static net.osmand.plus.backup.ui.status.BackupStatusAdapter.BACKUP_ITEMS_KEY;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -47,7 +49,7 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 				BackupInfo info = backup.getBackupInfo();
 				List<SettingsItem> items = info.itemsToUpload;
 				if (!items.isEmpty() || !Algorithms.isEmpty(info.filteredFilesToDelete)) {
-					app.getNetworkSettingsHelper().exportSettings(items, info.itemsToDelete, exportListener);
+					app.getNetworkSettingsHelper().exportSettings(BACKUP_ITEMS_KEY, items, info.itemsToDelete, exportListener);
 				}
 			});
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.backup_now);

@@ -9,16 +9,19 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NetworkSettingsHelper extends SettingsHelper {
 
 	ImportBackupTask importTask;
-	ExportBackupTask exportTask;
+	final Map<String, ExportBackupTask> exportAsyncTasks = new HashMap<>();
 
 	public interface BackupExportListener {
 		void onBackupExportStarted();
@@ -57,8 +60,8 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	@Nullable
-	public ExportBackupTask getExportTask() {
-		return exportTask;
+	public ExportBackupTask getExportTask(@NonNull String key) {
+		return exportAsyncTasks.get(key);
 	}
 
 	@Nullable
@@ -73,15 +76,17 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	public boolean cancelExport() {
-		ExportBackupTask exportTask = this.exportTask;
-		if (exportTask != null && (exportTask.getStatus() == AsyncTask.Status.RUNNING)) {
-			return exportTask.cancel(false);
+		boolean cancelled = false;
+		for (ExportBackupTask exportTask : exportAsyncTasks.values()) {
+			if (exportTask != null && (exportTask.getStatus() == AsyncTask.Status.RUNNING)) {
+				cancelled |= exportTask.cancel(true);
+			}
 		}
-		return false;
+		return cancelled;
 	}
 
 	public boolean isBackupExporting() {
-		return exportTask != null;
+		return !Algorithms.isEmpty(exportAsyncTasks);
 	}
 
 	public boolean isBackupImporting() {
@@ -89,8 +94,7 @@ public class NetworkSettingsHelper extends SettingsHelper {
 	}
 
 	public void updateExportListener(@Nullable BackupExportListener listener) {
-		ExportBackupTask exportTask = this.exportTask;
-		if (exportTask != null) {
+		for (ExportBackupTask exportTask : exportAsyncTasks.values()) {
 			exportTask.setListener(listener);
 		}
 	}
@@ -130,15 +134,17 @@ public class NetworkSettingsHelper extends SettingsHelper {
 				.executeOnExecutor(getBackupHelper().getExecutor());
 	}
 
-	public void exportSettings(@NonNull List<SettingsItem> items,
+	public void exportSettings(@NonNull String key,
+							   @NonNull List<SettingsItem> items,
 							   @NonNull List<SettingsItem> itemsToDelete,
 							   @Nullable BackupExportListener listener) {
-		ExportBackupTask exportTask = new ExportBackupTask(this, items, itemsToDelete, listener);
-		this.exportTask = exportTask;
+		ExportBackupTask exportTask = new ExportBackupTask(key, this, items, itemsToDelete, listener);
+		exportAsyncTasks.put(key, exportTask);
 		exportTask.executeOnExecutor(getBackupHelper().getExecutor());
 	}
 
-	public void exportSettings(@Nullable BackupExportListener listener, @NonNull SettingsItem... items) {
-		exportSettings(new ArrayList<>(Arrays.asList(items)), Collections.emptyList(), listener);
+	public void exportSettings(@NonNull String key, @Nullable BackupExportListener listener,
+							   @NonNull SettingsItem... items) {
+		exportSettings(key, new ArrayList<>(Arrays.asList(items)), Collections.emptyList(), listener);
 	}
 }

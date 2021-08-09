@@ -1,5 +1,7 @@
 package net.osmand.plus.backup.ui.status;
 
+import static net.osmand.plus.backup.ui.status.BackupStatusAdapter.BACKUP_ITEMS_KEY;
+
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,6 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupDbHelper.UploadedFileInfo;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.ExportBackupTask;
 import net.osmand.plus.backup.ExportBackupTask.ItemProgressInfo;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -46,11 +49,11 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 	}
 
 	public void bindView(SettingsItem item, boolean lastBackupItem, boolean deleteItem) {
-		setupItemView(item, deleteItem);
+		setupItemView(BACKUP_ITEMS_KEY, item, deleteItem);
 		AndroidUiHelper.updateVisibility(divider, !lastBackupItem);
 	}
 
-	protected void setupItemView(@NonNull SettingsItem item, boolean deleteItem) {
+	protected void setupItemView(@NonNull String exportKey, @NonNull SettingsItem item, boolean deleteItem) {
 		OsmandApplication app = getApplication();
 		String publicName = item.getPublicName(app);
 		if (item instanceof FileSettingsItem) {
@@ -63,9 +66,9 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		}
 		title.setText(publicName);
 
-		String filename = BackupHelper.getItemFileName(item);
+		String fileName = BackupHelper.getItemFileName(item);
 		String summary = app.getString(R.string.last_backup);
-		UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), filename);
+		UploadedFileInfo info = app.getBackupHelper().getDbHelper().getUploadedFileInfo(item.getType().name(), fileName);
 		if (info != null) {
 			String time = OsmAndFormatter.getFormattedPassedTime(app, info.getUploadTime(), app.getString(R.string.shared_string_never));
 			description.setText(app.getString(R.string.ltr_or_rtl_combine_via_colon, summary, time));
@@ -75,9 +78,9 @@ public class ItemViewHolder extends RecyclerView.ViewHolder {
 		icon.setImageDrawable(getItemIcon(item));
 
 		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
-		if (settingsHelper.getExportTask() != null) {
-			String fileName = BackupHelper.getItemFileName(item);
-			ItemProgressInfo progressInfo = settingsHelper.getExportTask().getItemProgressInfo(item.getType().name(), fileName);
+		ExportBackupTask exportTask = settingsHelper.getExportTask(exportKey);
+		if (exportTask != null) {
+			ItemProgressInfo progressInfo = exportTask.getItemProgressInfo(item.getType().name(), fileName);
 			if (progressInfo != null) {
 				if (progressInfo.isFinished()) {
 					secondIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_done));

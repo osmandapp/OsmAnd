@@ -27,14 +27,17 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	private final BackupExporter exporter;
 	private BackupExportListener listener;
 
+	private final String key;
 	private final Map<String, ItemProgressInfo> itemsProgress = new HashMap<>();
 	private int generalProgress;
 	private long maxProgress;
 
-	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
+	ExportBackupTask(@NonNull String key,
+					 @NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
 					 @NonNull List<SettingsItem> itemsToDelete,
 					 @Nullable BackupExportListener listener) {
+		this.key = key;
 		this.helper = helper;
 		this.listener = listener;
 		BackupHelper backupHelper = helper.getApp().getBackupHelper();
@@ -168,7 +171,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	@Override
 	protected void onPostExecute(String error) {
-		helper.exportTask = null;
+		helper.exportAsyncTasks.remove(key);
 
 		BackupHelper backupHelper = helper.getApp().getBackupHelper();
 		backupHelper.getBackup().setError(error);
