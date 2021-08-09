@@ -4,11 +4,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
-import android.net.Uri;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
@@ -17,6 +14,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.util.Algorithms;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 public class AudioVideoNoteMenuController extends MenuController {
 	private Recording mRecording;
@@ -191,26 +191,23 @@ public class AudioVideoNoteMenuController extends MenuController {
 		MapActivity mapActivity = getMapActivity();
 		if (mIsFileAvailable && mapActivity != null) {
 			String path = mRecording.getFile().getAbsolutePath();
-			MediaScannerConnection.scanFile(mapActivity, new String[]{path},
-					null, new MediaScannerConnection.OnScanCompletedListener() {
-						public void onScanCompleted(String path, Uri uri) {
-							MapActivity activity = getMapActivity();
-							if (activity != null) {
-								Intent shareIntent = new Intent(
-										android.content.Intent.ACTION_SEND);
-								if (mRecording.isPhoto()) {
-									shareIntent.setType("image/*");
-								} else if (mRecording.isAudio()) {
-									shareIntent.setType("audio/*");
-								} else if (mRecording.isVideo()) {
-									shareIntent.setType("video/*");
-								}
-								shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-								shareIntent
-										.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-								activity.startActivity(Intent.createChooser(shareIntent,
-										activity.getString(R.string.share_note)));
+			MediaScannerConnection.scanFile(mapActivity, new String[] {path},
+					null, (p, uri) -> {
+						MapActivity activity = getMapActivity();
+						if (activity != null) {
+							Intent shareIntent = new Intent(Intent.ACTION_SEND);
+							if (mRecording.isPhoto()) {
+								shareIntent.setType("image/*");
+							} else if (mRecording.isAudio()) {
+								shareIntent.setType("audio/*");
+							} else if (mRecording.isVideo()) {
+								shareIntent.setType("video/*");
 							}
+							shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+							shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+							Intent chooserIntent = Intent.createChooser(shareIntent,
+									activity.getString(R.string.share_note));
+							AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
 						}
 					});
 		} else {

@@ -1067,17 +1067,17 @@ public class OsmandApplication extends MultiDexApplication {
 		intent.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
 		Intent chooserIntent = Intent.createChooser(intent, getString(R.string.send_report));
 		chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(chooserIntent);
+		AndroidUtils.startActivityIfSafe(this, intent, chooserIntent);
 	}
 
 	public void sendSupportEmail(String screenName) {
-		final Intent emailIntent = new Intent(Intent.ACTION_SEND)
+		Intent emailIntent = new Intent(Intent.ACTION_SEND)
 				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-				.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@osmand.net"})
+				.putExtra(Intent.EXTRA_EMAIL, new String[] {"support@osmand.net"})
 				.putExtra(Intent.EXTRA_SUBJECT, screenName)
 				.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
 		emailIntent.setSelector(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")));
-		startActivity(emailIntent);
+		AndroidUtils.startActivityIfSafe(this, emailIntent);
 	}
 
 	public String getDeviceInfo() {

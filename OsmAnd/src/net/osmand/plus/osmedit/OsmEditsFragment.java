@@ -932,7 +932,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 				sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), osmchange));
 				sendIntent.setType("text/plain");
 				sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-				startActivity(sendIntent);
+				AndroidUtils.startActivityIfSafe(getActivity(), sendIntent);
 			}
 		}
 	}

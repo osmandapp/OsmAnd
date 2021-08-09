@@ -335,12 +335,10 @@ public class AddPOIAction extends QuickAction {
 
 		ImageButton onlineDocumentationButton =
 				(ImageButton) view.findViewById(R.id.onlineDocumentationButton);
-		onlineDocumentationButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW,
-						Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
-			}
+		onlineDocumentationButton.setOnClickListener(v -> {
+			Intent intent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features"));
+			AndroidUtils.startActivityIfSafe(activity, intent);
 		});
 
 		final int colorId = isLightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;

@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -71,7 +72,8 @@ public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialo
 			Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
 			sendEmail.setData(Uri.parse("mailto:" + email));
 			sendEmail.putExtra(Intent.EXTRA_EMAIL, email);
-			startActivity(Intent.createChooser(sendEmail, getString(R.string.send_report)));
+			Intent chooserIntent = Intent.createChooser(sendEmail, getString(R.string.send_report));
+			AndroidUtils.startActivityIfSafe(app, sendEmail, chooserIntent);
 			dismiss();
 		}
 	}

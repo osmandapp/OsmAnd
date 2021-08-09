@@ -477,44 +477,34 @@ public class MenuBuilder {
 				ctx.getString(R.string.shared_string_add_photo), R.drawable.ic_sample);
 		TextView textView = view.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(dp6);
-		button.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (false) {
-					AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
-				} else {
-					registerResultListener();
-					final String baseUrl = OPRConstants.getBaseUrl(app);
-					final String name = app.getSettings().OPR_USERNAME.get();
-					final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
-					if (Algorithms.isBlank(privateKey) || Algorithms.isBlank(name)) {
-						OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
-						return;
-					}
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
-								app.runInUIThread(new Runnable() {
-									@Override
-									public void run() {
-										Intent intent = new Intent();
-										intent.setType("image/*");
-										intent.setAction(Intent.ACTION_GET_CONTENT);
-										if (Build.VERSION.SDK_INT > 18) {
-											intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-										}
-										mapActivity.startActivityForResult(Intent.createChooser(intent,
-												mapActivity.getString(R.string.select_picture)), PICK_IMAGE);
-									}
-								});
-							} else {
-								OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
-							}
-						}
-					}).start();
-				}
+		button.setOnClickListener(v -> {
+			registerResultListener();
+			final String baseUrl = OPRConstants.getBaseUrl(app);
+			final String name = app.getSettings().OPR_USERNAME.get();
+			final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
+			if (Algorithms.isBlank(privateKey) || Algorithms.isBlank(name)) {
+				OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+				return;
 			}
+			new Thread(() -> {
+				if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
+					app.runInUIThread(() -> {
+						Intent intent = new Intent()
+								.setAction(Intent.ACTION_GET_CONTENT)
+								.setType("image/*");
+						if (Build.VERSION.SDK_INT > 18) {
+							intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+						}
+						if (AndroidUtils.isIntentSafe(mapActivity, intent)) {
+							Intent chooserIntent = Intent.createChooser(intent,
+									mapActivity.getString(R.string.select_picture));
+							mapActivity.startActivityForResult(chooserIntent, PICK_IMAGE);
+						}
+					});
+				} else {
+					OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+				}
+			}).start();
 		});
 		AndroidUiHelper.updateVisibility(view, false);
 		photoButton = view;
@@ -824,13 +814,10 @@ public class MenuBuilder {
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);
 		} else if (isUrl) {
-			ll.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse(text));
-					v.getContext().startActivity(intent);
-				}
+			ll.setOnClickListener(v -> {
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse(text));
+				AndroidUtils.startActivityIfSafe(v.getContext(), intent);
 			});
 		} else if (isNumber) {
 			ll.setOnClickListener(new View.OnClickListener() {
@@ -840,13 +827,10 @@ public class MenuBuilder {
 				}
 			});
 		} else if (isEmail) {
-			ll.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_SENDTO);
-					intent.setData(Uri.parse("mailto:" + text));
-					v.getContext().startActivity(intent);
-				}
+			ll.setOnClickListener(v -> {
+				Intent intent = new Intent(Intent.ACTION_SENDTO);
+				intent.setData(Uri.parse("mailto:" + text));
+				AndroidUtils.startActivityIfSafe(v.getContext(), intent);
 			});
 		}
 
@@ -966,12 +950,9 @@ public class MenuBuilder {
 			}
 			AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
 			dlg.setNegativeButton(R.string.shared_string_cancel, null);
-			dlg.setItems(items, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					intent.setData(Uri.parse(dataPrefix + items[which]));
-					v.getContext().startActivity(intent);
-				}
+			dlg.setItems(items, (dialog, which) -> {
+				intent.setData(Uri.parse(dataPrefix + items[which]));
+				AndroidUtils.startActivityIfSafe(v.getContext(), intent);
 			});
 			dlg.show();
 		} else {

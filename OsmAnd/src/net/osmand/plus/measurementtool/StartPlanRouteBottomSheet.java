@@ -157,10 +157,9 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 	private void importTrack() {
 		Intent intent = ImportHelper.getImportTrackIntent();
-		try {
-			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
-		} catch (ActivityNotFoundException e) {
-			LOG.error(e.getMessage(), e);
+		Activity activity = getActivity();
+		if (activity != null) {
+			AndroidUtils.startActivityForResultIfSave(activity, intent, OPEN_GPX_DOCUMENT_REQUEST);
 		}
 	}
 

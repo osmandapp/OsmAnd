@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -59,7 +60,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			if (intentData != null) {
 				installIntent.setData(intentData);
 			}
-			ctx.startActivity(installIntent);
+			AndroidUtils.startActivityIfSafe(ctx, installIntent);
 		}
 	}
 

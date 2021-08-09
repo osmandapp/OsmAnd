@@ -10,17 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.AndroidUtils;
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.util.Date;
+
+import androidx.annotation.NonNull;
 
 public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 
@@ -57,15 +54,12 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 					bmp = resizedBitmap;
 				}
 
-				buildImageRow(view, bmp, new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						Intent vint = new Intent(Intent.ACTION_VIEW);
-						vint.setDataAndType(AndroidUtils.getUriForFile(getApplication(),recording.getFile()) , "image/*");
-						vint.setFlags(0x10000000);
-						vint.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						v.getContext().startActivity(vint);
-					}
+				buildImageRow(view, bmp, v -> {
+					Intent vint = new Intent(Intent.ACTION_VIEW);
+					vint.setDataAndType(AndroidUtils.getUriForFile(getApplication(), recording.getFile()) , "image/*");
+					vint.setFlags(0x10000000);
+					vint.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					AndroidUtils.startActivityIfSafe(v.getContext(), vint);
 				});
 			}
 		} else {

@@ -476,10 +476,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 
 	public void importTrack() {
 		Intent intent = ImportHelper.getImportTrackIntent();
-		try {
-			startActivityForResult(intent, ImportHelper.IMPORT_FILE_REQUEST);
-		} catch (ActivityNotFoundException e) {
-			log.error(e.getMessage(), e);
+		if (getActivity() != null) {
+			AndroidUtils.startActivityForResultIfSave(getActivity(), intent, ImportHelper.IMPORT_FILE_REQUEST);
 		}
 	}
 

@@ -1,26 +1,27 @@
 package net.osmand.plus.download;
 
+import android.app.Activity;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
+import net.osmand.plus.settings.backend.OsmandSettings;
+
+import java.io.File;
+import java.text.MessageFormat;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
-
-import java.io.File;
-import java.text.MessageFormat;
 
 public class DownloadValidationManager {
 	public static final int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 7;
@@ -211,22 +212,16 @@ public class DownloadValidationManager {
 		@NonNull
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			final Activity activity = requireActivity();
 			String msgTx = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "");
-			AlertDialog.Builder msg = new AlertDialog.Builder(getActivity());
+			AlertDialog.Builder msg = new AlertDialog.Builder(activity);
 			msg.setTitle(R.string.free_version_title);
 			msg.setMessage(msgTx);
 			if (Version.isMarketEnabled()) {
-				msg.setPositiveButton(R.string.install_paid, new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW,
-								Uri.parse(Version.getUrlWithUtmRef(getMyApplication(), "net.osmand.plus")));
-						try {
-							startActivity(intent);
-						} catch (ActivityNotFoundException e) {
-						}
-					}
+				msg.setPositiveButton(R.string.install_paid, (dialog, which) -> {
+					Uri uri = Uri.parse(Version.getUrlWithUtmRef(getMyApplication(), "net.osmand.plus"));
+					Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+					AndroidUtils.startActivityIfSafe(activity, intent);
 				});
 				msg.setNegativeButton(R.string.shared_string_cancel, null);
 			} else {

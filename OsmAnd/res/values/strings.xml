@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="no_activity_for_intent">No suitable applications to perform this action were found</string>
     <string name="purchases_restored">Purchases restored</string>
     <string name="pro_features">Pro features</string>
     <string name="connect_track_points_as">Сonnect route points</string>

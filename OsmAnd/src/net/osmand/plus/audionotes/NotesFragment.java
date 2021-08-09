@@ -1,5 +1,6 @@
 package net.osmand.plus.audionotes;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -478,11 +479,15 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	}
 
 	private void shareItems(Set<Recording> selected) {
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
 		ArrayList<Uri> uris = new ArrayList<>();
 		for (Recording rec : selected) {
 			File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
 			if (file != null) {
-				uris.add(AndroidUtils.getUriForFile(getMyApplication(), file));
+				uris.add(AndroidUtils.getUriForFile(app, file));
 			}
 		}
 
@@ -493,7 +498,8 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		if (Build.VERSION.SDK_INT > 18) {
 			intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 		}
-		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
+		Intent chooserIntent = Intent.createChooser(intent, getString(R.string.share_note));
+		AndroidUtils.startActivityIfSafe(app, intent, chooserIntent);
 	}
 
 	private Set<Recording> getRecordingsForGpx(Set<Recording> selected) {
@@ -561,21 +567,25 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		if (!recording.getFile().exists()) {
 			return;
 		}
-		MediaScannerConnection.scanFile(getActivity(), new String[]{recording.getFile().getAbsolutePath()},
-				null, new MediaScannerConnection.OnScanCompletedListener() {
-					public void onScanCompleted(String path, Uri uri) {
-						Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
-						if (recording.isPhoto()) {
-							shareIntent.setType("image/*");
-						} else if (recording.isAudio()) {
-							shareIntent.setType("audio/*");
-						} else if (recording.isVideo()) {
-							shareIntent.setType("video/*");
-						}
-						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-						shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-						startActivity(Intent.createChooser(shareIntent, getString(R.string.share_note)));
+		MediaScannerConnection.scanFile(getActivity(), new String[] {recording.getFile().getAbsolutePath()},
+				null, (path, uri) -> {
+					Activity activity = getActivity();
+					if (activity == null) {
+						return;
 					}
+
+					Intent shareIntent = new Intent(Intent.ACTION_SEND);
+					if (recording.isPhoto()) {
+						shareIntent.setType("image/*");
+					} else if (recording.isAudio()) {
+						shareIntent.setType("audio/*");
+					} else if (recording.isVideo()) {
+						shareIntent.setType("video/*");
+					}
+					shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+					shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+					Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
+					AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
 				});
 	}
 

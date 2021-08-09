@@ -2,7 +2,6 @@ package net.osmand.plus.download;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.TrafficStats;
@@ -11,9 +10,6 @@ import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.view.View;
 import android.widget.Toast;
-
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
@@ -45,6 +41,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AlertDialog;
 
 @SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
@@ -382,15 +381,10 @@ public class DownloadIndexesThread {
 		private void showWarnDialog() {
 			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 			builder.setMessage(R.string.map_version_changed_info);
-			builder.setPositiveButton(R.string.button_upgrade_osmandplus, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
-					try {
-						ctx.startActivity(intent);
-					} catch (ActivityNotFoundException e) {
-					}
-				}
+			builder.setPositiveButton(R.string.button_upgrade_osmandplus, (dialog, which) -> {
+				Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus"));
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				AndroidUtils.startActivityIfSafe(ctx, intent);
 			});
 			builder.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
 				@Override

@@ -13,6 +13,7 @@ import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
@@ -106,20 +107,12 @@ public class FavoritesActivity extends TabActivity {
 
 	public void addTrack() {
 		Intent intent = ImportHelper.getImportTrackIntent();
-		try {
-			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
-		} catch (ActivityNotFoundException e) {
-			LOG.error(e.getMessage(), e);
-		}
+		AndroidUtils.startActivityForResultIfSave(this, intent, OPEN_GPX_DOCUMENT_REQUEST);
 	}
 
 	public void importFavourites() {
 		Intent intent = ImportHelper.getImportTrackIntent();
-		try {
-			startActivityForResult(intent, IMPORT_FAVOURITES_REQUEST);
-		} catch (ActivityNotFoundException e) {
-			LOG.error(e.getMessage(), e);
-		}
+		AndroidUtils.startActivityForResultIfSave(this, intent, IMPORT_FAVOURITES_REQUEST);
 	}
 
 	@Override

@@ -270,10 +270,10 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			final Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
 			sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
-			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
+			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
 			sendIntent.setType("*/*");
 			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			startActivity(sendIntent);
+			AndroidUtils.startActivityIfSafe(app, sendIntent);
 			dismissFragment();
 		} catch (Exception e) {
 			Toast.makeText(requireContext(), R.string.export_profile_failed, Toast.LENGTH_SHORT).show();

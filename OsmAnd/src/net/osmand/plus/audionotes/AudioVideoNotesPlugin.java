@@ -912,17 +912,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri); // set the image file name
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		// start the image capture Intent
-		mapActivity.startActivityForResult(intent, 105);
+		AndroidUtils.startActivityForResultIfSave(mapActivity, intent, 105);
 	}
 
 	public void captureVideoExternal(double lat, double lon, final MapActivity mapActivity) {
 		Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-
-		String ext = MPEG4_EXTENSION;
-//		if (AV_VIDEO_FORMAT.get() == VIDEO_OUTPUT_3GP) {
-//			ext = THREEGP_EXTENSION;
-//		}
-		Uri fileUri = AndroidUtils.getUriForFile(mapActivity, getBaseFileName(lat, lon, app, ext));
+		Uri fileUri = AndroidUtils.getUriForFile(mapActivity, getBaseFileName(lat, lon, app, MPEG4_EXTENSION));
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
 			intent.setClipData(ClipData.newRawUri("", fileUri));
 		}
@@ -930,7 +925,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 		intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1); // set the video image quality to high
 		// start the video capture Intent
-		mapActivity.startActivityForResult(intent, 205);
+		AndroidUtils.startActivityForResultIfSave(mapActivity, intent, 205);
 	}
 
 	@Override
@@ -1596,7 +1591,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 		takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 		try {
-			mapActivity.startActivityForResult(takePictureIntent, 205);
+			AndroidUtils.startActivityForResultIfSave(mapActivity, takePictureIntent, 205);
 		} catch (Exception e) {
 			log.error("Error taking a picture ", e);
 			Toast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -1956,27 +1951,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void playRecording(final @NonNull Context ctx, final @NonNull Recording r) {
-		if (r.isVideo()) {
+		if (r.isVideo() || r.isPhoto()) {
 			Intent vint = new Intent(Intent.ACTION_VIEW);
-			vint.setDataAndType(AndroidUtils.getUriForFile(ctx, r.file), "video/*");
+			String type = r.isVideo() ? "video/*" : "image/*";
+			vint.setDataAndType(AndroidUtils.getUriForFile(ctx, r.file), type);
 			vint.setFlags(0x10000000);
 			vint.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			try {
-				ctx.startActivity(vint);
-			} catch (Exception e) {
-				log.error(e.getMessage(), e);
-			}
-			return;
-		} else if (r.isPhoto()) {
-			Intent vint = new Intent(Intent.ACTION_VIEW);
-			vint.setDataAndType(AndroidUtils.getUriForFile(ctx, r.file), "image/*");
-			vint.setFlags(0x10000000);
-			vint.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			try {
-				ctx.startActivity(vint);
-			} catch (Exception e) {
-				log.error(e.getMessage(), e);
-			}
+			AndroidUtils.startActivityIfSafe(ctx, vint);
 			return;
 		}
 

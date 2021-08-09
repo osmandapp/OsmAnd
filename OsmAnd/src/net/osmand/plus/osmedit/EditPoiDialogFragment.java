@@ -34,20 +34,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.tabs.TabLayout;
 
 import net.osmand.AndroidUtils;
@@ -88,6 +74,19 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
@@ -227,11 +226,12 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		ImageButton onlineDocumentationButton =
 				(ImageButton) view.findViewById(R.id.onlineDocumentationButton);
-		onlineDocumentationButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				getActivity().startActivity(new Intent(Intent.ACTION_VIEW,
-						Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
+		onlineDocumentationButton.setOnClickListener(v -> {
+			Intent intent = new Intent(Intent.ACTION_VIEW,
+					Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features"));
+			Activity activity = getActivity();
+			if (activity != null) {
+				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
 		});
 

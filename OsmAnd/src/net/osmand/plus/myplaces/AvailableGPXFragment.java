@@ -33,14 +33,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.FileUtils;
@@ -99,6 +91,14 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
@@ -1446,16 +1446,17 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), gpxInfo.file);
-						final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-						sendIntent.setType("text/plain");
-						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						startActivity(sendIntent);
+				.setOnClickListener(v1 -> {
+					Activity activity = getActivity();
+					if (activity == null) {
+						return;
 					}
+					final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), gpxInfo.file);
+					final Intent sendIntent = new Intent(Intent.ACTION_SEND)
+							.putExtra(Intent.EXTRA_STREAM, fileUri)
+							.setType("text/plain")
+							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					AndroidUtils.startActivityIfSafe(activity, sendIntent);
 				})
 				.create()
 		);

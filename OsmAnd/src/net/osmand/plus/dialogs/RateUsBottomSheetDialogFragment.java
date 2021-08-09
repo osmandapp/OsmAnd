@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -70,12 +71,8 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 		if (app != null) {
 			rateUsHelper.updateState(RateUsState.LIKED);
 			Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, app.getPackageName()));
-			try {
-				Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-				startActivity(goToMarket);
-			} catch (Exception e) {
-				LOG.error(e.getMessage(), e);
-			}
+			Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+			AndroidUtils.startActivityIfSafe(app, goToMarket);
 			dismiss();
 		}
 	}

@@ -180,6 +180,33 @@ public class AndroidUtils {
 		return intent.resolveActivity(context.getPackageManager()) != null;
 	}
 
+	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent) {
+		return startActivityIfSafe(context, intent, null);
+	}
+
+	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent,
+	                                       @Nullable Intent chooserIntent) {
+		if (isIntentSafe(context, intent)) {
+			Intent toStart = chooserIntent != null ? chooserIntent : intent;
+			context.startActivity(toStart);
+			return true;
+		} else {
+			((OsmandApplication) context.getApplicationContext())
+					.showToastMessage(R.string.no_activity_for_intent);
+			return false;
+		}
+	}
+
+	public static void startActivityForResultIfSave(@NonNull Activity activity, @NonNull Intent intent,
+	                                                int requestCode) {
+		if (isIntentSafe(activity, intent)) {
+			activity.startActivityForResult(intent, requestCode);
+		} else {
+			((OsmandApplication) activity.getApplication())
+					.showShortToastMessage(R.string.no_activity_for_intent);
+		}
+	}
+
 	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {
 		if (Build.VERSION.SDK_INT >= 17) {
 			return activity != null && !activity.isFinishing() && !activity.isDestroyed();

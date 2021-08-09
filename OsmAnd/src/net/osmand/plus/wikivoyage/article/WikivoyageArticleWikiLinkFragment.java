@@ -7,10 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -20,6 +17,10 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
 
@@ -72,19 +73,16 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				.setIcon(downloadIcon)
 				.setTitle(getString(R.string.download_wikipedia_label))
 				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						FragmentActivity activity = getActivity();
-						OsmandApplication app = getMyApplication();
-						if (activity != null && app != null) {
-							Intent newIntent = new Intent(activity, app.getAppCustomization().getDownloadActivity());
-							newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-							newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
-							newIntent.putExtra(SHOW_WIKI_KEY, true);
-							activity.startActivity(newIntent);
-							dismiss();
-						}
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					OsmandApplication app = getMyApplication();
+					if (activity != null && app != null) {
+						Intent newIntent = new Intent(activity, app.getAppCustomization().getDownloadActivity());
+						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
+						newIntent.putExtra(SHOW_WIKI_KEY, true);
+						AndroidUtils.startActivityIfSafe(app, newIntent);
+						dismiss();
 					}
 				})
 				.create();
