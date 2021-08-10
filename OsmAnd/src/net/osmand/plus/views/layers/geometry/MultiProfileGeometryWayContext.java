@@ -41,9 +41,6 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 	private final Paint pathBorderPaint;
 	private final Paint pathPaint;
 
-	public final float minProfileIconMarginPx;
-	public final float profileIconFrameSizePx;
-
 	private final Map<String, Bitmap> profileIconsBitmapCache;
 
 	public MultiProfileGeometryWayContext(Context ctx, UiUtilities iconsCache, float density) {
@@ -51,9 +48,6 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 
 		this.iconsCache = iconsCache;
 		this.profileIconsBitmapCache = new HashMap<>();
-
-		this.minProfileIconMarginPx = MIN_PROFILE_ICON_MARGIN_DP * density;
-		this.profileIconFrameSizePx = PROFILE_ICON_FRAME_SIZE_DP * density;
 
 		this.profileIconBackgroundPaint = createPaint(Style.FILL, 0xFFFFFFFF, 0);
 		this.profileIconBorderPaint = createPaint(Style.STROKE, 0, PROFILE_ICON_BORDER_WIDTH_DP);
@@ -91,8 +85,9 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 		String key = iconRes + "_" + color;
 		Bitmap framedProfileIconBitmap = profileIconsBitmapCache.get(key);
 		if (framedProfileIconBitmap == null) {
-			framedProfileIconBitmap = Bitmap.createBitmap((int) profileIconFrameSizePx,
-					(int) profileIconFrameSizePx, Bitmap.Config.ARGB_8888);
+			int profileIconFrameSizePx = (int) getProfileIconSizePx(getDensity());
+			framedProfileIconBitmap = Bitmap.createBitmap(profileIconFrameSizePx,
+					profileIconFrameSizePx, Bitmap.Config.ARGB_8888);
 			Canvas canvas = new Canvas(framedProfileIconBitmap);
 			float iconCenter = framedProfileIconBitmap.getWidth() / 2f;
 
@@ -125,5 +120,13 @@ public class MultiProfileGeometryWayContext extends GeometryWayContext {
 	@ColorInt
 	public int getStraightLineColor() {
 		return ContextCompat.getColor(getCtx(), isNightMode() ? R.color.osmand_orange : R.color.color_myloc_distance);
+	}
+
+	public static float getProfileIconSizePx(float density) {
+		return PROFILE_ICON_FRAME_SIZE_DP * density;
+	}
+
+	public static float getMinProfileIconMarginPx(float density) {
+		return MIN_PROFILE_ICON_MARGIN_DP * density;
 	}
 }
