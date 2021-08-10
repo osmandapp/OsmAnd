@@ -42,6 +42,7 @@ import java.util.regex.Pattern;
 import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
 import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import static net.osmand.plus.track.TrackMenuFragment.ADDITIONAL_PARAMS;
 import static net.osmand.plus.track.TrackMenuFragment.RETURN_SCREEN_NAME;
 
 public class IntentHelper {
@@ -258,8 +259,9 @@ public class IntentHelper {
 			if (intent.hasExtra(TrackMenuFragment.OPEN_TRACK_MENU)) {
 				String path = intent.getStringExtra(TRACK_FILE_NAME);
 				String name = intent.getStringExtra(RETURN_SCREEN_NAME);
+				Bundle additionalParams = intent.getBundleExtra(ADDITIONAL_PARAMS);
 				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
-				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null);
+				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null, additionalParams);
 				mapActivity.setIntent(null);
 			}
 		}

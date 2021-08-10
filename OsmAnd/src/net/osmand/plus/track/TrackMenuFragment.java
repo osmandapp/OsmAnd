@@ -130,6 +130,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public static final String OPEN_TRACK_MENU = "open_track_menu";
 	public static final String RETURN_SCREEN_NAME = "return_screen_name";
+	public static final String ADDITIONAL_PARAMS = "additional_params";
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
@@ -165,6 +166,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private String callingFragmentTag;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
+	private Bundle additionalParams;
 
 	private Float heading;
 	private Location lastLocation;
@@ -355,6 +357,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private void setAnalyses(@Nullable GPXTrackAnalysis analyses) {
 		this.analyses = analyses;
+	}
+
+	private void setAdditionaParams(@Nullable Bundle additionalParams) {
+		this.additionalParams = additionalParams;
 	}
 
 	@Override
@@ -630,7 +636,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					}
 					cardsContainer.addView(descriptionCard.getView());
 				} else {
-					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx());
+					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx(), additionalParams);
 					cardsContainer.addView(descriptionCard.build(mapActivity));
 				}
 			} else if (menuType == TrackMenuType.POINTS) {
@@ -1407,7 +1413,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		openTrack(context, file, prevIntentParams, null);
 	}
 
-	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams, @Nullable String returnScreenName) {
+	public static void openTrack(@NonNull Context context, @Nullable File file, Bundle prevIntentParams,
+	                             @Nullable String returnScreenName) {
+		openTrack(context, file, prevIntentParams, returnScreenName, null);
+	}
+
+	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams,
+	                             @Nullable String returnScreenName, @Nullable Bundle additionalParams) {
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
@@ -1418,6 +1430,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			bundle.putBoolean(OPEN_TRACK_MENU, true);
 			bundle.putBoolean(CURRENT_RECORDING, currentRecording);
 			bundle.putString(RETURN_SCREEN_NAME, returnScreenName);
+			bundle.putBundle(ADDITIONAL_PARAMS, additionalParams);
 			MapActivity.launchMapActivityMoveToTop(context, prevIntentParams, null, bundle);
 		}
 	}
@@ -1460,17 +1473,26 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity,
+	                                @Nullable String path,
+	                                boolean showCurrentTrack,
+	                                @Nullable final String returnScreenName,
+	                                @Nullable final String callingFragmentTag) {
+		showInstance(mapActivity, path, showCurrentTrack, returnScreenName, callingFragmentTag, null);
+	}
+
+	public static void showInstance(@NonNull MapActivity mapActivity,
 									@Nullable String path,
 									boolean showCurrentTrack,
 									@Nullable final String returnScreenName,
-									@Nullable final String callingFragmentTag) {
+									@Nullable final String callingFragmentTag,
+	                                @Nullable final Bundle additionalParams) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		loadSelectedGpxFile(mapActivity, path, showCurrentTrack, new CallbackWithObject<SelectedGpxFile>() {
 			@Override
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, true, null);
+					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, true, null, additionalParams);
 				}
 				return true;
 			}
@@ -1480,7 +1502,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 									   @NonNull SelectedGpxFile selectedGpxFile,
 									   @Nullable SelectedGpxPoint gpxPoint) {
-		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, false, null);
+		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, false, null, null);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
@@ -1489,7 +1511,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 									   @Nullable String returnScreenName,
 									   @Nullable String callingFragmentTag,
 									   boolean adjustMapPosition,
-									   @Nullable GPXTrackAnalysis analyses) {
+									   @Nullable GPXTrackAnalysis analyses,
+									   @Nullable Bundle additionalParams) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
@@ -1502,6 +1525,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setReturnScreenName(returnScreenName);
 			fragment.setCallingFragmentTag(callingFragmentTag);
 			fragment.setAdjustMapPosition(adjustMapPosition);
+			fragment.setAdditionaParams(additionalParams);
 
 			if (gpxPoint != null) {
 				WptPt wptPt = gpxPoint.getSelectedPoint();

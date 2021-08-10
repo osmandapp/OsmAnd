@@ -2,6 +2,7 @@ package net.osmand.plus.track;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -20,25 +21,33 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
+import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.util.Algorithms;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
+import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_LANG;
+import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_NAME;
 
 public class DescriptionCard extends MapBaseCard {
 
 	private final Fragment targetFragment;
 	private final GPXFile gpxFile;
+	private final Bundle additionalParams;
 
 	public DescriptionCard(@NonNull MapActivity mapActivity,
 	                       @NonNull Fragment targetFragment,
-	                       @NonNull GPXFile gpxFile) {
+	                       @NonNull GPXFile gpxFile,
+	                       @Nullable Bundle additionalParams) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 		this.targetFragment = targetFragment;
+		this.additionalParams = additionalParams;
 	}
 
 	@Override
@@ -95,6 +104,17 @@ public class DescriptionCard extends MapBaseCard {
 		readBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if (additionalParams != null) {
+					String title = additionalParams.getString(ARTICLE_NAME);
+					String lang = additionalParams.getString(ARTICLE_LANG);
+					if (title != null && lang != null) {
+						TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(title, lang);
+						if (articleId != null) {
+							WikivoyageUtils.openWikivoyageArticle(activity, articleId, lang);
+							return;
+						}
+					}
+				}
 				GpxReadDescriptionDialogFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml, targetFragment);
 			}
 		});
