@@ -2211,7 +2211,7 @@
     <string name="storage_free_space">Свободное место</string>
     <string name="search_location">Определение местоположения…</string>
     <string name="no_inet_connection_desc_map">Требуется загрузить карты</string>
-    <string name="no_inet_connection">Соединение с Интернетом отсутствует</string>
+    <string name="no_inet_connection">Соединение с интернетом отсутствует</string>
     <string name="location_not_found">Не удалось определить местоположение</string>
     <string name="first_usage_wizard_desc">OsmAnd определит ваше местоположение и предложит загрузить карты для этой области.</string>
     <string name="search_map">Поиск карт…</string>
