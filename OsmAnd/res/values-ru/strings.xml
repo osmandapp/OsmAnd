@@ -2010,7 +2010,7 @@
     <string name="osm_edit_created_poi">Создана OSM POI</string>
     <string name="osmand_running_in_background">Запустить в фоновом режиме</string>
     <string name="av_locations">Места</string>
-    <string name="downloading_number_of_files">Загрузка файла — %1$d</string>
+    <string name="downloading_number_of_files">Загрузка файла %1$d…</string>
     <string name="read_more">Подробнее</string>
     <string name="whats_new">Что нового в</string>
     <string name="save_poi_without_poi_type_message">Сохранить POI без указания типа\?</string>
