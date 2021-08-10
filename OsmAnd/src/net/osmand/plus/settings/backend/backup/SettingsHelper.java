@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.backend.backup;
 
+import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -73,9 +76,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
-import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
-
 public abstract class SettingsHelper {
 
 	public static final int VERSION = 1;
@@ -97,6 +97,12 @@ public abstract class SettingsHelper {
 	}
 
 	public interface ImportListener {
+		void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work);
+
+		void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value);
+
+		void onImportItemFinished(@NonNull String type, @NonNull String fileName);
+
 		void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items);
 	}
 
