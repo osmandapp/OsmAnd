@@ -87,6 +87,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		super.onResume();
 		updateAdapter();
 		settingsHelper.updateExportListener(this);
+		settingsHelper.updateImportListener(this);
 		backupHelper.addPrepareBackupListener(this);
 	}
 
@@ -94,6 +95,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	public void onPause() {
 		super.onPause();
 		settingsHelper.updateExportListener(null);
+		settingsHelper.updateImportListener(null);
 		backupHelper.removePrepareBackupListener(this);
 	}
 

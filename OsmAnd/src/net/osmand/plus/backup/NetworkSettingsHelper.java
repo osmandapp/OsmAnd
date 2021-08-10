@@ -104,6 +104,12 @@ public class NetworkSettingsHelper extends SettingsHelper {
 		}
 	}
 
+	public void updateImportListener(@Nullable ImportListener listener) {
+		for (ImportBackupTask importTask : importAsyncTasks.values()) {
+			importTask.setImportListener(listener);
+		}
+	}
+
 	void finishImport(@Nullable ImportListener listener, boolean success, @NonNull List<SettingsItem> items, boolean needRestart) {
 		String error = collectFormattedWarnings(items);
 		if (!Algorithms.isEmpty(error)) {

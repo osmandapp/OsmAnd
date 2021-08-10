@@ -142,7 +142,7 @@ class BackupImporter {
 			if (reader != null) {
 				String fileName = remoteFile.getTypeNamePath();
 				File tempFile = new File(tempDir, fileName);
-				String error = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadFileListener());
+				String error = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item));
 				if (Algorithms.isEmpty(error)) {
 					is = new FileInputStream(tempFile);
 					reader.readFromStream(is, remoteFile.getName());
@@ -533,6 +533,37 @@ class BackupImporter {
 			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error) {
 				if (listener != null) {
 					listener.itemExportDone(type, fileName);
+				}
+			}
+
+			@Override
+			public boolean isDownloadCancelled() {
+				return isCancelled();
+			}
+		};
+	}
+
+	private OnDownloadFileListener getOnDownloadItemFileListener(@NonNull SettingsItem item) {
+		String itemFileName = BackupHelper.getItemFileName(item);
+		return new OnDownloadFileListener() {
+			@Override
+			public void onFileDownloadStarted(@NonNull String type, @NonNull String fileName, int work) {
+				if (listener != null) {
+					listener.itemExportStarted(type, itemFileName, work);
+				}
+			}
+
+			@Override
+			public void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				if (listener != null) {
+					listener.updateItemProgress(type, itemFileName, progress);
+				}
+			}
+
+			@Override
+			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error) {
+				if (listener != null) {
+					listener.itemExportDone(type, itemFileName);
 				}
 			}
 
