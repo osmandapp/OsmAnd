@@ -244,7 +244,7 @@
     <string name="accessibility_mode">Modul de accesibilitate</string>
     <string name="accessibility_mode_descr">Activează funcțiile pentru utilizatorii cu deficiențe.</string>
     <string name="shared_string_on">Pornit</string>
-    <string name="shared_string_off">Oprit</string>
+    <string name="shared_string_off">Închideți</string>
     <string name="accessibility_default">În funcție de setarea sistemului Android</string>
     <string name="backToMenu">Înapoi la meniu</string>
     <string name="zoomOut">Micșorare</string>
@@ -344,7 +344,7 @@
     <string name="user_name">Numele de utilizator OSM</string>
     <string name="open_street_map_login_descr">Necesar pentru trimiterea de date la openstreetmap.org.</string>
     <string name="user_password">Parolă</string>
-    <string name="osmand_service">Modul de fundal</string>
+    <string name="osmand_service">Modul fundal</string>
     <string name="osmand_service_descr">OsmAnd rulează în fundal cu ecranul închis.</string>
     <string name="download_files_not_enough_space">Nu există spațiu suficient pentru descărcarea a %1$s MB (liber: %2$s).</string>
     <string name="download_files_question_space">Descărcați {0} fișier(e)\?
@@ -391,7 +391,7 @@
     <string name="route_successfully_saved_at">Traseu salvat ca \"%1$s\".</string>
     <string name="filename_input">Numele fișierului:</string>
     <string name="file_with_name_already_exist">Există un fișier cu același nume.</string>
-    <string name="shared_string_save">Salvează</string>
+    <string name="shared_string_save">Salvați</string>
     <string name="local_index_upload_gpx_description">Încărcați fișiere GPX către comunitatea OSM, îmbunătățind hărțile.</string>
     <string name="local_index_items_uploaded">%1$d din %2$d element(e) încărcate .</string>
     <string name="local_index_mi_upload_gpx">Trimite la OSM</string>
@@ -824,7 +824,7 @@
     <string name="context_menu_item_update_map">Actualizează hartă</string>
     <string name="context_menu_item_create_poi">Creează POI</string>
     <string name="shared_string_yes">Da</string>
-    <string name="shared_string_cancel">Anulați</string>
+    <string name="shared_string_cancel">Anulează</string>
     <string name="shared_string_apply">Aplicați</string>
     <string name="shared_string_add">Adăugați</string>
     <string name="shared_string_no">Nu</string>
@@ -1630,12 +1630,12 @@
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_do_not_use">Nu folosiți</string>
     <string name="shared_string_enable">Activează</string>
-    <string name="shared_string_disable">Dezactiv</string>
+    <string name="shared_string_disable">Dezactivați</string>
     <string name="shared_string_enabled">Activat</string>
     <string name="shared_string_disabled">Dezactivat</string>
     <string name="shared_string_deselect">Deselectați</string>
     <string name="shared_string_deselect_all">Deselect tot</string>
-    <string name="shared_string_share">Distribuiți</string>
+    <string name="shared_string_share">Distribuie</string>
     <string name="shared_string_export">Exportați</string>
     <string name="shared_string_unexpected_error">Eroare neașteptată</string>
     <string name="shared_string_action_template">Acțiunea {0}</string>
@@ -1652,7 +1652,7 @@
     <string name="use_location">Utilizați poziția</string>
     <string name="my_location">Poziția mea</string>
     <string name="shared_string_finish">Sfârşit</string>
-    <string name="shared_string_sort">Sortează</string>
+    <string name="shared_string_sort">Sortare</string>
     <string name="move_to_history">Mută în istoric</string>
     <string name="order_by">Ordonează după:</string>
     <string name="shared_string_groups">Grupuri</string>
@@ -1674,7 +1674,7 @@
     <string name="mapillary_menu_date_from">De la</string>
     <string name="mapillary_menu_title_username">Nume de utilizator</string>
     <string name="shared_string_permissions">Permisiuni</string>
-    <string name="shared_string_install">Instalare</string>
+    <string name="shared_string_install">Instalați</string>
     <string name="shared_string_add_photos">Adaugă poze</string>
     <string name="make_as_start_point">Faceți din acesta punctul de plecare</string>
     <string name="shared_string_current">Actual</string>
@@ -1761,7 +1761,7 @@
     <string name="import_file">Importă fișier</string>
     <string name="wrong_input">Introducere greșită</string>
     <string name="enter_new_name">Introduceți noul nume</string>
-    <string name="shared_string_back">Inapoi</string>
+    <string name="shared_string_back">Înapoi</string>
     <string name="shared_string_view">Vizualizare</string>
     <string name="waypoints_added_to_map_markers">Punctele intermediare adăugate la marcajele hărții</string>
     <string name="wrong_format">Format greșit</string>

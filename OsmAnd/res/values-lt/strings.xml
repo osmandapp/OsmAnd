@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="starting_point_too_far">Išvykimo taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
@@ -1466,7 +1466,7 @@
     <string name="filter_poi_hint">Filtruoti pagal pavadinimą</string>
     <string name="shared_string_is_open">Atidaryti</string>
     <string name="shared_string_places">Vietovės</string>
-    <string name="shared_string_search">Paieška</string>
+    <string name="shared_string_search">Ieškoti</string>
     <string name="shared_string_show_description">Rodyti aprašymą.</string>
     <string name="simulate_your_location">Imituoti jūsų padėtį</string>
     <string name="shared_string_do_not_use">Nenaudoti</string>
