@@ -124,14 +124,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 		if (Algorithms.isEmpty(changesInfo)) {
-			downloadChangesInfo(new CallbackWithObject<Map<String, Contribution>>() {
-				@Override
-				public boolean processResult(Map<String, Contribution> result) {
-					changesInfo = result;
-					fullUpdate();
-					return true;
-				}
-			});
+			refreshContributions();
 		}
 	}
 
