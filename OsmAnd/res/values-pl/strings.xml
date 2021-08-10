@@ -4255,9 +4255,9 @@
     <string name="backup_data_removed">Wszystkie dane zostały usunięte.</string>
     <string name="shared_string_progress">Postęp</string>
     <string name="backup_do_not_have_any">Nie masz jeszcze kopii zapasowej online.</string>
-    <string name="backup_dont_have_any_descr">Skonfiguruj automatyczną kopię zapasową, aby nie martwić się o utratę danych.</string>
+    <string name="backup_dont_have_any_descr">Zaplanuj automatyczne tworzenie kopii zapasowych by nigdy nie utracić danych.</string>
     <string name="backup_welcome_back">Witamy ponownie!</string>
-    <string name="backup_welcome_back_descr">Możesz przywrócić dane na tym urządzeniu za pomocą istniejących kopii zapasowych lub skonfigurować kopię zapasową tego urządzenia do OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Przywróć dane na tym urządzeniu, korzystając z istniejących kopii zapasowych lub wykonaj kopię zapasową danych w chmurze OsmAnd Cloud.</string>
     <string name="backup_setup">Skonfiguruj kopię zapasową</string>
     <string name="backup_restore_now">Przywróć teraz</string>
     <string name="attribute">Atrybut</string>
@@ -4270,7 +4270,7 @@
     <string name="track_has_no_needed_data">Trasa nie zawiera potrzebnych danych.</string>
     <string name="option_available_only_in_osmand_pro">Opcja jest dostępna w ramach subskrypcji OsmAnd Pro.</string>
     <string name="pro_widgets">Widżety Pro</string>
-    <string name="purchases_feature_desc_pro_widgets">Uzyskaj dostęp do funkcji OsmAnd Pro. Kolorowanie trasy i nie tylko.</string>
+    <string name="purchases_feature_desc_pro_widgets">Uzyskaj dostęp do funkcji OsmAnd Pro: Kolorowanie tras i nie tylko.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Poznaj plany OsmAnd, aby znaleźć odpowiedni dla Ciebie.</string>
     <string name="travel_routes">Trasy podróży</string>
     <string name="setting_supported_by_style">To ustawienie jest obsługiwane przez styl mapy „%1$s”</string>
