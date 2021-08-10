@@ -75,7 +75,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private TrackChartPoints trackChartPoints;
 
 	private final Path multiProfilePath = new Path();
-	private final PathMeasure multiProfilePathMeasure = new PathMeasure();
+	private final PathMeasure multiProfilePathMeasure = new PathMeasure(multiProfilePath, false);
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -170,7 +170,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	private int getPointIdxByProfileIconOnMap(PointF point, RotatedTileBox tileBox) {
 		multiProfilePath.reset();
-		multiProfilePathMeasure.setPath(path, false);
 		Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = editingCtx.getRoadSegmentData();
 		List<WptPt> points = editingCtx.getPoints();
 
@@ -187,7 +186,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					currentPoint, nextPoint, roadSegmentData);
 			PointF profileIconPos = MultiProfileGeometryWay.getIconCenter(tileBox, routeBetweenPoints,
 					path, multiProfilePathMeasure);
-			if (profileIconPos != null) {
+			if (profileIconPos != null && tileBox.containsPoint(profileIconPos.x, profileIconPos.y, 0)) {
 				double dist = MapUtils.getSqrtDistance(point.x, point.y, profileIconPos.x, profileIconPos.y);
 				if (dist < minDist) {
 					indexOfMinDist = i;

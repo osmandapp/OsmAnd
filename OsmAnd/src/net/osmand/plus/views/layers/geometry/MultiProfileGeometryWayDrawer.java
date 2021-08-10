@@ -6,19 +6,20 @@ import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.PointF;
 
-import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay.GeometryMultiProfileWayStyle;
-import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-import androidx.annotation.Nullable;
-
 public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfileGeometryWayContext> {
+
+	private final Path path;
+	private final PathMeasure pathMeasure;
 
 	public MultiProfileGeometryWayDrawer(MultiProfileGeometryWayContext context) {
 		super(context);
+		path = new Path();
+		pathMeasure = new PathMeasure(path, false);
 	}
 
 	@Override
@@ -40,9 +41,7 @@ public class MultiProfileGeometryWayDrawer extends GeometryWayDrawer<MultiProfil
 
 	@Override
 	public void drawArrowsOverPath(Canvas canvas, RotatedTileBox tb, List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances, double distPixToFinish, List<GeometryWayStyle<?>> styles) {
-		Path path = new Path();
-		PathMeasure pathMeasure = new PathMeasure();
-		MultiProfileGeometryWayContext context = getContext();
+		path.reset();
 		GeometryMultiProfileWayStyle prevStyle = null;
 
 		for (int i = 0; i < styles.size(); i++) {
