@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.NetworkSettingsHelper;
@@ -24,7 +25,6 @@ import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.backup.PrepareBackupTask.OnPrepareBackupListener;
 import net.osmand.plus.backup.RemoteFile;
-import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.ui.AuthorizeFragment.LoginDialogType;
 import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -87,6 +87,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		super.onResume();
 		updateAdapter();
 		settingsHelper.updateExportListener(this);
+		settingsHelper.updateImportListener(this);
 		backupHelper.addPrepareBackupListener(this);
 	}
 
@@ -94,6 +95,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	public void onPause() {
 		super.onPause();
 		settingsHelper.updateExportListener(null);
+		settingsHelper.updateImportListener(null);
 		backupHelper.removePrepareBackupListener(this);
 	}
 
@@ -159,7 +161,7 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 		if (error != null) {
 			updateAdapter();
 			app.showShortToastMessage(new BackupError(error).getLocalizedError(app));
-		} else {
+		} else if (!settingsHelper.isBackupExporting()) {
 			backupHelper.prepareBackup();
 		}
 	}
@@ -212,8 +214,31 @@ public class BackupStatusFragment extends BaseOsmAndFragment implements BackupEx
 	}
 
 	@Override
-	public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+	public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
 		if (adapter != null) {
+			adapter.onImportItemStarted(type, fileName, work);
+		}
+	}
+
+	@Override
+	public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+		if (adapter != null) {
+			adapter.onImportItemProgress(type, fileName, value);
+		}
+	}
+
+	@Override
+	public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+		if (adapter != null) {
+			adapter.onImportItemFinished(type, fileName);
+		}
+	}
+
+	@Override
+	public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+		if (!settingsHelper.isBackupExporting() && !settingsHelper.isBackupImporting()) {
+			backupHelper.prepareBackup();
+		} else {
 			adapter.onImportFinished(succeed, needRestart, items);
 		}
 	}

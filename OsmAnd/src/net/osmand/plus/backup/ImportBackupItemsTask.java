@@ -7,32 +7,30 @@ import androidx.annotation.Nullable;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.util.List;
 
 public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 
-	private final NetworkSettingsHelper helper;
 	private final OsmandApplication app;
 	private final BackupImporter importer;
-	private final ImportListener listener;
+	private final ImportItemsListener listener;
 	private final List<SettingsItem> items;
 	private final StateChangedListener<String> localeListener;
 	private final boolean forceReadData;
 	private boolean needRestart = false;
 
-	ImportBackupItemsTask(@NonNull NetworkSettingsHelper helper,
-						  boolean forceReadData,
-						  @Nullable ImportListener listener,
-						  @NonNull List<SettingsItem> items) {
-		this.helper = helper;
-		this.forceReadData = forceReadData;
-		this.app = helper.getApp();
-		importer = new BackupImporter(app.getBackupHelper());
-		this.listener = listener;
+	ImportBackupItemsTask(@NonNull OsmandApplication app,
+						  @NonNull BackupImporter importer,
+						  @NonNull List<SettingsItem> items,
+						  @Nullable ImportItemsListener listener,
+						  boolean forceReadData) {
+		this.app = app;
+		this.importer = importer;
 		this.items = items;
+		this.listener = listener;
+		this.forceReadData = forceReadData;
 		localeListener = change -> needRestart = true;
 	}
 
@@ -55,6 +53,12 @@ public class ImportBackupItemsTask extends AsyncTask<Void, Void, Boolean> {
 	@Override
 	protected void onPostExecute(Boolean success) {
 		app.getSettings().PREFERRED_LOCALE.removeListener(localeListener);
-		helper.finishImport(listener, success, items, needRestart);
+		if (listener != null) {
+			listener.onImportFinished(success, needRestart);
+		}
+	}
+
+	public interface ImportItemsListener {
+		void onImportFinished(boolean succeed, boolean needRestart);
 	}
 }

@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.SQLITE_EXT;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -43,16 +45,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.IndexConstants.SQLITE_EXT;
 
 public class CustomOsmandPlugin extends OsmandPlugin {
 
@@ -232,6 +230,21 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 		}
 
 		final ImportListener importListener = new ImportListener() {
+			@Override
+			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+
+			}
+
+			@Override
+			public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+			}
+
+			@Override
+			public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+
+			}
+
 			@Override
 			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {

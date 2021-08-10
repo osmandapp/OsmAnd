@@ -1,5 +1,7 @@
 package net.osmand.plus.backup;
 
+import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -40,13 +42,12 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static net.osmand.plus.backup.BackupHelper.INFO_EXT;
-
 class BackupImporter {
 
 	private static final Log LOG = PlatformUtil.getLog(BackupImporter.class);
 
 	private final BackupHelper backupHelper;
+	private final NetworkImportProgressListener listener;
 
 	private boolean cancelled;
 
@@ -55,7 +56,16 @@ class BackupImporter {
 		public List<RemoteFile> remoteFiles;
 	}
 
-	BackupImporter(@NonNull BackupHelper backupHelper) {
+	public interface NetworkImportProgressListener {
+		void itemExportStarted(@NonNull String type, @NonNull String fileName, int work);
+
+		void updateItemProgress(@NonNull String type, @NonNull String fileName, int progress);
+
+		void itemExportDone(@NonNull String type, @NonNull String fileName);
+	}
+
+	BackupImporter(@NonNull BackupHelper backupHelper, @Nullable NetworkImportProgressListener listener) {
+		this.listener = listener;
 		this.backupHelper = backupHelper;
 	}
 
@@ -132,7 +142,7 @@ class BackupImporter {
 			if (reader != null) {
 				String fileName = remoteFile.getTypeNamePath();
 				File tempFile = new File(tempDir, fileName);
-				String error = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadFileListener());
+				String error = backupHelper.downloadFile(tempFile, remoteFile, getOnDownloadItemFileListener(item));
 				if (Algorithms.isEmpty(error)) {
 					is = new FileInputStream(tempFile);
 					reader.readFromStream(is, remoteFile.getName());
@@ -507,14 +517,54 @@ class BackupImporter {
 		return new OnDownloadFileListener() {
 			@Override
 			public void onFileDownloadStarted(@NonNull String type, @NonNull String fileName, int work) {
+				if (listener != null) {
+					listener.itemExportStarted(type, fileName, work);
+				}
 			}
 
 			@Override
 			public void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				if (listener != null) {
+					listener.updateItemProgress(type, fileName, progress);
+				}
 			}
 
 			@Override
-			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error) {
+			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error) {
+				if (listener != null) {
+					listener.itemExportDone(type, fileName);
+				}
+			}
+
+			@Override
+			public boolean isDownloadCancelled() {
+				return isCancelled();
+			}
+		};
+	}
+
+	private OnDownloadFileListener getOnDownloadItemFileListener(@NonNull SettingsItem item) {
+		String itemFileName = BackupHelper.getItemFileName(item);
+		return new OnDownloadFileListener() {
+			@Override
+			public void onFileDownloadStarted(@NonNull String type, @NonNull String fileName, int work) {
+				if (listener != null) {
+					listener.itemExportStarted(type, itemFileName, work);
+				}
+			}
+
+			@Override
+			public void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork) {
+				if (listener != null) {
+					listener.updateItemProgress(type, itemFileName, progress);
+				}
+			}
+
+			@Override
+			public void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error) {
+				if (listener != null) {
+					listener.itemExportDone(type, itemFileName);
+				}
 			}
 
 			@Override

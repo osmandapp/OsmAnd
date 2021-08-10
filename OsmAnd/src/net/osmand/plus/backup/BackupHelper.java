@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
+import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.OperationLog;
 import net.osmand.PlatformUtil;
@@ -600,10 +601,10 @@ public class BackupHelper {
 		checkRegistered();
 
 		OperationLog operationLog = new OperationLog("downloadFile " + file.getName(), DEBUG);
-		String res;
+		String error;
+		String type = remoteFile.getType();
+		String fileName = remoteFile.getName();
 		try {
-			String type = remoteFile.getType();
-			String fileName = remoteFile.getName();
 			Map<String, String> params = new HashMap<>();
 			params.put("deviceid", getDeviceId());
 			params.put("accessToken", getAccessToken());
@@ -615,7 +616,7 @@ public class BackupHelper {
 				sb.append(firstParam ? "?" : "&").append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue(), "UTF-8"));
 				firstParam = false;
 			}
-			res = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, new AbstractProgress() {
+			IProgress progress = new AbstractProgress() {
 
 				private int work = 0;
 				private int progress = 0;
@@ -648,12 +649,17 @@ public class BackupHelper {
 					}
 					return super.isInterrupted();
 				}
-			});
+			};
+			progress.startWork((int) (remoteFile.getFilesize() / 1024));
+			error = AndroidNetworkUtils.downloadFile(sb.toString(), file, true, progress);
 		} catch (UnsupportedEncodingException e) {
-			res = "UnsupportedEncodingException";
+			error = "UnsupportedEncodingException";
+		}
+		if (listener != null) {
+			listener.onFileDownloadDone(type, fileName, error);
 		}
 		operationLog.finishOperation();
-		return res;
+		return error;
 	}
 
 	@SuppressLint("StaticFieldLeak")
