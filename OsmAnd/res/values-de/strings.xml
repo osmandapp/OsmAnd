@@ -4169,7 +4169,6 @@
     <string name="restore_selected_data">Stelle ausgewählte Daten wieder her</string>
     <string name="receiving_data_from_server">Empfange Daten vom Server…</string>
     <string name="restore_complete">Wiederhergestellt</string>
-    <string name="grey_color_slope">Graue Farbe wird verwendet, wenn die Steigung undefiniert ist.</string>
     <string name="backup_version_history">Versionsgeschichte</string>
     <string name="backup_storage_taken">Belegter Speicher</string>
     <string name="backup_version_history_delete_descr">Die Änderungshistorie für veraltete Datentypen aus der OsmAnd Cloud löschen\?</string>

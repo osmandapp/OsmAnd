@@ -4122,7 +4122,6 @@
     <string name="verification_code_missing_description">Necesos atendi eĉ 10 minutojn por ricevi la kodon, bonvolu ankaŭ kontroli vian trudmesaĝujon. Se tio ĉi ne helpos, uzu la butonon sube.</string>
     <string name="select_nav_profile_dialog_message">Profilo de navigo influas al la maniero kiel kalkuli kurson; eblas elekti malkonektan aŭ enretan navigilon.</string>
     <string name="restore_complete">Restarigita</string>
-    <string name="grey_color_slope">Griza koloro estas uzata kiam dekliveco estas nekonata.</string>
     <string name="backup_version_history">Historio de versioj</string>
     <string name="backup_storage_taken">Uzata spaco</string>
     <string name="backup_version_history_delete_descr">Ĉu forigi historion de neaktualaj specoj de datumoj el OsmAnd-Nubo\?</string>

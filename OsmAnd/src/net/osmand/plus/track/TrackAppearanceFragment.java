@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -92,7 +93,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	private SplitIntervalCard splitIntervalCard;
 	private TrackColoringCard trackColoringCard;
 	private ColorsCard colorsCard;
-	private GradientCard gradientCard;
+	private ColoringTypeCard coloringTypeCard;
 	private PromoBannerCard promoCard;
 	private boolean showStartFinishIconsInitialValue;
 
@@ -387,16 +388,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				trackDrawInfo.setColoringType(currentColoringType);
 				trackDrawInfo.setRouteInfoAttribute(routeInfoAttribute);
 				refreshMap();
-				if (gradientCard != null) {
-					GradientScaleType scaleType = currentColoringType.isGradient() ?
-							currentColoringType.toGradientScaleType() : null;
-					gradientCard.setSelectedScaleType(scaleType);
+				if (coloringTypeCard != null) {
+					coloringTypeCard.setColoringType(currentColoringType);
 				}
 				if (colorsCard != null) {
 					AndroidUiHelper.updateVisibility(colorsCard.getView(), currentColoringType.isTrackSolid());
-				}
-				if (trackWidthCard != null) {
-					trackWidthCard.updateTopDividerVisibility(!currentColoringType.isRouteInfoAttribute());
 				}
 				updatePromoCardVisibility();
 			} else if (card instanceof ColorsCard) {
@@ -544,7 +540,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		boolean available = isAvailableColoringType();
 		if (!available) {
 			promoCard.updateVisibility(true);
-			gradientCard.updateVisibility(false);
+			coloringTypeCard.updateVisibility(false);
 			colorsCard.updateVisibility(false);
 		} else {
 			promoCard.updateVisibility(false);
@@ -740,9 +736,10 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 			setupColorsCard(container);
 
-			GradientScaleType scaleType = trackDrawInfo.getColoringType().toGradientScaleType();
-			gradientCard = new GradientCard(mapActivity, selectedGpxFile.getTrackAnalysis(app), scaleType);
-			addCard(container, gradientCard);
+			GPXTrackAnalysis analysis = selectedGpxFile.getTrackAnalysis(app);
+			ColoringType coloringType = trackDrawInfo.getColoringType();
+			coloringTypeCard = new ColoringTypeCard(mapActivity, analysis, coloringType);
+			addCard(container, coloringTypeCard);
 
 			promoCard = new PromoBannerCard(mapActivity, true);
 			addCard(container, promoCard);

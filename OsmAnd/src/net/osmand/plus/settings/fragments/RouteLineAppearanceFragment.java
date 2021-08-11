@@ -43,7 +43,7 @@ import static net.osmand.util.Algorithms.objectEquals;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		implements ColorPickerListener, OnMapThemeUpdateListener, OnSelectedColorChangeListener,
-		HeaderUiAdapter, CardListener {
+		HeaderUiAdapter {
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
@@ -179,7 +179,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		cardsContainer.removeAllViews();
 
 		colorCard = new RouteLineColorCard(mapActivity, this, previewRouteLineInfo, initMapTheme, selectedMapTheme, this);
-		colorCard.setListener(this);
 		cardsContainer.addView(colorCard.build(mapActivity));
 
 		widthCard = new RouteLineWidthCard(mapActivity, previewRouteLineInfo, createScrollListener(), this);
@@ -473,24 +472,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			boolean selectedModeAvailable = colorCard.isSelectedModeAvailable();
 			saveButton.setEnabled(selectedModeAvailable);
 		}
-	}
-
-	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {
-	}
-
-	@Override
-	public void onCardPressed(@NonNull BaseCard card) {
-		if (card instanceof RouteLineColorCard) {
-			if (widthCard != null) {
-				boolean dividerVisible = !previewRouteLineInfo.getRouteColoringType().isRouteInfoAttribute();
-				widthCard.updateTopDividerVisibility(dividerVisible);
-			}
-		}
-	}
-
-	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,

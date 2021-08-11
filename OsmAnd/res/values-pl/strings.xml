@@ -4162,7 +4162,6 @@
     <string name="restore_selected_data">Przywracanie wybranych danych</string>
     <string name="receiving_data_from_server">Odbieranie danych z serwera…</string>
     <string name="restore_complete">Przywrócone</string>
-    <string name="grey_color_slope">Kolor szary jest używany, gdy nachylenie jest nieokreślone.</string>
     <string name="backup_version_history">Historia wersji</string>
     <string name="backup_version_history_delete_descr">Usunąć z chmury OsmAnd Cloud historię zmian dla nieaktualnych typów danych\?</string>
     <string name="delete_version_history">Usuń historię wersji</string>

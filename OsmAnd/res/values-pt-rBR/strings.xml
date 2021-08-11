@@ -4160,7 +4160,6 @@
     <string name="restore_selected_data">Restaurar dados selecionados</string>
     <string name="receiving_data_from_server">Recebendo dados do servidor…</string>
     <string name="restore_complete">Restaurado</string>
-    <string name="grey_color_slope">A cor cinza é usada quando a inclinação é indefinida.</string>
     <string name="backup_version_history">Histórico de versão</string>
     <string name="backup_storage_taken">Armazenamento ocupado</string>
     <string name="backup_version_history_delete_descr">Excluir o registro de alterações para tipos de dados obsoletos do OsmAnd cloud\?</string>

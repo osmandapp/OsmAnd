@@ -4089,7 +4089,6 @@
     <string name="trip_recording_show_start_dialog_setting">Kui see on välja lülitatud, algab salvestamine kohe pärast vidina või menüüelemendi puudutamist, jättes vahele kinnitusdialoogi.</string>
     <string name="customize_route_line">Kohanda marsruudi joont</string>
     <string name="show_start_dialog">Kuva algdialoog</string>
-    <string name="grey_color_slope">Halli värvi kasutatakse määratlemata kalde korral.</string>
     <string name="purchases_feature_desc_terrain">Maastiku kontuurjooned, tumedate toonidega täielik mäe- ja nõlvakaart, millel on värvid tippude ja madalike eristamiseks.</string>
     <string name="purchases_feature_desc_wikivoyage">Sirvi Vikipeediat ilma võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>
     <string name="purchases_feature_desc_wikipedia">Sirvi Vikipeediat võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>

@@ -4162,7 +4162,6 @@
     <string name="restore_selected_data">Врати изабране податке</string>
     <string name="receiving_data_from_server">Пријем података са сервера…</string>
     <string name="restore_complete">Враћено</string>
-    <string name="grey_color_slope">Сива боја се користи када је нагиб недефинисан.</string>
     <string name="backup_version_history">Историја верзија</string>
     <string name="backup_storage_taken">Заузето складиште</string>
     <string name="backup_version_history_delete_descr">Да ли желите да из облака избришете историју промена за онеспособљене типове\?</string>

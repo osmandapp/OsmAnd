@@ -66,7 +66,6 @@ public class TrackWidthCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		updateTopDividerVisibility(!trackDrawInfo.getColoringType().isRouteInfoAttribute());
 		updateHeader();
 		updateCustomWidthSlider();
 
@@ -81,10 +80,6 @@ public class TrackWidthCard extends MapBaseCard {
 		if (widthAdapter != null) {
 			widthAdapter.notifyDataSetChanged();
 		}
-	}
-
-	public void updateTopDividerVisibility(boolean visible) {
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), visible);
 	}
 
 	@Nullable
