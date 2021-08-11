@@ -278,9 +278,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			mAddGpxPointBottomSheetHelper.onDraw(box);
 		} else if (!markerCustomized) {
 			LatLon latLon = null;
-			boolean shouldShowContextMarker = menu.getMenuController() != null
-					&& menu.getMenuController().shouldShowContextMarker();
-			if (menu.isActive() && shouldShowContextMarker) {
+			if (menu.isActive()) {
 				latLon = menu.getLatLon();
 			} else if (activity.getTrackMenuFragment() != null) {
 				latLon = activity.getTrackMenuFragment().getLatLon();
