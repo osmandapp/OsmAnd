@@ -3097,9 +3097,9 @@
     <string name="shared_string_track_is_saved">Трек %s сохранен</string>
     <string name="rendering_attr_showLez_name">Зоны с низким уровнем выбросов</string>
     <string name="temporary_conditional_routing">Учитывать временные ограничения</string>
-    <string name="new_route_calculated_dist_dbg">Маршрут: %1$s, 
-\nвремя навигации %2$s. 
-\nРасчет: %3$.1f с. 
+    <string name="new_route_calculated_dist_dbg">Маршрут: %1$s,
+\nвремя навигации %2$s.
+\nРасчет: %3$.1f с.
 \n(%4$d дорог, %5$d тайлов)</string>
     <string name="quick_action_need_to_add_item_to_list">Добавьте хотя бы один элемент в список «Быстрые действия» в настройках</string>
     <string name="routing_attr_piste_type_skitour_description">Маршруты для горнолыжного туризма.</string>
@@ -4169,8 +4169,7 @@
     <string name="choose_what_to_restore">Выберите данные для восстановления.</string>
     <string name="restore_selected_data">Восстановить выбранные данные</string>
     <string name="receiving_data_from_server">Получение данных с сервера…</string>
-    <string name="restore_complete">Восстановлено</string>
-    <string name="grey_color_slope">Серый цвет используется, когда уклон не определен.</string>
+    <string name="restore_complete">Восстановление завершено</string>
     <string name="backup_storage_taken">Занятое пространство</string>
     <string name="backup_version_history">История версий</string>
     <string name="backup_version_history_delete_descr">Удалить историю изменений для устаревших типов данных из OsmAnd Cloud\?</string>

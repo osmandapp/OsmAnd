@@ -3936,7 +3936,6 @@
     <string name="restore_selected_data">Gendanner valgte data</string>
     <string name="receiving_data_from_server">Henter data fra serveren…</string>
     <string name="restore_complete">Gendannelse fuldført</string>
-    <string name="grey_color_slope">Grå farve anvendes, når hældningen er udefineret.</string>
     <string name="backup_version_history">Versionshistorik</string>
     <string name="backup_error_no_subscription">Mangler abonnement</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Farvelægning efter netværkstilhørsforhold.</string>

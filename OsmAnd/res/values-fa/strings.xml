@@ -4222,7 +4222,6 @@
     <string name="backup_delete_old_data_warning">در حال حذف سابقهٔ تغییر مربوط به داده‌های پیش‌تر بارشده هستید.
 \n
 \nنسخهٔ کنونی داده‌ها در سرور ذخیره خواهد شد اما قادر نخواهید بود به تغییرات گذشته واگردانی کنید.</string>
-    <string name="grey_color_slope">اگر شیب نامشخص باشد از رنگ خاکستری استفاده می‌شود.</string>
     <string name="purchases_feature_desc_nautical">به اطلاعات عمق دریایی دست یابید.</string>
     <string name="purchases_feature_desc_terrain">نمایش بلندی‌ها و پستی‌ها با کمک خطوط میزان ناهمواری‌ها، نقشهٔ کامل سایه‌روشن با سایه‌های تیره و نقشه‌های رنگی شیب.</string>
     <string name="purchases_feature_desc_wikivoyage">ویکی‌سفر را آفلاین کاوش کنید. مقاله‌ها بر اساس کشور و منطقه تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>

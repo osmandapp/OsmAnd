@@ -4168,7 +4168,6 @@
     <string name="restore_selected_data">שחזור הנתונים הנבחרים</string>
     <string name="receiving_data_from_server">מתקבלים נתונים מהשרת…</string>
     <string name="restore_complete">שוחזר</string>
-    <string name="grey_color_slope">בצבע האפור נעשה שימוש כשלא מוגדר מדרון.</string>
     <string name="backup_version_history">היסטוריית גרסאות</string>
     <string name="backup_storage_taken">אחסון מנוצל</string>
     <string name="backup_version_history_delete_descr">למחוק את יומן השינויים לסוגים שהשימוש בהם הופסק מ־OsmAnd Cloud\?</string>

@@ -4163,7 +4163,6 @@
     <string name="restore_selected_data">Відновити вибрані дані</string>
     <string name="receiving_data_from_server">Отримання даних із сервера…</string>
     <string name="restore_complete">Відновлено</string>
-    <string name="grey_color_slope">Сірий колір застосовується на позначення невизначених схилів.</string>
     <string name="backup_version_history">Історія версій</string>
     <string name="backup_storage_taken">Заповнення сховища</string>
     <string name="backup_version_history_delete_descr">Видалити журнал змін для застарілих типів даних із OsmAnd Cloud\?</string>

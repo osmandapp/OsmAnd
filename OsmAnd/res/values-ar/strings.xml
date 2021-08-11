@@ -4233,7 +4233,6 @@
     <string name="restore_selected_data">استعادة البيانات المحددة</string>
     <string name="receiving_data_from_server">استقبال البيانات من السيرفر…</string>
     <string name="restore_complete">اكتمال الاستعادة</string>
-    <string name="grey_color_slope">يستخدم اللون الرمادي عندما يكون المنحدر غير محدد.</string>
     <string name="backup_version_history">تاريخ النسخة</string>
     <string name="backup_storage_taken">التخزين المستخدم</string>
     <string name="backup_version_history_delete_descr">حذف سجل التغييرات لأنواع البيانات المهملة من سحابة OsmAnd ؟</string>
