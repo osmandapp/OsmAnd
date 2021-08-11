@@ -200,14 +200,17 @@ public abstract class InAppPurchaseHelper {
 		return purchases.getSubscriptions();
 	}
 
+	@Nullable
 	public InAppPurchase getFullVersion() {
 		return purchases.getFullVersion();
 	}
 
+	@Nullable
 	public InAppPurchase getDepthContours() {
 		return purchases.getDepthContours();
 	}
 
+	@Nullable
 	public InAppPurchase getContourLines() {
 		return purchases.getContourLines();
 	}
@@ -245,9 +248,8 @@ public abstract class InAppPurchaseHelper {
 	@NonNull
 	public List<InAppPurchase> getEverMadeMainPurchases() {
 		List<InAppPurchase> purchases = new ArrayList<>(getEverMadeSubscriptions());
-
 		InAppPurchase fullVersion = getFullVersion();
-		if (fullVersion.isPurchased()) {
+		if (fullVersion != null && fullVersion.isPurchased()) {
 			purchases.add(fullVersion);
 		}
 		return purchases;
@@ -730,6 +732,9 @@ public abstract class InAppPurchaseHelper {
 		logDebug("Purchase successful.");
 
 		InAppSubscription subscription = getSubscriptions().getSubscriptionBySku(info.getSku());
+		InAppPurchase fullVersion = getFullVersion();
+		InAppPurchase depthContours = getDepthContours();
+		InAppPurchase contourLines = getContourLines();
 		if (subscription != null) {
 			final boolean maps = purchases.isMapsSubscription(subscription);
 			final boolean liveUpdates = purchases.isLiveUpdatesSubscription(subscription);
@@ -770,41 +775,41 @@ public abstract class InAppPurchaseHelper {
 				}
 			});
 
-		} else if (info.getSku().equals(getFullVersion().getSku())) {
+		} else if (fullVersion != null && info.getSku().equals(fullVersion.getSku())) {
 			// bought full version
-			getFullVersion().setPurchaseState(PurchaseState.PURCHASED);
-			getFullVersion().setPurchaseInfo(ctx, info);
+			fullVersion.setPurchaseState(PurchaseState.PURCHASED);
+			fullVersion.setPurchaseInfo(ctx, info);
 			logDebug("Full version purchased.");
 			showToast(ctx.getString(R.string.full_version_thanks));
 			ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
-			notifyItemPurchased(getFullVersion().getSku(), false);
+			notifyItemPurchased(fullVersion.getSku(), false);
 			stop(true);
 
-		} else if (info.getSku().equals(getDepthContours().getSku())) {
+		} else if (depthContours != null && info.getSku().equals(depthContours.getSku())) {
 			// bought sea depth contours
-			getDepthContours().setPurchaseState(PurchaseState.PURCHASED);
-			getDepthContours().setPurchaseInfo(ctx, info);
+			depthContours.setPurchaseState(PurchaseState.PURCHASED);
+			depthContours.setPurchaseInfo(ctx, info);
 			logDebug("Sea depth contours purchased.");
 			showToast(ctx.getString(R.string.sea_depth_thanks));
 			ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
 			ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(true);
 
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_DEPTH_CONTOURS);
-			notifyItemPurchased(getDepthContours().getSku(), false);
+			notifyItemPurchased(depthContours.getSku(), false);
 			stop(true);
 
-		} else if (info.getSku().equals(getContourLines().getSku())) {
+		} else if (contourLines != null && info.getSku().equals(contourLines.getSku())) {
 			// bought contour lines
-			getContourLines().setPurchaseState(PurchaseState.PURCHASED);
-			getContourLines().setPurchaseInfo(ctx, info);
+			contourLines.setPurchaseState(PurchaseState.PURCHASED);
+			contourLines.setPurchaseInfo(ctx, info);
 			logDebug("Contours lines purchased.");
 			showToast(ctx.getString(R.string.contour_lines_thanks));
 			ctx.getSettings().CONTOUR_LINES_PURCHASED.set(true);
 
 			notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_CONTOUR_LINES);
-			notifyItemPurchased(getContourLines().getSku(), false);
+			notifyItemPurchased(contourLines.getSku(), false);
 			stop(true);
 
 		} else {

@@ -57,14 +57,17 @@ public abstract class InAppPurchases {
 		return ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 	}
 
+	@Nullable
 	public InAppPurchase getFullVersion() {
 		return fullVersion;
 	}
 
+	@Nullable
 	public InAppPurchase getDepthContours() {
 		return depthContours;
 	}
 
+	@Nullable
 	public InAppPurchase getContourLines() {
 		return contourLines;
 	}
