@@ -4159,7 +4159,6 @@
     <string name="restore_selected_data">Endurheimta valin gögn</string>
     <string name="receiving_data_from_server">Tek á móti gögnum frá netþjóninum…</string>
     <string name="restore_complete">Endurheimt</string>
-    <string name="grey_color_slope">Grár litur er notaður þegar brekka er óskilgreind.</string>
     <string name="backup_version_history">Útgáfuferli</string>
     <string name="backup_storage_taken">Geymslurými upptekið</string>
     <string name="delete_version_history">Eyða útgáfuferli</string>

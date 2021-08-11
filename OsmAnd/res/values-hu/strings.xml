@@ -4158,7 +4158,6 @@
     <string name="restore_selected_data">Kijelölt adatok visszaállítása</string>
     <string name="receiving_data_from_server">Adatok fogadása a kiszolgálóról…</string>
     <string name="restore_complete">Visszaállítva</string>
-    <string name="grey_color_slope">A szürke szín ott fordul elő, ahol a lejtés nincs meghatározva.</string>
     <string name="backup_version_history">Verzióelőzmények</string>
     <string name="backup_version_history_delete_descr">Törli az elavult adattípusok változásnaplóját az OsmAnd cloudból\?</string>
     <string name="backup_storage_taken">Foglalt tárhely</string>

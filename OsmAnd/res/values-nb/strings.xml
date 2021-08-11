@@ -4015,7 +4015,6 @@
     <string name="backup_restore_data_descr">Gjenopprett data på enheten, ved bruk av nettbaserte sikkerhetskopier.</string>
     <string name="receiving_data_from_server">Mottar data fra tjeneren …</string>
     <string name="restore_complete">Gjenopprettet</string>
-    <string name="grey_color_slope">Grå farge brukes nå helningen ikke er definert.</string>
     <string name="backup_storage_taken">Brukt lagringsplass</string>
     <string name="backup_data">Sikkerhetskopier data</string>
     <string name="backup_restore_data">Gjenopprett data</string>
