@@ -296,13 +296,23 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	}
 
 	private void setupDescription() {
-		String cancelDesc = getString(Version.isHuawei() ?
-				R.string.cancel_anytime_in_huawei_appgallery :
-				R.string.cancel_anytime_in_gplay);
+		String cancelDesc;
+		if (Version.isHuawei()) {
+			cancelDesc = getString(R.string.cancel_anytime_in_huawei_appgallery);
+		} else if (Version.isAmazon()) {
+			cancelDesc = getString(R.string.cancel_anytime_in_amazon_app);
+		} else {
+			cancelDesc = getString(R.string.cancel_anytime_in_gplay);
+		}
 
-		String commonDesc = getString(Version.isHuawei() ?
-				R.string.osm_live_payment_subscription_management_hw :
-				R.string.osm_live_payment_subscription_management);
+		String commonDesc;
+		if (Version.isHuawei()) {
+			commonDesc = getString(R.string.osm_live_payment_subscription_management_hw);
+		} else if (Version.isAmazon()) {
+			commonDesc = getString(R.string.osm_live_payment_subscription_management_amz);
+		} else {
+			commonDesc = getString(R.string.osm_live_payment_subscription_management);
+		}
 
 		((TextView) mainView.findViewById(R.id.cancel_description)).setText(cancelDesc);
 		((TextView) mainView.findViewById(R.id.plan_info_description)).setText(commonDesc);

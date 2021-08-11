@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.amazon.device.iap.PurchasingListener;
 import com.amazon.device.iap.PurchasingService;
+import com.amazon.device.iap.model.FulfillmentResult;
 import com.amazon.device.iap.model.Product;
 import com.amazon.device.iap.model.ProductDataResponse;
 import com.amazon.device.iap.model.PurchaseResponse;
@@ -179,6 +180,7 @@ public class IapPurchasingListener implements PurchasingListener {
 			case SUCCESSFUL:
 				final Receipt receipt = response.getReceipt();
 				Log.d(TAG, "onPurchaseResponse: receipt json:" + receipt.toJSON());
+				PurchasingService.notifyFulfillment(receipt.getReceiptId(), FulfillmentResult.FULFILLED);
 				notifyPurchaseResponseListeners(receipt);
 				break;
 			case ALREADY_PURCHASED:

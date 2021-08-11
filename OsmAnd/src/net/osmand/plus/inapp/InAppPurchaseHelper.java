@@ -51,7 +51,7 @@ public abstract class InAppPurchaseHelper {
 	// Debug tag, for logging
 	protected static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(InAppPurchaseHelper.class);
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
-	private final boolean mDebugLog = false;
+	private final boolean mDebugLog = true;
 
 	protected InAppPurchases purchases;
 	protected long lastValidationCheckTime;
@@ -313,7 +313,7 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	protected void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppCommand command) {
-		if (isDeveloperVersion || (!Version.isGooglePlayEnabled() && !Version.isHuawei())) {
+		if (isDeveloperVersion || (!Version.isGooglePlayEnabled() && !Version.isHuawei() && !Version.isAmazon())) {
 			notifyDismissProgress(taskType);
 			stop(true);
 			return;

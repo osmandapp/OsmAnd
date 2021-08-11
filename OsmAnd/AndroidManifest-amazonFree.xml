@@ -15,12 +15,12 @@
 		<service
 			android:name="net.osmand.plus.NavigationService"
 			tools:replace="android:process"
-			android:process="net.osmand.amazon"/>
+			android:process="net.osmand"/>
 
 		<provider
 			android:name="androidx.core.content.FileProvider"
 			tools:replace="android:authorities"
-			android:authorities="net.osmand.amazon.fileprovider"/>
+			android:authorities="net.osmand.fileprovider"/>
 
 		<receiver android:name = "com.amazon.device.iap.ResponseReceiver"
 			android:permission = "com.amazon.inapp.purchasing.Permission.NOTIFY" >

@@ -13,6 +13,7 @@ import com.amazon.device.iap.model.UserData;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
@@ -28,9 +29,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -63,7 +66,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	@Override
 	protected void execImpl(@NonNull InAppPurchaseTaskType taskType, @NonNull InAppCommand command) {
-
+		command.run(this);
 	}
 
 	@Override
@@ -83,7 +86,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	@Override
 	public void manageSubscription(@NonNull Context ctx, @Nullable String sku) {
-
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		app.showToastMessage(R.string.amz_manage_subscription_descr);
 	}
 
 	@Override
@@ -153,18 +157,18 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		inAppPurchase.setPrice(price);
 
 		double priceValue = 0;
-		String currencyCode = "";
+		String countryCode = userData.getAmazonMarketplace();
+		String currencyCode = !Algorithms.isEmpty(countryCode) ? Currency.getInstance(new Locale("", countryCode)).getCurrencyCode() : "";
 		Pattern regex = Pattern.compile("\\d[\\d,.]+");
 		Matcher finder = regex.matcher(price);
-		if (finder.find() && finder.groupCount() > 0) {
+		if (finder.find()) {
 			try {
 				String rawPrice = finder.group(0);
 				if (!Algorithms.isEmpty(rawPrice)) {
 					priceValue = Double.parseDouble(rawPrice.trim().replaceAll(",", "."));
-					currencyCode = price.replaceAll(rawPrice, "").trim();
 				}
 				// do something with value
-			} catch (NumberFormatException e) {
+			} catch (Exception e) {
 				priceValue = 0;
 			}
 		}
@@ -282,6 +286,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					// Do we have the live updates?
 					boolean subscribedToLiveUpdates = false;
 					boolean subscribedToOsmAndPro = false;
+					boolean subscribedToMaps = false;
 					List<Receipt> subscriptionPurchases = new ArrayList<>();
 					for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 						Receipt receipt = getReceipt(s.getSku());
@@ -295,28 +300,34 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 							if (!subscribedToOsmAndPro && purchases.isOsmAndProSubscription(s)) {
 								subscribedToOsmAndPro = true;
 							}
+							if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
+								subscribedToMaps = true;
+							}
 						}
 					}
 					if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
 						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
-						if (!subscribedToOsmAndPro) {
-							onSubscriptionExpired();
-						}
 					} else if (subscribedToLiveUpdates) {
 						ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 					}
 					if (!subscribedToOsmAndPro && ctx.getSettings().OSMAND_PRO_PURCHASED.get()) {
 						ctx.getSettings().OSMAND_PRO_PURCHASED.set(false);
-						if (!subscribedToLiveUpdates) {
-							onSubscriptionExpired();
-						}
 					} else if (subscribedToOsmAndPro) {
 						ctx.getSettings().OSMAND_PRO_PURCHASED.set(true);
 					}
+					if (!subscribedToMaps && ctx.getSettings().OSMAND_MAPS_PURCHASED.get()) {
+						ctx.getSettings().OSMAND_MAPS_PURCHASED.set(false);
+					} else if (subscribedToMaps) {
+						ctx.getSettings().OSMAND_MAPS_PURCHASED.set(true);
+					}
+					if (!subscribedToLiveUpdates && !subscribedToOsmAndPro && !subscribedToMaps) {
+						onSubscriptionExpired();
+					}
 
 					lastValidationCheckTime = System.currentTimeMillis();
-					logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE")
-							+ " live updates purchased.");
+					logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE") + " live updates purchased.");
+					logDebug("User " + (subscribedToOsmAndPro ? "HAS" : "DOES NOT HAVE") + " OsmAnd Pro purchased.");
+					logDebug("User " + (subscribedToMaps ? "HAS" : "DOES NOT HAVE") + " Maps purchased.");
 
 					OsmandSettings settings = ctx.getSettings();
 					settings.INAPPS_READ.set(true);
