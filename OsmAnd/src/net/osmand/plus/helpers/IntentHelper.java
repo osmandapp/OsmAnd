@@ -259,9 +259,8 @@ public class IntentHelper {
 			if (intent.hasExtra(TrackMenuFragment.OPEN_TRACK_MENU)) {
 				String path = intent.getStringExtra(TRACK_FILE_NAME);
 				String name = intent.getStringExtra(RETURN_SCREEN_NAME);
-				Bundle additionalParams = intent.getBundleExtra(ADDITIONAL_PARAMS);
 				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
-				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null, additionalParams);
+				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null);
 				mapActivity.setIntent(null);
 			}
 		}

@@ -34,7 +34,7 @@ public class WikivoyageUtils {
 	private final static Log LOG = PlatformUtil.getLog(WikivoyageUtils.class);
 
 	private static final String GEO_PARAMS = "?lat=";
-	public static final String ARTICLE_NAME = "article_name";
+	public static final String ARTICLE_TITLE = "article_title";
 	public static final String ARTICLE_LANG = "article_lang";
 
 	public static void setupNetworkPolicy(OsmandSettings settings, RequestCreator rc) {

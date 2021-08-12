@@ -166,7 +166,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private String callingFragmentTag;
 	private SelectedGpxPoint gpxPoint;
 	private TrackChartPoints trackChartPoints;
-	private Bundle additionalParams;
 
 	private Float heading;
 	private Location lastLocation;
@@ -357,10 +356,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	private void setAnalyses(@Nullable GPXTrackAnalysis analyses) {
 		this.analyses = analyses;
-	}
-
-	private void setAdditionaParams(@Nullable Bundle additionalParams) {
-		this.additionalParams = additionalParams;
 	}
 
 	@Override
@@ -636,7 +631,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					}
 					cardsContainer.addView(descriptionCard.getView());
 				} else {
-					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx(), additionalParams);
+					descriptionCard = new DescriptionCard(getMapActivity(), this, displayHelper.getGpx());
 					cardsContainer.addView(descriptionCard.build(mapActivity));
 				}
 			} else if (menuType == TrackMenuType.POINTS) {
@@ -1473,26 +1468,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity,
-	                                @Nullable String path,
-	                                boolean showCurrentTrack,
-	                                @Nullable final String returnScreenName,
-	                                @Nullable final String callingFragmentTag) {
-		showInstance(mapActivity, path, showCurrentTrack, returnScreenName, callingFragmentTag, null);
-	}
-
-	public static void showInstance(@NonNull MapActivity mapActivity,
 									@Nullable String path,
 									boolean showCurrentTrack,
 									@Nullable final String returnScreenName,
-									@Nullable final String callingFragmentTag,
-	                                @Nullable final Bundle additionalParams) {
+									@Nullable final String callingFragmentTag) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		loadSelectedGpxFile(mapActivity, path, showCurrentTrack, new CallbackWithObject<SelectedGpxFile>() {
 			@Override
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, true, null, additionalParams);
+					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, true, null);
 				}
 				return true;
 			}
@@ -1502,7 +1488,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 									   @NonNull SelectedGpxFile selectedGpxFile,
 									   @Nullable SelectedGpxPoint gpxPoint) {
-		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, false, null, null);
+		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, false, null);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
@@ -1511,8 +1497,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 									   @Nullable String returnScreenName,
 									   @Nullable String callingFragmentTag,
 									   boolean adjustMapPosition,
-									   @Nullable GPXTrackAnalysis analyses,
-									   @Nullable Bundle additionalParams) {
+									   @Nullable GPXTrackAnalysis analyses) {
 		try {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
@@ -1525,7 +1510,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setReturnScreenName(returnScreenName);
 			fragment.setCallingFragmentTag(callingFragmentTag);
 			fragment.setAdjustMapPosition(adjustMapPosition);
-			fragment.setAdditionaParams(additionalParams);
 
 			if (gpxPoint != null) {
 				WptPt wptPt = gpxPoint.getSelectedPoint();

@@ -58,7 +58,7 @@ import java.util.Map;
 import static net.osmand.plus.track.TrackMenuFragment.openTrack;
 import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
 import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_LANG;
-import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_NAME;
+import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_TITLE;
 
 
 public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment {
@@ -163,7 +163,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				TravelHelper travelHelper = getMyApplication().getTravelHelper();
 				File file = travelHelper.createGpxFile(article);
 				Bundle additionalParams = new Bundle();
-				additionalParams.putString(ARTICLE_NAME, article.getTitle());
+				additionalParams.putString(ARTICLE_TITLE, article.getTitle());
 				additionalParams.putString(ARTICLE_LANG, article.getLang());
 				openTrack(activity, new File(file.getAbsolutePath()), null, getString(R.string.icon_group_travel), additionalParams);
 			}

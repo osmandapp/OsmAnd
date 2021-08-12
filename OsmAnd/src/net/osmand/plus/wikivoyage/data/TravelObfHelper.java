@@ -631,7 +631,7 @@ public class TravelObfHelper implements TravelHelper {
 								SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 								SelectedGpxPoint selectedGpxPoint = new SelectedGpxPoint(selectedGpxFile, selectedPoint);
 								TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint,
-										null, null, false, article.getAnalysis(), null);
+										null, null, false, article.getAnalysis());
 							} else {
 								LOG.error(errorMessage);
 							}
