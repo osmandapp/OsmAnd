@@ -128,19 +128,21 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		if (activity != null) {
 			AndroidUtils.hideSoftKeyboard(activity, editText);
 		}
-		File dest;
-		int index = file.getName().lastIndexOf('.');
-		String ext = index == -1 ? "" : file.getName().substring(index);
-		String newName = selectedFileName;
-		if (selectedFileName.endsWith(ext)) {
-			newName = selectedFileName.substring(0, selectedFileName.lastIndexOf(ext));
+
+		int idxOfLastDot = file.getName().lastIndexOf('.');
+		String extension = idxOfLastDot == -1 ? "" : file.getName().substring(idxOfLastDot).trim();
+		String newValidName = selectedFileName.trim();
+		if (newValidName.endsWith(extension)) {
+			newValidName = newValidName.substring(0, newValidName.lastIndexOf(extension)).trim();
 		}
-		if (SQLiteTileSource.EXT.equals(ext)) {
-			dest = renameSQLiteFile(app, file, newName + ext, null);
-		} else if (IndexConstants.GPX_FILE_EXT.equals(ext)) {
-			dest = renameGpxFile(app, file, newName + ext, false, null);
+
+		File dest;
+		if (SQLiteTileSource.EXT.equals(extension)) {
+			dest = renameSQLiteFile(app, file, newValidName + extension, null);
+		} else if (IndexConstants.GPX_FILE_EXT.equals(extension)) {
+			dest = renameGpxFile(app, file, newValidName + extension, false, null);
 		} else {
-			dest = renameFile(app, file, newName + ext, false, null);
+			dest = renameFile(app, file, newValidName + extension, false, null);
 		}
 		if (dest != null) {
 			Fragment fragment = getTargetFragment();

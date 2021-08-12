@@ -1,5 +1,8 @@
 package net.osmand.plus.importfiles;
 
+import static net.osmand.plus.AppInitializer.loadRoutingFiles;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.getSettingsToOperate;
+
 import android.app.ProgressDialog;
 import android.net.Uri;
 
@@ -25,17 +28,14 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
 import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.PluginSettingsItem;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
-import net.osmand.plus.settings.fragments.ImportCompleteFragment;
 import net.osmand.plus.settings.fragments.FileImportSettingsFragment;
+import net.osmand.plus.settings.fragments.ImportCompleteFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.AppInitializer.loadRoutingFiles;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.getSettingsToOperate;
 
 class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
@@ -134,6 +134,21 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	private ImportListener getImportListener(final File file) {
 		return new ImportListener() {
 			@Override
+			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+
+			}
+
+			@Override
+			public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+			}
+
+			@Override
+			public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+
+			}
+
+			@Override
 			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (succeed) {
 					app.getRendererRegistry().updateExternalRenderers();
@@ -173,6 +188,21 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 		}
 
 		final ImportListener importListener = new ImportListener() {
+			@Override
+			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+
+			}
+
+			@Override
+			public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+			}
+
+			@Override
+			public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+
+			}
+
 			@Override
 			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				FragmentActivity activity = activityRef.get();

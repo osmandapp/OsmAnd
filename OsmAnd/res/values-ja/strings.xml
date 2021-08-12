@@ -4147,7 +4147,6 @@ POIの更新は利用できません</string>
     <string name="restore_selected_data">選択したデータを復元</string>
     <string name="receiving_data_from_server">サーバーからデータを受信…</string>
     <string name="restore_complete">復元されました</string>
-    <string name="grey_color_slope">勾配の色定義がなされていない場合は、グレーが使用されます。</string>
     <string name="backup_version_history">バージョン履歴</string>
     <string name="backup_storage_taken">使用済みストレージ</string>
     <string name="backup_version_history_delete_descr">推奨されないデータ形式の変更ログをOsmAndクラウドから削除しますか？</string>

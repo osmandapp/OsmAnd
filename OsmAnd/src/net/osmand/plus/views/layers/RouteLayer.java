@@ -126,8 +126,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if ((helper.isPublicTransportMode() && transportHelper.getRoutes() != null) ||
-				(helper.getFinalLocation() != null && helper.getRoute().isCalculated()) ||
-				isPlanRouteGraphsAvailable()) {
+				(helper.getFinalLocation() != null && helper.getRoute().isCalculated())) {
 
 			updateRouteColoringType();
 			updateAttrs(settings, tileBox);
@@ -136,11 +135,11 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			int w = tileBox.getPixWidth();
 			int h = tileBox.getPixHeight();
 			Location lastProjection = helper.getLastProjection();
-			final RotatedTileBox cp ;
-			if(lastProjection != null &&
+			final RotatedTileBox cp;
+			if (lastProjection != null &&
 					tileBox.containsLatLon(lastProjection.getLatitude(), lastProjection.getLongitude())){
 				cp = tileBox.copy();
-				cp.increasePixelDimensions(w /2, h);
+				cp.increasePixelDimensions(w / 2, h);
 			} else {
 				cp = tileBox;
 			}
@@ -165,18 +164,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}
 		}
-
-	}
-
-	private boolean isPlanRouteGraphsAvailable() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			MeasurementToolFragment fragment = mapActivity.getMeasurementToolFragment();
-			if (fragment != null) {
-				return fragment.hasVisibleGraph();
-			}
-		}
-		return false;
 	}
 
 	@Override
@@ -193,8 +180,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 		nightMode = settings != null && settings.isNightMode();
 
-		updateIsPaint_1(updatePaints);
-
 		if (updatePaints) {
 			routeWayContext.updatePaints(nightMode, attrs);
 			publicTransportWayContext.updatePaints(nightMode, attrs, attrsPT, attrsW);
@@ -209,17 +194,6 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			customTurnArrowColor = attrs.paint3.getColor();
 		}
 		paintIconAction.setColorFilter(new PorterDuffColorFilter(customTurnArrowColor, PorterDuff.Mode.MULTIPLY));
-	}
-
-	@Override
-	protected void updateIsPaint_1(boolean updatePaints) {
-		if (updatePaints) {
-			attrsIsPaint_1 = attrs.isPaint_1;
-		}
-		if (attrsIsPaint_1 != null) {
-			attrs.isPaint_1 = attrsIsPaint_1 && (routeColoringType.isDefault()
-					|| !isColoringAvailable(routeColoringType, routeInfoAttribute));
-		}
 	}
 
 	private void drawAction(RotatedTileBox tb, Canvas canvas, List<Location> actionPoints) {

@@ -3515,7 +3515,7 @@
     <string name="developer_plugin">Розширення розробника</string>
     <string name="shared_string_items">Елементи</string>
     <string name="select_wikipedia_article_langs">Виберіть мови статей Вікіпедії на мапі. Перемикайтеся між усіма доступними мовами під час читання статті.</string>
-    <string name="some_articles_may_not_available_in_lang">Деякі статті у Вікіпедії можуть бути недоступними вашою мовою.</string>
+    <string name="some_articles_may_not_available_in_lang">Деякі статті Вікіпедії можуть бути недоступні вашою мовою.</string>
     <string name="lang_zhyue">Кантонська</string>
     <string name="lang_zhminnan">Південний Мін</string>
     <string name="lang_yo">Йоруба</string>
@@ -4163,7 +4163,6 @@
     <string name="restore_selected_data">Відновити вибрані дані</string>
     <string name="receiving_data_from_server">Отримання даних із сервера…</string>
     <string name="restore_complete">Відновлено</string>
-    <string name="grey_color_slope">Сірий колір застосовується на позначення невизначених схилів.</string>
     <string name="backup_version_history">Історія версій</string>
     <string name="backup_storage_taken">Заповнення сховища</string>
     <string name="backup_version_history_delete_descr">Видалити журнал змін для застарілих типів даних із OsmAnd Cloud\?</string>
@@ -4303,4 +4302,5 @@
     <string name="map_updates_for_mappers">Оновлення мап для творців мап</string>
     <string name="benefits_for_contributors">Переваги для активних учасників OSM</string>
     <string name="pro_features">Можливості Pro</string>
+    <string name="purchases_restored">Покупки відновлено</string>
 </resources>

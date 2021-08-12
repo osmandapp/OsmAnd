@@ -1134,7 +1134,7 @@
     <string name="show_zoom_buttons_navigation">הצגת כפתורי תקריב</string>
     <string name="save_as_favorites_points">שמירה כקבוצת מועדפים</string>
     <string name="select_destination_and_intermediate_points">הגדרת יעדים</string>
-    <string name="layer_amenity_label">תוויות שכבת על לנקודות עניין</string>
+    <string name="layer_amenity_label">תוויות נקודות (נ״ע, מועדפים)</string>
     <string name="loading_smth">%1$s בטעינה…</string>
     <string name="map_widget_plain_time">הזמן הנוכחי</string>
     <string name="selected_gpx_info_show">"
@@ -1343,7 +1343,7 @@
     <string name="map_markers">סמני מפה</string>
     <string name="map_marker">סמן מפה</string>
     <string name="consider_turning_polygons_off">מומלץ לכבות עיבוד מצולעים.</string>
-    <string name="rendering_attr_showMtbRoutes_name">הצגת מסלולי אופני הרים</string>
+    <string name="rendering_attr_showMtbRoutes_name">מסלולי אופני הרים</string>
     <string name="show_polygons">הצגת מצולעים</string>
     <string name="find_parking">חיפוש חנייה</string>
     <string name="shared_string_status">מצב</string>
@@ -1554,7 +1554,7 @@
     <string name="rendering_attr_showAccess_name">הצגת הגבלות גישה ומחיר</string>
     <string name="rendering_attr_showSurfaceGrade_name">הצגת איכות הדרך</string>
     <string name="rendering_attr_showSurfaces_name">הצגת משטח הדרך</string>
-    <string name="rendering_attr_showCycleRoutes_name">הצגת נתיבי אופניים</string>
+    <string name="rendering_attr_showCycleRoutes_name">נתיבי רכיבה</string>
     <string name="no_index_file_to_download">לא נמצאו הורדות, נא לבדוק את החיבור שלך לאינטרנט.</string>
     <string name="amenity_type_seamark">ציון דרך ימי</string>
     <string name="app_mode_motorcycle">אופנוע</string>
@@ -1593,7 +1593,7 @@
     <string name="route_via">דרך:</string>
     <string name="route_from">מ־:</string>
     <string name="save_poi_too_many_uppercase">השם מכיל יותר מדי אותיות גדולות. להמשיך?</string>
-    <string name="save_poi_without_poi_type_message">לשמור נקודת עניין ללא סוג?</string>
+    <string name="save_poi_without_poi_type_message">לשמור נקודת עניין ללא סוג\?</string>
     <string name="use_dashboard_btn">שימוש בלוח בקרה</string>
     <string name="use_drawer_btn">שימוש בתפריט</string>
     <string name="dashboard_or_drawer_title">בקרה דרך תפריט או לוח בקרה</string>
@@ -1905,7 +1905,7 @@
     <string name="shared_string_show_details">הצגת פרטים</string>
     <string name="osm_edit_context_menu_delete">מחיקת עריכת OSM</string>
     <string name="rendering_value_disabled_name">מושבת</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">צבע לפי שיוך לרשת</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">שיוך לרשת</string>
     <string name="shared_string_logoff">יציאה</string>
     <string name="rendering_attr_hideHouseNumbers_name">מספרי בתים</string>
     <string name="application_dir_change_warning3">להעביר את קובצי הנתונים של OsmAnd ליעד החדש\?</string>
@@ -2068,7 +2068,7 @@
 \nאורך %2$s</string>
     <string name="tips_and_tricks_descr">שאלות נפוצות, שינויים אחרונים ועוד.</string>
     <string name="routing_settings_2">הגדרות ניווט</string>
-    <string name="general_settings_2">הגדרות כלליות</string>
+    <string name="general_settings_2">הגדרות גלובליות</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_dismiss">התעלמות</string>
     <string name="shared_string_do_not_use">לא להשתמש</string>
@@ -2670,7 +2670,7 @@
 \nניתן לצאת מתצוגה זו על ידי השבתתה או על ידי שינוי ‚סגנון המפה’ תחת ‚הגדרת המפה’ כרצונך.</string>
     <string name="rendering_attr_alpineHiking_name">דרגות קושי בטיפוס (SAC - מועדון האלפים השווייצרי)</string>
     <string name="rendering_attr_alpineHiking_description">עיבוד מסלולים לפי מדד מועדון האלפים השווייצרי (SAC).</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">סמל טיול שטח מעל</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">מסלולי טיול</string>
     <string name="osmand_extended_description_part4">סקי
 \n תוסף מפות הסקי של OsmAnd מאפשר לך לצפות במסלולי סקי ברמות מורכבות מסוימות ופרטים נוספים, כמו מיקום הרכבלים ומתקנים נוספים.</string>
     <string name="osmand_extended_description_part5">רכיבה 
@@ -2713,7 +2713,7 @@
     <string name="quick_action_duplicate">שם פעולה מהירה כפול</string>
     <string name="map_widget_magnetic_bearing">תכווין מגנטי</string>
     <string name="map_widget_bearing">תכווין יחסי</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">צבע לפי סימול הליכת שטח של OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osmand_team">צוות OsmAnd</string>
     <string name="maps_you_need_descr">על סמך הערכים שהוספת לסימניות, נוכל להמליץ לך להוריד את המפות הבאות:</string>
     <string name="maps_you_need">מפות שדרושות לך</string>
@@ -3333,7 +3333,7 @@
     <string name="logcat_buffer_descr">בדיקה ושיתוף יומני תיעוד מפורטים של היישומים</string>
     <string name="permission_is_required">נדרשת הרשאה כדי להשתמש באפשרות הזו.</string>
     <string name="rearrange_categories">סידור הקטגוריות מחדש</string>
-    <string name="create_custom_categories_list_promo">ניתן להחליף את סדר הרשימה ולהסתיר קטגוריות בלתי נחוצות. אפשר לייבא או לייצא את כל השינויים עם פרופילים.</string>
+    <string name="create_custom_categories_list_promo">ניתן להחליף את סדר הרשימה ולהסתיר קטגוריות וגם לייבא או לייצא את כל השינויים כפרופילים.</string>
     <string name="add_new_custom_category_button_promo">ניתן להוסיף קטגוריה חדשה מותאמת אישית על ידי בחירה בקטגוריה אחת או יותר.</string>
     <string name="reset_to_default_category_button_promo">‚איפוס לבררת מחדל’ יחזיר את הסדר למצב בררת המחדל כמו בהתקנה.</string>
     <string name="shared_string_available">זמין</string>
@@ -3726,7 +3726,7 @@
     <string name="route_between_points_desc">נא לבחור כיצד לחבר את הנקודות, בקו ישר, או לחבר מסלול ביניהן כפי שצוין להלן.</string>
     <string name="route_between_points_warning_desc">בשלב הבא עליך להצמיד את הדרך המורשית הקרובה ביותר לאחד מפרופילי הניווט שלך כדי להשתמש באפשרות הזו.</string>
     <string name="street_level_imagery">תמונות ברמת רחוב</string>
-    <string name="plan_route_exit_dialog_descr">להתעלם מכל השינויים במסלול המתוכנן על ידי סגירתו\?</string>
+    <string name="plan_route_exit_dialog_descr">להתעלם מכל השינויים במסלול המתוכנן\?</string>
     <string name="in_case_of_reverse_direction">במקרה של כיוון הפוך</string>
     <string name="shared_string_save_as_gpx">שמירה כקובץ מסלול חדש</string>
     <string name="add_segment_to_the_track">הוספה לקובץ מסלול</string>
@@ -3840,7 +3840,7 @@
     <string name="login_open_street_map">כניסה אל OpenStreetMap</string>
     <string name="login_open_street_map_org">כניסה אל OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">רישום עם OpenStreetMap</string>
-    <string name="use_login_password">להיכנס עם שם כניסה וססמה</string>
+    <string name="use_login_password">להשתמש בשם משתמש וססמה</string>
     <string name="login_account">חשבון</string>
     <string name="user_login">שם כניסה</string>
     <string name="manage_subscription">ניהול מינוי</string>
@@ -3985,11 +3985,9 @@
     <string name="login_open_place_reviews">כניסה ל־OpenPlaceReviews</string>
     <string name="announcement_time_descr">זמן ההכרזה של ההנחיות הקוליות השונות תלוי בסוג ההכרזה, במהירות הניווט הנוכחית ובמהירות הניווט כבררת מחדל.</string>
     <string name="hillshade_slope_contour_lines">הצללה / מדרון / קווי מתאר</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews הוא מיזם בהובלת הקהילה בנוגע למקומות ציבוריים כגון מסעדות, מלונות, מוזיאונים ונקודות דרך. הוא אוסף מידע ציבורי עליהם כגון תמונות, סקירות, קישורים למערכות אחרות שמקושרות ל־OpenStreetMap, ויקיפדיה.
+    <string name="open_place_reviews_plugin_description">ניתן לשלוח תמונות, סקירות וקישורים לגבי מקומות ציבוריים כגון מסעדות, מלונות, מוזיאונים ונקודות דרך כנתונים פתוחים אל https://openplacereviews.org/data/‎.
 \n
-\nכל הנתונים של OpenPlaceReview הם פתוחים וזמינים לציבור הרחב: http://openplacereviews.org/data.
-\n
-\nניתן לקרוא עוד באתר: http://openplacereviews.org</string>
+\nניתן לקרוא עוד באתר: https://openplacereviews.org</string>
     <string name="activity_type_water_name">מים</string>
     <string name="activity_type_winter_name">חורף</string>
     <string name="activity_type_snowmobile_name">אופנוע שלג</string>
@@ -4107,12 +4105,12 @@
     <string name="routing_attr_avoid_low_emission_zone_name">להימנע מאזורים עם פליטה נמוכה</string>
     <string name="search_more">לחפש עוד…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="verify_email_address">אימות כתובת דוא״ל</string>
-    <string name="verify_email_address_descr">שלחנו קוד אימות אל %1$s, נא למלא אותו בשדה שלהלן.</string>
-    <string name="cloud_email_not_registered">כתובת דוא״ל זו טרם נרשמה ב־OsmAnd Cloud</string>
-    <string name="cloud_email_already_registered">כבר יש חשבון רשום עם כתובת הדוא״ל הזאת.</string>
-    <string name="resend_verification_code">שליחת הקוד מחדש</string>
-    <string name="verification_code_missing">לא קיבלתי את קוד האימות</string>
+    <string name="verify_email_address">אימות כתובת הדוא״ל</string>
+    <string name="verify_email_address_descr">קוד אימות נשלח אל %1$s. נא למלא אותו בשדה שלהלן.</string>
+    <string name="cloud_email_not_registered">כתובת דוא״ל זו אינה רשומה ב־OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">כתובת הדוא״ל הזו כבר רשומה.</string>
+    <string name="resend_verification_code">לשלוח שוב</string>
+    <string name="verification_code_missing">לא קיבלתי קוד אימות</string>
     <string name="verification_code_missing_description">זמן ההמתנה לקוד יכול לארוך עד 10 דקות, כדאי גם לחפש בתיקיית הספאם שלך. אם זה לא עזר, יש להשתמש בכפתור שלהלן.</string>
     <string name="backup_and_restore">גיבוי ושחזור</string>
     <string name="last_backup">גיבוי אחרון</string>
@@ -4121,20 +4119,20 @@
     <string name="osmand_cloud_authorize_descr">הנתונים שלך לעולם לא ילכו לאיבוד, ניתן לגבות ולשחזר את המידע שלך ללא כל קושי.</string>
     <string name="local_backup">גיבוי מקומי</string>
     <string name="local_backup_descr">גיבוי ושחזור נתונים מקובץ מקומי.</string>
-    <string name="backup_into_file">גיבוי לקובץ</string>
+    <string name="backup_into_file">גיבוי כקובץ</string>
     <string name="restore_from_file">שחזור מקובץ</string>
     <string name="osmand_cloud_help_descr">הסתבכת\? ניתן ליצור אתנו קשר דרך %1$s</string>
     <string name="osmand_cloud_create_account_descr">נא למלא את כתובת הדוא״ל שלך, כל הנתונים שלך יקושרו אליה.
 \nאנו נשלח לך קוד אימות לכתובת הדוא״ל הזו.</string>
     <string name="osmand_cloud_login_descr">נא להקליד את כתובת הדוא״ל בה השתמשת להרשמה. אנו נשלח לך תוך זמן קצר ססמה חד־פעמית שנחוצה לשלב הבא.</string>
-    <string name="select_nav_profile_dialog_message">‚סוג הניווט’ מגדיר את המסלולים מחושבים. ניתן לבחור בין מנגנוני ניווט מקוונים ובלתי מקוונים.</string>
+    <string name="select_nav_profile_dialog_message">‚סוג הניווט’ בוחר איך המסלולים מחושבים, עם מנגנוני ניווט מקוונים ובלתי מקוונים זמינים.</string>
     <string name="loading_list_of_routing_services">רשימת שירותי הניווט הזמינים נטענת</string>
     <string name="shared_string_offline">בלתי מקוון</string>
     <string name="shared_string_online">מקוון</string>
     <string name="osmand_online_routing_promo">ניתן להשתמש בתבניות שהוגדרו מראש או להוסיף ניווט מקוון מותאם אישית, נתמכים: OSRM,‏ Graphhopper,‏ OpenRouteService,‏ GPX.</string>
     <string name="shared_string_external">חיצוני</string>
     <string name="provided_by">סופק על ידי %1$s</string>
-    <string name="failed_loading_predefined_engines">טעינת התבניות שהוגדרו מראש נכשלה.
+    <string name="failed_loading_predefined_engines">לא ניתן לטעון את התבניות שהוגדרו מראש.
 \nנא לבדוק את החיבור לאינטרנט.</string>
     <string name="shared_string_predefined">הוגדר מראש</string>
     <string name="backup_complete">הגיבוי הושלם</string>
@@ -4169,11 +4167,10 @@
     <string name="choose_what_to_restore">נא לבחור מה לשחזר.</string>
     <string name="restore_selected_data">שחזור הנתונים הנבחרים</string>
     <string name="receiving_data_from_server">מתקבלים נתונים מהשרת…</string>
-    <string name="restore_complete">השחזור הושלם</string>
-    <string name="grey_color_slope">בצבע האפור נעשה שימוש כשלא מוגדר מדרון.</string>
+    <string name="restore_complete">שוחזר</string>
     <string name="backup_version_history">היסטוריית גרסאות</string>
     <string name="backup_storage_taken">אחסון מנוצל</string>
-    <string name="backup_version_history_delete_descr">למחוק את היסטוריית השינויים לסוגים שמושבתים מהענן\?</string>
+    <string name="backup_version_history_delete_descr">למחוק את יומן השינויים לסוגים שהשימוש בהם הופסק מ־OsmAnd Cloud\?</string>
     <string name="delete_version_history">מחיקת היסטוריית גרסאות</string>
     <string name="routing_attr_avoid_tunnels_description">הימנעות ממנהרות</string>
     <string name="routing_attr_avoid_tunnels_name">הימנעות ממנהרות</string>
@@ -4192,7 +4189,7 @@
     <string name="shared_string_learn_more">מידע נוסף</string>
     <string name="cancel_anytime_in_huawei_appgallery">ניתן לבטל זאת בכל עת בחנות Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">ניתן לבטל זאת בכל עת דרך Google Play.</string>
-    <string name="backup_delete_types_descr">למחוק את כל הנתונים על סוגי נתונים בלתי פעילים מ־OsmAnd cloud\?</string>
+    <string name="backup_delete_types_descr">למחוק את כל הנתונים על סוגי נתונים בלתי פעילים מ־OsmAnd Cloud\?</string>
     <string name="backup_delete_types">מחיקת סוגי נתונים מושבתים</string>
     <string name="offline_wikipeadia">ויקיפדיה בלתי־מקוונת</string>
     <string name="offline_wikivoyage">ויקימסע בלתי־מקוון</string>
@@ -4214,7 +4211,7 @@
     <string name="backup_error_no_valid_subscription">לא קיים מינוי בתוקף</string>
     <string name="duration_moment_ago">לפני רגע קט</string>
     <string name="backup_welcome_back">ברוך שובך!</string>
-    <string name="backup_welcome_back_descr">ניתן לשחזר נתונים למכשיר הזה באמצעות גיבויים קיימים או להקים גיבוי למכשיר הזה ל־OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">ניתן לשחזר נתונים למכשיר הזה באמצעות גיבויים קיימים או לגבות נתונים ל־OsmAnd Cloud.</string>
     <string name="backup_setup">הקמת גיבוי</string>
     <string name="backup_restore_now">לשחזר כעת</string>
     <string name="attribute">מאפיין</string>
@@ -4233,20 +4230,32 @@
     <string name="contour_lines_hillshades_slope">קווי מתאר, הצללות, מדרונים</string>
     <string name="logout_from_osmand_cloud">יציאה מ־OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">לצאת מהחשבון\?
-\nיהיה עליך להיכנס שוב כדי לגבות או לשחזר את הנתונים.</string>
-    <string name="backup_deleting_all_data">כל הנתונים נמחקים</string>
-    <string name="backup_deleted_all_data">כל הנתונים נמחקו</string>
+\nיהיה עליך להיכנס שוב כדי לגבות או לשחזר נתונים.</string>
+    <string name="backup_deleting_all_data">כל הנתונים נמחקים…</string>
+    <string name="backup_deleted_all_data">כל הנתונים נמחקו.</string>
     <string name="backup_deleting_all_data_descr">נא להמתין לסיום מחיקת כל הנתונים שלך על ידי OsmAnd מהענן. כל הנתונים שבמכשיר יישארו כפי שהם.</string>
     <string name="backup_deleted_all_data_descr">כל הנתונים שלך נמחקו מ־OsmAnd Cloud בהצלחה.</string>
-    <string name="backup_version_history_removed">כל היסטוריית הגרסאות נמחקת</string>
-    <string name="backup_data_removed">כל הנתונים נמחקים</string>
+    <string name="backup_version_history_removed">כל היסטוריית הגרסאות הוסרה.</string>
+    <string name="backup_data_removed">כל הנתונים הוסרו.</string>
     <string name="shared_string_progress">תהליך</string>
-    <string name="backup_do_not_have_any">עדיין אין לך גיבוי מקוון</string>
+    <string name="backup_do_not_have_any">עדיין אין לך גיבוי מקוון.</string>
     <string name="backup_dont_have_any_descr">ניתן להקים גיבוי אוטומטי כדי שנתונים אבודים לא יטרידו אותך.</string>
     <string name="track_has_no_needed_data">המסלול לא כולל את הנתונים הדרושים.</string>
-    <string name="online_maps_searching_descr">מתבצע חיפוש במפות המקוונות.</string>
+    <string name="online_maps_searching_descr">מתבצע חיפוש מקוון…</string>
     <string name="reset_to_original">איפוס למקור</string>
     <string name="backup_error_no_subscription">לא קיים מינוי</string>
     <string name="map_updates_for_mappers">עדכוני מפות לממפים</string>
     <string name="benefits_for_contributors">הטבות למתנדבים פעילים ב־OSM</string>
+    <string name="shared_string_contributions">תרומות</string>
+    <string name="contributions_may_calculate_with_delay">חישוב התרומות עשוי לארוך מספר שעות.</string>
+    <string name="map_updates_are_unavailable_yet">עדכוני מפה עדיין לא זמינים. :-(</string>
+    <string name="connect_track_points_as">חיבור נקודות מסלול</string>
+    <string name="pro_features">יכולות פרו</string>
+    <string name="purchases_restored">הרכישות שוחזרו</string>
+    <string name="enter_verification_code">נא למלא ססמה חד־פעמית</string>
+    <string name="benefits_for_contributors_primary_descr">יכול להיות שמגיע לך עדכוני מפה בלתי מוגבלים אם יש לך מעורבות התנדבותית ב־OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">יש להיכנס ל־OpenStreetMap כדי לבדוק זכאות לעדכוני מפה חודשיים ושעתיים ללא הגבלה.</string>
+    <string name="use_login_and_password">להשתמש בשם משתמש וססמה</string>
+    <string name="available_until">זמין עד %1$s</string>
+    <string name="enough_contributions_descr">ברכות, סיפקת מספיק תרומות ל־OpenStreetMap ועכשיו מותר לך ליהנות מכמות בלתי מוגבלת של עדכוני מפות מ־OsmAnd!</string>
 </resources>

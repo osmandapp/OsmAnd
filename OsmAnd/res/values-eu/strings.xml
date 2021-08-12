@@ -3984,7 +3984,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="restore_selected_data">Leheneratu hautatutako datuak</string>
     <string name="receiving_data_from_server">Datuak jasotzen zerbitzaritik</string>
     <string name="restore_complete">Leheneratzea burutu da</string>
-    <string name="grey_color_slope">Kolore grisa erabiltzen da malda zehaztu gabe dagoenean.</string>
     <string name="backup_version_history">Bertsioen historia</string>
     <string name="backup_storage_taken">Biltegiratzea</string>
     <string name="backup_version_history_delete_descr">Desgaituta dauden moten aldaketen historia hodeitik ezabatu nahi duzu\?</string>

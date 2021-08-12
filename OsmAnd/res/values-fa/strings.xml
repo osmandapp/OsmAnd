@@ -307,7 +307,7 @@
     <string name="route_general_information">مسافت کل %1$s، مدت سفر %2$d ساعت و %3$d دقیقه.</string>
     <string name="shared_string_next">بعدی</string>
     <string name="shared_string_previous">قبلی</string>
-    <string name="unit_of_length_descr">یکاهای طول را تغییر دهید.</string>
+    <string name="unit_of_length_descr">یکاهای فاصله را تغییر دهید.</string>
     <string name="unit_of_length">یکاهای طول</string>
     <string name="local_index_descr_title">مدیریت پرونده‌های نقشه</string>
     <string name="local_index_mi_restore">فعال‌سازی</string>
@@ -1307,7 +1307,7 @@
 \n
 \nردهای ضبط‌شده را با دوستان یا برای استفاده در مشارکت‌های OSM هم‌رسانی کنید.
 \nورزشکاران می‌توانند برای کنترل تمرین‌هایشان از ردهای ضبط‌شده استفاده کنند.
-\nبرنامهٔ OsmAnd پردازش‌های ساده‌ای مانند محاسبهٔ lap timeها، سرعت متوسط و... را روی ردهای ضبط‌شده انجام می‌دهد؛ البته می‌توانید این ردها را در سایر نرم‌افزارهای تحلیلگر نیز آنالیز کنید.</string>
+\nبرنامهٔ OsmAnd پردازش‌های ساده‌ای مانند محاسبهٔ lap timeها، سرعت متوسط و... را روی ردهای ضبط‌شده انجام می‌دهد؛ البته می‌توانید این ردها را در سایر نرم‌افزارهای تحلیلگر نیز تحلیل کنید.</string>
     <string name="lang_al">آلبانیایی</string>
     <string name="lang_ar">عربی</string>
     <string name="lang_fa">فارسی</string>
@@ -1748,7 +1748,7 @@
     <string name="quick_action_replace_destination">تغییر مقصد</string>
     <string name="subscribe_email_error">خطا</string>
     <string name="sea_depth_thanks">از اینکه «منحنی‌های میزان عمق دریایی» را خریدید سپاسگزاریم</string>
-    <string name="analyze_on_map">آنالیز روی نقشه</string>
+    <string name="analyze_on_map">تحلیل روی نقشه</string>
     <string name="shared_string_visible">نمایان</string>
     <string name="restore_purchases">بازیابی خریدها</string>
     <string name="fonts_header">فونت‌های نقشه</string>
@@ -2634,7 +2634,7 @@
     <string name="shared_string_gpx_file">پروندهٔ GPX</string>
     <string name="osc_file">پروندهٔ OSC</string>
     <string name="choose_file_type">انتخاب قالب پرونده</string>
-    <string name="osm_edits_export_desc">برون‌برد در قالب یادداشت‌های OSM،‏ POIها یا هر دو.</string>
+    <string name="osm_edits_export_desc">برون‌برد یادداشت‌های OSM، نقاط توجه (POI) یا هر دو.</string>
     <string name="all_data">همهٔ داده</string>
     <string name="osm_notes">یادداشت‌های OSM</string>
     <string name="tunnel_warning">تونل</string>
@@ -4222,7 +4222,6 @@
     <string name="backup_delete_old_data_warning">در حال حذف سابقهٔ تغییر مربوط به داده‌های پیش‌تر بارشده هستید.
 \n
 \nنسخهٔ کنونی داده‌ها در سرور ذخیره خواهد شد اما قادر نخواهید بود به تغییرات گذشته واگردانی کنید.</string>
-    <string name="grey_color_slope">اگر شیب نامشخص باشد از رنگ خاکستری استفاده می‌شود.</string>
     <string name="purchases_feature_desc_nautical">به اطلاعات عمق دریایی دست یابید.</string>
     <string name="purchases_feature_desc_terrain">نمایش بلندی‌ها و پستی‌ها با کمک خطوط میزان ناهمواری‌ها، نقشهٔ کامل سایه‌روشن با سایه‌های تیره و نقشه‌های رنگی شیب.</string>
     <string name="purchases_feature_desc_wikivoyage">ویکی‌سفر را آفلاین کاوش کنید. مقاله‌ها بر اساس کشور و منطقه تقسیم‌بندی شده و به همهٔ زبان‌ها موجود است.</string>
@@ -4328,4 +4327,5 @@
     <string name="contributions_may_calculate_with_delay">محاسبهٔ مشارکت‌ها ممکن است چندین ساعت زمان ببرد.</string>
     <string name="map_updates_are_unavailable_yet">روزآمدسازه‌های نقشه هنوز در دسترس نیست :-(</string>
     <string name="pro_features">قابلیت‌های Pro</string>
+    <string name="purchases_restored">خریدها بازیابی شد</string>
 </resources>

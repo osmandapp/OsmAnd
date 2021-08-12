@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="grey_color_undefined">Grey color is used for parts without data.</string>
     <string name="purchases_restored">Purchases restored</string>
     <string name="pro_features">Pro features</string>
     <string name="connect_track_points_as">Сonnect route points</string>
@@ -136,7 +137,6 @@
     <string name="backup_version_history_delete_descr">Delete the changelog for deprecated data types from OsmAnd Cloud?</string>
     <string name="backup_storage_taken">Storage taken</string>
     <string name="backup_version_history">Version history</string>
-    <string name="grey_color_slope">Grey color is used when slope is undefined.</string>
     <string name="restore_complete">Restored</string>
     <string name="receiving_data_from_server">Receiving data from the server…</string>
     <string name="restore_selected_data">Restore selected data</string>
