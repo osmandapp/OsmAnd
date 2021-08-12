@@ -130,7 +130,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public static final String OPEN_TRACK_MENU = "open_track_menu";
 	public static final String RETURN_SCREEN_NAME = "return_screen_name";
-	public static final String ADDITIONAL_PARAMS = "additional_params";
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
@@ -1408,13 +1407,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		openTrack(context, file, prevIntentParams, null);
 	}
 
-	public static void openTrack(@NonNull Context context, @Nullable File file, Bundle prevIntentParams,
-	                             @Nullable String returnScreenName) {
-		openTrack(context, file, prevIntentParams, returnScreenName, null);
-	}
-
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams,
-	                             @Nullable String returnScreenName, @Nullable Bundle additionalParams) {
+	                             @Nullable String returnScreenName) {
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
@@ -1425,7 +1419,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			bundle.putBoolean(OPEN_TRACK_MENU, true);
 			bundle.putBoolean(CURRENT_RECORDING, currentRecording);
 			bundle.putString(RETURN_SCREEN_NAME, returnScreenName);
-			bundle.putBundle(ADDITIONAL_PARAMS, additionalParams);
 			MapActivity.launchMapActivityMoveToTop(context, prevIntentParams, null, bundle);
 		}
 	}

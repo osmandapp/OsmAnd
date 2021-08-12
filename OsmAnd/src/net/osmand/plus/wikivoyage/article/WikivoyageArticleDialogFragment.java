@@ -162,10 +162,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				}
 				TravelHelper travelHelper = getMyApplication().getTravelHelper();
 				File file = travelHelper.createGpxFile(article);
-				Bundle additionalParams = new Bundle();
-				additionalParams.putString(ARTICLE_TITLE, article.getTitle());
-				additionalParams.putString(ARTICLE_LANG, article.getLang());
-				openTrack(activity, new File(file.getAbsolutePath()), null, getString(R.string.icon_group_travel), additionalParams);
+				openTrack(activity, new File(file.getAbsolutePath()), null, getString(R.string.icon_group_travel));
 			}
 		});
 		trackButton.setVisibility(View.GONE);
