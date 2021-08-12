@@ -91,6 +91,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
+	protected boolean isUserInfoSupported() {
+		return false;
+	}
+
+	@Override
 	protected InAppCommand getPurchaseSubscriptionCommand(WeakReference<Activity> activity, String sku, String userInfo) throws UnsupportedOperationException {
 		return new PurchaseSubscriptionCommand(activity, sku);
 	}
@@ -141,7 +146,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	private PurchaseInfo getPurchaseInfo(Receipt receipt) {
-		return new PurchaseInfo(receipt.getSku(), receipt.getReceiptId(), "",
+		return new PurchaseInfo(receipt.getSku(), receipt.getReceiptId(), receipt.getReceiptId(),
 				receipt.getPurchaseDate().getTime(), 0, true, !receipt.isCanceled());
 	}
 

@@ -27,8 +27,6 @@ import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.InAppPurchases.PurchaseInfo;
-import net.osmand.plus.liveupdates.CountrySelectionFragment;
-import net.osmand.plus.liveupdates.CountrySelectionFragment.CountryItem;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -259,11 +257,7 @@ public abstract class InAppPurchaseHelper {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		OsmandSettings settings = app.getSettings();
 		if (settings.isInternetConnectionAvailable(true)) {
-			purchaseHelper.purchaseSubscription(activity, sku,
-					settings.BILLING_USER_EMAIL.get(),
-					settings.BILLING_USER_NAME.get(),
-					settings.BILLING_USER_COUNTRY_DOWNLOAD_NAME.get(),
-					settings.BILLING_HIDE_USER_NAME.get());
+			purchaseHelper.purchaseSubscription(activity, sku);
 		} else {
 			app.showToastMessage(R.string.internet_not_available);
 		}
@@ -368,11 +362,9 @@ public abstract class InAppPurchaseHelper {
 
 	public abstract void purchaseFullVersion(@NonNull final Activity activity) throws UnsupportedOperationException;
 
-	public void purchaseSubscription(@NonNull Activity activity, String sku, String email, String userName,
-									 String countryDownloadName, boolean hideUserName) {
+	public void purchaseSubscription(@NonNull Activity activity, String sku) {
 		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
-		new SubscriptionPurchaseTask(activity, sku, email, userName, countryDownloadName, hideUserName)
-				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		new SubscriptionPurchaseTask(activity, sku).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public abstract void purchaseDepthContours(@NonNull final Activity activity) throws UnsupportedOperationException;
@@ -381,39 +373,33 @@ public abstract class InAppPurchaseHelper {
 
 	public abstract void manageSubscription(@NonNull Context ctx, @Nullable String sku);
 
+	protected boolean isUserInfoSupported() {
+		return true;
+	}
+
 	@SuppressLint("StaticFieldLeak")
 	private class SubscriptionPurchaseTask extends AsyncTask<Void, Void, String> {
 
 		private final WeakReference<Activity> activity;
 
 		private final String sku;
-		private final String email;
-		private final String userName;
-		private final String countryDownloadName;
-		private final boolean hideUserName;
-
 		private String userId;
 
-		SubscriptionPurchaseTask(Activity activity, String sku, String email, String userName,
-								 String countryDownloadName, boolean hideUserName) {
+		SubscriptionPurchaseTask(Activity activity, String sku) {
 			this.activity = new WeakReference<>(activity);
-
 			this.sku = sku;
-			this.email = email;
-			this.userName = userName;
-			this.countryDownloadName = countryDownloadName;
-			this.hideUserName = hideUserName;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			userId = ctx.getSettings().BILLING_USER_ID.get();
 		}
 
 		@Override
 		protected String doInBackground(Void... params) {
-			userId = ctx.getSettings().BILLING_USER_ID.get();
-			if (Algorithms.isEmpty(userId) || Algorithms.isEmpty(token)) {
+			if (isUserInfoSupported() && (Algorithms.isEmpty(userId) || Algorithms.isEmpty(token))) {
 				try {
 					Map<String, String> parameters = new HashMap<>();
-					parameters.put("visibleName", hideUserName ? "" : userName);
-					parameters.put("preferredCountry", countryDownloadName);
-					parameters.put("email", email);
 					addUserInfo(parameters);
 					return AndroidNetworkUtils.sendRequest(ctx,
 							"https://osmand.net/subscription/register",
@@ -428,6 +414,12 @@ public abstract class InAppPurchaseHelper {
 
 		@Override
 		protected void onPostExecute(String response) {
+			if (!isUserInfoSupported()) {
+				notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
+				logDebug("Launching purchase flow for " + sku + " subscription");
+				exec(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION, getPurchaseSubscriptionCommand(activity, sku, null));
+				return;
+			}
 			logDebug("Response=" + response);
 			if (response == null) {
 				if (!Algorithms.isEmpty(userId)) {
@@ -886,18 +878,16 @@ public abstract class InAppPurchaseHelper {
 							if (result != null) {
 								try {
 									JSONObject obj = new JSONObject(result);
-									if (!obj.has("error")) {
-										processPurchasedJson(obj);
-									} else {
+									if (obj.has("error")) {
 										complain("SendToken Error: "
 												+ obj.getString("error")
-												+ " (userId=" + userId + " token=" + token + " response=" + result + " google=" + info.toString() + ")");
+												+ " (response=" + result + " google=" + info.toString() + ")");
 									}
 								} catch (JSONException e) {
 									logError("SendToken", e);
 									complain("SendToken Error: "
 											+ (e.getMessage() != null ? e.getMessage() : "JSONException")
-											+ " (userId=" + userId + " token=" + token + " response=" + result + " google=" + info.toString() + ")");
+											+ " (response=" + result + " google=" + info.toString() + ")");
 								}
 							}
 						}
@@ -912,35 +902,6 @@ public abstract class InAppPurchaseHelper {
 					Set<String> tokensSent = new HashSet<>(Arrays.asList(tokensSentStr.split(";")));
 					tokensSent.add(info.getSku());
 					ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.set(TextUtils.join(";", tokensSent));
-				}
-
-				private void processPurchasedJson(JSONObject obj) throws JSONException {
-					if (obj.has("visibleName") && !Algorithms.isEmpty(obj.getString("visibleName"))) {
-						ctx.getSettings().BILLING_USER_NAME.set(obj.getString("visibleName"));
-						ctx.getSettings().BILLING_HIDE_USER_NAME.set(false);
-					} else {
-						ctx.getSettings().BILLING_HIDE_USER_NAME.set(true);
-					}
-					if (obj.has("preferredCountry")) {
-						String prefferedCountry = obj.getString("preferredCountry");
-						if (!ctx.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(prefferedCountry)) {
-							ctx.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(prefferedCountry);
-							CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
-							countrySelectionFragment.initCountries(ctx);
-							CountryItem countryItem = null;
-							if (Algorithms.isEmpty(prefferedCountry)) {
-								countryItem = countrySelectionFragment.getCountryItems().get(0);
-							} else if (!prefferedCountry.equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
-								countryItem = countrySelectionFragment.getCountryItem(prefferedCountry);
-							}
-							if (countryItem != null) {
-								ctx.getSettings().BILLING_USER_COUNTRY.set(countryItem.getLocalName());
-							}
-						}
-					}
-					if (obj.has("email")) {
-						ctx.getSettings().BILLING_USER_EMAIL.set(obj.getString("email"));
-					}
 				}
 
 				@Nullable
