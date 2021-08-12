@@ -2009,7 +2009,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			customizingRouteLine = true;
 			ApplicationMode routingAppMode = mapActivity.getMyApplication().getRoutingHelper().getAppMode();
-			RouteLineAppearanceFragment.showInstance(mapActivity.getSupportFragmentManager(), routingAppMode);
+			RouteLineAppearanceFragment.showInstance(mapActivity, routingAppMode);
 		}
 	}
 

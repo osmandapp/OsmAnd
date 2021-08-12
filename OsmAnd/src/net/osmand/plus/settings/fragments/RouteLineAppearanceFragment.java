@@ -22,8 +22,10 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.enums.DayNightMode;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.cards.RouteLineColorCard;
 import net.osmand.plus.routing.cards.RouteLineColorCard.OnMapThemeUpdateListener;
 import net.osmand.plus.routing.cards.RouteLineColorCard.OnSelectedColorChangeListener;
@@ -443,7 +445,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitAppearanceMode();
-		showHideMapRouteInfoMenu();
+		showHideMapRouteInfoMenuIfNeeded();
 	}
 
 	private void enterAppearanceMode() {
@@ -469,13 +471,16 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		}
 	}
 
-	private void showHideMapRouteInfoMenu() {
+	private void showHideMapRouteInfoMenuIfNeeded() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (!mapActivity.isChangingConfigurations()) {
-				mapActivity.getMapRouteInfoMenu().finishRouteLineCustomization();
+			RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+				if (!mapActivity.isChangingConfigurations()) {
+					mapActivity.getMapRouteInfoMenu().finishRouteLineCustomization();
+				}
+				mapActivity.getMapRouteInfoMenu().showHideMenu();
 			}
-			mapActivity.getMapRouteInfoMenu().showHideMenu();
 		}
 	}
 
@@ -522,20 +527,6 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		}
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @Nullable ApplicationMode appMode) {
-		try {
-			RouteLineAppearanceFragment fragment = new RouteLineAppearanceFragment();
-			fragment.appMode = appMode;
-			fragmentManager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (RuntimeException e) {
-			return false;
-		}
-	}
-
 	public void onMapThemeUpdated(@NonNull DayNightMode mapTheme) {
 		changeMapTheme(mapTheme);
 		updateColorItems();
@@ -546,6 +537,27 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		if (app != null) {
 			app.getSettings().DAYNIGHT_MODE.setModeValue(appMode, mapTheme);
 			selectedMapTheme = mapTheme;
+		}
+	}
+
+	public static boolean showInstance(@NonNull MapActivity mapActivity,
+	                                   @Nullable ApplicationMode appMode) {
+		try {
+			MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
+			if (mapRouteInfoMenu.isVisible()) {
+				mapRouteInfoMenu.hide();
+			}
+
+			RouteLineAppearanceFragment fragment = new RouteLineAppearanceFragment();
+			fragment.appMode = appMode;
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
+			return true;
+		} catch (RuntimeException e) {
+			return false;
 		}
 	}
 }
