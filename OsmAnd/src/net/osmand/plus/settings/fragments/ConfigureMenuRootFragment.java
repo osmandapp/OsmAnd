@@ -67,9 +67,9 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 	private Activity activity;
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-									   Fragment target,
-									   @NonNull ApplicationMode appMode) {
-		try {
+	                                   @Nullable Fragment target,
+	                                   @NonNull ApplicationMode appMode) {
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
 			ConfigureMenuRootFragment fragment = new ConfigureMenuRootFragment();
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
@@ -78,9 +78,8 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	@Override

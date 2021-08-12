@@ -793,13 +793,17 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	private void showHideMarkersList() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && portrait) {
-			cancelSnapToRoad = false;
-			planRouteContext.setMarkersListOpened(!planRouteContext.isMarkersListOpened());
-			int containerRes = planRouteContext.isMarkersListOpened() ? R.id.fragmentContainer : R.id.bottomFragmentContainer;
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.remove(this)
-					.add(containerRes, new PlanRouteFragment(), PlanRouteFragment.TAG)
-					.commitAllowingStateLoss();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			if (fragmentManager.findFragmentByTag(PlanRouteFragment.TAG) == null) {
+				cancelSnapToRoad = false;
+				planRouteContext.setMarkersListOpened(!planRouteContext.isMarkersListOpened());
+				int containerRes = planRouteContext.isMarkersListOpened() ?
+						R.id.fragmentContainer : R.id.bottomFragmentContainer;
+				fragmentManager.beginTransaction()
+						.remove(this)
+						.add(containerRes, new PlanRouteFragment(), PlanRouteFragment.TAG)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 
@@ -868,23 +872,30 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			planRouteContext.setFragmentVisible(false);
-			activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
+			activity.getSupportFragmentManager()
+					.beginTransaction()
+					.remove(this)
+					.commitAllowingStateLoss();
 		}
 	}
 
-	public static boolean showInstance(MapActivity mapActivity) {
-		try {
+	public static boolean showInstance(@NonNull MapActivity mapActivity) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(PlanRouteFragment.TAG) == null) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			boolean fullscreen = portrait && mapActivity.getMyApplication().getMapMarkersHelper().getPlanRouteContext().isMarkersListOpened();
-			int containerRes = portrait ? (fullscreen ? R.id.fragmentContainer : R.id.bottomFragmentContainer) : R.id.topFragmentContainer;
-			FragmentManager fm = mapActivity.getSupportFragmentManager();
-			fm.beginTransaction()
+			boolean markersListOpened = mapActivity.getMyApplication().getMapMarkersHelper()
+					.getPlanRouteContext()
+					.isMarkersListOpened();
+			boolean fullscreen = portrait && markersListOpened;
+			int containerRes = portrait
+					? (fullscreen ? R.id.fragmentContainer : R.id.bottomFragmentContainer)
+					: R.id.topFragmentContainer;
+			fragmentManager.beginTransaction()
 					.add(containerRes, new PlanRouteFragment(), PlanRouteFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			return false;
 		}
+		return false;
 	}
 
 	private void sortSelectedMarkersDoorToDoor(final MapActivity mapActivity, final boolean startFromLoc, final Location myLoc) {

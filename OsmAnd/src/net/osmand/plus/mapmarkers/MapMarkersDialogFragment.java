@@ -326,15 +326,18 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	}
 
 	private void showOptionsMenuFragment() {
-		OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
-		fragment.setListener(createOptionsFragmentListener());
-		Bundle args = new Bundle();
-		args.putBoolean(GROUPS_MARKERS_MENU, viewPager.getCurrentItem() == GROUPS_POSITION);
-		args.putBoolean(HISTORY_MARKERS_MENU, viewPager.getCurrentItem() == HISTORY_MARKERS_POSITION);
-		fragment.setArguments(args);
-		getChildFragmentManager().beginTransaction()
-				.add(R.id.menu_container, fragment, OptionsBottomSheetDialogFragment.TAG)
-				.commitAllowingStateLoss();
+		FragmentManager childFragmentManager = getChildFragmentManager();
+		if (childFragmentManager.findFragmentByTag(OptionsBottomSheetDialogFragment.TAG) == null) {
+			OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+			fragment.setListener(createOptionsFragmentListener());
+			Bundle args = new Bundle();
+			args.putBoolean(GROUPS_MARKERS_MENU, viewPager.getCurrentItem() == GROUPS_POSITION);
+			args.putBoolean(HISTORY_MARKERS_MENU, viewPager.getCurrentItem() == HISTORY_MARKERS_POSITION);
+			fragment.setArguments(args);
+			childFragmentManager.beginTransaction()
+					.add(R.id.menu_container, fragment, OptionsBottomSheetDialogFragment.TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	private boolean dismissOptionsMenuFragment() {

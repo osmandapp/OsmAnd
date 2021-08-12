@@ -1035,22 +1035,24 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		settings.ROUTE_LINE_WIDTH.setModeValue(appMode, drawInfo.getWidth());
 	}
 
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable String appMode, boolean imported) {
-		try {
-			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
+	public static boolean showInstance(@NonNull FragmentActivity activity,
+	                                   @NonNull SettingsScreenType screenType,
+	                                   @Nullable String appMode, boolean imported) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		String tag = screenType.fragmentName;
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(tag) == null) {
+			Fragment fragment = Fragment.instantiate(activity, tag);
 			Bundle args = new Bundle();
 			if (appMode != null) {
 				args.putString(BASE_PROFILE_FOR_NEW, appMode);
 				args.putBoolean(IS_BASE_PROFILE_IMPORTED, imported);
 			}
 			fragment.setArguments(args);
-			activity.getSupportFragmentManager().beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, screenType.fragmentName)
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, tag)
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
-					.commit();
+					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			LOG.error(e);
 		}
 		return false;
 	}

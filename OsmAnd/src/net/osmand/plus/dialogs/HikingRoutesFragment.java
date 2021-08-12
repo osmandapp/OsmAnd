@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -180,5 +181,13 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
 		params.height = height;
 		bottomView.setLayoutParams(params);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.content, new HikingRoutesFragment(), TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

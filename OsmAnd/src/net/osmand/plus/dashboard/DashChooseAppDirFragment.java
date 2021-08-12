@@ -51,6 +51,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.fragment.app.FragmentManager;
 import gnu.trove.list.array.TIntArrayList;
 
 public class DashChooseAppDirFragment {
@@ -376,34 +377,32 @@ public class DashChooseAppDirFragment {
 		}
 
 		public OnClickListener getConfirmListener(final boolean silentRestart) {
-			return new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					boolean wr = FileUtils.isWritable(selectedFile);
-					if (wr) {
-						boolean changed = !currentAppFile.getAbsolutePath().equals(selectedFile.getAbsolutePath());
-						getMyApplication().setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
-						if (changed) {
-							successCallback();
-							reloadData();
-						}
-						if (fragment != null && activity instanceof FragmentActivity) {
-							((FragmentActivity) activity).getSupportFragmentManager().beginTransaction()
-									.remove(fragment).commit();
-						}
-						if (silentRestart) {
-							android.os.Process.killProcess(android.os.Process.myPid());
-						} else {
-							getMyApplication().restartApp(activity);
-						}
+			return v -> {
+				boolean wr = FileUtils.isWritable(selectedFile);
+				if (wr) {
+					boolean changed = !currentAppFile.getAbsolutePath().equals(selectedFile.getAbsolutePath());
+					getMyApplication().setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
+					if (changed) {
+						successCallback();
+						reloadData();
+					}
+					if (fragment != null && activity instanceof FragmentActivity) {
+						((FragmentActivity) activity).getSupportFragmentManager()
+								.beginTransaction()
+								.remove(fragment)
+								.commitAllowingStateLoss();
+					}
+					if (silentRestart) {
+						android.os.Process.killProcess(android.os.Process.myPid());
 					} else {
-						Toast.makeText(activity, R.string.specified_directiory_not_writeable,
-								Toast.LENGTH_LONG).show();
+						getMyApplication().restartApp(activity);
 					}
-					if (dlg != null) {
-						dlg.dismiss();
-					}
+				} else {
+					Toast.makeText(activity, R.string.specified_directiory_not_writeable,
+							Toast.LENGTH_LONG).show();
+				}
+				if (dlg != null) {
+					dlg.dismiss();
 				}
 			};
 		}

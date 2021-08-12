@@ -87,13 +87,15 @@ public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 
 	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
 									List<SettingsItem> settingsItems, Fragment target) {
-		RestoreDuplicatesFragment fragment = new RestoreDuplicatesFragment();
-		fragment.setTargetFragment(target, 0);
-		fragment.setDuplicatesList(duplicatesList);
-		fragment.setSettingsItems(settingsItems);
-		fm.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+		if (fm.findFragmentByTag(TAG) == null) {
+			RestoreDuplicatesFragment fragment = new RestoreDuplicatesFragment();
+			fragment.setTargetFragment(target, 0);
+			fragment.setDuplicatesList(duplicatesList);
+			fragment.setSettingsItems(settingsItems);
+			fm.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

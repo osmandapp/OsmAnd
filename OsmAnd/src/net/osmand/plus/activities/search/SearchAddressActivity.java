@@ -16,9 +16,7 @@ public class SearchAddressActivity extends OsmandActionBarActivity {
 		setContentView(R.layout.single_fragment_layout);
 		if (savedInstanceState == null) {
 			// During initial setup, plug in the details fragment.
-			SearchAddressFragment details = new SearchAddressFragment();
-			details.setArguments(getIntent().getExtras());
-			getSupportFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
+			SearchAddressFragment.showInstance(getSupportFragmentManager(), getIntent().getExtras());
 		}
 	}
 	

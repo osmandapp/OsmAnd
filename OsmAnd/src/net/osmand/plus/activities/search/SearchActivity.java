@@ -4,7 +4,6 @@ package net.osmand.plus.activities.search;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,13 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-import androidx.appcompat.app.ActionBar.OnNavigationListener;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
-
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.FavouritePoint;
@@ -26,14 +19,16 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesListActivity;
 import net.osmand.plus.activities.FavoritesListFragment;
 import net.osmand.plus.activities.NavigatePointFragment;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
@@ -43,7 +38,18 @@ import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.appcompat.app.ActionBar.OnNavigationListener;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
+
 public class SearchActivity extends TabActivity implements OsmAndLocationListener {
+
+	private static final Log LOG = PlatformUtil.getLog(SearchActivity.class);
+
 	public static final int POI_TAB_INDEX = 0;
 	public static final int ADDRESS_TAB_INDEX = 1;
 	public static final int LOCATION_TAB_INDEX = 2;
@@ -131,19 +137,10 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 			});
 		} else {
 			setContentView(R.layout.search_activity_single);
-			Class<?> cl = getFragment(tab);
-			try {
-				getSupportFragmentManager().beginTransaction().replace(R.id.layout, (Fragment) cl.newInstance()).commit();
-			} catch (InstantiationException e) {
-				throw new IllegalStateException(e);
-			} catch (IllegalAccessException e) {
-				throw new IllegalStateException(e);
-			}
+			showFragment(tab);
         }
         setTopSpinner();
-		
-		Log.i("net.osmand", "Start on create " + (System.currentTimeMillis() - t ));
-		
+
 		Intent intent = getIntent();
 		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 		LatLon last = settings.getLastKnownMapLocation();
@@ -168,7 +165,20 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 				updateSearchPoint(last, getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
 			}
 		}
-    }
+
+		LOG.info("Start on create " + (System.currentTimeMillis() - t));
+	}
+
+	private void showFragment(Integer tab) {
+		Fragment fragment = instantiateFragment(getFragment(tab));
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		String tag = fragment.getClass().getName();
+		if (fragmentManager.findFragmentByTag(tag) == null) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.layout, fragment, tag)
+					.commitAllowingStateLoss();
+		}
+	}
 
 	protected Class<?> getFragment(int tab) {
 		if(tab == POI_TAB_INDEX) {
@@ -183,6 +193,18 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 			return FavoritesListFragment.class;
 		}
 		return SearchPoiFilterFragment.class;
+	}
+
+	private Fragment instantiateFragment(Class<?> clazz) {
+		try {
+			return (Fragment) clazz.newInstance();
+		} catch (InstantiationException e) {
+			LOG.error(e);
+			throw new IllegalStateException();
+		} catch (IllegalAccessException e) {
+			LOG.error(e);
+			throw new IllegalStateException();
+		}
 	}
 
 	public AccessibilityAssistant getAccessibilityAssistant() {

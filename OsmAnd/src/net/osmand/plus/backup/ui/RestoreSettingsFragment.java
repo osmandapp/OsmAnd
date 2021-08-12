@@ -216,10 +216,12 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
-		RestoreSettingsFragment fragment = new RestoreSettingsFragment();
-		manager.beginTransaction().
-				replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+		if (manager.findFragmentByTag(TAG) == null) {
+			RestoreSettingsFragment fragment = new RestoreSettingsFragment();
+			manager.beginTransaction().
+					replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

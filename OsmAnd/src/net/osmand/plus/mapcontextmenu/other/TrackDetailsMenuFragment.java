@@ -242,13 +242,6 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 		applyDayNightMode();
 	}
 
-	public void show(MapActivity mapActivity) {
-		mapActivity.getSupportFragmentManager().beginTransaction()
-				.add(R.id.routeMenuContainer, this, TAG)
-				.addToBackStack(TAG)
-				.commitAllowingStateLoss();
-	}
-
 	public void dismiss(boolean backPressed) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -291,18 +284,17 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 		}
 	}
 
-	public static boolean showInstance(final MapActivity mapActivity) {
-		try {
+	public static boolean showInstance(@NonNull MapActivity mapActivity) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			TrackDetailsMenuFragment fragment = new TrackDetailsMenuFragment();
-			mapActivity.getSupportFragmentManager().beginTransaction()
+			fragmentManager.beginTransaction()
 					.add(portrait ? R.id.bottomFragmentContainer : R.id.routeMenuContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
-
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

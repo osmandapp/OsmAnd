@@ -2026,27 +2026,26 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private void dismiss(@NonNull MapActivity mapActivity, boolean clearContext) {
-		try {
-			OsmandApplication app = mapActivity.getMyApplication();
-			if (clearContext) {
-				editingCtx.clearSegments();
-			}
-			collapseInfoViewIfExpanded();
-			resetAppMode();
-			hideSnapToRoadIcon();
-			if (isInEditMode()) {
-				GpxData gpxData = editingCtx.getGpxData();
-				GPXFile gpx = gpxData != null ? gpxData.getGpxFile() : null;
-				if (gpx != null) {
-					TrackMenuFragment.openTrack(mapActivity, new File(gpx.path), null);
-				}
-			}
-			editingCtx.resetRouteSettingsListener();
-			app.setMeasurementEditingContext(null);
-			mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
-		} catch (Exception e) {
-			// ignore
+		OsmandApplication app = mapActivity.getMyApplication();
+		if (clearContext) {
+			editingCtx.clearSegments();
 		}
+		collapseInfoViewIfExpanded();
+		resetAppMode();
+		hideSnapToRoadIcon();
+		if (isInEditMode()) {
+			GpxData gpxData = editingCtx.getGpxData();
+			GPXFile gpx = gpxData != null ? gpxData.getGpxFile() : null;
+			if (gpx != null) {
+				TrackMenuFragment.openTrack(mapActivity, new File(gpx.path), null);
+			}
+		}
+		editingCtx.resetRouteSettingsListener();
+		app.setMeasurementEditingContext(null);
+		mapActivity.getSupportFragmentManager()
+				.beginTransaction()
+				.remove(this)
+				.commitAllowingStateLoss();
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, LatLon initialPoint) {
@@ -2098,16 +2097,17 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return showFragment(fragment, fragmentManager);
 	}
 
-	private static boolean showFragment(MeasurementToolFragment fragment, FragmentManager fragmentManager) {
-		try {
+	private static boolean showFragment(@NonNull MeasurementToolFragment fragment,
+	                                    @NonNull FragmentManager fragmentManager) {
+		if (!fragmentManager.isStateSaved()
+				&& fragmentManager.findFragmentByTag(MeasurementToolFragment.TAG) == null) {
 			fragment.setRetainInstance(true);
 			fragmentManager.beginTransaction()
 					.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			return false;
 		}
+		return false;
 	}
 
 	private class MeasurementToolBarController extends TopToolbarController {
@@ -2214,11 +2214,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void enterApproximationMode(MapActivity mapActivity) {
 		MeasurementToolLayer layer = getMeasurementLayer();
 		if (layer != null) {
-			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			manager.beginTransaction()
-					.hide(this).commit();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			fragmentManager.beginTransaction()
+					.hide(this)
+					.commitAllowingStateLoss();
 			layer.setTapsDisabled(true);
-			SnapTrackWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+			SnapTrackWarningFragment.showInstance(fragmentManager, this);
 			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_ruler_container);
 		}
 	}
@@ -2230,7 +2231,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (layer != null && mapActivity != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.show(this).commit();
+					.show(this)
+					.commitAllowingStateLoss();
 			layer.setTapsDisabled(false);
 			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
 		}

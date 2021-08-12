@@ -62,17 +62,20 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	private boolean nightMode;
 	private boolean needRestart;
 
-	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull List<SettingsItem> settingsItems,
 									@NonNull String sourceName, boolean needRestart) {
-		ImportCompleteFragment fragment = new ImportCompleteFragment();
-		fragment.settingsItems.addAll(settingsItems);
-		fragment.setSourceName(sourceName);
-		fragment.setRetainInstance(true);
-		fragment.setNeedRestart(needRestart);
-		fm.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			ImportCompleteFragment fragment = new ImportCompleteFragment();
+			fragment.settingsItems.addAll(settingsItems);
+			fragment.setSourceName(sourceName);
+			fragment.setRetainInstance(true);
+			fragment.setNeedRestart(needRestart);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	@Override
@@ -186,9 +189,12 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.MAIN_SETTINGS);
 				break;
 			case QUICK_ACTIONS:
-				fm.beginTransaction()
-						.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
-						.addToBackStack(QuickActionListFragment.TAG).commit();
+				if (fm.findFragmentByTag(QuickActionListFragment.TAG) == null) {
+					fm.beginTransaction()
+							.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
+							.addToBackStack(QuickActionListFragment.TAG)
+							.commitAllowingStateLoss();
+				}
 				break;
 			case POI_TYPES:
 				if (activity instanceof MapActivity) {
@@ -204,19 +210,21 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				break;
 			case MAP_SOURCES:
 				if (activity instanceof MapActivity) {
-					((MapActivity) activity).getDashboard()
-							.setDashboardVisibility(
-									true,
-									DashboardOnMap.DashboardType.CONFIGURE_MAP,
-									null
-							);
+					((MapActivity) activity).getDashboard().setDashboardVisibility(true,
+							DashboardOnMap.DashboardType.CONFIGURE_MAP, null);
 				}
 				break;
 			case CUSTOM_RENDER_STYLE:
-				new SelectMapStyleBottomSheetDialogFragment().show(fm, SelectMapStyleBottomSheetDialogFragment.TAG);
+				if (fm.findFragmentByTag(SelectMapStyleBottomSheetDialogFragment.TAG) == null) {
+					new SelectMapStyleBottomSheetDialogFragment()
+							.show(fm, SelectMapStyleBottomSheetDialogFragment.TAG);
+				}
 				break;
 			case AVOID_ROADS:
-				new AvoidRoadsBottomSheetDialogFragment().show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
+				if (fm.findFragmentByTag(AvoidRoadsBottomSheetDialogFragment.TAG) == null) {
+					new AvoidRoadsBottomSheetDialogFragment()
+							.show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
+				}
 				break;
 			case TRACKS:
 			case OSM_NOTES:

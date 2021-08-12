@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
@@ -150,33 +151,19 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return getString(R.string.shared_string_favorites);
 	}
 
-	public static void showInstance(@NonNull MapActivity mapActivity) {
+	public static void showAutoFillInstance(@NonNull MapActivity mapActivity, boolean autoFill) {
 		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
-		//int slideInAnim = editor.getSlideInAnimation();
-		//int slideOutAnim = editor.getSlideOutAnimation();
-
 		if (editor != null) {
-			FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commitAllowingStateLoss();
-		}
-	}
-
-	public static void showAutoFillInstance(final MapActivity mapActivity, boolean autoFill) {
-		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
-		//int slideInAnim = editor.getSlideInAnimation();
-		//int slideOutAnim = editor.getSlideOutAnimation();
-
-		FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
-		fragment.autoFill = autoFill;
-
-		if (editor != null) {
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commit();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			String tag = editor.getFragmentTag();
+			if (fragmentManager.findFragmentByTag(tag) == null) {
+				FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
+				fragment.autoFill = autoFill;
+				fragmentManager.beginTransaction()
+						.add(R.id.fragmentContainer, fragment, tag)
+						.addToBackStack(null)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 

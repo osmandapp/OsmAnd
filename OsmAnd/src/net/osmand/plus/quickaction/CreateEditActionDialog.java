@@ -18,12 +18,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -70,6 +72,13 @@ public class CreateEditActionDialog extends DialogFragment
         dialog.setArguments(args);
 
         return dialog;
+    }
+
+    public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull QuickAction action) {
+    	if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+            CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
+            dialog.show(fragmentManager, CreateEditActionDialog.TAG);
+        }
     }
 
     private QuickActionRegistry quickActionRegistry;

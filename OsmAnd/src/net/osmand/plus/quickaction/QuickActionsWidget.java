@@ -19,6 +19,7 @@ import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.gridlayout.widget.GridLayout;
 import androidx.viewpager.widget.PagerAdapter;
@@ -239,29 +240,22 @@ public class QuickActionsWidget extends LinearLayout {
                                     : R.drawable.ic_action_icon_hide_dark);
                 }
 
-                view.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        if (selectionListener != null) selectionListener.onActionSelected(action);
+                view.setOnClickListener(v -> {
+                    if (selectionListener != null) {
+                        selectionListener.onActionSelected(action);
                     }
                 });
 //				if (action.isActionEditable()) {
-					view.setOnLongClickListener(new OnLongClickListener() {
-						@Override
-						public boolean onLongClick(View v) {
-							FragmentManager fm = ((AppCompatActivity) getContext()).getSupportFragmentManager();
-							if (action instanceof NewAction) {
-								fm.beginTransaction()
-									.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
-									.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
-							} else {
-								CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
-								dialog.show(fm, CreateEditActionDialog.TAG);
-							}
-							return true;
-						}
-					});
+                view.setOnLongClickListener(v -> {
+                    FragmentActivity activity = (AppCompatActivity) getContext();
+                    FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                    if (action instanceof NewAction) {
+                        QuickActionListFragment.showInstance(activity);
+                    } else {
+                        CreateEditActionDialog.showInstance(fragmentManager, action);
+                    }
+                    return true;
+                });
 //				}
                 if (!action.isActionEnable(application)) {
                     view.setEnabled(false);

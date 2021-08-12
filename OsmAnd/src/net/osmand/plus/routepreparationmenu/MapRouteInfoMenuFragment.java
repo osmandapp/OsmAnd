@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -402,19 +403,22 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		textViewExProgress.percent = 0;
 	}
 
-	public void show(MapActivity mapActivity) {
-		int slideInAnim = 0;
-		int slideOutAnim = 0;
-		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			slideInAnim = R.anim.slide_in_bottom;
-			slideOutAnim = R.anim.slide_out_bottom;
+	public void show(@NonNull MapActivity mapActivity) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			int slideInAnim = 0;
+			int slideOutAnim = 0;
+			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				slideInAnim = R.anim.slide_in_bottom;
+				slideOutAnim = R.anim.slide_out_bottom;
+			}
+
+			fragmentManager.beginTransaction()
+					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+					.add(R.id.routeMenuContainer, this, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
-		mapActivity.getSupportFragmentManager()
-				.beginTransaction()
-				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-				.add(R.id.routeMenuContainer, this, TAG)
-				.addToBackStack(TAG)
-				.commitAllowingStateLoss();
 	}
 
 	public void applyDayNightMode() {
@@ -470,40 +474,37 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		ctx.setupRouteCalculationProgressBar(mainView.findViewById(R.id.progress_bar));
 	}
 
-	public static boolean showInstance(final MapActivity mapActivity, int initialMenuState) {
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		int slideInAnim = 0;
-		int slideOutAnim = 0;
-		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			if (portrait) {
-				slideInAnim = R.anim.slide_in_bottom;
-				slideOutAnim = R.anim.slide_out_bottom;
-			} else {
-				boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
-				slideInAnim = isLayoutRtl ? R.anim.slide_in_right : R.anim.slide_in_left;
-				slideOutAnim = isLayoutRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
-			}
-		}
-
-		try {
+	public static boolean showInstance(@NonNull MapActivity mapActivity, int initialMenuState) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 			mapActivity.getContextMenu().hideMenues();
+
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+			int slideInAnim = 0;
+			int slideOutAnim = 0;
+			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				if (portrait) {
+					slideInAnim = R.anim.slide_in_bottom;
+					slideOutAnim = R.anim.slide_out_bottom;
+				} else {
+					boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
+					slideInAnim = isLayoutRtl ? R.anim.slide_in_right : R.anim.slide_in_left;
+					slideOutAnim = isLayoutRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
+				}
+			}
 
 			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
 			Bundle args = new Bundle();
-			fragment.setArguments(args);
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, initialMenuState);
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
+			fragment.setArguments(args);
+			fragmentManager.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	@Override

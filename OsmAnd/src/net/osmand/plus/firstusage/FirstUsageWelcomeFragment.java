@@ -7,15 +7,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
 public class FirstUsageWelcomeFragment extends Fragment {
+
 	public static final String TAG = "FirstUsageWelcomeFragment";
 	public static final String SHOW_OSMAND_WELCOME_SCREEN = "show_osmand_welcome_screen";
 	public static boolean SHOW = true;
@@ -56,7 +59,18 @@ public class FirstUsageWelcomeFragment extends Fragment {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			activity.getSupportFragmentManager().beginTransaction()
-					.remove(FirstUsageWelcomeFragment.this).commit();
+					.remove(FirstUsageWelcomeFragment.this)
+					.commitAllowingStateLoss();
 		}
+	}
+
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+			fragmentManager.beginTransaction()
+					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(), TAG)
+					.commitAllowingStateLoss();
+			return true;
+		}
+		return false;
 	}
 }

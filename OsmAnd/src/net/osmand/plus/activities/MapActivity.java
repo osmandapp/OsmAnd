@@ -737,6 +737,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		long tm = System.currentTimeMillis();
+		FragmentManager fragmentManager = getSupportFragmentManager();
 
 		if (app.getMapMarkersHelper().getPlanRouteContext().isFragmentVisible()) {
 			PlanRouteFragment.showInstance(this);
@@ -749,7 +750,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				} else {
 					if (CrashBottomSheetDialogFragment.shouldShow(settings, this)) {
 						SecondSplashScreenFragment.SHOW = false;
-						CrashBottomSheetDialogFragment.showInstance(getSupportFragmentManager());
+						CrashBottomSheetDialogFragment.showInstance(fragmentManager);
 					} else if (RateUsHelper.shouldShowRateDialog(app)) {
 						SecondSplashScreenFragment.SHOW = false;
 						RateUsHelper.showRateDialog(this);
@@ -851,9 +852,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (!showWelcomeScreen && !permissionDone && !app.getAppInitializer().isFirstTime()) {
 			if (!permissionAsked) {
 				if (app.isExternalStorageDirectoryReadOnly()
-						&& getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
+						&& fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
 					if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
-						DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+						DataStoragePlaceDialogFragment.showInstance(fragmentManager, true);
 					} else {
 						ActivityCompat.requestPermissions(this,
 								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -863,8 +864,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else {
 				if (permissionGranted) {
 					restartApp();
-				} else if (getSupportFragmentManager().findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
-					DataStoragePlaceDialogFragment.showInstance(getSupportFragmentManager(), true);
+				} else if (fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
+					DataStoragePlaceDialogFragment.showInstance(fragmentManager, true);
 				}
 				permissionAsked = false;
 				permissionGranted = false;
@@ -873,13 +874,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		enableDrawer();
 
-		if (showWelcomeScreen) {
+		if (showWelcomeScreen && FirstUsageWelcomeFragment.showInstance(fragmentManager)) {
 			SecondSplashScreenFragment.SHOW = false;
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
-							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
 		} else if (SendAnalyticsBottomSheetDialogFragment.shouldShowDialog(app)) {
-			SendAnalyticsBottomSheetDialogFragment.showInstance(app, getSupportFragmentManager(), null);
+			SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, null);
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 		if (isFirstScreenShowing() && (!settings.SHOW_OSMAND_WELCOME_SCREEN.get() || !showOsmAndWelcomeScreen)) {
@@ -892,13 +890,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				wizardFragment.closeWizard();
 			}
 		}
-		if (SecondSplashScreenFragment.SHOW) {
+		if (SecondSplashScreenFragment.SHOW && SecondSplashScreenFragment.showInstance(fragmentManager)) {
 			SecondSplashScreenFragment.SHOW = false;
 			SecondSplashScreenFragment.VISIBLE = true;
-			getSupportFragmentManager()
-					.beginTransaction()
-					.add(R.id.fragmentContainer, new SecondSplashScreenFragment(), SecondSplashScreenFragment.TAG)
-					.commitAllowingStateLoss();
 			mapView.setOnDrawMapListener(this);
 			splashScreenTimer = new Timer();
 			splashScreenTimer.schedule(new TimerTask() {
@@ -1027,10 +1021,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (SecondSplashScreenFragment.VISIBLE) {
 			SecondSplashScreenFragment.VISIBLE = false;
 			SecondSplashScreenFragment.SHOW = false;
-			Fragment fragment = getSupportFragmentManager().findFragmentByTag(SecondSplashScreenFragment.TAG);
-			if (fragment != null) {
-				getSupportFragmentManager().beginTransaction().remove(fragment).commitAllowingStateLoss();
-			}
+			removeFragment(SecondSplashScreenFragment.TAG);
 			applyScreenOrientation();
 		}
 	}
@@ -1799,28 +1790,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public FirstUsageWelcomeFragment getFirstUsageWelcomeFragment() {
-		FirstUsageWelcomeFragment welcomeFragment = (FirstUsageWelcomeFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWelcomeFragment.TAG);
-		if (welcomeFragment != null && !welcomeFragment.isDetached()) {
-			return welcomeFragment;
-		} else {
-			return null;
-		}
+		FirstUsageWelcomeFragment welcomeFragment = (FirstUsageWelcomeFragment) getSupportFragmentManager()
+				.findFragmentByTag(FirstUsageWelcomeFragment.TAG);
+		return welcomeFragment != null && !welcomeFragment.isDetached() ? welcomeFragment : null;
 	}
 
 	public FirstUsageWizardFragment getFirstUsageWizardFragment() {
-		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
-		if (wizardFragment != null && !wizardFragment.isDetached()) {
-			return wizardFragment;
-		} else {
-			return null;
-		}
+		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager()
+				.findFragmentByTag(FirstUsageWizardFragment.TAG);
+		return wizardFragment != null && !wizardFragment.isDetached() ? wizardFragment : null;
 	}
 
 	public boolean isFirstScreenShowing() {
-		FirstUsageWelcomeFragment welcomeFragment = (FirstUsageWelcomeFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWelcomeFragment.TAG);
-		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager().findFragmentByTag(FirstUsageWizardFragment.TAG);
-		return welcomeFragment != null && !welcomeFragment.isDetached()
-				|| wizardFragment != null && !wizardFragment.isDetached();
+		return getFirstUsageWelcomeFragment() != null || getFirstUsageWizardFragment() != null;
 	}
 
 	// DownloadEvents
@@ -1993,11 +1975,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (caller instanceof BaseSettingsFragment) {
 				fragment.setArguments(((BaseSettingsFragment) caller).buildArguments());
 			}
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, fragment.getClass().getName())
-					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
-					.commit();
-
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			String tag = fragment.getClass().getName();
+			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(tag) == null) {
+				fragmentManager.beginTransaction()
+						.replace(R.id.fragmentContainer, fragment, tag)
+						.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+						.commitAllowingStateLoss();
+			}
 			return true;
 		} catch (Exception e) {
 			LOG.error(e);
@@ -2316,10 +2301,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public TrackMenuFragment getTrackMenuFragment() {
 		return getFragment(TrackMenuFragment.TAG);
-	}
-
-	public RouteLineAppearanceFragment getRouteLineAppearanceFragment() {
-		return getFragment(RouteLineAppearanceFragment.TAG);
 	}
 
 	public void dismissTrackMenu() {

@@ -922,4 +922,29 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                 ctx.getString(R.string.quick_actions_delete), styledMessage,
                 R.string.shared_string_delete, usedOnMap);
     }
+
+    public static void showInstance(@NonNull FragmentActivity activity) {
+        showInstance(activity, false, false);
+    }
+
+    public static void showInstance(@NonNull FragmentActivity activity, boolean setFromDashboard, boolean animate) {
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+    	if (fragmentManager.findFragmentByTag(TAG) == null) {
+            int slideInAnim = 0;
+            int slideOutAnim = 0;
+            OsmandApplication app = ((OsmandApplication) activity.getApplication());
+            if (animate && !app.getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+                slideInAnim = R.anim.slide_in_bottom;
+                slideOutAnim = R.anim.slide_out_bottom;
+            }
+
+            QuickActionListFragment fragment = new QuickActionListFragment();
+            fragment.setFromDashboard(setFromDashboard);
+            fragmentManager.beginTransaction()
+                    .setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+                    .add(R.id.fragmentContainer, fragment, TAG)
+                    .addToBackStack(TAG)
+                    .commitAllowingStateLoss();
+    	}
+    }
 }

@@ -892,11 +892,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void addMainSearchFragment() {
-		mainSearchFragment = (QuickSearchMainListFragment) Fragment.instantiate(this.getContext(), QuickSearchMainListFragment.class.getName());
-		FragmentManager childFragMan = getChildFragmentManager();
-		FragmentTransaction childFragTrans = childFragMan.beginTransaction();
-		childFragTrans.replace(R.id.search_view, mainSearchFragment);
-		childFragTrans.commit();
+		mainSearchFragment = new QuickSearchMainListFragment();
+		FragmentManager childFragmentManager = getChildFragmentManager();
+		String tag = mainSearchFragment.getClass().getName();
+		if (childFragmentManager.findFragmentByTag(tag) == null) {
+			childFragmentManager.beginTransaction()
+					.replace(R.id.search_view, mainSearchFragment, tag)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	private void updateToolbarButton() {
@@ -2086,71 +2089,70 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 									   QuickSearchType searchType,
 									   QuickSearchTab showSearchTab,
 									   @Nullable LatLon latLon) {
-		try {
-
-			if (mapActivity.isActivityDestroyed()) {
-				return false;
-			}
-
-			mapActivity.getMyApplication().logEvent("search_open");
-
-			Bundle bundle = new Bundle();
-			if (object != null) {
-				bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
-				String objectLocalizedName = searchQuery;
-
-				if (object instanceof PoiCategory) {
-					PoiCategory c = (PoiCategory) object;
-					objectLocalizedName = c.getTranslation();
-
-					SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
-					SearchPhrase phrase = searchUICore.resetPhrase(objectLocalizedName + " ");
-					SearchResult sr = new SearchResult(phrase);
-					sr.localeName = objectLocalizedName;
-					sr.object = c;
-					sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
-					sr.priorityDistance = 0;
-					sr.objectType = ObjectType.POI_TYPE;
-					searchUICore.selectSearchResult(sr);
-
-					bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
-
-				} else if (object instanceof PoiUIFilter) {
-					PoiUIFilter filter = (PoiUIFilter) object;
-					objectLocalizedName = filter.getName();
-					SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
-					SearchPhrase phrase = searchUICore.resetPhrase();
-					SearchResult sr = new SearchResult(phrase);
-					sr.localeName = objectLocalizedName;
-					sr.object = filter;
-					sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
-					sr.priorityDistance = 0;
-					sr.objectType = ObjectType.POI_TYPE;
-					searchUICore.selectSearchResult(sr);
-
-					bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
-				}
-				searchQuery = objectLocalizedName.trim() + " ";
-
-			} else if (!Algorithms.isEmpty(searchQuery)) {
-				bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
-			}
-
-			bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
-			bundle.putString(QUICK_SEARCH_SHOW_TAB_KEY, showSearchTab.name());
-			bundle.putString(QUICK_SEARCH_TYPE_KEY, searchType.name());
-			if (latLon != null) {
-				bundle.putDouble(QUICK_SEARCH_LAT_KEY, latLon.getLatitude());
-				bundle.putDouble(QUICK_SEARCH_LON_KEY, latLon.getLongitude());
-			}
-			QuickSearchDialogFragment fragment = new QuickSearchDialogFragment();
-			fragment.setArguments(bundle);
-			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
-			return true;
-
-		} catch (RuntimeException e) {
+		if (mapActivity.isActivityDestroyed()) {
 			return false;
 		}
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (fragmentManager.isStateSaved() || fragmentManager.findFragmentByTag(TAG) != null) {
+			return false;
+		}
+
+		mapActivity.getMyApplication().logEvent("search_open");
+
+		Bundle bundle = new Bundle();
+		if (object != null) {
+			bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
+			String objectLocalizedName = searchQuery;
+
+			if (object instanceof PoiCategory) {
+				PoiCategory c = (PoiCategory) object;
+				objectLocalizedName = c.getTranslation();
+
+				SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
+				SearchPhrase phrase = searchUICore.resetPhrase(objectLocalizedName + " ");
+				SearchResult sr = new SearchResult(phrase);
+				sr.localeName = objectLocalizedName;
+				sr.object = c;
+				sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+				sr.priorityDistance = 0;
+				sr.objectType = ObjectType.POI_TYPE;
+				searchUICore.selectSearchResult(sr);
+
+				bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
+
+			} else if (object instanceof PoiUIFilter) {
+				PoiUIFilter filter = (PoiUIFilter) object;
+				objectLocalizedName = filter.getName();
+				SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
+				SearchPhrase phrase = searchUICore.resetPhrase();
+				SearchResult sr = new SearchResult(phrase);
+				sr.localeName = objectLocalizedName;
+				sr.object = filter;
+				sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+				sr.priorityDistance = 0;
+				sr.objectType = ObjectType.POI_TYPE;
+				searchUICore.selectSearchResult(sr);
+
+				bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
+			}
+			searchQuery = objectLocalizedName.trim() + " ";
+
+		} else if (!Algorithms.isEmpty(searchQuery)) {
+			bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
+		}
+
+		bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
+		bundle.putString(QUICK_SEARCH_SHOW_TAB_KEY, showSearchTab.name());
+		bundle.putString(QUICK_SEARCH_TYPE_KEY, searchType.name());
+		if (latLon != null) {
+			bundle.putDouble(QUICK_SEARCH_LAT_KEY, latLon.getLatitude());
+			bundle.putDouble(QUICK_SEARCH_LON_KEY, latLon.getLongitude());
+		}
+
+		QuickSearchDialogFragment fragment = new QuickSearchDialogFragment();
+		fragment.setArguments(bundle);
+		fragment.show(mapActivity.getSupportFragmentManager(), TAG);
+		return true;
 	}
 
 	private MapActivity getMapActivity() {

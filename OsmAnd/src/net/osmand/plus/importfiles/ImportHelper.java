@@ -677,17 +677,8 @@ public class ImportHelper {
 			if (forceImportGpx || !Algorithms.isEmpty(gpxFile.tracks)) {
 				handleResult(gpxFile, fileName, fileSize, save, useImportDir, false);
 			} else {
-				ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
-				fragment.setUsedOnMap(true);
-				fragment.setImportHelper(this);
-				fragment.setGpxFile(gpxFile);
-				fragment.setFileName(fileName);
-				fragment.setFileSize(fileSize);
-				fragment.setSave(save);
-				fragment.setUseImportDir(useImportDir);
-				activity.getSupportFragmentManager().beginTransaction()
-						.add(fragment, ImportGpxBottomSheetDialogFragment.TAG)
-						.commitAllowingStateLoss();
+				ImportGpxBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(),
+						this, gpxFile, fileName, fileSize, save, useImportDir);
 			}
 		}
 	}

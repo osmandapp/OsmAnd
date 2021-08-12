@@ -1994,7 +1994,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			FollowTrackFragment trackOptionsFragment = new FollowTrackFragment();
-			FollowTrackFragment.showInstance(mapActivity, trackOptionsFragment);
+			FollowTrackFragment.showInstance(mapActivity.getSupportFragmentManager(), trackOptionsFragment);
 		}
 	}
 

@@ -483,16 +483,7 @@ public class MapWidgetRegistry {
 
 					@Override
 					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-						int slideInAnim = R.anim.slide_in_bottom;
-						int slideOutAnim = R.anim.slide_out_bottom;
-
-						QuickActionListFragment fragment = new QuickActionListFragment();
-						fragment.setFromDashboard(true);
-						mapActivity.getSupportFragmentManager().beginTransaction()
-								.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-								.add(R.id.fragmentContainer, fragment, QuickActionListFragment.TAG)
-								.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
-
+						QuickActionListFragment.showInstance(mapActivity, true, true);
 						return true;
 					}
 

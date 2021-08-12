@@ -11,6 +11,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -161,24 +162,19 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		return "";
 	}
 
-	public static void showInstance(final MapActivity mapActivity) {
+	public static void showInstance(@NonNull MapActivity mapActivity, boolean skipDialog) {
 		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 		if (editor != null) {
-			WptPtEditorFragment fragment = new WptPtEditorFragment();
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commit();
-		}
-	}
-
-	public static void showInstance(final MapActivity mapActivity, boolean skipDialog) {
-		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
-		if (editor != null) {
-			WptPtEditorFragment fragment = new WptPtEditorFragment();
-			fragment.skipDialog = skipDialog;
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commit();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			String tag = editor.getFragmentTag();
+			if (fragmentManager.findFragmentByTag(tag) == null) {
+				WptPtEditorFragment fragment = new WptPtEditorFragment();
+				fragment.skipDialog = skipDialog;
+				fragmentManager.beginTransaction()
+						.add(R.id.fragmentContainer, fragment, tag)
+						.addToBackStack(null)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 

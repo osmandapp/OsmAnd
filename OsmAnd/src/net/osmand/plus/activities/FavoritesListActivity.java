@@ -6,6 +6,8 @@ import net.osmand.plus.R;
 
 import android.os.Bundle;
 
+import androidx.fragment.app.FragmentManager;
+
 
 public class FavoritesListActivity extends OsmandActionBarActivity {
 
@@ -15,10 +17,15 @@ public class FavoritesListActivity extends OsmandActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_fragment_layout);
 		if (savedInstanceState == null) {
-			// During initial setup, plug in the details fragment.
-			FavoritesListFragment details = new FavoritesListFragment();
-			details.setArguments(getIntent().getExtras());
-			getSupportFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			if (fragmentManager.findFragmentByTag(FavoritesListFragment.TAG) == null) {
+				// During initial setup, plug in the details fragment.
+				FavoritesListFragment details = new FavoritesListFragment();
+				details.setArguments(getIntent().getExtras());
+				fragmentManager.beginTransaction()
+						.add(android.R.id.content, details, FavoritesListFragment.TAG)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 

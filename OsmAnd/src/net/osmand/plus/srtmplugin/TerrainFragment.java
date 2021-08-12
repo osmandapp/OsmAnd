@@ -21,6 +21,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.google.android.material.slider.RangeSlider;
@@ -513,5 +514,13 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		ViewGroup.LayoutParams params = bottomEmptySpace.getLayoutParams();
 		params.height = h;
 		bottomEmptySpace.setLayoutParams(params);
+	}
+	
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.content, new TerrainFragment(), TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

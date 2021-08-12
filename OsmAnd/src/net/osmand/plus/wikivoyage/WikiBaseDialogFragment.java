@@ -53,10 +53,12 @@ public class WikiBaseDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	@Override
-	public void show(FragmentManager manager, String tag) {
-		FragmentTransaction ft = manager.beginTransaction();
-		ft.addToBackStack(tag);
-		show(ft, tag);
+	public void show(FragmentManager fragmentManager, String tag) {
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(tag) == null) {
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction()
+					.addToBackStack(tag);
+			show(fragmentTransaction, tag);
+		}
 	}
 
 	@Override

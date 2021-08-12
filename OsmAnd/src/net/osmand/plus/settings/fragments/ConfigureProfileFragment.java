@@ -419,52 +419,35 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager == null) {
+			return super.onPreferenceClick(preference);
+		}
 		String prefId = preference.getKey();
+		ApplicationMode selectedMode = getSelectedAppMode();
 
 		if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				try {
-					FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-					ApplicationMode selectedMode = getSelectedAppMode();
-					if (!ApplicationMode.values(app).contains(selectedMode)) {
-						ApplicationMode.changeProfileAvailability(selectedMode, true, app);
-					}
-					settings.setApplicationMode(selectedMode);
-					fragmentManager.beginTransaction()
-							.remove(this)
-							.addToBackStack(TAG)
-							.commitAllowingStateLoss();
-				} catch (Exception e) {
-					LOG.error(e);
-				}
+			if (!ApplicationMode.values(app).contains(selectedMode)) {
+				ApplicationMode.changeProfileAvailability(selectedMode, true, app);
 			}
+			settings.setApplicationMode(selectedMode);
+
+			fragmentManager.beginTransaction()
+					.remove(this)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
-			}
+			SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, selectedMode);
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
-			}
+			ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, selectedMode);
 		} else if (EXPORT_PROFILE.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ExportSettingsFragment.showInstance(fragmentManager, getSelectedAppMode(), false);
-			}
+			ExportSettingsFragment.showInstance(fragmentManager, selectedMode, false);
 		} else if (DELETE_PROFILE.equals(prefId)) {
 			onDeleteProfileClick();
 		} else if (UI_CUSTOMIZATION.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ConfigureMenuRootFragment.showInstance(
-						fragmentManager,
-						this,
-						getSelectedAppMode());
-			}
+			ConfigureMenuRootFragment.showInstance(fragmentManager, this, selectedMode);
 		}
+
 		return super.onPreferenceClick(preference);
 	}
 
@@ -510,4 +493,5 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 		return new File(backupDir, fileName);
 	}
+
 }

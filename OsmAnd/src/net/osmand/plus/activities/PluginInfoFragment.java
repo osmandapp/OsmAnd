@@ -129,7 +129,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 					if (settingsScreenType != null) {
 						Bundle args = new Bundle();
 						args.putBoolean(PLUGIN_INFO, true);
-						BaseSettingsFragment.showInstance(activity, settingsScreenType, null, args, null);
+						BaseSettingsFragment.showInstance(activity, settingsScreenType, args, null);
 					}
 				}
 			}
@@ -257,7 +257,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull OsmandPlugin plugin) {
-		try {
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 			Bundle args = new Bundle();
 			args.putString(EXTRA_PLUGIN_ID, plugin.getId());
 
@@ -268,8 +268,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			return false;
 		}
+		return false;
 	}
 }

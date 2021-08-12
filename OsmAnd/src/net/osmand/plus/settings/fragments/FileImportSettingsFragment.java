@@ -118,19 +118,23 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 					updateUi(R.string.shared_string_importing, R.string.importing_from);
 				}
 				settingsHelper.importSettings(file, items, "", 1, getImportListener());
-			} else if (fm != null && !isStateSaved()) {
+			} else if (fm != null) {
 				FileImportDuplicatesFragment.showInstance(fm, duplicates, items, file, this);
 			}
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull List<SettingsItem> settingsItems, @NonNull File file) {
-		FileImportSettingsFragment fragment = new FileImportSettingsFragment();
-		fragment.setSettingsItems(settingsItems);
-		fragment.setFile(file);
-		fm.beginTransaction().
-				replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull List<SettingsItem> settingsItems,
+	                                @NonNull File file) {
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			FileImportSettingsFragment fragment = new FileImportSettingsFragment();
+			fragment.setSettingsItems(settingsItems);
+			fragment.setFile(file);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

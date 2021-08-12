@@ -1083,18 +1083,15 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		ShareDialog.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, ContextMenuFragment fragment) {
-		try {
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
-					.replace(R.id.routeMenuContainer, fragment, fragment.getFragmentTag())
-					.addToBackStack(fragment.getFragmentTag())
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, ContextMenuFragment fragment) {
+		String tag = fragment.getFragmentTag();
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(tag) == null) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.routeMenuContainer, fragment, tag)
+					.addToBackStack(tag)
 					.commitAllowingStateLoss();
-
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

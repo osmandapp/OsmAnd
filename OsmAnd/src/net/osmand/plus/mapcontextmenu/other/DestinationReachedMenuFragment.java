@@ -188,18 +188,22 @@ public class DestinationReachedMenuFragment extends Fragment {
 		return exists;
 	}
 
-	public static void showInstance(DestinationReachedMenu menu) {
-		int slideInAnim = menu.getSlideInAnimation();
-		int slideOutAnim = menu.getSlideOutAnimation();
-
-		DestinationReachedMenuFragment fragment = new DestinationReachedMenuFragment();
-		fragment.menu = menu;
+	public static void showInstance(@NonNull DestinationReachedMenu menu) {
 		MapActivity mapActivity = menu.getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			if (fragmentManager.findFragmentByTag(TAG) == null) {
+				int slideInAnim = menu.getSlideInAnimation();
+				int slideOutAnim = menu.getSlideOutAnimation();
+
+				DestinationReachedMenuFragment fragment = new DestinationReachedMenuFragment();
+				fragment.menu = menu;
+				fragmentManager.beginTransaction()
+						.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+						.add(R.id.fragmentContainer, fragment, TAG)
+						.addToBackStack(TAG)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 

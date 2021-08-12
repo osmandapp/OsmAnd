@@ -499,11 +499,11 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean signUp) {
-		if (!fragmentManager.isStateSaved()) {
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 			AuthorizeFragment fragment = new AuthorizeFragment();
 			fragment.setDialogType(signUp ? LoginDialogType.SIGN_UP : LoginDialogType.SIGN_IN);
-			fragmentManager.beginTransaction().
-					replace(R.id.fragmentContainer, fragment, TAG)
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 		}

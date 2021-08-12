@@ -38,6 +38,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import static net.osmand.util.Algorithms.objectEquals;
 
@@ -477,20 +478,19 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull PreviewRouteLineInfo drawInfo,
 	                                   @NonNull Fragment target) {
-		try {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 			RouteLineAppearanceFragment fragment = new RouteLineAppearanceFragment();
 			fragment.setTargetFragment(target, 0);
 			fragment.previewRouteLineInfo = new PreviewRouteLineInfo(drawInfo);
 
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
+			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	public void onMapThemeUpdated(@NonNull DayNightMode mapTheme) {

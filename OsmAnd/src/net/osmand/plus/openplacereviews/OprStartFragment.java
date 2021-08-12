@@ -133,16 +133,13 @@ public class OprStartFragment extends BaseOsmAndFragment implements OprAuthoriza
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm) {
-		try {
-			if (fm.findFragmentByTag(OprStartFragment.TAG) == null) {
-				OprStartFragment fragment = new OprStartFragment();
-				fm.beginTransaction()
-						.add(R.id.fragmentContainer, fragment, OprStartFragment.TAG)
-						.addToBackStack(null).commit();
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (fragmentManager.findFragmentByTag(OprStartFragment.TAG) == null) {
+			OprStartFragment fragment = new OprStartFragment();
+			fragmentManager.beginTransaction()
+					.add(R.id.fragmentContainer, fragment, OprStartFragment.TAG)
+					.addToBackStack(null)
+					.commitAllowingStateLoss();
 		}
 	}
 }

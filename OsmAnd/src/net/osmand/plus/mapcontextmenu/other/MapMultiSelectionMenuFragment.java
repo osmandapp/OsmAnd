@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
@@ -210,30 +211,31 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 				- activity.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 	}
 
-	public static void showInstance(final MapActivity mapActivity) {
-
+	public static void showInstance(@NonNull MapActivity mapActivity) {
 		if (mapActivity.isActivityDestroyed()) {
 			return;
 		}
-		if (mapActivity.getContextMenu().isVisible()) {
-			mapActivity.getContextMenu().hide();
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			if (mapActivity.getContextMenu().isVisible()) {
+				mapActivity.getContextMenu().hide();
+			}
+
+			MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
+			int slideInAnim = 0;
+			int slideOutAnim = 0;
+			if (menu != null && !mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				slideInAnim = menu.getSlideInAnimation();
+				slideOutAnim = menu.getSlideOutAnimation();
+			}
+
+			MapMultiSelectionMenuFragment fragment = new MapMultiSelectionMenuFragment();
+			fragmentManager.beginTransaction()
+					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+					.add(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
-
-		MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
-
-		int slideInAnim = 0;
-		int slideOutAnim = 0;
-
-		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			slideInAnim = menu.getSlideInAnimation();
-			slideOutAnim = menu.getSlideOutAnimation();
-		}
-
-		MapMultiSelectionMenuFragment fragment = new MapMultiSelectionMenuFragment();
-		menu.getMapActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
 	private MultiSelectionArrayAdapter createAdapter() {

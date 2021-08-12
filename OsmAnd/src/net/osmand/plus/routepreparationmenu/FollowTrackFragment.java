@@ -594,14 +594,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	private void close() {
-		try {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				fragmentManager.beginTransaction().remove(this).commitAllowingStateLoss();
-			}
-		} catch (Exception e) {
-			log.error(e);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
+					.remove(this)
+					.commitAllowingStateLoss();
 		}
 	}
 

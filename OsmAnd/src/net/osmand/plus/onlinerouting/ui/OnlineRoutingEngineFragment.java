@@ -691,14 +691,15 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	public static void showInstance(@NonNull FragmentActivity activity,
 									@NonNull ApplicationMode appMode,
 									@Nullable String editedEngineKey) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved() && fm.findFragmentByTag(OnlineRoutingEngineFragment.TAG) == null) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (fragmentManager.findFragmentByTag(OnlineRoutingEngineFragment.TAG) == null) {
 			OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();
 			fragment.appMode = appMode;
 			fragment.editedEngineKey = editedEngineKey;
-			fm.beginTransaction()
+			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 

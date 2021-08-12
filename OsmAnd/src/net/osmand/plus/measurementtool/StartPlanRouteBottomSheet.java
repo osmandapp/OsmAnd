@@ -228,7 +228,8 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 		if (mapActivity != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.hide(this).commit();
+					.hide(this)
+					.commitAllowingStateLoss();
 		}
 	}
 
@@ -237,7 +238,8 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 		if (mapActivity != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.show(this).commit();
+					.show(this)
+					.commitAllowingStateLoss();
 		}
 	}
 

@@ -910,24 +910,19 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		return WaypointsFragment.showInstance(fragmentManager, false);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, boolean useRouteInfoMenu) {
-		try {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, boolean useRouteInfoMenu) {
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
 			WaypointsFragment fragment = new WaypointsFragment();
-
 			Bundle args = new Bundle();
 			args.putBoolean(USE_ROUTE_INFO_MENU_KEY, useRouteInfoMenu);
 			fragment.setArguments(args);
-
 			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	private void onDismiss() {
@@ -944,13 +939,12 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private void dismiss() {
-		try {
-			MapActivity mapActivity = (MapActivity) getActivity();
-			if (mapActivity != null) {
-				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
-			}
-		} catch (Exception e) {
-			//
+		MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity != null) {
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
+					.remove(this)
+					.commitAllowingStateLoss();
 		}
 	}
 

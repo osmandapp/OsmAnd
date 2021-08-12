@@ -177,10 +177,11 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
+		String tag = SettingsScreenType.BACKUP_AUTHORIZATION.fragmentName;
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(tag) == null) {
 			Fragment fragment = new BackupAuthorizationFragment();
 			fragmentManager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, SettingsScreenType.BACKUP_AUTHORIZATION.fragmentName)
+					.replace(R.id.fragmentContainer, fragment, tag)
 					.addToBackStack(SettingsScreenType.BACKUP_AUTHORIZATION.name())
 					.commit();
 		}

@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -25,6 +26,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class SecondSplashScreenFragment extends BaseOsmAndFragment {
+
 	private final static int LOGO_ID = 1001;
 	private final static int TEXT_ID = 1002;
 	private final static int OSM_TEXT_ID = 1003;
@@ -195,5 +197,17 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		return systemDefaultNightMode ?
 				R.color.status_bar_color_dark :
 				R.color.status_bar_transparent_light;
+	}
+
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
+		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+			fragmentManager
+					.beginTransaction()
+					.add(R.id.fragmentContainer, new SecondSplashScreenFragment(), SecondSplashScreenFragment.TAG)
+					.commitAllowingStateLoss();
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

@@ -329,26 +329,24 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		return (menuState & (MenuState.HEADER_ONLY | MenuState.HALF_SCREEN)) != 0;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment,
-									@NonNull List<List<WptPt>> pointsList, @Nullable ApplicationMode appMode) {
-		try {
-			if (!fm.isStateSaved()) {
-				GpxApproximationFragment fragment = new GpxApproximationFragment();
-				fragment.setRetainInstance(true);
-				fragment.setTargetFragment(targetFragment, REQUEST_CODE);
-				List<LocationsHolder> locationsHolders = new ArrayList<>();
-				for (List<WptPt> points : pointsList) {
-					locationsHolders.add(new LocationsHolder(points));
-				}
-				fragment.setLocationsHolders(locationsHolders);
-				fragment.setSnapToRoadAppMode(appMode);
-				fm.beginTransaction()
-						.replace(R.id.fragmentContainer, fragment, TAG)
-						.addToBackStack(TAG)
-						.commitAllowingStateLoss();
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @Nullable Fragment targetFragment,
+									@NonNull List<List<WptPt>> pointsList,
+	                                @Nullable ApplicationMode appMode) {
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			GpxApproximationFragment fragment = new GpxApproximationFragment();
+			fragment.setRetainInstance(true);
+			fragment.setTargetFragment(targetFragment, REQUEST_CODE);
+			List<LocationsHolder> locationsHolders = new ArrayList<>();
+			for (List<WptPt> points : pointsList) {
+				locationsHolders.add(new LocationsHolder(points));
 			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+			fragment.setLocationsHolders(locationsHolders);
+			fragment.setSnapToRoadAppMode(appMode);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 

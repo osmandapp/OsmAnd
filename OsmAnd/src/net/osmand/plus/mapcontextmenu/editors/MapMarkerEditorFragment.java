@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.PointDescription;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -132,14 +133,18 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 		return MapMarker.getColorId(editor.getMarker().colorIndex);
 	}
 
-	public static void showInstance(MapActivity mapActivity) {
+	public static void showInstance(@NonNull MapActivity mapActivity) {
 		MapMarkerEditor editor = mapActivity.getContextMenu().getMapMarkerEditor();
 		if (editor != null) {
-			MapMarkerEditorFragment fragment = new MapMarkerEditorFragment();
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null)
-					.commitAllowingStateLoss();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			String tag = editor.getFragmentTag();
+			if (fragmentManager.findFragmentByTag(tag) == null) {
+				MapMarkerEditorFragment fragment = new MapMarkerEditorFragment();
+				fragmentManager.beginTransaction()
+						.add(R.id.fragmentContainer, fragment, tag)
+						.addToBackStack(null)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 }

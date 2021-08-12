@@ -105,18 +105,18 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	public static ConfigureMenuItemsFragment showInstance(
-			@NonNull FragmentManager fm,
-			@NonNull ApplicationMode appMode,
-			@NonNull ScreenType type) {
-		ConfigureMenuItemsFragment fragment = new ConfigureMenuItemsFragment();
-		fragment.setScreenType(type);
-		fragment.setAppMode(appMode);
-		fm.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(CONFIGURE_MENU_ITEMS_TAG)
-				.commitAllowingStateLoss();
-		return fragment;
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull ApplicationMode appMode,
+	                                @NonNull ScreenType type) {
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			ConfigureMenuItemsFragment fragment = new ConfigureMenuItemsFragment();
+			fragment.setScreenType(type);
+			fragment.setAppMode(appMode);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(CONFIGURE_MENU_ITEMS_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	public void setAppMode(ApplicationMode appMode) {

@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandPlugin;
@@ -325,5 +326,13 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
     private void changeButtonState(Button button, float alpha, boolean enabled) {
         button.setAlpha(alpha);
         button.setEnabled(enabled);
+    }
+
+    public static void showInstance(@NonNull FragmentManager fragmentManager) {
+        if (fragmentManager.findFragmentByTag(TAG) == null) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content, new MapillaryFiltersFragment(), TAG)
+                    .commitAllowingStateLoss();
+        }
     }
 }

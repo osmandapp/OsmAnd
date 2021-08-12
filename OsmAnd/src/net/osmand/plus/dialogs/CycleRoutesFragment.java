@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -153,5 +154,13 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 
 	private CommonPreference<Boolean> getPreference() {
 		return settings.getCustomRenderBooleanProperty(SHOW_CYCLE_ROUTES_ATTR);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.content, new CycleRoutesFragment(), TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

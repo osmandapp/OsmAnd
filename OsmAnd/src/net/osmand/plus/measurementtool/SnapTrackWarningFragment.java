@@ -175,18 +175,14 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	public static void showInstance(FragmentManager fm, Fragment targetFragment) {
-		try {
-			if (!fm.isStateSaved()) {
-				SnapTrackWarningFragment fragment = new SnapTrackWarningFragment();
-				fragment.setTargetFragment(targetFragment, REQUEST_CODE);
-				fm.beginTransaction()
-						.replace(R.id.fragmentContainer, fragment, TAG)
-						.addToBackStack(TAG)
-						.commitAllowingStateLoss();
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {
+		if (fragmentManager.findFragmentByTag(TAG) == null) {
+			SnapTrackWarningFragment fragment = new SnapTrackWarningFragment();
+			fragment.setTargetFragment(targetFragment, REQUEST_CODE);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 
