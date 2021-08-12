@@ -1106,7 +1106,7 @@
     <string name="email">Эл. почта</string>
     <string name="day_night_info">Восход/закат</string>
     <string name="osmand_short_description_80_chars">Мобильные карты и навигация по всему миру для локальных и онлайн-карт OSM</string>
-    <string name="osmand_long_description_1000_chars">"OsmAnd (Open Street Maps Automated Navigation Directions)
+    <string name="osmand_long_description_1000_chars">OsmAnd (Open Street Maps Automated Navigation Directions)
 \n
 \nOsmAnd — это навигационное приложение с открытым исходным кодом и доступом к широкому спектру глобальных данных OSM. Все картографические данные (векторные или тайловые карты) могут быть сохранены на карте памяти телефона для использования без интернета. Также предлагаются функции автономной и онлайн-маршрутизации, включая пошаговое голосовое ведение по маршруту.
 \n
@@ -1114,9 +1114,9 @@
 \n • работа с векторными и растровыми картами без доступа в интернет (для этого нужно предварительно сохранить карты на карту памяти устройства);
 \n • доступность компактных векторных карт для всех стран мира;
 \n • загрузка векторных и растровых карт для страны или области из приложения;
-\n •  отображение дополнительной информации (слоев) на карте, такой как GPX или навигационные маршруты, объекты (POI), избранные местоположения, линии высот, остановки общественного транспорта; наложение дополнительных карт с настраиваемой прозрачностью;
+\n • отображение дополнительной информации (слоев) на карте, такой как GPX или навигационные маршруты, объекты (POI), избранные местоположения, линии высот, остановки общественного транспорта; наложение дополнительных карт с настраиваемой прозрачностью;
 \n • поиск адресов и объектов (POI) без доступа в интернет;
-\n •  построение маршрутов на небольшие расстояния без доступа в интернет (экспериментальная функция);
+\n • построение маршрутов на небольшие расстояния без доступа в интернет (экспериментальная функция);
 \n • режимы автомобиля, велосипеда и пешехода с возможностью:
 \n — автоматического переключения на дневной/ночной режим отрисовки карты;
 \n — изменения масштабы карты в зависимости от скорости;
@@ -1127,7 +1127,7 @@
 \n — ограниченное число загрузок карт;
 \n — нет возможности просматривать описание достопримечательностей из Википедии без интернета.
 \n
-\n OsmAnd продолжает активно развиваться. Но так как проект финансируется только взносами пользователей, то дальнейшее развитие проекта и появление новых функциональных возможностей зависит от наличия этого финансирования. Поэтому если вам нравится приложение, подумайте о покупке OsmAnd+. Также на сайте osmand.net вы можете профинансировать конкретную функциональную возможность или внести общий финансовый вклад в развитие проекта."</string>
+\n OsmAnd продолжает активно развиваться. Но так как проект финансируется только взносами пользователей, то дальнейшее развитие проекта и появление новых функциональных возможностей зависит от наличия этого финансирования. Поэтому если вам нравится приложение, подумайте о покупке OsmAnd+. Также на сайте osmand.net вы можете профинансировать конкретную функциональную возможность или внести общий финансовый вклад в развитие проекта.</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd — это навигационное приложение для путешествий с открытым исходным кодом</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
@@ -2872,7 +2872,7 @@
     <string name="use_osm_live_public_transport_description">Включить общественный транспорт с учетом автообновлений OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Общественный транспорт OsmAnd Live</string>
     <string name="transfers_size">пересадки: %1$d</string>
-    <string name="rendering_attr_surface_unpaved_name">Грунтовая</string>
+    <string name="rendering_attr_surface_unpaved_name">Грунтовое</string>
     <string name="rendering_attr_surface_sand_name">Песок</string>
     <string name="rendering_attr_surface_grass_name">Трава</string>
     <string name="rendering_attr_surface_ground_name">Земля</string>
@@ -2882,18 +2882,18 @@
     <string name="rendering_attr_surface_salt_name">Соль</string>
     <string name="rendering_attr_surface_snow_name">Снег</string>
     <string name="rendering_attr_surface_asphalt_name">Асфальт</string>
-    <string name="rendering_attr_surface_paved_name">Твердая</string>
+    <string name="rendering_attr_surface_paved_name">Твёрдое</string>
     <string name="rendering_attr_surface_concrete_name">Бетон</string>
     <string name="rendering_attr_surface_sett_name">Брусчатка</string>
     <string name="rendering_attr_surface_cobblestone_name">Булыжник</string>
-    <string name="rendering_attr_surface_paving_stones_name">Брусчатка</string>
+    <string name="rendering_attr_surface_paving_stones_name">Тротуарная плитка</string>
     <string name="rendering_attr_surface_pebblestone_name">Галька</string>
     <string name="rendering_attr_surface_stone_name">Камень</string>
     <string name="rendering_attr_surface_metal_name">Металл</string>
     <string name="rendering_attr_surface_wood_name">Дерево</string>
     <string name="rendering_attr_surface_gravel_name">Гравий</string>
     <string name="rendering_attr_surface_fine_gravel_name">Мелкий гравий</string>
-    <string name="rendering_attr_surface_compacted_name">Утрамбованная</string>
+    <string name="rendering_attr_surface_compacted_name">Утрамбованное</string>
     <string name="rendering_attr_smoothness_excellent_name">Отличная</string>
     <string name="rendering_attr_smoothness_good_name">Хорошая</string>
     <string name="rendering_attr_smoothness_intermediate_name">Средняя</string>
@@ -2919,7 +2919,7 @@
     <string name="add_start_and_end_points">Добавить пункты отправления и назначения</string>
     <string name="route_add_start_point">Добавить точку отправления</string>
     <string name="route_descr_select_start_point">Выберите точку отправления</string>
-    <string name="rendering_attr_surface_grass_paver_name">Газонная решетка</string>
+    <string name="rendering_attr_surface_grass_paver_name">Газонная решётка</string>
     <string name="rendering_attr_highway_class_state_road_name">Государственная дорога</string>
     <string name="shared_string_walk">Пешком</string>
     <string name="save_poi_value_exceed_length">Сделайте длину тега «%s» менее 255 символов.</string>
@@ -4267,7 +4267,7 @@
     <string name="backup_version_history_removed">Вся история версий удалена.</string>
     <string name="backup_data_removed">Все данные удалены.</string>
     <string name="shared_string_progress">Прогресс</string>
-    <string name="backup_do_not_have_any">У вас еще нет облачных резервных копий</string>
+    <string name="backup_do_not_have_any">У вас еще нет облачных резервных копий.</string>
     <string name="backup_dont_have_any_descr">Настройте автоматическое резервное копирование, чтобы не беспокоиться о потере данных.</string>
     <string name="backup_setup">Настроить резервное копирование</string>
     <string name="promo_subscription">Промо-подписка</string>
