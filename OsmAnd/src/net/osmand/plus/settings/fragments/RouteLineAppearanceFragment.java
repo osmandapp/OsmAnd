@@ -48,10 +48,13 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	public static final String TAG = RouteLineAppearanceFragment.class.getName();
 
+	private static final String APP_MODE_KEY = "app_mode";
 	private static final String INIT_MAP_THEME = "init_map_theme";
 	private static final String SELECTED_MAP_THEME = "selected_map_theme";
 
 	private PreviewRouteLineInfo previewRouteLineInfo;
+
+	private ApplicationMode appMode;
 
 	private int toolbarHeightPx;
 	private DayNightMode initMapTheme;
@@ -113,6 +116,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setupAppMode(savedInstanceState);
 		toolbarHeightPx = getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
 		if (savedInstanceState != null) {
@@ -121,7 +125,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 			selectedMapTheme = DayNightMode.valueOf(savedInstanceState.getString(SELECTED_MAP_THEME));
 		} else {
 			previewRouteLineInfo = createPreviewRouteLineInfo();
-			initMapTheme = requireSettings().DAYNIGHT_MODE.get();
+			initMapTheme = requireSettings().DAYNIGHT_MODE.getModeValue(appMode);
 			selectedMapTheme = initMapTheme;
 		}
 
@@ -132,19 +136,27 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		});
 	}
 
+	private void setupAppMode(@Nullable Bundle savedInstanceState) {
+		if (appMode == null && savedInstanceState != null) {
+			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
+		}
+		if (appMode == null) {
+			appMode =  requireSettings().getApplicationMode();
+		}
+	}
+
 	private PreviewRouteLineInfo createPreviewRouteLineInfo() {
 		OsmandSettings settings = requireSettings();
 
-		int colorDay = settings.CUSTOM_ROUTE_COLOR_DAY.get();
-		int colorNight = settings.CUSTOM_ROUTE_COLOR_NIGHT.get();
-		ColoringType coloringType = settings.ROUTE_COLORING_TYPE.get();
-		String routeInfoAttribute = settings.ROUTE_INFO_ATTRIBUTE.get();
-		String widthKey = settings.ROUTE_LINE_WIDTH.get();
+		int colorDay = settings.CUSTOM_ROUTE_COLOR_DAY.getModeValue(appMode);
+		int colorNight = settings.CUSTOM_ROUTE_COLOR_NIGHT.getModeValue(appMode);
+		ColoringType coloringType = settings.ROUTE_COLORING_TYPE.getModeValue(appMode);
+		String routeInfoAttribute = settings.ROUTE_INFO_ATTRIBUTE.getModeValue(appMode);
+		String widthKey = settings.ROUTE_LINE_WIDTH.getModeValue(appMode);
 
 		PreviewRouteLineInfo previewRouteLineInfo =  new PreviewRouteLineInfo(colorDay, colorNight,
 				coloringType, routeInfoAttribute, widthKey);
 
-		ApplicationMode appMode = settings.getApplicationMode();
 		previewRouteLineInfo.setIconId(appMode.getNavigationIcon().getIconId());
 		previewRouteLineInfo.setIconColor(appMode.getProfileColor(isNightMode()));
 
@@ -298,11 +310,11 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private void saveRouteLineAppearance() {
 		if (getMyApplication() != null) {
 			OsmandSettings settings = getMyApplication().getSettings();
-			settings.CUSTOM_ROUTE_COLOR_DAY.set(previewRouteLineInfo.getCustomColor(false));
-			settings.CUSTOM_ROUTE_COLOR_NIGHT.set(previewRouteLineInfo.getCustomColor(true));
-			settings.ROUTE_COLORING_TYPE.set(previewRouteLineInfo.getRouteColoringType());
-			settings.ROUTE_INFO_ATTRIBUTE.set(previewRouteLineInfo.getRouteInfoAttribute());
-			settings.ROUTE_LINE_WIDTH.set(previewRouteLineInfo.getWidth());
+			settings.CUSTOM_ROUTE_COLOR_DAY.setModeValue(appMode, previewRouteLineInfo.getCustomColor(false));
+			settings.CUSTOM_ROUTE_COLOR_NIGHT.setModeValue(appMode, previewRouteLineInfo.getCustomColor(true));
+			settings.ROUTE_COLORING_TYPE.setModeValue(appMode, previewRouteLineInfo.getRouteColoringType());
+			settings.ROUTE_INFO_ATTRIBUTE.setModeValue(appMode, previewRouteLineInfo.getRouteInfoAttribute());
+			settings.ROUTE_LINE_WIDTH.setModeValue(appMode, previewRouteLineInfo.getWidth());
 		}
 	}
 
@@ -421,15 +433,17 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
+		previewRouteLineInfo.saveToBundle(outState);
+		outState.putString(APP_MODE_KEY, appMode.getStringKey());
 		outState.putString(INIT_MAP_THEME, initMapTheme.name());
 		outState.putString(SELECTED_MAP_THEME, selectedMapTheme.name());
-		previewRouteLineInfo.saveToBundle(outState);
 	}
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitAppearanceMode();
+		showHideMapRouteInfoMenu();
 	}
 
 	private void enterAppearanceMode() {
@@ -452,6 +466,16 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 					R.id.map_center_info,
 					R.id.map_search_button);
 			changeMapTheme(initMapTheme);
+		}
+	}
+
+	private void showHideMapRouteInfoMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (!mapActivity.isChangingConfigurations()) {
+				mapActivity.getMapRouteInfoMenu().finishRouteLineCustomization();
+			}
+			mapActivity.getMapRouteInfoMenu().showHideMenu();
 		}
 	}
 
@@ -498,9 +522,10 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		}
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @Nullable ApplicationMode appMode) {
 		try {
 			RouteLineAppearanceFragment fragment = new RouteLineAppearanceFragment();
+			fragment.appMode = appMode;
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
@@ -519,7 +544,7 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	private void changeMapTheme(@NonNull DayNightMode mapTheme) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			app.getSettings().DAYNIGHT_MODE.set(mapTheme);
+			app.getSettings().DAYNIGHT_MODE.setModeValue(appMode, mapTheme);
 			selectedMapTheme = mapTheme;
 		}
 	}

@@ -146,7 +146,9 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		} else if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
-				RouteLineAppearanceFragment.showInstance(mapActivity.getSupportFragmentManager());
+				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+				ApplicationMode appMode = getSelectedAppMode();
+				RouteLineAppearanceFragment.showInstance(fragmentManager, appMode);
 			}
 		}
 		return false;

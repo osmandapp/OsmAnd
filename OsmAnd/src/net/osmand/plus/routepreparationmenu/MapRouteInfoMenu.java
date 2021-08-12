@@ -108,6 +108,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.settings.fragments.VoiceLanguageBottomSheetFragment;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -157,6 +158,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	private int selectFromMapMenuState = MenuState.HEADER_ONLY;
 	private boolean selectFromMapWaypoints;
 	private boolean selectFromTracks;
+	private boolean customizingRouteLine;
 
 	private boolean showMenu = false;
 	private int showMenuState = DEFAULT_MENU_STATE;
@@ -2002,6 +2004,19 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		selectFromTracks = false;
 	}
 
+	public void customizeRouteLine() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			customizingRouteLine = true;
+			ApplicationMode routingAppMode = mapActivity.getMyApplication().getRoutingHelper().getAppMode();
+			RouteLineAppearanceFragment.showInstance(mapActivity.getSupportFragmentManager(), routingAppMode);
+		}
+	}
+
+	public void finishRouteLineCustomization() {
+		customizingRouteLine = false;
+	}
+
 	public void setupFields(PointType pointType) {
 		View mainView = getMainView();
 		if (mainView != null) {
@@ -2290,7 +2305,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (switched) {
 					mapActivity.getMapLayers().getMapControlsLayer().switchToRouteFollowingLayout();
 				}
-				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && !selectFromTracks) {
+				if (mapActivity.getPointToNavigate() == null && !selectFromMapTouch && !selectFromTracks
+						&& !customizingRouteLine) {
 					mapActivity.getMapActions().stopNavigationWithoutConfirm();
 				}
 				mapActivity.updateStatusBarColor();
