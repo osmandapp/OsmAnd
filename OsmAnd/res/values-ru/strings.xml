@@ -4226,7 +4226,7 @@
     <string name="backup_error_token_is_not_valid_or_expired">Неверный или просроченный токен</string>
     <string name="backup_error_user_is_not_registered">Пользователь с данным адресом электронной почты не зарегистрирован</string>
     <string name="backup_error_no_valid_subscription">Нет действующей подписки</string>
-    <string name="duration_moment_ago">минуту назад</string>
+    <string name="duration_moment_ago">только что</string>
     <string name="approximate_route_description">Прикрепите маршрут к дорогам на карте, чтобы получить данные о всех поворотах, а также о проходимости, типах дорог и т. д.</string>
     <string name="release_4_0">• Облачное резервное копирование
 \n
@@ -4256,7 +4256,7 @@
     <string name="backup_restore_now">Восстановить</string>
     <string name="backup_welcome_back">С возвращением!</string>
     <string name="attribute">Атрибут</string>
-    <string name="shared_string_purchased">Приобретено</string>
+    <string name="shared_string_purchased">Куплено</string>
     <string name="explore_wikipedia_offline">Читайте Википедию офлайн.</string>
     <string name="backup_error_subscription_was_expired_descr">Срок действия вашей подписки OsmAnd Pro истёк, возобновите её, чтобы использовать резервное копирование. Вы по-прежнему можете восстановить данные из облака.</string>
     <string name="contour_lines_hillshades_slope">Контурные линии, затенение рельефа (отмывка), уклоны</string>
@@ -4312,4 +4312,5 @@
 \nВозможно, некоторые карты не загружены.</string>
     <string name="connect_track_points_as">Соедините точки маршрута</string>
     <string name="purchases_restored">Покупки восстановлены</string>
+    <string name="grey_color_undefined">Серый цвет используется для участков без данных.</string>
 </resources>

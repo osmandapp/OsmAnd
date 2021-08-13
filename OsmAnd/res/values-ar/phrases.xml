@@ -3830,4 +3830,6 @@
     <string name="poi_operator_type_government">نوع المشغل: حكومي</string>
     <string name="poi_picnic_table_no">طاولة نزهة : غير موجودة</string>
     <string name="poi_picnic_table_yes">طاولة نزهة: موجودة</string>
+    <string name="poi_access_bicycle">مدخل الدراجات الهوائية</string>
+    <string name="poi_access_general">الوصول العام</string>
 </resources>

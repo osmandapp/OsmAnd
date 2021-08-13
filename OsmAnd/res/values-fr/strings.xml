@@ -4277,4 +4277,5 @@
     <string name="contributions_may_calculate_with_delay">Le calcul des contributions peut prendre plusieurs heures.</string>
     <string name="pro_features">Fonctionnalités Pro</string>
     <string name="purchases_restored">Achats restaurés</string>
+    <string name="grey_color_undefined">Les parties grisées signalent l\'absence de donnée.</string>
 </resources>
