@@ -29,6 +29,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class BackupExporter extends Exporter {
 
+	private static final int MAX_LIGHT_ITEM_SIZE = 10 * 1024 * 1024;
+
 	private final BackupHelper backupHelper;
 	private final List<SettingsItem> itemsToDelete = new ArrayList<>();
 	private final List<SettingsItem> oldItemsToDelete = new ArrayList<>();
@@ -92,19 +94,36 @@ public class BackupExporter extends Exporter {
 			throw new IOException(subscriptionError.toString());
 		}
 
-		List<ItemWriterTask> tasks = new ArrayList<>();
+		List<ItemWriterTask> lightTasks = new ArrayList<>();
+		List<ItemWriterTask> heavyTasks = new ArrayList<>();
 		for (SettingsItem item : getItems()) {
-			tasks.add(new ItemWriterTask(writer, item));
+			if (item.getEstimatedSize() > MAX_LIGHT_ITEM_SIZE) {
+				heavyTasks.add(new ItemWriterTask(writer, item));
+			} else {
+				lightTasks.add(new ItemWriterTask(writer, item));
+			}
 		}
-		executor = new ThreadPoolTaskExecutor<>(null);
-		executor.setInterruptOnError(true);
-		executor.run(tasks);
-
+		if (!lightTasks.isEmpty()) {
+			executor = new ThreadPoolTaskExecutor<>(null);
+			executor.setInterruptOnError(true);
+			executor.run(lightTasks);
+			if (!executor.getExceptions().isEmpty()) {
+				log.finishOperation();
+				Throwable t = executor.getExceptions().values().iterator().next();
+				throw new IOException(t.getMessage(), t);
+			}
+		}
+		if (!heavyTasks.isEmpty()) {
+			executor = new ThreadPoolTaskExecutor<>(1, null);
+			executor.setInterruptOnError(true);
+			executor.run(heavyTasks);
+			if (!executor.getExceptions().isEmpty()) {
+				log.finishOperation();
+				Throwable t = executor.getExceptions().values().iterator().next();
+				throw new IOException(t.getMessage(), t);
+			}
+		}
 		log.finishOperation();
-		if (!executor.getExceptions().isEmpty()) {
-			Throwable t = executor.getExceptions().values().iterator().next();
-			throw new IOException(t.getMessage(), t);
-		}
 	}
 
 	private void exportItems() throws IOException {

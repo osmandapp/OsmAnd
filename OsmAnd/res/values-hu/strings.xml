@@ -4297,4 +4297,5 @@
     <string name="use_login_and_password">Felhasználónév és jelszó használata</string>
     <string name="available_until">Elérhető eddig: %1$s</string>
     <string name="purchases_restored">Visszaállított vásárlások</string>
+    <string name="grey_color_undefined">A szürke szín az adatok nélküli részeket jelzi.</string>
 </resources>

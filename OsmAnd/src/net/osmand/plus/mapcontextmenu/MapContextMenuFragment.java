@@ -1156,18 +1156,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
 			final TextView leftTitleButton = (TextView) leftTitleButtonView.findViewById(R.id.button_text);
 			if (leftTitleButtonController != null) {
-				SpannableStringBuilder title = new SpannableStringBuilder(leftTitleButtonController.caption);
-				if (leftTitleButtonController.needRightText) {
-					int startIndex = title.length();
-					title.append(" ").append(leftTitleButtonController.rightTextCaption);
-					Context context = view.getContext();
-					Typeface typeface = FontCache.getRobotoRegular(context);
-					title.setSpan(new CustomTypefaceSpan(typeface), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-					title.setSpan(new ForegroundColorSpan(
-									ContextCompat.getColor(context, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)),
-							startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				}
-				setupButton(leftTitleButtonView, leftTitleButtonController.enabled, title);
+				setupButton(leftTitleButtonView, leftTitleButtonController.enabled, createRightTextCaption(leftTitleButtonController));
 				if (leftTitleButtonController.visible) {
 					leftTitleButtonView.setVisibility(View.VISIBLE);
 					Drawable startIcon = leftTitleButtonController.getStartIcon();
@@ -1318,7 +1307,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void fillButtonInfo(final TitleButtonController buttonController, View buttonView, TextView buttonText) {
 		if (buttonController != null) {
-			setupButton(buttonView, buttonController.enabled, buttonController.caption);
+			setupButton(buttonView, buttonController.enabled, createRightTextCaption(buttonController));
 			buttonView.setVisibility(buttonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 			Drawable startIcon = buttonController.getStartIcon();
@@ -1336,6 +1325,21 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		} else {
 			buttonView.setVisibility(View.INVISIBLE);
 		}
+	}
+
+	private SpannableStringBuilder createRightTextCaption(@NonNull TitleButtonController buttonController) {
+		SpannableStringBuilder title = new SpannableStringBuilder(buttonController.caption);
+		if (buttonController.needRightText) {
+			int startIndex = title.length();
+			title.append(" ").append(buttonController.rightTextCaption);
+			Context context = view.getContext();
+			Typeface typeface = FontCache.getRobotoRegular(context);
+			title.setSpan(new CustomTypefaceSpan(typeface), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			title.setSpan(new ForegroundColorSpan(
+							ContextCompat.getColor(context, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)),
+					startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		}
+		return title;
 	}
 
 	private void buildHeader() {
