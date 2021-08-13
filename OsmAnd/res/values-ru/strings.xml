@@ -116,7 +116,7 @@
     <string name="shared_string_slope">Уклон</string>
     <string name="add_new_folder">Создать папку</string>
     <string name="points_delete_multiple_succesful">Точки удалены.</string>
-    <string name="points_delete_multiple">Вы уверены, что хотите удалить %1$d точки\?</string>
+    <string name="points_delete_multiple">Удалить точки (%1$d)\?</string>
     <string name="route_points_category_name">Повороты на маршруте</string>
     <string name="track_points_category_name">Путевые точки, точки интереса, именованные элементы</string>
     <string name="shared_string_gpx_track">Трек</string>
@@ -244,7 +244,7 @@
     <string name="osm_editors_ranking">Рейтинг картографов OSM</string>
     <string name="show_transparency_seekbar">Показывать регулировку прозрачности</string>
     <string name="show_polygons">Показывать полигоны</string>
-    <string name="rendering_attr_showMtbRoutes_name">Трассы для горных велосипедов</string>
+    <string name="rendering_attr_showMtbRoutes_name">Маршруты для горных велосипедов</string>
     <string name="shared_string_select">Выбрать</string>
     <string name="rendering_attr_hideIcons_name">Значки POI</string>
     <string name="rendering_attr_horseRoutes_name">Конные маршруты</string>
@@ -352,7 +352,7 @@
     <string name="confirm_interrupt_download">Прервать загрузку\?</string>
     <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из интернета с помощью пункта меню «Настройки» → «Управление файлами карт». После загрузки вы сможете просматривать карты, осуществлять поиск адресов, POI и общественного транспорта.</string>
     <string name="basemap_was_selected_to_download">Карта мира, необходимая для обеспечения базовой функциональности, находится в очереди загрузки.</string>
-    <string name="select_index_file_to_download">Ничего не найдено. Если для вашего региона нет карты, вы можете создать ее (см. osmand.net).</string>
+    <string name="select_index_file_to_download">Ничего не найдено. Если для вашего региона нет карты, вы можете создать её (см. osmand.net).</string>
     <string name="local_indexes_cat_tile">Онлайн и кешированные карты (растровые)</string>
     <string name="local_indexes_cat_map">Стандартные карты (векторные)</string>
     <string name="index_settings_descr">Загрузка и управление локальными файлами карт на вашем устройстве.</string>
@@ -469,7 +469,7 @@
     <string name="show_more_map_detail">Детализированная карта</string>
     <string name="show_more_map_detail_descr">Показывать детали (дороги и др.), начиная с мелких масштабов.</string>
     <string name="favourites_delete_multiple_succesful">Избранные точки удалены.</string>
-    <string name="favorite_delete_multiple">Вы уверены, что хотите удалить %1$d избранных и %2$d избранных групп\?</string>
+    <string name="favorite_delete_multiple">Удалить избранные (%1$d) и избранные группы (%2$d)\?</string>
     <string name="favorite_home_category">Дом</string>
     <string name="favorite_friends_category">Друзья</string>
     <string name="favorite_places_category">Места</string>
@@ -955,14 +955,14 @@
     <string name="west_north_west">западо-северо-запад</string>
     <string name="north_west">северо-запад</string>
     <string name="north_north_west">северо-северо-запад</string>
-    <string name="front">вперед</string>
-    <string name="front_right">направо вперед</string>
+    <string name="front">вперёд</string>
+    <string name="front_right">направо вперёд</string>
     <string name="right">направо</string>
     <string name="back_right">направо назад</string>
     <string name="back">назад</string>
     <string name="back_left">налево назад</string>
     <string name="left">налево</string>
-    <string name="front_left">налево вперед</string>
+    <string name="front_left">налево вперёд</string>
     <string name="towards">на</string>
     <string name="accuracy">Точность</string>
     <string name="altitude">Высота</string>
@@ -1198,7 +1198,7 @@
     <string name="recording_photo_description">Фото %1$s %2$s</string>
     <string name="local_indexes_cat_av">Медиаданные</string>
     <string name="stop_routing_confirm">Остановить навигацию\?</string>
-    <string name="clear_dest_confirm">Вы уверены, что хотите удалить пункт назначения (и промежуточные пункты)?</string>
+    <string name="clear_dest_confirm">Удалить пункт назначения (и промежуточные пункты)\?</string>
     <string name="precise_routing_mode">Точный маршрут (альфа)</string>
     <string name="support_new_features_descr">Пожертвуйте, чтобы увидеть новые функции реализованными в приложении.</string>
     <string name="precise_routing_mode_descr">Рассчитывайте точные маршруты без затруднений. Имеются ограничения на расстояние и быстродействие.</string>
@@ -1327,7 +1327,7 @@
     <string name="app_mode_boat">Лодка</string>
     <string name="app_mode_hiking">Пеший туризм</string>
     <string name="app_mode_motorcycle">Мотоцикл</string>
-    <string name="local_osm_changes_delete_all_confirm">Вы уверены, что желаете удалить %1$d изменений OSM\?</string>
+    <string name="local_osm_changes_delete_all_confirm">Удалить изменения (%1$d)\?</string>
     <string name="animate_routing_route_not_calculated">Сначала постройте маршрут</string>
     <string name="animate_routing_route">Симуляция использования рассчитанного маршрута </string>
     <string name="animate_routing_gpx">Симуляция использования трека GPX</string>
@@ -1502,7 +1502,7 @@
     <string name="map_preferred_locale">Предпочтительный язык на карте</string>
     <string name="lang_sw">Суахили</string>
     <string name="lang_he">Иврит</string>
-    <string name="forward">Вперед</string>
+    <string name="forward">Вперёд</string>
     <string name="home">Панель управления</string>
     <string name="local_map_names">Местные названия</string>
     <string name="gpx_start_new_segment">Начать новый сегмент</string>
@@ -1533,7 +1533,7 @@
     <string name="arrival_distance_factor_late">Позднее</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Наложение туристических меток</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Пешеходные маршруты</string>
     <string name="rendering_attr_coloredBuildings_name">Цветовая маркировка зданий по типу</string>
     <string name="rendering_attr_publicTransportMode_name">Маршруты автобусов, троллейбусов и маршрутных такси</string>
     <string name="rendering_value_browse_map_name">Обзор карты</string>
@@ -1736,7 +1736,7 @@
     <string name="share_note">Поделиться заметкой</string>
     <string name="shared_string_release">Дата выпуска</string>
     <string name="routing_settings_2">Настройки навигации</string>
-    <string name="general_settings_2">Основные настройки</string>
+    <string name="general_settings_2">Глобальные настройки</string>
     <string name="shared_string_clear_all">Очистить все</string>
     <string name="drawer">Плоский список</string>
     <string name="short_location_on_map">Широта %1$s
@@ -1765,7 +1765,7 @@
 \nСпециальная дополнительная карта для OsmAnd добавляет морские навигационные и условные знаки как для внутренней, так и для прибрежной навигации. Описание навигационных отметок содержит информацию, необходимую для их идентификации, а также их характеристики (категория, форма, цвет, последовательность мерцания огней и т.д.).
 \n
 \nЧтобы вернуться к одному из традиционных стилей карт в OsmAnd, просто деактивируйте этот плагин или измените на желаемый «Стиль карты» в разделе «Настройки карты».</string>
-    <string name="local_osm_changes_upload_all_confirm">Вы уверены, что хотите отправить %1$d изменений в OSM\?</string>
+    <string name="local_osm_changes_upload_all_confirm">Отправить изменения (%1$d) в OSM\?</string>
     <string name="confirmation_to_clear_history">Очистить историю?</string>
     <string name="plugin_ski_descr">Информация о маршрутах для беговых лыж, горнолыжных трассах, альпийских спусках, фуникулерах и горнолыжных подъёмниках. Маршруты и спуски отмечены разными цветами в зависимости от сложности и отображаются в особом «зимнем» стиле карты, где используются «снежные» цвета зимнего пейзажа.
 \n
@@ -1815,7 +1815,7 @@
     <string name="osm_edit_context_menu_delete">Удалить правки OSM</string>
     <string name="rendering_value_disabled_name">Выключено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Раскраска по сетевой принадлежности</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Раскраска туристических меток по OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Выход</string>
     <string name="index_name_netherlands">Европа — Нидерланды</string>
     <string name="shared_string_wikipedia">Википедия</string>
@@ -1824,7 +1824,7 @@
     <string name="download_wikipedia_maps">Википедия</string>
     <string name="read_full_article">Открыть в Википедии</string>
     <string name="shared_string_import2osmand">Импорт в OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Вы уверены, что хотите удалить %1$d заметок\?</string>
+    <string name="local_recordings_delete_all_confirm">Удалить заметки (%1$d)\?</string>
     <string name="gps_network_not_enabled">Служба определения местоположения выключена. Включить?</string>
     <string name="download_wikipedia_files">Загрузить дополнительные данные Википедии (%1$s Мб)\?</string>
     <string name="lang_es_ar">Испанский (аргентинский)</string>
@@ -2195,7 +2195,7 @@
     <string name="update_all_maps_now">Обновить все карты сейчас?</string>
     <string name="clear_tile_data">Удалить из кеша</string>
     <string name="routing_attr_short_way_name">Снижать расход топлива</string>
-    <string name="replace_favorite_confirmation">Вы уверены, что хотите заменить избранные %1$s\?</string>
+    <string name="replace_favorite_confirmation">Заменить избранные %1$s\?</string>
     <string name="shared_string_change">Изменить</string>
     <string name="get_started">Начать</string>
     <string name="shared_string_from">от</string>
@@ -2359,7 +2359,7 @@
     <string name="ascendingly">А-Я</string>
     <string name="coordinates_format">Формат координат</string>
     <string name="use_system_keyboard">Использовать системную клавиатуру</string>
-    <string name="fast_coordinates_input_descr">Выберите формат ввода координат. Вы всегда можете изменить его, нажав «Параметры».</string>
+    <string name="fast_coordinates_input_descr">Выберите формат ввода координат. Для изменения нажмите «Параметры».</string>
     <string name="fast_coordinates_input">Быстрый ввод координат</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Без ледовых дорог или бродов</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Избегать ледовых дорог и бродов.</string>
@@ -3218,8 +3218,8 @@
     <string name="contour_lines_and_hillshade">Контурные линии и затенение рельефа</string>
     <string name="routing_attr_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
     <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги.</string>
-    <string name="update_all_maps_q">Вы уверены, что хотите обновить все карты (%1$d)\?</string>
-    <string name="apply_preference_to_all_profiles">Вы можете применить это ко всем или только к выбранному профилю.</string>
+    <string name="update_all_maps_q">Обновить все карты (%1$d)\?</string>
+    <string name="apply_preference_to_all_profiles">Применить ко всем или только к выбранному профилю.</string>
     <string name="shared_preference">Общий</string>
     <string name="quick_action_contour_lines_descr">Переключатель для отображения или скрытия контурных линий на карте.</string>
     <string name="quick_action_hillshade_descr">Переключатель для отображения или скрытия затенения рельефа (отмывки) на карте.</string>
@@ -3317,7 +3317,7 @@
     <string name="permission_is_required">Для использования этой функции требуется разрешение.</string>
     <string name="monitoring_min_speed_descr">Это низкоскоростной фильтр отсечки, чтобы не записывать точки ниже определённой скорости. Это может сделать записанные треки более гладкими при просмотре на карте.</string>
     <string name="rearrange_categories">Упорядочить категории</string>
-    <string name="create_custom_categories_list_promo">Изменяйте порядок сортировки списка, скрывайте категории. Вы можете импортировать или экспортировать все изменения с профилями.</string>
+    <string name="create_custom_categories_list_promo">Изменение порядка списка и скрытие категорий. Импорт или экспорт всех изменений в виде профилей.</string>
     <string name="add_new_custom_category_button_promo">Вы можете создать свою категорию, выбрав одну или несколько категорий из списка.</string>
     <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведет к возврату порядка сортировки по умолчанию.</string>
     <string name="add_custom_category">Создать свою категорию</string>
