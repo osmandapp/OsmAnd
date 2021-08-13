@@ -4302,4 +4302,5 @@
     <string name="connect_track_points_as">Kunigi punktojn de kurso</string>
     <string name="pro_features">Altnivelaj eblaĵoj</string>
     <string name="purchases_restored">Aĉetoj restarigitaj</string>
+    <string name="grey_color_undefined">La griza koloro estas uzata por fragmentoj sen datumoj.</string>
 </resources>

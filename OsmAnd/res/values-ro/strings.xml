@@ -4310,4 +4310,5 @@
     <string name="gpx_monitoring_start">Reluarea înregistrării călătoriei</string>
     <string name="pro_features">Caracteristici Pro</string>
     <string name="purchases_restored">Achiziții restaurate</string>
+    <string name="grey_color_undefined">Culoarea gri este utilizată pentru piesele fără date.</string>
 </resources>

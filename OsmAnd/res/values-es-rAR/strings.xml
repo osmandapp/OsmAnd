@@ -4306,4 +4306,5 @@
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
     <string name="pro_features">Funciones «Pro»</string>
     <string name="purchases_restored">Compras restauradas</string>
+    <string name="grey_color_undefined">El color gris se usa para tramos sin datos.</string>
 </resources>
