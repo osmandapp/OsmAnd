@@ -407,7 +407,7 @@
     <string name="live_monitoring_url">Веб-адрес онлайн-слежения</string>
     <string name="gpx_monitoring_disabled_warn">Записать трек можно с помощью виджета GPX или выбрав «Запись маршрута» в настройках.</string>
     <string name="show_current_gpx_title">Показывать текущий путь</string>
-    <string name="free_version_message">Вы можете скачать или обновить карт: %1$s шт.</string>
+    <string name="free_version_message">Вы можете скачать или обновить %1$s карт(ы).</string>
     <string name="free_version_title">Бесплатная версия</string>
     <string name="poi_context_menu_showdescription">Показать описание POI.</string>
     <string name="index_name_us">Северная Америка — США</string>
