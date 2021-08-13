@@ -78,7 +78,7 @@
 	</LinearLayout>
 
 	<LinearLayout
-		android:id="@+id/select_color"
+		android:id="@+id/colors_card_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
