@@ -27,16 +27,20 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.myplaces.AddNewTrackFolderBottomSheet;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.track.ColorsCard;
-import net.osmand.plus.track.CustomColorBottomSheet;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFragment implements CustomColorBottomSheet.ColorPickerListener, BaseCard.CardListener {
+import static net.osmand.plus.mapcontextmenu.editors.SelectFavoriteCategoryBottomSheet.*;
+import static net.osmand.plus.routepreparationmenu.cards.BaseCard.*;
+import static net.osmand.plus.track.CustomColorBottomSheet.*;
 
+public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFragment implements
+		ColorPickerListener, CardListener {
 
 	public static final String TAG = AddNewTrackFolderBottomSheet.class.getName();
 	private static final String KEY_CTX_EDIT_CAT_EDITOR_TAG = "key_ctx_edit_cat_editor_tag";
@@ -45,6 +49,7 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	private static final String KEY_CTX_EDIT_CAT_NEW = "key_ctx_edit_cat_new";
 	private static final String KEY_CTX_EDIT_CAT_NAME = "key_ctx_edit_cat_name";
 	private static final String KEY_CTX_EDIT_CAT_COLOR = "key_ctx_edit_cat_color";
+
 	FavouritesDbHelper favoritesHelper;
 	private boolean isNew = true;
 	private String name = "";
@@ -56,9 +61,11 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 	private TextInputLayout nameTextBox;
 	private View view;
 	private String editorTag;
-	private SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener;
+	private CategorySelectionListener selectionListener;
 
-	public static AddNewFavoriteCategoryBottomSheet createInstance(@NonNull String editorTag, @Nullable Set<String> gpxCategories, boolean isGpx) {
+	public static AddNewFavoriteCategoryBottomSheet createInstance(@NonNull String editorTag,
+	                                                               @Nullable Set<String> gpxCategories,
+	                                                               boolean isGpx) {
 		AddNewFavoriteCategoryBottomSheet fragment = new AddNewFavoriteCategoryBottomSheet();
 		Bundle bundle = new Bundle();
 		bundle.putString(KEY_CTX_EDIT_CAT_EDITOR_TAG, editorTag);
@@ -71,7 +78,7 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		return fragment;
 	}
 
-	public void setSelectionListener(SelectFavoriteCategoryBottomSheet.CategorySelectionListener selectionListener) {
+	public void setSelectionListener(CategorySelectionListener selectionListener) {
 		this.selectionListener = selectionListener;
 	}
 
@@ -154,7 +161,10 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		OsmandApplication app = requiredMyApplication();
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
 		favoritesHelper = app.getFavorites();
 
 		if (savedInstanceState != null) {
@@ -162,7 +172,6 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		} else if (getArguments() != null) {
 			restoreState(getArguments());
 		}
-
 
 		items.add(new TitleItem(getString(R.string.favorite_category_add_new_title)));
 		selectedColor = getResources().getColor(R.color.color_favorite);
@@ -183,12 +192,22 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 				.setCustomView(view)
 				.create();
 		items.add(editFolderName);
-		MapActivity mapActivity = (MapActivity) getActivity();
+		updateColorSelector(selectedColor);
+		setupColorsCard();
+	}
+
+	private void setupColorsCard() {
+		MapActivity mapActivity = ((MapActivity) getActivity());
+		if (mapActivity == null) {
+			return;
+		}
+
 		List<Integer> colors = new ArrayList<>();
 		for (int color : ColorDialogs.pallette) {
 			colors.add(color);
 		}
-		colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors, app.getSettings().CUSTOM_TRACK_COLORS, null);
+		ListStringPreference colorsListPref = requiredMyApplication().getSettings().CUSTOM_TRACK_COLORS;
+		colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors, colorsListPref, null);
 		colorsCard.setListener(this);
 		LinearLayout selectColor = view.findViewById(R.id.select_color);
 		selectColor.addView(colorsCard.build(view.getContext()));
