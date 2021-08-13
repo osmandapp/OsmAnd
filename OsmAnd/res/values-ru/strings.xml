@@ -1058,8 +1058,7 @@
     <string name="use_compass_navigation_descr">Использовать компас, если невозможно определить направление иначе.</string>
     <string name="use_compass_navigation">Использовать компас</string>
     <string name="route_updated_loc_found">Маршрут будет пересчитан после определения местоположения</string>
-    <string name="continue_follow_previous_route_auto">Продолжить неоконченный маршрут\? 
-\n%1$s</string>
+    <string name="continue_follow_previous_route_auto">Продолжить неоконченный маршрут\? 【%1$s】</string>
     <string name="show_cameras">Камеры контроля скорости</string>
     <string name="show_traffic_warnings">Ограничения скорости</string>
     <string name="avoid_toll_roads">Без платных дорог</string>
