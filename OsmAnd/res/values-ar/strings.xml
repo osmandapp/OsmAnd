@@ -27,7 +27,7 @@
     <string name="shared_string_map">إدارة الخرائط</string>
     <string name="prefer_motorways">تفضل الطرق السريعة</string>
     <string name="prefer_in_routing_title">فضّل…</string>
-    <string name="prefer_in_routing_descr">تفضيل الطرق السريعة</string>
+    <string name="prefer_in_routing_descr">تفضيل الطرق السريعة.</string>
     <string name="max_speed_none">بدون</string>
     <string name="index_name_openmaps">فتح خرائط الاتحاد الأوروبي</string>
     <string name="local_indexes_cat_av">بيانات الصوت / الفيديو</string>
@@ -316,7 +316,7 @@
     <string name="rendering_attr_roadColors_description">اختر نظام ألوان الطريق:</string>
     <string name="rendering_attr_roadColors_name">نظام ألوان الطريق</string>
     <string name="target_point">الوجهة %1$s</string>
-    <string name="intermediate_point">الوجهة الوسطى %1$s</string>
+    <string name="intermediate_point">الوجهة الوسطية %1$s</string>
     <string name="context_menu_item_last_intermediate_point">أضف آخر وجهة وسيطة</string>
     <string name="context_menu_item_first_intermediate_point">إضافة كوجهة وسيطة أولى</string>
     <string name="edit_tilesource_expiration_time">انتهاء الوقت (دقيقة)</string>
@@ -340,8 +340,8 @@
     <string name="av_settings_descr">ضبط إعدادات الصوت والفيديو.</string>
     <string name="add_as_last_destination_point">إضافة كآخر وجهة وسيطة</string>
     <string name="add_as_first_destination_point">إضافتها كأول وجهة وسطى</string>
-    <string name="intermediate_point_too_far">الوجهة الوسطى %1$s بعيدة جدا من أقرب طريق.</string>
-    <string name="arrived_at_intermediate_point">وصلت إلى وجهتك المتوسطة</string>
+    <string name="intermediate_point_too_far">الوجهة الوسطية %1$s بعيدة جدا عن أقرب طريق.</string>
+    <string name="arrived_at_intermediate_point">وصلت إلى وجهتك الوسطية</string>
     <string name="context_menu_item_intermediate_point">إضافة كوجهة وسيطة</string>
     <string name="map_widget_intermediate_distance">وجهة وسطى</string>
     <string name="ending_point_too_far">نقطة الوصول بعيدة جدا عن أقرب طريق.</string>
@@ -521,7 +521,7 @@
     <string name="i_am_here">أنا هنا</string>
     <string name="index_name_voice">التوجيه الصوتي (صوت طبيعي)</string>
     <string name="index_name_tts_voice">التوجيه الصوتي (صوت آلي TTS)</string>
-    <string name="profile_settings">إعدادات محددة للوضع</string>
+    <string name="profile_settings">إعدادات خاصة بالوضع</string>
     <string name="zoom_by_trackball_descr">غيّر نمط تكبير الخريطة بواسطة حركات كرة التّتبع الأفقية.</string>
     <string name="zoom_by_trackball">استخدم كرة التّتبع للتّحكم في التّكبير</string>
     <string name="use_fluorescent_overlays">تراكب فلوري</string>
@@ -1226,7 +1226,7 @@
     <string name="lang_sr">صربي</string>
     <string name="lang_zh_cn">الصيني ( المبسط )</string>
     <string name="lang_zh_tw">الصيني ( التقليدي )</string>
-    <string name="calculate_osmand_route_without_internet">احسب قسم طريق أوسماند بدون إنترنت</string>
+    <string name="calculate_osmand_route_without_internet">حساب قطعة طريق بالتطبيق بدون إنترنت</string>
     <string name="gpx_option_calculate_first_last_segment">احسب طريق أوسماند لأول وآخر قسمين في الطريق</string>
     <string name="use_displayed_track_for_navigation">استخدام المسار المعروض للتنقل؟</string>
     <string name="keep_and_add_destination_point">إضافتها كوجهة لاحقا</string>
@@ -1865,7 +1865,7 @@
     <string name="shared_string_import2osmand">استيراد إلى أوسماند</string>
     <string name="osm_edit_context_menu_delete">حذف تعديل OSM</string>
     <string name="rendering_value_disabled_name">معطل</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">شبكة الاتصال</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">شبكة اتصال</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">خروج</string>
     <string name="local_recordings_delete_all_confirm">حذف %1$d ملاحظة؟</string>
@@ -3306,7 +3306,7 @@
     <string name="quick_action_need_to_add_item_to_list">أضف عنصراً واحداً على الأقل إلى القائمة في إعدادات \"الاختصار السريع\"</string>
     <string name="routing_attr_piste_type_downhill_name">التزلج على المنحدرات وجبال الألب</string>
     <string name="routing_attr_piste_type_downhill_description">التزلج على جبال الألب أو الانحدار.</string>
-    <string name="routing_attr_piste_type_nordic_name">التزلج عبر الريف والشمال</string>
+    <string name="routing_attr_piste_type_nordic_name">التزلج الريفي والتزلج الشمالي</string>
     <string name="routing_attr_piste_type_nordic_description">مسارات للتزلج الشمالي أو الريفي علي الثلج.</string>
     <string name="routing_attr_piste_type_skitour_name">جولة تزلج</string>
     <string name="routing_attr_piste_type_skitour_description">طرق لجولات التزلج.</string>
@@ -3622,7 +3622,7 @@
 \n
 \nأدر أو إلغي اشتراكاتك من إعدادات Google Play في أي وقت.</string>
     <string name="search_poi_types">البحث عن أنواع poi</string>
-    <string name="search_poi_types_descr">اجمع أنواع مواضع الاهتمام من فئات مختلفة. اضغط على مفتاح التبديل لتحدد الكل ، ثم انقر على الجانب الأيسر لاختيار الفئة.</string>
+    <string name="search_poi_types_descr">إدمج أنواع مواضع الاهتمام من فئات مختلفة. اضغط على مفتاح التبديل لتحديد الكل، أنقر على الجانب الأيسر لاختيار الفئة.</string>
     <string name="tracker_item">متتبع أوسماند</string>
     <string name="mapillary_item">أوسماند+ مابيلاري</string>
     <string name="quick_action_item">إجراء سريع</string>
@@ -4190,7 +4190,7 @@
     <string name="verification_code_missing">لم أتلق رمز تحقق</string>
     <string name="verification_code_missing_description">قد تستغرق إلى 10 دقائق ، استخدم الزر أدناه إذا لم يكن موجودا في مجلد البريد العشوائي.</string>
     <string name="restore_from_file">استعادة من ملف</string>
-    <string name="select_nav_profile_dialog_message">\'نوع التنقل\' يحدد كيفية حساب المسارات عبر محركات توجيه متاحة بالانترنت و بدونها.</string>
+    <string name="select_nav_profile_dialog_message">\'نوع الملاحة\' يحدد كيفية حساب المسارات عبر محركات توجيه متاحة بالانترنت و بدونها.</string>
     <string name="loading_list_of_routing_services">تحميل قائمة خدمات التوجيه المتوفرة</string>
     <string name="shared_string_offline">دون اتصال</string>
     <string name="shared_string_online">عبر الإنترنت</string>
@@ -4373,4 +4373,5 @@
     <string name="connect_track_points_as">ربط نقاط الطريق</string>
     <string name="pro_features">ميزات احترافية</string>
     <string name="purchases_restored">تمت استعادة المشتريات</string>
+    <string name="grey_color_undefined">يستخدم اللون الرمادي لأجزاء بدون بيانات.</string>
 </resources>
