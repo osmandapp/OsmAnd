@@ -122,7 +122,7 @@
     <string name="shared_string_gpx_track">Трек</string>
     <string name="max_speed">Макс. скорость</string>
     <string name="average_speed">Сред. скорость</string>
-    <string name="shared_string_time_moving">Время в движении</string>
+    <string name="shared_string_time_moving">Время движения</string>
     <string name="shared_string_time_span">Общее время</string>
     <string name="shared_string_max">Макс.</string>
     <string name="shared_string_start_time">Отправление</string>
@@ -1058,7 +1058,8 @@
     <string name="use_compass_navigation_descr">Использовать компас, если невозможно определить направление иначе.</string>
     <string name="use_compass_navigation">Использовать компас</string>
     <string name="route_updated_loc_found">Маршрут будет пересчитан после определения местоположения</string>
-    <string name="continue_follow_previous_route_auto">Предыдущий маршрут не был закончен. Продолжить следование по нему\? (%1$s сек.)</string>
+    <string name="continue_follow_previous_route_auto">Продолжить незаконченный маршрут\? 
+\n%1$s</string>
     <string name="show_cameras">Камеры контроля скорости</string>
     <string name="show_traffic_warnings">Ограничения скорости</string>
     <string name="avoid_toll_roads">Без платных дорог</string>
@@ -2301,7 +2302,7 @@
     <string name="rendering_value_fine_name">Правильно</string>
     <string name="average">Средняя</string>
     <string name="ascent_descent">Подъём/спуск</string>
-    <string name="moving_time">Время в движении</string>
+    <string name="moving_time">Время движения</string>
     <string name="max_min">Макс/Мин</string>
     <string name="min_max">Мин/Макс</string>
     <string name="quick_action_resume_pause_navigation">Пауза/возобновление навигации</string>
