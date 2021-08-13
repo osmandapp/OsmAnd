@@ -4312,4 +4312,5 @@
 \nВозможно, некоторые карты не загружены.</string>
     <string name="connect_track_points_as">Соедините точки маршрута</string>
     <string name="purchases_restored">Покупки восстановлены</string>
+    <string name="grey_color_undefined">Серый цвет используется для участков без данных.</string>
 </resources>
