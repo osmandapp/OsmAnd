@@ -3806,7 +3806,7 @@
     <string name="use_live_public_transport">Dane z OsmAnd Live</string>
     <string name="use_live_routing">Dane z OsmAnd Live</string>
     <string name="complex_routing_descr">Dwufazowe wyznaczanie tras do nawigacji samochodowej.</string>
-    <string name="use_native_pt">Rozwój rodzimego transportu publicznego</string>
+    <string name="use_native_pt">Lokalny transport publiczny - w opracowaniu</string>
     <string name="use_native_pt_desc">Przejdź do (bezpiecznego) obliczania trasy transportu publicznego w języku Java</string>
     <string name="perform_oauth_authorization_description">Zaloguj się za pomocą protokołu OAuth, aby korzystać z funkcji osmedit</string>
     <string name="perform_oauth_authorization">Zaloguj się przez OAuth</string>
@@ -4220,7 +4220,7 @@
     <string name="backup_error_no_valid_subscription">Brak ważnej subskrypcji</string>
     <string name="release_4_0">• Kopia zapasowa w chmurze
 \n
-\n • Dodano tryb nocny dla stylu renderowania „Topo”
+\n • Dodano tryb nocny dla stylu mapy „Topo”
 \n
 \n • Dodano opcję pobierania poziomic w stopach
 \n
@@ -4230,7 +4230,7 @@
 \n
 \n • Mierzenie odległości naciśnięciami przesunięte z cyrkla do oddzielnej opcji
 \n
-\n • Planowanie trasy: dodano możliwość zmiany opcji nawigacji, dostęp do konfiguracji mapy i szukanie bez opuszczania planowania trasy
+\n • Planowanie trasy: Możesz teraz zmienić opcje nawigacji, uzyskać dostęp do konfiguracji mapy i wyszukiwać bez opuszczania planowania trasy
 \n
 \n • Nowy ekran „Zakup” ze szczegółowymi informacjami o zakupie
 \n
@@ -4245,7 +4245,7 @@
     <string name="logout_from_osmand_cloud">Wyloguj się z OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">Wylogowałeś się\?
 \nAby utworzyć kopię zapasową lub przywrócić dane, konieczne będzie ponowne zalogowanie się.</string>
-    <string name="backup_deleting_all_data_descr">Proszę zaczekać, aż OsmAnd usunie wszystkie Twoje dane z chmury. Wszystkie dane na urządzeniu pozostają nietknięte.</string>
+    <string name="backup_deleting_all_data_descr">Poczekaj, aż OsmAnd usunie Twoje dane z chmury. Wszystkie dane na urządzeniu pozostaną nietknięte.</string>
     <string name="backup_error_subscription_was_expired_descr">Twoja subskrypcja OsmAnd Pro wygasła - odnów ją, aby korzystać z kopii zapasowej. Nadal możesz przywracać dane z chmury.</string>
     <string name="backup_deleting_all_data">Usuwanie wszystkich danych…</string>
     <string name="backup_deleted_all_data">Usunięto wszystkie dane.</string>
@@ -4278,7 +4278,7 @@
 \nByć może niektóre mapy nie są wczytane.</string>
     <string name="online_direct_line_maps_link">Sprawdź niezbędne mapy.</string>
     <string name="offline_maps_required_descr">Brakuje niektórych map offline potrzebnych do pokonania tej trasy.</string>
-    <string name="online_maps_required_descr">Niestety, OsmAnd nie mógł znaleźć (obliczyć) trasy odpowiedniej dla Twoich ustawień.
+    <string name="online_maps_required_descr">Niestety, OsmAnd nie mógł znaleźć trasy dla Twoich ustawień.
 \n
 \nByć może niektóre mapy nie są załadowane. Możesz uruchomić sprawdzenie online potrzebnych map.</string>
     <string name="online_maps_searching_descr">Wyszukiwanie online…</string>
@@ -4294,7 +4294,7 @@
     <string name="connect_track_points_as">Połącz punkty trasy</string>
     <string name="routes_color_by_type">Kolor trasy według…</string>
     <string name="shared_string_relation">Relacja</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i symbolu odznaki turystycznej</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i symbolu odznaki turystycznej.</string>
     <string name="walking_route_osmc_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i typu (międzynarodowe, regionalne, lokalne)</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolor trasy według typu sieci węzłów (międzynarodowy, regionalny, lokalny).</string>
     <string name="benefits_for_contributors_primary_descr">Możesz być uprawniony do nieograniczonych aktualizacji map co godzinę, jeśli jesteś aktywnym współtwórcą OpenStreetMap.org.</string>
@@ -4304,4 +4304,5 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolor wg przeznaczenia trasy.</string>
     <string name="pro_features">Funkcje Pro</string>
     <string name="purchases_restored">Przywrócono zakupy</string>
+    <string name="grey_color_undefined">Szary kolor jest używany dla części baz danych.</string>
 </resources>
