@@ -1736,7 +1736,7 @@
     <string name="share_note">Поделиться заметкой</string>
     <string name="shared_string_release">Дата выпуска</string>
     <string name="routing_settings_2">Настройки навигации</string>
-    <string name="general_settings_2">Глобальные настройки</string>
+    <string name="general_settings_2">Основные настройки</string>
     <string name="shared_string_clear_all">Очистить все</string>
     <string name="drawer">Плоский список</string>
     <string name="short_location_on_map">Широта %1$s
@@ -4295,13 +4295,13 @@
     <string name="option_available_only_in_osmand_pro">Опция доступна в рамках подписки OsmAnd Pro.</string>
     <string name="shared_string_relation">Отношение</string>
     <string name="routes_color_by_type">Раскраска маршрутов</string>
-    <string name="setting_supported_by_style">Этот параметр поддерживается стилем карты \'%1$s\'</string>
+    <string name="setting_supported_by_style">Параметр поддерживается стилем карты «%1$s»</string>
     <string name="online_maps_required_descr">Не удалось рассчитать подходящий маршрут.
 \n
 \nПохоже, не загружены необходимые карты.
 \nЗапустите онлайн-проверку карт.</string>
     <string name="online_direct_line_maps_link">Проверить карты</string>
-    <string name="offline_maps_required_descr">Для расчета маршрута требуются дополнительные офлайн-карты.</string>
+    <string name="offline_maps_required_descr">Отсутствуют необходимые карты.</string>
     <string name="pro_features">Функции Pro</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Окраска согласно принадлежности к сети.</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Окраска маршрутов в соответствии с индивидуальной маркировкой на туристических информационных щитах (если задано на OpenStreetMap).</string>
