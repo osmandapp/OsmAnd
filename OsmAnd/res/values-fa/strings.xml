@@ -4328,4 +4328,5 @@
     <string name="map_updates_are_unavailable_yet">روزآمدسازه‌های نقشه هنوز در دسترس نیست :-(</string>
     <string name="pro_features">قابلیت‌های Pro</string>
     <string name="purchases_restored">خریدها بازیابی شد</string>
+    <string name="grey_color_undefined">رنگ خاکستری برای قسمت‌های بدون داده به کار می‌رود.</string>
 </resources>
