@@ -899,19 +899,19 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode) {
-		Bundle args = new Bundle();
-		if (appMode != null) {
-			args.putString(APP_MODE_KEY, appMode.getStringKey());
-		}
-		return showInstance(activity, screenType, args, null);
+		return showInstance(activity, screenType, appMode, new Bundle(), null);
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType,
-									   @NonNull Bundle args, @Nullable Fragment target) {
+	                                   @Nullable ApplicationMode appMode, @NonNull Bundle args,
+	                                   @Nullable Fragment target) {
 		FragmentManager fragmentManager = activity.getSupportFragmentManager();
 		String tag = screenType.fragmentName;
 		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(tag) == null) {
 			Fragment fragment = Fragment.instantiate(activity, tag);
+			if (appMode != null) {
+				args.putString(APP_MODE_KEY, appMode.getStringKey());
+			}
 			fragment.setArguments(args);
 			fragment.setTargetFragment(target, 0);
 			fragmentManager.beginTransaction()
