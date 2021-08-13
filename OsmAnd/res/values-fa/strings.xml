@@ -4143,13 +4143,13 @@
     <string name="resend_verification_code">بازارسال</string>
     <string name="verification_code_missing">کد تأییدی دریافت نکردم</string>
     <string name="verification_code_missing_description">ممکن است ۱۰ دقیقه طول بکشد. اگر در پوشهٔ هرزنامه هم نیست دکمهٔ زیر را بزنید.</string>
-    <string name="select_nav_profile_dialog_message">در این قسمت شیوهٔ محاسبهٔ مسیر را از میان موتورهای مسیریابی آنلاین و آفلاین موجود انتخاب کنید.</string>
+    <string name="select_nav_profile_dialog_message">\"نوع ناوبری\" نحوه محاسبه مسیرها را با موتورهای مسیریابی آفلاین و آنلاین انتخاب می کند.</string>
     <string name="restore_complete">بازیابی شد</string>
     <string name="backup_data">از داده‌ها پشتیبان بگیرید</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="loading_list_of_routing_services">در حال بارکردن لیست خدمات مسیریابی موجود</string>
     <string name="shared_string_offline">آفلاین</string>
-    <string name="shared_string_online">آنلاین</string>
+    <string name="shared_string_online">انلاین</string>
     <string name="shared_string_external">خارجی</string>
     <string name="provided_by">تهیه‌شده توسط %1$s</string>
     <string name="failed_loading_predefined_engines">نمی‌توان لیست الگوهای از پیش تعریف شده را بار کرد.

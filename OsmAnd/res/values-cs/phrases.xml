@@ -3998,4 +3998,21 @@
     <string name="poi_access_bicycle">Přístup pro jízdní kola</string>
     <string name="poi_access_motorcar">Přístup pro motorová vozidla</string>
     <string name="poi_access_general">Obecný přístup</string>
+    <string name="poi_direction_east">Směr východ</string>
+    <string name="poi_direction_north">Směr sever</string>
+    <string name="poi_destination">Cíl</string>
+    <string name="poi_permanent_camping_only">Výhradně</string>
+    <string name="poi_permanent_camping_no">Ne</string>
+    <string name="poi_permanent_camping_yes">Ano</string>
+    <string name="poi_shelter_filter">Přístřešek</string>
+    <string name="poi_permanent_camping">Stálé tábořiště</string>
+    <string name="poi_shelter_yes">Ano</string>
+    <string name="poi_shelter_no">Přístřešek: ne</string>
+    <string name="poi_lounger">Lehátko</string>
+    <string name="poi_direction_southwest">Směr jihozápad</string>
+    <string name="poi_direction_southeast">Směr jihovýchod</string>
+    <string name="poi_direction_northwest">Směr severozápad</string>
+    <string name="poi_direction_northeast">Směr severovýchod</string>
+    <string name="poi_direction_west">Směr západ</string>
+    <string name="poi_direction_south">Směr jih</string>
 </resources>

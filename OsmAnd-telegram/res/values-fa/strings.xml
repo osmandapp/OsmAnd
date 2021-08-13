@@ -122,7 +122,7 @@
     <string name="my_location">مکان من</string>
     <string name="shared_string_distance">مسافت</string>
     <string name="osmand_service_descr">OsmAnd Tracker با خاموش بودن صفحه در پس زمینه اجرا می شود.</string>
-    <string name="gps_not_available">لطفاً \"جی پی اس\" خود را در تنظیمات سیستم روشن کنید</string>
+    <string name="gps_not_available">لطفاً \"موقعیت\" خود را در تنظیمات سیستم روشن کنید</string>
     <string name="no_location_permission">برنامه فاقد مجوز دسترسی به داده های مکان است.</string>
     <string name="gps_network_not_enabled">\"مکان\" روشن شود؟</string>
     <string name="shared_string_password">کلمه عبور</string>
@@ -131,4 +131,16 @@
     <string name="timeline_no_data">بدون اطلاعات</string>
     <string name="start_end_date">شروع - تاریخ پایان</string>
     <string name="time_zone_descr">منطقه زمانی خود را برای نمایش پیام های مکانتان انتخاب کنید.</string>
+    <string name="shared_string_accept">پذیرفتن</string>
+    <string name="privacy_policy_agree">با ضربه زدن روی \"ادامه\" ، شما با شرایط سیاست حفظ حریم خصوصی تلگرام و OsmAnd موافقت می کنید.</string>
+    <string name="privacy_policy_telegram_client">ردیاب OsmAnd یکی از مشتریانی است که از بستر باز تلگرام استفاده می کند. مخاطبین شما می توانند از هر سرویس گیرنده دیگر تلگرام استفاده کنند.</string>
+    <string name="privacy_policy_use_telegram">تلگرام (برنامه پیام رسانی) برای ارتباط و برقراری ارتباط با افراد استفاده می شود.</string>
+    <string name="shared_string_telegram">تلگرام</string>
+    <string name="app_name_short">OsmAnd Tracker</string>
+    <string name="timeline_description">نظارت را فعال کنید تا همه مکان ها در تاریخ ذخیره شوند.</string>
+    <string name="location_recording_enabled">ضبط مکان فعال شد</string>
+    <string name="disable_monitoring">نظارت را غیرفعال کنید</string>
+    <string name="timeline_available_for_free_now">تایم لاین یک ویژگی است که اکنون به صورت رایگان در دسترس است.</string>
+    <string name="type_contact_or_group_name">نام مخاطب یا گروه را تایپ کنید</string>
+    <string name="search_contacts_descr">در همه گروه ها و مخاطبین خود جستجو کنید.</string>
 </resources>

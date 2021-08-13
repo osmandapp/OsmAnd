@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="email">電子郵件</string>
     <string name="poi_dialog_opening_hours">打開</string>
@@ -2723,7 +2723,7 @@
     <string name="by_transport_type">乘坐 %1$s</string>
     <string name="step_by_step">逐步</string>
     <string name="routeInfo_road_types_name">道路类型</string>
-    <string name="exit_at">退出于</string>
+    <string name="exit_at">在该站下车</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">在地图上显示或隐藏所选轨迹的按钮。</string>
     <string name="add_destination_query">请先设置目的地</string>
     <string name="use_osm_live_public_transport_description">为OsmAnd Live启用公共交通的变更情况。</string>
@@ -2863,7 +2863,7 @@
     <string name="import_from_file">从文件导入</string>
     <string name="multimedia_notes_prefs_descr">照片尺寸、音频和视频质量</string>
     <string name="login_and_pass">用户名和密码</string>
-    <string name="multimedia_use_system_camera">使用系统应用程序</string>
+    <string name="multimedia_use_system_camera">使用系统应用</string>
     <string name="multimedia_photo_play_sound">相机快门声音</string>
     <string name="osm_authorization_success">授权成功</string>
     <string name="day">日</string>
@@ -3185,7 +3185,7 @@
     <string name="shared_string_done">完成</string>
     <string name="overwrite_track">覆盖轨迹</string>
     <string name="save_as_new_track">保存为新的轨迹</string>
-    <string name="plan_route_exit_dialog_descr">你确定要放弃计划路线中的所有更改吗？</string>
+    <string name="plan_route_exit_dialog_descr">放弃计划路线中的所有更改？</string>
     <string name="reverse_route">反转路线</string>
     <string name="route_between_points_whole_track_button_desc">全部路线会以选择的配置文件进行重新计算。</string>
     <string name="route_between_points_desc">选择以直线或以选择的导航文件来计算路线的方式去连接导航点。</string>
@@ -3326,7 +3326,6 @@
     <string name="icon_group_amenity">便利设施</string>
     <string name="icon_group_special">特殊</string>
     <string name="voice_prompts_timetable">语音提示时间</string>
-    
     <string name="subscription_expired_title">OsmAnd Live 订阅已过期</string>
     <string name="subscription_paused_title">OsmAnd Live 订阅已暂停</string>
     <string name="subscription_on_hold_title">OsmAnd Live 订阅已暂停</string>
@@ -3626,4 +3625,28 @@
     <string name="downloaded_maps_collect_descr">帮助我们了解国家和地区地图的受欢迎程度。</string>
     <string name="collected_data_descr">定义允许 OsmAnd 分享哪些数据。</string>
     <string name="choose_data_to_share">选择要分享的数据类型：</string>
+    <string name="external_input_device_descr">选择一个外部控制设备，如键盘或WunderLINQ。</string>
+    <string name="apply_to_all_profiles">应用于所有配置</string>
+    <string name="apply_to_current_profile">仅应用于 “%1$s”</string>
+    <string name="apply_preference_to_all_profiles">将更改应用于所有或者所选配置。</string>
+    <string name="change_default_settings">改变设置</string>
+    <string name="turn_screen_on_descr">选择屏幕唤醒选项（确保设备被锁定时OsmAnd处于前台）：</string>
+    <string name="turn_screen_on_wake_time_descr">选择唤醒后屏幕超时。 （“%1$s”表示禁用超时。）</string>
+    <string name="system_screen_timeout">使用系统屏幕超时</string>
+    <string name="use_system_language">使用系统语言</string>
+    <string name="turn_screen_on_sensor_descr">在屏幕上挥手点亮屏幕。</string>
+    <string name="voice_announces_descr">导航指示和公告</string>
+    <string name="turn_screen_on_navigation_instructions_descr">每个导航指令都会点亮屏幕。</string>
+    <string name="turn_screen_on_navigation_instructions">导航指示</string>
+    <string name="profile_appearance">配置外观</string>
+    <string name="edit_profile_screen_options_subtitle">选择页面选项</string>
+    <string name="map_look_descr">地图显示</string>
+    <string name="configure_profile_info">配置选项：</string>
+    <string name="configure_profile">更改配置</string>
+    <string name="osmand_live">实时OsmAnd</string>
+    <string name="contributions_may_calculate_with_delay">计算贡献可能需要几个小时。</string>
+    <string name="map_updates_are_unavailable_yet">地图尚无更新。 :-(</string>
+    <string name="connect_track_points_as">连接路线点</string>
+    <string name="pro_features">专业功能</string>
+    <string name="sit_on_the_stop">在该站上车</string>
 </resources>
