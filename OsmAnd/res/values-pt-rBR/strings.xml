@@ -4299,4 +4299,5 @@
     <string name="connect_track_points_as">Conectar pontos de rota</string>
     <string name="pro_features">Recursos Pro</string>
     <string name="purchases_restored">Compras restauradas</string>
+    <string name="grey_color_undefined">Cor cinza é usada para partes sem dados.</string>
 </resources>
