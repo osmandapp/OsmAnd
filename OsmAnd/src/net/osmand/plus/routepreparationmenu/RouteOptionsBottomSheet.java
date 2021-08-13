@@ -33,6 +33,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.CustomizeRouteLineRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DividerItem;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.GpxLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -194,6 +195,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				items.add(createTimeConditionalRoutingItem(optionsItem));
 			} else if (optionsItem instanceof OtherSettingsRoutingParameter) {
 				items.add(createOtherSettingsRoutingItem(optionsItem));
+			} else if (optionsItem instanceof CustomizeRouteLineRoutingParameter) {
+				items.add(createCustomizeRouteLineRoutingItem(optionsItem));
 			} else if (USE_HEIGHT_OBSTACLES.equals(optionsItem.getKey()) && hasReliefParameters()) {
 				items.add(inflateElevationParameter(optionsItem));
 			} else {
@@ -559,6 +562,22 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				.create();
 	}
 
+	private BaseBottomSheetItem createCustomizeRouteLineRoutingItem(
+			final LocalRoutingParameter lineCustomizationItem) {
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(lineCustomizationItem.getActiveIconId()))
+				.setTitle(getString(R.string.customize_route_line))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
+				.setOnClickListener(v -> {
+					if (mapActivity != null) {
+						MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
+						mapRouteInfoMenu.hide();
+						mapRouteInfoMenu.customizeRouteLine();
+						dismiss();
+					}
+				}).create();
+	}
+
 	private void inflateRoutingParameter(final LocalRoutingParameter parameter) {
 		if (parameter != null) {
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
@@ -725,6 +744,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
 		BICYCLE(MuteSoundRoutingParameter.KEY,
@@ -738,6 +758,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
 		PEDESTRIAN(MuteSoundRoutingParameter.KEY,
@@ -749,6 +770,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
 		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY,
@@ -767,6 +789,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
 		STRAIGHT(MuteSoundRoutingParameter.KEY,
@@ -775,6 +798,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
 		DIRECT_TO(MuteSoundRoutingParameter.KEY,
@@ -783,6 +807,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY);
 
 

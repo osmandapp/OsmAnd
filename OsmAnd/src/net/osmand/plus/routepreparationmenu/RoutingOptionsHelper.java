@@ -415,6 +415,8 @@ public class RoutingOptionsHelper {
 				return new TimeConditionalRoutingItem();
 			case OtherSettingsRoutingParameter.KEY:
 				return new OtherSettingsRoutingParameter();
+			case CustomizeRouteLineRoutingParameter.KEY:
+				return new CustomizeRouteLineRoutingParameter();
 			default:
 				return getRoutingParameterInnerById(am, parameter);
 		}
@@ -959,6 +961,35 @@ public class RoutingOptionsHelper {
 		@Override
 		public int getDisabledIconId() {
 			return R.drawable.ic_action_settings;
+		}
+	}
+
+	public static class CustomizeRouteLineRoutingParameter extends LocalRoutingParameter {
+
+		public static final String KEY = "CustomizeRouteLineRoutingParameter";
+
+		public CustomizeRouteLineRoutingParameter() {
+			super(null);
+		}
+
+		@Override
+		public String getKey() {
+			return KEY;
+		}
+
+		@Override
+		public boolean canAddToRouteMenu() {
+			return false;
+		}
+
+		@Override
+		public int getActiveIconId() {
+			return R.drawable.ic_action_appearance;
+		}
+
+		@Override
+		public int getDisabledIconId() {
+			return R.drawable.ic_action_appearance;
 		}
 	}
 
