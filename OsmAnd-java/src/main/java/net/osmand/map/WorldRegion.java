@@ -189,10 +189,14 @@ public class WorldRegion implements Serializable {
 
 	public boolean containsRegion(WorldRegion another) {
 		// Firstly check rectangles for greater efficiency
-		if (!containsBoundingBox(another.boundingBox)) return false;
+		if (!containsBoundingBox(another.boundingBox)) {
+			return false;
+		}
 
 		// Secondly check whole polygons
-		if (!containsPolygon(another.polygon)) return false;
+		if (!containsPolygon(another.polygon)) {
+			return false;
+		}
 
 		// Finally check inner point
 		boolean isInnerPoint = Algorithms.isPointInsidePolygon(another.regionCenter, another.polygon);
