@@ -163,7 +163,7 @@
     <string name="quick_action_map_underlay_title">Подложки</string>
     <string name="quick_action_map_underlay_action">Добавить подложку</string>
     <string name="quick_action_map_source">Сменить источник карты</string>
-    <string name="quick_action_map_source_title">Источники карты</string>
+    <string name="quick_action_map_source_title">Источники карт</string>
     <string name="quick_action_map_source_action">Добавить источник карты</string>
     <string name="quick_action_map_source_switch">Источник карты изменен на «%s».</string>
     <string name="quick_action_btn_tutorial_descr">Удерживайте кнопку для перемещения ее по экрану.</string>
@@ -2799,7 +2799,7 @@
     <string name="rendering_value_black_name">Черный</string>
     <string name="search_street">Поиск улицы</string>
     <string name="start_search_from_city">Укажите город/место/район</string>
-    <string name="shared_string_restore">Восстановить</string>
+    <string name="shared_string_restore">Восстановление</string>
     <string name="keep_passed_markers_descr">Маркеры, добавленные как группа избранных или путевых точек GPX и отмеченные как пройденные, останутся на карте. Если группа не активна, маркеры исчезнут с карты.</string>
     <string name="keep_passed_markers">Оставить пройденные маркеры на карте</string>
     <string name="more_transport_on_stop_hint">Больше транспорта доступно от этой остановки.</string>
@@ -4137,7 +4137,7 @@
     <string name="upload_local_version">Отправить локальную версию</string>
     <string name="download_server_version">Скачать версию с сервера</string>
     <string name="shared_string_predefined">Предопределённые</string>
-    <string name="backup_now">Создать резервную копию сейчас</string>
+    <string name="backup_now">Создать резервную копию</string>
     <string name="make_backup">Создать резервную копию</string>
     <string name="make_backup_descr">На устройстве много изменений. Сделайте резервную копию, чтобы не потерять данные.</string>
     <string name="backup_pause_all">Приостановить все</string>
@@ -4172,7 +4172,7 @@
     <string name="restore_complete">Восстановление завершено</string>
     <string name="backup_storage_taken">Занятое пространство</string>
     <string name="backup_version_history">История версий</string>
-    <string name="backup_version_history_delete_descr">Удалить историю изменений для устаревших типов данных из OsmAnd Cloud\?</string>
+    <string name="backup_version_history_delete_descr">Удалить историю изменений для отключенных типов данных из OsmAnd Cloud\?</string>
     <string name="delete_version_history">Удалить историю версий</string>
     <string name="routing_attr_avoid_tunnels_description">Исключить тоннели</string>
     <string name="routing_attr_avoid_tunnels_name">Без тоннелей</string>
@@ -4212,7 +4212,7 @@
     <string name="complete_purchase">Оформить покупку</string>
     <string name="regular_price">Обычная цена</string>
     <string name="from_with_param">За %1$s</string>
-    <string name="backup_delete_types_descr">Удалить все данные для устаревших типов из OsmAnd Cloud\?</string>
+    <string name="backup_delete_types_descr">Удалить все данные для отключенных типов из OsmAnd Cloud\?</string>
     <string name="backup_delete_types">Удалить данные отключенных типов</string>
     <string name="shared_string_discussion">Обсуждение</string>
     <string name="shared_string_view_all">Посмотреть все</string>
