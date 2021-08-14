@@ -1816,7 +1816,7 @@
     <string name="rendering_value_disabled_name">Выключено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Сетевая принадлежность</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
-    <string name="shared_string_logoff">Выход</string>
+    <string name="shared_string_logoff">Выйти</string>
     <string name="index_name_netherlands">Европа — Нидерланды</string>
     <string name="shared_string_wikipedia">Википедия</string>
     <string name="local_indexes_cat_wiki">Википедия</string>
@@ -3441,7 +3441,7 @@
     <string name="restore_all_profile_settings">Восстановить все настройки профиля\?</string>
     <string name="saving_new_profile">Сохранение нового профиля</string>
     <string name="profile_backup_failed">Не удалось создать резервную копию профиля.</string>
-    <string name="clear_recorded_data_warning">Вы уверены, что хотите очистить записанные данные\?</string>
+    <string name="clear_recorded_data_warning">Очистить записанные данные\?</string>
     <string name="monitoring_min_speed_descr_side_effect">Побочный эффект: в треке будут отсутствовать все участки, где не соблюдён критерий минимальной скорости (например где вы толкаете велосипед вверх по крутому склону). Также не будет информации о периодах покоя, например во время отдыха. Это влияет на любой анализ или постобработку, например при попытке определить общее время в пути, время в движении или среднюю скорость.</string>
     <string name="monitoring_min_accuracy_descr_side_effect">Побочный эффект: в результате фильтрации по точности, точки могут быть полностью пропущены, например, под мостами, под деревьями, между высокими зданиями или при определённых погодных условиях.</string>
     <string name="monitoring_min_accuracy_descr_remark">Примечание: при включении GPS непосредственно перед записью точность определения первой точки может быть снижена, поэтому мы рассматриваем добавление секундной задержки перед записью точки (либо записи лучшей из трёх последовательных точек и т. д.), но пока это не реализовано.</string>
@@ -3643,9 +3643,9 @@
     <string name="screen_control">Управление экраном</string>
     <string name="turn_screen_on_descr">Настройки включения экрана (убедитесь, что перед блокировкой устройства OsmAnd находится на переднем плане):</string>
     <string name="default_screen_timeout">Настройка отключения экрана по умолчанию</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Вы можете экспортировать или импортировать быстрые действия вместе с профилями приложения.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Экспортируйте или импортируйте быстрые действия с профилями приложения.</string>
     <string name="shared_string_delete_all_q">Удалить все\?</string>
-    <string name="delete_all_actions_message_q">Вы уверены, что хотите безвозвратно удалить %d быстрых действий\?</string>
+    <string name="delete_all_actions_message_q">Удалить безвозвратно быстрые действия (%d)\?</string>
     <string name="screen_timeout">Время экрана</string>
     <string name="width_limit_description">Укажите ширину автомобиля, для широких транспортных средств могут применяться ограничения на маршруте.</string>
     <string name="height_limit_description">Укажите высоту автомобиля, для высоких транспортных средств могут применяться ограничения на маршруте.</string>
@@ -3728,7 +3728,7 @@
     <string name="route_between_points_warning_desc">Далее необходимо выбрать профиль навигации для определения порогового расстояния и привязки маршрута к ближайшей разрешённой дороге.</string>
     <string name="route_between_points_desc">Выберите, как соединять точки: прямой линией или строить маршрут по заданному профилю.</string>
     <string name="in_case_of_reverse_direction">При обратном направлении</string>
-    <string name="plan_route_exit_dialog_descr">Вы уверены, что хотите отменить все изменения в запланированном маршруте\?</string>
+    <string name="plan_route_exit_dialog_descr">Отменить все изменения в запланированном маршруте\?</string>
     <string name="street_level_imagery">Фото с улиц</string>
     <string name="shared_string_save_as_gpx">Сохранить как новый файл трека</string>
     <string name="add_segment_to_the_track">Добавить в файл трека</string>
@@ -3840,9 +3840,9 @@
     <string name="enter_text_separated">Вводите теги через запятую.</string>
     <string name="use_native_pt_desc">Перейти на расчёт маршрутов общественного транспорта с помощью Java (safe)</string>
     <string name="use_two_phase_routing">Использовать 2-фазный алгоритм A*</string>
-    <string name="open_street_map_login_mode">Необходимо войти в систему, чтобы отправить новые данные или правки.
+    <string name="open_street_map_login_mode">Войдите в систему, чтобы отправить новые данные или правки.
 \n
-\nМожно войти в систему, используя безопасный метод OAuth или свои имя пользователя и пароль.</string>
+\nИспользуйте метод OAuth или свое имя пользователя OSM и пароль.</string>
     <string name="use_login_password">Использовать имя и пароль</string>
     <string name="login_open_street_map">Вход в OpenStreetMap</string>
     <string name="login_open_street_map_org">Вход в OpenStreetMap.org</string>
@@ -3878,7 +3878,7 @@
     <string name="select_groups_for_import">Выберите импортируемые группы.</string>
     <string name="select_items_for_import">Выберите импортируемые элементы.</string>
     <string name="use_dev_url">Использовать dev.openstreetmap.org</string>
-    <string name="osm_login_descr">Войди в систему с помощью безопасного метода OAuth или используя свои имя пользователя и пароль.</string>
+    <string name="osm_login_descr">Войдите в систему с помощью безопасного метода OAuth или используя имя пользователя OSM и пароль.</string>
     <string name="subscription_payment_issue_title">Нажмите кнопку, чтобы перейти к настройкам подписки Google Play и исправить вашу подписку.</string>
     <string name="osm_edit_comment_note">Комментировать заметку OSM</string>
     <string name="use_dev_url_descr">Переключиться на использование dev.openstreetmap.org вместо openstreetmap.org для тестирования отправки заметок OSM / POI / GPX.</string>
@@ -4121,7 +4121,7 @@
     <string name="cloud_email_already_registered">Данный адрес электронной почты уже зарегистрирован.</string>
     <string name="resend_verification_code">Отправить повторно</string>
     <string name="verification_code_missing">Я не получил код подтверждения</string>
-    <string name="verification_code_missing_description">Время ожидания кода может составлять 10 минут, также вы можете проверить папку со спамом. Если это не помогло, воспользуйтесь кнопкой ниже.</string>
+    <string name="verification_code_missing_description">Время ожидания кода может составить 10 минут. Проверьте папку со спамом, если и его нет, воспользуйтесь кнопкой ниже.</string>
     <string name="local_backup">Локальное резервное копирование</string>
     <string name="osmand_cloud_authorize_descr">Не теряйте данные. Используйте резервное копирование для лёгкого сохранения и восстановления информации.</string>
     <string name="backup_and_restore">Резервное копирование и восстановление</string>
@@ -4158,7 +4158,7 @@
     <string name="backup_confilcts_descr">Некоторые файлы не могут быть загружены на сервер, поскольку на сервере хранится более новая версия.</string>
     <string name="backup_view_conflicts">Просмотр конфликтов</string>
     <string name="backup_no_internet_descr">Проверьте подключение к интернету и загрузите снова.</string>
-    <string name="shared_string_logout">Выход</string>
+    <string name="shared_string_logout">Выйти</string>
     <string name="backup_delete_all_data">Удалить все мои данные</string>
     <string name="backup_delete_all_data_descr">Все данные в OsmAnd Cloud будут удалены. Локальные версии останутся нетронутыми.</string>
     <string name="backup_data">Резервное копирование данных</string>
@@ -4187,7 +4187,7 @@
     <string name="purchases_feature_desc_unlimited_map_download">Неограниченные загрузки локальных карт всех континентов и регионов.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Доступ к регулярным ежемесячным обновлениям для локальных карт.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Доступ к более частому обновлению карт, выбирайте между: ежечасными, ежедневными или еженедельными обновлениями. Обновления загружаются постепенно, только для измененной области.</string>
-    <string name="purchases_feature_desc_osmand_cloud">OsmAnd Cloud для хранения всех данных OsmAnd в облаке. Забудьте о потере данных после переустановки, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Облачное хранилище OsmAnd Cloud для хранения всех данных приложения. Забудьте о потере данных после переустановки, создавайте резервные копии и восстанавливайте всю информацию без проблем.</string>
     <string name="purchases_feature_desc_advanced_widgets">Доступ к расширенным виджетам OsmAnd.</string>
     <string name="unlimited_map_downloads">Неограниченные загрузки карт</string>
     <string name="wikipedia_and_wikivoyage_offline">Локальные Википедия и Викигид</string>
