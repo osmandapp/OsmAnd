@@ -4297,4 +4297,5 @@
     <string name="connect_track_points_as">連結路線點</string>
     <string name="pro_features">Pro 功能</string>
     <string name="purchases_restored">購買已復原</string>
+    <string name="grey_color_undefined">灰色用於無資料的部份。</string>
 </resources>
