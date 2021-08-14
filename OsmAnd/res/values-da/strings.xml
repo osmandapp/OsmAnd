@@ -4138,4 +4138,10 @@
     <string name="nautical_depth">Havdybde</string>
     <string name="shared_string_progress">Fremskridt</string>
     <string name="promo_subscription">Kampagne-abonnement</string>
+    <string name="icon_group_amenity">Facilitet</string>
+    <string name="subscription_payment_issue_title">Tryk på knappen for at konfigurere en betalingsmetode i Google Play for at ordne dit abonnement.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Offentlig\" betyder, at sporingen vises offentligt i dine GPS-sporinger og i offentlige GPS-sporingslister og i den offentlige sporingsliste med tidsstempler i rå form. Data, der leveres via API\'et, henviser ikke til din sporingsside. Sporpunktstidsstempler er ikke tilgængelige via den offentlige GPS-API, og sporpunkterne er ikke kronologisk ordnet.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privat\" betyder, at sporet ikke vises i nogen offentlige lister, men at sporpunkter fra det i ikke-kronologisk rækkefølge er tilgængelige via den offentlige GPS-API uden tidsstempler.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Sporbar\" betyder, at sporingen ikke vises i offentlige lister, men at behandlede sporingspunkter med tidsstempler fra sporingen (som ikke kan knyttes direkte til dig) vises gennem downloads fra den offentlige GPS-API.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificerbar\" betyder, at sporet vil blive vist offentligt i dine GPS-sporinger og i offentlige GPS-sporingslister, dvs. at andre brugere vil kunne downloade det rå spor og knytte det til dit brugernavn. Offentlige sporpunktsdata med tidsstempel fra GPS-API\'et, der leveres via trackpoints-API\'et, vil henvise til din oprindelige sporingsside.</string>
 </resources>
