@@ -4160,7 +4160,6 @@
     <string name="restore_selected_data">Obnoviť zvolené údaje</string>
     <string name="receiving_data_from_server">Prijímam údaje zo servera…</string>
     <string name="restore_complete">Obnovené</string>
-    <string name="grey_color_slope">Sivá farba sa použije, keď sklon nie je určený.</string>
     <string name="backup_version_history">História verzií</string>
     <string name="backup_storage_taken">Použité miesto</string>
     <string name="backup_version_history_delete_descr">Vymazať históriu zmien pre zastaralé dátové typy z OsmAnd cloudu\?</string>

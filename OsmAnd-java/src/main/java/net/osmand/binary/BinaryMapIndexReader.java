@@ -81,6 +81,7 @@ import gnu.trove.set.hash.TIntHashSet;
 
 public class BinaryMapIndexReader {
 
+	public final static int DETAILED_MAP_MIN_ZOOM = 9;
 	public final static int TRANSPORT_STOP_ZOOM = 24;
 	public static final int SHIFT_COORDINATES = 5;
 	public static final int LABEL_ZOOM_ENCODE = 31 - SHIFT_COORDINATES;

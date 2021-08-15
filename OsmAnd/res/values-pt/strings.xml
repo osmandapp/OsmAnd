@@ -4169,7 +4169,6 @@
     <string name="restore_selected_data">Restaurar dados selecionados</string>
     <string name="receiving_data_from_server">A receber dados do servidor…</string>
     <string name="restore_complete">Restaurado</string>
-    <string name="grey_color_slope">Os declives desconhecidos são mostrados na cor cinzento.</string>
     <string name="backup_version_history">Histórico de versões</string>
     <string name="backup_storage_taken">Espaço utilizado</string>
     <string name="backup_version_history_delete_descr">Eliminar o histórico de alterações de tipos em desuso da cloud\?</string>

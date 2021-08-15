@@ -45,6 +45,12 @@
 		app:fragment="net.osmand.plus.settings.fragments.VehicleParametersFragment"
 		tools:icon="@drawable/ic_action_car_dark" />
 
+	<Preference
+		android:key="customize_route_line"
+		android:layout="@layout/preference_customize_route_line"
+		android:title="@string/customize_route_line"
+		android:icon="@drawable/ic_action_appearance" />
+
 	<PreferenceCategory
 		android:key="other"
 		android:layout="@layout/preference_category_with_descr"
