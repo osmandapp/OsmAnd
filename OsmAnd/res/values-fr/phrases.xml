@@ -334,7 +334,7 @@
     <string name="poi_tobacco">Bureau de tabac</string>
     <string name="poi_toboggan">Toboggan</string>
     <string name="poi_toilets">Toilettes</string>
-    <string name="poi_topmark">Voyant maritime</string>
+    <string name="poi_topmark">Amers et balisage maritime</string>
     <string name="poi_town">Ville</string>
     <string name="poi_toys">Magasin de jouets</string>
     <string name="poi_leisure_track">Piste de sport</string>
@@ -594,7 +594,7 @@
     <string name="poi_craft_window_construction">Construction de fenêtres</string>
     <string name="poi_craft_computer">Assembleur d\'ordinateurs</string>
     <string name="poi_daymark">Amer</string>
-    <string name="poi_notice">Signalétique maritime</string>
+    <string name="poi_notice">Instructions et balisage maritime</string>
     <string name="poi_signal_station_warning">Station de signaux, avertissements</string>
     <string name="poi_small_craft_facility">Facilité pour petites embarcations</string>
     <string name="poi_military_nuclear_explosion_site">Site d\'essais nucléaires</string>
