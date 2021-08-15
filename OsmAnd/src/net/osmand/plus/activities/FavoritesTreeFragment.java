@@ -956,7 +956,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			label.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			if (visible) {
-				Typeface typeface = FontCache.getFont(getContext(), "fonts/Roboto-Medium.ttf");
+				Typeface typeface = FontCache.getFont(getContext(), "ui-fonts/Roboto-Medium.ttf");
 				label.setTypeface(typeface, Typeface.NORMAL);
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);

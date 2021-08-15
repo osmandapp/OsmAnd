@@ -1,5 +1,13 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -1286,9 +1294,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			// search from end
 			for (int i = category.size() - 1; i >= 0; i--) {
 				String cat = category.get(i);
-				// local_indexes_cat_gpx now obsolete in new UI screen which shows only GPX data
-				// if (Algorithms.objectEquals(getActivity().getString(R.string.local_indexes_cat_gpx) + " " +
-				// g.subfolder, cat)) {
 				if (objectEquals(g.subfolder, cat)) {
 					found = i;
 					break;
@@ -1535,7 +1540,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		@Override
 		protected void onPostExecute(String result) {
 			hideProgressBar();
-			Toast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
+			app.showToastMessage(result);
 		}
 	}
 

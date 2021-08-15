@@ -27,14 +27,17 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 	private final BackupExporter exporter;
 	private BackupExportListener listener;
 
+	private final String key;
 	private final Map<String, ItemProgressInfo> itemsProgress = new HashMap<>();
 	private int generalProgress;
 	private long maxProgress;
 
-	ExportBackupTask(@NonNull NetworkSettingsHelper helper,
+	ExportBackupTask(@NonNull String key,
+					 @NonNull NetworkSettingsHelper helper,
 					 @NonNull List<SettingsItem> items,
 					 @NonNull List<SettingsItem> itemsToDelete,
 					 @Nullable BackupExportListener listener) {
+		this.key = key;
 		this.helper = helper;
 		this.listener = listener;
 		BackupHelper backupHelper = helper.getApp().getBackupHelper();
@@ -145,7 +148,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 					ItemProgressInfo prevInfo = getItemProgressInfo(info.type, info.fileName);
 					if (prevInfo != null) {
-						info.work = prevInfo.work;
+						info.setWork(prevInfo.work);
 					}
 					itemsProgress.put(info.type + info.fileName, info);
 
@@ -168,7 +171,7 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	@Override
 	protected void onPostExecute(String error) {
-		helper.exportTask = null;
+		helper.exportAsyncTasks.remove(key);
 
 		BackupHelper backupHelper = helper.getApp().getBackupHelper();
 		backupHelper.getBackup().setError(error);
@@ -213,8 +216,8 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 	public static class ItemProgressInfo {
 
-		private final String type;
-		private final String fileName;
+		protected final String type;
+		protected final String fileName;
 
 		private int work;
 		private final int value;
@@ -230,6 +233,10 @@ public class ExportBackupTask extends AsyncTask<Void, Object, String> {
 
 		public int getWork() {
 			return work;
+		}
+
+		public void setWork(int work) {
+			this.work = work;
 		}
 
 		public int getValue() {

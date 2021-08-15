@@ -28,6 +28,10 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.MapsPlusPlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
@@ -73,11 +77,18 @@ public class DiscountHelper {
 
 	private static final String SHOW_CHOOSE_PLAN_PREFIX = "show-choose-plan:";
 	private static final String CHOOSE_PLAN_TYPE_FREE = "free-version";
-	private static final String CHOOSE_PLAN_TYPE_LIVE = "osmand-live";
 	private static final String CHOOSE_PLAN_TYPE_SEA_DEPTH = "sea-depth";
 	private static final String CHOOSE_PLAN_TYPE_HILLSHADE = "hillshade";
 	private static final String CHOOSE_PLAN_TYPE_WIKIPEDIA = "wikipedia";
-	private static final String CHOOSE_PLAN_TYPE_WIKIVOYAGE= "wikivoyage";
+	private static final String CHOOSE_PLAN_TYPE_WIKIVOYAGE = "wikivoyage";
+	private static final String CHOOSE_PLAN_TYPE_OSMAND_CLOUD = "osmand-cloud";
+	private static final String CHOOSE_PLAN_TYPE_ADVANCED_WIDGETS = "advanced-widgets";
+	private static final String CHOOSE_PLAN_TYPE_HOURLY_MAP_UPDATES = "hourly-map-updates";
+	private static final String CHOOSE_PLAN_TYPE_MONTHLY_MAP_UPDATES = "monthly-map-updates";
+	private static final String CHOOSE_PLAN_TYPE_UNLIMITED_MAP_DOWNLOADS = "unlimited-map-downloads";
+	private static final String CHOOSE_PLAN_TYPE_COMBINED_WIKI = "combined-wiki";
+	private static final String CHOOSE_PLAN_TYPE_PRO = "osmand-pro";
+	private static final String CHOOSE_PLAN_TYPE_MAPS_PLUS = "osmand-maps-plus";
 
 	@SuppressLint("HardwareIds")
 	public static void checkAndDisplay(final MapActivity mapActivity) {
@@ -265,26 +276,20 @@ public class DiscountHelper {
 			toolbarController.setTextBtnTitleClrs(data.textBtnTitleColor, data.textBtnTitleColor);
 		}
 		if (!Algorithms.isEmpty(data.url)) {
-			View.OnClickListener clickListener = new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mapActivity.getMyApplication().logEvent("motd_click");
-					mBannerVisible = false;
-					mapActivity.hideTopToolbar(toolbarController);
-					openUrl(mapActivity, data.url);
-				}
+			View.OnClickListener clickListener = v -> {
+				mapActivity.getMyApplication().logEvent("motd_click");
+				mBannerVisible = false;
+				mapActivity.hideTopToolbar(toolbarController);
+				openUrl(mapActivity, data.url);
 			};
 			toolbarController.setOnBackButtonClickListener(clickListener);
 			toolbarController.setOnTitleClickListener(clickListener);
 			toolbarController.setOnTextBtnClickListener(clickListener);
 		}
-		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.getMyApplication().logEvent("motd_close");
-				mBannerVisible = false;
-				mapActivity.hideTopToolbar(toolbarController);
-			}
+		toolbarController.setOnCloseButtonClickListener(v -> {
+			mapActivity.getMyApplication().logEvent("motd_close");
+			mBannerVisible = false;
+			mapActivity.hideTopToolbar(toolbarController);
 		});
 
 		mData = data;
@@ -294,12 +299,7 @@ public class DiscountHelper {
 	}
 
 	private static void showPoiFilter(final MapActivity mapActivity, final PoiUIFilter poiFilter) {
-		QuickSearchHelper.showPoiFilterOnMap(mapActivity, poiFilter, new Runnable() {
-			@Override
-			public void run() {
-				mFilterVisible = false;
-			}
-		});
+		QuickSearchHelper.showPoiFilterOnMap(mapActivity, poiFilter, () -> mFilterVisible = false);
 		mFilter = poiFilter;
 		mFilterVisible = true;
 	}
@@ -309,7 +309,8 @@ public class DiscountHelper {
 			OsmandApplication app = mapActivity.getMyApplication();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (purchaseHelper != null) {
-				if (url.contains(purchaseHelper.getFullVersion().getSku())) {
+				InAppPurchase fullVersion = purchaseHelper.getFullVersion();
+				if (fullVersion != null && url.contains(fullVersion.getSku())) {
 					app.logEvent("in_app_purchase_redirect");
 					try {
 						purchaseHelper.purchaseFullVersion(mapActivity);
@@ -317,9 +318,16 @@ public class DiscountHelper {
 						LOG.error("purchaseFullVersion is not supported", e);
 					}
 				} else {
+					InAppPurchases purchases = purchaseHelper.getInAppPurchases();
 					for (InAppPurchase p : purchaseHelper.getSubscriptions().getAllSubscriptions()) {
 						if (url.contains(p.getSku())) {
-							ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.HOURLY_MAP_UPDATES);
+							if (purchases.isMapsSubscription(p)) {
+								MapsPlusPlanFragment.showInstance(mapActivity);
+							} else if (purchases.isOsmAndProSubscription(p)) {
+								OsmAndProPlanFragment.showInstance(mapActivity);
+							} else {
+								ChoosePlanFragment.showDefaultInstance(mapActivity);
+							}
 							break;
 						}
 					}
@@ -363,27 +371,53 @@ public class DiscountHelper {
 			}
 		} else if (url.startsWith(SHOW_CHOOSE_PLAN_PREFIX)) {
 			String planType = url.substring(SHOW_CHOOSE_PLAN_PREFIX.length()).trim();
-			OsmAndFeature feature = null;
-			if (CHOOSE_PLAN_TYPE_FREE.equals(planType)) {
-				feature = OsmAndFeature.UNLIMITED_MAP_DOWNLOADS;
-			} else if (CHOOSE_PLAN_TYPE_LIVE.equals(planType)) {
-				feature = OsmAndFeature.HOURLY_MAP_UPDATES;
-			} else if (CHOOSE_PLAN_TYPE_SEA_DEPTH.equals(planType)) {
-				feature = OsmAndFeature.NAUTICAL;
-			} else if (CHOOSE_PLAN_TYPE_HILLSHADE.equals(planType)) {
-				feature = OsmAndFeature.TERRAIN;
-			} else if (CHOOSE_PLAN_TYPE_WIKIPEDIA.equals(planType)) {
-				feature = OsmAndFeature.WIKIPEDIA;
-			} else if (CHOOSE_PLAN_TYPE_WIKIVOYAGE.equals(planType)) {
-				feature = OsmAndFeature.WIKIVOYAGE;
-			}
-			if (feature != null) {
-				ChoosePlanFragment.showInstance(mapActivity, feature);
-			}
+			showDialogForPlanType(mapActivity, planType);
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
 			AndroidUtils.startActivityIfSafe(mapActivity, intent);
+		}
+	}
+
+	private static void showDialogForPlanType(@NonNull MapActivity mapActivity, @NonNull String planType) {
+		switch (planType) {
+			case CHOOSE_PLAN_TYPE_FREE:
+			case CHOOSE_PLAN_TYPE_MAPS_PLUS:
+				MapsPlusPlanFragment.showInstance(mapActivity);
+				break;
+			case CHOOSE_PLAN_TYPE_PRO:
+				OsmAndProPlanFragment.showInstance(mapActivity);
+				break;
+			case CHOOSE_PLAN_TYPE_SEA_DEPTH:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.NAUTICAL);
+				break;
+			case CHOOSE_PLAN_TYPE_HILLSHADE:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.TERRAIN);
+				break;
+			case CHOOSE_PLAN_TYPE_WIKIPEDIA:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.WIKIPEDIA);
+				break;
+			case CHOOSE_PLAN_TYPE_WIKIVOYAGE:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.WIKIVOYAGE);
+				break;
+			case CHOOSE_PLAN_TYPE_OSMAND_CLOUD:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.OSMAND_CLOUD);
+				break;
+			case CHOOSE_PLAN_TYPE_ADVANCED_WIDGETS:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.ADVANCED_WIDGETS);
+				break;
+			case CHOOSE_PLAN_TYPE_HOURLY_MAP_UPDATES:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.HOURLY_MAP_UPDATES);
+				break;
+			case CHOOSE_PLAN_TYPE_MONTHLY_MAP_UPDATES:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.MONTHLY_MAP_UPDATES);
+				break;
+			case CHOOSE_PLAN_TYPE_UNLIMITED_MAP_DOWNLOADS:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.UNLIMITED_MAP_DOWNLOADS);
+				break;
+			case CHOOSE_PLAN_TYPE_COMBINED_WIKI:
+				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.COMBINED_WIKI);
+				break;
 		}
 	}
 
@@ -646,7 +680,7 @@ public class DiscountHelper {
 	private static class Conditions {
 
 		protected OsmandApplication app;
-		private Condition[] conditions;
+		private final Condition[] conditions;
 
 		Conditions(OsmandApplication app) {
 			this.app = app;
@@ -656,7 +690,7 @@ public class DiscountHelper {
 					new NotPurchasedInAppPurchaseCondition(app),
 					new PurchasedInAppPurchaseCondition(app),
 					new NotPurchasedPluginCondition(app),
-					new PurchasedPluginCondition(app) };
+					new PurchasedPluginCondition(app)};
 		}
 
 		boolean matchesCondition(JSONObject o) {

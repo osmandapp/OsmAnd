@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="srtm_paid_version_msg">Overvej at betale for \'Højdekurve\' udvidelsen for at støtte videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
@@ -1684,7 +1684,7 @@
     <string name="srtm_plugin_disabled">Højdekurver er deaktiveret</string>
     <string name="show_free_version_banner">Vis banner for gratis version</string>
     <string name="show_free_version_banner_description">Vis banneret for den gratis version selv i den betalte version.</string>
-    <string name="downloading_number_of_files">Henter - %1$d fil</string>
+    <string name="downloading_number_of_files">Henter - %1$d fil…</string>
     <string name="buy">Køb</string>
     <string name="hillshade_layer_disabled">Reliefskygger er deaktiveret</string>
     <string name="activate_seamarks_plugin">Aktiver \'Søkort\' udvidelsen</string>
@@ -3934,8 +3934,214 @@
     <string name="restore_from_osmand_cloud">Gendan fra OsmAnd Cloud</string>
     <string name="choose_what_to_restore">Vælg hvad der skal gendannes.</string>
     <string name="restore_selected_data">Gendanner valgte data</string>
-    <string name="receiving_data_from_server">Henter data fra serveren</string>
+    <string name="receiving_data_from_server">Henter data fra serveren…</string>
     <string name="restore_complete">Gendannelse fuldført</string>
-    <string name="grey_color_slope">Grå farve anvendes, når hældningen er udefineret.</string>
     <string name="backup_version_history">Versionshistorik</string>
+    <string name="backup_error_no_subscription">Mangler abonnement</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Farvelægning efter netværkstilhørsforhold.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Farvelæg ruter efter deres knudepunktsnetværkstype (international, regional, lokal).</string>
+    <string name="walking_route_osmc_description">Farvelæg ruter efter deres individuelle lokale farve (hvis de findes på OpenStreetMap) og type (international, regional, lokal).</string>
+    <string name="travel_routes">Rejseruter</string>
+    <string name="setting_supported_by_style">Denne indstilling leveres af kortstilen \'%1$s\'</string>
+    <string name="direct_line_maps_required_descr">Ruteberegning tager længere tid end normalt.
+\n
+\nMåske er nogle kort ikke indlæst.</string>
+    <string name="online_direct_line_maps_link">Kontroller de nødvendige kort.</string>
+    <string name="offline_maps_required_descr">Nogle offline-kort, der er nødvendige for denne rute, mangler.</string>
+    <string name="online_maps_required_descr">OsmAnd kunne desværre ikke finde en rute for dine indstillinger.
+\n
+\nMåske er nogle kort ikke indlæst, du kan køre en online kontrol efter de nødvendige kort.</string>
+    <string name="online_maps_searching_descr">Søger online…</string>
+    <string name="reset_to_original">Nulstil til oprindelig</string>
+    <string name="map_updates_for_mappers">Kortopdateringer til kortlæggerne</string>
+    <string name="benefits_for_contributors">Fordele for aktive OSM-bidragsydere</string>
+    <string name="benefits_for_contributors_primary_descr">Du kan være berettiget til ubegrænsede kortopdateringer hver time, hvis du er en aktiv bidragyder til OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">Log ind på OpenStreetMap for at tjekke, om du er berettiget til ubegrænsede månedlige og ugentlige kortopdateringer.</string>
+    <string name="use_login_and_password">Benyt brugernavn og adgangskode</string>
+    <string name="available_until">Tilgængelig indtil %1$s</string>
+    <string name="enough_contributions_descr">Tillykke, du har lavet nok bidrag til OpenStreetMap og kan nu nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
+    <string name="not_enough_contributions_descr">Der kræves mindst %1$s OpenStreetMap-bidrag inden for %2$s dage.</string>
+    <string name="shared_string_contributions">Bidrag</string>
+    <string name="contributions_may_calculate_with_delay">Beregning af bidragene kan tage adskillige timer.</string>
+    <string name="map_updates_are_unavailable_yet">Kortopdateringer er endnu ikke tilgængelige. :-(</string>
+    <string name="connect_track_points_as">Forbind rutepunkter</string>
+    <string name="pro_features">Pro-funktioner</string>
+    <string name="purchases_restored">Køb gendannet</string>
+    <string name="option_available_only_in_osmand_pro">Denne mulighed er tilgængelig som en del af OsmAnd Pro-abonnementet.</string>
+    <string name="purchases_feature_desc_pro_widgets">Få adgang til OsmAnd Pro-funktioner: Rutefarvning og meget mere.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Udforsk OsmAnd-abonnementer for at finde et, der passer til dig.</string>
+    <string name="routes_color_by_type">Farv ruterne efter…</string>
+    <string name="shared_string_relation">Relation</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Farvelæg ruterne efter deres individuelle lokale farve (hvis de findes på OpenStreetMap) og symbolet for vandreskjoldet.</string>
+    <string name="unlimited_map_downloads">Ubegrænset download af kort</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipedia og Wikivoyage offline</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Terrænkort: konturlinjer, bakkeskygger, hældning</string>
+    <string name="offline_wikipeadia">Offline Wikipedia</string>
+    <string name="offline_wikivoyage">Offline Wikivoyage</string>
+    <string name="terrain_maps">Terrænkort</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Få \"%1$s\" som en del af %2$s abonnementet. Sammenligning:</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s af %2$s</string>
+    <string name="continue_with">Fortsæt med %1$s</string>
+    <string name="not_available_with">Ikke tilgængelig med %1$s</string>
+    <string name="redeem_promo_code">Indløs kampagnekode</string>
+    <string name="osmand_maps_plus_tagline">Få udvidede funktioner</string>
+    <string name="osmand_pro_tagline">Få flest mulige funktioner</string>
+    <string name="shared_string_learn_more">Få mere at vide</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Annuller det når som helst i Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Annuller det når som helst i Google Play.</string>
+    <string name="shared_string_not_included">Ikke inkluderet</string>
+    <string name="shared_string_includes">Inkluderer</string>
+    <string name="complete_purchase">Fuldfør køb</string>
+    <string name="regular_price">Normal pris</string>
+    <string name="from_with_param">Fra %1$s</string>
+    <string name="backup_delete_types_descr">Slet alle data for forældede datatyper fra OsmAnd Cloud\?</string>
+    <string name="backup_delete_types">Slet deaktiverede datatyper</string>
+    <string name="shared_string_discussion">Diskussion</string>
+    <string name="shared_string_view_all">Se alle</string>
+    <string name="backup_error_user_is_already_registered">Denne e-mailadresse er i brug på en anden konto</string>
+    <string name="backup_error_subscription_was_expired">Udløbet abonnement</string>
+    <string name="backup_error_subscription_was_expired_descr">Dit OsmAnd Pro-abonnement er udløbet, forny det for at bruge backup. Du kan stadig gendanne data fra skyen.</string>
+    <string name="backup_error_subscription_was_used">Abonnement eller kampagne anvendes af en anden konto %1$s</string>
+    <string name="backup_error_size_is_exceeded">Den maksimale størrelse på OsmAnd Cloud er overskredet %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">Filen skal sendes i .gzip-format</string>
+    <string name="backup_error_file_not_available">Fil ikke tilgængelig</string>
+    <string name="backup_error_token_is_not_valid">Der er noget galt med det angivne enheds-id eller token</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Ugyldig eller udløbet token</string>
+    <string name="backup_error_user_is_not_registered">Ingen bruger registreret med den e-mailadresse</string>
+    <string name="backup_error_no_valid_subscription">Mangler gyldigt abonnement</string>
+    <string name="contour_lines_hillshades_slope">Konturlinjer, bakkeskygger, hældning</string>
+    <string name="approximate_route_description">Fastgør ruten til veje på kortet for at få alle sving og yderligere data, som glathed, vejtyper osv.</string>
+    <string name="duration_moment_ago">for et øjeblik siden</string>
+    <string name="logout_from_osmand_cloud">Log af OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Log ud\?
+\nDu skal logge ind igen for at sikkerhedskopiere eller gendanne data.</string>
+    <string name="backup_deleting_all_data">Sletter alle data…</string>
+    <string name="backup_deleted_all_data">Slettede alle data.</string>
+    <string name="backup_deleting_all_data_descr">Vent venligst indtil OsmAnd sletter dine data fra skyen. Alle data på enheden forbliver uberørte.</string>
+    <string name="backup_deleted_all_data_descr">Alle dine data er blevet slettet fra OsmAnd Cloud med succes.</string>
+    <string name="backup_version_history_removed">Al versionshistorik er blevet fjernet.</string>
+    <string name="backup_data_removed">Alle data er blevet fjernet.</string>
+    <string name="backup_do_not_have_any">Du har endnu ingen online sikkerhedskopi.</string>
+    <string name="backup_dont_have_any_descr">Planlæg automatiske sikkerhedskopier, så du aldrig mister data.</string>
+    <string name="backup_welcome_back">Velkommen tilbage!</string>
+    <string name="backup_setup">Indstil sikkerhedskopiering</string>
+    <string name="backup_welcome_back_descr">Gendan data på denne enhed ved hjælp af eksisterende sikkerhedskopier, eller sikkerhedskopiér data til OsmAnd Cloud.</string>
+    <string name="backup_restore_now">Gendan nu</string>
+    <string name="shared_string_purchased">Købt</string>
+    <string name="explore_wikipedia_offline">Udforsk Wikipedia offline.</string>
+    <string name="on_hold_since">Pauset siden %1$s</string>
+    <string name="active_till">Aktiv indtil %1$s</string>
+    <string name="track_has_no_needed_data">Sporet indeholder ikke nødvendig data.</string>
+    <string name="weight_limit_description">Oplys din køretøjsvægt, da der kan gælde visse ruterestriktioner for tunge køretøjer.</string>
+    <string name="height_limit_description">Oplys din køretøjshøjde, da der kan gælde visse ruterestriktioner for høje køretøjer.</string>
+    <string name="width_limit_description">Angiv din køretøjsbredde. Nogle rutebegrænsninger kan gælde for brede køretøjer.</string>
+    <string name="osm_live_payment_subscription_management">Betaling opkræves fra din Google Play-konto, når du bekræfter købet.
+\n
+\nDet fornyes, medmindre det annulleres før den valgte fornyelsesperiode.
+\n
+\nDu kan til enhver tid administrere eller annullere dine abonnementer fra dine Google Play-indstillinger.</string>
+    <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
+    <string name="app_mode_light_aircraft">Letvægtsfly</string>
+    <string name="routing_attr_allow_intermittent_description">Tillad mellemliggende vandveje</string>
+    <string name="routing_attr_allow_intermittent_name">Tillad mellemliggende vandveje</string>
+    <string name="shared_string_server_url">Server-URL</string>
+    <string name="keep_it_empty_if_not">Lad den være tom, hvis ikke</string>
+    <string name="online_routing_example_hint">URL med alle parametre vil se således ud:</string>
+    <string name="open_place_reviews_plugin_description">Send fotos, anmeldelser og links om offentlige steder som restauranter, hoteller, museer og waypoints som åbne data https://openplacereviews.org/data/.
+\n
+\nLæs mere på https://openplacereviews.org</string>
+    <string name="routing_attr_height_obstacles_description">Ruteføring kunne undgå kraftige stigninger.</string>
+    <string name="release_4_0_beta">- Tilføjet mulighed for at downloade konturlinjer i fod
+\n
+\n - Planlæg rute-landskab: tilføjet faner til at skifte mellem punkter eller grafer
+\n
+\n - OsmAnd Live-opdateringer flyttet til \"Downloads &gt; Opdateringer\"
+\n
+\n - Spor kan nu farves efter højde, hastighed eller hældning.
+\n
+\n - Der er tilføjet mulighed for at ændre rutelinjens udseende.
+\n
+\n - Opdateret dialogboks \"Turoptagelse\"
+\n
+\n</string>
+    <string name="search_more">Søg mere…</string>
+    <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Sikkerhedskopiering og gendannelse</string>
+    <string name="last_backup">Seneste sikkerhedskopiering</string>
+    <string name="duration_ago">%1$s siden</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Mist aldrig dine data. Sikkerhedskopier og gendan nemt alle informationer.</string>
+    <string name="local_backup">Lokal sikkerhedskopiering</string>
+    <string name="local_backup_descr">Sikkerhedskopier eller gendan data fra en lokal fil.</string>
+    <string name="backup_into_file">Sikkerhedskopier som fil</string>
+    <string name="restore_from_file">Gendan fra fil</string>
+    <string name="osmand_cloud_help_descr">Brug for hjælp\? Kontakt os venligst på %1$s</string>
+    <string name="osmand_cloud_create_account_descr">Indtast din e-mailadresse, en bekræftelseskode vil blive sendt dertil,
+\nog alle dine data vil blive knyttet til den.</string>
+    <string name="osmand_cloud_login_descr">Indtast den e-mailadresse, du har registreret dig med. Der vil blive sendt en engangskode til den til det næste trin.</string>
+    <string name="verify_email_address">Bekræft e-mailadressen</string>
+    <string name="verify_email_address_descr">Verifikationskode sendt til %1$s. Indtast den venligst i feltet nedenfor.</string>
+    <string name="enter_verification_code">Indtast engangsadgangskode</string>
+    <string name="cloud_email_not_registered">Denne e-mailadresse er ikke registreret til OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Denne e-mailadresse er allerede registreret.</string>
+    <string name="resend_verification_code">Send igen</string>
+    <string name="verification_code_missing">Jeg modtog ikke en verifikationskode</string>
+    <string name="verification_code_missing_description">Det kan tage 10 minutter. Brug knappen nedenfor, hvis den ikke er i din spam-mappe.</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="shared_string_online">Online</string>
+    <string name="osmand_online_routing_promo">Brug foruddefinerede skabeloner, eller tilføj OSRM, GraphHopper, OpenRouteService eller GPX online-routing.</string>
+    <string name="shared_string_external">Ekstern</string>
+    <string name="provided_by">Leveret af %1$s</string>
+    <string name="failed_loading_predefined_engines">Kunne ikke indlæse listen over foruddefinerede skabeloner.
+\nKontroller venligst din internetforbindelse.</string>
+    <string name="shared_string_predefined">Foruddefineret</string>
+    <string name="backup_complete">Sikkerhedskopiering fuldført</string>
+    <string name="backup_now">Sikkerhedskopier nu</string>
+    <string name="make_backup">Lav en sikkerhedskopi</string>
+    <string name="make_backup_descr">Der er mange ændringer på denne enhed. Tag en sikkerhedskopi af disse data for ikke at miste dem.</string>
+    <string name="backup_conflicts">Konflikter</string>
+    <string name="backup_confilcts_descr">Nogle filer kunne ikke uploades til serveren, fordi en nyere version er gemt på serveren.</string>
+    <string name="backup_view_conflicts">Se konflikter</string>
+    <string name="backup_no_internet_descr">Tjek din internetforbindelse, og download igen.</string>
+    <string name="backup_pause_all">Sæt alle på pause</string>
+    <string name="upload_local_version">Upload lokal version</string>
+    <string name="download_server_version">Download serverversion</string>
+    <string name="shared_string_logout">Log ud</string>
+    <string name="backup_delete_all_data">Slet alle mine data</string>
+    <string name="backup_delete_all_data_descr">Alle data på OsmAnd Cloud slettes. Lokale versioner forbliver uberørte.</string>
+    <string name="backup_delete_all_data_warning">Du er ved at slette alle data, der tidligere er uploadet til OsmAnd Cloud, herunder versionshistorik.
+\n
+\nDu vil ikke kunne gendanne slettede data.</string>
+    <string name="backup_danger_zone">Farezone</string>
+    <string name="delete_all_confirmation">Ja, slet alle</string>
+    <string name="backup_delete_old_data">Fjern gamle versioner</string>
+    <string name="backup_delete_old_data_descr">Aktuelle versioner af dine data vil blive bevaret på OsmAnd Cloud</string>
+    <string name="backup_delete_old_data_warning">Du er ved at slette ændringshistorikken for de tidligere indlæste data.
+\n
+\nDen aktuelle version af dataene vil blive gemt på serveren, men du vil ikke kunne vende tilbage til de tidligere foretagne ændringer.</string>
+    <string name="backup_storage_taken">Lager brugt</string>
+    <string name="backup_version_history_delete_descr">Slet ændringsloggen for forældede datatyper fra OsmAnd Cloud\?</string>
+    <string name="delete_version_history">Slet versionshistorik</string>
+    <string name="routing_attr_avoid_tunnels_description">Undgå tunneller</string>
+    <string name="routing_attr_avoid_tunnels_name">Undgå tunneler</string>
+    <string name="backup_promocode">Kampagnekode</string>
+    <string name="send_crash_log">Send nedbrudslog</string>
+    <string name="purchases_feature_desc_nautical">Få adgang til havdybdeoplysninger</string>
+    <string name="purchases_feature_desc_terrain">Terrænkonturlinjer, fuldt bakkeskyggekort med mørke nuancer og hældningskort med farver til at vise toppe og lavlandsområder.</string>
+    <string name="purchases_feature_desc_wikivoyage">Udforsk Wikivoyage offline. Artikler opdelt efter lande og regioner og tilgængelige på alle sprog.</string>
+    <string name="purchases_feature_desc_wikipedia">Udforsk Wikipedia offline. Artikler opdelt efter lande og regioner og tilgængelige på alle sprog.</string>
+    <string name="purchases_feature_desc_combined_wiki">Udforsk Wikipedia-artikler på farten uden internetforbindelse. Offline-data opdelt efter lande og tilgængelig på alle sprog.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Få ubegrænset download af offline kort for alle kontinenter og regioner.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Få adgang til regelmæssige månedlige opdateringer af offlinekort.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Få adgang til hyppigere kortopdateringer. Opdateringer hver time, dag eller uge. Opdateringer downloades trinvis og kun for det ændrede område.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Få OsmAnd Cloud til at gemme alle OsmAnd-data online. Ingen tabte data efter geninstallation. Sikkerhedskopier og gendan nemt alle informationer.</string>
+    <string name="nautical_depth">Havdybde</string>
+    <string name="shared_string_progress">Fremskridt</string>
+    <string name="promo_subscription">Kampagne-abonnement</string>
+    <string name="icon_group_amenity">Facilitet</string>
+    <string name="subscription_payment_issue_title">Tryk på knappen for at konfigurere en betalingsmetode i Google Play for at ordne dit abonnement.</string>
+    <string name="gpx_upload_public_visibility_descr">\"Offentlig\" betyder, at sporingen vises offentligt i dine GPS-sporinger og i offentlige GPS-sporingslister og i den offentlige sporingsliste med tidsstempler i rå form. Data, der leveres via API\'et, henviser ikke til din sporingsside. Sporpunktstidsstempler er ikke tilgængelige via den offentlige GPS-API, og sporpunkterne er ikke kronologisk ordnet.</string>
+    <string name="gpx_upload_private_visibility_descr">\"Privat\" betyder, at sporet ikke vises i nogen offentlige lister, men at sporpunkter fra det i ikke-kronologisk rækkefølge er tilgængelige via den offentlige GPS-API uden tidsstempler.</string>
+    <string name="gpx_upload_trackable_visibility_descr">\"Sporbar\" betyder, at sporingen ikke vises i offentlige lister, men at behandlede sporingspunkter med tidsstempler fra sporingen (som ikke kan knyttes direkte til dig) vises gennem downloads fra den offentlige GPS-API.</string>
+    <string name="gpx_upload_identifiable_visibility_descr">\"Identificerbar\" betyder, at sporet vil blive vist offentligt i dine GPS-sporinger og i offentlige GPS-sporingslister, dvs. at andre brugere vil kunne downloade det rå spor og knytte det til dit brugernavn. Offentlige sporpunktsdata med tidsstempel fra GPS-API\'et, der leveres via trackpoints-API\'et, vil henvise til din oprindelige sporingsside.</string>
 </resources>

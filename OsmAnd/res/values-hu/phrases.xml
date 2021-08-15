@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_palaeontological_site">Őslénytani lelőhely</string>
     <string name="poi_bakery">Pékség</string>
@@ -383,7 +383,6 @@
     <string name="poi_driving_school">Autósiskola</string>
     <string name="poi_prosecutor">Ügyész</string>
     <string name="poi_pension_fund">Nyugdíjalap</string>
-    
     <string name="poi_customs">Vámhivatal</string>
     <string name="poi_isolated_dwelling">Magányos lakóhely</string>
     <string name="poi_suburb">Városrész</string>
@@ -587,7 +586,6 @@
     <string name="poi_candles">Gyertyabolt</string>
     <string name="poi_doors">Ajtók</string>
     <string name="poi_erotic">Szexbolt</string>
-    
     <string name="poi_garden_furniture">Kertibútor-bolt</string>
     <string name="poi_gas">Palackozottgáz-bolt</string>
     <string name="poi_herbalist">Gyógynövénybolt</string>
@@ -605,7 +603,6 @@
     <string name="poi_vehicle_inspection">Műszaki vizsgáló állomás</string>
     <string name="poi_aerialway_pylon">Felvonóoszlop</string>
     <string name="poi_breakwater">Hullámtörő</string>
-    
     <string name="poi_power_tower">Távvezetékoszlop</string>
     <string name="poi_power_pole">Villanyoszlop</string>
     <string name="poi_cooling_tower">Hűtőtorony</string>
@@ -671,7 +668,6 @@
     <string name="poi_photo">Fotósbolt</string>
     <string name="poi_radiotechnics">Rádiótechnikai bolt</string>
     <string name="poi_ship_chandler">Hajózási felszerelések boltja</string>
-    
     <string name="poi_trade">Szakáruház</string>
     <string name="poi_vacuum_cleaner">Porszívóbolt</string>
     <string name="poi_video">Videófilmbolt vagy -kölcsönző</string>
@@ -2952,7 +2948,6 @@
     <string name="poi_craft_rigger">Vitorlásfelszerelés-készítő</string>
     <string name="poi_dojo">Dódzsó</string>
     <string name="poi_bandy">Bandy</string>
-    
     <string name="poi_signal_station_traffic">Jelzőállomás (vízi közlekedés)</string>
     <string name="poi_signal_station_warning">Jelzőállomás (figyelmeztetés)</string>
     <string name="poi_electronics_repair_computer">Villamosgép-szerelés: számítógép</string>
@@ -3645,7 +3640,7 @@
     <string name="poi_vehicle_military">Járművel katonai célra használható</string>
     <string name="poi_vehicle_delivery">Járművel áruszállításra használható</string>
     <string name="poi_vehicle_forestry">Járművel erdészeti célra használható</string>
-    <string name="poi_motorcar_yes">Személyautóval használható</string>
+    <string name="poi_motorcar_yes">Igen</string>
     <string name="poi_motorcar_private">Személyautóval a tulajdonos engedélyével használható</string>
     <string name="poi_motorcar_no">Személyautóval nem használható</string>
     <string name="poi_motorcar_destination">Személyautóval célforgalomra használható</string>
@@ -3974,4 +3969,22 @@
     <string name="poi_contact_xing">Xing</string>
     <string name="poi_contact_linkedin">LinkedIn</string>
     <string name="poi_outdoor_seating_poi">Terasz (kiülős hely)</string>
+    <string name="poi_authentication_none_yes">Van</string>
+    <string name="poi_authentication_none_no">Azonosítás szükséges</string>
+    <string name="poi_authentication_short_message_text">Az azonosításhoz használt SMS szövege</string>
+    <string name="poi_authentication_short_message_number">Az azonosításhoz használt SMS-szám</string>
+    <string name="poi_authentication_contactless_yes">Van</string>
+    <string name="poi_authentication_contactless_no">Érintésmentes azonosítás nincs</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_access_motorcar">Személyautóval használható</string>
+    <string name="poi_authentication_none">Azonosítás nem szükséges</string>
+    <string name="poi_authentication_short_message">Azonosítás SMS-sel</string>
+    <string name="poi_authentication_phone_call">Azonosítás telefonhívással</string>
+    <string name="poi_authentication_app">Azonosítás telefonos alkalmazással</string>
+    <string name="poi_authentication_key">Azonosítás kulccsal</string>
+    <string name="poi_authentication_chip_card">Azonosítás chipkártyával</string>
+    <string name="poi_authentication_contactless">Érintésmentes azonosítás</string>
+    <string name="poi_access_bicycle">Kerékpárral használható</string>
+    <string name="poi_access_general">Általánosan használható</string>
+    <string name="poi_access_scooter">Rollerrel használható</string>
 </resources>

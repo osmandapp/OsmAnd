@@ -12,13 +12,17 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxReadDescriptionDialogFragment;
+import net.osmand.plus.wikipedia.WikiArticleHelper;
 
 import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKIVOYAGE_DOMAIN;
+import static net.osmand.plus.wikipedia.WikiArticleHelper.WIKI_DOMAIN;
 
 public class ArticleWebViewClient extends WebViewClient {
 
@@ -34,6 +38,7 @@ public class ArticleWebViewClient extends WebViewClient {
 	private final GPXFile gpxFile;
 	private final View view;
 	private final boolean usedOnMap;
+	private WikiArticleHelper wikiArticleHelper;
 
 	public ArticleWebViewClient(@NonNull GpxReadDescriptionDialogFragment fragment,
 	                            @NonNull FragmentActivity activity,
@@ -46,6 +51,7 @@ public class ArticleWebViewClient extends WebViewClient {
 		this.view = view;
 		this.usedOnMap = usedOnMap;
 		this.app = (OsmandApplication) activity.getApplicationContext();
+		wikiArticleHelper = new WikiArticleHelper(activity, isNightMode());
 	}
 
 	@Override
@@ -62,6 +68,10 @@ public class ArticleWebViewClient extends WebViewClient {
 		if (url.contains(WIKIVOYAGE_DOMAIN) && isWebPage) {
 			WikivoyageUtils.processWikivoyageDomain(activity, url, isNightMode());
 			fragment.dismiss();
+		} else if (url.contains(WIKI_DOMAIN) && isWebPage) {
+			QuadRect rect = gpxFile.getRect();
+			LatLon defaultCoordinates = new LatLon(rect.centerY(), rect.centerX());
+			WikivoyageUtils.processWikipediaDomain(wikiArticleHelper, defaultCoordinates, url);
 		} else if (url.contains(PREFIX_TEL)) {
 			Intent intent = new Intent(Intent.ACTION_DIAL);
 			intent.setData(Uri.parse(url));
@@ -80,6 +90,8 @@ public class ArticleWebViewClient extends WebViewClient {
 
 				MapActivity.launchMapActivityMoveToTop(activity);
 			}
+		} else if (isWebPage) {
+			WikiArticleHelper.warnAboutExternalLoad(url, activity, isNightMode());
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 			return AndroidUtils.startActivityIfSafe(activity, intent);

@@ -166,10 +166,15 @@ task collectVoiceAssets(type: Sync) {
 }
 
 task collectFonts(type: Copy) {
-	from "../../resources/fonts"
 	from "../../resources/rendering_styles/fonts"
 //	from "../../resources/rendering_styles/fonts/OpenSans"
 	into "assets/fonts"
+	include "*.ttf"
+}
+
+task collectUiFonts(type: Copy) {
+	from "../../resources/fonts"
+	into "assets/ui-fonts"
 	include "*.ttf"
 }
 
@@ -268,6 +273,7 @@ task copyWidgetIcons(type: Sync) {
 task collectExternalResources {
 	dependsOn collectVoiceAssets,
 			collectFonts,
+			collectUiFonts,
 			collectHelpContentsAssets,
 			collectHelpContentsStyle,
 			copyMapShaderIcons,

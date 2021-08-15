@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
@@ -3910,7 +3910,7 @@
     <string name="routing_attr_allow_streams_description">Permitir arroyos y desagües</string>
     <string name="routing_attr_allow_streams_name">Permitir arroyos y desagües</string>
     <string name="routing_attr_allow_intermittent_description">Permitir vías de agua intermitentes</string>
-    <string name="voice_prompts_timetable">Tiempo de indicaciones por voz</string>
+    <string name="voice_prompts_timetable">Tiempo de los avisos por voz</string>
     <string name="opr_use_dev_url">Usar test.openplacereviews.org</string>
     <string name="open_place_reviews_plugin_description">OpenPlaceReviews es un proyecto impulsado por la comunidad sobre lugares públicos como restaurantes, hoteles, museos, puntos de referencia. Recoge toda la información pública sobre ellos como fotos, reseñas, enlaces a otros servicios como OpenStreetMap y Wikipedia.
 \n
@@ -3963,7 +3963,6 @@
     <string name="shared_string_api_key">Clave API</string>
     <string name="uploaded_count">Subido %1$d de %2$d</string>
     <string name="rendering_attr_noNatureReserveBoundaries_name">Límites de reservas naturales</string>
-    
     <string name="shared_string_subtype">Subtipo</string>
     <string name="shared_string_vehicle">Vehículo</string>
     <string name="shared_string_server_url">URL del servidor</string>
@@ -4065,13 +4064,17 @@
     <string name="in_grace_period">En periodo de gracia</string>
     <string name="on_hold">En espera</string>
     <string name="expired">Expirado</string>
-    <string name="release_4_0_beta">- Las actualizaciones de OsmAnd Live se han movido a \"Descargas &gt; Actualizaciones\".
+    <string name="release_4_0_beta">• Se ha añadido la opción para descargar las curvas de nivel en pies.
 \n
-\n - Los tracks ahora pueden ser coloreados por altitud, velocidad o pendiente.
+\n• Paisaje del plan de ruta: se añadieron pestañas para alternar entre puntos o gráficos
 \n
-\n - Añadida la opción de cambiar la apariencia de la línea de la ruta de navegación
+\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones».
 \n
-\n - Actualizado el cuadro de diálogo \"Grabación del viaje\".
+\n• Las trazas ahora pueden colorearse por altitud, velocidad o pendiente.
+\n
+\n• Se ha añadido la opción de cambiar el aspecto a la línea de ruta.
+\n
+\n• Se ha actualizado el cuadro de diálogo «Grabación de viaje»
 \n
 \n</string>
     <string name="update_all_maps_added">¿Actualizar todos los mapas añadidos a %1$s\?</string>
@@ -4084,15 +4087,136 @@
     <string name="shared_string_max_height">Altura mínima</string>
     <string name="shared_string_itinerary">Itinerario</string>
     <string name="release_4_0">• Copia de seguridad en la nube.
-\n• Se ha añadido el modo nocturno para el estilo visual «Topográfico».
+\n
+\n• Se ha añadido el modo nocturno para el estilo de mapa «Topo».
+\n
 \n• Se ha añadido la opción de descargar las curvas de nivel en pies.
+\n
 \n• Las trazas ahora pueden ser coloreadas por altitud, velocidad o pendiente.
+\n
 \n• Se ha actualizado el cuadro de diálogo «Grabación de viaje».
-\n• La «distancia al pulsar» se ha movido de la regla radial a una opción separada.
-\n• Planificar ruta: se ha añadido la posibilidad de cambiar los ajustes de navegación, en la configuración del mapa y la búsqueda, sin salir de la planificación de ruta.
-\n• Se ha añadido la opción de «Compra» con información detallada sobre las compras.
+\n
+\n• La «Distancia al pulsar» se ha movido de la regla radial a una opción separada.
+\n
+\n• Planificar ruta: Ahora puedes cambiar los ajustes de navegación, acceder a la configuración del mapa y buscar sin salir de la planificación de ruta.
+\n
+\n• Se ha añadido la opción de «Compra» con información detallada de las compras.
+\n
 \n• Se ha añadido la opción de cambiar el aspecto de la línea de la ruta.
-\n• Las actualizaciones de OsmAnd Live se han movido a \"Descargas &gt; Actualizaciones\".
+\n
+\n• Las actualizaciones de OsmAnd Live se han movido a «Descargas → Actualizaciones».
 \n
 \n</string>
+    <string name="duration_moment_ago">hace un momento</string>
+    <string name="logout_from_osmand_cloud">Cerrar sesión de OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">¿Estás seguro de que quieres cerrar la sesión\?
+\nTendrás que volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
+    <string name="backup_deleting_all_data">Eliminando todos los datos</string>
+    <string name="backup_deleted_all_data">Eliminados todos los datos</string>
+    <string name="backup_deleting_all_data_descr">Por favor, espera hasta que OsmAnd elimine todos tus datos de la nube. Todos los datos en el dispositivo permanecen sin tocar.</string>
+    <string name="backup_deleted_all_data_descr">Todos tus datos han sido correctamente eliminados de OsmAnd Cloud.</string>
+    <string name="backup_version_history_removed">Todo el historial de versiones ha sido borrado</string>
+    <string name="backup_data_removed">Todos los datos han sido borrados</string>
+    <string name="shared_string_progress">Avance</string>
+    <string name="backup_do_not_have_any">Aún no tienes una copia de seguridad en línea</string>
+    <string name="backup_dont_have_any_descr">Configura una copia de seguridad automática para no tener que preocuparte por la pérdida de datos.</string>
+    <string name="backup_welcome_back">¡Bienvenido de nuevo!</string>
+    <string name="backup_welcome_back_descr">Puedes restaurar los datos de este dispositivo utilizando las copias de seguridad existentes o configurar una copia de seguridad de este dispositivo en OsmAnd Cloud.</string>
+    <string name="backup_setup">Configurar copia de seguridad</string>
+    <string name="backup_restore_now">Restaurar ahora</string>
+    <string name="attribute">Atributo</string>
+    <string name="shared_string_purchased">Comprado</string>
+    <string name="explore_wikipedia_offline">Explora Wikipedia sin conexión.</string>
+    <string name="on_hold_since">En espera desde %1$s</string>
+    <string name="active_till">Activo hasta %1$s</string>
+    <string name="promo_subscription">Suscripción promocional</string>
+    <string name="track_has_no_needed_data">La traza no contiene los datos necesarios.</string>
+    <string name="option_available_only_in_osmand_pro">La opción está disponible como parte de la suscripción a OsmAnd Pro.</string>
+    <string name="purchases_feature_desc_pro_widgets">Obtén acceso a las funciones de OsmAnd Pro. Coloración de rutas y más.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Explora los planes de OsmAnd para encontrar uno adecuado para ti.</string>
+    <string name="routes_color_by_type">Color de rutas por</string>
+    <string name="shared_string_relation">Relación</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Asigna color a las rutas en función del color asignado localmente (si está presente en OpenStreetMap) y del símbolo del escudo de senderismo</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Color por afiliación de red</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Asigna color a las rutas en función del tipo de red de nodos (internacional, regional, local) a la que pertenecen</string>
+    <string name="walking_route_osmc_description">Asigna color a las rutas en función del color asignado localmente (si está presente en OpenStreetMap) y del tipo (internacional, regional, local)</string>
+    <string name="travel_routes">Rutas de viaje</string>
+    <string name="setting_supported_by_style">Esta configuración es compatible con el estilo de mapa \'%1$s\'</string>
+    <string name="direct_line_maps_required_descr">El cálculo de la ruta tarda más de lo habitual.
+\n
+\nPuede que algunos mapas no estén cargados.</string>
+    <string name="online_direct_line_maps_link">Comprueba los mapas necesarios</string>
+    <string name="offline_maps_required_descr">Para calcular la ruta se necesitan mapas adicionales sin conexión.</string>
+    <string name="online_maps_required_descr">Lamentablemente, OsmAnd no ha podido encontrar (calcular) una ruta adecuada a tu configuración.
+\n
+\nQuizás algunos mapas no están cargados. Puedes ejecutar en línea la comprobación de los mapas necesarios.</string>
+    <string name="online_maps_searching_descr">La búsqueda de mapas en línea está en marcha.</string>
+    <string name="reset_to_original">Restablecer el original</string>
+    <string name="backup_error_no_subscription">No hay suscripción presente</string>
+    <string name="map_updates_for_mappers">Actualizaciones de mapas para mapeadores</string>
+    <string name="benefits_for_contributors">Beneficios para los contribuyentes activos de OSM</string>
+    <string name="benefits_for_contributors_primary_descr">Podrás beneficiarte de actualizaciones ilimitadas de los mapas cada hora si eres un colaborador activo de OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">Accedaea OpenStreetMap y compruebe si tienes derecho a recibir actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
+    <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
+    <string name="available_until">Disponible hasta %1$s</string>
+    <string name="enough_contributions_descr">Enhorabuena, has hecho suficientes contribuciones a OpenStreetMap y podrás disfrutar de actualizaciones ilimitadas de los mapas.</string>
+    <string name="not_enough_contributions_descr">Necesitas hacer al menos %1$s contribuciones de mapas a OpenStreetMap durante los últimos %2$s días.</string>
+    <string name="shared_string_contributions">Contribuciones</string>
+    <string name="contributions_may_calculate_with_delay">Las contribuciones pueden calcularse con retrasos de varias horas.</string>
+    <string name="map_updates_are_unavailable_yet">Las actualizaciones de los mapas aún no están disponibles :-(</string>
+    <string name="connect_track_points_as">Сonectar puntos de ruta</string>
+    <string name="pro_features">Características Pro</string>
+    <string name="use_system_language">Usar idioma del sistema</string>
+    <string name="shared_string_predefined">Predefinido</string>
+    <string name="backup_complete">Copia de seguridad completada</string>
+    <string name="backup_now">Hacer copia de seguridad ahora</string>
+    <string name="make_backup">Hacer una copia de seguridad</string>
+    <string name="backup_conflicts">Conflictos</string>
+    <string name="backup_confilcts_descr">Algunos ficheros no se han podido subir al servidor porque ya hay una versión más reciente en el servidor.</string>
+    <string name="backup_view_conflicts">Ver conflictos</string>
+    <string name="backup_no_internet_descr">Compruebe su conexión a internet y descargue de nuevo.</string>
+    <string name="backup_pause_all">Pausar todo</string>
+    <string name="upload_local_version">Subir versión local</string>
+    <string name="download_server_version">Descargar versión del servidor</string>
+    <string name="shared_string_logout">Cerrar sesión</string>
+    <string name="backup_delete_all_data">Borrar todos mis datos</string>
+    <string name="backup_danger_zone">Zona peligrosa</string>
+    <string name="delete_all_confirmation">Si, borrar todo</string>
+    <string name="backup_delete_old_data">Borrar versiones antiguas</string>
+    <string name="backup_delete_old_data_descr">Las versiones actuales de sus datos se preservarán en OsmAnd Cloud</string>
+    <string name="select_backup_data_descr">Seleccionar datos y carpetas para la copia de seguridad.</string>
+    <string name="backup_restore_data_descr">Restaurar datos en el dispositivo, utilizando copias de seguridad en línea.</string>
+    <string name="backup_restore_data">Restaurar datos</string>
+    <string name="restore_from_osmand_cloud">Restaurar desde OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Seleccionar qué restaurar.</string>
+    <string name="restore_selected_data">Restaurar datos seleccionados</string>
+    <string name="receiving_data_from_server">Reciviendo datos del servidor…</string>
+    <string name="restore_complete">Restaurado</string>
+    <string name="backup_version_history">Historial de versiones</string>
+    <string name="routing_attr_avoid_tunnels_description">Evitar túneles</string>
+    <string name="routing_attr_avoid_tunnels_name">Evitar túneles</string>
+    <string name="backup_promocode">Código de promoción</string>
+    <string name="unlimited_map_downloads">Descarga de mapas ilimitada</string>
+    <string name="wikipedia_and_wikivoyage_offline">Wikipedia y Wikivoyage sin conexión</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s o %2$s</string>
+    <string name="continue_with">Continuar con %1$s</string>
+    <string name="not_available_with">No disponible con %1$s</string>
+    <string name="shared_string_learn_more">Saber más</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Cancele en cualquier momento en Huawei AppGallery</string>
+    <string name="cancel_anytime_in_gplay">Cancele en cualquier comento en Google Play.</string>
+    <string name="shared_string_not_included">No incluido</string>
+    <string name="shared_string_includes">Incluye</string>
+    <string name="complete_purchase">Completar compra</string>
+    <string name="from_with_param">Desde %1$s</string>
+    <string name="backup_delete_types">Borrar los tipos de datos deshabilitados</string>
+    <string name="shared_string_discussion">Discusión</string>
+    <string name="shared_string_view_all">Ver todos</string>
+    <string name="backup_error_subscription_was_expired_descr">Su suscripción a OsmAnd Pro ha expirado, renuevela para usar copia de seguridad. Aún puede restaurar sus datos desde el Cloud.</string>
+    <string name="backup_error_subscription_was_expired">Suscripción expirada</string>
+    <string name="backup_error_subscription_was_used">Subscripción o promoción usada por otra cuenta %1$s</string>
+    <string name="backup_error_size_is_exceeded">El tamaño máximo de OsmAnd Cloud ha excedido %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">El fichero debe ser enviado en formato .gzip</string>
+    <string name="backup_error_file_not_available">Fichero no disponible</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Token no válido o expirado</string>
+    <string name="backup_error_user_is_not_registered">No hay ningún usuario registrado con ese correo electrónico</string>
 </resources>

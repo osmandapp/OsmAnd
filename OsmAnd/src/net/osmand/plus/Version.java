@@ -40,7 +40,7 @@ public class Version {
 	}
 
 	public static boolean isInAppPurchaseSupported() {
-		return isGooglePlayEnabled() || isHuawei();
+		return isGooglePlayEnabled() || isHuawei() || isAmazon();
 	}
 
 	public static boolean isGooglePlayInstalled(@NonNull OsmandApplication ctx) {

@@ -127,7 +127,7 @@ public class OverviewCard extends MapBaseCard {
 	}
 
 	private void initEditButton(@ColorRes int iconColorDef, @ColorRes int iconColorPres) {
-		initButton(editButton, EDIT_BUTTON_INDEX, R.drawable.ic_action_edit_dark, iconColorDef, iconColorPres);
+		initButton(editButton, EDIT_BUTTON_INDEX, R.drawable.ic_action_edit_track, iconColorDef, iconColorPres);
 	}
 
 	private void initDirectionsButton(@ColorRes int iconColorDef, @ColorRes int iconColorPres) {

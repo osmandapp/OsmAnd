@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="switch_to_raster_map_to_see">Stáhněte si off-line vektorovou mapu pro tuto oblast v menu \'Nastavení\' (\'Stáhnout mapy\'), nebo se přepněte na modul \'Online mapy\'.</string>
     <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -1224,7 +1224,7 @@
 \nStiskněte a podržte pro zobrazení na mapě"</string>
     <string name="save_as_favorites_points">Uložit jako skupinu Oblíbených</string>
     <string name="select_destination_and_intermediate_points">Určete cíle</string>
-    <string name="layer_amenity_label">Překryvné popisky bodů</string>
+    <string name="layer_amenity_label">Popisky bodů (body zájmu, Oblíbené)</string>
     <string name="create_poi_link_to_osm_doc"><u>On-line OSM</u> klasifikace map s obrázky.</string>
     <string name="show_zoom_buttons_navigation_descr">Zobrazit tlačítka lupy během navigace.</string>
     <string name="show_zoom_buttons_navigation">Zobrazit tlačítka lupy</string>
@@ -4124,7 +4124,6 @@
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Nahraný hlas zní lépe, ale může vyslovovat jen předem zaznamenané fráze: pokyny k odbočení. Neumí vyslovit názvy ulic nebo bodů zájmu.</string>
     <string name="select_nav_profile_dialog_message">\'Typ navigace\' ovlivňuje pravidla pro výpočet trasy. Můžete si vybrat mezi offline a online navigačními službami.</string>
-    <string name="grey_color_slope">Šedá barva je použita v případě, že sklon není znám.</string>
     <string name="backup_version_history">Historie verzí</string>
     <string name="backup_storage_taken">Využito místa</string>
     <string name="loading_list_of_routing_services">Načítání seznamu dostupných navigačních služeb</string>
@@ -4176,4 +4175,7 @@
     <string name="send_crash_log">Odeslat záznam o pádu</string>
     <string name="send_logcat_log">Odeslat záznam z logcatu</string>
     <string name="backup_promocode">Promokód</string>
+    <string name="backup_restore_now">Obnovit nyní</string>
+    <string name="shared_string_purchased">Zakoupeno</string>
+    <string name="explore_wikipedia_offline">Prozkoumejte Wikipedii offline.</string>
 </resources>

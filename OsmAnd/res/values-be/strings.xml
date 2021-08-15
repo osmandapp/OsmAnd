@@ -2752,7 +2752,7 @@
     <string name="select_travel_book">Абраць дзённік падарожжаў</string>
     <string name="shared_string_travel_book">Дзённік падарожжаў</string>
     <string name="download_images">Спампаваць выявы</string>
-    <string name="download_wikipedia_description">Спампаваць артыкулы Вікіпедыі для %1$s для аўтаномнага чытання.</string>
+    <string name="download_wikipedia_description">Спампаваць артыкулы Вікіпедыі для %1$s, каб чытаць іх у аўтаномным рэжыме.</string>
     <string name="download_wikipedia_label">Спампаваць даныя Вікіпедыі</string>
     <string name="open_in_browser_wiki">Адкрыць артыкул у сеціве</string>
     <string name="open_in_browser_wiki_description">Праглядзець артыкул у браўзеры.</string>

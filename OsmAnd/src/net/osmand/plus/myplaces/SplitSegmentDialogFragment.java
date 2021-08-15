@@ -108,7 +108,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		minMaxSpeedPaint = new Paint();
 		minMaxSpeedPaint.setTextSize(getResources().getDimension(R.dimen.default_split_segments_data));
-		minMaxSpeedPaint.setTypeface(FontCache.getFont(getContext(), "fonts/Roboto-Medium.ttf"));
+		minMaxSpeedPaint.setTypeface(FontCache.getFont(getContext(), "ui-fonts/Roboto-Medium.ttf"));
 		minMaxSpeedPaint.setStyle(Paint.Style.FILL);
 		minMaxSpeedTextBounds = new Rect();
 

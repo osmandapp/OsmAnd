@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_10pin">Bowling américain</string>
     <string name="poi_9pin">Bowling à 9 quilles</string>
@@ -301,7 +301,7 @@
     <string name="poi_skateboard">Planche à roulettes</string>
     <string name="poi_skating">Patin à glace</string>
     <string name="poi_skiing">Ski</string>
-    <string name="poi_slipway">Cale de lancement</string>
+    <string name="poi_slipway">Cale de mise à l\'eau</string>
     <string name="poi_soccer">Football</string>
     <string name="poi_social_centre">Centre associatif</string>
     <string name="poi_social_facility">Service social</string>
@@ -460,7 +460,6 @@
     <string name="poi_herbalist">Herboriste</string>
     <string name="poi_kitchen">Magasin de cuisines</string>
     <string name="poi_stationery">Papèterie</string>
-    
     <string name="poi_ticket">Billetterie</string>
     <string name="poi_vacuum_cleaner">Magasin d\'aspirateurs</string>
     <string name="poi_mountain_pass">Col</string>
@@ -473,7 +472,6 @@
     <string name="poi_astronomical_observatory">Astronomique</string>
     <string name="poi_orchard">Verger</string>
     <string name="poi_prosecutor">Procureur</string>
-    
     <string name="poi_seamark_rock">Rocher (amer)</string>
     <string name="poi_distance_mark">Borne</string>
     <string name="poi_craft_upholsterer">Tapissier</string>
@@ -795,7 +793,6 @@
     <string name="poi_chocolate">Chocolatier</string>
     <string name="poi_coffee">Magasin de cafés</string>
     <string name="poi_candles">Magasin de bougies</string>
-    
     <string name="poi_music">Disquaire</string>
     <string name="poi_watches">Horloger</string>
     <string name="poi_games">Magasin de jeux</string>
@@ -817,7 +814,6 @@
     <string name="poi_pyrotechnics">Magasin de pyrotechnie</string>
     <string name="poi_weapons">Armurerie</string>
     <string name="poi_breakwater">Brise-lames</string>
-    
     <string name="poi_basin">Bassin de rétention d\'eau</string>
     <string name="poi_crane">Grue</string>
     <string name="poi_wiki_lang_ceb">Wiki cébouano</string>
@@ -2189,7 +2185,6 @@
     <string name="poi_greenhouse_horticulture">Zone de cultures sous serre</string>
     <string name="poi_ventilation_shaft">Bouche de ventilation</string>
     <string name="poi_boat_storage">Stockage de bateaux</string>
-    
     <string name="poi_plant_nursery">Pépinière</string>
     <string name="poi_spoil_heap">Terril</string>
     <string name="poi_street_cabinet">Armoire de rue</string>
@@ -3611,7 +3606,7 @@
     <string name="poi_goods_designated">Indiqué</string>
     <string name="poi_disabled_yes">Oui</string>
     <string name="poi_glacier_type_hanging">suspendu</string>
-    <string name="poi_motorcar_yes">Accès voiture : oui</string>
+    <string name="poi_motorcar_yes">Oui</string>
     <string name="poi_motorcar_private">Accès voiture : privé</string>
     <string name="poi_motorcar_no">Accès voiture : non</string>
     <string name="poi_motorcar_permissive">Accès voiture : permis</string>
@@ -3749,7 +3744,7 @@
     <string name="poi_volcano_status_active">Actif</string>
     <string name="poi_volcano_status_inactive">Inactif</string>
     <string name="poi_volcano_number_of_eruptions">Nombre d’éruptions</string>
-    <string name="poi_charge">Chargeur</string>
+    <string name="poi_charge">Prix</string>
     <string name="poi_cash_withdrawal_postbank">Banque postale</string>
     <string name="poi_bath_type_foot_bath">Bain de pieds</string>
     <string name="poi_monastery_type_hermitage">Type de monastère : ermitage</string>
@@ -3973,4 +3968,30 @@
     <string name="poi_contact_linkedin">LinkedIn</string>
     <string name="poi_contact_xing">Xing</string>
     <string name="poi_contact_vhf">VHF</string>
+    <string name="poi_authentication_phone_call_yes">Oui</string>
+    <string name="poi_authentication_app_yes">Oui</string>
+    <string name="poi_authentication_key_yes">Oui</string>
+    <string name="poi_authentication_chip_card_yes">Oui</string>
+    <string name="poi_authentication_contactless_yes">Oui</string>
+    <string name="poi_shelter_yes">Oui</string>
+    <string name="poi_permanent_camping_no">Non</string>
+    <string name="poi_permanent_camping_yes">Oui</string>
+    <string name="poi_authentication_none_yes">Oui</string>
+    <string name="poi_authentication_short_message_yes">Oui</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_lounger">Chaise-longue</string>
+    <string name="poi_direction_southwest">Direction sud-ouest</string>
+    <string name="poi_direction_southeast">Direction sud-est</string>
+    <string name="poi_direction_northwest">Direction nord-ouest</string>
+    <string name="poi_direction_northeast">Direction nord-est</string>
+    <string name="poi_direction_west">Direction ouest</string>
+    <string name="poi_direction_south">Direction sud</string>
+    <string name="poi_direction_east">Direction est</string>
+    <string name="poi_direction_north">Direction nord</string>
+    <string name="poi_destination">Destination</string>
+    <string name="poi_share_taxi_yes">Taxi collectif : oui</string>
+    <string name="poi_shelter_filter">Abri</string>
+    <string name="poi_authentication_none">Aucune authentification requise</string>
+    <string name="poi_access_bicycle">Accès vélo</string>
+    <string name="poi_access_general">Accès pour tous</string>
 </resources>

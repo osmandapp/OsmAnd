@@ -118,7 +118,7 @@
     <string name="shared_string_group">Grupp</string>
     <string name="last_response">Senaste svar</string>
     <string name="time_ago">sedan</string>
-    <string name="shared_string_exit">Utgång</string>
+    <string name="shared_string_exit">Avsluta</string>
     <string name="turn_off_all">Stäng av allt</string>
     <string name="disable_all_sharing">Inaktivera all delning</string>
     <string name="disable_all_sharing_desc">Stäng av platsdelning i alla valda chatter (%1$d).</string>
