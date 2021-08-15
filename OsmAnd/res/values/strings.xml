@@ -11,7 +11,9 @@
 	Thx - Hardy
 
 -->
-
+    <string name="amz_manage_subscription_descr">To manage your subscription use the Amazon App on the device or open the Amazon.com website under your profile.</string>
+    <string name="cancel_anytime_in_amazon_app">Cancel it anytime in Amazon App</string>
+    <string name="osm_live_payment_subscription_management_amz">Payment is charged from your Amazon account when confirming the purchase.\n\nIt renews unless cancelled before the selected renewal period.\n\nManage or cancel your subscriptions from your Amazon settings at any time.</string>
     <string name="grey_color_undefined">Grey color is used for parts without data.</string>
     <string name="purchases_restored">Purchases restored</string>
     <string name="pro_features">Pro features</string>
