@@ -4308,4 +4308,5 @@
     <string name="connect_track_points_as">Routenpunkte verbinden</string>
     <string name="pro_features">Pro-Funktionen</string>
     <string name="purchases_restored">Käufe wiederhergestellt</string>
+    <string name="grey_color_undefined">Graue Farbe wird für Bereiche ohne Daten verwendet.</string>
 </resources>

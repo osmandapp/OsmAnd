@@ -301,7 +301,7 @@
     <string name="poi_skateboard">Planche à roulettes</string>
     <string name="poi_skating">Patin à glace</string>
     <string name="poi_skiing">Ski</string>
-    <string name="poi_slipway">Cale de lancement</string>
+    <string name="poi_slipway">Cale de mise à l\'eau</string>
     <string name="poi_soccer">Football</string>
     <string name="poi_social_centre">Centre associatif</string>
     <string name="poi_social_facility">Service social</string>
@@ -3979,4 +3979,19 @@
     <string name="poi_authentication_none_yes">Oui</string>
     <string name="poi_authentication_short_message_yes">Oui</string>
     <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_lounger">Chaise-longue</string>
+    <string name="poi_direction_southwest">Direction sud-ouest</string>
+    <string name="poi_direction_southeast">Direction sud-est</string>
+    <string name="poi_direction_northwest">Direction nord-ouest</string>
+    <string name="poi_direction_northeast">Direction nord-est</string>
+    <string name="poi_direction_west">Direction ouest</string>
+    <string name="poi_direction_south">Direction sud</string>
+    <string name="poi_direction_east">Direction est</string>
+    <string name="poi_direction_north">Direction nord</string>
+    <string name="poi_destination">Destination</string>
+    <string name="poi_share_taxi_yes">Taxi collectif : oui</string>
+    <string name="poi_shelter_filter">Abri</string>
+    <string name="poi_authentication_none">Aucune authentification requise</string>
+    <string name="poi_access_bicycle">Accès vélo</string>
+    <string name="poi_access_general">Accès pour tous</string>
 </resources>

@@ -477,7 +477,7 @@
     <string name="preferred_locale">Limba de afișare</string>
     <string name="shared_string_next">Următorul</string>
     <string name="shared_string_previous">Precedentul</string>
-    <string name="unit_of_length_descr">Modificați în ce se măsoară distanța.</string>
+    <string name="unit_of_length_descr">Schimbați în ce se măsoară distanța.</string>
     <string name="unit_of_length">Unități de lungime</string>
     <string name="si_mi_feet">Mile/picior</string>
     <string name="si_mi_yard">Mile/iarzi</string>
@@ -4310,4 +4310,5 @@
     <string name="gpx_monitoring_start">Reluarea înregistrării călătoriei</string>
     <string name="pro_features">Caracteristici Pro</string>
     <string name="purchases_restored">Achiziții restaurate</string>
+    <string name="grey_color_undefined">Culoarea gri este utilizată pentru piesele fără date.</string>
 </resources>

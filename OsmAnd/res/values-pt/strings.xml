@@ -3300,7 +3300,7 @@
     <string name="suggested_maps_descr">Estes mapas são necessários para a extensão.</string>
     <string name="added_profiles">Perfis adicionados</string>
     <string name="added_profiles_descr">Perfis adicionados pela extensão</string>
-    <string name="shared_string_turn_off">Desligar</string>
+    <string name="shared_string_turn_off">Desativar</string>
     <string name="new_plugin_added">Nova extensão adicionada</string>
     <string name="join_segments">Unir segmentos</string>
     <string name="choose_icon_color_name">Ícone, cor e nome</string>
@@ -4309,4 +4309,5 @@
     <string name="option_available_only_in_osmand_pro">A opção está disponível na subscrição do OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Obtenha acesso às funcionalidades OsmAnd Pro: coloração de rotas e mais.</string>
     <string name="purchases_restored">Compras restauradas</string>
+    <string name="grey_color_undefined">A cor cinzenta é usada nas partes sem dados.</string>
 </resources>

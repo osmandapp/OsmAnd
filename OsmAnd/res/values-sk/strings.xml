@@ -4299,4 +4299,5 @@
     <string name="available_until">Dostupné do %1$s</string>
     <string name="enough_contributions_descr">Gratulujeme, vykonali ste dostatok príspevkov do OpenStreetMap a teraz môžete využiť neobmedzené aktualizácie máp v OsmAnd!</string>
     <string name="purchases_restored">Nákupy obnovené</string>
+    <string name="grey_color_undefined">Sivá farba je použitá pre časti bez údajov.</string>
 </resources>

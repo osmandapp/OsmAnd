@@ -2318,10 +2318,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return getFragment(TrackMenuFragment.TAG);
 	}
 
-	public RouteLineAppearanceFragment getRouteLineAppearanceFragment() {
-		return getFragment(RouteLineAppearanceFragment.TAG);
-	}
-
 	public void dismissTrackMenu() {
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (!fragmentManager.isStateSaved()) {

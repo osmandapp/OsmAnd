@@ -4258,4 +4258,9 @@
     <string name="use_login_and_password">להשתמש בשם משתמש וססמה</string>
     <string name="available_until">זמין עד %1$s</string>
     <string name="enough_contributions_descr">ברכות, סיפקת מספיק תרומות ל־OpenStreetMap ועכשיו מותר לך ליהנות מכמות בלתי מוגבלת של עדכוני מפות מ־OsmAnd!</string>
+    <string name="online_maps_required_descr">לרוע המזל, OsmAnd לא הצליח למצוא מסלול להגדרות שלך.
+\n
+\nאולי חלק מהמפות לא נטענו, ניתן להריץ בדיקה מקוונת של המפות הנחוצות.</string>
+    <string name="not_enough_contributions_descr">נדרשות לפחות %1$s תרומות ל־OpenStreetMap תוך %2$s ימים.</string>
+    <string name="grey_color_undefined">הצבע האפור משמש לחלקים ללא נתונים.</string>
 </resources>

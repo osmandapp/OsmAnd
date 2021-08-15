@@ -13,9 +13,11 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -899,7 +901,7 @@ public class GPXDatabase {
 
 	@NonNull
 	public List<GpxDataItem> getItems() {
-		List<GpxDataItem> items = new ArrayList<>();
+		Set<GpxDataItem> items = new HashSet<>();
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -919,7 +921,7 @@ public class GPXDatabase {
 				db.close();
 			}
 		}
-		return items;
+		return new ArrayList<>(items);
 	}
 
 	@Nullable
