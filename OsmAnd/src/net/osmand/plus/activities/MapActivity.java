@@ -1627,7 +1627,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapWidgetsVisibilityHelper;
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, Bundle prevIntentParams, Uri intentData, Bundle intentParams) {
+	public static void launchMapActivityMoveToTop(@NonNull Context activity,
+	                                              @Nullable Bundle prevIntentParams,
+	                                              @Nullable Uri intentData,
+	                                              @Nullable Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1667,11 +1670,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity) {
+	public static void launchMapActivityMoveToTop(@NonNull Context activity) {
 		launchMapActivityMoveToTop(activity, null);
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, Bundle prevIntentParams) {
+	public static void launchMapActivityMoveToTop(@NonNull Context activity, @Nullable Bundle prevIntentParams) {
 		launchMapActivityMoveToTop(activity, prevIntentParams, null, null);
 	}
 
