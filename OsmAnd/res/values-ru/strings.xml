@@ -77,7 +77,7 @@
     <string name="full_version_thanks">Благодарим вас за покупку платной версии OsmAnd.</string>
     <string name="do_not_show_startup_messages">Не показывать сообщения при запуске</string>
     <string name="do_not_show_startup_messages_desc">Не показывать скидки на приложение и специальные сообщения о местных событиях.</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd собирает информацию о том, какие вы используете части приложения. Ваше местоположение никогда не отправляется, как и все, что вы вводите, какие области читаете, что ищете или скачиваете.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd собирает информацию о том, какие вы используете части приложения. Ваше местоположение никогда не отправляется, как и всё, что вы вводите, какие области читаете, что ищете или скачиваете.</string>
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="driving_region_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
@@ -195,7 +195,7 @@
     <string name="shared_string_continue">Продолжить</string>
     <string name="shared_string_pause">Пауза</string>
     <string name="shared_string_trip">Запись</string>
-    <string name="shared_string_recorded">Путь</string>
+    <string name="shared_string_recorded">Запись</string>
     <string name="shared_string_record">Запись</string>
     <string name="gpx_logging_no_data">Нет данных</string>
     <string name="save_track_min_speed">Минимальная скорость для записи</string>
@@ -3185,7 +3185,7 @@
     <string name="routing_attr_width_description">Укажите ширину транспортного средства для учёта при построении маршрута.</string>
     <string name="app_mode_utv">Мотовездеход</string>
     <string name="shared_string_calculate">Рассчитать</string>
-    <string name="shared_string_osmand_usage">Использование OsmAnd</string>
+    <string name="shared_string_osmand_usage">Использовано OsmAnd</string>
     <string name="shared_sting_tiles">Тайлы</string>
     <string name="shared_string_maps">Карты</string>
     <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
@@ -4138,7 +4138,7 @@
     <string name="download_server_version">Скачать версию с сервера</string>
     <string name="shared_string_predefined">Предопределённые</string>
     <string name="backup_now">Создать резервную копию</string>
-    <string name="make_backup">Создать резервную копию</string>
+    <string name="make_backup">Создайте резервную копию</string>
     <string name="make_backup_descr">На устройстве много изменений. Сделайте резервную копию, чтобы не потерять данные.</string>
     <string name="backup_pause_all">Приостановить все</string>
     <string name="backup_danger_zone">Опасная зона</string>
@@ -4170,7 +4170,7 @@
     <string name="restore_selected_data">Восстановить выбранные данные</string>
     <string name="receiving_data_from_server">Получение данных с сервера…</string>
     <string name="restore_complete">Восстановление завершено</string>
-    <string name="backup_storage_taken">Занятое пространство</string>
+    <string name="backup_storage_taken">Занято в хранилище</string>
     <string name="backup_version_history">История версий</string>
     <string name="backup_version_history_delete_descr">Удалить историю изменений для отключенных типов данных из OsmAnd Cloud\?</string>
     <string name="delete_version_history">Удалить историю версий</string>

@@ -75,7 +75,6 @@ public class DiscountHelper {
 
 	private static final String SHOW_CHOOSE_PLAN_PREFIX = "show-choose-plan:";
 	private static final String CHOOSE_PLAN_TYPE_FREE = "free-version";
-	private static final String CHOOSE_PLAN_TYPE_LIVE = "osmand-live";
 	private static final String CHOOSE_PLAN_TYPE_SEA_DEPTH = "sea-depth";
 	private static final String CHOOSE_PLAN_TYPE_HILLSHADE = "hillshade";
 	private static final String CHOOSE_PLAN_TYPE_WIKIPEDIA = "wikipedia";
@@ -275,26 +274,20 @@ public class DiscountHelper {
 			toolbarController.setTextBtnTitleClrs(data.textBtnTitleColor, data.textBtnTitleColor);
 		}
 		if (!Algorithms.isEmpty(data.url)) {
-			View.OnClickListener clickListener = new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mapActivity.getMyApplication().logEvent("motd_click");
-					mBannerVisible = false;
-					mapActivity.hideTopToolbar(toolbarController);
-					openUrl(mapActivity, data.url);
-				}
+			View.OnClickListener clickListener = v -> {
+				mapActivity.getMyApplication().logEvent("motd_click");
+				mBannerVisible = false;
+				mapActivity.hideTopToolbar(toolbarController);
+				openUrl(mapActivity, data.url);
 			};
 			toolbarController.setOnBackButtonClickListener(clickListener);
 			toolbarController.setOnTitleClickListener(clickListener);
 			toolbarController.setOnTextBtnClickListener(clickListener);
 		}
-		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.getMyApplication().logEvent("motd_close");
-				mBannerVisible = false;
-				mapActivity.hideTopToolbar(toolbarController);
-			}
+		toolbarController.setOnCloseButtonClickListener(v -> {
+			mapActivity.getMyApplication().logEvent("motd_close");
+			mBannerVisible = false;
+			mapActivity.hideTopToolbar(toolbarController);
 		});
 
 		mData = data;
@@ -304,12 +297,7 @@ public class DiscountHelper {
 	}
 
 	private static void showPoiFilter(final MapActivity mapActivity, final PoiUIFilter poiFilter) {
-		QuickSearchHelper.showPoiFilterOnMap(mapActivity, poiFilter, new Runnable() {
-			@Override
-			public void run() {
-				mFilterVisible = false;
-			}
-		});
+		QuickSearchHelper.showPoiFilterOnMap(mapActivity, poiFilter, () -> mFilterVisible = false);
 		mFilter = poiFilter;
 		mFilterVisible = true;
 	}
@@ -319,7 +307,8 @@ public class DiscountHelper {
 			OsmandApplication app = mapActivity.getMyApplication();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (purchaseHelper != null) {
-				if (url.contains(purchaseHelper.getFullVersion().getSku())) {
+				InAppPurchase fullVersion = purchaseHelper.getFullVersion();
+				if (fullVersion != null && url.contains(fullVersion.getSku())) {
 					app.logEvent("in_app_purchase_redirect");
 					try {
 						purchaseHelper.purchaseFullVersion(mapActivity);
@@ -693,7 +682,7 @@ public class DiscountHelper {
 	private static class Conditions {
 
 		protected OsmandApplication app;
-		private Condition[] conditions;
+		private final Condition[] conditions;
 
 		Conditions(OsmandApplication app) {
 			this.app = app;

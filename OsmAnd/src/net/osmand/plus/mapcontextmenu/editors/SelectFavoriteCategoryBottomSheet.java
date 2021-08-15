@@ -112,7 +112,7 @@ public class SelectFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 		title.setTypeface(typeface);
 		AndroidUiHelper.updateVisibility(addNewCategoryView.findViewById(R.id.description), false);
 		BaseBottomSheetItem addNewFolderItem = new SimpleBottomSheetItem.Builder()
-				.setTitle(getString(R.string.favorite_category_add_new))
+				.setTitle(getString(R.string.add_group))
 				.setTitleColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
 				.setIcon(getActiveIcon(R.drawable.ic_action_folder_add))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_64dp)

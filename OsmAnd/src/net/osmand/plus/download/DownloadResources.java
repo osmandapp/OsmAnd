@@ -1,5 +1,6 @@
 package net.osmand.plus.download;
 
+import static net.osmand.binary.BinaryMapIndexReader.DETAILED_MAP_MIN_ZOOM;
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.REGION_MAPS;
 
 import androidx.annotation.NonNull;
@@ -634,6 +635,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		for (BinaryMapReaderResource reader : app.getResourceManager().getFileReaders()) {
 			String fileName = reader.getFileName();
 			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
+					&& !fileName.startsWith("World_")
 					&& !fileName.endsWith(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
 					&& !fileName.endsWith(IndexConstants.BINARY_SRTM_FEET_MAP_INDEX_EXT)) {
 				BinaryMapIndexReader shallowReader = reader.getShallowReader();
@@ -643,10 +645,10 @@ public class DownloadResources extends DownloadResourceGroup {
 					}
 					if (shallowReader.containsMapData() && !isOsmandRegion(fileName)) {
 						if (routeData) {
-							if (shallowReader.containsRouteData(x31, y31, x31, y31, zoom)) {
+							if (shallowReader.containsRouteData(x31, y31, x31, y31, DETAILED_MAP_MIN_ZOOM)) {
 								res.add(fileName);
 							}
-						} else if (shallowReader.containsMapData(x31, y31, x31, y31, zoom)) {
+						} else if (shallowReader.containsMapData(x31, y31, x31, y31, DETAILED_MAP_MIN_ZOOM)) {
 							res.add(fileName);
 						}
 					}

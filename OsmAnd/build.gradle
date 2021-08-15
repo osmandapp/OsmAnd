@@ -85,10 +85,11 @@ android {
 		}
 		amazonFree {
 			java.srcDirs = ["src-nogms", "src-amazon"]
-			manifest.srcFile "AndroidManifest-gplayFree.xml"
+			manifest.srcFile "AndroidManifest-amazonFree.xml"
 		}
 		amazonFull {
 			java.srcDirs = ["src-nogms", "src-amazon"]
+			manifest.srcFile "AndroidManifest-amazonFull.xml"
 		}
 		huawei {
 			java.srcDirs = ["src-nogms", "src-huawei"]
@@ -196,4 +197,7 @@ dependencies {
 
 	gplayFreeImplementation 'com.google.android.gms:play-services-location:18.0.0'
 	gplayFullImplementation 'com.google.android.gms:play-services-location:18.0.0'
+
+	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
+	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 }

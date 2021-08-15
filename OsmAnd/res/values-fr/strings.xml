@@ -2150,7 +2150,7 @@
     <string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
     <string name="quick_action_page_list_descr">Bouton pour faire défiler la liste ci-dessous.</string>
     <string name="rendering_attr_depthContours_description">Afficher les lignes et points de sonde.</string>
-    <string name="rendering_attr_depthContours_name">Lignes de sonde maritimes</string>
+    <string name="rendering_attr_depthContours_name">Lignes de sonde de profondeur</string>
     <string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
     <string name="average_altitude">Altitude moyenne</string>
     <string name="total_distance">Distance totale</string>
@@ -2593,7 +2593,7 @@
     <string name="day_off_label">fermé</string>
     <string name="winter_and_ski_renderer">Hiver et ski</string>
     <string name="touring_view_renderer">Vue grand tourisme</string>
-    <string name="nautical_renderer">Maritime</string>
+    <string name="nautical_renderer">Carte marine</string>
     <string name="will_open_tomorrow_at">Ouvre demain à</string>
     <string name="copy_location_name">Copier l\'emplacement / le nom du point</string>
     <string name="toast_empty_name_error">Emplacement sans nom</string>
