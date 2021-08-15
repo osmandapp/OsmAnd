@@ -187,12 +187,25 @@ public class WorldRegion implements Serializable {
 		return res;
 	}
 
-	public boolean containsRegion(WorldRegion region) {
-		if (containsBoundingBox(region.boundingBox)) {
-			// check polygon only if bounding box match
-			return containsPolygon(region.polygon);
+	public boolean containsRegion(WorldRegion another) {
+		// Firstly check rectangles for greater efficiency
+		if (!containsBoundingBox(another.boundingBox)) {
+			return false;
 		}
-		return false;
+
+		// Secondly check whole polygons
+		if (!containsPolygon(another.polygon)) {
+			return false;
+		}
+
+		// Finally check inner point
+		boolean isInnerPoint = Algorithms.isPointInsidePolygon(another.regionCenter, another.polygon);
+		if (isInnerPoint) {
+			return Algorithms.isPointInsidePolygon(another.regionCenter, this.polygon);
+		} else {
+			// in this case we should find real inner point and check it
+		}
+		return true;
 	}
 
 	private boolean containsBoundingBox(QuadRect rectangle) {
