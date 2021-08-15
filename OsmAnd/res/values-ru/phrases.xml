@@ -3961,4 +3961,14 @@
     <string name="poi_windsock">Ветроуказатель</string>
     <string name="poi_telecom_exchange">Автоматическая телефонная станция</string>
     <string name="poi_permanent_camping">Постоянный кемпинг</string>
+    <string name="poi_access_scooter">Доступ для скутеров</string>
+    <string name="poi_access_bicycle">Доступ для велосипедов</string>
+    <string name="poi_access_motorcar">Доступ для автомобилей</string>
+    <string name="poi_authentication_none">Авторизация не требуется</string>
+    <string name="poi_authentication_short_message">Авторизация с помощью короткого сообщения</string>
+    <string name="poi_authentication_phone_call">Авторизация по телефонному звонку</string>
+    <string name="poi_authentication_app">Авторизация через приложение</string>
+    <string name="poi_authentication_key">Авторизация по ключу</string>
+    <string name="poi_authentication_chip_card">Авторизация по чип-карте</string>
+    <string name="poi_authentication_contactless">Бесконтактная авторизация</string>
 </resources>
