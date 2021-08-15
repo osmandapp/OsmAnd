@@ -2877,7 +2877,7 @@
     <string name="rendering_attr_surface_grass_name">Трава</string>
     <string name="rendering_attr_surface_ground_name">Земля</string>
     <string name="rendering_attr_surface_dirt_name">Грязь</string>
-    <string name="rendering_attr_surface_mud_name">Ил</string>
+    <string name="rendering_attr_surface_mud_name">Месиво</string>
     <string name="rendering_attr_surface_ice_name">Лёд</string>
     <string name="rendering_attr_surface_salt_name">Соль</string>
     <string name="rendering_attr_surface_snow_name">Снег</string>
