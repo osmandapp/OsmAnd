@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="empty_category_name">Empty category name</string>
     <string name="grey_color_undefined">Grey color is used for parts without data.</string>
     <string name="purchases_restored">Purchases restored</string>
     <string name="pro_features">Pro features</string>
