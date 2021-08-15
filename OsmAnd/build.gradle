@@ -195,6 +195,6 @@ dependencies {
 	gplayFreeImplementation 'com.google.android.gms:play-services-location:18.0.0'
 	gplayFullImplementation 'com.google.android.gms:play-services-location:18.0.0'
 
-	amazonFreeImplementation fileTree(include:  ['in-app-purchasing-2.0.76.jar'], dir: 'libs')
-	amazonFullImplementation fileTree(include:  ['in-app-purchasing-2.0.76.jar'], dir: 'libs')
+	amazonFreeImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
+	amazonFullImplementation "com.amazon:in-app-purchasing:2.0.76@jar"
 }

@@ -39,7 +39,7 @@ public class IapPurchasingListener implements PurchasingListener {
 		void onUserDataResponse(@Nullable UserIapData userData);
 		void onProductDataResponse(@Nullable Map<String, Product> productMap);
 		void onPurchaseUpdatesResponse(@Nullable Map<UserData, List<Receipt>> purchaseMap, boolean hasMore);
-		void onPurchaseResponse(@Nullable Receipt receipt);
+		void onPurchaseResponse(@Nullable PurchaseResponse response);
 	}
 
 	public IapPurchasingListener(final @NonNull IapManager iapManager) {
@@ -74,9 +74,9 @@ public class IapPurchasingListener implements PurchasingListener {
 		}
 	}
 
-	private void notifyPurchaseResponseListeners(@Nullable Receipt receipt) {
+	private void notifyPurchaseResponseListeners(@Nullable PurchaseResponse response) {
 		for (PurchaseResponseListener listener : responseListeners) {
-			listener.onPurchaseResponse(receipt);
+			listener.onPurchaseResponse(response);
 		}
 	}
 
@@ -181,7 +181,7 @@ public class IapPurchasingListener implements PurchasingListener {
 				final Receipt receipt = response.getReceipt();
 				Log.d(TAG, "onPurchaseResponse: receipt json:" + receipt.toJSON());
 				PurchasingService.notifyFulfillment(receipt.getReceiptId(), FulfillmentResult.FULFILLED);
-				notifyPurchaseResponseListeners(receipt);
+				notifyPurchaseResponseListeners(response);
 				break;
 			case ALREADY_PURCHASED:
 				Log.i(TAG, "onPurchaseResponse: already purchased, you should verify the subscription " +

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.amazon.device.iap.PurchasingService;
 import com.amazon.device.iap.model.Product;
+import com.amazon.device.iap.model.PurchaseResponse;
 import com.amazon.device.iap.model.Receipt;
 import com.amazon.device.iap.model.UserData;
 
@@ -30,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Currency;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -45,7 +45,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	private final IapPurchasingListener purchasingListener;
 
 	private UserIapData userData;
-	private Map<String, Product> productMap = new HashMap<>();
+	private Map<String, Product> productMap;
 	private List<Receipt> receipts = new ArrayList<>();
 
 	public InAppPurchaseHelperImpl(OsmandApplication ctx) {
@@ -71,7 +71,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	@Override
 	public void purchaseFullVersion(@NonNull Activity activity) throws UnsupportedOperationException {
-		throw new UnsupportedOperationException("Attempt to purchase full version (amazon build)");
+		notifyShowProgress(InAppPurchaseTaskType.PURCHASE_FULL_VERSION);
+		InAppPurchase fullVersion = purchases.getFullVersion();
+		if (fullVersion != null) {
+			exec(InAppPurchaseTaskType.PURCHASE_FULL_VERSION, new PurchaseInAppCommand(new WeakReference<>(activity), fullVersion.getSku()));
+		}
 	}
 
 	@Override
@@ -97,7 +101,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	@Override
 	protected InAppCommand getPurchaseSubscriptionCommand(WeakReference<Activity> activity, String sku, String userInfo) throws UnsupportedOperationException {
-		return new PurchaseSubscriptionCommand(activity, sku);
+		return new PurchaseInAppCommand(activity, sku);
 	}
 
 	@Override
@@ -116,23 +120,41 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	@Nullable
 	private Product getProductInfo(@NonNull String productId) {
-		Collection<Product> products = productMap.values();
-		for (Product product : products) {
-			if (product.getSku().equals(productId)) {
-				return product;
+		Map<String, Product> productMap = this.productMap;
+		if (productMap != null) {
+			Collection<Product> products = productMap.values();
+			for (Product product : products) {
+				if (product.getSku().equals(productId)) {
+					return product;
+				}
 			}
 		}
 		return null;
 	}
 
 	// Call when a purchase is finished
-	private void onPurchaseFinished(@NonNull Receipt receipt) {
+	private void onPurchaseFinished(@NonNull PurchaseResponse response) {
+		Receipt receipt = response.getReceipt();
 		logDebug("Purchase finished: " + receipt.getSku());
-		onPurchaseDone(getPurchaseInfo(receipt));
+		PurchaseInfo info = getPurchaseInfo(receipt);
+		UserData userData = response.getUserData();
+		if (userData != null) {
+			info.setPurchaseToken(userData.getUserId());
+		} else {
+			info.setPurchaseToken(getUserId());
+		}
+		onPurchaseDone(info);
 	}
 
 	private boolean hasDetails(@NonNull String productId) {
 		return getProductInfo(productId) != null;
+	}
+
+	@NonNull
+	private String getUserId() {
+		UserIapData userData = this.userData;
+		String userId = userData != null ? userData.getAmazonUserId() : null;
+		return userId != null ? userId : "";
 	}
 
 	@Nullable
@@ -146,7 +168,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	private PurchaseInfo getPurchaseInfo(Receipt receipt) {
-		return new PurchaseInfo(receipt.getSku(), receipt.getReceiptId(), receipt.getReceiptId(),
+		return new PurchaseInfo(receipt.getSku(), receipt.getReceiptId(), getUserId(),
 				receipt.getPurchaseDate().getTime(), 0, true, !receipt.isCanceled());
 	}
 
@@ -182,15 +204,16 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			inAppPurchase.setPriceValue(priceValue);
 		}
 		if (inAppPurchase instanceof InAppSubscription) {
+			InAppSubscription s = (InAppSubscription) inAppPurchase;
 			String subscriptionPeriod = null;
-			if (product.getSku().contains(".annual.")) {
+			if (product.getSku().contains(".annual")) {
 				subscriptionPeriod = "P1Y";
-			} else if (product.getSku().contains(".monthly.")) {
+			} else if (product.getSku().contains(".monthly")) {
 				subscriptionPeriod = "P1M";
 			}
 			if (!Algorithms.isEmpty(subscriptionPeriod)) {
 				try {
-					((InAppSubscription) inAppPurchase).setSubscriptionPeriodString(subscriptionPeriod);
+					s.setSubscriptionPeriodString(subscriptionPeriod);
 				} catch (ParseException e) {
 					LOG.error(e);
 				}
@@ -213,7 +236,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						logDebug("getPurchaseUpdates");
 						PurchasingService.getPurchaseUpdates(true);
 					} else {
-						obtainSubscriptionsInfo(null);
+						obtainInAppsInfo(null);
 					}
 				}
 
@@ -236,7 +259,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						for (Receipt receipt : receipts) {
 							skus.add(receipt.getSku());
 						}
-						obtainSubscriptionsInfo(skus);
+						obtainInAppsInfo(skus);
 					}
 				}
 
@@ -252,7 +275,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				}
 
 				@Override
-				public void onPurchaseResponse(@Nullable Receipt receipt) {
+				public void onPurchaseResponse(@Nullable PurchaseResponse response) {
 				}
 
 				private void processInventory() {
@@ -286,6 +309,18 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 								fetchInAppPurchase(s, productInfo, receipt);
 							}
 						}
+					}
+
+					InAppPurchase fullVersion = getFullVersion();
+					if (fullVersion != null && hasDetails(fullVersion.getSku())) {
+						Receipt receipt = getReceipt(fullVersion.getSku());
+						Product productInfo = getProductInfo(fullVersion.getSku());
+						if (productInfo != null) {
+							fetchInAppPurchase(fullVersion, productInfo, receipt);
+						}
+					}
+					if (fullVersion != null && getReceipt(fullVersion.getSku()) != null) {
+						ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
 					}
 
 					// Do we have the live updates?
@@ -388,12 +423,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			}
 		}
 
-		private void obtainSubscriptionsInfo(@Nullable List<String> skus) {
+		private void obtainInAppsInfo(@Nullable List<String> skus) {
 			if (uiActivity != null) {
 				Set<String> productIds = new HashSet<>();
-				List<InAppSubscription> subscriptions = purchases.getSubscriptions().getAllSubscriptions();
-				for (InAppSubscription s : subscriptions) {
-					productIds.add(s.getSku());
+				for (InAppPurchase purchase : getInAppPurchases().getAllInAppPurchases(true)) {
+					productIds.add(purchase.getSku());
 				}
 				if (skus != null) {
 					productIds.addAll(skus);
@@ -405,13 +439,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 	}
 
-	private class PurchaseSubscriptionCommand extends InAppCommand {
+	private class PurchaseInAppCommand extends InAppCommand {
 
 		private final WeakReference<Activity> activityRef;
 		private final String sku;
 		private final PurchaseResponseListener responseListener;
 
-		public PurchaseSubscriptionCommand(WeakReference<Activity> activity, String sku) {
+		public PurchaseInAppCommand(WeakReference<Activity> activity, String sku) {
 			this.activityRef = activity;
 			this.sku = sku;
 
@@ -429,11 +463,11 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				}
 
 				@Override
-				public void onPurchaseResponse(@Nullable Receipt receipt) {
-					if (receipt != null) {
+				public void onPurchaseResponse(@Nullable PurchaseResponse response) {
+					if (response != null) {
 						Activity a = activity.get();
 						if (AndroidUtils.isActivityNotDestroyed(a)) {
-							onPurchaseFinished(receipt);
+							onPurchaseFinished(response);
 						} else {
 							logError("startResolutionForResult on destroyed activity");
 						}

@@ -113,9 +113,15 @@ public abstract class InAppPurchases {
 
 	public List<InAppPurchase> getAllInAppPurchases(boolean includeSubscriptions) {
 		List<InAppPurchase> purchases = new ArrayList<>();
-		purchases.add(fullVersion);
-		purchases.add(depthContours);
-		purchases.add(contourLines);
+		if (fullVersion != null) {
+			purchases.add(fullVersion);
+		}
+		if (depthContours != null) {
+			purchases.add(depthContours);
+		}
+		if (contourLines != null) {
+			purchases.add(contourLines);
+		}
 		if (includeSubscriptions) {
 			purchases.addAll(subscriptions.getAllSubscriptions());
 		}
@@ -1206,6 +1212,10 @@ public abstract class InAppPurchases {
 
 		public String getPurchaseToken() {
 			return purchaseToken;
+		}
+
+		protected void setPurchaseToken(String purchaseToken) {
+			this.purchaseToken = purchaseToken;
 		}
 
 		public long getPurchaseTime() {
