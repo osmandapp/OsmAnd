@@ -1,7 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import net.osmand.data.LatLon;
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -29,10 +27,6 @@ public abstract class OsmPoint  implements Serializable {
 	private Action action;
 
 	public OsmPoint(){
-	}
-
-	public LatLon getLocation() {
-		return new LatLon(getLatitude(), getLongitude());
 	}
 
 	public abstract long getId();

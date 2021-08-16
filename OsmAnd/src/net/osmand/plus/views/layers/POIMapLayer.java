@@ -265,7 +265,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				}
 			}
 		}
-		mapTextLayer.putData(this, fullObjects);
+		mapTextLayer.putData(this, objects);
 	}
 
 	@Override
