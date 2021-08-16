@@ -203,7 +203,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_zone"
-                                android:imeOptions="actionDone"
+                                android:imeOptions="actionNext"
                                 android:inputType="textCapCharacters|textNoSuggestions"
                                 tools:text="22.12345"/>
 
@@ -303,7 +303,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_easting"
-                                android:imeOptions="actionNext"
+                                android:imeOptions="actionDone"
                                 android:inputType="textCapCharacters|textNoSuggestions"
                                 tools:text="22.12345"/>
 
@@ -497,7 +497,11 @@
                     android:layout_height="1dp"
                     android:background="?attr/ctx_menu_info_divider"/>
 
-                <include layout="@layout/search_list_item"/>
+                <include android:id="@+id/found_location"
+                    layout="@layout/search_list_item"/>
+
+                <include android:id="@+id/additional_found_location"
+                    layout="@layout/search_list_item" />
 
                 <LinearLayout
                     android:id="@+id/error_item"

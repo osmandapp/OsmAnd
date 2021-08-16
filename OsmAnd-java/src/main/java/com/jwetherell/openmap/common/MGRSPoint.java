@@ -444,12 +444,21 @@ public class MGRSPoint extends ZonedUTMPoint {
      * 
      * @param mgrsZone
      * @return N of given zone is equal or larger than N, S otherwise.
+     * @throws NumberFormatException if MGSR zone letter is invalid
      */
     public static char MGRSZoneToUTMZone(char mgrsZone) {
-        if (Character.toUpperCase(mgrsZone) >= 'N')
-            return 'N';
-        // else
-        return 'S';
+        if (!isZoneValid(mgrsZone)) {
+            throw new NumberFormatException("Invalid MGSRPoint zone letter: " + mgrsZone);
+        }
+        return Character.toUpperCase(mgrsZone) >= 'N' ? 'N' : 'S';
+    }
+
+    /**
+     * @return true if provided zone letter is valid for MGRS
+     */
+    public static boolean isZoneValid(char zone) {
+        zone = Character.toUpperCase(zone);
+        return zone > 'A' && zone != 'B' && zone != 'Y' && zone < 'Z' && zone != 'I' && zone != 'O';
     }
 
     /**
