@@ -62,12 +62,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
 		String mapUnderlay = app.getSettings().MAP_UNDERLAY.get();
-		if (mapUnderlay == null) {
-			return KEY_NO_UNDERLAY;
-		}
-		return mapUnderlay.endsWith(IndexConstants.SQLITE_EXT)
-				? Algorithms.getFileNameWithoutExtension(mapUnderlay)
-				: mapUnderlay;
+		return mapUnderlay != null ? mapUnderlay : KEY_NO_UNDERLAY;
 	}
 
 	@Override

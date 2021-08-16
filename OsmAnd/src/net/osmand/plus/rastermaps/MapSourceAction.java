@@ -61,13 +61,8 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		if (!app.getSettings().MAP_ONLINE_DATA.get()) {
-			return MapSourceAction.LAYER_OSM_VECTOR;
-		}
-		String tileSources = app.getSettings().MAP_TILE_SOURCES.get();
-		return tileSources.endsWith(IndexConstants.SQLITE_EXT)
-				? Algorithms.getFileNameWithoutExtension(tileSources)
-				: tileSources;
+		OsmandSettings settings = app.getSettings();
+		return settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get() : LAYER_OSM_VECTOR;
 	}
 
 	@Override
