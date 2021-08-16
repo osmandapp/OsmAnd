@@ -41,6 +41,8 @@ import java.util.Map;
 
 public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenuProvider {
 
+	private static final int START_ZOOM = 10;
+
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
 
@@ -356,23 +358,25 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	private void drawPoints(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
-		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
-		points.addAll(editingCtx.getAfterPoints());
+		if (tileBox.getZoom() >= START_ZOOM) {
+			List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
+			points.addAll(editingCtx.getAfterPoints());
 
-		float px = -1;
-		float py = -1;
-		float iconRadius = AndroidUtils.dpToPx(view.getApplication(), 9);
-		for (int i = 0; i < points.size(); i++) {
-			WptPt point = points.get(i);
-			float x = tileBox.getPixXFromLatLon(point.lat, point.lon);
-			float y = tileBox.getPixYFromLatLon(point.lat, point.lon);
-			if (i > 0 && Math.abs(x - px) <= iconRadius && Math.abs(y - py) <= iconRadius) {
-				continue;
-			}
-			px = x;
-			py = y;
-			if (isInTileBox(tileBox, point)) {
-				drawPointIcon(canvas, tileBox, point, false);
+			float px = -1;
+			float py = -1;
+			float iconRadius = AndroidUtils.dpToPx(view.getApplication(), 9);
+			for (int i = 0; i < points.size(); i++) {
+				WptPt point = points.get(i);
+				float x = tileBox.getPixXFromLatLon(point.lat, point.lon);
+				float y = tileBox.getPixYFromLatLon(point.lat, point.lon);
+				if (i > 0 && Math.abs(x - px) <= iconRadius && Math.abs(y - py) <= iconRadius) {
+					continue;
+				}
+				px = x;
+				py = y;
+				if (isInTileBox(tileBox, point)) {
+					drawPointIcon(canvas, tileBox, point, false);
+				}
 			}
 		}
 	}
