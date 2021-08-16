@@ -305,7 +305,7 @@
     <string name="av_settings_descr">Параметры записи звука и видео.</string>
     <string name="recording_error">Ошибка записи</string>
     <string name="recording_camera_not_available">Камера недоступна</string>
-    <string name="recording_is_recorded">Идет запись медиа. Для остановки нажмите на виджет AV.</string>
+    <string name="recording_is_recorded">Идёт запись медиа. Для остановки нажмите на виджет AV.</string>
     <string name="recording_playing">Проигрывается аудио.\n%1$s</string>
     <string name="recording_open_external_player">Открыть внешний проигрыватель</string>
     <string name="recording_delete_confirm">Удалить эту запись?</string>
@@ -313,7 +313,7 @@
     <string name="recording_context_menu_arecord">Записать аудио</string>
     <string name="recording_context_menu_vrecord">Записать видео</string>
     <string name="layer_recordings">Слой медиазаписей</string>
-    <string name="recording_can_not_be_played">Не удается воспроизвести запись.</string>
+    <string name="recording_can_not_be_played">Не удаётся воспроизвести запись.</string>
     <string name="recording_context_menu_delete">Удалить запись</string>
     <string name="recording_context_menu_play">Проиграть</string>
     <string name="recording_description">Запись %1$s %3$s %2$s</string>
@@ -341,13 +341,13 @@
     <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только функции Android).</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение работает в безопасном режиме (отключите его в разделе «Настройки»).</string>
-    <string name="background_service_is_enabled_question">Фоновая служба OsmAnd все еще работает. Остановите ее тоже\?</string>
+    <string name="background_service_is_enabled_question">Фоновая служба OsmAnd всё ещё работает. Остановите её тоже\?</string>
     <string name="close_changeset">Закрыть пакет правок</string>
     <string name="zxing_barcode_scanner_not_found">Приложение ZXing Barcode Scanner не найдено. Искать в Google Play?</string>
     <string name="non_optimal_route_calculation">Быстрое построение маршрута (возможно неоптимально)</string>
     <string name="oclock">ч.</string>
-    <string name="unknown_from_location">Точка отправления еще не определена.</string>
-    <string name="unknown_location">Местоположение еще не определено.</string>
+    <string name="unknown_from_location">Точка отправления ещё не определена.</string>
+    <string name="unknown_location">Местоположение ещё не определено.</string>
     <string name="modify_transparency">Установить прозрачность (0 – прозрачный, 255 – непрозрачный)</string>
     <string name="confirm_interrupt_download">Прервать загрузку\?</string>
     <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из интернета с помощью пункта меню «Настройки» → «Управление файлами карт». После загрузки вы сможете просматривать карты, осуществлять поиск адресов, POI и общественного транспорта.</string>
@@ -366,7 +366,7 @@
 \n Любую из карт можно использовать в качестве основной или как подложку к другой карте (например стандартной локальной карте OsmAnd). Некоторые элементы векторной карты OsmAnd можно скрыть в меню «Настройки карты».
 \n
 \n Карты можно загрузить из интернета или подготовить для использования в автономном режиме (и вручную скопировать в папку данных OsmAnd) в виде базы данных sqlite, которая может быть создана с помощью различных инструментов подготовки карт сторонних производителей.</string>
-    <string name="osmand_background_plugin_description">Показывает настройки для включения фонового отслеживания и навигации путем периодического пробуждения устройства GPS (с выключенным экраном).</string>
+    <string name="osmand_background_plugin_description">Показывает настройки для включения фонового отслеживания и навигации путём периодического пробуждения устройства GPS (с выключенным экраном).</string>
     <string name="osmand_accessibility_description">Поддержка специальных возможностей устройства непосредственно в OsmAnd. Это облегчает, например, настройку скорости речи для преобразования текста в речь, настройку навигации по D-pad, использование трекбола для управления масштабированием или обратной связи между текстом и речью, например, для автоматического объявления вашей позиции.</string>
     <string name="osmand_development_plugin_description">Настройки для функций разработки и отладки, таких как проверка или имитация маршрутизации, производительность отрисовки, проверка голосовых подсказок. Эти настройки предназначены для разработчиков и не нужны обычному пользователю.</string>
     <string name="plugins_screen">Плагины</string>
@@ -427,7 +427,7 @@
     <string name="index_name_tts_voice">Голосовые подсказки (TTS, предпочтительно)</string>
     <string name="amenity_type_osmwiki">Википедия (локально)</string>
     <string name="amenity_type_user_defined">Пользовательские</string>
-    <string name="fav_export_confirmation">Файл экспорта сохраненных точек уже существует. Заменить его\?</string>
+    <string name="fav_export_confirmation">Файл экспорта избранных точек уже существует. Заменить его\?</string>
     <string name="profile_settings">Настройки профиля</string>
     <string name="settings_preset">Профиль по умолчанию</string>
     <string name="settings_preset_descr">Вид карты и настройки навигации сохраняются для каждого отдельного профиля. Установите ваш профиль по умолчанию.</string>
@@ -440,7 +440,7 @@
     <string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
     <string name="init_native_library">Инициализация нативной библиотеки…</string>
     <string name="choose_auto_follow_route">Автовозврат к позиции на карте</string>
-    <string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции.</string>
+    <string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернётся к текущей позиции.</string>
     <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
     <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
     <string name="auto_follow_location_enabled">Возврат к позиции на карте...</string>
@@ -453,14 +453,14 @@
     <string name="map_version_changed_info">На сервере данных были найдены файлы, не совместимые с данной версией программы. Чтобы их использовать, обновите приложение.</string>
     <string name="poi_filter_nominatim">Nominatim (Интернет)</string>
     <string name="search_position_current_location_search">Определение положения…</string>
-    <string name="search_position_current_location_found">Мое местоположение (найдено)</string>
+    <string name="search_position_current_location_found">Моё местоположение (найдено)</string>
     <string name="search_position_address">Адрес…</string>
     <string name="search_position_favorites">Избранные…</string>
     <string name="shared_string_undefined">Неопределённо</string>
     <string name="search_position_map_view">Текущий центр карты</string>
     <string name="select_search_position">Начало:</string>
     <string name="context_menu_item_search">Поиск рядом</string>
-    <string name="route_successfully_saved_at">Маршрут сохранен в «%1$s».</string>
+    <string name="route_successfully_saved_at">Маршрут сохранён в «%1$s».</string>
     <string name="filename_input">Имя файла: </string>
     <string name="file_with_name_already_exist">Файл с таким именем уже существует.</string>
     <string name="local_index_upload_gpx_description">Отправить файлы GPX в сообщество OSM. Они будут использованы для улучшения карты.</string>
@@ -533,7 +533,7 @@
     <string name="tile_source_already_installed">Карта уже установлена, настройки будут обновлены.</string>
     <string name="select_tile_source_to_install">Выберите тайловые карты для установки или обновления.</string>
     <string name="internet_not_available">Для данной операции требуется подключение к интернету, но оно недоступно.</string>
-    <string name="install_more">Загрузить еще…</string>
+    <string name="install_more">Загрузить ещё…</string>
     <string name="level_to_switch_vector_raster_descr">Минимальный масштаб для использования векторных карт.</string>
     <string name="level_to_switch_vector_raster">Минимальный масштаб векторных карт</string>
     <string name="error_doing_search">Не удалось выполнить локальный поиск.</string>
@@ -617,7 +617,7 @@
     <string name="daynight_mode_day">День</string>
     <string name="daynight_mode_night">Ночь</string>
     <string name="daynight_mode_auto">Восход/закат</string>
-    <string name="daynight_mode_sensor">Датчик освещенности</string>
+    <string name="daynight_mode_sensor">Датчик освещённости</string>
     <string name="daynight_descr">Настройте переключение между ночным и дневным режимами.</string>
     <string name="daynight">Дневной/ночной режим</string>
     <string name="download_files_question">Загрузить {0} файл(ов) ({1} МБ)\?</string>
@@ -629,7 +629,7 @@
     <string name="osmand_service">Фоновый режим</string>
     <string name="osmand_service_descr">OsmAnd работает в фоновом режиме с выключенным экраном.</string>
     <string name="fast_route_mode">Самый быстрый маршрут</string>
-    <string name="fast_route_mode_descr">Расчет скоростного маршрута вместо кратчайшего.</string>
+    <string name="fast_route_mode_descr">Расчёт скоростного маршрута вместо кратчайшего.</string>
     <string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} МБ)</string>
     <string name="shared_string_download_map">Скачать карту</string>
     <string name="select_max_zoom_preload_area">Наибольший масштаб для предварительной загрузки</string>
@@ -669,7 +669,7 @@
     <string name="rotate_map_to_bearing">Ориентация карты</string>
     <string name="show_route">Детали маршрута</string>
     <string name="fav_imported_sucessfully">Избранные точки импортированы</string>
-    <string name="fav_file_to_load_not_found">GPX-файл с сохраненными точками отсутствует в {0}</string>
+    <string name="fav_file_to_load_not_found">GPX-файл с избранными точками отсутствует в {0}</string>
     <string name="fav_saved_sucessfully">Точки сохранены в {0}</string>
     <string name="no_fav_to_save">Нет избранных точек для сохранения</string>
     <string name="error_occurred_loading_gpx">Не удалось загрузить GPX.</string>
@@ -692,8 +692,8 @@
     <string name="where_am_i">Где я?</string>
     <string name="network_provider">Сеть</string>
     <string name="gps_provider">GPS</string>
-    <string name="int_seconds">сек.</string>
-    <string name="int_min">мин.</string>
+    <string name="int_seconds">с</string>
+    <string name="int_min">мин</string>
     <string name="background_service_int_descr">Интервал пробуждения для фоновой службы:</string>
     <string name="background_service_int">Интервал пробуждения GPS</string>
     <string name="background_service_provider_descr">Метод определения местоположения, используемый фоновой службой:</string>
@@ -778,12 +778,12 @@
     <string name="search_online_address">Онлайн-поиск</string>
     <string name="max_level_download_tile">Уровень детализации</string>
     <string name="max_level_download_tile_descr">Выберите максимальный масштаб для загрузки тайлов карт из интернета.</string>
-    <string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч. %3$d м.</string>
+    <string name="route_general_information">Общая протяжённость = %1$s, время в пути = %2$d ч %3$d мин.</string>
     <string name="router_service_descr">Онлайн или локальный сервис для прокладки маршрута.</string>
     <string name="router_service">Прокладка маршрута</string>
     <string name="sd_dir_not_accessible">Папка для хранения данных на SD-карте недоступна!</string>
     <string name="download_question">Загрузить {0} — {1}\?</string>
-    <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите ее обновить ({2})\?</string>
+    <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите её обновить ({2})\?</string>
     <string name="address">Адрес</string>
     <string name="shared_string_download_successful">Загружено</string>
     <string name="downloading_list_indexes">Загружается список доступных регионов…</string>
@@ -804,7 +804,7 @@
     <string name="loading_poi_obj">Загрузка POI…</string>
     <string name="auth_failed">Авторизация не произошла</string>
     <string name="failed_op">, ошибка</string>
-    <string name="converting_names">Конвертация местных/английских имен…</string>
+    <string name="converting_names">Конвертация местных/английских имён…</string>
     <string name="loading_streets_buildings">Загружаются улицы и дома…</string>
     <string name="loading_postcodes">Загружаются почтовые индексы…</string>
     <string name="loading_streets">Загружаются улицы…</string>
@@ -867,7 +867,7 @@
     <string name="search_button">Поиск</string>
     <string name="search_activity">Поиск</string>
     <string name="searchpoi_activity">Выберите POI</string>
-    <string name="search_POI_level_btn">Найти еще</string>
+    <string name="search_POI_level_btn">Найти ещё</string>
     <string name="incremental_search_street">Выберите улицу</string>
     <string name="incremental_search_building">Выберите дом</string>
     <string name="choose_available_region">Выберите регион из списка</string>
@@ -918,7 +918,7 @@
     <string name="poi_action_succeded_template">Действие {0} успешно завершено.</string>
     <string name="poi_error_unexpected_template">Не удалось выполнить действие {0}.</string>
     <string name="poi_error_io_error_template">Произошла ошибка ввода/вывода при выполнении действия {0}.</string>
-    <string name="poi_error_info_not_loaded">Информация об узле не была загружена</string>
+    <string name="poi_error_info_not_loaded">Информация о точке не была загружена</string>
     <string name="poi_dialog_opening_hours">Время работы</string>
     <string name="poi_dialog_comment">Комментарий</string>
     <string name="poi_dialog_comment_default">Изменение POI</string>
@@ -927,7 +927,7 @@
     <string name="filter_current_poiButton">Фильтровать</string>
     <string name="edit_filter_save_as_menu_item">Сохранить как</string>
     <string name="edit_filter_delete_dialog_title">Удалить этот фильтр\?</string>
-    <string name="edit_filter_delete_message">«%1$s» фильтр удален</string>
+    <string name="edit_filter_delete_message">«%1$s» фильтр удалён</string>
     <string name="edit_filter_create_message">«%1$s» фильтр создан</string>
     <string name="accessibility_mode">Режим специальных возможностей</string>
     <string name="accessibility_mode_descr">Включает дополнительные возможности для невизуального доступа.</string>
@@ -1044,7 +1044,7 @@
     <string name="osmand_parking_plugin_name">Место парковки</string>
     <string name="context_menu_item_add_parking_point">Место парковки</string>
     <string name="context_menu_item_delete_parking_point">Удалить парковку</string>
-    <string name="starting_point_too_far">Точка отправления слишком далеко от ближайшей дороги.</string>
+    <string name="starting_point_too_far">Пункт отправления слишком далеко от ближайшей дороги.</string>
     <string name="shared_location">Общие места</string>
     <string name="select_animate_speedup">Скорость моделирования маршрута:</string>
     <string name="global_app_allocated_memory_descr">Выделено памяти %1$s МБ (ограничение Android %2$s МБ, Dalvik %3$s МБ).</string>
@@ -1058,7 +1058,7 @@
     <string name="use_compass_navigation_descr">Использовать компас, если невозможно определить направление иначе.</string>
     <string name="use_compass_navigation">Использовать компас</string>
     <string name="route_updated_loc_found">Маршрут будет пересчитан после определения местоположения</string>
-    <string name="continue_follow_previous_route_auto">Продолжить неоконченный маршрут\? 【%1$s】</string>
+    <string name="continue_follow_previous_route_auto">Продолжить неоконченный маршрут\?  [ %1$s ]</string>
     <string name="show_cameras">Камеры контроля скорости</string>
     <string name="show_traffic_warnings">Ограничения скорости</string>
     <string name="avoid_toll_roads">Без платных дорог</string>
@@ -1748,8 +1748,8 @@
     <string name="action_modify">Изменить действие</string>
     <string name="action_create">Создать действие</string>
     <string name="osm_edits">Правки OSM</string>
-    <string name="osmand_parking_hour">ч.</string>
-    <string name="osmand_parking_minute">мин.</string>
+    <string name="osmand_parking_hour">ч</string>
+    <string name="osmand_parking_minute">мин</string>
     <string name="osmand_parking_time_left">осталось</string>
     <string name="parking_place_limited">Парковка ограничена временем</string>
     <string name="your_edits">Ваши правки</string>
@@ -1996,7 +1996,7 @@
     <string name="first_usage_item">Первый запуск</string>
     <string name="first_usage_item_description">Как загрузить карты, установить основные настройки.</string>
     <string name="navigation_item_description">Настройки навигации.</string>
-    <string name="planning_trip_item">Планирование маршрута</string>
+    <string name="planning_trip_item">Планирование маршрута при навигации</string>
     <string name="enter_country_name">Страна</string>
     <string name="new_version">Новая версия</string>
     <string name="begin_with_osmand_menu_group">Первые шаги с OsmAnd</string>
@@ -3556,9 +3556,9 @@
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
     <string name="osm_live_payment_subscription_management">Оплата будет списана со счёта, привязанного к вашему аккаунту Google Play, при подтверждении покупки.
 \n
-\nПодписка продлевается автоматически, если вы не отмените её до даты продления. С вашего счёта будет взиматься плата за период продления (месяц/три месяца/год) разово в день продления.
+\nПодписка продлевается автоматически, если вы не отмените её до даты продления.
 \n
-\nВы можете управлять подписками и отменять их в настройках Google Play.</string>
+\nВы можете управлять подписками и отменять их в настройках Google Play в любое время.</string>
     <string name="search_poi_types_descr">Можно объединить типы POI из разных категорий. Нажмите переключатель, чтобы выбрать все; нажмите слева, чтобы выбрать категорию.</string>
     <string name="search_poi_types">Поиск типов POI</string>
     <string name="mapillary_item">OsmAnd и Mapillary</string>
@@ -3700,7 +3700,7 @@
     <string name="add_to_a_track">Добавить к треку</string>
     <string name="set_working_days_to_continue">Для продолжения задайте рабочие дни</string>
     <string name="route_between_points">Маршрут между точками</string>
-    <string name="plan_a_route">Составление маршрута</string>
+    <string name="plan_a_route">Планирование маршрута</string>
     <string name="gpx_split_interval_none_descr">Выберите способ разбиения: по времени или по расстоянию.</string>
     <string name="gpx_split_interval_descr">Интервал между метками расстояния или времени на треке.</string>
     <string name="shared_string_custom">Своё значение</string>
@@ -3804,9 +3804,9 @@
     <string name="osm_live_payment_desc_hw">Подписка оплачивается за выбранный период. Отмените ее в AppGallery в любое время.</string>
     <string name="osm_live_payment_subscription_management_hw">Оплата будет снята с вашей учётной записи AppGallery при подтверждении покупки.
 \n
-\nПодписка продлевается автоматически, если она не будет отменена до даты продления. С вашего счёта будет взиматься плата за период продления (месяц/три месяца/год) только в дату продления.
+\nПодписка продлевается автоматически, если она не будет отменена до даты продления.
 \n
-\nВы можете управлять своими подписками и отменять их, перейдя в настройки AppGallery.</string>
+\nВы можете управлять подписками и отменять их в настройках AppGallery в любое время.</string>
     <string name="use_live_public_transport">Данные OsmAnd Live</string>
     <string name="use_live_routing">Данные OsmAnd Live</string>
     <string name="complex_routing_descr">Двухфазная маршрутизация для автомобильной навигации.</string>
@@ -3946,7 +3946,7 @@
     <string name="edit_track">Редактировать трек</string>
     <string name="rename_track">Переименовать трек</string>
     <string name="change_folder">Изменить папку</string>
-    <string name="shared_string_sec">сек.</string>
+    <string name="shared_string_sec">с</string>
     <string name="announcement_time_off_route">Вне маршрута</string>
     <string name="announcement_time_arrive">Прибытие в пункт назначения</string>
     <string name="shared_string_turn">Поворот</string>
@@ -4313,4 +4313,13 @@
     <string name="connect_track_points_as">Соедините точки маршрута</string>
     <string name="purchases_restored">Покупки восстановлены</string>
     <string name="grey_color_undefined">Серый цвет используется для участков без данных.</string>
+    <string name="empty_category_name">Не задано название категории</string>
+    <string name="osm_live_payment_subscription_management_amz">Оплата будет списана со счёта, привязанного к вашему аккаунту Amazon , при подтверждении покупки.
+\n
+\nПодписка продлевается автоматически, если вы не отмените её до даты продления. 
+\n
+\nВы можете управлять подписками и отменять их в настройках Amazon в любое время.</string>
+    <string name="cancel_anytime_in_amazon_app">Отмена в любое время в Amazon App</string>
+    <string name="amz_manage_subscription_descr">Для управления подпиской используйте приложение Amazon App или откройте веб-сайт Amazon.com под своим профилем.</string>
+    <string name="no_activity_for_intent">Не найдено подходящих приложений для выполнения этого действия</string>
 </resources>
