@@ -1038,7 +1038,7 @@
     <string name="osmand_parking_position_description_add">Забрать автомобиль в:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
-    <string name="osmand_parking_position_name">Точка парковки</string>
+    <string name="osmand_parking_position_name">Место парковки</string>
     <string name="osmand_parking_plugin_description">Запись места и времени парковки вашего авто.
 \nМесто и время отображаются на панели управления или как виджет на карте. Можно добавить напоминание в календаре Android.</string>
     <string name="osmand_parking_plugin_name">Место парковки</string>
@@ -1432,14 +1432,14 @@
     <string name="voice_pref_title">Голос</string>
     <string name="misc_pref_title">Разное</string>
     <string name="localization_pref_title">Локализация</string>
-    <string name="interrupt_music_descr">Приостановка воспроизведения во время подсказок.</string>
+    <string name="interrupt_music_descr">Приостановка воспроизведения во время подсказок.</string>
     <string name="interrupt_music">Прерывать музыку</string>
     <string name="share_route_as_gpx">Поделиться маршрутом используя файл GPX</string>
     <string name="navigation_intent_invalid">Неправильный формат: %s</string>
     <string name="share_route_subject">Маршрут предоставленный через OsmAnd</string>
     <string name="keep_informing_never">При нажатии на стрелку (вручную)</string>
-    <string name="keep_informing_descr">Повторять навигационные инструкции с регулярными интервалами.</string>
-    <string name="keep_informing">Повторять навигационные инструкции</string>
+    <string name="keep_informing_descr">Повторять навигационные инструкции с заданным интервалом.</string>
+    <string name="keep_informing">Повторение подсказок</string>
     <string name="arrival_distance">Объявление о прибытии</string>
     <string name="arrival_distance_descr">Как скоро следует сообщать о прибытии?</string>
     <string name="share_fav_subject">Места, отправленные в OsmAnd</string>
@@ -2305,13 +2305,13 @@
     <string name="max_min">Макс/Мин</string>
     <string name="min_max">Мин/Макс</string>
     <string name="quick_action_resume_pause_navigation">Пауза/возобновление навигации</string>
-    <string name="mapillary_menu_descr_tile_cache">Перезагрузить тайлы для актуализации данных.</string>
+    <string name="mapillary_menu_descr_tile_cache">Перезагрузить тайлы для актуализации данных.</string>
     <string name="mapillary_menu_edit_text_hint">Введите имя пользователя</string>
     <string name="shared_string_reset">Сбросить</string>
     <string name="shared_string_to">До</string>
     <string name="mapillary_menu_date_from">От</string>
     <string name="shared_string_reload">Обновить</string>
-    <string name="mapillary_menu_filter_description">Фильтровать фотографии по отправителю, дате или типу. Фильтры применяются только для больших масштабов.</string>
+    <string name="mapillary_menu_filter_description">Фильтровать фотографии по отправителю, дате или типу. Фильтры применяются только для больших масштабов.</string>
     <string name="import_gpx_failed_descr">Не удалось импортировать файл. Убедитесь, что OsmAnd имеет разрешение на его чтение.</string>
     <string name="distance_moving">Исправл. путь</string>
     <string name="improve_coverage_install_mapillary_desc">Установите Mapillary, чтобы добавить фотографии этого места.</string>
@@ -2522,11 +2522,11 @@
 \n• Функция записи GPX позволяет вам записывать ваше путешествие и делиться им 
 \n• Через приложение вы можете включить отображение контурных линий и затемнение рельефа</string>
     <string name="osmand_extended_description_part6">Прогулки, пеший туризм, экскурсии
-\n• Карта показывает пешеходные и трекинговые тропы
+\n• Карта показывает пешеходные и туристические маршруты
 \n• Википедия на предпочитаемом вами языке может многое рассказать вам во время экскурсии по городу
 \n• Остановки общественного транспорта (автобус, трамвай, поезд), включая названия маршрутов, помогут ориентироваться в новом городе
-\n• GPS навигация в пешеходном режиме высчитывает маршрут, используя пешеходные тропы
-\n• Отправьте и следуйте по маршруту GPX или запишите и поделитесь своим собственным
+\n• GPS-навигация в пешеходном режиме высчитывает маршрут, используя пешеходные тропы
+\n• Загружайте и следуйте по маршрутам GPX или записывайте и делитесь собствеными.
 \n</string>
     <string name="osmand_extended_description_part7">Внесение вклада в OSM
 \n• Сообщения об ошибках
@@ -3481,7 +3481,7 @@
     <string name="select_shape">Выберите форму</string>
     <string name="shared_string_circle">Круг</string>
     <string name="shared_string_octagon">Восьмиугольник</string>
-    <string name="accessibility_announce">Объявлять</string>
+    <string name="accessibility_announce">Объявление</string>
     <string name="monitoring_min_speed_descr_remark">Примечание: проверка скорости &gt; 0: большинство модулей GPS сообщают значение скорости только в том случае, если алгоритм определяет, что вы движетесь, и ничего, если вы не перемещаетесь. Следовательно, использование параметра &gt; 0 в этом фильтре в некотором смысле приводит к обнаружению факта перемещения модуля GPS. Но даже если мы не производим данную фильтрацию во время записи, то все равно эта функция используется при анализе GPX для определения скорректированного расстояния, то есть значение, отображаемое в этом поле, является расстоянием, записанным во время движения.</string>
     <string name="multimedia_rec_split_title">Разделение записи</string>
     <string name="live_monitoring_adress_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -4083,10 +4083,10 @@
     <string name="expired">Срок истёк</string>
     <string name="on_hold">Приостановлено</string>
     <string name="renew_subscription">Продление подписки</string>
-    <string name="announce_when_exceeded">Объявлять о превышении</string>
+    <string name="announce_when_exceeded">Уведомлять о превышении</string>
     <string name="user_points">Точки пользователя</string>
     <string name="output">Вывод</string>
-    <string name="exit_number">Номер съезда</string>
+    <string name="exit_number">Номера съездов</string>
     <string name="srtm_unit_format">Единицы измерения на контурных линиях</string>
     <string name="srtm_download_single_help_message">Выберите необходимый вариант. Для изменения формата потребуется повторно загрузить файл.</string>
     <string name="shared_string_feet">футы</string>
