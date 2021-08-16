@@ -9,6 +9,11 @@ import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
@@ -23,7 +28,7 @@ import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
-import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWayContext;
@@ -34,12 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
-	private static final int POINTS_TO_DRAW = 50;
+public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenuProvider {
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
@@ -67,7 +67,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
 	private LatLon pressedPointLatLon;
-	private boolean pointsThresholdExceeded;
 	private boolean tapsDisabled;
 	private MeasurementEditingContext editingCtx;
 
@@ -146,7 +145,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled && editingCtx.getSelectedPointPosition() == -1) {
-			boolean pointSelected = !pointsThresholdExceeded && selectPoint(point.x, point.y, true);
+			boolean pointSelected = selectPoint(point.x, point.y, true);
 			boolean profileIconSelected = !pointSelected && selectPointForAppModeChange(point, tileBox);
 			if (!pointSelected && !profileIconSelected) {
 				pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
@@ -201,8 +200,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled) {
-			if (!pointsThresholdExceeded && editingCtx.getSelectedPointPosition() == -1
-					&& editingCtx.getPointsCount() > 0) {
+			if (editingCtx.getSelectedPointPosition() == -1 && editingCtx.getPointsCount() > 0) {
 				selectPoint(point.x, point.y, false);
 				if (editingCtx.getSelectedPointPosition() != -1) {
 					enterMovingPointMode();
@@ -357,39 +355,24 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		}
 	}
 
-	private void drawPoints(Canvas canvas, RotatedTileBox tb) {
-		WptPt lastBeforePoint = null;
+	private void drawPoints(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
-		if (points.size() > 0) {
-			lastBeforePoint = points.get(points.size() - 1);
-		}
-		WptPt firstAfterPoint = null;
-		List<WptPt> afterPoints = editingCtx.getAfterPoints();
-		if (afterPoints.size() > 0) {
-			firstAfterPoint = afterPoints.get(0);
-		}
-		points.addAll(afterPoints);
-		pointsThresholdExceeded = false;
-		int drawn = 0;
+		points.addAll(editingCtx.getAfterPoints());
+
+		float px = -1;
+		float py = -1;
+		float iconRadius = AndroidUtils.dpToPx(view.getApplication(), 9);
 		for (int i = 0; i < points.size(); i++) {
-			WptPt pt = points.get(i);
-			if (tb.containsLatLon(pt.lat, pt.lon)) {
-				drawn++;
-				if (drawn > POINTS_TO_DRAW) {
-					pointsThresholdExceeded = true;
-					break;
-				}
+			WptPt point = points.get(i);
+			float x = tileBox.getPixXFromLatLon(point.lat, point.lon);
+			float y = tileBox.getPixYFromLatLon(point.lat, point.lon);
+			if (i > 0 && Math.abs(x - px) <= iconRadius && Math.abs(y - py) <= iconRadius) {
+				continue;
 			}
-		}
-		if (pointsThresholdExceeded) {
-			WptPt pt = points.get(0);
-			drawPointIcon(canvas, tb, pt, false);
-			pt = points.get(points.size() - 1);
-			drawPointIcon(canvas, tb, pt, false);
-		} else {
-			for (int i = 0; i < points.size(); i++) {
-				WptPt pt = points.get(i);
-				drawPointIcon(canvas, tb, pt, false);
+			px = x;
+			py = y;
+			if (isInTileBox(tileBox, point)) {
+				drawPointIcon(canvas, tileBox, point, false);
 			}
 		}
 	}
