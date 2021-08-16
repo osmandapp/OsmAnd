@@ -251,7 +251,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			Toast.makeText(activity.getApplicationContext(),
 					activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
 		} else {
-			activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
+			AndroidUtils.startActivityIfSafe(activity, intent);
 		}
 	}
 
@@ -262,7 +263,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			url += "&sku=" + sku;
 		}
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-		ctx.startActivity(intent);
+		AndroidUtils.isIntentSafe(ctx, intent);
 	}
 
 	@Nullable

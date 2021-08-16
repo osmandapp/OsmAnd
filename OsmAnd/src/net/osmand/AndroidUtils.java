@@ -1,6 +1,10 @@
 package net.osmand;
 
 
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -83,10 +87,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -176,8 +176,34 @@ public class AndroidUtils {
 		}
 	}
 
-	public static boolean isIntentSafe(Context context, Intent intent) {
+	public static boolean isIntentSafe(@NonNull Context context, @NonNull Intent intent) {
 		return intent.resolveActivity(context.getPackageManager()) != null;
+	}
+
+	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent) {
+		return startActivityIfSafe(context, intent, null);
+	}
+
+	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent, @Nullable Intent chooserIntent) {
+		if (isIntentSafe(context, intent)) {
+			context.startActivity(chooserIntent != null ? chooserIntent : intent);
+			return true;
+		} else {
+			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+			app.showToastMessage(R.string.no_activity_for_intent);
+			return false;
+		}
+	}
+
+	public static boolean startActivityForResultIfSafe(@NonNull Activity activity, @NonNull Intent intent, int requestCode) {
+		if (isIntentSafe(activity, intent)) {
+			activity.startActivityForResult(intent, requestCode);
+			return true;
+		} else {
+			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+			app.showToastMessage(R.string.no_activity_for_intent);
+			return false;
+		}
 	}
 
 	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {

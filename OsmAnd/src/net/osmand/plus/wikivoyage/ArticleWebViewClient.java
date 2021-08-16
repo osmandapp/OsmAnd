@@ -75,7 +75,7 @@ public class ArticleWebViewClient extends WebViewClient {
 		} else if (url.contains(PREFIX_TEL)) {
 			Intent intent = new Intent(Intent.ACTION_DIAL);
 			intent.setData(Uri.parse(url));
-			return startActivity(intent);
+			return AndroidUtils.startActivityIfSafe(activity, intent);
 		} else if (url.contains(PREFIX_GEO)) {
 			fragment.closeAll();
 			String coordinates = url.replace(PREFIX_GEO, "");
@@ -93,18 +93,10 @@ public class ArticleWebViewClient extends WebViewClient {
 		} else if (isWebPage) {
 			WikiArticleHelper.warnAboutExternalLoad(url, activity, isNightMode());
 		} else {
-			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-			return startActivity(i);
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+			return AndroidUtils.startActivityIfSafe(activity, intent);
 		}
 		return true;
-	}
-
-	private boolean startActivity(@NonNull Intent intent) {
-		if (AndroidUtils.isIntentSafe(app, intent)) {
-			activity.startActivity(intent);
-			return true;
-		}
-		return false;
 	}
 
 	protected boolean isNightMode() {
@@ -113,5 +105,4 @@ public class ArticleWebViewClient extends WebViewClient {
 		}
 		return !app.getSettings().isLightContent();
 	}
-
 }

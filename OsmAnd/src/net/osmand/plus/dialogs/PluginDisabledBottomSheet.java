@@ -1,5 +1,7 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.OsmandPlugin.PLUGIN_ID_KEY;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,6 +11,7 @@ import android.provider.Settings;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -24,8 +27,6 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
-
-import static net.osmand.plus.OsmandPlugin.PLUGIN_ID_KEY;
 
 public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -95,10 +96,10 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = getMyApplication();
-		Intent intent = getPluginSettingsIntent();
-		if (app != null && AndroidUtils.isIntentSafe(app, intent)) {
-			startActivity(intent);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Intent intent = getPluginSettingsIntent();
+			AndroidUtils.startActivityIfSafe(activity, intent);
 		}
 		dismiss();
 	}

@@ -1443,15 +1443,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), gpxInfo.file);
-						final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-						sendIntent.setType("text/plain");
-						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						startActivity(sendIntent);
+				.setOnClickListener(v1 -> {
+					Activity activity = getActivity();
+					if (activity != null) {
+						Uri fileUri = AndroidUtils.getUriForFile(activity, gpxInfo.file);
+						Intent sendIntent = new Intent(Intent.ACTION_SEND)
+								.putExtra(Intent.EXTRA_STREAM, fileUri)
+								.setType("text/plain")
+								.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						AndroidUtils.startActivityIfSafe(activity, sendIntent);
 					}
 				})
 				.create()

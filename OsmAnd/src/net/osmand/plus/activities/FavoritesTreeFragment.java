@@ -1,5 +1,12 @@
 package net.osmand.plus.activities;
 
+import static android.view.Gravity.CENTER;
+import static net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import static net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -68,12 +75,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static android.view.Gravity.CENTER;
-import static net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
-import static net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
-import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment implements FavoritesFragmentStateHolder,
@@ -708,25 +709,24 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			@Override
 			protected void onPostExecute(Void res) {
 				hideProgressBar();
-				if (getActivity() == null) {
-					// user quit application
-					return;
-				}
-				try {
-					if (src != null && dst != null) {
-						Algorithms.fileCopy(src, dst);
+				Activity activity = getActivity();
+				if (activity != null) {
+					try {
+						if (src != null && dst != null) {
+							Algorithms.fileCopy(src, dst);
+						}
+						Intent sendIntent = new Intent();
+						sendIntent.setAction(Intent.ACTION_SEND)
+								.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject))
+								.putExtra(Intent.EXTRA_TEXT, descriptionOfPoints)
+								.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(activity, dst))
+								.setType("text/plain")
+								.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						AndroidUtils.startActivityIfSafe(activity, sendIntent);
+					} catch (IOException e) {
+						Toast.makeText(activity, "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+						e.printStackTrace();
 					}
-					final Intent sendIntent = new Intent();
-					sendIntent.setAction(Intent.ACTION_SEND)
-							.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject))
-							.putExtra(Intent.EXTRA_TEXT, descriptionOfPoints)
-							.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), dst))
-							.setType("text/plain")
-							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					startActivity(sendIntent);
-				} catch (IOException e) {
-					Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-					e.printStackTrace();
 				}
 			}
 		};

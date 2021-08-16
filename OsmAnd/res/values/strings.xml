@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+
+    <string name="no_activity_for_intent">No suitable applications to perform this action were found</string>
     <string name="empty_category_name">Empty category name</string>
     <string name="amz_manage_subscription_descr">To manage your subscription use the Amazon App on the device or open the Amazon.com website under your profile.</string>
     <string name="cancel_anytime_in_amazon_app">Cancel it anytime in Amazon App</string>
