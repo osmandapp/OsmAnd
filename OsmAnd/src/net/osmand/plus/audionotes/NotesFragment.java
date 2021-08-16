@@ -1,5 +1,8 @@
 package net.osmand.plus.audionotes;
 
+import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -64,9 +67,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 public class NotesFragment extends OsmAndListFragment implements FavoritesFragmentStateHolder {
 
@@ -479,27 +479,26 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	}
 
 	private void shareItems(Set<Recording> selected) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
-		ArrayList<Uri> uris = new ArrayList<>();
-		for (Recording rec : selected) {
-			File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
-			if (file != null) {
-				uris.add(AndroidUtils.getUriForFile(app, file));
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			ArrayList<Uri> uris = new ArrayList<>();
+			for (Recording rec : selected) {
+				File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
+				if (file != null) {
+					uris.add(AndroidUtils.getUriForFile(activity, file));
+				}
 			}
-		}
 
-		Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-		intent.setType("*/*");
-		intent.putExtra(Intent.EXTRA_STREAM, uris);
-		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		if (Build.VERSION.SDK_INT > 18) {
-			intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+			Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+			intent.setType("*/*");
+			intent.putExtra(Intent.EXTRA_STREAM, uris);
+			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			if (Build.VERSION.SDK_INT > 18) {
+				intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+			}
+			Intent chooserIntent = Intent.createChooser(intent, getString(R.string.share_note));
+			AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
 		}
-		Intent chooserIntent = Intent.createChooser(intent, getString(R.string.share_note));
-		AndroidUtils.startActivityIfSafe(app, intent, chooserIntent);
 	}
 
 	private Set<Recording> getRecordingsForGpx(Set<Recording> selected) {
@@ -570,22 +569,20 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		MediaScannerConnection.scanFile(getActivity(), new String[] {recording.getFile().getAbsolutePath()},
 				null, (path, uri) -> {
 					Activity activity = getActivity();
-					if (activity == null) {
-						return;
+					if (activity != null) {
+						Intent shareIntent = new Intent(Intent.ACTION_SEND);
+						if (recording.isPhoto()) {
+							shareIntent.setType("image/*");
+						} else if (recording.isAudio()) {
+							shareIntent.setType("audio/*");
+						} else if (recording.isVideo()) {
+							shareIntent.setType("video/*");
+						}
+						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+						shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+						Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
+						AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
 					}
-
-					Intent shareIntent = new Intent(Intent.ACTION_SEND);
-					if (recording.isPhoto()) {
-						shareIntent.setType("image/*");
-					} else if (recording.isAudio()) {
-						shareIntent.setType("audio/*");
-					} else if (recording.isVideo()) {
-						shareIntent.setType("video/*");
-					}
-					shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-					shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-					Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
-					AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
 				});
 	}
 

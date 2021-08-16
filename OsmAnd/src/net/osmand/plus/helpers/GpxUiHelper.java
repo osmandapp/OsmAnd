@@ -900,8 +900,7 @@ public class GpxUiHelper {
 			Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 			intent.setType("*/*");
 			if (AndroidUtils.isIntentSafe(mapActivity, intent)) {
-				ActivityResultListener listener =
-						new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, onActivityResultListener);
+				ActivityResultListener listener = new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, onActivityResultListener);
 				mapActivity.registerActivityResultListener(listener);
 				mapActivity.startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
 			} else {

@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -19,10 +23,6 @@ import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 
 import org.apache.commons.logging.Log;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 	public static final String TAG = "RateUsBottomSheetDialogFragment";
@@ -71,8 +71,8 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 		if (app != null) {
 			rateUsHelper.updateState(RateUsState.LIKED);
 			Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, app.getPackageName()));
-			Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-			AndroidUtils.startActivityIfSafe(app, goToMarket);
+			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+			AndroidUtils.startActivityIfSafe(app, intent);
 			dismiss();
 		}
 	}

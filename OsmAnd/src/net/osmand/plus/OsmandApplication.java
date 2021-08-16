@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -24,6 +26,13 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
@@ -101,16 +110,8 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.multidex.MultiDex;
-import androidx.multidex.MultiDexApplication;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
-
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 
 public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log";

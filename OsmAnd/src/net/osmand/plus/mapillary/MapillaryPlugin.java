@@ -1,5 +1,9 @@
 package net.osmand.plus.mapillary;
 
+import static android.content.Intent.ACTION_VIEW;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -10,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -42,14 +50,6 @@ import org.json.JSONObject;
 
 import java.text.MessageFormat;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.FragmentActivity;
-
-import static android.content.Intent.ACTION_VIEW;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 public class MapillaryPlugin extends OsmandPlugin {
 

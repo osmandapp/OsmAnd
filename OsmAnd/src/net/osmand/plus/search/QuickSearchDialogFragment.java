@@ -1,5 +1,11 @@
 package net.osmand.plus.search;
 
+import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
+import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
+import static net.osmand.search.core.ObjectType.POI_TYPE;
+import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
+import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -15,7 +21,6 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,12 +120,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
-import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
-import static net.osmand.search.core.ObjectType.POI_TYPE;
-import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
-import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener,
 		DownloadIndexesThread.DownloadEvents {
@@ -2276,22 +2275,25 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				protected void onPostExecute(GPXFile gpxFile) {
-					hideProgressBar();
-					File dir = new File(getActivity().getCacheDir(), "share");
-					if (!dir.exists()) {
-						dir.mkdir();
-					}
-					File dst = new File(dir, "History.gpx");
-					GPXUtilities.writeGpxFile(dst, gpxFile);
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						hideProgressBar();
+						File dir = new File(activity.getCacheDir(), "share");
+						if (!dir.exists()) {
+							dir.mkdir();
+						}
+						File dst = new File(dir, "History.gpx");
+						GPXUtilities.writeGpxFile(dst, gpxFile);
 
-					final Intent sendIntent = new Intent();
-					sendIntent.setAction(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile));
-					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
-					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMapActivity(), dst));
-					sendIntent.setType("text/plain");
-					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					AndroidUtils.startActivityIfSafe(getActivity(), sendIntent);
+						final Intent sendIntent = new Intent();
+						sendIntent.setAction(Intent.ACTION_SEND);
+						sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile));
+						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
+						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMapActivity(), dst));
+						sendIntent.setType("text/plain");
+						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						AndroidUtils.startActivityIfSafe(activity, sendIntent);
+					}
 				}
 			};
 			exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

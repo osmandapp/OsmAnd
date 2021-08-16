@@ -246,15 +246,13 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 							Intent intent = new Intent(SearchActivity.this, FavoritesListActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							intent.putExtra(FavoritesListFragment.SELECT_FAVORITE_POINT_INTENT_KEY, (Serializable) null);
-							AndroidUtils.startActivityForResultIfSafe(SearchActivity.this,
-									intent, REQUEST_FAVORITE_SELECT);
+							AndroidUtils.startActivityForResultIfSafe(SearchActivity.this, intent, REQUEST_FAVORITE_SELECT);
 							getSupportActionBar().setSelectedNavigationItem(0);
 						} else if (position == POSITION_ADDRESS) {
 							Intent intent = new Intent(SearchActivity.this, SearchAddressActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							intent.putExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
-							AndroidUtils.startActivityForResultIfSafe(SearchActivity.this,
-									intent, REQUEST_ADDRESS_SELECT);
+							AndroidUtils.startActivityForResultIfSafe(SearchActivity.this, intent, REQUEST_ADDRESS_SELECT);
 							getSupportActionBar().setSelectedNavigationItem(0);
 						}
 					}
@@ -400,8 +398,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	}
 	
 	public void setAddressSpecContent() {
-		Intent intent = getIntent();
-		AndroidUtils.startActivityIfSafe(this, intent);
 		finish();
+		AndroidUtils.startActivityIfSafe(this, getIntent());
 	}
 }

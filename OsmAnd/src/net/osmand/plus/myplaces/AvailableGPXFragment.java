@@ -41,6 +41,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.FileUtils;
@@ -99,22 +107,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
-import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.TrackMenuFragment.openTrack;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback {
@@ -1453,15 +1445,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon))
 				.setOnClickListener(v1 -> {
 					Activity activity = getActivity();
-					if (activity == null) {
-						return;
+					if (activity != null) {
+						Uri fileUri = AndroidUtils.getUriForFile(activity, gpxInfo.file);
+						Intent sendIntent = new Intent(Intent.ACTION_SEND)
+								.putExtra(Intent.EXTRA_STREAM, fileUri)
+								.setType("text/plain")
+								.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						AndroidUtils.startActivityIfSafe(activity, sendIntent);
 					}
-					final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), gpxInfo.file);
-					final Intent sendIntent = new Intent(Intent.ACTION_SEND)
-							.putExtra(Intent.EXTRA_STREAM, fileUri)
-							.setType("text/plain")
-							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					AndroidUtils.startActivityIfSafe(activity, sendIntent);
 				})
 				.create()
 		);

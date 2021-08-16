@@ -14,6 +14,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
@@ -35,8 +39,8 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.importfiles.ImportHelper;
-import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
+import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.measurementtool.GpxData;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
@@ -65,9 +69,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentManager;
 
 
 public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
@@ -474,9 +475,10 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	}
 
 	public void importTrack() {
-		Intent intent = ImportHelper.getImportTrackIntent();
-		if (getActivity() != null) {
-			AndroidUtils.startActivityForResultIfSafe(getActivity(), intent, ImportHelper.IMPORT_FILE_REQUEST);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Intent intent = ImportHelper.getImportTrackIntent();
+			AndroidUtils.startActivityForResultIfSafe(activity, intent, ImportHelper.IMPORT_FILE_REQUEST);
 		}
 	}
 

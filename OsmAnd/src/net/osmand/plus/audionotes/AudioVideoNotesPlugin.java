@@ -1,5 +1,11 @@
 package net.osmand.plus.audionotes;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -95,12 +101,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AUDIO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_PHOTO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_VIDEO_NOTE;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -1952,12 +1952,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public void playRecording(final @NonNull Context ctx, final @NonNull Recording r) {
 		if (r.isVideo() || r.isPhoto()) {
-			Intent vint = new Intent(Intent.ACTION_VIEW);
+			Intent intent = new Intent(Intent.ACTION_VIEW);
 			String type = r.isVideo() ? "video/*" : "image/*";
-			vint.setDataAndType(AndroidUtils.getUriForFile(ctx, r.file), type);
-			vint.setFlags(0x10000000);
-			vint.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			AndroidUtils.startActivityIfSafe(ctx, vint);
+			intent.setDataAndType(AndroidUtils.getUriForFile(ctx, r.file), type);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			AndroidUtils.startActivityIfSafe(ctx, intent);
 			return;
 		}
 

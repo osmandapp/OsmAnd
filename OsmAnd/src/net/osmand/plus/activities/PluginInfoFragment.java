@@ -150,20 +150,19 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		getButton.setText(plugin.isPaid() ? R.string.get_plugin : R.string.shared_string_install);
 		getButton.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
-			if (activity == null) {
-				return;
-			}
-			OsmAndFeature feature = null;
-			if (plugin instanceof SRTMPlugin) {
-				feature = OsmAndFeature.TERRAIN;
-			} else if (plugin instanceof WikipediaPlugin) {
-				feature = OsmAndFeature.WIKIPEDIA;
-			} else {
-				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
-				AndroidUtils.startActivityIfSafe(activity, intent);
-			}
-			if (feature != null) {
-				ChoosePlanFragment.showInstance(activity, feature);
+			if (activity != null) {
+				OsmAndFeature feature = null;
+				if (plugin instanceof SRTMPlugin) {
+					feature = OsmAndFeature.TERRAIN;
+				} else if (plugin instanceof WikipediaPlugin) {
+					feature = OsmAndFeature.WIKIPEDIA;
+				} else {
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
+					AndroidUtils.startActivityIfSafe(activity, intent);
+				}
+				if (feature != null) {
+					ChoosePlanFragment.showInstance(activity, feature);
+				}
 			}
 		});
 

@@ -1,11 +1,17 @@
 package net.osmand.plus.wikivoyage.article;
 
+import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -17,12 +23,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
 
 public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFragment {
 

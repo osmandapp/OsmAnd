@@ -1,8 +1,9 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+
 import android.content.ClipData;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -25,6 +26,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -56,7 +64,6 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
 import net.osmand.plus.openplacereviews.OPRConstants;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
@@ -87,15 +94,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 public class MenuBuilder {
 
@@ -495,13 +493,8 @@ public class MenuBuilder {
 						if (Build.VERSION.SDK_INT > 18) {
 							intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 						}
-						if (AndroidUtils.isIntentSafe(mapActivity, intent)) {
-							Intent chooserIntent = Intent.createChooser(intent,
-									mapActivity.getString(R.string.select_picture));
-							mapActivity.startActivityForResult(chooserIntent, PICK_IMAGE);
-						} else {
-							app.showToastMessage(R.string.no_activity_for_intent);
-						}
+						Intent chooserIntent = Intent.createChooser(intent, mapActivity.getString(R.string.select_picture));
+						AndroidUtils.startActivityForResultIfSafe(mapActivity, chooserIntent, PICK_IMAGE);
 					});
 				} else {
 					OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());

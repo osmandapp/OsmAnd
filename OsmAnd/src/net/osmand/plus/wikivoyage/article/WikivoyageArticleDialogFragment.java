@@ -1,5 +1,8 @@
 package net.osmand.plus.wikivoyage.article;
 
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
+import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -54,11 +57,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.osmand.plus.track.TrackMenuFragment.openTrack;
-import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
-import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_LANG;
-import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_TITLE;
 
 
 public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment {

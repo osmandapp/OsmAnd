@@ -1,5 +1,6 @@
 package net.osmand.plus.audionotes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,14 +11,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 
 import java.io.File;
-
-import androidx.annotation.NonNull;
 
 public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 
@@ -53,13 +54,13 @@ public class AudioVideoNoteMenuBuilder extends MenuBuilder {
 					bmp.recycle();
 					bmp = resizedBitmap;
 				}
-
 				buildImageRow(view, bmp, v -> {
-					Intent vint = new Intent(Intent.ACTION_VIEW);
-					vint.setDataAndType(AndroidUtils.getUriForFile(getApplication(), recording.getFile()) , "image/*");
-					vint.setFlags(0x10000000);
-					vint.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					AndroidUtils.startActivityIfSafe(v.getContext(), vint);
+					Context ctx = v.getContext();
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setDataAndType(AndroidUtils.getUriForFile(ctx, recording.getFile()), "image/*");
+					intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					AndroidUtils.startActivityIfSafe(ctx, intent);
 				});
 			}
 		} else {

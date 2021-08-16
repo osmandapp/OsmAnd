@@ -7,6 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -17,11 +22,6 @@ import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.RateUsHelper.RateUsState;
 
 import org.apache.commons.logging.Log;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 	public static final String TAG = "DislikeOsmAndBottomSheetDialogFragment";
@@ -65,15 +65,15 @@ public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
 			rateUsHelper.updateState(RateUsState.DISLIKED_WITH_MESSAGE);
 			String email = getString(R.string.support_email);
 			Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
 			sendEmail.setData(Uri.parse("mailto:" + email));
 			sendEmail.putExtra(Intent.EXTRA_EMAIL, email);
 			Intent chooserIntent = Intent.createChooser(sendEmail, getString(R.string.send_report));
-			AndroidUtils.startActivityIfSafe(app, sendEmail, chooserIntent);
+			AndroidUtils.startActivityIfSafe(activity, sendEmail, chooserIntent);
 			dismiss();
 		}
 	}
