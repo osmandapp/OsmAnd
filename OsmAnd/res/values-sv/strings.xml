@@ -3409,7 +3409,7 @@
     <string name="local_backup_descr">Säkerhetskopiera eller återställ data från en lokal fil.</string>
     <string name="backup_into_file">Säkerhetskopiera som fil</string>
     <string name="backup_complete">Säkerhetskopiering klar</string>
-    <string name="backup_now">Såkerhetskopiera nu</string>
+    <string name="backup_now">Säkerhetskopiera nu</string>
     <string name="make_backup">Gör en säkerhetskopia</string>
     <string name="backup_conflicts">Konflikter</string>
     <string name="backup_view_conflicts">Visa konflikter</string>
@@ -3727,4 +3727,25 @@
     <string name="enough_contributions_descr">Grattis, du har bidragit tillräckligt mycket till OpenStreetMap och kan nu dra nytta av obegränsade kartuppdateringar i OsmAnd!</string>
     <string name="not_enough_contributions_descr">Minst %1$s bidrag till OpenStreetMap inom %2$s dagar krävs.</string>
     <string name="map_updates_are_unavailable_yet">Kartuppdateringar är ännu inte tillgängliga. :-(</string>
+    <string name="shared_string_min_height">Lägsta höjd</string>
+    <string name="shared_string_max_height">Högsta höjd</string>
+    <string name="search_more">Sök mer…</string>
+    <string name="shared_string_external">Extern</string>
+    <string name="delete_all_confirmation">Ja, ta bort alla</string>
+    <string name="restore_complete">Återställd</string>
+    <string name="backup_promocode">Kampanjkod</string>
+    <string name="shared_string_learn_more">Läs mer</string>
+    <string name="from_with_param">Från %1$s</string>
+    <string name="continue_with">Fortsätt med %1$s</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s eller %2$s</string>
+    <string name="you_can_get_feature_as_part_of_pattern">Få “%1$s” som en del av %2$s-paketet. Jämförelse:</string>
+    <string name="regular_price">Ordinarie pris</string>
+    <string name="complete_purchase">Slutför köp</string>
+    <string name="shared_string_not_included">Ej inkluderad</string>
+    <string name="shared_string_includes">Inkluderar</string>
+    <string name="attribute">Attribut</string>
+    <string name="travel_routes">Resrutter</string>
+    <string name="direct_line_maps_required_descr">Ruttberäkning tar längre tid än vanligt.
+\n
+\nNågra kartor har kanske inte laddats.</string>
 </resources>
