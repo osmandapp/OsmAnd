@@ -194,7 +194,7 @@
     <string name="shared_string_notifications">Уведомления</string>
     <string name="shared_string_continue">Продолжить</string>
     <string name="shared_string_pause">Пауза</string>
-    <string name="shared_string_trip">Запись</string>
+    <string name="shared_string_trip">Маршрут</string>
     <string name="shared_string_recorded">Запись</string>
     <string name="shared_string_record">Запись</string>
     <string name="gpx_logging_no_data">Нет данных</string>
@@ -2561,7 +2561,7 @@
     <string name="favorite_autofill_toast_text">" сохранено в "</string>
     <string name="retry">Повторить</string>
     <string name="add_route_points">Добавить точки маршрута</string>
-    <string name="add_waypoint">Путевая точка</string>
+    <string name="add_waypoint">Добавить путевую точку</string>
     <string name="add_line">Добавить линию</string>
     <string name="save_gpx_waypoint">Сохранить путевую точку GPX</string>
     <string name="save_route_point">Сохранить точку маршрута</string>
