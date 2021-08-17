@@ -708,7 +708,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
 				prevActivityIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 			}
-			startActivity(prevActivityIntent);
+			AndroidUtils.startActivityIfSafe(this, prevActivityIntent);
 			prevActivityIntent = null;
 			return true;
 		}
@@ -1113,9 +1113,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				//check if we got the PackageManager
 				if (pm != null) {
 					//create the intent with the default start activity for your application
-					Intent mStartActivity = pm.getLaunchIntentForPackage(
-							c.getPackageName()
-					);
+					Intent mStartActivity = pm.getLaunchIntentForPackage(c.getPackageName());
 					if (mStartActivity != null) {
 						mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						//create a pending intent so the application is restarted after System.exit(0) was called.
@@ -1627,7 +1625,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapWidgetsVisibilityHelper;
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, Bundle prevIntentParams, Uri intentData, Bundle intentParams) {
+	public static void launchMapActivityMoveToTop(@NonNull Context activity,
+	                                              @Nullable Bundle prevIntentParams,
+	                                              @Nullable Uri intentData,
+	                                              @Nullable Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1663,15 +1664,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				newIntent.putExtra(INTENT_PARAMS, intentParams);
 				newIntent.putExtras(intentParams);
 			}
-			activity.startActivity(newIntent);
+			AndroidUtils.startActivityIfSafe(activity, newIntent);
 		}
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity) {
+	public static void launchMapActivityMoveToTop(@NonNull Context activity) {
 		launchMapActivityMoveToTop(activity, null);
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, Bundle prevIntentParams) {
+	public static void launchMapActivityMoveToTop(@NonNull Context activity, @Nullable Bundle prevIntentParams) {
 		launchMapActivityMoveToTop(activity, prevIntentParams, null, null);
 	}
 
@@ -2316,10 +2317,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public TrackMenuFragment getTrackMenuFragment() {
 		return getFragment(TrackMenuFragment.TAG);
-	}
-
-	public RouteLineAppearanceFragment getRouteLineAppearanceFragment() {
-		return getFragment(RouteLineAppearanceFragment.TAG);
 	}
 
 	public void dismissTrackMenu() {

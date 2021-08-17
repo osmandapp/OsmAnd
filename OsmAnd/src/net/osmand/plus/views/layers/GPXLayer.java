@@ -11,7 +11,6 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.util.Pair;
 
@@ -27,6 +26,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
@@ -47,7 +47,6 @@ import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.ColoringType;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.track.CachedTrack;
 import net.osmand.plus.track.GradientScaleType;
@@ -84,7 +83,6 @@ import java.util.Set;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import static net.osmand.GPXUtilities.calculateTrackBounds;
@@ -104,7 +102,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private Paint paint;
 	private Paint borderPaint;
 	private Paint shadowPaint;
-	private Paint paintIcon;
 
 	private int cachedHash;
 	@ColorInt
@@ -115,8 +112,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private Drawable startPointIcon;
 	private Drawable finishPointIcon;
 	private Drawable startAndFinishIcon;
-	private LayerDrawable selectedPoint;
 	private TrackDrawInfo trackDrawInfo;
+
+	private ChartPointsHelper chartPointsHelper;
 	private TrackChartPoints trackChartPoints;
 
 	private GpxDbHelper gpxDbHelper;
@@ -167,6 +165,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
 		mapMarkersHelper = view.getApplication().getMapMarkersHelper();
 		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
+		chartPointsHelper = new ChartPointsHelper(view.getContext());
 
 		currentTrackColorPref = view.getSettings().CURRENT_TRACK_COLOR;
 		currentTrackColoringTypePref = view.getSettings().CURRENT_TRACK_COLORING_TYPE;
@@ -232,9 +231,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		paintGridOuterCircle.setColor(Color.WHITE);
 		paintGridOuterCircle.setAlpha(204);
 
-		paintIcon = new Paint();
-		selectedPoint = (LayerDrawable) AppCompatResources.getDrawable(view.getContext(), R.drawable.map_location_default);
-
 		UiUtilities iconsCache = view.getApplication().getUIUtilities();
 		startPointIcon = iconsCache.getIcon(R.drawable.map_track_point_start);
 		finishPointIcon = iconsCache.getIcon(R.drawable.map_track_point_finish);
@@ -274,7 +270,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
 			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			if (trackChartPoints != null) {
-				drawXAxisPoints(canvas, tileBox);
+				drawXAxisPoints(trackChartPoints, canvas, tileBox);
 			}
 			drawDirectionArrows(canvas, tileBox, selectedGPXFiles);
 			drawSelectedFilesSplits(canvas, tileBox, selectedGPXFiles, settings);
@@ -579,23 +575,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					drawBigPoint(canvas, wpt, fileColor, x, y, pair.second, textScale);
 				}
 			}
-			if (trackChartPoints != null) {
+			if (trackChartPoints != null && trackChartPoints.getHighlightedPoint() != null) {
 				LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
-				if (highlightedPoint != null) {
-					if (highlightedPoint.getLatitude() >= latLonBounds.bottom
-							&& highlightedPoint.getLatitude() <= latLonBounds.top
-							&& highlightedPoint.getLongitude() >= latLonBounds.left
-							&& highlightedPoint.getLongitude() <= latLonBounds.right) {
-						float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
-						float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
-						paintIcon.setColorFilter(null);
-						selectedPoint.setBounds((int) x - selectedPoint.getIntrinsicWidth() / 2,
-								(int) y - selectedPoint.getIntrinsicHeight() / 2,
-								(int) x + selectedPoint.getIntrinsicWidth() / 2,
-								(int) y + selectedPoint.getIntrinsicHeight() / 2);
-						selectedPoint.draw(canvas);
-					}
-				}
+				chartPointsHelper.drawHighlightedPoint(highlightedPoint, canvas, tileBox);
 			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
 			this.smallObjectsLatLon = smallObjectsLatLon;
@@ -608,40 +590,15 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		return markersGroup != null && !markersGroup.isDisabled();
 	}
 
-	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
-		int color = trackChartPoints.getSegmentColor();
-		if (color == 0) {
-			color = getTrackColor(trackChartPoints.getGpx(), cachedColor);
-			trackChartPoints.setSegmentColor(color);
-		}
-		paintGridCircle.setColor(color);
-		paintGridCircle.setAlpha(255);
-		QuadRect latLonBounds = tileBox.getLatLonBounds();
-		float r = 3 * tileBox.getDensity();
-		List<LatLon> xAxisPoints = trackChartPoints.getXAxisPoints();
-		if (xAxisPoints != null) {
-			float density = (float) Math.ceil(tileBox.getDensity());
-			float outerRadius = r + 2 * density;
-			float innerRadius = r + density;
-			QuadRect prevPointRect = null;
-			for (int i = 0; i < xAxisPoints.size(); i++) {
-				LatLon axisPoint = xAxisPoints.get(i);
-				if (axisPoint != null) {
-					if (axisPoint.getLatitude() >= latLonBounds.bottom
-							&& axisPoint.getLatitude() <= latLonBounds.top
-							&& axisPoint.getLongitude() >= latLonBounds.left
-							&& axisPoint.getLongitude() <= latLonBounds.right) {
-						float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-						float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-						QuadRect pointRect = new QuadRect(x - outerRadius, y - outerRadius, x + outerRadius, y + outerRadius);
-						if (prevPointRect == null || !QuadRect.intersects(prevPointRect, pointRect)) {
-							canvas.drawCircle(x, y, outerRadius, paintGridOuterCircle);
-							canvas.drawCircle(x, y, innerRadius, paintGridCircle);
-							prevPointRect = pointRect;
-						}
-					}
-				}
+	private void drawXAxisPoints(@NonNull TrackChartPoints chartPoints, Canvas canvas, RotatedTileBox tileBox) {
+		List<LatLon> xAxisPoints = chartPoints.getXAxisPoints();
+		if (!Algorithms.isEmpty(xAxisPoints)) {
+			int pointColor = trackChartPoints.getSegmentColor();
+			if (pointColor == 0) {
+				pointColor = getTrackColor(trackChartPoints.getGpx(), cachedColor);
+				trackChartPoints.setSegmentColor(pointColor);
 			}
+			chartPointsHelper.drawXAxisPoints(xAxisPoints, pointColor, canvas, tileBox);
 		}
 	}
 
@@ -791,7 +748,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 		if (coloringType == null) {
 			return defaultColoringType;
-		} else if (!coloringType.isAvailableInSubscription(view.getApplication(), routeInfoAttribute)) {
+		} else if (!coloringType.isAvailableInSubscription(view.getApplication(), routeInfoAttribute, false)) {
 			return defaultColoringType;
 		} else if (getCachedTrack(selectedGpxFile).isColoringTypeAvailable(coloringType, routeInfoAttribute)) {
 			return coloringType.getName(routeInfoAttribute);

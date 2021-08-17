@@ -13,6 +13,12 @@
 -->
 
     <string name="no_items_of_type_message">You do not have any items of this type</string>
+    <string name="no_activity_for_intent">No suitable applications to perform this action were found</string>
+    <string name="empty_category_name">Empty category name</string>
+    <string name="amz_manage_subscription_descr">To manage your subscription use the Amazon App on the device or open the Amazon.com website under your profile.</string>
+    <string name="cancel_anytime_in_amazon_app">Cancel it anytime in Amazon App</string>
+    <string name="osm_live_payment_subscription_management_amz">Payment is charged from your Amazon account when confirming the purchase.\n\nIt renews unless cancelled before the selected renewal period.\n\nManage or cancel your subscriptions from your Amazon settings at any time.</string>
+    <string name="grey_color_undefined">Grey color is used for parts without data.</string>
     <string name="purchases_restored">Purchases restored</string>
     <string name="pro_features">Pro features</string>
     <string name="connect_track_points_as">Сonnect route points</string>
@@ -137,7 +143,6 @@
     <string name="backup_version_history_delete_descr">Delete the changelog for deprecated data types from OsmAnd Cloud?</string>
     <string name="backup_storage_taken">Storage taken</string>
     <string name="backup_version_history">Version history</string>
-    <string name="grey_color_slope">Grey color is used when slope is undefined.</string>
     <string name="restore_complete">Restored</string>
     <string name="receiving_data_from_server">Receiving data from the server…</string>
     <string name="restore_selected_data">Restore selected data</string>

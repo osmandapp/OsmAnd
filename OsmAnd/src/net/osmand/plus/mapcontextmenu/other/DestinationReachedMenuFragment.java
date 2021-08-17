@@ -27,10 +27,10 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 
 public class DestinationReachedMenuFragment extends Fragment {
+
 	public static final String TAG = "DestinationReachedMenuFragment";
 	private static boolean exists = false;
 	private DestinationReachedMenu menu;
-
 
 	public DestinationReachedMenuFragment() {
 		exists = true;
@@ -188,7 +188,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 		return exists;
 	}
 
-	public static void showInstance(DestinationReachedMenu menu) {
+	public static void showInstance(@NonNull DestinationReachedMenu menu) {
 		int slideInAnim = menu.getSlideInAnimation();
 		int slideOutAnim = menu.getSlideOutAnimation();
 

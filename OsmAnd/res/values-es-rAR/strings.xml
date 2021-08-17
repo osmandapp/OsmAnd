@@ -4166,7 +4166,6 @@
     <string name="restore_selected_data">Restaurar datos marcados</string>
     <string name="receiving_data_from_server">Recibiendo datos del servidor…</string>
     <string name="restore_complete">Restaurado</string>
-    <string name="grey_color_slope">El color gris se usa al no estar definida la pendiente.</string>
     <string name="backup_version_history">Historial de versiones</string>
     <string name="backup_storage_taken">Almacenamiento usado</string>
     <string name="backup_version_history_delete_descr">¿Borrar el historial de cambios en OsmAnd Cloud de los tipos de datos obsoletos\?</string>
@@ -4257,7 +4256,7 @@
     <string name="backup_version_history_removed">Se ha quitado todo el historial de versiones.</string>
     <string name="backup_data_removed">Se han quitado todos los datos.</string>
     <string name="shared_string_progress">Progreso</string>
-    <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea</string>
+    <string name="backup_do_not_have_any">Aún no tienes copias de seguridad en línea.</string>
     <string name="backup_dont_have_any_descr">Programa copias de seguridad automáticas y no pierdas nunca los datos.</string>
     <string name="backup_welcome_back">¡Bienvenido de nuevo!</string>
     <string name="backup_welcome_back_descr">Restaura los datos del dispositivo usando las copias de seguridad existentes o crea una copia de seguridad de los datos en OsmAnd Cloud.</string>
@@ -4295,7 +4294,7 @@
     <string name="backup_error_no_subscription">Sin suscripción válida</string>
     <string name="map_updates_for_mappers">Actualizaciones de mapas para cartógrafos</string>
     <string name="benefits_for_contributors">Beneficios para colaboradores activos de OSM</string>
-    <string name="benefits_for_contributors_primary_descr">Puede tener derecho a actualizaciones ilimitadas del mapa cada hora, si es un colaborador activo de OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">Puedes tener derecho a actualizaciones ilimitadas del mapa cada hora, si es un colaborador activo de OpenStreetMap.org.</string>
     <string name="benefits_for_contributors_secondary_descr">Accede a OpenStreetMap para comprobar si tienes derecho a actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta el %1$s</string>
@@ -4306,4 +4305,6 @@
     <string name="map_updates_are_unavailable_yet">Las actualizaciones de mapas no están disponibles aún :-(</string>
     <string name="connect_track_points_as">Conectar puntos de ruta</string>
     <string name="pro_features">Funciones «Pro»</string>
+    <string name="purchases_restored">Compras restauradas</string>
+    <string name="grey_color_undefined">El color gris se usa para tramos sin datos.</string>
 </resources>

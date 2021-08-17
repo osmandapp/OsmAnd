@@ -1284,15 +1284,13 @@ public class MapInfoWidgetsFactory {
 
 		private void showShareSnackbar(@NonNull final String text, @NonNull final Context ctx) {
 			Snackbar snackbar = Snackbar.make(map.getLayout(), ctx.getResources().getString(R.string.copied_to_clipboard) + ":\n" + text, Snackbar.LENGTH_LONG)
-					.setAction(R.string.shared_string_share, new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							Intent intent = new Intent(Intent.ACTION_SEND);
-							intent.setAction(Intent.ACTION_SEND);
-							intent.putExtra(Intent.EXTRA_TEXT, text);
-							intent.setType("text/plain");
-							ctx.startActivity(Intent.createChooser(intent, ctx.getString(R.string.send_location)));
-						}
+					.setAction(R.string.shared_string_share, view -> {
+						Intent intent = new Intent(Intent.ACTION_SEND);
+						intent.setAction(Intent.ACTION_SEND);
+						intent.putExtra(Intent.EXTRA_TEXT, text);
+						intent.setType("text/plain");
+						Intent chooserIntent = Intent.createChooser(intent, ctx.getString(R.string.send_location));
+						AndroidUtils.startActivityIfSafe(ctx, intent, chooserIntent);
 					});
 			UiUtilities.setupSnackbar(snackbar, nightMode, 5);
 			snackbar.show();

@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.GeomagneticField;
@@ -25,11 +24,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
-
+import net.osmand.AndroidUtils;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -52,6 +47,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 
 public class OsmAndLocationProvider implements SensorEventListener {
 
@@ -942,13 +942,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		    // notify user
 		    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
 		    dialog.setMessage(context.getResources().getString(R.string.gps_network_not_enabled));
-		    dialog.setPositiveButton(context.getResources().getString(R.string.shared_string_settings), new DialogInterface.OnClickListener() {
-		            @Override
-		            public void onClick(DialogInterface paramDialogInterface, int paramInt) {
-		                Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-		                context.startActivity(myIntent);
-		            }
-		        });
+		    dialog.setPositiveButton(context.getResources().getString(R.string.shared_string_settings), (paramDialogInterface, paramInt) -> {
+				Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				AndroidUtils.startActivityIfSafe(context, intent);
+			});
 		    dialog.setNegativeButton(context.getString(R.string.shared_string_cancel), null);
 		    dialog.show();      
 		    return false;

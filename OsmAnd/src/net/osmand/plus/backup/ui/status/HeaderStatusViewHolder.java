@@ -1,5 +1,8 @@
 package net.osmand.plus.backup.ui.status;
 
+import static net.osmand.plus.activities.OsmandBaseExpandableListAdapter.adjustIndicator;
+import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
+
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,8 +24,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.fragments.MainSettingsFragment;
 import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.activities.OsmandBaseExpandableListAdapter.adjustIndicator;
-
 public class HeaderStatusViewHolder extends RecyclerView.ViewHolder {
 
 	private final TextView title;
@@ -42,7 +43,7 @@ public class HeaderStatusViewHolder extends RecyclerView.ViewHolder {
 		OsmandApplication app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
 
-		ExportBackupTask exportTask = settingsHelper.getExportTask();
+		ExportBackupTask exportTask = settingsHelper.getExportTask(BACKUP_ITEMS_KEY);
 		if (exportTask != null) {
 			title.setText(R.string.uploading);
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_cloud_upload));

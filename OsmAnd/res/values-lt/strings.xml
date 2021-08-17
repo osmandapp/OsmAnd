@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="starting_point_too_far">Išvykimo taškas yra per toli nuo artimiausio kelio.</string>
     <string name="shared_location">Bendrinta vieta</string>
@@ -1374,8 +1374,8 @@
     <string name="version_settings_descr">Atsisiųsti nightly sąrankas.</string>
     <string name="version_settings">Sąrankos</string>
     <string name="rendering_attr_streetLighting_name">Gatvės apšvietimas</string>
-    <string name="proxy_pref_title">Proksi serveris</string>
-    <string name="proxy_pref_descr">Nurodyti proksi serverį.</string>
+    <string name="proxy_pref_title">Įgaliotasis serveris</string>
+    <string name="proxy_pref_descr">Nurodyti įgaliotąjį serverį.</string>
     <string name="settings_privacy">Privatumas</string>
     <string name="shared_string_gpx_points">Taškai</string>
     <string name="shared_string_my_location">Mano dabartinė vieta</string>
@@ -1383,11 +1383,11 @@
     <string name="avoid_roads_msg">Galite pasirinkti kitą maršrutą, pažymėdami norimus aplenkti kelius</string>
     <string name="save_track_to_gpx_globally_headline">Privalomas kelio log įrašymas</string>
     <string name="enable_proxy_title">Įjungti HTTP proksi serverį</string>
-    <string name="proxy_host_title">Proksi serverio adresas</string>
-    <string name="proxy_host_descr">Nurodykite jūsų proksi serverio pavadinimą (pvz., 127.0.0.1).</string>
-    <string name="proxy_port_title">Proksi serverio portas</string>
-    <string name="proxy_port_descr">Nurodykite jūsų proksi serverio porto numerį (pvz., 8118).</string>
-    <string name="enable_proxy_descr">Konfigūruoti HTTP proksi serverį visoms tinklo užklausoms.</string>
+    <string name="proxy_host_title">Įgaliotojo serverio adresas</string>
+    <string name="proxy_host_descr">Nurodykite jūsų įgaliotojo serverio pavadinimą (pvz., 127.0.0.1).</string>
+    <string name="proxy_port_title">Įgaliotojo serverio prievadas</string>
+    <string name="proxy_port_descr">Nurodykite jūsų įgaliotojo serverio prievado numerį (pvz., 8118).</string>
+    <string name="enable_proxy_descr">Konfigūruoti HTTP įgaliotąjį serverį visoms tinklo užklausoms.</string>
     <string name="shared_string_disabled">Išjungta</string>
     <string name="shared_string_enabled">Įjungta</string>
     <string name="edit_group">Redaguoti grupę</string>
@@ -1466,7 +1466,7 @@
     <string name="filter_poi_hint">Filtruoti pagal pavadinimą</string>
     <string name="shared_string_is_open">Atidaryti</string>
     <string name="shared_string_places">Vietovės</string>
-    <string name="shared_string_search">Paieška</string>
+    <string name="shared_string_search">Ieškoti</string>
     <string name="shared_string_show_description">Rodyti aprašymą.</string>
     <string name="simulate_your_location">Imituoti jūsų padėtį</string>
     <string name="shared_string_do_not_use">Nenaudoti</string>

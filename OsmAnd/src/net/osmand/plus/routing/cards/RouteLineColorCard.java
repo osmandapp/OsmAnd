@@ -28,7 +28,7 @@ import net.osmand.plus.settings.fragments.HeaderUiAdapter;
 import net.osmand.plus.track.AppearanceViewHolder;
 import net.osmand.plus.track.ColorsCard;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
-import net.osmand.plus.track.GradientCard;
+import net.osmand.plus.track.ColoringTypeCard;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
@@ -57,7 +57,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	private final HeaderUiAdapter headerUiAdapter;
 
 	private ColorsCard colorsCard;
-	private GradientCard gradientCard;
+	private ColoringTypeCard coloringTypeCard;
 	private PromoBannerCard promoCard;
 	private ColorTypeAdapter colorAdapter;
 	private RecyclerView groupRecyclerView;
@@ -118,7 +118,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	private void modeChanged() {
 		AndroidUiHelper.updateVisibility(themeToggleContainer, selectedType.isCustomColor());
 		colorsCard.updateVisibility(selectedType.isCustomColor());
-		gradientCard.setSelectedScaleType(selectedType.toGradientScaleType());
+		coloringTypeCard.setColoringType(selectedType);
 		changeMapTheme(!selectedType.isCustomColor() ? initMapTheme : isNightMap() ? DayNightMode.NIGHT : DayNightMode.DAY);
 
 		previewRouteLineInfo.setRouteColoringType(selectedType);
@@ -132,7 +132,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		boolean available = isSelectedModeAvailable();
 		if (!available) {
 			promoCard.updateVisibility(true);
-			gradientCard.updateVisibility(false);
+			coloringTypeCard.updateVisibility(false);
 			colorsCard.updateVisibility(false);
 		} else {
 			promoCard.updateVisibility(false);
@@ -140,7 +140,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	public boolean isSelectedModeAvailable() {
-		return selectedType.isAvailableInSubscription(app, selectedRouteInfoAttribute);
+		return selectedType.isAvailableInSubscription(app, selectedRouteInfoAttribute, true);
 	}
 
 	private void setupRadioGroup(LinearLayout buttonsContainer) {
@@ -191,8 +191,8 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			colorsCard.setListener(this);
 			container.addView(colorsCard.build(mapActivity));
 
-			gradientCard = new GradientCard(mapActivity, previewRouteLineInfo.getRouteColoringType().toGradientScaleType());
-			container.addView(gradientCard.build(mapActivity));
+			coloringTypeCard = new ColoringTypeCard(mapActivity, previewRouteLineInfo.getRouteColoringType());
+			container.addView(coloringTypeCard.build(mapActivity));
 
 			promoCard = new PromoBannerCard(mapActivity, true);
 			container.addView(promoCard.build(mapActivity));

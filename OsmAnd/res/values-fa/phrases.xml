@@ -1503,4 +1503,10 @@
     <string name="poi_garden_type_private">نوع باغ: خصوصی</string>
     <string name="poi_garden_type_residential">نوع باغ: مسکونی</string>
     <string name="poi_nuts">آجیل‌فروشی</string>
+    <string name="poi_glacier_type">نوع یخچال طبیعی</string>
+    <string name="poi_socket_schuko_output_filter">خروجی شوکو</string>
+    <string name="poi_socket_cee_blue_output_filter">خروجی آبی CEE</string>
+    <string name="poi_socket_type3_output_filter">خروجی نوع 3</string>
+    <string name="poi_socket_type2_combo_output_filter">خروجی ترکیبی نوع 2</string>
+    <string name="poi_water_place_access">دسترسی به محل آب</string>
 </resources>

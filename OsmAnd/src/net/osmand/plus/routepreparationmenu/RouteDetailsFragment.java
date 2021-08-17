@@ -54,6 +54,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
@@ -1443,7 +1444,7 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	private void makeGpx() {
 		OsmandApplication app = requireMyApplication();
 		gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
-		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, true);
+		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
 	}
 
 	void openDetails() {

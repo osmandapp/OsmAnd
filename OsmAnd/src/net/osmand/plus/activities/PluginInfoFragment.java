@@ -30,13 +30,14 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -74,20 +75,8 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		app = requireMyApplication();
-
-		Bundle args = getArguments();
-		if (args == null || !args.containsKey(EXTRA_PLUGIN_ID)) {
-			log.error("Required extra '" + EXTRA_PLUGIN_ID + "' is missing");
-			return null;
-		}
-		String pluginId = args.getString(EXTRA_PLUGIN_ID);
-		if (pluginId == null) {
-			log.error("Extra '" + EXTRA_PLUGIN_ID + "' is null");
-			return null;
-		}
-		plugin = OsmandPlugin.getPlugin(pluginId);
+		plugin = getPluginFromArgs();
 		if (plugin == null) {
-			log.error("Plugin '" + EXTRA_PLUGIN_ID + "' not found");
 			return null;
 		}
 
@@ -159,26 +148,20 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		});
 		Button getButton = mainView.findViewById(R.id.plugin_get);
 		getButton.setText(plugin.isPaid() ? R.string.get_plugin : R.string.shared_string_install);
-		getButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+		getButton.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
 				OsmAndFeature feature = null;
 				if (plugin instanceof SRTMPlugin) {
 					feature = OsmAndFeature.TERRAIN;
 				} else if (plugin instanceof WikipediaPlugin) {
 					feature = OsmAndFeature.WIKIPEDIA;
 				} else {
-					FragmentActivity activity = getActivity();
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
-					if (activity != null && AndroidUtils.isIntentSafe(activity, intent)) {
-						startActivity(intent);
-					}
+					AndroidUtils.startActivityIfSafe(activity, intent);
 				}
 				if (feature != null) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						ChoosePlanFragment.showInstance(activity, feature);
-					}
+					ChoosePlanFragment.showInstance(activity, feature);
 				}
 			}
 		});
@@ -187,11 +170,35 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		return mainView;
 	}
 
+	@Nullable
+	private OsmandPlugin getPluginFromArgs() {
+		Bundle args = getArguments();
+		if (args == null || !args.containsKey(EXTRA_PLUGIN_ID)) {
+			log.error("Required extra '" + EXTRA_PLUGIN_ID + "' is missing");
+			return null;
+		}
+		String pluginId = args.getString(EXTRA_PLUGIN_ID);
+		if (pluginId == null) {
+			log.error("Extra '" + EXTRA_PLUGIN_ID + "' is null");
+			return null;
+		}
+		OsmandPlugin plugin = OsmandPlugin.getPlugin(pluginId);
+		if (plugin == null) {
+			log.error("Plugin '" + EXTRA_PLUGIN_ID + "' not found");
+			return null;
+		}
+		return plugin;
+	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
-		OsmandPlugin.checkInstalledMarketPlugins(app, getActivity());
-		updateState();
+		if (plugin != null) {
+			OsmandPlugin.checkInstalledMarketPlugins(app, getActivity());
+			updateState();
+		} else {
+			dismiss();
+		}
 	}
 
 	private void updateState() {
@@ -226,8 +233,10 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	}
 
 	@Override
-	public void onPluginStateChanged(OsmandPlugin plugin) {
-		updateState();
+	public void onPluginStateChanged(@NonNull OsmandPlugin osmandPlugin) {
+		if (Algorithms.stringsEqual(plugin.getId(), osmandPlugin.getId())) {
+			updateState();
+		}
 	}
 
 	public void dismiss() {
@@ -241,7 +250,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		}
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, OsmandPlugin plugin) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull OsmandPlugin plugin) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(EXTRA_PLUGIN_ID, plugin.getId());

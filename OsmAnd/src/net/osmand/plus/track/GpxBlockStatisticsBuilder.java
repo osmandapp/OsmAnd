@@ -31,6 +31,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.GPXTabItemType;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.widgets.TextViewEx;
@@ -108,7 +109,8 @@ public class GpxBlockStatisticsBuilder {
 
 	@Nullable
 	public GpxDisplayItem getDisplayItem(GPXFile gpxFile) {
-		return gpxFile.tracks.size() > 0 ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile, false) : null;
+		return gpxFile.tracks.size() > 0 ?
+				GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX) : null;
 	}
 
 	private GPXFile getGPXFile() {

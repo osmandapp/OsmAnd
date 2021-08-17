@@ -41,6 +41,9 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		if (dialog == null) {
+			return null;
+		}
 		View view = inflater.inflate(R.layout.context_menu_card_dialog, container, false);
 		FragmentActivity activity = requireActivity();
 		AndroidUtils.addStatusBarPadding21v(activity, view);
@@ -48,34 +51,26 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 			view.findViewById(R.id.dialog_layout)
 					.setBackgroundColor(ContextCompat.getColor(activity, R.color.mapillary_action_bar));
 		}
-		contentLayout = (LinearLayout) view.findViewById(R.id.content);
+		contentLayout = view.findViewById(R.id.content);
 		contentView = dialog.getContentView();
 		if (contentView != null) {
 			contentLayout.addView(contentView);
 		}
-		view.findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+		view.findViewById(R.id.close_button).setOnClickListener(v -> dismiss());
 		if (!Algorithms.isEmpty(dialog.getTitle())) {
 			((TextView) view.findViewById(R.id.title)).setText(dialog.getTitle());
 		}
 		if (!Algorithms.isEmpty(dialog.getDescription())) {
 			((TextView) view.findViewById(R.id.description)).setText(dialog.getDescription());
 		}
-		AppCompatImageView moreButton = (AppCompatImageView) view.findViewById(R.id.more_button);
+		AppCompatImageView moreButton = view.findViewById(R.id.more_button);
 		if (dialog.haveMenuItems()) {
 			moreButton.setVisibility(View.VISIBLE);
-			moreButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					final PopupMenu optionsMenu = new PopupMenu(v.getContext(), v);
-					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
-					dialog.createMenuItems(optionsMenu.getMenu());
-					optionsMenu.show();
-				}
+			moreButton.setOnClickListener(v -> {
+				final PopupMenu optionsMenu = new PopupMenu(v.getContext(), v);
+				DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+				dialog.createMenuItems(optionsMenu.getMenu());
+				optionsMenu.show();
 			});
 		} else {
 			moreButton.setVisibility(View.GONE);
@@ -88,6 +83,8 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		super.onResume();
 		if (dialog != null) {
 			dialog.onResume();
+		} else {
+			dismiss();
 		}
 	}
 
@@ -112,7 +109,9 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		dialog.saveMenu(outState);
+		if (dialog != null) {
+			dialog.saveMenu(outState);
+		}
 	}
 
 	@Override
@@ -123,7 +122,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 		return -1;
 	}
 
-	public static void showInstance(ContextMenuCardDialog menu) {
+	public static void showInstance(@NonNull ContextMenuCardDialog menu) {
 		ContextMenuCardDialogFragment fragment = new ContextMenuCardDialogFragment();
 		fragment.dialog = menu;
 		menu.getMapActivity().getSupportFragmentManager().beginTransaction()
@@ -132,7 +131,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	}
 
 	public void dismiss() {
-		MapActivity activity = dialog.getMapActivity();
+		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			if (!fragmentManager.isStateSaved()) {

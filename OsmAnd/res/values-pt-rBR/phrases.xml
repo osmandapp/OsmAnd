@@ -4001,4 +4001,21 @@
     <string name="poi_authentication_key">Autenticação via chave</string>
     <string name="poi_authentication_chip_card">Autenticação via cartão com chip</string>
     <string name="poi_authentication_contactless">Autenticação sem contato</string>
+    <string name="poi_shelter_yes">Sim</string>
+    <string name="poi_shelter_no">Abrigo: não</string>
+    <string name="poi_direction_southwest">Direção sudoeste</string>
+    <string name="poi_direction_southeast">Direção sudeste</string>
+    <string name="poi_direction_northwest">Direção noroeste</string>
+    <string name="poi_direction_northeast">Direção nordeste</string>
+    <string name="poi_direction_west">Direção oeste</string>
+    <string name="poi_direction_south">Direção sul</string>
+    <string name="poi_direction_east">Direção leste</string>
+    <string name="poi_direction_north">Direção norte</string>
+    <string name="poi_destination">Destino</string>
+    <string name="poi_permanent_camping_only">Somente</string>
+    <string name="poi_permanent_camping_no">Não</string>
+    <string name="poi_permanent_camping_yes">Sim</string>
+    <string name="poi_shelter_filter">Abrigo</string>
+    <string name="poi_permanent_camping">Acampamento permanente</string>
+    <string name="poi_lounger">Espreguiçadeira</string>
 </resources>

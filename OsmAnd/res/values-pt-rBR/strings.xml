@@ -4159,7 +4159,6 @@
     <string name="restore_selected_data">Restaurar dados selecionados</string>
     <string name="receiving_data_from_server">Recebendo dados do servidor…</string>
     <string name="restore_complete">Restaurado</string>
-    <string name="grey_color_slope">A cor cinza é usada quando a inclinação é indefinida.</string>
     <string name="backup_version_history">Histórico de versão</string>
     <string name="backup_storage_taken">Armazenamento ocupado</string>
     <string name="backup_version_history_delete_descr">Excluir o registro de alterações para tipos de dados obsoletos do OsmAnd Cloud\?</string>
@@ -4218,23 +4217,23 @@
     <string name="approximate_route_description">Anexe a rota às estradas no mapa para obter todas as curvas e dados adicionais, como suavidade, tipos de estradas, etc.</string>
     <string name="release_4_0">- Cópia de segurança para a nuvem
 \n
-\n - Adicionado o modo noturno para o estilo de renderização de curvas de níveis
+\n- Adicionado o modo noturno para o estilo de mapa \"Topográfico\"
 \n
-\n - Adicionada a opção de descarregar as linhas de contorno na unidade de medida \"pés\"
+\n- Adicionada a opção de descarregar as linhas de contorno na unidade de medida \"pés\"
 \n
-\n - Os trilhos podem agora ser coloridos conforme a altitude, velocidade ou declive.
+\n- Os trilhos podem agora ser coloridos conforme a altitude, velocidade ou declive.
 \n
-\n - Tela \"Gravar viagem\" atualizado
+\n- Tela \"Gravar viagem\" atualizado
 \n
-\n - Opção de distância por toque movido da régua de raio para uma opção separada
+\n- Opção de distância por toque movido da régua de raio para uma opção separada
 \n
-\n - Planear rota: capacidade adicional para alterar as opções de navegação, aceder ao mapa de configuração e pesquisa sem sair do ecrã de planear rota
+\n- Planear rota: agora pode alterar as opções de navegação, aceder ao mapa de configuração e pesquisar sem sair da tela de planejar rota
 \n
-\n - Nova tela \"Comprar\" com informações detalhadas sobre compras.
+\n- Nova tela \"Comprar\" com informações detalhadas
 \n
-\n - Adicionada a opção para alterar a aparência da linha de rota.
+\n- Adicionada a opção para alterar a aparência da linha de rota.
 \n
-\n - Atualizações OsmAnd Live movidas para \"Baixar mapas &gt; Atualizações\".
+\n- Atualizações do OsmAnd Live movidas para \"Baixar mapas &gt; Atualizações\".
 \n
 \n</string>
     <string name="duration_moment_ago">há um momento atrás</string>
@@ -4271,7 +4270,7 @@
 \nTalvez alguns mapas não estejam carregados, você pode executar uma verificação online dos mapas necessários.</string>
     <string name="option_available_only_in_osmand_pro">A opção disponível como parte da assinatura do OsmAnd Pro.</string>
     <string name="pro_widgets">Pro Widgets</string>
-    <string name="purchases_feature_desc_pro_widgets">Tenha acesso aos recursos do OsmAnd Pro. Colorização de rotas e muito mais.</string>
+    <string name="purchases_feature_desc_pro_widgets">Tenha acesso aos recursos do OsmAnd Pro: Coloração de rotas e muito mais.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explore os planos do OsmAnd para encontrar um adequado para você.</string>
     <string name="routes_color_by_type">Rotas de cores por…</string>
     <string name="shared_string_relation">Relação</string>
@@ -4299,4 +4298,15 @@
     <string name="map_updates_are_unavailable_yet">As atualizações do mapa ainda não estão disponíveis :-(</string>
     <string name="connect_track_points_as">Conectar pontos de rota</string>
     <string name="pro_features">Recursos Pro</string>
+    <string name="purchases_restored">Compras restauradas</string>
+    <string name="grey_color_undefined">Cor cinza é usada para partes sem dados.</string>
+    <string name="osm_live_payment_subscription_management_amz">O pagamento é cobrado de sua conta Amazon ao confirmar a compra.
+\n
+\nEle renova a menos que seja cancelado antes do período de renovação selecionado.
+\n
+\nGerencie ou cancele suas assinaturas nas configurações da Amazon a qualquer momento.</string>
+    <string name="cancel_anytime_in_amazon_app">Cancele a qualquer momento no Amazon App</string>
+    <string name="amz_manage_subscription_descr">Para gerenciar sua assinatura, use o Amazon App no dispositivo ou abra o site Amazon.com em seu perfil.</string>
+    <string name="empty_category_name">Nome de categoria vazio</string>
+    <string name="no_activity_for_intent">Nenhum aplicativo adequado para executar esta ação foi encontrado</string>
 </resources>

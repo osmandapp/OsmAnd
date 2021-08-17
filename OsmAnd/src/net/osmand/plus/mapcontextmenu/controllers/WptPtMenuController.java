@@ -12,8 +12,12 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.AudioVideoNoteMenuController;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -31,6 +35,7 @@ public class WptPtMenuController extends MenuController {
 
 	private WptPt wpt;
 	private MapMarker mapMarker;
+	private AudioVideoNoteMenuController audioVideoNoteController;
 
 	public WptPtMenuController(@NonNull MenuBuilder menuBuilder, @NonNull MapActivity mapActivity,
 							   @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
@@ -59,16 +64,45 @@ public class WptPtMenuController extends MenuController {
 		openTrackButtonController.startIconId = R.drawable.ic_action_polygom_dark;
 		openTrackButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
 
+		additionalButtonsControllers = new ArrayList<>();
 		if (mapMarker != null) {
 			PointDescription description = mapMarker.getPointDescription(mapActivity);
 			MapMarkerMenuController markerMenuController = new MapMarkerMenuController(mapActivity, description, mapMarker);
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
 
-			additionalButtonsControllers = new ArrayList<>();
-			additionalButtonsControllers.add(Pair.<TitleButtonController, TitleButtonController>create(openTrackButtonController, null));
+			additionalButtonsControllers.add(Pair.create(openTrackButtonController, null));
 		} else {
 			leftTitleButtonController = openTrackButtonController;
+		}
+
+		AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
+		if (plugin != null) {
+			Recording selectedRec = null;
+			for (Recording rec : plugin.getAllRecordings()) {
+				if (Math.abs(rec.getLatitude() - wpt.lat) < 0.0001
+						&& Math.abs(rec.getLongitude() - wpt.lon) < 0.0001) {
+					selectedRec = rec;
+					break;
+				}
+			}
+			if (selectedRec != null) {
+				audioVideoNoteController = new AudioVideoNoteMenuController(mapActivity, pointDescription, selectedRec);
+
+				TitleButtonController leftButtonController = audioVideoNoteController.getLeftTitleButtonController();
+				TitleButtonController rightButtonController = audioVideoNoteController.getRightTitleButtonController();
+				if (leftButtonController != null && rightButtonController != null) {
+					additionalButtonsControllers.add(Pair.create(leftButtonController, rightButtonController));
+				}
+			}
+		}
+	}
+
+	@Override
+	public void updateData() {
+		super.updateData();
+		if (audioVideoNoteController != null) {
+			audioVideoNoteController.updateData();
 		}
 	}
 
@@ -83,18 +117,6 @@ public class WptPtMenuController extends MenuController {
 	protected Object getObject() {
 		return wpt;
 	}
-
-/*
-	@Override
-	public boolean handleSingleTapOnMap() {
-		Fragment fragment = getMapActivity().getSupportFragmentManager().findFragmentByTag(FavoritePointEditor.TAG);
-		if (fragment != null) {
-			((FavoritePointEditorFragment)fragment).dismiss();
-			return true;
-		}
-		return false;
-	}
-*/
 
 	@Override
 	public boolean needStreetName() {

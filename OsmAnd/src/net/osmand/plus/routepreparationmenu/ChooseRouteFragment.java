@@ -1,5 +1,12 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
+import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
@@ -30,6 +37,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -57,8 +65,8 @@ import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.CumulativeInfo;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment.RouteDetailsFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.PublicTransportCard;
-import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -78,13 +86,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.activities.MapActivityActions.SaveDirectionsAsyncTask;
-import static net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 
 public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMenuFragmentListener,
 		RouteDetailsFragmentListener, SaveAsNewTrackFragmentListener {
@@ -515,8 +516,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		OnClickListener shareOnClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					OsmandApplication app = (OsmandApplication) activity.getApplication();
 					RoutingHelper routingHelper = app.getRoutingHelper();
 					final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
 					final GPXUtilities.GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
@@ -539,10 +541,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
 						sendIntent.setType("text/plain");
 						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						startActivity(sendIntent);
+						AndroidUtils.startActivityIfSafe(activity, sendIntent);
 					} catch (IOException e) {
-						// Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(),
-						// Toast.LENGTH_LONG).show();
 					}
 				}
 			}
@@ -560,24 +560,27 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	void print() {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
-		final RoutingHelper routingHelper = app.getRoutingHelper();
-		File file = generateRouteInfoHtml(routingHelper.getRouteDirections(), routingHelper.getGeneralRouteInformation());
-		if (file != null && file.exists()) {
-			Uri uri = AndroidUtils.getUriForFile(app, file);
-			Intent browserIntent;
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { // use Android Print Framework
-				browserIntent = new Intent(getActivity(), PrintDialogActivity.class)
-						.setDataAndType(uri, "text/html");
-			} else { // just open html document
-				browserIntent = new Intent(Intent.ACTION_VIEW).setDataAndType(
-						uri, "text/html");
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			File file = generateRouteInfoHtml(routingHelper.getRouteDirections(), routingHelper.getGeneralRouteInformation());
+			if (file != null && file.exists()) {
+				Uri uri = AndroidUtils.getUriForFile(app, file);
+				Intent intent;
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+					// Use Android Print Framework
+					intent = new Intent(getActivity(), PrintDialogActivity.class)
+							.setDataAndType(uri, "text/html")
+							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				} else {
+					// Just open html document
+					intent = new Intent(Intent.ACTION_VIEW)
+							.setDataAndType(uri, "text/html")
+							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				}
+				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
-			browserIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			startActivity(browserIntent);
 		}
 	}
 
@@ -846,26 +849,17 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		dismiss();
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
 		return showInstance(fragmentManager, 0);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, int routeIndex) {
-		try {
-			ChooseRouteFragment fragment = new ChooseRouteFragment();
-			Bundle args = new Bundle();
-			args.putInt(ROUTE_INDEX_KEY, routeIndex);
-			fragment.setArguments(args);
-			fragmentManager.beginTransaction()
-					.add(R.id.routeMenuContainer, fragment, TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, int routeIndex) {
+		Bundle args = new Bundle();
+		args.putInt(ROUTE_INDEX_KEY, routeIndex);
+		return showInstance(fragmentManager, args);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
 		Bundle args = new Bundle();
 		args.putInt(ROUTE_INDEX_KEY, routeIndex);
 		args.putInt(INITIAL_MENU_STATE_KEY, initialMenuState);
@@ -873,7 +867,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return showInstance(fragmentManager, args);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, Bundle args) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, Bundle args) {
 		try {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			fragment.setArguments(args);

@@ -64,7 +64,7 @@ public class BackupListeners {
 
 		void onFileDownloadProgress(@NonNull String type, @NonNull String fileName, int progress, int deltaWork);
 
-		void onFileDownloadDone(@NonNull String type, @NonNull String fileName, long uploadTime, @Nullable String error);
+		void onFileDownloadDone(@NonNull String type, @NonNull String fileName, @Nullable String error);
 
 		boolean isDownloadCancelled();
 	}

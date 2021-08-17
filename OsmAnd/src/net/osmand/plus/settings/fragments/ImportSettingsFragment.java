@@ -92,17 +92,36 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 	protected abstract void importFinished(boolean succeed, boolean needRestart, List<SettingsItem> items);
 
 	public ImportListener getImportListener() {
-		return (succeed, needRestart, items) -> {
-			if (succeed) {
-				app.getRendererRegistry().updateExternalRenderers();
-				AppInitializer.loadRoutingFiles(app, null);
-				reloadIndexes(items);
-				AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
-				if (plugin != null) {
-					plugin.indexingFiles(null, true, true);
-				}
+		return new ImportListener() {
+
+			@Override
+			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+
 			}
-			importFinished(succeed, needRestart, items);
+
+			@Override
+			public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+			}
+
+			@Override
+			public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+
+			}
+
+			@Override
+			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+				if (succeed) {
+					app.getRendererRegistry().updateExternalRenderers();
+					AppInitializer.loadRoutingFiles(app, null);
+					reloadIndexes(items);
+					AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+					if (plugin != null) {
+						plugin.indexingFiles(null, true, true);
+					}
+				}
+				importFinished(succeed, needRestart, items);
+			}
 		};
 	}
 

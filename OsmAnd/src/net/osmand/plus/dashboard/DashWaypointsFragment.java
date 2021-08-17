@@ -1,6 +1,6 @@
 package net.osmand.plus.dashboard;
 
-import android.content.DialogInterface;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,29 +12,32 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.PopupMenu;
-
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.PopupMenu;
+
 /**
  */
 public class DashWaypointsFragment extends DashLocationFragment {
+
 	public static final String TAG = "DASH_WAYPOINTS_FRAGMENT";
 	public static final int TITLE_ID = R.string.shared_string_waypoints;
-	List<TargetPoint> points = new ArrayList<TargetPoint>();
 	private static boolean SHOW_ALL;
 	public static final DashFragmentData.ShouldShowFunction SHOULD_SHOW_FUNCTION =
 			new DashboardOnMap.DefaultShouldShow() {
@@ -61,39 +64,49 @@ public class DashWaypointsFragment extends DashLocationFragment {
 		setupTargets();
 	}
 
-	public void setupTargets() {
+	private void setupTargets() {
+		OsmandApplication app = getMyApplication();
 		View mainView = getView();
-		final TargetPointsHelper helper = getMyApplication().getTargetPointsHelper();
+		if (mainView == null || app == null) {
+			return;
+		}
+
+		final TargetPointsHelper helper = app.getTargetPointsHelper();
 		if (helper.getPointToNavigate() == null) {
-			(mainView.findViewById(R.id.main_fav)).setVisibility(View.GONE);
+			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), false);
 			return;
 		} else {
-			(mainView.findViewById(R.id.main_fav)).setVisibility(View.VISIBLE);
+			AndroidUiHelper.updateVisibility(mainView.findViewById(R.id.main_fav), true);
 		}
-		points = SHOW_ALL ? helper.getIntermediatePointsWithTarget() :
-			Collections.singletonList(helper.getPointToNavigate());
-		((Button) mainView.findViewById(R.id.show_all)).setText(SHOW_ALL? getString(R.string.shared_string_collapse) : 
-			getString(R.string.shared_string_show_all));
-		((Button) mainView.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				SHOW_ALL = !SHOW_ALL;
-				setupView();
-			}
+
+		String collapseOrShowAll = SHOW_ALL
+				? getString(R.string.shared_string_collapse)
+				: getString(R.string.shared_string_show_all);
+		((Button) mainView.findViewById(R.id.show_all)).setText(collapseOrShowAll);
+
+		mainView.findViewById(R.id.show_all).setOnClickListener(v -> {
+			SHOW_ALL = !SHOW_ALL;
+			setupView();
 		});
-		((Button) mainView.findViewById(R.id.show_all)).setVisibility(
+
+		mainView.findViewById(R.id.show_all).setVisibility(
 				helper.getIntermediatePoints().size() == 0 ? View.INVISIBLE : View.VISIBLE);
 		((TextView) mainView.findViewById(R.id.fav_text)).setText(getString(R.string.shared_string_waypoints) + " (" + 
-				helper.getIntermediatePointsWithTarget().size()+")");
-		LinearLayout favorites = (LinearLayout) mainView.findViewById(R.id.items);
+				helper.getIntermediatePointsWithTarget().size() + ")");
+		LinearLayout favorites = mainView.findViewById(R.id.items);
 		favorites.removeAllViews();
-		List<DashLocationView> distances = new ArrayList<DashLocationFragment.DashLocationView>();
-		for (final TargetPoint point : points) {
+
+		List<TargetPoint> targetPoints = SHOW_ALL
+				? helper.getIntermediatePointsWithTarget()
+				: Collections.singletonList(helper.getPointToNavigate());
+		List<DashLocationView> distances = new ArrayList<>();
+
+		for (final TargetPoint point : targetPoints) {
 			LayoutInflater inflater = getActivity().getLayoutInflater();
 			View view = inflater.inflate(R.layout.favorites_list_item, null, false);
-			TextView name = (TextView) view.findViewById(R.id.favourite_label);
-			TextView label = (TextView) view.findViewById(R.id.distance);
-			ImageView direction = (ImageView) view.findViewById(R.id.direction);
+			TextView name = view.findViewById(R.id.favourite_label);
+			TextView label = view.findViewById(R.id.distance);
+			ImageView direction = view.findViewById(R.id.direction);
 			direction.setVisibility(View.VISIBLE);
 			label.setVisibility(View.VISIBLE);
 			view.findViewById(R.id.divider).setVisibility(View.VISIBLE);
@@ -107,48 +120,39 @@ public class DashWaypointsFragment extends DashLocationFragment {
 				id = R.drawable.list_destination;
 			}
 
-			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(getMyApplication().getUIUtilities()
+			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(app.getUIUtilities()
 					.getIcon(id, 0));
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
 					point.getLongitude()));
 			distances.add(dv);
 
 			name.setText(PointDescription.getSimpleName(point, getActivity()));
-			ImageButton options =  ((ImageButton)view.findViewById(R.id.options));
+			ImageButton options = view.findViewById(R.id.options);
 			options.setVisibility(View.VISIBLE);
-			final boolean optionsVisible = (SHOW_ALL && getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() > 0); 
+			final boolean optionsVisible = (SHOW_ALL && app.getTargetPointsHelper().getIntermediatePoints().size() > 0);
 			
-			options.setImageDrawable(getMyApplication().getUIUtilities().
+			options.setImageDrawable(app.getUIUtilities().
 					getThemedIcon(optionsVisible ? R.drawable.ic_overflow_menu_white :
 							R.drawable.ic_action_remove_dark));
-			options.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if(optionsVisible) {
-						selectTargetModel(point, view);
-					} else {
-						deletePointConfirm(point, view);
-					}
+			options.setOnClickListener(v -> {
+				if (optionsVisible) {
+					selectTargetModel(point, v);
+				} else {
+					deletePointConfirm(point, v);
 				}
 			});
 			
-			ImageButton navigate =  ((ImageButton)view.findViewById(R.id.navigate_to));
-			navigate.setImageDrawable(getMyApplication().getUIUtilities().
+			ImageButton navigate = view.findViewById(R.id.navigate_to);
+			navigate.setImageDrawable(app.getUIUtilities().
 					getThemedIcon(R.drawable.ic_action_gdirections_dark));
-			navigate.setVisibility(target? View.VISIBLE : View.GONE);
-			navigate.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					dashboard.navigationAction();
-				}
-			});
+			navigate.setVisibility(target ? View.VISIBLE : View.GONE);
+			navigate.setOnClickListener(v -> dashboard.navigationAction());
 			
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
+			view.setOnClickListener(v -> {
+				if (getActivity() != null) {
 					getMyApplication().getSettings().setMapLocationToShow(point.getLatitude(), point.getLongitude(),
 							15, point.getPointDescription(getActivity()), false,
-							point); //$NON-NLS-1$
+							point);
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			});
@@ -158,84 +162,67 @@ public class DashWaypointsFragment extends DashLocationFragment {
 	}
 	
 	protected void deletePointConfirm(final TargetPoint point, View view) {
-		final boolean target = point == getMyApplication().getTargetPointsHelper().getPointToNavigate();
+		final OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
+		final boolean target = point == app.getTargetPointsHelper().getPointToNavigate();
 		AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 		// Stop the navigation
 		builder.setTitle(getString(R.string.delete_target_point));
-		builder.setMessage(PointDescription.getSimpleName(point, getActivity()));
-		builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				getMyApplication().getTargetPointsHelper().removeWayPoint(true, target ? -1 :  point.index);
-				setupView();
-			}
+		builder.setMessage(PointDescription.getSimpleName(point, app));
+		builder.setPositiveButton(R.string.shared_string_yes, (dialog, which) -> {
+			app.getTargetPointsHelper().removeWayPoint(true, target ? -1 : point.index);
+			setupView();
 		});
 		builder.setNegativeButton(R.string.shared_string_no, null);
 		builder.show();		
 	}
 
 	private void selectTargetModel(final TargetPoint point, final View view) {
-		final PopupMenu optionsMenu = new PopupMenu(getActivity(), view);
+		final OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
+		final UiUtilities iconsCache = app.getUIUtilities();
+		final PopupMenu optionsMenu = new PopupMenu(requireActivity(), view);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem item; 
-//		item = optionsMenu.getMenu().add(
-//				R.string.shared_string_add_to_favorites).setIcon(getMyApplication().getIconsCache().
-//						getIcon(R.drawable.ic_action_favorite));
-//		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//			@Override
-//			public boolean onMenuItemClick(MenuItem item) {
-//				Bundle args = new Bundle();
-//				Dialog dlg = FavoriteDialogs.createAddFavouriteDialog(getActivity(), args);
-//				dlg.show();
-//				FavoriteDialogs.prepareAddFavouriteDialog(getActivity(), dlg, args, model.getLatitude(), model.getLongitude(),
-//						model.getOriginalPointDescription());
-//				return true;
-//			}
-//		});
-		final boolean target = point == getMyApplication().getTargetPointsHelper().getPointToNavigate();
-		if(SHOW_ALL && getMyApplication().getTargetPointsHelper().getIntermediatePoints().size() > 0) {
-			final List<TargetPoint> allTargets = getMyApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
+		final boolean target = point == app.getTargetPointsHelper().getPointToNavigate();
+
+		if (SHOW_ALL && app.getTargetPointsHelper().getIntermediatePoints().size() > 0) {
+			final List<TargetPoint> allTargets = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+
 			if (point.index > 0 || target) {
 				final int ind = target ? allTargets.size() - 1 : point.index;
 				item = optionsMenu.getMenu().add(R.string.waypoint_visit_before)
-						.setIcon(getMyApplication().getUIUtilities().
-								getThemedIcon(R.drawable.ic_action_up_dark));
-				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(MenuItem item) {
-						TargetPoint remove = allTargets.remove(ind - 1);
-						allTargets.add(ind, remove);
-						getMyApplication().getTargetPointsHelper().reorderAllTargetPoints(allTargets, true);
-						setupView();
-						return true;
-					}
+						.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_up_dark));
+				item.setOnMenuItemClickListener(menuItem -> {
+					TargetPoint remove = allTargets.remove(ind - 1);
+					allTargets.add(ind, remove);
+					app.getTargetPointsHelper().reorderAllTargetPoints(allTargets, true);
+					setupView();
+					return true;
 				});
 			}
+
 			if (!target) {
 				item = optionsMenu.getMenu().add(R.string.waypoint_visit_after)
-						.setIcon(getMyApplication().getUIUtilities().
-								getThemedIcon(R.drawable.ic_action_down_dark));
-				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(MenuItem item) {
-						TargetPoint remove = allTargets.remove(point.index + 1);
-						allTargets.add(point.index, remove);
-						getMyApplication().getTargetPointsHelper().reorderAllTargetPoints(allTargets, true);
-						setupView();
-						return true;
-					}
+						.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_down_dark));
+				item.setOnMenuItemClickListener(menuItem -> {
+					TargetPoint remove = allTargets.remove(point.index + 1);
+					allTargets.add(point.index, remove);
+					app.getTargetPointsHelper().reorderAllTargetPoints(allTargets, true);
+					setupView();
+					return true;
 				});
 			}
 		}
-		item = optionsMenu.getMenu().add(
-				R.string.shared_string_remove).setIcon(getMyApplication().getUIUtilities().
-				getThemedIcon(R.drawable.ic_action_remove_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				deletePointConfirm(point, view);
-				return true;
-			}
+		item = optionsMenu.getMenu().add(R.string.shared_string_remove)
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
+		item.setOnMenuItemClickListener(menuItem -> {
+			deletePointConfirm(point, view);
+			return true;
 		});
 		optionsMenu.show();
 	}

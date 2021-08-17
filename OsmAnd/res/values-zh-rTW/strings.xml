@@ -4157,7 +4157,6 @@
     <string name="restore_selected_data">復原選定的資料</string>
     <string name="receiving_data_from_server">正在從伺服器接收資料……</string>
     <string name="restore_complete">已復原</string>
-    <string name="grey_color_slope">當斜率未被定義時則使用灰色。</string>
     <string name="backup_version_history">版本歷史紀錄</string>
     <string name="backup_storage_taken">用掉的儲存空間</string>
     <string name="backup_version_history_delete_descr">要從 OsmAnd Cloud 刪除已棄用資料類型的變更紀錄嗎？</string>
@@ -4297,4 +4296,15 @@
     <string name="map_updates_are_unavailable_yet">地圖更新尚不可用 :-(</string>
     <string name="connect_track_points_as">連結路線點</string>
     <string name="pro_features">Pro 功能</string>
+    <string name="purchases_restored">購買已復原</string>
+    <string name="grey_color_undefined">灰色用於無資料的部份。</string>
+    <string name="osm_live_payment_subscription_management_amz">確認購買後，將從您的 Amazon 帳號中收取費用。
+\n
+\n除非在選定的續訂週期前取消，否則其會續訂。
+\n
+\n隨時從您的 Amazon 設定中管理或取消您的訂閱。</string>
+    <string name="cancel_anytime_in_amazon_app">隨時在 Amazon 應用程式中取消</string>
+    <string name="amz_manage_subscription_descr">要管理您的訂閱，請在裝置上使用 Amazon 應用程式，或是以您的個人檔案開啟 Amazon.com。</string>
+    <string name="empty_category_name">空的分類名稱</string>
+    <string name="no_activity_for_intent">找不到適合執行此動作的應用程式</string>
 </resources>

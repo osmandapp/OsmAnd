@@ -86,8 +86,6 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 		nightMode = settings != null && settings.isNightMode();
 
-		updateIsPaint_1(updatePaints);
-
 		if (updatePaints) {
 			previewWayContext.updatePaints(nightMode, attrs);
 		}

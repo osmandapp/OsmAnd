@@ -4001,4 +4001,21 @@
     <string name="poi_access_scooter">Доступ для скутера</string>
     <string name="poi_access_bicycle">Доступ для велосипедів</string>
     <string name="poi_access_motorcar">Доступ для автомобілів</string>
+    <string name="poi_shelter_yes">Так</string>
+    <string name="poi_shelter_no">Укриття: немає</string>
+    <string name="poi_lounger">Лежак</string>
+    <string name="poi_direction_southwest">Південно-західний напрямок</string>
+    <string name="poi_direction_southeast">Південно-східний напрямок</string>
+    <string name="poi_direction_northwest">Північно-західний напрямок</string>
+    <string name="poi_direction_northeast">Північно-східний напрямок</string>
+    <string name="poi_direction_west">Західний напрямок</string>
+    <string name="poi_direction_south">Південний напрямок</string>
+    <string name="poi_direction_east">Східний напрямок</string>
+    <string name="poi_direction_north">Північний напрямок</string>
+    <string name="poi_destination">Пункт призначення</string>
+    <string name="poi_permanent_camping_only">Лише</string>
+    <string name="poi_permanent_camping_no">Ні</string>
+    <string name="poi_permanent_camping_yes">Так</string>
+    <string name="poi_shelter_filter">Тимчасове укриття</string>
+    <string name="poi_permanent_camping">Постійний кемпінг</string>
 </resources>

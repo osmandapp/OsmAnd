@@ -171,15 +171,11 @@ public enum ColoringType {
 		return true;
 	}
 
+
 	public boolean isAvailableInSubscription(@NonNull OsmandApplication app,
-	                                         @Nullable String attributeName) {
-		boolean proSubscription = InAppPurchaseHelper.isOsmAndProAvailable(app);
-		if (!proSubscription) {
-			if (isRouteInfoAttribute()) {
-				return attributeName != null
-						&& !Algorithms.containsAny(attributeName, "_roadClass", "_surface");
-			}
-			return this != ColoringType.SLOPE;
+	                                         @Nullable String attributeName, boolean route) {
+		if ((isRouteInfoAttribute() && route) || this == ColoringType.SLOPE) {
+			return InAppPurchaseHelper.isOsmAndProAvailable(app);
 		}
 		return true;
 	}

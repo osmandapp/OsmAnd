@@ -3102,7 +3102,6 @@
     <string name="backup_restore_data_descr">Palauta laitteen data käyttäen online-varmuuskopioita.</string>
     <string name="backup_restore_data">Palauta data</string>
     <string name="restore_from_osmand_cloud">Palauta OsmAnd Cloudista</string>
-    <string name="grey_color_slope">Harmaata väriä käytetään kun jyrkkyyttä ei ole määritelty.</string>
     <string name="backup_storage_taken">Tallennustilaa varattu</string>
     <string name="choose_what_to_restore">Valitse mitä palautetaan.</string>
     <string name="restore_selected_data">Palauta valittu data</string>

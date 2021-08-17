@@ -113,6 +113,7 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.SaveCurrentTrackTask;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -896,12 +897,15 @@ public class GpxUiHelper {
 				importHelper.handleGpxImport(uri, null, false);
 			};
 
-			ActivityResultListener listener =
-					new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, onActivityResultListener);
 			Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 			intent.setType("*/*");
-			mapActivity.registerActivityResultListener(listener);
-			activity.startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
+			if (AndroidUtils.isIntentSafe(mapActivity, intent)) {
+				ActivityResultListener listener = new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, onActivityResultListener);
+				mapActivity.registerActivityResultListener(listener);
+				mapActivity.startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
+			} else {
+				mapActivity.getMyApplication().showToastMessage(R.string.no_activity_for_intent);
+			}
 		}
 	}
 
@@ -2287,9 +2291,10 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile, boolean fromRoute) {
+	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile,
+	                                                ChartPointLayer chartPointLayer) {
 		GpxDisplayGroup group = null;
-		if(!Algorithms.isEmpty(gpxFile.tracks)){
+		if (!Algorithms.isEmpty(gpxFile.tracks)) {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();
 			String groupName = helper.getGroupName(gpxFile);
 			group = helper.buildGpxDisplayGroup(gpxFile, 0, groupName);
@@ -2297,7 +2302,7 @@ public class GpxUiHelper {
 		if (group != null && group.getModifiableList().size() > 0) {
 			GpxDisplayItem gpxItem = group.getModifiableList().get(0);
 			if (gpxItem != null) {
-				gpxItem.route = fromRoute;
+				gpxItem.chartPointLayer = chartPointLayer;
 			}
 			return gpxItem;
 		}
@@ -2396,9 +2401,7 @@ public class GpxUiHelper {
 		if (context instanceof OsmandApplication) {
 			sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		}
-		if (AndroidUtils.isIntentSafe(context, sendIntent)) {
-			context.startActivity(sendIntent);
-		}
+		AndroidUtils.startActivityIfSafe(context, sendIntent);
 	}
 
 	@NonNull

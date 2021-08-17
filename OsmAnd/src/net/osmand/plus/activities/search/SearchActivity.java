@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
+import net.osmand.AndroidUtils;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.FavouritePoint;
@@ -245,13 +246,13 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 							Intent intent = new Intent(SearchActivity.this, FavoritesListActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							intent.putExtra(FavoritesListFragment.SELECT_FAVORITE_POINT_INTENT_KEY, (Serializable) null);
-							startActivityForResult(intent, REQUEST_FAVORITE_SELECT);
+							AndroidUtils.startActivityForResultIfSafe(SearchActivity.this, intent, REQUEST_FAVORITE_SELECT);
 							getSupportActionBar().setSelectedNavigationItem(0);
 						} else if (position == POSITION_ADDRESS) {
 							Intent intent = new Intent(SearchActivity.this, SearchAddressActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							intent.putExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
-							startActivityForResult(intent, REQUEST_ADDRESS_SELECT);
+							AndroidUtils.startActivityForResultIfSafe(SearchActivity.this, intent, REQUEST_ADDRESS_SELECT);
 							getSupportActionBar().setSelectedNavigationItem(0);
 						}
 					}
@@ -397,12 +398,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	}
 	
 	public void setAddressSpecContent() {
-		Intent intent = getIntent();
 		finish();
-		startActivity(intent);
+		AndroidUtils.startActivityIfSafe(this, getIntent());
 	}
-	
-
-
-
 }
