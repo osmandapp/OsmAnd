@@ -1454,7 +1454,7 @@
     <string name="si_min_m">Minute pe milă</string>
     <string name="si_nm_h">Mile marine pe oră (noduri)</string>
     <string name="nm_h">kn</string>
-    <string name="nm">nmi</string>
+    <string name="nm">nmi ( nautic miles)</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
