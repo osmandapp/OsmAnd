@@ -4282,4 +4282,9 @@
     <string name="amz_manage_subscription_descr">Pour gérer votre abonnement, utilisez l\'application Amazon sur votre appareil ou connectez-vous sur le site Amazon.com.</string>
     <string name="cancel_anytime_in_amazon_app">Annulez-le à tout moment dans l\'application Amazon</string>
     <string name="empty_category_name">Nom de catégorie vide</string>
+    <string name="osm_live_payment_subscription_management_amz">Le montant sera débité de votre compte Amazon lors de la confirmation de l\'achat.
+\n
+\nCe débit sera renouvelé automatiquement sauf si vous annulez votre abonnement.
+\n
+\nGérez ou annulez vos abonnements à tout moment depuis vos paramètres Amazon.</string>
 </resources>
