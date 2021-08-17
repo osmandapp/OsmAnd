@@ -9,6 +9,10 @@ import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
@@ -23,7 +27,7 @@ import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
-import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWayContext;
@@ -31,15 +35,14 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenuProvider {
 
-public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
-	private static final int POINTS_TO_DRAW = 50;
+	private static final int START_ZOOM = 8;
+	private static final int MIN_POINTS_PERCENTILE = 5;
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
@@ -67,12 +70,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
 	private LatLon pressedPointLatLon;
-	private boolean pointsThresholdExceeded;
 	private boolean tapsDisabled;
 	private MeasurementEditingContext editingCtx;
 
-	private ChartPointsHelper chartPointsHelper;
+	private Integer pointsStartZoom = null;
 	private TrackChartPoints trackChartPoints;
+	private ChartPointsHelper chartPointsHelper;
 
 	private final Path multiProfilePath = new Path();
 	private final PathMeasure multiProfilePathMeasure = new PathMeasure(multiProfilePath, false);
@@ -146,7 +149,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled && editingCtx.getSelectedPointPosition() == -1) {
-			boolean pointSelected = !pointsThresholdExceeded && selectPoint(point.x, point.y, true);
+			int startZoom = getPointsStartZoom();
+			boolean pointSelected = tileBox.getZoom() >= startZoom && selectPoint(point.x, point.y, true);
 			boolean profileIconSelected = !pointSelected && selectPointForAppModeChange(point, tileBox);
 			if (!pointSelected && !profileIconSelected) {
 				pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
@@ -201,7 +205,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled) {
-			if (!pointsThresholdExceeded && editingCtx.getSelectedPointPosition() == -1
+			int startZoom = getPointsStartZoom();
+			if (tileBox.getZoom() >= startZoom
+					&& editingCtx.getSelectedPointPosition() == -1
 					&& editingCtx.getPointsCount() > 0) {
 				selectPoint(point.x, point.y, false);
 				if (editingCtx.getSelectedPointPosition() != -1) {
@@ -357,41 +363,73 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		}
 	}
 
-	private void drawPoints(Canvas canvas, RotatedTileBox tb) {
-		WptPt lastBeforePoint = null;
+	private void drawPoints(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
-		if (points.size() > 0) {
-			lastBeforePoint = points.get(points.size() - 1);
+		points.addAll(editingCtx.getAfterPoints());
+
+		if (pointsStartZoom == null && points.size() > 100) {
+			double percentile = getPointsDensity();
+			pointsStartZoom = getStartZoom(percentile);
 		}
-		WptPt firstAfterPoint = null;
-		List<WptPt> afterPoints = editingCtx.getAfterPoints();
-		if (afterPoints.size() > 0) {
-			firstAfterPoint = afterPoints.get(0);
-		}
-		points.addAll(afterPoints);
-		pointsThresholdExceeded = false;
-		int drawn = 0;
-		for (int i = 0; i < points.size(); i++) {
-			WptPt pt = points.get(i);
-			if (tb.containsLatLon(pt.lat, pt.lon)) {
-				drawn++;
-				if (drawn > POINTS_TO_DRAW) {
-					pointsThresholdExceeded = true;
-					break;
+		int startZoom = getPointsStartZoom();
+		if (tileBox.getZoom() >= startZoom) {
+			for (int i = 0; i < points.size(); i++) {
+				WptPt point = points.get(i);
+				if (isInTileBox(tileBox, point)) {
+					drawPointIcon(canvas, tileBox, point, false);
 				}
 			}
 		}
-		if (pointsThresholdExceeded) {
-			WptPt pt = points.get(0);
-			drawPointIcon(canvas, tb, pt, false);
-			pt = points.get(points.size() - 1);
-			drawPointIcon(canvas, tb, pt, false);
-		} else {
-			for (int i = 0; i < points.size(); i++) {
-				WptPt pt = points.get(i);
-				drawPointIcon(canvas, tb, pt, false);
+	}
+
+	private double getPointsDensity() {
+		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
+		points.addAll(editingCtx.getAfterPoints());
+
+		List<Double> distances = new ArrayList<>();
+		WptPt prev = null;
+		for (WptPt wptPt : points) {
+			if (prev != null) {
+				double dist = MapUtils.getDistance(wptPt.lat, wptPt.lon, prev.lat, prev.lon);
+				distances.add(dist);
 			}
+			prev = wptPt;
 		}
+		Collections.sort(distances);
+		return Algorithms.getPercentile(distances, MIN_POINTS_PERCENTILE);
+	}
+
+	private int getPointsStartZoom() {
+		return pointsStartZoom != null ? pointsStartZoom : START_ZOOM;
+	}
+
+	private int getStartZoom(double density) {
+		if (density < 2) {
+			return 21;
+		} else if (density < 5) {
+			return 20;
+		} else if (density < 10) {
+			return 19;
+		} else if (density < 20) {
+			return 18;
+		} else if (density < 50) {
+			return 17;
+		} else if (density < 100) {
+			return 16;
+		} else if (density < 200) {
+			return 15;
+		} else if (density < 500) {
+			return 14;
+		} else if (density < 1000) {
+			return 13;
+		} else if (density < 2000) {
+			return 11;
+		} else if (density < 5000) {
+			return 10;
+		} else if (density < 10000) {
+			return 9;
+		}
+		return START_ZOOM;
 	}
 
 	private void drawBeforeAfterPath(Canvas canvas, RotatedTileBox tb) {
@@ -528,6 +566,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	public void refreshMap() {
+		pointsStartZoom = null;
 		view.refreshMap();
 	}
 
