@@ -74,7 +74,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private boolean tapsDisabled;
 	private MeasurementEditingContext editingCtx;
 
-	private Double pointsDensity = null;
+	private Integer pointsStartZoom = null;
 	private TrackChartPoints trackChartPoints;
 	private ChartPointsHelper chartPointsHelper;
 
@@ -150,7 +150,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled && editingCtx.getSelectedPointPosition() == -1) {
-			int startZoom = getStartZoom(pointsDensity);
+			int startZoom = getPointsStartZoom();
 			boolean pointSelected = tileBox.getZoom() >= startZoom && selectPoint(point.x, point.y, true);
 			boolean profileIconSelected = !pointSelected && selectPointForAppModeChange(point, tileBox);
 			if (!pointSelected && !profileIconSelected) {
@@ -206,7 +206,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled) {
-			int startZoom = getStartZoom(pointsDensity);
+			int startZoom = getPointsStartZoom();
 			if (tileBox.getZoom() >= startZoom
 					&& editingCtx.getSelectedPointPosition() == -1
 					&& editingCtx.getPointsCount() > 0) {
@@ -368,11 +368,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
 		points.addAll(editingCtx.getAfterPoints());
 
-		if (pointsDensity == null && points.size() > 100) {
-			updatePointsPercentile();
+		if (pointsStartZoom == null && points.size() > 100) {
+			double percentile = getPointsDensity();
+			pointsStartZoom = getStartZoom(percentile);
 		}
-
-		int startZoom = getStartZoom(pointsDensity);
+		int startZoom = getPointsStartZoom();
 		if (tileBox.getZoom() >= startZoom) {
 			float px = -1;
 			float py = -1;
@@ -393,7 +393,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		}
 	}
 
-	private void updatePointsPercentile() {
+	private double getPointsDensity() {
 		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
 		points.addAll(editingCtx.getAfterPoints());
 
@@ -407,13 +407,15 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 			prev = wptPt;
 		}
 		Collections.sort(distances);
-		pointsDensity = Algorithms.getPercentile(distances, MIN_POINTS_PERCENTILE);
+		return Algorithms.getPercentile(distances, MIN_POINTS_PERCENTILE);
 	}
 
-	private int getStartZoom(@Nullable Double density) {
-		if (density == null) {
-			return START_ZOOM;
-		} else if (density < 2) {
+	private int getPointsStartZoom() {
+		return pointsStartZoom != null ? pointsStartZoom : START_ZOOM;
+	}
+
+	private int getStartZoom(double density) {
+		if (density < 2) {
 			return 21;
 		} else if (density < 5) {
 			return 20;
@@ -575,7 +577,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	}
 
 	public void refreshMap() {
-		pointsDensity = null;
+		pointsStartZoom = null;
 		view.refreshMap();
 	}
 
