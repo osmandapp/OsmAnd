@@ -1613,7 +1613,7 @@
     <string name="active_markers">عدد خطوط التوجيه</string>
     <string name="map_markers">التوجيه المباشر</string>
     <string name="routing_attr_avoid_borders_name">تخطي الحدود</string>
-    <string name="impassable_road_desc">تحديد طرق تريد تجنبها خلال التنقل.</string>
+    <string name="impassable_road_desc">حدد طرق تريد تجنبها خلال التنقل.</string>
     <string name="search_categories">الفئات</string>
     <string name="shared_string_near">بالقرب من</string>
     <string name="route_tslr">انعطف قليلا إلى اليمين</string>
@@ -2988,7 +2988,7 @@
     <string name="dialogs_and_notifications_descr">التحكم في النوافذ المنبثقة ، ومربعات الحوار والإشعارات.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">شبكة النقاط</string>
     <string name="suggested_maps">خرائط مقترحة</string>
-    <string name="suggested_maps_descr">هذه الخرائط مطلوبة لاستخدامها مع الأداة.</string>
+    <string name="suggested_maps_descr">هذه الخرائط مطلوبة لاستخدامها مع الأداة الملحقة.</string>
     <string name="added_profiles">الأوضاع المضافة</string>
     <string name="added_profiles_descr">الأوضاع المضافة بواسطة الأداة الملحقة</string>
     <string name="shared_string_turn_off">إيقاف تشغيل</string>
@@ -4190,7 +4190,7 @@
     <string name="verification_code_missing">لم أتلق رمز تحقق</string>
     <string name="verification_code_missing_description">قد تستغرق إلى 10 دقائق ، استخدم الزر أدناه إذا لم يكن موجودا في مجلد البريد العشوائي.</string>
     <string name="restore_from_file">استعادة من ملف</string>
-    <string name="select_nav_profile_dialog_message">\'نوع الملاحة\' يحدد كيفية حساب المسارات عبر محركات توجيه متاحة بالانترنت و بدونها.</string>
+    <string name="select_nav_profile_dialog_message">\'نوع التنقل\' يحدد كيفية حساب المسارات عبر محركات توجيه متاحة بالانترنت و بدونها.</string>
     <string name="loading_list_of_routing_services">تحميل قائمة خدمات التوجيه المتوفرة</string>
     <string name="shared_string_offline">دون اتصال</string>
     <string name="shared_string_online">عبر الإنترنت</string>
@@ -4374,4 +4374,13 @@
     <string name="pro_features">ميزات احترافية</string>
     <string name="purchases_restored">تمت استعادة المشتريات</string>
     <string name="grey_color_undefined">يستخدم اللون الرمادي لأجزاء بدون بيانات.</string>
+    <string name="osm_live_payment_subscription_management_amz">يتم الدفع من حساب أمازون الخاص بك عند تأكيد الشراء.
+\n
+\nيتم تجديده ما لم يتم إلغاؤه قبل فترة التجديد المحددة.
+\n
+\nإدارة أو إلغاء اشتراكاتك من إعدادات Amazon الخاصة بك في أي وقت.</string>
+    <string name="cancel_anytime_in_amazon_app">قم بإلغائه في أي وقت في تطبيق أمازون</string>
+    <string name="amz_manage_subscription_descr">لإدارة اشتراكك ، استخدم تطبيق Amazon على الجهاز أو افتح موقع Amazon.com بالحساب الخاص بك.</string>
+    <string name="empty_category_name">اسم فئة فارغ</string>
+    <string name="no_activity_for_intent">لم يتم العثور على تطبيقات مناسبة لتنفيذ هذا الإجراء</string>
 </resources>
