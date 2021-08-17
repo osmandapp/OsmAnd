@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
@@ -374,18 +373,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 		}
 		int startZoom = getPointsStartZoom();
 		if (tileBox.getZoom() >= startZoom) {
-			float px = -1;
-			float py = -1;
-			float iconRadius = AndroidUtils.dpToPx(view.getApplication(), 12);
 			for (int i = 0; i < points.size(); i++) {
 				WptPt point = points.get(i);
-				float x = tileBox.getPixXFromLatLon(point.lat, point.lon);
-				float y = tileBox.getPixYFromLatLon(point.lat, point.lon);
-				if (i > 0 && Math.abs(x - px) <= iconRadius && Math.abs(y - py) <= iconRadius) {
-					continue;
-				}
-				px = x;
-				py = y;
 				if (isInTileBox(tileBox, point)) {
 					drawPointIcon(canvas, tileBox, point, false);
 				}
