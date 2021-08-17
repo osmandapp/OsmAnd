@@ -4307,4 +4307,13 @@
     <string name="pro_features">Funciones «Pro»</string>
     <string name="purchases_restored">Compras restauradas</string>
     <string name="grey_color_undefined">El color gris se usa para tramos sin datos.</string>
+    <string name="cancel_anytime_in_amazon_app">Se puede cancelar en cualquier momento en la aplicación de Amazon</string>
+    <string name="amz_manage_subscription_descr">Para gestionar la suscripción usa la aplicación de Amazon en el dispositivo o abre la página web de Amazon.com en tu perfil.</string>
+    <string name="empty_category_name">Nombre de categoría vacío</string>
+    <string name="no_activity_for_intent">Sin aplicaciones adecuadas para realizar esta acción</string>
+    <string name="osm_live_payment_subscription_management_amz">El pago se carga en la cuenta de Amazon al confirmar la compra.
+\n
+\nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación.
+\n
+\nGestiona o cancela las suscripciones cuando quieras, en los ajustes de Amazon.</string>
 </resources>
