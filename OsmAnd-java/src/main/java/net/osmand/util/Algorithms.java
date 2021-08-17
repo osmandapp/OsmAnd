@@ -935,6 +935,14 @@ public class Algorithms {
 		return pointsCount == 1;
 	}
 
+	public static <T> T getPercentile(List<T> sortedValues, int percentile) throws IllegalArgumentException {
+		if (percentile < 0 || percentile > 100) {
+			throw new IllegalArgumentException("invalid percentile " + percentile + ", should be 0-100");
+		}
+		int index = (sortedValues.size() - 1) * percentile / 100;
+		return sortedValues.get(index);
+	}
+
 	public static String formatDuration(int seconds, boolean fullForm) {
 		String sec;
 		if (seconds % 60 < 10) {
