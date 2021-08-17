@@ -364,7 +364,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 			float px = -1;
 			float py = -1;
-			float iconRadius = AndroidUtils.dpToPx(view.getApplication(), 9);
+			float iconRadius = AndroidUtils.dpToPx(view.getApplication(), 12);
 			for (int i = 0; i < points.size(); i++) {
 				WptPt point = points.get(i);
 				float x = tileBox.getPixXFromLatLon(point.lat, point.lon);
