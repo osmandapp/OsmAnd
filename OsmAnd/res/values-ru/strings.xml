@@ -24,12 +24,12 @@
     <string name="rendering_attr_winter_road_name">Автозимник</string>
     <string name="rendering_attr_ice_road_name">Ледовый автозимник</string>
     <string name="routeInfo_winter_ice_road_name">Зимние и ледовые дороги</string>
-    <string name="rendering_attr_tracktype_grade1_name">Твердое</string>
+    <string name="rendering_attr_tracktype_grade1_name">Твёрдое</string>
     <string name="rendering_attr_tracktype_grade2_name">Почти твёрдое</string>
     <string name="rendering_attr_tracktype_grade3_name">Смешанное</string>
     <string name="rendering_attr_tracktype_grade4_name">Почти мягкое</string>
     <string name="rendering_attr_tracktype_grade5_name">Мягкое</string>
-    <string name="routeInfo_tracktype_name">Твердость поверхности дороги</string>
+    <string name="routeInfo_tracktype_name">Твёрдость поверхности дороги</string>
     <string name="intermediate_waypoint">Промежуточная точка</string>
     <string name="intermediate_destinations">Промежуточные точки</string>
     <string name="arrive_at_time">Прибытие в %1$s</string>
@@ -101,7 +101,7 @@
     <string name="quick_action_replace_destination">Заменить пункт назначения</string>
     <string name="quick_action_add_first_intermediate">Первый промежуточный пункт</string>
     <string name="quick_action_add_destination_desc">Добавление нового пункта назначения в центре экрана. Ранее выбранный пункт назначения станет последним промежуточным пунктом.</string>
-    <string name="quick_action_directions_from_desc">Кнопка для установки центра экрана пунктом отправления. Затем нужно будет выбрать пункт назначения или запустить расчет маршрута.</string>
+    <string name="quick_action_directions_from_desc">Кнопка для установки центра экрана пунктом отправления. Затем нужно будет выбрать пункт назначения или запустить расчёт маршрута.</string>
     <string name="quick_action_replace_destination_desc">Кнопка для установки центра экрана пунктом назначения с заменой предыдущего (если был задан).</string>
     <string name="quick_action_add_first_intermediate_desc">Установка центра экрана местом первой остановки на маршруте.</string>
     <string name="no_overlay">Без наложения</string>
@@ -165,8 +165,8 @@
     <string name="quick_action_map_source">Сменить источник карты</string>
     <string name="quick_action_map_source_title">Источники карт</string>
     <string name="quick_action_map_source_action">Добавить источник карты</string>
-    <string name="quick_action_map_source_switch">Источник карты изменен на «%s».</string>
-    <string name="quick_action_btn_tutorial_descr">Удерживайте кнопку для перемещения ее по экрану.</string>
+    <string name="quick_action_map_source_switch">Источник карты изменён на «%s».</string>
+    <string name="quick_action_btn_tutorial_descr">Удерживайте кнопку для перемещения её по экрану.</string>
     <string name="rendering_attr_depthContours_description">Показывать контуры и точки глубин.</string>
     <string name="rendering_attr_depthContours_name">Контуры морских глубин</string>
     <string name="rendering_attr_contourDensity_description">Частота горизонталей</string>
@@ -205,7 +205,7 @@
     <string name="save_track_precision">Минимальная точность для записи</string>
     <string name="save_track_precision_descr">Фильтр: не записывать, если эта точность не достигнута.</string>
     <string name="christmas_poi">Рождественские POI</string>
-    <string name="christmas_desc">В преддверии рождественских и новогодних праздников вы можете выбрать отображение связанных с ними POI, таких как рождественские елки, ярмарки и т.д.</string>
+    <string name="christmas_desc">В преддверии рождественских и новогодних праздников вы можете выбрать отображение связанных с ними POI, таких как рождественские ёлки, ярмарки и т.д.</string>
     <string name="christmas_desc_q">Показывать праздничные POI\?</string>
     <string name="rendering_attr_contourColorScheme_description">Цветовая схема горизонталей</string>
     <string name="rendering_value_light_brown_name">Светло-коричневый</string>
@@ -260,7 +260,7 @@
     <string name="av_audio_bitrate">Битрейт аудио</string>
     <string name="av_audio_bitrate_descr">Выберите битрейт аудио.</string>
     <string name="shared_string_hide">Скрыть</string>
-    <string name="no_address_found">Адрес не определен</string>
+    <string name="no_address_found">Адрес не определён</string>
     <string name="shared_string_near">Рядом с</string>
     <string name="shared_string_location">Местоположение</string>
     <string name="poi_context_menu_modify_osm_change">Изменить POI</string>
@@ -276,7 +276,7 @@
     <string name="osn_add_dialog_error">Не удалось создать заметку.</string>
     <string name="osn_close_dialog_success">Заметка закрыта</string>
     <string name="osn_close_dialog_error">Не удалось закрыть заметку.</string>
-    <string name="osm_edit_deleted_poi">Удаленная OSM POI</string>
+    <string name="osm_edit_deleted_poi">Удалённая OSM POI</string>
     <string name="osm_edit_modified_poi">Отредактированная OSM POI</string>
     <string name="osm_save_offline">Сохранить локально</string>
     <string name="context_menu_item_open_note">OSM-заметка</string>
@@ -1767,7 +1767,7 @@
 \nЧтобы вернуться к одному из традиционных стилей карт в OsmAnd, просто деактивируйте этот плагин или измените на желаемый «Стиль карты» в разделе «Настройки карты».</string>
     <string name="local_osm_changes_upload_all_confirm">Отправить изменения (%1$d) в OSM\?</string>
     <string name="confirmation_to_clear_history">Очистить историю?</string>
-    <string name="plugin_ski_descr">Информация о маршрутах для беговых лыж, горнолыжных трассах, альпийских спусках, фуникулерах и горнолыжных подъёмниках. Маршруты и спуски отмечены разными цветами в зависимости от сложности и отображаются в особом «зимнем» стиле карты, где используются «снежные» цвета зимнего пейзажа.
+    <string name="plugin_ski_descr">Информация о маршрутах для беговых лыж, горнолыжных трассах, альпийских спусках, фуникулёрах и горнолыжных подъёмниках. Маршруты и спуски отмечены разными цветами в зависимости от сложности и отображаются в особом «зимнем» стиле карты, где используются «снежные» цвета зимнего пейзажа.
 \n
 \nПри выборе этого стиля вид карты меняется на «Зимний/лыжный», отображая все детали так, как они выглядят зимой.
 \nОтключить стиль можно здесь либо через смену стиля карты в разделе «Настройки карты».</string>
@@ -2157,18 +2157,18 @@
     <string name="access_autoannounce_period">Период автооповещений</string>
     <string name="access_autoannounce_period_descr">Минимальное время между оповещениями.</string>
     <string name="access_disable_offroute_recalc">Не пересчитывать маршрут при сходе с него</string>
-    <string name="access_disable_offroute_recalc_descr">Предотвращает пересчет маршрута после того, как вы из него вышли.</string>
+    <string name="access_disable_offroute_recalc_descr">Предотвращает пересчёт маршрута после того, как вы из него вышли.</string>
     <string name="access_disable_wrong_direction_recalc">Не пересчитывать маршрут при обратном направлении движения</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Предотвращает автоматический пересчет маршрута при обратном направлении движения.</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Предотвращает автоматический пересчёт маршрута при обратном направлении движения.</string>
     <string name="access_no_destination">Плагин специальных возможностей: пункт назначения не задан</string>
     <string name="access_direction_audio_feedback">Озвучивать направление</string>
     <string name="access_direction_audio_feedback_descr">Индицировать звуком направление на целевую точку.</string>
     <string name="access_direction_haptic_feedback">Тактильная индикация направления</string>
     <string name="access_direction_haptic_feedback_descr">Индицировать вибрацией направление на целевую точку.</string>
     <string name="osm_live_subscription">Подписка OsmAnd Live</string>
-    <string name="use_osm_live_routing_description">Включить навигацию с учетом автообновлений OsmAnd Live.</string>
+    <string name="use_osm_live_routing_description">Включить навигацию с учётом автообновлений OsmAnd Live.</string>
     <string name="lang_es_us">Испанский (американский)</string>
-    <string name="lang_en_gb">Английский (Соединенное Королевство)</string>
+    <string name="lang_en_gb">Английский (Соединённое Королевство)</string>
     <string name="lang_hu_formal">Венгерский (официальный)</string>
     <string name="lang_kn">Каннада</string>
     <string name="file_name_containes_illegal_char">Имя файла содержит недопустимый символ</string>
@@ -2203,7 +2203,7 @@
     <string name="osm_live_email_desc">Необходимо, чтобы информировать вас о ваших вкладах.</string>
     <string name="download_files_question_space_with_temp">Скачать {0} файл(ов)\?
 \nИспользуется {3} МБ временного хранилища и {1} МБ постоянного. (Из {2} МБ)</string>
-    <string name="search_my_location">Найти мое местоположение</string>
+    <string name="search_my_location">Найти моё местоположение</string>
     <string name="first_usage_greeting">Открывайте новые места и стройте маршруты без подключения к интернету</string>
     <string name="allow_access_location">Разрешить доступ к местоположению</string>
     <string name="give_permission">Дать разрешение</string>
@@ -2226,7 +2226,7 @@
     <string name="select_voice_provider">Голосовые инструкции</string>
     <string name="osm_live_payment_desc">Абонентская плата взимается за выбранный период. Отменить подписку можно в Google Play в любой момент.</string>
     <string name="donation_to_osm">Пожертвование для сообщества OSM</string>
-    <string name="donation_to_osm_desc">Часть вашего пожертвования будет отправлена участникам OSM. Стоимость подписки при этом остается прежней.</string>
+    <string name="donation_to_osm_desc">Часть вашего пожертвования будет отправлена участникам OSM. Стоимость подписки при этом остаётся прежней.</string>
     <string name="osm_live_subscription_desc">Подписка позволяет получать ежечасные, ежедневные, еженедельные обновления и неограниченные загрузки для всех карт по всему миру.</string>
     <string name="av_locations_descr">GPX-файл с координатами.</string>
     <string name="lang_ast">Астурийский</string>
@@ -2248,7 +2248,7 @@
     <string name="quick_action_add_marker">Добавить маркер</string>
     <string name="quick_action_add_poi">Добавить POI</string>
     <string name="quick_action_map_style">Сменить стиль карты</string>
-    <string name="quick_action_map_style_switch">Стиль карты изменен на «%s».</string>
+    <string name="quick_action_map_style_switch">Стиль карты изменён на «%s».</string>
     <string name="quick_action_add_parking">Добавить место парковки</string>
     <string name="quick_action_new_action">Добавить действие</string>
     <string name="quick_action_edit_action">Редактировать действие</string>
@@ -2363,7 +2363,7 @@
     <string name="fast_coordinates_input">Быстрый ввод координат</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Без ледовых дорог или бродов</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Избегать ледовых дорог и бродов.</string>
-    <string name="my_location">Мое местоположение</string>
+    <string name="my_location">Моё местоположение</string>
     <string name="shared_string_finish">Финиш</string>
     <string name="shared_string_sort">Сортировка</string>
     <string name="marker_save_as_track_descr">Экспорт маркеров в следующий файл GPX:</string>
@@ -2379,8 +2379,8 @@
     <string name="map_orientation_change_in_accordance_with_speed">Смена ориентации карты</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Выберите скорость, при которой ориентация по направлению движения переключится на ориентацию по компасу.</string>
     <string name="all_markers_moved_to_history">Все маркеры перемещены в историю</string>
-    <string name="marker_moved_to_history">Маркер перемещен в историю</string>
-    <string name="marker_moved_to_active">Маркер перемещен в действующие</string>
+    <string name="marker_moved_to_history">Маркер перемещён в историю</string>
+    <string name="marker_moved_to_active">Маркер перемещён в действующие</string>
     <string name="show_direction">Указатель расстояния</string>
     <string name="show_map">Показать карту</string>
     <string name="plan_route_no_markers_toast">Для использования этой функции нужно добавить хотя бы один маркер.</string>
@@ -2388,7 +2388,7 @@
     <string name="shared_string_road">Дорога</string>
     <string name="show_guide_line">Показывать направляющие линии</string>
     <string name="rendering_value_darkyellow_name">Тёмно-жёлтый</string>
-    <string name="osmand_extended_description_part8">OsmAnd — это активно развивающийся проект с открытым исходным кодом. Благодаря открытости, каждый может внести свой вклад в приложение, сообщая об ошибках, совершенствуя перевод или разрабатывая новые возможности. Кроме того, проект финансируется за счет денежных взносов с целью разработки и тестирования новых функций.
+    <string name="osmand_extended_description_part8">OsmAnd — это активно развивающийся проект с открытым исходным кодом. Благодаря открытости, каждый может внести свой вклад в приложение, сообщая об ошибках, совершенствуя перевод или разрабатывая новые возможности. Кроме того, проект финансируется за счёт денежных взносов с целью разработки и тестирования новых функций.
 \nПримерное покрытие и качество карт:
 \n • Западная Европа: ****
 \n • Восточная Европа: ***
@@ -2401,7 +2401,7 @@
 \n • Африка: **
 \n • Антарктида:
 \nДля скачивания доступно большинство стран мира!
-\n Получите надежный навигатор в своей стране — будь то Франция, Германия, Мексика, Великобритания, Испания, Нидерланды, США, Россия, Бразилия или любая другая.</string>
+\n Получите надёжный навигатор в своей стране — будь то Франция, Германия, Мексика, Великобритания, Испания, Нидерланды, США, Россия, Бразилия или любая другая.</string>
     <string name="osmand_plus_extended_description_part8">Примерная карта покрытия и качество: 
 \n • Западная Европа: **** 
 \n • Восточная Европа: *** 
@@ -2486,7 +2486,7 @@
 \n
 \nКроме того, стиль добавляет специальные туристические опции, такие как велосипедные маршруты или альпийские горные маршруты.
 \n
-\nДополнительное скачивание не требуется, стиль создается из наших стандартных карт.
+\nДополнительное скачивание не требуется, стиль создаётся из наших стандартных карт.
 \n
 \nОтключить стиль можно здесь либо через смену стиля карты в разделе «Настройки карты».</string>
     <string name="navigate_point_olc">Открытый код местоположения (OLC)</string>
@@ -2496,7 +2496,7 @@
     <string name="osmand_extended_description_part2">GPS-навигация
 \n• Выбор между автономным (без платы за роуминг) и онлайн-режимом (быстрее)
 \n• Пошаговые голосовые подсказки (записанные или синтезированные) доведут до места назначения
-\n• Повторный расчет маршрута после значительного отклонения от существующего
+\n• Повторный расчёт маршрута после значительного отклонения от существующего
 \n•Обновлен автоматически
 \n• Отображение ограничений скорости и получение предупреждений при их превышении
 \n• Карта масштабируется соответственно вашей скорости
@@ -2536,7 +2536,7 @@
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) — картографическая и навигационная программа с доступом к свободным, мировым и высококачественным данным OSM.
 \n Получайте наслаждение от голосовой и визуальной навигации, просматривайте точки интереса (англ. POI, points of interest), создавайте и управляйте треками GPX, используйте визуализацию контурных линий и данных высот, переключайтесь между режимами автомобиль, велосипед и пешеход, редактируйте данные OSM и многое другое.
 \n
-\n OsmAnd + — платная версия программы. Приобретая ее, вы поддержите проект, финансируете разработку новых возможностей и получите последние обновления.
+\n OsmAnd + — платная версия программы. Приобретая её, вы поддержите проект, финансируете разработку новых возможностей и получите последние обновления.
 \n
 \n Некоторые из главных возможностей:</string>
     <string name="osmand_plus_extended_description_part2">Навигация
@@ -2690,7 +2690,7 @@
     <string name="shared_string_result">Результат</string>
     <string name="wikivoyage_search_hint">Поиск страны, города или провинции</string>
     <string name="shared_string_read">Читать</string>
-    <string name="saved_articles">Сохраненные статьи</string>
+    <string name="saved_articles">Сохранённые статьи</string>
     <string name="shared_string_contents">Главы</string>
     <string name="download_maps_travel">Путеводитель</string>
     <string name="shared_string_wikivoyage">Викигид</string>
@@ -2707,7 +2707,7 @@
     <string name="shared_string_wifi_only">Только по Wi-Fi</string>
     <string name="select_travel_book">Выберите дневник путешествий</string>
     <string name="shared_string_travel_book">Дневник путешествий</string>
-    <string name="online_webpage_warning">Страница доступна только онлайн. Открыть ее в браузере\?</string>
+    <string name="online_webpage_warning">Страница доступна только онлайн. Открыть её в браузере\?</string>
     <string name="download_images">Загружать изображения</string>
     <string name="shared_string_dont">Нет</string>
     <string name="shared_string_do">Выполнить</string>
@@ -2715,7 +2715,7 @@
     <string name="purchase_dialog_travel_description">Приобретите один из перечисленных ниже, чтоб получить функциональность автономного туристического гида:</string>
     <string name="purchase_dialog_subtitle">Выберите подходящий пункт</string>
     <string name="in_app_purchase">Покупка в приложении</string>
-    <string name="in_app_purchase_desc">Разовый платеж</string>
+    <string name="in_app_purchase_desc">Разовый платёж</string>
     <string name="purchase_unlim_title">Купить — %1$s</string>
     <string name="wikivoyage_offline">Локальный Викигид</string>
     <string name="unlimited_downloads">Неограниченные загрузки</string>
@@ -2796,7 +2796,7 @@
 \nОставьте отзыв</string>
     <string name="increase_search_radius_to">Расширить радиус поиска до %1$s</string>
     <string name="ask_for_location_permission">Для продолжения дайте OsmAnd разрешение на определение местоположения.</string>
-    <string name="rendering_value_black_name">Черный</string>
+    <string name="rendering_value_black_name">Чёрный</string>
     <string name="search_street">Поиск улицы</string>
     <string name="start_search_from_city">Укажите город/место/район</string>
     <string name="shared_string_restore">Восстановление</string>
@@ -2869,7 +2869,7 @@
     <string name="by_transport_type">На %1$s</string>
     <string name="exit_at">Выход на</string>
     <string name="sit_on_the_stop">Посадка на остановке</string>
-    <string name="use_osm_live_public_transport_description">Включить общественный транспорт с учетом автообновлений OsmAnd Live.</string>
+    <string name="use_osm_live_public_transport_description">Включить общественный транспорт с учётом автообновлений OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Общественный транспорт OsmAnd Live</string>
     <string name="transfers_size">пересадки: %1$d</string>
     <string name="rendering_attr_surface_unpaved_name">Грунтовое</string>
@@ -3008,7 +3008,7 @@
     <string name="base_profile_descr_pedestrian">Прогулки, пеший туризм, бег</string>
     <string name="base_profile_descr_public_transport">Виды общественного транспорта</string>
     <string name="base_profile_descr_boat">Корабль, гребля, парусный спорт</string>
-    <string name="base_profile_descr_aircraft">Самолет, планеризм</string>
+    <string name="base_profile_descr_aircraft">Самолёт, планеризм</string>
     <string name="routing_profile_geocoding">Геокодирование</string>
     <string name="routing_profile_straightline">Прямая линия</string>
     <string name="application_profiles_descr">Выберите профили, которые будут отображаться в приложении.</string>
@@ -3084,7 +3084,7 @@
     <string name="third_party_routing_type">Сторонняя навигация</string>
     <string name="routing_attr_piste_type_nordic_name">Лыжные гонки и северные дисциплины</string>
     <string name="routing_attr_piste_type_nordic_description">Трассы для северных дисциплин или лыжных гонок.</string>
-    <string name="app_mode_personal_transporter">Персональный транспортер</string>
+    <string name="app_mode_personal_transporter">Персональный транспортёр</string>
     <string name="routing_attr_max_num_changes_name">Количество изменений</string>
     <string name="turn_screen_on_time_descr">Настройте, как долго экран должен быть включён.</string>
     <string name="turn_screen_on_sensor_descr">Включать экран движением руки по нему.</string>
@@ -3094,12 +3094,12 @@
     <string name="sett_generic_ext_input">Клавиатура</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
-    <string name="shared_string_track_is_saved">Трек %s сохранен</string>
+    <string name="shared_string_track_is_saved">Трек %s сохранён</string>
     <string name="rendering_attr_showLez_name">Зоны с низким уровнем выбросов</string>
     <string name="temporary_conditional_routing">Учитывать временные ограничения</string>
     <string name="new_route_calculated_dist_dbg">Маршрут: %1$s,
 \nвремя навигации %2$s.
-\nРасчет: %3$.1f с.
+\nРасчёт: %3$.1f с.
 \n(%4$d дорог, %5$d тайлов)</string>
     <string name="quick_action_need_to_add_item_to_list">Добавьте хотя бы один элемент в список «Быстрые действия» в настройках</string>
     <string name="routing_attr_piste_type_skitour_description">Маршруты для горнолыжного туризма.</string>
@@ -3123,7 +3123,7 @@
     <string name="turn_screen_on_info">Показывать карту на экране блокировки во время навигации.</string>
     <string name="configure_profile">Настройки профиля</string>
     <string name="switch_profile">Переключить профиль</string>
-    <string name="application_profile_changed">Профиль приложения изменен на «%s»</string>
+    <string name="application_profile_changed">Профиль приложения изменён на «%s»</string>
     <string name="configure_profile_info">Настройки профиля:</string>
     <string name="units_and_formats">Единицы измерения и форматы</string>
     <string name="map_look_descr">Внешний вид карты</string>
@@ -3134,7 +3134,7 @@
     <string name="utm_format_descr">OsmAnd использует формат UTM Standard, который похож, но не идентичен формату UTM NATO.</string>
     <string name="navigate_point_format_utm">UTM Стандарт</string>
     <string name="navigate_point_format_olc">Открытый код местоположения (OLC)</string>
-    <string name="coordinates_format_info">Выбранный формат будет применён во всем приложении.</string>
+    <string name="coordinates_format_info">Выбранный формат будет применён во всём приложении.</string>
     <string name="pref_selected_by_default_for_profiles">Параметр выбран по умолчанию для профилей: %s</string>
     <string name="route_parameters_info">Настройки маршрутизации в профиле «%1$s».</string>
     <string name="wake_time">Время работы после пробуждения</string>
@@ -3202,7 +3202,7 @@
 \n
 \n • Новый диалог загрузки карты, предлагающий загрузить карту во время просмотра
 \n
-\n • Исправление темной темы
+\n • Исправление тёмной темы
 \n
 \n • Исправлено несколько проблем с маршрутизацией по всему миру
 \n
@@ -3274,7 +3274,7 @@
     <string name="routing_attr_allow_skating_only_description">Маршруты, подготовленные для фристайла или катания только на коньках без классических треков.</string>
     <string name="routing_attr_allow_classic_only_name">Разрешить только классические маршруты</string>
     <string name="routing_attr_allow_classic_only_description">Маршруты только для классического стиля, без конькобежных трасс. Сюда входят маршруты, подготовленные небольшим снегоходом с более свободной лыжнёй и трассами, подготовленными вручную лыжниками.</string>
-    <string name="routing_attr_difficulty_preference_description">Предпочитаемый уровень сложности маршрутов. Более сложные или легкие трассы могут использоваться, если они короче.</string>
+    <string name="routing_attr_difficulty_preference_description">Предпочитаемый уровень сложности маршрутов. Более сложные или лёгкие трассы могут использоваться, если они короче.</string>
     <string name="turn_screen_on_router">Включать на повороте</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Класс 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Класс 2</string>
@@ -3319,7 +3319,7 @@
     <string name="rearrange_categories">Упорядочить категории</string>
     <string name="create_custom_categories_list_promo">Изменение порядка списка и скрытие категорий. Импорт или экспорт всех изменений в виде профилей.</string>
     <string name="add_new_custom_category_button_promo">Создайте свою категорию, выбрав одну или несколько категорий из списка.</string>
-    <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведет к возврату порядка сортировки по умолчанию.</string>
+    <string name="reset_to_default_category_button_promo">Сброс к настройкам по умолчанию приведёт к возврату порядка сортировки по умолчанию.</string>
     <string name="add_custom_category">Создать свою категорию</string>
     <string name="rendering_attr_streetLightingNight_name">Показывать только ночью</string>
     <string name="plugin_prefs_reset_successful">Все настройки плагина восстановлены до состояния по умолчанию.</string>
@@ -3327,7 +3327,7 @@
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Закат в %1$s</string>
     <string name="sunrise_at">Восход в %1$s</string>
-    <string name="accessibility_mode_disabled">Режим специальных возможностей отключен в системе.</string>
+    <string name="accessibility_mode_disabled">Режим специальных возможностей отключён в системе.</string>
     <string name="use_system_screen_timeout">Использовать системную блокировку экрана</string>
     <string name="use_system_screen_timeout_promo">По умолчанию отключено: пока OsmAnd работает на переднем плане, экран не отключается. 
 \n 
@@ -3413,7 +3413,7 @@
     <string name="login_and_pass">Имя пользователя и пароль</string>
     <string name="plugin_global_prefs_info">Эти настройки плагина применяются ко всем профилям</string>
     <string name="osm_editing">Редактирование OSM</string>
-    <string name="osm_edits_view_descr">Здесь отображаются ваши правки и ошибки OSM, еще не отправленные в %1$s. Отправленные изменения не отображаются.</string>
+    <string name="osm_edits_view_descr">Здесь отображаются ваши правки и ошибки OSM, ещё не отправленные в %1$s. Отправленные изменения не отображаются.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Значок, отображаемый во время навигации или движения.</string>
     <string name="select_map_icon_descr">Значок, отображаемый в состоянии покоя.</string>
@@ -3446,7 +3446,7 @@
     <string name="monitoring_min_accuracy_descr_side_effect">Побочный эффект: в результате фильтрации по точности, точки могут быть полностью пропущены, например, под мостами, под деревьями, между высокими зданиями или при определённых погодных условиях.</string>
     <string name="monitoring_min_accuracy_descr_remark">Примечание: при включении GPS непосредственно перед записью точность определения первой точки может быть снижена, поэтому мы рассматриваем добавление секундной задержки перед записью точки (либо записи лучшей из трёх последовательных точек и т. д.), но пока это не реализовано.</string>
     <string name="monitoring_min_distance_descr">Фильтр предотвращает запись точек при отсутствии фактического перемещения и улучшает вид треков без обработки.</string>
-    <string name="monitoring_min_distance_descr_side_effect">Побочные эффекты: периоды в состоянии покоя не записываются вообще или только по одной точке каждый. Небольшие (в реальности) перемещения (например, в сторону, указывающие возможное изменение направления движения) могут быть отфильтрованы. Файл содержит меньше информации для последующей обработки и имеет худшую статистику, отфильтровывая явно избыточные точки во время записи, при этом потенциально сохраняя артефакты, вызванные плохим приемом или эффектами модуля GPS.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Побочные эффекты: периоды в состоянии покоя не записываются вообще или только по одной точке каждый. Небольшие (в реальности) перемещения (например, в сторону, указывающие возможное изменение направления движения) могут быть отфильтрованы. Файл содержит меньше информации для последующей обработки и имеет худшую статистику, отфильтровывая явно избыточные точки во время записи, при этом потенциально сохраняя артефакты, вызванные плохим приёмом или эффектами модуля GPS.</string>
     <string name="monitoring_min_distance_descr_recommendation">Рекомендация: настройка 5 метров подходит, если не нужно фиксировать более короткие перемещения и вы не хотите записывать данные в состоянии покоя.</string>
     <string name="listed_exist">Указанные %1$s уже существуют в OsmAnd.</string>
     <string name="importing_from">Импорт данных из %1$s</string>
@@ -3613,7 +3613,7 @@
     <string name="turn_screen_on_wake_time_descr">Время работы экрана после включения. («%1$s» запрещает выключение экрана.)</string>
     <string name="turn_screen_on_power_button_descr">Нажатие кнопки питания устройства включит экран с OsmAnd на переднем плане экрана блокировки.</string>
     <string name="pseudo_mercator_projection">Псевдо-проекция Меркатора</string>
-    <string name="one_image_per_tile">Каждый тайл в своем файле</string>
+    <string name="one_image_per_tile">Каждый тайл в своём файле</string>
     <string name="edit_online_source">Изменить онлайн-источник</string>
     <string name="map_source_zoom_levels">Установите минимальный и максимальный уровни масштабирования для отображения или загрузки онлайн-карты.</string>
     <string name="shared_string_always">Всегда</string>
@@ -3649,13 +3649,13 @@
     <string name="screen_timeout">Время экрана</string>
     <string name="width_limit_description">Укажите ширину автомобиля, для широких транспортных средств могут применяться ограничения на маршруте.</string>
     <string name="height_limit_description">Укажите высоту автомобиля, для высоких транспортных средств могут применяться ограничения на маршруте.</string>
-    <string name="weight_limit_description">Укажите вес автомобиля, для тяжелых транспортных средств могут применяться ограничения на маршруте.</string>
+    <string name="weight_limit_description">Укажите вес автомобиля, для тяжёлых транспортных средств могут применяться ограничения на маршруте.</string>
     <string name="shared_string_tones">тонны</string>
     <string name="shared_string_meters">метры</string>
     <string name="details_dialog_decr">Управление отображением дополнительных деталей на карте</string>
     <string name="shared_string_night_map">Ночная карта</string>
     <string name="turn_screen_on_power_button_disabled">Отключено. Необходимо включить «Держать экран включённым» в разделе «Время работы после пробуждения».</string>
-    <string name="clear_tiles_warning">Применение этих изменений приведет к очистке кешированных данных этого источника тайлов</string>
+    <string name="clear_tiles_warning">Применение этих изменений приведёт к очистке кешированных данных этого источника тайлов</string>
     <string name="add_online_source">Добавить онлайн-источник</string>
     <string name="vessel_height_warning_link">Указать высоту судна</string>
     <string name="vessel_height_warning">Укажите высоту судна, чтобы избегать низких мостов. Имейте в виду, что если мост раздвижной, будет использована его высота в открытом состоянии.</string>
@@ -3779,7 +3779,7 @@
     <string name="shared_string_is_saved">сохранён</string>
     <string name="one_point_error">Добавьте хотя бы две точки.</string>
     <string name="shared_string_redo">Повторить</string>
-    <string name="release_3_8">• Обновленная функция планирования маршрута позволяет применять к сегментам разные режимы навигации и настраивать привязку к дорогам
+    <string name="release_3_8">• Обновлённая функция планирования маршрута позволяет применять к сегментам разные режимы навигации и настраивать привязку к дорогам
 \n
 \n • Новые настройки вида треков: выбор цвета и толщины линии, указатели направления, метки начала и конца маршрута
 \n
@@ -3801,7 +3801,7 @@
     <string name="contour_lines_thanks">Спасибо за покупку «Контурных линий»</string>
     <string name="routing_attr_avoid_footways_description">Избегать пешеходных дорожек</string>
     <string name="routing_attr_avoid_footways_name">Избегать пешеходных дорожек</string>
-    <string name="osm_live_payment_desc_hw">Подписка оплачивается за выбранный период. Отмените ее в AppGallery в любое время.</string>
+    <string name="osm_live_payment_desc_hw">Подписка оплачивается за выбранный период. Отмените её в AppGallery в любое время.</string>
     <string name="osm_live_payment_subscription_management_hw">Оплата будет снята с вашей учётной записи AppGallery при подтверждении покупки.
 \n
 \nПодписка продлевается автоматически, если она не будет отменена до даты продления.
@@ -3850,7 +3850,7 @@
     <string name="login_account">Аккаунт</string>
     <string name="user_login">Авторизоваться</string>
     <string name="manage_subscription">Управление подпиской</string>
-    <string name="subscription_expired_title">Срок действия подписки OsmAnd Live истек</string>
+    <string name="subscription_expired_title">Срок действия подписки OsmAnd Live истёк</string>
     <string name="subscription_paused_title">Подписка OsmAnd Live была приостановлена</string>
     <string name="subscription_on_hold_title">Подписка OsmAnd Live приостановлена</string>
     <string name="markers_history">История маркеров</string>
@@ -3888,7 +3888,7 @@
     <string name="app_mode_kayak">Каяк</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
     <string name="lang_de_casual">Немецкий (повседневный)</string>
-    <string name="app_mode_light_aircraft">Лёгкий самолет</string>
+    <string name="app_mode_light_aircraft">Лёгкий самолёт</string>
     <string name="plan_route_add_new_segment">Добавить новый сегмент</string>
     <string name="plan_route_join_segments">Объединить сегменты</string>
     <string name="plan_route_split_before">Разделить до</string>
@@ -3937,7 +3937,7 @@
     <string name="shared_string_server_url">URL-адрес сервера</string>
     <string name="keep_it_empty_if_not">Оставить пустым, если не</string>
     <string name="online_routing_example_hint">URL со всеми параметрами будет выглядеть так:</string>
-    <string name="test_route_calculation">Тест расчета маршрута</string>
+    <string name="test_route_calculation">Тест расчёта маршрута</string>
     <string name="routing_engine_vehicle_type_car">Автомобиль</string>
     <string name="online_routing_engine">Онлайн-маршрутизатор</string>
     <string name="online_routing_engines">Онлайн-маршрутизаторы</string>
@@ -4266,7 +4266,7 @@
     <string name="backup_version_history_removed">Вся история версий удалена.</string>
     <string name="backup_data_removed">Все данные удалены.</string>
     <string name="shared_string_progress">Прогресс</string>
-    <string name="backup_do_not_have_any">У вас еще нет облачных резервных копий.</string>
+    <string name="backup_do_not_have_any">У вас ещё нет облачных резервных копий.</string>
     <string name="backup_dont_have_any_descr">Настройте автоматическое резервное копирование, чтобы не беспокоиться о потере данных.</string>
     <string name="backup_setup">Настроить резервное копирование</string>
     <string name="promo_subscription">Промо-подписка</string>
@@ -4316,7 +4316,7 @@
     <string name="empty_category_name">Не задано название категории</string>
     <string name="osm_live_payment_subscription_management_amz">Оплата будет списана со счёта, привязанного к вашему аккаунту Amazon , при подтверждении покупки.
 \n
-\nПодписка продлевается автоматически, если вы не отмените её до даты продления. 
+\nПодписка продлевается автоматически, если вы не отмените её до даты продления.
 \n
 \nВы можете управлять подписками и отменять их в настройках Amazon в любое время.</string>
     <string name="cancel_anytime_in_amazon_app">Отмена в любое время в Amazon App</string>
