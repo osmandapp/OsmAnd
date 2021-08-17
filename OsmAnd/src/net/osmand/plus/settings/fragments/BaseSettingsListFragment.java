@@ -275,7 +275,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	@Override
 	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
 		SettingsCategoryItems categoryItems = dataList.get(category);
-		for (ExportSettingsType type : categoryItems.getTypes()) {
+		for (ExportSettingsType type : categoryItems.getNotEmptyTypes()) {
 			List<?> selectedItems = selected ? categoryItems.getItemsForType(type) : new ArrayList<>();
 			selectedItemsMap.put(type, selectedItems);
 		}

@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="no_items_of_type_message">You do not have any items of this type</string>
     <string name="purchases_restored">Purchases restored</string>
     <string name="pro_features">Pro features</string>
     <string name="connect_track_points_as">Сonnect route points</string>
