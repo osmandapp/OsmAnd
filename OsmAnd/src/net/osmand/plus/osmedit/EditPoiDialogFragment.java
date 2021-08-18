@@ -1,5 +1,7 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -89,8 +91,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
-
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = EditPoiDialogFragment.class.getSimpleName();
@@ -225,13 +225,12 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			});
 		}
 
-		ImageButton onlineDocumentationButton =
-				(ImageButton) view.findViewById(R.id.onlineDocumentationButton);
-		onlineDocumentationButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				getActivity().startActivity(new Intent(Intent.ACTION_VIEW,
-						Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
+		ImageButton onlineDocumentationButton = view.findViewById(R.id.onlineDocumentationButton);
+		onlineDocumentationButton.setOnClickListener(v -> {
+			Activity activity = getActivity();
+			if (activity != null) {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features"));
+				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
 		});
 

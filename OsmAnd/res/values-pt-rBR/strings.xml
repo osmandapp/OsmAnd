@@ -4300,4 +4300,13 @@
     <string name="pro_features">Recursos Pro</string>
     <string name="purchases_restored">Compras restauradas</string>
     <string name="grey_color_undefined">Cor cinza é usada para partes sem dados.</string>
+    <string name="osm_live_payment_subscription_management_amz">O pagamento é cobrado de sua conta Amazon ao confirmar a compra.
+\n
+\nEle renova a menos que seja cancelado antes do período de renovação selecionado.
+\n
+\nGerencie ou cancele suas assinaturas nas configurações da Amazon a qualquer momento.</string>
+    <string name="cancel_anytime_in_amazon_app">Cancele a qualquer momento no Amazon App</string>
+    <string name="amz_manage_subscription_descr">Para gerenciar sua assinatura, use o Amazon App no dispositivo ou abra o site Amazon.com em seu perfil.</string>
+    <string name="empty_category_name">Nome de categoria vazio</string>
+    <string name="no_activity_for_intent">Nenhum aplicativo adequado para executar esta ação foi encontrado</string>
 </resources>

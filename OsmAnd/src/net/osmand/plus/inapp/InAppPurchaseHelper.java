@@ -712,7 +712,7 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	@SuppressLint("HardwareIds")
-	private void addUserInfo(Map<String, String> parameters) {
+	protected void addUserInfo(Map<String, String> parameters) {
 		parameters.put("version", Version.getFullVersion(ctx));
 		parameters.put("lang", ctx.getLanguage() + "");
 		parameters.put("nd", ctx.getAppInitializer().getFirstInstalledDays() + "");

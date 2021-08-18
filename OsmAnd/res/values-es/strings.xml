@@ -608,7 +608,7 @@
     <string name="map_online_data">Mapas en línea y teselas</string>
     <string name="map_online_data_descr">Usa mapas en línea (descarga y guarda teselas en la tarjeta de memoria).</string>
     <string name="shared_string_online_maps">Mapas en línea</string>
-    <string name="online_map_settings_descr">Configura las fuentes de teselas de mapas con conexión o almacenadas</string>
+    <string name="online_map_settings_descr">Configura las fuentes de teselas de mapas con conexión o almacenadas.</string>
     <string name="osmand_rastermaps_plugin_description">Accede a tantos tipos de mapas en línea (llamados teselas o ráster) que desees, desde teselas predefinidas de OSM (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas meteorológicos, mapas del clima, mapas geológicos, capas de sombreado, etc.
 \n
 \nCualquiera de estos mapas puede usarse como el mapa predefinido que se mostrará, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Ciertos elementos de los mapas vectoriales de OsmAnd pueden ocultarse a través del menú «Configurar mapa» para hacer cualquier subyacencia mas visible.
@@ -1680,7 +1680,7 @@
     <string name="world_maps">Mapas mundiales</string>
     <string name="hillshade_layer_disabled">Capa de sombreado desactivada</string>
     <string name="srtm_plugin_disabled">Curvas de nivel desactivadas</string>
-    <string name="downloading_number_of_files">Descargando - %1$d archivo/s</string>
+    <string name="downloading_number_of_files">Descargando %1$d archivo/s…</string>
     <string name="show_free_version_banner">Mostrar anuncio de la versión gratuita</string>
     <string name="show_free_version_banner_description">Muestra el anuncio de la versión gratuita, incluso en la versión de pago.</string>
     <string name="buy">Comprar</string>
@@ -4035,7 +4035,7 @@
     <string name="copy_poi_name">Copiar nombre de PDI</string>
     <string name="quick_action_show_hide_title">Mostrar/Ocultar</string>
     <string name="shared_string_interval">Intervalo</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar los límites de las reservas naturales, las áreas protegidas y los parques nacionales</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">Ocultar los límites de las reservas naturales, las áreas protegidas y los parques nacionales.</string>
     <string name="track_has_no_altitude">La traza no contiene dato de altitud.</string>
     <string name="track_has_no_speed">La traza no contiene datos de velocidad.</string>
     <string name="select_another_colorization">Selecciona otro tipo de coloración.</string>
@@ -4111,14 +4111,14 @@
     <string name="logout_from_osmand_cloud">Cerrar sesión de OsmAnd Cloud</string>
     <string name="logout_from_osmand_cloud_decsr">¿Estás seguro de que quieres cerrar la sesión\?
 \nTendrás que volver a iniciar sesión para hacer una copia de seguridad o restaurar los datos.</string>
-    <string name="backup_deleting_all_data">Eliminando todos los datos</string>
-    <string name="backup_deleted_all_data">Eliminados todos los datos</string>
+    <string name="backup_deleting_all_data">Eliminando todos los datos…</string>
+    <string name="backup_deleted_all_data">Eliminados todos los datos.</string>
     <string name="backup_deleting_all_data_descr">Por favor, espera hasta que OsmAnd elimine todos tus datos de la nube. Todos los datos en el dispositivo permanecen sin tocar.</string>
     <string name="backup_deleted_all_data_descr">Todos tus datos han sido correctamente eliminados de OsmAnd Cloud.</string>
-    <string name="backup_version_history_removed">Todo el historial de versiones ha sido borrado</string>
-    <string name="backup_data_removed">Todos los datos han sido borrados</string>
+    <string name="backup_version_history_removed">Todo el historial de versiones ha sido borrado.</string>
+    <string name="backup_data_removed">Todos los datos han sido borrados.</string>
     <string name="shared_string_progress">Avance</string>
-    <string name="backup_do_not_have_any">Aún no tienes una copia de seguridad en línea</string>
+    <string name="backup_do_not_have_any">Aún no tienes una copia de seguridad en línea.</string>
     <string name="backup_dont_have_any_descr">Configura una copia de seguridad automática para no tener que preocuparte por la pérdida de datos.</string>
     <string name="backup_welcome_back">¡Bienvenido de nuevo!</string>
     <string name="backup_welcome_back_descr">Puedes restaurar los datos de este dispositivo utilizando las copias de seguridad existentes o configurar una copia de seguridad de este dispositivo en OsmAnd Cloud.</string>
@@ -4134,23 +4134,23 @@
     <string name="option_available_only_in_osmand_pro">La opción está disponible como parte de la suscripción a OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Obtén acceso a las funciones de OsmAnd Pro. Coloración de rutas y más.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explora los planes de OsmAnd para encontrar uno adecuado para ti.</string>
-    <string name="routes_color_by_type">Color de rutas por</string>
+    <string name="routes_color_by_type">Rutas de color por…</string>
     <string name="shared_string_relation">Relación</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Asigna color a las rutas en función del color asignado localmente (si está presente en OpenStreetMap) y del símbolo del escudo de senderismo</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_description">Color por afiliación de red</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_description">Asigna color a las rutas en función del tipo de red de nodos (internacional, regional, local) a la que pertenecen</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Color por afiliación de red.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Colorea las rutas en función del tipo de red de nodos (internacional, regional, local).</string>
     <string name="walking_route_osmc_description">Asigna color a las rutas en función del color asignado localmente (si está presente en OpenStreetMap) y del tipo (internacional, regional, local)</string>
     <string name="travel_routes">Rutas de viaje</string>
     <string name="setting_supported_by_style">Esta configuración es compatible con el estilo de mapa \'%1$s\'</string>
     <string name="direct_line_maps_required_descr">El cálculo de la ruta tarda más de lo habitual.
 \n
 \nPuede que algunos mapas no estén cargados.</string>
-    <string name="online_direct_line_maps_link">Comprueba los mapas necesarios</string>
+    <string name="online_direct_line_maps_link">Comprueba los mapas necesarios.</string>
     <string name="offline_maps_required_descr">Para calcular la ruta se necesitan mapas adicionales sin conexión.</string>
     <string name="online_maps_required_descr">Lamentablemente, OsmAnd no ha podido encontrar (calcular) una ruta adecuada a tu configuración.
 \n
 \nQuizás algunos mapas no están cargados. Puedes ejecutar en línea la comprobación de los mapas necesarios.</string>
-    <string name="online_maps_searching_descr">La búsqueda de mapas en línea está en marcha.</string>
+    <string name="online_maps_searching_descr">Buscando en línea…</string>
     <string name="reset_to_original">Restablecer el original</string>
     <string name="backup_error_no_subscription">No hay suscripción presente</string>
     <string name="map_updates_for_mappers">Actualizaciones de mapas para mapeadores</string>
@@ -4159,7 +4159,7 @@
     <string name="benefits_for_contributors_secondary_descr">Accedaea OpenStreetMap y compruebe si tienes derecho a recibir actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta %1$s</string>
-    <string name="enough_contributions_descr">Enhorabuena, has hecho suficientes contribuciones a OpenStreetMap y podrás disfrutar de actualizaciones ilimitadas de los mapas.</string>
+    <string name="enough_contributions_descr">Enhorabuena, has proporcionado suficientes contribuciones a OpenStreetMap y ahora puedes disfrutar de actualizaciones ilimitadas de los mapas!</string>
     <string name="not_enough_contributions_descr">Necesitas hacer al menos %1$s contribuciones de mapas a OpenStreetMap durante los últimos %2$s días.</string>
     <string name="shared_string_contributions">Contribuciones</string>
     <string name="contributions_may_calculate_with_delay">Las contribuciones pueden calcularse con retrasos de varias horas.</string>
@@ -4219,4 +4219,7 @@
     <string name="backup_error_file_not_available">Fichero no disponible</string>
     <string name="backup_error_token_is_not_valid_or_expired">Token no válido o expirado</string>
     <string name="backup_error_user_is_not_registered">No hay ningún usuario registrado con ese correo electrónico</string>
+    <string name="duration_ago">hace %1$s</string>
+    <string name="purchases_restored">Compras restauradas</string>
+    <string name="grey_color_undefined">El color gris se utiliza para partes sin datos.</string>
 </resources>

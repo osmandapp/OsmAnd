@@ -4304,4 +4304,13 @@
     <string name="contributions_may_calculate_with_delay">Su càrculu de sas contributziones diat pòdere durare unas cantas oras.</string>
     <string name="map_updates_are_unavailable_yet">Non bi sunt galu agiornamentos a disponimentu pro sas mapas :-(</string>
     <string name="connect_track_points_as">Collega sos puntos de s\'àndala</string>
+    <string name="osm_live_payment_subscription_management_amz">Su pagamentu benit addebitadu a su contu tuo cando cunfirmas sa còmpora.
+\n
+\nSi rinnovat a sa sola francu chi l\'apas annulladu in antis de sa die de rinnovu.
+\n
+\nAmministra o annulla sos abbonamentos tuos dae sas impostatziones de Amazon tuas in cale si siat momentu.</string>
+    <string name="cancel_anytime_in_amazon_app">Annulla·lu in cale si siat momentu dae s\'aplicatzione de Amazon</string>
+    <string name="amz_manage_subscription_descr">Pro gestire sos abbonamentos imprea s\'aplicatzione de Amazon in su dispositivu o aberi su situ Amazon.com cun su profilu tuo.</string>
+    <string name="empty_category_name">Nùmene de sa categoria bòidu</string>
+    <string name="no_activity_for_intent">Non s\'est agatada peruna aplicatzione pro fàghere custa atzione</string>
 </resources>

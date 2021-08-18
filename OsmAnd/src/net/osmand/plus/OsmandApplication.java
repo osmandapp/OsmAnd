@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -24,6 +26,13 @@ import android.text.format.DateFormat;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
@@ -101,16 +110,8 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.multidex.MultiDex;
-import androidx.multidex.MultiDexApplication;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
-
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 
 public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log";
@@ -1067,17 +1068,17 @@ public class OsmandApplication extends MultiDexApplication {
 		intent.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
 		Intent chooserIntent = Intent.createChooser(intent, getString(R.string.send_report));
 		chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(chooserIntent);
+		AndroidUtils.startActivityIfSafe(this, intent, chooserIntent);
 	}
 
 	public void sendSupportEmail(String screenName) {
-		final Intent emailIntent = new Intent(Intent.ACTION_SEND)
+		Intent emailIntent = new Intent(Intent.ACTION_SEND)
 				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-				.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@osmand.net"})
+				.putExtra(Intent.EXTRA_EMAIL, new String[] {"support@osmand.net"})
 				.putExtra(Intent.EXTRA_SUBJECT, screenName)
 				.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
 		emailIntent.setSelector(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")));
-		startActivity(emailIntent);
+		AndroidUtils.startActivityIfSafe(this, emailIntent);
 	}
 
 	public String getDeviceInfo() {

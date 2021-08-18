@@ -111,11 +111,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 				app.logEvent("paid_version_redirect");
 				Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
-				try {
-					activity.startActivity(intent);
-				} catch (ActivityNotFoundException e) {
-					LOG.error("ActivityNotFoundException", e);
-				}
+				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
 		}
 	}

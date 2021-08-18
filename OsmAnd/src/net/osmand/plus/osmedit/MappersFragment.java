@@ -155,9 +155,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 				String url = CONTRIBUTIONS_URL + userName + "/history";
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(Uri.parse(url));
-				if (AndroidUtils.isIntentSafe(app, intent)) {
-					startActivity(intent);
-				}
+				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
 		});
 	}

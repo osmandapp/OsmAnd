@@ -3275,7 +3275,7 @@
     <string name="dialogs_and_notifications_descr">Керуйте спливаючими вікнами, діалогами та сповіщеннями.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Вузлові мережі</string>
     <string name="suggested_maps">Пропоновані мапи</string>
-    <string name="suggested_maps_descr">Ці мапи потрібно використовувати з плагіном.</string>
+    <string name="suggested_maps_descr">Ці мапи потрібно використовувати з розширенням.</string>
     <string name="added_profiles">Додані профілі</string>
     <string name="added_profiles_descr">Профілі, додані розширенням</string>
     <string name="shared_string_turn_off">Вимкнути</string>
@@ -4304,4 +4304,13 @@
     <string name="pro_features">Можливості Pro</string>
     <string name="purchases_restored">Покупки відновлено</string>
     <string name="grey_color_undefined">Сірим кольором позначено складники без даних.</string>
+    <string name="no_activity_for_intent">Не знайдено відповідних застосунків для виконання цієї дії</string>
+    <string name="osm_live_payment_subscription_management_amz">Оплата стягується з вашого облікового запису Amazon під час підтвердження покупки.
+\n
+\nПідписка поновлюється, якщо не скасовано до вибраного проміжку поновлення.
+\n
+\nКеруйте або скасовуйте свої підписки в налаштуваннях Amazon будь-коли.</string>
+    <string name="cancel_anytime_in_amazon_app">Скасуйте її будь-коли в застосунку Amazon</string>
+    <string name="amz_manage_subscription_descr">Щоб керувати підпискою, використовуйте застосунок Amazon на пристрої або відкрийте вебсайт Amazon.com під своїм профілем.</string>
+    <string name="empty_category_name">Нема назви категорії</string>
 </resources>

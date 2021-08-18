@@ -37,6 +37,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -515,8 +516,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		OnClickListener shareOnClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					OsmandApplication app = (OsmandApplication) activity.getApplication();
 					RoutingHelper routingHelper = app.getRoutingHelper();
 					final String trackName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
 					final GPXUtilities.GPXFile gpx = routingHelper.generateGPXFileWithRoute(trackName);
@@ -539,10 +541,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, dst));
 						sendIntent.setType("text/plain");
 						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						startActivity(sendIntent);
+						AndroidUtils.startActivityIfSafe(activity, sendIntent);
 					} catch (IOException e) {
-						// Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(),
-						// Toast.LENGTH_LONG).show();
 					}
 				}
 			}
@@ -560,24 +560,27 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	void print() {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
-		final RoutingHelper routingHelper = app.getRoutingHelper();
-		File file = generateRouteInfoHtml(routingHelper.getRouteDirections(), routingHelper.getGeneralRouteInformation());
-		if (file != null && file.exists()) {
-			Uri uri = AndroidUtils.getUriForFile(app, file);
-			Intent browserIntent;
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) { // use Android Print Framework
-				browserIntent = new Intent(getActivity(), PrintDialogActivity.class)
-						.setDataAndType(uri, "text/html");
-			} else { // just open html document
-				browserIntent = new Intent(Intent.ACTION_VIEW).setDataAndType(
-						uri, "text/html");
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			OsmandApplication app = (OsmandApplication) activity.getApplication();
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			File file = generateRouteInfoHtml(routingHelper.getRouteDirections(), routingHelper.getGeneralRouteInformation());
+			if (file != null && file.exists()) {
+				Uri uri = AndroidUtils.getUriForFile(app, file);
+				Intent intent;
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+					// Use Android Print Framework
+					intent = new Intent(getActivity(), PrintDialogActivity.class)
+							.setDataAndType(uri, "text/html")
+							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				} else {
+					// Just open html document
+					intent = new Intent(Intent.ACTION_VIEW)
+							.setDataAndType(uri, "text/html")
+							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				}
+				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
-			browserIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			startActivity(browserIntent);
 		}
 	}
 

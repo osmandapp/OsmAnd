@@ -708,7 +708,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (mapViewTrackingUtilities.isMapLinkedToLocation()) {
 				prevActivityIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 			}
-			startActivity(prevActivityIntent);
+			AndroidUtils.startActivityIfSafe(this, prevActivityIntent);
 			prevActivityIntent = null;
 			return true;
 		}
@@ -1113,9 +1113,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				//check if we got the PackageManager
 				if (pm != null) {
 					//create the intent with the default start activity for your application
-					Intent mStartActivity = pm.getLaunchIntentForPackage(
-							c.getPackageName()
-					);
+					Intent mStartActivity = pm.getLaunchIntentForPackage(c.getPackageName());
 					if (mStartActivity != null) {
 						mStartActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 						//create a pending intent so the application is restarted after System.exit(0) was called.
@@ -1666,7 +1664,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				newIntent.putExtra(INTENT_PARAMS, intentParams);
 				newIntent.putExtras(intentParams);
 			}
-			activity.startActivity(newIntent);
+			AndroidUtils.startActivityIfSafe(activity, newIntent);
 		}
 	}
 

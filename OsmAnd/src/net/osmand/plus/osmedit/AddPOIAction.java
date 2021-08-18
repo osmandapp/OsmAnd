@@ -1,5 +1,8 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
+import static net.osmand.plus.osmedit.AdvancedEditPoiFragment.addPoiToStringSet;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -56,9 +59,6 @@ import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.osmedit.AdvancedEditPoiFragment.addPoiToStringSet;
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class AddPOIAction extends QuickAction {
 
@@ -335,12 +335,10 @@ public class AddPOIAction extends QuickAction {
 
 		ImageButton onlineDocumentationButton =
 				(ImageButton) view.findViewById(R.id.onlineDocumentationButton);
-		onlineDocumentationButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW,
-						Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features")));
-			}
+		onlineDocumentationButton.setOnClickListener(v -> {
+			Uri uri = Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features");
+			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+			AndroidUtils.startActivityIfSafe(activity, intent);
 		});
 
 		final int colorId = isLightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
