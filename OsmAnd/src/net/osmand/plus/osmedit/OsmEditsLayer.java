@@ -287,12 +287,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 
 	@Override
 	public int getTextShift(OpenstreetmapPoint o, RotatedTileBox rb) {
-		int radiusPoi = getRadiusPoi(rb);
-		if (isPresentInFullObjects(o.getLocation())) {
-			radiusPoi += (app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size)
-					- app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_size_small)) / 2;
-		}
-		return radiusPoi;
+		return (int) (16 * rb.getDensity());
 	}
 
 	@Override
