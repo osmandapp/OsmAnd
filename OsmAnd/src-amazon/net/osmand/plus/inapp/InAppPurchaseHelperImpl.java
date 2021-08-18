@@ -8,10 +8,15 @@ import androidx.annotation.Nullable;
 
 import com.amazon.device.iap.PurchasingService;
 import com.amazon.device.iap.model.Product;
+import com.amazon.device.iap.model.ProductType;
 import com.amazon.device.iap.model.PurchaseResponse;
 import com.amazon.device.iap.model.Receipt;
 import com.amazon.device.iap.model.UserData;
 
+import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidNetworkUtils.OnSendRequestsListener;
+import net.osmand.AndroidNetworkUtils.Request;
+import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -31,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -47,6 +53,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	private UserIapData userData;
 	private Map<String, Product> productMap;
 	private List<Receipt> receipts = new ArrayList<>();
+	private Map<String, Receipt> subscriptionReceiptMap = new HashMap<>();
 
 	public InAppPurchaseHelperImpl(OsmandApplication ctx) {
 		super(ctx);
@@ -133,10 +140,10 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	// Call when a purchase is finished
-	private void onPurchaseFinished(@NonNull PurchaseResponse response) {
+	private void onPurchaseFinished(@NonNull String sku, @NonNull PurchaseResponse response) {
 		Receipt receipt = response.getReceipt();
 		logDebug("Purchase finished: " + receipt.getSku());
-		PurchaseInfo info = getPurchaseInfo(receipt);
+		PurchaseInfo info = getPurchaseInfo(sku, receipt);
 		UserData userData = response.getUserData();
 		if (userData != null) {
 			info.setPurchaseToken(userData.getUserId());
@@ -159,23 +166,18 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
 	@Nullable
 	private Receipt getReceipt(@NonNull String productId) {
-		for (Receipt receipt : receipts) {
-			if (receipt.getSku().equals(productId)) {
-				return receipt;
-			}
-		}
-		return null;
+		return subscriptionReceiptMap.get(productId);
 	}
 
-	private PurchaseInfo getPurchaseInfo(Receipt receipt) {
-		return new PurchaseInfo(receipt.getSku(), receipt.getReceiptId(), getUserId(),
+	private PurchaseInfo getPurchaseInfo(String sku, Receipt receipt) {
+		return new PurchaseInfo(sku, receipt.getReceiptId(), getUserId(),
 				receipt.getPurchaseDate().getTime(), 0, true, !receipt.isCanceled());
 	}
 
 	private void fetchInAppPurchase(@NonNull InAppPurchase inAppPurchase, @NonNull Product product, @Nullable Receipt receipt) {
 		if (receipt != null) {
 			inAppPurchase.setPurchaseState(InAppPurchase.PurchaseState.PURCHASED);
-			inAppPurchase.setPurchaseInfo(ctx, getPurchaseInfo(receipt));
+			inAppPurchase.setPurchaseInfo(ctx, getPurchaseInfo(product.getSku(), receipt));
 		} else {
 			inAppPurchase.setPurchaseState(InAppPurchase.PurchaseState.NOT_PURCHASED);
 			inAppPurchase.restorePurchaseInfo(ctx);
@@ -205,6 +207,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		}
 		if (inAppPurchase instanceof InAppSubscription) {
 			InAppSubscription s = (InAppSubscription) inAppPurchase;
+			s.restoreState(ctx);
+			s.restoreExpireTime(ctx);
+			SubscriptionStateHolder stateHolder = subscriptionStateMap.get(s.getSku());
+			if (stateHolder != null) {
+				s.setState(ctx, stateHolder.state);
+				s.setExpireTime(ctx, stateHolder.expireTime);
+			}
 			String subscriptionPeriod = null;
 			if (product.getSku().contains(".annual")) {
 				subscriptionPeriod = "P1Y";
@@ -236,7 +245,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						logDebug("getPurchaseUpdates");
 						PurchasingService.getPurchaseUpdates(true);
 					} else {
-						obtainInAppsInfo(null);
+						obtainInAppsInfo();
 					}
 				}
 
@@ -255,11 +264,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					}
 					InAppPurchaseHelperImpl.this.receipts = receipts;
 					if (!hasMore) {
-						List<String> skus = new ArrayList<>();
-						for (Receipt receipt : receipts) {
-							skus.add(receipt.getSku());
-						}
-						obtainInAppsInfo(skus);
+						obtainInAppsInfo();
 					}
 				}
 
@@ -286,10 +291,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					 * the developer payload to see if it's correct!
 					 */
 
-					List<String> allOwnedSubscriptionSkus = new ArrayList<>();
-					for (Receipt receipt : receipts) {
-						allOwnedSubscriptionSkus.add(receipt.getSku());
-					}
+					List<String> allOwnedSubscriptionSkus = new ArrayList<>(subscriptionStateMap.keySet());
 					for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 						if (hasDetails(s.getSku())) {
 							Receipt receipt = getReceipt(s.getSku());
@@ -327,12 +329,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					boolean subscribedToLiveUpdates = false;
 					boolean subscribedToOsmAndPro = false;
 					boolean subscribedToMaps = false;
-					List<Receipt> subscriptionPurchases = new ArrayList<>();
+					Map<String, Receipt> subscriptionPurchases = new HashMap<>();
 					for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 						Receipt receipt = getReceipt(s.getSku());
 						if (receipt != null || s.getState().isActive()) {
 							if (receipt != null) {
-								subscriptionPurchases.add(receipt);
+								subscriptionPurchases.put(s.getSku(), receipt);
 							}
 							if (!subscribedToLiveUpdates && purchases.isLiveUpdatesSubscription(s)) {
 								subscribedToLiveUpdates = true;
@@ -372,18 +374,19 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					OsmandSettings settings = ctx.getSettings();
 					settings.INAPPS_READ.set(true);
 
-					List<Receipt> tokensToSend = new ArrayList<>();
+					Map<String, Receipt> tokensToSend = new HashMap<>();
 					if (subscriptionPurchases.size() > 0) {
 						List<String> tokensSent = Arrays.asList(settings.BILLING_PURCHASE_TOKENS_SENT.get().split(";"));
-						for (Receipt receipt : subscriptionPurchases) {
-							if (!tokensSent.contains(receipt.getSku())) {
-								tokensToSend.add(receipt);
+						for (Entry<String, Receipt> receiptEntry : subscriptionPurchases.entrySet()) {
+							String sku = receiptEntry.getKey();
+							if (!tokensSent.contains(sku)) {
+								tokensToSend.put(sku, receiptEntry.getValue());
 							}
 						}
 					}
 					List<PurchaseInfo> purchaseInfoList = new ArrayList<>();
-					for (Receipt receipt : tokensToSend) {
-						purchaseInfoList.add(getPurchaseInfo(receipt));
+					for (Entry<String, Receipt> receiptEntry : tokensToSend.entrySet()) {
+						purchaseInfoList.add(getPurchaseInfo(receiptEntry.getKey(), receiptEntry.getValue()));
 					}
 					onSkuDetailsResponseDone(purchaseInfoList, userRequested);
 				}
@@ -412,6 +415,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 		@Override
 		public void run(InAppPurchaseHelper helper) {
 			logDebug("Setup successful. Querying inventory.");
+			InAppPurchaseHelperImpl.this.receipts = new ArrayList<>();
 			try {
 				logDebug("getUserData");
 				PurchasingService.getUserData();
@@ -423,16 +427,76 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			}
 		}
 
-		private void obtainInAppsInfo(@Nullable List<String> skus) {
+		private void obtainInAppsInfo() {
 			if (uiActivity != null) {
 				Set<String> productIds = new HashSet<>();
-				for (InAppPurchase purchase : getInAppPurchases().getAllInAppPurchases(true)) {
-					productIds.add(purchase.getSku());
+				List<Receipt> receipts = InAppPurchaseHelperImpl.this.receipts;
+				Map<String, SubscriptionStateHolder> subscriptionStateMap = new HashMap<>();
+				Map<String, Receipt> subscriptionReceiptMap = new HashMap<>();
+				boolean requested = false;
+				if (!Algorithms.isEmpty(receipts)) {
+					String url = "https://osmand.net/api/subscriptions/get";
+					String userOperation = "Requesting subscription state...";
+					List<Request> requests = new ArrayList<>();
+					for (Receipt receipt : receipts) {
+						if (receipt.getProductType() == ProductType.SUBSCRIPTION) {
+							productIds.add(receipt.getSku());
+							Map<String, String> parameters = new HashMap<>();
+							parameters.put("androidPackage", ctx.getPackageName());
+							addUserInfo(parameters);
+							parameters.put("orderId", receipt.getReceiptId());
+							requests.add(new Request(url, parameters, userOperation, false, false));
+						}
+					}
+					if (!Algorithms.isEmpty(requests)) {
+						requested = true;
+						AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnSendRequestsListener() {
+							@Override
+							public void onRequestSending(@NonNull Request request) {
+							}
+
+							@Override
+							public void onRequestSent(@NonNull RequestResponse response) {
+							}
+
+							@Override
+							public void onRequestsSent(@NonNull List<RequestResponse> results) {
+								for (RequestResponse response : results) {
+									String subscriptionStateStr = response.getResponse();
+									if (!Algorithms.isEmpty(subscriptionStateStr)) {
+										Map<String, SubscriptionStateHolder> subscriptionState = parseSubscriptionStates(subscriptionStateStr);
+										if (!subscriptionState.isEmpty()) {
+											Entry<String, SubscriptionStateHolder> subStateEntry = subscriptionState.entrySet().iterator().next();
+											String sku = subStateEntry.getKey();
+											SubscriptionStateHolder state = subStateEntry.getValue();
+											subscriptionStateMap.put(sku, state);
+											String receiptId = response.getRequest().getParameters().get("orderId");
+											for (Receipt receipt : receipts) {
+												if (receipt.getReceiptId().equals(receiptId)) {
+													subscriptionReceiptMap.put(sku, receipt);
+													break;
+												}
+											}
+											productIds.add(sku);
+										}
+									}
+								}
+								InAppPurchaseHelperImpl.this.subscriptionStateMap = subscriptionStateMap;
+								InAppPurchaseHelperImpl.this.subscriptionReceiptMap = subscriptionReceiptMap;
+								for (InAppPurchase purchase : getInAppPurchases().getAllInAppPurchases(true)) {
+									productIds.add(purchase.getSku());
+								}
+								PurchasingService.getProductData(productIds);
+							}
+						});
+					}
 				}
-				if (skus != null) {
-					productIds.addAll(skus);
+				if (!requested) {
+					for (InAppPurchase purchase : getInAppPurchases().getAllInAppPurchases(true)) {
+						productIds.add(purchase.getSku());
+					}
+					PurchasingService.getProductData(productIds);
 				}
-				PurchasingService.getProductData(productIds);
 			} else {
 				commandDone();
 			}
@@ -467,7 +531,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 					if (response != null) {
 						Activity a = activity.get();
 						if (AndroidUtils.isActivityNotDestroyed(a)) {
-							onPurchaseFinished(response);
+							onPurchaseFinished(sku, response);
 						} else {
 							logError("startResolutionForResult on destroyed activity");
 						}
