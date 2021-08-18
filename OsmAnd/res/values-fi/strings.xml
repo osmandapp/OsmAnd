@@ -428,7 +428,7 @@
     <string name="amenity_type_finance">Rahoitus</string>
     <string name="amenity_type_barrier">Este</string>
     <string name="amenity_type_education">Koulutus</string>
-    <string name="amenity_type_emergency">Ensiapu</string>
+    <string name="amenity_type_emergency">Hätäpalvelu</string>
     <string name="amenity_type_entertainment">Viihde</string>
     <string name="amenity_type_geocache">Geokätkö</string>
     <string name="amenity_type_healthcare">Terveydenhuolto</string>
@@ -892,7 +892,7 @@
     <string name="access_hint_enter_name">Anna nimi</string>
     <string name="access_hint_enter_category">Anna luokka</string>
     <string name="access_hint_enter_description">Syötä kuvaus.</string>
-    <string name="access_map_linked_to_location">Kartta linkitetty sijaintiin</string>
+    <string name="access_map_linked_to_location">Sijaintiin yhdistetty kartta</string>
     <string name="access_shared_string_not_installed">Ei asennettu</string>
     <string name="access_widget_expand">Laajenna</string>
     <string name="access_shared_string_navigate_up">Navigointi ylös</string>
@@ -3625,7 +3625,7 @@
     <string name="rendering_attr_highway_class_track_grade2_name">Luokka 2</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Mäkinen</string>
     <string name="rendering_attr_surface_ground_name">Maa</string>
-    <string name="rendering_attr_piste_type_skitour_name">Hiihtoretki</string>
+    <string name="rendering_attr_piste_type_skitour_name">Hiihtomatkailu</string>
     <string name="rendering_attr_surface_dirt_name">Lika</string>
     <string name="routing_attr_piste_type_skitour_name">Hiihtomatkailu</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Luokka 1</string>
@@ -3859,4 +3859,11 @@
     <string name="cancel_anytime_in_amazon_app">Keskeytä se koska vain Amazon sovelluksessa</string>
     <string name="empty_category_name">Tyhjä kategorian nimi</string>
     <string name="no_activity_for_intent">Tarvittavaa sovellusta ei löytynyt</string>
+    <string name="indexing_transport">Indeksoidaan liikennettä…</string>
+    <string name="increase_search_radius_to">Laajenna hakusädettä %1$s:iin</string>
+    <string name="powered_by_osmand">Käyttäen OsmAndia</string>
+    <string name="exit_at">Poistu kohdalla</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Maastopuisto</string>
+    <string name="nearest_point">Lähin piste</string>
+    <string name="output">Lähtö</string>
 </resources>
