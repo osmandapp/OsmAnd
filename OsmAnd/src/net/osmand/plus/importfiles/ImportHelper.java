@@ -364,37 +364,37 @@ public class ImportHelper {
 		}
 		final OsmandApplication app = mapActivity.getMyApplication();
 		Intent intent = ImportHelper.getImportTrackIntent();
+		if (!AndroidUtils.isIntentSafe(app, intent)) {
+			app.showToastMessage(R.string.no_activity_for_intent);
+			return;
+		}
 
-		ActivityResultListener listener = new ActivityResultListener(IMPORT_FILE_REQUEST, new ActivityResultListener.OnActivityResultListener() {
-			@Override
-			public void onResult(int resultCode, Intent resultData) {
-				MapActivity mapActivity = getMapActivity();
-				if (resultCode == RESULT_OK) {
-					Uri data = resultData.getData();
-					if (mapActivity == null || data == null) {
-						return;
+		ActivityResultListener listener = new ActivityResultListener(IMPORT_FILE_REQUEST, (resultCode, resultData) -> {
+			if (resultCode == RESULT_OK) {
+				Uri data = resultData.getData();
+				if (data == null) {
+					return;
+				}
+				String scheme = data.getScheme();
+				String fileName = "";
+				if ("file".equals(scheme)) {
+					final String path = data.getPath();
+					if (path != null) {
+						fileName = new File(path).getName();
 					}
-					String scheme = data.getScheme();
-					String fileName = "";
-					if ("file".equals(scheme)) {
-						final String path = data.getPath();
-						if (path != null) {
-							fileName = new File(path).getName();
-						}
-					} else if ("content".equals(scheme)) {
-						fileName = getNameFromContentUri(app, data);
-					}
+				} else if ("content".equals(scheme)) {
+					fileName = getNameFromContentUri(app, data);
+				}
 
-					if (fileName.endsWith(importType.getExtension())) {
-						if (importType.equals(ImportType.SETTINGS)) {
-							handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), callback);
-						} else if (importType.equals(ImportType.ROUTING)) {
-							handleXmlFileImport(data, fileName, callback);
-						}
-					} else {
-						app.showToastMessage(app.getString(R.string.not_support_file_type_with_ext,
-								importType.getExtension().replaceAll("\\.", "").toUpperCase()));
+				if (fileName.endsWith(importType.getExtension())) {
+					if (importType.equals(ImportType.SETTINGS)) {
+						handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), callback);
+					} else if (importType.equals(ImportType.ROUTING)) {
+						handleXmlFileImport(data, fileName, callback);
 					}
+				} else {
+					app.showToastMessage(app.getString(R.string.not_support_file_type_with_ext,
+							importType.getExtension().replaceAll("\\.", "").toUpperCase()));
 				}
 			}
 		});

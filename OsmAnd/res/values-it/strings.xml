@@ -3884,7 +3884,7 @@
 \n
 \n • Creazione del percorso: grafici per parti del percorso, aggiunta anche la possibilità di creare e modificare tracce composte da più segmenti
 \n
-\n • Aggiunto il metodi di autenticazione OAuth per OpenStreetMap, migliorata la UI dei dialoghi OSM
+\n • Aggiunto il metodo di autenticazione OAuth per OpenStreetMap, migliorata la UI dei dialoghi OSM
 \n
 \n • Supporto alla personalizzazione dei colori per i preferiti e i punti intermedi delle tracce
 \n
@@ -4190,7 +4190,7 @@
     <string name="backup_error_no_valid_subscription">Nessuna valida sottoscrizione presente</string>
     <string name="contour_lines_hillshades_slope">Isoipse, ombreggiamento dei rilievi, pendenze</string>
     <string name="release_4_0">• Backup Cloud
-\n • Aggiunto la modalità notte per lo stile della mappa \"Topo\"
+\n • Aggiunta la modalità notte per lo stile della mappa \"Topo\"
 \n
 \n • Aggiunta l\'opzione per scaricare le linee isoipse in piedi
 \n
@@ -4204,7 +4204,7 @@
 \n
 \n • Nuova schermata \"Acquisti\" con informazioni dettagliate sugli acquisti
 \n
-\n • Aggiunto l\'opzione per cambiare l\'aspetto della linea del percorso
+\n • Aggiunta l\'opzione per cambiare l\'aspetto della linea del percorso
 \n
 \n • OsmAnd Live spostato in \"Scarica mappe &gt; Aggiornamenti\"
 \n

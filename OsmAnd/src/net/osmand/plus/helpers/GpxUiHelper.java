@@ -897,12 +897,15 @@ public class GpxUiHelper {
 				importHelper.handleGpxImport(uri, null, false);
 			};
 
-			ActivityResultListener listener =
-					new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, onActivityResultListener);
 			Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 			intent.setType("*/*");
-			mapActivity.registerActivityResultListener(listener);
-			activity.startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
+			if (AndroidUtils.isIntentSafe(mapActivity, intent)) {
+				ActivityResultListener listener = new ActivityResultListener(OPEN_GPX_DOCUMENT_REQUEST, onActivityResultListener);
+				mapActivity.registerActivityResultListener(listener);
+				mapActivity.startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
+			} else {
+				mapActivity.getMyApplication().showToastMessage(R.string.no_activity_for_intent);
+			}
 		}
 	}
 
@@ -2398,9 +2401,7 @@ public class GpxUiHelper {
 		if (context instanceof OsmandApplication) {
 			sendIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		}
-		if (AndroidUtils.isIntentSafe(context, sendIntent)) {
-			context.startActivity(sendIntent);
-		}
+		AndroidUtils.startActivityIfSafe(context, sendIntent);
 	}
 
 	@NonNull

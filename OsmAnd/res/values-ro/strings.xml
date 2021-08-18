@@ -1454,7 +1454,7 @@
     <string name="si_min_m">Minute pe milă</string>
     <string name="si_nm_h">Mile marine pe oră (noduri)</string>
     <string name="nm_h">kn</string>
-    <string name="nm">nmi</string>
+    <string name="nm">nmi ( nautic miles)</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
@@ -4310,4 +4310,14 @@
     <string name="gpx_monitoring_start">Reluarea înregistrării călătoriei</string>
     <string name="pro_features">Caracteristici Pro</string>
     <string name="purchases_restored">Achiziții restaurate</string>
+    <string name="grey_color_undefined">Culoarea gri este utilizată pentru piesele fără date.</string>
+    <string name="osm_live_payment_subscription_management_amz">Plata este debitată din contul dvs. Amazon la confirmarea achiziției.
+\n
+\nSe reînnoiește dacă nu este anulat înainte de perioada de reînnoire selectată.
+\n
+\nGestionați sau anulați abonamentele din setările Amazon în orice moment.</string>
+    <string name="cancel_anytime_in_amazon_app">Anulați-o oricând în aplicația Amazon</string>
+    <string name="amz_manage_subscription_descr">Pentru a vă gestiona abonamentul, utilizați aplicația Amazon de pe dispozitiv sau deschideți site-ul web Amazon.com la profilul dvs.</string>
+    <string name="empty_category_name">Numele categoriei este gol</string>
+    <string name="no_activity_for_intent">Nu au fost găsite aplicații adecvate pentru a efectua această acțiune</string>
 </resources>

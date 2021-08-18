@@ -1,7 +1,6 @@
 package net.osmand.plus.helpers;
 
 import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,11 +14,8 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-
 import net.osmand.AndroidNetworkUtils;
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
@@ -30,6 +26,8 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.MapsPlusPlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
@@ -57,6 +55,10 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+
 public class DiscountHelper {
 
 	private static final String TAG = "DiscountHelper";
@@ -75,7 +77,6 @@ public class DiscountHelper {
 
 	private static final String SHOW_CHOOSE_PLAN_PREFIX = "show-choose-plan:";
 	private static final String CHOOSE_PLAN_TYPE_FREE = "free-version";
-	private static final String CHOOSE_PLAN_TYPE_LIVE = "osmand-live";
 	private static final String CHOOSE_PLAN_TYPE_SEA_DEPTH = "sea-depth";
 	private static final String CHOOSE_PLAN_TYPE_HILLSHADE = "hillshade";
 	private static final String CHOOSE_PLAN_TYPE_WIKIPEDIA = "wikipedia";
@@ -275,26 +276,20 @@ public class DiscountHelper {
 			toolbarController.setTextBtnTitleClrs(data.textBtnTitleColor, data.textBtnTitleColor);
 		}
 		if (!Algorithms.isEmpty(data.url)) {
-			View.OnClickListener clickListener = new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mapActivity.getMyApplication().logEvent("motd_click");
-					mBannerVisible = false;
-					mapActivity.hideTopToolbar(toolbarController);
-					openUrl(mapActivity, data.url);
-				}
+			View.OnClickListener clickListener = v -> {
+				mapActivity.getMyApplication().logEvent("motd_click");
+				mBannerVisible = false;
+				mapActivity.hideTopToolbar(toolbarController);
+				openUrl(mapActivity, data.url);
 			};
 			toolbarController.setOnBackButtonClickListener(clickListener);
 			toolbarController.setOnTitleClickListener(clickListener);
 			toolbarController.setOnTextBtnClickListener(clickListener);
 		}
-		toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.getMyApplication().logEvent("motd_close");
-				mBannerVisible = false;
-				mapActivity.hideTopToolbar(toolbarController);
-			}
+		toolbarController.setOnCloseButtonClickListener(v -> {
+			mapActivity.getMyApplication().logEvent("motd_close");
+			mBannerVisible = false;
+			mapActivity.hideTopToolbar(toolbarController);
 		});
 
 		mData = data;
@@ -304,12 +299,7 @@ public class DiscountHelper {
 	}
 
 	private static void showPoiFilter(final MapActivity mapActivity, final PoiUIFilter poiFilter) {
-		QuickSearchHelper.showPoiFilterOnMap(mapActivity, poiFilter, new Runnable() {
-			@Override
-			public void run() {
-				mFilterVisible = false;
-			}
-		});
+		QuickSearchHelper.showPoiFilterOnMap(mapActivity, poiFilter, () -> mFilterVisible = false);
 		mFilter = poiFilter;
 		mFilterVisible = true;
 	}
@@ -319,7 +309,8 @@ public class DiscountHelper {
 			OsmandApplication app = mapActivity.getMyApplication();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
 			if (purchaseHelper != null) {
-				if (url.contains(purchaseHelper.getFullVersion().getSku())) {
+				InAppPurchase fullVersion = purchaseHelper.getFullVersion();
+				if (fullVersion != null && url.contains(fullVersion.getSku())) {
 					app.logEvent("in_app_purchase_redirect");
 					try {
 						purchaseHelper.purchaseFullVersion(mapActivity);
@@ -384,7 +375,7 @@ public class DiscountHelper {
 		} else {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
-			mapActivity.startActivity(intent);
+			AndroidUtils.startActivityIfSafe(mapActivity, intent);
 		}
 	}
 
@@ -460,11 +451,7 @@ public class DiscountHelper {
 			successful = false;
 		}
 		if (successful) {
-			try {
-				context.startActivity(intent);
-			} catch (ActivityNotFoundException e) {
-				// ignore
-			}
+			AndroidUtils.startActivityIfSafe(context, intent);
 		}
 	}
 
@@ -693,7 +680,7 @@ public class DiscountHelper {
 	private static class Conditions {
 
 		protected OsmandApplication app;
-		private Condition[] conditions;
+		private final Condition[] conditions;
 
 		Conditions(OsmandApplication app) {
 			this.app = app;

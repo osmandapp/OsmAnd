@@ -148,26 +148,20 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		});
 		Button getButton = mainView.findViewById(R.id.plugin_get);
 		getButton.setText(plugin.isPaid() ? R.string.get_plugin : R.string.shared_string_install);
-		getButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+		getButton.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
 				OsmAndFeature feature = null;
 				if (plugin instanceof SRTMPlugin) {
 					feature = OsmAndFeature.TERRAIN;
 				} else if (plugin instanceof WikipediaPlugin) {
 					feature = OsmAndFeature.WIKIPEDIA;
 				} else {
-					FragmentActivity activity = getActivity();
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
-					if (activity != null && AndroidUtils.isIntentSafe(activity, intent)) {
-						startActivity(intent);
-					}
+					AndroidUtils.startActivityIfSafe(activity, intent);
 				}
 				if (feature != null) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						ChoosePlanFragment.showInstance(activity, feature);
-					}
+					ChoosePlanFragment.showInstance(activity, feature);
 				}
 			}
 		});

@@ -3300,7 +3300,7 @@
     <string name="suggested_maps_descr">Estes mapas são necessários para a extensão.</string>
     <string name="added_profiles">Perfis adicionados</string>
     <string name="added_profiles_descr">Perfis adicionados pela extensão</string>
-    <string name="shared_string_turn_off">Desligar</string>
+    <string name="shared_string_turn_off">Desativar</string>
     <string name="new_plugin_added">Nova extensão adicionada</string>
     <string name="join_segments">Unir segmentos</string>
     <string name="choose_icon_color_name">Ícone, cor e nome</string>
@@ -4309,4 +4309,14 @@
     <string name="option_available_only_in_osmand_pro">A opção está disponível na subscrição do OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Obtenha acesso às funcionalidades OsmAnd Pro: coloração de rotas e mais.</string>
     <string name="purchases_restored">Compras restauradas</string>
+    <string name="grey_color_undefined">A cor cinzenta é usada nas partes sem dados.</string>
+    <string name="osm_live_payment_subscription_management_amz">O pagamento é cobrado da sua conta Amazon ao confirmar a compra.
+\n
+\nEste é renovado a não ser que seja cancelado antes do período de renovação selecionado.
+\n
+\nFaça a gestão ou cancele as suas subscrições nas configurações da Amazon a qualquer momento.</string>
+    <string name="cancel_anytime_in_amazon_app">Cancele a qualquer momento na App Amazon</string>
+    <string name="amz_manage_subscription_descr">Para gerir a sua subscrição, use a App Amazon no dispositivo ou abra o site Amazon.com no seu perfil.</string>
+    <string name="empty_category_name">Nome de categoria vazio</string>
+    <string name="no_activity_for_intent">Não foi encontrada nenhuma aplicação adequada para executar esta ação</string>
 </resources>

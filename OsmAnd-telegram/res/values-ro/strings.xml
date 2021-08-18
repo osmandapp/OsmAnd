@@ -152,10 +152,10 @@
     <string name="mile_per_hour">mph</string>
     <string name="km_h">km/h</string>
     <string name="m_s">m/s</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">nmi/h ( nautic miles/oră)</string>
     <string name="min_km">min/km</string>
     <string name="min_mile">min/m</string>
-    <string name="nm">nmi</string>
+    <string name="nm">nmi ( nautic miles)</string>
     <string name="m">m</string>
     <string name="km">km</string>
     <string name="mile">mi</string>
@@ -176,8 +176,8 @@
     <string name="osmand_service_descr">OsmAnd Tracker rulează pe fundal cu ecranul închis.</string>
     <string name="osmand_service">Modul fundal</string>
     <string name="location_service_no_gps_available">Selectați unul dintre furnizorii de locație pentru a vă partaja locația.</string>
-    <string name="gps_not_available">Vă rugăm să activați \"Locația\" în setările sistemului.</string>
-    <string name="no_location_permission">Aplicația este lipsită de permisiune pentru accesarea datelor de localizare.</string>
+    <string name="gps_not_available">Vă rugăm să activați \"Locația\" în setările sistemului</string>
+    <string name="no_location_permission">App fără permisiune pentru accesarea datelor de localizare.</string>
     <string name="shared_string_settings">Setări</string>
     <string name="shared_string_cancel">Anulează</string>
     <string name="shared_string_continue">Continuă</string>

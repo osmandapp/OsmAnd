@@ -251,7 +251,8 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			Toast.makeText(activity.getApplicationContext(),
 					activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
 		} else {
-			activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
+			AndroidUtils.startActivityIfSafe(activity, intent);
 		}
 	}
 
@@ -262,7 +263,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			url += "&sku=" + sku;
 		}
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-		ctx.startActivity(intent);
+		AndroidUtils.isIntentSafe(ctx, intent);
 	}
 
 	@Nullable
@@ -417,6 +418,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 				// Do we have the live updates?
 				boolean subscribedToLiveUpdates = false;
 				boolean subscribedToOsmAndPro = false;
+				boolean subscribedToMaps = false;
 				List<Purchase> subscriptionPurchases = new ArrayList<>();
 				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
 					Purchase purchase = getPurchase(s.getSku());
@@ -430,27 +432,34 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 						if (!subscribedToOsmAndPro && purchases.isOsmAndProSubscription(s)) {
 							subscribedToOsmAndPro = true;
 						}
+						if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
+							subscribedToMaps = true;
+						}
 					}
 				}
 				if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
 					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
-					if (!subscribedToOsmAndPro) {
-						onSubscriptionExpired();
-					}
 				} else if (subscribedToLiveUpdates) {
 					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 				}
 				if (!subscribedToOsmAndPro && ctx.getSettings().OSMAND_PRO_PURCHASED.get()) {
 					ctx.getSettings().OSMAND_PRO_PURCHASED.set(false);
-					if (!subscribedToLiveUpdates) {
-						onSubscriptionExpired();
-					}
 				} else if (subscribedToOsmAndPro) {
 					ctx.getSettings().OSMAND_PRO_PURCHASED.set(true);
+				}
+				if (!subscribedToMaps && ctx.getSettings().OSMAND_MAPS_PURCHASED.get()) {
+					ctx.getSettings().OSMAND_MAPS_PURCHASED.set(false);
+				} else if (subscribedToMaps) {
+					ctx.getSettings().OSMAND_MAPS_PURCHASED.set(true);
+				}
+				if (!subscribedToLiveUpdates && !subscribedToOsmAndPro && !subscribedToMaps) {
+					onSubscriptionExpired();
 				}
 
 				lastValidationCheckTime = System.currentTimeMillis();
 				logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE") + " live updates purchased.");
+				logDebug("User " + (subscribedToOsmAndPro ? "HAS" : "DOES NOT HAVE") + " OsmAnd Pro purchased.");
+				logDebug("User " + (subscribedToMaps ? "HAS" : "DOES NOT HAVE") + " Maps purchased.");
 
 				OsmandSettings settings = ctx.getSettings();
 				settings.INAPPS_READ.set(true);

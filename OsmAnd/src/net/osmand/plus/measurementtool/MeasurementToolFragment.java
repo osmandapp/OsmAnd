@@ -1907,7 +1907,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (mapActivity != null && measurementLayer != null) {
 			measurementLayer.setInMeasurementMode(true);
-			mapActivity.refreshMap();
+			measurementLayer.refreshMap();
 			mapActivity.disableDrawer();
 
 			mainView.getViewTreeObserver().addOnGlobalLayoutListener(getWidgetsLayoutListener());

@@ -275,20 +275,11 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, @NonNull OsmAndFeature selectedFeature) {
-		OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
-		if (Version.isAmazon() && selectedFeature != OsmAndFeature.OSMAND_CLOUD) {
-			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			if (AndroidUtils.isIntentSafe(app, intent)) {
-				app.startActivity(intent);
-			}
-		} else {
-			FragmentManager fm = activity.getSupportFragmentManager();
-			if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
-				ChoosePlanFragment fragment = new ChoosePlanFragment();
-				fragment.selectedFeature = selectedFeature;
-				fragment.show(activity.getSupportFragmentManager(), TAG);
-			}
+		FragmentManager fm = activity.getSupportFragmentManager();
+		if (!fm.isStateSaved() && fm.findFragmentByTag(TAG) == null) {
+			ChoosePlanFragment fragment = new ChoosePlanFragment();
+			fragment.selectedFeature = selectedFeature;
+			fragment.show(activity.getSupportFragmentManager(), TAG);
 		}
 	}
 

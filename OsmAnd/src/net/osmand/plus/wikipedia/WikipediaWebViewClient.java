@@ -41,10 +41,8 @@ public class WikipediaWebViewClient extends WebViewClient {
 		} else if (url.startsWith(PAGE_PREFIX_HTTP) || url.startsWith(PAGE_PREFIX_HTTPS)) {
 			WikiArticleHelper.warnAboutExternalLoad(url, context, nightMode);
 		} else {
-			Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-			if (AndroidUtils.isIntentSafe(context, i)) {
-				context.startActivity(i);
-			}
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+			AndroidUtils.startActivityIfSafe(context, intent);
 		}
 		return true;
 	}

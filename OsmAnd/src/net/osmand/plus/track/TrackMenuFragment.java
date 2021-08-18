@@ -1403,7 +1403,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		openTrack(context, file, prevIntentParams, null);
 	}
 
-	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams, @Nullable String returnScreenName) {
+	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams,
+	                             @Nullable String returnScreenName) {
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {

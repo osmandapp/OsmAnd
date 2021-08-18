@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.jwetherell.openmap.common.LatLonPoint;
@@ -37,6 +38,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class NavigatePointFragment extends Fragment implements SearchActivityChild {
+
 	int currentFormat = Location.FORMAT_DEGREES;
 	
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
@@ -56,7 +58,7 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		location = null;
 		app = (OsmandApplication) getActivity().getApplication();
 		Intent intent = getActivity().getIntent();
-		if(intent != null){
+		if (intent != null){
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if(lat != 0 || lon != 0){
@@ -71,11 +73,12 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 		}
 		currentFormat = app.getSettings().COORDINATES_FORMAT.get();
 		initUI(location.getLatitude(), location.getLongitude());
-		if(savedInstanceState != null && savedInstanceState.containsKey(SEARCH_LAT) && savedInstanceState.containsKey(SEARCH_LON) &&
-				currentFormat != PointDescription.UTM_FORMAT && currentFormat != PointDescription.MGRS_FORMAT) {
+		if (savedInstanceState != null && savedInstanceState.containsKey(SEARCH_LAT)
+				&& savedInstanceState.containsKey(SEARCH_LON) && currentFormat != PointDescription.UTM_FORMAT
+				&& currentFormat != PointDescription.MGRS_FORMAT) {
 			String lat = savedInstanceState.getString(SEARCH_LAT);
 			String lon = savedInstanceState.getString(SEARCH_LON);
-			if(lat != null && lon != null && lat.length() > 0 && lon.length() > 0) {
+			if (lat != null && lon != null && lat.length() > 0 && lon.length() > 0) {
 				((TextView)view.findViewById(R.id.LatitudeEdit)).setText(lat);
 				((TextView)view.findViewById(R.id.LongitudeEdit)).setText(lon);
 			}
@@ -84,11 +87,11 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	}
 	
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
-		if(view != null) {
-			final TextView latEdit = ((TextView)view.findViewById(R.id.LatitudeEdit));
-			final TextView lonEdit = ((TextView)view.findViewById(R.id.LongitudeEdit));
+		if (view != null) {
+			final TextView latEdit = view.findViewById(R.id.LatitudeEdit);
+			final TextView lonEdit = view.findViewById(R.id.LongitudeEdit);
 			outState.putString(SEARCH_LAT, latEdit.getText().toString());
 			outState.putString(SEARCH_LON, lonEdit.getText().toString());
 		}
@@ -98,7 +101,6 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	@Override
 	public void onCreateOptionsMenu(Menu onCreate, MenuInflater inflater) {
 		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		boolean light = app.getSettings().isLightActionBar();
 		Menu menu = onCreate;
 		if(getActivity() instanceof SearchActivity) {
@@ -140,7 +142,6 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	
 	@Override
 	public void locationUpdate(LatLon l) {
-		//location = l;
 		if (view != null) {
 			if (l != null) {
 				showCurrentFormat(l);
@@ -151,8 +152,8 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 	}
 	
 	protected void showCurrentFormat(LatLon l) {
-		final EditText latEdit = ((EditText)view.findViewById(R.id.LatitudeEdit));
-		final EditText lonEdit = ((EditText)view.findViewById(R.id.LongitudeEdit));
+		final EditText latEdit = view.findViewById(R.id.LatitudeEdit);
+		final EditText lonEdit = view.findViewById(R.id.LongitudeEdit);
 		switch (currentFormat){
 			case PointDescription.UTM_FORMAT: {
 				view.findViewById(R.id.easting_row).setVisibility(View.VISIBLE);
@@ -162,9 +163,9 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 				view.findViewById(R.id.lon_row).setVisibility(View.GONE);
 				view.findViewById(R.id.mgrs_row).setVisibility(View.GONE);
 
-				final EditText northingEdit = ((EditText) view.findViewById(R.id.NorthingEdit));
-				final EditText eastingEdit = ((EditText) view.findViewById(R.id.EastingEdit));
-				final EditText zoneEdit = ((EditText) view.findViewById(R.id.ZoneEdit));
+				final EditText northingEdit = view.findViewById(R.id.NorthingEdit);
+				final EditText eastingEdit = view.findViewById(R.id.EastingEdit);
+				final EditText zoneEdit = view.findViewById(R.id.ZoneEdit);
 				UTMPoint pnt = new UTMPoint(new LatLonPoint(l.getLatitude(), l.getLongitude()));
 				zoneEdit.setText(pnt.zone_number + "" + pnt.zone_letter);
 				northingEdit.setText(((long) pnt.northing) + "");
@@ -264,8 +265,6 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 				}
 				
 			}
-
-		
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
@@ -369,5 +368,4 @@ public class NavigatePointFragment extends Fragment implements SearchActivityChi
 			Log.w(PlatformUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 		}
 	}
-	
 }

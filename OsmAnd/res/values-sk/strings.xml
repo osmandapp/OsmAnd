@@ -4299,4 +4299,14 @@
     <string name="available_until">Dostupné do %1$s</string>
     <string name="enough_contributions_descr">Gratulujeme, vykonali ste dostatok príspevkov do OpenStreetMap a teraz môžete využiť neobmedzené aktualizácie máp v OsmAnd!</string>
     <string name="purchases_restored">Nákupy obnovené</string>
+    <string name="grey_color_undefined">Sivá farba je použitá pre časti bez údajov.</string>
+    <string name="osm_live_payment_subscription_management_amz">Platba je stiahnutá z vášho účtu Amazon pri potvrdení nákupu.
+\n
+\nObnovuje sa automaticky ak nie je zrušená pred zvoleným intervalom predĺženia.
+\n
+\nSpravujte alebo zrušte kedykoľvek vaše predplatné vo vašich nastaveniach Amazon.</string>
+    <string name="cancel_anytime_in_amazon_app">Zrušte kedykoľvek v aplikácii Amazon</string>
+    <string name="amz_manage_subscription_descr">Pre správu vášho predplatného použite aplikáciu Amazon na zariadení, alebo otvorte stránku Amazon.com s vaším profilom.</string>
+    <string name="empty_category_name">Prázdny názov kategórie</string>
+    <string name="no_activity_for_intent">Nenašli sa vhodné aplikácie na vykonanie tejto akcie</string>
 </resources>

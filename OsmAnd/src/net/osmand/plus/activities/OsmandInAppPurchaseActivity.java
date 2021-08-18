@@ -20,6 +20,8 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseInitCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
+import net.osmand.plus.inapp.InAppPurchases;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
@@ -109,11 +111,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 				app.logEvent("paid_version_redirect");
 				Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
-				try {
-					activity.startActivity(intent);
-				} catch (ActivityNotFoundException e) {
-					LOG.error("ActivityNotFoundException", e);
-				}
+				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
 		}
 	}
@@ -200,7 +198,8 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		}
 		onInAppPurchaseItemPurchased(sku);
 		fireInAppPurchaseItemPurchasedOnFragments(fragmentManager, sku, active);
-		if (purchaseHelper != null && purchaseHelper.getFullVersion().getSku().equals(sku)) {
+		InAppPurchase fullVersion = purchaseHelper != null ? purchaseHelper.getFullVersion() : null;
+		if (fullVersion != null && fullVersion.getSku().equals(sku)) {
 			if (!(this instanceof MapActivity)) {
 				finish();
 			}

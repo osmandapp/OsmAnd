@@ -13,9 +13,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.PluginsFragment;
@@ -31,6 +29,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * Created by Denis
@@ -49,19 +50,17 @@ public class DashPluginsFragment extends DashBaseFragment {
 	private List<OsmandPlugin> plugins;
 
 	private View.OnClickListener getListener(final OsmandPlugin plugin) {
-		return new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
+		return view -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
 				if (plugin instanceof SRTMPlugin) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
-					}
+					ChoosePlanFragment.showInstance(activity, OsmAndFeature.TERRAIN);
 				} else {
-					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
+					AndroidUtils.startActivityIfSafe(activity, intent);
 				}
-				closeDashboard();
 			}
+			closeDashboard();
 		};
 	}
 
