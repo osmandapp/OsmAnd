@@ -3137,7 +3137,7 @@
     <string name="shared_string_save_as_gpx">Salvare ca fișier nou al pistei</string>
     <string name="add_segment_to_the_track">Adăugare la un fișier track</string>
     <string name="shared_string_gpx_files">Piste</string>
-    <string name="show_gpx">Track-uri</string>
+    <string name="show_gpx">Piste</string>
     <string name="save_track_to_gpx_globally">Înregistrați traseul în fișierul GPX</string>
     <string name="shared_string_gpx_route">Traseu de cale ferată</string>
     <string name="empty_state_my_tracks">Adăugați fișiere de track-uri</string>
@@ -3350,7 +3350,7 @@
     <string name="cannot_upload_image">Nu se poate încărca imaginea, vă rugăm să încercați din nou mai târziu</string>
     <string name="select_picture">Selectați imaginea</string>
     <string name="shared_string_resources">Resurse</string>
-    <string name="approximate_file_size">Dimensiunea aproximativă fișier</string>
+    <string name="approximate_file_size">Aproximează dimensiunea fișierului</string>
     <string name="select_data_to_export">Selectați datele care urmează să fie exportate în fișier.</string>
     <string name="file_size_needed_for_import">Necesar pentru import</string>
     <string name="export_not_enough_space_descr">Dispozitivul dvs. are doar %1$s liberi. Vă rugăm să eliberați spațiu sau să deselectați unele elemente pentru export.</string>
@@ -4305,7 +4305,7 @@
     <string name="layer_gpx_layer">Trasee</string>
     <string name="empty_state_my_tracks_desc">Importați sau înregistrați fișiere track</string>
     <string name="map_widget_monitoring">Înregistrarea călătoriei</string>
-    <string name="save_global_track_interval_descr">Specificați intervalul de înregistrare pentru înregistrarea generală a traseului (activat prin intermediul widget-ului \"Trip recording\" de pe hartă).</string>
+    <string name="save_global_track_interval_descr">Specificați intervalul de înregistrare pentru înregistrarea generală a traseului (activat prin intermediul widget-ului \'Trip recording\' de pe hartă).</string>
     <string name="gpx_monitoring_stop">Pauză la înregistrarea călătoriei</string>
     <string name="gpx_monitoring_start">Reluarea înregistrării călătoriei</string>
     <string name="pro_features">Caracteristici Pro</string>

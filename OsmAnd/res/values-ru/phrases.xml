@@ -1362,7 +1362,7 @@
     <string name="poi_microbrewery_yes">Есть</string>
     <string name="poi_microbrewery_no">Нет собственной пивоварни</string>
     <string name="poi_takeaway_filter_yes">Да</string>
-    <string name="poi_takeaway">На вынос</string>
+    <string name="poi_takeaway">Навынос</string>
     <string name="poi_takeaway_yes">На вынос</string>
     <string name="poi_takeaway_no">На вынос: нет</string>
     <string name="poi_takeaway_only">Только на вынос</string>
@@ -2005,7 +2005,7 @@
     <string name="poi_refugee_yes">Удобства, предназначенные для беженцев</string>
     <string name="poi_refugee_no">Беженцы: нет</string>
     <string name="poi_social_facility_type">Тип</string>
-    <string name="poi_social_facility_for">Целевая социальная группа</string>
+    <string name="poi_social_facility_for">Целевая аудитория</string>
     <string name="poi_social_facility_group_home">Групповое проживание</string>
     <string name="poi_social_facility_assisted_living">Дом престарелых</string>
     <string name="poi_social_facility_outreach">Социальные услуги без проживания</string>
@@ -3485,7 +3485,7 @@
     <string name="poi_access_bus">Доступ для автобусов</string>
     <string name="poi_access_caravan">Доступ для автодомов (караванов)</string>
     <string name="poi_access_disabled">Доступ для людей с ограниченными возможностями</string>
-    <string name="poi_cash_withdrawal_bank_card">Снятие наличности</string>
+    <string name="poi_cash_withdrawal_bank_card">Снятие наличных</string>
     <string name="poi_fire_hydrant_position_green">Трава</string>
     <string name="poi_fire_hydrant_position_lane">Полоса движения</string>
     <string name="poi_fire_hydrant_style_wsh">Дизайн гидранта: wsh</string>
@@ -3510,7 +3510,7 @@
     <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
     <string name="poi_socket_chademo_output_filter">Выход: CHAdeMO</string>
     <string name="poi_socket_type2_output_filter">Выход: Тип 2</string>
-    <string name="poi_socket_type2_combo_output_filter">Выход: Тип 2 combo</string>
+    <string name="poi_socket_type2_combo_output_filter">Выход: Тип 2 комбо</string>
     <string name="poi_socket_type3_output_filter">Выход: Тип 3</string>
     <string name="poi_socket_cee_blue_output_filter">Выход: CEE синий</string>
     <string name="poi_socket_schuko_output_filter">Выход: Schuko</string>
@@ -3971,4 +3971,7 @@
     <string name="poi_authentication_key">Авторизация по ключу</string>
     <string name="poi_authentication_chip_card">Авторизация по чип-карте</string>
     <string name="poi_authentication_contactless">Бесконтактная авторизация</string>
+    <string name="poi_summit_register_no">Книга саммита: нет</string>
+    <string name="poi_summit_register_yes">Книга саммита: да</string>
+    <string name="poi_lounger">Шезлонг;Лежак</string>
 </resources>

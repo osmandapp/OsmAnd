@@ -4305,4 +4305,8 @@
     <string name="pro_features">Funkcje Pro</string>
     <string name="purchases_restored">Przywrócono zakupy</string>
     <string name="grey_color_undefined">Szary kolor jest używany dla części baz danych.</string>
+    <string name="cancel_anytime_in_amazon_app">Anuluj w dowolnym momencie w aplikacji Amazon</string>
+    <string name="amz_manage_subscription_descr">Aby zarządzać subskrypcją, skorzystaj z aplikacji Amazon na urządzeniu lub otwórz witrynę Amazon.com pod swoim profilem.</string>
+    <string name="empty_category_name">Pusta nazwa kategorii</string>
+    <string name="no_activity_for_intent">Nie znaleziono odpowiednich aplikacji do wykonania tej czynności</string>
 </resources>
