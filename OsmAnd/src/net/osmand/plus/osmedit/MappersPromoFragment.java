@@ -1,7 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
-
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -31,6 +29,8 @@ import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
 
 public class MappersPromoFragment extends BasePurchaseDialogFragment {
 
@@ -126,6 +126,13 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 		int normal = getColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		int pressed = getColor(nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light);
 		setupButtonBackground(button, normal, pressed);
+
+		TextView tvTitle = button.findViewById(R.id.sign_in_button_title);
+		int iconColorId = nightMode ? R.color.text_color_tab_active_dark : R.color.text_color_tab_active_light;
+		Drawable icon = getIcon(R.drawable.ic_action_openstreetmap_logo, iconColorId);
+		AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(tvTitle, icon, null, null, null);
+		tvTitle.setCompoundDrawablePadding(getResources().getDimensionPixelSize(R.dimen.content_padding_small));
+
 		button.setOnClickListener(v -> {
 			Fragment fragment = getTargetFragment();
 			if (fragment instanceof OsmAuthorizationListener) {
@@ -149,8 +156,8 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 	}
 
 	private void setupButtonBackground(@NonNull View button, @ColorInt int normalColor, @ColorInt int pressedColor) {
-		Drawable normal = createRoundedDrawable(normalColor, ButtonBackground.ROUNDED);
-		Drawable pressed = createRoundedDrawable(pressedColor, ButtonBackground.ROUNDED);
+		Drawable normal = createRoundedDrawable(normalColor, ButtonBackground.ROUNDED_SMALL);
+		Drawable pressed = createRoundedDrawable(pressedColor, ButtonBackground.ROUNDED_SMALL);
 		setupRoundedBackground(button, normal, pressed);
 	}
 
