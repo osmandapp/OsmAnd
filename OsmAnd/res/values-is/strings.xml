@@ -4015,7 +4015,7 @@
     <string name="temporary_conditional_routing_descr">Nota vegtakmarkanir sem núna eru virkar á kortinu</string>
     <string name="routing_attr_short_way_description">Bestuð styttri leið (orkusparandi)</string>
     <string name="restart">Endurræsa</string>
-    <string name="shared_strings_all_regions">Öll svæði</string>
+    <string name="shared_strings_all_regions">Öll landsvæði</string>
     <string name="delete_number_files_question">Eyða %1$d skrám\?</string>
     <string name="track_recording_stop_without_saving">Stöðva án þess að vista</string>
     <string name="track_recording_save_and_stop">Vista og stöðva upptöku</string>
