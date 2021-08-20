@@ -40,6 +40,7 @@ import java.util.Map;
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
 
+	private static final int ONE_HOUR_MS = 3600000;
 	private static final int COMPASS_REQUEST_TIME_INTERVAL_MS = 5000;
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4;
 
@@ -71,6 +72,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		app.getLocationProvider().addCompassListener(this);
 		addTargetPointListener(app);
 		addMapMarkersListener(app);
+		initMapLinkedToLocation();
 	}
 
 	public void resetDrivingRegionUpdate() {
@@ -416,8 +418,19 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return isMapLinkedToLocation;
 	}
 
+	private void initMapLinkedToLocation() {
+		isMapLinkedToLocation = true;
+		if (!settings.MAP_LINKED_TO_LOCATION.get()) {
+			long lastAppClosedTime = settings.LAST_MAP_ACTIVITY_PAUSED_TIME.get();
+			if (System.currentTimeMillis() - lastAppClosedTime < ONE_HOUR_MS) {
+				isMapLinkedToLocation = false;
+			}
+		}
+	}
+
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		this.isMapLinkedToLocation = isMapLinkedToLocation;
+		settings.MAP_LINKED_TO_LOCATION.set(isMapLinkedToLocation);
 		if (!isMapLinkedToLocation) {
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
 			if (autoFollow > 0 && app.getRoutingHelper().isFollowingMode() && !routePlanningMode) {
