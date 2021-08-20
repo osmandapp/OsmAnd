@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_button">Iskanje ►</string>
     <string name="search_activity">Iskanje podatkov</string>
@@ -2162,7 +2162,6 @@
     <string name="shared_string_time">Čas</string>
     <string name="total_distance">Skupna razdalja</string>
     <string name="routing_attr_height_obstacles_name">Uporabi podatke višine</string>
-
     <string name="routing_attr_driving_style_name">Način vožnje</string>
     <string name="select_gpx_folder">Izbor mape datotek GPX</string>
     <string name="file_can_not_be_moved">Datoteke ni mogoče premakniti.</string>
@@ -3345,4 +3344,5 @@
     <string name="activity_type_walking_name">Hoja</string>
     <string name="activity_type_motorbike_name">Motor</string>
     <string name="activity_type_car_name">Avto</string>
+    <string name="speed_cameras_restart_descr">Za popolno odstranitev podatkov s hitrostne kamere je potreben ponovni zagon.</string>
 </resources>
