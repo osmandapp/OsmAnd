@@ -4316,4 +4316,6 @@
 \nVerwalten und kündigen Sie Ihre Abonnements jederzeit in den Amazon-Einstellungen.</string>
     <string name="cancel_anytime_in_amazon_app">Jederzeit in der Amazon App kündigen</string>
     <string name="amz_manage_subscription_descr">Um Ihr Abonnement zu verwalten, verwenden Sie die Amazon App auf Ihrem Gerät oder öffnen Sie die Amazon.com Website unter Ihrem Profil.</string>
+    <string name="empty_category_name">Leerer Kategoriename</string>
+    <string name="no_activity_for_intent">Es wurden keine geeigneten Anwendungen für diese Aktion gefunden</string>
 </resources>
