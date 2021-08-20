@@ -4309,4 +4309,9 @@
     <string name="pro_features">Pro-Funktionen</string>
     <string name="purchases_restored">Käufe wiederhergestellt</string>
     <string name="grey_color_undefined">Graue Farbe wird für Bereiche ohne Daten verwendet.</string>
+    <string name="osm_live_payment_subscription_management_amz">Bezahlung wird von Ihrem Amazon-Konto eingezogen, wenn Sie den Kauf bestätigen.
+\n
+\nEs wird erneuert, es sei denn, Sie kündigen, bevor die ausgewählte Erneuerungsperiode beginnt.
+\n
+\nVerwalten und kündigen Sie Ihre Abonnements jederzeit in den Amazon-Einstellungen.</string>
 </resources>
