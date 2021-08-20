@@ -278,7 +278,7 @@
     <string name="poi_filter_for_tourists">Za turiste</string>
     <string name="poi_filter_fuel">Gorivo</string>
     <string name="auto_zoom_map_descr">Približevanje zemljevida glede na hitrost vožnje (zemljevid se usklajuje s trenutnim mestom).</string>
-    <string name="auto_zoom_map">Samodejna povečava zemljevida</string>
+    <string name="auto_zoom_map">Samodejno približevanje zemljevida</string>
     <string name="snap_to_road">Pripni na cesto</string>
     <string name="osmand_short_description_80_chars">OsmAnd je odprtokodni program za navigacijo z uporabo shranjenih ali spletnih zemljevidov</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd je odprtokodni program za navigacijo z uporabo shranjenih ali spletnih zemljevidov</string>
@@ -947,7 +947,7 @@
     <string name="access_arrival_time">Čas prihoda</string>
     <string name="layer_hillshade">Izris senčenja terena</string>
     <string name="map_widget_gps_info">Podrobnosti GPS</string>
-    <string name="osmand_play_title_30_chars">Zemljevidi OsmAnd in navigacija</string>
+    <string name="osmand_play_title_30_chars">Zemljevidi in navigacija OsmAnd</string>
     <string name="osmand_plus_play_title_30_chars">Zemljevidi OsmAnd+ in navigacija</string>
     <string name="street_name">Ulica</string>
     <string name="hno">Hišna številka</string>
@@ -2961,7 +2961,7 @@
     <string name="select_base_profile_dialog_title">Izbor osnovnega profila</string>
     <string name="select_base_profile_dialog_message">Profil zasnujte na podlagi enega izmed osnovnih profilov, s katerimi so določene osnovne nastavitve, na primer privzet nabor gradnikov, enoti za hitrost in razdaljo. Osnovni profili, ki so privzeto na voljo so:</string>
     <string name="select_nav_profile_dialog_title">Izbor vrste navigacije</string>
-    <string name="base_profile_descr_car">Za osebne avtomobile, motorje, tovornjake ...</string>
+    <string name="base_profile_descr_car">Za avtomobile, motorje, tovornjake ...</string>
     <string name="base_profile_descr_bicycle">Za gorska kolesa, kolesa z motorjem, ježo s konji</string>
     <string name="base_profile_descr_pedestrian">Za hojo, pohodništvo, tek ...</string>
     <string name="base_profile_descr_public_transport">Za uporabo javnega prevoza</string>
