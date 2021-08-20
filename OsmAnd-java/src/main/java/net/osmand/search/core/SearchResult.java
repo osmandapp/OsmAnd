@@ -50,6 +50,9 @@ public class SearchResult {
 	}
 	private static final double MAX_TYPE_WEIGHT = 10;
 
+	private static final double SEARCH_RANK_INDEX = 100;
+	private static final double SEARCH_RANK_INDEX_POI = 10;
+
 	// maximum corresponds to the top entry
 	public double getUnknownPhraseMatchWeight() {
 		if (unknownPhraseMatchWeight != 0) {
@@ -77,7 +80,13 @@ public class SearchResult {
 			allWordsMatched = false;
 		}
 
-		double res = allWordsMatched ? ObjectType.getTypeWeight(objectType) * 10 : ObjectType.getTypeWeight(null);
+		double res;
+		if (allWordsMatched) {
+			res = objectType == ObjectType.POI ? ObjectType.getTypeWeight(objectType) * SEARCH_RANK_INDEX_POI : ObjectType.getTypeWeight(objectType) * SEARCH_RANK_INDEX;
+		} else {
+			res = ObjectType.getTypeWeight(null);
+		}
+
 		if (requiredSearchPhrase.getUnselectedPoiType() != null) {
 			// search phrase matches poi type, then we lower all POI matches and don't check allWordsMatched
 			res = ObjectType.getTypeWeight(objectType);
