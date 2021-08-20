@@ -4314,4 +4314,6 @@
 \nEs wird erneuert, es sei denn, Sie kündigen, bevor die ausgewählte Erneuerungsperiode beginnt.
 \n
 \nVerwalten und kündigen Sie Ihre Abonnements jederzeit in den Amazon-Einstellungen.</string>
+    <string name="cancel_anytime_in_amazon_app">Jederzeit in der Amazon App kündigen</string>
+    <string name="amz_manage_subscription_descr">Um Ihr Abonnement zu verwalten, verwenden Sie die Amazon App auf Ihrem Gerät oder öffnen Sie die Amazon.com Website unter Ihrem Profil.</string>
 </resources>
