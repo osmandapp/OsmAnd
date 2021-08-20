@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="layer_map_appearance">Configureer scherm</string>
     <string name="show_lanes">Rijstroken</string>
@@ -1688,7 +1688,7 @@
     <string name="unsaved_changes_will_be_lost">Niet-bewaarde wijzigingen gaan verloren. Doorgaan?</string>
     <string name="downloads_left_template">%1$s downloads over</string>
     <string name="roads">Wegen</string>
-    <string name="downloading_number_of_files">Downloaden - %1$d bestand</string>
+    <string name="downloading_number_of_files">Downloaden %1$d bestand…</string>
     <string name="show_free_version_banner">Toon de balk \"Gratis Versie\"</string>
     <string name="show_free_version_banner_description">In de betaalde versie toch de balk \"Gratis Versie\" tonen.</string>
     <string name="buy">Kopen</string>
