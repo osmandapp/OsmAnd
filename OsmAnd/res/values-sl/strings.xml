@@ -993,7 +993,7 @@
     <string name="use_kalman_filter_compass_descr">Zmanjša napake podatkov kompasa, vendar doda zamik.</string>
     <string name="use_kalman_filter_compass">Uporabi Kalmanov filter</string>
     <string name="use_magnetic_sensor_descr">Za določanje smeri po kompasu uporabi magnetno tipalo in ne usmerjevalnega.</string>
-    <string name="cancel_route">Opusti pot</string>
+    <string name="cancel_route">Opustim pot\?</string>
     <string name="monitoring_settings_descr">Nastavitve beleženja potovanj in poti.</string>
     <string name="choose_osmand_theme_descr">Izbor videza programa.</string>
     <string name="choose_osmand_theme">Tema programa</string>
@@ -1672,7 +1672,7 @@
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="downloading_number_of_files">Prejemanje datotek: %1$d</string>
+    <string name="downloading_number_of_files">Prejemanje datotek: %1$d…</string>
     <string name="show_free_version_banner">Pokaži pasico brezplačne različice</string>
     <string name="srtm_plugin_disabled">Izris izohips je onemogočen</string>
     <string name="show_free_version_banner_description">Četudi imate plačljivo različico, še vedno lahko prikažete pasico brezplačne različice.</string>
@@ -3344,5 +3344,5 @@
     <string name="activity_type_walking_name">Hoja</string>
     <string name="activity_type_motorbike_name">Motor</string>
     <string name="activity_type_car_name">Avto</string>
-    <string name="speed_cameras_restart_descr">Za popolno odstranitev podatkov s hitrostne kamere je potreben ponovni zagon.</string>
+    <string name="speed_cameras_restart_descr">Za popolno odstranitev podatkov o hitrostnih kamerah je potreben ponovni zagon.</string>
 </resources>
