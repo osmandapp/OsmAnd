@@ -56,7 +56,12 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 
 		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
 		nameTextBox = view.findViewById(R.id.name_text_box);
-		nameTextBox.setBoxBackgroundColorResource(nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light);
+		int textBoxBgColorId = nightMode ? R.color.color_white : R.color.activity_background_color_light;
+		int textBoxBgColor = ContextCompat.getColor(app, textBoxBgColorId);
+		if (nightMode) {
+			textBoxBgColor = UiUtilities.getColorWithAlpha(textBoxBgColor, 0.1f);
+		}
+		nameTextBox.setBoxBackgroundColor(textBoxBgColor);
 		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
 				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
