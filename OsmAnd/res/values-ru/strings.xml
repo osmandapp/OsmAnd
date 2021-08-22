@@ -340,7 +340,7 @@
     <string name="download_roads_only_maps">Карта дорог</string>
     <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только функции Android).</string>
     <string name="safe_mode">Безопасный режим</string>
-    <string name="native_library_not_running">Приложение работает в безопасном режиме (отключите его в разделе «Настройки»).</string>
+    <string name="native_library_not_running">Приложение работает в безопасном режиме (отключается в разделе «Настройки»).</string>
     <string name="background_service_is_enabled_question">Фоновая служба OsmAnd всё ещё работает. Остановите её тоже\?</string>
     <string name="close_changeset">Закрыть пакет правок</string>
     <string name="zxing_barcode_scanner_not_found">Приложение ZXing Barcode Scanner не найдено. Искать в Google Play?</string>
@@ -3002,7 +3002,7 @@
     <string name="profile_alert_delete_msg">Удалить профиль «%s»\?</string>
     <string name="select_base_profile_dialog_title">Выберите профиль для начала</string>
     <string name="select_base_profile_dialog_message">Основывайте свой пользовательский профиль на одном из профилей приложения по умолчанию, это определяет базовые настройки, такие как видимость виджетов по умолчанию и выбор единиц измерения скорости и расстояния. Ниже перечислены профили приложений по умолчанию, а также примеры пользовательских профилей, на которые они могут быть расширены:</string>
-    <string name="select_nav_profile_dialog_title">Выберите режим навигации</string>
+    <string name="select_nav_profile_dialog_title">Режим навигации</string>
     <string name="base_profile_descr_car">Автомобиль, грузовик, мотоцикл</string>
     <string name="base_profile_descr_bicycle">Горный велосипед, мопед, лошадь</string>
     <string name="base_profile_descr_pedestrian">Прогулки, пеший туризм, бег</string>
@@ -4127,7 +4127,7 @@
     <string name="backup_and_restore">Резервное копирование и восстановление</string>
     <string name="last_backup">Последнее резервное копирование</string>
     <string name="duration_ago">%1$s назад</string>
-    <string name="select_nav_profile_dialog_message">«Режим навигации» определяет правила расчёта маршрутов, с доступными офлайн или онлайн-механизмами маршрутизации.</string>
+    <string name="select_nav_profile_dialog_message">«Режим навигации» опре деляет правила расчёта маршрутов, с доступными офлайн или онлайн-механизмами маршрутизации.</string>
     <string name="backup_delete_all_data_warning">Вы собираетесь удалить все данные, загруженные в OsmAnd Cloud ранее, включая историю версий.
 \n
 \nВы не сможете восстановить удалённые данные.</string>
