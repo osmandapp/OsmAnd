@@ -3936,7 +3936,7 @@
     <string name="shared_string_api_key">Ключ API</string>
     <string name="shared_string_server_url">URL-адрес сервера</string>
     <string name="keep_it_empty_if_not">Оставить пустым, если не</string>
-    <string name="online_routing_example_hint">URL со всеми параметрами будет выглядеть так:</string>
+    <string name="online_routing_example_hint">Вид URL со всеми параметрами:</string>
     <string name="test_route_calculation">Тест расчёта маршрута</string>
     <string name="routing_engine_vehicle_type_car">Автомобиль</string>
     <string name="online_routing_engine">Онлайн-маршрутизатор</string>
@@ -4148,7 +4148,7 @@
     <string name="loading_list_of_routing_services">Загрузка списка доступных сервисов маршрутизации</string>
     <string name="shared_string_offline">Офлайн</string>
     <string name="shared_string_online">Онлайн</string>
-    <string name="osmand_online_routing_promo">Использовать предопределённые шаблоны или добавить онлайн-маршрутизацию OSRM, GraphHopper, OpenRouteService или GPX.</string>
+    <string name="osmand_online_routing_promo">Используйте предопределённые шаблоны или добавьте онлайн-маршрутизацию OSRM, GraphHopper, OpenRouteService или GPX.</string>
     <string name="shared_string_external">Внешний</string>
     <string name="provided_by">Предоставлен %1$s</string>
     <string name="failed_loading_predefined_engines">Не удалось загрузить список предустановленных шаблонов.
@@ -4227,7 +4227,7 @@
     <string name="backup_error_user_is_not_registered">Пользователь с данным адресом электронной почты не зарегистрирован</string>
     <string name="backup_error_no_valid_subscription">Нет действующей подписки</string>
     <string name="duration_moment_ago">только что</string>
-    <string name="approximate_route_description">Прикрепите маршрут к дорогам на карте, чтобы получить данные о всех поворотах, а также о проходимости, типах дорог и т. д.</string>
+    <string name="approximate_route_description">Прикрепить маршрут к дорогам на карте, чтобы получать данные о всех поворотах, а также о проходимости, типах дорог и т. д.</string>
     <string name="release_4_0">• Облачное резервное копирование
 \n
 \n• Добавлен ночной режим для стиля карты «Topo»
