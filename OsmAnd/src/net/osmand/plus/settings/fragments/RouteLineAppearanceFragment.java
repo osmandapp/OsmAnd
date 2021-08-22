@@ -533,8 +533,11 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 	}
 
 	private void changeMapTheme(@NonNull DayNightMode mapTheme) {
-		if (getActivity() != null) {
-			requireSettings().DAYNIGHT_MODE.setModeValue(appMode, mapTheme);
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			// Apply theme to application profile (instead of routing profile)
+			// Because application profile affects the map theme during navigation
+			app.getSettings().DAYNIGHT_MODE.set(mapTheme);
 			selectedMapTheme = mapTheme;
 		}
 	}

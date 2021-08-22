@@ -563,7 +563,7 @@
     <string name="native_app_allocated_memory_descr">Memòria nativa totale allocada dae s’aplicu %1$s MB (Dalvik %2$s MB, àteru %3$s MB).
 \n Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Memòria nativa locale</string>
-    <string name="starting_point_too_far">Puntu de tzucada tropu distante dae su caminu prus a curtzu.</string>
+    <string name="starting_point_too_far">Puntu de tzucada tropu indedda dae su caminu prus a curtzu.</string>
     <string name="shared_location">Positzione cumpartzida</string>
     <string name="osmand_parking_event">Piga sa màchina dae su parchègiu</string>
     <string name="osmand_parking_warning">Atentzione</string>

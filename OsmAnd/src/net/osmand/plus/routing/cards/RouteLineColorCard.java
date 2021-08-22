@@ -173,6 +173,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		}
 		if (selectedType == ColoringType.CUSTOM_COLOR) {
 			colorsCard.setSelectedColor(getCustomRouteColor());
+			updateColorItems();
 		}
 	}
 
