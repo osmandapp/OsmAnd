@@ -128,15 +128,20 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 				double distance = step.getDouble("distance");
 				double duration = step.getDouble("duration");
 				String instruction = step.getString("instruction");
-				TurnType turnType = getTurnType(step.getInt("type"));
+				TurnType turnType = getTurnType(step.getInt("type"), leftSideNavigation);
 				String streetName = step.getString("name");
+				JSONArray wayPoints = step.getJSONArray("way_points");
+				int routePointOffset = wayPoints.getInt(0);
+				int routeEndPointOffset = wayPoints.getInt(1);
 				float averageSpeed = (float) (distance / duration);
 
 				// create direction step
 				RouteDirectionInfo direction = new RouteDirectionInfo(averageSpeed, turnType);
+				direction.routePointOffset = routePointOffset;
+				direction.routeEndPointOffset = routeEndPointOffset;
 				direction.setDescriptionRoute(instruction);
 				direction.setStreetName(streetName);
-				direction.setDistance((int) distance);
+				direction.setDistance((int) Math.round(distance));
 				directions.add(direction);
 			}
 		}
@@ -154,9 +159,7 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 	 * documentation: https://giscience.github.io/openrouteservice/documentation/Instruction-Types.html
 	 */
 	@NonNull
-	private TurnType getTurnType(int orsInstructionType) {
-		// driving on the left or right side is currently not supported by the ORS
-		boolean leftSide = false;
+	private TurnType getTurnType(int orsInstructionType, boolean leftSide) {
 		switch (orsInstructionType) {
 			case 0: // TURN_LEFT
 				return TurnType.fromString("TL", leftSide);
