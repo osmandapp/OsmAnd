@@ -39,7 +39,7 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 	@Override
 	@NonNull
 	public String getTitle() {
-		return "Openroute Service";
+		return "openrouteservice";
 	}
 
 	@NonNull
@@ -154,10 +154,10 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 	 * documentation: https://giscience.github.io/openrouteservice/documentation/Instruction-Types.html
 	 */
 	@NonNull
-	private TurnType getTurnType(int orsTurnType) {
+	private TurnType getTurnType(int orsInstructionType) {
 		// driving on the left or right side is currently not supported by the ORS
 		boolean leftSide = false;
-	    switch (orsTurnType) {
+		switch (orsInstructionType) {
 			case 0: // TURN_LEFT
 				return TurnType.fromString("TL", leftSide);
 			case 1: // TURN_RIGHT
@@ -177,9 +177,9 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 			case 8: // EXIT_ROUNDABOUT
 				return TurnType.fromString(leftSide ? "TL" : "TR", leftSide);
 			case 9: // UTURN
-			    return TurnType.fromString("TU", leftSide);
+				return TurnType.fromString("TU", leftSide);
 			case 11: // DEPART
-			    return TurnType.fromString(leftSide ? "KL" : "KR", leftSide);
+				return TurnType.fromString(leftSide ? "KL" : "KR", leftSide);
 			case 12: // KEEP_LEFT
 				return TurnType.fromString("KL", leftSide);
 			case 13: // KEEP_RIGHT
