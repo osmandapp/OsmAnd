@@ -178,19 +178,17 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 				return TurnType.fromString(leftSide ? "TL" : "TR", leftSide);
 			case 9: // UTURN
 			    return TurnType.fromString("TU", leftSide);
-			case 10: // FINISH
-				// not supported -> default
-				return getTurnType(-1);
 			case 11: // DEPART
 			    return TurnType.fromString(leftSide ? "KL" : "KR", leftSide);
 			case 12: // KEEP_LEFT
 				return TurnType.fromString("KL", leftSide);
 			case 13: // KEEP_RIGHT
 				return TurnType.fromString("KR", leftSide);
-			case 14: // UNKNOWN:
+			case 10: // FINISH
+			case 14: // UNKNOWN
 			default:
 				// CONTINUE per default
-				return getTurnType(6);
+				return TurnType.fromString("C", leftSide);
 		}
 	}
 
