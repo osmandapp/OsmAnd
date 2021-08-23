@@ -114,7 +114,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 				if (tag instanceof OsmandPlugin) {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
-						PluginInfoFragment.showInstance(activity.getSupportFragmentManager(), (OsmandPlugin) tag);
+						PluginInfoFragment.showInstance(activity.getSupportFragmentManager(), PluginsFragment.this, (OsmandPlugin) tag);
 					}
 				} else if (tag instanceof ConnectedApp) {
 					switchEnabled((ConnectedApp) tag);
