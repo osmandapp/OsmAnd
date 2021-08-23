@@ -123,6 +123,7 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 		for (int i = 0; i < segments.length(); i++) {
 			JSONArray steps = segments.getJSONObject(i).getJSONArray("steps");
 			for (int j = 0; j < steps.length(); j++) {
+				// parse JSON values
 				JSONObject step = steps.getJSONObject(j);
 				double distance = step.getDouble("distance");
 				double duration = step.getDouble("duration");
@@ -131,6 +132,7 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 				String streetName = step.getString("name");
 				float averageSpeed = (float) (distance / duration);
 
+				// create direction step
 				RouteDirectionInfo direction = new RouteDirectionInfo(averageSpeed, turnType);
 				direction.setDescriptionRoute(instruction);
 				direction.setStreetName(streetName);
@@ -146,84 +148,49 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 		return null;
 	}
 
+	/**
+	 * This method takes an ORS instruction type integer and maps it to an OsmAnd TurnType object.
+	 * source: https://github.com/GIScience/openrouteservice/blob/master/openrouteservice/src/main/java/org/heigit/ors/routing/instructions/InstructionType.java
+	 * documentation: https://giscience.github.io/openrouteservice/documentation/Instruction-Types.html
+	 */
 	@NonNull
-	private TurnType getTurnType(int orsTurnIdx) {
-		boolean leftSide = false; // TODO: change
-		// go straight per default
-		String turnTypeStr = "C";
-		OrsInstructionType orsInstructionType = OrsInstructionType.values()[orsTurnIdx];
-	    switch (orsInstructionType) {
-			case TURN_LEFT:
-				turnTypeStr = "TL";
-				break;
-			case TURN_RIGHT:
-				turnTypeStr = "TR";
-			    break;
-			case TURN_SHARP_LEFT:
-				turnTypeStr = "TSHL";
-				break;
-			case TURN_SHARP_RIGHT:
-				turnTypeStr = "TSHR";
-				break;
-			case TURN_SLIGHT_LEFT:
-				turnTypeStr = "TSLL";
-				break;
-			case TURN_SLIGHT_RIGHT:
-				turnTypeStr = "TSLR";
-				break;
-			case CONTINUE:
-				turnTypeStr = "C";
-				break;
-			case ENTER_ROUNDABOUT:
-				turnTypeStr = "RNDB";
-				break;
-			case EXIT_ROUNDABOUT:
-			    turnTypeStr = leftSide ? "TL" : "TR";
-				break;
-			case UTURN:
-			    turnTypeStr = "TU";
-				break;
-			case FINISH:
-			    // not supported -> default
-				break;
-			case DEPART:
-			    turnTypeStr = leftSide ? "KL" : "KR";
-				break;
-			case KEEP_LEFT:
-				turnTypeStr = "KL";
-				break;
-			case KEEP_RIGHT:
-				turnTypeStr = "KR";
-				break;
-			case UNKNOWN:
+	private TurnType getTurnType(int orsTurnType) {
+		// driving on the left or right side is currently not supported by the ORS
+		boolean leftSide = false;
+	    switch (orsTurnType) {
+			case 0: // TURN_LEFT
+				return TurnType.fromString("TL", leftSide);
+			case 1: // TURN_RIGHT
+				return TurnType.fromString("TR", leftSide);
+			case 2: // TURN_SHARP_LEFT
+				return TurnType.fromString("TSHL", leftSide);
+			case 3: // TURN_SHARP_RIGHT
+				return TurnType.fromString("TSHR", leftSide);
+			case 4: // TURN_SLIGHT_LEFT
+				return TurnType.fromString("TSLL", leftSide);
+			case 5: // TURN_SLIGHT_RIGHT
+				return TurnType.fromString("TSLR", leftSide);
+			case 6: // CONTINUE
+				return TurnType.fromString("C", leftSide);
+			case 7: // ENTER_ROUNDABOUT
+				return TurnType.fromString("RNDB", leftSide);
+			case 8: // EXIT_ROUNDABOUT
+				return TurnType.fromString(leftSide ? "TL" : "TR", leftSide);
+			case 9: // UTURN
+			    return TurnType.fromString("TU", leftSide);
+			case 10: // FINISH
+				// not supported -> default
+				return getTurnType(-1);
+			case 11: // DEPART
+			    return TurnType.fromString(leftSide ? "KL" : "KR", leftSide);
+			case 12: // KEEP_LEFT
+				return TurnType.fromString("KL", leftSide);
+			case 13: // KEEP_RIGHT
+				return TurnType.fromString("KR", leftSide);
+			case 14: // UNKNOWN:
 			default:
-				// go straight per default
-				break;
-		}
-		return TurnType.fromString(turnTypeStr, leftSide);
-	}
-
-	// taken from https://github.com/giscience/openrouteservice
-	private enum OrsInstructionType
-	{
-		TURN_LEFT,              /*0*/
-		TURN_RIGHT,             /*1*/
-		TURN_SHARP_LEFT,        /*2*/
-		TURN_SHARP_RIGHT,       /*3*/
-		TURN_SLIGHT_LEFT,       /*4*/
-		TURN_SLIGHT_RIGHT,      /*5*/
-		CONTINUE,               /*6*/
-		ENTER_ROUNDABOUT,       /*7*/
-		EXIT_ROUNDABOUT,        /*8*/
-		UTURN,                  /*9*/
-		FINISH,                 /*10*/
-		DEPART,                 /*11*/
-		KEEP_LEFT,              /*12*/
-		KEEP_RIGHT,             /*13*/
-		UNKNOWN                 /*14*/;
-
-		public boolean isSlightLeftOrRight() {
-			return this == TURN_SLIGHT_RIGHT || this == TURN_SLIGHT_LEFT;
+				// CONTINUE per default
+				return getTurnType(6);
 		}
 	}
 
