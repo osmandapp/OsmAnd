@@ -9,6 +9,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.routing.RouteDirectionInfo;
+import net.osmand.router.TurnType;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -107,19 +109,122 @@ public class OrsEngine extends JsonOnlineRoutingEngine {
 	public OnlineRoutingResponse parseServerResponse(@NonNull JSONObject root,
 	                                                 @NonNull OsmandApplication app,
 	                                                 boolean leftSideNavigation) throws JSONException {
-		JSONArray array = root.getJSONObject("geometry").getJSONArray("coordinates");
+		JSONArray coordinates = root.getJSONObject("geometry").getJSONArray("coordinates");
 		List<LatLon> points = new ArrayList<>();
-		for (int i = 0; i < array.length(); i++) {
-			JSONArray point = array.getJSONArray(i);
+		for (int i = 0; i < coordinates.length(); i++) {
+			JSONArray point = coordinates.getJSONArray(i);
 			double lon = Double.parseDouble(point.getString(0));
 			double lat = Double.parseDouble(point.getString(1));
 			points.add(new LatLon(lat, lon));
 		}
+
+		List<RouteDirectionInfo> directions = new ArrayList<>();
+		JSONArray segments = root.getJSONObject("properties").getJSONArray("segments");
+		for (int i = 0; i < segments.length(); i++) {
+			JSONArray steps = segments.getJSONObject(i).getJSONArray("steps");
+			for (int j = 0; j < steps.length(); j++) {
+				JSONObject step = steps.getJSONObject(j);
+				double distance = step.getDouble("distance");
+				double duration = step.getDouble("duration");
+				String instruction = step.getString("instruction");
+				TurnType turnType = getTurnType(step.getInt("type"));
+				String streetName = step.getString("name");
+				float averageSpeed = (float) (distance / duration);
+
+				RouteDirectionInfo direction = new RouteDirectionInfo(averageSpeed, turnType);
+				direction.setDescriptionRoute(instruction);
+				direction.setStreetName(streetName);
+				direction.setDistance((int) distance);
+				directions.add(direction);
+			}
+		}
+
 		if (!isEmpty(points)) {
 			List<Location> route = convertRouteToLocationsList(points);
-			new OnlineRoutingResponse(route, null);
+			return new OnlineRoutingResponse(route, directions);
 		}
 		return null;
+	}
+
+	@NonNull
+	private TurnType getTurnType(int orsTurnIdx) {
+		boolean leftSide = false; // TODO: change
+		// go straight per default
+		String turnTypeStr = "C";
+		OrsInstructionType orsInstructionType = OrsInstructionType.values()[orsTurnIdx];
+	    switch (orsInstructionType) {
+			case TURN_LEFT:
+				turnTypeStr = "TL";
+				break;
+			case TURN_RIGHT:
+				turnTypeStr = "TR";
+			    break;
+			case TURN_SHARP_LEFT:
+				turnTypeStr = "TSHL";
+				break;
+			case TURN_SHARP_RIGHT:
+				turnTypeStr = "TSHR";
+				break;
+			case TURN_SLIGHT_LEFT:
+				turnTypeStr = "TSLL";
+				break;
+			case TURN_SLIGHT_RIGHT:
+				turnTypeStr = "TSLR";
+				break;
+			case CONTINUE:
+				turnTypeStr = "C";
+				break;
+			case ENTER_ROUNDABOUT:
+				turnTypeStr = "RNDB";
+				break;
+			case EXIT_ROUNDABOUT:
+			    turnTypeStr = leftSide ? "TL" : "TR";
+				break;
+			case UTURN:
+			    turnTypeStr = "TU";
+				break;
+			case FINISH:
+			    // not supported -> default
+				break;
+			case DEPART:
+			    turnTypeStr = leftSide ? "KL" : "KR";
+				break;
+			case KEEP_LEFT:
+				turnTypeStr = "KL";
+				break;
+			case KEEP_RIGHT:
+				turnTypeStr = "KR";
+				break;
+			case UNKNOWN:
+			default:
+				// go straight per default
+				break;
+		}
+		return TurnType.fromString(turnTypeStr, leftSide);
+	}
+
+	// taken from https://github.com/giscience/openrouteservice
+	private enum OrsInstructionType
+	{
+		TURN_LEFT,              /*0*/
+		TURN_RIGHT,             /*1*/
+		TURN_SHARP_LEFT,        /*2*/
+		TURN_SHARP_RIGHT,       /*3*/
+		TURN_SLIGHT_LEFT,       /*4*/
+		TURN_SLIGHT_RIGHT,      /*5*/
+		CONTINUE,               /*6*/
+		ENTER_ROUNDABOUT,       /*7*/
+		EXIT_ROUNDABOUT,        /*8*/
+		UTURN,                  /*9*/
+		FINISH,                 /*10*/
+		DEPART,                 /*11*/
+		KEEP_LEFT,              /*12*/
+		KEEP_RIGHT,             /*13*/
+		UNKNOWN                 /*14*/;
+
+		public boolean isSlightLeftOrRight() {
+			return this == TURN_SLIGHT_RIGHT || this == TURN_SLIGHT_LEFT;
+		}
 	}
 
 	@NonNull
