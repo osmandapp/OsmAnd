@@ -4130,7 +4130,7 @@
     <string name="loading_list_of_routing_services">Carrighende sa lista de sos servìtzios de càrculu de sas àndalas a disponimentu</string>
     <string name="shared_string_offline">Non in lìnia</string>
     <string name="shared_string_online">In lìnia</string>
-    <string name="osmand_online_routing_promo">Imprea modellos predefinidos o annanghe OSRM, Graphhopper, OpenRouteService o su càrculu de s\'àndala GPX in lìnia.</string>
+    <string name="osmand_online_routing_promo">Imprea modellos predefinidos o annanghe OSRM, Graphhopper, openrouteservice o su càrculu de s\'àndala GPX in lìnia.</string>
     <string name="shared_string_external">Esternu</string>
     <string name="provided_by">Frunidu dae %1$s</string>
     <string name="failed_loading_predefined_engines">Carrigamentu de sa lista de sos modellos predefinidos fallidu.

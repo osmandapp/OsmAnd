@@ -4129,7 +4129,7 @@
     <string name="loading_list_of_routing_services">Načítání seznamu dostupných navigačních služeb</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Můžete použít předdefinované šablony, nebo přidat vlastní online navigaci. Podporováno: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="osmand_online_routing_promo">Můžete použít předdefinované šablony, nebo přidat vlastní online navigaci. Podporováno: OSRM, Graphhopper, openrouteservice, GPX.</string>
     <string name="shared_string_external">Externí</string>
     <string name="provided_by">Zprostředkuje %1$s</string>
     <string name="failed_loading_predefined_engines">Seznam předdefinovaných šablon se nepodařilo načíst.

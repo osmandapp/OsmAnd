@@ -4089,7 +4089,7 @@
     <string name="verification_code_missing_description">Det kan tage 10 minutter. Brug knappen nedenfor, hvis den ikke er i din spam-mappe.</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Brug foruddefinerede skabeloner, eller tilføj OSRM, GraphHopper, OpenRouteService eller GPX online-routing.</string>
+    <string name="osmand_online_routing_promo">Brug foruddefinerede skabeloner, eller tilføj OSRM, GraphHopper, openrouteservice eller GPX online-routing.</string>
     <string name="shared_string_external">Ekstern</string>
     <string name="provided_by">Leveret af %1$s</string>
     <string name="failed_loading_predefined_engines">Kunne ikke indlæse listen over foruddefinerede skabeloner.

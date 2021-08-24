@@ -4124,7 +4124,7 @@
     <string name="loading_list_of_routing_services">Список завантаження доступних служб маршрутизації</string>
     <string name="shared_string_offline">Автономно</string>
     <string name="shared_string_online">З мережі</string>
-    <string name="osmand_online_routing_promo">Користуйтеся попередньо визначеними шаблонами або додавайте онлайн-маршрутизацію OSRM, GraphHopper, OpenRouteService або GPX.</string>
+    <string name="osmand_online_routing_promo">Користуйтеся попередньо визначеними шаблонами або додавайте онлайн-маршрутизацію OSRM, GraphHopper, openrouteservice або GPX.</string>
     <string name="shared_string_external">Зовнішні</string>
     <string name="provided_by">Надано %1$s</string>
     <string name="failed_loading_predefined_engines">Не вдалося завантажити список попередньо визначених шаблонів.

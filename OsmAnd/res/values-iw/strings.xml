@@ -4129,7 +4129,7 @@
     <string name="loading_list_of_routing_services">רשימת שירותי הניווט הזמינים נטענת</string>
     <string name="shared_string_offline">בלתי מקוון</string>
     <string name="shared_string_online">מקוון</string>
-    <string name="osmand_online_routing_promo">ניתן להשתמש בתבניות שהוגדרו מראש או להוסיף ניווט מקוון מותאם אישית, נתמכים: OSRM,‏ Graphhopper,‏ OpenRouteService,‏ GPX.</string>
+    <string name="osmand_online_routing_promo">ניתן להשתמש בתבניות שהוגדרו מראש או להוסיף ניווט מקוון מותאם אישית, נתמכים: OSRM,‏ Graphhopper,‏ openrouteservice,‏ GPX.</string>
     <string name="shared_string_external">חיצוני</string>
     <string name="provided_by">סופק על ידי %1$s</string>
     <string name="failed_loading_predefined_engines">לא ניתן לטעון את התבניות שהוגדרו מראש.

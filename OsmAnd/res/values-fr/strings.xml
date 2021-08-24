@@ -4139,7 +4139,7 @@
     <string name="backup_delete_old_data">Supprimer les anciennes versions</string>
     <string name="backup_data">Sauvegarder les données</string>
     <string name="select_backup_data_descr">Sélectionnez les données et dossiers à sauvegarder.</string>
-    <string name="osmand_online_routing_promo">Utiliser des modèles prédéfinis ou ajouter OSRM, GraphHopper, OpenRouteService, ou un moteur de routage GPX en ligne.</string>
+    <string name="osmand_online_routing_promo">Utiliser des modèles prédéfinis ou ajouter OSRM, GraphHopper, openrouteservice, ou un moteur de routage GPX en ligne.</string>
     <string name="failed_loading_predefined_engines">Impossible d\'actualiser la liste des modèles prédéfinis.
 \nVeuillez vérifier votre connexion Internet.</string>
     <string name="backup_delete_all_data_warning">Vous êtes sur le point de supprimer toutes les données envoyées précédemment sur OsmAnd Cloud, y compris l\'historique des versions.

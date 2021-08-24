@@ -4194,7 +4194,7 @@
     <string name="loading_list_of_routing_services">تحميل قائمة خدمات التوجيه المتوفرة</string>
     <string name="shared_string_offline">دون اتصال</string>
     <string name="shared_string_online">عبر الإنترنت</string>
-    <string name="osmand_online_routing_promo">استخدم قوالب محددة مسبقًا ، أو أضف OSRM، GraphHopper، OpenRouteService أو توجيه مدعم بال GPX عبر الانترنت.</string>
+    <string name="osmand_online_routing_promo">استخدم قوالب محددة مسبقًا ، أو أضف OSRM، GraphHopper، openrouteservice أو توجيه مدعم بال GPX عبر الانترنت.</string>
     <string name="shared_string_external">خارجي</string>
     <string name="provided_by">مقدمة من %1$s</string>
     <string name="failed_loading_predefined_engines">فشل تحميل قائمة القوالب المحددة مسبقًا.
