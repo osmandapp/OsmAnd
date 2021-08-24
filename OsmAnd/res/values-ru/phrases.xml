@@ -3976,4 +3976,17 @@
     <string name="poi_lounger">Шезлонг;Лежак</string>
     <string name="poi_refugee_site">Лагерь беженцев</string>
     <string name="poi_trolley_bay">Парковка тележек</string>
+    <string name="poi_glacier_debris_cover_scarce">Мусорный покров: незначительный</string>
+    <string name="poi_glacier_debris_cover_partial">Мусорный покров: частичный</string>
+    <string name="poi_glacier_debris_cover_none">Мусорный покров: отсутствует</string>
+    <string name="poi_authentication_none_no">Авторизация не требуется: нет</string>
+    <string name="poi_authentication_short_message_text">Текст короткого сообщения, используемый для авторизации</string>
+    <string name="poi_authentication_short_message_no">Авторизация с помощью короткого сообщения: нет</string>
+    <string name="poi_authentication_phone_call_no">Авторизация по телефонному звонку: нет</string>
+    <string name="poi_authentication_app_no">Авторизация через приложение: нет</string>
+    <string name="poi_authentication_key_no">Авторизация по ключу: нет</string>
+    <string name="poi_authentication_chip_card_no">Авторизация по чип-карте: нет</string>
+    <string name="poi_authentication_contactless_no">Бесконтактная авторизация: нет</string>
+    <string name="poi_share_taxi_yes">Маршрутное такси: да</string>
+    <string name="poi_power_portal">Портальная опора ВЛ</string>
 </resources>

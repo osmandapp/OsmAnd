@@ -4240,7 +4240,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Colora in base alla rete di appartenenza.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Colora i percorsi in base al tipo di nodi della rete (internazionale, regionale, locale).</string>
     <string name="walking_route_osmc_description">Colora i percorsi in base ai loro colori locali (se presente in OpenStreetMap) e tipo (internazionali, regionali, locali).</string>
-    <string name="travel_routes">Percorsi effettuati</string>
+    <string name="travel_routes">Percorsi turistici</string>
     <string name="setting_supported_by_style">Queste impostazioni sono fornite dallo stile della mappa \'%1$s\'</string>
     <string name="online_direct_line_maps_link">Controlla le mappe necessarie.</string>
     <string name="offline_maps_required_descr">Alcune mappe offline necessarie per questo percorso non sono state trovate.</string>
@@ -4294,4 +4294,14 @@
     <string name="cancel_anytime_in_huawei_appgallery">Cancellalo in ogni momento in Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Cancellalo in ogni momento in Google Play.</string>
     <string name="shared_string_not_included">Non include</string>
+    <string name="amz_manage_subscription_descr">Per gestire la tua sottoscrizione usa l\'app Amazon nel dispositivo o il tuo profilo nel sito Amazon.com.</string>
+    <string name="no_activity_for_intent">Non è stata trovata alcuna applicazione per completare l\'azione</string>
+    <string name="grey_color_undefined">Il grigio è utilizzato per le parti in cui non sono presenti dati.</string>
+    <string name="osm_live_payment_subscription_management_amz">Il pagamento viene addebitato sul tuo account Amazon alla conferma dell\'acquisto.
+\n
+\nSe non cancellato si rinnova alla scadenza del periodo.
+\n
+\nGestisci o cancella la tua sottoscrizione dalle tue impostazioni Amazon.</string>
+    <string name="cancel_anytime_in_amazon_app">Cancellala in qualunque momento dall\'app Amazon</string>
+    <string name="empty_category_name">Nome categoria vuoto</string>
 </resources>
