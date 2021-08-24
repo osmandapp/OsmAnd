@@ -141,7 +141,6 @@ import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
-import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -1401,6 +1400,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onPause() {
 		super.onPause();
+		settings.LAST_MAP_ACTIVITY_PAUSED_TIME.set(System.currentTimeMillis());
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && isInMultiWindowMode()) {
 			pendingPause = true;
 		} else {

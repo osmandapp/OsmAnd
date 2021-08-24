@@ -271,10 +271,6 @@ public class MapActivityActions implements DialogProvider {
 		});
 	}
 
-	protected Location getLastKnownLocation() {
-		return getMyApplication().getLocationProvider().getLastKnownLocation();
-	}
-
 	protected OsmandApplication getMyApplication() {
 		return mapActivity.getMyApplication();
 	}
