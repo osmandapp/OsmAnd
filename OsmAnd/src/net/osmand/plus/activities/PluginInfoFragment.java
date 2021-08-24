@@ -143,7 +143,11 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 				if (plugin.isEnabled() != isChecked) {
 					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked)) {
 						updateState();
-						onEnableSwitched();
+
+						Fragment target = getTargetFragment();
+						if (target instanceof PluginStateListener) {
+							((PluginStateListener) target).onPluginStateChanged(plugin);
+						}
 					}
 				}
 			}
@@ -234,12 +238,6 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		enableDisableButton.setChecked(plugin.isEnabled());
 	}
 
-	private void onEnableSwitched() {
-		if (getTargetFragment() instanceof PluginStateListener) {
-			((PluginStateListener) getTargetFragment()).onPluginStateChanged(plugin);
-		}
-	}
-
 	@Override
 	public void onPluginStateChanged(@NonNull OsmandPlugin osmandPlugin) {
 		if (Algorithms.stringsEqual(plugin.getId(), osmandPlugin.getId())) {
@@ -259,7 +257,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target,
-	                                   @NonNull OsmandPlugin plugin) {
+									   @NonNull OsmandPlugin plugin) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(EXTRA_PLUGIN_ID, plugin.getId());
