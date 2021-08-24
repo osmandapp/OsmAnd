@@ -20,6 +20,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -142,6 +143,11 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 				if (plugin.isEnabled() != isChecked) {
 					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked)) {
 						updateState();
+
+						Fragment target = getTargetFragment();
+						if (target instanceof PluginStateListener) {
+							((PluginStateListener) target).onPluginStateChanged(plugin);
+						}
 					}
 				}
 			}
@@ -250,13 +256,15 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		}
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull OsmandPlugin plugin) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target,
+									   @NonNull OsmandPlugin plugin) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(EXTRA_PLUGIN_ID, plugin.getId());
 
 			PluginInfoFragment fragment = new PluginInfoFragment();
 			fragment.setArguments(args);
+			fragment.setTargetFragment(target, 0);
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
