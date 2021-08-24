@@ -4148,7 +4148,7 @@
     <string name="loading_list_of_routing_services">Загрузка списка доступных сервисов маршрутизации</string>
     <string name="shared_string_offline">Офлайн</string>
     <string name="shared_string_online">Онлайн</string>
-    <string name="osmand_online_routing_promo">Используйте предопределённые шаблоны или добавьте онлайн-маршрутизацию OSRM, GraphHopper, OpenRouteService или GPX.</string>
+    <string name="osmand_online_routing_promo">Используйте предопределённые шаблоны или добавьте онлайн-маршрутизацию OSRM, GraphHopper, openrouteservice или GPX.</string>
     <string name="shared_string_external">Внешний</string>
     <string name="provided_by">Предоставлен %1$s</string>
     <string name="failed_loading_predefined_engines">Не удалось загрузить список предустановленных шаблонов.

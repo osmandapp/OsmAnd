@@ -4130,7 +4130,7 @@
     <string name="loading_list_of_routing_services">Lade Liste der verfügbaren Routingdienste</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Verwenden Sie vordefinierte Vorlagen, oder fügen Sie OSRM, GraphHopper, OpenRouteService oder GPX Online-Routing hinzu.</string>
+    <string name="osmand_online_routing_promo">Verwenden Sie vordefinierte Vorlagen, oder fügen Sie OSRM, GraphHopper, openrouteservice oder GPX Online-Routing hinzu.</string>
     <string name="shared_string_external">Extern</string>
     <string name="provided_by">Bereitgestellt von %1$s</string>
     <string name="failed_loading_predefined_engines">Die Liste der vordefinierten Vorlagen konnte nicht geladen werden.

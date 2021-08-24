@@ -4126,7 +4126,7 @@
     <string name="loading_list_of_routing_services">Kullanılabilir yönlendirme hizmetlerinin listesi yükleniyor</string>
     <string name="shared_string_offline">Çevrim dışı</string>
     <string name="shared_string_online">Çevrim içi</string>
-    <string name="osmand_online_routing_promo">Önceden tanımlanan şablonlar kullanın veya OSRM, Graphhopper, OpenRouteService veya GPX çevrim içi yönlendirme ekleyin.</string>
+    <string name="osmand_online_routing_promo">Önceden tanımlanan şablonlar kullanın veya OSRM, Graphhopper, openrouteservice veya GPX çevrim içi yönlendirme ekleyin.</string>
     <string name="shared_string_external">Harici</string>
     <string name="provided_by">%1$s tarafından sağlanan</string>
     <string name="failed_loading_predefined_engines">Önceden tanımlanan şablonların listesi yüklenemedi.

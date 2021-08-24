@@ -4049,7 +4049,7 @@
     <string name="verify_email_address_descr">Bekreftelseskode sendt til %1$s. Skriv den inn i feltet nedenfor.</string>
     <string name="delete_version_history">Slett versjonshistorikk</string>
     <string name="nautical_depth">Havdybde</string>
-    <string name="osmand_online_routing_promo">Du kan bruke forhåndsdefinerte maler, eller legge til egendefinert nettbasert ruteberegning. OSRM, GrapHopper, OpenRouteService og GPX støttes.</string>
+    <string name="osmand_online_routing_promo">Du kan bruke forhåndsdefinerte maler, eller legge til egendefinert nettbasert ruteberegning. OSRM, GrapHopper, openrouteservice og GPX støttes.</string>
     <string name="loading_list_of_routing_services">Laster inn liste over tilgjengelige ruteberegningstjenester</string>
     <string name="send_logcat_log">Send Logcat-logg</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>

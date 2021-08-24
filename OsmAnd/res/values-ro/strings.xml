@@ -2935,7 +2935,7 @@
     <string name="loading_list_of_routing_services">Încărcarea listei de servicii de rutare disponibile</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Utilizați șabloane predefinite sau adăugați rutare online OSRM, GraphHopper, OpenRouteService sau GPX.</string>
+    <string name="osmand_online_routing_promo">Utilizați șabloane predefinite sau adăugați rutare online OSRM, GraphHopper, openrouteservice sau GPX.</string>
     <string name="shared_string_external">Extern</string>
     <string name="provided_by">Furnizat de %1$s</string>
     <string name="failed_loading_predefined_engines">Nu s-a putut încărca lista de șabloane predefinite.

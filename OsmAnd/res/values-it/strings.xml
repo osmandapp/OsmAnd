@@ -4116,7 +4116,7 @@
     <string name="loading_list_of_routing_services">Caricamento della lista dei servizi di navigazione disponibili</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Puoi utilizzare i modelli predefiniti o aggiungere OSRM, Graphhopper, OpenRouteService, o navigatori online di GPX.</string>
+    <string name="osmand_online_routing_promo">Puoi utilizzare i modelli predefiniti o aggiungere OSRM, Graphhopper, openrouteservice, o navigatori online di GPX.</string>
     <string name="shared_string_external">Esterno</string>
     <string name="provided_by">Fornito da %1$s</string>
     <string name="failed_loading_predefined_engines">Impossibile caricare la lista dei modelli predefiniti.

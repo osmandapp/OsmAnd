@@ -175,7 +175,7 @@
     <string name="failed_loading_predefined_engines">Could not load the list of predefined templates.\nPlease check your Internet connection.</string>
     <string name="provided_by">Provided by %1$s</string>
     <string name="shared_string_external">External</string>
-    <string name="osmand_online_routing_promo">Use predefined templates, or add OSRM, GraphHopper, OpenRouteService, or GPX online routing.</string>
+    <string name="osmand_online_routing_promo">Use predefined templates, or add OSRM, GraphHopper, openrouteservice, or GPX online routing.</string>
     <string name="shared_string_online">Online</string>
     <string name="shared_string_offline">Offline</string>
     <string name="loading_list_of_routing_services">Loading list of available routing services</string>

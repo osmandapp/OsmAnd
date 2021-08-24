@@ -4118,7 +4118,7 @@
     <string name="loading_list_of_routing_services">載入可用路線規劃服務清單</string>
     <string name="shared_string_offline">離線</string>
     <string name="shared_string_online">線上</string>
-    <string name="osmand_online_routing_promo">使用預先定義的範本，或是新增 OSRM、Graphhopper、OpenRouteService 或是 GPX 線上路線規劃。</string>
+    <string name="osmand_online_routing_promo">使用預先定義的範本，或是新增 OSRM、Graphhopper、openrouteservice 或是 GPX 線上路線規劃。</string>
     <string name="shared_string_external">外部</string>
     <string name="provided_by">由 %1$s 提供</string>
     <string name="failed_loading_predefined_engines">無法載入預先定義範本。

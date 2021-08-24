@@ -4120,7 +4120,7 @@
     <string name="loading_list_of_routing_services">Načítava sa zoznam dostupných navigačných služieb</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Použite prednastavené šablóny alebo prijte online navigácie OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="osmand_online_routing_promo">Použite prednastavené šablóny alebo prijte online navigácie OSRM, Graphhopper, openrouteservice, GPX.</string>
     <string name="shared_string_external">Externé</string>
     <string name="provided_by">Poskytované %1$s</string>
     <string name="failed_loading_predefined_engines">Nepodarilo sa načítať zoznam prednastavených šablón.
