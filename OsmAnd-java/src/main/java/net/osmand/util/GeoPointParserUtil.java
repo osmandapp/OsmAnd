@@ -3,8 +3,6 @@ package net.osmand.util;
 import java.net.URI;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Arrays;
-import java.util.Base64;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -14,7 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.osmand.data.LatLon;
-import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
 public class GeoPointParserUtil {
 
@@ -110,7 +107,7 @@ public class GeoPointParserUtil {
 		URI uri;
 		try {
 			// amap.com uses | in their URLs, which is an illegal character for a URL
-			uri = URI.create(uriString.replaceAll("\\s+", "+")
+			uri = URI.create(uriString.trim().replaceAll("\\s+", "+")
 					.replaceAll("%20", "+")
 					.replaceAll("%2C", ",")
 					.replaceAll("\\|", ";")
@@ -316,8 +313,7 @@ public class GeoPointParserUtil {
 						}
 					}
 					String DATA_PREFIX = "/data=";
-					String[] pathPrefixes = new String[]{"/@", "/ll=",
-							"loc:", DATA_PREFIX, "/"};
+					String[] pathPrefixes = new String[]{DATA_PREFIX, "/@", "/ll=", "loc:", "/"};
 					for (String pref : pathPrefixes) {
 						if (path.contains(pref)) {
 							path = path.substring(path.lastIndexOf(pref) + pref.length());
@@ -335,8 +331,10 @@ public class GeoPointParserUtil {
 										lon = v.substring(2);
 									}
 								}
-								if (lat != null && lon != null) {
-									return new GeoParsedPoint(Double.valueOf(lat), Double.valueOf(lon));
+								if (lat == null || lon == null) {
+									path = uri.getPath();
+								} else {
+									return new GeoParsedPoint(Double.parseDouble(lat), Double.parseDouble(lon));
 								}
 							} else {
 								return parseGoogleMapsPath(path, params);
