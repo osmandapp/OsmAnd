@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -18,12 +20,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -35,8 +39,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.AddPOIAction;
 
 import java.util.List;
-
-import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
 
 /**
  * Created by rosty on 12/27/16.
@@ -71,6 +73,12 @@ public class CreateEditActionDialog extends DialogFragment
         dialog.setArguments(args);
 
         return dialog;
+    }
+
+    public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull QuickAction action) {
+    	if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+            CreateEditActionDialog.newInstance(action.id).show(fragmentManager, TAG);
+        }
     }
 
     private QuickActionRegistry quickActionRegistry;

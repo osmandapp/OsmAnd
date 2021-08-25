@@ -1,5 +1,7 @@
 package net.osmand.plus.base;
 
+import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
+
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
@@ -598,7 +600,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		super.onResume();
 		paused = false;
 		dismissing = false;
-		ViewParent parent = view.getParent();
+		ViewParent parent = view != null ? view.getParent() : null;
 		if (parent != null && containerLayoutListener != null) {
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
 		}
@@ -1084,18 +1086,15 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		ShareDialog.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, ContextMenuFragment fragment) {
-		try {
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
-					.replace(R.id.routeMenuContainer, fragment, fragment.getFragmentTag())
-					.addToBackStack(fragment.getFragmentTag())
+	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull ContextMenuFragment fragment) {
+		String tag = fragment.getFragmentTag();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
+			manager.beginTransaction()
+					.replace(R.id.routeMenuContainer, fragment, tag)
+					.addToBackStack(tag)
 					.commitAllowingStateLoss();
-
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

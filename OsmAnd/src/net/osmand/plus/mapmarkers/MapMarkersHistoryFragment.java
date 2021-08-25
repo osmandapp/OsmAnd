@@ -35,8 +35,10 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkerChan
 
 	private MapMarkersHistoryAdapter adapter;
 	private OsmandApplication app;
-	private Paint backgroundPaint = new Paint();
-	private Paint textPaint = new Paint();
+
+	private final Paint backgroundPaint = new Paint();
+	private final Paint textPaint = new Paint();
+
 	private Snackbar snackbar;
 
 	@Override

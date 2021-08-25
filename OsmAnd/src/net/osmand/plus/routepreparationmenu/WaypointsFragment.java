@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -63,8 +65,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
 
 public class WaypointsFragment extends BaseOsmAndFragment implements ObservableScrollViewCallbacks,
 		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback, AddPointBottomSheetDialog.DialogListener {
@@ -910,24 +910,20 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		return WaypointsFragment.showInstance(fragmentManager, false);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, boolean useRouteInfoMenu) {
-		try {
-			WaypointsFragment fragment = new WaypointsFragment();
-
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, boolean useRouteInfoMenu) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putBoolean(USE_ROUTE_INFO_MENU_KEY, useRouteInfoMenu);
-			fragment.setArguments(args);
 
+			WaypointsFragment fragment = new WaypointsFragment();
+			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	private void onDismiss() {
@@ -944,13 +940,12 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private void dismiss() {
-		try {
-			MapActivity mapActivity = (MapActivity) getActivity();
-			if (mapActivity != null) {
-				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
-			}
-		} catch (Exception e) {
-			//
+		MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity != null) {
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
+					.remove(this)
+					.commitAllowingStateLoss();
 		}
 	}
 

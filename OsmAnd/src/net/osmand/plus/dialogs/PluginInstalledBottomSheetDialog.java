@@ -325,7 +325,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	public interface PluginStateListener {
 
-		void onPluginStateChanged(OsmandPlugin plugin);
+		void onPluginStateChanged(@NonNull OsmandPlugin plugin);
 
 	}
 }

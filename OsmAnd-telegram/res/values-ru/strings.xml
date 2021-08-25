@@ -130,7 +130,7 @@
     <string name="disconnect_from_telegram_desc">Для отзыва доступа к трансляции местоположения. Откройте Telegram, перейдите в Настройки → Конфиденциальность и безопасность → Активные сессии, и завершите сессию OsmAnd Tracker.</string>
     <string name="logout_from_osmand_telegram">Выйти из OsmAnd Tracker?</string>
     <string name="shared_string_login">Войти</string>
-    <string name="shared_string_logout">Выход</string>
+    <string name="shared_string_logout">Выйти</string>
     <string name="logout_from_osmand_telegram_descr">Вы уверены, что хотите выйти из OsmAnd Tracker\? Выйдя из приложения, вы не сможете делиться местоположением или не видеть местоположения других.</string>
     <string name="not_found_yet">Не найдено</string>
     <string name="re_send_location">Отправить местоположение</string>
@@ -170,7 +170,7 @@
     <string name="monitoring_is_disabled">Мониторинг отключён</string>
     <string name="time_on_the_move">Время в движении</string>
     <string name="average_altitude">Средняя высота</string>
-    <string name="average_speed">Средняя скорость</string>
+    <string name="average_speed">Сред. скорость</string>
     <string name="open_in_osmand">Показать в OsmAnd</string>
     <string name="end_date">Дата окончания</string>
     <string name="start_date">Дата начала</string>
@@ -270,5 +270,5 @@
     <string name="shared_string_export">Экспорт</string>
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="logcat_buffer_descr">Проверьте и поделитесь подробными журналами приложения</string>
-    <string name="send_report">Отправить отчет</string>
+    <string name="send_report">Отправить отчёт</string>
 </resources>

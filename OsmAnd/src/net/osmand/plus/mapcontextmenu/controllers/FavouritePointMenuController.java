@@ -24,7 +24,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.FavouritePointMenuBuilder;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
@@ -100,8 +100,8 @@ public class FavouritePointMenuController extends MenuController {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(FavoritePointEditor.TAG);
-			if (fragment instanceof FavoritePointEditorFragmentNew) {
-				((FavoritePointEditorFragmentNew) fragment).dismiss();
+			if (fragment instanceof FavoritePointEditorFragment) {
+				((FavoritePointEditorFragment) fragment).dismiss();
 				return true;
 			}
 		}

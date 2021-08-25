@@ -27,7 +27,7 @@ import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.dashboard.DashChooseAppDirFragment;
+import net.osmand.plus.dashboard.ReloadData;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -250,16 +250,18 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	}
 
 	private void reloadData() {
-		new DashChooseAppDirFragment.ReloadData(getActivity(), getMyApplication()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		new ReloadData(getActivity(), getMyApplication()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, boolean storageReadOnly) {
-		DataStoragePlaceDialogFragment f = new DataStoragePlaceDialogFragment();
-		Bundle args = new Bundle();
-		args.putBoolean(STORAGE_READOLNY_KEY, storageReadOnly);
-		f.setArguments(args);
-		fragmentManager.beginTransaction()
-				.add(f, DataStoragePlaceDialogFragment.TAG)
-				.commitAllowingStateLoss();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			DataStoragePlaceDialogFragment fragment = new DataStoragePlaceDialogFragment();
+			Bundle args = new Bundle();
+			args.putBoolean(STORAGE_READOLNY_KEY, storageReadOnly);
+			fragment.setArguments(args);
+			fragmentManager.beginTransaction()
+					.add(fragment, TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

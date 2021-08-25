@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_shoes">Skoaffär</string>
     <string name="poi_computer">Datorbutik</string>
@@ -196,7 +196,6 @@
     <string name="poi_doityourself">Hemförbättringsbutik</string>
     <string name="poi_doors">Dörrar</string>
     <string name="poi_erotic">Erotisk butik</string>
-    
     <string name="poi_fishing">Fiskeredskap</string>
     <string name="poi_florist">Blomsteraffär</string>
     <string name="poi_frame">Ramaffär</string>
@@ -234,7 +233,6 @@
     <string name="poi_ship_chandler">Skeppshandlaren</string>
     <string name="poi_sports">Sportartiklar</string>
     <string name="poi_stationery">Pappershandel</string>
-    
     <string name="poi_ticket">Biljettförsäljning</string>
     <string name="poi_tobacco">Tobakshandel</string>
     <string name="poi_toys">Leksaksaffär</string>
@@ -382,7 +380,6 @@
     <string name="poi_groyne">Vågbrytare</string>
     <string name="poi_power_substation">Transformatorstation</string>
     <string name="poi_power_transformer">Transformator</string>
-    
     <string name="poi_power_plant">Kraftverk</string>
     <string name="poi_power_generator">Elgenerator</string>
     <string name="poi_power_tower">Kraftledningsstolpe</string>
@@ -524,7 +521,6 @@
     <string name="poi_pension_fund">Pensionsfond</string>
     <string name="poi_migration">Migration</string>
     <string name="poi_tax_inspection">Skattemyndigheten</string>
-    
     <string name="poi_customs">Tull</string>
     <string name="poi_country">Land</string>
     <string name="poi_city">Stad</string>
@@ -3211,7 +3207,6 @@
     <string name="poi_fire_operator">Brandoperatör</string>
     <string name="poi_diplomatic_high_commission">Hög provision</string>
     <string name="poi_diplomatic_permanent_mission">Permanent representation</string>
-    
     <string name="poi_generator_output_electricity_no">Effekt (el): nej</string>
     <string name="poi_atm_yes">ATM: ja</string>
     <string name="poi_health_specialty_radiotherapy_yes">Strålbehandling</string>
@@ -3663,7 +3658,7 @@
     <string name="poi_motorcar_destination">Bilåtkomst: destination</string>
     <string name="poi_motorcar_no">Bilåtkomst: nej</string>
     <string name="poi_motorcar_private">Bilåtkomst: privat</string>
-    <string name="poi_motorcar_yes">Bilåtkomst: ja</string>
+    <string name="poi_motorcar_yes">Ja</string>
     <string name="poi_vehicle_forestry">Fordonsåtkomst: skogsbruk</string>
     <string name="poi_vehicle_delivery">Fordonsåtkomst: leverans</string>
     <string name="poi_vehicle_military">Fordonsåtkomst: militär</string>
@@ -3976,4 +3971,51 @@
     <string name="poi_picnic_table_no">Picknickbord: nej</string>
     <string name="poi_picnic_table_yes">Picknickbord: ja</string>
     <string name="poi_outdoor_seating_poi">Uteservering</string>
+    <string name="poi_access_general">Generell åtkomst</string>
+    <string name="poi_authentication_none_yes">Ja</string>
+    <string name="poi_authentication_none_no">Autentisering krävs: nej</string>
+    <string name="poi_authentication_short_message_text">Kort meddelande som används för autentisering</string>
+    <string name="poi_authentication_short_message_number">Kort meddelande nummer som används för autentisering</string>
+    <string name="poi_authentication_short_message_yes">Ja</string>
+    <string name="poi_authentication_short_message_no">Autentisering med kort meddelande: nej</string>
+    <string name="poi_authentication_phone_call_number">Telefonnummer som används för autentisering</string>
+    <string name="poi_authentication_phone_call_yes">Ja</string>
+    <string name="poi_authentication_phone_call_no">Autentisering med telefonsamtal: nej</string>
+    <string name="poi_authentication_app_yes">Ja</string>
+    <string name="poi_authentication_app_no">Autentisering med app: nej</string>
+    <string name="poi_authentication_key_yes">Ja</string>
+    <string name="poi_authentication_key_no">Autentisering med nyckel: nej</string>
+    <string name="poi_authentication_chip_card_yes">Ja</string>
+    <string name="poi_authentication_chip_card_no">Autentisering med chipkort: nej</string>
+    <string name="poi_authentication_contactless_yes">Ja</string>
+    <string name="poi_authentication_contactless_no">Kontaktlös autentisering: nej</string>
+    <string name="poi_share_taxi_yes">Delad taxi: ja</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_authentication_none">Autentisering krävs inte</string>
+    <string name="poi_authentication_short_message">Autentisering genom kort meddelande</string>
+    <string name="poi_authentication_phone_call">Autentisering med telefonsamtal</string>
+    <string name="poi_authentication_app">Autentisering med app</string>
+    <string name="poi_authentication_key">Autentisering med nyckel</string>
+    <string name="poi_authentication_chip_card">Autentisering med chipkort</string>
+    <string name="poi_authentication_contactless">Kontaktlös autentisering</string>
+    <string name="poi_access_scooter">Tillträde för skoter</string>
+    <string name="poi_access_bicycle">Tillträde för cyklar</string>
+    <string name="poi_access_motorcar">Tillträde för motorfordon</string>
+    <string name="poi_destination">Destination</string>
+    <string name="poi_permanent_camping_only">Endast</string>
+    <string name="poi_permanent_camping">Permanent camping</string>
+    <string name="poi_permanent_camping_no">Nej</string>
+    <string name="poi_permanent_camping_yes">Ja</string>
+    <string name="poi_shelter_yes">Ja</string>
+    <string name="poi_shelter_no">Skydd: nej</string>
+    <string name="poi_lounger">Liggstol</string>
+    <string name="poi_direction_southwest">Sydvästlig riktning</string>
+    <string name="poi_direction_southeast">Sydostlig riktning</string>
+    <string name="poi_direction_northwest">Nordvästlig riktning</string>
+    <string name="poi_direction_northeast">Nordostlig riktning</string>
+    <string name="poi_direction_west">Västlig riktning</string>
+    <string name="poi_direction_south">Sydlig riktning</string>
+    <string name="poi_direction_east">Östlig riktning</string>
+    <string name="poi_direction_north">Nordlig riktning</string>
+    <string name="poi_shelter_filter">Skydd</string>
 </resources>

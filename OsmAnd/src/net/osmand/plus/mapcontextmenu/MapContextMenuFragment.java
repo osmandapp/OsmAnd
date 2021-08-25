@@ -1157,17 +1157,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			final View leftTitleButtonView = view.findViewById(R.id.title_button_view);
 			final TextView leftTitleButton = (TextView) leftTitleButtonView.findViewById(R.id.button_text);
 			if (leftTitleButtonController != null) {
-				SpannableStringBuilder title = new SpannableStringBuilder(leftTitleButtonController.caption);
-				if (leftTitleButtonController.needRightText) {
-					int startIndex = title.length();
-					title.append(" ").append(leftTitleButtonController.rightTextCaption);
-					Context context = view.getContext();
-					Typeface typeface = FontCache.getRobotoRegular(context);
-					title.setSpan(new CustomTypefaceSpan(typeface), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-					title.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(context, nightMode)),
-							startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-				}
-				setupButton(leftTitleButtonView, leftTitleButtonController.enabled, title);
+				setupButton(leftTitleButtonView, leftTitleButtonController.enabled, createRightTextCaption(leftTitleButtonController));
 				if (leftTitleButtonController.visible) {
 					leftTitleButtonView.setVisibility(View.VISIBLE);
 					Drawable startIcon = leftTitleButtonController.getStartIcon();
@@ -1318,7 +1308,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void fillButtonInfo(final TitleButtonController buttonController, View buttonView, TextView buttonText) {
 		if (buttonController != null) {
-			setupButton(buttonView, buttonController.enabled, buttonController.caption);
+			setupButton(buttonView, buttonController.enabled, createRightTextCaption(buttonController));
 			buttonView.setVisibility(buttonController.visible ? View.VISIBLE : View.INVISIBLE);
 
 			Drawable startIcon = buttonController.getStartIcon();
@@ -1336,6 +1326,20 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		} else {
 			buttonView.setVisibility(View.INVISIBLE);
 		}
+	}
+
+	private SpannableStringBuilder createRightTextCaption(@NonNull TitleButtonController buttonController) {
+		SpannableStringBuilder title = new SpannableStringBuilder(buttonController.caption);
+		if (buttonController.needRightText) {
+			int startIndex = title.length();
+			title.append(" ").append(buttonController.rightTextCaption);
+			Context context = view.getContext();
+			Typeface typeface = FontCache.getRobotoRegular(context);
+			title.setSpan(new CustomTypefaceSpan(typeface), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			title.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(context, nightMode)),
+					startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		}
+		return title;
 	}
 
 	private void buildHeader() {
@@ -2232,12 +2236,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity,
 	                                   final boolean centered) {
-		try {
+		if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
+			return false;
+		}
 
-			if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
-				return false;
-			}
-
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
 			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
@@ -2252,16 +2256,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			MapContextMenuFragment fragment = new MapContextMenuFragment();
 			fragment.centered = centered;
-			mapActivity.getSupportFragmentManager().beginTransaction()
+			fragmentManager.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+
+		return false;
 	}
 
 	//DownloadEvents

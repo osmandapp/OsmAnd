@@ -1,5 +1,7 @@
 package net.osmand.plus.backup.ui.status;
 
+import static net.osmand.plus.backup.NetworkSettingsHelper.BACKUP_ITEMS_KEY;
+
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -7,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -14,6 +17,7 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.BackupInfo;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper.BackupExportListener;
 import net.osmand.plus.backup.PrepareBackupResult;
 import net.osmand.plus.chooseplan.OsmAndProPlanFragment;
@@ -21,9 +25,13 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.List;
 
 public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
+
+	private static final Log log = PlatformUtil.getLog(ActionButtonViewHolder.class);
 
 	private final View divider;
 	private final View actionButton;
@@ -39,15 +47,23 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 		OsmandApplication app = (OsmandApplication) itemView.getContext().getApplicationContext();
 		BackupStatus status = BackupStatus.getBackupStatus(app, backup);
 
-		if (app.getNetworkSettingsHelper().isBackupExporting()) {
-			actionButton.setOnClickListener(v -> app.getNetworkSettingsHelper().cancelExport());
+		NetworkSettingsHelper settingsHelper = app.getNetworkSettingsHelper();
+		if (settingsHelper.isBackupExporting()) {
+			actionButton.setOnClickListener(v -> {
+				settingsHelper.cancelImport();
+				settingsHelper.cancelExport();
+			});
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 		} else if (status == BackupStatus.MAKE_BACKUP || status == BackupStatus.CONFLICTS) {
 			actionButton.setOnClickListener(v -> {
-				BackupInfo info = backup.getBackupInfo();
-				List<SettingsItem> items = info.itemsToUpload;
-				if (!items.isEmpty() || !Algorithms.isEmpty(info.filteredFilesToDelete)) {
-					app.getNetworkSettingsHelper().exportSettings(items, info.itemsToDelete, exportListener);
+				try {
+					BackupInfo info = backup.getBackupInfo();
+					List<SettingsItem> items = info.itemsToUpload;
+					if (!items.isEmpty() || !Algorithms.isEmpty(info.filteredFilesToDelete)) {
+						settingsHelper.exportSettings(BACKUP_ITEMS_KEY, items, info.itemsToDelete, exportListener);
+					}
+				} catch (IllegalArgumentException e) {
+					log.error(e.getMessage(), e);
 				}
 			});
 			UiUtilities.setupDialogButton(nightMode, actionButton, DialogButtonType.SECONDARY, R.string.backup_now);

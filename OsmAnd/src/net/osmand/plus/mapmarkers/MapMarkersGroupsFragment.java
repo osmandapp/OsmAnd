@@ -47,8 +47,10 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 
 	private OsmandApplication app;
 	private MapMarkersGroupsAdapter adapter;
-	private Paint backgroundPaint = new Paint();
-	private Paint textPaint = new Paint();
+
+	private final Paint backgroundPaint = new Paint();
+	private final Paint textPaint = new Paint();
+
 	private Snackbar snackbar;
 	private View mainView;
 	private String groupIdToOpen;

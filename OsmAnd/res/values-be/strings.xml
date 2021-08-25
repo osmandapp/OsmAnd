@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="auto_zoom_none">Без аўтаматычнага маштабавання</string>
     <string name="auto_zoom_close">Буйней</string>
@@ -1188,7 +1188,7 @@
     <string name="osmo_edit_color">Выбар колеру</string>
     <string name="gpx_file_is_empty">Пусты GPX-файл</string>
     <string name="gpx_info_waypoints">Пунктаў шляху: %1$s</string>
-    <string name="gpx_info_distance">Даўжыня: %1$s (%2$s кропак) </string>
+    <string name="gpx_info_distance">Даўжыня: %1$s (%2$s пунктаў)</string>
     <string name="gpx_info_start_time">Пачатак: %1$tF,  %1$tT </string>
     <string name="gpx_info_end_time">Канец: %1$tF,  %1$tT </string>
     <string name="gpx_info_average_speed">Сярэдняя хуткасць: %1$s</string>
@@ -1714,7 +1714,7 @@
     <string name="min_km">хв/км</string>
     <string name="m_s">м/с</string>
     <string name="srtm_plugin_disabled">Контурныя лініі выключаныя</string>
-    <string name="downloading_number_of_files">Спампоўваецца - %1$d файл</string>
+    <string name="downloading_number_of_files">Спампоўванне файла %1$d…</string>
     <string name="show_free_version_banner_description">Паказваць банер бясплатнай версіі нават у платнай версіі.</string>
     <string name="show_free_version_banner">Паказваць банэр бясплатнай версіі</string>
     <string name="buy">Набыць</string>
@@ -2114,9 +2114,9 @@
     <string name="quick_action_map_style">Змяніць стыль мапы</string>
     <string name="quick_action_map_style_switch">Стыль мапы зменены на \"%s\".</string>
     <string name="quick_action_add_parking">Дадаць месца паркоўкі</string>
-    <string name="save_track_min_speed_descr">Фільтр: не запісваць кропкі ніжэй гэтай хуткасці.</string>
+    <string name="save_track_min_speed_descr">Фільтр: не запісваць пункты ніжэй гэтай хуткасці.</string>
     <string name="save_track_min_distance">Запіс мінімальнага зруху</string>
-    <string name="save_track_min_distance_descr">Фільтр: задайце мінімальную адлегласць ад кропкі для лагавання новай.</string>
+    <string name="save_track_min_distance_descr">Фільтр: вызначце мінімальную адлегласць ад пункта для запісу новага.</string>
     <string name="save_track_precision">Мінімальная дакладнасць лагавання</string>
     <string name="save_track_precision_descr">Фільтр: Не запісваць, пакуль дакладнасць не дасягне зададзенай.</string>
     <string name="navigate_point_olc_info_invalid">Хібны OLC
@@ -2267,8 +2267,8 @@
     <string name="depth_contour_descr">Контурныя лініі марскіх глыбінь і марскія знакі.</string>
     <string name="sea_depth_thanks">Дзякуй за пакупку «Контураў марскіх глыбінь»</string>
     <string name="index_item_depth_contours_osmand_ext">Контуры марскіх глыбінь</string>
-    <string name="index_item_depth_points_southern_hemisphere">Кропкі марскіх глыбінь паўднёвага паўшар\'я</string>
-    <string name="index_item_depth_points_northern_hemisphere">Кропкі марскіх глыбінь паўночнага паўшар\'я</string>
+    <string name="index_item_depth_points_southern_hemisphere">Адзнакі марскіх глыбінь паўднёвага паўшар\'я</string>
+    <string name="index_item_depth_points_northern_hemisphere">Адзнакі марскіх глыбінь паўночнага паўшар\'я</string>
     <string name="download_depth_countours">Контуры марскіх глыбінь</string>
     <string name="nautical_maps">Марскія мапы</string>
     <string name="analyze_on_map">Аналізуй на мапе</string>
@@ -2621,7 +2621,7 @@
     <string name="one_tap_active_descr">Націск на адзнаку на мапе перамесціць яе на першае месца ў спісе актыўных без адкрыцця кантэкстнага меню.</string>
     <string name="one_tap_active">Актывацыя адным націскам</string>
     <string name="empty_state_av_notes">Стварайце нататкі!</string>
-    <string name="empty_state_av_notes_desc">Дадайце аўдыё-, відэа- ці фотанататку на любую кропку на мапе, выкарыстоўваючы віджэт ці кантэкстнае меню.</string>
+    <string name="empty_state_av_notes_desc">Дадайце аўдыё-, відэа- ці фотанататку ў любы пункт на мапе праз віджэт ці кантэкстнае меню.</string>
     <string name="modify_the_search_query">Змяніце пошукавы запыт.</string>
     <string name="what_is_here">Што тут:</string>
     <string name="parked_at">прыпаркаваны на</string>
@@ -2752,7 +2752,7 @@
     <string name="select_travel_book">Абраць дзённік падарожжаў</string>
     <string name="shared_string_travel_book">Дзённік падарожжаў</string>
     <string name="download_images">Спампаваць выявы</string>
-    <string name="download_wikipedia_description">Спампаваць артыкулы Вікіпедыі для %1$s для аўтаномнага чытання.</string>
+    <string name="download_wikipedia_description">Спампаваць артыкулы Вікіпедыі для %1$s, каб чытаць іх у аўтаномным рэжыме.</string>
     <string name="download_wikipedia_label">Спампаваць даныя Вікіпедыі</string>
     <string name="open_in_browser_wiki">Адкрыць артыкул у сеціве</string>
     <string name="open_in_browser_wiki_description">Праглядзець артыкул у браўзеры.</string>
@@ -3655,7 +3655,7 @@
     <string name="live_monitoring_tracking_interval">Інтэрвал адсочвання</string>
     <string name="live_monitoring_time_buffer">Буфер часу</string>
     <string name="monitoring_min_speed_descr_side_effect">Пабочны эфект: на следзе будуць адсутнічаць усе ўчасткі, дзе не быў выкананы крытэрый мінімальнай хуткасці (напрыклад, калі вы вядзеце ровар на круты пагорак). Таксама не будзе інфармацыі пра перыяды адпачынку, напрыклад, перапынкі. Гэта ўплывае на любы аналіз альбо наступную апрацоўку, напрыклад, пры спробе вызначыць агульную працягласць паездкі, час руху, сярэднюю хуткасць.</string>
-    <string name="monitoring_min_speed_descr">Гэта адсечны фільтр з нізкай хуткасцю. Ён прызначаны для таго, каб не фіксаваць кропкі ніжэй пэўнай хуткасці. Гэта можа зрабіць запісаныя сляды больш плаўнымі пры праглядзе на мапе.</string>
+    <string name="monitoring_min_speed_descr">Гэта адсечны фільтр з нізкай хуткасцю. Ён прызначаны для таго, каб не фіксаваць пункты ніжэй пэўнай хуткасці. Гэта можа зрабіць запісаныя сляды больш плаўнымі пры праглядзе на мапе.</string>
     <string name="not_support_file_type_with_ext">Абярыце падтрымліваемы файл з пашырэннем %1$s.</string>
     <string name="file_does_not_contain_routing_rules">У \"%1$s\" няма правіл маршрутызацыі. Калі ласка, абярыце іншы файл.</string>
     <string name="logcat_buffer_descr">Праверце і падзяліцеся падрабязнымі журналамі праграмы</string>
@@ -3941,7 +3941,6 @@
 \nMapillary - выявы вуліц;
 \nWeb / Wikimedia - фотаздымкі POI паводле даных з OpenStreetMap.</string>
     <string name="ltr_or_rtl_combine_via_star">%1$s * %2$s</string>
-    
     <string name="app_mode_light_aircraft">Лёгкі самалёт</string>
     <string name="plan_route_join_segments">Аб\'яднаць сегменты</string>
     <string name="plan_route_split_before">Падзяліць да</string>
@@ -4033,11 +4032,10 @@
     <string name="uploaded_count">Адпраўлена %1$d з %2$d</string>
     <string name="toast_select_edits_for_upload">Абярыце змены для адпраўлення</string>
     <string name="hillshade_slope_contour_lines">Рэльеф мясцовасці / Схілы / Контурныя лініі</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews — гэта грамадскі праект пра месцы агульнага карыстання, такія як рэстараны, гатэлі, музеі, пункты шляху. Ён збірае ўсе агульнадаступныя даныя пра іх, такія як, выявы, водгукі, спасылкі на іншыя сістэмы, спасылкі OpenStreetMap, Вікіпедыя.
+    <string name="open_place_reviews_plugin_description">Адпраўляйце спасылкі, фотаздымкі і агляды грамадскіх месцаў кшталту рэстаранаў, музеяў і іншых пунктаў шляху як адкрытыя даныя http://openplacereviews.org/data.
 \n
-\nУсе даныя OpenPlaceReview адкрытыя і даступныя тут: http://openplacereviews.org/data.
 \n
-\nВы можаце прачытаць больш па адрасе: http://openplacereviews.org</string>
+\nПадрабязней можна даведацца http://openplacereviews.org</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Выкарыстаць test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Увайсці ў OpenPlaceReviews</string>
@@ -4058,4 +4056,62 @@
     <string name="snap_to_road_descr">Значок бягучага месцазнаходжання будзе прыаязвацца да бягучага маршруту навігацыі</string>
     <string name="routing_attr_height_obstacles_description">Разлік маршруту дапаможа пазбегнуць вялікіх схілаў.</string>
     <string name="purchases">Куплі</string>
+    <string name="not_enough_contributions_descr">У вас павінна быць прынамсі %1$s унёскаў на OpenStreetMap на працягу апошніх %2$s дзён.</string>
+    <string name="shared_string_contributions">Унёскі</string>
+    <string name="contributions_may_calculate_with_delay">Унёскі могуць разлічвацца з затрымкай у некалькі гадзін.</string>
+    <string name="map_updates_are_unavailable_yet">Абнаўленні мапаў пакуль што недаступныя. :-(</string>
+    <string name="connect_track_points_as">Злучыце пункты маршруту</string>
+    <string name="pro_features">Функцыі Pro</string>
+    <string name="purchases_restored">Куплі адноўленыя</string>
+    <string name="grey_color_undefined">Шэры колер выкарыстоўваецца для частак без даных.</string>
+    <string name="osm_live_payment_subscription_management_amz">Плацеж будзе спагнаны з рахунку, прывязанага да акаўнта Amazon падчас пацвярджэння куплі.
+\n
+\nПадпіска працягваецца аўтаматычна, калі вы не скасуеце яе да даты падаўжэння.
+\n
+\nВы можаце кіраваць падпіскамі ў наладах Amazon.</string>
+    <string name="cancel_anytime_in_amazon_app">Можна ў любы момант скасаваць у праграме Amazon</string>
+    <string name="amz_manage_subscription_descr">Кіраваць падпіскай можна з дапамогай праграмы Amazon або праз Amazon.com у сваім профілі.</string>
+    <string name="empty_category_name">Назва катэгорыі пустая</string>
+    <string name="no_activity_for_intent">Не выяўлена праграм, якія могуць выканаць гэтае дзеянне</string>
+    <string name="backup_and_restore">Рэзервовае капіяванне і аднаўленне</string>
+    <string name="shared_string_predefined">Папярэдне вызначаныя</string>
+    <string name="backup_complete">Рэзервовае капіяванне скончана</string>
+    <string name="backup_now">Стварыць рэзервовую копію</string>
+    <string name="make_backup">Стварыце рэзервовую копію</string>
+    <string name="backup_conflicts">Канфлікты</string>
+    <string name="backup_view_conflicts">Прагляд канфліктаў</string>
+    <string name="backup_no_internet_descr">Праверце злучэнне з інтэрнэтам і спампуйце зноў.</string>
+    <string name="backup_pause_all">Прыпыніць усе</string>
+    <string name="backup_delete_all_data">Выдаліць усе мае даныя</string>
+    <string name="backup_delete_all_data_descr">Усе даныя ў OsmAnd Cloud страцяцца. Лакальныя версіі застануцца.</string>
+    <string name="backup_danger_zone">Небяспечная зона</string>
+    <string name="backup_delete_old_data">Выдаліць старыя версіі</string>
+    <string name="backup_data">Рэзервовае капіяванне даных</string>
+    <string name="select_backup_data_descr">Абярыце даныя і каталогі для рэзервовага капіявання.</string>
+    <string name="backup_restore_data_descr">Аднаўленне даных на прыладзе з дапамогай воблачнага рэзервовага капіявання.</string>
+    <string name="backup_restore_data">Аднавіць даныя</string>
+    <string name="backup_version_history">Гісторыя версій</string>
+    <string name="backup_delete_types_descr">Выдаліць усе даныя для адключаных тыпаў з OsmAnd Cloud\?</string>
+    <string name="backup_delete_types">Выдаліць даныя адключаных тыпаў</string>
+    <string name="backup_error_user_is_already_registered">Гэты адрас электроннай пошты ўжо выкарыстоўваецца іншым акаўнтам</string>
+    <string name="backup_error_subscription_was_expired">Тэрмін дзеяння падпіскі скончыўся</string>
+    <string name="backup_error_file_not_available">Файл недаступны</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Хібны або пратэрмінаваны токен</string>
+    <string name="backup_error_user_is_not_registered">Карыстальнікаў з такім адрасам электроннай пошты не зарэгістравана</string>
+    <string name="backup_error_no_valid_subscription">Няма дзейнай падпіскі</string>
+    <string name="logout_from_osmand_cloud_decsr">Выйсці\?
+\nКаб выканаць рэзервовае капіяванне або аднаўленне, вам патрэбна будзе зноў увайсці.</string>
+    <string name="backup_deleting_all_data">Выдаленне ўсіх даных…</string>
+    <string name="backup_deleted_all_data">Усе даныя выдаленыя.</string>
+    <string name="backup_deleting_all_data_descr">Пачакайце пакуль OsmAnd не выдаліць усе вашыя даныя з воблака. Аперацыя не ўплывае на даныя на прыладзе.</string>
+    <string name="backup_deleted_all_data_descr">Усе вашыя даныя паспяхова выдаленыя з OsmAnd Cloud.</string>
+    <string name="backup_version_history_removed">Уся гісторыя версій выдаленая.</string>
+    <string name="backup_data_removed">Усе даныя выдаленыя.</string>
+    <string name="backup_do_not_have_any">У вас пакуль што няма рэзервовых копій у воблаку.</string>
+    <string name="backup_dont_have_any_descr">Наладзьце аўтаматычнае рэзервовае капіяванне, каб не страціць даных.</string>
+    <string name="backup_welcome_back_descr">Аднавіце даныя на гэтай прыладзе з дапамогай наяўных рэзервовых копій або стварыце рэзервовую копію ў OsmAnd Cloud.</string>
+    <string name="backup_setup">Наладзіць рэзервовае капіяванне</string>
+    <string name="backup_restore_now">Аднавіць</string>
+    <string name="backup_error_no_subscription">Падпіскі няма</string>
+    <string name="select_nav_profile_dialog_message">Тып навігацыі ўплывае на разлік маршруту.</string>
 </resources>

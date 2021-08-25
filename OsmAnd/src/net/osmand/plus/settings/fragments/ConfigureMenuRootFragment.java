@@ -1,5 +1,9 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -52,10 +56,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-
 public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = ConfigureMenuRootFragment.class.getName();
@@ -69,9 +69,9 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 	private Activity activity;
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-									   Fragment target,
-									   @NonNull ApplicationMode appMode) {
-		try {
+									   @NonNull ApplicationMode appMode,
+									   @Nullable Fragment target) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ConfigureMenuRootFragment fragment = new ConfigureMenuRootFragment();
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
@@ -80,9 +80,8 @@ public class ConfigureMenuRootFragment extends BaseOsmAndFragment {
 					.addToBackStack(null)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	@Override

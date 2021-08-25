@@ -180,11 +180,6 @@ public class SelectedGpxMenuController extends MenuController {
 	}
 
 	@Override
-	public boolean shouldShowContextMarker() {
-		return false;
-	}
-
-	@Override
 	public Drawable getRightIcon() {
 		int color = ColorUtilities.getActiveColorId(!isLight());
 		return getIcon(R.drawable.ic_action_polygom_dark, color);

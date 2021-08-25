@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_traffic_signals_sound">Hljóð</string>
     <string name="poi_bicycle_parking_type">Tegund</string>
@@ -236,7 +236,6 @@
     <string name="poi_boutique">Tískusérverslun</string>
     <string name="poi_camera">Myndavélar og linsur</string>
     <string name="poi_shoes">Skóbúð</string>
-    
     <string name="poi_furniture">Húsgagnaverslun</string>
     <string name="poi_shop_yes">Almenn verslun</string>
     <string name="poi_gift">Gjafavöruverslun</string>
@@ -1793,7 +1792,6 @@
     <string name="poi_scuba_diving_shop">Verslun með loftpípuköfunardót</string>
     <string name="poi_ship_chandler">Skipaverslun</string>
     <string name="poi_sports">Íþróttavöruverslun</string>
-    
     <string name="poi_vacuum_cleaner">Ryksuguverslun</string>
     <string name="poi_video">Myndbandaverslun</string>
     <string name="poi_department_store">Verslunarmiðstöð</string>
@@ -1837,7 +1835,6 @@
     <string name="poi_breakwater">Brimvarnargarður</string>
     <string name="poi_groyne">Öldubrjótur</string>
     <string name="poi_power_substation">Spennivirki</string>
-    
     <string name="poi_power_plant">Aflstöð</string>
     <string name="poi_power_generator">Aflgjafi</string>
     <string name="poi_club_motorcycle">Mótorhjólaklúbbur</string>
@@ -1900,7 +1897,6 @@
     <string name="poi_club_scout">Skátafélag</string>
     <string name="poi_farmyard">Hlað</string>
     <string name="poi_pension_fund">Eftirlaunasjóður</string>
-    
     <string name="poi_isolated_dwelling">Einangraður bústaður</string>
     <string name="poi_notary">Lögbókandi</string>
     <string name="poi_tax_advisor">Skrifstofa skattaráðgjafa</string>
@@ -2941,7 +2937,6 @@
     <string name="poi_recreation_center">Leikjamiðstöð</string>
     <string name="poi_payment_troika_yes">Troika</string>
     <string name="poi_payment_troika_no">Ekki tekið við Troika-kortum</string>
-    
     <string name="poi_lighting">Ljósafestingar</string>
     <string name="poi_energy_supplier">Skrifstofa orkusala</string>
     <string name="poi_electronics_repair_computer">Raftækjaviðgerðir: tölvur</string>
@@ -3604,7 +3599,7 @@
     <string name="poi_vehicle_military">Aðgangur farartækja: hernaðarlegur</string>
     <string name="poi_vehicle_delivery">Aðgangur farartækja: vöruafhending</string>
     <string name="poi_vehicle_forestry">Aðgangur farartækja: skógrækt</string>
-    <string name="poi_motorcar_yes">Aðgangur bifreiða: já</string>
+    <string name="poi_motorcar_yes">Já</string>
     <string name="poi_motorcar_private">Aðgangur bifreiða: einka</string>
     <string name="poi_motorcar_no">Aðgangur bifreiða: nei</string>
     <string name="poi_motorcar_destination">Aðgangur bifreiða: áfangastaður</string>
@@ -3976,4 +3971,51 @@
     <string name="poi_outdoor_seating_poi">Sæti utandyra</string>
     <string name="poi_power_portal">Tengislá</string>
     <string name="poi_power_terminal">Tengivirki</string>
+    <string name="poi_authentication_none_yes">Já</string>
+    <string name="poi_authentication_none_no">Auðkenning ekki nauðsynleg: nei</string>
+    <string name="poi_authentication_short_message_text">Texti smáskilaboða notað fyrir auðkenningu</string>
+    <string name="poi_authentication_short_message_number">Símanúmer smáskilaboða notað fyrir auðkenningu</string>
+    <string name="poi_authentication_short_message_yes">Já</string>
+    <string name="poi_authentication_short_message_no">Auðkenning með smáskilaboðum: nei</string>
+    <string name="poi_authentication_phone_call_number">Símanúmer notað fyrir auðkenningu</string>
+    <string name="poi_authentication_phone_call_yes">Já</string>
+    <string name="poi_authentication_phone_call_no">Auðkenning með símtali: nei</string>
+    <string name="poi_authentication_app_yes">Já</string>
+    <string name="poi_authentication_app_no">Auðkenning með forriti: nei</string>
+    <string name="poi_authentication_key_yes">Já</string>
+    <string name="poi_authentication_key_no">Auðkenning með lykli: nei</string>
+    <string name="poi_authentication_chip_card_yes">Já</string>
+    <string name="poi_authentication_chip_card_no">Auðkenning með örgjörvakorti: nei</string>
+    <string name="poi_authentication_contactless_yes">Já</string>
+    <string name="poi_authentication_contactless_no">Snertilaus auðkenning: nei</string>
+    <string name="poi_share_taxi_yes">Deilileigubíll: já</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_authentication_none">Auðkenning ekki nauðsynleg</string>
+    <string name="poi_authentication_short_message">Auðkenning með smáskilaboðum</string>
+    <string name="poi_authentication_phone_call">Auðkenning með símtali</string>
+    <string name="poi_authentication_app">Auðkenning með forriti</string>
+    <string name="poi_authentication_key">Auðkenning með lykli</string>
+    <string name="poi_authentication_chip_card">Auðkenning með örgjörvakorti</string>
+    <string name="poi_authentication_contactless">Snertilaus auðkenning</string>
+    <string name="poi_access_scooter">Aðgangur skellinaðra</string>
+    <string name="poi_access_bicycle">Aðgangur reiðhjóla</string>
+    <string name="poi_access_motorcar">Aðgangur bifreiða</string>
+    <string name="poi_access_general">Almennur aðgangur</string>
+    <string name="poi_shelter_yes">Já</string>
+    <string name="poi_shelter_no">Skýli: nei</string>
+    <string name="poi_direction_southwest">Suðvesturátt</string>
+    <string name="poi_direction_southeast">Suðausturátt</string>
+    <string name="poi_direction_northwest">Norðvesturátt</string>
+    <string name="poi_direction_northeast">Norðausturátt</string>
+    <string name="poi_direction_west">Vesturátt</string>
+    <string name="poi_direction_south">Suðurátt</string>
+    <string name="poi_direction_east">Austurátt</string>
+    <string name="poi_direction_north">Norðurátt</string>
+    <string name="poi_destination">Áfangastaður</string>
+    <string name="poi_permanent_camping_only">Einungis</string>
+    <string name="poi_permanent_camping_no">Nei</string>
+    <string name="poi_permanent_camping_yes">Já</string>
+    <string name="poi_shelter_filter">Skýli</string>
+    <string name="poi_permanent_camping">Langleigutjaldstæði</string>
+    <string name="poi_lounger">Hægindastóll</string>
 </resources>

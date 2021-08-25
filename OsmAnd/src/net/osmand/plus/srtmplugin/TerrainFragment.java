@@ -1,5 +1,14 @@
 package net.osmand.plus.srtmplugin;
 
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
+import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
+import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.TERRAIN_MAX_ZOOM;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.TERRAIN_MIN_ZOOM;
+import static net.osmand.plus.srtmplugin.TerrainMode.HILLSHADE;
+import static net.osmand.plus.srtmplugin.TerrainMode.SLOPE;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -21,6 +30,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentActivity;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.google.android.material.slider.RangeSlider;
@@ -50,15 +61,6 @@ import org.apache.commons.logging.Log;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
-
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
-import static net.osmand.plus.download.DownloadActivityType.HILLSHADE_FILE;
-import static net.osmand.plus.download.DownloadActivityType.SLOPE_FILE;
-import static net.osmand.plus.srtmplugin.SRTMPlugin.TERRAIN_MAX_ZOOM;
-import static net.osmand.plus.srtmplugin.SRTMPlugin.TERRAIN_MIN_ZOOM;
-import static net.osmand.plus.srtmplugin.TerrainMode.HILLSHADE;
-import static net.osmand.plus.srtmplugin.TerrainMode.SLOPE;
 
 
 public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickListener,
@@ -295,10 +297,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		ClickableSpan clickableSpan = new ClickableSpan() {
 			@Override
 			public void onClick(@NonNull View view) {
-				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.setData(Uri.parse(url));
-				if (AndroidUtils.isIntentSafe(app, i)) {
-					startActivity(i);
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent.setData(Uri.parse(url));
+					AndroidUtils.startActivityIfSafe(activity, intent);
 				}
 			}
 
@@ -512,5 +515,13 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		ViewGroup.LayoutParams params = bottomEmptySpace.getLayoutParams();
 		params.height = h;
 		bottomEmptySpace.setLayoutParams(params);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.content, new TerrainFragment(), TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

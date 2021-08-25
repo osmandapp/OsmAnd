@@ -36,8 +36,8 @@ import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
 
@@ -49,6 +49,14 @@ import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.FragmentActivity;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
@@ -354,15 +362,12 @@ public class ContextMenuAdapter {
 				contactUsButton.setCompoundDrawablesWithIntrinsicBounds(null, contactUsIcon, null,
 						null);
 				final String email = app.getString(R.string.support_email);
-				contactUsButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
+				contactUsButton.setOnClickListener(v -> {
+					if (getContext() != null) {
 						Intent intent = new Intent(Intent.ACTION_SENDTO);
-						intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-						intent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});
-						if (intent.resolveActivity(app.getPackageManager()) != null) {
-							getContext().startActivity(intent);
-						}
+						intent.setData(Uri.parse("mailto:"));
+						intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
+						AndroidUtils.startActivityIfSafe(getContext(), intent);
 					}
 				});
 				return convertView;

@@ -902,18 +902,21 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType,
 									   @Nullable ApplicationMode appMode, @NonNull Bundle args, @Nullable Fragment target) {
 		try {
-			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
-			if (appMode != null) {
-				args.putString(APP_MODE_KEY, appMode.getStringKey());
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			String tag = screenType.fragmentName;
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
+				Fragment fragment = Fragment.instantiate(activity, tag);
+				if (appMode != null) {
+					args.putString(APP_MODE_KEY, appMode.getStringKey());
+				}
+				fragment.setArguments(args);
+				fragment.setTargetFragment(target, 0);
+				fragmentManager.beginTransaction()
+						.replace(R.id.fragmentContainer, fragment, tag)
+						.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+						.commitAllowingStateLoss();
+				return true;
 			}
-			fragment.setArguments(args);
-			fragment.setTargetFragment(target, 0);
-			activity.getSupportFragmentManager().beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, screenType.fragmentName)
-					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
-					.commit();
-
-			return true;
 		} catch (Exception e) {
 			LOG.error(e);
 		}

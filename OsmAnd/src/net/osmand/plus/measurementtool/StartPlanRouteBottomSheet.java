@@ -1,7 +1,9 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
+
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,9 +39,6 @@ import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
 
 public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragment {
 
@@ -157,10 +156,9 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 	private void importTrack() {
 		Intent intent = ImportHelper.getImportTrackIntent();
-		try {
-			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
-		} catch (ActivityNotFoundException e) {
-			LOG.error(e.getMessage(), e);
+		Activity activity = getActivity();
+		if (activity != null) {
+			AndroidUtils.startActivityForResultIfSafe(activity, intent, OPEN_GPX_DOCUMENT_REQUEST);
 		}
 	}
 
@@ -228,7 +226,8 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 		if (mapActivity != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.hide(this).commit();
+					.hide(this)
+					.commitAllowingStateLoss();
 		}
 	}
 
@@ -237,7 +236,8 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 		if (mapActivity != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.show(this).commit();
+					.show(this)
+					.commitAllowingStateLoss();
 		}
 	}
 

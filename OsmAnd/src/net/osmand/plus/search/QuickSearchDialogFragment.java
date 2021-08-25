@@ -1,5 +1,11 @@
 package net.osmand.plus.search;
 
+import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
+import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
+import static net.osmand.search.core.ObjectType.POI_TYPE;
+import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
+import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -15,7 +21,6 @@ import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +50,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -116,12 +120,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_LOCATION_KEY;
-import static net.osmand.plus.search.SendSearchQueryBottomSheet.MISSING_SEARCH_QUERY_KEY;
-import static net.osmand.search.core.ObjectType.POI_TYPE;
-import static net.osmand.search.core.ObjectType.SEARCH_STARTED;
-import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIORITY;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener,
 		DownloadIndexesThread.DownloadEvents {
@@ -515,7 +513,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						List<HistoryEntry> historyEntries = new ArrayList<HistoryEntry>();
 						List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
 						for (QuickSearchListItem searchListItem : selectedItems) {
-							Object object = searchListItem.getSearchResult().object;;
+							Object object = searchListItem.getSearchResult().object;
 							if (object instanceof HistoryEntry) {
 								historyEntries.add((HistoryEntry) object);
 							}
@@ -727,7 +725,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = new Dialog(getActivity(), getTheme()){
+		Dialog dialog = new Dialog(getActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
 				if (!processBackAction()) {
@@ -893,11 +891,14 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void addMainSearchFragment() {
-		mainSearchFragment = (QuickSearchMainListFragment) Fragment.instantiate(this.getContext(), QuickSearchMainListFragment.class.getName());
-		FragmentManager childFragMan = getChildFragmentManager();
-		FragmentTransaction childFragTrans = childFragMan.beginTransaction();
-		childFragTrans.replace(R.id.search_view, mainSearchFragment);
-		childFragTrans.commit();
+		mainSearchFragment = new QuickSearchMainListFragment();
+		FragmentManager childFragmentManager = getChildFragmentManager();
+		String tag = mainSearchFragment.getClass().getName();
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, tag)) {
+			childFragmentManager.beginTransaction()
+					.replace(R.id.search_view, mainSearchFragment, tag)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	private void updateToolbarButton() {
@@ -928,7 +929,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			if (word.getResult().object instanceof PoiUIFilter) {
 				buttonToolbarFilter.setImageDrawable(app.getUIUtilities()
 						.getIcon(R.drawable.ic_action_filter, ColorUtilities.getActiveColorId(nightMode)));
-			} else{
+				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
+						app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
+			} else {
 				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_filter));
 			}
 		}
@@ -2088,12 +2091,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 									   QuickSearchType searchType,
 									   QuickSearchTab showSearchTab,
 									   @Nullable LatLon latLon) {
-		try {
-
-			if (mapActivity.isActivityDestroyed()) {
-				return false;
-			}
-
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			mapActivity.getMyApplication().logEvent("search_open");
 
 			Bundle bundle = new Bundle();
@@ -2149,10 +2148,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			fragment.setArguments(bundle);
 			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	private MapActivity getMapActivity() {
@@ -2278,22 +2275,25 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 				@Override
 				protected void onPostExecute(GPXFile gpxFile) {
-					hideProgressBar();
-					File dir = new File(getActivity().getCacheDir(), "share");
-					if (!dir.exists()) {
-						dir.mkdir();
-					}
-					File dst = new File(dir, "History.gpx");
-					GPXUtilities.writeGpxFile(dst, gpxFile);
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						hideProgressBar();
+						File dir = new File(activity.getCacheDir(), "share");
+						if (!dir.exists()) {
+							dir.mkdir();
+						}
+						File dst = new File(dir, "History.gpx");
+						GPXUtilities.writeGpxFile(dst, gpxFile);
 
-					final Intent sendIntent = new Intent();
-					sendIntent.setAction(Intent.ACTION_SEND);
-					sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile));
-					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
-					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMapActivity(), dst));
-					sendIntent.setType("text/plain");
-					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					startActivity(sendIntent);
+						final Intent sendIntent = new Intent();
+						sendIntent.setAction(Intent.ACTION_SEND);
+						sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile));
+						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
+						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMapActivity(), dst));
+						sendIntent.setType("text/plain");
+						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						AndroidUtils.startActivityIfSafe(activity, sendIntent);
+					}
 				}
 			};
 			exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -2388,7 +2388,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public interface SearchResultListener {
 		void searchStarted(SearchPhrase phrase);
+
 		void publish(SearchResultCollection res, boolean append);
+
 		// return true if search done, false if next search will be ran immediately
 		boolean searchFinished(SearchPhrase phrase);
 	}
@@ -2399,7 +2401,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				QuickSearchCategoriesListFragment.class.getName(),
 				QuickSearchAddressListFragment.class.getName()
 		};
-		private final int[] titleIds = new int[]{
+		private final int[] titleIds = new int[] {
 				QuickSearchHistoryListFragment.TITLE,
 				QuickSearchCategoriesListFragment.TITLE,
 				QuickSearchAddressListFragment.TITLE

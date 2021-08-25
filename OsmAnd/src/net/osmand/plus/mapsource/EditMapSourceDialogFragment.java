@@ -106,23 +106,27 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private boolean fromTemplate = false;
 	private boolean wasChanged = false;
 
-	public static void showInstance(@NonNull FragmentManager fm,
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
 									@Nullable Fragment targetFragment,
 									@Nullable String editedLayerName) {
-		if (!fm.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
 			fragment.setTargetFragment(targetFragment, 0);
 			fragment.setEditedLayerName(editedLayerName);
-			fragment.show(fm, TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm,
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
 									@NonNull TileSourceTemplate template) {
-		EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
-		fragment.setTemplate(template);
-		fragment.fromTemplate = true;
-		fm.beginTransaction().add(fragment, TAG).commitAllowingStateLoss();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
+			fragment.setTemplate(template);
+			fragment.fromTemplate = true;
+			fragmentManager.beginTransaction()
+					.add(fragment, TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	@Override

@@ -1,5 +1,23 @@
 package net.osmand.plus.importfiles;
 
+import static android.app.Activity.RESULT_OK;
+import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.IndexConstants.SQLITE_CHART_FILE_EXT;
+import static net.osmand.IndexConstants.SQLITE_EXT;
+import static net.osmand.IndexConstants.WPT_CHART_FILE_EXT;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_TYPE_LIST_KEY;
+import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
+
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -58,24 +76,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import static android.app.Activity.RESULT_OK;
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_IMPORT_DIR;
-import static net.osmand.IndexConstants.GPX_INDEX_DIR;
-import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
-import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-import static net.osmand.IndexConstants.SQLITE_CHART_FILE_EXT;
-import static net.osmand.IndexConstants.SQLITE_EXT;
-import static net.osmand.IndexConstants.WPT_CHART_FILE_EXT;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.REPLACE_KEY;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.SETTINGS_TYPE_LIST_KEY;
-import static net.osmand.plus.settings.backend.backup.SettingsHelper.SILENT_IMPORT_KEY;
 
 /**
  * @author Koen Rabaey
@@ -364,37 +364,37 @@ public class ImportHelper {
 		}
 		final OsmandApplication app = mapActivity.getMyApplication();
 		Intent intent = ImportHelper.getImportTrackIntent();
+		if (!AndroidUtils.isIntentSafe(app, intent)) {
+			app.showToastMessage(R.string.no_activity_for_intent);
+			return;
+		}
 
-		ActivityResultListener listener = new ActivityResultListener(IMPORT_FILE_REQUEST, new ActivityResultListener.OnActivityResultListener() {
-			@Override
-			public void onResult(int resultCode, Intent resultData) {
-				MapActivity mapActivity = getMapActivity();
-				if (resultCode == RESULT_OK) {
-					Uri data = resultData.getData();
-					if (mapActivity == null || data == null) {
-						return;
+		ActivityResultListener listener = new ActivityResultListener(IMPORT_FILE_REQUEST, (resultCode, resultData) -> {
+			if (resultCode == RESULT_OK) {
+				Uri data = resultData.getData();
+				if (data == null) {
+					return;
+				}
+				String scheme = data.getScheme();
+				String fileName = "";
+				if ("file".equals(scheme)) {
+					final String path = data.getPath();
+					if (path != null) {
+						fileName = new File(path).getName();
 					}
-					String scheme = data.getScheme();
-					String fileName = "";
-					if ("file".equals(scheme)) {
-						final String path = data.getPath();
-						if (path != null) {
-							fileName = new File(path).getName();
-						}
-					} else if ("content".equals(scheme)) {
-						fileName = getNameFromContentUri(app, data);
-					}
+				} else if ("content".equals(scheme)) {
+					fileName = getNameFromContentUri(app, data);
+				}
 
-					if (fileName.endsWith(importType.getExtension())) {
-						if (importType.equals(ImportType.SETTINGS)) {
-							handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), callback);
-						} else if (importType.equals(ImportType.ROUTING)) {
-							handleXmlFileImport(data, fileName, callback);
-						}
-					} else {
-						app.showToastMessage(app.getString(R.string.not_support_file_type_with_ext,
-								importType.getExtension().replaceAll("\\.", "").toUpperCase()));
+				if (fileName.endsWith(importType.getExtension())) {
+					if (importType.equals(ImportType.SETTINGS)) {
+						handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), callback);
+					} else if (importType.equals(ImportType.ROUTING)) {
+						handleXmlFileImport(data, fileName, callback);
 					}
+				} else {
+					app.showToastMessage(app.getString(R.string.not_support_file_type_with_ext,
+							importType.getExtension().replaceAll("\\.", "").toUpperCase()));
 				}
 			}
 		});
@@ -677,17 +677,8 @@ public class ImportHelper {
 			if (forceImportGpx || !Algorithms.isEmpty(gpxFile.tracks)) {
 				handleResult(gpxFile, fileName, fileSize, save, useImportDir, false);
 			} else {
-				ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
-				fragment.setUsedOnMap(true);
-				fragment.setImportHelper(this);
-				fragment.setGpxFile(gpxFile);
-				fragment.setFileName(fileName);
-				fragment.setFileSize(fileSize);
-				fragment.setSave(save);
-				fragment.setUseImportDir(useImportDir);
-				activity.getSupportFragmentManager().beginTransaction()
-						.add(fragment, ImportGpxBottomSheetDialogFragment.TAG)
-						.commitAllowingStateLoss();
+				ImportGpxBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager(),
+						this, gpxFile, fileName, fileSize, save, useImportDir);
 			}
 		}
 	}

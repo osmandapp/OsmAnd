@@ -1,5 +1,7 @@
 package net.osmand.plus.backup.ui;
 
+import static net.osmand.plus.backup.NetworkSettingsHelper.RESTORE_ITEMS_KEY;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -50,7 +52,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 		exportMode = false;
 		settingsHelper = app.getNetworkSettingsHelper();
 
-		ImportBackupTask importTask = settingsHelper.getImportTask();
+		ImportBackupTask importTask = settingsHelper.getImportTask(RESTORE_ITEMS_KEY);
 		if (importTask != null) {
 			if (settingsItems == null) {
 				settingsItems = importTask.getItems();
@@ -60,7 +62,11 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 			if (duplicates == null) {
 				importTask.setDuplicatesListener(getDuplicatesListener());
 			} else if (duplicates.isEmpty() && selectedItems != null) {
-				settingsHelper.importSettings(selectedItems, "", 1, false, getImportListener());
+				try {
+					settingsHelper.importSettings(RESTORE_ITEMS_KEY, selectedItems, false, getImportListener());
+				} catch (IllegalArgumentException e) {
+					LOG.error(e.getMessage(), e);
+				}
 			}
 		}
 	}
@@ -112,8 +118,12 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 			if (isAdded()) {
 				updateUi(R.string.shared_string_restore, R.string.receiving_data_from_server);
 			}
-			settingsHelper.importSettings(items, "", 1, false, getImportListener());
-		} else if (fragmentManager != null && !isStateSaved()) {
+			try {
+				settingsHelper.importSettings(RESTORE_ITEMS_KEY, items, false, getImportListener());
+			} catch (IllegalArgumentException e) {
+				LOG.error(e.getMessage(), e);
+			}
+		} else if (fragmentManager != null) {
 			RestoreDuplicatesFragment.showInstance(fragmentManager, duplicates, items, this);
 		}
 	}
@@ -130,10 +140,14 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 	}
 
 	private void importItems() {
-		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
 		if (settingsItems != null) {
-			duplicateStartTime = System.currentTimeMillis();
-			settingsHelper.checkDuplicates(settingsItems, selectedItems, getDuplicatesListener());
+			try {
+				duplicateStartTime = System.currentTimeMillis();
+				List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
+				settingsHelper.checkDuplicates(RESTORE_ITEMS_KEY, settingsItems, selectedItems, getDuplicatesListener());
+			} catch (IllegalArgumentException e) {
+				LOG.error(e.getMessage(), e);
+			}
 		}
 		updateUi(R.string.shared_string_preparing, R.string.checking_for_duplicate_description);
 	}
@@ -155,7 +169,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 	}
 
 	private void collectAndReadSettings() {
-		settingsHelper.collectSettings("", 0, true, new BackupCollectListener() {
+		BackupCollectListener collectListener = new BackupCollectListener() {
 
 			@Nullable
 			private SettingsItem getRestoreItem(@NonNull List<SettingsItem> items, @NonNull RemoteFile remoteFile) {
@@ -193,14 +207,21 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 					}
 				}
 			}
-		});
+		};
+		try {
+			settingsHelper.collectSettings(RESTORE_ITEMS_KEY, true, collectListener);
+		} catch (IllegalArgumentException e) {
+			LOG.error(e.getMessage(), e);
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
-		RestoreSettingsFragment fragment = new RestoreSettingsFragment();
-		manager.beginTransaction().
-				replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
+			RestoreSettingsFragment fragment = new RestoreSettingsFragment();
+			manager.beginTransaction().
+					replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

@@ -474,38 +474,33 @@ public class OsmandRegions {
 		}
 
 		List<LatLon> polygon = new ArrayList<>();
-		double currentX = object.getPoint31XTile(0);
-		double currentY = object.getPoint31YTile(0);
-		polygon.add(new LatLon(currentX, currentY));
-		double minX = currentX;
-		double maxX = currentX;
-		double minY = currentY;
-		double maxY = currentY;
+		double x = MapUtils.get31LongitudeX(object.getPoint31XTile(0));
+		double y = MapUtils.get31LatitudeY(object.getPoint31YTile(0));
+		polygon.add(new LatLon(y, x));
+		double minX = x;
+		double maxX = x;
+		double minY = y;
+		double maxY = y;
 
 		if (object.getPointsLength() > 1) {
 			for (int i = 1; i < object.getPointsLength(); i++) {
-				currentX = object.getPoint31XTile(i);
-				currentY = object.getPoint31YTile(i);
-				if (currentX > maxX) {
-					maxX = currentX;
-				} else if (currentX < minX) {
-					minX = currentX;
+				x = MapUtils.get31LongitudeX(object.getPoint31XTile(i));
+				y = MapUtils.get31LatitudeY(object.getPoint31YTile(i));
+				if (x > maxX) {
+					maxX = x;
+				} else if (x < minX) {
+					minX = x;
 				}
-				if (currentY > maxY) {
-					maxY = currentY;
-				} else if (currentY < minY) {
-					minY = currentY;
+				if (y < maxY) {
+					maxY = y;
+				} else if (y > minY) {
+					minY = y;
 				}
-				polygon.add(new LatLon(currentX, currentY));
+				polygon.add(new LatLon(y, x));
 			}
 		}
 
-		minX = MapUtils.get31LongitudeX((int) minX);
-		maxX = MapUtils.get31LongitudeX((int) maxX);
-		double revertedMinY = MapUtils.get31LatitudeY((int) maxY);
-		double revertedMaxY = MapUtils.get31LatitudeY((int) minY);
-
-		rd.boundingBox = new QuadRect(minX, revertedMinY, maxX, revertedMaxY);
+		rd.boundingBox = new QuadRect(minX, minY, maxX, maxY);
 		rd.polygon = polygon;
 	}
 

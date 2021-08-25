@@ -5,7 +5,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.graphics.PointF;
+import android.util.Pair;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -21,7 +27,7 @@ import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
-import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWay;
 import net.osmand.plus.views.layers.geometry.MultiProfileGeometryWayContext;
@@ -29,14 +35,14 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenuProvider {
 
-public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
-	private static final int POINTS_TO_DRAW = 50;
+	private static final int START_ZOOM = 8;
+	private static final int MIN_POINTS_PERCENTILE = 5;
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
@@ -64,12 +70,15 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
 	private LatLon pressedPointLatLon;
-	private boolean overlapped;
 	private boolean tapsDisabled;
 	private MeasurementEditingContext editingCtx;
 
-	private ChartPointsHelper chartPointsHelper;
+	private Integer pointsStartZoom = null;
 	private TrackChartPoints trackChartPoints;
+	private ChartPointsHelper chartPointsHelper;
+
+	private final Path multiProfilePath = new Path();
+	private final PathMeasure multiProfilePathMeasure = new PathMeasure(multiProfilePath, false);
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -140,10 +149,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled && editingCtx.getSelectedPointPosition() == -1) {
-			if (!overlapped) {
-				selectPoint(point.x, point.y, true);
-			}
-			if (editingCtx.getSelectedPointPosition() == -1) {
+			int startZoom = getPointsStartZoom();
+			boolean pointSelected = tileBox.getZoom() >= startZoom && selectPoint(point.x, point.y, true);
+			boolean profileIconSelected = !pointSelected && selectPointForAppModeChange(point, tileBox);
+			if (!pointSelected && !profileIconSelected) {
 				pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 				if (singleTapListener != null) {
 					singleTapListener.onAddPoint();
@@ -153,10 +162,53 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return false;
 	}
 
+	private boolean selectPointForAppModeChange(PointF point, RotatedTileBox tileBox) {
+		int pointIdx = getPointIdxByProfileIconOnMap(point, tileBox);
+		if (pointIdx != -1 && singleTapListener != null) {
+			editingCtx.setSelectedPointPosition(pointIdx);
+			singleTapListener.onSelectProfileIcon(pointIdx);
+			return true;
+		}
+		return false;
+	}
+
+	private int getPointIdxByProfileIconOnMap(PointF point, RotatedTileBox tileBox) {
+		multiProfilePath.reset();
+		Map<Pair<WptPt, WptPt>, RoadSegmentData> roadSegmentData = editingCtx.getRoadSegmentData();
+		List<WptPt> points = editingCtx.getPoints();
+
+		double minDist = view.getResources().getDimension(R.dimen.measurement_tool_select_radius);
+		int indexOfMinDist = -1;
+		for (int i = 0; i < points.size() - 1; i++) {
+			WptPt currentPoint = points.get(i);
+			WptPt nextPoint = points.get(i + 1);
+			if (currentPoint.isGap()) {
+				continue;
+			}
+
+			List<LatLon> routeBetweenPoints = MultiProfileGeometryWay.getRoutePoints(
+					currentPoint, nextPoint, roadSegmentData);
+			PointF profileIconPos = MultiProfileGeometryWay.getIconCenter(tileBox, routeBetweenPoints,
+					path, multiProfilePathMeasure);
+			if (profileIconPos != null && tileBox.containsPoint(profileIconPos.x, profileIconPos.y, 0)) {
+				double dist = MapUtils.getSqrtDistance(point.x, point.y, profileIconPos.x, profileIconPos.y);
+				if (dist < minDist) {
+					indexOfMinDist = i;
+					minDist = dist;
+				}
+			}
+		}
+
+		return indexOfMinDist;
+	}
+
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode && !tapsDisabled) {
-			if (!overlapped && getEditingCtx().getSelectedPointPosition() == -1 && editingCtx.getPointsCount() > 0) {
+			int startZoom = getPointsStartZoom();
+			if (tileBox.getZoom() >= startZoom
+					&& editingCtx.getSelectedPointPosition() == -1
+					&& editingCtx.getPointsCount() > 0) {
 				selectPoint(point.x, point.y, false);
 				if (editingCtx.getSelectedPointPosition() != -1) {
 					enterMovingPointMode();
@@ -176,15 +228,15 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 	}
 
-	private void selectPoint(double x, double y, boolean singleTap) {
+	private boolean selectPoint(float x, float y, boolean singleTap) {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		double lowestDistance = view.getResources().getDimension(R.dimen.measurement_tool_select_radius);
 		for (int i = 0; i < editingCtx.getPointsCount(); i++) {
 			WptPt pt = editingCtx.getPoints().get(i);
 			if (tb.containsLatLon(pt.getLatitude(), pt.getLongitude())) {
-				double xDiff = tb.getPixXFromLonNoRot(pt.getLongitude()) - x;
-				double yDiff = tb.getPixYFromLatNoRot(pt.getLatitude()) - y;
-				double distToPoint = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
+				float ptX = tb.getPixXFromLatLon(pt.lat, pt.lon);
+				float ptY = tb.getPixYFromLatLon(pt.lat, pt.lon);
+				double distToPoint = MapUtils.getSqrtDistance(x, y, ptX, ptY);
 				if (distToPoint < lowestDistance) {
 					lowestDistance = distToPoint;
 					editingCtx.setSelectedPointPosition(i);
@@ -194,6 +246,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		if (singleTap && singleTapListener != null) {
 			singleTapListener.onSelectPoint(editingCtx.getSelectedPointPosition());
 		}
+		return editingCtx.getSelectedPointPosition() != -1;
 	}
 
 	void selectPoint(int position) {
@@ -310,41 +363,73 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		}
 	}
 
-	private void drawPoints(Canvas canvas, RotatedTileBox tb) {
-		WptPt lastBeforePoint = null;
+	private void drawPoints(@NonNull Canvas canvas, @NonNull RotatedTileBox tileBox) {
 		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
-		if (points.size() > 0) {
-			lastBeforePoint = points.get(points.size() - 1);
+		points.addAll(editingCtx.getAfterPoints());
+
+		if (pointsStartZoom == null && points.size() > 100) {
+			double percentile = getPointsDensity();
+			pointsStartZoom = getStartZoom(percentile);
 		}
-		WptPt firstAfterPoint = null;
-		List<WptPt> afterPoints = editingCtx.getAfterPoints();
-		if (afterPoints.size() > 0) {
-			firstAfterPoint = afterPoints.get(0);
-		}
-		points.addAll(afterPoints);
-		overlapped = false;
-		int drawn = 0;
-		for (int i = 0; i < points.size(); i++) {
-			WptPt pt = points.get(i);
-			if (tb.containsLatLon(pt.lat, pt.lon)) {
-				drawn++;
-				if (drawn > POINTS_TO_DRAW) {
-					overlapped = true;
-					break;
+		int startZoom = getPointsStartZoom();
+		if (tileBox.getZoom() >= startZoom) {
+			for (int i = 0; i < points.size(); i++) {
+				WptPt point = points.get(i);
+				if (isInTileBox(tileBox, point)) {
+					drawPointIcon(canvas, tileBox, point, false);
 				}
 			}
 		}
-		if (overlapped) {
-			WptPt pt = points.get(0);
-			drawPointIcon(canvas, tb, pt, false);
-			pt = points.get(points.size() - 1);
-			drawPointIcon(canvas, tb, pt, false);
-		} else {
-			for (int i = 0; i < points.size(); i++) {
-				WptPt pt = points.get(i);
-				drawPointIcon(canvas, tb, pt, false);
+	}
+
+	private double getPointsDensity() {
+		List<WptPt> points = new ArrayList<>(editingCtx.getBeforePoints());
+		points.addAll(editingCtx.getAfterPoints());
+
+		List<Double> distances = new ArrayList<>();
+		WptPt prev = null;
+		for (WptPt wptPt : points) {
+			if (prev != null) {
+				double dist = MapUtils.getDistance(wptPt.lat, wptPt.lon, prev.lat, prev.lon);
+				distances.add(dist);
 			}
+			prev = wptPt;
 		}
+		Collections.sort(distances);
+		return Algorithms.getPercentile(distances, MIN_POINTS_PERCENTILE);
+	}
+
+	private int getPointsStartZoom() {
+		return pointsStartZoom != null ? pointsStartZoom : START_ZOOM;
+	}
+
+	private int getStartZoom(double density) {
+		if (density < 2) {
+			return 21;
+		} else if (density < 5) {
+			return 20;
+		} else if (density < 10) {
+			return 19;
+		} else if (density < 20) {
+			return 18;
+		} else if (density < 50) {
+			return 17;
+		} else if (density < 100) {
+			return 16;
+		} else if (density < 200) {
+			return 15;
+		} else if (density < 500) {
+			return 14;
+		} else if (density < 1000) {
+			return 13;
+		} else if (density < 2000) {
+			return 11;
+		} else if (density < 5000) {
+			return 10;
+		} else if (density < 10000) {
+			return 9;
+		}
+		return START_ZOOM;
 	}
 
 	private void drawBeforeAfterPath(Canvas canvas, RotatedTileBox tb) {
@@ -481,6 +566,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	public void refreshMap() {
+		pointsStartZoom = null;
 		view.refreshMap();
 	}
 
@@ -546,6 +632,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		void onAddPoint();
 
 		void onSelectPoint(int selectedPointPos);
+
+		void onSelectProfileIcon(int startPointPos);
 	}
 
 	interface OnEnterMovePointModeListener {

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -92,8 +93,8 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 	}
 
 	private void importItems() {
-		List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
 		if (file != null && settingsItems != null) {
+			List<SettingsItem> selectedItems = settingsHelper.prepareSettingsItems(adapter.getData(), settingsItems, false);
 			duplicateStartTime = System.currentTimeMillis();
 			settingsHelper.checkDuplicates(file, settingsItems, selectedItems, getDuplicatesListener());
 		}
@@ -118,19 +119,23 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 					updateUi(R.string.shared_string_importing, R.string.importing_from);
 				}
 				settingsHelper.importSettings(file, items, "", 1, getImportListener());
-			} else if (fm != null && !isStateSaved()) {
+			} else if (fm != null) {
 				FileImportDuplicatesFragment.showInstance(fm, duplicates, items, file, this);
 			}
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @NonNull List<SettingsItem> settingsItems, @NonNull File file) {
-		FileImportSettingsFragment fragment = new FileImportSettingsFragment();
-		fragment.setSettingsItems(settingsItems);
-		fragment.setFile(file);
-		fm.beginTransaction().
-				replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+									@NonNull List<SettingsItem> settingsItems,
+									@NonNull File file) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			FileImportSettingsFragment fragment = new FileImportSettingsFragment();
+			fragment.setSettingsItems(settingsItems);
+			fragment.setFile(file);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

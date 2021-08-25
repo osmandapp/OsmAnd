@@ -49,12 +49,10 @@ public class PredefinedProfilesGroup extends ProfilesGroup {
 		ClickableSpan clickableSpan = new ClickableSpan() {
 			@Override
 			public void onClick(@NonNull View widget) {
-				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				i.setData(Uri.parse(url));
-				if (AndroidUtils.isIntentSafe(ctx, i)) {
-					ctx.startActivity(i);
-				}
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.setData(Uri.parse(url));
+				AndroidUtils.startActivityIfSafe(ctx, intent);
 			}
 
 			@Override

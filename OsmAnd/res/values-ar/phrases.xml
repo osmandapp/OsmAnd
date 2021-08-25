@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_shop">متجر</string>
     <string name="poi_personal_transport">نقل شخصي</string>
@@ -82,7 +82,6 @@
     <string name="poi_fabric">متجر الأقمشة</string>
     <string name="poi_dive">معدات الغطس</string>
     <string name="poi_doors">أبواب</string>
-    
     <string name="poi_fishing">معدات الصيد</string>
     <string name="poi_florist">محل بيع الزهور</string>
     <string name="poi_frame">متجر اطارات الصور</string>
@@ -191,7 +190,6 @@
     <string name="poi_water_tank">خزان ماء</string>
     <string name="poi_diplomatic_honorary_consulate">قنصلية شرفية</string>
     <string name="poi_radiotechnics">متجر تقنيات الراديو</string>
-    
     <string name="poi_ticket">بيع التذاكر</string>
     <string name="poi_tobacco">متجر تبغ</string>
     <string name="poi_trade">مبسط تجاري</string>
@@ -237,7 +235,7 @@
     <string name="poi_fuel_biogas">غاز حيوي</string>
     <string name="poi_fuel_lh2">هيدروجين سائل</string>
     <string name="poi_fuel_electricity">كهرباء</string>
-    <string name="poi_electricity_combined_charging">محطة شحن</string>
+    <string name="poi_electricity_combined_charging">محطة الشحن؛ محطة شحن السيارات الكهربائية؛ محطة شحن EV; نقطة إعادة شحن كهربائية؛ نقطة الشحن؛ محطة الشحن الإلكترونية؛ معدات توريد السيارات الكهربائية</string>
     <string name="poi_compressed_air">هواء مضغوط</string>
     <string name="poi_garages">مرائب/كراجات</string>
     <string name="poi_public_transport_platform">موقف النقل العام</string>
@@ -299,7 +297,6 @@
     <string name="poi_theatre">مسرح</string>
     <string name="poi_dentist">طبيب أسنان</string>
     <string name="poi_craft_photographer">مصور</string>
-    
     <string name="poi_townhall">مَبنى البَلدِيّة</string>
     <string name="poi_fountain">نافورة مياه</string>
     <string name="poi_memorial">معلم تذكاري</string>
@@ -1409,7 +1406,6 @@
     <string name="poi_weir">سدّ غاطس</string>
     <string name="poi_breakwater">كاسر الأمواج</string>
     <string name="poi_groyne">حاجز للرواسب البحرية</string>
-    
     <string name="poi_power_pole">عمود كهربائي</string>
     <string name="poi_bell_tower">برج جرس</string>
     <string name="poi_telephone_exchange">مقسم الهاتف</string>
@@ -1689,7 +1685,7 @@
     <string name="poi_pile">كومة</string>
     <string name="poi_notice">إشعار، علامة مائية</string>
     <string name="poi_lock_basin">حوض مقفول</string>
-    <string name="poi_mooring">رباط</string>
+    <string name="poi_mooring">مربط سفن ومراكب بحرية</string>
     <string name="poi_seamark_light_vessel">ضوء السفينة ، علامة مائية</string>
     <string name="poi_seamark_light_float">عوامة منيرة، علامة مائية</string>
     <string name="poi_seamark_light_minor">ضوء رئيسي، علامة البحر</string>
@@ -2261,7 +2257,6 @@
     <string name="poi_organic_only">فقط</string>
     <string name="poi_organic_no">لا</string>
     <string name="poi_organic_yes">نعم</string>
-    
     <string name="poi_passenger_information_display_no">عرض معلومات الركاب: نعم</string>
     <string name="poi_passenger_information_display_yes">عرض معلومات الركاب: نعم</string>
     <string name="poi_support_tower">الحامل/تستند إلى: برج</string>
@@ -3833,4 +3828,94 @@
     <string name="poi_trail_riding_station">سكن للخيول والفرسان</string>
     <string name="poi_shrub">شجيرة</string>
     <string name="poi_operator_type_government">نوع المشغل: حكومي</string>
+    <string name="poi_picnic_table_no">طاولة نزهة : غير موجودة</string>
+    <string name="poi_picnic_table_yes">طاولة نزهة: موجودة</string>
+    <string name="poi_access_bicycle">مدخل الدراجات الهوائية</string>
+    <string name="poi_access_general">الوصول العام</string>
+    <string name="poi_stone_type_coat_of_arms">النوع: شعار النبالة</string>
+    <string name="poi_stone_type_conciliation_cross">النوع: صليب التوفيق</string>
+    <string name="poi_animal_training_dog">كلب</string>
+    <string name="poi_product_beer">المنتج: بيرة</string>
+    <string name="poi_bandstand">منصة فرق موسيقية</string>
+    <string name="poi_theatre_genre_shadow_play">لعب الظل</string>
+    <string name="poi_theatre_genre_ballet">باليه</string>
+    <string name="poi_theatre_genre_marionette">دمى متحركة</string>
+    <string name="poi_theatre_genre_chamber_music">موسيقى الحجرة</string>
+    <string name="poi_theatre_genre_comedy">كوميديا</string>
+    <string name="poi_theatre_genre_puppet">دمية</string>
+    <string name="poi_theatre_genre_cabaret">كاباريه</string>
+    <string name="poi_theatre_genre_opera">أوبرا</string>
+    <string name="poi_theatre_genre_drama">دراما</string>
+    <string name="poi_theatre_genre_musical">موسيقي</string>
+    <string name="poi_theatre_genre_philharmonic">أوركسترا</string>
+    <string name="poi_solarium_yes">خدمات أشعة الشمس</string>
+    <string name="poi_sauna_yes">خدمات حمامات الساونا</string>
+    <string name="poi_massage_yes">خدمات التدليك</string>
+    <string name="poi_massage_chinese">صينى</string>
+    <string name="poi_massage_sexual">جنسي</string>
+    <string name="poi_castle_type_shiro">نوع القلعة: شيرو</string>
+    <string name="poi_castle_type_castrum">نوع القلعة: كاستروم</string>
+    <string name="poi_castle_type_defensive_stately">نوع القلعة: دفاعي، فخم</string>
+    <string name="poi_castle_type_kremlin">نوع القلعة: الكرملين</string>
+    <string name="poi_castle_type_palace">نوع القلعة: قصر</string>
+    <string name="poi_castle_type_fortress">نوع القلعة: حصن</string>
+    <string name="poi_castle_type_defensive">نوع القلعة: دفاعية</string>
+    <string name="poi_castle_type_stately">نوع القلعة: فخمة</string>
+    <string name="poi_historic_milestone">معلم تاريخي</string>
+    <string name="poi_clothes_dance">الرقص</string>
+    <string name="poi_crop_tobacco">المحاصيل: التبغ</string>
+    <string name="poi_shelter_filter">مأوى</string>
+    <string name="poi_permanent_camping">التخييم الدائم</string>
+    <string name="poi_authentication_none">المصادقة غير مطلوبة</string>
+    <string name="poi_authentication_short_message">المصادقة برسالة قصيرة</string>
+    <string name="poi_authentication_phone_call">المصادقة عن طريق مكالمة هاتفية</string>
+    <string name="poi_authentication_app">المصادقة بالتطبيق</string>
+    <string name="poi_authentication_key">المصادقة بالمفتاح</string>
+    <string name="poi_authentication_chip_card">المصادقة عن طريق البطاقة الذكية</string>
+    <string name="poi_authentication_contactless">المصادقة اللا تلامسية</string>
+    <string name="poi_access_scooter">مدخل درجات السكوتر</string>
+    <string name="poi_access_motorcar">مدخل السيارات</string>
+    <string name="poi_shelter_yes">نعم</string>
+    <string name="poi_shelter_no">المأوى: لا</string>
+    <string name="poi_lounger">كرسي شاطىء</string>
+    <string name="poi_direction_southwest">اتجاه الجنوب الغربي</string>
+    <string name="poi_direction_southeast">اتجاه الجنوب الشرقي</string>
+    <string name="poi_direction_northwest">اتجاه الشمال الغربي</string>
+    <string name="poi_direction_northeast">الاتجاه الشمالي الشرقي</string>
+    <string name="poi_direction_west">الاتجاه الغربي</string>
+    <string name="poi_direction_south">الاتجاه الجنوبي</string>
+    <string name="poi_direction_east">الاتجاه الشرقي</string>
+    <string name="poi_direction_north">اتجاه الشمال</string>
+    <string name="poi_destination">وجهة</string>
+    <string name="poi_permanent_camping_only">فقط</string>
+    <string name="poi_permanent_camping_no">لا</string>
+    <string name="poi_permanent_camping_yes">نعم</string>
+    <string name="poi_authentication_none_yes">نعم</string>
+    <string name="poi_authentication_none_no">المصادقة غير مطلوبة: لا</string>
+    <string name="poi_authentication_short_message_text">نص الرسالة القصيرة المستخدم للمصادقة</string>
+    <string name="poi_authentication_short_message_number">رقم الرسالة القصيرة المستخدم للمصادقة</string>
+    <string name="poi_authentication_short_message_yes">نعم</string>
+    <string name="poi_authentication_short_message_no">المصادقة برسالة قصيرة: لا</string>
+    <string name="poi_authentication_phone_call_number">رقم الهاتف المستخدم للمصادقة</string>
+    <string name="poi_authentication_phone_call_yes">نعم</string>
+    <string name="poi_authentication_phone_call_no">المصادقة عن طريق مكالمة هاتفية: لا</string>
+    <string name="poi_authentication_app_yes">نعم</string>
+    <string name="poi_authentication_app_no">المصادقة عن طريق التطبيق: لا</string>
+    <string name="poi_authentication_key_yes">نعم</string>
+    <string name="poi_authentication_key_no">المصادقة بالمفتاح: لا</string>
+    <string name="poi_authentication_chip_card_yes">نعم</string>
+    <string name="poi_authentication_chip_card_no">المصادقة عن طريق البطاقة الذكية: لا</string>
+    <string name="poi_authentication_contactless_yes">نعم</string>
+    <string name="poi_authentication_contactless_no">المصادقة اللا تلامسية: لا</string>
+    <string name="poi_share_taxi_yes">مشاركة سيارة أجرة: نعم</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_outdoor_seating_poi">مقاعد في الهواء الطلق</string>
+    <string name="poi_contact_vhf">تردد عالي جدا</string>
+    <string name="poi_contact_webcam">كاميرا ويب</string>
+    <string name="poi_contact_linkedin">LinkedIn</string>
+    <string name="poi_power_portal">بوابة الطاقة</string>
+    <string name="poi_memorial_subject">موضوع</string>
+    <string name="poi_fuel_propane">بروبان</string>
+    <string name="poi_power_terminal">محطة الطاقة</string>
+    <string name="poi_glacier_status_oscillating">حالة الأنهار الجليدية: متذبذبة</string>
 </resources>

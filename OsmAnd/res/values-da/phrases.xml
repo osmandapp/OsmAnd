@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_bakery">Bager</string>
     <string name="poi_alcohol">Spiritus</string>
@@ -70,7 +70,6 @@
     <string name="poi_ship_chandler">Skibsproviant</string>
     <string name="poi_sports">Sportsforretning</string>
     <string name="poi_stationery">Papirvarebutik</string>
-    
     <string name="poi_ticket">Billetsalg</string>
     <string name="poi_tobacco">Tobak</string>
     <string name="poi_toys">Legetøjsbuttik</string>
@@ -218,7 +217,6 @@
     <string name="poi_pension_fund">Pensionskasse</string>
     <string name="poi_migration">Migration</string>
     <string name="poi_tax_inspection">Skattekontrol</string>
-    
     <string name="poi_customs">Told</string>
     <string name="poi_pharmacy">Apotek</string>
     <string name="poi_hospital">Hospital</string>
@@ -468,7 +466,7 @@
     <string name="poi_car_rental">Biludlejning</string>
     <string name="poi_car_sharing">Delebil</string>
     <string name="poi_boat_sharing">Delebåd</string>
-    <string name="poi_toilets">Toiletetter</string>
+    <string name="poi_toilets">Toiletter</string>
     <string name="poi_sauna">Sauna</string>
     <string name="poi_brothel">Bordel</string>
     <string name="poi_mortuary">Ligkapel</string>
@@ -811,7 +809,6 @@
     <string name="poi_pasta">Pastaforretning</string>
     <string name="poi_pastry">Konditori</string>
     <string name="poi_candles">Stearinlys</string>
-    
     <string name="poi_garden_furniture">Havemøbler</string>
     <string name="poi_leather">Lædervarebutik</string>
     <string name="poi_music">Musikforretning</string>
@@ -830,7 +827,6 @@
     <string name="poi_swimming_pool_shop">Svømmebassin udstyr</string>
     <string name="poi_breakwater">Bølgebryder</string>
     <string name="poi_groyne">Høfde</string>
-    
     <string name="poi_basin">Basin</string>
     <string name="poi_crane">Kran</string>
     <string name="poi_cutline">Brandbælte</string>
@@ -2722,7 +2718,6 @@
     <string name="poi_aquaculture_shrimp">Akvakultur: rejer</string>
     <string name="poi_aquaculture_fish">Akvakultur: fisk</string>
     <string name="poi_aquaculture_mussels">Akvakultur: muslinger</string>
-    
     <string name="poi_min_age">Minimumsalder</string>
     <string name="poi_organic_yes">Ja</string>
     <string name="poi_organic_no">Nej</string>
@@ -3880,4 +3875,18 @@
     <string name="poi_water_source_water_works">Vandværk</string>
     <string name="poi_water_source_tube_well">Rørformet brønd</string>
     <string name="poi_lifeguard_base">Livredderbase</string>
+    <string name="poi_shelter_filter">Shelter</string>
+    <string name="poi_authentication_phone_call">Godkend ved telefonopkald</string>
+    <string name="poi_authentication_app">Godkend med app</string>
+    <string name="poi_authentication_key">Godkend med nøgle</string>
+    <string name="poi_authentication_chip_card">Godkend med chipkort</string>
+    <string name="poi_authentication_contactless">Kontaktløs godkendelse</string>
+    <string name="poi_access_scooter">Adgang for scootere</string>
+    <string name="poi_access_bicycle">Adgang for cykler</string>
+    <string name="poi_access_motorcar">Adgang for motorkøretøjer</string>
+    <string name="poi_access_general">Generel adgang</string>
+    <string name="poi_bay_filter">Type af bugt</string>
+    <string name="poi_permanent_camping">Permanent camping</string>
+    <string name="poi_authentication_none">Godkendelse ikke påkrævet</string>
+    <string name="poi_authentication_short_message">Godkend ved kort besked</string>
 </resources>

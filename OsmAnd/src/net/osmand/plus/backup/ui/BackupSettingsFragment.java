@@ -1,6 +1,5 @@
 package net.osmand.plus.backup.ui;
 
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -55,6 +54,7 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	private NetworkSettingsHelper settingsHelper;
 
 	private Map<String, RemoteFile> oldRemoteFiles = new HashMap<>();
+	private Map<String, RemoteFile> uniqueRemoteFiles = new HashMap<>();
 
 	private ProgressBar progressBar;
 
@@ -110,12 +110,11 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	private void setupBackupTypes(View view) {
 		View container = view.findViewById(R.id.select_types_container);
 		TextView title = container.findViewById(android.R.id.title);
-		TextView summary = container.findViewById(android.R.id.summary);
+		title.setText(R.string.backup_storage_taken);
 
-		String text = getString(R.string.backup_data);
-		Typeface typeface = FontCache.getRobotoMedium(app);
-		title.setText(UiUtilities.createCustomFontSpannable(typeface, text, text));
-		summary.setText(R.string.select_backup_data_descr);
+		ImageView icon = container.findViewById(android.R.id.icon);
+		icon.setImageDrawable(getContentIcon(R.drawable.ic_action_storage));
+
 		container.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -126,7 +125,9 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 			}
 		});
 		setupSelectableBackground(container);
-		AndroidUiHelper.updateVisibility(container.findViewById(android.R.id.icon), false);
+
+		TextView summary = container.findViewById(android.R.id.summary);
+		setupSizeSummary(summary, uniqueRemoteFiles);
 	}
 
 	private void setupAccount(View view) {
@@ -180,10 +181,14 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		setupSelectableBackground(container);
 
 		TextView summary = container.findViewById(android.R.id.summary);
-		if (!Algorithms.isEmpty(oldRemoteFiles)) {
+		setupSizeSummary(summary, oldRemoteFiles);
+	}
+
+	private void setupSizeSummary(TextView summary, Map<String, RemoteFile> remoteFiles) {
+		if (!Algorithms.isEmpty(remoteFiles)) {
 			int filesSize = 0;
-			for (RemoteFile remoteFile : oldRemoteFiles.values()) {
-				filesSize += remoteFile.getFilesize();
+			for (RemoteFile remoteFile : remoteFiles.values()) {
+				filesSize += remoteFile.getZipSize();
 			}
 			summary.setText(AndroidUtils.formatSize(app, filesSize));
 			AndroidUiHelper.updateVisibility(summary, true);
@@ -269,8 +274,10 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 		updateProgressVisibility(false);
 		if (backupResult != null && Algorithms.isEmpty(backupResult.getError())) {
 			oldRemoteFiles = backupResult.getRemoteFiles(RemoteFilesType.OLD);
+			uniqueRemoteFiles = backupResult.getRemoteFiles(RemoteFilesType.UNIQUE);
 			View view = getView();
 			if (view != null) {
+				setupBackupTypes(view);
 				setupVersionHistory(view);
 			}
 		}

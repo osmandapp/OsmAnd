@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
@@ -153,7 +154,7 @@ public class ShareMenu extends BaseMenuController {
 				break;
 			case GEO:
 				Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUrl));
-				mapActivity.startActivity(mapIntent);
+				AndroidUtils.startActivityIfSafe(mapActivity, mapIntent);
 				break;
 			case QR_CODE:
 				Bundle bundle = new Bundle();

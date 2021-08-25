@@ -1,7 +1,10 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.R;
@@ -26,33 +29,23 @@ public class RtePtEditorFragment extends WptPtEditorFragment {
 		return editor != null ? SelectFavoriteCategoryBottomSheet.createInstance(editor.getFragmentTag(), "") : null;
 	}
 
-	public static void showInstance(final MapActivity mapActivity) {
-		RtePtEditor editor = mapActivity.getContextMenu().getRtePtPointEditor();
-		if (editor != null) {
-			//int slideInAnim = editor.getSlideInAnimation();
-			//int slideOutAnim = editor.getSlideOutAnimation();
-
-			RtePtEditorFragment fragment = new RtePtEditorFragment();
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commit();
-		}
+	public static void showInstance(@NonNull MapActivity mapActivity) {
+		showInstance(mapActivity, false);
 	}
 
-	public static void showInstance(final MapActivity mapActivity, boolean skipDialog) {
+	public static void showInstance(@NonNull MapActivity mapActivity, boolean skipDialog) {
 		RtePtEditor editor = mapActivity.getContextMenu().getRtePtPointEditor();
 		if (editor != null) {
-			//int slideInAnim = editor.getSlideInAnimation();
-			//int slideOutAnim = editor.getSlideOutAnimation();
-
-			RtePtEditorFragment fragment = new RtePtEditorFragment();
-			fragment.skipDialog = skipDialog;
-
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commit();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			String tag = editor.getFragmentTag();
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
+				RtePtEditorFragment fragment = new RtePtEditorFragment();
+				fragment.skipDialog = skipDialog;
+				fragmentManager.beginTransaction()
+						.add(R.id.fragmentContainer, fragment, tag)
+						.addToBackStack(null)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 

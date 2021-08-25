@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="local_index_tile_data_zooms">Deskargatutako zoom mailak: %1$s</string>
     <string name="local_index_tile_data_expire">Iraungitze denbora (minutuak): %1$s</string>
@@ -3984,7 +3984,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="restore_selected_data">Leheneratu hautatutako datuak</string>
     <string name="receiving_data_from_server">Datuak jasotzen zerbitzaritik</string>
     <string name="restore_complete">Leheneratzea burutu da</string>
-    <string name="grey_color_slope">Kolore grisa erabiltzen da malda zehaztu gabe dagoenean.</string>
     <string name="backup_version_history">Bertsioen historia</string>
     <string name="backup_storage_taken">Biltegiratzea</string>
     <string name="backup_version_history_delete_descr">Desgaituta dauden moten aldaketen historia hodeitik ezabatu nahi duzu\?</string>
@@ -4051,4 +4050,33 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="backup_delete_types">Ezabatu desgaitutako moten datuak</string>
     <string name="shared_string_discussion">Eztabaida</string>
     <string name="shared_string_view_all">Ikusi dena</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Sareko kidetzaren araberako kolorea eman</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Esleitu kolorea ibilbideei nodo sare motaren arabera (nazioartekoa, eskualdekoa, tokikoa)</string>
+    <string name="walking_route_osmc_description">Esleitu kolorea tokian tokiko esleitutako koloreen arabera (OpenStreetMap-en badago) eta motaren arabera (nazioartekoa, eskualdekoa, tokikoa)</string>
+    <string name="travel_routes">Bidaiatzeko ibilbideak</string>
+    <string name="setting_supported_by_style">\'%1$s\' mapa estiloak onartzen du konfigurazio hau</string>
+    <string name="direct_line_maps_required_descr">Ibilbidearen kalkulua ohikoa baino gehiago luzatzen ari da.
+\n
+\nAgian zenbait mapa ez da kargatu.</string>
+    <string name="online_direct_line_maps_link">Egiaztatu behar diren mapak</string>
+    <string name="offline_maps_required_descr">Lineaz kanpoko mapa gehigarriak behar dira ibilbidea kalkulatzeko.</string>
+    <string name="online_maps_required_descr">Tamalez, OsmAndek ezin izan du bilatu (kalkulatu) zure ezarpenekin bat datorren ibilbiderik.
+\n
+\nAgian mapa batzuk ez dira kargatu. Online egiazta dezakezu beharrezkoak diren mapak.</string>
+    <string name="online_maps_searching_descr">Mapen lineako bilaketa martxan dago.</string>
+    <string name="reset_to_original">Leheneratu jatorrizkoa</string>
+    <string name="backup_error_no_subscription">Ez dago harpidetzarik</string>
+    <string name="map_updates_for_mappers">Mapa-egileentzako mapen eguneraketak</string>
+    <string name="benefits_for_contributors">OSMren kolaboratzaile aktiboen onurak</string>
+    <string name="benefits_for_contributors_primary_descr">Mapen ordueroko mugarik gabeko eguneraketez baliatzen ahal zara baldin eta OpenStreetMap.org-en kolaboratzaile aktiboa bazara.</string>
+    <string name="benefits_for_contributors_secondary_descr">Sartu OpenStreetMapen eta begiratu eskubidea ote duzun mugarik gabe hilabeteko eta orduko mapen eguneraketak jasotzeko.</string>
+    <string name="use_login_and_password">Erabili erabiltzaile izena eta pasahitza</string>
+    <string name="available_until">Erabilgarri %1$s arte</string>
+    <string name="enough_contributions_descr">Zorionak, OpenStreetMapen nahikoa ekarpen egin dituzu eta mugarik gabeko mapen eguneraketaz baliatu ahal izango duzu.</string>
+    <string name="not_enough_contributions_descr">"Gutxienez %1$s mapa ekarpen egin behar dituzu OpenStreetMapen azken  %2$s egunetan."</string>
+    <string name="shared_string_contributions">Ekarpenak</string>
+    <string name="contributions_may_calculate_with_delay">Ekarpenen inplementazioa zenbait orduz atzeratu daitezke.</string>
+    <string name="map_updates_are_unavailable_yet">Mapen eguneraketak oraindik ez daude erabilgarri :-(</string>
+    <string name="connect_track_points_as">Konektatu ibilbide puntuak</string>
+    <string name="pro_features">Pro ezaugarriak</string>
 </resources>

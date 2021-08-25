@@ -363,9 +363,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				.setIcon(icon)
 				.setListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-					if (AndroidUtils.isIntentSafe(this, intent)) {
-						startActivity(intent);
-					}
+					AndroidUtils.startActivityIfSafe(this, intent);
 					return false;
 				})
 				.createItem();

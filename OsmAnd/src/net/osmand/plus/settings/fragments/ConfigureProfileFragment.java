@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -55,8 +57,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
-
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
@@ -201,6 +201,21 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	private void importBackupSettingsItems(File file, List<SettingsItem> items) {
 		app.getFileSettingsHelper().importSettings(file, items, "", 1, new ImportListener() {
+			@Override
+			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+
+			}
+
+			@Override
+			public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+			}
+
+			@Override
+			public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+
+			}
+
 			@Override
 			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				app.showToastMessage(R.string.profile_prefs_reset_successful);
@@ -405,50 +420,30 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		String prefId = preference.getKey();
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			String prefId = preference.getKey();
+			ApplicationMode selectedMode = getSelectedAppMode();
 
-		if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				try {
-					FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-					ApplicationMode selectedMode = getSelectedAppMode();
-					if (!ApplicationMode.values(app).contains(selectedMode)) {
-						ApplicationMode.changeProfileAvailability(selectedMode, true, app);
-					}
-					settings.setApplicationMode(selectedMode);
-					fragmentManager.beginTransaction()
-							.remove(this)
-							.addToBackStack(TAG)
-							.commitAllowingStateLoss();
-				} catch (Exception e) {
-					LOG.error(e);
+			if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
+				if (!ApplicationMode.values(app).contains(selectedMode)) {
+					ApplicationMode.changeProfileAvailability(selectedMode, true, app);
 				}
-			}
-		} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
-			}
-		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
-			}
-		} else if (EXPORT_PROFILE.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ExportSettingsFragment.showInstance(fragmentManager, getSelectedAppMode(), false);
-			}
-		} else if (DELETE_PROFILE.equals(prefId)) {
-			onDeleteProfileClick();
-		} else if (UI_CUSTOMIZATION.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ConfigureMenuRootFragment.showInstance(
-						fragmentManager,
-						this,
-						getSelectedAppMode());
+				settings.setApplicationMode(selectedMode);
+				fragmentManager.beginTransaction()
+						.remove(this)
+						.addToBackStack(TAG)
+						.commitAllowingStateLoss();
+			} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, selectedMode);
+			} else if (RESET_TO_DEFAULT.equals(prefId)) {
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, selectedMode);
+			} else if (EXPORT_PROFILE.equals(prefId)) {
+				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, false);
+			} else if (DELETE_PROFILE.equals(prefId)) {
+				onDeleteProfileClick();
+			} else if (UI_CUSTOMIZATION.equals(prefId)) {
+				ConfigureMenuRootFragment.showInstance(fragmentManager, selectedMode, this);
 			}
 		}
 		return super.onPreferenceClick(preference);
