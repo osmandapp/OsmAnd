@@ -3063,7 +3063,7 @@
     <string name="loading_list_of_routing_services">Ladataan luettelo käytettävissä olevista reitityspalveluista</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Voit käyttää valmiita malleja tai lisätä tuettuja mukautettuja online-reitityksiä: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="osmand_online_routing_promo">Voit käyttää valmiita malleja tai lisätä tuettuja mukautettuja online-reitityksiä: OSRM, Graphhopper, openrouteservice, GPX.</string>
     <string name="shared_string_external">Ulkoinen</string>
     <string name="provided_by">Toimittanut %1$s</string>
     <string name="wikivoyage_travel_guide_descr">Oppaita planeetan mielenkiintoisimpiin paikkoihin OsmAndin sisällä, ilman Internet-yhteyttä.</string>

@@ -4502,5 +4502,7 @@
 	<string name="poi_shelter_no">Shelter: no</string>
 	<string name="poi_shelter_yes">Yes</string>
 
+	<string name="poi_arch">Arch</string>
+
 
 </resources>

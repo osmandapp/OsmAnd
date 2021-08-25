@@ -4120,7 +4120,7 @@
     <string name="loading_list_of_routing_services">Lista de carregamento de serviços de roteamento disponíveis</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Use modelos predefinidos ou adicione roteamento online OSRM, GraphHopper, OpenRouteService ou GPX.</string>
+    <string name="osmand_online_routing_promo">Use modelos predefinidos ou adicione roteamento online OSRM, GraphHopper, openrouteservice ou GPX.</string>
     <string name="shared_string_external">Externo</string>
     <string name="provided_by">Fornecido por %1$s</string>
     <string name="failed_loading_predefined_engines">Não foi possível carregar a lista de modelos predefinidos.

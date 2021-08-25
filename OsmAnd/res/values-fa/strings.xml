@@ -4217,7 +4217,7 @@
 \n
 \n</string>
     <string name="send_logcat_log">ارسال گزارش logcat</string>
-    <string name="osmand_online_routing_promo">از الگوهای از پیش تعریف شده استفاده کنید یا از خدمات مسیریابی آنلاین OSRM،‏ GrapgHopper،‏ OpenRouteService یا GPX اضافه نمایید.</string>
+    <string name="osmand_online_routing_promo">از الگوهای از پیش تعریف شده استفاده کنید یا از خدمات مسیریابی آنلاین OSRM،‏ GrapgHopper،‏ openrouteservice یا GPX اضافه نمایید.</string>
     <string name="backup_view_conflicts">دیدن تداخل‌ها</string>
     <string name="backup_delete_old_data_warning">در حال حذف سابقهٔ تغییر مربوط به داده‌های پیش‌تر بارشده هستید.
 \n

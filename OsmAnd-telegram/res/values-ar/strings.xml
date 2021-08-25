@@ -75,7 +75,7 @@
     <string name="last_response_duration">الرد الأخير: قبل٪ 1 $ s</string>
     <string name="shared_string_error_short">خطا</string>
     <string name="privacy_policy_telegram_client">تتبع أوسماند هوأحد العملاء الذين يستخدمون منصة تيليجرام المفتوحة. يمكن لجهات الاتصال الخاصة بك استخدام أي عميل تيليجرام آخر.</string>
-    <string name="privacy_policy_agree">من خلال النقر على \"متابعة\" فإنك توافق على شروط سياسة الخصوصية تيليجرام وأوسماند.</string>
+    <string name="privacy_policy_agree">من خلال النقر على \"متابعة\" أنت توافق على شروط سياسة الخصوصية لتطبيقي تيليجرام وأوسماند.</string>
     <string name="shared_string_accept">قبول</string>
     <string name="telegram_privacy_policy">سياسة خصوصية تيليجرام</string>
     <string name="osmand_privacy_policy">سياسة الخصوصية Osmand</string>
