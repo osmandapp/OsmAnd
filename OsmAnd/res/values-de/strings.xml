@@ -4130,7 +4130,7 @@
     <string name="loading_list_of_routing_services">Lade Liste der verfügbaren Routingdienste</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Verwenden Sie vordefinierte Vorlagen, oder fügen Sie OSRM, GraphHopper, OpenRouteService oder GPX Online-Routing hinzu.</string>
+    <string name="osmand_online_routing_promo">Verwenden Sie vordefinierte Vorlagen, oder fügen Sie OSRM, GraphHopper, openrouteservice oder GPX Online-Routing hinzu.</string>
     <string name="shared_string_external">Extern</string>
     <string name="provided_by">Bereitgestellt von %1$s</string>
     <string name="failed_loading_predefined_engines">Die Liste der vordefinierten Vorlagen konnte nicht geladen werden.
@@ -4309,4 +4309,13 @@
     <string name="pro_features">Pro-Funktionen</string>
     <string name="purchases_restored">Käufe wiederhergestellt</string>
     <string name="grey_color_undefined">Graue Farbe wird für Bereiche ohne Daten verwendet.</string>
+    <string name="osm_live_payment_subscription_management_amz">Bezahlung wird von Ihrem Amazon-Konto eingezogen, wenn Sie den Kauf bestätigen.
+\n
+\nEs wird erneuert, es sei denn, Sie kündigen, bevor die ausgewählte Erneuerungsperiode beginnt.
+\n
+\nVerwalten und kündigen Sie Ihre Abonnements jederzeit in den Amazon-Einstellungen.</string>
+    <string name="cancel_anytime_in_amazon_app">Jederzeit in der Amazon App kündigen</string>
+    <string name="amz_manage_subscription_descr">Um Ihr Abonnement zu verwalten, verwenden Sie die Amazon App auf Ihrem Gerät oder öffnen Sie die Amazon.com Website unter Ihrem Profil.</string>
+    <string name="empty_category_name">Leerer Kategoriename</string>
+    <string name="no_activity_for_intent">Es wurden keine geeigneten Anwendungen für diese Aktion gefunden</string>
 </resources>

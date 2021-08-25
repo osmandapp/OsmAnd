@@ -4129,7 +4129,7 @@
     <string name="loading_list_of_routing_services">Načítání seznamu dostupných navigačních služeb</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Můžete použít předdefinované šablony, nebo přidat vlastní online navigaci. Podporováno: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="osmand_online_routing_promo">Můžete použít předdefinované šablony, nebo přidat vlastní online navigaci. Podporováno: OSRM, Graphhopper, openrouteservice, GPX.</string>
     <string name="shared_string_external">Externí</string>
     <string name="provided_by">Zprostředkuje %1$s</string>
     <string name="failed_loading_predefined_engines">Seznam předdefinovaných šablon se nepodařilo načíst.
@@ -4178,4 +4178,25 @@
     <string name="backup_restore_now">Obnovit nyní</string>
     <string name="shared_string_purchased">Zakoupeno</string>
     <string name="explore_wikipedia_offline">Prozkoumejte Wikipedii offline.</string>
+    <string name="release_4_0">• Záloha do cloudu
+\n
+\n • Přidán noční režim pro styl mapy \"Topo\"
+\n
+\n • Přidána volba pro stažení vrstevnic ve stopách
+\n
+\n • Trasy mohou být vybarveny podle výšky, rychlosti a svahů
+\n
+\n • Aktualizován dialog \"Záznam cesty\"
+\n
+\n • Měření vzdálenosti dotykem byl přesunut z Kruhového pravítka do samostatného nastavení
+\n
+\n • Plánování trasy: Nyní můžete měnit možnosti navigace, přistupovat ke konfiguraci mapy a vyhledávat, bez nutnosti opuštění plánování trasy
+\n
+\n • Nová obrazovka \"Nákupy\" s podrobnými informacemi o nákupu
+\n
+\n • Přidána možnost změny vzhledu linie trasy
+\n
+\n • Aktualizace OsmAnd Live přesunuty do sekce \"Stáhnout mapy &gt; Aktualizace\"
+\n
+\n</string>
 </resources>

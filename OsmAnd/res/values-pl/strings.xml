@@ -4121,7 +4121,7 @@
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="select_nav_profile_dialog_message">„Rodzaj nawigacji” wybiera sposób obliczania tras z dostępnymi silnikami wyznaczania tras offline i online.</string>
     <string name="loading_list_of_routing_services">Wczytywanie listy dostępnych usług routingu</string>
-    <string name="osmand_online_routing_promo">Użyj wstępnie zdefiniowanych szablonów, lub dodaj OSRM, Graphhopper, OpenRouteService lub GPX wyznaczania tras online.</string>
+    <string name="osmand_online_routing_promo">Użyj wstępnie zdefiniowanych szablonów, lub dodaj OSRM, Graphhopper, openrouteservice lub GPX wyznaczania tras online.</string>
     <string name="shared_string_external">Zewnętrzny</string>
     <string name="provided_by">Dostarczone przez %1$s</string>
     <string name="failed_loading_predefined_engines">Nie udało się załadować listy wstępnie zdefiniowanych szablonów.
@@ -4305,4 +4305,8 @@
     <string name="pro_features">Funkcje Pro</string>
     <string name="purchases_restored">Przywrócono zakupy</string>
     <string name="grey_color_undefined">Szary kolor jest używany dla części baz danych.</string>
+    <string name="cancel_anytime_in_amazon_app">Anuluj w dowolnym momencie w aplikacji Amazon</string>
+    <string name="amz_manage_subscription_descr">Aby zarządzać subskrypcją, skorzystaj z aplikacji Amazon na urządzeniu lub otwórz witrynę Amazon.com pod swoim profilem.</string>
+    <string name="empty_category_name">Pusta nazwa kategorii</string>
+    <string name="no_activity_for_intent">Nie znaleziono odpowiednich aplikacji do wykonania tej czynności</string>
 </resources>

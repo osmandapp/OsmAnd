@@ -1380,26 +1380,22 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void hide() {
-		try {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				fragmentManager.beginTransaction().hide(this).commit();
-			}
-		} catch (Exception e) {
-			log.error(e);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
+					.hide(this)
+					.commitAllowingStateLoss();
 		}
 	}
 
 	public void show() {
-		try {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				fragmentManager.beginTransaction().show(this).commit();
-			}
-		} catch (Exception e) {
-			log.error(e);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
+					.show(this)
+					.commitAllowingStateLoss();
 		}
 	}
 
@@ -1491,7 +1487,8 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 									   @Nullable String callingFragmentTag,
 									   boolean adjustMapPosition,
 									   @Nullable GPXTrackAnalysis analyses) {
-		try {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
 
@@ -1514,14 +1511,12 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				fragment.setLatLon(latLonRect);
 			}
 
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
+			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(fragment.getFragmentTag())
+					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

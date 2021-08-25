@@ -4129,7 +4129,7 @@
     <string name="loading_list_of_routing_services">Ŝargado de listo de disponeblaj navigiloj</string>
     <string name="shared_string_offline">Malkonekta</string>
     <string name="shared_string_online">Enreta</string>
-    <string name="osmand_online_routing_promo">Vi povas uzi antaŭdifinitajn ŝablonojn, aŭ aldoni enretajn navigilojn OSRM, GraphHopper, OpenRouteService aŭ GPX.</string>
+    <string name="osmand_online_routing_promo">Vi povas uzi antaŭdifinitajn ŝablonojn, aŭ aldoni enretajn navigilojn OSRM, GraphHopper, openrouteservice aŭ GPX.</string>
     <string name="shared_string_external">Ekstera</string>
     <string name="provided_by">Liverata de %1$s</string>
     <string name="failed_loading_predefined_engines">Fiaskis enlegi liston de antaŭdifinitaj ŝablonoj.
@@ -4303,4 +4303,13 @@
     <string name="pro_features">Altnivelaj eblaĵoj</string>
     <string name="purchases_restored">Aĉetoj restarigitaj</string>
     <string name="grey_color_undefined">La griza koloro estas uzata por fragmentoj sen datumoj.</string>
+    <string name="osm_live_payment_subscription_management_amz">La pago estos prenita el via konto Amazon post konfirmi aĉeton.
+\n
+\nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo.
+\n
+\nVi povas administri kaj rezigni viajn abonojn per agordoj de via konto Amazon.</string>
+    <string name="cancel_anytime_in_amazon_app">Rezignebla iam ajn per la aplikaĵo Amazon.</string>
+    <string name="amz_manage_subscription_descr">Por administri vian abonon uzu la aplikaĵon Amazon e via aparato aŭ malfermu vian profilon en la retejo Amazon.com.</string>
+    <string name="empty_category_name">Malplena nomo de kategorio</string>
+    <string name="no_activity_for_intent">Neniu kongrua aplikaĵo por plenumi tiun ĉi agon</string>
 </resources>

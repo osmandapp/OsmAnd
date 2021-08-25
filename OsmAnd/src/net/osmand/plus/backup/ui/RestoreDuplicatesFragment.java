@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -87,13 +88,15 @@ public class RestoreDuplicatesFragment extends ImportDuplicatesFragment {
 
 	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
 									List<SettingsItem> settingsItems, Fragment target) {
-		RestoreDuplicatesFragment fragment = new RestoreDuplicatesFragment();
-		fragment.setTargetFragment(target, 0);
-		fragment.setDuplicatesList(duplicatesList);
-		fragment.setSettingsItems(settingsItems);
-		fm.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+			RestoreDuplicatesFragment fragment = new RestoreDuplicatesFragment();
+			fragment.setTargetFragment(target, 0);
+			fragment.setDuplicatesList(duplicatesList);
+			fragment.setSettingsItems(settingsItems);
+			fm.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

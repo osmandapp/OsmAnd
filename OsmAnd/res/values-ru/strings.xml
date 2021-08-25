@@ -29,7 +29,7 @@
     <string name="rendering_attr_tracktype_grade3_name">Смешанное</string>
     <string name="rendering_attr_tracktype_grade4_name">Почти мягкое</string>
     <string name="rendering_attr_tracktype_grade5_name">Мягкое</string>
-    <string name="routeInfo_tracktype_name">Твёрдость поверхности дороги</string>
+    <string name="routeInfo_tracktype_name">Твёрдость поверхности</string>
     <string name="intermediate_waypoint">Промежуточная точка</string>
     <string name="intermediate_destinations">Промежуточные точки</string>
     <string name="arrive_at_time">Прибытие в %1$s</string>
@@ -340,7 +340,7 @@
     <string name="download_roads_only_maps">Карта дорог</string>
     <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только функции Android).</string>
     <string name="safe_mode">Безопасный режим</string>
-    <string name="native_library_not_running">Приложение работает в безопасном режиме (отключите его в разделе «Настройки»).</string>
+    <string name="native_library_not_running">Приложение работает в безопасном режиме (отключается в разделе «Настройки»).</string>
     <string name="background_service_is_enabled_question">Фоновая служба OsmAnd всё ещё работает. Остановите её тоже\?</string>
     <string name="close_changeset">Закрыть пакет правок</string>
     <string name="zxing_barcode_scanner_not_found">Приложение ZXing Barcode Scanner не найдено. Искать в Google Play?</string>
@@ -558,7 +558,7 @@
     <string name="send_location">Отправить местоположение</string>
     <string name="context_menu_item_share_location">Отправка геопозиции</string>
     <string name="add_waypoint_dialog_added">Путевая точка GPX «{0}» добавлена</string>
-    <string name="add_waypoint_dialog_title">Добавить точку в записанный трек</string>
+    <string name="add_waypoint_dialog_title">Добавить путевую точку в записанный трек</string>
     <string name="amenity_type_administrative">Административное</string>
     <string name="amenity_type_barrier">Препятствие</string>
     <string name="amenity_type_education">Образование</string>
@@ -2827,9 +2827,9 @@
     <string name="lang_gn_py">Гуарани</string>
     <string name="run_full_osmand_msg">Вы используете {0} карту, которая поставляется OsmAnd. Хотите запустить полную версию Osmand\?</string>
     <string name="run_full_osmand_header">Запустить OsmAnd\?</string>
-    <string name="add_destination_point">Задать пункт назначения</string>
+    <string name="add_destination_point">Задайте пункт назначения</string>
     <string name="add_intermediate_point">Добавить промежуточный пункт</string>
-    <string name="add_start_point">Установить отправную точку</string>
+    <string name="add_start_point">Задайте пункт отправления</string>
     <string name="route_way">Путь</string>
     <string name="points_of_interests">Точки интереса (POI)</string>
     <string name="waiting_for_route_calculation">Расчёт маршрута…</string>
@@ -3002,7 +3002,7 @@
     <string name="profile_alert_delete_msg">Удалить профиль «%s»\?</string>
     <string name="select_base_profile_dialog_title">Выберите профиль для начала</string>
     <string name="select_base_profile_dialog_message">Основывайте свой пользовательский профиль на одном из профилей приложения по умолчанию, это определяет базовые настройки, такие как видимость виджетов по умолчанию и выбор единиц измерения скорости и расстояния. Ниже перечислены профили приложений по умолчанию, а также примеры пользовательских профилей, на которые они могут быть расширены:</string>
-    <string name="select_nav_profile_dialog_title">Выберите режим навигации</string>
+    <string name="select_nav_profile_dialog_title">Режим навигации</string>
     <string name="base_profile_descr_car">Автомобиль, грузовик, мотоцикл</string>
     <string name="base_profile_descr_bicycle">Горный велосипед, мопед, лошадь</string>
     <string name="base_profile_descr_pedestrian">Прогулки, пеший туризм, бег</string>
@@ -3302,7 +3302,7 @@
     <string name="rendering_attr_piste_difficulty_aerialway_name">Канатная дорога</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Соединение</string>
     <string name="simulate_your_location_gpx_descr">Симулировать свою позицию используя записанный GPX трек.</string>
-    <string name="route_start_point">Начало маршрута</string>
+    <string name="route_start_point">Пункт отправления</string>
     <string name="shared_string_revert">Сброс</string>
     <string name="suggested_maps_descr">Эти карты необходимо использовать с плагином.</string>
     <string name="added_profiles">Добавленные профили</string>
@@ -3936,7 +3936,7 @@
     <string name="shared_string_api_key">Ключ API</string>
     <string name="shared_string_server_url">URL-адрес сервера</string>
     <string name="keep_it_empty_if_not">Оставить пустым, если не</string>
-    <string name="online_routing_example_hint">URL со всеми параметрами будет выглядеть так:</string>
+    <string name="online_routing_example_hint">Вид URL со всеми параметрами:</string>
     <string name="test_route_calculation">Тест расчёта маршрута</string>
     <string name="routing_engine_vehicle_type_car">Автомобиль</string>
     <string name="online_routing_engine">Онлайн-маршрутизатор</string>
@@ -4148,7 +4148,7 @@
     <string name="loading_list_of_routing_services">Загрузка списка доступных сервисов маршрутизации</string>
     <string name="shared_string_offline">Офлайн</string>
     <string name="shared_string_online">Онлайн</string>
-    <string name="osmand_online_routing_promo">Использовать предопределённые шаблоны или добавить онлайн-маршрутизацию OSRM, GraphHopper, OpenRouteService или GPX.</string>
+    <string name="osmand_online_routing_promo">Используйте предопределённые шаблоны или добавьте онлайн-маршрутизацию OSRM, GraphHopper, openrouteservice или GPX.</string>
     <string name="shared_string_external">Внешний</string>
     <string name="provided_by">Предоставлен %1$s</string>
     <string name="failed_loading_predefined_engines">Не удалось загрузить список предустановленных шаблонов.
@@ -4227,7 +4227,7 @@
     <string name="backup_error_user_is_not_registered">Пользователь с данным адресом электронной почты не зарегистрирован</string>
     <string name="backup_error_no_valid_subscription">Нет действующей подписки</string>
     <string name="duration_moment_ago">только что</string>
-    <string name="approximate_route_description">Прикрепите маршрут к дорогам на карте, чтобы получить данные о всех поворотах, а также о проходимости, типах дорог и т. д.</string>
+    <string name="approximate_route_description">Прикрепить маршрут к дорогам на карте, чтобы получать данные о всех поворотах, а также о проходимости, типах дорог и т. д.</string>
     <string name="release_4_0">• Облачное резервное копирование
 \n
 \n• Добавлен ночной режим для стиля карты «Topo»
@@ -4272,7 +4272,7 @@
     <string name="promo_subscription">Промо-подписка</string>
     <string name="on_hold_since">Приостановлена с %1$s</string>
     <string name="active_till">Активна до %1$s</string>
-    <string name="backup_deleted_all_data">Все данные удалены</string>
+    <string name="backup_deleted_all_data">Все данные удалены.</string>
     <string name="track_has_no_needed_data">Трек не содержит необходимых данных.</string>
     <string name="enter_verification_code">Введите одноразовый пароль</string>
     <string name="reset_to_original">Сбросить к начальному значению</string>
@@ -4288,13 +4288,13 @@
     <string name="enough_contributions_descr">Вы внесли достойный вклад в OpenStreetMap и теперь можете обновлять карты OsmAnd без ограничений!</string>
     <string name="not_enough_contributions_descr">У вас должно быть не менее %1$s правок на OpenStreetMap за последние %2$s дней.</string>
     <string name="map_updates_are_unavailable_yet">Обновления карт пока недоступны :-(</string>
-    <string name="online_maps_searching_descr">Выполняется онлайн-поиск карт.</string>
+    <string name="online_maps_searching_descr">Онлайн-поиск.…</string>
     <string name="walking_route_osmc_description">Окраска на основе индивидуального цвета (если задано на OpenStreetMap) и типа (международный, региональный, местный).</string>
     <string name="purchases_feature_desc_pro_widgets">Получите доступ к функциям OsmAnd Pro: раскраска маршрутов и многое другое.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Изучите планы OsmAnd, чтобы выбрать подходящий.</string>
     <string name="option_available_only_in_osmand_pro">Опция доступна в рамках подписки OsmAnd Pro.</string>
     <string name="shared_string_relation">Отношение</string>
-    <string name="routes_color_by_type">Раскраска маршрутов</string>
+    <string name="routes_color_by_type">Раскраска маршрутов…</string>
     <string name="setting_supported_by_style">Параметр поддерживается стилем карты «%1$s»</string>
     <string name="online_maps_required_descr">Не удалось рассчитать подходящий маршрут.
 \n

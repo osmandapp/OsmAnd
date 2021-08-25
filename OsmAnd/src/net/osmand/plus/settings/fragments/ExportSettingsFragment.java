@@ -278,8 +278,10 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		}
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull ApplicationMode appMode, boolean globalExport) {
-		try {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
+	                                   @NonNull ApplicationMode appMode,
+	                                   boolean globalExport) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ExportSettingsFragment fragment = new ExportSettingsFragment();
 			fragment.appMode = appMode;
 			fragment.globalExport = globalExport;
@@ -288,8 +290,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 					.addToBackStack(SETTINGS_LIST_TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

@@ -563,7 +563,7 @@
     <string name="native_app_allocated_memory_descr">Memòria nativa totale allocada dae s’aplicu %1$s MB (Dalvik %2$s MB, àteru %3$s MB).
 \n Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Memòria nativa locale</string>
-    <string name="starting_point_too_far">Puntu de tzucada tropu distante dae su caminu prus a curtzu.</string>
+    <string name="starting_point_too_far">Puntu de tzucada tropu indedda dae su caminu prus a curtzu.</string>
     <string name="shared_location">Positzione cumpartzida</string>
     <string name="osmand_parking_event">Piga sa màchina dae su parchègiu</string>
     <string name="osmand_parking_warning">Atentzione</string>
@@ -4130,7 +4130,7 @@
     <string name="loading_list_of_routing_services">Carrighende sa lista de sos servìtzios de càrculu de sas àndalas a disponimentu</string>
     <string name="shared_string_offline">Non in lìnia</string>
     <string name="shared_string_online">In lìnia</string>
-    <string name="osmand_online_routing_promo">Imprea modellos predefinidos o annanghe OSRM, Graphhopper, OpenRouteService o su càrculu de s\'àndala GPX in lìnia.</string>
+    <string name="osmand_online_routing_promo">Imprea modellos predefinidos o annanghe OSRM, Graphhopper, openrouteservice o su càrculu de s\'àndala GPX in lìnia.</string>
     <string name="shared_string_external">Esternu</string>
     <string name="provided_by">Frunidu dae %1$s</string>
     <string name="failed_loading_predefined_engines">Carrigamentu de sa lista de sos modellos predefinidos fallidu.

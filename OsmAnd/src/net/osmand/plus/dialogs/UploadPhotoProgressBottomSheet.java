@@ -10,9 +10,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -103,15 +105,18 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 		return uploadingFinished ? R.string.shared_string_close : R.string.shared_string_cancel;
 	}
 
+	@Nullable
 	public static UploadPhotosProgressListener showInstance(@NonNull FragmentManager fragmentManager, int maxProgress, OnDismissListener listener) {
-		UploadPhotoProgressBottomSheet fragment = new UploadPhotoProgressBottomSheet();
-		fragment.setRetainInstance(true);
-		fragment.setMaxProgress(maxProgress);
-		fragment.setOnDismissListener(listener);
-		fragmentManager.beginTransaction()
-				.add(fragment, UploadPhotoProgressBottomSheet.TAG)
-				.commitAllowingStateLoss();
-
-		return fragment;
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			UploadPhotoProgressBottomSheet fragment = new UploadPhotoProgressBottomSheet();
+			fragment.setRetainInstance(true);
+			fragment.setMaxProgress(maxProgress);
+			fragment.setOnDismissListener(listener);
+			fragmentManager.beginTransaction()
+					.add(fragment, UploadPhotoProgressBottomSheet.TAG)
+					.commitAllowingStateLoss();
+			return fragment;
+		}
+		return null;
 	}
 }

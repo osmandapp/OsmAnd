@@ -909,7 +909,7 @@
     <string name="shared_string_search">بحث</string>
     <string name="shared_string_show_description">عرض الوصف.</string>
     <string name="shared_string_message">رسالة</string>
-    <string name="welmode_download_maps">إدارة الخرائط</string>
+    <string name="welmode_download_maps">تنزيل الخرائط</string>
     <string name="welcome_select_region">لعرض إشارات وقواعد المرور بشكل صحيح، من فضلك اختر منطقة القيادة:</string>
     <string name="shared_string_add_to_favorites">إضافة إلى المفضلة</string>
     <string name="shared_string_my_places">المعالم المفضلة</string>
@@ -981,7 +981,7 @@
     <string name="map_widget_plain_time">الوقت الحالي</string>
     <string name="rotate_map_to_bearing">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">اتجاه الحركة</string>
-    <string name="rotate_map_none_opt">الشمال في الأعلى</string>
+    <string name="rotate_map_none_opt">لا يوجد دوران (الشمال دائمًا للأعلى)</string>
     <string name="rotate_map_compass_opt">حسب البوصلة</string>
     <string name="traffic_warning_stop">إشارة توقف</string>
     <string name="live_monitoring_stop">إيقاف التتبع على الإنترنت</string>
@@ -1001,7 +1001,7 @@
     <string name="add_favorite_dialog_favourite_added_template">تم إضافة إحداثية المفضلة \'\'{0}\'\' بنجاح.</string>
     <string name="update_existing">استبدال</string>
     <string name="fav_point_dublicate">اسم مكرر</string>
-    <string name="fav_point_dublicate_message">تم تغيير اسم المفضلة إلى %1$s لتجنب التكرار.</string>
+    <string name="fav_point_dublicate_message">تم تسمية المفضلة إلى %1$s لتجنب التكرار.</string>
     <string name="fav_imported_sucessfully">تم بنجاح استيراد المفضلة</string>
     <string name="fav_file_to_load_not_found">لم يتم العثور على ملف GPX يحتوي على الأماكن المفضلة في {0}</string>
     <string name="fav_saved_sucessfully">المفضلة تم حفظها بنجاح إلى {0}</string>
@@ -1157,7 +1157,7 @@
     <string name="drawer">قائمة منبسطة</string>
     <string name="osm_settings">تعديل OSM</string>
     <string name="free">فارغ %1$s</string>
-    <string name="parking_place">مكان لركن السيارات</string>
+    <string name="parking_place">موقف السيارات</string>
     <string name="version_settings_descr">نزل الإصدارات الليلية.</string>
     <string name="version_settings">إصدرات</string>
     <string name="speak_pedestrian">ممرات الراجلين</string>
@@ -4194,7 +4194,7 @@
     <string name="loading_list_of_routing_services">تحميل قائمة خدمات التوجيه المتوفرة</string>
     <string name="shared_string_offline">دون اتصال</string>
     <string name="shared_string_online">عبر الإنترنت</string>
-    <string name="osmand_online_routing_promo">استخدم قوالب محددة مسبقًا ، أو أضف OSRM، GraphHopper، OpenRouteService أو توجيه مدعم بال GPX عبر الانترنت.</string>
+    <string name="osmand_online_routing_promo">استخدم قوالب محددة مسبقًا ، أو أضف OSRM، GraphHopper، openrouteservice أو توجيه مدعم بال GPX عبر الانترنت.</string>
     <string name="shared_string_external">خارجي</string>
     <string name="provided_by">مقدمة من %1$s</string>
     <string name="failed_loading_predefined_engines">فشل تحميل قائمة القوالب المحددة مسبقًا.

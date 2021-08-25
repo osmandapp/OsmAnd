@@ -67,6 +67,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -211,6 +212,10 @@ public class AndroidUtils {
 			return activity != null && !activity.isFinishing() && !activity.isDestroyed();
 		}
 		return activity != null && !activity.isFinishing();
+	}
+
+	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag) {
+		return !manager.isStateSaved() && manager.findFragmentByTag(tag) == null;
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {

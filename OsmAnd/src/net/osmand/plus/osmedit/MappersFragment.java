@@ -81,7 +81,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 			fm.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 
@@ -238,8 +238,8 @@ public class MappersFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupButtonBackground(@NonNull View button, @ColorInt int normalColor, @ColorInt int pressedColor) {
-		Drawable normal = createRoundedDrawable(normalColor, ButtonBackground.ROUNDED);
-		Drawable pressed = createRoundedDrawable(pressedColor, ButtonBackground.ROUNDED);
+		Drawable normal = createRoundedDrawable(normalColor, ButtonBackground.ROUNDED_SMALL);
+		Drawable pressed = createRoundedDrawable(pressedColor, ButtonBackground.ROUNDED_SMALL);
 		setupRoundedBackground(button, normal, pressed);
 	}
 

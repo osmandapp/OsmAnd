@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.backup.BackupHelper;
@@ -149,13 +150,13 @@ public class DeleteProgressBottomSheet extends MenuBottomSheetDialogFragment imp
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, int maxProgress) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			DeleteProgressBottomSheet fragment = new DeleteProgressBottomSheet();
 			fragment.maxProgress = maxProgress;
 
 			fragmentManager.beginTransaction()
 					.add(fragment, TAG)
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 }

@@ -1,5 +1,9 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -22,6 +26,21 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -54,25 +73,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
 public class ProfileAppearanceFragment extends BaseSettingsFragment implements OnSelectProfileCallback,
 		CardListener, ColorPickerListener {
@@ -977,22 +977,24 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		this.onCardPressed(colorsCard);
 	}
 
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable String appMode, boolean imported) {
-		try {
-			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
+	public static boolean showInstance(@NonNull FragmentActivity activity,
+	                                   @NonNull SettingsScreenType screenType,
+	                                   @Nullable String appMode, boolean imported) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		String tag = screenType.fragmentName;
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Fragment fragment = Fragment.instantiate(activity, tag);
 			Bundle args = new Bundle();
 			if (appMode != null) {
 				args.putString(BASE_PROFILE_FOR_NEW, appMode);
 				args.putBoolean(IS_BASE_PROFILE_IMPORTED, imported);
 			}
 			fragment.setArguments(args);
-			activity.getSupportFragmentManager().beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, screenType.fragmentName)
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, tag)
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
-					.commit();
+					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			LOG.error(e);
 		}
 		return false;
 	}

@@ -4005,7 +4005,7 @@
     <string name="snap_to_road_descr">Значок поточного місцеперебування буде прив\'язано до поточного маршруту навігації</string>
     <string name="map_orientation_threshold_descr">Не обертати, якщо швидкість менше граничної</string>
     <string name="restart">Перезапустити</string>
-    <string name="shared_strings_all_regions">Всі регіони</string>
+    <string name="shared_strings_all_regions">Усі регіони</string>
     <string name="delete_number_files_question">Видалити %1$d файли\?</string>
     <string name="track_recording_stop_without_saving">Зупинити без збереження</string>
     <string name="track_recording_save_and_stop">Зберегти і зупинити запис</string>
@@ -4124,7 +4124,7 @@
     <string name="loading_list_of_routing_services">Список завантаження доступних служб маршрутизації</string>
     <string name="shared_string_offline">Автономно</string>
     <string name="shared_string_online">З мережі</string>
-    <string name="osmand_online_routing_promo">Користуйтеся попередньо визначеними шаблонами або додавайте онлайн-маршрутизацію OSRM, GraphHopper, OpenRouteService або GPX.</string>
+    <string name="osmand_online_routing_promo">Користуйтеся попередньо визначеними шаблонами або додавайте онлайн-маршрутизацію OSRM, GraphHopper, openrouteservice або GPX.</string>
     <string name="shared_string_external">Зовнішні</string>
     <string name="provided_by">Надано %1$s</string>
     <string name="failed_loading_predefined_engines">Не вдалося завантажити список попередньо визначених шаблонів.

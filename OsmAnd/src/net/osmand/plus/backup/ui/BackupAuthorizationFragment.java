@@ -1,5 +1,8 @@
 package net.osmand.plus.backup.ui;
 
+import static net.osmand.plus.UiUtilities.setupDialogButton;
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
@@ -28,9 +32,6 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.ExportSettingsFragment;
-
-import static net.osmand.plus.UiUtilities.setupDialogButton;
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
 
 public class BackupAuthorizationFragment extends BaseSettingsFragment implements InAppPurchaseListener {
 
@@ -177,12 +178,13 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved()) {
+		String tag = SettingsScreenType.BACKUP_AUTHORIZATION.fragmentName;
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
 			Fragment fragment = new BackupAuthorizationFragment();
 			fragmentManager.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, SettingsScreenType.BACKUP_AUTHORIZATION.fragmentName)
+					.replace(R.id.fragmentContainer, fragment, tag)
 					.addToBackStack(SettingsScreenType.BACKUP_AUTHORIZATION.name())
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 
