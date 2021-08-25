@@ -33,7 +33,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 

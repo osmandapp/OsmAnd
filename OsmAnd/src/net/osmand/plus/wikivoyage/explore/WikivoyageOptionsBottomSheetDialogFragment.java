@@ -11,8 +11,6 @@ import androidx.appcompat.widget.PopupMenu;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -20,7 +18,8 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.wikivoyage.data.TravelHelper;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.plus.wikivoyage.data.TravelLocalDataHelper;
 
 public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -37,11 +36,9 @@ public class WikivoyageOptionsBottomSheetDialogFragment extends MenuBottomSheetD
 		if (app == null) {
 			return;
 		}
-		final CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
-		final TravelHelper travelHelper = app.getTravelHelper();
-
 		items.add(new TitleItem(getString(R.string.shared_string_options)));
 
+		final CommonPreference<WikiArticleShowImages> showImagesPref = app.getSettings().WIKI_ARTICLE_SHOW_IMAGES;
 		BaseBottomSheetItem showImagesItem = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(showImagesPref.get().name))
 				.setDescriptionColorId(nightMode ? R.color.wikivoyage_active_dark : R.color.wikivoyage_active_light)

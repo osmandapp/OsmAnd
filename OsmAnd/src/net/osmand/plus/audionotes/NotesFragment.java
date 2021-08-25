@@ -40,6 +40,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -104,18 +105,18 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 		setHasOptionsMenu(true);
 
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
 		emptyView = emptyStub.inflate();
-		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-				.isLightContent() ? R.color.activity_background_color_light : R.color.activity_background_color_dark));
+		emptyView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 
 		if (Build.VERSION.SDK_INT >= 18) {
-			int icRes = getMyApplication().getSettings().isLightContent()
-					? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
+			int icRes = !nightMode ? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
 			emptyImageView.setImageResource(icRes);
 		} else {
 			emptyImageView.setVisibility(View.INVISIBLE);
@@ -126,8 +127,9 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getListView().setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-				.isLightContent() ? R.color.activity_background_color_light : R.color.activity_background_color_dark));
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		getListView().setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
 	@Override

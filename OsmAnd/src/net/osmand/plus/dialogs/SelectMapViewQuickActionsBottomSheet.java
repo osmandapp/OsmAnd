@@ -24,6 +24,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -214,7 +215,7 @@ public class SelectMapViewQuickActionsBottomSheet extends MenuBottomSheetDialogF
 	private int getStyleTitleColor(boolean selected) {
 		int colorId = selected
 				? getActiveColorId()
-				: nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+				: ColorUtilities.getPrimaryTextColorId(nightMode);
 		return getResolvedColor(colorId);
 	}
 

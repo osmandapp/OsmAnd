@@ -41,6 +41,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -134,8 +135,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		view = inflater.inflate(R.layout.search_advanced_coords, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
-				isLightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightTheme);
+		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app), color);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -144,7 +145,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 				dismiss();
 			}
 		});
-		toolbar.setBackgroundColor(ContextCompat.getColor(app, isLightTheme ? R.color.app_bar_color_light : R.color.app_bar_color_dark));
+		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, !isLightTheme));
 		toolbar.setTitleTextColor(ContextCompat.getColor(app, isLightTheme ? R.color.color_white : R.color.text_color_primary_dark));
 		
 		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();

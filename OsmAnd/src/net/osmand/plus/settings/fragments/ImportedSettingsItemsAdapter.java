@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -54,9 +55,7 @@ public class ImportedSettingsItemsAdapter extends
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
 		final ExportSettingsType currentItemType = itemsTypes.get(position);
 		boolean isLastItem = itemsTypes.size() - 1 == position;
-		int activeColorRes = nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light;
+		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 
 		holder.title.setTextColor(app.getResources().getColor(activeColorRes));
 		Typeface typeface = FontCache.getFont(app, app.getString(R.string.font_roboto_medium));

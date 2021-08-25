@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -53,7 +54,7 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 			}
 		});
 		TextView title = (TextView) view.findViewById(R.id.switchButtonText);
-		title.setTextColor(ContextCompat.getColor(app, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+		title.setTextColor(ContextCompat.getColor(app, ColorUtilities.getActiveColorId(isNightMode())));
 	}
 
 	@Override
@@ -94,7 +95,7 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 
 		TextView title = (TextView) selectableView.findViewById(R.id.switchButtonText);
 		title.setText(checked ? R.string.shared_string_enabled : R.string.shared_string_disabled);
-		title.setTextColor(ContextCompat.getColor(app, isNightMode() ? R.color.text_color_tab_active_dark : R.color.text_color_tab_active_light));
+		title.setTextColor(ColorUtilities.getActiveTabTextColor(app, isNightMode()));
 
 		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveProfileColor(), 0.3f);
 		AndroidUtils.setBackground(selectableView, drawable);

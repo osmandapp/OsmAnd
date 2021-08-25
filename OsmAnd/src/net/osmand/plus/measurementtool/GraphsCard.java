@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -155,7 +156,7 @@ public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private void fillInMenu() {
 		OsmandApplication app = getMyApplication();
-		int activeColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		final HorizontalSelectionAdapter adapter = new HorizontalSelectionAdapter(app, nightMode);
 		final ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
 		for (GraphType type : graphTypes) {

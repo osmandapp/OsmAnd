@@ -10,6 +10,10 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.LayerDrawable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -20,9 +24,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
-import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.profiles.LocationIcon;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.ColoringTypeAvailabilityCache;
@@ -45,10 +47,6 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 
 public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
@@ -294,8 +292,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 			}
 			if (directTo) {
 				//add projection point on original route
-				double[] projectionOnRoute = calculateProjectionOnRoutePoint(
-						helper.getRoute().getImmutableAllLocations(), helper, tb);
+				double[] projectionOnRoute = calculateProjectionOnRoutePoint(helper, tb);
 				if (projectionOnRoute != null) {
 					drawProjectionPoint(canvas, projectionOnRoute);
 				}
@@ -303,7 +300,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		}
 	}
 	
-	private double[] calculateProjectionOnRoutePoint(List<Location> routeNodes, RoutingHelper helper, RotatedTileBox box) {
+	private double[] calculateProjectionOnRoutePoint(RoutingHelper helper, RotatedTileBox box) {
 		double[] projectionXY = null;
 		Location ll = helper.getLastFixedLocation();
 		RouteCalculationResult route = helper.getRoute();

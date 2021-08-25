@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -81,12 +82,8 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		this.items = items;
 		uiUtilities = app.getUIUtilities();
 		this.nightMode = nightMode;
-		activeColorRes = nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light;
-		textColorRes = nightMode
-				? R.color.text_color_primary_dark
-				: R.color.text_color_primary_light;
+		activeColorRes = ColorUtilities.getActiveColorId(nightMode);
+		textColorRes = ColorUtilities.getPrimaryTextColorId(nightMode);
 	}
 
 	@Override

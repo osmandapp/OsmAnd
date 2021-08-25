@@ -10,8 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 
 
 public abstract class OsmandExpandableListActivity extends
@@ -26,10 +26,9 @@ public abstract class OsmandExpandableListActivity extends
 	
 	protected void onStart() {
 		super.onStart();
-		getExpandableListView().setBackgroundColor(
-				getResources().getColor(
-						getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light
-								: R.color.list_background_color_dark));
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		getExpandableListView().setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	};
 
 

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -68,8 +69,8 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
 		holder.icon.setImageDrawable(PointImageDrawable.getFromWpt(app, wpt.getColor(), false, wpt));
-		holder.mainLayout.setBackgroundColor(getResolvedColor(nightTheme ? R.color.list_background_color_dark : R.color.list_background_color_light));
-		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
+		holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(app, nightTheme));
+		holder.title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightTheme));
 		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.coordinate_input_edit_text_normal_dark : R.color.divider_color_light));
 		holder.iconReorder.setVisibility(View.GONE);
 		holder.numberText.setVisibility(View.VISIBLE);

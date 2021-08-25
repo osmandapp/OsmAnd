@@ -5,11 +5,9 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import net.osmand.IndexConstants;
 import net.osmand.map.OsmandRegions;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;

@@ -30,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -150,7 +151,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int id) {
@@ -452,7 +453,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@ColorRes
 	protected int getBgColorId() {
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	protected Drawable getColoredBg(@NonNull Context ctx) {

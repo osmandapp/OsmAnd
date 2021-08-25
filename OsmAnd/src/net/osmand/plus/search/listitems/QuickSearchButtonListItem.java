@@ -8,8 +8,8 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 
 public class QuickSearchButtonListItem extends QuickSearchListItem {
 
@@ -24,7 +24,7 @@ public class QuickSearchButtonListItem extends QuickSearchListItem {
 		this.iconId = iconId;
 		this.title = title.toUpperCase();
 		this.onClickListener = onClickListener;
-		this.colorId = app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
+		this.colorId = ColorUtilities.getActiveColorId(!app.getSettings().isLightContent());
 	}
 
 	public QuickSearchButtonListItem(OsmandApplication app, int iconId, @NonNull Spannable title, View.OnClickListener onClickListener) {
@@ -32,7 +32,7 @@ public class QuickSearchButtonListItem extends QuickSearchListItem {
 		this.iconId = iconId;
 		this.spannableTitle = spannedToUpperCase(title);
 		this.onClickListener = onClickListener;
-		this.colorId = app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
+		this.colorId = ColorUtilities.getActiveColorId(!app.getSettings().isLightContent());
 	}
 
 	public QuickSearchListItemType getType() {

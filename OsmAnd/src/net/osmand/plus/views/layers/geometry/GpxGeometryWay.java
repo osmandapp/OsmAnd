@@ -2,20 +2,20 @@ package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.UiUtilities;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayContext, GpxGeometryWayDrawer> {
 
@@ -111,7 +111,7 @@ public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayConte
 
 	@ColorInt
 	private int getTrackContrastColor(@ColorInt int trackColor) {
-		return UiUtilities.getContrastColor(getContext().getCtx(), trackColor, false);
+		return ColorUtilities.getContrastColor(getContext().getCtx(), trackColor, false);
 	}
 
 	@Override

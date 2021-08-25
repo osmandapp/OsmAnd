@@ -56,6 +56,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -87,7 +88,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -120,8 +121,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener,
-		DownloadIndexesThread.DownloadEvents {
+public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener,
+		OsmAndLocationListener, DownloadEvents {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(QuickSearchDialogFragment.class);
 
@@ -901,6 +902,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateToolbarButton() {
+		boolean nightMode = !app.getSettings().isLightContent();
 		SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
 		if (foundPartialLocation) {
 			buttonToolbarText.setText(app.getString(R.string.advanced_coords_search).toUpperCase());
@@ -925,6 +927,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarFilter.setVisibility(filterButtonVisible ? View.VISIBLE : View.GONE);
 		if (filterButtonVisible) {
 			if (word.getResult().object instanceof PoiUIFilter) {
+				buttonToolbarFilter.setImageDrawable(app.getUIUtilities()
+						.getIcon(R.drawable.ic_action_filter, ColorUtilities.getActiveColorId(nightMode)));
 				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
 						app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
 			} else {

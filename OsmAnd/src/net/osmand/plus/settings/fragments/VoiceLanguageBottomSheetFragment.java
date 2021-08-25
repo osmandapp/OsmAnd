@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -379,7 +380,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	@Override
 	protected int getActiveColorId() {
-		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		return ColorUtilities.getActiveColorId(nightMode);
 	}
 
 	@Override

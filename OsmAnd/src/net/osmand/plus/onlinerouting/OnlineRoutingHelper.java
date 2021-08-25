@@ -11,7 +11,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.onlinerouting.engine.EngineType;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.OnlineRoutingResponse;
-import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;

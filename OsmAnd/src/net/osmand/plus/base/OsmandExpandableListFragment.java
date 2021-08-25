@@ -15,6 +15,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
@@ -39,10 +40,9 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getExpandableListView().setBackgroundColor(
-				getResources().getColor(
-						getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light
-								: R.color.list_background_color_dark));
+		OsmandApplication app = requireMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		getExpandableListView().setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
 
 	public View createView(android.view.LayoutInflater inflater, android.view.ViewGroup container) {
@@ -88,7 +88,7 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconId, int menuItemType,
 	                               boolean flipIconForRtl) {
-		int color = isLightActionBar() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
 		return createMenuItem(m, id, titleRes, iconId, menuItemType, false, color);
 	}
 

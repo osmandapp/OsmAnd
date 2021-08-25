@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -48,7 +47,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.download.DownloadResources.WIKIVOYAGE_FILE_FILTER;
-import static net.osmand.plus.resources.ResourceManager.DEFAULT_WIKIVOYAGE_TRAVEL_OBF;
 
 public class ExploreTabFragment extends BaseOsmAndFragment implements DownloadEvents, TravelLocalDataHelper.Listener {
 

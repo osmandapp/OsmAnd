@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
@@ -33,7 +34,7 @@ public class ScreenTimeoutBottomSheet extends BooleanPreferenceBottomSheet {
 		BaseBottomSheetItem preferenceDescription = new BottomSheetItemWithDescription.Builder()
 				.setTitle(getString(R.string.change_default_settings))
 				.setIcon(getContentIcon(R.drawable.ic_action_external_link))
-				.setTitleColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
+				.setTitleColorId(ColorUtilities.getActiveColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_right_icon)
 				.setOnClickListener(v -> {
 					FragmentActivity activity = getActivity();

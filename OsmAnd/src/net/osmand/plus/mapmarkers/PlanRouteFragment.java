@@ -42,6 +42,7 @@ import net.osmand.TspAnt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -173,8 +174,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final int backgroundColor = ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
+		final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		fullScreen = portrait && planRouteContext.isMarkersListOpened();
 		int layoutRes = fullScreen ? R.layout.fragment_plan_route_full_screen : R.layout.fragment_plan_route_half_screen;
@@ -452,7 +452,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int id) {

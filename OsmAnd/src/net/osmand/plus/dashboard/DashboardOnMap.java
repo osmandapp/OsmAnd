@@ -49,6 +49,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
@@ -674,11 +675,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void applyDayNightMode() {
 		final int backgroundColor;
-		backgroundColor = ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.activity_background_color_dark
-						: R.color.activity_background_color_light);
-		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
+		backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
+		Drawable dividerDrawable = new ColorDrawable(ColorUtilities.getDividerColor(mapActivity, nightMode));
 
 		if (listBackgroundView != null) {
 			listBackgroundView.setBackgroundColor(backgroundColor);

@@ -23,6 +23,7 @@ import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -73,7 +74,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		Context ctx = requireContext();
 		file = new File(app.getAppCustomization().getTracksDir(), savedGpxName + IndexConstants.GPX_FILE_EXT);
 		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		final int textPrimaryColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+		final int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 		View mainView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.save_gpx_fragment, null);
 
 		OsmandTextFieldBoxes textBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.name_text_box);

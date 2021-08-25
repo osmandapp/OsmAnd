@@ -30,6 +30,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -147,18 +148,15 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 		}
 
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
+		OsmandApplication app = getMyApplication();
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
-		Drawable icArrowBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(getContext()),
-				lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+		int icArrowBackId = AndroidUtils.getNavigationIconResId(app);
+		int icColor = ColorUtilities.getActiveButtonsAndLinksTextColorId(!lightTheme);
+		Drawable icArrowBack = app.getUIUtilities().getIcon(icArrowBackId, icColor);
 		toolbar.setNavigationIcon(icArrowBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(view -> dismiss());
 
 		viewPager = mainView.findViewById(R.id.map_markers_view_pager);
 		viewPager.setOffscreenPageLimit(3);

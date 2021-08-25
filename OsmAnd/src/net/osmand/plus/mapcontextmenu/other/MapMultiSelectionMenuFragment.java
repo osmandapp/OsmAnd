@@ -27,6 +27,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCal
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu.MenuObject;
@@ -55,8 +56,8 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 			AndroidUtils.setBackground(view.getContext(), view, !menu.isLight(),
 					R.drawable.multi_selection_menu_bg_light_land, R.drawable.multi_selection_menu_bg_dark_land);
 		} else {
-			AndroidUtils.setBackground(view.getContext(), view.findViewById(R.id.cancel_row), !menu.isLight(),
-					R.color.list_background_color_light, R.color.list_background_color_dark);
+			AndroidUtils.setBackground(view.getContext(),
+					view.findViewById(R.id.cancel_row), ColorUtilities.getListBgColorId(!menu.isLight()));
 		}
 
 		final ListView listView = (ListView) view.findViewById(R.id.list);
@@ -146,7 +147,8 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		}
 		View headerView = inflater.inflate(R.layout.menu_obj_selection_header, listView, false);
 		if (!menu.isLandscapeLayout()) {
-			AndroidUtils.setBackground(getContext(), headerView, !menu.isLight(), R.color.list_background_color_light, R.color.list_background_color_dark);
+			int listBgColor = ColorUtilities.getListBgColorId(!menu.isLight());
+			AndroidUtils.setBackground(getContext(), headerView, listBgColor);
 		}
 		headerView.setOnClickListener(null);
 		listView.addHeaderView(headerView);

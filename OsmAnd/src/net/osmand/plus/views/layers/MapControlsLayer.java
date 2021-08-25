@@ -1,5 +1,14 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+
 import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -80,15 +89,6 @@ import java.util.List;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
@@ -424,7 +424,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		} else {
 			ActivityCompat.requestPermissions(mapActivity,
-					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 					OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
 		}
 	}
@@ -470,7 +470,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void navigateButton() {
 		if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			ActivityCompat.requestPermissions(mapActivity,
-					new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 					REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION);
 		} else {
 			final MapContextMenu menu = mapActivity.getContextMenu();
@@ -496,8 +496,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 				} else {
 					AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
 					bld.setTitle(R.string.new_directions_point_dialog);
-					final int[] defaultVls = new int[]{0};
-					bld.setSingleChoiceItems(new String[]{
+					final int[] defaultVls = new int[] {0};
+					bld.setSingleChoiceItems(new String[] {
 							mapActivity.getString(R.string.clear_intermediate_points),
 							mapActivity.getString(R.string.keep_intermediate_points)
 					}, 0, new DialogInterface.OnClickListener() {
@@ -556,7 +556,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 				requestedLatLon = latLon;
 				ActivityCompat.requestPermissions(mapActivity,
-						new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+						new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 						REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION);
 			} else {
 				PointDescription pointDescription = getPointDescriptionForTarget(latLon);
@@ -752,11 +752,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		});
 		set.start();
-	}
-
-	public void setMapControlsVisibility(boolean visible) {
-		View mapHudButtonsOverlay = mapActivity.findViewById(R.id.MapHudButtonsOverlay);
-		mapHudButtonsOverlay.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
 	}
 
 	public boolean isMapControlsVisible() {
@@ -964,10 +959,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return forceShowCompass || mapRotate != 0
 				|| settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE
 				|| mapActivity.getMapLayers().getMapInfoLayer().getMapInfoControls().isVisible("compass");
-	}
-
-	public CompassDrawable getCompassDrawable(Drawable originalDrawable) {
-		return new CompassDrawable(originalDrawable);
 	}
 
 	private void updateMyLocation(MapHudButton backToLocationControl) {
@@ -1335,7 +1326,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				final OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
 				final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
 				int p = (int) (mapDensity.get() * 100);
-				final TIntArrayList tlist = new TIntArrayList(new int[]{25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
+				final TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
 				final List<String> values = new ArrayList<>();
 				int i = -1;
 				for (int k = 0; k <= tlist.size(); k++) {

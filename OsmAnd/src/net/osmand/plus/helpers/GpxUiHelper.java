@@ -89,6 +89,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -1392,12 +1393,12 @@ public class GpxUiHelper {
 		yr.setAxisMinimum(0f);
 		chart.setMinOffset(0);
 
-		int mainFontColor = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		int mainFontColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		yl.setTextColor(mainFontColor);
 		yr.setTextColor(mainFontColor);
 
 		chart.setFitBars(true);
-		chart.setBorderColor(ContextCompat.getColor(app, nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
+		chart.setBorderColor(ColorUtilities.getDividerColor(app, nightMode));
 
 		Legend l = chart.getLegend();
 		l.setEnabled(false);
@@ -1434,7 +1435,7 @@ public class GpxUiHelper {
 		entries.add(new BarEntry(0, stacks));
 		BarDataSet barDataSet = new BarDataSet(entries, "");
 		barDataSet.setColors(colors);
-		barDataSet.setHighLightColor(!nightMode ? mChart.getResources().getColor(R.color.text_color_secondary_light) : mChart.getResources().getColor(R.color.text_color_secondary_dark));
+		barDataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		BarData dataSet = new BarData(barDataSet);
 		dataSet.setDrawValues(false);
 		dataSet.setBarWidth(1);
@@ -1518,7 +1519,7 @@ public class GpxUiHelper {
 		dataSet.setHighlightEnabled(true);
 		dataSet.setDrawVerticalHighlightIndicator(true);
 		dataSet.setDrawHorizontalHighlightIndicator(false);
-		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.text_color_secondary_light) : mChart.getResources().getColor(R.color.text_color_secondary_dark));
+		dataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(mChart.getContext(), !light));
 
 		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
@@ -1694,7 +1695,7 @@ public class GpxUiHelper {
 		dataSet.setHighlightEnabled(true);
 		dataSet.setDrawVerticalHighlightIndicator(true);
 		dataSet.setDrawHorizontalHighlightIndicator(false);
-		dataSet.setHighLightColor(mChart.getResources().getColor(light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark));
+		dataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(mChart.getContext(), !light));
 
 		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
@@ -1859,7 +1860,7 @@ public class GpxUiHelper {
 		dataSet.setHighlightEnabled(true);
 		dataSet.setDrawVerticalHighlightIndicator(true);
 		dataSet.setDrawHorizontalHighlightIndicator(false);
-		dataSet.setHighLightColor(light ? mChart.getResources().getColor(R.color.text_color_secondary_light) : mChart.getResources().getColor(R.color.text_color_secondary_dark));
+		dataSet.setHighLightColor(ColorUtilities.getSecondaryTextColor(mChart.getContext(), !light));
 
 		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 

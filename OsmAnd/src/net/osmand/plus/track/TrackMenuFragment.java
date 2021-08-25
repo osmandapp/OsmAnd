@@ -49,6 +49,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -654,13 +655,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (bottomContainer == null) {
 			return;
 		}
+		int colorId;
 		if (menuType == TrackMenuType.OPTIONS) {
-			AndroidUtils.setBackground(app, bottomContainer, isNightMode(),
-					R.color.list_background_color_light, R.color.list_background_color_dark);
+			colorId = ColorUtilities.getListBgColorId(isNightMode());
 		} else {
-			AndroidUtils.setBackground(app, bottomContainer, isNightMode(),
-					R.color.activity_background_color_light, R.color.activity_background_color_dark);
+			colorId = ColorUtilities.getActivityBgColorId(isNightMode());
 		}
+		AndroidUtils.setBackgroundColor(app, bottomContainer, colorId);
 	}
 
 	@Override

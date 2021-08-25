@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
@@ -52,7 +53,7 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 	@NonNull
 	@Override
 	public GroupsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 		View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.point_editor_group_select_item,
 				parent, false);
 		ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
@@ -64,7 +65,7 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 		groupName.setTextColor(ContextCompat.getColor(app, activeColorRes));
 		if (viewType != VIEW_TYPE_CELL) {
 			groupName.setText(R.string.add_new_folder);
-			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 			Drawable iconAdd = app.getUIUtilities().getIcon(R.drawable.ic_action_add, activeColorResId);
 			ImageView groupIcon = view.findViewById(R.id.groupIcon);
 			groupIcon.setImageDrawable(iconAdd);
@@ -107,7 +108,7 @@ public class FolderListAdapter extends RecyclerView.Adapter<FolderListAdapter.Gr
 			});
 			final String group = Algorithms.capitalizeFirstLetter(items.get(position));
 			holder.groupName.setText(group);
-			int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 			int strokeColor;
 			int strokeWidth;
 			if (selectedItemName != null && selectedItemName.equals(items.get(position))) {

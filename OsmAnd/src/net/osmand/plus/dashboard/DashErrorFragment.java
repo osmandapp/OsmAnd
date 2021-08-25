@@ -22,8 +22,6 @@ import net.osmand.plus.helpers.FontCache;
 
 import java.text.MessageFormat;
 
-import androidx.fragment.app.FragmentManager;
-
 public class DashErrorFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_ERROR_FRAGMENT";

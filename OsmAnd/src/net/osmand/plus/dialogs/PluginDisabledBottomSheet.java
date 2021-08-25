@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -70,7 +71,7 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
 		BaseBottomSheetItem pluginTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(pluginTitleSpan)
-				.setTitleColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
+				.setTitleColorId(ColorUtilities.getActiveColorId(nightMode))
 				.setIcon(getContentIcon(R.drawable.ic_extension_dark))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.create();
