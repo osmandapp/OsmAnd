@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -125,9 +126,9 @@ public class FileImportSettingsFragment extends ImportSettingsFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @NonNull List<SettingsItem> settingsItems,
-	                                @NonNull File file) {
-		if (fragmentManager.findFragmentByTag(TAG) == null) {
+									@NonNull List<SettingsItem> settingsItems,
+									@NonNull File file) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			FileImportSettingsFragment fragment = new FileImportSettingsFragment();
 			fragment.setSettingsItems(settingsItems);
 			fragment.setFile(file);

@@ -783,7 +783,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private static void showFragment(@Nullable FragmentActivity activity, @NonNull Bundle args) {
 		if (!wizardClosed && activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			if (fragmentManager.findFragmentByTag(TAG) == null) {
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 				Fragment fragment = new FirstUsageWizardFragment();
 				fragment.setArguments(args);
 				activity.getSupportFragmentManager()

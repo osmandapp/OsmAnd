@@ -123,7 +123,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 			} catch (IllegalArgumentException e) {
 				LOG.error(e.getMessage(), e);
 			}
-		} else if (fragmentManager != null && !isStateSaved()) {
+		} else if (fragmentManager != null) {
 			RestoreDuplicatesFragment.showInstance(fragmentManager, duplicates, items, this);
 		}
 	}
@@ -216,7 +216,7 @@ public class RestoreSettingsFragment extends ImportSettingsFragment implements O
 	}
 
 	public static void showInstance(@NonNull FragmentManager manager) {
-		if (manager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(manager, TAG)) {
 			RestoreSettingsFragment fragment = new RestoreSettingsFragment();
 			manager.beginTransaction().
 					replace(R.id.fragmentContainer, fragment, TAG)

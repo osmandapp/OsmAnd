@@ -81,7 +81,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 			fm.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 

@@ -555,8 +555,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 						Bundle args = new Bundle();
 						args.putString(DIALOG_MODE_KEY, dialogMode.name());
-						BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.NAVIGATION,
-								applicationMode, args, null);
+						BaseSettingsFragment.showInstance(mapActivity,
+								SettingsScreenType.NAVIGATION, applicationMode, args, null);
 					}
 				})
 				.create();

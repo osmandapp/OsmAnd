@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -106,7 +107,7 @@ public class UploadPhotoProgressBottomSheet extends MenuBottomSheetDialogFragmen
 
 	@Nullable
 	public static UploadPhotosProgressListener showInstance(@NonNull FragmentManager fragmentManager, int maxProgress, OnDismissListener listener) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			UploadPhotoProgressBottomSheet fragment = new UploadPhotoProgressBottomSheet();
 			fragment.setRetainInstance(true);
 			fragment.setMaxProgress(maxProgress);

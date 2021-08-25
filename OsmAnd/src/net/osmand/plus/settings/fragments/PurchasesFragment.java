@@ -51,7 +51,7 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	private boolean nightMode;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			PurchasesFragment fragment = new PurchasesFragment();
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)

@@ -1083,10 +1083,10 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 		ShareDialog.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, ContextMenuFragment fragment) {
+	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull ContextMenuFragment fragment) {
 		String tag = fragment.getFragmentTag();
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(tag) == null) {
-			fragmentManager.beginTransaction()
+		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
+			manager.beginTransaction()
 					.replace(R.id.routeMenuContainer, fragment, tag)
 					.addToBackStack(tag)
 					.commitAllowingStateLoss();

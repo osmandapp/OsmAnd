@@ -1,5 +1,7 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,7 +18,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
@@ -40,8 +44,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -75,7 +77,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		} else {
 			selectedStyle = savedInstanceState.getString(SELECTED_STYLE_KEY);
 		}
-		if(selectedStyle == null) {
+		if (selectedStyle == null) {
 			selectedStyle = RendererRegistry.DEFAULT_RENDER;
 		}
 
@@ -251,5 +253,12 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 			};
 		}
 		return onStyleClickListener;
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SelectMapStyleBottomSheetDialogFragment fragment = new SelectMapStyleBottomSheetDialogFragment();
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 }

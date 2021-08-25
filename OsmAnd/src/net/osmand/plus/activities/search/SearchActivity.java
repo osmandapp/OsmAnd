@@ -11,15 +11,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
-import net.osmand.PlatformUtil;
 import androidx.appcompat.app.ActionBar.OnNavigationListener;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.FavouritePoint;
@@ -45,14 +46,6 @@ import java.util.Arrays;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.appcompat.app.ActionBar.OnNavigationListener;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
 public class SearchActivity extends TabActivity implements OsmAndLocationListener {
 
@@ -167,8 +160,8 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 				}
 			}
 		}
-		if(searchPoint == null){
-			if(!Algorithms.objectEquals(reqSearchPoint, last)){
+		if (searchPoint == null) {
+			if (!Algorithms.objectEquals(reqSearchPoint, last)) {
 				reqSearchPoint = last;
 				updateSearchPoint(last, getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
 			}
@@ -181,7 +174,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		Fragment fragment = instantiateFragment(getFragment(tab));
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		String tag = fragment.getClass().getName();
-		if (fragmentManager.findFragmentByTag(tag) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
 			fragmentManager.beginTransaction()
 					.replace(R.id.layout, fragment, tag)
 					.commitAllowingStateLoss();
@@ -189,7 +182,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	}
 
 	protected Class<?> getFragment(int tab) {
-		if(tab == POI_TAB_INDEX) {
+		if (tab == POI_TAB_INDEX) {
 			return SearchPoiFilterFragment.class;
 		} else if(tab == ADDRESS_TAB_INDEX) {
 			return SearchAddressFragment.class;

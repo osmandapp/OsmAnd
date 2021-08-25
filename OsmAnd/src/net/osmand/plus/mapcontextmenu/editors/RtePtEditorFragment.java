@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.R;
@@ -37,7 +38,7 @@ public class RtePtEditorFragment extends WptPtEditorFragment {
 		if (editor != null) {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			String tag = editor.getFragmentTag();
-			if (fragmentManager.findFragmentByTag(tag) == null) {
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
 				RtePtEditorFragment fragment = new RtePtEditorFragment();
 				fragment.skipDialog = skipDialog;
 				fragmentManager.beginTransaction()

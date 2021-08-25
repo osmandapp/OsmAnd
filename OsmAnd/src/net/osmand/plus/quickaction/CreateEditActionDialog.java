@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -37,8 +39,6 @@ import net.osmand.plus.osmedit.AddPOIAction;
 
 import java.util.List;
 
-import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
-
 /**
  * Created by rosty on 12/27/16.
  */
@@ -75,9 +75,8 @@ public class CreateEditActionDialog extends DialogFragment
     }
 
     public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull QuickAction action) {
-    	if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
-            CreateEditActionDialog dialog = CreateEditActionDialog.newInstance(action.id);
-            dialog.show(fragmentManager, CreateEditActionDialog.TAG);
+    	if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+            CreateEditActionDialog.newInstance(action.id).show(fragmentManager, TAG);
         }
     }
 

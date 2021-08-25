@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.R.id.imageView;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -32,8 +34,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.quickaction.actions.NewAction;
 
 import java.util.List;
-
-import static net.osmand.plus.R.id.imageView;
 
 
 public class QuickActionsWidget extends LinearLayout {
@@ -246,16 +246,19 @@ public class QuickActionsWidget extends LinearLayout {
                     }
                 });
 //				if (action.isActionEditable()) {
-                view.setOnLongClickListener(v -> {
-                    FragmentActivity activity = (AppCompatActivity) getContext();
-                    FragmentManager fragmentManager = activity.getSupportFragmentManager();
-                    if (action instanceof NewAction) {
-                        QuickActionListFragment.showInstance(activity);
-                    } else {
-                        CreateEditActionDialog.showInstance(fragmentManager, action);
-                    }
-                    return true;
-                });
+					view.setOnLongClickListener(new OnLongClickListener() {
+						@Override
+						public boolean onLongClick(View v) {
+                            FragmentActivity activity = (AppCompatActivity) getContext();
+                            FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                            if (action instanceof NewAction) {
+                                QuickActionListFragment.showInstance(activity);
+                            } else {
+                                CreateEditActionDialog.showInstance(fragmentManager, action);
+                            }
+                            return true;
+						}
+					});
 //				}
                 if (!action.isActionEnable(application)) {
                     view.setEnabled(false);

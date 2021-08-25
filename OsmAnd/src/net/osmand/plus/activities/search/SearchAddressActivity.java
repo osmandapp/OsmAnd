@@ -1,10 +1,11 @@
 package net.osmand.plus.activities.search;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
-import android.os.Bundle;
-import android.view.MenuItem;
 
 
 public class SearchAddressActivity extends OsmandActionBarActivity {

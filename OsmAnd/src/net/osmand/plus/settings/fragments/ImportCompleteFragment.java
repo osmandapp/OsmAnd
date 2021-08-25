@@ -29,7 +29,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -63,9 +63,9 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	private boolean needRestart;
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager,
-	                                @NonNull List<SettingsItem> settingsItems,
+									@NonNull List<SettingsItem> settingsItems,
 									@NonNull String sourceName, boolean needRestart) {
-		if (fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ImportCompleteFragment fragment = new ImportCompleteFragment();
 			fragment.settingsItems.addAll(settingsItems);
 			fragment.setSourceName(sourceName);
@@ -175,7 +175,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 
 	private void navigateTo(ExportSettingsType type) {
 		FragmentManager fm = getFragmentManager();
-		Activity activity = requireActivity();
+		FragmentActivity activity = requireActivity();
 		if (fm == null || fm.isStateSaved()) {
 			return;
 		}
@@ -189,12 +189,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.MAIN_SETTINGS);
 				break;
 			case QUICK_ACTIONS:
-				if (fm.findFragmentByTag(QuickActionListFragment.TAG) == null) {
-					fm.beginTransaction()
-							.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
-							.addToBackStack(QuickActionListFragment.TAG)
-							.commitAllowingStateLoss();
-				}
+				QuickActionListFragment.showInstance(activity);
 				break;
 			case POI_TYPES:
 				if (activity instanceof MapActivity) {
@@ -211,17 +206,14 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 			case MAP_SOURCES:
 				if (activity instanceof MapActivity) {
 					((MapActivity) activity).getDashboard().setDashboardVisibility(true,
-							DashboardOnMap.DashboardType.CONFIGURE_MAP, null);
+							DashboardType.CONFIGURE_MAP, null);
 				}
 				break;
 			case CUSTOM_RENDER_STYLE:
-				if (fm.findFragmentByTag(SelectMapStyleBottomSheetDialogFragment.TAG) == null) {
-					new SelectMapStyleBottomSheetDialogFragment()
-							.show(fm, SelectMapStyleBottomSheetDialogFragment.TAG);
-				}
+				SelectMapStyleBottomSheetDialogFragment.showInstance(fm);
 				break;
 			case AVOID_ROADS:
-				if (fm.findFragmentByTag(AvoidRoadsBottomSheetDialogFragment.TAG) == null) {
+				if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 					new AvoidRoadsBottomSheetDialogFragment()
 							.show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
 				}

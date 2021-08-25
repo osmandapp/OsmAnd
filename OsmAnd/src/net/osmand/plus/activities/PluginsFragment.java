@@ -331,14 +331,13 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			PluginsFragment fragment = new PluginsFragment();
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 			return true;
-
 		}
 		return false;
 	}

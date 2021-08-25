@@ -192,7 +192,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 		MapActivity mapActivity = menu.getMapActivity();
 		if (mapActivity != null) {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-			if (fragmentManager.findFragmentByTag(TAG) == null) {
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 				int slideInAnim = menu.getSlideInAnimation();
 				int slideOutAnim = menu.getSlideOutAnimation();
 

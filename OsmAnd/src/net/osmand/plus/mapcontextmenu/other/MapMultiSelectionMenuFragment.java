@@ -212,18 +212,14 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {
-		if (mapActivity.isActivityDestroyed()) {
-			return;
-		}
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			if (mapActivity.getContextMenu().isVisible()) {
 				mapActivity.getContextMenu().hide();
 			}
-
-			MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
+			MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
 			if (menu != null && !mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				slideInAnim = menu.getSlideInAnimation();
 				slideOutAnim = menu.getSlideOutAnimation();

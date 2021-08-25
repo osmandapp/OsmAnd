@@ -286,7 +286,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment implements OsmA
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			TrackDetailsMenuFragment fragment = new TrackDetailsMenuFragment();
 			fragmentManager.beginTransaction()

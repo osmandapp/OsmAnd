@@ -333,7 +333,7 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 	                                @Nullable Fragment targetFragment,
 									@NonNull List<List<WptPt>> pointsList,
 	                                @Nullable ApplicationMode appMode) {
-		if (fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			GpxApproximationFragment fragment = new GpxApproximationFragment();
 			fragment.setRetainInstance(true);
 			fragment.setTargetFragment(targetFragment, REQUEST_CODE);

@@ -1791,15 +1791,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public FirstUsageWelcomeFragment getFirstUsageWelcomeFragment() {
-		FirstUsageWelcomeFragment welcomeFragment = (FirstUsageWelcomeFragment) getSupportFragmentManager()
+		FirstUsageWelcomeFragment fragment = (FirstUsageWelcomeFragment) getSupportFragmentManager()
 				.findFragmentByTag(FirstUsageWelcomeFragment.TAG);
-		return welcomeFragment != null && !welcomeFragment.isDetached() ? welcomeFragment : null;
+		return fragment != null && !fragment.isDetached() ? fragment : null;
 	}
 
 	public FirstUsageWizardFragment getFirstUsageWizardFragment() {
-		FirstUsageWizardFragment wizardFragment = (FirstUsageWizardFragment) getSupportFragmentManager()
+		FirstUsageWizardFragment fragment = (FirstUsageWizardFragment) getSupportFragmentManager()
 				.findFragmentByTag(FirstUsageWizardFragment.TAG);
-		return wizardFragment != null && !wizardFragment.isDetached() ? wizardFragment : null;
+		return fragment != null && !fragment.isDetached() ? fragment : null;
 	}
 
 	public boolean isFirstScreenShowing() {
@@ -1976,19 +1976,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (caller instanceof BaseSettingsFragment) {
 				fragment.setArguments(((BaseSettingsFragment) caller).buildArguments());
 			}
-			FragmentManager fragmentManager = getSupportFragmentManager();
+			FragmentManager manager = getSupportFragmentManager();
 			String tag = fragment.getClass().getName();
-			if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(tag) == null) {
-				fragmentManager.beginTransaction()
+			if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
+				manager.beginTransaction()
 						.replace(R.id.fragmentContainer, fragment, tag)
 						.addToBackStack(DRAWER_SETTINGS_ID + ".new")
 						.commitAllowingStateLoss();
+				return true;
 			}
-			return true;
 		} catch (Exception e) {
 			LOG.error(e);
 		}
-
 		return false;
 	}
 

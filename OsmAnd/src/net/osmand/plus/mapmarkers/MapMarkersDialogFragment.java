@@ -1,5 +1,8 @@
 package net.osmand.plus.mapmarkers;
 
+import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.GROUPS_MARKERS_MENU;
+import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.HISTORY_MARKERS_MENU;
+
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -35,19 +38,16 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnPointsSavedListener;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersSortByDef;
-import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
+import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.track.TrackMenuFragment;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.GROUPS_MARKERS_MENU;
-import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.HISTORY_MARKERS_MENU;
 
 public class MapMarkersDialogFragment extends DialogFragment implements OnGroupSyncedListener {
 
@@ -326,15 +326,16 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	}
 
 	private void showOptionsMenuFragment() {
-		FragmentManager childFragmentManager = getChildFragmentManager();
-		if (childFragmentManager.findFragmentByTag(OptionsBottomSheetDialogFragment.TAG) == null) {
-			OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
-			fragment.setListener(createOptionsFragmentListener());
+		FragmentManager fragmentManager = getChildFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, OptionsBottomSheetDialogFragment.TAG)) {
 			Bundle args = new Bundle();
 			args.putBoolean(GROUPS_MARKERS_MENU, viewPager.getCurrentItem() == GROUPS_POSITION);
 			args.putBoolean(HISTORY_MARKERS_MENU, viewPager.getCurrentItem() == HISTORY_MARKERS_POSITION);
+
+			OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
 			fragment.setArguments(args);
-			childFragmentManager.beginTransaction()
+			fragment.setListener(createOptionsFragmentListener());
+			fragmentManager.beginTransaction()
 					.add(R.id.menu_container, fragment, OptionsBottomSheetDialogFragment.TAG)
 					.commitAllowingStateLoss();
 		}

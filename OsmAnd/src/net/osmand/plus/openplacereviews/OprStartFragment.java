@@ -134,7 +134,7 @@ public class OprStartFragment extends BaseOsmAndFragment implements OprAuthoriza
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (fragmentManager.findFragmentByTag(OprStartFragment.TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OprStartFragment fragment = new OprStartFragment();
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, OprStartFragment.TAG)

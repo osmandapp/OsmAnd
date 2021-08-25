@@ -50,7 +50,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -513,7 +512,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						List<HistoryEntry> historyEntries = new ArrayList<HistoryEntry>();
 						List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
 						for (QuickSearchListItem searchListItem : selectedItems) {
-							Object object = searchListItem.getSearchResult().object;;
+							Object object = searchListItem.getSearchResult().object;
 							if (object instanceof HistoryEntry) {
 								historyEntries.add((HistoryEntry) object);
 							}
@@ -725,7 +724,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = new Dialog(getActivity(), getTheme()){
+		Dialog dialog = new Dialog(getActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
 				if (!processBackAction()) {
@@ -894,7 +893,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		mainSearchFragment = new QuickSearchMainListFragment();
 		FragmentManager childFragmentManager = getChildFragmentManager();
 		String tag = mainSearchFragment.getClass().getName();
-		if (childFragmentManager.findFragmentByTag(tag) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, tag)) {
 			childFragmentManager.beginTransaction()
 					.replace(R.id.search_view, mainSearchFragment, tag)
 					.commitAllowingStateLoss();
@@ -928,7 +927,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			if (word.getResult().object instanceof PoiUIFilter) {
 				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
 						app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
-			} else{
+			} else {
 				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_filter));
 			}
 		}
@@ -2088,70 +2087,65 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 									   QuickSearchType searchType,
 									   QuickSearchTab showSearchTab,
 									   @Nullable LatLon latLon) {
-		if (mapActivity.isActivityDestroyed()) {
-			return false;
-		}
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (fragmentManager.isStateSaved() || fragmentManager.findFragmentByTag(TAG) != null) {
-			return false;
-		}
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			mapActivity.getMyApplication().logEvent("search_open");
 
-		mapActivity.getMyApplication().logEvent("search_open");
+			Bundle bundle = new Bundle();
+			if (object != null) {
+				bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
+				String objectLocalizedName = searchQuery;
 
-		Bundle bundle = new Bundle();
-		if (object != null) {
-			bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
-			String objectLocalizedName = searchQuery;
+				if (object instanceof PoiCategory) {
+					PoiCategory c = (PoiCategory) object;
+					objectLocalizedName = c.getTranslation();
 
-			if (object instanceof PoiCategory) {
-				PoiCategory c = (PoiCategory) object;
-				objectLocalizedName = c.getTranslation();
+					SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
+					SearchPhrase phrase = searchUICore.resetPhrase(objectLocalizedName + " ");
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = objectLocalizedName;
+					sr.object = c;
+					sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+					sr.priorityDistance = 0;
+					sr.objectType = ObjectType.POI_TYPE;
+					searchUICore.selectSearchResult(sr);
 
-				SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
-				SearchPhrase phrase = searchUICore.resetPhrase(objectLocalizedName + " ");
-				SearchResult sr = new SearchResult(phrase);
-				sr.localeName = objectLocalizedName;
-				sr.object = c;
-				sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
-				sr.priorityDistance = 0;
-				sr.objectType = ObjectType.POI_TYPE;
-				searchUICore.selectSearchResult(sr);
+					bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
 
-				bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
+				} else if (object instanceof PoiUIFilter) {
+					PoiUIFilter filter = (PoiUIFilter) object;
+					objectLocalizedName = filter.getName();
+					SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
+					SearchPhrase phrase = searchUICore.resetPhrase();
+					SearchResult sr = new SearchResult(phrase);
+					sr.localeName = objectLocalizedName;
+					sr.object = filter;
+					sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
+					sr.priorityDistance = 0;
+					sr.objectType = ObjectType.POI_TYPE;
+					searchUICore.selectSearchResult(sr);
 
-			} else if (object instanceof PoiUIFilter) {
-				PoiUIFilter filter = (PoiUIFilter) object;
-				objectLocalizedName = filter.getName();
-				SearchUICore searchUICore = mapActivity.getMyApplication().getSearchUICore().getCore();
-				SearchPhrase phrase = searchUICore.resetPhrase();
-				SearchResult sr = new SearchResult(phrase);
-				sr.localeName = objectLocalizedName;
-				sr.object = filter;
-				sr.priority = SEARCH_AMENITY_TYPE_PRIORITY;
-				sr.priorityDistance = 0;
-				sr.objectType = ObjectType.POI_TYPE;
-				searchUICore.selectSearchResult(sr);
+					bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
+				}
+				searchQuery = objectLocalizedName.trim() + " ";
 
-				bundle.putBoolean(QUICK_SEARCH_PHRASE_DEFINED_KEY, true);
+			} else if (!Algorithms.isEmpty(searchQuery)) {
+				bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
 			}
-			searchQuery = objectLocalizedName.trim() + " ";
 
-		} else if (!Algorithms.isEmpty(searchQuery)) {
-			bundle.putBoolean(QUICK_SEARCH_RUN_SEARCH_FIRST_TIME_KEY, true);
+			bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
+			bundle.putString(QUICK_SEARCH_SHOW_TAB_KEY, showSearchTab.name());
+			bundle.putString(QUICK_SEARCH_TYPE_KEY, searchType.name());
+			if (latLon != null) {
+				bundle.putDouble(QUICK_SEARCH_LAT_KEY, latLon.getLatitude());
+				bundle.putDouble(QUICK_SEARCH_LON_KEY, latLon.getLongitude());
+			}
+			QuickSearchDialogFragment fragment = new QuickSearchDialogFragment();
+			fragment.setArguments(bundle);
+			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
+			return true;
 		}
-
-		bundle.putString(QUICK_SEARCH_QUERY_KEY, searchQuery);
-		bundle.putString(QUICK_SEARCH_SHOW_TAB_KEY, showSearchTab.name());
-		bundle.putString(QUICK_SEARCH_TYPE_KEY, searchType.name());
-		if (latLon != null) {
-			bundle.putDouble(QUICK_SEARCH_LAT_KEY, latLon.getLatitude());
-			bundle.putDouble(QUICK_SEARCH_LON_KEY, latLon.getLongitude());
-		}
-
-		QuickSearchDialogFragment fragment = new QuickSearchDialogFragment();
-		fragment.setArguments(bundle);
-		fragment.show(mapActivity.getSupportFragmentManager(), TAG);
-		return true;
+		return false;
 	}
 
 	private MapActivity getMapActivity() {
@@ -2390,7 +2384,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public interface SearchResultListener {
 		void searchStarted(SearchPhrase phrase);
+
 		void publish(SearchResultCollection res, boolean append);
+
 		// return true if search done, false if next search will be ran immediately
 		boolean searchFinished(SearchPhrase phrase);
 	}
@@ -2401,7 +2397,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				QuickSearchCategoriesListFragment.class.getName(),
 				QuickSearchAddressListFragment.class.getName()
 		};
-		private final int[] titleIds = new int[]{
+		private final int[] titleIds = new int[] {
 				QuickSearchHistoryListFragment.TITLE,
 				QuickSearchCategoriesListFragment.TITLE,
 				QuickSearchAddressListFragment.TITLE

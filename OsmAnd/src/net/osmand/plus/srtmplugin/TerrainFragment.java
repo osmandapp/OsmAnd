@@ -519,7 +519,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragmentManager.beginTransaction()
 					.replace(R.id.content, new TerrainFragment(), TAG)
 					.commitAllowingStateLoss();

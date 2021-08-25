@@ -39,7 +39,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
@@ -817,11 +816,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private void refreshFragment(@NonNull String tag) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		Fragment fragment = fragmentManager.findFragmentByTag(tag);
-		if (!fragmentManager.isStateSaved() && fragment != null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragmentManager.beginTransaction()
 					.detach(fragment)
 					.attach(fragment)
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 

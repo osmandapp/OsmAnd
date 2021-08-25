@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 
 public class AudioVideoNoteRecordingMenuFullScreenFragment extends Fragment {
@@ -48,7 +49,7 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends Fragment {
 
 	public static void showInstance(@NonNull AudioVideoNoteRecordingMenuFullScreen menu) {
 		FragmentManager fragmentManager = menu.getMapActivity().getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			AudioVideoNoteRecordingMenuFullScreenFragment fragment = new AudioVideoNoteRecordingMenuFullScreenFragment();
 			fragment.menu = menu;
 			fragmentManager.beginTransaction()

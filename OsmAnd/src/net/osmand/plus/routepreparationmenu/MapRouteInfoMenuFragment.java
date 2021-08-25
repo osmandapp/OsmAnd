@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.plus.track.TrackMenuFragment.startNavigationForGPX;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -31,8 +33,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.widgets.TextViewExProgress;
-
-import static net.osmand.plus.track.TrackMenuFragment.startNavigationForGPX;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		implements OnSegmentSelectedListener, DownloadEvents {
@@ -405,14 +405,13 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	public void show(@NonNull MapActivity mapActivity) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
 			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				slideInAnim = R.anim.slide_in_bottom;
 				slideOutAnim = R.anim.slide_out_bottom;
 			}
-
 			fragmentManager.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.routeMenuContainer, this, TAG)
@@ -476,9 +475,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity, int initialMenuState) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
-			mapActivity.getContextMenu().hideMenues();
-
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
@@ -492,10 +489,11 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 					slideOutAnim = isLayoutRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
 				}
 			}
+			mapActivity.getContextMenu().hideMenues();
 
-			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
 			Bundle args = new Bundle();
-			args.putInt(ContextMenuFragment.MENU_STATE_KEY, initialMenuState);
+			args.putInt(MENU_STATE_KEY, initialMenuState);
+			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)

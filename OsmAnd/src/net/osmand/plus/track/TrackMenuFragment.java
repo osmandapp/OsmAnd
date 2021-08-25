@@ -1488,7 +1488,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 									   boolean adjustMapPosition,
 									   @Nullable GPXTrackAnalysis analyses) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putInt(ContextMenuFragment.MENU_STATE_KEY, MenuState.HEADER_ONLY);
 

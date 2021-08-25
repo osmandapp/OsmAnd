@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -7,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -50,8 +51,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 
 /**
  * Created by okorsun on 20.12.16.
@@ -929,7 +928,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
 
     public static void showInstance(@NonNull FragmentActivity activity, boolean setFromDashboard, boolean animate) {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
-    	if (fragmentManager.findFragmentByTag(TAG) == null) {
+        if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
             int slideInAnim = 0;
             int slideOutAnim = 0;
             OsmandApplication app = ((OsmandApplication) activity.getApplication());
@@ -945,6 +944,6 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     .add(R.id.fragmentContainer, fragment, TAG)
                     .addToBackStack(TAG)
                     .commitAllowingStateLoss();
-    	}
+        }
     }
 }

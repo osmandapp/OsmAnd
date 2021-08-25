@@ -398,7 +398,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, GpxDisplayGroup group, Fragment target) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			EditTrackGroupDialogFragment fragment = new EditTrackGroupDialogFragment();
 			fragment.group = group;
 			fragment.setRetainInstance(true);

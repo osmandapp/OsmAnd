@@ -281,7 +281,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
 	                                   @NonNull ApplicationMode appMode,
 	                                   boolean globalExport) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ExportSettingsFragment fragment = new ExportSettingsFragment();
 			fragment.appMode = appMode;
 			fragment.globalExport = globalExport;

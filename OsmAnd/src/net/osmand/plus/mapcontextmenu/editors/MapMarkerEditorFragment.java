@@ -14,11 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapmarkers.MapMarker;
 
 public class MapMarkerEditorFragment extends PointEditorFragment {
 
@@ -138,7 +139,7 @@ public class MapMarkerEditorFragment extends PointEditorFragment {
 		if (editor != null) {
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			String tag = editor.getFragmentTag();
-			if (fragmentManager.findFragmentByTag(tag) == null) {
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
 				MapMarkerEditorFragment fragment = new MapMarkerEditorFragment();
 				fragmentManager.beginTransaction()
 						.add(R.id.fragmentContainer, fragment, tag)

@@ -28,14 +28,15 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.DelayAutoCompleteTextView;
 
 import java.text.DateFormat;
@@ -329,7 +330,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
     }
 
     public static void showInstance(@NonNull FragmentManager fragmentManager) {
-        if (fragmentManager.findFragmentByTag(TAG) == null) {
+        if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
             fragmentManager.beginTransaction()
                     .replace(R.id.content, new MapillaryFiltersFragment(), TAG)
                     .commitAllowingStateLoss();

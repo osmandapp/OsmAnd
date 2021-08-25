@@ -258,7 +258,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target,
 									   @NonNull OsmandPlugin plugin) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(EXTRA_PLUGIN_ID, plugin.getId());
 

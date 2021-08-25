@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -54,8 +56,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
-
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
@@ -420,34 +420,31 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager == null) {
-			return super.onPreferenceClick(preference);
-		}
-		String prefId = preference.getKey();
-		ApplicationMode selectedMode = getSelectedAppMode();
+		if (fragmentManager != null) {
+			String prefId = preference.getKey();
+			ApplicationMode selectedMode = getSelectedAppMode();
 
-		if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
-			if (!ApplicationMode.values(app).contains(selectedMode)) {
-				ApplicationMode.changeProfileAvailability(selectedMode, true, app);
+			if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
+				if (!ApplicationMode.values(app).contains(selectedMode)) {
+					ApplicationMode.changeProfileAvailability(selectedMode, true, app);
+				}
+				settings.setApplicationMode(selectedMode);
+				fragmentManager.beginTransaction()
+						.remove(this)
+						.addToBackStack(TAG)
+						.commitAllowingStateLoss();
+			} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, selectedMode);
+			} else if (RESET_TO_DEFAULT.equals(prefId)) {
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, selectedMode);
+			} else if (EXPORT_PROFILE.equals(prefId)) {
+				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, false);
+			} else if (DELETE_PROFILE.equals(prefId)) {
+				onDeleteProfileClick();
+			} else if (UI_CUSTOMIZATION.equals(prefId)) {
+				ConfigureMenuRootFragment.showInstance(fragmentManager, selectedMode, this);
 			}
-			settings.setApplicationMode(selectedMode);
-
-			fragmentManager.beginTransaction()
-					.remove(this)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-		} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
-			SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, selectedMode);
-		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, selectedMode);
-		} else if (EXPORT_PROFILE.equals(prefId)) {
-			ExportSettingsFragment.showInstance(fragmentManager, selectedMode, false);
-		} else if (DELETE_PROFILE.equals(prefId)) {
-			onDeleteProfileClick();
-		} else if (UI_CUSTOMIZATION.equals(prefId)) {
-			ConfigureMenuRootFragment.showInstance(fragmentManager, this, selectedMode);
 		}
-
 		return super.onPreferenceClick(preference);
 	}
 
@@ -493,5 +490,4 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 		return new File(backupDir, fileName);
 	}
-
 }

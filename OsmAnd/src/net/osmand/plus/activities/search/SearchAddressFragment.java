@@ -21,15 +21,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.PluginsFragment;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 public class SearchAddressFragment extends Fragment {
@@ -474,11 +474,11 @@ public class SearchAddressFragment extends Fragment {
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @Nullable Bundle arguments) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
-			SearchAddressFragment details = new SearchAddressFragment();
-			details.setArguments(arguments);
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SearchAddressFragment fragment = new SearchAddressFragment();
+			fragment.setArguments(arguments);
 			fragmentManager.beginTransaction()
-					.add(android.R.id.content, details, TAG)
+					.add(android.R.id.content, fragment, TAG)
 					.commitAllowingStateLoss();
 			return true;
 		}

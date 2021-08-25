@@ -42,27 +42,6 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		return (MapActivity) getActivity();
 	}
 
-	private int getStatusBarHeight() {
-		int statusBarHeight = 0;
-		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-		if (resourceId > 0) {
-			statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-		}
-		return statusBarHeight;
-	}
-
-	private int getNavigationBarHeight() {
-		if (!AndroidUtils.hasNavBar(getContext()) && !AndroidUtils.isNavBarVisible(getMapActivity()))
-			return 0;
-		int orientation = getResources().getConfiguration().orientation;
-		if (isSmartphone() && Configuration.ORIENTATION_LANDSCAPE == orientation)
-			return 0;
-		int id = getResources().getIdentifier(orientation == Configuration.ORIENTATION_PORTRAIT ? "navigation_bar_height" : "navigation_bar_height_landscape", "dimen", "android");
-		if (id > 0)
-			return getResources().getDimensionPixelSize(id);
-		return 0;
-	}
-
 	private int getNavigationBarWidth() {
 		if (!AndroidUtils.hasNavBar(getContext()) && !AndroidUtils.isNavBarVisible(getMapActivity()))
 			return 0;
@@ -145,7 +124,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		osmTextLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 
 		int defaultLogoMarginTop = getResources().getDimensionPixelSize(R.dimen.splash_screen_logo_top);
-		int logoMarginTop = defaultLogoMarginTop - (Build.VERSION.SDK_INT >= 21 ? 0 : getStatusBarHeight());
+		int logoMarginTop = defaultLogoMarginTop - (Build.VERSION.SDK_INT >= 21 ? 0 : AndroidUtils.getStatusBarHeight(activity));
 		int textMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_text_bottom);
 		int osmTextMarginBottom = getResources().getDimensionPixelSize(R.dimen.splash_screen_osm_text_bottom);
 		int elementsPaddingLeft = 0;
@@ -200,10 +179,9 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
-			fragmentManager
-					.beginTransaction()
-					.add(R.id.fragmentContainer, new SecondSplashScreenFragment(), SecondSplashScreenFragment.TAG)
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragmentManager.beginTransaction()
+					.add(R.id.fragmentContainer, new SecondSplashScreenFragment(), TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} else {
