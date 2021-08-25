@@ -413,7 +413,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@Override
 	protected int getBgColorId() {
-		return ColorUtilities.getActivityBgColorId(nightMode);
+		return nightMode ? R.color.activity_background_color_dark : R.color.list_background_color_light;
 	}
 
 	@Override

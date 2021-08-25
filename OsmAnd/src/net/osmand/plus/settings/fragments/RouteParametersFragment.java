@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -132,8 +131,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 		String key = preference.getKey();
 		if (ROUTE_PARAMETERS_INFO.equals(key)) {
-			int color = ColorUtilities.getActivityBgColor(app, isNightMode());
-			holder.itemView.setBackgroundColor(color);
+			holder.itemView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, isNightMode()));
 		} else if (ROUTE_PARAMETERS_IMAGE.equals(key)) {
 			ImageView imageView = (ImageView) holder.itemView.findViewById(R.id.device_image);
 			if (imageView != null) {

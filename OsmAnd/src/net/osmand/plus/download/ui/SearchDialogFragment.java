@@ -4,7 +4,6 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.system.Os;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;

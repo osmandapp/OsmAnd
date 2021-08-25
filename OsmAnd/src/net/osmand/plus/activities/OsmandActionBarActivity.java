@@ -1,7 +1,6 @@
 package net.osmand.plus.activities;
 
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,20 +15,20 @@ public class OsmandActionBarActivity extends OsmandInAppPurchaseActivity {
 
 	protected boolean haveHomeButton = true;
 
-    //should be called after set content view
-    protected void setupHomeButton() {
-    	OsmandApplication app = getMyApplication();
-    	boolean nightMode = !app.getSettings().isLightContent();
-    	int iconId = AndroidUtils.getNavigationIconResId(app);
-    	int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
-        Drawable back = app.getUIUtilities().getIcon(iconId, colorId);
-        final ActionBar supportActionBar = getSupportActionBar();
-        if (supportActionBar != null) {
-            supportActionBar.setHomeButtonEnabled(true);
-            supportActionBar.setDisplayHomeAsUpEnabled(true);
-            supportActionBar.setHomeAsUpIndicator(back);
-        }
-    }
+	//should be called after set content view
+	protected void setupHomeButton() {
+		ActionBar supportActionBar = getSupportActionBar();
+		if (supportActionBar != null) {
+			OsmandApplication app = getMyApplication();
+			boolean nightMode = !app.getSettings().isLightContent();
+			int iconId = AndroidUtils.getNavigationIconResId(app);
+			int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+
+			supportActionBar.setHomeButtonEnabled(true);
+			supportActionBar.setDisplayHomeAsUpEnabled(true);
+			supportActionBar.setHomeAsUpIndicator(app.getUIUtilities().getIcon(iconId, colorId));
+		}
+	}
 
     @Override
     public void setContentView(int layoutResID) {

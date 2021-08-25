@@ -98,8 +98,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment implements OnPref
 		String key = preference.getKey();
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
 			if (SHOW_ROUTING_ALARMS_INFO.equals(key)) {
-				int color = ColorUtilities.getActivityBgColor(app, isNightMode());
-				holder.itemView.setBackgroundColor(color);
+				holder.itemView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, isNightMode()));
 			} else if (SCREEN_ALERTS_IMAGE.equals(key)) {
 				ImageView deviceImage = (ImageView) holder.itemView.findViewById(R.id.device_image);
 				ImageView warningIcon = (ImageView) holder.itemView.findViewById(R.id.warning_icon);

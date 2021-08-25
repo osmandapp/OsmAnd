@@ -1,5 +1,7 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.FileUtils.ILLEGAL_PATH_NAME_CHARACTERS;
+
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
@@ -31,8 +33,6 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 
-import static net.osmand.FileUtils.ILLEGAL_PATH_NAME_CHARACTERS;
-
 public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = AddNewTrackFolderBottomSheet.class.getName();
@@ -60,7 +60,7 @@ public class AddNewTrackFolderBottomSheet extends MenuBottomSheetDialogFragment 
 		int textBoxBgColorId = nightMode ? R.color.color_white : R.color.activity_background_color_light;
 		int textBoxBgColor = ContextCompat.getColor(app, textBoxBgColorId);
 		if (nightMode) {
-			textBoxBgColor = UiUtilities.getColorWithAlpha(textBoxBgColor, 0.1f);
+			textBoxBgColor = ColorUtilities.getColorWithAlpha(textBoxBgColor, 0.1f);
 		}
 		nameTextBox.setBoxBackgroundColor(textBoxBgColor);
 		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_name));

@@ -12,7 +12,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidRoadInfo;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.routing.RoutingHelper;
 
 public class ImpassibleRoadsMenuController extends MenuController {
 

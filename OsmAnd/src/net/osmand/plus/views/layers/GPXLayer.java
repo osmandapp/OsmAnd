@@ -1,5 +1,9 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.GPXUtilities.calculateTrackBounds;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,6 +17,11 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Pair;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -46,7 +55,6 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.track.CachedTrack;
@@ -81,15 +89,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.GPXUtilities.calculateTrackBounds;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-
 public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
@@ -108,7 +107,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@ColorInt
 	private int cachedColor;
 	private float defaultTrackWidth;
-	private Map<String, Float> cachedTrackWidth = new HashMap<>();
+	private final Map<String, Float> cachedTrackWidth = new HashMap<>();
 
 	private Drawable startPointIcon;
 	private Drawable finishPointIcon;
@@ -124,7 +123,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private final Map<String, CachedTrack> segmentsCache = new HashMap<>();
 
-	private List<WptPt> cache = new ArrayList<>();
+	private final List<WptPt> cache = new ArrayList<>();
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 	private MapTextLayer textLayer;
 
@@ -806,20 +805,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private boolean hasTrackDrawInfoForTrack(GPXFile gpxFile) {
 		return trackDrawInfo != null && (trackDrawInfo.isCurrentRecording() && gpxFile.showCurrentTrack
 				|| gpxFile.path.equals(trackDrawInfo.getFilePath()));
-	}
-
-	private boolean showTrackToFollow() {
-		if (view.getContext() instanceof MapActivity) {
-			MapActivity mapActivity = (MapActivity) view.getContext();
-			OsmandApplication app = mapActivity.getMyApplication();
-			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
-			return routeInfoMenu.isVisible()
-					|| app.getRoutingHelper().isFollowingMode()
-					|| MapRouteInfoMenu.followTrackVisible
-					|| MapRouteInfoMenu.chooseRoutesVisible
-					|| MapRouteInfoMenu.waypointsVisible;
-		}
-		return false;
 	}
 
 	@NonNull

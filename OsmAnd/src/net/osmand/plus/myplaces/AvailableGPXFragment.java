@@ -266,8 +266,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		} else {
 			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.GONE);
 			currentGpxView.findViewById(R.id.segment_time).setVisibility(View.GONE);
-			Drawable stopIcon = app.getUIUtilities()
-					.getIcon(R.drawable.ic_action_rec_start, activeColorId);
+			Drawable stopIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_rec_start, activeColorId);
 			stop.setCompoundDrawablesWithIntrinsicBounds(stopIcon, null, null, null);
 			stop.setText(app.getString(R.string.shared_string_record));
 			stop.setContentDescription(app.getString(R.string.gpx_monitoring_start));

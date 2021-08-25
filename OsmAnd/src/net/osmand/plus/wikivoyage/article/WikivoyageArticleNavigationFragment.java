@@ -48,8 +48,6 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 
 	public static final int OPEN_ARTICLE_REQUEST_CODE = 2;
 
-	private static final long UNDEFINED = -1;
-
 	private TravelArticleIdentifier articleId;
 	private String selectedLang;
 	private TravelArticle article;

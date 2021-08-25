@@ -35,7 +35,6 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 
 	protected final List<_Radio> items = new ArrayList<>();
 	protected final boolean nightMode;
-	protected boolean isEnabled;
 	protected RadioItem selectedItem;
 
 	public MultiStateToggleButton(@NonNull OsmandApplication app,

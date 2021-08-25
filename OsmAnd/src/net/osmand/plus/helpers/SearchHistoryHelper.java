@@ -19,8 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.data.PointDescription.POINT_TYPE_GPX_FILE;
-
 public class SearchHistoryHelper {
 
 	private static final int HISTORY_LIMIT = 1500;

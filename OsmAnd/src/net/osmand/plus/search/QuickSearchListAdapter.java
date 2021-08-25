@@ -541,8 +541,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private void setupBackground(View view) {
-		int bgColor = ColorUtilities.getListBgColor(app, isNightMode());
-		view.setBackgroundColor(bgColor);
+		view.setBackgroundColor(ColorUtilities.getListBgColor(app, isNightMode()));
 	}
 
 	private void setupDivider(final int position,

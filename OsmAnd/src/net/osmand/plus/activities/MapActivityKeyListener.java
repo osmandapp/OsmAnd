@@ -1,5 +1,9 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.GENERIC_EXTERNAL_DEVICE;
+import static net.osmand.plus.settings.backend.OsmandSettings.PARROT_EXTERNAL_DEVICE;
+import static net.osmand.plus.settings.backend.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
@@ -12,11 +16,6 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
-
-import static net.osmand.plus.settings.backend.OsmandSettings.NO_EXTERNAL_DEVICE;
-import static net.osmand.plus.settings.backend.OsmandSettings.GENERIC_EXTERNAL_DEVICE;
-import static net.osmand.plus.settings.backend.OsmandSettings.PARROT_EXTERNAL_DEVICE;
-import static net.osmand.plus.settings.backend.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
 
 public class MapActivityKeyListener implements KeyEvent.Callback {
 

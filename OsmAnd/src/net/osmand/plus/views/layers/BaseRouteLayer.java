@@ -1,5 +1,7 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -8,15 +10,18 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
-import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -31,12 +36,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 public abstract class BaseRouteLayer extends OsmandMapLayer {
 
@@ -224,14 +223,6 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 
 	public void setPreviewRouteLineInfo(PreviewRouteLineInfo previewInfo) {
 		this.previewRouteLineInfo = previewInfo;
-	}
-
-	@Nullable
-	protected MapActivity getMapActivity() {
-		if (view.getContext() instanceof MapActivity) {
-			return (MapActivity) view.getContext();
-		}
-		return null;
 	}
 
 	protected ApplicationMode getAppMode() {

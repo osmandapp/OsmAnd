@@ -13,7 +13,6 @@ import org.mozilla.javascript.ScriptableObject;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.FilenameFilter;
 
 public class JSTTSCommandPlayerImpl extends TTSCommandPlayerImpl {
     private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(JSTTSCommandPlayerImpl.class);

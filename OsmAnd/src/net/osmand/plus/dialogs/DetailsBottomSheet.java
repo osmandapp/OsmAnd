@@ -1,5 +1,9 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,7 +16,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -34,10 +37,6 @@ import net.osmand.render.RenderingRuleProperty;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
 
 public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 

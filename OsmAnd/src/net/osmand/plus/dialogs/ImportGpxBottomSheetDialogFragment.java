@@ -59,11 +59,9 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		Context ctx = getContext();
-		if (ctx == null) return;
-
 		items.add(new TitleItem(getString(R.string.import_file)));
 
+		Context ctx = requireContext();
 		int nameColor = ColorUtilities.getActiveColor(ctx, nightMode);
 		int descrColor = ColorUtilities.getSecondaryTextColor(ctx, nightMode);
 		String descr = getString(R.string.import_gpx_file_description);

@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -37,8 +36,6 @@ import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.OnItemClickListener;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
-
-import java.util.List;
 
 public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment {
 

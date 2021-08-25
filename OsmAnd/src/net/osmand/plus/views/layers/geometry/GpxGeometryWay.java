@@ -2,6 +2,10 @@ package net.osmand.plus.views.layers.geometry;
 
 import android.graphics.Bitmap;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.RotatedTileBox;
@@ -12,10 +16,6 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class GpxGeometryWay extends MultiColoringGeometryWay<GpxGeometryWayContext, GpxGeometryWayDrawer> {
 

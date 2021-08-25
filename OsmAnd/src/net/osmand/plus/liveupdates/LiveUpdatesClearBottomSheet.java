@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.style.StyleSpan;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
