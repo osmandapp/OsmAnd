@@ -258,7 +258,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target,
 									   @NonNull OsmandPlugin plugin) {
-		try {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(EXTRA_PLUGIN_ID, plugin.getId());
 
@@ -270,8 +270,7 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			return false;
 		}
+		return false;
 	}
 }

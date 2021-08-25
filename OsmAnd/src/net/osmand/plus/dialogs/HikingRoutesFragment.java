@@ -1,5 +1,7 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.dialogs.ConfigureMapMenu.HIKING_ROUTES_OSMC_ATTR;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -30,8 +33,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.dialogs.ConfigureMapMenu.HIKING_ROUTES_OSMC_ATTR;
 
 public class HikingRoutesFragment extends BaseOsmAndFragment {
 
@@ -180,5 +181,13 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
 		params.height = height;
 		bottomView.setLayoutParams(params);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.content, new HikingRoutesFragment(), TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

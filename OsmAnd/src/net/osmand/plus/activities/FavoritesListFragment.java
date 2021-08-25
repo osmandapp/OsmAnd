@@ -42,6 +42,8 @@ import java.util.List;
 
 public class FavoritesListFragment extends OsmAndListFragment implements SearchActivityChild, OsmAndCompassListener {
 
+	public static final String TAG = FavoritesListFragment.class.getName();
+
 	public static final String SELECT_FAVORITE_POINT_INTENT_KEY = "SELECT_FAVORITE_POINT_INTENT_KEY";
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;
 

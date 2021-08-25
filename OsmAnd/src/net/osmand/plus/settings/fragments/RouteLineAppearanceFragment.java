@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +14,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -34,15 +43,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.util.Algorithms.objectEquals;
 
 public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 		implements ColorPickerListener, OnMapThemeUpdateListener, OnSelectedColorChangeListener,
@@ -544,7 +544,8 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @Nullable ApplicationMode appMode) {
-		try {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
 			if (mapRouteInfoMenu.isVisible()) {
 				mapRouteInfoMenu.hide();
@@ -552,14 +553,13 @@ public class RouteLineAppearanceFragment extends ContextMenuScrollFragment
 
 			RouteLineAppearanceFragment fragment = new RouteLineAppearanceFragment();
 			fragment.appMode = appMode;
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
+
+			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

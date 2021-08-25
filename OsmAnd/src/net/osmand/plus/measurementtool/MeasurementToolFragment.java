@@ -2098,16 +2098,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return showFragment(fragment, fragmentManager);
 	}
 
-	private static boolean showFragment(MeasurementToolFragment fragment, FragmentManager fragmentManager) {
-		try {
+	private static boolean showFragment(@NonNull MeasurementToolFragment fragment,
+	                                    @NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragment.setRetainInstance(true);
 			fragmentManager.beginTransaction()
-					.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
+					.add(R.id.bottomFragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			return false;
 		}
+		return false;
 	}
 
 	private class MeasurementToolBarController extends TopToolbarController {
@@ -2216,9 +2216,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (layer != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.hide(this).commit();
+					.hide(this)
+					.commitAllowingStateLoss();
 			layer.setTapsDisabled(true);
-			SnapTrackWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+			SnapTrackWarningFragment.showInstance(manager, this);
 			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_ruler_container);
 		}
 	}
@@ -2230,7 +2231,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (layer != null && mapActivity != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.show(this).commit();
+					.show(this)
+					.commitAllowingStateLoss();
 			layer.setTapsDisabled(false);
 			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
 		}

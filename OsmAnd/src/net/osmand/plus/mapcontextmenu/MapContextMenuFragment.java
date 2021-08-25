@@ -2236,12 +2236,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity,
 	                                   final boolean centered) {
-		try {
+		if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
+			return false;
+		}
 
-			if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
-				return false;
-			}
-
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
 			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
@@ -2256,16 +2256,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			MapContextMenuFragment fragment = new MapContextMenuFragment();
 			fragment.centered = centered;
-			mapActivity.getSupportFragmentManager().beginTransaction()
+			fragmentManager.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+
+		return false;
 	}
 
 	//DownloadEvents

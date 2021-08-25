@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,15 +16,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -31,6 +34,8 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
@@ -39,9 +44,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
 
 public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
@@ -178,24 +180,23 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		return "";
 	}
 
-	public static void showInstance(final MapActivity mapActivity) {
-		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
-		if (editor != null) {
-			WptPtEditorFragmentNew fragment = new WptPtEditorFragmentNew();
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commit();
-		}
+	public static void showInstance(@NonNull MapActivity mapActivity) {
+		showInstance(mapActivity, false);
 	}
 
-	public static void showInstance(final MapActivity mapActivity, boolean skipDialog) {
+	public static void showInstance(@NonNull MapActivity mapActivity, boolean skipDialog) {
 		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 		if (editor != null) {
-			WptPtEditorFragmentNew fragment = new WptPtEditorFragmentNew();
-			fragment.skipDialog = skipDialog;
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commit();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			String tag = editor.getFragmentTag();
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+				WptPtEditorFragmentNew fragment = new WptPtEditorFragmentNew();
+				fragment.skipDialog = skipDialog;
+				fragmentManager.beginTransaction()
+						.add(R.id.fragmentContainer, fragment, tag)
+						.addToBackStack(null)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 

@@ -1,5 +1,7 @@
 package net.osmand.plus.onlinerouting.ui;
 
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -42,8 +44,8 @@ import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
 import net.osmand.plus.onlinerouting.VehicleType;
-import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.EngineType;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -56,8 +58,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
 
 public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
@@ -691,14 +691,15 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	public static void showInstance(@NonNull FragmentActivity activity,
 									@NonNull ApplicationMode appMode,
 									@Nullable String editedEngineKey) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved() && fm.findFragmentByTag(OnlineRoutingEngineFragment.TAG) == null) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();
 			fragment.appMode = appMode;
 			fragment.editedEngineKey = editedEngineKey;
-			fm.beginTransaction()
+			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 

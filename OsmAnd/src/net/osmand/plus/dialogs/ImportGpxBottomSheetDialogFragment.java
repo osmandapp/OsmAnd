@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.R;
@@ -96,5 +99,27 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 				})
 				.create();
 		items.add(asGpxItem);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull ImportHelper importHelper,
+	                                @NonNull GPXFile gpxFile,
+	                                @NonNull String fileName,
+	                                long fileSize,
+	                                boolean save,
+	                                boolean useImportDir) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
+			fragment.setUsedOnMap(true);
+			fragment.setImportHelper(importHelper);
+			fragment.setGpxFile(gpxFile);
+			fragment.setFileName(fileName);
+			fragment.setFileSize(fileSize);
+			fragment.setSave(save);
+			fragment.setUseImportDir(useImportDir);
+			fragmentManager.beginTransaction()
+					.add(fragment, TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

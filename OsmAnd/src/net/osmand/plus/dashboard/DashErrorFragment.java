@@ -22,6 +22,8 @@ import net.osmand.plus.helpers.FontCache;
 
 import java.text.MessageFormat;
 
+import androidx.fragment.app.FragmentManager;
+
 public class DashErrorFragment extends DashBaseFragment {
 
 	public static final String TAG = "DASH_ERROR_FRAGMENT";
@@ -56,14 +58,13 @@ public class DashErrorFragment extends DashBaseFragment {
 
 		Button cancelBtn = ((Button) view.findViewById(R.id.error_cancel));
 		cancelBtn.setTypeface(typeface);
-		cancelBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				OsmandActionBarActivity dashboardActivity = ((OsmandActionBarActivity) getActivity());
-				if (dashboardActivity != null) {
-					dashboardActivity.getSupportFragmentManager().beginTransaction().remove(DashErrorFragment.this)
-							.commit();
-				}
+		cancelBtn.setOnClickListener(view1 -> {
+			OsmandActionBarActivity dashboardActivity = ((OsmandActionBarActivity) getActivity());
+			if (dashboardActivity != null) {
+				dashboardActivity.getSupportFragmentManager()
+						.beginTransaction()
+						.remove(DashErrorFragment.this)
+						.commitAllowingStateLoss();
 			}
 		});
 		dismissCallback = new ErrorDismissListener(getParentView(), dashboard, TAG, view);
