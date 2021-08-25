@@ -1270,7 +1270,7 @@
     <string name="shared_string_waypoints">راه‌نشان‌ها</string>
     <string name="way_alarms">هشدارهای ترافیکی</string>
     <string name="speak_favorites">علاقه‌مندی‌های نزدیک</string>
-    <string name="speak_poi">نقاط توجه نزدیک</string>
+    <string name="speak_poi">نقاط توجه نزدیک از نوع</string>
     <string name="download_additional_maps">آیا نقشه‌های ناموجود را دانلود می‌کنید %1$s ‏(%2$d مگابایت)؟</string>
     <string name="shared_string_more">بیشتر…</string>
     <string name="rendering_value_browse_map_name">مرور نقشه</string>
@@ -4329,4 +4329,5 @@
     <string name="pro_features">قابلیت‌های Pro</string>
     <string name="purchases_restored">خریدها بازیابی شد</string>
     <string name="grey_color_undefined">رنگ خاکستری برای قسمت‌های بدون داده به کار می‌رود.</string>
+    <string name="no_activity_for_intent">برنامهٔ مناسبی برای اجرای این کنش پیدا نشد</string>
 </resources>
