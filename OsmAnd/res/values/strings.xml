@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="service_is_not_available_please_try_later">Service is not available please try later</string>
     <string name="no_activity_for_intent">No suitable applications to perform this action were found</string>
     <string name="empty_category_name">Empty category name</string>
     <string name="amz_manage_subscription_descr">To manage your subscription use the Amazon App on the device or open the Amazon.com website under your profile.</string>

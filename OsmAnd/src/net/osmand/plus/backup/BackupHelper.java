@@ -386,7 +386,7 @@ public class BackupHelper {
 			params.put("deviceid", androidId);
 		}
 		OperationLog operationLog = new OperationLog("updateOrderId", DEBUG);
-		AndroidNetworkUtils.sendRequest(app, UPDATE_ORDER_ID_URL, params, "Update order id", false, true, (resultJson, error) -> {
+		AndroidNetworkUtils.sendRequest(app, UPDATE_ORDER_ID_URL, params, "Update order id", false, true, (resultJson, error, resultCode) -> {
 			int status;
 			String message;
 			if (!Algorithms.isEmpty(error)) {
@@ -549,7 +549,7 @@ public class BackupHelper {
 		final OperationLog operationLog = new OperationLog("downloadFileList", DEBUG);
 		operationLog.startOperation();
 		AndroidNetworkUtils.sendRequest(app, LIST_FILES_URL, params, "Download file list", false, false,
-				(resultJson, error) -> {
+				(resultJson, error, resultCode) -> {
 					int status;
 					String message;
 					List<RemoteFile> remoteFiles = new ArrayList<>();

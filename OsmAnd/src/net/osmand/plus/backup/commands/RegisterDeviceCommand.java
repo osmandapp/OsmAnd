@@ -4,10 +4,11 @@ import androidx.annotation.NonNull;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.OperationLog;
+import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupCommand;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
-import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -52,11 +53,15 @@ public class RegisterDeviceCommand extends BackupCommand {
 		}
 		params.put("token", token);
 		OperationLog operationLog = createOperationLog("registerDevice");
-		AndroidNetworkUtils.sendRequest(getApp(), DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error) -> {
+		AndroidNetworkUtils.sendRequest(getApp(), DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error, resultCode) -> {
 			int status;
 			String message;
 			BackupError backupError = null;
-			if (!Algorithms.isEmpty(error)) {
+			if (resultCode != null && isTemporallyServiceErrorCode(resultCode)) {
+				backupError = new BackupError(getApp().getString(R.string.service_is_not_available_please_try_later));
+				message = "Device registration error code: " + resultCode;
+				status = STATUS_SERVER_ERROR;
+			} else if (!Algorithms.isEmpty(error)) {
 				backupError = new BackupError(error);
 				message = "Device registration error: " + backupError;
 				status = STATUS_SERVER_ERROR;
@@ -94,5 +99,9 @@ public class RegisterDeviceCommand extends BackupCommand {
 			BackupError backupError = (BackupError) values[2];
 			listener.onRegisterDevice(status, message, backupError);
 		}
+	}
+
+	protected boolean isTemporallyServiceErrorCode(int code) {
+		return code == 404 || code >= 500 && code < 600;
 	}
 }
