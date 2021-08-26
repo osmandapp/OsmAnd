@@ -1,5 +1,7 @@
 package net.osmand.plus.importfiles;
 
+import static net.osmand.plus.importfiles.KmlImportTask.convertKmlToGpxStream;
+
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
@@ -15,8 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import static net.osmand.plus.importfiles.KmlImportTask.convertKmlToGpxStream;
 
 class GpxOrFavouritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 
@@ -79,9 +79,7 @@ class GpxOrFavouritesImportTask extends BaseLoadAsyncTask<Void, Void, GPXFile> {
 			}
 		} catch (FileNotFoundException e) {
 			//
-		} catch (IOException e) {
-			ImportHelper.log.error(e.getMessage(), e);
-		} catch (SecurityException e) {
+		} catch (IOException | SecurityException | IllegalStateException e) {
 			ImportHelper.log.error(e.getMessage(), e);
 		} finally {
 			Algorithms.closeStream(is);

@@ -39,6 +39,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
+import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -177,8 +178,26 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				trackDrawInfo.setShowArrows(app.getSettings().CURRENT_TRACK_SHOW_ARROWS.get());
 				trackDrawInfo.setShowStartFinish(app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.get());
 			} else {
-				gpxDataItem = gpxDbHelper.getItem(new File(selectedGpxFile.getGpxFile().path));
-				trackDrawInfo = new TrackDrawInfo(gpxDataItem, false);
+				GpxDataItemCallback callback = new GpxDataItemCallback() {
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+
+					@Override
+					public void onGpxDataItemReady(GpxDataItem item) {
+						if (item != null) {
+							gpxDataItem = item;
+							trackDrawInfo.updateParams(item);
+						}
+						if (view != null) {
+							initContent();
+						}
+					}
+				};
+				String filePath = selectedGpxFile.getGpxFile().path;
+				gpxDataItem = gpxDbHelper.getItem(new File(filePath), callback);
+				trackDrawInfo = new TrackDrawInfo(filePath, gpxDataItem, false);
 			}
 		}
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {

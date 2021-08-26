@@ -265,7 +265,9 @@ public class MappersFragment extends BaseOsmAndFragment {
 		downloadChangesInfo(result -> {
 			changesInfo = result;
 			checkLastChanges(result);
-			fullUpdate();
+			if (isAdded()) {
+				fullUpdate();
+			}
 			return true;
 		});
 	}
