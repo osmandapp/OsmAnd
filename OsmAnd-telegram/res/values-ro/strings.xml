@@ -131,7 +131,7 @@
     <string name="shared_string_enable">Activează</string>
     <string name="shared_string_select">Selectați</string>
     <string name="shared_string_apply">Aplicați</string>
-    <string name="unit_of_length_descr">Modificați în ce se măsoară distanța.</string>
+    <string name="unit_of_length_descr">Schimbați în ce se măsoară distanța.</string>
     <string name="units_and_formats">Unități &amp; formate</string>
     <string name="shared_string_export">Exportați</string>
     <string name="logcat_buffer">Buffer Logcat</string>
