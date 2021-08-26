@@ -29,6 +29,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityActionsProvider;
@@ -45,6 +47,8 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.auto.CarSurfaceView;
+import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
@@ -69,21 +73,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	protected final static int LOWEST_ZOOM_TO_ROTATE = 9;
 	private static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
 	private boolean MEASURE_FPS = false;
-	private FPSMeasurement main = new FPSMeasurement();
-	private FPSMeasurement additional = new FPSMeasurement();
+	private final FPSMeasurement main = new FPSMeasurement();
+	private final FPSMeasurement additional = new FPSMeasurement();
 	private View view;
-	private Activity activity;
+	private final Activity activity;
 	private OsmandApplication application;
 	protected OsmandSettings settings = null;
 	private CanvasColors canvasColors = null;
 	private Boolean nightMode = null;
 
-	private class CanvasColors {
+	private static class CanvasColors {
 		int colorDay = MAP_DEFAULT_COLOR;
 		int colorNight = MAP_DEFAULT_COLOR;
 	}
 
-	private class FPSMeasurement {
+	private static class FPSMeasurement {
 		int fpsMeasureCount = 0;
 		int fpsMeasureMs = 0;
 		long fpsFirstMeasurement = 0;
@@ -101,9 +105,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-
 	protected static final int emptyTileDivisor = 16;
-
 
 	public interface OnTrackBallListener {
 		public boolean onTrackBallEvent(MotionEvent e);
@@ -122,7 +124,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	protected static final Log LOG = PlatformUtil.getLog(OsmandMapTileView.class);
-
 
 	private RotatedTileBox currentViewport;
 
@@ -264,15 +265,24 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		elevationAngle = settings.getLastKnownMapElevation();
 	}
 
-	public void setView(View view) {
+	public void setView(@Nullable View view) {
 		this.view = view;
-		view.setClickable(true);
-		view.setLongClickable(true);
-		view.setFocusable(true);
-		if (Build.VERSION.SDK_INT >= 26) {
-			view.setDefaultFocusHighlightEnabled(false);
+		if (view != null) {
+			view.setClickable(true);
+			view.setLongClickable(true);
+			view.setFocusable(true);
+			if (Build.VERSION.SDK_INT >= 26) {
+				view.setDefaultFocusHighlightEnabled(false);
+			}
+			refreshMap(true);
 		}
-		refreshMap(true);
+	}
+
+	public void setupOpenGLView() {
+		Activity activity = this.activity;
+		if (!application.isApplicationInitializing() && activity instanceof MapActivity) {
+			((MapActivity) activity).setupOpenGLView(false);
+		}
 	}
 
 	public Boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -661,6 +671,21 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 					} finally {
 						holder.unlockCanvasAndPost(canvas);
 					}
+				}
+				if (MEASURE_FPS) {
+					main.calculateFPS(ms, SystemClock.elapsedRealtime());
+				}
+			}
+		} else if (view instanceof CarSurfaceView) {
+			SurfaceRenderer renderer = ((CarSurfaceView) view).getSurfaceRenderer();
+			long ms = SystemClock.elapsedRealtime();
+			synchronized (renderer) {
+				try {
+					// make copy to avoid concurrency
+					RotatedTileBox viewportToDraw = currentViewport.copy();
+					renderer.renderFrame(viewportToDraw, drawSettings);
+				} catch (Exception e) {
+					// ignore
 				}
 				if (MEASURE_FPS) {
 					main.calculateFPS(ms, SystemClock.elapsedRealtime());

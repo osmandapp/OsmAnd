@@ -54,6 +54,8 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -125,6 +127,9 @@ public class OsmandApplication extends MultiDexApplication {
 	NavigationService navigationService;
 	DownloadService downloadService;
 	OsmandAidlApi aidlApi;
+
+	NavigationCarAppService navigationCarAppService;
+	NavigationSession navigationSession;
 
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
@@ -534,6 +539,46 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setNavigationService(NavigationService navigationService) {
 		this.navigationService = navigationService;
+	}
+
+	public interface NavigationSessionListener {
+		void onNavigationSessionChanged(@Nullable NavigationSession navigationSession);
+	}
+
+	private NavigationSessionListener navigationSessionListener;
+
+	public void setNavigationSessionListener(@Nullable NavigationSessionListener navigationSessionListener) {
+		this.navigationSessionListener = navigationSessionListener;
+	}
+
+	@Nullable
+	public NavigationCarAppService getNavigationCarAppService() {
+		return navigationCarAppService;
+	}
+
+	public void setNavigationCarAppService(@Nullable NavigationCarAppService navigationCarAppService) {
+		this.navigationCarAppService = navigationCarAppService;
+	}
+
+	@Nullable
+	public NavigationSession getNavigationSession() {
+		return navigationSession;
+	}
+
+	public void setNavigationSession(@Nullable NavigationSession navigationSession) {
+		if (navigationSession == null) {
+			NavigationService navigationService = this.navigationService;
+			if (navigationService != null) {
+				navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
+			}
+		} else {
+			startNavigationService(NavigationService.USED_BY_CAR_APP);
+		}
+		this.navigationSession = navigationSession;
+		NavigationSessionListener navigationSessionListener = this.navigationSessionListener;
+		if (navigationSessionListener != null) {
+			navigationSessionListener.onNavigationSessionChanged(navigationSession);
+		}
 	}
 
 	public DownloadService getDownloadService() {

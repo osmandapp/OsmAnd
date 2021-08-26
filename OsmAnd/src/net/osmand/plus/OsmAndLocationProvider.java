@@ -34,6 +34,7 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.routing.RouteSegmentSearchResult;
 import net.osmand.plus.routing.RoutingHelper;
@@ -756,6 +757,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		OsmandPlugin.updateLocationPlugins(location);
 		app.getRoutingHelper().updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
+		NavigationSession navigationSession = app.getNavigationSession();
+		if (navigationSession != null) {
+			navigationSession.updateLocation(location);
+		}
 	}
 	
 	public void setLocationFromSimulation(net.osmand.Location location) {
