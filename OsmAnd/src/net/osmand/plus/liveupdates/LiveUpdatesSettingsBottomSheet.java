@@ -1,7 +1,5 @@
 package net.osmand.plus.liveupdates;
 
-import static net.osmand.AndroidUtils.getPrimaryTextColorId;
-import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatHelpDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
