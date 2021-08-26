@@ -719,7 +719,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				color = dataItem.getColor();
 			}
 		}
-		return color != 0 ? color : defaultColor;
+		return color != 0 ? color : gpxFile.getColor(defaultColor);
 	}
 
 	private String getAvailableOrDefaultColoringType(SelectedGpxFile selectedGpxFile) {
@@ -772,7 +772,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				width = dataItem.getWidth();
 			}
 		}
-		return width != null ? width : defaultWidth;
+		return width != null ? width : gpxFile.getWidth(defaultWidth);
 	}
 
 	private boolean isShowArrowsForTrack(GPXFile gpxFile) {
@@ -785,7 +785,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (dataItem != null) {
 				return dataItem.isShowArrows();
 			}
-			return false;
+			return gpxFile.isShowArrows();
 		}
 	}
 

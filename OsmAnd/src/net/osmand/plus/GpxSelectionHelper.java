@@ -721,9 +721,6 @@ public class GpxSelectionHelper {
 					sf = new SelectedGpxFile();
 				}
 				if (dataItem != null) {
-					if (dataItem.getColor() != 0) {
-						gpx.setColor(dataItem.getColor());
-					}
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);
