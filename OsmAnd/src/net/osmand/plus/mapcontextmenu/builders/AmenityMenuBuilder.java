@@ -23,6 +23,7 @@ import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -178,7 +179,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				textPrefixView == null ? (collapsable ? dpToPx(13f) : dpToPx(8f)) : dpToPx(2f), 0, collapsable && textPrefixView == null ? dpToPx(13f) : dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
 

@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BaseOsmAndFragment;
@@ -105,7 +106,7 @@ public class OprStartFragment extends BaseOsmAndFragment implements OprAuthoriza
 		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
 			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	private class URLSpanNoUnderline extends URLSpan {

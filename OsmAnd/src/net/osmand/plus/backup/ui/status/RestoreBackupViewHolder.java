@@ -5,12 +5,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -33,7 +33,7 @@ public class RestoreBackupViewHolder extends RecyclerView.ViewHolder {
 	public void bindView(@NonNull MapActivity mapActivity, boolean nightMode) {
 		title.setText(R.string.backup_restore_data);
 
-		int colorId = getActiveColorId(nightMode);
+		int colorId = ColorUtilities.getActiveColorId(nightMode);
 		icon.setImageDrawable(getApplication().getUIUtilities().getIcon(R.drawable.ic_action_restore, colorId));
 
 		restoreButton.setOnClickListener(v -> {
@@ -51,8 +51,4 @@ public class RestoreBackupViewHolder extends RecyclerView.ViewHolder {
 		return (OsmandApplication) itemView.getContext().getApplicationContext();
 	}
 
-	@ColorRes
-	private int getActiveColorId(boolean nightMode) {
-		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-	}
 }

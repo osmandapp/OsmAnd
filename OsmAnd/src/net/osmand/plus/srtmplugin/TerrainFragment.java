@@ -39,6 +39,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -318,9 +319,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 			spannableString.setSpan(clickableSpan, startIndex, startIndex + clickableText.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			textView.setText(spannableString);
 			textView.setMovementMethod(LinkMovementMethod.getInstance());
-			textView.setHighlightColor(nightMode
-					? getResources().getColor(R.color.active_color_primary_dark)
-					: getResources().getColor(R.color.active_color_primary_light));
+			textView.setHighlightColor(ColorUtilities.getActiveColor(app, nightMode));
 		} catch (RuntimeException e) {
 			LOG.error("Error trying to find index of " + clickableText + " " + e);
 		}

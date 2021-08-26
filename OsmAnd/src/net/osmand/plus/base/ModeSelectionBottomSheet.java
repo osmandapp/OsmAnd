@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 
@@ -41,7 +41,7 @@ public class ModeSelectionBottomSheet extends SelectionBottomSheet {
 		ivIcon.setImageDrawable(icon);
 		tvTitle.setText(item.getTitle());
 		tvDescr.setText(item.getDescription());
-		tvDescr.setTextColor(ContextCompat.getColor(app, AndroidUtils.getSecondaryTextColorId(nightMode)));
+		tvDescr.setTextColor(ContextCompat.getColor(app, ColorUtilities.getSecondaryTextColorId(nightMode)));
 	}
 
 	@Override

@@ -10,11 +10,11 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -124,7 +124,7 @@ public class TrackEditCard extends MapBaseCard {
 		AndroidUtils.setPadding(container, listContentPadding, 0, 0, 0);
 
 		int activeColor = getActiveColor();
-		int bgColor = UiUtilities.getColorWithAlpha(activeColor, 0.1f);
+		int bgColor = ColorUtilities.getColorWithAlpha(activeColor, 0.1f);
 		view.setBackgroundDrawable(new ColorDrawable(bgColor));
 	}
 }

@@ -34,6 +34,7 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -229,14 +230,13 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+		Context ctx = requireContext();
 		View root = mInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		AppBarLayout appbar = root.findViewById(R.id.appbar);
 		View toolbar = mInflater.inflate(R.layout.global_preference_toolbar, container, false);
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		ImageButton toolbarButton = toolbar.findViewById(R.id.close_button);
-		toolbar.setBackgroundColor(nightMode
-				? getResources().getColor(R.color.list_background_color_dark)
-				: getResources().getColor(R.color.list_background_color_light));
+		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(ctx, nightMode));
 		toolbarTitle.setTextColor(nightMode
 				? getResources().getColor(R.color.text_color_primary_dark)
 				: getResources().getColor(R.color.list_background_color_dark));

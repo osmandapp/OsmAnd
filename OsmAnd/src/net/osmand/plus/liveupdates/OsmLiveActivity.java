@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
@@ -57,10 +58,10 @@ public class OsmLiveActivity extends AbstractDownloadActivity {
 		}
 
 		boolean nightMode = !app.getSettings().isLightContent();
-		int normalTabColor = ContextCompat.getColor(app,
-				nightMode ? R.color.searchbar_tab_inactive_dark : R.color.searchbar_tab_inactive_light);
-		int selectedTabColor = ContextCompat.getColor(app,
-				nightMode ? R.color.text_color_tab_active_dark : R.color.text_color_tab_active_light);
+		int normalTabColor = ContextCompat.getColor(app, nightMode ?
+				R.color.searchbar_tab_inactive_dark :
+				R.color.searchbar_tab_inactive_light);
+		int selectedTabColor = ColorUtilities.getActiveTabTextColor(app, nightMode);
 		tabLayout.setTabTextColors(normalTabColor, selectedTabColor);
 	}
 

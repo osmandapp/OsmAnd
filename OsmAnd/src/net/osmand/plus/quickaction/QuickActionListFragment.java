@@ -35,6 +35,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -213,8 +214,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private void setUpToolbar() {
         final OsmandApplication app = requireMyApplication();
         TextView tvTitle = toolbar.findViewById(R.id.toolbar_title);
-        tvTitle.setTextColor(ContextCompat.getColor(app,
-                nightMode ? R.color.text_color_primary_dark : R.color.color_white));
+        tvTitle.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
         boolean isWidgetVisibleOnMap = app.getQuickActionRegistry().isQuickActionOn();
         updateToolbarTitle();
         updateToolbarNavigationIcon();
@@ -225,10 +225,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
     private void updateToolbarNavigationIcon() {
         OsmandApplication app = requireMyApplication();
 
-        int activeButtonsColorResId = nightMode ?
-                R.color.active_buttons_and_links_text_dark :
-                R.color.active_buttons_and_links_text_light;
-
+        int activeButtonsColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
         if (screenType == SCREEN_TYPE_REORDER) {
             Drawable icBack = app.getUIUtilities().getIcon(
                     AndroidUtils.getNavigationIconResId(app),
@@ -333,13 +330,11 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         OsmandApplication app = requireMyApplication();
         View deleteIconContainer = toolbar.findViewById(R.id.action_button);
         ImageView deletingModeIcon = toolbar.findViewById(R.id.action_button_icon);
-        int activeButtonsColorResId = nightMode ?
-                R.color.active_buttons_and_links_text_dark :
-                R.color.active_buttons_and_links_text_light;
+        int activeButtonsColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
         boolean hasActiveQuickActions = quickActionRegistry.getQuickActions().size() > 0;
         int activeColor = ContextCompat.getColor(app, activeButtonsColorResId);
         int deleteIconColor = hasActiveQuickActions ? activeColor :
-                UiUtilities.getColorWithAlpha(activeColor, 0.25f);
+                ColorUtilities.getColorWithAlpha(activeColor, 0.25f);
         Drawable deleteIcon = getPaintedContentIcon(
                 R.drawable.ic_action_delete_dark, deleteIconColor);
         deletingModeIcon.setImageDrawable(deleteIcon);
@@ -517,8 +512,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment
         public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
             OsmandApplication app = requireMyApplication();
             ListItem item = items.get(position);
-            int activeColorResId = nightMode ?
-                    R.color.active_color_primary_dark : R.color.active_color_primary_light;
+            int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 
             if (holder instanceof QuickActionVH) {
                 final QuickActionVH h = (QuickActionVH) holder;
@@ -635,9 +629,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment
                     int deleteAllIconColor = ContextCompat.getColor(app,
                             R.color.color_osm_edit_delete);
                     iconColor = hasActiveActions ? deleteAllIconColor :
-                            UiUtilities.getColorWithAlpha(deleteAllIconColor, 0.25f);
+                            ColorUtilities.getColorWithAlpha(deleteAllIconColor, 0.25f);
                     titleColor = hasActiveActions ? titleColor :
-                            UiUtilities.getColorWithAlpha(titleColor, 0.25f);
+                            ColorUtilities.getColorWithAlpha(titleColor, 0.25f);
                     h.divider.setVisibility(View.GONE);
                 } else {
                     h.container.setEnabled(true);

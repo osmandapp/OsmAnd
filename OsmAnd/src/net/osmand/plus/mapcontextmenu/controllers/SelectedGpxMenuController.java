@@ -11,6 +11,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -180,7 +181,7 @@ public class SelectedGpxMenuController extends MenuController {
 
 	@Override
 	public Drawable getRightIcon() {
-		int color = isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
+		int color = ColorUtilities.getActiveColorId(!isLight());
 		return getIcon(R.drawable.ic_action_polygom_dark, color);
 	}
 

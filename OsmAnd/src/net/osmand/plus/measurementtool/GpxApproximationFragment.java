@@ -25,6 +25,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -263,10 +264,9 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 						R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(),
-						R.color.list_background_color_light, R.color.list_background_color_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(),
-						R.color.list_background_color_light, R.color.list_background_color_dark);
+				int listBgColor = ColorUtilities.getListBgColorId(isNightMode());
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, listBgColor);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, listBgColor);
 			}
 		}
 	}

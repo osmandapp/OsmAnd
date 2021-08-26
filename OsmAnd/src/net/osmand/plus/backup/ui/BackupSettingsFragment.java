@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -20,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -62,16 +61,6 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 	@Override
 	public int getStatusBarColorId() {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
-	}
-
-	@ColorRes
-	private int getActiveColorRes() {
-		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-	}
-
-	@ColorInt
-	private int getActiveColor() {
-		return ContextCompat.getColor(app, getActiveColorRes());
 	}
 
 	@Override
@@ -268,7 +257,8 @@ public class BackupSettingsFragment extends BaseOsmAndFragment implements OnDele
 
 	private void setupSelectableBackground(View view) {
 		View selectableView = view.findViewById(R.id.selectable_list_item);
-		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveColor(), 0.3f);
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
 		AndroidUtils.setBackground(selectableView, drawable);
 	}
 

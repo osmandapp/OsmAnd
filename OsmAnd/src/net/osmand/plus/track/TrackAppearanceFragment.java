@@ -36,8 +36,10 @@ import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
+import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -176,8 +178,26 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				trackDrawInfo.setShowArrows(app.getSettings().CURRENT_TRACK_SHOW_ARROWS.get());
 				trackDrawInfo.setShowStartFinish(app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.get());
 			} else {
-				gpxDataItem = gpxDbHelper.getItem(new File(selectedGpxFile.getGpxFile().path));
-				trackDrawInfo = new TrackDrawInfo(gpxDataItem, false);
+				GpxDataItemCallback callback = new GpxDataItemCallback() {
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+
+					@Override
+					public void onGpxDataItemReady(GpxDataItem item) {
+						if (item != null) {
+							gpxDataItem = item;
+							trackDrawInfo.updateParams(item);
+						}
+						if (view != null) {
+							initContent();
+						}
+					}
+				};
+				String filePath = selectedGpxFile.getGpxFile().path;
+				gpxDataItem = gpxDbHelper.getItem(new File(filePath), callback);
+				trackDrawInfo = new TrackDrawInfo(filePath, gpxDataItem, false);
 			}
 		}
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
@@ -353,7 +373,7 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
-				return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
+				return ColorUtilities.getDividerColorId(nightMode);
 			} else {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -495,13 +515,13 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		Drawable widthIcon = app.getUIUtilities().getPaintedIcon(widthIconId, color);
 
 		int strokeIconId = getStrokeIconId(widthAttr);
-		int strokeColor = UiUtilities.getColorWithAlpha(Color.BLACK, 0.7f);
+		int strokeColor = ColorUtilities.getColorWithAlpha(Color.BLACK, 0.7f);
 		Drawable strokeIcon = app.getUIUtilities().getPaintedIcon(strokeIconId, strokeColor);
 
 		Drawable transparencyIcon = getTransparencyIcon(app, widthAttr, color);
 		if (showArrows) {
 			int arrowsIconId = getArrowsIconId(widthAttr);
-			int contrastColor = UiUtilities.getContrastColor(app, color, false);
+			int contrastColor = ColorUtilities.getContrastColor(app, color, false);
 			Drawable arrows = app.getUIUtilities().getPaintedIcon(arrowsIconId, contrastColor);
 			return UiUtilities.getLayeredIcon(transparencyIcon, widthIcon, strokeIcon, arrows);
 		}
@@ -510,8 +530,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 
 	private static Drawable getTransparencyIcon(OsmandApplication app, String widthAttr, @ColorInt int color) {
 		int transparencyIconId = getTransparencyIconId(widthAttr);
-		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
-		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
+		int colorWithoutAlpha = ColorUtilities.removeAlpha(color);
+		int transparencyColor = ColorUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
 		return app.getUIUtilities().getPaintedIcon(transparencyIconId, transparencyColor);
 	}
 
@@ -530,8 +550,9 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
+				int listBgColor = ColorUtilities.getListBgColorId(isNightMode());
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, listBgColor);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, listBgColor);
 			}
 		}
 	}

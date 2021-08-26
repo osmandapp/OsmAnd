@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -26,6 +25,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -131,8 +131,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 		String key = preference.getKey();
 		if (ROUTE_PARAMETERS_INFO.equals(key)) {
-			int colorRes = isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
-			holder.itemView.setBackgroundColor(ContextCompat.getColor(app, colorRes));
+			holder.itemView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, isNightMode()));
 		} else if (ROUTE_PARAMETERS_IMAGE.equals(key)) {
 			ImageView imageView = (ImageView) holder.itemView.findViewById(R.id.device_image);
 			if (imageView != null) {

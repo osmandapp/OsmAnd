@@ -9,7 +9,6 @@ import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.LocalIndexInfo;

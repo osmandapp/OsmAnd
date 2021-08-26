@@ -31,6 +31,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -169,7 +170,7 @@ public class CreateEditActionDialog extends DialogFragment
                 ? R.string.quick_action_new_action
                 : R.string.quick_action_edit_action);
 
-        int buttonsAndLinksTextColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+        int buttonsAndLinksTextColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightContent);
         toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), buttonsAndLinksTextColorResId));
 
         Drawable icBack = getIconsCache().getIcon(AndroidUtils.getNavigationIconResId(getContext()), buttonsAndLinksTextColorResId);
@@ -207,8 +208,8 @@ public class CreateEditActionDialog extends DialogFragment
     private void setupHeader(View root, Bundle savedInstanceState){
         ImageView image = (ImageView) root.findViewById(R.id.image);
         EditText nameEditText = (EditText) root.findViewById(R.id.name);
-        int buttonsAndLinksTextColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
-        nameEditText.setTextColor(ContextCompat.getColor(getContext(), buttonsAndLinksTextColorResId));
+        int color = ColorUtilities.getActiveButtonsAndLinksTextColor(getContext(), !isLightContent);
+        nameEditText.setTextColor(color);
 
         nameEditText.addTextChangedListener(new TextWatcher() {
             @Override

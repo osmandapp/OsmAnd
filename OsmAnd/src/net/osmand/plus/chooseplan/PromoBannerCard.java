@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -34,7 +35,7 @@ public class PromoBannerCard extends BaseCard {
 		});
 
 		int bgResId = R.drawable.promo_banner_bg;
-		int bgColor = UiUtilities.getColorWithAlpha(getActiveColor(), 0.15f);
+		int bgColor = ColorUtilities.getColorWithAlpha(getActiveColor(), 0.15f);
 		View background = view.findViewById(R.id.banner_background);
 		Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);
 		AndroidUtils.setBackground(background, bgDrawable);

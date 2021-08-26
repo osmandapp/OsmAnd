@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -174,8 +175,7 @@ public class ContourLinesMenu {
 		int toggleIconId;
 		if (selected) {
 			toggleIconId = R.drawable.ic_action_view;
-			toggleIconColorId = nightMode ?
-					R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			toggleIconColorId = ColorUtilities.getActiveColorId(nightMode);
 		} else {
 			toggleIconId = R.drawable.ic_action_hide;
 			toggleIconColorId = ContextMenuItem.INVALID_ID;

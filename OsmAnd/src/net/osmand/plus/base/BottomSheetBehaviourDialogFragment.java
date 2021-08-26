@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -165,7 +166,7 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int id) {
@@ -246,11 +247,6 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 		}
 	}
 
-	@ColorRes
-	protected int getBgColorId() {
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-	}
-
 	@DrawableRes
 	protected int getPortraitBgResId() {
 		return nightMode ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_menu_light;
@@ -268,7 +264,7 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 
 	private int getButtonsContainerBg() {
 		if (portrait) {
-			return getBgColorId();
+			return ColorUtilities.getListBgColorId(nightMode);
 		}
 		return nightMode ? R.drawable.bottom_sheet_buttons_bg_dark : R.drawable.bottom_sheet_buttons_bg_light;
 	}

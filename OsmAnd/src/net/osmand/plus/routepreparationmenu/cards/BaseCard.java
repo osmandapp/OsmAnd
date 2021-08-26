@@ -5,10 +5,6 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.helpers.AndroidUiHelper;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -17,6 +13,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+
+import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class BaseCard {
 
@@ -110,12 +111,12 @@ public abstract class BaseCard {
 
 	@ColorInt
 	protected int getActiveColor() {
-		return getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		return ColorUtilities.getActiveColor(app, nightMode);
 	}
 
 	@ColorInt
 	protected int getMainFontColor() {
-		return getResolvedColor(nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		return ColorUtilities.getPrimaryTextColor(app, nightMode);
 	}
 
 	@ColorInt
@@ -128,11 +129,7 @@ public abstract class BaseCard {
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int icon) {
-		return getColoredIcon(icon, R.color.active_color_primary_light, R.color.active_color_primary_dark);
-	}
-
-	protected Drawable getColoredIcon(@DrawableRes int icon, @ColorRes int colorLight, @ColorRes int colorDark) {
-		return getColoredIcon(icon, nightMode ? colorDark : colorLight);
+		return getColoredIcon(icon, ColorUtilities.getActiveColorId(nightMode));
 	}
 
 	protected Drawable getIcon(@DrawableRes int icon) {

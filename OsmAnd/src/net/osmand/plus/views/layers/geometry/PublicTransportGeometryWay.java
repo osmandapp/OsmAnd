@@ -13,9 +13,9 @@ import net.osmand.data.TransportRoute;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.TransportRoutingHelper;
@@ -228,7 +228,7 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 			super(context, segment);
 			OsmandApplication app = (OsmandApplication) getCtx().getApplicationContext();
 			this.color = ContextCompat.getColor(app, R.color.icon_color_default_light);
-			this.pointColor = UiUtilities.getContrastColor(app, color, true);
+			this.pointColor = ColorUtilities.getContrastColor(app, color, true);
 		}
 	}
 
@@ -248,7 +248,7 @@ public class PublicTransportGeometryWay extends GeometryWay<PublicTransportGeome
 			r.route = route;
 			OsmandApplication app = (OsmandApplication) getCtx().getApplicationContext();
 			this.color = r.getRouteColor(app, isNightMode());
-			this.pointColor = UiUtilities.getContrastColor(app, color, true);
+			this.pointColor = ColorUtilities.getContrastColor(app, color, true);
 
 			TransportStopType type = TransportStopType.findType(route.getType());
 			if (type == null) {

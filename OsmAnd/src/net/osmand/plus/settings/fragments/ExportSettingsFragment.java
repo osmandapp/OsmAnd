@@ -220,7 +220,9 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 					dismissExportProgressDialog();
 					exportingStarted = false;
 					if (succeed) {
-						shareProfile(file);
+						if (AndroidUtils.isActivityNotDestroyed(getActivity())) {
+							shareProfile(file);
+						}
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
 					}

@@ -61,6 +61,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
@@ -286,14 +287,16 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		if (orientationPortrait) {
 			Drawable icBack = getColoredIcon(AndroidUtils.getNavigationIconResId(getContext()), lightTheme ? R.color.color_black : R.color.active_buttons_and_links_text_dark);
 			backBtn.setImageDrawable(icBack);
-			optionsButton.setTextColor(getResolvedColor(lightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
+			optionsButton.setTextColor(ColorUtilities.getActiveColor(getContext(), !lightTheme));
 			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
-			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+			toolbar.setTextColor(ColorUtilities.getPrimaryTextColor(getContext(), !lightTheme));
 			toolbar.setText(R.string.coord_input_add_point);
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
-			setBackgroundColor(mainView, lightTheme ? R.color.activity_background_color_light : R.color.activity_background_color_dark);
+			setBackgroundColor(mainView, ColorUtilities.getActivityBgColorId(!lightTheme));
 		} else {
-			Drawable icBack = getColoredIcon(AndroidUtils.getNavigationIconResId(getContext()), lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+			int resId = AndroidUtils.getNavigationIconResId(getContext());
+			int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(!lightTheme);
+			Drawable icBack = getColoredIcon(resId, color);
 			backBtn.setImageDrawable(icBack);
 			optionsButton.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.active_color_primary_dark));
 			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
@@ -350,7 +353,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			View dataAreaView = View.inflate(ctx, R.layout.coordinate_input_land_data_area, null);
 			View keyboardAndListView = View.inflate(ctx, R.layout.coordinate_input_land_keyboard_and_list, null);
 			setBackgroundColor(dataAreaView, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
-			setBackgroundColor(keyboardAndListView, lightTheme ? R.color.activity_background_color_light : R.color.activity_background_color_dark);
+			setBackgroundColor(keyboardAndListView, ColorUtilities.getActivityBgColorId(!lightTheme));
 			((FrameLayout) handContainer.findViewById(R.id.left_container)).addView(rightHand ? dataAreaView : keyboardAndListView, 0);
 			((FrameLayout) handContainer.findViewById(R.id.right_container)).addView(rightHand ? keyboardAndListView : dataAreaView, 0);
 
@@ -743,7 +746,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 			});
 
-			@ColorRes int colorId = lightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
+			int colorId = ColorUtilities.getActiveColorId(!lightTheme);
 			boolean lat = id == R.id.lat_side_of_the_world_btn;
 			Drawable icon = getColoredIcon(
 					lat ? R.drawable.ic_action_coordinates_longitude : R.drawable.ic_action_coordinates_latitude, colorId

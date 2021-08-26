@@ -18,8 +18,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.chooseplan.BasePurchaseDialogFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -123,7 +123,7 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 
 	private void setupSignInWithOsmButton() {
 		View button = mainView.findViewById(R.id.sign_in_button);
-		int normal = getColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int normal = ColorUtilities.getActiveColor(app, nightMode);
 		int pressed = getColor(nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light);
 		setupButtonBackground(button, normal, pressed);
 
@@ -166,8 +166,8 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 		float absOffset = Math.abs(verticalOffset);
 		float totalScrollRange = appBar.getTotalScrollRange();
 
-		float alpha = UiUtilities.getProportionalAlpha(totalScrollRange * 0.25f, totalScrollRange * 0.9f, absOffset);
-		float inverseAlpha = 1.0f - UiUtilities.getProportionalAlpha(totalScrollRange * 0.5f, totalScrollRange, absOffset);
+		float alpha = ColorUtilities.getProportionalAlpha(totalScrollRange * 0.25f, totalScrollRange * 0.9f, absOffset);
+		float inverseAlpha = 1.0f - ColorUtilities.getProportionalAlpha(totalScrollRange * 0.5f, totalScrollRange, absOffset);
 
 		TextView tvTitle = mainView.findViewById(R.id.toolbar_title);
 		tvTitle.setAlpha(inverseAlpha);

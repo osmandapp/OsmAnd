@@ -26,6 +26,7 @@ import androidx.fragment.app.DialogFragment;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.CustomRegion;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
@@ -457,9 +458,10 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 		setShowsDialog(openAsDialog());
-		listView.setBackgroundColor(getResources().getColor(
-				getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
+		listView.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
 
 	@Override
@@ -535,7 +537,8 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		if (!openAsDialog()) {
 			OsmandApplication app = getMyApplication();
-			int colorResId = app.getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+			boolean nightMode = !app.getSettings().isLightContent();
+			int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 			
 			MenuItem itemReload = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
 			Drawable icReload = app.getUIUtilities().getIcon(R.drawable.ic_action_refresh_dark, colorResId);

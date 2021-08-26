@@ -11,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.transport.TransportStopRoute;
 
 import java.util.List;
@@ -56,7 +56,7 @@ public class TransportStopRouteAdapter extends ArrayAdapter<Object> {
 			transportStopRouteTextView.setText(routeRef);
 			GradientDrawable gradientDrawableBg = (GradientDrawable) transportStopRouteTextView.getBackground();
 			gradientDrawableBg.setColor(bgColor);
-			transportStopRouteTextView.setTextColor(UiUtilities.getContrastColor(app, bgColor, true));
+			transportStopRouteTextView.setTextColor(ColorUtilities.getContrastColor(app, bgColor, true));
 
 			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override

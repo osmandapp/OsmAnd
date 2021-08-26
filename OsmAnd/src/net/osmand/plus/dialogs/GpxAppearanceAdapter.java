@@ -1,6 +1,7 @@
 package net.osmand.plus.dialogs;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.render.RenderingRule;
@@ -76,8 +78,8 @@ public class GpxAppearanceAdapter extends ArrayAdapter<GpxAppearanceAdapter.Appe
 				}
 			} else if (SHOW_START_FINISH_ATTR.equals(item.attrName)) {
 				int iconId = showStartFinishIcons ? R.drawable.ic_check_box_dark : R.drawable.ic_check_box_outline_dark;
-				textView.setCompoundDrawablesWithIntrinsicBounds(null, null, app.getUIUtilities().getIcon(iconId,
-						nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light), null);
+				Drawable icon = app.getUIUtilities().getIcon(iconId, ColorUtilities.getActiveColorId(nightMode));
+				textView.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null);
 			}
 			textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(context, 10f));
 			v.findViewById(R.id.divider).setVisibility(item.lastItem

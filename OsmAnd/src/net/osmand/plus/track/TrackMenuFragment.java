@@ -1,5 +1,27 @@
 package net.osmand.plus.track;
 
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
+import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
+import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
+import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
+import static net.osmand.plus.track.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.DELETE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.RENAME_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.SHARE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.ADD_WAYPOINT_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
@@ -49,6 +71,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -101,28 +124,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
-
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
-import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
-import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
-import static net.osmand.plus.track.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.DELETE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.RENAME_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.SHARE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.ADD_WAYPOINT_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
@@ -654,13 +655,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (bottomContainer == null) {
 			return;
 		}
+		int colorId;
 		if (menuType == TrackMenuType.OPTIONS) {
-			AndroidUtils.setBackground(app, bottomContainer, isNightMode(),
-					R.color.list_background_color_light, R.color.list_background_color_dark);
+			colorId = ColorUtilities.getListBgColorId(isNightMode());
 		} else {
-			AndroidUtils.setBackground(app, bottomContainer, isNightMode(),
-					R.color.activity_background_color_light, R.color.activity_background_color_dark);
+			colorId = ColorUtilities.getActivityBgColorId(isNightMode());
 		}
+		AndroidUtils.setBackgroundColor(app, bottomContainer, colorId);
 	}
 
 	@Override
@@ -755,8 +756,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if (FileUtils.isTempFile(app, getGpx().path)) {
-			FileUtils.removeGpxFile(app, new File(getGpx().path));
+
+		GPXFile gpxFile = getGpx();
+		if (gpxFile != null && FileUtils.isTempFile(app, gpxFile.path)) {
+			FileUtils.removeGpxFile(app, new File(gpxFile.path));
 		}
 	}
 
@@ -867,7 +870,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putString(TRACK_FILE_NAME, getGpx().path);
+		outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
 		outState.putBoolean(CURRENT_RECORDING, selectedGpxFile.isShowCurrentTrack());
 		if (latLon != null) {
 			outState.putDouble(KEY_LATITUDE, latLon.getLatitude());

@@ -15,6 +15,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.mapmarkers.MapMarker;
@@ -108,7 +109,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			marker = (MapMarker) item;
 		}
 
-		holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_background_color_dark : R.color.list_background_color_light));
+		holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, night));
 		holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_white : R.color.color_black));
 		holder.title.setText(location != null ? mapActivity.getString(R.string.shared_string_my_location) : marker.getName(mapActivity));
 		holder.iconDirection.setVisibility(View.GONE);
@@ -145,7 +146,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		holder.bottomShadow.setVisibility(lastMarkerItem ? View.VISIBLE : View.GONE);
 		holder.iconReorder.setVisibility(View.VISIBLE);
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_item_move));
-		holder.description.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.icon_color_default_dark : R.color.icon_color_default_light));
+		holder.description.setTextColor(ColorUtilities.getDefaultIconColor(app, night));
 
 		holder.firstDescription.setVisibility((start || finish) ? View.VISIBLE : View.GONE);
 		if (start) {

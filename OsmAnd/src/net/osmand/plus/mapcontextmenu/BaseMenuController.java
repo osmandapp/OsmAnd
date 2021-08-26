@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -94,7 +95,7 @@ public abstract class BaseMenuController {
 	}
 
 	protected Drawable getIcon(int iconId) {
-		return getIcon(iconId, isLight() ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
+		return getIcon(iconId, ColorUtilities.getDefaultIconColorId(!isLight()));
 	}
 
 	protected Drawable getIcon(int iconId, int colorId) {

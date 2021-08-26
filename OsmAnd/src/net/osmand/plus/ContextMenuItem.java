@@ -2,8 +2,6 @@ package net.osmand.plus;
 
 import android.content.Context;
 
-import net.osmand.plus.ContextMenuAdapter.OnItemDeleteAction;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
@@ -11,6 +9,8 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
+
+import net.osmand.plus.ContextMenuAdapter.OnItemDeleteAction;
 
 public class ContextMenuItem {
 	public static final int INVALID_ID = -1;
@@ -123,7 +123,9 @@ public class ContextMenuItem {
 		if (skipPaintingWithoutColor || color != null) {
 			return color;
 		}
-		return ContextCompat.getColor(context, UiUtilities.getDefaultColorRes(context));
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		boolean nightMode = !app.getSettings().isLightContent();
+		return ColorUtilities.getDefaultIconColor(app, nightMode);
 	}
 
 	@DrawableRes

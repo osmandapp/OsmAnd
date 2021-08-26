@@ -327,7 +327,7 @@
     <string name="preferred_locale">Programos kalba</string>
     <string name="shared_string_next">Kitas</string>
     <string name="shared_string_previous">Ankstesnis</string>
-    <string name="unit_of_length_descr">Pakeisti ilgio matavimo vienetus.</string>
+    <string name="unit_of_length_descr">Pakeiskite, kuo matuojamas atstumas.</string>
     <string name="unit_of_length">Ilgio matavimo vienetai</string>
     <string name="si_mi_feet">Mylios/pėdos</string>
     <string name="si_mi_yard">Mylios/jardai</string>

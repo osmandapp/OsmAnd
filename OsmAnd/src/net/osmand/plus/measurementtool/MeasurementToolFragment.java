@@ -56,6 +56,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -856,7 +857,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int id) {

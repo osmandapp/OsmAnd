@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -266,12 +267,12 @@ public abstract class SelectProfileBottomSheet extends BasePreferenceBottomSheet
 
 	@ColorRes
 	protected int getActiveColorId() {
-		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		return ColorUtilities.getActiveColorId(nightMode);
 	}
 
 	@ColorRes
 	protected int getDefaultIconColorId() {
-		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		return ColorUtilities.getDefaultIconColorId(nightMode);
 	}
 
 	@ColorRes

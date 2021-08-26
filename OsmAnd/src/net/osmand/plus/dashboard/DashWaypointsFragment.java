@@ -1,6 +1,5 @@
 package net.osmand.plus.dashboard;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;

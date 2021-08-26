@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -106,8 +107,8 @@ public class ElevationDateBottomSheet extends MenuBottomSheetDialogFragment {
 		appModeColor = appMode.getProfileColor(nightMode);
 		activeColor = AndroidUtils.resolveAttribute(themedCtx, R.attr.active_color_basic);
 		disabledColor = AndroidUtils.resolveAttribute(themedCtx, android.R.attr.textColorSecondary);
-		checkedColor = (nightMode ? app.getResources().getColor(R.color.text_color_primary_dark) : app.getResources().getColor(R.color.text_color_primary_light));
-		uncheckedColor = (nightMode ? app.getResources().getColor(R.color.text_color_secondary_dark) : app.getResources().getColor(R.color.text_color_secondary_light));
+		checkedColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+		uncheckedColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
 
 
 		items.add(new TitleItem(getString(R.string.routing_attr_height_obstacles_name)));
