@@ -74,7 +74,6 @@ public class QuickActionRegistry {
 
 	private List<QuickAction> quickActions;
 	private final Gson gson;
-	private List<QuickActionType> allTypes = new ArrayList<>();
 	private List<QuickActionType> enabledTypes = new ArrayList<>();
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
@@ -258,7 +257,6 @@ public class QuickActionRegistry {
 			quickActionTypesInt.put(qt.getId(), qt);
 			quickActionTypesStr.put(qt.getStringId(), qt);
 		}
-		this.allTypes = allTypes;
 		this.enabledTypes = enabledTypes;
 		this.quickActionTypesInt = quickActionTypesInt;
 		this.quickActionTypesStr = quickActionTypesStr;
