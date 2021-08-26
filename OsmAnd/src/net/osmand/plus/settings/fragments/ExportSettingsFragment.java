@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,8 +42,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 public class ExportSettingsFragment extends BaseSettingsListFragment {
 
@@ -221,7 +221,9 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 					dismissExportProgressDialog();
 					exportingStarted = false;
 					if (succeed) {
-						shareProfile(file);
+						if (AndroidUtils.isActivityNotDestroyed(getActivity())) {
+							shareProfile(file);
+						}
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
 					}

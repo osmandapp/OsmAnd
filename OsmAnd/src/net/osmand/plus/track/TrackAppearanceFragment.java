@@ -1,5 +1,12 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
+import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
+import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
+import static net.osmand.plus.track.ActionsCard.RESET_BUTTON_INDEX;
+
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -31,6 +38,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
+import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -62,13 +70,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_BOLD;
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.TRACK_WIDTH_MEDIUM;
-import static net.osmand.plus.dialogs.GpxAppearanceAdapter.getAppearanceItems;
-import static net.osmand.plus.monitoring.TripRecordingBottomSheet.UPDATE_TRACK_ICON;
-import static net.osmand.plus.track.ActionsCard.RESET_BUTTON_INDEX;
 
 public class TrackAppearanceFragment extends ContextMenuScrollFragment implements CardListener, ColorPickerListener {
 
@@ -176,8 +177,24 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 				trackDrawInfo.setShowArrows(app.getSettings().CURRENT_TRACK_SHOW_ARROWS.get());
 				trackDrawInfo.setShowStartFinish(app.getSettings().CURRENT_TRACK_SHOW_START_FINISH.get());
 			} else {
-				gpxDataItem = gpxDbHelper.getItem(new File(selectedGpxFile.getGpxFile().path));
-				trackDrawInfo = new TrackDrawInfo(gpxDataItem, false);
+				GpxDataItemCallback callback = new GpxDataItemCallback() {
+					@Override
+					public boolean isCancelled() {
+						return false;
+					}
+
+					@Override
+					public void onGpxDataItemReady(GpxDataItem item) {
+						if (item != null && view != null) {
+							gpxDataItem = item;
+							trackDrawInfo.updateParams(item);
+							initContent();
+						}
+					}
+				};
+				String filePath = selectedGpxFile.getGpxFile().path;
+				gpxDataItem = gpxDbHelper.getItem(new File(filePath), callback);
+				trackDrawInfo = new TrackDrawInfo(filePath, gpxDataItem, false);
 			}
 		}
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
