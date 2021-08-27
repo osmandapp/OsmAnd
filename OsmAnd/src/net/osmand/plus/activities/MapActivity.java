@@ -1593,7 +1593,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return super.onKeyUp(keyCode, event);
 	}
 
-	private void scrollMap(int dx, int dy) {
+	public void scrollMap(float dx, float dy) {
 		final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
 		final QuadPoint cp = tb.getCenterPixelPoint();
 		final LatLon l = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);

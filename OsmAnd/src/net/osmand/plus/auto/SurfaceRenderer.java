@@ -89,13 +89,24 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 				@Override
 				public void onScroll(float distanceX, float distanceY) {
 					synchronized (SurfaceRenderer.this) {
-						renderFrame();
+						OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
+						if (mapView != null) {
+							mapView.scrollMap(distanceX, distanceY);
+						}
+					}
+				}
+
+				@Override
+				public void onFling(float velocityX, float velocityY) {
+					OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
+					if (mapView != null) {
+						mapView.flingMap(0, 0, velocityX, velocityY);
 					}
 				}
 
 				@Override
 				public void onScale(float focusX, float focusY, float scaleFactor) {
-					handleScale(focusX, focusY, scaleFactor);
+					//TODO handleScale(focusX, focusY, scaleFactor);
 				}
 			};
 
@@ -135,7 +146,14 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 					y = visibleArea.centerY();
 				}
 			}
-			renderFrame();
+			OsmandMapTileView mapView = this.mapView;
+			if (mapView != null) {
+				if (scaleFactor > 1) {
+					mapView.zoomIn();
+				} else if (scaleFactor < 1) {
+					mapView.zoomOut();
+				}
+			}
 		}
 	}
 
@@ -143,7 +161,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	 * Handles the map re-centering events.
 	 */
 	public void handleRecenter() {
-		renderFrame();
+		OsmandMapTileView mapView = this.mapView;
+		if (mapView != null) {
+			mapView.backToLocation();
+		}
 	}
 
 	/**
@@ -157,7 +178,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	 * Updates the location coordinate string drawn on the surface.
 	 */
 	public void updateLocation(@Nullable Location location) {
-		renderFrame();
+		//renderFrame();
 	}
 
 	public OsmandMapTileView getMapView() {

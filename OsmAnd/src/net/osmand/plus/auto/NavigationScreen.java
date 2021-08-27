@@ -141,6 +141,7 @@ public final class NavigationScreen extends Screen {
 							.setOnClickListener(this::stopNavigation)
 							.build());
 		} else {
+			/*
 			actionStripBuilder.addAction(
 					new Action.Builder()
 							.setIcon(
@@ -151,6 +152,7 @@ public final class NavigationScreen extends Screen {
 											.build())
 							.setOnClickListener(this::openSearch)
 							.build());
+			 */
 			actionStripBuilder.addAction(
 					new Action.Builder()
 							.setTitle("Favorites")
@@ -180,21 +182,7 @@ public final class NavigationScreen extends Screen {
 														getCarContext(),
 														R.drawable.ic_my_location))
 												.build())
-								.setOnClickListener(
-										() -> mSurfaceRenderer.handleRecenter())
-								.build())
-				.addAction(
-						new Action.Builder()
-								.setIcon(
-										new CarIcon.Builder(
-												IconCompat.createWithResource(
-														getCarContext(),
-														R.drawable.ic_zoom_out))
-												.build())
-								.setOnClickListener(
-										() -> mSurfaceRenderer.handleScale(INVALID_FOCAL_POINT_VAL,
-												INVALID_FOCAL_POINT_VAL,
-												ZOOM_OUT_BUTTON_SCALE_FACTOR))
+								.setOnClickListener(mSurfaceRenderer::handleRecenter)
 								.build())
 				.addAction(
 						new Action.Builder()
@@ -209,6 +197,20 @@ public final class NavigationScreen extends Screen {
 												INVALID_FOCAL_POINT_VAL,
 												ZOOM_IN_BUTTON_SCALE_FACTOR))
 								.build())
+				.addAction(
+						new Action.Builder()
+								.setIcon(
+										new CarIcon.Builder(
+												IconCompat.createWithResource(
+														getCarContext(),
+														R.drawable.ic_zoom_out))
+												.build())
+								.setOnClickListener(
+										() -> mSurfaceRenderer.handleScale(INVALID_FOCAL_POINT_VAL,
+												INVALID_FOCAL_POINT_VAL,
+												ZOOM_OUT_BUTTON_SCALE_FACTOR))
+								.build())
+
 				.build());
 
 		// When the user enters the pan mode, remind the user that they can exit the pan mode by

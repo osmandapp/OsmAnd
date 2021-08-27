@@ -285,6 +285,41 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
+	public void backToLocation() {
+		Activity activity = this.activity;
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).getMapViewTrackingUtilities().backToLocationImpl();
+		}
+	}
+
+	public void zoomOut() {
+		Activity activity = this.activity;
+		if (activity instanceof MapActivity) {
+			((MapActivity) activity).changeZoom(-1, System.currentTimeMillis());
+		}
+	}
+
+	public void zoomIn() {
+		Activity activity = this.activity;
+		if (activity instanceof MapActivity) {
+			MapActivity mapActivity = (MapActivity) activity;
+			if (isZooming()) {
+				mapActivity.changeZoom(2, System.currentTimeMillis());
+			} else {
+				mapActivity.changeZoom(1, System.currentTimeMillis());
+			}
+		}
+	}
+
+	public void scrollMap(float dx, float dy) {
+		moveTo(dx, dy, true);
+	}
+
+	public void flingMap(float x, float y, float velocityX, float velocityY) {
+		animatedDraggingThread.startDragging(velocityX / 3, velocityY / 3,
+				0, 0, x, y, true);
+	}
+
 	public Boolean onKeyDown(int keyCode, KeyEvent event) {
 		return application.accessibilityEnabled() ? false : null;
 	}
@@ -440,9 +475,16 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 
 	public void setLatLon(double latitude, double longitude) {
+		setLatLon(latitude, longitude, false);
+	}
+
+	public void setLatLon(double latitude, double longitude, boolean notify) {
 		animatedDraggingThread.stopAnimating();
 		currentViewport.setLatLonCenter(latitude, longitude);
 		refreshMap();
+		if (notify && locationListener != null) {
+			locationListener.locationChanged(getLatitude(), getLongitude(), this);
+		}
 	}
 
 	public double getLatitude() {
@@ -917,7 +959,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	protected void dragToAnimate(float fromX, float fromY, float toX, float toY, boolean notify) {
 		float dx = (fromX - toX);
 		float dy = (fromY - toY);
-		moveTo(dx, dy);
+		moveTo(dx, dy, false);
 		if (locationListener != null && notify) {
 			locationListener.locationChanged(getLatitude(), getLongitude(), this);
 		}
@@ -962,13 +1004,14 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	public void moveTo(float dx, float dy) {
+	public void moveTo(float dx, float dy, boolean notify) {
 		final QuadPoint cp = currentViewport.getCenterPixelPoint();
 		final LatLon latlon = currentViewport.getLatLonFromPixel(cp.x + dx, cp.y + dy);
 		currentViewport.setLatLonCenter(latlon.getLatitude(), latlon.getLongitude());
 		refreshMap();
-		// do not notify here listener
-
+		if (notify && locationListener != null) {
+			locationListener.locationChanged(getLatitude(), getLongitude(), this);
+		}
 	}
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
