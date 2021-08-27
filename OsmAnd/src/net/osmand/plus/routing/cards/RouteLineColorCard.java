@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -50,6 +51,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 public class RouteLineColorCard extends MapBaseCard implements CardListener, ColorPickerListener, HeaderInfo {
+
+	public static final String ROUTE_INFO_ATTRIBUTE_ROAD_TYPE = "routeInfo_roadClass";
+	public static final String ROUTE_INFO_ATTRIBUTE_SURFACE = "routeInfo_surface";
+	public static final String ROUTE_INFO_ATTRIBUTE_SMOOTHNESS = "routeInfo_smoothness";
+	public static final String ROUTE_INFO_ATTRIBUTE_WINTER_ICE_ROAD = "routeInfo_winter_ice_road";
+	public static final String ROUTE_INFO_ATTRIBUTE_SURFACE_FIRMNESS = "routeInfo_tracktype";
 
 	private static final int DAY_TITLE_ID = R.string.day;
 	private static final int NIGHT_TITLE_ID = R.string.night;
@@ -256,11 +263,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	private void updateDescription() {
-		if (selectedType.isRouteInfoAttribute()) {
-			AndroidUiHelper.updateVisibility(tvDescription, false);
-			return;
-		}
-		String description;
+		String description = null;
 		if (selectedType.isDefault()) {
 			String pattern = app.getString(R.string.route_line_use_map_style_color);
 			description = String.format(pattern, app.getRendererRegistry().getSelectedRendererName());
@@ -268,11 +271,30 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			String pattern = app.getString(R.string.specify_color_for_map_mode);
 			String mapModeTitle = app.getString(isNightMap() ? NIGHT_TITLE_ID : DAY_TITLE_ID);
 			description = String.format(pattern, mapModeTitle.toLowerCase());
+		} else if (selectedType.isRouteInfoAttribute()) {
+			description = getRouteInfoAttributeDescription(selectedRouteInfoAttribute);
 		} else {
 			description = app.getString(R.string.route_line_use_gradient_coloring);
 		}
-		AndroidUiHelper.updateVisibility(tvDescription, true);
-		tvDescription.setText(description);
+		AndroidUiHelper.updateVisibility(tvDescription, description != null);
+		tvDescription.setText(description != null ? description : "");
+	}
+
+	@Nullable
+	private String getRouteInfoAttributeDescription(String attribute) {
+		int descId = -1;
+		if (ROUTE_INFO_ATTRIBUTE_ROAD_TYPE.equals(attribute)) {
+			descId = R.string.route_color_road_type_description;
+		} else if (ROUTE_INFO_ATTRIBUTE_SMOOTHNESS.equals(attribute)) {
+			descId = R.string.route_color_smoothness_description;
+		} else if (ROUTE_INFO_ATTRIBUTE_SURFACE.equals(attribute)) {
+			descId = R.string.route_color_surface_description;
+		} else if (ROUTE_INFO_ATTRIBUTE_WINTER_ICE_ROAD.equals(attribute)) {
+			descId = R.string.route_color_winter_and_ski_description;
+		} else if (ROUTE_INFO_ATTRIBUTE_SURFACE_FIRMNESS.equals(attribute)) {
+			descId = R.string.route_color_tracktype_description;
+		}
+		return descId != -1 ? app.getString(descId) : null;
 	}
 
 	private boolean isNightMap() {
