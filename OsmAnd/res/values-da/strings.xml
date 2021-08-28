@@ -65,7 +65,7 @@
     <string name="rendering_attr_roadColors_description">Vælg et farveskema til veje:</string>
     <string name="rendering_attr_roadColors_name">Farveskema for veje</string>
     <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
-    <string name="enable_plugin_monitoring_services">Aktiver \"Optag ture\" udvidelsen for at bruge positionlogningstjenester (GPX-logning, online sporing)</string>
+    <string name="enable_plugin_monitoring_services">Aktiver \"Optagelse af tur\" udvidelsen for at bruge positionlogningstjenester (GPX-logning, online sporing)</string>
     <string name="non_optimal_route_calculation">Beregn en muligvis ikke-optimal rute over lange afstande</string>
     <string name="gps_not_available">Aktiver GPS i indstillinger</string>
     <string name="map_widget_monitoring_services">Logningstjenester</string>
@@ -348,7 +348,7 @@
     <string name="live_monitoring_interval">Interval for online sporing</string>
     <string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}.</string>
     <string name="live_monitoring_url">Webadresse for online sporing</string>
-    <string name="gpx_monitoring_disabled_warn">Log spor med GPX-modul eller via \'Optag ture\' i indstillingerne.</string>
+    <string name="gpx_monitoring_disabled_warn">Log spor med GPX-modul eller via \'Optagelse af tur\' i indstillingerne.</string>
     <string name="show_current_gpx_title">Vis aktuelt spor</string>
     <string name="free_version_message">%1$s kort kan hentes eller opdateres.</string>
     <string name="free_version_title">Gratisversion</string>
@@ -845,7 +845,7 @@
     <string name="loading_postcodes">Indlæser postnumre…</string>
     <string name="loading_streets">Indlæser gader…</string>
     <string name="loading_cities">Indlæser byer…</string>
-    <string name="poi">Interessepunkt</string>
+    <string name="poi">Interessepunkt (IP)</string>
     <string name="error_occurred_saving_gpx">Kunne ikke gemme GPX-fil.</string>
     <string name="error_calculating_route">Ruten kunne ikke beregnes.</string>
     <string name="error_calculating_route_occured">Ruten kunne ikke beregnes.</string>
@@ -930,7 +930,7 @@
     <string name="choose_osmand_theme_descr">Tilpas udseende på programmet.</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Indstillinger for tilgængelighed</string>
-    <string name="monitoring_settings">Optag ture</string>
+    <string name="monitoring_settings">Optagelse af tur</string>
     <string name="monitoring_settings_descr">Indstil hvordan ture optages.</string>
     <string name="local_openstreetmap_act_title">OSM-modifikationer</string>
     <string name="download_using_mobile_internet">Ikke forbundet til Wi-Fi. Brug den aktuelle forbindelse til internettet for at hente?</string>
@@ -1256,7 +1256,7 @@
     <string name="distance">Afstand</string>
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
-    <string name="record_plugin_name">Optag ture</string>
+    <string name="record_plugin_name">Optagelse af tur</string>
     <string name="record_plugin_description">Udvidelsen aktiverer funktionalitet til at optage og gemme spor ved at klikke på GPX-logningsmodulet på skærmen, eller også for automatisk at logge alle navigationsruter til en GPX-fil. 
 \n 
 \nOptagede spor kan deles med venner eller anvendes til OSM-bidrag. Sportsfolk kan bruge optagede spor til at overvåge deres træning. En vis grundlæggende sporanalyse kan udføres direkte i OsmAnd, såsom omgangstider, gennemsnitshastighed mv., og spor kan selvfølgelig også senere analyseres i særlige tredjeparts analyseværktøjer.</string>
@@ -1662,7 +1662,7 @@
     <string name="roads">Veje</string>
     <string name="favourites_edit_dialog_title">Favorit information</string>
     <string name="favourites_context_menu_add">Tilføj favorit</string>
-    <string name="shared_string_trip_recording">Optag ture</string>
+    <string name="shared_string_trip_recording">Optagelse af tur</string>
     <string name="shared_string_navigation">Navigation</string>
     <string name="osmand_running_in_background">Kør i baggrunden</string>
     <string name="default_speed_system">Hastighed</string>
@@ -2315,7 +2315,7 @@
 \n • Visning af gang-, vandre- og cykelstier, fantastisk til udendørsaktiviteter
 \n • Særlige navigations- og visningstilstande for cyklister og fodgængere
 \n • Valgfrie stoppesteder for offentlig transport (bus, sporvogn, tog), herunder også linjenavne
-\n • Valgfri ruteoptagelse til lokal GPX-fil eller online tjeneste
+\n • Valgfri turoptagelse til lokal GPX-fil eller online tjeneste
 \n • Valgfri hastigheds og højdevisning
 \n • Visning af højdekurver og relieflag (med ekstra udvidelse)</string>
     <string name="osmand_plus_extended_description_part8">Anslået kortdækning og kvalitet:
@@ -3631,7 +3631,7 @@
     <string name="show_gpx">Spor</string>
     <string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
     <string name="empty_state_my_tracks">Tilføj sporfiler</string>
-    <string name="map_widget_monitoring">Optag tur</string>
+    <string name="map_widget_monitoring">Optagelse af tur</string>
     <string name="marker_save_as_track">Gem som sporfil</string>
     <string name="follow_track">Følg spor</string>
     <string name="follow_track_descr">Vælg den sporfil, der skal følges</string>
@@ -3648,8 +3648,8 @@
     <string name="plan_route_change_route_type_after">Skift rutetype efter</string>
     <string name="simplified_track">Forenklet spor</string>
     <string name="shared_string_file_name">Fil navn</string>
-    <string name="gpx_monitoring_stop">Pause tur optagelse</string>
-    <string name="gpx_monitoring_start">Genoptage tur optagelse</string>
+    <string name="gpx_monitoring_stop">Pause turoptagelse</string>
+    <string name="gpx_monitoring_start">Genoptage turoptagelse</string>
     <string name="previous_segment">Foregående segmenter</string>
     <string name="system_default_theme">System standard</string>
     <string name="all_previous_segments">Alle tidligere segmenter</string>
@@ -3789,8 +3789,8 @@
     <string name="routing_engine_vehicle_type_scooter">Scooter</string>
     <string name="routing_engine_vehicle_type_mtb">MTB</string>
     <string name="message_name_is_already_exists">Navnet findes allerede</string>
-    <string name="delete_online_routing_engine">Slet online routing-motor\?</string>
-    <string name="delete_waypoints">Slet rutepunkt</string>
+    <string name="delete_online_routing_engine">Slet online ruteberegningsmotor\?</string>
+    <string name="delete_waypoints">Slet rutepunkter</string>
     <string name="copy_to_map_markers">Kopier til kortmarkører</string>
     <string name="copy_to_map_favorites">Kopier til favoritter</string>
     <string name="select_segments">Vælg segmenter</string>
@@ -3840,9 +3840,9 @@
     <string name="shared_string_min_height">Min. højde</string>
     <string name="shared_string_max_height">Maks. højde</string>
     <string name="language_description">Vælg foretrukne sprog og type af stemmevejledning.</string>
-    <string name="tts_description">Tekst-til-tale (TTS) kan udtale alle typer instruktioner: vejnavne, drejeinstruktioner, POI-navne osv.</string>
+    <string name="tts_description">Tekst-til-tale (TTS) kan udtale alle typer instruktioner: vejnavne, drejeinstruktioner, IP-navne osv.</string>
     <string name="tts_title">TTS</string>
-    <string name="recorded_description">Indspillet stemme lyder bedre, men kan kun udtale forudindspillede sætninger: drejeinstruktioner. Kan ikke udtale vejnavne eller POI-navne.</string>
+    <string name="recorded_description">Indspillet stemme lyder bedre, men kan kun udtale forudindspillede sætninger: drejeinstruktioner. Kan ikke udtale vejnavne eller IP-navne.</string>
     <string name="use_system_language">Brug systemsprog</string>
     <string name="srtm_download_list_help_message">OsmAnd leverer data om højdekurver i meter og fod. Du skal downloade filen igen for at ændre formatet.</string>
     <string name="srtm_download_single_help_message">Vælg venligst varianten. Du skal downloade filen igen for at ændre formatet.</string>
@@ -4047,7 +4047,7 @@
     <string name="shared_string_server_url">Server-URL</string>
     <string name="keep_it_empty_if_not">Lad den være tom, hvis ikke</string>
     <string name="online_routing_example_hint">URL med alle parametre vil se således ud:</string>
-    <string name="open_place_reviews_plugin_description">Send fotos, anmeldelser og links om offentlige steder som restauranter, hoteller, museer og waypoints som åbne data https://openplacereviews.org/data/.
+    <string name="open_place_reviews_plugin_description">Send fotos, anmeldelser og links om offentlige steder som restauranter, hoteller, museer og rutepunkter som åbne data https://openplacereviews.org/data/.
 \n
 \nLæs mere på https://openplacereviews.org</string>
     <string name="routing_attr_height_obstacles_description">Ruteføring kunne undgå kraftige stigninger.</string>
@@ -4089,7 +4089,7 @@
     <string name="verification_code_missing_description">Det kan tage 10 minutter. Brug knappen nedenfor, hvis den ikke er i din spam-mappe.</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Brug foruddefinerede skabeloner, eller tilføj OSRM, GraphHopper, openrouteservice eller GPX online-routing.</string>
+    <string name="osmand_online_routing_promo">Brug foruddefinerede skabeloner, eller tilføj OSRM, GraphHopper, openrouteservice eller GPX online ruteberegning.</string>
     <string name="shared_string_external">Ekstern</string>
     <string name="provided_by">Leveret af %1$s</string>
     <string name="failed_loading_predefined_engines">Kunne ikke indlæse listen over foruddefinerede skabeloner.
@@ -4155,4 +4155,105 @@
     <string name="amz_manage_subscription_descr">Du kan administrere dit abonnement ved at bruge Amazon-appen på enheden eller åbne Amazon.com-webstedet under din profil.</string>
     <string name="empty_category_name">Tomt kategorinavn</string>
     <string name="no_activity_for_intent">Der blev ikke fundet egnede applikationer til at udføre denne handling</string>
+    <string name="voice_prompts_timetable">Tidspunkter for stemmemeddelelser</string>
+    <string name="system_screen_timeout_descr">Slukker skærmen i henhold til systemets skærm-timeout.</string>
+    <string name="system_screen_timeout">Brug systemets skærm-timeout</string>
+    <string name="turn_screen_on_descr">Vælg indstillinger for opvågning af skærmen (sørg for at OsmAnd er i forgrunden, når enheden er låst):</string>
+    <string name="turn_screen_on_power_button_disabled">Deaktiveret. Kræver \"Hold skærmen tændt\" under \"Timeout efter opvågning\".</string>
+    <string name="turn_screen_on_power_button_descr">Hvis du trykker på enhedens tænd/sluk-knap, tændes skærmen med OsmAnd ovenpå låseskærmen.</string>
+    <string name="turn_screen_on_wake_time_descr">Vælg skærmens timeout efter opvågning. (\"%1$s\" anvender ingen timeout.)</string>
+    <string name="map_source_zoom_levels">Indstil et minimalt og maksimalt zoomniveau for visning eller indlæsning af onlinekortet.</string>
+    <string name="map_source_zoom_levels_descr">Påvirker skærmen, når den bruges som kort eller som overlejring/underlejring.
+\n
+\n%1$s: Kortet er begrænset til det valgte zoomniveauområde.
+\n
+\n%2$s er de niveauer, hvor de originale fliser vil være synlige, opskalering eller nedskalering vil ske uden for disse værdier.</string>
+    <string name="expire_time_descr">Cachelagrede fliser vil blive downloadet igen efter det angivne antal minutter. Lad dette felt være tomt for aldrig at opdatere fliserne for denne kilde.
+\n
+\nEn dag er 1440 minutter.
+\nEn uge er 10.080 minutter.
+\nEn måned er 43.829 minutter.</string>
+    <string name="tiles_storage_descr">Vælg hvordan du vil gemme downloadede fliser.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Eksporter eller importer hurtige handlinger med app-profiler.</string>
+    <string name="quick_action_showhide_mapillary_descr">En omskifter til at vise eller skjule Mapillary-laget på kortet.</string>
+    <string name="track_coloring_solid">Solid</string>
+    <string name="route_between_points_warning_desc">Fastgør derefter dit spor til den nærmeste tilladte vej med en af dine navigationsprofiler for at bruge denne mulighed.</string>
+    <string name="shared_string_enter_param">Angiv param</string>
+    <string name="delete_all_actions_message_q">Vil du uigenkaldeligt slette %d hurtige handlinger\?</string>
+    <string name="screen_timeout">Skærm-timeout</string>
+    <string name="uninstall_speed_cameras">Afinstaller fartkameraer</string>
+    <string name="speed_camera_pois">Fartkamera-IP\'er</string>
+    <string name="speed_cameras_legal_descr">I nogle lande eller regioner er det forbudt at anvende apps, som advarer om fartkameraer.
+\n
+\nDu må foretage et valg afhængig af landets lovgivning.
+\n
+\nVælg %1$s og du vil modtage advarsler om fartkameraer.
+\n
+\nVælg %2$s. Alle date relateret til fartkameraer: advarsler, notifikationer, POI\'er vil blev slettet indtil OsmAnd er fuldstændig geninstalleret.</string>
+    <string name="screen_timeout_descr">Hvis \"%1$s\" er slået til, afhænger aktivitetstiden af den.</string>
+    <string name="default_screen_timeout">Standardtimeout for skærm</string>
+    <string name="clear_tiles_warning">Hvis du anvender disse ændringer, ryddes de lagrede data for denne flisekilde</string>
+    <string name="vessel_height_warning">Indstil en fartøjshøjde for at undgå lave broer. Hvis broen er bevægelig anvendes højden, når den er åben.</string>
+    <string name="vessel_height_limit_description">Indstil fartøjets højde for at undgå lave broer. Husk, at hvis broen er bevægelig, vil vi bruge dens højde i åben tilstand.</string>
+    <string name="routing_attr_length_description">Angiv køretøjslængde der skal være tilladt på ruter.</string>
+    <string name="shared_string_bearing">Kurs</string>
+    <string name="speed_cameras_restart_descr">Genstart appen for at slette alle data fra fartkameraer.</string>
+    <string name="speed_cameras_removed_descr">Denne enhed har ikke fartkameraer.</string>
+    <string name="use_volume_buttons_as_zoom_descr">Kontrollér kortets zoom-niveau ved hjælp af lydstyrkeknapperne på enheden.</string>
+    <string name="quick_action_remove_next_destination_descr">Sletter den næste destination på din rute. Hvis det er den endelige destination, stopper navigationen.</string>
+    <string name="gpx_split_interval_descr">Vælg det interval, hvormed markeringer af afstand eller tid på sporet skal vises.</string>
+    <string name="route_between_points_desc">Vælg, hvordan du vil forbinde punkterne, enten ved hjælp af en lige linje eller ved at beregne en rute mellem dem som angivet nedenfor.</string>
+    <string name="shared_string_gpx_route">Spor rute</string>
+    <string name="context_menu_item_add_waypoint">Tilføj spor-rutepunkt</string>
+    <string name="quick_action_add_gpx">Tilføj spor-rutepunkt</string>
+    <string name="release_3_9">• Tilføjet mulighed for at eksportere eller importere alle data inklusiv indstillinger, ressourcer, mine steder
+\n
+\n • Planlæg rute: grafer for sporsegmenter med rute og tilføjet mulighed for at oprette og redigere flere sporelementer
+\n
+\n • Tilføjet OAuth godkendelsesmetode for OpenStreetMap, forbedret brugerflade for OSM dialoger
+\n
+\n • Understøttelse af brugerdefinerede farver for favoritter og spor-rutepunkter
+\n
+\n</string>
+    <string name="disable_recording_once_app_killed_descrp">Sporlogning sættes på pause, når appen afsluttes (via seneste apps). (OsmAnd-baggrundsindikatoren forsvinder fra Android-meddelelseslinjen.)</string>
+    <string name="osm_live_payment_subscription_management_hw">Betalingen opkræves fra din AppGallery-konto, når du bekræfter købet.
+\n
+\nDet fornyes, medmindre det annulleres før den valgte fornyelsesperiode.
+\n
+\nDu kan til enhver tid administrere eller annullere dine abonnementer fra dine AppGallery-indstillinger.</string>
+    <string name="use_native_pt">Indbygget udvikling af offentlig trafik</string>
+    <string name="send_logcat_log">Send logcat-log</string>
+    <string name="attribute">Attribut</string>
+    <string name="save_global_track_interval_descr">Angiv logningsintervallet for den generelle sporregistrering (aktiveres via widgetten \"Optagelse af tur\" på kortet).</string>
+    <string name="release_4_0">• Cloud backup
+\n
+\n • Tilføjet nattilstand for \"Topo\" kortstil
+\n
+\n • Tilføjet mulighed for at downloade konturlinjer i fod
+\n
+\n • Spor kan nu farvelægges efter højde, hastighed eller hældning
+\n
+\n • Opdateret \"turoptagelse\" dialog
+\n
+\n • Afstand ved tryk flytte fra Radiusmåler til en separat indstilling
+\n
+\n • Ruteplanlægning: Du kan nu ændre navigationsindstillinger, få adgang til kortindstillinger og søge uden at forlade ruteplanlægningen
+\n
+\n • Ny \"Køb\" skærm med detaljeret købsinfo
+\n
+\n • Tilføjet mulighed for at ændre rutelinjens udseende
+\n
+\n • OsmAnd Live opdateringer flyttet til \"Downloads &gt; Opdateringer\"
+\n
+\n</string>
+    <string name="use_native_pt_desc">Skift til Java (sikker) Ruteberegning med offentlig transport</string>
+    <string name="message_need_calculate_route_before_show_graph">%1$s data er kun tilgængelige på veje, beregn en rute ved hjælp af \"Rute mellem punkter\" for at se graferne.</string>
+    <string name="add_online_routing_engine">Tilføj online ruteberegningsmotor</string>
+    <string name="edit_online_routing_engine">Rediger online ruteberegningsmotor</string>
+    <string name="online_routing_engine">Online ruteberegningsmotor</string>
+    <string name="online_routing_engines">Online ruteberegningsmotorer</string>
+    <string name="select_nav_profile_dialog_message">\'Navigationstype\' afgør, hvordan ruterne beregnes med tilgængelige offline- og online ruteberegningsmotorer.</string>
+    <string name="in_grace_period">I betalingsfri periode</string>
+    <string name="loading_list_of_routing_services">Indlæser liste over tilgængelige ruteberegningstjenester</string>
+    <string name="gpx_parse_error">OsmAnd GPX er ikke korrekt dannet, kontakt venligst supportteamet for at undersøge det nærmere.</string>
 </resources>
