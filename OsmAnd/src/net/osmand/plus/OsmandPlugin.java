@@ -48,6 +48,7 @@ import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -955,9 +956,14 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public static void registerQuickActionTypesPlugins(List<QuickActionType> quickActionTypes) {
-		for (OsmandPlugin p : getEnabledPlugins()) {
-			quickActionTypes.addAll(p.getQuickActionTypes());
+	public static void registerQuickActionTypesPlugins(List<QuickActionType> allTypes,
+	                                                   List<QuickActionType> enabledTypes) {
+		for (OsmandPlugin p : getAvailablePlugins()) {
+			List<QuickActionType> types = p.getQuickActionTypes();
+			allTypes.addAll(types);
+			if (p.isEnabled()) {
+				enabledTypes.addAll(types);
+			}
 		}
 	}
 

@@ -711,7 +711,7 @@
     <string name="download_regular_maps">Mapa padrão</string>
     <string name="download_roads_only_maps">Apenas mapa de estradas</string>
     <string name="rendering_attr_alpineHiking_description">Renderizar caminhos de acordo com a escala de SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Percursos de caminhada</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Rotas de caminhada</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar caminhos de acordo com traços OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Limites</string>
     <string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis administrativos 5-9).</string>
@@ -3266,7 +3266,7 @@
     <string name="quick_action_directions_from_desc">Um botão para fazer com que a tela centralize o ponto de partida. Em seguida, solicitará para definir o destino ou acionar o cálculo da rota.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar os nós da rede de ciclovias</string>
     <string name="clear_confirmation_msg">Limpar %1$s\?</string>
-    <string name="download_map_dialog">Caixa baixar mapa</string>
+    <string name="download_map_dialog">Tela de baixar mapa</string>
     <string name="dialogs_and_notifications_title">Diálogos e notificações</string>
     <string name="dialogs_and_notifications_descr">Popups de controle, caixas de diálogo e notificações.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nós</string>

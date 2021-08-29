@@ -483,7 +483,7 @@
     <string name="si_mi_yard">Mile/iarzi</string>
     <string name="si_km_m">Km/metri</string>
     <string name="yard">yd</string>
-    <string name="foot">ft</string>
+    <string name="foot">picior</string>
     <string name="mile_per_hour">mph</string>
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Distribuiți locația folosind</string>
@@ -1117,7 +1117,7 @@
     <string name="rendering_attr_showAccess_name">Arată restricțiile de acces și taxele de trecere</string>
     <string name="rendering_attr_showSurfaceGrade_name">Arată calitatea drumului</string>
     <string name="rendering_attr_showSurfaces_name">Arată suprafața drumului</string>
-    <string name="rendering_attr_showCycleRoutes_name">Rute de biciclete</string>
+    <string name="rendering_attr_showCycleRoutes_name">Traseele pentru biciclete</string>
     <string name="no_index_file_to_download">Descărcările nu au fost găsite, verificați conexiunea la Internet.</string>
     <string name="local_index_select_gpx_file">Selectați un track</string>
     <string name="gpx_split_interval">Intervalul de împărțire</string>
@@ -1459,7 +1459,7 @@
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Înregistrează călătoria</string>
-    <string name="shared_string_navigation">Navigare</string>
+    <string name="shared_string_navigation">Navigație</string>
     <string name="osmand_running_in_background">Rulați în fundal</string>
     <string name="favourites_edit_dialog_title">Informații favorite</string>
     <string name="simulate_your_location_stop_descr">Oprește simularea poziției tale.</string>
@@ -1589,7 +1589,7 @@
     <string name="map_markers">Marcaje de hartă</string>
     <string name="map_marker">Marcaj de hartă</string>
     <string name="consider_turning_polygons_off">Este recomandat să dezactivați redarea de poligoane.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Traseele de ciclism montan</string>
+    <string name="rendering_attr_showMtbRoutes_name">Traseele pentru biciclete de munte</string>
     <string name="show_polygons">Arată poligoanele</string>
     <string name="find_parking">Găsește parcare</string>
     <string name="shared_string_status">Stare</string>
@@ -2668,7 +2668,7 @@
     <string name="voice_announces_info">Anunțurile vocale apar doar în timpul navigării.</string>
     <string name="voice_announces_descr">Instrucțiuni și anunțuri de navigație</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Arată rutele pentru biciclete</string>
-    <string name="download_map_dialog">Dialogul de descărcare a hărții</string>
+    <string name="download_map_dialog">Descărcați harta de dialog</string>
     <string name="dialogs_and_notifications_descr">Control popups, dialoguri și notificări.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Rețele de noduri</string>
     <string name="suggested_maps">Hărți sugerate</string>
@@ -2854,7 +2854,7 @@
     <string name="keep_active">Mențineți activ</string>
     <string name="shared_string_uninstall">Dezinstalare</string>
     <string name="shared_string_tones">tone</string>
-    <string name="shared_string_meters">metrii</string>
+    <string name="shared_string_meters">metri</string>
     <string name="add_online_source">Adăugare surse online</string>
     <string name="quick_action_showhide_mapillary_descr">O comutare să afișeze sau să ascundă stratul Mapillary pe hartă.</string>
     <string name="routing_attr_length_description">Specificați lungimea vehiculului care trebuie permisă pe rute.</string>
@@ -4271,7 +4271,7 @@
     <string name="pro_widgets">Widget-uri Pro</string>
     <string name="purchases_feature_desc_pro_widgets">Obțineți acces la funcțiile OsmAnd Pro: Colorarea traseelor și multe altele.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explorați planurile OsmAnd pentru a găsi unul potrivit pentru dumneavoastră.</string>
-    <string name="routes_color_by_type">Rutele colorate de…</string>
+    <string name="routes_color_by_type">Culoare rute de…</string>
     <string name="shared_string_relation">Relația</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Colorați rutele în funcție de culoarea lor locală individuală (dacă este prezentă pe OpenStreetMap) și de simbolul scutului de drumeție.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Culoare în funcție de afilierea la rețea.</string>
