@@ -53,7 +53,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 			}
 			return true;
 		} else if (mapScrollHelper.isAvailableKeyCode(keyCode)) {
-			return mapScrollHelper.onKeyDown(keyCode, event);
+			return mapScrollHelper.onKeyDown(keyCode);
 		}
 
 		if (settings.USE_VOLUME_BUTTONS_AS_ZOOM.get()) {
@@ -100,7 +100,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 			mapActivity.changeZoom(1);
 			return true;
 		} else if (mapScrollHelper.isAvailableKeyCode(keyCode)) {
-			return mapScrollHelper.onKeyUp(keyCode, event);
+			return mapScrollHelper.onKeyUp(keyCode);
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == PARROT_EXTERNAL_DEVICE) {
 			// Parrot device has only dpad left and right
 			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {

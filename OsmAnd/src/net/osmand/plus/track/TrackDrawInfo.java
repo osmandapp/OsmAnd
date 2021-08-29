@@ -1,7 +1,7 @@
 package net.osmand.plus.track;
 
-import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
-import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
+import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
 
 import android.os.Bundle;
 

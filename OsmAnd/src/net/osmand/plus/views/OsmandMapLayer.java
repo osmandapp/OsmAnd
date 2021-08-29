@@ -70,9 +70,6 @@ public abstract class OsmandMapLayer {
 
 	public abstract void destroyLayer();
 
-	public void onRetainNonConfigurationInstance(Map<String, Object> map) {
-	}
-
 	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
 	}
 

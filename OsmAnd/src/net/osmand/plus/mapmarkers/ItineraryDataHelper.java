@@ -59,7 +59,6 @@ public class ItineraryDataHelper {
 
 	private static final String CATEGORIES_SPLIT = ",";
 	private static final String FILE_TO_SAVE = "itinerary.gpx";
-	private static final String FILE_TO_BACKUP = "itinerary_bak.gpx";
 	private static final String ITINERARY_ID = "itinerary_id";
 	private static final String ITINERARY_GROUP = "itinerary_group";
 	private static final String GPX_KEY = "gpx";

@@ -1,5 +1,7 @@
 package net.osmand.plus.download.ui;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -60,9 +62,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
-import static net.osmand.plus.liveupdates.LiveUpdatesFragment.updateCountEnabled;
 
 public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
 	private static final int RELOAD_ID = 5;
@@ -317,13 +316,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> implements LocalIndexInfoAdapter {
 
-		static final int INDEX_ITEM = 0;
-		static final int OSM_LIVE_BANNER = 1;
-		List<IndexItem> items;
+		private static final int INDEX_ITEM = 0;
+		private static final int OSM_LIVE_BANNER = 1;
+
 		private final ArrayList<LocalIndexInfo> mapsList = new ArrayList<>();
 		private final boolean showSubscriptionPurchaseBanner;
-		private TextView countView;
-		private int countEnabled = 0;
 
 		@Override
 		public void addData(LocalIndexInfo info) {
@@ -337,12 +334,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 		@Override
 		public void onDataUpdated() {
-			countEnabled = updateCountEnabled(countView, mapsList, settings);
+
 		}
 
 		public UpdateIndexAdapter(Context context, int resource, List<IndexItem> items, boolean showSubscriptionPurchaseBanner) {
 			super(context, resource, items);
-			this.items = items;
 			this.showSubscriptionPurchaseBanner = showSubscriptionPurchaseBanner;
 		}
 
@@ -414,7 +410,7 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						TextView tvTitle = view.findViewById(R.id.title);
 						tvTitle.setText(R.string.download_live_updates);
 						AndroidUtils.setTextPrimaryColor(app, tvTitle, nightMode);
-						countView = view.findViewById(R.id.description);
+						TextView countView = view.findViewById(R.id.description);
 						AndroidUtils.setTextSecondaryColor(app, countView, nightMode);
 						Drawable additionalIconDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_action_update);
 						UiUtilities.tintDrawable(additionalIconDrawable, ColorUtilities.getDefaultIconColor(app, nightMode));

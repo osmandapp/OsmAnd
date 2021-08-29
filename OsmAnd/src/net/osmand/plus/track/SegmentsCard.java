@@ -53,7 +53,7 @@ public class SegmentsCard extends MapBaseCard {
 			GpxDisplayItem displayItem = items.get(i);
 			updateLocationOnMap(displayItem);
 
-			View segmentView = SegmentGPXAdapter.createGpxTabsView(displayHelper, container, listener, nightMode);
+			View segmentView = SegmentGPXAdapter.createGpxTabsView(container, nightMode);
 
 			AndroidUiHelper.updateVisibility(segmentView.findViewById(R.id.list_item_divider), i != 0);
 

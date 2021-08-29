@@ -117,7 +117,7 @@ public abstract class ImportSettingsFragment extends BaseSettingsListFragment {
 					reloadIndexes(items);
 					AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 					if (plugin != null) {
-						plugin.indexingFiles(null, true, true);
+						plugin.indexingFiles(true, true);
 					}
 				}
 				importFinished(succeed, needRestart, items);

@@ -1,5 +1,7 @@
 package net.osmand.plus.base;
 
+import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
+
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
@@ -43,14 +45,12 @@ import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
-
-import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
 
 public abstract class ContextMenuFragment extends BaseOsmAndFragment implements MapControlsThemeInfoProvider {
 
@@ -1081,7 +1081,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {
-		ShareDialog.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
+		ShareMenu.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull ContextMenuFragment fragment) {

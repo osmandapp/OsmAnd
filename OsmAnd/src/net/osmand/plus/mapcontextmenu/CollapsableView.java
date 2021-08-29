@@ -59,7 +59,7 @@ public class CollapsableView {
 		return collapseExpandListener;
 	}
 
-	public void setCollapseExpandListener(MenuBuilder.CollapseExpandListener collapseExpandListener) {
+	public void setCollapseExpandListener(CollapseExpandListener collapseExpandListener) {
 		this.collapseExpandListener = collapseExpandListener;
 	}
 }
