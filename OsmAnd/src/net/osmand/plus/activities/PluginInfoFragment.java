@@ -20,6 +20,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -142,32 +143,31 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 				if (plugin.isEnabled() != isChecked) {
 					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, isChecked)) {
 						updateState();
+
+						Fragment target = getTargetFragment();
+						if (target instanceof PluginStateListener) {
+							((PluginStateListener) target).onPluginStateChanged(plugin);
+						}
 					}
 				}
 			}
 		});
 		Button getButton = mainView.findViewById(R.id.plugin_get);
 		getButton.setText(plugin.isPaid() ? R.string.get_plugin : R.string.shared_string_install);
-		getButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+		getButton.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
 				OsmAndFeature feature = null;
 				if (plugin instanceof SRTMPlugin) {
 					feature = OsmAndFeature.TERRAIN;
 				} else if (plugin instanceof WikipediaPlugin) {
 					feature = OsmAndFeature.WIKIPEDIA;
 				} else {
-					FragmentActivity activity = getActivity();
 					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
-					if (activity != null && AndroidUtils.isIntentSafe(activity, intent)) {
-						startActivity(intent);
-					}
+					AndroidUtils.startActivityIfSafe(activity, intent);
 				}
 				if (feature != null) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						ChoosePlanFragment.showInstance(activity, feature);
-					}
+					ChoosePlanFragment.showInstance(activity, feature);
 				}
 			}
 		});
@@ -256,20 +256,21 @@ public class PluginInfoFragment extends BaseOsmAndFragment implements PluginStat
 		}
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull OsmandPlugin plugin) {
-		try {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target,
+									   @NonNull OsmandPlugin plugin) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(EXTRA_PLUGIN_ID, plugin.getId());
 
 			PluginInfoFragment fragment = new PluginInfoFragment();
 			fragment.setArguments(args);
+			fragment.setTargetFragment(target, 0);
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			return false;
 		}
+		return false;
 	}
 }

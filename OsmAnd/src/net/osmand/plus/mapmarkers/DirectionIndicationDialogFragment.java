@@ -23,22 +23,21 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.ListPopupWindow;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.mapmarkers.MapMarkersMode;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.LinkedList;
 
@@ -221,7 +220,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	@Override
 	protected Drawable getContentIcon(int id) {
-		return getIcon(id, getSettings().isLightContent() ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
+		return getIcon(id, ColorUtilities.getDefaultIconColorId(!getSettings().isLightContent()));
 	}
 
 	private MapActivity getMapActivity() {
@@ -241,8 +240,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	private SpannableString getActiveString(int id) {
 		SpannableString res = new SpannableString(getString(id));
-		res.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getActivity(), getSettings().isLightContent()
-				? R.color.active_color_primary_light : R.color.active_color_primary_dark)), 0, res.length(), 0);
+		int activeColor = ColorUtilities.getActiveColor(getActivity(), !getSettings().isLightContent());
+		res.setSpan(new ForegroundColorSpan(activeColor), 0, res.length(), 0);
 		return res;
 	}
 

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -29,8 +30,7 @@ public class ImportTrackCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		int color = ContextCompat.getColor(app, nightMode ?
-				R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int color = ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode));
 		Typeface typeface = FontCache.getRobotoMedium(app);
 		String importTrack = app.getString(R.string.plan_route_import_track);
 		SpannableString spannable = UiUtilities.createCustomFontSpannable(typeface, importTrack, importTrack, importTrack);

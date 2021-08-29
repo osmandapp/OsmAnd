@@ -20,7 +20,6 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -721,9 +720,6 @@ public class GpxSelectionHelper {
 					sf = new SelectedGpxFile();
 				}
 				if (dataItem != null) {
-					if (dataItem.getColor() != 0) {
-						gpx.setColor(dataItem.getColor());
-					}
 					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);

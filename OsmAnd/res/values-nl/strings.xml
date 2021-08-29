@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="layer_map_appearance">Configureer scherm</string>
     <string name="show_lanes">Rijstroken</string>
@@ -737,7 +737,7 @@
     <string name="bg_service_screen_unlock">Ontgrendel</string>
     <string name="bg_service_sleep_mode_off">Start\nachtergrondmodus</string>
     <string name="bg_service_sleep_mode_on">Stop\nachtergrondmodus</string>
-    <string name="email">email</string>
+    <string name="email">e-mail</string>
     <string name="filterpoi_activity">Creëer POI-filter</string>
     <string name="select_navigation_mode">Kies vervoerwijze:</string>
     <string name="day_night_info_description">Zonsopgang: %1$s \nZonsondergang: %2$s</string>
@@ -1688,7 +1688,7 @@
     <string name="unsaved_changes_will_be_lost">Niet-bewaarde wijzigingen gaan verloren. Doorgaan?</string>
     <string name="downloads_left_template">%1$s downloads over</string>
     <string name="roads">Wegen</string>
-    <string name="downloading_number_of_files">Downloaden - %1$d bestand</string>
+    <string name="downloading_number_of_files">Downloaden %1$d bestand…</string>
     <string name="show_free_version_banner">Toon de balk \"Gratis Versie\"</string>
     <string name="show_free_version_banner_description">In de betaalde versie toch de balk \"Gratis Versie\" tonen.</string>
     <string name="buy">Kopen</string>
@@ -1856,7 +1856,7 @@
     <string name="osm_live_month_cost_desc">Abonnementskosten per maand</string>
     <string name="osm_live_active">Actief</string>
     <string name="osm_live_not_active">Niet actief</string>
-    <string name="osm_live_enter_email">Voer een geldig emailadres in</string>
+    <string name="osm_live_enter_email">Voer een geldig e-mailadres in</string>
     <string name="osm_live_enter_user_name">Voer een Openbare Naam in</string>
     <string name="osm_live_thanks">Bedankt voor het steunen van OsmAnd!
 \nOm toegang te krijgen tot alle nieuwe functies moet OsmAnd opnieuw gestart worden.</string>
@@ -4083,4 +4083,61 @@
     <string name="customize_route_line">Pas de routelijn aan</string>
     <string name="shared_string_route_line">Routelijn</string>
     <string name="specify_color_for_map_mode">Geef een kleur op voor de kaartmodus %1$s.</string>
+    <string name="verify_email_address">Verifieer e-mailadres</string>
+    <string name="cloud_email_not_registered">Dit e-mailadres is niet geregistreerd voor OsmAnd Cloud</string>
+    <string name="cloud_email_already_registered">Dit e-mailadres is reeds geregistreerd.</string>
+    <string name="backup_error_user_is_already_registered">Dit e-mailadres wordt gebruikt door een ander account</string>
+    <string name="backup_error_subscription_was_expired">Afgelopen abonnement</string>
+    <string name="enter_verification_code">Eenmalig wachtwoord invoeren</string>
+    <string name="resend_verification_code">Opnieuw verzenden</string>
+    <string name="verification_code_missing">Ik heb geen verificatiecode gekregen</string>
+    <string name="shared_string_offline">Offline</string>
+    <string name="shared_string_online">Online</string>
+    <string name="osmand_online_routing_promo">Gebruik voor gedefinieerde sjablonen of voeg OSRM, GraphHopper, openrouteservice of GPX online routing toe.</string>
+    <string name="shared_string_external">Extern</string>
+    <string name="shared_string_predefined">Voorgedefinieerd</string>
+    <string name="backup_complete">Back-up voltooid</string>
+    <string name="backup_now">Back-up nu</string>
+    <string name="make_backup">Maak een back-up</string>
+    <string name="backup_conflicts">Conflicten</string>
+    <string name="backup_confilcts_descr">Sommige bestanden konden niet worden geüpload naar de server omdat er een nieuwere versie is opgeslagen op de server.</string>
+    <string name="backup_view_conflicts">Toon conflicten</string>
+    <string name="backup_no_internet_descr">Controleer je internet verbinding en herstart de download.</string>
+    <string name="shared_string_logout">Log uit</string>
+    <string name="backup_delete_all_data">Verwijder al mijn gegevens</string>
+    <string name="backup_danger_zone">Gevarenzone</string>
+    <string name="delete_all_confirmation">Ja, verwijder alles</string>
+    <string name="backup_delete_old_data">Verwijder oude versies</string>
+    <string name="backup_data">Back-up gegevens</string>
+    <string name="backup_restore_data_descr">Herstel gegevens op dit apparaat met behulp van online back-ups.</string>
+    <string name="backup_restore_data">Herstel gegevens</string>
+    <string name="restore_from_osmand_cloud">Herstel van OsmAnd Cloud</string>
+    <string name="choose_what_to_restore">Kies wat je wil herstellen.</string>
+    <string name="restore_selected_data">Herstel geselecteerde gegevens</string>
+    <string name="receiving_data_from_server">Gegevens verkrijgen van de server…</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Vermijd lage-emissiezones</string>
+    <string name="poi_routes">Routes</string>
+    <string name="online_direct_line_maps_link">Controleer op de noodzakelijke kaarten.</string>
+    <string name="offline_maps_required_descr">Enkele offline kaarten, noodzakelijk voor deze route, ontbreken.</string>
+    <string name="online_maps_required_descr">OsmAnd kan spijtig genoeg geen route bepalen voor jouw instellingen.
+\n
+\nMisschien zijn bepaalde kaarten niet geladen. Je kan een online controle uitvoeren om de noodzakelijke kaarten te vinden.</string>
+    <string name="online_maps_searching_descr">Online zoeken…</string>
+    <string name="reset_to_original">Opnieuw instellen naar origineel</string>
+    <string name="backup_error_no_subscription">Geen abonnement gevonden</string>
+    <string name="map_updates_for_mappers">Kaart updates voor OSM bijdragers</string>
+    <string name="benefits_for_contributors">Voordelen voor actieve OSM bijdragers</string>
+    <string name="benefits_for_contributors_primary_descr">Je hebt misschien recht op onbeperkte uurlijkse kaart updates als je een actieve bijdrager bent aan OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">Log in op OpenStreetMap om te controleren of je recht hebt op onbeperkte maandelijkse en uurlijkse kaart updates.</string>
+    <string name="use_login_and_password">Gebruik gebruikersnaam en wachtwoord</string>
+    <string name="available_until">Beschikbaar tot %1$s</string>
+    <string name="enough_contributions_descr">Proficiat, je hebt genoeg bijdragen geleverd aan OpenStreetMap en kan nu genieten van onbeperkte OsmAnd kaart updates!</string>
+    <string name="not_enough_contributions_descr">Er zijn minsten %1$s OpenStreetMap bijdragen nodig in %2$s dagen.</string>
+    <string name="shared_string_contributions">Bijdragen</string>
+    <string name="contributions_may_calculate_with_delay">Het berekenen van de bijdragen kan enkele uren duren.</string>
+    <string name="map_updates_are_unavailable_yet">Kaart updates zijn nog niet beschikbaar. :-(</string>
+    <string name="connect_track_points_as">Routepunten verbinden</string>
+    <string name="pro_features">Pro functies</string>
+    <string name="purchases_restored">Aankoop hersteld</string>
+    <string name="grey_color_undefined">Grijs wordt gebruikt wanneer de nodige gegevens ontbreken voor dat deel.</string>
 </resources>

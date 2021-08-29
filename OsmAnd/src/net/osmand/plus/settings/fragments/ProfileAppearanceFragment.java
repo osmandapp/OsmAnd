@@ -1,5 +1,9 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -23,9 +27,25 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -54,25 +74,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 
 public class ProfileAppearanceFragment extends BaseSettingsFragment implements OnSelectProfileCallback,
 		CardListener, ColorPickerListener {
@@ -257,7 +258,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			saveButton.setVisibility(View.VISIBLE);
 			buttonsContainer.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 
-			AndroidUtils.setBackground(getContext(), buttonsContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
+			AndroidUtils.setBackground(getContext(), buttonsContainer, ColorUtilities.getListBgColorId(isNightMode()));
 
 			UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 			UiUtilities.setupDialogButton(isNightMode(), saveButton, DialogButtonType.PRIMARY, R.string.shared_string_save);
@@ -344,7 +345,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		if (profileButton != null) {
 			int iconColor = changedProfile.getActualColor();
 			AndroidUtils.setBackground(profileButton, UiUtilities.tintDrawable(AppCompatResources.getDrawable(app,
-					R.drawable.circle_background_light), UiUtilities.getColorWithAlpha(iconColor, 0.1f)));
+					R.drawable.circle_background_light), ColorUtilities.getColorWithAlpha(iconColor, 0.1f)));
 			ImageView profileIcon = view.findViewById(R.id.profile_icon);
 			if (profileIcon != null) {
 				profileIcon.setImageDrawable(getPaintedIcon(changedProfile.iconRes, iconColor));
@@ -510,7 +511,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		ImageView coloredCircle = iconItemView.findViewById(R.id.background);
 		AndroidUtils.setBackground(coloredCircle,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.circle_background_light),
-						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		coloredCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -532,7 +533,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		checkMark.setImageDrawable(app.getUIUtilities().getIcon(changedProfile.iconRes, R.color.icon_color_default_light));
 		AndroidUtils.setBackground(iconItem.findViewById(R.id.background),
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.circle_background_light),
-						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		changedProfile.iconRes = iconRes;
 		updateProfileButton();
 	}
@@ -552,7 +553,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		ImageView coloredRect = locationIconView.findViewById(R.id.backgroundRect);
 		AndroidUtils.setBackground(coloredRect,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
-						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		coloredRect.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -600,7 +601,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		ImageView coloredRect = navigationIconView.findViewById(R.id.backgroundRect);
 		AndroidUtils.setBackground(coloredRect,
 				UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.bg_select_icon_button),
-						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+						ColorUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		coloredRect.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -644,7 +645,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 			int newColor = changedProfile.getActualColor();
 			AndroidUtils.setBackground(iconItem.findViewById(R.id.background),
 					UiUtilities.tintDrawable(AppCompatResources.getDrawable(app, R.drawable.circle_background_light),
-							UiUtilities.getColorWithAlpha(newColor, 0.1f)));
+							ColorUtilities.getColorWithAlpha(newColor, 0.1f)));
 			ImageView outlineCircle = iconItem.findViewById(R.id.outline);
 			GradientDrawable circleContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.circle_contour_bg_light);
 			if (circleContourDrawable != null) {
@@ -977,22 +978,24 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		this.onCardPressed(colorsCard);
 	}
 
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable String appMode, boolean imported) {
-		try {
-			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
+	public static boolean showInstance(@NonNull FragmentActivity activity,
+	                                   @NonNull SettingsScreenType screenType,
+	                                   @Nullable String appMode, boolean imported) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		String tag = screenType.fragmentName;
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Fragment fragment = Fragment.instantiate(activity, tag);
 			Bundle args = new Bundle();
 			if (appMode != null) {
 				args.putString(BASE_PROFILE_FOR_NEW, appMode);
 				args.putBoolean(IS_BASE_PROFILE_IMPORTED, imported);
 			}
 			fragment.setArguments(args);
-			activity.getSupportFragmentManager().beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, screenType.fragmentName)
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, tag)
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
-					.commit();
+					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			LOG.error(e);
 		}
 		return false;
 	}

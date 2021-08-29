@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.Fragment;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
@@ -20,13 +24,15 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
+import net.osmand.plus.wikivoyage.WikivoyageUtils;
+import net.osmand.plus.wikivoyage.data.TravelArticle.TravelArticleIdentifier;
 import net.osmand.util.Algorithms;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.fragment.app.Fragment;
+import java.util.Map;
 
 import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
+import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_LANG;
+import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_TITLE;
 
 public class DescriptionCard extends MapBaseCard {
 
@@ -95,6 +101,18 @@ public class DescriptionCard extends MapBaseCard {
 		readBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Map<String, String> extensions = gpxFile.metadata.getExtensionsToRead();
+				if (!Algorithms.isEmpty(extensions)) {
+					String title = extensions.get(ARTICLE_TITLE);
+					String lang = extensions.get(ARTICLE_LANG);
+					if (title != null && lang != null) {
+						TravelArticleIdentifier articleId = app.getTravelHelper().getArticleId(title, lang);
+						if (articleId != null) {
+							WikivoyageUtils.openWikivoyageArticle(activity, articleId, lang);
+							return;
+						}
+					}
+				}
 				GpxReadDescriptionDialogFragment.showInstance(mapActivity, title, imageUrl, descriptionHtml, targetFragment);
 			}
 		});

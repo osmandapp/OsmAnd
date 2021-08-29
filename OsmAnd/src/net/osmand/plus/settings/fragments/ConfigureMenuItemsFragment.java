@@ -1,5 +1,15 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.HEADER;
+import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
@@ -24,22 +34,23 @@ import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.chooseplan.button.PurchasingUtils;
-import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
-import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
-import net.osmand.plus.settings.backend.DrawerMenuItemsSettings;
-import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.ContextMenuItemsPreference;
+import net.osmand.plus.settings.backend.ContextMenuItemsSettings;
+import net.osmand.plus.settings.backend.DrawerMenuItemsSettings;
+import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.fragments.ConfigureMenuRootFragment.ScreenType;
 import net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.MenuItemsAdapterListener;
@@ -53,16 +64,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SWITCH_PROFILE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MORE_ID;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.BUTTON;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DESCRIPTION;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.DIVIDER;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.HEADER;
-import static net.osmand.plus.settings.fragments.RearrangeMenuItemsAdapter.AdapterItemType.MENU_ITEM;
 
 public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		implements SelectCopyAppModeBottomSheet.CopyAppModePrefsListener {
@@ -105,18 +106,18 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 		}
 	}
 
-	public static ConfigureMenuItemsFragment showInstance(
-			@NonNull FragmentManager fm,
-			@NonNull ApplicationMode appMode,
-			@NonNull ScreenType type) {
-		ConfigureMenuItemsFragment fragment = new ConfigureMenuItemsFragment();
-		fragment.setScreenType(type);
-		fragment.setAppMode(appMode);
-		fm.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(CONFIGURE_MENU_ITEMS_TAG)
-				.commitAllowingStateLoss();
-		return fragment;
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull ApplicationMode appMode,
+	                                @NonNull ScreenType type) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ConfigureMenuItemsFragment fragment = new ConfigureMenuItemsFragment();
+			fragment.setScreenType(type);
+			fragment.setAppMode(appMode);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(CONFIGURE_MENU_ITEMS_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	public void setAppMode(ApplicationMode appMode) {
@@ -229,14 +230,13 @@ public class ConfigureMenuItemsFragment extends BaseOsmAndFragment
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+		Context ctx = requireContext();
 		View root = mInflater.inflate(R.layout.edit_arrangement_list_fragment, container, false);
 		AppBarLayout appbar = root.findViewById(R.id.appbar);
 		View toolbar = mInflater.inflate(R.layout.global_preference_toolbar, container, false);
 		TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		ImageButton toolbarButton = toolbar.findViewById(R.id.close_button);
-		toolbar.setBackgroundColor(nightMode
-				? getResources().getColor(R.color.list_background_color_dark)
-				: getResources().getColor(R.color.list_background_color_light));
+		toolbar.setBackgroundColor(ColorUtilities.getListBgColor(ctx, nightMode));
 		toolbarTitle.setTextColor(nightMode
 				? getResources().getColor(R.color.text_color_primary_dark)
 				: getResources().getColor(R.color.list_background_color_dark));

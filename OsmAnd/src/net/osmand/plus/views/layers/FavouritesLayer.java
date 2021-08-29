@@ -33,11 +33,11 @@ import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider,
-		MapTextProvider<FavouritePoint> {
+public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider,
+		IMoveObjectProvider, MapTextProvider<FavouritePoint> {
 
 	protected int startZoom = 6;
-	
+
 	protected OsmandMapTileView view;
 	private FavouritesDbHelper favouritesDbHelper;
 	private MapMarkersHelper mapMarkersHelper;
@@ -49,9 +49,6 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private int grayColor;
 	private OsmandSettings settings;
 	private ContextMenuLayer contextMenuLayer;
-	protected String getObjName() {
-		return view.getContext().getString(R.string.favorite);
-	}
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -66,14 +63,14 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return (Math.abs(objx - ex) <= radius * 1.5 && Math.abs(objy - ey) <= radius * 1.5) ;
+		return (Math.abs(objx - ex) <= radius * 1.5 && Math.abs(objy - ey) <= radius * 1.5);
 //		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 		//return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 	}
 
 	@Override
 	public void destroyLayer() {
-		
+
 	}
 
 	@Override
@@ -128,10 +125,10 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								if (marker != null && marker.history) {
 									color = grayColor;
 								} else {
-									color = favouritesDbHelper.getColorWithCategory(favoritePoint,defaultColor);
+									color = favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor);
 								}
 								PointImageDrawable pointImageDrawable = PointImageDrawable.getFromFavorite(
-										view.getContext(), color,true, favoritePoint);
+										view.getContext(), color, true, favoritePoint);
 								pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 								smallObjectsLatLon.add(new LatLon(lat, lon));
 							} else {
@@ -151,7 +148,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
 		}
-		if(isTextVisible()) {
+		if (isTextVisible()) {
 			textLayer.putData(this, cache);
 		}
 
@@ -163,16 +160,16 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y, @Nullable MapMarker marker,
-	                          float textScale) {
+							  float textScale) {
 		PointImageDrawable pointImageDrawable;
 		boolean history = false;
 		if (marker != null) {
 			pointImageDrawable = PointImageDrawable.getOrCreateSyncedIcon(view.getContext(),
-					favouritesDbHelper.getColorWithCategory(favoritePoint,defaultColor), favoritePoint);
+					favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor), favoritePoint);
 			history = marker.history;
 		} else {
 			pointImageDrawable = PointImageDrawable.getFromFavorite(view.getContext(),
-					favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor),true, favoritePoint);
+					favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor), true, favoritePoint);
 		}
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
 	}
@@ -193,7 +190,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private void getFavFromPoint(RotatedTileBox tb, List<? super FavouritePoint> res, int r, int ex, int ey,
-			FavouritePoint n) {
+								 FavouritePoint n) {
 		if (n.isVisible()) {
 			int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 			int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
@@ -205,8 +202,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if(o instanceof FavouritePoint){
-			return ((FavouritePoint) o).getPointDescription(view.getContext()); //$NON-NLS-1$
+		if (o instanceof FavouritePoint) {
+			return ((FavouritePoint) o).getPointDescription(view.getContext());
 		}
 		return null;
 	}
@@ -245,8 +242,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if(o instanceof FavouritePoint){
-			return new LatLon(((FavouritePoint)o).getLatitude(), ((FavouritePoint)o).getLongitude());
+		if (o instanceof FavouritePoint) {
+			return new LatLon(((FavouritePoint) o).getLatitude(), ((FavouritePoint) o).getLongitude());
 		}
 		return null;
 	}

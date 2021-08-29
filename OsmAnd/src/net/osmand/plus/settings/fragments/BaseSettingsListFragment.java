@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -183,9 +184,8 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	}
 
 	private void setupToolbar(Toolbar toolbar) {
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, nightMode
-				? getResources().getColor(R.color.active_buttons_and_links_text_dark)
-				: getResources().getColor(R.color.active_buttons_and_links_text_light)));
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
+		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -275,7 +275,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	@Override
 	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
 		SettingsCategoryItems categoryItems = dataList.get(category);
-		for (ExportSettingsType type : categoryItems.getTypes()) {
+		for (ExportSettingsType type : categoryItems.getNotEmptyTypes()) {
 			List<?> selectedItems = selected ? categoryItems.getItemsForType(type) : new ArrayList<>();
 			selectedItemsMap.put(type, selectedItems);
 		}

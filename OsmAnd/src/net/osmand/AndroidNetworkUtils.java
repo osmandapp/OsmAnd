@@ -630,6 +630,7 @@ public class AndroidNetworkUtils {
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoInput(true);
 			conn.setDoOutput(true);
+			conn.setChunkedStreamingMode(0);
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY);
 			conn.setRequestProperty("User-Agent", "OsmAnd");

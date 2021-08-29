@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
@@ -46,8 +47,6 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	public static final String SELECTED_LANG_KEY = "selected_lang";
 
 	public static final int OPEN_ARTICLE_REQUEST_CODE = 2;
-
-	private static final long UNDEFINED = -1;
 
 	private TravelArticleIdentifier articleId;
 	private String selectedLang;
@@ -222,8 +221,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 				txtListChild.setTextColor(ContextCompat.getColor(context, nightMode
 						? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			} else {
-				txtListChild.setTextColor(ContextCompat.getColor(context, nightMode
-						? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
+				txtListChild.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
 			}
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
 
@@ -248,8 +246,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 				lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode
 						? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			} else {
-				lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode
-						? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
+				lblListHeader.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
 			}
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 

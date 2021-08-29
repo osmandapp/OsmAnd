@@ -4129,7 +4129,7 @@
     <string name="loading_list_of_routing_services">רשימת שירותי הניווט הזמינים נטענת</string>
     <string name="shared_string_offline">בלתי מקוון</string>
     <string name="shared_string_online">מקוון</string>
-    <string name="osmand_online_routing_promo">ניתן להשתמש בתבניות שהוגדרו מראש או להוסיף ניווט מקוון מותאם אישית, נתמכים: OSRM,‏ Graphhopper,‏ OpenRouteService,‏ GPX.</string>
+    <string name="osmand_online_routing_promo">ניתן להשתמש בתבניות שהוגדרו מראש או להוסיף ניווט מקוון מותאם אישית, נתמכים: OSRM,‏ Graphhopper,‏ openrouteservice,‏ GPX.</string>
     <string name="shared_string_external">חיצוני</string>
     <string name="provided_by">סופק על ידי %1$s</string>
     <string name="failed_loading_predefined_engines">לא ניתן לטעון את התבניות שהוגדרו מראש.
@@ -4258,4 +4258,13 @@
     <string name="use_login_and_password">להשתמש בשם משתמש וססמה</string>
     <string name="available_until">זמין עד %1$s</string>
     <string name="enough_contributions_descr">ברכות, סיפקת מספיק תרומות ל־OpenStreetMap ועכשיו מותר לך ליהנות מכמות בלתי מוגבלת של עדכוני מפות מ־OsmAnd!</string>
+    <string name="online_maps_required_descr">לרוע המזל, OsmAnd לא הצליח למצוא מסלול להגדרות שלך.
+\n
+\nאולי חלק מהמפות לא נטענו, ניתן להריץ בדיקה מקוונת של המפות הנחוצות.</string>
+    <string name="not_enough_contributions_descr">נדרשות לפחות %1$s תרומות ל־OpenStreetMap תוך %2$s ימים.</string>
+    <string name="grey_color_undefined">הצבע האפור משמש לחלקים ללא נתונים.</string>
+    <string name="cancel_anytime_in_amazon_app">ניתן לבטל בכל עת דרך יישומון Amazon</string>
+    <string name="amz_manage_subscription_descr">כדי לנהל את המינויים שלך עלי להשתמש ביישומון של Amazon במכשיר או לפתוח את האתר Amazon.com תחת הפרופיל שלך.</string>
+    <string name="empty_category_name">שם הקטגוריה ריק</string>
+    <string name="no_activity_for_intent">לא נמצאו יישומים מתאימים לביצוע הפעולה הזאת</string>
 </resources>

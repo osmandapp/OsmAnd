@@ -1,5 +1,9 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.AndroidUtils.dpToPx;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_TRACK;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -31,6 +35,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -56,10 +61,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import static net.osmand.AndroidUtils.dpToPx;
-import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
-import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_TRACK;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener {
@@ -265,7 +266,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				}
 			}
 		}
-		mapTextLayer.putData(this, objects);
+		mapTextLayer.putData(this, fullObjects);
 	}
 
 	@Override
@@ -290,7 +291,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		textView.setLayoutParams(llTextParams);
 		textView.setPadding(textMargin, textMargin, textMargin, textMargin);
 		textView.setTextSize(16);
-		textView.setTextColor(ContextCompat.getColor(app, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setAutoLinkMask(Linkify.ALL);
 		textView.setLinksClickable(true);
 		textView.setText(text);
@@ -309,7 +310,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		webView.setBackgroundColor(Color.TRANSPARENT);
 		webView.getSettings().setTextZoom((int) (app.getResources().getConfiguration().fontScale * 100f));
 		boolean light = app.getSettings().isLightContent();
-		int textColor = ContextCompat.getColor(app, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
+		int textColor = ColorUtilities.getPrimaryTextColor(app, !light);
 		String rgbHex = Algorithms.colorToString(textColor);
 		html = "<body style=\"color:" + rgbHex + ";\">" + html + "</body>";
 		String encoded = Base64.encodeToString(html.getBytes(), Base64.NO_PADDING);

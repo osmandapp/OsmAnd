@@ -4049,7 +4049,7 @@
     <string name="verify_email_address_descr">Bekreftelseskode sendt til %1$s. Skriv den inn i feltet nedenfor.</string>
     <string name="delete_version_history">Slett versjonshistorikk</string>
     <string name="nautical_depth">Havdybde</string>
-    <string name="osmand_online_routing_promo">Du kan bruke forhåndsdefinerte maler, eller legge til egendefinert nettbasert ruteberegning. OSRM, GrapHopper, OpenRouteService og GPX støttes.</string>
+    <string name="osmand_online_routing_promo">Du kan bruke forhåndsdefinerte maler, eller legge til egendefinert nettbasert ruteberegning. OSRM, GrapHopper, openrouteservice og GPX støttes.</string>
     <string name="loading_list_of_routing_services">Laster inn liste over tilgjengelige ruteberegningstjenester</string>
     <string name="send_logcat_log">Send Logcat-logg</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
@@ -4231,4 +4231,15 @@
     <string name="purchases_feature_desc_wikipedia">Utforsk Wikipedia frakoblet. Artikler inndelt etter land og regioner og tilgjengelig på alle språk.</string>
     <string name="walking_route_osmc_description">Fargelegg ruter i henhold til deres individuelle lokale farge (hvis den forefinnes i OpenStreetMap) og type (internasjonal, regional, lokal).</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Fargelegg ruter i henhold til deres nodenettverkstype (internasjonal, regional, lokal).</string>
+    <string name="trip_recording_show_start_dialog_setting">Hvis avskudd vil opptak starte umiddelbart etter å ha trykket på miniprogram eller menyelement, noe som hopper over bekreftelsesdialogen.</string>
+    <string name="grey_color_undefined">Grå farge brukes for områder uten data.</string>
+    <string name="osm_live_payment_subscription_management_amz">Betaling belastes din Amazon-konto ved bekreftelse av kjøp.
+\n
+\nDet fornyer seg med mindre det avbrytes før valgt fornyelsesperiode.
+\n
+\nHåndter eller avbryt abonnementene dine fra Amazon-innstillingene når som helst.</string>
+    <string name="cancel_anytime_in_amazon_app">Avbryt det når som helst i Amazon-programmet</string>
+    <string name="amz_manage_subscription_descr">Bruk Amazon-programmet for å håndtere abonnementet ditt på enheten, eller i profilen din på Amazon-com-nettsiden.</string>
+    <string name="empty_category_name">Tomt kateogrinavn</string>
+    <string name="no_activity_for_intent">Ingen programmer kunne utføre handlingen</string>
 </resources>

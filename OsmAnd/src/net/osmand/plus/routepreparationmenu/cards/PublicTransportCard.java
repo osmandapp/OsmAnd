@@ -20,9 +20,9 @@ import androidx.core.content.ContextCompat;
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -387,11 +387,11 @@ public class PublicTransportCard extends MapBaseCard {
 		ImageView transportStopRouteImageView = (ImageView) bageView.findViewById(R.id.transport_stop_route_icon);
 
 		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
-		transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, UiUtilities.getContrastColor(app, bgColor, true)));
+		transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, ColorUtilities.getContrastColor(app, bgColor, true)));
 		transportStopRouteTextView.setText(routeRef);
 		GradientDrawable gradientDrawableBg = (GradientDrawable) bageView.getBackground();
 		gradientDrawableBg.setColor(bgColor);
-		transportStopRouteTextView.setTextColor(UiUtilities.getContrastColor(app, bgColor, true));
+		transportStopRouteTextView.setTextColor(ColorUtilities.getContrastColor(app, bgColor, true));
 
 		if (transportCardListener != null && !badgesRowClickable) {
 			bageView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {

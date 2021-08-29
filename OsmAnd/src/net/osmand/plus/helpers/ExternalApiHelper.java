@@ -993,7 +993,7 @@ public class ExternalApiHelper {
 			}
 
 			if (intent != null) {
-				mapActivity.startActivity(intent);
+				AndroidUtils.startActivityIfSafe(mapActivity, intent);
 			}
 
 		} catch (Exception e) {

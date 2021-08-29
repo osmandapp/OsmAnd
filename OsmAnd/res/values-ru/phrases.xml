@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_bakery">Булочная</string>
     <string name="poi_alcohol">Винно-водочный магазин;Алкоголь</string>
@@ -80,7 +80,6 @@
     <string name="poi_ship_chandler">Яхты, запчасти, оснастка</string>
     <string name="poi_sports">Спорттовары;Товары для спорта;Спортивные товары</string>
     <string name="poi_stationery">Канцелярские принадлежности, канцтовары</string>
-    
     <string name="poi_ticket">Продажа билетов</string>
     <string name="poi_tobacco">Табак;Сигареты</string>
     <string name="poi_toys">Игрушки;Детские игрушки</string>
@@ -99,7 +98,6 @@
     <string name="poi_sewing">Шитьё и рукоделие</string>
     <string name="poi_perfumery">Парфюмерия</string>
     <string name="poi_energy">Элементы питания;Батарейки</string>
-    
     <string name="poi_free_flying">Товары для свободного полёта</string>
     <string name="poi_games">Магазин игр;Игры</string>
     <string name="poi_garden_furniture">Садовая мебель, аксессуары</string>
@@ -319,7 +317,6 @@
     <string name="poi_pension_fund">Пенсионный фонд</string>
     <string name="poi_migration">Миграционная служба</string>
     <string name="poi_tax_inspection">Налоговая инспекция</string>
-    
     <string name="poi_customs">Таможенный пункт;Таможня</string>
     <string name="poi_pharmacy">Аптека</string>
     <string name="poi_hospital">Больница</string>
@@ -1059,7 +1056,6 @@
     <string name="poi_brownfield">Земли под застройку (использованные ранее)</string>
     <string name="poi_greenfield">Земли под застройку</string>
     <string name="poi_bunker_silo">Сооружение для хранения силоса</string>
-    
     <string name="poi_crane">Кран</string>
     <string name="poi_cutline">Просека</string>
     <string name="poi_forest">Лес (обслуживаемый)</string>
@@ -1355,10 +1351,10 @@
     <string name="poi_diet_lactose_free_yes">Безлактозное питание</string>
     <string name="poi_diet_lactose_free_no">Безлактозные продукты не предлагаются</string>
     <string name="poi_diet_pescetarian_yes">Пескетарианское питание</string>
-    <string name="poi_drive_in">Обслуживание клиентов, сидящих в автомобиле</string>
+    <string name="poi_drive_in">Обслуживание на парковке (Drive-in)</string>
     <string name="poi_drive_in_yes">Да</string>
     <string name="poi_drive_in_no">Приобрести продукты не покидая авто на парковке (drive-in): нет</string>
-    <string name="poi_drive_through">Обслуживание клиентов, сидящих в автомобиле</string>
+    <string name="poi_drive_through">Обслуживание проездом (Drive-through)</string>
     <string name="poi_drive_through_yes">Да</string>
     <string name="poi_drive_through_no">Приобрести продукты не покидая авто в окошке (drive-through): нет</string>
     <string name="poi_brewery_additional">Название пивоварни</string>
@@ -1366,7 +1362,7 @@
     <string name="poi_microbrewery_yes">Есть</string>
     <string name="poi_microbrewery_no">Нет собственной пивоварни</string>
     <string name="poi_takeaway_filter_yes">Да</string>
-    <string name="poi_takeaway">На вынос</string>
+    <string name="poi_takeaway">Навынос</string>
     <string name="poi_takeaway_yes">На вынос</string>
     <string name="poi_takeaway_no">На вынос: нет</string>
     <string name="poi_takeaway_only">Только на вынос</string>
@@ -2009,7 +2005,7 @@
     <string name="poi_refugee_yes">Удобства, предназначенные для беженцев</string>
     <string name="poi_refugee_no">Беженцы: нет</string>
     <string name="poi_social_facility_type">Тип</string>
-    <string name="poi_social_facility_for">Целевая социальная группа</string>
+    <string name="poi_social_facility_for">Целевая аудитория</string>
     <string name="poi_social_facility_group_home">Групповое проживание</string>
     <string name="poi_social_facility_assisted_living">Дом престарелых</string>
     <string name="poi_social_facility_outreach">Социальные услуги без проживания</string>
@@ -2779,7 +2775,6 @@
     <string name="poi_aquaculture_shrimp">Разведение креветок</string>
     <string name="poi_aquaculture_fish">Разведение рыбы</string>
     <string name="poi_aquaculture_mussels">Разведение моллюсков</string>
-    
     <string name="poi_min_age">Минимальный возраст</string>
     <string name="poi_organic_yes">Есть</string>
     <string name="poi_organic_no">Отсутствуют</string>
@@ -3490,7 +3485,7 @@
     <string name="poi_access_bus">Доступ для автобусов</string>
     <string name="poi_access_caravan">Доступ для автодомов (караванов)</string>
     <string name="poi_access_disabled">Доступ для людей с ограниченными возможностями</string>
-    <string name="poi_cash_withdrawal_bank_card">Снятие наличности</string>
+    <string name="poi_cash_withdrawal_bank_card">Снятие наличных</string>
     <string name="poi_fire_hydrant_position_green">Трава</string>
     <string name="poi_fire_hydrant_position_lane">Полоса движения</string>
     <string name="poi_fire_hydrant_style_wsh">Дизайн гидранта: wsh</string>
@@ -3515,7 +3510,7 @@
     <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
     <string name="poi_socket_chademo_output_filter">Выход: CHAdeMO</string>
     <string name="poi_socket_type2_output_filter">Выход: Тип 2</string>
-    <string name="poi_socket_type2_combo_output_filter">Выход: Тип 2 combo</string>
+    <string name="poi_socket_type2_combo_output_filter">Выход: Тип 2 комбо</string>
     <string name="poi_socket_type3_output_filter">Выход: Тип 3</string>
     <string name="poi_socket_cee_blue_output_filter">Выход: CEE синий</string>
     <string name="poi_socket_schuko_output_filter">Выход: Schuko</string>
@@ -3563,7 +3558,7 @@
     <string name="poi_vehicle_military">Доступ для транспортных средств: военные</string>
     <string name="poi_vehicle_delivery">Доступ для транспортных средств: курьеры/доставка</string>
     <string name="poi_vehicle_forestry">Доступ для транспортных средств: лесное хозяйство</string>
-    <string name="poi_motorcar_yes">Доступ для автомобилей: да</string>
+    <string name="poi_motorcar_yes">Да</string>
     <string name="poi_motorcar_private">Доступ для автомобилей: частный</string>
     <string name="poi_motorcar_no">Доступ для автомобилей: нет</string>
     <string name="poi_motorcar_destination">Доступ для автомобилей: пункт назначения</string>
@@ -3689,13 +3684,13 @@
     <string name="poi_goods_yes">Да</string>
     <string name="poi_hgv_delivery">Доставка</string>
     <string name="poi_hgv_designated">Выделенный</string>
-    <string name="poi_hgv_destination">Выделенный</string>
+    <string name="poi_hgv_destination">Пункт назначения</string>
     <string name="poi_hgv_yes">Да</string>
     <string name="poi_mofa_designated">Выделенный</string>
     <string name="poi_mofa_yes">Да</string>
     <string name="poi_moped_designated">Выделенный</string>
     <string name="poi_motorcycle_designated">Выделенный</string>
-    <string name="poi_motorcycle_destination">Выделенный</string>
+    <string name="poi_motorcycle_destination">Пункт назначения</string>
     <string name="poi_motorcycle_yes">Да</string>
     <string name="poi_trailer_designated">Выделенный</string>
     <string name="poi_motorhome_designated">Выделенный</string>
@@ -3939,4 +3934,60 @@
     <string name="poi_contact_linkedin">LinkedIn</string>
     <string name="poi_contact_vhf">VHF</string>
     <string name="poi_contact_xing">Xing</string>
+    <string name="poi_shelter_yes">Да</string>
+    <string name="poi_direction_southwest">Юго-западное направление</string>
+    <string name="poi_direction_southeast">Юго-восточное направление</string>
+    <string name="poi_direction_northwest">Северо-западное направление</string>
+    <string name="poi_direction_northeast">Северо-восточное направление</string>
+    <string name="poi_direction_west">Западное направление</string>
+    <string name="poi_direction_south">Южное направление</string>
+    <string name="poi_direction_east">Восточное направление</string>
+    <string name="poi_destination">Пункт назначения</string>
+    <string name="poi_permanent_camping_no">Нет</string>
+    <string name="poi_permanent_camping_yes">Да</string>
+    <string name="poi_authentication_none_yes">Да</string>
+    <string name="poi_authentication_short_message_yes">Да</string>
+    <string name="poi_authentication_phone_call_yes">Да</string>
+    <string name="poi_authentication_app_yes">Да</string>
+    <string name="poi_authentication_key_yes">Да</string>
+    <string name="poi_authentication_chip_card_yes">Да</string>
+    <string name="poi_authentication_contactless_yes">Да</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_outdoor_seating_poi">Места на открытом воздухе</string>
+    <string name="poi_contact_webcam">Веб-камера</string>
+    <string name="poi_picnic_table_no">Стол для пикника: нет</string>
+    <string name="poi_picnic_table_yes">Стол для пикника: да</string>
+    <string name="poi_ultralight_aviation">Сверхлёгкая авиация</string>
+    <string name="poi_windsock">Ветроуказатель</string>
+    <string name="poi_telecom_exchange">Автоматическая телефонная станция</string>
+    <string name="poi_permanent_camping">Постоянный кемпинг</string>
+    <string name="poi_access_scooter">Доступ для скутеров</string>
+    <string name="poi_access_bicycle">Доступ для велосипедов</string>
+    <string name="poi_access_motorcar">Доступ для автомобилей</string>
+    <string name="poi_authentication_none">Авторизация не требуется</string>
+    <string name="poi_authentication_short_message">Авторизация с помощью короткого сообщения</string>
+    <string name="poi_authentication_phone_call">Авторизация по телефонному звонку</string>
+    <string name="poi_authentication_app">Авторизация через приложение</string>
+    <string name="poi_authentication_key">Авторизация по ключу</string>
+    <string name="poi_authentication_chip_card">Авторизация по чип-карте</string>
+    <string name="poi_authentication_contactless">Бесконтактная авторизация</string>
+    <string name="poi_summit_register_no">Книга саммита: нет</string>
+    <string name="poi_summit_register_yes">Книга саммита: да</string>
+    <string name="poi_lounger">Шезлонг;Лежак</string>
+    <string name="poi_refugee_site">Лагерь беженцев</string>
+    <string name="poi_trolley_bay">Парковка тележек</string>
+    <string name="poi_glacier_debris_cover_scarce">Мусорный покров: незначительный</string>
+    <string name="poi_glacier_debris_cover_partial">Мусорный покров: частичный</string>
+    <string name="poi_glacier_debris_cover_none">Мусорный покров: отсутствует</string>
+    <string name="poi_authentication_none_no">Авторизация не требуется: нет</string>
+    <string name="poi_authentication_short_message_text">Текст короткого сообщения, используемый для авторизации</string>
+    <string name="poi_authentication_short_message_no">Авторизация с помощью короткого сообщения: нет</string>
+    <string name="poi_authentication_phone_call_no">Авторизация по телефонному звонку: нет</string>
+    <string name="poi_authentication_app_no">Авторизация через приложение: нет</string>
+    <string name="poi_authentication_key_no">Авторизация по ключу: нет</string>
+    <string name="poi_authentication_chip_card_no">Авторизация по чип-карте: нет</string>
+    <string name="poi_authentication_contactless_no">Бесконтактная авторизация: нет</string>
+    <string name="poi_share_taxi_yes">Маршрутное такси: да</string>
+    <string name="poi_power_portal">Портальная опора ВЛ</string>
+    <string name="poi_arch">Арка</string>
 </resources>

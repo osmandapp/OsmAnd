@@ -124,13 +124,15 @@ public class GpxNotification extends OsmandNotification {
 		if (isGpxRecording) {
 			color = app.getResources().getColor(R.color.osmand_orange);
 			notificationTitle = app.getString(R.string.shared_string_trip) + " • "
-					+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true);
+					+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true) + " • "
+					+ OsmAndFormatter.getFormattedDistance(recordedDistance, app);
 			notificationText = app.getString(R.string.shared_string_recorded)
 					+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistance, app);
 		} else {
 			if (app.getSavingTrackHelper().getTrkPoints() > 0) {
 				notificationTitle = app.getString(R.string.shared_string_paused) + " • "
-						+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true);
+						+ Algorithms.formatDuration((int) (app.getSavingTrackHelper().getDuration() / 1000), true) + " • "
+						+ OsmAndFormatter.getFormattedDistance(recordedDistance, app);
 				notificationText = app.getString(R.string.shared_string_recorded)
 						+ ": " + OsmAndFormatter.getFormattedDistance(recordedDistance, app);
 			} else {

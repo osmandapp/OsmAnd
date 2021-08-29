@@ -3,23 +3,20 @@ package net.osmand.plus.views.layers.geometry;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-
-import net.osmand.AndroidUtils;
-import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.util.Algorithms;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import net.osmand.AndroidUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MultiProfileGeometryWayContext extends GeometryWayContext {
 

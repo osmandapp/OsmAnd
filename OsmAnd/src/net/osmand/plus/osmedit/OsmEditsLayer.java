@@ -15,6 +15,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.osm.PoiType;
 import net.osmand.osm.edit.Entity;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
@@ -22,6 +23,8 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.layers.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapTextLayer;
+import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,18 +33,21 @@ import java.util.Map;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
-		ContextMenuLayer.IMoveObjectProvider {
+		ContextMenuLayer.IMoveObjectProvider, MapTextProvider<OpenstreetmapPoint> {
 	private static final int startZoom = 10;
+	private final OsmandApplication app;
 	private final OsmEditingPlugin plugin;
 	private final MapActivity activity;
 	private final OpenstreetmapLocalUtil mOsmChangeUtil;
 	private final OsmBugsLocalUtil mOsmBugsUtil;
 
 	private ContextMenuLayer contextMenuLayer;
+	private MapTextLayer mapTextLayer;
 
 	public OsmEditsLayer(MapActivity activity, OsmEditingPlugin plugin) {
 		this.activity = activity;
 		this.plugin = plugin;
+		app = activity.getMyApplication();
 		mOsmChangeUtil = plugin.getPoiModificationLocalUtil();
 		mOsmBugsUtil = plugin.getOsmNotesLocalUtil();
 	}
@@ -49,6 +55,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
+		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
 
 	@Override
@@ -64,22 +71,38 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
 			List<LatLon> fullObjectsLatLon = new ArrayList<>();
-			drawPoints(canvas, tileBox, plugin.getDBBug().getOsmbugsPoints(), fullObjectsLatLon);
-			drawPoints(canvas, tileBox, plugin.getDBPOI().getOpenstreetmapPoints(), fullObjectsLatLon);
+			drawOsmbugsPoints(canvas, tileBox, fullObjectsLatLon);
+			drawOpenstreetmapPoints(canvas, tileBox, fullObjectsLatLon);
 			this.fullObjectsLatLon = fullObjectsLatLon;
 		}
 	}
 
-	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, List<? extends OsmPoint> objects,
-							List<LatLon> fullObjectsLatLon) {
+	private void drawOsmbugsPoints(Canvas canvas, RotatedTileBox tileBox, List<LatLon> fullObjectsLatLon) {
+		drawPoints(canvas, tileBox, plugin.getDBBug().getOsmbugsPoints(), fullObjectsLatLon);
+	}
+
+	private void drawOpenstreetmapPoints(Canvas canvas, RotatedTileBox tileBox, List<LatLon> fullObjectsLatLon) {
+		List<OpenstreetmapPoint> objects = plugin.getDBPOI().getOpenstreetmapPoints();
+		List<OsmPoint> result = drawPoints(canvas, tileBox, objects, fullObjectsLatLon);
+		mapTextLayer.putData(this, result);
+	}
+
+	private List<OsmPoint> drawPoints(Canvas canvas, RotatedTileBox tileBox,
+	                                  List<? extends OsmPoint> objects, List<LatLon> fullObjectsLatLon) {
+		float iconSize = getIconSize(app);
+		List<OsmPoint> fullObjects = new ArrayList<>();
 		for (OsmPoint o : objects) {
 			if (contextMenuLayer.getMoveableObject() != o) {
 				float x = tileBox.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
 				float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
-				drawPoint(canvas, o, x, y);
-				fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+				if (tileBox.containsPoint(x, y, iconSize)) {
+					drawPoint(canvas, o, x, y);
+					fullObjects.add(o);
+					fullObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
+				}
 			}
 		}
+		return fullObjects;
 	}
 
 	private void drawPoint(Canvas canvas, OsmPoint osmPoint, float x, float y) {
@@ -148,7 +171,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	private int getFromPoint(RotatedTileBox tileBox, List<? super OsmPoint> am, int ex, int ey, int compare,
-							 int radius, List<? extends OsmPoint> pnts) {
+	                         int radius, List<? extends OsmPoint> pnts) {
 		for (OsmPoint n : pnts) {
 			int x = (int) tileBox.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 			int y = (int) tileBox.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
@@ -257,6 +280,31 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 	}
 
+	@Override
+	public LatLon getTextLocation(OpenstreetmapPoint o) {
+		return o.getLocation();
+	}
+
+	@Override
+	public int getTextShift(OpenstreetmapPoint o, RotatedTileBox rb) {
+		return (int) (16 * rb.getDensity());
+	}
+
+	@Override
+	public String getText(OpenstreetmapPoint o) {
+		return o.getName();
+	}
+
+	@Override
+	public boolean isTextVisible() {
+		return app.getSettings().SHOW_POI_LABEL.get();
+	}
+
+	@Override
+	public boolean isFakeBoldText() {
+		return false;
+	}
+
 	static class SaveOsmChangeAsyncTask extends AsyncTask<Void, Void, Entity> {
 		private final OpenstreetmapLocalUtil mOpenstreetmapUtil;
 		@Nullable
@@ -264,7 +312,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		private final OpenstreetmapPoint objectInMotion;
 
 		SaveOsmChangeAsyncTask(OpenstreetmapLocalUtil openstreetmapUtil,
-							   @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback, OpenstreetmapPoint objectInMotion) {
+		                       @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback, OpenstreetmapPoint objectInMotion) {
 			this.mOpenstreetmapUtil = openstreetmapUtil;
 			this.mCallback = callback;
 			this.objectInMotion = objectInMotion;
@@ -294,9 +342,9 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		private OsmBugsUtil mOsmbugsUtil;
 
 		public SaveOsmNoteAsyncTask(String text,
-									MapActivity activity,
-									@Nullable ContextMenuLayer.ApplyMovedObjectCallback callback,
-									OsmEditingPlugin plugin, OsmBugsUtil osmbugsUtil) {
+		                            MapActivity activity,
+		                            @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback,
+		                            OsmEditingPlugin plugin, OsmBugsUtil osmbugsUtil) {
 			mText = text;
 			mActivity = activity;
 			mCallback = callback;

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -244,11 +246,13 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 	public static void showFullArticle(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
 		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-				.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light))
+				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
 				.build();
 		customTabsIntent.intent.setData(uri);
 		if (AndroidUtils.isIntentSafe(context, customTabsIntent.intent)) {
 			customTabsIntent.launchUrl(context, uri);
+		} else {
+			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 		}
 	}
 

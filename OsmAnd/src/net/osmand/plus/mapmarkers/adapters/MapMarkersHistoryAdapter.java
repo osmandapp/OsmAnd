@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -136,7 +137,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			final MapMarker marker = (MapMarker) getItem(position);
 			itemViewHolder.iconReorder.setVisibility(View.GONE);
 
-			int color = night ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+			int color = ColorUtilities.getDefaultIconColorId(night);
 			int actionIconColor = night ? R.color.icon_color_primary_dark : R.color.icon_color_primary_light;
 			itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag, color));
 

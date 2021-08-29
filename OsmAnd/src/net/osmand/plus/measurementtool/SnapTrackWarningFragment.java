@@ -1,5 +1,13 @@
 package net.osmand.plus.measurementtool;
 
+import static android.view.Gravity.TOP;
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.plus.UiUtilities.DialogButtonType.PRIMARY;
+import static net.osmand.plus.UiUtilities.DialogButtonType.SECONDARY;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -30,14 +38,6 @@ import net.osmand.plus.views.layers.MapControlsLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 
 import org.apache.commons.logging.Log;
-
-import static android.view.Gravity.TOP;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
-import static net.osmand.plus.UiUtilities.DialogButtonType.PRIMARY;
-import static net.osmand.plus.UiUtilities.DialogButtonType.SECONDARY;
 
 public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 
@@ -175,18 +175,14 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	public static void showInstance(FragmentManager fm, Fragment targetFragment) {
-		try {
-			if (!fm.isStateSaved()) {
-				SnapTrackWarningFragment fragment = new SnapTrackWarningFragment();
-				fragment.setTargetFragment(targetFragment, REQUEST_CODE);
-				fm.beginTransaction()
-						.replace(R.id.fragmentContainer, fragment, TAG)
-						.addToBackStack(TAG)
-						.commitAllowingStateLoss();
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment targetFragment) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SnapTrackWarningFragment fragment = new SnapTrackWarningFragment();
+			fragment.setTargetFragment(targetFragment, REQUEST_CODE);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 

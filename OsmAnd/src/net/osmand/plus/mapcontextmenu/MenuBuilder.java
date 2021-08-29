@@ -1,8 +1,9 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+
 import android.content.ClipData;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -26,6 +27,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -34,6 +42,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -56,7 +65,6 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.openplacereviews.AddPhotosBottomSheetDialogFragment;
 import net.osmand.plus.openplacereviews.OPRConstants;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
@@ -87,15 +95,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 public class MenuBuilder {
 
@@ -477,44 +476,31 @@ public class MenuBuilder {
 				ctx.getString(R.string.shared_string_add_photo), R.drawable.ic_sample);
 		TextView textView = view.findViewById(R.id.button_text);
 		textView.setCompoundDrawablePadding(dp6);
-		button.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (false) {
-					AddPhotosBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
-				} else {
-					registerResultListener();
-					final String baseUrl = OPRConstants.getBaseUrl(app);
-					final String name = app.getSettings().OPR_USERNAME.get();
-					final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
-					if (Algorithms.isBlank(privateKey) || Algorithms.isBlank(name)) {
-						OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
-						return;
-					}
-					new Thread(new Runnable() {
-						@Override
-						public void run() {
-							if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
-								app.runInUIThread(new Runnable() {
-									@Override
-									public void run() {
-										Intent intent = new Intent();
-										intent.setType("image/*");
-										intent.setAction(Intent.ACTION_GET_CONTENT);
-										if (Build.VERSION.SDK_INT > 18) {
-											intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-										}
-										mapActivity.startActivityForResult(Intent.createChooser(intent,
-												mapActivity.getString(R.string.select_picture)), PICK_IMAGE);
-									}
-								});
-							} else {
-								OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
-							}
-						}
-					}).start();
-				}
+		button.setOnClickListener(v -> {
+			registerResultListener();
+			final String baseUrl = OPRConstants.getBaseUrl(app);
+			final String name = app.getSettings().OPR_USERNAME.get();
+			final String privateKey = app.getSettings().OPR_ACCESS_TOKEN.get();
+			if (Algorithms.isBlank(privateKey) || Algorithms.isBlank(name)) {
+				OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+				return;
 			}
+			new Thread(() -> {
+				if (openDBAPI.checkPrivateKeyValid(app, baseUrl, name, privateKey)) {
+					app.runInUIThread(() -> {
+						Intent intent = new Intent()
+								.setAction(Intent.ACTION_GET_CONTENT)
+								.setType("image/*");
+						if (Build.VERSION.SDK_INT > 18) {
+							intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+						}
+						Intent chooserIntent = Intent.createChooser(intent, mapActivity.getString(R.string.select_picture));
+						AndroidUtils.startActivityForResultIfSafe(mapActivity, chooserIntent, PICK_IMAGE);
+					});
+				} else {
+					OprStartFragment.showInstance(mapActivity.getSupportFragmentManager());
+				}
+			}).start();
 		});
 		AndroidUiHelper.updateVisibility(view, false);
 		photoButton = view;
@@ -715,7 +701,7 @@ public class MenuBuilder {
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 			textPrefixView.setTextSize(12);
-			textPrefixView.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark));
+			textPrefixView.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
 			textPrefixView.setMinLines(1);
 			textPrefixView.setMaxLines(1);
 			textPrefixView.setText(textPrefix);
@@ -730,7 +716,7 @@ public class MenuBuilder {
 		textView.setLayoutParams(llTextParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(text);
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
@@ -761,7 +747,7 @@ public class MenuBuilder {
 			textViewSecondary.setLayoutParams(llTextSecondaryParams);
 			textViewSecondary.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 			textViewSecondary.setTextSize(14);
-			textViewSecondary.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark));
+			textViewSecondary.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
 			textViewSecondary.setText(secondaryText);
 			llText.addView(textViewSecondary);
 		}
@@ -824,13 +810,10 @@ public class MenuBuilder {
 		if (onClickListener != null) {
 			ll.setOnClickListener(onClickListener);
 		} else if (isUrl) {
-			ll.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse(text));
-					v.getContext().startActivity(intent);
-				}
+			ll.setOnClickListener(v -> {
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse(text));
+				AndroidUtils.startActivityIfSafe(v.getContext(), intent);
 			});
 		} else if (isNumber) {
 			ll.setOnClickListener(new View.OnClickListener() {
@@ -840,13 +823,10 @@ public class MenuBuilder {
 				}
 			});
 		} else if (isEmail) {
-			ll.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_SENDTO);
-					intent.setData(Uri.parse("mailto:" + text));
-					v.getContext().startActivity(intent);
-				}
+			ll.setOnClickListener(v -> {
+				Intent intent = new Intent(Intent.ACTION_SENDTO);
+				intent.setData(Uri.parse("mailto:" + text));
+				AndroidUtils.startActivityIfSafe(v.getContext(), intent);
 			});
 		}
 
@@ -914,7 +894,7 @@ public class MenuBuilder {
 		textPrefixView.setLayoutParams(llTextParams);
 		textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textPrefixView.setTextSize(12);
-		textPrefixView.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark));
+		textPrefixView.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
 		textPrefixView.setMinLines(1);
 		textPrefixView.setMaxLines(1);
 		textPrefixView.setText(descriptionLabel);
@@ -927,7 +907,7 @@ public class MenuBuilder {
 		textView.setLayoutParams(llDescriptionParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(WikiArticleHelper.getPartialContent(description));
 
 		if (Linkify.addLinks(textView, Linkify.ALL)) {
@@ -958,25 +938,23 @@ public class MenuBuilder {
 	}
 
 	protected void showDialog(String text, final String actionType, final String dataPrefix, final View v) {
+		final Context context = v.getContext();
 		final String[] items = text.split("[,;]");
 		final Intent intent = new Intent(actionType);
 		if (items.length > 1) {
 			for (int i = 0; i < items.length; i++) {
 				items[i] = items[i].trim();
 			}
-			AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
+			AlertDialog.Builder dlg = new AlertDialog.Builder(context);
 			dlg.setNegativeButton(R.string.shared_string_cancel, null);
-			dlg.setItems(items, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					intent.setData(Uri.parse(dataPrefix + items[which]));
-					v.getContext().startActivity(intent);
-				}
+			dlg.setItems(items, (dialog, which) -> {
+				intent.setData(Uri.parse(dataPrefix + items[which]));
+				AndroidUtils.startActivityIfSafe(context, intent);
 			});
 			dlg.show();
 		} else {
 			intent.setData(Uri.parse(dataPrefix + text));
-			v.getContext().startActivity(intent);
+			AndroidUtils.startActivityIfSafe(context, intent);
 		}
 	}
 
@@ -1167,7 +1145,7 @@ public class MenuBuilder {
 		shape.setCornerRadius(dpToPx(3));
 		int bgColor = route.getColor(app, !light);
 		shape.setColor(bgColor);
-		transportRect.setTextColor(UiUtilities.getContrastColor(app, bgColor, true));
+		transportRect.setTextColor(ColorUtilities.getContrastColor(app, bgColor, true));
 
 		transportRect.setBackgroundDrawable(shape);
 		transportRect.setText(route.route.getAdjustedRouteRef(true));
@@ -1184,7 +1162,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		titleView.setLayoutParams(titleParams);
 		titleView.setTextSize(16);
-		int textColor = app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
+		int textColor = ColorUtilities.getPrimaryTextColor(app, !light);
 		titleView.setTextColor(textColor);
 		String desc = route.getDescription(getMapActivity().getMyApplication(), true);
 		Drawable arrow = app.getUIUtilities().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
@@ -1289,7 +1267,7 @@ public class MenuBuilder {
 		textView.setLayoutParams(llTextDescParams);
 		textView.setTypeface(FontCache.getRobotoRegular(context));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(text);
 		return new CollapsableView(textView, this, collapsed);
 	}
@@ -1422,7 +1400,7 @@ public class MenuBuilder {
 					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 			button.setTextColor(buttonColorStateList);
 		} else {
-			button.setTextColor(ContextCompat.getColor(context, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+			button.setTextColor(ColorUtilities.getPrimaryTextColor(context, !light));
 		}
 		button.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 		button.setSingleLine(singleLine);

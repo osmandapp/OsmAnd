@@ -18,6 +18,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -260,7 +261,7 @@ public class TrackWidthCard extends MapBaseCard {
 			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
 				if (getSelectedItem() != null && getSelectedItem().equals(item)) {
-					int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+					int strokeColor = ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode));
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), strokeColor);
 				} else {
 					int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.stroked_buttons_and_links_outline_dark

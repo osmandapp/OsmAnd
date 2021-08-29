@@ -1,7 +1,5 @@
 package net.osmand.plus.chooseplan;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
-
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -26,8 +24,8 @@ import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
@@ -127,20 +125,20 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		float totalScrollRange = appBar.getTotalScrollRange();
 		boolean collapsed = totalScrollRange > 0 && Math.abs(verticalOffset) == totalScrollRange;
 
-		float alpha = UiUtilities.getProportionalAlpha(0, totalScrollRange * 0.75f, absOffset);
-		float inverseAlpha = 1.0f - UiUtilities.getProportionalAlpha(0, totalScrollRange, absOffset);
+		float alpha = ColorUtilities.getProportionalAlpha(0, totalScrollRange * 0.75f, absOffset);
+		float inverseAlpha = 1.0f - ColorUtilities.getProportionalAlpha(0, totalScrollRange, absOffset);
 
 		int defaultLinksColor = ContextCompat.getColor(app, getToolbarLinksColor());
-		int activeLinksColor = ContextCompat.getColor(app, getActiveToolbarLinksColor());
+		int activeLinksColor = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
 		int headerBgColor = ContextCompat.getColor(app, getHeaderBgColorId());
-		int activeColor = ContextCompat.getColor(app, getActiveColorId(nightMode));
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 
 		View header = mainView.findViewById(R.id.header);
 		header.setAlpha(alpha);
 
 		ImageView icBack = mainView.findViewById(R.id.button_back);
 		ImageView icInfo = mainView.findViewById(R.id.button_help);
-		int iconsColor = UiUtilities.getProportionalColorMix(defaultLinksColor, activeLinksColor, 0, totalScrollRange, Math.abs(verticalOffset));
+		int iconsColor = ColorUtilities.getProportionalColorMix(defaultLinksColor, activeLinksColor, 0, totalScrollRange, Math.abs(verticalOffset));
 		icBack.setColorFilter(iconsColor);
 		icInfo.setColorFilter(iconsColor);
 
@@ -149,7 +147,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		tvTitle.setText(getHeader());
 		tvTitle.setAlpha(inverseAlpha);
 
-		int toolbarColor = UiUtilities.getProportionalColorMix(headerBgColor, activeColor, 0, totalScrollRange, Math.abs(verticalOffset));
+		int toolbarColor = ColorUtilities.getProportionalColorMix(headerBgColor, activeColor, 0, totalScrollRange, Math.abs(verticalOffset));
 		appBar.setBackgroundColor(toolbarColor);
 		Dialog dialog = getDialog();
 		if (Build.VERSION.SDK_INT >= 21 && dialog != null && dialog.getWindow() != null) {
@@ -253,13 +251,13 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 
 			ImageView ivCheckmark = itemView.findViewById(R.id.icon);
 
-			int colorNoAlpha = ContextCompat.getColor(app, getActiveColorId(nightMode));
+			int colorNoAlpha = ColorUtilities.getActiveColor(app, nightMode);
 			Drawable normal;
 			if (key.equals(selectedPriceButton)) {
 				ivCheckmark.setImageDrawable(getCheckmark());
 
 				Drawable stroke = getActiveStrokeDrawable();
-				int colorWithAlpha = UiUtilities.getColorWithAlpha(colorNoAlpha, 0.1f);
+				int colorWithAlpha = ColorUtilities.getColorWithAlpha(colorNoAlpha, 0.1f);
 
 				Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(R.drawable.rectangle_rounded, colorWithAlpha);
 				Drawable[] layers = {bgDrawable, stroke};
@@ -290,19 +288,29 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 			}
 		});
 
-		int activeColor = ContextCompat.getColor(app, getActiveColorId(nightMode));
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		Drawable normal = createRoundedDrawable(activeColor, ButtonBackground.ROUNDED_SMALL);
 		setupRoundedBackground(itemView, normal, activeColor, ButtonBackground.ROUNDED_SMALL);
 	}
 
 	private void setupDescription() {
-		String cancelDesc = getString(Version.isHuawei() ?
-				R.string.cancel_anytime_in_huawei_appgallery :
-				R.string.cancel_anytime_in_gplay);
+		String cancelDesc;
+		if (Version.isHuawei()) {
+			cancelDesc = getString(R.string.cancel_anytime_in_huawei_appgallery);
+		} else if (Version.isAmazon()) {
+			cancelDesc = getString(R.string.cancel_anytime_in_amazon_app);
+		} else {
+			cancelDesc = getString(R.string.cancel_anytime_in_gplay);
+		}
 
-		String commonDesc = getString(Version.isHuawei() ?
-				R.string.osm_live_payment_subscription_management_hw :
-				R.string.osm_live_payment_subscription_management);
+		String commonDesc;
+		if (Version.isHuawei()) {
+			commonDesc = getString(R.string.osm_live_payment_subscription_management_hw);
+		} else if (Version.isAmazon()) {
+			commonDesc = getString(R.string.osm_live_payment_subscription_management_amz);
+		} else {
+			commonDesc = getString(R.string.osm_live_payment_subscription_management);
+		}
 
 		((TextView) mainView.findViewById(R.id.cancel_description)).setText(cancelDesc);
 		((TextView) mainView.findViewById(R.id.plan_info_description)).setText(commonDesc);
@@ -353,7 +361,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		int iconBgColor = ContextCompat.getColor(app, feature.isAvailableInMapsPlus() ?
 				R.color.maps_plus_item_bg :
 				R.color.osmand_pro_item_bg);
-		int color = UiUtilities.getColorWithAlpha(iconBgColor, 0.2f);
+		int color = ColorUtilities.getColorWithAlpha(iconBgColor, 0.2f);
 		AndroidUtils.setBackground(itemView.findViewById(R.id.icon_background), createRoundedDrawable(color, ButtonBackground.ROUNDED));
 	}
 
@@ -368,11 +376,6 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	@ColorRes
 	protected int getToolbarLinksColor() {
 		return nightMode ? R.color.purchase_sc_toolbar_active_dark : R.color.purchase_sc_toolbar_active_light;
-	}
-
-	@ColorRes
-	protected int getActiveToolbarLinksColor() {
-		return nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
 	}
 
 	protected int getHeaderBgColorId() {

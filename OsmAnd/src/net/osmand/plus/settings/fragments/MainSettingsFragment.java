@@ -14,10 +14,10 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.backup.ui.BackupAndRestoreFragment;
 import net.osmand.plus.backup.ui.BackupAuthorizationFragment;
@@ -64,7 +64,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	@Override
 	@ColorRes
 	protected int getBackgroundColorRes() {
-		return isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+		return ColorUtilities.getActivityBgColorId(isNightMode());
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 			View selectedProfile = holder.itemView.findViewById(R.id.selectable_list_item);
 			if (selectedProfile != null) {
 				int activeProfileColor = getSelectedAppMode().getProfileColor(isNightMode());
-				Drawable backgroundDrawable = new ColorDrawable(UiUtilities.getColorWithAlpha(activeProfileColor, 0.15f));
+				Drawable backgroundDrawable = new ColorDrawable(ColorUtilities.getColorWithAlpha(activeProfileColor, 0.15f));
 				AndroidUtils.setBackground(selectedProfile, backgroundDrawable);
 			}
 		}
@@ -193,8 +193,7 @@ public class MainSettingsFragment extends BaseSettingsFragment implements OnSele
 	}
 
 	private void profileManagementPref() {
-		int activeColorPrimaryResId = isNightMode() ? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light;
+		int activeColorPrimaryResId = ColorUtilities.getActiveColorId(isNightMode());
 
 		Preference createProfile = findPreference(CREATE_PROFILE);
 		createProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_plus, activeColorPrimaryResId));

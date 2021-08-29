@@ -1,11 +1,16 @@
 package net.osmand.plus.dialogs;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -56,8 +61,9 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 	public void createMenuItems(Bundle savedInstanceState) {
 		items.add(new TitleItem(getString(R.string.import_file)));
 
-		int nameColor = getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-		int descrColor = getResolvedColor(nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		Context ctx = requireContext();
+		int nameColor = ColorUtilities.getActiveColor(ctx, nightMode);
+		int descrColor = ColorUtilities.getSecondaryTextColor(ctx, nightMode);
 		String descr = getString(R.string.import_gpx_file_description);
 		if (!descr.contains("%s")) {
 			descr = "%s " + descr;
@@ -96,5 +102,27 @@ public class ImportGpxBottomSheetDialogFragment extends MenuBottomSheetDialogFra
 				})
 				.create();
 		items.add(asGpxItem);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull ImportHelper importHelper,
+	                                @NonNull GPXFile gpxFile,
+	                                @NonNull String fileName,
+	                                long fileSize,
+	                                boolean save,
+	                                boolean useImportDir) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
+			fragment.setUsedOnMap(true);
+			fragment.setImportHelper(importHelper);
+			fragment.setGpxFile(gpxFile);
+			fragment.setFileName(fileName);
+			fragment.setFileSize(fileSize);
+			fragment.setSave(save);
+			fragment.setUseImportDir(useImportDir);
+			fragmentManager.beginTransaction()
+					.add(fragment, TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

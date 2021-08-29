@@ -1,6 +1,7 @@
 package net.osmand.plus.liveupdates;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -109,12 +110,11 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 			}
 		});
 
-		view.findViewById(R.id.show_all).setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
+		view.findViewById(R.id.show_all).setOnClickListener(v -> {
+			Activity activity = getActivity();
+			if (activity != null) {
 				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(OSM_LIVE_URL));
-				startActivity(intent);
+				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
 		});
 		((TextView) view.findViewById(R.id.osm_live_url_label)).setText(OSM_LIVE_URL);

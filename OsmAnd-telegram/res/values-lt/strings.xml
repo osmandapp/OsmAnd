@@ -51,8 +51,10 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="shared_string_ok">Gerai</string>
     <string name="shared_string_search">Ieškoti</string>
-    <string name="proxy">Tarpinis serveris</string>
+    <string name="proxy">įgaliotasis serveris</string>
     <string name="proxy_port">Prievadas</string>
     <string name="my_location">Mano buvimo vieta</string>
     <string name="timeline">Laiko juosta</string>
+    <string name="unit_of_length_descr">Pakeiskite, kuo matuojamas atstumas.</string>
+    <string name="status_widget_title">OsmAnd seklio būsena</string>
 </resources>

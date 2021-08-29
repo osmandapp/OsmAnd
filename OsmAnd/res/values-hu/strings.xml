@@ -4126,7 +4126,7 @@
     <string name="loading_list_of_routing_services">Elérhető útvonaltervező szolgáltatások listájának betöltése</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Használhat előre meghatározott sablonokat, vagy a következő online útvonaltervezőket: OSRM, Graphhopper, OpenRouteService és GPX.</string>
+    <string name="osmand_online_routing_promo">Használhat előre meghatározott sablonokat, vagy a következő online útvonaltervezőket: OSRM, Graphhopper, openrouteservice és GPX.</string>
     <string name="shared_string_external">Külső</string>
     <string name="failed_loading_predefined_engines">Nem sikerült betölteni az előre meghatározott sablonok listáját.
 \nKérjük, ellenőrizze internetkapcsolatát.</string>
@@ -4298,4 +4298,13 @@
     <string name="available_until">Elérhető eddig: %1$s</string>
     <string name="purchases_restored">Visszaállított vásárlások</string>
     <string name="grey_color_undefined">A szürke szín az adatok nélküli részeket jelzi.</string>
+    <string name="osm_live_payment_subscription_management_amz">A fizetés az Amazon-fiókjáról kerül levonásra a vásárlás megerősítésekor.
+\n
+\nMegújul, kivéve ha a kiválasztott megújítási időszak előtt lemondja.
+\n
+\nElőfizetéseit bármikor kezelheti vagy törölheti az Amazon beállításaiból.</string>
+    <string name="cancel_anytime_in_amazon_app">Bármikor lemondhatja az Amazon alkalmazásban</string>
+    <string name="amz_manage_subscription_descr">Az előfizetés kezeléséhez használja az Amazon alkalmazást a készüléken, vagy nyissa meg az Amazon.com webhelyet a profilja alatt.</string>
+    <string name="empty_category_name"></string>
+    <string name="no_activity_for_intent">Nem találtunk megfelelő alkalmazást a művelet elvégzésére</string>
 </resources>

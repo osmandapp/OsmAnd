@@ -1,5 +1,7 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.OsmandPlugin.PLUGIN_ID_KEY;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,10 +11,12 @@ import android.provider.Settings;
 import android.text.SpannableString;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -24,8 +28,6 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
-
-import static net.osmand.plus.OsmandPlugin.PLUGIN_ID_KEY;
 
 public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -69,7 +71,7 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
 		BaseBottomSheetItem pluginTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(pluginTitleSpan)
-				.setTitleColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
+				.setTitleColorId(ColorUtilities.getActiveColorId(nightMode))
 				.setIcon(getContentIcon(R.drawable.ic_extension_dark))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.create();
@@ -95,10 +97,10 @@ public class PluginDisabledBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = getMyApplication();
-		Intent intent = getPluginSettingsIntent();
-		if (app != null && AndroidUtils.isIntentSafe(app, intent)) {
-			startActivity(intent);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Intent intent = getPluginSettingsIntent();
+			AndroidUtils.startActivityIfSafe(activity, intent);
 		}
 		dismiss();
 	}

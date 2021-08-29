@@ -1,5 +1,9 @@
 package net.osmand.plus.audionotes;
 
+import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,6 +40,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -63,9 +68,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-
-import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
 public class NotesFragment extends OsmAndListFragment implements FavoritesFragmentStateHolder {
 
@@ -103,18 +105,18 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 		setHasOptionsMenu(true);
 
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_av_notes);
 		emptyView = emptyStub.inflate();
-		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-				.isLightContent() ? R.color.activity_background_color_light : R.color.activity_background_color_dark));
+		emptyView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 
 		if (Build.VERSION.SDK_INT >= 18) {
-			int icRes = getMyApplication().getSettings().isLightContent()
-					? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
+			int icRes = !nightMode ? R.drawable.ic_empty_state_av_notes_day : R.drawable.ic_empty_state_av_notes_night;
 			emptyImageView.setImageResource(icRes);
 		} else {
 			emptyImageView.setVisibility(View.INVISIBLE);
@@ -125,8 +127,9 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getListView().setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-				.isLightContent() ? R.color.activity_background_color_light : R.color.activity_background_color_dark));
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		getListView().setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
 	@Override
@@ -478,22 +481,26 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 	}
 
 	private void shareItems(Set<Recording> selected) {
-		ArrayList<Uri> uris = new ArrayList<>();
-		for (Recording rec : selected) {
-			File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
-			if (file != null) {
-				uris.add(AndroidUtils.getUriForFile(getMyApplication(), file));
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			ArrayList<Uri> uris = new ArrayList<>();
+			for (Recording rec : selected) {
+				File file = rec == SHARE_LOCATION_FILE ? generateGPXForRecordings(selected) : rec.getFile();
+				if (file != null) {
+					uris.add(AndroidUtils.getUriForFile(activity, file));
+				}
 			}
-		}
 
-		Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-		intent.setType("*/*");
-		intent.putExtra(Intent.EXTRA_STREAM, uris);
-		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-		if (Build.VERSION.SDK_INT > 18) {
-			intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+			Intent intent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+			intent.setType("*/*");
+			intent.putExtra(Intent.EXTRA_STREAM, uris);
+			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			if (Build.VERSION.SDK_INT > 18) {
+				intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+			}
+			Intent chooserIntent = Intent.createChooser(intent, getString(R.string.share_note));
+			AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
 		}
-		startActivity(Intent.createChooser(intent, getString(R.string.share_note)));
 	}
 
 	private Set<Recording> getRecordingsForGpx(Set<Recording> selected) {
@@ -561,10 +568,11 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 		if (!recording.getFile().exists()) {
 			return;
 		}
-		MediaScannerConnection.scanFile(getActivity(), new String[]{recording.getFile().getAbsolutePath()},
-				null, new MediaScannerConnection.OnScanCompletedListener() {
-					public void onScanCompleted(String path, Uri uri) {
-						Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+		MediaScannerConnection.scanFile(getActivity(), new String[] {recording.getFile().getAbsolutePath()},
+				null, (path, uri) -> {
+					Activity activity = getActivity();
+					if (activity != null) {
+						Intent shareIntent = new Intent(Intent.ACTION_SEND);
 						if (recording.isPhoto()) {
 							shareIntent.setType("image/*");
 						} else if (recording.isAudio()) {
@@ -574,7 +582,8 @@ public class NotesFragment extends OsmAndListFragment implements FavoritesFragme
 						}
 						shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
 						shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-						startActivity(Intent.createChooser(shareIntent, getString(R.string.share_note)));
+						Intent chooserIntent = Intent.createChooser(shareIntent, getString(R.string.share_note));
+						AndroidUtils.startActivityIfSafe(activity, shareIntent, chooserIntent);
 					}
 				});
 	}

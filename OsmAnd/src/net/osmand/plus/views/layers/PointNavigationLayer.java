@@ -6,12 +6,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.Paint.Style;
 import android.graphics.PointF;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -30,13 +28,9 @@ import java.util.List;
 public class PointNavigationLayer extends OsmandMapLayer implements
 		IContextMenuProvider, IMoveObjectProvider {
 
-	protected final static int DIST_TO_SHOW = 80;
-
-	private Paint mPoint;
 	private Paint mBitmapPaint;
 
 	private OsmandMapTileView mView;
-	private float[] mCalculations = new float[2];
 
 	private Bitmap mStartPoint;
 	private Bitmap mTargetPoint;
@@ -53,17 +47,13 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	}
 
 	private void initUI() {
-		mPoint = new Paint();
-		mPoint.setColor(ContextCompat.getColor(map, R.color.nav_point));
-		mPoint.setAntiAlias(true);
-		mPoint.setStyle(Style.FILL);
-
 		mBitmapPaint = new Paint();
 		mBitmapPaint.setDither(true);
 		mBitmapPaint.setAntiAlias(true);
 		mBitmapPaint.setFilterBitmap(true);
-		mTextPaint = new Paint();
+
 		float sp = Resources.getSystem().getDisplayMetrics().scaledDensity;
+		mTextPaint = new Paint();
 		mTextPaint.setTextSize(sp * 18);
 		mTextPaint.setTextAlign(Align.CENTER);
 		mTextPaint.setAntiAlias(true);

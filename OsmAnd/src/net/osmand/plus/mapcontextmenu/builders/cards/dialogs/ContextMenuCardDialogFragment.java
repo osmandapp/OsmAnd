@@ -123,11 +123,15 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 	}
 
 	public static void showInstance(@NonNull ContextMenuCardDialog menu) {
-		ContextMenuCardDialogFragment fragment = new ContextMenuCardDialogFragment();
-		fragment.dialog = menu;
-		menu.getMapActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.topFragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commitAllowingStateLoss();
+		FragmentManager fragmentManager = menu.getMapActivity().getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ContextMenuCardDialogFragment fragment = new ContextMenuCardDialogFragment();
+			fragment.dialog = menu;
+			fragmentManager.beginTransaction()
+					.replace(R.id.topFragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	public void dismiss() {

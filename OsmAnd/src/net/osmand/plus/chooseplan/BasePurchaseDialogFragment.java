@@ -1,7 +1,5 @@
 package net.osmand.plus.chooseplan;
 
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
@@ -28,6 +26,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -70,7 +69,7 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 
 	@ColorRes
 	protected int getStatusBarColorId() {
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 
 	@Override
@@ -231,17 +230,18 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	}
 
 	protected void setupRoundedBackground(@NonNull View view, ButtonBackground background) {
-		setupRoundedBackground(view, ContextCompat.getColor(app, getActiveColorId(nightMode)), background);
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
+		setupRoundedBackground(view, activeColor, background);
 	}
 
 	protected void setupRoundedBackground(@NonNull View view, @ColorInt int color, ButtonBackground background) {
-		Drawable normal = createRoundedDrawable(UiUtilities.getColorWithAlpha(color, 0.1f), background);
+		Drawable normal = createRoundedDrawable(ColorUtilities.getColorWithAlpha(color, 0.1f), background);
 		setupRoundedBackground(view, normal, color, background);
 	}
 
 	protected void setupRoundedBackground(@NonNull View view, @NonNull Drawable normal,
 										  @ColorInt int color, ButtonBackground background) {
-		Drawable selected = createRoundedDrawable(UiUtilities.getColorWithAlpha(color, 0.5f), background);
+		Drawable selected = createRoundedDrawable(ColorUtilities.getColorWithAlpha(color, 0.5f), background);
 		setupRoundedBackground(view, normal, selected);
 	}
 

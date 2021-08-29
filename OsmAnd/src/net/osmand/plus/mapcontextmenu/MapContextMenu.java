@@ -201,6 +201,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	@Nullable
 	public MapMultiSelectionMenu getMultiSelectionMenu() {
 		return mapMultiSelectionMenu;
 	}

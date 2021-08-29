@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -18,15 +20,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -34,8 +39,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.AddPOIAction;
 
 import java.util.List;
-
-import static net.osmand.plus.quickaction.QuickActionListFragment.showConfirmDeleteAnActionBottomSheet;
 
 /**
  * Created by rosty on 12/27/16.
@@ -70,6 +73,12 @@ public class CreateEditActionDialog extends DialogFragment
         dialog.setArguments(args);
 
         return dialog;
+    }
+
+    public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull QuickAction action) {
+    	if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+            CreateEditActionDialog.newInstance(action.id).show(fragmentManager, TAG);
+        }
     }
 
     private QuickActionRegistry quickActionRegistry;
@@ -161,7 +170,7 @@ public class CreateEditActionDialog extends DialogFragment
                 ? R.string.quick_action_new_action
                 : R.string.quick_action_edit_action);
 
-        int buttonsAndLinksTextColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+        int buttonsAndLinksTextColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightContent);
         toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), buttonsAndLinksTextColorResId));
 
         Drawable icBack = getIconsCache().getIcon(AndroidUtils.getNavigationIconResId(getContext()), buttonsAndLinksTextColorResId);
@@ -199,8 +208,8 @@ public class CreateEditActionDialog extends DialogFragment
     private void setupHeader(View root, Bundle savedInstanceState){
         ImageView image = (ImageView) root.findViewById(R.id.image);
         EditText nameEditText = (EditText) root.findViewById(R.id.name);
-        int buttonsAndLinksTextColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
-        nameEditText.setTextColor(ContextCompat.getColor(getContext(), buttonsAndLinksTextColorResId));
+        int color = ColorUtilities.getActiveButtonsAndLinksTextColor(getContext(), !isLightContent);
+        nameEditText.setTextColor(color);
 
         nameEditText.addTextChangedListener(new TextWatcher() {
             @Override

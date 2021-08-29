@@ -1,6 +1,10 @@
 package net.osmand;
 
 
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -63,7 +67,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
@@ -83,10 +89,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -176,8 +178,34 @@ public class AndroidUtils {
 		}
 	}
 
-	public static boolean isIntentSafe(Context context, Intent intent) {
+	public static boolean isIntentSafe(@NonNull Context context, @NonNull Intent intent) {
 		return intent.resolveActivity(context.getPackageManager()) != null;
+	}
+
+	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent) {
+		return startActivityIfSafe(context, intent, null);
+	}
+
+	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent, @Nullable Intent chooserIntent) {
+		if (isIntentSafe(context, intent)) {
+			context.startActivity(chooserIntent != null ? chooserIntent : intent);
+			return true;
+		} else {
+			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+			app.showToastMessage(R.string.no_activity_for_intent);
+			return false;
+		}
+	}
+
+	public static boolean startActivityForResultIfSafe(@NonNull Activity activity, @NonNull Intent intent, int requestCode) {
+		if (isIntentSafe(activity, intent)) {
+			activity.startActivityForResult(intent, requestCode);
+			return true;
+		} else {
+			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+			app.showToastMessage(R.string.no_activity_for_intent);
+			return false;
+		}
 	}
 
 	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {
@@ -185,6 +213,10 @@ public class AndroidUtils {
 			return activity != null && !activity.isFinishing() && !activity.isDestroyed();
 		}
 		return activity != null && !activity.isFinishing();
+	}
+
+	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag) {
+		return !manager.isStateSaved() && manager.findFragmentByTag(tag) == null;
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
@@ -340,10 +372,10 @@ public class AndroidUtils {
 						new int[] {}
 				},
 				new int[] {
-						ContextCompat.getColor(ctx, night? R.color.text_color_secondary_dark : R.color.text_color_secondary_light),
-						ContextCompat.getColor(ctx, night? R.color.active_color_primary_dark : R.color.active_color_primary_light),
-						ContextCompat.getColor(ctx, night? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)}
-		);
+						ColorUtilities.getSecondaryTextColor(ctx, night),
+						ColorUtilities.getActiveColor(ctx, night),
+						ColorUtilities.getSecondaryTextColor(ctx, night)}
+				);
 	}
 
 	public static ColorStateList createCheckedColorIntStateList(@ColorInt int normal, @ColorInt int checked) {
@@ -421,7 +453,11 @@ public class AndroidUtils {
 	}
 
 	public static void setBackground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
-		setBackground(view, AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
+		setBackground(ctx, view, night ? darkResId : lightResId);
+	}
+
+	public static void setBackground(Context ctx, View view, int resId) {
+		setBackground(view, AppCompatResources.getDrawable(ctx, resId));
 	}
 
 	public static void setBackground(View view, Drawable drawable) {
@@ -461,43 +497,27 @@ public class AndroidUtils {
 	}
 
 	public static void setBackgroundColor(Context ctx, View view, boolean night, int lightResId, int darkResId) {
-		view.setBackgroundColor(ctx.getResources().getColor(night ? darkResId : lightResId));
+		setBackgroundColor(ctx, view, night ? darkResId : lightResId);
+	}
+
+	public static void setBackgroundColor(Context ctx, View view, @ColorRes int colorId) {
+		view.setBackgroundColor(ContextCompat.getColor(ctx, colorId));
 	}
 
 	public static void setListItemBackground(Context ctx, View view, boolean night) {
-		setBackgroundColor(ctx, view, night, R.color.list_background_color_light, R.color.list_background_color_dark);
-	}
-
-	public static void setListBackground(Context ctx, View view, boolean night) {
-		setBackgroundColor(ctx, view, night, R.color.activity_background_color_light, R.color.activity_background_color_dark);
+		setBackgroundColor(ctx, view, ColorUtilities.getListBgColorId(night));
 	}
 
 	public static void setTextPrimaryColor(Context ctx, TextView textView, boolean night) {
-		textView.setTextColor(night ?
-				ctx.getResources().getColor(R.color.text_color_primary_dark)
-				: ctx.getResources().getColor(R.color.text_color_primary_light));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(ctx, night));
 	}
 
 	public static void setTextSecondaryColor(Context ctx, TextView textView, boolean night) {
-		textView.setTextColor(night ?
-				ctx.getResources().getColor(R.color.text_color_secondary_dark)
-				: ctx.getResources().getColor(R.color.text_color_secondary_light));
+		textView.setTextColor(ColorUtilities.getSecondaryTextColor(ctx, night));
 	}
 
 	public static void setHintTextSecondaryColor(Context ctx, TextView textView, boolean night) {
-		textView.setHintTextColor(night ?
-				ctx.getResources().getColor(R.color.text_color_secondary_dark)
-				: ctx.getResources().getColor(R.color.text_color_secondary_light));
-	}
-
-	@ColorRes
-	public static int getPrimaryTextColorId(boolean nightMode) {
-		return nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
-	}
-
-	@ColorRes
-	public static int getSecondaryTextColorId(boolean nightMode) {
-		return nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+		textView.setHintTextColor(ColorUtilities.getSecondaryTextColor(ctx, night));
 	}
 
 	public static int getTextMaxWidth(float textSize, List<String> titles) {

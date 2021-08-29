@@ -1,5 +1,9 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 import android.Manifest;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -62,7 +66,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
@@ -91,10 +94,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
@@ -169,10 +168,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		outlinePaint.setStrokeWidth(AndroidUtils.dpToPx(activity, 2f));
 		outlinePaint.setStrokeCap(Paint.Cap.ROUND);
 		outlinePaint.setColor(activity.getResources().getColor(R.color.osmand_orange));
-	}
-
-	public boolean isVisible() {
-		return menu.isActive();
 	}
 
 	public Object getSelectedObject() {
@@ -806,7 +801,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				return true;
 			}
 		}
-		processTransportStops(selectedObjects, pointLatLon);
+		processTransportStops(selectedObjects);
 		if (selectedObjects.size() == 1) {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
 			LatLon latLon = objectLatLon;
@@ -929,7 +924,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return res;
 	}
 
-	private void processTransportStops(@NonNull Map<Object, IContextMenuProvider> selectedObjects, @NonNull LatLon latLon) {
+	private void processTransportStops(@NonNull Map<Object, IContextMenuProvider> selectedObjects) {
 		List<String> publicTransportTypes = getPublicTransportTypes();
 		if (publicTransportTypes != null) {
 			List<Amenity> transportStopAmenities = new ArrayList<>();

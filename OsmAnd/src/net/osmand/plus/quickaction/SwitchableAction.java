@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.AndroidUtils.isLayoutRtl;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,8 +33,6 @@ import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static net.osmand.AndroidUtils.isLayoutRtl;
 
 public abstract class SwitchableAction<T> extends QuickAction {
 
@@ -108,8 +109,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public String getActionText(OsmandApplication app) {
 		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
 
-		List<QuickAction> actions = app.getQuickActionRegistry().collectQuickActionsByType(getActionType());
-		if (actions.size() > 1) {
+		List<T> items = loadListFromParams();
+		if (items.size() > 1) {
 			String item = getNextSelectedItem(app);
 			return "\u2026" + arrowDirection + getTranslatedItemName(app, item);
 		} else {
@@ -328,7 +329,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	@ColorInt
 	protected int getItemIconColor(OsmandApplication app, T item) {
 		boolean nightMode = !app.getSettings().isLightContent();
-		int colorRes = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
 		return ContextCompat.getColor(app, colorRes);
 	}
 

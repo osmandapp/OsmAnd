@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,8 +41,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
 
 public class ExportSettingsFragment extends BaseSettingsListFragment {
 
@@ -78,7 +77,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
 		exportMode = true;
-		dataList = app.getFileSettingsHelper().getSettingsByCategory(false);
+		dataList = app.getFileSettingsHelper().getSettingsByCategory(true);
 		if (!globalExport && savedInstanceState == null) {
 			updateSelectedProfile();
 		}
@@ -221,7 +220,9 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 					dismissExportProgressDialog();
 					exportingStarted = false;
 					if (succeed) {
-						shareProfile(file);
+						if (AndroidUtils.isActivityNotDestroyed(getActivity())) {
+							shareProfile(file);
+						}
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
 					}
@@ -266,23 +267,23 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	private void shareProfile(@NonNull File file) {
-		try {
-			final Intent sendIntent = new Intent();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
 			sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
-			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
+			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
 			sendIntent.setType("*/*");
 			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			startActivity(sendIntent);
+			AndroidUtils.startActivityIfSafe(activity, sendIntent);
 			dismissFragment();
-		} catch (Exception e) {
-			Toast.makeText(requireContext(), R.string.export_profile_failed, Toast.LENGTH_SHORT).show();
-			LOG.error("Share profile error", e);
 		}
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull ApplicationMode appMode, boolean globalExport) {
-		try {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
+	                                   @NonNull ApplicationMode appMode,
+	                                   boolean globalExport) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ExportSettingsFragment fragment = new ExportSettingsFragment();
 			fragment.appMode = appMode;
 			fragment.globalExport = globalExport;
@@ -291,8 +292,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 					.addToBackStack(SETTINGS_LIST_TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

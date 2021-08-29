@@ -1,10 +1,13 @@
 package net.osmand.plus.activities;
 
+import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.fragment.app.FragmentManager;
+
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-
-import android.os.Bundle;
 
 
 public class FavoritesListActivity extends OsmandActionBarActivity {
@@ -15,21 +18,24 @@ public class FavoritesListActivity extends OsmandActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_fragment_layout);
 		if (savedInstanceState == null) {
-			// During initial setup, plug in the details fragment.
-			FavoritesListFragment details = new FavoritesListFragment();
-			details.setArguments(getIntent().getExtras());
-			getSupportFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
+			FragmentManager fragmentManager = getSupportFragmentManager();
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, FavoritesListFragment.TAG)) {
+				// During initial setup, plug in the details fragment.
+				FavoritesListFragment fragment = new FavoritesListFragment();
+				fragment.setArguments(getIntent().getExtras());
+				fragmentManager.beginTransaction()
+						.add(android.R.id.content, fragment, FavoritesListFragment.TAG)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
-		switch (itemId) {
-		case android.R.id.home:
+		if (itemId == android.R.id.home) {
 			finish();
 			return true;
-
 		}
 		return false;
 	}

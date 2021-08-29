@@ -4006,4 +4006,17 @@
     <string name="poi_permanent_camping">Permanent camping</string>
     <string name="poi_permanent_camping_no">Nej</string>
     <string name="poi_permanent_camping_yes">Ja</string>
+    <string name="poi_shelter_yes">Ja</string>
+    <string name="poi_shelter_no">Skydd: nej</string>
+    <string name="poi_lounger">Liggstol</string>
+    <string name="poi_direction_southwest">Sydvästlig riktning</string>
+    <string name="poi_direction_southeast">Sydostlig riktning</string>
+    <string name="poi_direction_northwest">Nordvästlig riktning</string>
+    <string name="poi_direction_northeast">Nordostlig riktning</string>
+    <string name="poi_direction_west">Västlig riktning</string>
+    <string name="poi_direction_south">Sydlig riktning</string>
+    <string name="poi_direction_east">Östlig riktning</string>
+    <string name="poi_direction_north">Nordlig riktning</string>
+    <string name="poi_shelter_filter">Skydd</string>
+    <string name="poi_arch">Båge</string>
 </resources>

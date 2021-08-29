@@ -2,17 +2,13 @@ package net.osmand.plus.voice;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioAttributes;
-import android.net.Uri;
 import android.os.Build;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -36,32 +32,6 @@ import java.util.Map;
 public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	public final static String PEBBLE_ALERT = "PEBBLE_ALERT";
 	public final static String WEAR_ALERT = "WEAR_ALERT";
-	private static final class IntentStarter implements
-			DialogInterface.OnClickListener {
-		private final Context ctx;
-		private final String intentAction;
-		private final Uri intentData;
-
-		private IntentStarter(Context ctx, String intentAction) {
-			this(ctx,intentAction, null);
-		}
-
-		private IntentStarter(Context ctx, String intentAction, Uri intentData) {
-			this.ctx = ctx;
-			this.intentAction = intentAction;
-			this.intentData = intentData;
-		}
-
-		@Override
-		public void onClick(DialogInterface dialog, int which) {
-			Intent installIntent = new Intent();
-			installIntent.setAction(intentAction);
-			if (intentData != null) {
-				installIntent.setData(intentData);
-			}
-			ctx.startActivity(installIntent);
-		}
-	}
 
 	private static final String CONFIG_FILE = "_ttsconfig.p";
 	private static final int[] TTS_VOICE_VERSION = new int[] { 102, 103 }; // !! MUST BE SORTED  
@@ -320,17 +290,6 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		return ttsVoiceUsed;
 	}
 
-	private AlertDialog.Builder createAlertDialog(int titleResID, int messageResID,
-			IntentStarter intentStarter, final Activity ctx) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-		builder.setCancelable(true);
-		builder.setNegativeButton(R.string.shared_string_no, null);
-		builder.setPositiveButton(R.string.shared_string_yes, intentStarter);
-		builder.setTitle(titleResID);
-		builder.setMessage(messageResID);
-		return builder;
-	}
-		
 	private void internalClear() {
 		ttsRequests = 0;
 		speechAllowed = false;

@@ -40,6 +40,7 @@ import gnu.trove.list.array.TIntArrayList;
 public class OsmandRegions {
 
 	public static final String MAP_TYPE = "region_map";
+	public static final String ROADS_TYPE = "region_roads";
 
 	public static final String FIELD_DOWNLOAD_NAME = "download_name";
 	public static final String FIELD_NAME = "name";
@@ -465,6 +466,7 @@ public class OsmandRegions {
 		rd.params.population = mapIndexFields.get(mapIndexFields.populationType, object);
 		rd.regionSearchText = getSearchIndex(object);
 		rd.regionMapDownload = isDownloadOfType(object, MAP_TYPE);
+		rd.regionRoadsDownload = isDownloadOfType(object, ROADS_TYPE);
 		return rd;
 	}
 
@@ -474,38 +476,33 @@ public class OsmandRegions {
 		}
 
 		List<LatLon> polygon = new ArrayList<>();
-		double currentX = object.getPoint31XTile(0);
-		double currentY = object.getPoint31YTile(0);
-		polygon.add(new LatLon(currentX, currentY));
-		double minX = currentX;
-		double maxX = currentX;
-		double minY = currentY;
-		double maxY = currentY;
+		double x = MapUtils.get31LongitudeX(object.getPoint31XTile(0));
+		double y = MapUtils.get31LatitudeY(object.getPoint31YTile(0));
+		polygon.add(new LatLon(y, x));
+		double minX = x;
+		double maxX = x;
+		double minY = y;
+		double maxY = y;
 
 		if (object.getPointsLength() > 1) {
 			for (int i = 1; i < object.getPointsLength(); i++) {
-				currentX = object.getPoint31XTile(i);
-				currentY = object.getPoint31YTile(i);
-				if (currentX > maxX) {
-					maxX = currentX;
-				} else if (currentX < minX) {
-					minX = currentX;
+				x = MapUtils.get31LongitudeX(object.getPoint31XTile(i));
+				y = MapUtils.get31LatitudeY(object.getPoint31YTile(i));
+				if (x > maxX) {
+					maxX = x;
+				} else if (x < minX) {
+					minX = x;
 				}
-				if (currentY > maxY) {
-					maxY = currentY;
-				} else if (currentY < minY) {
-					minY = currentY;
+				if (y < maxY) {
+					maxY = y;
+				} else if (y > minY) {
+					minY = y;
 				}
-				polygon.add(new LatLon(currentX, currentY));
+				polygon.add(new LatLon(y, x));
 			}
 		}
 
-		minX = MapUtils.get31LongitudeX((int) minX);
-		maxX = MapUtils.get31LongitudeX((int) maxX);
-		double revertedMinY = MapUtils.get31LatitudeY((int) maxY);
-		double revertedMaxY = MapUtils.get31LatitudeY((int) minY);
-
-		rd.boundingBox = new QuadRect(minX, revertedMinY, maxX, revertedMaxY);
+		rd.boundingBox = new QuadRect(minX, minY, maxX, maxY);
 		rd.polygon = polygon;
 	}
 
@@ -773,7 +770,11 @@ public class OsmandRegions {
 	}
 
 	public List<WorldRegion> getWorldRegionsAt(LatLon latLon) throws IOException {
-		Map<WorldRegion, BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsWithRegionsAt(latLon);
+		return getWorldRegionsAt(latLon, false);
+	}
+
+	public List<WorldRegion> getWorldRegionsAt(LatLon latLon, boolean includeRoadRegions) throws IOException {
+		Map<WorldRegion, BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsWithRegionsAt(latLon, includeRoadRegions);
 		return new ArrayList<>(mapDataObjects.keySet());
 	}
 
@@ -799,6 +800,10 @@ public class OsmandRegions {
 	}
 
 	private Map<WorldRegion, BinaryMapDataObject> getBinaryMapDataObjectsWithRegionsAt(LatLon latLon) throws IOException {
+		return getBinaryMapDataObjectsWithRegionsAt(latLon, false);
+	}
+
+	private Map<WorldRegion, BinaryMapDataObject> getBinaryMapDataObjectsWithRegionsAt(LatLon latLon, boolean includeRoadRegions) throws IOException {
 		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
 		Map<WorldRegion, BinaryMapDataObject> foundObjects = new LinkedHashMap<>();
@@ -814,7 +819,7 @@ public class OsmandRegions {
 			if (o.getTypes() != null) {
 				WorldRegion downloadRegion = getRegionData(getFullName(o));
 				if ( downloadRegion == null
-						|| !downloadRegion.isRegionMapDownload()
+						|| (includeRoadRegions ? !downloadRegion.isRegionRoadsDownload() && !downloadRegion.isRegionMapDownload() : !downloadRegion.isRegionMapDownload())
 						|| !contain(o, point31x, point31y)) {
 					it.remove();
 				} else {

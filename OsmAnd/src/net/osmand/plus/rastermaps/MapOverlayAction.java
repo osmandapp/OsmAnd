@@ -62,12 +62,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	@Override
 	public String getSelectedItem(OsmandApplication app) {
 		String mapOverlay = app.getSettings().MAP_OVERLAY.get();
-		if (mapOverlay == null) {
-			return KEY_NO_OVERLAY;
-		}
-		return mapOverlay.endsWith(IndexConstants.SQLITE_EXT)
-				? Algorithms.getFileNameWithoutExtension(mapOverlay)
-				: mapOverlay;
+		return mapOverlay != null ? mapOverlay : KEY_NO_OVERLAY;
 	}
 
 	@Override

@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -15,11 +20,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.monitoring.TripRecordingBottomSheet.DismissTargetFragment;
 import net.osmand.plus.monitoring.TripRecordingBottomSheet.ItemType;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import static net.osmand.AndroidUtils.getPrimaryTextColorId;
 import static net.osmand.plus.monitoring.TripRecordingOptionsBottomSheet.ACTION_STOP_AND_DISMISS;
 
 public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragment implements DismissTargetFragment {
@@ -48,7 +48,7 @@ public class TripRecordingDiscardBottomSheet extends MenuBottomSheetDialogFragme
 
 		items.add(new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.track_recording_description))
-				.setDescriptionColorId(getPrimaryTextColorId(nightMode))
+				.setDescriptionColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
 				.setTitle(app.getString(R.string.track_recording_stop_without_saving))
 				.setLayoutId(R.layout.bottom_sheet_item_title_with_description)
 				.create());

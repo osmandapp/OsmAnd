@@ -1431,7 +1431,7 @@
     <string name="rendering_attr_moreDetailed_name">Mais detalhes</string>
     <string name="rendering_attr_coloredBuildings_name">Colorir edifícios por tipo</string>
     <string name="rendering_attr_alpineHiking_name">Escala de montanhismo (SAC)</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Camada superior de símbolos de montanhismo</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Rotas de montanhismo</string>
     <string name="rendering_attr_showCycleRoutes_name">Rotas para bicicletas</string>
     <string name="rendering_attr_hideBuildings_name">Edifícios</string>
     <string name="rendering_attr_trolleybusRoutes_name">Rotas de troleicarros</string>
@@ -1596,8 +1596,8 @@
     <string name="shared_string_show_details">Mostrar detalhes</string>
     <string name="osm_edit_context_menu_delete">Eliminar edição OSM</string>
     <string name="rendering_value_disabled_name">Desativado</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Cor pela afiliação da rede</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Cor pelo símbolo de caminhada de OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Afiliação da rede</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="shared_string_logoff">Sair</string>
     <string name="local_recordings_delete_all_confirm">Eliminar %1$d notas\?</string>
     <string name="plugin_touringview_descr">Esta opção muda o estilo de mapa do OsmAnd para a \"vista turística\", uma visualização especial do mapa com altos detalhes, para viajantes e motoristas profissionais.
@@ -1751,7 +1751,7 @@
     <string name="map_markers">Marcadores</string>
     <string name="map_marker">Marcador de mapa</string>
     <string name="consider_turning_polygons_off">É recomendável desativar a renderização de polígonos.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Trilhos de bicicletas BTT</string>
+    <string name="rendering_attr_showMtbRoutes_name">Rotas de bicicletas BTT</string>
     <string name="show_polygons">Mostrar áreas do mapa principal</string>
     <string name="find_parking">Encontrar estacionamento</string>
     <string name="shared_string_status">Estado</string>
@@ -4087,7 +4087,7 @@
     <string name="output">Saída</string>
     <string name="shared_string_feet">pés</string>
     <string name="srtm_download_list_help_message">O OsmAnd fornece dados de curvas de nível em metros e pés. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
-    <string name="srtm_unit_format">Unidade das curvas de nível</string>
+    <string name="srtm_unit_format">Variante da unidade das curvas de nível</string>
     <string name="srtm_download_single_help_message">Selecione a variante. Terá de descarregar novamente o ficheiro para alterar o formato.</string>
     <string name="route_line_use_gradient_coloring">A linha da rota é colorida conforme o declive.</string>
     <string name="shared_string_min_height">Altura mínima</string>
@@ -4129,7 +4129,7 @@
     <string name="loading_list_of_routing_services">A carregar a lista de serviços de roteamento disponíveis</string>
     <string name="shared_string_offline">Offline</string>
     <string name="shared_string_online">Online</string>
-    <string name="osmand_online_routing_promo">Use modelos predefinidos ou adicione um roteamento online OSRM, GraphHopper, OpenRouteService ou GPX.</string>
+    <string name="osmand_online_routing_promo">Use modelos predefinidos ou adicione um roteamento online OSRM, GraphHopper, openrouteservice ou GPX.</string>
     <string name="shared_string_external">Externo</string>
     <string name="provided_by">Fornecido por %1$s</string>
     <string name="failed_loading_predefined_engines">Não foi possível carregar a lista de modelos predefinidos.
@@ -4310,4 +4310,13 @@
     <string name="purchases_feature_desc_pro_widgets">Obtenha acesso às funcionalidades OsmAnd Pro: coloração de rotas e mais.</string>
     <string name="purchases_restored">Compras restauradas</string>
     <string name="grey_color_undefined">A cor cinzenta é usada nas partes sem dados.</string>
+    <string name="osm_live_payment_subscription_management_amz">O pagamento é cobrado da sua conta Amazon ao confirmar a compra.
+\n
+\nEste é renovado a não ser que seja cancelado antes do período de renovação selecionado.
+\n
+\nFaça a gestão ou cancele as suas subscrições nas configurações da Amazon a qualquer momento.</string>
+    <string name="cancel_anytime_in_amazon_app">Cancele a qualquer momento na App Amazon</string>
+    <string name="amz_manage_subscription_descr">Para gerir a sua subscrição, use a App Amazon no dispositivo ou abra o site Amazon.com no seu perfil.</string>
+    <string name="empty_category_name">Nome de categoria vazio</string>
+    <string name="no_activity_for_intent">Não foi encontrada nenhuma aplicação adequada para executar esta ação</string>
 </resources>

@@ -5,7 +5,6 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementEditingContext.AdditionMode;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
-import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.List;
 

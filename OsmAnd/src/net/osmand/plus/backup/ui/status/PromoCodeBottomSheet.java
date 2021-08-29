@@ -89,7 +89,7 @@ public class PromoCodeBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			PromoCodeBottomSheet fragment = new PromoCodeBottomSheet();
 			fragment.show(fragmentManager, TAG);
 		}

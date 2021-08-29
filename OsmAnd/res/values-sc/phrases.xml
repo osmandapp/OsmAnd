@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_palaeontological_site">Giassu paleontològicu</string>
     <string name="poi_bakery">Furru de su pane</string>
@@ -177,7 +177,6 @@
     <string name="poi_prosecutor">Pùblicu ministeru</string>
     <string name="poi_migration">Ufìtziu migratzione</string>
     <string name="poi_tax_inspection">Guàrdia de finàntzia</string>
-    
     <string name="poi_city">Tzitade cabu-de-logu de provìntzia</string>
     <string name="poi_town">Tzitade</string>
     <string name="poi_village">Bidda</string>
@@ -439,7 +438,6 @@
     <string name="poi_military_nuclear_explosion_site">Giassu esplosiones nucleares</string>
     <string name="poi_kiosk">Chioscu</string>
     <string name="poi_houseware">Butega de artìculos pro sa domo</string>
-    
     <string name="poi_variety_store">Butega de ogetos baratos</string>
     <string name="poi_grit_bin">Cassione de arena</string>
     <string name="poi_ambulance_station">Istatzione ambulàntzias</string>
@@ -726,7 +724,6 @@
     <string name="poi_pastry">Pastisseria</string>
     <string name="poi_camera">Càmeras e lentes</string>
     <string name="poi_candles">Butega de candelas</string>
-    
     <string name="poi_free_flying">Artìculos pro Freefly (paracadutismu)</string>
     <string name="poi_garden_furniture">Butega de artìculos pro su giardinu</string>
     <string name="poi_leather">Butega de còrgiu</string>
@@ -787,7 +784,6 @@
     <string name="poi_aerialway_pylon">Turre de sa funivia</string>
     <string name="poi_breakwater">Paraundas</string>
     <string name="poi_groyne">Paraundas (Groyne)</string>
-    
     <string name="poi_power_tower">Turre de s’alta tensione</string>
     <string name="poi_power_pole">Palu de potèntzia</string>
     <string name="poi_cooling_tower">Turre de isfritamentu</string>
@@ -2314,7 +2310,7 @@
     <string name="poi_social_facility_assisted_living">Residèntzia asistida</string>
     <string name="poi_social_facility_outreach">Assistèntzia</string>
     <string name="poi_social_facility_food_bank">Bancu alimentare</string>
-    <string name="poi_social_facility_shelter">Rifùgiu</string>
+    <string name="poi_social_facility_shelter">Aprigu</string>
     <string name="poi_social_facility_ambulatory_care">Ambulatòriu</string>
     <string name="poi_social_facility_workshop">Ambiente de traballu amparadu</string>
     <string name="poi_social_facility_day_care">Assistèntzia diurna</string>
@@ -2911,7 +2907,6 @@
     <string name="poi_aquaculture_shrimp">Abbacultura: gàmberos</string>
     <string name="poi_aquaculture_fish">Abbacultura: pische</string>
     <string name="poi_aquaculture_mussels">Abbacultura: cotzas</string>
-    
     <string name="poi_min_age">Edade mìnima</string>
     <string name="poi_organic_yes">Eja</string>
     <string name="poi_organic_no">Nono</string>
@@ -3201,8 +3196,8 @@
     <string name="poi_direction_entrance">Diretzione: intrada</string>
     <string name="poi_direction_exit">Diretzione: essida</string>
     <string name="poi_direction_all">Diretzione: totus</string>
-    <string name="poi_winter_room_yes">Rifùgiu pro s\'ierru: eja</string>
-    <string name="poi_winter_room_no">Rifùgiu pro s\'ierru: nono</string>
+    <string name="poi_winter_room_yes">Aprigu pro s\'ierru: eja</string>
+    <string name="poi_winter_room_no">Aprigu pro s\'ierru: nono</string>
     <string name="poi_government_archive">Archìviu</string>
     <string name="poi_government_ministry">Ministeru</string>
     <string name="poi_government_public_service">Servìtziu pùblicu</string>
@@ -3604,7 +3599,7 @@
     <string name="poi_vehicle_military">Atzessu pro sos veìculos: militares</string>
     <string name="poi_vehicle_delivery">Atzessu pro sos veìculos: intregas</string>
     <string name="poi_vehicle_forestry">Atzessu pro sos veìculos: foresteria</string>
-    <string name="poi_motorcar_yes">Atzessu pro sas automòbiles: eja</string>
+    <string name="poi_motorcar_yes">Eja</string>
     <string name="poi_motorcar_private">Atzessu pro sas automòbiles: privadu</string>
     <string name="poi_motorcar_no">Atzessu pro sas automòbiles: nono</string>
     <string name="poi_motorcar_destination">Atzessu pro sas automòbiles: destinatzione</string>
@@ -3976,4 +3971,52 @@
     <string name="poi_contact_linkedin">LinkedIn</string>
     <string name="poi_contact_xing">Xing</string>
     <string name="poi_outdoor_seating_poi">Logos pro si sètzere in foras</string>
+    <string name="poi_shelter_no">Aprigu: nono</string>
+    <string name="poi_shelter_filter">Aprigu</string>
+    <string name="poi_shelter_yes">Eja</string>
+    <string name="poi_lounger">Letinu</string>
+    <string name="poi_direction_southwest">Diretzione sud-ovest</string>
+    <string name="poi_direction_southeast">Diretzione sud-est</string>
+    <string name="poi_direction_northwest">Diretzione nord-ovest</string>
+    <string name="poi_direction_northeast">Diretzione nord-est</string>
+    <string name="poi_direction_west">Diretzione ovest</string>
+    <string name="poi_direction_south">Diretzione sud</string>
+    <string name="poi_direction_east">Diretzione est</string>
+    <string name="poi_direction_north">Diretzione nord</string>
+    <string name="poi_destination">Destinatzione</string>
+    <string name="poi_permanent_camping_only">Petzi</string>
+    <string name="poi_permanent_camping_no">Nono</string>
+    <string name="poi_permanent_camping_yes">Eja</string>
+    <string name="poi_authentication_none_yes">Eja</string>
+    <string name="poi_authentication_none_no">Autenticatzione non pedida: nono</string>
+    <string name="poi_authentication_short_message_text">Testu impreadu pro s\'autenticatzione cun SMS</string>
+    <string name="poi_authentication_short_message_number">Nùmeru impreadu pro s\'autenticatzione cun SMS</string>
+    <string name="poi_authentication_short_message_yes">Eja</string>
+    <string name="poi_authentication_short_message_no">Autenticatzione cun SMS: nono</string>
+    <string name="poi_authentication_phone_call_number">Nùmeru de telèfono impreadu pro s\'autenticatzione</string>
+    <string name="poi_authentication_phone_call_yes">Eja</string>
+    <string name="poi_authentication_phone_call_no">Autenticatzione cun mutida telefònica: nono</string>
+    <string name="poi_authentication_app_yes">Eja</string>
+    <string name="poi_authentication_app_no">Autenticatzione cun aplicatzione: nono</string>
+    <string name="poi_authentication_key_yes">Eja</string>
+    <string name="poi_authentication_key_no">Autenticatzione cun crae: nono</string>
+    <string name="poi_authentication_chip_card_yes">Eja</string>
+    <string name="poi_authentication_chip_card_no">Autenticatzione cun carta cun chip: nono</string>
+    <string name="poi_authentication_contactless_yes">Eja</string>
+    <string name="poi_authentication_contactless_no">Autenticatzione chene cuntatu: nono</string>
+    <string name="poi_share_taxi_yes">Taxi cumpartzidu: eja</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_permanent_camping">Campègiu permanente</string>
+    <string name="poi_authentication_none">Autenticatzione non pedida</string>
+    <string name="poi_authentication_short_message">Autenticatzione cun SMS</string>
+    <string name="poi_authentication_phone_call">Autenticatzione cun mutida telefònica</string>
+    <string name="poi_authentication_app">Autenticatzione cun aplicatzione</string>
+    <string name="poi_authentication_key">Autenticatzione cun crae</string>
+    <string name="poi_authentication_chip_card">Autenticatzione cun carta cun chip (tzircùitu integradu)</string>
+    <string name="poi_authentication_contactless">Autenticatzione chene cuntatu</string>
+    <string name="poi_access_scooter">Atzessu pro sos motorinos</string>
+    <string name="poi_access_bicycle">Atzessu pro sas bitzicletas</string>
+    <string name="poi_access_motorcar">Atzessu pro sas automòbiles</string>
+    <string name="poi_access_general">Atzessu generale</string>
+    <string name="poi_arch">Arcu</string>
 </resources>

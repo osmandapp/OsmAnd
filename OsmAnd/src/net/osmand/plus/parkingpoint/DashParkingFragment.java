@@ -1,6 +1,5 @@
 package net.osmand.plus.parkingpoint;
 
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -30,6 +29,7 @@ import java.util.Calendar;
  * 26.01.2015.
  */
 public class DashParkingFragment extends DashLocationFragment {
+
 	private static final String TAG = "DASH_PARKING_FRAGMENT";
 	private static final int TITLE_ID = R.string.osmand_parking_plugin_name;
 	ParkingPositionPlugin plugin;
@@ -49,30 +49,28 @@ public class DashParkingFragment extends DashLocationFragment {
 	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_parking_fragment, container, false);
 		Typeface typeface = FontCache.getRobotoMedium(getActivity());
-		Button remove = (Button) view.findViewById(R.id.remove_tag);
-		remove.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+		Button remove = view.findViewById(R.id.remove_tag);
+		remove.setOnClickListener(v -> {
+			if (plugin != null) {
 				AlertDialog dialog = plugin.showDeleteDialog(getActivity());
-				dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						updateParkingPosition();
-					}
-				});
+				dialog.setOnDismissListener(d -> updateParkingPosition());
 			}
 		});
 		remove.setTypeface(typeface);
 
-		view.findViewById(R.id.parking_header).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				LatLon point = plugin.getParkingPosition();
-				getMyApplication().getSettings().setMapLocationToShow(point.getLatitude(), point.getLongitude(),
-						15, new PointDescription(PointDescription.POINT_TYPE_PARKING_MARKER, getString(R.string.osmand_parking_position_name)), false,
-						point); //$NON-NLS-1$
-				MapActivity.launchMapActivityMoveToTop(getActivity());
+		view.findViewById(R.id.parking_header).setOnClickListener(v -> {
+			if (plugin == null || plugin.getParkingPosition() == null) {
+				return;
 			}
+			LatLon parkingPosition = plugin.getParkingPosition();
+			double lat = parkingPosition.getLatitude();
+			double lon = parkingPosition.getLongitude();
+			PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_PARKING_MARKER,
+					getString(R.string.osmand_parking_position_name));
+
+			getMyApplication().getSettings().setMapLocationToShow(lat, lon,
+					15, pointDescription, false, parkingPosition);
+			MapActivity.launchMapActivityMoveToTop(getActivity());
 		});
 		return view;
 	}
@@ -100,21 +98,19 @@ public class DashParkingFragment extends DashLocationFragment {
 		boolean limited = plugin.getParkingType();
 		String descr;
 
-		TextView timeLeft = (TextView) mainView.findViewById(R.id.time_left);
+		TextView timeLeft = mainView.findViewById(R.id.time_left);
 		if (limited) {
-			descr = getString(R.string.parking_place_limited) + " " + plugin.getFormattedTime( plugin.getParkingTime());
+			descr = getString(R.string.parking_place_limited) + " " + plugin.getFormattedTime(plugin.getParkingTime());
 			long endtime = plugin.getParkingTime();
 			long currTime = Calendar.getInstance().getTimeInMillis();
 			long timeDiff = endtime - currTime;
 			String time = getFormattedTime(timeDiff) + " ";
-			TextView leftLbl = (TextView) mainView.findViewById(R.id.left_lbl);
+			TextView leftLbl = mainView.findViewById(R.id.left_lbl);
 			timeLeft.setText(time);
 			if (timeDiff < 0) {
-				timeLeft.setText(time);
 				leftLbl.setTextColor(getResources().getColor(R.color.parking_outdated_color));
 				leftLbl.setText(getString(R.string.osmand_parking_overdue));
 			} else {
-				timeLeft.setText(time);
 				leftLbl.setTextColor(Color.WHITE);
 				leftLbl.setText(getString(R.string.osmand_parking_time_left));
 			}
@@ -125,15 +121,13 @@ public class DashParkingFragment extends DashLocationFragment {
 			timeLeft.setVisibility(View.GONE);
 		}
 		((TextView) mainView.findViewById(R.id.name)).setText(descr);
-		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
+		ImageView direction = mainView.findViewById(R.id.direction_icon);
 		if (loc != null) {
-			DashLocationView dv = new DashLocationView(direction, (TextView) mainView.findViewById(R.id.distance), position);
+			DashLocationView dv = new DashLocationView(direction, mainView.findViewById(R.id.distance), position);
 			dv.paint = false;
 			dv.arrowResId = R.drawable.ic_action_start_navigation; 
 			distances.add(dv);
 		}
-
-
 	}
 
 	String getFormattedTime(long timeInMillis) {
@@ -154,7 +148,6 @@ public class DashParkingFragment extends DashLocationFragment {
 		timeStringBuilder.append(minutes);
 		timeStringBuilder.append(" ");
 		timeStringBuilder.append(getResources().getString(R.string.osmand_parking_minute));
-
 
 		return timeStringBuilder.toString();
 	}

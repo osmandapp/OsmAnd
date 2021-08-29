@@ -61,6 +61,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -251,21 +252,22 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		final boolean light = app.getSettings().isLightContent();
 		SavingTrackHelper sth = app.getSavingTrackHelper();
 
+		int activeColorId = ColorUtilities.getActiveColorId(!light);
 		Button stop = (Button) currentGpxView.findViewById(R.id.action_button);
 		if (isRecording) {
 			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.VISIBLE);
 			TextView segmentTime = (TextView) currentGpxView.findViewById(R.id.segment_time);
 			segmentTime.setText(OsmAndFormatter.getFormattedDurationShort((int)(sth.getDuration() / 1000)));
 			segmentTime.setVisibility(View.VISIBLE);
-			stop.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
-					.getIcon(R.drawable.ic_action_rec_stop, light ? R.color.active_color_primary_light : R.color.active_color_primary_dark), null, null, null);
+			Drawable stopIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_rec_stop, activeColorId);
+			stop.setCompoundDrawablesWithIntrinsicBounds(stopIcon, null, null, null);
 			stop.setText(app.getString(R.string.shared_string_control_stop));
 			stop.setContentDescription(app.getString(R.string.gpx_monitoring_stop));
 		} else {
 			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.GONE);
 			currentGpxView.findViewById(R.id.segment_time).setVisibility(View.GONE);
-			stop.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
-					.getIcon(R.drawable.ic_action_rec_start, light ? R.color.active_color_primary_light : R.color.active_color_primary_dark), null, null, null);
+			Drawable stopIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_rec_start, activeColorId);
+			stop.setCompoundDrawablesWithIntrinsicBounds(stopIcon, null, null, null);
 			stop.setText(app.getString(R.string.shared_string_record));
 			stop.setContentDescription(app.getString(R.string.gpx_monitoring_start));
 		}
@@ -282,8 +284,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 		});
 		Button save = (Button) currentGpxView.findViewById(R.id.save_button);
-		save.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
-				.getIcon(R.drawable.ic_action_gsave_dark, light ? R.color.active_color_primary_light : R.color.active_color_primary_dark), null, null, null);
+		Drawable saveIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_gsave_dark, activeColorId);
+		save.setCompoundDrawablesWithIntrinsicBounds(saveIcon, null, null, null);
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -399,9 +401,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		listView.setBackgroundColor(getResources().getColor(
-				app.getSettings().isLightContent() ? R.color.activity_background_color_light
-						: R.color.activity_background_color_dark));
+		boolean nightMode = !app.getSettings().isLightContent();
+		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
 	public void createCurrentTrackView() {
@@ -464,8 +465,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		inflater.inflate(R.menu.track_sort_menu_item, menu);
 		mi = menu.findItem(R.id.action_sort);
 		mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		int iconColorId = isLightActionBar() ? R.color.active_buttons_and_links_text_light
-				: R.color.active_buttons_and_links_text_dark;
+		int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
 		mi.setIcon(getIcon(sortByMode.getIconId(), iconColorId));
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
@@ -530,9 +530,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				});
 			}
 			if (contextMenuItem.getIcon() != -1) {
-				int activeButtonsAndLinksTextColorResId = getMyApplication().getSettings().isLightContent() ?
-						R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
-				Drawable icMenuItem = getMyApplication().getUIUtilities().getIcon(contextMenuItem.getIcon(), activeButtonsAndLinksTextColorResId);
+				OsmandApplication app = requireMyApplication();
+				boolean nightMode = !app.getSettings().isLightContent();
+				int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+				Drawable icMenuItem = app.getUIUtilities().getIcon(contextMenuItem.getIcon(), colorId);
 				item.setIcon(icMenuItem);
 			}
 		}
@@ -574,8 +575,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 								@Override
 								public void onClick(View v) {
 									updateTracksSort(mode);
-									int iconColorId = isLightActionBar() ? R.color.active_buttons_and_links_text_light
-											: R.color.active_buttons_and_links_text_dark;
+									int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
 									item.setIcon(getIcon(mode.getIconId(), iconColorId));
 								}
 							})
@@ -1443,15 +1443,15 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		items.add(new PopUpMenuItem.Builder(app)
 				.setTitleId(R.string.shared_string_share)
 				.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), gpxInfo.file);
-						final Intent sendIntent = new Intent(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-						sendIntent.setType("text/plain");
-						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						startActivity(sendIntent);
+				.setOnClickListener(v1 -> {
+					Activity activity = getActivity();
+					if (activity != null) {
+						Uri fileUri = AndroidUtils.getUriForFile(activity, gpxInfo.file);
+						Intent sendIntent = new Intent(Intent.ACTION_SEND)
+								.putExtra(Intent.EXTRA_STREAM, fileUri)
+								.setType("text/plain")
+								.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						AndroidUtils.startActivityIfSafe(activity, sendIntent);
 					}
 				})
 				.create()

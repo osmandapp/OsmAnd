@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
@@ -26,6 +27,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCal
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu.MenuObject;
@@ -54,8 +56,8 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 			AndroidUtils.setBackground(view.getContext(), view, !menu.isLight(),
 					R.drawable.multi_selection_menu_bg_light_land, R.drawable.multi_selection_menu_bg_dark_land);
 		} else {
-			AndroidUtils.setBackground(view.getContext(), view.findViewById(R.id.cancel_row), !menu.isLight(),
-					R.color.list_background_color_light, R.color.list_background_color_dark);
+			AndroidUtils.setBackground(view.getContext(),
+					view.findViewById(R.id.cancel_row), ColorUtilities.getListBgColorId(!menu.isLight()));
 		}
 
 		final ListView listView = (ListView) view.findViewById(R.id.list);
@@ -145,7 +147,8 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 		}
 		View headerView = inflater.inflate(R.layout.menu_obj_selection_header, listView, false);
 		if (!menu.isLandscapeLayout()) {
-			AndroidUtils.setBackground(getContext(), headerView, !menu.isLight(), R.color.list_background_color_light, R.color.list_background_color_dark);
+			int listBgColor = ColorUtilities.getListBgColorId(!menu.isLight());
+			AndroidUtils.setBackground(getContext(), headerView, listBgColor);
 		}
 		headerView.setOnClickListener(null);
 		listView.addHeaderView(headerView);
@@ -210,30 +213,27 @@ public class MapMultiSelectionMenuFragment extends Fragment implements MultiSele
 				- activity.getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 	}
 
-	public static void showInstance(final MapActivity mapActivity) {
+	public static void showInstance(@NonNull MapActivity mapActivity) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			if (mapActivity.getContextMenu().isVisible()) {
+				mapActivity.getContextMenu().hide();
+			}
+			int slideInAnim = 0;
+			int slideOutAnim = 0;
+			MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
+			if (menu != null && !mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				slideInAnim = menu.getSlideInAnimation();
+				slideOutAnim = menu.getSlideOutAnimation();
+			}
 
-		if (mapActivity.isActivityDestroyed()) {
-			return;
+			MapMultiSelectionMenuFragment fragment = new MapMultiSelectionMenuFragment();
+			fragmentManager.beginTransaction()
+					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+					.add(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
-		if (mapActivity.getContextMenu().isVisible()) {
-			mapActivity.getContextMenu().hide();
-		}
-
-		MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
-
-		int slideInAnim = 0;
-		int slideOutAnim = 0;
-
-		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			slideInAnim = menu.getSlideInAnimation();
-			slideOutAnim = menu.getSlideOutAnimation();
-		}
-
-		MapMultiSelectionMenuFragment fragment = new MapMultiSelectionMenuFragment();
-		menu.getMapActivity().getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
 	private MultiSelectionArrayAdapter createAdapter() {

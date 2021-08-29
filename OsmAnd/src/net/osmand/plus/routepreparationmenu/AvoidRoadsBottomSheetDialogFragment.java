@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -74,10 +75,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
+		final OsmandApplication app = requiredMyApplication();
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		routingOptionsHelper = app.getRoutingOptionsHelper();
 		compoundButtonColor = appMode != null
 				? appMode.getProfileColor(nightMode)
@@ -147,7 +146,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			final View buttonView = themedInflater.inflate(R.layout.bottom_sheet_item_btn, null);
 			TextView buttonDescription = (TextView) buttonView.findViewById(R.id.button_descr);
 			buttonDescription.setText(R.string.shared_string_select_on_map);
-			buttonDescription.setTextColor(getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+			buttonDescription.setTextColor(activeColor);
 
 			FrameLayout buttonContainer = buttonView.findViewById(R.id.button_container);
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -185,10 +184,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void populateImpassableRoadsObjects() {
-		Context context = getContext();
-		if (context == null) {
-			return;
-		}
+		Context context = requireContext();
+		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
 		AvoidSpecificRoads avoidSpecificRoads = getMyApplication().getAvoidSpecificRoads();
 
 		int counter = 0;
@@ -209,7 +206,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 			TextView titleTv = (TextView) view.findViewById(R.id.title);
 			titleTv.setText(name);
-			titleTv.setTextColor(getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+			titleTv.setTextColor(activeColor);
 
 			ImageView icon = (ImageView) view.findViewById(R.id.icon);
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));

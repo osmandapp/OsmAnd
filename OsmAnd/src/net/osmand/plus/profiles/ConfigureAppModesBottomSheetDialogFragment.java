@@ -1,6 +1,7 @@
 package net.osmand.plus.profiles;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
@@ -61,7 +62,8 @@ public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSh
 		ApplicationMode.changeProfileAvailability(item, isChecked, getMyApplication());
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean usedOnMap, UpdateMapRouteMenuListener listener) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, boolean usedOnMap,
+	                                @Nullable UpdateMapRouteMenuListener listener) {
 		if (fragmentManager.findFragmentByTag(TAG) == null) {
 			ConfigureAppModesBottomSheetDialogFragment fragment = new ConfigureAppModesBottomSheetDialogFragment();
 			fragment.setUsedOnMap(usedOnMap);

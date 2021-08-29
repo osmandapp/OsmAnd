@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.FileUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -59,8 +60,8 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 
 		items.add(new TitleItem(getString(R.string.change_osmand_data_folder_question)));
 
-		int textColorPrimary = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
-		int activeColor = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int textColorPrimary = ColorUtilities.getPrimaryTextColorId(nightMode);
+		int activeColor = ColorUtilities.getActiveColorId(nightMode);
 		CharSequence desc = null;
 		
 		File currentStorageFile = new File(currentDirectory.getDirectory());

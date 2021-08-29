@@ -1,13 +1,16 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.style.StyleSpan;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
@@ -18,8 +21,6 @@ import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 
 import java.io.File;
 import java.util.List;
-
-import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
 
 public class FileImportDuplicatesFragment extends ImportDuplicatesFragment {
 
@@ -83,16 +84,21 @@ public class FileImportDuplicatesFragment extends ImportDuplicatesFragment {
 		));
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, List<? super Object> duplicatesList,
-									List<SettingsItem> settingsItems, File file, Fragment targetFragment) {
-		FileImportDuplicatesFragment fragment = new FileImportDuplicatesFragment();
-		fragment.setTargetFragment(targetFragment, 0);
-		fragment.setDuplicatesList(duplicatesList);
-		fragment.setSettingsItems(settingsItems);
-		fragment.setFile(file);
-		fm.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull List<? super Object> duplicatesList,
+									@NonNull List<SettingsItem> settingsItems,
+		                            @NonNull File file,
+	                                @Nullable Fragment targetFragment) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			FileImportDuplicatesFragment fragment = new FileImportDuplicatesFragment();
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.setDuplicatesList(duplicatesList);
+			fragment.setSettingsItems(settingsItems);
+			fragment.setFile(file);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

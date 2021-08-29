@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -30,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -55,8 +58,6 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-
 public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	public static final String TAG = ConfigureProfileFragment.class.getSimpleName();
@@ -76,7 +77,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	@ColorRes
 	protected int getBackgroundColorRes() {
-		return isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+		return ColorUtilities.getActivityBgColorId(isNightMode());
 	}
 
 	@Override
@@ -351,7 +352,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	private void setupCopyProfileSettingsPref() {
 		Preference copyProfilePrefs = findPreference(COPY_PROFILE_SETTINGS);
 		copyProfilePrefs.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_copy,
-				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+				ColorUtilities.getActiveColorId(isNightMode())));
 	}
 
 	private void setupResetToDefaultPref() {
@@ -367,20 +368,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 				resetToDefault.setTitle(title);
 			}
 			resetToDefault.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,
-					isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+					ColorUtilities.getActiveColorId(isNightMode())));
 		}
 	}
 
 	private void setupExportProfilePref() {
 		Preference exportProfile = findPreference(EXPORT_PROFILE);
 		exportProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_app_configuration,
-				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+				ColorUtilities.getActiveColorId(isNightMode())));
 	}
 
 	private void setupDeleteProfilePref() {
 		Preference deleteProfile = findPreference(DELETE_PROFILE);
 		deleteProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark,
-				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+				ColorUtilities.getActiveColorId(isNightMode())));
 	}
 
 	private void setupOsmandPluginsPref(PreferenceCategory preferenceCategory) {
@@ -419,50 +420,30 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		String prefId = preference.getKey();
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			String prefId = preference.getKey();
+			ApplicationMode selectedMode = getSelectedAppMode();
 
-		if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
-			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				try {
-					FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-					ApplicationMode selectedMode = getSelectedAppMode();
-					if (!ApplicationMode.values(app).contains(selectedMode)) {
-						ApplicationMode.changeProfileAvailability(selectedMode, true, app);
-					}
-					settings.setApplicationMode(selectedMode);
-					fragmentManager.beginTransaction()
-							.remove(this)
-							.addToBackStack(TAG)
-							.commitAllowingStateLoss();
-				} catch (Exception e) {
-					LOG.error(e);
+			if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
+				if (!ApplicationMode.values(app).contains(selectedMode)) {
+					ApplicationMode.changeProfileAvailability(selectedMode, true, app);
 				}
-			}
-		} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
-			}
-		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
-			}
-		} else if (EXPORT_PROFILE.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ExportSettingsFragment.showInstance(fragmentManager, getSelectedAppMode(), false);
-			}
-		} else if (DELETE_PROFILE.equals(prefId)) {
-			onDeleteProfileClick();
-		} else if (UI_CUSTOMIZATION.equals(prefId)) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ConfigureMenuRootFragment.showInstance(
-						fragmentManager,
-						this,
-						getSelectedAppMode());
+				settings.setApplicationMode(selectedMode);
+				fragmentManager.beginTransaction()
+						.remove(this)
+						.addToBackStack(TAG)
+						.commitAllowingStateLoss();
+			} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, selectedMode);
+			} else if (RESET_TO_DEFAULT.equals(prefId)) {
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, selectedMode);
+			} else if (EXPORT_PROFILE.equals(prefId)) {
+				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, false);
+			} else if (DELETE_PROFILE.equals(prefId)) {
+				onDeleteProfileClick();
+			} else if (UI_CUSTOMIZATION.equals(prefId)) {
+				ConfigureMenuRootFragment.showInstance(fragmentManager, selectedMode, this);
 			}
 		}
 		return super.onPreferenceClick(preference);

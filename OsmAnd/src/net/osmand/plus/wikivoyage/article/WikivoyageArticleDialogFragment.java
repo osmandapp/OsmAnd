@@ -1,5 +1,8 @@
 package net.osmand.plus.wikivoyage.article;
 
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
+import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -54,9 +57,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static net.osmand.plus.track.TrackMenuFragment.openTrack;
-import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
 
 
 public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment {
@@ -475,22 +475,19 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		UiUtilities.setupToolbarOverflowIcon(
 				toolbar, R.drawable.ic_overflow_menu_white, R.color.icon_color_default_light);
 		Menu menu = toolbar.getMenu();
-		MenuItem.OnMenuItemClickListener itemClickListener = new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				OsmandApplication app = getMyApplication();
-				if (app != null) {
-					int itemId = item.getItemId();
-					if (itemId == MENU_ITEM_SHARE) {
-						Intent intent = new Intent(Intent.ACTION_SEND);
-						intent.putExtra(Intent.EXTRA_TEXT, WikiArticleHelper.buildTravelUrl(article.getTitle(), article.getLang()));
-						intent.setType("text/plain");
-						startActivity(Intent.createChooser(intent, getString(R.string.shared_string_share)));
-						return true;
-					}
+		MenuItem.OnMenuItemClickListener itemClickListener = item -> {
+			OsmandApplication app = getMyApplication();
+			if (app != null) {
+				int itemId = item.getItemId();
+				if (itemId == MENU_ITEM_SHARE) {
+					Intent intent = new Intent(Intent.ACTION_SEND);
+					intent.putExtra(Intent.EXTRA_TEXT, WikiArticleHelper.buildTravelUrl(article.getTitle(), article.getLang()));
+					intent.setType("text/plain");
+					Intent chooserIntent = Intent.createChooser(intent, getString(R.string.shared_string_share));
+					return AndroidUtils.startActivityIfSafe(app, intent, chooserIntent);
 				}
-				return false;
 			}
+			return false;
 		};
 		MenuItem itemShow = menu.add(0, MENU_ITEM_SHARE, 0, R.string.shared_string_share);
 		itemShow.setOnMenuItemClickListener(itemClickListener);

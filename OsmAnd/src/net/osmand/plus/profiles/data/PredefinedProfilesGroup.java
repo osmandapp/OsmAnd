@@ -11,9 +11,9 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -39,8 +39,7 @@ public class PredefinedProfilesGroup extends ProfilesGroup {
 	@Override
 	public CharSequence getDescription(@NonNull final OsmandApplication ctx, boolean nightMode) {
 		String fullDescription = ctx.getString(R.string.provided_by, description);
-		int color = ContextCompat.getColor(ctx, nightMode ?
-				R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int color = ColorUtilities.getActiveColor(ctx, nightMode);
 		Typeface typeface = FontCache.getRobotoMedium(ctx);
 		final String url = description.toString();
 		SpannableString spannable = UiUtilities.createCustomFontSpannable(typeface, fullDescription, url);
@@ -50,12 +49,10 @@ public class PredefinedProfilesGroup extends ProfilesGroup {
 		ClickableSpan clickableSpan = new ClickableSpan() {
 			@Override
 			public void onClick(@NonNull View widget) {
-				Intent i = new Intent(Intent.ACTION_VIEW);
-				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				i.setData(Uri.parse(url));
-				if (AndroidUtils.isIntentSafe(ctx, i)) {
-					ctx.startActivity(i);
-				}
+				Intent intent = new Intent(Intent.ACTION_VIEW);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.setData(Uri.parse(url));
+				AndroidUtils.startActivityIfSafe(ctx, intent);
 			}
 
 			@Override

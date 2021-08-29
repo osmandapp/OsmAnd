@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -23,7 +24,6 @@ import net.osmand.plus.widgets.TextViewEx;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.AndroidUtils.getPrimaryTextColorId;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 
 public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragment {
@@ -48,7 +48,7 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 
 		itemTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.update_all_maps_now))
-				.setTitleColorId(getPrimaryTextColorId(nightMode))
+				.setTitleColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_title)
 				.create();
 		items.add(itemTitle);
@@ -57,7 +57,7 @@ public class LiveUpdatesUpdateAllBottomSheet extends MenuBottomSheetDialogFragme
 		itemDescription = new LongDescriptionItem.Builder()
 				.setDescription(getString(R.string.update_all_maps_added, osmAndLive))
 				.setDescriptionMaxLines(5)
-				.setDescriptionColorId(getPrimaryTextColorId(nightMode))
+				.setDescriptionColorId(ColorUtilities.getPrimaryTextColorId(nightMode))
 				.setLayoutId(R.layout.bottom_sheet_item_description_long)
 				.create();
 		items.add(itemDescription);

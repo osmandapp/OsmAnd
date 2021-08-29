@@ -25,6 +25,7 @@ import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -540,10 +541,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private void setupBackground(View view) {
-		int bgColorResId = isNightMode() ?
-				R.color.list_background_color_dark :
-				R.color.list_background_color_light;
-		view.setBackgroundColor(app.getResources().getColor(bgColorResId));
+		view.setBackgroundColor(ColorUtilities.getListBgColor(app, isNightMode()));
 	}
 
 	private void setupDivider(final int position,

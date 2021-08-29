@@ -25,6 +25,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LocationsHolder;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -263,10 +264,9 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 						R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(),
-						R.color.list_background_color_light, R.color.list_background_color_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(),
-						R.color.list_background_color_light, R.color.list_background_color_dark);
+				int listBgColor = ColorUtilities.getListBgColorId(isNightMode());
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, listBgColor);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, listBgColor);
 			}
 		}
 	}
@@ -329,26 +329,24 @@ public class GpxApproximationFragment extends ContextMenuScrollFragment
 		return (menuState & (MenuState.HEADER_ONLY | MenuState.HALF_SCREEN)) != 0;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment,
-									@NonNull List<List<WptPt>> pointsList, @Nullable ApplicationMode appMode) {
-		try {
-			if (!fm.isStateSaved()) {
-				GpxApproximationFragment fragment = new GpxApproximationFragment();
-				fragment.setRetainInstance(true);
-				fragment.setTargetFragment(targetFragment, REQUEST_CODE);
-				List<LocationsHolder> locationsHolders = new ArrayList<>();
-				for (List<WptPt> points : pointsList) {
-					locationsHolders.add(new LocationsHolder(points));
-				}
-				fragment.setLocationsHolders(locationsHolders);
-				fragment.setSnapToRoadAppMode(appMode);
-				fm.beginTransaction()
-						.replace(R.id.fragmentContainer, fragment, TAG)
-						.addToBackStack(TAG)
-						.commitAllowingStateLoss();
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @Nullable Fragment targetFragment,
+									@NonNull List<List<WptPt>> pointsList,
+	                                @Nullable ApplicationMode appMode) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			GpxApproximationFragment fragment = new GpxApproximationFragment();
+			fragment.setRetainInstance(true);
+			fragment.setTargetFragment(targetFragment, REQUEST_CODE);
+			List<LocationsHolder> locationsHolders = new ArrayList<>();
+			for (List<WptPt> points : pointsList) {
+				locationsHolders.add(new LocationsHolder(points));
 			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
+			fragment.setLocationsHolders(locationsHolders);
+			fragment.setSnapToRoadAppMode(appMode);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 

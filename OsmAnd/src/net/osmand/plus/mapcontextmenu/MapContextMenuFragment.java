@@ -57,6 +57,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.LockableScrollView;
@@ -514,8 +515,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 		buildHeader();
 
-		((TextView) view.findViewById(R.id.context_menu_line1)).setTextColor(ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
+		((TextView) view.findViewById(R.id.context_menu_line1))
+				.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, nightMode));
 		View menuLine2 = view.findViewById(R.id.context_menu_line2);
 		if (menuLine2 != null) {
 			((TextView) menuLine2).setTextColor(ContextCompat.getColor(mapActivity, R.color.ctx_menu_subtitle_color));
@@ -1335,8 +1336,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			Context context = view.getContext();
 			Typeface typeface = FontCache.getRobotoRegular(context);
 			title.setSpan(new CustomTypefaceSpan(typeface), startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			title.setSpan(new ForegroundColorSpan(
-							ContextCompat.getColor(context, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)),
+			title.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(context, nightMode)),
 					startIndex, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 		return title;
@@ -1385,7 +1385,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (!menu.isActive() || menu.getLatLon() == null || MapRouteInfoMenu.waypointsVisible
+			if (view == null || !menu.isActive() || menu.getLatLon() == null
+					|| MapRouteInfoMenu.waypointsVisible
 					|| mapActivity.getMapRouteInfoMenu().isVisible()) {
 				dismissMenu();
 				return;
@@ -1491,11 +1492,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				ImageView transportStopRouteImageView = (ImageView) convertView.findViewById(R.id.transport_stop_route_icon);
 
 				int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
-				transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, UiUtilities.getContrastColor(mapActivity, bgColor, true)));
+				transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, ColorUtilities.getContrastColor(mapActivity, bgColor, true)));
 				transportStopRouteTextView.setText(routeRef + ": " + routeDescription);
 				GradientDrawable gradientDrawableBg = (GradientDrawable) convertView.getBackground();
 				gradientDrawableBg.setColor(bgColor);
-				transportStopRouteTextView.setTextColor(UiUtilities.getContrastColor(mapActivity, bgColor, true));
+				transportStopRouteTextView.setTextColor(ColorUtilities.getContrastColor(mapActivity, bgColor, true));
 			}
 		}
 		return convertView;
@@ -2236,12 +2237,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity,
 	                                   final boolean centered) {
-		try {
+		if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
+			return false;
+		}
 
-			if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
-				return false;
-			}
-
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			int slideInAnim = 0;
 			int slideOutAnim = 0;
 			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
@@ -2256,16 +2257,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 			MapContextMenuFragment fragment = new MapContextMenuFragment();
 			fragment.centered = centered;
-			mapActivity.getSupportFragmentManager().beginTransaction()
+			fragmentManager.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+
+		return false;
 	}
 
 	//DownloadEvents

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -173,6 +174,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		}
 		if (selectedType == ColoringType.CUSTOM_COLOR) {
 			colorsCard.setSelectedColor(getCustomRouteColor());
+			updateColorItems();
 		}
 	}
 
@@ -363,8 +365,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 					.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
 				if (isItemSelected(coloringType, coloringTypeName)) {
-					int strokeColorRes = nightMode ?
-							R.color.active_color_primary_dark : R.color.active_color_primary_light;
+					int strokeColorRes = ColorUtilities.getActiveColorId(nightMode);
 					int strokeColor = ContextCompat.getColor(app, strokeColorRes);
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), strokeColor);
 				} else {

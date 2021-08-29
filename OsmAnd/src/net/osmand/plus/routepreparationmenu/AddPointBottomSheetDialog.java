@@ -26,6 +26,7 @@ import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -170,10 +171,9 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		firstIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_search_dark));
 		secondIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_street_name));
 
-		AndroidUtils.setBackground(getContext(), searchView.findViewById(R.id.first_divider),
-				nightMode, R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(getContext(), searchView.findViewById(R.id.second_divider),
-				nightMode, R.color.divider_color_light, R.color.divider_color_dark);
+		int dividerColor = ColorUtilities.getDividerColorId(nightMode);
+		AndroidUtils.setBackground(getContext(), searchView.findViewById(R.id.first_divider), dividerColor);
+		AndroidUtils.setBackground(getContext(), searchView.findViewById(R.id.second_divider), dividerColor);
 
 		searchView.findViewById(R.id.first_item).setOnClickListener(new OnClickListener() {
 			@Override
@@ -632,6 +632,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		@Override
 		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 			OsmandApplication app = getApp();
+			boolean nightMode = !app.getSettings().isLightContent();
 			if (holder instanceof ItemViewHolder) {
 				Object item = getItem(position);
 				ItemViewHolder favoriteViewHolder = (ItemViewHolder) holder;
@@ -644,8 +645,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						FavouritePoint point = (FavouritePoint) item;
 						favoriteViewHolder.title.setText(point.getDisplayName(app));
 						if (((FavouritePoint) item).getSpecialPointType() != null) {
-							int iconColor = app.getSettings().isLightContent()
-									? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+							int iconColor = ColorUtilities.getDefaultIconColorId(nightMode);
 							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(
 									((FavouritePoint) item).getSpecialPointType().getIconId(app), iconColor));
 							favoriteViewHolder.description.setText(point.getDescription());

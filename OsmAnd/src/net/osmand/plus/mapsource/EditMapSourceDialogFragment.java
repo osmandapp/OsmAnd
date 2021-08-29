@@ -43,6 +43,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -105,23 +106,27 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	private boolean fromTemplate = false;
 	private boolean wasChanged = false;
 
-	public static void showInstance(@NonNull FragmentManager fm,
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
 									@Nullable Fragment targetFragment,
 									@Nullable String editedLayerName) {
-		if (!fm.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
 			fragment.setTargetFragment(targetFragment, 0);
 			fragment.setEditedLayerName(editedLayerName);
-			fragment.show(fm, TAG);
+			fragment.show(fragmentManager, TAG);
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm,
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
 									@NonNull TileSourceTemplate template) {
-		EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
-		fragment.setTemplate(template);
-		fragment.fromTemplate = true;
-		fm.beginTransaction().add(fragment, TAG).commitAllowingStateLoss();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			EditMapSourceDialogFragment fragment = new EditMapSourceDialogFragment();
+			fragment.setTemplate(template);
+			fragment.fromTemplate = true;
+			fragmentManager.beginTransaction()
+					.add(fragment, TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	@Override
@@ -145,21 +150,16 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		View root = UiUtilities.getInflater(requireContext(), nightMode)
 				.inflate(R.layout.fragment_edit_map_source, container, false);
 		Toolbar toolbar = root.findViewById(R.id.toolbar);
-		toolbar.setBackgroundColor(ContextCompat.getColor(app, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
-		toolbar.setTitleTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light));
+		toolbar.setBackgroundColor(ColorUtilities.getAppBarColor(app, nightMode));
+		toolbar.setTitleTextColor(ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode));
 		toolbar.setTitle(editedLayerName == null ? R.string.add_online_source : R.string.edit_online_source);
 		ImageButton iconHelp = root.findViewById(R.id.toolbar_action);
-		Drawable closeDrawable = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
-				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
-		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help,
-				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
+		int activeButtonsColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+		Drawable closeDrawable = app.getUIUtilities().getIcon(
+				AndroidUtils.getNavigationIconResId(app), activeButtonsColorId);
+		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help, activeButtonsColorId);
 		iconHelp.setImageDrawable(helpDrawable);
-		iconHelp.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				onHelpClick();
-			}
-		});
+		iconHelp.setOnClickListener(view -> onHelpClick());
 		toolbar.setNavigationIcon(closeDrawable);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -172,10 +172,8 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 				}
 			}
 		});
-		int boxStrokeColor = nightMode
-				? ContextCompat.getColor(app, R.color.icon_color_osmand_dark)
-				: ContextCompat.getColor(app, R.color.icon_color_osmand_light);
-		int btnBgColorRes = nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		int boxStrokeColor = ContextCompat.getColor(app, nightMode ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light);
+		int btnBgColorRes = ColorUtilities.getListBgColorId(nightMode);
 		nameInputLayout = root.findViewById(R.id.name_input_layout);
 		nameInputLayout.setBoxStrokeColor(boxStrokeColor);
 		nameEditText = root.findViewById(R.id.name_edit_text);

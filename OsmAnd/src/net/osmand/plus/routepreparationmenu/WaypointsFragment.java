@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -35,6 +37,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -62,8 +65,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.helpers.WaypointDialogHelper.showOnMap;
 
 public class WaypointsFragment extends BaseOsmAndFragment implements ObservableScrollViewCallbacks,
 		DynamicListViewCallbacks, WaypointDialogHelper.WaypointDialogHelperCallback, AddPointBottomSheetDialog.DialogListener {
@@ -397,7 +398,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 		boolean landscapeLayout = !portrait;
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int colorActive = ContextCompat.getColor(mapActivity, ColorUtilities.getActiveColorId(nightMode));
 		if (!landscapeLayout) {
 			AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.route_info_menu_bg_light, R.drawable.route_info_menu_bg_dark);
 		} else {
@@ -407,8 +408,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		((TextView) view.findViewById(R.id.sort_button)).setTextColor(colorActive);
 		((TextView) view.findViewById(R.id.add_button_descr)).setTextColor(colorActive);
 		((TextView) view.findViewById(R.id.clear_all_button_descr)).setTextColor(colorActive);
-		((TextView) view.findViewById(R.id.title)).setTextColor(
-				ContextCompat.getColor(mapActivity, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
+		((TextView) view.findViewById(R.id.title)).setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, nightMode));
 
 		FrameLayout addButton = view.findViewById(R.id.add_button);
 		TextView addButtonDescr = (TextView) view.findViewById(R.id.add_button_descr);
@@ -433,8 +433,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		} else {
 			AndroidUtils.setBackground(mapActivity, clearButtonDescr, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
-		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.cancel_button), nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.controls_divider), nightMode, R.color.divider_color_light, R.color.divider_color_dark);
+		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.cancel_button), ColorUtilities.getCardAndListBackgroundColorId(nightMode));
+		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.controls_divider), ColorUtilities.getDividerColorId(nightMode));
 
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(colorActive);
 
@@ -574,7 +574,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			int bgColor = ContextCompat.getColor(app, nightMode ? R.color.activity_background_dark : R.color.activity_background_light);
-			int progressColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+			int progressColor = ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode));
 			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, ContextCompat.getColor(app, progressTextColor)));
 			textProgress.paint.setColor(progressColor);
 			textProgress.setTextColor(ContextCompat.getColor(app, R.color.active_buttons_and_links_text_disabled_dark));
@@ -723,7 +723,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		if (v == null || v.findViewById(R.id.info_close) == null) {
 			v = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.route_waypoint_item, null);
 		}
-		v.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
+		v.setBackgroundColor(ColorUtilities.getCardAndListBackgroundColor(mapActivity, nightMode));
 		updatePointInfoView(mapActivity, v, point, true, nightMode, edit, false);
 
 		final ImageView move = (ImageView) v.findViewById(R.id.info_move);
@@ -769,7 +769,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 				}
 			}
 
-			AndroidUtils.setBackground(mapActivity, topDivider, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
+			AndroidUtils.setBackground(mapActivity, topDivider, ColorUtilities.getDividerColorId(nightMode));
 			topDivider.setVisibility(position != 0 ? View.VISIBLE : View.GONE);
 
 			move.setVisibility(notFlatTargets ? View.VISIBLE : View.GONE);
@@ -796,7 +796,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		if (!topBar) {
-			text.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
+			text.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, nightMode));
 		}
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		if (!edit) {
@@ -808,7 +808,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			});
 		}
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
-		textDist.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+		textDist.setTextColor(ColorUtilities.getActiveColor(mapActivity, nightMode));
 		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(mapActivity, app, nightMode));
 		int dist = -1;
 		boolean startPoint = ps.type == WaypointHelper.TARGETS && ((TargetPoint) ps.point).start;
@@ -910,24 +910,20 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		return WaypointsFragment.showInstance(fragmentManager, false);
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, boolean useRouteInfoMenu) {
-		try {
-			WaypointsFragment fragment = new WaypointsFragment();
-
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, boolean useRouteInfoMenu) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putBoolean(USE_ROUTE_INFO_MENU_KEY, useRouteInfoMenu);
-			fragment.setArguments(args);
 
+			WaypointsFragment fragment = new WaypointsFragment();
+			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	private void onDismiss() {
@@ -944,13 +940,12 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	private void dismiss() {
-		try {
-			MapActivity mapActivity = (MapActivity) getActivity();
-			if (mapActivity != null) {
-				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
-			}
-		} catch (Exception e) {
-			//
+		MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity != null) {
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
+					.remove(this)
+					.commitAllowingStateLoss();
 		}
 	}
 
