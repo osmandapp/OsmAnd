@@ -3,7 +3,7 @@ APP_CPPFLAGS := -std=c++14 -fexceptions -frtti
 APP_SHORT_COMMANDS := true
 
 # Specify least supported Android platform version
-APP_PLATFORM := android-14
+APP_PLATFORM := android-21
 
 NDK_TOOLCHAIN_VERSION := clang
 APP_ABI := x86 armeabi-v7a arm64-v8a x86_64
