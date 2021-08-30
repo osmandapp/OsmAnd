@@ -92,10 +92,6 @@ public abstract class OsmandListActivity extends
 		((ListView)findViewById(android.R.id.list)).setOnItemClickListener(childClickListener);
 	}
 
-	public boolean isLightActionBar() {
-		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
-	}
-
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 

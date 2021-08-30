@@ -3,9 +3,7 @@ package net.osmand.plus.track;
 import static net.osmand.GPXUtilities.GPXTrackAnalysis;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
-import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
-import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
+import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.plus.track.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
@@ -72,6 +70,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -105,7 +104,6 @@ import net.osmand.plus.myplaces.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
-import net.osmand.plus.myplaces.TrackActivityFragmentAdapter;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -129,8 +127,14 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener {
 
+	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
+	public static final String OPEN_POINTS_TAB = "OPEN_POINTS_TAB";
+	public static final String OPEN_TRACKS_LIST = "OPEN_TRACKS_LIST";
+	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
+	public static final String SHOW_TEMPORARILY = "SHOW_TEMPORARILY";
 	public static final String OPEN_TRACK_MENU = "open_track_menu";
 	public static final String RETURN_SCREEN_NAME = "return_screen_name";
+	public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
@@ -1342,7 +1346,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (deleteSegment(segment)) {
 			GPXFile gpx = displayHelper.getGpx();
 			if (gpx != null) {
-				boolean showOnMap = TrackActivityFragmentAdapter.isGpxFileSelected(app, gpx);
+				boolean showOnMap = GpxSelectionHelper.isGpxFileSelected(app, gpx);
 				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
 				saveGpx(showOnMap ? selectedGpxFile : null, gpx);
 			}
@@ -1407,7 +1411,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams,
-	                             @Nullable String returnScreenName) {
+								 @Nullable String returnScreenName) {
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {

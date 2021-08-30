@@ -18,7 +18,6 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 	private RegionAddressRepository region;
 	private City cityOrPostcode;
 	private Street street1;
-	private OsmandSettings osmandSettings;
 
 	@Override
 	protected Comparator<? super Street> createComparator() {

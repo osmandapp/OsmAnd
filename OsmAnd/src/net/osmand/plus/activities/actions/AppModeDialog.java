@@ -33,22 +33,6 @@ import java.util.Set;
 
 public class AppModeDialog {
 
-	private static final Log LOG = PlatformUtil.getLog(AppModeDialog.class);
-	
-	public static View prepareAppModeView(Activity a, final Set<ApplicationMode> selected, boolean showDefault,
-	                                      ViewGroup parent, final boolean singleSelection, boolean useListBg, boolean useMapTheme, final View.OnClickListener onClickListener) {
-		OsmandApplication app = (OsmandApplication) a.getApplication();
-		OsmandSettings settings = app.getSettings();
-		final List<ApplicationMode> values = new ArrayList<>(ApplicationMode.values(app));
-		if (!showDefault) {
-			values.remove(ApplicationMode.DEFAULT);
-		}
-		if (showDefault || (settings.getApplicationMode() != ApplicationMode.DEFAULT && !singleSelection)) {
-			selected.add(settings.getApplicationMode());
-		}
-		return prepareAppModeView(a, values, selected, parent, singleSelection, useListBg, useMapTheme, onClickListener);
-	}
-
 	//special method for drawer menu
 	//needed because if there's more than 4 items  - the don't fit in drawer
 	public static View prepareAppModeDrawerView(Activity a, final Set<ApplicationMode> selected,

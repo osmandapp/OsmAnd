@@ -13,7 +13,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -46,7 +45,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
@@ -167,7 +165,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		currentRecording.currentlyRecordingTrack = true;
 		asyncLoader = new LoadGpxTask();
 		selectedGpxHelper = ((OsmandApplication) activity.getApplicationContext()).getSelectedGpxHelper();
-		allGpxAdapter = new GpxIndexesAdapter(getActivity());
+		allGpxAdapter = new GpxIndexesAdapter();
 		setAdapter(allGpxAdapter);
 	}
 
@@ -934,12 +932,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
-		Map<String, List<GpxInfo>> data = new LinkedHashMap<>();
-		List<String> category = new ArrayList<>();
-		List<GpxInfo> selected = new ArrayList<>();
-		int warningColor;
-		int defaultColor;
-		int corruptedColor;
+		private Map<String, List<GpxInfo>> data = new LinkedHashMap<>();
+		private List<String> category = new ArrayList<>();
+		private List<GpxInfo> selected = new ArrayList<>();
 		private SearchFilter filter;
 
 		private GpxInfoViewCallback updateGpxCallback = new GpxInfoViewCallback() {
@@ -972,13 +967,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				app.runMessageInUIThreadAndCancelPrevious(UPDATE_GPX_ITEM_MSG_ID, updateItemsProc, MIN_UPDATE_INTERVAL);
 			}
 		};
-
-		public GpxIndexesAdapter(Context ctx) {
-			warningColor = ContextCompat.getColor(ctx, R.color.color_warning);
-			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-			defaultColor = ta.getColor(0, ContextCompat.getColor(ctx, R.color.color_unknown));
-			ta.recycle();
-		}
 
 		public void refreshSelected() {
 			selected.clear();
@@ -1206,9 +1194,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				final CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.GONE);
 				if (isSelectedGroup(groupPosition)) {
-					setCategoryIcon(app, app.getUIUtilities().getIcon(R.drawable.ic_map, R.color.osmand_orange), groupPosition, isExpanded, v, light);
+					setCategoryIcon(app.getUIUtilities().getIcon(R.drawable.ic_map, R.color.osmand_orange), v);
 				} else {
-					setCategoryIcon(app, 0, groupPosition, isExpanded, v, light);
+					setCategoryIcon(app, 0, v, light);
 				}
 				v.findViewById(R.id.category_icon).setVisibility(View.VISIBLE);
 			}

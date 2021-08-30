@@ -4,12 +4,10 @@ package net.osmand.plus.activities.search;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 
 import androidx.appcompat.app.ActionBar.OnNavigationListener;
 import androidx.appcompat.widget.Toolbar;
@@ -70,7 +68,6 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	public static final String SEARCH_LON = "net.osmand.search_lon"; //$NON-NLS-1$
 	public static final String SHOW_ONLY_ONE_TAB = "SHOW_ONLY_ONE_TAB"; //$NON-NLS-1$
 
-	Button searchPOIButton;
 	private LatLon searchPoint = null;
 	private LatLon reqSearchPoint = null;
 	private boolean searchAroundCurrentLocation = false;
@@ -83,8 +80,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	
 	private AccessibilityAssistant accessibilityAssistant;
 	private NavigationInfo navigationInfo;
-	private View spinnerView;
-	
+
 	public interface SearchActivityChild {
 		
 		public void locationUpdate(LatLon l);
@@ -246,7 +242,6 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 					}
 				};
 		spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-		spinnerView = LayoutInflater.from(spinnerAdapter.getContext()).inflate(R.layout.spinner_item, null);
         getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
 			
 			@Override

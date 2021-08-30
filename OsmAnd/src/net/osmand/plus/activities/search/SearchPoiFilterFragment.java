@@ -54,8 +54,6 @@ import java.util.List;
 
 public class SearchPoiFilterFragment extends OsmAndListFragment implements SearchActivityChild {
 
-	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
-	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	public static final int REQUEST_POI_EDIT = 55;
 
 	private EditText searchEditText;

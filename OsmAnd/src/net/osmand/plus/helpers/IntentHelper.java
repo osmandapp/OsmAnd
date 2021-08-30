@@ -39,8 +39,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
-import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
+import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
 import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import static net.osmand.plus.track.TrackMenuFragment.RETURN_SCREEN_NAME;
 

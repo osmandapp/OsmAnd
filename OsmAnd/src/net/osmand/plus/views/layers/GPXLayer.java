@@ -5,7 +5,6 @@ import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
@@ -130,13 +129,9 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private Paint paintOuterRect;
 	private Paint paintInnerRect;
 
-	private Paint paintGridOuterCircle;
-	private Paint paintGridCircle;
-
 	private Paint paintTextIcon;
 
 	private GpxGeometryWayContext wayContext;
-	private GpxGeometryWay wayGeometry;
 
 	private OsmandRenderer osmandRenderer;
 
@@ -222,14 +217,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		paintOuterRect.setAntiAlias(true);
 		paintOuterRect.setStrokeWidth(3);
 		paintOuterRect.setAlpha(255);
-		paintGridCircle = new Paint();
-		paintGridCircle.setStyle(Style.FILL_AND_STROKE);
-		paintGridCircle.setAntiAlias(true);
-		paintGridOuterCircle = new Paint();
-		paintGridOuterCircle.setStyle(Style.FILL_AND_STROKE);
-		paintGridOuterCircle.setAntiAlias(true);
-		paintGridOuterCircle.setColor(Color.WHITE);
-		paintGridOuterCircle.setAlpha(204);
 
 		UiUtilities iconsCache = view.getApplication().getUIUtilities();
 		startPointIcon = iconsCache.getIcon(R.drawable.map_track_point_start);
@@ -243,7 +230,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		grayColor = ContextCompat.getColor(view.getApplication(), R.color.color_favorite_gray);
 
 		wayContext = new GpxGeometryWayContext(view.getContext(), view.getDensity());
-		wayGeometry = new GpxGeometryWay(wayContext);
 	}
 
 	@Override
@@ -945,7 +931,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private SelectedGpxPoint createSelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint,
-	                                                WptPt nextPoint, LatLon latLon, boolean showTrackPointMenu) {
+													WptPt nextPoint, LatLon latLon, boolean showTrackPointMenu) {
 		WptPt projectionPoint = createProjectionPoint(prevPoint, nextPoint, latLon);
 
 		Location prevPointLocation = new Location("");
@@ -1063,7 +1049,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
-	                                    boolean unknownLocation) {
+										boolean unknownLocation) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			getWptFromPoint(tileBox, point, res);
 			getTracksFromPoint(tileBox, point, res, false);

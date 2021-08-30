@@ -322,8 +322,6 @@ public class AddPOIAction extends QuickAction {
 								poiTypeEditText.setText(category);
 							}
 						});
-
-						CreateEditActionDialog parentFragment = (CreateEditActionDialog) activity.getSupportFragmentManager().findFragmentByTag(CreateEditActionDialog.TAG);
 						f.show(activity.getSupportFragmentManager(), "PoiSubTypeDialogFragment");
 						return true;
 					}

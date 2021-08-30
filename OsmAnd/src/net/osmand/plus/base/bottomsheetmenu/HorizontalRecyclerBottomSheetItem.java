@@ -26,10 +26,6 @@ public class HorizontalRecyclerBottomSheetItem extends BaseBottomSheetItem {
 		this.adapter = adapter;
 	}
 
-	protected HorizontalRecyclerBottomSheetItem() {
-
-	}
-
 	public void setAdapter(RecyclerView.Adapter adapter) {
 		this.adapter = adapter;
 		recyclerView.setAdapter(adapter);

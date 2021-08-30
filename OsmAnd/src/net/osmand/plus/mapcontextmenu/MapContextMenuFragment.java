@@ -44,7 +44,6 @@ import android.widget.TextView;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -876,29 +875,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		});
 	}
 
-	private void deactivate(View view) {
-		view.setEnabled(false);
-		view.setAlpha(0.5f);
-	}
-
 	@Override
 	public int getStatusBarColorId() {
 		if (menu != null && (menu.getCurrentMenuState() == MenuState.FULL_SCREEN || menu.isLandscapeLayout())) {
 			return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_route_light;
 		}
 		return -1;
-	}
-
-	private void updateImageButton(ImageButton button, int iconLightId, int iconDarkId, int bgLightId, int bgDarkId, boolean night) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			button.setImageDrawable(mapActivity.getMyApplication().getUIUtilities().getIcon(night ? iconDarkId : iconLightId));
-			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-				button.setBackground(AppCompatResources.getDrawable(mapActivity, night ? bgDarkId : bgLightId));
-			} else {
-				button.setBackgroundDrawable(AppCompatResources.getDrawable(mapActivity, night ? bgDarkId : bgLightId));
-			}
-		}
 	}
 
 	private void processScreenHeight(ViewParent parent) {
@@ -1500,28 +1482,6 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			}
 		}
 		return convertView;
-	}
-
-	public void fitRectOnMap(QuadRect rect) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
-			int tileBoxWidthPx = 0;
-			int tileBoxHeightPx;
-			if (menu.isLandscapeLayout()) {
-				tileBoxWidthPx = tb.getPixWidth() - mainView.getWidth();
-				tileBoxHeightPx = viewHeight;
-			} else {
-				tileBoxHeightPx = viewHeight - menuFullHeight;
-			}
-			if (tileBoxHeightPx > 0 || tileBoxWidthPx > 0) {
-				int topMarginPx = AndroidUtils.getStatusBarHeight(mapActivity);
-				int leftMarginPx = mainView.getWidth();
-				restoreCustomMapRatio();
-				mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
-						tileBoxWidthPx, tileBoxHeightPx, topMarginPx, leftMarginPx);
-			}
-		}
 	}
 
 	private void updateLocalRoutesBadges(List<TransportStopRoute> localTransportStopRoutes, int localColumnsPerRow) {

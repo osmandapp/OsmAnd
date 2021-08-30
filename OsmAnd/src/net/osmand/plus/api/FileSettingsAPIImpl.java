@@ -11,15 +11,12 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 
-import net.osmand.plus.OsmandApplication;
-
 public class FileSettingsAPIImpl implements SettingsAPI {
 
-	protected OsmandApplication app;
-	protected ConcurrentHashMap<String, Object> map = new ConcurrentHashMap<String, Object>();
 	protected File file;
+	protected ConcurrentHashMap<String, Object> map = new ConcurrentHashMap<String, Object>();
 
-	public FileSettingsAPIImpl(OsmandApplication app, File file) throws IOException {
+	public FileSettingsAPIImpl(File file) throws IOException {
 		this.file = file;
 		if (file.exists()) {
 			Properties props = new Properties();
@@ -31,23 +28,24 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 			}
 		}
 	}
-	
+
 	@Override
 	public Object getPreferenceObject(String key) {
 		return key;
 	}
-	
+
 	private String wrap(Object pref, String key) {
-		return pref + "."+key;
+		return pref + "." + key;
 	}
+
 	@Override
 	public SettingsEditor edit(final Object pref) {
 		return new SettingsEditor() {
-			Map<String, Object> modified = new LinkedHashMap<String, Object>();
-			
+			final Map<String, Object> modified = new LinkedHashMap<String, Object>();
+
 			@Override
 			public SettingsEditor remove(String key) {
-				modified.put(wrap(pref,key), null);
+				modified.put(wrap(pref, key), null);
 				return this;
 			}
 
@@ -59,34 +57,34 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 
 			@Override
 			public SettingsEditor putString(String key, String value) {
-				modified.put(wrap(pref,key), value);
+				modified.put(wrap(pref, key), value);
 				return this;
 			}
-			
+
 			@Override
 			public SettingsEditor putLong(String key, long value) {
-				modified.put(key, value+"");
+				modified.put(key, value + "");
 				return this;
 			}
-			
+
 			@Override
 			public SettingsEditor putInt(String key, int value) {
-				modified.put(wrap(pref,key), value);
+				modified.put(wrap(pref, key), value);
 				return this;
 			}
-			
+
 			@Override
 			public SettingsEditor putFloat(String key, float value) {
-				modified.put(wrap(pref,key), value);
+				modified.put(wrap(pref, key), value);
 				return this;
 			}
-			
+
 			@Override
 			public SettingsEditor putBoolean(String key, boolean value) {
-				modified.put(wrap(pref,key), value);
+				modified.put(wrap(pref, key), value);
 				return this;
 			}
-			
+
 			@Override
 			public boolean commit() {
 				return commitToFile(modified);
@@ -94,10 +92,9 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 
 		};
 	}
-	
-	
+
 	private boolean commitToFile(Map<String, Object> modified) {
-		for(Entry<String, Object> e : modified.entrySet()) {
+		for (Entry<String, Object> e : modified.entrySet()) {
 			if (e.getValue() == null) {
 				map.remove(e.getKey());
 			} else {
@@ -111,7 +108,7 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 		try {
 			Properties ps = new Properties();
 			Iterator<Entry<String, Object>> it = map.entrySet().iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				Entry<String, Object> e = it.next();
 				ps.put(e.getKey(), String.valueOf(e.getValue()));
 			}
@@ -124,23 +121,24 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public String getString(Object pref, String key, String defValue) {
-		Object obj = map.get(wrap(pref,key));
-		if(obj == null) {
+		Object obj = map.get(wrap(pref, key));
+		if (obj == null) {
 			return defValue;
 		}
 		return obj.toString();
 	}
+
 	@Override
 	public float getFloat(Object pref, String key, float defValue) {
-		Object obj = map.get(wrap(pref,key));
-		if(obj == null) {
+		Object obj = map.get(wrap(pref, key));
+		if (obj == null) {
 			return defValue;
 		}
-		if(obj instanceof Number) {
-			return ((Number)obj).floatValue();
+		if (obj instanceof Number) {
+			return ((Number) obj).floatValue();
 		} else {
 			try {
 				float flot = Float.parseFloat(obj.toString());
@@ -151,23 +149,24 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 			}
 		}
 	}
+
 	@Override
 	public boolean getBoolean(Object pref, String key, boolean defValue) {
-		Object obj = map.get(wrap(pref,key));
-		if(obj == null) {
+		Object obj = map.get(wrap(pref, key));
+		if (obj == null) {
 			return defValue;
 		}
 		return Boolean.parseBoolean(obj.toString());
 	}
-	
+
 	@Override
 	public int getInt(Object pref, String key, int defValue) {
-		Object obj = map.get(wrap(pref,key));
-		if(obj == null) {
+		Object obj = map.get(wrap(pref, key));
+		if (obj == null) {
 			return defValue;
 		}
-		if(obj instanceof Number) {
-			return ((Number)obj).intValue();
+		if (obj instanceof Number) {
+			return ((Number) obj).intValue();
 		} else {
 			try {
 				int num = Integer.parseInt(obj.toString());
@@ -178,15 +177,15 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 			}
 		}
 	}
-	
+
 	@Override
 	public long getLong(Object pref, String key, long defValue) {
-		Object obj = map.get(wrap(pref,key));
-		if(obj == null) {
+		Object obj = map.get(wrap(pref, key));
+		if (obj == null) {
 			return defValue;
 		}
-		if(obj instanceof Number) {
-			return ((Number)obj).longValue();
+		if (obj instanceof Number) {
+			return ((Number) obj).longValue();
 		} else {
 			try {
 				long num = Long.parseLong(obj.toString());
@@ -196,10 +195,11 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 				return defValue;
 			}
 		}
-	
+
 	}
+
 	@Override
 	public boolean contains(Object pref, String key) {
-		return map.containsKey(wrap(pref,key));
+		return map.containsKey(wrap(pref, key));
 	}
 }

@@ -31,8 +31,8 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.AndroidUtils.dpToPx;
-import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
-import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
+import static net.osmand.plus.track.DescriptionCard.getMetadataImageLink;
+import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
