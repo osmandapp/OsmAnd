@@ -4015,4 +4015,5 @@
     <string name="poi_shelter_no">Esőbeálló nincs</string>
     <string name="poi_shelter_filter">Esőbeálló</string>
     <string name="poi_permanent_camping">Állandó kemping</string>
+    <string name="poi_arch">Sziklaboltív</string>
 </resources>
