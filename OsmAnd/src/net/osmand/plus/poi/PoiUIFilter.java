@@ -20,6 +20,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -79,7 +80,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public PoiUIFilter(AbstractPoiType type, OsmandApplication application, String idSuffix) {
 		this.app = application;
 		isStandardFilter = true;
-		standardIconId = (type == null ? null : type.getKeyName());
+		standardIconId = type == null ? null : type.getKeyName();
 		filterId = STD_PREFIX + standardIconId + idSuffix;
 
 		poiTypes = application.getPoiTypes();
@@ -94,7 +95,6 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			updateTypesToAccept(type);
 		}
 	}
-
 
 	// search by name standard
 	protected PoiUIFilter(OsmandApplication application) {
@@ -860,8 +860,13 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	public String getIconId() {
-		if (filterId.startsWith(STD_PREFIX)) {
+		if (filterId.startsWith(STD_PREFIX) && RenderingIcons.containsBigIcon(standardIconId)) {
 			return standardIconId;
+		} else if (acceptedTypes.size() == 1) {
+			PoiCategory category = acceptedTypes.keySet().iterator().next();
+			String categoryName = category.getKeyName();
+			String categoryType = acceptedTypes.get(category).iterator().next();
+			return categoryName + "_" + categoryType;
 		} else if (filterId.startsWith(USER_PREFIX)) {
 			return filterId.substring(USER_PREFIX.length()).toLowerCase();
 		}
