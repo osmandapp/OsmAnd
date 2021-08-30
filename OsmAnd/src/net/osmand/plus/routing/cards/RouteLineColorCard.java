@@ -75,22 +75,6 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	private final DayNightMode initMapTheme;
 	private DayNightMode selectedMapTheme;
 
-	enum RouteInfoAttribute {
-		ROAD_TYPE("roadClass", R.string.route_color_road_type_description),
-		SURFACE("surface", R.string.route_color_surface_description),
-		SMOOTHNESS("smoothness", R.string.route_color_smoothness_description),
-		WINTER_ICE_ROAD("winter_ice_road", R.string.route_color_winter_and_ski_description),
-		SURFACE_FIRMNESS("tracktype", R.string.route_color_tracktype_description);
-
-		private String key;
-		private int descId;
-
-		RouteInfoAttribute(String key, int descId) {
-			this.key = ROUTE_INFO_PREFIX + key;
-			this.descId = descId;
-		}
-	}
-
 	public RouteLineColorCard(@NonNull MapActivity mapActivity,
 	                          @NonNull Fragment targetFragment,
 	                          @NonNull PreviewRouteLineInfo previewRouteLineInfo,
@@ -284,22 +268,13 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			String mapModeTitle = app.getString(isNightMap() ? NIGHT_TITLE_ID : DAY_TITLE_ID);
 			description = String.format(pattern, mapModeTitle.toLowerCase());
 		} else if (selectedType.isRouteInfoAttribute()) {
-			description = getAttributeDescription(selectedRouteInfoAttribute);
+			String key = selectedRouteInfoAttribute.replaceAll(ROUTE_INFO_PREFIX, "");
+			description = AndroidUtils.getStringRouteInfoPropertyDescription(app, key);
 		} else {
 			description = app.getString(R.string.route_line_use_gradient_coloring);
 		}
 		AndroidUiHelper.updateVisibility(tvDescription, description != null);
 		tvDescription.setText(description != null ? description : "");
-	}
-
-	@Nullable
-	private String getAttributeDescription(String key) {
-		for (RouteInfoAttribute attr: RouteInfoAttribute.values()) {
-			if (attr.key.equals(key)) {
-				return app.getString(attr.descId);
-			}
-		}
-		return null;
 	}
 
 	private boolean isNightMap() {

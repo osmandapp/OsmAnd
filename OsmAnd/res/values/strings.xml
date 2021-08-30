@@ -12,11 +12,11 @@
 
 -->
 
-    <string name="route_color_road_type_description">Colouring the route or track line according to road classification.</string>
-    <string name="route_color_surface_description">Provide additional information about the physical surface of roads/footpaths.</string>
-    <string name="route_color_smoothness_description">Provides a classification scheme regarding the physical usability of a way for wheeled vehicles, particularly regarding surface regularity/flatness.</string>
-    <string name="route_color_winter_and_ski_description">Coloring the route or track line according to the winter road classification that is only usable during the winter.</string>
-    <string name="route_color_tracktype_description">Coloring a route or track line according to the condition of the roads based on their surface composition. Typically applied to roads where the main road network consists of unpaved roads.</string>
+    <string name="routeInfo_roadClass_description">Colouring the route or track line according to road classification.</string>
+    <string name="routeInfo_surface_description">Provide additional information about the physical surface of roads/footpaths.</string>
+    <string name="routeInfo_smoothness_description">Provides a classification scheme regarding the physical usability of a way for wheeled vehicles, particularly regarding surface regularity/flatness.</string>
+    <string name="routeInfo_winter_ice_road_description">Coloring the route or track line according to the winter road classification that is only usable during the winter.</string>
+    <string name="routeInfo_tracktype_description">Coloring a route or track line according to the condition of the roads based on their surface composition. Typically applied to roads where the main road network consists of unpaved roads.</string>
     <string name="no_activity_for_intent">No suitable applications to perform this action were found</string>
     <string name="empty_category_name">Empty category name</string>
     <string name="amz_manage_subscription_descr">To manage your subscription use the Amazon App on the device or open the Amazon.com website under your profile.</string>

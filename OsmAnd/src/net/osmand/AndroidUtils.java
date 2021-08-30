@@ -1085,6 +1085,16 @@ public class AndroidUtils {
 		return value != null ? value : propertyValue;
 	}
 
+	@NonNull
+	public static String getStringRouteInfoPropertyDescription(Context ctx, String propertyValue) {
+		if (propertyValue == null) {
+			return "";
+		}
+		String propertyValueReplaced = propertyValue.replaceAll("\\s+", "_");
+		String value = getStringByProperty(ctx, "routeInfo_" + propertyValueReplaced + "_description");
+		return value != null ? value : propertyValue;
+	}
+
 
 	public static String getActivityTypeStringPropertyName(Context ctx, String propertyName, String defValue) {
 		String value = getStringByProperty(ctx, "activity_type_" + propertyName + "_name");
