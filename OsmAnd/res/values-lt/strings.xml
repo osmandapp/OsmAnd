@@ -196,7 +196,7 @@
     <string name="user_name">Jūsų OSM vartotojo vardas</string>
     <string name="open_street_map_login_descr">Reikalingas norint teikti duomenis į openstreetmap.org.</string>
     <string name="user_password">Slaptažodis</string>
-    <string name="osmand_service">Foninis režimas</string>
+    <string name="osmand_service">Fono režimas</string>
     <string name="osmand_service_descr">Reikalinga, jei norite naudoti OsmAnd kai ekranas yra išjungtas.</string>
     <string name="download_files_not_enough_space">Neužtenka vietos parsiųsti %1$s MB (laisva: %2$s).</string>
     <string name="download_files_question_space">Atsiųsti {0} failą(-us)\? 
@@ -2770,7 +2770,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="routing_engine_vehicle_type_bike">Dviratis</string>
     <string name="routing_engine_vehicle_type_car">Automobilis</string>
     <string name="copy_address">Kopijuoti adresą</string>
-    <string name="shared_string_folders">Folderiai</string>
+    <string name="shared_string_folders">Aplankai</string>
     <string name="select_folder">Pasirinkite folderį</string>
     <string name="select_folder_descr">Pasirinkite folderį arba sukurkite naują</string>
     <string name="upload_to_openstreetmap">Siųsti į OpenStreetMap</string>
