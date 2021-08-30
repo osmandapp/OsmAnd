@@ -49,14 +49,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import static net.osmand.router.RouteStatisticsHelper.ROUTE_INFO_PREFIX;
+
 
 public class RouteLineColorCard extends MapBaseCard implements CardListener, ColorPickerListener, HeaderInfo {
-
-	public static final String ROUTE_INFO_ATTRIBUTE_ROAD_TYPE = "routeInfo_roadClass";
-	public static final String ROUTE_INFO_ATTRIBUTE_SURFACE = "routeInfo_surface";
-	public static final String ROUTE_INFO_ATTRIBUTE_SMOOTHNESS = "routeInfo_smoothness";
-	public static final String ROUTE_INFO_ATTRIBUTE_WINTER_ICE_ROAD = "routeInfo_winter_ice_road";
-	public static final String ROUTE_INFO_ATTRIBUTE_SURFACE_FIRMNESS = "routeInfo_tracktype";
 
 	private static final int DAY_TITLE_ID = R.string.day;
 	private static final int NIGHT_TITLE_ID = R.string.night;
@@ -78,6 +74,22 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	private final PreviewRouteLineInfo previewRouteLineInfo;
 	private final DayNightMode initMapTheme;
 	private DayNightMode selectedMapTheme;
+
+	enum RouteInfoAttribute {
+		ROAD_TYPE("roadClass", R.string.route_color_road_type_description),
+		SURFACE("surface", R.string.route_color_surface_description),
+		SMOOTHNESS("smoothness", R.string.route_color_smoothness_description),
+		WINTER_ICE_ROAD("winter_ice_road", R.string.route_color_winter_and_ski_description),
+		SURFACE_FIRMNESS("tracktype", R.string.route_color_tracktype_description);
+
+		private String key;
+		private int descId;
+
+		RouteInfoAttribute(String key, int descId) {
+			this.key = ROUTE_INFO_PREFIX + key;
+			this.descId = descId;
+		}
+	}
 
 	public RouteLineColorCard(@NonNull MapActivity mapActivity,
 	                          @NonNull Fragment targetFragment,
@@ -272,7 +284,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			String mapModeTitle = app.getString(isNightMap() ? NIGHT_TITLE_ID : DAY_TITLE_ID);
 			description = String.format(pattern, mapModeTitle.toLowerCase());
 		} else if (selectedType.isRouteInfoAttribute()) {
-			description = getRouteInfoAttributeDescription(selectedRouteInfoAttribute);
+			description = getAttributeDescription(selectedRouteInfoAttribute);
 		} else {
 			description = app.getString(R.string.route_line_use_gradient_coloring);
 		}
@@ -281,20 +293,13 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	@Nullable
-	private String getRouteInfoAttributeDescription(String attribute) {
-		int descId = -1;
-		if (ROUTE_INFO_ATTRIBUTE_ROAD_TYPE.equals(attribute)) {
-			descId = R.string.route_color_road_type_description;
-		} else if (ROUTE_INFO_ATTRIBUTE_SMOOTHNESS.equals(attribute)) {
-			descId = R.string.route_color_smoothness_description;
-		} else if (ROUTE_INFO_ATTRIBUTE_SURFACE.equals(attribute)) {
-			descId = R.string.route_color_surface_description;
-		} else if (ROUTE_INFO_ATTRIBUTE_WINTER_ICE_ROAD.equals(attribute)) {
-			descId = R.string.route_color_winter_and_ski_description;
-		} else if (ROUTE_INFO_ATTRIBUTE_SURFACE_FIRMNESS.equals(attribute)) {
-			descId = R.string.route_color_tracktype_description;
+	private String getAttributeDescription(String key) {
+		for (RouteInfoAttribute attr: RouteInfoAttribute.values()) {
+			if (attr.key.equals(key)) {
+				return app.getString(attr.descId);
+			}
 		}
-		return descId != -1 ? app.getString(descId) : null;
+		return null;
 	}
 
 	private boolean isNightMap() {
