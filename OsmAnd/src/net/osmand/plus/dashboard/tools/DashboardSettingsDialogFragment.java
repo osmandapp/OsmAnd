@@ -66,7 +66,6 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		TypedValue typedValue = new TypedValue();
 		FragmentActivity activity = requireActivity();
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		boolean nightMode = isNightMode();
 		context = new ContextThemeWrapper(activity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		Theme theme = context.getTheme();

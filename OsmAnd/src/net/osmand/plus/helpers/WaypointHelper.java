@@ -1,5 +1,10 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -46,11 +51,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
 
 //	import android.widget.Toast;
 
@@ -507,7 +507,7 @@ public class WaypointHelper {
 			} else {
 				routeIndex = k == 0 ? route.getImmutableAllLocations().size() - 1 : route.getIndexOfIntermediate(k - 1);
 			}
-			points.add(new LocationPointWrapper(route, TARGETS, tp, 0, routeIndex));
+			points.add(new LocationPointWrapper(TARGETS, tp, 0, routeIndex));
 		}
 		Collections.reverse(points);
 		return points;
@@ -640,7 +640,7 @@ public class WaypointHelper {
 				if (routePoint != null) {
 					int i = locs.indexOf(routePoint.pointA);
 					if (i >= 0) {
-						LocationPointWrapper lwp = new LocationPointWrapper(route, POI, new AmenityLocationPoint(a),
+						LocationPointWrapper lwp = new LocationPointWrapper(POI, new AmenityLocationPoint(a),
 								(float) routePoint.deviateDistance, i);
 						lwp.deviationDirectionRight = routePoint.deviationDirectionRight;
 						lwp.setAnnounce(announcePOI);
@@ -657,7 +657,7 @@ public class WaypointHelper {
 			if (i.getType() == AlarmInfoType.SPEED_CAMERA) {
 				if (app.getSettings().SHOW_ROUTING_ALARMS.get() && app.getSettings().SHOW_CAMERAS.getModeValue(mode)
 						|| app.getSettings().SPEAK_SPEED_CAMERA.getModeValue(mode)) {
-					LocationPointWrapper lw = new LocationPointWrapper(route, ALARMS, i, 0, i.getLocationIndex());
+					LocationPointWrapper lw = new LocationPointWrapper(ALARMS, i, 0, i.getLocationIndex());
 					if(prevSpeedCam != null &&  
 							MapUtils.getDistance(prevSpeedCam.getLatitude(), prevSpeedCam.getLongitude(), 
 									i.getLatitude(), i.getLongitude()) < DISTANCE_IGNORE_DOUBLE_SPEEDCAMS) {
@@ -671,7 +671,7 @@ public class WaypointHelper {
 			} else {
 				if (app.getSettings().SHOW_ROUTING_ALARMS.get() && app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(mode)
 						|| app.getSettings().SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
-					LocationPointWrapper lw = new LocationPointWrapper(route, ALARMS, i, 0, i.getLocationIndex());
+					LocationPointWrapper lw = new LocationPointWrapper(ALARMS, i, 0, i.getLocationIndex());
 					lw.setAnnounce(app.getSettings().SPEAK_TRAFFIC_WARNINGS.get());
 					array.add(lw);
 				}
@@ -702,7 +702,7 @@ public class WaypointHelper {
 			float dist = dist(p, immutableAllLocations, ind, devDirRight);
 			int rad = getSearchDeviationRadius(type);
 			if (dist <= rad) {
-				LocationPointWrapper lpw = new LocationPointWrapper(rt, type, p, dist, ind[0]);
+				LocationPointWrapper lpw = new LocationPointWrapper(type, p, dist, ind[0]);
 				lpw.deviationDirectionRight = devDirRight[0];
 				lpw.setAnnounce(announce);
 				locationPoints.add(lpw);
@@ -725,13 +725,11 @@ public class WaypointHelper {
 
 		int routeIndex;
 		boolean announce = true;
-		RouteCalculationResult route;
 
 		public LocationPointWrapper() {
 		}
 
-		public LocationPointWrapper(RouteCalculationResult rt, int type, LocationPoint point, float deviationDistance, int routeIndex) {
-			this.route = rt;
+		public LocationPointWrapper(int type, LocationPoint point, float deviationDistance, int routeIndex) {
 			this.type = type;
 			this.point = point;
 			this.deviationDistance = deviationDistance;

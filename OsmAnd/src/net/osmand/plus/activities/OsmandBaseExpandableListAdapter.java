@@ -14,7 +14,7 @@ public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableList
 
 	protected void adjustIndicator(OsmandApplication app, int groupPosition, boolean expanded, View row, boolean light) {
 		adjustIndicator(app, row, expanded, !light);
-		ImageView indicator = (ImageView) row.findViewById(R.id.explicit_indicator);
+		ImageView indicator = row.findViewById(R.id.explicit_indicator);
 		indicator.setVisibility(getChildrenCount(groupPosition) > 0 ? View.VISIBLE : View.GONE);
 	}
 
@@ -29,8 +29,8 @@ public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableList
 		}
 	}
 
-	protected void setCategoryIcon(OsmandApplication app, int resId, int groupPosition, boolean isExpanded, View row, boolean light) {
-		ImageView icon = (ImageView) row.findViewById(R.id.category_icon);
+	protected void setCategoryIcon(OsmandApplication app, int resId, View row, boolean light) {
+		ImageView icon = row.findViewById(R.id.category_icon);
 		if (resId == 0) {
 			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_folder_stroke, light));
 		} else {
@@ -38,8 +38,8 @@ public abstract class OsmandBaseExpandableListAdapter extends BaseExpandableList
 		}
 	}
 
-	protected void setCategoryIcon(OsmandApplication app, Drawable res, int groupPosition, boolean isExpanded, View row, boolean light) {
-		ImageView icon = (ImageView) row.findViewById(R.id.category_icon);
+	protected void setCategoryIcon(Drawable res, View row) {
+		ImageView icon = row.findViewById(R.id.category_icon);
 		icon.setImageDrawable(res);
 	}
 }

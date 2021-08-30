@@ -64,7 +64,6 @@
 		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@mipmap/icon" android:value="" />
 		<meta-data android:name="android.webkit.WebView.MetricsOptOut" android:value="true" />
 		<activity android:name="net.osmand.plus.activities.HelpActivity" />
-        <activity android:name="net.osmand.plus.activities.ExitActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -495,7 +494,6 @@
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" />
 		<activity android:name="net.osmand.plus.activities.FavoritesListActivity" android:label="@string/favourites_list_activity" />
 		<activity android:name=".myplaces.FavoritesActivity" android:windowSoftInputMode="adjustPan" />
-		<activity android:name="net.osmand.plus.activities.TrackActivity"/>
 		<activity android:name="net.osmand.plus.activities.ContributionVersionActivity" android:configChanges="keyboardHidden|orientation" android:label="@string/contribution_activity" />
 
 

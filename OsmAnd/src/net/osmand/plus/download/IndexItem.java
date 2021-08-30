@@ -162,15 +162,6 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		return getFileName().compareTo(another.getFileName());
 	}
 
-	
-	public String getDaysBehind(OsmandApplication app) {
-		if (localTimestamp > 0) {
-			long days = Math.max(1, (getTimestamp() - localTimestamp) / (24 * 60 * 60 * 1000) + 1);
-			return days + " " + app.getString(R.string.days_behind);
-		}
-		return "";
-	}
-
 	public String getDate(@NonNull DateFormat dateFormat, boolean remote) {
 		return remote ? getRemoteDate(dateFormat) : getLocalDate(dateFormat);
 	}

@@ -1,13 +1,20 @@
 package net.osmand.plus;
 
+import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -18,7 +25,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
-import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
@@ -36,7 +42,6 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
@@ -53,7 +58,6 @@ import net.osmand.plus.openplacereviews.OprAuthHelper;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -79,6 +83,7 @@ import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
+import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
@@ -95,40 +100,27 @@ import java.util.Random;
 
 import btools.routingapp.IBRouterService;
 
-import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
-
 /**
+ *
  */
 public class AppInitializer implements IProgress {
 
-	public static final boolean TIPS_AND_TRICKS = false;
-
-	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
-	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
-
 	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-android-4-0-released";
-//	public static final String LATEST_CHANGES_URL = null; // not enough to read
-	public static final int APP_EXIT_CODE = 4;
-	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
-	private OsmandApplication app;
-	private AppVersionUpgradeOnInit appVersionUpgrade;
-	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(AppInitializer.class);
+
+	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
+	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);
+
+	private final OsmandApplication app;
+	private final AppVersionUpgradeOnInit appVersionUpgrade;
 
 	private boolean initSettings = false;
 	private boolean activityChangesShowed = false;
 	private long startTime;
 	private long startBgTime;
 	private boolean appInitializing = true;
-	private List<String> warnings = new ArrayList<>();
+	private final List<String> warnings = new ArrayList<>();
 	private String taskName;
-	private List<AppInitializeListener> listeners = new ArrayList<>();
+	private final List<AppInitializeListener> listeners = new ArrayList<>();
 	private SharedPreferences startPrefs;
 
 	public enum InitEvents {
@@ -149,7 +141,7 @@ public class AppInitializer implements IProgress {
 		@UiThread
 		void onFinish(AppInitializer init);
 	}
-	
+
 	public interface LoadRoutingFilesCallback {
 		void onRoutingFilesLoaded();
 	}
@@ -160,7 +152,6 @@ public class AppInitializer implements IProgress {
 		appVersionUpgrade = new AppVersionUpgradeOnInit(app);
 	}
 
-
 	public List<String> getWarnings() {
 		return warnings;
 	}
@@ -169,10 +160,9 @@ public class AppInitializer implements IProgress {
 		return appInitializing;
 	}
 
-
 	@SuppressLint({"CommitPrefEdits", "ApplySharedPref"})
 	public void initVariables() {
-		if(initSettings) {
+		if (initSettings) {
 			return;
 		}
 		ApplicationMode.onApplicationStart(app);
@@ -223,7 +213,7 @@ public class AppInitializer implements IProgress {
 
 	private void checkMapUpdates() {
 		long diff = System.currentTimeMillis() - app.getSettings().LAST_CHECKED_UPDATES.get();
-		if (diff >= 2 * 24 * 60 * 60l  && new Random().nextInt(5) == 0 &&
+		if (diff >= 2 * 24 * 60 * 60L && new Random().nextInt(5) == 0 &&
 				app.getSettings().isInternetConnectionAvailable()) {
 			app.getDownloadThread().runReloadIndexFiles();
 		} else if (Version.isDeveloperVersion(app)) {
@@ -250,42 +240,6 @@ public class AppInitializer implements IProgress {
 		return false;
 	}
 
-	// TODO
-	public void checkVectorIndexesDownloaded(final Activity ctx) {
-		OsmandApplication app = (OsmandApplication)ctx.getApplication();
-		MapRenderRepositories maps = app.getResourceManager().getRenderer();
-		SharedPreferences pref = ctx.getPreferences(Context.MODE_PRIVATE);
-		boolean check = pref.getBoolean(VECTOR_INDEXES_CHECK, true);
-		// do not show each time
-		if (check && new Random().nextInt() % 5 == 1) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-			if (maps.isEmpty()) {
-				builder.setMessage(R.string.vector_data_missing);
-			} else if (!maps.basemapExists()) {
-				builder.setMessage(R.string.basemap_missing);
-			} else {
-				return;
-			}
-			builder.setPositiveButton(R.string.shared_string_download, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					ctx.startActivity(new Intent(ctx, DownloadActivity.class));
-				}
-
-			});
-			builder.setNeutralButton(R.string.shared_string_no_thanks, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					ctx.getPreferences(Context.MODE_PRIVATE).edit().putBoolean(VECTOR_INDEXES_CHECK, false).commit();
-				}
-			});
-			builder.setNegativeButton(R.string.first_time_continue, null);
-			builder.show();
-		}
-
-	}
-
 	private void indexRegionsBoundaries(List<String> warnings) {
 		File file = app.getAppPath("regions.ocbf");
 		try {
@@ -305,7 +259,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	Resources getLocalizedResources(String loc) {
-		if(Build.VERSION.SDK_INT < 17) {
+		if (Build.VERSION.SDK_INT < 17) {
 			return null;
 		}
 		Locale desiredLocale = new Locale(loc);
@@ -344,7 +298,7 @@ public class AppInitializer implements IProgress {
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
 						String val = app.getString(in);
-						if(val != null) {
+						if (val != null) {
 							int ind = val.indexOf(';');
 							if (ind > 0) {
 								return val.substring(0, ind);
@@ -375,9 +329,9 @@ public class AppInitializer implements IProgress {
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
 						String val = app.getString(in);
-						if(val != null) {
+						if (val != null) {
 							int ind = val.indexOf(';');
-							if(ind > 0) {
+							if (ind > 0) {
 								return val.substring(ind + 1);
 							}
 							return "";
@@ -409,9 +363,9 @@ public class AppInitializer implements IProgress {
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
 						String val = en.getString(in);
-						if(val != null) {
+						if (val != null) {
 							int ind = val.indexOf(';');
-							if(ind > 0) {
+							if (ind > 0) {
 								return val.substring(0, ind);
 							}
 						}
@@ -503,23 +457,23 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			public String getTranslation(String id) {
-				if(WorldRegion.AFRICA_REGION_ID.equals(id)){
+				if (WorldRegion.AFRICA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_africa);
-				} else if(WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID.equals(id)){
+				} else if (WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_oceania);
-				} else if(WorldRegion.ASIA_REGION_ID.equals(id)){
+				} else if (WorldRegion.ASIA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_asia);
-				} else if(WorldRegion.CENTRAL_AMERICA_REGION_ID.equals(id)){
+				} else if (WorldRegion.CENTRAL_AMERICA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_central_america);
-				} else if(WorldRegion.EUROPE_REGION_ID.equals(id)){
+				} else if (WorldRegion.EUROPE_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_europe);
-				} else if(WorldRegion.RUSSIA_REGION_ID.equals(id)){
+				} else if (WorldRegion.RUSSIA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_russia);
-				} else if(WorldRegion.NORTH_AMERICA_REGION_ID.equals(id)){
+				} else if (WorldRegion.NORTH_AMERICA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_north_america);
-				} else if(WorldRegion.SOUTH_AMERICA_REGION_ID.equals(id)){
+				} else if (WorldRegion.SOUTH_AMERICA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_south_america);
-				} else if(WorldRegion.ANTARCTICA_REGION_ID.equals(id)){
+				} else if (WorldRegion.ANTARCTICA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_antarctica);
 				}
 				return null;
@@ -531,8 +485,8 @@ public class AppInitializer implements IProgress {
 
 	private <T> T startupInit(T object, Class<T> class1) {
 		long t = System.currentTimeMillis();
-		if(t - startTime > 7) {
-			System.err.println("Startup service " + class1.getName() + " took too long " + (t - startTime)  + " ms");
+		if (t - startTime > 7) {
+			System.err.println("Startup service " + class1.getName() + " took too long " + (t - startTime) + " ms");
 		}
 		startTime = t;
 		return object;
@@ -638,6 +592,7 @@ public class AppInitializer implements IProgress {
 				}
 				return null;
 			}
+
 			@Override
 			public void run() {
 				try {
@@ -646,14 +601,14 @@ public class AppInitializer implements IProgress {
 					}
 					app.player = createCommandPlayer(voiceProvider, applicationMode, app, uiContext);
 					app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
-					if(dlg != null) {
+					if (dlg != null) {
 						dlg.dismiss();
 					}
 					if (run != null && uiContext != null) {
 						uiContext.runOnUiThread(run);
 					}
 				} catch (CommandPlayerException e) {
-					if(dlg != null) {
+					if (dlg != null) {
 						dlg.dismiss();
 					}
 					app.showToastMessage(e.getError());
@@ -699,7 +654,6 @@ public class AppInitializer implements IProgress {
 			app.searchUICore.initSearchUICore();
 
 			checkLiveUpdatesAlerts();
-			
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			warnings.add(e.getMessage());
@@ -811,7 +765,7 @@ public class AppInitializer implements IProgress {
 				startTask(app.getString(R.string.init_native_library), -1);
 				RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 				NativeOsmandLibrary lib = NativeOsmandLibrary.getLibrary(storage, app);
-				boolean initialized =  lib != null;
+				boolean initialized = lib != null;
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 				if (!initialized) {
 					LOG.info("Native library could not be loaded!");
@@ -836,12 +790,13 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			public void run() {
-				for(AppInitializeListener l : listeners) {
+				for (AppInitializeListener l : listeners) {
 					l.onFinish(AppInitializer.this);
 				}
 			}
 		});
 	}
+
 	public void notifyEvent(final InitEvents event) {
 		if (event != InitEvents.TASK_CHANGED) {
 			long time = System.currentTimeMillis();
@@ -852,7 +807,7 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			public void run() {
-				for(AppInitializeListener l : listeners) {
+				for (AppInitializeListener l : listeners) {
 					l.onProgress(AppInitializer.this, event);
 				}
 			}
@@ -915,21 +870,21 @@ public class AppInitializer implements IProgress {
 		}
 		applicationBgInitializing = true;
 		new Thread(new Runnable() { //$NON-NLS-1$
-					@Override
-					public void run() {
-						try {
-							startApplicationBackground();
-						} finally {
-							applicationBgInitializing = false;
-						}
-					}
-				}, "Initializing app").start();
+			@Override
+			public void run() {
+				try {
+					startApplicationBackground();
+				} finally {
+					applicationBgInitializing = false;
+				}
+			}
+		}, "Initializing app").start();
 	}
 
 
 	public void addListener(AppInitializeListener listener) {
 		this.listeners.add(listener);
-		if(!appInitializing) {
+		if (!appInitializing) {
 			listener.onFinish(this);
 		}
 	}

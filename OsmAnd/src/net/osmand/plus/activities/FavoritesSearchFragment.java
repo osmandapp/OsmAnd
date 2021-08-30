@@ -77,7 +77,6 @@ public class FavoritesSearchFragment extends DialogFragment {
 	private FavoritesSearchListAdapter listAdapter;
 
 	private String searchQuery;
-	private boolean paused;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -209,13 +208,11 @@ public class FavoritesSearchFragment extends DialogFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		paused = false;
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		paused = true;
 		hideProgressBar();
 	}
 

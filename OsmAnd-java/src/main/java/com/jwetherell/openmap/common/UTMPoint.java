@@ -43,11 +43,10 @@ public class UTMPoint {
     /**
      * Method that provides a check for UTM zone letters. Returns an uppercase
      * version of any valid letter passed in, 'N' or 'S'.
-     * 
-     * @throws NumberFormatException
-     *             if zone letter is invalid.
+     *
+     * @throws NumberFormatException if zone letter is invalid.
      */
-    protected char checkZone(char zone) {
+    protected static char checkZone(char zone) throws NumberFormatException {
         zone = Character.toUpperCase(zone);
 
         if (zone != 'N' && zone != 'S') {

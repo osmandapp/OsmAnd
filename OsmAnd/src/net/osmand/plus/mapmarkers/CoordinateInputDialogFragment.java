@@ -1,5 +1,8 @@
 package net.osmand.plus.mapmarkers;
 
+import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -70,7 +73,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.DDM;
@@ -91,9 +93,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
-import static android.content.Context.CLIPBOARD_SERVICE;
-
 public class CoordinateInputDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = "CoordinateInputDialogFragment";
@@ -108,7 +107,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private SavingTrackHelper savingTrackHelper;
 	private GpxSelectionHelper selectedGpxHelper;
 	private RecyclerView recyclerView;
-		
+
 	private View mainView;
 	private final List<EditTextEx> editTexts = new ArrayList<>();
 	private CoordinateInputAdapter adapter;
@@ -139,7 +138,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		OsmandApplication app = getMyApplication();
-		
+
 		lightTheme = app.getSettings().isLightContent();
 		setStyle(STYLE_NO_FRAME, lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		newGpxFile = new GPXFile(Version.getFullVersion(app));
@@ -149,23 +148,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	@Nullable
 	private GPXFile getGpx() {
-		TrackActivity activity = getTrackActivity();
-		if (activity != null) {
-			GPXFile gpx = activity.getGpx();
-			return gpx != null ? gpx : newGpxFile;
-		} else {
-			return newGpxFile;
-		}
-	}
-
-	@Nullable
-	public TrackActivity getTrackActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof TrackActivity) {
-			return (TrackActivity) getActivity();
-		} else {
-			return null;
-		}
+		return newGpxFile;
 	}
 
 	private void syncGpx(GPXFile gpxFile) {
@@ -204,7 +187,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				showSaveDialog();
 			} else {
 				GPXFile gpx = getGpx();
-				new SaveGpxAsyncTask(getMyApplication(), gpx,null, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				new SaveGpxAsyncTask(getMyApplication(), gpx, null, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				syncGpx(gpx);
 				if (listener != null) {
 					listener.onPointsSaved();
@@ -226,7 +209,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		fragment.setListener(createSaveAsTrackFragmentListener());
 		fragment.show(getChildFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
 	}
-	
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -255,7 +238,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		this.newGpxFile = gpx;
 		adapter.setGpx(gpx);
 	}
-	
+
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -451,7 +434,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				hasUnsavedChanges = true;
 			}
 		});
-		
+
 		TextView cancelButton = (TextView) mainView.findViewById(R.id.cancel_button);
 		cancelButton.setText(R.string.shared_string_cancel);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -464,7 +447,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		final View keyboardLayout = mainView.findViewById(R.id.keyboard_layout);
 		keyboardLayout.setBackgroundResource(lightTheme
 				? R.drawable.bg_bottom_menu_light : R.drawable.bg_coordinate_input_keyboard_dark);
-		
+
 		View keyboardView = mainView.findViewById(R.id.keyboard_view);
 
 		int dividersColorResId = lightTheme ? R.color.keyboard_divider_light : R.color.keyboard_divider_dark;
@@ -599,7 +582,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 		recyclerView.setPadding(recyclerView.getPaddingLeft(), recyclerView.getPaddingTop(), recyclerView.getPaddingRight(), padding);
 	}
-	
+
 	private void setupKeyboardItems(View keyboardView, View.OnClickListener listener, @IdRes int... itemsIds) {
 		@DrawableRes int itemBg = lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg;
 		@DrawableRes int controlItemBg = lightTheme ? R.drawable.keyboard_item_control_light_bg : R.drawable.keyboard_item_control_dark_bg;
@@ -615,7 +598,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		for (@IdRes int id : itemsIds) {
 			View itemView = keyboardView.findViewById(id);
 			Object item = getItemObjectById(id);
-			final boolean controlItem = id == R.id.keyboard_item_next_field 
+			final boolean controlItem = id == R.id.keyboard_item_next_field
 					|| id == R.id.keyboard_item_backspace
 					|| id == R.id.keyboard_item_hide;
 
@@ -1090,7 +1073,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			@Override
 			public void saveGpx(final String fileName) {
-				new SaveGpxAsyncTask(app, getGpx(),fileName, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				new SaveGpxAsyncTask(app, getGpx(), fileName, false).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				hasUnsavedChanges = false;
 				app.getMapMarkersHelper().addOrEnableGroup(getGpx());
 				if (listener != null) {

@@ -35,7 +35,6 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	private City city;
 	private Button searchAllStrets;
 	private int searchWithCity = -1; // -1 - default, 0 - filter city, 1 - deep search
-	private OsmandSettings osmandSettings;
 
 	@Override
 	protected Comparator<? super Street> createComparator() {

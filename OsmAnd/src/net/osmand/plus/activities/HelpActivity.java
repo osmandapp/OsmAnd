@@ -30,9 +30,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.development.BaseLogcatActivity;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.io.File;
@@ -319,7 +319,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				.setDescription(version)
 				.setListener(listener)
 				.setLongClickListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
-					ShareDialog.copyToClipboardWithToast(adapter.getContext(), version, Toast.LENGTH_SHORT);
+					ShareMenu.copyToClipboardWithToast(adapter.getContext(), version, Toast.LENGTH_SHORT);
 					return false;
 				})
 				.createItem());

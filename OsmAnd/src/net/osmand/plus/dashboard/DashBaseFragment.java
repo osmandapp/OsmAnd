@@ -3,12 +3,15 @@ package net.osmand.plus.dashboard;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -18,10 +21,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.widgets.InterceptorFrameLayout;
 import net.osmand.plus.widgets.tools.SwipeDismissTouchListener;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 public abstract class DashBaseFragment extends Fragment {
 	protected DashboardOnMap dashboard;
@@ -126,10 +125,6 @@ public abstract class DashBaseFragment extends Fragment {
 		if (dashboard != null && dashboard.isVisible() && getView() != null) {
 			onOpenDash();
 		}
-	}
-
-
-	public void onLocationCompassChanged(Location l, double compassValue) {
 	}
 
 	@Override

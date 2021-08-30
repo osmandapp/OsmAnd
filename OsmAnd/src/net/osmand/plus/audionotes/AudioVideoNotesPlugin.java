@@ -1775,10 +1775,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public List<String> indexingFiles(IProgress progress) {
-		return indexingFiles(progress, true, false);
+		return indexingFiles(true, false);
 	}
 
-	public List<String> indexingFiles(IProgress progress, boolean reIndexAndKeepOld, boolean registerNew) {
+	public List<String> indexingFiles(boolean reIndexAndKeepOld, boolean registerNew) {
 		File avPath = app.getAppPath(IndexConstants.AV_INDEX_DIR);
 		if (avPath.canRead()) {
 			if (!reIndexAndKeepOld) {
@@ -1856,18 +1856,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 205 || requestCode == 105) {
-			indexingFiles(null, true, true);
+			indexingFiles(true, true);
 		}
 	}
-
-	public boolean onMapActivityKeyEvent(KeyEvent key) {
-		if (KeyEvent.KEYCODE_CAMERA == key.getKeyCode()) {
-			defaultAction(mapActivity);
-			return true;
-		}
-		return false;
-	}
-
 
 	public Collection<Recording> getAllRecordings() {
 		return recordingByFileName.values();

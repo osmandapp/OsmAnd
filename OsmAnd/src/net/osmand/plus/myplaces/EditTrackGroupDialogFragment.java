@@ -1,5 +1,8 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -40,7 +43,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.EditFavoriteGroupDialogFragment.FavoriteColorAdapter;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -61,9 +63,6 @@ import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 
 public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment implements OnPointsDeleteListener {
 
@@ -520,9 +519,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 			}
 
 			FragmentActivity activity = activityRef.get();
-			if (activity instanceof TrackActivity) {
-				((TrackActivity) activity).loadGpx();
-			} else if (activity instanceof MapActivity) {
+			if (activity instanceof MapActivity) {
 				MapActivity mapActivity = (MapActivity) activity;
 				TrackMenuFragment fragment = mapActivity.getTrackMenuFragment();
 				if (fragment != null) {

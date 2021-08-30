@@ -1,5 +1,7 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -147,7 +149,6 @@ import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
-import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapTileView.OnDrawMapListener;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -164,15 +165,11 @@ import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -482,7 +479,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					findViewById(R.id.drawer_layout).invalidate();
 				}
 			};
-			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);
+			getMyApplication().checkApplicationIsBeingInitialized(initListener);
 		} else {
 			setupOpenGLView(true);
 			checkRestoreRoutingMode();
@@ -644,25 +641,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public ImportHelper getImportHelper() {
 		return importHelper;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public Object getLastNonConfigurationInstanceByKey(String key) {
-		Object k = super.getLastNonConfigurationInstance();
-		if (k instanceof Map) {
-
-			return ((Map) k).get(key);
-		}
-		return null;
-	}
-
-	@Override
-	public Object onRetainCustomNonConfigurationInstance() {
-		LinkedHashMap<String, Object> l = new LinkedHashMap<>();
-		for (OsmandMapLayer ml : mapView.getLayers()) {
-			ml.onRetainNonConfigurationInstance(l);
-		}
-		return l;
 	}
 
 	@Override
@@ -1327,7 +1305,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onStart() {
 		super.onStart();
 		stopped = false;
-		lockHelper.onStart(this);
+		lockHelper.onStart();
 		mapScrollHelper.setListener(this);
 		getMyApplication().getNotificationHelper().showNotifications();
 		extendedMapActivity.onStart(this);
