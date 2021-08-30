@@ -3918,4 +3918,5 @@
     <string name="poi_fuel_propane">بروبان</string>
     <string name="poi_power_terminal">محطة الطاقة</string>
     <string name="poi_glacier_status_oscillating">حالة الأنهار الجليدية: متذبذبة</string>
+    <string name="poi_vending_toll">آلة دفع الضريبة</string>
 </resources>
