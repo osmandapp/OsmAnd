@@ -255,23 +255,27 @@ public class RoutingContext {
 		}
 		return ind;
 	}
-	
-	
+
 	public RouteSegment loadRouteSegment(int x31, int y31, long memoryLimit) {
+		return loadRouteSegment(x31, y31, memoryLimit, false);
+	}
+
+	public RouteSegment loadRouteSegment(int x31, int y31, long memoryLimit, boolean withExcluded) {
 		long tileId = getRoutingTile(x31, y31, memoryLimit);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 		RouteSegment original = null;
 		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
 		if (subregions != null) {
 			for (int j = 0; j < subregions.size(); j++) {
-				original = subregions.get(j).loadRouteSegment(x31, y31, this, excludeDuplications, 
-						original, subregions, j);
+				original = subregions.get(j).loadRouteSegment(x31, y31, this, excludeDuplications,
+						original, subregions, j, withExcluded);
 			}
 		}
 		return original;
 	}
-	
-	public void loadSubregionTile(final RoutingSubregionTile ts, boolean loadObjectsInMemory, List<RouteDataObject> toLoad, TLongHashSet excludeNotAllowed) {
+
+	public void loadSubregionTile(final RoutingSubregionTile ts, boolean loadObjectsInMemory,
+	                              List<RouteDataObject> toLoad, TLongHashSet excludeNotAllowed) {
 		boolean wasUnloaded = ts.isUnloaded();
 		int ucount = ts.getUnloadCont();
 		if (nativeLib == null) {
@@ -314,15 +318,17 @@ public class RoutingContext {
 									if (!config.router.attributes.containsKey(GeneralRouter.CHECK_ALLOW_PRIVATE_NEEDED)) {
 										connectPoint(ts, ro, points);
 									}
-									ts.add(ro);
+									ts.addRoute(ro);
 								}
 							}
 							if (excludeNotAllowed != null && ro.getId() > 0) {
 								excludeNotAllowed.add(ro.getId());
 								if (ts.excludedIds == null) {
 									ts.excludedIds = new TLongHashSet();
+									ts.excludedRoutes = new TLongObjectHashMap<>();
 								}
 								ts.excludedIds.add(ro.getId());
+								ts.addExcludedRoute(ro);
 							}
 						}
 					}
@@ -749,32 +755,45 @@ public class RoutingContext {
 		}
 		return usedMem1;
 	}
-	
-	
+
 	private static long calcRouteId(RouteDataObject o, int ind) {
 		return (o.getId() << 10) + ind;
 	}
 
+	public boolean hasAttachedRoads(RouteDataObject road, int pointIdx, long prevRoadId) {
+		RouteSegment nextSegment = loadRouteSegment(road.getPoint31XTile(pointIdx), road.getPoint31YTile(pointIdx),
+				config.memoryLimitation, true);
+		while (nextSegment != null) {
+			RouteDataObject nextRoad = nextSegment.road;
+			boolean outWay = (getRouter().isOneWay(nextRoad) * -nextSegment.segStart) >= 0;
+			if (road.getId() != nextRoad.getId() && nextRoad.getId() != prevRoadId && !nextRoad.isRoadDeleted() && outWay) {
+				return true;
+			}
+			nextSegment = nextSegment.next;
+		}
+		return false;
+	}
 
 	public static class RoutingSubregionTile {
 		public final RouteSubregion subregion;
 		// make it without get/set for fast access
 		public int access;
 		public TileStatistics tileStatistics = new TileStatistics();
-		
+
 		private NativeRouteSearchResult searchResult = null;
 		private int isLoaded = 0;
 		private TLongObjectMap<RouteSegment> routes = null;
 		private TLongHashSet excludedIds = null;
+		private TLongObjectMap<RouteSegment> excludedRoutes = null;
 
 		public RoutingSubregionTile(RouteSubregion subregion) {
 			this.subregion = subregion;
 		}
-		
+
 		public TLongObjectMap<RouteSegment> getRoutes() {
 			return routes;
 		}
-		
+
 		public void loadAllObjects(final List<RouteDataObject> toFillIn, RoutingContext ctx, TLongObjectHashMap<RouteDataObject> excludeDuplications) {
 			if(routes != null) {
 				Iterator<RouteSegment> it = routes.valueCollection().iterator();
@@ -801,12 +820,13 @@ public class RoutingContext {
 				}
 			}
 		}
-		
+
 		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
-				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex) {
+		                                      TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original,
+		                                      List<RoutingSubregionTile> subregions, int subregionIndex, boolean withExcluded) {
 			access++;
+			long l = (((long) x31) << 31) + (long) y31;
 			if (routes != null) {
-				long l = (((long) x31) << 31) + (long) y31;
 				RouteSegment segment = routes.get(l);
 				while (segment != null) {
 					RouteDataObject ro = segment.road;
@@ -819,6 +839,20 @@ public class RoutingContext {
 						original = s;
 					}
 					segment = segment.next;
+				}
+				if (withExcluded && excludedRoutes != null) {
+					segment = excludedRoutes.get(l);
+					while (segment != null) {
+						RouteDataObject ro = segment.road;
+						RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
+						if ((toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())) {
+							excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
+							RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
+							s.next = original;
+							original = s;
+						}
+						segment = segment.next;
+					}
 				}
 			} else {
 				throw new UnsupportedOperationException("Not clear how it could be used with native");
@@ -848,27 +882,36 @@ public class RoutingContext {
 		}
 		
 		public void unload() {
-			if(isLoaded == 0) {
-				this.isLoaded = -1;	
+			if (isLoaded == 0) {
+				this.isLoaded = -1;
 			} else {
 				isLoaded = -Math.abs(isLoaded);
 			}
-			if(searchResult != null) {
+			if (searchResult != null) {
 				searchResult.deleteNativeResult();
 			}
 			searchResult = null;
 			routes = null;
 			excludedIds = null;
+			excludedRoutes = null;
 		}
-		
-		public void setLoadedNonNative(){
+
+		public void setLoadedNonNative() {
 			isLoaded = Math.abs(isLoaded) + 1;
 			routes = new TLongObjectHashMap<BinaryRoutePlanner.RouteSegment>();
 			tileStatistics = new TileStatistics();
 		}
-		
-		public void add(RouteDataObject ro) {
+
+		public void addRoute(RouteDataObject ro) {
 			tileStatistics.addObject(ro);
+			put(routes, ro);
+		}
+
+		public void addExcludedRoute(RouteDataObject ro) {
+			put(excludedRoutes, ro);
+		}
+
+		public void put(TLongObjectMap<RouteSegment> routes, RouteDataObject ro) {
 			for (int i = 0; i < ro.pointsX.length; i++) {
 				int x31 = ro.getPoint31XTile(i);
 				int y31 = ro.getPoint31YTile(i);
@@ -891,10 +934,13 @@ public class RoutingContext {
 			tileStatistics = new TileStatistics();
 			if (r.objects != null) {
 				searchResult = null;
-				routes = new TLongObjectHashMap<BinaryRoutePlanner.RouteSegment>();
+				routes = new TLongObjectHashMap<>();
+				excludedRoutes = new TLongObjectHashMap<>();
 				for (RouteDataObject ro : r.objects) {
 					if (ro != null && ctx.config.router.acceptLine(ro)) {
-						add(ro);
+						addRoute(ro);
+					} else {
+						addExcludedRoute(ro);
 					}
 				}
 			} else {

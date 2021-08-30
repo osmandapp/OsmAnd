@@ -227,7 +227,7 @@ public class RouteResultPreparation {
 
 	public void prepareTurnResults(RoutingContext ctx, List<RouteSegmentResult> result) {
 		for (int i = 0; i < result.size(); i ++) {
-			TurnType turnType = getTurnInfo(result, i, ctx.leftSideNavigation);
+			TurnType turnType = getTurnInfo(ctx, result, i, ctx.leftSideNavigation);
 			result.get(i).setTurnType(turnType);
 		}
 		
@@ -1088,30 +1088,30 @@ public class RouteResultPreparation {
 
 	private static final int MAX_SPEAK_PRIORITY = 5;
 	private int highwaySpeakPriority(String highway) {
-		if(highway == null || highway.endsWith("track") || highway.endsWith("services") || highway.endsWith("service")
+		if (highway == null || highway.endsWith("track") || highway.endsWith("services") || highway.endsWith("service")
 				|| highway.endsWith("path")) {
 			return MAX_SPEAK_PRIORITY;
 		}
-		if (highway.endsWith("_link")  || highway.endsWith("unclassified") || highway.endsWith("road") 
-				|| highway.endsWith("living_street") || highway.endsWith("residential") || highway.endsWith("tertiary") )  {
+		if (highway.endsWith("_link") || highway.endsWith("unclassified") || highway.endsWith("road")
+				|| highway.endsWith("living_street") || highway.endsWith("residential") || highway.endsWith("tertiary")) {
 			return 1;
 		}
 		return 0;
 	}
 
 
-	private TurnType getTurnInfo(List<RouteSegmentResult> result, int i, boolean leftSide) {
+	private TurnType getTurnInfo(RoutingContext ctx, List<RouteSegmentResult> result, int i, boolean leftSide) {
 		if (i == 0) {
 			return TurnType.valueOf(TurnType.C, false);
 		}
-		RouteSegmentResult prev = result.get(i - 1) ;
-		if(prev.getObject().roundabout()) {
+		RouteSegmentResult prev = result.get(i - 1);
+		if (prev.getObject().roundabout()) {
 			// already analyzed!
 			return null;
 		}
 		RouteSegmentResult rr = result.get(i);
 		if (rr.getObject().roundabout()) {
-			return processRoundaboutTurn(result, i, leftSide, prev, rr);
+			return processRoundaboutTurn(ctx, result, i, leftSide, prev, rr);
 		}
 		TurnType t = null;
 		if (prev != null) {
@@ -1226,17 +1226,18 @@ public class RouteResultPreparation {
 		return turnSet;
 	}
 
-	private TurnType processRoundaboutTurn(List<RouteSegmentResult> result, int i, boolean leftSide, RouteSegmentResult prev,
-			RouteSegmentResult rr) {
+	private TurnType processRoundaboutTurn(RoutingContext ctx, List<RouteSegmentResult> result, int i, boolean leftSide,
+	                                       RouteSegmentResult prev, RouteSegmentResult rr) {
 		int exit = 1;
 		RouteSegmentResult last = rr;
 		RouteSegmentResult firstRoundabout = rr;
 		RouteSegmentResult lastRoundabout = rr;
-		
+		long prevRoadId = prev.getObject().id;
 		for (int j = i; j < result.size(); j++) {
 			RouteSegmentResult rnext = result.get(j);
 			last = rnext;
-			if (rnext.getObject().roundabout()) {
+			RouteDataObject road = rnext.getObject();
+			if (road.roundabout()) {
 				lastRoundabout = rnext;
 				boolean plus = rnext.getStartPointIndex() < rnext.getEndPointIndex();
 				int k = rnext.getStartPointIndex();
@@ -1245,8 +1246,7 @@ public class RouteResultPreparation {
 //					k = plus ? k + 1 : k - 1;
 				}
 				while (k != rnext.getEndPointIndex()) {
-					int attachedRoads = rnext.getAttachedRoutes(k).size();
-					if(attachedRoads > 0) {
+					if (ctx.hasAttachedRoads(road, k, prevRoadId)) {
 						exit++;
 					}
 					k = plus ? k + 1 : k - 1;
@@ -1268,9 +1268,9 @@ public class RouteResultPreparation {
 		float turnAngleBasedOnCircle = (float) -MapUtils.degreesDiff(firstRoundabout.getBearingBegin(), lastRoundabout.getBearingEnd() + 180);
 		if (Math.abs(turnAngleBasedOnOutRoads) > 120) {
 			// correctly identify if angle is +- 180, so we approach from left or right side
-			t.setTurnAngle(turnAngleBasedOnCircle) ;
+			t.setTurnAngle(turnAngleBasedOnCircle);
 		} else {
-			t.setTurnAngle(turnAngleBasedOnOutRoads) ;
+			t.setTurnAngle(turnAngleBasedOnOutRoads);
 		}
 		return t;
 	}
