@@ -185,23 +185,6 @@ public class InputZoomLevelsBottomSheet extends MenuBottomSheetDialogFragment {
 		dismiss();
 	}
 
-	private SpannableString createSpannableString(@NonNull String text, @NonNull String... textToStyle) {
-		SpannableString spannable = new SpannableString(text);
-		for (String t : textToStyle) {
-			try {
-				int startIndex = text.indexOf(t);
-				spannable.setSpan(
-						new CustomTypefaceSpan(FontCache.getRobotoMedium(requireContext())),
-						startIndex,
-						startIndex + t.length(),
-						Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-			} catch (RuntimeException e) {
-				LOG.error("Error trying to find index of " + t + " " + e);
-			}
-		}
-		return spannable;
-	}
-
 	private void setSliderDescrRes(int sliderDescrRes) {
 		this.sliderDescrRes = sliderDescrRes;
 	}

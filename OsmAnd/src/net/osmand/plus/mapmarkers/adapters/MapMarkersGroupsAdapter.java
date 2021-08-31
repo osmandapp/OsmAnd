@@ -140,7 +140,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 			if (markerGroupName == null) {
 				int previousGroupDateId = 0;
-				int monthsDisplayed = 0;
 				List<MapMarker> groupMarkers = group.getActiveMarkers();
 				for (int j = 0; j < groupMarkers.size(); j++) {
 					MapMarker marker = groupMarkers.get(j);

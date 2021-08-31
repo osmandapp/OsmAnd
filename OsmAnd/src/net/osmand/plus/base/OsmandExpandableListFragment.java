@@ -83,11 +83,6 @@ public abstract class OsmandExpandableListFragment extends BaseOsmAndFragment
 	}
 
 	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconId, int menuItemType) {
-		return createMenuItem(m, id, titleRes, iconId, menuItemType, false);
-	}
-
-	public MenuItem createMenuItem(Menu m, int id, int titleRes, int iconId, int menuItemType,
-	                               boolean flipIconForRtl) {
 		int color = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
 		return createMenuItem(m, id, titleRes, iconId, menuItemType, false, color);
 	}

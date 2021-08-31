@@ -52,7 +52,6 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 	private static final String ZOOM_OUT_BUTTON_ID = ZOOM_OUT_HUD_ID + TAG;
 	private static final String BACK_TO_LOC_BUTTON_ID = BACK_TO_LOC_HUD_ID + TAG;
 
-	protected View mainView;
 	private boolean continued = false;
 	private View cancelButton;
 	private View applyButton;

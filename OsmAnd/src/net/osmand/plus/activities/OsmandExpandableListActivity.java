@@ -1,13 +1,9 @@
 package net.osmand.plus.activities;
 
 import android.app.ActionBar;
-import android.graphics.Shader.TileMode;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ExpandableListView;
 
 import net.osmand.plus.ColorUtilities;
@@ -29,7 +25,7 @@ public abstract class OsmandExpandableListActivity extends
 		OsmandApplication app = getMyApplication();
 		boolean nightMode = !app.getSettings().isLightContent();
 		getExpandableListView().setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
-	};
+	}
 
 
 	public OsmandApplication getMyApplication() {
@@ -69,24 +65,12 @@ public abstract class OsmandExpandableListActivity extends
 		return createMenuItem(m, id, titleRes, icon, icon, menuItemType);
 	}
 
-	public void fixBackgroundRepeat(View view) {
-		Drawable bg = view.getBackground();
-		if (bg != null) {
-			if (bg instanceof BitmapDrawable) {
-				BitmapDrawable bmp = (BitmapDrawable) bg;
-				// bmp.mutate(); // make sure that we aren't sharing state anymore
-				bmp.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);
-			}
-		}
-	}
-
-
 	public void setListAdapter(OsmandBaseExpandableListAdapter adapter) {
 		((ExpandableListView) findViewById(android.R.id.list)).setAdapter(adapter);
 	}
 
 	public ExpandableListView getExpandableListView() {
-		return (ExpandableListView) findViewById(android.R.id.list);
+		return findViewById(android.R.id.list);
 	}
 
 	public void setOnChildClickListener(ExpandableListView.OnChildClickListener childClickListener) {

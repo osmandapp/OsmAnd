@@ -147,7 +147,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		if (OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			View view = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
 
-			createCurrentTrackView(view, app);
+			createCurrentTrackView(view);
 			((TextView) view.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
 			updateCurrentTrack(view, getActivity(), app);
 			view.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +183,7 @@ public class DashTrackFragment extends DashBaseFragment {
 		}
 	}
 
-	public static void createCurrentTrackView(View v, final OsmandApplication app) {
+	public static void createCurrentTrackView(View v) {
 		((TextView) v.findViewById(R.id.name)).setText(R.string.shared_string_currently_recording_track);
 		v.findViewById(R.id.icon).setVisibility(View.GONE);
 		v.findViewById(R.id.time_icon).setVisibility(View.GONE);

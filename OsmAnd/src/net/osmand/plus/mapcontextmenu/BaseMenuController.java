@@ -106,22 +106,4 @@ public abstract class BaseMenuController {
 			return null;
 		}
 	}
-
-	protected Drawable getPaintedIcon(int iconId, int color) {
-		if (mapActivity != null) {
-			UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
-			return iconsCache.getPaintedIcon(iconId, color);
-		} else {
-			return null;
-		}
-	}
-
-	protected Drawable getIcon(int iconId, int colorLightId, int colorDarkId) {
-		if (mapActivity != null) {
-			UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
-			return iconsCache.getIcon(iconId, isLight() ? colorLightId : colorDarkId);
-		} else {
-			return null;
-		}
-	}
 }

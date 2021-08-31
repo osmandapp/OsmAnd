@@ -48,7 +48,6 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.activities.ExitActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
@@ -443,7 +442,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void checkApplicationIsBeingInitialized(Activity activity, AppInitializeListener listener) {
+	public void checkApplicationIsBeingInitialized(AppInitializeListener listener) {
 		// start application if it was previously closed
 		startApplication();
 		if (listener != null) {
@@ -558,69 +557,6 @@ public class OsmandApplication extends MultiDexApplication {
 		osmandSettings.LAST_ROUTING_APPLICATION_MODE = osmandSettings.APPLICATION_MODE.get();
 		osmandSettings.setApplicationMode(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		targetPointsHelper.removeAllWayPoints(false, false);
-	}
-
-	private void fullExit() {
-		// http://stackoverflow.com/questions/2092951/how-to-close-android-application
-		System.runFinalizersOnExit(true);
-		System.exit(0);
-	}
-
-	public synchronized void closeApplication(final Activity activity) {
-		if (getNavigationService() != null) {
-			AlertDialog.Builder bld = new AlertDialog.Builder(activity);
-			bld.setMessage(R.string.background_service_is_enabled_question);
-			bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					closeApplicationAnywayImpl(activity, true);
-				}
-			});
-			bld.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					closeApplicationAnywayImpl(activity, false);
-				}
-			});
-			bld.show();
-		} else {
-			closeApplicationAnywayImpl(activity, true);
-		}
-	}
-	
-	private void closeApplicationAnyway(final Activity activity, boolean disableService) {
-		activity.finish();
-		Intent newIntent = new Intent(activity, ExitActivity.class);
-		newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-		newIntent.putExtra(ExitActivity.DISABLE_SERVICE, disableService);
-		startActivity(newIntent);
-	}
-
-	public void closeApplicationAnywayImpl(final Activity activity, boolean disableService) {
-		if (appInitializer.isAppInitializing()) {
-			resourceManager.close();
-		}
-		activity.finish();
-		if (getNavigationService() == null) {
-			fullExit();
-		} else if (disableService) {
-			final Intent serviceIntent = new Intent(this, NavigationService.class);
-			stopService(serviceIntent);
-
-			new Thread(new Runnable() {
-				public void run() {
-					//wait until the service has fully stopped
-					while (getNavigationService() != null) {
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
-						}
-					}
-
-					fullExit();
-				}
-			}).start();
-		}
 	}
 
 	public void startApplication() {

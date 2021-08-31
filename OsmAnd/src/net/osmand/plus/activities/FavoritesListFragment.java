@@ -50,7 +50,6 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 	private FavouritesAdapter favouritesAdapter;
 
 	private boolean selectFavoriteMode;
-	private OsmandSettings settings;
 	private boolean compassRegistered;
 
 	float lastHeading ; 
@@ -59,7 +58,6 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		Intent intent = activity.getIntent();
-		settings = getApplication().getSettings();
 		OsmandApplication app = getApplication();
 		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints(),
 				false);

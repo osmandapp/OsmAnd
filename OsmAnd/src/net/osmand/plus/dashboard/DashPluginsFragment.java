@@ -13,6 +13,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -29,9 +32,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 
 /**
  * Created by Denis
@@ -64,7 +64,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 		};
 	}
 
-	private final View.OnClickListener pluginDetailsListener(final OsmandPlugin plugin) {
+	private final View.OnClickListener pluginDetailsListener() {
 		return new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -166,7 +166,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 	private void inflatePluginView(LayoutInflater inflater, ViewGroup container, final OsmandPlugin plugin) {
 		View view = inflater.inflate(R.layout.dash_plugin_item, container, false);
-		view.setOnClickListener(pluginDetailsListener(plugin));
+		view.setOnClickListener(pluginDetailsListener());
 
 		TextView nameView = (TextView) view.findViewById(R.id.plugin_name);
 		nameView.setText(plugin.getName());
