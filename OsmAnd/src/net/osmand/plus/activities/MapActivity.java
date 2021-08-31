@@ -1595,9 +1595,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public static void launchMapActivityMoveToTop(@NonNull Context activity,
-	                                              @Nullable Bundle prevIntentParams,
-	                                              @Nullable Uri intentData,
-	                                              @Nullable Bundle intentParams) {
+												  @Nullable Bundle prevIntentParams,
+												  @Nullable Uri intentData,
+												  @Nullable Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1849,24 +1849,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
 					&& permissions.length > 0
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
-
-				new Timer().schedule(new TimerTask() {
-					@Override
-					public void run() {
-						FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-						if (wizardFragment != null) {
-							wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-						}
+				app.runInUIThread(() -> {
+					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+					if (wizardFragment != null) {
+						wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
 					}
 				}, 1);
 			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
-				new Timer().schedule(new TimerTask() {
-					@Override
-					public void run() {
-						FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-						if (wizardFragment != null) {
-							wizardFragment.processLocationPermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-						}
+				app.runInUIThread(() -> {
+					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+					if (wizardFragment != null) {
+						wizardFragment.processLocationPermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
 					}
 				}, 1);
 			} else if (requestCode == MapActivityActions.REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION
