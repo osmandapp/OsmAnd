@@ -1,5 +1,7 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -141,7 +143,6 @@ import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
-import net.osmand.plus.settings.fragments.RouteLineAppearanceFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -172,8 +173,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1888,24 +1887,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION
 					&& permissions.length > 0
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
-
-				new Timer().schedule(new TimerTask() {
-					@Override
-					public void run() {
-						FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-						if (wizardFragment != null) {
-							wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-						}
+				app.runInUIThread(() -> {
+					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+					if (wizardFragment != null) {
+						wizardFragment.processStoragePermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
 					}
 				}, 1);
 			} else if (requestCode == FirstUsageWizardFragment.FIRST_USAGE_LOCATION_PERMISSION) {
-				new Timer().schedule(new TimerTask() {
-					@Override
-					public void run() {
-						FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
-						if (wizardFragment != null) {
-							wizardFragment.processLocationPermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-						}
+				app.runInUIThread(() -> {
+					FirstUsageWizardFragment wizardFragment = getFirstUsageWizardFragment();
+					if (wizardFragment != null) {
+						wizardFragment.processLocationPermission(grantResults[0] == PackageManager.PERMISSION_GRANTED);
 					}
 				}, 1);
 			} else if (requestCode == MapActivityActions.REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION
