@@ -3,8 +3,6 @@ package net.osmand.plus.poi;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.Location;
@@ -39,6 +37,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
+
+import androidx.annotation.NonNull;
 
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
@@ -865,8 +865,9 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		} else if (acceptedTypes.size() == 1) {
 			PoiCategory category = acceptedTypes.keySet().iterator().next();
 			String categoryName = category.getKeyName();
-			String categoryType = acceptedTypes.get(category).iterator().next();
-			return categoryName + "_" + categoryType;
+			Set<String> subCategories = acceptedTypes.get(category);
+			String subCategory = Algorithms.isEmpty(subCategories) ? null : subCategories.iterator().next();
+			return categoryName + "_" + subCategory;
 		} else if (filterId.startsWith(USER_PREFIX)) {
 			return filterId.substring(USER_PREFIX.length()).toLowerCase();
 		}

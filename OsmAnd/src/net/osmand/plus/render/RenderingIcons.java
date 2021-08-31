@@ -22,6 +22,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 public class RenderingIcons {
+
 	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
 	
 	private static final Map<String, Integer> shaderIcons = new LinkedHashMap<>();
@@ -188,7 +189,7 @@ public class RenderingIcons {
 					bigIcons.put(f.getName().substring(3), f.getInt(null));
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
+				log.error(e);
 			}
 		}
 	}
