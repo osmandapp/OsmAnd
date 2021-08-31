@@ -3,8 +3,6 @@ package net.osmand.plus.poi;
 
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.Location;
@@ -20,6 +18,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -39,15 +38,17 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
+import androidx.annotation.NonNull;
+
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 
 public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
-	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
-	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
-	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
-	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
+	public final static String STD_PREFIX = "std_";
+	public final static String USER_PREFIX = "user_";
+	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
+	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
 	public final static int INVALID_ORDER  = -1;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
@@ -65,7 +66,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	protected int distanceInd = 0;
 	// in kilometers
-	protected double[] distanceToSearchValues = new double[]{1, 2, 5, 10, 20, 50, 100, 200, 500};
+	protected double[] distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 500};
 
 	private final MapPoiTypes poiTypes;
 
@@ -79,7 +80,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public PoiUIFilter(AbstractPoiType type, OsmandApplication application, String idSuffix) {
 		this.app = application;
 		isStandardFilter = true;
-		standardIconId = (type == null ? null : type.getKeyName());
+		standardIconId = type == null ? null : type.getKeyName();
 		filterId = STD_PREFIX + standardIconId + idSuffix;
 
 		poiTypes = application.getPoiTypes();
@@ -94,7 +95,6 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			updateTypesToAccept(type);
 		}
 	}
-
 
 	// search by name standard
 	protected PoiUIFilter(OsmandApplication application) {
@@ -196,7 +196,6 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public String getSavedFilterByName() {
 		return savedFilterByName;
 	}
-
 
 	public List<Amenity> searchAgain(double lat, double lon) {
 		List<Amenity> amenityList;
@@ -860,12 +859,37 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	public String getIconId() {
-		if (filterId.startsWith(STD_PREFIX)) {
+		if (filterId.startsWith(STD_PREFIX) && RenderingIcons.containsBigIcon(standardIconId)) {
 			return standardIconId;
-		} else if (filterId.startsWith(USER_PREFIX)) {
-			return filterId.substring(USER_PREFIX.length()).toLowerCase();
+		} else if (filterId.startsWith(USER_PREFIX) && !filterId.equals(CUSTOM_FILTER_ID)) {
+			String iconId = filterId.substring(USER_PREFIX.length()).toLowerCase();
+			if (RenderingIcons.containsBigIcon(iconId)) {
+				return iconId;
+			}
+		}
+		if (acceptedTypes.size() == 1) {
+			PoiCategory category = acceptedTypes.keySet().iterator().next();
+			String iconId = getIconIdFromPoiCategory(category);
+			if (iconId != null) {
+				return iconId;
+			}
 		}
 		return filterId;
+	}
+
+	private String getIconIdFromPoiCategory(PoiCategory category) {
+		String categoryName = category.getKeyName();
+		Set<String> subCategories = acceptedTypes.get(category);
+		if (!Algorithms.isEmpty(subCategories)) {
+			String subCategory = subCategories.iterator().next();
+			String fullCategoryName = categoryName + "_" + subCategory;
+			if (RenderingIcons.containsBigIcon(fullCategoryName)) {
+				return fullCategoryName;
+			} else if (RenderingIcons.containsBigIcon(subCategory)) {
+				return subCategory;
+			}
+		}
+		return null;
 	}
 
 	public boolean isStandardFilter() {
@@ -940,7 +964,6 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public interface AmenityNameFilter {
 
-		public boolean accept(Amenity a);
+		boolean accept(Amenity a);
 	}
-
 }
