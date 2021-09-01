@@ -141,6 +141,10 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 						if (activity instanceof MapActivity) {
 							((MapActivity) activity).refreshMap();
 						}
+						Fragment fragment = getTargetFragment();
+						if (fragment instanceof TrackMenuFragment) {
+							((TrackMenuFragment) fragment).updateContent();
+						}
 					}
 				})
 				.create();
