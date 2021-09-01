@@ -4309,4 +4309,10 @@
     <string name="amz_manage_subscription_descr">Pre správu vášho predplatného použite aplikáciu Amazon na zariadení, alebo otvorte stránku Amazon.com s vaším profilom.</string>
     <string name="empty_category_name">Prázdny názov kategórie</string>
     <string name="no_activity_for_intent">Nenašli sa vhodné aplikácie na vykonanie tejto akcie</string>
+    <string name="no_items_of_type_message">Nemáte žiadne položky tohto typu</string>
+    <string name="routeInfo_tracktype_description">Zafarbenie trasy alebo stopy podľa vlastností zloženia jej povrchu. Obyčajne sa aplikuje na cesty, kde hlavná cestná sieť pozostáva z nespevnených ciest.</string>
+    <string name="routeInfo_winter_ice_road_description">Zafarbenie trasy alebo stopy podľa zimnej klasifikácie, ktorá je použiteľná len v zime.</string>
+    <string name="routeInfo_smoothness_description">Poskytuje klasifikačnú schému podľa fyzickej použiteľnosti cesty pre kolesové vozidlá, najmä vzhľadom na pravidelnosť/rovnosť povrchu.</string>
+    <string name="routeInfo_surface_description">Poskytuje ďalšiu informáciu o fyzickom povrchu ciest/chodníkov.</string>
+    <string name="routeInfo_roadClass_description">Zafarbenie trasy alebo stopy podľa klasifikácie cesty.</string>
 </resources>
