@@ -8,11 +8,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.osmedit.OsmBugsUtil.OsmBugResult;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugResult> {
 
-	private OsmandApplication app;
-	private ValidateOsmLoginListener validateListener;
+	private final OsmandApplication app;
+	private final ValidateOsmLoginListener validateListener;
 
 	public ValidateOsmLoginDetailsTask(@NonNull OsmandApplication app, ValidateOsmLoginListener validateListener) {
 		this.app = app;
@@ -29,12 +30,14 @@ public class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugRes
 
 	@Override
 	protected void onPostExecute(OsmBugResult osmBugResult) {
+		OsmandSettings settings = app.getSettings();
 		if (osmBugResult.warning != null) {
-			app.getSettings().OSM_USER_NAME.resetToDefault();
-			app.getSettings().OSM_USER_PASSWORD.resetToDefault();
-			app.getSettings().MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
+			settings.OSM_USER_NAME_OR_EMAIL.resetToDefault();
+			settings.OSM_USER_PASSWORD.resetToDefault();
+			settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
 			app.showToastMessage(osmBugResult.warning);
 		} else {
+			settings.OSM_USER_DISPLAY_NAME.set(osmBugResult.userName);
 			app.showToastMessage(R.string.osm_authorization_success);
 		}
 		if (validateListener != null) {

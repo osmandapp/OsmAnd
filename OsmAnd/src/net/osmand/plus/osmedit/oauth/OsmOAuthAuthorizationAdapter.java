@@ -29,12 +29,12 @@ import java.util.concurrent.ExecutionException;
 
 public class OsmOAuthAuthorizationAdapter {
 
+    private final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationAdapter.class);
     private static final int THREAD_ID = 10101;
     private static final String OSM_USER = "user";
-    private static final String DISPLAY_NAME = "display_name";
-    public final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationAdapter.class);
+    public static final String DISPLAY_NAME = "display_name";
 
-    private OsmandApplication app;
+    private final OsmandApplication app;
     private final OsmOAuthAuthorizationClient client;
 
     public OsmOAuthAuthorizationAdapter(OsmandApplication app) {
@@ -164,15 +164,8 @@ public class OsmOAuthAuthorizationAdapter {
             String userName = "";
             try {
                 userName = getUserName();
-            } catch (InterruptedException e) {
-                log.error(e);
-            } catch (ExecutionException e) {
-                log.error(e);
-            } catch (IOException e) {
-                log.error(e);
-            } catch (XmlPullParserException e) {
-                log.error(e);
-            } catch (OAuthException e) {
+            } catch (InterruptedException | ExecutionException | IOException | XmlPullParserException
+                    | OAuthException e) {
                 log.error(e);
             }
             app.getSettings().OSM_USER_DISPLAY_NAME.set(userName);
@@ -183,10 +176,10 @@ public class OsmOAuthAuthorizationAdapter {
             return parseUserName(response);
         }
 
-    public Response getOsmUserDetails() throws InterruptedException, ExecutionException, IOException {
-        String osmUserDetailsUrl = app.getSettings().getOsmUrl() + "api/0.6/user/details";
-        return performRequest(osmUserDetailsUrl, Verb.GET.name(), null);
-    }
+        public Response getOsmUserDetails() throws InterruptedException, ExecutionException, IOException {
+            String osmUserDetailsUrl = app.getSettings().getOsmUrl() + "api/0.6/user/details";
+            return performRequest(osmUserDetailsUrl, Verb.GET.name(), null);
+        }
 
         public String parseUserName(Response response) throws XmlPullParserException, IOException {
             String userName = null;

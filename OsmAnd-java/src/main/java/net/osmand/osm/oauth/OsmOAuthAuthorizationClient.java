@@ -156,7 +156,7 @@ public class OsmOAuthAuthorizationClient {
     }
 
     public boolean isValidToken() {
-        return !(accessToken == null);
+        return accessToken != null;
     }
 
     private Verb parseRequestMethod(String method) {

@@ -14,6 +14,7 @@ import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
+
 import org.apache.commons.logging.Log;
 
 import java.io.FileNotFoundException;
@@ -39,8 +40,8 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		return settings.getOsmUrl() + "api/0.6/user/details";
 	}
 
-	private OsmandApplication app;
-	private OsmandSettings settings;
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
 
 	public OsmBugsRemoteUtil(OsmandApplication app) {
 		this.app = app;
@@ -104,13 +105,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		if (authorizationAdapter.isValidToken() && !anonymous) {
 			try {
 				result = performOAuthRequest(url, requestMethod, userOperation, authorizationAdapter);
-			} catch (InterruptedException e) {
-				log.error(e);
-				result.warning = e.getMessage();
-			} catch (ExecutionException e) {
-				log.error(e);
-				result.warning = e.getMessage();
-			} catch (IOException e) {
+			} catch (InterruptedException | ExecutionException | IOException e) {
 				log.error(e);
 				result.warning = e.getMessage();
 			}
@@ -141,11 +136,12 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
 		if (!anonymous) {
-			String token = settings.OSM_USER_NAME.get() + ":" + settings.OSM_USER_PASSWORD.get();
+			String token = settings.OSM_USER_NAME_OR_EMAIL.get() + ":" + settings.OSM_USER_PASSWORD.get();
 			connection.addRequestProperty("Authorization", "Basic " + Base64.encode(token.getBytes(StandardCharsets.UTF_8)));
 		}
 		connection.setDoInput(true);
 		connection.connect();
+
 		String msg = connection.getResponseMessage();
 		boolean ok = connection.getResponseCode() == HttpURLConnection.HTTP_OK;
 		log.info(msg);
@@ -156,6 +152,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			responseBody = Algorithms.readFromInputStream(connection.getErrorStream());
 		} else {
 			responseBody = Algorithms.readFromInputStream(connection.getInputStream());
+			result.userName = fetchUserName(responseBody.toString());
 		}
 		log.info("Response : " + responseBody);
 		connection.disconnect();
@@ -163,6 +160,18 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			result.warning = msg + "\n" + responseBody;
 		}
 		return result;
+	}
+
+	private String fetchUserName(String response) {
+		String userNameTag = OsmOAuthAuthorizationAdapter.DISPLAY_NAME + "=\"";
+		int userNameTagStart = response.indexOf(userNameTag);
+		if (userNameTagStart == -1) {
+			return "";
+		} else {
+			int userNameStart = userNameTagStart + userNameTag.length();
+			int userNameEnd = response.indexOf("\"", userNameStart);
+			return userNameEnd == -1 ? "" : response.substring(userNameStart, userNameEnd);
+		}
 	}
 
 	private OsmBugResult performOAuthRequest(String url, String requestMethod, String userOperation,
