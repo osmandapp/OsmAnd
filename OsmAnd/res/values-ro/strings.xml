@@ -8,7 +8,7 @@
     <string name="map_widget_show_destination_arrow">Arată direcția spre destinație</string>
     <string name="enable_plugin_monitoring_services">Activați plugin-ul \"Trip recording\" pentru a utiliza serviciile de înregistrare a poziției (înregistrare GPX, urmărire online)</string>
     <string name="non_optimal_route_calculation">Calculează rute mai puțin optime pentru distanțe foarte mari</string>
-    <string name="gps_not_available">Vă rugăm să activați GPS în setări</string>
+    <string name="gps_not_available">Vă rugăm să activați GPS-ul în setări</string>
     <string name="map_widget_monitoring_services">Servicii de Logging</string>
     <string name="no_route">Nu există rută</string>
     <string name="delete_target_point">Eliminați destinația</string>
@@ -19,7 +19,7 @@
     <string name="add_as_last_destination_point">Se adaugă ca ultimă destinație intermediară</string>
     <string name="add_as_first_destination_point">Se adaugă ca primă destinație intermediară</string>
     <string name="replace_destination_point">Înlocuiți destinația</string>
-    <string name="new_destination_point_dialog">Ați setat deja o destinație:</string>
+    <string name="new_destination_point_dialog">Aveți setată deja o destinație:</string>
     <string name="shared_string_target_points">Puncte intermediare</string>
     <string name="intermediate_point_too_far">Destinația intermediară %1$s este prea departe de cel mai apropiat drum.</string>
     <string name="arrived_at_intermediate_point">Destinația intermediară atinsă</string>
@@ -636,7 +636,7 @@
     <string name="search_poi_filter">Filtrează</string>
     <string name="menu_mute_off">Sunetul e activ</string>
     <string name="menu_mute_on">Sunetul e inactiv</string>
-    <string name="voice_provider_descr">Selectați vocea pentru ghidare folosită la navigare.</string>
+    <string name="voice_provider_descr">Selectați ghidarea vocală pentru navigare.</string>
     <string name="voice_provider">Vocea pentru ghidare</string>
     <string name="voice_data_initializing">Se inițializează vocea…</string>
     <string name="voice_data_not_supported">Versiune de voce nesuportată</string>
@@ -975,12 +975,12 @@
     <string name="edit_tilesource_choose_existing">Selectează una existentă…</string>
     <string name="maps_define_edit">Definește/Editează…</string>
     <string name="map_widget_fps_info">Informații depanare FPS</string>
-    <string name="driving_region_descr">Selectați regiune de conducere: USA, Europa, UK, Asia, și altele.</string>
+    <string name="driving_region_descr">Selectați regiune de condus: USA, Europa, UK, Asia, și altele.</string>
     <string name="driving_region">regiunea de conducere</string>
     <string name="driving_region_japan">Japonia</string>
     <string name="driving_region_us">Statele Unite</string>
     <string name="driving_region_canada">Canada</string>
-    <string name="driving_region_europe_asia">Europa, Asia, America Latină și similare</string>
+    <string name="driving_region_europe_asia">Europa, Asia, America Latină, și similare</string>
     <string name="driving_region_uk">Marea Britanie, India, și similare</string>
     <string name="speak_title">Anunță…</string>
     <string name="speak_street_names">numele Străzilor (TTS)</string>
@@ -1042,14 +1042,14 @@
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="local_indexes_cat_srtm">Linii de contur</string>
     <string name="local_indexes_cat_av">Date Audio/Video</string>
-    <string name="stop_routing_confirm">Stop the navigation\?</string>
+    <string name="stop_routing_confirm">Opriți navigația\?</string>
     <string name="clear_dest_confirm">Eliminați destinația (și destinațiile intermediare)\?</string>
     <string name="precise_routing_mode">Rutare precisă (alpha)</string>
     <string name="recording_context_menu_show">Afișează</string>
     <string name="recording_photo_description">Poza %1$s %2$s</string>
     <string name="av_def_action_picture">Faceți o poză</string>
     <string name="recording_context_menu_precord">Faceți o poză</string>
-    <string name="use_displayed_track_for_navigation">Utilizați track-ul afișat pentru navigare\?</string>
+    <string name="use_displayed_track_for_navigation">Utilizați track-ul afișat pentru navigație\?</string>
     <string name="keep_and_add_destination_point">Adăugați ca destinație subsecventă</string>
     <string name="shared_string_select_on_map">Selectează pe hartă</string>
     <string name="shared_string_favorite">Favorite</string>
@@ -1065,7 +1065,7 @@
     <string name="traffic_warning_calming">Calmarea traficului</string>
     <string name="traffic_warning_speed_camera">Cameră trafic</string>
     <string name="traffic_warning">Avertizare trafic</string>
-    <string name="speak_favorites">favorit apropiat</string>
+    <string name="speak_favorites">favorite în apropiere</string>
     <string name="speak_poi">Puncte de interes apropiate</string>
     <string name="way_alarms">Avertizări trafic</string>
     <string name="sleep_mode_stop_dialog">Opriți modul de fundal GPS\?</string>
@@ -1086,7 +1086,7 @@
     <string name="download_additional_maps">Descarcă hărțile lipsă %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Mai mult…</string>
     <string name="rendering_value_browse_map_name">Derulează hartă</string>
-    <string name="rendering_value_car_name">Autovehicul</string>
+    <string name="rendering_value_car_name">Automobil</string>
     <string name="rendering_value_bicycle_name">Bicicletă</string>
     <string name="rendering_value_pedestrian_name">Pe jos</string>
     <string name="rendering_attr_coloredBuildings_name">Colorare clădiri după tip</string>
@@ -1176,7 +1176,7 @@
     <string name="rendering_value_brown_name">Maro</string>
     <string name="osmo_edit_color">Culoare afișare</string>
     <string name="fav_point_dublicate">Nume favorit duplicat specificat</string>
-    <string name="fav_point_dublicate_message">Favorit redenumit în %1$s să evite duplicarea.</string>
+    <string name="fav_point_dublicate_message">Favorit redenumit în %1$s ca să evite duplicarea.</string>
     <string name="text_size_descr">Setați mărimea textului pe hartă.</string>
     <string name="text_size">Mărimea textului</string>
     <string name="rendering_attr_streetLighting_name">Lumină stradală</string>
@@ -1316,7 +1316,7 @@
     <string name="index_name_canada">America de Nord - Canada</string>
     <string name="index_name_italy">Europa - Italia</string>
     <string name="index_name_gb">Europa - Marea Britanie</string>
-    <string name="calculate_osmand_route_without_internet">Calcularea offline a segmentului de rută OsmAnd</string>
+    <string name="calculate_osmand_route_without_internet">Calcularea offline din segmentul de rută OsmAnd</string>
     <string name="rendering_value_default13_name">Implicit(13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Implicit(cyan translucid)</string>
     <string name="rendering_attr_currentTrackColor_name">Culoare GPX</string>
@@ -2276,7 +2276,7 @@
     <string name="osm_live_payment_month_cost_descr">%1$s / lună</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / lună</string>
     <string name="osm_live_payment_discount_descr">Salvați %1$s</string>
-    <string name="osm_live_payment_current_subscription">Abonamentul curent</string>
+    <string name="osm_live_payment_current_subscription">Abonamentul actual</string>
     <string name="osm_live_payment_renews_monthly">Reînnoire lunară</string>
     <string name="osm_live_payment_renews_quarterly">Se reînnoiește trimestrial</string>
     <string name="osm_live_payment_renews_annually">Se reînnoiește anual</string>

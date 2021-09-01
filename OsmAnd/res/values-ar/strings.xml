@@ -2985,7 +2985,7 @@
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">إظهار شبكة مسارات الدارجات الهوائية</string>
     <string name="download_map_dialog">نافذة تحميل الخريطة</string>
     <string name="dialogs_and_notifications_title">النوافذ والإشعارات</string>
-    <string name="dialogs_and_notifications_descr">التحكم في النوافذ المنبثقة ، ومربعات الحوار والإشعارات.</string>
+    <string name="dialogs_and_notifications_descr">التحكم في النوافذ المنبثقة، مربعات الحوار والإشعارات.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">شبكة النقاط</string>
     <string name="suggested_maps">خرائط مقترحة</string>
     <string name="suggested_maps_descr">هذه الخرائط مطلوبة لاستخدامها مع الأداة الملحقة.</string>
@@ -4150,7 +4150,7 @@
     <string name="announce_when_exceeded">الإعلان عند التجاوز</string>
     <string name="user_points">نقاط المستخدم</string>
     <string name="output">الإخراج</string>
-    <string name="srtm_unit_format">تنسيق وحدة خطوط الكنتور</string>
+    <string name="srtm_unit_format">متغير وحدة خطوط الكفاف (الكنتور)</string>
     <string name="srtm_download_list_help_message">OsmAnd يوفر بيانات الخطوط الكنتورية بالأمتار والقدم. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
     <string name="srtm_download_single_help_message">الرجاء تحديد التنسيق المطلوب. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
     <string name="shared_string_feet">قدم</string>

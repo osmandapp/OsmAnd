@@ -1650,7 +1650,7 @@
     <string name="poi_surface_metal">Поверхность: металл</string>
     <string name="poi_surface_wood">Поверхность: дерево</string>
     <string name="poi_surface_gravel">Поверхность: гравий</string>
-    <string name="poi_surface_fine_gravel">Поверхность: многослойный гравий</string>
+    <string name="poi_surface_fine_gravel">Поверхность: мелкий гравий</string>
     <string name="poi_surface_compacted">Поверхность: утрамбованная почва и камни</string>
     <string name="poi_surface_sand">Поверхность: песок</string>
     <string name="poi_surface_grass">Поверхность: трава</string>
