@@ -53,7 +53,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
-import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.plus.ColorUtilities;
@@ -2196,37 +2195,32 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	}
 
 	public static boolean showInstance(final MapContextMenu menu, final MapActivity mapActivity,
-	                                   final boolean centered) {
+									   final boolean centered) {
 		if (menu.getLatLon() == null || mapActivity == null || mapActivity.isActivityDestroyed()) {
 			return false;
 		}
 
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			int slideInAnim = 0;
-			int slideOutAnim = 0;
-			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-				slideInAnim = R.anim.slide_in_bottom;
-				slideOutAnim = R.anim.slide_out_bottom;
+		int slideInAnim = 0;
+		int slideOutAnim = 0;
+		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			slideInAnim = R.anim.slide_in_bottom;
+			slideOutAnim = R.anim.slide_out_bottom;
 
-				if (menu.isExtended()) {
-					slideInAnim = menu.getSlideInAnimation();
-					slideOutAnim = menu.getSlideOutAnimation();
-				}
+			if (menu.isExtended()) {
+				slideInAnim = menu.getSlideInAnimation();
+				slideOutAnim = menu.getSlideOutAnimation();
 			}
-
-			MapContextMenuFragment fragment = new MapContextMenuFragment();
-			fragment.centered = centered;
-			fragmentManager.beginTransaction()
-					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-
-			return true;
 		}
 
-		return false;
+		MapContextMenuFragment fragment = new MapContextMenuFragment();
+		fragment.centered = centered;
+		fragmentManager.beginTransaction()
+				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+				.add(R.id.fragmentContainer, fragment, TAG)
+				.addToBackStack(TAG)
+				.commitAllowingStateLoss();
+		return true;
 	}
 
 	//DownloadEvents
