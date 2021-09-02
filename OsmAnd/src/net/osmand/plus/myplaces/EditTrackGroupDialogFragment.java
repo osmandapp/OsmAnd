@@ -197,7 +197,7 @@ public class EditTrackGroupDialogFragment extends MenuBottomSheetDialogFragment 
 
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(synced ? R.drawable.ic_action_delete_dark : R.drawable.ic_action_copy))
-				.setTitle(getString(synced ? R.string.remove_from_map_markers : R.string.copy_to_map_markers))
+				.setTitle(getString(synced ? R.string.remove_group_from_markers : R.string.add_group_to_markers))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
