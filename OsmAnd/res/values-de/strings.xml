@@ -4322,4 +4322,6 @@
     <string name="routeInfo_tracktype_description">Färbt die Route oder den Track entsprechend dem Zustand der Straßen auf der Grundlage ihrer Oberflächenzusammensetzung. Wird in der Regel auf Straßen angewendet, bei denen das Hauptstraßennetz aus unbefestigten Straßen besteht.</string>
     <string name="routeInfo_winter_ice_road_description">Färbt die Route oder den Track entsprechend der Winterstraßenklassifizierung, die nur im Winter befahrbar ist.</string>
     <string name="routeInfo_smoothness_description">Bietet ein Klassifizierungsschema für die physische Nutzbarkeit eines Weges für Radfahrzeuge, insbesondere hinsichtlich der Regelmäßigkeit/Ebenheit der Oberfläche.</string>
+    <string name="routeInfo_surface_description">Zusätzliche Informationen über die Oberfläche von Straßen/Fußwegen anbieten.</string>
+    <string name="routeInfo_roadClass_description">Färbt die Route oder den Track entsprechend der Straßenklassifikation ein.</string>
 </resources>
