@@ -4312,4 +4312,10 @@
     <string name="amz_manage_subscription_descr">Por administri vian abonon uzu la aplikaĵon Amazon e via aparato aŭ malfermu vian profilon en la retejo Amazon.com.</string>
     <string name="empty_category_name">Malplena nomo de kategorio</string>
     <string name="no_activity_for_intent">Neniu kongrua aplikaĵo por plenumi tiun ĉi agon</string>
+    <string name="no_items_of_type_message">Neniu elemento de tiu ĉi speco</string>
+    <string name="routeInfo_tracktype_description">Linio de spuro aŭ kurso estas kolorigata laŭ kvalitoj de vojoj: iliaj firmecoj. Uzebla nur por regionoj kie reto de ŝosea reto konsistas ĉefe el tervojoj.</string>
+    <string name="routeInfo_winter_ice_road_description">Klasifikas vintrajn vojojn (ŝoseojn uzeblajn nur dum vintro) laŭ ilia uzeblo.</string>
+    <string name="routeInfo_smoothness_description">Klasifikas vojojn laŭ ilia uzeblo por radveturiloj: glateco kaj krateretoj.</string>
+    <string name="routeInfo_surface_description">Liveras aldonajn informojn pri ŝosea kovro de voj(et)oj.</string>
+    <string name="routeInfo_roadClass_description">Linio de spuro aŭ kurso estas kolorigata laŭ speco de vojo.</string>
 </resources>
