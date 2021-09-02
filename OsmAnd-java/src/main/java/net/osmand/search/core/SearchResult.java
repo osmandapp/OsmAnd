@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.CommonWords;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
@@ -112,11 +113,13 @@ public class SearchResult {
 			
 			boolean wordMatched = false;
 			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
-				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
-				if (r == 0) {
-					wordMatched = true;
-					idxMatchedWord = i;
-					break;
+				if (CommonWords.getCommon(localResultNames.get(i)) != 0) {
+					int r = requiredSearchPhrase.getCollator().compare(searchPhraseName.toLowerCase(), localResultNames.get(i).toLowerCase());
+					if (r == 0) {
+						wordMatched = true;
+						idxMatchedWord = i;
+						break;
+					}
 				}
 			}
 			if (!wordMatched) {
