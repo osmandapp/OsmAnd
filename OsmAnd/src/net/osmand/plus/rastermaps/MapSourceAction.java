@@ -68,27 +68,7 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	@Override
 	public String getNextSelectedItem(OsmandApplication app) {
 		List<Pair<String, String>> sources = loadListFromParams();
-		if (!Algorithms.isEmpty(sources)) {
-			String currentSource = getSelectedItem(app);
-			if (sources.size() > 1) {
-				int index = -1;
-				for (int idx = 0; idx < sources.size(); idx++) {
-					if (Algorithms.stringsEqual(sources.get(idx).first, currentSource)) {
-						index = idx;
-						break;
-					}
-				}
-
-				Pair<String, String> nextSource = sources.get(0);
-				if (index >= 0 && index + 1 < sources.size()) {
-					nextSource = sources.get(index + 1);
-				}
-				return nextSource.first;
-			} else {
-				return Algorithms.stringsEqual(LAYER_OSM_VECTOR, currentSource) ? sources.get(0).first : LAYER_OSM_VECTOR;
-			}
-		}
-		return null;
+		return getNextItemFromSources(app, sources, LAYER_OSM_VECTOR);
 	}
 
 	@Override
