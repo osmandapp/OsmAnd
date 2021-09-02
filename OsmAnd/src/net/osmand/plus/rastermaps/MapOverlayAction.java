@@ -68,22 +68,24 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	@Override
 	public String getNextSelectedItem(OsmandApplication app) {
 		List<Pair<String, String>> sources = loadListFromParams();
-		if (sources.size() > 0) {
+		if (!Algorithms.isEmpty(sources)) {
 			String currentSource = getSelectedItem(app);
-
-			int index = -1;
-			for (int idx = 0; idx < sources.size(); idx++) {
-				if (Algorithms.stringsEqual(sources.get(idx).first, currentSource)) {
-					index = idx;
-					break;
+			if (sources.size() > 1) {
+				int index = -1;
+				for (int idx = 0; idx < sources.size(); idx++) {
+					if (Algorithms.stringsEqual(sources.get(idx).first, currentSource)) {
+						index = idx;
+						break;
+					}
 				}
+				Pair<String, String> nextSource = sources.get(0);
+				if (index >= 0 && index + 1 < sources.size()) {
+					nextSource = sources.get(index + 1);
+				}
+				return nextSource.first;
+			} else {
+				return Algorithms.stringsEqual(KEY_NO_OVERLAY, currentSource) ? sources.get(0).first : KEY_NO_OVERLAY;
 			}
-
-			Pair<String, String> nextSource = sources.get(0);
-			if (index >= 0 && index + 1 < sources.size()) {
-				nextSource = sources.get(index + 1);
-			}
-			return nextSource.first;
 		}
 		return null;
 	}
