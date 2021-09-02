@@ -227,7 +227,7 @@ public class RouteResultPreparation {
 
 	public void prepareTurnResults(RoutingContext ctx, List<RouteSegmentResult> result) {
 		for (int i = 0; i < result.size(); i ++) {
-			TurnType turnType = getTurnInfo(ctx, result, i, ctx.leftSideNavigation);
+			TurnType turnType = getTurnInfo(result, i, ctx.leftSideNavigation);
 			result.get(i).setTurnType(turnType);
 		}
 		
@@ -1100,7 +1100,7 @@ public class RouteResultPreparation {
 	}
 
 
-	private TurnType getTurnInfo(RoutingContext ctx, List<RouteSegmentResult> result, int i, boolean leftSide) {
+	private TurnType getTurnInfo(List<RouteSegmentResult> result, int i, boolean leftSide) {
 		if (i == 0) {
 			return TurnType.valueOf(TurnType.C, false);
 		}
@@ -1111,7 +1111,7 @@ public class RouteResultPreparation {
 		}
 		RouteSegmentResult rr = result.get(i);
 		if (rr.getObject().roundabout()) {
-			return processRoundaboutTurn(ctx, result, i, leftSide, prev, rr);
+			return processRoundaboutTurn(result, i, leftSide, prev, rr);
 		}
 		TurnType t = null;
 		if (prev != null) {
@@ -1226,18 +1226,16 @@ public class RouteResultPreparation {
 		return turnSet;
 	}
 
-	private TurnType processRoundaboutTurn(RoutingContext ctx, List<RouteSegmentResult> result, int i, boolean leftSide,
+	private TurnType processRoundaboutTurn(List<RouteSegmentResult> result, int i, boolean leftSide,
 	                                       RouteSegmentResult prev, RouteSegmentResult rr) {
 		int exit = 1;
 		RouteSegmentResult last = rr;
 		RouteSegmentResult firstRoundabout = rr;
 		RouteSegmentResult lastRoundabout = rr;
-		long prevRoadId = prev.getObject().id;
 		for (int j = i; j < result.size(); j++) {
 			RouteSegmentResult rnext = result.get(j);
 			last = rnext;
-			RouteDataObject road = rnext.getObject();
-			if (road.roundabout()) {
+			if (rnext.getObject().roundabout()) {
 				lastRoundabout = rnext;
 				boolean plus = rnext.getStartPointIndex() < rnext.getEndPointIndex();
 				int k = rnext.getStartPointIndex();
@@ -1246,7 +1244,8 @@ public class RouteResultPreparation {
 //					k = plus ? k + 1 : k - 1;
 				}
 				while (k != rnext.getEndPointIndex()) {
-					if (ctx.hasAttachedRoads(road, k, prevRoadId)) {
+					int attachedRoads = rnext.getAttachedRoutes(k).size();
+					if (attachedRoads > 0) {
 						exit++;
 					}
 					k = plus ? k + 1 : k - 1;
@@ -1834,7 +1833,8 @@ public class RouteResultPreparation {
 				}
 			};	
 		} else if (recalculation || ctx.nativeLib == null) {
-			RouteSegment rt = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd), ctx.config.memoryLimitation);
+			RouteSegment rt = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd),
+					ctx.config.memoryLimitation, true);
 			it = rt == null ? null : rt.getIterator();
 		} else {
 			// Here we assume that all segments should be attached by native

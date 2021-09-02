@@ -760,20 +760,6 @@ public class RoutingContext {
 		return (o.getId() << 10) + ind;
 	}
 
-	public boolean hasAttachedRoads(RouteDataObject road, int pointIdx, long prevRoadId) {
-		RouteSegment nextSegment = loadRouteSegment(road.getPoint31XTile(pointIdx), road.getPoint31YTile(pointIdx),
-				config.memoryLimitation, true);
-		while (nextSegment != null) {
-			RouteDataObject nextRoad = nextSegment.road;
-			boolean outWay = (getRouter().isOneWay(nextRoad) * -nextSegment.segStart) >= 0;
-			if (road.getId() != nextRoad.getId() && nextRoad.getId() != prevRoadId && !nextRoad.isRoadDeleted() && outWay) {
-				return true;
-			}
-			nextSegment = nextSegment.next;
-		}
-		return false;
-	}
-
 	public static class RoutingSubregionTile {
 		public final RouteSubregion subregion;
 		// make it without get/set for fast access
