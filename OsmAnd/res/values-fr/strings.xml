@@ -4314,4 +4314,6 @@
 \n• Les mises à jour OsmAnd Live ont été déplacées vers « Téléchargements &gt; mises à jour »
 \n
 \n</string>
+    <string name="add_group_to_markers">Ajouter un groupe à la liste des marques</string>
+    <string name="remove_group_from_markers">Supprimer le groupe de la liste des marques</string>
 </resources>
