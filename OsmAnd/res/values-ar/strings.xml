@@ -4383,4 +4383,10 @@
     <string name="amz_manage_subscription_descr">لإدارة اشتراكك ، استخدم تطبيق Amazon على الجهاز أو افتح موقع Amazon.com بالحساب الخاص بك.</string>
     <string name="empty_category_name">اسم فئة فارغ</string>
     <string name="no_activity_for_intent">لم يتم العثور على تطبيقات مناسبة لتنفيذ هذا الإجراء</string>
+    <string name="no_items_of_type_message">ليس لديك أي عناصر من هذا النوع</string>
+    <string name="routeInfo_tracktype_description">تلوين مسار أو خط المسار وفقا لحالة الطرق على أساس تكوينها السطحي. تطبق عادة على الطرق التي تتكون فيها شبكة الطرق الرئيسية من طرق غير معبدة.</string>
+    <string name="routeInfo_winter_ice_road_description">تلوين الطريق أو خط المسار وفقا لتصنيف الطريق في فصل الشتاء التي هي قابلة للاستخدام فقط خلال فصل الشتاء.</string>
+    <string name="routeInfo_smoothness_description">يوفر نظام تصنيف بشأن الاستخدام المادي لطريق المركبات ذات العجلات، لا سيما فيما يتعلق بانتظام السطح / وتسطيحه.</string>
+    <string name="routeInfo_surface_description">تقديم معلومات إضافية حول السطح المادي للطرق/ممرات المشاة.</string>
+    <string name="routeInfo_roadClass_description">تلوين الطريق أو خط المسار وفقا لتصنيف الطرق.</string>
 </resources>

@@ -4319,4 +4319,10 @@
     <string name="amz_manage_subscription_descr">Para gerir a sua subscrição, use a App Amazon no dispositivo ou abra o site Amazon.com no seu perfil.</string>
     <string name="empty_category_name">Nome de categoria vazio</string>
     <string name="no_activity_for_intent">Não foi encontrada nenhuma aplicação adequada para executar esta ação</string>
+    <string name="no_items_of_type_message">Você não tem nenhum item deste tipo</string>
+    <string name="routeInfo_tracktype_description">Colorir uma rota ou linha do trilho de acordo com as condições das estradas com base na composição da superfície. Normalmente aplicado a estradas em que a rede de estradas principal consiste em estradas não pavimentadas.</string>
+    <string name="routeInfo_winter_ice_road_description">Colorir a rota ou linha do trilho de acordo com a classificação da estrada de inverno que só pode ser usada durante o inverno.</string>
+    <string name="routeInfo_smoothness_description">Fornece um esquema de classificação em relação à usabilidade física de uma via para veículos com rodas, particularmente em relação à regularidade / planicidade da superfície.</string>
+    <string name="routeInfo_surface_description">Fornece informações adicionais sobre a superfície física das estradas/caminhos pedonais.</string>
+    <string name="routeInfo_roadClass_description">Colorir a rota ou a linha da via de acordo com a classificação da estrada.</string>
 </resources>

@@ -4269,4 +4269,14 @@
     <string name="cancel_anytime_in_amazon_app">Hættu hvenær sem er í Amazon-forritinu</string>
     <string name="empty_category_name">Autt heiti flokks</string>
     <string name="no_activity_for_intent">Ekkert hentugt forrit fannst til að meðhöndla þessa aðgerð</string>
+    <string name="purchases_feature_desc_wikivoyage">Skoðaðu Wikiferðir ónettengt. Greinum er skipt eftir löndum og héruðum og eru þær tiltækar á öllum tungumálum.</string>
+    <string name="purchases_feature_desc_wikipedia">Skoðaðu Wikipediu ónettengt. Greinum er skipt eftir löndum og héruðum og eru þær tiltækar á öllum tungumálum.</string>
+    <string name="purchases_feature_desc_combined_wiki">Skoðaðu Wikipedia-greinar á ferðum þínum án nettengingar. Ónettengdum gögnum er skipt eftir löndum og héruðum og eru þau tiltæk á öllum tungumálum.</string>
+    <string name="logout_from_osmand_cloud_decsr">"Skrá út\?
+\nÞú þarft að skrá þig aftur inn til að taka öryggisafrit  eða endurheimta gögn."</string>
+    <string name="enough_contributions_descr">Til hamingju, þú hefur gefið næginleg framlög til OpenStreetMap og getur því notið ótakmarkaðs niðurhals á uppfærslum OsmAnd-landakorta!</string>
+    <string name="osmand_cloud_authorize_descr">Ekki tapa gögnunum þínum. Taktu öryggisafrit og endu heimtu allar upplýsingar á einfaldan máta.</string>
+    <string name="verification_code_missing_description">Þetta gæti tekið 10 mínútur. Notaðu hnappinn hér fyrir neðan ef hann er ekki í ruslpóstmöppunni þinni.</string>
+    <string name="osmand_online_routing_promo">Notaðu forsniðin sniðmát, eða bættu við OSRM, GraphHopper, openrouteservice eða GPX-leiðagerð af netinu.</string>
+    <string name="no_items_of_type_message">Þú ert ekki með nein atriði af þessari tegund</string>
 </resources>
