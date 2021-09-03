@@ -68,24 +68,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	@Override
 	public String getNextSelectedItem(OsmandApplication app) {
 		List<Pair<String, String>> sources = loadListFromParams();
-		if (sources.size() > 0) {
-			String currentSource = getSelectedItem(app);
-
-			int index = -1;
-			for (int idx = 0; idx < sources.size(); idx++) {
-				if (Algorithms.stringsEqual(sources.get(idx).first, currentSource)) {
-					index = idx;
-					break;
-				}
-			}
-
-			Pair<String, String> nextSource = sources.get(0);
-			if (index >= 0 && index + 1 < sources.size()) {
-				nextSource = sources.get(index + 1);
-			}
-			return nextSource.first;
-		}
-		return null;
+		return getNextItemFromSources(app, sources, KEY_NO_UNDERLAY);
 	}
 
 	@Override
