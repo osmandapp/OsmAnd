@@ -4325,4 +4325,6 @@
     <string name="routeInfo_smoothness_description">Giver en klassificering af en vejs fysiske anvendelighed for køretøjer, navnlig med hensyn til overfladens ensartethed/jævnhed.</string>
     <string name="routeInfo_surface_description">Giv yderligere oplysninger om den fysiske overflade af veje/gangstier.</string>
     <string name="routeInfo_roadClass_description">Farvelægning af ruten eller sporlinjen i henhold til vejklassificering.</string>
+    <string name="add_group_to_markers">Tilføj gruppe til markørliste</string>
+    <string name="remove_group_from_markers">Fjern gruppe fra markørliste</string>
 </resources>
