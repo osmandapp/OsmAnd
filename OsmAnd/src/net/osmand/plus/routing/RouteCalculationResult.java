@@ -412,26 +412,43 @@ public class RouteCalculationResult {
 					info.setStreetName(current.getStreetName(lang, transliterate, list, lind));
 					info.setDestinationName(current.getDestinationName(lang, transliterate, list, lind));
 
-					//if (s.getObject().isExitPoint() && current.getObject().getHighway().equals("motorway_link")) {
+					RouteDataObject rdoWithShield = null;
+					RouteDataObject rdoWithoutShield = null;
 					if (s.getObject().isExitPoint()) {
 						ExitInfo exitInfo = new ExitInfo();
 						exitInfo.setRef(current.getObject().getExitRef());
 						exitInfo.setExitStreetName(current.getObject().getExitName());
 						info.setExitInfo(exitInfo);
+
+						if (routeInd > 0) {
+							// set ref from previous segment because exit point is not consist of highway ref
+							RouteSegmentResult previous;
+							previous = list.get(routeInd - 1);
+							rdoWithoutShield = previous.getObject();
+							info.setRef(previous.getRef(lang, transliterate));
+							if (info.getRef() != null) {
+								rdoWithShield = previous.getObjectWithShield(list, lind);
+							}
+						}
 					}
 
-					if (routeInd > 0) {
-						RouteSegmentResult previous;
-						previous = list.get(routeInd - 1);
-						info.setRef(previous.getRef(lang, transliterate));
+					if (info.getRef() == null) {
+						String ref = current.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+								ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), current.isForwardDirection());
+						String destRef = current.getObject().getDestinationRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+								ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), current.isForwardDirection());
+						rdoWithoutShield = current.getObject();
+						if (ref != null && !ref.equals(destRef)) {
+							info.setRef(ref);
+							rdoWithShield = current.getObjectWithShield(list, lind);
+						}
+					}
 
-						if (info.getRef() != null) {
-							RouteDataObject rdoWithShield = previous.getObjectWithShield(list, lind);
-							if (rdoWithShield != null) {
-								info.setRouteDataObject(rdoWithShield);
-							} else {
-								info.setRouteDataObject(previous.getObject());
-							}
+					if (info.getRef() != null) {
+						if (rdoWithShield != null) {
+							info.setRouteDataObject(rdoWithShield);
+						} else {
+							info.setRouteDataObject(rdoWithoutShield);
 						}
 					}
 				}
