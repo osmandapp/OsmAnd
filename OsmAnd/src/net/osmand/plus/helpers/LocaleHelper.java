@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 
-import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 

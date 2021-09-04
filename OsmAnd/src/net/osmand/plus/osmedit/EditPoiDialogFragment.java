@@ -65,6 +65,7 @@ import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -234,9 +235,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 
-		final int colorId = isLightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
-		final int color = getResources().getColor(colorId);
-		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, color));
+		final int activeColor = ColorUtilities.getActiveColor(getContext(), !isLightTheme);
+		onlineDocumentationButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_help, activeColor));
 		final ImageButton poiTypeButton = (ImageButton) view.findViewById(R.id.poiTypeButton);
 		poiTypeButton.setOnClickListener(new View.OnClickListener() {
 			@Override

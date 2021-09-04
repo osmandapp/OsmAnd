@@ -753,13 +753,23 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		// notify about lost location
 		scheduleCheckIfGpsLost(location);
 
+		RoutingHelper routingHelper = app.getRoutingHelper();
 		app.getSavingTrackHelper().updateLocation(location, heading);
 		OsmandPlugin.updateLocationPlugins(location);
-		app.getRoutingHelper().updateLocation(location);
+		routingHelper.updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
-		NavigationSession navigationSession = app.getNavigationSession();
-		if (navigationSession != null) {
-			navigationSession.updateLocation(location);
+		NavigationSession carNavigationSession = app.getNavigationSession();
+		if (carNavigationSession != null) {
+			carNavigationSession.updateLocation(location);
+			net.osmand.Location updatedLocation = location;
+			if (routingHelper.isFollowingMode()) {
+				if (location == null || isPointAccurateForRouting(location)) {
+					// Update routing position and get location for sticking mode
+					updatedLocation = routingHelper.setCurrentLocation(location, app.getSettings().SNAP_TO_ROAD.get());
+				}
+			}
+			this.location = updatedLocation;
+			updateLocation(this.location);
 		}
 	}
 	

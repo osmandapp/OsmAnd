@@ -19,6 +19,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.Street;
 import net.osmand.data.WptLocationPoint;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -118,15 +119,15 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 		dialogFragment = (QuickSearchDialogFragment) getParentFragment();
 		listAdapter = new QuickSearchListAdapter(getMyApplication(), getActivity());
 		listAdapter.setAccessibilityAssistant(dialogFragment.getAccessibilityAssistant());
 		listAdapter.setUseMapCenter(dialogFragment.isUseMapCenter());
 		setListAdapter(listAdapter);
 		ListView listView = getListView();
-		listView.setBackgroundColor(getResources().getColor(
-				getMyApplication().getSettings().isLightContent() ? R.color.activity_background_color_light
-						: R.color.activity_background_color_dark));
+		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 		listView.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {

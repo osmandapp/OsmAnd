@@ -1,6 +1,5 @@
 package net.osmand.plus.liveupdates;
 
-import static net.osmand.AndroidUtils.getSecondaryTextColorId;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
@@ -11,8 +10,6 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayT
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getTertiaryTextColorId;
-import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getActiveTextColorId;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getOsmandIconColorId;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.getSecondaryIconColorId;
 
@@ -38,7 +35,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageButton;
@@ -57,6 +53,7 @@ import com.google.android.material.appbar.AppBarLayout;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -202,7 +199,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 		AppCompatImageView descriptionIcon = timeContainer.findViewById(R.id.icon);
 		Drawable icon = UiUtilities.createTintedDrawable(app, R.drawable.ic_action_time,
-				ContextCompat.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light));
+				ColorUtilities.getDefaultIconColor(app, nightMode));
 		descriptionIcon.setImageDrawable(icon);
 
 		TextViewEx title = timeContainer.findViewById(R.id.title);
@@ -288,7 +285,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		});
 
 		FrameLayout iconHelpContainer = toolbar.findViewById(R.id.action_button);
-		int iconColorResId = nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
+		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		AppCompatImageButton iconHelp = toolbar.findViewById(R.id.action_button_icon);
 		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, iconColorResId);
 		iconHelp.setImageDrawable(helpDrawable);
@@ -308,7 +305,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 	private void updateToolbarSwitch(final boolean isChecked) {
 		int switchColor = ContextCompat.getColor(app,
-				isChecked ? getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode));
+				isChecked ? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryTextColorId(nightMode));
 		AndroidUtils.setBackground(toolbarSwitchContainer, new ColorDrawable(switchColor));
 
 		SwitchCompat switchView = toolbarSwitchContainer.findViewById(R.id.switchWidget);
@@ -533,7 +530,7 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 //			IncrementalChangesManager changesManager = app.getResourceManager().getChangesManager();
 			compoundButton.setChecked(localUpdateOn.get());
 			if (!liveUpdateOn && localUpdateOn.get()) {
-				UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app, getTertiaryTextColorId(nightMode)), compoundButton);
+				UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app, ColorUtilities.getTertiaryTextColorId(nightMode)), compoundButton);
 			} else {
 				UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 			}
@@ -552,14 +549,14 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				}*/
 				subTitle.setText(subTitleText);
 				subTitle.setTextColor(ContextCompat.getColor(app, liveUpdateOn
-						? getActiveTextColorId(nightMode) : getSecondaryTextColorId(nightMode)));
+						? ColorUtilities.getActiveColorId(nightMode) : ColorUtilities.getSecondaryTextColorId(nightMode)));
 				Typeface typeface = FontCache.getFont(app, getString(R.string.font_roboto_medium));
 				subTitle.setTypeface(typeface);
 			}
 
 			Drawable statusDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_map);
 			int resColorId = !localUpdateOn.get() ? getSecondaryIconColorId(nightMode) :
-					!liveUpdateOn ? getDefaultIconColorId(nightMode) : getOsmandIconColorId(nightMode);
+					!liveUpdateOn ? ColorUtilities.getDefaultIconColorId(nightMode) : getOsmandIconColorId(nightMode);
 			int statusColor = ContextCompat.getColor(app, resColorId);
 			if (statusDrawable != null) {
 				DrawableCompat.setTint(statusDrawable, statusColor);
@@ -740,10 +737,5 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		return supportRegion.equals(app.getString(R.string.osmand_team)) ?
 				app.getString(R.string.default_buttons_support) :
 				app.getString(R.string.osm_live_support_region);
-	}
-
-	@ColorRes
-	public static int getDefaultIconColorId(boolean nightMode) {
-		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 	}
 }

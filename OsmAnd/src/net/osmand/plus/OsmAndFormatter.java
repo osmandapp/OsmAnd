@@ -86,8 +86,9 @@ public class OsmAndFormatter {
 					+ app.getString(R.string.osmand_parking_minute) : "");
 		} else if (minutes > 0) {
 			return minutes + " " + app.getString(R.string.osmand_parking_minute);
+		} else {
+			return "<1 " + app.getString(R.string.osmand_parking_minute);
 		}
-		return "";
 	}
 
 	public static String getFormattedPassedTime(@NonNull OsmandApplication app, long lastUploadedTimems, String def) {

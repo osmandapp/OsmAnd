@@ -1,14 +1,15 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.routing.ColoringType;
-
-import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
-import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
 
 public class TrackDrawInfo {
 
@@ -41,8 +42,15 @@ public class TrackDrawInfo {
 		readBundle(bundle);
 	}
 
-	public TrackDrawInfo(@NonNull GpxDataItem gpxDataItem, boolean currentRecording) {
-		filePath = gpxDataItem.getFile().getPath();
+	public TrackDrawInfo(@NonNull String filePath, @Nullable GpxDataItem gpxDataItem, boolean currentRecording) {
+		if (gpxDataItem != null) {
+			updateParams(gpxDataItem);
+		}
+		this.filePath = filePath;
+		this.currentRecording = currentRecording;
+	}
+
+	public void updateParams(@NonNull GpxDataItem gpxDataItem) {
 		width = gpxDataItem.getWidth();
 		color = gpxDataItem.getColor();
 		coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxDataItem.getColoringType());
@@ -52,7 +60,6 @@ public class TrackDrawInfo {
 		joinSegments = gpxDataItem.isJoinSegments();
 		showArrows = gpxDataItem.isShowArrows();
 		showStartFinish = gpxDataItem.isShowStartFinish();
-		this.currentRecording = currentRecording;
 	}
 
 	public String getFilePath() {

@@ -18,7 +18,6 @@ import net.osmand.router.RouteColorize;
 import net.osmand.router.RouteColorize.ColorizationType;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class ColoringTypeCard extends MapBaseCard {
 

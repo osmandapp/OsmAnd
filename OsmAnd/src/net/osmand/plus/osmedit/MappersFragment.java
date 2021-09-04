@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -27,6 +26,7 @@ import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -81,7 +81,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 			fm.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 
@@ -131,16 +131,15 @@ public class MappersFragment extends BaseOsmAndFragment {
 	private void setupToolbar() {
 		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		int iconId = AndroidUtils.getNavigationIconResId(app);
-		toolbar.setNavigationIcon(getPaintedContentIcon(iconId, nightMode
-				? getResources().getColor(R.color.active_buttons_and_links_text_dark)
-				: getResources().getColor(R.color.active_buttons_and_links_text_light)));
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
+		toolbar.setNavigationIcon(getPaintedContentIcon(iconId, color));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> dismiss());
 	}
 
 	private void setupRefreshButton() {
 		View button = mainView.findViewById(R.id.button_refresh);
-		int normal = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int normal = ColorUtilities.getActiveColor(app, nightMode);
 		int pressed = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light);
 		setupButtonBackground(button, normal, pressed);
 		button.setOnClickListener(v -> refreshContributions());
@@ -173,13 +172,13 @@ public class MappersFragment extends BaseOsmAndFragment {
 		long expireTime = settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.get();
 		boolean isAvailable = expireTime > System.currentTimeMillis();
 		if (isAvailable) {
-			titleColor = ContextCompat.getColor(app, getActiveColorId());
+			titleColor = ColorUtilities.getActiveColor(app, nightMode);
 			String date = OsmAndFormatter.getFormattedDate(app, expireTime);
 			title = getString(R.string.available_until, date);
 			description = getString(R.string.enough_contributions_descr);
 		} else {
 			int size = getChangesSize(changesInfo);
-			titleColor = ContextCompat.getColor(app, getPrimaryTextColorId());
+			titleColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 			title = getString(R.string.map_updates_are_unavailable_yet);
 			description = getString(R.string.not_enough_contributions_descr,
 					String.valueOf(CHANGES_FOR_MAPPER_PROMO - size),
@@ -238,8 +237,8 @@ public class MappersFragment extends BaseOsmAndFragment {
 	}
 
 	private void setupButtonBackground(@NonNull View button, @ColorInt int normalColor, @ColorInt int pressedColor) {
-		Drawable normal = createRoundedDrawable(normalColor, ButtonBackground.ROUNDED);
-		Drawable pressed = createRoundedDrawable(pressedColor, ButtonBackground.ROUNDED);
+		Drawable normal = createRoundedDrawable(normalColor, ButtonBackground.ROUNDED_SMALL);
+		Drawable pressed = createRoundedDrawable(pressedColor, ButtonBackground.ROUNDED_SMALL);
 		setupRoundedBackground(button, normal, pressed);
 	}
 
@@ -262,21 +261,13 @@ public class MappersFragment extends BaseOsmAndFragment {
 		return AppCompatResources.getDrawable(app, nightMode ? R.drawable.purchase_button_ripple_dark : R.drawable.purchase_button_ripple_light);
 	}
 
-	@ColorRes
-	private int getActiveColorId() {
-		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-	}
-
-	@ColorRes
-	private int getPrimaryTextColorId() {
-		return nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
-	}
-
 	public void refreshContributions() {
 		downloadChangesInfo(result -> {
 			changesInfo = result;
 			checkLastChanges(result);
-			fullUpdate();
+			if (isAdded()) {
+				fullUpdate();
+			}
 			return true;
 		});
 	}

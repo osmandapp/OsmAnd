@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -41,11 +42,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import static net.osmand.router.RouteStatisticsHelper.ROUTE_INFO_PREFIX;
 
 
 public class RouteLineColorCard extends MapBaseCard implements CardListener, ColorPickerListener, HeaderInfo {
@@ -173,6 +177,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 		}
 		if (selectedType == ColoringType.CUSTOM_COLOR) {
 			colorsCard.setSelectedColor(getCustomRouteColor());
+			updateColorItems();
 		}
 	}
 
@@ -254,11 +259,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 	}
 
 	private void updateDescription() {
-		if (selectedType.isRouteInfoAttribute()) {
-			AndroidUiHelper.updateVisibility(tvDescription, false);
-			return;
-		}
-		String description;
+		String description = null;
 		if (selectedType.isDefault()) {
 			String pattern = app.getString(R.string.route_line_use_map_style_color);
 			description = String.format(pattern, app.getRendererRegistry().getSelectedRendererName());
@@ -266,11 +267,14 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			String pattern = app.getString(R.string.specify_color_for_map_mode);
 			String mapModeTitle = app.getString(isNightMap() ? NIGHT_TITLE_ID : DAY_TITLE_ID);
 			description = String.format(pattern, mapModeTitle.toLowerCase());
+		} else if (selectedType.isRouteInfoAttribute()) {
+			String key = selectedRouteInfoAttribute.replaceAll(ROUTE_INFO_PREFIX, "");
+			description = AndroidUtils.getStringRouteInfoPropertyDescription(app, key);
 		} else {
 			description = app.getString(R.string.route_line_use_gradient_coloring);
 		}
-		AndroidUiHelper.updateVisibility(tvDescription, true);
-		tvDescription.setText(description);
+		AndroidUiHelper.updateVisibility(tvDescription, description != null);
+		tvDescription.setText(description != null ? description : "");
 	}
 
 	private boolean isNightMap() {
@@ -363,8 +367,7 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 					.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
 				if (isItemSelected(coloringType, coloringTypeName)) {
-					int strokeColorRes = nightMode ?
-							R.color.active_color_primary_dark : R.color.active_color_primary_light;
+					int strokeColorRes = ColorUtilities.getActiveColorId(nightMode);
 					int strokeColor = ContextCompat.getColor(app, strokeColorRes);
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), strokeColor);
 				} else {

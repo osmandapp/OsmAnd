@@ -47,8 +47,7 @@ public abstract class BasicProgressAsyncTask<Tag, Params, Progress, Result> exte
 		updProgress(false);
 	}
 
-	protected abstract void updateProgress(boolean updateOnlyProgress, 
-			Tag tag);
+	protected abstract void updateProgress(boolean updateOnlyProgress, Tag tag);
 
 	@Override
 	public void startWork(int work) {

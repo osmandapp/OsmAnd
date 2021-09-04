@@ -29,7 +29,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -62,17 +62,20 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 	private boolean nightMode;
 	private boolean needRestart;
 
-	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+									@NonNull List<SettingsItem> settingsItems,
 									@NonNull String sourceName, boolean needRestart) {
-		ImportCompleteFragment fragment = new ImportCompleteFragment();
-		fragment.settingsItems.addAll(settingsItems);
-		fragment.setSourceName(sourceName);
-		fragment.setRetainInstance(true);
-		fragment.setNeedRestart(needRestart);
-		fm.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ImportCompleteFragment fragment = new ImportCompleteFragment();
+			fragment.settingsItems.addAll(settingsItems);
+			fragment.setSourceName(sourceName);
+			fragment.setRetainInstance(true);
+			fragment.setNeedRestart(needRestart);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	@Override
@@ -172,7 +175,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 
 	private void navigateTo(ExportSettingsType type) {
 		FragmentManager fm = getFragmentManager();
-		Activity activity = requireActivity();
+		FragmentActivity activity = requireActivity();
 		if (fm == null || fm.isStateSaved()) {
 			return;
 		}
@@ -186,9 +189,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.MAIN_SETTINGS);
 				break;
 			case QUICK_ACTIONS:
-				fm.beginTransaction()
-						.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
-						.addToBackStack(QuickActionListFragment.TAG).commit();
+				QuickActionListFragment.showInstance(activity);
 				break;
 			case POI_TYPES:
 				if (activity instanceof MapActivity) {
@@ -204,19 +205,18 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				break;
 			case MAP_SOURCES:
 				if (activity instanceof MapActivity) {
-					((MapActivity) activity).getDashboard()
-							.setDashboardVisibility(
-									true,
-									DashboardOnMap.DashboardType.CONFIGURE_MAP,
-									null
-							);
+					((MapActivity) activity).getDashboard().setDashboardVisibility(true,
+							DashboardType.CONFIGURE_MAP, null);
 				}
 				break;
 			case CUSTOM_RENDER_STYLE:
-				new SelectMapStyleBottomSheetDialogFragment().show(fm, SelectMapStyleBottomSheetDialogFragment.TAG);
+				SelectMapStyleBottomSheetDialogFragment.showInstance(fm);
 				break;
 			case AVOID_ROADS:
-				new AvoidRoadsBottomSheetDialogFragment().show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
+				if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+					new AvoidRoadsBottomSheetDialogFragment()
+							.show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
+				}
 				break;
 			case TRACKS:
 			case OSM_NOTES:

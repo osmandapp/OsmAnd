@@ -5,7 +5,6 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.net.URLConnection;
 
 import net.osmand.IndexConstants;
@@ -18,8 +17,6 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import android.graphics.Canvas;
-import android.graphics.RectF;
-import android.os.Build;
 
 public class YandexTrafficAdapter  extends MapTileAdapter {
 

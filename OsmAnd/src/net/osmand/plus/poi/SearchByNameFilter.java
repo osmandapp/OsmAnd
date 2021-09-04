@@ -2,13 +2,10 @@ package net.osmand.plus.poi;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
-import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;

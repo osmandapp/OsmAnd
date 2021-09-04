@@ -358,10 +358,10 @@ public class MapWidgetRegistry {
 		settings.MAP_INFO_CONTROLS.set(SHOW_PREFIX);
 	}
 
-	private void resetDefaultAppearance(ApplicationMode appMode) {
-		settings.TRANSPARENT_MAP_THEME.resetToDefault();
-		settings.SHOW_STREET_NAME.resetToDefault();
-		settings.MAP_MARKERS_MODE.resetToDefault();
+	private void resetDefaultAppearance(ApplicationMode mode) {
+		settings.TRANSPARENT_MAP_THEME.resetModeToDefault(mode);
+		settings.SHOW_STREET_NAME.resetModeToDefault(mode);
+		settings.MAP_MARKERS_MODE.resetModeToDefault(mode);
 	}
 
 	public void addControlsAppearance(final MapActivity map, final ContextMenuAdapter cm, ApplicationMode mode) {
@@ -483,16 +483,7 @@ public class MapWidgetRegistry {
 
 					@Override
 					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
-						int slideInAnim = R.anim.slide_in_bottom;
-						int slideOutAnim = R.anim.slide_out_bottom;
-
-						QuickActionListFragment fragment = new QuickActionListFragment();
-						fragment.setFromDashboard(true);
-						mapActivity.getSupportFragmentManager().beginTransaction()
-								.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-								.add(R.id.fragmentContainer, fragment, QuickActionListFragment.TAG)
-								.addToBackStack(QuickActionListFragment.TAG).commitAllowingStateLoss();
-
+						QuickActionListFragment.showInstance(mapActivity, true, true);
 						return true;
 					}
 

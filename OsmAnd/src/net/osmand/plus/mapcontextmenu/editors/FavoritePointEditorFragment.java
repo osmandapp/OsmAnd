@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
@@ -7,27 +9,34 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.Algorithms;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-public class FavoritePointEditorFragment extends PointEditorFragment {
+public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 
 	@Nullable
 	private FavoritePointEditor editor;
@@ -35,15 +44,20 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	private FavouritePoint favorite;
 	@Nullable
 	private FavoriteGroup group;
+	private int color;
+	private int iconId;
+	@NonNull
+	private BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
+
 	@Nullable
-	FavouritesDbHelper helper;
+	private FavouritesDbHelper helper;
 
 	private boolean autoFill;
 	private boolean saved;
 	private int defaultColor;
 
 	@Override
-	public void onAttach(Context context) {
+	public void onAttach(@NonNull Context context) {
 		super.onAttach(context);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -62,8 +76,14 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		FavouritesDbHelper helper = getHelper();
 		if (editor != null && helper != null) {
 			FavouritePoint favorite = editor.getFavorite();
+			if (favorite == null && savedInstanceState != null) {
+				favorite = (FavouritePoint) savedInstanceState.getSerializable(FavoriteDialogs.KEY_FAVORITE);
+			}
 			this.favorite = favorite;
 			this.group = helper.getGroup(favorite);
+			this.color = favorite.getColor();
+			this.backgroundType = favorite.getBackgroundType();
+			this.iconId = favorite.getIconId();
 		}
 	}
 
@@ -71,23 +91,41 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		FavoritePointEditor editor = getFavoritePointEditor();
-		if (view != null && editor != null && editor.isNew()) {
-			Button replaceButton = (Button) view.findViewById(R.id.replace_button);
-			replaceButton.setTextColor(getResources().getColor(!editor.isLight() ? R.color.osmand_orange : R.color.map_widget_blue));
+		if (view != null) {
+			View replaceButton = view.findViewById(R.id.button_replace_container);
 			replaceButton.setVisibility(View.VISIBLE);
 			replaceButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Bundle args = new Bundle();
-					args.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						FavoriteDialogs.createReplaceFavouriteDialog(activity, args);
-					}
+					replacePressed();
 				}
 			});
+			if (editor != null && editor.isNew()) {
+				ImageView toolbarAction = view.findViewById(R.id.toolbar_action);
+				toolbarAction.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						replacePressed();
+					}
+				});
+			}
 		}
 		return view;
+	}
+
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
+	}
+
+	private void replacePressed() {
+		Bundle args = new Bundle();
+		args.putSerializable(FavoriteDialogs.KEY_FAVORITE, getFavorite());
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FavoriteDialogs.createReplaceFavouriteDialog(activity, args);
+		}
 	}
 
 	@Override
@@ -103,7 +141,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		return editor;
 	}
 
-	public FavoritePointEditor getFavoritePointEditor() {
+	private FavoritePointEditor getFavoritePointEditor() {
 		return editor;
 	}
 
@@ -138,11 +176,40 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	public void setCategory(String name, int color) {
 		FavouritesDbHelper helper = getHelper();
-		if (helper != null) {
-			FavoriteGroup group = helper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(requireContext(), name));
+		Context ctx = getContext();
+		if (helper != null && ctx != null) {
+			FavoriteGroup group = helper.getGroup(FavoriteGroup.convertDisplayNameToGroupIdName(ctx, name));
 			this.group = group;
 			super.setCategory(name, group != null ? group.getColor() : 0);
 		}
+	}
+
+	@Override
+	protected String getLastUsedGroup() {
+		String lastCategory = "";
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			lastCategory = app.getSettings().LAST_FAV_CATEGORY_ENTERED.get();
+			if (!Algorithms.isEmpty(lastCategory) && !app.getFavorites().groupExists(lastCategory)) {
+				lastCategory = "";
+			}
+		}
+		return lastCategory;
+	}
+
+	@Override
+	public void setColor(int color) {
+		this.color = color;
+	}
+
+	@Override
+	public void setBackgroundType(@NonNull BackgroundType backgroundType) {
+		this.backgroundType = backgroundType;
+	}
+
+	@Override
+	public void setIcon(int iconId) {
+		this.iconId = iconId;
 	}
 
 	@Override
@@ -151,37 +218,38 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	public static void showInstance(@NonNull MapActivity mapActivity) {
-		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
-		//int slideInAnim = editor.getSlideInAnimation();
-		//int slideOutAnim = editor.getSlideOutAnimation();
-
-		if (editor != null) {
-			FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commitAllowingStateLoss();
-		}
+		showAutoFillInstance(mapActivity, false);
 	}
 
 	public static void showAutoFillInstance(final MapActivity mapActivity, boolean autoFill) {
 		FavoritePointEditor editor = mapActivity.getContextMenu().getFavoritePointEditor();
-		//int slideInAnim = editor.getSlideInAnimation();
-		//int slideOutAnim = editor.getSlideOutAnimation();
-
-		FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
-		fragment.autoFill = autoFill;
-
 		if (editor != null) {
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commit();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			String tag = editor.getFragmentTag();
+			if (fragmentManager.findFragmentByTag(tag) == null) {
+				FavoritePointEditorFragment fragment = new FavoritePointEditorFragment();
+				fragment.autoFill = autoFill;
+				fragmentManager.beginTransaction()
+						.add(R.id.fragmentContainer, fragment, tag)
+						.addToBackStack(null)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 
 	@Override
 	protected boolean wasSaved() {
+		final FavouritePoint favorite = getFavorite();
+		if (favorite != null) {
+			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
+					getNameTextValue(), getCategoryTextValue(), favorite.getAltitude(), favorite.getTimestamp());
+			point.setDescription(isDescriptionAvailable() ? getDescriptionTextValue() : null);
+			point.setAddress(isAddressAvailable() ? getAddressTextValue() : null);
+			point.setColor(color);
+			point.setBackgroundType(backgroundType);
+			point.setIconId(iconId);
+			return isChanged(favorite, point);
+		}
 		return saved;
 	}
 
@@ -191,14 +259,15 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (favorite != null) {
 			final FavouritePoint point = new FavouritePoint(favorite.getLatitude(), favorite.getLongitude(),
 					getNameTextValue(), getCategoryTextValue(), favorite.getAltitude(), favorite.getTimestamp());
-			point.setDescription(getDescriptionTextValue());
-			point.setAddress(getAddressTextValue());
+			point.setDescription(isDescriptionAvailable() ? getDescriptionTextValue() : null);
+			point.setAddress(isAddressAvailable() ? getAddressTextValue() : null);
+			point.setColor(color);
+			point.setBackgroundType(backgroundType);
+			point.setIconId(iconId);
 			AlertDialog.Builder builder = FavouritesDbHelper.checkDuplicates(point, helper, getMapActivity());
 
-			if (favorite.getName().equals(point.getName()) &&
-					favorite.getCategory().equals(point.getCategory()) &&
-					Algorithms.stringsEqual(favorite.getDescription(), point.getDescription()) &&
-					Algorithms.stringsEqual(favorite.getAddress(), point.getAddress())) {
+			if (isChanged(favorite, point)) {
+
 				if (needDismiss) {
 					dismiss(false);
 				}
@@ -209,25 +278,38 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(), needDismiss);
+						doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(),
+								point.getColor(), point.getBackgroundType(), point.getIconId(), needDismiss);
 					}
 				});
 				builder.create().show();
 			} else {
-				doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(), needDismiss);
+				doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(),
+						point.getColor(), point.getBackgroundType(), point.getIconId(), needDismiss);
 			}
 			saved = true;
 		}
 	}
 
-	private void doSave(FavouritePoint favorite, String name, String category, String description, String address, boolean needDismiss) {
+	private boolean isChanged(FavouritePoint favorite, FavouritePoint point) {
+		return favorite.getColor() == point.getColor() &&
+				favorite.getIconId() == point.getIconId() &&
+				favorite.getName().equals(point.getName()) &&
+				favorite.getCategory().equals(point.getCategory()) &&
+				favorite.getBackgroundType().equals(point.getBackgroundType()) &&
+				Algorithms.stringsEqual(favorite.getDescription(), point.getDescription()) &&
+				Algorithms.stringsEqual(favorite.getAddress(), point.getAddress());
+	}
+
+	private void doSave(FavouritePoint favorite, String name, String category, String description, String address,
+						@ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId, boolean needDismiss) {
 		FavouritesDbHelper helper = getHelper();
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null && helper != null) {
 			if (editor.isNew()) {
-				doAddFavorite(name, category, description, address);
+				doAddFavorite(name, category, description, address, color, backgroundType, iconId);
 			} else {
-				helper.editFavouriteName(favorite, name, category, description, address);
+				doEditFavorite(favorite, name, category, description, address, color, backgroundType, iconId, helper);
 			}
 		}
 		MapActivity mapActivity = getMapActivity();
@@ -246,7 +328,21 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		}
 	}
 
-	private void doAddFavorite(String name, String category, String description, String address) {
+	private void doEditFavorite(FavouritePoint favorite, String name, String category, String description, String address,
+								@ColorInt int color, BackgroundType backgroundType, @DrawableRes int iconId,
+								FavouritesDbHelper helper) {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
+			favorite.setColor(color);
+			favorite.setBackgroundType(backgroundType);
+			favorite.setIconId(iconId);
+			helper.editFavouriteName(favorite, name, category, description, address);
+		}
+	}
+
+	private void doAddFavorite(String name, String category, String description, String address, @ColorInt int color,
+							   BackgroundType backgroundType, @DrawableRes int iconId) {
 		OsmandApplication app = getMyApplication();
 		FavouritesDbHelper helper = getHelper();
 		FavouritePoint favorite = getFavorite();
@@ -255,6 +351,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 			favorite.setCategory(category);
 			favorite.setDescription(description);
 			favorite.setAddress(address);
+			favorite.setColor(color);
+			favorite.setBackgroundType(backgroundType);
+			favorite.setIconId(iconId);
 			app.getSettings().LAST_FAV_CATEGORY_ENTERED.set(category);
 			helper.addFavourite(favorite);
 		}
@@ -265,7 +364,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		FragmentActivity activity = getActivity();
 		final FavouritePoint favorite = getFavorite();
 		if (activity != null && favorite != null) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			final OsmandApplication app = (OsmandApplication) activity.getApplication();
+			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 			builder.setMessage(getString(R.string.favourites_remove_dialog_msg, favorite.getName()));
 			builder.setNegativeButton(R.string.shared_string_no, null);
 			builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
@@ -291,11 +392,6 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public String getHeaderCaption() {
-		return getString(R.string.favourites_edit_dialog_title);
-	}
-
-	@Override
 	public String getNameInitValue() {
 		FavouritePoint favorite = getFavorite();
 		return favorite != null ? favorite.getName() : "";
@@ -314,8 +410,22 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
+	public String getAddressInitValue() {
+		FavouritePoint favourite = getFavorite();
+		return favourite != null ? favourite.getAddress() : "";
+	}
+
+	@Override
 	public Drawable getNameIcon() {
-		return PointImageDrawable.getFromFavorite(getMapActivity(), getPointColor(), false, getFavorite());
+		FavouritePoint favorite = getFavorite();
+		FavouritePoint point = null;
+		if (favorite != null) {
+			point = new FavouritePoint(favorite);
+			point.setColor(getPointColor());
+			point.setBackgroundType(backgroundType);
+			point.setIconId(iconId);
+		}
+		return PointImageDrawable.getFromFavorite(getMapActivity(), getPointColor(), false, point);
 	}
 
 	@Override
@@ -324,15 +434,96 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
+	public int getDefaultColor() {
+		return defaultColor;
+	}
+
+	@Override
 	public int getPointColor() {
-		int color = 0;
+		FavouritePoint favorite = getFavorite();
+		int color = favorite != null ? getColor() : 0;
 		FavoriteGroup group = getGroup();
-		if (group != null) {
+		if (group != null && (color == 0)) {
 			color = group.getColor();
 		}
 		if (color == 0) {
 			color = defaultColor;
 		}
 		return color;
+	}
+
+	@Override
+	@NonNull
+	public BackgroundType getBackgroundType() {
+		return backgroundType;
+	}
+
+	@Override
+	public int getIconId() {
+		return iconId;
+	}
+
+	private int getColor() {
+		return color;
+	}
+
+	@Override
+	public Set<String> getCategories() {
+		Set<String> categories = new LinkedHashSet<>();
+		Set<String> categoriesHidden = new LinkedHashSet<>();
+		FavouritesDbHelper helper = getHelper();
+		if (helper != null && editor != null) {
+			OsmandApplication app = getMyApplication();
+			FavoriteGroup lastUsedGroup = helper.getGroup(getLastUsedGroup());
+			if (lastUsedGroup != null) {
+				categories.add(lastUsedGroup.getDisplayName(app));
+			}
+			for (FavouritesDbHelper.FavoriteGroup fg : helper.getFavoriteGroups()) {
+				if (!fg.equals(lastUsedGroup)) {
+					if (fg.isVisible()) {
+						categories.add(fg.getDisplayName(app));
+					} else {
+						categoriesHidden.add(fg.getDisplayName(app));
+					}
+				}
+			}
+			categories.addAll(categoriesHidden);
+		}
+		return categories;
+	}
+
+	@Override
+	public boolean isCategoryVisible(String name) {
+		if (getHelper() != null) {
+			return getHelper().isGroupVisible(name);
+		}
+		return true;
+	}
+
+	@Override
+	public int getCategoryPointsCount(String category) {
+		FavouritesDbHelper helper = getHelper();
+		if (helper != null) {
+			for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+				if (fg.getDisplayName(getMyApplication()).equals(category)) {
+					return fg.getPoints().size();
+				}
+			}
+		}
+		return 0;
+	}
+
+	@Override
+	@ColorInt
+	public int getCategoryColor(String category) {
+		FavouritesDbHelper helper = getHelper();
+		if (helper != null) {
+			for (FavouritesDbHelper.FavoriteGroup fg : getHelper().getFavoriteGroups()) {
+				if (fg.getDisplayName(getMyApplication()).equals(category)) {
+					return fg.getColor();
+				}
+			}
+		}
+		return defaultColor;
 	}
 }

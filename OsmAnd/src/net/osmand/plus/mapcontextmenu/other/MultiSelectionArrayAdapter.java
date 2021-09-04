@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.util.Algorithms;
@@ -41,8 +42,8 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 		final MapMultiSelectionMenu.MenuObject item = getItem(position);
 		if (item != null) {
 			if (!menu.isLandscapeLayout()) {
-				AndroidUtils.setBackground(convertView.getContext(), convertView, !menu.isLight(),
-						R.color.list_background_color_light, R.color.list_background_color_dark);
+				int listBgColor = ColorUtilities.getListBgColorId(!menu.isLight());
+				AndroidUtils.setBackground(convertView.getContext(), convertView, listBgColor);
 			}
 			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -76,8 +77,7 @@ public class MultiSelectionArrayAdapter extends ArrayAdapter<MapMultiSelectionMe
 
 			// Text line 1
 			TextView line1 = (TextView) convertView.findViewById(R.id.context_menu_line1);
-			line1.setTextColor(ContextCompat.getColor(getContext(),
-					!menu.isLight() ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
+			line1.setTextColor(ColorUtilities.getPrimaryTextColor(getContext(), !menu.isLight()));
 			line1.setText(item.getTitleStr());
 
 			// Text line 2

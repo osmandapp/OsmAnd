@@ -10,6 +10,7 @@ import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -127,8 +128,8 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		if (oldColor != null) {
 			oldColor.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
 			ImageView icon = oldColor.findViewById(R.id.icon);
-			icon.setImageDrawable(UiUtilities.tintDrawable(icon.getDrawable(),
-					getResolvedColor(nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light)));
+			icon.setImageDrawable(UiUtilities.tintDrawable(
+					icon.getDrawable(), ColorUtilities.getDefaultIconColor(app, nightMode)));
 		}
 		View newColor = view.findViewWithTag(color);
 		if (newColor != null) {
@@ -144,10 +145,7 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		Drawable transparencyIcon = getTransparencyIcon(app, color);
 		Drawable colorIcon = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle, color);
 		Drawable layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon);
-		int listBgColorId = nightMode ?
-				R.color.card_and_list_background_dark :
-				R.color.card_and_list_background_light;
-		int listBgColor = getResolvedColor(listBgColorId);
+		int listBgColor = ColorUtilities.getCardAndListBackgroundColor(app, nightMode);
 		double contrastRatio = ColorUtils.calculateContrast(color, listBgColor);
 		if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
 			backgroundCircle.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
@@ -185,7 +183,7 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		View colorItemView = createCircleView(rootView);
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
 
-		int bgColorId = nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+		int bgColorId = ColorUtilities.getActivityBgColorId(nightMode);
 		Drawable backgroundIcon = app.getUIUtilities().getIcon(R.drawable.bg_point_circle, bgColorId);
 
 		ImageView icon = colorItemView.findViewById(R.id.icon);
@@ -217,8 +215,8 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 	}
 
 	private Drawable getTransparencyIcon(OsmandApplication app, @ColorInt int color) {
-		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
-		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
+		int colorWithoutAlpha = ColorUtilities.removeAlpha(color);
+		int transparencyColor = ColorUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
 		return app.getUIUtilities().getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor);
 	}
 

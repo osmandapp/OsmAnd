@@ -17,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -25,6 +24,7 @@ import androidx.preference.PreferenceViewHolder;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -52,7 +52,6 @@ import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
 
 public class DataStorageFragment extends BaseSettingsFragment implements DataStorageHelper.UpdateMemoryInfoUIAdapter {
@@ -197,13 +196,10 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 		String key = preference.getKey();
-		if (key == null) {
-			return;
-		}
-		int activeColorResId = isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-		int activeColor = ContextCompat.getColor(app, activeColorResId);
-		int primaryTextColorResId = isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
-		int primaryTextColor = ContextCompat.getColor(app, primaryTextColorResId);
+		if (key == null) return;
+
+		int activeColor = ColorUtilities.getActiveColor(app, isNightMode());
+		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, isNightMode());
 
 		String[] memoryUnitsFormats = new String[]{
 				getString(R.string.shared_string_memory_kb_desc),
@@ -227,7 +223,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 				String currentKey = item.getKey();
 				boolean isCurrent = currentDataStorage.getKey().equals(currentKey);
 
-				int defaultIconColor = isNightMode() ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+				int defaultIconColor = ColorUtilities.getDefaultIconColorId(isNightMode());
 				int chosenIconColor = isNightMode() ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
 				Drawable icon = app.getUIUtilities().getIcon(item.getIconResId(),
 						isCurrent ? chosenIconColor : defaultIconColor);

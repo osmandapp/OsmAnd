@@ -16,9 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 
 public class WarningViewHolder extends RecyclerView.ViewHolder {
 
@@ -54,7 +54,7 @@ public class WarningViewHolder extends RecyclerView.ViewHolder {
 	private void setupWarningRoundedBg(boolean hideBottomPadding) {
 		Context context = itemView.getContext();
 		int activeColor = AndroidUtils.getColorFromAttr(context, R.attr.active_color_basic);
-		int selectedColor = UiUtilities.getColorWithAlpha(activeColor, 0.3f);
+		int selectedColor = ColorUtilities.getColorWithAlpha(activeColor, 0.3f);
 
 		int backgroundColor = AndroidUtils.getColorFromAttr(context, R.attr.activity_background_color);
 		Drawable bgDrawable = getPaintedIcon(R.drawable.rectangle_rounded, backgroundColor);

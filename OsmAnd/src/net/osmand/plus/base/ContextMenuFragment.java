@@ -40,13 +40,14 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
@@ -309,7 +310,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 
 		if (getTopViewId() != 0) {
 			topView = view.findViewById(getTopViewId());
-			AndroidUtils.setBackground(app, topView, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+			AndroidUtils.setBackground(app, topView, ColorUtilities.getCardAndListBackgroundColorId(nightMode));
 		}
 		if (!portrait) {
 			currentMenuState = MenuState.FULL_SCREEN;
@@ -1080,21 +1081,18 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment implements 
 	}
 
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {
-		ShareDialog.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
+		ShareMenu.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, ContextMenuFragment fragment) {
-		try {
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
-					.replace(R.id.routeMenuContainer, fragment, fragment.getFragmentTag())
-					.addToBackStack(fragment.getFragmentTag())
+	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull ContextMenuFragment fragment) {
+		String tag = fragment.getFragmentTag();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
+			manager.beginTransaction()
+					.replace(R.id.routeMenuContainer, fragment, tag)
+					.addToBackStack(tag)
 					.commitAllowingStateLoss();
-
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

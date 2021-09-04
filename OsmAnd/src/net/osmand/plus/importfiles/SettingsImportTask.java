@@ -157,7 +157,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 					FragmentActivity activity = activityRef.get();
 					AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 					if (plugin != null) {
-						plugin.indexingFiles(null, true, true);
+						plugin.indexingFiles(true, true);
 					}
 					if (activity instanceof MapActivity) {
 						((MapActivity) activity).getMapLayers().getMapWidgetRegistry().updateVisibleWidgets();
@@ -211,7 +211,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 				}
 				AudioVideoNotesPlugin pluginAudioVideo = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 				if (pluginAudioVideo != null) {
-					pluginAudioVideo.indexingFiles(null, true, true);
+					pluginAudioVideo.indexingFiles(true, true);
 				}
 				CustomOsmandPlugin plugin = pluginItem.getPlugin();
 				plugin.loadResources();

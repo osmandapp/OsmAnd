@@ -39,7 +39,7 @@ public class FileNameTranslationHelper {
 		} else if (fileName.endsWith("tts")) { //tts files
 			return getVoiceName(ctx, fileName);
 		} else if (fileName.endsWith(IndexConstants.FONT_INDEX_EXT)) { //otf files
-			return getFontName(ctx, basename);
+			return getFontName(basename);
 		} else if (fileName.startsWith(HILL_SHADE)) {
 			basename = basename.replace(HILL_SHADE + " ", "");
 			return getTerrainName(ctx, regions, basename, R.string.download_hillshade_maps);
@@ -123,7 +123,7 @@ public class FileNameTranslationHelper {
 		return fileName;
 	}
 
-	public static String getFontName(Context ctx, String basename) {
+	public static String getFontName(String basename) {
 		return basename.replace('-', ' ').replace('_', ' ');
 	}
 

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -30,7 +31,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
+import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class OptionsCard extends MapBaseCard {
@@ -323,7 +324,7 @@ public class OptionsCard extends MapBaseCard {
 
 		return new BottomSheetItemWithDescriptionDifHeight.Builder()
 				.setMinHeight(app.getResources().getDimensionPixelSize(R.dimen.setting_list_item_group_height))
-				.setDescriptionColorId(nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)
+				.setDescriptionColorId(ColorUtilities.getSecondaryTextColorId(nightMode))
 				.setDescription(capitalizeFirstLetter(folder))
 				.setIcon(AndroidUtils.getDrawableForDirection(app, changeFolderIcon))
 				.setTitle(app.getString(R.string.change_folder))

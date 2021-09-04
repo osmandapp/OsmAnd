@@ -19,6 +19,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.MGRSPoint;
@@ -32,6 +42,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.CurrentPositionHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -40,12 +51,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -68,16 +79,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 public class MapInfoWidgetsFactory {
 	public enum TopToolbarControllerType {
@@ -892,7 +893,8 @@ public class MapInfoWidgetsFactory {
 			TextInfoWidget.updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
 					(TextView) waypointInfoBar.findViewById(R.id.waypoint_text_shadow),
 					textColor, textShadowColor, bold, rad / 2);
-			exitRefText.setTextColor(nightMode ? map.getResources().getColor(R.color.text_color_primary_dark) :
+			exitRefText.setTextColor(nightMode ?
+					map.getResources().getColor(R.color.text_color_primary_dark) :
 					map.getResources().getColor(R.color.color_white));
 
 			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
@@ -1277,7 +1279,7 @@ public class MapInfoWidgetsFactory {
 		}
 
 		private void copyToClipboard(@NonNull String text) {
-			if (ShareDialog.copyToClipboard(map, text)) {
+			if (ShareMenu.copyToClipboard(map, text)) {
 				showShareSnackbar(text, map);
 			}
 		}
@@ -1310,7 +1312,7 @@ public class MapInfoWidgetsFactory {
 			int textColor = ContextCompat.getColor(map, nightMode ? R.color.activity_background_light : R.color.activity_background_light);
 			latitudeText.setTextColor(textColor);
 			longitudeText.setTextColor(textColor);
-			coordinatesDivider.setBackgroundColor(ContextCompat.getColor(map, nightMode ? R.color.divider_color_dark : R.color.divider_color_dark));
+			coordinatesDivider.setBackgroundColor(ColorUtilities.getDividerColor(map, nightMode));
 			latitudeText.setTypeface(Typeface.DEFAULT, bold ? Typeface.BOLD : Typeface.NORMAL);
 			longitudeText.setTypeface(Typeface.DEFAULT, bold ? Typeface.BOLD : Typeface.NORMAL);
 		}

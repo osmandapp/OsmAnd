@@ -30,7 +30,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;

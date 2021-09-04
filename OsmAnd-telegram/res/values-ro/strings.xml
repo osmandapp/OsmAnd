@@ -159,7 +159,7 @@
     <string name="m">m</string>
     <string name="km">km</string>
     <string name="mile">mi</string>
-    <string name="foot">ft</string>
+    <string name="foot">picior</string>
     <string name="yard">yd</string>
     <string name="shared_string_welcome">Bine ați venit</string>
     <string name="shared_string_authorization_descr">Vă rugăm să introduceți numărul de telefon Telegram în format internațional</string>

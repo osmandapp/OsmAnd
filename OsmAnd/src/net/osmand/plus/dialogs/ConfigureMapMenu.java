@@ -1,5 +1,40 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+import static net.osmand.plus.ContextMenuItem.INVALID_ID;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
+import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_WIDTH_ATTR;
+import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
+import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
+import static net.osmand.render.RenderingRuleStorageProperties.A_ENGINE_V1;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -48,41 +83,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-import static net.osmand.plus.ContextMenuItem.INVALID_ID;
-import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
-import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
-import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
-import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_WIDTH_ATTR;
-import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.render.RenderingRuleStorageProperties.A_APP_MODE;
-import static net.osmand.render.RenderingRuleStorageProperties.A_BASE_APP_MODE;
-import static net.osmand.render.RenderingRuleStorageProperties.A_ENGINE_V1;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDE;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_ROUTES;
 
 public class ConfigureMapMenu {
 
@@ -406,8 +406,7 @@ public class ConfigureMapMenu {
 					@Override
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
-						new SelectMapStyleBottomSheetDialogFragment().show(activity.getSupportFragmentManager(),
-								SelectMapStyleBottomSheetDialogFragment.TAG);
+						SelectMapStyleBottomSheetDialogFragment.showInstance(activity.getSupportFragmentManager());
 						return false;
 					}
 				})

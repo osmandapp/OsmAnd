@@ -1,7 +1,10 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.GPXUtilities.calculateTrackBounds;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
+
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
@@ -13,6 +16,11 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Pair;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -27,6 +35,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
@@ -45,7 +54,6 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.track.CachedTrack;
@@ -80,15 +88,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.GPXUtilities.calculateTrackBounds;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
-import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-
 public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider, MapTextProvider<WptPt> {
 
 	private static final Log log = PlatformUtil.getLog(GPXLayer.class);
@@ -107,7 +106,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	@ColorInt
 	private int cachedColor;
 	private float defaultTrackWidth;
-	private Map<String, Float> cachedTrackWidth = new HashMap<>();
+	private final Map<String, Float> cachedTrackWidth = new HashMap<>();
 
 	private Drawable startPointIcon;
 	private Drawable finishPointIcon;
@@ -123,20 +122,16 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private final Map<String, CachedTrack> segmentsCache = new HashMap<>();
 
-	private List<WptPt> cache = new ArrayList<>();
+	private final List<WptPt> cache = new ArrayList<>();
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 	private MapTextLayer textLayer;
 
 	private Paint paintOuterRect;
 	private Paint paintInnerRect;
 
-	private Paint paintGridOuterCircle;
-	private Paint paintGridCircle;
-
 	private Paint paintTextIcon;
 
 	private GpxGeometryWayContext wayContext;
-	private GpxGeometryWay wayGeometry;
 
 	private OsmandRenderer osmandRenderer;
 
@@ -222,14 +217,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		paintOuterRect.setAntiAlias(true);
 		paintOuterRect.setStrokeWidth(3);
 		paintOuterRect.setAlpha(255);
-		paintGridCircle = new Paint();
-		paintGridCircle.setStyle(Style.FILL_AND_STROKE);
-		paintGridCircle.setAntiAlias(true);
-		paintGridOuterCircle = new Paint();
-		paintGridOuterCircle.setStyle(Style.FILL_AND_STROKE);
-		paintGridOuterCircle.setAntiAlias(true);
-		paintGridOuterCircle.setColor(Color.WHITE);
-		paintGridOuterCircle.setAlpha(204);
 
 		UiUtilities iconsCache = view.getApplication().getUIUtilities();
 		startPointIcon = iconsCache.getIcon(R.drawable.map_track_point_start);
@@ -243,7 +230,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 		grayColor = ContextCompat.getColor(view.getApplication(), R.color.color_favorite_gray);
 
 		wayContext = new GpxGeometryWayContext(view.getContext(), view.getDensity());
-		wayGeometry = new GpxGeometryWay(wayContext);
 	}
 
 	@Override
@@ -385,7 +371,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 					paintInnerRect.setColor(color);
 					paintInnerRect.setAlpha(179);
 
-					int contrastColor = UiUtilities.getContrastColor(app, color, false);
+					int contrastColor = ColorUtilities.getContrastColor(app, color, false);
 					paintTextIcon.setColor(contrastColor);
 					paintOuterRect.setColor(contrastColor);
 
@@ -719,7 +705,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				color = dataItem.getColor();
 			}
 		}
-		return color != 0 ? color : defaultColor;
+		return color != 0 ? color : gpxFile.getColor(defaultColor);
 	}
 
 	private String getAvailableOrDefaultColoringType(SelectedGpxFile selectedGpxFile) {
@@ -772,7 +758,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 				width = dataItem.getWidth();
 			}
 		}
-		return width != null ? width : defaultWidth;
+		return width != null ? width : gpxFile.getWidth(defaultWidth);
 	}
 
 	private boolean isShowArrowsForTrack(GPXFile gpxFile) {
@@ -785,7 +771,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (dataItem != null) {
 				return dataItem.isShowArrows();
 			}
-			return false;
+			return gpxFile.isShowArrows();
 		}
 	}
 
@@ -805,20 +791,6 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	private boolean hasTrackDrawInfoForTrack(GPXFile gpxFile) {
 		return trackDrawInfo != null && (trackDrawInfo.isCurrentRecording() && gpxFile.showCurrentTrack
 				|| gpxFile.path.equals(trackDrawInfo.getFilePath()));
-	}
-
-	private boolean showTrackToFollow() {
-		if (view.getContext() instanceof MapActivity) {
-			MapActivity mapActivity = (MapActivity) view.getContext();
-			OsmandApplication app = mapActivity.getMyApplication();
-			MapRouteInfoMenu routeInfoMenu = mapActivity.getMapRouteInfoMenu();
-			return routeInfoMenu.isVisible()
-					|| app.getRoutingHelper().isFollowingMode()
-					|| MapRouteInfoMenu.followTrackVisible
-					|| MapRouteInfoMenu.chooseRoutesVisible
-					|| MapRouteInfoMenu.waypointsVisible;
-		}
-		return false;
 	}
 
 	@NonNull
@@ -959,7 +931,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 	}
 
 	private SelectedGpxPoint createSelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt prevPoint,
-	                                                WptPt nextPoint, LatLon latLon, boolean showTrackPointMenu) {
+													WptPt nextPoint, LatLon latLon, boolean showTrackPointMenu) {
 		WptPt projectionPoint = createProjectionPoint(prevPoint, nextPoint, latLon);
 
 		Location prevPointLocation = new Location("");
@@ -1077,7 +1049,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> res,
-	                                    boolean unknownLocation) {
+										boolean unknownLocation) {
 		if (tileBox.getZoom() >= START_ZOOM) {
 			getWptFromPoint(tileBox, point, res);
 			getTracksFromPoint(tileBox, point, res, false);

@@ -4121,7 +4121,7 @@
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="select_nav_profile_dialog_message">„Rodzaj nawigacji” wybiera sposób obliczania tras z dostępnymi silnikami wyznaczania tras offline i online.</string>
     <string name="loading_list_of_routing_services">Wczytywanie listy dostępnych usług routingu</string>
-    <string name="osmand_online_routing_promo">Użyj wstępnie zdefiniowanych szablonów, lub dodaj OSRM, Graphhopper, OpenRouteService lub GPX wyznaczania tras online.</string>
+    <string name="osmand_online_routing_promo">Użyj wstępnie zdefiniowanych szablonów, lub dodaj OSRM, Graphhopper, openrouteservice lub GPX wyznaczania tras online.</string>
     <string name="shared_string_external">Zewnętrzny</string>
     <string name="provided_by">Dostarczone przez %1$s</string>
     <string name="failed_loading_predefined_engines">Nie udało się załadować listy wstępnie zdefiniowanych szablonów.

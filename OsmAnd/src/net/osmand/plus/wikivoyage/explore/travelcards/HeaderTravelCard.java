@@ -6,6 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
@@ -26,7 +27,7 @@ public class HeaderTravelCard extends BaseTravelCard {
 		if (viewHolder instanceof HeaderTravelVH) {
 			final HeaderTravelVH holder = (HeaderTravelVH) viewHolder;
 			holder.title.setText(title);
-			int primaryTextColor = getResolvedColor(getPrimaryTextColorRes());
+			int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 			holder.title.setTextColor(primaryTextColor);
 			if (articleItemCount > 0) {
 				holder.description.setText(String.valueOf(articleItemCount));

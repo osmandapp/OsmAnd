@@ -11,6 +11,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
@@ -28,13 +29,11 @@ public abstract class OsmandListActivity extends
 	@Override
 	protected void onStart() {
 		super.onStart();
-		getListView().setBackgroundColor(
-				getResources().getColor(
-						getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light
-								: R.color.list_background_color_dark));
-		getListView().setDivider(getMyApplication().getUIUtilities().getIcon(R.drawable.divider_solid,
-				getMyApplication().getSettings().isLightContent() ? R.color.divider_color_light : R.color.divider_color_dark));
-		getListView().setDividerHeight(AndroidUtils.dpToPx(getMyApplication(), 1));
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		getListView().setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
+		getListView().setDivider(app.getUIUtilities().getIcon(R.drawable.divider_solid, ColorUtilities.getDividerColorId(nightMode)));
+		getListView().setDividerHeight(AndroidUtils.dpToPx(app, 1));
 	}
 
 
@@ -91,10 +90,6 @@ public abstract class OsmandListActivity extends
 
 	public void setOnItemClickListener(AdapterView.OnItemClickListener childClickListener){
 		((ListView)findViewById(android.R.id.list)).setOnItemClickListener(childClickListener);
-	}
-
-	public boolean isLightActionBar() {
-		return ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 	}
 
 	@Override

@@ -22,9 +22,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckBox;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -120,7 +120,7 @@ public class StartGPSStatus extends OsmAndAction {
 		AndroidUtils.setMargins(lp, dp24, dp8, dp8, dp24);
 		cb.setLayoutParams(lp);
 		cb.setPadding(dp8, 0, 0, 0);
-		int textColorPrimary = ContextCompat.getColor(activity, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		int textColorPrimary = ColorUtilities.getPrimaryTextColor(activity, isNightMode());
 		int selectedModeColor = getSettings().getApplicationMode().getProfileColor(isNightMode());
 		cb.setTextColor(textColorPrimary);
 		UiUtilities.setupCompoundButton(isNightMode(), selectedModeColor, cb);

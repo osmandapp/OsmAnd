@@ -4107,8 +4107,8 @@ POIの更新は利用できません</string>
     <string name="renew_subscription">サブスクリプションの更新</string>
     <string name="shared_string_offline">オフライン</string>
     <string name="shared_string_online">オンライン</string>
-    <string name="osmand_online_routing_promo">定義済みのテンプレートの使用、カスタムオンラインルートが追加できます。サポート形式は以下の通り:OSRM, Graphhopper, OpenRouteService, GPX
-\n定義済みのテンプレートの使用、OSRM・GraphHopper・OpenRouteServiceや、GPXオンラインルーティング機能が利用可能になります。</string>
+    <string name="osmand_online_routing_promo">定義済みのテンプレートの使用、カスタムオンラインルートが追加できます。サポート形式は以下の通り:OSRM, Graphhopper, openrouteservice, GPX
+\n定義済みのテンプレートの使用、OSRM・GraphHopper・openrouteserviceや、GPXオンラインルーティング機能が利用可能になります。</string>
     <string name="shared_string_external">外部</string>
     <string name="provided_by">%1$sから提供</string>
     <string name="failed_loading_predefined_engines">定義済みのテンプレートリストを読み込めませんでした。

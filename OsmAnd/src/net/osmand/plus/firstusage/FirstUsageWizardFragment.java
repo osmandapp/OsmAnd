@@ -21,6 +21,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
@@ -632,8 +633,10 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	public void closeWizard() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			activity.getSupportFragmentManager().beginTransaction()
-					.remove(FirstUsageWizardFragment.this).commit();
+			activity.getSupportFragmentManager()
+					.beginTransaction()
+					.remove(FirstUsageWizardFragment.this)
+					.commitAllowingStateLoss();
 			location = null;
 			mapDownloadRegion = null;
 			mapIndexItem = null;
@@ -741,60 +744,53 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	}
 
 	public static void showSearchLocationFragment(FragmentActivity activity, boolean searchByIp) {
-		Fragment fragment = new FirstUsageWizardFragment();
 		Bundle args = new Bundle();
 		args.putString(WIZARD_TYPE_KEY, WizardType.SEARCH_LOCATION.name());
 		args.putBoolean(SEARCH_LOCATION_BY_IP_KEY, searchByIp);
-		fragment.setArguments(args);
-		showFragment(activity, fragment);
+		showFragment(activity, args);
 	}
 
 	public static void showSearchMapFragment(FragmentActivity activity) {
-		Fragment fragment = new FirstUsageWizardFragment();
 		Bundle args = new Bundle();
 		args.putString(WIZARD_TYPE_KEY, WizardType.SEARCH_MAP.name());
-		fragment.setArguments(args);
-		showFragment(activity, fragment);
+		showFragment(activity, args);
 	}
 
 	public static void showMapFoundFragment(FragmentActivity activity) {
-		Fragment fragment = new FirstUsageWizardFragment();
 		Bundle args = new Bundle();
 		args.putString(WIZARD_TYPE_KEY, WizardType.MAP_FOUND.name());
-		fragment.setArguments(args);
-		showFragment(activity, fragment);
+		showFragment(activity, args);
 	}
 
 	public static void showMapDownloadFragment(FragmentActivity activity) {
-		Fragment fragment = new FirstUsageWizardFragment();
 		Bundle args = new Bundle();
 		args.putString(WIZARD_TYPE_KEY, WizardType.MAP_DOWNLOAD.name());
-		fragment.setArguments(args);
-		showFragment(activity, fragment);
+		showFragment(activity, args);
 	}
 
 	public static void showNoInternetFragment(FragmentActivity activity) {
-		Fragment fragment = new FirstUsageWizardFragment();
 		Bundle args = new Bundle();
 		args.putString(WIZARD_TYPE_KEY, WizardType.NO_INTERNET.name());
-		fragment.setArguments(args);
-		showFragment(activity, fragment);
+		showFragment(activity, args);
 	}
 
 	public static void showNoLocationFragment(FragmentActivity activity) {
-		Fragment fragment = new FirstUsageWizardFragment();
 		Bundle args = new Bundle();
 		args.putString(WIZARD_TYPE_KEY, WizardType.NO_LOCATION.name());
-		fragment.setArguments(args);
-		showFragment(activity, fragment);
+		showFragment(activity, args);
 	}
 
-	private static void showFragment(FragmentActivity activity, Fragment fragment) {
+	private static void showFragment(@Nullable FragmentActivity activity, @NonNull Bundle args) {
 		if (!wizardClosed && activity != null) {
-			activity.getSupportFragmentManager()
-					.beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, FirstUsageWizardFragment.TAG)
-					.commitAllowingStateLoss();
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+				Fragment fragment = new FirstUsageWizardFragment();
+				fragment.setArguments(args);
+				activity.getSupportFragmentManager()
+						.beginTransaction()
+						.replace(R.id.fragmentContainer, fragment, TAG)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 

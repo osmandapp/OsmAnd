@@ -11,14 +11,14 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.WptLocationPoint;
 import net.osmand.plus.GpxSelectionHelper;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -26,6 +26,8 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.track.SaveGpxAsyncTask;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
@@ -161,24 +163,19 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		return "";
 	}
 
-	public static void showInstance(final MapActivity mapActivity) {
+	public static void showInstance(@NonNull MapActivity mapActivity, boolean skipDialog) {
 		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
 		if (editor != null) {
-			WptPtEditorFragment fragment = new WptPtEditorFragment();
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commit();
-		}
-	}
-
-	public static void showInstance(final MapActivity mapActivity, boolean skipDialog) {
-		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
-		if (editor != null) {
-			WptPtEditorFragment fragment = new WptPtEditorFragment();
-			fragment.skipDialog = skipDialog;
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
-					.addToBackStack(null).commit();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			String tag = editor.getFragmentTag();
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
+				WptPtEditorFragment fragment = new WptPtEditorFragment();
+				fragment.skipDialog = skipDialog;
+				fragmentManager.beginTransaction()
+						.add(R.id.fragmentContainer, fragment, tag)
+						.addToBackStack(null)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 

@@ -1,5 +1,7 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.dialogs.ConfigureMapMenu.HIKING_ROUTES_OSMC_ATTR;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
@@ -31,8 +34,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.plus.dialogs.ConfigureMapMenu.HIKING_ROUTES_OSMC_ATTR;
-
 public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 	public static final String TAG = HikingRoutesFragment.class.getSimpleName();
@@ -41,6 +42,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	private OsmandSettings settings;
 
 	private CommonPreference<String> pref;
+	@Nullable
 	private RenderingRuleProperty property;
 	private String previousValue;
 
@@ -55,13 +57,19 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 		pref = settings.getCustomRenderProperty(HIKING_ROUTES_OSMC_ATTR);
 		property = app.getRendererRegistry().getCustomRenderingRuleProperty(HIKING_ROUTES_OSMC_ATTR);
-		previousValue = isEnabled() ? pref.get() : property.getPossibleValues()[0];
+		if (property == null) {
+			previousValue = pref.get();
+		} else {
+			previousValue = isEnabled() ? pref.get() : property.getPossibleValues()[0];
+		}
 	}
 
 	private boolean isEnabled() {
-		for (String value : property.getPossibleValues()) {
-			if (Algorithms.stringsEqual(value, pref.get())) {
-				return true;
+		if (property != null) {
+			for (String value : property.getPossibleValues()) {
+				if (Algorithms.stringsEqual(value, pref.get())) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -90,9 +98,8 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		boolean enabled = isEnabled();
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.default_icon_color);
-		String propertyName = AndroidUtils.getRenderingStringPropertyName(app, HIKING_ROUTES_OSMC_ATTR, property.getName());
 
-		title.setText(propertyName);
+		title.setText(R.string.rendering_attr_hikingRoutesOSMC_name);
 		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, enabled ? selectedColor : disabledColor));
 		description.setText(enabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 
@@ -117,7 +124,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	private void setupTypesCard(@NonNull View view) {
 		View container = view.findViewById(R.id.card_container);
 
-		boolean enabled = isEnabled();
+		boolean enabled = property != null && isEnabled();
 		if (enabled) {
 			TextRadioItem selectedItem = null;
 			List<TextRadioItem> items = new ArrayList<>();
@@ -180,5 +187,13 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		ViewGroup.LayoutParams params = bottomView.getLayoutParams();
 		params.height = height;
 		bottomView.setLayoutParams(params);
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.content, new HikingRoutesFragment(), TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 }

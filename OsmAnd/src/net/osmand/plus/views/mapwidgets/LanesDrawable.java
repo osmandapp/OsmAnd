@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -179,8 +180,7 @@ public class LanesDrawable extends Drawable {
 			for (int i = 0; i < lanes.length; i++) {
 				if ((lanes[i] & 1) == 1) {
 					if (isTurnByTurn) {
-						paintRouteDirection.setColor(isNightMode ? ctx.getResources().getColor(R.color.active_color_primary_dark) :
-								ctx.getResources().getColor(R.color.active_color_primary_light));
+						paintRouteDirection.setColor(ColorUtilities.getActiveColor(ctx, isNightMode));
 					} else {
 						paintRouteDirection.setColor(imminent ? ctx.getResources().getColor(R.color.nav_arrow_imminent) :
 								ctx.getResources().getColor(R.color.nav_arrow));

@@ -87,7 +87,7 @@
     <string name="poi_furniture">Mueblería</string>
     <string name="poi_garden_centre">Vivero (venta);Centro de jardinería</string>
     <string name="poi_gas">Venta de garrafas;Gas líquido</string>
-    <string name="poi_shop_yes">Tienda</string>
+    <string name="poi_shop_yes">Tienda (sin clasificar)</string>
     <string name="poi_gift">Regalería;Tienda de regalos</string>
     <string name="poi_glaziery">Vidriería</string>
     <string name="poi_hardware">Ferretería</string>
@@ -4018,4 +4018,5 @@
     <string name="poi_permanent_camping_yes">Sí</string>
     <string name="poi_shelter_filter">Refugio</string>
     <string name="poi_permanent_camping">Campamento permanente</string>
+    <string name="poi_arch">Arco (natural)</string>
 </resources>

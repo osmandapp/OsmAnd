@@ -1,5 +1,11 @@
 package net.osmand.plus.monitoring;
 
+import static net.osmand.AndroidUtils.setPadding;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -17,11 +23,27 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
@@ -52,28 +74,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.AndroidUtils.getSecondaryTextColorId;
-import static net.osmand.AndroidUtils.setPadding;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
 
@@ -163,7 +163,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		blockStatisticsBuilder.setBlocksClickable(false);
 		blockStatisticsBuilder.setTabItem(GPX_TAB_ITEM_GENERAL);
 		blockStatisticsBuilder.initStatBlocks(null,
-				ContextCompat.getColor(app, getActiveTextColorId(nightMode)), null);
+				ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode)), null);
 	}
 
 	@Override
@@ -314,7 +314,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	private void createSegmentsTabs(ViewGroup viewGroup) {
-		View segmentView = SegmentGPXAdapter.createGpxTabsView(null, viewGroup, this, nightMode);
+		View segmentView = SegmentGPXAdapter.createGpxTabsView(viewGroup, nightMode);
 		AndroidUiHelper.setVisibility(View.GONE, segmentView.findViewById(R.id.list_item_divider));
 		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 		PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
@@ -360,7 +360,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		if (titleId != null) {
 			statusTitle.setText(titleId);
 		}
-		int colorText = status.equals(ItemType.SEARCHING_GPS) ? getSecondaryTextColorId(nightMode) : getOsmandIconColorId(nightMode);
+		int colorText = status.equals(ItemType.SEARCHING_GPS) ? ColorUtilities.getSecondaryTextColorId(nightMode) : getOsmandIconColorId(nightMode);
 		statusTitle.setTextColor(ContextCompat.getColor(app, colorText));
 		Integer iconId = status.getIconId();
 		if (iconId != null) {
@@ -494,7 +494,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		Integer titleId = type.getTitleId();
 		if (title != null && titleId != null) {
 			title.setText(titleId);
-			setTextColorActive(context, title, nightMode, type);
+			setTextColorActive(context, title, nightMode);
 		}
 		setItemBackgroundActive(context, nightMode, view);
 	}
@@ -503,14 +503,14 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		if (view instanceof CardView) {
 			int colorId = enabled ? getActiveTransparentColorId(nightMode) : getInactiveButtonColorId(nightMode);
 			((CardView) view).setCardBackgroundColor(AndroidUtils.createPressedColorStateList(
-					context, colorId, getActiveTextColorId(nightMode)
+					context, colorId, ColorUtilities.getActiveColorId(nightMode)
 			));
 			return;
 		}
 		Drawable background = AppCompatResources.getDrawable(context, getInactiveButtonBackgroundId(nightMode));
 		if (background != null && enabled) {
 			DrawableCompat.setTintList(background, AndroidUtils.createPressedColorStateList(
-					context, getInactiveButtonColorId(nightMode), getActiveTextColorId(nightMode)
+					context, getInactiveButtonColorId(nightMode), ColorUtilities.getActiveColorId(nightMode)
 			));
 		} else {
 			UiUtilities.tintDrawable(background, ContextCompat.getColor(context, getInactiveButtonColorId(nightMode)));
@@ -520,7 +520,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	public static void setItemBackgroundActive(Context context, boolean nightMode, View view) {
 		if (view instanceof CardView) {
-			((CardView) view).setCardBackgroundColor(ContextCompat.getColor(context, getActiveTextColorId(nightMode)));
+			((CardView) view).setCardBackgroundColor(ContextCompat.getColor(context, ColorUtilities.getActiveColorId(nightMode)));
 		}
 	}
 
@@ -575,14 +575,14 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	protected static void setTextColor(Context context, TextView tv, boolean enabled, boolean nightMode, ItemType type) {
 		if (tv != null) {
-			int activeColorId = type.isNegative() ? R.color.color_osm_edit_delete : getActiveTextColorId(nightMode);
-			int normalColorId = enabled ? activeColorId : getSecondaryTextColorId(nightMode);
+			int activeColorId = type.isNegative() ? R.color.color_osm_edit_delete : ColorUtilities.getActiveColorId(nightMode);
+			int normalColorId = enabled ? activeColorId : ColorUtilities.getSecondaryTextColorId(nightMode);
 			ColorStateList textColorStateList = AndroidUtils.createPressedColorStateList(context, normalColorId, getPressedColorId(nightMode));
 			tv.setTextColor(textColorStateList);
 		}
 	}
 
-	protected static void setTextColorActive(Context context, TextView tv, boolean nightMode, ItemType type) {
+	protected static void setTextColorActive(Context context, TextView tv, boolean nightMode) {
 		if (tv != null) {
 			tv.setTextColor(ContextCompat.getColor(context, getPressedColorId(nightMode)));
 		}
@@ -666,11 +666,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	@ColorRes
-	public static int getActiveTextColorId(boolean nightMode) {
-		return nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-	}
-
-	@ColorRes
 	public static int getActiveIconColorId(boolean nightMode) {
 		return nightMode ? R.color.icon_color_active_dark : R.color.icon_color_active_light;
 	}
@@ -678,11 +673,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	@ColorRes
 	public static int getSecondaryIconColorId(boolean nightMode) {
 		return nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
-	}
-
-	@ColorRes
-	public static int getActiveButtonColorId(boolean nightMode) {
-		return nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light;
 	}
 
 	@ColorRes
@@ -702,7 +692,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	@ColorRes
 	public static int getPressedColorId(boolean nightMode) {
-		return nightMode ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
+		return ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 	}
 
 	@DrawableRes

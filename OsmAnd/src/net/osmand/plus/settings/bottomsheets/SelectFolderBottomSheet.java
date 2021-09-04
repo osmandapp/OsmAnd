@@ -79,7 +79,7 @@ public class SelectFolderBottomSheet extends BasePreferenceBottomSheet {
 //		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //			if (btnTitle != null) {
 //				tvBtnTitle.setText(btnTitle);
-//				int colorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+//				int colorResId = ColorUtilities.getActiveColorId(nightMode);
 //				int color = ContextCompat.getColor(ctx, colorResId);
 //				Drawable drawable = UiUtilities.getColoredSelectableDrawable(ctx, color, 0.3f);
 //				AndroidUtils.setBackground(btnOpenChoseDialog, drawable);

@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.AndroidUtils.isLayoutRtl;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,24 +16,26 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static net.osmand.AndroidUtils.isLayoutRtl;
 
 public abstract class SwitchableAction<T> extends QuickAction {
 
@@ -108,8 +112,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public String getActionText(OsmandApplication app) {
 		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
 
-		List<QuickAction> actions = app.getQuickActionRegistry().collectQuickActionsByType(getActionType());
-		if (actions.size() > 1) {
+		List<T> items = loadListFromParams();
+		if (items.size() > 1) {
 			String item = getNextSelectedItem(app);
 			return "\u2026" + arrowDirection + getTranslatedItemName(app, item);
 		} else {
@@ -150,6 +154,31 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		args.putLong(KEY_ID, id);
 		fragment.setArguments(args);
 		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
+	}
+
+	public String getNextItemFromSources(@NonNull OsmandApplication app,
+										 @NonNull List<Pair<String, String>> sources,
+										 @NonNull String defValue) {
+		if (!Algorithms.isEmpty(sources)) {
+			String currentSource = getSelectedItem(app);
+			if (sources.size() > 1) {
+				int index = -1;
+				for (int idx = 0; idx < sources.size(); idx++) {
+					if (Algorithms.stringsEqual(sources.get(idx).first, currentSource)) {
+						index = idx;
+						break;
+					}
+				}
+				Pair<String, String> nextSource = sources.get(0);
+				if (index >= 0 && index + 1 < sources.size()) {
+					nextSource = sources.get(index + 1);
+				}
+				return nextSource.first;
+			} else {
+				return Algorithms.stringsEqual(defValue, currentSource) ? sources.get(0).first : defValue;
+			}
+		}
+		return null;
 	}
 
 	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
@@ -328,7 +357,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	@ColorInt
 	protected int getItemIconColor(OsmandApplication app, T item) {
 		boolean nightMode = !app.getSettings().isLightContent();
-		int colorRes = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
 		return ContextCompat.getColor(app, colorRes);
 	}
 

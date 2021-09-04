@@ -1,5 +1,8 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.PARROT_EXTERNAL_DEVICE;
+import static net.osmand.plus.settings.backend.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
+
 import android.view.KeyEvent;
 
 import net.osmand.plus.OsmandApplication;
@@ -9,9 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.settings.backend.OsmandSettings.PARROT_EXTERNAL_DEVICE;
-import static net.osmand.plus.settings.backend.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
 
 public class ScrollHelper {
 
@@ -61,7 +61,7 @@ public class ScrollHelper {
 		};
 	}
 
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	public boolean onKeyDown(int keyCode) {
 		if (isInContinuousScrolling) {
 			addDirection(keyCode);
 		} else {
@@ -71,7 +71,7 @@ public class ScrollHelper {
 		return true;
 	}
 
-	public boolean onKeyUp(int keyCode, KeyEvent event) {
+	public boolean onKeyUp(int keyCode) {
 		removeDirection(keyCode);
 		boolean shortPress = !hasActiveDirections() && ((System.currentTimeMillis() - startContinuousScrollingTime) < LONG_PRESS_TIME_MS);
 		if (shortPress) {

@@ -39,6 +39,7 @@ import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -511,8 +512,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		boolean nightMode = !getMyApplication().getSettings().isLightContent();
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
-		int iconColorResId = nightMode ?
-				R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light;
+		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		optionsMenuAdapter = new ContextMenuAdapter(requireMyApplication());
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
@@ -619,7 +619,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	private void openSelectionMode(final int actionResId, final int actionIconId,
 	                               final DialogInterface.OnClickListener listener) {
-		final int colorResId = getMyApplication().getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		final int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		String value = getString(actionResId);
 		if (value.endsWith("...")) {
 			value = value.substring(0, value.length() - 3);
@@ -643,7 +645,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				selectionMode = true;
 				MenuItem it = menu.add(actionResId);
 				if (actionIconId != 0) {
-					Drawable icon = getMyApplication().getUIUtilities().getIcon(actionIconId, colorResId);
+					Drawable icon = app.getUIUtilities().getIcon(actionIconId, colorResId);
 					it.setIcon(icon);
 				}
 				it.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM |
@@ -741,7 +743,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			this.ctx = ctx;
 			warningColor = ContextCompat.getColor(ctx, R.color.color_warning);
 			boolean light = ctx.getMyApplication().getSettings().isLightContent();
-			okColor = ContextCompat.getColor(ctx, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
+			okColor = ColorUtilities.getPrimaryTextColor(ctx, !light);
 			corruptedColor = ContextCompat.getColor(ctx, R.color.color_invalid);
 		}
 

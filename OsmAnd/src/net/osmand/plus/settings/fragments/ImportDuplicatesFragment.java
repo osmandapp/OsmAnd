@@ -23,6 +23,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.ITileSource;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -106,9 +107,7 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 						: getResources().getColor(R.color.icon_color_active_light))
 		);
 		replaceAllBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_replace,
-				nightMode
-						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
-						: getResources().getColor(R.color.active_buttons_and_links_text_light))
+				ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode))
 		);
 		keepBothBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -182,9 +181,7 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		toolbar.setTitle(R.string.import_duplicates_title);
 		toolbar.setNavigationIcon(getPaintedContentIcon(
 				AndroidUtils.getNavigationIconResId(app),
-				nightMode
-						? getResources().getColor(R.color.active_buttons_and_links_text_dark)
-						: getResources().getColor(R.color.active_buttons_and_links_text_light)));
+				ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode)));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

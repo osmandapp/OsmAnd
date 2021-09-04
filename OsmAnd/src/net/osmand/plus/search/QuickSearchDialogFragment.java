@@ -50,7 +50,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -76,6 +75,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
@@ -88,7 +88,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
-import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -121,8 +121,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener,
-		DownloadIndexesThread.DownloadEvents {
+public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener,
+		OsmAndLocationListener, DownloadEvents {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(QuickSearchDialogFragment.class);
 
@@ -513,7 +513,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						List<HistoryEntry> historyEntries = new ArrayList<HistoryEntry>();
 						List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
 						for (QuickSearchListItem searchListItem : selectedItems) {
-							Object object = searchListItem.getSearchResult().object;;
+							Object object = searchListItem.getSearchResult().object;
 							if (object instanceof HistoryEntry) {
 								historyEntries.add((HistoryEntry) object);
 							}
@@ -725,7 +725,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		Dialog dialog = new Dialog(getActivity(), getTheme()){
+		Dialog dialog = new Dialog(getActivity(), getTheme()) {
 			@Override
 			public void onBackPressed() {
 				if (!processBackAction()) {
@@ -891,14 +891,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public void addMainSearchFragment() {
-		mainSearchFragment = (QuickSearchMainListFragment) Fragment.instantiate(this.getContext(), QuickSearchMainListFragment.class.getName());
-		FragmentManager childFragMan = getChildFragmentManager();
-		FragmentTransaction childFragTrans = childFragMan.beginTransaction();
-		childFragTrans.replace(R.id.search_view, mainSearchFragment);
-		childFragTrans.commit();
+		mainSearchFragment = new QuickSearchMainListFragment();
+		FragmentManager childFragmentManager = getChildFragmentManager();
+		String tag = mainSearchFragment.getClass().getName();
+		childFragmentManager.beginTransaction()
+				.replace(R.id.search_view, mainSearchFragment, tag)
+				.commitAllowingStateLoss();
 	}
 
 	private void updateToolbarButton() {
+		boolean nightMode = !app.getSettings().isLightContent();
 		SearchWord word = searchUICore.getPhrase().getLastSelectedWord();
 		if (foundPartialLocation) {
 			buttonToolbarText.setText(app.getString(R.string.advanced_coords_search).toUpperCase());
@@ -923,9 +925,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		buttonToolbarFilter.setVisibility(filterButtonVisible ? View.VISIBLE : View.GONE);
 		if (filterButtonVisible) {
 			if (word.getResult().object instanceof PoiUIFilter) {
+				buttonToolbarFilter.setImageDrawable(app.getUIUtilities()
+						.getIcon(R.drawable.ic_action_filter, ColorUtilities.getActiveColorId(nightMode)));
 				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_filter,
 						app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
-			} else{
+			} else {
 				buttonToolbarFilter.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_filter));
 			}
 		}
@@ -2085,12 +2089,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 									   QuickSearchType searchType,
 									   QuickSearchTab showSearchTab,
 									   @Nullable LatLon latLon) {
-		try {
-
-			if (mapActivity.isActivityDestroyed()) {
-				return false;
-			}
-
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			mapActivity.getMyApplication().logEvent("search_open");
 
 			Bundle bundle = new Bundle();
@@ -2146,10 +2146,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			fragment.setArguments(bundle);
 			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	private MapActivity getMapActivity() {
@@ -2388,7 +2386,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public interface SearchResultListener {
 		void searchStarted(SearchPhrase phrase);
+
 		void publish(SearchResultCollection res, boolean append);
+
 		// return true if search done, false if next search will be ran immediately
 		boolean searchFinished(SearchPhrase phrase);
 	}
@@ -2399,7 +2399,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				QuickSearchCategoriesListFragment.class.getName(),
 				QuickSearchAddressListFragment.class.getName()
 		};
-		private final int[] titleIds = new int[]{
+		private final int[] titleIds = new int[] {
 				QuickSearchHistoryListFragment.TITLE,
 				QuickSearchCategoriesListFragment.TITLE,
 				QuickSearchAddressListFragment.TITLE

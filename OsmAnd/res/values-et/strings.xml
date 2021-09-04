@@ -4079,8 +4079,8 @@
     <string name="delete_all_confirmation">Jah, kustuta kõik</string>
     <string name="backup_data">Andmete varundamine</string>
     <string name="select_backup_data_descr">Vali varundatavad andmed ja kaustad.</string>
-    <string name="select_nav_profile_dialog_message">„Navigatsioonitüüp“ määrab teekonna koostamise viisi. Saad valida võrguühenduseta ja võrgupõhiste marsruutimismootorite vahel.</string>
-    <string name="backup_delete_types_descr">Kustuta kõik andmed vananenud andmetüüpide kohta OsmAnd pilvest\?</string>
+    <string name="select_nav_profile_dialog_message">„Navigatsioonitüüp“ määrab teekonna koostamise viisi ning valikus on võrguühenduseta ja võrgupõhised marsruutimismootorid.</string>
+    <string name="backup_delete_types_descr">Kas kustutame kõik andmed vananenud andmetüüpide kohta OsmAnd pilvest\?</string>
     <string name="backup_delete_types">Kustuta keelatud andmetüübid</string>
     <string name="shared_string_discussion">Arutelu</string>
     <string name="shared_string_view_all">Näita kõiki</string>
@@ -4088,7 +4088,7 @@
     <string name="customize_route_line">Kohanda marsruudi joont</string>
     <string name="show_start_dialog">Kuva algdialoog</string>
     <string name="purchases_feature_desc_terrain">Maastiku kontuurjooned, tumedate toonidega täielik mäe- ja nõlvakaart, millel on värvid tippude ja madalike eristamiseks.</string>
-    <string name="purchases_feature_desc_wikivoyage">Sirvi Vikipeediat ilma võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>
+    <string name="purchases_feature_desc_wikivoyage">Sirvi Wikivoyage saiti ilma võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>
     <string name="purchases_feature_desc_wikipedia">Sirvi Vikipeediat võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>
     <string name="purchases_feature_desc_combined_wiki">Tutvu Vikipeedia artiklitega liikvel olles, ilma internetiühenduseta. Võrguühenduseta andmed on jaotatud riikide kaupa ja saadaval kõigis keeltes.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Hangi juurdepääs regulaarsetele igakuistele võrguühenduseta kaartide uuendustele.</string>
@@ -4217,13 +4217,13 @@
     <string name="loading_list_of_routing_services">Saadaval olevate marsruutimisteenuste loendi laadimine</string>
     <string name="shared_string_offline">Võrguühenduseta</string>
     <string name="shared_string_online">Veebis</string>
-    <string name="osmand_online_routing_promo">Võid kasutada etteantud malle või lisada kohandatud online marsruutimise omi, mida toetatakse: OSRM, Graphhopper, OpenRouteService, GPX.</string>
+    <string name="osmand_online_routing_promo">Kasutada etteantud malle või lisa selliseid kohandatud online marsruutimise omi, mida toetatakse: OSRM, Graphhopper, openrouteservice, GPX.</string>
     <string name="failed_loading_predefined_engines">Eeldefineeritud mallide nimekirja ei õnnestunud laadida.
 \nPalun kontrolli oma internetiühendust.</string>
     <string name="backup_delete_old_data_warning">Oled kustutamas varem laetud andmete muutuste ajalugu.
 \n
 \nAndmete praegune versioon salvestatakse serverisse ning varem tehtud muudatusi ei saa tagasi võtta.</string>
-    <string name="backup_version_history_delete_descr">Kustutada vananenud andmetüüpide muutuste register OsmAndi pilves\?</string>
+    <string name="backup_version_history_delete_descr">Kas kustutame vananenud andmetüüpide muutuste logi OsmAndi pilves\?</string>
     <string name="purchases_feature_desc_unlimited_map_download">Hangi kõigi mandrite ja piirkondade võrguühenduseta kaartide piiramatud allalaadimised.</string>
     <string name="approximate_route_description">Kinnita marsruut kaardil olevatele teedele, et saada kõik pöörded ja lisaandmed, nagu tasasus, teetüübid jne.</string>
     <string name="release_4_0">• Pilvepõhine varundamine

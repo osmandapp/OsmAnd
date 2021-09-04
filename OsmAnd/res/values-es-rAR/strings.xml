@@ -4127,7 +4127,7 @@
     <string name="loading_list_of_routing_services">Cargando lista de servicios de navegación disponibles</string>
     <string name="shared_string_offline">Desconectado</string>
     <string name="shared_string_online">En línea</string>
-    <string name="osmand_online_routing_promo">Usa plantillas predefinidas o añade navegadores en línea admitidos como OSRM, Graphhopper, OpenRouteService o GPX.</string>
+    <string name="osmand_online_routing_promo">Usa plantillas predefinidas o añade navegadores en línea admitidos como OSRM, Graphhopper, openrouteservice o GPX.</string>
     <string name="shared_string_external">Externo</string>
     <string name="provided_by">Provisto por %1$s</string>
     <string name="failed_loading_predefined_engines">No se pudo cargar la lista de plantillas predefinidas.
@@ -4316,4 +4316,10 @@
 \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación.
 \n
 \nGestiona o cancela las suscripciones cuando quieras, en los ajustes de Amazon.</string>
+    <string name="no_items_of_type_message">No existe ningún elemento de este tipo</string>
+    <string name="routeInfo_tracktype_description">Colorea la ruta o el trazado de la vía según el estado del camino en función de su composición superficial. Se aplica normalmente a las rutas en los que la red principal de caminos está formada por caminos sin pavimentar.</string>
+    <string name="routeInfo_winter_ice_road_description">Colorea la ruta o el trazado de la vía según la clasificación del camino, sólo utilizable durante el invierno.</string>
+    <string name="routeInfo_smoothness_description">Proporciona un esquema de clasificación con respecto a la usabilidad física de un camino para vehículos con ruedas, particularmente con respecto a la regularidad y planitud de la superficie.</string>
+    <string name="routeInfo_surface_description">Proporciona información adicional sobre la superficie física de los caminos y senderos.</string>
+    <string name="routeInfo_roadClass_description">Colorea la ruta o el trazado de la vía según la clasificación del camino.</string>
 </resources>

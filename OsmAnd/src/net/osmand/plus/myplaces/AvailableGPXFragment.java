@@ -13,7 +13,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -46,7 +45,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
@@ -61,6 +59,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -166,7 +165,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		currentRecording.currentlyRecordingTrack = true;
 		asyncLoader = new LoadGpxTask();
 		selectedGpxHelper = ((OsmandApplication) activity.getApplicationContext()).getSelectedGpxHelper();
-		allGpxAdapter = new GpxIndexesAdapter(getActivity());
+		allGpxAdapter = new GpxIndexesAdapter();
 		setAdapter(allGpxAdapter);
 	}
 
@@ -251,21 +250,22 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		final boolean light = app.getSettings().isLightContent();
 		SavingTrackHelper sth = app.getSavingTrackHelper();
 
+		int activeColorId = ColorUtilities.getActiveColorId(!light);
 		Button stop = (Button) currentGpxView.findViewById(R.id.action_button);
 		if (isRecording) {
 			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.VISIBLE);
 			TextView segmentTime = (TextView) currentGpxView.findViewById(R.id.segment_time);
 			segmentTime.setText(OsmAndFormatter.getFormattedDurationShort((int)(sth.getDuration() / 1000)));
 			segmentTime.setVisibility(View.VISIBLE);
-			stop.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
-					.getIcon(R.drawable.ic_action_rec_stop, light ? R.color.active_color_primary_light : R.color.active_color_primary_dark), null, null, null);
+			Drawable stopIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_rec_stop, activeColorId);
+			stop.setCompoundDrawablesWithIntrinsicBounds(stopIcon, null, null, null);
 			stop.setText(app.getString(R.string.shared_string_control_stop));
 			stop.setContentDescription(app.getString(R.string.gpx_monitoring_stop));
 		} else {
 			currentGpxView.findViewById(R.id.segment_time_div).setVisibility(View.GONE);
 			currentGpxView.findViewById(R.id.segment_time).setVisibility(View.GONE);
-			stop.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
-					.getIcon(R.drawable.ic_action_rec_start, light ? R.color.active_color_primary_light : R.color.active_color_primary_dark), null, null, null);
+			Drawable stopIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_rec_start, activeColorId);
+			stop.setCompoundDrawablesWithIntrinsicBounds(stopIcon, null, null, null);
 			stop.setText(app.getString(R.string.shared_string_record));
 			stop.setContentDescription(app.getString(R.string.gpx_monitoring_start));
 		}
@@ -282,8 +282,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 			}
 		});
 		Button save = (Button) currentGpxView.findViewById(R.id.save_button);
-		save.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities()
-				.getIcon(R.drawable.ic_action_gsave_dark, light ? R.color.active_color_primary_light : R.color.active_color_primary_dark), null, null, null);
+		Drawable saveIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_gsave_dark, activeColorId);
+		save.setCompoundDrawablesWithIntrinsicBounds(saveIcon, null, null, null);
 		save.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -399,9 +399,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		listView.setBackgroundColor(getResources().getColor(
-				app.getSettings().isLightContent() ? R.color.activity_background_color_light
-						: R.color.activity_background_color_dark));
+		boolean nightMode = !app.getSettings().isLightContent();
+		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
 	public void createCurrentTrackView() {
@@ -464,8 +463,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		inflater.inflate(R.menu.track_sort_menu_item, menu);
 		mi = menu.findItem(R.id.action_sort);
 		mi.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-		int iconColorId = isLightActionBar() ? R.color.active_buttons_and_links_text_light
-				: R.color.active_buttons_and_links_text_dark;
+		int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
 		mi.setIcon(getIcon(sortByMode.getIconId(), iconColorId));
 
 		if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
@@ -530,9 +528,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				});
 			}
 			if (contextMenuItem.getIcon() != -1) {
-				int activeButtonsAndLinksTextColorResId = getMyApplication().getSettings().isLightContent() ?
-						R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
-				Drawable icMenuItem = getMyApplication().getUIUtilities().getIcon(contextMenuItem.getIcon(), activeButtonsAndLinksTextColorResId);
+				OsmandApplication app = requireMyApplication();
+				boolean nightMode = !app.getSettings().isLightContent();
+				int colorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
+				Drawable icMenuItem = app.getUIUtilities().getIcon(contextMenuItem.getIcon(), colorId);
 				item.setIcon(icMenuItem);
 			}
 		}
@@ -574,8 +573,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 								@Override
 								public void onClick(View v) {
 									updateTracksSort(mode);
-									int iconColorId = isLightActionBar() ? R.color.active_buttons_and_links_text_light
-											: R.color.active_buttons_and_links_text_dark;
+									int iconColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(!isLightActionBar());
 									item.setIcon(getIcon(mode.getIconId(), iconColorId));
 								}
 							})
@@ -934,12 +932,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 	protected class GpxIndexesAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
-		Map<String, List<GpxInfo>> data = new LinkedHashMap<>();
-		List<String> category = new ArrayList<>();
-		List<GpxInfo> selected = new ArrayList<>();
-		int warningColor;
-		int defaultColor;
-		int corruptedColor;
+		private Map<String, List<GpxInfo>> data = new LinkedHashMap<>();
+		private List<String> category = new ArrayList<>();
+		private List<GpxInfo> selected = new ArrayList<>();
 		private SearchFilter filter;
 
 		private GpxInfoViewCallback updateGpxCallback = new GpxInfoViewCallback() {
@@ -972,13 +967,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				app.runMessageInUIThreadAndCancelPrevious(UPDATE_GPX_ITEM_MSG_ID, updateItemsProc, MIN_UPDATE_INTERVAL);
 			}
 		};
-
-		public GpxIndexesAdapter(Context ctx) {
-			warningColor = ContextCompat.getColor(ctx, R.color.color_warning);
-			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-			defaultColor = ta.getColor(0, ContextCompat.getColor(ctx, R.color.color_unknown));
-			ta.recycle();
-		}
 
 		public void refreshSelected() {
 			selected.clear();
@@ -1206,9 +1194,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				final CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.GONE);
 				if (isSelectedGroup(groupPosition)) {
-					setCategoryIcon(app, app.getUIUtilities().getIcon(R.drawable.ic_map, R.color.osmand_orange), groupPosition, isExpanded, v, light);
+					setCategoryIcon(app.getUIUtilities().getIcon(R.drawable.ic_map, R.color.osmand_orange), v);
 				} else {
-					setCategoryIcon(app, 0, groupPosition, isExpanded, v, light);
+					setCategoryIcon(app, 0, v, light);
 				}
 				v.findViewById(R.id.category_icon).setVisibility(View.VISIBLE);
 			}

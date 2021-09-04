@@ -4118,7 +4118,7 @@
     <string name="loading_list_of_routing_services">載入可用路線規劃服務清單</string>
     <string name="shared_string_offline">離線</string>
     <string name="shared_string_online">線上</string>
-    <string name="osmand_online_routing_promo">使用預先定義的範本，或是新增 OSRM、Graphhopper、OpenRouteService 或是 GPX 線上路線規劃。</string>
+    <string name="osmand_online_routing_promo">使用預先定義的範本，或是新增 OSRM、Graphhopper、openrouteservice 或是 GPX 線上路線規劃。</string>
     <string name="shared_string_external">外部</string>
     <string name="provided_by">由 %1$s 提供</string>
     <string name="failed_loading_predefined_engines">無法載入預先定義範本。
@@ -4307,4 +4307,10 @@
     <string name="amz_manage_subscription_descr">要管理您的訂閱，請在裝置上使用 Amazon 應用程式，或是以您的個人檔案開啟 Amazon.com。</string>
     <string name="empty_category_name">空的分類名稱</string>
     <string name="no_activity_for_intent">找不到適合執行此動作的應用程式</string>
+    <string name="no_items_of_type_message">您沒有任何此類型的項目</string>
+    <string name="routeInfo_tracktype_description">根據道路的表面組成，根據道路狀況為路線或軌跡線著色。通常適用於主要道路路網由未鋪裝道路組成的道路。</string>
+    <string name="routeInfo_winter_ice_road_description">根據僅在冬季可用的冬季道路分類為路線或軌跡線著色。</string>
+    <string name="routeInfo_smoothness_description">提供關於有輪子的載具的物理可用性的分類方案，特別是關於表面規則性或平整度。</string>
+    <string name="routeInfo_surface_description">提供關於道路或人行道鋪面的額外資訊。</string>
+    <string name="routeInfo_roadClass_description">根據道路分類為路線或軌跡線著色。</string>
 </resources>

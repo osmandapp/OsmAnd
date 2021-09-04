@@ -13,8 +13,8 @@ import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.views.OsmandMapLayer.RenderingLineAttributes;
 
 import java.util.HashMap;
@@ -137,7 +137,7 @@ public class PublicTransportGeometryWayContext extends GeometryWayContext {
 	public Bitmap getStopShieldBitmap(int color, Drawable stopDrawable) {
 		Bitmap bmp = stopBitmapsCache.get(new Pair<>(color, stopDrawable));
 		if (bmp == null) {
-			int fillColor = UiUtilities.getContrastColor(getApp(), color, true);
+			int fillColor = ColorUtilities.getContrastColor(getApp(), color, true);
 			int strokeColor = getStrokeColor(color);
 
 			float density = getDensity();
@@ -178,7 +178,7 @@ public class PublicTransportGeometryWayContext extends GeometryWayContext {
 	public Bitmap getStopSmallShieldBitmap(int color) {
 		Bitmap bmp = stopSmallBitmapsCache.get(color);
 		if (bmp == null) {
-			int fillColor = UiUtilities.getContrastColor(getApp(), color, true);
+			int fillColor = ColorUtilities.getContrastColor(getApp(), color, true);
 			int strokeColor = getStrokeColor(color);
 
 			float routeShieldRadius = attrsPT.paint3.getStrokeWidth() / 4;

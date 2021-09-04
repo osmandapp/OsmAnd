@@ -1,5 +1,8 @@
 package net.osmand.plus.mapmarkers;
 
+import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.GROUPS_MARKERS_MENU;
+import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.HISTORY_MARKERS_MENU;
+
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -27,6 +30,7 @@ import com.google.android.material.snackbar.Snackbar;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -35,19 +39,16 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.OnPointsSavedListener;
 import net.osmand.plus.mapmarkers.DirectionIndicationDialogFragment.DirectionIndicationFragmentListener;
 import net.osmand.plus.mapmarkers.MapMarkersHelper.MapMarkersSortByDef;
-import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
+import net.osmand.plus.mapmarkers.SyncGroupTask.OnGroupSyncedListener;
 import net.osmand.plus.track.TrackMenuFragment;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.GROUPS_MARKERS_MENU;
-import static net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.HISTORY_MARKERS_MENU;
 
 public class MapMarkersDialogFragment extends DialogFragment implements OnGroupSyncedListener {
 
@@ -147,18 +148,15 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 		}
 
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
+		OsmandApplication app = getMyApplication();
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
-		Drawable icArrowBack = getMyApplication().getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(getContext()),
-				lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+		int icArrowBackId = AndroidUtils.getNavigationIconResId(app);
+		int icColor = ColorUtilities.getActiveButtonsAndLinksTextColorId(!lightTheme);
+		Drawable icArrowBack = app.getUIUtilities().getIcon(icArrowBackId, icColor);
 		toolbar.setNavigationIcon(icArrowBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
+		toolbar.setNavigationOnClickListener(view -> dismiss());
 
 		viewPager = mainView.findViewById(R.id.map_markers_view_pager);
 		viewPager.setOffscreenPageLimit(3);
@@ -326,15 +324,19 @@ public class MapMarkersDialogFragment extends DialogFragment implements OnGroupS
 	}
 
 	private void showOptionsMenuFragment() {
-		OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
-		fragment.setListener(createOptionsFragmentListener());
-		Bundle args = new Bundle();
-		args.putBoolean(GROUPS_MARKERS_MENU, viewPager.getCurrentItem() == GROUPS_POSITION);
-		args.putBoolean(HISTORY_MARKERS_MENU, viewPager.getCurrentItem() == HISTORY_MARKERS_POSITION);
-		fragment.setArguments(args);
-		getChildFragmentManager().beginTransaction()
-				.add(R.id.menu_container, fragment, OptionsBottomSheetDialogFragment.TAG)
-				.commitAllowingStateLoss();
+		FragmentManager fragmentManager = getChildFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, OptionsBottomSheetDialogFragment.TAG)) {
+			Bundle args = new Bundle();
+			args.putBoolean(GROUPS_MARKERS_MENU, viewPager.getCurrentItem() == GROUPS_POSITION);
+			args.putBoolean(HISTORY_MARKERS_MENU, viewPager.getCurrentItem() == HISTORY_MARKERS_POSITION);
+
+			OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+			fragment.setArguments(args);
+			fragment.setListener(createOptionsFragmentListener());
+			fragmentManager.beginTransaction()
+					.add(R.id.menu_container, fragment, OptionsBottomSheetDialogFragment.TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	private boolean dismissOptionsMenuFragment() {

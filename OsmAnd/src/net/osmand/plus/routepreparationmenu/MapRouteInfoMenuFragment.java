@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.plus.track.TrackMenuFragment.startNavigationForGPX;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,11 +16,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,8 +34,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.widgets.TextViewExProgress;
-
-import static net.osmand.plus.track.TrackMenuFragment.startNavigationForGPX;
 
 public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		implements OnSegmentSelectedListener, DownloadEvents {
@@ -227,7 +229,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
-				return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
+				return ColorUtilities.getDividerColorId(nightMode);
 			} else {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -402,19 +404,21 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		textViewExProgress.percent = 0;
 	}
 
-	public void show(MapActivity mapActivity) {
-		int slideInAnim = 0;
-		int slideOutAnim = 0;
-		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			slideInAnim = R.anim.slide_in_bottom;
-			slideOutAnim = R.anim.slide_out_bottom;
+	public void show(@NonNull MapActivity mapActivity) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			int slideInAnim = 0;
+			int slideOutAnim = 0;
+			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				slideInAnim = R.anim.slide_in_bottom;
+				slideOutAnim = R.anim.slide_out_bottom;
+			}
+			fragmentManager.beginTransaction()
+					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+					.add(R.id.routeMenuContainer, this, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
-		mapActivity.getSupportFragmentManager()
-				.beginTransaction()
-				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-				.add(R.id.routeMenuContainer, this, TAG)
-				.addToBackStack(TAG)
-				.commitAllowingStateLoss();
 	}
 
 	public void applyDayNightMode() {
@@ -426,16 +430,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		}
 		updateNightMode();
 
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), isNightMode(),
-				R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.toLayoutDivider), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
+		int dividerColorId = ColorUtilities.getDividerColorId(isNightMode());
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), dividerColorId);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), dividerColorId);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.toLayoutDivider), dividerColorId);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), dividerColorId);
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), dividerColorId);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), isNightMode(),
@@ -447,17 +447,17 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 
 		if (getTopView() != null) {
 			View topView = getTopView();
-			AndroidUtils.setBackground(ctx, topView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+			AndroidUtils.setBackground(ctx, topView, ColorUtilities.getCardAndListBackgroundColorId(isNightMode()));
 		}
 
-		int activeColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int activeColor = ContextCompat.getColor(ctx, ColorUtilities.getActiveColorId(isNightMode()));
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.from_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.via_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.to_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.map_options_route_button_title)).setTextColor(activeColor);
 
-		int mainFontColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		int mainFontColor = ColorUtilities.getPrimaryTextColor(ctx, isNightMode());
 		((TextView) mainView.findViewById(R.id.fromText)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.toText)).setTextColor(mainFontColor);
@@ -470,40 +470,36 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 		ctx.setupRouteCalculationProgressBar(mainView.findViewById(R.id.progress_bar));
 	}
 
-	public static boolean showInstance(final MapActivity mapActivity, int initialMenuState) {
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		int slideInAnim = 0;
-		int slideOutAnim = 0;
-		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			if (portrait) {
-				slideInAnim = R.anim.slide_in_bottom;
-				slideOutAnim = R.anim.slide_out_bottom;
-			} else {
-				boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
-				slideInAnim = isLayoutRtl ? R.anim.slide_in_right : R.anim.slide_in_left;
-				slideOutAnim = isLayoutRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
+	public static boolean showInstance(@NonNull MapActivity mapActivity, int initialMenuState) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+			int slideInAnim = 0;
+			int slideOutAnim = 0;
+			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				if (portrait) {
+					slideInAnim = R.anim.slide_in_bottom;
+					slideOutAnim = R.anim.slide_out_bottom;
+				} else {
+					boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
+					slideInAnim = isLayoutRtl ? R.anim.slide_in_right : R.anim.slide_in_left;
+					slideOutAnim = isLayoutRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
+				}
 			}
-		}
-
-		try {
 			mapActivity.getContextMenu().hideMenues();
 
-			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
 			Bundle args = new Bundle();
+			args.putInt(MENU_STATE_KEY, initialMenuState);
+			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
 			fragment.setArguments(args);
-			args.putInt(ContextMenuFragment.MENU_STATE_KEY, initialMenuState);
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
+			fragmentManager.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	@Override

@@ -43,6 +43,7 @@ import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -147,6 +148,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 		if (savedInstanceState != null) {
 			exportType = savedInstanceState.getInt(EXPORT_TYPE_KEY);
 		}
@@ -159,8 +161,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_osm_edits);
 		emptyView = emptyStub.inflate();
-		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-				.isLightContent() ? R.color.activity_background_color_light : R.color.activity_background_color_dark));
+		emptyView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
 			int icRes = getMyApplication().getSettings().isLightContent()
@@ -416,9 +417,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getListView().setBackgroundColor(getResources().getColor(getMyApplication().getSettings().isLightContent()
-				? R.color.activity_background_color_light
-				: R.color.activity_background_color_dark));
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		getListView().setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
 	@Override

@@ -39,7 +39,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollView;
@@ -50,13 +49,13 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
@@ -343,7 +342,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		flat.setVisibility(View.GONE);
 		ImageView settingsButton = dashboardView.findViewById(R.id.toolbar_settings);
 		settingsButton.setVisibility(View.GONE);
-		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 		ImageView lst = dashboardView.findViewById(R.id.toolbar_list);
 		lst.setVisibility(View.GONE);
 		ImageButton back = dashboardView.findViewById(R.id.toolbar_back);
@@ -479,18 +477,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		}
 	}
 
-	private boolean isInRouteOrPlannigMode() {
-		boolean routePlanningMode = false;
-		RoutingHelper rh = mapActivity.getRoutingHelper();
-		if (rh.isRoutePlanningMode()) {
-			routePlanningMode = true;
-		} else if ((rh.isRouteCalculated() || rh.isRouteBeingCalculated()) && !rh.isFollowingMode()) {
-			routePlanningMode = true;
-		}
-		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		return routePlanningMode || routeFollowingMode;
-	}
-
 	private void hideActionButton() {
 		actionButton.setVisibility(View.GONE);
 		if (compassButton != null) {
@@ -609,24 +595,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					|| visibleType == DashboardType.CYCLE_ROUTES
 					|| visibleType == DashboardType.HIKING_ROUTES
 					|| visibleType == DashboardType.TERRAIN) {
+				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				if (visibleType == DashboardType.DASHBOARD) {
 					addOrUpdateDashboardFragments();
 				} else if (visibleType == DashboardType.MAPILLARY) {
-					mapActivity.getSupportFragmentManager().beginTransaction()
-							.replace(R.id.content, new MapillaryFiltersFragment(), MapillaryFiltersFragment.TAG)
-							.commit();
+					MapillaryFiltersFragment.showInstance(fragmentManager);
 				} else if (visibleType == DashboardType.CYCLE_ROUTES) {
-					mapActivity.getSupportFragmentManager().beginTransaction()
-							.replace(R.id.content, new CycleRoutesFragment(), CycleRoutesFragment.TAG)
-							.commit();
+					CycleRoutesFragment.showInstance(fragmentManager);
 				} else if (visibleType == DashboardType.HIKING_ROUTES) {
-					mapActivity.getSupportFragmentManager().beginTransaction()
-							.replace(R.id.content, new HikingRoutesFragment(), HikingRoutesFragment.TAG)
-							.commit();
+					HikingRoutesFragment.showInstance(fragmentManager);
 				} else {
-					mapActivity.getSupportFragmentManager().beginTransaction()
-							.replace(R.id.content, new TerrainFragment(), TerrainFragment.TAG)
-							.commit();
+					TerrainFragment.showInstance(fragmentManager);
 				}
 				scrollView.setVisibility(View.VISIBLE);
 				scrollView.scrollTo(0, 0);
@@ -650,10 +629,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			mapActivity.getMapLayers().getMapControlsLayer().hideMapControls();
 
 			updateToolbarActions();
-			//fabButton.showFloatingActionButton();
 			open(animation, animationCoordinates);
 			updateLocation(true, true, false);
-//			addOrUpdateDashboardFragments();
 			mapActivity.getRoutingHelper().addListener(this);
 		} else {
 			mapActivity.getMapViewTrackingUtilities().setDashboard(null);
@@ -684,11 +661,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	private void applyDayNightMode() {
 		final int backgroundColor;
-		backgroundColor = ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.activity_background_color_dark
-						: R.color.activity_background_color_light);
-		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
+		backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
+		Drawable dividerDrawable = new ColorDrawable(ColorUtilities.getDividerColor(mapActivity, nightMode));
 
 		if (listBackgroundView != null) {
 			listBackgroundView.setBackgroundColor(backgroundColor);
@@ -826,11 +800,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 	private void refreshFragment(@NonNull String tag) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		Fragment fragment = fragmentManager.findFragmentByTag(tag);
-		if (fragment != null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragmentManager.beginTransaction()
 					.detach(fragment)
 					.attach(fragment)
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 
@@ -1037,7 +1011,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			TransactionBuilder builder = new TransactionBuilder(manager, settings, mapActivity);
 			builder.getFragmentTransaction()
 					.remove(fragment)
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 
@@ -1110,10 +1084,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public void onAttach(DashBaseFragment dashBaseFragment) {
 		fragList.add(new WeakReference<>(dashBaseFragment));
-	}
-
-	public void requestLayout() {
-		dashboardView.requestLayout();
 	}
 
 	public boolean onBackPressed() {
@@ -1306,9 +1276,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	void hideFragmentByTag(String tag) {
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		FragmentTransaction transaction = manager.beginTransaction();
-		Fragment frag = manager.findFragmentByTag(tag);
-		transaction.hide(frag).commit();
+		Fragment fragment = manager.findFragmentByTag(tag);
+		if (fragment != null) {
+			manager.beginTransaction()
+					.hide(fragment)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	void unblacklistFragmentClass(String tag) {
@@ -1319,9 +1292,12 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	void unhideFragmentByTag(String tag) {
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
-		FragmentTransaction transaction = manager.beginTransaction();
-		Fragment frag = manager.findFragmentByTag(tag);
-		transaction.show(frag).commit();
+		Fragment fragment = manager.findFragmentByTag(tag);
+		if (fragment != null) {
+			manager.beginTransaction()
+					.show(fragment)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	View getParentView() {

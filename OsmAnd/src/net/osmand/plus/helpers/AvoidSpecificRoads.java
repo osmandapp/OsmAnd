@@ -222,14 +222,7 @@ public class AvoidSpecificRoads {
 	}
 
 	public void selectFromMap(@NonNull final MapActivity mapActivity) {
-		ContextMenuLayer cm = mapActivity.getMapLayers().getContextMenuLayer();
-		cm.setSelectOnMap(new CallbackWithObject<LatLon>() {
-			@Override
-			public boolean processResult(LatLon result) {
-				addImpassableRoad(mapActivity, result, true, false, null);
-				return true;
-			}
-		});
+		selectFromMap(mapActivity, null);
 	}
 
 	public void selectFromMap(@NonNull final MapActivity mapActivity, @Nullable final ApplicationMode mode) {

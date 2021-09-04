@@ -42,6 +42,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiType;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -51,7 +52,6 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.ActivityResultListener.OnActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -64,6 +64,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.openplacereviews.OPRConstants;
 import net.osmand.plus.openplacereviews.OprStartFragment;
 import net.osmand.plus.osmedit.opr.OpenDBAPI;
@@ -700,7 +701,7 @@ public class MenuBuilder {
 			textPrefixView.setLayoutParams(llTextParams);
 			textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 			textPrefixView.setTextSize(12);
-			textPrefixView.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark));
+			textPrefixView.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
 			textPrefixView.setMinLines(1);
 			textPrefixView.setMaxLines(1);
 			textPrefixView.setText(textPrefix);
@@ -715,7 +716,7 @@ public class MenuBuilder {
 		textView.setLayoutParams(llTextParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(text);
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
@@ -746,7 +747,7 @@ public class MenuBuilder {
 			textViewSecondary.setLayoutParams(llTextSecondaryParams);
 			textViewSecondary.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 			textViewSecondary.setTextSize(14);
-			textViewSecondary.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark));
+			textViewSecondary.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
 			textViewSecondary.setText(secondaryText);
 			llText.addView(textViewSecondary);
 		}
@@ -893,7 +894,7 @@ public class MenuBuilder {
 		textPrefixView.setLayoutParams(llTextParams);
 		textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textPrefixView.setTextSize(12);
-		textPrefixView.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark));
+		textPrefixView.setTextColor(ColorUtilities.getSecondaryTextColor(app, !light));
 		textPrefixView.setMinLines(1);
 		textPrefixView.setMaxLines(1);
 		textPrefixView.setText(descriptionLabel);
@@ -906,7 +907,7 @@ public class MenuBuilder {
 		textView.setLayoutParams(llDescriptionParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(WikiArticleHelper.getPartialContent(description));
 
 		if (Linkify.addLinks(textView, Linkify.ALL)) {
@@ -962,7 +963,7 @@ public class MenuBuilder {
 	}
 
 	protected void copyToClipboard(String text, Context ctx) {
-		ShareDialog.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
+		ShareMenu.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
 	}
 
 	protected CollapsableView getLocationCollapsableView(Map<Integer, String> locationData) {
@@ -1144,7 +1145,7 @@ public class MenuBuilder {
 		shape.setCornerRadius(dpToPx(3));
 		int bgColor = route.getColor(app, !light);
 		shape.setColor(bgColor);
-		transportRect.setTextColor(UiUtilities.getContrastColor(app, bgColor, true));
+		transportRect.setTextColor(ColorUtilities.getContrastColor(app, bgColor, true));
 
 		transportRect.setBackgroundDrawable(shape);
 		transportRect.setText(route.route.getAdjustedRouteRef(true));
@@ -1161,7 +1162,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		titleView.setLayoutParams(titleParams);
 		titleView.setTextSize(16);
-		int textColor = app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
+		int textColor = ColorUtilities.getPrimaryTextColor(app, !light);
 		titleView.setTextColor(textColor);
 		String desc = route.getDescription(getMapActivity().getMyApplication(), true);
 		Drawable arrow = app.getUIUtilities().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
@@ -1266,7 +1267,7 @@ public class MenuBuilder {
 		textView.setLayoutParams(llTextDescParams);
 		textView.setTypeface(FontCache.getRobotoRegular(context));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(app, !light));
 		textView.setText(text);
 		return new CollapsableView(textView, this, collapsed);
 	}
@@ -1399,7 +1400,7 @@ public class MenuBuilder {
 					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 			button.setTextColor(buttonColorStateList);
 		} else {
-			button.setTextColor(ContextCompat.getColor(context, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+			button.setTextColor(ColorUtilities.getPrimaryTextColor(context, !light));
 		}
 		button.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
 		button.setSingleLine(singleLine);

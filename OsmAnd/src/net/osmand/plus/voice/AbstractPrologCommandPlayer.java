@@ -112,23 +112,6 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		return new String[] { "alice.tuprolog.lib.BasicLibrary",
 					"alice.tuprolog.lib.ISOLibrary"/*, "alice.tuprolog.lib.IOLibrary"*/};
 	}
-	
-	public void sendAlertToAndroidWear(Context ctx, String message) {
-		int notificationId = 1;
-		NotificationCompat.Builder notificationBuilder =
-				new NotificationCompat.Builder(ctx)
-						.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-						.setSmallIcon(R.mipmap.icon)
-						.setContentTitle(ctx.getString(R.string.app_name))
-						.setContentText(message)
-						.setGroup(WEAR_ALERT);
-
-		// Get an instance of the NotificationManager service
-		NotificationManagerCompat notificationManager =
-				NotificationManagerCompat.from(ctx);
-		// Build the notification and issues it with notification manager.
-		notificationManager.notify(notificationId, notificationBuilder.build());
-	}
 
 	@Override
 	public void stateChanged(ApplicationMode change) {

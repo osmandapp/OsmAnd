@@ -1,5 +1,8 @@
 package net.osmand.plus.views.layers;
 
+import static android.graphics.Paint.ANTI_ALIAS_FLAG;
+import static android.graphics.Paint.FILTER_BITMAP_FLAG;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,9 +26,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -36,9 +39,6 @@ import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import org.apache.commons.logging.Log;
 
 import java.util.List;
-
-import static android.graphics.Paint.ANTI_ALIAS_FLAG;
-import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 
 public class PointLocationLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
@@ -194,7 +194,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			if (locationIcon != null) {
 				DrawableCompat.setTint(DrawableCompat.wrap(locationIcon.getDrawable(1)), color);
 			}
-			area.setColor(UiUtilities.getColorWithAlpha(color, 0.16f));
+			area.setColor(ColorUtilities.getColorWithAlpha(color, 0.16f));
 			aroundArea.setColor(color);
 		}
 	}

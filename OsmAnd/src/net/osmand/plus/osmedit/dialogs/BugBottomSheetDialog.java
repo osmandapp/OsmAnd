@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -14,6 +13,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -59,8 +59,7 @@ public class BugBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		osmNoteView.getViewTreeObserver().addOnGlobalLayoutListener(getShadowLayoutListener());
 		TextInputLayout textBox = osmNoteView.findViewById(R.id.name_text_box);
 		textBox.setHint(AndroidUtils.addColon(app, R.string.osn_bug_name));
-		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
-				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
+		ColorStateList colorStateList = ColorStateList.valueOf(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		textBox.setDefaultHintTextColor(colorStateList);
 		noteText = osmNoteView.findViewById(R.id.name_edit_text);
 		noteText.setText(text);

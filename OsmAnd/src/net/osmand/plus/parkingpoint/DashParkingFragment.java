@@ -1,6 +1,5 @@
 package net.osmand.plus.parkingpoint;
 
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;

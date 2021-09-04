@@ -1,5 +1,7 @@
 package net.osmand.plus.download.ui;
 
+import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,12 +24,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.ColorRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.FragmentActivity;
 
@@ -35,6 +35,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.map.OsmandRegions;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -61,9 +62,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-
-import static net.osmand.plus.liveupdates.LiveUpdatesFragment.showUpdateDialog;
-import static net.osmand.plus.liveupdates.LiveUpdatesFragment.updateCountEnabled;
 
 public class UpdatesIndexFragment extends OsmAndListFragment implements DownloadEvents, RefreshLiveUpdates, LiveUpdateListener, InAppPurchaseListener {
 	private static final int RELOAD_ID = 5;
@@ -261,9 +259,10 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 		ActionBar actionBar = getMyActivity().getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 
 		if (app.getAppCustomization().showDownloadExtraActions()) {
-			int colorResId = app.getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+			int colorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 			MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
 			Drawable icRefresh = app.getUIUtilities().getIcon(R.drawable.ic_action_refresh_dark, colorResId);
 			item.setIcon(icRefresh);
@@ -317,13 +316,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 	private class UpdateIndexAdapter extends ArrayAdapter<IndexItem> implements LocalIndexInfoAdapter {
 
-		static final int INDEX_ITEM = 0;
-		static final int OSM_LIVE_BANNER = 1;
-		List<IndexItem> items;
+		private static final int INDEX_ITEM = 0;
+		private static final int OSM_LIVE_BANNER = 1;
+
 		private final ArrayList<LocalIndexInfo> mapsList = new ArrayList<>();
 		private final boolean showSubscriptionPurchaseBanner;
-		private TextView countView;
-		private int countEnabled = 0;
 
 		@Override
 		public void addData(LocalIndexInfo info) {
@@ -337,12 +334,11 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 
 		@Override
 		public void onDataUpdated() {
-			countEnabled = updateCountEnabled(countView, mapsList, settings);
+
 		}
 
 		public UpdateIndexAdapter(Context context, int resource, List<IndexItem> items, boolean showSubscriptionPurchaseBanner) {
 			super(context, resource, items);
-			this.items = items;
 			this.showSubscriptionPurchaseBanner = showSubscriptionPurchaseBanner;
 		}
 
@@ -414,10 +410,10 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 						TextView tvTitle = view.findViewById(R.id.title);
 						tvTitle.setText(R.string.download_live_updates);
 						AndroidUtils.setTextPrimaryColor(app, tvTitle, nightMode);
-						countView = view.findViewById(R.id.description);
+						TextView countView = view.findViewById(R.id.description);
 						AndroidUtils.setTextSecondaryColor(app, countView, nightMode);
 						Drawable additionalIconDrawable = AppCompatResources.getDrawable(app, R.drawable.ic_action_update);
-						UiUtilities.tintDrawable(additionalIconDrawable, ContextCompat.getColor(app, getDefaultIconColorId(nightMode)));
+						UiUtilities.tintDrawable(additionalIconDrawable, ColorUtilities.getDefaultIconColor(app, nightMode));
 						((ImageView) view.findViewById(R.id.additional_button_icon)).setImageDrawable(additionalIconDrawable);
 						LinearLayout additionalButton = view.findViewById(R.id.additional_button);
 						TypedValue typedValue = new TypedValue();
@@ -452,10 +448,5 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	@Override
 	public List<LocalIndexInfo> getMapsToUpdate() {
 		return LiveUpdatesFragment.getMapsToUpdate(listAdapter.mapsList, settings);
-	}
-
-	@ColorRes
-	public static int getDefaultIconColorId(boolean nightMode) {
-		return nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 	}
 }

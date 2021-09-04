@@ -1669,6 +1669,9 @@ public class OsmandSettings {
 	public static final int LANDSCAPE_MIDDLE_RIGHT_CONSTANT = 4;
 	public final CommonPreference<Boolean> CENTER_POSITION_ON_MAP = new BooleanPreference(this, "center_position_on_map", false).makeProfile();
 
+	public final CommonPreference<Long> LAST_MAP_ACTIVITY_PAUSED_TIME = new LongPreference(this, "last_map_activity_paused_time", 0).makeGlobal().cache();
+	public final CommonPreference<Boolean> MAP_LINKED_TO_LOCATION = new BooleanPreference(this, "map_linked_to_location", true).makeGlobal().cache();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Integer> MAX_LEVEL_TO_DOWNLOAD_TILE = new IntPreference(this, "max_level_download_tile", 20).makeProfile().cache();
 

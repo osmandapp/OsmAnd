@@ -18,10 +18,10 @@ import android.widget.Toast;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -30,9 +30,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.development.BaseLogcatActivity;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import java.io.File;
@@ -154,12 +154,11 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
 		listView.setOnItemLongClickListener(this);
-		int dividerColor = lightContent ? R.color.divider_color_light : R.color.divider_color_dark;
-		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(this, dividerColor));
+		int dividerColor = ColorUtilities.getDividerColor(this, !lightContent);
+		Drawable dividerDrawable = new ColorDrawable(dividerColor);
 		listView.setDivider(dividerDrawable);
 		listView.setDividerHeight(AndroidUtils.dpToPx(this, 1f));
-		listView.setBackgroundColor(getResources().getColor(
-				lightContent ? R.color.list_background_color_light : R.color.list_background_color_dark));
+		listView.setBackgroundColor(ColorUtilities.getListBgColor(getMyApplication(), !lightContent));
 	}
 
 	@Override
@@ -320,7 +319,7 @@ public class HelpActivity extends BaseLogcatActivity implements OnItemClickListe
 				.setDescription(version)
 				.setListener(listener)
 				.setLongClickListener((adapter, itemId, position, isChecked, viewCoordinates) -> {
-					ShareDialog.copyToClipboardWithToast(adapter.getContext(), version, Toast.LENGTH_SHORT);
+					ShareMenu.copyToClipboardWithToast(adapter.getContext(), version, Toast.LENGTH_SHORT);
 					return false;
 				})
 				.createItem());

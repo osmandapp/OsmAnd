@@ -29,7 +29,7 @@ Please give us the following information so that we can try to **reproduce** you
 <!-- Which routing provider was used? (please tick the proper box [x]) -->
 
 - [ ] OsmAnd's in-app offline routing
-- [ ] Any online routing provider (YOURS, OpenRouteService, OSRM, etc.)
+- [ ] Any online routing provider (YOURS, openrouteservice, OSRM, etc.)
 
 ### Routing Profile
 

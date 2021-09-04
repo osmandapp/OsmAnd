@@ -56,6 +56,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -856,7 +857,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int id) {
@@ -2098,16 +2099,16 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		return showFragment(fragment, fragmentManager);
 	}
 
-	private static boolean showFragment(MeasurementToolFragment fragment, FragmentManager fragmentManager) {
-		try {
+	private static boolean showFragment(@NonNull MeasurementToolFragment fragment,
+	                                    @NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			fragment.setRetainInstance(true);
 			fragmentManager.beginTransaction()
-					.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
+					.add(R.id.bottomFragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			return false;
 		}
+		return false;
 	}
 
 	private class MeasurementToolBarController extends TopToolbarController {
@@ -2216,9 +2217,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (layer != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.hide(this).commit();
+					.hide(this)
+					.commitAllowingStateLoss();
 			layer.setTapsDisabled(true);
-			SnapTrackWarningFragment.showInstance(mapActivity.getSupportFragmentManager(), this);
+			SnapTrackWarningFragment.showInstance(manager, this);
 			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_ruler_container);
 		}
 	}
@@ -2230,7 +2232,8 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (layer != null && mapActivity != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.show(this).commit();
+					.show(this)
+					.commitAllowingStateLoss();
 			layer.setTapsDisabled(false);
 			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
 		}

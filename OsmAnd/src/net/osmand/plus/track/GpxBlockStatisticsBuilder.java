@@ -23,6 +23,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
@@ -45,8 +46,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import static net.osmand.plus.liveupdates.LiveUpdatesFragment.getDefaultIconColorId;
 
 public class GpxBlockStatisticsBuilder {
 
@@ -310,7 +309,7 @@ public class GpxBlockStatisticsBuilder {
 
 	public void prepareData(String title, String value, @DrawableRes int imageResId,
 							GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
-		prepareData(title, value, imageResId, getDefaultIconColorId(nightMode), firstType, secondType, itemType);
+		prepareData(title, value, imageResId, ColorUtilities.getDefaultIconColorId(nightMode), firstType, secondType, itemType);
 	}
 
 	public void prepareData(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId,
@@ -464,7 +463,7 @@ public class GpxBlockStatisticsBuilder {
 			});
 			Drawable icon = app.getUIUtilities().getIcon(item.imageResId, item.imageColorId);
 			holder.imageView.setImageDrawable(icon);
-			AndroidUtils.setBackgroundColor(app, holder.divider, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
+			AndroidUtils.setBackgroundColor(app, holder.divider, ColorUtilities.getDividerColorId(nightMode));
 			AndroidUiHelper.updateVisibility(holder.divider, position != items.size() - 1);
 		}
 

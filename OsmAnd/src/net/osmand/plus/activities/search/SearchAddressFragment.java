@@ -16,19 +16,25 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.resources.RegionAddressRepository;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 public class SearchAddressFragment extends Fragment {
+
+	public static final String TAG = SearchAddressFragment.class.getName();
 
 	public static final String SELECT_ADDRESS_POINT_INTENT_KEY = "SELECT_ADDRESS_POINT_INTENT_KEY";
 	public static final int SELECT_ADDRESS_POINT_RESULT_OK = 1;	
@@ -274,7 +280,7 @@ public class SearchAddressFragment extends Fragment {
 			ai.zoom = 16;
 			return ai;
 		}
-		
+
 		public static AddressInformation buildBuilding(Context ctx, OsmandSettings settings){
 			AddressInformation ai = new AddressInformation();
 			String cityName = getCityName(settings);
@@ -452,7 +458,7 @@ public class SearchAddressFragment extends Fragment {
 			}
 		}
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -465,5 +471,17 @@ public class SearchAddressFragment extends Fragment {
 		region = osmandSettings.getLastSearchedRegion();
 		loadData();
 		updateUI();
+	}
+
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @Nullable Bundle arguments) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SearchAddressFragment fragment = new SearchAddressFragment();
+			fragment.setArguments(arguments);
+			fragmentManager.beginTransaction()
+					.add(android.R.id.content, fragment, TAG)
+					.commitAllowingStateLoss();
+			return true;
+		}
+		return false;
 	}
 }

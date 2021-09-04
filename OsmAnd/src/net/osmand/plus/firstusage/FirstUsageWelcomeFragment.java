@@ -6,13 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import net.osmand.AndroidUtils;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 
 public class FirstUsageWelcomeFragment extends Fragment {
 
@@ -50,7 +53,18 @@ public class FirstUsageWelcomeFragment extends Fragment {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			activity.getSupportFragmentManager().beginTransaction()
-					.remove(FirstUsageWelcomeFragment.this).commit();
+					.remove(FirstUsageWelcomeFragment.this)
+					.commitAllowingStateLoss();
 		}
+	}
+
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			fragmentManager.beginTransaction()
+					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(), TAG)
+					.commitAllowingStateLoss();
+			return true;
+		}
+		return false;
 	}
 }

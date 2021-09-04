@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.CompoundButton;
 
@@ -19,6 +18,7 @@ import androidx.core.os.LocaleListCompat;
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -69,8 +69,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final int activeColorResId = nightMode ?
-				R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		final int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 		final int profileColor = appMode.getProfileColor(nightMode);
 
 		final int contentPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
@@ -169,8 +168,7 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 	}
 
 	private void setLanguageListEnable(boolean enable) {
-		int textColorPrimaryId = nightMode ?
-				R.color.text_color_primary_dark : R.color.text_color_primary_light;
+		int textColorPrimaryId = ColorUtilities.getPrimaryTextColorId(nightMode);
 		int disableColorId = nightMode ?
 				R.color.active_buttons_and_links_text_disabled_dark :
 				R.color.active_buttons_and_links_text_disabled_light;
@@ -247,8 +245,8 @@ public class SelectWikiLanguagesBottomSheet extends MenuBottomSheetDialogFragmen
 				.inflate(R.layout.bottom_sheet_item_title_with_swith_56dp, null);
 		CompoundButton cb = buttonView.findViewById(R.id.compound_button);
 
-		int color = nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
-		int bgColor = UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, color), 0.5f);
+		int color = ColorUtilities.getDividerColor(app, nightMode);
+		int bgColor = ColorUtilities.getColorWithAlpha(color, 0.5f);
 
 		int bgResId = R.drawable.rectangle_rounded_right;
 		Drawable bgDrawable = app.getUIUtilities().getPaintedIcon(bgResId, bgColor);

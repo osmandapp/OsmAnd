@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
 import net.osmand.plus.R;
@@ -140,6 +141,6 @@ public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragm
 
 	@ColorRes
 	protected int getBgColorId() {
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		return ColorUtilities.getListBgColorId(nightMode);
 	}
 }

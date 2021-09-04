@@ -55,11 +55,10 @@ public final class TransactionBuilder {
 		for (DashFragmentData dashFragmentData : fragments) {
 			DashBaseFragment fragment =
 					(DashBaseFragment) manager.findFragmentByTag(dashFragmentData.tag);
-			if (manager.findFragmentByTag(dashFragmentData.tag) == null) {
+			if (fragment == null) {
 				if (dashFragmentData.shouldShowFunction.shouldShow(settings, mapActivity, dashFragmentData.tag)) {
-					DashBaseFragment newInstance = null;
 					try {
-						newInstance = dashFragmentData.fragmentClass.newInstance();
+						DashBaseFragment newInstance = dashFragmentData.fragmentClass.newInstance();
 						// XXX hardcoded value
 						fragmentTransaction.add(R.id.content, newInstance, dashFragmentData.tag);
 					} catch (InstantiationException e) {
@@ -74,7 +73,7 @@ public final class TransactionBuilder {
 				}
 			} else {
 				if (!dashFragmentData.shouldShowFunction.shouldShow(settings, mapActivity, dashFragmentData.tag)) {
-					fragmentTransaction.remove(manager.findFragmentByTag(dashFragmentData.tag));
+					fragmentTransaction.remove(fragment);
 				} else if (fragment.getView() != null) {
 					if (fragment.isHidden()) {
 						fragmentTransaction.show(fragment);

@@ -12,6 +12,7 @@ import androidx.preference.Preference;
 
 import net.osmand.AndroidUtils;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
@@ -50,7 +51,7 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 			}
 		});
 		TextView title = (TextView) view.findViewById(R.id.switchButtonText);
-		title.setTextColor(ContextCompat.getColor(app, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+		title.setTextColor(ContextCompat.getColor(app, ColorUtilities.getActiveColorId(isNightMode())));
 	}
 
 	@Override

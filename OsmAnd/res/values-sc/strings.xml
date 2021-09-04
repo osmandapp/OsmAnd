@@ -1153,7 +1153,7 @@
     <string name="follow">Incumintza cun sa ghia</string>
     <string name="mark_final_location_first">In antis imposta sa destinatzione</string>
     <string name="get_directions">Indicatziones</string>
-    <string name="opening_hours">Oràrios pro abèrrere</string>
+    <string name="opening_hours">Oràrios de abertura</string>
     <string name="opening_changeset">Abertura modìficas…</string>
     <string name="closing_changeset">Serradura modìficas…</string>
     <string name="commiting_node">Imbiende su nodu…</string>
@@ -1537,7 +1537,7 @@
     <string name="use_fast_recalculation_desc">Torra a carculare petzi su cantu initziale de s’àndala. Podet èssere ùtile pro biàgios longos.</string>
     <string name="rendering_value_disabled_name">Disabilitadu</string>
     <string name="shared_string_logoff">Essi</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Casta (afiliatzione) de àndala</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Casta (afiliatzione) de retze</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">Iscantzella modìfica OSM</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
@@ -4130,7 +4130,7 @@
     <string name="loading_list_of_routing_services">Carrighende sa lista de sos servìtzios de càrculu de sas àndalas a disponimentu</string>
     <string name="shared_string_offline">Non in lìnia</string>
     <string name="shared_string_online">In lìnia</string>
-    <string name="osmand_online_routing_promo">Imprea modellos predefinidos o annanghe OSRM, Graphhopper, OpenRouteService o su càrculu de s\'àndala GPX in lìnia.</string>
+    <string name="osmand_online_routing_promo">Imprea modellos predefinidos o annanghe OSRM, Graphhopper, openrouteservice o su càrculu de s\'àndala GPX in lìnia.</string>
     <string name="shared_string_external">Esternu</string>
     <string name="provided_by">Frunidu dae %1$s</string>
     <string name="failed_loading_predefined_engines">Carrigamentu de sa lista de sos modellos predefinidos fallidu.

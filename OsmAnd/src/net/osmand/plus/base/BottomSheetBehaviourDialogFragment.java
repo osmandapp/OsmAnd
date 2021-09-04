@@ -2,7 +2,6 @@ package net.osmand.plus.base;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -13,17 +12,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -165,22 +163,12 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
-	}
-
-	protected Drawable getActiveIcon(@DrawableRes int id) {
-		return getIcon(id, getActiveColorId());
+		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 
 	@ColorRes
 	protected int getActiveColorId() {
 		return nightMode ? R.color.osmand_orange : R.color.color_myloc_distance;
-	}
-
-	@ColorInt
-	protected int getResolvedColor(@ColorRes int colorId) {
-		Context ctx = getContext();
-		return ctx != null ? ContextCompat.getColor(ctx, colorId) : 0;
 	}
 
 	private void updateBackground() {
@@ -246,11 +234,6 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 		}
 	}
 
-	@ColorRes
-	protected int getBgColorId() {
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-	}
-
 	@DrawableRes
 	protected int getPortraitBgResId() {
 		return nightMode ? R.drawable.bg_bottom_menu_dark : R.drawable.bg_bottom_menu_light;
@@ -261,14 +244,9 @@ public abstract class BottomSheetBehaviourDialogFragment extends BottomSheetDial
 		return nightMode ? R.drawable.bg_bottom_sheet_topsides_landscape_dark : R.drawable.bg_bottom_sheet_topsides_landscape_light;
 	}
 
-	@DrawableRes
-	protected int getLandscapeSidesBgResId() {
-		return nightMode ? R.drawable.bg_bottom_sheet_sides_landscape_dark : R.drawable.bg_bottom_sheet_sides_landscape_light;
-	}
-
 	private int getButtonsContainerBg() {
 		if (portrait) {
-			return getBgColorId();
+			return ColorUtilities.getListBgColorId(nightMode);
 		}
 		return nightMode ? R.drawable.bottom_sheet_buttons_bg_dark : R.drawable.bottom_sheet_buttons_bg_light;
 	}

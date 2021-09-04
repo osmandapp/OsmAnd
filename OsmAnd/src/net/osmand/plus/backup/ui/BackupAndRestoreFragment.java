@@ -135,13 +135,13 @@ public class BackupAndRestoreFragment extends BaseOsmAndFragment implements InAp
 	}
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable LoginDialogType dialogType) {
-		if (!fragmentManager.isStateSaved() && fragmentManager.findFragmentByTag(TAG) == null) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			BackupAndRestoreFragment fragment = new BackupAndRestoreFragment();
 			fragment.dialogType = dialogType;
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
-					.commit();
+					.commitAllowingStateLoss();
 		}
 	}
 

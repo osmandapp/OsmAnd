@@ -25,16 +25,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.DelayAutoCompleteTextView;
 
 import java.text.DateFormat;
@@ -58,8 +60,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
         final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
         final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-        final int backgroundColor = ContextCompat.getColor(getActivity(),
-                nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
+        final int backgroundColor = ColorUtilities.getActivityBgColor(getActivity(), nightMode);
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
         final int currentModeColor = getMyApplication().getSettings().getApplicationMode().getProfileColor(nightMode);
 
@@ -77,7 +78,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             toggleIconColor = currentModeColor;
         } else {
             toggleIconId = R.drawable.ic_action_hide;
-            toggleIconColor = ContextCompat.getColor(getContext(), nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+            toggleIconColor = ColorUtilities.getDefaultIconColor(mapActivity, nightMode);
         }
         ((AppCompatTextView) toggleRow.findViewById(R.id.toggle_row_title)).setText(toggleActionStringId);
         final Drawable drawable = getPaintedContentIcon(toggleIconId, toggleIconColor);
@@ -114,7 +115,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
 
 
-        final int colorRes = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+        final int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon)).setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon)).setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
@@ -325,5 +326,13 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
     private void changeButtonState(Button button, float alpha, boolean enabled) {
         button.setAlpha(alpha);
         button.setEnabled(enabled);
+    }
+
+    public static void showInstance(@NonNull FragmentManager fragmentManager) {
+        if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content, new MapillaryFiltersFragment(), TAG)
+                    .commitAllowingStateLoss();
+        }
     }
 }

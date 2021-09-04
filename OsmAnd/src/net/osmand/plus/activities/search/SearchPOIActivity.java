@@ -92,10 +92,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private static final int SHOW_ON_MAP = 1;
 	private static final int FILTER = 2;
 
-	private static final int EDIT_FILTER = 4;
 	private static final int DELETE_FILTER = 5;
 	private static final int SAVE_FILTER = 6;
-
 
 	private PoiUIFilter filter;
 	private AmenityAdapter amenityAdapter;
@@ -750,7 +748,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				LayoutInflater inflater = getLayoutInflater();
 				row = inflater.inflate(R.layout.searchpoi_list, parent, false);
 			}
-			float[] mes = null;
 			TextView label = (TextView) row.findViewById(R.id.poi_label);
 			TextView distanceText = (TextView) row.findViewById(R.id.distance);
 			TextView timeText = (TextView) row.findViewById(R.id.time);

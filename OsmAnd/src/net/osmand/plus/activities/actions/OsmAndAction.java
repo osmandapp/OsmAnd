@@ -50,9 +50,6 @@ public class OsmAndAction {
 		return null;
 	}
 	
-	public void prepareDialog(Activity activity, Bundle args, Dialog dlg) {
-	}
-
 	public void showDialog() {
 		mapActivity.showDialog(getDialogID());		
 	}

@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.view.View;
@@ -13,14 +15,13 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 
 public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalSelectionAdapter.ItemViewHolder> {
@@ -65,11 +66,11 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		TextView textView = holder.buttonText;
 		int innerPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
 		textView.setPadding(innerPadding, 0, innerPadding, 0);
-		int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+
 		if (item.equals(selectedItem) && item.isEnabled()) {
+			int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 			AndroidUtils.setBackground(holder.button, UiUtilities.createTintedDrawable(app,
-							R.drawable.bg_select_icon_group_button,
-							ContextCompat.getColor(app, activeColorResId)));
+							R.drawable.bg_select_icon_group_button, activeColor));
 			textView.setTextColor(ContextCompat.getColor(app, R.color.color_white));
 		} else {
 			if (!item.isEnabled()) {

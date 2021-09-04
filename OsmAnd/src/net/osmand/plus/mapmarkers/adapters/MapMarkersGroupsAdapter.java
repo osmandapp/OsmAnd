@@ -20,6 +20,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
@@ -139,7 +140,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 			if (markerGroupName == null) {
 				int previousGroupDateId = 0;
-				int monthsDisplayed = 0;
 				List<MapMarker> groupMarkers = group.getActiveMarkers();
 				for (int j = 0; j < groupMarkers.size(); j++) {
 					MapMarker marker = groupMarkers.get(j);
@@ -198,14 +198,14 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						for (TravelArticle art : savedArticles) {
 							String gpxName = travelHelper.getGPXName(art);
 							File path = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_TRAVEL_DIR + gpxName);
-							if (path.getAbsolutePath().equals(group.getGpxPath())) {
+							if (path.getAbsolutePath().equals(group.getGpxPath(app))) {
 								group.setWikivoyageArticle(art);
 							}
 						}
 					}
 				}
-				if (group.getWptCategories() == null || group.getWptCategories().isEmpty()) {
-					helper.updateGroupWptCategories(group, getGpxFile(group.getGpxPath()).getPointsByCategories().keySet());
+				if (Algorithms.isEmpty(group.getWptCategories())) {
+					helper.updateGroupWptCategories(group, getGpxFile(group.getGpxPath(app)).getPointsByCategories().keySet());
 				}
 				populateAdapterWithGroupMarkers(group, getItemCount());
 			}
@@ -330,12 +330,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.iconDirection.setVisibility(View.VISIBLE);
 
 				itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag, color));
-				itemViewHolder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_background_color_dark : R.color.list_background_color_light));
-				itemViewHolder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
+				itemViewHolder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, night));
+				itemViewHolder.title.setTextColor(ColorUtilities.getPrimaryTextColor(mapActivity, night));
 				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.app_bar_color_dark : R.color.divider_color_light));
 				itemViewHolder.optionsBtn.setBackgroundDrawable(AppCompatResources.getDrawable(mapActivity, night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 				itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getIcon(markerInHistory ? R.drawable.ic_action_reset_to_default_dark : R.drawable.ic_action_marker_passed, actionIconColor));
-				itemViewHolder.description.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.icon_color_default_dark : R.color.icon_color_default_light));
+				itemViewHolder.description.setTextColor(ColorUtilities.getDefaultIconColor(mapActivity, night));
 
 				drawableResToUpdate = R.drawable.ic_direction_arrow;
 				markerImageViewToUpdate = itemViewHolder.iconDirection;
@@ -476,7 +476,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						if (groupIsDisabled && !group.wasShown() && group.getWptCategories().size() > 1) {
 							group.setWasShown(true);
 							Bundle args = new Bundle();
-							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
+							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath(app));
 							args.putString(SelectWptCategoriesBottomSheetDialogFragment.ACTIVE_CATEGORIES_KEY, group.getWptCategoriesString());
 							args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
 
@@ -488,7 +488,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						mapMarkersHelper.updateGroupDisabled(group, disabled);
 						if (group.getType() == ItineraryType.TRACK) {
 							group.setVisibleUntilRestart(disabled);
-							String gpxPath = group.getGpxPath();
+							String gpxPath = group.getGpxPath(app);
 							SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxPath);
 							if (selectedGpxFile != null) {
 								gpxFile[0] = selectedGpxFile.getGpxFile();
@@ -558,7 +558,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					public void onClick(View view) {
 						if (!group.getWptCategories().isEmpty()) {
 							Bundle args = new Bundle();
-							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath());
+							args.putString(SelectWptCategoriesBottomSheetDialogFragment.GPX_FILE_PATH_KEY, group.getGpxPath(app));
 							args.putBoolean(SelectWptCategoriesBottomSheetDialogFragment.UPDATE_CATEGORIES_KEY, true);
 							args.putStringArrayList(SelectWptCategoriesBottomSheetDialogFragment.ACTIVE_CATEGORIES_KEY, new ArrayList<String>(group.getWptCategories()));
 							SelectWptCategoriesBottomSheetDialogFragment fragment = new SelectWptCategoriesBottomSheetDialogFragment();
@@ -566,7 +566,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							fragment.setUsedOnMap(false);
 							fragment.show(mapActivity.getSupportFragmentManager(), SelectWptCategoriesBottomSheetDialogFragment.TAG);
 						} else {
-							mapActivity.getMyApplication().getMapMarkersHelper().addOrEnableGpxGroup(new File(group.getGpxPath()));
+							mapActivity.getMyApplication().getMapMarkersHelper().addOrEnableGpxGroup(new File(group.getGpxPath(app)));
 						}
 					}
 				};
