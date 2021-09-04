@@ -4287,4 +4287,10 @@
 \nCe débit sera renouvelé automatiquement sauf si vous annulez votre abonnement.
 \n
 \nGérez ou annulez vos abonnements à tout moment depuis vos paramètres Amazon.</string>
+    <string name="routeInfo_tracktype_description">Colore les routes et chemins en fonction de leur surface. S\'applique généralement aux routes non revêtues.</string>
+    <string name="routeInfo_roadClass_description">Colore les routes et chemins en fonction d\'une classification.</string>
+    <string name="routeInfo_winter_ice_road_description">Colore les routes et chemins selon si ils sont praticables ou non en période hivernale.</string>
+    <string name="routeInfo_smoothness_description">Fournit un système de classification en fonction des caractéristiques physiques des voies pour les véhicules à roues, notamment en ce qui concerne la nature et la régularité de leurs surfaces.</string>
+    <string name="routeInfo_surface_description">Fournit des informations supplémentaires sur la surface physique des routes / chemins.</string>
+    <string name="no_items_of_type_message">Vous n’avez aucun élément de ce type</string>
 </resources>

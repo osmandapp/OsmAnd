@@ -4319,4 +4319,10 @@
 \n - Rettet problemer med import/eksport af profilindstillinger
 \n
 \n</string>
+    <string name="no_items_of_type_message">Du har ikke nogen elementer af denne type</string>
+    <string name="routeInfo_tracktype_description">Farvelægning af en rute eller sporlinje i henhold til vejenes tilstand baseret på deres overfladesammensætning. Anvendes typisk på veje, hvor hovedvejsnettet består af ikke-asfalterede veje.</string>
+    <string name="routeInfo_winter_ice_road_description">Farvelægning af ruten eller sporlinjen i henhold til vintervejklassificeringen, som kun bruges om vinteren.</string>
+    <string name="routeInfo_smoothness_description">Giver en klassificering af en vejs fysiske anvendelighed for køretøjer, navnlig med hensyn til overfladens ensartethed/jævnhed.</string>
+    <string name="routeInfo_surface_description">Giv yderligere oplysninger om den fysiske overflade af veje/gangstier.</string>
+    <string name="routeInfo_roadClass_description">Farvelægning af ruten eller sporlinjen i henhold til vejklassificering.</string>
 </resources>

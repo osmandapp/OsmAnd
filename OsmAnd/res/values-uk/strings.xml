@@ -4083,7 +4083,7 @@
     <string name="srtm_download_list_help_message">OsmAnd надає дані горизонталей у метрах і футах. Щоб змінити формат, потрібно повторно завантажити файл.</string>
     <string name="srtm_unit_format">Варіант одиниць вимірювання горизонталей</string>
     <string name="shared_string_feet">фути</string>
-    <string name="srtm_download_single_help_message">Виберіть потрібний варіант. Щоб змінити формат, потрібно повторно завантажувати файл.</string>
+    <string name="srtm_download_single_help_message">Виберіть потрібний формат. Щоб змінити його, потрібно повторно завантажувати файл.</string>
     <string name="route_line_use_gradient_coloring">Лінія маршруту забарвлена за профілем висоти маршруту.</string>
     <string name="shared_string_min_height">Мін. висота</string>
     <string name="shared_string_max_height">Макс. висота</string>
@@ -4313,4 +4313,10 @@
     <string name="cancel_anytime_in_amazon_app">Скасуйте її будь-коли в застосунку Amazon</string>
     <string name="amz_manage_subscription_descr">Щоб керувати підпискою, використовуйте застосунок Amazon на пристрої або відкрийте вебсайт Amazon.com під своїм профілем.</string>
     <string name="empty_category_name">Нема назви категорії</string>
+    <string name="no_items_of_type_message">У вас немає елементів цього типу</string>
+    <string name="routeInfo_tracktype_description">Забарвлення маршруту або треку відповідно до стану доріг, виходячи з їх складу. Зазвичай застосовується для доріг, де основна мережа доріг складається з ґрунтових доріг.</string>
+    <string name="routeInfo_winter_ice_road_description">Забарвлення маршруту або треку відповідно до класифікації зимових доріг, якою можна рухатись лише взимку.</string>
+    <string name="routeInfo_smoothness_description">Надає схему класифікації відносно можливості фізичного користування дорогою для руху колісних транспортних засобів, зокрема щодо плавності/пласкості поверхні.</string>
+    <string name="routeInfo_surface_description">Надати додаткові відомості про фізичну поверхню доріг/пішохідних доріжок.</string>
+    <string name="routeInfo_roadClass_description">Забарвлення маршруту або треку відповідно до класифікації доріг.</string>
 </resources>
