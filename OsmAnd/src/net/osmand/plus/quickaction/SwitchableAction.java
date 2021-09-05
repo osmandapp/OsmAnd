@@ -111,14 +111,13 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	@Override
 	public String getActionText(OsmandApplication app) {
 		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
-
-		List<T> items = loadListFromParams();
-		if (items.size() > 1) {
-			String item = getNextSelectedItem(app);
-			return "\u2026" + arrowDirection + getTranslatedItemName(app, item);
-		} else {
+		String disabledItem = getDisabledItem(app);
+		String nextItem = getNextSelectedItem(app);
+		if (Algorithms.stringsEqual(nextItem, disabledItem)) {
 			String item = getSelectedItem(app);
 			return getTranslatedItemName(app, item) + arrowDirection + "\u2026";
+		} else {
+			return getTranslatedItemName(app, nextItem) + arrowDirection + "\u2026";
 		}
 	}
 
@@ -143,6 +142,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public abstract void executeWithParams(MapActivity activity, String params);
 
 	public abstract String getTranslatedItemName(Context context, String item);
+
+	public abstract String getDisabledItem(OsmandApplication app);
 
 	public abstract String getSelectedItem(OsmandApplication app);
 
@@ -175,7 +176,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 				}
 				return nextSource.first;
 			} else {
-				return Algorithms.stringsEqual(defValue, currentSource) ? sources.get(0).first : defValue;
+				String source = sources.get(0).first;
+				return Algorithms.stringsEqual(source, currentSource) ? defValue : source;
 			}
 		}
 		return null;
