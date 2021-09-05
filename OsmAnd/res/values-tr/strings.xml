@@ -4320,4 +4320,6 @@
     <string name="routeInfo_smoothness_description">Tekerlekli araçlar için bir yolun fiziksel olarak kullanılabilirliği, özellikle yüzey düzgünlüğü/düzlüğü ile ilgili bir sınıflandırma şeması sağlar.</string>
     <string name="routeInfo_surface_description">Yolların/patikaların fiziksel yüzeyi hakkında ek bilgi sağlar.</string>
     <string name="routeInfo_roadClass_description">Yol sınıflandırmasına göre güzergah veya yol hattının renklendirilmesi.</string>
+    <string name="add_group_to_markers">İşaretleyiciler listesine grup ekle</string>
+    <string name="remove_group_from_markers">Grubu işaretleyiciler listesinden kaldır</string>
 </resources>

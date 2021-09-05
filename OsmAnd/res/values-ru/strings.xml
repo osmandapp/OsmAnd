@@ -3398,13 +3398,13 @@
     <string name="import_from_file">Импорт из файла</string>
     <string name="import_routing_file">Импорт файла маршрута</string>
     <string name="import_profile">Импорт профиля</string>
-    <string name="monitoring_prefs_descr">Навигация, точность логирования</string>
+    <string name="monitoring_prefs_descr">Навигация, точность журналирования</string>
     <string name="multimedia_notes_prefs_descr">Размер изображения, качество звука и видео</string>
     <string name="osm_editing_prefs_descr">Логин, пароль, локальное редактирование</string>
     <string name="accessibility_prefs_descr">Значок, цвет и название профиля</string>
     <string name="live_monitoring_descr">Возможность отправки текущего местоположения при записи маршрута.</string>
     <string name="live_monitoring">Онлайн-трекинг</string>
-    <string name="save_track_logging_accuracy">Точность логирования</string>
+    <string name="save_track_logging_accuracy">Точность журналирования</string>
     <string name="tracks_view_descr">Ваши записанные треки находятся в %1$s или папке OsmAnd.</string>
     <string name="multimedia_notes_view_descr">Ваши OSM-заметки находятся в %1$s.</string>
     <string name="video_notes">Видеозаметки</string>
@@ -4322,4 +4322,6 @@
     <string name="cancel_anytime_in_amazon_app">Отмена в любое время в Amazon App</string>
     <string name="amz_manage_subscription_descr">Для управления подпиской используйте приложение Amazon App или откройте веб-сайт Amazon.com под своим профилем.</string>
     <string name="no_activity_for_intent">Не найдено подходящих приложений для выполнения этого действия</string>
+    <string name="add_group_to_markers">Добавить группу в список маркеров</string>
+    <string name="remove_group_from_markers">Удалить группу из списка маркеров</string>
 </resources>

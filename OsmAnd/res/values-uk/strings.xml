@@ -4319,4 +4319,6 @@
     <string name="routeInfo_smoothness_description">Надає схему класифікації відносно можливості фізичного користування дорогою для руху колісних транспортних засобів, зокрема щодо плавності/пласкості поверхні.</string>
     <string name="routeInfo_surface_description">Надати додаткові відомості про фізичну поверхню доріг/пішохідних доріжок.</string>
     <string name="routeInfo_roadClass_description">Забарвлення маршруту або треку відповідно до класифікації доріг.</string>
+    <string name="add_group_to_markers">Додати групу до списку позначок</string>
+    <string name="remove_group_from_markers">Вилучити групу зі списку позначок</string>
 </resources>
