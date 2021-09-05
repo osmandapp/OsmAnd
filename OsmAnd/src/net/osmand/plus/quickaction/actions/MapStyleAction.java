@@ -49,6 +49,11 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
+	public String getDefaultItem(OsmandApplication app) {
+		return null;
+	}
+
+	@Override
 	public String getSelectedItem(OsmandApplication app) {
 		return app.getSettings().RENDERER.get();
 	}

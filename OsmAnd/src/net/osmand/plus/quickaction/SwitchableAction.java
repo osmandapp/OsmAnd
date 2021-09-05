@@ -117,8 +117,14 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			String item = getNextSelectedItem(app);
 			return "\u2026" + arrowDirection + getTranslatedItemName(app, item);
 		} else {
-			String item = getSelectedItem(app);
-			return getTranslatedItemName(app, item) + arrowDirection + "\u2026";
+			String defaultItem = getDefaultItem(app);
+			String nextItem = getNextSelectedItem(app);
+			if (Algorithms.stringsEqual(nextItem, defaultItem)) {
+				String item = getSelectedItem(app);
+				return getTranslatedItemName(app, item) + arrowDirection + "\u2026";
+			} else {
+				return getTranslatedItemName(app, nextItem) + arrowDirection + "\u2026";
+			}
 		}
 	}
 
@@ -143,6 +149,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	public abstract void executeWithParams(MapActivity activity, String params);
 
 	public abstract String getTranslatedItemName(Context context, String item);
+
+	public abstract String getDefaultItem(OsmandApplication app);
 
 	public abstract String getSelectedItem(OsmandApplication app);
 
@@ -175,7 +183,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 				}
 				return nextSource.first;
 			} else {
-				return Algorithms.stringsEqual(defValue, currentSource) ? sources.get(0).first : defValue;
+				String source = sources.get(0).first;
+				return Algorithms.stringsEqual(source, currentSource) ? defValue : source;
 			}
 		}
 		return null;

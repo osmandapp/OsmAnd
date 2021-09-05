@@ -60,6 +60,11 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
+	public String getDefaultItem(OsmandApplication app) {
+		return KEY_NO_UNDERLAY;
+	}
+
+	@Override
 	public String getSelectedItem(OsmandApplication app) {
 		String mapUnderlay = app.getSettings().MAP_UNDERLAY.get();
 		return mapUnderlay != null ? mapUnderlay : KEY_NO_UNDERLAY;
