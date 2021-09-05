@@ -326,24 +326,19 @@ public class Algorithms {
 		return new HashSet<>(Arrays.asList(s.split(split)));
 	}
 
-	public static <T> String encodeCollection(Collection<T> collection) {
-		return encodeCollection(collection, String.valueOf(CHAR_TO_SPLIT));
+	public static String encodeStringSet(Set<String> set) {
+		return encodeStringSet(set, String.valueOf(CHAR_TO_SPLIT));
 	}
 
-	public static <T> String encodeCollection(Collection<T> collection, String split) {
-		if (collection == null) {
-			return "";
-		}
-		StringBuilder res = new StringBuilder();
-		Iterator<T> iterator = collection.iterator();
-		while (iterator.hasNext()) {
-			T next = iterator.next();
-			res.append(next);
-			if (iterator.hasNext()) {
-				res.append(split);
+	public static String encodeStringSet(Set<String> set, String split) {
+		if (set != null) {
+			StringBuilder sb = new StringBuilder();
+			for (String s : set) {
+				sb.append(s).append(split);
 			}
+			return sb.toString();
 		}
-		return res.toString();
+		return "";
 	}
 
 	public static int findFirstNumberEndIndexLegacy(String value) {
