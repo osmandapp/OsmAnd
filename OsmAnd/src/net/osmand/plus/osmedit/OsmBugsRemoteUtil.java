@@ -18,6 +18,7 @@ import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -150,12 +151,11 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		if (connection.getResponseCode() == HttpURLConnection.HTTP_CONFLICT) {
 			responseBody = Algorithms.readFromInputStream(connection.getErrorStream());
 		} else {
-			InputStream inputStream = Algorithms.createByteArrayIS(connection.getInputStream());
-			responseBody = Algorithms.readFromInputStream(inputStream);
+			responseBody = Algorithms.readFromInputStream(connection.getInputStream());
 			if (!anonymous) {
-				inputStream.reset();
 				try {
-					result.userName = parseUserName(inputStream);
+					byte[] bytes = String.valueOf(responseBody).getBytes(StandardCharsets.UTF_8);
+					result.userName = parseUserName(new ByteArrayInputStream(bytes));
 				} catch (IOException | XmlPullParserException e) {
 					log.error(e);
 				}
