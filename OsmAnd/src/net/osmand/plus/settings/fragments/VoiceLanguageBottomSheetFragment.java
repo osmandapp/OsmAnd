@@ -31,6 +31,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadOsmandIndexesHelper;
+import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -76,7 +77,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private IndexItem indexToSelectAfterDownload = null;
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, ApplicationMode appMode, boolean usedOnMap) {
-		if (!fm.isStateSaved()) {
+		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
 			VoiceLanguageBottomSheetFragment fragment = new VoiceLanguageBottomSheetFragment();
 			fragment.setRetainInstance(true);
 			fragment.setAppMode(appMode);
@@ -219,13 +220,10 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private TextRadioItem createRadioButton(final InfoType voiceType) {
 		String title = getString(voiceType.titleRes);
 		TextRadioItem item = new TextRadioItem(title);
-		item.setOnClickListener(new OnRadioItemClickListener() {
-			@Override
-			public boolean onRadioItemClick(RadioItem radioItem, View view) {
-				selectedVoiceType = voiceType;
-				updateMenuItems();
-				return true;
-			}
+		item.setOnClickListener((radioItem, view) -> {
+			selectedVoiceType = voiceType;
+			updateMenuItems();
+			return true;
 		});
 		return item;
 	}
@@ -396,13 +394,14 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	public List<DownloadItem> getVoiceList(String type) {
-		if (!downloadThread.getIndexes().isDownloadedFromInternet && settings.isInternetConnectionAvailable()) {
+		DownloadResources indexes = downloadThread.getIndexes();
+		if (!indexes.isDownloadedFromInternet && settings.isInternetConnectionAvailable()) {
 			downloadThread.runReloadIndexFiles();
 		}
 
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
-		if (!downloadThread.shouldDownloadIndexes()) {
-			suggestedVoice.addAll(downloadThread.getIndexes().getDownloadItemsForGroup(type));
+		if (indexes.isDownloadedFromInternet && !indexes.downloadFromInternetFailed) {
+			suggestedVoice.addAll(indexes.getDownloadItemsForGroup(type));
 		} else if (selectedVoiceType == InfoType.TTS) {
 			suggestedVoice.addAll(DownloadOsmandIndexesHelper.listTtsVoiceIndexes(app));
 		}
