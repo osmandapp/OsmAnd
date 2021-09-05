@@ -60,6 +60,11 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
+	public String getDefaultItem(OsmandApplication app) {
+		return LAYER_OSM_VECTOR;
+	}
+
+	@Override
 	public String getSelectedItem(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		return settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get() : LAYER_OSM_VECTOR;
