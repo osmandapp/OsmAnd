@@ -210,10 +210,7 @@ public class AndroidUtils {
 	}
 
 	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {
-		if (Build.VERSION.SDK_INT >= 17) {
-			return activity != null && !activity.isFinishing() && !activity.isDestroyed();
-		}
-		return activity != null && !activity.isFinishing();
+		return activity != null && !activity.isFinishing() && !activity.isDestroyed();
 	}
 
 	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag) {
