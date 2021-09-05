@@ -2525,7 +2525,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="send_search_query">Siųsti paieškos užklausą?</string>
     <string name="shared_string_world">Pasaulis</string>
     <string name="coord_input_edit_point">Redaguoti tašką</string>
-    <string name="coord_input_add_point">Priddėti tašką</string>
+    <string name="coord_input_add_point">Pridėti tašką</string>
     <string name="open_wikipedia_link_online_description">Nuoroda bus atverta naršyklėje.</string>
     <string name="start_editing_card_image_text">Atviras pasaulinis kelionių vadovas, kurie kiekvienas gali redaguoti.</string>
     <string name="access_intermediate_arrival_time">Tarpinis atvykimo laikas</string>
@@ -2888,4 +2888,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="backup_restore_now">Atkurti dabar</string>
     <string name="shared_string_purchased">Įsigyta</string>
     <string name="layer_gpx_layer">Maršrutai</string>
+    <string name="activity_type_running_name">Bėgimas</string>
+    <string name="activity_type_walking_name">Ėjimas</string>
+    <string name="activity_type_offroad_name">Bekelė</string>
 </resources>
