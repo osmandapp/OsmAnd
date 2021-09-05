@@ -25,7 +25,7 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 	@Override
 	protected void collectPriceButtons(List<PriceButton<?>> priceButtons) {
 		priceButtons.clear();
-		priceButtons.addAll(collectPriceButtons(app, purchaseHelper));
+		priceButtons.addAll(collectPriceButtons(app, purchaseHelper, nightMode));
 	}
 
 	@Override
@@ -56,9 +56,12 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 		return R.drawable.ic_action_osmand_maps_plus;
 	}
 
-	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
+	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
+	                                                       InAppPurchaseHelper purchaseHelper,
+	                                                       boolean nightMode) {
 		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
-		List<PriceButton<?>> priceButtons = new ArrayList<>(PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions));
+		List<PriceButton<?>> priceButtons = new ArrayList<>(
+				PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions, nightMode));
 		OneTimePaymentButton oneTimePaymentButton = PurchasingUtils.getOneTimePaymentButton(app);
 		if (oneTimePaymentButton != null) {
 			priceButtons.add(oneTimePaymentButton);
