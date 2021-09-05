@@ -1,6 +1,6 @@
 package net.osmand.plus.track;
 
-import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
 import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 import android.graphics.Typeface;
@@ -32,9 +32,6 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class OptionsCard extends MapBaseCard {
 
