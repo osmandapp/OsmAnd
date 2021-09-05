@@ -106,16 +106,9 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	@Override
 	public String getActionText(OsmandApplication app) {
+		String item = getNextSelectedItem(app);
 		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
-
-		List<T> items = loadListFromParams();
-		if (items.size() > 1) {
-			String item = getNextSelectedItem(app);
-			return "\u2026" + arrowDirection + getTranslatedItemName(app, item);
-		} else {
-			String item = getSelectedItem(app);
-			return getTranslatedItemName(app, item) + arrowDirection + "\u2026";
-		}
+		return "\u2026" + arrowDirection + getTranslatedItemName(app, item);
 	}
 
 	@Override
