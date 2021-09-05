@@ -1,10 +1,6 @@
 package net.osmand;
 
 
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -83,12 +79,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -1019,15 +1020,19 @@ public class AndroidUtils {
 
 	@NonNull
 	public static String createDbInsertQuery(@NonNull String tableName, @NonNull Set<String> rowKeys) {
-		String keys = Algorithms.encodeCollection(rowKeys, ", ");
+		StringBuilder keys = new StringBuilder();
 		StringBuilder values = new StringBuilder();
-		for (int i = 0; i < rowKeys.size(); i++) {
+		String split = ", ";
+		Iterator<String> iterator = rowKeys.iterator();
+		while (iterator.hasNext()) {
+			keys.append(iterator.next());
 			values.append("?");
-			if (i + 1 != rowKeys.size()) {
-				values.append(", ");
+			if (iterator.hasNext()) {
+				keys.append(split);
+				values.append(split);
 			}
 		}
-		return "INSERT INTO " + tableName + " (" + keys + ") VALUES (" + values.toString() + ")";
+		return "INSERT INTO " + tableName + " (" + keys.toString() + ") VALUES (" + values.toString() + ")";
 	}
 
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {
