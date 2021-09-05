@@ -60,7 +60,7 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public String getDefaultItem(OsmandApplication app) {
+	public String getDisabledItem(OsmandApplication app) {
 		return KEY_NO_UNDERLAY;
 	}
 

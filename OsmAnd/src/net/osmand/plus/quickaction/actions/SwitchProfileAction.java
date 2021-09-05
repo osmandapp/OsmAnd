@@ -130,7 +130,7 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public String getDefaultItem(OsmandApplication app) {
+	public String getDisabledItem(OsmandApplication app) {
 		return null;
 	}
 
