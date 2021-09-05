@@ -185,24 +185,6 @@ public class SelectedGpxMenuController extends MenuController {
 		return getIcon(R.drawable.ic_action_polygom_dark, color);
 	}
 
-	@Override
-	public void share(LatLon latLon, String title, String address) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && selectedGpxPoint != null) {
-			final GPXFile gpxFile = selectedGpxPoint.getSelectedGpxFile().getGpxFile();
-			if (gpxFile != null) {
-				OsmandApplication app = mapActivity.getMyApplication();
-				if (Algorithms.isEmpty(gpxFile.path)) {
-					GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
-				} else {
-					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
-				}
-			}
-		} else {
-			super.share(latLon, title, "");
-		}
-	}
-
 	public static class SelectedGpxPoint {
 
 		private final SelectedGpxFile selectedGpxFile;
