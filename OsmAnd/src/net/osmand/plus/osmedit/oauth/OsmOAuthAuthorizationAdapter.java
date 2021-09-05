@@ -18,10 +18,10 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.osmedit.OsmBugsRemoteUtil;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -31,8 +31,6 @@ public class OsmOAuthAuthorizationAdapter {
 
     private final static Log log = PlatformUtil.getLog(OsmOAuthAuthorizationAdapter.class);
     private static final int THREAD_ID = 10101;
-    private static final String OSM_USER = "user";
-    public static final String DISPLAY_NAME = "display_name";
 
     private final OsmandApplication app;
     private final OsmOAuthAuthorizationClient client;
@@ -173,25 +171,12 @@ public class OsmOAuthAuthorizationAdapter {
 
         public String getUserName() throws InterruptedException, ExecutionException, IOException, XmlPullParserException {
             Response response = getOsmUserDetails();
-            return parseUserName(response);
+            return OsmBugsRemoteUtil.parseUserName(response.getStream());
         }
 
         public Response getOsmUserDetails() throws InterruptedException, ExecutionException, IOException {
             String osmUserDetailsUrl = app.getSettings().getOsmUrl() + "api/0.6/user/details";
             return performRequest(osmUserDetailsUrl, Verb.GET.name(), null);
-        }
-
-        public String parseUserName(Response response) throws XmlPullParserException, IOException {
-            String userName = null;
-            XmlPullParser parser = PlatformUtil.newXMLPullParser();
-            parser.setInput(response.getStream(), "UTF-8");
-            int tok;
-            while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-                if (tok == XmlPullParser.START_TAG && OSM_USER.equals(parser.getName())) {
-                    userName = parser.getAttributeValue("", DISPLAY_NAME);
-                }
-            }
-            return userName;
         }
     }
 }

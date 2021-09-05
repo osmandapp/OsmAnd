@@ -8,7 +8,6 @@ import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.osm.oauth.OsmOAuthAuthorizationClient;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.oauth.OsmOAuthAuthorizationAdapter;
@@ -16,21 +15,28 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
 
+import androidx.annotation.NonNull;
+
 public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
 	private static final Log log = PlatformUtil.getLog(OsmBugsRemoteUtil.class);
+
 	private static final String GET = "GET";
 	private static final String POST = "POST";
+
+	private static final String OSM_USER = "user";
+	public static final String DISPLAY_NAME = "display_name";
 
 	String getNotesApi() {
 		return settings.getOsmUrl() + "api/0.6/notes";
@@ -63,25 +69,25 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		String msg = "";
 		try {
 			if (action == OsmPoint.Action.CREATE) {
-				b.append(getNotesApi()).append("?"); //$NON-NLS-1$
-				b.append("lat=").append(point.getLatitude()); //$NON-NLS-1$
-				b.append("&lon=").append(point.getLongitude()); //$NON-NLS-1$
-				b.append("&text=").append(URLEncoder.encode(text, "UTF-8")); //$NON-NLS-1$
-				msg = "creating bug";
+				b.append(getNotesApi()).append("?");
+				b.append("lat=").append(point.getLatitude());
+				b.append("&lon=").append(point.getLongitude());
+				b.append("&text=").append(URLEncoder.encode(text, "UTF-8"));
+				msg = "Creating bug";
 			} else {
 				b.append(getNotesApi()).append("/");
-				b.append(point.getId()); //$NON-NLS-1$
+				b.append(point.getId());
 				if (action == OsmPoint.Action.REOPEN) {
 					b.append("/reopen");
-					msg = "reopen note";
+					msg = "Reopening note";
 				} else if (action == OsmPoint.Action.MODIFY) {
 					b.append("/comment");
-					msg = "adding comment";
+					msg = "Adding comment";
 				} else if (action == OsmPoint.Action.DELETE) {
 					b.append("/close");
-					msg = "close note";
+					msg = "Closing note";
 				}
-				b.append("?text=").append(URLEncoder.encode(text, "UTF-8")); //$NON-NLS-1$
+				b.append("?text=").append(URLEncoder.encode(text, "UTF-8"));
 			}
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
@@ -96,7 +102,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	}
 
 	public OsmBugResult validateLoginDetails() {
-		return editingPOI(getUserDetailsApi(), GET, "validate_login", false);
+		return editingPOI(getUserDetailsApi(), GET, "Validating login", false);
 	}
 
 	private OsmBugResult editingPOI(String url, String requestMethod, String userOperation, boolean anonymous) {
@@ -106,32 +112,25 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			try {
 				result = performOAuthRequest(url, requestMethod, userOperation, authorizationAdapter);
 			} catch (InterruptedException | ExecutionException | IOException e) {
-				log.error(e);
+				log.error(userOperation + " failed", e);
 				result.warning = e.getMessage();
 			}
 		} else {
 			try {
-				result = performBasicRequest(url, requestMethod, anonymous);
-			} catch (FileNotFoundException | NullPointerException e) {
-				// that's tricky case why NPE is thrown to fix that problem httpClient could be used
-				String msg = app.getString(R.string.auth_failed);
-				log.error(msg, e);
-				result.warning = app.getString(R.string.auth_failed) + "";
-			} catch (MalformedURLException e) {
-				log.error(userOperation + " " + app.getString(R.string.failed_op), e);
-				result.warning = e.getMessage() + "";
-			} catch (IOException e) {
-				log.error(userOperation + " " + app.getString(R.string.failed_op), e);
-				result.warning = e.getMessage() + " link unavailable";
+				result = performBasicRequest(url, requestMethod, userOperation, anonymous);
+			} catch (NullPointerException | IOException e) {
+				log.error(userOperation + " failed", e);
+				result.warning = e.getMessage();
 			}
 		}
 		return result;
 	}
 
-	private OsmBugResult performBasicRequest(String url, String requestMethod, boolean anonymous) throws IOException {
+	private OsmBugResult performBasicRequest(String url, String requestMethod, String userOperation, boolean anonymous)
+			throws IOException {
 		OsmBugResult result = new OsmBugResult();
 		HttpURLConnection connection = NetworkUtils.getHttpURLConnection(url);
-		log.info("Editing poi " + url);
+		log.info(userOperation + " " + url);
 		connection.setConnectTimeout(15000);
 		connection.setRequestMethod(requestMethod);
 		connection.setRequestProperty("User-Agent", Version.getFullVersion(app));
@@ -151,8 +150,16 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 		if (connection.getResponseCode() == HttpURLConnection.HTTP_CONFLICT) {
 			responseBody = Algorithms.readFromInputStream(connection.getErrorStream());
 		} else {
-			responseBody = Algorithms.readFromInputStream(connection.getInputStream());
-			result.userName = fetchUserName(responseBody.toString());
+			InputStream inputStream = Algorithms.createByteArrayIS(connection.getInputStream());
+			responseBody = Algorithms.readFromInputStream(inputStream);
+			if (!anonymous) {
+				inputStream.reset();
+				try {
+					result.userName = parseUserName(inputStream);
+				} catch (IOException | XmlPullParserException e) {
+					log.error(e);
+				}
+			}
 		}
 		log.info("Response : " + responseBody);
 		connection.disconnect();
@@ -160,18 +167,6 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			result.warning = msg + "\n" + responseBody;
 		}
 		return result;
-	}
-
-	private String fetchUserName(String response) {
-		String userNameTag = OsmOAuthAuthorizationAdapter.DISPLAY_NAME + "=\"";
-		int userNameTagStart = response.indexOf(userNameTag);
-		if (userNameTagStart == -1) {
-			return "";
-		} else {
-			int userNameStart = userNameTagStart + userNameTag.length();
-			int userNameEnd = response.indexOf("\"", userNameStart);
-			return userNameEnd == -1 ? "" : response.substring(userNameStart, userNameEnd);
-		}
 	}
 
 	private OsmBugResult performOAuthRequest(String url, String requestMethod, String userOperation,
@@ -184,5 +179,18 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			result.warning = response.getMessage() + "\n" + response.getBody();
 		}
 		return result;
+	}
+
+	public static String parseUserName(@NonNull InputStream inputStream) throws XmlPullParserException, IOException {
+		String userName = null;
+		XmlPullParser parser = PlatformUtil.newXMLPullParser();
+		parser.setInput(inputStream, "UTF-8");
+		int tok;
+		while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+			if (tok == XmlPullParser.START_TAG && OSM_USER.equals(parser.getName())) {
+				userName = parser.getAttributeValue("", DISPLAY_NAME);
+			}
+		}
+		return userName;
 	}
 }
