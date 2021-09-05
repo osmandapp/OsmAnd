@@ -137,7 +137,7 @@ public class MapMarkersGroup {
 	@Nullable
 	public String getWptCategoriesString() {
 		if (wptCategories != null) {
-			return Algorithms.encodeStringSet(wptCategories);
+			return Algorithms.encodeCollection(wptCategories);
 		}
 		return null;
 	}

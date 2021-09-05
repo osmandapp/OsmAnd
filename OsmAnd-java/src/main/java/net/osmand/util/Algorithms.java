@@ -326,15 +326,15 @@ public class Algorithms {
 		return new HashSet<>(Arrays.asList(s.split(split)));
 	}
 
-	public static String encodeStringSet(Set<String> set) {
-		return encodeStringSet(set, String.valueOf(CHAR_TO_SPLIT));
+	public static <T> String encodeCollection(Collection<T> collection) {
+		return encodeCollection(collection, String.valueOf(CHAR_TO_SPLIT));
 	}
 
-	public static String encodeStringSet(Set<String> set, String split) {
-		if (set != null) {
+	public static <T> String encodeCollection(Collection<T> collection, String split) {
+		if (collection != null) {
 			StringBuilder sb = new StringBuilder();
-			for (String s : set) {
-				sb.append(s).append(split);
+			for (T item : collection) {
+				sb.append(item).append(split);
 			}
 			return sb.toString();
 		}

@@ -801,7 +801,7 @@ public class OsmandSettings {
 			if (!nonexistentAppModesKeys.isEmpty()) {
 				appModesKeys.removeAll(nonexistentAppModesKeys);
 			}
-			set(parseString(Algorithms.encodeStringSet(appModesKeys, ",")));
+			set(parseString(Algorithms.encodeCollection(appModesKeys, ",")));
 		}
 
 	}.makeGlobal().makeShared().cache();
