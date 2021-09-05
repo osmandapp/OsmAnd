@@ -48,7 +48,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 		userNameEditText = view.findViewById(R.id.name_edit_text);
 		passwordEditText = view.findViewById(R.id.password_edit_text);
 
-		String name = app.getSettings().OSM_USER_NAME.get();
+		String name = app.getSettings().OSM_USER_NAME_OR_EMAIL.get();
 		String password = app.getSettings().OSM_USER_PASSWORD.get();
 
 		if (savedInstanceState != null) {
@@ -95,7 +95,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = requiredMyApplication();
 
-		app.getSettings().OSM_USER_NAME.set(userNameEditText.getText().toString());
+		app.getSettings().OSM_USER_NAME_OR_EMAIL.set(userNameEditText.getText().toString());
 		app.getSettings().OSM_USER_PASSWORD.set(passwordEditText.getText().toString());
 
 		Fragment targetFragment = getTargetFragment();

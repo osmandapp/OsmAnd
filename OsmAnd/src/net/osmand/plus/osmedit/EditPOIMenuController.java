@@ -52,7 +52,7 @@ public class EditPOIMenuController extends MenuController {
 					OsmandSettings settings = app.getSettings();
 					OsmOAuthAuthorizationAdapter client = new OsmOAuthAuthorizationAdapter(app);
 					boolean isLogged = client.isValidToken()
-							|| !Algorithms.isEmpty(settings.OSM_USER_NAME.get())
+							|| !Algorithms.isEmpty(settings.OSM_USER_NAME_OR_EMAIL.get())
 							&& !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
 
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
