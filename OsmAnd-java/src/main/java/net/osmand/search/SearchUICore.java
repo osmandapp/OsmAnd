@@ -4,6 +4,7 @@ import net.osmand.Collator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.CommonWords;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
@@ -33,20 +34,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static net.osmand.search.core.SearchPhrase.DELIMITER;
+import static net.osmand.search.core.SearchResult.deletedCommonWords;
 
 public class SearchUICore {
 
@@ -202,24 +197,52 @@ public class SearchUICore {
 
 		private void filterSearchDuplicateResults(List<SearchResult> lst) {
 			ListIterator<SearchResult> it = lst.listIterator();
-			LinkedList<SearchResult> lstUnique = new LinkedList<SearchResult>();
+			List<Integer> indLst = new ArrayList<>();
+			LinkedList<SearchResult> lstUnique = new LinkedList<>();
 			while (it.hasNext()) {
 				SearchResult r = it.next();
 				boolean same = false;
+				int numberBuildingsLstUnique = 0;
+				int numberBuildingsIt = 0;
+				int indResultLst = 0;
+				int indUniqueLst = 0;
+
 				for (SearchResult rs : lstUnique) {
 					same = sameSearchResult(rs, r);
-					if (same) {
+					if(same) {
+						if(rs.objectType == r.objectType && rs.objectType == ObjectType.STREET) {
+							numberBuildingsLstUnique = ((Street) rs.object).getBuildings().size();
+							numberBuildingsIt = ((Street) r.object).getBuildings().size();
+							indResultLst = lst.indexOf(rs);
+							indUniqueLst = lstUnique.indexOf(rs);
+						}
 						break;
 					}
 				}
+
 				if (same) {
-					it.remove();
+					if (r.objectType == ObjectType.STREET && lst.get(indResultLst).objectType == r.objectType) {
+						if (numberBuildingsLstUnique >= numberBuildingsIt) {
+							indLst.add(lst.indexOf(r));
+						} else {
+							indLst.add(indResultLst);
+							lstUnique.remove(indUniqueLst);
+							lstUnique.add(r);
+						}
+					} else {
+						indLst.add(lst.indexOf(r));
+					}
 				} else {
 					lstUnique.add(r);
 					if (lstUnique.size() > DEPTH_TO_CHECK_SAME_SEARCH_RESULTS) {
 						lstUnique.remove(0);
 					}
 				}
+			}
+
+			Collections.reverse(indLst);
+			for (int ind : indLst) {
+				lst.remove(ind);
 			}
 		}
 
@@ -230,7 +253,7 @@ public class SearchUICore {
 					if (r1.objectType == ObjectType.STREET) {
 						Street st1 = (Street) r1.object;
 						Street st2 = (Street) r2.object;
-						return st1.getLocation().equals(st2.getLocation());
+						return st1.getLocation().equals(st2.getLocation()) || compareNames(r1, r2);
 					}
 				} 
 				Amenity a1 = null;
@@ -277,6 +300,52 @@ public class SearchUICore {
 				return r1.object == r2.object;
 			}
 			return false;
+		}
+
+		private static boolean compareNames(SearchResult r1, SearchResult r2) {
+			String name1 = ((Street) r1.object).getName();
+			String name2 = ((Street) r2.object).getName();
+
+			if (equalNames(name1, name2, r1, r2) || equalNames(name2, name1, r1, r2)) {
+				return true;
+			} else {
+				for (String n1 : getLocaleStreetNames(r1)) {
+					for (String n2 : getLocaleStreetNames(r2)) {
+						if (equalNames(n1, n2, r1, r2) || equalNames(name2, name1, r1, r2)) {
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		}
+
+		private static boolean equalNames(String name1, String name2, SearchResult r1, SearchResult r2) {
+			if (name1 != null
+					&& name1.equalsIgnoreCase(name2)
+					&& ((Street) r1.object).getCity().getName().equals(((Street) r2.object).getCity().getName())) {
+				return true;
+			} else return CommonWords.getCommon(name1) > 0
+					&& CommonWords.getCommon(name2) == -1
+					&& deletedCommonWords(name1) != null
+					&& deletedCommonWords(name1).equalsIgnoreCase(name2)
+					&& ((Street) r1.object).getCity().getName().equals(((Street) r2.object).getCity().getName())
+					&& MapUtils.getDistance(r1.location, r2.location) < 2000;
+		}
+
+		private static List<String> getLocaleStreetNames(SearchResult searchResult) {
+			List<String> locNames = new ArrayList<>();
+			Map<String, String> names = ((Street) searchResult.object).getNamesMap(true);
+
+			for (Map.Entry<String, String> entry : names.entrySet()) {
+				if (!entry.getKey().contains("old")) {
+					locNames.add(entry.getValue());
+				}
+			}
+			if (names.isEmpty()) {
+				locNames.add(((Street) searchResult.object).getName());
+			}
+			return locNames;
 		}
 	}
 

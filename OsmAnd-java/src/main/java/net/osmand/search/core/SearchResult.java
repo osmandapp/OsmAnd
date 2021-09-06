@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.CommonWords;
 import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.Street;
@@ -14,6 +15,8 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
+import static net.osmand.search.core.SearchPhrase.DELIMITER;
 
 public class SearchResult {
 	// search phrase that makes search result valid
@@ -64,10 +67,10 @@ public class SearchResult {
 	private double getSumPhraseMatchWeight() {
 		// if result is a complete match in the search we prioritize it higher
 		List<String> searchPhraseNames = getSearchPhraseNames();
-		boolean allWordsMatched = allWordsMatched(SearchPhrase.splitWords(localeName, new ArrayList<String>()), searchPhraseNames);
+		boolean allWordsMatched = allWordsMatched(SearchPhrase.splitWords(deletedCommonWords(localeName), new ArrayList<String>()), searchPhraseNames);
 		if (otherNames != null && !allWordsMatched) {
 			for (String otherName : otherNames) {
-				allWordsMatched = allWordsMatched(SearchPhrase.splitWords(otherName, new ArrayList<String>()), searchPhraseNames);
+				allWordsMatched = allWordsMatched(SearchPhrase.splitWords(deletedCommonWords(otherName), new ArrayList<String>()), searchPhraseNames);
 				if (allWordsMatched) {
 					break;
 				}
@@ -88,6 +91,24 @@ public class SearchResult {
 		return res;
 	}
 
+	public static String deletedCommonWords(String name) {
+		if (name != null) {
+			List<String> res = new ArrayList<>();
+			String[] words = name.split(DELIMITER);
+			for (String word : words) {
+				if (CommonWords.getCommon(word) == -1) {
+					res.add(word);
+				}
+			}
+			StringBuilder sb = new StringBuilder();
+			for (String s : res) {
+				sb.append(s).append(DELIMITER);
+			}
+			return sb.toString().trim();
+		}
+		return null;
+	}
+
 	public int getDepth() {
 		if (parentSearchResult != null) {
 			return 1 + parentSearchResult.getDepth();
@@ -104,7 +125,7 @@ public class SearchResult {
 	}
 
 	private boolean allWordsMatched(List<String> localResultNames, List<String> searchPhraseNames) {
-		if (searchPhraseNames.size() == 0) {
+		if (searchPhraseNames.isEmpty()) {
 			return false;
 		}
 		int idxMatchedWord = -1;
@@ -112,7 +133,7 @@ public class SearchResult {
 			
 			boolean wordMatched = false;
 			for (int i = idxMatchedWord + 1; i < localResultNames.size(); i++) {
-				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName, localResultNames.get(i));
+				int r = requiredSearchPhrase.getCollator().compare(searchPhraseName.toLowerCase(), localResultNames.get(i).toLowerCase());
 				if (r == 0) {
 					wordMatched = true;
 					idxMatchedWord = i;
@@ -129,13 +150,15 @@ public class SearchResult {
 	private List<String> getSearchPhraseNames() {
 		List<String> searchPhraseNames = new ArrayList<>();
 
-		String fw = requiredSearchPhrase.getFirstUnknownSearchWord();
+		String fw = deletedCommonWords(requiredSearchPhrase.getFirstUnknownSearchWord());
 		List<String> ow = requiredSearchPhrase.getUnknownSearchWords();
 		if (fw != null && fw.length() > 0) {
 			searchPhraseNames.add(fw);
 		}
 		if (ow != null) {
-			searchPhraseNames.addAll(ow);
+			for (String name : ow) {
+				searchPhraseNames.add(deletedCommonWords(name));
+			}
 		}
 
 		return searchPhraseNames;

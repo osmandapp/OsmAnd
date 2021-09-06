@@ -146,7 +146,7 @@ public class SearchCoreFactory {
 			subSearchApiOrPublish(phrase, resultMatcher, res, api, true);
 		}
 
-		protected void subSearchApiOrPublish(SearchPhrase phrase, SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
+		protected void subSearchApiOrPublish(SearchPhrase phrase, final SearchResultMatcher resultMatcher, SearchResult res, SearchBaseAPI api,
 											 boolean publish)
 				throws IOException {
 			phrase.countUnknownWordsMatchMainResult(res);
@@ -175,6 +175,22 @@ public class SearchCoreFactory {
 					firstUnknownWordMatches = true;
 					match = true;
 				}
+
+				SearchRequest<Building> sr = BinaryMapIndexReader
+						.buildAddressRequest(new ResultMatcher<Building>() {
+
+							@Override
+							public boolean publish(Building object) {
+								return true;
+							}
+
+							@Override
+							public boolean isCancelled() {
+								return resultMatcher.isCancelled();
+							}
+						});
+				res.file.preloadBuildings((Street) res.object, sr);
+
 				if (cityResult.otherWordsMatch != null) {
 					Iterator<String> iterator = cityResult.otherWordsMatch.iterator();
 					while (iterator.hasNext()) {

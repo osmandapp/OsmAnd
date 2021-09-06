@@ -9,7 +9,6 @@ import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.*;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,16 +19,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.xmlpull.v1.XmlPullParserException;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.GZIPInputStream;
 
