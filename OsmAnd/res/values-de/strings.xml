@@ -4324,4 +4324,6 @@
     <string name="routeInfo_smoothness_description">Bietet ein Klassifizierungsschema für die physische Nutzbarkeit eines Weges für Radfahrzeuge, insbesondere hinsichtlich der Regelmäßigkeit/Ebenheit der Oberfläche.</string>
     <string name="routeInfo_surface_description">Zusätzliche Informationen über die Oberfläche von Straßen/Fußwegen anbieten.</string>
     <string name="routeInfo_roadClass_description">Färbt die Route oder den Track entsprechend der Straßenklassifikation ein.</string>
+    <string name="add_group_to_markers">Gruppe zu Markerliste hinzufügen</string>
+    <string name="remove_group_from_markers">Gruppe von Markerliste entfernen</string>
 </resources>

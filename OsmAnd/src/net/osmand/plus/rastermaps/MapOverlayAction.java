@@ -60,6 +60,11 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
+	public String getDisabledItem(OsmandApplication app) {
+		return KEY_NO_OVERLAY;
+	}
+
+	@Override
 	public String getSelectedItem(OsmandApplication app) {
 		String mapOverlay = app.getSettings().MAP_OVERLAY.get();
 		return mapOverlay != null ? mapOverlay : KEY_NO_OVERLAY;

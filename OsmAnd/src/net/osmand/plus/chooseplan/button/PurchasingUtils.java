@@ -1,11 +1,6 @@
 package net.osmand.plus.chooseplan.button;
 
-import android.graphics.Color;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -24,77 +19,40 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 public class PurchasingUtils {
 
-	public static String PROMO_PREFIX = "promo_";
+	public static final String PROMO_PREFIX = "promo_";
 
 	public static List<SubscriptionButton> collectSubscriptionButtons(OsmandApplication app,
-																	  InAppPurchaseHelper purchaseHelper,
-																	  List<InAppSubscription> subscriptions) {
+	                                                                  InAppPurchaseHelper purchaseHelper,
+	                                                                  List<InAppSubscription> subscriptions,
+	                                                                  boolean nightMode) {
+		int priceColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		List<SubscriptionButton> priceButtons = new ArrayList<>();
-		InAppSubscription maxDiscountSubscription = null;
-		double maxDiscount = 0;
-		boolean anyPurchased = false;
-		for (InAppSubscription s : subscriptions) {
-			if (s.isPurchased()) {
-				anyPurchased = true;
-			}
-			double discount = s.getDiscountPercent(purchaseHelper.getMonthlyLiveUpdates());
-			if (discount > maxDiscount) {
-				maxDiscountSubscription = s;
-				maxDiscount = discount;
-			}
-		}
-		boolean maxDiscountAction = maxDiscountSubscription != null && maxDiscountSubscription.hasDiscountOffer();
+
 		for (InAppSubscription s : subscriptions) {
 			InAppSubscriptionIntroductoryInfo introductoryInfo = s.getIntroductoryInfo();
 			boolean hasIntroductoryInfo = introductoryInfo != null;
-			CharSequence descriptionText = s.getDescription(app);
-			if (s.isPurchased()) {
-				SubscriptionButton priceBtn = new SubscriptionButton(s.getSkuNoVersion(), s);
-				priceBtn.setTitle(s.getTitle(app));
+			SubscriptionButton priceBtn = new SubscriptionButton(s.getSkuNoVersion(), s);
+			priceBtn.setTitle(s.getTitle(app));
 
-				boolean showSolidButton = !anyPurchased
-						&& (!maxDiscountAction || hasIntroductoryInfo || maxDiscountSubscription.isUpgrade());
-				int descriptionColor = Color.RED; // tvTitle.getCurrentTextColor();
-				// todo
-				// showSolidButton ? buttonExTitle.getCurrentTextColor() : buttonTitle.getCurrentTextColor();
-				CharSequence priceTitle = hasIntroductoryInfo ?
-						introductoryInfo.getFormattedDescription(app, descriptionColor) : s.getPriceWithPeriod(app);
-				priceBtn.setPrice(priceTitle);
+			CharSequence priceTitle = hasIntroductoryInfo ?
+					introductoryInfo.getFormattedDescription(app, priceColor) : s.getPriceWithPeriod(app);
+			priceBtn.setPrice(priceTitle);
 
-				String discount = s.getDiscount(purchaseHelper.getMonthlyLiveUpdates());
-				if (!Algorithms.isEmpty(discount)) {
-					priceBtn.setDiscount(discount);
+			String discount = s.getDiscount(purchaseHelper.getMonthlyLiveUpdates());
+			if (!Algorithms.isEmpty(discount)) {
+				priceBtn.setDiscount(discount);
 
-					String regularPrice = s.getRegularPrice(app, purchaseHelper.getMonthlyLiveUpdates());
-					priceBtn.setRegularPrice(regularPrice);
-				}
-
-				priceButtons.add(priceBtn);
-			} else {
-				SubscriptionButton priceBtn = new SubscriptionButton(s.getSkuNoVersion(), s);
-				priceBtn.setTitle(s.getTitle(app));
-
-				boolean showSolidButton = !anyPurchased
-						&& (!maxDiscountAction || hasIntroductoryInfo || maxDiscountSubscription.isUpgrade());
-				int descriptionColor = Color.RED; // tvTitle.getCurrentTextColor();
-				// todo
-				// showSolidButton ? buttonExTitle.getCurrentTextColor() : buttonTitle.getCurrentTextColor();
-				CharSequence priceTitle = hasIntroductoryInfo ?
-						introductoryInfo.getFormattedDescription(app, descriptionColor) : s.getPriceWithPeriod(app);
-				priceBtn.setPrice(priceTitle);
-
-				String discount = s.getDiscount(purchaseHelper.getMonthlyLiveUpdates());
-				if (!Algorithms.isEmpty(discount)) {
-					priceBtn.setDiscount(discount);
-
-					String regularPrice = s.getRegularPrice(app, purchaseHelper.getMonthlyLiveUpdates());
-					priceBtn.setRegularPrice(regularPrice);
-				}
-
-				priceButtons.add(priceBtn);
+				String regularPrice = s.getRegularPrice(app, purchaseHelper.getMonthlyLiveUpdates());
+				priceBtn.setRegularPrice(regularPrice);
 			}
+
+			priceButtons.add(priceBtn);
 		}
 		return priceButtons;
 	}

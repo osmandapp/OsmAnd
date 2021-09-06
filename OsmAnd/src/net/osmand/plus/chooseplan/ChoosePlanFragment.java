@@ -212,7 +212,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	}
 
 	private void updateContinueButtons() {
-		List<PriceButton<?>> priceButtons = OsmAndProPlanFragment.collectPriceButtons(app, purchaseHelper);
+		List<PriceButton<?>> priceButtons = OsmAndProPlanFragment.collectPriceButtons(app, purchaseHelper, nightMode);
 		PriceButton<?>[] array = new PriceButton[priceButtons.size()];
 		priceButtons.toArray(array);
 
@@ -227,7 +227,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 				v -> OsmAndProPlanFragment.showInstance(requireActivity()),
 				Version.isInAppPurchaseSupported());
 
-		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper);
+		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper, nightMode);
 		array = new PriceButton[priceButtons.size()];
 		priceButtons.toArray(array);
 

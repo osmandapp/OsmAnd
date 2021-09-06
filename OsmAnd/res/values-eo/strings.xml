@@ -4318,4 +4318,6 @@
     <string name="routeInfo_smoothness_description">Klasifikas vojojn laŭ ilia uzeblo por radveturiloj: glateco kaj krateretoj.</string>
     <string name="routeInfo_surface_description">Liveras aldonajn informojn pri ŝosea kovro de voj(et)oj.</string>
     <string name="routeInfo_roadClass_description">Linio de spuro aŭ kurso estas kolorigata laŭ speco de vojo.</string>
+    <string name="add_group_to_markers">Aldoni grupon al la listo de map-markoj</string>
+    <string name="remove_group_from_markers">Forigi grupon el la listo de map-markoj</string>
 </resources>

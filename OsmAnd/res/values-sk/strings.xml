@@ -4315,4 +4315,6 @@
     <string name="routeInfo_smoothness_description">Poskytuje klasifikačnú schému podľa fyzickej použiteľnosti cesty pre kolesové vozidlá, najmä vzhľadom na pravidelnosť/rovnosť povrchu.</string>
     <string name="routeInfo_surface_description">Poskytuje ďalšiu informáciu o fyzickom povrchu ciest/chodníkov.</string>
     <string name="routeInfo_roadClass_description">Zafarbenie trasy alebo stopy podľa klasifikácie cesty.</string>
+    <string name="add_group_to_markers">Pridať skupinu do zoznamu značiek</string>
+    <string name="remove_group_from_markers">Odstrániť skupinu zo zoznamu značiek</string>
 </resources>

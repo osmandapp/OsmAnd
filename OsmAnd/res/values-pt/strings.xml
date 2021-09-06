@@ -4325,4 +4325,6 @@
     <string name="routeInfo_smoothness_description">Fornece um esquema de classificação em relação à usabilidade física de uma via para veículos com rodas, particularmente em relação à regularidade / planicidade da superfície.</string>
     <string name="routeInfo_surface_description">Fornece informações adicionais sobre a superfície física das estradas/caminhos pedonais.</string>
     <string name="routeInfo_roadClass_description">Colorir a rota ou a linha da via de acordo com a classificação da estrada.</string>
+    <string name="add_group_to_markers">Adicionar grupo à lista de marcadores</string>
+    <string name="remove_group_from_markers">Remover grupo da lista de marcadores</string>
 </resources>

@@ -8,6 +8,8 @@ import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -247,7 +250,9 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	private void updateButtons() {
 		for (PriceButton<?> key : buttonViews.keySet()) {
 			View itemView = buttonViews.get(key);
-			if (itemView == null) continue;
+			if (itemView == null) {
+				continue;
+			}
 
 			ImageView ivCheckmark = itemView.findViewById(R.id.icon);
 
@@ -268,12 +273,36 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 			}
 			setupRoundedBackground(itemView, normal, colorNoAlpha, ButtonBackground.ROUNDED);
 		}
+		updateSelectedPriceButton();
+	}
 
+	private void updateSelectedPriceButton() {
 		if (selectedPriceButton != null) {
 			View applyButton = mainView.findViewById(R.id.apply_button);
 			TextView tvPrice = applyButton.findViewById(R.id.description);
-			tvPrice.setText(selectedPriceButton.getPrice());
+			CharSequence price = selectedPriceButton.getPrice();
+			if (price instanceof SpannableStringBuilder) {
+				SpannableStringBuilder formattedPrice = (SpannableStringBuilder) price;
+				ForegroundColorSpan[] textColorSpans =
+						formattedPrice.getSpans(0, formattedPrice.length(), ForegroundColorSpan.class);
+				int textColor = ((TextView) applyButton.findViewById(R.id.title)).getCurrentTextColor();
+				if (textColorSpans.length > 0) {
+					updateSpanColor(formattedPrice, textColorSpans[0], textColor);
+				}
+				if (textColorSpans.length > 1) {
+					int semiTransparentTextColor = ColorUtilities.getColorWithAlpha(textColor, 0.5f);
+					updateSpanColor(formattedPrice, textColorSpans[1], semiTransparentTextColor);
+				}
+			}
+			tvPrice.setText(price);
 		}
+	}
+
+	private void updateSpanColor(SpannableStringBuilder spannable, ForegroundColorSpan span, @ColorInt int color) {
+		int start = spannable.getSpanStart(span);
+		int end = spannable.getSpanEnd(span);
+		spannable.removeSpan(span);
+		spannable.setSpan(new ForegroundColorSpan(color), start, end, 0);
 	}
 
 	private void setupApplyButton() {

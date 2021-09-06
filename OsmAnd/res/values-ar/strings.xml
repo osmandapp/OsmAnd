@@ -4389,4 +4389,6 @@
     <string name="routeInfo_smoothness_description">يوفر نظام تصنيف بشأن الاستخدام المادي لطريق المركبات ذات العجلات، لا سيما فيما يتعلق بانتظام السطح / وتسطيحه.</string>
     <string name="routeInfo_surface_description">تقديم معلومات إضافية حول السطح المادي للطرق/ممرات المشاة.</string>
     <string name="routeInfo_roadClass_description">تلوين الطريق أو خط المسار وفقا لتصنيف الطرق.</string>
+    <string name="add_group_to_markers">إضافة مجموعة إلى قائمة العلامات</string>
+    <string name="remove_group_from_markers">إزالة المجموعة من قائمة العلامات</string>
 </resources>
