@@ -361,11 +361,11 @@
     <string name="sd_mounted_ro">La carte mémoire est en lecture seule.
 \nSeules les cartes déjà installées seront accessibles.</string>
     <string name="unzipping_file">Décompression du fichier…</string>
-    <string name="route_tr">Tournez à droite et continuez</string>
-    <string name="route_tshr">Tournez franchement à droite et continuez</string>
+    <string name="route_tr">Tournez à droite</string>
+    <string name="route_tshr">Tournez franchement à droite</string>
     <string name="route_tslr">Tournez légèrement vers la droite et continuez</string>
-    <string name="route_tl">Tournez à gauche et continuez</string>
-    <string name="route_tshl">Tournez franchement à gauche et continuez</string>
+    <string name="route_tl">Tournez à gauche</string>
+    <string name="route_tshl">Tournez franchement à gauche</string>
     <string name="route_tsll">Tournez légèrement vers la gauche et continuez</string>
     <string name="route_tu">Faites demi-tour et continuez</string>
     <string name="route_head">Avancez</string>
@@ -680,8 +680,8 @@
     <string name="transport_search_desc">Recherche de transports publics</string>
     <string name="favourites_search_desc">Recherche dans les favoris</string>
     <string name="route_roundabout">Giratoire : prenez la sortie %1$d puis continuez</string>
-    <string name="route_kl">Serrez à gauche et continuez</string>
-    <string name="route_kr">Serrez à droite et continuez</string>
+    <string name="route_kl">Serrez à gauche</string>
+    <string name="route_kr">Serrez à droite</string>
     <string name="rendering_attr_noPolygons_description">Rendre invisibles les surfaces représentant des éléments de terrain.</string>
     <string name="rendering_attr_noPolygons_name">Polygones</string>
     <string name="rendering_attr_appMode_name">Profil pour l\'affichage</string>
@@ -1269,8 +1269,8 @@
     <string name="rendering_attr_subwayMode_name">Lignes de métro</string>
     <string name="rendering_attr_alpineHiking_name">Difficulté des chemins de randonnée (échelle CAS)</string>
     <string name="rendering_attr_alpineHiking_description">Afficher la difficulté des chemins selon l\'échelle du CAS.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Chemins de randonnée</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Afficher les chemins de randonnée d\'après les traces OSMC.</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Itinéraires de randonnée</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Rendu des itinéraires de randonnée d\'après OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Bâtiments colorés par type</string>
     <string name="arrival_distance_factor_early">Tôt</string>
     <string name="arrival_distance_factor_normally">Normal</string>
@@ -1337,7 +1337,7 @@
     <string name="rendering_category_routes">Chemins</string>
     <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
     <string name="rendering_attr_trolleybusRoutes_name">Lignes de trolleybus</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Itinéraires de chemin de fer</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Lignes de chemin de fer</string>
     <string name="rendering_attr_tramRoutes_name">Lignes de tram</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Voies partagées pour les taxis</string>
     <string name="rendering_attr_tramTrainRoutes_name">Lignes de tram et train</string>
@@ -1530,7 +1530,7 @@
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Affiliation de l\'itinéraire</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Affiliation au réseau</string>
     <string name="osm_edit_context_menu_delete">Supprimer la modification OSM</string>
     <string name="shared_string_show_details">Afficher les détails</string>
     <string name="read_full_article">Lire l\'article complet (en ligne)</string>
@@ -1787,7 +1787,7 @@
     <string name="looking_up_address">Recherche de l\'adresse</string>
     <string name="only_download_over_wifi">Télécharger uniquement en WiFi</string>
     <string name="live_update">Mise à jour en temps réel</string>
-    <string name="rendering_attr_horseRoutes_name">Randonnée à cheval</string>
+    <string name="rendering_attr_horseRoutes_name">Itinéraires à cheval</string>
     <string name="update_now">Mettre à jour maintenant</string>
     <string name="route_distance">Distance :</string>
     <string name="route_duration">Durée :</string>
@@ -1985,7 +1985,7 @@
     <string name="skip_map_downloading_desc">Aucune carte hors ligne n\'est installée. Vous pouvez sélectionner une carte dans la liste ou télécharger une carte plus tard depuis le menu « %1$s ».</string>
     <string name="search_another_country">Sélectionner une autre région</string>
     <string name="search_map">Recherche des cartes …</string>
-    <string name="first_usage_wizard_desc">Autoriser OsmAnd à vous localiser et à vous suggérer le téléchargement des cartes de la région.</string>
+    <string name="first_usage_wizard_desc">Autoriser OsmAnd à vous localiser et à vous suggérer le téléchargement de la cartes de la région.</string>
     <string name="location_not_found">Position non trouvée</string>
     <string name="no_inet_connection">Aucune connexion Internet</string>
     <string name="no_inet_connection_desc_map">Indispensable pour télécharger des cartes.</string>
@@ -2384,7 +2384,7 @@
     <string name="measurement_tool">Mesurer une distance</string>
     <string name="show_on_map_after_saving">Afficher sur la carte après enregistrement</string>
     <string name="route_point_one">Point 1 de l\'itinéraire</string>
-    <string name="none_point_error">Veuillez ajouter au moins un point.</string>
+    <string name="none_point_error">Merci d\'ajouter au moins un point.</string>
     <string name="enter_gpx_name">Nom du fichier GPX :</string>
     <string name="waypoint_one">Étape 1</string>
     <string name="save_route_point">Enregistrer le point d\'itinéraire</string>
@@ -2962,9 +2962,9 @@
     <string name="osmand_default_routing">Routage OsmAnd</string>
     <string name="routing_attr_piste_type_skitour_description">Itinéraires de randonnée à ski.</string>
     <string name="routing_attr_allow_advanced_name">Autoriser les itinéraires avancés</string>
-    <string name="routing_attr_allow_advanced_description">Routes difficiles avec des passages dangereux et des pentes raides.</string>
+    <string name="routing_attr_allow_advanced_description">Itinéraires difficiles, avec des obstacles dangereux et des sections escarpées.</string>
     <string name="routing_attr_allow_expert_name">Autoriser les itinéraires experts</string>
-    <string name="routing_attr_allow_expert_description">Routes extrêmement difficiles avec des obstacles et en environnement dangereux.</string>
+    <string name="routing_attr_allow_expert_description">Itinéraires extrêmement difficiles, avec des obstacles et des environnements dangereux.</string>
     <string name="routing_attr_freeride_policy_name">Hors-piste</string>
     <string name="process_downloading_service">Service de téléchargement OsmAnd</string>
     <string name="press_again_to_change_the_map_orientation">Appuyez à nouveau pour modifier l\'orientation de la carte</string>
@@ -3041,13 +3041,13 @@
     <string name="routing_attr_piste_type_sled_name">Traîneau</string>
     <string name="routing_attr_piste_type_sled_description">Pistes pour chiens de traîneau.</string>
     <string name="routing_attr_allow_intermediate_name">Autoriser les itinéraires intermédiaires</string>
-    <string name="routing_attr_allow_intermediate_description">Itinéraires plus difficiles avec des sections pentues et souvent des obstacles à contourner.</string>
+    <string name="routing_attr_allow_intermediate_description">Itinéraires plus difficiles avec des sections pentues avec des obstacles à contourner régulièrement.</string>
     <string name="routing_attr_allow_skating_only_name">Autoriser uniquement les pistes de skating</string>
     <string name="routing_attr_allow_skating_only_description">Pistes damées pour le skating, sans traces parallèles.</string>
     <string name="routing_attr_allow_classic_only_name">Autoriser uniquement les pistes classiques</string>
     <string name="routing_attr_allow_classic_only_description">Pistes de ski de fond (inclus les pistes tracées par le passage des skieurs).</string>
     <string name="routing_attr_difficulty_preference_name">Difficulté préférée</string>
-    <string name="routing_attr_difficulty_preference_description">Privilégier les itinéraires avec ce niveau de difficulté (un itinéraire plus difficile ou pus facile est toujours possible s\'il est plus court).</string>
+    <string name="routing_attr_difficulty_preference_description">Privilégier les itinéraires avec ce niveau de difficulté (le calcul d’un itinéraire plus difficile ou pus facile est toujours possible s\'il est plus court).</string>
     <string name="release_3_4">• Profils d\'application : créez un profil personnalisé pour vos propres besoins, avec une icône et une couleur personnalisées 
 \n 
 \n• Personnalisez maintenant les paramètres par défaut et la vitesse min/max de n\'importe quel profil 
@@ -3274,7 +3274,7 @@
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les nœuds du réseau cyclable</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les nœuds du réseau des itinéraires cyclable</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Nœud de réseaux</string>
     <string name="personal_category_name">Personnel</string>
     <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
@@ -4245,9 +4245,9 @@
 \n
 \nPeut-être que certaines cartes sont absentes.</string>
     <string name="pro_widgets">Widgets Pro</string>
-    <string name="routes_color_by_type">Couleur des itinéraires selon …</string>
+    <string name="routes_color_by_type">Couleur des itinéraires selon…</string>
     <string name="shared_string_relation">Relation</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_description">Couleur selon l\'affiliation de l\'itinéraire.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Couleur selon l\'affiliation au réseau.</string>
     <string name="travel_routes">Itinéraires de voyage</string>
     <string name="setting_supported_by_style">Ce paramètre est disponible avec le style de carte \"%1$s\"</string>
     <string name="online_direct_line_maps_link">Vérifier les cartes nécessaires.</string>
@@ -4266,8 +4266,8 @@
     <string name="option_available_only_in_osmand_pro">L\'option est disponible avec un abonnement OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Accédez aux fonctionnalités d\'OsmAnd Pro comme les itinéraires colorés et bien plus encore.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explorez les offres OsmAnd et trouvez celle qui vous convient.</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_description">Colorier les itinéraires en fonction du type de réseau (international, régional, local).</string>
-    <string name="walking_route_osmc_description">Colorer les itinéraires en fonction de leur couleur définie localement (si elle est connue d’OpenStreetMap) et du type d\'itinéraire (international, régional, local).</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Couleur des itinéraires en fonction du type de réseau (international, régional, local).</string>
+    <string name="walking_route_osmc_description">Couleur des itinéraires en fonction de leurs définitions locale (si elle est connue d’OpenStreetMap) et du type d\'itinéraire (international, régional, local).</string>
     <string name="backup_error_no_subscription">Aucun abonnement en cours</string>
     <string name="map_updates_for_mappers">Mises à jour des cartes pour les contributeurs OSM</string>
     <string name="benefits_for_contributors_primary_descr">Vous pouvez bénéficier de mises à jour horaires et illimitées des cartes à condition d\'être un contributeur actif d\'OpenStreetMap.</string>
