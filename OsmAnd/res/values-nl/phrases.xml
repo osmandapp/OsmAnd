@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_historic_mine">Historische mijn</string>
     <string name="poi_palaeontological_site">Paleontologische site</string>
@@ -74,7 +74,6 @@
     <string name="poi_ship_chandler">Scheepsuitrusting</string>
     <string name="poi_sports">Sportwinkel</string>
     <string name="poi_stationery">Kantoorboekhandel</string>
-    
     <string name="poi_ticket">Ticketwinkel</string>
     <string name="poi_tobacco">Tabakswinkel</string>
     <string name="poi_toys">Speelgoedwinkel</string>
@@ -458,7 +457,6 @@
     <string name="poi_pension_fund">Pensioenfonds</string>
     <string name="poi_migration">Migratie</string>
     <string name="poi_tax_inspection">Belastingsinspectie</string>
-    
     <string name="poi_speech_therapist">Logopedist</string>
     <string name="poi_healthcare_yes">Medische voorziening</string>
     <string name="poi_office_telecommunication">Telecommunicatiekantoor</string>
@@ -531,7 +529,7 @@
     <string name="poi_military_naval_base">Militaire marinebasis</string>
     <string name="poi_man_made">Kunstmatig</string>
     <string name="poi_service">Dienst</string>
-    <string name="poi_rugby_union">Rugby unie</string>
+    <string name="poi_rugby_union">Rugby union</string>
     <string name="poi_rugby_league">Rugby competitie</string>
     <string name="poi_toboggan">Rodelen</string>
     <string name="poi_artwork">Kunst</string>
@@ -730,7 +728,6 @@
     <string name="poi_camera">Fotoapparatuur</string>
     <string name="poi_candles">Kaarsenwinkel</string>
     <string name="poi_doors">Deuren</string>
-    
     <string name="poi_free_flying">Freeflying-toebehoren</string>
     <string name="poi_garden_furniture">Tuinmeubelen</string>
     <string name="poi_leather">Lederwarenzaak</string>
@@ -753,7 +750,6 @@
     <string name="poi_games">Spellen en games</string>
     <string name="poi_aerialway_pylon">Kabelbaanmast</string>
     <string name="poi_breakwater">Golfbreker</string>
-    
     <string name="poi_power_tower">Hoogspanningsmast</string>
     <string name="poi_power_pole">Bokpaal</string>
     <string name="poi_cooling_tower">Koeltoren</string>
@@ -3232,7 +3228,6 @@
     <string name="poi_diplomatic_permanent_mission">Permanente missie</string>
     <string name="poi_diplomatic_consulate_general">Consulaat-generaal</string>
     <string name="poi_traffic_mirror">Verkeersspiegel</string>
-    
     <string name="poi_aquaculture_fish">Aquacultuur: vis</string>
     <string name="poi_aquaculture">Aquacultuur</string>
     <string name="poi_passenger_information_display_yes">Reizigersinformatiedisplay: ja</string>
