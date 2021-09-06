@@ -85,6 +85,7 @@ public class MapWidgetRegistry {
 		loadVisibleElementsFromSettings();
 		listener = change -> updateVisibleWidgets();
 		settings.AVAILABLE_APP_MODES.addListener(listener);
+		settings.MAP_INFO_CONTROLS.addListener(listener);
 	}
 
 	public void populateStackControl(LinearLayout stack,
