@@ -3752,7 +3752,7 @@
     <string name="gpx_monitoring_start">Reprendre l\'enregistrement du trajet</string>
     <string name="gpx_monitoring_stop">Suspendre l\'enregistrement du trajet</string>
     <string name="save_global_track_interval_descr">Définit la fréquence d’enregistrement des points du parcours (activable depuis le gadget \"Enregistrement\" sur la carte).</string>
-    <string name="disable_recording_once_app_killed_descrp">L\'enregistrement du suivi s\'interrompt lorsque l\'application est tuée (via les applications récentes). (les indications OsmAnd ne seront plus affichées dans la barre de notifications.)</string>
+    <string name="disable_recording_once_app_killed_descrp">L\'enregistrement de la trace sera interrompu si l\'application est fermée via Applications récentes (les indications OsmAnd ne seront plus affichées dans la barre de notifications).</string>
     <string name="all_next_segments_will_be_recalc">Tous les segments suivants seront recalculés avec le profil sélectionné.</string>
     <string name="all_previous_segments_will_be_recalc">Tous les segments précédents seront recalculés avec le profil sélectionné.</string>
     <string name="all_next_segments">Tous les segments suivants</string>
