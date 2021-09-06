@@ -418,16 +418,17 @@ public class RouteCalculationResult {
 						ExitInfo exitInfo = new ExitInfo();
 						exitInfo.setRef(current.getObject().getExitRef());
 						exitInfo.setExitStreetName(current.getObject().getExitName());
-						info.setExitInfo(exitInfo);
-
-						if (routeInd > 0) {
-							// set ref from previous segment because exit point is not consist of highway ref
-							RouteSegmentResult previous;
-							previous = list.get(routeInd - 1);
-							rdoWithoutShield = previous.getObject();
-							info.setRef(previous.getRef(lang, transliterate));
-							if (info.getRef() != null) {
-								rdoWithShield = previous.getObjectWithShield(list, lind);
+						if (exitInfo.getRef() != null || exitInfo.getExitStreetName() != null) {
+							info.setExitInfo(exitInfo);
+							if (routeInd > 0) {
+								// set ref from previous segment because exit point is not consist of highway ref
+								RouteSegmentResult previous;
+								previous = list.get(routeInd - 1);
+								rdoWithoutShield = previous.getObject();
+								info.setRef(previous.getRef(lang, transliterate));
+								if (info.getRef() != null) {
+									rdoWithShield = previous.getObjectWithShield(list, lind);
+								}
 							}
 						}
 					}
