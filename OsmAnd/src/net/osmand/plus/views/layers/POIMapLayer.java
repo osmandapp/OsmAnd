@@ -222,8 +222,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 						if (tileBox.containsPoint(x, y, iconSize)) {
 							boolean intersects = intersects(boundIntersections, x, y, iconSize, iconSize);
-							if (intersects || app.getSettings().SHOW_NEARBY_POI.get()
-									&& routingHelper.isFollowingMode() && !wph.isAmenityNoPassed(o)) {
+							boolean shouldShowNearbyPoi = app.getSettings().SHOW_NEARBY_POI.get()
+									&& routingHelper.isFollowingMode();
+							if (intersects || shouldShowNearbyPoi && !wph.isAmenityNoPassed(o)) {
 								pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 								smallObjectsLatLon.add(latLon);
 							} else {
