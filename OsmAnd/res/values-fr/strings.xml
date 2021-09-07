@@ -1458,7 +1458,7 @@
     <string name="short_location_on_map">Lat. %1$s\nLon. %2$s</string>
     <string name="tips_and_tricks_descr">Questions fréquentes, notes de version et autres informations.</string>
     <string name="routing_settings_2">Paramètres de guidage</string>
-    <string name="general_settings_2">Paramètres globaux</string>
+    <string name="general_settings_2">Paramètres généraux</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Désélectionner</string>
     <string name="shared_string_deselect_all">Tout désélectionner</string>
