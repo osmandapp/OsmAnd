@@ -86,25 +86,27 @@ public class DownloadValidationManager {
 	}
 
 	public void startDownload(@NonNull FragmentActivity context, IndexItem... items) {
-		downloadFilesWithAllChecks(context, items);
+		if (downloadFilesCheck_1_FreeVersion(context)) {
+			downloadFilesCheck_2_Internet(context, items);
+		}
 	}
 
-	private void downloadFilesWithAllChecks(@NonNull FragmentActivity context, IndexItem[] items) {
-		downloadFilesCheck_1_FreeVersion(context, items);
+	public void copyAssetsWithoutInternet(@NonNull FragmentActivity activity, IndexItem... items) {
+		if (downloadFilesCheck_1_FreeVersion(activity)) {
+			downloadFilesCheck_3_ValidateSpace(activity, items);
+		}
 	}
 
-	private void downloadFilesCheck_1_FreeVersion(@NonNull FragmentActivity context, IndexItem[] items) {
+	private boolean downloadFilesCheck_1_FreeVersion(@NonNull FragmentActivity context) {
 		if (!Version.isPaidVersion(app)) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS) {
 				new InstallPaidVersionDialogFragment()
 						.show(context.getSupportFragmentManager(), InstallPaidVersionDialogFragment.TAG);
-			} else {
-				downloadFilesCheck_2_Internet(context, items);
+				return false;
 			}
-		} else {
-			downloadFilesCheck_2_Internet(context, items);
 		}
+		return true;
 	}
 
 	private void downloadFilesCheck_2_Internet(@NonNull final FragmentActivity context, final IndexItem[] items) {
