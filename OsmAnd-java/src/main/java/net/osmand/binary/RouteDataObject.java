@@ -338,7 +338,7 @@ public class RouteDataObject {
 			}
 			//return names.get(region.refTypeRule);
 		}
-		return getRef(lang, transliterate, direction);
+		return null;
 	}
 
 	public String getDestinationName(String lang, boolean transliterate, boolean direction) {

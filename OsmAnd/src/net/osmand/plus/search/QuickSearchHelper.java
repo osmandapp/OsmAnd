@@ -329,7 +329,8 @@ public class QuickSearchHelper implements ResourceListener {
 				if (phrase.getFullSearchPhrase().length() <= 1
 						&& (phrase.isNoSelectedType() || phrase.isLastWord(ObjectType.FAVORITE_GROUP))) {
 					resultMatcher.publish(sr);
-				} else if (phrase.getFirstUnknownNameStringMatcher().matches(sr.localeName)) {
+				} else if (phrase.getFullNameStringMatcher().matches(sr.localeName)) {
+					phrase.countUnknownWordsMatchMainResult(sr);
 					resultMatcher.publish(sr);
 				}
 			}

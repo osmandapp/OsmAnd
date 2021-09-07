@@ -589,7 +589,7 @@
     <string name="context_menu_item_search_poi">Sök efter POI</string>
     <string name="use_trackball_descr">Använd en styrkuleenhet för att flytta kartan.</string>
     <string name="use_trackball">Använd styrkula</string>
-    <string name="background_service_wait_int_descr">Ange maximal väntetid för varje positionsbestämning i bakgrunden.</string>
+    <string name="background_service_wait_int_descr">Ange längsta tillåtna väntetid för varje positionsbestämning i bakgrunden.</string>
     <string name="background_service_wait_int">Maximal väntetid för fix</string>
     <string name="where_am_i">Var är jag?</string>
     <string name="process_navigation_service">OsmAnd navigeringstjänst</string>
@@ -614,7 +614,8 @@
     <string name="voice_data_not_supported">Version av röstdata som inte stöds</string>
     <string name="voice_data_corrupted">Angivna röstdata är skadade</string>
     <string name="voice_data_unavailable">Valda röstdata är inte tillgängliga</string>
-    <string name="sd_unmounted">SD-kortet är inte tillgängligt.\nDu kommer inte att kunna se kartor eller hitta saker.</string>
+    <string name="sd_unmounted">Minneskortet är inte tillgängligt.
+\nDu kommer inte att kunna se kartor eller hitta saker.</string>
     <string name="sd_mounted_ro">Minneskort skrivskyddat.
 \nDet är nu bara möjligt att se den förinstallerade kartan, inte hämta nya områden.</string>
     <string name="unzipping_file">Packar upp filen …</string>
@@ -671,7 +672,7 @@
     <string name="searching_address">Söker adress …</string>
     <string name="hint_search_online">Online-sökning: Husnummer, gata, stad</string>
     <string name="search_offline_address">Offline</string>
-    <string name="max_level_download_tile_descr">Bläddra inte i kartplattor på nätet för zoomnivåer bortom detta.</string>
+    <string name="max_level_download_tile_descr">Bläddra inte i kartor på nätet för zoomnivåer bortom denna.</string>
     <string name="route_general_information">Total sträcka %1$s, restid %2$d h %3$d min.</string>
     <string name="router_service_descr">Online- eller offline-navigeringstjänst.</string>
     <string name="router_service">Navigeringstjänst</string>
@@ -858,7 +859,7 @@
     <string name="choose_available_region">Välj region från lista</string>
     <string name="choose_intersected_street">Välj korsande gata</string>
     <string name="app_mode_default">Titta på kartan</string>
-    <string name="app_mode_car">Bil</string>
+    <string name="app_mode_car">Fordonskörning</string>
     <string name="app_mode_bicycle">Cykling</string>
     <string name="app_mode_pedestrian">Gång</string>
     <string name="position_on_map_center">I mitten</string>
@@ -866,7 +867,7 @@
     <string name="navigate_point_top_text">Ange latitud och longitud i valt format (D - grader, M - minuter, S - sekunder)</string>
     <string name="navigate_point_latitude">Latitud</string>
     <string name="navigate_point_longitude">Longitud</string>
-    <string name="navigate_point_format_D">DDD.DD</string>
+    <string name="navigate_point_format_D">DDD.DDDDD</string>
     <string name="navigate_point_format_DM">DDD MM.MMM</string>
     <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="get_directions">Vägvisning</string>
@@ -997,7 +998,7 @@
     <string name="av_camera_focus_auto">Autofokus</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokal fokus</string>
     <string name="av_camera_focus_edof">Utökat skärpedjup (EDOF)</string>
-    <string name="av_camera_focus_infinity">Fokus på oändligt</string>
+    <string name="av_camera_focus_infinity">Fokus är inställt på oändligheten</string>
     <string name="av_camera_focus_macro">Makrofokusläge (närbild)</string>
     <string name="av_camera_focus_continuous">Kameran försöker fokusera hela tiden</string>
     <string name="av_photo_play_sound">Spela upp kameraslutarljud</string>
@@ -1574,7 +1575,7 @@
     <string name="rate_this_app">Betygssätt denna app</string>
     <string name="rate_this_app_long">Poängsätt OsmAnd på Google Play</string>
     <string name="user_hates_app_get_feedback">Berätta för oss varför.</string>
-    <string name="user_hates_app_get_feedback_long">Berätta för oss vad du vill förändra i denna app.</string>
+    <string name="user_hates_app_get_feedback_long">Låt oss gärna ta del av dina förslag.</string>
     <string name="download_live_updates">Liveuppdateringar</string>
     <string name="failed_to_upload">Uppladdningen misslyckades</string>
     <string name="delete_change">Ta bort ändring</string>
@@ -1582,7 +1583,7 @@
     <string name="try_again">Försök igen</string>
     <string name="error_message_pattern">Fel: {0}</string>
     <string name="no_updates_available">Inga uppdateringar tillgängliga</string>
-    <string name="we_really_care_about_your_opinion">Vi bryr oss mycket om vad du tycker och det är viktigt för oss att höra din åsikt.</string>
+    <string name="we_really_care_about_your_opinion">Vi värdesätter dina åsikter och din återkoppling.</string>
     <string name="rendering_value_boldOutline_name">Fet kontur</string>
     <string name="offline_maps_and_navigation">Offline-kartor\noch navigering</string>
     <string name="shared_string_card_was_hidden">Kortet har dolts</string>
@@ -3217,7 +3218,7 @@
     <string name="keep_it_empty_if_not">Behåll tom om inte</string>
     <string name="online_routing_example_hint">URL med alla parametrar kommer att se ut så här:</string>
     <string name="test_route_calculation">Testa ruttberäkning</string>
-    <string name="routing_engine_vehicle_type_driving">Körning</string>
+    <string name="routing_engine_vehicle_type_driving">Fordonskörning</string>
     <string name="routing_engine_vehicle_type_foot">Fot</string>
     <string name="routing_engine_vehicle_type_bike">Cykel</string>
     <string name="routing_engine_vehicle_type_car">Bil</string>
@@ -3768,4 +3769,5 @@
     <string name="routing_attr_difficulty_preference_name">Föredragen svårighetsgrad</string>
     <string name="routing_attr_difficulty_preference_description">Prioritera rutter av denna svårighetsgrad, även om rutter över svårare eller lättare pister är tillåtna om de är kortare.</string>
     <string name="routing_attr_freeride_policy_name">Offpist</string>
+    <string name="quick_action_need_to_add_item_to_list">Lägg till minst ett objekt i listan bland inställningarna för \'Snabbhandlingar\'</string>
 </resources>
