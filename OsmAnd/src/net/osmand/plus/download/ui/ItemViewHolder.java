@@ -485,7 +485,11 @@ public class ItemViewHolder {
 	private void startDownload(DownloadItem item) {
 		if (item instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) item;
-			context.startDownload(indexItem);
+			if (DownloadActivityType.isVoiceTTS(indexItem)) {
+				context.copyVoiceAssetWithoutInternet(indexItem);
+			} else {
+				context.startDownload(indexItem);
+			}
 		} else {
 			selectIndexesToDownload(item);
 		}
