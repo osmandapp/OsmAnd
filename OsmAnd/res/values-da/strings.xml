@@ -3857,7 +3857,7 @@
     <string name="announcement_time_intervals">Tid- og afstandsintervaller</string>
     <string name="context_menu_read_full">Læs hele</string>
     <string name="hillshade_slope_contour_lines">Bakkeskygge / Skråning / Konturlinjer</string>
-    <string name="activity_type_racing_name">Væddeløb</string>
+    <string name="activity_type_racing_name">Racerkørsel</string>
     <string name="temporary_conditional_routing_descr">Brug de vejrestriktioner, der er aktive på kortet nu</string>
     <string name="on_hold">I venteposition</string>
     <string name="srtm_unit_format">Enhedsvariant med konturlinjer</string>
