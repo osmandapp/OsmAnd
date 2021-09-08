@@ -1455,7 +1455,7 @@
 \nHosszúság: %2$s</string>
     <string name="tips_and_tricks_descr">Gyakran ismételt kérdések, legutóbbi módosítások és egyebek.</string>
     <string name="routing_settings_2">Navigációs beállítások</string>
-    <string name="general_settings_2">Globális beállítások</string>
+    <string name="general_settings_2">Általános beállítások</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Kijelölés megszüntetése</string>
     <string name="shared_string_deselect_all">Összes kijelölés megszüntetése</string>
