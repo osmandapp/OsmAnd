@@ -79,6 +79,7 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.WidgetsVisibilityHelper;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -1191,7 +1192,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 
 		public MapHudButton setIconColor(@ColorInt int clr) {
-			if (clrIntLight == clr && clrIntDark == clr) {
+			if (Algorithms.objectEquals(clrIntLight, clr) && Algorithms.objectEquals(clrIntDark, clr)) {
 				return this;
 			}
 			clrIntLight = clr;
