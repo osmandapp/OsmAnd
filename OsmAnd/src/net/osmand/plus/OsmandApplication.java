@@ -188,9 +188,6 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 		super.onCreate();
-		if (Build.VERSION.SDK_INT < 21) {
-			AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-		}
 		createInUiThread();
 		uiHandler = new Handler();
 		appCustomization = new OsmAndAppCustomization();

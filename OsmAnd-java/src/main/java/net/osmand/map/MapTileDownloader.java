@@ -29,6 +29,9 @@ import org.apache.commons.logging.Log;
 
 
 public class MapTileDownloader {
+
+	private static final Log log = PlatformUtil.getLog(MapTileDownloader.class);
+
 	// Download manager tile settings
 	public static int TILE_DOWNLOAD_THREADS = 4;
 	public static int TILE_DOWNLOAD_SECONDS_TO_WORK = 25;
@@ -36,23 +39,19 @@ public class MapTileDownloader {
 	public static final int TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT = 50;
 	private static final int CONNECTION_TIMEOUT = 30000;
 
-
 	private static MapTileDownloader downloader = null;
-	private static Log log = PlatformUtil.getLog(MapTileDownloader.class);
 
 	public static String USER_AGENT = "OsmAnd~";
 
+	private final ThreadPoolExecutor threadPoolExecutor;
+	private List<WeakReference<IMapDownloaderCallback>> callbacks = new LinkedList<>();
 
-	private ThreadPoolExecutor threadPoolExecutor;
-	private List<WeakReference<IMapDownloaderCallback>> callbacks = new LinkedList<WeakReference<IMapDownloaderCallback>>();
-
-	private Set<File> pendingToDownload;
-	private Set<File> currentlyDownloaded;
+	private final Set<File> pendingToDownload;
+	private final Set<File> currentlyDownloaded;
 
 	private int currentErrors = 0;
 	private long timeForErrorCounter = 0;
 	private boolean noHttps;
-
 
 	public static MapTileDownloader getInstance(String userAgent) {
 		if (downloader == null) {
@@ -77,7 +76,7 @@ public class MapTileDownloader {
 		 *
 		 * @param fileSaved
 		 */
-		public void tileDownloaded(DownloadRequest request);
+		void tileDownloaded(DownloadRequest request);
 	}
 
 	/**
@@ -146,25 +145,25 @@ public class MapTileDownloader {
 	protected BlockingQueue<Runnable> createQueue() {
 		boolean loaded = false;
 		try {
-			Class<?> cl = Class.forName("java.util.concurrent.LinkedBlockingDeque");
-			loaded = cl != null;
+			Class.forName("java.util.concurrent.LinkedBlockingDeque");
+			loaded = true;
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		if (!loaded) {
 			// for Android 2.2
-			return new LinkedBlockingQueue<Runnable>();
+			return new LinkedBlockingQueue<>();
 		}
 		return createDeque();
 	}
 
 	protected static BlockingQueue<Runnable> createDeque() {
-		return new net.osmand.util.LIFOBlockingDeque<Runnable>();
+		return new net.osmand.util.LIFOBlockingDeque<>();
 	}
 
 	public void addDownloaderCallback(IMapDownloaderCallback callback) {
 		LinkedList<WeakReference<IMapDownloaderCallback>> ncall = new LinkedList<WeakReference<IMapDownloaderCallback>>(callbacks);
-		ncall.add(new WeakReference<MapTileDownloader.IMapDownloaderCallback>(callback));
+		ncall.add(new WeakReference<>(callback));
 		callbacks = ncall;
 	}
 
@@ -182,7 +181,7 @@ public class MapTileDownloader {
 
 
 	public void clearCallbacks() {
-		callbacks = new LinkedList<WeakReference<IMapDownloaderCallback>>();
+		callbacks = new LinkedList<>();
 	}
 
 	public List<IMapDownloaderCallback> getDownloaderCallbacks() {
@@ -245,7 +244,7 @@ public class MapTileDownloader {
 
 	private class DownloadMapWorker implements Runnable, Comparable<DownloadMapWorker> {
 
-		private DownloadRequest request;
+		private final DownloadRequest request;
 
 		private DownloadMapWorker(DownloadRequest request) {
 			this.request = request;
@@ -294,27 +293,20 @@ public class MapTileDownloader {
 					fireLoadCallback(request);
 				}
 			}
-
 		}
 
 		@Override
 		public int compareTo(DownloadMapWorker o) {
-			return 0; //(int) (time - o.time);
+			return 0;
 		}
-
 	}
 
-
 	public void fireLoadCallback(DownloadRequest request) {
-		Iterator<WeakReference<IMapDownloaderCallback>> it = callbacks.iterator();
-		while (it.hasNext()) {
-			IMapDownloaderCallback c = it.next().get();
+		for (WeakReference<IMapDownloaderCallback> callback : callbacks) {
+			IMapDownloaderCallback c = callback.get();
 			if (c != null) {
 				c.tileDownloaded(request);
 			}
 		}
 	}
-
-	
-	
 }
