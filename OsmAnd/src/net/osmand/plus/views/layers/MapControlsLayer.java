@@ -1190,7 +1190,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			return this;
 		}
 
-		public MapHudButton setIconColor(@ColorInt Integer clr) {
+		public MapHudButton setIconColor(@ColorInt int clr) {
 			if (clrIntLight == clr && clrIntDark == clr) {
 				return this;
 			}
