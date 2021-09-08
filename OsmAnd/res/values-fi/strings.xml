@@ -941,7 +941,7 @@
     <string name="follow_us">Seuraa meitä</string>
     <string name="access_direction_audio_feedback_descr">Osoita kohdepisteen suuntaa äänellä.</string>
     <string name="access_direction_haptic_feedback_descr">Osoita kohdepisteen suuntaa värinällä.</string>
-    <string name="use_osm_live_routing_description">Ota käyttöön navigaatio OSM Liven muutoksilla (Beta)</string>
+    <string name="use_osm_live_routing_description">Ota käyttöön navigaatio OsmAnd Liven muutoksilla.</string>
     <string name="access_disable_offroute_recalc">Ei reitin uudelleenlaskentaa reitiltä poistuttua</string>
     <string name="access_disable_offroute_recalc_descr">Estä automaattinen reitin uudelleenlaskenta reitiltä poistuessa.</string>
     <string name="access_disable_wrong_direction_recalc">Älä vaihda reittiä virheellisellä suunnalla</string>
@@ -967,7 +967,7 @@
     <string name="osm_live_enter_user_name">Ole hyvä ja anna julkinen nimi</string>
     <string name="osm_live_thanks">Kiitos, että tuet OsmAndia!
 \nAktivoidaksesi kaikki uudet ominaisuudet, sinun on käynnistettävä OsmAnd uudelleen.</string>
-    <string name="osm_live_region_desc">Osa lahjoituksestasi lähetetään OSM-käyttäjille, jotka ovat lähettäneet muutoksia haluamallesi alueelle</string>
+    <string name="osm_live_region_desc">Osa lahjoituksestasi lähetetään OSM-käyttäjille, jotka ovat lähettäneet muutoksia haluamallesi alueelle.</string>
     <string name="osm_live_ask_for_purchase">Osta OSM Live -tilaus ensin</string>
     <string name="file_name_containes_illegal_char">Tiedostonimi sisältää virheellisiä merkkejä</string>
     <string name="select_map_marker">Valitse karttamarkkeri</string>
@@ -1223,7 +1223,7 @@
     <string name="unsaved_changes_will_be_lost">Kaikki tallentamattomat muutokset häviävät. Jatkatko?</string>
     <string name="downloads_left_template">%1$s latausta jäljellä</string>
     <string name="roads">Tiet</string>
-    <string name="downloading_number_of_files">Ladataan - %1$d tiedosto</string>
+    <string name="downloading_number_of_files">Ladataan %1$d tiedosto…</string>
     <string name="show_free_version_banner">Näytä vapaan version mainos</string>
     <string name="show_free_version_banner_description">Vaikka Sinulla on maksettu versio voit silti nähdä vapaan version mainoksen.</string>
     <string name="buy">Osta</string>
@@ -2095,7 +2095,7 @@
     <string name="shared_string_actions">Toiminnot</string>
     <string name="shared_string_marker">Markkeri</string>
     <string name="empty_state_osm_edits">Luo tai muokkaa OSM-objekteja</string>
-    <string name="empty_state_osm_edits_descr">Luo tai muokkaa OSM KP-kohteita, avaa tai kommentoi OSM-huomautuksia ja tue jakamalla tallennettuja GPX-tiedostoja.</string>
+    <string name="empty_state_osm_edits_descr">Luo tai muokkaa OpenStreetMapin KP-kohteita, avaa tai kommentoi OSM-huomautuksia ja tue jakamalla tallennettuja GPX-tiedostoja.</string>
     <string name="shared_string_deleted">Poistettu</string>
     <string name="shared_string_edited">Muokattu</string>
     <string name="shared_string_added">Lisätty</string>
@@ -2977,7 +2977,7 @@
     <string name="in_grace_period">Armoajalla</string>
     <string name="on_hold">Pidossa</string>
     <string name="expired">Erääntynyt</string>
-    <string name="shared_string_feet">jalka</string>
+    <string name="shared_string_feet">jalkaa</string>
     <string name="srtm_unit_format">Korkeuskäyrien yksikkövariantti</string>
     <string name="srtm_download_list_help_message">OsmAnd tarjoaa korkeuskäyrätiedot metreinä ja jalkoina. Sinun on ladattava tiedosto uudelleen muodon muuttamiseksi.</string>
     <string name="srtm_download_single_help_message">Valitse variantti. Sinun on ladattava tiedosto uudelleen muodon muuttamiseksi.</string>
@@ -3105,7 +3105,7 @@
     <string name="backup_storage_taken">Tallennustilaa varattu</string>
     <string name="choose_what_to_restore">Valitse mitä palautetaan.</string>
     <string name="restore_selected_data">Palauta valittu data</string>
-    <string name="receiving_data_from_server">Vastaanotetaan dataa palvelimelta</string>
+    <string name="receiving_data_from_server">Vastaanotetaan tietoa palvelimelta…</string>
     <string name="restore_complete">Palautus valmis</string>
     <string name="backup_version_history">Versiohistoria</string>
     <string name="osm_live_payment_renews_quarterly">Uusiutuu neljännesvuosittain</string>
@@ -3632,7 +3632,7 @@
     <string name="routing_attr_avoid_bus_name">Ei busseja</string>
     <string name="routeInfo_roadClass_name">Tien tyyppi</string>
     <string name="rendering_attr_highway_class_track_grade5_name">Luokka 5</string>
-    <string name="routing_attr_avoid_ferry_name">Ei lauttoja</string>
+    <string name="routing_attr_avoid_ferry_name">Vältä lauttoja</string>
     <string name="routing_attr_avoid_train_name">Ei junia</string>
     <string name="app_mode_camper">Asuntovaunu</string>
     <string name="map_widget_intermediate_time">Väliaika</string>
@@ -3866,4 +3866,6 @@
     <string name="rendering_attr_piste_type_snow_park_name">Maastopuisto</string>
     <string name="nearest_point">Lähin piste</string>
     <string name="output">Lähtö</string>
+    <string name="routing_attr_avoid_ferry_description">Välttää lauttoja</string>
+    <string name="quick_favorites_name_preset">Nimeä esiasetus</string>
 </resources>
