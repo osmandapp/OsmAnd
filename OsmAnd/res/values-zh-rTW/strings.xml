@@ -1467,7 +1467,7 @@
 \n經度 %2$s</string>
     <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其它。</string>
     <string name="routing_settings_2">導航設定</string>
-    <string name="general_settings_2">全域設定</string>
+    <string name="general_settings_2">一般設定</string>
     <string name="waypoint_visit_after">隨後造訪</string>
     <string name="waypoint_visit_before">先造訪</string>
     <string name="shared_string_dismiss">退出</string>
