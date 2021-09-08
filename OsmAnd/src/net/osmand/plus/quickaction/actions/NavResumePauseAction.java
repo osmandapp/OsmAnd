@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,23 +32,23 @@ public class NavResumePauseAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
-		RoutingHelper routingHelper = activity.getRoutingHelper();
+	public void execute(@NonNull MapActivity mapActivity) {
+		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		if (routingHelper.isRoutePlanningMode()) {
 			routingHelper.setRoutePlanningMode(false);
 			routingHelper.setFollowingMode(true);
-			routingHelper.setCurrentLocation(activity.getMyApplication().getLocationProvider().getLastKnownLocation(), false);
+			routingHelper.setCurrentLocation(mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation(), false);
 		} else {
 			routingHelper.setRoutePlanningMode(true);
 			routingHelper.setFollowingMode(false);
 			routingHelper.setPauseNavigation(true);
 		}
-		activity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
-		activity.refreshMap();
+		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+		mapActivity.refreshMap();
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
 

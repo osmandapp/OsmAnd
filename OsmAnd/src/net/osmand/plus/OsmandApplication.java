@@ -90,6 +90,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.router.GeneralRouter;
@@ -165,6 +166,7 @@ public class OsmandApplication extends MultiDexApplication {
 	TravelHelper travelHelper;
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
+	OsmandMap osmandMap;
 	LockHelper lockHelper;
 	FileSettingsHelper fileSettingsHelper;
 	NetworkSettingsHelper networkSettingsHelper;
@@ -230,6 +232,7 @@ public class OsmandApplication extends MultiDexApplication {
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
+		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -1032,6 +1035,10 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return mapViewTrackingUtilities;
+	}
+
+	public OsmandMap getOsmandMap() {
+		return osmandMap;
 	}
 
 	public void sendCrashLog() {

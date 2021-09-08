@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -9,6 +10,8 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Build;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -31,11 +34,10 @@ public class MapTileLayer extends BaseMapLayer {
 	protected final boolean mainMap;
 	protected ITileSource map = null;
 	protected MapTileAdapter mapTileAdapter = null;
-	
+
 	protected Paint paintBitmap;
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
-	
 
 	protected OsmandMapTileView view;
 	protected ResourceManager resourceManager;
@@ -43,8 +45,8 @@ public class MapTileLayer extends BaseMapLayer {
 	private boolean visible = true;
 	private boolean useSampling;
 
-	
-	public MapTileLayer(boolean mainMap) {
+	public MapTileLayer(@NonNull Context context, boolean mainMap) {
+		super(context);
 		this.mainMap = mainMap;
 	}
 	
@@ -54,7 +56,7 @@ public class MapTileLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		settings = view.getSettings();
 		resourceManager = view.getApplication().getResourceManager();
@@ -65,7 +67,7 @@ public class MapTileLayer extends BaseMapLayer {
 		paintBitmap.setFilterBitmap(true);
 		paintBitmap.setAlpha(getAlpha());
 		
-		if (mapTileAdapter != null && view != null) {
+		if (mapTileAdapter != null) {
 			mapTileAdapter.initLayerAdapter(this, view);
 		}
 	}

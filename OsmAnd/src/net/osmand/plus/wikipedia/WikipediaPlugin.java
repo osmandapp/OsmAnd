@@ -18,6 +18,8 @@ import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
+import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -68,7 +70,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.wikipedia";
 
 	private MapActivity mapActivity;
-	private OsmandSettings settings;
+	private final OsmandSettings settings;
 
 	private PoiUIFilter topWikiPoiFilter;
 
@@ -146,9 +148,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected void registerLayerContextMenuActions(OsmandMapTileView mapView,
-												   ContextMenuAdapter adapter,
-												   final MapActivity mapActivity) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 		if (isLocked()) {
 			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.WIKIPEDIA,
 					WIKIPEDIA_ID,
@@ -161,7 +161,7 @@ public class WikipediaPlugin extends OsmandPlugin {
 
 	private void createWikipediaItem(ContextMenuAdapter adapter,
 	                                 final MapActivity mapActivity) {
-		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
+		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {

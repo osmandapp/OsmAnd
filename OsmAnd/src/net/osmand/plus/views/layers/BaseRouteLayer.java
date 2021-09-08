@@ -2,6 +2,7 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -60,8 +61,12 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	protected Paint paintIconAction;
 	private Bitmap actionArrow;
 
+	public BaseRouteLayer(@NonNull Context ctx) {
+		super(ctx);
+	}
+
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		float density = view.getDensity();
 		initAttrs(density);

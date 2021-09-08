@@ -20,6 +20,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -57,7 +58,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -70,20 +70,20 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	private OsmandMapTileView view;
 
-	private RoutingHelper routingHelper;
+	private final OsmandApplication app;
+	private final RoutingHelper routingHelper;
 	private Set<PoiUIFilter> filters = new TreeSet<>();
 	private MapTextLayer mapTextLayer;
 
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
-	private MapLayerData<List<Amenity>> data;
+	private final MapLayerData<List<Amenity>> data;
 
-	private OsmandApplication app;
-
-	public POIMapLayer(final MapActivity activity) {
-		routingHelper = activity.getRoutingHelper();
+	public POIMapLayer(@NonNull final Context context) {
+		super(context);
+		app = (OsmandApplication) context.getApplicationContext();
+		routingHelper = app.getRoutingHelper();
 		routingHelper.addListener(this);
-		app = activity.getMyApplication();
 		data = new OsmandMapLayer.MapLayerData<List<Amenity>>() {
 
 			Set<PoiUIFilter> calculatedFilters;
@@ -104,7 +104,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 			@Override
 			public void layerOnPostExecute() {
-				activity.refreshMap();
+				app.getOsmandMap().refreshMap();
 			}
 
 			@Override
@@ -133,12 +133,8 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 							}));
 				}
 
-				Collections.sort(res, new Comparator<Amenity>() {
-					@Override
-					public int compare(Amenity lhs, Amenity rhs) {
-						return lhs.getId() < rhs.getId() ? -1 : (lhs.getId().longValue() == rhs.getId().longValue() ? 0 : 1);
-					}
-				});
+				Collections.sort(res, (lhs, rhs) -> lhs.getId() < rhs.getId()
+						? -1 : (lhs.getId().longValue() == rhs.getId().longValue() ? 0 : 1));
 
 				return res;
 			}
@@ -169,7 +165,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
@@ -200,14 +196,13 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			data.clearCache();
 		}
 
-		List<Amenity> objects = Collections.emptyList();
 		List<Amenity> fullObjects = new ArrayList<>();
 		List<LatLon> fullObjectsLatLon = new ArrayList<>();
 		List<LatLon> smallObjectsLatLon = new ArrayList<>();
 		if (!filters.isEmpty()) {
 			if (tileBox.getZoom() >= startZoom) {
 				data.queryNewData(tileBox);
-				objects = data.getResults();
+				List<Amenity> objects = data.getResults();
 				if (objects != null) {
 					float textScale = app.getSettings().TEXT_SCALE.get();
 					float iconSize = getIconSize(app);
@@ -343,12 +338,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		topBar.setTitle(title);
 		topBar.setBackgroundColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTabBackground)));
 		topBar.setTitleTextColor(ContextCompat.getColor(ctx, getResIdFromAttribute(ctx, R.attr.pstsTextColor)));
-		topBar.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				dialog.dismiss();
-			}
-		});
+		topBar.setNavigationOnClickListener(v -> dialog.dismiss());
 
 		ScrollView scrollView = new ScrollView(ctx);
 		ll.addView(topBar);
@@ -408,9 +398,9 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public boolean showMenuAction(@Nullable Object object) {
 		OsmandApplication app = view.getApplication();
-		MapActivity mapActivity = (MapActivity) view.getContext();
+		MapActivity mapActivity = view.getMapActivity();
 		TravelHelper travelHelper = app.getTravelHelper();
-		if (object instanceof Amenity) {
+		if (mapActivity != null && object instanceof Amenity) {
 			Amenity amenity = (Amenity) object;
 			if (amenity.getSubType().equals(ROUTE_TRACK)) {
 				TravelGpx travelGpx = travelHelper.searchGpx(amenity.getLocation(), amenity.getRouteId(), amenity.getRef());

@@ -62,7 +62,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, final MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull final MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_switchable_action, parent, false);
 
@@ -79,7 +79,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		});
 
 		RecyclerView list = view.findViewById(R.id.list);
-		adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
+		adapter = new Adapter(mapActivity, new QuickActionListFragment.OnStartDragListener() {
 			@Override
 			public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
 				touchHelper.startDrag(viewHolder);
@@ -103,7 +103,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		dscrTitle.setText(parent.getContext().getString(getDiscrTitle()) + ":");
 		dscrHint.setText(getDiscrHint());
 		addBtn.setText(getAddBtnText());
-		addBtn.setOnClickListener(getOnAddBtnClickListener(activity, adapter));
+		addBtn.setOnClickListener(getOnAddBtnClickListener(mapActivity, adapter));
 
 		parent.addView(view);
 	}
@@ -123,7 +123,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		final RecyclerView list = root.findViewById(R.id.list);
 		final Adapter adapter = (Adapter) list.getAdapter();
 
@@ -140,7 +140,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	public abstract List<T> loadListFromParams();
 
-	public abstract void executeWithParams(MapActivity activity, String params);
+	public abstract void executeWithParams(@NonNull MapActivity activity, String params);
 
 	public abstract String getTranslatedItemName(Context context, String item);
 

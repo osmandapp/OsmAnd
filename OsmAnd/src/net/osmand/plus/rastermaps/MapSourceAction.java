@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.util.Pair;
@@ -93,35 +94,35 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();
 			if (sources.size() > 0) {
 				boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 				if (showBottomSheetStyles) {
-					showChooseDialog(activity.getSupportFragmentManager());
+					showChooseDialog(mapActivity.getSupportFragmentManager());
 					return;
 				}
-				String nextItem = getNextSelectedItem(activity.getMyApplication());
-				executeWithParams(activity, nextItem);
+				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());
+				executeWithParams(mapActivity, nextItem);
 			}
 		}
 	}
 
 	@Override
-	public void executeWithParams(MapActivity activity, String params) {
-		OsmandSettings settings = activity.getMyApplication().getSettings();
+	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
+		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		if (params.equals(LAYER_OSM_VECTOR)) {
 			settings.MAP_ONLINE_DATA.set(false);
-			activity.getMapLayers().updateMapSource(activity.getMapView(), null);
+			mapActivity.getMapLayers().updateMapSource(mapActivity.getMapView(), null);
 		} else {
 			settings.MAP_TILE_SOURCES.set(params);
 			settings.MAP_ONLINE_DATA.set(true);
-			activity.getMapLayers().updateMapSource(activity.getMapView(), settings.MAP_TILE_SOURCES);
+			mapActivity.getMapLayers().updateMapSource(mapActivity.getMapView(), settings.MAP_TILE_SOURCES);
 		}
-		Toast.makeText(activity, activity.getString(R.string.quick_action_map_source_switch,
-				getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
+		Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_source_switch,
+				getTranslatedItemName(mapActivity, params)), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -204,8 +205,8 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-		return super.fillParams(root, activity);
+		return super.fillParams(root, mapActivity);
 	}
 }

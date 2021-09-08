@@ -63,7 +63,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static final int ZOOM_THRESHOLD = 2;
 
 	private OsmandApplication app;
-	private MapActivity mapActivity;
 	private OsmandMapTileView view;
 	private Paint paintDownloaded;
 	private Path pathDownloaded;
@@ -125,12 +124,12 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		}
 	}
 
-	public DownloadedRegionsLayer(@NonNull MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
+	public DownloadedRegionsLayer(@NonNull Context context) {
+		super(context);
 	}
 
 	@Override
-	public void initLayer(final OsmandMapTileView view) {
+	public void initLayer(@NonNull final OsmandMapTileView view) {
 		this.view = view;
 		app = view.getApplication();
 		rm = app.getResourceManager();
@@ -251,8 +250,9 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		lastCheckMapCy = cy;
 		lastCheckMapZoom = zoom;
 
+		MapActivity mapActivity = getMapActivity();
 		if (app.getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get()
-				&& mapActivity.getWidgetsVisibilityHelper().shouldShowDownloadMapWidget()
+				&& mapActivity != null && mapActivity.getWidgetsVisibilityHelper().shouldShowDownloadMapWidget()
 				&& zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG
 				&& zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
 				&& !view.isAnimatingMapMove()
@@ -314,7 +314,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	private void showDownloadMapToolbar(final @NonNull IndexItem indexItem, final @NonNull String regionName) {
-		if (!regionName.equals(DownloadMapToolbarController.getLastProcessedRegionName())) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !regionName.equals(DownloadMapToolbarController.getLastProcessedRegionName())) {
 			app.runInUIThread(() -> {
 				if (!regionName.equals(DownloadMapToolbarController.getLastProcessedRegionName())) {
 					TopToolbarController controller = mapActivity.getTopToolbarController(TopToolbarControllerType.DOWNLOAD_MAP);
@@ -328,7 +329,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	private void hideDownloadMapToolbar() {
-		app.runInUIThread(() -> mapActivity.hideTopToolbar(TopToolbarControllerType.DOWNLOAD_MAP));
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			app.runInUIThread(() -> mapActivity.hideTopToolbar(TopToolbarControllerType.DOWNLOAD_MAP));
+		}
 	}
 
 	private void removeObjectsFromList(List<BinaryMapDataObject> list, List<BinaryMapDataObject> objects) {
@@ -440,7 +444,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		if(view.getMainLayer() instanceof MapTileLayer) {
+		if (view.getMainLayer() instanceof MapTileLayer) {
 			return;
 		}
 		// query from UI thread because of Android AsyncTask bug (Handler init)
@@ -518,8 +522,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
 		boolean isMenuVisible = false;
-		if (view.getContext() instanceof MapActivity) {
-			MapActivity mapActivity = (MapActivity) view.getContext();
+		MapActivity mapActivity = view.getMapActivity();
+		if (mapActivity != null) {
 			MapContextMenu menu = mapActivity.getContextMenu();
 			MapMultiSelectionMenu multiMenu = menu.getMultiSelectionMenu();
 			isMenuVisible = menu.isVisible() || (multiMenu != null && multiMenu.isVisible());

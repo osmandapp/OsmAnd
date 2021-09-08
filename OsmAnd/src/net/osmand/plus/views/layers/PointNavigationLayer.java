@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,7 +18,6 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
@@ -38,12 +38,10 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	private Paint mTextPaint;
 
-	private final MapActivity map;
-
 	private ContextMenuLayer contextMenuLayer;
 
-	public PointNavigationLayer(MapActivity map) {
-		this.map = map;
+	public PointNavigationLayer(@NonNull Context context) {
+		super(context);
 	}
 
 	private void initUI() {
@@ -63,7 +61,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.mView = view;
 		initUI();
 
@@ -76,7 +74,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			return;
 		}
 
-		TargetPointsHelper targetPoints = map.getMyApplication().getTargetPointsHelper();
+		TargetPointsHelper targetPoints = getApplication().getTargetPointsHelper();
 		TargetPoint pointToStart = targetPoints.getPointToStart();
 		if (pointToStart != null) {
 			if (isLocationVisible(tb, pointToStart)) {
@@ -186,7 +184,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
 		if (tileBox.getZoom() >= 3) {
-			TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();
+			TargetPointsHelper tg = getApplication().getTargetPointsHelper();
 			List<TargetPoint> intermediatePoints = tg.getAllPoints();
 			int r = getDefaultRadiusPoi(tileBox);
 			for (int i = 0; i < intermediatePoints.size(); i++) {
@@ -227,8 +225,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	@Override
 	public boolean isObjectMovable(Object o) {
-		if (o != null && o instanceof TargetPoint) {
-			TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
+		if (o instanceof TargetPoint) {
+			TargetPointsHelper targetPointsHelper = getApplication().getTargetPointsHelper();
 			return targetPointsHelper.getAllPoints().contains(o);
 		}
 		return false;
@@ -240,7 +238,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		boolean result = false;
 		TargetPoint newTargetPoint = null;
 		if (o instanceof TargetPoint) {
-			TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
+			TargetPointsHelper targetPointsHelper = getApplication().getTargetPointsHelper();
 			TargetPoint oldPoint = (TargetPoint) o;
 			if (oldPoint.start) {
 				targetPointsHelper.setStartPoint(position, true, null);

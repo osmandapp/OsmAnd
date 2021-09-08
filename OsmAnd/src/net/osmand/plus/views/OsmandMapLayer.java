@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -18,6 +19,9 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -42,14 +46,19 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public abstract class OsmandMapLayer {
+	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
 
 	public static final float ICON_VISIBLE_PART_RATIO = 0.45f;
+
+	@NonNull
+	private final Context ctx;
+	@Nullable
+	private MapActivity mapActivity;
+
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
-	private static final Log log = PlatformUtil.getLog(OsmandMapLayer.class);
 
 	public enum MapGestureType {
 		DOUBLE_TAP_ZOOM_IN,
@@ -57,11 +66,55 @@ public abstract class OsmandMapLayer {
 		TWO_POINTERS_ZOOM_OUT
 	}
 
+	protected OsmandMapLayer(@NonNull Context ctx) {
+		this.ctx = ctx;
+	}
+
+	@NonNull
+	public Context getContext() {
+		return ctx;
+	}
+
+	@Nullable
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+	}
+
+	@NonNull
+	public MapActivity requireMapActivity() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			throw new IllegalStateException("Layer " + this + " not attached to MapActivity.");
+		}
+		return mapActivity;
+	}
+
+	@NonNull
+	public OsmandApplication getApplication() {
+		return (OsmandApplication) ctx.getApplicationContext();
+	}
+
+	public String getString(@StringRes int resId) {
+		return ctx.getString(resId);
+	}
+
+	public String getString(@StringRes int resId, Object... formatArgs) {
+		return ctx.getString(resId, formatArgs);
+	}
+
+	public OsmandMapTileView getMapView() {
+		return getApplication().getOsmandMap().getMapView();
+	}
+
 	public boolean isMapGestureAllowed(MapGestureType type) {
 		return true;
 	}
 
-	public abstract void initLayer(OsmandMapTileView view);
+	public abstract void initLayer(@NonNull OsmandMapTileView view);
 
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings);
 
@@ -70,7 +123,7 @@ public abstract class OsmandMapLayer {
 
 	public abstract void destroyLayer();
 
-	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
+	public void populateObjectContextMenu(@NonNull LatLon latLon, @Nullable Object o, @NonNull ContextMenuAdapter adapter) {
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
@@ -322,8 +375,8 @@ public abstract class OsmandMapLayer {
 		protected abstract T calculateResult(RotatedTileBox tileBox);
 
 		public class Task extends AsyncTask<Object, Object, T> {
-			private RotatedTileBox dataBox;
-			private RotatedTileBox requestedBox;
+			private final RotatedTileBox dataBox;
+			private final RotatedTileBox requestedBox;
 
 			public Task(RotatedTileBox requestedBox, RotatedTileBox dataBox) {
 				this.requestedBox = requestedBox;
@@ -431,7 +484,7 @@ public abstract class OsmandMapLayer {
 					req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
 					if (req.searchRenderingAttribute(renderingAttribute)) {
 						RenderingContext rc = new OsmandRenderer.RenderingContext(app);
-						rc.setDensityValue((float) tileBox.getDensity());
+						rc.setDensityValue(tileBox.getDensity());
 						// cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
 						renderer.updatePaint(req, paint, 0, false, rc);
 						isPaint2 = renderer.updatePaint(req, paint2, 1, false, rc);

@@ -21,23 +21,23 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
 public class TextInfoWidget {
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	private String contentTitle;
-	private View view;
-	private ImageView imageView;
-	private TextView textView;
-	private TextView textViewShadow;
-	private TextView smallTextView;
-	private TextView smallTextViewShadow;
-	private ImageView topImageView;
+	private final View view;
+	private final ImageView imageView;
+	private final TextView textView;
+	private final TextView textViewShadow;
+	private final TextView smallTextView;
+	private final TextView smallTextViewShadow;
+	private final ImageView topImageView;
 	protected TextView topTextView;
 	private boolean explicitlyVisible;
 
 	private int dayIcon;
 	private int nightIcon;
 	private boolean isNight;
-	private ViewGroup bottomLayout;
+	private final ViewGroup bottomLayout;
 
 	private Integer cachedMetricSystem = null;
 	private Integer cachedAngularUnits = null;

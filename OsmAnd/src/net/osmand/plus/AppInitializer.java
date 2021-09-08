@@ -68,6 +68,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
@@ -424,6 +425,7 @@ public class AppInitializer implements IProgress {
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
+		app.osmandMap = startupInit(new OsmandMap(app), OsmandMap.class);
 
 		// TODOTRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
 		app.travelHelper = !TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
