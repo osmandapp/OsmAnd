@@ -895,7 +895,7 @@ public class AndroidUtils {
 				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
 					return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
 				} else {
-					return fs.getAvailableBlocks() * fs.getBlockSize();
+					return (long)(fs.getAvailableBlocks()) * fs.getBlockSize();
 				}
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
@@ -911,7 +911,7 @@ public class AndroidUtils {
 				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
 					return fs.getBlockCountLong() * fs.getBlockSizeLong();
 				} else {
-					return fs.getBlockCount() * fs.getBlockSize();
+					return (long)(fs.getBlockCount()) * fs.getBlockSize();
 				}
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
