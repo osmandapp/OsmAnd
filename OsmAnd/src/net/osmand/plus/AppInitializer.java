@@ -198,10 +198,9 @@ public class AppInitializer implements IProgress {
 		return appVersionUpgrade.getPrevAppVersion();
 	}
 
-	public boolean checkAppVersionChanged() {
+	public boolean checkIfNewRelease() {
 		initVariables();
-		boolean showRecentChangesDialog = !isFirstTime() && isAppVersionChanged();
-//		showRecentChangesDialog = true;
+		boolean showRecentChangesDialog = !isFirstTime() && appVersionUpgrade.isNewRelease();
 		if (showRecentChangesDialog && !activityChangesShowed) {
 			activityChangesShowed = true;
 			return true;

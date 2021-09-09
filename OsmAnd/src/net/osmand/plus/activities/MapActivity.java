@@ -298,7 +298,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
 		}
 
-		if (app.getAppInitializer().checkAppVersionChanged() && WhatsNewDialogFragment.SHOW) {
+		if (app.getAppInitializer().checkIfNewRelease() && WhatsNewDialogFragment.SHOW) {
 			SecondSplashScreenFragment.SHOW = false;
 			WhatsNewDialogFragment.SHOW = false;
 			new WhatsNewDialogFragment().show(getSupportFragmentManager(), null);

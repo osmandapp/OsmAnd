@@ -177,6 +177,10 @@ class AppVersionUpgradeOnInit {
 		return appVersionChanged;
 	}
 
+	boolean isNewRelease() {
+		return appVersionChanged && (prevAppVersion < 1000 || (LAST_APP_VERSION - prevAppVersion) / 100 > 0);
+	}
+
 	int getPrevAppVersion() {
 		return prevAppVersion;
 	}
