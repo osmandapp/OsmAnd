@@ -274,8 +274,8 @@
     <string name="map_orientation_landscape">横屏</string>
     <string name="map_screen_orientation">屏幕方向</string>
     <string name="transport_Routes">路线</string>
-    <string name="transport_Stop">停止</string>
-    <string name="transport_stops">停止</string>
+    <string name="transport_Stop">站点</string>
+    <string name="transport_stops">站点</string>
     <string name="transport_search_after">后续路由</string>
     <string name="transport_search_before">此前路线</string>
     <string name="transport_finish_search">完成搜索</string>
@@ -339,7 +339,7 @@
     <string name="download_hillshade_maps">山体阴影层</string>
     <string name="prefer_in_routing_descr">首选高速公路。</string>
     <string name="local_indexes_cat_av">音频/视频数据</string>
-    <string name="stop_routing_confirm">是否确定停止导航？</string>
+    <string name="stop_routing_confirm">停止导航？</string>
     <string name="clear_dest_confirm">删除目的地（和中转点）？</string>
     <string name="precise_routing_mode_descr">启用精确路径计算，受实地距离限制不使用本地库。</string>
     <string name="recording_photo_description">图片 %1$s of %2$s</string>
@@ -440,7 +440,7 @@
     <string name="av_settings">音频/视频设置 </string>
     <string name="recording_error">录制失败</string>
     <string name="recording_camera_not_available">摄像头不可用</string>
-    <string name="recording_is_recorded">音频/视频正在记录，要停止请点击AV窗体。</string>
+    <string name="recording_is_recorded">正在录制音频/视频，点击AV组件停止。</string>
     <string name="recording_open_external_player">打开外部播放器</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd 的离线等高线插件</string>
     <string name="map_widget_distancemeasurement">距离测量</string>
@@ -452,7 +452,7 @@
     <string name="rendering_attr_showRoadMaps_name">仅包含道路的地图</string>
     <string name="safe_mode_description">在安全模式运行应用（使用较慢的 Android 代码代替原生代码）。</string>
     <string name="native_library_not_running">应用正运行在安全模式下（可在“设置”中关闭）。</string>
-    <string name="background_service_is_enabled_question">OsmAnd 睡眠模式服务仍在运行。是否要关闭？</string>
+    <string name="background_service_is_enabled_question">OsmAnd 后台服务仍在运行。是否也要关闭？</string>
     <string name="close_changeset">关闭修改集</string>
     <string name="zxing_barcode_scanner_not_found">ZXing 条形码扫描应用未安装，是否转到应用市场中搜索？</string>
     <string name="rendering_attr_roadColors_description">选择道路颜色主题：</string>
@@ -3662,4 +3662,112 @@
     <string name="gpx_monitoring_stop">暂停旅程记录</string>
     <string name="gpx_monitoring_start">继续旅程记录</string>
     <string name="routing_attr_allow_intermediate_name">允许中转点线路</string>
+    <string name="shared_string_includes">包括</string>
+    <string name="complete_purchase">完全购买</string>
+    <string name="regular_price">正常价格</string>
+    <string name="from_with_param">来自 %1$s</string>
+    <string name="backup_delete_types_descr">从OsmAnd Cloud中删除所有已废弃的数据类型的数据？</string>
+    <string name="backup_delete_types">删除禁用的数据类型</string>
+    <string name="shared_string_discussion">讨论</string>
+    <string name="shared_string_view_all">查看全部</string>
+    <string name="backup_error_user_is_already_registered">此电子邮件地址正被另一个帐户使用</string>
+    <string name="backup_error_subscription_was_expired">订阅已过期</string>
+    <string name="backup_error_subscription_was_expired_descr">您的 OsmAnd Pro 订阅已过期，请续订以使用备份。您仍然可以从云端恢复数据。</string>
+    <string name="backup_error_subscription_was_used">订阅或促销活动由另一个账户使用%1$s</string>
+    <string name="backup_error_size_is_exceeded">超过了OsmAnd云的最大尺寸 %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">该文件应以.gzip格式发送</string>
+    <string name="backup_error_file_not_available">文件不可用</string>
+    <string name="backup_error_token_is_not_valid">所提供的设备ID或令牌有问题</string>
+    <string name="backup_error_token_is_not_valid_or_expired">无效或过期的令牌</string>
+    <string name="backup_error_user_is_not_registered">没有用户用该电子邮件地址注册</string>
+    <string name="backup_error_no_valid_subscription">没有有效的订阅</string>
+    <string name="contour_lines_hillshades_slope">等高线、丘陵阴影、坡度</string>
+    <string name="approximate_route_description">将路线附在地图上的道路上，以获得所有的转弯和附加数据，如平整度、道路类型等。</string>
+    <string name="release_4_0">- 云备份
+\n
+\n - 为 \"Topo \"地图风格增加了夜间模式
+\n
+\n - 增加了下载以英尺为单位等高线的选项
+\n
+\n - 现在可以按海拔高度、速度或坡度对轨迹进行着色
+\n
+\n - 更新了 \"行程记录 \"对话框
+\n
+\n - 点击的距离从半径标尺移到一个单独的选项中
+\n
+\n - 规划路线：你现在可以改变导航选项，访问地图配置和搜索，而不必离开路线规划。
+\n
+\n - 新的 \"购买 \"屏幕上有详细的购买信息
+\n
+\n - 增加了改变航线外观的选项
+\n
+\n - OsmAnd实时更新移至 \"下载&gt;更新\"。
+\n
+\n</string>
+    <string name="duration_moment_ago">刚才</string>
+    <string name="logout_from_osmand_cloud">从 OsmAnd Cloud 注销</string>
+    <string name="logout_from_osmand_cloud_decsr">登出？
+\n您需要重新登录才能备份或恢复数据。</string>
+    <string name="backup_deleting_all_data">正在删除所有数据…</string>
+    <string name="backup_deleted_all_data">删除了所有数据。</string>
+    <string name="backup_deleting_all_data_descr">请等待 OsmAnd 从云端删除您的数据。设备上的所有数据将保持不变。</string>
+    <string name="backup_deleted_all_data_descr">你的所有数据已经成功地从OsmAnd Cloud中删除。</string>
+    <string name="backup_version_history_removed">所有的版本历史已经被删除。</string>
+    <string name="backup_data_removed">所有数据已被删除。</string>
+    <string name="shared_string_progress">进展</string>
+    <string name="backup_do_not_have_any">你还没有在线备份。</string>
+    <string name="backup_dont_have_any_descr">安排自动备份，永不丢失数据。</string>
+    <string name="backup_welcome_back">欢迎回来!</string>
+    <string name="backup_welcome_back_descr">使用现有的备份恢复该设备上的数据，或将数据备份到OsmAnd云。</string>
+    <string name="backup_setup">设置备份</string>
+    <string name="backup_restore_now">立即恢复</string>
+    <string name="attribute">属性</string>
+    <string name="shared_string_purchased">已购买</string>
+    <string name="explore_wikipedia_offline">离线浏览维基百科。</string>
+    <string name="on_hold_since">自 %1$s 起暂停</string>
+    <string name="active_till">活动至 %1$s</string>
+    <string name="promo_subscription">优惠订阅</string>
+    <string name="track_has_no_needed_data">该轨道不包含所需的数据。</string>
+    <string name="option_available_only_in_osmand_pro">该选项作为 OsmAnd Pro 订阅的一部分提供。</string>
+    <string name="purchases_feature_desc_pro_widgets">获得 OsmAnd Pro 功能：路线着色等。</string>
+    <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd Plans 以找到适合您的产品。</string>
+    <string name="routes_color_by_type">根据 … 对路线着色</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">根据他们各自的本地颜色（如果 OpenStreetMap 上存在）和远足盾牌符号为路线着色。</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">按网络从属着色。</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">根据其节点网络类型（国际、区域、本地）对路线进行着色。</string>
+    <string name="walking_route_osmc_description">根据各自的本地颜色（如果在OpenStreetMap上存在）和类型（国际、区域、本地）给路线着色。</string>
+    <string name="travel_routes">旅行路线</string>
+    <string name="setting_supported_by_style">此设置由地图样式“%1$s”提供</string>
+    <string name="direct_line_maps_required_descr">路线计算的时间比平时长。
+\n
+\n也许有些地图没有被加载。</string>
+    <string name="online_direct_line_maps_link">检查必要的地图。</string>
+    <string name="offline_maps_required_descr">缺少此路线所需的一些离线地图。</string>
+    <string name="online_maps_required_descr">不幸的是，OsmAnd 无法为您的设置确定路线。
+\n
+\n可能有些地图没有加载，您可以在线检查所需的地图。</string>
+    <string name="map_updates_for_mappers">为绘图者提供的地图更新</string>
+    <string name="benefits_for_contributors">活跃的 OSM 贡献者的好处</string>
+    <string name="benefits_for_contributors_primary_descr">如果你是OpenStreetMap.org的积极贡献者，你可能有权获得每小时无限次的地图更新。</string>
+    <string name="benefits_for_contributors_secondary_descr">登录 OpenStreetMap 以检查您是否有资格获得无限制的每月和每小时地图更新。</string>
+    <string name="osm_live_payment_subscription_management_amz">确认购买时，将从您的亚马逊帐户中收取费用。
+\n
+\n除非在选定的续订期之前取消，否则它会续订。
+\n
+\n随时从您的亚马逊设置管理或取消您的订阅。</string>
+    <string name="cancel_anytime_in_amazon_app">在亚马逊应用程序中随时取消</string>
+    <string name="amz_manage_subscription_descr">要管理您的订阅，请使用设备上的亚马逊应用程序或在您的个人资料下打开Amazon.com网站。</string>
+    <string name="online_maps_searching_descr">在线搜索…</string>
+    <string name="reset_to_original">重置为原始状态</string>
+    <string name="backup_error_no_subscription">当前无订阅</string>
+    <string name="no_items_of_type_message">你没有该类项目</string>
+    <string name="routeInfo_tracktype_description">根据道路的表面构成，按照道路的状况给路线或轨道线着色。通常适用于主要道路网由非铺装道路组成的道路。</string>
+    <string name="routeInfo_winter_ice_road_description">根据冬季道路分类，给只在冬季可用的路线或轨道线涂上颜色。</string>
+    <string name="routeInfo_smoothness_description">提供关于轮式车辆的物理可用性的分类方案，特别是关于表面规则性/平整度。</string>
+    <string name="routeInfo_surface_description">提供有关道路/人行道物理表面的补充信息。</string>
+    <string name="routeInfo_roadClass_description">根据道路分类给路线或轨道线着色。</string>
+    <string name="add_group_to_markers">添加组别到标记列表</string>
+    <string name="remove_group_from_markers">在标记列表中删除组</string>
+    <string name="last_intermediate_dest_description">添加中间站</string>
+    <string name="more_transport_on_stop_hint">自该站有更多的交通方式。</string>
 </resources>
