@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="routing_attr_allow_gate_name">Allow gate usage</string>
+    <string name="routing_attr_allow_gate_description">Allow usage of gates</string>
+    <string name="routing_attr_only_permitted_streets_name">Expressly permitted streets</string>
+    <string name="routing_attr_only_permitted_streets_description">Only use Streets which are expressly permitted</string>
+    <string name="routing_attr_only_permitted_ways_name">Expressly permitted ways</string>
+    <string name="routing_attr_only_permitted_ways_description">Only use ways (tracks, paths aso.) which are expressly permitted</string>
+    <string name="routing_attr_prefer_horse_routes_name">Prefer horse routes</string>
+    <string name="routing_attr_prefer_horse_routes_description">Prefer horse routes</string>
+
     <string name="poi_routes">Маршруты</string>
     <string name="day">День</string>
     <string name="days_2_4">Дня</string>
