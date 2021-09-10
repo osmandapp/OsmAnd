@@ -1626,7 +1626,7 @@
 \nLun %2$s</string>
     <string name="tips_and_tricks_descr">Întrebări frecvente, schimbări recente și altele.</string>
     <string name="routing_settings_2">Setări de navigație</string>
-    <string name="general_settings_2">Setări globale</string>
+    <string name="general_settings_2">Setări generale</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_do_not_use">A nu se utiliza</string>
     <string name="shared_string_enable">Activează</string>
@@ -3056,20 +3056,20 @@
 \n
 \n</string>
     <string name="duration_moment_ago">cu un moment în urmă</string>
-    <string name="logout_from_osmand_cloud">Ieșiți din OsmAnd Cloud</string>
-    <string name="logout_from_osmand_cloud_decsr">Să mă deconectez\?
-\nVa trebui să vă conectați din nou pentru a face backup sau a restaura datele.</string>
-    <string name="backup_deleting_all_data">Ștergerea tuturor datelor…</string>
+    <string name="logout_from_osmand_cloud">Deconectați-vă din OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Vă deconectați\?
+\nVa trebui să vă conectați din nou pentru a face backup sau a restaura date.</string>
+    <string name="backup_deleting_all_data">Se șterg toate datele…</string>
     <string name="backup_deleted_all_data">Toate datele au fost șterse.</string>
     <string name="backup_deleting_all_data_descr">Vă rugăm să așteptați până când OsmAnd vă șterge datele din cloud. Toate datele de pe dispozitiv vor rămâne neatinse.</string>
     <string name="backup_deleted_all_data_descr">Toate datele dumneavoastră au fost șterse cu succes din OsmAnd Cloud.</string>
     <string name="backup_version_history_removed">Tot istoricul versiunilor a fost eliminat.</string>
-    <string name="backup_data_removed">Toate datele sunt eliminate.</string>
+    <string name="backup_data_removed">Toate datele au fost eliminate.</string>
     <string name="shared_string_progress">Progres</string>
     <string name="backup_do_not_have_any">Nu aveți încă o copie de rezervă online.</string>
     <string name="backup_dont_have_any_descr">Programați copii de rezervă automate și nu pierdeți niciodată date.</string>
     <string name="backup_welcome_back">Bine ați revenit!</string>
-    <string name="backup_welcome_back_descr">Restaurați datele de pe acest dispozitiv utilizând copiile de rezervă existente sau faceți o copie de rezervă a datelor în OsmAnd Cloud.</string>
+    <string name="backup_welcome_back_descr">Restaurați datele pe acest dispozitiv utilizând copii de rezervă existente sau faceți o copie de rezervă a datelor în OsmAnd Cloud.</string>
     <string name="backup_setup">Configurați o copie de rezervă</string>
     <string name="backup_restore_now">Restaurați acum</string>
     <string name="attribute">Atribut</string>
@@ -4269,12 +4269,12 @@
 \n - Prin intermediul unui plugin suplimentar, puteți activa liniile de contur și umbrirea dealurilor</string>
     <string name="option_available_only_in_osmand_pro">Această opțiune este disponibilă ca parte a abonamentului OsmAnd Pro.</string>
     <string name="pro_widgets">Widget-uri Pro</string>
-    <string name="purchases_feature_desc_pro_widgets">Obțineți acces la funcțiile OsmAnd Pro: Colorarea traseelor și multe altele.</string>
+    <string name="purchases_feature_desc_pro_widgets">Obțineți acces la funcțiile OsmAnd Pro: Colorarea rutelor și multe altele.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explorați planurile OsmAnd pentru a găsi unul potrivit pentru dumneavoastră.</string>
-    <string name="routes_color_by_type">Culoare rute de…</string>
+    <string name="routes_color_by_type">Colorează rutele după…</string>
     <string name="shared_string_relation">Relația</string>
-    <string name="rendering_value_walkingRoutesOSMC_description">Colorați rutele în funcție de culoarea lor locală individuală (dacă este prezentă pe OpenStreetMap) și de simbolul scutului de drumeție.</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_description">Culoare în funcție de afilierea la rețea.</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Colorează rutele în funcție de culoarea lor locală individuală (dacă este prezentă pe OpenStreetMap) și de simbolul marcajului de drumeție.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Colorează în funcție de afilierea la rețea.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Colorează rutele în funcție de tipul de rețea de noduri (internațională, regională, locală).</string>
     <string name="walking_route_osmc_description">Colorați rutele în funcție de culoarea locală individuală (dacă este prezentă pe OpenStreetMap) și de tipul lor (internațional, regional, local).</string>
     <string name="travel_routes">Rute de călătorie</string>
@@ -4284,15 +4284,15 @@
 \nPoate că unele hărți nu sunt încărcate.</string>
     <string name="online_direct_line_maps_link">Verificați hărțile necesare.</string>
     <string name="offline_maps_required_descr">Unele hărți offline necesare pentru acest traseu lipsesc.</string>
-    <string name="online_maps_required_descr">Din păcate, OsmAnd nu a putut determina o rută pentru setările dumneavoastră.
+    <string name="online_maps_required_descr">Din păcate OsmAnd nu a putut determina o rută pentru setările dumneavoastră.
 \n
 \nPoate că unele hărți nu sunt încărcate, puteți efectua o verificare online pentru hărțile necesare.</string>
-    <string name="online_maps_searching_descr">Căutând online…</string>
+    <string name="online_maps_searching_descr">Se căută online…</string>
     <string name="reset_to_original">Resetare la original</string>
     <string name="backup_error_no_subscription">Nu există abonament</string>
     <string name="map_updates_for_mappers">Actualizări de hărți pentru cartografi</string>
     <string name="benefits_for_contributors">Beneficii pentru contribuitorii OSM activi</string>
-    <string name="benefits_for_contributors_primary_descr">Este posibil să aveți dreptul la actualizări nelimitate ale hărții din oră în oră dacă sunteți un contribuitor activ la OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">Este posibil să aveți dreptul la actualizări din oră în oră nelimitate ale hărții dacă sunteți un contribuitor activ al OpenStreetMap.org.</string>
     <string name="benefits_for_contributors_secondary_descr">Conectați-vă la OpenStreetMap pentru a verifica dacă sunteți eligibil pentru actualizări lunare și orare nelimitate ale hărților.</string>
     <string name="use_login_and_password">Utilizați numele de utilizator și parola</string>
     <string name="available_until">Disponibil până la %1$s</string>
@@ -4301,7 +4301,7 @@
     <string name="shared_string_contributions">Contribuții</string>
     <string name="contributions_may_calculate_with_delay">Calcularea contribuțiilor poate dura câteva ore.</string>
     <string name="map_updates_are_unavailable_yet">Actualizările hărților nu sunt încă disponibile. :-(</string>
-    <string name="connect_track_points_as">Сonectarea punctelor de traseu</string>
+    <string name="connect_track_points_as">Сonectează punctele din traseu</string>
     <string name="layer_gpx_layer">Trasee</string>
     <string name="empty_state_my_tracks_desc">Importați sau înregistrați fișiere track</string>
     <string name="map_widget_monitoring">Înregistrarea călătoriei</string>
@@ -4309,8 +4309,8 @@
     <string name="gpx_monitoring_stop">Pauză la înregistrarea călătoriei</string>
     <string name="gpx_monitoring_start">Reluarea înregistrării călătoriei</string>
     <string name="pro_features">Caracteristici Pro</string>
-    <string name="purchases_restored">Achiziții restaurate</string>
-    <string name="grey_color_undefined">Culoarea gri este utilizată pentru piesele fără date.</string>
+    <string name="purchases_restored">Achizițiile au fost restaurate</string>
+    <string name="grey_color_undefined">Culoarea gri este utilizată pentru părțile fără date.</string>
     <string name="osm_live_payment_subscription_management_amz">Plata este debitată din contul dvs. Amazon la confirmarea achiziției.
 \n
 \nSe reînnoiește dacă nu este anulat înainte de perioada de reînnoire selectată.
@@ -4322,8 +4322,10 @@
     <string name="no_activity_for_intent">Nu au fost găsite aplicații adecvate pentru a efectua această acțiune</string>
     <string name="no_items_of_type_message">Nu aveți niciun articol de acest tip</string>
     <string name="routeInfo_tracktype_description">Colorarea unui traseu sau a unei linii de cale ferată în funcție de starea drumurilor pe baza compoziției suprafeței acestora. Se aplică de obicei la drumurile în care rețeaua rutieră principală este formată din drumuri neasfaltate.</string>
-    <string name="routeInfo_winter_ice_road_description">Colorarea traseului sau a liniei de cale ferată în conformitate cu clasificarea drumurilor de iarnă, care este utilizabilă numai în timpul iernii.</string>
+    <string name="routeInfo_winter_ice_road_description">"Colorarea traseului sau a liniei de cale în conformitate cu clasificarea de iarnă a drumurilor  care este utilizabilă numai în timpul iernii."</string>
     <string name="routeInfo_smoothness_description">Oferă o schemă de clasificare privind utilizabilitatea fizică a unei căi de rulare pentru vehiculele pe roți, în special în ceea ce privește regularitatea/planeitatea suprafeței.</string>
     <string name="routeInfo_surface_description">Furnizați informații suplimentare cu privire la suprafața fizică a drumurilor/căilor pietonale.</string>
-    <string name="routeInfo_roadClass_description">Colorarea traseului sau a liniei de cale ferată în funcție de clasificarea drumului.</string>
+    <string name="routeInfo_roadClass_description">"Colorarea traseului sau a liniei de cale  în funcție de clasificarea drumului."</string>
+    <string name="add_group_to_markers">Adaugă grupul în lista de markeri</string>
+    <string name="remove_group_from_markers">Elimină grupul din lista de markeri</string>
 </resources>
