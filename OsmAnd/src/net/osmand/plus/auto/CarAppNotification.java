@@ -40,7 +40,7 @@ public class CarAppNotification extends OsmandNotification {
 
 	@Override
 	public boolean isEnabled() {
-		return app.getNavigationSession() != null;
+		return app.getCarNavigationSession() != null;
 	}
 
 	@Override

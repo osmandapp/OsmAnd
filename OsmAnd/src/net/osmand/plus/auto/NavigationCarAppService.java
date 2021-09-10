@@ -53,14 +53,14 @@ public final class NavigationCarAppService extends CarAppService {
 	public Session onCreateSession() {
 		NavigationSession session = new NavigationSession();
 		getApp().getLocationProvider().addLocationListener(session);
-		getApp().setNavigationSession(session);
+		getApp().setCarNavigationSession(session);
 		session.getLifecycle()
 				.addObserver(
 						new DefaultLifecycleObserver() {
 							@Override
 							public void onDestroy(@NonNull LifecycleOwner owner) {
 								getApp().getLocationProvider().removeLocationListener(session);
-								getApp().setNavigationSession(null);
+								getApp().setCarNavigationSession(null);
 							}
 						});
 

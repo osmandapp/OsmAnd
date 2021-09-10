@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.WindowManager;
 
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
 import net.osmand.Location;
@@ -108,15 +109,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		}
 	}
 
-	public void setMapView(OsmandMapTileView mapView) {
+	public void setMapView(@Nullable OsmandMapTileView mapView) {
 		this.mapView = mapView;
 		if (mapView != null) {
 			WindowManager wm = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
+			int orientation = 0;
 			if (wm != null) {
-				int orientation = wm.getDefaultDisplay().getRotation();
-				app.getLocationProvider().updateScreenOrientation(orientation);
-				mapView.setMapLocationListener(this);
+				orientation = wm.getDefaultDisplay().getRotation();
 			}
+			app.getLocationProvider().updateScreenOrientation(orientation);
+			mapView.setMapLocationListener(this);
 		}
 	}
 

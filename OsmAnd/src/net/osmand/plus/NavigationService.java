@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import net.osmand.Location;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LocationServiceHelper.LocationCallback;
 import net.osmand.plus.notifications.OsmandNotification;
@@ -96,7 +97,9 @@ public class NavigationService extends Service {
 				public void onLocationResult(@NonNull List<net.osmand.Location> locations) {
 					if (!locations.isEmpty()) {
 						Location location = locations.get(locations.size() - 1);
-						if (!settings.MAP_ACTIVITY_ENABLED.get()) {
+						NavigationSession carNavigationSession = app.getCarNavigationSession();
+						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasSurface();
+						if (!settings.MAP_ACTIVITY_ENABLED.get() || hasCarSurface) {
 							locationProvider.setLocationFromService(location);
 						}
 					}
@@ -137,12 +140,7 @@ public class NavigationService extends Service {
 		// remove notification
 		stopForeground(Boolean.TRUE);
 		app.getNotificationHelper().updateTopNotification();
-		app.runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				app.getNotificationHelper().refreshNotifications();
-			}
-		}, 500);
+		app.runInUIThread(() -> app.getNotificationHelper().refreshNotifications(), 500);
 	}
 
 	@Override

@@ -475,7 +475,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private void setupOpenGLView(boolean init) {
 		OsmandMapTileView mapView = getMapView();
-		NavigationSession navigationSession = app.getNavigationSession();
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
 		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			ViewStub stub = findViewById(R.id.atlasMapRendererViewStub);
 			if (atlasMapRendererView == null) {
@@ -485,7 +485,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			}
 			OsmAndMapLayersView ml = findViewById(R.id.MapLayersView);
-			if (navigationSession == null || !navigationSession.hasSurface()) {
+			if (carNavigationSession == null || !carNavigationSession.hasSurface()) {
 				ml.setVisibility(View.VISIBLE);
 				ml.setMapView(mapView);
 			} else {
@@ -498,7 +498,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			surf.setVisibility(View.GONE);
 		} else {
 			OsmAndMapSurfaceView surf = findViewById(R.id.MapView);
-			if (navigationSession == null || !navigationSession.hasSurface()) {
+			if (carNavigationSession == null || !carNavigationSession.hasSurface()) {
 				surf.setVisibility(View.VISIBLE);
 				surf.setMapView(mapView);
 			} else {
@@ -1266,7 +1266,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		FailSafeFuntions.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
-		getMapViewTrackingUtilities().setMapView(null);
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		if (carNavigationSession == null || !carNavigationSession.hasSurface()) {
+			getMapViewTrackingUtilities().setMapView(null);
+		}
 		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(getMapView());
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();

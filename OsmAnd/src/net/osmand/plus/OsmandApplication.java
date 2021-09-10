@@ -129,7 +129,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OsmandAidlApi aidlApi;
 
 	NavigationCarAppService navigationCarAppService;
-	NavigationSession navigationSession;
+	NavigationSession carNavigationSession;
 
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
@@ -233,6 +233,8 @@ public class OsmandApplication extends MultiDexApplication {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
 		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
+		osmandMap.getMapLayers().updateLayers(null);
+
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -563,12 +565,12 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	@Nullable
-	public NavigationSession getNavigationSession() {
-		return navigationSession;
+	public NavigationSession getCarNavigationSession() {
+		return carNavigationSession;
 	}
 
-	public void setNavigationSession(@Nullable NavigationSession navigationSession) {
-		if (navigationSession == null) {
+	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
+		if (carNavigationSession == null) {
 			NavigationService navigationService = this.navigationService;
 			if (navigationService != null) {
 				navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
@@ -576,10 +578,10 @@ public class OsmandApplication extends MultiDexApplication {
 		} else {
 			startNavigationService(NavigationService.USED_BY_CAR_APP);
 		}
-		this.navigationSession = navigationSession;
+		this.carNavigationSession = carNavigationSession;
 		NavigationSessionListener navigationSessionListener = this.navigationSessionListener;
 		if (navigationSessionListener != null) {
-			navigationSessionListener.onNavigationSessionChanged(navigationSession);
+			navigationSessionListener.onNavigationSessionChanged(carNavigationSession);
 		}
 	}
 
@@ -923,7 +925,7 @@ public class OsmandApplication extends MultiDexApplication {
 			
 		}
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			startForegroundService(serviceIntent);
 		} else {
 			startService(serviceIntent);

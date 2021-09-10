@@ -53,8 +53,8 @@ public class OsmandMap implements NavigationSessionListener {
 
 		int w;
 		int h;
-		NavigationSession navigationSession = app.getNavigationSession();
-		if (navigationSession == null) {
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		if (carNavigationSession == null) {
 			WindowManager wm = (WindowManager) app.getSystemService(Context.WINDOW_SERVICE);
 			Display display = wm.getDefaultDisplay();
 			Point screenDimensions = new Point(0, 0);
@@ -62,7 +62,7 @@ public class OsmandMap implements NavigationSessionListener {
 			w = screenDimensions.x;
 			h = screenDimensions.y - AndroidUtils.getStatusBarHeight(app);
 		} else {
-			SurfaceRenderer surface = navigationSession.getNavigationCarSurface();
+			SurfaceRenderer surface = carNavigationSession.getNavigationCarSurface();
 			w = surface != null ? surface.getWidth() : 100;
 			h = surface != null ? surface.getHeight() : 100;
 		}
@@ -77,10 +77,12 @@ public class OsmandMap implements NavigationSessionListener {
 		return app;
 	}
 
+	@NonNull
 	public OsmandMapTileView getMapView() {
 		return mapView;
 	}
 
+	@NonNull
 	public MapLayers getMapLayers() {
 		return mapLayers;
 	}
@@ -140,9 +142,12 @@ public class OsmandMap implements NavigationSessionListener {
 		for (OsmandMapListener listener : listeners) {
 			listener.onSetupOpenGLView(init);
 		}
-		NavigationSession navigationSession = app.getNavigationSession();
+		NavigationSession navigationSession = app.getCarNavigationSession();
 		if (navigationSession != null && navigationSession.hasSurface()) {
 			navigationSession.setMapView(mapView);
+			app.getMapViewTrackingUtilities().setMapView(mapView);
+		} else if (mapView.getMapActivity() == null) {
+			app.getMapViewTrackingUtilities().setMapView(null);
 		}
 	}
 
@@ -150,6 +155,9 @@ public class OsmandMap implements NavigationSessionListener {
 	public void onNavigationSessionChanged(@Nullable NavigationSession navigationSession) {
 		if (navigationSession != null) {
 			navigationSession.setMapView(mapView);
+			app.getMapViewTrackingUtilities().setMapView(mapView);
+		} else if (mapView.getMapActivity() == null) {
+			app.getMapViewTrackingUtilities().setMapView(null);
 		}
 	}
 }

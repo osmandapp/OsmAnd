@@ -748,6 +748,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			return;
 		}
 		if (location != null) {
+			lastTimeLocationFixed = System.currentTimeMillis();
 			notifyGpsLocationRecovered();
 		}
 		// notify about lost location
@@ -758,8 +759,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		OsmandPlugin.updateLocationPlugins(location);
 		routingHelper.updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
-		NavigationSession carNavigationSession = app.getNavigationSession();
-		if (carNavigationSession != null) {
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		if (carNavigationSession != null && carNavigationSession.hasSurface()) {
 			carNavigationSession.updateLocation(location);
 			net.osmand.Location updatedLocation = location;
 			if (routingHelper.isFollowingMode()) {
