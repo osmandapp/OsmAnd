@@ -4019,4 +4019,9 @@
     <string name="poi_shelter_filter">Unterstand</string>
     <string name="poi_permanent_camping">Dauerstellplätze</string>
     <string name="poi_arch">Felsbogen</string>
+    <string name="poi_payment_reverse_charge_calls_yes">R-Gespräche: ja</string>
+    <string name="poi_payment_calling_cards_yes">Calling cards akzeptiert</string>
+    <string name="poi_callable">Anrufbar</string>
+    <string name="poi_payment_calling_cards_no">Calling cards nicht akzeptiert</string>
+    <string name="poi_payment_reverse_charge_calls_no">R-Gespräche: nein</string>
 </resources>
