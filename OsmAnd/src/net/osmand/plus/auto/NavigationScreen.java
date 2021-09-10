@@ -162,17 +162,15 @@ public final class NavigationScreen extends Screen {
 		builder.setActionStrip(actionStripBuilder.build());
 
 		// Set the map action strip with the pan and zoom buttons.
-		CarIcon.Builder panIconBuilder = new CarIcon.Builder(
-				IconCompat.createWithResource(
-						getCarContext(),
-						R.drawable.ic_action_item_move));
-		if (mIsInPanMode) {
-			panIconBuilder.setTint(CarColor.BLUE);
-		}
+		//CarIcon.Builder panIconBuilder = new CarIcon.Builder(
+		//		IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_item_move));
+		//if (mIsInPanMode) {
+		//	panIconBuilder.setTint(CarColor.BLUE);
+		//}
 
 		builder.setMapActionStrip(new ActionStrip.Builder()
 				.addAction(new Action.Builder(Action.PAN)
-						.setIcon(panIconBuilder.build())
+						//.setIcon(panIconBuilder.build())
 						.build())
 				.addAction(
 						new Action.Builder()
