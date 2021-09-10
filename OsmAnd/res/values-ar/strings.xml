@@ -68,7 +68,7 @@
     <string name="map_widget_monitoring_services">خدمات التسجيل</string>
     <string name="no_route">لا طريق</string>
     <string name="delete_target_point">إزالة وجهة</string>
-    <string name="new_destination_point_dialog">لقد قمت بالفعل بتعيين وجهة:</string>
+    <string name="new_destination_point_dialog">توجد وجهة سابقة تعمل حاليا:</string>
     <string name="shared_string_target_points">الوجهات</string>
     <string name="btn_advanced_mode">الوضع المتقدم…</string>
     <string name="poi_filter_parking">موقف السيارة</string>
@@ -1865,8 +1865,8 @@
     <string name="shared_string_import2osmand">استيراد إلى أوسماند</string>
     <string name="osm_edit_context_menu_delete">حذف تعديل OSM</string>
     <string name="rendering_value_disabled_name">معطل</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">شبكة اتصال</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">الانتماء لشبكة الاتصال</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">تلوين وفق رمز تنزه OSMC</string>
     <string name="shared_string_logoff">خروج</string>
     <string name="local_recordings_delete_all_confirm">حذف %1$d ملاحظة؟</string>
     <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تحميل خريطة خاصة محلياً.</string>
@@ -1882,7 +1882,7 @@
     <string name="disable_complex_routing_descr">تعطيل 2-مرحلة التوجيه للملاحة بالسيارة.</string>
     <string name="rendering_attr_alpineHiking_name">مقياس التنزه في جبال الألب (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">تقديم المسارات وفقاً لمقياس SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">مسارات تنزه</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">طرق المشي الخلوي</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم المسارات وفقاً لآثار OSMC.</string>
     <string name="local_index_description">انقر فوق أي عنصر لمعرفة المزيد من التفاصيل، اضغط وواصل الضغط للتعطيل أو الحذف. البيانات الحالية على الجهاز (%1$s متاح):</string>
     <string name="keep_informing_descr">إعادة إعلان تعليمات الملاحة في فترات منتظمة.</string>
@@ -4150,7 +4150,7 @@
     <string name="announce_when_exceeded">الإعلان عند التجاوز</string>
     <string name="user_points">نقاط المستخدم</string>
     <string name="output">الإخراج</string>
-    <string name="srtm_unit_format">متغير وحدة خطوط الكفاف (الكنتور)</string>
+    <string name="srtm_unit_format">تنسيق وحدة خطوط الكنتور</string>
     <string name="srtm_download_list_help_message">OsmAnd يوفر بيانات الخطوط الكنتورية بالأمتار والقدم. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
     <string name="srtm_download_single_help_message">الرجاء تحديد التنسيق المطلوب. ستحتاج إلى إعادة تنزيل الملف لتغيير التنسيق.</string>
     <string name="shared_string_feet">قدم</string>

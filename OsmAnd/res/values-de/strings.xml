@@ -307,7 +307,7 @@
     <string name="index_settings">Kartenverwaltung</string>
     <string name="index_settings_descr">Herunterladen und Verwalten von auf Ihrem Gerät gespeicherten Offline-Kartendateien.</string>
     <string name="general_settings">Allgemein</string>
-    <string name="general_settings_2">Globale Einstellungen</string>
+    <string name="general_settings_2">Allgemeine Einstellungen</string>
     <string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen.</string>
     <string name="global_app_settings">Globale Einstellungen</string>
     <string name="user_name">OSM-Benutzername</string>
