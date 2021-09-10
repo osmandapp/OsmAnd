@@ -111,7 +111,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			WptPt wpt = editor.getWptPt();
 			this.wpt = wpt;
 			color = wpt.getColor(0);
-			iconName = wpt.getIconNameOrDefault();
+			iconName = getInitialIconName(wpt);
 			categoriesMap = editor.getGpxFile().getWaypointCategoriesWithColors(false);
 			backgroundTypeName = wpt.getBackgroundType();
 		}
@@ -180,6 +180,11 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		return "";
 	}
 
+	private String getInitialIconName(WptPt wpt) {
+		String iconName = wpt.getIconName();
+		return iconName != null ? iconName : getDefaultIconName();
+	}
+
 	public static void showInstance(@NonNull MapActivity mapActivity) {
 		showInstance(mapActivity, false);
 	}
@@ -220,6 +225,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 			} else {
 				doUpdateWpt(name, category, description);
 			}
+			addLastUsedIcon(wpt.getIconName());
 			mapActivity.refreshMap();
 			if (needDismiss) {
 				dismiss(false);
@@ -450,11 +456,7 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 
 	@Override
 	public int getIconId() {
-		return getIconIdFromName(iconName);
-	}
-
-	public int getIconIdFromName(String iconName) {
-		int iconId = app.getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
+		int iconId = getIconIdByName(iconName);
 		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
 	}
 

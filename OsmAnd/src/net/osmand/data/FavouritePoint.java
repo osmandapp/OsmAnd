@@ -164,6 +164,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public int getIconId() {
+		return iconId;
+	}
+
+	public int getIconIdOrDefault() {
 		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
@@ -212,7 +216,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId(ctx);
 		}
-		return getIconId();
+		return getIconIdOrDefault();
 	}
 
 	public double getLatitude() {

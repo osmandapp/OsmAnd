@@ -54,6 +54,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
+import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.track.ColorsCard;
@@ -73,6 +74,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
 import static net.osmand.data.FavouritePoint.BackgroundType;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
@@ -102,6 +104,8 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	private RecyclerView groupRecyclerView;
 	private String selectedIconCategory;
 	private LinkedHashMap<String, JSONArray> iconCategories;
+	private String lastUsedCategoryTitle;
+	private List<String> lastUsedIcons;
 	private OsmandApplication app;
 	private View descriptionCaption;
 	private View addressCaption;
@@ -113,6 +117,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		app = requireMyApplication();
+		initLastUsedIcons();
+
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				MapActivity mapActivity = getMapActivity();
@@ -128,7 +135,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		app = requireMyApplication();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		view = UiUtilities.getInflater(getContext(), nightMode)
 				.inflate(R.layout.point_editor_fragment_new, container, false);
@@ -591,12 +597,23 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		return iconCategories.keySet().iterator().next();
 	}
 
-	private String getNameFromIconId(int iconId) {
+	protected String getNameFromIconId(int iconId) {
 		return app.getResources().getResourceEntryName(iconId).replaceFirst("mx_", "");
+	}
+
+	protected int getIconIdByName(String iconName) {
+		return app.getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
 	}
 
 	private void createIconSelector() {
 		iconCategories = new LinkedHashMap<>();
+
+		// update last used icons
+		if (!Algorithms.isEmpty(lastUsedIcons)) {
+			iconCategories.put(lastUsedCategoryTitle, new JSONArray(lastUsedIcons));
+		}
+
+		// update categories from json
 		try {
 			JSONObject obj = new JSONObject(loadJSONFromAsset());
 			JSONObject categories = obj.getJSONObject("categories");
@@ -610,13 +627,56 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
 		selectedIconCategory = getInitCategory();
 		createIconForCategory();
+	}
+
+	protected void initLastUsedIcons() {
+		lastUsedCategoryTitle = getString(R.string.shared_string_last_used);
+		List<String> fromPref = app.getSettings().LAST_USED_FAV_ICONS.getStringsList();
+		lastUsedIcons = new ArrayList<>(fromPref);
+	}
+
+	protected int getDefaultIconId() {
+		try {
+			String iconName = getDefaultIconName();
+			return getIconIdByName(iconName);
+		} catch (Exception e) {
+			return DEFAULT_UI_ICON_ID;
+		}
+	}
+
+	protected String getDefaultIconName() {
+		if (!Algorithms.isEmpty(lastUsedIcons)) {
+			return lastUsedIcons.get(0);
+		}
+		return DEFAULT_ICON_NAME;
+	}
+
+	protected void addLastUsedIcon(int iconId) {
+		try {
+			String iconName = getNameFromIconId(iconId);
+			addLastUsedIcon(iconName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected void addLastUsedIcon(String iconName) {
+		int LIMIT = 20;
+		lastUsedIcons.remove(iconName);
+		if (lastUsedIcons.size() >= LIMIT) {
+			lastUsedIcons = lastUsedIcons.subList(0, LIMIT - 1);
+		}
+		lastUsedIcons.add(0, iconName);
+		app.getSettings().LAST_USED_FAV_ICONS.setStringsList(lastUsedIcons);
 	}
 
 	private void createIconForCategory() {
 		createIconList();
 		final HorizontalSelectionAdapter horizontalSelectionAdapter = new HorizontalSelectionAdapter(app, nightMode);
+
 		horizontalSelectionAdapter.setTitledItems(new ArrayList<>(iconCategories.keySet()));
 		horizontalSelectionAdapter.setSelectedItemByTitle(selectedIconCategory);
 		horizontalSelectionAdapter.setListener(new HorizontalSelectionAdapter.HorizontalSelectionAdapterListener() {
@@ -628,6 +688,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				horizontalSelectionAdapter.notifyDataSetChanged();
 			}
 		});
+		HorizontalSelectionItem lastUsedCategory = horizontalSelectionAdapter.getItemByTitle(lastUsedCategoryTitle);
+		if (lastUsedCategory != null) {
+			lastUsedCategory.setIconId(R.drawable.ic_action_history);
+			lastUsedCategory.setShowOnlyIcon(true);
+			lastUsedCategory.setTitleColorId(ColorUtilities.getActiveColorId(nightMode));
+		}
 		RecyclerView iconCategoriesRecyclerView = view.findViewById(R.id.group_name_recycler_view);
 		iconCategoriesRecyclerView.setAdapter(horizontalSelectionAdapter);
 		iconCategoriesRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
@@ -669,7 +735,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		setIconSelectorBackground(backgroundCircle);
 		ImageView icon = iconItemView.findViewById(R.id.icon);
 		icon.setVisibility(View.VISIBLE);
-		int validIconId = app.getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
+		int validIconId = getIconIdByName(iconName);
 		final int iconRes = validIconId != 0 ? validIconId : DEFAULT_UI_ICON_ID;
 		icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color_default_light));
 		backgroundCircle.setOnClickListener(new View.OnClickListener() {
