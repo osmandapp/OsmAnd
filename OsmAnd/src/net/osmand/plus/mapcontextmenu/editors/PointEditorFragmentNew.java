@@ -633,9 +633,12 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	}
 
 	protected void initLastUsedIcons() {
+		lastUsedIcons = new ArrayList<>();
 		lastUsedCategoryTitle = getString(R.string.shared_string_last_used);
 		List<String> fromPref = app.getSettings().LAST_USED_FAV_ICONS.getStringsList();
-		lastUsedIcons = new ArrayList<>(fromPref);
+		if (fromPref != null) {
+			lastUsedIcons.addAll(fromPref);
+		}
 	}
 
 	protected int getDefaultIconId() {
