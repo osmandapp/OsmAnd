@@ -614,7 +614,6 @@ public class TileSourceManager {
 	public static java.util.List<TileSourceTemplate> getKnownSourceTemplates() {
 		java.util.List<TileSourceTemplate> list = new ArrayList<>();
 		list.add(getMapnikSource());
-		list.add(getMapillaryRasterSource());
 		list.add(getMapillaryVectorSource());
 		return list;
 	}
