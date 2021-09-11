@@ -12,6 +12,7 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.SunriseSunset;
@@ -77,6 +78,11 @@ public class DayNightHelper implements SensorEventListener {
 
 	public boolean isNightModeForProfile(ApplicationMode mode) {
 		DayNightMode dayNightMode = app.getSettings().DAYNIGHT_MODE.getModeValue(mode);
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		if (carNavigationSession != null) {
+			boolean carDarkMode = carNavigationSession.getCarContext().isDarkMode();
+			dayNightMode = carDarkMode ? DayNightMode.NIGHT : DayNightMode.DAY;
+		}
 		if (dayNightMode.isDay()) {
 			return false;
 		} else if (dayNightMode.isNight()) {

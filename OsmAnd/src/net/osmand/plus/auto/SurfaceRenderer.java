@@ -36,6 +36,8 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	@Nullable
 	Rect mStableArea;
 
+	private boolean darkMode = false;
+
 	private final CarContext mCarContext;
 
 	public final SurfaceCallback mSurfaceCallback =
@@ -46,6 +48,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 						Log.i(TAG, "Surface available " + surfaceContainer);
 						mSurface = surfaceContainer.getSurface();
 						surfaceView.setWidthHeight(surfaceContainer.getWidth(), surfaceContainer.getHeight());
+						darkMode = mCarContext.isDarkMode();
 						OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 						if (mapView != null) {
 							mapView.setupOpenGLView();
@@ -207,8 +210,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 			// Surface is not available, or has been destroyed, skip this frame.
 			return;
 		}
-		boolean nightMode = mapView.getApplication().getDaynightHelper().isNightMode();
-		DrawSettings drawSettings = new DrawSettings(nightMode, false);
+		DrawSettings drawSettings = new DrawSettings(mCarContext.isDarkMode(), false);
 		RotatedTileBox tileBox = mapView.getCurrentRotatedTileBox().copy();
 		renderFrame(tileBox, drawSettings);
 	}
@@ -220,6 +222,10 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 		}
 		Canvas canvas = mSurface.lockCanvas(null);
 		try {
+			boolean newDarkMode = mCarContext.isDarkMode();
+			boolean updateVectorRendering = drawSettings.isUpdateVectorRendering() || darkMode != newDarkMode;
+			darkMode = newDarkMode;
+			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);
 			mapView.drawOverMap(canvas, tileBox, drawSettings);
 		} finally {
 			mSurface.unlockCanvasAndPost(canvas);
