@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import net.osmand.StateChangedListener;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -555,23 +556,20 @@ public class MapWidgetRegistry {
 									items.add(new PopUpMenuItem.Builder(app)
 											.setTitle(title)
 											.setIcon(icon)
-											.setOnClickListener(new View.OnClickListener() {
-												@Override
-												public void onClick(View v) {
-													r.changeState(id);
-													MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-													if (mil != null) {
-														mil.recreateControls();
-													}
-													ContextMenuItem item = adapter.getItem(pos);
-													item.setIcon(r.getDrawableMenu());
-													if (r.getMessage() != null) {
-														item.setTitle(r.getMessage());
-													} else {
-														item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
-													}
-													adapter.notifyDataSetChanged();
+											.setOnClickListener(v -> {
+												r.changeState(id);
+												MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+												if (mil != null) {
+													mil.recreateControls();
 												}
+												ContextMenuItem item = adapter.getItem(pos);
+												item.setIcon(r.getDrawableMenu());
+												if (r.getMessage() != null) {
+													item.setTitle(r.getMessage());
+												} else {
+													item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
+												}
+												adapter.notifyDataSetChanged();
 											})
 											.showCompoundBtn(currentModeColor)
 											.setSelected(isChecked)
@@ -583,40 +581,27 @@ public class MapWidgetRegistry {
 							items.add(new PopUpMenuItem.Builder(app)
 									.setTitleId(R.string.shared_string_show)
 									.setIcon(ic.getThemedIcon(R.drawable.ic_action_view))
-									.setOnClickListener(new View.OnClickListener() {
-										@Override
-										public void onClick(View v) {
-											setVisibility(adapter, pos, true, false);
-										}
-									})
+									.setOnClickListener(v -> setVisibility(adapter, pos, true, false))
+									.showTopDivider(items.size() > 0)
 									.create());
 
 							// hide
 							items.add(new PopUpMenuItem.Builder(app)
 									.setTitleId(R.string.shared_string_hide)
 									.setIcon(ic.getThemedIcon(R.drawable.ic_action_hide))
-									.setOnClickListener(new View.OnClickListener() {
-										@Override
-										public void onClick(View v) {
-											setVisibility(adapter, pos, false, false);
-										}
-									})
+									.setOnClickListener(v -> setVisibility(adapter, pos, false, false))
 									.create());
 
 							// collapse
 							items.add(new PopUpMenuItem.Builder(app)
 									.setTitleId(R.string.shared_string_collapse)
 									.setIcon(ic.getThemedIcon(R.drawable.ic_action_widget_collapse))
-									.setOnClickListener(new View.OnClickListener() {
-										@Override
-										public void onClick(View v) {
-											setVisibility(adapter, pos, true, true);
-										}
-									})
+									.setOnClickListener(v -> setVisibility(adapter, pos, true, true))
 									.create());
 
 							new PopUpMenuHelper.Builder(textWrapper, items, nightMode)
 									.setWidthType(PopUpMenuWidthType.STANDARD)
+									.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode))
 									.show();
 
 							return false;
