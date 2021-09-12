@@ -4110,7 +4110,7 @@
     <string name="update_all_maps_added">Aktualizovat všechny mapy přidané do %1$s\?</string>
     <string name="shared_string_feet">stopy</string>
     <string name="srtm_unit_format">Varianta vrstevnicových jednotek</string>
-    <string name="srtm_download_list_help_message">OsmAnd poskytuje vrstevnicová data v metrech a stopách. Pro změnu formátu budete muset soubor znovu stáhnout.</string>
+    <string name="srtm_download_list_help_message">OsmAnd poskytuje data vrstevnic v metrech a stopách. Pro změnu formátu budete muset soubor znovu stáhnout.</string>
     <string name="srtm_download_single_help_message">Zvolte prosím variantu. Pro změnu formátu budete muset soubor znovu stáhnout.</string>
     <string name="exit_number">Číslo výjezdu</string>
     <string name="announce_when_exceeded">Hlásit při překročení</string>
