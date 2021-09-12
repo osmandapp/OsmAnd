@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 	public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
 		StringBuilder buf = new StringBuilder();
 		try {
-			BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+			BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
 			String str;
 			while ((str = in.readLine()) != null) {
 				buf.append(str);
@@ -55,23 +56,20 @@ public abstract class OsmandSettingsItemReader<T extends OsmandSettingsItem> ext
 	}
 
 	public void readPreferencesFromJson(final JSONObject json) {
-		settings.getContext().runInUIThread(new Runnable() {
-			@Override
-			public void run() {
-				Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
-				Iterator<String> iter = json.keys();
-				while (iter.hasNext()) {
-					String key = iter.next();
-					OsmandPreference<?> p = prefs.get(key);
-					if (p != null) {
-						try {
-							readPreferenceFromJson(p, json);
-						} catch (Exception e) {
-							SettingsHelper.LOG.error("Failed to read preference: " + key, e);
-						}
-					} else {
-						SettingsHelper.LOG.warn("No preference while importing settings: " + key);
+		settings.getContext().runInUIThread(() -> {
+			Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
+			Iterator<String> iterator = json.keys();
+			while (iterator.hasNext()) {
+				String key = iterator.next();
+				OsmandPreference<?> p = prefs.get(key);
+				if (p != null) {
+					try {
+						readPreferenceFromJson(p, json);
+					} catch (Exception e) {
+						SettingsHelper.LOG.error("Failed to read preference: " + key, e);
 					}
+				} else {
+					SettingsHelper.LOG.warn("No preference while importing settings: " + key);
 				}
 			}
 		});

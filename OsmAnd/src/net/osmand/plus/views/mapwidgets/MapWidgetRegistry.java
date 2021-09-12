@@ -86,6 +86,7 @@ public class MapWidgetRegistry {
 		loadVisibleElementsFromSettings();
 		listener = change -> updateVisibleWidgets();
 		settings.AVAILABLE_APP_MODES.addListener(listener);
+		settings.MAP_INFO_CONTROLS.addListener(listener);
 	}
 
 	public void populateStackControl(LinearLayout stack,
@@ -249,7 +250,7 @@ public class MapWidgetRegistry {
 		for (MapWidgetRegInfo m : mi) {
 			if (m.visibleModes.contains(mode)) {
 				set.add(m.key);
-			} else if (m.visibleCollapsible != null && m.visibleCollapsible.contains(mode)) {
+			} else if (m.visibleCollapsible.contains(mode)) {
 				set.add(COLLAPSED_PREFIX + m.key);
 			} else {
 				set.add(HIDE_PREFIX + m.key);
@@ -812,13 +813,7 @@ public class MapWidgetRegistry {
 		cm.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.app_modes_choose, map)
 				.setLayout(R.layout.mode_toggles).createItem());
-		cm.setChangeAppModeListener(new ConfigureMapMenu.OnClickListener() {
-
-			@Override
-			public void onClick() {
-				map.getDashboard().updateListAdapter(getViewConfigureMenuAdapter(map));
-			}
-		});
+		cm.setChangeAppModeListener(() -> map.getDashboard().updateListAdapter(getViewConfigureMenuAdapter(map)));
 		final ApplicationMode mode = settings.getApplicationMode();
 		addControls(map, cm, mode);
 		return cm;
@@ -826,8 +821,8 @@ public class MapWidgetRegistry {
 
 	static class AppearanceItemClickListener implements ContextMenuAdapter.ItemClickListener {
 
-		private MapActivity mapActivity;
-		private OsmandPreference<Boolean> pref;
+		private final MapActivity mapActivity;
+		private final OsmandPreference<Boolean> pref;
 
 		public AppearanceItemClickListener(OsmandPreference<Boolean> pref, MapActivity mapActivity) {
 			this.pref = pref;
