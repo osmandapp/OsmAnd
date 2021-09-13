@@ -53,8 +53,10 @@ class AppVersionUpgradeOnInit {
 	public static final int VERSION_3_8_00 = 3800;
 	// 4000 - 4.0-00
 	public static final int VERSION_4_0_00 = 4000;
+	// 4001 - 4.0-01
+	public static final int VERSION_4_0_01 = 4001;
 
-	public static final int LAST_APP_VERSION = VERSION_4_0_00;
+	public static final int LAST_APP_VERSION = VERSION_4_0_01;
 
 	static final String VERSION_INSTALLED = "VERSION_INSTALLED";
 

@@ -104,9 +104,7 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
                                 wrong = true;
                             }
                         }
-                    } catch (InterruptedException e) {
-                        Log.e(TAG, e.toString());
-                    } catch (ExecutionException e) {
+                    } catch (InterruptedException | ExecutionException e) {
                         Log.e(TAG, e.toString());
                     }
                     filterResults.values = names;
