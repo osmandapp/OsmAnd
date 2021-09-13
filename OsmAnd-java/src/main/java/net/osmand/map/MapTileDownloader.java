@@ -128,9 +128,9 @@ public class MapTileDownloader {
 
 	public MapTileDownloader(int numberOfThreads) {
 		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads,
-				TILE_DOWNLOAD_SECONDS_TO_WORK, TimeUnit.SECONDS, new LIFOBlockingDeque<>());
-		pendingToDownload = Collections.synchronizedSet(new HashSet<>());
-		currentlyDownloaded = Collections.synchronizedSet(new HashSet<>());
+				TILE_DOWNLOAD_SECONDS_TO_WORK, TimeUnit.SECONDS, new LIFOBlockingDeque<Runnable>());
+		pendingToDownload = Collections.synchronizedSet(new HashSet<File>());
+		currentlyDownloaded = Collections.synchronizedSet(new HashSet<File>());
 	}
 	
 	public void setNoHttps(boolean noHttps) {

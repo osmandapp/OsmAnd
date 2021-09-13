@@ -19,19 +19,19 @@ public class MapillaryImage {
 	// When the image was captured, expressed as UTC epoch time in milliseconds. Must be non-negative integer;  0 if not found.
 	private long capturedAt;
 	private String imageId;
-	private boolean isPanoramicImage;
+	private boolean panoramicImage;
 	private String sequenceId;
-	// User key. Empty if not found.
+	// Can be absent
 	private String organizationId;
 
 	public MapillaryImage(double latitude, double longitude, double compassAngle, long capturedAt,
-	                      String imageId, boolean isPanoramicImage, String sequenceId, String organizationId) {
+	                      String imageId, boolean panoramicImage, String sequenceId, String organizationId) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.compassAngle = compassAngle;
 		this.capturedAt = capturedAt;
 		this.imageId = imageId;
-		this.isPanoramicImage = isPanoramicImage;
+		this.panoramicImage = panoramicImage;
 		this.sequenceId = sequenceId;
 		this.organizationId = organizationId;
 	}
@@ -51,7 +51,7 @@ public class MapillaryImage {
 			if (userData.get(ORGANIZATION_ID_KEY) != null) {
 				this.organizationId = ((Number) userData.get(ORGANIZATION_ID_KEY)).toString();
 			}
-			this.isPanoramicImage = (boolean) userData.get(IS_PANORAMIC_KEY);
+			this.panoramicImage = (boolean) userData.get(IS_PANORAMIC_KEY);
 		} catch (Exception e) {
 			res = false;
 		}
@@ -79,7 +79,7 @@ public class MapillaryImage {
 	}
 
 	public boolean isPanoramicImage() {
-		return isPanoramicImage;
+		return panoramicImage;
 	}
 
 	public String getSKey() {
