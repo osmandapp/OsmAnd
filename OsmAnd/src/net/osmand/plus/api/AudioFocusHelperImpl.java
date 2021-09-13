@@ -1,5 +1,9 @@
 package net.osmand.plus.api;
 
+import android.media.AudioAttributes;
+import android.media.AudioFocusRequest;
+import android.os.Build;
+
 import net.osmand.PlatformUtil;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -9,47 +13,94 @@ import org.apache.commons.logging.Log;
 import android.content.Context;
 import android.media.AudioManager;
 
-/**
- * This helper class allows API level 8 calls to be isolated from the rest of the app. This class is only be instantiated on OS versions
- * which support it.
- *
- * @author genly
- */
+// Hardy, 2021-09-12, audio focus overhaul:
+// - AudioAttributes, AudioFocusRequest for SDK_INT >= 26
+// - Inhibit playing without focus granted
+// - Handle audio focus losss
+// - Handle TRANSIENT and DUCK
 public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeListener, AudioFocusHelper {
+	private static boolean playbackAuthorized = false;
+	//private static boolean playbackDelayed = false;
 	private static final Log log = PlatformUtil.getLog(AudioFocusHelperImpl.class);
 
 	@Override
-	public boolean requestFocus(Context context, ApplicationMode applicationMode, int streamType) {
+	public boolean requestAudFocus(Context context, ApplicationMode applicationMode, int streamType) {
 		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-		return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this, streamType, 
-			((OsmandApplication) context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.getModeValue(applicationMode)?
-			AudioManager.AUDIOFOCUS_GAIN_TRANSIENT: 
-			AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK );
+		if (android.os.Build.VERSION.SDK_INT < 26) {
+			playbackAuthorized = AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this, streamType,
+					((OsmandApplication) context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.getModeValue(applicationMode)
+					? AudioManager.AUDIOFOCUS_GAIN_TRANSIENT : AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK);
+		} else {
+			AudioAttributes mAudioAttributes = new AudioAttributes.Builder()
+					.setUsage(((OsmandApplication) context.getApplicationContext()).getSettings().AUDIO_USAGE.get())
+					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+					.build();
+			AudioFocusRequest mAudioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+					.setAudioAttributes(mAudioAttributes)
+					.setAcceptsDelayedFocusGain(false)
+					.setOnAudioFocusChangeListener(this)
+					.build();
+			final Object focusLock = new Object();
+			int res = mAudioManager.requestAudioFocus(mAudioFocusRequest);
+			synchronized(focusLock) {
+				if (res == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+					playbackAuthorized = true;
+				} else if (res == AudioManager.AUDIOFOCUS_REQUEST_FAILED) {
+					playbackAuthorized = false;
+				} else if (res == AudioManager.AUDIOFOCUS_REQUEST_DELAYED) {
+					playbackAuthorized = false;
+					//playbackDelayed = true;
+				}
+			}
 		}
+		return playbackAuthorized;
+	}
 
 	@Override
-	public boolean abandonFocus(Context context, ApplicationMode applicationMode, int streamType) {
+	public boolean abandonAudFocus(Context context, ApplicationMode applicationMode, int streamType) {
 		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-		return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
+		playbackAuthorized = false;
+		//playbackDelayed = false;
+		if (android.os.Build.VERSION.SDK_INT < 26) {
+			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
+		} else {
+			AudioAttributes pmAudioAttributes = new AudioAttributes.Builder()
+					.setUsage(((OsmandApplication) context.getApplicationContext()).getSettings().AUDIO_USAGE.get())
+					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+					.build();
+			AudioFocusRequest mAudioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+					.setAudioAttributes(mAudioAttributes)
+					.setAcceptsDelayedFocusGain(false)
+					.setOnAudioFocusChangeListener(this)
+					.build();
+			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocusRequest(mAudioFocusRequest);
+		}
 	}
 
 	@Override
 	public void onAudioFocusChange(int focusChange) {
-		// Basically we ignore audio focus changes. There's not much we can do when we have interrupted audio
-		// for our speech, and we in turn get interrupted. Ignore it until a scenario comes up which gives us
-		// reason to change this strategy.
-		log.error("MediaCommandPlayerImpl.onAudioFocusChange(): Unexpected audio focus change: " + focusChange);
+		log.error("AudioFocusHelperImpl.onAudioFocusChange(): Unexpected audio focus change: " + focusChange);
+		if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+			playbackAuthorized = true;
+		} else if (focusChange == AudioManager.AUDIOFOCUS_GAIN_TRANSIENT) {
+			playbackAuthorized = true;
+		} else if (focusChange == AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK) {
+			playbackAuthorized = true;
+		} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+			playbackAuthorized = false;
+			// Stop playback
+			//abandonAudioFocus(this);
+			//RoutingHelper.getVoiceRouter().interruptRouteCommands();
+		} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
+			playbackAuthorized = false;
+			//playbackDelayed = true;
+		} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+			//System will not automatically duck apps with AudioAttributes.CONTENT_TYPE_SPEECH and instead notify this case to e.g. enable pausing here: 
+			playbackAuthorized = true;
+		}
+	}
 
-		// Hardy, 2017-05-25: (See https://developer.android.com/guide/topics/media-apps/volume-and-earphones.html)
-//		if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
-			// Usually: Permanent loss of audio focus, stop playback here
-//			RoutingHelper.getVoiceRouter().interruptRouteCommands();
-//		} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
-			// Usually: Pause playback
-//		} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-			// Usually: Lower the volume, keep playing
-//		} else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-			// Usually: App has been granted audio focus again, raise volume to normal
-//		}
+	public boolean getPlaybackAuthorized() {
+		return playbackAuthorized;
 	}
 }
