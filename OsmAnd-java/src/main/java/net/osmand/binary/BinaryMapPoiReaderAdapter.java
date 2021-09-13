@@ -386,15 +386,10 @@ public class BinaryMapPoiReaderAdapter {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
 				offset = codedIS.getTotalBytesRead();
-				List<String> queries = new ArrayList<>();
-				for (String word : query.split(" ")) {
-					if (word.trim().length() > 0) {
-						queries.add(word.trim());
-					}
-				}
+				List<String> queries = splitQuery(query);
 				TIntArrayList charsList = new TIntArrayList(queries.size());
 				listOffsets = new ArrayList<TIntArrayList>(queries.size());
-				while(listOffsets.size() < queries.size()) {
+				while (listOffsets.size() < queries.size()) {
 					charsList.add(0);
 					listOffsets.add(new TIntArrayList());
 				}
@@ -444,15 +439,35 @@ public class BinaryMapPoiReaderAdapter {
 
 	}
 
+	private List<String> splitQuery(String query) {
+		List<String> queries = new ArrayList<>();
+		int prev = -1;
+		for (int i = 0; i <= query.length(); i++) {
+			if (i == query.length() ||
+					(!Character.isLetter(query.charAt(i)) && !Character.isDigit(query.charAt(i)))) {
+				if (prev != -1) {
+					String substr = query.substring(prev, i);
+					String val = substr.toLowerCase();
+					queries.add(val);
+				}
+			} else {
+				if (prev == -1) {
+					prev = i;
+				}
+			}
+		}
+		return queries;
+	}
+
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req) throws IOException {
 		while (true) {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
-			case 0:
-				return;
-			case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
-				int len = codedIS.readRawVarint32();
+				case 0:
+					return;
+				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
+					int len = codedIS.readRawVarint32();
 				int oldLim = codedIS.pushLimit(len);
 				readPoiNameIndexDataAtom(offsets, req);
 				codedIS.popLimit(oldLim);
