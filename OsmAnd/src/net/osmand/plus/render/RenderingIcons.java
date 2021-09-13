@@ -6,6 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.R.drawable;
@@ -17,9 +20,6 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 public class RenderingIcons {
 
@@ -171,6 +171,14 @@ public class RenderingIcons {
 
 	public static Integer getResId(String id) {
 		return id.startsWith("h_") ? shaderIcons.get(id.substring(2)) : smallIcons.get(id);
+	}
+
+	public static String getNameFromMxIconId(Context ctx, int iconId) {
+		return ctx.getResources().getResourceEntryName(iconId).replaceFirst("mx_", "");
+	}
+
+	public static int getMxIconIdByName(Context ctx, String iconName) {
+		return ctx.getResources().getIdentifier("mx_" + iconName, "drawable", ctx.getPackageName());
 	}
 
 	static {

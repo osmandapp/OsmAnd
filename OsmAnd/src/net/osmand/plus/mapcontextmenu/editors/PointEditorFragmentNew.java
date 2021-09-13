@@ -55,6 +55,7 @@ import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.track.ColorsCard;
@@ -75,6 +76,7 @@ import java.util.List;
 import java.util.Set;
 
 import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.GPXUtilities.log;
 import static net.osmand.data.FavouritePoint.BackgroundType;
 import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
 import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
@@ -84,6 +86,8 @@ import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategor
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
 
 	public static final String TAG = PointEditorFragmentNew.class.getSimpleName();
+
+	private static final int LAST_USED_ICONS_LIMIT = 20;
 
 	private View view;
 	private EditText nameEdit;
@@ -590,7 +594,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 						return (String) iconCategories.keySet().toArray()[j];
 					}
 				} catch (JSONException e) {
-					e.printStackTrace();
+					log.error(e.getMessage());
 				}
 			}
 		}
@@ -598,11 +602,11 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	}
 
 	protected String getNameFromIconId(int iconId) {
-		return app.getResources().getResourceEntryName(iconId).replaceFirst("mx_", "");
+		return RenderingIcons.getNameFromMxIconId(app, iconId);
 	}
 
 	protected int getIconIdByName(String iconName) {
-		return app.getResources().getIdentifier("mx_" + iconName, "drawable", app.getPackageName());
+		return RenderingIcons.getMxIconIdByName(app, iconName);
 	}
 
 	private void createIconSelector() {
@@ -625,7 +629,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				iconCategories.put(translatedName, icons.getJSONArray("icons"));
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 
 		selectedIconCategory = getInitCategory();
@@ -667,10 +671,9 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	}
 
 	protected void addLastUsedIcon(String iconName) {
-		int LIMIT = 20;
 		lastUsedIcons.remove(iconName);
-		if (lastUsedIcons.size() >= LIMIT) {
-			lastUsedIcons = lastUsedIcons.subList(0, LIMIT - 1);
+		if (lastUsedIcons.size() >= LAST_USED_ICONS_LIMIT) {
+			lastUsedIcons = lastUsedIcons.subList(0, LAST_USED_ICONS_LIMIT - 1);
 		}
 		lastUsedIcons.add(0, iconName);
 		app.getSettings().LAST_USED_FAV_ICONS.setStringsList(lastUsedIcons);

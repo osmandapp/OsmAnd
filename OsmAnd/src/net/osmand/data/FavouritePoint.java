@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
@@ -180,7 +181,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public void setIconIdFromName(Context ctx, String iconName) {
-		this.iconId = ctx.getResources().getIdentifier("mx_" + iconName, "drawable", ctx.getPackageName());
+		this.iconId = RenderingIcons.getMxIconIdByName(ctx, iconName);
 	}
 
 	public boolean isSpecialPoint() {
