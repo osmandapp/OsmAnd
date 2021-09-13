@@ -1,5 +1,12 @@
 package net.osmand.map;
 
+import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.util.Algorithms;
+import net.osmand.util.LIFOBlockingDeque;
+
+import org.apache.commons.logging.Log;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,16 +23,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import net.osmand.PlatformUtil;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
 
 
 public class MapTileDownloader {
@@ -128,37 +127,14 @@ public class MapTileDownloader {
 
 
 	public MapTileDownloader(int numberOfThreads) {
-
-		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, TILE_DOWNLOAD_SECONDS_TO_WORK,
-				TimeUnit.SECONDS, createQueue());
-		// 1.6 method but very useful to kill non-running threads
-//		threadPoolExecutor.allowCoreThreadTimeOut(true);
-		pendingToDownload = Collections.synchronizedSet(new HashSet<File>());
-		currentlyDownloaded = Collections.synchronizedSet(new HashSet<File>());
-
+		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads,
+				TILE_DOWNLOAD_SECONDS_TO_WORK, TimeUnit.SECONDS, new LIFOBlockingDeque<>());
+		pendingToDownload = Collections.synchronizedSet(new HashSet<>());
+		currentlyDownloaded = Collections.synchronizedSet(new HashSet<>());
 	}
 	
 	public void setNoHttps(boolean noHttps) {
 		this.noHttps = noHttps;
-	}
-
-	protected BlockingQueue<Runnable> createQueue() {
-		boolean loaded = false;
-		try {
-			Class.forName("java.util.concurrent.LinkedBlockingDeque");
-			loaded = true;
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		if (!loaded) {
-			// for Android 2.2
-			return new LinkedBlockingQueue<>();
-		}
-		return createDeque();
-	}
-
-	protected static BlockingQueue<Runnable> createDeque() {
-		return new net.osmand.util.LIFOBlockingDeque<>();
 	}
 
 	public void addDownloaderCallback(IMapDownloaderCallback callback) {
