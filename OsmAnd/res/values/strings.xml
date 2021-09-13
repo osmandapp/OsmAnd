@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="mapillary_menu_filter_description_new">Filter images by date or by type. Only active in closeup zoom.</string>
     <string name="routeInfo_roadClass_description">Colouring the route or track line according to road classification.</string>
     <string name="routeInfo_surface_description">Provide additional information about the physical surface of roads/footpaths.</string>
     <string name="routeInfo_smoothness_description">Provides a classification scheme regarding the physical usability of a way for wheeled vehicles, particularly regarding surface regularity/flatness.</string>

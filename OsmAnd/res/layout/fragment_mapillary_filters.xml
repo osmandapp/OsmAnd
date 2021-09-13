@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="10dp"
                     android:paddingTop="4dp"
-                    android:text="@string/mapillary_menu_filter_description"
+                    android:text="@string/mapillary_menu_filter_description_new"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size" />
             </LinearLayout>
@@ -185,11 +185,16 @@
                 android:background="?attr/dashboard_divider" />
         </LinearLayout>
 
+        <!--
+                Hidden and not deleted in case filter by username
+                will be available again in new Mapillary API version
+        -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/bg_color"
-            android:minHeight="60dp">
+            android:minHeight="60dp"
+            android:visibility="gone">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/mapillary_filters_user_icon"
@@ -233,7 +238,8 @@
             android:background="?attr/bg_color"
             android:orientation="vertical"
             android:paddingLeft="52dp"
-            android:paddingStart="52dp">
+            android:paddingStart="52dp"
+            android:visibility="gone">
 
             <net.osmand.plus.views.controls.DelayAutoCompleteTextView
                 android:id="@+id/auto_complete_text_view"

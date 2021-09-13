@@ -4,12 +4,12 @@ import java.util.Map;
 
 public class MapillaryImage {
 
-	private static final String CAPTURED_AT_KEY = "captured_at";
-	private static final String COMPASS_ANGLE_KEY = "compass_angle";
-	private static final String IMAGE_ID_KEY = "id";
-	private static final String SEQUENCE_ID_KEY = "sequence_id";
-	private static final String ORGANIZATION_ID_KEY = "organization_id";
-	private static final String IS_PANORAMIC_KEY = "is_pano";
+	public static final String CAPTURED_AT_KEY = "captured_at";
+	public static final String COMPASS_ANGLE_KEY = "compass_angle";
+	public static final String IMAGE_ID_KEY = "id";
+	public static final String SEQUENCE_ID_KEY = "sequence_id";
+	public static final String ORGANIZATION_ID_KEY = "organization_id";
+	public static final String IS_PANORAMIC_KEY = "is_pano";
 
 	// Image location
 	private double latitude;
@@ -46,12 +46,12 @@ public class MapillaryImage {
 		try {
 			this.capturedAt = ((Number) userData.get(CAPTURED_AT_KEY)).longValue();
 			this.compassAngle = ((Number) userData.get(COMPASS_ANGLE_KEY)).doubleValue();
-			this.imageId = ((Long) userData.get(IMAGE_ID_KEY)).toString();
+			this.imageId = ((Number) userData.get(IMAGE_ID_KEY)).toString();
 			this.sequenceId = (String) userData.get(SEQUENCE_ID_KEY);
 			if (userData.get(ORGANIZATION_ID_KEY) != null) {
-				this.organizationId = ((Integer) userData.get(ORGANIZATION_ID_KEY)).toString();
+				this.organizationId = ((Number) userData.get(ORGANIZATION_ID_KEY)).toString();
 			}
-			this.isPanoramicImage = (Boolean) userData.get(IS_PANORAMIC_KEY);
+			this.isPanoramicImage = (boolean) userData.get(IS_PANORAMIC_KEY);
 		} catch (Exception e) {
 			res = false;
 		}
