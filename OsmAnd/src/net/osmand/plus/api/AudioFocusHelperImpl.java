@@ -64,7 +64,7 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 		if (android.os.Build.VERSION.SDK_INT < 26) {
 			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
 		} else {
-			AudioAttributes pmAudioAttributes = new AudioAttributes.Builder()
+			AudioAttributes mAudioAttributes = new AudioAttributes.Builder()
 					.setUsage(((OsmandApplication) context.getApplicationContext()).getSettings().AUDIO_USAGE.get())
 					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 					.build();
