@@ -1,10 +1,12 @@
 package net.osmand.plus.widgets.popup;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.ListPopupWindow;
 
@@ -20,17 +22,21 @@ public class PopUpMenuHelper {
 	private View anchorView;
 	private List<PopUpMenuItem> items;
 	private PopUpMenuWidthType widthType;
+	@ColorInt
+	private int backgroundColor;
 	private AdapterView.OnItemClickListener listener;
 	private boolean nightMode;
 
 	private PopUpMenuHelper(@NonNull View anchorView,
 	                        @NonNull List<PopUpMenuItem> items,
 	                        PopUpMenuWidthType widthType,
+	                        @ColorInt int backgroundColor,
 	                        AdapterView.OnItemClickListener listener,
 	                        boolean nightMode) {
 		this.anchorView = anchorView;
 		this.items = items;
 		this.widthType = widthType;
+		this.backgroundColor = backgroundColor;
 		this.listener = listener;
 		this.nightMode = nightMode;
 	}
@@ -63,7 +69,7 @@ public class PopUpMenuHelper {
 		} else {
 			additional = iconPartWidth;
 		}
-		int totalWidth =(int) (Math.max(itemWidth, minWidth) + additional);
+		int totalWidth = (int) (Math.max(itemWidth, minWidth) + additional);
 
 		PopUpMenuArrayAdapter adapter =
 				new PopUpMenuArrayAdapter(ctx, R.layout.popup_menu_item, items, nightMode);
@@ -74,14 +80,14 @@ public class PopUpMenuHelper {
 		listPopupWindow.setVerticalOffset(-anchorView.getHeight() + contentPaddingHalf);
 		listPopupWindow.setModal(true);
 		listPopupWindow.setAdapter(adapter);
-		listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (listener != null) {
-					listener.onItemClick(parent, view, position, id);
-				}
-				listPopupWindow.dismiss();
+		if (backgroundColor != 0) {
+			listPopupWindow.setBackgroundDrawable(new ColorDrawable(backgroundColor));
+		}
+		listPopupWindow.setOnItemClickListener((parent, view, position, id) -> {
+			if (listener != null) {
+				listener.onItemClick(parent, view, position, id);
 			}
+			listPopupWindow.dismiss();
 		});
 		return listPopupWindow;
 	}
@@ -98,6 +104,8 @@ public class PopUpMenuHelper {
 	public static class Builder {
 		private View anchorView;
 		private List<PopUpMenuItem> items;
+		@ColorInt
+		private int backgroundColor;
 		private AdapterView.OnItemClickListener listener;
 		private PopUpMenuWidthType widthType = PopUpMenuWidthType.AS_ANCHOR_VIEW;
 		private boolean nightMode;
@@ -118,21 +126,23 @@ public class PopUpMenuHelper {
 			return this;
 		}
 
+		public Builder setBackgroundColor(@ColorInt int backgroundColor) {
+			this.backgroundColor = backgroundColor;
+			return this;
+		}
+
 		public void show() {
 			if (listener == null) {
-				listener = new AdapterView.OnItemClickListener() {
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-						if (position < items.size()) {
-							View.OnClickListener listener = items.get(position).getOnClickListener();
-							if (listener != null) {
-								listener.onClick(view);
-							}
+				listener = (parent, view, position, id) -> {
+					if (position < items.size()) {
+						View.OnClickListener listener = items.get(position).getOnClickListener();
+						if (listener != null) {
+							listener.onClick(view);
 						}
 					}
 				};
 			}
-			new PopUpMenuHelper(anchorView, items, widthType, listener, nightMode).show();
+			new PopUpMenuHelper(anchorView, items, widthType, backgroundColor, listener, nightMode).show();
 		}
 	}
 }

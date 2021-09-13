@@ -364,7 +364,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (!TextUtils.isEmpty(pointDesc)) {
 			description.append(pointDesc);
 		} else if (pos < 1 && before) {
-			description.append(getString(R.string.shared_string_control_start));
+			description.append(getString(R.string.start_point));
 		} else {
 			float dist = 0;
 			int startIdx;
