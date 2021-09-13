@@ -516,7 +516,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		if (mapActivity != null && gpxFile != null) {
 			editingTrack = true;
 			GpxData gpxData = new GpxData(gpxFile);
-			MeasurementEditingContext editingContext = new MeasurementEditingContext();
+			MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
 			editingContext.setGpxData(gpxData);
 			editingContext.setAppMode(app.getRoutingHelper().getAppMode());
 			editingContext.setSelectedSegment(app.getSettings().GPX_ROUTE_SEGMENT.get());
