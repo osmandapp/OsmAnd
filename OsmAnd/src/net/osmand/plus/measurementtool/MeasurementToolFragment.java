@@ -261,6 +261,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 		app.setMeasurementEditingContext(editingCtx);
 		editingCtx.setApplication(app);
+		editingCtx.setAppMode(app.getSettings().getApplicationMode());
 		editingCtx.setProgressListener(new SnapToRoadProgressListener() {
 			@Override
 			public void showProgressBar() {
