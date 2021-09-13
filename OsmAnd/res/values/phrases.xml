@@ -158,6 +158,7 @@
 	<string name="poi_authentication_none">Auth not required</string>
 	<string name="poi_permanent_camping">Permanent camping</string>
 	<string name="poi_shelter_filter">Shelter</string>
+	<string name="poi_callable">Callable</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4504,5 +4505,11 @@
 
 	<string name="poi_arch">Arch</string>
 
-
+	<string name="poi_manufacturer">Manufacturer</string>
+	<string name="poi_payment_calling_cards_no">Calling cards not accepted</string>
+	<string name="poi_payment_reverse_charge_calls_no">Reverse charge calls: no</string>
+	<string name="poi_payment_calling_cards_yes">Calling cards accepted</string>
+	<string name="poi_payment_reverse_charge_calls_yes">Reverse charge calls: yes</string>
+	<string name="poi_callable_yes">Yes</string>
+	<string name="poi_callable_no">No</string>
 </resources>

@@ -40,7 +40,7 @@
     <string name="fav_export_confirmation">Un fichier de favoris existe déjà. Voulez-vous l\'écraser ?</string>
     <string name="profile_settings">Paramètres pour le profil</string>
     <string name="settings_preset">Profil par défaut</string>
-    <string name="settings_preset_descr">Les paramètres d’affichage et de guidage sont mémorisés dans un profil. Définissez votre profil par défaut ici.</string>
+    <string name="settings_preset_descr">Les paramètres de la carte et de guidage sont mémorisés dans un profil. Définissez votre profil par défaut ici.</string>
     <string name="routing_settings">Navigation</string>
     <string name="routing_settings_descr">Paramétrer les options de guidage.</string>
     <string name="global_settings">Paramètres globaux</string>
@@ -313,7 +313,7 @@
     <string name="fav_file_to_load_not_found">Le fichier GPX contenant les favoris est introuvable dans {0}</string>
     <string name="fav_saved_sucessfully">Favoris enregistrés dans {0}</string>
     <string name="no_fav_to_save">Aucun point favori à enregistrer</string>
-    <string name="shared_string_import">Importer</string>
+    <string name="shared_string_import">Importer le profil</string>
     <string name="error_occurred_loading_gpx">Impossible de charger le fichier GPX.</string>
     <string name="send_report">Envoyer le rapport</string>
     <string name="none_region_found">Aucun carte n\'a été téléchargée.</string>
@@ -732,7 +732,7 @@
     <string name="use_compass_navigation">Utiliser la boussole</string>
     <string name="route_updated_loc_found">En attente de la position pour calculer l\'itinéraire</string>
     <string name="continue_follow_previous_route_auto">Le guidage a été interrompu. Souhaitez-vous le reprendre \? (%1$s secondes)</string>
-    <string name="show_cameras">Radars</string>
+    <string name="show_cameras">Radars de vitesse</string>
     <string name="show_traffic_warnings">Informations de circulation</string>
     <string name="avoid_toll_roads">Éviter les routes à péage</string>
     <string name="screen_is_locked">Appuyez sur l\'icône cadenas pour déverrouiller l\'écran</string>
@@ -1023,7 +1023,7 @@
     <string name="driving_region_uk">Royaume-Uni, Inde et équivalents</string>
     <string name="speak_title">Annoncer…</string>
     <string name="speak_cameras">Radars</string>
-    <string name="speak_traffic_warnings">Alertes de trafic</string>
+    <string name="speak_traffic_warnings">Alertes de circulation</string>
     <string name="osb_author_or_password_not_specified">Veuillez indiquer votre nom d\'utilisateur et mot de passe OSM dans les paramètres</string>
     <string name="clear_intermediate_points">Supprimer les étapes</string>
     <string name="keep_intermediate_points">Conserver les étapes</string>
@@ -1287,7 +1287,7 @@
     <string name="shared_string_waypoints">Itinéraire</string>
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Favoris à proximité</string>
-    <string name="speak_poi">Points d\'intérêt à proximité</string>
+    <string name="speak_poi">POI à proximité</string>
     <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">Ce greffon permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte. 
@@ -1458,7 +1458,7 @@
     <string name="short_location_on_map">Lat. %1$s\nLon. %2$s</string>
     <string name="tips_and_tricks_descr">Questions fréquentes, notes de version et autres informations.</string>
     <string name="routing_settings_2">Paramètres de guidage</string>
-    <string name="general_settings_2">Paramètres globaux</string>
+    <string name="general_settings_2">Paramètres généraux</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Désélectionner</string>
     <string name="shared_string_deselect_all">Tout désélectionner</string>
@@ -1845,7 +1845,7 @@
     <string name="rendering_attr_showMtbRoutes_name">Itinéraires pour VTT</string>
     <string name="shared_string_reverse_order">Inverser l\'ordre</string>
     <string name="shared_string_toolbar">Barre d\'outils</string>
-    <string name="shared_string_widgets">Widgets</string>
+    <string name="shared_string_widgets">Gadgets</string>
     <string name="consider_turning_polygons_off">Il est recommandé de désactiver le rendu des polygones.</string>
     <string name="upload_anonymously">Téléverser anonymement</string>
     <string name="upload_osm_note_description">Envoyez vos notes OSM en anonyme ou avec votre compte OpenStreetMap.org.</string>
@@ -3270,7 +3270,7 @@
     <string name="added_profiles_descr">Profils ajoutés par plugin</string>
     <string name="shared_string_turn_off">Eteindre</string>
     <string name="new_plugin_added">Nouveau greffon ajouté</string>
-    <string name="join_segments">Joindre les segments</string>
+    <string name="join_segments">Relier les segments</string>
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
@@ -3778,7 +3778,7 @@
     <string name="plan_route_trim_after">Couper après</string>
     <string name="plan_route_change_route_type_before">Modifier le type d’itinéraire avant</string>
     <string name="plan_route_change_route_type_after">Modifier le type d’itinéraire après</string>
-    <string name="simplified_track_description">Seule la ligne d\'itinéraire sera enregistrée, les points de passage seront supprimés.</string>
+    <string name="simplified_track_description">Seul l\'itinéraire sera enregistré, les étapes seront supprimées.</string>
     <string name="shared_string_redo">Rétablir</string>
     <string name="sort_last_modified">Récents</string>
     <string name="sort_name_descending">Nom : Z – A</string>
@@ -4092,7 +4092,7 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Éviter les zones à faibles émissions</string>
     <string name="poi_routes">Routes</string>
     <string name="routing_attr_avoid_low_emission_zone_description">Éviter les zones à faibles émissions</string>
-    <string name="search_more">Rechercher plus …</string>
+    <string name="search_more">Rechercher plus…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
     <string name="backup_and_restore">Sauvegarde &amp; Restauration</string>
     <string name="last_backup">Dernière sauvegarde</string>
@@ -4316,4 +4316,5 @@
 \n</string>
     <string name="add_group_to_markers">Ajouter un groupe à la liste des marques</string>
     <string name="remove_group_from_markers">Supprimer le groupe de la liste des marques</string>
+    <string name="start_point">Départ</string>
 </resources>

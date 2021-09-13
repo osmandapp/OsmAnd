@@ -35,12 +35,7 @@ public class ImportFileItemsTask extends AsyncTask<Void, Void, Boolean> {
 		this.file = file;
 		this.listener = listener;
 		this.items = items;
-		localeListener = new StateChangedListener<String>() {
-			@Override
-			public void stateChanged(String change) {
-				needRestart = true;
-			}
-		};
+		localeListener = change -> needRestart = true;
 	}
 
 	@Override
@@ -53,9 +48,7 @@ public class ImportFileItemsTask extends AsyncTask<Void, Void, Boolean> {
 		try {
 			importer.importItems(file, items);
 			return true;
-		} catch (IllegalArgumentException e) {
-			FileSettingsHelper.LOG.error("Failed to import items from: " + file.getName(), e);
-		} catch (IOException e) {
+		} catch (IllegalArgumentException | IOException e) {
 			FileSettingsHelper.LOG.error("Failed to import items from: " + file.getName(), e);
 		}
 		return false;

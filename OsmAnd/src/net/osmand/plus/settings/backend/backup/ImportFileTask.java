@@ -100,9 +100,7 @@ public class ImportFileTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 			case COLLECT_AND_READ:
 				try {
 					return importer.collectItems(file);
-				} catch (IllegalArgumentException e) {
-					FileSettingsHelper.LOG.error("Failed to collect items from: " + file.getName(), e);
-				} catch (IOException e) {
+				} catch (IllegalArgumentException | IOException e) {
 					FileSettingsHelper.LOG.error("Failed to collect items from: " + file.getName(), e);
 				}
 				break;

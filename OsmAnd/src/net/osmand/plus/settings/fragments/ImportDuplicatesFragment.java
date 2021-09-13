@@ -1,6 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,15 +8,6 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
-import androidx.core.widget.NestedScrollView;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
@@ -46,6 +36,15 @@ import net.osmand.view.ComplexButton;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.NestedScrollView;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
@@ -101,26 +100,15 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 		description = root.findViewById(R.id.description);
 		progressBar = root.findViewById(R.id.progress_bar);
 		toolbarLayout = root.findViewById(R.id.toolbar_layout);
-		keepBothBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_keep_both,
-				nightMode
-						? getResources().getColor(R.color.icon_color_active_dark)
-						: getResources().getColor(R.color.icon_color_active_light))
+		keepBothBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_keep_both, nightMode
+				? getResources().getColor(R.color.icon_color_active_dark)
+				: getResources().getColor(R.color.icon_color_active_light))
 		);
 		replaceAllBtn.setIcon(getPaintedContentIcon(R.drawable.ic_action_replace,
 				ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode))
 		);
-		keepBothBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				importItems(false);
-			}
-		});
-		replaceAllBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				importItems(true);
-			}
-		});
+		keepBothBtn.setOnClickListener(v -> importItems(false));
+		replaceAllBtn.setOnClickListener(v -> importItems(true));
 		list = root.findViewById(R.id.list);
 		ViewCompat.setNestedScrollingEnabled(list, false);
 		ViewTreeObserver treeObserver = buttonsContainer.getViewTreeObserver();
@@ -131,17 +119,11 @@ public abstract class ImportDuplicatesFragment extends BaseOsmAndFragment {
 					ViewTreeObserver vts = buttonsContainer.getViewTreeObserver();
 					int height = buttonsContainer.getMeasuredHeight();
 					nestedScroll.setPadding(0, 0, 0, height);
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						vts.removeOnGlobalLayoutListener(this);
-					} else {
-						vts.removeGlobalOnLayoutListener(this);
-					}
+					vts.removeOnGlobalLayoutListener(this);
 				}
 			}
 		});
-		if (Build.VERSION.SDK_INT >= 21) {
-			AndroidUtils.addStatusBarPadding21v(app, root);
-		}
+		AndroidUtils.addStatusBarPadding21v(app, root);
 
 		return root;
 	}
