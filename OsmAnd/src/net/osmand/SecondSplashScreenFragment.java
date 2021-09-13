@@ -105,7 +105,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		} else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
 			if (InAppPurchaseHelper.isOsmAndProAvailable(app)) {
 				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_plus_pro, textColorId));
-			} if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+			} else if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_plus_osmlive, textColorId));
 			} else {
 				text.setImageDrawable(iconsCache.getIcon(R.drawable.image_text_osmand_plus, textColorId));

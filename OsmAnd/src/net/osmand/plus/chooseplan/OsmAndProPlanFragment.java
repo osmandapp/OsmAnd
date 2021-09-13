@@ -7,6 +7,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.chooseplan.button.PriceButton;
 import net.osmand.plus.chooseplan.button.PurchasingUtils;
+import net.osmand.plus.chooseplan.button.SubscriptionButton;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -24,7 +25,7 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 	@Override
 	protected void collectPriceButtons(List<PriceButton<?>> priceButtons) {
 		priceButtons.clear();
-		priceButtons.addAll(collectPriceButtons(app, purchaseHelper));
+		priceButtons.addAll(collectPriceButtons(app, purchaseHelper, nightMode));
 	}
 
 	@Override
@@ -50,9 +51,13 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 				R.drawable.ic_action_osmand_pro_logo_colored;
 	}
 
-	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {
+	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
+	                                                       InAppPurchaseHelper purchaseHelper,
+	                                                       boolean nightMode) {
 		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
-		return new ArrayList<>(PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions));
+		List<SubscriptionButton> subscriptionButtons =
+				PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions, nightMode);
+		return new ArrayList<>(subscriptionButtons);
 	}
 
 	public static List<InAppSubscription> getVisibleSubscriptions(OsmandApplication app, InAppPurchaseHelper purchaseHelper) {

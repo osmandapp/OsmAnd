@@ -3857,7 +3857,7 @@
     <string name="announcement_time_intervals">Tid- og afstandsintervaller</string>
     <string name="context_menu_read_full">Læs hele</string>
     <string name="hillshade_slope_contour_lines">Bakkeskygge / Skråning / Konturlinjer</string>
-    <string name="activity_type_racing_name">Væddeløb</string>
+    <string name="activity_type_racing_name">Racerkørsel</string>
     <string name="temporary_conditional_routing_descr">Brug de vejrestriktioner, der er aktive på kortet nu</string>
     <string name="on_hold">I venteposition</string>
     <string name="srtm_unit_format">Enhedsvariant med konturlinjer</string>
@@ -4319,4 +4319,12 @@
 \n - Rettet problemer med import/eksport af profilindstillinger
 \n
 \n</string>
+    <string name="no_items_of_type_message">Du har ikke nogen elementer af denne type</string>
+    <string name="routeInfo_tracktype_description">Farvelægning af en rute eller sporlinje i henhold til vejenes tilstand baseret på deres overfladesammensætning. Anvendes typisk på veje, hvor hovedvejsnettet består af ikke-asfalterede veje.</string>
+    <string name="routeInfo_winter_ice_road_description">Farvelægning af ruten eller sporlinjen i henhold til vintervejklassificeringen, som kun bruges om vinteren.</string>
+    <string name="routeInfo_smoothness_description">Giver en klassificering af en vejs fysiske anvendelighed for køretøjer, navnlig med hensyn til overfladens ensartethed/jævnhed.</string>
+    <string name="routeInfo_surface_description">Giv yderligere oplysninger om den fysiske overflade af veje/gangstier.</string>
+    <string name="routeInfo_roadClass_description">Farvelægning af ruten eller sporlinjen i henhold til vejklassificering.</string>
+    <string name="add_group_to_markers">Tilføj gruppe til markørliste</string>
+    <string name="remove_group_from_markers">Fjern gruppe fra markørliste</string>
 </resources>

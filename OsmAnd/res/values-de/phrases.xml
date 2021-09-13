@@ -2599,7 +2599,7 @@
     <string name="poi_fire_hydrant_position_street">Straße</string>
     <string name="poi_fire_hydrant_position_underground">Unterflur</string>
     <string name="poi_fire_hydrant_style_wsh">Hydrantart: Schacht</string>
-    <string name="poi_water_source_main">Haupt</string>
+    <string name="poi_water_source_main">Zentralversorgung</string>
     <string name="poi_water_source_pond">Teich</string>
     <string name="poi_water_source_stream">Wasserlauf</string>
     <string name="poi_in_service_yes">Im Dienst: ja</string>

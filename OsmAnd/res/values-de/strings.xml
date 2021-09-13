@@ -307,7 +307,7 @@
     <string name="index_settings">Kartenverwaltung</string>
     <string name="index_settings_descr">Herunterladen und Verwalten von auf Ihrem Gerät gespeicherten Offline-Kartendateien.</string>
     <string name="general_settings">Allgemein</string>
-    <string name="general_settings_2">Globale Einstellungen</string>
+    <string name="general_settings_2">Allgemeine Einstellungen</string>
     <string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen.</string>
     <string name="global_app_settings">Globale Einstellungen</string>
     <string name="user_name">OSM-Benutzername</string>
@@ -4318,4 +4318,12 @@
     <string name="amz_manage_subscription_descr">Um Ihr Abonnement zu verwalten, verwenden Sie die Amazon App auf Ihrem Gerät oder öffnen Sie die Amazon.com Website unter Ihrem Profil.</string>
     <string name="empty_category_name">Leerer Kategoriename</string>
     <string name="no_activity_for_intent">Es wurden keine geeigneten Anwendungen für diese Aktion gefunden</string>
+    <string name="no_items_of_type_message">Sie haben keine Artikel dieses Typs</string>
+    <string name="routeInfo_tracktype_description">Färbt die Route oder den Track entsprechend dem Zustand der Straßen auf der Grundlage ihrer Oberflächenzusammensetzung. Wird in der Regel auf Straßen angewendet, bei denen das Hauptstraßennetz aus unbefestigten Straßen besteht.</string>
+    <string name="routeInfo_winter_ice_road_description">Färbt die Route oder den Track entsprechend der Winterstraßenklassifizierung, die nur im Winter befahrbar ist.</string>
+    <string name="routeInfo_smoothness_description">Bietet ein Klassifizierungsschema für die physische Nutzbarkeit eines Weges für Radfahrzeuge, insbesondere hinsichtlich der Regelmäßigkeit/Ebenheit der Oberfläche.</string>
+    <string name="routeInfo_surface_description">Zusätzliche Informationen über die Oberfläche von Straßen/Fußwegen anbieten.</string>
+    <string name="routeInfo_roadClass_description">Färbt die Route oder den Track entsprechend der Straßenklassifikation ein.</string>
+    <string name="add_group_to_markers">Gruppe zu Markerliste hinzufügen</string>
+    <string name="remove_group_from_markers">Gruppe von Markerliste entfernen</string>
 </resources>

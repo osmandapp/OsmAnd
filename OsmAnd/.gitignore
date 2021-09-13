@@ -87,3 +87,6 @@ assets/ui-fonts/*
 
 .project
 .classpath
+
+# c++
+/.cxx

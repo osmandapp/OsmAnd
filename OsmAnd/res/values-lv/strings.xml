@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="plugins_screen">Spraudņu pārvaldnieks</string>
     <string name="prefs_plugins_descr">Spraudņi papildina lietotnes iespējas un piešķir papildus funkcionalitāti.</string>
@@ -3343,4 +3343,47 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="plan_route_split_before">Sadalīt pirms</string>
     <string name="plan_route_split_after">Sadalīt pēc</string>
     <string name="plan_route_add_new_segment">Pievienot jaunu segmentu</string>
+    <string name="index_name_antarctica">Antarktika</string>
+    <string name="unlimited_map_downloads">Neierobežotas karšu lejupielādes</string>
+    <string name="offline_wikipeadia">Bezsaistes vikipēdija</string>
+    <string name="redeem_promo_code">Atlaižu kods</string>
+    <string name="osmand_maps_plus_tagline">Iegūstiet paplašinātās iespējas</string>
+    <string name="osmand_pro_tagline">Iegūstiet maksimālās iespējas</string>
+    <string name="shared_string_learn_more">Uzzināt vairāk</string>
+    <string name="cancel_anytime_in_gplay">Anulējiet jebkurā laikā Google Play.</string>
+    <string name="shared_string_not_included">Nav iekļauts</string>
+    <string name="shared_string_includes">Iekļauts</string>
+    <string name="complete_purchase">Pabeidziet pirkumu</string>
+    <string name="regular_price">Parastā cena</string>
+    <string name="from_with_param">No %1$s</string>
+    <string name="shared_string_discussion">Diskusija</string>
+    <string name="shared_string_view_all">Skatīt visu</string>
+    <string name="backup_error_user_is_already_registered">Šī epasta adrese jau tiek izmantota</string>
+    <string name="backup_error_subscription_was_expired">Beidzies abonoments</string>
+    <string name="backup_error_subscription_was_expired_descr">Jūsu OsmAnd Pro abonoments ir beidzies, atjaunojiet to, lai lietotu dublējumkopiju. Datus joprojām variet atjaunot no Cloud.</string>
+    <string name="backup_error_size_is_exceeded">Maksimālais OsmAnd Cloud izmērs pārsniegts par %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">Faila sūtīšanai izmantot .gzip formātu</string>
+    <string name="backup_error_file_not_available">Fails nav pieejams</string>
+    <string name="backup_error_user_is_not_registered">Lietotājs nav reģistrējies ar šādu epasta adresi</string>
+    <string name="backup_error_no_valid_subscription">Nav derīga abonomenta</string>
+    <string name="duration_moment_ago">mirkli atpakaļ</string>
+    <string name="logout_from_osmand_cloud">Izrakstīties no OsmAnd Cloud</string>
+    <string name="logout_from_osmand_cloud_decsr">Izrakstīties\?
+\nJums vajadzēs no jauna pierakstīties, lai dublētu vai atjaunotu datus.</string>
+    <string name="backup_deleting_all_data">Tiek dzēsti dati…</string>
+    <string name="backup_deleted_all_data">Dzēst visus datus.</string>
+    <string name="backup_deleting_all_data_descr">Lūdzu uzgaidiet, kamēr OsmAnd izdzēsīs jūsu datus no cloud. Ierīces dati paliks neskarti.</string>
+    <string name="backup_deleted_all_data_descr">Jūsu dati tika veiksmīgi izdzēsti no OsmAnd Could.</string>
+    <string name="backup_version_history_removed">Versiju vēsture ir dzēsta.</string>
+    <string name="backup_data_removed">Visi dati ir dzēsti.</string>
+    <string name="shared_string_progress">Progress</string>
+    <string name="backup_do_not_have_any">Jums vēl nav izveidota tiešsaistes kopija.</string>
+    <string name="backup_dont_have_any_descr">Automātiski dublēt datus, lai nekad tos nezaudētu.</string>
+    <string name="backup_welcome_back_descr">Atjaunojiet datus no dublējumkopijas vai dublējiet esošos datus uz OsmAnd Cloud.</string>
+    <string name="backup_setup">Izveidot dublējumkopiju</string>
+    <string name="backup_restore_now">Atjaunot</string>
+    <string name="attribute">Atribūts</string>
+    <string name="explore_wikipedia_offline">Lasīt vikipēdiju bezsaistē.</string>
+    <string name="map_updates_are_unavailable_yet">Karšu atjauninājumi pagaidām nav pieejami. :-(</string>
+    <string name="connect_track_points_as">Savienot maršruta punktus</string>
 </resources>

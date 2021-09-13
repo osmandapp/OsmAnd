@@ -58,7 +58,7 @@ public class GlobalSettingsItem extends OsmandSettingsItem {
 	@NonNull
 	@Override
 	public String getPublicName(@NonNull Context ctx) {
-		return ctx.getString(R.string.general_settings_2);
+		return ctx.getString(R.string.global_settings);
 	}
 
 	@Override

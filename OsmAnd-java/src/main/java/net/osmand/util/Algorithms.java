@@ -331,19 +331,14 @@ public class Algorithms {
 	}
 
 	public static <T> String encodeCollection(Collection<T> collection, String split) {
-		if (collection == null) {
-			return "";
-		}
-		StringBuilder res = new StringBuilder();
-		Iterator<T> iterator = collection.iterator();
-		while (iterator.hasNext()) {
-			T next = iterator.next();
-			res.append(next);
-			if (iterator.hasNext()) {
-				res.append(split);
+		if (collection != null) {
+			StringBuilder sb = new StringBuilder();
+			for (T item : collection) {
+				sb.append(item).append(split);
 			}
+			return sb.toString();
 		}
-		return res.toString();
+		return "";
 	}
 
 	public static int findFirstNumberEndIndexLegacy(String value) {

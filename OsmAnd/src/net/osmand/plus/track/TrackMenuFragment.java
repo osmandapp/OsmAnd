@@ -1,9 +1,9 @@
 package net.osmand.plus.track;
 
 import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
 import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
 import static net.osmand.plus.track.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
@@ -501,7 +501,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			addCardViewToHeader(groupsCard);
 		} else {
 			MapActivity mapActivity = requireMapActivity();
-			groupsCard = new PointsGroupsCard(mapActivity, pointsCard.getGroups());
+			groupsCard = new PointsGroupsCard(mapActivity, selectedGpxFile, pointsCard.getGroups());
 			groupsCard.setListener(this);
 			headerContainer.addView(groupsCard.build(mapActivity));
 		}
@@ -1203,6 +1203,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		}
 		if (pointsCard != null) {
 			pointsCard.updateContent();
+		}
+		if (groupsCard != null) {
+			groupsCard.updateContent();
 		}
 		setupCards();
 	}

@@ -16,9 +16,11 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -108,14 +111,13 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	@Override
 	public String getActionText(OsmandApplication app) {
 		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
-
-		List<T> items = loadListFromParams();
-		if (items.size() > 1) {
-			String item = getNextSelectedItem(app);
-			return "\u2026" + arrowDirection + getTranslatedItemName(app, item);
-		} else {
+		String disabledItem = getDisabledItem(app);
+		String nextItem = getNextSelectedItem(app);
+		if (Algorithms.stringsEqual(nextItem, disabledItem)) {
 			String item = getSelectedItem(app);
 			return getTranslatedItemName(app, item) + arrowDirection + "\u2026";
+		} else {
+			return getTranslatedItemName(app, nextItem) + arrowDirection + "\u2026";
 		}
 	}
 
@@ -141,6 +143,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	public abstract String getTranslatedItemName(Context context, String item);
 
+	public abstract String getDisabledItem(OsmandApplication app);
+
 	public abstract String getSelectedItem(OsmandApplication app);
 
 	public abstract String getNextSelectedItem(OsmandApplication app);
@@ -151,6 +155,32 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		args.putLong(KEY_ID, id);
 		fragment.setArguments(args);
 		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
+	}
+
+	public String getNextItemFromSources(@NonNull OsmandApplication app,
+										 @NonNull List<Pair<String, String>> sources,
+										 @NonNull String defValue) {
+		if (!Algorithms.isEmpty(sources)) {
+			String currentSource = getSelectedItem(app);
+			if (sources.size() > 1) {
+				int index = -1;
+				for (int idx = 0; idx < sources.size(); idx++) {
+					if (Algorithms.stringsEqual(sources.get(idx).first, currentSource)) {
+						index = idx;
+						break;
+					}
+				}
+				Pair<String, String> nextSource = sources.get(0);
+				if (index >= 0 && index + 1 < sources.size()) {
+					nextSource = sources.get(index + 1);
+				}
+				return nextSource.first;
+			} else {
+				String source = sources.get(0).first;
+				return Algorithms.stringsEqual(source, currentSource) ? defValue : source;
+			}
+		}
+		return null;
 	}
 
 	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
