@@ -37,9 +37,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import static net.osmand.plus.mapillary.MapillaryImage.*;
+
 class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, IContextMenuProvider {
 
 	public static final int TILE_ZOOM = 14;
+	public static final int MIN_POINTS_ZOOM = 17;
 	public static final double EXTENT = 4096.0;
 
 	private LatLon selectedImageLocation;
@@ -153,7 +156,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 						tiles.put(tileId, tile);
 						if (tile.getData() != null) {
 							drawLines(canvas, tileBox, tileX, tileY, tile);
-							if (nzoom > 15) {
+							if (nzoom >= MIN_POINTS_ZOOM) {
 								drawPoints(canvas, tileBox, tileX, tileY, tile, visiblePoints);
 							}
 						}
@@ -185,8 +188,8 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 				tx = (tileX + px) * mult;
 				ty = (tileY + py) * mult;
 				if (tileBounds.contains(tx, ty, tx, ty)) {
-					if (settings.USE_MAPILLARY_FILTER.get()) {
-						if (filtered(p.getUserData())) continue;
+					if (filtered(p.getUserData())) {
+						continue;
 					}
 					x = tileBox.getPixXFromTile(tileX + px, tileY + py, TILE_ZOOM);
 					y = tileBox.getPixYFromTile(tileX + px, tileY + py, TILE_ZOOM);
@@ -201,29 +204,38 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		if (data == null) {
 			return true;
 		}
-		String userKey = settings.MAPILLARY_FILTER_USER_KEY.get();
-		HashMap<String, Object> userData = (HashMap<String, Object>) data;
-		long capturedAt = ((Number) userData.get("captured_at")).longValue();
+
+		boolean shouldFilter = settings.USE_MAPILLARY_FILTER.get();
+//		String userKey = settings.MAPILLARY_FILTER_USER_KEY.get();
 		long from = settings.MAPILLARY_FILTER_FROM_DATE.get();
 		long to = settings.MAPILLARY_FILTER_TO_DATE.get();
 		boolean pano = settings.MAPILLARY_FILTER_PANO.get();
 
-		if (!userKey.isEmpty()) {
-			String key = (String) userData.get("userkey");
-			if (!userKey.equals(key)) {
+		HashMap<String, Object> userData = (HashMap<String, Object>) data;
+		long capturedAt = ((Number) userData.get(CAPTURED_AT_KEY)).longValue();
+
+		if (shouldFilter) {
+//  		Filter by user name unavailable in current API version
+//			if (!userKey.isEmpty()) {
+//				String key = (String) userData.get("userkey");
+//				if (!userKey.equals(key)) {
+//					return true;
+//				}
+//			}
+
+			if (from != 0 && to != 0) {
+				if (capturedAt < from || capturedAt > to) {
+					return true;
+				}
+			} else if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
 				return true;
 			}
-		}
-		if (from != 0 && to != 0) {
-			if (capturedAt < from || capturedAt > to) {
-				return true;
-			}
-		} else if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
-			return true;
 		}
 
+		// Always filter by image type
 		if (pano) {
-			return (long) userData.get("pano") == 0;
+			boolean isPanoramicImage = (boolean) userData.get(IS_PANORAMIC_KEY);
+			return !isPanoramicImage;
 		}
 		return false;
 	}

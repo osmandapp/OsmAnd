@@ -1340,7 +1340,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void openPlanRoute(GpxData gpxData) {
 		QuadRect qr = gpxData.getRect();
 		getMapActivity().getMapView().fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-		MeasurementEditingContext editingContext = new MeasurementEditingContext();
+		MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
 		editingContext.setGpxData(gpxData);
 		MeasurementToolFragment.showInstance(getFragmentManager(), editingContext);
 	}

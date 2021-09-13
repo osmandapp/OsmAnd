@@ -6,6 +6,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.api.AudioFocusHelperImpl;
 
 import org.mozilla.javascript.ScriptableObject;
 
@@ -66,9 +67,13 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
                 }
             }
         }
-        playQueue();
-        return lst;
-    }
+		if (AudioFocusHelperImpl.playbackAuthorized) {
+			playQueue();
+			return lst;
+		} else {
+			return Collections.emptyList();
+		}
+	}
 
     private List<String> splitAnnouncements(List<String> execute) {
         List<String> result = new ArrayList<>();

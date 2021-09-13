@@ -34,7 +34,7 @@ public class MapillaryMenuController extends MenuController {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && image != null && getMenuType() == MenuType.STANDARD) {
 			MapillaryImageDialog.show(mapActivity, image.getLatitude(), image.getLongitude(),
-					image.getKey(), image.getSKey(), image.getCa(), mapActivity.getMyApplication().getString(R.string.mapillary), null);
+					image.getImageId(), image.getSKey(), image.getCompassAngle(), mapActivity.getMyApplication().getString(R.string.mapillary), null);
 			return false;
 		} else {
 			return super.setActive(active);

@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="mapillary_menu_filter_description_new">Filter images by date or by type. Only active in closeup zoom.</string>
     <string name="start_point">Start</string>
     <string name="remove_group_from_markers">Remove group from markers list</string>
     <string name="add_group_to_markers">Add group to markers list</string>

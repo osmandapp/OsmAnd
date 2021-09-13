@@ -6,6 +6,8 @@ import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
 import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.SOFT_KEYBOARD_MIN_DETECTION_SIZE;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,6 +15,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +29,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -301,6 +305,10 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 			if (BackupHelper.isTokenValid(token)) {
 				progressBar.setVisibility(View.VISIBLE);
 				backupHelper.registerDevice(token);
+				Activity activity = getActivity();
+				if (AndroidUtils.isActivityNotDestroyed(activity)) {
+					AndroidUtils.hideSoftKeyboard(activity, editText);
+				}
 			} else {
 				editText.requestFocus();
 				editText.setError("Token is not valid");
@@ -453,14 +461,14 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 				public void onGlobalLayout() {
 					Rect r = new Rect();
 					mainView.getWindowVisibleDisplayFrame(r);
-					int screenHeight = mainView.getRootView().getHeight();
+					int screenHeight = mainView.getHeight();
 					int keypadHeight = screenHeight - r.bottom;
 					boolean softKeyboardVisible = keypadHeight > screenHeight * SOFT_KEYBOARD_MIN_DETECTION_SIZE;
 
 					if (previousKeyboardHeight != keypadHeight) {
 						previousKeyboardHeight = keypadHeight;
 						if (softKeyboardVisible) {
-							space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, space.getHeight()));
+							space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, space.getHeight() / 2));
 							keyboardSpace.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, keypadHeight));
 						} else {
 							space.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 0, 1));
@@ -506,6 +514,40 @@ public class AuthorizeFragment extends BaseOsmAndFragment implements OnRegisterU
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
+		}
+	}
+
+	public static class FixScrollingFooterBehaviour extends AppBarLayout.ScrollingViewBehavior {
+
+		private AppBarLayout appBar;
+
+		public FixScrollingFooterBehaviour() {
+			super();
+		}
+
+		public FixScrollingFooterBehaviour(Context context, AttributeSet attrs) {
+			super(context, attrs);
+		}
+
+		@Override
+		public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent,
+		                                      @NonNull View child,
+		                                      @NonNull View dependency) {
+			if (appBar == null) {
+				appBar = ((AppBarLayout) dependency);
+			}
+
+			boolean viewChanged = super.onDependentViewChanged(parent, child, dependency);
+			int bottomPadding = appBar.getTop() + appBar.getTotalScrollRange()
+					- AndroidUtils.getStatusBarHeight(parent.getContext());
+			boolean paddingChanged = bottomPadding != child.getPaddingBottom();
+			if (paddingChanged) {
+				child.setPadding(child.getPaddingLeft(), child.getPaddingTop(), child.getPaddingRight(),
+						bottomPadding);
+				child.requestLayout();
+			}
+
+			return paddingChanged || viewChanged;
 		}
 	}
 }
