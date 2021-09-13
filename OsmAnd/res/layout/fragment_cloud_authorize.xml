@@ -11,7 +11,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="vertical"
-		osmand:layout_behavior=".backup.ui.AuthorizeFragment$FixScrollingFooterBehaviour">
+		osmand:layout_behavior="net.osmand.plus.backup.ui.AuthorizeFragment$FixScrollingFooterBehaviour">
 
 		<me.zhanghai.android.materialprogressbar.MaterialProgressBar
 			android:id="@+id/progress_bar"
