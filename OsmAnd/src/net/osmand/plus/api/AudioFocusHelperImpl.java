@@ -40,7 +40,8 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 					.setUsage(((OsmandApplication) context.getApplicationContext()).getSettings().AUDIO_USAGE.get())
 					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 					.build();
-			AudioFocusRequest mAudioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+			AudioFocusRequest mAudioFocusRequest = new AudioFocusRequest.Builder(((OsmandApplication) context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.getModeValue(applicationMode)
+					? AudioManager.AUDIOFOCUS_GAIN_TRANSIENT : AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)
 					.setAudioAttributes(mAudioAttributes)
 					.setAcceptsDelayedFocusGain(false)
 					.setOnAudioFocusChangeListener(this)
@@ -72,7 +73,8 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 					.setUsage(((OsmandApplication) context.getApplicationContext()).getSettings().AUDIO_USAGE.get())
 					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 					.build();
-			AudioFocusRequest mAudioFocusRequest = new AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+			AudioFocusRequest mAudioFocusRequest = new AudioFocusRequest.Builder(((OsmandApplication) context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.getModeValue(applicationMode)
+					? AudioManager.AUDIOFOCUS_GAIN_TRANSIENT : AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK)
 					.setAudioAttributes(mAudioAttributes)
 					.setAcceptsDelayedFocusGain(false)
 					.setOnAudioFocusChangeListener(this)
