@@ -1558,10 +1558,6 @@ public class RouteResultPreparation {
 				lanes[it] = (laneType << 1) + 1;
 			}
 		}
-		// sometimes links are
-		if ((current <= rs.leftLanes + rs.rightLanes) && (rs.leftLanes > 1 || rs.rightLanes > 1)) {
-			rs.speak = true;
-		}
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(lanes);
 		return t;
