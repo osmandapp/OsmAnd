@@ -10,12 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
+import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandApplication.NavigationSessionListener;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.resources.ResourceManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,6 +30,7 @@ public class OsmandMap implements NavigationSessionListener {
 	private final MapViewTrackingUtilities mapViewTrackingUtilities;
 	private final OsmandMapTileView mapView;
 	private final MapLayers mapLayers;
+	private final IMapDownloaderCallback downloaderCallback;
 
 	private final List<OsmandMapListener> listeners = Collections.synchronizedList(new ArrayList<>());
 
@@ -68,6 +71,18 @@ public class OsmandMap implements NavigationSessionListener {
 		}
 		mapView = new OsmandMapTileView(app, w, h);
 		mapLayers = new MapLayers(app);
+
+		// to not let it gc
+		downloaderCallback = request -> {
+			if (request != null && !request.error && request.fileToSave != null) {
+				ResourceManager mgr = app.getResourceManager();
+				mgr.tileDownloaded(request);
+			}
+			if (request == null || !request.error) {
+				mapView.tileDownloaded(request);
+			}
+		};
+		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(downloaderCallback);
 
 		app.setNavigationSessionListener(this);
 	}

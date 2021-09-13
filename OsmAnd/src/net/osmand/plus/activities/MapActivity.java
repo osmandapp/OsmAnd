@@ -61,7 +61,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
@@ -120,7 +119,6 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SnapTrackWarningFragment;
 import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.render.RendererRegistry;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
@@ -221,7 +219,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private final DashboardOnMap dashboardOnMap = new DashboardOnMap(this);
 	private AppInitializeListener initListener;
-	private IMapDownloaderCallback downloaderCallback;
 	private DrawerLayout drawerLayout;
 	private boolean drawerDisabled;
 
@@ -306,17 +303,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapView.setAccessibilityActions(new MapAccessibilityActions(this));
 		getMapViewTrackingUtilities().setMapView(mapView);
 
-		// to not let it gc
-		downloaderCallback = request -> {
-			if (request != null && !request.error && request.fileToSave != null) {
-				ResourceManager mgr = app.getResourceManager();
-				mgr.tileDownloaded(request);
-			}
-			if (request == null || !request.error) {
-				mapView.tileDownloaded(request);
-			}
-		};
-		app.getResourceManager().getMapTileDownloader().addDownloaderCallback(downloaderCallback);
 		createProgressBarForRouting();
 		updateStatusBarColor();
 
@@ -1270,7 +1256,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (carNavigationSession == null || !carNavigationSession.hasSurface()) {
 			getMapViewTrackingUtilities().setMapView(null);
 		}
-		app.getResourceManager().getMapTileDownloader().removeDownloaderCallback(getMapView());
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}

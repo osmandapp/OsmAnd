@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
 import net.osmand.Location;
-import net.osmand.StateChangedListener;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -45,14 +44,15 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private static final int COMPASS_REQUEST_TIME_INTERVAL_MS = 5000;
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4;
 
-	private long lastTimeAutoZooming = 0;
-	private boolean sensorRegistered = false;
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
+
 	private OsmandMapTileView mapView;
 	private DashboardOnMap dashboard;
 	private MapContextMenu contextMenu;
 	private TrackDetailsMenu detailsMenu;
-	private OsmandSettings settings;
-	private OsmandApplication app;
+
+	private long lastTimeAutoZooming = 0;
 	private boolean isMapLinkedToLocation = true;
 	private boolean followingMode;
 	private boolean routePlanningMode;
@@ -81,17 +81,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private void addTargetPointListener(OsmandApplication app) {
-		app.getTargetPointsHelper().addListener(new StateChangedListener<Void>() {
-
-			@Override
-			public void stateChanged(Void change) {
-				app.runInUIThread(() -> {
-					if (mapView != null) {
-						mapView.refreshMap();
-					}
-				});
+		app.getTargetPointsHelper().addListener(change -> app.runInUIThread(() -> {
+			if (mapView != null) {
+				mapView.refreshMap();
 			}
-		});
+		}));
 	}
 
 	private void addMapMarkersListener(OsmandApplication app) {
@@ -308,14 +302,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	}
 
 	private void registerUnregisterSensor(net.osmand.Location location, boolean smallSpeedForDirectionOfMovement) {
-
 		int currentMapRotation = settings.ROTATE_MAP.get();
 		boolean registerCompassListener = ((showViewAngle || contextMenu != null) && location != null)
 				|| (currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS && !routePlanningMode)
 				|| (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING && smallSpeedForDirectionOfMovement);
 		// show point view only if gps enabled
-		if(sensorRegistered != registerCompassListener) {
-			app.getLocationProvider().registerOrUnregisterCompassListener(registerCompassListener);
+		if (registerCompassListener) {
+			app.getLocationProvider().registerOrUnregisterCompassListener(true);
 		}
 	}
 
@@ -383,12 +376,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom : mapView.getZoom();
 					movingToMyLocation = true;
 					thread.startMoving(location.getLatitude(), location.getLongitude(),
-							fZoom, false, new Runnable() {
-								@Override
-								public void run() {
-									movingToMyLocation = false;
-								}
-							});
+							fZoom, false, () -> movingToMyLocation = false);
 				}
 				mapView.refreshMap();
 			}
@@ -413,7 +401,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					backToLocationImpl(15, false);
 				}
 			}
-		}, delay * 1000);
+		}, delay * 1000L);
 	}
 
 	public boolean isMapLinkedToLocation() {
@@ -505,7 +493,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 
 	private static class DetectDrivingRegionTask extends AsyncTask<LatLon, Void, WorldRegion> {
 
-		private OsmandApplication app;
+		private final OsmandApplication app;
 
 		DetectDrivingRegionTask(OsmandApplication app) {
 			this.app = app;

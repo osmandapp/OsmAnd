@@ -100,8 +100,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private net.osmand.Location customLocation;
 
 	private boolean sensorRegistered = false;
-	private float[] mGravs = new float[3];
-	private float[] mGeoMags = new float[3];
+	private final float[] mGravs = new float[3];
+	private final float[] mGeoMags = new float[3];
 	private float previousCorrectionValue = 360;
 
 	private static final boolean USE_KALMAN_FILTER = true;
@@ -111,8 +111,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	float avgValCos = 0;
 	float lastValSin = 0;
 	float lastValCos = 0;
-	private float[] previousCompassValuesA = new float[50];
-	private float[] previousCompassValuesB = new float[50];
+	private final float[] previousCompassValuesA = new float[50];
+	private final float[] previousCompassValuesB = new float[50];
 	private int previousCompassIndA = 0;
 	private int previousCompassIndB = 0;
 	private boolean inUpdateValue = false;
@@ -131,12 +131,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private net.osmand.Location location = null;
 
-	private GPSInfo gpsInfo = new GPSInfo();
+	private final GPSInfo gpsInfo = new GPSInfo();
 
-	private List<OsmAndLocationListener> locationListeners = new ArrayList<>();
-	private List<OsmAndCompassListener> compassListeners = new ArrayList<>();
+	private final List<OsmAndLocationListener> locationListeners = new ArrayList<>();
+	private final List<OsmAndCompassListener> compassListeners = new ArrayList<>();
 	private Object gpsStatusListener;
-	private float[] mRotationM = new float[9];
+	private final float[] mRotationM = new float[9];
 
 	public static class SimulationProvider {
 		private int currentRoad;
@@ -469,7 +469,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// Attention : sensor produces a lot of events & can hang the system
-		if(inUpdateValue) {
+		if (inUpdateValue) {
 			return;
 		}
 		synchronized (this) {
@@ -576,7 +576,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private void updateCompassVal() {
 		heading = (float) getAngle(avgValSin, avgValCos);
-		for(OsmAndCompassListener c : compassListeners){
+		for (OsmAndCompassListener c : compassListeners) {
 			c.updateCompassValue(heading);
 		}
 	}
@@ -671,21 +671,17 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (location != null && routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
 				&& simulatePosition == null) {
 			final long fixTime = location.getTime();
-			app.runMessageInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, new Runnable() {
-
-				@Override
-				public void run() {
-					net.osmand.Location lastKnown = getLastKnownLocation();
-					if (lastKnown != null && lastKnown.getTime() > fixTime) {
-						// false positive case, still strange how we got here with removeMessages
-						return;
-					}
-					gpsSignalLost = true;
-					if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
-							&& simulatePosition == null) {
-						routingHelper.getVoiceRouter().gpsLocationLost();
-						setLocation(null);
-					}
+			app.runMessageInUIThreadAndCancelPrevious(LOST_LOCATION_MSG_ID, () -> {
+				net.osmand.Location lastKnown = getLastKnownLocation();
+				if (lastKnown != null && lastKnown.getTime() > fixTime) {
+					// false positive case, still strange how we got here with removeMessages
+					return;
+				}
+				gpsSignalLost = true;
+				if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0
+						&& simulatePosition == null) {
+					routingHelper.getVoiceRouter().gpsLocationLost();
+					setLocation(null);
 				}
 			}, LOST_LOCATION_CHECK_DELAY);
 			app.runMessageInUIThreadAndCancelPrevious(START_SIMULATE_LOCATION_MSG_ID, new Runnable() {
@@ -709,13 +705,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 	
 	public void simulatePosition() {
-		app.runMessageInUIThreadAndCancelPrevious(RUN_SIMULATE_LOCATION_MSG_ID, new Runnable() {
-
-			@Override
-			public void run() {
-				simulatePositionImpl();
-			}
-		}, 600);
+		app.runMessageInUIThreadAndCancelPrevious(RUN_SIMULATE_LOCATION_MSG_ID, this::simulatePositionImpl, 600);
 	}
 	
 	private void simulatePositionImpl() {
@@ -947,12 +937,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		boolean networkenabled = false;
 
 		try {
-		    gpsenabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		} catch(Exception ex) {}
+			gpsenabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+		} catch (Exception ignored) {
+		}
 
 		try {
 		    networkenabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-		} catch(Exception ex) {}
+		} catch (Exception ignored) {
+		}
 
 		if (!gpsenabled && !networkenabled) {
 		    // notify user

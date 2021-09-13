@@ -108,22 +108,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		}
 	}
 
-	protected static final int emptyTileDivisor = 16;
-
 	public interface OnTrackBallListener {
-		public boolean onTrackBallEvent(MotionEvent e);
+		boolean onTrackBallEvent(MotionEvent e);
 	}
 
 	public interface OnLongClickListener {
-		public boolean onLongPressEvent(PointF point);
+		boolean onLongPressEvent(PointF point);
 	}
 
 	public interface OnClickListener {
-		public boolean onPressEvent(PointF point);
+		boolean onPressEvent(PointF point);
 	}
 
 	public interface OnDrawMapListener {
-		public void onDrawOverMap();
+		void onDrawOverMap();
 	}
 
 	protected static final Log LOG = PlatformUtil.getLog(OsmandMapTileView.class);
@@ -150,11 +148,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private AccessibilityActionsProvider accessibilityActions;
 
-	private List<OsmandMapLayer> layers = new ArrayList<>();
+	private final List<OsmandMapLayer> layers = new ArrayList<>();
 
 	private BaseMapLayer mainLayer;
 
-	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
+	private final Map<OsmandMapLayer, Float> zOrders = new HashMap<>();
 
 	private OnDrawMapListener onDrawMapListener;
 
@@ -438,8 +436,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setIntZoom(int zoom) {
-		zoom = zoom > getMaxZoom() ? getMaxZoom() : zoom;
-		zoom = zoom < getMinZoom() ? getMinZoom() : zoom;
+		zoom = Math.min(zoom, getMaxZoom());
+		zoom = Math.max(zoom, getMinZoom());
 		if (mainLayer != null) {
 			animatedDraggingThread.stopAnimating();
 			currentViewport.setZoomAndAnimation(zoom, 0, 0);
@@ -871,29 +869,26 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return;
 		}
 		if (!baseHandler.hasMessages(BASE_REFRESH_MESSAGE) || drawSettings.isUpdateVectorRendering()) {
-			Message msg = Message.obtain(baseHandler, new Runnable() {
-				@Override
-				public void run() {
-					baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
-					try {
-						DrawSettings param = drawSettings;
-						Boolean currentNightMode = nightMode;
-						if (currentNightMode != null && currentNightMode != param.isNightMode()) {
-							param = new DrawSettings(currentNightMode, true);
-							resetDefaultColor();
-						}
-						if (handler.hasMessages(MAP_FORCE_REFRESH_MESSAGE)) {
-							if (!param.isUpdateVectorRendering()) {
-								param = new DrawSettings(drawSettings.isNightMode(), true);
-							}
-							handler.removeMessages(MAP_FORCE_REFRESH_MESSAGE);
-						}
-						param.mapRefreshTimestamp = System.currentTimeMillis();
-						refreshBaseMapInternal(currentViewport.copy(), param);
-						sendRefreshMapMsg(param, 0);
-					} catch (Exception e) {
-						LOG.error(e.getMessage(), e);
+			Message msg = Message.obtain(baseHandler, () -> {
+				baseHandler.removeMessages(BASE_REFRESH_MESSAGE);
+				try {
+					DrawSettings param = drawSettings;
+					Boolean currentNightMode = nightMode;
+					if (currentNightMode != null && currentNightMode != param.isNightMode()) {
+						param = new DrawSettings(currentNightMode, true);
+						resetDefaultColor();
 					}
+					if (handler.hasMessages(MAP_FORCE_REFRESH_MESSAGE)) {
+						if (!param.isUpdateVectorRendering()) {
+							param = new DrawSettings(drawSettings.isNightMode(), true);
+						}
+						handler.removeMessages(MAP_FORCE_REFRESH_MESSAGE);
+					}
+					param.mapRefreshTimestamp = System.currentTimeMillis();
+					refreshBaseMapInternal(currentViewport.copy(), param);
+					sendRefreshMapMsg(param, 0);
+				} catch (Exception e) {
+					LOG.error(e.getMessage(), e);
 				}
 			});
 			msg.what = drawSettings.isUpdateVectorRendering() ? MAP_FORCE_REFRESH_MESSAGE : BASE_REFRESH_MESSAGE;
@@ -925,14 +920,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	private void sendRefreshMapMsg(final DrawSettings drawSettings, int delay) {
 		if (!handler.hasMessages(MAP_REFRESH_MESSAGE) || drawSettings.isUpdateVectorRendering()) {
-			Message msg = Message.obtain(handler, new Runnable() {
-				@Override
-				public void run() {
-					DrawSettings param = drawSettings;
-					handler.removeMessages(MAP_REFRESH_MESSAGE);
+			Message msg = Message.obtain(handler, () -> {
+				DrawSettings param = drawSettings;
+				handler.removeMessages(MAP_REFRESH_MESSAGE);
 
-					refreshMapInternal(param);
-				}
+				refreshMapInternal(param);
 			});
 			msg.what = MAP_REFRESH_MESSAGE;
 			if (delay > 0) {
@@ -1204,20 +1196,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		accessibilityActions = actions;
 	}
 
-
 	public AnimateDraggingMapThread getAnimatedDraggingThread() {
 		return animatedDraggingThread;
 	}
 
 	public void showMessage(final String msg) {
-		handler.post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(application, msg, Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
-			}
+		handler.post(() -> {
+			Toast.makeText(application, msg, Toast.LENGTH_SHORT).show(); 
 		});
 	}
-
 
 	private class MapTileViewMultiTouchZoomListener implements MultiTouchZoomListener,
 			DoubleTapScaleDetector.DoubleTapZoomListener {
@@ -1245,7 +1232,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
-					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); //$NON-NLS-1$
+					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); 
 				} else {
 					final LatLon p1 = initialViewport.getLatLonFromPixel(x1, y1);
 					final LatLon p2 = initialViewport.getLatLonFromPixel(x2, y2);
@@ -1262,7 +1249,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			final int newZoom = getZoom();
 			if (application.accessibilityEnabled()) {
 				if (newZoom != initialViewport.getZoom()) {
-					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); //$NON-NLS-1$
+					showMessage(application.getString(R.string.zoomIs) + " " + newZoom); 
 				} else {
 					final LatLon p1 = initialViewport.getLatLonFromPixel(x1, y1);
 					final LatLon p2 = initialViewport.getLatLonFromPixel(x2, y2);
@@ -1452,7 +1439,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				return;
 			}
 			if (LOG.isDebugEnabled()) {
-				LOG.debug("On long click event " + e.getX() + " " + e.getY()); //$NON-NLS-1$ //$NON-NLS-2$
+				LOG.debug("On long click event " + e.getX() + " " + e.getY());  //$NON-NLS-2$
 			}
 			PointF point = new PointF(e.getX(), e.getY());
 			if ((accessibilityActions != null) && accessibilityActions.onLongClick(point, getCurrentRotatedTileBox())) {
@@ -1489,7 +1476,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 			PointF point = new PointF(e.getX(), e.getY());
 			if (LOG.isDebugEnabled()) {
-				LOG.debug("On click event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
+				LOG.debug("On click event " + point.x + " " + point.y);  //$NON-NLS-2$
 			}
 			if ((accessibilityActions != null) && accessibilityActions.onClick(point, getCurrentRotatedTileBox())) {
 				return true;
