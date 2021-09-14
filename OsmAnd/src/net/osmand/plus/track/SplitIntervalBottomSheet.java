@@ -37,7 +37,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
+import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
 
 public class SplitIntervalBottomSheet extends MenuBottomSheetDialogFragment {
 

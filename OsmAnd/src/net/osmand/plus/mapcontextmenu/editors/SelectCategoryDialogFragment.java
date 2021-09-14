@@ -185,7 +185,6 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 	}
 
 	private static Drawable getIcon(final Activity activity, int resId, int color) {
-		OsmandApplication app = (OsmandApplication)activity.getApplication();
 		Drawable d = AppCompatResources.getDrawable(activity, resId);
 		if (d != null) {
 			d = DrawableCompat.wrap(d).mutate();

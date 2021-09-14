@@ -193,7 +193,6 @@ public class MapActivityLayers {
 		mapQuickActionLayer = new MapQuickActionLayer(activity);
 		mapView.addLayer(mapQuickActionLayer, 12);
 		contextMenuLayer.setMapQuickActionLayer(mapQuickActionLayer);
-		mapControlsLayer.setMapQuickActionLayer(mapQuickActionLayer);
 
 		transparencyListener = new StateChangedListener<Integer>() {
 			@Override

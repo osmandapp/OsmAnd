@@ -48,7 +48,7 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 		boolean create = false;
 		if (row == null) {
 			create = true;
-			row = createGpxTabsView(displayHelper, parent, listener, nightMode);
+			row = createGpxTabsView(parent, nightMode);
 		}
 		GpxDisplayItem item = getItem(position);
 		if (item != null) {
@@ -65,8 +65,7 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 		return row;
 	}
 
-	public static View createGpxTabsView(TrackDisplayHelper displayHelper, ViewGroup root,
-										 SegmentActionsListener listener, boolean nightMode) {
+	public static View createGpxTabsView(ViewGroup root, boolean nightMode) {
 		Context context = root.getContext();
 		View row = UiUtilities.getInflater(context, nightMode).inflate(R.layout.gpx_list_item_tab_content, root, false);
 

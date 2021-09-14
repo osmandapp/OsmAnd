@@ -56,7 +56,6 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dashboard.tools.DashboardSettingsDialogFragment;
@@ -343,7 +342,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		flat.setVisibility(View.GONE);
 		ImageView settingsButton = dashboardView.findViewById(R.id.toolbar_settings);
 		settingsButton.setVisibility(View.GONE);
-		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
 		ImageView lst = dashboardView.findViewById(R.id.toolbar_list);
 		lst.setVisibility(View.GONE);
 		ImageButton back = dashboardView.findViewById(R.id.toolbar_back);
@@ -477,18 +475,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			actionButton.setContentDescription(button.text);
 			actionButton.setOnClickListener(button.onClickListener);
 		}
-	}
-
-	private boolean isInRouteOrPlannigMode() {
-		boolean routePlanningMode = false;
-		RoutingHelper rh = mapActivity.getRoutingHelper();
-		if (rh.isRoutePlanningMode()) {
-			routePlanningMode = true;
-		} else if ((rh.isRouteCalculated() || rh.isRouteBeingCalculated()) && !rh.isFollowingMode()) {
-			routePlanningMode = true;
-		}
-		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
-		return routePlanningMode || routeFollowingMode;
 	}
 
 	private void hideActionButton() {
@@ -681,7 +667,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (listBackgroundView != null) {
 			listBackgroundView.setBackgroundColor(backgroundColor);
 		} else {
-//			listView.setBackgroundColor(backgroundColor);
+			listView.setBackgroundColor(backgroundColor);
 			listEmptyTextView.setBackgroundColor(backgroundColor);
 		}
 		if (visibleType != DashboardType.CONFIGURE_SCREEN
@@ -1098,10 +1084,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 
 	public void onAttach(DashBaseFragment dashBaseFragment) {
 		fragList.add(new WeakReference<>(dashBaseFragment));
-	}
-
-	public void requestLayout() {
-		dashboardView.requestLayout();
 	}
 
 	public boolean onBackPressed() {

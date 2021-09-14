@@ -1,12 +1,17 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_LANG;
+import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_TITLE;
+
 import android.content.Context;
 import android.os.Build;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
@@ -17,6 +22,7 @@ import com.squareup.picasso.RequestCreator;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.Metadata;
 import net.osmand.PicassoUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,18 +36,14 @@ import net.osmand.util.Algorithms;
 
 import java.util.Map;
 
-import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.getMetadataImageLink;
-import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_LANG;
-import static net.osmand.plus.wikivoyage.WikivoyageUtils.ARTICLE_TITLE;
-
 public class DescriptionCard extends MapBaseCard {
 
 	private final Fragment targetFragment;
 	private final GPXFile gpxFile;
 
 	public DescriptionCard(@NonNull MapActivity mapActivity,
-	                       @NonNull Fragment targetFragment,
-	                       @NonNull GPXFile gpxFile) {
+						   @NonNull Fragment targetFragment,
+						   @NonNull GPXFile gpxFile) {
 		super(mapActivity);
 		this.gpxFile = gpxFile;
 		this.targetFragment = targetFragment;
@@ -165,5 +167,21 @@ public class DescriptionCard extends MapBaseCard {
 				picasso.setResultLoaded(imageUrl, false);
 			}
 		});
+	}
+
+	@Nullable
+	public static String getMetadataImageLink(@NonNull Metadata metadata) {
+		String link = metadata.link;
+		if (!TextUtils.isEmpty(link)) {
+			String lowerCaseLink = link.toLowerCase();
+			if (lowerCaseLink.contains(".jpg")
+					|| lowerCaseLink.contains(".jpeg")
+					|| lowerCaseLink.contains(".png")
+					|| lowerCaseLink.contains(".bmp")
+					|| lowerCaseLink.contains(".webp")) {
+				return link;
+			}
+		}
+		return null;
 	}
 }

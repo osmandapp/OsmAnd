@@ -4298,15 +4298,27 @@
     <string name="walking_route_osmc_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i typu (międzynarodowe, regionalne, lokalne)</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolor trasy według typu sieci węzłów (międzynarodowy, regionalny, lokalny).</string>
     <string name="benefits_for_contributors_primary_descr">Możesz być uprawniony do nieograniczonych aktualizacji map co godzinę, jeśli jesteś aktywnym współtwórcą OpenStreetMap.org.</string>
-    <string name="not_enough_contributions_descr">Musisz zrobić co najmniej %1$s wkłady(-ów) w rozwój map OpenStreetMap przez ostatnie %2$s dni.</string>
+    <string name="not_enough_contributions_descr">Wymagany jest co najmniej %1$s wkład OpenStreetMap w ciągu %2$s dni.</string>
     <string name="shared_string_contributions">Wkłady w rozwój</string>
     <string name="contributions_may_calculate_with_delay">Wkłady mogą być obliczane z kilkugodzinnymi opóźnieniami.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolor wg przeznaczenia trasy.</string>
     <string name="pro_features">Funkcje Pro</string>
     <string name="purchases_restored">Przywrócono zakupy</string>
-    <string name="grey_color_undefined">Szary kolor jest używany dla części baz danych.</string>
+    <string name="grey_color_undefined">Kolor szary jest używany dla części bez danych.</string>
     <string name="cancel_anytime_in_amazon_app">Anuluj w dowolnym momencie w aplikacji Amazon</string>
     <string name="amz_manage_subscription_descr">Aby zarządzać subskrypcją, skorzystaj z aplikacji Amazon na urządzeniu lub otwórz witrynę Amazon.com pod swoim profilem.</string>
     <string name="empty_category_name">Pusta nazwa kategorii</string>
     <string name="no_activity_for_intent">Nie znaleziono odpowiednich aplikacji do wykonania tej czynności</string>
+    <string name="osm_live_payment_subscription_management_amz">Płatność jest pobierana z konta Amazon podczas potwierdzania zakupu.
+\n
+\nOdnawia się, chyba że zostanie anulowana przed wybranym okresem odnowienia.
+\n
+\nZarządzaj lub anuluj subskrypcje w ustawieniach Amazon w dowolnym momencie.</string>
+    <string name="no_items_of_type_message">Nie masz żadnych elementów tego typu</string>
+    <string name="routeInfo_winter_ice_road_description">Kolorowanie trasy lub linii toru zgodnie z zimową klasyfikacją dróg, która jest użyteczna tylko w okresie zimowym.</string>
+    <string name="routeInfo_smoothness_description">Zapewnia schemat klasyfikacji dotyczący fizycznej użyteczności drogi dla pojazdów kołowych, w szczególności w odniesieniu do regularności/płaskości powierzchni.</string>
+    <string name="routeInfo_surface_description">Podaj dodatkowe informacje o fizycznej nawierzchni dróg/ścieżek.</string>
+    <string name="routeInfo_roadClass_description">Kolorowanie trasy lub linii toru zgodnie z klasyfikacją dróg.</string>
+    <string name="add_group_to_markers">Dodaj grupę do listy znaczników</string>
+    <string name="remove_group_from_markers">Usuń grupę z listy znaczników</string>
 </resources>

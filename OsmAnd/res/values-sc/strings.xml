@@ -1153,7 +1153,7 @@
     <string name="follow">Incumintza cun sa ghia</string>
     <string name="mark_final_location_first">In antis imposta sa destinatzione</string>
     <string name="get_directions">Indicatziones</string>
-    <string name="opening_hours">Oràrios pro abèrrere</string>
+    <string name="opening_hours">Oràrios de abertura</string>
     <string name="opening_changeset">Abertura modìficas…</string>
     <string name="closing_changeset">Serradura modìficas…</string>
     <string name="commiting_node">Imbiende su nodu…</string>
@@ -1477,7 +1477,7 @@
 \nLon %2$s</string>
     <string name="tips_and_tricks_descr">Dimandas fitianas, ùrtimas modìficas e àteru.</string>
     <string name="routing_settings_2">Impostatziones de navigatzione</string>
-    <string name="general_settings_2">Impostatziones globales</string>
+    <string name="general_settings_2">Impostatziones generales</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">De-ischerta</string>
     <string name="shared_string_deselect_all">De-ischerta totu</string>
@@ -1537,7 +1537,7 @@
     <string name="use_fast_recalculation_desc">Torra a carculare petzi su cantu initziale de s’àndala. Podet èssere ùtile pro biàgios longos.</string>
     <string name="rendering_value_disabled_name">Disabilitadu</string>
     <string name="shared_string_logoff">Essi</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Casta (afiliatzione) de àndala</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Casta (afiliatzione) de retze</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="osm_edit_context_menu_delete">Iscantzella modìfica OSM</string>
     <string name="shared_string_import2osmand">Importa in OsmAnd</string>
@@ -4313,4 +4313,12 @@
     <string name="amz_manage_subscription_descr">Pro gestire sos abbonamentos imprea s\'aplicatzione de Amazon in su dispositivu o aberi su situ Amazon.com cun su profilu tuo.</string>
     <string name="empty_category_name">Nùmene de sa categoria bòidu</string>
     <string name="no_activity_for_intent">Non s\'est agatada peruna aplicatzione pro fàghere custa atzione</string>
+    <string name="no_items_of_type_message">Non tenes perunu elementu de custa genia</string>
+    <string name="routeInfo_tracktype_description">Colorimentu de un\'àndala o de una lìnia de rasta sighende sas cunditziones de sos caminos basadas in sa cumpositzione de sa superfìtzie issoro. Aplicada de sòlitu a sos caminos in ue sa retza de caminos printzipale cunsistet in caminos chene asfaltu.</string>
+    <string name="routeInfo_winter_ice_road_description">Colorimentu de s\'àndala o sa lìnia de sa rasta sighende sa classificatzione de su caminu ierrile chi si podet impreare in s\'ierru ebbia.</string>
+    <string name="routeInfo_roadClass_description">Colorimentu de s\'àndala o sa lìnia de sa rasta sighende sa classificatzione de su caminu.</string>
+    <string name="routeInfo_smoothness_description">Frunit un\'ischema de classificatzione chi pertocat a s\'usabilidade fìsica de unu caminu pro veìculos a rodas, mescamente pro su chi pertocat a sa regularidade e a sa pranaridade de sas superfìtzies.</string>
+    <string name="routeInfo_surface_description">Fruni informatziones in prus in subra de sa superfìtzie fìsica de sos caminos e de sas camineras pro andare a pee.</string>
+    <string name="add_group_to_markers">Annanghe unu grupu a sa lista de marcadores</string>
+    <string name="remove_group_from_markers">Boga su grupu dae sa lista de marcadores</string>
 </resources>

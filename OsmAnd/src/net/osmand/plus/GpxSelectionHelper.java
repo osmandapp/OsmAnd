@@ -149,6 +149,11 @@ public class GpxSelectionHelper {
 		return selectedGpxFilesBackUp;
 	}
 
+	public static boolean isGpxFileSelected(@NonNull OsmandApplication app, @Nullable GPXFile gpxFile) {
+		return gpxFile != null &&
+				((gpxFile.showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
+						(gpxFile.path != null && app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path) != null));
+	}
 
 	@SuppressLint({"StringFormatInvalid", "StringFormatMatches"})
 	public String getGpxDescription() {

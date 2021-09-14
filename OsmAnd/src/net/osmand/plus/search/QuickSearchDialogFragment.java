@@ -56,7 +56,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.ColorUtilities;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -76,9 +75,11 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -894,11 +895,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		mainSearchFragment = new QuickSearchMainListFragment();
 		FragmentManager childFragmentManager = getChildFragmentManager();
 		String tag = mainSearchFragment.getClass().getName();
-		if (AndroidUtils.isFragmentCanBeAdded(childFragmentManager, tag)) {
-			childFragmentManager.beginTransaction()
-					.replace(R.id.search_view, mainSearchFragment, tag)
-					.commitAllowingStateLoss();
-		}
+		childFragmentManager.beginTransaction()
+				.replace(R.id.search_view, mainSearchFragment, tag)
+				.commitAllowingStateLoss();
 	}
 
 	private void updateToolbarButton() {
@@ -1080,17 +1079,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void startLocationUpdate() {
-		app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
-		app.getLocationProvider().addCompassListener(this);
-		app.getLocationProvider().addLocationListener(this);
-		location = app.getLocationProvider().getLastKnownLocation();
+		OsmAndLocationProvider locationProvider = app.getLocationProvider();
+		locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
+		locationProvider.addCompassListener(this);
+		locationProvider.addLocationListener(this);
+		location = locationProvider.getLastKnownLocation();
 		updateLocation(location);
 	}
 
 	private void stopLocationUpdate() {
-		app.getLocationProvider().removeLocationListener(this);
-		app.getLocationProvider().removeCompassListener(this);
-		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
+		OsmAndLocationProvider locationProvider = app.getLocationProvider();
+		locationProvider.removeLocationListener(this);
+		locationProvider.removeCompassListener(this);
+		locationProvider.addCompassListener(locationProvider.getNavigationInfo());
 	}
 
 	private void showProgressBar() {

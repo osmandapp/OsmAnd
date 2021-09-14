@@ -1,5 +1,8 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -30,9 +33,6 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class OptionsCard extends MapBaseCard {
 
@@ -167,7 +167,7 @@ public class OptionsCard extends MapBaseCard {
 	private BaseBottomSheetItem createDirectionsItem() {
 		return new SimpleBottomSheetItem.Builder()
 				.setIcon(getActiveIcon(R.drawable.ic_action_gdirections_dark))
-				.setTitle(app.getString(R.string.shared_string_navigation))
+				.setTitle(app.getString(R.string.follow_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override

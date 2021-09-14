@@ -23,13 +23,12 @@ public class GpxDbHelper {
 
 	private static final int MAX_ITEMS_CACHE_SIZE = 5000;
 
-	private OsmandApplication app;
-	private GPXDatabase db;
-	private Map<File, GpxDataItem> itemsCache = new ConcurrentHashMap<>();
+	private final GPXDatabase db;
+	private final Map<File, GpxDataItem> itemsCache = new ConcurrentHashMap<>();
 
-	private ConcurrentLinkedQueue<File> readingItems = new ConcurrentLinkedQueue<>();
-	private Map<File, GpxDataItem> readingItemsMap = new ConcurrentHashMap<>();
-	private Map<File, GpxDataItemCallback> readingItemsCallbacks = new ConcurrentHashMap<>();
+	private final ConcurrentLinkedQueue<File> readingItems = new ConcurrentLinkedQueue<>();
+	private final Map<File, GpxDataItem> readingItemsMap = new ConcurrentHashMap<>();
+	private final Map<File, GpxDataItemCallback> readingItemsCallbacks = new ConcurrentHashMap<>();
 	private GpxReaderTask readerTask;
 
 	public interface GpxDataItemCallback {
@@ -39,8 +38,7 @@ public class GpxDbHelper {
 		void onGpxDataItemReady(GpxDataItem item);
 	}
 
-	GpxDbHelper(OsmandApplication app) {
-		this.app = app;
+	GpxDbHelper(@NonNull OsmandApplication app) {
 		db = new GPXDatabase(app);
 	}
 

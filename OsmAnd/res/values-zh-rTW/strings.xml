@@ -1467,7 +1467,7 @@
 \n經度 %2$s</string>
     <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其它。</string>
     <string name="routing_settings_2">導航設定</string>
-    <string name="general_settings_2">全域設定</string>
+    <string name="general_settings_2">一般設定</string>
     <string name="waypoint_visit_after">隨後造訪</string>
     <string name="waypoint_visit_before">先造訪</string>
     <string name="shared_string_dismiss">退出</string>
@@ -4307,4 +4307,12 @@
     <string name="amz_manage_subscription_descr">要管理您的訂閱，請在裝置上使用 Amazon 應用程式，或是以您的個人檔案開啟 Amazon.com。</string>
     <string name="empty_category_name">空的分類名稱</string>
     <string name="no_activity_for_intent">找不到適合執行此動作的應用程式</string>
+    <string name="no_items_of_type_message">您沒有任何此類型的項目</string>
+    <string name="routeInfo_tracktype_description">根據道路的表面組成，根據道路狀況為路線或軌跡線著色。通常適用於主要道路路網由未鋪裝道路組成的道路。</string>
+    <string name="routeInfo_winter_ice_road_description">根據僅在冬季可用的冬季道路分類為路線或軌跡線著色。</string>
+    <string name="routeInfo_smoothness_description">提供關於有輪子的載具的物理可用性的分類方案，特別是關於表面規則性或平整度。</string>
+    <string name="routeInfo_surface_description">提供關於道路或人行道鋪面的額外資訊。</string>
+    <string name="routeInfo_roadClass_description">根據道路分類為路線或軌跡線著色。</string>
+    <string name="add_group_to_markers">將群組新增至標記清單</string>
+    <string name="remove_group_from_markers">從標記清單中移除群組</string>
 </resources>

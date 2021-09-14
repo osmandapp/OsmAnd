@@ -1,11 +1,13 @@
 package net.osmand.plus.render;
 
 import net.osmand.core.android.MapRendererView;
+import net.osmand.core.android.TileSourceProxyProvider;
 import net.osmand.core.jni.MapLayerConfiguration;
 import net.osmand.core.jni.PointI;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPointDouble;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.map.ITileSource;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
@@ -101,7 +103,6 @@ public class MapVectorLayer extends BaseMapLayer {
 		if (mapRenderer != null && !oldRender) {
 			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
 			OsmandSettings st = view.getApplication().getSettings();
-			/* TODO: Commented to avoid crash (looks like IMapTiledDataProvider.Request parameter does not pass correctly or cannot be resolved while calling obtainImage method)
 			if (!Algorithms.objectEquals(st.MAP_UNDERLAY.get(), cachedUnderlay)) {
 				cachedUnderlay = st.MAP_UNDERLAY.get();
 				ITileSource tileSource = st.getTileSourceByName(cachedUnderlay, false);
@@ -115,14 +116,12 @@ public class MapVectorLayer extends BaseMapLayer {
 					mapRenderer.resetMapLayerProvider(-1);
 				}
 			}
-			*/
 			if (!Algorithms.objectEquals(st.MAP_TRANSPARENCY.get(), cachedMapTransparency)) {
 				cachedMapTransparency = st.MAP_TRANSPARENCY.get();
 				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 				mapLayerConfiguration.setOpacityFactor(((float) cachedMapTransparency) / 255.0f);
 				mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
 			}
-			/* TODO: Commented to avoid crash (looks like IMapTiledDataProvider.Request parameter does not pass correctly or cannot be resolved while calling obtainImage method)
 			if (!Algorithms.objectEquals(st.MAP_OVERLAY.get(), cachedOverlay)) {
 				cachedOverlay = st.MAP_OVERLAY.get();
 				ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
@@ -142,7 +141,6 @@ public class MapVectorLayer extends BaseMapLayer {
 				mapLayerConfiguration.setOpacityFactor(((float) cachedOverlayTransparency) / 255.0f);
 				mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
 			}
-			*/
 			// opengl renderer
 			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
 			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll

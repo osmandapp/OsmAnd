@@ -7,23 +7,27 @@ import android.view.View;
 import androidx.annotation.ColorInt;
 
 public class PopUpMenuItem {
-	private CharSequence title;
-	private Drawable icon;
-	private View.OnClickListener onClickListener;
-	private boolean selected;
+
+	private final CharSequence title;
+	private final Drawable icon;
+	private final View.OnClickListener onClickListener;
 	@ColorInt
-	private Integer compoundBtnColor;
+	private final Integer compoundBtnColor;
+	private final boolean selected;
+	private final boolean showTopDivider;
 
 	private PopUpMenuItem(CharSequence title,
 	                     Drawable icon,
 	                     View.OnClickListener onClickListener,
+	                     Integer compoundBtnColor,
 	                     boolean selected,
-	                     Integer compoundBtnColor) {
+	                     boolean showTopDivider) {
 		this.title = title;
 		this.icon = icon;
 		this.onClickListener = onClickListener;
-		this.selected = selected;
 		this.compoundBtnColor = compoundBtnColor;
+		this.selected = selected;
+		this.showTopDivider = showTopDivider;
 	}
 
 	public CharSequence getTitle() {
@@ -50,6 +54,10 @@ public class PopUpMenuItem {
 		return selected;
 	}
 
+	public boolean shouldShowTopDivider() {
+		return showTopDivider;
+	}
+
 	public static class Builder {
 		private Context ctx;
 		private CharSequence title;
@@ -58,6 +66,7 @@ public class PopUpMenuItem {
 		@ColorInt
 		private Integer compoundBtnColor;
 		private boolean selected;
+		private boolean showTopDivider;
 
 		public Builder(Context ctx) {
 			this.ctx = ctx;
@@ -93,8 +102,13 @@ public class PopUpMenuItem {
 			return this;
 		}
 
+		public Builder showTopDivider(boolean showTopDivider) {
+			this.showTopDivider = showTopDivider;
+			return this;
+		}
+
 		public PopUpMenuItem create() {
-			return new PopUpMenuItem(title, icon, onClickListener, selected, compoundBtnColor);
+			return new PopUpMenuItem(title, icon, onClickListener, compoundBtnColor, selected, showTopDivider);
 		}
 	}
 }

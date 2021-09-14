@@ -27,11 +27,11 @@ public class AsyncLoadingThread extends Thread {
 
 	private static final Log log = PlatformUtil.getLog(AsyncLoadingThread.class);
 
-	private final Stack<Object> requests = new Stack<Object>();
+	private final Stack<Object> requests = new Stack<>();
 	private final ResourceManager resourceManger;
 
 	public AsyncLoadingThread(ResourceManager resourceManger) {
-		super("Loader map objects (synchronizer)"); //$NON-NLS-1$
+		super("Loader map objects (synchronizer)");
 		this.resourceManger = resourceManger;
 	}
 
@@ -69,9 +69,7 @@ public class AsyncLoadingThread extends Thread {
 					resourceManger.getMapTileDownloader().fireLoadCallback(null);
 				}
 				sleep(750);
-			} catch (InterruptedException e) {
-				log.error(e, e);
-			} catch (RuntimeException e) {
+			} catch (InterruptedException | RuntimeException e) {
 				log.error(e, e);
 			}
 		}

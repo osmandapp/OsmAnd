@@ -1,5 +1,7 @@
 package net.osmand.plus.notifications;
 
+import static net.osmand.plus.NavigationService.USED_BY_NAVIGATION;
+
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -28,7 +30,6 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -36,11 +37,7 @@ import net.osmand.util.Algorithms;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import static net.osmand.plus.NavigationService.USED_BY_NAVIGATION;
 
 public class NavigationNotification extends OsmandNotification {
 
@@ -49,8 +46,6 @@ public class NavigationNotification extends OsmandNotification {
 	public final static String OSMAND_STOP_NAVIGATION_SERVICE_ACTION = "OSMAND_STOP_NAVIGATION_SERVICE_ACTION";
 	public final static String GROUP_NAME = "NAVIGATION";
 
-	private Map<TurnPathHelper.TurnResource, Bitmap> bitmapCache = new HashMap<>();
-	private Bitmap turnBitmap;
 	private boolean leftSide;
 
 	public NavigationNotification(OsmandApplication app) {
@@ -131,7 +126,7 @@ public class NavigationNotification extends OsmandNotification {
 		StringBuilder notificationText = new StringBuilder();
 		color = 0;
 		icon = R.drawable.ic_notification_start_navigation;
-		turnBitmap = null;
+		Bitmap turnBitmap = null;
 		ongoing = true;
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (service != null && (service.getUsedBy() & USED_BY_NAVIGATION) != 0) {

@@ -149,14 +149,14 @@ public class OsmOAuthAuthorizationClient {
     public OAuth1AccessToken authorize(String oauthVerifier) {
         try {
             setAccessToken(service.getAccessToken(requestToken, oauthVerifier));
-        } catch (OAuthException | IOException | InterruptedException | ExecutionException e) {
+        } catch (OAuthException | IOException | InterruptedException | ExecutionException | IllegalArgumentException e) {
             log.error(e);
         }
         return accessToken;
     }
 
     public boolean isValidToken() {
-        return !(accessToken == null);
+        return accessToken != null;
     }
 
     private Verb parseRequestMethod(String method) {

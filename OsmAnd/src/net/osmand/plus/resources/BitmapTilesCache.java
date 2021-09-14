@@ -9,6 +9,8 @@ import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 
 import java.io.File;
 
+import static net.osmand.map.TileSourceManager.MAPILLARY_VECTOR_TILE_EXT;
+
 public class BitmapTilesCache extends TilesCache<Bitmap> {
 
 	public BitmapTilesCache(AsyncLoadingThread asyncLoadingThread) {
@@ -21,7 +23,7 @@ public class BitmapTilesCache extends TilesCache<Bitmap> {
 
 	@Override
 	public boolean isTileSourceSupported(ITileSource tileSource) {
-		return !".mvt".equals(tileSource.getTileFormat());
+		return !MAPILLARY_VECTOR_TILE_EXT.equals(tileSource.getTileFormat());
 	}
 
 	@Override

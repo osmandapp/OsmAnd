@@ -10,7 +10,7 @@
     <string name="unit_of_length">Unități de lungime</string>
     <string name="shared_string_search">Căutați</string>
     <string name="shared_string_logout">Deconectare</string>
-    <string name="duration_ago">%1$s acum</string>
+    <string name="duration_ago">%1$s în urmă</string>
     <string name="shared_string_account">Cont</string>
     <string name="re_send_location">Trimiteți din nou locația</string>
     <string name="not_found_yet">Nu s-a găsit încă</string>
@@ -131,7 +131,7 @@
     <string name="shared_string_enable">Activează</string>
     <string name="shared_string_select">Selectați</string>
     <string name="shared_string_apply">Aplicați</string>
-    <string name="unit_of_length_descr">Modificați în ce se măsoară distanța.</string>
+    <string name="unit_of_length_descr">Schimbați în ce se măsoară distanța.</string>
     <string name="units_and_formats">Unități &amp; formate</string>
     <string name="shared_string_export">Exportați</string>
     <string name="logcat_buffer">Buffer Logcat</string>
@@ -159,7 +159,7 @@
     <string name="m">m</string>
     <string name="km">km</string>
     <string name="mile">mi</string>
-    <string name="foot">ft</string>
+    <string name="foot">picior</string>
     <string name="yard">yd</string>
     <string name="shared_string_welcome">Bine ați venit</string>
     <string name="shared_string_authorization_descr">Vă rugăm să introduceți numărul de telefon Telegram în format internațional</string>

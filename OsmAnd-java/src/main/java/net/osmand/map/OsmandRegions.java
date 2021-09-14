@@ -40,6 +40,7 @@ import gnu.trove.list.array.TIntArrayList;
 public class OsmandRegions {
 
 	public static final String MAP_TYPE = "region_map";
+	public static final String ROADS_TYPE = "region_roads";
 
 	public static final String FIELD_DOWNLOAD_NAME = "download_name";
 	public static final String FIELD_NAME = "name";
@@ -465,6 +466,7 @@ public class OsmandRegions {
 		rd.params.population = mapIndexFields.get(mapIndexFields.populationType, object);
 		rd.regionSearchText = getSearchIndex(object);
 		rd.regionMapDownload = isDownloadOfType(object, MAP_TYPE);
+		rd.regionRoadsDownload = isDownloadOfType(object, ROADS_TYPE);
 		return rd;
 	}
 
@@ -768,7 +770,11 @@ public class OsmandRegions {
 	}
 
 	public List<WorldRegion> getWorldRegionsAt(LatLon latLon) throws IOException {
-		Map<WorldRegion, BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsWithRegionsAt(latLon);
+		return getWorldRegionsAt(latLon, false);
+	}
+
+	public List<WorldRegion> getWorldRegionsAt(LatLon latLon, boolean includeRoadRegions) throws IOException {
+		Map<WorldRegion, BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsWithRegionsAt(latLon, includeRoadRegions);
 		return new ArrayList<>(mapDataObjects.keySet());
 	}
 
@@ -794,6 +800,10 @@ public class OsmandRegions {
 	}
 
 	private Map<WorldRegion, BinaryMapDataObject> getBinaryMapDataObjectsWithRegionsAt(LatLon latLon) throws IOException {
+		return getBinaryMapDataObjectsWithRegionsAt(latLon, false);
+	}
+
+	private Map<WorldRegion, BinaryMapDataObject> getBinaryMapDataObjectsWithRegionsAt(LatLon latLon, boolean includeRoadRegions) throws IOException {
 		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
 		Map<WorldRegion, BinaryMapDataObject> foundObjects = new LinkedHashMap<>();
@@ -809,7 +819,7 @@ public class OsmandRegions {
 			if (o.getTypes() != null) {
 				WorldRegion downloadRegion = getRegionData(getFullName(o));
 				if ( downloadRegion == null
-						|| !downloadRegion.isRegionMapDownload()
+						|| (includeRoadRegions ? !downloadRegion.isRegionRoadsDownload() && !downloadRegion.isRegionMapDownload() : !downloadRegion.isRegionMapDownload())
 						|| !contain(o, point31x, point31y)) {
 					it.remove();
 				} else {

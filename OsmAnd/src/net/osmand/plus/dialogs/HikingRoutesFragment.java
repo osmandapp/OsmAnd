@@ -42,6 +42,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	private OsmandSettings settings;
 
 	private CommonPreference<String> pref;
+	@Nullable
 	private RenderingRuleProperty property;
 	private String previousValue;
 
@@ -56,13 +57,19 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 
 		pref = settings.getCustomRenderProperty(HIKING_ROUTES_OSMC_ATTR);
 		property = app.getRendererRegistry().getCustomRenderingRuleProperty(HIKING_ROUTES_OSMC_ATTR);
-		previousValue = isEnabled() ? pref.get() : property.getPossibleValues()[0];
+		if (property == null) {
+			previousValue = pref.get();
+		} else {
+			previousValue = isEnabled() ? pref.get() : property.getPossibleValues()[0];
+		}
 	}
 
 	private boolean isEnabled() {
-		for (String value : property.getPossibleValues()) {
-			if (Algorithms.stringsEqual(value, pref.get())) {
-				return true;
+		if (property != null) {
+			for (String value : property.getPossibleValues()) {
+				if (Algorithms.stringsEqual(value, pref.get())) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -91,9 +98,8 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 		boolean enabled = isEnabled();
 		int selectedColor = settings.getApplicationMode().getProfileColor(nightMode);
 		int disabledColor = AndroidUtils.getColorFromAttr(view.getContext(), R.attr.default_icon_color);
-		String propertyName = AndroidUtils.getRenderingStringPropertyName(app, HIKING_ROUTES_OSMC_ATTR, property.getName());
 
-		title.setText(propertyName);
+		title.setText(R.string.rendering_attr_hikingRoutesOSMC_name);
 		icon.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_trekking_dark, enabled ? selectedColor : disabledColor));
 		description.setText(enabled ? R.string.shared_string_enabled : R.string.shared_string_disabled);
 
@@ -118,7 +124,7 @@ public class HikingRoutesFragment extends BaseOsmAndFragment {
 	private void setupTypesCard(@NonNull View view) {
 		View container = view.findViewById(R.id.card_container);
 
-		boolean enabled = isEnabled();
+		boolean enabled = property != null && isEnabled();
 		if (enabled) {
 			TextRadioItem selectedItem = null;
 			List<TextRadioItem> items = new ArrayList<>();

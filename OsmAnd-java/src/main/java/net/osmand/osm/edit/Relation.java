@@ -1,16 +1,14 @@
 package net.osmand.osm.edit;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.osmand.data.LatLon;
-import net.osmand.osm.edit.Entity.EntityId;
-import net.osmand.osm.edit.Relation.RelationMember;
+
+import static net.osmand.osm.edit.OSMSettings.*;
 
 public class Relation extends Entity {
 	
@@ -38,7 +36,11 @@ public class Relation extends Entity {
 		public Entity getEntity() {
 			return entity;
 		}
-		
+
+		public boolean hasName() {
+			return entity != null && entity.getTag(OSMTagKey.NAME) != null;
+		}
+
 		@Override
 		public String toString() {
 			return entityId.toString() + " " + role;

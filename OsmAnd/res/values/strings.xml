@@ -13,6 +13,16 @@
 -->
 
     <string name="service_is_not_available_please_try_later">Service is not available, please try later</string>
+    <string name="mapillary_menu_filter_description_new">Filter images by date or by type. Only active in closeup zoom.</string>
+    <string name="start_point">Start</string>
+    <string name="remove_group_from_markers">Remove group from markers list</string>
+    <string name="add_group_to_markers">Add group to markers list</string>
+    <string name="routeInfo_roadClass_description">Colouring the route or track line according to road classification.</string>
+    <string name="routeInfo_surface_description">Provide additional information about the physical surface of roads/footpaths.</string>
+    <string name="routeInfo_smoothness_description">Provides a classification scheme regarding the physical usability of a way for wheeled vehicles, particularly regarding surface regularity/flatness.</string>
+    <string name="routeInfo_winter_ice_road_description">Coloring the route or track line according to the winter road classification that is only usable during the winter.</string>
+    <string name="routeInfo_tracktype_description">Coloring a route or track line according to the condition of the roads based on their surface composition. Typically applied to roads where the main road network consists of unpaved roads.</string>
+    <string name="no_items_of_type_message">You do not have any items of this type</string>
     <string name="no_activity_for_intent">No suitable applications to perform this action were found</string>
     <string name="empty_category_name">Empty category name</string>
     <string name="amz_manage_subscription_descr">To manage your subscription use the Amazon App on the device or open the Amazon.com website under your profile.</string>
@@ -2453,7 +2463,7 @@
     <string name="short_location_on_map">Lat %1$s\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Frequently asked questions, recent changes, and others.</string>
     <string name="routing_settings_2">Navigation settings</string>
-    <string name="general_settings_2">Global settings</string>
+    <string name="general_settings_2">General settings</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">OK</string>
     <string name="shared_string_cancel">Cancel</string>

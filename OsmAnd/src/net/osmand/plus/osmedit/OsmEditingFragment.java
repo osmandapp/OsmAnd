@@ -116,7 +116,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 		boolean validToken = isValidToken();
 		Preference nameAndPasswordPref = findPreference(OSM_LOGOUT);
 		if (validToken || isLoginExists()) {
-			String userName = validToken ? settings.OSM_USER_DISPLAY_NAME.get() : settings.OSM_USER_NAME.get();
+			String userName = validToken ? settings.OSM_USER_DISPLAY_NAME.get() : settings.OSM_USER_NAME_OR_EMAIL.get();
 			nameAndPasswordPref.setVisible(true);
 			nameAndPasswordPref.setSummary(userName);
 			nameAndPasswordPref.setIcon(getContentIcon(R.drawable.ic_action_user_account));
@@ -130,7 +130,7 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private boolean isLoginExists() {
-		return !Algorithms.isEmpty(settings.OSM_USER_NAME.get()) && !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
+		return !Algorithms.isEmpty(settings.OSM_USER_NAME_OR_EMAIL.get()) && !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
 	}
 
 	private void setupOfflineEditingPref() {

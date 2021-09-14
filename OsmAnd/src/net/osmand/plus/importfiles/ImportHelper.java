@@ -76,6 +76,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Koen Rabaey
@@ -625,20 +626,6 @@ public class ImportHelper {
 		MeasurementToolFragment.showInstance(activity.getSupportFragmentManager(), result);
 	}
 
-	private void showGpxOnMap(final GPXFile result) {
-		if (mapView != null && getMapActivity() != null) {
-			app.getSelectedGpxHelper().setGpxFileToDisplay(result);
-			final WptPt moveTo = result.findPointToShow();
-			if (moveTo != null) {
-				mapView.getAnimatedDraggingThread().startMoving(moveTo.lat, moveTo.lon, mapView.getZoom(), true);
-			}
-			mapView.refreshMap();
-			if (getMapActivity().getDashboard().isVisible()) {
-				getMapActivity().getDashboard().refreshContent(true);
-			}
-		}
-	}
-
 	protected void importGpxOrFavourites(final GPXFile gpxFile, final String fileName, final long fileSize,
 										 final boolean save, final boolean useImportDir,
 										 final boolean forceImportFavourites, final boolean forceImportGpx) {
@@ -704,8 +691,10 @@ public class ImportHelper {
 				if (p.desc != null) {
 					point.setDescription(p.desc);
 				}
-				point.setAddress(p.getExtensionsToRead().get("address"));
+				Map<String, String> extensions = p.getExtensionsToRead();
+				point.setAddress(extensions.get("address"));
 				point.setColor(p.getColor(0));
+				point.setVisible(!Boolean.parseBoolean(extensions.get("hidden")));
 				String iconName = p.getIconName();
 				if (iconName != null) {
 					point.setIconIdFromName(app, iconName);

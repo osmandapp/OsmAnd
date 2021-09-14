@@ -351,7 +351,7 @@ public class DownloadActivityType {
 			return getBasename(downloadItem);
 		}
 		if (this == FONT_FILE) {
-			return FileNameTranslationHelper.getFontName(ctx, getBasename(downloadItem));
+			return FileNameTranslationHelper.getFontName(getBasename(downloadItem));
 		}
 		final String basename = getBasename(downloadItem);
 		if (basename.endsWith(FileNameTranslationHelper.WIKI_NAME)) {

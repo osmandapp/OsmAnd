@@ -39,8 +39,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
-import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
+import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
 import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import static net.osmand.plus.track.TrackMenuFragment.RETURN_SCREEN_NAME;
 
@@ -313,10 +313,12 @@ public class IntentHelper {
 			Uri uri = intent.getData();
 			if (uri.toString().startsWith("osmand-oauth")) {
 				String oauthVerifier = uri.getQueryParameter("oauth_verifier");
-				app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
-				app.getOsmOAuthHelper().authorize(oauthVerifier);
-				mapActivity.setIntent(null);
-				return true;
+				if (oauthVerifier != null) {
+					app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
+					app.getOsmOAuthHelper().authorize(oauthVerifier);
+					mapActivity.setIntent(null);
+					return true;
+				}
 			}
 		}
 		return false;

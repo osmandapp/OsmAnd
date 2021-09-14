@@ -1,5 +1,25 @@
 package net.osmand.plus.track;
 
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
+import static net.osmand.plus.track.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.DELETE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.RENAME_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.SHARE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.ADD_WAYPOINT_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
@@ -50,6 +70,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -83,7 +104,6 @@ import net.osmand.plus.myplaces.MoveGpxFileBottomSheet;
 import net.osmand.plus.myplaces.MoveGpxFileBottomSheet.OnTrackFileMoveListener;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
-import net.osmand.plus.myplaces.TrackActivityFragmentAdapter;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
@@ -103,34 +123,18 @@ import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.activities.TrackActivity.CURRENT_RECORDING;
-import static net.osmand.plus.activities.TrackActivity.TRACK_FILE_NAME;
-import static net.osmand.plus.myplaces.TrackActivityFragmentAdapter.isGpxFileSelected;
-import static net.osmand.plus.track.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.DELETE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.RENAME_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.SHARE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.ADD_WAYPOINT_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
-
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
 		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener {
 
+	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
+	public static final String OPEN_POINTS_TAB = "OPEN_POINTS_TAB";
+	public static final String OPEN_TRACKS_LIST = "OPEN_TRACKS_LIST";
+	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
+	public static final String SHOW_TEMPORARILY = "SHOW_TEMPORARILY";
 	public static final String OPEN_TRACK_MENU = "open_track_menu";
 	public static final String RETURN_SCREEN_NAME = "return_screen_name";
+	public static final String TRACK_DELETED_KEY = "track_deleted_key";
 
 	public static final String TAG = TrackMenuFragment.class.getName();
 	private static final Log log = PlatformUtil.getLog(TrackMenuFragment.class);
@@ -497,7 +501,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			addCardViewToHeader(groupsCard);
 		} else {
 			MapActivity mapActivity = requireMapActivity();
-			groupsCard = new PointsGroupsCard(mapActivity, pointsCard.getGroups());
+			groupsCard = new PointsGroupsCard(mapActivity, selectedGpxFile, pointsCard.getGroups());
 			groupsCard.setListener(this);
 			headerContainer.addView(groupsCard.build(mapActivity));
 		}
@@ -756,8 +760,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if (FileUtils.isTempFile(app, getGpx().path)) {
-			FileUtils.removeGpxFile(app, new File(getGpx().path));
+
+		GPXFile gpxFile = getGpx();
+		if (gpxFile != null && FileUtils.isTempFile(app, gpxFile.path)) {
+			FileUtils.removeGpxFile(app, new File(gpxFile.path));
 		}
 	}
 
@@ -868,7 +874,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putString(TRACK_FILE_NAME, getGpx().path);
+		outState.putString(TRACK_FILE_NAME, selectedGpxFile.getGpxFile().path);
 		outState.putBoolean(CURRENT_RECORDING, selectedGpxFile.isShowCurrentTrack());
 		if (latLon != null) {
 			outState.putDouble(KEY_LATITUDE, latLon.getLatitude());
@@ -1198,6 +1204,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (pointsCard != null) {
 			pointsCard.updateContent();
 		}
+		if (groupsCard != null) {
+			groupsCard.updateContent();
+		}
 		setupCards();
 	}
 
@@ -1331,7 +1340,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void openPlanRoute(GpxData gpxData) {
 		QuadRect qr = gpxData.getRect();
 		getMapActivity().getMapView().fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-		MeasurementEditingContext editingContext = new MeasurementEditingContext();
+		MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
 		editingContext.setGpxData(gpxData);
 		MeasurementToolFragment.showInstance(getFragmentManager(), editingContext);
 	}
@@ -1340,7 +1349,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (deleteSegment(segment)) {
 			GPXFile gpx = displayHelper.getGpx();
 			if (gpx != null) {
-				boolean showOnMap = TrackActivityFragmentAdapter.isGpxFileSelected(app, gpx);
+				boolean showOnMap = GpxSelectionHelper.isGpxFileSelected(app, gpx);
 				SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
 				saveGpx(showOnMap ? selectedGpxFile : null, gpx);
 			}
@@ -1405,7 +1414,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams,
-	                             @Nullable String returnScreenName) {
+								 @Nullable String returnScreenName) {
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {

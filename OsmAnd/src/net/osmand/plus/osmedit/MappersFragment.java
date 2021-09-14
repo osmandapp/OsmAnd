@@ -150,7 +150,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 		button.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				String userName = getUserName();
+				String userName = settings.OSM_USER_DISPLAY_NAME.get();
 				String url = CONTRIBUTIONS_URL + userName + "/history";
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(Uri.parse(url));
@@ -265,7 +265,9 @@ public class MappersFragment extends BaseOsmAndFragment {
 		downloadChangesInfo(result -> {
 			changesInfo = result;
 			checkLastChanges(result);
-			fullUpdate();
+			if (isAdded()) {
+				fullUpdate();
+			}
 			return true;
 		});
 	}
@@ -302,13 +304,8 @@ public class MappersFragment extends BaseOsmAndFragment {
 		return changesSize;
 	}
 
-	private String getUserName() {
-		boolean validToken = app.getOsmOAuthHelper().isValidToken();
-		return validToken ? settings.OSM_USER_DISPLAY_NAME.get() : settings.OSM_USER_NAME.get();
-	}
-
 	public void downloadChangesInfo(@NonNull CallbackWithObject<Map<String, Contribution>> callback) {
-		String userName = getUserName();
+		String userName = settings.OSM_USER_DISPLAY_NAME.get();
 		Map<String, String> params = new HashMap<>();
 		params.put("name", userName);
 		AndroidNetworkUtils.sendRequestAsync(app, USER_CHANGES_URL, params, "Download object changes list", false, false,

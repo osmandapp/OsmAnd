@@ -124,7 +124,7 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 
 	public static void showInstance(@NonNull ContextMenuCardDialog menu) {
 		FragmentManager fragmentManager = menu.getMapActivity().getSupportFragmentManager();
-		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+		if (!fragmentManager.isStateSaved()) {
 			ContextMenuCardDialogFragment fragment = new ContextMenuCardDialogFragment();
 			fragment.dialog = menu;
 			fragmentManager.beginTransaction()

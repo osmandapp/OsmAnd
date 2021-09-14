@@ -51,12 +51,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.activities.actions.StartGPSStatus;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
@@ -1279,7 +1279,7 @@ public class MapInfoWidgetsFactory {
 		}
 
 		private void copyToClipboard(@NonNull String text) {
-			if (ShareDialog.copyToClipboard(map, text)) {
+			if (ShareMenu.copyToClipboard(map, text)) {
 				showShareSnackbar(text, map);
 			}
 		}

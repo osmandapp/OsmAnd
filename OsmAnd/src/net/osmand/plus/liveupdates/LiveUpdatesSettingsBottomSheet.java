@@ -1,5 +1,18 @@
 package net.osmand.plus.liveupdates;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatHelpDateTime;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
+import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -41,30 +54,17 @@ import net.osmand.plus.liveupdates.LiveUpdatesHelper.UpdateFrequency;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
-import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import java.util.Arrays;
-
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatHelpDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.formatShortDateTime;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getNameToDisplay;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceDownloadViaWiFi;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLatestUpdateAvailable;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.getCustomButtonView;
-import static net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet.updateCustomButtonView;
 
 public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragment implements RefreshLiveUpdates {
 
@@ -272,9 +272,8 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 							app.showShortToastMessage(R.string.no_internet_connection);
 						} else {
 							if (onLiveUpdatesForLocalChange != null) {
-								onLiveUpdatesForLocalChange.forceUpdateLocal(fileName, true, new Runnable() {
-									@Override
-									public void run() {
+								Runnable runnable = () -> {
+									if (isAdded()) {
 										updateLastCheck();
 										updateFrequencyHelpMessage();
 										updateFileSize();
@@ -283,7 +282,8 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 											((LiveUpdatesFragment) target).updateList();
 										}
 									}
-								});
+								};
+								onLiveUpdatesForLocalChange.forceUpdateLocal(fileName, true, runnable);
 							}
 						}
 					}

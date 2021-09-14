@@ -1845,7 +1845,7 @@
     <string name="dashboard_or_drawer_title">Стільниця або меню керування</string>
     <string name="live_update">Оновлення</string>
     <string name="reports_for">Відзвітувати</string>
-    <string name="rendering_attr_showMtbRoutes_name">Гірські велосипедні маршрути</string>
+    <string name="rendering_attr_showMtbRoutes_name">Маршрути для гірських велосипедів</string>
     <string name="show_on_start_description">\"Вимкнено\" запускає мапу безпосередньо.</string>
     <string name="add_points_to_map_markers_q">Додати всі точки як позначки мапи\?</string>
     <string name="shared_string_add_to_map_markers">Додати до позначок мапи</string>
@@ -3272,7 +3272,7 @@
     <string name="clear_confirmation_msg">Очистити %1$s\?</string>
     <string name="download_map_dialog">Діалогове вікно завантаження мапи</string>
     <string name="dialogs_and_notifications_title">Діалоги та сповіщення</string>
-    <string name="dialogs_and_notifications_descr">Керуйте спливаючими вікнами, діалогами та сповіщеннями.</string>
+    <string name="dialogs_and_notifications_descr">Керуйте спливними вікнами, діалогами та сповіщеннями.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Вузлові мережі</string>
     <string name="suggested_maps">Пропоновані мапи</string>
     <string name="suggested_maps_descr">Ці мапи потрібно використовувати з розширенням.</string>
@@ -4080,10 +4080,10 @@
     <string name="announce_when_exceeded">Повідомляти про перевищення</string>
     <string name="user_points">Користувацькі точки</string>
     <string name="output">Вивід</string>
-    <string name="srtm_download_list_help_message">OsmAnd надає дані горизонталей в метрах і футах. Щоб змінити формат, потрібно повторно завантажити файл.</string>
+    <string name="srtm_download_list_help_message">OsmAnd надає дані горизонталей у метрах і футах. Щоб змінити формат, потрібно повторно завантажити файл.</string>
     <string name="srtm_unit_format">Варіант одиниць вимірювання горизонталей</string>
     <string name="shared_string_feet">фути</string>
-    <string name="srtm_download_single_help_message">Виберіть потрібний варіант. Щоб змінити формат, потрібно повторно завантажувати файл.</string>
+    <string name="srtm_download_single_help_message">Виберіть потрібний формат. Щоб змінити його, потрібно повторно завантажувати файл.</string>
     <string name="route_line_use_gradient_coloring">Лінія маршруту забарвлена за профілем висоти маршруту.</string>
     <string name="shared_string_min_height">Мін. висота</string>
     <string name="shared_string_max_height">Макс. висота</string>
@@ -4313,4 +4313,12 @@
     <string name="cancel_anytime_in_amazon_app">Скасуйте її будь-коли в застосунку Amazon</string>
     <string name="amz_manage_subscription_descr">Щоб керувати підпискою, використовуйте застосунок Amazon на пристрої або відкрийте вебсайт Amazon.com під своїм профілем.</string>
     <string name="empty_category_name">Нема назви категорії</string>
+    <string name="no_items_of_type_message">У вас немає елементів цього типу</string>
+    <string name="routeInfo_tracktype_description">Забарвлення маршруту або треку відповідно до стану доріг, виходячи з їх складу. Зазвичай застосовується для доріг, де основна мережа доріг складається з ґрунтових доріг.</string>
+    <string name="routeInfo_winter_ice_road_description">Забарвлення маршруту або треку відповідно до класифікації зимових доріг, якою можна рухатись лише взимку.</string>
+    <string name="routeInfo_smoothness_description">Надає схему класифікації відносно можливості фізичного користування дорогою для руху колісних транспортних засобів, зокрема щодо плавності/пласкості поверхні.</string>
+    <string name="routeInfo_surface_description">Надати додаткові відомості про фізичну поверхню доріг/пішохідних доріжок.</string>
+    <string name="routeInfo_roadClass_description">Забарвлення маршруту або треку відповідно до класифікації доріг.</string>
+    <string name="add_group_to_markers">Додати групу до списку позначок</string>
+    <string name="remove_group_from_markers">Вилучити групу зі списку позначок</string>
 </resources>

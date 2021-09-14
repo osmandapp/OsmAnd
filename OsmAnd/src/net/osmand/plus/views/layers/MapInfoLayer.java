@@ -95,10 +95,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return mapInfoControls;
 	}
 
-	public MapActivity getMapActivity() {
-		return map;
-	}
-
 	@Override
 	public void initLayer(final OsmandMapTileView view) {
 		this.view = view;

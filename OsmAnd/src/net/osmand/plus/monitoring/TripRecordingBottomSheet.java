@@ -1,5 +1,11 @@
 package net.osmand.plus.monitoring;
 
+import static net.osmand.AndroidUtils.setPadding;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -16,6 +22,21 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -53,27 +74,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.AndroidUtils.setPadding;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
 
@@ -314,7 +314,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	}
 
 	private void createSegmentsTabs(ViewGroup viewGroup) {
-		View segmentView = SegmentGPXAdapter.createGpxTabsView(null, viewGroup, this, nightMode);
+		View segmentView = SegmentGPXAdapter.createGpxTabsView(viewGroup, nightMode);
 		AndroidUiHelper.setVisibility(View.GONE, segmentView.findViewById(R.id.list_item_divider));
 		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 		PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
@@ -494,7 +494,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		Integer titleId = type.getTitleId();
 		if (title != null && titleId != null) {
 			title.setText(titleId);
-			setTextColorActive(context, title, nightMode, type);
+			setTextColorActive(context, title, nightMode);
 		}
 		setItemBackgroundActive(context, nightMode, view);
 	}
@@ -582,7 +582,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		}
 	}
 
-	protected static void setTextColorActive(Context context, TextView tv, boolean nightMode, ItemType type) {
+	protected static void setTextColorActive(Context context, TextView tv, boolean nightMode) {
 		if (tv != null) {
 			tv.setTextColor(ContextCompat.getColor(context, getPressedColorId(nightMode)));
 		}
@@ -673,11 +673,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	@ColorRes
 	public static int getSecondaryIconColorId(boolean nightMode) {
 		return nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light;
-	}
-
-	@ColorRes
-	public static int getActiveButtonColorId(boolean nightMode) {
-		return nightMode ? R.color.active_buttons_and_links_bg_pressed_dark : R.color.active_buttons_and_links_bg_pressed_light;
 	}
 
 	@ColorRes

@@ -30,6 +30,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -54,17 +55,19 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final MapActivity mapActivity = (MapActivity) getActivity();
-        final OsmandSettings settings = getSettings();
+        final MapActivity mapActivity = (MapActivity) requireActivity();
+        final OsmandApplication app = requireMyApplication();
+        final OsmandSettings settings = requireSettings();
         final MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
 
-        final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+        final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
         final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-        final int backgroundColor = ColorUtilities.getActivityBgColor(getActivity(), nightMode);
+        final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
-        final int currentModeColor = getMyApplication().getSettings().getApplicationMode().getProfileColor(nightMode);
+        final int currentModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 
-        final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_mapillary_filters, null);
+        final View view = View.inflate(new ContextThemeWrapper(mapActivity, themeRes),
+                R.layout.fragment_mapillary_filters, null);
         view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
 
 
@@ -94,34 +97,28 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 mapActivity.getDashboard().refreshContent(true);
             }
         });
-        toggleRow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle.setChecked(!toggle.isChecked());
-            }
-        });
+        toggleRow.setOnClickListener(v -> toggle.setChecked(!toggle.isChecked()));
         UiUtilities.setupCompoundButton(nightMode, currentModeColor, toggle);
 
-
         final Button reloadTile = (Button) view.findViewById(R.id.button_reload_tile);
-        reloadTile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ResourceManager manager = getMyApplication().getResourceManager();
-                manager.clearCacheAndTiles(TileSourceManager.getMapillaryVectorSource());
-                manager.clearCacheAndTiles(TileSourceManager.getMapillaryRasterSource());
-                mapActivity.refreshMap();
-            }
+        reloadTile.setOnClickListener(v -> {
+            ResourceManager manager = app.getResourceManager();
+            manager.clearCacheAndTiles(TileSourceManager.getMapillaryVectorSource());
+            mapActivity.refreshMap();
         });
 
 
         final int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon)).setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon)).setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
+        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon))
+                .setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
+        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon))
+                .setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
+        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon))
+                .setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
 
-        final DelayAutoCompleteTextView textView = (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
-        textView.setAdapter(new MapillaryAutoCompleteAdapter(getContext(), R.layout.auto_complete_suggestion, getMyApplication()));
+        final DelayAutoCompleteTextView textView =
+                (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
+        textView.setAdapter(new MapillaryAutoCompleteAdapter(mapActivity, R.layout.auto_complete_suggestion, app));
         String selectedUsername = settings.MAPILLARY_FILTER_USERNAME.get();
         if (!selectedUsername.isEmpty() && settings.USE_MAPILLARY_FILTER.get()) {
             textView.setText(selectedUsername);
@@ -148,7 +145,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         textView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -159,7 +155,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
         ImageView imageView = (ImageView) view.findViewById(R.id.warning_image_view);

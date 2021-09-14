@@ -14,6 +14,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.api.AudioFocusHelperImpl;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
@@ -111,7 +112,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			}
 			log.debug("ttsRequests="+ttsRequests);
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
-			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
+			if (AudioFocusHelperImpl.playbackAuthorized) {
+				mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
+			} else {
+				stop();
+			}
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
 		} else if (ctx != null && vrt.isMute()) {
 			// sendAlertToAndroidWear(ctx, bld.toString());

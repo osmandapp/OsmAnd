@@ -77,7 +77,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
 		exportMode = true;
-		dataList = app.getFileSettingsHelper().getSettingsByCategory(false);
+		dataList = app.getFileSettingsHelper().getSettingsByCategory(true);
 		if (!globalExport && savedInstanceState == null) {
 			updateSelectedProfile();
 		}
@@ -220,7 +220,9 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 					dismissExportProgressDialog();
 					exportingStarted = false;
 					if (succeed) {
-						shareProfile(file);
+						if (AndroidUtils.isActivityNotDestroyed(getActivity())) {
+							shareProfile(file);
+						}
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
 					}

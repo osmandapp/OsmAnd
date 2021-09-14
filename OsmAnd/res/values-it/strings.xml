@@ -4305,4 +4305,12 @@
 \nGestisci o cancella la tua sottoscrizione dalle tue impostazioni Amazon.</string>
     <string name="cancel_anytime_in_amazon_app">Cancellala in qualunque momento dall\'app Amazon</string>
     <string name="empty_category_name">Nome categoria vuoto</string>
+    <string name="no_items_of_type_message">Non hai elementi di questo tipo</string>
+    <string name="routeInfo_tracktype_description">Colorazione di un percorso o di una traccia in base alle condizioni delle strade in base alla loro composizione della superficie. Tipicamente applicato a strade in cui la rete stradale principale è costituita da strade non asfaltate.</string>
+    <string name="routeInfo_winter_ice_road_description">Colorazione del percorso o del tracciato secondo la classificazione stradale invernale, utilizzabile solo nel periodo invernale.</string>
+    <string name="routeInfo_smoothness_description">Fornisce uno schema di classificazione riguardante l\'usabilità fisica di una strada per i veicoli su ruote, in particolare per quanto riguarda la regolarità/planarità della superficie.</string>
+    <string name="routeInfo_surface_description">Fornisce informazioni aggiuntive sulla superficie fisica delle strade/piste pedonali.</string>
+    <string name="routeInfo_roadClass_description">Colorazione del percorso o della traccia in base alla classificazione stradale.</string>
+    <string name="add_group_to_markers">Aggiungi gruppo all\'elenco dei marcatori</string>
+    <string name="remove_group_from_markers">Rimuovere il gruppo dall\'elenco dei marcatori</string>
 </resources>

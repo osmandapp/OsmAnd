@@ -134,7 +134,7 @@ public class TurnDrawable extends Drawable {
 	}
 
 	public boolean setTurnType(TurnType turnType) {
-		if (turnType != this.turnType) {
+		if (turnType != this.turnType && !getBounds().isEmpty()) {
 			this.turnType = turnType;
 			TurnPathHelper.calcTurnPath(pathForTurn, pathForTurnOutlay, turnType, null,
 					centerText, mini, false, true, false);

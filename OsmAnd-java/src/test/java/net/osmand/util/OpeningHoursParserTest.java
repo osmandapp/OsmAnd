@@ -300,6 +300,10 @@ public class OpeningHoursParserTest {
 			testOpened("08.08.2012 23:59", hours, true);
 			testOpened("08.08.2012 12:23", hours, true);
 			testOpened("08.08.2012 06:23", hours, true);
+			hours = parseOpenedHours("24/7 closed \"Temporarily, for major repairs\"");
+			System.out.println(hours);
+			testOpened("13.10.2019 18:00", hours, false);
+			testInfo("13.10.2019 18:00", hours, "24/7 off - Temporarily, for major repairs");
 
 			// some people seem to use the following syntax:
 			hours = parseOpenedHours("Sa-Su 24/7");

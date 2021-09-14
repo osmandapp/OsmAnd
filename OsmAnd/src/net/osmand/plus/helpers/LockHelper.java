@@ -195,7 +195,7 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	public void onStart(@NonNull Activity activity) {
+	public void onStart() {
 		switchSensor(false);
 	}
 

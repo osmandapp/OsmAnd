@@ -35,7 +35,7 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 15
+		minSdkVersion 21
 		versionCode 410
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		versionName "4.1.0"
@@ -171,7 +171,11 @@ android {
 
 afterEvaluate {
 	android.applicationVariants.all { variant ->
-		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+		if (variant.name.contains('Opengldebug')) {
+			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, copyOsmAndCoreWithJNI, cleanupDuplicatesInCore)
+		} else {
+			variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+		}
 	}
 	Gradle gradle = getGradle()
 	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
@@ -180,12 +184,31 @@ afterEvaluate {
 	}
 }
 
+task copyOsmAndCoreWithJNI() {
+	dependsOn buildOsmAndCore
+	doLast {
+		file("libs/armeabi-v7a").mkdirs()
+		file("../../binaries/android/clang-armeabi-v7a/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/armeabi-v7a/libOsmAndCoreWithJNI.so"))
+		file("libs/arm64-v8a").mkdirs()
+		file("../../binaries/android/clang-arm64-v8a/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/arm64-v8a/libOsmAndCoreWithJNI.so"))
+		file("libs/x86").mkdirs()
+		file("../../binaries/android/clang-x86/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/x86/libOsmAndCoreWithJNI.so"))
+		file("libs/x86_64").mkdirs()
+		file("../../binaries/android/clang-x86_64/Debug/libOsmAndCoreWithJNI.so").renameTo(file("libs/x86_64/libOsmAndCoreWithJNI.so"))
+	}
+}
+
 dependencies {
 	openglImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
 	opengldebugImplementation fileTree(include:  ['QtAndroid.jar', 'QtAndroidBearer.jar'], dir: 'libs')
 
+	// Uncomment for local debug
+	//opengldebugImplementation files('../../core/wrappers/android/build/outputs/aar/OsmAndCore_android-debug.aar')
+
+	// Comment for local debug
 	opengldebugImplementation "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"
 	opengldebugImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
+
 	openglImplementation "net.osmand:OsmAndCore_androidNativeRelease:0.1-SNAPSHOT@aar"
 	openglImplementation "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@aar"
 

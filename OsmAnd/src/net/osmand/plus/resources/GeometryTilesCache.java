@@ -8,6 +8,8 @@ import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
 import java.io.File;
 import java.io.IOException;
 
+import static net.osmand.map.TileSourceManager.MAPILLARY_VECTOR_TILE_EXT;
+
 public class GeometryTilesCache extends TilesCache<GeometryTile> {
 
 	public GeometryTilesCache(AsyncLoadingThread asyncLoadingThread) {
@@ -17,7 +19,7 @@ public class GeometryTilesCache extends TilesCache<GeometryTile> {
 
 	@Override
 	public boolean isTileSourceSupported(ITileSource tileSource) {
-		return ".mvt".equals(tileSource.getTileFormat());
+		return MAPILLARY_VECTOR_TILE_EXT.equals(tileSource.getTileFormat());
 	}
 
 	@Override

@@ -98,38 +98,36 @@ public class RouteResultPreparationTest {
         for (int i = 0; i <= routeSegments.size(); i++) {
             if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
                 if (prevSegment >= 0) {
-                    String lanes = getLanesString(routeSegments.get(prevSegment));
-                    String turn = routeSegments.get(prevSegment).getTurnType().toXmlString();
-                    String turnLanes = turn +":" +lanes;
-                    String name = routeSegments.get(prevSegment).getDescription();
-
-                    long segmentId = routeSegments.get(prevSegment).getObject().getId() >> (RouteResultPreparation.SHIFT_ID );
+                    RouteSegmentResult segment = routeSegments.get(prevSegment);
+                    String lanes = getLanesString(segment);
+                    String turn = segment.getTurnType().toXmlString();
+                    String turnLanes = turn + ":" + lanes;
+                    String name = segment.getDescription();
+                    boolean skipToSpeak = segment.getTurnType().isSkipToSpeak();
+                    long segmentId = segment.getObject().getId() >> (RouteResultPreparation.SHIFT_ID);
                     String expectedResult = expectedResults.get(segmentId);
                     if (expectedResult != null) {
-                    	if(!Algorithms.objectEquals(expectedResult, turnLanes) &&
-                    			!Algorithms.objectEquals(expectedResult, lanes) && 
-                    			!Algorithms.objectEquals(expectedResult, turn)) {
-                    		Assert.assertEquals("Segment " + segmentId, expectedResult, turnLanes);
-                    	}
+                        if ("skipToSpeak".equals(expectedResult)) {
+                            Assert.assertTrue("Segment " + segmentId + " is skipToSpeak", skipToSpeak);
+                        } else if (!Algorithms.objectEquals(expectedResult, turnLanes)
+                                && !Algorithms.objectEquals(expectedResult, lanes)
+                                && !Algorithms.objectEquals(expectedResult, turn)) {
+                            Assert.assertEquals("Segment " + segmentId, expectedResult, turnLanes);
+                        }
                     }
-
                     System.out.println("segmentId: " + segmentId + " description: " + name);
-
                 }
                 prevSegment = i;
             }
-
             if (i < routeSegments.size()) {
                 reachedSegments.add(routeSegments.get(i).getObject().getId() >> (RouteResultPreparation.SHIFT_ID ));
             }
         }
-
         Set<Long> expectedSegments = expectedResults.keySet();
         for (Long expSegId : expectedSegments){
             Assert.assertTrue("Expected segment " + (expSegId ) + 
             		" weren't reached in route segments " + reachedSegments.toString(), reachedSegments.contains(expSegId));
         }
-
     }
 
 

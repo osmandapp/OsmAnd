@@ -100,7 +100,7 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		if (selectedTypes == 0) {
 			checkBox.setState(UNCHECKED);
 		} else {
-			checkBox.setState(selectedTypes == items.getTypes().size() ? CHECKED : MISC);
+			checkBox.setState(selectedTypes == items.getNotEmptyTypes().size() ? CHECKED : MISC);
 		}
 		int checkBoxColor = checkBox.getState() == UNCHECKED ? secondaryColorRes : activeColorRes;
 		CompoundButtonCompat.setButtonTintList(checkBox, ColorStateList.valueOf(ContextCompat.getColor(app, checkBoxColor)));
@@ -108,12 +108,16 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		group.findViewById(R.id.check_box_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				checkBox.performClick();
-				boolean selected = checkBox.getState() == CHECKED;
-				if (listener != null) {
-					listener.onCategorySelected(category, selected);
+				if (!Algorithms.isEmpty(items.getNotEmptyTypes())) {
+					checkBox.performClick();
+					boolean selected = checkBox.getState() == CHECKED;
+					if (listener != null) {
+						listener.onCategorySelected(category, selected);
+					}
+					notifyDataSetChanged();
+				} else {
+					showNoItemsMessage();
 				}
-				notifyDataSetChanged();
 			}
 		});
 
@@ -166,8 +170,12 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		child.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (listener != null) {
-					listener.onTypeClicked(type);
+				if (!Algorithms.isEmpty(items)) {
+					if (listener != null) {
+						listener.onTypeClicked(type);
+					}
+				} else {
+					showNoItemsMessage();
 				}
 			}
 		});
@@ -176,12 +184,16 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		child.findViewById(R.id.check_box_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				checkBox.performClick();
-				boolean selected = checkBox.getState() == CHECKED;
-				if (listener != null) {
-					listener.onItemsSelected(type, selected ? items : new ArrayList<>());
+				if (!Algorithms.isEmpty(items)) {
+					checkBox.performClick();
+					boolean selected = checkBox.getState() == CHECKED;
+					if (listener != null) {
+						listener.onItemsSelected(type, selected ? items : new ArrayList<>());
+					}
+					notifyDataSetChanged();
+				} else {
+					showNoItemsMessage();
 				}
-				notifyDataSetChanged();
 			}
 		});
 		AndroidUiHelper.updateVisibility(child.findViewById(R.id.card_bottom_divider), isLastChild);
@@ -238,6 +250,10 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		} else {
 			icon.setImageDrawable(uiUtilities.getIcon(iconRes, secondaryColorRes));
 		}
+	}
+
+	private void showNoItemsMessage() {
+		app.showShortToastMessage(R.string.no_items_of_type_message);
 	}
 
 	public void updateSettingsItems(Map<ExportSettingsCategory, SettingsCategoryItems> itemsMap,
@@ -330,7 +346,8 @@ public class ExportSettingsAdapter extends OsmandBaseExpandableListAdapter {
 		}
 		String description;
 		if (selectedTypes == 0) {
-			description = app.getString(R.string.shared_string_none);
+			description = app.getString(Algorithms.isEmpty(items) ?
+					R.string.shared_string_empty : R.string.shared_string_none);
 		} else if (selectedTypes == items.size()) {
 			description = app.getString(R.string.shared_string_all);
 			if (itemsSize == 0) {

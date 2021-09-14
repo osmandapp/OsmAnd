@@ -66,7 +66,7 @@
 \nLongitude %2$s</string>
     <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras.</string>
     <string name="routing_settings_2">Configurações de navegação</string>
-    <string name="general_settings_2">Configurações globais</string>
+    <string name="general_settings_2">Configurações gerais</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">OK</string>
     <string name="shared_string_cancel">Cancelar</string>
@@ -711,7 +711,7 @@
     <string name="download_regular_maps">Mapa padrão</string>
     <string name="download_roads_only_maps">Apenas mapa de estradas</string>
     <string name="rendering_attr_alpineHiking_description">Renderizar caminhos de acordo com a escala de SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Percursos de caminhada</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Rotas de caminhada</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Renderizar caminhos de acordo com traços OSMC.</string>
     <string name="rendering_attr_noAdminboundaries_name">Limites</string>
     <string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis administrativos 5-9).</string>
@@ -3266,7 +3266,7 @@
     <string name="quick_action_directions_from_desc">Um botão para fazer com que a tela centralize o ponto de partida. Em seguida, solicitará para definir o destino ou acionar o cálculo da rota.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar os nós da rede de ciclovias</string>
     <string name="clear_confirmation_msg">Limpar %1$s\?</string>
-    <string name="download_map_dialog">Caixa baixar mapa</string>
+    <string name="download_map_dialog">Tela de baixar mapa</string>
     <string name="dialogs_and_notifications_title">Diálogos e notificações</string>
     <string name="dialogs_and_notifications_descr">Popups de controle, caixas de diálogo e notificações.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nós</string>
@@ -4309,4 +4309,12 @@
     <string name="amz_manage_subscription_descr">Para gerenciar sua assinatura, use o Amazon App no dispositivo ou abra o site Amazon.com em seu perfil.</string>
     <string name="empty_category_name">Nome de categoria vazio</string>
     <string name="no_activity_for_intent">Nenhum aplicativo adequado para executar esta ação foi encontrado</string>
+    <string name="no_items_of_type_message">Você não tem nenhum item deste tipo</string>
+    <string name="routeInfo_tracktype_description">Colorir uma rota ou linha de trilha de acordo com as condições das estradas com base em sua composição de superfície. Normalmente aplicado a estradas em que a rede de estradas principal consiste em estradas não pavimentadas.</string>
+    <string name="routeInfo_winter_ice_road_description">Colorir a rota ou linha de pista de acordo com a classificação da estrada de inverno que só pode ser usada durante o inverno.</string>
+    <string name="routeInfo_smoothness_description">Fornece um esquema de classificação em relação à usabilidade física de uma via para veículos com rodas, particularmente em relação à regularidade/planicidade da superfície.</string>
+    <string name="routeInfo_surface_description">Fornece informações adicionais sobre a superfície física de estradas/caminhos pedonais.</string>
+    <string name="routeInfo_roadClass_description">Colorir a rota ou linha do trilho de acordo com a classificação da estrada.</string>
+    <string name="add_group_to_markers">Adicionar grupo à lista de marcadores</string>
+    <string name="remove_group_from_markers">Remover grupo da lista de marcadores</string>
 </resources>

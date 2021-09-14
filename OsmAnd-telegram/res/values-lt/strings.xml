@@ -57,4 +57,23 @@
     <string name="timeline">Laiko juosta</string>
     <string name="unit_of_length_descr">Pakeiskite, kuo matuojamas atstumas.</string>
     <string name="status_widget_title">OsmAnd seklio būsena</string>
+    <string name="proxy_settings">Įgaliotojo serverio nustatymai</string>
+    <string name="proxy_type">Įgaliotojo serverio tipas</string>
+    <string name="osmand_service">Fono režimas</string>
+    <string name="error_adding_new_device">Nepavyko pridėti naujo įrenginio</string>
+    <string name="last_update_from_telegram">Paskutinis atnaujinimas iš Telegram</string>
+    <string name="map_and_text">Žemėlapis ir tekstas</string>
+    <string name="start_date">Pradžios data</string>
+    <string name="end_date">Pabaigos data</string>
+    <string name="average_speed">Vidutinis greitis</string>
+    <string name="time_on_the_move">Judėjimo laikas</string>
+    <string name="shared_string_sent">Išsiųsta</string>
+    <string name="gps_points">GPS taškai</string>
+    <string name="please_update_osmand">Atnaujinkite OsmAnd, kad galėtumėte peržiūrėti duomenis žemėlapyje</string>
+    <string name="show_gps_points_descr">Rodyti surinktų ir išsiųstų GPS taškų kiekį.</string>
+    <string name="show_gps_points">Rodyti GPS taškus</string>
+    <string name="received_gps_points">Gauti GPX taškai: %1$s</string>
+    <string name="how_it_works">Kaip tai veikia</string>
+    <string name="osmand_privacy_policy">OsmAnd privatumo politika</string>
+    <string name="telegram_privacy_policy">Telegram privatumo politika</string>
 </resources>

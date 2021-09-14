@@ -39,7 +39,7 @@ public class MissingMapsHelper {
 		for (int i = 0; i < points.size(); i++) {
 			final Location point = points.get(i);
 			List<WorldRegion> downloadRegions = params.ctx.getRegions().getWorldRegionsAt(
-					new LatLon(point.getLatitude(), point.getLongitude()));
+					new LatLon(point.getLatitude(), point.getLongitude()), true);
 			if (downloadRegions.isEmpty()) {
 				return true;
 			}
@@ -105,7 +105,7 @@ public class MissingMapsHelper {
 			int point31x = MapUtils.get31TileNumberX(l.getLongitude());
 			int point31y = MapUtils.get31TileNumberY(l.getLatitude());
 			LatLon latLon = new LatLon(l.getLatitude(), l.getLongitude());
-			List<WorldRegion> worldRegions = params.ctx.getRegions().getWorldRegionsAt(latLon);
+			List<WorldRegion> worldRegions = params.ctx.getRegions().getWorldRegionsAt(latLon, true);
 			Set<WorldRegion> regions = new LinkedHashSet<>();
 			boolean hasAnyRegionDownloaded =
 					!downloadResources.getExternalMapFileNamesAt(point31x, point31y, 15, true).isEmpty();
