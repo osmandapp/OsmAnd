@@ -88,6 +88,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	public static final String TAG = PointEditorFragmentNew.class.getSimpleName();
 
 	private static final int LAST_USED_ICONS_LIMIT = 20;
+	private static final String LAST_USED_ICONS_KEY = "last used icons";
 
 	private View view;
 	private EditText nameEdit;
@@ -108,7 +109,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	private RecyclerView groupRecyclerView;
 	private String selectedIconCategory;
 	private LinkedHashMap<String, JSONArray> iconCategories;
-	private String lastUsedCategoryTitle;
 	private List<String> lastUsedIcons;
 	private OsmandApplication app;
 	private View descriptionCaption;
@@ -614,7 +614,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 		// update last used icons
 		if (!Algorithms.isEmpty(lastUsedIcons)) {
-			iconCategories.put(lastUsedCategoryTitle, new JSONArray(lastUsedIcons));
+			iconCategories.put(LAST_USED_ICONS_KEY, new JSONArray(lastUsedIcons));
 		}
 
 		// update categories from json
@@ -638,7 +638,6 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 
 	protected void initLastUsedIcons() {
 		lastUsedIcons = new ArrayList<>();
-		lastUsedCategoryTitle = getString(R.string.shared_string_last_used);
 		List<String> fromPref = app.getSettings().LAST_USED_FAV_ICONS.getStringsList();
 		if (fromPref != null) {
 			lastUsedIcons.addAll(fromPref);
@@ -694,7 +693,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				horizontalSelectionAdapter.notifyDataSetChanged();
 			}
 		});
-		HorizontalSelectionItem lastUsedCategory = horizontalSelectionAdapter.getItemByTitle(lastUsedCategoryTitle);
+		HorizontalSelectionItem lastUsedCategory = horizontalSelectionAdapter.getItemByTitle(LAST_USED_ICONS_KEY);
 		if (lastUsedCategory != null) {
 			lastUsedCategory.setIconId(R.drawable.ic_action_history);
 			lastUsedCategory.setShowOnlyIcon(true);
