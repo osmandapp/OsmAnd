@@ -697,7 +697,7 @@ public class ImportHelper {
 				point.setVisible(!Boolean.parseBoolean(extensions.get("hidden")));
 				String iconName = p.getIconName();
 				if (iconName != null) {
-					point.setIconIdFromName(app, iconName);
+					point.setIconIdFromName(iconName);
 				}
 				point.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 				favourites.add(point);

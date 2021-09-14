@@ -6,6 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.R.drawable;
@@ -18,13 +22,10 @@ import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
-
 public class RenderingIcons {
 
 	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
-	
+
 	private static final Map<String, Integer> shaderIcons = new LinkedHashMap<>();
 	private static final Map<String, Integer> smallIcons = new LinkedHashMap<>();
 	private static final Map<String, Integer> bigIcons = new LinkedHashMap<>();
@@ -169,8 +170,27 @@ public class RenderingIcons {
 		return d;
 	}
 
+	public static String getBigIconName(@NonNull Integer iconId) {
+		for (String key : bigIcons.keySet()) {
+			if (iconId.equals(bigIcons.get(key))) {
+				return key;
+			}
+		}
+		return null;
+	}
+
+	public static int getBigIconId(String iconName) {
+		return getResId("mx_" + iconName);
+	}
+
 	public static Integer getResId(String id) {
-		return id.startsWith("h_") ? shaderIcons.get(id.substring(2)) : smallIcons.get(id);
+		if (id.startsWith("mx_")) {
+			return bigIcons.get(id.substring(3));
+		} else if (id.startsWith("h_")) {
+			return shaderIcons.get(id.substring(2));
+		} else {
+			return smallIcons.get(id);
+		}
 	}
 
 	static {

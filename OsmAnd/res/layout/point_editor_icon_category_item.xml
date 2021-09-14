@@ -12,5 +12,5 @@
 
 	<include
 		android:id="@+id/button"
-		layout="@layout/bottom_sheet_dialog_button" />
+		layout="@layout/horizontal_selection_item" />
 </LinearLayout>
