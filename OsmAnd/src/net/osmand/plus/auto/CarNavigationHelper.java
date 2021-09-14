@@ -11,6 +11,8 @@ import androidx.car.app.model.CarIcon;
 import androidx.car.app.model.DateTimeWithZone;
 import androidx.car.app.model.Distance;
 import androidx.car.app.navigation.model.Destination;
+import androidx.car.app.navigation.model.Lane;
+import androidx.car.app.navigation.model.LaneDirection;
 import androidx.car.app.navigation.model.Maneuver;
 import androidx.car.app.navigation.model.Step;
 import androidx.car.app.navigation.model.TravelEstimate;
@@ -24,6 +26,7 @@ import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
 
@@ -70,16 +73,17 @@ public class CarNavigationHelper {
 			boolean deviatedFromRoute = routingHelper.isDeviatedFromRoute();
 			int turnImminent = 0;
 			int nextTurnDistance = 0;
+			RouteCalculationResult.NextDirectionInfo nextDirInfo;
+			RouteCalculationResult.NextDirectionInfo calc = new RouteCalculationResult.NextDirectionInfo();
 			if (deviatedFromRoute) {
 				turnType = TurnType.valueOf(TurnType.OFFR, leftSide);
 				nextTurnDistance = (int) routingHelper.getRouteDeviation();
 			} else {
-				RouteCalculationResult.NextDirectionInfo calc1 = new RouteCalculationResult.NextDirectionInfo();
-				RouteCalculationResult.NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(calc1, true);
-				if (r != null && r.distanceTo > 0 && r.directionInfo != null) {
-					turnType = r.directionInfo.getTurnType();
-					nextTurnDistance = r.distanceTo;
-					turnImminent = r.imminent;
+				nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, true);
+				if (nextDirInfo != null && nextDirInfo.distanceTo > 0 && nextDirInfo.directionInfo != null) {
+					turnType = nextDirInfo.directionInfo.getTurnType();
+					nextTurnDistance = nextDirInfo.distanceTo;
+					turnImminent = nextDirInfo.imminent;
 				}
 			}
 			if (turnType != null) {
@@ -103,6 +107,39 @@ public class CarNavigationHelper {
 			stepBuilder.setManeuver(maneuver);
 			stepBuilder.setCue(cue);
 
+			nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, false);
+			if (nextDirInfo != null && nextDirInfo.directionInfo != null && nextDirInfo.directionInfo.getTurnType() != null) {
+				int[] lanes = nextDirInfo.directionInfo.getTurnType().getLanes();
+				// Do not show too far
+				if ((nextDirInfo.distanceTo > 800 && nextDirInfo.directionInfo.getTurnType().isSkipToSpeak()) || nextDirInfo.distanceTo > 1200) {
+					lanes = null;
+				}
+				//int dist = nextDirInfo.distanceTo;
+				if (lanes != null) {
+					for (int lane : lanes) {
+						int firstTurnType = TurnType.getPrimaryTurn(lane);
+						int secondTurnType = TurnType.getSecondaryTurn(lane);
+						int thirdTurnType = TurnType.getTertiaryTurn(lane);
+						Lane.Builder laneBuilder = new Lane.Builder();
+						laneBuilder.addDirection(LaneDirection.create(getLaneDirection(TurnType.valueOf(firstTurnType, leftSide)), (lane & 1) == 1));
+						if (secondTurnType > 0) {
+							laneBuilder.addDirection(LaneDirection.create(getLaneDirection(TurnType.valueOf(secondTurnType, leftSide)), false));
+						}
+						if (thirdTurnType > 0) {
+							laneBuilder.addDirection(LaneDirection.create(getLaneDirection(TurnType.valueOf(thirdTurnType, leftSide)), false));
+						}
+						stepBuilder.addLane(laneBuilder.build());
+					}
+					LanesDrawable lanesDrawable = new LanesDrawable(app, 1);
+					lanesDrawable.lanes = lanes;
+					lanesDrawable.isTurnByTurn = true;
+					lanesDrawable.isNightMode = app.getDaynightHelper().isNightMode();
+					lanesDrawable.updateBounds(); // prefer 500 x 74 dp
+					Bitmap lanesBitmap = drawableToBitmap(app, lanesDrawable, lanesDrawable.getIntrinsicWidth(), lanesDrawable.getIntrinsicHeight());
+					stepBuilder.setLanesImage(new CarIcon.Builder(IconCompat.createWithBitmap(lanesBitmap)).build());
+				}
+			}
+
 			int leftTurnTimeSec = routingHelper.getLeftTimeNextTurn();
 			long turnArrivalTime = System.currentTimeMillis() + leftTurnTimeSec * 1000L;
 			Distance stepDistance = Distance.create(nextTurnDistance, Distance.UNIT_METERS);
@@ -113,8 +150,7 @@ public class CarNavigationHelper {
 			TravelEstimate stepTravelEstimate = stepTravelEstimateBuilder.build();
 			tripBuilder.addStep(step, stepTravelEstimate);
 			if (!deviatedFromRoute) {
-				RouteCalculationResult.NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(
-						new RouteCalculationResult.NextDirectionInfo(), true);
+				nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, true);
 				CurrentStreetName currentName = routingHelper.getCurrentName(nextDirInfo);
 				tripBuilder.setCurrentRoad(currentName.text);
 			}
@@ -126,6 +162,10 @@ public class CarNavigationHelper {
 	private Bitmap drawableToBitmap(@NonNull Context ctx, @NonNull Drawable drawable) {
 		int height = (int) ctx.getResources().getDimension(android.R.dimen.notification_large_icon_height);
 		int width = (int) ctx.getResources().getDimension(android.R.dimen.notification_large_icon_width);
+		return drawableToBitmap(ctx, drawable, width, height);
+	}
+
+	private Bitmap drawableToBitmap(@NonNull Context ctx, @NonNull Drawable drawable, int width, int height) {
 		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 		canvas.drawColor(0, PorterDuff.Mode.CLEAR);
@@ -134,7 +174,7 @@ public class CarNavigationHelper {
 		return bitmap;
 	}
 
-	private int getManeuverType(TurnType turnType) {
+	private int getManeuverType(@NonNull TurnType turnType) {
 		switch (turnType.getValue()) {
 			case TurnType.C: return Maneuver.TYPE_STRAIGHT; // continue (go straight)
 			case TurnType.TL: return Maneuver.TYPE_TURN_NORMAL_LEFT; // turn left
@@ -151,6 +191,26 @@ public class CarNavigationHelper {
 			case TurnType.RNDB: return Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CCW; // Roundabout
 			case TurnType.RNLB: return Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CW; // Roundabout left
 			default: return Maneuver.TYPE_UNKNOWN;
+		}
+	}
+
+	private int getLaneDirection(@NonNull TurnType turnType) {
+		switch (turnType.getValue()) {
+			case TurnType.C: return LaneDirection.SHAPE_STRAIGHT; // continue (go straight)
+			case TurnType.TL: return LaneDirection.SHAPE_NORMAL_LEFT; // turn left
+			case TurnType.TSLL: return LaneDirection.SHAPE_SLIGHT_LEFT; // turn slightly left
+			case TurnType.TSHL: return LaneDirection.SHAPE_SHARP_LEFT; // turn sharply left
+			case TurnType.TR: return LaneDirection.SHAPE_NORMAL_RIGHT; // turn right
+			case TurnType.TSLR: return LaneDirection.SHAPE_SLIGHT_RIGHT; // turn slightly right
+			case TurnType.TSHR: return LaneDirection.SHAPE_SHARP_RIGHT; // turn sharply right
+			case TurnType.KL: return LaneDirection.SHAPE_SLIGHT_LEFT; // keep left
+			case TurnType.KR: return LaneDirection.SHAPE_SLIGHT_RIGHT; // keep right
+			case TurnType.TU: return LaneDirection.SHAPE_U_TURN_LEFT; // U-turn
+			case TurnType.TRU: return LaneDirection.SHAPE_U_TURN_RIGHT; // Right U-turn
+			case TurnType.OFFR: return LaneDirection.SHAPE_UNKNOWN; // Off route
+			case TurnType.RNDB: return LaneDirection.SHAPE_UNKNOWN; // Roundabout
+			case TurnType.RNLB: return LaneDirection.SHAPE_UNKNOWN; // Roundabout left
+			default: return LaneDirection.SHAPE_UNKNOWN;
 		}
 	}
 }
