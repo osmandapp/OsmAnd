@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
@@ -169,9 +170,9 @@ public class RenderingIcons {
 		return d;
 	}
 
-	public static String getBigIconName(int iconId) {
+	public static String getBigIconName(@NonNull Integer iconId) {
 		for (String key : bigIcons.keySet()) {
-			if (iconId == bigIcons.get(key)) {
+			if (iconId.equals(bigIcons.get(key))) {
 				return key;
 			}
 		}
