@@ -28,6 +28,7 @@ import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class BinaryMapPoiReaderAdapter {
@@ -386,7 +387,7 @@ public class BinaryMapPoiReaderAdapter {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
 				offset = codedIS.getTotalBytesRead();
-				List<String> queries = splitQuery(query);
+				List<String> queries = Algorithms.splitString(query);
 				TIntArrayList charsList = new TIntArrayList(queries.size());
 				listOffsets = new ArrayList<TIntArrayList>(queries.size());
 				while (listOffsets.size() < queries.size()) {
@@ -437,26 +438,6 @@ public class BinaryMapPoiReaderAdapter {
 			}
 		}
 
-	}
-
-	private List<String> splitQuery(String query) {
-		List<String> queries = new ArrayList<>();
-		int prev = -1;
-		for (int i = 0; i <= query.length(); i++) {
-			if (i == query.length() ||
-					(!Character.isLetter(query.charAt(i)) && !Character.isDigit(query.charAt(i)))) {
-				if (prev != -1) {
-					String substr = query.substring(prev, i);
-					String val = substr.toLowerCase();
-					queries.add(val);
-				}
-			} else {
-				if (prev == -1) {
-					prev = i;
-				}
-			}
-		}
-		return queries;
 	}
 
 	private void readPoiNameIndexData(TIntLongHashMap offsets, SearchRequest<Amenity> req) throws IOException {

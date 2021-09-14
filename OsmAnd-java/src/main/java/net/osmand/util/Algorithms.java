@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.InterruptedIOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -78,6 +79,26 @@ public class Algorithms {
 			s = s.replace(CHARS_TO_NORMALIZE_KEY[k], CHARS_TO_NORMALIZE_VALUE[k]);
 		}
 		return s;
+	}
+
+	public static List<String> splitString(String str) {
+		List<String> splitStr = new ArrayList<>();
+		int prev = -1;
+		for (int i = 0; i <= str.length(); i++) {
+			if (i == str.length() ||
+					(!Character.isLetter(str.charAt(i)) && !Character.isDigit(str.charAt(i)))) {
+				if (prev != -1) {
+					String subStr = str.substring(prev, i);
+					splitStr.add(subStr.toLowerCase());
+					prev = -1;
+				}
+			} else {
+				if (prev == -1) {
+					prev = i;
+				}
+			}
+		}
+		return splitStr;
 	}
 
 	public static boolean isEmpty(Map<?, ?> map) {
