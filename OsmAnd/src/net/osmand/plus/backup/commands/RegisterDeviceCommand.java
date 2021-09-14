@@ -5,9 +5,9 @@ import androidx.annotation.NonNull;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.OperationLog;
 import net.osmand.plus.backup.BackupCommand;
+import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnRegisterDeviceListener;
-import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 
@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.backup.BackupHelper.DEVICE_REGISTER_URL;
+import static net.osmand.plus.backup.BackupHelper.STATUS_SERVER_TEMPORALLY_UNAVAILABLE_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_EMPTY_RESPONSE_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_PARSE_JSON_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_SERVER_ERROR;
@@ -52,10 +53,16 @@ public class RegisterDeviceCommand extends BackupCommand {
 		}
 		params.put("token", token);
 		OperationLog operationLog = createOperationLog("registerDevice");
-		AndroidNetworkUtils.sendRequest(getApp(), DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error) -> {
+		AndroidNetworkUtils.sendRequest(getApp(), DEVICE_REGISTER_URL, params, "Register device", false, true, (resultJson, error, resultCode) -> {
 			int status;
 			String message;
 			BackupError backupError = null;
+
+			if (resultCode != null && isTemporallyUnavailableErrorCode(resultCode)) {
+				message = "Device registration error code: " + resultCode;
+				error = "{\"error\":{\"errorCode\":" + STATUS_SERVER_TEMPORALLY_UNAVAILABLE_ERROR + ",\"message\":\"" + message + "\"}}";
+			}
+
 			if (!Algorithms.isEmpty(error)) {
 				backupError = new BackupError(error);
 				message = "Device registration error: " + backupError;
@@ -94,5 +101,9 @@ public class RegisterDeviceCommand extends BackupCommand {
 			BackupError backupError = (BackupError) values[2];
 			listener.onRegisterDevice(status, message, backupError);
 		}
+	}
+
+	protected boolean isTemporallyUnavailableErrorCode(int code) {
+		return code == 404 || code >= 500 && code < 600;
 	}
 }

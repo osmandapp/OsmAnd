@@ -171,7 +171,7 @@ public abstract class BaseDeleteFilesCommand extends BackupCommand {
 		@Override
 		public Void call() {
 			OperationLog operationLog = new OperationLog("deleteFile", BackupHelper.DEBUG);
-			AndroidNetworkUtils.sendRequest(app, request, (result, error) ->
+			AndroidNetworkUtils.sendRequest(app, request, (result, error, resultCode) ->
 					response = new RequestResponse(request, result, error));
 			if (response.getError() == null && !byVersion) {
 				app.getBackupHelper().getDbHelper().removeUploadedFileInfo(
