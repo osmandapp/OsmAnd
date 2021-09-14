@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
-import net.osmand.AndroidNetworkUtils.OnRequestResultListenerWithCode;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.BackupListeners.OnDeleteFilesListener;
 import net.osmand.plus.backup.RemoteFile;
@@ -74,7 +73,7 @@ public class DeleteAllFilesCommand extends BaseDeleteFilesCommand {
 		}
 	}
 
-	private OnRequestResultListenerWithCode getDeleteAllFilesListener() {
+	private OnRequestResultListener getDeleteAllFilesListener() {
 		return (resultJson, error, resultCode) -> {
 			int status;
 			String message;

@@ -312,7 +312,7 @@ public class MappersFragment extends BaseOsmAndFragment {
 		Map<String, String> params = new HashMap<>();
 		params.put("name", userName);
 		AndroidNetworkUtils.sendRequestAsync(app, USER_CHANGES_URL, params, "Download object changes list", false, false,
-				(resultJson, error) -> {
+				(resultJson, error, resultCode) -> {
 					Map<String, Contribution> map = new LinkedHashMap<>();
 					if (!Algorithms.isEmpty(error)) {
 						log.error(error);

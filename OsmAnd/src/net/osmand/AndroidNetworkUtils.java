@@ -51,10 +51,6 @@ public class AndroidNetworkUtils {
 	public static final String CANCELLED_MSG = "cancelled";
 
 	public interface OnRequestResultListener {
-		void onResult(@Nullable String result, @Nullable String error);
-	}
-
-	public interface OnRequestResultListenerWithCode {
 		void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode);
 	}
 
@@ -215,7 +211,7 @@ public class AndroidNetworkUtils {
 			@Override
 			protected void onPostExecute(String[] response) {
 				if (listener != null) {
-					listener.onResult(response[0], response[1]);
+					listener.onResult(response[0], response[1], null);
 				}
 			}
 
@@ -395,7 +391,7 @@ public class AndroidNetworkUtils {
 	}
 
 	public static String sendRequest(@Nullable OsmandApplication ctx, @NonNull Request request,
-									 @Nullable OnRequestResultListenerWithCode listener) {
+									 @Nullable OnRequestResultListener listener) {
 		return sendRequest(ctx, request.getUrl(), request.getParameters(),
 				request.getUserOperation(), request.isToastAllowed(), request.isPost(), listener);
 	}
@@ -409,7 +405,7 @@ public class AndroidNetworkUtils {
 	public static String sendRequest(@Nullable OsmandApplication ctx, @NonNull String url,
 									 @Nullable Map<String, String> parameters,
 									 @Nullable String userOperation, boolean toastAllowed, boolean post,
-									 @Nullable OnRequestResultListenerWithCode listener) {
+									 @Nullable OnRequestResultListener listener) {
 		String result = null;
 		String error = null;
 		Integer resultCode = null;
