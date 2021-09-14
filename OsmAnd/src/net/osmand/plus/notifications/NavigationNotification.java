@@ -135,7 +135,7 @@ public class NavigationNotification extends OsmandNotification {
 			String distanceStr = OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app);
 			String timeStr = OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app);
 			String etaStr = SimpleDateFormat.getTimeInstance(DateFormat.SHORT)
-					.format(new Date(System.currentTimeMillis() + routingHelper.getLeftTime() * 1000));
+					.format(new Date(System.currentTimeMillis() + routingHelper.getLeftTime() * 1000L));
 			String speedStr = null;
 			Location location = getLastKnownLocation();
 			if (location != null && location.hasSpeed()) {

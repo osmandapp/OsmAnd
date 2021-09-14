@@ -327,6 +327,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return (float) (Math.log(visibleDist / distToSee) / Math.log(2.0f));
 	}
 
+	@Nullable
 	public Pair<Integer, Double> autozoom(RotatedTileBox tb, Location location) {
 		if (location.hasSpeed()) {
 			long now = System.currentTimeMillis();
@@ -352,7 +353,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					targetZoom = Math.round(targetZoom * 3) / 3f;
 					int newIntegerZoom = (int)Math.round(targetZoom);
 					double zPart = targetZoom - newIntegerZoom;
-					return new Pair<>(newIntegerZoom, zPart);
+					return newIntegerZoom > 0 ? new Pair<>(newIntegerZoom, zPart) : null;
 				}
 			}
 		}

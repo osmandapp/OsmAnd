@@ -9,12 +9,19 @@ import android.os.IBinder;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.car.app.CarContext;
+import androidx.car.app.CarToast;
+import androidx.car.app.navigation.NavigationManager;
+import androidx.car.app.navigation.NavigationManagerCallback;
 
 import net.osmand.Location;
+import net.osmand.plus.auto.CarNavigationHelper;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LocationServiceHelper.LocationCallback;
 import net.osmand.plus.notifications.OsmandNotification;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.List;
@@ -38,6 +45,12 @@ public class NavigationService extends Service {
 	private OsmAndLocationProvider locationProvider;
 	private LocationServiceHelper locationServiceHelper;
 
+	// Android Auto
+	private CarContext carContext;
+	private NavigationManager navigationManager;
+	private boolean carNavigationActive;
+	private CarNavigationHelper carNavigationHelper;
+
 	@Override
 	public IBinder onBind(Intent intent) {
 		return binder;
@@ -51,6 +64,10 @@ public class NavigationService extends Service {
 		return usedBy != 0;
 	}
 
+	public boolean isUsedByNavigation() {
+		return (usedBy & USED_BY_NAVIGATION) == USED_BY_NAVIGATION;
+	}
+
 	public void addUsageIntent(int usageIntent) {
 		usedBy |= usageIntent;
 	}
@@ -59,19 +76,29 @@ public class NavigationService extends Service {
 		if ((usedBy & usageIntent) > 0) {
 			usedBy -= usageIntent;
 		}
+		if (!isUsedByNavigation()) {
+			stopCarNavigation();
+		}
+		if (usageIntent == USED_BY_CAR_APP) {
+			setCarContext(null);
+		}
 		if (usedBy == 0) {
 			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
 		} else {
-			final OsmandApplication app = (OsmandApplication) getApplication();
+			final OsmandApplication app = getApp();
 			app.getNotificationHelper().updateTopNotification();
 			app.getNotificationHelper().refreshNotifications();
 		}
 	}
 
+	private OsmandApplication getApp() {
+		return (OsmandApplication) getApplication();
+	}
+
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		final OsmandApplication app = (OsmandApplication) getApplication();
+		final OsmandApplication app = getApp();
 		settings = app.getSettings();
 		usedBy = intent.getIntExtra(USAGE_INTENT, 0);
 
@@ -79,8 +106,16 @@ public class NavigationService extends Service {
 		locationServiceHelper = app.createLocationServiceHelper();
 		app.setNavigationService(this);
 
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		if (carNavigationSession != null) {
+			setCarContext(carNavigationSession.getCarContext());
+		}
+
 		Notification notification = app.getNotificationHelper().buildTopNotification();
 		if (notification != null) {
+			if (isUsedByNavigation()) {
+				startCarNavigation();
+			}
 			startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
 			app.getNotificationHelper().refreshNotifications();
 		} else {
@@ -126,7 +161,8 @@ public class NavigationService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		final OsmandApplication app = (OsmandApplication) getApplication();
+		final OsmandApplication app = getApp();
+		setCarContext(null);
 		app.setNavigationService(null);
 		usedBy = 0;
 		// remove updates
@@ -145,11 +181,70 @@ public class NavigationService extends Service {
 
 	@Override
 	public void onTaskRemoved(Intent rootIntent) {
-		OsmandApplication app = ((OsmandApplication) getApplication());
+		OsmandApplication app = getApp();
 		app.getNotificationHelper().removeNotifications(false);
 		if (app.getNavigationService() != null &&
 				app.getSettings().DISABLE_RECORDING_ONCE_APP_KILLED.get()) {
 			NavigationService.this.stopSelf();
+		}
+	}
+
+	/** Sets the {@link CarContext} to use while the service is running. */
+	public void setCarContext(@Nullable CarContext carContext) {
+		this.carContext = carContext;
+		if (carContext != null) {
+			this.carNavigationHelper = new CarNavigationHelper(getApp());
+			this.navigationManager = carContext.getCarService(NavigationManager.class);
+			this.navigationManager.setNavigationManagerCallback(
+					new NavigationManagerCallback() {
+						@Override
+						public void onStopNavigation() {
+							NavigationService.this.stopCarNavigation();
+						}
+
+						@Override
+						public void onAutoDriveEnabled() {
+							CarToast.makeText(carContext, "Auto drive enabled", CarToast.LENGTH_LONG).show();
+						}
+					});
+
+			// Uncomment if navigating
+			// mNavigationManager.navigationStarted();
+		} else {
+			this.navigationManager = null;
+		}
+	}
+
+	/** Clears the currently used {@link CarContext}. */
+	public void clearCarContext() {
+		carContext = null;
+		navigationManager = null;
+		carNavigationHelper = null;
+	}
+
+	/** Starts navigation. */
+	public void startCarNavigation() {
+		if (navigationManager != null) {
+			navigationManager.navigationStarted();
+			carNavigationActive = true;
+		}
+	}
+
+	/** Stops navigation. */
+	public void stopCarNavigation() {
+		if (navigationManager != null) {
+			carNavigationActive = false;
+			navigationManager.navigationEnded();
+		}
+	}
+
+	public void updateCarNavigation() {
+		OsmandApplication app = getApp();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		CarNavigationHelper carNavigationHelper = this.carNavigationHelper;
+		if (carNavigationActive && carNavigationHelper != null
+				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
+			navigationManager.updateTrip(carNavigationHelper.buildTrip());
 		}
 	}
 }

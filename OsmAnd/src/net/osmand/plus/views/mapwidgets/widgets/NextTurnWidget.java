@@ -2,6 +2,8 @@ package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -18,10 +20,10 @@ public class NextTurnWidget extends TextInfoWidget {
 	protected int deviatedPath = 0;
 	protected int nextTurnDistance = 0;
 
-	private TurnDrawable turnDrawable;
-	private OsmandApplication app;
+	private final TurnDrawable turnDrawable;
+	private final OsmandApplication app;
 
-	public NextTurnWidget(Activity activity, OsmandApplication app, boolean horizontalMini) {
+	public NextTurnWidget(Activity activity, @NonNull OsmandApplication app, boolean horizontalMini) {
 		super(activity);
 		this.app = app;
 		this.horizontalMini = horizontalMini;

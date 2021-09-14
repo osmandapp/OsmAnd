@@ -570,8 +570,8 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
+		NavigationService navigationService = this.navigationService;
 		if (carNavigationSession == null) {
-			NavigationService navigationService = this.navigationService;
 			if (navigationService != null) {
 				navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
 			}
