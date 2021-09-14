@@ -180,8 +180,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.iconId = iconId;
 	}
 
-	public void setIconIdFromName(Context ctx, String iconName) {
-		this.iconId = RenderingIcons.getMxIconIdByName(ctx, iconName);
+	public void setIconIdFromName(String iconName) {
+		this.iconId = RenderingIcons.getBigIconId(iconName);
 	}
 
 	public boolean isSpecialPoint() {
@@ -521,7 +521,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		fp.setAddress(pt.getExtensionsToRead().get(ADDRESS_EXTENSION));
 		String iconName = pt.getIconName();
 		if (iconName != null) {
-			fp.setIconIdFromName(ctx, iconName);
+			fp.setIconIdFromName(iconName);
 		}
 		BackgroundType backgroundType = BackgroundType.getByTypeName(pt.getBackgroundType(), null);
 		fp.setBackgroundType(backgroundType);

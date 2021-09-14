@@ -24,7 +24,7 @@ import java.util.Map;
 public class RenderingIcons {
 
 	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
-	
+
 	private static final Map<String, Integer> shaderIcons = new LinkedHashMap<>();
 	private static final Map<String, Integer> smallIcons = new LinkedHashMap<>();
 	private static final Map<String, Integer> bigIcons = new LinkedHashMap<>();
@@ -169,16 +169,27 @@ public class RenderingIcons {
 		return d;
 	}
 
+	public static String getBigIconName(int iconId) {
+		for (String key : bigIcons.keySet()) {
+			if (iconId == bigIcons.get(key)) {
+				return key;
+			}
+		}
+		return null;
+	}
+
+	public static int getBigIconId(String iconName) {
+		return getResId("mx_" + iconName);
+	}
+
 	public static Integer getResId(String id) {
-		return id.startsWith("h_") ? shaderIcons.get(id.substring(2)) : smallIcons.get(id);
-	}
-
-	public static String getNameFromMxIconId(Context ctx, int iconId) {
-		return ctx.getResources().getResourceEntryName(iconId).replaceFirst("mx_", "");
-	}
-
-	public static int getMxIconIdByName(Context ctx, String iconName) {
-		return ctx.getResources().getIdentifier("mx_" + iconName, "drawable", ctx.getPackageName());
+		if (id.startsWith("mx_")) {
+			return bigIcons.get(id.substring(3));
+		} else if (id.startsWith("h_")) {
+			return shaderIcons.get(id.substring(2));
+		} else {
+			return smallIcons.get(id);
+		}
 	}
 
 	static {
