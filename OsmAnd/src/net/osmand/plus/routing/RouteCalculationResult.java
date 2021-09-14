@@ -1287,7 +1287,7 @@ public class RouteCalculationResult {
 			}
 			time += getLeftTimeToNextDirection(fromLoc);
 		}
-		return time;
+		return Math.max(time, 0);
 	}
 
 	public int getLeftTimeToNextDirection(Location fromLoc) {

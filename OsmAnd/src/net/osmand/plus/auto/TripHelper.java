@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.car.app.model.CarIcon;
@@ -22,6 +23,7 @@ import androidx.core.graphics.drawable.IconCompat;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
@@ -32,12 +34,38 @@ import net.osmand.router.TurnType;
 
 import java.util.TimeZone;
 
-public class CarNavigationHelper {
+public class TripHelper {
 
 	private final OsmandApplication app;
 
-	public CarNavigationHelper(@NonNull OsmandApplication app) {
+	private Destination lastDestination;
+	private TravelEstimate lastDestinationTravelEstimate;
+	private Step lastStep;
+	private TravelEstimate lastStepTravelEstimate;
+	private CharSequence lastCurrentRoad;
+
+	public TripHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+	}
+
+	public Destination getLastDestination() {
+		return lastDestination;
+	}
+
+	public TravelEstimate getLastDestinationTravelEstimate() {
+		return lastDestinationTravelEstimate;
+	}
+
+	public Step getLastStep() {
+		return lastStep;
+	}
+
+	public TravelEstimate getLastStepTravelEstimate() {
+		return lastStepTravelEstimate;
+	}
+
+	public CharSequence getLastCurrentRoad() {
+		return lastCurrentRoad;
 	}
 
 	@NonNull
@@ -46,22 +74,16 @@ public class CarNavigationHelper {
 		OsmandSettings settings = app.getSettings();
 
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		TargetPointsHelper.TargetPoint pointToNavigate = targetPointsHelper.getPointToNavigate();
+		TargetPoint pointToNavigate = targetPointsHelper.getPointToNavigate();
 		Trip.Builder tripBuilder = new Trip.Builder();
 		if (pointToNavigate != null) {
-			Destination.Builder destBuilder = new Destination.Builder();
-			destBuilder.setName(pointToNavigate.getOnlyName());
-			destBuilder.setImage(new CarIcon.Builder(IconCompat.createWithResource(app,
-					R.drawable.ic_action_point_destination)).build());
-
-			Distance distance = Distance.create(routingHelper.getLeftDistance(), Distance.UNIT_METERS);
-			int leftTimeSec = routingHelper.getLeftTime();
-			DateTimeWithZone dateTime = DateTimeWithZone.create(System.currentTimeMillis() + leftTimeSec * 1000L, TimeZone.getDefault());
-			TravelEstimate.Builder travelEstimateBuilder = new TravelEstimate.Builder(distance, dateTime);
-			travelEstimateBuilder.setRemainingTimeSeconds(leftTimeSec);
-			Destination destination = destBuilder.build();
-			TravelEstimate travelEstimate = travelEstimateBuilder.build();
-			tripBuilder.addDestination(destination, travelEstimate);
+			Pair<Destination, TravelEstimate> dest = getDestination(pointToNavigate);
+			tripBuilder.addDestination(dest.first, dest.second);
+			lastDestination = dest.first;
+			lastDestinationTravelEstimate = dest.second;
+		} else {
+			lastDestination = null;
+			lastDestinationTravelEstimate = null;
 		}
 		boolean routeBeingCalculated = routingHelper.isRouteBeingCalculated();
 		tripBuilder.setLoading(routeBeingCalculated);
@@ -149,13 +171,39 @@ public class CarNavigationHelper {
 			Step step = stepBuilder.build();
 			TravelEstimate stepTravelEstimate = stepTravelEstimateBuilder.build();
 			tripBuilder.addStep(step, stepTravelEstimate);
+			lastStep = step;
+			lastStepTravelEstimate = stepTravelEstimate;
 			if (!deviatedFromRoute) {
 				nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, true);
 				CurrentStreetName currentName = routingHelper.getCurrentName(nextDirInfo);
 				tripBuilder.setCurrentRoad(currentName.text);
+				lastCurrentRoad = currentName.text;
+			} else {
+				lastCurrentRoad = null;
 			}
+		} else {
+			lastStep = null;
+			lastStepTravelEstimate = null;
 		}
 		return tripBuilder.build();
+	}
+
+	@NonNull
+	public Pair<Destination, TravelEstimate> getDestination(@NonNull TargetPoint pointToNavigate) {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		Destination.Builder destBuilder = new Destination.Builder();
+		destBuilder.setName(pointToNavigate.getOnlyName());
+		destBuilder.setImage(new CarIcon.Builder(IconCompat.createWithResource(app,
+				R.drawable.ic_action_point_destination)).build());
+
+		Distance distance = Distance.create(routingHelper.getLeftDistance(), Distance.UNIT_METERS);
+		int leftTimeSec = routingHelper.getLeftTime();
+		DateTimeWithZone dateTime = DateTimeWithZone.create(System.currentTimeMillis() + leftTimeSec * 1000L, TimeZone.getDefault());
+		TravelEstimate.Builder travelEstimateBuilder = new TravelEstimate.Builder(distance, dateTime);
+		travelEstimateBuilder.setRemainingTimeSeconds(leftTimeSec);
+		Destination destination = destBuilder.build();
+		TravelEstimate travelEstimate = travelEstimateBuilder.build();
+		return new Pair<>(destination, travelEstimate);
 	}
 
 	@NonNull

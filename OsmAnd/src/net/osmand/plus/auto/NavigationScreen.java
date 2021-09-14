@@ -9,10 +9,12 @@ import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
 import androidx.car.app.model.CarColor;
 import androidx.car.app.model.CarIcon;
+import androidx.car.app.model.CarText;
 import androidx.car.app.model.Distance;
 import androidx.car.app.model.Template;
 import androidx.car.app.navigation.model.Destination;
 import androidx.car.app.navigation.model.Lane;
+import androidx.car.app.navigation.model.Maneuver;
 import androidx.car.app.navigation.model.MessageInfo;
 import androidx.car.app.navigation.model.NavigationTemplate;
 import androidx.car.app.navigation.model.RoutingInfo;
@@ -21,6 +23,7 @@ import androidx.car.app.navigation.model.TravelEstimate;
 import androidx.core.graphics.drawable.IconCompat;
 
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import java.util.List;
 
@@ -47,10 +50,7 @@ public final class NavigationScreen extends Screen {
 	 * A listener for navigation start and stop signals.
 	 */
 	public interface Listener {
-
-		/**
-		 * Stops navigation.
-		 */
+		void updateNavigation(boolean navigating);
 		void stopNavigation();
 	}
 
@@ -119,6 +119,20 @@ public final class NavigationScreen extends Screen {
 		mShouldShowNextStep = shouldShowNextStep;
 		mShouldShowLanes = shouldShowLanes;
 		mJunctionImage = junctionImage;
+		invalidate();
+	}
+
+	public void stopTrip() {
+		mIsNavigating = false;
+		mIsRerouting = false;
+		mHasArrived = false;
+		mDestinations = null;
+		mSteps = null;
+		mStepRemainingDistance = null;
+		mDestinationTravelEstimate = null;
+		mShouldShowNextStep = false;
+		mShouldShowLanes = false;
+		mJunctionImage = null;
 		invalidate();
 	}
 
@@ -227,30 +241,42 @@ public final class NavigationScreen extends Screen {
 			if (mDestinationTravelEstimate != null) {
 				builder.setDestinationTravelEstimate(mDestinationTravelEstimate);
 			}
-
 			if (isRerouting()) {
 				builder.setNavigationInfo(new RoutingInfo.Builder().setLoading(true).build());
 			} else if (mHasArrived) {
-
 				MessageInfo messageInfo = new MessageInfo.Builder(
 						getCarContext().getString(R.string.arrived_at_destination)).build();
 				builder.setNavigationInfo(messageInfo);
-			} else {
+			} else if (!Algorithms.isEmpty(mSteps)) {
 				RoutingInfo.Builder info = new RoutingInfo.Builder();
-				Step tmp = mSteps.get(0);
-				Step.Builder currentStep =
-						new Step.Builder(tmp.getCue().toCharSequence())
-								.setManeuver(tmp.getManeuver())
-								.setRoad(tmp.getRoad().toCharSequence());
+				Step firstStep = mSteps.get(0);
+				Step.Builder currentStep = new Step.Builder();
+				CarText cue = firstStep.getCue();
+				if (cue != null) {
+					currentStep.setCue(cue.toCharSequence());
+				}
+				Maneuver maneuver = firstStep.getManeuver();
+				if (maneuver != null) {
+					currentStep.setManeuver(maneuver);
+				}
+				CarText road = firstStep.getRoad();
+				if (road != null) {
+					currentStep.setRoad(road.toCharSequence());
+				}
 				if (mShouldShowLanes) {
-					for (Lane lane : tmp.getLanes()) {
+					for (Lane lane : firstStep.getLanes()) {
 						currentStep.addLane(lane);
 					}
-					currentStep.setLanesImage(tmp.getLanesImage());
+					CarIcon lanesImage = firstStep.getLanesImage();
+					if (lanesImage != null) {
+						currentStep.setLanesImage(lanesImage);
+					}
 				}
-				info.setCurrentStep(currentStep.build(), mStepRemainingDistance);
-				if (mShouldShowNextStep && mSteps.size() > 1) {
-					info.setNextStep(mSteps.get(1));
+				if (mStepRemainingDistance != null) {
+					info.setCurrentStep(currentStep.build(), mStepRemainingDistance);
+					if (mShouldShowNextStep && mSteps.size() > 1) {
+						info.setNextStep(mSteps.get(1));
+					}
 				}
 				if (mJunctionImage != null) {
 					info.setJunctionImage(mJunctionImage);
@@ -258,6 +284,7 @@ public final class NavigationScreen extends Screen {
 				builder.setNavigationInfo(info.build());
 			}
 		}
+		mListener.updateNavigation(mIsNavigating);
 
 		return builder.build();
 	}

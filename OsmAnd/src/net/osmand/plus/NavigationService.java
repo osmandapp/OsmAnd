@@ -14,16 +14,21 @@ import androidx.car.app.CarContext;
 import androidx.car.app.CarToast;
 import androidx.car.app.navigation.NavigationManager;
 import androidx.car.app.navigation.NavigationManagerCallback;
+import androidx.car.app.navigation.model.Destination;
+import androidx.car.app.navigation.model.TravelEstimate;
+import androidx.car.app.navigation.model.Trip;
 
 import net.osmand.Location;
-import net.osmand.plus.auto.CarNavigationHelper;
+import net.osmand.plus.auto.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.auto.TripHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LocationServiceHelper.LocationCallback;
 import net.osmand.plus.notifications.OsmandNotification;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
+import java.util.Collections;
 import java.util.List;
 
 public class NavigationService extends Service {
@@ -49,7 +54,7 @@ public class NavigationService extends Service {
 	private CarContext carContext;
 	private NavigationManager navigationManager;
 	private boolean carNavigationActive;
-	private CarNavigationHelper carNavigationHelper;
+	private TripHelper tripHelper;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -193,7 +198,7 @@ public class NavigationService extends Service {
 	public void setCarContext(@Nullable CarContext carContext) {
 		this.carContext = carContext;
 		if (carContext != null) {
-			this.carNavigationHelper = new CarNavigationHelper(getApp());
+			this.tripHelper = new TripHelper(getApp());
 			this.navigationManager = carContext.getCarService(NavigationManager.class);
 			this.navigationManager.setNavigationManagerCallback(
 					new NavigationManagerCallback() {
@@ -219,7 +224,7 @@ public class NavigationService extends Service {
 	public void clearCarContext() {
 		carContext = null;
 		navigationManager = null;
-		carNavigationHelper = null;
+		tripHelper = null;
 	}
 
 	/** Starts navigation. */
@@ -233,6 +238,13 @@ public class NavigationService extends Service {
 	/** Stops navigation. */
 	public void stopCarNavigation() {
 		if (navigationManager != null) {
+			NavigationSession carNavigationSession = getApp().getCarNavigationSession();
+			if (carNavigationSession != null) {
+				NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
+				if (navigationScreen != null) {
+					navigationScreen.stopTrip();
+				}
+			}
 			carNavigationActive = false;
 			navigationManager.navigationEnded();
 		}
@@ -241,10 +253,29 @@ public class NavigationService extends Service {
 	public void updateCarNavigation() {
 		OsmandApplication app = getApp();
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		CarNavigationHelper carNavigationHelper = this.carNavigationHelper;
-		if (carNavigationActive && carNavigationHelper != null
+		TripHelper tripHelper = this.tripHelper;
+		if (carNavigationActive && tripHelper != null
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
-			navigationManager.updateTrip(carNavigationHelper.buildTrip());
+			Trip trip = tripHelper.buildTrip();
+			navigationManager.updateTrip(trip);
+			NavigationSession carNavigationSession = app.getCarNavigationSession();
+			if (carNavigationSession != null) {
+				NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
+				if (navigationScreen != null) {
+					List<Destination> destinations = null;
+					Destination destination = tripHelper.getLastDestination();
+					TravelEstimate destinationTravelEstimate = tripHelper.getLastDestinationTravelEstimate();
+					if (destination != null) {
+						destinations = Collections.singletonList(destination);
+					}
+					TravelEstimate lastStepTravelEstimate = tripHelper.getLastStepTravelEstimate();
+					navigationScreen.updateTrip(true, routingHelper.isRouteBeingCalculated(),
+							false/*routingHelper.isRouteWasFinished()*/,
+							destinations, trip.getSteps(), destinationTravelEstimate,
+							lastStepTravelEstimate != null ? lastStepTravelEstimate.getRemainingDistance() : null,
+							false, true, null);
+				}
+			}
 		}
 	}
 }

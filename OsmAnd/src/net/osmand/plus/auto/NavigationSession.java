@@ -168,10 +168,22 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	}
 
 	@Override
+	public void updateNavigation(boolean navigating) {
+		OsmandMapTileView mapView = this.mapView;
+		if (mapView != null) {
+			mapView.setMapPositionX(navigating ? 1 : 0);
+		}
+	}
+
+	@Override
 	public void stopNavigation() {
 		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
 		if (app != null) {
 			app.stopNavigation();
+			NavigationScreen navigationScreen = getNavigationScreen();
+			if (navigationScreen != null) {
+				navigationScreen.stopTrip();
+			}
 		}
 	}
 
