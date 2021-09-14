@@ -128,7 +128,7 @@
     <string name="points_delete_multiple_succesful">Точки удалены.</string>
     <string name="points_delete_multiple">Удалить точки (%1$d)\?</string>
     <string name="route_points_category_name">Повороты на маршруте</string>
-    <string name="track_points_category_name">Путевые точки, точки интереса, именованные элементы</string>
+    <string name="track_points_category_name">Путевые точки, точки интереса, именованные объекты</string>
     <string name="shared_string_gpx_track">Трек</string>
     <string name="max_speed">Макс. скорость</string>
     <string name="average_speed">Сред. скорость</string>
@@ -2220,7 +2220,7 @@
     <string name="storage_place_description">Хранилище данных OsmAnd (для карт, файлов треков и пр.): %1$s.</string>
     <string name="storage_free_space">Свободное место</string>
     <string name="search_location">Определение местоположения…</string>
-    <string name="no_inet_connection_desc_map">Требуется загрузить карты</string>
+    <string name="no_inet_connection_desc_map">Требуется загрузить карты.</string>
     <string name="no_inet_connection">Соединение с интернетом отсутствует</string>
     <string name="location_not_found">Не удалось определить местоположение</string>
     <string name="first_usage_wizard_desc">OsmAnd определит ваше местоположение и предложит загрузить карты для этой области.</string>
@@ -4334,4 +4334,13 @@
     <string name="no_activity_for_intent">Не найдено подходящих приложений для выполнения этого действия</string>
     <string name="add_group_to_markers">Добавить группу в список маркеров</string>
     <string name="remove_group_from_markers">Удалить группу из списка маркеров</string>
+    <string name="no_items_of_type_message">У вас нет элементов этого типа</string>
+    <string name="routeInfo_tracktype_description">Раскрашивание маршрута или трека в соответствии с состоянием дорог на основе состава их поверхности. Обычно применяется для дорог, где основная дорожная сеть состоит из грунтовых дорог.</string>
+    <string name="routeInfo_winter_ice_road_description">Раскрашивание маршрута или трека в соответствии с классификацией зимних дорог (зимников), которые доступны только в зимний период.</string>
+    <string name="routeInfo_smoothness_description">Предоставляет схему классификации в отношении физической пригодности пути для колесных транспортных средств, в частности, в отношении регулярности/ровности поверхности.</string>
+    <string name="routeInfo_surface_description">Предоставление дополнительной информации о физическом покрытии дорог/тротуаров.</string>
+    <string name="routeInfo_roadClass_description">Раскрашивание маршрута или трека в соответствии с классификацией дорог.</string>
+    <string name="start_point">Старт</string>
+    <string name="mapillary_menu_filter_description_new">Фильтр изображений по дате или по типу. Активен только при увеличении крупным планом.</string>
+    <string name="service_is_not_available_please_try_later">Сервис недоступен, попробуйте позже</string>
 </resources>
