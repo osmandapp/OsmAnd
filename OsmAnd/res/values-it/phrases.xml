@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_mall">Centro commerciale</string>
     <string name="poi_seafood">Pescheria</string>
@@ -123,7 +123,6 @@
     <string name="poi_ambulance_station">Stazione ambulanze</string>
     <string name="poi_ship_chandler">Negozio nautica</string>
     <string name="poi_stationery">Negozio di cancelleria (cartoleria)</string>
-    
     <string name="poi_aeroway_gate">Gate aeroporto</string>
     <string name="poi_aerialway_gondola">Gondola</string>
     <string name="poi_aerialway_chair_lift">Ascensore carrozzine</string>
@@ -169,7 +168,6 @@
     <string name="poi_bailiff">Ufficiale giudiziario</string>
     <string name="poi_migration">Ufficio migrazione</string>
     <string name="poi_tax_inspection">Guardia di finanza</string>
-    
     <string name="poi_city">Città</string>
     <string name="poi_town">Cittadina</string>
     <string name="poi_village">Paese</string>
@@ -774,7 +772,6 @@
     <string name="poi_coffee">Caffetteria</string>
     <string name="poi_pastry">Pasticceria</string>
     <string name="poi_doors">Porte</string>
-    
     <string name="poi_free_flying">Negozio di articoli di freefly (paracadutismo)</string>
     <string name="poi_garden_furniture">Negozio di mobili da giardino</string>
     <string name="poi_medical_supply">Rifornimento medico</string>
@@ -2217,7 +2214,6 @@
     <string name="poi_water_purification">Potabilizzazione acqua</string>
     <string name="poi_climbing_style">Stile arrampicata</string>
     <string name="poi_glacier_type">Tipo di ghiacciaio</string>
-    
     <string name="poi_lighting_tower">Torre faro</string>
     <string name="poi_foundation">Fondazione</string>
     <string name="poi_attraction_swing_carousel">Seggiolini volanti; Calcinculo</string>
@@ -3003,4 +2999,5 @@
     <string name="poi_wiki_lang_mr">Wiki maratino</string>
     <string name="poi_wiki_lang_ml">Wiki malayalam</string>
     <string name="poi_wiki_lang_fy">Wiki frisone occidentale</string>
+    <string name="poi_memorial_ghost_bike">Bici fantasma</string>
 </resources>
