@@ -73,7 +73,7 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 				AndroidNetworkUtils.sendRequestAsync(app, "https://osmand.net/api/missing_search", params,
 						null, true, true, new AndroidNetworkUtils.OnRequestResultListener() {
 							@Override
-							public void onResult(@Nullable String result, @Nullable String error) {
+							public void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode) {
 								if (result != null && isAdded()) {
 									try {
 										JSONObject obj = new JSONObject(result);

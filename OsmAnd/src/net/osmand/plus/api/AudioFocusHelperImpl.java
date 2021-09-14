@@ -8,29 +8,28 @@ import net.osmand.PlatformUtil;
 
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-//import net.osmand.plus.voice.CommandPlayer;
-//import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.routing.RoutingHelper;
 import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.media.AudioManager;
 
 // Hardy, 2021-09-12, audio focus overhaul:
-// - Use AudioAttributes, AudioFocusRequest for SDK_INT >= 26
-// - Play only after immediate focus granted. (Delayed playback probably makes no sense.)
-// - Stop playing on audio focus LOSS.
-// - Treat LOSS_TRANSIENT like LOSS, delayed playback probably makes no sense.
-// - Treat LOSS_TRANSIENT_CAN_DUCK like LOSS, ducked speech probably hard to understand.
+// [x] Use AudioAttributes, AudioFocusRequest for SDK_INT >= 26
+// [x] Play only after immediate focus granted. (Do not handle delayed playback, probably makes no sense.)
+// [x] Stop playing on audio focus LOSS.
+// [x] Treat LOSS_TRANSIENT like LOSS, delayed playback probably makes no sense.
+// [x] Treat LOSS_TRANSIENT_CAN_DUCK like LOSS, ducked speech probably hard to understand.
 
 public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeListener, AudioFocusHelper {
 	public static boolean playbackAuthorized = false;
-	//private static CommandPlayer player = null;
 	private static final Log log = PlatformUtil.getLog(AudioFocusHelperImpl.class);
+	RoutingHelper routingHelper;
 
 	@Override
 	public boolean requestAudFocus(Context context, ApplicationMode applicationMode, int streamType) {
 		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-		//player = ((OsmandApplication) context.getApplication()).getRoutingHelper().getVoiceRouter().getPlayer();
+		routingHelper = ((OsmandApplication) context.getApplicationContext()).getRoutingHelper();
 		if (android.os.Build.VERSION.SDK_INT < 26) {
 			playbackAuthorized = AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.requestAudioFocus(this, streamType,
 					((OsmandApplication) context.getApplicationContext()).getSettings().INTERRUPT_MUSIC.getModeValue(applicationMode)
@@ -64,7 +63,7 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 	@Override
 	public boolean abandonAudFocus(Context context, ApplicationMode applicationMode, int streamType) {
 		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-		//player = ((OsmandApplication) context.getApplication()).getRoutingHelper().getVoiceRouter().getPlayer();
+		routingHelper = ((OsmandApplication) context.getApplicationContext()).getRoutingHelper();
 		playbackAuthorized = false;
 		if (android.os.Build.VERSION.SDK_INT < 26) {
 			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
@@ -95,10 +94,10 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 				|| focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
 			//System will not automatically duck apps with AudioAttributes.CONTENT_TYPE_SPEECH and instead notify AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK to e.g. enable pausing here: 
 			playbackAuthorized = false;
-			//if (player != null) {
-			//	player.stop();
-			//}
-			//abandonAudioFocus() is in stop()
+			//stop() player here. abandonAudioFocus() is in stop():
+			if (routingHelper != null) {
+				routingHelper.getVoiceRouter().interruptRouteCommands();
+			}
 		}
 	}
 }

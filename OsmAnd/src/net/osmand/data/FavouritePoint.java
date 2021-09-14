@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
@@ -164,6 +165,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public int getIconId() {
+		return iconId;
+	}
+
+	public int getIconIdOrDefault() {
 		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
@@ -175,8 +180,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.iconId = iconId;
 	}
 
-	public void setIconIdFromName(Context ctx, String iconName) {
-		this.iconId = ctx.getResources().getIdentifier("mx_" + iconName, "drawable", ctx.getPackageName());
+	public void setIconIdFromName(String iconName) {
+		this.iconId = RenderingIcons.getBigIconId(iconName);
 	}
 
 	public boolean isSpecialPoint() {
@@ -212,7 +217,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId(ctx);
 		}
-		return getIconId();
+		return getIconIdOrDefault();
 	}
 
 	public double getLatitude() {
@@ -516,7 +521,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		fp.setAddress(pt.getExtensionsToRead().get(ADDRESS_EXTENSION));
 		String iconName = pt.getIconName();
 		if (iconName != null) {
-			fp.setIconIdFromName(ctx, iconName);
+			fp.setIconIdFromName(iconName);
 		}
 		BackgroundType backgroundType = BackgroundType.getByTypeName(pt.getBackgroundType(), null);
 		fp.setBackgroundType(backgroundType);

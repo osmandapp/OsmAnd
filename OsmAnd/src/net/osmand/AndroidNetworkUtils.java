@@ -51,7 +51,7 @@ public class AndroidNetworkUtils {
 	public static final String CANCELLED_MSG = "cancelled";
 
 	public interface OnRequestResultListener {
-		void onResult(@Nullable String result, @Nullable String error);
+		void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode);
 	}
 
 	public interface OnFileUploadCallback {
@@ -137,7 +137,7 @@ public class AndroidNetworkUtils {
 						publishProgress(request);
 						final String[] response = {null, null};
 						sendRequest(ctx, request.getUrl(), request.getParameters(),
-								request.getUserOperation(), request.isToastAllowed(), request.isPost(), (result, error) -> {
+								request.getUserOperation(), request.isToastAllowed(), request.isPost(), (result, error, resultCode) -> {
 									response[0] = result;
 									response[1] = error;
 								});
@@ -198,7 +198,7 @@ public class AndroidNetworkUtils {
 			protected String[] doInBackground(Void... params) {
 				final String[] res = {null, null};
 				try {
-					sendRequest(ctx, url, parameters, userOperation, toastAllowed, post, (result, error) -> {
+					sendRequest(ctx, url, parameters, userOperation, toastAllowed, post, (result, error, resultCode) -> {
 						res[0] = result;
 						res[1] = error;
 					});
@@ -211,7 +211,7 @@ public class AndroidNetworkUtils {
 			@Override
 			protected void onPostExecute(String[] response) {
 				if (listener != null) {
-					listener.onResult(response[0], response[1]);
+					listener.onResult(response[0], response[1], null);
 				}
 			}
 
@@ -408,6 +408,7 @@ public class AndroidNetworkUtils {
 									 @Nullable OnRequestResultListener listener) {
 		String result = null;
 		String error = null;
+		Integer resultCode = null;
 		HttpURLConnection connection = null;
 		try {
 			String params = null;
@@ -443,7 +444,8 @@ public class AndroidNetworkUtils {
 				connection.setRequestMethod("GET");
 				connection.connect();
 			}
-			if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+			resultCode = connection.getResponseCode();
+			if (resultCode != HttpURLConnection.HTTP_OK) {
 				if (ctx != null) {
 					error = (!Algorithms.isEmpty(userOperation) ? userOperation + " " : "")
 							+ ctx.getString(R.string.failed_op) + ": " + connection.getResponseMessage();
@@ -497,7 +499,7 @@ public class AndroidNetworkUtils {
 			}
 		}
 		if (listener != null) {
-			listener.onResult(result, error);
+			listener.onResult(result, error, resultCode);
 		}
 		return result;
 	}
