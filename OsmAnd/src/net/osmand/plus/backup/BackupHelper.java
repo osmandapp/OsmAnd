@@ -115,6 +115,7 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_SUBSCRIPTION_WAS_USED_FOR_ANOTHER_ACCOUNT = 109;
 	public static final int SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT = 110;
 	public static final int SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED = 111;
+	public static final int SERVER_ERROR_CODE_TEMPORALLY_UNAVAILABLE = 112;
 
 	private PrepareBackupTask prepareBackupTask;
 	private PrepareBackupResult backup = new PrepareBackupResult();

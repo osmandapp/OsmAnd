@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.OperationLog;
-import net.osmand.plus.R;
 import net.osmand.plus.backup.BackupCommand;
 import net.osmand.plus.backup.BackupError;
 import net.osmand.plus.backup.BackupHelper;
@@ -20,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.backup.BackupHelper.DEVICE_REGISTER_URL;
+import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TEMPORALLY_UNAVAILABLE;
 import static net.osmand.plus.backup.BackupHelper.STATUS_EMPTY_RESPONSE_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_PARSE_JSON_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_SERVER_ERROR;
@@ -57,11 +57,13 @@ public class RegisterDeviceCommand extends BackupCommand {
 			int status;
 			String message;
 			BackupError backupError = null;
-			if (resultCode != null && isTemporallyServiceErrorCode(resultCode)) {
-				backupError = new BackupError(getApp().getString(R.string.service_is_not_available_please_try_later));
+
+			if (resultCode != null && isTemporallyUnavailableErrorCode(resultCode)) {
 				message = "Device registration error code: " + resultCode;
-				status = STATUS_SERVER_ERROR;
-			} else if (!Algorithms.isEmpty(error)) {
+				error = "{\"error\":{\"errorCode\":" + SERVER_ERROR_CODE_TEMPORALLY_UNAVAILABLE + ",\"message\":\"" + message + "\"}}";
+			}
+
+			if (!Algorithms.isEmpty(error)) {
 				backupError = new BackupError(error);
 				message = "Device registration error: " + backupError;
 				status = STATUS_SERVER_ERROR;
@@ -101,7 +103,7 @@ public class RegisterDeviceCommand extends BackupCommand {
 		}
 	}
 
-	protected boolean isTemporallyServiceErrorCode(int code) {
+	protected boolean isTemporallyUnavailableErrorCode(int code) {
 		return code == 404 || code >= 500 && code < 600;
 	}
 }
