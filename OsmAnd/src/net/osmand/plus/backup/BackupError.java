@@ -18,7 +18,7 @@ import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_PROVIDED_TOK
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SIZE_OF_SUPPORTED_BOX_IS_EXCEEDED;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_SUBSCRIPTION_WAS_USED_FOR_ANOTHER_ACCOUNT;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TEMPORALLY_UNAVAILABLE;
+import static net.osmand.plus.backup.BackupHelper.STATUS_SERVER_TEMPORALLY_UNAVAILABLE_ERROR;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TOKEN_IS_NOT_VALID_OR_EXPIRED;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED;
 import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_USER_IS_NOT_REGISTERED;
@@ -106,7 +106,7 @@ public class BackupError {
 				return app.getString(R.string.backup_error_subscription_was_expired);
 			case SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED:
 				return app.getString(R.string.backup_error_user_is_already_registered);
-			case SERVER_ERROR_CODE_TEMPORALLY_UNAVAILABLE:
+			case STATUS_SERVER_TEMPORALLY_UNAVAILABLE_ERROR:
 				return app.getString(R.string.service_is_not_available_please_try_later);
 			case STATUS_NO_ORDER_ID_ERROR:
 				return app.getString(R.string.backup_error_no_subscription);

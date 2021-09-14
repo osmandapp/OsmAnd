@@ -103,6 +103,7 @@ public class BackupHelper {
 	public final static int STATUS_SERVER_ERROR = 3;
 	public final static int STATUS_NO_ORDER_ID_ERROR = 4;
 	public final static int STATUS_EXECUTION_ERROR = 5;
+	public static final int STATUS_SERVER_TEMPORALLY_UNAVAILABLE_ERROR = 6;
 
 	public static final int SERVER_ERROR_CODE_EMAIL_IS_INVALID = 101;
 	public static final int SERVER_ERROR_CODE_NO_VALID_SUBSCRIPTION = 102;
@@ -115,7 +116,6 @@ public class BackupHelper {
 	public static final int SERVER_ERROR_CODE_SUBSCRIPTION_WAS_USED_FOR_ANOTHER_ACCOUNT = 109;
 	public static final int SERVER_ERROR_CODE_SUBSCRIPTION_WAS_EXPIRED_OR_NOT_PRESENT = 110;
 	public static final int SERVER_ERROR_CODE_USER_IS_ALREADY_REGISTERED = 111;
-	public static final int SERVER_ERROR_CODE_TEMPORALLY_UNAVAILABLE = 112;
 
 	private PrepareBackupTask prepareBackupTask;
 	private PrepareBackupResult backup = new PrepareBackupResult();

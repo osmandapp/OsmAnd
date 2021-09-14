@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.backup.BackupHelper.DEVICE_REGISTER_URL;
-import static net.osmand.plus.backup.BackupHelper.SERVER_ERROR_CODE_TEMPORALLY_UNAVAILABLE;
+import static net.osmand.plus.backup.BackupHelper.STATUS_SERVER_TEMPORALLY_UNAVAILABLE_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_EMPTY_RESPONSE_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_PARSE_JSON_ERROR;
 import static net.osmand.plus.backup.BackupHelper.STATUS_SERVER_ERROR;
@@ -60,7 +60,7 @@ public class RegisterDeviceCommand extends BackupCommand {
 
 			if (resultCode != null && isTemporallyUnavailableErrorCode(resultCode)) {
 				message = "Device registration error code: " + resultCode;
-				error = "{\"error\":{\"errorCode\":" + SERVER_ERROR_CODE_TEMPORALLY_UNAVAILABLE + ",\"message\":\"" + message + "\"}}";
+				error = "{\"error\":{\"errorCode\":" + STATUS_SERVER_TEMPORALLY_UNAVAILABLE_ERROR + ",\"message\":\"" + message + "\"}}";
 			}
 
 			if (!Algorithms.isEmpty(error)) {
