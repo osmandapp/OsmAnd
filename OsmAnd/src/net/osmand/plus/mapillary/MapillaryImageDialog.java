@@ -52,6 +52,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
+import static net.osmand.plus.mapillary.MapillaryImage.IMAGE_ID_KEY;
+import static net.osmand.plus.mapillary.MapillaryImage.SEQUENCE_ID_KEY;
 import static net.osmand.plus.mapillary.MapillaryVectorLayer.EXTENT;
 import static net.osmand.plus.mapillary.MapillaryVectorLayer.TILE_ZOOM;
 
@@ -303,9 +305,9 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			for (Geometry g : tile.getData()) {
 				if (g instanceof Point && !g.isEmpty() && g.getUserData() != null && g.getUserData() instanceof HashMap) {
 					HashMap userData = (HashMap) g.getUserData();
-					String key = (String) userData.get("key");
+					String key = (String) userData.get(IMAGE_ID_KEY);
 					if (this.key.equals(key)) {
-						sKey = (String) userData.get("skey");
+						sKey = (String) userData.get(SEQUENCE_ID_KEY);
 						return;
 					}
 				}
@@ -324,7 +326,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				for (Geometry g : tile.getData()) {
 					if (g instanceof Point && !g.isEmpty() && g.getUserData() != null && g.getUserData() instanceof HashMap) {
 						HashMap userData = (HashMap) g.getUserData();
-						String sKey = (String) userData.get("skey");
+						String sKey = (String) userData.get(SEQUENCE_ID_KEY);
 						if (this.sKey.equals(sKey)) {
 							Point p = (Point) g;
 							px = p.getCoordinate().x / EXTENT;
