@@ -28,6 +28,7 @@ import net.osmand.data.Amenity.AmenityRoutePoint;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class BinaryMapPoiReaderAdapter {
@@ -386,15 +387,10 @@ public class BinaryMapPoiReaderAdapter {
 				int length = readInt();
 				int oldLimit = codedIS.pushLimit(length);
 				offset = codedIS.getTotalBytesRead();
-				List<String> queries = new ArrayList<>();
-				for (String word : query.split(" ")) {
-					if (word.trim().length() > 0) {
-						queries.add(word.trim());
-					}
-				}
+				List<String> queries = Algorithms.splitByWordsLowercase(query);
 				TIntArrayList charsList = new TIntArrayList(queries.size());
 				listOffsets = new ArrayList<TIntArrayList>(queries.size());
-				while(listOffsets.size() < queries.size()) {
+				while (listOffsets.size() < queries.size()) {
 					charsList.add(0);
 					listOffsets.add(new TIntArrayList());
 				}
@@ -449,10 +445,10 @@ public class BinaryMapPoiReaderAdapter {
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
-			case 0:
-				return;
-			case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
-				int len = codedIS.readRawVarint32();
+				case 0:
+					return;
+				case OsmAndPoiNameIndexData.ATOMS_FIELD_NUMBER:
+					int len = codedIS.readRawVarint32();
 				int oldLim = codedIS.pushLimit(len);
 				readPoiNameIndexDataAtom(offsets, req);
 				codedIS.popLimit(oldLim);
