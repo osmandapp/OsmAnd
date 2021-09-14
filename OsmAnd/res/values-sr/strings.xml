@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="about_version">Верзија:</string>
     <string name="shared_string_about">О програму</string>
@@ -67,7 +67,7 @@
     <string name="distance_measurement_clear_route">Обришите све тачке</string>
     <string name="distance_measurement_load_gpx">Отвори постојећи GPX фајл</string>
     <string name="wait_current_task_finished">Молимо сачекајте док се не заврши тренутни задатак</string>
-    <string name="use_kalman_filter_compass">Користите Калман филтер</string>
+    <string name="use_kalman_filter_compass">Користи Калман филтер</string>
     <string name="use_magnetic_sensor">Користи магнетни сензор</string>
     <string name="other_location">Остало</string>
     <string name="files_limit">%1$d фајлова остало</string>
@@ -686,7 +686,7 @@
     <string name="sleep_mode_stop_dialog">Прекинути позадински режим GPS-а?</string>
     <string name="stop_navigation_service">Заустави</string>
     <string name="confirm_every_run">Увек питај</string>
-    <string name="save_global_track_interval">Међувреме опште пријаве</string>
+    <string name="save_global_track_interval">Међувреме општег бележења</string>
     <string name="background_service_int">Међувреме буђења GPS-а</string>
     <string name="enable_sleep_mode">Укључи да GPS ради у позадини</string>
     <string name="save_track_to_gpx_globally_headline">Праћење путање по захтеву</string>
@@ -707,7 +707,7 @@
     <string name="show_zoom_buttons_navigation">Приказуј дугмад за увеличавање</string>
     <string name="save_as_favorites_points">Сачувај као скуп Омиљених</string>
     <string name="select_destination_and_intermediate_points">Поставите одредиште</string>
-    <string name="layer_amenity_label">Називи тачака од интереса на слоју изнад</string>
+    <string name="layer_amenity_label">Називи тачака (тачке од интереса, омиљене)</string>
     <string name="loading_smth">Учитавам %1$s…</string>
     <string name="map_widget_plain_time">Тренутно време</string>
     <string name="selected_gpx_info_show">\n\nПритисните и држите ради приказа карте</string>
@@ -1522,7 +1522,7 @@
     <string name="index_item_depth_points_northern_hemisphere">Поморске дубинске тачке северне полулопте</string>
     <string name="download_depth_countours">Поморске изобате</string>
     <string name="shared_string_color">Боја</string>
-    <string name="auto_split_recording_title">Самоподели снимке после размака</string>
+    <string name="auto_split_recording_title">Аутоматски подели снимке после размака</string>
     <string name="auto_split_recording_descr">Почни нови одсечак после размака од 6 минута, нову путању после размака од 2 сата, или нови фајл после дужег размака ако је дан измењен.</string>
     <string name="rendering_attr_showMtbRoutes_name">Прикажи путеве планинских бицикли</string>
     <string name="add_time_span">Додај временски размак</string>
@@ -2523,7 +2523,7 @@
     <string name="gpx_option_from_start_point">Постави дуж целе путање</string>
     <string name="map_transparency_descr">Подесите провидност основне карте.</string>
     <string name="map_transparency">Провидност основне карте</string>
-    <string name="layer_underlay">Карта испод…</string>
+    <string name="layer_underlay">Карта слоја испод…</string>
     <string name="map_underlay">Карта испод</string>
     <string name="tile_source_already_installed">Карта већ инсталирана, „Подешавања“ ће се ажурирати.</string>
     <string name="select_tile_source_to_install">Изаберите (сличице) карте за инсталацију или ажурирање.</string>
@@ -3154,7 +3154,7 @@
     <string name="map_during_navigation">Карта за време навођења</string>
     <string name="shared_string_other">Остало</string>
     <string name="vehicle_parameters_descr">Тежина, висина, дужина, брзина</string>
-    <string name="vehicle_parameters">Параметри возика</string>
+    <string name="vehicle_parameters">Параметри возила</string>
     <string name="voice_announces_info">Гласовна обавештења су дешавају само за време навођења.</string>
     <string name="voice_announces_descr">Инструкције и обавештења приликом навођења</string>
     <string name="voice_announces">Гласовна обавештења</string>
@@ -3288,7 +3288,7 @@
     <string name="rendering_value_thick_name">Дебело</string>
     <string name="desert_render_descr">За пустиње и остале ретко насељене области. Детаљније.</string>
     <string name="select_navigation_icon">Иконица положаја док се крећете</string>
-    <string name="select_map_icon">Позиција иконице при мировање</string>
+    <string name="select_map_icon">Позиција иконице при мировању</string>
     <string name="delete_profiles_descr">Избрисани профили ће заувек бити избрисани када кликнете ’Примени’.</string>
     <string name="master_profile">Главни профил</string>
     <string name="select_color">Одаберите боју</string>
@@ -3544,7 +3544,7 @@
     <string name="routing_attr_length_name">Лимит дужине</string>
     <string name="shared_string_bearing">Курс</string>
     <string name="quick_action_showhide_mapillary_descr">Прикажи или сакриј Mapillary слој на карти.</string>
-    <string name="routing_attr_length_description">Одаберите дужину возика која је дозвољена на путевима.</string>
+    <string name="routing_attr_length_description">Одаберите дужину возила која је дозвољена на путевима.</string>
     <string name="speed_cameras_legal_descr">У неким државама или областима, коришћење апликација за обавештавање о радарима на путу је забрањено законом.
 \n
 \nМорате направити избор овде, у зависности од закона Ваше државе.
