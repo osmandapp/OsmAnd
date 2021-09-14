@@ -81,7 +81,13 @@ public class Algorithms {
 		return s;
 	}
 
-	public static List<String> splitString(String str) {
+	/**
+	 * Split string by words and convert to lowercase, use as delimiter all chars except letters and digits
+	 * @param str input string
+	 * @return result words list
+	 */
+
+	public static List<String> splitByWordsLowercase(String str) {
 		List<String> splitStr = new ArrayList<>();
 		int prev = -1;
 		for (int i = 0; i <= str.length(); i++) {
