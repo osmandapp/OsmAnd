@@ -37,8 +37,13 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	Rect mStableArea;
 
 	private boolean darkMode = false;
-
 	private final CarContext mCarContext;
+
+	SurfaceRendererCallback callback;
+
+	interface SurfaceRendererCallback {
+		void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea);
+	}
 
 	public final SurfaceCallback mSurfaceCallback =
 			new SurfaceCallback() {
@@ -235,6 +240,14 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 			darkMode = newDarkMode;
 			drawSettings = new DrawSettings(newDarkMode, updateVectorRendering);
 			mapView.drawOverMap(canvas, tileBox, drawSettings);
+			SurfaceRendererCallback callback = this.callback;
+			if (callback != null) {
+				Rect visibleArea = this.mVisibleArea;
+				Rect stableArea = this.mStableArea;
+				if (visibleArea != null && stableArea != null) {
+					callback.onFrameRendered(canvas, visibleArea, stableArea);
+				}
+			}
 		} finally {
 			mSurface.unlockCanvasAndPost(canvas);
 		}

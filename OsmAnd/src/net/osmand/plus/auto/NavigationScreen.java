@@ -1,5 +1,13 @@
 package net.osmand.plus.auto;
 
+import static android.util.TypedValue.COMPLEX_UNIT_PX;
+
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
@@ -20,9 +28,18 @@ import androidx.car.app.navigation.model.NavigationTemplate;
 import androidx.car.app.navigation.model.RoutingInfo;
 import androidx.car.app.navigation.model.Step;
 import androidx.car.app.navigation.model.TravelEstimate;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
+import net.osmand.Location;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.SurfaceRenderer.SurfaceRendererCallback;
+import net.osmand.plus.routing.AlarmInfo;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
+import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget.AlarmWidgetDrawSettings;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -30,7 +47,7 @@ import java.util.List;
 /**
  * Simple demo of how to present a trip on the routing screen.
  */
-public final class NavigationScreen extends Screen {
+public final class NavigationScreen extends Screen implements SurfaceRendererCallback {
 	/**
 	 * Invalid zoom focal point value, used for the zoom buttons.
 	 */
@@ -82,6 +99,8 @@ public final class NavigationScreen extends Screen {
 	@Nullable
 	CarIcon mJunctionImage;
 
+	private final AlarmWidget alarmWidget;
+
 	private boolean mIsInPanMode;
 
 	public NavigationScreen(
@@ -93,11 +112,25 @@ public final class NavigationScreen extends Screen {
 		mListener = listener;
 		mSettingsAction = settingsAction;
 		mSurfaceRenderer = surfaceRenderer;
+		alarmWidget = new AlarmWidget((OsmandApplication) carContext.getApplicationContext(), null);
 	}
 
 	@NonNull
 	public SurfaceRenderer getSurfaceRenderer() {
 		return mSurfaceRenderer;
+	}
+
+	@Override
+	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
+		AlarmWidgetDrawSettings drawSettings = new AlarmWidgetDrawSettings();
+		drawSettings.width = 92;
+		drawSettings.height = 92;
+		drawSettings.density = mSurfaceRenderer.getDensity();
+		alarmWidget.updateInfo(null, drawSettings);
+		Bitmap widgetBitmap = alarmWidget.getWidgetBitmap();
+		if (widgetBitmap != null) {
+			canvas.drawBitmap(widgetBitmap, visibleArea.right - drawSettings.width - 10, visibleArea.top + 10, new Paint());
+		}
 	}
 
 	/**

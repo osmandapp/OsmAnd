@@ -88,8 +88,8 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 		if (mapView != null) {
 			mNavigationCarSurface.setMapView(mapView);
 		}
-		mNavigationScreen =
-				new NavigationScreen(getCarContext(), mSettingsAction, this, mNavigationCarSurface);
+		mNavigationScreen = new NavigationScreen(getCarContext(), mSettingsAction, this, mNavigationCarSurface);
+		mNavigationCarSurface.callback = mNavigationScreen;
 
 		String action = intent.getAction();
 		if (CarContext.ACTION_NAVIGATE.equals(action)) {
