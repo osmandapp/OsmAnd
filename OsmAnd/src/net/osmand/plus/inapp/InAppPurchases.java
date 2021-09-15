@@ -15,6 +15,7 @@ import androidx.annotation.StringRes;
 import net.osmand.AndroidUtils;
 import net.osmand.Period;
 import net.osmand.Period.PeriodUnit;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.FontCache;
@@ -642,7 +643,7 @@ public abstract class InAppPurchases {
 			Typeface typefaceBold = FontCache.getRobotoMedium(ctx);
 			mainPart.setSpan(new ForegroundColorSpan(textColor), 0, mainPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			mainPart.setSpan(new CustomTypefaceSpan(typefaceBold), 0, mainPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			int secondaryTextColor = Color.argb(128, Color.red(textColor), Color.green(textColor), Color.blue(textColor));
+			int secondaryTextColor = ColorUtilities.getColorWithAlpha(textColor, 0.5f);
 			thenPart.setSpan(new ForegroundColorSpan(secondaryTextColor), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			thenPart.setSpan(new CustomTypefaceSpan(typefaceRegular), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 

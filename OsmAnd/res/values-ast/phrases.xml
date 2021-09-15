@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_fuel_type">Tipu de combustible</string>
     <string name="poi_fuel_avia_type">Tipu de combustible p\'aviación</string>
@@ -1340,7 +1340,7 @@
     <string name="poi_site_type_hut_circle">Hut circle</string>
     <string name="poi_site_type_city">Ciudá</string>
     <string name="poi_site_type_settlement">Settlement</string>
-    <string name="poi_site_type_fortification">Fortification</string>
+    <string name="poi_site_type_fortification">Fortificación</string>
     <string name="poi_site_type_tumulus">Tumulus</string>
     <string name="poi_site_type_megalith">Megalith</string>
     <string name="poi_material_aluminium">Material: aluminiu</string>

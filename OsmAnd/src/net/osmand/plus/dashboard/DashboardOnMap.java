@@ -667,7 +667,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		if (listBackgroundView != null) {
 			listBackgroundView.setBackgroundColor(backgroundColor);
 		} else {
-//			listView.setBackgroundColor(backgroundColor);
+			listView.setBackgroundColor(backgroundColor);
 			listEmptyTextView.setBackgroundColor(backgroundColor);
 		}
 		if (visibleType != DashboardType.CONFIGURE_SCREEN

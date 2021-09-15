@@ -4242,4 +4242,21 @@
     <string name="amz_manage_subscription_descr">Bruk Amazon-programmet for å håndtere abonnementet ditt på enheten, eller i profilen din på Amazon-com-nettsiden.</string>
     <string name="empty_category_name">Tomt kateogrinavn</string>
     <string name="no_activity_for_intent">Ingen programmer kunne utføre handlingen</string>
+    <string name="release_3_9">• Tillagt innstilling for eksport og importering av data, inkludert innstillinger, ressurser, og mine steder.
+\n
+\n • Planlegg rute: Diagrammer for sporsegmenter med rute, og mulighet til å opprette og redigere flere sporsegmenter
+\n
+\n • Tillagt OAuth-identitetsbekreftelsesmetode for OpenStreetMap, forbedret grensesnitt i OSM-dialoger
+\n
+\n • Støtte for egendefinerte farger for favoritter og spor-veipunkter.
+\n
+\n</string>
+    <string name="routeInfo_tracktype_description">Fargelegging av rute eller spor i henhold til innhold av veier basert på overflatesammensetning. Typisk brukt på veier der hovedveinettet består av uasfalterte veier.</string>
+    <string name="routeInfo_winter_ice_road_description">Fargelegging av rute eller sporlinje i henhold til vinterveiklassifisering, som kun brukes om vinteren.</string>
+    <string name="routeInfo_smoothness_description">Angir en klassifiseringsklasse for fysisk anvendbarhet av vei for hjul-kjøretøy, spesielt mtp. overflategjevnhet.</string>
+    <string name="routeInfo_surface_description">Angi ytterligere info om fysisk overflate for veier/stier.</string>
+    <string name="routeInfo_roadClass_description">Fargelegging av ruten eller rutelinje i henhold til veiklassifisering.</string>
+    <string name="no_items_of_type_message">Du har ingen elementer av denne typen</string>
+    <string name="add_group_to_markers">Legg til gruppe i markørliste</string>
+    <string name="remove_group_from_markers">Fjern gruppe fra markørliste</string>
 </resources>

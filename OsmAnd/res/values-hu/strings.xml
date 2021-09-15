@@ -1455,7 +1455,7 @@
 \nHosszúság: %2$s</string>
     <string name="tips_and_tricks_descr">Gyakran ismételt kérdések, legutóbbi módosítások és egyebek.</string>
     <string name="routing_settings_2">Navigációs beállítások</string>
-    <string name="general_settings_2">Globális beállítások</string>
+    <string name="general_settings_2">Általános beállítások</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Kijelölés megszüntetése</string>
     <string name="shared_string_deselect_all">Összes kijelölés megszüntetése</string>
@@ -4313,4 +4313,6 @@
     <string name="no_items_of_type_message">Nincs ilyen típusú eleme</string>
     <string name="routeInfo_tracktype_description">Útvonal vagy nyomvonal színezése az utak állapotának megfelelően, azok felületi összetétele alapján. Jellemzően olyan utakra alkalmazzák, ahol a fő úthálózat burkolatlan utakból áll.</string>
     <string name="routeInfo_smoothness_description">Osztályozási rendszert mutat arról, hogy az út fizikailag mennyire használható kerekes járművekkel (különös tekintettel az útfelszín egyenletességére/simaságára).</string>
+    <string name="add_group_to_markers">Csoport hozzáadása a jelölők listájához</string>
+    <string name="remove_group_from_markers">Csoport eltávolítása a jelölők listájáról</string>
 </resources>

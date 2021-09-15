@@ -48,6 +48,11 @@
 	<supports-screens android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
 		android:xlargeScreens="true" android:anyDensity="true" />
 
+	<queries>
+		<intent>
+			<action android:name="android.intent.action.TTS_SERVICE" />
+		</intent>
+	</queries>
 
 	<!-- android:theme="@style/OsmandLightDarkActionBarTheme" -->
 	<application android:allowBackup="true" android:backupAgent="net.osmand.plus.OsmandBackupAgent"

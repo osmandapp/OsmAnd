@@ -83,7 +83,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 			this.group = helper.getGroup(favorite);
 			this.color = favorite.getColor();
 			this.backgroundType = favorite.getBackgroundType();
-			this.iconId = favorite.getIconId();
+			this.iconId = getInitialIconId(favorite);
 		}
 	}
 
@@ -171,6 +171,11 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 			}
 		}
 		return "";
+	}
+
+	private int getInitialIconId(FavouritePoint favorite) {
+		int iconId = favorite.getIconId();
+		return iconId > 0 ? iconId : getDefaultIconId();
 	}
 
 	@Override
@@ -279,13 +284,13 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(),
-								point.getColor(), point.getBackgroundType(), point.getIconId(), needDismiss);
+								point.getColor(), point.getBackgroundType(), point.getIconIdOrDefault(), needDismiss);
 					}
 				});
 				builder.create().show();
 			} else {
 				doSave(favorite, point.getName(), point.getCategory(), point.getDescription(), point.getAddress(),
-						point.getColor(), point.getBackgroundType(), point.getIconId(), needDismiss);
+						point.getColor(), point.getBackgroundType(), point.getIconIdOrDefault(), needDismiss);
 			}
 			saved = true;
 		}
@@ -293,7 +298,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 
 	private boolean isChanged(FavouritePoint favorite, FavouritePoint point) {
 		return favorite.getColor() == point.getColor() &&
-				favorite.getIconId() == point.getIconId() &&
+				favorite.getIconIdOrDefault() == point.getIconIdOrDefault() &&
 				favorite.getName().equals(point.getName()) &&
 				favorite.getCategory().equals(point.getCategory()) &&
 				favorite.getBackgroundType().equals(point.getBackgroundType()) &&
@@ -311,6 +316,7 @@ public class FavoritePointEditorFragment extends PointEditorFragmentNew {
 			} else {
 				doEditFavorite(favorite, name, category, description, address, color, backgroundType, iconId, helper);
 			}
+			addLastUsedIcon(iconId);
 		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {

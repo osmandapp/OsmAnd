@@ -313,10 +313,12 @@ public class IntentHelper {
 			Uri uri = intent.getData();
 			if (uri.toString().startsWith("osmand-oauth")) {
 				String oauthVerifier = uri.getQueryParameter("oauth_verifier");
-				app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
-				app.getOsmOAuthHelper().authorize(oauthVerifier);
-				mapActivity.setIntent(null);
-				return true;
+				if (oauthVerifier != null) {
+					app.getOsmOAuthHelper().addListener(getOnAuthorizeListener());
+					app.getOsmOAuthHelper().authorize(oauthVerifier);
+					mapActivity.setIntent(null);
+					return true;
+				}
 			}
 		}
 		return false;

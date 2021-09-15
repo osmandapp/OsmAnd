@@ -52,17 +52,18 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final MapActivity mapActivity = (MapActivity) requireActivity();
+        final OsmandApplication app = requireMyApplication();
         final OsmandSettings settings = requireSettings();
         final MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
 
-        OsmandApplication app = requireMyApplication();
         final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
         final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
         final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
-        final int currentModeColor = app.getSettings().getApplicationMode().getProfileColor(nightMode);
+        final int currentModeColor = settings.getApplicationMode().getProfileColor(nightMode);
 
-        final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_mapillary_filters, null);
+        final View view = View.inflate(new ContextThemeWrapper(mapActivity, themeRes),
+                R.layout.fragment_mapillary_filters, null);
         view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
 
         final View toggleRow = view.findViewById(R.id.toggle_row);
@@ -83,32 +84,35 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final CompoundButton toggle = toggleRow.findViewById(R.id.toggle_row_toggle);
 		toggle.setOnCheckedChangeListener(null);
         toggle.setChecked(selected);
-        toggle.setOnCheckedChangeListener((compoundButton, b) -> {
-            settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
-            if (plugin != null) {
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
                 plugin.updateLayers(mapActivity, mapActivity);
+                mapActivity.getDashboard().refreshContent(true);
             }
-            mapActivity.getDashboard().refreshContent(true);
         });
         toggleRow.setOnClickListener(v -> toggle.setChecked(!toggle.isChecked()));
         UiUtilities.setupCompoundButton(nightMode, currentModeColor, toggle);
 
-
-        final Button reloadTile = view.findViewById(R.id.button_reload_tile);
+        final Button reloadTile = (Button) view.findViewById(R.id.button_reload_tile);
         reloadTile.setOnClickListener(v -> {
-            ResourceManager manager = requireMyApplication().getResourceManager();
+            ResourceManager manager = app.getResourceManager();
             manager.clearCacheAndTiles(TileSourceManager.getMapillaryVectorSource());
-            manager.clearCacheAndTiles(TileSourceManager.getMapillaryRasterSource());
             mapActivity.refreshMap();
         });
 
 
         final int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon)).setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon)).setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
+        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon))
+                .setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
+        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon))
+                .setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
+        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon))
+                .setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
 
-        final DelayAutoCompleteTextView textView = view.findViewById(R.id.auto_complete_text_view);
+        final DelayAutoCompleteTextView textView =
+                (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
         textView.setAdapter(new MapillaryAutoCompleteAdapter(mapActivity, R.layout.auto_complete_suggestion, app));
         String selectedUsername = settings.MAPILLARY_FILTER_USERNAME.get();
         if (!selectedUsername.isEmpty() && settings.USE_MAPILLARY_FILTER.get()) {
@@ -130,7 +134,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         textView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
@@ -141,7 +144,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
         ImageView imageView = view.findViewById(R.id.warning_image_view);

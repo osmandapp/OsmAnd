@@ -16,6 +16,7 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -57,16 +58,14 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 	@Override
 	public void onBindViewHolder(@NonNull final MeasureToolItemVH holder, int pos) {
-		UiUtilities iconsCache = mapActivity.getMyApplication().getUIUtilities();
+		OsmandApplication app = mapActivity.getMyApplication();
+		UiUtilities iconsCache = app.getUIUtilities();
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_item_move));
-		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View view, MotionEvent event) {
-				if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-					listener.onDragStarted(holder);
-				}
-				return false;
+		holder.iconReorder.setOnTouchListener((view, event) -> {
+			if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+				listener.onDragStarted(holder);
 			}
+			return false;
 		});
 		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_measure_point,
 				ColorUtilities.getDefaultIconColorId(nightMode)));
@@ -85,56 +84,46 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 			Location l1;
 			Location l2;
 			if (pos < 1) {
-				text = mapActivity.getString(R.string.shared_string_control_start);
-				if (mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null) {
-					l1 = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+				text = mapActivity.getString(R.string.start_point);
+				if (app.getLocationProvider().getLastKnownLocation() != null) {
+					l1 = app.getLocationProvider().getLastKnownLocation();
 					l2 = getLocationFromLL(points.get(0).lat, points.get(0).lon);
 					text = text
-						+ BULLET + OsmAndFormatter.getFormattedDistance(l1.distanceTo(l2), mapActivity.getMyApplication())
-						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2), mapActivity.getMyApplication());
+						+ BULLET + OsmAndFormatter.getFormattedDistance(l1.distanceTo(l2), app)
+						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2), app);
 				}
-				holder.descr.setText(text);
 			} else {
 				float dist = 0;
 				for (int i = 1; i <= pos; i++) {
 					l1 = getLocationFromLL(points.get(i - 1).lat, points.get(i - 1).lon);
 					l2 = getLocationFromLL(points.get(i).lat, points.get(i).lon);
 					dist += l1.distanceTo(l2);
-					text = OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication())
-						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2), mapActivity.getMyApplication());
+					text = OsmAndFormatter.getFormattedDistance(dist, app)
+						+ BULLET + OsmAndFormatter.getFormattedAzimuth(l1.bearingTo(l2), app);
 				}
-				holder.descr.setText(text);
 			}
+			holder.descr.setText(text);
 		}
 		double elevation = pt.ele;
 		if (!Double.isNaN(elevation)) {
 			String eleStr = (mapActivity.getString(R.string.altitude)).substring(0, 1);
 			holder.elevation.setText(mapActivity.getString(R.string.ltr_or_rtl_combine_via_colon,
-					eleStr, OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication())));
+					eleStr, OsmAndFormatter.getFormattedAlt(elevation, app)));
 		} else {
 			holder.elevation.setText("");
 		}
 		float speed = (float) pt.speed;
 		if (speed != 0) {
 			String speedStr = (mapActivity.getString(R.string.map_widget_speed)).substring(0, 1);
-			holder.speed.setText(speedStr + ": " + OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
+			holder.speed.setText(mapActivity.getString(R.string.ltr_or_rtl_combine_via_colon,
+					speedStr, OsmAndFormatter.getFormattedSpeed(speed, app)));
 		} else {
 			holder.speed.setText("");
 		}
 		holder.deleteBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
 				ColorUtilities.getDefaultIconColorId(nightMode)));
-		holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				listener.onRemoveClick(holder.getAdapterPosition());
-			}
-		});
-		holder.itemView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				listener.onItemClick(holder.getAdapterPosition());
-			}
-		});
+		holder.deleteBtn.setOnClickListener(view -> listener.onRemoveClick(holder.getAdapterPosition()));
+		holder.itemView.setOnClickListener(view -> listener.onItemClick(holder.getAdapterPosition()));
 	}
 
 	private Location getLocationFromLL(double lat, double lon) {

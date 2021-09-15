@@ -67,7 +67,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private MapActivity mapActivity;
 
-	private MapillaryRasterLayer rasterLayer;
 	private MapillaryVectorLayer vectorLayer;
 	private TextInfoWidget mapillaryControl;
 	private MapWidgetRegInfo mapillaryWidgetRegInfo;
@@ -124,7 +123,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	private void createLayers(@NonNull Context context) {
-		rasterLayer = new MapillaryRasterLayer(context);
 		vectorLayer = new MapillaryVectorLayer(context);
 	}
 
@@ -138,23 +136,18 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	private void updateMapLayers(@NonNull Context context, boolean force) {
-		if (rasterLayer == null || vectorLayer == null) {
+		if (vectorLayer == null) {
 			createLayers(context);
 		}
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (isActive()) {
-			ITileSource rasterSource = null;
 			ITileSource vectorSource = null;
 			if (settings.SHOW_MAPILLARY.get() || force) {
-				rasterSource = settings.getTileSourceByName(TileSourceManager.getMapillaryRasterSource().getName(), false);
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getMapillaryVectorSource().getName(), false);
 			}
-			updateLayer(mapView, rasterSource, rasterLayer, 0.61f);
 			updateLayer(mapView, vectorSource, vectorLayer, 0.62f);
 		} else {
-			mapView.removeLayer(rasterLayer);
-			rasterLayer.setMap(null);
 			mapView.removeLayer(vectorLayer);
 			vectorLayer.setMap(null);
 		}
@@ -201,9 +194,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 			}
 		};
 
-		if (rasterLayer.getMap() == null) {
-			settings.SHOW_MAPILLARY.set(false);
-		}
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(MAPILLARY)
 				.setTitleId(R.string.street_level_imagery, mapActivity)

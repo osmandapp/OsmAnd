@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,23 +66,23 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 	public void onBindViewHolder(@NonNull ItemViewHolder holder, final int position) {
 		final HorizontalSelectionItem item = items.get(holder.getAdapterPosition());
 		TextView textView = holder.buttonText;
-		int innerPadding = app.getResources().getDimensionPixelSize(R.dimen.content_padding);
-		textView.setPadding(innerPadding, 0, innerPadding, 0);
+		ImageView imageView = holder.buttonIcon;
 
+		int itemColor;
 		if (item.equals(selectedItem) && item.isEnabled()) {
 			int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 			AndroidUtils.setBackground(holder.button, UiUtilities.createTintedDrawable(app,
 							R.drawable.bg_select_icon_group_button, activeColor));
-			textView.setTextColor(ContextCompat.getColor(app, R.color.color_white));
+			itemColor = ContextCompat.getColor(app, R.color.color_white);
 		} else {
 			if (!item.isEnabled()) {
 				int inactiveColorId = nightMode ?
 						R.color.icon_color_default_dark : R.color.icon_color_secondary_light;
-				textView.setTextColor(ContextCompat.getColor(app, inactiveColorId));
+				itemColor = ContextCompat.getColor(app, inactiveColorId);
 			} else {
 				int defaultTitleColorId = nightMode ? R.color.active_color_primary_dark : R.color.preference_category_title;
-				textView.setTextColor(ContextCompat.getColor(app,
-						item.getTitleColorId() != INVALID_ID ? item.getTitleColorId() : defaultTitleColorId));
+				itemColor = ContextCompat.getColor(app,
+						item.getTitleColorId() != INVALID_ID ? item.getTitleColorId() : defaultTitleColorId);
 			}
 			GradientDrawable buttonBackground = (GradientDrawable) AppCompatResources.getDrawable(app,
 					R.drawable.bg_select_icon_group_button).mutate();
@@ -90,6 +92,14 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 			buttonBackground.setColor(ContextCompat.getColor(app, R.color.color_transparent));
 			AndroidUtils.setBackground(holder.button, buttonBackground);
 		}
+		textView.setTextColor(itemColor);
+		if (item.iconId != INVALID_ID) {
+			imageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.iconId, itemColor));
+		}
+		AndroidUiHelper.updateVisibility(textView, !item.isShowOnlyIcon());
+		AndroidUiHelper.updateVisibility(imageView, item.iconId != INVALID_ID);
+		AndroidUiHelper.updateVisibility(holder.space,
+				item.iconId != INVALID_ID && !item.isShowOnlyIcon());
 		textView.setText(capitalizeFirstLetter(item.title));
 		textView.requestLayout();
 		holder.button.setEnabled(item.isEnabled());
@@ -151,11 +161,15 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 
 	static class ItemViewHolder extends RecyclerView.ViewHolder {
 		final TextView buttonText;
+		final ImageView buttonIcon;
+		final View space;
 		final LinearLayout button;
 
 		ItemViewHolder(@NonNull View itemView) {
 			super(itemView);
 			buttonText = itemView.findViewById(R.id.button_text);
+			buttonIcon = itemView.findViewById(R.id.button_icon);
+			space = itemView.findViewById(R.id.space);
 			button = itemView.findViewById(R.id.button);
 		}
 	}
@@ -165,9 +179,11 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 		private boolean enabled = true;
 		private int titleColorId = INVALID_ID;
 		private Object object;
+		private int iconId = INVALID_ID;
+		private boolean showOnlyIcon;
 
 		public HorizontalSelectionItem(String title) {
-			this.title = title;
+			this(title, null);
 		}
 
 		public HorizontalSelectionItem(String title, Object object) {
@@ -183,6 +199,14 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 			this.titleColorId = titleColorId;
 		}
 
+		public void setIconId(int iconId) {
+			this.iconId = iconId;
+		}
+
+		public void setShowOnlyIcon(boolean showOnlyIcon) {
+			this.showOnlyIcon = showOnlyIcon;
+		}
+
 		public String getTitle() {
 			return title;
 		}
@@ -195,8 +219,16 @@ public class HorizontalSelectionAdapter extends RecyclerView.Adapter<HorizontalS
 			return titleColorId;
 		}
 
+		public int getIconId() {
+			return iconId;
+		}
+
 		public Object getObject() {
 			return object;
+		}
+
+		public boolean isShowOnlyIcon() {
+			return iconId != INVALID_ID && showOnlyIcon;
 		}
 	}
 }

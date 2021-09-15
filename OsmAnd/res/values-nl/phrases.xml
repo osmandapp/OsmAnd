@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_historic_mine">Historische mijn</string>
     <string name="poi_palaeontological_site">Paleontologische site</string>
@@ -74,7 +74,6 @@
     <string name="poi_ship_chandler">Scheepsuitrusting</string>
     <string name="poi_sports">Sportwinkel</string>
     <string name="poi_stationery">Kantoorboekhandel</string>
-    
     <string name="poi_ticket">Ticketwinkel</string>
     <string name="poi_tobacco">Tabakswinkel</string>
     <string name="poi_toys">Speelgoedwinkel</string>
@@ -458,7 +457,6 @@
     <string name="poi_pension_fund">Pensioenfonds</string>
     <string name="poi_migration">Migratie</string>
     <string name="poi_tax_inspection">Belastingsinspectie</string>
-    
     <string name="poi_speech_therapist">Logopedist</string>
     <string name="poi_healthcare_yes">Medische voorziening</string>
     <string name="poi_office_telecommunication">Telecommunicatiekantoor</string>
@@ -531,7 +529,7 @@
     <string name="poi_military_naval_base">Militaire marinebasis</string>
     <string name="poi_man_made">Kunstmatig</string>
     <string name="poi_service">Dienst</string>
-    <string name="poi_rugby_union">Rugby unie</string>
+    <string name="poi_rugby_union">Rugby union</string>
     <string name="poi_rugby_league">Rugby competitie</string>
     <string name="poi_toboggan">Rodelen</string>
     <string name="poi_artwork">Kunst</string>
@@ -730,7 +728,6 @@
     <string name="poi_camera">Fotoapparatuur</string>
     <string name="poi_candles">Kaarsenwinkel</string>
     <string name="poi_doors">Deuren</string>
-    
     <string name="poi_free_flying">Freeflying-toebehoren</string>
     <string name="poi_garden_furniture">Tuinmeubelen</string>
     <string name="poi_leather">Lederwarenzaak</string>
@@ -753,7 +750,6 @@
     <string name="poi_games">Spellen en games</string>
     <string name="poi_aerialway_pylon">Kabelbaanmast</string>
     <string name="poi_breakwater">Golfbreker</string>
-    
     <string name="poi_power_tower">Hoogspanningsmast</string>
     <string name="poi_power_pole">Bokpaal</string>
     <string name="poi_cooling_tower">Koeltoren</string>
@@ -2715,8 +2711,8 @@
     <string name="poi_historic_era_mesolithic">Historische era: Mesolithicum</string>
     <string name="poi_historic_era_neolithic">Historische era: Neolithicum</string>
     <string name="poi_historic_era_chalcolithic">Historische era: Chalcolithicum (kopersteentijd) (4000 - 3000 v.Chr)</string>
-    <string name="poi_fortification_type_hill_fort">Fortificatie type: heuvel fort</string>
-    <string name="poi_fortification_type_limes">Fortificatie type: kalksteen</string>
+    <string name="poi_fortification_type_hill_fort">Fortificatie type: heuvelfort</string>
+    <string name="poi_fortification_type_limes">Fortificatie type: limes</string>
     <string name="poi_fitness_station">Fitness accomodatie</string>
     <string name="poi_health_specialty_internal_medicine_yes">Interne geneeskunde</string>
     <string name="poi_health_specialty_radiotherapy_yes">Radiotherapie</string>
@@ -3232,7 +3228,6 @@
     <string name="poi_diplomatic_permanent_mission">Permanente missie</string>
     <string name="poi_diplomatic_consulate_general">Consulaat-generaal</string>
     <string name="poi_traffic_mirror">Verkeersspiegel</string>
-    
     <string name="poi_aquaculture_fish">Aquacultuur: vis</string>
     <string name="poi_aquaculture">Aquacultuur</string>
     <string name="poi_passenger_information_display_yes">Reizigersinformatiedisplay: ja</string>
@@ -3735,4 +3730,65 @@
     <string name="poi_craft_builder">Aannemer</string>
     <string name="poi_health_food">Health food</string>
     <string name="poi_cellar_entrance">Kelderingang</string>
+    <string name="poi_memorial_ghost_bike">Witte fiets</string>
+    <string name="poi_volcano_number_of_eruptions">Aantal uitbarstingen</string>
+    <string name="poi_volcano_status_inactive">Inactief</string>
+    <string name="poi_volcano_status_active">Actief</string>
+    <string name="poi_volcano_status_dormant">Slapend</string>
+    <string name="poi_volcano_status_extinct">Uitgestorven</string>
+    <string name="poi_volcano_last_eruption">Laatste uitbarsting</string>
+    <string name="poi_volcano_type_mud">Moddervulkaan</string>
+    <string name="poi_volcano_type_lava_dome">Lavakoepel</string>
+    <string name="poi_volcano_type_caldera">Caldeira</string>
+    <string name="poi_volcano_type_maar">Maar</string>
+    <string name="poi_volcano_type_shield">Schildvulkaan</string>
+    <string name="poi_volcano_type_stratovolcano">Stratovulkaan</string>
+    <string name="poi_volcano_type_scoria">Sintelkegel</string>
+    <string name="poi_url">URL</string>
+    <string name="poi_community_gender_mixed">Geslacht van de gemeenschap: gemengd</string>
+    <string name="poi_community_gender_male">Geslacht van de gemeenschap: mannelijk</string>
+    <string name="poi_community_gender_female">Geslacht van de gemeenschap: vrouwelijk</string>
+    <string name="poi_tourist_camp">Vrijetijds- en recreatiewoning</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
+    <string name="poi_rtsa_scale_3b">3B</string>
+    <string name="poi_rtsa_scale_3a_asterisk">3A*</string>
+    <string name="poi_rtsa_scale_3a">3A</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2B*</string>
+    <string name="poi_rtsa_scale_2b">2B</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2A*</string>
+    <string name="poi_rtsa_scale_2a">2A</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
+    <string name="poi_rtsa_scale_1b">1B</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1A*</string>
+    <string name="poi_rtsa_scale_1a">1A</string>
+    <string name="poi_rtsa_scale_nc_asterisk">n.b.*</string>
+    <string name="poi_rtsa_scale_nc">n.b.</string>
+    <string name="poi_checkpoint_type_needler">Naald</string>
+    <string name="poi_climbing_grade_uiaa_min">Makkelijkste route (UIAA)</string>
+    <string name="poi_climbing_grade_french_min">Makkelijkste route (Frans)</string>
+    <string name="poi_climbing_grade_saxon_min">Makkelijkste route (Saksisch)</string>
+    <string name="poi_recycling_small_electrical_appliances">Kleine elektrische apparaten</string>
+    <string name="poi_callable">Opvraagbaar</string>
+    <string name="poi_shelter_filter">Onderdak</string>
+    <string name="poi_permanent_camping">Permanente camping</string>
+    <string name="poi_authentication_none">Authenticatie niet nodig</string>
+    <string name="poi_authentication_short_message">Authenticatie met kort bericht</string>
+    <string name="poi_authentication_phone_call">Authenticatie met telefoongesprek</string>
+    <string name="poi_authentication_app">Authenticatie met app</string>
+    <string name="poi_authentication_key">Authenticatie met sleutel</string>
+    <string name="poi_authentication_chip_card">Authenticatie met chipkaart</string>
+    <string name="poi_authentication_contactless">Contactloze authenticatie</string>
+    <string name="poi_access_scooter">Toegang voor scooters</string>
+    <string name="poi_access_bicycle">Toegang voor fietsen</string>
+    <string name="poi_access_motorcar">Toegang voor auto\'s</string>
+    <string name="poi_access_general">Algemene toegang</string>
+    <string name="poi_bay_filter">Baai type</string>
+    <string name="poi_diplomatic_services_citizen_services_filter">Dienstverlening voor burgers</string>
+    <string name="poi_diplomatic_services_immigrant_visas_filter">Visum voor immigranten</string>
+    <string name="poi_diplomatic_services_non_immigrant_visas_filter">Visum voor niet-immigranten</string>
+    <string name="poi_liaison_filter">Liaison</string>
+    <string name="poi_consulate_filter">Consulaat</string>
+    <string name="poi_embassy_filter">Ambassade</string>
+    <string name="poi_departures_board">Bestemmingsbord</string>
+    <string name="poi_drinking_water_refill">Drinkwaterpunt</string>
 </resources>

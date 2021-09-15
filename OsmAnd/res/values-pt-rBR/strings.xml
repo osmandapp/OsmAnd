@@ -66,7 +66,7 @@
 \nLongitude %2$s</string>
     <string name="tips_and_tricks_descr">Respostas às perguntas frequentes, mudanças recentes e outras.</string>
     <string name="routing_settings_2">Configurações de navegação</string>
-    <string name="general_settings_2">Configurações globais</string>
+    <string name="general_settings_2">Configurações gerais</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">OK</string>
     <string name="shared_string_cancel">Cancelar</string>
@@ -4315,4 +4315,6 @@
     <string name="routeInfo_smoothness_description">Fornece um esquema de classificação em relação à usabilidade física de uma via para veículos com rodas, particularmente em relação à regularidade/planicidade da superfície.</string>
     <string name="routeInfo_surface_description">Fornece informações adicionais sobre a superfície física de estradas/caminhos pedonais.</string>
     <string name="routeInfo_roadClass_description">Colorir a rota ou linha do trilho de acordo com a classificação da estrada.</string>
+    <string name="add_group_to_markers">Adicionar grupo à lista de marcadores</string>
+    <string name="remove_group_from_markers">Remover grupo da lista de marcadores</string>
 </resources>

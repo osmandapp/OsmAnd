@@ -1157,7 +1157,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					GpxData gpxData = (GpxData) toShow;
 					QuadRect qr = gpxData.getRect();
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-					MeasurementEditingContext editingContext = new MeasurementEditingContext();
+					MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
 					editingContext.setGpxData(gpxData);
 					MeasurementToolFragment.showInstance(getSupportFragmentManager(), editingContext);
 				} else {

@@ -3324,4 +3324,18 @@
     <string name="poi_socket_chademo_output_low">Düşük</string>
     <string name="poi_socket_chademo_output_medium">Orta</string>
     <string name="poi_socket_chademo_output_high">Yüksek</string>
+    <string name="poi_callable">Çağrılabilir</string>
+    <string name="poi_shelter_filter">Barınak</string>
+    <string name="poi_permanent_camping">Kalıcı kamp</string>
+    <string name="poi_authentication_none">Kimlik doğrulaması gerekli değil</string>
+    <string name="poi_authentication_short_message">Kısa mesajla kimlik doğrulaması</string>
+    <string name="poi_authentication_phone_call">Telefonla kimlik doğrulaması</string>
+    <string name="poi_authentication_app">Uygulamaya göre kimlik doğrulaması</string>
+    <string name="poi_authentication_key">Anahtarla kimlik doğrulaması</string>
+    <string name="poi_authentication_chip_card">Çip kartı ile kimlik doğrulaması</string>
+    <string name="poi_authentication_contactless">Temassız kimlik doğrulaması</string>
+    <string name="poi_access_scooter">Scooter erişimi</string>
+    <string name="poi_access_bicycle">Bisiklet erişimi</string>
+    <string name="poi_access_motorcar">Motorlu araç erişimi</string>
+    <string name="poi_access_general">Genel erişim</string>
 </resources>

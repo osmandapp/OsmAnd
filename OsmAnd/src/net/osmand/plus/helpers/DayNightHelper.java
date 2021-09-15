@@ -69,8 +69,7 @@ public class DayNightHelper implements SensorEventListener {
 	}
 
 	/**
-	 * @return null if could not be determined (in case of error)
-	 * @return true if day is supposed to be 
+	 * @return true if day is supposed to be
 	 */
 	public boolean isNightMode() {
 		return isNightModeForProfile(app.getSettings().APPLICATION_MODE.get());

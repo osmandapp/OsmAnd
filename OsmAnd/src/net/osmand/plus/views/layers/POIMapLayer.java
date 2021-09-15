@@ -1,9 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.AndroidUtils.dpToPx;
-import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
-import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_TRACK;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -19,11 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -61,6 +52,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.AndroidUtils.dpToPx;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
+import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_TRACK;
 
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener {
@@ -212,29 +212,27 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 							ContextCompat.getColor(app, R.color.osmand_orange), true);
 					pointImageDrawable.setAlpha(0.8f);
 					for (Amenity o : objects) {
-						float x = tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
-								.getLongitude());
-						float y = tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
-								.getLongitude());
+						LatLon latLon = o.getLocation();
+						float x = tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+						float y = tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 
 						if (tileBox.containsPoint(x, y, iconSize)) {
-							if (intersects(boundIntersections, x, y, iconSize, iconSize) ||
-									(app.getSettings().SHOW_NEARBY_POI.get() && wph.isRouteCalculated() && !wph.isAmenityNoPassed(o))) {
+							boolean intersects = intersects(boundIntersections, x, y, iconSize, iconSize);
+							boolean shouldShowNearbyPoi = app.getSettings().SHOW_NEARBY_POI.get()
+									&& routingHelper.isFollowingMode();
+							if (intersects || shouldShowNearbyPoi && !wph.isAmenityNoPassed(o)) {
 								pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
-								smallObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
-										o.getLocation().getLongitude()));
+								smallObjectsLatLon.add(latLon);
 							} else {
 								fullObjects.add(o);
-								fullObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
-										o.getLocation().getLongitude()));
+								fullObjectsLatLon.add(latLon);
 							}
 						}
 					}
 					for (Amenity o : fullObjects) {
-						int x = (int) tileBox.getPixXFromLatLon(o.getLocation().getLatitude(), o.getLocation()
-								.getLongitude());
-						int y = (int) tileBox.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation()
-								.getLongitude());
+						LatLon latLon = o.getLocation();
+						int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+						int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 						if (tileBox.containsPoint(x, y, iconSize)) {
 							String id = o.getGpxIcon();
 							if (id == null) {

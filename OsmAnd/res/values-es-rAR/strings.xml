@@ -53,7 +53,7 @@
 \nLon %2$s</string>
     <string name="tips_and_tricks_descr">Preguntas frecuentes, cambios recientes y otros.</string>
     <string name="routing_settings_2">Ajustes de navegación</string>
-    <string name="general_settings_2">Ajustes globales</string>
+    <string name="general_settings_2">Ajustes generales</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_cancel">Cancelar</string>
     <string name="shared_string_yes">Sí</string>
@@ -4322,4 +4322,6 @@
     <string name="routeInfo_smoothness_description">Proporciona un esquema de clasificación con respecto a la usabilidad física de un camino para vehículos con ruedas, particularmente con respecto a la regularidad y planitud de la superficie.</string>
     <string name="routeInfo_surface_description">Proporciona información adicional sobre la superficie física de los caminos y senderos.</string>
     <string name="routeInfo_roadClass_description">Colorea la ruta o el trazado de la vía según la clasificación del camino.</string>
+    <string name="add_group_to_markers">Añadir grupo a la lista de marcadores</string>
+    <string name="remove_group_from_markers">Quitar grupo de la lista de marcadores</string>
 </resources>

@@ -52,11 +52,11 @@ public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
 
 	private static final String ICON_NAME_EXTENSION = "icon";
-	private static final String DEFAULT_ICON_NAME = "special_star";
 	private static final String BACKGROUND_TYPE_EXTENSION = "background";
 	private static final String PROFILE_TYPE_EXTENSION = "profile";
 	private static final String GAP_PROFILE_TYPE = "gap";
 	private static final String TRKPT_INDEX_EXTENSION = "trkpt_idx";
+	public static final String DEFAULT_ICON_NAME = "special_star";
 	public static final char TRAVEL_GPX_CONVERT_FIRST_LETTER = 'A';
 	public static final int TRAVEL_GPX_CONVERT_FIRST_DIST = 5000;
 	public static final int TRAVEL_GPX_CONVERT_MULT_1 = 2;
@@ -314,7 +314,7 @@ public class GPXUtilities {
 		}
 
 		public String getIconNameOrDefault() {
-			String iconName = getExtensionsToRead().get(ICON_NAME_EXTENSION);
+			String iconName = getIconName();
 			if (iconName == null) {
 				iconName = DEFAULT_ICON_NAME;
 			}

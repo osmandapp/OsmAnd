@@ -307,7 +307,7 @@
     <string name="index_settings">Kartenverwaltung</string>
     <string name="index_settings_descr">Herunterladen und Verwalten von auf Ihrem Gerät gespeicherten Offline-Kartendateien.</string>
     <string name="general_settings">Allgemein</string>
-    <string name="general_settings_2">Globale Einstellungen</string>
+    <string name="general_settings_2">Allgemeine Einstellungen</string>
     <string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen.</string>
     <string name="global_app_settings">Globale Einstellungen</string>
     <string name="user_name">OSM-Benutzername</string>
@@ -2700,7 +2700,7 @@
     <string name="wikivoyage_travel_guide">Reiseführer</string>
     <string name="wikivoyage_travel_guide_descr">Führt innerhalb von OsmAnd ohne Internetverbindung zu den interessantesten Orten der Welt.</string>
     <string name="monthly_map_updates">Kartenaktualisierungen: jeden Monat</string>
-    <string name="daily_map_updates">Kartenaktualisierungen: jede Stunde</string>
+    <string name="daily_map_updates">Stündliche Kartenaktualisierungen</string>
     <string name="in_app_purchase">In-App-Kauf</string>
     <string name="in_app_purchase_desc">Einmalige Zahlung</string>
     <string name="in_app_purchase_desc_ex">Nach dem Kauf steht es Ihnen dauerhaft zur Verfügung.</string>
@@ -3355,7 +3355,7 @@
     <string name="sunset_at">Sonnenuntergang um %1$s</string>
     <string name="sunrise_at">Sonnenaufgang um %1$s</string>
     <string name="rearrange_categories">Kategorien neu ordnen</string>
-    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierreihenfolge der Liste, blenden Sie Kategorien aus. Sie können alle Änderungen als Profile importieren oder exportieren.</string>
+    <string name="create_custom_categories_list_promo">Ändern Sie die Sortierreihenfolge der Liste und blenden Sie Kategorien aus. Sie können alle Änderungen als Profile importieren oder exportieren.</string>
     <string name="add_new_custom_category_button_promo">Neue benutzerdefinierte Kategorie hinzufügen, indem Sie eine oder mehrere Kategorien auswählen.</string>
     <string name="rendering_attr_streetLightingNight_name">Nur nachts anzeigen</string>
     <string name="plugin_prefs_reset_successful">Alle Plugin-Einstellungen wurden auf den Standardzustand zurückgesetzt.</string>
@@ -3467,7 +3467,7 @@
     <string name="select_distance_route_will_recalc">Wählen Sie die Entfernung, nach der die Route neu berechnet wird.</string>
     <string name="recalculate_route_in_deviation">Neuberechnung der Route im Falle einer Abweichung</string>
     <string name="recalculate_route_distance_promo">Die Route wird neu berechnet, wenn die Entfernung von der Route zur aktuellen Position größer als der ausgewählte Wert ist.</string>
-    <string name="import_complete_description">Es wurden alle Daten aus dem %1$s importiert. Verwenden Sie die Schaltflächen unten, um einen beliebigen Teil der App zu öffnen und zu verwalten.</string>
+    <string name="import_complete_description">Alle Daten aus dem %1$s importiert. Verwenden Sie die Schaltflächen unten, um einen beliebigen Teil der App zu öffnen und zu verwalten.</string>
     <string name="shared_string_square">Quadrat</string>
     <string name="shared_string_circle">Kreis</string>
     <string name="select_shape">Form auswählen</string>
@@ -3544,7 +3544,7 @@
     <string name="lang_bar">Bairisch</string>
     <string name="lang_ba">Baschkirisch</string>
     <string name="main_actions_descr">Hat nur vier Schaltflächen.</string>
-    <string name="select_wikipedia_article_langs">Wählen Sie die Sprachen für Wikipedia-Artikel auf der Karte aus. Wechseln Sie beim Lesen des Artikels zu einer beliebigen verfügbaren Sprache.</string>
+    <string name="select_wikipedia_article_langs">Sprachauswahl für Wikipedia-Artikel auf der Karte. Während des Lesens eines Artikels ist ein Wechsel auf jede verfügbare Sprache möglich.</string>
     <string name="hidden_items_descr">Diese Elemente werden aus dem Menü ausgeblendet, aber die entsprechenden Optionen oder Plugins funktionieren weiterhin.</string>
     <string name="reorder_or_hide_from">Ordnen Sie Elemente aus %1$s neu an oder blenden Sie sie aus.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
@@ -4324,4 +4324,6 @@
     <string name="routeInfo_smoothness_description">Bietet ein Klassifizierungsschema für die physische Nutzbarkeit eines Weges für Radfahrzeuge, insbesondere hinsichtlich der Regelmäßigkeit/Ebenheit der Oberfläche.</string>
     <string name="routeInfo_surface_description">Zusätzliche Informationen über die Oberfläche von Straßen/Fußwegen anbieten.</string>
     <string name="routeInfo_roadClass_description">Färbt die Route oder den Track entsprechend der Straßenklassifikation ein.</string>
+    <string name="add_group_to_markers">Gruppe zu Markerliste hinzufügen</string>
+    <string name="remove_group_from_markers">Gruppe von Markerliste entfernen</string>
 </resources>

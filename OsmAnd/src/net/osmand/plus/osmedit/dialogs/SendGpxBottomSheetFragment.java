@@ -75,7 +75,7 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		if (!Algorithms.isEmpty(settings.OSM_USER_DISPLAY_NAME.get())) {
 			accountName.setText(settings.OSM_USER_DISPLAY_NAME.get());
 		} else {
-			accountName.setText(settings.OSM_USER_NAME.get());
+			accountName.setText(settings.OSM_USER_NAME_OR_EMAIL.get());
 		}
 
 		String fileName = gpxInfos[0].getFileName();

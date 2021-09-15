@@ -234,7 +234,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public void resumeAllUpdates() {
-		final LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
+		registerOrUnregisterCompassListener(true);
+
 		if (app.getSettings().isInternetConnectionAvailable()) {
 			if (System.currentTimeMillis() - app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get() > AGPS_TO_REDOWNLOAD) {
 				// force an updated check for internet connectivity here before destroying A-GPS-data
@@ -243,8 +244,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				}
 			}
 		}
+
 		if (isLocationPermissionAvailable(app)) {
-			registerGpsStatusListener(service);
+			final LocationManager locationService = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
+			registerGpsStatusListener(locationService);
 			try {
 				locationServiceHelper.requestLocationUpdates(new LocationServiceHelper.LocationCallback() {
 					@Override
@@ -405,12 +408,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public synchronized void registerOrUnregisterCompassListener(boolean register) {
 		if (sensorRegistered && !register) {
-			Log.d(PlatformUtil.TAG, "Disable sensor"); //$NON-NLS-1$
+			Log.d(PlatformUtil.TAG, "Disable sensor");
 			((SensorManager) app.getSystemService(Context.SENSOR_SERVICE)).unregisterListener(this);
 			sensorRegistered = false;
 			heading = null;
 		} else if (!sensorRegistered && register) {
-			Log.d(PlatformUtil.TAG, "Enable sensor"); //$NON-NLS-1$
+			Log.d(PlatformUtil.TAG, "Enable sensor");
 			SensorManager sensorMgr = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
 			if (app.getSettings().USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
 				Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);

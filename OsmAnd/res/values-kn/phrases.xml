@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_fuel_type">ಇಂಧನದ ಪ್ರಕಾರ</string>
     <string name="poi_fuel_avia_type">ಇಂಧನದ ಪ್ರಕಾರ (ಏವಿಯಾ)</string>
@@ -15,4 +15,5 @@
     <string name="poi_payment_toll_type">ಪಾವತಿಸುವ ವಿಧಾನ</string>
     <string name="poi_traffic_signals_sound">ಧ್ವನಿ</string>
     <string name="poi_highway_crossing_type">ಮಾದರಿ</string>
+    <string name="poi_site_type_fortification">ಕೋಟೆ</string>
 </resources>

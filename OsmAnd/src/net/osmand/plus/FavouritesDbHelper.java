@@ -225,7 +225,7 @@ public class FavouritesDbHelper {
 			if (fp.getBackgroundType() == FavouritePoint.DEFAULT_BACKGROUND_TYPE) {
 				fp.setBackgroundType(null);
 			}
-			if (fp.getIconId() == FavouritePoint.DEFAULT_UI_ICON_ID) {
+			if (fp.getIconIdOrDefault() == FavouritePoint.DEFAULT_UI_ICON_ID) {
 				fp.setIconId(0);
 			}
 			FavoriteGroup group = getOrCreateGroup(fp, 0);

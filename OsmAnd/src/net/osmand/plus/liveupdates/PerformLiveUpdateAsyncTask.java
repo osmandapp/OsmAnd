@@ -195,7 +195,7 @@ public class PerformLiveUpdateAsyncTask
 		AndroidNetworkUtils.sendRequestAsync(
 				app, LiveUpdatesFragment.URL, null, "Requesting map updates info...", false, false, new OnRequestResultListener() {
 					@Override
-					public void onResult(@Nullable String result, @Nullable String error) {
+					public void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode) {
 						if (!Algorithms.isEmpty(result)) {
 							SimpleDateFormat source = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
 							source.setTimeZone(TimeZone.getTimeZone("UTC"));

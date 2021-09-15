@@ -76,7 +76,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private int calculatedPairs;
 	private int pointsToCalculateSize;
 	private CalculationMode lastCalculationMode = WHOLE_TRACK;
-	private ApplicationMode appMode = DEFAULT_APP_MODE;
+	private ApplicationMode appMode;
 
 	private SnapToRoadProgressListener progressListener;
 	private RouteCalculationProgress calculationProgress;
@@ -94,8 +94,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		ADD_BEFORE,
 	}
 
-	public void setApplication(OsmandApplication application) {
-		this.application = application;
+	public MeasurementEditingContext(OsmandApplication app) {
+		this.application = app;
+		appMode = app.getSettings().getApplicationMode();
 	}
 
 	public void setupRouteSettingsListener() {

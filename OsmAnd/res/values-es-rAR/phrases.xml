@@ -4019,4 +4019,12 @@
     <string name="poi_shelter_filter">Refugio</string>
     <string name="poi_permanent_camping">Campamento permanente</string>
     <string name="poi_arch">Arco (natural)</string>
+    <string name="poi_callable_yes">Sí</string>
+    <string name="poi_payment_reverse_charge_calls_yes">Llamadas de cobro revertido: sí</string>
+    <string name="poi_payment_calling_cards_yes">Acepta tarjetas telefónicas</string>
+    <string name="poi_payment_reverse_charge_calls_no">Llamadas de cobro revertido: no</string>
+    <string name="poi_callable_no">No</string>
+    <string name="poi_payment_calling_cards_no">No acepta tarjetas telefónicas</string>
+    <string name="poi_manufacturer">Fabricante</string>
+    <string name="poi_callable">Recibe llamadas</string>
 </resources>

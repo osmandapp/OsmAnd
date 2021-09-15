@@ -278,7 +278,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			mAudioFocusHelper = getAudioFocus();
 		}
 		if (mAudioFocusHelper != null && ctx != null) {
-			boolean audioFocusGranted = mAudioFocusHelper.requestFocus(ctx, applicationMode, streamType);
+			boolean audioFocusGranted = mAudioFocusHelper.requestAudFocus(ctx, applicationMode, streamType);
 			// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
 			if (audioFocusGranted && ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0) {
 				toggleBtSco(true);
@@ -301,7 +301,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			toggleBtSco(false);
 		}
 		if (ctx != null && mAudioFocusHelper != null) {
-			mAudioFocusHelper.abandonFocus(ctx, applicationMode, streamType);
+			mAudioFocusHelper.abandonAudFocus(ctx, applicationMode, streamType);
 		}
 		mAudioFocusHelper = null;
 	}

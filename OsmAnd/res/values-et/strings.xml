@@ -8,7 +8,7 @@
     <string name="poi_action_add">lisa</string>
     <string name="shared_string_message">Sõnum</string>
     <string name="agps_data_last_downloaded">A-GPS andmed on alla laaditud: %1$s</string>
-    <string name="welmode_download_maps">Laadi kaarte</string>
+    <string name="welmode_download_maps">Kaartide allalaadimine</string>
     <string name="welcome_header">Tere tulemast</string>
     <string name="mark_to_delete">Märgi kustutamiseks</string>
     <string name="confirmation_to_clear_history">Tühjendada ajalugu\?</string>
@@ -200,8 +200,8 @@
     <string name="in_app_purchase">Rakendusesisene ost</string>
     <string name="in_app_purchase_desc">Ühekordne makse</string>
     <string name="purchase_unlim_title">Osta - %1$s</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Värvus võrku kuulumise põhjal</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Värv OSMC matkamise sümboli põhjal</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Võrku kuulumine</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="current_route">Praegune teekond</string>
     <string name="delay_to_start_navigation_descr">Määra ooteaeg teekonna planeerimise ekraanil püsimiseks.</string>
     <string name="route_points">Teekonnapunktid</string>
@@ -215,7 +215,7 @@
     <string name="rendering_attr_busRoutes_name">Bussiliinid</string>
     <string name="rendering_category_routes">Teekonnad</string>
     <string name="print_route">Trüki teekond</string>
-    <string name="rendering_attr_showCycleRoutes_name">Kuva rattarajad</string>
+    <string name="rendering_attr_showCycleRoutes_name">Rattarajad</string>
     <string name="use_points_as_intermediates">Arvuta teekond punktide vahel</string>
     <string name="route_preferences">Teekonna eelistused</string>
     <string name="route_info">Teekonna teave</string>
@@ -233,7 +233,7 @@
     <string name="layer_hillshade">Künkavarjutuse kiht</string>
     <string name="download_hillshade_maps">Künkavarjutused</string>
     <string name="precise_routing_mode_descr">Arvuta täpsed teekonnad ilma tõrgeteta. Ikka kaugusega piiratud ja aeglane.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Matkasümbolite ülekate</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Matkateekonnad</string>
     <string name="no_route">Teekond puudub</string>
     <string name="recalculate_route_to_your_location">Transpordiliik:</string>
     <string name="map_widget_fluorescent">Helkivad teekonnad</string>
@@ -274,7 +274,7 @@
     <string name="rendering_attr_horseRoutes_name">Ratsutamisteed</string>
     <string name="route_distance">Kaugus:</string>
     <string name="route_duration">Aeg:</string>
-    <string name="rendering_attr_showMtbRoutes_name">Kuva maastrikuratta rajad</string>
+    <string name="rendering_attr_showMtbRoutes_name">Maastrikuratta rajad</string>
     <string name="recalculate_route">Arvuta teekond uuesti</string>
     <string name="route_stops_before">%1$s peatust varem</string>
     <string name="route_calculation">Teekonna arvutamine</string>
@@ -381,7 +381,7 @@
     <string name="shared_string_markers">Markerid</string>
     <string name="coordinates_format">Koordinaatide formaat</string>
     <string name="use_system_keyboard">Kasuta süsteemi klaviatuuri</string>
-    <string name="fast_coordinates_input_descr">Vali koordinaatide sisestamise formaat. Saad seda alati muuta vajutades \'Valikud\'.</string>
+    <string name="fast_coordinates_input_descr">Vali koordinaatide sisestusformaat. Selle muutmiseks puuduta valikut \"Valikud\".</string>
     <string name="fast_coordinates_input">Kiire koordinaatide sisestamine</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Väldi jääteid ja koolmekohti</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Väldib jääteid ja koolmekohti.</string>
@@ -713,7 +713,7 @@
     <string name="app_mode_subway">Metroo</string>
     <string name="app_mode_horse">Hobune</string>
     <string name="app_mode_helicopter">Helikopter</string>
-    <string name="osmand_routing_promo">Saad lisada oma muudetud versiooni routing.xml failist asukohas ..osmand/routing</string>
+    <string name="osmand_routing_promo">Lisa oma muudetud versioon failist routing.xml aadressile ..osmand/routing</string>
     <string name="app_mode_skiing">Suusatamine</string>
     <string name="base_profile_descr_ski">Suusatamine</string>
     <string name="show_compass_ruler">Kuva kompassi joonlaud</string>
@@ -979,12 +979,12 @@
 \n • Muud veaparandused
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Võid rakendada seda muudatust kõikidele või ainult valitud profiilile.</string>
+    <string name="apply_preference_to_all_profiles">Rakenda see muudatus kõigile või valitud profiilile.</string>
     <string name="shared_preference">Jagatud</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Eelista katteta teid</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Teekonna koostamisel eelista katteta teid pinnatud teedele.</string>
     <string name="layer_osm_edits">OSM muudatused</string>
-    <string name="quick_action_contour_lines_descr">Tegevusnupp kontuurjoonte kuvamiseks või peitmiseks kaardil.</string>
+    <string name="quick_action_contour_lines_descr">Tegevusnupp kõrgusjoonte kuvamiseks või peitmiseks kaardil.</string>
     <string name="quick_action_hillshade_descr">Tegevusnupp künkavarjutuste kuvamiseks või peitmiseks kaardil.</string>
     <string name="tts_initialization_error">Kõnesünteesi mootorit ei saa käivitada.</string>
     <string name="export_profile">Ekspordi profiil</string>
@@ -1010,7 +1010,7 @@
     <string name="suggested_maps">Soovitatud kaardid</string>
     <string name="suggested_maps_descr">Need kaardid on laienduse kasutamisel nõutud.</string>
     <string name="added_profiles">Lisatud profiilid</string>
-    <string name="added_profiles_descr">Laienduse poolt lisatud OsmAnd profiilid</string>
+    <string name="added_profiles_descr">Pistikprogrammi poolt lisatud profiilid</string>
     <string name="shared_string_turn_off">Lülita välja</string>
     <string name="new_plugin_added">Uus laiendus lisatud</string>
     <string name="join_segments">Liida lõigud</string>
@@ -1045,7 +1045,7 @@
     <string name="index_item_depth_points_northern_hemisphere">Põhjapoolkera meresügavuse punktid</string>
     <string name="download_depth_countours">Meresügavuse kontuurid</string>
     <string name="nautical_maps">Merekaardid</string>
-    <string name="depth_contour_descr">Meresügavuse kontuurjooned ja meremärgid.</string>
+    <string name="depth_contour_descr">Meresügavuse kõrgusjooned ja meremärgid.</string>
     <string name="index_item_world_wikivoyage">Ülemaailmsed Wikivoyage artiklid</string>
     <string name="av_locations_descr">GPX fail asukohtadega.</string>
     <string name="av_locations">Asukohad</string>
@@ -1342,7 +1342,7 @@
     <string name="rendering_attr_showSurfaceGrade_name">Kuva tee kvaliteet</string>
     <string name="rendering_attr_showSurfaces_name">Kuva tee pind</string>
     <string name="no_index_file_to_download">Allalaadimisi ei leitud, palun kontrolli internetiühendust.</string>
-    <string name="select_index_file_to_download">Midagi ei leitud. Kui Sa ei leidnud oma piirkonda, võid selle ise luua (vaata https://osmand.net).</string>
+    <string name="select_index_file_to_download">Midagi ei leitud, kuid seda saab ka ise teha (vt https://osmand.net).</string>
     <string name="none_selected_gpx">Määra pika vajutusega kõigepealt GPX fail.</string>
     <string name="local_index_select_gpx_file">Vali rada</string>
     <string name="gpx_split_interval">Jagamise vahemik</string>
@@ -1897,7 +1897,7 @@
     <string name="live_monitoring_interval">Veebipõhise jälgimise ajavahemik</string>
     <string name="live_monitoring_url">Veebipõhise jälgimise veebiaadress</string>
     <string name="show_current_gpx_title">Kuva praegune teekond</string>
-    <string name="free_version_message">Võid alla laadida või uuendada %1$s kaarti.</string>
+    <string name="free_version_message">%1$s kaarti allalaadimiseks või uuendamiseks.</string>
     <string name="free_version_title">Tasuta versioon</string>
     <string name="poi_context_menu_showdescription">Kuva huvipunkti kirjeldus.</string>
     <string name="index_name_north_america">Põhja-Ameerika</string>
@@ -2031,7 +2031,7 @@
     <string name="si_mi_yard">Miilid/jardid</string>
     <string name="si_km_m">Kilomeetrid/meetrid</string>
     <string name="yard">yd</string>
-    <string name="foot">ft</string>
+    <string name="foot">jalga</string>
     <string name="mile_per_hour">mph</string>
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Jaga asukohta kasutades</string>
@@ -2610,10 +2610,10 @@
     <string name="open_in_browser_wiki">Ava artikkel veebis</string>
     <string name="nautical_render_descr">Merel navigeerimiseks. Sisaldab poisid, tuletorne, jõeteid, mereteid ja tähiseid, sadamaid, meremärkide teenuseid ja sügavuskontuure.</string>
     <string name="ski_map_render_descr">Suusatamiseks. Hõlmab nõlvu, suusatõstukeid, murdmaaradu jne. Hägustab teisejärgulised kaardiobjektid.</string>
-    <string name="light_rs_render_descr">Lihtne sõidustiil. Õrn öörežiim, kontuurjooned, kontrastsed oranži värvi teed ja hägustatud teisejärgulised kaardiobjektid.</string>
-    <string name="topo_render_descr">Matkamiseks, rändamiseks ja jalgrattasõiduks looduses. Loetav õues. Kontrastsed teed ja loodusobjektid, erinevad teekonnaliigid, täpsemad kontuurjoonte võimalused, lisadetailid. Pinna terviklikkuse reguleerimine eristab tee kvaliteeti. Öine režiim puudub.</string>
+    <string name="light_rs_render_descr">Lihtne sõidustiil. Õrn öörežiim, kõrgusjooned, kontrastsed oranži värvi teed ja hägustatud teisejärgulised kaardiobjektid.</string>
+    <string name="topo_render_descr">Matkamiseks, rändamiseks ja jalgrattasõiduks looduses. Loetav õues. Kontrastsed teed ja loodusobjektid, erinevad teekonnaliigid, täpsemad kõrgusjoonte võimalused, lisadetailid. Pinna terviklikkuse reguleerimine eristab tee kvaliteeti. Öine režiim puudub.</string>
     <string name="mapnik_render_descr">Vana vaikimisi \'Mapnik\' stiil. \'Mapnik\' sarnased värvid.</string>
-    <string name="default_render_descr">Üldotstarbeline stiil. Selgelt esitatud tiheasustus. Sisaldab kontuurjooni, teekondi, pinna kvaliteeti, juurdepääsupiiranguid, teekatteid, SAC-skaala järgi rajatavaid radu, kärestikuspordi üksuseid.</string>
+    <string name="default_render_descr">Üldotstarbeline stiil. Selgelt esitatud tiheasustus. Sisaldab kõrgusjooni, teekondi, pinna kvaliteeti, juurdepääsupiiranguid, teekatteid, SAC-skaala järgi rajatavaid radu, kärestikuspordi üksuseid.</string>
     <string name="touring_view_render_descr">Suure kontrastsusega ja maksimaalselt detailne matkamise stiil. Sisaldab kõiki OsmAndi vaikestiili valikuid, kuvades samal ajal võimalikult palju üksikasju, eriti teid, radu ja muid liikumisviise. Selge \"turismialase atlase\" eristamine teetüüpide vahel. Sobib kasutamiseks nii päeval, öösel kui ka välitingimustes.</string>
     <string name="off_road_render_descr">\'Topo\' stiilis maanteel sõitmiseks ja rohelise satelliidipildi aluskihina kasutamiseks. Vähendatud peatee paksus, suurendatud radade, teede, jalgratta ja muude teede paksus.</string>
     <string name="access_intermediate_arrival_time">Vahepealne saabumisaeg</string>
@@ -3062,7 +3062,7 @@
     <string name="planning_trip_item">Reisi planeerimine</string>
     <string name="map_legend">Kaardi legend</string>
     <string name="feedback">Tagasiside</string>
-    <string name="save_poi_without_poi_type_message">Kas soovid tõesti salvestada HP ilma liigita\?</string>
+    <string name="save_poi_without_poi_type_message">Salvesta POI ilma liigita\?</string>
     <string name="poi_context_menu_modify_osm_change">Muuda OSM muudatust</string>
     <string name="poi_dialog_reopen">Ava uuesti</string>
     <string name="dashboard_or_drawer_title">Armatuurlaua või menüü juhtimine</string>
@@ -3377,7 +3377,7 @@
     <string name="keep_both">Säilita mõlemad</string>
     <string name="replace_all">Asenda kõik</string>
     <string name="replace_all_desc">Olemasolevad kirjed asendatakse failis leiduvate kirjetega</string>
-    <string name="listed_exist">Märgitud %1$s on juba OsmAndis olemas.</string>
+    <string name="listed_exist">Loetletud %1$s on juba OsmAndis olemas.</string>
     <string name="shared_string_profiles">Profiilid</string>
     <string name="shared_string_quick_actions">Kiirtoimingud</string>
     <string name="shared_string_nothing_selected">Midagi pole valitud</string>
@@ -3395,14 +3395,14 @@
     <string name="slope_description">Raja nõlva kallet visualiseeritakse värvidega.</string>
     <string name="terrain_slider_description">Määra vähima ja suurima suurenduse kaardikihi kuvamisel.</string>
     <string name="hillshade_download_description">Mäevarjude kaardil vaatamiseks on vaja täiendavaid kaarte.</string>
-    <string name="slope_download_description">Nõlvade kuvamiseks on vaja täiendavaid kaarte.</string>
-    <string name="slope_read_more">Nõlvadest saab rohkem lugeda %1$s-s.</string>
+    <string name="slope_download_description">Kaardil nõlvade vaatamiseks on vaja lisakaarte.</string>
+    <string name="slope_read_more">Loe lähemalt nõlvade kohta %1$s.</string>
     <string name="shared_string_transparency">Läbipaistvus</string>
     <string name="shared_string_zoom_levels">Suurendus</string>
     <string name="shared_string_legend">Tingmärgid</string>
-    <string name="terrain_empty_state_text">Luba kõrgusreljeefi või nõlvakaardi kuvamiseks. Neist kaarditüüpidest saad rohkem lugeda meie veebisaidis.</string>
+    <string name="terrain_empty_state_text">Näitab kaardil mägede või nõlvade kuju. Loe nende kaarditüüpide kohta rohkem meie veebilehelt.</string>
     <string name="shared_string_hillshade">Kõrgusreljeef</string>
-    <string name="import_complete_description">Kõik andmed on failist %1$s imporditud. Rakenduses vajaliku osaga töötamiseks võid kasutada nuppe allpool.</string>
+    <string name="import_complete_description">Imporditud kõik andmed %1$s. Kasuta allpool olevaid nuppe, et avada rakenduse mis tahes osa selle haldamiseks.</string>
     <string name="shared_string_import_complete">Imporditud</string>
     <string name="items_added">Kirjed lisatud</string>
     <string name="checking_for_duplicate_description">OsmAnd kontrollib faili %1$s, et leida rakenduses korduvaid kirjeid.
@@ -3511,10 +3511,10 @@
     <string name="clear_tiles_warning">Nende muudatuste rakendamine tühjendab selle paaniallika vahemällu talletatud andmed</string>
     <string name="osm_edit_closed_note">Suletud OSM märkus</string>
     <string name="vessel_height_warning_link">Määra laeva kõrgus</string>
-    <string name="vessel_height_warning">Madalate sildade vältimiseks saad kirjeldada laeva kõrguse. Palun arvesta, et liikuva silla puhul me kasutame seda kõrgust ka siis, kui sild on avatud.</string>
+    <string name="vessel_height_warning">Määra laeva kõrgus madalate sildade vältimiseks. Liikuva silla korral kasutatakse kõrgust avatud olekus.</string>
     <string name="vessel_height_limit_description">Madalate sildade vältimiseks kirjelda laeva kõrgus. Palun arvesta, et liikuva silla puhul me kasutame seda kõrgust ka siis, kui sild on avatud.</string>
-    <string name="vessel_width_limit_description">Lühikeste sildade vältimiseks määra laeva laius</string>
-    <string name="quick_action_showhide_mapillary_descr">Selle tegevusnupu toksamisel kuvatakse või peidetakse kaardil Mapillary kiht.</string>
+    <string name="vessel_width_limit_description">Määra laeva laius lühikeste sildade vältimiseks</string>
+    <string name="quick_action_showhide_mapillary_descr">Selle tegevusnupu puudutamisel kuvatakse või peidetakse kaardil Mapillary kiht.</string>
     <string name="shared_string_uninstall_and_restart">Eemalda ja taaskäivita</string>
     <string name="app_mode_inline_skates">Rulluisud</string>
     <string name="quick_action_remove_next_destination">Kustuta lähim sihtpunkt</string>
@@ -3523,7 +3523,7 @@
     <string name="please_provide_point_name_error">Palun sisestage punkti nimi</string>
     <string name="search_download_wikipedia_maps">Laadi alla Vikipeedia kaardid</string>
     <string name="plugin_wikipedia_description">Hankige teavet huvipunktide kohta Wikipediast, taskukohasest võrguühenduseta juhendist, mis sisaldab artikleid kohtade ja sihtkohtade kohta.</string>
-    <string name="add_hidden_group_info">Kuna valitud grupp on peidetud, siis lisatud punkt ei ole kaardil nähtav. Vajadusel leiad ta „%s“ alt.</string>
+    <string name="add_hidden_group_info">Lisatud punkti võib leida \"%s\". Valitud grupi kuvamiseks kaardil luba see.</string>
     <string name="app_mode_go_cart">Kartauto</string>
     <string name="parking_positions">Parkimiskohad</string>
     <string name="add_edit_favorite">Lisa lemmik või muuda seda</string>
@@ -3600,22 +3600,22 @@
     <string name="shared_string_tones">toonid</string>
     <string name="shared_string_meters">meetrit</string>
     <string name="details_dialog_decr">Näita või peida täiendavaid andmeid kaardil</string>
-    <string name="export_profile_dialog_description">Võid valida täiendavad teavet, mida profiili ekspordil kaasa pannakse.</string>
+    <string name="export_profile_dialog_description">Vali koos profiiliga eksporditavad lisaandmed.</string>
     <string name="profile_prefs_reset_successful">Kõik profiili seadistused on lähtestatud.</string>
     <string name="plugin_prefs_reset_successful">Kõikide lisaprogrammide seadistused on lähtestatud.</string>
-    <string name="additional_actions_descr">Nendele toimingutele pääsed ligi klõpsides nuppu „%1$s“.</string>
+    <string name="additional_actions_descr">Juurdepääs nendele toimingutele toimub nupule \"%1$s\" vajutades.</string>
     <string name="shared_string_legal">Juriidiline teave</string>
     <string name="reverse_route">Pööra teekond teistpidi</string>
     <string name="whole_track">Kogu teekond</string>
     <string name="next_segment">Järgmine segment</string>
     <string name="navigation_profile">Navigeerimisprofiil</string>
-    <string name="route_between_points_add_track_desc">Vali teekonnafail, millele lisada uus segment.</string>
+    <string name="route_between_points_add_track_desc">Vali teekonnafail, millele lisada uus lõik.</string>
     <string name="street_level_imagery">Tänavataseme vaated</string>
     <string name="plan_route_exit_dialog_descr">Loobuda kõigist planeeritud teekonnal tehtud muudatustest\?</string>
     <string name="in_case_of_reverse_direction">Vastupidise suuna korral</string>
     <string name="reorder_or_hide_from">Muuda järjekorda või peida kirjed %1$s\'st.</string>
     <string name="hidden_items_descr">Need kirjed on menüüs peidetuna, kuid tehtud valikud või lisaprogrammid on jätkuvalt kasutatavad.</string>
-    <string name="move_inside_category">Sa võid kirjeid liigutada vaid selle kategooria piires.</string>
+    <string name="move_inside_category">Esemeid saab liigutada ainult selles kategoorias.</string>
     <string name="shared_string_items">Kirjed</string>
     <string name="reset_deafult_order">Taasta kirjete vaikimisi järjekord</string>
     <string name="expire_time_descr">Puhverdatud paanid laaaditakse uuesti alla peale nimetatud minutite möödumist. Kui sa ei soovi uuendamist, siis jäta väli tühjaks.
@@ -3637,7 +3637,7 @@
     <string name="add_segment_to_the_track">Lisa rajafaili</string>
     <string name="shared_string_gpx_files">Rajafailid</string>
     <string name="layer_gpx_layer">Rajafailid</string>
-    <string name="show_gpx">Teekonnad</string>
+    <string name="show_gpx">Rajad</string>
     <string name="save_track_to_gpx_globally">Logi teekond GPX faili</string>
     <string name="shared_string_gpx_route">Raja teekond</string>
     <string name="empty_state_my_tracks">Lisa rajafaile</string>
@@ -3695,12 +3695,12 @@
     <string name="route_between_points_warning_desc">Järgmisena klõpsa oma rada lähimale lubatud teele ühe oma navigatsiooniprofiiliga selle võimaluse kasutamiseks.</string>
     <string name="route_between_points_next_segment_button_desc">Selle valitud profiili alusel arvutatakse uus teekond vaid järgmise segmendi osas.</string>
     <string name="main_actions">Põhitegevused</string>
-    <string name="osm_live_payment_subscription_management">Ostu kinnitamisel võetakse sinu Google Play kontolt tasu.
+    <string name="osm_live_payment_subscription_management">Maksmine toimub Sinu Google Play kontolt ostu kinnitamisel.
 \n
-\nTellimus uuendatakse automaatselt, kui seda ei ole ennem uuendamise kuupäeva tühistatud. Sinu kontolt võetakse pikendamisperioodi eest (kuu/kolm kuud/aasta) tasu ainult uuendamise kuupäeval.
+\nTellimust uuendatakse, kui seda ei tühistata enne valitud uuendamisperioodi.
 \n
-\nTellimusi saad hallata ja tühistada Google Play seadistustes.</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Kiirtegevusi saad eksportida või importida koos rakenduse profiilidega.</string>
+\nTellimuse haldamine või tühistamine on võimalik igal ajal Google Play seadetest.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Ekspordi või impordi kiiretoiminguid koos rakenduse profiilidega.</string>
     <string name="delete_all_actions_message_q">Kustutada tagasivõtmatult %d kiirtegevust\?</string>
     <string name="route_between_points_desc">Vali kas soovid ühendada punkte sirge joonega või arvutada nendevahelist teekonda selle alusel kuidas järgnevalt on määratud.</string>
     <string name="release_3_8">• Uuendatud teekonnaplaneerija: võimaldab kasutada igal segmendil erinevat liikumisviisi ning radade kaasamist
@@ -3721,8 +3721,8 @@
     <string name="gpx_monitoring_stop">Peata teekonna salvestamine</string>
     <string name="gpx_monitoring_start">Jätka teekonna salvestamist</string>
     <string name="accessibility_mode_disabled">Režiim erivajadusega kasutajatele on sinu Android\'i seadmes välja lülitatud.</string>
-    <string name="create_custom_categories_list_promo">Muuda loendi järjestust ja peida kategooriad. Kõiki muudatusi saad importida või eksportida koos profiilidega.</string>
-    <string name="add_new_custom_category_button_promo">Valides ühe või mitu kategooriat võid lisada uue kohandatud kategooria.</string>
+    <string name="create_custom_categories_list_promo">Muuda nimekirja järjekorda ja peida kategooriad. Impordi või ekspordi kõik muudatused profiilidena.</string>
+    <string name="add_new_custom_category_button_promo">Lisa uus kohandatud kategooria, valides ühe või mitu kategooriat.</string>
     <string name="shared_string_routing">Navigeerimine</string>
     <string name="sort_last_modified">Viimati muudetud</string>
     <string name="sort_name_descending">Nimi: Z – A</string>
@@ -3732,11 +3732,11 @@
     <string name="routing_attr_avoid_footways_description">Väldi jalgteid</string>
     <string name="routing_attr_avoid_footways_name">Väldi jalgteid</string>
     <string name="contour_lines_thanks">Täname „Kõrgusjoonte“ ostu eest</string>
-    <string name="osm_live_payment_subscription_management_hw">Teie AppGallery konto eest võetakse tasu ostu kinnitamisel.
+    <string name="osm_live_payment_subscription_management_hw">Maksmine toimub Sinu AppGallery kontolt ostu kinnitamisel.
 \n
-\nTellimus pikeneb automaatselt, kui seda ei tühistata enne uuendamise kuupäeva. Teie kontolt võetakse pikendamisperioodi (kuu / kolm kuud / aasta) eest tasu ainult pikendamise kuupäeval.
+\nTellimust uuendatakse kui seda ei tühistata enne valitud uuendamisperioodi.
 \n
-\nTellimusi saate hallata ja tühistada oma AppGallery seadetes.</string>
+\nHalda või tühista tellimusi igal ajal oma AppGallery seadetes.</string>
     <string name="osm_live_payment_desc_hw">Tellimuse eest võetakse tasu valitud perioodi kohta. Tühistage see igal ajal oma AppGallery\'s.</string>
     <string name="osm_edit_logout_success">Väljalogitud</string>
     <string name="development">Arendus</string>
@@ -3769,16 +3769,16 @@
     <string name="subscription_payment_issue_title">Tellimuse parandamiseks puudutage nuppu Google Play makseviisi seadistamiseks.</string>
     <string name="manage_subscription">Halda tellimusi</string>
     <string name="sign_in_with_open_street_map">Logi sisse OpenStreetMapi kasutajakontoga</string>
-    <string name="user_login">Kasutajanimi</string>
-    <string name="use_login_password">Pruugi kasutajanime ja salasõna</string>
-    <string name="open_street_map_login_mode">Täienduste või muudatuste üleslaadimiseks pead sisse logima.
+    <string name="user_login">Logi sisse</string>
+    <string name="use_login_password">Kasuta kasutajanime ja salasõna</string>
+    <string name="open_street_map_login_mode">Uute või muudetud muudatuste üleslaadimiseks logi kõigepealt sisse.
 \n
-\nSa võid selleks kasutada mõnd turvalist OAuth võimalust või oma kasutajanime ning salasõna.</string>
+\nKasuta OAuth-meetodit või oma OSM kasutajanime ja salasõna.</string>
     <string name="login_account">Kasutajakonto</string>
     <string name="send_files_to_openstreetmap">Saada GPX fail OpenStreetMappi</string>
     <string name="osm_edit_close_note">Sulge OSM märkus</string>
     <string name="osm_edit_comment_note">Kommenteeri OSM märkust</string>
-    <string name="osm_login_descr">Sa võid sisse logida kasutades mõnda turvalist OAuth\'i meetodit või oma kasutajanime ja salasõna alusel.</string>
+    <string name="osm_login_descr">Logi sisse, kasutades OAuth-meetodit või oma OSM kasutajanime ja salasõna.</string>
     <string name="shared_string_add_photo">Lisa foto</string>
     <string name="register_on_openplacereviews">Registreeru
 \nOpenPlaceReviews.org saidis</string>
@@ -3986,8 +3986,8 @@
     <string name="copy_to_map_favorites">Kopeeri lemmikutesse</string>
     <string name="select_segments">Vali segmendid</string>
     <string name="select_segments_description">Failis %1$s on mitu segmendi. Navigeerimiseks pead sa valima sobiva osa.</string>
-    <string name="segments_count">Segment %1$d</string>
-    <string name="hillshade_slope_contour_lines">Reljeefi varjutus / Nõlv / Kontuurjooned</string>
+    <string name="segments_count">Lõik %1$d</string>
+    <string name="hillshade_slope_contour_lines">Reljeefi varjutus / Nõlv / Kõrgusjooned</string>
     <string name="open_place_reviews_plugin_description">Saada fotosid, ülevaateid ja viitu avalikest kohtadest nagu restranid, hotellid, muuseumid ja teeviidad kui avalikud andmed http://openplacereviews.org/data/.
 \n
 \nTäiendavalt saad lugeda aadressil http://openplacereviews.org</string>
@@ -4013,7 +4013,7 @@
     <string name="show_track_on_map">Kuva teekond kaardil</string>
     <string name="map_orientation_threshold_descr">Ära pööra kaardivaadet, kui kiirus on täpsuse lävest madalam</string>
     <string name="restart">Taaskäivita</string>
-    <string name="shared_strings_all_regions">Kõik regioonid</string>
+    <string name="shared_strings_all_regions">Kõik piirkonnad</string>
     <string name="delete_number_files_question">Kas kustutada %1$d filai\?</string>
     <string name="track_recording_stop_without_saving">Peata salvestamata</string>
     <string name="track_recording_save_and_stop">Salvesta ja peata salvestamine</string>
@@ -4038,7 +4038,7 @@
     <string name="track_has_no_speed">Teekond ei sisalda kiiruse andmeid.</string>
     <string name="select_another_colorization">Palun vali muud moodi värvimine.</string>
     <string name="routing_attr_short_way_description">Optimeeritud lühem marsruut (energiat säästev)</string>
-    <string name="snap_to_road_descr">Hetkeasukoha ikoon haakub aktiivse navigeerimismarsruudiga</string>
+    <string name="snap_to_road_descr">Hetkeasukoha ikoon haakub aktiivse navigeerimisteekonnaga</string>
     <string name="routing_attr_height_obstacles_description">Marsruudi koostamisel võiks vältida raskeid tõuse.</string>
     <string name="shared_string_turn">Pööra</string>
     <string name="purchases">Ostud</string>
@@ -4047,14 +4047,14 @@
     <string name="rendering_attr_noNatureReserveBoundaries_name">Looduse piirid</string>
     <string name="trip_recording_save_and_continue">Salvesta ja jätka</string>
     <string name="lost_data_warning">Kõik salvestamata andmed lähevad kaotsi.</string>
-    <string name="verification_code_missing_description">Koodi ooteaeg võib olla 10 minutit; samuti võid kontrollida rämpsposti kausta, Kui see ei aita, siis kasuta all asuvat nuppu.</string>
+    <string name="verification_code_missing_description">Võib võtta 10 minutit. Kasuta allolevat nuppu kui see ei ole Sinu rämpsposti kaustas.</string>
     <string name="duration_ago">%1$s tagasi</string>
     <string name="osmand_cloud_login_descr">Palun sisesta registreerumisel kasutatud e-posti aadress. Saadame sulle järgmisel sammul vaja mineva ühekordse salasõna.</string>
     <string name="verify_email_address">Kinnita e-posti aadress</string>
     <string name="verify_email_address_descr">Kinnituskood on saadetud aadressile %1$s. Palun sisesta see allolevale väljale.</string>
     <string name="cloud_email_not_registered">See e-posti aadress ei ole registreeritud OsmAnd Cloudile</string>
     <string name="cloud_email_already_registered">Selle e-posti aadressiga konto on juba registreeritud.</string>
-    <string name="resend_verification_code">Saada kood uuesti</string>
+    <string name="resend_verification_code">Saada uuesti</string>
     <string name="verification_code_missing">Ma ei saanud kinnituskoodi</string>
     <string name="backup_complete">Varukoopia on tehtud</string>
     <string name="backup_now">Varunda nüüd</string>
@@ -4079,7 +4079,7 @@
     <string name="delete_all_confirmation">Jah, kustuta kõik</string>
     <string name="backup_data">Andmete varundamine</string>
     <string name="select_backup_data_descr">Vali varundatavad andmed ja kaustad.</string>
-    <string name="select_nav_profile_dialog_message">„Navigatsioonitüüp“ määrab teekonna koostamise viisi ning valikus on võrguühenduseta ja võrgupõhised marsruutimismootorid.</string>
+    <string name="select_nav_profile_dialog_message">\"Navigatsiooni liik\" valib teekondade arvutamise viisi, seejuures on saadaval nii võguühenduseta kui -ühendusega arvutusmootorid.</string>
     <string name="backup_delete_types_descr">Kas kustutame kõik andmed vananenud andmetüüpide kohta OsmAnd pilvest\?</string>
     <string name="backup_delete_types">Kustuta keelatud andmetüübid</string>
     <string name="shared_string_discussion">Arutelu</string>
@@ -4087,7 +4087,7 @@
     <string name="trip_recording_show_start_dialog_setting">Kui see on välja lülitatud, algab salvestamine kohe pärast vidina või menüüelemendi puudutamist, jättes vahele kinnitusdialoogi.</string>
     <string name="customize_route_line">Kohanda marsruudi joont</string>
     <string name="show_start_dialog">Kuva algdialoog</string>
-    <string name="purchases_feature_desc_terrain">Maastiku kontuurjooned, tumedate toonidega täielik mäe- ja nõlvakaart, millel on värvid tippude ja madalike eristamiseks.</string>
+    <string name="purchases_feature_desc_terrain">Maastiku kõrgusjooned, tumedate toonidega täielik mäe- ja nõlvakaart, millel on värvid tippude ja madalike eristamiseks.</string>
     <string name="purchases_feature_desc_wikivoyage">Sirvi Wikivoyage saiti ilma võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>
     <string name="purchases_feature_desc_wikipedia">Sirvi Vikipeediat võrguühenduseta. Artiklid on jaotatud riikide ja piirkondade kaupa ning saadaval kõigis keeltes.</string>
     <string name="purchases_feature_desc_combined_wiki">Tutvu Vikipeedia artiklitega liikvel olles, ilma internetiühenduseta. Võrguühenduseta andmed on jaotatud riikide kaupa ja saadaval kõigis keeltes.</string>
@@ -4115,7 +4115,7 @@
     <string name="purchases_feature_desc_nautical">Juurdepääs meresügavuse teabele</string>
     <string name="unlimited_map_downloads">Piiramatu kaartide allalaadimine</string>
     <string name="wikipedia_and_wikivoyage_offline">Vikipeedia ja Wikivoyage ei ole võrgus</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Maastikukaardid: kontuurjooned, mäenõlvad, kallakud</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Maastikukaardid: kõrgusjooned, mäenõlvad, kallakud</string>
     <string name="offline_wikipeadia">Võrguühenduseta Vikipeedia</string>
     <string name="offline_wikivoyage">Võrguühenduseta Wikivoyage</string>
     <string name="terrain_maps">Maastikukaardid</string>
@@ -4165,7 +4165,7 @@
     <string name="in_grace_period">Ajapikendusperioodil</string>
     <string name="on_hold">Ootel</string>
     <string name="expired">Aegunud</string>
-    <string name="release_4_0_beta">• Lisatud võimalus kontuurjoonte allalaadimiseks jalgades
+    <string name="release_4_0_beta">• Lisatud võimalus kõrgusjoonte allalaadimiseks jalgades
 \n
 \n • Plaani marsruudi maastik: lisatud vahekaardid punktide või graafikute vahel vahetamiseks
 \n
@@ -4179,10 +4179,10 @@
 \n
 \n</string>
     <string name="update_all_maps_added">Uuendada kõik %1$s lisatud kaardid\?</string>
-    <string name="shared_string_feet">jalga</string>
-    <string name="srtm_unit_format">Kontuurjoonte ühiku variant</string>
-    <string name="srtm_download_list_help_message">OsmAnd pakub kontuurjoonte andmeid meetrites ja jalgades. Vormingute muutmiseks pead faili uuesti alla laadima.</string>
-    <string name="srtm_download_single_help_message">Palun vali variant. Vormingu muutmiseks pead faili uuesti alla laadima.</string>
+    <string name="shared_string_feet">jalad</string>
+    <string name="srtm_unit_format">Kõrgusjoonte ühiku variant</string>
+    <string name="srtm_download_list_help_message">OsmAnd pakub kõrgusjoonte andmeid meetrites ja jalgades. Formaadi muutmiseks tuleb fail uuesti alla laadida.</string>
+    <string name="srtm_download_single_help_message">Palun vali variant. Vormingu muutmiseks tuleb fail uuesti alla laadida.</string>
     <string name="exit_number">Väljumise number</string>
     <string name="announce_when_exceeded">Teata ületamisel</string>
     <string name="user_points">Kasutaja punktid</string>
@@ -4230,7 +4230,7 @@
 \n
 \n • Lisatud öine režiim \"Topo\" renderdamisstiili jaoks
 \n
-\n • Lisatud võimalus kontuurjoonte allalaadimiseks jalgades
+\n • Lisatud võimalus kõrgusjoonte allalaadimiseks jalgades
 \n
 \n • Jälgi saab nüüd värvida kõrguse, kiiruse või kallakuga.
 \n
@@ -4256,7 +4256,7 @@
     <string name="benefits_for_contributors">Aktiivse OSM kaastöötaja eelised</string>
     <string name="benefits_for_contributors_primary_descr">Aktiivse kaastöötajana võid omada õigust igatunnistele kaardivärskendustele.</string>
     <string name="benefits_for_contributors_secondary_descr">Logi OpenStreetMapi sisse, et kontrollida, kas sul on piiramatu õigus igakuistele ja igatunnistele kaardivärskendustele.</string>
-    <string name="use_login_and_password">Kasuta kasutajanime ja parooli</string>
+    <string name="use_login_and_password">Kasuta kasutajanime ja salasõna</string>
     <string name="available_until">Saadaval kuni %1$s</string>
     <string name="enough_contributions_descr">Õnnitleme! Olete teinud OpenStreetMapile piisavalt kaastööd ja saate nüüd nautida piiramatult OsmAnd kaardivärskendusi!</string>
     <string name="not_enough_contributions_descr">Nõutav on vähemalt %1$s OpenStreetMapi kaastööd %2$s päeva jooksul.</string>
@@ -4266,4 +4266,66 @@
     <string name="connect_track_points_as">Marsruudi punktide ühendamine</string>
     <string name="pro_features">Pro funktsioonid</string>
     <string name="purchases_restored">Ostud taastatud</string>
+    <string name="backup_error_subscription_was_expired_descr">Sinu OsmAnd Pro tellimus on aegunud, uuenda seda varukoopiate kasutamiseks. Andmeid saad endiselt pilvest taastada.</string>
+    <string name="logout_from_osmand_cloud">Logi OsmAnd Cloud pilvest välja</string>
+    <string name="logout_from_osmand_cloud_decsr">Logida välja\?
+\nAndmete varundamiseks või taastamiseks pead uuesti sisse logima.</string>
+    <string name="backup_deleting_all_data">Kõikide andmete kustutamine…</string>
+    <string name="backup_deleted_all_data">Kõik andmed kustutatud.</string>
+    <string name="backup_deleting_all_data_descr">Palun oota, kuni OsmAnd kustutab Sinu andmed pilvest. Kõik seadmes olevad andmed jäävad puutumata.</string>
+    <string name="backup_deleted_all_data_descr">Kõik Sinu andmed on OsmAnd Cloud pilvest edukalt kustutatud.</string>
+    <string name="backup_version_history_removed">Kogu versiooniajalugu on eemaldatud.</string>
+    <string name="backup_data_removed">Kõik andmed on eemaldatud.</string>
+    <string name="shared_string_progress">Edenemine</string>
+    <string name="backup_do_not_have_any">Sul ei ole veel veebipõhist varundust.</string>
+    <string name="backup_dont_have_any_descr">Seadista automaatsed regulaarsed varukoopiad ja ära kaota kunagi andmeid.</string>
+    <string name="backup_welcome_back">Tere tulemast tagasi!</string>
+    <string name="backup_welcome_back_descr">Taasta selle seadme andmed, kasutades olemasolevaid varukoopiaid või varunda andmed OsmAnd Cloud pilve.</string>
+    <string name="backup_setup">Seadista varukoopia</string>
+    <string name="backup_restore_now">Taasta kohe</string>
+    <string name="attribute">Omadus</string>
+    <string name="shared_string_purchased">Ostetud</string>
+    <string name="explore_wikipedia_offline">Tutvu Vikipeediaga võrguühenduseta.</string>
+    <string name="on_hold_since">Ootel alates %1$s</string>
+    <string name="active_till">Aktiivne kuni %1$s</string>
+    <string name="promo_subscription">Kampaaniatellimus</string>
+    <string name="track_has_no_needed_data">Rada ei sisalda vajalikke andmeid.</string>
+    <string name="option_available_only_in_osmand_pro">Valik on saadaval OsmAnd Pro tellimuse osana.</string>
+    <string name="purchases_feature_desc_pro_widgets">Saa juurdepääs OsmAnd Pro funktsioonidele: teekonna värvimine ja palju muud.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Tutvu OsmAnd plaanidega, et leida endale sobiv.</string>
+    <string name="shared_string_relation">Seos</string>
+    <string name="setting_supported_by_style">Selle sätte pakub kaardistiil \'%1$s\'</string>
+    <string name="direct_line_maps_required_descr">Teekonna arvutamine võtab tavalisest kauem aega.
+\n
+\nVõib-olla ei ole mõned kaardid laetud.</string>
+    <string name="online_direct_line_maps_link">Kontrolli vajalikke kaarte.</string>
+    <string name="offline_maps_required_descr">Mõned selle marsruudi jaoks vajalikud võrguühenduseta kaardid on puudu.</string>
+    <string name="online_maps_required_descr">Kahjuks ei suutnud OsmAnd teie seadete põhjal teekonda arvutada.
+\n
+\nVõib-olla ei ole mõned kaardid laetud - saad vajalike kaartide jaoks teha veebipõhise kontrolli.</string>
+    <string name="grey_color_undefined">Andmeteta osade puhul kasutatakse halli värvi.</string>
+    <string name="osm_live_payment_subscription_management_amz">Ostu kinnitamisel võetakse makse Sinu Amazoni kontolt.
+\n
+\nTellimust uuendatakse, kui seda ei tühistata enne valitud uuendamisperioodi.
+\n
+\nTellimuse haldamine või tühistamine on võimalik igal ajal Amazon\'i seadetest.</string>
+    <string name="cancel_anytime_in_amazon_app">Tühista see igal ajal Amazoni rakenduses</string>
+    <string name="amz_manage_subscription_descr">Tellimuse haldamiseks kasuta seadmes olevat Amazoni rakendust või ava Amazon.com veebileht oma profiili alt.</string>
+    <string name="empty_category_name">Tühi kategooria nimi</string>
+    <string name="no_activity_for_intent">Selle toimingu teostamiseks ei leitud ühtegi sobivat rakendust</string>
+    <string name="no_items_of_type_message">Sul ei ole ühtegi sellist tüüpi eset</string>
+    <string name="routeInfo_tracktype_description">Teekonna või raja joone värvimine vastavalt teede seisukorrale, mis põhineb nende pinna koostisel. Kasutatakse tavaliselt teede puhul, kus peamine teedevõrk koosneb katmata teedest.</string>
+    <string name="routeInfo_winter_ice_road_description">Värvi teekond või rada vastavalt ainult talvel kasutatavale talvise tee klassifikatsioonile.</string>
+    <string name="routeInfo_smoothness_description">Pakub klassifikatsioonisüsteemi, mis käsitleb tee füüsilist kasutatavust ratassõidukitele, eelkõige pinna korrapärasust ja tasasust.</string>
+    <string name="routeInfo_surface_description">Anna lisateavet teede ja radade füüsilise pinna kohta.</string>
+    <string name="routeInfo_roadClass_description">Teekonna või raja värvimine vastavalt teede klassifikatsioonile.</string>
+    <string name="add_group_to_markers">Lisa grupp markerite nimekirja</string>
+    <string name="remove_group_from_markers">Eemalda grupp markerite nimekirjast</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Värvi teekondi vastavalt nende sõlmede võrgu tüübile (rahvusvaheline, piirkondlik, kohalik).</string>
+    <string name="routes_color_by_type">Teekondade värvimine…</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Värvi marsruudid vastavalt nende individuaalsele kohalikule värvile (kui see on OpenStreetMapis olemas) ja matkakilbi sümbolile.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Värv võrgukuuluvuse järgi.</string>
+    <string name="walking_route_osmc_description">Värvi marsruudid vastavalt nende individuaalsele kohalikule värvile (kui see on OpenStreetMapis olemas) ja tüübile (rahvusvaheline, piirkondlik, kohalik).</string>
+    <string name="travel_routes">Reisimarsruudid</string>
+    <string name="contour_lines_hillshades_slope">Kõrgusjooned, mäenõlvad, kalle</string>
 </resources>

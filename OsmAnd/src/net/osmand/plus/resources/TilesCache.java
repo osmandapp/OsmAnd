@@ -18,7 +18,7 @@ import java.util.Set;
 
 public abstract class TilesCache<T> {
 
-	private AsyncLoadingThread asyncLoadingThread;
+	private final AsyncLoadingThread asyncLoadingThread;
 	protected static final Log log = PlatformUtil.getLog(TilesCache.class);
 
 	Map<String, CacheEntry<T>> cache = new LinkedHashMap<>();

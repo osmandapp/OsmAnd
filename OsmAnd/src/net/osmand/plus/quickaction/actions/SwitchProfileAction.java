@@ -131,6 +131,11 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
+	public String getDisabledItem(OsmandApplication app) {
+		return null;
+	}
+
+	@Override
 	public String getSelectedItem(OsmandApplication app) {
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		return appMode.getStringKey();

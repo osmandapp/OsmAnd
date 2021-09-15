@@ -22,7 +22,7 @@ import net.osmand.util.MapUtils;
 // Immutable object !
 public class SearchPhrase {
 	public static final String DELIMITER = " ";
-	private static final String ALLDELIMITERS = "\\s|,";
+	private static final String ALLDELIMITERS = "\\s|,|-";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
 	private static Set<String> conjunctions = new TreeSet<>();
@@ -565,7 +565,7 @@ public class SearchPhrase {
 		}
 		return firstUnknownNameStringMatcher;
 	}
-	
+
 	public NameStringMatcher getUnknownNameStringMatcher(int i) {
 		while (unknownWordsMatcher.size() <= i) {
 			int ind = unknownWordsMatcher.size();
@@ -574,18 +574,21 @@ public class SearchPhrase {
 		}
 		return unknownWordsMatcher.get(i);
 	}
-	
-	
+
+	public NameStringMatcher getFullNameStringMatcher() {
+		return getNameStringMatcher(fullTextSearchPhrase, false);
+	}
+
 	private NameStringMatcher getNameStringMatcher(String word, boolean complete) {
-		return new NameStringMatcher(word, 
-				(complete ?  
-					StringMatcherMode.CHECK_EQUALS_FROM_SPACE : 
+		return new NameStringMatcher(word,
+				(complete ?
+					StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
 					StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 	}
-	
+
 	public boolean hasObjectType(ObjectType p) {
-		for(SearchWord s : words) {
-			if(s.getType() == p) {
+		for (SearchWord s : words) {
+			if (s.getType() == p) {
 				return true;
 			}
 		}

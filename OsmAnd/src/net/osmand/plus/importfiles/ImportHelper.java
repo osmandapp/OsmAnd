@@ -76,6 +76,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Koen Rabaey
@@ -690,11 +691,13 @@ public class ImportHelper {
 				if (p.desc != null) {
 					point.setDescription(p.desc);
 				}
-				point.setAddress(p.getExtensionsToRead().get("address"));
+				Map<String, String> extensions = p.getExtensionsToRead();
+				point.setAddress(extensions.get("address"));
 				point.setColor(p.getColor(0));
+				point.setVisible(!Boolean.parseBoolean(extensions.get("hidden")));
 				String iconName = p.getIconName();
 				if (iconName != null) {
-					point.setIconIdFromName(app, iconName);
+					point.setIconIdFromName(iconName);
 				}
 				point.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
 				favourites.add(point);
