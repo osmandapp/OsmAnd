@@ -230,7 +230,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		if (activity instanceof MapActivity) {
 			MapActivity mapActivity = (MapActivity) activity;
 			mapActivity.refreshMapComplete();
-			mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+			mapActivity.getMapLayers().updateLayers(mapActivity);
 		}
 		super.onDismiss(dialog);
 	}

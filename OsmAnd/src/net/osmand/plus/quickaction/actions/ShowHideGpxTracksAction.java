@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,8 +32,8 @@ public class ShowHideGpxTracksAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(final MapActivity activity) {
-		final GpxSelectionHelper selectedGpxHelper = activity.getMyApplication()
+	public void execute(@NonNull final MapActivity mapActivity) {
+		final GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication()
 			.getSelectedGpxHelper();
 		if (selectedGpxHelper.isShowingAnyGpxFiles()) {
 			selectedGpxHelper.clearAllGpxFilesToShow(true);
@@ -41,7 +43,7 @@ public class ShowHideGpxTracksAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 
 		View view = LayoutInflater.from(parent.getContext())
 			.inflate(R.layout.quick_action_with_text, parent, false);

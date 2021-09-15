@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
@@ -23,7 +24,6 @@ import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -38,7 +38,6 @@ import net.osmand.plus.views.layers.geometry.GeometryWay;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -49,7 +48,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private static final int startZoom = 12;
 	private static final int startZoomRoute = 10;
 
-	private final MapActivity mapActivity;
 	private OsmandMapTileView view;
 
 	private RenderingLineAttributes attrs;
@@ -57,19 +55,18 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	private MapLayerData<List<TransportStop>> data;
 	private TransportStopRoute stopRoute = null;
 
-	private CommonPreference<Boolean> showTransportStops;
+	private final CommonPreference<Boolean> showTransportStops;
 
 	private Path path;
 
-	public TransportStopsLayer(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
-		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+	public TransportStopsLayer(@NonNull Context context) {
+		super(context);
+		OsmandSettings settings = getApplication().getSettings();
 		showTransportStops = settings.getCustomRenderBooleanProperty(TRANSPORT_STOPS_OVER_MAP).cache();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public void initLayer(final OsmandMapTileView view) {
+	public void initLayer(@NonNull final OsmandMapTileView view) {
 		this.view = view;
 		DisplayMetrics dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -112,12 +109,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 									return isInterrupted();
 								}
 							});
-					Collections.sort(res, new Comparator<TransportStop>() {
-						@Override
-						public int compare(TransportStop lhs, TransportStop rhs) {
-							return lhs.getId() < rhs.getId() ? -1 : (lhs.getId().longValue() == rhs.getId().longValue() ? 0 : 1);
-						}
-					});
+					Collections.sort(res, (lhs, rhs) -> lhs.getId() < rhs.getId()
+							? -1 : (lhs.getId().longValue() == rhs.getId().longValue() ? 0 : 1));
 					return res;
 				} catch (IOException e) {
 					return new ArrayList<>();
@@ -130,7 +123,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 							  List<TransportStop> objects) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		final int rp = getScaledTouchRadius(mapActivity.getMyApplication(), getRadiusPoi(tb));
+		final int rp = getScaledTouchRadius(getApplication(), getRadiusPoi(tb));
 		int radius = rp * 3 / 2;
 		try {
 			TreeSet<String> ms = new TreeSet<>();
@@ -184,7 +177,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		List<TransportStop> objects = null;
 		boolean nightMode = settings.isNightMode();
-		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandApplication app = getApplication();
 		if (tb.getZoom() >= startZoomRoute) {
 			if (stopRoute != null) {
 				objects = stopRoute.route.getForwardStops();
@@ -221,6 +214,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 		}
 
 		if (objects != null) {
+			Context ctx = getContext();
 			float textScale = app.getSettings().TEXT_SCALE.get();
 			float iconSize = getIconSize(app);
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
@@ -230,8 +224,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 				float y = tb.getPixYFromLatLon(o.getLocation().getLatitude(), o.getLocation().getLongitude());
 
 				if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(mapActivity,
-							ContextCompat.getColor(mapActivity, R.color.transport_stop_icon_background),
+					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+							ContextCompat.getColor(ctx, R.color.transport_stop_icon_background),
 							true, false, 0, BackgroundType.SQUARE);
 					pointImageDrawable.setAlpha(0.9f);
 					pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
@@ -256,8 +250,8 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	}
 
 	private void drawPoint(Canvas canvas, float textScale, float x, float y, @DrawableRes int iconId) {
-		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(mapActivity,
-				ContextCompat.getColor(mapActivity, R.color.transport_stop_icon_background),
+		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(getContext(),
+				ContextCompat.getColor(getContext(), R.color.transport_stop_icon_background),
 				true,false ,iconId, BackgroundType.SQUARE);
 		pointImageDrawable.setAlpha(0.9f);
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
@@ -284,7 +278,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if(o instanceof TransportStop){
-			return new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, mapActivity.getString(R.string.transport_Stop),
+			return new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP, getContext().getString(R.string.transport_Stop),
 					((TransportStop)o).getName());
 		}
 		return null;

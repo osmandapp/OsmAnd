@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,13 +32,13 @@ public class ShowHideTransportLinesAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(final MapActivity activity) {
-		boolean enabled = TransportLinesMenu.isShowLines(activity.getMyApplication());
-		TransportLinesMenu.toggleTransportLines(activity, !enabled, null);
+	public void execute(@NonNull final MapActivity mapActivity) {
+		boolean enabled = TransportLinesMenu.isShowLines(mapActivity.getMyApplication());
+		TransportLinesMenu.toggleTransportLines(mapActivity, !enabled, null);
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);

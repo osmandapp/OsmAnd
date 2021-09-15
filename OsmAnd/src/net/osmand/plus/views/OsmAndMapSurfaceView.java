@@ -8,6 +8,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
+import androidx.annotation.Nullable;
+
 public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 	
 	private OsmandMapTileView mapView;
@@ -56,9 +58,14 @@ public class OsmAndMapSurfaceView extends SurfaceView implements Callback {
 	
 	
 
-	public void setMapView(OsmandMapTileView mapView) {
+	public void setMapView(@Nullable OsmandMapTileView mapView) {
+		if (this.mapView != null && mapView == null) {
+			this.mapView.setView(null);
+		}
 		this.mapView = mapView;
-		mapView.setView(this);
+		if (mapView != null) {
+			mapView.setView(this);
+		}
 	}
 
 	@Override

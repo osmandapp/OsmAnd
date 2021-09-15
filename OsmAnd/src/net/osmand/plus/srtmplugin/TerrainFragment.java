@@ -21,7 +21,6 @@ import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -30,8 +29,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.google.android.material.slider.RangeSlider;
@@ -180,7 +179,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		downloadContainer = root.findViewById(R.id.download_container);
 		downloadTopDivider = root.findViewById(R.id.download_container_top_divider);
 		downloadBottomDivider = root.findViewById(R.id.download_container_bottom_divider);
-		observableListView = (ObservableListView) root.findViewById(R.id.list_view);
+		observableListView = root.findViewById(R.id.list_view);
 		bottomEmptySpace = root.findViewById(R.id.bottom_empty_space);
 
 		titleTv.setText(R.string.shared_string_terrain);
@@ -353,7 +352,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 	private void updateLayers() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			srtmPlugin.updateLayers(mapActivity.getMapView(), mapActivity);
+			srtmPlugin.updateLayers(mapActivity, mapActivity);
 		}
 	}
 
@@ -402,53 +401,45 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 										? HILLSHADE_FILE.getString(app) + " • " + indexItem.getSizeDescription(app)
 										: SLOPE_FILE.getString(app) + " • " + indexItem.getSizeDescription(app))
 								.setIcon(mode == HILLSHADE ? HILLSHADE_FILE.getIconResource() : SLOPE_FILE.getIconResource())
-								.setListener(new ContextMenuAdapter.ItemClickListener() {
-									@Override
-									public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-										MapActivity mapActivity = mapActivityRef.get();
-										if (mapActivity != null && !mapActivity.isFinishing()) {
-											ContextMenuItem item = adapter.getItem(position);
-											if (downloadThread.isDownloading(indexItem)) {
-												downloadThread.cancelDownload(indexItem);
-												if (item != null) {
-													item.setProgress(ContextMenuItem.INVALID_ID);
-													item.setLoading(false);
-													item.setSecondaryIcon(R.drawable.ic_action_import);
-													adapter.notifyDataSetChanged();
-												}
-											} else {
-												new DownloadValidationManager(app).startDownload(mapActivity, indexItem);
-												if (item != null) {
-													item.setProgress(ContextMenuItem.INVALID_ID);
-													item.setLoading(true);
-													item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-													adapter.notifyDataSetChanged();
-												}
+								.setListener((adptr, itemId, position, isChecked, viewCoordinates) -> {
+									MapActivity mapActivity1 = mapActivityRef.get();
+									if (mapActivity1 != null && !mapActivity1.isFinishing()) {
+										ContextMenuItem item = adptr.getItem(position);
+										if (downloadThread.isDownloading(indexItem)) {
+											downloadThread.cancelDownload(indexItem);
+											if (item != null) {
+												item.setProgress(ContextMenuItem.INVALID_ID);
+												item.setLoading(false);
+												item.setSecondaryIcon(R.drawable.ic_action_import);
+												adptr.notifyDataSetChanged();
+											}
+										} else {
+											new DownloadValidationManager(app).startDownload(mapActivity1, indexItem);
+											if (item != null) {
+												item.setProgress(ContextMenuItem.INVALID_ID);
+												item.setLoading(true);
+												item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
+												adptr.notifyDataSetChanged();
 											}
 										}
-										return false;
 									}
+									return false;
 								})
-								.setProgressListener(new ContextMenuAdapter.ProgressListener() {
-									@Override
-									public boolean onProgressChanged(Object progressObject, int progress,
-																	 ArrayAdapter<ContextMenuItem> adapter,
-																	 int itemId, int position) {
-										if (progressObject instanceof IndexItem) {
-											IndexItem progressItem = (IndexItem) progressObject;
-											if (indexItem.compareTo(progressItem) == 0) {
-												ContextMenuItem item = adapter.getItem(position);
-												if (item != null) {
-													item.setProgress(progress);
-													item.setLoading(true);
-													item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-													adapter.notifyDataSetChanged();
-												}
-												return true;
+								.setProgressListener((progressObject, progress, adptr, itemId, position) -> {
+									if (progressObject instanceof IndexItem) {
+										IndexItem progressItem = (IndexItem) progressObject;
+										if (indexItem.compareTo(progressItem) == 0) {
+											ContextMenuItem item = adptr.getItem(position);
+											if (item != null) {
+												item.setProgress(progress);
+												item.setLoading(true);
+												item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
+												adptr.notifyDataSetChanged();
 											}
+											return true;
 										}
-										return false;
 									}
+									return false;
 								});
 
 						if (indexItem == currentDownloadingItem) {
@@ -471,14 +462,11 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		}
 		listAdapter = adapter.createListAdapter(mapActivity, !nightMode);
 		observableListView.setAdapter(listAdapter);
-		observableListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				ContextMenuItem item = adapter.getItem(position);
-				ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
-				if (click != null) {
-					click.onContextMenuClick(listAdapter, item.getTitleId(), position, false, null);
-				}
+		observableListView.setOnItemClickListener((parent, view, position, id) -> {
+			ContextMenuItem item = adapter.getItem(position);
+			ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
+			if (click != null) {
+				click.onContextMenuClick(listAdapter, item.getTitleId(), position, false, null);
 			}
 		});
 	}
@@ -494,7 +482,7 @@ public class TerrainFragment extends BaseOsmAndFragment implements View.OnClickL
 		IndexItem downloadIndexItem = downloadThread.getCurrentDownloadingItem();
 		if (downloadIndexItem != null && listAdapter != null) {
 			int downloadProgress = downloadThread.getCurrentDownloadingItemProgress();
-			ArrayAdapter<ContextMenuItem> adapter = (ArrayAdapter<ContextMenuItem>) listAdapter;
+			ArrayAdapter<ContextMenuItem> adapter = listAdapter;
 			for (int i = 0; i < adapter.getCount(); i++) {
 				ContextMenuItem item = adapter.getItem(i);
 				if (item != null && item.getProgressListener() != null) {

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.plus.OsmandApplication;
@@ -34,21 +35,21 @@ public class NavStartStopAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
-		RoutingHelper helper = activity.getRoutingHelper();
+	public void execute(@NonNull MapActivity mapActivity) {
+		RoutingHelper helper = mapActivity.getRoutingHelper();
 		if (helper.isPauseNavigation() || helper.isFollowingMode()) {
 			if (Boolean.valueOf(getParams().get(KEY_DIALOG))) {
-				DestinationReachedMenu.show(activity);
+				DestinationReachedMenu.show(mapActivity);
 			} else {
-				activity.getMapLayers().getMapControlsLayer().stopNavigation();
+				mapActivity.getMapLayers().getMapControlsLayer().stopNavigation();
 			}
 		} else {
-			activity.getMapLayers().getMapControlsLayer().doRoute(false);
+			mapActivity.getMapLayers().getMapControlsLayer().doRoute(false);
 		}
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_start_stop_navigation, parent, false);
 
@@ -69,7 +70,7 @@ public class NavStartStopAction extends QuickAction {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		getParams().put(KEY_DIALOG, Boolean
 				.toString(((SwitchCompat) root.findViewById(R.id.show_dialog_switch)).isChecked()));
 		return true;

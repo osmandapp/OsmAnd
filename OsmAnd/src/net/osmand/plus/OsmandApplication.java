@@ -53,6 +53,8 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.auto.NavigationCarAppService;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -88,6 +90,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.router.GeneralRouter;
@@ -125,6 +128,9 @@ public class OsmandApplication extends MultiDexApplication {
 	DownloadService downloadService;
 	OsmandAidlApi aidlApi;
 
+	NavigationCarAppService navigationCarAppService;
+	NavigationSession carNavigationSession;
+
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
 	private final UiUtilities iconsCache = new UiUtilities(this);
@@ -160,6 +166,7 @@ public class OsmandApplication extends MultiDexApplication {
 	TravelHelper travelHelper;
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
+	OsmandMap osmandMap;
 	LockHelper lockHelper;
 	FileSettingsHelper fileSettingsHelper;
 	NetworkSettingsHelper networkSettingsHelper;
@@ -222,6 +229,9 @@ public class OsmandApplication extends MultiDexApplication {
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
+		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
+		osmandMap.getMapLayers().updateLayers(null);
+
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -530,6 +540,46 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setNavigationService(NavigationService navigationService) {
 		this.navigationService = navigationService;
+	}
+
+	public interface NavigationSessionListener {
+		void onNavigationSessionChanged(@Nullable NavigationSession navigationSession);
+	}
+
+	private NavigationSessionListener navigationSessionListener;
+
+	public void setNavigationSessionListener(@Nullable NavigationSessionListener navigationSessionListener) {
+		this.navigationSessionListener = navigationSessionListener;
+	}
+
+	@Nullable
+	public NavigationCarAppService getNavigationCarAppService() {
+		return navigationCarAppService;
+	}
+
+	public void setNavigationCarAppService(@Nullable NavigationCarAppService navigationCarAppService) {
+		this.navigationCarAppService = navigationCarAppService;
+	}
+
+	@Nullable
+	public NavigationSession getCarNavigationSession() {
+		return carNavigationSession;
+	}
+
+	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
+		NavigationService navigationService = this.navigationService;
+		if (carNavigationSession == null) {
+			if (navigationService != null) {
+				navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
+			}
+		} else {
+			startNavigationService(NavigationService.USED_BY_CAR_APP);
+		}
+		this.carNavigationSession = carNavigationSession;
+		NavigationSessionListener navigationSessionListener = this.navigationSessionListener;
+		if (navigationSessionListener != null) {
+			navigationSessionListener.onNavigationSessionChanged(carNavigationSession);
+		}
 	}
 
 	public DownloadService getDownloadService() {
@@ -872,7 +922,7 @@ public class OsmandApplication extends MultiDexApplication {
 			
 		}
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			startForegroundService(serviceIntent);
 		} else {
 			startService(serviceIntent);
@@ -984,6 +1034,10 @@ public class OsmandApplication extends MultiDexApplication {
 	
 	public MapViewTrackingUtilities getMapViewTrackingUtilities() {
 		return mapViewTrackingUtilities;
+	}
+
+	public OsmandMap getOsmandMap() {
+		return osmandMap;
 	}
 
 	public void sendCrashLog() {

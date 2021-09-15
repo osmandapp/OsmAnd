@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.util.Pair;
@@ -50,8 +51,12 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private OsmandSettings settings;
 	private ContextMenuLayer contextMenuLayer;
 
+	public FavouritesLayer(@NonNull Context ctx) {
+		super(ctx);
+	}
+
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		settings = view.getApplication().getSettings();
 		favouritesDbHelper = view.getApplication().getFavorites();

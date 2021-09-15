@@ -82,6 +82,7 @@ import net.osmand.plus.settings.backend.MainContextMenuItemsSettings;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
@@ -749,7 +750,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						TransportStopsLayer stopsLayer = mapActivity.getMapLayers().getTransportStopsLayer();
 						stopsLayer.setRoute(route);
 						int cz = route.calculateZoom(0, mapActivity.getMapView().getCurrentRotatedTileBox());
-						mapActivity.changeZoom(cz - mapActivity.getMapView().getZoom());
+						app.getOsmandMap().changeZoom(cz - mapActivity.getMapView().getZoom());
 					} else if (object instanceof String) {
 						if (object.equals(TRANSPORT_BADGE_MORE_ITEM)) {
 							if (menu.isLandscapeLayout()) {
@@ -990,18 +991,19 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	public void doZoomIn() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
+			OsmandMap osmandMap = mapActivity.getMyApplication().getOsmandMap();
 			RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
 			boolean containsLatLon = tb.containsLatLon(menu.getLatLon());
 			if (!containsLatLon) {
 				restoreCustomMapRatio();
 			}
 			if (map.isZooming() && (map.hasCustomMapRatio() || !containsLatLon)) {
-				mapActivity.changeZoom(2, System.currentTimeMillis());
+				osmandMap.changeZoom(2, System.currentTimeMillis());
 			} else {
 				if (containsLatLon) {
 					setCustomMapRatio();
 				}
-				mapActivity.changeZoom(1, System.currentTimeMillis());
+				osmandMap.changeZoom(1, System.currentTimeMillis());
 			}
 		}
 	}
@@ -1016,7 +1018,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 			} else {
 				restoreCustomMapRatio();
 			}
-			mapActivity.changeZoom(-1, System.currentTimeMillis());
+			mapActivity.getMyApplication().getOsmandMap().changeZoom(-1, System.currentTimeMillis());
 		}
 	}
 

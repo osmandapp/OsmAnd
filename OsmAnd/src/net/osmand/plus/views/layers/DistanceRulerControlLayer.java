@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -13,13 +14,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.MotionEvent;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.geometry.GeometryWay;
@@ -35,7 +37,6 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 	private static final long DELAY_BEFORE_DRAW = 500;
 	private static final int DISTANCE_TEXT_SIZE = 16;
 
-	private final MapActivity mapActivity;
 	private OsmandApplication app;
 	private OsmandMapTileView view;
 
@@ -65,16 +66,16 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 	private Handler handler;
 
-	public DistanceRulerControlLayer(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
+	public DistanceRulerControlLayer(@NonNull Context ctx) {
+		super(ctx);
 	}
 
 	@Override
-	public void initLayer(final OsmandMapTileView view) {
-		app = mapActivity.getMyApplication();
+	public void initLayer(@NonNull final OsmandMapTileView view) {
+		app = getApplication();
 		this.view = view;
 		touchPoint = new PointF();
-		acceptableTouchRadius = mapActivity.getResources().getDimensionPixelSize(R.dimen.acceptable_touch_radius);
+		acceptableTouchRadius = app.getResources().getDimensionPixelSize(R.dimen.acceptable_touch_radius);
 
 		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
 		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
@@ -86,7 +87,7 @@ public class DistanceRulerControlLayer extends OsmandMapLayer {
 
 		lineAttrs = new RenderingLineAttributes("rulerLine");
 
-		float lineTextSize = DISTANCE_TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
+		float lineTextSize = DISTANCE_TEXT_SIZE * app.getResources().getDisplayMetrics().density;
 
 		lineFontAttrs = new RenderingLineAttributes("rulerLineFont");
 		lineFontAttrs.paint.setTextSize(lineTextSize);

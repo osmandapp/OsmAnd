@@ -30,7 +30,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityLayers;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -109,7 +109,7 @@ public class SnapTrackWarningFragment extends BaseOsmAndFragment {
 		View myLocButtonView = view.findViewById(R.id.map_my_location_button);
 		View mapRulerView = view.findViewById(R.id.map_ruler_layout);
 
-		MapActivityLayers mapLayers = mapActivity.getMapLayers();
+		MapLayers mapLayers = mapActivity.getMapLayers();
 
 		OsmandMapTileView mapTileView = mapActivity.getMapView();
 		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);

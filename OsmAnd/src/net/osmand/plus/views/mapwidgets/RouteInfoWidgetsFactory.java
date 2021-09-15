@@ -43,7 +43,7 @@ public class RouteInfoWidgetsFactory {
 		final OsmandSettings settings = app.getSettings();
 		final RoutingHelper routingHelper = app.getRoutingHelper();
 		final NextTurnWidget nextTurnInfo = new NextTurnWidget(activity, app, horisontalMini) {
-			NextDirectionInfo calc1 = new NextDirectionInfo();
+			final NextDirectionInfo calc1 = new NextDirectionInfo();
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
@@ -108,7 +108,7 @@ public class RouteInfoWidgetsFactory {
 	                                                final OsmandApplication app, boolean horisontalMini) {
 		final RoutingHelper routingHelper = app.getRoutingHelper();
 		final NextTurnWidget nextTurnInfo = new NextTurnWidget(activity, app, horisontalMini) {
-			NextDirectionInfo calc1 = new NextDirectionInfo();
+			final NextDirectionInfo calc1 = new NextDirectionInfo();
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean followingMode = routingHelper.isFollowingMode() || app.getLocationProvider().getLocationSimulation().isRouteAnimating();
@@ -215,15 +215,10 @@ public class RouteInfoWidgetsFactory {
 				return false;
 			}
 		};
-		leftTimeControl.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				showArrival.set(!showArrival.get());
-				setTimeControlIcons(leftTimeControl, showArrival.get(), intermediate);
-				map.refreshMap();
-			}
-			
+		leftTimeControl.setOnClickListener(v -> {
+			showArrival.set(!showArrival.get());
+			setTimeControlIcons(leftTimeControl, showArrival.get(), intermediate);
+			map.refreshMap();
 		});
 		leftTimeControl.setText(null, null);
 		setTimeControlIcons(leftTimeControl, showArrival.get(), intermediate);
@@ -536,14 +531,9 @@ public class RouteInfoWidgetsFactory {
 			}
 		};
 
-		bearingControl.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				showRelativeBearing.set(!showRelativeBearing.get());
-				map.refreshMap();
-			}
-
+		bearingControl.setOnClickListener(v -> {
+			showRelativeBearing.set(!showRelativeBearing.get());
+			map.refreshMap();
 		});
 		bearingControl.setText(null, null);
 		bearingControl.setIcons(!showRelativeBearing.get() ? bearingResId : relativeBearingResId,

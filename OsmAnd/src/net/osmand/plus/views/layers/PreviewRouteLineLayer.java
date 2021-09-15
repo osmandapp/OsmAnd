@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -53,6 +54,10 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 	private RouteGeometryWayContext previewWayContext;
 	private RouteGeometryWay previewLineGeometry;
+
+	public PreviewRouteLineLayer(@NonNull Context ctx) {
+		super(ctx);
+	}
 
 	@Override
 	protected void initGeometries(float density) {

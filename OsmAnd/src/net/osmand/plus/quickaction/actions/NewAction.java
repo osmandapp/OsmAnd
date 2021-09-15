@@ -2,6 +2,8 @@ package net.osmand.plus.quickaction.actions;
 
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.quickaction.AddQuickActionDialog;
@@ -23,12 +25,12 @@ public class NewAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
-		AddQuickActionDialog.showInstance(activity.getSupportFragmentManager(), true);
+	public void execute(@NonNull MapActivity mapActivity) {
+		AddQuickActionDialog.showInstance(mapActivity.getSupportFragmentManager(), true);
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 
 	}
 }

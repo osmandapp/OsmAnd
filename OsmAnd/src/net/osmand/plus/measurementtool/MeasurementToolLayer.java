@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -80,8 +81,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 	private final Path multiProfilePath = new Path();
 	private final PathMeasure multiProfilePathMeasure = new PathMeasure(multiProfilePath, false);
 
+	public MeasurementToolLayer(@NonNull Context ctx) {
+		super(ctx);
+	}
+
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		this.chartPointsHelper = new ChartPointsHelper(view.getContext());
 

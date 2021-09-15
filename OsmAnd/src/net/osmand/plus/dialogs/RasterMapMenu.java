@@ -15,7 +15,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityLayers;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
@@ -90,14 +90,14 @@ public class RasterMapMenu {
 						}
 					}
 				};
-		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
+		final MapLayers mapLayers = mapActivity.getMapLayers();
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
 										  View view, int itemId, int pos) {
 				if (itemId == mapTypeString) {
 					if (mapSelected) {
-						plugin.selectMapOverlayLayer(mapActivity.getMapView(), mapTypePreference,
+						plugin.selectMapOverlayLayer(mapTypePreference,
 								exMapTypePreference, true, mapActivity, onMapSelectedCallback);
 					}
 					return false;

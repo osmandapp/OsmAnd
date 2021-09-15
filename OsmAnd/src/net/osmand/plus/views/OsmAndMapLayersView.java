@@ -8,6 +8,8 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 public class OsmAndMapLayersView extends View {
 	
 	private OsmandMapTileView mapView;
@@ -21,9 +23,14 @@ public class OsmAndMapLayersView extends View {
 		super(context);
 	}
 	
-	public void setMapView(OsmandMapTileView mapView) {
+	public void setMapView(@Nullable OsmandMapTileView mapView) {
+		if (this.mapView != null && mapView == null) {
+			this.mapView.setView(null);
+		}
 		this.mapView = mapView;
-		mapView.setView(this);
+		if (mapView != null) {
+			mapView.setView(this);
+		}
 	}
 
 	@Override

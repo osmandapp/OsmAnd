@@ -538,8 +538,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private void showOnMap(LatLon mapCenter, int mapZoom) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
-			mapActivity.setMapLocation(mapCenter.getLatitude(), mapCenter.getLongitude());
-			mapActivity.getMapView().setIntZoom(mapZoom);
+			mapActivity.getMyApplication().getOsmandMap().setMapLocation(mapCenter.getLatitude(), mapCenter.getLongitude());
+			mapActivity.getMyApplication().getOsmandMap().getMapView().setIntZoom(mapZoom);
 		}
 		closeWizard();
 	}
