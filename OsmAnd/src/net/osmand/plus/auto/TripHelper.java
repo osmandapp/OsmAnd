@@ -1,5 +1,11 @@
 package net.osmand.plus.auto;
 
+import static net.osmand.plus.OsmAndFormatter.FEET_IN_ONE_METER;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_MILE;
+import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
+import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
@@ -23,6 +29,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingHelper;
@@ -173,7 +180,7 @@ public class TripHelper {
 
 			int leftTurnTimeSec = routingHelper.getLeftTimeNextTurn();
 			long turnArrivalTime = System.currentTimeMillis() + leftTurnTimeSec * 1000L;
-			Distance stepDistance = Distance.create(nextTurnDistance, Distance.UNIT_METERS);
+			Distance stepDistance = getDistance(nextTurnDistance);
 			DateTimeWithZone stepDateTime = DateTimeWithZone.create(turnArrivalTime, TimeZone.getDefault());
 			TravelEstimate.Builder stepTravelEstimateBuilder = new TravelEstimate.Builder(stepDistance, stepDateTime);
 			stepTravelEstimateBuilder.setRemainingTimeSeconds(leftTurnTimeSec);
@@ -205,7 +212,7 @@ public class TripHelper {
 		destBuilder.setImage(new CarIcon.Builder(IconCompat.createWithResource(app,
 				R.drawable.ic_action_point_destination)).build());
 
-		Distance distance = Distance.create(routingHelper.getLeftDistance(), Distance.UNIT_METERS);
+		Distance distance = getDistance(routingHelper.getLeftDistance());
 		int leftTimeSec = routingHelper.getLeftTime();
 		DateTimeWithZone dateTime = DateTimeWithZone.create(System.currentTimeMillis() + leftTimeSec * 1000L, TimeZone.getDefault());
 		TravelEstimate.Builder travelEstimateBuilder = new TravelEstimate.Builder(distance, dateTime);
@@ -225,43 +232,113 @@ public class TripHelper {
 		return bitmap;
 	}
 
+	private Distance getDistance(double meters) {
+		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
+		int displayUnit;
+		float mainUnitInMeters;
+		if (mc == net.osmand.plus.helpers.enums.MetricsConstants.KILOMETERS_AND_METERS) {
+			displayUnit = Distance.UNIT_KILOMETERS;
+			mainUnitInMeters = METERS_IN_KILOMETER;
+		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.NAUTICAL_MILES) {
+			displayUnit = Distance.UNIT_MILES;
+			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE;
+		} else {
+			displayUnit = Distance.UNIT_MILES;
+			mainUnitInMeters = METERS_IN_ONE_MILE;
+		}
+		if (meters >= 100 * mainUnitInMeters) {
+			return Distance.create(meters / mainUnitInMeters + 0.5, displayUnit);
+		} else if (meters > 9.99f * mainUnitInMeters) {
+			return Distance.create(meters / mainUnitInMeters, displayUnit);
+		} else if (meters > 0.999f * mainUnitInMeters) {
+			return Distance.create(meters / mainUnitInMeters, displayUnit);
+		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
+			return Distance.create(meters / mainUnitInMeters, displayUnit);
+		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
+			return Distance.create(meters / mainUnitInMeters, displayUnit);
+		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
+			return Distance.create(meters / mainUnitInMeters, displayUnit);
+		} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
+			return Distance.create(meters / mainUnitInMeters, displayUnit);
+		} else {
+			if (mc == net.osmand.plus.helpers.enums.MetricsConstants.KILOMETERS_AND_METERS || mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_METERS) {
+				return Distance.create(meters + 0.5,  Distance.UNIT_METERS);
+			} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_FEET) {
+				return Distance.create(meters * FEET_IN_ONE_METER + 0.5, Distance.UNIT_FEET);
+			} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_YARDS) {
+				return Distance.create(meters * YARDS_IN_ONE_METER + 0.5, Distance.UNIT_YARDS);
+			}
+			return Distance.create(meters + 0.5,  Distance.UNIT_METERS);
+		}
+	}
+
 	private int getManeuverType(@NonNull TurnType turnType) {
 		switch (turnType.getValue()) {
-			case TurnType.C: return Maneuver.TYPE_STRAIGHT; // continue (go straight)
-			case TurnType.TL: return Maneuver.TYPE_TURN_NORMAL_LEFT; // turn left
-			case TurnType.TSLL: return Maneuver.TYPE_TURN_SLIGHT_LEFT; // turn slightly left
-			case TurnType.TSHL: return Maneuver.TYPE_TURN_SHARP_LEFT; // turn sharply left
-			case TurnType.TR: return Maneuver.TYPE_TURN_NORMAL_RIGHT; // turn right
-			case TurnType.TSLR: return Maneuver.TYPE_TURN_SLIGHT_RIGHT; // turn slightly right
-			case TurnType.TSHR: return Maneuver.TYPE_TURN_SHARP_RIGHT; // turn sharply right
-			case TurnType.KL: return Maneuver.TYPE_KEEP_LEFT; // keep left
-			case TurnType.KR: return Maneuver.TYPE_KEEP_RIGHT; // keep right
-			case TurnType.TU: return Maneuver.TYPE_U_TURN_LEFT; // U-turn
-			case TurnType.TRU: return Maneuver.TYPE_U_TURN_RIGHT; // Right U-turn
-			case TurnType.OFFR: return Maneuver.TYPE_UNKNOWN; // Off route
-			case TurnType.RNDB: return Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CCW; // Roundabout
-			case TurnType.RNLB: return Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CW; // Roundabout left
-			default: return Maneuver.TYPE_UNKNOWN;
+			case TurnType.C:
+				return Maneuver.TYPE_STRAIGHT; // continue (go straight)
+			case TurnType.TL:
+				return Maneuver.TYPE_TURN_NORMAL_LEFT; // turn left
+			case TurnType.TSLL:
+				return Maneuver.TYPE_TURN_SLIGHT_LEFT; // turn slightly left
+			case TurnType.TSHL:
+				return Maneuver.TYPE_TURN_SHARP_LEFT; // turn sharply left
+			case TurnType.TR:
+				return Maneuver.TYPE_TURN_NORMAL_RIGHT; // turn right
+			case TurnType.TSLR:
+				return Maneuver.TYPE_TURN_SLIGHT_RIGHT; // turn slightly right
+			case TurnType.TSHR:
+				return Maneuver.TYPE_TURN_SHARP_RIGHT; // turn sharply right
+			case TurnType.KL:
+				return Maneuver.TYPE_KEEP_LEFT; // keep left
+			case TurnType.KR:
+				return Maneuver.TYPE_KEEP_RIGHT; // keep right
+			case TurnType.TU:
+				return Maneuver.TYPE_U_TURN_LEFT; // U-turn
+			case TurnType.TRU:
+				return Maneuver.TYPE_U_TURN_RIGHT; // Right U-turn
+			case TurnType.OFFR:
+				return Maneuver.TYPE_UNKNOWN; // Off route
+			case TurnType.RNDB:
+				return Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CCW; // Roundabout
+			case TurnType.RNLB:
+				return Maneuver.TYPE_ROUNDABOUT_ENTER_AND_EXIT_CW; // Roundabout left
+			default:
+				return Maneuver.TYPE_UNKNOWN;
 		}
 	}
 
 	private int getLaneDirection(@NonNull TurnType turnType) {
 		switch (turnType.getValue()) {
-			case TurnType.C: return LaneDirection.SHAPE_STRAIGHT; // continue (go straight)
-			case TurnType.TL: return LaneDirection.SHAPE_NORMAL_LEFT; // turn left
-			case TurnType.TSLL: return LaneDirection.SHAPE_SLIGHT_LEFT; // turn slightly left
-			case TurnType.TSHL: return LaneDirection.SHAPE_SHARP_LEFT; // turn sharply left
-			case TurnType.TR: return LaneDirection.SHAPE_NORMAL_RIGHT; // turn right
-			case TurnType.TSLR: return LaneDirection.SHAPE_SLIGHT_RIGHT; // turn slightly right
-			case TurnType.TSHR: return LaneDirection.SHAPE_SHARP_RIGHT; // turn sharply right
-			case TurnType.KL: return LaneDirection.SHAPE_SLIGHT_LEFT; // keep left
-			case TurnType.KR: return LaneDirection.SHAPE_SLIGHT_RIGHT; // keep right
-			case TurnType.TU: return LaneDirection.SHAPE_U_TURN_LEFT; // U-turn
-			case TurnType.TRU: return LaneDirection.SHAPE_U_TURN_RIGHT; // Right U-turn
-			case TurnType.OFFR: return LaneDirection.SHAPE_UNKNOWN; // Off route
-			case TurnType.RNDB: return LaneDirection.SHAPE_UNKNOWN; // Roundabout
-			case TurnType.RNLB: return LaneDirection.SHAPE_UNKNOWN; // Roundabout left
-			default: return LaneDirection.SHAPE_UNKNOWN;
+			case TurnType.C:
+				return LaneDirection.SHAPE_STRAIGHT; // continue (go straight)
+			case TurnType.TL:
+				return LaneDirection.SHAPE_NORMAL_LEFT; // turn left
+			case TurnType.TSLL:
+				return LaneDirection.SHAPE_SLIGHT_LEFT; // turn slightly left
+			case TurnType.TSHL:
+				return LaneDirection.SHAPE_SHARP_LEFT; // turn sharply left
+			case TurnType.TR:
+				return LaneDirection.SHAPE_NORMAL_RIGHT; // turn right
+			case TurnType.TSLR:
+				return LaneDirection.SHAPE_SLIGHT_RIGHT; // turn slightly right
+			case TurnType.TSHR:
+				return LaneDirection.SHAPE_SHARP_RIGHT; // turn sharply right
+			case TurnType.KL:
+				return LaneDirection.SHAPE_SLIGHT_LEFT; // keep left
+			case TurnType.KR:
+				return LaneDirection.SHAPE_SLIGHT_RIGHT; // keep right
+			case TurnType.TU:
+				return LaneDirection.SHAPE_U_TURN_LEFT; // U-turn
+			case TurnType.TRU:
+				return LaneDirection.SHAPE_U_TURN_RIGHT; // Right U-turn
+			case TurnType.OFFR:
+				return LaneDirection.SHAPE_UNKNOWN; // Off route
+			case TurnType.RNDB:
+				return LaneDirection.SHAPE_UNKNOWN; // Roundabout
+			case TurnType.RNLB:
+				return LaneDirection.SHAPE_UNKNOWN; // Roundabout left
+			default:
+				return LaneDirection.SHAPE_UNKNOWN;
 		}
 	}
 }
