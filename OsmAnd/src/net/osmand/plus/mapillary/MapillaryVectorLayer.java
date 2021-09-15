@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.CoordinateSequence;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.MultiLineString;
@@ -93,21 +94,6 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		return true;
 	}
 
-	private void drawSelectedPoint(Canvas canvas, RotatedTileBox tileBox) {
-		if (selectedImageLocation != null) {
-			float x = tileBox.getPixXFromLatLon(selectedImageLocation.getLatitude(), selectedImageLocation.getLongitude());
-			float y = tileBox.getPixYFromLatLon(selectedImageLocation.getLatitude(), selectedImageLocation.getLongitude());
-			if (selectedImageCameraAngle != null) {
-				canvas.save();
-				canvas.rotate(selectedImageCameraAngle - 180, x, y);
-				canvas.drawBitmap(headingImage, x - headingImage.getWidth() / 2,
-						y - headingImage.getHeight() / 2, paintPoint);
-				canvas.restore();
-			}
-			canvas.drawBitmap(selectedImage, x - selectedImage.getWidth() / 2, y - selectedImage.getHeight() / 2, paintPoint);
-		}
-	}
-
 	@Override
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		ITileSource map = this.map;
@@ -168,6 +154,85 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		}
 		this.visiblePoints = visiblePoints;
 		drawSelectedPoint(canvas, tileBox);
+	}
+
+	protected void drawLines(Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY, GeometryTile tile) {
+		for (Geometry g : tile.getData()) {
+			if (g instanceof LineString && !g.isEmpty()) {
+				LineString l = (LineString) g;
+				CoordinateSequence sequence = l.getCoordinateSequence();
+				if (sequence != null && !l.isEmpty()) {
+					if (!filtered(l.getUserData())) {
+						draw(sequence.toCoordinateArray(), canvas, tileBox, tileX, tileY);
+					}
+				}
+			} else if (g instanceof MultiLineString && !g.isEmpty()) {
+				MultiLineString ml = (MultiLineString) g;
+				if (!filtered(ml.getUserData())) {
+					for (int i = 0; i < ml.getNumGeometries(); i++) {
+						Geometry gm = ml.getGeometryN(i);
+						if (gm instanceof LineString && !gm.isEmpty()) {
+							LineString l = (LineString) gm;
+							CoordinateSequence sequence = l.getCoordinateSequence();
+							if (sequence != null && !l.isEmpty()) {
+								draw(sequence.toCoordinateArray(), canvas, tileBox, tileX, tileY);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	protected void draw(Coordinate[] points, Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY) {
+		if (points.length > 1) {
+			int dzoom = tileBox.getZoom() - TILE_ZOOM;
+			int mult = (int) Math.pow(2.0, dzoom);
+			QuadRect tileBounds = tileBox.getTileBounds();
+
+			Coordinate lastPt = points[0];
+			float x;
+			float y;
+			float lastx = 0;
+			float lasty = 0;
+			double px, py, tpx, tpy, tlx, tly;
+			double lx = lastPt.x / EXTENT;
+			double ly = lastPt.y / EXTENT;
+			boolean reCalculateLastXY = true;
+
+			int size = points.length;
+			for (int i = 1; i < size; i++) {
+				Coordinate pt = points[i];
+				px = pt.x / EXTENT;
+				py = pt.y / EXTENT;
+				tpx = (tileX + px) * mult;
+				tpy = (tileY + py) * mult;
+				tlx = (tileX + lx) * mult;
+				tly = (tileY + ly) * mult;
+
+				if (tileBounds.contains(tpx, tpy, tpx, tpy) || tileBounds.contains(tlx, tly, tlx, tly)) {
+					if (reCalculateLastXY) {
+						lastx = tileBox.getPixXFromTile(tileX + lx, tileY + ly, TILE_ZOOM);
+						lasty = tileBox.getPixYFromTile(tileX + lx, tileY + ly, TILE_ZOOM);
+						reCalculateLastXY = false;
+					}
+
+					x = tileBox.getPixXFromTile(tileX + px, tileY + py, TILE_ZOOM);
+					y = tileBox.getPixYFromTile(tileX + px, tileY + py, TILE_ZOOM);
+
+					if (lastx != x || lasty != y) {
+						canvas.drawLine(lastx, lasty, x, y, paintLine);
+					}
+
+					lastx = x;
+					lasty = y;
+				} else {
+					reCalculateLastXY = true;
+				}
+				lx = px;
+				ly = py;
+			}
+		}
 	}
 
 	protected void drawPoints(Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY,
@@ -242,80 +307,18 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		return false;
 	}
 
-	protected void drawLines(Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY, GeometryTile tile) {
-		for (Geometry g : tile.getData()) {
-			if (g instanceof LineString && !g.isEmpty()) {
-				LineString l = (LineString) g;
-				if (l.getCoordinateSequence() != null && !l.isEmpty()) {
-					if (!filtered(l.getUserData())) {
-						draw(l.getCoordinateSequence().toCoordinateArray(), canvas, tileBox, tileX, tileY);
-					}
-				}
-			} else if (g instanceof MultiLineString && !g.isEmpty()) {
-				MultiLineString ml = (MultiLineString) g;
-				if (!filtered(ml.getUserData())) {
-					for (int i = 0; i < ml.getNumGeometries(); i++) {
-                        Geometry gm = ml.getGeometryN(i);
-                        if (gm instanceof LineString && !gm.isEmpty()) {
-                            LineString l = (LineString) gm;
-                            if (l.getCoordinateSequence() != null && !l.isEmpty()) {
-                                draw(l.getCoordinateSequence().toCoordinateArray(), canvas, tileBox, tileX, tileY);
-                            }
-                        }
-                    }
-				}
+	private void drawSelectedPoint(Canvas canvas, RotatedTileBox tileBox) {
+		if (selectedImageLocation != null) {
+			float x = tileBox.getPixXFromLatLon(selectedImageLocation.getLatitude(), selectedImageLocation.getLongitude());
+			float y = tileBox.getPixYFromLatLon(selectedImageLocation.getLatitude(), selectedImageLocation.getLongitude());
+			if (selectedImageCameraAngle != null) {
+				canvas.save();
+				canvas.rotate(selectedImageCameraAngle - 180, x, y);
+				canvas.drawBitmap(headingImage, x - headingImage.getWidth() / 2,
+						y - headingImage.getHeight() / 2, paintPoint);
+				canvas.restore();
 			}
-		}
-	}
-
-	protected void draw(Coordinate[] points, Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY) {
-		if (points.length > 1) {
-			int dzoom = tileBox.getZoom() - TILE_ZOOM;
-			int mult = (int) Math.pow(2.0, dzoom);
-			QuadRect tileBounds = tileBox.getTileBounds();
-
-			Coordinate lastPt = points[0];
-			float x;
-			float y;
-			float lastx = 0;
-			float lasty = 0;
-			double px, py, tpx, tpy, tlx, tly;
-			double lx = lastPt.x / EXTENT;
-			double ly = lastPt.y / EXTENT;
-			boolean reCalculateLastXY = true;
-
-			int size = points.length;
-			for (int i = 1; i < size; i++) {
-				Coordinate pt = points[i];
-				px = pt.x / EXTENT;
-				py = pt.y / EXTENT;
-				tpx = (tileX + px) * mult;
-				tpy = (tileY + py) * mult;
-				tlx = (tileX + lx) * mult;
-				tly = (tileY + ly) * mult;
-
-				if (tileBounds.contains(tpx, tpy, tpx, tpy) || tileBounds.contains(tlx, tly, tlx, tly)) {
-					if (reCalculateLastXY) {
-						lastx = tileBox.getPixXFromTile(tileX + lx, tileY + ly, TILE_ZOOM);
-						lasty = tileBox.getPixYFromTile(tileX + lx, tileY + ly, TILE_ZOOM);
-						reCalculateLastXY = false;
-					}
-
-					x = tileBox.getPixXFromTile(tileX + px, tileY + py, TILE_ZOOM);
-					y = tileBox.getPixYFromTile(tileX + px, tileY + py, TILE_ZOOM);
-
-					if (lastx != x || lasty != y) {
-						canvas.drawLine(lastx, lasty, x, y, paintLine);
-					}
-
-					lastx = x;
-					lasty = y;
-				} else {
-					reCalculateLastXY = true;
-				}
-				lx = px;
-				ly = py;
-			}
+			canvas.drawBitmap(selectedImage, x - selectedImage.getWidth() / 2, y - selectedImage.getHeight() / 2, paintPoint);
 		}
 	}
 
