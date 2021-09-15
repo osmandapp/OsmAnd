@@ -320,7 +320,7 @@ public class TransportRouteController extends MenuController {
 		if (mapActivity != null) {
 			TransportStopsLayer stopsLayer = mapActivity.getMapLayers().getTransportStopsLayer();
 			int cz = transportRoute.calculateZoom(0, mapActivity.getMapView().getCurrentRotatedTileBox());
-			mapActivity.changeZoom(cz - mapActivity.getMapView().getZoom());
+			mapActivity.getMyApplication().getOsmandMap().changeZoom(cz - mapActivity.getMapView().getZoom());
 			stopsLayer.setRoute(transportRoute);
 		}
 	}

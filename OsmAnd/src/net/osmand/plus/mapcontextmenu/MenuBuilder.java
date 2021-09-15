@@ -1254,7 +1254,7 @@ public class MenuBuilder {
 				TransportStopsLayer stopsLayer = getMapActivity().getMapLayers().getTransportStopsLayer();
 				stopsLayer.setRoute(r);
 				int cz = r.calculateZoom(0, getMapActivity().getMapView().getCurrentRotatedTileBox());
-				getMapActivity().changeZoom(cz - getMapActivity().getMapView().getZoom());
+				app.getOsmandMap().changeZoom(cz - getMapActivity().getMapView().getZoom());
 			}
 		};
 	}
@@ -1291,7 +1291,7 @@ public class MenuBuilder {
 				public void onClick(View v) {
 					LatLon latLon = new LatLon(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 					mapActivity.getContextMenu().show(latLon, pointDescription, poi);
-					mapActivity.setMapLocation(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
+					mapActivity.getMyApplication().getOsmandMap().setMapLocation(poi.getLocation().getLatitude(), poi.getLocation().getLongitude());
 				}
 			});
 			view.addView(button);

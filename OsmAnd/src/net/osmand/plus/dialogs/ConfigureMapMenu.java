@@ -133,7 +133,7 @@ public class ConfigureMapMenu {
 		return nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
-	private void createLayersItems(MapActivity activity, ContextMenuAdapter adapter, boolean nightMode) {
+	private void createLayersItems(@NonNull MapActivity activity, @NonNull ContextMenuAdapter adapter, boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		int selectedProfileColor = settings.getApplicationMode().getProfileColor(nightMode);
@@ -220,7 +220,7 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES))
 				.setListener(listener).createItem());
 
-		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
+		OsmandPlugin.registerLayerContextMenu(adapter, activity);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 	}
 
@@ -562,7 +562,7 @@ public class ConfigureMapMenu {
 						}
 						a.notifyDataSetInvalidated();
 						activity.refreshMapComplete();
-						activity.getMapLayers().updateLayers(activity.getMapView());
+						activity.getMapLayers().updateLayers(activity);
 					} else {
 						if (UI_CATEGORY_DETAILS.equals(category)) {
 							DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, a, adapter, pos);

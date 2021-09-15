@@ -16,6 +16,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.LayerDrawable;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
@@ -61,12 +62,13 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	private Bitmap headingIcon;
 	private int headingIconId;
 	private OsmAndLocationProvider locationProvider;
-	private MapViewTrackingUtilities mapViewTrackingUtilities;
+	private final MapViewTrackingUtilities mapViewTrackingUtilities;
 	private boolean nm;
 	private boolean locationOutdated;
 
-	public PointLocationLayer(MapViewTrackingUtilities mv) {
-		this.mapViewTrackingUtilities = mv;
+	public PointLocationLayer(@NonNull Context context) {
+		super(context);
+		this.mapViewTrackingUtilities = getApplication().getMapViewTrackingUtilities();
 	}
 
 	private void initUI() {
@@ -81,7 +83,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		initUI();
 	}

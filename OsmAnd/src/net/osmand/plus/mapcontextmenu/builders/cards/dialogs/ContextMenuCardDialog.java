@@ -8,27 +8,27 @@ import androidx.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapillary.MapillaryImageDialog;
 import net.osmand.plus.mapillary.MapillaryPlugin;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public abstract class ContextMenuCardDialog {
 
-	private MapActivity mapActivity;
+	private final MapActivity mapActivity;
 
 	private static final String KEY_CARD_DIALOG_TYPE = "key_card_dialog_type";
 	private static final String KEY_CARD_DIALOG_TITLE = "key_card_dialog_title";
 	private static final String KEY_CARD_DIALOG_DESCRIPTION = "key_card_dialog_description";
 
-	private CardDialogType type;
+	private final CardDialogType type;
 	protected String title;
 	protected String description;
 
 	private int prevMapPosition = OsmandSettings.CENTER_CONSTANT;
-	private boolean portrait;
+	private final boolean portrait;
 
 	public enum CardDialogType {
 		REGULAR,
@@ -142,7 +142,7 @@ public abstract class ContextMenuCardDialog {
 				if (!showMapillary) {
 					MapillaryPlugin mapillaryPlugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
 					if (mapillaryPlugin != null) {
-						mapillaryPlugin.updateLayers(mapActivity.getMapView(), mapActivity, activate);
+						mapillaryPlugin.updateLayers(mapActivity, activate);
 					}
 				}
 				break;

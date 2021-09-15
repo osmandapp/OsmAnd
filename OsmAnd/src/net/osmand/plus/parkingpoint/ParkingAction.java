@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -28,22 +30,22 @@ public class ParkingAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 
 		ParkingPositionPlugin plugin = OsmandPlugin.getActivePlugin(ParkingPositionPlugin.class);
 
 		if (plugin != null) {
 
-			LatLon latLon = activity.getMapView()
+			LatLon latLon = mapActivity.getMapView()
 					.getCurrentRotatedTileBox()
 					.getCenterLatLon();
 
-			plugin.showAddParkingDialog(activity, latLon.getLatitude(), latLon.getLongitude());
+			plugin.showAddParkingDialog(mapActivity, latLon.getLatitude(), latLon.getLongitude());
 		}
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);

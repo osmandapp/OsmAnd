@@ -48,7 +48,6 @@ import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.poi.PoiUIFilter;
-import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -58,7 +57,6 @@ import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.wikipedia.WikipediaPlugin;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
@@ -86,7 +84,7 @@ public abstract class OsmandPlugin {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandPlugin.class);
 
-	private static List<OsmandPlugin> allPlugins = new ArrayList<OsmandPlugin>();
+	private static final List<OsmandPlugin> allPlugins = new ArrayList<>();
 
 	protected OsmandApplication app;
 
@@ -324,12 +322,7 @@ public abstract class OsmandPlugin {
 	public static void removeCustomPlugin(@NonNull OsmandApplication app, @NonNull final CustomOsmandPlugin plugin) {
 		allPlugins.remove(plugin);
 		if (plugin.isActive()) {
-			plugin.removePluginItems(new CustomOsmandPlugin.PluginItemsListener() {
-				@Override
-				public void onItemsRemoved() {
-					Algorithms.removeAllFiles(plugin.getPluginDir());
-				}
-			});
+			plugin.removePluginItems(() -> Algorithms.removeAllFiles(plugin.getPluginDir()));
 		} else {
 			Algorithms.removeAllFiles(plugin.getPluginDir());
 		}
@@ -420,10 +413,10 @@ public abstract class OsmandPlugin {
 		boolean available = plugin.isAvailable(app);
 		boolean paid = plugin.isPaid();
 		boolean processed = false;
-		if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
-			// for test reasons
-			// marketEnabled = false;
-		}
+		// for test reasons
+		//if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
+		//	marketEnabled = false;
+		//}
 		if (available || (!marketEnabled && !paid)) {
 			plugin.setInstallURL(null);
 			processed = true;
@@ -489,7 +482,7 @@ public abstract class OsmandPlugin {
 		if (activity != null) {
 			if (activity instanceof MapActivity) {
 				final MapActivity mapActivity = (MapActivity) activity;
-				plugin.updateLayers(mapActivity.getMapView(), mapActivity);
+				plugin.updateLayers(mapActivity, mapActivity);
 				mapActivity.getDashboard().refreshDashboardFragments();
 
 				DashFragmentData fragmentData = plugin.getCardFragment();
@@ -522,15 +515,10 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 	}
 
-	/**
-	 * Register layers calls when activity is created and before @mapActivityCreate
-	 *
-	 * @param activity
-	 */
-	public void registerLayers(MapActivity activity) {
+	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 	}
 
 	public void mapActivityCreate(MapActivity activity) {
@@ -556,17 +544,18 @@ public abstract class OsmandPlugin {
 											   int[] grantResults) {
 	}
 
-	public static final void onRequestPermissionsResult(int requestCode, String[] permissions,
-														int[] grantResults) {
+	public static void onRequestPermissionsResult(int requestCode, String[] permissions,
+												  int[] grantResults) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.handleRequestPermissionsResult(requestCode, permissions, grantResults);
 		}
 	}
 
-	protected void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 	}
 
-	protected void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	protected void registerMapContextMenuActions(@NonNull MapActivity mapActivity, double latitude, double longitude,
+												 ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 	}
 
 	protected void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
@@ -617,9 +606,9 @@ public abstract class OsmandPlugin {
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
 	}
 
-	public static void refreshLayers(OsmandMapTileView mapView, MapActivity activity) {
+	public static void refreshLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
-			plugin.updateLayers(mapView, activity);
+			plugin.updateLayers(context, mapActivity);
 		}
 	}
 
@@ -828,21 +817,22 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void createLayers(OsmandMapTileView mapView, MapActivity activity) {
+	public static void createLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.registerLayers(activity);
+			plugin.registerLayers(context, mapActivity);
 		}
 	}
 
-	public static void registerMapContextMenu(MapActivity map, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	public static void registerMapContextMenu(@NonNull MapActivity mapActivity, double latitude, double longitude,
+											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.registerMapContextMenuActions(map, latitude, longitude, adapter, selectedObj, configureMenu);
+			plugin.registerMapContextMenuActions(mapActivity, latitude, longitude, adapter, selectedObj, configureMenu);
 		}
 	}
 
-	public static void registerLayerContextMenu(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
+	public static void registerLayerContextMenu(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			plugin.registerLayerContextMenuActions(mapView, adapter, mapActivity);
+			plugin.registerLayerContextMenuActions(adapter, mapActivity);
 		}
 	}
 

@@ -27,7 +27,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -429,42 +428,19 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 						getString(R.string.poi) : app.getPoiFilters().getSelectedPoiFiltersName();
 				((TextView) v.findViewById(R.id.title)).setText(getString(R.string.search_radius_proximity) + ":");
 				((TextView) v.findViewById(R.id.titleEx)).setText(getString(R.string.shared_string_type) + ":");
-				final TextView radiusEx = (TextView) v.findViewById(R.id.descriptionEx);
+				final TextView radiusEx = v.findViewById(R.id.descriptionEx);
 				radiusEx.setText(descEx);
-				v.findViewById(R.id.secondCellContainer).setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						mapActivity.getMapLayers().showSingleChoicePoiFilterDialog(mapActivity.getMapView(), new MapActivityLayers.DismissListener() {
-
-							@Override
-							public void dismiss() {
-								enableType(type, true);
-							}
-						});
-					}
-				});
-				final TextView radius = (TextView) v.findViewById(R.id.description);
+				v.findViewById(R.id.secondCellContainer).setOnClickListener(view -> mapActivity.getMapLayers()
+						.showSingleChoicePoiFilterDialog(mapActivity, () -> enableType(type, true)));
+				final TextView radius = v.findViewById(R.id.description);
 				radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
-				v.findViewById(R.id.firstCellContainer).setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View view) {
-						selectDifferentRadius(type);
-					}
-				});
+				v.findViewById(R.id.firstCellContainer).setOnClickListener(view -> selectDifferentRadius(type));
 			} else {
 				v = themedInflater.inflate(R.layout.along_the_route_radius_simple, null);
 				((TextView) v.findViewById(R.id.title)).setText(getString(R.string.search_radius_proximity));
-				final TextView radius = (TextView) v.findViewById(R.id.description);
+				final TextView radius = v.findViewById(R.id.description);
 				radius.setText(OsmAndFormatter.getFormattedDistance(waypointHelper.getSearchDeviationRadius(type), app));
-				v.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View view) {
-						selectDifferentRadius(type);
-					}
-
-				});
+				v.setOnClickListener(view -> selectDifferentRadius(type));
 			}
 			return v;
 		}
@@ -472,13 +448,10 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	private void selectPoi(final int type, final boolean enable) {
 		if (!app.getPoiFilters().isPoiFilterSelected(PoiUIFilter.CUSTOM_FILTER_ID)) {
-			mapActivity.getMapLayers().showSingleChoicePoiFilterDialog(mapActivity.getMapView(),
-					new MapActivityLayers.DismissListener() {
-						@Override
-						public void dismiss() {
-							if (app.getPoiFilters().isShowingAnyPoi()) {
-								enableType(type, enable);
-							}
+			mapActivity.getMapLayers().showSingleChoicePoiFilterDialog(mapActivity,
+					() -> {
+						if (app.getPoiFilters().isShowingAnyPoi()) {
+							enableType(type, enable);
 						}
 					});
 		} else {

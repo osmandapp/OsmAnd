@@ -207,7 +207,7 @@
     <string name="poi_florist">Blumenhandlung</string>
     <string name="poi_food_court">Markthalle</string>
     <string name="poi_ford">Furt</string>
-    <string name="poi_fort">Festung</string>
+    <string name="poi_fort">Fort</string>
     <string name="poi_fountain">Springbrunnen</string>
     <string name="poi_frame">Bilderrahmengeschäft</string>
     <string name="poi_fuel">Tankstelle;Tankanlage;Tankstation</string>
@@ -2083,7 +2083,7 @@
     <string name="poi_historic_manor">Historischer Gutshof</string>
     <string name="poi_castle_type_stately">Burgtyp: Schloss</string>
     <string name="poi_castle_type_defensive">Burgtyp: Verteidigung</string>
-    <string name="poi_castle_type_fortress">Burgtyp: Festung</string>
+    <string name="poi_castle_type_fortress">Burgtyp: Fort</string>
     <string name="poi_castle_type_palace">Burgtyp: Palast</string>
     <string name="poi_castle_type_defensive_stately">Burgtyp: Verteidigung, Adelssitz</string>
     <string name="poi_massage_thai">Thailändisch</string>
@@ -3761,7 +3761,7 @@
     <string name="poi_volcano_status_active">Aktiv</string>
     <string name="poi_volcano_status_inactive">Inaktiv</string>
     <string name="poi_volcano_number_of_eruptions">Anzahl der Ausbrüche</string>
-    <string name="poi_memorial_ghost_bike">Geisterfahrrad</string>
+    <string name="poi_memorial_ghost_bike">Geisterrad</string>
     <string name="poi_paintball">Paintball</string>
     <string name="poi_mountain_rescue">Bergrettung</string>
     <string name="poi_shop_security">Sicherheitsgeschäft</string>

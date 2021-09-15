@@ -51,15 +51,15 @@ public class FavoriteAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(final MapActivity activity) {
-		final LatLon latLon = activity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+	public void execute(@NonNull final MapActivity mapActivity) {
+		final LatLon latLon = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
 		final String title = getParams().get(KEY_NAME);
 
 		if (title == null || title.isEmpty()) {
-			progressDialog = createProgressDialog(activity, new DialogOnClickListener() {
+			progressDialog = createProgressDialog(mapActivity, new DialogOnClickListener() {
 				@Override
 				public void skipOnClick() {
-					onClick(activity.getString(R.string.favorite), !Boolean.valueOf(getParams().get(KEY_DIALOG)));
+					onClick(mapActivity.getString(R.string.favorite), !Boolean.valueOf(getParams().get(KEY_DIALOG)));
 				}
 
 				@Override
@@ -68,9 +68,9 @@ public class FavoriteAction extends QuickAction {
 				}
 
 				private void onClick(String title, boolean autoFill) {
-					activity.getMyApplication().getGeocodingLookupService().cancel(lookupRequest);
+					mapActivity.getMyApplication().getGeocodingLookupService().cancel(lookupRequest);
 					dismissProgressDialog();
-					addFavorite(activity, latLon, title, autoFill);
+					addFavorite(mapActivity, latLon, title, autoFill);
 				}
 			});
 			progressDialog.show();
@@ -79,13 +79,13 @@ public class FavoriteAction extends QuickAction {
 				@Override
 				public void geocodingDone(String address) {
 					dismissProgressDialog();
-					addFavorite(activity, latLon, address, !Boolean.valueOf(getParams().get(KEY_DIALOG)));
+					addFavorite(mapActivity, latLon, address, !Boolean.valueOf(getParams().get(KEY_DIALOG)));
 				}
 			}, null);
 
-			activity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
+			mapActivity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
 		} else {
-			addFavorite(activity, latLon, title, !Boolean.valueOf(getParams().get(KEY_DIALOG)));
+			addFavorite(mapActivity, latLon, title, !Boolean.valueOf(getParams().get(KEY_DIALOG)));
 		}
 	}
 
@@ -125,9 +125,9 @@ public class FavoriteAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(final ViewGroup parent, final MapActivity activity) {
+	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
 
-		FavouritesDbHelper helper = activity.getMyApplication().getFavorites();
+		FavouritesDbHelper helper = mapActivity.getMyApplication().getFavorites();
 
 		final View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_favorite, parent, false);
@@ -148,16 +148,16 @@ public class FavoriteAction extends QuickAction {
 
 			if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)) == 0) {
 
-				categoryEdit.setText(activity.getString(R.string.shared_string_favorites));
-				categoryImage.setColorFilter(activity.getResources().getColor(R.color.color_favorite));
+				categoryEdit.setText(mapActivity.getString(R.string.shared_string_favorites));
+				categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.color_favorite));
 			}
 
 		} else if (helper.getFavoriteGroups().size() > 0) {
 
 			FavouritesDbHelper.FavoriteGroup group = helper.getFavoriteGroups().get(0);
 
-			int color = group.getColor() == 0 ? activity.getResources().getColor(R.color.color_favorite) : group.getColor();
-			categoryEdit.setText(group.getDisplayName(activity));
+			int color = group.getColor() == 0 ? mapActivity.getResources().getColor(R.color.color_favorite) : group.getColor();
+			categoryEdit.setText(group.getDisplayName(mapActivity));
 			categoryImage.setColorFilter(color);
 
 			getParams().put(KEY_CATEGORY_NAME, group.getName());
@@ -165,8 +165,8 @@ public class FavoriteAction extends QuickAction {
 
 		} else {
 
-			categoryEdit.setText(activity.getString(R.string.shared_string_favorites));
-			categoryImage.setColorFilter(activity.getResources().getColor(R.color.color_favorite));
+			categoryEdit.setText(mapActivity.getString(R.string.shared_string_favorites));
+			categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.color_favorite));
 
 			getParams().put(KEY_CATEGORY_NAME, "");
 			getParams().put(KEY_CATEGORY_COLOR, "0");
@@ -179,7 +179,7 @@ public class FavoriteAction extends QuickAction {
 				SelectFavoriteCategoryBottomSheet dialogFragment = SelectFavoriteCategoryBottomSheet.createInstance("", "");
 
 				dialogFragment.show(
-						activity.getSupportFragmentManager(),
+						mapActivity.getSupportFragmentManager(),
 						SelectCategoryDialogFragment.TAG);
 
 				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
@@ -193,7 +193,7 @@ public class FavoriteAction extends QuickAction {
 		});
 
 		SelectFavoriteCategoryBottomSheet dialogFragment = (SelectFavoriteCategoryBottomSheet)
-				activity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
+				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
 
 		if (dialogFragment != null) {
 
@@ -208,7 +208,7 @@ public class FavoriteAction extends QuickAction {
 		} else {
 
 			EditCategoryDialogFragment dialog = (EditCategoryDialogFragment)
-					activity.getSupportFragmentManager().findFragmentByTag(EditCategoryDialogFragment.TAG);
+					mapActivity.getSupportFragmentManager().findFragmentByTag(EditCategoryDialogFragment.TAG);
 
 			if (dialog != null) {
 
@@ -224,7 +224,7 @@ public class FavoriteAction extends QuickAction {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 
 		getParams().put(KEY_NAME, ((EditText) root.findViewById(R.id.name_edit)).getText().toString());
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));

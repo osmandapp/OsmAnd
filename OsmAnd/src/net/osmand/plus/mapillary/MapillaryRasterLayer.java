@@ -1,9 +1,12 @@
 package net.osmand.plus.mapillary;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
+import androidx.annotation.NonNull;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -20,12 +23,12 @@ class MapillaryRasterLayer extends MapTileLayer implements MapillaryLayer {
 	private Bitmap headingImage;
 	private Paint paintIcon;
 
-	MapillaryRasterLayer() {
-		super(false);
+	MapillaryRasterLayer(@NonNull Context context) {
+		super(context, false);
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		super.initLayer(view);
 		paintIcon = new Paint();
 		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_fuel_type">Tipe de carburant</string>
     <string name="poi_fuel_avia_type">Tipe de carburant (avia)</string>
@@ -181,7 +181,6 @@
     <string name="poi_doityourself">Bricolatge</string>
     <string name="poi_doors">Pòrtas</string>
     <string name="poi_erotic">Articles erotics</string>
-    
     <string name="poi_fishing">Èscas e pesca</string>
     <string name="poi_florist">Florista</string>
     <string name="poi_frame">Enquadrament</string>
@@ -219,7 +218,6 @@
     <string name="poi_ship_chandler">Articles per lo nautisme</string>
     <string name="poi_sports">Materiau esportiu</string>
     <string name="poi_stationery">Papetariá</string>
-    
     <string name="poi_ticket">Bilhetariá</string>
     <string name="poi_tobacco">Tabatariá</string>
     <string name="poi_toys">Joguets</string>
@@ -407,7 +405,6 @@
     <string name="poi_groyne">Espigon</string>
     <string name="poi_power_substation">Estacion electrica segondària</string>
     <string name="poi_power_transformer">Transformador electric</string>
-    
     <string name="poi_power_plant">Centrala electrica</string>
     <string name="poi_power_generator">Generador electric</string>
     <string name="poi_power_tower">Torre d’auta tension</string>
@@ -522,7 +519,6 @@
     <string name="poi_embassy">Embaissada</string>
     <string name="poi_pension_fund">Fons de pension</string>
     <string name="poi_migration">Ofici de l’imigracion</string>
-    
     <string name="poi_customs">Dogana</string>
     <string name="poi_country">País</string>
     <string name="poi_city">Vila</string>
@@ -1060,4 +1056,5 @@
     <string name="poi_content_fodder">Contengut: ferratge</string>
     <string name="poi_content_beer">Contengut: cervesa</string>
     <string name="poi_content_salt">Contengut: sau</string>
+    <string name="poi_site_type_fortification">Fortificacion</string>
 </resources>

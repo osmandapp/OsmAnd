@@ -144,7 +144,7 @@ public class MapTileDownloader {
 	}
 
 	public void removeDownloaderCallback(IMapDownloaderCallback callback) {
-		LinkedList<WeakReference<IMapDownloaderCallback>> ncall = new LinkedList<WeakReference<IMapDownloaderCallback>>(callbacks);
+		LinkedList<WeakReference<IMapDownloaderCallback>> ncall = new LinkedList<>(callbacks);
 		Iterator<WeakReference<IMapDownloaderCallback>> it = ncall.iterator();
 		while (it.hasNext()) {
 			IMapDownloaderCallback c = it.next().get();
@@ -155,13 +155,12 @@ public class MapTileDownloader {
 		callbacks = ncall;
 	}
 
-
 	public void clearCallbacks() {
 		callbacks = new LinkedList<>();
 	}
 
 	public List<IMapDownloaderCallback> getDownloaderCallbacks() {
-		ArrayList<IMapDownloaderCallback> lst = new ArrayList<IMapDownloaderCallback>();
+		ArrayList<IMapDownloaderCallback> lst = new ArrayList<>();
 		for (WeakReference<IMapDownloaderCallback> c : callbacks) {
 			IMapDownloaderCallback ct = c.get();
 			if (ct != null) {
@@ -217,7 +216,6 @@ public class MapTileDownloader {
 		}
 	}
 
-
 	private class DownloadMapWorker implements Runnable, Comparable<DownloadMapWorker> {
 
 		private final DownloadRequest request;
@@ -236,32 +234,32 @@ public class MapTileDownloader {
 
 				currentlyDownloaded.add(request.fileToSave);
 				if (log.isDebugEnabled()) {
-					log.debug("Start downloading tile : " + request.url); //$NON-NLS-1$
+					log.debug("Start downloading tile : " + request.url); 
 				}
 				long time = System.currentTimeMillis();
 				request.setError(false);
 				try {
 					URLConnection connection = NetworkUtils.getHttpURLConnection(request.url);
-					connection.setRequestProperty("User-Agent", Algorithms.isEmpty(request.userAgent) ? USER_AGENT : request.userAgent); //$NON-NLS-1$
+					connection.setRequestProperty("User-Agent", Algorithms.isEmpty(request.userAgent) ? USER_AGENT : request.userAgent); 
 					if (request.referer != null)
-						connection.setRequestProperty("Referer", request.referer); //$NON-NLS-1$
+						connection.setRequestProperty("Referer", request.referer); 
 					connection.setConnectTimeout(CONNECTION_TIMEOUT);
 					connection.setReadTimeout(CONNECTION_TIMEOUT);
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 					request.saveTile(inputStream);
 					if (log.isDebugEnabled()) {
-						log.debug("Downloading tile : " + request.url + " successfull " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						log.debug("Downloading tile : " + request.url + " successfull " + (System.currentTimeMillis() - time) + " ms");  //$NON-NLS-2$ //$NON-NLS-3$
 					}
 				} catch (UnknownHostException e) {
 					currentErrors++;
 					timeForErrorCounter = System.currentTimeMillis();
 					request.setError(true);
-					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage()); //$NON-NLS-1$  //$NON-NLS-2$
+					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage());   //$NON-NLS-2$
 				} catch (Exception e) {
 					currentErrors++;
 					timeForErrorCounter = System.currentTimeMillis();
 					request.setError(true);
-					log.warn("Cannot download tile : " + request.url, e); //$NON-NLS-1$
+					log.warn("Cannot download tile : " + request.url, e); 
 				} finally {
 					currentlyDownloaded.remove(request.fileToSave);
 				}

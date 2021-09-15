@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityLayers;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.base.ContextMenuFragment.ContextMenuFragmentListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -97,7 +97,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			MapActivityLayers mapLayers = mapActivity.getMapLayers();
+			MapLayers mapLayers = mapActivity.getMapLayers();
 
 			MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
 			mapControlsLayer.removeHudButtons(Arrays.asList(ZOOM_IN_BUTTON_ID, ZOOM_OUT_BUTTON_ID, BACK_TO_LOC_BUTTON_ID));
@@ -114,7 +114,7 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		View myLocButtonView = view.findViewById(R.id.map_my_location_button);
 		View mapRulerView = view.findViewById(R.id.map_ruler_layout);
 
-		MapActivityLayers mapLayers = mapActivity.getMapLayers();
+		MapLayers mapLayers = mapActivity.getMapLayers();
 
 		OsmandMapTileView mapTileView = mapActivity.getMapView();
 		View.OnLongClickListener longClickListener = MapControlsLayer.getOnClickMagnifierListener(mapTileView);

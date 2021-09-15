@@ -49,7 +49,7 @@ public class ConfigureMapDialogs {
 		int selectedProfileColor = settings.APPLICATION_MODE.get().getProfileColor(nightMode);
 
 		final OsmandMapTileView view = activity.getMapView();
-		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
+		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		bld.setTitle(R.string.daynight);
 		final String[] items = new String[DayNightMode.values().length];
 		for (int i = 0; i < items.length; i++) {
@@ -81,7 +81,7 @@ public class ConfigureMapDialogs {
 
 		final OsmandMapTileView view = activity.getMapView();
 		final OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
-		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
+		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		int p = (int) (mapDensity.get() * 100);
 		final TIntArrayList tlist = new TIntArrayList(new int[] {25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
 		final List<String> values = new ArrayList<>();
@@ -139,7 +139,7 @@ public class ConfigureMapDialogs {
 
 
 		final OsmandMapTileView view = activity.getMapView();
-		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
+		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		// test old descr as title
 		b.setTitle(R.string.text_size);
 		final Float[] txtValues = new Float[] {0.33f, 0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f, 3f};
@@ -178,7 +178,7 @@ public class ConfigureMapDialogs {
 
 
 		final OsmandMapTileView view = activity.getMapView();
-		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
+		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 
 		b.setTitle(activity.getString(R.string.map_locale));
 
@@ -195,14 +195,10 @@ public class ConfigureMapDialogs {
 		selectedLanguageIndex[0] = selected;
 		transliterateNames[0] = settings.MAP_TRANSLITERATE_NAMES.get();
 
-		final OnCheckedChangeListener translitChangdListener = new OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				transliterateNames[0] = isChecked;
-			}
-		};
+		final OnCheckedChangeListener translitChangdListener = (buttonView, isChecked) -> transliterateNames[0] = isChecked;
 
-		final ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(new ContextThemeWrapper(view.getContext(), themeRes), R.layout.single_choice_switch_item, R.id.text1, txtValues) {
+		final ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(
+				new ContextThemeWrapper(activity, themeRes), R.layout.single_choice_switch_item, R.id.text1, txtValues) {
 			@NonNull
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
@@ -369,7 +365,7 @@ public class ConfigureMapDialogs {
 				}
 				a.notifyDataSetInvalidated();
 				activity.refreshMapComplete();
-				activity.getMapLayers().updateLayers(activity.getMapView());
+				activity.getMapLayers().updateLayers(activity);
 			}
 		});
 		AlertDialog dialog = builder.create();

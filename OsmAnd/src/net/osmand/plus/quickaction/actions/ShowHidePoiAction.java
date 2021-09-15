@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -104,12 +105,12 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 
-		activity.closeQuickSearch();
+		mapActivity.closeQuickSearch();
 
-		PoiFiltersHelper pf = activity.getMyApplication().getPoiFilters();
-		List<PoiUIFilter> poiFilters = loadPoiFilters(activity.getMyApplication().getPoiFilters());
+		PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();
+		List<PoiUIFilter> poiFilters = loadPoiFilters(mapActivity.getMyApplication().getPoiFilters());
 
 		if (!isCurrentFilters(pf.getSelectedPoiFilters(), poiFilters)) {
 
@@ -124,7 +125,7 @@ public class ShowHidePoiAction extends QuickAction {
 
 		} else pf.clearSelectedPoiFilters();
 
-		activity.getMapLayers().updateLayers(activity.getMapView());
+		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
 
 	private boolean isCurrentFilters(OsmandApplication application) {
@@ -143,15 +144,15 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, final MapActivity activity) {
-		boolean nightMode = activity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		View view = UiUtilities.getInflater(activity, nightMode).inflate(R.layout.quick_action_show_hide_poi, parent, false);
+	public void drawUI(@NonNull ViewGroup parent, @NonNull final MapActivity mapActivity) {
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.quick_action_show_hide_poi, parent, false);
 
 		RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
 		Button addFilter = (Button) view.findViewById(R.id.btnAddCategory);
 
 		final Adapter adapter = new Adapter(!getParams().isEmpty()
-				? loadPoiFilters(activity.getMyApplication().getPoiFilters())
+				? loadPoiFilters(mapActivity.getMyApplication().getPoiFilters())
 				: new ArrayList<PoiUIFilter>());
 
 		list.setAdapter(adapter);
@@ -159,7 +160,7 @@ public class ShowHidePoiAction extends QuickAction {
 		addFilter.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				showSingleChoicePoiFilterDialog(activity.getMyApplication(), activity, adapter);
+				showSingleChoicePoiFilterDialog(mapActivity.getMyApplication(), mapActivity, adapter);
 			}
 		});
 
@@ -357,7 +358,7 @@ public class ShowHidePoiAction extends QuickAction {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		return !getParams().isEmpty() && (getParams().get(KEY_FILTERS) != null || !getParams().get(KEY_FILTERS).isEmpty());
 	}
 }
