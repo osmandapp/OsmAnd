@@ -4321,4 +4321,7 @@
     <string name="routeInfo_roadClass_description">Забарвлення маршруту або треку відповідно до класифікації доріг.</string>
     <string name="add_group_to_markers">Додати групу до списку позначок</string>
     <string name="remove_group_from_markers">Вилучити групу зі списку позначок</string>
+    <string name="start_point">Почати</string>
+    <string name="mapillary_menu_filter_description_new">Добирати зображення за датою або типом. Працює лише в наближенні великим планом.</string>
+    <string name="service_is_not_available_please_try_later">Служба недоступна, будь ласка, спробуйте пізніше</string>
 </resources>

@@ -4321,4 +4321,7 @@
     <string name="routeInfo_surface_description">Fruni informatziones in prus in subra de sa superfìtzie fìsica de sos caminos e de sas camineras pro andare a pee.</string>
     <string name="add_group_to_markers">Annanghe unu grupu a sa lista de marcadores</string>
     <string name="remove_group_from_markers">Boga su grupu dae sa lista de marcadores</string>
+    <string name="start_point">Incumintza</string>
+    <string name="mapillary_menu_filter_description_new">Filtra sas immàgines pro data o casta. Ativu petzi a pustis de s\'ismanniamentu.</string>
+    <string name="service_is_not_available_please_try_later">Su servìtziu no est a disponimentu. Torra a proare prus a tardu</string>
 </resources>

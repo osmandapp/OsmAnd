@@ -3148,7 +3148,7 @@
     <string name="quick_action_need_to_add_item_to_list">Voeg tenminste één item toe aan de lijst via de instelling \'Sneltoetsen\'</string>
     <string name="routing_attr_piste_type_downhill_name">Alpine/afdaling ski</string>
     <string name="routing_attr_piste_type_downhill_description">Hellingen voor alpine en bergafwaarts skiën en toegang tot skiliften.</string>
-    <string name="routing_attr_piste_type_nordic_name">Cross country/langlaufen</string>
+    <string name="routing_attr_piste_type_nordic_name">Cross country en langlaufen</string>
     <string name="routing_attr_piste_type_nordic_description">Sporen voor nordic of cross-country skiën.</string>
     <string name="routing_attr_piste_type_skitour_name">Ski tours</string>
     <string name="routing_attr_piste_type_skitour_description">Routes voor ski tours.</string>
@@ -4149,4 +4149,11 @@
     <string name="backup_welcome_back">Welkom terug!</string>
     <string name="attribute">Eigenschappen</string>
     <string name="shared_string_purchased">Gekocht</string>
+    <string name="routeInfo_surface_description">Vermeld extra informatie over het fysieke oppervlak van wegen en paden.</string>
+    <string name="routeInfo_roadClass_description">Kleur de route volgens de weegclassificatie.</string>
+    <string name="add_group_to_markers">Voeg de groep toe tot je lijst van markeringen</string>
+    <string name="remove_group_from_markers">Verwijder de groep uit lijst van markeringen</string>
+    <string name="start_point">Start</string>
+    <string name="mapillary_menu_filter_description_new">Filter afbeelding op basis van tijdstip of type. Enkel beschikbaar in een ingezoomde weergave.</string>
+    <string name="service_is_not_available_please_try_later">De service is niet beschikbaar, gelieve later opnieuw te proberen</string>
 </resources>

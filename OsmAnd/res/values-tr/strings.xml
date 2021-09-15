@@ -4322,4 +4322,7 @@
     <string name="routeInfo_roadClass_description">Yol sınıflandırmasına göre güzergah veya yol hattının renklendirilmesi.</string>
     <string name="add_group_to_markers">İşaretleyiciler listesine grup ekle</string>
     <string name="remove_group_from_markers">Grubu işaretleyiciler listesinden kaldır</string>
+    <string name="start_point">Başlangıç</string>
+    <string name="mapillary_menu_filter_description_new">Görüntüleri tarihe veya türe göre filtrele. Yalnızca yakın çekimde etkindir.</string>
+    <string name="service_is_not_available_please_try_later">Hizmet kullanılamıyor, lütfen daha sonra deneyin</string>
 </resources>

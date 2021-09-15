@@ -4326,4 +4326,7 @@
     <string name="routeInfo_roadClass_description">Färbt die Route oder den Track entsprechend der Straßenklassifikation ein.</string>
     <string name="add_group_to_markers">Gruppe zu Markerliste hinzufügen</string>
     <string name="remove_group_from_markers">Gruppe von Markerliste entfernen</string>
+    <string name="start_point">Start</string>
+    <string name="mapillary_menu_filter_description_new">Bilder nach Datum oder Typ filtern. Nur hineingezoomt aktiv.</string>
+    <string name="service_is_not_available_please_try_later">Dienst ist nicht verfügbar, bitte versuchen Sie es später</string>
 </resources>
