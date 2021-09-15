@@ -8,19 +8,31 @@ import android.view.View;
 public class CarSurfaceView extends View {
 
 	private final SurfaceRenderer surfaceRenderer;
+	private int dpi;
+	private float density;
 
 	public CarSurfaceView(Context context, SurfaceRenderer surfaceRenderer) {
 		super(context);
 		this.surfaceRenderer = surfaceRenderer;
 	}
 
-	public void setWidthHeight(int width, int height) {
+	public void setSurfaceParams(int width, int height, int dpi) {
 		setRight(width);
 		setBottom(height);
+		this.dpi = dpi;
+		this.density = dpi / 160f;
 	}
 
 	public SurfaceRenderer getSurfaceRenderer() {
 		return surfaceRenderer;
+	}
+
+	public int getDpi() {
+		return dpi;
+	}
+
+	public float getDensity() {
+		return density;
 	}
 
 	@Override

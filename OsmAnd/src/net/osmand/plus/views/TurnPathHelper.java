@@ -567,8 +567,8 @@ public class TurnPathHelper {
 		}
 	}
 
-	public static Path getPathFromTurnType(Resources res, int firstTurn,
-			int secondTurn, int thirdTurn, int turnIndex, float coef, boolean leftSide, boolean smallArrow) {
+	public static Path getPathFromTurnType(int firstTurn, int secondTurn, int thirdTurn, int turnIndex,
+										   float size, boolean leftSide, boolean smallArrow) {
 		int firstTurnType = TurnType.valueOf(firstTurn, leftSide).getValue();
 		int secondTurnType = TurnType.valueOf(secondTurn, leftSide).getValue();
 		int thirdTurnType = TurnType.valueOf(thirdTurn, leftSide).getValue();
@@ -635,12 +635,10 @@ public class TurnPathHelper {
 		if (turnResource == null) {
 			return null;
 		}
-
-		int size = res.getDimensionPixelSize(R.dimen.widget_turn_lane_size);
 		return getPathFromTurnResource(turnResource, size, smallArrow);
 	}
 
-	private static Path getPathFromTurnResource(TurnResource turnResource, int size, boolean smallArrow) {
+	private static Path getPathFromTurnResource(TurnResource turnResource, float size, boolean smallArrow) {
 		float coef = size / 72.f;
 		Path p = new Path();
 		Matrix matrix = new Matrix();

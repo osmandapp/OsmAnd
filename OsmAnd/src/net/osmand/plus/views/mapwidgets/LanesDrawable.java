@@ -1,5 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,6 +11,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
@@ -24,63 +26,69 @@ import java.util.List;
 public class LanesDrawable extends Drawable {
 
 	public int[] lanes = null;
-	boolean imminent = false;
+	public boolean imminent = false;
 	public boolean isTurnByTurn = false;
 	public boolean isNightMode = false;
-	private Context ctx;
-	private Paint paintBlack;
-	private Paint paintRouteDirection;
-	private Paint paintSecondTurn;
-	private float scaleCoefficient;
+	private final Context ctx;
+	private final Paint paintBlack;
+	private final Paint paintRouteDirection;
+	private final Paint paintSecondTurn;
+	private final float size;
+
+	private float delta;
+	private final boolean leftSide;
+	private final float imgMinDelta;
+	private final float imgMargin;
+	private final float laneHalfSize;
+
 	private int height;
 	private int width;
-	private float delta;
-	private float laneHalfSize;
-	private static final float miniCoeff = 2f;
-	private final boolean leftSide;
-	private int imgMinDelta;
-	private int imgMargin;
 
-	public LanesDrawable(@NonNull Context ctx, float scaleCoefficent) {
+	public LanesDrawable(@NonNull Context ctx, float strokeWidth) {
+		this(ctx, strokeWidth, ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_size),
+				ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_min_delta),
+				ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_margin),
+				ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_size));
+	}
+
+	public LanesDrawable(@NonNull Context ctx, float strokeWidth, float size, float imgMinDeltaPx, float imgMarginPx, float laneSizePx) {
 		this.ctx = ctx;
 		OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		leftSide = settings.DRIVING_REGION.get().leftHandDriving;
-		imgMinDelta = ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_min_delta);
-		imgMargin = ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_margin);
-		laneHalfSize = ctx.getResources().getDimensionPixelSize(R.dimen.widget_turn_lane_size) / 2;
-
-		this.scaleCoefficient = scaleCoefficent;
+		imgMinDelta = imgMinDeltaPx;
+		imgMargin = imgMarginPx;
+		laneHalfSize = laneSizePx / 2f;
+		this.size = size;
 
 		paintBlack = new Paint(Paint.ANTI_ALIAS_FLAG);
 		paintBlack.setStyle(Paint.Style.STROKE);
 		paintBlack.setColor(Color.BLACK);
-		paintBlack.setStrokeWidth(scaleCoefficent);
+		paintBlack.setStrokeWidth(strokeWidth);
 
 		paintRouteDirection = new Paint(Paint.ANTI_ALIAS_FLAG);
 		paintRouteDirection.setStyle(Paint.Style.FILL);
-		paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow));
+		paintRouteDirection.setColor(ContextCompat.getColor(ctx, R.color.nav_arrow));
 
 		paintSecondTurn = new Paint(Paint.ANTI_ALIAS_FLAG);
 		paintSecondTurn.setStyle(Paint.Style.FILL);
-		paintSecondTurn.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
+		paintSecondTurn.setColor(ContextCompat.getColor(ctx, R.color.nav_arrow_distant));
 	}
 
 	public void updateBounds() {
 		float w = 0;
 		float h = 0;
 		float delta = imgMinDelta;
-		float coef = scaleCoefficient / miniCoeff;
 		if (lanes != null) {
 			List<RectF> boundsList = new ArrayList<>(lanes.length);
-			for (int i = 0; i < lanes.length; i++) {
-				int turnType = TurnType.getPrimaryTurn(lanes[i]);
-				int secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
-				int thirdTurnType = TurnType.getTertiaryTurn(lanes[i]);
+			for (int lane : lanes) {
+				int turnType = TurnType.getPrimaryTurn(lane);
+				int secondTurnType = TurnType.getSecondaryTurn(lane);
+				int thirdTurnType = TurnType.getTertiaryTurn(lane);
 
 				RectF imgBounds = new RectF();
 				if (thirdTurnType > 0) {
-					Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
-							secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide, true);
+					Path p = TurnPathHelper.getPathFromTurnType(turnType, secondTurnType, thirdTurnType,
+							TurnPathHelper.THIRD_TURN, size, leftSide, true);
 					if (p != null) {
 						RectF b = new RectF();
 						p.computeBounds(b, true);
@@ -94,8 +102,8 @@ public class LanesDrawable extends Drawable {
 					}
 				}
 				if (secondTurnType > 0) {
-					Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
-							secondTurnType, thirdTurnType, TurnPathHelper.SECOND_TURN, coef, leftSide, true);
+					Path p = TurnPathHelper.getPathFromTurnType(turnType, secondTurnType, thirdTurnType,
+							TurnPathHelper.SECOND_TURN, size, leftSide, true);
 					if (p != null) {
 						RectF b = new RectF();
 						p.computeBounds(b, true);
@@ -108,8 +116,8 @@ public class LanesDrawable extends Drawable {
 						}
 					}
 				}
-				Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
-						secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide, true);
+				Path p = TurnPathHelper.getPathFromTurnType(turnType, secondTurnType, thirdTurnType,
+						TurnPathHelper.FIRST_TURN, size, leftSide, true);
 				if (p != null) {
 					RectF b = new RectF();
 					p.computeBounds(b, true);
@@ -174,7 +182,6 @@ public class LanesDrawable extends Drawable {
 
 		//to change color immediately when needed
 		if (lanes != null && lanes.length > 0) {
-			float coef = scaleCoefficient / miniCoeff;
 			canvas.save();
 			// canvas.translate((int) (16 * scaleCoefficient), 0);
 			for (int i = 0; i < lanes.length; i++) {
@@ -182,11 +189,11 @@ public class LanesDrawable extends Drawable {
 					if (isTurnByTurn) {
 						paintRouteDirection.setColor(ColorUtilities.getActiveColor(ctx, isNightMode));
 					} else {
-						paintRouteDirection.setColor(imminent ? ctx.getResources().getColor(R.color.nav_arrow_imminent) :
-								ctx.getResources().getColor(R.color.nav_arrow));
+						paintRouteDirection.setColor(imminent ? ContextCompat.getColor(ctx, R.color.nav_arrow_imminent) :
+								ContextCompat.getColor(ctx, R.color.nav_arrow));
 					}
 				} else {
-					paintRouteDirection.setColor(ctx.getResources().getColor(R.color.nav_arrow_distant));
+					paintRouteDirection.setColor(ContextCompat.getColor(ctx, R.color.nav_arrow_distant));
 				}
 				int turnType = TurnType.getPrimaryTurn(lanes[i]);
 				int secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
@@ -198,8 +205,8 @@ public class LanesDrawable extends Drawable {
 				Path firstTurnPath = null;
 
 				if (thirdTurnType > 0) {
-					Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
-							secondTurnType, thirdTurnType, TurnPathHelper.THIRD_TURN, coef, leftSide, true);
+					Path p = TurnPathHelper.getPathFromTurnType(turnType, secondTurnType, thirdTurnType,
+							TurnPathHelper.THIRD_TURN, size, leftSide, true);
 					if (p != null) {
 						RectF b = new RectF();
 						p.computeBounds(b, true);
@@ -214,8 +221,8 @@ public class LanesDrawable extends Drawable {
 					}
 				}
 				if (secondTurnType > 0) {
-					Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
-							secondTurnType, thirdTurnType, TurnPathHelper.SECOND_TURN, coef, leftSide, true);
+					Path p = TurnPathHelper.getPathFromTurnType(turnType, secondTurnType, thirdTurnType,
+							TurnPathHelper.SECOND_TURN, size, leftSide, true);
 					if (p != null) {
 						RectF b = new RectF();
 						p.computeBounds(b, true);
@@ -229,8 +236,8 @@ public class LanesDrawable extends Drawable {
 						}
 					}
 				}
-				Path p = TurnPathHelper.getPathFromTurnType(ctx.getResources(), turnType,
-						secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide, true);
+				Path p = TurnPathHelper.getPathFromTurnType(turnType, secondTurnType, thirdTurnType,
+						TurnPathHelper.FIRST_TURN, size, leftSide, true);
 				if (p != null) {
 					RectF b = new RectF();
 					p.computeBounds(b, true);
@@ -292,6 +299,7 @@ public class LanesDrawable extends Drawable {
 	public void setColorFilter(ColorFilter cf) {
 	}
 
+	@SuppressLint("WrongConstant")
 	@Override
 	public int getOpacity() {
 		return 0;

@@ -1,6 +1,5 @@
 package net.osmand.plus.auto;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
@@ -36,6 +35,11 @@ import java.util.TimeZone;
 
 public class TripHelper {
 
+	public static final float TURN_IMAGE_SIZE_DP = 128f;
+	public static final float TURN_LANE_IMAGE_SIZE = 64f;
+	public static final float TURN_LANE_IMAGE_MIN_DELTA = 36f;
+	public static final float TURN_LANE_IMAGE_MARGIN = 4f;
+
 	private final OsmandApplication app;
 
 	private Destination lastDestination;
@@ -69,7 +73,7 @@ public class TripHelper {
 	}
 
 	@NonNull
-	public Trip buildTrip() {
+	public Trip buildTrip(float density) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		OsmandSettings settings = app.getSettings();
 
@@ -110,12 +114,12 @@ public class TripHelper {
 			}
 			if (turnType != null) {
 				TurnDrawable drawable = new TurnDrawable(app, false);
-				int height = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_height);
-				int width = (int) app.getResources().getDimension(android.R.dimen.notification_large_icon_width);
+				int height = (int) (TURN_IMAGE_SIZE_DP * density);
+				int width = (int) (TURN_IMAGE_SIZE_DP * density);
 				drawable.setBounds(0, 0, width, height);
 				drawable.setTurnType(turnType);
 				drawable.setTurnImminent(turnImminent, deviatedFromRoute);
-				Bitmap turnBitmap = drawableToBitmap(app, drawable);
+				Bitmap turnBitmap = drawableToBitmap(drawable, width, height);
 				turnBuilder = new Maneuver.Builder(getManeuverType(turnType));
 				if (turnType.isRoundAbout()) {
 					turnBuilder.setRoundaboutExitNumber(turnType.getExitOut());
@@ -132,6 +136,7 @@ public class TripHelper {
 			nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc, false);
 			if (nextDirInfo != null && nextDirInfo.directionInfo != null && nextDirInfo.directionInfo.getTurnType() != null) {
 				int[] lanes = nextDirInfo.directionInfo.getTurnType().getLanes();
+				int locimminent = nextDirInfo.imminent;
 				// Do not show too far
 				if ((nextDirInfo.distanceTo > 800 && nextDirInfo.directionInfo.getTurnType().isSkipToSpeak()) || nextDirInfo.distanceTo > 1200) {
 					lanes = null;
@@ -152,12 +157,16 @@ public class TripHelper {
 						}
 						stepBuilder.addLane(laneBuilder.build());
 					}
-					LanesDrawable lanesDrawable = new LanesDrawable(app, 1);
+					LanesDrawable lanesDrawable = new LanesDrawable(app, 1f,
+							TURN_LANE_IMAGE_SIZE * density,
+							TURN_LANE_IMAGE_MIN_DELTA * density,
+							TURN_LANE_IMAGE_MARGIN * density,
+							TURN_LANE_IMAGE_SIZE * density);
 					lanesDrawable.lanes = lanes;
-					lanesDrawable.isTurnByTurn = true;
+					lanesDrawable.imminent = locimminent == 0;
 					lanesDrawable.isNightMode = app.getDaynightHelper().isNightMode();
 					lanesDrawable.updateBounds(); // prefer 500 x 74 dp
-					Bitmap lanesBitmap = drawableToBitmap(app, lanesDrawable, lanesDrawable.getIntrinsicWidth(), lanesDrawable.getIntrinsicHeight());
+					Bitmap lanesBitmap = drawableToBitmap(lanesDrawable, lanesDrawable.getIntrinsicWidth(), lanesDrawable.getIntrinsicHeight());
 					stepBuilder.setLanesImage(new CarIcon.Builder(IconCompat.createWithBitmap(lanesBitmap)).build());
 				}
 			}
@@ -207,13 +216,7 @@ public class TripHelper {
 	}
 
 	@NonNull
-	private Bitmap drawableToBitmap(@NonNull Context ctx, @NonNull Drawable drawable) {
-		int height = (int) ctx.getResources().getDimension(android.R.dimen.notification_large_icon_height);
-		int width = (int) ctx.getResources().getDimension(android.R.dimen.notification_large_icon_width);
-		return drawableToBitmap(ctx, drawable, width, height);
-	}
-
-	private Bitmap drawableToBitmap(@NonNull Context ctx, @NonNull Drawable drawable, int width, int height) {
+	private Bitmap drawableToBitmap(@NonNull Drawable drawable, int width, int height) {
 		Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 		canvas.drawColor(0, PorterDuff.Mode.CLEAR);

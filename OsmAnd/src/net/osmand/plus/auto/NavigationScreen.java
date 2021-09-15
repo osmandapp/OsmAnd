@@ -95,6 +95,11 @@ public final class NavigationScreen extends Screen {
 		mSurfaceRenderer = surfaceRenderer;
 	}
 
+	@NonNull
+	public SurfaceRenderer getSurfaceRenderer() {
+		return mSurfaceRenderer;
+	}
+
 	/**
 	 * Updates the navigation screen with the next instruction.
 	 */

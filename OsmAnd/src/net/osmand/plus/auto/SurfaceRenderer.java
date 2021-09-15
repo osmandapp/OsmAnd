@@ -47,7 +47,7 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 					synchronized (SurfaceRenderer.this) {
 						Log.i(TAG, "Surface available " + surfaceContainer);
 						mSurface = surfaceContainer.getSurface();
-						surfaceView.setWidthHeight(surfaceContainer.getWidth(), surfaceContainer.getHeight());
+						surfaceView.setSurfaceParams(surfaceContainer.getWidth(), surfaceContainer.getHeight(), surfaceContainer.getDpi());
 						darkMode = mCarContext.isDarkMode();
 						OsmandMapTileView mapView = SurfaceRenderer.this.mapView;
 						if (mapView != null) {
@@ -199,6 +199,14 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 
 	public int getHeight() {
 		return surfaceView.getHeight();
+	}
+
+	public int getDpi() {
+		return surfaceView.getDpi();
+	}
+
+	public float getDensity() {
+		return surfaceView.getDensity();
 	}
 
 	public boolean hasSurface() {

@@ -21,6 +21,7 @@ import androidx.car.app.navigation.model.Trip;
 import net.osmand.Location;
 import net.osmand.plus.auto.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
+import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.auto.TripHelper;
 import net.osmand.plus.helpers.LocationServiceHelper;
 import net.osmand.plus.helpers.LocationServiceHelper.LocationCallback;
@@ -256,12 +257,17 @@ public class NavigationService extends Service {
 		TripHelper tripHelper = this.tripHelper;
 		if (carNavigationActive && tripHelper != null
 				&& routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
-			Trip trip = tripHelper.buildTrip();
-			navigationManager.updateTrip(trip);
 			NavigationSession carNavigationSession = app.getCarNavigationSession();
 			if (carNavigationSession != null) {
 				NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
 				if (navigationScreen != null) {
+					float density = navigationScreen.getSurfaceRenderer().getDensity();
+					if (density == 0) {
+						density = 1;
+					}
+					Trip trip = tripHelper.buildTrip(density);
+					navigationManager.updateTrip(trip);
+
 					List<Destination> destinations = null;
 					Destination destination = tripHelper.getLastDestination();
 					TravelEstimate destinationTravelEstimate = tripHelper.getLastDestinationTravelEstimate();
