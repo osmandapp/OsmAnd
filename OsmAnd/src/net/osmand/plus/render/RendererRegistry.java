@@ -1,5 +1,7 @@
 package net.osmand.plus.render;
 
+import static net.osmand.IndexConstants.RENDERER_INDEX_EXT;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -25,8 +27,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -48,39 +52,37 @@ public class RendererRegistry {
 	public final static String DESERT_RENDER = "Desert";  //$NON-NLS-1$
 	public final static String SNOWMOBILE_RENDER = "Snowmobile";  //$NON-NLS-1$
 
+	private final OsmandApplication app;
+
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
 
-	private Map<String, File> externalRenderers = new LinkedHashMap<String, File>();
-	private Map<String, String> internalRenderers = new LinkedHashMap<String, String>();
-	
-	private Map<String, RenderingRulesStorage> renderers = new LinkedHashMap<String, RenderingRulesStorage>();
+	private Map<String, File> externalRenderers = new LinkedHashMap<>();
+	private final Map<String, String> internalRenderers = new LinkedHashMap<>();
+	private final Map<String, RenderingRulesStorage> renderers = new LinkedHashMap<>();
+	private final List<IRendererLoadedEventListener> rendererLoadedListeners = new ArrayList<>();
 
     public interface IRendererLoadedEventListener {
-        void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source);
-    }
+		void onRendererLoaded(String name, RenderingRulesStorage rules, InputStream source);
+	}
 
-    private IRendererLoadedEventListener rendererLoadedEventListener;
-
-	private OsmandApplication app;
-	
-	public RendererRegistry(OsmandApplication app){
+	public RendererRegistry(@NonNull OsmandApplication app) {
 		this.app = app;
 		internalRenderers.put(DEFAULT_RENDER, DEFAULT_RENDER_FILE_PATH);
-		internalRenderers.put(TOURING_VIEW, "Touring-view_(more-contrast-and-details)" +".render.xml");
-		internalRenderers.put(TOPO_RENDER, "topo" + ".render.xml");
-		internalRenderers.put(MAPNIK_RENDER, "mapnik" + ".render.xml");
-		internalRenderers.put(LIGHTRS_RENDER, "LightRS" + ".render.xml");
-		internalRenderers.put(UNIRS_RENDER, "UniRS" + ".render.xml");
-		internalRenderers.put(NAUTICAL_RENDER, "nautical" + ".render.xml");
-		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + ".render.xml");
-		internalRenderers.put(OFFROAD_RENDER, "offroad" + ".render.xml");
-		internalRenderers.put(DESERT_RENDER, "desert" + ".render.xml");
-		internalRenderers.put(SNOWMOBILE_RENDER, "snowmobile" + ".render.xml");
+		internalRenderers.put(TOURING_VIEW, "Touring-view_(more-contrast-and-details)" + RENDERER_INDEX_EXT);
+		internalRenderers.put(TOPO_RENDER, "topo" + RENDERER_INDEX_EXT);
+		internalRenderers.put(MAPNIK_RENDER, "mapnik" + RENDERER_INDEX_EXT);
+		internalRenderers.put(LIGHTRS_RENDER, "LightRS" + RENDERER_INDEX_EXT);
+		internalRenderers.put(UNIRS_RENDER, "UniRS" + RENDERER_INDEX_EXT);
+		internalRenderers.put(NAUTICAL_RENDER, "nautical" + RENDERER_INDEX_EXT);
+		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + RENDERER_INDEX_EXT);
+		internalRenderers.put(OFFROAD_RENDER, "offroad" + RENDERER_INDEX_EXT);
+		internalRenderers.put(DESERT_RENDER, "desert" + RENDERER_INDEX_EXT);
+		internalRenderers.put(SNOWMOBILE_RENDER, "snowmobile" + RENDERER_INDEX_EXT);
 	}
 	
 	public RenderingRulesStorage defaultRender() {
-		if(defaultRender == null){
+		if (defaultRender == null) {
 			defaultRender = getRenderer(DEFAULT_RENDER);
 		}
 		return defaultRender;
@@ -97,9 +99,7 @@ public class RendererRegistry {
 			RenderingRulesStorage r = loadRenderer(name, new LinkedHashMap<String, RenderingRulesStorage>(), new LinkedHashMap<String, String>());
 			renderers.put(name, r);
 			return r;
-		} catch (IOException e) {
-			log.error("Error loading renderer", e); //$NON-NLS-1$
-		} catch (XmlPullParserException e) {
+		} catch (IOException | XmlPullParserException e) {
 			log.error("Error loading renderer", e); //$NON-NLS-1$
 		}
 		return null;
@@ -186,10 +186,9 @@ public class RendererRegistry {
 		} finally {
 			is.close();
 		}
-
-        if (rendererLoadedEventListener != null)
-            rendererLoadedEventListener.onRendererLoaded(name, main, getInputStream(name));
-
+		for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
+			listener.onRendererLoaded(name, main, getInputStream(name));
+		}
 		return main;
 	}
 
@@ -259,7 +258,7 @@ public class RendererRegistry {
 			File[] lf = file.listFiles();
 			if (lf != null) {
 				for (File f : lf) {
-					if (f != null && f.getName().endsWith(IndexConstants.RENDERER_INDEX_EXT)) {
+					if (f != null && f.getName().endsWith(RENDERER_INDEX_EXT)) {
 						if (!internalRenderers.containsValue(f.getName())) {
 							String name = formatRendererFileName(f.getName());
 							externalRenderers.put(name, f);
@@ -272,7 +271,7 @@ public class RendererRegistry {
 	}
 
 	public static String formatRendererFileName(String fileName) {
-		String name = fileName.substring(0, fileName.length() - IndexConstants.RENDERER_INDEX_EXT.length());
+		String name = fileName.substring(0, fileName.length() - RENDERER_INDEX_EXT.length());
 		name = name.replace('_', ' ').replace('-', ' ');
 		return Algorithms.capitalizeFirstLetter(name);
 	}
@@ -356,13 +355,13 @@ public class RendererRegistry {
 		this.currentSelectedRender = currentSelectedRender;
 	}
 
-    public void setRendererLoadedEventListener(IRendererLoadedEventListener listener) {
-        rendererLoadedEventListener = listener;
-    }
+	public void addRendererLoadedEventListener(IRendererLoadedEventListener listener) {
+		rendererLoadedListeners.add(listener);
+	}
 
-    public IRendererLoadedEventListener getRendererLoadedEventListener() {
-        return rendererLoadedEventListener;
-    }
+	public void removeRendererLoadedEventListener(IRendererLoadedEventListener listener) {
+		rendererLoadedListeners.remove(listener);
+	}
 
 	public RenderingRuleProperty getCustomRenderingRuleProperty(String attrName) {
 		RenderingRulesStorage renderer = getCurrentSelectedRenderer();

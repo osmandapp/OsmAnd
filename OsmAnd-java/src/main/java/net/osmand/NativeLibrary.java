@@ -1,22 +1,9 @@
 package net.osmand;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
+import static net.osmand.router.RoutePlannerFrontEnd.GpxPoint;
+import static net.osmand.router.RoutePlannerFrontEnd.GpxRouteApproximation;
 
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
@@ -34,15 +21,25 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TransportRoutingConfiguration;
 import net.osmand.util.Algorithms;
-
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.router.RoutePlannerFrontEnd.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.IndexConstants.GPX_GZ_FILE_EXT;
+import gnu.trove.list.array.TIntArrayList;
 
 public class NativeLibrary {
 
@@ -270,6 +267,10 @@ public class NativeLibrary {
 		return lr;
 	}
 
+	public void clearCachedRenderingRulesStorage() {
+		 clearRenderingRulesStorage();
+	}
+
 	/**/
 	protected static native NativeGpxRouteApproximationResult nativeSearchGpxRoute(RoutingContext c,
 	                                                                               NativeGpxPointApproximation[] gpxPoints,
@@ -300,6 +301,8 @@ public class NativeLibrary {
 	protected static native boolean closeBinaryMapFile(String filePath);
 
 	protected static native void initRenderingRulesStorage(RenderingRulesStorage storage);
+
+	protected static native void clearRenderingRulesStorage();
 
 	protected static native RenderingGenerationResult generateRenderingIndirect(RenderingContext rc, long searchResultHandler,
 			boolean isTransparent, RenderingRuleSearchRequest render, boolean encodePng);
