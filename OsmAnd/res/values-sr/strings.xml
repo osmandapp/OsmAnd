@@ -4216,4 +4216,13 @@
     <string name="backup_error_token_is_not_valid_or_expired">Неважећи или истекао токен</string>
     <string name="backup_error_user_is_not_registered">Ниједан корисник није регистрован са том адресом е-поште</string>
     <string name="backup_error_no_valid_subscription">Нема важеће претплате</string>
+    <string name="routeInfo_winter_ice_road_description">Боји линију путање или стазе према каквоћи путева зими које је употребљиво само зимама.</string>
+    <string name="routeInfo_smoothness_description">Доставља податке о правилима бојења у зависности од употребљивости путева за возила на точковима, нарочито према исправности/равности површине.</string>
+    <string name="routeInfo_surface_description">Доставља додатне податке о врсти подлоге путева/стаза.</string>
+    <string name="routeInfo_roadClass_description">Бојење линије путање или стазе по врсти пута.</string>
+    <string name="add_group_to_markers">Додај групу списку обележивача</string>
+    <string name="remove_group_from_markers">Уклони групу из списка обележивача</string>
+    <string name="start_point">Почетак</string>
+    <string name="mapillary_menu_filter_description_new">Разврстај слике по времену и врсти. Ради само при увећању.</string>
+    <string name="service_is_not_available_please_try_later">Услуга није доступна, молим, покушајте поново касније</string>
 </resources>
