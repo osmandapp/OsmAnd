@@ -57,6 +57,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 
 	private LayoutInflater themedInflater;
 	private boolean nightMode;
+	private boolean wasDrawerDisabled;
 
 	@Override
 	public int getStatusBarColorId() {
@@ -127,8 +128,24 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	@Override
 	public void onResume() {
 		super.onResume();
-		OsmandPlugin.checkInstalledMarketPlugins(app, getActivity());
+		Activity activity = getActivity();
+		OsmandPlugin.checkInstalledMarketPlugins(app, activity);
 		adapter.notifyDataSetChanged();
+		if (activity instanceof MapActivity) {
+			MapActivity mapActivity = ((MapActivity) activity);
+			wasDrawerDisabled = mapActivity.isDrawerDisabled();
+			if (!wasDrawerDisabled) {
+				mapActivity.disableDrawer();
+			}
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		if (getActivity() instanceof MapActivity && !wasDrawerDisabled) {
+			((MapActivity) getActivity()).enableDrawer();
+		}
 	}
 
 	private void enableDisablePlugin(OsmandPlugin plugin) {
