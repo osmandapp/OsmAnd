@@ -79,7 +79,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 import static net.osmand.plus.mapillary.MapillaryVectorLayer.MIN_IMAGE_LAYER_ZOOM;
-import static net.osmand.plus.mapillary.MapillaryVectorLayer.MIN_SEQUENCE_LAYER_ZOOM;
+import static net.osmand.plus.mapillary.MapillaryVectorLayer.MAX_SEQUENCE_LAYER_ZOOM;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -253,7 +253,7 @@ public class ResourceManager {
 		this.renderer = new MapRenderRepositories(context);
 
 		bitmapTilesCache = new BitmapTilesCache(asyncLoadingThread);
-		mapillarySequenceLayerTilesCache = new GeometryTilesCache(asyncLoadingThread, MIN_SEQUENCE_LAYER_ZOOM);
+		mapillarySequenceLayerTilesCache = new GeometryTilesCache(asyncLoadingThread, MAX_SEQUENCE_LAYER_ZOOM);
 		mapillarySequenceLayerTilesCache.setMaxCacheSize(16);
 		mapillaryImageLayerTilesCache = new GeometryTilesCache(asyncLoadingThread, MIN_IMAGE_LAYER_ZOOM);
 		tilesCacheList.add(bitmapTilesCache);
@@ -392,7 +392,7 @@ public class ResourceManager {
 
 	private TilesCache<?> getTilesCache(ITileSource map, int zoom) {
 		for (TilesCache<?> cache : tilesCacheList) {
-			if (cache.isTileSourceSupported(map) && cache.isZoomSupported(zoom)) {
+			if (cache.isTileSourceSupported(map) && cache.isTileZoomCorrect(zoom)) {
 				return cache;
 			}
 		}

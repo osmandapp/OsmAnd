@@ -6,14 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PointF;
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.CoordinateSequence;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.MultiLineString;
@@ -32,9 +26,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.GeometryTilesCache;
 import net.osmand.plus.resources.ResourceManager;
-import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.util.MapUtils;
 
 import java.util.HashMap;
@@ -42,11 +36,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import static net.osmand.plus.mapillary.MapillaryImage.*;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.plus.mapillary.MapillaryImage.CAPTURED_AT_KEY;
+import static net.osmand.plus.mapillary.MapillaryImage.IS_PANORAMIC_KEY;
 
 public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, IContextMenuProvider {
 
-	public static final int MIN_SEQUENCE_LAYER_ZOOM = 13;
+	public static final int MAX_SEQUENCE_LAYER_ZOOM = 13;
 	public static final int MIN_IMAGE_LAYER_ZOOM = 14;
 	public static final int MIN_POINTS_ZOOM = 17;
 	public static final double EXTENT = 4096.0;
@@ -74,7 +73,6 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		paintLine.setAntiAlias(true);
 		paintLine.setColor(ContextCompat.getColor(view.getContext(), R.color.mapillary_color));
 		paintLine.setStrokeWidth(AndroidUtils.dpToPx(view.getContext(), 4f));
-		//paintLine.setStrokeJoin(Paint.Join.ROUND);
 		paintLine.setStrokeCap(Paint.Cap.ROUND);
 
 		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
@@ -106,15 +104,15 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		}
 
 		int currentZoom = tileBox.getZoom();
-		int minLayerZoom;
+		int tileZoom;
 		GeometryTilesCache tilesCache;
 		if (currentZoom < map.getMinimumZoomSupported()) {
 			return;
 		} else if (currentZoom < MIN_POINTS_ZOOM) {
-			minLayerZoom = MIN_SEQUENCE_LAYER_ZOOM;
+			tileZoom = MAX_SEQUENCE_LAYER_ZOOM;
 			tilesCache = mgr.getMapillarySequenceLayerTilesCache();
 		} else {
-			minLayerZoom = MIN_IMAGE_LAYER_ZOOM;
+			tileZoom = MIN_IMAGE_LAYER_ZOOM;
 			tilesCache = mgr.getMapillaryImageLayerTilesCache();
 		}
 
@@ -131,7 +129,7 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		int width = (int) Math.ceil(tilesRect.right - left);
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
 
-		int zoomDiff = currentZoom - minLayerZoom;
+		int zoomDiff = currentZoom - tileZoom;
 		int div = (int) Math.pow(2.0, zoomDiff);
 
 		boolean useInternet = (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)
@@ -140,81 +138,86 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 		Map<String, GeometryTile> tiles = new HashMap<>();
 		Map<QuadPointDouble, Map> visiblePoints = new HashMap<>();
-		long start = System.currentTimeMillis();
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				int tileX = (left + i) / div;
 				int tileY = (top + j) / div;
 
-				String tileId = mgr.calculateTileId(map, tileX, tileY, minLayerZoom);
+				String tileId = mgr.calculateTileId(map, tileX, tileY, tileZoom);
 				GeometryTile tile = tiles.get(tileId);
 				if (tile == null) {
 					// asking tile image async
-					boolean imgExist = tilesCache.tileExistOnFileSystem(tileId, map, tileX, tileY, minLayerZoom);
+					boolean imgExist = tilesCache.tileExistOnFileSystem(tileId, map, tileX, tileY, tileZoom);
 					if (imgExist || useInternet) {
 						tile = tilesCache.getTileForMapAsync(tileId, map, tileX, tileY,
-								minLayerZoom, useInternet, drawSettings.mapRefreshTimestamp);
+								tileZoom, useInternet, drawSettings.mapRefreshTimestamp);
 					}
 					if (tile != null) {
 						tiles.put(tileId, tile);
-						if (tile.getData() != null) {
-							drawLines(canvas, tileBox, tile, tileX, tileY, minLayerZoom);
+						List<Geometry> geometries = tile.getData();
+						if (geometries != null) {
+							drawLines(canvas, tileBox, geometries, tileX, tileY, tileZoom);
 							if (currentZoom >= MIN_POINTS_ZOOM) {
-								drawPoints(canvas, tileBox, tileX, tileY, tile, visiblePoints);
+								Map<QuadPointDouble, Map> drawnPoints =
+										drawPoints(canvas, tileBox, geometries, tileX, tileY);
+								visiblePoints.putAll(drawnPoints );
 							}
 						}
 					}
 				}
 			}
 		}
-		Log.v("M_MapillaryVectorLayer", "Time to draw: " + (System.currentTimeMillis() - start));
 		this.visiblePoints = visiblePoints;
 		drawSelectedPoint(canvas, tileBox);
 	}
 
-	protected void drawLines(Canvas canvas, RotatedTileBox tileBox, GeometryTile tile,
-	                         int tileX, int tileY, int minLayerZoom) {
-		for (Geometry g : tile.getData()) {
-			if (g instanceof LineString && !g.isEmpty()) {
-				LineString l = (LineString) g;
-				CoordinateSequence sequence = l.getCoordinateSequence();
-				if (sequence != null && !l.isEmpty() && !filtered(l.getUserData())) {
-					draw(sequence.toCoordinateArray(), canvas, tileBox, tileX, tileY, minLayerZoom);
-				}
-			} else if (g instanceof MultiLineString && !g.isEmpty()) {
-				MultiLineString ml = (MultiLineString) g;
-				if (!filtered(ml.getUserData())) {
-					for (int i = 0; i < ml.getNumGeometries(); i++) {
-						Geometry gm = ml.getGeometryN(i);
-						if (gm instanceof LineString && !gm.isEmpty()) {
-							LineString l = (LineString) gm;
-							CoordinateSequence sequence = l.getCoordinateSequence();
-							if (sequence != null && !l.isEmpty()) {
-								draw(sequence.toCoordinateArray(), canvas, tileBox, tileX, tileY, minLayerZoom);
-							}
-						}
-					}
-				}
+	private void drawLines(Canvas canvas, RotatedTileBox tileBox, List<Geometry> geometries,
+	                       int tileX, int tileY, int tileZoom) {
+		for (Geometry geometry : geometries) {
+			if (geometry.isEmpty() || filtered(geometry.getUserData())) {
+				continue;
+			}
+
+			if (geometry instanceof MultiLineString) {
+				drawMultiLineString(canvas, tileBox, (MultiLineString) geometry, tileX, tileY, tileZoom);
+			} else if (geometry instanceof LineString) {
+				drawLineString(canvas, tileBox, (LineString) geometry, tileX, tileY, tileZoom);
 			}
 		}
 	}
+
+	private void drawMultiLineString(Canvas canvas, RotatedTileBox tileBox, MultiLineString multiLineString,
+	                                 int tileX, int tileY, int tileZoom) {
+		for (int i = 0; i < multiLineString.getNumGeometries(); i++) {
+			Geometry geometry = multiLineString.getGeometryN(i);
+			if (geometry instanceof LineString && !geometry.isEmpty()) {
+				drawLineString(canvas, tileBox, ((LineString) geometry), tileX, tileY, tileZoom);
+			}
+		}
+	}
+
+	private void drawLineString(Canvas canvas, RotatedTileBox tileBox, LineString line,
+	                            int tileX, int tileY, int tileZoom) {
+		Coordinate[] coordinates = line.getCoordinateSequence().toCoordinateArray();
+		draw(coordinates, canvas, tileBox, tileX, tileY, tileZoom);
+	}
 	
-	protected void draw(Coordinate[] points, Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY,
-	                    int minLayerZoom) {
+	private void draw(Coordinate[] points, Canvas canvas, RotatedTileBox tileBox,
+	                    int tileX, int tileY, int tileZoom) {
 		if (points.length > 1) {
-			int dzoom = tileBox.getZoom() - minLayerZoom;
-			int mult = (int) Math.pow(2.0, dzoom);
+			int zoomDiff = tileBox.getZoom() - tileZoom;
+			int mult = (int) Math.pow(2.0, zoomDiff);
 			QuadRect tileBounds = tileBox.getTileBounds();
 
 			Coordinate lastPt = points[0];
 			float x;
 			float y;
-			float lastx = 0;
-			float lasty = 0;
+			float lastX = 0;
+			float lastY = 0;
 			double px, py, tpx, tpy, tlx, tly;
 			double lx = lastPt.x / EXTENT;
 			double ly = lastPt.y / EXTENT;
-			boolean reCalculateLastXY = true;
+			boolean recalculateLastXY = true;
 
 			int size = points.length;
 			for (int i = 1; i < size; i++) {
@@ -228,23 +231,23 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 				if (Math.min(tpx, tlx) < tileBounds.right && Math.max(tpx, tlx) > tileBounds.left
 						&& Math.max(tpy, tly) > tileBounds.top && Math.min(tpy, tly) < tileBounds.bottom) {
-					if (reCalculateLastXY) {
-						lastx = tileBox.getPixXFromTile(tileX + lx, tileY + ly, minLayerZoom);
-						lasty = tileBox.getPixYFromTile(tileX + lx, tileY + ly, minLayerZoom);
-						reCalculateLastXY = false;
+					if (recalculateLastXY) {
+						lastX = tileBox.getPixXFromTile(tileX + lx, tileY + ly, tileZoom);
+						lastY = tileBox.getPixYFromTile(tileX + lx, tileY + ly, tileZoom);
+						recalculateLastXY = false;
 					}
 
-					x = tileBox.getPixXFromTile(tileX + px, tileY + py, minLayerZoom);
-					y = tileBox.getPixYFromTile(tileX + px, tileY + py, minLayerZoom);
+					x = tileBox.getPixXFromTile(tileX + px, tileY + py, tileZoom);
+					y = tileBox.getPixYFromTile(tileX + px, tileY + py, tileZoom);
 
-					if (lastx != x || lasty != y) {
-						canvas.drawLine(lastx, lasty, x, y, paintLine);
+					if (lastX != x || lastY != y) {
+						canvas.drawLine(lastX, lastY, x, y, paintLine);
 					}
 
-					lastx = x;
-					lasty = y;
+					lastX = x;
+					lastY = y;
 				} else {
-					reCalculateLastXY = true;
+					recalculateLastXY = true;
 				}
 				lx = px;
 				ly = py;
@@ -252,8 +255,8 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		}
 	}
 
-	protected void drawPoints(Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY,
-							  GeometryTile tile, Map<QuadPointDouble, Map> visiblePoints) {
+	private Map<QuadPointDouble, Map> drawPoints(Canvas canvas, RotatedTileBox tileBox,
+	                                             List<Geometry> geometries, int tileX, int tileY) {
 		int dzoom = tileBox.getZoom() - MIN_IMAGE_LAYER_ZOOM;
 		int mult = (int) Math.pow(2.0, dzoom);
 		QuadRect tileBounds = tileBox.getTileBounds();
@@ -264,24 +267,25 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 		float pwd = pw / 2;
 		float phd = ph / 2;
 
-		for (Geometry g : tile.getData()) {
-			if (g instanceof Point && !g.isEmpty() && g.getUserData() != null && g.getUserData() instanceof HashMap) {
+		Map<QuadPointDouble, Map> visiblePoints = new HashMap<>();
+		for (Geometry g : geometries) {
+			Map<?, ?> userData = g.getUserData() instanceof HashMap ? ((HashMap<?, ?>) g.getUserData()) : null;
+			if (g instanceof Point && !g.isEmpty() && userData != null) {
 				Point p = (Point) g;
 				px = p.getCoordinate().x / EXTENT;
 				py = p.getCoordinate().y / EXTENT;
 				tx = (tileX + px) * mult;
 				ty = (tileY + py) * mult;
-				if (tileBounds.contains(tx, ty, tx, ty)) {
-					if (filtered(p.getUserData())) {
-						continue;
-					}
+				if (tileBounds.contains(tx, ty, tx, ty) && !filtered(userData)) {
 					x = tileBox.getPixXFromTile(tileX + px, tileY + py, MIN_IMAGE_LAYER_ZOOM);
 					y = tileBox.getPixYFromTile(tileX + px, tileY + py, MIN_IMAGE_LAYER_ZOOM);
 					canvas.drawBitmap(point, x - pwd, y - phd, paintPoint);
-					visiblePoints.put(new QuadPointDouble(tileX + px,  tileY + py), (Map) p.getUserData());
+					visiblePoints.put(new QuadPointDouble(tileX + px,  tileY + py), userData);
 				}
 			}
 		}
+
+		return visiblePoints;
 	}
 
 	private boolean filtered(Object data) {
@@ -326,23 +330,29 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 	private void drawSelectedPoint(Canvas canvas, RotatedTileBox tileBox) {
 		if (selectedImageLocation != null) {
-			float x = tileBox.getPixXFromLatLon(selectedImageLocation.getLatitude(), selectedImageLocation.getLongitude());
-			float y = tileBox.getPixYFromLatLon(selectedImageLocation.getLatitude(), selectedImageLocation.getLongitude());
+			double imageLat = selectedImageLocation.getLatitude();
+			double imageLon = selectedImageLocation.getLongitude();
+			float x = tileBox.getPixXFromLatLon(imageLat, imageLon);
+			float y = tileBox.getPixYFromLatLon(imageLat, imageLon);
 			if (selectedImageCameraAngle != null) {
 				canvas.save();
 				canvas.rotate(selectedImageCameraAngle - 180, x, y);
-				canvas.drawBitmap(headingImage, x - headingImage.getWidth() / 2,
-						y - headingImage.getHeight() / 2, paintPoint);
+				float headingLeftBound = x - headingImage.getWidth() / 2f;
+				float headingTopBound = y - headingImage.getHeight() / 2f;
+				canvas.drawBitmap(headingImage, headingLeftBound, headingTopBound, paintPoint);
 				canvas.restore();
 			}
-			canvas.drawBitmap(selectedImage, x - selectedImage.getWidth() / 2, y - selectedImage.getHeight() / 2, paintPoint);
+			float pointLeftBound = x - selectedImage.getWidth() / 2f;
+			float pointTopBound = y - selectedImage.getHeight() / 2f;
+			canvas.drawBitmap(selectedImage, pointLeftBound, pointTopBound, paintPoint);
 		}
 	}
 
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof MapillaryImage) {
-			return new PointDescription(PointDescription.POINT_TYPE_MAPILLARY_IMAGE, view.getContext().getString(R.string.mapillary_image));
+			String description = view.getContext().getString(R.string.mapillary_image);
+			return new PointDescription(PointDescription.POINT_TYPE_MAPILLARY_IMAGE, description);
 		}
 		return null;
 	}
@@ -390,33 +400,37 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 
 	private void getImagesFromPoint(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
 		Map<QuadPointDouble, Map> points = this.visiblePoints;
-		if (points != null) {
-			float ex = point.x;
-			float ey = point.y;
-			final int rp = getRadius(tb);
-			int radius = rp * 3 / 2;
-			float x, y;
-			double minSqDist = Double.NaN;
-			double sqDist;
-			MapillaryImage img = null;
-			for (Entry<QuadPointDouble, Map> entry : points.entrySet()) {
-				x = tb.getPixXFromTile(entry.getKey().x, entry.getKey().y, MIN_IMAGE_LAYER_ZOOM);
-				y = tb.getPixYFromTile(entry.getKey().x, entry.getKey().y, MIN_IMAGE_LAYER_ZOOM);
-				if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
-					sqDist = (x - ex) * (x - ex) + (y - ey) * (y - ey);
-					if (img == null || minSqDist > sqDist) {
-						minSqDist = sqDist;
-						img = new MapillaryImage(MapUtils.getLatitudeFromTile(MIN_IMAGE_LAYER_ZOOM, entry.getKey().y),
-								MapUtils.getLongitudeFromTile(MIN_IMAGE_LAYER_ZOOM, entry.getKey().x));
-						if (!img.setData(entry.getValue())) {
-							img = null;
-						}
+		float ex = point.x;
+		float ey = point.y;
+		final int rp = getRadius(tb);
+		int radius = rp * 3 / 2;
+		float x, y;
+		double minSqDist = Double.NaN;
+		double sqDist;
+		MapillaryImage img = null;
+
+		for (Entry<QuadPointDouble, Map> entry : points.entrySet()) {
+			double tileX = entry.getKey().x;
+			double tileY = entry.getKey().y;
+			Map<?, ?> userData = entry.getValue();
+
+			x = tb.getPixXFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
+			y = tb.getPixYFromTile(tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
+			if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+				sqDist = (x - ex) * (x - ex) + (y - ey) * (y - ey);
+				if (img == null || minSqDist > sqDist) {
+					minSqDist = sqDist;
+					double lat = MapUtils.getLatitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileY);
+					double lon = MapUtils.getLongitudeFromTile(MIN_IMAGE_LAYER_ZOOM, tileX);
+					img = new MapillaryImage(lat, lon);
+					if (!img.setData(userData)) {
+						img = null;
 					}
 				}
 			}
-			if (img != null) {
-				images.add(img);
-			}
+		}
+		if (img != null) {
+			images.add(img);
 		}
 	}
 

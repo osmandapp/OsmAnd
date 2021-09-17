@@ -27,7 +27,7 @@ public class BitmapTilesCache extends TilesCache<Bitmap> {
 	}
 
 	@Override
-	public boolean isZoomSupported(int tileZoom) {
+	public boolean isTileZoomCorrect(int tileZoom) {
 		return true;
 	}
 
