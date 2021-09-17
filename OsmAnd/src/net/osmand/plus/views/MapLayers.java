@@ -4,6 +4,7 @@ package net.osmand.plus.views;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -207,8 +208,22 @@ public class MapLayers {
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		OsmandMapTileView mapView = getApplication().getOsmandMap().getMapView();
 		for (OsmandMapLayer layer : mapView.getLayers()) {
+			MapActivity layerMapActivity = layer.getMapActivity();
+			if (mapActivity != null && layerMapActivity != null) {
+				layer.setMapActivity(null);
+			}
 			layer.setMapActivity(mapActivity);
 		}
+	}
+
+	public boolean hasMapActivity() {
+		OsmandMapTileView mapView = getApplication().getOsmandMap().getMapView();
+		for (OsmandMapLayer layer : mapView.getLayers()) {
+			if (layer.getMapActivity() == null) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public void updateLayers(@Nullable MapActivity mapActivity) {

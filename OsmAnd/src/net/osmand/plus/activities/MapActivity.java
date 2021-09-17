@@ -674,7 +674,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onResume() {
 		super.onResume();
 
-		if (activityRestartNeeded) {
+		if (activityRestartNeeded || !getMapLayers().hasMapActivity()) {
 			activityRestartNeeded = false;
 			recreate();
 			return;
