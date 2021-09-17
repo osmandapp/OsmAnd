@@ -1,8 +1,5 @@
 package net.osmand.plus.auto;
 
-import static android.util.TypedValue.COMPLEX_UNIT_PX;
-
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -28,18 +25,13 @@ import androidx.car.app.navigation.model.NavigationTemplate;
 import androidx.car.app.navigation.model.RoutingInfo;
 import androidx.car.app.navigation.model.Step;
 import androidx.car.app.navigation.model.TravelEstimate;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
-import net.osmand.Location;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.auto.SurfaceRenderer.SurfaceRendererCallback;
-import net.osmand.plus.routing.AlarmInfo;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
-import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget.AlarmWidgetDrawSettings;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -122,14 +114,11 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 
 	@Override
 	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
-		AlarmWidgetDrawSettings drawSettings = new AlarmWidgetDrawSettings();
-		drawSettings.width = 92;
-		drawSettings.height = 92;
-		drawSettings.density = mSurfaceRenderer.getDensity();
-		alarmWidget.updateInfo(null, drawSettings);
+		DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, mSurfaceRenderer.getDensity());
+		alarmWidget.updateInfo(drawSettings);
 		Bitmap widgetBitmap = alarmWidget.getWidgetBitmap();
 		if (widgetBitmap != null) {
-			canvas.drawBitmap(widgetBitmap, visibleArea.right - drawSettings.width - 10, visibleArea.top + 10, new Paint());
+			canvas.drawBitmap(widgetBitmap, visibleArea.right - widgetBitmap.getWidth() - 10, visibleArea.top + 10, new Paint());
 		}
 	}
 

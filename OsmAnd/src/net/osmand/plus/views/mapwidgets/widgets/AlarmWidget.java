@@ -38,6 +38,12 @@ import net.osmand.util.Algorithms;
 
 public class AlarmWidget {
 
+	private static final float WIDGET_BITMAP_SIZE_DP = 92f;
+	private static final float WIDGET_BITMAP_TEXT_SIZE = 26f;
+	private static final float WIDGET_BITMAP_TEXT_AMERICAN_SPEED_LIMIT_SHIFT_DP = 12f;
+	private static final float WIDGET_BITMAP_BOTTOM_TEXT_SIZE = 16f;
+	private static final float WIDGET_BITMAP_BOTTOM_TEXT_SIZE_SMALL = 12f;
+
 	@Nullable
 	private final View layout;
 	@Nullable
@@ -57,6 +63,8 @@ public class AlarmWidget {
 	private final OsmAndLocationProvider locationProvider;
 	private final WaypointHelper wh;
 
+	private final boolean drawBitmap;
+
 	private int imgId;
 	private String cachedText;
 	private String cachedBottomText;
@@ -72,12 +80,6 @@ public class AlarmWidget {
 		public DrivingRegion region;
 	}
 
-	public static class AlarmWidgetDrawSettings {
-		public float width;
-		public float height;
-		public float density;
-	}
-
 	public AlarmWidget(@NonNull OsmandApplication app, @Nullable MapActivity mapActivity) {
 		if (mapActivity != null) {
 			layout = mapActivity.findViewById(R.id.map_alarm_warning);
@@ -91,6 +93,7 @@ public class AlarmWidget {
 			widgetBottomText = null;
 		}
 		this.app = app;
+		this.drawBitmap = mapActivity == null;
 		routingHelper = app.getRoutingHelper();
 		trackingUtilities = app.getMapViewTrackingUtilities();
 		settings = app.getSettings();
@@ -103,8 +106,7 @@ public class AlarmWidget {
 		return widgetBitmap;
 	}
 
-	public boolean updateInfo(@Nullable DrawSettings drawSettings,
-							  @Nullable AlarmWidgetDrawSettings alarmWidgetDrawSettings) {
+	public boolean updateInfo(DrawSettings drawSettings) {
 		boolean showRoutingAlarms = settings.SHOW_ROUTING_ALARMS.get();
 		boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
 		boolean cams = settings.SHOW_CAMERAS.get();
@@ -179,10 +181,11 @@ public class AlarmWidget {
 				changed = true;
 			}
 			if (changed && icon == null) {
-				if (info == null || alarmWidgetDrawSettings == null) {
+				if (info == null || drawSettings == null || !drawBitmap) {
 					widgetBitmap = null;
 				} else {
-					widgetBitmap = createWidgetBitmap(info, alarmWidgetDrawSettings);
+					float density = drawSettings.getDensity();
+					widgetBitmap = createWidgetBitmap(info, density == 0 ? 1 : density);
 				}
 			}
 		}
@@ -193,10 +196,9 @@ public class AlarmWidget {
 	}
 
 	@NonNull
-	private Bitmap createWidgetBitmap(@NonNull AlarmWidgetInfo info, @NonNull AlarmWidgetDrawSettings drawSettings) {
-		float density = drawSettings.density;
-		Bitmap bitmap = Bitmap.createBitmap((int) (drawSettings.width * density),
-				(int) (drawSettings.height * density), Bitmap.Config.ARGB_8888);
+	private Bitmap createWidgetBitmap(@NonNull AlarmWidgetInfo info, float density) {
+		Bitmap bitmap = Bitmap.createBitmap((int) (WIDGET_BITMAP_SIZE_DP * density),
+				(int) (WIDGET_BITMAP_SIZE_DP * density), Bitmap.Config.ARGB_8888);
 		Canvas canvas = new Canvas(bitmap);
 
 		Drawable locImg = app.getUIUtilities().getIcon(info.locImgId);
@@ -207,14 +209,14 @@ public class AlarmWidget {
 			TextPaint textPaint = new TextPaint();
 			textPaint.setAntiAlias(true);
 			textPaint.setColor(Color.BLACK);
-			textPaint.setTextSize(25 * density);
+			textPaint.setTextSize(WIDGET_BITMAP_TEXT_SIZE * density);
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			textPaint.setTypeface(Typeface.DEFAULT_BOLD);
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			float x = canvas.getWidth() / 2f;
 			float y = canvas.getHeight() / 2f - ((textPaint.descent() + textPaint.ascent()) / 2);
 			if (info.alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT && info.americanType && !info.isCanadianRegion) {
-				y += 20 * density;
+				y += WIDGET_BITMAP_TEXT_AMERICAN_SPEED_LIMIT_SHIFT_DP * density;
 			}
 			canvas.drawText(info.text, x, y, textPaint);
 		}
@@ -224,15 +226,14 @@ public class AlarmWidget {
 			textPaint.setAntiAlias(true);
 			textPaint.setColor(Color.BLACK);
 			textPaint.setColor(ContextCompat.getColor(app, info.americanType ? R.color.color_black : R.color.color_white));
-			textPaint.setTextSize(16 * density);
+			textPaint.setTextSize(WIDGET_BITMAP_BOTTOM_TEXT_SIZE * density);
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			textPaint.setTypeface(Typeface.DEFAULT_BOLD);
 			textPaint.setTextAlign(Paint.Align.CENTER);
 			float x = canvas.getWidth() / 2f;
-			float y = canvas.getHeight() - (textPaint.descent() - textPaint.ascent()) - 0 * density;
+			float y = canvas.getHeight() - (textPaint.descent() - textPaint.ascent());
 			if (info.alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_LIMIT && info.isCanadianRegion) {
-				y -= 6 * density;
-				textPaint.setTextSize(12 * density);
+				textPaint.setTextSize(WIDGET_BITMAP_BOTTOM_TEXT_SIZE_SMALL * density);
 			}
 			canvas.drawText(info.bottomText, x, y, textPaint);
 		}
