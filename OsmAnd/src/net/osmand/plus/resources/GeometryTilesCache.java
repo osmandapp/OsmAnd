@@ -12,14 +12,22 @@ import static net.osmand.map.TileSourceManager.MAPILLARY_VECTOR_TILE_EXT;
 
 public class GeometryTilesCache extends TilesCache<GeometryTile> {
 
-	public GeometryTilesCache(AsyncLoadingThread asyncLoadingThread) {
+	private final int minTileZoom;
+
+	public GeometryTilesCache(AsyncLoadingThread asyncLoadingThread, int minTileZoom) {
 		super(asyncLoadingThread);
-		maxCacheSize = 4;
+		this.maxCacheSize = 4;
+		this.minTileZoom = minTileZoom;
 	}
 
 	@Override
 	public boolean isTileSourceSupported(ITileSource tileSource) {
 		return MAPILLARY_VECTOR_TILE_EXT.equals(tileSource.getTileFormat());
+	}
+
+	@Override
+	public boolean isZoomSupported(int tileZoom) {
+		return minTileZoom == tileZoom;
 	}
 
 	@Override

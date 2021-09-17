@@ -78,6 +78,8 @@ import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
+import static net.osmand.plus.mapillary.MapillaryVectorLayer.MIN_IMAGE_LAYER_ZOOM;
+import static net.osmand.plus.mapillary.MapillaryVectorLayer.MIN_SEQUENCE_LAYER_ZOOM;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -99,7 +101,8 @@ public class ResourceManager {
 
 	private final List<TilesCache<?>> tilesCacheList = new ArrayList<>();
 	private final BitmapTilesCache bitmapTilesCache;
-	private final GeometryTilesCache geometryTilesCache;
+	private final GeometryTilesCache mapillarySequenceLayerTilesCache;
+	private final GeometryTilesCache mapillaryImageLayerTilesCache;
 	private List<MapTileLayerSize> mapTileLayerSizes = new ArrayList<>();
 
 	private final OsmandApplication context;
@@ -250,9 +253,11 @@ public class ResourceManager {
 		this.renderer = new MapRenderRepositories(context);
 
 		bitmapTilesCache = new BitmapTilesCache(asyncLoadingThread);
-		geometryTilesCache = new GeometryTilesCache(asyncLoadingThread);
+		mapillarySequenceLayerTilesCache = new GeometryTilesCache(asyncLoadingThread, MIN_SEQUENCE_LAYER_ZOOM);
+		mapillaryImageLayerTilesCache = new GeometryTilesCache(asyncLoadingThread, MIN_IMAGE_LAYER_ZOOM);
 		tilesCacheList.add(bitmapTilesCache);
-		tilesCacheList.add(geometryTilesCache);
+		tilesCacheList.add(mapillarySequenceLayerTilesCache);
+		tilesCacheList.add(mapillaryImageLayerTilesCache);
 
 		asyncLoadingThread.start();
 		renderingBufferImageThread = new HandlerThread("RenderingBaseImage");
@@ -280,8 +285,12 @@ public class ResourceManager {
 		return bitmapTilesCache;
 	}
 
-	public GeometryTilesCache getGeometryTilesCache() {
-		return geometryTilesCache;
+	public GeometryTilesCache getMapillaryImageLayerTilesCache() {
+		return mapillaryImageLayerTilesCache;
+	}
+
+	public GeometryTilesCache getMapillarySequenceLayerTilesCache() {
+		return mapillarySequenceLayerTilesCache;
 	}
 
 	public MapTileDownloader getMapTileDownloader() {
@@ -380,10 +389,10 @@ public class ResourceManager {
 
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
 
-	private TilesCache<?> getTilesCache(ITileSource map) {
-		for (TilesCache<?> tc : tilesCacheList) {
-			if (tc.isTileSourceSupported(map)) {
-				return tc;
+	private TilesCache<?> getTilesCache(ITileSource map, int zoom) {
+		for (TilesCache<?> cache : tilesCacheList) {
+			if (cache.isTileSourceSupported(map) && cache.isZoomSupported(zoom)) {
+				return cache;
 			}
 		}
 		return null;
@@ -392,7 +401,7 @@ public class ResourceManager {
 	public synchronized void tileDownloaded(DownloadRequest request) {
 		if (request instanceof TileLoadDownloadRequest) {
 			TileLoadDownloadRequest req = ((TileLoadDownloadRequest) request);
-			TilesCache<?> cache = getTilesCache(req.tileSource);
+			TilesCache<?> cache = getTilesCache(req.tileSource, req.zoom);
 			if (cache != null) {
 				cache.tilesOnFS.put(req.tileId, Boolean.TRUE);
 			}
@@ -400,12 +409,12 @@ public class ResourceManager {
 	}
 
 	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom) {
-		TilesCache<?> cache = getTilesCache(map);
+		TilesCache<?> cache = getTilesCache(map, zoom);
 		return cache != null && cache.tileExistOnFileSystem(file, map, x, y, zoom);
 	}
 
 	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom, long requestTimestamp) {
-		TilesCache<?> cache = getTilesCache(map);
+		TilesCache<?> cache = getTilesCache(map, zoom);
 		if (cache != null) {
 			cache.getTileForMap(file, map, x, y, zoom, true, false, true, true, requestTimestamp);
 		}
@@ -415,7 +424,7 @@ public class ResourceManager {
 	private boolean searchAmenitiesInProgress;
 
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
-		TilesCache<?> cache = getTilesCache(map);
+		TilesCache<?> cache = getTilesCache(map, zoom);
 		if (cache != null) {
 			return cache.calculateTileId(map, x, y, zoom);
 		}
@@ -423,22 +432,23 @@ public class ResourceManager {
 	}
 
 	protected boolean hasRequestedTile(TileLoadDownloadRequest req) {
-		TilesCache<?> cache = getTilesCache(req.tileSource);
+		TilesCache<?> cache = getTilesCache(req.tileSource, req.zoom);
 		return cache != null && cache.getRequestedTile(req) != null;
 	}
 
 	public boolean hasTileForMapSync(String file, ITileSource map, int x, int y, int zoom,
 									 boolean loadFromInternetIfNeeded, long requestTimestamp) {
-		TilesCache<?> cache = getTilesCache(map);
+		TilesCache<?> cache = getTilesCache(map, zoom);
 		return cache != null
 				&& cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded, requestTimestamp) != null;
 	}
 
 	public void clearCacheAndTiles(@NonNull ITileSource map) {
 		map.deleteTiles(new File(dirWithTiles, map.getName()).getAbsolutePath());
-		TilesCache<?> cache = getTilesCache(map);
-		if (cache != null) {
-			cache.clearTiles();
+		for (TilesCache<?> cache : tilesCacheList) {
+			if (cache.isTileSourceSupported(map)) {
+				cache.clearTiles();
+			}
 		}
 	}
 

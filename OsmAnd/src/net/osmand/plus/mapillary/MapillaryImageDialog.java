@@ -55,7 +55,7 @@ import androidx.core.util.Pair;
 import static net.osmand.plus.mapillary.MapillaryImage.IMAGE_ID_KEY;
 import static net.osmand.plus.mapillary.MapillaryImage.SEQUENCE_ID_KEY;
 import static net.osmand.plus.mapillary.MapillaryVectorLayer.EXTENT;
-import static net.osmand.plus.mapillary.MapillaryVectorLayer.TILE_ZOOM;
+import static net.osmand.plus.mapillary.MapillaryVectorLayer.MIN_IMAGE_LAYER_ZOOM;
 
 public class MapillaryImageDialog extends ContextMenuCardDialog {
 
@@ -332,8 +332,8 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 							Point p = (Point) g;
 							px = p.getCoordinate().x / EXTENT;
 							py = p.getCoordinate().y / EXTENT;
-							double lat = MapUtils.getLatitudeFromTile(TILE_ZOOM, point.y + py);
-							double lon = MapUtils.getLongitudeFromTile(TILE_ZOOM, point.x + px);
+							double lat = MapUtils.getLatitudeFromTile(MIN_IMAGE_LAYER_ZOOM, point.y + py);
+							double lon = MapUtils.getLongitudeFromTile(MIN_IMAGE_LAYER_ZOOM, point.x + px);
 							MapillaryImage image = new MapillaryImage(lat, lon);
 							if (image.setData(userData)) {
 								sequenceImages.add(image);
@@ -426,7 +426,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		int top = (int) Math.floor(tilesRect.top + ellipticTileCorrection);
 		int width = (int) Math.ceil(tilesRect.right - left);
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
-		int dzoom = nzoom - TILE_ZOOM;
+		int dzoom = nzoom - MIN_IMAGE_LAYER_ZOOM;
 		int div = (int) Math.pow(2.0, dzoom);
 
 		long requestTimestamp = System.currentTimeMillis();
@@ -436,20 +436,20 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			for (int j = 0; j < height; j++) {
 				int tileX = (left + i) / div;
 				int tileY = (top + j) / div;
-				String tileId = mgr.calculateTileId(map, tileX, tileY, TILE_ZOOM);
+				String tileId = mgr.calculateTileId(map, tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
 				Pair<QuadPointDouble, GeometryTile> p = tiles.get(tileId);
 				if (p == null) {
 					GeometryTile tile = null;
 					// asking tile image async
-					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, TILE_ZOOM);
+					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
 					if (imgExist) {
 						if (sync) {
-							tile = mgr.getGeometryTilesCache().getTileForMapSync(tileId, map,
-									tileX, tileY, TILE_ZOOM, false, requestTimestamp);
+							tile = mgr.getMapillaryImageLayerTilesCache().getTileForMapSync(tileId, map,
+									tileX, tileY, MIN_IMAGE_LAYER_ZOOM, false, requestTimestamp);
 							sync = false;
 						} else {
-							tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map,
-									tileX, tileY, TILE_ZOOM, false, requestTimestamp);
+							tile = mgr.getMapillaryImageLayerTilesCache().getTileForMapAsync(tileId, map,
+									tileX, tileY, MIN_IMAGE_LAYER_ZOOM, false, requestTimestamp);
 						}
 					}
 					if (tile != null) {

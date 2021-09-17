@@ -27,6 +27,11 @@ public class BitmapTilesCache extends TilesCache<Bitmap> {
 	}
 
 	@Override
+	public boolean isZoomSupported(int tileZoom) {
+		return true;
+	}
+
+	@Override
 	protected Bitmap getTileObject(TileLoadDownloadRequest req) {
 		Bitmap bmp = null;
 		if (req.tileSource instanceof SQLiteTileSource) {
