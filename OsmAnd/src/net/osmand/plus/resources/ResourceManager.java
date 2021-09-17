@@ -254,6 +254,7 @@ public class ResourceManager {
 
 		bitmapTilesCache = new BitmapTilesCache(asyncLoadingThread);
 		mapillarySequenceLayerTilesCache = new GeometryTilesCache(asyncLoadingThread, MIN_SEQUENCE_LAYER_ZOOM);
+		mapillarySequenceLayerTilesCache.setMaxCacheSize(16);
 		mapillaryImageLayerTilesCache = new GeometryTilesCache(asyncLoadingThread, MIN_IMAGE_LAYER_ZOOM);
 		tilesCacheList.add(bitmapTilesCache);
 		tilesCacheList.add(mapillarySequenceLayerTilesCache);

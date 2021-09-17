@@ -46,7 +46,7 @@ import static net.osmand.plus.mapillary.MapillaryImage.*;
 
 public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, IContextMenuProvider {
 
-	public static final int MIN_SEQUENCE_LAYER_ZOOM = 6;
+	public static final int MIN_SEQUENCE_LAYER_ZOOM = 13;
 	public static final int MIN_IMAGE_LAYER_ZOOM = 14;
 	public static final int MIN_POINTS_ZOOM = 17;
 	public static final double EXTENT = 4096.0;

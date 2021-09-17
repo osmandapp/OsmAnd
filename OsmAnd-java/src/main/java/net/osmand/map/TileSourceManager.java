@@ -55,7 +55,7 @@ public class TileSourceManager {
 					16, 0, 256, 16, 32000);
 	private static final TileSourceTemplate MAPILLARY_VECTOR_SOURCE =
 			new TileSourceTemplate("Mapillary (vector tiles)", MAPILLARY_VECTOR_URL,
-					MAPILLARY_VECTOR_TILE_EXT, 21, 14, 256, 16, 3200);
+					MAPILLARY_VECTOR_TILE_EXT, 21, 13, 256, 16, 3200);
 
 	static {
 		MAPILLARY_RASTER_SOURCE.setExpirationTimeMinutes(60 * 24);
