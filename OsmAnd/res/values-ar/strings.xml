@@ -4391,4 +4391,7 @@
     <string name="routeInfo_roadClass_description">تلوين الطريق أو خط المسار وفقا لتصنيف الطرق.</string>
     <string name="add_group_to_markers">إضافة مجموعة إلى قائمة العلامات</string>
     <string name="remove_group_from_markers">إزالة المجموعة من قائمة العلامات</string>
+    <string name="mapillary_menu_filter_description_new">تصفية الصور حسب التاريخ أو النوع. خاصية نشطة أثناء التكبير عن كثب فقط..</string>
+    <string name="start_point">ابدأ</string>
+    <string name="service_is_not_available_please_try_later">الخدمة غير متوفرة، يرجى المحاولة لاحقا</string>
 </resources>
