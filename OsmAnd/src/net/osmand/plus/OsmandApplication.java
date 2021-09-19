@@ -30,7 +30,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
@@ -53,8 +52,8 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
-import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.NavigationCarAppService;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -80,6 +79,7 @@ import net.osmand.plus.openplacereviews.OprAuthHelper;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
+import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
@@ -177,8 +177,9 @@ public class OsmandApplication extends MultiDexApplication {
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
 	BackupHelper backupHelper;
+	TravelRendererHelper travelRendererHelper;
 
-	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
+	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 
@@ -507,6 +508,10 @@ public class OsmandApplication extends MultiDexApplication {
 		return travelHelper;
 	}
 
+	public TravelRendererHelper getTravelRendererHelper() {
+		return travelRendererHelper;
+	}
+
 	public InAppPurchaseHelper getInAppPurchaseHelper() {
 		return inAppPurchaseHelper;
 	}
@@ -516,7 +521,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void initVoiceCommandPlayer(final Activity uiContext, final ApplicationMode applicationMode,
-	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force, final boolean applyAllModes) {
+									   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force, final boolean applyAllModes) {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
@@ -619,8 +624,8 @@ public class OsmandApplication extends MultiDexApplication {
 
 	private class DefaultExceptionHandler implements UncaughtExceptionHandler {
 
-		private UncaughtExceptionHandler defaultHandler;
-		private PendingIntent intent;
+		private final UncaughtExceptionHandler defaultHandler;
+		private final PendingIntent intent;
 
 		public DefaultExceptionHandler() {
 			defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
@@ -652,7 +657,7 @@ public class OsmandApplication extends MultiDexApplication {
 						.append("Exception occured in thread ")
 						.append(thread.toString())
 						.append(" : \n")
-						.append(new String(out.toByteArray()));
+						.append(out.toString());
 
 				if (file.getParentFile().canWrite()) {
 					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));

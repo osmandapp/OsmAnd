@@ -1,5 +1,6 @@
 package net.osmand.plus.resources;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 
@@ -11,6 +12,7 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapPoiReaderAdapter;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.data.Amenity;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -132,6 +134,20 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 			log.error("Error searching amenities", e); //$NON-NLS-1$
 		}
 		return map;
+	}
+
+	@NonNull
+	public synchronized List<PoiSubType> searchPoiSubTypesByPrefix(@NonNull String query) {
+		List<PoiSubType> poiSubTypes = new ArrayList<>();
+		try {
+			BinaryMapIndexReader reader = getOpenFile();
+			if (reader != null) {
+				poiSubTypes.addAll(reader.searchPoiSubTypesByPrefix(query));
+			}
+		} catch (IOException e) {
+			log.error("Error searching poiSubTypes", e);
+		}
+		return poiSubTypes;
 	}
 
 	public synchronized List<Amenity> searchAmenitiesByName(int x, int y, int l, int t, int r, int b, String query, ResultMatcher<Amenity> resulMatcher) {
