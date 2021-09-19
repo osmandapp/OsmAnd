@@ -195,7 +195,9 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 
 	public void setMapView(OsmandMapTileView mapView) {
 		this.mapView = mapView;
-		mapView.setView(surfaceView);
+		if (mSurface != null) {
+			mapView.setView(surfaceView);
+		}
 	}
 
 	public int getWidth() {

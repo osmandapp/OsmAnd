@@ -42,6 +42,8 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.plus.AppInitializer;
+import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -308,8 +310,25 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public void setupOpenGLView() {
-		if (!application.isApplicationInitializing()) {
-			application.getOsmandMap().setupOpenGLView(false);
+		if (application.isApplicationInitializing()) {
+			application.getAppInitializer().addListener(new AppInitializeListener() {
+
+				@Override
+				public void onStart(AppInitializer init) {
+				}
+
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					application.getOsmandMap().setupOpenGLView(false);
+					application.getOsmandMap().refreshMap();
+				}
+			});
+		} else {
+			application.getOsmandMap().setupOpenGLView(true);
 		}
 	}
 
