@@ -24,6 +24,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -116,7 +117,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		return app.getLocationProvider().getLastKnownLocation() == null;
 	}
 
-	private boolean isMonitoringTrack() {
+	private boolean isRecordingTrack() {
 		return settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 	}
 
@@ -188,19 +189,28 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 	private void setupResumePauseButton(View container) {
 		final CardView resumePauseButton = container.findViewById(R.id.button_center_left);
-		createItem(resumePauseButton, isMonitoringTrack() ? ItemType.PAUSE : ItemType.RESUME);
+		createItem(resumePauseButton, isRecordingTrack() ? ItemType.PAUSE : ItemType.RESUME);
 		resumePauseButton.setOnClickListener(v -> {
-			boolean isMonitoringTrack = isMonitoringTrack();
-			if (isMonitoringTrack) {
+			boolean isRecordingTrack = isRecordingTrack();
+			if (isRecordingTrack) {
 				blockStatisticsBuilder.stopUpdatingStatBlocks();
 				stopUpdatingGraph();
 			} else {
 				blockStatisticsBuilder.runUpdatingStatBlocksIfNeeded();
 				runUpdatingGraph();
 			}
-			settings.SAVE_GLOBAL_TRACK_TO_GPX.set(!isMonitoringTrack);
+			if (isRecordingTrack) {
+				settings.SAVE_GLOBAL_TRACK_TO_GPX.set(false);
+				NavigationService navigationService = app.getNavigationService();
+				if (navigationService != null) {
+					navigationService.stopIfNeeded(app, NavigationService.USED_BY_GPX);
+				}
+			} else {
+				app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.set(true);
+				app.startNavigationService(NavigationService.USED_BY_GPX);
+			}
 			updateStatus();
-			createItem(resumePauseButton, !isMonitoringTrack ? ItemType.PAUSE : ItemType.RESUME);
+			createItem(resumePauseButton, !isRecordingTrack ? ItemType.PAUSE : ItemType.RESUME);
 		});
 	}
 
@@ -355,7 +365,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 	private void updateStatus() {
 		TextView statusTitle = statusContainer.findViewById(R.id.text_status);
 		AppCompatImageView statusIcon = statusContainer.findViewById(R.id.icon_status);
-		ItemType status = searchingGPS() ? ItemType.SEARCHING_GPS : !isMonitoringTrack() ? ItemType.ON_PAUSE : ItemType.RECORDING;
+		ItemType status = searchingGPS() ? ItemType.SEARCHING_GPS : !isRecordingTrack() ? ItemType.ON_PAUSE : ItemType.RECORDING;
 		Integer titleId = status.getTitleId();
 		if (titleId != null) {
 			statusTitle.setText(titleId);
