@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -39,8 +41,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 
@@ -176,7 +176,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					if (has) {
 						return true;
 					}
-					q = db.query(false, POINT_NAME, new String[]{POINT_COL_LAT, POINT_COL_LON}, null, null, null, null, null, null);
+					q = db.query(false, POINT_NAME, new String[] {POINT_COL_LAT, POINT_COL_LON}, null, null, null, null, null, null);
 					has = q.moveToFirst();
 					while (has) {
 						if (q.getDouble(0) != 0 || q.getDouble(1) != 0) {
@@ -205,58 +205,54 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	/**
 	 * @return warnings, gpxFilesByName
 	 */
-	public synchronized SaveGpxResult saveDataToGpx(File dir) {
+	public synchronized SaveGpxResult saveDataToGpx(@NonNull File dir) {
 		List<String> warnings = new ArrayList<>();
 		Map<String, GPXFile> gpxFilesByName = new LinkedHashMap<>();
 		dir.mkdirs();
-		if (dir.getParentFile().canWrite()) {
-			if (dir.exists()) {
-				Map<String, GPXFile> data = collectRecordedData();
-
-				// save file
-				for (final Map.Entry<String, GPXFile> entry : data.entrySet()) {
-					final String f = entry.getKey();
-					GPXFile gpx = entry.getValue();
-					log.debug("Filename: " + f);
-					File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
-					if (!gpx.isEmpty()) {
-						WptPt pt = gpx.findPointToShow();
-						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
-						Integer trackStorageDirectory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
-						if (!OsmandSettings.REC_DIRECTORY.equals(trackStorageDirectory)) {
-							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM", Locale.US);
+		if (dir.getParentFile().canWrite() && dir.exists()) {
+			Map<String, GPXFile> data = collectRecordedData();
+			for (Map.Entry<String, GPXFile> entry : data.entrySet()) {
+				String f = entry.getKey();
+				GPXFile gpx = entry.getValue();
+				log.debug("Filename: " + f);
+				File fout = new File(dir, f + IndexConstants.GPX_FILE_EXT);
+				if (!gpx.isEmpty()) {
+					WptPt pt = gpx.findPointToShow();
+					String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
+					Integer trackStorageDirectory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
+					if (!OsmandSettings.REC_DIRECTORY.equals(trackStorageDirectory)) {
+						SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM", Locale.US);
 //							if (trackStorageDirectory == OsmandSettings.DAILY_DIRECTORY) {
 //								dateDirFormat = new SimpleDateFormat("yyyy-MM-dd");
 //							}
-							String dateDirName = dateDirFormat.format(new Date(pt.time));
-							File dateDir = new File(dir, dateDirName);
-							dateDir.mkdirs();
-							if (dateDir.exists()) {
-								fileName = dateDirName + File.separator + fileName;
-							}
-						}
-						gpxFilesByName.put(fileName, gpx);
-						fout = new File(dir, fileName + IndexConstants.GPX_FILE_EXT);
-						int ind = 1;
-						while (fout.exists()) {
-							fout = new File(dir, fileName + "_" + (++ind) + IndexConstants.GPX_FILE_EXT); //$NON-NLS-1$
+						String dateDirName = dateDirFormat.format(new Date(pt.time));
+						File dateDir = new File(dir, dateDirName);
+						dateDir.mkdirs();
+						if (dateDir.exists()) {
+							fileName = dateDirName + File.separator + fileName;
 						}
 					}
-
-					Exception warn = GPXUtilities.writeGpxFile(fout, gpx);
-					if (warn != null) {
-						warnings.add(warn.getMessage());
-						return new SaveGpxResult(warnings, new HashMap<String, GPXFile>());
+					gpxFilesByName.put(fileName, gpx);
+					fout = new File(dir, fileName + IndexConstants.GPX_FILE_EXT);
+					int ind = 1;
+					while (fout.exists()) {
+						fout = new File(dir, fileName + "_" + (++ind) + IndexConstants.GPX_FILE_EXT); //$NON-NLS-1$
 					}
-
-					GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
-					GpxDataItem item = new GpxDataItem(fout, analysis);
-					ctx.getGpxDbHelper().add(item);
-					lastTimeFileSaved = fout.lastModified();
 				}
+
+				Exception warn = GPXUtilities.writeGpxFile(fout, gpx);
+				if (warn != null) {
+					warnings.add(warn.getMessage());
+					return new SaveGpxResult(warnings, new HashMap<String, GPXFile>());
+				}
+
+				GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
+				GpxDataItem item = new GpxDataItem(fout, analysis);
+				ctx.getGpxDbHelper().add(item);
+				lastTimeFileSaved = fout.lastModified();
 			}
+			clearRecordedData(warnings.isEmpty());
 		}
-		clearRecordedData(warnings.isEmpty());
 		return new SaveGpxResult(warnings, gpxFilesByName);
 	}
 
