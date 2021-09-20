@@ -52,6 +52,7 @@ public class MapTileLayer extends BaseMapLayer {
 	private boolean visible = true;
 	private boolean useSampling;
 
+	private boolean is_set_provider = false;
 	private boolean oldRender = false;
 	private String cachedUnderlay;
 	private Integer cachedMapTransparency;
@@ -76,9 +77,11 @@ public class MapTileLayer extends BaseMapLayer {
 
 		useSampling = Build.VERSION.SDK_INT < 28;
 
-		paintBitmap = new Paint();
-		paintBitmap.setFilterBitmap(true);
-		paintBitmap.setAlpha(getAlpha());
+		if (view.getMapRenderer() == null ) {
+			paintBitmap = new Paint();
+			paintBitmap.setFilterBitmap(true);
+			paintBitmap.setAlpha(getAlpha());
+		}
 		
 		if (mapTileAdapter != null) {
 			mapTileAdapter.initLayerAdapter(this, view);
@@ -90,21 +93,23 @@ public class MapTileLayer extends BaseMapLayer {
 		super.setAlpha(alpha);
 		if (paintBitmap != null) {
 			paintBitmap.setAlpha(alpha);
-		}/*
-		final MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer != null && !oldRender) {
-			OsmandSettings st = view.getApplication().getSettings();
-			if (!Algorithms.objectEquals(st.MAP_TRANSPARENCY.get(), cachedMapTransparency)) {
-				cachedMapTransparency = st.MAP_TRANSPARENCY.get();
-				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-				mapLayerConfiguration.setOpacityFactor(((float) cachedMapTransparency) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
-			}
-			if (!Algorithms.objectEquals(st.MAP_OVERLAY_TRANSPARENCY.get(), cachedOverlayTransparency)) {
-				cachedOverlayTransparency = st.MAP_OVERLAY_TRANSPARENCY.get();
-				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-				mapLayerConfiguration.setOpacityFactor(((float) cachedOverlayTransparency) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
+		}//*
+		if (view != null) {
+			final MapRendererView mapRenderer = view.getMapRenderer();
+			if (mapRenderer != null && !oldRender) {
+				OsmandSettings st = view.getApplication().getSettings();
+				if (!Algorithms.objectEquals(st.MAP_TRANSPARENCY.get(), cachedMapTransparency)) {
+					cachedMapTransparency = st.MAP_TRANSPARENCY.get();
+					MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+					mapLayerConfiguration.setOpacityFactor(((float) cachedMapTransparency) / 255.0f);
+					mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
+				}
+				if (!Algorithms.objectEquals(st.MAP_OVERLAY_TRANSPARENCY.get(), cachedOverlayTransparency)) {
+					cachedOverlayTransparency = st.MAP_OVERLAY_TRANSPARENCY.get();
+					MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+					mapLayerConfiguration.setOpacityFactor(((float) cachedOverlayTransparency) / 255.0f);
+					mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
+				}
 			}
 		}//*/
 	}
@@ -140,37 +145,6 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 		this.map = map;
 		setMapTileAdapter(target);
-		/*
-		final MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer != null && !oldRender) {
-			OsmandSettings st = view.getApplication().getSettings();
-			if (!Algorithms.objectEquals(st.MAP_UNDERLAY.get(), cachedUnderlay)) {
-				cachedUnderlay = st.MAP_UNDERLAY.get();
-				ITileSource tileSource = st.getTileSourceByName(cachedUnderlay, false);
-				if (tileSource != null) {
-					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
-					mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
-					prov.swigReleaseOwnership();
-					// mapRenderer.setMapLayerProvider(-1,
-					// net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
-				} else {
-					mapRenderer.resetMapLayerProvider(-1);
-				}
-			}
-			if (!Algorithms.objectEquals(st.MAP_OVERLAY.get(), cachedOverlay)) {
-				cachedOverlay = st.MAP_OVERLAY.get();
-				ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
-				if (tileSource != null) {
-					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
-					mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
-					prov.swigReleaseOwnership();
-					// mapRenderer.setMapLayerProvider(1,
-					// net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
-				} else {
-					mapRenderer.resetMapLayerProvider(1);
-				}
-			}
-		}//*/
 	}
 	
 	public MapTileAdapter getMapTileAdapter() {
@@ -186,54 +160,57 @@ public class MapTileLayer extends BaseMapLayer {
 		if (mapTileAdapter != null) {
 			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
 		}
-		drawTileMap(canvas, tileBox, drawSettings);
 
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null && !oldRender) {
-			OsmandSettings st = view.getApplication().getSettings();//*
-			if (!Algorithms.objectEquals(st.MAP_UNDERLAY.get(), cachedUnderlay)) {
-				cachedUnderlay = st.MAP_UNDERLAY.get();
+			//OsmandSettings st = view.getApplication().getSettings();//*
+			//if (!Algorithms.objectEquals(st.MAP_UNDERLAY.get(), cachedUnderlay)) {
+			if (is_set_provider == false) {
+				is_set_provider = true;
+				//cachedUnderlay = st.MAP_UNDERLAY.get();
 				//ITileSource tileSource = st.getTileSourceByName(cachedUnderlay, false);
-				if (tileSource != null) {
+				//ITileSource tileSource = map;
+				if (map != null) {
 					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), map);
 					mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
 					prov.swigReleaseOwnership();
 				} else {
 					mapRenderer.resetMapLayerProvider(-1);
 				}
-			}//*/
-			if (!Algorithms.objectEquals(st.MAP_TRANSPARENCY.get(), cachedMapTransparency)) {
-				cachedMapTransparency = st.MAP_TRANSPARENCY.get();
-				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
-				mapLayerConfiguration.setOpacityFactor(((float) cachedMapTransparency) / 255.0f);
-				mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
-			}//*/
-			if (!Algorithms.objectEquals(st.MAP_OVERLAY.get(), cachedOverlay)) {
-				cachedOverlay = st.MAP_OVERLAY.get();
-				//ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
-				if (tileSource != null) {
+				if (map != null) {
 					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), map);
 					mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
 					prov.swigReleaseOwnership();
 				} else {
 					mapRenderer.resetMapLayerProvider(1);
 				}
-			}//*/
+			}/*
+			if (!Algorithms.objectEquals(st.MAP_TRANSPARENCY.get(), cachedMapTransparency)) {
+				cachedMapTransparency = st.MAP_TRANSPARENCY.get();
+				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+				mapLayerConfiguration.setOpacityFactor(((float) cachedMapTransparency) / 255.0f);
+				mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
+			}//*
+			if (!Algorithms.objectEquals(st.MAP_OVERLAY.get(), cachedOverlay)) {
+				cachedOverlay = st.MAP_OVERLAY.get();
+				//ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
+				ITileSource tileSource = map;
+				if (tileSource != null) {
+					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
+					mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
+					prov.swigReleaseOwnership();
+				} else {
+					mapRenderer.resetMapLayerProvider(1);
+				}
+			}/*
 			if (!Algorithms.objectEquals(st.MAP_OVERLAY_TRANSPARENCY.get(), cachedOverlayTransparency)) {
 				cachedOverlayTransparency = st.MAP_OVERLAY_TRANSPARENCY.get();
 				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 				mapLayerConfiguration.setOpacityFactor(((float) cachedOverlayTransparency) / 255.0f);
 				mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
 			}//*/
-			// opengl renderer
-			LatLon ll = tileBox.getLatLonFromPixel(tileBox.getPixWidth() / 2, tileBox.getPixHeight() / 2);
-			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
-					.getLatitude())));
-			mapRenderer.setAzimuth(-tileBox.getRotate());
-			mapRenderer.setZoom((float) (tileBox.getZoom() + tileBox.getZoomAnimation() + tileBox
-					.getZoomFloatPart()));
-			float zoomMagnifier = st.MAP_DENSITY.get();
-			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
+		} else {
+			drawTileMap(canvas, tileBox, drawSettings);
 		}
 
 	}
