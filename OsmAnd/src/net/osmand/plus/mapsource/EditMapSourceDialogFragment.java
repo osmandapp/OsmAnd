@@ -71,7 +71,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	public static final String TAG = EditMapSourceDialogFragment.class.getName();
 	static final int EXPIRE_TIME_NEVER = -1;
 	private static final Log LOG = PlatformUtil.getLog(EditMapSourceDialogFragment.class);
-	private static final String MAPS_PLUGINS_URL = "https://osmand.net/features/online-maps-plugin";
+	private static final String HELP_ARTICLE_URL = "https://docs.osmand.net/en/main@latest/osmand/map/raster-maps#add-new-online-raster-map-source";
 	private static final String PNG_EXT = "png";
 	private static final int MAX_ZOOM = 17;
 	private static final int MIN_ZOOM = 5;
@@ -157,7 +157,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 		int activeButtonsColorId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		Drawable closeDrawable = app.getUIUtilities().getIcon(
 				AndroidUtils.getNavigationIconResId(app), activeButtonsColorId);
-		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help, activeButtonsColorId);
+		Drawable helpDrawable = app.getUIUtilities().getIcon(R.drawable.ic_action_help_online, activeButtonsColorId);
 		iconHelp.setImageDrawable(helpDrawable);
 		iconHelp.setOnClickListener(view -> onHelpClick());
 		toolbar.setNavigationIcon(closeDrawable);
@@ -422,7 +422,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void onHelpClick() {
-		WikipediaDialogFragment.showFullArticle(requireContext(), Uri.parse(MAPS_PLUGINS_URL), nightMode);
+		WikipediaDialogFragment.showFullArticle(requireContext(), Uri.parse(HELP_ARTICLE_URL), nightMode);
 	}
 
 	private void showExitDialog() {
