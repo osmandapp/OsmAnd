@@ -444,11 +444,11 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
 					if (imgExist) {
 						if (sync) {
-							tile = mgr.getMapillaryImageLayerTilesCache().getTileForMapSync(tileId, map,
+							tile = mgr.getMapillaryVectorTilesCache().getTileForMapSync(tileId, map,
 									tileX, tileY, MIN_IMAGE_LAYER_ZOOM, false, requestTimestamp);
 							sync = false;
 						} else {
-							tile = mgr.getMapillaryImageLayerTilesCache().getTileForMapAsync(tileId, map,
+							tile = mgr.getMapillaryVectorTilesCache().getTileForMapAsync(tileId, map,
 									tileX, tileY, MIN_IMAGE_LAYER_ZOOM, false, requestTimestamp);
 						}
 					}

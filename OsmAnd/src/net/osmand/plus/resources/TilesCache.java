@@ -51,8 +51,6 @@ public abstract class TilesCache<T> {
 
 	public abstract boolean isTileSourceSupported(ITileSource tileSource);
 
-	public abstract boolean isTileZoomCorrect(int zoom);
-
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
 		builder.setLength(0);
 		if (map == null) {

@@ -98,22 +98,22 @@ public class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer
 	@Override
 	public void drawTileMap(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		ITileSource map = this.map;
-		ResourceManager mgr = resourceManager;
 		if (map == null) {
 			return;
 		}
+		ResourceManager mgr = resourceManager;
+		GeometryTilesCache tilesCache = mgr.getMapillaryVectorTilesCache();
 
 		int currentZoom = tileBox.getZoom();
 		int tileZoom;
-		GeometryTilesCache tilesCache;
 		if (currentZoom < map.getMinimumZoomSupported()) {
 			return;
 		} else if (currentZoom < MIN_POINTS_ZOOM) {
 			tileZoom = MAX_SEQUENCE_LAYER_ZOOM;
-			tilesCache = mgr.getMapillarySequenceLayerTilesCache();
+			tilesCache.useForMapillarySequenceLayer();
 		} else {
 			tileZoom = MIN_IMAGE_LAYER_ZOOM;
-			tilesCache = mgr.getMapillaryImageLayerTilesCache();
+			tilesCache.useForMapillaryImageLayer();
 		}
 
 		// recalculate for ellipsoid coordinates

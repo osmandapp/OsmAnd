@@ -12,22 +12,37 @@ import static net.osmand.map.TileSourceManager.MAPILLARY_VECTOR_TILE_EXT;
 
 public class GeometryTilesCache extends TilesCache<GeometryTile> {
 
-	private final int tileZoom;
+	private static final int MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE = 16;
+	private static final int MAPILLARY_IMAGE_LAYER_CACHE_SIZE = 4;
 
-	public GeometryTilesCache(AsyncLoadingThread asyncLoadingThread, int tileZoom) {
+	public GeometryTilesCache(AsyncLoadingThread asyncLoadingThread) {
 		super(asyncLoadingThread);
 		this.maxCacheSize = 4;
-		this.tileZoom = tileZoom;
+	}
+
+	public void useForMapillarySequenceLayer() {
+		changeMapillaryLayerToCache(MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE);
+	}
+
+	public void useForMapillaryImageLayer() {
+		changeMapillaryLayerToCache(MAPILLARY_IMAGE_LAYER_CACHE_SIZE);
+	}
+
+	private void changeMapillaryLayerToCache(int maxCacheSize) {
+		if (this.maxCacheSize != maxCacheSize) {
+			setMaxCacheSize(maxCacheSize);
+		}
+	}
+
+	@Override
+	public void setMaxCacheSize(int maxCacheSize) {
+		super.setMaxCacheSize(maxCacheSize);
+		cache.clear();
 	}
 
 	@Override
 	public boolean isTileSourceSupported(ITileSource tileSource) {
 		return MAPILLARY_VECTOR_TILE_EXT.equals(tileSource.getTileFormat());
-	}
-
-	@Override
-	public boolean isTileZoomCorrect(int tileZoom) {
-		return this.tileZoom == tileZoom;
 	}
 
 	@Override
