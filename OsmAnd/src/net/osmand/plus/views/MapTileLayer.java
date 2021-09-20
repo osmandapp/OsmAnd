@@ -187,19 +187,17 @@ public class MapTileLayer extends BaseMapLayer {
 			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
 		}
 		drawTileMap(canvas, tileBox, drawSettings);
-		
+
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null && !oldRender) {
 			OsmandSettings st = view.getApplication().getSettings();//*
 			if (!Algorithms.objectEquals(st.MAP_UNDERLAY.get(), cachedUnderlay)) {
 				cachedUnderlay = st.MAP_UNDERLAY.get();
-				ITileSource tileSource = st.getTileSourceByName(cachedUnderlay, false);
+				//ITileSource tileSource = st.getTileSourceByName(cachedUnderlay, false);
 				if (tileSource != null) {
-					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
+					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), map);
 					mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
 					prov.swigReleaseOwnership();
-					// mapRenderer.setMapLayerProvider(-1,
-					// net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
 				} else {
 					mapRenderer.resetMapLayerProvider(-1);
 				}
@@ -212,13 +210,11 @@ public class MapTileLayer extends BaseMapLayer {
 			}//*/
 			if (!Algorithms.objectEquals(st.MAP_OVERLAY.get(), cachedOverlay)) {
 				cachedOverlay = st.MAP_OVERLAY.get();
-				ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
+				//ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
 				if (tileSource != null) {
-					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), tileSource);
+					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), map);
 					mapRenderer.setMapLayerProvider(1, prov.instantiateProxy(true));
 					prov.swigReleaseOwnership();
-					// mapRenderer.setMapLayerProvider(1,
-					// net.osmand.core.jni.OnlineTileSources.getBuiltIn().createProviderFor("Mapnik (OsmAnd)"));
 				} else {
 					mapRenderer.resetMapLayerProvider(1);
 				}
