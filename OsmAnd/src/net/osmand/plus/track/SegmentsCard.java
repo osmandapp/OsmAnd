@@ -1,13 +1,18 @@
 package net.osmand.plus.track;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
@@ -20,9 +25,6 @@ import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class SegmentsCard extends MapBaseCard {
 
@@ -71,6 +73,12 @@ public class SegmentsCard extends MapBaseCard {
 
 			container.addView(segmentView);
 		}
+		addBottomShadow(container);
+	}
+
+	private void addBottomShadow(ViewGroup container) {
+		LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
+		inflater.inflate(R.layout.card_bottom_divider, container, true);
 	}
 
 	private void updateLocationOnMap(GpxDisplayItem item) {

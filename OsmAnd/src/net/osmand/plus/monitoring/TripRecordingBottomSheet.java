@@ -1,11 +1,5 @@
 package net.osmand.plus.monitoring;
 
-import static net.osmand.AndroidUtils.setPadding;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -75,6 +69,12 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+
+import static net.osmand.AndroidUtils.setPadding;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
 
@@ -329,8 +329,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 		PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
 		tabLayout.setDividerWidth(AndroidUtils.dpToPx(app, 1));
-		tabLayout.setDividerColor(ContextCompat.getColor(app, nightMode ?
-				R.color.stroked_buttons_and_links_outline_dark : R.color.stroked_buttons_and_links_outline_light));
+		tabLayout.setDividerColor(ColorUtilities.getStrokedButtonsOutlineColor(app, nightMode));
 		tabLayout.setOnTabReselectedListener(new PagerSlidingTabStrip.OnTabReselectedListener() {
 			@Override
 			public void onTabSelected(int position) {
