@@ -1,5 +1,10 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.routing.ColoringType.ALTITUDE;
+import static net.osmand.plus.routing.ColoringType.ATTRIBUTE;
+import static net.osmand.plus.routing.ColoringType.SLOPE;
+import static net.osmand.plus.routing.ColoringType.SPEED;
+
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -33,11 +38,6 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.routing.ColoringType.ALTITUDE;
-import static net.osmand.plus.routing.ColoringType.ATTRIBUTE;
-import static net.osmand.plus.routing.ColoringType.SLOPE;
-import static net.osmand.plus.routing.ColoringType.SPEED;
 
 public class TrackColoringCard extends MapBaseCard {
 
@@ -272,7 +272,7 @@ public class TrackColoringCard extends MapBaseCard {
 				iconColorId = trackDrawInfo.getColor();
 			}
 			if (iconColorId == 0) {
-				iconColorId = TrackAppearanceFragment.getTrackColor(app, selectedGpxFile);
+				iconColorId = TrackAppearanceFragment.getTrackColor(app);
 			}
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.getIconId(), iconColorId));
 			holder.title.setTextColor(textColorId);

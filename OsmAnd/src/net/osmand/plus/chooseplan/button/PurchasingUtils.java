@@ -1,6 +1,11 @@
 package net.osmand.plus.chooseplan.button;
 
-import net.osmand.plus.ColorUtilities;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.core.content.ContextCompat;
+
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -19,19 +24,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
 public class PurchasingUtils {
 
 	public static final String PROMO_PREFIX = "promo_";
 
 	public static List<SubscriptionButton> collectSubscriptionButtons(OsmandApplication app,
-	                                                                  InAppPurchaseHelper purchaseHelper,
-	                                                                  List<InAppSubscription> subscriptions,
-	                                                                  boolean nightMode) {
-		int priceColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+																	  InAppPurchaseHelper purchaseHelper,
+																	  List<InAppSubscription> subscriptions,
+																	  boolean nightMode) {
+		int priceColor = ContextCompat.getColor(app, AndroidUtils.getPrimaryTextColorId(nightMode));
 		List<SubscriptionButton> priceButtons = new ArrayList<>();
 
 		for (InAppSubscription s : subscriptions) {
@@ -79,11 +80,11 @@ public class PurchasingUtils {
 	}
 
 	public static void createPromoItem(@NonNull ContextMenuAdapter adapter,
-	                                   @NonNull MapActivity mapActivity,
-	                                   @NonNull OsmAndFeature feature,
-	                                   @NonNull String id,
-	                                   @StringRes int titleId,
-	                                   @StringRes int descriptionId) {
+									   @NonNull MapActivity mapActivity,
+									   @NonNull OsmAndFeature feature,
+									   @NonNull String id,
+									   @StringRes int titleId,
+									   @StringRes int descriptionId) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
