@@ -1,25 +1,6 @@
 package net.osmand.plus.views.layers;
 
 
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
-import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -32,8 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
@@ -62,6 +45,25 @@ import net.osmand.plus.views.mapwidgets.widgetstates.WidgetState;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_COMPASS;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_GPS_INFO;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_DISTANCE;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_INTERMEDIATE_TIME;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_1;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MARKER_2;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_MAX_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_NEXT_TURN_SMALL;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TIME;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
+import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -295,8 +297,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (expand != null) {
 			expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode()) ?
 					View.VISIBLE : View.GONE);
-			Drawable expandIcon = getApplication().getUIUtilities().getMapIcon(expanded ? R.drawable.ic_action_arrow_up :
-					R.drawable.ic_action_arrow_down, true);
+			UiUtilities uiUtilities = getApplication().getUIUtilities();
+			int iconId = expanded ? R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down;
+			int colorId = ColorUtilities.getMapButtonIconColorId(false);
+			Drawable expandIcon = uiUtilities.getIcon(iconId, colorId);
 			setMapButtonIcon(expand, expandIcon);
 			expand.setContentDescription(getString(expanded ? R.string.shared_string_collapse : R.string.access_widget_expand));
 			expand.setOnClickListener(v -> {

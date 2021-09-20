@@ -158,10 +158,6 @@ public class UiUtilities {
 		return getDrawable(id, ColorUtilities.getDefaultIconColorId(!light));
 	}
 
-	public Drawable getMapIcon(@DrawableRes int id, boolean light) {
-		return getDrawable(id, light ? R.color.map_button_icon_color_light : R.color.map_button_icon_color_dark);
-	}
-
 	public static Drawable getSelectableDrawable(Context ctx) {
 		int bgResId = AndroidUtils.resolveAttribute(ctx, R.attr.selectableItemBackground);
 		if (bgResId != 0) {
