@@ -10,12 +10,10 @@ import android.widget.LinearLayout;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 
@@ -95,13 +93,11 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 	}
 
 	private void createDivider() {
-		int dividerColor = nightMode ?
-				R.color.stroked_buttons_and_links_outline_dark :
-				R.color.stroked_buttons_and_links_outline_light;
+		int dividerColor = ColorUtilities.getStrokedButtonsOutlineColor(app, nightMode);
 		int width = AndroidUtils.dpToPx(app, 1.0f);
 		View divider = new View(app);
 		divider.setLayoutParams(new ViewGroup.LayoutParams(width, ViewGroup.LayoutParams.MATCH_PARENT));
-		divider.setBackgroundColor(ContextCompat.getColor(app, dividerColor));
+		divider.setBackgroundColor(dividerColor);
 		dividers.add(divider);
 		container.addView(divider);
 	}
@@ -113,7 +109,7 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 	public void updateView(boolean isEnabled) {
 		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		int defaultColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-		int activatedColor = isEnabled ? activeColor : defaultColor;
+		int selectedBgColor = isEnabled ? activeColor : defaultColor;
 
 		int textColorPrimary = ColorUtilities.getPrimaryTextColor(app, nightMode);
 		int textColorSecondary = ColorUtilities.getSecondaryTextColor(app, nightMode);
@@ -122,18 +118,18 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 		int radius = AndroidUtils.dpToPx(app, 4);
 		float[] leftBtnRadii = new float[]{radius, radius, 0, 0, 0, 0, radius, radius};
 		float[] rightBtnRadii = new float[]{0, 0, radius, radius, radius, radius, 0, 0};
-		float[] centerBtnRadii = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
+		float[] internalBtnRadii = new float[]{0, 0, 0, 0, 0, 0, 0, 0};
 		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(app);
 
 		GradientDrawable background = new GradientDrawable();
-		background.setColor(ColorUtilities.getColorWithAlpha(activatedColor, 0.1f));
-		background.setStroke(AndroidUtils.dpToPx(app, 1), ColorUtilities.getColorWithAlpha(activatedColor, 0.5f));
+		background.setColor(ColorUtilities.getColorWithAlpha(selectedBgColor, 0.1f));
+		background.setStroke(AndroidUtils.dpToPx(app, 1), ColorUtilities.getColorWithAlpha(selectedBgColor, 0.5f));
 
 		showAllDividers();
 		for (int i = 0; i < items.size(); i++) {
 			_Radio item = items.get(i);
-			ViewGroup container = buttons.get(i);
-			container.setEnabled(isEnabled);
+			ViewGroup button = buttons.get(i);
+			button.setEnabled(isEnabled);
 			if (selectedItem == item) {
 				if (i == 0) {
 					background.setCornerRadii(isLayoutRtl ? rightBtnRadii : leftBtnRadii);
@@ -142,14 +138,14 @@ public abstract class MultiStateToggleButton<_Radio extends RadioItem> {
 					background.setCornerRadii(isLayoutRtl ? leftBtnRadii : rightBtnRadii);
 					hideDividers(dividers.size() - 1);
 				} else {
-					background.setCornerRadii(centerBtnRadii);
+					background.setCornerRadii(internalBtnRadii);
 					hideDividers(i - 1, i);
 				}
-				container.setBackgroundDrawable(background);
-				updateItemView(container, item, textColor);
+				button.setBackgroundDrawable(background);
+				updateItemView(button, item, textColor);
 			} else {
-				container.setBackgroundColor(Color.TRANSPARENT);
-				updateItemView(container, item, activatedColor);
+				button.setBackgroundColor(Color.TRANSPARENT);
+				updateItemView(button, item, selectedBgColor);
 			}
 		}
 	}

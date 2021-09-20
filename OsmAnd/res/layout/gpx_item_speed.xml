@@ -101,7 +101,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="2dp"
-				osmand:srcCompat="@drawable/ic_action_speed" />
+				osmand:srcCompat="@drawable/ic_action_speed_16" />
 
 		</LinearLayout>
 

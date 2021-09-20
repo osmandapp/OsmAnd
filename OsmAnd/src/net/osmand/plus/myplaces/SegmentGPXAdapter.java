@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -71,6 +72,8 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 
 		PagerSlidingTabStrip tabLayout = row.findViewById(R.id.sliding_tabs);
 		tabLayout.setTabBackground(AndroidUtils.resolveAttribute(context, R.attr.btn_bg_border_inactive));
+		tabLayout.setDividerWidth(AndroidUtils.dpToPx(context, 1));
+		tabLayout.setDividerColor(ColorUtilities.getStrokedButtonsOutlineColor(context, nightMode));
 		tabLayout.setIndicatorHeight(0);
 		tabLayout.setShouldExpand(true);
 		WrapContentHeightViewPager pager = row.findViewById(R.id.pager);
