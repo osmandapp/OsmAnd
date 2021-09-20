@@ -1,5 +1,9 @@
 package net.osmand.plus.chooseplan.button;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
@@ -18,10 +22,6 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 
 public class PurchasingUtils {
 
@@ -79,11 +79,11 @@ public class PurchasingUtils {
 	}
 
 	public static void createPromoItem(@NonNull ContextMenuAdapter adapter,
-	                                   @NonNull MapActivity mapActivity,
-	                                   @NonNull OsmAndFeature feature,
-	                                   @NonNull String id,
-	                                   @StringRes int titleId,
-	                                   @StringRes int descriptionId) {
+									   @NonNull MapActivity mapActivity,
+									   @NonNull OsmAndFeature feature,
+									   @NonNull String id,
+									   @StringRes int titleId,
+									   @StringRes int descriptionId) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
