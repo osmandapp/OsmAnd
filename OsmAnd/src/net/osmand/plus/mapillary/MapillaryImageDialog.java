@@ -52,17 +52,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 import androidx.annotation.NonNull;
 import androidx.core.util.Pair;
 
+import static net.osmand.plus.mapillary.MapillaryImage.IMAGE_ID_KEY;
+import static net.osmand.plus.mapillary.MapillaryImage.SEQUENCE_ID_KEY;
 import static net.osmand.plus.mapillary.MapillaryVectorLayer.EXTENT;
-import static net.osmand.plus.mapillary.MapillaryVectorLayer.TILE_ZOOM;
+import static net.osmand.plus.mapillary.MapillaryVectorLayer.MIN_IMAGE_LAYER_ZOOM;
 
 public class MapillaryImageDialog extends ContextMenuCardDialog {
 
-	private static final String KEY_MAPILLARY_DIALOG_IMAGE_KEY = "key_mapillary_dialog_image_key";
-	private static final String KEY_MAPILLARY_DIALOG_IMAGE_SKEY = "key_mapillary_dialog_image_skey";
+	private static final String KEY_MAPILLARY_DIALOG_IMAGE_ID = "key_mapillary_dialog_image_id";
+	private static final String KEY_MAPILLARY_DIALOG_SEQUENCE_ID = "key_mapillary_dialog_sequence_id";
 	private static final String KEY_MAPILLARY_DIALOG_IMAGE_URL = "key_mapillary_dialog_image_url";
 	private static final String KEY_MAPILLARY_DIALOG_VIEWER_URL = "key_mapillary_dialog_viewer_url";
 	private static final String KEY_MAPILLARY_DIALOG_LATLON = "key_mapillary_dialog_latlon";
-	private static final String KEY_MAPILLARY_DIALOG_CA = "key_mapillary_dialog_ca";
+	private static final String KEY_MAPILLARY_DIALOG_COMPASS_ANGLE = "key_mapillary_dialog_compass_angle";
 
 	private static final String MAPILLARY_VIEWER_URL_TEMPLATE =
 			"https://osmand.net/api/mapillary/photo-viewer?photo_id=";
@@ -71,12 +73,12 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 
 	private static final String WEBGL_ERROR_MESSAGE = "Error creating WebGL context";
 
-	private String key;
-	private String sKey;
+	private String imageId;
+	private String sequenceId;
 	private String imageUrl;
 	private String viewerUrl;
 	private LatLon latLon;
-	private double ca = Double.NaN;
+	private double compassAngle = Double.NaN;
 	private boolean sync;
 
 	private View staticImageView;
@@ -86,31 +88,32 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private double fetchedTileLon = Double.NaN;
 	private List<MapillaryImage> sequenceImages = new ArrayList<>();
 	private AtomicInteger downloadRequestNumber = new AtomicInteger();
-	private UiUtilities ic;
+	private UiUtilities iconsCache;
 
 	public MapillaryImageDialog(@NonNull MapActivity mapActivity, @NonNull Bundle bundle) {
 		super(mapActivity, CardDialogType.MAPILLARY);
 		restoreFields(bundle);
-		this.ic = mapActivity.getMyApplication().getUIUtilities();
+		this.iconsCache = mapActivity.getMyApplication().getUIUtilities();
 	}
 
-	public MapillaryImageDialog(MapActivity mapActivity, String key, String sKey, String imageUrl,
-								String viewerUrl, LatLon latLon, double ca, String title, String description, boolean sync) {
+	public MapillaryImageDialog(MapActivity mapActivity, String imageId, String sequenceId,
+	                            String imageUrl, String viewerUrl, LatLon latLon, double compassAngle,
+	                            String title, String description, boolean sync) {
 		super(mapActivity, CardDialogType.MAPILLARY);
 		this.title = title;
 		this.description = description;
-		this.key = key;
-		this.sKey = sKey;
+		this.imageId = imageId;
+		this.sequenceId = sequenceId;
 		this.imageUrl = imageUrl;
 		this.viewerUrl = viewerUrl;
 		this.latLon = latLon;
-		this.ca = ca;
-		this.ic = mapActivity.getMyApplication().getUIUtilities();
+		this.compassAngle = compassAngle;
+		this.iconsCache = mapActivity.getMyApplication().getUIUtilities();
 		this.sync = sync;
 	}
 
-	public String getKey() {
-		return key;
+	public String getImageId() {
+		return imageId;
 	}
 
 	public String getViewerUrl() {
@@ -121,37 +124,37 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		return latLon;
 	}
 
-	public double getCa() {
-		return ca;
+	public double getCompassAngle() {
+		return compassAngle;
 	}
 
 	public void saveMenu(Bundle bundle) {
 		super.saveMenu(bundle);
-		bundle.putSerializable(KEY_MAPILLARY_DIALOG_IMAGE_KEY, key);
-		bundle.putSerializable(KEY_MAPILLARY_DIALOG_IMAGE_SKEY, sKey);
+		bundle.putSerializable(KEY_MAPILLARY_DIALOG_IMAGE_ID, imageId);
+		bundle.putSerializable(KEY_MAPILLARY_DIALOG_SEQUENCE_ID, sequenceId);
 		bundle.putSerializable(KEY_MAPILLARY_DIALOG_IMAGE_URL, imageUrl);
 		bundle.putSerializable(KEY_MAPILLARY_DIALOG_VIEWER_URL, viewerUrl);
 		bundle.putSerializable(KEY_MAPILLARY_DIALOG_LATLON, latLon);
-		bundle.putDouble(KEY_MAPILLARY_DIALOG_CA, ca);
+		bundle.putDouble(KEY_MAPILLARY_DIALOG_COMPASS_ANGLE, compassAngle);
 	}
 
 	@Override
 	protected void restoreFields(Bundle bundle) {
 		super.restoreFields(bundle);
-		this.key = bundle.getString(KEY_MAPILLARY_DIALOG_IMAGE_KEY);
-		this.sKey = bundle.getString(KEY_MAPILLARY_DIALOG_IMAGE_SKEY);
+		this.imageId = bundle.getString(KEY_MAPILLARY_DIALOG_IMAGE_ID);
+		this.sequenceId = bundle.getString(KEY_MAPILLARY_DIALOG_SEQUENCE_ID);
 		this.imageUrl = bundle.getString(KEY_MAPILLARY_DIALOG_IMAGE_URL);
 		this.viewerUrl = bundle.getString(KEY_MAPILLARY_DIALOG_VIEWER_URL);
 		Object latLonObj = bundle.getSerializable(KEY_MAPILLARY_DIALOG_LATLON);
 		if (latLonObj != null) {
 			this.latLon = (LatLon) latLonObj;
 		}
-		this.ca = bundle.getDouble(KEY_MAPILLARY_DIALOG_CA, Double.NaN);
+		this.compassAngle = bundle.getDouble(KEY_MAPILLARY_DIALOG_COMPASS_ANGLE, Double.NaN);
 	}
 
 	public void onResume() {
 		super.onResume();
-		setImageLocation(latLon, ca, true);
+		setImageLocation(latLon, compassAngle, true);
 	}
 
 	public void onPause() {
@@ -159,27 +162,27 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		setImageLocation(null, Double.NaN, false);
 	}
 
-	private void setImageLocation(LatLon latLon, double ca, boolean animated) {
-		OsmandMapTileView mapView = getMapActivity().getMapView();
-		updateLayer(mapView.getLayerByClass(MapillaryRasterLayer.class), latLon, ca);
-		updateLayer(mapView.getLayerByClass(MapillaryVectorLayer.class), latLon, ca);
+	private void setImageLocation(LatLon latLon, double compassAngle, boolean animated) {
+		MapActivity mapActivity = getMapActivity();
+		OsmandMapTileView mapView = mapActivity.getMapView();
+		updateLayer(mapView.getLayerByClass(MapillaryVectorLayer.class), latLon, compassAngle);
 		if (latLon != null) {
 			if (animated) {
 				mapView.getAnimatedDraggingThread().startMoving(
 						latLon.getLatitude(), latLon.getLongitude(), mapView.getZoom(), true);
 			} else {
-				getMapActivity().getMyApplication().getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
+				mapActivity.getMyApplication().getOsmandMap().setMapLocation(latLon.getLatitude(), latLon.getLongitude());
 			}
 		} else {
-			getMapActivity().refreshMap();
+			mapActivity.refreshMap();
 		}
 	}
 
-	private void updateLayer(MapillaryLayer layer, LatLon latLon, double ca) {
+	private void updateLayer(MapillaryLayer layer, LatLon latLon, double compassAngle) {
 		if (layer != null) {
 			layer.setSelectedImageLocation(latLon);
-			if (!Double.isNaN(ca)) {
-				layer.setSelectedImageCameraAngle((float) ca);
+			if (!Double.isNaN(compassAngle)) {
+				layer.setSelectedImageCameraAngle((float) compassAngle);
 			} else {
 				layer.setSelectedImageCameraAngle(null);
 			}
@@ -198,17 +201,12 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	@Override
 	protected void createMenuItems(Menu menu) {
 		MenuItem item = menu.add(R.string.open_mapillary)
-				.setIcon(getMapActivity().getMyApplication().getUIUtilities().getThemedIcon(
-						R.drawable.ic_action_mapillary));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				MapillaryPlugin.openMapillary(getMapActivity(), key);
-				return true;
-			}
+				.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_mapillary));
+		item.setOnMenuItemClickListener(i -> {
+			MapillaryPlugin.openMapillary(getMapActivity(), imageId);
+			return true;
 		});
 	}
-
 
 	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
 	private View getWebView() {
@@ -216,7 +214,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		final WebView webView = view.findViewById(R.id.webView);
 		webView.setBackgroundColor(Color.argb(1, 0, 0, 0));
 		final View noInternetView = view.findViewById(R.id.mapillaryNoInternetLayout);
-		Drawable icWifiOff = ic.getThemedIcon(R.drawable.ic_action_wifi_off);
+		Drawable icWifiOff = iconsCache.getThemedIcon(R.drawable.ic_action_wifi_off);
 		((ImageView) noInternetView.findViewById(R.id.wifiOff)).setImageDrawable(icWifiOff);
 		view.setScrollContainer(false);
 		webView.getSettings().setJavaScriptEnabled(true);
@@ -243,19 +241,19 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private class MapillaryWebAppInterface {
 
 		@JavascriptInterface
-		public void onNodeChanged(double latitude, double longitude, double ca, String key) {
+		public void onNodeChanged(double latitude, double longitude, double compassAngle, String imageId) {
 			LatLon latLon = null;
 			if (!Double.isNaN(latitude) && !Double.isNaN(longitude)) {
 				latLon = new LatLon(latitude, longitude);
 				MapillaryImageDialog.this.latLon = latLon;
-				MapillaryImageDialog.this.ca = ca;
-				if (!Algorithms.isEmpty(key)) {
-					MapillaryImageDialog.this.key = key;
-					MapillaryImageDialog.this.imageUrl = MAPILLARY_HIRES_IMAGE_URL_TEMPLATE + key;
-					MapillaryImageDialog.this.viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + key;
+				MapillaryImageDialog.this.compassAngle = compassAngle;
+				if (!Algorithms.isEmpty(imageId)) {
+					MapillaryImageDialog.this.imageId = imageId;
+					MapillaryImageDialog.this.imageUrl = MAPILLARY_HIRES_IMAGE_URL_TEMPLATE + imageId;
+					MapillaryImageDialog.this.viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + imageId;
 				}
 			}
-			setImageLocation(latLon, ca, false);
+			setImageLocation(latLon, compassAngle, false);
 		}
 	}
 
@@ -273,14 +271,19 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		staticImageView = view.findViewById(R.id.staticImageViewLayout);
 
 		noInternetView = view.findViewById(R.id.mapillaryNoInternetLayout);
-		((ImageView) noInternetView.findViewById(R.id.wifiOff)).setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_wifi_off));
+		((ImageView) noInternetView.findViewById(R.id.wifiOff))
+				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_wifi_off));
 		noInternetView.findViewById(R.id.retry_button).setOnClickListener(v -> {
-			MenuBuilder.execute(new DownloadImageTask(staticImageView, downloadRequestNumber.incrementAndGet(), downloadRequestNumber));
+			DownloadImageTask downloadTask = new DownloadImageTask(staticImageView,
+					downloadRequestNumber.incrementAndGet(), downloadRequestNumber);
+			MenuBuilder.execute(downloadTask);
 			fetchSequence();
 		});
 
 		if (!Algorithms.isEmpty(imageUrl)) {
-			MenuBuilder.execute(new DownloadImageTask(staticImageView, downloadRequestNumber.incrementAndGet(), downloadRequestNumber));
+			DownloadImageTask downloadTask = new DownloadImageTask(staticImageView,
+					downloadRequestNumber.incrementAndGet(), downloadRequestNumber);
+			MenuBuilder.execute(downloadTask);
 			fetchSequence();
 		}
 		updateArrowButtons();
@@ -288,10 +291,10 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	}
 
 	private void fetchSequence() {
-		if (Algorithms.isEmpty(sKey)) {
+		if (Algorithms.isEmpty(sequenceId)) {
 			acquireSequenceKey();
 		}
-		if (!Algorithms.isEmpty(sKey)) {
+		if (!Algorithms.isEmpty(sequenceId)) {
 			acquireSequenceImages();
 		}
 	}
@@ -303,9 +306,9 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			for (Geometry g : tile.getData()) {
 				if (g instanceof Point && !g.isEmpty() && g.getUserData() != null && g.getUserData() instanceof HashMap) {
 					HashMap userData = (HashMap) g.getUserData();
-					String key = (String) userData.get("key");
-					if (this.key.equals(key)) {
-						sKey = (String) userData.get("skey");
+					String imageId = (String) userData.get(IMAGE_ID_KEY);
+					if (this.imageId.equals(imageId)) {
+						sequenceId = (String) userData.get(SEQUENCE_ID_KEY);
 						return;
 					}
 				}
@@ -316,7 +319,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private void acquireSequenceImages() {
 		fetchTiles();
 		List<MapillaryImage> sequenceImages = new ArrayList<>();
-		if (!Algorithms.isEmpty(sKey)) {
+		if (!Algorithms.isEmpty(sequenceId)) {
 			double px, py;
 			for (Pair<QuadPointDouble, GeometryTile> pt : tiles) {
 				QuadPointDouble point = pt.first;
@@ -324,14 +327,14 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				for (Geometry g : tile.getData()) {
 					if (g instanceof Point && !g.isEmpty() && g.getUserData() != null && g.getUserData() instanceof HashMap) {
 						HashMap userData = (HashMap) g.getUserData();
-						String sKey = (String) userData.get("skey");
-						if (this.sKey.equals(sKey)) {
+						String sequenceId = (String) userData.get(SEQUENCE_ID_KEY);
+						if (this.sequenceId.equals(sequenceId)) {
 							Point p = (Point) g;
 							px = p.getCoordinate().x / EXTENT;
 							py = p.getCoordinate().y / EXTENT;
-							MapillaryImage image = new MapillaryImage(
-									MapUtils.getLatitudeFromTile(TILE_ZOOM, point.y + py),
-									MapUtils.getLongitudeFromTile(TILE_ZOOM, point.x + px));
+							double lat = MapUtils.getLatitudeFromTile(MIN_IMAGE_LAYER_ZOOM, point.y + py);
+							double lon = MapUtils.getLongitudeFromTile(MIN_IMAGE_LAYER_ZOOM, point.x + px);
+							MapillaryImage image = new MapillaryImage(lat, lon);
 							if (image.setData(userData)) {
 								sequenceImages.add(image);
 							}
@@ -348,9 +351,9 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		if (staticImageView != null) {
 			boolean showLeftButton = false;
 			boolean showRightButton = false;
-			if (sequenceImages.size() > 1 && !Algorithms.isEmpty(key)) {
-				showLeftButton = !sequenceImages.get(0).getImageId().equals(key);
-				showRightButton = !sequenceImages.get(sequenceImages.size() - 1).getImageId().equals(key);
+			if (sequenceImages.size() > 1 && !Algorithms.isEmpty(imageId)) {
+				showLeftButton = !sequenceImages.get(0).getImageId().equals(imageId);
+				showRightButton = !sequenceImages.get(sequenceImages.size() - 1).getImageId().equals(imageId);
 			}
 			staticImageView.findViewById(R.id.leftArrowButton)
 					.setVisibility(showLeftButton ? View.VISIBLE : View.GONE);
@@ -371,7 +374,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private void clickLeftArrowButton(View v) {
 		fetchSequence();
 		if (sequenceImages != null) {
-			int index = getImageIndex(key);
+			int index = getImageIndex(imageId);
 			if (index > 0) {
 				setImage(sequenceImages.get(index - 1));
 			}
@@ -382,7 +385,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private void clickRightArrowButton(View v) {
 		fetchSequence();
 		if (sequenceImages != null) {
-			int index = getImageIndex(key);
+			int index = getImageIndex(imageId);
 			if (index != -1 && index < sequenceImages.size() - 1) {
 				setImage(sequenceImages.get(index + 1));
 			}
@@ -392,12 +395,12 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 
 	private void setImage(MapillaryImage image) {
 		this.latLon = new LatLon(image.getLatitude(), image.getLongitude());
-		this.ca = image.getCompassAngle();
-		this.key = image.getImageId();
+		this.compassAngle = image.getCompassAngle();
+		this.imageId = image.getImageId();
 		this.imageUrl = MAPILLARY_HIRES_IMAGE_URL_TEMPLATE + image.getImageId();
 		this.viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + image.getImageId();
 		MenuBuilder.execute(new DownloadImageTask(staticImageView, downloadRequestNumber.incrementAndGet(), downloadRequestNumber));
-		setImageLocation(latLon, ca, false);
+		setImageLocation(latLon, compassAngle, false);
 	}
 
 	public void fetchTiles() {
@@ -423,7 +426,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		int top = (int) Math.floor(tilesRect.top + ellipticTileCorrection);
 		int width = (int) Math.ceil(tilesRect.right - left);
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
-		int dzoom = nzoom - TILE_ZOOM;
+		int dzoom = nzoom - MIN_IMAGE_LAYER_ZOOM;
 		int div = (int) Math.pow(2.0, dzoom);
 
 		long requestTimestamp = System.currentTimeMillis();
@@ -433,20 +436,20 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			for (int j = 0; j < height; j++) {
 				int tileX = (left + i) / div;
 				int tileY = (top + j) / div;
-				String tileId = mgr.calculateTileId(map, tileX, tileY, TILE_ZOOM);
+				String tileId = mgr.calculateTileId(map, tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
 				Pair<QuadPointDouble, GeometryTile> p = tiles.get(tileId);
 				if (p == null) {
 					GeometryTile tile = null;
 					// asking tile image async
-					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, TILE_ZOOM);
+					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, MIN_IMAGE_LAYER_ZOOM);
 					if (imgExist) {
 						if (sync) {
-							tile = mgr.getGeometryTilesCache().getTileForMapSync(tileId, map,
-									tileX, tileY, TILE_ZOOM, false, requestTimestamp);
+							tile = mgr.getMapillaryVectorTilesCache().getTileForMapSync(tileId, map,
+									tileX, tileY, MIN_IMAGE_LAYER_ZOOM, false, requestTimestamp);
 							sync = false;
 						} else {
-							tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map,
-									tileX, tileY, TILE_ZOOM, false, requestTimestamp);
+							tile = mgr.getMapillaryVectorTilesCache().getTileForMapAsync(tileId, map,
+									tileX, tileY, MIN_IMAGE_LAYER_ZOOM, false, requestTimestamp);
 						}
 					}
 					if (tile != null) {
@@ -460,31 +463,32 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		this.tiles = new ArrayList<>(tiles.values());
 	}
 
-	public static MapillaryImageDialog show(MapActivity mapActivity, String key, String imageUrl,
-											String viewerUrl, LatLon latLon, double ca,
-											String title, String description) {
-		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, null, imageUrl,
-				viewerUrl, latLon, ca, title, description, false);
+	public static MapillaryImageDialog show(MapActivity mapActivity, String imageId, String imageUrl,
+	                                        String viewerUrl, LatLon latLon, double compassAngle,
+	                                        String title, String description) {
+		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, imageId, null, imageUrl,
+				viewerUrl, latLon, compassAngle, title, description, false);
 		ContextMenuCardDialogFragment.showInstance(dialog);
 		return dialog;
 	}
 
-	public static MapillaryImageDialog show(MapActivity mapActivity, String key, String imageUrl,
-											String viewerUrl, LatLon latLon, double ca,
-											String title, String description, boolean sync) {
-		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, null, imageUrl,
-				viewerUrl, latLon, ca, title, description, sync);
+	public static MapillaryImageDialog show(MapActivity mapActivity, String imageId, String imageUrl,
+	                                        String viewerUrl, LatLon latLon, double compassAngle,
+	                                        String title, String description, boolean sync) {
+		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, imageId, null, imageUrl,
+				viewerUrl, latLon, compassAngle, title, description, sync);
 		ContextMenuCardDialogFragment.showInstance(dialog);
 		return dialog;
 	}
 
 	public static MapillaryImageDialog show(MapActivity mapActivity, double latitude, double longitude,
-											String key, String sKey, double ca, String title, String description) {
-		String imageUrl = MAPILLARY_HIRES_IMAGE_URL_TEMPLATE + key;
-		String viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + key;
+	                                        String imageId, String sequenceId, double compassAngle,
+	                                        String title, String description) {
+		String imageUrl = MAPILLARY_HIRES_IMAGE_URL_TEMPLATE + imageId;
+		String viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + imageId;
 		LatLon latLon = new LatLon(latitude, longitude);
-		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, sKey, imageUrl, viewerUrl,
-				latLon, ca, title, description, false);
+		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, imageId, sequenceId, imageUrl, viewerUrl,
+				latLon, compassAngle, title, description, false);
 		ContextMenuCardDialogFragment.showInstance(dialog);
 		return dialog;
 	}

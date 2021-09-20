@@ -1,8 +1,6 @@
 package net.osmand.plus.resources;
 
 
-import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
-
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
@@ -10,9 +8,6 @@ import android.os.HandlerThread;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
@@ -82,6 +77,11 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
+
 /**
  * Resource manager is responsible to work with all resources
  * that could consume memory (especially with file resources).
@@ -102,7 +102,7 @@ public class ResourceManager {
 
 	private final List<TilesCache<?>> tilesCacheList = new ArrayList<>();
 	private final BitmapTilesCache bitmapTilesCache;
-	private final GeometryTilesCache geometryTilesCache;
+	private final GeometryTilesCache mapillaryVectorTilesCache;
 	private List<MapTileLayerSize> mapTileLayerSizes = new ArrayList<>();
 
 	private final OsmandApplication context;
@@ -252,9 +252,9 @@ public class ResourceManager {
 		this.renderer = new MapRenderRepositories(context);
 
 		bitmapTilesCache = new BitmapTilesCache(asyncLoadingThread);
-		geometryTilesCache = new GeometryTilesCache(asyncLoadingThread);
+		mapillaryVectorTilesCache = new GeometryTilesCache(asyncLoadingThread);
 		tilesCacheList.add(bitmapTilesCache);
-		tilesCacheList.add(geometryTilesCache);
+		tilesCacheList.add(mapillaryVectorTilesCache);
 
 		asyncLoadingThread.start();
 		renderingBufferImageThread = new HandlerThread("RenderingBaseImage");
@@ -282,8 +282,8 @@ public class ResourceManager {
 		return bitmapTilesCache;
 	}
 
-	public GeometryTilesCache getGeometryTilesCache() {
-		return geometryTilesCache;
+	public GeometryTilesCache getMapillaryVectorTilesCache() {
+		return mapillaryVectorTilesCache;
 	}
 
 	public MapTileDownloader getMapTileDownloader() {
@@ -383,9 +383,9 @@ public class ResourceManager {
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
 
 	private TilesCache<?> getTilesCache(ITileSource map) {
-		for (TilesCache<?> tc : tilesCacheList) {
-			if (tc.isTileSourceSupported(map)) {
-				return tc;
+		for (TilesCache<?> cache : tilesCacheList) {
+			if (cache.isTileSourceSupported(map)) {
+				return cache;
 			}
 		}
 		return null;
