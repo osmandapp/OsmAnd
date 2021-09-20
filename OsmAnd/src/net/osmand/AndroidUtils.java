@@ -106,12 +106,9 @@ public class AndroidUtils {
 	}
 
 	public static void softKeyboardDelayed(final Activity activity, final View view) {
-		view.post(new Runnable() {
-			@Override
-			public void run() {
-				if (!isHardwareKeyboardAvailable(view.getContext())) {
-					showSoftKeyboard(activity,view);
-				}
+		view.post(() -> {
+			if (!isHardwareKeyboardAvailable(view.getContext())) {
+				showSoftKeyboard(activity,view);
 			}
 		});
 	}

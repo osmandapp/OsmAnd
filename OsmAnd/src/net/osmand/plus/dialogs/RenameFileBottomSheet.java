@@ -47,8 +47,8 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private OsmandApplication app;
 
-	private TextInputEditText editText;
 	private TextInputLayout nameTextBox;
+	private TextInputEditText editText;
 
 	private File file;
 	private String selectedFileName;
@@ -67,15 +67,31 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		items.add(new TitleItem(getString(R.string.shared_string_rename)));
 
-		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
-		nameTextBox = view.findViewById(R.id.name_text_box);
-		nameTextBox.setBoxBackgroundColorResource(nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light);
+		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
+		nameTextBox = setupTextBox(mainView);
+		editText = setupEditText(mainView);
+		AndroidUtils.softKeyboardDelayed(getActivity(), editText);
+
+		BaseBottomSheetItem editFolderName = new BaseBottomSheetItem.Builder()
+				.setCustomView(mainView)
+				.create();
+		items.add(editFolderName);
+	}
+
+	private TextInputLayout setupTextBox(View mainView) {
+		TextInputLayout nameTextBox = mainView.findViewById(R.id.name_text_box);
+		int backgroundId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
+		nameTextBox.setBoxBackgroundColorResource(backgroundId);
 		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_name));
 		ColorStateList colorStateList = ColorStateList.valueOf(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
+		return nameTextBox;
+	}
 
-		editText = view.findViewById(R.id.name_edit_text);
+	private TextInputEditText setupEditText(View mainView) {
+		TextInputEditText editText = mainView.findViewById(R.id.name_edit_text);
 		editText.setText(selectedFileName);
+		editText.requestFocus();
 		editText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -90,11 +106,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 				updateFileName(s.toString());
 			}
 		});
-
-		BaseBottomSheetItem editFolderName = new BaseBottomSheetItem.Builder()
-				.setCustomView(view)
-				.create();
-		items.add(editFolderName);
+		return editText;
 	}
 
 	private void updateFileName(String name) {
