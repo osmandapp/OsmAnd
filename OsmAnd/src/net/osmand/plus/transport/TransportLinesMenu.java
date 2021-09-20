@@ -219,7 +219,7 @@ public class TransportLinesMenu {
 
 	private static void refreshMap(MapActivity mapActivity) {
 		mapActivity.refreshMapComplete();
-		mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
 
 	public static boolean isShowLines(@NonNull OsmandApplication app) {

@@ -139,11 +139,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayers(MapActivity activity) {
-		registerWidget(activity);
+	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		if (mapActivity != null) {
+			registerWidget(mapActivity);
+		}
 	}
 
-	private void registerWidget(MapActivity activity) {
+	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
 		monitoringControl = createMonitoringControl(activity);
 
@@ -153,18 +155,22 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (isActive()) {
-			if (monitoringControl == null) {
-				registerWidget(activity);
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		if (mapActivity != null) {
+			if (isActive()) {
+				if (monitoringControl == null) {
+					registerWidget(mapActivity);
+				}
+			} else {
+				if (monitoringControl != null) {
+					MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
+					layer.removeSideWidget(monitoringControl);
+					layer.recreateControls();
+					monitoringControl = null;
+				}
 			}
 		} else {
-			if (monitoringControl != null) {
-				MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
-				layer.removeSideWidget(monitoringControl);
-				layer.recreateControls();
-				monitoringControl = null;
-			}
+			//TODO: CLEAR CONTROL IN ALL PLUGINS!!!
 		}
 	}
 

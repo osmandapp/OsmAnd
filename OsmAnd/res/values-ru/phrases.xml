@@ -219,7 +219,7 @@
     <string name="poi_telephone_exchange">АТС</string>
     <string name="poi_recycling">Переработка отходов</string>
     <string name="poi_landfill">Свалка</string>
-    <string name="poi_waste_disposal">Утилизация мусора</string>
+    <string name="poi_waste_disposal">Мусорный бак;Утилизация мусора</string>
     <string name="poi_waste_basket">Урна для мусора</string>
     <string name="poi_recycling_type">Тип</string>
     <string name="poi_recycling_centre">Пункт приёма;Центр утилизации</string>
@@ -3990,4 +3990,6 @@
     <string name="poi_share_taxi_yes">Маршрутное такси: да</string>
     <string name="poi_power_portal">Портальная опора ВЛ</string>
     <string name="poi_arch">Арка</string>
+    <string name="poi_shelter_filter">Укрытие</string>
+    <string name="poi_shelter_no">Укрытие: нет</string>
 </resources>

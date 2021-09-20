@@ -72,9 +72,9 @@ public class MapWidgetRegistry {
 	public static String WIDGET_STREET_NAME = "street_name";
 
 
-	private Set<MapWidgetRegInfo> leftWidgetSet = new TreeSet<>();
-	private Set<MapWidgetRegInfo> rightWidgetSet = new TreeSet<>();
-	private Map<ApplicationMode, Set<String>> visibleElementsFromSettings = new LinkedHashMap<>();
+	private final Set<MapWidgetRegInfo> leftWidgetSet = new TreeSet<>();
+	private final Set<MapWidgetRegInfo> rightWidgetSet = new TreeSet<>();
+	private final Map<ApplicationMode, Set<String>> visibleElementsFromSettings = new LinkedHashMap<>();
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
 
@@ -134,7 +134,6 @@ public class MapWidgetRegistry {
 		}
 	}
 
-
 	public void removeSideWidgetInternal(TextInfoWidget widget) {
 		Iterator<MapWidgetRegInfo> it = leftWidgetSet.iterator();
 		while (it.hasNext()) {
@@ -148,6 +147,11 @@ public class MapWidgetRegistry {
 				it.remove();
 			}
 		}
+	}
+
+	public void clearSideWidgets() {
+		leftWidgetSet.clear();
+		rightWidgetSet.clear();
 	}
 
 	public <T extends TextInfoWidget> T getSideWidget(Class<T> cl) {

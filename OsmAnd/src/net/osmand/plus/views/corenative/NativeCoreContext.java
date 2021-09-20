@@ -1,6 +1,9 @@
 package net.osmand.plus.views.corenative;
 
-import java.io.File;
+import android.content.Context;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.WindowManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.core.android.CoreResourcesFromAndroidAssets;
@@ -14,10 +17,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
-import android.content.Context;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.WindowManager;
+
+import java.io.File;
 
 /**
  * Created by Denis on 01.10.2014.
@@ -67,7 +68,7 @@ public class NativeCoreContext {
 
                 mapRendererContext = new MapRendererContext(app, dm.density);
 				mapRendererContext.setupObfMap(new MapStylesCollection(), obfsCollection);
-                app.getRendererRegistry().setRendererLoadedEventListener(mapRendererContext);
+                app.getRendererRegistry().addRendererLoadedEventListener(mapRendererContext);
 				init = true;
 			}
 		}

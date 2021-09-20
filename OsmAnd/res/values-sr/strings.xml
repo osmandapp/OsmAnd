@@ -4216,4 +4216,54 @@
     <string name="backup_error_token_is_not_valid_or_expired">Неважећи или истекао токен</string>
     <string name="backup_error_user_is_not_registered">Ниједан корисник није регистрован са том адресом е-поште</string>
     <string name="backup_error_no_valid_subscription">Нема важеће претплате</string>
+    <string name="routeInfo_winter_ice_road_description">Боји линију путање или стазе према каквоћи путева зими које је употребљиво само зимама.</string>
+    <string name="routeInfo_smoothness_description">Доставља податке о правилима бојења у зависности од употребљивости путева за возила на точковима, нарочито према исправности/равности површине.</string>
+    <string name="routeInfo_surface_description">Доставља додатне податке о врсти подлоге путева/стаза.</string>
+    <string name="routeInfo_roadClass_description">Бојење линије путање или стазе по врсти пута.</string>
+    <string name="add_group_to_markers">Додај групу списку обележивача</string>
+    <string name="remove_group_from_markers">Уклони групу из списка обележивача</string>
+    <string name="start_point">Почетак</string>
+    <string name="mapillary_menu_filter_description_new">Разврстај слике по времену и врсти. Ради само при увећању.</string>
+    <string name="service_is_not_available_please_try_later">Услуга није доступна, молим, покушајте поново касније</string>
+    <string name="backup_restore_now">Поврати сада</string>
+    <string name="shared_string_purchased">Купљено</string>
+    <string name="explore_wikipedia_offline">Истражите Википедију ван мреже.</string>
+    <string name="on_hold_since">На задршци од %1$s</string>
+    <string name="active_till">Траје до %1$s</string>
+    <string name="promo_subscription">Попустна претплата</string>
+    <string name="track_has_no_needed_data">Стаза не садржи потребне податке.</string>
+    <string name="routes_color_by_type">Боји путање по…</string>
+    <string name="walking_route_osmc_description">Боји путање по њиховим појединачним местним бојама (уколико је присутно на ОпенСтритМапама) и врсти (међуародне, областне, местне).</string>
+    <string name="travel_routes">Путање путовања</string>
+    <string name="setting_supported_by_style">Ове поставке су одређене изгледом карте „%1$s“</string>
+    <string name="direct_line_maps_required_descr">Прорачун путање је дужи него што је очекивано.
+\n
+\nМожда неке карте нису учитане.</string>
+    <string name="online_direct_line_maps_link">Проверите потребне карте.</string>
+    <string name="offline_maps_required_descr">Неке карте на мрежи су потребне за ову путању недостају.</string>
+    <string name="online_maps_required_descr">Нажалост, Османд није успео да одреди путању по Вашим поставкама.
+\n
+\nМожда неке карте нису учитане, можете покренути проверу на мрежи за неопходним картама.</string>
+    <string name="online_maps_searching_descr">Тражи на мрежи…</string>
+    <string name="reset_to_original">Поврати на почетне вредности</string>
+    <string name="backup_error_no_subscription">Нема доступне претплате</string>
+    <string name="map_updates_for_mappers">Надградња карата уредницима карата</string>
+    <string name="benefits_for_contributors">Корист доприносиоцима ОСМ-а</string>
+    <string name="use_login_and_password">Користите своје корисничко име и лозинку</string>
+    <string name="available_until">Доступно до %1$s</string>
+    <string name="enough_contributions_descr">Честитамо, стекли сте довољно доприноса ОпенСртитМапама и сада можете уживати неограничено у освежавању карата Османда!</string>
+    <string name="not_enough_contributions_descr">Најмање %1$s доприноса ОпенСтритМапи кроз %2$s дана је неопходно.</string>
+    <string name="shared_string_contributions">Доприноси</string>
+    <string name="contributions_may_calculate_with_delay">Прорачунавање учешћа може потрајати неколико часова.</string>
+    <string name="map_updates_are_unavailable_yet">Надоградње карата још увек нису доступне. :=(</string>
+    <string name="connect_track_points_as">Повежите тачке пута</string>
+    <string name="pro_features">Плаћене могућности</string>
+    <string name="purchases_restored">Куповина је повраћена</string>
+    <string name="grey_color_undefined">Зелена боја се користи за делове без података.</string>
+    <string name="cancel_anytime_in_amazon_app">Откажите било када у програму Амазон</string>
+    <string name="amz_manage_subscription_descr">Ради управљања своје претплате на програм Амазон на уређају или отварање странице Amazon.com под својим налогом.</string>
+    <string name="empty_category_name">Име врсте је празно</string>
+    <string name="no_activity_for_intent">Нисам пронашао одговарајући програм за извођење ове радње</string>
+    <string name="no_items_of_type_message">Немате ни једну ставку ове врсте</string>
+    <string name="routeInfo_tracktype_description">Бојење линије пута или стазе према стању пута засновано на саставу површи. Обично се користи на путевима где је главна мрежа путева од непресвучених површи.</string>
 </resources>

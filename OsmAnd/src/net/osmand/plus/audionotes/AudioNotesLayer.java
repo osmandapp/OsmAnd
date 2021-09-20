@@ -1,5 +1,6 @@
 package net.osmand.plus.audionotes;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 
@@ -15,13 +16,12 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin.Recording;
 import net.osmand.plus.base.PointImageDrawable;
-import net.osmand.plus.views.layers.ContextMenuLayer;
-import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -31,24 +31,25 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		IContextMenuProvider, ContextMenuLayer.IMoveObjectProvider {
 
 	private static final int startZoom = 10;
-	private MapActivity activity;
-	private AudioVideoNotesPlugin plugin;
+	private final Context ctx;
+	private final AudioVideoNotesPlugin plugin;
 	private OsmandMapTileView view;
 	private ContextMenuLayer contextMenuLayer;
 
-	public AudioNotesLayer(MapActivity activity, AudioVideoNotesPlugin plugin) {
-		this.activity = activity;
+	public AudioNotesLayer(@NonNull Context context, @NonNull AudioVideoNotesPlugin plugin) {
+		super(context);
+		this.ctx = context;
 		this.plugin = plugin;
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 	}
 
 	public int getRadiusPoi(RotatedTileBox tb) {
-		int r = 0;
+		int r;
 		if (tb.getZoom() < startZoom) {
 			r = 0;
 		} else {
@@ -62,7 +63,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		if (contextMenuLayer.getMoveableObject() instanceof Recording) {
 			Recording objectInMotion = (Recording) contextMenuLayer.getMoveableObject();
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+			float textScale = getApplication().getSettings().TEXT_SCALE.get();
 			drawRecording(canvas, objectInMotion, pf.x, pf.y, textScale);
 		}
 	}
@@ -70,7 +71,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
-			OsmandApplication app = activity.getMyApplication();
+			OsmandApplication app = getApplication();
 			float textScale = app.getSettings().TEXT_SCALE.get();
 			float iconSize = getIconSize(app);
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
@@ -87,8 +88,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 					float y = tileBox.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 
 					if (intersects(boundIntersections, x, y, iconSize, iconSize)) {
-						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
-								ContextCompat.getColor(activity, R.color.audio_video_icon_color), true);
+						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+								ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true);
 						pointImageDrawable.setAlpha(0.8f);
 						pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 						smallObjectsLatLon.add(new LatLon(o.getLatitude(), o.getLongitude()));
@@ -117,8 +118,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		} else {
 			iconId = R.drawable.mx_special_video_camera;
 		}
-		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(activity,
-				ContextCompat.getColor(activity, R.color.audio_video_icon_color), true, iconId);
+		PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(ctx,
+				ContextCompat.getColor(ctx, R.color.audio_video_icon_color), true, iconId);
 		pointImageDrawable.setAlpha(0.8f);
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 	}
@@ -137,7 +138,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		if (o instanceof Recording) {
 			Recording rec = (Recording) o;
 			if (rec.getFile().exists()) {
-				String recName = rec.getName(activity, true);
+				String recName = rec.getName(ctx, true);
 				if (Algorithms.isEmpty(recName)) {
 					return new PointDescription(rec.getSearchHistoryType(), view.getResources().getString(R.string.recording_default_name));
 				}
@@ -184,7 +185,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	public void getRecordingsFromPoint(PointF point, RotatedTileBox tileBox, List<? super Recording> am) {
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		int compare = getScaledTouchRadius(activity.getMyApplication(), getRadiusPoi(tileBox));
+		int compare = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox));
 		int radius = compare * 3 / 2;
 		for (Recording n : plugin.getAllRecordings()) {
 			int x = (int) tileBox.getPixXFromLatLon(n.getLatitude(), n.getLongitude());

@@ -228,7 +228,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 						mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, mapView.getZoom(), true);
 						mapView.refreshMap();
 					} else {
-						mapActivity.setMapLocation(loc.lat, loc.lon);
+						app.getOsmandMap().setMapLocation(loc.lat, loc.lon);
 					}
 				}
 			}

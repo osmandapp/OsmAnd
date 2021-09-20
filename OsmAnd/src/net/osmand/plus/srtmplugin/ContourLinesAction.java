@@ -18,6 +18,8 @@ import net.osmand.render.RenderingRuleProperty;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
 
+import androidx.annotation.NonNull;
+
 public class ContourLinesAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(29,
@@ -35,21 +37,21 @@ public class ContourLinesAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(final MapActivity activity) {
+	public void execute(@NonNull final MapActivity mapActivity) {
 		final SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		if (plugin != null) {
-			boolean enabled = SRTMPlugin.isContourLinesLayerEnabled(activity.getMyApplication());
-			plugin.toggleContourLines(activity, !enabled, new Runnable() {
+			boolean enabled = SRTMPlugin.isContourLinesLayerEnabled(mapActivity.getMyApplication());
+			plugin.toggleContourLines(mapActivity, !enabled, new Runnable() {
 				@Override
 				public void run() {
-					OsmandApplication app = activity.getMyApplication();
+					OsmandApplication app = mapActivity.getMyApplication();
 					RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 					if (contourLinesProp != null) {
 						final CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
 						if (!pref.get().equals(CONTOUR_LINES_DISABLED_VALUE)) {
-							OsmandPlugin.enablePluginIfNeeded(activity, app, plugin, true);
+							OsmandPlugin.enablePluginIfNeeded(mapActivity, app, plugin, true);
 						}
-						activity.refreshMapComplete();
+						mapActivity.refreshMapComplete();
 					}
 				}
 			});
@@ -57,7 +59,7 @@ public class ContourLinesAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text))

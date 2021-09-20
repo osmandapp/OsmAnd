@@ -5,6 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.R;
@@ -24,16 +27,16 @@ public class DayNightModeAction extends QuickAction {
 	public DayNightModeAction(QuickAction quickAction) {super(quickAction);}
 
 	@Override
-	public void execute(MapActivity activity) {
-		if (activity.getMyApplication().getDaynightHelper().isNightMode()) {
-			activity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.DAY);
+	public void execute(@NonNull MapActivity mapActivity) {
+		if (mapActivity.getMyApplication().getDaynightHelper().isNightMode()) {
+			mapActivity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.DAY);
 		} else {
-			activity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.NIGHT);
+			mapActivity.getMyApplication().getSettings().DAYNIGHT_MODE.set(DayNightMode.NIGHT);
 		}
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text))

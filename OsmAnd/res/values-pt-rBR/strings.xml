@@ -4317,4 +4317,7 @@
     <string name="routeInfo_roadClass_description">Colorir a rota ou linha do trilho de acordo com a classificação da estrada.</string>
     <string name="add_group_to_markers">Adicionar grupo à lista de marcadores</string>
     <string name="remove_group_from_markers">Remover grupo da lista de marcadores</string>
+    <string name="start_point">Iniciar</string>
+    <string name="mapillary_menu_filter_description_new">Filtre as imagens por data ou tipo. Ativo apenas no zoom de close up.</string>
+    <string name="service_is_not_available_please_try_later">O serviço não está disponível, tente mais tarde</string>
 </resources>

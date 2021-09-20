@@ -1,19 +1,22 @@
 package net.osmand.plus.views.layers;
 
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
@@ -64,8 +67,8 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
-	private final MapActivity map;
 	private final RouteLayer routeLayer;
+	private final OsmandSettings settings;
 	private OsmandMapTileView view;
 
 	// groups
@@ -79,15 +82,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private List<RulerWidget> rulerWidgets;
 	private MapWidgetRegistry mapInfoControls;
 
-	private OsmandSettings settings;
 	private DrawSettings drawSettings;
 	private TopTextView streetNameView;
 	private TopToolbarView topToolbarView;
 	private TopCoordinatesView topCoordinatesView;
 
-	public MapInfoLayer(MapActivity map, RouteLayer layer) {
-		this.map = map;
-		settings = map.getMyApplication().getSettings();
+	public MapInfoLayer(@NonNull Context context, @NonNull RouteLayer layer) {
+		super(context);
+		settings = getApplication().getSettings();
 		this.routeLayer = layer;
 	}
 
@@ -96,58 +98,103 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(final OsmandMapTileView view) {
+	public void initLayer(@NonNull final OsmandMapTileView view) {
 		this.view = view;
-		mapInfoControls = map.getMapLayers().getMapWidgetRegistry();
-		leftStack = map.findViewById(R.id.map_left_widgets_panel);
-		rightStack = map.findViewById(R.id.map_right_widgets_panel);
-		expand = map.findViewById(R.id.map_collapse_button);
-		mapRulerLayout = map.findViewById(R.id.map_ruler_layout);
-
-		// update and create controls
-		registerAllControls();
-		map.getMyApplication().getAidlApi().registerWidgetControls(map);
-
-		recreateControls();
 	}
 
+	@Override
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		if (mapActivity != null) {
+			mapInfoControls = mapActivity.getMapLayers().getMapWidgetRegistry();
+			leftStack = mapActivity.findViewById(R.id.map_left_widgets_panel);
+			rightStack = mapActivity.findViewById(R.id.map_right_widgets_panel);
+			expand = mapActivity.findViewById(R.id.map_collapse_button);
+			mapRulerLayout = mapActivity.findViewById(R.id.map_ruler_layout);
+
+			// update and create controls
+			registerAllControls(mapActivity);
+			getApplication().getAidlApi().registerWidgetControls(mapActivity);
+
+			recreateControls();
+		} else {
+			if (mapInfoControls != null) {
+				mapInfoControls.clearSideWidgets();
+			}
+			mapInfoControls = null;
+
+			leftStack = null;
+			rightStack = null;
+			expand = null;
+			mapRulerLayout = null;
+
+			lanesControl = null;
+			alarmControl = null;
+			rulerWidgets = null;
+
+			drawSettings = null;
+			streetNameView = null;
+			topToolbarView = null;
+			topCoordinatesView = null;
+		}
+	}
+
+	@Nullable
 	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableMenu,
 											   int messageId, String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, messageId, key, left, priorityOrder);
-		updateReg(calculateTextState(), reg);
-		return reg;
+		if (mapInfoControls != null) {
+			MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, messageId, key, left, priorityOrder);
+			updateReg(calculateTextState(), reg);
+			return reg;
+		} else {
+			return null;
+		}
 	}
 
+	@Nullable
 	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableMenu,
 											   String message, String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, message, key, left, priorityOrder);
-		updateReg(calculateTextState(), reg);
-		return reg;
+		if (mapInfoControls != null) {
+			MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, message, key, left, priorityOrder);
+			updateReg(calculateTextState(), reg);
+			return reg;
+		} else {
+			return null;
+		}
 	}
 
 	public void registerSideWidget(TextInfoWidget widget, WidgetState widgetState, String key, boolean left, int priorityOrder) {
-		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, widgetState, key, left, priorityOrder);
-		updateReg(calculateTextState(), reg);
+		if (mapInfoControls != null) {
+			MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, widgetState, key, left, priorityOrder);
+			updateReg(calculateTextState(), reg);
+		}
 	}
 
+	@Nullable
 	public <T extends TextInfoWidget> T getSideWidget(Class<T> cl) {
-		return mapInfoControls.getSideWidget(cl);
+		return mapInfoControls != null ? mapInfoControls.getSideWidget(cl) : null;
 	}
 
 	public void removeSideWidget(TextInfoWidget widget) {
-		mapInfoControls.removeSideWidgetInternal(widget);
+		if (mapInfoControls != null) {
+			mapInfoControls.removeSideWidgetInternal(widget);
+		}
 	}
 
 	public void addTopToolbarController(TopToolbarController controller) {
-		topToolbarView.addController(controller);
+		if (topToolbarView != null) {
+			topToolbarView.addController(controller);
+		}
 	}
 
 	public void removeTopToolbarController(TopToolbarController controller) {
-		topToolbarView.removeController(controller);
+		if (topToolbarView != null) {
+			topToolbarView.removeController(controller);
+		}
 	}
 
 	public boolean hasTopToolbar() {
-		return topToolbarView.getTopController() != null;
+		return topToolbarView != null && topToolbarView.getTopController() != null;
 	}
 
 	public TopToolbarController getTopToolbarController() {
@@ -163,7 +210,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return topToolbarView != null && topToolbarView.isTopToolbarViewVisible();
 	}
 
-	public void registerAllControls() {
+	private void registerAllControls(@NonNull MapActivity map) {
 		rulerWidgets = new ArrayList<>();
 		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory();
 		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory();
@@ -233,41 +280,52 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	public void recreateControls() {
-		leftStack.removeAllViews();
-		mapInfoControls.populateStackControl(leftStack, settings.getApplicationMode(), true, expanded);
-		leftStack.requestLayout();
-
-		rightStack.removeAllViews();
-		mapInfoControls.populateStackControl(rightStack, settings.getApplicationMode(), false, expanded);
-		rightStack.requestLayout();
-
-		expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode()) ?
-				View.VISIBLE : View.GONE);
-		Drawable expandIcon = map.getMyApplication().getUIUtilities().getMapIcon(expanded ? R.drawable.ic_action_arrow_up :
-				R.drawable.ic_action_arrow_down, true);
-		setMapButtonIcon(expand, expandIcon);
-		expand.setContentDescription(map.getString(expanded ? R.string.shared_string_collapse : R.string.access_widget_expand));
-		expand.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
+		if (leftStack != null) {
+			leftStack.removeAllViews();
+			if (mapInfoControls != null) {
+				mapInfoControls.populateStackControl(leftStack, settings.getApplicationMode(), true, expanded);
+			}
+			leftStack.requestLayout();
+		}
+		if (rightStack != null) {
+			rightStack.removeAllViews();
+			if (mapInfoControls != null) {
+				mapInfoControls.populateStackControl(rightStack, settings.getApplicationMode(), false, expanded);
+			}
+			rightStack.requestLayout();
+		}
+		if (expand != null) {
+			expand.setVisibility(mapInfoControls.hasCollapsibles(settings.getApplicationMode()) ?
+					View.VISIBLE : View.GONE);
+			UiUtilities uiUtilities = getApplication().getUIUtilities();
+			int iconId = expanded ? R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down;
+			int colorId = ColorUtilities.getMapButtonIconColorId(false);
+			Drawable expandIcon = uiUtilities.getIcon(iconId, colorId);
+			setMapButtonIcon(expand, expandIcon);
+			expand.setContentDescription(getString(expanded ? R.string.shared_string_collapse : R.string.access_widget_expand));
+			expand.setOnClickListener(v -> {
 				expanded = !expanded;
 				recreateControls();
-			}
-		});
+			});
+		}
 	}
 
 	public RulerWidget setupRulerWidget(View mapRulerView) {
-		RulerWidget rulerWidget = RouteInfoWidgetsFactory.createRulerControl(map, mapRulerView);
-		rulerWidget.setVisibility(false);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RulerWidget rulerWidget = RouteInfoWidgetsFactory.createRulerControl(mapActivity, mapRulerView);
+			rulerWidget.setVisibility(false);
 
-		TextState ts = calculateTextState();
-		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
-		rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
+			TextState ts = calculateTextState();
+			boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+			rulerWidget.updateTextSize(nightMode, ts.textColor, ts.textShadowColor, (int) (2 * view.getDensity()));
 
-		rulerWidgets.add(rulerWidget);
+			rulerWidgets.add(rulerWidget);
 
-		return rulerWidget;
+			return rulerWidget;
+		} else {
+			return null;
+		}
 	}
 
 	public void removeRulerWidgets(List<RulerWidget> rulers) {
@@ -296,6 +354,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private int themeId = -1;
 
 	public void updateColorShadowsOfText() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
 		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
 		boolean nightMode = drawSettings != null && drawSettings.isNightMode();
 		boolean following = routeLayer.getHelper().isFollowingMode();
@@ -303,12 +365,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
 			TextState ts = calculateTextState();
-			map.findViewById(R.id.map_center_info).setBackgroundResource(ts.boxFree);
-			for (MapWidgetRegInfo reg : mapInfoControls.getLeftWidgetSet()) {
-				updateReg(ts, reg);
-			}
-			for (MapWidgetRegInfo reg : mapInfoControls.getRightWidgetSet()) {
-				updateReg(ts, reg);
+			mapActivity.findViewById(R.id.map_center_info).setBackgroundResource(ts.boxFree);
+			if (mapInfoControls != null) {
+				for (MapWidgetRegInfo reg : mapInfoControls.getLeftWidgetSet()) {
+					updateReg(ts, reg);
+				}
+				for (MapWidgetRegInfo reg : mapInfoControls.getRightWidgetSet()) {
+					updateReg(ts, reg);
+				}
 			}
 			updateStreetName(nightMode, ts);
 			updateTopCoordinates(nightMode, ts);
@@ -327,8 +391,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 
 	private void updateStreetName(boolean nightMode, TextState ts) {
-		streetNameView.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? ts.boxTop
-				: ts.boxFree);
+		MapActivity mapActivity = getMapActivity();
+		boolean portrait = mapActivity != null && AndroidUiHelper.isOrientationPortrait(mapActivity);
+		streetNameView.setBackgroundResource(portrait ? ts.boxTop : ts.boxFree);
 		streetNameView.updateTextColor(nightMode, ts.textColor, ts.textShadowColor, ts.textBold, ts.textShadowRadius);
 	}
 
@@ -391,17 +456,21 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
 		this.drawSettings = drawSettings;
-		// update data on draw
-		updateColorShadowsOfText();
-		mapInfoControls.updateInfo(settings.getApplicationMode(), drawSettings, expanded);
-		streetNameView.updateInfo(drawSettings);
-		topToolbarView.updateInfo();
-		topCoordinatesView.updateInfo();
-		alarmControl.updateInfo(drawSettings);
-		lanesControl.updateInfo(drawSettings);
+		if (getMapActivity() != null) {
+			// update data on draw
+			updateColorShadowsOfText();
+			if (mapInfoControls != null) {
+				mapInfoControls.updateInfo(settings.getApplicationMode(), drawSettings, expanded);
+			}
+			streetNameView.updateInfo(drawSettings);
+			topToolbarView.updateInfo();
+			topCoordinatesView.updateInfo();
+			alarmControl.updateInfo(drawSettings);
+			lanesControl.updateInfo(drawSettings);
 
-		for (RulerWidget rulerWidget : rulerWidgets) {
-			rulerWidget.updateInfo(tileBox, drawSettings);
+			for (RulerWidget rulerWidget : rulerWidgets) {
+				rulerWidget.updateInfo(tileBox, drawSettings);
+			}
 		}
 	}
 

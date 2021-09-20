@@ -101,7 +101,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="@dimen/subHeaderPadding"
-				osmand:srcCompat="@drawable/ic_action_altitude_average" />
+				osmand:srcCompat="@drawable/ic_action_altitude_average_16" />
 
 		</LinearLayout>
 
@@ -147,7 +147,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="@dimen/subHeaderPadding"
-				osmand:srcCompat="@drawable/ic_action_altitude_average" />
+				osmand:srcCompat="@drawable/ic_action_altitude_average_16" />
 
 		</LinearLayout>
 
@@ -220,7 +220,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="@dimen/subHeaderPadding"
-				osmand:srcCompat="@drawable/ic_action_altitude_ascent" />
+				osmand:srcCompat="@drawable/ic_action_altitude_ascent_16" />
 
 		</LinearLayout>
 
@@ -266,7 +266,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@dimen/poi_icon_size"
 				android:layout_marginTop="@dimen/subHeaderPadding"
-				osmand:srcCompat="@drawable/ic_action_altitude_descent" />
+				osmand:srcCompat="@drawable/ic_action_altitude_descent_16" />
 
 		</LinearLayout>
 

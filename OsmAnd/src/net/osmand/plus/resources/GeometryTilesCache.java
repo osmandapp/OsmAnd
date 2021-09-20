@@ -12,9 +12,32 @@ import static net.osmand.map.TileSourceManager.MAPILLARY_VECTOR_TILE_EXT;
 
 public class GeometryTilesCache extends TilesCache<GeometryTile> {
 
+	private static final int MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE = 16;
+	private static final int MAPILLARY_IMAGE_LAYER_CACHE_SIZE = 4;
+
 	public GeometryTilesCache(AsyncLoadingThread asyncLoadingThread) {
 		super(asyncLoadingThread);
-		maxCacheSize = 4;
+		this.maxCacheSize = 4;
+	}
+
+	public void useForMapillarySequenceLayer() {
+		changeMapillaryLayerToCache(MAPILLARY_SEQUENCE_LAYER_CACHE_SIZE);
+	}
+
+	public void useForMapillaryImageLayer() {
+		changeMapillaryLayerToCache(MAPILLARY_IMAGE_LAYER_CACHE_SIZE);
+	}
+
+	private void changeMapillaryLayerToCache(int maxCacheSize) {
+		if (this.maxCacheSize != maxCacheSize) {
+			setMaxCacheSize(maxCacheSize);
+		}
+	}
+
+	@Override
+	public void setMaxCacheSize(int maxCacheSize) {
+		super.setMaxCacheSize(maxCacheSize);
+		cache.clear();
 	}
 
 	@Override

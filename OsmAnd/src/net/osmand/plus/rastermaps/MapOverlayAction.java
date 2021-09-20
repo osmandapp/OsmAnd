@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.util.Pair;
@@ -98,27 +99,27 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();
 			if (sources.size() > 0) {
 				boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 				if (showBottomSheetStyles) {
-					showChooseDialog(activity.getSupportFragmentManager());
+					showChooseDialog(mapActivity.getSupportFragmentManager());
 					return;
 				}
-				String nextItem = getNextSelectedItem(activity.getMyApplication());
-				executeWithParams(activity, nextItem);
+				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());
+				executeWithParams(mapActivity, nextItem);
 			}
 		}
 	}
 
 	@Override
-	public void executeWithParams(MapActivity activity, String params) {
+	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
 		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
-			OsmandSettings settings = activity.getMyApplication().getSettings();
+			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 			boolean hasOverlay = !params.equals(KEY_NO_OVERLAY);
 			if (hasOverlay) {
 				settings.MAP_OVERLAY.set(params);
@@ -127,16 +128,16 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OVERLAY);
 				}
 				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY) {
-					activity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
+					mapActivity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
 				}
 			} else {
 				settings.MAP_OVERLAY.set(null);
-				activity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
+				mapActivity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
 				settings.MAP_OVERLAY_PREVIOUS.set(null);
 			}
-			plugin.updateMapLayers(activity.getMapView(), settings.MAP_OVERLAY, activity.getMapLayers());
-			Toast.makeText(activity, activity.getString(R.string.quick_action_map_overlay_switch,
-					getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
+			plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_OVERLAY);
+			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_overlay_switch,
+					getTranslatedItemName(mapActivity, params)), Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -212,8 +213,8 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-		return super.fillParams(root, activity);
+		return super.fillParams(root, mapActivity);
 	}
 }

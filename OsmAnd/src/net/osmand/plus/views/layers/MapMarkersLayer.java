@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -16,7 +17,6 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,16 +31,16 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
-import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
@@ -62,7 +62,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
 	protected static final int DIST_TO_SHOW = 80;
 
-	private final MapActivity map;
 	private OsmandMapTileView view;
 
 	private MapMarkersWidgetsFactory widgetsFactory;
@@ -86,7 +85,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Bitmap arrowLight;
 	private Bitmap arrowToDestination;
 	private Bitmap arrowShadow;
-	private float[] calculations = new float[2];
+	private final float[] calculations = new float[2];
 
 	private final TextPaint textPaint = new TextPaint();
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
@@ -97,9 +96,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private float textSize;
 	private int verticalOffset;
 
-	private List<Float> tx = new ArrayList<>();
-	private List<Float> ty = new ArrayList<>();
-	private Path linePath = new Path();
+	private final List<Float> tx = new ArrayList<>();
+	private final List<Float> ty = new ArrayList<>();
+	private final Path linePath = new Path();
 
 	private LatLon fingerLocation;
 	private boolean hasMoved;
@@ -113,10 +112,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private boolean inPlanRouteMode;
 	private boolean defaultAppMode = true;
 
-	private List<Amenity> amenities = new ArrayList<>();
+	private final List<Amenity> amenities = new ArrayList<>();
 
-	public MapMarkersLayer(MapActivity map) {
-		this.map = map;
+	public MapMarkersLayer(@NonNull Context context) {
+		super(context);
 	}
 
 	public MapMarkersWidgetsFactory getWidgetsFactory() {
@@ -158,12 +157,27 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		bitmapPaintDestTeal = createPaintDest(R.color.marker_teal);
 		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
 
-		widgetsFactory = new MapMarkersWidgetsFactory(map);
-
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 
-		textSize = map.getResources().getDimensionPixelSize(R.dimen.guide_line_text_size);
-		verticalOffset = map.getResources().getDimensionPixelSize(R.dimen.guide_line_vertical_offset);
+		textSize = getContext().getResources().getDimensionPixelSize(R.dimen.guide_line_text_size);
+		verticalOffset = getContext().getResources().getDimensionPixelSize(R.dimen.guide_line_vertical_offset);
+	}
+
+	@Override
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		super.setMapActivity(mapActivity);
+		if (mapActivity != null) {
+			widgetsFactory = new MapMarkersWidgetsFactory(mapActivity);
+			longTapDetector = new GestureDetector(mapActivity, new GestureDetector.SimpleOnGestureListener() {
+				@Override
+				public void onLongPress(MotionEvent e) {
+					cancelFingerAction();
+				}
+			});
+		} else {
+			widgetsFactory = null;
+			longTapDetector = null;
+		}
 	}
 
 	private Paint createPaintDest(int colorId) {
@@ -171,7 +185,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		paint.setDither(true);
 		paint.setAntiAlias(true);
 		paint.setFilterBitmap(true);
-		int color = ContextCompat.getColor(map, colorId);
+		int color = ContextCompat.getColor(getContext(), colorId);
 		paint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
 		return paint;
 	}
@@ -223,21 +237,15 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		handler = new Handler();
 		initUI();
-		longTapDetector = new GestureDetector(view.getContext(), new GestureDetector.SimpleOnGestureListener() {
-			@Override
-			public void onLongPress(MotionEvent e) {
-				cancelFingerAction();
-			}
-		});
 	}
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		OsmandApplication app = map.getMyApplication();
+		OsmandApplication app = getApplication();
 		OsmandSettings settings = app.getSettings();
 		if (!settings.SHOW_MAP_MARKERS.get()) {
 			return;
@@ -275,16 +283,17 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 			float locX;
 			float locY;
-			if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()
+			MapViewTrackingUtilities mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
+			if (mapViewTrackingUtilities.isMapLinkedToLocation()
 					&& !MapViewTrackingUtilities.isSmallSpeedForAnimation(myLoc)
-					&& !map.getMapViewTrackingUtilities().isMovingToMyLocation()) {
+					&& !mapViewTrackingUtilities.isMovingToMyLocation()) {
 				locX = tileBox.getPixXFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
 				locY = tileBox.getPixYFromLatLon(tileBox.getLatitude(), tileBox.getLongitude());
 			} else {
 				locX = tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
 				locY = tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
 			}
-			int[] colors = MapMarker.getColors(map);
+			int[] colors = MapMarker.getColors(getContext());
 			for (int i = 0; i < activeMapMarkers.size() && i < displayedWidgets; i++) {
 				MapMarker marker = activeMapMarkers.get(i);
 				float markerX = tileBox.getPixXFromLatLon(marker.getLatitude(), marker.getLongitude());
@@ -306,7 +315,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 				float dist = (float) MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(), marker.getLatitude(), marker.getLongitude());
 				String distSt = OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
-				String text = distSt + (drawMarkerName ? " • " + marker.getName(map) : "");
+				String text = distSt + (drawMarkerName ? " • " + marker.getName(getContext()) : "");
 				text = TextUtils.ellipsize(text, textPaint, pm.getLength(), TextUtils.TruncateAt.END).toString();
 				Rect bounds = new Rect();
 				textAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
@@ -331,8 +340,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : null, tileBox.getZoom());
-		OsmandSettings settings = map.getMyApplication().getSettings();
+		if (widgetsFactory != null) {
+			widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : null, tileBox.getZoom());
+		}
+		OsmandSettings settings = getApplication().getSettings();
 
 		if (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) {
 			return;
@@ -340,7 +351,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
 
-		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
+		MapMarkersHelper markersHelper = getApplication().getMapMarkersHelper();
 
 		for (MapMarker marker : markersHelper.getMapMarkers()) {
 			if (isLocationVisible(tileBox, marker) && !overlappedByWaypoint(marker)
@@ -413,7 +424,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	public boolean containsLatLon(RotatedTileBox tb, double lat, double lon) {
 		double widgetHeight = 0;
-		if (widgetsFactory.isTopBarVisible()) {
+		if (widgetsFactory != null && widgetsFactory.isTopBarVisible()) {
 			widgetHeight = widgetsFactory.getTopBarHeight();
 		}
 		double tx = tb.getPixXFromLatLon(lat, lon);
@@ -422,7 +433,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	public boolean overlappedByWaypoint(MapMarker marker) {
-		List<TargetPoint> targetPoints = map.getMyApplication().getTargetPointsHelper().getAllPoints();
+		List<TargetPoint> targetPoints = getApplication().getTargetPointsHelper().getAllPoints();
 		for (TargetPoint t : targetPoints) {
 			if (t.point.equals(marker.point)) {
 				return true;
@@ -450,15 +461,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				case MotionEvent.ACTION_MOVE:
 					if (!hasMoved) {
 						if (!handler.hasMessages(MAP_REFRESH_MESSAGE)) {
-							Message msg = Message.obtain(handler, new Runnable() {
-								@Override
-								public void run() {
-									handler.removeMessages(MAP_REFRESH_MESSAGE);
-									if (moving) {
-										if (!useFingerLocation) {
-											useFingerLocation = true;
-											map.refreshMap();
-										}
+							Message msg = Message.obtain(handler, () -> {
+								handler.removeMessages(MAP_REFRESH_MESSAGE);
+								if (moving) {
+									if (!useFingerLocation) {
+										useFingerLocation = true;
+										getApplication().getOsmandMap().refreshMap();
 									}
 								}
 							});
@@ -483,7 +491,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		useFingerLocation = false;
 		moving = false;
 		fingerLocation = null;
-		map.refreshMap();
+		getApplication().getOsmandMap().refreshMap();
 	}
 
 	@Override
@@ -508,25 +516,21 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public boolean runExclusiveAction(Object o, boolean unknownLocation) {
-		OsmandSettings settings = map.getMyApplication().getSettings();
+		MapActivity mapActivity = getMapActivity();
+		OsmandSettings settings = getApplication().getSettings();
 		if (unknownLocation
-				|| o == null
+				|| mapActivity == null
 				|| !(o instanceof MapMarker)
 				|| !settings.SELECT_MARKER_ON_SINGLE_TAP.get()
 				|| !settings.SHOW_MAP_MARKERS.get()) {
 			return false;
 		}
-		final MapMarkersHelper helper = map.getMyApplication().getMapMarkersHelper();
+		final MapMarkersHelper helper = getApplication().getMapMarkersHelper();
 		final MapMarker old = helper.getMapMarkers().get(0);
 		helper.moveMarkerToTop((MapMarker) o);
-		String title = map.getString(R.string.marker_activated, helper.getMapMarkers().get(0).getName(map));
-		Snackbar.make(map.findViewById(R.id.bottomFragmentContainer), title, Snackbar.LENGTH_LONG)
-				.setAction(R.string.shared_string_cancel, new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						helper.moveMarkerToTop(old);
-					}
-				})
+		String title = getContext().getString(R.string.marker_activated, helper.getMapMarkers().get(0).getName(getContext()));
+		Snackbar.make(mapActivity.findViewById(R.id.bottomFragmentContainer), title, Snackbar.LENGTH_LONG)
+				.setAction(R.string.shared_string_cancel, v -> helper.moveMarkerToTop(old))
 				.show();
 		return true;
 	}
@@ -538,11 +542,11 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().SHOW_MAP_MARKERS.get()) {
+		if (tileBox.getZoom() < 3 || !getApplication().getSettings().SHOW_MAP_MARKERS.get()) {
 			return;
 		}
 		amenities.clear();
-		OsmandApplication app = map.getMyApplication();
+		OsmandApplication app = getApplication();
 		int r = getDefaultRadiusPoi(tileBox);
 		boolean selectMarkerOnSingleTap = app.getSettings().SELECT_MARKER_ON_SINGLE_TAP.get();
 
@@ -576,18 +580,18 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private boolean isMarkerOnWaypoint(@NonNull MapMarker marker) {
-		return marker.point != null && map.getMyApplication().getSelectedGpxHelper().getVisibleWayPointByLatLon(marker.point) != null;
+		return marker.point != null && getApplication().getSelectedGpxHelper().getVisibleWayPointByLatLon(marker.point) != null;
 	}
 
 	private boolean isMarkerOnFavorite(@NonNull MapMarker marker) {
-		return marker.point != null && map.getMyApplication().getFavorites().getVisibleFavByLatLon(marker.point) != null;
+		return marker.point != null && getApplication().getFavorites().getVisibleFavByLatLon(marker.point) != null;
 	}
 
 	@Nullable
 	public Amenity getMapObjectByMarker(@NonNull MapMarker marker) {
 		if (marker.mapObjectName != null && marker.point != null) {
 			String mapObjName = marker.mapObjectName.split("_")[0];
-			return findAmenity(map.getMyApplication(), -1, Collections.singletonList(mapObjName), marker.point, 15);
+			return findAmenity(getApplication(), -1, Collections.singletonList(mapObjName), marker.point, 15);
 		}
 		return null;
 	}
@@ -639,12 +643,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		boolean result = false;
 		MapMarker newObject = null;
 		if (o instanceof MapMarker) {
-			MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
+			MapMarkersHelper markersHelper = getApplication().getMapMarkersHelper();
 			MapMarker marker = (MapMarker) o;
 
 			PointDescription originalDescription = marker.getOriginalPointDescription();
 			if (originalDescription.isLocation()) {
-				originalDescription.setName(PointDescription.getSearchAddressStr(map));
+				originalDescription.setName(PointDescription.getSearchAddressStr(getContext()));
 			}
 			markersHelper.moveMapMarker(marker, position);
 			int index = markersHelper.getMapMarkers().indexOf(marker);

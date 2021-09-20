@@ -60,6 +60,7 @@ import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
@@ -68,6 +69,7 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
@@ -424,10 +426,12 @@ public class AppInitializer implements IProgress {
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
+		app.osmandMap = startupInit(new OsmandMap(app), OsmandMap.class);
 
-		// TODOTRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
-		app.travelHelper = !TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
-		app.travelHelper = startupInit(app.travelHelper, TravelHelper.class);
+		// TODO TRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
+		TravelHelper travelHelper = !TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
+		app.travelHelper = startupInit(travelHelper, TravelHelper.class);
+		app.travelRendererHelper = startupInit(new TravelRendererHelper(app), TravelRendererHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
 		app.fileSettingsHelper = startupInit(new FileSettingsHelper(app), FileSettingsHelper.class);
@@ -660,7 +664,7 @@ public class AppInitializer implements IProgress {
 		} finally {
 			appInitializing = false;
 			notifyFinish();
-			if (warnings != null && !warnings.isEmpty()) {
+			if (!Algorithms.isEmpty(warnings)) {
 				app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
 			}
 		}

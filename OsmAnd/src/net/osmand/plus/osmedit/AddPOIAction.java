@@ -25,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -112,9 +113,8 @@ public class AddPOIAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(final MapActivity activity) {
-
-		LatLon latLon = activity.getMapView()
+	public void execute(@NonNull final MapActivity mapActivity) {
+		LatLon latLon = mapActivity.getMapView()
 				.getCurrentRotatedTileBox()
 				.getCenterLatLon();
 
@@ -122,17 +122,17 @@ public class AddPOIAction extends QuickAction {
 		if (plugin == null) return;
 		Node node = new Node(latLon.getLatitude(), latLon.getLongitude(), -1);
 		node.replaceTags(getTagsFromParams());
-		EditPoiData editPoiData = new EditPoiData(node, activity.getMyApplication());
+		EditPoiData editPoiData = new EditPoiData(node, mapActivity.getMyApplication());
 		if (Boolean.parseBoolean(getParams().get(KEY_DIALOG)) || editPoiData.hasEmptyValue()) {
 			Entity newEntity = editPoiData.getEntity();
 			EditPoiDialogFragment editPoiDialogFragment =
 					EditPoiDialogFragment.createInstance(newEntity, true, getTagsFromParams());
-			editPoiDialogFragment.show(activity.getSupportFragmentManager(),
+			editPoiDialogFragment.show(mapActivity.getSupportFragmentManager(),
 					EditPoiDialogFragment.TAG);
 		} else {
 			OpenstreetmapUtil mOpenstreetmapUtil;
-			if (activity.getMyApplication().getSettings().OFFLINE_EDITION.get()
-					|| !activity.getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
+			if (mapActivity.getMyApplication().getSettings().OFFLINE_EDITION.get()
+					|| !mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
 				mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
 			} else {
 				mOpenstreetmapUtil = plugin.getPoiModificationRemoteUtil();
@@ -166,36 +166,22 @@ public class AddPOIAction extends QuickAction {
 				}
 			}
 			EditPoiDialogFragment.commitEntity(action, newNode, mOpenstreetmapUtil.getEntityInfo(newNode.getId()), "", false,
-					new CallbackWithObject<Entity>() {
-
-						@Override
-						public boolean processResult(Entity result) {
-							if (result != null) {
-								OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-								if (plugin != null && offlineEdit) {
-									List<OpenstreetmapPoint> points = plugin.getDBPOI().getOpenstreetmapPoints();
-									if (activity instanceof MapActivity && points.size() > 0) {
-										OsmPoint point = points.get(points.size() - 1);
-										activity.getContextMenu().showOrUpdate(
-												new LatLon(point.getLatitude(), point.getLongitude()),
-												plugin.getOsmEditsLayer(activity).getObjectName(point), point);
-									}
+					result -> {
+						if (result != null) {
+							OsmEditingPlugin plugin1 = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+							if (plugin1 != null && offlineEdit) {
+								List<OpenstreetmapPoint> points = plugin1.getDBPOI().getOpenstreetmapPoints();
+								if (points.size() > 0) {
+									OsmPoint point = points.get(points.size() - 1);
+									mapActivity.getContextMenu().showOrUpdate(
+											new LatLon(point.getLatitude(), point.getLongitude()),
+											plugin1.getOsmEditsLayer(mapActivity).getObjectName(point), point);
 								}
-
-								if (activity instanceof MapActivity) {
-									activity.getMapView().refreshMap(true);
-								}
-							} else {
-//                                    OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
-//                                    mOpenstreetmapUtil = plugin.getPoiModificationLocalUtil();
-//                                    Button saveButton = (Button) view.findViewById(R.id.saveButton);
-//                                    saveButton.setText(mOpenstreetmapUtil instanceof OpenstreetmapRemoteUtil
-//                                            ? R.string.shared_string_upload : R.string.shared_string_save);
 							}
-
-							return false;
+							mapActivity.getMapView().refreshMap(true);
 						}
-					}, activity, mOpenstreetmapUtil, null);
+						return false;
+					}, mapActivity, mOpenstreetmapUtil, null);
 
 		}
 	}
@@ -206,13 +192,13 @@ public class AddPOIAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(final ViewGroup parent, final MapActivity activity) {
+	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
 		final View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_poi_layout, parent, false);
 
-		final OsmandApplication application = activity.getMyApplication();
+		final OsmandApplication application = mapActivity.getMyApplication();
 		boolean isLightTheme = application.getSettings().isLightContent();
-		final boolean isLayoutRtl = AndroidUtils.isLayoutRtl(activity);
+		final boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
 		Drawable deleteDrawable = application.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark, isLightTheme);
 
 		final LinearLayout editTagsLineaLayout =
@@ -225,7 +211,7 @@ public class AddPOIAction extends QuickAction {
 		for (AbstractPoiType abstractPoiType : getAllTranslatedNames(application).values()) {
 			addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
 		}
-		addPoiToStringSet(getPoiTypes(activity).getOtherMapCategory(), tagKeys, valueKeys);
+		addPoiToStringSet(getPoiTypes(mapActivity).getOtherMapCategory(), tagKeys, valueKeys);
 		tagKeys.addAll(EditPoiDialogFragment.BASIC_TAGS);
 		mAdapter.setTagData(tagKeys.toArray(new String[0]));
 		mAdapter.setValueData(valueKeys.toArray(new String[0]));
@@ -281,7 +267,7 @@ public class AddPOIAction extends QuickAction {
 				if (title != null) {
 
 					if (prevType.equals(title.getText().toString())
-							|| title.getText().toString().equals(activity.getString(getNameRes()))
+							|| title.getText().toString().equals(mapActivity.getString(getNameRes()))
 							|| title.getText().toString().equals((add + " "))) {
 
 						if (!tp.isEmpty()) {
@@ -312,8 +298,8 @@ public class AddPOIAction extends QuickAction {
 					}
 
 					if (expandButtonPressed) {
-						PoiCategory category = getCategory(getAllTranslatedNames(activity));
-						PoiCategory tempPoiCategory = (category != null) ? category : getPoiTypes(activity).getOtherPoiCategory();
+						PoiCategory category = getCategory(getAllTranslatedNames(mapActivity));
+						PoiCategory tempPoiCategory = (category != null) ? category : getPoiTypes(mapActivity).getOtherPoiCategory();
 						PoiSubTypeDialogFragment f =
 								PoiSubTypeDialogFragment.createInstance(tempPoiCategory);
 						f.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
@@ -322,7 +308,7 @@ public class AddPOIAction extends QuickAction {
 								poiTypeEditText.setText(category);
 							}
 						});
-						f.show(activity.getSupportFragmentManager(), "PoiSubTypeDialogFragment");
+						f.show(mapActivity.getSupportFragmentManager(), "PoiSubTypeDialogFragment");
 						return true;
 					}
 				}
@@ -330,18 +316,18 @@ public class AddPOIAction extends QuickAction {
 			}
 		});
 
-		setUpAdapterForPoiTypeEditText(activity, getAllTranslatedNames(activity), poiTypeEditText);
+		setUpAdapterForPoiTypeEditText(mapActivity, getAllTranslatedNames(mapActivity), poiTypeEditText);
 
 		ImageButton onlineDocumentationButton =
 				(ImageButton) view.findViewById(R.id.onlineDocumentationButton);
 		onlineDocumentationButton.setOnClickListener(v -> {
 			Uri uri = Uri.parse("https://wiki.openstreetmap.org/wiki/Map_Features");
 			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-			AndroidUtils.startActivityIfSafe(activity, intent);
+			AndroidUtils.startActivityIfSafe(mapActivity, intent);
 		});
 
-		final int activeColor = ColorUtilities.getActiveColor(activity, !isLightTheme);
-		onlineDocumentationButton.setImageDrawable(activity.getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, activeColor));
+		final int activeColor = ColorUtilities.getActiveColor(mapActivity, !isLightTheme);
+		onlineDocumentationButton.setImageDrawable(mapActivity.getMyApplication().getUIUtilities().getPaintedIcon(R.drawable.ic_action_help, activeColor));
 //            poiTypeEditText.setCompoundDrawables(null, null, activity.getMyApplication().getIconsCache().getPaintedIcon(R.drawable.ic_action_arrow_drop_down, activeColor), null);
 
 //            Button addTypeButton = (Button) view.findViewById(R.id.addTypeButton);
@@ -560,7 +546,7 @@ public class AddPOIAction extends QuickAction {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
 		return !getParams().isEmpty() && (getParams().get(KEY_TAG) != null || !getTagsFromParams().isEmpty());
 	}

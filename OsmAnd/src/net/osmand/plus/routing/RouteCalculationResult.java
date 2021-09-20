@@ -1282,8 +1282,33 @@ public class RouteCalculationResult {
 		int time = 0;
 		if (currentDirectionInfo < directions.size()) {
 			RouteDirectionInfo current = directions.get(currentDirectionInfo);
-			time = current.afterLeftTime;
+			time = current.afterLeftTime + getLeftTimeToNextDirection(fromLoc);
+		}
+		return time;
+	}
 
+	public int getLeftTimeToNextTurn(Location fromLoc) {
+		int time = 0;
+		if (currentDirectionInfo < directions.size()) {
+			RouteDirectionInfo current = directions.get(currentDirectionInfo);
+			// Locate next direction of interest
+			int nextInd = currentDirectionInfo + 1;
+			while (nextInd < directions.size()) {
+				RouteDirectionInfo i = directions.get(nextInd);
+				if (i.getTurnType() != null && !i.getTurnType().isSkipToSpeak()) {
+					break;
+				}
+				nextInd++;
+				time += i.getExpectedTime();
+			}
+			time += getLeftTimeToNextDirection(fromLoc);
+		}
+		return Math.max(time, 0);
+	}
+
+	public int getLeftTimeToNextDirection(Location fromLoc) {
+		if (currentDirectionInfo < directions.size()) {
+			RouteDirectionInfo current = directions.get(currentDirectionInfo);
 			int distanceToNextTurn = getListDistance(currentRoute);
 			if (currentDirectionInfo + 1 < directions.size()) {
 				distanceToNextTurn -= getListDistance(directions.get(currentDirectionInfo + 1).routePointOffset);
@@ -1292,9 +1317,9 @@ public class RouteCalculationResult {
 			if (fromLoc != null) {
 				distanceToNextTurn += fromLoc.distanceTo(l);
 			}
-			time += distanceToNextTurn / current.getAverageSpeed();
+			return (int) (distanceToNextTurn / current.getAverageSpeed());
 		}
-		return time;
+		return 0;
 	}
 
 	public int getLeftTimeToNextIntermediate(Location fromLoc) {

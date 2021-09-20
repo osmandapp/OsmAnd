@@ -9,18 +9,18 @@ import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.AndroidUtils;
+import net.osmand.Collator;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
+import net.osmand.binary.BinaryMapPoiReaderAdapter.PoiSubType;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
 import net.osmand.data.RotatedTileBox;
@@ -77,6 +77,9 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 
 /**
@@ -99,7 +102,7 @@ public class ResourceManager {
 
 	private final List<TilesCache<?>> tilesCacheList = new ArrayList<>();
 	private final BitmapTilesCache bitmapTilesCache;
-	private final GeometryTilesCache geometryTilesCache;
+	private final GeometryTilesCache mapillaryVectorTilesCache;
 	private List<MapTileLayerSize> mapTileLayerSizes = new ArrayList<>();
 
 	private final OsmandApplication context;
@@ -245,14 +248,13 @@ public class ResourceManager {
 	private boolean indexesLoadedOnStart = false;
 
 	public ResourceManager(OsmandApplication context) {
-
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
 
 		bitmapTilesCache = new BitmapTilesCache(asyncLoadingThread);
-		geometryTilesCache = new GeometryTilesCache(asyncLoadingThread);
+		mapillaryVectorTilesCache = new GeometryTilesCache(asyncLoadingThread);
 		tilesCacheList.add(bitmapTilesCache);
-		tilesCacheList.add(geometryTilesCache);
+		tilesCacheList.add(mapillaryVectorTilesCache);
 
 		asyncLoadingThread.start();
 		renderingBufferImageThread = new HandlerThread("RenderingBaseImage");
@@ -280,8 +282,8 @@ public class ResourceManager {
 		return bitmapTilesCache;
 	}
 
-	public GeometryTilesCache getGeometryTilesCache() {
-		return geometryTilesCache;
+	public GeometryTilesCache getMapillaryVectorTilesCache() {
+		return mapillaryVectorTilesCache;
 	}
 
 	public MapTileDownloader getMapTileDownloader() {
@@ -381,9 +383,9 @@ public class ResourceManager {
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
 
 	private TilesCache<?> getTilesCache(ITileSource map) {
-		for (TilesCache<?> tc : tilesCacheList) {
-			if (tc.isTileSourceSupported(map)) {
-				return tc;
+		for (TilesCache<?> cache : tilesCacheList) {
+			if (cache.isTileSourceSupported(map)) {
+				return cache;
 			}
 		}
 		return null;
@@ -803,7 +805,7 @@ public class ResourceManager {
 					if (!depthContours && fileName.toLowerCase().startsWith("depth_")) {
 						depthContours = true;
 					}
-					renderer.initializeNewResource(progress, f, mapReader);
+					renderer.initializeNewResource(f, mapReader);
 					BinaryMapReaderResource resource = new BinaryMapReaderResource(f, mapReader);
 					if (mapReader.containsPoiData()) {
 						amenityRepositories.put(fileName, new AmenityIndexRepositoryBinary(resource, context));
@@ -881,11 +883,29 @@ public class ResourceManager {
 		return warnings;
 	}
 
-	public List<BinaryMapIndexReader> getTravelRepositories() {
+	public List<String> getTravelRepositoryNames() {
 		List<String> fileNames = new ArrayList<>(travelRepositories.keySet());
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
+		return fileNames;
+	}
+
+	public List<BinaryMapIndexReader> getTravelMapRepositories() {
 		List<BinaryMapIndexReader> res = new ArrayList<>();
-		for (String fileName : fileNames) {
+		for (String fileName : getTravelRepositoryNames()) {
+			BinaryMapReaderResource resource = travelRepositories.get(fileName);
+			if (resource != null) {
+				BinaryMapIndexReader shallowReader = resource.getShallowReader();
+				if (shallowReader != null && shallowReader.containsMapData()) {
+					res.add(shallowReader);
+				}
+			}
+		}
+		return res;
+	}
+
+	public List<BinaryMapIndexReader> getTravelRepositories() {
+		List<BinaryMapIndexReader> res = new ArrayList<>();
+		for (String fileName : getTravelRepositoryNames()) {
 			BinaryMapReaderResource r = travelRepositories.get(fileName);
 			if (r != null) {
 				res.add(r.getReader(BinaryMapReaderResourceType.POI));
@@ -962,6 +982,20 @@ public class ResourceManager {
 			searchAmenitiesInProgress = false;
 		}
 		return amenities;
+	}
+
+	@NonNull
+	public List<PoiSubType> searchPoiSubTypesByPrefix(@NonNull String prefix) {
+		List<PoiSubType> poiSubTypes = new ArrayList<>();
+		for (AmenityIndexRepository index : getAmenityRepositories()) {
+			if (index instanceof AmenityIndexRepositoryBinary) {
+				AmenityIndexRepositoryBinary repository = (AmenityIndexRepositoryBinary) index;
+				poiSubTypes.addAll(repository.searchPoiSubTypesByPrefix(prefix));
+			}
+		}
+		final Collator collator = OsmAndCollator.primaryCollator();
+		Collections.sort(poiSubTypes, (o1, o2) -> collator.compare(o1.name, o2.name));
+		return poiSubTypes;
 	}
 
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter,

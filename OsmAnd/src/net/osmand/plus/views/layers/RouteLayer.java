@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -23,6 +24,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.ChartPointsHelper;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.profiles.LocationIcon;
@@ -50,7 +52,7 @@ import java.util.List;
 
 public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
-	private static final Log log = PlatformUtil.getLog(RouteLayer.class);
+	private static final Log LOG = PlatformUtil.getLog(RouteLayer.class);
 
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
@@ -72,11 +74,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private LayerDrawable projectionIcon;
 
-	public RouteLayer(RoutingHelper helper) {
-		this.helper = helper;
+	public RouteLayer(@NonNull Context context) {
+		super(context);
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		this.helper = app.getRoutingHelper();
 		this.transportHelper = helper.getTransportRoutingHelper();
-		chartPointsHelper = new ChartPointsHelper(helper.getApplication());
-		coloringAvailabilityCache = new ColoringTypeAvailabilityCache(helper.getApplication());
+		chartPointsHelper = new ChartPointsHelper(app);
+		coloringAvailabilityCache = new ColoringTypeAvailabilityCache(app);
 	}
 
 	public RoutingHelper getHelper() {

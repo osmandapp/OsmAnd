@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -27,13 +29,13 @@ public class NavDirectionsFromAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
-		LatLon latLon = activity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
-		activity.getMapActions().enterDirectionsFromPoint(latLon.getLatitude(), latLon.getLongitude());
+	public void execute(@NonNull MapActivity mapActivity) {
+		LatLon latLon = mapActivity.getMapView().getCurrentRotatedTileBox().getCenterLatLon();
+		mapActivity.getMapActions().enterDirectionsFromPoint(latLon.getLatitude(), latLon.getLongitude());
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
