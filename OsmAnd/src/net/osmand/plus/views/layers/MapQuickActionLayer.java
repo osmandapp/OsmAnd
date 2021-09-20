@@ -1,7 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -31,6 +29,7 @@ import com.getkeepsafe.taptargetview.TapTargetView;
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -48,6 +47,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static net.osmand.plus.views.layers.ContextMenuLayer.VIBRATE_SHORT;
 
 /**
  * Created by okorsun on 23.12.16.
@@ -312,8 +313,9 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 	private void updateQuickActionButton(boolean widgetVisible) {
 	    if (quickActionButton != null) {
             quickActionButton.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle_trans);
-            setMapButtonIcon(quickActionButton, app.getUIUtilities().getMapIcon(
-                    !widgetVisible ? R.drawable.ic_quick_action : R.drawable.ic_action_close, !nightMode));
+            int iconId = !widgetVisible ? R.drawable.ic_quick_action : R.drawable.ic_action_close;
+            int colorId = ColorUtilities.getMapButtonIconColorId(nightMode);
+            setMapButtonIcon(quickActionButton, app.getUIUtilities().getIcon(iconId, colorId));
             quickActionButton.setContentDescription(getString(!widgetVisible ? R.string.configure_screen_quick_action : R.string.shared_string_cancel));
         }
 	}

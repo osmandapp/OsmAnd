@@ -47,14 +47,11 @@ import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -472,22 +469,6 @@ public class AndroidUtils {
 		} else if (view instanceof FrameLayout) {
 			((FrameLayout) view).setForeground(AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
 		}
-	}
-
-	public static void updateImageButton(OsmandApplication ctx, ImageButton button,
-	                                     @DrawableRes int iconLightId, @DrawableRes int iconDarkId,
-	                                     @DrawableRes int bgLightId, @DrawableRes int bgDarkId, boolean night) {
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			button.setBackground(ctx.getUIUtilities().getIcon(night ? bgDarkId : bgLightId));
-		} else {
-			button.setBackgroundDrawable(ctx.getUIUtilities().getIcon(night ? bgDarkId : bgLightId));
-		}
-		int btnSizePx = button.getLayoutParams().height;
-		int iconSizePx = ctx.getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
-		int iconPadding = (btnSizePx - iconSizePx) / 2;
-		button.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
-		button.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		button.setImageDrawable(ctx.getUIUtilities().getMapIcon(night ? iconDarkId : iconLightId, !night));
 	}
 
 	public static void setDashButtonBackground(Context ctx, View view, boolean night) {
