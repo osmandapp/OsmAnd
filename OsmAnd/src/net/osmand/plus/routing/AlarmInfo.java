@@ -21,10 +21,10 @@ public class AlarmInfo implements LocationPoint {
 		MAXIMUM(10, R.string.traffic_warning),
 		TUNNEL(11, R.string.tunnel_warning);
 		
-		private int priority;
-		private int string;
+		private final int priority;
+		private final int string;
 
-		private AlarmInfoType(int p, int string) {
+		AlarmInfoType(int p, int string) {
 			this.priority = p;
 			this.string = string;
 		}
@@ -39,7 +39,7 @@ public class AlarmInfo implements LocationPoint {
 		}
 	}
 	
-	private AlarmInfoType type;
+	private final AlarmInfoType type;
 	protected final int locationIndex;
 	private int lastLocationIndex = -1;
 	private int intValue;

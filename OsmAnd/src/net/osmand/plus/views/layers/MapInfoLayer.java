@@ -116,7 +116,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 			recreateControls();
 		} else {
-			mapInfoControls.clearSideWidgets();
+			if (mapInfoControls != null) {
+				mapInfoControls.clearSideWidgets();
+			}
 			mapInfoControls = null;
 
 			leftStack = null;

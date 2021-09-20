@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -173,14 +172,22 @@ public abstract class OsmandMapLayer {
 
 		private final boolean nightMode;
 		private final boolean updateVectorRendering;
+		private final float density;
 
 		public DrawSettings(boolean nightMode) {
-			this(nightMode, false);
+			this(nightMode, false, 0);
 		}
 
 		public DrawSettings(boolean nightMode, boolean updateVectorRendering) {
 			this.nightMode = nightMode;
 			this.updateVectorRendering = updateVectorRendering;
+			this.density = 0;
+		}
+
+		public DrawSettings(boolean nightMode, boolean updateVectorRendering, float density) {
+			this.nightMode = nightMode;
+			this.updateVectorRendering = updateVectorRendering;
+			this.density = density;
 		}
 
 		public boolean isUpdateVectorRendering() {
@@ -189,6 +196,10 @@ public abstract class OsmandMapLayer {
 
 		public boolean isNightMode() {
 			return nightMode;
+		}
+
+		public float getDensity() {
+			return density;
 		}
 	}
 

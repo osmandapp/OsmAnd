@@ -1,5 +1,10 @@
 package net.osmand.plus.auto;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
@@ -22,7 +27,11 @@ import androidx.car.app.navigation.model.Step;
 import androidx.car.app.navigation.model.TravelEstimate;
 import androidx.core.graphics.drawable.IconCompat;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.auto.SurfaceRenderer.SurfaceRendererCallback;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.widgets.AlarmWidget;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -30,7 +39,7 @@ import java.util.List;
 /**
  * Simple demo of how to present a trip on the routing screen.
  */
-public final class NavigationScreen extends Screen {
+public final class NavigationScreen extends Screen implements SurfaceRendererCallback {
 	/**
 	 * Invalid zoom focal point value, used for the zoom buttons.
 	 */
@@ -82,6 +91,8 @@ public final class NavigationScreen extends Screen {
 	@Nullable
 	CarIcon mJunctionImage;
 
+	private final AlarmWidget alarmWidget;
+
 	private boolean mIsInPanMode;
 
 	public NavigationScreen(
@@ -93,11 +104,22 @@ public final class NavigationScreen extends Screen {
 		mListener = listener;
 		mSettingsAction = settingsAction;
 		mSurfaceRenderer = surfaceRenderer;
+		alarmWidget = new AlarmWidget((OsmandApplication) carContext.getApplicationContext(), null);
 	}
 
 	@NonNull
 	public SurfaceRenderer getSurfaceRenderer() {
 		return mSurfaceRenderer;
+	}
+
+	@Override
+	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
+		DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, mSurfaceRenderer.getDensity());
+		alarmWidget.updateInfo(drawSettings);
+		Bitmap widgetBitmap = alarmWidget.getWidgetBitmap();
+		if (widgetBitmap != null) {
+			canvas.drawBitmap(widgetBitmap, visibleArea.right - widgetBitmap.getWidth() - 10, visibleArea.top + 10, new Paint());
+		}
 	}
 
 	/**

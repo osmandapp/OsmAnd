@@ -3978,7 +3978,7 @@
     <string name="activity_type_winter_name">Winter</string>
     <string name="activity_type_snowmobile_name">Gatto delle nevi</string>
     <string name="activity_type_riding_name">Riding</string>
-    <string name="activity_type_racing_name">Racing</string>
+    <string name="activity_type_racing_name">Corse</string>
     <string name="activity_type_mountainbike_name">Mountainbike</string>
     <string name="activity_type_cycling_name">Bici</string>
     <string name="activity_type_hiking_name">Escursione</string>
@@ -4302,7 +4302,7 @@
 \n
 \nSe non cancellato si rinnova alla scadenza del periodo.
 \n
-\nGestisci o cancella la tua sottoscrizione dalle tue impostazioni Amazon.</string>
+\nGestisci o cancella, quando vuoi, la tua sottoscrizione dalle tue impostazioni Amazon.</string>
     <string name="cancel_anytime_in_amazon_app">Cancellala in qualunque momento dall\'app Amazon</string>
     <string name="empty_category_name">Nome categoria vuoto</string>
     <string name="no_items_of_type_message">Non hai elementi di questo tipo</string>
@@ -4313,4 +4313,7 @@
     <string name="routeInfo_roadClass_description">Colorazione del percorso o della traccia in base alla classificazione stradale.</string>
     <string name="add_group_to_markers">Aggiungi gruppo all\'elenco dei marcatori</string>
     <string name="remove_group_from_markers">Rimuovere il gruppo dall\'elenco dei marcatori</string>
+    <string name="start_point">Partenza</string>
+    <string name="mapillary_menu_filter_description_new">Filtra le immagini per data o tipo. Attivo solo a zoom elevati.</string>
+    <string name="service_is_not_available_please_try_later">Sevizio indisponibile, prova più tardi</string>
 </resources>

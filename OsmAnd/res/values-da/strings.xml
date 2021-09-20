@@ -4327,4 +4327,7 @@
     <string name="routeInfo_roadClass_description">Farvelægning af ruten eller sporlinjen i henhold til vejklassificering.</string>
     <string name="add_group_to_markers">Tilføj gruppe til markørliste</string>
     <string name="remove_group_from_markers">Fjern gruppe fra markørliste</string>
+    <string name="start_point">Start</string>
+    <string name="mapillary_menu_filter_description_new">Filtrer billeder efter dato eller type. Kun aktiv ved højt zoomniveau.</string>
+    <string name="service_is_not_available_please_try_later">Tjeneste er ikke tilgængelig. Prøv venligst senere</string>
 </resources>

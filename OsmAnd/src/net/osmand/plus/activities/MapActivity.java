@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -379,6 +380,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onSaveInstanceState(outState);
 	}
 
+	@MainThread
 	private boolean removeFragment(String tag) {
 		FragmentManager fm = getSupportFragmentManager();
 		Fragment fragment = fm.findFragmentByTag(tag);
@@ -674,7 +676,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onResume() {
 		super.onResume();
 
-		if (activityRestartNeeded) {
+		if (activityRestartNeeded || !getMapLayers().hasMapActivity()) {
 			activityRestartNeeded = false;
 			recreate();
 			return;
@@ -837,7 +839,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			splashScreenTimer.schedule(new TimerTask() {
 				@Override
 				public void run() {
-					dismissSecondSplashScreen();
+					app.runInUIThread(() -> dismissSecondSplashScreen());
 				}
 			}, SECOND_SPLASH_TIME_OUT);
 		} else {
@@ -1717,7 +1719,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (dashboardOnMap.isVisible()) {
 			dashboardOnMap.onDownloadHasFinished();
 		}
-		refreshMap();
+		refreshMapComplete();
 	}
 
 	@Override

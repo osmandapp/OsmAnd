@@ -3233,7 +3233,7 @@
     <string name="open_place_reviews_plugin_description">Trimiteți fotografii, recenzii și link-uri despre locuri publice, cum ar fi restaurante, hoteluri, muzee și puncte de reper ca date deschise https://openplacereviews.org/data/.
 \n
 \nCitiți mai multe la https://openplacereviews.org</string>
-    <string name="open_place_reviews">OpenPlaceReviews</string>
+    <string name="open_place_reviews">OpenPlaceRecenzii</string>
     <string name="opr_use_dev_url">Utilizați test.openplacereviews.org</string>
     <string name="use_volume_buttons_as_zoom_descr">Controlați nivelul de zoom al hărții cu ajutorul butoanelor de volum de pe dispozitiv.</string>
     <string name="quick_action_remove_next_destination_descr">Șterge următoarea destinație de pe traseu. Dacă aceasta este destinația finală, navigația se va opri.</string>
@@ -4322,10 +4322,13 @@
     <string name="no_activity_for_intent">Nu au fost găsite aplicații adecvate pentru a efectua această acțiune</string>
     <string name="no_items_of_type_message">Nu aveți niciun articol de acest tip</string>
     <string name="routeInfo_tracktype_description">Colorarea unui traseu sau a unei linii de cale ferată în funcție de starea drumurilor pe baza compoziției suprafeței acestora. Se aplică de obicei la drumurile în care rețeaua rutieră principală este formată din drumuri neasfaltate.</string>
-    <string name="routeInfo_winter_ice_road_description">"Colorarea traseului sau a liniei de cale în conformitate cu clasificarea de iarnă a drumurilor  care este utilizabilă numai în timpul iernii."</string>
+    <string name="routeInfo_winter_ice_road_description">Colorarea traseului sau a liniei de cale în conformitate cu clasificarea de iarnă a drumurilor care este utilizabilă numai în timpul iernii.</string>
     <string name="routeInfo_smoothness_description">Oferă o schemă de clasificare privind utilizabilitatea fizică a unei căi de rulare pentru vehiculele pe roți, în special în ceea ce privește regularitatea/planeitatea suprafeței.</string>
     <string name="routeInfo_surface_description">Furnizați informații suplimentare cu privire la suprafața fizică a drumurilor/căilor pietonale.</string>
-    <string name="routeInfo_roadClass_description">"Colorarea traseului sau a liniei de cale  în funcție de clasificarea drumului."</string>
+    <string name="routeInfo_roadClass_description">Colorarea traseului sau a liniei de cale în funcție de clasificarea drumului.</string>
     <string name="add_group_to_markers">Adaugă grupul în lista de markeri</string>
     <string name="remove_group_from_markers">Elimină grupul din lista de markeri</string>
+    <string name="start_point">Începe</string>
+    <string name="mapillary_menu_filter_description_new">Filtrați imaginile în funcție de dată sau de tip. Activ doar în zoom de apropiere.</string>
+    <string name="service_is_not_available_please_try_later">Serviciul nu este disponibil, vă rugăm să încercați mai târziu</string>
 </resources>

@@ -4,6 +4,7 @@ package net.osmand.plus.views;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -207,8 +208,22 @@ public class MapLayers {
 	public void setMapActivity(@Nullable MapActivity mapActivity) {
 		OsmandMapTileView mapView = getApplication().getOsmandMap().getMapView();
 		for (OsmandMapLayer layer : mapView.getLayers()) {
+			MapActivity layerMapActivity = layer.getMapActivity();
+			if (mapActivity != null && layerMapActivity != null) {
+				layer.setMapActivity(null);
+			}
 			layer.setMapActivity(mapActivity);
 		}
+	}
+
+	public boolean hasMapActivity() {
+		OsmandMapTileView mapView = getApplication().getOsmandMap().getMapView();
+		for (OsmandMapLayer layer : mapView.getLayers()) {
+			if (layer.getMapActivity() == null) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public void updateLayers(@Nullable MapActivity mapActivity) {
@@ -291,7 +306,7 @@ public class MapLayers {
 		adapter.setNightMode(isNightMode(app));
 
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !isNightMode(app));
-		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, getThemeRes(app)));
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, getThemeRes(app)));
 		final ListView listView = new ListView(ctx);
 		listView.setDivider(null);
 		listView.setClickable(true);
@@ -354,7 +369,7 @@ public class MapLayers {
 		}
 
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, !isNightMode(app));
-		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, getThemeRes(app)));
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, getThemeRes(app)));
 		builder.setAdapter(listAdapter, (dialog, which) -> {
 			PoiUIFilter pf = list.get(which);
 			String filterId = pf.getFilterId();
@@ -436,7 +451,7 @@ public class MapLayers {
 
 		final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ctx, getThemeRes(getApplication())));
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, getThemeRes(getApplication())));
 
 		String selectedTileSourceKey = settings.MAP_TILE_SOURCES.get();
 

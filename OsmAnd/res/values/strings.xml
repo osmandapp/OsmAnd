@@ -12,6 +12,8 @@
 
 -->
 
+    <string name="travel_route_types">Route types</string>
+    <string name="shared_string_files">Files</string>
     <string name="service_is_not_available_please_try_later">Service is not available, please try later</string>
     <string name="mapillary_menu_filter_description_new">Filter images by date or by type. Only active in closeup zoom.</string>
     <string name="start_point">Start</string>
