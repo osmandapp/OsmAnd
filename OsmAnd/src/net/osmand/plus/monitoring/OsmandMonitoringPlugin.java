@@ -169,6 +169,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					monitoringControl = null;
 				}
 			}
+		} else {
+			//TODO: CLEAR CONTROL IN ALL PLUGINS!!!
 		}
 	}
 
