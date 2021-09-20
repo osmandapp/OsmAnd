@@ -1719,7 +1719,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (dashboardOnMap.isVisible()) {
 			dashboardOnMap.onDownloadHasFinished();
 		}
-		refreshMap();
+		refreshMapComplete();
 	}
 
 	@Override
