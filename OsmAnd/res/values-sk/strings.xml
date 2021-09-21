@@ -4317,4 +4317,9 @@
     <string name="routeInfo_roadClass_description">Zafarbenie trasy alebo stopy podľa klasifikácie cesty.</string>
     <string name="add_group_to_markers">Pridať skupinu do zoznamu značiek</string>
     <string name="remove_group_from_markers">Odstrániť skupinu zo zoznamu značiek</string>
+    <string name="start_point">Štart</string>
+    <string name="mapillary_menu_filter_description_new">Filtrovať obrázky podľa dátumu alebo typu. Aktívne len pri vysokom priblížení.</string>
+    <string name="service_is_not_available_please_try_later">Služba nie je dostupná, skúste prosím neskôr</string>
+    <string name="shared_string_files">Súbory</string>
+    <string name="travel_route_types">Typy trás</string>
 </resources>
