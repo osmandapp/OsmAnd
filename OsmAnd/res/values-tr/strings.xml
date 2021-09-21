@@ -4325,4 +4325,6 @@
     <string name="start_point">Başlangıç</string>
     <string name="mapillary_menu_filter_description_new">Görüntüleri tarihe veya türe göre filtrele. Yalnızca yakın çekimde etkindir.</string>
     <string name="service_is_not_available_please_try_later">Hizmet kullanılamıyor, lütfen daha sonra deneyin</string>
+    <string name="shared_string_files">Dosyalar</string>
+    <string name="travel_route_types">Güzergah türleri</string>
 </resources>

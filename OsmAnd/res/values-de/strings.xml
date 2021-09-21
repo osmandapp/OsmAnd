@@ -4329,4 +4329,6 @@
     <string name="start_point">Start</string>
     <string name="mapillary_menu_filter_description_new">Bilder nach Datum oder Typ filtern. Nur hineingezoomt aktiv.</string>
     <string name="service_is_not_available_please_try_later">Dienst ist nicht verfügbar, bitte versuchen Sie es später</string>
+    <string name="travel_route_types">Routentypen</string>
+    <string name="shared_string_files">Dateien</string>
 </resources>
