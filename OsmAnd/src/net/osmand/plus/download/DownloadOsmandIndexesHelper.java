@@ -144,9 +144,7 @@ public class DownloadOsmandIndexesHelper {
 			List<AssetEntry> bundledAssets = getBundledAssets(app.getAssets());
 			ttsList.addAll(listDefaultTtsVoiceIndexes(app, bundledAssets));
 			ttsList.addAll(listCustomTtsVoiceIndexes(app, bundledAssets));
-		} catch (IOException e) {
-			log.error("Error while loading tts files from assets", e);
-		} catch (XmlPullParserException e) {
+		} catch (IOException | XmlPullParserException e) {
 			log.error("Error while loading tts files from assets", e);
 		}
 
@@ -238,7 +236,7 @@ public class DownloadOsmandIndexesHelper {
 	private static IndexFileList downloadIndexesListFromInternet(OsmandApplication ctx) {
 		try {
 			IndexFileList result = new IndexFileList();
-			log.debug("Start loading list of index files"); //$NON-NLS-1$
+			log.debug("Start loading list of index files");
 			try {
 				String strUrl = ctx.getAppCustomization().getIndexesUrl();
 				long nd = ctx.getAppInitializer().getFirstInstalledDays();
@@ -256,30 +254,28 @@ public class DownloadOsmandIndexesHelper {
 				URLConnection connection = NetworkUtils.getHttpURLConnection(strUrl);
 				InputStream in = connection.getInputStream();
 				GZIPInputStream gzin = new GZIPInputStream(in);
-				parser.setInput(gzin, "UTF-8"); //$NON-NLS-1$
+				parser.setInput(gzin, "UTF-8");
 				int next;
 				while ((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
 					if (next == XmlPullParser.START_TAG) {
-						DownloadActivityType tp = DownloadActivityType.getIndexType(parser.getAttributeValue(null, "type"));
+						String attrValue = parser.getAttributeValue(null, "type");
+						DownloadActivityType tp = DownloadActivityType.getIndexType(attrValue);
 						if (tp != null) {
 							IndexItem it = tp.parseIndexItem(ctx, parser);
 							if (it != null) {
 								result.add(it);
 							}
 						} else if ("osmand_regions".equals(parser.getName())) {
-							String mapversion = parser.getAttributeValue(null, "mapversion");
-							result.setMapVersion(mapversion);
+							String mapVersion = parser.getAttributeValue(null, "mapversion");
+							result.setMapVersion(mapVersion);
 						}
 					}
 				}
 				result.sort();
 				gzin.close();
 				in.close();
-			} catch (IOException e) {
-				log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
-				return null;
-			} catch (XmlPullParserException e) {
-				log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
+			} catch (IOException | XmlPullParserException e) {
+				log.error("Error while loading indexes from repository", e);
 				return null;
 			}
 
@@ -289,7 +285,7 @@ public class DownloadOsmandIndexesHelper {
 				return null;
 			}
 		} catch (RuntimeException e) {
-			log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
+			log.error("Error while loading indexes from repository", e);
 			return null;
 		}
 	}
