@@ -292,7 +292,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 					updateSpanColor(formattedPrice, textColorSpans[0], textColor);
 				}
 				if (textColorSpans.length > 1) {
-					int semiTransparentTextColor = ColorUtilities.getColorWithAlpha(textColor, 0.5f);
+					int semiTransparentTextColor = UiUtilities.getColorWithAlpha(textColor, 0.5f);
 					updateSpanColor(formattedPrice, textColorSpans[1], semiTransparentTextColor);
 				}
 			}

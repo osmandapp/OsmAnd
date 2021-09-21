@@ -1,5 +1,13 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_TTS;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -40,8 +48,6 @@ import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem;
-import net.osmand.plus.widgets.multistatetoggle.RadioItem.OnRadioItemClickListener;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.util.Algorithms;
@@ -52,14 +58,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_TTS;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS;
 
 public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet implements DownloadEvents {
 
@@ -77,7 +75,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private IndexItem indexToSelectAfterDownload = null;
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, ApplicationMode appMode, boolean usedOnMap) {
-		if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+		if (!fm.isStateSaved()) {
 			VoiceLanguageBottomSheetFragment fragment = new VoiceLanguageBottomSheetFragment();
 			fragment.setRetainInstance(true);
 			fragment.setAppMode(appMode);

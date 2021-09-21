@@ -39,24 +39,19 @@ public class TrackWidthCard extends MapBaseCard {
 	private final static int CUSTOM_WIDTH_MAX = 24;
 
 	private final TrackDrawInfo trackDrawInfo;
-	private final SelectedGpxFile selectedGpxFile;
 	private final OnNeedScrollListener onNeedScrollListener;
 
-	private AppearanceListItem selectedItem;
-	private final List<AppearanceListItem> appearanceItems;
+	private List<AppearanceListItem> appearanceItems;
 
 	private GpxWidthAdapter widthAdapter;
 	private View sliderContainer;
 	private RecyclerView groupRecyclerView;
 
 	public TrackWidthCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo,
-						  @NonNull SelectedGpxFile selectedGpxFile,
 						  @NonNull OnNeedScrollListener onNeedScrollListener) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
-		this.selectedGpxFile = selectedGpxFile;
 		this.onNeedScrollListener = onNeedScrollListener;
-		appearanceItems = getWidthAppearanceItems();
 	}
 
 	@Override
@@ -66,6 +61,7 @@ public class TrackWidthCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
+		appearanceItems = getWidthAppearanceItems();
 		updateHeader();
 		updateCustomWidthSlider();
 
@@ -84,18 +80,15 @@ public class TrackWidthCard extends MapBaseCard {
 
 	@Nullable
 	private AppearanceListItem getSelectedItem() {
-		if (selectedItem == null) {
-			String selectedWidth = trackDrawInfo.getWidth();
-			for (AppearanceListItem item : appearanceItems) {
-				if (selectedWidth != null && (Algorithms.objectEquals(item.getValue(), selectedWidth)
-						|| Algorithms.isEmpty(selectedWidth) && Algorithms.isEmpty(item.getValue())
-						|| Algorithms.isInt(selectedWidth) && CUSTOM_WIDTH.equals(item.getAttrName()))) {
-					selectedItem = item;
-					break;
-				}
+		String selectedWidth = trackDrawInfo.getWidth();
+		for (AppearanceListItem item : appearanceItems) {
+			if (selectedWidth != null && (Algorithms.objectEquals(item.getValue(), selectedWidth)
+					|| Algorithms.isEmpty(selectedWidth) && Algorithms.isEmpty(item.getValue())
+					|| Algorithms.isInt(selectedWidth) && CUSTOM_WIDTH.equals(item.getAttrName()))) {
+				return item;
 			}
 		}
-		return selectedItem;
+		return null;
 	}
 
 	private List<AppearanceListItem> getWidthAppearanceItems() {
@@ -180,6 +173,7 @@ public class TrackWidthCard extends MapBaseCard {
 	}
 
 	private void scrollMenuToSelectedItem() {
+		AppearanceListItem selectedItem = getSelectedItem();
 		int position = widthAdapter.getItemPosition(selectedItem);
 		if (position != -1) {
 			groupRecyclerView.scrollToPosition(position);
@@ -222,7 +216,7 @@ public class TrackWidthCard extends MapBaseCard {
 				@Override
 				public void onClick(View view) {
 					int prevSelectedPosition = getItemPosition(getSelectedItem());
-					selectedItem = items.get(holder.getAdapterPosition());
+					AppearanceListItem selectedItem = items.get(holder.getAdapterPosition());
 					notifyItemChanged(holder.getAdapterPosition());
 					notifyItemChanged(prevSelectedPosition);
 
@@ -251,7 +245,7 @@ public class TrackWidthCard extends MapBaseCard {
 				iconId = TrackAppearanceFragment.getWidthIconId(item.getValue());
 			}
 			if (color == 0) {
-				color = TrackAppearanceFragment.getTrackColor(app, selectedGpxFile);
+				color = TrackAppearanceFragment.getTrackColor(app);
 			}
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconId, color));
 		}
