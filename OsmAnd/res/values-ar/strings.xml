@@ -4394,4 +4394,6 @@
     <string name="mapillary_menu_filter_description_new">تصفية الصور حسب التاريخ أو النوع. خاصية نشطة أثناء التكبير عن كثب فقط..</string>
     <string name="start_point">ابدأ</string>
     <string name="service_is_not_available_please_try_later">الخدمة غير متوفرة، يرجى المحاولة لاحقا</string>
+    <string name="shared_string_files">الملفات</string>
+    <string name="travel_route_types">أنواع المسار</string>
 </resources>

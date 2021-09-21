@@ -4324,4 +4324,6 @@
     <string name="start_point">Почати</string>
     <string name="mapillary_menu_filter_description_new">Добирати зображення за датою або типом. Працює лише в наближенні великим планом.</string>
     <string name="service_is_not_available_please_try_later">Служба недоступна, будь ласка, спробуйте пізніше</string>
+    <string name="shared_string_files">Файли</string>
+    <string name="travel_route_types">Типи маршрутів</string>
 </resources>

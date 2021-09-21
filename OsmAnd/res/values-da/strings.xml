@@ -4330,4 +4330,6 @@
     <string name="start_point">Start</string>
     <string name="mapillary_menu_filter_description_new">Filtrer billeder efter dato eller type. Kun aktiv ved højt zoomniveau.</string>
     <string name="service_is_not_available_please_try_later">Tjeneste er ikke tilgængelig. Prøv venligst senere</string>
+    <string name="shared_string_files">Filer</string>
+    <string name="travel_route_types">Rutetyper</string>
 </resources>

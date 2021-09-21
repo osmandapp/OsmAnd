@@ -4323,4 +4323,6 @@
     <string name="start_point">Komenco</string>
     <string name="mapillary_menu_filter_description_new">Filtri bildojn laŭ dato aŭ laŭ tipo; aktiva nur je pligrandigo.</string>
     <string name="service_is_not_available_please_try_later">Servo ne estas disponebla, reprovu poste</string>
+    <string name="shared_string_files">Dosieroj</string>
+    <string name="travel_route_types">Specoj de kursoj</string>
 </resources>

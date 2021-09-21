@@ -4319,4 +4319,6 @@
     <string name="start_point">Départ</string>
     <string name="mapillary_menu_filter_description_new">Filtrer les images par date ou par type. Disponible uniquement après avoir zoomé.</string>
     <string name="service_is_not_available_please_try_later">Le service n\'est pas disponible actuellement, veuillez réessayer plus tard</string>
+    <string name="shared_string_files">Fichiers</string>
+    <string name="travel_route_types">Types d\'itinéraires</string>
 </resources>

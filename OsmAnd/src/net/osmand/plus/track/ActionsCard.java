@@ -30,8 +30,9 @@ public class ActionsCard extends BaseCard {
 	@Override
 	protected void updateContent() {
 		View reset = view.findViewById(R.id.button_reset);
-		ImageView icon = view.findViewById(android.R.id.icon);
-		TextView title = view.findViewById(android.R.id.title);
+		ImageView icon = reset.findViewById(android.R.id.icon);
+		TextView title = reset.findViewById(android.R.id.title);
+		View button = reset.findViewById(R.id.selectable_list_item);
 
 		Typeface typeface = FontCache.getRobotoRegular(app);
 		title.setText(R.string.reset_to_original);
@@ -39,12 +40,14 @@ public class ActionsCard extends BaseCard {
 		title.setTextColor(AndroidUtils.getColorFromAttr(view.getContext(), android.R.attr.textColorPrimary));
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_reset));
 
-		reset.setOnClickListener(v -> {
+		button.setOnClickListener(v -> {
 			CardListener listener = getListener();
 			if (listener != null) {
 				listener.onCardButtonPressed(ActionsCard.this, RESET_BUTTON_INDEX);
 			}
 		});
-		AndroidUtils.setBackground(reset, UiUtilities.getSelectableDrawable(app));
+		if (button.getBackground() == null) {
+			AndroidUtils.setBackground(button, UiUtilities.getSelectableDrawable(app));
+		}
 	}
 }

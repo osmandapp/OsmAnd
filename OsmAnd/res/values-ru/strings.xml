@@ -4343,4 +4343,6 @@
     <string name="start_point">Старт</string>
     <string name="mapillary_menu_filter_description_new">Фильтр изображений по дате или по типу. Активен только при увеличении крупным планом.</string>
     <string name="service_is_not_available_please_try_later">Сервис недоступен, попробуйте позже</string>
+    <string name="shared_string_files">Файлы</string>
+    <string name="travel_route_types">Типы маршрутов</string>
 </resources>
