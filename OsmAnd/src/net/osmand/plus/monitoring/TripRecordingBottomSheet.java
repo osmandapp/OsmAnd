@@ -1,5 +1,12 @@
 package net.osmand.plus.monitoring;
 
+import static net.osmand.AndroidUtils.getSecondaryTextColorId;
+import static net.osmand.AndroidUtils.setPadding;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -16,6 +23,21 @@ import android.widget.CompoundButton;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -53,28 +75,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import static net.osmand.AndroidUtils.getSecondaryTextColorId;
-import static net.osmand.AndroidUtils.setPadding;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
 
@@ -398,11 +398,11 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 										   Integer showTrackId, final Fragment target,
 										   final boolean nightMode, final Runnable hideOnClickButtonAppearance) {
 		FragmentActivity activity = target.getActivity();
-		if (!(activity instanceof MapActivity)) {
+		if (activity == null) {
+			AndroidUiHelper.updateVisibility(showTrackContainer, false);
 			return;
 		}
-		final MapActivity mapActivity = (MapActivity) activity;
-		final OsmandApplication app = mapActivity.getMyApplication();
+		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final CardView buttonShowTrack = showTrackContainer.findViewById(R.id.compound_container);
 		final CardView buttonAppearance = showTrackContainer.findViewById(R.id.additional_button_container);
 
@@ -428,16 +428,18 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 		updateTrackIcon(app, trackAppearanceIcon);
 		createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, showTrackCompound.isChecked(), null);
-		buttonAppearance.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (showTrackCompound.isChecked()) {
-					hideOnClickButtonAppearance.run();
-					SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-					TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, target);
+		if (activity instanceof MapActivity) {
+			buttonAppearance.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (showTrackCompound.isChecked()) {
+						hideOnClickButtonAppearance.run();
+						SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+						TrackAppearanceFragment.showInstance((MapActivity) activity, selectedGpxFile, target);
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	public static void setShowTrackItemBackground(View view, boolean checked, boolean nightMode) {
