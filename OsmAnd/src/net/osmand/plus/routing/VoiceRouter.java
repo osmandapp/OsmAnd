@@ -328,7 +328,9 @@ public class VoiceRouter {
 			boolean speakTunnels = type == AlarmInfoType.TUNNEL && settings.SPEAK_TUNNELS.get();
 			boolean speakPedestrian = type == AlarmInfoType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();
 			boolean speakSpeedCamera = type == AlarmInfoType.SPEED_CAMERA && settings.SPEAK_SPEED_CAMERA.get();
-			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings) {
+			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN || type == AlarmInfoType.SPEED_CAMERA;
+
+			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					p.attention(String.valueOf(type));
