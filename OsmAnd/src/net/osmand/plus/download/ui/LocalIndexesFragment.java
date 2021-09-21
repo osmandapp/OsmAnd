@@ -53,6 +53,7 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.SrtmDownloadItem;
@@ -1138,12 +1139,12 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		if (update != null) {
 			item = optionsMenu.getMenu().add(R.string.update_tile)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_import));
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					getDownloadActivity().startDownload(update);
-					return true;
+			item.setOnMenuItemClickListener(i -> {
+				DownloadActivity downloadActivity = getDownloadActivity();
+				if (downloadActivity != null) {
+					downloadActivity.startDownload(update);
 				}
+				return true;
 			});
 		}
 

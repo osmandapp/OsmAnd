@@ -12,6 +12,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.LocalIndexHelper;
+import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
 
 import org.apache.commons.logging.Log;
@@ -144,9 +145,7 @@ public class DownloadOsmandIndexesHelper {
 			List<AssetEntry> bundledAssets = getBundledAssets(app.getAssets());
 			ttsList.addAll(listDefaultTtsVoiceIndexes(app, bundledAssets));
 			ttsList.addAll(listCustomTtsVoiceIndexes(app, bundledAssets));
-		} catch (IOException e) {
-			log.error("Error while loading tts files from assets", e);
-		} catch (XmlPullParserException e) {
+		} catch (IOException | XmlPullParserException e) {
 			log.error("Error while loading tts files from assets", e);
 		}
 
@@ -193,11 +192,14 @@ public class DownloadOsmandIndexesHelper {
 
 			String lang = target.substring(IndexConstants.VOICE_INDEX_DIR.length(),
 					target.indexOf(IndexConstants.VOICE_PROVIDER_SUFFIX));
-			File destFile = new File(voiceDirPath, target.substring(IndexConstants.VOICE_INDEX_DIR.length(),
-					target.indexOf("/", IndexConstants.VOICE_INDEX_DIR.length())) + "/" + lang + "_tts.js");
-			defaultTTS.add(new AssetIndexItem(lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS,
+			String ttsIndexFolder = target.substring(IndexConstants.VOICE_INDEX_DIR.length(),
+					target.indexOf("/", IndexConstants.VOICE_INDEX_DIR.length()));
+			File destFile = new File(voiceDirPath, ttsIndexFolder + "/" + lang + "_tts.js");
+			IndexItem ttsIndex = new AssetIndexItem(lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS,
 					"voice", installDate, "0.1", destFile.length(), asset.source,
-					destFile.getPath(), DownloadActivityType.VOICE_FILE));
+					destFile.getPath(), DownloadActivityType.VOICE_FILE);
+			ttsIndex.setDownloaded(destFile.exists());
+			defaultTTS.add(ttsIndex);
 		}
 
 		return defaultTTS;
@@ -227,18 +229,47 @@ public class DownloadOsmandIndexesHelper {
 			if (isCustomVoice) {
 				String fileName = indexInfo.getFileName().replace("-", "_") + ".js";
 				File file = new File(voiceDirPath, indexInfo.getFileName() + "/" + fileName);
-				customTTS.add(new AssetIndexItem(fileName, "voice", installDate, "0.1",
-						file.length(), "", file.getPath(), DownloadActivityType.VOICE_FILE));
+				IndexItem customVoiceIndex = new AssetIndexItem(fileName, "voice", installDate, "0.1",
+						file.length(), "", file.getPath(), DownloadActivityType.VOICE_FILE);
+				customVoiceIndex.setDownloaded(true);
+				customTTS.add(customVoiceIndex);
 			}
 		}
 
 		return customTTS;
 	}
 
+	@NonNull
+	public static List<IndexItem> listLocalRecordedVoiceIndexes(OsmandApplication app) {
+		File voiceDirPath = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+		LocalIndexHelper localIndexHelper = new LocalIndexHelper(app);
+		List<LocalIndexInfo> localIndexes = new ArrayList<>();
+		List<IndexItem> recordedVoiceList = new ArrayList<>();
+
+		localIndexHelper.loadVoiceData(voiceDirPath, localIndexes, false, true, true,
+				app.getResourceManager().getIndexFiles(), null);
+		for (LocalIndexInfo indexInfo : localIndexes) {
+			if (indexInfo.getType() != LocalIndexType.VOICE_DATA || indexInfo.getFileName().contains("tts")) {
+				continue;
+			}
+
+			String recordedZipName = indexInfo.getFileName() + "_0" + IndexConstants.VOICE_INDEX_EXT_ZIP;
+			String ttsFileName = indexInfo.getFileName() + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS;
+			File ttsFile = new File(voiceDirPath, indexInfo.getFileName() + "/" + ttsFileName);
+				long installDate = ttsFile.lastModified();
+			IndexItem localRecordedVoiceIndex = new IndexItem(recordedZipName, "", installDate,
+					"", 0, 0, DownloadActivityType.VOICE_FILE);
+			localRecordedVoiceIndex.setDownloaded(true);
+			recordedVoiceList.add(localRecordedVoiceIndex);
+		}
+
+		return recordedVoiceList;
+	}
+
 	private static IndexFileList downloadIndexesListFromInternet(OsmandApplication ctx) {
 		try {
 			IndexFileList result = new IndexFileList();
-			log.debug("Start loading list of index files"); //$NON-NLS-1$
+			log.debug("Start loading list of index files");
 			try {
 				String strUrl = ctx.getAppCustomization().getIndexesUrl();
 				long nd = ctx.getAppInitializer().getFirstInstalledDays();
@@ -256,30 +287,28 @@ public class DownloadOsmandIndexesHelper {
 				URLConnection connection = NetworkUtils.getHttpURLConnection(strUrl);
 				InputStream in = connection.getInputStream();
 				GZIPInputStream gzin = new GZIPInputStream(in);
-				parser.setInput(gzin, "UTF-8"); //$NON-NLS-1$
+				parser.setInput(gzin, "UTF-8");
 				int next;
 				while ((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
 					if (next == XmlPullParser.START_TAG) {
-						DownloadActivityType tp = DownloadActivityType.getIndexType(parser.getAttributeValue(null, "type"));
+						String attrValue = parser.getAttributeValue(null, "type");
+						DownloadActivityType tp = DownloadActivityType.getIndexType(attrValue);
 						if (tp != null) {
 							IndexItem it = tp.parseIndexItem(ctx, parser);
 							if (it != null) {
 								result.add(it);
 							}
 						} else if ("osmand_regions".equals(parser.getName())) {
-							String mapversion = parser.getAttributeValue(null, "mapversion");
-							result.setMapVersion(mapversion);
+							String mapVersion = parser.getAttributeValue(null, "mapversion");
+							result.setMapVersion(mapVersion);
 						}
 					}
 				}
 				result.sort();
 				gzin.close();
 				in.close();
-			} catch (IOException e) {
-				log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
-				return null;
-			} catch (XmlPullParserException e) {
-				log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
+			} catch (IOException | XmlPullParserException e) {
+				log.error("Error while loading indexes from repository", e);
 				return null;
 			}
 
@@ -289,7 +318,7 @@ public class DownloadOsmandIndexesHelper {
 				return null;
 			}
 		} catch (RuntimeException e) {
-			log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
+			log.error("Error while loading indexes from repository", e);
 			return null;
 		}
 	}

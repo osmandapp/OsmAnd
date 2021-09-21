@@ -8,6 +8,7 @@ import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGro
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC;
 import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -73,6 +75,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	private InfoType selectedVoiceType = InfoType.TTS;
 	private IndexItem indexToSelectAfterDownload = null;
+	private boolean listedRecordedVoicesFromInternet = false;
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, ApplicationMode appMode, boolean usedOnMap) {
 		if (!fm.isStateSaved()) {
@@ -229,8 +232,14 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private void createVoiceView() {
 		if (selectedVoiceType == InfoType.TTS && Algorithms.isEmpty(voiceItems)) {
 			voiceItems = getVoiceList(selectedVoiceType.indexGroupName);
-		} else if (selectedVoiceType == InfoType.RECORDED && Algorithms.isEmpty(voiceItemsRec)) {
-			voiceItemsRec = getVoiceList(selectedVoiceType.indexGroupName);
+		} else if (selectedVoiceType == InfoType.RECORDED) {
+			DownloadResources indexes = downloadThread.getIndexes();
+			boolean successfulDownload = indexes.isDownloadedFromInternet && !indexes.downloadFromInternetFailed;
+			boolean shouldReloadList = !listedRecordedVoicesFromInternet
+					&& (successfulDownload || downloadThread.shouldDownloadIndexes());
+			if (Algorithms.isEmpty(voiceItemsRec) || shouldReloadList) {
+				voiceItemsRec = getVoiceList(selectedVoiceType.indexGroupName);
+			}
 		}
 		createSuggestedVoiceItemsView(selectedVoiceType == InfoType.TTS ? voiceItems : voiceItemsRec);
 	}
@@ -248,10 +257,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 			boolean isDefault = isDefaultTTS(indexItem);
 			String title = isDefault ? getString(R.string.use_system_language) : indexItem.getVisibleName(app, app.getRegions(), false);
-			String dateUpdate = indexItem.getDate(SimpleDateFormat.getDateInstance(DateFormat.DEFAULT));
-			String description = isDefault
-					? downloadItem.getVisibleName(app, app.getRegions(), false)
-					: isTTS ? "" : indexItem.getSizeDescription(app) + " • " + dateUpdate;
+			String description = getVoiceIndexDescription(indexItem);
 
 			final TextView textDescription = container.findViewById(R.id.description);
 			final ProgressBar progressBar = container.findViewById(R.id.ProgressBar);
@@ -284,6 +290,20 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 					.setCustomView(container)
 					.create();
 			items.add(voiceDownloadedItem[0]);
+		}
+	}
+
+	private String getVoiceIndexDescription(IndexItem voiceIndex) {
+		if (isDefaultTTS(voiceIndex)) {
+			return voiceIndex.getVisibleName(app, app.getRegions(), false);
+		} else if (selectedVoiceType == InfoType.TTS) {
+			return "";
+		} else {
+			String size = voiceIndex.getSizeToDownloadInMb() == 0.0 ? null : voiceIndex.getSizeDescription(app);
+			String dateModified = voiceIndex.getDate(SimpleDateFormat.getDateInstance(DateFormat.DEFAULT));
+			return Algorithms.isEmpty(size)
+					? dateModified
+					: getString(R.string.ltr_or_rtl_combine_via_bold_point, size, dateModified);
 		}
 	}
 
@@ -346,8 +366,13 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void updateVoiceProvider(IndexItem indexItem, boolean forceDismiss) {
-		settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexItem.getBasename());
-		onVoiceProviderChanged();
+		Activity activity = getActivity();
+		if (activity != null) {
+			settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexItem.getBasename());
+			onVoiceProviderChanged();
+			app.initVoiceCommandPlayer(activity, getAppMode(), false, null,
+					false, false, false);
+		}
 		if (DownloadActivityType.isVoiceTTS(indexItem) || forceDismiss) {
 			dismiss();
 		}
@@ -355,8 +380,10 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void downloadIndexItem(IndexItem indexItem) {
-		if (getActivity() != null) {
-			new DownloadValidationManager(app).startDownload(getActivity(), indexItem);
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			DownloadValidationManager manager = new DownloadValidationManager(app);
+			manager.startDownload(activity, indexItem);
 			indexToSelectAfterDownload = indexItem;
 		}
 	}
@@ -400,8 +427,15 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		List<DownloadItem> suggestedVoice = new ArrayList<>();
 		if (indexes.isDownloadedFromInternet && !indexes.downloadFromInternetFailed) {
 			suggestedVoice.addAll(indexes.getDownloadItemsForGroup(type));
-		} else if (selectedVoiceType == InfoType.TTS) {
-			suggestedVoice.addAll(DownloadOsmandIndexesHelper.listTtsVoiceIndexes(app));
+			if (selectedVoiceType == InfoType.RECORDED) {
+				listedRecordedVoicesFromInternet = true;
+			}
+		} else {
+			if (selectedVoiceType == InfoType.TTS) {
+				suggestedVoice.addAll(DownloadOsmandIndexesHelper.listTtsVoiceIndexes(app));
+			} else {
+				suggestedVoice.addAll(DownloadOsmandIndexesHelper.listLocalRecordedVoiceIndexes(app));
+			}
 		}
 
 		return suggestedVoice;

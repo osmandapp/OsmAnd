@@ -12,9 +12,6 @@ import android.os.AsyncTask.Status;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AlertDialog;
-
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -46,17 +43,22 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AlertDialog;
+
 @SuppressLint({ "NewApi", "DefaultLocale" })
 public class DownloadIndexesThread {
+
 	private final static Log LOG = PlatformUtil.getLog(DownloadIndexesThread.class);
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
+
+	private final DatabaseHelper dbHelper;
+	private final DownloadFileHelper downloadFileHelper;
+	private final List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<>());
+	private final ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<>();
 
 	private DownloadEvents uiActivity = null;
-	private DatabaseHelper dbHelper;
-	private DownloadFileHelper downloadFileHelper;
-	private List<BasicProgressAsyncTask<?, ?, ?, ?>> currentRunningTask = Collections.synchronizedList(new ArrayList<BasicProgressAsyncTask<?, ?, ?, ?>>());
-	private ConcurrentLinkedQueue<IndexItem> indexItemDownloading = new ConcurrentLinkedQueue<IndexItem>();
 	private IndexItem currentDownloadingItem = null;
 	private int currentDownloadingItemProgress = 0;
 	private DownloadResources indexes;
@@ -70,7 +72,6 @@ public class DownloadIndexesThread {
 		
 		void downloadHasFinished();
 	}
-
 
 	public DownloadIndexesThread(OsmandApplication app) {
 		this.app = app;
@@ -166,9 +167,9 @@ public class DownloadIndexesThread {
 	}
 	
 	public List<IndexItem> getCurrentDownloadingItems() {
-		List<IndexItem> res = new ArrayList<IndexItem>();
+		List<IndexItem> res = new ArrayList<>();
 		IndexItem ii = currentDownloadingItem;
-		if(ii != null) {
+		if (ii != null) {
 			res.add(ii);
 		}
 		res.addAll(indexItemDownloading);
@@ -193,10 +194,10 @@ public class DownloadIndexesThread {
 
 	public int getCountedDownloads() {
 		int i = 0;
-		if(currentDownloadingItem != null && DownloadActivityType.isCountedInDownloads(currentDownloadingItem)) {
+		if (currentDownloadingItem != null && DownloadActivityType.isCountedInDownloads(currentDownloadingItem)) {
 			i++;
 		}
-		for(IndexItem ii : indexItemDownloading) {
+		for (IndexItem ii : indexItemDownloading) {
 			if (DownloadActivityType.isCountedInDownloads(ii)) {
 				i++;
 			}
@@ -220,14 +221,14 @@ public class DownloadIndexesThread {
 
 	public void runDownloadFiles(IndexItem... items) {
 		if (getCurrentRunningTask() instanceof ReloadIndexesTask) {
-			if(checkRunning(false)) {
+			if (checkRunning(false)) {
 				return;
 			}	
 		}
 		if (uiActivity instanceof Activity) {
 			app.logEvent("download_files");
 		}
-		for(IndexItem item : items) {
+		for (IndexItem item : items) {
 			if (!item.equals(currentDownloadingItem) && !indexItemDownloading.contains(item)) {
 				indexItemDownloading.add(item);
 			}
@@ -303,7 +304,7 @@ public class DownloadIndexesThread {
 	}
 
 	public double getAvailableSpace() {
-		return AndroidUtils.getAvailableSpace(app) / (1 << 20);
+		return (double) AndroidUtils.getAvailableSpace(app) / (1 << 20);
 	}
 
 	public boolean shouldDownloadIndexes() {
@@ -352,19 +353,17 @@ public class DownloadIndexesThread {
 			TrafficStats.setThreadStatsTag(THREAD_ID);
 			DownloadResources result = null;
 			DownloadOsmandIndexesHelper.IndexFileList indexFileList = DownloadOsmandIndexesHelper.getIndexesList(ctx);
-			if (indexFileList != null) {
-				try {
-					while (app.isApplicationInitializing()) {
-						Thread.sleep(200);
-					}
-					result = new DownloadResources(app);
-					result.isDownloadedFromInternet = indexFileList.isDownloadedFromInternet();
-					result.mapVersionIsIncreased = indexFileList.isIncreasedMapVersion();
-					app.getSettings().LAST_CHECKED_UPDATES.set(System.currentTimeMillis());
-					result.prepareData(indexFileList.getIndexFiles());
-				} catch (Exception e) {
-					LOG.error(e);
+			try {
+				while (app.isApplicationInitializing()) {
+					Thread.sleep(200);
 				}
+				result = new DownloadResources(app);
+				result.isDownloadedFromInternet = indexFileList.isDownloadedFromInternet();
+				result.mapVersionIsIncreased = indexFileList.isIncreasedMapVersion();
+				app.getSettings().LAST_CHECKED_UPDATES.set(System.currentTimeMillis());
+				result.prepareData(indexFileList.getIndexFiles());
+			} catch (Exception e) {
+				LOG.error(e);
 			}
 			return result == null ? new DownloadResources(app) : result;
 		}
@@ -392,14 +391,8 @@ public class DownloadIndexesThread {
 					}
 				}
 			});
-			builder.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-				}
-			});
+			builder.setNegativeButton(R.string.shared_string_cancel, (dialog, which) -> dialog.dismiss());
 			builder.show();
-
 		}
 
 		@Override
@@ -411,7 +404,7 @@ public class DownloadIndexesThread {
 
 	private class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, IndexItem, Object, String> implements DownloadFileShowWarning {
 
-		private OsmandPreference<Integer> downloads;
+		private final OsmandPreference<Integer> downloads;
 
 
 		public DownloadIndexesAsyncTask() {
@@ -443,7 +436,6 @@ public class DownloadIndexesThread {
 					}
 				} else if (o instanceof String) {
 					String message = (String) o;
-					// ctx.getString(R.string.shared_string_io_error) +": Interrupted";
 					if (!message.toLowerCase().contains("interrupted") && !message.equals(app.getString(R.string.shared_string_download_successful))) {
 						app.showToastMessage(message);
 					}
@@ -487,47 +479,43 @@ public class DownloadIndexesThread {
 		@Override
 		protected String doInBackground(IndexItem... filesToDownload) {
 			try {
-				List<File> filesToReindex = new ArrayList<File>();
+				List<File> filesToReindex = new ArrayList<>();
 				boolean forceWifi = downloadFileHelper.isWifiConnected();
-				Set<IndexItem> currentDownloads = new HashSet<IndexItem>();
-				String warn = "";
+				Set<IndexItem> currentDownloads = new HashSet<>();
+				StringBuilder warnings = new StringBuilder();
 				try {
-					downloadCycle: while (!indexItemDownloading.isEmpty()) {
+					while (!indexItemDownloading.isEmpty()) {
 						IndexItem item = indexItemDownloading.poll();
 						currentDownloadingItem = item;
 						currentDownloadingItemProgress = 0;
-						if (currentDownloads.contains(item)) {
+						if (item == null || currentDownloads.contains(item)) {
 							continue;
 						}
 						currentDownloads.add(item);
-						boolean success = false;
-						if(!validateEnoughSpace(item)) {
-							break downloadCycle;
-						}
-						if(!validateNotExceedsFreeLimit(item)) {
-							break downloadCycle;
+						if (!validateEnoughSpace(item) || !validateNotExceedsFreeLimit(item)) {
+							break;
 						}
 						setTag(item);
-						boolean result = downloadFile(item, filesToReindex, forceWifi);
-						success = result || success;
-						if (result) {
+						boolean success = downloadFile(item, filesToReindex, forceWifi);
+						if (success) {
 							if (DownloadActivityType.isCountedInDownloads(item)) {
 								downloads.set(downloads.get() + 1);
 							}
-							if(item.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)) {
-								File oldFile = new File(app.getAppPath(IndexConstants.MAPS_PATH), DownloadResources.WORLD_SEAMARKS_OLD_NAME + 
-										IndexConstants.BINARY_MAP_INDEX_EXT); 
+							if (item.getBasename().equalsIgnoreCase(DownloadResources.WORLD_SEAMARKS_KEY)) {
+								File folder = app.getAppPath(IndexConstants.MAPS_PATH);
+								String fileName = DownloadResources.WORLD_SEAMARKS_OLD_NAME
+										+ IndexConstants.BINARY_MAP_INDEX_EXT;
+								File oldFile = new File(folder, fileName);
 								Algorithms.removeAllFiles(oldFile);
 							}
 							File bf = item.getBackupFile(app);
 							if (bf.exists()) {
 								Algorithms.removeAllFiles(bf);
 							}
-							// trackEvent(entry);
 							publishProgress(item);
-							String wn = reindexFiles(filesToReindex);
-							if(!Algorithms.isEmpty(wn)) {
-								warn += " " + wn;
+							String warning = reindexFiles(filesToReindex);
+							if (!Algorithms.isEmpty(warning)) {
+								warnings.append(" ").append(warning);
 							}
 							filesToReindex.clear();
 							// slow down but let update all button work properly
@@ -538,11 +526,10 @@ public class DownloadIndexesThread {
 					currentDownloadingItem = null;
 					currentDownloadingItemProgress = 0;
 				}
-				//String warn = reindexFiles(filesToReindex);
-				if(warn.trim().length() == 0) {
+				if (warnings.toString().trim().length() == 0) {
 					return null;
 				}
-				return warn.trim();
+				return warnings.toString().trim();
 			} catch (InterruptedException e) {
 				LOG.info("Download Interrupted");
 				// do not dismiss dialog
@@ -552,7 +539,7 @@ public class DownloadIndexesThread {
 
 		private boolean validateEnoughSpace(IndexItem item) {
 			double asz = getAvailableSpace();
-			double cs =(item.contentSize / (1 << 20));
+			double cs = ((double) item.contentSize / (1 << 20));
 			// validate enough space
 			if (asz != -1 && cs > asz) {
 				String breakDownloadMessage = app.getString(R.string.download_files_not_enough_space,
@@ -584,7 +571,7 @@ public class DownloadIndexesThread {
 					vectorMapsToReindex = true;
 				}
 			}
-			List<String> warnings = new ArrayList<String>();
+			List<String> warnings = new ArrayList<>();
 			manager.indexVoiceFiles(this);
 			manager.indexFontFiles(this);
 			if (vectorMapsToReindex) {
@@ -601,17 +588,6 @@ public class DownloadIndexesThread {
 			return null;
 		}
 
-//		private void trackEvent(DownloadEntry entry) {
-//			String v = Version.getAppName(app);
-//			if (Version.isProductionVersion(app)) {
-//				v = Version.getFullVersion(app);
-//			} else {
-//				v += " test";
-//			}
-//			new DownloadTracker().trackEvent(app, v, Version.getAppName(app),
-//					entry.baseName, 1, app.getString(R.string.ga_api_key));
-//		}
-
 		@Override
 		public void showWarning(String warning) {
 			publishProgress(warning);
@@ -622,8 +598,8 @@ public class DownloadIndexesThread {
 			downloadFileHelper.setInterruptDownloading(false);
 			IndexItem.DownloadEntry de = item.createDownloadEntry(app);
 			boolean res = false;
-			if(de == null) {
-				return res;
+			if (de == null) {
+				return false;
 			}
 			if (de.isAsset) {
 				try {
