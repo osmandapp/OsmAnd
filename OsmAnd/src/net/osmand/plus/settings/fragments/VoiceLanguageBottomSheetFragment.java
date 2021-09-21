@@ -383,11 +383,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			DownloadValidationManager manager = new DownloadValidationManager(app);
-			if (DownloadActivityType.isVoiceTTS(indexItem)) {
-				manager.copyAssetsWithoutInternet(activity, indexItem);
-			} else {
-				manager.startDownload(activity, indexItem);
-			}
+			manager.startDownload(activity, indexItem);
 			indexToSelectAfterDownload = indexItem;
 		}
 	}

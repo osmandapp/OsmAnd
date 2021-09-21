@@ -1142,11 +1142,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			item.setOnMenuItemClickListener(i -> {
 				DownloadActivity downloadActivity = getDownloadActivity();
 				if (downloadActivity != null) {
-					if (DownloadActivityType.isVoiceTTS(update)) {
-						downloadActivity.copyVoiceAssetWithoutInternet(update);
-					} else {
-						downloadActivity.startDownload(update);
-					}
+					downloadActivity.startDownload(update);
 				}
 				return true;
 			});

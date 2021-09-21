@@ -17,10 +17,6 @@ public class AbstractDownloadActivity extends ActionBarProgressActivity {
 		downloadValidationManager.startDownload(this, indexItem);
 	}
 
-	public void copyVoiceAssetWithoutInternet(IndexItem indexItem) {
-		downloadValidationManager.copyAssetsWithoutInternet(this, indexItem);
-	}
-
 	public void makeSureUserCancelDownload(DownloadItem item) {
 		downloadValidationManager.makeSureUserCancelDownload(this, item);
 	}
