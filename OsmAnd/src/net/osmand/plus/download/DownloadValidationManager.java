@@ -86,14 +86,30 @@ public class DownloadValidationManager {
 	}
 
 	public void startDownload(@NonNull FragmentActivity context, IndexItem... items) {
-		if (downloadFilesCheck_1_FreeVersion(context)) {
-			downloadFilesCheck_2_Internet(context, items);
+		boolean allTts = true;
+		for (IndexItem index : items) {
+			if (!DownloadActivityType.isVoiceTTS(index)) {
+				allTts = false;
+				break;
+			}
+		}
+
+		if (allTts) {
+			copyVoiceAssetsWithoutInternet(context, items);
+		} else {
+			downloadFilesWithAllChecks(context, items);
 		}
 	}
 
-	public void copyAssetsWithoutInternet(@NonNull FragmentActivity activity, IndexItem... items) {
+	private void copyVoiceAssetsWithoutInternet(@NonNull FragmentActivity activity, IndexItem... items) {
 		if (downloadFilesCheck_1_FreeVersion(activity)) {
 			downloadFilesCheck_3_ValidateSpace(activity, items);
+		}
+	}
+
+	private void downloadFilesWithAllChecks(@NonNull FragmentActivity activity, IndexItem... items) {
+		if (downloadFilesCheck_1_FreeVersion(activity)) {
+			downloadFilesCheck_2_Internet(activity, items);
 		}
 	}
 
