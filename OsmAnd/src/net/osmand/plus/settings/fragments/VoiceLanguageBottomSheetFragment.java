@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -349,8 +350,13 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	}
 
 	private void updateVoiceProvider(IndexItem indexItem, boolean forceDismiss) {
-		settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexItem.getBasename());
-		onVoiceProviderChanged();
+		Activity activity = getActivity();
+		if (activity != null) {
+			settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexItem.getBasename());
+			onVoiceProviderChanged();
+			app.initVoiceCommandPlayer(activity, getAppMode(), false, null,
+					false, false, false);
+		}
 		if (DownloadActivityType.isVoiceTTS(indexItem) || forceDismiss) {
 			dismiss();
 		}
