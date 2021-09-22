@@ -105,6 +105,15 @@ public class MapVectorLayer extends BaseMapLayer {
 		final MapRendererView mapRenderer = view.getMapRenderer();
 		if (mapRenderer != null && !oldRender) {
 			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
+			// opengl renderer
+			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
+			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
+					.getLatitude())));
+			mapRenderer.setAzimuth(-tilesRect.getRotate());
+			mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomAnimation() + tilesRect
+					.getZoomFloatPart()));
+			float zoomMagnifier = st.MAP_DENSITY.get();
+			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 		} else {
 			if (!view.isZooming()) {
 				if (resourceManager.updateRenderedMapNeeded(tilesRect, drawSettings)) {

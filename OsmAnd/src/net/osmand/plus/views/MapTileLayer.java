@@ -52,11 +52,7 @@ public class MapTileLayer extends BaseMapLayer {
 	private boolean useSampling;
 
 	private boolean is_set_provider = false;
-	private boolean oldRender = false;
-	private String cachedUnderlay;
-	private Integer cachedMapTransparency;
-	private String cachedOverlay;
-	private Integer cachedOverlayTransparency;
+	private static final Log LOG = PlatformUtil.getLog(MapTileLayer.class);
 
 	public MapTileLayer(@NonNull Context context, boolean mainMap) {
 		super(context);
@@ -92,18 +88,17 @@ public class MapTileLayer extends BaseMapLayer {
 		super.setAlpha(alpha);
 		if (paintBitmap != null) {
 			paintBitmap.setAlpha(alpha);
-		}//*
+		}
 		if (view != null) {
 			float zorder = view.getZorder(this);
 			int layer_index = (int)(zorder * 100.0);
-			//LOG.error("alpha = " + alpha + "  zorder = " + zorder + "  layer_index =" + layer_index);
 			final MapRendererView mapRenderer = view.getMapRenderer();
-			if (mapRenderer != null && !oldRender) {
+			if (mapRenderer != null) {
 				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 				mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
 				mapRenderer.setMapLayerConfiguration(layer_index, mapLayerConfiguration);
 			}
-		}//*/
+		}
 	}
 	
 	public void setMapTileAdapter(MapTileAdapter mapTileAdapter) {
@@ -137,6 +132,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 		this.map = map;
 		setMapTileAdapter(target);
+		is_set_provider = false;
 	}
 	
 	public MapTileAdapter getMapTileAdapter() {
@@ -152,20 +148,12 @@ public class MapTileLayer extends BaseMapLayer {
 		if (mapTileAdapter != null) {
 			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
 		}
-
 		final MapRendererView mapRenderer = view.getMapRenderer();
-		if (mapRenderer != null && !oldRender) {
+		if (mapRenderer != null) {
 			float zorder = view.getZorder(this);
 			int layer_index = (int)(zorder * 100.0);
-			if (is_set_provider == false && layer_index == 69) {
+			if (is_set_provider == false ) {
 				is_set_provider = true;
-				if (map != null) {
-					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), map);
-					mapRenderer.setMapLayerProvider(-1, prov.instantiateProxy(true));
-					prov.swigReleaseOwnership();
-				} else {
-					mapRenderer.resetMapLayerProvider(-1);
-				}
 				if (map != null) {
 					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), map);
 					mapRenderer.setMapLayerProvider(layer_index, prov.instantiateProxy(true));
