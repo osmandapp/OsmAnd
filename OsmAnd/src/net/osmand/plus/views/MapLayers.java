@@ -4,7 +4,6 @@ package net.osmand.plus.views;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -219,11 +218,11 @@ public class MapLayers {
 	public boolean hasMapActivity() {
 		OsmandMapTileView mapView = getApplication().getOsmandMap().getMapView();
 		for (OsmandMapLayer layer : mapView.getLayers()) {
-			if (layer.getMapActivity() == null) {
-				return false;
+			if (layer.getMapActivity() != null) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	public void updateLayers(@Nullable MapActivity mapActivity) {
