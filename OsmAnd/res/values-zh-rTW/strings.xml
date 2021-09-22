@@ -4318,4 +4318,6 @@
     <string name="start_point">開始</string>
     <string name="mapillary_menu_filter_description_new">按日期或類型過濾圖片。僅在超近縮放中有用。</string>
     <string name="service_is_not_available_please_try_later">服務不可用，請再試一次</string>
+    <string name="shared_string_files">檔案</string>
+    <string name="travel_route_types">路線類型</string>
 </resources>
