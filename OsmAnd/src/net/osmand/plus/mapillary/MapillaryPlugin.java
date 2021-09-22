@@ -117,9 +117,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		createLayers(context);
-		if (mapActivity != null) {
-			registerWidget(mapActivity);
-		}
 	}
 
 	private void createLayers(@NonNull Context context) {
@@ -128,14 +125,14 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
-		updateMapLayers(context, false);
+		updateMapLayers(context, mapActivity, false);
 	}
 
-	public void updateLayers(@NonNull Context context, boolean force) {
-		updateMapLayers(context, force);
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity, boolean force) {
+		updateMapLayers(context, mapActivity, force);
 	}
 
-	private void updateMapLayers(@NonNull Context context, boolean force) {
+	private void updateMapLayers(@NonNull Context context, @Nullable MapActivity mapActivity, boolean force) {
 		if (vectorLayer == null) {
 			createLayers(context);
 		}
@@ -147,9 +144,21 @@ public class MapillaryPlugin extends OsmandPlugin {
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getMapillaryVectorSource().getName(), false);
 			}
 			updateLayer(mapView, vectorSource, vectorLayer, 0.62f);
+			if (mapillaryControl == null && mapActivity != null) {
+				registerWidget(mapActivity);
+			}
 		} else {
 			mapView.removeLayer(vectorLayer);
 			vectorLayer.setMap(null);
+			if (mapActivity != null) {
+				MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+				if (mapillaryControl != null && mapInfoLayer != null) {
+					mapInfoLayer.removeSideWidget(mapillaryControl);
+					mapillaryControl = null;
+					mapInfoLayer.recreateControls();
+				}
+			}
+			mapillaryControl = null;
 		}
 		app.getOsmandMap().getMapLayers().updateMapSource(mapView, null);
 	}
@@ -182,7 +191,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 				final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 				if (itemId == R.string.street_level_imagery) {
 					settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
-					updateMapLayers(mapActivity, false);
+					updateMapLayers(mapActivity, mapActivity, false);
 					ContextMenuItem item = adapter.getItem(pos);
 					if (item != null) {
 						item.setSelected(settings.SHOW_MAPILLARY.get());
@@ -270,6 +279,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public void mapActivityPause(MapActivity activity) {
+		this.mapillaryControl = null;
 		this.mapActivity = null;
 	}
 

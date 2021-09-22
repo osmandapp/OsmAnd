@@ -30,13 +30,13 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends Fragment {
 	}
 
 	public static void showInstance(@NonNull AudioVideoNoteRecordingMenuFullScreen menu) {
-		FragmentManager fragmentManager = menu.getMapActivity().getSupportFragmentManager();
+		FragmentManager fragmentManager = menu.requireMapActivity().getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			AudioVideoNoteRecordingMenuFullScreenFragment fragment = new AudioVideoNoteRecordingMenuFullScreenFragment();
 			fragment.menu = menu;
