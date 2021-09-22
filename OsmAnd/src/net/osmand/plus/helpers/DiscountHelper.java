@@ -364,7 +364,7 @@ public class DiscountHelper {
 				}
 			}
 		} else if (url.equals(OPEN_ACTIVITY)) {
-			if (mData.activityJson != null) {
+			if (mData != null && mData.activityJson != null) {
 				openActivity(mapActivity, mData.activityJson);
 			}
 		} else if (url.startsWith(SHOW_CHOOSE_PLAN_PREFIX)) {
@@ -378,26 +378,25 @@ public class DiscountHelper {
 	}
 
 	private static void showDialogForPlanType(@NonNull MapActivity mapActivity, @NonNull String planType) {
-		if (planType.startsWith(CHOOSE_PLAN_TYPE_PRO)) {
-			if (planType.length() > CHOOSE_PLAN_TYPE_PRO.length()) {
-				String purchaseId = planType.substring(CHOOSE_PLAN_TYPE_PRO.length()).replace(":", "").trim();
-				OsmAndProPlanFragment.showInstance(mapActivity, purchaseId);
-			} else {
-				OsmAndProPlanFragment.showInstance(mapActivity);
-			}
-			return;
-		} else if (planType.startsWith(CHOOSE_PLAN_TYPE_MAPS_PLUS)) {
-			if (planType.length() > CHOOSE_PLAN_TYPE_MAPS_PLUS.length()) {
-				String purchaseId = planType.substring(CHOOSE_PLAN_TYPE_MAPS_PLUS.length()).replace(":", "").trim();
-				MapsPlusPlanFragment.showInstance(mapActivity, purchaseId);
-			} else {
-				MapsPlusPlanFragment.showInstance(mapActivity);
-			}
-			return;
+		String purchaseId = null;
+		if (mData != null && mData.urlParams != null) {
+			purchaseId = mData.urlParams.optString("selectedPriceBtnId");
 		}
 		switch (planType) {
 			case CHOOSE_PLAN_TYPE_FREE:
-				MapsPlusPlanFragment.showInstance(mapActivity);
+			case CHOOSE_PLAN_TYPE_MAPS_PLUS:
+				if (Algorithms.isEmpty(purchaseId)) {
+					MapsPlusPlanFragment.showInstance(mapActivity);
+				} else {
+					MapsPlusPlanFragment.showInstance(mapActivity, purchaseId);
+				}
+				break;
+			case CHOOSE_PLAN_TYPE_PRO:
+				if (Algorithms.isEmpty(purchaseId)) {
+					OsmAndProPlanFragment.showInstance(mapActivity);
+				} else {
+					OsmAndProPlanFragment.showInstance(mapActivity, purchaseId);
+				}
 				break;
 			case CHOOSE_PLAN_TYPE_SEA_DEPTH:
 				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.NAUTICAL);
@@ -487,6 +486,7 @@ public class DiscountHelper {
 		@ColorInt
 		int textBtnTitleColor = -1;
 
+		JSONObject urlParams;
 		JSONObject activityJson;
 		JSONArray oneOfConditions;
 
@@ -503,6 +503,7 @@ public class DiscountHelper {
 			res.descrColor = parseColor("description_color", obj);
 			res.statusBarColor = parseColor("status_bar_color", obj);
 			res.textBtnTitleColor = parseColor("button_title_color", obj);
+			res.urlParams = obj.optJSONObject("url_params");
 			res.activityJson = obj.optJSONObject("activity");
 			res.oneOfConditions = obj.optJSONArray("oneOfConditions");
 			return res;
