@@ -1,6 +1,11 @@
 package net.osmand.plus.routing;
 
 
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PREPARE_TURN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_TURN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
+
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -35,11 +40,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PREPARE_TURN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_TURN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
 
 
 public class VoiceRouter {
@@ -322,35 +322,18 @@ public class VoiceRouter {
 		AlarmInfoType type = info.getType();
 		if (type == AlarmInfoType.SPEED_LIMIT) {
 			announceSpeedAlarm(info.getIntValue(), speed);
-		} else if (type == AlarmInfoType.SPEED_CAMERA) {
-			if (router.getSettings().SPEAK_SPEED_CAMERA.get()) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					p.attention(type+"");
-				}
-				play(p);
-			}
-		} else if (type == AlarmInfoType.PEDESTRIAN) {
-			if (router.getSettings().SPEAK_PEDESTRIAN.get()) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					p.attention(type+"");
-				}
-				play(p);
-			}
-		} else if (type == AlarmInfoType.TUNNEL) {
-			if (router.getSettings().SPEAK_TUNNELS.get()) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					p.attention(type+"");
-				}
-				play(p);
-			}
 		} else {
-			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get()) {
+			OsmandSettings settings = router.getSettings();
+			boolean speakTrafficWarnings = settings.SPEAK_TRAFFIC_WARNINGS.get();
+			boolean speakTunnels = type == AlarmInfoType.TUNNEL && settings.SPEAK_TUNNELS.get();
+			boolean speakPedestrian = type == AlarmInfoType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();
+			boolean speakSpeedCamera = type == AlarmInfoType.SPEED_CAMERA && settings.SPEAK_SPEED_CAMERA.get();
+			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN || type == AlarmInfoType.SPEED_CAMERA;
+
+			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
-					p.attention(type+"");
+					p.attention(String.valueOf(type));
 				}
 				play(p);
 				// See Issue 2377: Announce destination again - after some motorway tolls roads split shortly after the toll
