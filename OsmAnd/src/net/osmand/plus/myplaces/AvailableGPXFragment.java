@@ -1,5 +1,13 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
+import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+import static net.osmand.util.Algorithms.formatDuration;
+import static net.osmand.util.Algorithms.objectEquals;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -43,6 +51,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Collator;
+import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.FileUtils;
 import net.osmand.FileUtils.RenameCallback;
 import net.osmand.GPXUtilities;
@@ -84,6 +93,7 @@ import net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.search.core.SearchPhrase.NameStringMatcher;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -99,14 +109,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.GpxSelectionHelper.CURRENT_TRACK;
-import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.track.TrackMenuFragment.openTrack;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-import static net.osmand.util.Algorithms.formatDuration;
-import static net.osmand.util.Algorithms.objectEquals;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment implements
 		FavoritesFragmentStateHolder, OsmAuthorizationListener, OnTrackFileMoveListener, RenameCallback {
@@ -1543,16 +1545,17 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();
-			final List<GpxInfo> raw = asyncLoader.getResult();
+			List<GpxInfo> raw = asyncLoader.getResult();
 			if (constraint == null || constraint.length() == 0 || raw == null) {
 				results.values = raw;
 				results.count = 1;
 			} else {
-				String cs = constraint.toString();
+				String namePart = constraint.toString();
+				NameStringMatcher matcher = new NameStringMatcher(namePart, StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 				List<GpxInfo> res = new ArrayList<>();
-				for (GpxInfo r : raw) {
-					if (r.getName().toLowerCase().contains(cs)) {
-						res.add(r);
+				for (GpxInfo gpxInfo : raw) {
+					if (matcher.matches(gpxInfo.getName())) {
+						res.add(gpxInfo);
 					}
 				}
 				results.values = res;
