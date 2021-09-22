@@ -1,11 +1,10 @@
 package net.osmand.plus.voice;
 
-import android.app.Activity;
-
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
 import org.mozilla.javascript.ScriptableObject;
 
@@ -18,8 +17,9 @@ public class JSTTSCommandPlayerImpl extends TTSCommandPlayerImpl {
 
     private ScriptableObject jsScope;
 
-    public JSTTSCommandPlayerImpl(Activity activity, ApplicationMode applicationMode, VoiceRouter vrt, String voiceProvider) throws CommandPlayerException {
-        super(activity, applicationMode, vrt, voiceProvider);
+    public JSTTSCommandPlayerImpl(OsmandApplication app, ApplicationMode applicationMode, VoiceRouter vrt,
+                                  String voiceProvider) throws CommandPlayerException {
+        super(app, applicationMode, vrt, voiceProvider);
         org.mozilla.javascript.Context context = org.mozilla.javascript.Context.enter();
         context.setOptimizationLevel(-1);
         jsScope = context.initSafeStandardObjects();

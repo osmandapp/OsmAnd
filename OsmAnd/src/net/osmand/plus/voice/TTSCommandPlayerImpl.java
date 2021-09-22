@@ -1,7 +1,5 @@
 package net.osmand.plus.voice;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.os.Build;
@@ -12,8 +10,8 @@ import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.api.AudioFocusHelperImpl;
+import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
@@ -28,7 +26,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-
 public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 	public final static String PEBBLE_ALERT = "PEBBLE_ALERT";
 	public final static String WEAR_ALERT = "WEAR_ALERT";
@@ -41,28 +38,23 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 	private static TextToSpeech mTts;
 	private static String ttsVoiceStatus = "-";
 	private static String ttsVoiceUsed = "-";
-	private Context mTtsContext;
-	private HashMap<String, String> params = new HashMap<String, String>();
+	private HashMap<String, String> params = new HashMap<>();
 	private VoiceRouter vrt;
 
-	public TTSCommandPlayerImpl(Activity ctx, ApplicationMode applicationMode, VoiceRouter vrt, String voiceProvider)
-			throws CommandPlayerException {
-		super((OsmandApplication) ctx.getApplicationContext(), applicationMode, voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
+	public TTSCommandPlayerImpl(OsmandApplication app, ApplicationMode applicationMode, VoiceRouter vrt,
+	                            String voiceProvider) throws CommandPlayerException {
+		super(app, applicationMode, voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
 		this.vrt = vrt;
 		if (Algorithms.isEmpty(language)) {
-			throw new CommandPlayerException(
-					ctx.getString(R.string.voice_data_corrupted));
+			throw new CommandPlayerException(app.getString(R.string.voice_data_corrupted));
 		}
-		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		if(app.accessibilityEnabled()) {
+		if (app.accessibilityEnabled()) {
 			cSpeechRate = app.getSettings().SPEECH_RATE.get();
 		}
-		initializeEngine(app);
+		initializeEngine();
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_MANAGER_STREAM
 				.getModeValue(getApplicationMode()).toString());
 	}
-	
-	
 
 	/**
 	 * Since TTS requests are asynchronous, playCommands() can be called before
@@ -143,12 +135,10 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 		}
 	}
 
-	private void initializeEngine(final OsmandApplication app) {
-		if (mTtsContext != app) {
-			internalClear();
-		}
+	private void initializeEngine() {
+		internalClear();
+
 		if (mTts == null) {
-			mTtsContext = app;
 			ttsVoiceStatus = "-";
 			ttsVoiceUsed = "-";
 			ttsRequests = 0;
@@ -172,12 +162,10 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 			//Locale newLocale0 = new Locale(lsplit[0], lregion, lvariant); (Setting variant here seems to cause errors on some systems)
 			Locale newLocale0 = new Locale(lsplit[0], lregion);
 			// #3344: Try Locale builder instead (only available from API 21), also supports script (we support as 4 letters)
-			if (android.os.Build.VERSION.SDK_INT >= 21) {
-				try {
-					newLocale0 = new Locale.Builder().setLanguage(lsplit[0]).setScript(lscript).setRegion(lregion).setVariant(lvariant).build();
-				} catch (RuntimeException e) {
-					// Falls back to constructor
-				}
+			try {
+				newLocale0 = new Locale.Builder().setLanguage(lsplit[0]).setScript(lscript).setRegion(lregion).setVariant(lvariant).build();
+			} catch (RuntimeException e) {
+				// Falls back to constructor
 			}
 			final Locale newLocale = newLocale0;
 
@@ -287,7 +275,6 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 			mTts = null;
 		}
 		abandonAudioFocus();
-		mTtsContext = null;
 		ttsVoiceStatus = "-";
 		ttsVoiceUsed = "-";
 	}
