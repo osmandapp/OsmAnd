@@ -25,7 +25,7 @@ import java.util.List;
  * It gets commands from input, analyze what files should be played and play 
  * them using media player 
  */
-public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implements MediaPlayer.OnCompletionListener {
+public class MediaCommandPlayerImpl extends BaseCommandPlayer implements MediaPlayer.OnCompletionListener {
 	
 	private static final String CONFIG_FILE = "_config.p";
 	private static final int[] MEDIA_VOICE_VERSION = new int[] { 0 }; // MUST BE SORTED, list of supported versions

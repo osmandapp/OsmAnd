@@ -3,9 +3,6 @@ package net.osmand.plus.voice;
 import android.content.Context;
 import android.media.AudioManager;
 
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
@@ -38,9 +35,9 @@ import alice.tuprolog.Term;
 import alice.tuprolog.Theory;
 import alice.tuprolog.Var;
 
-public abstract class AbstractPrologCommandPlayer implements CommandPlayer, StateChangedListener<ApplicationMode> {
+public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedListener<ApplicationMode> {
 
-	private static final Log log = PlatformUtil.getLog(AbstractPrologCommandPlayer.class);
+	private static final Log log = PlatformUtil.getLog(BaseCommandPlayer.class);
 
 	protected OsmandApplication ctx;
 	protected File voiceDir;
@@ -58,7 +55,6 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	public static final String A_RIGHT_KEEP = "right_keep";
 
 	protected static final String DELAY_CONST = "delay_";
-	private static final String WEAR_ALERT = "WEAR_ALERT";
 	/** Must be sorted array! */
 	private int[] sortedVoiceVersions;
 	private static AudioFocusHelper mAudioFocusHelper;
@@ -68,7 +64,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	private ApplicationMode applicationMode;
 
 
-	protected AbstractPrologCommandPlayer(OsmandApplication ctx, ApplicationMode applicationMode,
+	protected BaseCommandPlayer(OsmandApplication ctx, ApplicationMode applicationMode,
 										  String voiceProvider, String configFile, int[] sortedVoiceVersions)
 			throws CommandPlayerException {
 		this.ctx = ctx;
@@ -81,12 +77,12 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		initVoiceDir(voiceProvider);
 		if (voiceDir != null && (MediaCommandPlayerImpl.isMyData(voiceDir) || TTSCommandPlayerImpl.isMyData(voiceDir))) {
 			if (log.isInfoEnabled()) {
-				log.info("Initializing prolog system : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$
+				log.info("Initializing prolog system : " + (System.currentTimeMillis() - time));
 			}
 			try {
 				prologSystem = new Prolog(getLibraries());
 			} catch (InvalidLibraryException e) {
-				log.error("Initializing error", e); //$NON-NLS-1$
+				log.error("Initializing error", e);
 				throw new RuntimeException(e);
 			}
 			init(voiceProvider, ctx.getSettings(), configFile);
@@ -133,20 +129,12 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	private void init(String voiceProvider, OsmandSettings settings, String configFile) throws CommandPlayerException {
 		prologSystem.clearTheory();
 
-		// see comments below why it is impossible to read from zip (don't know
-		// how to play file from zip)
-		// voiceZipFile = null;
 		if (voiceDir != null) {
 			long time = System.currentTimeMillis();
 			boolean wrong = false;
 			try {
 				InputStream config;
-				//			if (voiceDir.getName().endsWith(".zip")) { //$NON-NLS-1$
-				// voiceZipFile = new ZipFile(voiceDir);
-				//				config = voiceZipFile.getInputStream(voiceZipFile.getEntry("_config.p")); //$NON-NLS-1$
-				// } else {
-				config = new FileInputStream(new File(voiceDir, configFile)); //$NON-NLS-1$
-				// }
+				config = new FileInputStream(new File(voiceDir, configFile));
 				MetricsConstants mc = settings.METRIC_SYSTEM.get();
 				settings.APPLICATION_MODE.addListener(this);
 				prologSystem.getTheoryManager()
@@ -156,11 +144,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 				prologSystem.addTheory(new Theory("measure('"+mc.toTTSString()+"')."));
 				prologSystem.addTheory(new Theory(config));
 				config.close();
-			} catch (InvalidTheoryException e) {
-				log.error("Loading voice config exception " + voiceProvider, e); //$NON-NLS-1$
-				wrong = true;
-			} catch (IOException e) {
-				log.error("Loading voice config exception " + voiceProvider, e); //$NON-NLS-1$
+			} catch (InvalidTheoryException | IOException e) {
+				log.error("Loading voice config exception " + voiceProvider, e);
 				wrong = true;
 			}
 			if (wrong) {
@@ -173,9 +158,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 				currentVersion = ((Number)val).intValue();
 			}
 			if (log.isInfoEnabled()) {
-				log.info("Initializing voice subsystem  " + voiceProvider + " : " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$
+				log.info("Initializing voice subsystem  " + voiceProvider + " : " + (System.currentTimeMillis() - time));
 			}
-
 		}
 	}
 
@@ -193,7 +177,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	protected Term solveSimplePredicate(String predicate) {
 		Term val = null;
-		Var v = new Var("MyVariable"); //$NON-NLS-1$
+		Var v = new Var("MyVariable");
 		SolveInfo s = prologSystem.solve(new Struct(predicate, v));
 		if (s.isSuccess()) {
 			prologSystem.solveEnd();
@@ -208,7 +192,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	@Override
 	public List<String> execute(List<Struct> listCmd){
 		Struct list = new Struct(listCmd.toArray(new Term[0]));
-		Var result = new Var("RESULT"); //$NON-NLS-1$
+		Var result = new Var("RESULT");
 		List<String> files = new ArrayList<String>();
 		if(prologSystem == null) {
 			return files;
@@ -274,12 +258,9 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 
 	protected synchronized void requestAudioFocus() {
 		log.debug("requestAudioFocus");
-		if (android.os.Build.VERSION.SDK_INT >= 8) {
-			mAudioFocusHelper = getAudioFocus();
-		}
+		mAudioFocusHelper = getAudioFocus();
 		if (mAudioFocusHelper != null && ctx != null) {
 			boolean audioFocusGranted = mAudioFocusHelper.requestAudFocus(ctx, applicationMode, streamType);
-			// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
 			if (audioFocusGranted && ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0) {
 				toggleBtSco(true);
 			}
@@ -297,7 +278,8 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	
 	protected synchronized void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
-		if ((ctx != null && ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0) || (btScoStatus == true)) {
+		if ((ctx != null && ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0)
+				|| btScoStatus) {
 			toggleBtSco(false);
 		}
 		if (ctx != null && mAudioFocusHelper != null) {
@@ -328,7 +310,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			} catch (Exception e) {
 				System.out.println("Exception starting BT SCO " + e.getMessage() );
 				btScoStatus = false;
-				btScoInit = "Available, but not initializad.\n(" + e.getMessage() + ")";
+				btScoInit = "Available, but not initialized.\n(" + e.getMessage() + ")";
 				return false;
 			}
 			btScoInit = "Available, initialized OK.";
@@ -345,5 +327,4 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			return true;
 		}
 	}
-
 }

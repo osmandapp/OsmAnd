@@ -30,7 +30,7 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
+public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 	public final static String PEBBLE_ALERT = "PEBBLE_ALERT";
 	public final static String WEAR_ALERT = "WEAR_ALERT";
 

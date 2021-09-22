@@ -23,7 +23,7 @@ import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.voice.AbstractPrologCommandPlayer;
+import net.osmand.plus.voice.BaseCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.ExitInfo;
@@ -808,21 +808,21 @@ public class VoiceRouter {
 	
 	private String getTurnType(TurnType t) {
 		if (TurnType.TL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT;
+			return BaseCommandPlayer.A_LEFT;
 		} else if (TurnType.TSHL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_SH;
+			return BaseCommandPlayer.A_LEFT_SH;
 		} else if (TurnType.TSLL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_SL;
+			return BaseCommandPlayer.A_LEFT_SL;
 		} else if (TurnType.TR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT;
+			return BaseCommandPlayer.A_RIGHT;
 		} else if (TurnType.TSHR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_SH;
+			return BaseCommandPlayer.A_RIGHT_SH;
 		} else if (TurnType.TSLR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_SL;
+			return BaseCommandPlayer.A_RIGHT_SL;
 		} else if (TurnType.KL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_KEEP;
+			return BaseCommandPlayer.A_LEFT_KEEP;
 		} else if (TurnType.KR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_KEEP;
+			return BaseCommandPlayer.A_RIGHT_KEEP;
 		}
 		return null;
 	}
