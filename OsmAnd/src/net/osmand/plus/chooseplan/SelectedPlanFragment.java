@@ -54,7 +54,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	protected List<OsmAndFeature> noIncludedFeatures = new ArrayList<>();
 	protected List<OsmAndFeature> previewFeatures = new ArrayList<>();
 	protected List<PriceButton<?>> priceButtons = new ArrayList<>();
-	private Map<PriceButton<?>, View> buttonViews = new HashMap<>();
+	private final Map<PriceButton<?>, View> buttonViews = new HashMap<>();
 	private PriceButton<?> selectedPriceButton;
 
 	@Override
@@ -66,19 +66,29 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		collectPriceButtons(priceButtons);
-		if (priceButtons.size() > 0) {
-			selectedPriceButton = priceButtons.get(0);
-		}
-		if (savedInstanceState != null && savedInstanceState.containsKey(SELECTED_PRICE_BTN)) {
-			String key = savedInstanceState.getString(SELECTED_PRICE_BTN);
-			for (PriceButton<?> button : priceButtons) {
-				if (Algorithms.objectEquals(key, button.getId())) {
-					selectedPriceButton = button;
-					break;
-				}
+
+		if (!Algorithms.isEmpty(priceButtons)) {
+			selectedPriceButton = getSelectedPriceButton(savedInstanceState);
+			if (selectedPriceButton == null) {
+				selectedPriceButton = getSelectedPriceButton(getArguments());
+			}
+			if (selectedPriceButton == null) {
+				selectedPriceButton = priceButtons.get(0);
 			}
 		}
 		collectFeatures();
+	}
+
+	private PriceButton<?> getSelectedPriceButton(@Nullable Bundle bundle) {
+		if (bundle != null && bundle.containsKey(SELECTED_PRICE_BTN)) {
+			String key = bundle.getString(SELECTED_PRICE_BTN);
+			for (PriceButton<?> button : priceButtons) {
+				if (Algorithms.objectEquals(key, button.getId())) {
+					return button;
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override

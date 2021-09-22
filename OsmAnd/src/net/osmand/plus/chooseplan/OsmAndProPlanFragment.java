@@ -1,6 +1,9 @@
 package net.osmand.plus.chooseplan;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
@@ -11,14 +14,20 @@ import net.osmand.plus.chooseplan.button.SubscriptionButton;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OsmAndProPlanFragment extends SelectedPlanFragment {
 
-	public static void showInstance(@NonNull FragmentActivity activity) {
+	public static void showInstance(@NonNull FragmentActivity activity, @Nullable String selectedButtonId) {
 		OsmAndProPlanFragment fragment = new OsmAndProPlanFragment();
+		if (!Algorithms.isEmpty(selectedButtonId)) {
+			Bundle args = new Bundle();
+			args.putString(SELECTED_PRICE_BTN, selectedButtonId);
+			fragment.setArguments(args);
+		}
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
 
@@ -52,8 +61,8 @@ public class OsmAndProPlanFragment extends SelectedPlanFragment {
 	}
 
 	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
-	                                                       InAppPurchaseHelper purchaseHelper,
-	                                                       boolean nightMode) {
+														   InAppPurchaseHelper purchaseHelper,
+														   boolean nightMode) {
 		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
 		List<SubscriptionButton> subscriptionButtons =
 				PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions, nightMode);

@@ -14,6 +14,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -52,10 +56,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
 
 public class DiscountHelper {
 
@@ -320,9 +320,9 @@ public class DiscountHelper {
 					for (InAppPurchase p : purchaseHelper.getSubscriptions().getAllSubscriptions()) {
 						if (url.contains(p.getSku())) {
 							if (purchases.isMapsSubscription(p)) {
-								MapsPlusPlanFragment.showInstance(mapActivity);
+								MapsPlusPlanFragment.showInstance(mapActivity, p.getSku());
 							} else if (purchases.isOsmAndProSubscription(p)) {
-								OsmAndProPlanFragment.showInstance(mapActivity);
+								OsmAndProPlanFragment.showInstance(mapActivity, p.getSku());
 							} else {
 								ChoosePlanFragment.showDefaultInstance(mapActivity);
 							}
@@ -378,13 +378,24 @@ public class DiscountHelper {
 	}
 
 	private static void showDialogForPlanType(@NonNull MapActivity mapActivity, @NonNull String planType) {
+		if (planType.startsWith(CHOOSE_PLAN_TYPE_PRO)) {
+			String purchaseId = null;
+			if (planType.length() > CHOOSE_PLAN_TYPE_PRO.length()) {
+				purchaseId = planType.substring(CHOOSE_PLAN_TYPE_PRO.length()).replace(":", "").trim();
+			}
+			OsmAndProPlanFragment.showInstance(mapActivity, purchaseId);
+			return;
+		} else if (planType.startsWith(CHOOSE_PLAN_TYPE_MAPS_PLUS)) {
+			String purchaseId = null;
+			if (planType.length() > CHOOSE_PLAN_TYPE_MAPS_PLUS.length()) {
+				purchaseId = planType.substring(CHOOSE_PLAN_TYPE_MAPS_PLUS.length()).replace(":", "").trim();
+			}
+			MapsPlusPlanFragment.showInstance(mapActivity, purchaseId);
+			return;
+		}
 		switch (planType) {
 			case CHOOSE_PLAN_TYPE_FREE:
-			case CHOOSE_PLAN_TYPE_MAPS_PLUS:
-				MapsPlusPlanFragment.showInstance(mapActivity);
-				break;
-			case CHOOSE_PLAN_TYPE_PRO:
-				OsmAndProPlanFragment.showInstance(mapActivity);
+				MapsPlusPlanFragment.showInstance(mapActivity, null);
 				break;
 			case CHOOSE_PLAN_TYPE_SEA_DEPTH:
 				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.NAUTICAL);
