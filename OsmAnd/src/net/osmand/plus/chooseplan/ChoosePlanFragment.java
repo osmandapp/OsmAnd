@@ -224,7 +224,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 				osmAndProIconId,
 				getString(R.string.osmand_pro),
 				price,
-				v -> OsmAndProPlanFragment.showInstance(requireActivity(), null),
+				v -> OsmAndProPlanFragment.showInstance(requireActivity()),
 				Version.isInAppPurchaseSupported());
 
 		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper, nightMode);
@@ -238,7 +238,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 				mapsPlusIconId,
 				getString(R.string.maps_plus),
 				price,
-				v -> MapsPlusPlanFragment.showInstance(requireActivity(), null),
+				v -> MapsPlusPlanFragment.showInstance(requireActivity()),
 				availableInMapsPlus && Version.isInAppPurchaseSupported());
 	}
 
