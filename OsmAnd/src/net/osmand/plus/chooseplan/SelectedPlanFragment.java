@@ -50,7 +50,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	private static final Log LOG = PlatformUtil.getLog(SelectedPlanFragment.class);
 
 	private static final String PURCHASES_INFO = "https://docs.osmand.net/en/main@latest/osmand/purchases/android";
-	public static final String SELECTED_PRICE_BTN = "selected_price_button";
+	public static final String SELECTED_PRICE_BTN_ID = "selected_price_btn_id";
 
 	protected List<OsmAndFeature> includedFeatures = new ArrayList<>();
 	protected List<OsmAndFeature> noIncludedFeatures = new ArrayList<>();
@@ -82,8 +82,8 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	}
 
 	private PriceButton<?> getSelectedPriceButton(@Nullable Bundle bundle) {
-		if (bundle != null && bundle.containsKey(SELECTED_PRICE_BTN)) {
-			String key = bundle.getString(SELECTED_PRICE_BTN);
+		if (bundle != null && bundle.containsKey(SELECTED_PRICE_BTN_ID)) {
+			String key = bundle.getString(SELECTED_PRICE_BTN_ID);
 			for (PriceButton<?> button : priceButtons) {
 				if (Algorithms.objectEquals(key, button.getId())) {
 					return button;
@@ -97,7 +97,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (selectedPriceButton != null) {
-			outState.putString(SELECTED_PRICE_BTN, selectedPriceButton.getId());
+			outState.putString(SELECTED_PRICE_BTN_ID, selectedPriceButton.getId());
 		}
 	}
 

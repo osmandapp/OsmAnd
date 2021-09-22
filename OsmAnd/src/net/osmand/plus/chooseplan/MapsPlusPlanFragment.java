@@ -3,7 +3,6 @@ package net.osmand.plus.chooseplan;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.plus.OsmandApplication;
@@ -14,20 +13,22 @@ import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchases;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
-import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MapsPlusPlanFragment extends SelectedPlanFragment {
 
-	public static void showInstance(@NonNull FragmentActivity activity, @Nullable String selectedButtonId) {
+	public static void showInstance(@NonNull FragmentActivity activity) {
 		MapsPlusPlanFragment fragment = new MapsPlusPlanFragment();
-		if (!Algorithms.isEmpty(selectedButtonId)) {
-			Bundle args = new Bundle();
-			args.putString(SELECTED_PRICE_BTN, selectedButtonId);
-			fragment.setArguments(args);
-		}
+		fragment.show(activity.getSupportFragmentManager(), TAG);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String selectedButtonId) {
+		Bundle args = new Bundle();
+		args.putString(SELECTED_PRICE_BTN_ID, selectedButtonId);
+		MapsPlusPlanFragment fragment = new MapsPlusPlanFragment();
+		fragment.setArguments(args);
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
 

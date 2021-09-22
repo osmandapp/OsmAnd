@@ -73,7 +73,7 @@ public class ActionButtonViewHolder extends RecyclerView.ViewHolder {
 		} else if (status == BackupStatus.SUBSCRIPTION_EXPIRED) {
 			actionButton.setOnClickListener(v -> {
 				if (Version.isInAppPurchaseSupported()) {
-					OsmAndProPlanFragment.showInstance(mapActivity, null);
+					OsmAndProPlanFragment.showInstance(mapActivity);
 				} else {
 					PromoCodeBottomSheet.showInstance(mapActivity.getSupportFragmentManager());
 				}
