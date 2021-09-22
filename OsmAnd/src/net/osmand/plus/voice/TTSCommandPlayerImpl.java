@@ -8,7 +8,6 @@ import android.os.Build;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
-import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -58,7 +57,7 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 		if(app.accessibilityEnabled()) {
 			cSpeechRate = app.getSettings().SPEECH_RATE.get();
 		}
-		initializeEngine(app, ctx);
+		initializeEngine(app);
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_MANAGER_STREAM
 				.getModeValue(getApplicationMode()).toString());
 	}
@@ -88,29 +87,22 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 		if (mTts != null && !vrt.isMute() && speechAllowed) {
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-					mTts.setAudioAttributes(new AudioAttributes.Builder()
-							.setUsage(ctx.getSettings().AUDIO_USAGE.get())
-							.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-							.build());
-				}
+				mTts.setAudioAttributes(new AudioAttributes.Builder()
+						.setUsage(app.getSettings().AUDIO_USAGE.get())
+						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+						.build());
 				// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
-				if (ctx != null) {
-					Integer streamModeValue = ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
-					OsmandPreference<Integer> pref = ctx.getSettings().VOICE_PROMPT_DELAY[streamModeValue];
+				if (app != null) {
+					Integer streamModeValue = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
+					OsmandPreference<Integer> pref = app.getSettings().VOICE_PROMPT_DELAY[streamModeValue];
 					int vpd = pref == null ? 0 : pref.getModeValue(getApplicationMode());
 					if (vpd > 0) {
 						ttsRequests++;
-						if (android.os.Build.VERSION.SDK_INT < 21) {
-							params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "" + System.currentTimeMillis());
-							mTts.playSilence(vpd, TextToSpeech.QUEUE_ADD, params);
-						} else {
-							mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, "" + System.currentTimeMillis());
-						}
+						mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, "" + System.currentTimeMillis());
 					}
 				}
 			}
-			log.debug("ttsRequests="+ttsRequests);
+			log.debug("ttsRequests=" + ttsRequests);
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
 			if (AudioFocusHelperImpl.playbackAuthorized) {
 				mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
@@ -118,12 +110,10 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 				stop();
 			}
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
-		} else if (ctx != null && vrt.isMute()) {
-			// sendAlertToAndroidWear(ctx, bld.toString());
 		}
 		// #5966: TTS Utterance for debugging
-		if (ctx != null && ctx.getSettings().DISPLAY_TTS_UTTERANCE.get()) {
-			((OsmandApplication) ctx.getApplicationContext()).showToastMessage(bld.toString());
+		if (app != null && app.getSettings().DISPLAY_TTS_UTTERANCE.get()) {
+			app.showToastMessage(bld.toString());
 		}
 		return execute;
 	}
@@ -147,19 +137,18 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 		i.putExtra("messageType", PEBBLE_ALERT);
 		i.putExtra("sender", "OsmAnd");
 		i.putExtra("notificationData", notificationData);
-		if (ctx != null) {
-			ctx.sendBroadcast(i);
-			log.info("Send message to pebble " + bld.toString());
+		if (app != null) {
+			app.sendBroadcast(i);
+			log.info("Send message to pebble " + bld);
 		}
 	}
 
-
-	private void initializeEngine(final Context ctx, final Activity act) {
-		if (mTtsContext != ctx) {
+	private void initializeEngine(final OsmandApplication app) {
+		if (mTtsContext != app) {
 			internalClear();
 		}
 		if (mTts == null) {
-			mTtsContext = ctx;
+			mTtsContext = app;
 			ttsVoiceStatus = "-";
 			ttsVoiceUsed = "-";
 			ttsRequests = 0;
@@ -192,13 +181,13 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 			}
 			final Locale newLocale = newLocale0;
 
-			mTts = new TextToSpeech(ctx, new OnInitListener() {
+			mTts = new TextToSpeech(app, new OnInitListener() {
 				@Override
 				public void onInit(int status) {
 					if (status != TextToSpeech.SUCCESS) {
 						ttsVoiceStatus = "NO INIT SUCCESS";
 						internalClear();
-						((OsmandApplication) ctx.getApplicationContext()).showToastMessage(ctx.getString(R.string.tts_initialization_error));
+						app.showToastMessage(app.getString(R.string.tts_initialization_error));
 					} else if (mTts != null) {
 						speechAllowed = true;
 						switch (mTts.isLanguageAvailable(newLocale)) {
@@ -228,7 +217,7 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 									if (mTts.isLanguageAvailable(Locale.getDefault()) > 0) {
 										mTts.setLanguage(Locale.getDefault());
 									} else {
-										Toast.makeText(act, "TTS language not available", Toast.LENGTH_LONG).show();
+										app.showToastMessage("TTS language not available");
 									}
 								}
 								if(speechRate != 1) {
@@ -259,15 +248,10 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 
 				private String getVoiceUsed() {
 					try {
-						if (android.os.Build.VERSION.SDK_INT >= 21) {
-							if (mTts.getVoice() != null) {
-								return mTts.getVoice().toString() + " (API " + android.os.Build.VERSION.SDK_INT + ")";
-							}
-						} else {
-							return mTts.getLanguage() + " (API " + android.os.Build.VERSION.SDK_INT + " only reports language)";
+						if (mTts.getVoice() != null) {
+							return mTts.getVoice().toString() + " (API " + Build.VERSION.SDK_INT + ")";
 						}
 					} catch (RuntimeException e) {
-						// mTts.getVoice() might throw NPE
 					}
 					return "-";
 				}

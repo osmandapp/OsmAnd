@@ -39,7 +39,7 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 
 	private static final Log log = PlatformUtil.getLog(BaseCommandPlayer.class);
 
-	protected OsmandApplication ctx;
+	protected OsmandApplication app;
 	protected File voiceDir;
 	protected Prolog prologSystem;
 	protected static final String P_VERSION = "version";
@@ -64,16 +64,16 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 	private ApplicationMode applicationMode;
 
 
-	protected BaseCommandPlayer(OsmandApplication ctx, ApplicationMode applicationMode,
-										  String voiceProvider, String configFile, int[] sortedVoiceVersions)
-			throws CommandPlayerException {
-		this.ctx = ctx;
+	protected BaseCommandPlayer(OsmandApplication app, ApplicationMode applicationMode,
+	                            String voiceProvider, String configFile,
+	                            int[] sortedVoiceVersions) throws CommandPlayerException {
+		this.app = app;
 		this.sortedVoiceVersions = sortedVoiceVersions;
 		this.applicationMode = applicationMode;
 		long time = System.currentTimeMillis();
-		this.ctx = ctx;
+		this.app = app;
 
-		this.streamType = ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode);
+		this.streamType = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode);
 		initVoiceDir(voiceProvider);
 		if (voiceDir != null && (MediaCommandPlayerImpl.isMyData(voiceDir) || TTSCommandPlayerImpl.isMyData(voiceDir))) {
 			if (log.isInfoEnabled()) {
@@ -85,7 +85,7 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 				log.error("Initializing error", e);
 				throw new RuntimeException(e);
 			}
-			init(voiceProvider, ctx.getSettings(), configFile);
+			init(voiceProvider, app.getSettings(), configFile);
 			final Term langVal = solveSimplePredicate("language");
 			if (langVal instanceof Struct) {
 				language = ((Struct) langVal).getName();
@@ -111,7 +111,7 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 
 	@Override
 	public void stateChanged(ApplicationMode change) {
-		ctx.runInUIThread(() -> {
+		app.runInUIThread(() -> {
 			if (prologSystem != null) {
 				try {
 					prologSystem.getTheoryManager().retract(new Struct("appMode", new Var()));
@@ -120,7 +120,7 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 				}
 				prologSystem.getTheoryManager()
 						.assertA(
-								new Struct("appMode", new Struct(ctx.getSettings().APPLICATION_MODE.get().getStringKey()
+								new Struct("appMode", new Struct(app.getSettings().APPLICATION_MODE.get().getStringKey()
 										.toLowerCase())), true, "", true);
 			}
 		});
@@ -139,7 +139,7 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 				settings.APPLICATION_MODE.addListener(this);
 				prologSystem.getTheoryManager()
 				.assertA(
-						new Struct("appMode", new Struct(ctx.getSettings().APPLICATION_MODE.get().getStringKey()
+						new Struct("appMode", new Struct(app.getSettings().APPLICATION_MODE.get().getStringKey()
 								.toLowerCase())), true, "", true);
 				prologSystem.addTheory(new Theory("measure('"+mc.toTTSString()+"')."));
 				prologSystem.addTheory(new Theory(config));
@@ -149,11 +149,11 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 				wrong = true;
 			}
 			if (wrong) {
-				throw new CommandPlayerException(ctx.getString(R.string.voice_data_corrupted));
+				throw new CommandPlayerException(app.getString(R.string.voice_data_corrupted));
 			} else {
 				Term val = solveSimplePredicate(P_VERSION);
 				if (!(val instanceof Number) ||  Arrays.binarySearch(sortedVoiceVersions,((Number)val).intValue()) < 0) {
-					throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
+					throw new CommandPlayerException(app.getString(R.string.voice_data_not_supported));
 				}
 				currentVersion = ((Number)val).intValue();
 			}
@@ -165,12 +165,12 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 
 	private void initVoiceDir(String voiceProvider) throws CommandPlayerException {
 		if (voiceProvider != null) {
-			File parent = ctx.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+			File parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 			voiceDir = new File(parent, voiceProvider);
 			if (!voiceDir.exists()) {
 				voiceDir = null;
 				throw new CommandPlayerException(
-						ctx.getString(R.string.voice_data_unavailable));
+						app.getString(R.string.voice_data_unavailable));
 			}
 		}
 	}
@@ -243,11 +243,11 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 
 	@Override
 	public void clear() {
-		if(ctx != null && ctx.getSettings() != null) {
-			ctx.getSettings().APPLICATION_MODE.removeListener(this);
+		if(app != null && app.getSettings() != null) {
+			app.getSettings().APPLICATION_MODE.removeListener(this);
 		}
 		abandonAudioFocus();
-		ctx = null;
+		app = null;
 		prologSystem = null;
 	}
 
@@ -259,9 +259,9 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 	protected synchronized void requestAudioFocus() {
 		log.debug("requestAudioFocus");
 		mAudioFocusHelper = getAudioFocus();
-		if (mAudioFocusHelper != null && ctx != null) {
-			boolean audioFocusGranted = mAudioFocusHelper.requestAudFocus(ctx, applicationMode, streamType);
-			if (audioFocusGranted && ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0) {
+		if (mAudioFocusHelper != null && app != null) {
+			boolean audioFocusGranted = mAudioFocusHelper.requestAudFocus(app, applicationMode, streamType);
+			if (audioFocusGranted && app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0) {
 				toggleBtSco(true);
 			}
 		}
@@ -278,12 +278,12 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 	
 	protected synchronized void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
-		if ((ctx != null && ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0)
+		if ((app != null && app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0)
 				|| btScoStatus) {
 			toggleBtSco(false);
 		}
-		if (ctx != null && mAudioFocusHelper != null) {
-			mAudioFocusHelper.abandonAudFocus(ctx, applicationMode, streamType);
+		if (app != null && mAudioFocusHelper != null) {
+			mAudioFocusHelper.abandonAudFocus(app, applicationMode, streamType);
 		}
 		mAudioFocusHelper = null;
 	}
@@ -297,7 +297,7 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
 		if (on) {
 			try {
-				AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
+				AudioManager mAudioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
 				if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
 					btScoInit = "Reported not available.";
 					return false;
@@ -316,7 +316,7 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 			btScoInit = "Available, initialized OK.";
 			return true;
 		} else {
-			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
+			AudioManager mAudioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
 			if (mAudioManager == null) {
 				return false;
 			}

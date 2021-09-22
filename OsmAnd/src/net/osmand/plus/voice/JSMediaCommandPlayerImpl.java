@@ -24,11 +24,9 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
     private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(JSMediaCommandPlayerImpl.class);
 
     private ScriptableObject jsScope;
-    private OsmandApplication app;
 
-    public JSMediaCommandPlayerImpl(OsmandApplication ctx, ApplicationMode applicationMode, VoiceRouter vrt, String voiceProvider) throws CommandPlayerException {
-        super(ctx, applicationMode, vrt, voiceProvider);
-        app = ctx;
+    public JSMediaCommandPlayerImpl(OsmandApplication app, ApplicationMode applicationMode, VoiceRouter vrt, String voiceProvider) throws CommandPlayerException {
+        super(app, applicationMode, vrt, voiceProvider);
         org.mozilla.javascript.Context context = org.mozilla.javascript.Context.enter();
         context.setOptimizationLevel(-1);
         jsScope = context.initSafeStandardObjects();
@@ -57,8 +55,8 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
         if (mediaPlayer == null) {
             requestAudioFocus();
             // Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
-            if (ctx != null) {
-                int vpd = ctx.getSettings().VOICE_PROMPT_DELAY[ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode())].get();
+            if (app != null) {
+                int vpd = app.getSettings().VOICE_PROMPT_DELAY[app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode())].get();
                 if (vpd > 0) {
                     try {
                         Thread.sleep(vpd);

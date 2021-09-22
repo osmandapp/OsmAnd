@@ -45,7 +45,7 @@ public class MediaCommandPlayerImpl extends BaseCommandPlayer implements MediaPl
 		super(ctx, applicationMode, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
 		this.vrt = vrt;
 	}
-	
+
 	@Override
 	public void clear() {
 		super.clear();
@@ -77,22 +77,19 @@ public class MediaCommandPlayerImpl extends BaseCommandPlayer implements MediaPl
 			for (String s : builder.execute()) {
 				bld.append(s).append(' ');
 			}
-			if (ctx != null) {
-				// sendAlertToAndroidWear(ctx, bld.toString());
-			}
 			return Collections.emptyList();
 		}
 		List<String> lst = builder.execute();
 
 		filesToPlay.addAll(lst);
-		
+
 		// If we have not already started to play audio, start.
 		if (mediaPlayer == null) {
 			requestAudioFocus();
 			// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
-			if (ctx != null) {
-				Integer stream = ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
-				OsmandPreference<Integer> pref = ctx.getSettings().VOICE_PROMPT_DELAY[stream];
+			if (app != null) {
+				Integer stream = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
+				OsmandPreference<Integer> pref = app.getSettings().VOICE_PROMPT_DELAY[stream];
 				if (pref.getModeValue(getApplicationMode()) > 0) {
 					try {
 						Thread.sleep(pref.getModeValue(getApplicationMode()));
@@ -179,24 +176,19 @@ public class MediaCommandPlayerImpl extends BaseCommandPlayer implements MediaPl
 			return;
 		}
 		try {
-			log.debug("Playing file : " + file); //$NON-NLS-1$
+			log.debug("Playing file : " + file);
 			mediaPlayer.reset();
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
-						.setUsage(ctx.getSettings().AUDIO_USAGE.get())
-						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-						.build());
+			mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
+					.setUsage(app.getSettings().AUDIO_USAGE.get())
+					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+					.build());
 
-			} else {
-				// Deprecated in API Level 26, use above AudioAtrributes instead
-				mediaPlayer.setAudioStreamType(streamType);
-			}
 			mediaPlayer.setDataSource(file.getAbsolutePath());
 			mediaPlayer.prepare();
 			mediaPlayer.setOnCompletionListener(this);
 			mediaPlayer.start();
 		} catch (Exception e) {
-			log.error("Error while playing voice command", e); //$NON-NLS-1$
+			log.error("Error while playing voice command", e);
 			playQueue();
 		}
 	}
@@ -209,5 +201,4 @@ public class MediaCommandPlayerImpl extends BaseCommandPlayer implements MediaPl
 	public boolean supportsStructuredStreetNames() {
 		return false;
 	}
-	
 }
