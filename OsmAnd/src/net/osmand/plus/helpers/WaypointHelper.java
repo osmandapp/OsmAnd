@@ -1,5 +1,10 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -35,6 +40,7 @@ import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.routing.data.AnnounceTimeDistances;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -46,11 +52,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import gnu.trove.list.array.TIntArrayList;
-
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_ALARM_ANNOUNCE;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PNT_APPROACH;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_ALARM_ANNOUNCE;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_SHORT_PNT_APPROACH;
 
 //	import android.widget.Toast;
 
@@ -652,36 +653,41 @@ public class WaypointHelper {
 	}
 
 	private void calculateAlarms(RouteCalculationResult route, List<LocationPointWrapper> array, ApplicationMode mode) {
+		OsmandSettings settings = app.getSettings();
+		if (!settings.SHOW_ROUTING_ALARMS.getModeValue(mode)) {
+			return;
+		}
 		AlarmInfo prevSpeedCam = null;
-		for (AlarmInfo i : route.getAlarmInfo()) {
-			if (i.getType() == AlarmInfoType.SPEED_CAMERA) {
-				if (app.getSettings().SHOW_ROUTING_ALARMS.get() && app.getSettings().SHOW_CAMERAS.getModeValue(mode)
-						|| app.getSettings().SPEAK_SPEED_CAMERA.getModeValue(mode)) {
-					LocationPointWrapper lw = new LocationPointWrapper(route, ALARMS, i, 0, i.getLocationIndex());
-					if(prevSpeedCam != null &&  
-							MapUtils.getDistance(prevSpeedCam.getLatitude(), prevSpeedCam.getLongitude(), 
-									i.getLatitude(), i.getLongitude()) < DISTANCE_IGNORE_DOUBLE_SPEEDCAMS) {
-						// ignore double speed cams
-					} else {
-						lw.setAnnounce(app.getSettings().SPEAK_SPEED_CAMERA.getModeValue(mode));
-						array.add(lw);
-						prevSpeedCam = i;
+		for (AlarmInfo alarmInfo : route.getAlarmInfo()) {
+			AlarmInfoType type = alarmInfo.getType();
+			if (type == AlarmInfoType.SPEED_CAMERA) {
+				if (settings.SHOW_CAMERAS.getModeValue(mode) || settings.SPEAK_SPEED_CAMERA.getModeValue(mode)) {
+					// ignore double speed cams
+					if (prevSpeedCam == null || MapUtils.getDistance(prevSpeedCam.getLatitude(), prevSpeedCam.getLongitude(),
+							alarmInfo.getLatitude(), alarmInfo.getLongitude()) >= DISTANCE_IGNORE_DOUBLE_SPEEDCAMS) {
+						addPointWrapper(alarmInfo, array, settings.SPEAK_SPEED_CAMERA.getModeValue(mode));
+						prevSpeedCam = alarmInfo;
 					}
 				}
-			} else {
-				if (app.getSettings().SHOW_ROUTING_ALARMS.get() && app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(mode)
-						|| app.getSettings().SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
-					LocationPointWrapper lw = new LocationPointWrapper(route, ALARMS, i, 0, i.getLocationIndex());
-					lw.setAnnounce(app.getSettings().SPEAK_TRAFFIC_WARNINGS.get());
-					array.add(lw);
+			} else if (type == AlarmInfoType.TUNNEL) {
+				if (settings.SHOW_TUNNELS.getModeValue(mode) || settings.SPEAK_TUNNELS.getModeValue(mode)) {
+					addPointWrapper(alarmInfo, array, settings.SPEAK_TUNNELS.getModeValue(mode));
 				}
+			} else if (type == AlarmInfoType.PEDESTRIAN) {
+				if (settings.SHOW_PEDESTRIAN.getModeValue(mode) || settings.SPEAK_PEDESTRIAN.getModeValue(mode)) {
+					addPointWrapper(alarmInfo, array, settings.SPEAK_PEDESTRIAN.getModeValue(mode));
+				}
+			} else if (settings.SHOW_TRAFFIC_WARNINGS.getModeValue(mode) || settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
+				addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
 			}
-			
-
 		}
-
 	}
 
+	private void addPointWrapper(AlarmInfo alarmInfo, List<LocationPointWrapper> array, boolean announce) {
+		LocationPointWrapper pointWrapper = new LocationPointWrapper(route, ALARMS, alarmInfo, 0, alarmInfo.getLocationIndex());
+		pointWrapper.setAnnounce(announce);
+		array.add(pointWrapper);
+	}
 
 	private List<LocationPointWrapper> clearAndGetArray(List<List<LocationPointWrapper>> array,
 														int ind) {
