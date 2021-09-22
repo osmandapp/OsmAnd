@@ -3,12 +3,10 @@ package net.osmand.plus.chooseplan;
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getActiveColorId;
 import static net.osmand.plus.liveupdates.LiveUpdatesSettingsBottomSheet.getDefaultIconColorId;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -28,7 +26,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
@@ -230,7 +227,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 				osmAndProIconId,
 				getString(R.string.osmand_pro),
 				price,
-				v -> OsmAndProPlanFragment.showInstance(requireActivity()),
+				v -> OsmAndProPlanFragment.showInstance(requireActivity(), null),
 				Version.isInAppPurchaseSupported());
 
 		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper, nightMode);
@@ -244,7 +241,7 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 				mapsPlusIconId,
 				getString(R.string.maps_plus),
 				price,
-				v -> MapsPlusPlanFragment.showInstance(requireActivity()),
+				v -> MapsPlusPlanFragment.showInstance(requireActivity(), null),
 				availableInMapsPlus && Version.isInAppPurchaseSupported());
 	}
 
