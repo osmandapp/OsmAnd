@@ -378,24 +378,24 @@ public class DiscountHelper {
 	}
 
 	private static void showDialogForPlanType(@NonNull MapActivity mapActivity, @NonNull String planType) {
-		String purchaseId = null;
+		String selectedButtonId = null;
 		if (mData != null && mData.urlParams != null) {
-			purchaseId = mData.urlParams.optString("selectedPriceBtnId");
+			selectedButtonId = mData.urlParams.optString("selected_price_btn_id");
 		}
 		switch (planType) {
 			case CHOOSE_PLAN_TYPE_FREE:
 			case CHOOSE_PLAN_TYPE_MAPS_PLUS:
-				if (Algorithms.isEmpty(purchaseId)) {
+				if (Algorithms.isEmpty(selectedButtonId)) {
 					MapsPlusPlanFragment.showInstance(mapActivity);
 				} else {
-					MapsPlusPlanFragment.showInstance(mapActivity, purchaseId);
+					MapsPlusPlanFragment.showInstance(mapActivity, selectedButtonId);
 				}
 				break;
 			case CHOOSE_PLAN_TYPE_PRO:
-				if (Algorithms.isEmpty(purchaseId)) {
+				if (Algorithms.isEmpty(selectedButtonId)) {
 					OsmAndProPlanFragment.showInstance(mapActivity);
 				} else {
-					OsmAndProPlanFragment.showInstance(mapActivity, purchaseId);
+					OsmAndProPlanFragment.showInstance(mapActivity, selectedButtonId);
 				}
 				break;
 			case CHOOSE_PLAN_TYPE_SEA_DEPTH:
