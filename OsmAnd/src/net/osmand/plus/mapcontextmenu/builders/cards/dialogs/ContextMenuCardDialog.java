@@ -142,7 +142,7 @@ public abstract class ContextMenuCardDialog {
 				if (!showMapillary) {
 					MapillaryPlugin mapillaryPlugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
 					if (mapillaryPlugin != null) {
-						mapillaryPlugin.updateLayers(mapActivity, activate);
+						mapillaryPlugin.updateLayers(mapActivity, mapActivity, activate);
 					}
 				}
 				break;

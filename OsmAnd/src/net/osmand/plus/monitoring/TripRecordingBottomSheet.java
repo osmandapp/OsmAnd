@@ -1,5 +1,11 @@
 package net.osmand.plus.monitoring;
 
+import static net.osmand.AndroidUtils.setPadding;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
+import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -69,12 +75,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-
-import static net.osmand.AndroidUtils.setPadding;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.GLOBAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_ALTITUDE;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_GENERAL;
-import static net.osmand.plus.myplaces.GPXTabItemType.GPX_TAB_ITEM_SPEED;
 
 public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment implements SegmentActionsListener {
 
@@ -397,11 +397,11 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 										   Integer showTrackId, final Fragment target,
 										   final boolean nightMode, final Runnable hideOnClickButtonAppearance) {
 		FragmentActivity activity = target.getActivity();
-		if (!(activity instanceof MapActivity)) {
+		if (activity == null) {
+			AndroidUiHelper.updateVisibility(showTrackContainer, false);
 			return;
 		}
-		final MapActivity mapActivity = (MapActivity) activity;
-		final OsmandApplication app = mapActivity.getMyApplication();
+		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final CardView buttonShowTrack = showTrackContainer.findViewById(R.id.compound_container);
 		final CardView buttonAppearance = showTrackContainer.findViewById(R.id.additional_button_container);
 
@@ -427,16 +427,18 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 
 		updateTrackIcon(app, trackAppearanceIcon);
 		createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, showTrackCompound.isChecked(), null);
-		buttonAppearance.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (showTrackCompound.isChecked()) {
-					hideOnClickButtonAppearance.run();
-					SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-					TrackAppearanceFragment.showInstance(mapActivity, selectedGpxFile, target);
+		if (activity instanceof MapActivity) {
+			buttonAppearance.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (showTrackCompound.isChecked()) {
+						hideOnClickButtonAppearance.run();
+						SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+						TrackAppearanceFragment.showInstance((MapActivity) activity, selectedGpxFile, target);
+					}
 				}
-			}
-		});
+			});
+		}
 	}
 
 	public static void setShowTrackItemBackground(View view, boolean checked, boolean nightMode) {

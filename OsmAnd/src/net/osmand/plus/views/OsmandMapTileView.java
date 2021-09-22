@@ -736,6 +736,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				currentViewport.getCenterPixelY() != cy ||
 				currentViewport.getCenterPixelX() != cx) {
 			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
+			if (view instanceof CarSurfaceView) {
+				currentViewport.setDensity(((CarSurfaceView) view).getDensity());
+			}
 			refreshBufferImage(drawSettings);
 		}
 		if (view instanceof SurfaceView) {

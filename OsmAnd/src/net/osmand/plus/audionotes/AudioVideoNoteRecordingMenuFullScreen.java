@@ -63,29 +63,18 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 
 	public void update() {
 		View leftButtonView = view.findViewById(R.id.leftButtonView);
-		leftButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				plugin.shootAgain();
-			}
-		});
+		leftButtonView.setOnClickListener(v -> plugin.shootAgain());
 
 		View centerButtonView = view.findViewById(R.id.centerButtonView);
-		centerButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				stopProgress();
-				finishRecording();
-			}
+		centerButtonView.setOnClickListener(v -> {
+			stopProgress();
+			finishRecording();
 		});
 
 		View rightButtonView = view.findViewById(R.id.rightButtonView);
-		rightButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				plugin.finishPhotoRecording(true);
-				recExternal(plugin.getMapActivity());
-			}
+		rightButtonView.setOnClickListener(v -> {
+			plugin.finishPhotoRecording(true);
+			recExternal(requireMapActivity());
 		});
 	}
 
@@ -135,12 +124,9 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 		final Interpolator interpolator = new LinearInterpolator();
 		animatorCompat.setDuration(duration);
 		animatorCompat.setTarget(progressBar);
-		animatorCompat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-			@Override
-			public void onAnimationUpdate(ValueAnimator valueAnimator) {
-				float fraction = interpolator.getInterpolation(valueAnimator.getAnimatedFraction());
-				progressBar.setProgress((int)(500 * fraction));
-			}
+		animatorCompat.addUpdateListener(valueAnimator -> {
+			float fraction = interpolator.getInterpolation(valueAnimator.getAnimatedFraction());
+			progressBar.setProgress((int)(500 * fraction));
 		});
 		animatorCompat.start();
 	}
@@ -170,7 +156,7 @@ public class AudioVideoNoteRecordingMenuFullScreen extends AudioVideoNoteRecordi
 	private static Bitmap rotateBitmap(Bitmap src, int angle, int screenWidth, int screenHeight) {
 		float srcWidth = (float) src.getWidth();
 		float srcHeight = (float) src.getHeight();
-		float srcRes[] = {srcWidth, srcHeight};
+		float[] srcRes = {srcWidth, srcHeight};
 
 		Matrix mat = new Matrix();
 		mat.setRotate(angle);

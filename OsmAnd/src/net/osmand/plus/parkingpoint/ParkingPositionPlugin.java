@@ -196,6 +196,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public void mapActivityPause(MapActivity activity) {
+		parkingPlaceControl = null;
+	}
+
+	@Override
 	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 		if (mapActivity != null) {
 			registerWidget(mapActivity);

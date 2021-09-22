@@ -167,6 +167,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private Map<String, Recording> recordingByFileName = new LinkedHashMap<>();
 	private AudioNotesLayer audioNotesLayer;
 
+	@Nullable
 	private MapActivity mapActivity;
 
 	private static File mediaRecFile;
@@ -272,10 +273,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			File directory = file.getParentFile();
 			lat = latLon.getLatitude();
 			lon = latLon.getLongitude();
-			File to = getBaseFileName(lat, lon, directory, Algorithms.getFileExtension(file));
-			if (file.renameTo(to)) {
-				file = to;
-				return true;
+			if (directory != null) {
+				File to = getBaseFileName(lat, lon, directory, Algorithms.getFileExtension(file));
+				if (file.renameTo(to)) {
+					file = to;
+					return true;
+				}
 			}
 			return false;
 		}
@@ -919,10 +922,21 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			}
 			finishRecording();
 		}
+		this.recordControl = null;
 		this.mapActivity = null;
 	}
 
+	@Nullable
 	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
+	@NonNull
+	public MapActivity requireMapActivity() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			throw new IllegalStateException("Plugin " + this + " not attached to MapActivity.");
+		}
 		return mapActivity;
 	}
 
@@ -1408,7 +1422,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 
 	private void internalShoot() {
-		getMapActivity().getMyApplication().runInUIThread(() -> {
+		requireMapActivity().getMyApplication().runInUIThread(() -> {
 			if (cam != null) {
 				if (!autofocus) {
 					cam.takePicture(null, null, new JpegPhotoHandler());
@@ -1826,9 +1840,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void updateContextMenu() {
 		app.runInUIThread(() -> {
-			MapActivity activity = getMapActivity();
-			if (activity != null) {
-				activity.getContextMenu().updateMenuUI();
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.getContextMenu().updateMenuUI();
 			}
 		});
 	}
