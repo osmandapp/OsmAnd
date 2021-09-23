@@ -38,7 +38,7 @@ public class PurchasingUtils {
 		for (InAppSubscription s : subscriptions) {
 			InAppSubscriptionIntroductoryInfo introductoryInfo = s.getIntroductoryInfo();
 			boolean hasIntroductoryInfo = introductoryInfo != null;
-			SubscriptionButton priceBtn = new SubscriptionButton(s.getSkuNoVersion(), s);
+			SubscriptionButton priceBtn = new SubscriptionButton(s.getSku(), s);
 			priceBtn.setTitle(s.getTitle(app));
 
 			CharSequence priceTitle = hasIntroductoryInfo ?
