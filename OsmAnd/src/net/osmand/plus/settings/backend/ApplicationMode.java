@@ -36,8 +36,6 @@ import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -336,7 +334,7 @@ public class ApplicationMode {
 			if (keyName != -1) {
 				return app.getString(keyName);
 			} else {
-				return StringUtils.capitalize(getStringKey());
+				return Algorithms.capitalizeFirstLetter(getStringKey());
 			}
 		} else {
 			return userProfileName;

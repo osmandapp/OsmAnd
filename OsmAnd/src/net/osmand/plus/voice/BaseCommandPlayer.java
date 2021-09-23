@@ -56,11 +56,6 @@ public abstract class BaseCommandPlayer implements CommandPlayer {
 		return language;
 	}
 
-	public String[] getLibraries(){
-		return new String[] { "alice.tuprolog.lib.BasicLibrary",
-					"alice.tuprolog.lib.ISOLibrary"/*, "alice.tuprolog.lib.IOLibrary"*/};
-	}
-
 	private File getVoiceProviderDir(String voiceProvider) throws CommandPlayerException {
 		if (voiceProvider != null) {
 			File voicesDir = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
