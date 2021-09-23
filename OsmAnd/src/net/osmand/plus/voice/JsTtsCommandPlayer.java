@@ -7,6 +7,7 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -19,37 +20,27 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.mozilla.javascript.ScriptableObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class TTSCommandPlayerImpl extends BaseCommandPlayer {
-	public final static String PEBBLE_ALERT = "PEBBLE_ALERT";
-	public final static String WEAR_ALERT = "WEAR_ALERT";
+public class JsTtsCommandPlayer extends BaseCommandPlayer {
 
-	private static final Log log = PlatformUtil.getLog(TTSCommandPlayerImpl.class);
+	private static final Log log = PlatformUtil.getLog(JsTtsCommandPlayer.class);
+
+	private final static String PEBBLE_ALERT = "PEBBLE_ALERT";
+
 	private static TextToSpeech mTts;
-	private static String ttsVoiceStatus = "-";
-	private static String ttsVoiceUsed = "-";
-	private HashMap<String, String> params = new HashMap<>();
-	private VoiceRouter vrt;
 
-	public TTSCommandPlayerImpl(OsmandApplication app, ApplicationMode applicationMode, VoiceRouter vrt,
-	                            String voiceProvider) throws CommandPlayerException {
-		super(app, applicationMode, voiceProvider);
-		this.vrt = vrt;
-		if (Algorithms.isEmpty(language)) {
-			throw new CommandPlayerException(app.getString(R.string.voice_data_corrupted));
-		}
-		if (app.accessibilityEnabled()) {
-			cSpeechRate = app.getSettings().SPEECH_RATE.get();
-		}
-		initializeEngine();
-		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_MANAGER_STREAM
-				.getModeValue(getApplicationMode()).toString());
-	}
+	private final ScriptableObject jsScope;
+	private final VoiceRouter voiceRouter;
+	private final HashMap<String, String> params = new HashMap<>();
 
 	/**
 	 * Since TTS requests are asynchronous, playCommands() can be called before
@@ -61,72 +52,40 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 	private static int ttsRequests;
 	private float cSpeechRate = 1;
 	private boolean speechAllowed = false;
-	
-	// Called from the calculating route thread.
-	@Override
-	public synchronized List<String> playCommands(JsCommandBuilder builder) {
-		final List<String> execute = builder.execute(); //list of strings, the speech text, play it
-		StringBuilder bld = new StringBuilder();
-		for (String s : execute) {
-			bld.append(s).append(' ');
-		}
-		sendAlertToPebble(bld.toString());
-		if (mTts != null && !vrt.isMute() && speechAllowed) {
-			if (ttsRequests++ == 0) {
-				requestAudioFocus();
-				mTts.setAudioAttributes(new AudioAttributes.Builder()
-						.setUsage(app.getSettings().AUDIO_USAGE.get())
-						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-						.build());
-				// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
-				if (app != null) {
-					Integer streamModeValue = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
-					OsmandPreference<Integer> pref = app.getSettings().VOICE_PROMPT_DELAY[streamModeValue];
-					int vpd = pref == null ? 0 : pref.getModeValue(getApplicationMode());
-					if (vpd > 0) {
-						ttsRequests++;
-						mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, "" + System.currentTimeMillis());
-					}
-				}
-			}
-			log.debug("ttsRequests=" + ttsRequests);
-			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
-			if (AudioFocusHelperImpl.playbackAuthorized) {
-				mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
-			} else {
-				stop();
-			}
-			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
-		}
-		// #5966: TTS Utterance for debugging
-		if (app != null && app.getSettings().DISPLAY_TTS_UTTERANCE.get()) {
-			app.showToastMessage(bld.toString());
-		}
-		return execute;
-	}
 
-	@Override
-	public void stop(){
-		ttsRequests = 0;
-		if (mTts != null){
-			mTts.stop();
-		}
-		abandonAudioFocus();
-	}
+	// Only for debugging
+	private static String ttsVoiceStatus = "-";
+	private static String ttsVoiceUsed = "-";
 
-	public void sendAlertToPebble(String bld) {
-		final Intent i = new Intent("com.getpebble.action.SEND_NOTIFICATION");
-		final Map<String, Object> data = new HashMap<String, Object>();
-		data.put("title", "Voice");
-		data.put("body", bld.toString());
-		final JSONObject jsonData = new JSONObject(data);
-		final String notificationData = new JSONArray().put(jsonData).toString();
-		i.putExtra("messageType", PEBBLE_ALERT);
-		i.putExtra("sender", "OsmAnd");
-		i.putExtra("notificationData", notificationData);
-		if (app != null) {
-			app.sendBroadcast(i);
-			log.info("Send message to pebble " + bld);
+	public JsTtsCommandPlayer(OsmandApplication app, ApplicationMode applicationMode,
+	                          VoiceRouter voiceRouter,
+	                          String voiceProvider) throws CommandPlayerException {
+		super(app, applicationMode, voiceProvider);
+		this.voiceRouter = voiceRouter;
+
+		if (Algorithms.isEmpty(language)) {
+			throw new CommandPlayerException(app.getString(R.string.voice_data_corrupted));
+		}
+		if (app.accessibilityEnabled()) {
+			cSpeechRate = app.getSettings().SPEECH_RATE.get();
+		}
+		initializeEngine();
+		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_MANAGER_STREAM
+				.getModeValue(getApplicationMode()).toString());
+
+		org.mozilla.javascript.Context context = org.mozilla.javascript.Context.enter();
+		context.setOptimizationLevel(-1);
+		jsScope = context.initSafeStandardObjects();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(new File(
+					app.getAppPath(IndexConstants.VOICE_INDEX_DIR).getAbsolutePath() + "/" + voiceProvider + "/"
+							+ voiceProvider.replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "_tts") + ".js")));
+			context.evaluateReader(jsScope, br, "JS", 1, null);
+			br.close();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		} finally {
+			org.mozilla.javascript.Context.exit();
 		}
 	}
 
@@ -144,13 +103,13 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 			String lregion = "";
 			String lvariant = "";
 			String lscript = "";
-			for (int i=3; i>0; i--) {
+			for (int i = 3; i > 0; i--) {
 				if (lsplit[i].length() == 4 && !(lsplit[i] + "A").substring(0, 1).matches("[0-9]")) {
-						lscript = lsplit[i];
+					lscript = lsplit[i];
 				} else if (lsplit[i].length() >= 4) {
-						lvariant = lsplit[i];
+					lvariant = lsplit[i];
 				} else {
-						lregion = lsplit[i];
+					lregion = lsplit[i];
 				}
 			}
 			// Locale constructor supports 'language, region, variant'
@@ -195,7 +154,7 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
 								try {
 									mTts.setLanguage(newLocale);
-								} catch(Exception e) {
+								} catch (Exception e) {
 									e.printStackTrace();
 									if (mTts.isLanguageAvailable(Locale.getDefault()) > 0) {
 										mTts.setLanguage(Locale.getDefault());
@@ -203,7 +162,7 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 										app.showToastMessage("TTS language not available");
 									}
 								}
-								if(speechRate != 1) {
+								if (speechRate != 1) {
 									mTts.setSpeechRate(speechRate);
 								}
 								ttsVoiceStatus = "-".equals(ttsVoiceStatus) ? newLocale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceStatus;
@@ -245,7 +204,7 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 				public synchronized void onUtteranceCompleted(String utteranceId) {
 					if (--ttsRequests <= 0)
 						abandonAudioFocus();
-					log.debug("ttsRequests="+ttsRequests);
+					log.debug("ttsRequests=" + ttsRequests);
 					if (ttsRequests < 0) {
 						ttsRequests = 0;
 					}
@@ -254,12 +213,92 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 		}
 	}
 
-	public static String getTtsVoiceStatus() {
-		return ttsVoiceStatus;
+	// Called from the calculating route thread.
+	@Override
+	public synchronized List<String> playCommands(JsCommandBuilder builder) {
+		final List<String> execute = builder.execute(); //list of strings, the speech text, play it
+		StringBuilder bld = new StringBuilder();
+		for (String s : execute) {
+			bld.append(s).append(' ');
+		}
+		sendAlertToPebble(bld.toString());
+		if (mTts != null && !voiceRouter.isMute() && speechAllowed) {
+			if (ttsRequests++ == 0) {
+				requestAudioFocus();
+				mTts.setAudioAttributes(new AudioAttributes.Builder()
+						.setUsage(app.getSettings().AUDIO_USAGE.get())
+						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+						.build());
+				// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
+				if (app != null) {
+					Integer streamModeValue = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
+					OsmandPreference<Integer> pref = app.getSettings().VOICE_PROMPT_DELAY[streamModeValue];
+					int vpd = pref == null ? 0 : pref.getModeValue(getApplicationMode());
+					if (vpd > 0) {
+						ttsRequests++;
+						mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, "" + System.currentTimeMillis());
+					}
+				}
+			}
+			log.debug("ttsRequests=" + ttsRequests);
+			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, "" + System.currentTimeMillis());
+			if (AudioFocusHelperImpl.playbackAuthorized) {
+				mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
+			} else {
+				stop();
+			}
+			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
+		}
+		// #5966: TTS Utterance for debugging
+		if (app != null && app.getSettings().DISPLAY_TTS_UTTERANCE.get()) {
+			app.showToastMessage(bld.toString());
+		}
+		return execute;
 	}
 
-	public static String getTtsVoiceUsed() {
-		return ttsVoiceUsed;
+	private void sendAlertToPebble(String bld) {
+		final Intent i = new Intent("com.getpebble.action.SEND_NOTIFICATION");
+		final Map<String, Object> data = new HashMap<>();
+		data.put("title", "Voice");
+		data.put("body", bld);
+		final JSONObject jsonData = new JSONObject(data);
+		final String notificationData = new JSONArray().put(jsonData).toString();
+		i.putExtra("messageType", PEBBLE_ALERT);
+		i.putExtra("sender", "OsmAnd");
+		i.putExtra("notificationData", notificationData);
+		if (app != null) {
+			app.sendBroadcast(i);
+			log.info("Send message to pebble " + bld);
+		}
+	}
+
+	@Override
+	public JsCommandBuilder newCommandBuilder() {
+		JsCommandBuilder commandBuilder = new JsCommandBuilder(this);
+		commandBuilder.setJSContext(jsScope);
+		commandBuilder.setParameters(app.getSettings().METRIC_SYSTEM.get().toTTSString(), true);
+		return commandBuilder;
+	}
+
+	@Override
+	public void updateAudioStream(int streamType) {
+		super.updateAudioStream(streamType);
+		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, streamType + "");
+	}
+
+	@Override
+	public void stop() {
+		ttsRequests = 0;
+		if (mTts != null) {
+			mTts.stop();
+		}
+		abandonAudioFocus();
+	}
+
+	@Override
+	public void clear() {
+		super.clear();
+		internalClear();
 	}
 
 	private void internalClear() {
@@ -273,22 +312,25 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 		ttsVoiceStatus = "-";
 		ttsVoiceUsed = "-";
 	}
-	
-	@Override
-	public void clear() {
-		super.clear();
-		internalClear();
+
+	public static String getTtsVoiceStatus() {
+		return ttsVoiceStatus;
 	}
-	
-	@Override
-	public void updateAudioStream(int streamType) {
-		super.updateAudioStream(streamType);
-		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, streamType+"");		
+
+	public static String getTtsVoiceUsed() {
+		return ttsVoiceUsed;
 	}
 
 	@Override
 	public boolean supportsStructuredStreetNames() {
-		return false;
+		return true;
 	}
 
+	public static boolean isMyData(File voiceDir) {
+		if (!voiceDir.getName().contains("tts")) {
+			return false;
+		}
+		String langName = voiceDir.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
+		return new File(voiceDir, langName + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS).exists();
+	}
 }

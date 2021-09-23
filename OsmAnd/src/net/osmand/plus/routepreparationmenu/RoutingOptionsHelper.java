@@ -36,7 +36,7 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
-import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
+import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -200,11 +200,13 @@ public class RoutingOptionsHelper {
 		// read available voice data
 		OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		File extStorage = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-		Set<String> setFiles = new LinkedHashSet<String>();
+		Set<String> setFiles = new LinkedHashSet<>();
 		if (extStorage.exists()) {
-			for (File f : extStorage.listFiles()) {
+			File[] voiceDirs = extStorage.listFiles();
+			voiceDirs = voiceDirs == null ? new File[0] : voiceDirs;
+			for (File f : voiceDirs) {
 				if (f.isDirectory()) {
-					if (JSMediaCommandPlayerImpl.isMyData(f) || JSTTSCommandPlayerImpl.isMyData(f)) {
+					if (JSMediaCommandPlayerImpl.isMyData(f) || JsTtsCommandPlayer.isMyData(f)) {
 						setFiles.add(f.getName());
 					}
 				}

@@ -26,7 +26,7 @@ import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.voice.BaseCommandPlayer;
 import net.osmand.plus.voice.JsCommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.plus.voice.TTSCommandPlayerImpl;
+import net.osmand.plus.voice.JsTtsCommandPlayer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -142,8 +142,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		v += "\n \u25CF OsmAnd voice: " + osmandVoice;
 		v += "\n \u25CF OsmAnd voice language: " + osmandVoiceLang;
 
-		v += "\n \u25CF TTS voice language availability: " + TTSCommandPlayerImpl.getTtsVoiceStatus();
-		v += "\n \u25CF TTS voice actually used: " + TTSCommandPlayerImpl.getTtsVoiceUsed();
+		v += "\n \u25CF TTS voice language availability: " + JsTtsCommandPlayer.getTtsVoiceStatus();
+		v += "\n \u25CF TTS voice actually used: " + JsTtsCommandPlayer.getTtsVoiceUsed();
 
 		if (stream == 0) {
 			v += "\n \u25CF BT SCO: " + BaseCommandPlayer.btScoInit;

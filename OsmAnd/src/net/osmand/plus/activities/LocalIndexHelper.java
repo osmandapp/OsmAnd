@@ -12,7 +12,7 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
-import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
+import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -282,7 +282,7 @@ public class LocalIndexHelper {
 		Iterator<File> it = voiceFilesList.iterator();
 		while (it.hasNext()) {
 			File voiceFile = it.next();
-			if (voiceFile.isDirectory() && (JSTTSCommandPlayerImpl.isMyData(voiceFile))) {
+			if (voiceFile.isDirectory() && (JsTtsCommandPlayer.isMyData(voiceFile))) {
 				loadLocalData(voiceFile, LocalIndexType.TTS_VOICE_DATA, result, backup, needDescription, loadTask);
 				it.remove();
 			}
