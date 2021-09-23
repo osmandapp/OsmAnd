@@ -44,7 +44,7 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
     }
 
     @Override
-    public synchronized List<String> playCommands(CommandBuilder builder) {
+    public synchronized List<String> playCommands(JsCommandBuilder builder) {
         if(vrt.isMute()) {
             return Collections.emptyList();
         }
@@ -82,8 +82,8 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
     }
 
     @Override
-    public JSCommandBuilder newCommandBuilder() {
-        JSCommandBuilder commandBuilder = new JSCommandBuilder(this);
+    public JsCommandBuilder newCommandBuilder() {
+        JsCommandBuilder commandBuilder = new JsCommandBuilder(this);
         commandBuilder.setJSContext(jsScope);
         commandBuilder.setParameters(app.getSettings().METRIC_SYSTEM.get().toTTSString(), false);
         return commandBuilder;

@@ -37,8 +37,8 @@ public class JSTTSCommandPlayerImpl extends TTSCommandPlayerImpl {
     }
 
     @Override
-    public JSCommandBuilder newCommandBuilder() {
-        JSCommandBuilder commandBuilder = new JSCommandBuilder(this);
+    public JsCommandBuilder newCommandBuilder() {
+        JsCommandBuilder commandBuilder = new JsCommandBuilder(this);
         commandBuilder.setJSContext(jsScope);
         commandBuilder.setParameters(app.getSettings().METRIC_SYSTEM.get().toTTSString(), true);
         return commandBuilder;

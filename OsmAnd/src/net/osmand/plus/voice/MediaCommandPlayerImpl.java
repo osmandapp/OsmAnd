@@ -67,7 +67,7 @@ public class MediaCommandPlayerImpl extends BaseCommandPlayer implements MediaPl
 
 	//  Called from the calculating route thread.
 	@Override
-	public synchronized List<String> playCommands(CommandBuilder builder) {
+	public synchronized List<String> playCommands(JsCommandBuilder builder) {
 		if(vrt.isMute()) {
 			StringBuilder bld = new StringBuilder();
 			for (String s : builder.execute()) {

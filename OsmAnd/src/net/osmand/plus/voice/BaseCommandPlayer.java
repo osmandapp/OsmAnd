@@ -14,11 +14,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.List;
-
-import alice.tuprolog.Struct;
-import androidx.annotation.NonNull;
 
 public abstract class BaseCommandPlayer implements CommandPlayer {
 
@@ -26,8 +21,6 @@ public abstract class BaseCommandPlayer implements CommandPlayer {
 
 	protected OsmandApplication app;
 	protected File voiceProviderDir;
-	protected static final String P_VERSION = "version";
-	protected static final String P_RESOLVE = "resolve";
 
 	public static final String A_LEFT = "left";
 	public static final String A_LEFT_SH = "left_sh";
@@ -43,7 +36,6 @@ public abstract class BaseCommandPlayer implements CommandPlayer {
 	protected String language;
 	protected int streamType;
 	private ApplicationMode applicationMode;
-
 
 	protected BaseCommandPlayer(OsmandApplication app, ApplicationMode applicationMode,
 	                            String voiceProvider) throws CommandPlayerException {
@@ -82,11 +74,6 @@ public abstract class BaseCommandPlayer implements CommandPlayer {
 	}
 
 	@Override
-	public List<String> execute(List<Struct> listCmd) {
-		return Collections.emptyList();
-	}
-	
-	@Override
 	public String getCurrentVoice() {
 		if (voiceProviderDir == null) {
 			return null;
@@ -95,8 +82,8 @@ public abstract class BaseCommandPlayer implements CommandPlayer {
 	}
 
 	@Override
-	public CommandBuilder newCommandBuilder() {
-		return new CommandBuilder(this);
+	public JsCommandBuilder newCommandBuilder() {
+		return new JsCommandBuilder(this);
 	}
 
 	@Override

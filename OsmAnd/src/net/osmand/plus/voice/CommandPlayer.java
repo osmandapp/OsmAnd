@@ -2,25 +2,21 @@ package net.osmand.plus.voice;
 
 import java.util.List;
 
-import alice.tuprolog.Struct;
-
 public interface CommandPlayer {
 
-	public String getCurrentVoice();
+	String getCurrentVoice();
 
-	public CommandBuilder newCommandBuilder();
+	JsCommandBuilder newCommandBuilder();
 
-	public List<String> playCommands(CommandBuilder builder);
+	List<String> playCommands(JsCommandBuilder builder);
 
-	public void clear();
+	void clear();
 
-	public List<String> execute(List<Struct> listStruct);
-	
-	public void updateAudioStream(int streamType);
+	void updateAudioStream(int streamType);
 
-    public String getLanguage();
+    String getLanguage();
     
-    public boolean supportsStructuredStreetNames();
+    boolean supportsStructuredStreetNames();
 
-	public void stop();
+	void stop();
 }

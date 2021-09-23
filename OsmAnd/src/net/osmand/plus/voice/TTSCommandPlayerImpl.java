@@ -64,7 +64,7 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 	
 	// Called from the calculating route thread.
 	@Override
-	public synchronized List<String> playCommands(CommandBuilder builder) {
+	public synchronized List<String> playCommands(JsCommandBuilder builder) {
 		final List<String> execute = builder.execute(); //list of strings, the speech text, play it
 		StringBuilder bld = new StringBuilder();
 		for (String s : execute) {

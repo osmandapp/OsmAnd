@@ -24,7 +24,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.voice.BaseCommandPlayer;
-import net.osmand.plus.voice.CommandBuilder;
+import net.osmand.plus.voice.JsCommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 
@@ -262,11 +262,11 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		return new StreetName(res);
 	}
 
-	private CommandBuilder builder(CommandPlayer p){
+	private JsCommandBuilder builder(CommandPlayer p){
 		return p.newCommandBuilder();
 	}
 
-	public void addButton(ViewGroup layout, final String description, final CommandBuilder builder){
+	public void addButton(ViewGroup layout, final String description, final JsCommandBuilder builder) {
 		final Button button = new Button(this);
 		button.setGravity(Gravity.LEFT);
 		button.setTransformationMethod(null); //or else button text is all upper case
