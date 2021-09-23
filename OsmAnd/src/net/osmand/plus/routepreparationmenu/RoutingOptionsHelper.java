@@ -10,11 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatCheckedTextView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -24,9 +19,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -40,10 +32,11 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
 import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
-import net.osmand.plus.voice.MediaCommandPlayerImpl;
-import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -56,6 +49,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatCheckedTextView;
 
 
 public class RoutingOptionsHelper {
@@ -206,8 +204,7 @@ public class RoutingOptionsHelper {
 		if (extStorage.exists()) {
 			for (File f : extStorage.listFiles()) {
 				if (f.isDirectory()) {
-					if (JSMediaCommandPlayerImpl.isMyData(f) || JSTTSCommandPlayerImpl.isMyData(f)
-							|| MediaCommandPlayerImpl.isMyData(f) || TTSCommandPlayerImpl.isMyData(f)) {
+					if (JSMediaCommandPlayerImpl.isMyData(f) || JSTTSCommandPlayerImpl.isMyData(f)) {
 						setFiles.add(f.getName());
 					}
 				}

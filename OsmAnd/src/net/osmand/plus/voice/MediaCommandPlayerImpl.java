@@ -3,14 +3,13 @@ package net.osmand.plus.voice;
 
 import android.media.AudioAttributes;
 import android.media.MediaPlayer;
-import android.os.Build;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.api.AudioFocusHelperImpl;
+import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandPreference;
 
 import org.apache.commons.logging.Log;
 
@@ -27,9 +26,6 @@ import java.util.List;
  */
 public class MediaCommandPlayerImpl extends BaseCommandPlayer implements MediaPlayer.OnCompletionListener {
 	
-	private static final String CONFIG_FILE = "_config.p";
-	private static final int[] MEDIA_VOICE_VERSION = new int[] { 0 }; // MUST BE SORTED, list of supported versions
-
 	private static final Log log = PlatformUtil.getLog(MediaCommandPlayerImpl.class);
 	
 	// playing media
@@ -42,7 +38,7 @@ public class MediaCommandPlayerImpl extends BaseCommandPlayer implements MediaPl
 	public MediaCommandPlayerImpl(OsmandApplication ctx, ApplicationMode applicationMode, VoiceRouter vrt, String voiceProvider)
 		throws CommandPlayerException
 	{
-		super(ctx, applicationMode, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
+		super(ctx, applicationMode, voiceProvider);
 		this.vrt = vrt;
 	}
 
@@ -156,8 +152,8 @@ public class MediaCommandPlayerImpl extends BaseCommandPlayer implements MediaPl
 	private File getNextFileToPlay() {
 		while (!filesToPlay.isEmpty()) {
 			String f = filesToPlay.remove(0);
-			if (f != null && voiceDir != null) {
-				File file = new File(voiceDir, f);
+			if (f != null && voiceProviderDir != null) {
+				File file = new File(voiceProviderDir, f);
 				return file;
 			}
 		}
@@ -193,10 +189,6 @@ public class MediaCommandPlayerImpl extends BaseCommandPlayer implements MediaPl
 		}
 	}
 	
-	public static boolean isMyData(File voiceDir) {
-		return new File(voiceDir, CONFIG_FILE).exists();
-	}
-
 	@Override
 	public boolean supportsStructuredStreetNames() {
 		return false;

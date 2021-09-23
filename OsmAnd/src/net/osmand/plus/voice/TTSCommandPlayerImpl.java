@@ -20,7 +20,6 @@ import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -30,10 +29,6 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 	public final static String PEBBLE_ALERT = "PEBBLE_ALERT";
 	public final static String WEAR_ALERT = "WEAR_ALERT";
 
-	private static final String CONFIG_FILE = "_ttsconfig.p";
-	private static final int[] TTS_VOICE_VERSION = new int[] { 102, 103 }; // !! MUST BE SORTED  
-	// No more TTS v101 support because of too many changes
-	// TODO: We could actually remove v102 support, I am done updating all existing 35 TTS voices to v103. Hardy, July 2016
 	private static final Log log = PlatformUtil.getLog(TTSCommandPlayerImpl.class);
 	private static TextToSpeech mTts;
 	private static String ttsVoiceStatus = "-";
@@ -43,7 +38,7 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 
 	public TTSCommandPlayerImpl(OsmandApplication app, ApplicationMode applicationMode, VoiceRouter vrt,
 	                            String voiceProvider) throws CommandPlayerException {
-		super(app, applicationMode, voiceProvider, CONFIG_FILE, TTS_VOICE_VERSION);
+		super(app, applicationMode, voiceProvider);
 		this.vrt = vrt;
 		if (Algorithms.isEmpty(language)) {
 			throw new CommandPlayerException(app.getString(R.string.voice_data_corrupted));
@@ -285,10 +280,6 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 		internalClear();
 	}
 	
-	public static boolean isMyData(File voiceDir) {
-		return new File(voiceDir, CONFIG_FILE).exists();
-	}
-
 	@Override
 	public void updateAudioStream(int streamType) {
 		super.updateAudioStream(streamType);
@@ -297,7 +288,7 @@ public class TTSCommandPlayerImpl extends BaseCommandPlayer {
 
 	@Override
 	public boolean supportsStructuredStreetNames() {
-		return getCurrentVersion() >= 103;
+		return false;
 	}
 
 }

@@ -5,43 +5,27 @@ import android.media.AudioManager;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.StateChangedListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.api.AudioFocusHelper;
-import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.api.AudioFocusHelperImpl;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
 
-import alice.tuprolog.InvalidLibraryException;
-import alice.tuprolog.InvalidTheoryException;
-import alice.tuprolog.NoSolutionException;
-import alice.tuprolog.Number;
-import alice.tuprolog.Prolog;
-import alice.tuprolog.SolveInfo;
 import alice.tuprolog.Struct;
-import alice.tuprolog.Term;
-import alice.tuprolog.Theory;
-import alice.tuprolog.Var;
+import androidx.annotation.NonNull;
 
-public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedListener<ApplicationMode> {
+public abstract class BaseCommandPlayer implements CommandPlayer {
 
 	private static final Log log = PlatformUtil.getLog(BaseCommandPlayer.class);
 
 	protected OsmandApplication app;
-	protected File voiceDir;
-	protected Prolog prologSystem;
+	protected File voiceProviderDir;
 	protected static final String P_VERSION = "version";
 	protected static final String P_RESOLVE = "resolve";
 
@@ -55,45 +39,21 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 	public static final String A_RIGHT_KEEP = "right_keep";
 
 	protected static final String DELAY_CONST = "delay_";
-	/** Must be sorted array! */
-	private int[] sortedVoiceVersions;
 	private static AudioFocusHelper mAudioFocusHelper;
-	protected String language = "";
+	protected String language;
 	protected int streamType;
-	private static int currentVersion;
 	private ApplicationMode applicationMode;
 
 
 	protected BaseCommandPlayer(OsmandApplication app, ApplicationMode applicationMode,
-	                            String voiceProvider, String configFile,
-	                            int[] sortedVoiceVersions) throws CommandPlayerException {
+	                            String voiceProvider) throws CommandPlayerException {
 		this.app = app;
-		this.sortedVoiceVersions = sortedVoiceVersions;
 		this.applicationMode = applicationMode;
-		long time = System.currentTimeMillis();
-		this.app = app;
-
 		this.streamType = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode);
-		initVoiceDir(voiceProvider);
-		if (voiceDir != null && (MediaCommandPlayerImpl.isMyData(voiceDir) || TTSCommandPlayerImpl.isMyData(voiceDir))) {
-			if (log.isInfoEnabled()) {
-				log.info("Initializing prolog system : " + (System.currentTimeMillis() - time));
-			}
-			try {
-				prologSystem = new Prolog(getLibraries());
-			} catch (InvalidLibraryException e) {
-				log.error("Initializing error", e);
-				throw new RuntimeException(e);
-			}
-			init(voiceProvider, app.getSettings(), configFile);
-			final Term langVal = solveSimplePredicate("language");
-			if (langVal instanceof Struct) {
-				language = ((Struct) langVal).getName();
-			}
-		} else {
-			language = voiceProvider.replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "")
-					.replace("-formal", "").replace("-casual", "");
-		}
+		voiceProviderDir = getVoiceProviderDir(voiceProvider);
+		this.language = voiceProvider.replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "")
+				.replace("-formal", "")
+				.replace("-casual", "");
 	}
 
 	public ApplicationMode getApplicationMode() {
@@ -109,131 +69,29 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 					"alice.tuprolog.lib.ISOLibrary"/*, "alice.tuprolog.lib.IOLibrary"*/};
 	}
 
-	@Override
-	public void stateChanged(ApplicationMode change) {
-		app.runInUIThread(() -> {
-			if (prologSystem != null) {
-				try {
-					prologSystem.getTheoryManager().retract(new Struct("appMode", new Var()));
-				} catch (Exception e) {
-					log.error("Retract error: ", e);
-				}
-				prologSystem.getTheoryManager()
-						.assertA(
-								new Struct("appMode", new Struct(app.getSettings().APPLICATION_MODE.get().getStringKey()
-										.toLowerCase())), true, "", true);
-			}
-		});
-	}
-	
-	private void init(String voiceProvider, OsmandSettings settings, String configFile) throws CommandPlayerException {
-		prologSystem.clearTheory();
-
-		if (voiceDir != null) {
-			long time = System.currentTimeMillis();
-			boolean wrong = false;
-			try {
-				InputStream config;
-				config = new FileInputStream(new File(voiceDir, configFile));
-				MetricsConstants mc = settings.METRIC_SYSTEM.get();
-				settings.APPLICATION_MODE.addListener(this);
-				prologSystem.getTheoryManager()
-				.assertA(
-						new Struct("appMode", new Struct(app.getSettings().APPLICATION_MODE.get().getStringKey()
-								.toLowerCase())), true, "", true);
-				prologSystem.addTheory(new Theory("measure('"+mc.toTTSString()+"')."));
-				prologSystem.addTheory(new Theory(config));
-				config.close();
-			} catch (InvalidTheoryException | IOException e) {
-				log.error("Loading voice config exception " + voiceProvider, e);
-				wrong = true;
-			}
-			if (wrong) {
-				throw new CommandPlayerException(app.getString(R.string.voice_data_corrupted));
-			} else {
-				Term val = solveSimplePredicate(P_VERSION);
-				if (!(val instanceof Number) ||  Arrays.binarySearch(sortedVoiceVersions,((Number)val).intValue()) < 0) {
-					throw new CommandPlayerException(app.getString(R.string.voice_data_not_supported));
-				}
-				currentVersion = ((Number)val).intValue();
-			}
-			if (log.isInfoEnabled()) {
-				log.info("Initializing voice subsystem  " + voiceProvider + " : " + (System.currentTimeMillis() - time));
-			}
-		}
-	}
-
-	private void initVoiceDir(String voiceProvider) throws CommandPlayerException {
+	private File getVoiceProviderDir(String voiceProvider) throws CommandPlayerException {
 		if (voiceProvider != null) {
-			File parent = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-			voiceDir = new File(parent, voiceProvider);
-			if (!voiceDir.exists()) {
-				voiceDir = null;
-				throw new CommandPlayerException(
-						app.getString(R.string.voice_data_unavailable));
+			File voicesDir = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+			File voiceProviderDir = new File(voicesDir, voiceProvider);
+			if (!voiceProviderDir.exists()) {
+				throw new CommandPlayerException(app.getString(R.string.voice_data_unavailable));
 			}
+			return voiceProviderDir;
 		}
-	}
-
-	protected Term solveSimplePredicate(String predicate) {
-		Term val = null;
-		Var v = new Var("MyVariable");
-		SolveInfo s = prologSystem.solve(new Struct(predicate, v));
-		if (s.isSuccess()) {
-			prologSystem.solveEnd();
-			try {
-				val = s.getVarValue(v.getName());
-			} catch (NoSolutionException e) {
-			}
-		}
-		return val;
+		return null;
 	}
 
 	@Override
-	public List<String> execute(List<Struct> listCmd){
-		Struct list = new Struct(listCmd.toArray(new Term[0]));
-		Var result = new Var("RESULT");
-		List<String> files = new ArrayList<String>();
-		if(prologSystem == null) {
-			return files;
-		}
-		if (log.isInfoEnabled()) {
-			log.info("Query speak files " + listCmd);
-		}
-		SolveInfo res = prologSystem.solve(new Struct(P_RESOLVE, list, result));
-		
-		if (res.isSuccess()) {
-			try {
-				prologSystem.solveEnd();	
-				Term solution = res.getVarValue(result.getName());
-				
-				Iterator<?> listIterator = ((Struct) solution).listIterator();
-				while(listIterator.hasNext()){
-					Object term = listIterator.next();
-					if(term instanceof Struct){
-						files.add(((Struct) term).getName());
-					}
-				}
-				
-			} catch (NoSolutionException e) {
-			}
-		}
-		if (log.isInfoEnabled()) {
-			log.info("Speak files " + files);
-		}
-		return files;
-	}
-	
-	public static int getCurrentVersion() {
-		return currentVersion;
+	public List<String> execute(List<Struct> listCmd) {
+		return Collections.emptyList();
 	}
 	
 	@Override
 	public String getCurrentVoice() {
-		if (voiceDir == null) {
+		if (voiceProviderDir == null) {
 			return null;
 		}
-		return voiceDir.getName();
+		return voiceProviderDir.getName();
 	}
 
 	@Override
@@ -243,12 +101,8 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 
 	@Override
 	public void clear() {
-		if(app != null && app.getSettings() != null) {
-			app.getSettings().APPLICATION_MODE.removeListener(this);
-		}
 		abandonAudioFocus();
 		app = null;
-		prologSystem = null;
 	}
 
 	@Override
@@ -269,11 +123,11 @@ public abstract class BaseCommandPlayer implements CommandPlayer, StateChangedLi
 
 	private AudioFocusHelper getAudioFocus() {
 		try {
-			return new net.osmand.plus.api.AudioFocusHelperImpl();
+			return new AudioFocusHelperImpl();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
+			return null;
 		}
-		return null;
 	}
 	
 	protected synchronized void abandonAudioFocus() {
