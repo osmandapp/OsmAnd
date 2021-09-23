@@ -82,11 +82,6 @@ public abstract class BaseCommandPlayer implements CommandPlayer {
 	}
 
 	@Override
-	public JsCommandBuilder newCommandBuilder() {
-		return new JsCommandBuilder(this);
-	}
-
-	@Override
 	public void clear() {
 		abandonAudioFocus();
 		app = null;
