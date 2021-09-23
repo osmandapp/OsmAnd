@@ -113,10 +113,10 @@
     <string name="mile">mi</string>
     <string name="km">km</string>
     <string name="m">m</string>
-    <string name="nm">nmi</string>
+    <string name="nm">mn</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
-    <string name="nm_h">nmi/h</string>
+    <string name="nm_h">mn/h</string>
     <string name="m_s">m/s</string>
     <string name="km_h">km/h</string>
     <string name="mile_per_hour">mph</string>
@@ -125,7 +125,7 @@
     <string name="si_m_s">Metro segunduko</string>
     <string name="si_min_km">Minutu kilometroko</string>
     <string name="si_min_m">Minutu miliaro</string>
-    <string name="si_nm_h">Milia nautikoa orduro (knot)</string>
+    <string name="si_nm_h">Itsas miliak orduko (korapiloak)</string>
     <string name="si_mi_feet">Miliak/Oin</string>
     <string name="si_mi_yard">Miliak/yardak</string>
     <string name="si_km_m">Kilometroak/metroak</string>
@@ -181,7 +181,7 @@
     <string name="device_added_successfully">%1$s gehituta.</string>
     <string name="enter_device_name_description">Eman izena zure gailuari gehienez 200 karaktere erabilita.</string>
     <string name="shared_string_off">Desgaituta</string>
-    <string name="shared_string_end">Amaiera</string>
+    <string name="shared_string_end">Amaiera!!!</string>
     <string name="shared_string_start">Hasiera</string>
     <string name="shared_string_apply">Aplikatu</string>
     <string name="set_time_timeline_descr">Hautatu bistaratzeko denbora</string>
@@ -266,8 +266,9 @@
     <string name="share_location_as_description_second_line">Telegrama bezeroan gailuaren IDa sortu eta ikusi dezakezu %1$s txat bota erabiliz. % 2 $ s</string>
     <string name="privacy_policy_agree">\"Jarraitu\" sakatuz, Telegram eta OsmAnd pribatutasun-politiken baldintzak onartzen dituzu.</string>
     <string name="privacy_policy_telegram_client">OsmAnd aztarnariak Telegram plataforma irekia erabiltzen duten bezeroetako bat da. Zure kontaktuek Telegram-eko beste edozein bezero erabil dezakete.</string>
-    <string name="last_update_from_telegram_date">Telegram-eko azken eguneratzea: %1$s</string>
+    <string name="last_update_from_telegram_date">Telegram-en azken eguneratzea: %1$s</string>
     <string name="shared_string_export">Esportatu</string>
     <string name="logcat_buffer">Logcat bufferra</string>
     <string name="send_report">Bidali txostena</string>
+    <string name="logcat_buffer_descr">Egiaztatu eta partekatu aplikazioaren erregistro zehatzak</string>
 </resources>

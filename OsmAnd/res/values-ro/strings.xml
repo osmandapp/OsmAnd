@@ -4331,4 +4331,6 @@
     <string name="start_point">Începe</string>
     <string name="mapillary_menu_filter_description_new">Filtrați imaginile în funcție de dată sau de tip. Activ doar în zoom de apropiere.</string>
     <string name="service_is_not_available_please_try_later">Serviciul nu este disponibil, vă rugăm să încercați mai târziu</string>
+    <string name="shared_string_files">Fișiere</string>
+    <string name="travel_route_types">Tipuri de rute</string>
 </resources>

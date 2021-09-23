@@ -1101,11 +1101,11 @@
     <string name="hourly">Cada hora</string>
     <string name="number_of_contributors">Number of contributors</string>
     <string name="configure_screen_quick_action">Aición rápida</string>
-    <string name="quick_action_map_style_switch">Map style changed to \"%s\".</string>
+    <string name="quick_action_map_style_switch">L\'estilu del mapa camudó a «%s».</string>
     <string name="quick_action_take_audio_note">New audio note</string>
     <string name="quick_action_navigation_voice_off">Unmute Voice</string>
     <string name="quick_action_navigation_voice_on">Mute Voice</string>
-    <string name="quick_actions_delete_text">Delete the \"%s\" action\?</string>
+    <string name="quick_actions_delete_text">¿Quies desaniciar l\'aición «%s»\?</string>
     <string name="quick_action_take_audio_note_descr">A button to add an audio note in the middle of the screen.</string>
     <string name="quick_action_add_osm_bug_descr">Un botón p\'amestar una nota d\'OSM metanes de la pantalla.</string>
     <string name="quick_action_add_poi_descr">A button to add a POI in the middle of the screen.</string>
@@ -1117,7 +1117,7 @@
     <string name="quick_action_bug_descr">This message is included in the comment field.</string>
     <string name="quick_action_gpx_category_descr">Choose an optional category.</string>
     <string name="mappilary_no_internet_desc">Photos from Mapillary are only available online.</string>
-    <string name="retry">Retry</string>
+    <string name="retry">Retentar</string>
     <string name="empty_state_favourites">Add Favorites</string>
     <string name="empty_state_favourites_desc">Import Favorites or add them by marking points on the map.</string>
     <string name="total_donations">Total donations</string>
@@ -1547,11 +1547,11 @@
     <string name="quick_action_add_marker_descr">A button to add a map marker at the screen center location.</string>
     <string name="quick_favorites_name_preset">Name preset</string>
     <string name="quick_favorites_show_favorites_dialog">Show Favorites dialog</string>
-    <string name="quick_actions_delete">Delete action</string>
-    <string name="dialog_add_action_title">Add action</string>
+    <string name="quick_actions_delete">Desaniciar l\'aición</string>
+    <string name="dialog_add_action_title">Amestar una aición</string>
     <string name="quick_action_add_favorite">Add Favorite</string>
     <string name="quick_action_edit_action">Edit action</string>
-    <string name="quick_action_new_action">Add action</string>
+    <string name="quick_action_new_action">Amestar una aición</string>
     <string name="quick_action_add_parking">Add parking place</string>
     <string name="quick_action_navigation_voice">Voice on/off</string>
     <string name="quick_action_add_osm_bug">Add OSM Note</string>
@@ -4329,4 +4329,5 @@
     <string name="backup_error_token_is_not_valid_or_expired">Invalid or expired token</string>
     <string name="backup_error_user_is_not_registered">No user registered with that e-mail address</string>
     <string name="backup_error_no_valid_subscription">No valid subscription present</string>
+    <string name="shared_string_files">Ficheros</string>
 </resources>

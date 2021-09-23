@@ -4327,4 +4327,6 @@
     <string name="start_point">Iniciar</string>
     <string name="mapillary_menu_filter_description_new">Filtrar imágenes por fecha o tipo. Sólo activado en los primeros zums.</string>
     <string name="service_is_not_available_please_try_later">Servicio no disponible, por favor intente más tarde</string>
+    <string name="shared_string_files">Archivos</string>
+    <string name="travel_route_types">Tipos de rutas</string>
 </resources>
