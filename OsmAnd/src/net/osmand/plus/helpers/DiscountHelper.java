@@ -380,7 +380,7 @@ public class DiscountHelper {
 	private static void showDialogForPlanType(@NonNull MapActivity mapActivity, @NonNull String planType) {
 		String selectedButtonId = null;
 		if (mData != null && mData.urlParams != null) {
-			selectedButtonId = mData.urlParams.optString("selected_price_btn_id");
+			selectedButtonId = mData.urlParams.optString("selected_choose_plan_btn");
 		}
 		switch (planType) {
 			case CHOOSE_PLAN_TYPE_FREE:

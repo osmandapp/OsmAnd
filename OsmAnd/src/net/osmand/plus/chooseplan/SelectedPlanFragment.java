@@ -83,7 +83,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 		if (bundle != null && bundle.containsKey(SELECTED_PRICE_BTN_ID)) {
 			String key = bundle.getString(SELECTED_PRICE_BTN_ID);
 			for (PriceButton<?> button : priceButtons) {
-				if (Algorithms.objectEquals(key, button.getId())) {
+				if (key != null && button.getId().contains(key)) {
 					return button;
 				}
 			}
