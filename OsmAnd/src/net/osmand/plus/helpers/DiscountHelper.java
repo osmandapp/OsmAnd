@@ -14,6 +14,10 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
+
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -52,10 +56,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
-
-import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
 
 public class DiscountHelper {
 
@@ -320,9 +320,9 @@ public class DiscountHelper {
 					for (InAppPurchase p : purchaseHelper.getSubscriptions().getAllSubscriptions()) {
 						if (url.contains(p.getSku())) {
 							if (purchases.isMapsSubscription(p)) {
-								MapsPlusPlanFragment.showInstance(mapActivity);
+								MapsPlusPlanFragment.showInstance(mapActivity, p.getSku());
 							} else if (purchases.isOsmAndProSubscription(p)) {
-								OsmAndProPlanFragment.showInstance(mapActivity);
+								OsmAndProPlanFragment.showInstance(mapActivity, p.getSku());
 							} else {
 								ChoosePlanFragment.showDefaultInstance(mapActivity);
 							}
@@ -364,7 +364,7 @@ public class DiscountHelper {
 				}
 			}
 		} else if (url.equals(OPEN_ACTIVITY)) {
-			if (mData.activityJson != null) {
+			if (mData != null && mData.activityJson != null) {
 				openActivity(mapActivity, mData.activityJson);
 			}
 		} else if (url.startsWith(SHOW_CHOOSE_PLAN_PREFIX)) {
@@ -378,13 +378,25 @@ public class DiscountHelper {
 	}
 
 	private static void showDialogForPlanType(@NonNull MapActivity mapActivity, @NonNull String planType) {
+		String selectedButtonId = null;
+		if (mData != null && mData.urlParams != null) {
+			selectedButtonId = mData.urlParams.optString("selected_choose_plan_btn");
+		}
 		switch (planType) {
 			case CHOOSE_PLAN_TYPE_FREE:
 			case CHOOSE_PLAN_TYPE_MAPS_PLUS:
-				MapsPlusPlanFragment.showInstance(mapActivity);
+				if (Algorithms.isEmpty(selectedButtonId)) {
+					MapsPlusPlanFragment.showInstance(mapActivity);
+				} else {
+					MapsPlusPlanFragment.showInstance(mapActivity, selectedButtonId);
+				}
 				break;
 			case CHOOSE_PLAN_TYPE_PRO:
-				OsmAndProPlanFragment.showInstance(mapActivity);
+				if (Algorithms.isEmpty(selectedButtonId)) {
+					OsmAndProPlanFragment.showInstance(mapActivity);
+				} else {
+					OsmAndProPlanFragment.showInstance(mapActivity, selectedButtonId);
+				}
 				break;
 			case CHOOSE_PLAN_TYPE_SEA_DEPTH:
 				ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.NAUTICAL);
@@ -474,6 +486,7 @@ public class DiscountHelper {
 		@ColorInt
 		int textBtnTitleColor = -1;
 
+		JSONObject urlParams;
 		JSONObject activityJson;
 		JSONArray oneOfConditions;
 
@@ -490,6 +503,7 @@ public class DiscountHelper {
 			res.descrColor = parseColor("description_color", obj);
 			res.statusBarColor = parseColor("status_bar_color", obj);
 			res.textBtnTitleColor = parseColor("button_title_color", obj);
+			res.urlParams = obj.optJSONObject("url_params");
 			res.activityJson = obj.optJSONObject("activity");
 			res.oneOfConditions = obj.optJSONArray("oneOfConditions");
 			return res;

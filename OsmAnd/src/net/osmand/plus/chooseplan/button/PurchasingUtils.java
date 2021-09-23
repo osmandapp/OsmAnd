@@ -37,7 +37,7 @@ public class PurchasingUtils {
 		for (InAppSubscription s : subscriptions) {
 			InAppSubscriptionIntroductoryInfo introductoryInfo = s.getIntroductoryInfo();
 			boolean hasIntroductoryInfo = introductoryInfo != null;
-			SubscriptionButton priceBtn = new SubscriptionButton(s.getSkuNoVersion(), s);
+			SubscriptionButton priceBtn = new SubscriptionButton(s.getSku(), s);
 			priceBtn.setTitle(s.getTitle(app));
 
 			CharSequence priceTitle = hasIntroductoryInfo ?
@@ -62,9 +62,8 @@ public class PurchasingUtils {
 		InAppPurchase purchase = getPlanTypePurchase(app);
 		if (purchase == null) return null;
 
-		String title = app.getString(R.string.in_app_purchase_desc);
-		OneTimePaymentButton btn = new OneTimePaymentButton(title, purchase);
-		btn.setTitle(title);
+		OneTimePaymentButton btn = new OneTimePaymentButton(purchase.getSku(), purchase);
+		btn.setTitle(app.getString(R.string.in_app_purchase_desc));
 		btn.setPrice(purchase.getPrice(app));
 		return btn;
 	}
