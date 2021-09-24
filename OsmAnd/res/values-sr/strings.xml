@@ -4266,4 +4266,19 @@
     <string name="no_activity_for_intent">Нисам пронашао одговарајући програм за извођење ове радње</string>
     <string name="no_items_of_type_message">Немате ни једну ставку ове врсте</string>
     <string name="routeInfo_tracktype_description">Бојење линије пута или стазе према стању пута засновано на саставу површи. Обично се користи на путевима где је главна мрежа путева од непресвучених површи.</string>
+    <string name="backup_deleting_all_data">Бришем све податке…</string>
+    <string name="backup_deleted_all_data">Сви подаци су уклоњени</string>
+    <string name="backup_version_history_removed">Сва издања историје су уклоњена.</string>
+    <string name="backup_data_removed">Сви подаци су уклоњени.</string>
+    <string name="shared_string_progress">Напредак</string>
+    <string name="backup_do_not_have_any">Још увек немате ништа сачувано на мрежи.</string>
+    <string name="backup_dont_have_any_descr">Закажите самостална чувања и никад не губите податке.</string>
+    <string name="backup_welcome_back">Добродошли назад!</string>
+    <string name="backup_setup">Подеси чување</string>
+    <string name="purchases_feature_desc_pro_widgets">Добавите приступ могућностима Османда професионалног; бојење путева и још штошта.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Истражите Планове Османда ради проналажења Вама одговарајућих.</string>
+    <string name="shared_string_relation">Однос</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Обоји путеве према њиховим врстама саобраћајних чворишта (међународни, областни, местни).</string>
+    <string name="shared_string_files">Датотеке</string>
+    <string name="travel_route_types">Врсте путева</string>
 </resources>
