@@ -1,7 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -36,20 +34,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.tabs.TabLayout;
 
 import net.osmand.AndroidUtils;
@@ -70,8 +54,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
+import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
@@ -91,7 +79,22 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
+
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = EditPoiDialogFragment.class.getSimpleName();
@@ -565,15 +568,13 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	private void dismissCheckForChanges() {
 		if (editPoiData.hasChanges()) {
-			showExitDialog();
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				AreYouSureBottomSheetDialogFragment.showInstance(fragmentManager, this);
+			}
 		} else {
 			dismiss();
 		}
-	}
-
-	private void showExitDialog() {
-		DialogFragment dialog = new AreYouSureDialogFragment();
-		dialog.show(getChildFragmentManager(), "AreYouSureDialogFragment");
 	}
 
 	public EditPoiData getEditPoiData() {
@@ -900,7 +901,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			Context themedContext = getActivity();
 			if (getParentFragment() instanceof EditPoiDialogFragment) {
 				themedContext = UiUtilities.getThemedContext(getActivity(),
-						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
+						((EditPoiDialogFragment) getParentFragment()).isNightMode(false));
 			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 			String msg = getString(R.string.save_poi_without_poi_type_message);
@@ -921,26 +922,70 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		}
 	}
 
-	public static class AreYouSureDialogFragment extends DialogFragment {
-		@NonNull
+	public static class AreYouSureBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+
+		public static final String TAG = AreYouSureBottomSheetDialogFragment.class.getSimpleName();
+
 		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			Context themedContext = getActivity();
-			if (getParentFragment() instanceof EditPoiDialogFragment) {
-				themedContext = UiUtilities.getThemedContext(getActivity(),
-						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
+		public void createMenuItems(Bundle savedInstanceState) {
+			items.add(new BottomSheetItemWithDescription.Builder()
+					.setDescription(getString(R.string.unsaved_changes_will_be_lost))
+					.setTitle(getString(R.string.are_you_sure))
+					.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
+					.create());
+
+			int spaceHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin);
+			items.add(new DividerSpaceItem(getContext(), spaceHeight));
+		}
+
+		@Override
+		protected void onThirdBottomButtonClick() {
+			if (getTargetFragment() instanceof EditPoiDialogFragment) {
+				((EditPoiDialogFragment) getTargetFragment()).dismiss();
 			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-			builder.setTitle(getResources().getString(R.string.are_you_sure))
-					.setMessage(getString(R.string.unsaved_changes_will_be_lost))
-					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							((DialogFragment) getParentFragment()).dismiss();
-						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, null);
-			return builder.create();
+			dismiss();
+		}
+
+		@Override
+		protected DialogButtonType getThirdBottomButtonType() {
+			return (DialogButtonType.SECONDARY);
+		}
+
+		@Override
+		protected int getThirdBottomButtonTextId() {
+			return R.string.shared_string_exit;
+		}
+
+		@Override
+		protected void onRightBottomButtonClick() {
+			if (getTargetFragment() instanceof EditPoiDialogFragment) {
+				((EditPoiDialogFragment) getTargetFragment()).trySave();
+			}
+			dismiss();
+		}
+
+		@Override
+		protected int getRightBottomButtonTextId() {
+			return R.string.shared_string_save;
+		}
+
+		@Override
+		protected void onDismissButtonClickAction() {
+			dismiss();
+		}
+
+		@Override
+		protected int getSecondDividerHeight() {
+			return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
+		}
+
+		public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
+			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+				AreYouSureBottomSheetDialogFragment fragment = new AreYouSureBottomSheetDialogFragment();
+				fragment.setTargetFragment(target, 0);
+				fragment.setUsedOnMap(false);
+				fragment.show(fragmentManager, TAG);
+			}
 		}
 	}
 
@@ -951,7 +996,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			Context themedContext = getActivity();
 			if (getParentFragment() instanceof EditPoiDialogFragment) {
 				themedContext = UiUtilities.getThemedContext(getActivity(),
-						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
+						((EditPoiDialogFragment) getParentFragment()).isNightMode(false));
 			}
 			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 			String msg = getString(R.string.save_poi_value_exceed_length);
