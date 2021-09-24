@@ -889,8 +889,9 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 
 		private String getNameToDisplay(LocalIndexInfo child) {
-			return child.getType() == LocalIndexType.VOICE_DATA ? FileNameTranslationHelper.getVoiceName(ctx, child.getFileName()) :
-					FileNameTranslationHelper.getFileName(ctx,
+			return child.getType() == LocalIndexType.VOICE_DATA
+					? FileNameTranslationHelper.getVoiceName(ctx, child.getFileName())
+					: FileNameTranslationHelper.getFileName(ctx,
 							ctx.getMyApplication().getResourceManager().getOsmandRegions(),
 							child.getFileName());
 		}
