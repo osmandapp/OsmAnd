@@ -225,15 +225,13 @@ public class DownloadFileHelper {
 					return false;
 				}
 			}
-			if (de.type == DownloadActivityType.VOICE_FILE) {
-				copyVoiceConfig(de);
-			} else if (de.type == DownloadActivityType.SRTM_COUNTRY_FILE) {
+			if (de.type == DownloadActivityType.SRTM_COUNTRY_FILE) {
 				removePreviousSrtmFile(de);
 			}
 			toReIndex.add(de.targetFile);
 			return true;
 		} catch (IOException e) {
-			log.error("Exception ocurred", e); //$NON-NLS-1$
+			log.error("Exception ocurred", e);
 			showWarningCallback.showWarning(ctx.getString(R.string.shared_string_io_error) + ": " + e.getMessage());
 			// Possibly file is corrupted
 			Algorithms.removeAllFiles(de.fileToDownload);
@@ -258,23 +256,6 @@ public class DownloadFileHelper {
 			if (successful) {
 				ctx.getResourceManager().closeFile(previous.getName());
 			}
-		}
-	}
-
-	private void copyVoiceConfig(IndexItem.DownloadEntry de) {
-		File f = ctx.getAppPath("/voice/" + de.baseName + "/_config.p");
-		if (f.exists()) try {
-			InputStream is = ctx.getAssets().open("voice/" + de.baseName + "/config.p");
-			int size = is.available();
-			byte[] buffer = new byte[size];
-			is.read(buffer);
-			is.close();
-
-			FileOutputStream fos = new FileOutputStream(f);
-			fos.write(buffer);
-			fos.close();
-		} catch (Exception ex){
-			log.debug(ex.getMessage());
 		}
 	}
 

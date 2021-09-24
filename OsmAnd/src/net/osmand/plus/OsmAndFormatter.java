@@ -12,6 +12,7 @@ import com.jwetherell.openmap.common.MGRSPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 
 import net.osmand.LocationConvert;
+import net.osmand.OsmAndDateUtils;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;
@@ -128,7 +129,7 @@ public class OsmAndFormatter {
 		} else {
 			calendar.setTimeInMillis(seconds * 1000);
 		}
-		if (org.apache.commons.lang3.time.DateUtils.isSameDay(calendar, Calendar.getInstance())) {
+		if (OsmAndDateUtils.isSameDay(calendar, Calendar.getInstance())) {
 			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime());
 		} else {
 			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime()) + " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];

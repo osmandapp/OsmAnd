@@ -453,7 +453,8 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 				ApplicationMode mode = ApplicationMode.valueOfStringKey(points.get(0).getProfileType(), null);
 				if (mode != null) {
 					app.getRoutingHelper().setAppMode(mode);
-					app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
+					app.initVoiceCommandPlayer(mapActivity, mode, null,
+							true, false, false, true);
 				}
 			}
 			mapActivity.getMapActions().setGPXRouteParams(gpxFile);

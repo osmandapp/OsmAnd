@@ -3,11 +3,6 @@ package net.osmand.plus.activities;
 
 import android.content.Context;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-
 import net.osmand.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -16,10 +11,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
-import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
-import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
-import net.osmand.plus.voice.MediaCommandPlayerImpl;
-import net.osmand.plus.voice.TTSCommandPlayerImpl;
+import net.osmand.plus.voice.JsMediaCommandPlayer;
+import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -32,6 +25,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 
 public class LocalIndexHelper {
@@ -284,16 +282,14 @@ public class LocalIndexHelper {
 		Iterator<File> it = voiceFilesList.iterator();
 		while (it.hasNext()) {
 			File voiceFile = it.next();
-			if (voiceFile.isDirectory() && (JSTTSCommandPlayerImpl.isMyData(voiceFile)
-					|| TTSCommandPlayerImpl.isMyData(voiceFile))) {
+			if (voiceFile.isDirectory() && (JsTtsCommandPlayer.isMyData(voiceFile))) {
 				loadLocalData(voiceFile, LocalIndexType.TTS_VOICE_DATA, result, backup, needDescription, loadTask);
 				it.remove();
 			}
 		}
 		//Now list recorded voices
 		for (File voiceFile : voiceFilesList) {
-			if (voiceFile.isDirectory() && (JSMediaCommandPlayerImpl.isMyData(voiceFile)
-					|| MediaCommandPlayerImpl.isMyData(voiceFile))) {
+			if (voiceFile.isDirectory() && (JsMediaCommandPlayer.isMyData(voiceFile))) {
 				loadLocalData(voiceFile, LocalIndexType.VOICE_DATA, result, backup, needDescription, loadTask);
 			}
 		}

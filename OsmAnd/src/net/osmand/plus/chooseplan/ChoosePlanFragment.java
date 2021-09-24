@@ -31,11 +31,11 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class ChoosePlanFragment extends BasePurchaseDialogFragment implements CardListener {
@@ -213,13 +213,10 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 
 	private void updateContinueButtons() {
 		List<PriceButton<?>> priceButtons = OsmAndProPlanFragment.collectPriceButtons(app, purchaseHelper, nightMode);
-		PriceButton<?>[] array = new PriceButton[priceButtons.size()];
-		priceButtons.toArray(array);
-
-		int osmAndProIconId = nightMode ?
-				R.drawable.ic_action_osmand_pro_logo_colored_night :
-				R.drawable.ic_action_osmand_pro_logo_colored;
-		CharSequence price = array.length == 0 ? null : ObjectUtils.min(array).getPrice();
+		int osmAndProIconId = nightMode
+				? R.drawable.ic_action_osmand_pro_logo_colored_night
+				: R.drawable.ic_action_osmand_pro_logo_colored;
+		CharSequence price = priceButtons.size() == 0 ? null : Collections.min(priceButtons).getPrice();
 		updateContinueButton(mainView.findViewById(R.id.button_continue_pro),
 				osmAndProIconId,
 				getString(R.string.osmand_pro),
@@ -228,12 +225,11 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 				Version.isInAppPurchaseSupported());
 
 		priceButtons = MapsPlusPlanFragment.collectPriceButtons(app, purchaseHelper, nightMode);
-		array = new PriceButton[priceButtons.size()];
-		priceButtons.toArray(array);
-
-		price = array.length == 0 ? null : ObjectUtils.min(array).getPrice();
+		price = priceButtons.size() == 0 ? null : Collections.min(priceButtons).getPrice();
 		boolean availableInMapsPlus = selectedFeature.isAvailableInMapsPlus();
-		int mapsPlusIconId = availableInMapsPlus ? R.drawable.ic_action_osmand_maps_plus : R.drawable.ic_action_osmand_maps_plus_desaturated;
+		int mapsPlusIconId = availableInMapsPlus
+				? R.drawable.ic_action_osmand_maps_plus
+				: R.drawable.ic_action_osmand_maps_plus_desaturated;
 		updateContinueButton(mainView.findViewById(R.id.button_continue_maps_plus),
 				mapsPlusIconId,
 				getString(R.string.maps_plus),

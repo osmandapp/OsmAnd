@@ -23,9 +23,8 @@ import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.voice.AbstractPrologCommandPlayer;
-import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.voice.JsCommandBuilder;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
@@ -141,7 +140,7 @@ public class VoiceRouter {
 	public void setPlayer(CommandPlayer player) {
 		this.player = player;
 		if (pendingCommand != null && player != null) {
-			CommandBuilder newCommand = getNewCommandPlayerToPlay();
+			JsCommandBuilder newCommand = getNewCommandPlayerToPlay();
 			if (newCommand != null) {
 				pendingCommand.play(newCommand);
 			}
@@ -169,7 +168,7 @@ public class VoiceRouter {
 		return settings.VOICE_MUTE.getModeValue(mode);
 	}
 
-	private CommandBuilder getNewCommandPlayerToPlay() {
+	private JsCommandBuilder getNewCommandPlayerToPlay() {
 		if (player == null) {
 			return null;
 		}
@@ -212,7 +211,7 @@ public class VoiceRouter {
 		if (dist > atd.getOffRouteDistance() && !settings.DISABLE_OFFROUTE_RECALC.get()) {
 			long ms = System.currentTimeMillis();
 			if (waitAnnouncedOffRoute == 0 || ms - lastAnnouncedOffRoute > waitAnnouncedOffRoute) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
+				JsCommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					p.offRoute(dist);
 					announceBackOnRoute = true;
@@ -230,7 +229,7 @@ public class VoiceRouter {
 
 	public void announceBackOnRoute() {
 		if (announceBackOnRoute) {
-			CommandBuilder p = getNewCommandPlayerToPlay();
+			JsCommandBuilder p = getNewCommandPlayerToPlay();
 			if (p != null) {
 				p.backOnRoute();
 			}
@@ -240,7 +239,7 @@ public class VoiceRouter {
 	}
 
 	public void approachWaypoint(Location location, List<LocationPointWrapper> points) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			double[] dist = new double[1];
 			makeSound();
@@ -251,7 +250,7 @@ public class VoiceRouter {
 	}
 
 	public void approachFavorite(Location location, List<LocationPointWrapper> points) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			double[] dist = new double[1];
 			makeSound();
@@ -262,7 +261,7 @@ public class VoiceRouter {
 	}
 	
 	public void approachPoi(Location location, List<LocationPointWrapper> points) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			double[] dist = new double[1];
 			String text = getText(location, points, dist);
@@ -272,7 +271,7 @@ public class VoiceRouter {
 	}
 
 	public void announceWaypoint(List<LocationPointWrapper> points) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			makeSound();
 			String text = getText(null, points, null);
@@ -282,7 +281,7 @@ public class VoiceRouter {
 	}
 	
 	public void announceFavorite(List<LocationPointWrapper> points) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			makeSound();
 			String text = getText(null, points, null);
@@ -292,7 +291,7 @@ public class VoiceRouter {
 	}
 	
 	public void announcePoi(List<LocationPointWrapper> points) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			String text = getText(null, points, null);
 			p.arrivedAtPoi(text);
@@ -331,7 +330,7 @@ public class VoiceRouter {
 			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN || type == AlarmInfoType.SPEED_CAMERA;
 
 			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
+				JsCommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					p.attention(String.valueOf(type));
 				}
@@ -356,7 +355,7 @@ public class VoiceRouter {
 			if (ms - waitAnnouncedSpeedLimit > 20 * 1000) {
 				waitAnnouncedSpeedLimit = 0;
 			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get() && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
+				JsCommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					lastAnnouncedSpeedLimit = ms;
 					waitAnnouncedSpeedLimit = 0;
@@ -513,7 +512,7 @@ public class VoiceRouter {
 	}
 
 	private boolean playMakeUTwp() {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			p.makeUTwp();
 			play(p);
@@ -524,7 +523,7 @@ public class VoiceRouter {
 	}
 
 	void playThen() {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			p.then();
 		}
@@ -532,7 +531,7 @@ public class VoiceRouter {
 	}
 
 	private void playGoAhead(int dist, StreetName streetName) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			p.goAhead(dist, streetName);
 		}
@@ -630,7 +629,7 @@ public class VoiceRouter {
 	}
 
 	private void playPrepareTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			String tParam = getTurnType(next.getTurnType());
 			if (tParam != null) {
@@ -676,7 +675,7 @@ public class VoiceRouter {
 	}
 
 	private void playMakeTurnIn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist, RouteDirectionInfo pronounceNextNext) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
@@ -738,7 +737,7 @@ public class VoiceRouter {
 	private void playAndArriveAtDestination(NextDirectionInfo info) {
 		if (isTargetPoint(info)) {
 			String pointName = (info == null || info.pointName == null) ? "" : info.pointName;
-			CommandBuilder p = getNewCommandPlayerToPlay();
+			JsCommandBuilder p = getNewCommandPlayerToPlay();
 			if (p != null) {
 				if (info != null && info.intermediatePoint) {
 					p.andArriveAtIntermediatePoint(getSpeakablePointName(pointName));
@@ -751,7 +750,7 @@ public class VoiceRouter {
 	}
 
 	private void playMakeTurn(RouteSegmentResult currentSegment, RouteDirectionInfo next, NextDirectionInfo nextNextInfo) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			String tParam = getTurnType(next.getTurnType());
 			ExitInfo exitInfo = next.getExitInfo();
@@ -808,27 +807,27 @@ public class VoiceRouter {
 	
 	private String getTurnType(TurnType t) {
 		if (TurnType.TL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT;
+			return CommandPlayer.A_LEFT;
 		} else if (TurnType.TSHL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_SH;
+			return CommandPlayer.A_LEFT_SH;
 		} else if (TurnType.TSLL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_SL;
+			return CommandPlayer.A_LEFT_SL;
 		} else if (TurnType.TR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT;
+			return CommandPlayer.A_RIGHT;
 		} else if (TurnType.TSHR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_SH;
+			return CommandPlayer.A_RIGHT_SH;
 		} else if (TurnType.TSLR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_SL;
+			return CommandPlayer.A_RIGHT_SL;
 		} else if (TurnType.KL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_KEEP;
+			return CommandPlayer.A_LEFT_KEEP;
 		} else if (TurnType.KR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_KEEP;
+			return CommandPlayer.A_RIGHT_KEEP;
 		}
 		return null;
 	}
 	
 	public void gpsLocationLost() {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			p.gpsLocationLost();
 		}
@@ -836,7 +835,7 @@ public class VoiceRouter {
 	}
 	
 	public void gpsLocationRecover() {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			p.gpsLocationRecover();
 		}
@@ -844,7 +843,7 @@ public class VoiceRouter {
 	}
 
 	public void newRouteIsCalculated(boolean newRoute) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			if (!newRoute) {
 				p.routeRecalculated(router.getLeftDistance(), router.getLeftTime());
@@ -864,7 +863,7 @@ public class VoiceRouter {
 	}
 
 	public void arrivedDestinationPoint(String name) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			p.arrivedAtDestination(getSpeakablePointName(name));
 		}
@@ -872,7 +871,7 @@ public class VoiceRouter {
 	}
 	
 	public void arrivedIntermediatePoint(String name) {
-		CommandBuilder p = getNewCommandPlayerToPlay();
+		JsCommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			p.arrivedAtIntermediatePoint(getSpeakablePointName(name));
 		}
@@ -914,7 +913,7 @@ public class VoiceRouter {
 			this.voiceRouter = voiceRouter;
 		}
 
-		public void play(CommandBuilder newCommand) {
+		public void play(JsCommandBuilder newCommand) {
 			int left = voiceRouter.router.getLeftDistance();
 			int time = voiceRouter.router.getLeftTime();
 			if (left > 0) {
@@ -928,7 +927,7 @@ public class VoiceRouter {
 		}
 	}
 
-	private void play(CommandBuilder p) {
+	private void play(JsCommandBuilder p) {
 		if (p != null) {
 			List<String> played = p.play();
 			notifyOnVoiceMessage(p.getListCommands(), played);

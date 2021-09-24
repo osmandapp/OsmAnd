@@ -486,10 +486,6 @@ public class ResourceManager {
 					if (f.isDirectory()) {
 						String lang = f.getName().replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "");
 						File conf = new File(f, lang + "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
-						if (!conf.exists()) {
-							conf = new File(f, "_config.p");
-							conf = conf.exists() ? conf : new File(f, "_ttsconfig.p");
-						}
 						if (conf.exists()) {
 							indexFileNames.put(f.getName(), dateFormat.format(conf.lastModified()));
 							indexFiles.put(f.getName(), f);

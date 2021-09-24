@@ -127,7 +127,8 @@ public class TracksCard extends MapBaseCard {
 						ApplicationMode mode = ApplicationMode.valueOfStringKey(points.get(0).getProfileType(), null);
 						if (mode != null) {
 							app.getRoutingHelper().setAppMode(mode);
-							app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
+							app.initVoiceCommandPlayer(mapActivity, mode, null,
+									true, false, false, true);
 						}
 					}
 					if (item.file.getNonEmptySegmentsCount() > 1) {

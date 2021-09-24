@@ -37,7 +37,6 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -99,7 +98,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					if (appMode != null) {
 						profileName = appMode.toHumanString();
 					} else {
-						profileName = StringUtils.capitalize(modeBean.stringKey);
+						profileName = Algorithms.capitalizeFirstLetter(modeBean.stringKey);
 					}
 				}
 				itemHolder.title.setText(profileName);

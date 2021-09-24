@@ -6,8 +6,7 @@ import androidx.preference.DialogPreference;
 
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.VehicleSizeAssets;
-
-import org.apache.commons.lang3.StringUtils;
+import net.osmand.util.Algorithms;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -90,7 +89,7 @@ public class SizePreference extends DialogPreference {
 	public CharSequence getSummary() {
 		String summary = entries[0];
 		String persistedString = getValue();
-		if (StringUtils.isBlank(persistedString)) {
+		if (Algorithms.isBlank(persistedString)) {
 			return summary;
 		}
 		if (!isPersistedStringEqualsZero(persistedString)) {
