@@ -28,6 +28,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.ReloadIndexesTask;
+import net.osmand.plus.download.ReloadIndexesTask.ReloadIndexesListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.render.TravelRendererHelper;
@@ -112,11 +113,10 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 				setupPrefItems(view);
 				setupTypeRadioGroup(view);
 
-				MapActivity mapActivity = (MapActivity) getMyActivity();
-				if (mapActivity != null) {
-					mapActivity.refreshMapComplete();
-					mapActivity.getMapLayers().updateLayers(mapActivity);
-				}
+				app.runInUIThread(() -> {
+					app.getOsmandMap().refreshMap(true);
+					app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
+				});
 			}
 		});
 	}
@@ -205,13 +205,17 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 				updateItemView(itemView, title, pref.get());
 
 				rendererHelper.updateFileVisibility(fileName, selected);
-				new ReloadIndexesTask(app, null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				new ReloadIndexesTask(app, new ReloadIndexesListener() {
+					@Override
+					public void reloadIndexesStarted() {
+					}
 
-				MapActivity mapActivity = (MapActivity) getMyActivity();
-				if (mapActivity != null) {
-					mapActivity.refreshMapComplete();
-					mapActivity.getMapLayers().updateLayers(mapActivity);
-				}
+					@Override
+					public void reloadIndexesFinished(List<String> warnings) {
+						app.getOsmandMap().refreshMap(true);
+						app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
+					}
+				}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			});
 			container.addView(itemView);
 		}
@@ -230,15 +234,12 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 				boolean selected = !pref.get();
 				pref.set(selected);
 				updateItemView(itemView, attrName, pref.get());
-
-				RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-				rendererHelper.updateRouteTypeVisibility(storage, attrName, selected);
-
-				MapActivity mapActivity = (MapActivity) getMyActivity();
-				if (mapActivity != null) {
-					mapActivity.refreshMapComplete();
-					mapActivity.getMapLayers().updateLayers(mapActivity);
-				}
+				app.runInUIThread(() -> {
+					RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+					rendererHelper.updateRouteTypeVisibility(storage, attrName, selected);
+					app.getOsmandMap().refreshMap(true);
+					app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
+				});
 			});
 			container.addView(itemView);
 		}

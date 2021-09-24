@@ -118,14 +118,21 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 
 	public void updateRouteTypesVisibility() {
 		RenderingRulesStorage renderer = rendererRegistry.getCurrentSelectedRenderer();
+		if (renderer != null) {
+			renderer = renderer.copy();
+		}
+		boolean renderedChanged = false;
 		List<PoiSubType> routesTypes = resourceManager.searchPoiSubTypesByPrefix(ACTIVITY_TYPE);
 		for (PoiSubType type : routesTypes) {
 			CommonPreference<Boolean> pref = getRouteTypeProperty(type.name);
 			if (renderer != null) {
 				boolean selected = pref.get();
 				String attrName = type.name.replace(ACTIVITY_TYPE + "_", "");
-				updateRouteTypeVisibility(renderer, attrName, selected);
+				renderedChanged |= updateRouteTypeVisibility(renderer, attrName, selected, false);
 			}
+		}
+		if (renderedChanged) {
+			app.getRendererRegistry().updateRenderer(renderer);
 		}
 	}
 
@@ -173,13 +180,19 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 		return pref;
 	}
 
-	public void updateRouteTypeVisibility(RenderingRulesStorage storage, String name, boolean selected) {
+	public boolean updateRouteTypeVisibility(RenderingRulesStorage storage, String name, boolean selected) {
+		return updateRouteTypeVisibility(storage, name, selected, true);
+	}
+
+	private boolean updateRouteTypeVisibility(RenderingRulesStorage storage, String name, boolean selected, boolean cloneStorage) {
 		Map<String, String> attrsMap = new LinkedHashMap<>();
 		attrsMap.put("order", "-1");
 		attrsMap.put("tag", "route");
 		attrsMap.put("value", "segment");
 		attrsMap.put("additional", "route_activity_type=" + name);
 
+		storage = cloneStorage ? storage.copy() : storage;
+		boolean changed = false;
 		if (selected) {
 			int key = storage.getTagValueKey("route", "segment");
 			RenderingRule insert = storage.getRule(ORDER_RULES, key);
@@ -192,20 +205,22 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 					}
 				}
 				insert.removeIfElseChildren(selectedRule);
+				changed = true;
 			}
 		} else {
 			try {
 				RenderingRule rule = new RenderingRule(attrsMap, false, storage);
 				rule.storeAttributes(attrsMap);
 				storage.registerTopLevel(rule, null, attrsMap, ORDER_RULES, true);
+				changed = true;
 			} catch (XmlPullParserException e) {
 				log.error(e);
 			}
 		}
-		NativeOsmandLibrary nativeLib = !settings.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage, app) : null;
-		if (nativeLib != null) {
-			nativeLib.clearCachedRenderingRulesStorage();
+		if (changed && cloneStorage) {
+			app.getRendererRegistry().updateRenderer(storage);
 		}
+		return changed;
 	}
 
 	@Override
@@ -213,7 +228,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 		for (Map.Entry<String, CommonPreference<Boolean>> entry : routeTypesProps.entrySet()) {
 			boolean selected = entry.getValue().get();
 			String attrName = entry.getKey().replace(ACTIVITY_TYPE + "_", "");
-			updateRouteTypeVisibility(rules, attrName, selected);
+			updateRouteTypeVisibility(rules, attrName, selected, false);
 		}
 	}
 }
