@@ -33,38 +33,24 @@ public class JSMediaCommandPlayerImpl extends BaseCommandPlayer implements OnCom
 
 	private static final Log log = PlatformUtil.getLog(JSMediaCommandPlayerImpl.class);
 
-	private final ScriptableObject jsScope;
-	private final VoiceRouter voiceRouter;
+	private static final String DELAY_PREFIX = "delay_";
+
 	private MediaPlayer mediaPlayer;
 	// indicates that player is ready to play first file
 	private final List<String> filesToPlay = Collections.synchronizedList(new ArrayList<>());
 
-	public JSMediaCommandPlayerImpl(OsmandApplication app, ApplicationMode applicationMode,
-			VoiceRouter voiceRouter, String voiceProvider) throws CommandPlayerException {
-		super(app, applicationMode, voiceProvider);
-		this.voiceRouter = voiceRouter;
-
-		org.mozilla.javascript.Context context = org.mozilla.javascript.Context.enter();
-		context.setOptimizationLevel(-1);
-		jsScope = context.initSafeStandardObjects();
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(new File(
-					app.getAppPath(IndexConstants.VOICE_INDEX_DIR).getAbsolutePath() +
-							"/" + voiceProvider + "/" + language + "_tts.js")));
-			context.evaluateReader(jsScope, br, "JS", 1, null);
-			br.close();
-		} catch (IOException e) {
-			log.error(e.getMessage(), e);
-		} finally {
-			org.mozilla.javascript.Context.exit();
-		}
+	protected JSMediaCommandPlayerImpl(OsmandApplication app,
+	                                   ApplicationMode applicationMode,
+	                                   VoiceRouter voiceRouter,
+	                                   File voiceProviderDir) throws CommandPlayerException {
+		super(app, applicationMode, voiceRouter, voiceProviderDir);
 	}
 
 	@Override
 	public JsCommandBuilder newCommandBuilder() {
 		JsCommandBuilder commandBuilder = new JsCommandBuilder(this);
 		commandBuilder.setJSContext(jsScope);
-		commandBuilder.setParameters(app.getSettings().METRIC_SYSTEM.get().toTTSString(), false);
+		commandBuilder.setParameters(settings.METRIC_SYSTEM.get().toTTSString(), false);
 		return commandBuilder;
 	}
 
@@ -105,7 +91,7 @@ public class JSMediaCommandPlayerImpl extends BaseCommandPlayer implements OnCom
 			requestAudioFocus();
 			// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 			if (app != null) {
-				int vpd = app.getSettings().VOICE_PROMPT_DELAY[app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode())].get();
+				int vpd = settings.VOICE_PROMPT_DELAY[settings.AUDIO_MANAGER_STREAM.getModeValue(applicationMode)].get();
 				if (vpd > 0) {
 					try {
 						Thread.sleep(vpd);
@@ -161,8 +147,8 @@ public class JSMediaCommandPlayerImpl extends BaseCommandPlayer implements OnCom
 
 	private void performDelays() {
 		int sleep = 0;
-		while (!filesToPlay.isEmpty() && filesToPlay.get(0).startsWith(DELAY_CONST)) {
-			String s = filesToPlay.remove(0).substring(DELAY_CONST.length());
+		while (!filesToPlay.isEmpty() && filesToPlay.get(0).startsWith(DELAY_PREFIX)) {
+			String s = filesToPlay.remove(0).substring(DELAY_PREFIX.length());
 			try {
 				sleep += Integer.parseInt(s);
 			} catch (NumberFormatException e) {
@@ -204,7 +190,7 @@ public class JSMediaCommandPlayerImpl extends BaseCommandPlayer implements OnCom
 			log.debug("Playing file : " + file);
 			mediaPlayer.reset();
 			mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
-					.setUsage(app.getSettings().AUDIO_USAGE.get())
+					.setUsage(settings.AUDIO_USAGE.get())
 					.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 					.build());
 

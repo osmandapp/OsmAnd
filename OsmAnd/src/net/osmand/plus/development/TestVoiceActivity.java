@@ -104,20 +104,16 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 				getSupportActionBar().setTitle(app.getString(R.string.test_voice_prompts) + " (" + entrieValues[which] + ")");
 				app.getSettings().VOICE_PROVIDER.set(entrieValues[which]);
 				app.initVoiceCommandPlayer(TestVoiceActivity.this,
-						app.getSettings().APPLICATION_MODE.get(), true, new Runnable() {
-					
-					@Override
-					public void run() {
-						CommandPlayer p = app.getRoutingHelper().getVoiceRouter().getPlayer();
-						if (p == null) {
-							Toast.makeText(TestVoiceActivity.this, "Voice player not initialized", Toast.LENGTH_SHORT).show();
-						} else {
-							osmandVoice = entrieValues[which];
-							osmandVoiceLang = p.getLanguage();
-							addButtons(ll, p);
-						}
-					}
-				}, true, true, false);
+						app.getSettings().APPLICATION_MODE.get(), () -> {
+							CommandPlayer commandPlayer = app.getRoutingHelper().getVoiceRouter().getPlayer();
+							if (commandPlayer == null) {
+								app.showShortToastMessage("Voice player not initialized");
+							} else {
+								osmandVoice = entrieValues[which];
+								osmandVoiceLang = commandPlayer.getLanguage();
+								addButtons(ll, commandPlayer);
+							}
+						}, true, true, true, false);
 				dialog.dismiss();
 			}
 		});
@@ -146,7 +142,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		v += "\n \u25CF TTS voice actually used: " + JsTtsCommandPlayer.getTtsVoiceUsed();
 
 		if (stream == 0) {
-			v += "\n \u25CF BT SCO: " + BaseCommandPlayer.btScoInit;
+			v += "\n \u25CF BT SCO: " + BaseCommandPlayer.getBluetoothScoStatus();
 		} else {
 			v += "\n \u25CF BT SCO: The current app profile is not set to use 'Phone call audio'.";
 		}

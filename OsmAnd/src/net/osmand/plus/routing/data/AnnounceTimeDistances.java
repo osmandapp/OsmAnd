@@ -88,7 +88,7 @@ public class AnnounceTimeDistances {
 
 		// Trigger close prompts earlier to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 		int ams = settings.AUDIO_MANAGER_STREAM.getModeValue(appMode);
-		if ((ams == 0 && !BaseCommandPlayer.btScoStatus) || ams > 0) {
+		if ((ams == 0 && !BaseCommandPlayer.isBluetoothScoRunning()) || ams > 0) {
 			if (settings.VOICE_PROMPT_DELAY[ams] != null) {
 				voicePromptDelayTimeSec = (double) settings.VOICE_PROMPT_DELAY[ams].get() / 1000;
 			}

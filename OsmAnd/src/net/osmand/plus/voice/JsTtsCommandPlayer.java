@@ -38,8 +38,6 @@ public class JsTtsCommandPlayer extends BaseCommandPlayer {
 
 	private static TextToSpeech mTts;
 
-	private final ScriptableObject jsScope;
-	private final VoiceRouter voiceRouter;
 	private final HashMap<String, String> params = new HashMap<>();
 
 	/**
@@ -57,36 +55,18 @@ public class JsTtsCommandPlayer extends BaseCommandPlayer {
 	private static String ttsVoiceStatus = "-";
 	private static String ttsVoiceUsed = "-";
 
-	public JsTtsCommandPlayer(OsmandApplication app, ApplicationMode applicationMode,
-	                          VoiceRouter voiceRouter,
-	                          String voiceProvider) throws CommandPlayerException {
-		super(app, applicationMode, voiceProvider);
-		this.voiceRouter = voiceRouter;
+	protected JsTtsCommandPlayer(OsmandApplication app,
+	                             ApplicationMode applicationMode,
+	                             VoiceRouter voiceRouter,
+	                             File voiceProviderDir) throws CommandPlayerException {
+		super(app, applicationMode, voiceRouter, voiceProviderDir);
 
-		if (Algorithms.isEmpty(language)) {
-			throw new CommandPlayerException(app.getString(R.string.voice_data_corrupted));
-		}
 		if (app.accessibilityEnabled()) {
-			cSpeechRate = app.getSettings().SPEECH_RATE.get();
+			cSpeechRate = settings.SPEECH_RATE.get();
 		}
 		initializeEngine();
-		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_MANAGER_STREAM
-				.getModeValue(getApplicationMode()).toString());
-
-		org.mozilla.javascript.Context context = org.mozilla.javascript.Context.enter();
-		context.setOptimizationLevel(-1);
-		jsScope = context.initSafeStandardObjects();
-		try {
-			BufferedReader br = new BufferedReader(new FileReader(new File(
-					app.getAppPath(IndexConstants.VOICE_INDEX_DIR).getAbsolutePath() + "/" + voiceProvider + "/"
-							+ voiceProvider.replace(IndexConstants.VOICE_PROVIDER_SUFFIX, "_tts") + ".js")));
-			context.evaluateReader(jsScope, br, "JS", 1, null);
-			br.close();
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		} finally {
-			org.mozilla.javascript.Context.exit();
-		}
+		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, settings.AUDIO_MANAGER_STREAM
+				.getModeValue(applicationMode).toString());
 	}
 
 	private void initializeEngine() {
@@ -226,14 +206,14 @@ public class JsTtsCommandPlayer extends BaseCommandPlayer {
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
 				mTts.setAudioAttributes(new AudioAttributes.Builder()
-						.setUsage(app.getSettings().AUDIO_USAGE.get())
+						.setUsage(settings.AUDIO_USAGE.get())
 						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 						.build());
 				// Delay first prompt of each batch to allow BT SCO link being established, or when VOICE_PROMPT_DELAY is set >0 for the other stream types
 				if (app != null) {
-					Integer streamModeValue = app.getSettings().AUDIO_MANAGER_STREAM.getModeValue(getApplicationMode());
-					OsmandPreference<Integer> pref = app.getSettings().VOICE_PROMPT_DELAY[streamModeValue];
-					int vpd = pref == null ? 0 : pref.getModeValue(getApplicationMode());
+					Integer streamModeValue = settings.AUDIO_MANAGER_STREAM.getModeValue(applicationMode);
+					OsmandPreference<Integer> pref = settings.VOICE_PROMPT_DELAY[streamModeValue];
+					int vpd = pref == null ? 0 : pref.getModeValue(applicationMode);
 					if (vpd > 0) {
 						ttsRequests++;
 						mTts.playSilentUtterance(vpd, TextToSpeech.QUEUE_ADD, "" + System.currentTimeMillis());
@@ -250,7 +230,7 @@ public class JsTtsCommandPlayer extends BaseCommandPlayer {
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
 		}
 		// #5966: TTS Utterance for debugging
-		if (app != null && app.getSettings().DISPLAY_TTS_UTTERANCE.get()) {
+		if (app != null && settings.DISPLAY_TTS_UTTERANCE.get()) {
 			app.showToastMessage(bld.toString());
 		}
 		return execute;
@@ -276,7 +256,7 @@ public class JsTtsCommandPlayer extends BaseCommandPlayer {
 	public JsCommandBuilder newCommandBuilder() {
 		JsCommandBuilder commandBuilder = new JsCommandBuilder(this);
 		commandBuilder.setJSContext(jsScope);
-		commandBuilder.setParameters(app.getSettings().METRIC_SYSTEM.get().toTTSString(), true);
+		commandBuilder.setParameters(settings.METRIC_SYSTEM.get().toTTSString(), true);
 		return commandBuilder;
 	}
 

@@ -193,7 +193,8 @@ public class RoutingOptionsHelper {
 			}
 		}
 		VP.setModeValue(selectedAppMode, provider);
-		app.initVoiceCommandPlayer(mapActivity, selectedAppMode, false, null, true, false, applyAllModes);
+		app.initVoiceCommandPlayer(mapActivity, selectedAppMode, null,
+				false, true, false, applyAllModes);
 	}
 
 	public Set<String> getVoiceFiles(Activity activity) {

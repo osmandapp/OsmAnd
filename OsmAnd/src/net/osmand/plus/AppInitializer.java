@@ -57,10 +57,8 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.voice.BaseCommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
-import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
-import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
@@ -561,54 +559,33 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext,
-															final ApplicationMode applicationMode,
-															final String voiceProvider,
-															final Runnable run,
-															boolean showDialog) {
+	public synchronized void initVoiceDataInDifferentThread(@NonNull final Activity uiContext,
+	                                                        @NonNull final ApplicationMode applicationMode,
+	                                                        @NonNull final String voiceProvider,
+	                                                        @Nullable final Runnable onFinishInitialization,
+	                                                        boolean showProgress) {
+		String progressTitle = app.getString(R.string.loading_data);
+		String progressMessage = app.getString(R.string.voice_data_initializing);
+		final ProgressDialog progressDialog = showProgress
+				? ProgressDialog.show(uiContext, progressTitle, progressMessage)
+				: null;
 
-		final ProgressDialog dlg = showDialog ? ProgressDialog.show(uiContext, app.getString(R.string.loading_data),
-				app.getString(R.string.voice_data_initializing)) : null;
-		new Thread(new Runnable() {
-
-			public CommandPlayer createCommandPlayer(String voiceProvider, ApplicationMode applicationMode,
-													 OsmandApplication osmandApplication, Activity ctx)
-					throws CommandPlayerException {
-				if (voiceProvider != null) {
-					File parent = osmandApplication.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-					File voiceDir = new File(parent, voiceProvider);
-					if (!voiceDir.exists()) {
-						throw new CommandPlayerException(ctx.getString(R.string.voice_data_unavailable));
-					}
-					if (JsTtsCommandPlayer.isMyData(voiceDir)) {
-						return new JsTtsCommandPlayer(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
-					} else if (JSMediaCommandPlayerImpl.isMyData(voiceDir)) {
-						return new JSMediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
-					}
-					throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
+		new Thread(() -> {
+			try {
+				if (app.player != null) {
+					app.player.clear();
 				}
-				return null;
-			}
-
-			@Override
-			public void run() {
-				try {
-					if (app.player != null) {
-						app.player.clear();
-					}
-					app.player = createCommandPlayer(voiceProvider, applicationMode, app, uiContext);
-					app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
-					if (dlg != null) {
-						dlg.dismiss();
-					}
-					if (run != null && uiContext != null) {
-						uiContext.runOnUiThread(run);
-					}
-				} catch (CommandPlayerException e) {
-					if (dlg != null) {
-						dlg.dismiss();
-					}
-					app.showToastMessage(e.getError());
+				app.player = BaseCommandPlayer.createCommandPlayer(app, applicationMode, voiceProvider);
+				app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
+			} catch (CommandPlayerException e) {
+				app.showToastMessage(e.getError());
+				LOG.error("Failed to create CommandPlayer", e);
+			} finally {
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+				if (onFinishInitialization != null) {
+					uiContext.runOnUiThread(onFinishInitialization);
 				}
 			}
 		}).start();
