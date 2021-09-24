@@ -42,7 +42,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -192,7 +191,8 @@ public class RouteLineColorCard extends MapBaseCard implements CardListener, Col
 			int selectedColorNight = getSelectedColorForTheme(colors, true);
 			int selectedColor = isNightMap() ? selectedColorNight : selectedColorDay;
 			ListStringPreference preference = app.getSettings().CUSTOM_ROUTE_LINE_COLORS;
-			colorsCard = new ColorsCard(mapActivity, selectedColor, targetFragment, colors, preference, null);
+			colorsCard = new ColorsCard(mapActivity, null, targetFragment, selectedColor,
+					colors, preference, true);
 			colorsCard.setListener(this);
 			container.addView(colorsCard.build(mapActivity));
 
