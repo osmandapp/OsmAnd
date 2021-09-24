@@ -156,8 +156,8 @@ public class JsCommandBuilder {
 	}
 
 	/**
-	 * @param turnType {@link net.osmand.plus.voice.BaseCommandPlayer#A_LEFT},
-	 *                 {@link net.osmand.plus.voice.BaseCommandPlayer#A_LEFT},..
+	 * @param turnType {@link CommandPlayer#A_LEFT},
+	 *                 {@link CommandPlayer#A_LEFT},..
 	 */
 	public JsCommandBuilder prepareTurn(String turnType, double dist, StreetName streetName) {
 		return addCommand(C_PREPARE_TURN, turnType, dist, convertStreetName(streetName));

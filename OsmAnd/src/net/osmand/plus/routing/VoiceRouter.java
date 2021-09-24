@@ -23,9 +23,8 @@ import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.voice.BaseCommandPlayer;
-import net.osmand.plus.voice.JsCommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.voice.JsCommandBuilder;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
@@ -808,21 +807,21 @@ public class VoiceRouter {
 	
 	private String getTurnType(TurnType t) {
 		if (TurnType.TL == t.getValue()) {
-			return BaseCommandPlayer.A_LEFT;
+			return CommandPlayer.A_LEFT;
 		} else if (TurnType.TSHL == t.getValue()) {
-			return BaseCommandPlayer.A_LEFT_SH;
+			return CommandPlayer.A_LEFT_SH;
 		} else if (TurnType.TSLL == t.getValue()) {
-			return BaseCommandPlayer.A_LEFT_SL;
+			return CommandPlayer.A_LEFT_SL;
 		} else if (TurnType.TR == t.getValue()) {
-			return BaseCommandPlayer.A_RIGHT;
+			return CommandPlayer.A_RIGHT;
 		} else if (TurnType.TSHR == t.getValue()) {
-			return BaseCommandPlayer.A_RIGHT_SH;
+			return CommandPlayer.A_RIGHT_SH;
 		} else if (TurnType.TSLR == t.getValue()) {
-			return BaseCommandPlayer.A_RIGHT_SL;
+			return CommandPlayer.A_RIGHT_SL;
 		} else if (TurnType.KL == t.getValue()) {
-			return BaseCommandPlayer.A_LEFT_KEEP;
+			return CommandPlayer.A_LEFT_KEEP;
 		} else if (TurnType.KR == t.getValue()) {
-			return BaseCommandPlayer.A_RIGHT_KEEP;
+			return CommandPlayer.A_RIGHT_KEEP;
 		}
 		return null;
 	}

@@ -25,7 +25,7 @@ import static android.media.MediaPlayer.OnCompletionListener;
  * It gets commands from input, analyze what files should be played and play
  * them using media player
  */
-public class JsMediaCommandPlayer extends BaseCommandPlayer implements OnCompletionListener {
+public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionListener {
 
 	private static final Log log = PlatformUtil.getLog(JsMediaCommandPlayer.class);
 

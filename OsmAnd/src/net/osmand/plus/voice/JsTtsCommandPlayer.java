@@ -15,22 +15,18 @@ import net.osmand.plus.api.AudioFocusHelperImpl;
 import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.mozilla.javascript.ScriptableObject;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class JsTtsCommandPlayer extends BaseCommandPlayer {
+public class JsTtsCommandPlayer extends CommandPlayer {
 
 	private static final Log log = PlatformUtil.getLog(JsTtsCommandPlayer.class);
 
@@ -293,17 +289,17 @@ public class JsTtsCommandPlayer extends BaseCommandPlayer {
 		ttsVoiceUsed = "-";
 	}
 
+	@Override
+	public boolean supportsStructuredStreetNames() {
+		return true;
+	}
+
 	public static String getTtsVoiceStatus() {
 		return ttsVoiceStatus;
 	}
 
 	public static String getTtsVoiceUsed() {
 		return ttsVoiceUsed;
-	}
-
-	@Override
-	public boolean supportsStructuredStreetNames() {
-		return true;
 	}
 
 	public static boolean isMyData(File voiceDir) {

@@ -57,7 +57,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
-import net.osmand.plus.voice.BaseCommandPlayer;
+import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
@@ -575,7 +575,7 @@ public class AppInitializer implements IProgress {
 				if (app.player != null) {
 					app.player.clear();
 				}
-				app.player = BaseCommandPlayer.createCommandPlayer(app, applicationMode, voiceProvider);
+				app.player = CommandPlayer.createCommandPlayer(app, applicationMode, voiceProvider);
 				app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
 			} catch (CommandPlayerException e) {
 				app.showToastMessage(e.getError());

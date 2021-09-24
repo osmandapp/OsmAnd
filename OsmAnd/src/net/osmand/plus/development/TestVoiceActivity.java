@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -23,9 +22,8 @@ import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.routing.data.StreetName;
-import net.osmand.plus.voice.BaseCommandPlayer;
-import net.osmand.plus.voice.JsCommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.voice.JsCommandBuilder;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 
 import java.util.HashMap;
@@ -142,7 +140,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		v += "\n \u25CF TTS voice actually used: " + JsTtsCommandPlayer.getTtsVoiceUsed();
 
 		if (stream == 0) {
-			v += "\n \u25CF BT SCO: " + BaseCommandPlayer.getBluetoothScoStatus();
+			v += "\n \u25CF BT SCO: " + CommandPlayer.getBluetoothScoStatus();
 		} else {
 			v += "\n \u25CF BT SCO: The current app profile is not set to use 'Phone call audio'.";
 		}
@@ -167,26 +165,26 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (2.4)  Route recalculated 125900m, 92700sec (25:45)", builder(p).routeRecalculated(125900, 92700) );
 
 		addButton(ll, "All turn types: prepareTurn, makeTurnIn, turn, takeExit, takeExitIn:", builder(p));
-		addButton(ll, "\u25BA (3.1)  After 1520m turn slightly left", builder(p).prepareTurn(BaseCommandPlayer.A_LEFT_SL, 1520, street(p, "")));
-		addButton(ll, "\u25BA (3.2)  In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(BaseCommandPlayer.A_LEFT_SH, 450, street(p, "Hauptstraße")).then().bearRight(street(p, "")));
-		addButton(ll, "\u25BA (3.3)  Turn left, then in 100m turn slightly right", builder(p).turn(BaseCommandPlayer.A_LEFT, street(p, "")).then().turn(BaseCommandPlayer.A_RIGHT_SL, 100, street(p, "")));
-		addButton(ll, "\u25BA (3.4)  After 3100m turn right onto 'SR 80' toward 'Rome'", builder(p).prepareTurn(BaseCommandPlayer.A_RIGHT, 3100, street(p,  "SR 80", "", "Rome")));
-		addButton(ll, "\u25BA (3.5)  In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(BaseCommandPlayer.A_RIGHT_SL, 370, street(p, "Route 23", "Main Street", "")).then().bearLeft(street(p, "")));
-		addButton(ll, "\u25BA (3.6)  Turn sharply right onto 'Dr.-Quinn-Stra"+"\u00df"+"e'", builder(p).turn(BaseCommandPlayer.A_RIGHT_SH, street(p, "", "Dr.-Quinn-Straße", "")));
-		addButton(ll, "\u25BA (3.7)  Turn slightly right onto exit 6 onto 'Amsterdam-Osdorp'", builder(p).takeExit(BaseCommandPlayer.A_RIGHT_SL, "6", 6, street(p, "", "Amsterdam-Osdorp", "")));
-		addButton(ll, "\u25BA (3.8)  In 350m turn slightly right onto exit 6, 'Amsterdam-Osdorp'", builder(p).takeExit(BaseCommandPlayer.A_RIGHT_SL, 350, "6", 6, street(p, "", "Amsterdam-Osdorp", "")));
-		addButton(ll, "\u25BA (3.9)  In 350m turn slightly right onto exit 6, 'Amsterdam-Osdorp' towards Osdorp", builder(p).takeExit(BaseCommandPlayer.A_RIGHT_SL, 350, "6", 6, street(p, "", "Amsterdam-Osdorp", "Osdorp")));
-		addButton(ll, "\u25BA (3.10)  In 350m turn slightly right to exit 6 towards 'Osdorp'", builder(p).takeExit(BaseCommandPlayer.A_RIGHT_SL, 350, "6", 6, street(p, "", "", "Osdorp")));
-		addButton(ll, "\u25BA (3.11)  Turn slightly right to exit 260B ", builder(p).takeExit(BaseCommandPlayer.A_RIGHT_SL, "260 B", 260, street(p, "", "", "")));
-		addButton(ll, "\u25BA (3.12)  Turn slightly left to exit 15B ", builder(p).takeExit(BaseCommandPlayer.A_LEFT_SL, "15 B", 15, street(p, "", "", "")));
+		addButton(ll, "\u25BA (3.1)  After 1520m turn slightly left", builder(p).prepareTurn(CommandPlayer.A_LEFT_SL, 1520, street(p, "")));
+		addButton(ll, "\u25BA (3.2)  In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(CommandPlayer.A_LEFT_SH, 450, street(p, "Hauptstraße")).then().bearRight(street(p, "")));
+		addButton(ll, "\u25BA (3.3)  Turn left, then in 100m turn slightly right", builder(p).turn(CommandPlayer.A_LEFT, street(p, "")).then().turn(CommandPlayer.A_RIGHT_SL, 100, street(p, "")));
+		addButton(ll, "\u25BA (3.4)  After 3100m turn right onto 'SR 80' toward 'Rome'", builder(p).prepareTurn(CommandPlayer.A_RIGHT, 3100, street(p,  "SR 80", "", "Rome")));
+		addButton(ll, "\u25BA (3.5)  In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(CommandPlayer.A_RIGHT_SL, 370, street(p, "Route 23", "Main Street", "")).then().bearLeft(street(p, "")));
+		addButton(ll, "\u25BA (3.6)  Turn sharply right onto 'Dr.-Quinn-Stra"+"\u00df"+"e'", builder(p).turn(CommandPlayer.A_RIGHT_SH, street(p, "", "Dr.-Quinn-Straße", "")));
+		addButton(ll, "\u25BA (3.7)  Turn slightly right onto exit 6 onto 'Amsterdam-Osdorp'", builder(p).takeExit(CommandPlayer.A_RIGHT_SL, "6", 6, street(p, "", "Amsterdam-Osdorp", "")));
+		addButton(ll, "\u25BA (3.8)  In 350m turn slightly right onto exit 6, 'Amsterdam-Osdorp'", builder(p).takeExit(CommandPlayer.A_RIGHT_SL, 350, "6", 6, street(p, "", "Amsterdam-Osdorp", "")));
+		addButton(ll, "\u25BA (3.9)  In 350m turn slightly right onto exit 6, 'Amsterdam-Osdorp' towards Osdorp", builder(p).takeExit(CommandPlayer.A_RIGHT_SL, 350, "6", 6, street(p, "", "Amsterdam-Osdorp", "Osdorp")));
+		addButton(ll, "\u25BA (3.10)  In 350m turn slightly right to exit 6 towards 'Osdorp'", builder(p).takeExit(CommandPlayer.A_RIGHT_SL, 350, "6", 6, street(p, "", "", "Osdorp")));
+		addButton(ll, "\u25BA (3.11)  Turn slightly right to exit 260B ", builder(p).takeExit(CommandPlayer.A_RIGHT_SL, "260 B", 260, street(p, "", "", "")));
+		addButton(ll, "\u25BA (3.12)  Turn slightly left to exit 15B ", builder(p).takeExit(CommandPlayer.A_LEFT_SL, "15 B", 15, street(p, "", "", "")));
 
 		addButton(ll, "Keep left/right: prepareTurn, makeTurnIn, turn:", builder(p));
-		addButton(ll, "\u25BA (4.1)  After 1810m keep left ' '", builder(p).prepareTurn(BaseCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
-		addButton(ll, "\u25BA (4.2)  In 400m keep left ' ' then in 80m keep right onto 'A1'", builder(p).turn(BaseCommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(BaseCommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")));
-		addButton(ll, "\u25BA (4.3)  Keep right on 'Highway 60'", builder(p).turn(BaseCommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")));
+		addButton(ll, "\u25BA (4.1)  After 1810m keep left ' '", builder(p).prepareTurn(CommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
+		addButton(ll, "\u25BA (4.2)  In 400m keep left ' ' then in 80m keep right onto 'A1'", builder(p).turn(CommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(CommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")));
+		addButton(ll, "\u25BA (4.3)  Keep right on 'Highway 60'", builder(p).turn(CommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")));
 		addButton(ll, "\u25BA (4.4)  Turn left onto 'Broadway', then in 100m keep right and arrive at your destination 'Town Hall'",  
-				builder(p).turn(BaseCommandPlayer.A_LEFT, street(p, "Broadway"))
-				.then().turn(BaseCommandPlayer.A_RIGHT_KEEP, 100, street(p, "")).andArriveAtDestination("Town Hall"));
+				builder(p).turn(CommandPlayer.A_LEFT, street(p, "Broadway"))
+				.then().turn(CommandPlayer.A_RIGHT_KEEP, 100, street(p, "")).andArriveAtDestination("Town Hall"));
 		addButton(ll, "Roundabouts: prepareTurn, makeTurnIn, turn:", builder(p));
 		addButton(ll, "\u25BA (5.1)  After 1250m enter a roundabout", builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")));
 		addButton(ll, "\u25BA (5.2)  In 450m enter the roundabout and take the 1st exit onto 'I 15' toward 'Los Angeles'", builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")));
