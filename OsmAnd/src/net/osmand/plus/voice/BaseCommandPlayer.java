@@ -67,8 +67,8 @@ public abstract class BaseCommandPlayer implements CommandPlayer {
 		VoiceRouter voiceRouter = app.getRoutingHelper().getVoiceRouter();
 		if (JsTtsCommandPlayer.isMyData(voiceProviderDir)) {
 			return new JsTtsCommandPlayer(app, appMode, voiceRouter, voiceProviderDir);
-		} else if (JSMediaCommandPlayerImpl.isMyData(voiceProviderDir)) {
-			return new JSMediaCommandPlayerImpl(app, appMode, voiceRouter, voiceProviderDir);
+		} else if (JsMediaCommandPlayer.isMyData(voiceProviderDir)) {
+			return new JsMediaCommandPlayer(app, appMode, voiceRouter, voiceProviderDir);
 		}
 		throw new CommandPlayerException(app.getString(R.string.voice_data_not_supported));
 	}

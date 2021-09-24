@@ -11,7 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
-import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
+import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.util.Algorithms;
 
@@ -289,7 +289,7 @@ public class LocalIndexHelper {
 		}
 		//Now list recorded voices
 		for (File voiceFile : voiceFilesList) {
-			if (voiceFile.isDirectory() && (JSMediaCommandPlayerImpl.isMyData(voiceFile))) {
+			if (voiceFile.isDirectory() && (JsMediaCommandPlayer.isMyData(voiceFile))) {
 				loadLocalData(voiceFile, LocalIndexType.VOICE_DATA, result, backup, needDescription, loadTask);
 			}
 		}

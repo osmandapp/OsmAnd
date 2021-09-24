@@ -11,12 +11,8 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 import org.apache.commons.logging.Log;
-import org.mozilla.javascript.ScriptableObject;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,9 +25,9 @@ import static android.media.MediaPlayer.OnCompletionListener;
  * It gets commands from input, analyze what files should be played and play
  * them using media player
  */
-public class JSMediaCommandPlayerImpl extends BaseCommandPlayer implements OnCompletionListener {
+public class JsMediaCommandPlayer extends BaseCommandPlayer implements OnCompletionListener {
 
-	private static final Log log = PlatformUtil.getLog(JSMediaCommandPlayerImpl.class);
+	private static final Log log = PlatformUtil.getLog(JsMediaCommandPlayer.class);
 
 	private static final String DELAY_PREFIX = "delay_";
 
@@ -39,10 +35,10 @@ public class JSMediaCommandPlayerImpl extends BaseCommandPlayer implements OnCom
 	// indicates that player is ready to play first file
 	private final List<String> filesToPlay = Collections.synchronizedList(new ArrayList<>());
 
-	protected JSMediaCommandPlayerImpl(OsmandApplication app,
-	                                   ApplicationMode applicationMode,
-	                                   VoiceRouter voiceRouter,
-	                                   File voiceProviderDir) throws CommandPlayerException {
+	protected JsMediaCommandPlayer(OsmandApplication app,
+	                               ApplicationMode applicationMode,
+	                               VoiceRouter voiceRouter,
+	                               File voiceProviderDir) throws CommandPlayerException {
 		super(app, applicationMode, voiceRouter, voiceProviderDir);
 	}
 

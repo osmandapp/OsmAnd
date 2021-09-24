@@ -35,7 +35,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
+import net.osmand.plus.voice.JsMediaCommandPlayer;
 import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
@@ -207,7 +207,7 @@ public class RoutingOptionsHelper {
 			voiceDirs = voiceDirs == null ? new File[0] : voiceDirs;
 			for (File f : voiceDirs) {
 				if (f.isDirectory()) {
-					if (JSMediaCommandPlayerImpl.isMyData(f) || JsTtsCommandPlayer.isMyData(f)) {
+					if (JsMediaCommandPlayer.isMyData(f) || JsTtsCommandPlayer.isMyData(f)) {
 						setFiles.add(f.getName());
 					}
 				}
