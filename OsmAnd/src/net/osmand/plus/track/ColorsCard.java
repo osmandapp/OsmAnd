@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 
@@ -123,17 +124,20 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		updateColorSelector(selectedColor);
 	}
 
-	private void updateColorSelector(int color) {
-		View oldColor = view.findViewWithTag(selectedColor);
-		if (oldColor != null) {
-			oldColor.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
-			ImageView icon = oldColor.findViewById(R.id.icon);
+	private void updateColorSelector(int newColor) {
+		View oldColorContainer = view.findViewWithTag(selectedColor);
+		if (oldColorContainer != null) {
+			oldColorContainer.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
+			ImageView icon = oldColorContainer.findViewById(R.id.icon);
 			icon.setImageDrawable(UiUtilities.tintDrawable(
 					icon.getDrawable(), ColorUtilities.getDefaultIconColor(app, nightMode)));
 		}
-		View newColor = view.findViewWithTag(color);
-		if (newColor != null) {
-			newColor.findViewById(R.id.outline).setVisibility(View.VISIBLE);
+		View newColorContainer = view.findViewWithTag(newColor);
+		if (newColorContainer != null) {
+			AppCompatImageView outline = newColorContainer.findViewById(R.id.outline);
+			Drawable border = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle_contour, newColor);
+			outline.setImageDrawable(border);
+			outline.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -206,12 +210,7 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 
 	private View createCircleView(FlowLayout rootView) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		View circleView = themedInflater.inflate(R.layout.point_editor_button, rootView, false);
-		ImageView outline = circleView.findViewById(R.id.outline);
-		int colorId = nightMode ? R.color.stroked_buttons_and_links_outline_dark : R.color.stroked_buttons_and_links_outline_light;
-		Drawable contourIcon = app.getUIUtilities().getIcon(R.drawable.bg_point_circle_contour, colorId);
-		outline.setImageDrawable(contourIcon);
-		return circleView;
+		return themedInflater.inflate(R.layout.point_editor_button, rootView, false);
 	}
 
 	private Drawable getTransparencyIcon(OsmandApplication app, @ColorInt int color) {
@@ -245,10 +244,6 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 			}
 		}
 		return colors;
-	}
-
-	public int getIndexOfSelectedColor() {
-		return customColors.indexOf(selectedColor);
 	}
 
 	public boolean isBaseColor(int color) {
