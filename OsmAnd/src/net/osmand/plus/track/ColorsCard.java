@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
@@ -53,13 +55,14 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		return R.layout.colors_card;
 	}
 
-	public ColorsCard(MapActivity mapActivity,
-	                  int selectedColor,
-	                  Fragment targetFragment,
-	                  List<Integer> colors,
-	                  ListStringPreference colorsListPreference,
-	                  ApplicationMode appMode) {
-		super(mapActivity);
+	public ColorsCard(@NonNull MapActivity mapActivity,
+	                  @Nullable ApplicationMode appMode,
+	                  @Nullable Fragment targetFragment,
+	                  @ColorInt int selectedColor,
+	                  @NonNull List<Integer> colors,
+	                  @NonNull ListStringPreference colorsListPreference,
+	                  boolean userOnMap) {
+		super(mapActivity, userOnMap);
 		this.targetFragment = targetFragment;
 		this.selectedColor = selectedColor;
 		this.colors = colors;
@@ -68,11 +71,12 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 		this.appMode = appMode;
 	}
 
+	@ColorInt
 	public int getSelectedColor() {
 		return selectedColor;
 	}
 
-	public void setSelectedColor(int selectedColor) {
+	public void setSelectedColor(@ColorInt int selectedColor) {
 		this.selectedColor = selectedColor;
 		updateContent();
 	}

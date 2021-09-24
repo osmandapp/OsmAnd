@@ -778,7 +778,8 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			List<Integer> colors = getTrackColors();
-			colorsCard = new ColorsCard(mapActivity, trackDrawInfo.getColor(), this, colors, settings.CUSTOM_TRACK_COLORS, null);
+			colorsCard = new ColorsCard(mapActivity, null, this,
+					trackDrawInfo.getColor(), colors, settings.CUSTOM_TRACK_COLORS, true);
 			AndroidUiHelper.updateVisibility(colorsCard.build(mapActivity), trackDrawInfo.getColoringType().isTrackSolid());
 			addCard(container, colorsCard);
 		}
