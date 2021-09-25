@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import net.osmand.core.android.MapRendererView;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
@@ -25,6 +26,11 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.MapUtils;
+
+import net.osmand.core.android.TileSourceProxyProvider;
+import net.osmand.core.jni.MapLayerConfiguration;
+import net.osmand.data.LatLon;
+import net.osmand.core.jni.PointI;
 
 public class MapTileLayer extends BaseMapLayer {
 
@@ -45,6 +51,9 @@ public class MapTileLayer extends BaseMapLayer {
 	private boolean visible = true;
 	private boolean useSampling;
 
+	private boolean is_set_provider = false;
+	private static final Log LOG = PlatformUtil.getLog(MapTileLayer.class);
+
 	public MapTileLayer(@NonNull Context context, boolean mainMap) {
 		super(context);
 		this.mainMap = mainMap;
@@ -63,9 +72,11 @@ public class MapTileLayer extends BaseMapLayer {
 
 		useSampling = Build.VERSION.SDK_INT < 28;
 
-		paintBitmap = new Paint();
-		paintBitmap.setFilterBitmap(true);
-		paintBitmap.setAlpha(getAlpha());
+		if (view.getMapRenderer() == null ) {
+			paintBitmap = new Paint();
+			paintBitmap.setFilterBitmap(true);
+			paintBitmap.setAlpha(getAlpha());
+		}
 		
 		if (mapTileAdapter != null) {
 			mapTileAdapter.initLayerAdapter(this, view);
@@ -77,6 +88,16 @@ public class MapTileLayer extends BaseMapLayer {
 		super.setAlpha(alpha);
 		if (paintBitmap != null) {
 			paintBitmap.setAlpha(alpha);
+		}
+		if (view != null) {
+			float zorder = view.getZorder(this);
+			int layer_index = (int)(zorder * 100.0);
+			final MapRendererView mapRenderer = view.getMapRenderer();
+			if (mapRenderer != null) {
+				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
+				mapLayerConfiguration.setOpacityFactor(((float) alpha) / 255.0f);
+				mapRenderer.setMapLayerConfiguration(layer_index, mapLayerConfiguration);
+			}
 		}
 	}
 	
@@ -111,6 +132,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 		this.map = map;
 		setMapTileAdapter(target);
+		is_set_provider = false;
 	}
 	
 	public MapTileAdapter getMapTileAdapter() {
@@ -126,7 +148,24 @@ public class MapTileLayer extends BaseMapLayer {
 		if (mapTileAdapter != null) {
 			mapTileAdapter.onDraw(canvas, tileBox, drawSettings);
 		}
-		drawTileMap(canvas, tileBox, drawSettings);
+		final MapRendererView mapRenderer = view.getMapRenderer();
+		if (mapRenderer != null) {
+			float zorder = view.getZorder(this);
+			int layer_index = (int)(zorder * 100.0);
+			if (is_set_provider == false ) {
+				is_set_provider = true;
+				if (map != null) {
+					TileSourceProxyProvider prov = new TileSourceProxyProvider(view.getApplication(), map);
+					mapRenderer.setMapLayerProvider(layer_index, prov.instantiateProxy(true));
+					prov.swigReleaseOwnership();
+				} else {
+					mapRenderer.resetMapLayerProvider(layer_index);
+				}
+			}
+		} else {
+			drawTileMap(canvas, tileBox, drawSettings);
+		}
+
 	}
 
 	@Override
