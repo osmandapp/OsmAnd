@@ -2919,7 +2919,7 @@
     <string name="vessel_width_limit_description">设置船只宽度以避免狭窄的桥梁</string>
     <string name="item_deleted">%1$s 已删除</string>
     <string name="shared_string_uninstall_and_restart">卸载并重新启动</string>
-    <string name="quick_action_remove_next_destination">删除下一个目的地</string>
+    <string name="quick_action_remove_next_destination">删除最近的目的地点</string>
     <string name="use_volume_buttons_as_zoom_descr">启用以使用设备音量键控制地图缩放级别。</string>
     <string name="use_volume_buttons_as_zoom">音量键用于缩放</string>
     <string name="please_provide_point_name_error">请提供该点的名称</string>
@@ -3770,4 +3770,14 @@
     <string name="remove_group_from_markers">在标记列表中删除组</string>
     <string name="last_intermediate_dest_description">添加中间站</string>
     <string name="more_transport_on_stop_hint">自该站有更多的交通方式。</string>
+    <string name="routing_attr_avoid_tunnels_description">避开隧道</string>
+    <string name="send_crash_log">发送崩溃日志</string>
+    <string name="offline_wikipeadia">离线维基百科</string>
+    <string name="redeem_promo_code">兑换优惠码</string>
+    <string name="shared_string_learn_more">了解更多信息</string>
+    <string name="cancel_anytime_in_gplay">随时在 Google Play 上取消。</string>
+    <string name="start_point">开始</string>
+    <string name="service_is_not_available_please_try_later">服务不可用，请稍后再试</string>
+    <string name="shared_string_files">文件</string>
+    <string name="travel_route_types">路线类型</string>
 </resources>
