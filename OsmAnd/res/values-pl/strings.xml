@@ -4325,4 +4325,6 @@
     <string name="start_point">Uruchom</string>
     <string name="mapillary_menu_filter_description_new">Filtrowanie obrazów według daty lub typu. Aktywne tylko w zbliżeniu.</string>
     <string name="service_is_not_available_please_try_later">Usługa nie jest dostępna, spróbuj później</string>
+    <string name="shared_string_files">Pliki</string>
+    <string name="travel_route_types">Typy tras</string>
 </resources>
