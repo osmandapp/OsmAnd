@@ -112,23 +112,6 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		return new String[] { "alice.tuprolog.lib.BasicLibrary",
 					"alice.tuprolog.lib.ISOLibrary"/*, "alice.tuprolog.lib.IOLibrary"*/};
 	}
-	
-	public void sendAlertToAndroidWear(Context ctx, String message) {
-		int notificationId = 1;
-		NotificationCompat.Builder notificationBuilder =
-				new NotificationCompat.Builder(ctx)
-						.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-						.setSmallIcon(R.mipmap.icon)
-						.setContentTitle(ctx.getString(R.string.app_name))
-						.setContentText(message)
-						.setGroup(WEAR_ALERT);
-
-		// Get an instance of the NotificationManager service
-		NotificationManagerCompat notificationManager =
-				NotificationManagerCompat.from(ctx);
-		// Build the notification and issues it with notification manager.
-		notificationManager.notify(notificationId, notificationBuilder.build());
-	}
 
 	@Override
 	public void stateChanged(ApplicationMode change) {
@@ -295,7 +278,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			mAudioFocusHelper = getAudioFocus();
 		}
 		if (mAudioFocusHelper != null && ctx != null) {
-			boolean audioFocusGranted = mAudioFocusHelper.requestFocus(ctx, applicationMode, streamType);
+			boolean audioFocusGranted = mAudioFocusHelper.requestAudFocus(ctx, applicationMode, streamType);
 			// If AudioManager.STREAM_VOICE_CALL try using BT SCO:
 			if (audioFocusGranted && ctx.getSettings().AUDIO_MANAGER_STREAM.getModeValue(applicationMode) == 0) {
 				toggleBtSco(true);
@@ -318,7 +301,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			toggleBtSco(false);
 		}
 		if (ctx != null && mAudioFocusHelper != null) {
-			mAudioFocusHelper.abandonFocus(ctx, applicationMode, streamType);
+			mAudioFocusHelper.abandonAudFocus(ctx, applicationMode, streamType);
 		}
 		mAudioFocusHelper = null;
 	}

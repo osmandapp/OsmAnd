@@ -10,6 +10,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.routing.VoiceRouter;
+import net.osmand.plus.api.AudioFocusHelperImpl;
 
 import org.apache.commons.logging.Log;
 
@@ -100,8 +101,12 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 				}
 			}
 		}
-		playQueue();
-		return lst;
+		if (AudioFocusHelperImpl.playbackAuthorized) {
+			playQueue();
+			return lst;
+		} else {
+			return Collections.emptyList();
+		}
 	}
 	
 	synchronized void playQueue() {
