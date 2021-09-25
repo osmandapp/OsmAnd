@@ -4316,4 +4316,6 @@
     <string name="start_point">Partenza</string>
     <string name="mapillary_menu_filter_description_new">Filtra le immagini per data o tipo. Attivo solo a zoom elevati.</string>
     <string name="service_is_not_available_please_try_later">Sevizio indisponibile, prova più tardi</string>
+    <string name="shared_string_files">File</string>
+    <string name="travel_route_types">Tipi di percorso</string>
 </resources>
