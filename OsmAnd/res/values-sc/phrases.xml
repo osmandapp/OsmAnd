@@ -2451,7 +2451,7 @@
     <string name="poi_socket_type3_output_filter">Casta 3 (SCAME)</string>
     <string name="poi_socket_cee_blue_output_filter">CEE blue</string>
     <string name="poi_socket_schuko_output_filter">Schuko</string>
-    <string name="poi_beachvolleyball">Beach volley</string>
+    <string name="poi_beachvolleyball">Bòcia a bolu de plaja</string>
     <string name="poi_seamark_clearance_height">Artària màssima</string>
     <string name="poi_seamark_clearance_height_closed">Artària màssima (serradu)</string>
     <string name="poi_seamark_clearance_height_open">Artària màssima (abertu)</string>
@@ -3356,7 +3356,7 @@
     <string name="poi_socket_schuko_yes">Schuko</string>
     <string name="poi_socket_bs1363_yes">BS 1363</string>
     <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
-    <string name="poi_volleyball">Volleyball</string>
+    <string name="poi_volleyball">Bòcia a bolu</string>
     <string name="poi_map_size_site">Mannària de sa mapa: giassu</string>
     <string name="poi_map_size_city">Mannària de sa mapa: tzitade</string>
     <string name="poi_map_size_region">Mannària de sa mapa: regione</string>
@@ -3797,7 +3797,7 @@
     <string name="poi_water_source_groundwater">Abba suta de terra</string>
     <string name="poi_fire_hydrant_type_pipe">Pompa</string>
     <string name="poi_fire_hydrant_pressure_filter">Pressione</string>
-    <string name="poi_pump_status_missing_beam">Istadu de sa pompa: mancat sa trave</string>
+    <string name="poi_pump_status_missing_beam">Istadu de sa pompa: mancat sa trae</string>
     <string name="poi_traffic_signals_arrow_yes">Eja</string>
     <string name="poi_traffic_signals_vibration_yes">Eja</string>
     <string name="poi_traffic_signals_vibration_no">Vibratzione: nono</string>
@@ -3886,7 +3886,7 @@
     <string name="poi_gladed_yes">Cun àrbores: eja</string>
     <string name="poi_piste_name">Nùmene de sa pista</string>
     <string name="poi_piste_ski_jump">Brincu cun sos iscì</string>
-    <string name="poi_local_ref">Riferimentu locale</string>
+    <string name="poi_local_ref">Referèntzia locale</string>
     <string name="poi_geodesist">Geodesista</string>
     <string name="poi_conference_centre">Tzentru pro cunferèntzias</string>
     <string name="poi_wakeboarding">Wakeboard</string>
@@ -3956,7 +3956,7 @@
     <string name="poi_trolley_bay">Acorru de sos carrellos</string>
     <string name="poi_planetarium">Planetàriu</string>
     <string name="poi_service_vehicle_rental_yes">Nolu de veturas</string>
-    <string name="poi_service_vehicle_inspection_yes">Revisione de sos veìculos</string>
+    <string name="poi_service_vehicle_inspection_yes">Revisione de is veìculos</string>
     <string name="poi_climbing_grade_uiaa_min">Àndala prus fàtzile (classificatzione UIAA)</string>
     <string name="poi_climbing_grade_french_min">Àndala prus fàtzile (classificatzione frantzesa)</string>
     <string name="poi_climbing_grade_saxon_min">Àndala prus fàtzile (classificatzione sàssona)</string>
