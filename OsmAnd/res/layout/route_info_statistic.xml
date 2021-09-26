@@ -42,19 +42,21 @@
 					android:layout_weight="1"
 					android:minHeight="36dp"
 					android:orientation="horizontal"
-					android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
-					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
+					android:paddingStart="10dp"
+					android:paddingLeft="10dp"
+					android:paddingEnd="5dp"
+					android:paddingRight="5dp">
 
 					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/InfoIcon"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginLeft="@dimen/list_content_padding"
-						android:layout_marginRight="@dimen/list_content_padding"
+						android:layout_marginLeft="0dp"
+						android:layout_marginRight="@dimen/list_content_padding_small"
 						android:contentDescription="@string/info_button"
 						osmand:srcCompat="@drawable/ic_action_info_dark"
-						android:layout_marginEnd="@dimen/list_content_padding"
-						android:layout_marginStart="@dimen/list_content_padding" />
+						android:layout_marginEnd="@dimen/list_content_padding_small"
+						android:layout_marginStart="0dp" />
 
 					<LinearLayout
 						android:id="@+id/InfoDistance"
@@ -70,7 +72,7 @@
 							android:singleLine="true"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
-							tools:text="10 km" />
+							tools:text="1000000 km" />
 
 						<net.osmand.plus.widgets.TextViewEx
 							android:id="@+id/DistanceTitle"
@@ -98,19 +100,21 @@
 					android:layout_weight="1"
 					android:minHeight="36dp"
 					android:orientation="horizontal"
-					android:paddingEnd="@dimen/route_info_buttons_padding_top_bottom"
-					android:paddingRight="@dimen/route_info_buttons_padding_top_bottom">
+					android:paddingStart="0dp"
+					android:paddingLeft="0dp"
+					android:paddingEnd="5dp"
+					android:paddingRight="5dp">
 
 					<androidx.appcompat.widget.AppCompatImageView
 						android:id="@+id/DurationIcon"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginLeft="@dimen/list_content_padding"
-						android:layout_marginRight="@dimen/list_content_padding"
+						android:layout_marginLeft="@dimen/list_content_padding_small"
+						android:layout_marginRight="@dimen/list_content_padding_small"
 						android:contentDescription="@string/info_button"
 						osmand:srcCompat="@drawable/ic_action_time"
-						android:layout_marginEnd="@dimen/list_content_padding"
-						android:layout_marginStart="@dimen/list_content_padding" />
+						android:layout_marginEnd="@dimen/list_content_padding_small"
+						android:layout_marginStart="@dimen/list_content_padding_small" />
 
 					<LinearLayout
 						android:id="@+id/InfoDuration"
@@ -123,10 +127,9 @@
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:gravity="start"
-							android:singleLine="true"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
-							tools:text="5 min" />
+							tools:text="11 h 23 min" />
 
 						<net.osmand.plus.widgets.TextViewEx
 							android:id="@+id/DurationTitle"
@@ -136,6 +139,65 @@
 							android:textColor="@color/description_font_and_bottom_sheet_icons"
 							android:textSize="@dimen/default_sub_text_size"
 							tools:text="@string/arrive_at_time" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+				<View
+					android:id="@+id/info_divider2"
+					android:layout_width="1dp"
+					android:layout_height="match_parent"
+					android:background="?attr/divider_color_basic"
+					android:paddingBottom="@dimen/list_item_button_padding" />
+
+				<LinearLayout
+					android:id="@+id/co2_container"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:minHeight="36dp"
+					android:orientation="horizontal"
+					android:paddingStart="0dp"
+					android:paddingLeft="0dp"
+					android:paddingEnd="10dp"
+					android:paddingRight="10dp">
+
+					<androidx.appcompat.widget.AppCompatImageView
+						android:id="@+id/CO2Icon"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginStart="@dimen/list_content_padding_small"
+						android:layout_marginLeft="@dimen/list_content_padding_small"
+						android:layout_marginEnd="@dimen/list_content_padding_small"
+						android:layout_marginRight="@dimen/list_content_padding_small"
+						android:contentDescription="@string/info_button"
+						osmand:srcCompat="@drawable/ic_co2_24dp" />
+
+					<LinearLayout
+						android:id="@+id/InfoCO2"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="vertical">
+
+						<net.osmand.plus.widgets.TextViewEx
+							android:id="@+id/CO2Text"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="start"
+							android:singleLine="true"
+							android:textColor="?android:textColorPrimary"
+							android:textSize="@dimen/default_list_text_size"
+							tools:text="10.2 kg" />
+
+						<net.osmand.plus.widgets.TextViewEx
+							android:id="@+id/CO2Title"
+							android:layout_width="match_parent"
+							android:layout_height="wrap_content"
+							android:gravity="start"
+							android:textColor="@color/description_font_and_bottom_sheet_icons"
+							android:textSize="@dimen/default_sub_text_size"
+							android:text="@string/approxEmissions" />
 
 					</LinearLayout>
 

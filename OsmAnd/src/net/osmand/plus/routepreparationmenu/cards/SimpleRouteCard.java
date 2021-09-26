@@ -18,6 +18,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.routepreparationmenu.Co2Computer;
 import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
@@ -87,6 +88,20 @@ public class SimpleRouteCard extends MapBaseCard {
 		distanceText.setText(OsmAndFormatter.getFormattedDistance(routingHelper.getLeftDistance(), app));
 		durationText.setText(OsmAndFormatter.getFormattedDuration(routingHelper.getLeftTime(), app));
 		durationTitle.setText(app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(routingHelper.getLeftTime(), true)));
+
+		ImageView co2Icon = (ImageView) view.findViewById(R.id.CO2Icon);
+		co2Icon.setImageDrawable(getContentIcon(R.drawable.ic_co2_24dp));
+		final View co2Layout = view.findViewById(R.id.co2_container);
+		final TextView co2Text = view.findViewById(R.id.CO2Text);
+		boolean emitCO2 = Co2Computer.modeEmitCo2(routingHelper.getAppMode());
+		if (emitCO2) {
+			co2Text.setText(Co2Computer.getFormattedCO2(routingHelper.getLeftDistance(), app));
+			co2Layout.setVisibility(View.VISIBLE);
+			co2Icon.setVisibility(View.VISIBLE);
+		} else {
+			co2Layout.setVisibility(View.GONE);
+			co2Icon.setVisibility(View.GONE);
+		}
 
 		view.findViewById(R.id.details_button).setOnClickListener(new View.OnClickListener() {
 			@Override

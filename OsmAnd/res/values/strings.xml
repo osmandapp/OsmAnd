@@ -7,11 +7,21 @@
 	   1. To not produce duplicate strings (check by name if a string already exists)
 	   2. Every apostrophe (quote) is preceded by a backslash.
 	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
-	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
+	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/creating-consistent-ux
 	Thx - Hardy
 
 -->
 
+    <string name="motor_setting_title">Motor type</string>
+    <string name="motor_setting_descr">For CO2 computation</string>
+    <string name="approxEmissions">Approx. emissions</string>
+    <string name="diesel">Diesel</string>
+    <string name="petrol">Petrol</string>
+    <string name="LPG">LPG</string>
+    <string name="electric">Electric</string>
+    <string name="gas">CNG</string>
+    <string name="hybrid">Hybrid</string>
+    <string name="vehicle_parameters_descr">Weight, height, length, speed, motor type</string>
     <string name="travel_route_types">Route types</string>
     <string name="shared_string_files">Files</string>
     <string name="service_is_not_available_please_try_later">Service is not available, please try later</string>
@@ -1098,7 +1108,6 @@
     <string name="map_during_navigation_info">Map during navigation</string>
     <string name="map_during_navigation">Map during navigation</string>
     <string name="shared_string_other">Other</string>
-    <string name="vehicle_parameters_descr">Weight, height, length, speed</string>
     <string name="vehicle_parameters">Vehicle parameters</string>
     <string name="voice_announces_info">Voice announcements only occur during navigation.</string>
     <string name="voice_announces_descr">Navigation instructions and announcements</string>

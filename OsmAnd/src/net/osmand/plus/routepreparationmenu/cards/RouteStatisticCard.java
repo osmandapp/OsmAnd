@@ -29,6 +29,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
+import net.osmand.plus.routepreparationmenu.Co2Computer;
 import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
@@ -79,6 +80,9 @@ public class RouteStatisticCard extends MapBaseCard {
 		((ImageView) view.findViewById(R.id.distance_icon)).setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_route_distance));
 		((ImageView) view.findViewById(R.id.time_icon)).setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_time_span));
 
+		ImageView co2Icon = (ImageView) view.findViewById(R.id.CO2Icon_bis);
+		co2Icon.setImageDrawable(getContentIcon(R.drawable.ic_co2_24dp));
+
 		int dist = routingHelper.getLeftDistance();
 		String text = OsmAndFormatter.getFormattedDistance(dist, app);
 		SpannableStringBuilder distanceStr = new SpannableStringBuilder(text);
@@ -102,6 +106,24 @@ public class RouteStatisticCard extends MapBaseCard {
 		TextView arriveTimeTv = (TextView) view.findViewById(R.id.time_desc);
 		String arriveStr = app.getString(R.string.arrive_at_time, OsmAndFormatter.getFormattedTime(time, true));
 		arriveTimeTv.setText(arriveStr);
+
+		final View co2Layout = view.findViewById(R.id.co2_container_bis);
+		boolean emitCO2 = Co2Computer.modeEmitCo2(routingHelper.getAppMode());
+		if (emitCO2) {
+			SpannableStringBuilder co2Str = new SpannableStringBuilder();
+			co2Str.append(Co2Computer.getFormattedCO2(dist, app));
+			spaceIndex = co2Str.toString().lastIndexOf(" ");
+			if (spaceIndex != -1) {
+				co2Str.setSpan(new ForegroundColorSpan(getMainFontColor()), 0, spaceIndex, 0);
+			}
+			TextView co2Tv = view.findViewById(R.id.CO2Text_bis);
+			co2Tv.setText(co2Str);
+			co2Layout.setVisibility(View.VISIBLE);
+			co2Icon.setVisibility(View.VISIBLE);
+		} else {
+			co2Layout.setVisibility(View.GONE);
+			co2Icon.setVisibility(View.GONE);
+		}
 
 		buildSlopeInfo();
 		updateButtons();

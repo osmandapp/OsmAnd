@@ -44,6 +44,8 @@ import static net.osmand.router.GeneralRouter.VEHICLE_HEIGHT;
 import static net.osmand.router.GeneralRouter.VEHICLE_LENGTH;
 import static net.osmand.router.GeneralRouter.VEHICLE_WEIGHT;
 import static net.osmand.router.GeneralRouter.VEHICLE_WIDTH;
+import static net.osmand.plus.routepreparationmenu.Co2Computer.MotorType;
+import static net.osmand.plus.routepreparationmenu.Co2Computer.MOTOR_TYPE;
 
 public class VehicleParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -71,6 +73,9 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				setupCustomRoutingPropertyPref(parameters.get(VEHICLE_LENGTH), routerProfile);
 				if (routerProfile != GeneralRouterProfile.PUBLIC_TRANSPORT) {
 					setupDefaultSpeedPref();
+				}
+				if (routerProfile == GeneralRouterProfile.CAR) {
+					setupMotorPref();
 				}
 			}
 		} else {
@@ -134,6 +139,28 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		defaultSpeedPref.setIcon(getPreferenceIcon(DEFAULT_SPEED));
 		defaultSpeedPref.setLayoutResource(R.layout.preference_with_descr);
 		getPreferenceScreen().addPreference(defaultSpeedPref);
+	}
+
+	private void setupMotorPref() {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		ListPreferenceEx motorPref = new ListPreferenceEx(ctx);
+		MotorType[] motorTypes = MotorType.values(); //remove class import above if removed
+		String[] entries = new String[motorTypes.length];
+		Integer[] entryValues = new Integer[motorTypes.length];
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = motorTypes[i].toHumanString(ctx);
+			entryValues[i] = motorTypes[i].ordinal();
+		}
+		motorPref.setKey(MOTOR_TYPE);
+		motorPref.setTitle(R.string.motor_setting_title);
+		motorPref.setSummary(R.string.motor_setting_descr);
+		motorPref.setIcon(getPreferenceIcon(MOTOR_TYPE));
+		motorPref.setEntries(entries);
+		motorPref.setEntryValues(entryValues);
+		getPreferenceScreen().addPreference(motorPref);
 	}
 
 	@Override
@@ -393,6 +420,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 				return getPersistentPrefIcon(R.drawable.ic_action_width_limit);
 			case VEHICLE_LENGTH:
 				return getPersistentPrefIcon(R.drawable.ic_action_length_limit);
+			case MOTOR_TYPE:
+				return getPersistentPrefIcon(R.drawable.ic_action_fuel);
 			default:
 				return null;
 		}

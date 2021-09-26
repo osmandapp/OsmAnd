@@ -49,6 +49,7 @@ import net.osmand.plus.helpers.enums.AutoZoomMap;
 import net.osmand.plus.helpers.enums.DayNightMode;
 import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.helpers.enums.MetricsConstants;
+import net.osmand.plus.routepreparationmenu.Co2Computer.MotorType;
 import net.osmand.plus.helpers.enums.SpeedConstants;
 import net.osmand.plus.helpers.enums.TracksSortByMode;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription.SubscriptionState;
@@ -1025,6 +1026,9 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Float> MAX_SPEED = new FloatPreference(this,
 			"max_speed", 0f).makeProfile().cache();
+
+	public final OsmandPreference<MotorType> MOTOR_TYPE = new EnumStringPreference<MotorType>(this,
+			"motor_type", MotorType.PETROL, MotorType.values()).makeProfile().cache();
 
 	public final CommonPreference<String> ICON_RES_NAME = new StringPreference(this, "app_mode_icon_res_name", "ic_world_globe_dark").makeProfile().cache();
 
