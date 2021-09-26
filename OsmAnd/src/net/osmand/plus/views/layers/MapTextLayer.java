@@ -197,7 +197,7 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	private void updateTextSize() {
-		float scale = view.getApplication().getSettings().TEXT_SCALE.get();
+		float scale = getTextScale();
 		float textSize = scale * TEXT_SIZE * view.getDensity();
 		if (paintTextIcon.getTextSize() != textSize) {
 			paintTextIcon.setTextSize(textSize);

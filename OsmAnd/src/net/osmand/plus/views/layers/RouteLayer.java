@@ -14,6 +14,7 @@ import android.graphics.drawable.LayerDrawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -98,7 +99,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsPT = new RenderingLineAttributes("publicTransportLine");
 		attrsPT.defaultWidth = (int) (12 * density);
 		attrsPT.defaultWidth3 = (int) (7 * density);
-		attrsPT.defaultColor = view.getResources().getColor(R.color.nav_track);
+		attrsPT.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track);
 		attrsPT.paint3.setStrokeCap(Cap.BUTT);
 		attrsPT.paint3.setColor(Color.WHITE);
 		attrsPT.paint2.setStrokeCap(Cap.BUTT);
@@ -107,7 +108,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsW = new RenderingLineAttributes("walkingRouteLine");
 		attrsW.defaultWidth = (int) (12 * density);
 		attrsW.defaultWidth3 = (int) (7 * density);
-		attrsW.defaultColor = view.getResources().getColor(R.color.nav_track_walk_fill);
+		attrsW.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track_walk_fill);
 		attrsW.paint3.setStrokeCap(Cap.BUTT);
 		attrsW.paint3.setColor(Color.WHITE);
 		attrsW.paint2.setStrokeCap(Cap.BUTT);

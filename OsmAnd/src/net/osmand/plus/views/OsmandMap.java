@@ -1,5 +1,8 @@
 package net.osmand.plus.views;
 
+import static net.osmand.plus.auto.CarSurfaceView.MAP_DENSITY_DIVIDER_160;
+import static net.osmand.plus.auto.CarSurfaceView.TEXT_SCALE_DIVIDER_160;
+
 import android.content.Context;
 import android.graphics.Point;
 import android.view.Display;
@@ -178,5 +181,27 @@ public class OsmandMap implements NavigationSessionListener {
 		} else if (mapView.getMapActivity() == null) {
 			app.getMapViewTrackingUtilities().setMapView(null);
 		}
+	}
+
+	public float getTextScale() {
+		float scale = app.getSettings().TEXT_SCALE.get();
+		return scale * getScaleCoef(true);
+	}
+
+	public float getMapDensity() {
+		float scale = app.getSettings().MAP_DENSITY.get();
+		return scale * getScaleCoef(false);
+	}
+
+	public float getScaleCoef(boolean textScale) {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
+		if (mapView.isCarView()) {
+			float carViewDensity = mapView.getCarViewDensity();
+			float density = mapView.getDensity();
+			if (density >= 2 && carViewDensity == 1) {
+				return textScale ? TEXT_SCALE_DIVIDER_160 : MAP_DENSITY_DIVIDER_160;
+			}
+		}
+		return 1f;
 	}
 }

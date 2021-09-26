@@ -115,7 +115,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	@Override
 	public void onFrameRendered(@NonNull Canvas canvas, @NonNull Rect visibleArea, @NonNull Rect stableArea) {
 		DrawSettings drawSettings = new DrawSettings(getCarContext().isDarkMode(), false, mSurfaceRenderer.getDensity());
-		alarmWidget.updateInfo(drawSettings);
+		alarmWidget.updateInfo(drawSettings, true);
 		Bitmap widgetBitmap = alarmWidget.getWidgetBitmap();
 		if (widgetBitmap != null) {
 			canvas.drawBitmap(widgetBitmap, visibleArea.right - widgetBitmap.getWidth() - 10, visibleArea.top + 10, new Paint());

@@ -465,7 +465,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			streetNameView.updateInfo(drawSettings);
 			topToolbarView.updateInfo();
 			topCoordinatesView.updateInfo();
-			alarmControl.updateInfo(drawSettings);
+			alarmControl.updateInfo(drawSettings, false);
 			lanesControl.updateInfo(drawSettings);
 
 			for (RulerWidget rulerWidget : rulerWidgets) {

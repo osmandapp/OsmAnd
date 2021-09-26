@@ -107,7 +107,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	private void drawPoint(Canvas canvas, OsmPoint osmPoint, float x, float y) {
-		float textScale = app.getSettings().TEXT_SCALE.get();
+		float textScale = getTextScale();
 		int iconId = getIconId(osmPoint);
 		BackgroundType backgroundType = DEFAULT_BACKGROUND_TYPE;
 		if (osmPoint.getGroup() == OsmPoint.Group.BUG) {

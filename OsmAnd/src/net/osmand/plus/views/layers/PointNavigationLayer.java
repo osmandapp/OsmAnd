@@ -3,7 +3,6 @@ package net.osmand.plus.views.layers;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
@@ -15,6 +14,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -31,6 +31,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	private Paint mBitmapPaint;
 
 	private OsmandMapTileView mView;
+	private boolean carView;
+	private float textScale = 1f;
+	private double pointSizePx;
 
 	private Bitmap mStartPoint;
 	private Bitmap mTargetPoint;
@@ -55,9 +58,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		mTextPaint.setTextSize(sp * 18);
 		mTextPaint.setTextAlign(Align.CENTER);
 		mTextPaint.setAntiAlias(true);
-		mStartPoint = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_start_point);
-		mTargetPoint = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_target_point);
-		mIntermediatePoint = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_intermediate_point);
+
+		updateBitmaps(true);
 	}
 
 	@Override
@@ -73,6 +75,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		if (tb.getZoom() < 3) {
 			return;
 		}
+		updateBitmaps(false);
 
 		TargetPointsHelper targetPoints = getApplication().getTargetPointsHelper();
 		TargetPoint pointToStart = targetPoints.getPointToStart();
@@ -117,6 +120,31 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 
 	}
 
+	private void updateBitmaps(boolean forceUpdate) {
+		OsmandApplication app = getApplication();
+		float textScale = getTextScale();
+		boolean carView = app.getOsmandMap().getMapView().isCarView();
+		if (this.textScale != textScale || this.carView != carView || forceUpdate) {
+			this.textScale = textScale;
+			this.carView = carView;
+			recreateBitmaps();
+			pointSizePx = Math.sqrt(mTargetPoint.getWidth() * mTargetPoint.getWidth()
+					+ mTargetPoint.getHeight() * mTargetPoint.getHeight());
+		}
+	}
+
+	private void recreateBitmaps() {
+		mStartPoint = getScaledBitmap(R.drawable.map_start_point);
+		mTargetPoint = getScaledBitmap(R.drawable.map_target_point);
+		mIntermediatePoint = getScaledBitmap(R.drawable.map_intermediate_point);
+	}
+
+	@Nullable
+	@Override
+	protected Bitmap getScaledBitmap(int drawableId) {
+		return getScaledBitmap(drawableId, textScale);
+	}
+
 	private float getPointX(RotatedTileBox tileBox, TargetPoint point) {
 		if (contextMenuLayer.getMoveableObject() != null
 				&& point == contextMenuLayer.getMoveableObject()) {
@@ -142,7 +170,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		} else if (p == null || tb == null) {
 			return false;
 		}
-		return tb.containsLatLon(p.getLatitude(), p.getLongitude());
+		double tx = tb.getPixXFromLatLon(p.getLatitude(), p.getLongitude());
+		double ty = tb.getPixYFromLatLon(p.getLatitude(), p.getLongitude());
+		return tx >= -pointSizePx && tx <= tb.getPixWidth() + pointSizePx && ty >= -pointSizePx && ty <= tb.getPixHeight() + pointSizePx;
 	}
 
 

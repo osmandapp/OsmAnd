@@ -2,7 +2,6 @@ package net.osmand.plus.views.layers;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -94,7 +93,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private TrkSegment route;
 
 	private float textSize;
-	private int verticalOffset;
+	private float verticalOffset;
 
 	private final List<Float> tx = new ArrayList<>();
 	private final List<Float> ty = new ArrayList<>();
@@ -111,6 +110,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private boolean inPlanRouteMode;
 	private boolean defaultAppMode = true;
+	private boolean carView;
+	private float textScale = 1f;
+	private double markerSizePx;
 
 	private final List<Amenity> amenities = new ArrayList<>();
 
@@ -138,17 +140,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		bitmapPaint = new Paint();
 		bitmapPaint.setAntiAlias(true);
 		bitmapPaint.setFilterBitmap(true);
-		markerBitmapBlue = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_blue);
-		markerBitmapGreen = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_green);
-		markerBitmapOrange = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_orange);
-		markerBitmapRed = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_red);
-		markerBitmapYellow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_yellow);
-		markerBitmapTeal = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_teal);
-		markerBitmapPurple = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_purple);
 
-		arrowLight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p1_light);
-		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p2_color);
-		arrowShadow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p3_shadow);
+		updateBitmaps(true);
+
 		bitmapPaintDestBlue = createPaintDest(R.color.marker_blue);
 		bitmapPaintDestGreen = createPaintDest(R.color.marker_green);
 		bitmapPaintDestOrange = createPaintDest(R.color.marker_orange);
@@ -158,9 +152,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
-
-		textSize = getContext().getResources().getDimensionPixelSize(R.dimen.guide_line_text_size);
-		verticalOffset = getContext().getResources().getDimensionPixelSize(R.dimen.guide_line_vertical_offset);
 	}
 
 	@Override
@@ -319,7 +310,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				text = TextUtils.ellipsize(text, textPaint, pm.getLength(), TextUtils.TruncateAt.END).toString();
 				Rect bounds = new Rect();
 				textAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
-				float hOffset = pm.getLength() / 2 - bounds.width() / 2;
+				float hOffset = pm.getLength() / 2 - bounds.width() / 2f;
 				lineAttrs.paint.setColor(colors[marker.colorIndex]);
 
 				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
@@ -343,18 +334,19 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (widgetsFactory != null) {
 			widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : null, tileBox.getZoom());
 		}
-		OsmandSettings settings = getApplication().getSettings();
+		OsmandApplication app = getApplication();
+		OsmandSettings settings = app.getSettings();
 
 		if (tileBox.getZoom() < 3 || !settings.SHOW_MAP_MARKERS.get()) {
 			return;
 		}
 
 		int displayedWidgets = settings.DISPLAYED_MARKERS_WIDGETS_COUNT.get();
-
-		MapMarkersHelper markersHelper = getApplication().getMapMarkersHelper();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		updateBitmaps(false);
 
 		for (MapMarker marker : markersHelper.getMapMarkers()) {
-			if (isLocationVisible(tileBox, marker) && !overlappedByWaypoint(marker)
+			if (isMarkerVisible(tileBox, marker) && !overlappedByWaypoint(marker)
 					&& !isInMotion(marker) && !isSynced(marker)) {
 				Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
 				int marginX = bmp.getWidth() / 6;
@@ -406,6 +398,42 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
+	private void updateBitmaps(boolean forceUpdate) {
+		OsmandApplication app = getApplication();
+		float textScale = getTextScale();
+		boolean carView = app.getOsmandMap().getMapView().isCarView();
+		if (this.textScale != textScale || this.carView != carView || forceUpdate) {
+			this.textScale = textScale;
+			this.carView = carView;
+			recreateBitmaps();
+			textSize = app.getResources().getDimensionPixelSize(R.dimen.guide_line_text_size) * textScale;
+			verticalOffset = app.getResources().getDimensionPixelSize(R.dimen.guide_line_vertical_offset) * textScale;
+		}
+	}
+
+	private void recreateBitmaps() {
+		markerBitmapBlue = getScaledBitmap(R.drawable.map_marker_blue);
+		markerBitmapGreen = getScaledBitmap(R.drawable.map_marker_green);
+		markerBitmapOrange = getScaledBitmap(R.drawable.map_marker_orange);
+		markerBitmapRed = getScaledBitmap(R.drawable.map_marker_red);
+		markerBitmapYellow = getScaledBitmap(R.drawable.map_marker_yellow);
+		markerBitmapTeal = getScaledBitmap(R.drawable.map_marker_teal);
+		markerBitmapPurple = getScaledBitmap(R.drawable.map_marker_purple);
+
+		markerSizePx = Math.sqrt(markerBitmapBlue.getWidth() * markerBitmapBlue.getWidth()
+				+ markerBitmapBlue.getHeight() * markerBitmapBlue.getHeight());
+
+		arrowLight = getScaledBitmap(R.drawable.map_marker_direction_arrow_p1_light);
+		arrowToDestination = getScaledBitmap(R.drawable.map_marker_direction_arrow_p2_color);
+		arrowShadow = getScaledBitmap(R.drawable.map_marker_direction_arrow_p3_shadow);
+	}
+
+	@Nullable
+	@Override
+	protected Bitmap getScaledBitmap(int drawableId) {
+		return getScaledBitmap(drawableId, textScale);
+	}
+
 	private boolean isSynced(@NonNull MapMarker marker) {
 		return marker.wptPt != null || marker.favouritePoint != null;
 	}
@@ -419,17 +447,25 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (marker == null || tb == null) {
 			return false;
 		}
-		return containsLatLon(tb, marker.getLatitude(), marker.getLongitude());
+		return containsLatLon(tb, marker.getLatitude(), marker.getLongitude(), 0, 0);
 	}
 
-	public boolean containsLatLon(RotatedTileBox tb, double lat, double lon) {
+	public boolean isMarkerVisible(RotatedTileBox tb, MapMarker marker) {
+		//noinspection SimplifiableIfStatement
+		if (marker == null || tb == null) {
+			return false;
+		}
+		return containsLatLon(tb, marker.getLatitude(), marker.getLongitude(), markerSizePx, markerSizePx);
+	}
+
+	public boolean containsLatLon(RotatedTileBox tb, double lat, double lon, double w, double h) {
 		double widgetHeight = 0;
-		if (widgetsFactory != null && widgetsFactory.isTopBarVisible()) {
+		if (widgetsFactory != null && widgetsFactory.isTopBarVisible() && !getApplication().getOsmandMap().getMapView().isCarView()) {
 			widgetHeight = widgetsFactory.getTopBarHeight();
 		}
 		double tx = tb.getPixXFromLatLon(lat, lon);
 		double ty = tb.getPixYFromLatLon(lat, lon);
-		return tx >= 0 && tx <= tb.getPixWidth() && ty >= widgetHeight && ty <= tb.getPixHeight();
+		return tx >= -w && tx <= tb.getPixWidth() + w && ty >= widgetHeight - h && ty <= tb.getPixHeight() + h;
 	}
 
 	public boolean overlappedByWaypoint(MapMarker marker) {
