@@ -61,8 +61,8 @@ public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 	                  @ColorInt int selectedColor,
 	                  @NonNull List<Integer> colors,
 	                  @NonNull ListStringPreference colorsListPreference,
-	                  boolean userOnMap) {
-		super(mapActivity, userOnMap);
+	                  boolean usedOnMap) {
+		super(mapActivity, usedOnMap);
 		this.targetFragment = targetFragment;
 		this.selectedColor = selectedColor;
 		this.colors = colors;
