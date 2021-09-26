@@ -79,7 +79,7 @@ public class JSCommandBuilder extends CommandBuilder {
 
     @Override
     public JSCommandBuilder makeUTwp(){
-        return makeUT(new StreetName());
+        return addCommand(C_MAKE_UTWP);
     }
 
     public JSCommandBuilder makeUT(StreetName streetName){
