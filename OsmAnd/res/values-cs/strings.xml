@@ -4205,4 +4205,6 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Obarví trasy podle síťové příslušnosti.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Obarví trasy podle typu sítě (mezinárodní, regionální, lokální).</string>
     <string name="travel_routes">Cestovní trasy</string>
+    <string name="remove_group_from_markers">Vyjmout skupinu ze seznamu mapových značek</string>
+    <string name="start_point">Start</string>
 </resources>
