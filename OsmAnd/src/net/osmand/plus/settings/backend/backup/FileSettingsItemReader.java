@@ -28,7 +28,7 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 		OutputStream output;
 		FileSettingsItem item = getItem();
 		savedFile = item.getFile();
-		if (savedFile.isDirectory()) {
+		if (savedFile.isDirectory() || entryName.startsWith(item.getFileName())) {
 			savedFile = new File(savedFile, entryName.substring(item.getFileName().length()));
 		}
 		if (savedFile.exists() && !item.isShouldReplace()) {
