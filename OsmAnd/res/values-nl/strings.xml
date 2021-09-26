@@ -4156,4 +4156,15 @@
     <string name="start_point">Start</string>
     <string name="mapillary_menu_filter_description_new">Filter afbeelding op basis van tijdstip of type. Enkel beschikbaar in een ingezoomde weergave.</string>
     <string name="service_is_not_available_please_try_later">De service is niet beschikbaar, gelieve later opnieuw te proberen</string>
+    <string name="travel_routes">Reiswegen</string>
+    <string name="setting_supported_by_style">Deze instelling is beschikbaar in de \'%1$s\' kaartstijl</string>
+    <string name="direct_line_maps_required_descr">De route berekening duurt langer dan gewoonlijk.
+\n
+\nMisschien zijn enkele kaarten niet geladen.</string>
+    <string name="cancel_anytime_in_amazon_app">Annuleer het op elk moment via de Amazon app</string>
+    <string name="no_activity_for_intent">Er zijn geen gepaste applicaties zijn gevonden om deze actie uit te voeren</string>
+    <string name="no_items_of_type_message">Je heb geen items van dit type</string>
+    <string name="routeInfo_smoothness_description">Voorziet een classificatieschema volgens de bruikbaarheid van een weg voor wielvoertuigen in het bijzonder voor de regelmatigheid en vlakte van de ondergrond.</string>
+    <string name="shared_string_files">Bestanden</string>
+    <string name="travel_route_types">Routetypes</string>
 </resources>

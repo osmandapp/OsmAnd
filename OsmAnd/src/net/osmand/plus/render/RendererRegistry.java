@@ -14,7 +14,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.render.RenderingRulesStorage.RenderingRulesStorageResolver;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -28,7 +27,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,18 +37,18 @@ public class RendererRegistry {
 
 	private final static Log log = PlatformUtil.getLog(RendererRegistry.class);
 	
-	public final static String DEFAULT_RENDER = "OsmAnd";  //$NON-NLS-1$
+	public final static String DEFAULT_RENDER = "OsmAnd"; 
 	public final static String DEFAULT_RENDER_FILE_PATH = "default.render.xml";
-	public final static String TOURING_VIEW = "Touring view (contrast and details)";  //$NON-NLS-1$
-	public final static String WINTER_SKI_RENDER = "Winter and ski";  //$NON-NLS-1$
-	public final static String NAUTICAL_RENDER = "Nautical";  //$NON-NLS-1$
-	public final static String TOPO_RENDER = "Topo";  //$NON-NLS-1$
-	public final static String MAPNIK_RENDER = "Mapnik";  //$NON-NLS-1$
-	public final static String OFFROAD_RENDER = "Offroad";  //$NON-NLS-1$
-	public final static String LIGHTRS_RENDER = "LightRS";  //$NON-NLS-1$
-	public final static String UNIRS_RENDER = "UniRS";  //$NON-NLS-1$
-	public final static String DESERT_RENDER = "Desert";  //$NON-NLS-1$
-	public final static String SNOWMOBILE_RENDER = "Snowmobile";  //$NON-NLS-1$
+	public final static String TOURING_VIEW = "Touring view (contrast and details)"; 
+	public final static String WINTER_SKI_RENDER = "Winter and ski"; 
+	public final static String NAUTICAL_RENDER = "Nautical"; 
+	public final static String TOPO_RENDER = "Topo"; 
+	public final static String MAPNIK_RENDER = "Mapnik"; 
+	public final static String OFFROAD_RENDER = "Offroad"; 
+	public final static String LIGHTRS_RENDER = "LightRS"; 
+	public final static String UNIRS_RENDER = "UniRS"; 
+	public final static String DESERT_RENDER = "Desert"; 
+	public final static String SNOWMOBILE_RENDER = "Snowmobile"; 
 
 	private final OsmandApplication app;
 
@@ -88,21 +86,35 @@ public class RendererRegistry {
 		return defaultRender;
 	}
 
+	@Nullable
 	public RenderingRulesStorage getRenderer(String name) {
-		if(renderers.containsKey(name)){
+		if (renderers.containsKey(name)) {
 			return renderers.get(name);
 		}
-		if(!hasRender(name)){
+		if (!hasRender(name)) {
 			return null;
 		}
 		try {
-			RenderingRulesStorage r = loadRenderer(name, new LinkedHashMap<String, RenderingRulesStorage>(), new LinkedHashMap<String, String>());
-			renderers.put(name, r);
+			RenderingRulesStorage r = loadRenderer(name, new LinkedHashMap<>(), new LinkedHashMap<>());
+			if (r != null) {
+				renderers.put(name, r);
+			}
 			return r;
 		} catch (IOException | XmlPullParserException e) {
-			log.error("Error loading renderer", e); //$NON-NLS-1$
+			log.error("Error loading renderer", e);
 		}
 		return null;
+	}
+
+	public void updateRenderer(@NonNull RenderingRulesStorage storage) {
+		RenderingRulesStorage renderer = getRenderer(storage.getName());
+		if (defaultRender == renderer) {
+			defaultRender = storage;
+		}
+		if (currentSelectedRender == renderer) {
+			currentSelectedRender = storage;
+		}
+		renderers.put(storage.getName(), storage);
 	}
 
 	private boolean hasRender(String name) {
@@ -111,14 +123,12 @@ public class RendererRegistry {
 	
 	private String getInternalRender(String name) {
 		// check by key and by value
-		Iterator<Entry<String, String>> mapIt = internalRenderers.entrySet().iterator();
-		while(mapIt.hasNext()) {
-			Entry<String, String> e = mapIt.next();
-			if(e.getKey().equalsIgnoreCase(name)) {
+		for (Entry<String, String> e : internalRenderers.entrySet()) {
+			if (e.getKey().equalsIgnoreCase(name)) {
 				return e.getValue();
 			}
 			String simpleFileName = e.getValue().substring(0, e.getValue().indexOf('.'));
-			if(simpleFileName.equalsIgnoreCase(name)) {
+			if (simpleFileName.equalsIgnoreCase(name)) {
 				return e.getValue();
 			}
 		}
@@ -126,6 +136,7 @@ public class RendererRegistry {
 	}
 	
 //	private static boolean USE_PRECOMPILED_STYLE = false;
+	@Nullable
 	private RenderingRulesStorage loadRenderer(String name, final Map<String, RenderingRulesStorage> loadedRenderers, 
 			final Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
 //		if ((name.equals(DEFAULT_RENDER) || name.equalsIgnoreCase("default")) && USE_PRECOMPILED_STYLE) {
@@ -135,7 +146,7 @@ public class RendererRegistry {
 //			return rrs;
 //		}
 		InputStream is = getInputStream(name);
-		if(is == null) {
+		if (is == null) {
 			return null;
 		}
 		try {
@@ -158,42 +169,41 @@ public class RendererRegistry {
 		}
 
 		// parse content
+		RenderingRulesStorage main = null;
 		is = getInputStream(name);
-		final RenderingRulesStorage main = new RenderingRulesStorage(name, renderingConstants);
-		
-		loadedRenderers.put(name, main);
-		try {
-			main.parseRulesFromXmlInputStream(is, new RenderingRulesStorageResolver() {
-
-				@Override
-				public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException {
+		if (is != null) {
+			main = new RenderingRulesStorage(name, renderingConstants);
+			loadedRenderers.put(name, main);
+			try {
+				main.parseRulesFromXmlInputStream(is, (nm, ref) -> {
 					// reload every time to propogate rendering constants
-					if (loadedRenderers.containsKey(name)) {
-						log.warn("Circular dependencies found " + name); //$NON-NLS-1$
+					if (loadedRenderers.containsKey(nm)) {
+						log.warn("Circular dependencies found " + nm);
 					}
 					RenderingRulesStorage dep = null;
 					try {
-						dep = loadRenderer(name, loadedRenderers, renderingConstants);
+						dep = loadRenderer(nm, loadedRenderers, renderingConstants);
 					} catch (IOException e) {
-						log.warn("Dependent renderer not found : " + e.getMessage(), e); //$NON-NLS-1$
+						log.warn("Dependent renderer not found: " + e.getMessage(), e);
 					}
 					if (dep == null) {
-						log.warn("Dependent renderer not found : " + name); //$NON-NLS-1$
+						log.warn("Dependent renderer not found: " + nm);
 					}
 					return dep;
-				}
-			});
-		} finally {
-			is.close();
-		}
-		for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
-			listener.onRendererLoaded(name, main, getInputStream(name));
+				});
+			} finally {
+				is.close();
+			}
+			for (IRendererLoadedEventListener listener : rendererLoadedListeners) {
+				listener.onRendererLoaded(name, main, getInputStream(name));
+			}
 		}
 		return main;
 	}
 
+	@Nullable
 	public InputStream getInputStream(String name) throws FileNotFoundException {
-		InputStream is;
+		InputStream is = null;
 		if("default".equalsIgnoreCase(name)) {
 			name = DEFAULT_RENDER;
 		} 
@@ -209,7 +219,10 @@ public class RendererRegistry {
 				is = new FileInputStream(fl);
 			} else {
 				copyFileForInternalStyle(name);
-				is = RenderingRulesStorage.class.getResourceAsStream(getInternalRender(name));
+				String internalRender = getInternalRender(name);
+				if (!Algorithms.isEmpty(internalRender)) {
+					is = RenderingRulesStorage.class.getResourceAsStream(internalRender);
+				}
 			}
 		}
 		return is;
@@ -218,8 +231,13 @@ public class RendererRegistry {
 	public void copyFileForInternalStyle(String name) {
 		try {
 			FileOutputStream fout = new FileOutputStream(getFileForInternalStyle(name));
-			Algorithms.streamCopy(RenderingRulesStorage.class.getResourceAsStream(getInternalRender(name)),
-					fout);
+			String internalRender = getInternalRender(name);
+			if (!Algorithms.isEmpty(internalRender)) {
+				InputStream resourceAsStream = RenderingRulesStorage.class.getResourceAsStream(internalRender);
+				if (resourceAsStream != null) {
+					Algorithms.streamCopy(resourceAsStream, fout);
+				}
+			}
 			fout.close();
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
@@ -232,11 +250,9 @@ public class RendererRegistry {
 
 	public File getFileForInternalStyle(String name) {
 		String file = getInternalRender(name);
-		if(file == null) {
-			return new File(app.getAppPath(IndexConstants.RENDERERS_DIR), "default.render.xml");
-		}
-		File fl = new File(app.getAppPath(IndexConstants.RENDERERS_DIR), file);
-		return fl;
+		return file == null
+				? new File(app.getAppPath(IndexConstants.RENDERERS_DIR), "default.render.xml")
+				: new File(app.getAppPath(IndexConstants.RENDERERS_DIR), file);
 	}
 	
 	public void initRenderers(IProgress progress) {
@@ -253,7 +269,7 @@ public class RendererRegistry {
 	public void updateExternalRenderers() {
 		File file = app.getAppPath(IndexConstants.RENDERERS_DIR);
 		file.mkdirs();
-		Map<String, File> externalRenderers = new LinkedHashMap<String, File>();
+		Map<String, File> externalRenderers = new LinkedHashMap<>();
 		if (file.exists() && file.canRead()) {
 			File[] lf = file.listFiles();
 			if (lf != null) {
@@ -278,7 +294,7 @@ public class RendererRegistry {
 
 	@NonNull
 	public Map<String, String> getRenderers() {
-		Map<String, String> renderers = new LinkedHashMap<String, String>();
+		Map<String, String> renderers = new LinkedHashMap<>();
 		renderers.put(DEFAULT_RENDER, DEFAULT_RENDER_FILE_PATH);
 		renderers.putAll(internalRenderers);
 
@@ -345,7 +361,7 @@ public class RendererRegistry {
 	}
 
 	public RenderingRulesStorage getCurrentSelectedRenderer() {
-		if(currentSelectedRender == null){
+		if (currentSelectedRender == null) {
 			return defaultRender();
 		}
 		return currentSelectedRender;

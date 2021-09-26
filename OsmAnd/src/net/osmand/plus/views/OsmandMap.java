@@ -106,6 +106,10 @@ public class OsmandMap implements NavigationSessionListener {
 		mapView.refreshMap();
 	}
 
+	public void refreshMap(final boolean updateVectorRendering) {
+		mapView.refreshMap(updateVectorRendering);
+	}
+
 	public void changeZoom(int stp, long time) {
 		mapViewTrackingUtilities.setZoomTime(time);
 		changeZoom(stp);

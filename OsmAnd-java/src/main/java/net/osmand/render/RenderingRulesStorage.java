@@ -39,7 +39,6 @@ public class RenderingRulesStorage {
 	public final static int LENGTH_RULES = 6;
 	
 	private final static int SHIFT_TAG_VAL = 16;
-	
 
 	private final static String SEQ_ATTR_KEY = "seq";
 	private final static String SEQ_PLACEHOLDER = "#SEQ";
@@ -58,23 +57,48 @@ public class RenderingRulesStorage {
 	
 	protected String renderingName;
 	protected String internalRenderingName;
-	
-	
-	public static interface RenderingRulesStorageResolver {
-		
+
+	protected int internalVersion = 1;
+
+	public interface RenderingRulesStorageResolver {
 		RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws XmlPullParserException, IOException;
 	}
 	
 	public RenderingRulesStorage(String name, Map<String, String> renderingConstants){
 		getDictionaryValue("");
 		this.renderingName = name;
-		if(renderingConstants != null) {
+		if (renderingConstants != null) {
 			this.renderingConstants.putAll(renderingConstants);
 		}
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public RenderingRulesStorage copy() {
+		RenderingRulesStorage storage = new RenderingRulesStorage(renderingName, renderingConstants);
+		storage.internalRenderingName = internalRenderingName;
+		storage.internalVersion = internalVersion + 1;
+		storage.dictionary = new ArrayList<>(dictionary);
+		storage.dictionaryMap.putAll(dictionaryMap);
+		storage.PROPS = new RenderingRuleStorageProperties(PROPS);
+		storage.tagValueGlobalRules = new TIntObjectHashMap[tagValueGlobalRules.length];
+		for (int i = 0; i < tagValueGlobalRules.length; i++) {
+			TIntObjectHashMap<RenderingRule> rule = this.tagValueGlobalRules[i];
+			if (rule != null) {
+				TIntObjectHashMap<RenderingRule> newRule = new TIntObjectHashMap<>();
+				newRule.putAll(rule);
+				storage.tagValueGlobalRules[i] = newRule;
+			}
+		}
+		storage.renderingAttributes.putAll(renderingAttributes);
+		return storage;
+	}
+
+	public int getInternalVersion() {
+		return internalVersion;
+	}
+
 	public int getDictionaryValue(String val) {
-		if(dictionaryMap.containsKey(val)){
+		if (dictionaryMap.containsKey(val)) {
 			return dictionaryMap.get(val);
 		}
 		int nextInd = dictionaryMap.size();
@@ -87,7 +111,6 @@ public class RenderingRulesStorage {
 	public String getStringValue(int i){
 		return dictionary.get(i);
 	}
-	
 	
 	public String getName() {
 		return renderingName;
@@ -120,7 +143,6 @@ public class RenderingRulesStorage {
 					renderingAttributes.put(e.getKey(), e.getValue());
 				}
 			}
-
 			for (int i = 0; i < LENGTH_RULES; i++) {
 				if (depends.tagValueGlobalRules[i] == null || depends.tagValueGlobalRules[i].isEmpty()) {
 					continue;
@@ -144,7 +166,6 @@ public class RenderingRulesStorage {
 					tagValueGlobalRules[i] = depends.tagValueGlobalRules[i];
 				}
 			}
-
 		}
 	}
 
@@ -479,7 +500,7 @@ public class RenderingRulesStorage {
 	}
 	
 	protected RenderingRule getRule(int state, int itag, int ivalue){
-		if(tagValueGlobalRules[state] != null){
+		if (tagValueGlobalRules[state] != null){
 			return tagValueGlobalRules[state].get((itag << SHIFT_TAG_VAL) | ivalue);
 		}
 		return null;
@@ -636,5 +657,10 @@ public class RenderingRulesStorage {
 		} else {
 			out.println("Not found");
 		}
+	}
+
+	@Override
+	public String toString() {
+		return getName();
 	}
 }
