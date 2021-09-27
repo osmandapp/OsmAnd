@@ -1,7 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -36,20 +34,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatImageButton;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.ViewCompat;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.tabs.TabLayout;
 
 import net.osmand.AndroidUtils;
@@ -73,8 +57,11 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+import net.osmand.plus.osmedit.dialogs.AreYouSureBottomSheetDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
+import net.osmand.plus.osmedit.dialogs.SaveExtraValidationDialogFragment;
+import net.osmand.plus.osmedit.dialogs.ValueExceedLimitDialogFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -91,7 +78,21 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
+
+import static net.osmand.osm.edit.Entity.POI_TYPE_TAG;
 
 public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public static final String TAG = EditPoiDialogFragment.class.getSimpleName();
@@ -415,34 +416,23 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		throw new UnsupportedOperationException("Please use show(FragmentManager manager, String tag)");
 	}
 
-	private void trySave() {
+	public void trySave() {
 		if (onSaveButtonClickListener != null) {
 			onSaveButtonClickListener.onSaveButtonClick();
 		}
 		String tagWithExceedingValue = isTextLengthInRange();
-		if (!Algorithms.isEmpty(tagWithExceedingValue)){
-			ValueExceedLimitDialogFragment f = new ValueExceedLimitDialogFragment();
-			Bundle args = new Bundle();
-			args.putString("tag", tagWithExceedingValue);
-			f.setArguments(args);
-			f.show(getChildFragmentManager(), "exceedDialog");
+		if (!Algorithms.isEmpty(tagWithExceedingValue)) {
+			ValueExceedLimitDialogFragment.showInstance(getChildFragmentManager(), tagWithExceedingValue);
 		} else if (TextUtils.isEmpty(poiTypeEditText.getText())) {
 			if (Algorithms.isEmpty(editPoiData.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()))) {
-				SaveExtraValidationDialogFragment f = new SaveExtraValidationDialogFragment();
-				Bundle args = new Bundle();
-				args.putInt("message", R.string.save_poi_without_poi_type_message);
-				f.setArguments(args);
-				f.show(getChildFragmentManager(), "dialog");
-				// poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
+				int messageId = R.string.save_poi_without_poi_type_message;
+				SaveExtraValidationDialogFragment.showInstance(getChildFragmentManager(), messageId);
 			} else {
 				save();
 			}
 		} else if (testTooManyCapitalLetters(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()))) {
-			SaveExtraValidationDialogFragment f = new SaveExtraValidationDialogFragment();
-			Bundle args = new Bundle();
-			args.putInt("message", R.string.save_poi_too_many_uppercase);
-			f.setArguments(args);
-			f.show(getChildFragmentManager(), "dialog");			
+			int messageId = R.string.save_poi_too_many_uppercase;
+			SaveExtraValidationDialogFragment.showInstance(getChildFragmentManager(), messageId);
 		} else if (editPoiData.getPoiCategory() == getMyApplication().getPoiTypes().getOtherPoiCategory()) {
 			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
 		} else if (editPoiData.getPoiTypeDefined() == null) {
@@ -484,7 +474,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		return capital > nonalpha && capital > lower;
 	}
 
-	private void save() {
+	public void save() {
 		Entity original = editPoiData.getEntity();
 
 		final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
@@ -565,15 +555,13 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 	private void dismissCheckForChanges() {
 		if (editPoiData.hasChanges()) {
-			showExitDialog();
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				AreYouSureBottomSheetDialogFragment.showInstance(fragmentManager, this);
+			}
 		} else {
 			dismiss();
 		}
-	}
-
-	private void showExitDialog() {
-		DialogFragment dialog = new AreYouSureDialogFragment();
-		dialog.show(getChildFragmentManager(), "AreYouSureDialogFragment");
 	}
 
 	public EditPoiData getEditPoiData() {
@@ -890,79 +878,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		public interface DeletePoiCallback {
 			void poiDeleted();
-		}
-	}
-
-	public static class SaveExtraValidationDialogFragment extends DialogFragment {
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			Context themedContext = getActivity();
-			if (getParentFragment() instanceof EditPoiDialogFragment) {
-				themedContext = UiUtilities.getThemedContext(getActivity(),
-						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
-			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-			String msg = getString(R.string.save_poi_without_poi_type_message);
-			int i = getArguments().getInt("message", 0);
-			if(i != 0) {
-				msg = getString(i);
-			}
-			builder.setTitle(getResources().getString(R.string.are_you_sure))
-					.setMessage(msg)
-					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							((EditPoiDialogFragment) getParentFragment()).save();
-						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, null);
-			return builder.create();
-		}
-	}
-
-	public static class AreYouSureDialogFragment extends DialogFragment {
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			Context themedContext = getActivity();
-			if (getParentFragment() instanceof EditPoiDialogFragment) {
-				themedContext = UiUtilities.getThemedContext(getActivity(),
-						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
-			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-			builder.setTitle(getResources().getString(R.string.are_you_sure))
-					.setMessage(getString(R.string.unsaved_changes_will_be_lost))
-					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							((DialogFragment) getParentFragment()).dismiss();
-						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, null);
-			return builder.create();
-		}
-	}
-
-	public static class ValueExceedLimitDialogFragment extends DialogFragment {
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			Context themedContext = getActivity();
-			if (getParentFragment() instanceof EditPoiDialogFragment) {
-				themedContext = UiUtilities.getThemedContext(getActivity(),
-						((EditPoiDialogFragment) getParentFragment()).isNightMode(true));
-			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-			String msg = getString(R.string.save_poi_value_exceed_length);
-			String fieldTag = getArguments().getString("tag", "");
-			if(!Algorithms.isEmpty(fieldTag)) {
-				msg = String.format(msg, fieldTag);
-			}
-			builder.setTitle(String.format(getResources().getString(R.string.save_poi_value_exceed_length_title), fieldTag))
-				.setMessage(msg)
-				.setNegativeButton(R.string.shared_string_ok, null);
-			return builder.create();
 		}
 	}
 
