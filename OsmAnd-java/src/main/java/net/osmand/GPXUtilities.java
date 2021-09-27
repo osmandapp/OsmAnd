@@ -848,7 +848,9 @@ public class GPXUtilities {
 						totalDistance += calculations[0];
 						segmentDistance += calculations[0];
 						point.distance = segmentDistance;
-						long timeDiffMillis = Math.abs(point.time - prev.time);
+
+						// In case points are reversed and => time is decreasing
+						long timeDiffMillis = Math.max(0, point.time - prev.time);
 						timeDiff = (int) ((timeDiffMillis) / 1000);
 
 						//Last resort: Derive speed values from displacement if track does not originally contain speed
