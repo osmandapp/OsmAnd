@@ -505,7 +505,7 @@
     <string name="filename_input">Tiedostonimi: </string>
     <string name="file_with_name_already_exist">Tiedosto samalla nimellä on jo olemassa.</string>
     <string name="show_more_map_detail">Näytä enemmän karttatietoja</string>
-    <string name="favorite_delete_multiple">Olet poistamassa %1$d suoosikkia ja %2$d suosikkiryhmää. Oletko varma?</string>
+    <string name="favorite_delete_multiple">Poistetaanko %1$d suosikkia ja %2$d suosikkiryhmää\?</string>
     <string name="local_index_installed">Paikallinen versio</string>
     <string name="poi_remove_confirm_template">Poista {0} (lisää kommentti)?</string>
     <string name="osb_comment_dialog_author">Tekijän nimi</string>
@@ -3891,4 +3891,5 @@
     <string name="sqlite_db_file">SQLiteDB -tiedosto</string>
     <string name="start_point">Aloita</string>
     <string name="shared_string_files">Tiedostot</string>
+    <string name="start_editing_card_image_text">Ilmainen maailmanlaajuinen matkaopas, jota kuka tahansa voi muokata.</string>
 </resources>
