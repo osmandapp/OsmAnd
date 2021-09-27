@@ -4208,4 +4208,8 @@
     <string name="remove_group_from_markers">Odstranit skupinu ze seznamu mapových značek</string>
     <string name="start_point">Start</string>
     <string name="add_group_to_markers">Přidat skupinu do seznamu mapových značek</string>
+    <string name="mapillary_menu_filter_description_new">Filtrovat obrázky podle data nebo typu. Aktivní pouze při vysokém přiblížení.</string>
+    <string name="service_is_not_available_please_try_later">Služba není dostupná, zkuste to prosím později</string>
+    <string name="shared_string_files">Soubory</string>
+    <string name="travel_route_types">Typy tras</string>
 </resources>
