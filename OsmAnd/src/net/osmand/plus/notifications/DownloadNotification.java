@@ -82,6 +82,7 @@ public class DownloadNotification extends OsmandNotification {
 		}
 		notificationBuilder.setContentTitle(msg)
 				.setContentText(contentText.toString())
+				.setOnlyAlertOnce(true)
 				.setOngoing(true);
 		int progress = downloadThread.getCurrentDownloadingItemProgress();
 		notificationBuilder.setProgress(100, Math.max(progress, 0), progress < 0);
