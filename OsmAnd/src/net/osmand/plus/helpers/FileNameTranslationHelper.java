@@ -102,15 +102,14 @@ public class FileNameTranslationHelper {
 
 		if ("Default".equals(formattedName)) {
 			return ctx.getString(R.string.sample_wikivoyage);
+		} else {
+			String wikiVoyageName = getSuggestedWikivoyageMaps(ctx, formattedName);
+			if (wikiVoyageName == null) {
+				wikiVoyageName = formattedName;
+			}
+			String wikiVoyageWord = ctx.getString(R.string.shared_string_wikivoyage);
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, wikiVoyageName, wikiVoyageWord);
 		}
-
-		String wikiVoyageName = getSuggestedWikivoyageMaps(ctx, formattedName);
-		if (wikiVoyageName == null) {
-			wikiVoyageName = formattedName;
-		}
-		String wikiVoyageWord = ctx.getString(R.string.shared_string_wikivoyage);
-
-		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, wikiVoyageName, wikiVoyageWord);
 	}
 
 	public static String getVoiceName(Context ctx, String fileName) {
@@ -254,7 +253,8 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.index_item_world_basemap_detailed);
 		} else if (basename.equals("world_basemap_mini")) {
 			String basemap = ctx.getString(R.string.index_item_world_basemap);
-			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, basemap, "(mini)");
+			String mini = "(" + ctx.getString(R.string.shared_string_mini) + ")";
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, basemap, mini);
 		} else if (basename.equals("world_bitcoin_payments")) {
 			return ctx.getString(R.string.index_item_world_bitcoin_payments);
 		} else if (basename.equals(DownloadResources.WORLD_SEAMARKS_KEY) ||
