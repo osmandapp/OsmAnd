@@ -97,6 +97,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	public MeasurementEditingContext(OsmandApplication app) {
 		this.application = app;
 		appMode = app.getSettings().getApplicationMode();
+		if (appMode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
+			appMode = ApplicationMode.DEFAULT;
+		}
 	}
 
 	public void setupRouteSettingsListener() {
