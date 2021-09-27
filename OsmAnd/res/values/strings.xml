@@ -12,6 +12,7 @@
 
 -->
 
+    <string name="shared_string_mini">mini</string>
     <string name="sample_wikivoyage">Sample Wikivoyage</string>
     <string name="travel_route_types">Route types</string>
     <string name="shared_string_files">Files</string>
