@@ -96,7 +96,14 @@ public class FileNameTranslationHelper {
 	}
 
 	public static String getWikivoyageName(Context ctx, String basename) {
-		String formattedName = basename.substring(0, basename.indexOf(WIKIVOYAGE_NAME)).replaceAll("-", "").replaceAll("all", "");
+		String formattedName = basename.substring(0, basename.indexOf(WIKIVOYAGE_NAME))
+				.replaceAll("-", "")
+				.replaceAll("all", "");
+
+		if ("Default".equals(formattedName)) {
+			return ctx.getString(R.string.sample_wikivoyage);
+		}
+
 		String wikiVoyageName = getSuggestedWikivoyageMaps(ctx, formattedName);
 		if (wikiVoyageName == null) {
 			wikiVoyageName = formattedName;
@@ -245,6 +252,9 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.index_item_world_basemap);
 		} else if (basename.equals("world_basemap_detailed")) {
 			return ctx.getString(R.string.index_item_world_basemap_detailed);
+		} else if (basename.equals("world_basemap_mini")) {
+			String basemap = ctx.getString(R.string.index_item_world_basemap);
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, basemap, "(mini)");
 		} else if (basename.equals("world_bitcoin_payments")) {
 			return ctx.getString(R.string.index_item_world_bitcoin_payments);
 		} else if (basename.equals(DownloadResources.WORLD_SEAMARKS_KEY) ||
