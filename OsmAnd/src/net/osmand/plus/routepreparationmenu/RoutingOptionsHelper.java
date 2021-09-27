@@ -204,11 +204,12 @@ public class RoutingOptionsHelper {
 		Set<String> setFiles = new LinkedHashSet<>();
 		if (extStorage.exists()) {
 			File[] voiceDirs = extStorage.listFiles();
-			voiceDirs = voiceDirs == null ? new File[0] : voiceDirs;
-			for (File f : voiceDirs) {
-				if (f.isDirectory()) {
-					if (JsMediaCommandPlayer.isMyData(f) || JsTtsCommandPlayer.isMyData(f)) {
-						setFiles.add(f.getName());
+			if (voiceDirs != null) {
+				for (File f : voiceDirs) {
+					if (f.isDirectory()) {
+						if (JsMediaCommandPlayer.isMyData(f) || JsTtsCommandPlayer.isMyData(f)) {
+							setFiles.add(f.getName());
+						}
 					}
 				}
 			}

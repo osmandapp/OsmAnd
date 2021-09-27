@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
-import net.osmand.OsmAndDateUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.ColorUtilities;
@@ -80,7 +79,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		Date end = new Date(analysis.endTime);
 		DateFormat startFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 		DateFormat endFormat;
-		if (OsmAndDateUtils.isSameDay(start, end)) {
+		if (OsmAndFormatter.isSameDay(start, end)) {
 			endFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 		} else {
 			endFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
