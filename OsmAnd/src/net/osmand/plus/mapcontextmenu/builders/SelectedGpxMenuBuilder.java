@@ -23,8 +23,6 @@ import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.lang3.time.DateUtils;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -81,7 +79,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		Date end = new Date(analysis.endTime);
 		DateFormat startFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 		DateFormat endFormat;
-		if (DateUtils.isSameDay(start, end)) {
+		if (OsmAndFormatter.isSameDay(start, end)) {
 			endFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 		} else {
 			endFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
