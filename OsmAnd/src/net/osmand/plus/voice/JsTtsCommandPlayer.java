@@ -191,7 +191,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 
 	// Called from the calculating route thread.
 	@Override
-	public synchronized List<String> playCommands(JsCommandBuilder builder) {
+	public synchronized List<String> playCommands(CommandBuilder builder) {
 		final List<String> execute = builder.execute(); //list of strings, the speech text, play it
 		StringBuilder bld = new StringBuilder();
 		for (String s : execute) {
@@ -249,7 +249,7 @@ public class JsTtsCommandPlayer extends CommandPlayer {
 	}
 
 	@Override
-	public JsCommandBuilder newCommandBuilder() {
+	public CommandBuilder newCommandBuilder() {
 		JsCommandBuilder commandBuilder = new JsCommandBuilder(this);
 		commandBuilder.setJSContext(jsScope);
 		commandBuilder.setParameters(settings.METRIC_SYSTEM.get().toTTSString(), true);

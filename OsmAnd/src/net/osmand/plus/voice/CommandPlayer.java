@@ -113,11 +113,11 @@ public abstract class CommandPlayer {
 		return jsScope;
 	}
 
-	public abstract JsCommandBuilder newCommandBuilder();
+	public abstract CommandBuilder newCommandBuilder();
 
 	public abstract boolean supportsStructuredStreetNames();
 
-	public abstract List<String> playCommands(JsCommandBuilder builder);
+	public abstract List<String> playCommands(CommandBuilder builder);
 
 	public abstract void stop();
 

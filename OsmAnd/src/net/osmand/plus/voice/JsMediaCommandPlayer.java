@@ -43,7 +43,7 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 	}
 
 	@Override
-	public JsCommandBuilder newCommandBuilder() {
+	public CommandBuilder newCommandBuilder() {
 		JsCommandBuilder commandBuilder = new JsCommandBuilder(this);
 		commandBuilder.setJSContext(jsScope);
 		commandBuilder.setParameters(settings.METRIC_SYSTEM.get().toTTSString(), false);
@@ -75,7 +75,7 @@ public class JsMediaCommandPlayer extends CommandPlayer implements OnCompletionL
 
 	//  Called from the calculating route thread.
 	@Override
-	public synchronized List<String> playCommands(JsCommandBuilder builder) {
+	public synchronized List<String> playCommands(CommandBuilder builder) {
 		if (voiceRouter.isMute()) {
 			return Collections.emptyList();
 		}
