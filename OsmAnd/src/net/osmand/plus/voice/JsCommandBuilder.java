@@ -121,9 +121,9 @@ public class JsCommandBuilder extends CommandBuilder{
 
 	@Override
 	public CommandBuilder takeExit(String turnType, double dist, String exitString, int exitInt, StreetName streetName) {
-		return isJSCommandExists(C_TAKE_EXIT) ?
-				addCommand(C_TAKE_EXIT, turnType, dist, exitString, exitInt, convertStreetName(streetName)) :
-				addCommand(C_TURN, turnType, dist, convertStreetName(streetName));
+		return isJsCommandExists(C_TAKE_EXIT)
+				? addCommand(C_TAKE_EXIT, turnType, dist, exitString, exitInt, convertStreetName(streetName))
+				: addCommand(C_TURN, turnType, dist, convertStreetName(streetName));
 	}
 
 	@Override
@@ -248,7 +248,7 @@ public class JsCommandBuilder extends CommandBuilder{
 		return NativeJSON.parse(jsContext, jsScope, jsonText, new NullCallable());
 	}
 
-	private boolean isJSCommandExists(String name) {
+	private boolean isJsCommandExists(String name) {
 		return jsScope.get(name) instanceof Function;
 	}
 
