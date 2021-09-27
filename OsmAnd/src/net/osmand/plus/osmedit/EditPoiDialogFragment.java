@@ -54,15 +54,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerSpaceItem;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+import net.osmand.plus.osmedit.dialogs.AreYouSureBottomSheetDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.osmedit.dialogs.PoiTypeDialogFragment;
+import net.osmand.plus.osmedit.dialogs.SaveExtraValidationDialogFragment;
+import net.osmand.plus.osmedit.dialogs.ValueExceedLimitDialogFragment;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
@@ -86,7 +85,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -418,34 +416,23 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		throw new UnsupportedOperationException("Please use show(FragmentManager manager, String tag)");
 	}
 
-	private void trySave() {
+	public void trySave() {
 		if (onSaveButtonClickListener != null) {
 			onSaveButtonClickListener.onSaveButtonClick();
 		}
 		String tagWithExceedingValue = isTextLengthInRange();
-		if (!Algorithms.isEmpty(tagWithExceedingValue)){
-			ValueExceedLimitDialogFragment f = new ValueExceedLimitDialogFragment();
-			Bundle args = new Bundle();
-			args.putString("tag", tagWithExceedingValue);
-			f.setArguments(args);
-			f.show(getChildFragmentManager(), "exceedDialog");
+		if (!Algorithms.isEmpty(tagWithExceedingValue)) {
+			ValueExceedLimitDialogFragment.showInstance(getChildFragmentManager(), tagWithExceedingValue);
 		} else if (TextUtils.isEmpty(poiTypeEditText.getText())) {
 			if (Algorithms.isEmpty(editPoiData.getTag(OSMSettings.OSMTagKey.ADDR_HOUSE_NUMBER.getValue()))) {
-				SaveExtraValidationDialogFragment f = new SaveExtraValidationDialogFragment();
-				Bundle args = new Bundle();
-				args.putInt("message", R.string.save_poi_without_poi_type_message);
-				f.setArguments(args);
-				f.show(getChildFragmentManager(), "dialog");
-				// poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
+				int messageId = R.string.save_poi_without_poi_type_message;
+				SaveExtraValidationDialogFragment.showInstance(getChildFragmentManager(), messageId);
 			} else {
 				save();
 			}
 		} else if (testTooManyCapitalLetters(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()))) {
-			SaveExtraValidationDialogFragment f = new SaveExtraValidationDialogFragment();
-			Bundle args = new Bundle();
-			args.putInt("message", R.string.save_poi_too_many_uppercase);
-			f.setArguments(args);
-			f.show(getChildFragmentManager(), "dialog");			
+			int messageId = R.string.save_poi_too_many_uppercase;
+			SaveExtraValidationDialogFragment.showInstance(getChildFragmentManager(), messageId);
 		} else if (editPoiData.getPoiCategory() == getMyApplication().getPoiTypes().getOtherPoiCategory()) {
 			poiTypeEditText.setError(getResources().getString(R.string.please_specify_poi_type));
 		} else if (editPoiData.getPoiTypeDefined() == null) {
@@ -487,7 +474,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		return capital > nonalpha && capital > lower;
 	}
 
-	private void save() {
+	public void save() {
 		Entity original = editPoiData.getEntity();
 
 		final boolean offlineEdit = mOpenstreetmapUtil instanceof OpenstreetmapLocalUtil;
@@ -891,123 +878,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 
 		public interface DeletePoiCallback {
 			void poiDeleted();
-		}
-	}
-
-	public static class SaveExtraValidationDialogFragment extends DialogFragment {
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			Context themedContext = getActivity();
-			if (getParentFragment() instanceof EditPoiDialogFragment) {
-				themedContext = UiUtilities.getThemedContext(getActivity(),
-						((EditPoiDialogFragment) getParentFragment()).isNightMode(false));
-			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-			String msg = getString(R.string.save_poi_without_poi_type_message);
-			int i = getArguments().getInt("message", 0);
-			if(i != 0) {
-				msg = getString(i);
-			}
-			builder.setTitle(getResources().getString(R.string.are_you_sure))
-					.setMessage(msg)
-					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							((EditPoiDialogFragment) getParentFragment()).save();
-						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, null);
-			return builder.create();
-		}
-	}
-
-	public static class AreYouSureBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
-
-		public static final String TAG = AreYouSureBottomSheetDialogFragment.class.getSimpleName();
-
-		@Override
-		public void createMenuItems(Bundle savedInstanceState) {
-			items.add(new BottomSheetItemWithDescription.Builder()
-					.setDescription(getString(R.string.unsaved_changes_will_be_lost))
-					.setTitle(getString(R.string.are_you_sure))
-					.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
-					.create());
-
-			int spaceHeight = getResources().getDimensionPixelSize(R.dimen.bottom_sheet_exit_button_margin);
-			items.add(new DividerSpaceItem(getContext(), spaceHeight));
-		}
-
-		@Override
-		protected void onThirdBottomButtonClick() {
-			if (getTargetFragment() instanceof EditPoiDialogFragment) {
-				((EditPoiDialogFragment) getTargetFragment()).dismiss();
-			}
-			dismiss();
-		}
-
-		@Override
-		protected DialogButtonType getThirdBottomButtonType() {
-			return (DialogButtonType.SECONDARY);
-		}
-
-		@Override
-		protected int getThirdBottomButtonTextId() {
-			return R.string.shared_string_exit;
-		}
-
-		@Override
-		protected void onRightBottomButtonClick() {
-			if (getTargetFragment() instanceof EditPoiDialogFragment) {
-				((EditPoiDialogFragment) getTargetFragment()).trySave();
-			}
-			dismiss();
-		}
-
-		@Override
-		protected int getRightBottomButtonTextId() {
-			return R.string.shared_string_save;
-		}
-
-		@Override
-		protected void onDismissButtonClickAction() {
-			dismiss();
-		}
-
-		@Override
-		protected int getSecondDividerHeight() {
-			return getResources().getDimensionPixelSize(R.dimen.bottom_sheet_icon_margin);
-		}
-
-		public static void showInstance(@NonNull FragmentManager fragmentManager, @NonNull Fragment target) {
-			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-				AreYouSureBottomSheetDialogFragment fragment = new AreYouSureBottomSheetDialogFragment();
-				fragment.setTargetFragment(target, 0);
-				fragment.setUsedOnMap(false);
-				fragment.show(fragmentManager, TAG);
-			}
-		}
-	}
-
-	public static class ValueExceedLimitDialogFragment extends DialogFragment {
-		@NonNull
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			Context themedContext = getActivity();
-			if (getParentFragment() instanceof EditPoiDialogFragment) {
-				themedContext = UiUtilities.getThemedContext(getActivity(),
-						((EditPoiDialogFragment) getParentFragment()).isNightMode(false));
-			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-			String msg = getString(R.string.save_poi_value_exceed_length);
-			String fieldTag = getArguments().getString("tag", "");
-			if(!Algorithms.isEmpty(fieldTag)) {
-				msg = String.format(msg, fieldTag);
-			}
-			builder.setTitle(String.format(getResources().getString(R.string.save_poi_value_exceed_length_title), fieldTag))
-				.setMessage(msg)
-				.setNegativeButton(R.string.shared_string_ok, null);
-			return builder.create();
 		}
 	}
 
