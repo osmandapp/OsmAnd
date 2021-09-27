@@ -94,7 +94,9 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 			if (!getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 				window.getAttributes().windowAnimations = R.style.Animations_Alpha;
 			}
-			window.setStatusBarColor(ContextCompat.getColor(ctx, getStatusBarColorId()));
+			if (Build.VERSION.SDK_INT >= 21) {
+				window.setStatusBarColor(ContextCompat.getColor(ctx, getStatusBarColorId()));
+			}
 		}
 		return dialog;
 	}
