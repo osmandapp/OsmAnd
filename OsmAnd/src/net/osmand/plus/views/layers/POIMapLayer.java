@@ -434,7 +434,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			radiusPoi += (app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size)
 					- app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_size_small)) / 2;
 		}
-		return radiusPoi;
+		return (int) (radiusPoi * getTextScale());
 	}
 
 	@Override

@@ -327,16 +327,17 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public int getTextShift(AidlMapPointWrapper o, RotatedTileBox rb) {
+		double result = 0;
 		if (pointsType == PointsType.STANDARD) {
-			return (int) (getRadiusPoi(rb) * 1.5);
+			result = getRadiusPoi(rb) * 1.5;
 		} else if (pointsType == PointsType.CIRCLE) {
-			return (int) (circle.getHeight() * 0.6);
+			result = circle.getHeight() * 0.6;
 		} else if (pointsType == PointsType.SMALL_ICON) {
-			return smallIconBg.getHeight() / 2;
+			result = smallIconBg.getHeight() / 2.0;
 		} else if (pointsType == PointsType.BIG_ICON) {
-			return bigIconBg.getHeight() / 6;
+			result = bigIconBg.getHeight() / 6.0;
 		}
-		return 0;
+		return (int) (result * getTextScale());
 	}
 
 	@Override
