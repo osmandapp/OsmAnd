@@ -4321,4 +4321,6 @@
     <string name="service_is_not_available_please_try_later">Le service n\'est pas disponible actuellement, veuillez réessayer plus tard</string>
     <string name="shared_string_files">Fichiers</string>
     <string name="travel_route_types">Types d\'itinéraires</string>
+    <string name="sample_wikivoyage">Exemple Wikivoyage</string>
+    <string name="shared_string_mini">mini</string>
 </resources>
