@@ -284,14 +284,14 @@ public class BinaryRoutePlanner {
 			graphDirectSegments.add(startPos);
 		}
 		if (startNeg != null) {
-			startNeg.distanceToEnd = estimatedDistance;
+			startNeg.distanceFromStart = estimatedDistance;
 			graphDirectSegments.add(startNeg);
 		}
 		if (recalculationEnd != null) {
 			graphReverseSegments.add(recalculationEnd);
 		} else {
 			if (endPos != null) {
-				endPos.distanceToEnd = estimatedDistance;
+				endPos.distanceFromStart = estimatedDistance;
 				graphReverseSegments.add(endPos);
 			}
 			if (endNeg != null) {

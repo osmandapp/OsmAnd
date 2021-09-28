@@ -5,12 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeSet;
 
 import net.osmand.binary.BinaryMapIndexReader;
 
@@ -74,10 +70,14 @@ public class RouteTestingTest {
 			binaryMapIndexReaders = new BinaryMapIndexReader[]{new BinaryMapIndexReader(raf, new File(fl))};
 		}
 
+		plan:
 		for (int planRoadDirection = -1; planRoadDirection <= 1; planRoadDirection++) {
 			if (params.containsKey("wrongPlanRoadDirection")) {
-				if (params.get("wrongPlanRoadDirection").equals(planRoadDirection + "")) {
-					continue;
+				String[] plans = params.get("wrongPlanRoadDirection").split(",");
+				for (String plan : plans) {
+					if (plan.trim().equals(planRoadDirection + "")) {
+						break plan;
+					}
 				}
 			}
 			RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
