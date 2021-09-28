@@ -185,15 +185,15 @@ public class OsmandMap implements NavigationSessionListener {
 
 	public float getTextScale() {
 		float scale = app.getSettings().TEXT_SCALE.get();
-		return scale * getScaleCoef(true);
+		return scale * getCarScaleCoef(true);
 	}
 
 	public float getMapDensity() {
 		float scale = app.getSettings().MAP_DENSITY.get();
-		return scale * getScaleCoef(false);
+		return scale * getCarScaleCoef(false);
 	}
 
-	public float getScaleCoef(boolean textScale) {
+	public float getCarScaleCoef(boolean textScale) {
 		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (mapView.isCarView()) {
 			float carViewDensity = mapView.getCarViewDensity();

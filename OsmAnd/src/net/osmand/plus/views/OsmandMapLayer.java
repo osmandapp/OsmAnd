@@ -1,8 +1,5 @@
 package net.osmand.plus.views;
 
-import static net.osmand.plus.auto.CarSurfaceView.MAP_DENSITY_DIVIDER_160;
-import static net.osmand.plus.auto.CarSurfaceView.TEXT_SCALE_DIVIDER_160;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -366,8 +363,8 @@ public abstract class OsmandMapLayer {
 		return getApplication().getOsmandMap().getMapDensity();
 	}
 
-	public float getScaleCoef(boolean textScale) {
-		return getApplication().getOsmandMap().getScaleCoef(textScale);
+	public float getCarScaleCoef(boolean textScale) {
+		return getApplication().getOsmandMap().getCarScaleCoef(textScale);
 	}
 
 	public abstract class MapLayerData<T> {

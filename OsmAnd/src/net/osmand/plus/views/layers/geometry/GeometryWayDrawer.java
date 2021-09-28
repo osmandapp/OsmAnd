@@ -147,6 +147,13 @@ public class GeometryWayDrawer<T extends GeometryWayContext> {
 				float paintW2 = bitmap.getWidth() / 2f;
 
 				matrix.reset();
+				float styleWidth = style.getWidth();
+				if (styleWidth > 0) {
+					float scaleCoef = (styleWidth / 2) / bitmap.getWidth();
+					if (scaleCoef < 1) {
+						matrix.setScale(scaleCoef, scaleCoef, paintW2, paintH2);
+					}
+				}
 				matrix.postRotate((float) angle, paintW2, paintH2);
 				matrix.postTranslate(x - paintW2, y - paintH2);
 				if (pointColor != null) {

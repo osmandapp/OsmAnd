@@ -203,10 +203,11 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		if (actionPoints.size() > 0) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			try {
+				float routeWidth = routeGeometry.getDefaultWayStyle().getWidth();
 				Path pth = new Path();
 				Matrix matrix = new Matrix();
 				boolean first = true;
-				int x = 0, px = 0, py = 0, y = 0;
+				float x = 0, px = 0, py = 0, y = 0;
 				for (int i = 0; i < actionPoints.size(); i++) {
 					Location o = actionPoints.get(i);
 					if (o == null) {
@@ -215,14 +216,17 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 						if (customTurnArrowColor != 0) {
 							attrs.paint3.setColor(customTurnArrowColor);
 						}
+						if (routeWidth != 0) {
+							attrs.paint3.setStrokeWidth(routeWidth / 2);
+						}
 						canvas.drawPath(pth, attrs.paint3);
 						drawTurnArrow(canvas, matrix, x, y, px, py);
 						attrs.paint3.setColor(defaultTurnArrowColor);
 					} else {
 						px = x;
 						py = y;
-						x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-						y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+						x = tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+						y = tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 						if (first) {
 							pth.reset();
 							pth.moveTo(x, y);
