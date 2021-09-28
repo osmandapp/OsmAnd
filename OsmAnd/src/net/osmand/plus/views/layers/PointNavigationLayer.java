@@ -77,7 +77,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		}
 		updateBitmaps(false);
 
-		TargetPointsHelper targetPoints = getApplication().getTargetPointsHelper();
+		OsmandApplication app = getApplication();
+		TargetPointsHelper targetPoints = app.getTargetPointsHelper();
 		TargetPoint pointToStart = targetPoints.getPointToStart();
 		if (pointToStart != null) {
 			if (isLocationVisible(tb, pointToStart)) {

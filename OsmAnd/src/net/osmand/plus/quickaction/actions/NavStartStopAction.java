@@ -90,7 +90,7 @@ public class NavStartStopAction extends QuickAction {
 		if (context instanceof MapActivity) {
 			RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
 			if (!helper.isRoutePlanningMode() && !helper.isFollowingMode()) {
-				return ((MapActivity) context).getMapActions().getRouteMode(null).getIconRes();
+				return ((MapActivity) context).getMapActions().getRouteMode().getIconRes();
 			}
 			return helper.getAppMode().getIconRes();
 		}
