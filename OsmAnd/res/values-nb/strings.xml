@@ -4259,4 +4259,11 @@
     <string name="no_items_of_type_message">Du har ingen elementer av denne typen</string>
     <string name="add_group_to_markers">Legg til gruppe i markørliste</string>
     <string name="remove_group_from_markers">Fjern gruppe fra markørliste</string>
+    <string name="mapillary_menu_filter_description_new">Filtrer bilder etter dato eller type. Kun aktivt i nær forstørrelse.</string>
+    <string name="service_is_not_available_please_try_later">Tjenesten er ikke tilgjengelig. Prøv igjen senere.</string>
+    <string name="sample_wikivoyage">Prøv Wikivoyage</string>
+    <string name="start_point">Start</string>
+    <string name="shared_string_files">Filer</string>
+    <string name="travel_route_types">Rutetyper</string>
+    <string name="shared_string_mini">mini</string>
 </resources>
