@@ -4027,4 +4027,5 @@
     <string name="poi_payment_calling_cards_no">不接受電話卡</string>
     <string name="poi_manufacturer">製造商</string>
     <string name="poi_callable">可通話</string>
+    <string name="poi_groundskeeping">草皮維護商店</string>
 </resources>
