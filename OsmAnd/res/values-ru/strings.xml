@@ -4345,4 +4345,5 @@
     <string name="service_is_not_available_please_try_later">Сервис недоступен, попробуйте позже</string>
     <string name="shared_string_files">Файлы</string>
     <string name="travel_route_types">Типы маршрутов</string>
+    <string name="shared_string_mini">мини</string>
 </resources>
