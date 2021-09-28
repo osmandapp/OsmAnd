@@ -1088,6 +1088,7 @@ public class RoutingOptionsHelper {
 		BOAT(MuteSoundRoutingParameter.KEY),
 		AIRCRAFT(MuteSoundRoutingParameter.KEY),
 		SKI(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
+		HORSE(MuteSoundRoutingParameter.KEY),
 		OTHER(MuteSoundRoutingParameter.KEY);
 
 		List<String> routingParameters;
@@ -1116,6 +1117,8 @@ public class RoutingOptionsHelper {
 				return PermanentAppModeOptions.AIRCRAFT.routingParameters;
 			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.SKI)) {
 				return PermanentAppModeOptions.SKI.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.HORSE)) {
+				return PermanentAppModeOptions.HORSE.routingParameters;
 			} else {
 				return PermanentAppModeOptions.OTHER.routingParameters;
 			}
