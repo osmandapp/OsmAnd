@@ -687,7 +687,7 @@
     <string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung.</string>
     <string name="router_service">Navigationsdienst</string>
     <string name="sd_dir_not_accessible">Auf den Ordner auf der Speicherkarte kann nicht zugegriffen werden!</string>
-    <string name="download_question">Herunterladen {0} - {1}?</string>
+    <string name="download_question">{0} - {1} herunterladen\?</string>
     <string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Aktualisieren ({2})?</string>
     <string name="address">Adresse</string>
     <string name="shared_string_download_successful">Heruntergeladen</string>
