@@ -49,6 +49,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class MeasurementEditingContext implements IRouteSettingsListener {
 
@@ -97,6 +98,9 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	public MeasurementEditingContext(OsmandApplication app) {
 		this.application = app;
 		appMode = app.getSettings().getApplicationMode();
+		if (PUBLIC_TRANSPORT_KEY.equals(appMode.getRoutingProfile())) {
+			appMode = ApplicationMode.DEFAULT;
+		}
 	}
 
 	public void setupRouteSettingsListener() {
