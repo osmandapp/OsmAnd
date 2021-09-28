@@ -10,6 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatCheckedTextView;
+
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
@@ -49,11 +54,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.AppCompatCheckedTextView;
 
 
 public class RoutingOptionsHelper {
@@ -242,33 +242,30 @@ public class RoutingOptionsHelper {
 				TargetPointsHelper tg = app.getTargetPointsHelper();
 				List<Location> ps = rp.getPoints(app);
 				if (ps.size() > 0) {
+					Location firstLoc = ps.get(0);
+					Location lastLoc = ps.get(ps.size() - 1);
 					TargetPoint pointToStart = tg.getPointToStart();
 					TargetPoint pointToNavigate = tg.getPointToNavigate();
 					if (rp.getFile().hasRoute()) {
-						TargetPoint endPoint = selected ? pointToStart : null;
-						Location lastLoc = ps.get(ps.size() - 1);
-						Location firstLoc = ps.get(0);
 						LatLon firstLatLon = new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude());
-						LatLon endLocation = endPoint != null ? endPoint.point : new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude());
-						LatLon startLocation = selected ? firstLatLon : (pointToNavigate != null ? pointToNavigate.point : firstLatLon);
+						LatLon endLocation = pointToStart != null ? pointToStart.point : new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude());
+						LatLon startLocation = pointToNavigate != null ? pointToNavigate.point : firstLatLon;
 						tg.navigateToPoint(endLocation, false, -1);
 						if (pointToStart != null) {
 							tg.setStartPoint(startLocation, false, null);
 						}
 						tg.updateRouteAndRefresh(true);
 					} else {
-						Location first = ps.get(0);
-						Location end = ps.get(ps.size() - 1);
 						boolean update = false;
 						if (pointToNavigate == null
-								|| MapUtils.getDistance(pointToNavigate.point, new LatLon(first.getLatitude(), first.getLongitude())) < 10) {
-							tg.navigateToPoint(new LatLon(end.getLatitude(), end.getLongitude()), false, -1);
+								|| MapUtils.getDistance(pointToNavigate.point, new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude())) < 10) {
+							tg.navigateToPoint(new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude()), false, -1);
 							update = true;
 						}
 						if (pointToStart == null
 								|| MapUtils.getDistance(pointToStart.point,
-								new LatLon(end.getLatitude(), end.getLongitude())) < 10) {
-							tg.setStartPoint(new LatLon(first.getLatitude(), first.getLongitude()), false, null);
+								new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude())) < 10) {
+							tg.setStartPoint(new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude()), false, null);
 							update = true;
 						}
 						if (update) {
