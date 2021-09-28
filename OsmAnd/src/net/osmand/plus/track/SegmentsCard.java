@@ -3,6 +3,8 @@ package net.osmand.plus.track;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -73,12 +75,19 @@ public class SegmentsCard extends MapBaseCard {
 
 			container.addView(segmentView);
 		}
-		addBottomShadow(container);
+		addBottomSpace(container);
 	}
 
-	private void addBottomShadow(ViewGroup container) {
+	private void addBottomSpace(ViewGroup container) {
+		FrameLayout bottomSpace = new FrameLayout(activity);
+		int height = app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin);
+		bottomSpace.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, height));
+
+		// shadow
 		LayoutInflater inflater = UiUtilities.getInflater(activity, nightMode);
-		inflater.inflate(R.layout.card_bottom_divider, container, true);
+		inflater.inflate(R.layout.card_bottom_divider, bottomSpace, true);
+
+		container.addView(bottomSpace);
 	}
 
 	private void updateLocationOnMap(GpxDisplayItem item) {
