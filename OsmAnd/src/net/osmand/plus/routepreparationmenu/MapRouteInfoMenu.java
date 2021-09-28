@@ -930,7 +930,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				appMode.set(next);
 			}
 			routingHelper.setAppMode(next);
-			app.initVoiceCommandPlayer(mapActivity, next, true, null, false, false, true);
+			app.initVoiceCommandPlayer(mapActivity, next, null, true,
+					false, false, true);
 			routingHelper.onSettingsChanged(true);
 		}
 	}

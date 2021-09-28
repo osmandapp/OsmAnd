@@ -113,7 +113,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				if (calculatedFilters.isEmpty() || latLonBounds == null) {
 					return new ArrayList<>();
 				}
-				int z = (int) Math.floor(tileBox.getZoom() + Math.log(view.getSettings().MAP_DENSITY.get()) / Math.log(2));
+				int z = (int) Math.floor(tileBox.getZoom() + Math.log(getMapDensity()) / Math.log(2));
 
 				List<Amenity> res = new ArrayList<>();
 				PoiUIFilter.combineStandardPoiFilters(calculatedFilters, app);
@@ -204,7 +204,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				data.queryNewData(tileBox);
 				List<Amenity> objects = data.getResults();
 				if (objects != null) {
-					float textScale = app.getSettings().TEXT_SCALE.get();
+					float textScale = getTextScale();
 					float iconSize = getIconSize(app);
 					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 					WaypointHelper wph = app.getWaypointHelper();
@@ -434,7 +434,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			radiusPoi += (app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size)
 					- app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_size_small)) / 2;
 		}
-		return radiusPoi;
+		return (int) (radiusPoi * getTextScale());
 	}
 
 	@Override

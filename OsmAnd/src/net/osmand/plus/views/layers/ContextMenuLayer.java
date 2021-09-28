@@ -248,7 +248,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		float textScale = 1f;
 		if (!pressedLatLonSmall.isEmpty() || !pressedLatLonFull.isEmpty()) {
-			textScale = getApplication().getSettings().TEXT_SCALE.get();
+			textScale = getTextScale();
 		}
 		for (Entry<LatLon, BackgroundType> entry : pressedLatLonSmall.entrySet()) {
 			LatLon latLon = entry.getKey();

@@ -151,7 +151,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			mapRenderer.setAzimuth(-tilesRect.getRotate());
 			mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomAnimation() + tilesRect
 					.getZoomFloatPart()));
-			float zoomMagnifier = st.MAP_DENSITY.get();
+			float zoomMagnifier = getMapDensity();
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 		} else {
 			if (!view.isZooming()) {

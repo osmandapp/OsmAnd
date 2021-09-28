@@ -63,7 +63,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 		if (contextMenuLayer.getMoveableObject() instanceof Recording) {
 			Recording objectInMotion = (Recording) contextMenuLayer.getMoveableObject();
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
-			float textScale = getApplication().getSettings().TEXT_SCALE.get();
+			float textScale = getTextScale();
 			drawRecording(canvas, objectInMotion, pf.x, pf.y, textScale);
 		}
 	}
@@ -72,7 +72,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		if (tileBox.getZoom() >= startZoom) {
 			OsmandApplication app = getApplication();
-			float textScale = app.getSettings().TEXT_SCALE.get();
+			float textScale = getTextScale();
 			float iconSize = getIconSize(app);
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 

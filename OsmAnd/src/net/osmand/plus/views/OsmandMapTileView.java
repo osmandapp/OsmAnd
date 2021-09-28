@@ -546,7 +546,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	public double getSettingsMapDensity() {
-		return (getSettings().MAP_DENSITY.get()) * Math.max(1, getDensity());
+		OsmandMap map = application.getOsmandMap();
+		return (map != null ? map.getMapDensity() : getSettings().MAP_DENSITY.get())
+				* Math.max(1, getDensity());
 	}
 
 
@@ -639,6 +641,17 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return mainLayer.getMinimumShownMapZoom() + 1;
 		}
 		return BaseMapLayer.DEFAULT_MIN_ZOOM;
+	}
+
+	public boolean isCarView() {
+		return view instanceof CarSurfaceView;
+	}
+
+	public float getCarViewDensity() {
+		if (view instanceof CarSurfaceView) {
+			return ((CarSurfaceView) view).getDensity();
+		}
+		return 0;
 	}
 
 	private void drawBasemap(Canvas canvas) {
@@ -736,9 +749,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				currentViewport.getCenterPixelY() != cy ||
 				currentViewport.getCenterPixelX() != cx) {
 			currentViewport.setPixelDimensions(view.getWidth(), view.getHeight(), ratiox, ratioy);
-			if (view instanceof CarSurfaceView) {
-				currentViewport.setDensity(((CarSurfaceView) view).getDensity());
-			}
+			currentViewport.setMapDensity(getSettingsMapDensity());
 			refreshBufferImage(drawSettings);
 		}
 		if (view instanceof SurfaceView) {

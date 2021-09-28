@@ -215,7 +215,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements IContextMenuP
 
 		if (objects != null) {
 			Context ctx = getContext();
-			float textScale = app.getSettings().TEXT_SCALE.get();
+			float textScale = getTextScale();
 			float iconSize = getIconSize(app);
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tb);
 			List<TransportStop> fullObjects = new ArrayList<>();

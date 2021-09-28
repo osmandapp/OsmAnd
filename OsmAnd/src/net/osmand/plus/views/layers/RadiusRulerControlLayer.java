@@ -29,7 +29,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.enums.AngularConstants;
 import net.osmand.plus.helpers.enums.MetricsConstants;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
@@ -56,7 +55,6 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 
 	private QuadPoint cacheCenter;
 	private float cacheMapDensity;
-	private OsmandPreference<Float> mapDensity;
 	private MetricsConstants cacheMetricSystem;
 	private int cacheIntZoom;
 	private LatLon cacheCenterLatLon;
@@ -93,9 +91,8 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 	public void initLayer(@NonNull final OsmandMapTileView view) {
 		app = getApplication();
 		this.view = view;
-		mapDensity = app.getSettings().MAP_DENSITY;
 		cacheMetricSystem = app.getSettings().METRIC_SYSTEM.get();
-		cacheMapDensity = mapDensity.get();
+		cacheMapDensity = getMapDensity();
 		cacheDistances = new ArrayList<>();
 		cacheCenter = new QuadPoint();
 		maxRadiusInDp = app.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
@@ -256,8 +253,9 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 			}
 
 			MetricsConstants currentMetricSystem = app.getSettings().METRIC_SYSTEM.get();
+			float mapDensity = getMapDensity();
 			boolean updateCache = tb.getZoom() != cacheIntZoom
-					|| !tb.getCenterLatLon().equals(cacheCenterLatLon) || mapDensity.get() != cacheMapDensity
+					|| !tb.getCenterLatLon().equals(cacheCenterLatLon) || mapDensity != cacheMapDensity
 					|| cacheMetricSystem != currentMetricSystem;
 
 			if (!tb.isZoomAnimated() && updateCache) {
@@ -265,7 +263,7 @@ public class RadiusRulerControlLayer extends OsmandMapLayer {
 				cacheIntZoom = tb.getZoom();
 				LatLon centerLatLon = tb.getCenterLatLon();
 				cacheCenterLatLon = new LatLon(centerLatLon.getLatitude(), centerLatLon.getLongitude());
-				cacheMapDensity = mapDensity.get();
+				cacheMapDensity = mapDensity;
 				updateDistance(tb);
 			}
 		}

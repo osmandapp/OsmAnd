@@ -1,14 +1,5 @@
 package net.osmand.plus;
 
-import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -20,11 +11,6 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
-import androidx.annotation.WorkerThread;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
@@ -73,10 +59,6 @@ import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
-import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
-import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
-import net.osmand.plus.voice.MediaCommandPlayerImpl;
-import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
@@ -100,7 +82,20 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.annotation.WorkerThread;
 import btools.routingapp.IBRouterService;
+
+import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 /**
  *
@@ -564,58 +559,33 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext,
-															final ApplicationMode applicationMode,
-															final String voiceProvider,
-															final Runnable run,
-															boolean showDialog) {
+	public synchronized void initVoiceDataInDifferentThread(@NonNull final Activity uiContext,
+	                                                        @NonNull final ApplicationMode applicationMode,
+	                                                        @NonNull final String voiceProvider,
+	                                                        @Nullable final Runnable onFinishInitialization,
+	                                                        boolean showProgress) {
+		String progressTitle = app.getString(R.string.loading_data);
+		String progressMessage = app.getString(R.string.voice_data_initializing);
+		final ProgressDialog progressDialog = showProgress
+				? ProgressDialog.show(uiContext, progressTitle, progressMessage)
+				: null;
 
-		final ProgressDialog dlg = showDialog ? ProgressDialog.show(uiContext, app.getString(R.string.loading_data),
-				app.getString(R.string.voice_data_initializing)) : null;
-		new Thread(new Runnable() {
-
-			public CommandPlayer createCommandPlayer(String voiceProvider, ApplicationMode applicationMode,
-													 OsmandApplication osmandApplication, Activity ctx)
-					throws CommandPlayerException {
-				if (voiceProvider != null) {
-					File parent = osmandApplication.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-					File voiceDir = new File(parent, voiceProvider);
-					if (!voiceDir.exists()) {
-						throw new CommandPlayerException(ctx.getString(R.string.voice_data_unavailable));
-					}
-					if (JSTTSCommandPlayerImpl.isMyData(voiceDir)) {
-						return new JSTTSCommandPlayerImpl(ctx, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
-					} else if (JSMediaCommandPlayerImpl.isMyData(voiceDir)) {
-						return new JSMediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
-					} else if (TTSCommandPlayerImpl.isMyData(voiceDir)) {
-						return new TTSCommandPlayerImpl(ctx, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
-					} else if (MediaCommandPlayerImpl.isMyData((voiceDir))) {
-						return new MediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
-					}
-					throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
+		new Thread(() -> {
+			try {
+				if (app.player != null) {
+					app.player.clear();
 				}
-				return null;
-			}
-
-			@Override
-			public void run() {
-				try {
-					if (app.player != null) {
-						app.player.clear();
-					}
-					app.player = createCommandPlayer(voiceProvider, applicationMode, app, uiContext);
-					app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
-					if (dlg != null) {
-						dlg.dismiss();
-					}
-					if (run != null && uiContext != null) {
-						uiContext.runOnUiThread(run);
-					}
-				} catch (CommandPlayerException e) {
-					if (dlg != null) {
-						dlg.dismiss();
-					}
-					app.showToastMessage(e.getError());
+				app.player = CommandPlayer.createCommandPlayer(app, applicationMode, voiceProvider);
+				app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
+			} catch (CommandPlayerException e) {
+				app.showToastMessage(e.getError());
+				LOG.error("Failed to create CommandPlayer", e);
+			} finally {
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+				if (onFinishInitialization != null) {
+					uiContext.runOnUiThread(onFinishInitialization);
 				}
 			}
 		}).start();

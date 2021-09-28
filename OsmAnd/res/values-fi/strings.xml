@@ -505,7 +505,7 @@
     <string name="filename_input">Tiedostonimi: </string>
     <string name="file_with_name_already_exist">Tiedosto samalla nimellä on jo olemassa.</string>
     <string name="show_more_map_detail">Näytä enemmän karttatietoja</string>
-    <string name="favorite_delete_multiple">Olet poistamassa %1$d suoosikkia ja %2$d suosikkiryhmää. Oletko varma?</string>
+    <string name="favorite_delete_multiple">Poistetaanko %1$d suosikkia ja %2$d suosikkiryhmää\?</string>
     <string name="local_index_installed">Paikallinen versio</string>
     <string name="poi_remove_confirm_template">Poista {0} (lisää kommentti)?</string>
     <string name="osb_comment_dialog_author">Tekijän nimi</string>
@@ -3057,7 +3057,7 @@
     <string name="verify_email_address_descr">Lähetimme vahvistuskoodin osoitteeseen %1$s, kirjoita se alla olevaan kenttään.</string>
     <string name="cloud_email_not_registered">Tätä sähköpostia ei ole rekisteröity OsmAnd Cloud -palveluun</string>
     <string name="cloud_email_already_registered">Tällä sähköpostilla on jo rekisteröity tili.</string>
-    <string name="resend_verification_code">Lähetä koodi uudelleen</string>
+    <string name="resend_verification_code">Lähetä uudelleen</string>
     <string name="verification_code_missing">En saanut vahvistuskoodia</string>
     <string name="verification_code_missing_description">Koodin odotusaika voi olla 10 minuuttia, voit myös tarkistaa roskapostikansiosi. Jos se ei auta, käytä alla olevaa painiketta.</string>
     <string name="loading_list_of_routing_services">Ladataan luettelo käytettävissä olevista reitityspalveluista</string>
@@ -3878,4 +3878,18 @@
     <string name="quick_action_add_navigation">Navigointi</string>
     <string name="quick_action_add_osm_bug">Lisää OSM-huomautus</string>
     <string name="in_app_purchase_desc_ex">Ostamisen jälkeen se on pysyvästi käytettävissäsi.</string>
+    <string name="lang_ur">Urdu</string>
+    <string name="lang_tg">Tadžikki</string>
+    <string name="lang_scn">Sisilia</string>
+    <string name="lang_pnb">Pandžabi</string>
+    <string name="lang_nap">Napoli</string>
+    <string name="lang_min">Minangkabau</string>
+    <string name="lang_mg">Malagassi</string>
+    <string name="lang_kk">Kazakki</string>
+    <string name="lang_gu">Gudžarati</string>
+    <string name="lang_cv">Tšuvassi</string>
+    <string name="sqlite_db_file">SQLiteDB -tiedosto</string>
+    <string name="start_point">Aloita</string>
+    <string name="shared_string_files">Tiedostot</string>
+    <string name="start_editing_card_image_text">Ilmainen maailmanlaajuinen matkaopas, jota kuka tahansa voi muokata.</string>
 </resources>

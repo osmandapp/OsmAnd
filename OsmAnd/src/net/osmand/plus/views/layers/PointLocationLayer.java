@@ -5,7 +5,6 @@ import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -22,6 +21,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -47,12 +47,15 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 	protected final static int RADIUS = 7;
 
 	private Paint headingPaint;
+	private Paint bitmapPaint;
 	private Paint area;
 	private Paint aroundArea;
 
 	private OsmandMapTileView view;
 
 	private ApplicationMode appMode;
+	private boolean carView = false;
+	private float textScale = 1f;
 	@ColorInt
 	private int color;
 	private LayerDrawable navigationIcon;
@@ -73,6 +76,7 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 
 	private void initUI() {
 		headingPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
+		bitmapPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
 		area = new Paint();
 		aroundArea = new Paint();
 		aroundArea.setStyle(Style.STROKE);
@@ -139,21 +143,36 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			// Issue 5538: Some devices return positives for hasBearing() at rest, hence add 0.0 check:
 			boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0)
 					&& (!lastKnownLocation.hasSpeed() || lastKnownLocation.getSpeed() > 0.1);
-
 			if (!locationOutdated && isBearing) {
 				float bearing = lastKnownLocation.getBearing();
 				canvas.rotate(bearing - 90, locationX, locationY);
-				navigationIcon.setBounds(locationX - navigationIcon.getIntrinsicWidth() / 2,
-						locationY - navigationIcon.getIntrinsicHeight() / 2,
-						locationX + navigationIcon.getIntrinsicWidth() / 2,
-						locationY + navigationIcon.getIntrinsicHeight() / 2);
-				navigationIcon.draw(canvas);
+				int width = (int) (navigationIcon.getIntrinsicWidth() * textScale);
+				int height = (int) (navigationIcon.getIntrinsicHeight() * textScale);
+				width += width % 2 == 1 ? 1 : 0;
+				height += height % 2 == 1 ? 1 : 0;
+				if (textScale == 1) {
+					navigationIcon.setBounds(locationX - width / 2, locationY - height / 2,
+							locationX + width / 2, locationY + height / 2);
+					navigationIcon.draw(canvas);
+				} else {
+					navigationIcon.setBounds(0, 0, width, height);
+					Bitmap bitmap = AndroidUtils.createScaledBitmap(navigationIcon, width, height);
+					canvas.drawBitmap(bitmap, locationX - width / 2, locationY - height / 2, bitmapPaint);
+				}
 			} else {
-				locationIcon.setBounds(locationX - locationIcon.getIntrinsicWidth() / 2,
-						locationY - locationIcon.getIntrinsicHeight() / 2,
-						locationX + locationIcon.getIntrinsicWidth() / 2,
-						locationY + locationIcon.getIntrinsicHeight() / 2);
-				locationIcon.draw(canvas);
+				int width = (int) (locationIcon.getIntrinsicWidth() * textScale);
+				int height = (int) (locationIcon.getIntrinsicHeight() * textScale);
+				width += width % 2 == 1 ? 1 : 0;
+				height += height % 2 == 1 ? 1 : 0;
+				if (textScale == 1) {
+					locationIcon.setBounds(locationX - width / 2, locationY - height / 2,
+							locationX + width / 2, locationY + height / 2);
+					locationIcon.draw(canvas);
+				} else {
+					locationIcon.setBounds(0, 0, width, height);
+					Bitmap bitmap = AndroidUtils.createScaledBitmap(locationIcon, width, height);
+					canvas.drawBitmap(bitmap, locationX - width / 2, locationY - height / 2, bitmapPaint);
+				}
 			}
 		}
 	}
@@ -174,11 +193,15 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 		int locationIconId = appMode.getLocationIcon().getIconId();
 		int navigationIconId = appMode.getNavigationIcon().getIconId();
 		int headingIconId = appMode.getLocationIcon().getHeadingIconId();
+		float textScale = getTextScale();
+		boolean carView = getApplication().getOsmandMap().getMapView().isCarView();
 		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated
 				|| this.color != color
 				|| this.locationIconId != locationIconId
 				|| this.headingIconId != headingIconId
-				|| this.navigationIconId != navigationIconId) {
+				|| this.navigationIconId != navigationIconId
+				|| this.textScale != textScale
+				|| this.carView != carView) {
 			this.appMode = appMode;
 			this.color = color;
 			this.nm = nighMode;
@@ -186,11 +209,13 @@ public class PointLocationLayer extends OsmandMapLayer implements IContextMenuPr
 			this.locationIconId = locationIconId;
 			this.headingIconId = headingIconId;
 			this.navigationIconId = navigationIconId;
+			this.textScale = textScale;
+			this.carView = carView;
 			navigationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, navigationIconId);
 			if (navigationIcon != null) {
 				DrawableCompat.setTint(navigationIcon.getDrawable(1), color);
 			}
-			headingIcon = BitmapFactory.decodeResource(view.getResources(), headingIconId);
+			headingIcon = getScaledBitmap(headingIconId);
 			headingPaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
 			locationIcon = (LayerDrawable) AppCompatResources.getDrawable(ctx, locationIconId);
 			if (locationIcon != null) {

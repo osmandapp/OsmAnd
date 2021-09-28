@@ -113,7 +113,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			List<OpenStreetNote> objects = data.getResults();
 
 			if (objects != null) {
-				float textScale = app.getSettings().TEXT_SCALE.get();
+				float textScale = getTextScale();
 				float iconSize = getIconSize(app);
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 				List<OpenStreetNote> fullObjects = new ArrayList<>();

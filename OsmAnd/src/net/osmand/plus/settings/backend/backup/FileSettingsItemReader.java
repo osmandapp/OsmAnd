@@ -27,9 +27,12 @@ public class FileSettingsItemReader extends SettingsItemReader<FileSettingsItem>
 	public void readFromStream(@NonNull InputStream inputStream, String entryName) throws IOException, IllegalArgumentException {
 		OutputStream output;
 		FileSettingsItem item = getItem();
+		String fileName = item.getFileName();
+
 		savedFile = item.getFile();
-		if (savedFile.isDirectory()) {
-			savedFile = new File(savedFile, entryName.substring(item.getFileName().length()));
+		String dirName = fileName.endsWith(File.separator) ? fileName : fileName + File.separator;
+		if (savedFile.isDirectory() || entryName.startsWith(dirName)) {
+			savedFile = new File(savedFile, entryName.substring(fileName.length()));
 		}
 		if (savedFile.exists() && !item.isShouldReplace()) {
 			savedFile = item.renameFile(savedFile);
