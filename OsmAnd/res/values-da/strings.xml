@@ -4332,4 +4332,6 @@
     <string name="service_is_not_available_please_try_later">Tjeneste er ikke tilgængelig. Prøv venligst senere</string>
     <string name="shared_string_files">Filer</string>
     <string name="travel_route_types">Rutetyper</string>
+    <string name="sample_wikivoyage">Prøv Wikivoyage</string>
+    <string name="shared_string_mini">mini</string>
 </resources>
