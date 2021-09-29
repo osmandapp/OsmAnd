@@ -23,13 +23,13 @@
     <string name="add_group_to_markers">Add group to list of markers</string>
     <string name="routeInfo_roadClass_description">Color route or track line by road classification.</string>
     <string name="routeInfo_surface_description">Additional info about the physical surface of roads/footpaths.</string>
-    <string name="routeInfo_smoothness_description">Classification scheme for physical surfrace usability for wheeled vehicles, particularly regularity/flatness.</string>
-    <string name="routeInfo_winter_ice_road_description">Color the route or track line by winter road classification in winter season.</string>
+    <string name="routeInfo_smoothness_description">Classification of physical surface usability for wheeled vehicles, particularly regularity/flatness.</string>
+    <string name="routeInfo_winter_ice_road_description">Color route or track line by winter road classification in winter season.</string>
     <string name="routeInfo_tracktype_description">Color route or track line according to the condition of the roads based on their surface composition. Typically applied to roads where the main road network consists of unpaved roads.</string>
     <string name="no_items_of_type_message">You have no items of this type</string>
     <string name="no_activity_for_intent">Install an app that can perform this action first</string>
     <string name="empty_category_name">Empty category name</string>
-    <string name="amz_manage_subscription_descr">Manage your subscription using the Amazon app on the device or open the Amazon.com website under your profile.</string>
+    <string name="amz_manage_subscription_descr">Manage your subscription using the Amazon app or open your profile on Amazon.com.</string>
     <string name="cancel_anytime_in_amazon_app">Cancel it anytime in the Amazon app</string>
     <string name="osm_live_payment_subscription_management_amz">Payment is charged from your Amazon account when confirming the purchase.\n\nIt renews unless cancelled before the selected renewal period.\n\nManage or cancel your subscriptions from your Amazon settings at any time.</string>
     <string name="grey_color_undefined">Parts without data are gray.</string>
