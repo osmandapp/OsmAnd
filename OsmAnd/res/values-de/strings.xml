@@ -4331,4 +4331,6 @@
     <string name="service_is_not_available_please_try_later">Dienst ist nicht verfügbar, bitte versuchen Sie es später</string>
     <string name="travel_route_types">Routentypen</string>
     <string name="shared_string_files">Dateien</string>
+    <string name="sample_wikivoyage">Wikivoyage Beispiel</string>
+    <string name="shared_string_mini">mini</string>
 </resources>
