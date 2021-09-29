@@ -286,7 +286,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				((ImageView) view.findViewById(R.id.time_moving_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
 				((ImageView) view.findViewById(R.id.distance_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
 
 				String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
 				String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
@@ -419,7 +419,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 			if (!onlyGraphs) {
 				((ImageView) view.findViewById(R.id.distance_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
 				((ImageView) view.findViewById(R.id.duration_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span_16));
 				((ImageView) view.findViewById(R.id.start_time_icon))

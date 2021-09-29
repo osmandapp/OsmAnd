@@ -762,7 +762,7 @@ public class MapRenderRepositories {
 			//Text/icon scales according to mapDensity (so text is size of road)
 //			currentRenderingContext.textScale = (requestedBox.getDensity()*app.getSettings().TEXT_SCALE.get()); 
 			//Text/icon stays same for all sizes 
-			currentRenderingContext.textScale = (requestedBox.getDensity() * app.getSettings().TEXT_SCALE.get())
+			currentRenderingContext.textScale = (requestedBox.getDensity() * app.getOsmandMap().getTextScale())
 					/ mapDensity;
 			
 			currentRenderingContext.screenDensityRatio = 1 / Math.max(1, requestedBox.getDensity()) ;

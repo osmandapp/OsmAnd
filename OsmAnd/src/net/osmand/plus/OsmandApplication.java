@@ -520,21 +520,24 @@ public class OsmandApplication extends MultiDexApplication {
 		return player;
 	}
 
-	public void initVoiceCommandPlayer(final Activity uiContext, final ApplicationMode applicationMode,
-									   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force, final boolean applyAllModes) {
-		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
-		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-			if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-				osmandSettings.VOICE_MUTE.setModeValue(applicationMode, true);
-			}
-			if (warningNoneProvider && voiceProvider == null) {
-				if (uiContext instanceof MapActivity) {
-					OsmAndDialogs.showVoiceProviderDialog((MapActivity) uiContext, applicationMode, applyAllModes);
-				}
+	public void initVoiceCommandPlayer(@NonNull Activity uiContext,
+	                                   @NonNull ApplicationMode appMode,
+	                                   @Nullable Runnable onCommandPlayerCreated,
+	                                   boolean warnNoProvider,
+	                                   boolean showProgress,
+	                                   boolean forceInitialization,
+	                                   boolean applyAllModes) {
+		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(appMode);
+		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+			osmandSettings.VOICE_MUTE.setModeValue(appMode, true);
+		} else if (Algorithms.isEmpty(voiceProvider)) {
+			if (warnNoProvider && uiContext instanceof MapActivity) {
+				OsmAndDialogs.showVoiceProviderDialog((MapActivity) uiContext, appMode, applyAllModes);
 			}
 		} else {
-			if (player == null || !Algorithms.objectEquals(voiceProvider, player.getCurrentVoice()) || force) {
-				appInitializer.initVoiceDataInDifferentThread(uiContext, applicationMode, voiceProvider, run, showDialog);
+			if (player == null || !voiceProvider.equals(player.getCurrentVoice()) || forceInitialization) {
+				appInitializer.initVoiceDataInDifferentThread(uiContext, appMode, voiceProvider,
+						onCommandPlayerCreated, showProgress);
 			}
 		}
 	}

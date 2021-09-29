@@ -687,7 +687,7 @@
     <string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung.</string>
     <string name="router_service">Navigationsdienst</string>
     <string name="sd_dir_not_accessible">Auf den Ordner auf der Speicherkarte kann nicht zugegriffen werden!</string>
-    <string name="download_question">Herunterladen {0} - {1}?</string>
+    <string name="download_question">{0} - {1} herunterladen\?</string>
     <string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Aktualisieren ({2})?</string>
     <string name="address">Adresse</string>
     <string name="shared_string_download_successful">Heruntergeladen</string>
@@ -4175,6 +4175,16 @@
     <string name="delete_version_history">Versionsgeschichte löschen</string>
     <string name="routing_attr_avoid_tunnels_description">Tunnel vermeiden</string>
     <string name="routing_attr_avoid_tunnels_name">Tunnel vermeiden</string>
+    <string name="routing_attr_avoid_highway_description">Schnellstraßen vermeiden</string>
+    <string name="routing_attr_avoid_highway_name">Schnellstraßen vermeiden</string> 
+    <string name="routing_attr_allow_gate_description">Schranken benutzen</string>
+    <string name="routing_attr_allow_gate_name">Schranken benutzen</string> 
+    <string name="routing_attr_only_permitted_streets_description">Nur Straßen mit ausdrücklicher Genehmigung nutzen</string>
+    <string name="routing_attr_only_permitted_streets_name">Nur Straßen mit Genehmigung nutzen</string>      
+    <string name="routing_attr_only_permitted_ways_description">Nur Geländewege mit ausdrücklicher Genehmigung nutzen</string>
+    <string name="routing_attr_only_permitted_ways_name">Nur Geländewege mit Genehmigung nutzen</string>      
+    <string name="routing_attr_prefer_horse_routes_description">Reitrouten bevorzugen</string>
+    <string name="routing_attr_prefer_horse_routes_name">Reitrouten bevorzugen</string>
     <string name="send_crash_log">Crash Log senden</string>
     <string name="send_logcat_log">Logcat Log senden</string>
     <string name="backup_promocode">Aktionscode</string>

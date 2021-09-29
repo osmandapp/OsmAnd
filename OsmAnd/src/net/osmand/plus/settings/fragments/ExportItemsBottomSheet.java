@@ -64,7 +64,6 @@ import net.osmand.plus.settings.fragments.ExportSettingsAdapter.OnItemSelectedLi
 import net.osmand.util.Algorithms;
 import net.osmand.view.ThreeStateCheckbox;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -294,7 +293,7 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 				if (appMode != null) {
 					profileName = appMode.toHumanString();
 				} else {
-					profileName = StringUtils.capitalize(modeBean.stringKey);
+					profileName = Algorithms.capitalizeFirstLetter(modeBean.stringKey);
 				}
 			}
 			item.setTitle(profileName);

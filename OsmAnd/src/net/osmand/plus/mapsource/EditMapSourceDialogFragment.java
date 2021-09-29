@@ -58,7 +58,6 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
@@ -502,7 +501,7 @@ public class EditMapSourceDialogFragment extends BaseOsmAndDialogFragment
 	}
 
 	private void updateDescription(ConfigurationItem item) {
-		View view = contentContainer.getChildAt(ArrayUtils.indexOf(ConfigurationItem.values(), item));
+		View view = contentContainer.getChildAt(item.ordinal());
 		((TextView) view.findViewById(R.id.sub_title)).setText(getDescription(item));
 	}
 

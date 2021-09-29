@@ -1,6 +1,8 @@
 package net.osmand.plus.views;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -18,10 +20,12 @@ import android.os.AsyncTask;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
@@ -304,7 +308,7 @@ public abstract class OsmandMapLayer {
 	}
 
 	protected float getIconSize(OsmandApplication app) {
-		return app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size) * ICON_VISIBLE_PART_RATIO * app.getSettings().TEXT_SCALE.get();
+		return app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size) * ICON_VISIBLE_PART_RATIO * getTextScale();
 	}
 
 	public Rect getIconDestinationRect(float x, float y, int width, int height, float scale) {
@@ -320,7 +324,7 @@ public abstract class OsmandMapLayer {
 	}
 
 	public int getScaledTouchRadius(OsmandApplication app, int radiusPoi) {
-		float textScale = app.getSettings().TEXT_SCALE.get();
+		float textScale = getTextScale();
 		if (textScale < 1.0f) {
 			textScale = 1.0f;
 		}
@@ -334,6 +338,33 @@ public abstract class OsmandMapLayer {
 		imageView.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
 		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		imageView.setImageDrawable(icon);
+	}
+
+	@Nullable
+	protected Bitmap getScaledBitmap(@DrawableRes int drawableId) {
+		return getScaledBitmap(drawableId, getTextScale());
+	}
+
+	protected Bitmap getScaledBitmap(@DrawableRes int drawableId, float scale) {
+		OsmandApplication app = getApplication();
+		Bitmap bitmap = BitmapFactory.decodeResource(app.getResources(), drawableId);
+		if (bitmap != null && scale != 1f && scale > 0) {
+			bitmap = AndroidUtils.scaleBitmap(bitmap,
+					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
+		}
+		return bitmap;
+	}
+
+	public float getTextScale() {
+		return getApplication().getOsmandMap().getTextScale();
+	}
+
+	public float getMapDensity() {
+		return getApplication().getOsmandMap().getMapDensity();
+	}
+
+	public float getCarScaleCoef(boolean textScale) {
+		return getApplication().getOsmandMap().getCarScaleCoef(textScale);
 	}
 
 	public abstract class MapLayerData<T> {

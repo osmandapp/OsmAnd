@@ -487,7 +487,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment implements O
 		for (ProfileIconColors color : ProfileIconColors.values()) {
 			colors.add(ContextCompat.getColor(app, color.getColor(isNightMode())));
 		}
-		colorsCard = new ColorsCard(mapActivity, selectedColor, this, colors, app.getSettings().CUSTOM_ICON_COLORS, getSelectedAppMode());
+		colorsCard = new ColorsCard(mapActivity, getSelectedAppMode(), this, selectedColor,
+				colors, app.getSettings().CUSTOM_ICON_COLORS, false);
 		colorsCard.setListener(this);
 		colorsCardContainer.addView(colorsCard.build(app));
 		updateColorName();

@@ -11,6 +11,7 @@ import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
+import android.widget.AbsListView;
 
 import androidx.annotation.NonNull;
 import androidx.car.app.model.CarIcon;
@@ -37,6 +38,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.mapwidgets.LanesDrawable;
 import net.osmand.plus.views.mapwidgets.TurnDrawable;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 
 import java.util.TimeZone;
 
@@ -208,7 +210,11 @@ public class TripHelper {
 	public Pair<Destination, TravelEstimate> getDestination(@NonNull TargetPoint pointToNavigate) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		Destination.Builder destBuilder = new Destination.Builder();
-		destBuilder.setName(pointToNavigate.getOnlyName());
+		String name = pointToNavigate.getOnlyName();
+		if (Algorithms.isEmpty(name)) {
+			name = app.getString(R.string.route_descr_destination);
+		}
+		destBuilder.setName(name);
 		destBuilder.setImage(new CarIcon.Builder(IconCompat.createWithResource(app,
 				R.drawable.ic_action_point_destination)).build());
 

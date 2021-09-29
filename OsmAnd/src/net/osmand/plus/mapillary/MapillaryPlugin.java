@@ -103,7 +103,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isEnableByDefault() {
-		return true;
+		return false;
 	}
 
 	@Override

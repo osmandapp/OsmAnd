@@ -89,7 +89,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
-			float textScale = this.settings.TEXT_SCALE.get();
+			float textScale = getTextScale();
 			drawBigPoint(canvas, objectInMotion, pf.x, pf.y, mapMarker, textScale);
 		}
 	}
@@ -99,7 +99,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		cache.clear();
 		if (this.settings.SHOW_FAVORITES.get() && favouritesDbHelper.isFavoritesLoaded()) {
 			if (tileBox.getZoom() >= startZoom) {
-				float textScale = this.settings.TEXT_SCALE.get();
+				float textScale = getTextScale();
 				float iconSize = getIconSize(view.getApplication());
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
@@ -260,7 +260,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public int getTextShift(FavouritePoint o, RotatedTileBox rb) {
-		return (int) (16 * rb.getDensity());
+		return (int) (16 * rb.getDensity() * getTextScale());
 	}
 
 	@Override

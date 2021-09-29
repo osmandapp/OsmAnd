@@ -245,7 +245,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 			if (gpxFile != null) {
 				PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 				MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
-				float textScale = view.getSettings().TEXT_SCALE.get();
+				float textScale = getTextScale();
 				drawBigPoint(canvas, objectInMotion, getFileColor(gpxFile), pf.x, pf.y, mapMarker, textScale);
 			}
 		}
@@ -512,7 +512,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	private void drawSelectedFilesPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
 		if (tileBox.getZoom() >= START_ZOOM) {
-			float textScale = view.getSettings().TEXT_SCALE.get();
+			float textScale = getTextScale();
 			float iconSize = getIconSize(view.getApplication());
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
@@ -1146,7 +1146,7 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 	@Override
 	public int getTextShift(WptPt o, RotatedTileBox rb) {
-		return (int) (16 * rb.getDensity());
+		return (int) (16 * rb.getDensity() * getTextScale());
 	}
 
 	@Override

@@ -93,7 +93,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	private void drawPoint(Canvas canvas, float x, float y, boolean active) {
-		float textScale = getApplication().getSettings().TEXT_SCALE.get();
+		float textScale = getTextScale();
 		y -= roadWorkIcon.getHeight() / 2f * textScale;
 		Rect destRect = getIconDestinationRect(x, y, roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), textScale);
 		canvas.drawBitmap(roadWorkIcon, null, destRect, active ? activePaint : paint);
