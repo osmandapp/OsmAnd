@@ -4320,4 +4320,6 @@
     <string name="service_is_not_available_please_try_later">服務不可用，請再試一次</string>
     <string name="shared_string_files">檔案</string>
     <string name="travel_route_types">路線類型</string>
+    <string name="sample_wikivoyage">維基導遊範例</string>
+    <string name="shared_string_mini">迷你</string>
 </resources>
