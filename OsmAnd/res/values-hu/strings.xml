@@ -4320,4 +4320,5 @@
     <string name="service_is_not_available_please_try_later">A szolgáltatás nem elérhető, kérjük, próbálja meg később</string>
     <string name="shared_string_files">Fájlok</string>
     <string name="travel_route_types">Útvonaltípusok</string>
+    <string name="sample_wikivoyage">Wikivoyage példa</string>
 </resources>
