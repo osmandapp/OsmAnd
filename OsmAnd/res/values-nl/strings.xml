@@ -314,7 +314,7 @@
     <string name="osmand_net_previously_installed">Een oudere OsmAnd versie is al geïnstalleerd. Alle offline gegevens blijven werken in het nieuwe programma, maar Favorieten moeten worden geëxporteerd in de oude versie en dan worden geïmporteerd in de nieuwe.</string>
     <string name="build_installed">Versie {0} succesvol geïnstalleerd ({1}).</string>
     <string name="downloading_build">Downloaden versie…</string>
-    <string name="install_selected_build">Doorgaan met de installatie van OsmAnd - {0} van {1} {2} MB ?</string>
+    <string name="install_selected_build">Doorgaan met de installatie van OsmAnd - {0} van {1} {2} MB\?</string>
     <string name="loading_builds_failed">Het ophalen van de lijst met de versies van OsmAnd is mislukt</string>
     <string name="loading_builds">OsmAnd-versies worden geladen…</string>
     <string name="select_build_to_install">Kies de OsmAnd-versie om te installeren</string>
@@ -620,7 +620,7 @@
     <string name="default_buttons_commit">Bevestigen</string>
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Bewaar als</string>
-    <string name="edit_filter_delete_dialog_title">Verwijder dit filter\?</string>
+    <string name="edit_filter_delete_dialog_title">Verwijder deze filter\?</string>
     <string name="edit_filter_delete_message">Filter %1$s verwijderd</string>
     <string name="edit_filter_create_message">Filter \'%1$s\' aangemaakt</string>
     <string name="offline_navigation_not_available">OsmAnd offline navigatie is tijdelijk niet beschikbaar.</string>
@@ -927,7 +927,7 @@
     <string name="files_limit">%1$d resterende bestanden</string>
     <string name="available_downloads_left">%1$d resterende bestanden nog te downloaden</string>
     <string name="install_paid">Volledige versie</string>
-    <string name="cancel_route">Annuleer route \?</string>
+    <string name="cancel_route">Annuleer route\?</string>
     <string name="cancel_navigation">Stop navigatie</string>
     <string name="clear_destination">Bestemming wissen</string>
     <string name="use_magnetic_sensor_descr">Gebruik magnetische sensor in plaats van oriëntatiesensor voor het kompas.</string>
@@ -2707,7 +2707,7 @@
     <string name="download_wiki_region_placeholder">deze regio</string>
     <string name="wiki_article_search_text">Zoeken naar het bijbehorende wiki-artikel</string>
     <string name="wiki_article_not_found">Artikel niet gevonden</string>
-    <string name="how_to_open_wiki_title">Hoe Wikipedia-artikelen te openen?</string>
+    <string name="how_to_open_wiki_title">Hoe Wikipedia-artikelen openen\?</string>
     <string name="quick_action_edit_actions">Wijzig sneltoetsen</string>
     <string name="shared_string_bookmark">Bladwijzer</string>
     <string name="point_deleted">Punt %1$s verwijderd</string>
@@ -4167,4 +4167,5 @@
     <string name="routeInfo_smoothness_description">Voorziet een classificatieschema volgens de bruikbaarheid van een weg voor wielvoertuigen in het bijzonder voor de regelmatigheid en vlakte van de ondergrond.</string>
     <string name="shared_string_files">Bestanden</string>
     <string name="travel_route_types">Routetypes</string>
+    <string name="sample_wikivoyage">Voorbeeld van Wikivoyage</string>
 </resources>
