@@ -1,5 +1,8 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
+
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -45,8 +48,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
-
 public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextProvider<AidlMapPointWrapper> {
 
 	private static final float POINT_IMAGE_VERTICAL_OFFSET = 0.91f;
@@ -56,14 +57,13 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private static final int SMALL_ICON_SIZE_DP = 20;
 	private static final int BIG_ICON_SIZE_DP = 40;
 
-	private final MapActivity map;
 	private OsmandMapTileView view;
 
-	private String packName;
-	private AidlMapLayerWrapper aidlLayer;
+	private final String packName;
+	private final AidlMapLayerWrapper aidlLayer;
 
-	private CommonPreference<Boolean> layerPref;
-	private CommonPreference<Boolean> appLayersPref;
+	private final CommonPreference<Boolean> layerPref;
+	private final CommonPreference<Boolean> appLayersPref;
 
 	private Paint pointInnerCircle;
 	private Paint pointOuterCircle;
@@ -84,27 +84,28 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	private MapTextLayer mapTextLayer;
 
-	private Map<String, Bitmap> pointImages = new ConcurrentHashMap<>();
+	private final Map<String, Bitmap> pointImages = new ConcurrentHashMap<>();
 
-	private Set<String> imageRequests = new HashSet<>();
-	private List<AidlMapPointWrapper> displayedPoints = new ArrayList<>();
+	private final Set<String> imageRequests = new HashSet<>();
+	private final List<AidlMapPointWrapper> displayedPoints = new ArrayList<>();
 
-	public AidlMapLayer(MapActivity map, AidlMapLayerWrapper aidlLayer, String packName) {
-		this.map = map;
+	public AidlMapLayer(@NonNull Context context, @NonNull AidlMapLayerWrapper aidlLayer,
+						@NonNull String packName) {
+		super(context);
 		this.aidlLayer = aidlLayer;
 		this.packName = packName;
 
-		OsmandApplication app = map.getMyApplication();
+		OsmandApplication app = getApplication();
 		layerPref = app.getSettings().registerBooleanPreference(packName + "_" + aidlLayer.getId(), true);
 		appLayersPref = app.getSettings().registerBooleanPreference(AIDL_LAYERS_PREFIX + packName, true);
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 
 		Resources res = view.getResources();
-		boolean night = map.getMyApplication().getDaynightHelper().isNightMode();
+		boolean night = getApplication().getDaynightHelper().isNightMode();
 
 		pointInnerCircle = new Paint();
 		pointInnerCircle.setColor(res.getColor(R.color.poi_background));
@@ -134,8 +135,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 				? R.drawable.map_pin_user_stale_location_selected_night : R.drawable.map_pin_user_stale_location_selected_day);
 		placeholder = BitmapFactory.decodeResource(res, R.drawable.img_user_picture);
 
-		smallIconSize = AndroidUtils.dpToPx(map, SMALL_ICON_SIZE_DP);
-		bigIconSize = AndroidUtils.dpToPx(map, BIG_ICON_SIZE_DP);
+		smallIconSize = AndroidUtils.dpToPx(getContext(), SMALL_ICON_SIZE_DP);
+		bigIconSize = AndroidUtils.dpToPx(getContext(), BIG_ICON_SIZE_DP);
 
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
@@ -222,11 +223,14 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	private String getSelectedContextMenuPointId() {
-		MapContextMenu mapContextMenu = map.getContextMenu();
-		Object object = mapContextMenu.getObject();
-		if (mapContextMenu.isVisible() && object instanceof AidlMapPointWrapper) {
-			AidlMapPointWrapper aMapPoint = (AidlMapPointWrapper) object;
-			return aMapPoint.getId();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			MapContextMenu mapContextMenu = mapActivity.getContextMenu();
+			Object object = mapContextMenu.getObject();
+			if (mapContextMenu.isVisible() && object instanceof AidlMapPointWrapper) {
+				AidlMapPointWrapper aMapPoint = (AidlMapPointWrapper) object;
+				return aMapPoint.getId();
+			}
 		}
 		return null;
 	}
@@ -250,7 +254,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	private boolean isLayerEnabled() {
-		return map.getMyApplication().getAidlApi().isAppEnabled(packName) && appLayersPref.get() && layerPref.get();
+		return getApplication().getAidlApi().isAppEnabled(packName) && appLayersPref.get() && layerPref.get();
 	}
 
 	@Override
@@ -323,16 +327,17 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public int getTextShift(AidlMapPointWrapper o, RotatedTileBox rb) {
+		double result = 0;
 		if (pointsType == PointsType.STANDARD) {
-			return (int) (getRadiusPoi(rb) * 1.5);
+			result = getRadiusPoi(rb) * 1.5;
 		} else if (pointsType == PointsType.CIRCLE) {
-			return (int) (circle.getHeight() * 0.6);
+			result = circle.getHeight() * 0.6;
 		} else if (pointsType == PointsType.SMALL_ICON) {
-			return smallIconBg.getHeight() / 2;
+			result = smallIconBg.getHeight() / 2.0;
 		} else if (pointsType == PointsType.BIG_ICON) {
-			return bigIconBg.getHeight() / 6;
+			result = bigIconBg.getHeight() / 6.0;
 		}
-		return 0;
+		return (int) (result * getTextScale());
 	}
 
 	@Override
@@ -427,8 +432,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	private static class PointImageReaderTask extends AsyncTask<String, Void, Boolean> {
 
-		private WeakReference<AidlMapLayer> layerRef;
-		private CropCircleTransformation circleTransformation = new CropCircleTransformation();
+		private final WeakReference<AidlMapLayer> layerRef;
+		private final CropCircleTransformation circleTransformation = new CropCircleTransformation();
 
 		PointImageReaderTask(AidlMapLayer layer) {
 			this.layerRef = new WeakReference<>(layer);
@@ -443,7 +448,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 					Uri fileUri = Uri.parse(imageUriStr);
 					if (layer != null && fileUri != null) {
 						try {
-							InputStream ims = layer.map.getContentResolver().openInputStream(fileUri);
+							InputStream ims = layer.getContext().getContentResolver().openInputStream(fileUri);
 							if (ims != null) {
 								Bitmap bitmap = BitmapFactory.decodeStream(ims);
 								if (bitmap != null) {

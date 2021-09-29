@@ -1,5 +1,12 @@
 package net.osmand.map;
 
+import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.util.Algorithms;
+import net.osmand.util.LIFOBlockingDeque;
+
+import org.apache.commons.logging.Log;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,19 +23,14 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import net.osmand.PlatformUtil;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-
 
 public class MapTileDownloader {
+
+	private static final Log log = PlatformUtil.getLog(MapTileDownloader.class);
+
 	// Download manager tile settings
 	public static int TILE_DOWNLOAD_THREADS = 4;
 	public static int TILE_DOWNLOAD_SECONDS_TO_WORK = 25;
@@ -36,23 +38,19 @@ public class MapTileDownloader {
 	public static final int TILE_DOWNLOAD_MAX_ERRORS_PER_TIMEOUT = 50;
 	private static final int CONNECTION_TIMEOUT = 30000;
 
-
 	private static MapTileDownloader downloader = null;
-	private static Log log = PlatformUtil.getLog(MapTileDownloader.class);
 
 	public static String USER_AGENT = "OsmAnd~";
 
+	private final ThreadPoolExecutor threadPoolExecutor;
+	private List<WeakReference<IMapDownloaderCallback>> callbacks = new LinkedList<>();
 
-	private ThreadPoolExecutor threadPoolExecutor;
-	private List<WeakReference<IMapDownloaderCallback>> callbacks = new LinkedList<WeakReference<IMapDownloaderCallback>>();
-
-	private Set<File> pendingToDownload;
-	private Set<File> currentlyDownloaded;
+	private final Set<File> pendingToDownload;
+	private final Set<File> currentlyDownloaded;
 
 	private int currentErrors = 0;
 	private long timeForErrorCounter = 0;
 	private boolean noHttps;
-
 
 	public static MapTileDownloader getInstance(String userAgent) {
 		if (downloader == null) {
@@ -77,7 +75,7 @@ public class MapTileDownloader {
 		 *
 		 * @param fileSaved
 		 */
-		public void tileDownloaded(DownloadRequest request);
+		void tileDownloaded(DownloadRequest request);
 	}
 
 	/**
@@ -129,47 +127,24 @@ public class MapTileDownloader {
 
 
 	public MapTileDownloader(int numberOfThreads) {
-
-		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads, TILE_DOWNLOAD_SECONDS_TO_WORK,
-				TimeUnit.SECONDS, createQueue());
-		// 1.6 method but very useful to kill non-running threads
-//		threadPoolExecutor.allowCoreThreadTimeOut(true);
+		threadPoolExecutor = new ThreadPoolExecutor(numberOfThreads, numberOfThreads,
+				TILE_DOWNLOAD_SECONDS_TO_WORK, TimeUnit.SECONDS, new LIFOBlockingDeque<Runnable>());
 		pendingToDownload = Collections.synchronizedSet(new HashSet<File>());
 		currentlyDownloaded = Collections.synchronizedSet(new HashSet<File>());
-
 	}
 	
 	public void setNoHttps(boolean noHttps) {
 		this.noHttps = noHttps;
 	}
 
-	protected BlockingQueue<Runnable> createQueue() {
-		boolean loaded = false;
-		try {
-			Class<?> cl = Class.forName("java.util.concurrent.LinkedBlockingDeque");
-			loaded = cl != null;
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		if (!loaded) {
-			// for Android 2.2
-			return new LinkedBlockingQueue<Runnable>();
-		}
-		return createDeque();
-	}
-
-	protected static BlockingQueue<Runnable> createDeque() {
-		return new net.osmand.util.LIFOBlockingDeque<Runnable>();
-	}
-
 	public void addDownloaderCallback(IMapDownloaderCallback callback) {
 		LinkedList<WeakReference<IMapDownloaderCallback>> ncall = new LinkedList<WeakReference<IMapDownloaderCallback>>(callbacks);
-		ncall.add(new WeakReference<MapTileDownloader.IMapDownloaderCallback>(callback));
+		ncall.add(new WeakReference<>(callback));
 		callbacks = ncall;
 	}
 
 	public void removeDownloaderCallback(IMapDownloaderCallback callback) {
-		LinkedList<WeakReference<IMapDownloaderCallback>> ncall = new LinkedList<WeakReference<IMapDownloaderCallback>>(callbacks);
+		LinkedList<WeakReference<IMapDownloaderCallback>> ncall = new LinkedList<>(callbacks);
 		Iterator<WeakReference<IMapDownloaderCallback>> it = ncall.iterator();
 		while (it.hasNext()) {
 			IMapDownloaderCallback c = it.next().get();
@@ -180,13 +155,12 @@ public class MapTileDownloader {
 		callbacks = ncall;
 	}
 
-
 	public void clearCallbacks() {
-		callbacks = new LinkedList<WeakReference<IMapDownloaderCallback>>();
+		callbacks = new LinkedList<>();
 	}
 
 	public List<IMapDownloaderCallback> getDownloaderCallbacks() {
-		ArrayList<IMapDownloaderCallback> lst = new ArrayList<IMapDownloaderCallback>();
+		ArrayList<IMapDownloaderCallback> lst = new ArrayList<>();
 		for (WeakReference<IMapDownloaderCallback> c : callbacks) {
 			IMapDownloaderCallback ct = c.get();
 			if (ct != null) {
@@ -242,10 +216,9 @@ public class MapTileDownloader {
 		}
 	}
 
-
 	private class DownloadMapWorker implements Runnable, Comparable<DownloadMapWorker> {
 
-		private DownloadRequest request;
+		private final DownloadRequest request;
 
 		private DownloadMapWorker(DownloadRequest request) {
 			this.request = request;
@@ -261,32 +234,32 @@ public class MapTileDownloader {
 
 				currentlyDownloaded.add(request.fileToSave);
 				if (log.isDebugEnabled()) {
-					log.debug("Start downloading tile : " + request.url); //$NON-NLS-1$
+					log.debug("Start downloading tile : " + request.url); 
 				}
 				long time = System.currentTimeMillis();
 				request.setError(false);
 				try {
 					URLConnection connection = NetworkUtils.getHttpURLConnection(request.url);
-					connection.setRequestProperty("User-Agent", Algorithms.isEmpty(request.userAgent) ? USER_AGENT : request.userAgent); //$NON-NLS-1$
+					connection.setRequestProperty("User-Agent", Algorithms.isEmpty(request.userAgent) ? USER_AGENT : request.userAgent); 
 					if (request.referer != null)
-						connection.setRequestProperty("Referer", request.referer); //$NON-NLS-1$
+						connection.setRequestProperty("Referer", request.referer); 
 					connection.setConnectTimeout(CONNECTION_TIMEOUT);
 					connection.setReadTimeout(CONNECTION_TIMEOUT);
 					BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
 					request.saveTile(inputStream);
 					if (log.isDebugEnabled()) {
-						log.debug("Downloading tile : " + request.url + " successfull " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						log.debug("Downloading tile : " + request.url + " successfull " + (System.currentTimeMillis() - time) + " ms");  //$NON-NLS-2$ //$NON-NLS-3$
 					}
 				} catch (UnknownHostException e) {
 					currentErrors++;
 					timeForErrorCounter = System.currentTimeMillis();
 					request.setError(true);
-					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage()); //$NON-NLS-1$  //$NON-NLS-2$
+					log.error("UnknownHostException, cannot download tile " + request.url + " " + e.getMessage());   //$NON-NLS-2$
 				} catch (Exception e) {
 					currentErrors++;
 					timeForErrorCounter = System.currentTimeMillis();
 					request.setError(true);
-					log.warn("Cannot download tile : " + request.url, e); //$NON-NLS-1$
+					log.warn("Cannot download tile : " + request.url, e); 
 				} finally {
 					currentlyDownloaded.remove(request.fileToSave);
 				}
@@ -294,27 +267,20 @@ public class MapTileDownloader {
 					fireLoadCallback(request);
 				}
 			}
-
 		}
 
 		@Override
 		public int compareTo(DownloadMapWorker o) {
-			return 0; //(int) (time - o.time);
+			return 0;
 		}
-
 	}
 
-
 	public void fireLoadCallback(DownloadRequest request) {
-		Iterator<WeakReference<IMapDownloaderCallback>> it = callbacks.iterator();
-		while (it.hasNext()) {
-			IMapDownloaderCallback c = it.next().get();
+		for (WeakReference<IMapDownloaderCallback> callback : callbacks) {
+			IMapDownloaderCallback c = callback.get();
 			if (c != null) {
 				c.tileDownloaded(request);
 			}
 		}
 	}
-
-	
-	
 }

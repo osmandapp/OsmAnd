@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
@@ -29,9 +31,9 @@ public class MarkerAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 
-		LatLon latLon = activity.getMapView()
+		LatLon latLon = mapActivity.getMapView()
 				.getCurrentRotatedTileBox()
 				.getCenterLatLon();
 
@@ -39,10 +41,10 @@ public class MarkerAction extends QuickAction {
 				latLon.getLatitude(),
 				latLon.getLongitude());
 
-		if (pointDescription.isLocation() && pointDescription.getName().equals(PointDescription.getAddressNotFoundStr(activity)))
+		if (pointDescription.isLocation() && pointDescription.getName().equals(PointDescription.getAddressNotFoundStr(mapActivity)))
 			pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
 
-		activity.getMapActions().addMapMarker(
+		mapActivity.getMapActions().addMapMarker(
 				latLon.getLatitude(),
 				latLon.getLongitude(),
 				pointDescription,
@@ -50,7 +52,7 @@ public class MarkerAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);

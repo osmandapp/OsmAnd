@@ -2413,7 +2413,7 @@
     <string name="mapillary_menu_edit_text_hint">Enigu uzantnomon</string>
     <string name="mapillary_menu_descr_username">Montri nur bildojn aldonitajn de</string>
     <string name="mapillary_menu_title_username">Uzantnomo</string>
-    <string name="mapillary_menu_filter_description">Filtri bildojn laŭ alŝutinto, laŭ dato aŭ laŭ tipo; aktivaj nur je pligrandigo.</string>
+    <string name="mapillary_menu_filter_description">Filtri bildojn laŭ alŝutinto, laŭ dato aŭ laŭ tipo; aktiva nur je pligrandigo.</string>
     <string name="shared_string_reset">Reagordi</string>
     <string name="store_tracks_in_monthly_directories">Konservi spurojn en monataj dosierujoj</string>
     <string name="store_tracks_in_monthly_directories_descrp">Konservi registritajn spurojn en subdosierujoj laŭ monato (ekz. 2018-01).</string>
@@ -4320,4 +4320,9 @@
     <string name="routeInfo_roadClass_description">Linio de spuro aŭ kurso estas kolorigata laŭ speco de vojo.</string>
     <string name="add_group_to_markers">Aldoni grupon al la listo de map-markoj</string>
     <string name="remove_group_from_markers">Forigi grupon el la listo de map-markoj</string>
+    <string name="start_point">Komenco</string>
+    <string name="mapillary_menu_filter_description_new">Filtri bildojn laŭ dato aŭ laŭ tipo; aktiva nur je pligrandigo.</string>
+    <string name="service_is_not_available_please_try_later">Servo ne estas disponebla, reprovu poste</string>
+    <string name="shared_string_files">Dosieroj</string>
+    <string name="travel_route_types">Specoj de kursoj</string>
 </resources>

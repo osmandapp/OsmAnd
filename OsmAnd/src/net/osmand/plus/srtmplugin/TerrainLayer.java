@@ -1,22 +1,25 @@
 package net.osmand.plus.srtmplugin;
 
+import static net.osmand.plus.srtmplugin.TerrainMode.HILLSHADE;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.util.Algorithms;
@@ -30,29 +33,27 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.srtmplugin.TerrainMode.HILLSHADE;
-
 public class TerrainLayer extends MapTileLayer {
 
 	private final static Log log = PlatformUtil.getLog(TerrainLayer.class);
-	private Map<String, SQLiteTileSource> resources = new LinkedHashMap<String, SQLiteTileSource>();
+	private Map<String, SQLiteTileSource> resources = new LinkedHashMap<>();
 	private final static String HILLSHADE_CACHE = "hillshade.cache";
 	private final static String SLOPE_CACHE = "slope.cache";
-	private int ZOOM_BOUNDARY = 15;
+	private final static int ZOOM_BOUNDARY = 15;
 	private final static int DEFAULT_ALPHA = 100;
-	private SRTMPlugin srtmPlugin;
-	private TerrainMode mode;
+	private final SRTMPlugin srtmPlugin;
+	private final TerrainMode mode;
 
-	private QuadTree<String> indexedResources = new QuadTree<String>(new QuadRect(0, 0, 1 << (ZOOM_BOUNDARY+1), 1 << (ZOOM_BOUNDARY+1)), 8, 0.55f);
+	private final QuadTree<String> indexedResources = new QuadTree<>(new QuadRect(0, 0, 1 << (ZOOM_BOUNDARY+1), 1 << (ZOOM_BOUNDARY+1)), 8, 0.55f);
 
-	public TerrainLayer(MapActivity activity, SRTMPlugin srtmPlugin) {
-		super(false);
-		final OsmandApplication app = activity.getMyApplication();
+	public TerrainLayer(@NonNull Context context, SRTMPlugin srtmPlugin) {
+		super(context, false);
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		this.srtmPlugin = srtmPlugin;
 		mode = srtmPlugin.getTerrainMode();
 		indexTerrainFiles(app);
 		setAlpha(DEFAULT_ALPHA);
-		setMap(createTileSource(activity));
+		setMap(createTileSource(app));
 	}
 
 	@Override
@@ -73,7 +74,7 @@ public class TerrainLayer extends MapTileLayer {
 	private void indexTerrainFiles(final OsmandApplication app) {
 		@SuppressLint("StaticFieldLeak") AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 			private SQLiteDatabase sqliteDb;
-			private String type = mode.name().toLowerCase();
+			private final String type = mode.name().toLowerCase();
 			@Override
 			protected Void doInBackground(Void... params) {
 				File tilesDir = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
@@ -95,7 +96,7 @@ public class TerrainLayer extends MapTileLayer {
 						}
 						sqliteDb.execSQL("CREATE TABLE IF NOT EXISTS TILE_SOURCES(filename varchar2(256), date_modified int, left int, right int, top int, bottom int)");
 
-						Map<String, Long> fileModified = new HashMap<String, Long>();
+						Map<String, Long> fileModified = new HashMap<>();
 						Map<String, SQLiteTileSource> rs = readFiles(app, tilesDir, fileModified);
 						indexCachedResources(fileModified, rs);
 						indexNonCachedResources(fileModified, rs);
@@ -159,14 +160,14 @@ public class TerrainLayer extends MapTileLayer {
 			}
 
 			private Map<String, SQLiteTileSource> readFiles(final OsmandApplication app, File tilesDir, Map<String, Long> fileModified) {
-				Map<String, SQLiteTileSource> rs = new LinkedHashMap<String, SQLiteTileSource>();
+				Map<String, SQLiteTileSource> rs = new LinkedHashMap<>();
 				File[] files = tilesDir.listFiles();
 				if(files != null) {
 					for(File f : files) {
 						if (f != null
 								&& f.getName().endsWith(IndexConstants.SQLITE_EXT)
 								&& f.getName().toLowerCase().startsWith(type)) {
-							SQLiteTileSource ts = new SQLiteTileSource(app, f, new ArrayList<TileSourceTemplate>());
+							SQLiteTileSource ts = new SQLiteTileSource(app, f, new ArrayList<>());
 							rs.put(f.getName(), ts);
 							fileModified.put(f.getName(), f.lastModified());
 						}
@@ -178,8 +179,8 @@ public class TerrainLayer extends MapTileLayer {
 		executeTaskInBackground(task);
 	}
 
-	private SQLiteTileSource createTileSource(MapActivity activity) {
-		return new SQLiteTileSource(activity.getMyApplication(), null, new ArrayList<TileSourceTemplate>()) {
+	private SQLiteTileSource createTileSource(@NonNull OsmandApplication app) {
+		return new SQLiteTileSource(app, null, new ArrayList<>()) {
 			
 			@Override
 			protected SQLiteConnection getDatabase() {
@@ -191,7 +192,7 @@ public class TerrainLayer extends MapTileLayer {
 			};
 			
 			List<String> getTileSource(int x, int y, int zoom) {
-				ArrayList<String> ls = new ArrayList<String>();
+				ArrayList<String> ls = new ArrayList<>();
 				int z = (zoom - ZOOM_BOUNDARY);
 				if (z > 0) {
 					indexedResources.queryInBox(new QuadRect(x >> z, y >> z, (x >> z), (y >> z)), ls);

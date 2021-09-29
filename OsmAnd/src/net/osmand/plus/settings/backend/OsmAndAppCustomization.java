@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.backend;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -205,8 +206,7 @@ public class OsmAndAppCustomization {
 		return app.getAppPath(IndexConstants.GPX_RECORDED_INDEX_DIR);
 	}
 
-	public void createLayers(OsmandMapTileView mapView, MapActivity activity) {
-
+	public void createLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
 	}
 
 	public List<? extends LocationPoint> getWaypoints() {

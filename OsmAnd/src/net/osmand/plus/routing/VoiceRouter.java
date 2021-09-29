@@ -1,6 +1,11 @@
 package net.osmand.plus.routing;
 
 
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PREPARE_TURN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_TURN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
+import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
+
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -18,7 +23,6 @@ import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.ExitInfo;
@@ -35,11 +39,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_LONG_PREPARE_TURN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_PREPARE_TURN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_IN;
-import static net.osmand.plus.routing.data.AnnounceTimeDistances.STATE_TURN_NOW;
 
 
 public class VoiceRouter {
@@ -322,35 +321,18 @@ public class VoiceRouter {
 		AlarmInfoType type = info.getType();
 		if (type == AlarmInfoType.SPEED_LIMIT) {
 			announceSpeedAlarm(info.getIntValue(), speed);
-		} else if (type == AlarmInfoType.SPEED_CAMERA) {
-			if (router.getSettings().SPEAK_SPEED_CAMERA.get()) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					p.attention(type+"");
-				}
-				play(p);
-			}
-		} else if (type == AlarmInfoType.PEDESTRIAN) {
-			if (router.getSettings().SPEAK_PEDESTRIAN.get()) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					p.attention(type+"");
-				}
-				play(p);
-			}
-		} else if (type == AlarmInfoType.TUNNEL) {
-			if (router.getSettings().SPEAK_TUNNELS.get()) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					p.attention(type+"");
-				}
-				play(p);
-			}
 		} else {
-			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get()) {
+			OsmandSettings settings = router.getSettings();
+			boolean speakTrafficWarnings = settings.SPEAK_TRAFFIC_WARNINGS.get();
+			boolean speakTunnels = type == AlarmInfoType.TUNNEL && settings.SPEAK_TUNNELS.get();
+			boolean speakPedestrian = type == AlarmInfoType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();
+			boolean speakSpeedCamera = type == AlarmInfoType.SPEED_CAMERA && settings.SPEAK_SPEED_CAMERA.get();
+			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN || type == AlarmInfoType.SPEED_CAMERA;
+
+			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
-					p.attention(type+"");
+					p.attention(String.valueOf(type));
 				}
 				play(p);
 				// See Issue 2377: Announce destination again - after some motorway tolls roads split shortly after the toll
@@ -825,21 +807,21 @@ public class VoiceRouter {
 	
 	private String getTurnType(TurnType t) {
 		if (TurnType.TL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT;
+			return CommandPlayer.A_LEFT;
 		} else if (TurnType.TSHL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_SH;
+			return CommandPlayer.A_LEFT_SH;
 		} else if (TurnType.TSLL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_SL;
+			return CommandPlayer.A_LEFT_SL;
 		} else if (TurnType.TR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT;
+			return CommandPlayer.A_RIGHT;
 		} else if (TurnType.TSHR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_SH;
+			return CommandPlayer.A_RIGHT_SH;
 		} else if (TurnType.TSLR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_SL;
+			return CommandPlayer.A_RIGHT_SL;
 		} else if (TurnType.KL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_KEEP;
+			return CommandPlayer.A_LEFT_KEEP;
 		} else if (TurnType.KR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_KEEP;
+			return CommandPlayer.A_RIGHT_KEEP;
 		}
 		return null;
 	}
@@ -948,9 +930,9 @@ public class VoiceRouter {
 	private void play(CommandBuilder p) {
 		if (p != null) {
 			List<String> played = p.play();
-			notifyOnVoiceMessage(p.getListCommands(), played);
+			notifyOnVoiceMessage(p.getCommandsList(), played);
 		} else {
-			notifyOnVoiceMessage(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+			notifyOnVoiceMessage(Collections.emptyList(), Collections.emptyList());
 		}
 	}
 

@@ -3857,7 +3857,7 @@
     <string name="announcement_time_intervals">Tid- og afstandsintervaller</string>
     <string name="context_menu_read_full">Læs hele</string>
     <string name="hillshade_slope_contour_lines">Bakkeskygge / Skråning / Konturlinjer</string>
-    <string name="activity_type_racing_name">Væddeløb</string>
+    <string name="activity_type_racing_name">Racerkørsel</string>
     <string name="temporary_conditional_routing_descr">Brug de vejrestriktioner, der er aktive på kortet nu</string>
     <string name="on_hold">I venteposition</string>
     <string name="srtm_unit_format">Enhedsvariant med konturlinjer</string>
@@ -4327,4 +4327,9 @@
     <string name="routeInfo_roadClass_description">Farvelægning af ruten eller sporlinjen i henhold til vejklassificering.</string>
     <string name="add_group_to_markers">Tilføj gruppe til markørliste</string>
     <string name="remove_group_from_markers">Fjern gruppe fra markørliste</string>
+    <string name="start_point">Start</string>
+    <string name="mapillary_menu_filter_description_new">Filtrer billeder efter dato eller type. Kun aktiv ved højt zoomniveau.</string>
+    <string name="service_is_not_available_please_try_later">Tjeneste er ikke tilgængelig. Prøv venligst senere</string>
+    <string name="shared_string_files">Filer</string>
+    <string name="travel_route_types">Rutetyper</string>
 </resources>

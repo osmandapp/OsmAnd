@@ -130,4 +130,5 @@
     <string name="last_update_from_telegram_duration">Последна актуализация от Telegram: преди %1$s</string>
     <string name="logcat_buffer">Буфер на Logcat</string>
     <string name="logcat_buffer_descr">Проверете и споделете подробният лог на приложението</string>
+    <string name="shared_string_cancel">Отказ</string>
 </resources>

@@ -432,7 +432,7 @@
     <string name="route_tl">Fordulj balra és menj</string>
     <string name="route_tshl">Fordulj élesen balra és menj</string>
     <string name="route_tsll">Fordulj enyhén balra és menj</string>
-    <string name="route_tu">Fordulj meg és menj</string>
+    <string name="route_tu">Forduljon meg, és menjen tovább</string>
     <string name="route_head">Előre</string>
     <string name="first_time_continue">Tovább</string>
     <string name="first_time_download">Régiók letöltése</string>
@@ -1455,7 +1455,7 @@
 \nHosszúság: %2$s</string>
     <string name="tips_and_tricks_descr">Gyakran ismételt kérdések, legutóbbi módosítások és egyebek.</string>
     <string name="routing_settings_2">Navigációs beállítások</string>
-    <string name="general_settings_2">Globális beállítások</string>
+    <string name="general_settings_2">Általános beállítások</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_deselect">Kijelölés megszüntetése</string>
     <string name="shared_string_deselect_all">Összes kijelölés megszüntetése</string>
@@ -4315,4 +4315,9 @@
     <string name="routeInfo_smoothness_description">Osztályozási rendszert mutat arról, hogy az út fizikailag mennyire használható kerekes járművekkel (különös tekintettel az útfelszín egyenletességére/simaságára).</string>
     <string name="add_group_to_markers">Csoport hozzáadása a jelölők listájához</string>
     <string name="remove_group_from_markers">Csoport eltávolítása a jelölők listájáról</string>
+    <string name="start_point">Start</string>
+    <string name="mapillary_menu_filter_description_new">Képek szűrése dátum vagy típus szerint. Csak erős nagyításnál aktív.</string>
+    <string name="service_is_not_available_please_try_later">A szolgáltatás nem elérhető, kérjük, próbálja meg később</string>
+    <string name="shared_string_files">Fájlok</string>
+    <string name="travel_route_types">Útvonaltípusok</string>
 </resources>

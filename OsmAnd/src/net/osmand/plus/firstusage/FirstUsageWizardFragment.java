@@ -538,8 +538,8 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private void showOnMap(LatLon mapCenter, int mapZoom) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
-			mapActivity.setMapLocation(mapCenter.getLatitude(), mapCenter.getLongitude());
-			mapActivity.getMapView().setIntZoom(mapZoom);
+			mapActivity.getMyApplication().getOsmandMap().setMapLocation(mapCenter.getLatitude(), mapCenter.getLongitude());
+			mapActivity.getMyApplication().getOsmandMap().getMapView().setIntZoom(mapZoom);
 		}
 		closeWizard();
 	}
@@ -783,7 +783,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private static void showFragment(@Nullable FragmentActivity activity, @NonNull Bundle args) {
 		if (!wizardClosed && activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			if (!fragmentManager.isStateSaved()) {
 				Fragment fragment = new FirstUsageWizardFragment();
 				fragment.setArguments(args);
 				activity.getSupportFragmentManager()

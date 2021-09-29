@@ -4,6 +4,7 @@ package net.osmand.plus.settings.backend;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.auto.CarSurfaceView.TEXT_SCALE_DIVIDER_160;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 import android.annotation.SuppressLint;
@@ -63,6 +64,7 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -109,17 +111,17 @@ public class OsmandSettings {
 	private Object globalPreferences;
 	private Object profilePreferences;
 	private ApplicationMode currentMode;
-	private Map<String, OsmandPreference<?>> registeredPreferences = new LinkedHashMap<>();
+	private final Map<String, OsmandPreference<?>> registeredPreferences = new LinkedHashMap<>();
 
 	// cache variables
 	private long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
 
 	// TODO variable
-	private Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<String, CommonPreference<String>>();
-	private Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<String, CommonPreference<String>>();
-	private Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<String, CommonPreference<Boolean>>();
-	private Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<String, CommonPreference<Boolean>>();
+	private final Map<String, CommonPreference<String>> customRoutingProps = new LinkedHashMap<>();
+	private final Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<>();
+	private final Map<String, CommonPreference<Boolean>> customBooleanRoutingProps = new LinkedHashMap<>();
+	private final Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<>();
 
 	private final ImpassableRoadsStorage impassableRoadsStorage = new ImpassableRoadsStorage(this);
 	private final IntermediatePointsStorage intermediatePointsStorage = new IntermediatePointsStorage(this);
@@ -515,10 +517,7 @@ public class OsmandSettings {
 
 	public boolean hasAvailableApplicationMode() {
 		int currentModeCount = ApplicationMode.values(ctx).size();
-		if (currentModeCount == 0 || currentModeCount == 1 && getApplicationMode() == ApplicationMode.DEFAULT) {
-			return false;
-		}
-		return true;
+		return currentModeCount != 0 && (currentModeCount != 1 || getApplicationMode() != ApplicationMode.DEFAULT);
 	}
 
 	public ApplicationMode readApplicationMode() {
@@ -791,7 +790,7 @@ public class OsmandSettings {
 
 		@Override
 		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			Set<String> appModesKeys = Algorithms.decodeStringSet(json.getString(getId()),",");
+			Set<String> appModesKeys = Algorithms.decodeStringSet(json.getString(getId()), ",");
 			Set<String> nonexistentAppModesKeys = new HashSet<>();
 			for (String appModeKey : appModesKeys) {
 				if (ApplicationMode.valueOfStringKey(appModeKey, null) == null) {
@@ -1422,11 +1421,6 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SPEAK_STREET_NAMES = new BooleanPreference(this, "speak_street_names", true).makeProfile().cache();
 	public final CommonPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference(this, "speak_traffic_warnings", true).makeProfile().cache();
-
-	{
-		SPEAK_TRAFFIC_WARNINGS.setModeDefaultValue(ApplicationMode.CAR, true);
-	}
-
 	public final CommonPreference<Boolean> SPEAK_PEDESTRIAN = new BooleanPreference(this, "speak_pedestrian", false).makeProfile().cache();
 
 	{
@@ -1510,6 +1504,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_ARROWS = new BooleanPreference(this, "current_track_show_arrows", false).makeGlobal().makeShared().cache();
 	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_START_FINISH = new BooleanPreference(this, "current_track_show_start_finish", true).makeGlobal().makeShared().cache();
 	public final ListStringPreference CUSTOM_TRACK_COLORS = (ListStringPreference) new ListStringPreference(this, "custom_track_colors", null, ",").makeShared().makeGlobal();
+	public final ListStringPreference LAST_USED_FAV_ICONS = (ListStringPreference) new ListStringPreference(this, "last_used_favorite_icons", null, ",").makeShared().makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference(this, "save_track_interval", 5000).makeProfile();
@@ -2752,7 +2747,7 @@ public class OsmandSettings {
 		RENDERER.setModeDefaultValue(ApplicationMode.SKI, RendererRegistry.WINTER_SKI_RENDER);
 	}
 
-	public CommonPreference<String> getCustomRenderProperty(String attrName) {
+	public CommonPreference<String> getCustomRenderProperty(@NonNull String attrName) {
 		if (!customRendersProps.containsKey(attrName)) {
 			customRendersProps.put(attrName, new StringPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, "").makeProfile());
 		}
@@ -2764,20 +2759,19 @@ public class OsmandSettings {
 		getCustomRenderProperty("defAppMode");
 	}
 
-	public CommonPreference<Boolean> getCustomRenderBooleanProperty(String attrName) {
+	public CommonPreference<Boolean> getCustomRenderBooleanProperty(@NonNull String attrName) {
 		if (!customBooleanRendersProps.containsKey(attrName)) {
 			customBooleanRendersProps.put(attrName, new BooleanPreference(this, RENDERER_PREFERENCE_PREFIX + attrName, false).makeProfile());
 		}
 		return customBooleanRendersProps.get(attrName);
 	}
 
-	public CommonPreference<String> getCustomRoutingProperty(String attrName, String defValue) {
+	public CommonPreference<String> getCustomRoutingProperty(@NonNull String attrName, String defValue) {
 		if (!customRoutingProps.containsKey(attrName)) {
 			customRoutingProps.put(attrName, new StringPreference(this, ROUTING_PREFERENCE_PREFIX + attrName, defValue).makeProfile());
 		}
 		return customRoutingProps.get(attrName);
 	}
-
 
 	public CommonPreference<Boolean> getCustomRoutingBooleanProperty(String attrName, boolean defaulfValue) {
 		if (!customBooleanRoutingProps.containsKey(attrName)) {
@@ -2785,6 +2779,8 @@ public class OsmandSettings {
 		}
 		return customBooleanRoutingProps.get(attrName);
 	}
+
+	public final OsmandPreference<Boolean> SHOW_TRAVEL = new BooleanPreference(this, "show_travel", true).makeProfile().cache();
 
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference(this, "routing_recalc_distance", 0.f).makeProfile();
 	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference(this, "routing_straight_angle", 30.f).makeProfile();

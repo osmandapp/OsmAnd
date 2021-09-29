@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapTileView;
 
 public class MapActivityKeyListener implements KeyEvent.Callback {
@@ -57,11 +58,12 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 		}
 
 		if (settings.USE_VOLUME_BUTTONS_AS_ZOOM.get()) {
+			OsmandMap osmandMap = app.getOsmandMap();
 			if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-				mapActivity.changeZoom(-1);
+				osmandMap.changeZoom(-1);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
-				mapActivity.changeZoom(1);
+				osmandMap.changeZoom(1);
 				return true;
 			}
 		}
@@ -75,6 +77,7 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		OsmandMap osmandMap = app.getOsmandMap();
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			OsmandMapTileView mapView = mapActivity.getMapView();
 
@@ -94,29 +97,29 @@ public class MapActivityKeyListener implements KeyEvent.Callback {
 		} else if (keyCode == KeyEvent.KEYCODE_D) {
 			mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
 		} else if (keyCode == KeyEvent.KEYCODE_MINUS) {
-			mapActivity.changeZoom(-1);
+			osmandMap.changeZoom(-1);
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_PLUS || keyCode == KeyEvent.KEYCODE_EQUALS) {
-			mapActivity.changeZoom(1);
+			osmandMap.changeZoom(1);
 			return true;
 		} else if (mapScrollHelper.isAvailableKeyCode(keyCode)) {
 			return mapScrollHelper.onKeyUp(keyCode);
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == PARROT_EXTERNAL_DEVICE) {
 			// Parrot device has only dpad left and right
 			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
-				mapActivity.changeZoom(-1);
+				osmandMap.changeZoom(-1);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
-				mapActivity.changeZoom(1);
+				osmandMap.changeZoom(1);
 				return true;
 			}
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == WUNDERLINQ_EXTERNAL_DEVICE) {
 			// WunderLINQ device, motorcycle smart phone control
 			if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-				mapActivity.changeZoom(-1);
+				osmandMap.changeZoom(-1);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-				mapActivity.changeZoom(1);
+				osmandMap.changeZoom(1);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_ESCAPE) {
 				String callingApp = "wunderlinq://datagrid";

@@ -49,7 +49,7 @@ public class TileStorageFormatBottomSheet extends MenuBottomSheetDialogFragment 
 			newMapSource = savedInstanceState.getBoolean(NEW_MAP_SOURCE_KEY);
 		}
 		Context context = requireContext();
-		TitleItem titleItem = new TitleItem(getString(R.string.mercator_projection));
+		TitleItem titleItem = new TitleItem(getString(R.string.storage_format));
 		items.add(titleItem);
 		NestedScrollView nestedScrollView = new NestedScrollView(context);
 		valuesContainer = new LinearLayout(context);

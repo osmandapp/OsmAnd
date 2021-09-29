@@ -127,6 +127,7 @@ import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -139,7 +140,9 @@ import java.util.Map;
 
 
 public class MapActivityActions implements DialogProvider {
+
 	private static final Log LOG = PlatformUtil.getLog(MapActivityActions.class);
+
 	public static final String KEY_LONGITUDE = "longitude";
 	public static final String KEY_LATITUDE = "latitude";
 	public static final String KEY_NAME = "name";
@@ -147,6 +150,7 @@ public class MapActivityActions implements DialogProvider {
 	public static final String KEY_ZOOM = "zoom";
 
 	public static final int REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION = 203;
+	public static final int START_TRACK_POINT_MY_LOCATION_RADIUS_METERS = 50 * 1000;
 
 	// Constants for determining the order of items in the additional actions context menu
 	public static final int DIRECTIONS_FROM_ITEM_ORDER = 1000;
@@ -170,34 +174,35 @@ public class MapActivityActions implements DialogProvider {
 	// make static
 	private static Bundle dialogBundle = new Bundle();
 
+	private final OsmandApplication app;
+	private final OsmandSettings settings;
 	private final MapActivity mapActivity;
-	private OsmandSettings settings;
-	private RoutingDataUtils routingDataUtils;
+	private final RoutingDataUtils routingDataUtils;
 
 	@NonNull
-	private ImageView drawerLogoHeader;
+	private final ImageView drawerLogoHeader;
 
 	private int drawerMode = DRAWER_MODE_NORMAL;
 
-	public MapActivityActions(MapActivity mapActivity) {
+	public MapActivityActions(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		settings = mapActivity.getMyApplication().getSettings();
-		routingDataUtils = new RoutingDataUtils(mapActivity.getMyApplication());
+		app = mapActivity.getMyApplication();
+		settings = app.getSettings();
+		routingDataUtils = new RoutingDataUtils(app);
 		drawerLogoHeader = new ImageView(mapActivity);
 		drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f),
 				AndroidUtils.dpToPx(mapActivity, 16f), 0, 0);
 	}
 
 	public void addAsTarget(double latitude, double longitude, PointDescription pd) {
-		TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
-		targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size() + 1,
-				pd);
+		TargetPointsHelper targets = app.getTargetPointsHelper();
+		targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size() + 1, pd);
 		openIntermediatePointsDialog();
 	}
 
 
 	public void addMapMarker(double latitude, double longitude, PointDescription pd, @Nullable String mapObjectName) {
-		MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		markersHelper.addMapMarker(new LatLon(latitude, longitude), pd, mapObjectName);
 	}
 
@@ -220,7 +225,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	private Dialog createAddWaypointDialog(final Bundle args) {
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
 		builder.setTitle(R.string.add_waypoint_dialog_title);
 
@@ -234,7 +239,7 @@ public class MapActivityActions implements DialogProvider {
 				double latitude = args.getDouble(KEY_LATITUDE);
 				double longitude = args.getDouble(KEY_LONGITUDE);
 				String name = editText.getText().toString();
-				SavingTrackHelper savingTrackHelper = mapActivity.getMyApplication().getSavingTrackHelper();
+				SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), null, name, null, 0);
 				Toast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_waypoint_dialog_added), name), Toast.LENGTH_SHORT)
 						.show();
@@ -269,10 +274,6 @@ public class MapActivityActions implements DialogProvider {
 				Toast.makeText(mapActivity, msg, Toast.LENGTH_LONG).show();
 			}
 		});
-	}
-
-	protected OsmandApplication getMyApplication() {
-		return mapActivity.getMyApplication();
 	}
 
 	public void saveDirections() {
@@ -442,9 +443,9 @@ public class MapActivityActions implements DialogProvider {
 		if (configureMenu) {
 			adapter.addItem(addGpxItem);
 		} else if (selectedObj instanceof WptPt
-				&& getMyApplication().getSelectedGpxHelper().getSelectedGPXFile((WptPt) selectedObj) != null) {
+				&& app.getSelectedGpxHelper().getSelectedGPXFile((WptPt) selectedObj) != null) {
 			adapter.addItem(editGpxItem);
-		} else if (!getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
+		} else if (!app.getSelectedGpxHelper().getSelectedGPXFiles().isEmpty()
 				|| (OsmandPlugin.isActive(OsmandMonitoringPlugin.class))) {
 			adapter.addItem(addGpxItem);
 		}
@@ -465,7 +466,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
-		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(getMyApplication()) : iadapter;
+		ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(app) : iadapter;
 		addActionsToAdapter(latitude, longitude, adapter, selectedObj, false);
 		showAdditionalActionsFragment(adapter, getContextMenuItemClickListener(latitude, longitude, adapter));
 	}
@@ -477,8 +478,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public ContextMenuItemClickListener getContextMenuItemClickListener(final double latitude, final double longitude, final ContextMenuAdapter adapter) {
-		final ArrayAdapter<ContextMenuItem> listAdapter =
-				adapter.createListAdapter(mapActivity, getMyApplication().getSettings().isLightContent());
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(mapActivity, settings.isLightContent());
 
 		return new AdditionalActionsBottomSheetDialogFragment.ContextMenuItemClickListener() {
 			@Override
@@ -502,7 +502,7 @@ public class MapActivityActions implements DialogProvider {
 					mapActivity.getContextMenu().close();
 					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), new LatLon(latitude, longitude));
 				} else if (standardId == R.string.avoid_road) {
-					getMyApplication().getAvoidSpecificRoads().addImpassableRoad(mapActivity, new LatLon(latitude, longitude), true, false, null);
+					app.getAvoidSpecificRoads().addImpassableRoad(mapActivity, new LatLon(latitude, longitude), true, false, null);
 				} else if (standardId == R.string.shared_string_add || standardId == R.string.favourites_context_menu_edit) {
 					mapActivity.getContextMenu().hide();
 					mapActivity.getContextMenu().buttonFavoritePressed();
@@ -521,7 +521,7 @@ public class MapActivityActions implements DialogProvider {
 			enterRoutePlanningMode(new LatLon(latitude, longitude),
 					mapActivity.getContextMenu().getPointDescription());
 		} else {
-			getMyApplication().getTargetPointsHelper().setStartPoint(new LatLon(latitude, longitude),
+			app.getTargetPointsHelper().setStartPoint(new LatLon(latitude, longitude),
 					true, mapActivity.getContextMenu().getPointDescription());
 		}
 	}
@@ -539,10 +539,17 @@ public class MapActivityActions implements DialogProvider {
 			mapActivity.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
 			if (!ps.isEmpty()) {
-				TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();
-				tg.clearStartPoint(false);
+				Location startLoc = ps.get(0);
 				Location finishLoc = ps.get(ps.size() - 1);
-				tg.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
+				Location location = app.getLocationProvider().getLastKnownLocation();
+				TargetPointsHelper pointsHelper = app.getTargetPointsHelper();
+				pointsHelper.clearAllIntermediatePoints(false);
+				if (location == null || MapUtils.getDistance(location, startLoc) <= START_TRACK_POINT_MY_LOCATION_RADIUS_METERS) {
+					pointsHelper.clearStartPoint(false);
+				} else {
+					pointsHelper.setStartPoint(new LatLon(startLoc.getLatitude(), startLoc.getLongitude()), false, null);
+				}
+				pointsHelper.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
 			}
 		}
 	}
@@ -564,13 +571,13 @@ public class MapActivityActions implements DialogProvider {
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from, PointDescription fromName,
 											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
-		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
-		ApplicationMode mode = appMode != null ? appMode : getRouteMode(from);
+		ApplicationMode mode = appMode != null ? appMode : getRouteMode();
 		//app.getSettings().setApplicationMode(mode, false);
 		app.getRoutingHelper().setAppMode(mode);
-		app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, showMenu);
+		app.initVoiceCommandPlayer(mapActivity, mode, null, true,
+				false, false, showMenu);
 		// save application mode controls
 		settings.FOLLOW_THE_ROUTE.set(false);
 		app.getRoutingHelper().setFollowingMode(false);
@@ -597,10 +604,9 @@ public class MapActivityActions implements DialogProvider {
 
 	public void recalculateRoute(boolean showDialog) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(true);
-		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
-		ApplicationMode mode = getRouteMode(null);
+		ApplicationMode mode = getRouteMode();
 		//app.getSettings().setApplicationMode(mode, false);
 		app.getRoutingHelper().setAppMode(mode);
 		//Test for #2810: No need to init player here?
@@ -624,8 +630,8 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 
-	public ApplicationMode getRouteMode(LatLon from) {
-		MarkersPlanRouteContext planRouteContext = mapActivity.getMyApplication().getMapMarkersHelper().getPlanRouteContext();
+	public ApplicationMode getRouteMode() {
+		MarkersPlanRouteContext planRouteContext = app.getMapMarkersHelper().getPlanRouteContext();
 		if (planRouteContext.isNavigationFromMarkers() && planRouteContext.getSnappedMode() != ApplicationMode.DEFAULT) {
 			planRouteContext.setNavigationFromMarkers(false);
 			return planRouteContext.getSnappedMode();
@@ -730,8 +736,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public ContextMenuAdapter createMainOptionsMenu() {
-		OsmandApplication app = mapActivity.getMyApplication();
-		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 		optionsMenuHelper.setNightMode(nightMode);
 
@@ -939,8 +944,7 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent("drawer_download_maps_open");
-						Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
-								.getDownloadActivity());
+						Intent newIntent = new Intent(mapActivity, app.getAppCustomization().getDownloadActivity());
 						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(newIntent);
 						return true;
@@ -966,7 +970,7 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						MapActivity.clearPrevActivityIntent();
-						TravelHelper travelHelper = getMyApplication().getTravelHelper();
+						TravelHelper travelHelper = app.getTravelHelper();
 						travelHelper.initializeDataOnAppStartup();
 						if (!travelHelper.isAnyTravelBookPresent() && !travelHelper.getBookmarksHelper().hasSavedArticles()) {
 							WikivoyageWelcomeDialogFragment.showInstance(mapActivity.getSupportFragmentManager());
@@ -1119,8 +1123,8 @@ public class MapActivityActions implements DialogProvider {
 				.setIcon(iconRes)
 				.setListener((adapter1, itemId, position, isChecked, viewCoordinates) -> {
 					String itemLogName = drawerId.replace(DRAWER_ITEM_ID_SCHEME, "");
-					mapActivity.getMyApplication().logEvent("drawer_" + itemLogName + "_open");
-					Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+					app.logEvent("drawer_" + itemLogName + "_open");
+					Intent newIntent = new Intent(mapActivity, app.getAppCustomization()
 							.getFavoritesActivity());
 					newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					settings.FAVORITES_TAB.set(titleRes);
@@ -1136,14 +1140,10 @@ public class MapActivityActions implements DialogProvider {
 		WaypointsFragment.showInstance(mapActivity.getSupportFragmentManager());
 	}
 
-	public void openRoutePreferencesDialog() {
-		mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.ROUTE_PREFERENCES);
-	}
-
 	public void stopNavigationWithoutConfirm() {
-		getMyApplication().stopNavigation();
+		app.stopNavigation();
 		mapActivity.updateApplicationModeSettings();
-		List<ApplicationMode> modes = ApplicationMode.values(getMyApplication());
+		List<ApplicationMode> modes = ApplicationMode.values(app);
 		for (ApplicationMode mode : modes) {
 			if (settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(mode)) {
 				settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, false);
@@ -1174,7 +1174,7 @@ public class MapActivityActions implements DialogProvider {
 						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 						break;
 					case 1:
-						OsmAndLocationProvider locationProvider = getMyApplication().getLocationProvider();
+						OsmAndLocationProvider locationProvider = app.getLocationProvider();
 						locationProvider.showNavigationInfo(mapActivity.getPointToNavigate(), mapActivity);
 						break;
 					default:
@@ -1186,11 +1186,11 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	protected void updateDrawerMenu() {
-		final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final ListView menuItemsListView = (ListView) mapActivity.findViewById(R.id.menuItems);
 		menuItemsListView.setBackgroundColor(ColorUtilities.getListBgColor(mapActivity, nightMode));
 		menuItemsListView.removeHeaderView(drawerLogoHeader);
-		Bitmap navDrawerLogo = getMyApplication().getAppCustomization().getNavDrawerLogo();
+		Bitmap navDrawerLogo = app.getAppCustomization().getNavDrawerLogo();
 
 		if (navDrawerLogo != null) {
 			drawerLogoHeader.setImageBitmap(navDrawerLogo);
@@ -1209,7 +1209,7 @@ public class MapActivityActions implements DialogProvider {
 				boolean hasHeader = menuItemsListView.getHeaderViewsCount() > 0;
 				boolean hasFooter = menuItemsListView.getFooterViewsCount() > 0;
 				if (hasHeader && position == 0 || (hasFooter && position == menuItemsListView.getCount() - 1)) {
-					String drawerLogoParams = getMyApplication().getAppCustomization().getNavDrawerLogoUrl();
+					String drawerLogoParams = app.getAppCustomization().getNavDrawerLogoUrl();
 					if (!Algorithms.isEmpty(drawerLogoParams)) {
 						WikipediaDialogFragment.showFullArticle(mapActivity, Uri.parse(drawerLogoParams), nightMode);
 					}
@@ -1223,7 +1223,6 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}
 			}
-
 		});
 	}
 }

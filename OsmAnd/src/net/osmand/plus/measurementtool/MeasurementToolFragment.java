@@ -169,7 +169,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private boolean nightMode;
 	private int cachedMapPosition;
 
-	private MeasurementEditingContext editingCtx = new MeasurementEditingContext();
+	private MeasurementEditingContext editingCtx;
 	private GraphDetailsMenu detailsMenu;
 
 	private LatLon initialPoint;
@@ -239,6 +239,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		editingCtx = new MeasurementEditingContext(requireMyApplication());
 		onBackPressedCallback = new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				quit(true);
@@ -260,7 +261,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		final OsmandApplication app = mapActivity.getMyApplication();
 
 		app.setMeasurementEditingContext(editingCtx);
-		editingCtx.setApplication(app);
 		editingCtx.setProgressListener(new SnapToRoadProgressListener() {
 			@Override
 			public void showProgressBar() {

@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -53,6 +54,10 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 
 	private RouteGeometryWayContext previewWayContext;
 	private RouteGeometryWay previewLineGeometry;
+
+	public PreviewRouteLineLayer(@NonNull Context ctx) {
+		super(ctx);
+	}
 
 	@Override
 	protected void initGeometries(float density) {
@@ -147,6 +152,11 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		int attrsTurnArrowColor = attrs.paint3.getColor();
 		if (customTurnArrowColor != 0) {
 			attrs.paint3.setColor(customTurnArrowColor);
+		}
+		float routeWidth = previewLineGeometry.getDefaultWayStyle().getWidth();
+		if (routeWidth != 0) {
+			attrs.paint3.setStrokeWidth(routeWidth / 2);
+			//attrs.paint3.setStrokeWidth(Math.min(previewLineGeometry.getContext().getAttrs().defaultWidth3, routeWidth / 2));
 		}
 		path.moveTo(centerX + offset, startY);
 		path.lineTo(centerX, startY);

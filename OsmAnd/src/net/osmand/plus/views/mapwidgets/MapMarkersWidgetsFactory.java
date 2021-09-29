@@ -5,6 +5,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -32,29 +34,29 @@ public class MapMarkersWidgetsFactory {
 	public static final int MIN_DIST_2ND_ROW_SHOW = 150; // meters
 
 	private final MapActivity map;
-	private MapMarkersHelper helper;
-	private boolean portraitMode;
+	private final MapMarkersHelper helper;
+	private final boolean portraitMode;
 
-	private View topBar;
-	private View topBar2nd;
-	private View rowView;
-	private View rowView2nd;
-	private ImageView arrowImg;
-	private ImageView arrowImg2nd;
-	private TextView distText;
-	private TextView distText2nd;
-	private TextView addressText;
-	private TextView addressText2nd;
-	private ImageButton okButton;
-	private ImageButton okButton2nd;
-	private ImageButton moreButton;
-	private ImageButton moreButton2nd;
+	private final View topBar;
+	private final View topBar2nd;
+	private final View rowView;
+	private final View rowView2nd;
+	private final ImageView arrowImg;
+	private final ImageView arrowImg2nd;
+	private final TextView distText;
+	private final TextView distText2nd;
+	private final TextView addressText;
+	private final TextView addressText2nd;
+	private final ImageButton okButton;
+	private final ImageButton okButton2nd;
+	private final ImageButton moreButton;
+	private final ImageButton moreButton2nd;
 
 	private LatLon loc;
 
 	private boolean cachedTopBarVisibility;
 
-	public MapMarkersWidgetsFactory(final MapActivity map) {
+	public MapMarkersWidgetsFactory(@NonNull MapActivity map) {
 		this.map = map;
 		helper = map.getMyApplication().getMapMarkersHelper();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(map);
@@ -74,18 +76,8 @@ public class MapMarkersWidgetsFactory {
 		moreButton = (ImageButton) map.findViewById(R.id.marker_btn_more);
 		moreButton2nd = (ImageButton) map.findViewById(R.id.marker_btn_more_2nd);
 
-		rowView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showMarkerOnMap(0);
-			}
-		});
-		rowView2nd.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showMarkerOnMap(1);
-			}
-		});
+		rowView.setOnClickListener(v -> showMarkerOnMap(0));
+		rowView2nd.setOnClickListener(v -> showMarkerOnMap(1));
 
 		UiUtilities iconsCache = map.getMyApplication().getUIUtilities();
 		if (isLandscapeLayout() && helper.getMapMarkers().size() > 1
@@ -93,38 +85,22 @@ public class MapMarkersWidgetsFactory {
 			moreButton.setVisibility(View.GONE);
 		} else {
 			moreButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_markers_list, R.color.marker_top_2nd_line_color));
-			moreButton.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MapActivity.clearPrevActivityIntent();
-					MapMarkersDialogFragment.showInstance(map);
-				}
+			moreButton.setOnClickListener(v -> {
+				MapActivity.clearPrevActivityIntent();
+				MapMarkersDialogFragment.showInstance(map);
 			});
 		}
 		if (moreButton2nd != null) {
 			moreButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_markers_list, R.color.marker_top_2nd_line_color));
-			moreButton2nd.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MapActivity.clearPrevActivityIntent();
-					MapMarkersDialogFragment.showInstance(map);
-				}
+			moreButton2nd.setOnClickListener(v -> {
+				MapActivity.clearPrevActivityIntent();
+				MapMarkersDialogFragment.showInstance(map);
 			});
 		}
 		okButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
-		okButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				removeMarker(0);
-			}
-		});
+		okButton.setOnClickListener(v -> removeMarker(0));
 		okButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
-		okButton2nd.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				removeMarker(1);
-			}
-		});
+		okButton2nd.setOnClickListener(v -> removeMarker(1));
 
 		updateVisibility(false);
 	}
@@ -141,7 +117,7 @@ public class MapMarkersWidgetsFactory {
 			AnimateDraggingMapThread thread = map.getMapView().getAnimatedDraggingThread();
 			LatLon pointToNavigate = marker.point;
 			if (pointToNavigate != null) {
-				int fZoom = map.getMapView().getZoom() < 15 ? 15 : map.getMapView().getZoom();
+				int fZoom = Math.max(map.getMapView().getZoom(), 15);
 				thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
 			}
 			//MapMarkerDialogHelper.showMarkerOnMap(map, marker);
@@ -246,9 +222,7 @@ public class MapMarkersWidgetsFactory {
 		} else {
 			txt = "—";
 		}
-		if (txt != null) {
-			distText.setText(txt);
-		}
+		distText.setText(txt);
 		AndroidUiHelper.updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
 
 		String descr;
@@ -285,11 +259,11 @@ public class MapMarkersWidgetsFactory {
 
 	public abstract static class DistanceToMapMarkerControl extends TextInfoWidget {
 
-		private boolean firstMarker;
+		private final boolean firstMarker;
 		private final OsmandMapTileView view;
-		private MapActivity map;
-		private MapMarkersHelper helper;
-		private float[] calculations = new float[1];
+		private final MapActivity map;
+		private final MapMarkersHelper helper;
+		private final float[] calculations = new float[1];
 		private int cachedMeters;
 		private int cachedMarkerColorIndex = -1;
 		private Boolean cachedNightMode = null;
@@ -301,13 +275,7 @@ public class MapMarkersWidgetsFactory {
 			this.view = map.getMapView();
 			helper = map.getMyApplication().getMapMarkersHelper();
 			setText(null, null);
-			setOnClickListener(new View.OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					click(view);
-				}
-			});
+			setOnClickListener(v -> click(view));
 		}
 
 		protected abstract void click(OsmandMapTileView view);

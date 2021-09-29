@@ -939,6 +939,7 @@ public class GpxUiHelper {
 		}
 	}
 
+	@NonNull
 	public static List<String> getSelectedTrackPaths(OsmandApplication app) {
 		List<String> trackNames = new ArrayList<>();
 		for (SelectedGpxFile file : app.getSelectedGpxHelper().getSelectedGPXFiles()) {

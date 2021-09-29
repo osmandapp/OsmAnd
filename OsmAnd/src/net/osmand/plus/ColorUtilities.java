@@ -199,4 +199,26 @@ public class ColorUtilities {
 	public static int getCardAndListBackgroundColorId(boolean nightMode) {
 		return nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light;
 	}
+
+	@ColorInt
+	public static int getStrokedButtonsOutlineColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getStrokedButtonsOutlineColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getStrokedButtonsOutlineColorId(boolean nightMode) {
+		return nightMode ?
+				R.color.stroked_buttons_and_links_outline_dark :
+				R.color.stroked_buttons_and_links_outline_light;
+	}
+
+	@ColorInt
+	public static int getMapButtonIconColor(@NonNull Context ctx, boolean nightMode) {
+		return ContextCompat.getColor(ctx, getMapButtonIconColorId(nightMode));
+	}
+
+	@ColorRes
+	public static int getMapButtonIconColorId(boolean nightMode) {
+		return nightMode ? R.color.map_button_icon_color_dark : R.color.map_button_icon_color_light;
+	}
 }

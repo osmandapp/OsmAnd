@@ -1,25 +1,5 @@
 package net.osmand.plus.track;
 
-import static net.osmand.GPXUtilities.GPXTrackAnalysis;
-import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
-import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
-import static net.osmand.plus.track.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.DELETE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.RENAME_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.SHARE_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
-import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.ADD_WAYPOINT_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
-import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ProgressDialog;
@@ -89,6 +69,7 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.OpenGpxDetailsTask;
@@ -122,6 +103,26 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LATITUDE;
+import static net.osmand.plus.activities.MapActivityActions.KEY_LONGITUDE;
+import static net.osmand.plus.track.OptionsCard.ANALYZE_BY_INTERVALS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.ANALYZE_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.APPEARANCE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.DELETE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.RENAME_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.SHARE_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.ADD_WAYPOINT_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
+import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
@@ -421,9 +422,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	@NonNull
-	private String getHeaderTitle() {
+	private CharSequence getHeaderTitle() {
 		if (menuType == TrackMenuType.TRACK) {
-			return app.getString(R.string.shared_string_gpx_track) + "\n" + gpxTitle;
+			String title = app.getString(R.string.shared_string_gpx_track) + "\n" + gpxTitle;
+			return UiUtilities.createCustomFontSpannable(FontCache.getRobotoRegular(app), title, gpxTitle);
 		} else if (menuType == TrackMenuType.OPTIONS) {
 			return app.getString(menuType.titleId);
 		} else {
@@ -1340,7 +1342,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public void openPlanRoute(GpxData gpxData) {
 		QuadRect qr = gpxData.getRect();
 		getMapActivity().getMapView().fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-		MeasurementEditingContext editingContext = new MeasurementEditingContext();
+		MeasurementEditingContext editingContext = new MeasurementEditingContext(app);
 		editingContext.setGpxData(gpxData);
 		MeasurementToolFragment.showInstance(getFragmentManager(), editingContext);
 	}

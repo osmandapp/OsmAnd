@@ -131,8 +131,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
 				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
 
-				MeasurementEditingContext ctx = new MeasurementEditingContext();
-				ctx.setApplication(app);
+				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
 				ctx.setPoints(gpxApproximation, points, appMode);
 				return ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
 			}

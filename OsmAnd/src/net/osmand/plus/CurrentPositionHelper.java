@@ -25,6 +25,8 @@ import org.apache.commons.logging.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -312,10 +314,12 @@ public class CurrentPositionHelper {
 			});
 			return;
 		}
-//		Collections.sort(complete, GeocodingUtilities.DISTANCE_COMPARATOR);
-//		for(GeocodingResult rt : complete) {
-//			System.out.println(rt.toString());
-//		}
+		Collections.sort(complete,new Comparator<GeocodingResult>() {
+			@Override
+			public int compare(GeocodingResult o1, GeocodingResult o2) {
+				return Double.compare(o1.getDistance(), o2.getDistance());
+			}
+		});
 		final GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
 		app.runInUIThread(new Runnable() {
 			public void run() {

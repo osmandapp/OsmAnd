@@ -2,6 +2,7 @@ package net.osmand.plus.views.layers;
 
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -13,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -60,9 +62,17 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 	protected Paint paintIconAction;
 	private Bitmap actionArrow;
 
+	public BaseRouteLayer(@NonNull Context ctx) {
+		super(ctx);
+	}
+
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
+		init();
+	}
+
+	private void init() {
 		float density = view.getDensity();
 		initAttrs(density);
 		initGeometries(density);
@@ -74,7 +84,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		attrs = new RenderingLineAttributes("route");
 		attrs.defaultWidth = (int) (12 * density);
 		attrs.defaultWidth3 = (int) (7 * density);
-		attrs.defaultColor = view.getResources().getColor(R.color.nav_track);
+		attrs.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track);
 		attrs.paint3.setStrokeCap(Paint.Cap.BUTT);
 		attrs.paint3.setColor(Color.WHITE);
 		attrs.paint2.setStrokeCap(Paint.Cap.BUTT);
@@ -149,7 +159,8 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		} else {
 			widthKey = view.getSettings().ROUTE_LINE_WIDTH.getModeValue(getAppMode());
 		}
-		return widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
+		float width = widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
+		return width * getCarScaleCoef(false);
 	}
 
 	@Nullable
@@ -201,7 +212,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		matrix.reset();
 		matrix.postTranslate(0, -actionArrow.getHeight() / 2f);
 		matrix.postRotate((float) angle, actionArrow.getWidth() / 2f, 0);
-		if (scale > 1.0f) {
+		if (scale > 0) {
 			matrix.postScale(scale, scale);
 			scaledWidth *= scale;
 		}

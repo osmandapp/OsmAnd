@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
@@ -194,18 +196,28 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayers(MapActivity activity) {
-		registerWidget(activity);
+	public void mapActivityPause(MapActivity activity) {
+		parkingPlaceControl = null;
 	}
 
 	@Override
-	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		if (mapActivity != null) {
+			registerWidget(mapActivity);
+		}
+	}
+
+	@Override
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		if (mapActivity == null) {
+			return;
+		}
 		if (isActive()) {
 			if (parkingPlaceControl == null) {
-				registerWidget(activity);
+				registerWidget(mapActivity);
 			}
 		} else {
-			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null && parkingPlaceControl != null) {
 				mapInfoLayer.removeSideWidget(parkingPlaceControl);
 				mapInfoLayer.recreateControls();
@@ -214,7 +226,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void registerWidget(MapActivity activity) {
+	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity);
@@ -225,9 +237,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerMapContextMenuActions(final MapActivity mapActivity,
-			final double latitude, final double longitude,
-			ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	public void registerMapContextMenuActions(@NonNull final MapActivity mapActivity,
+											  final double latitude, final double longitude,
+											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 
 		ItemClickListener addListener = new ItemClickListener() {
 			@Override

@@ -136,7 +136,7 @@ public class CycleRoutesFragment extends BaseOsmAndFragment {
 				MapActivity mapActivity = (MapActivity) getMyActivity();
 				if (mapActivity != null) {
 					mapActivity.refreshMapComplete();
-					mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+					mapActivity.getMapLayers().updateLayers(mapActivity);
 				}
 				return true;
 			}

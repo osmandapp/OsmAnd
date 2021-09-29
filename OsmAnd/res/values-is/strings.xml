@@ -183,7 +183,7 @@
     <string name="osmand_parking_minute">mín</string>
     <string name="osmand_parking_time_left">eftir</string>
     <string name="drawer">Flatur listi</string>
-    <string name="general_settings_2">Víðværar stillingar</string>
+    <string name="general_settings_2">Almennar stillingar</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">Í lagi</string>
     <string name="shared_string_cancel">Hætta við</string>
@@ -4272,8 +4272,8 @@
     <string name="purchases_feature_desc_wikivoyage">Skoðaðu Wikiferðir ónettengt. Greinum er skipt eftir löndum og héruðum og eru þær tiltækar á öllum tungumálum.</string>
     <string name="purchases_feature_desc_wikipedia">Skoðaðu Wikipediu ónettengt. Greinum er skipt eftir löndum og héruðum og eru þær tiltækar á öllum tungumálum.</string>
     <string name="purchases_feature_desc_combined_wiki">Skoðaðu Wikipedia-greinar á ferðum þínum án nettengingar. Ónettengdum gögnum er skipt eftir löndum og héruðum og eru þau tiltæk á öllum tungumálum.</string>
-    <string name="logout_from_osmand_cloud_decsr">"Skrá út\?
-\nÞú þarft að skrá þig aftur inn til að taka öryggisafrit  eða endurheimta gögn."</string>
+    <string name="logout_from_osmand_cloud_decsr">Skrá út\?
+\nÞú þarft að skrá þig aftur inn til að taka öryggisafrit eða endurheimta gögn.</string>
     <string name="enough_contributions_descr">Til hamingju, þú hefur gefið næginleg framlög til OpenStreetMap og getur því notið ótakmarkaðs niðurhals á uppfærslum OsmAnd-landakorta!</string>
     <string name="osmand_cloud_authorize_descr">Ekki tapa gögnunum þínum. Taktu öryggisafrit og endu heimtu allar upplýsingar á einfaldan máta.</string>
     <string name="verification_code_missing_description">Þetta gæti tekið 10 mínútur. Notaðu hnappinn hér fyrir neðan ef hann er ekki í ruslpóstmöppunni þinni.</string>

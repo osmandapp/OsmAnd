@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -13,6 +14,7 @@ import android.graphics.drawable.LayerDrawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -23,6 +25,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.plus.ChartPointsHelper;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.profiles.LocationIcon;
@@ -50,7 +53,7 @@ import java.util.List;
 
 public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
-	private static final Log log = PlatformUtil.getLog(RouteLayer.class);
+	private static final Log LOG = PlatformUtil.getLog(RouteLayer.class);
 
 	private final RoutingHelper helper;
 	private final TransportRoutingHelper transportHelper;
@@ -72,11 +75,13 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 
 	private LayerDrawable projectionIcon;
 
-	public RouteLayer(RoutingHelper helper) {
-		this.helper = helper;
+	public RouteLayer(@NonNull Context context) {
+		super(context);
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		this.helper = app.getRoutingHelper();
 		this.transportHelper = helper.getTransportRoutingHelper();
-		chartPointsHelper = new ChartPointsHelper(helper.getApplication());
-		coloringAvailabilityCache = new ColoringTypeAvailabilityCache(helper.getApplication());
+		chartPointsHelper = new ChartPointsHelper(app);
+		coloringAvailabilityCache = new ColoringTypeAvailabilityCache(app);
 	}
 
 	public RoutingHelper getHelper() {
@@ -94,7 +99,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsPT = new RenderingLineAttributes("publicTransportLine");
 		attrsPT.defaultWidth = (int) (12 * density);
 		attrsPT.defaultWidth3 = (int) (7 * density);
-		attrsPT.defaultColor = view.getResources().getColor(R.color.nav_track);
+		attrsPT.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track);
 		attrsPT.paint3.setStrokeCap(Cap.BUTT);
 		attrsPT.paint3.setColor(Color.WHITE);
 		attrsPT.paint2.setStrokeCap(Cap.BUTT);
@@ -103,7 +108,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		attrsW = new RenderingLineAttributes("walkingRouteLine");
 		attrsW.defaultWidth = (int) (12 * density);
 		attrsW.defaultWidth3 = (int) (7 * density);
-		attrsW.defaultColor = view.getResources().getColor(R.color.nav_track_walk_fill);
+		attrsW.defaultColor = ContextCompat.getColor(view.getContext(), R.color.nav_track_walk_fill);
 		attrsW.paint3.setStrokeCap(Cap.BUTT);
 		attrsW.paint3.setColor(Color.WHITE);
 		attrsW.paint2.setStrokeCap(Cap.BUTT);
@@ -198,10 +203,11 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		if (actionPoints.size() > 0) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			try {
+				float routeWidth = routeGeometry.getDefaultWayStyle().getWidth();
 				Path pth = new Path();
 				Matrix matrix = new Matrix();
 				boolean first = true;
-				int x = 0, px = 0, py = 0, y = 0;
+				float x = 0, px = 0, py = 0, y = 0;
 				for (int i = 0; i < actionPoints.size(); i++) {
 					Location o = actionPoints.get(i);
 					if (o == null) {
@@ -210,14 +216,17 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 						if (customTurnArrowColor != 0) {
 							attrs.paint3.setColor(customTurnArrowColor);
 						}
+						if (routeWidth != 0) {
+							attrs.paint3.setStrokeWidth(routeWidth / 2);
+						}
 						canvas.drawPath(pth, attrs.paint3);
 						drawTurnArrow(canvas, matrix, x, y, px, py);
 						attrs.paint3.setColor(defaultTurnArrowColor);
 					} else {
 						px = x;
 						py = y;
-						x = (int) tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
-						y = (int) tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
+						x = tb.getPixXFromLatLon(o.getLatitude(), o.getLongitude());
+						y = tb.getPixYFromLatLon(o.getLatitude(), o.getLongitude());
 						if (first) {
 							pth.reset();
 							pth.moveTo(x, y);

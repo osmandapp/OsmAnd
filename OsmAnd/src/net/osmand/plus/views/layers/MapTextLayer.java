@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -18,7 +19,6 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -44,6 +44,10 @@ public class MapTextLayer extends OsmandMapLayer {
 		boolean isTextVisible();
 
 		boolean isFakeBoldText();
+	}
+
+	public MapTextLayer(@NonNull Context ctx) {
+		super(ctx);
 	}
 
 	public void putData(OsmandMapLayer ml, Collection<?> objects) {
@@ -161,22 +165,19 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView v) {
+	public void initLayer(@NonNull OsmandMapTileView v) {
 		this.view = v;
 		paintTextIcon = new Paint();
 		updateTextSize();
 		paintTextIcon.setTextAlign(Align.CENTER);
 		paintTextIcon.setAntiAlias(true);
-		Map<OsmandMapLayer, Collection<?>> textObjectsLoc = new TreeMap<>(new Comparator<OsmandMapLayer>() {
-			@Override
-			public int compare(OsmandMapLayer lhs, OsmandMapLayer rhs) {
-				if (view != null) {
-					float z1 = view.getZorder(lhs);
-					float z2 = view.getZorder(rhs);
-					return Float.compare(z1, z2);
-				}
-				return 0;
+		Map<OsmandMapLayer, Collection<?>> textObjectsLoc = new TreeMap<>((lhs, rhs) -> {
+			if (view != null) {
+				float z1 = view.getZorder(lhs);
+				float z2 = view.getZorder(rhs);
+				return Float.compare(z1, z2);
 			}
+			return 0;
 		});
 		textObjectsLoc.putAll(this.textObjects);
 		this.textObjects = textObjectsLoc;
@@ -196,7 +197,7 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	private void updateTextSize() {
-		float scale = view.getApplication().getSettings().TEXT_SCALE.get();
+		float scale = getTextScale();
 		float textSize = scale * TEXT_SIZE * view.getDensity();
 		if (paintTextIcon.getTextSize() != textSize) {
 			paintTextIcon.setTextSize(textSize);

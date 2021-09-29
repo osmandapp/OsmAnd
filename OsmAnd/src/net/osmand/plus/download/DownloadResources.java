@@ -217,19 +217,6 @@ public class DownloadResources extends DownloadResourceGroup {
 					if (item instanceof AssetIndexItem) {
 						File file = new File(((AssetIndexItem) item).getDestFile());
 						oldItemSize = file.length();
-					} else {
-						File fl = new File(item.getType().getDownloadFolder(app, item), sfName + "/_config.p");
-						if (fl.exists()) {
-							oldItemSize = fl.length();
-							try {
-								InputStream is = app.getAssets().open("voice/" + sfName + "/config.p");
-								if (is != null) {
-									itemSize = is.available();
-									is.close();
-								}
-							} catch (IOException e) {
-							}
-						}
 					}
 				} else if (item.getType() == DownloadActivityType.FONT_FILE) {
 					oldItemSize = new File(app.getAppPath(IndexConstants.FONT_INDEX_DIR), item.getTargetFileName()).length();
@@ -643,7 +630,7 @@ public class DownloadResources extends DownloadResourceGroup {
 					if (routeData && !shallowReader.containsRouteData()) {
 						continue;
 					}
-					if (shallowReader.containsMapData() && !isOsmandRegion(fileName)) {
+					if (shallowReader.containsMapData() && !isOsmandMapRegion(fileName)) {
 						if (routeData) {
 							if (shallowReader.containsRouteData(x31, y31, x31, y31, DETAILED_MAP_MIN_ZOOM)) {
 								res.add(fileName);
@@ -658,10 +645,11 @@ public class DownloadResources extends DownloadResourceGroup {
 		return res;
 	}
 
-	public boolean isOsmandRegion(@NonNull String mapFileName) {
+	public boolean isOsmandMapRegion(@NonNull String mapFileName) {
 		OsmandRegions osmandRegions = app.getRegions();
 		String downloadName = WorldRegion.getRegionDownloadName(mapFileName);
-		return osmandRegions.getRegionDataByDownloadName(downloadName) != null;
+		WorldRegion region = osmandRegions.getRegionDataByDownloadName(downloadName);
+		return region != null && (region.isRegionRoadsDownload() || region.isRegionMapDownload());
 	}
 
 	private static IndexItem getSmallestIndexItem(@NonNull IndexItem item1, @NonNull IndexItem item2) {

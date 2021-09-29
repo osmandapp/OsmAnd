@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -26,20 +27,35 @@ import java.util.Map;
 
 
 public class TileSourceManager {
+
 	private static final Log log = PlatformUtil.getLog(TileSourceManager.class);
+
 	public static final String RULE_YANDEX_TRAFFIC = "yandex_traffic";
+	public static final String MAPILLARY_VECTOR_TILE_EXT = ".pbf";
+	public static final String MAPILLARY_ACCESS_TOKEN = "MLY|4444816185556934|29475a355616c979409a5adc377a00fa";
+
 	private static final String RULE_WMS = "wms_tile";
 	private static final String RULE_TEMPLATE_1 = "template:1";
 	private static final String RND_ALG_WIKIMAPIA = "wikimapia";
 
+	private static final String MAPNIK_URL = "https://tile.osmand.net/hd/{0}/{1}/{2}.png";
+	private static final String CYCLE_URL = "https://b.tile.thunderforest.com/cycle/{0}/{1}/{2}.png?apikey=a778ae1a212641d38f46dc11f20ac116";
+	private static final String MAPILLARY_RASTER_URL = "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png";
+	private static final String MAPILLARY_VECTOR_URL = "https://tiles.mapillary.com/maps/vtp/mly1_public/2/{0}/{1}/{2}/?access_token="
+			+ MAPILLARY_ACCESS_TOKEN;
+
 	private static final TileSourceTemplate MAPNIK_SOURCE =
-			new TileSourceTemplate("OsmAnd (online tiles)", "https://tile.osmand.net/hd/{0}/{1}/{2}.png", ".png", 19, 1, 512, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+			new TileSourceTemplate("OsmAnd (online tiles)", MAPNIK_URL, ".png", 19,
+					1, 512, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$
 	private static final TileSourceTemplate CYCLE_MAP_SOURCE =
-			new TileSourceTemplate("CycleMap", "https://b.tile.thunderforest.com/cycle/{0}/{1}/{2}.png?apikey=a778ae1a212641d38f46dc11f20ac116", ".png", 16, 1, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$ 
+			new TileSourceTemplate("CycleMap", CYCLE_URL, ".png", 16, 1,
+					256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$
 	private static final TileSourceTemplate MAPILLARY_RASTER_SOURCE =
-			new TileSourceTemplate("Mapillary (raster tiles)", "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png", ".png", 16, 0, 256, 16, 32000);
+			new TileSourceTemplate("Mapillary (raster tiles)", MAPILLARY_RASTER_URL, ".png",
+					16, 0, 256, 16, 32000);
 	private static final TileSourceTemplate MAPILLARY_VECTOR_SOURCE =
-			new TileSourceTemplate("Mapillary (vector tiles)", "https://d25uarhxywzl1j.cloudfront.net/v0.1/{0}/{1}/{2}.mvt", ".mvt", 21, 17, 256, 16, 3200);
+			new TileSourceTemplate("Mapillary (vector tiles)", MAPILLARY_VECTOR_URL,
+					MAPILLARY_VECTOR_TILE_EXT, 21, 13, 256, 16, 3200);
 
 	static {
 		MAPILLARY_RASTER_SOURCE.setExpirationTimeMinutes(60 * 24);
@@ -441,33 +457,6 @@ public class TileSourceManager {
 		}
 	}
 	
-	private static Map<String, String> readMetaInfoFile(File dir) {
-		Map<String, String> keyValueMap = new LinkedHashMap<String, String>();
-		try {
-
-			File metainfo = new File(dir, ".metainfo"); //$NON-NLS-1$
-			if (metainfo.exists()) {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(
-						new FileInputStream(metainfo), "UTF-8")); //$NON-NLS-1$
-				String line;
-				String key = null;
-				while ((line = reader.readLine()) != null) {
-					line = line.trim();
-					if (line.startsWith("[")) {
-						key = line.substring(1, line.length() - 1).toLowerCase();
-					} else if (key != null && line.length() > 0) {
-						keyValueMap.put(key, line);
-						key = null;
-					}
-				}
-				reader.close();
-			}
-		} catch (IOException e) {
-			log.error("Error reading metainfo file " + dir.getAbsolutePath(), e);
-		}
-		return keyValueMap;
-	}	
-	
 	private static int parseInt(Map<String, String> attributes, String value, int def){
 		String val = attributes.get(value);
 		if(val == null){
@@ -482,12 +471,12 @@ public class TileSourceManager {
 	
 	public static void createMetaInfoFile(File dir, TileSourceTemplate tm, boolean override) throws IOException {
 		File metainfo = new File(dir, ".metainfo"); //$NON-NLS-1$
-		Map<String, String> properties = new LinkedHashMap<String, String>();
+		Map<String, String> properties = new LinkedHashMap<>();
 
 		if (!Algorithms.isEmpty(tm.getRule())) {
 			properties.put("rule", tm.getRule());
 		}
-		if(tm.getUrlTemplate() != null) {
+		if (tm.getUrlTemplate() != null) {
 			properties.put("url_template", tm.getUrlTemplate());
 		}
 		if (!Algorithms.isEmpty(tm.getReferer())) {
@@ -531,16 +520,16 @@ public class TileSourceManager {
 	
 	/**
 	 * @param dir
-	 * @return doesn't return null 
+	 * @return nonnull
 	 */
 	public static TileSourceTemplate createTileSourceTemplate(File dir) {
 		// read metainfo file
 		Map<String, String> metaInfo = readMetaInfoFile(dir);
 		boolean ruleAcceptable = true;
-		if(!metaInfo.isEmpty()){
+		if (!metaInfo.isEmpty()){
 			metaInfo.put("name", dir.getName());
 			TileSourceTemplate template = createTileSourceTemplate(metaInfo);
-			if(template != null){
+			if (template != null){
 				return template;
 			}
 			ruleAcceptable = false;
@@ -567,6 +556,32 @@ public class TileSourceManager {
 				ext, 18, 1, 256, 16, 20000); //$NON-NLS-1$
 		template.setRuleAcceptable(ruleAcceptable);
 		return template;
+	}
+
+	private static Map<String, String> readMetaInfoFile(File dir) {
+		Map<String, String> keyValueMap = new LinkedHashMap<>();
+		try {
+			File metainfo = new File(dir, ".metainfo"); //$NON-NLS-1$
+			if (metainfo.exists()) {
+				BufferedReader reader = new BufferedReader(new InputStreamReader(
+						new FileInputStream(metainfo), StandardCharsets.UTF_8));
+				String line;
+				String key = null;
+				while ((line = reader.readLine()) != null) {
+					line = line.trim();
+					if (line.startsWith("[")) {
+						key = line.substring(1, line.length() - 1).toLowerCase();
+					} else if (key != null && line.length() > 0) {
+						keyValueMap.put(key, line);
+						key = null;
+					}
+				}
+				reader.close();
+			}
+		} catch (IOException e) {
+			log.error("Error reading metainfo file " + dir.getAbsolutePath(), e);
+		}
+		return keyValueMap;
 	}
 
 	private static String findOneTile(File dir) {
@@ -597,9 +612,8 @@ public class TileSourceManager {
 	}
 	
 	public static java.util.List<TileSourceTemplate> getKnownSourceTemplates() {
-		java.util.List<TileSourceTemplate> list = new ArrayList<TileSourceTemplate>();
+		java.util.List<TileSourceTemplate> list = new ArrayList<>();
 		list.add(getMapnikSource());
-		list.add(getMapillaryRasterSource());
 		list.add(getMapillaryVectorSource());
 		return list;
 	}
@@ -607,7 +621,6 @@ public class TileSourceManager {
 	public static TileSourceTemplate getMapnikSource(){
 		return MAPNIK_SOURCE;
 	}
-
 
 	public static TileSourceTemplate getMapillaryRasterSource() {
 		return MAPILLARY_RASTER_SOURCE;
@@ -618,7 +631,7 @@ public class TileSourceManager {
 	}
 
 	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl, boolean https) {
-		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
+		final List<TileSourceTemplate> templates = new ArrayList<>();
 		try {
 			URLConnection connection = NetworkUtils.getHttpURLConnection((https ? "https" : "http")
 					+ "://test.osmand.net/tile_sources?" + versionAsUrl);
@@ -640,10 +653,7 @@ public class TileSourceManager {
 					}
 				}
 			}
-		} catch (IOException e) {
-			log.error("Exception while downloading tile sources", e);
-			return null;
-		} catch (XmlPullParserException e) {
+		} catch (IOException | XmlPullParserException e) {
 			log.error("Exception while downloading tile sources", e);
 			return null;
 		}
@@ -653,7 +663,7 @@ public class TileSourceManager {
 	public static TileSourceTemplate createTileSourceTemplate(Map<String, String> attrs) {
 		TileSourceTemplate template;
 		String rule = attrs.get("rule");
-		if (rule == null){
+		if (rule == null) {
 			template = createSimpleTileSourceTemplate(attrs, false);
 		} else if (RULE_TEMPLATE_1.equalsIgnoreCase(rule)) {
 			template = createSimpleTileSourceTemplate(attrs, false);
@@ -664,7 +674,7 @@ public class TileSourceManager {
 		} else {
 			return null;
 		}
-		if(template != null){
+		if (template != null){
 			template.setRule(rule);
 		}
 		return template;
@@ -691,8 +701,6 @@ public class TileSourceManager {
 		templ.setRandoms(randoms);
 		return templ;
 	}
-	
-
 
 	private static TileSourceTemplate createSimpleTileSourceTemplate(Map<String, String> attributes, boolean ignoreTemplate) {
 		String name = attributes.get("name");

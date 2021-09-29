@@ -9,11 +9,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
+import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
@@ -151,14 +154,14 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayers(MapActivity activity) {
+	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		if (terrainLayer != null) {
-			activity.getMapView().removeLayer(terrainLayer);
+			app.getOsmandMap().getMapView().removeLayer(terrainLayer);
 		}
 		if (settings.TERRAIN.get()) {
-			terrainLayer = new TerrainLayer(activity, this);
-
-			activity.getMapView().addLayer(terrainLayer, 0.6f);
+			terrainLayer = new TerrainLayer(context, this);
+			app.getOsmandMap().getMapView().addLayer(terrainLayer, 0.6f);
 		}
 	}
 
@@ -248,41 +251,38 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (settings.TERRAIN.get() && isActive()) {
-			removeTerrainLayer(mapView, activity);
-			registerLayers(activity);
+			removeTerrainLayer(mapView);
+			registerLayers(context, mapActivity);
 		} else {
-			removeTerrainLayer(mapView, activity);
+			removeTerrainLayer(mapView);
 		}
 	}
 
-	private void removeTerrainLayer(OsmandMapTileView mapView, MapActivity activity) {
+	private void removeTerrainLayer(@NonNull OsmandMapTileView mapView) {
 		if (terrainLayer != null) {
 			mapView.removeLayer(terrainLayer);
 			terrainLayer = null;
-			activity.refreshMap();
+			mapView.refreshMap();
 		}
 	}
 
 	@Override
-	public void registerLayerContextMenuActions(OsmandMapTileView mapView,
-	                                            ContextMenuAdapter adapter,
-	                                            MapActivity mapActivity) {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
 		if (isLocked()) {
 			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
 					TERRAIN,
 					R.string.shared_string_terrain,
 					R.string.contour_lines_hillshades_slope);
 		} else {
-			createContextMenuItems(mapView, adapter, mapActivity);
+			createContextMenuItems(adapter, mapActivity);
 		}
 	}
 
-	private void createContextMenuItems(OsmandMapTileView mapView,
-	                                    ContextMenuAdapter adapter,
-	                                    MapActivity mapActivity) {
-		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
+	private void createContextMenuItems(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
@@ -342,7 +342,7 @@ public class SRTMPlugin extends OsmandPlugin {
 								item.setSelected(selected);
 								adapter.notifyDataSetChanged();
 							}
-							updateLayers(mapView, mapActivity);
+							updateLayers(mapActivity, mapActivity);
 							mapActivity.refreshMapComplete();
 						}
 					});

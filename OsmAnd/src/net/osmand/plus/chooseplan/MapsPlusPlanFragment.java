@@ -1,5 +1,7 @@
 package net.osmand.plus.chooseplan;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
@@ -19,6 +21,14 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 
 	public static void showInstance(@NonNull FragmentActivity activity) {
 		MapsPlusPlanFragment fragment = new MapsPlusPlanFragment();
+		fragment.show(activity.getSupportFragmentManager(), TAG);
+	}
+
+	public static void showInstance(@NonNull FragmentActivity activity, @NonNull String selectedButtonId) {
+		Bundle args = new Bundle();
+		args.putString(SELECTED_PRICE_BTN_ID, selectedButtonId);
+		MapsPlusPlanFragment fragment = new MapsPlusPlanFragment();
+		fragment.setArguments(args);
 		fragment.show(activity.getSupportFragmentManager(), TAG);
 	}
 
@@ -57,8 +67,8 @@ public class MapsPlusPlanFragment extends SelectedPlanFragment {
 	}
 
 	public static List<PriceButton<?>> collectPriceButtons(OsmandApplication app,
-	                                                       InAppPurchaseHelper purchaseHelper,
-	                                                       boolean nightMode) {
+														   InAppPurchaseHelper purchaseHelper,
+														   boolean nightMode) {
 		List<InAppSubscription> subscriptions = getVisibleSubscriptions(app, purchaseHelper);
 		List<PriceButton<?>> priceButtons = new ArrayList<>(
 				PurchasingUtils.collectSubscriptionButtons(app, purchaseHelper, subscriptions, nightMode));

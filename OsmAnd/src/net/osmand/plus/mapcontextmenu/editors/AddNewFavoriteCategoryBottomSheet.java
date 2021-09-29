@@ -216,7 +216,8 @@ public class AddNewFavoriteCategoryBottomSheet extends MenuBottomSheetDialogFrag
 			colors.add(color);
 		}
 		ListStringPreference colorsListPref = requiredMyApplication().getSettings().CUSTOM_TRACK_COLORS;
-		colorsCard = new ColorsCard(mapActivity, categoryColor, this, colors, colorsListPref, null);
+		colorsCard = new ColorsCard(mapActivity, null, this, categoryColor, colors,
+				colorsListPref, true);
 		colorsCard.setListener(this);
 		LinearLayout colorsCardContainer = view.findViewById(R.id.colors_card_container);
 		colorsCardContainer.addView(colorsCard.build(view.getContext()));

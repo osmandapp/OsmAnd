@@ -1436,7 +1436,7 @@
 \nDługość %2$s</string>
     <string name="tips_and_tricks_descr">Wyświetla najczęściej zadawane pytania, ostatnie zmiany i inne.</string>
     <string name="routing_settings_2">Nawigacja</string>
-    <string name="general_settings_2">Ustawienia globalne</string>
+    <string name="general_settings_2">Ustawienia ogólne</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_enable">Włącz</string>
     <string name="shared_string_disable">Wyłącz</string>
@@ -4321,4 +4321,10 @@
     <string name="routeInfo_roadClass_description">Kolorowanie trasy lub linii toru zgodnie z klasyfikacją dróg.</string>
     <string name="add_group_to_markers">Dodaj grupę do listy znaczników</string>
     <string name="remove_group_from_markers">Usuń grupę z listy znaczników</string>
+    <string name="routeInfo_tracktype_description">Kolorowanie trasy lub linii toru zgodnie z stanem dróg na podstawie ich składu powierzchni. Zazwyczaj stosuje się je do dróg, na których główna sieć drogowa składa się z dróg nieutwardzonych.</string>
+    <string name="start_point">Uruchom</string>
+    <string name="mapillary_menu_filter_description_new">Filtrowanie obrazów według daty lub typu. Aktywne tylko w zbliżeniu.</string>
+    <string name="service_is_not_available_please_try_later">Usługa nie jest dostępna, spróbuj później</string>
+    <string name="shared_string_files">Pliki</string>
+    <string name="travel_route_types">Typy tras</string>
 </resources>

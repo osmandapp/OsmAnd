@@ -1,5 +1,8 @@
 package net.osmand.aidl;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -15,10 +18,11 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.AidlMapLayer;
 import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -26,8 +30,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 
 public class ConnectedApp implements Comparable<ConnectedApp> {
 
@@ -46,17 +48,17 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	static final String PACK_KEY = "pack";
 	static final String ENABLED_KEY = "enabled";
 
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
-	private Map<String, AidlMapWidgetWrapper> widgets = new ConcurrentHashMap<>();
-	private Map<String, TextInfoWidget> widgetControls = new ConcurrentHashMap<>();
+	private final Map<String, AidlMapWidgetWrapper> widgets = new ConcurrentHashMap<>();
+	private final Map<String, TextInfoWidget> widgetControls = new ConcurrentHashMap<>();
 
-	private Map<String, AidlMapLayerWrapper> layers = new ConcurrentHashMap<>();
-	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
+	private final Map<String, AidlMapLayerWrapper> layers = new ConcurrentHashMap<>();
+	private final Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 
-	private CommonPreference<Boolean> layersPref;
+	private final CommonPreference<Boolean> layersPref;
 
-	private String pack;
+	private final String pack;
 	private String name;
 
 	private Drawable icon;
@@ -113,14 +115,16 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		enabled = !enabled;
 	}
 
-	void registerMapLayers(@NonNull MapActivity mapActivity) {
+	void registerMapLayers(@NonNull Context context) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		for (AidlMapLayerWrapper layer : layers.values()) {
 			OsmandMapLayer mapLayer = mapLayers.get(layer.getId());
 			if (mapLayer != null) {
-				mapActivity.getMapView().removeLayer(mapLayer);
+				mapView.removeLayer(mapLayer);
 			}
-			mapLayer = new AidlMapLayer(mapActivity, layer, pack);
-			mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
+			mapLayer = new AidlMapLayer(context, layer, pack);
+			mapView.addLayer(mapLayer, layer.getZOrder());
 			mapLayers.put(layer.getId(), mapLayer);
 		}
 	}
@@ -166,7 +170,7 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 				.createItem());
 	}
 
-	void registerWidgetControls(MapActivity mapActivity) {
+	void registerWidgetControls(@NonNull MapActivity mapActivity) {
 		for (AidlMapWidgetWrapper widget : widgets.values()) {
 			MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (layer != null) {
@@ -223,13 +227,10 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		};
 		control.updateInfo(null);
 
-		control.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AidlMapWidgetWrapper widget = widgets.get(widgetId);
-				if (widget != null && widget.getIntentOnClick() != null) {
-					app.startActivity(widget.getIntentOnClick());
-				}
+		control.setOnClickListener(v -> {
+			AidlMapWidgetWrapper widget = widgets.get(widgetId);
+			if (widget != null && widget.getIntentOnClick() != null) {
+				app.startActivity(widget.getIntentOnClick());
 			}
 		});
 		return control;

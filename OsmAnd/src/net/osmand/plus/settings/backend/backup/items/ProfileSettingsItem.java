@@ -268,35 +268,32 @@ public class ProfileSettingsItem extends OsmandSettingsItem {
 
 			@Override
 			public void readPreferencesFromJson(final JSONObject json) {
-				getSettings().getContext().runInUIThread(new Runnable() {
-					@Override
-					public void run() {
-						OsmandSettings settings = getSettings();
-						Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
-						Iterator<String> iter = json.keys();
-						while (iter.hasNext()) {
-							String key = iter.next();
-							OsmandPreference<?> p = prefs.get(key);
-							if (p == null) {
-								if (OsmandSettings.isRoutingPreference(key)) {
-									p = settings.registerStringPreference(key, "");
-								}
+				getSettings().getContext().runInUIThread(() -> {
+					OsmandSettings settings = getSettings();
+					Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
+					Iterator<String> iterator = json.keys();
+					while (iterator.hasNext()) {
+						String key = iterator.next();
+						OsmandPreference<?> p = prefs.get(key);
+						if (p == null) {
+							if (OsmandSettings.isRoutingPreference(key)) {
+								p = settings.registerStringPreference(key, "");
 							}
-							if (p != null) {
-								try {
-									readPreferenceFromJson(p, json);
-									if (OsmandSettings.isRoutingPreference(p.getId())) {
-										if (p.getId().endsWith(GeneralRouter.USE_SHORTEST_WAY)) {
-											settings.FAST_ROUTE_MODE.setModeValue(appMode,
-													!settings.getCustomRoutingBooleanProperty(GeneralRouter.USE_SHORTEST_WAY, false).getModeValue(appMode));
-										}
+						}
+						if (p != null) {
+							try {
+								readPreferenceFromJson(p, json);
+								if (OsmandSettings.isRoutingPreference(p.getId())) {
+									if (p.getId().endsWith(GeneralRouter.USE_SHORTEST_WAY)) {
+										settings.FAST_ROUTE_MODE.setModeValue(appMode,
+												!settings.getCustomRoutingBooleanProperty(GeneralRouter.USE_SHORTEST_WAY, false).getModeValue(appMode));
 									}
-								} catch (Exception e) {
-									SettingsHelper.LOG.error("Failed to read preference: " + key, e);
 								}
-							} else {
-								SettingsHelper.LOG.warn("No preference while importing settings: " + key);
+							} catch (Exception e) {
+								SettingsHelper.LOG.error("Failed to read preference: " + key, e);
 							}
+						} else {
+							SettingsHelper.LOG.warn("No preference while importing settings: " + key);
 						}
 					}
 				});

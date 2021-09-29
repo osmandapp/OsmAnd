@@ -133,7 +133,7 @@ public class ConfigureMapMenu {
 		return nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
-	private void createLayersItems(MapActivity activity, ContextMenuAdapter adapter, boolean nightMode) {
+	private void createLayersItems(@NonNull MapActivity activity, @NonNull ContextMenuAdapter adapter, boolean nightMode) {
 		OsmandApplication app = activity.getMyApplication();
 		OsmandSettings settings = app.getSettings();
 		int selectedProfileColor = settings.getApplicationMode().getProfileColor(nightMode);
@@ -220,7 +220,7 @@ public class ConfigureMapMenu {
 				.setItemDeleteAction(makeDeleteAction(settings.MAP_ONLINE_DATA, settings.MAP_TILE_SOURCES))
 				.setListener(listener).createItem());
 
-		OsmandPlugin.registerLayerContextMenu(activity.getMapView(), adapter, activity);
+		OsmandPlugin.registerLayerContextMenu(adapter, activity);
 		app.getAidlApi().registerLayerContextMenu(adapter, activity);
 	}
 
@@ -248,6 +248,11 @@ public class ConfigureMapMenu {
 				}
 			}
 			customRules.remove(property);
+		}
+		OsmandApplication app = activity.getMyApplication();
+		ResourceManager manager = app.getResourceManager();
+		if (OsmandPlugin.isDevelopment() && !Algorithms.isEmpty(manager.getTravelMapRepositories())) {
+			adapter.addItem(createTravelRoutesItem(activity, nightMode));
 		}
 	}
 
@@ -328,6 +333,42 @@ public class ConfigureMapMenu {
 						if (item != null) {
 							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
 							item.setDescription(app.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
+							adapter.notifyDataSetChanged();
+						}
+						activity.refreshMap();
+						activity.updateLayers();
+						return false;
+					}
+				}).createItem();
+	}
+
+	private ContextMenuItem createTravelRoutesItem(@NonNull MapActivity activity, boolean nightMode) {
+		OsmandSettings settings = activity.getMyApplication().getSettings();
+		boolean selected = settings.SHOW_TRAVEL.get();
+		return new ContextMenuItem.ItemBuilder()
+				.setId(ROUTES_ID + TRAVEL_ROUTES)
+				.setTitle(activity.getString(R.string.travel_routes))
+				.setIcon(getIconIdForAttr(TRAVEL_ROUTES))
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setSelected(selected)
+				.setColor(selected ? settings.APPLICATION_MODE.get().getProfileColor(nightMode) : null)
+				.setDescription(activity.getString(selected ? R.string.shared_string_enabled : R.string.shared_string_disabled))
+				.setListener(new OnRowItemClick() {
+
+					@Override
+					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+						activity.getDashboard().setDashboardVisibility(true, DashboardType.TRAVEL_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
+						return false;
+					}
+
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+						settings.SHOW_TRAVEL.set(isChecked);
+						ContextMenuItem item = adapter.getItem(position);
+						if (item != null) {
+							item.setSelected(isChecked);
+							item.setColor(activity, isChecked ? R.color.osmand_orange : INVALID_ID);
+							item.setDescription(activity.getString(isChecked ? R.string.shared_string_enabled : R.string.shared_string_disabled));
 							adapter.notifyDataSetChanged();
 						}
 						activity.refreshMap();
@@ -562,7 +603,7 @@ public class ConfigureMapMenu {
 						}
 						a.notifyDataSetInvalidated();
 						activity.refreshMapComplete();
-						activity.getMapLayers().updateLayers(activity.getMapView());
+						activity.getMapLayers().updateLayers(activity);
 					} else {
 						if (UI_CATEGORY_DETAILS.equals(category)) {
 							DetailsBottomSheet.showInstance(activity.getSupportFragmentManager(), ps, prefs, a, adapter, pos);

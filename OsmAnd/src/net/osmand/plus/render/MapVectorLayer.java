@@ -22,13 +22,15 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
+import androidx.annotation.NonNull;
+
 public class MapVectorLayer extends BaseMapLayer {
 
 	private OsmandMapTileView view;
 	private ResourceManager resourceManager;
 	private Paint paintImg;
 
-	private RectF destImage = new RectF();
+	private final RectF destImage = new RectF();
 	private final MapTileLayer tileLayer;
 	private boolean visible = false;
 	private boolean oldRender = false;
@@ -37,7 +39,8 @@ public class MapVectorLayer extends BaseMapLayer {
 	private String cachedOverlay;
 	private Integer cachedOverlayTransparency;
 
-	public MapVectorLayer(MapTileLayer tileLayer, boolean oldRender) {
+	public MapVectorLayer(@NonNull MapTileLayer tileLayer, boolean oldRender) {
+		super(tileLayer.getContext());
 		this.tileLayer = tileLayer;
 		this.oldRender = oldRender;
 	}
@@ -52,7 +55,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		resourceManager = view.getApplication().getResourceManager();
 		paintImg = new Paint();
@@ -148,7 +151,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			mapRenderer.setAzimuth(-tilesRect.getRotate());
 			mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomAnimation() + tilesRect
 					.getZoomFloatPart()));
-			float zoomMagnifier = st.MAP_DENSITY.get();
+			float zoomMagnifier = getMapDensity();
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 		} else {
 			if (!view.isZooming()) {

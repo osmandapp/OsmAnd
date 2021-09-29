@@ -280,13 +280,13 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 			if (!onlyGraphs) {
 				((ImageView) view.findViewById(R.id.average_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_speed));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_speed_16));
 				((ImageView) view.findViewById(R.id.max_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_max_speed));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_max_speed_16));
 				((ImageView) view.findViewById(R.id.time_moving_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
 				((ImageView) view.findViewById(R.id.distance_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
 
 				String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
 				String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
@@ -352,13 +352,13 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 			if (!onlyGraphs) {
 				((ImageView) view.findViewById(R.id.average_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average_16));
 				((ImageView) view.findViewById(R.id.range_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average_16));
 				((ImageView) view.findViewById(R.id.ascent_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_ascent));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_ascent_16));
 				((ImageView) view.findViewById(R.id.descent_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_descent));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_descent_16));
 
 				String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
 				String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
@@ -419,13 +419,13 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 			if (!onlyGraphs) {
 				((ImageView) view.findViewById(R.id.distance_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
 				((ImageView) view.findViewById(R.id.duration_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span_16));
 				((ImageView) view.findViewById(R.id.start_time_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_start));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_start_16));
 				((ImageView) view.findViewById(R.id.end_time_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_end));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_end_16));
 
 				view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 					@Override

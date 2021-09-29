@@ -1237,7 +1237,7 @@
     <string name="rendering_attr_hideText_name">Text</string>
     <string name="rendering_attr_hideWoodScrubs_name">Lesy a křoviny</string>
     <string name="rendering_attr_showSurfaces_name">Zobrazit povrch cesty</string>
-    <string name="rendering_attr_showCycleRoutes_name">Zobrazit cyklostezky</string>
+    <string name="rendering_attr_showCycleRoutes_name">Cyklostezky</string>
     <string name="forward">Vpřed</string>
     <string name="home">Domovská stránka</string>
     <string name="keep_navigation_service">Ponechat</string>
@@ -1275,7 +1275,7 @@
     <string name="lang_zh_tw">Čínština (tradiční)</string>
     <string name="rendering_attr_alpineHiking_name">Vysokohorská turistika (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Vykreslovat cesty podle stupnice SAC.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy a značky</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Turistické trasy</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Vykreslovat cesty podle OSMC značení.</string>
     <string name="arrival_distance_factor_early">Brzy</string>
     <string name="arrival_distance_factor_normally">Normální</string>
@@ -1542,8 +1542,8 @@
     <string name="shared_string_show_details">Zobrazit detaily</string>
     <string name="osm_edit_context_menu_delete">Smazat OSM změnu</string>
     <string name="rendering_value_disabled_name">Vypnuto</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Zbarvení podle příslušnosti k síti</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Zbarvení podle turistické značky OSMC</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Příslušnost k síti</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
     <string name="local_recordings_delete_all_confirm">Opravdu chcete smazat %1$d poznámek\?</string>
     <string name="download_wikipedia_maps">Wikipedie</string>
     <string name="rendering_value_red_name">Červená</string>
@@ -1910,7 +1910,7 @@
     <string name="map_markers">Mapové značky</string>
     <string name="map_marker">Mapová značka</string>
     <string name="consider_turning_polygons_off">Doporučujeme vypnout vykreslování polygonů.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Zobrazit trasy pro horská kola</string>
+    <string name="rendering_attr_showMtbRoutes_name">Trasy pro horská kola</string>
     <string name="storage_permission_restart_is_required">Aplikace nyní smí zapisovat na externí úložiště, ale je potřeba její restart.</string>
     <string name="file_name_containes_illegal_char">Nepovolený znak v názvu souboru</string>
     <string name="access_no_destination">Modul usnadnění: Cíl není nastaven</string>
@@ -4110,7 +4110,7 @@
     <string name="update_all_maps_added">Aktualizovat všechny mapy přidané do %1$s\?</string>
     <string name="shared_string_feet">stopy</string>
     <string name="srtm_unit_format">Varianta vrstevnicových jednotek</string>
-    <string name="srtm_download_list_help_message">OsmAnd poskytuje vrstevnicová data v metrech a stopách. Pro změnu formátu budete muset soubor znovu stáhnout.</string>
+    <string name="srtm_download_list_help_message">OsmAnd poskytuje data vrstevnic v metrech a stopách. Pro změnu formátu budete muset soubor znovu stáhnout.</string>
     <string name="srtm_download_single_help_message">Zvolte prosím variantu. Pro změnu formátu budete muset soubor znovu stáhnout.</string>
     <string name="exit_number">Číslo výjezdu</string>
     <string name="announce_when_exceeded">Hlásit při překročení</string>
@@ -4199,4 +4199,17 @@
 \n • Aktualizace OsmAnd Live přesunuty do sekce \"Stáhnout mapy &gt; Aktualizace\"
 \n
 \n</string>
+    <string name="walking_route_osmc_description">Obarví trasy podle jejich individuální lokální barvy (pokud je nastavena v OpenStreetMap) a typu (mezinárodní, regionální, lokální).</string>
+    <string name="routes_color_by_type">Obarvit trasy podle…</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Obarví trasy podle jejich individuální lokální barvy (pokud je nastavena v OpenStreetMap) a turistického značení.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Obarví trasy podle síťové příslušnosti.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Obarví trasy podle typu sítě (mezinárodní, regionální, lokální).</string>
+    <string name="travel_routes">Cestovní trasy</string>
+    <string name="remove_group_from_markers">Odstranit skupinu ze seznamu mapových značek</string>
+    <string name="start_point">Start</string>
+    <string name="add_group_to_markers">Přidat skupinu do seznamu mapových značek</string>
+    <string name="mapillary_menu_filter_description_new">Filtrovat obrázky podle data nebo typu. Aktivní pouze při vysokém přiblížení.</string>
+    <string name="service_is_not_available_please_try_later">Služba není dostupná, zkuste to prosím později</string>
+    <string name="shared_string_files">Soubory</string>
+    <string name="travel_route_types">Typy tras</string>
 </resources>

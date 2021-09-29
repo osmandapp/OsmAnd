@@ -8,8 +8,11 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.routing.ColoringType;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class TrackDrawInfo {
 
@@ -34,8 +37,9 @@ public class TrackDrawInfo {
 	private boolean showStartFinish = true;
 	private boolean currentRecording;
 
-	public TrackDrawInfo(boolean currentRecording) {
+	public TrackDrawInfo(@NonNull OsmandApplication app, boolean currentRecording) {
 		this.currentRecording = currentRecording;
+		initCurrentTrackParams(app);
 	}
 
 	public TrackDrawInfo(Bundle bundle) {
@@ -48,6 +52,16 @@ public class TrackDrawInfo {
 		}
 		this.filePath = filePath;
 		this.currentRecording = currentRecording;
+	}
+
+	private void initCurrentTrackParams(@NonNull OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
+		width = settings.CURRENT_TRACK_WIDTH.get();
+		color = settings.CURRENT_TRACK_COLOR.get();
+		coloringType = settings.CURRENT_TRACK_COLORING_TYPE.get();
+		routeInfoAttribute = settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.get();
+		showArrows = settings.CURRENT_TRACK_SHOW_ARROWS.get();
+		showStartFinish = settings.CURRENT_TRACK_SHOW_START_FINISH.get();
 	}
 
 	public void updateParams(@NonNull GpxDataItem gpxDataItem) {
@@ -139,16 +153,26 @@ public class TrackDrawInfo {
 		return currentRecording;
 	}
 
-	public void resetParams() {
-		width = null;
-		color = 0;
-		coloringType = ColoringType.getNonNullTrackColoringTypeByName(null);
-		routeInfoAttribute = ColoringType.getRouteInfoAttribute(null);
-		splitType = GpxSplitType.NO_SPLIT.getType();
-		splitInterval = 0;
-		joinSegments = false;
-		showArrows = false;
-		showStartFinish = true;
+	public void resetParams(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile) {
+		if (currentRecording) {
+			OsmandSettings settings = app.getSettings();
+			settings.CURRENT_TRACK_COLOR.resetToDefault();
+			settings.CURRENT_TRACK_WIDTH.resetToDefault();
+			settings.CURRENT_TRACK_COLORING_TYPE.resetToDefault();
+			settings.CURRENT_TRACK_ROUTE_INFO_ATTRIBUTE.resetToDefault();
+			settings.CURRENT_TRACK_SHOW_ARROWS.resetToDefault();
+			settings.CURRENT_TRACK_SHOW_START_FINISH.resetToDefault();
+			initCurrentTrackParams(app);
+		} else {
+			color = gpxFile.getColor(0);
+			width = gpxFile.getWidth(null);
+			showArrows = gpxFile.isShowArrows();
+			showStartFinish = gpxFile.isShowStartFinish();
+			splitInterval = gpxFile.getSplitInterval();
+			splitType = GpxSplitType.getSplitTypeByName(gpxFile.getSplitType()).getType();
+			coloringType = ColoringType.getNonNullTrackColoringTypeByName(gpxFile.getColoringType());
+			routeInfoAttribute = ColoringType.getRouteInfoAttribute(gpxFile.getColoringType());
+		}
 	}
 
 	private void readBundle(@NonNull Bundle bundle) {

@@ -32,9 +32,13 @@ import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static java.util.Calendar.DAY_OF_YEAR;
+import static java.util.Calendar.ERA;
+import static java.util.Calendar.YEAR;
 import static net.osmand.data.PointDescription.getLocationOlcName;
 
 public class OsmAndFormatter {
@@ -128,7 +132,7 @@ public class OsmAndFormatter {
 		} else {
 			calendar.setTimeInMillis(seconds * 1000);
 		}
-		if (org.apache.commons.lang3.time.DateUtils.isSameDay(calendar, Calendar.getInstance())) {
+		if (isSameDay(calendar, Calendar.getInstance())) {
 			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime());
 		} else {
 			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime()) + " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
@@ -402,6 +406,19 @@ public class OsmAndFormatter {
 		}
 	}
 
+	public static boolean isSameDay(@NonNull Date firstDate, @NonNull Date secondDate) {
+		Calendar firstCal = Calendar.getInstance();
+		firstCal.setTime(firstDate);
+		Calendar secondCal = Calendar.getInstance();
+		secondCal.setTime(secondDate);
+		return isSameDay(firstCal, secondCal);
+	}
+
+	public static boolean isSameDay(@NonNull Calendar first, @NonNull Calendar second) {
+		return first.get(ERA) == second.get(ERA)
+				&& first.get(YEAR) == second.get(YEAR)
+				&& first.get(DAY_OF_YEAR) == second.get(DAY_OF_YEAR);
+	}
 
 	public static String toPublicString(CityType t, Context ctx) {
 		switch (t) {

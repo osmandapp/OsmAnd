@@ -74,7 +74,7 @@ public class DeleteOldFilesCommand extends BaseDeleteFilesCommand {
 	}
 
 	private OnRequestResultListener getDeleteOldFilesListener() {
-		return (resultJson, error) -> {
+		return (resultJson, error, resultCode) -> {
 			int status;
 			String message;
 			List<RemoteFile> remoteFiles = new ArrayList<>();
