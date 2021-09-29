@@ -113,7 +113,7 @@ public class GeneralRouter implements VehicleRouter {
 		BICYCLE,
 		BOAT,
 		PUBLIC_TRANSPORT,
-		HORSEBACK_RIDING
+		HORSEBACKRIDING
 	}
 	
 	public enum RoutingParameterType {
