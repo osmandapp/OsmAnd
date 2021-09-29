@@ -42,7 +42,7 @@ public class RoutingDataObject extends ProfileDataObject {
 		SKI(R.string.routing_profile_ski, R.drawable.ic_action_skiing),
 		PUBLIC_TRANSPORT(R.string.app_mode_public_transport, R.drawable.ic_action_bus_dark),
 		BOAT(R.string.app_mode_boat, R.drawable.ic_action_sail_boat_dark),
-		HORSEBACKRIDING(R.string.horseback_riding, R.drawable.ic_action_horse),
+		HORSEBACK_RIDING(R.string.horseback_riding, R.drawable.ic_action_horse),
 		GEOCODING(R.string.routing_profile_geocoding, R.drawable.ic_action_world_globe);
 
 		int stringRes;

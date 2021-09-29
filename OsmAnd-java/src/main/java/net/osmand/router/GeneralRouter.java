@@ -1,5 +1,12 @@
 package net.osmand.router;
 
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,12 +22,6 @@ import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.TLongHashSet;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
-import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.router.BinaryRoutePlanner.RouteSegment;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 public class GeneralRouter implements VehicleRouter {
 	
@@ -112,7 +113,7 @@ public class GeneralRouter implements VehicleRouter {
 		BICYCLE,
 		BOAT,
 		PUBLIC_TRANSPORT,
-		HORSEBACKRIDING
+		HORSEBACK_RIDING
 	}
 	
 	public enum RoutingParameterType {
