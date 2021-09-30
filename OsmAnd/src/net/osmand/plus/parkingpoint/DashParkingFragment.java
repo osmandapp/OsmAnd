@@ -116,7 +116,7 @@ public class DashParkingFragment extends DashLocationFragment {
 			}
 			timeLeft.setVisibility(View.VISIBLE);
 		} else {
-			descr = getString(R.string.parking_place);
+			descr = getString(R.string.osmand_parking_position_name);
 			timeLeft.setText("");
 			timeLeft.setVisibility(View.GONE);
 		}
