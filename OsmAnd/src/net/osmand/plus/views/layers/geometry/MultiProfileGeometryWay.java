@@ -162,8 +162,8 @@ public class MultiProfileGeometryWay extends GeometryWay<MultiProfileGeometryWay
 
 	@Override
 	protected boolean shouldAddLocation(TByteArrayList simplification, double leftLon, double rightLon,
-										double bottomLat, double topLat, GeometryWayProvider provider,
-										int currLocationIdx) {
+	                                    double bottomLat, double topLat, GeometryWayProvider provider,
+	                                    int previousVisible, int currLocationIdx) {
 		double currLat = provider.getLatitude(currLocationIdx);
 		double currLon = provider.getLongitude(currLocationIdx);
 
