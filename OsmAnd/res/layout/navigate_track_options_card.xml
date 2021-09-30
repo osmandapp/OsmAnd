@@ -19,17 +19,17 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:letterSpacing="@dimen/description_letter_spacing"
+			android:paddingStart="@dimen/content_padding"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingTop="@dimen/list_header_settings_top_margin"
+			android:paddingEnd="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
 			android:paddingBottom="@dimen/context_menu_padding_margin_tiny"
 			android:singleLine="true"
 			android:text="@string/navigate_to_track_descr"
 			android:textColor="@color/preference_category_title"
 			android:textSize="@dimen/default_desc_text_size"
-			osmand:typeface="@string/font_roboto_medium"
-			android:paddingEnd="@dimen/content_padding"
-			android:paddingStart="@dimen/content_padding" />
+			osmand:typeface="@string/font_roboto_medium" />
 
 		<include
 			android:id="@+id/pass_whole_route_container"
@@ -38,7 +38,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="@dimen/content_padding_half"
 			android:visibility="gone"
-			tools:visibility="visible"/>
+			tools:visibility="visible" />
 
 		<include
 			android:id="@+id/navigation_type_container"
@@ -47,16 +47,7 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="@dimen/content_padding"
 			android:visibility="gone"
-			tools:visibility="visible"/>
-
-		<include
-			android:id="@+id/connect_track_points_container"
-			layout="@layout/radio_buttons_with_descr"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/content_padding"
-			android:visibility="gone"
-			tools:visibility="visible"/>
+			tools:visibility="visible" />
 
 	</LinearLayout>
 
