@@ -4321,4 +4321,6 @@
     <string name="shared_string_files">Fájlok</string>
     <string name="travel_route_types">Útvonaltípusok</string>
     <string name="sample_wikivoyage">Wikivoyage példa</string>
+    <string name="shared_string_mini">mini</string>
+    <string name="horseback_riding">Lovaglás</string>
 </resources>
