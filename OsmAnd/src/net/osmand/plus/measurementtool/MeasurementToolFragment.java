@@ -1927,23 +1927,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private OnGlobalLayoutListener getWidgetsLayoutListener() {
 		if (widgetsLayoutListener == null) {
-			widgetsLayoutListener = new OnGlobalLayoutListener() {
-				@Override
-				public void onGlobalLayout() {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						int visibility = portrait ? View.INVISIBLE : View.GONE;
-						View rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
-						if (rightWidgetsPanel.getVisibility() != visibility) {
-							AndroidUiHelper.setVisibility(mapActivity, visibility,
-									R.id.map_left_widgets_panel,
-									R.id.map_right_widgets_panel,
-									R.id.map_center_info);
-							AndroidUiHelper.setVisibility(mapActivity, View.GONE,
-									R.id.map_route_info_button,
-									R.id.map_menu_button,
-									R.id.map_quick_actions_button);
-						}
+			widgetsLayoutListener = () -> {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					View rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
+					if (rightWidgetsPanel.getVisibility() != View.GONE) {
+						AndroidUiHelper.setVisibility(mapActivity, View.GONE,
+								R.id.map_left_widgets_panel,
+								R.id.map_right_widgets_panel,
+								R.id.map_center_info,
+								R.id.map_route_info_button,
+								R.id.map_menu_button,
+								R.id.map_quick_actions_button);;
 					}
 				}
 			};
