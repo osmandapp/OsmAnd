@@ -1,5 +1,8 @@
 package net.osmand.data;
 
+import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
+import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -25,9 +28,6 @@ import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
-
-import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
-import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
 
 
 public class FavouritePoint implements Serializable, LocationPoint {
@@ -389,7 +389,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public enum SpecialPointType {
 		HOME("home", R.string.home_button, R.drawable.mx_special_house),
 		WORK("work", R.string.work_button, R.drawable.mx_special_building),
-		PARKING("parking", R.string.map_widget_parking, R.drawable.mx_parking);
+		PARKING("parking", R.string.osmand_parking_position_name, R.drawable.mx_parking);
 
 		private String typeName;
 		@StringRes
