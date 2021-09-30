@@ -57,7 +57,7 @@ public class RendererRegistry {
 
 	private Map<String, File> externalRenderers = new LinkedHashMap<>();
 	private final Map<String, String> internalRenderers = new LinkedHashMap<>();
-	private final Map<String, RenderingRulesStorage> renderers = new LinkedHashMap<>();
+	private final Map<String, RenderingRulesStorage> loadedRenderers = new LinkedHashMap<>();
 	private final List<IRendererLoadedEventListener> rendererLoadedListeners = new ArrayList<>();
 
     public interface IRendererLoadedEventListener {
@@ -88,18 +88,20 @@ public class RendererRegistry {
 
 	@Nullable
 	public RenderingRulesStorage getRenderer(String name) {
-		if (renderers.containsKey(name)) {
-			return renderers.get(name);
+		if (loadedRenderers.containsKey(name)) {
+			return loadedRenderers.get(name);
 		}
+
 		if (!hasRender(name)) {
 			return null;
 		}
+
 		try {
-			RenderingRulesStorage r = loadRenderer(name, new LinkedHashMap<>(), new LinkedHashMap<>());
-			if (r != null) {
-				renderers.put(name, r);
+			RenderingRulesStorage renderer = loadRenderer(name, new LinkedHashMap<>(), new LinkedHashMap<>());
+			if (renderer != null) {
+				loadedRenderers.put(name, renderer);
 			}
-			return r;
+			return renderer;
 		} catch (IOException | XmlPullParserException e) {
 			log.error("Error loading renderer", e);
 		}
@@ -114,10 +116,11 @@ public class RendererRegistry {
 		if (currentSelectedRender == renderer) {
 			currentSelectedRender = storage;
 		}
-		renderers.put(storage.getName(), storage);
+		loadedRenderers.put(storage.getName(), storage);
 	}
 
 	private boolean hasRender(String name) {
+		updateExternalRenderers();
 		return externalRenderers.containsKey(name) || getInternalRender(name) != null;
 	}
 	
@@ -135,16 +138,9 @@ public class RendererRegistry {
 		return null;
 	}
 	
-//	private static boolean USE_PRECOMPILED_STYLE = false;
 	@Nullable
 	private RenderingRulesStorage loadRenderer(String name, final Map<String, RenderingRulesStorage> loadedRenderers, 
 			final Map<String, String> renderingConstants) throws IOException,  XmlPullParserException {
-//		if ((name.equals(DEFAULT_RENDER) || name.equalsIgnoreCase("default")) && USE_PRECOMPILED_STYLE) {
-//			RenderingRulesStorage rrs = new RenderingRulesStorage("", null);
-//			new DefaultRenderingRulesStorage().createStyle(rrs);
-//			log.info("INIT rendering from class");
-//			return rrs;
-//		}
 		InputStream is = getInputStream(name);
 		if (is == null) {
 			return null;
