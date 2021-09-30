@@ -66,7 +66,7 @@ public class AnimateDraggingMapThread {
 						tileView.rotateToAnimate(rotationDiff / 5 + tileView.getRotate());
 					}
 				}
-			} while (conditionToCountinue && tileView.isMapRotateEnabled());
+			} while (conditionToCountinue);
 			targetRotate = -720;
 		}
 	}
@@ -260,7 +260,7 @@ public class AnimateDraggingMapThread {
 		AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
 		float startRotate = tileView.getRotate();
 		float rotationDiff = MapUtils.unifyRotationDiff(startRotate, rotate);
-		if (tileView.isMapRotateEnabled() && Math.abs(rotationDiff) > 1) {
+		if (Math.abs(rotationDiff) > 1) {
 			long timeMillis = SystemClock.uptimeMillis();
 			float normalizedTime;
 			while (!stopped) {
