@@ -66,7 +66,7 @@ public class BinaryRoutePlanner {
 	 * return list of segments
 	 */
 	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegmentPoint start, RouteSegmentPoint end,
-			RouteSegment recalculationEnd ) throws InterruptedException, IOException {
+										  RouteSegment recalculationEnd) throws InterruptedException, IOException {
 		// measure time
 		ctx.memoryOverhead = 1000;
 
@@ -284,14 +284,14 @@ public class BinaryRoutePlanner {
 			graphDirectSegments.add(startPos);
 		}
 		if (startNeg != null) {
-			startNeg.distanceFromStart = estimatedDistance;
+			startNeg.distanceToEnd = estimatedDistance;
 			graphDirectSegments.add(startNeg);
 		}
 		if (recalculationEnd != null) {
 			graphReverseSegments.add(recalculationEnd);
 		} else {
 			if (endPos != null) {
-				endPos.distanceFromStart = estimatedDistance;
+				endPos.distanceToEnd = estimatedDistance;
 				graphReverseSegments.add(endPos);
 			}
 			if (endNeg != null) {
@@ -457,7 +457,7 @@ public class BinaryRoutePlanner {
 
 			// 2. calculate point and try to load neighbor ways if they are not loaded
 			segmentDist += squareRootDist(x, y, prevx, prevy);
-
+			visitedSegments.get(nextPntId).distToFinalSegment = segmentDist;
 			// 2.1 calculate possible obstacle plus time
 			
 			double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentPoint, (dir && !reverseWaySearch));
@@ -589,7 +589,7 @@ public class BinaryRoutePlanner {
 			if (checkViaRestrictions(from, to)) {
 				FinalRouteSegment frs = new FinalRouteSegment(road, segmentPoint);
 				float distStartObstacles = segment.distanceFromStart
-						+ calculateTimeWithObstacles(ctx, road, segmentDist, obstaclesTime);
+						+ calculateTimeWithObstacles(ctx, road, segmentDist + opposite.distToFinalSegment, obstaclesTime);
 				frs.setParentRoute(segment);
 				frs.setParentSegmentEnd(segmentPoint);
 				frs.reverseWaySearch = reverseWaySearch;
@@ -919,6 +919,7 @@ public class BinaryRoutePlanner {
 
 	public static class RouteSegment {
 		final short segStart;
+		float distToFinalSegment;
 		final RouteDataObject road;
 		// needed to store intersection of routes
 		RouteSegment next = null;
