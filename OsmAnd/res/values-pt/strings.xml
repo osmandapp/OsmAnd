@@ -4335,4 +4335,14 @@
     <string name="sample_wikivoyage">Amostra do Wikivoyage</string>
     <string name="shared_string_mini">mini</string>
     <string name="horseback_riding">Equitação</string>
+    <string name="routing_attr_only_permitted_ways_name">Vias com permissão expressa</string>
+    <string name="routing_attr_only_permitted_ways_description">Usar apenas vias (trilhos, caminhos) com utilização permitida assinalada</string>
+    <string name="routing_attr_prefer_horse_routes_description">Preferir percursos que podem ser utilizador a cavalo</string>
+    <string name="routing_attr_prefer_horse_routes_name">Preferir percursos a cavalo</string>
+    <string name="routing_attr_only_permitted_streets_description">Usar apenas ruas com permissão de utilização assinalada</string>
+    <string name="routing_attr_only_permitted_streets_name">Ruas com permissão expressa</string>
+    <string name="routing_attr_allow_gate_description">Permitir utilização de portões</string>
+    <string name="routing_attr_allow_gate_name">Permitir utilização de portões</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Preferir pavimentação tátil</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Preferir pavimentação tátil</string>
 </resources>
