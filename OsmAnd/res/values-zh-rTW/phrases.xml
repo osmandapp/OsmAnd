@@ -4028,4 +4028,6 @@
     <string name="poi_manufacturer">製造商</string>
     <string name="poi_callable">可通話</string>
     <string name="poi_groundskeeping">草皮維護商店</string>
+    <string name="poi_prep_school">補習班</string>
+    <string name="poi_country_store">鄉村商店</string>
 </resources>
