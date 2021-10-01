@@ -4324,4 +4324,6 @@
     <string name="sample_wikivoyage">Exemple Wikivoyage</string>
     <string name="shared_string_mini">mini</string>
     <string name="horseback_riding">Équitation</string>
+    <string name="routing_attr_prefer_horse_routes_description">Privilégier les itinéraires équestres</string>
+    <string name="routing_attr_prefer_horse_routes_name">Privilégier les itinéraires équestres</string>
 </resources>
