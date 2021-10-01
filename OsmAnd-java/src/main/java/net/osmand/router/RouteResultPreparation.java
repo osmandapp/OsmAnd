@@ -481,8 +481,8 @@ public class RouteResultPreparation {
 
 	private float calcRoutingTime(float parentRoutingTime, RouteSegment finalSegment, RouteSegment segment,
 			RouteSegmentResult res) {
-		if(segment != finalSegment) {
-			if(parentRoutingTime != -1) {
+		if (segment != finalSegment) {
+			if (parentRoutingTime != -1) {
 				res.setRoutingTime(parentRoutingTime - segment.distanceFromStart);
 			}
 			parentRoutingTime = segment.distanceFromStart;
