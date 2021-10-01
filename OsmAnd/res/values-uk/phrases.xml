@@ -4028,4 +4028,6 @@
     <string name="poi_payment_reverse_charge_calls_yes">Зворотні виклики: так</string>
     <string name="poi_payment_calling_cards_yes">Телефонні картки приймаються</string>
     <string name="poi_groundskeeping">Садівнича крамниця</string>
+    <string name="poi_prep_school">Навчальні курси</string>
+    <string name="poi_country_store">Сільський магазин</string>
 </resources>
