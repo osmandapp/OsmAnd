@@ -16,9 +16,9 @@
     <string name="routing_attr_allow_gate_name">Allow gate usage</string>
     <string name="routing_attr_allow_gate_description">Allow usage of gates</string>
     <string name="routing_attr_only_permitted_streets_name">Expressly permitted streets</string>
-    <string name="routing_attr_only_permitted_streets_description">Only use Streets which are expressly permitted</string>
+    <string name="routing_attr_only_permitted_streets_description">Only use streets which are expressly permitted</string>
     <string name="routing_attr_only_permitted_ways_name">Expressly permitted ways</string>
-    <string name="routing_attr_only_permitted_ways_description">Only use ways (tracks, paths aso.) which are expressly permitted</string>
+    <string name="routing_attr_only_permitted_ways_description">Only use ways (tracks, paths, etc.) which are expressly permitted</string>
     <string name="routing_attr_prefer_horse_routes_name">Prefer horse routes</string>
     <string name="routing_attr_prefer_horse_routes_description">Prefer horse routes</string>
     <string name="horseback_riding">Horseback riding</string>
