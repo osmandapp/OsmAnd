@@ -3983,7 +3983,7 @@
     <string name="poi_authentication_phone_call_number">Número telefónico para autenticación</string>
     <string name="poi_authentication_phone_call_no">Autenticación con llamada telefónica: no</string>
     <string name="poi_authentication_app_no">Autenticación con aplicación: no</string>
-    <string name="poi_authentication_chip_card_no">Autenticación vía tarjeta con chip</string>
+    <string name="poi_authentication_chip_card_no">Autenticación vía tarjeta con chip: no</string>
     <string name="poi_authentication_none_yes">Sí</string>
     <string name="poi_authentication_short_message_yes">Sí</string>
     <string name="poi_authentication_phone_call_yes">Sí</string>
@@ -4011,7 +4011,7 @@
     <string name="poi_direction_west">En dirección Oeste</string>
     <string name="poi_direction_south">En dirección Sur</string>
     <string name="poi_direction_east">En dirección Este</string>
-    <string name="poi_direction_north">En dirección norte</string>
+    <string name="poi_direction_north">En dirección Norte</string>
     <string name="poi_destination">Destino</string>
     <string name="poi_permanent_camping_only">Únicamente</string>
     <string name="poi_permanent_camping_no">No</string>
@@ -4028,5 +4028,6 @@
     <string name="poi_manufacturer">Fabricante</string>
     <string name="poi_callable">Recibe llamadas</string>
     <string name="poi_groundskeeping">Productos para mantenimiento de jardines</string>
-    <string name="poi_country_store">Tienda de campo</string>
+    <string name="poi_country_store">Productos de campo; Tienda de campo</string>
+    <string name="poi_prep_school">Centro de tutorización; Academia de estudios;Profesor/a particular</string>
 </resources>
