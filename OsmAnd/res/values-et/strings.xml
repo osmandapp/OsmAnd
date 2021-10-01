@@ -4333,4 +4333,7 @@
     <string name="service_is_not_available_please_try_later">Teenus pole saadaval, palun proovi hiljem uuesti</string>
     <string name="shared_string_files">Failid</string>
     <string name="travel_route_types">Teekonna tüübid</string>
+    <string name="sample_wikivoyage">Wikivoyage\'i näidis</string>
+    <string name="shared_string_mini">mini</string>
+    <string name="horseback_riding">Ratsutamine</string>
 </resources>

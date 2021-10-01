@@ -4322,4 +4322,17 @@
     <string name="service_is_not_available_please_try_later">Služba nie je dostupná, skúste prosím neskôr</string>
     <string name="shared_string_files">Súbory</string>
     <string name="travel_route_types">Typy trás</string>
+    <string name="sample_wikivoyage">Ukážka Wikivoyage</string>
+    <string name="shared_string_mini">mini</string>
+    <string name="horseback_riding">Jazdenie na koni</string>
+    <string name="routing_attr_prefer_horse_routes_description">Uprednostniť trasy pre kone</string>
+    <string name="routing_attr_prefer_horse_routes_name">Uprednostniť trasy pre kone</string>
+    <string name="routing_attr_only_permitted_ways_description">Použiť len vyslovene povolené cesty (poľné cesty, chodníčky, atď)</string>
+    <string name="routing_attr_only_permitted_ways_name">Len povolené cesty</string>
+    <string name="routing_attr_only_permitted_streets_description">Použiť len vyslovene povolené ulice</string>
+    <string name="routing_attr_only_permitted_streets_name">Len povolené ulice</string>
+    <string name="routing_attr_allow_gate_description">Povoliť použitie brán</string>
+    <string name="routing_attr_allow_gate_name">Povoliť použitie brán</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Uprednostniť dlažbu pre nevidiacich</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Uprednostniť dlažbu pre nevidiacich</string>
 </resources>

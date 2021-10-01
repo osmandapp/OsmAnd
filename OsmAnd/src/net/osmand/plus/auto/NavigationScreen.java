@@ -36,9 +36,6 @@ import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-/**
- * Simple demo of how to present a trip on the routing screen.
- */
 public final class NavigationScreen extends Screen implements SurfaceRendererCallback {
 	/**
 	 * Invalid zoom focal point value, used for the zoom buttons.
@@ -182,18 +179,11 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 							.setOnClickListener(this::stopNavigation)
 							.build());
 		} else {
-			/*
 			actionStripBuilder.addAction(
 					new Action.Builder()
-							.setIcon(
-									new CarIcon.Builder(
-											IconCompat.createWithResource(
-													getCarContext(),
-													R.drawable.ic_action_search_dark))
-											.build())
+							.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_search_dark)).build())
 							.setOnClickListener(this::openSearch)
 							.build());
-			 */
 			actionStripBuilder.addAction(
 					new Action.Builder()
 							.setTitle("Favorites")
