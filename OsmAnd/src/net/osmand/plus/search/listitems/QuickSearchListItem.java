@@ -8,6 +8,7 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.City;
@@ -28,7 +29,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.CustomSearchPoiFilter;
@@ -250,6 +253,19 @@ public class QuickSearchListItem {
 					sb.append(new File(gpx.path).getName());
 				}
 				return sb.toString();
+			case MAP_MARKER:
+				MapMarker marker = (MapMarker) searchResult.object;
+				String desc = OsmAndFormatter.getFormattedDate(app, marker.creationDate);
+				String markerGroupName = marker.groupName;
+				if (markerGroupName != null) {
+					if (markerGroupName.isEmpty()) {
+						markerGroupName = app.getString(R.string.shared_string_favorites);
+					}
+					desc += " • " + markerGroupName;
+				}
+				return desc;
+			case ROUTE:
+				return "";
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}
@@ -308,6 +324,7 @@ public class QuickSearchListItem {
 		return null;
 	}
 
+	@Nullable
 	public static Drawable getIcon(OsmandApplication app, SearchResult searchResult) {
 		if (searchResult == null || searchResult.objectType == null) {
 			return null;
@@ -365,7 +382,7 @@ public class QuickSearchListItem {
 				return getIcon(app, R.drawable.ic_action_world_globe);
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
-				int color = app.getFavorites().getColorWithCategory(fav, app.getResources().getColor(R.color.color_favorite));
+				int color = app.getFavorites().getColorWithCategory(fav, ContextCompat.getColor(app, R.color.color_favorite));
 				return PointImageDrawable.getFromFavorite(app, color, false, fav);
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
@@ -384,6 +401,15 @@ public class QuickSearchListItem {
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;
 				return PointImageDrawable.getFromWpt(app, wpt.getColor(), false, wpt);
+			case MAP_MARKER:
+				MapMarker marker = (MapMarker) searchResult.object;
+				if (!marker.history) {
+					return MapMarkerDialogHelper.getMapMarkerIcon(app, marker.colorIndex);
+				} else {
+					return getIcon(app, R.drawable.ic_action_flag);
+				}
+			case ROUTE:
+				return getIcon(app, R.drawable.ic_action_previous_route);
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}
