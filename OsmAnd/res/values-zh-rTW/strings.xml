@@ -4323,4 +4323,14 @@
     <string name="sample_wikivoyage">維基導遊範例</string>
     <string name="shared_string_mini">迷你</string>
     <string name="horseback_riding">騎馬</string>
+    <string name="routing_attr_only_permitted_ways_name">明確允許的路徑</string>
+    <string name="routing_attr_prefer_tactile_paving_description">偏好導盲鋪面</string>
+    <string name="routing_attr_prefer_tactile_paving_name">偏好導盲鋪面</string>
+    <string name="routing_attr_prefer_horse_routes_description">偏好騎馬路線</string>
+    <string name="routing_attr_prefer_horse_routes_name">偏好騎馬路線</string>
+    <string name="routing_attr_only_permitted_ways_description">僅使用明確允許的路徑（軌跡、路徑等）</string>
+    <string name="routing_attr_only_permitted_streets_description">僅使用明確允許的街道</string>
+    <string name="routing_attr_only_permitted_streets_name">明確允許的街道</string>
+    <string name="routing_attr_allow_gate_description">允許使用閘門</string>
+    <string name="routing_attr_allow_gate_name">允許使用閘門</string>
 </resources>
