@@ -163,9 +163,6 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	@NonNull
 	@Override
 	public Template onGetTemplate() {
-		mSurfaceRenderer.updateMarkerVisibility(
-				/* showMarkers=*/ false, /* numMarkers=*/ 0, /* activeMarker=*/ -1);
-
 		NavigationTemplate.Builder builder = new NavigationTemplate.Builder();
 		builder.setBackgroundColor(CarColor.SECONDARY);
 
@@ -315,40 +312,11 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	}
 
 	private void openFavorites() {
-		getScreenManager()
-				.pushForResult(
-						new FavoritesScreen(getCarContext(), mSettingsAction, mSurfaceRenderer),
-						(obj) -> {
-							if (obj != null) {
-                                /*
-                                // Need to copy over each element to satisfy Java type safety.
-                                List<?> results = (List<?>) obj;
-                                List<Instruction> instructions = new ArrayList<Instruction>();
-                                for (Object result : results) {
-                                    instructions.add((Instruction) result);
-                                }
-                                mListener.executeScript(instructions);
-                                 */
-							}
-						});
+		getScreenManager().pushForResult(new FavoritesScreen(getCarContext(), mSettingsAction, mSurfaceRenderer), (obj) -> { });
 	}
 
 	private void openSearch() {
-		getScreenManager()
-				.pushForResult(
-						new SearchScreen(getCarContext(), mSettingsAction, mSurfaceRenderer),
-						(obj) -> {
-							if (obj != null) {
-                                /*
-                                // Need to copy over each element to satisfy Java type safety.
-                                List<?> results = (List<?>) obj;
-                                List<Instruction> instructions = new ArrayList<Instruction>();
-                                for (Object result : results) {
-                                    instructions.add((Instruction) result);
-                                }
-                                mListener.executeScript(instructions);
-                                 */
-							}
-						});
+		getScreenManager().pushForResult(new SearchScreen(getCarContext(), mSettingsAction, mSurfaceRenderer), (obj) -> { });
+		//getScreenManager().pushForResult(new SearchResultsScreen(getCarContext(), mSettingsAction, mSurfaceRenderer, "cafe"), (obj) -> { });
 	}
 }

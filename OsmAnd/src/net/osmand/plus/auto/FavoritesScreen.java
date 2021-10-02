@@ -26,11 +26,14 @@ import androidx.car.app.navigation.model.PlaceListNavigationTemplate;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.IconCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -64,43 +67,23 @@ public final class FavoritesScreen extends Screen {
 		LatLon location = app.getSettings().getLastKnownMapLocation();
 		for (FavouritePoint point : getFavorites()) {
 			String title = point.getDisplayName(app);
-			String description;
-			CarIcon icon;
-			if (point.getSpecialPointType() != null) {
-				int iconColor = app.getSettings().isLightContent()
-						? R.color.icon_color_default_light : R.color.icon_color_default_dark;
-				icon = new CarIcon.Builder(IconCompat.createWithResource(
-						app, point.getSpecialPointType().getIconId(app)).setTint(ContextCompat.getColor(app, iconColor))).build();
-				description = point.getDescription();
-			} else {
-				if (point.getCategory().isEmpty()) {
-					description = app.getString(R.string.shared_string_favorites);
-				} else {
-					description = point.getCategory();
-				}
-				int color = app.getFavorites().getColorWithCategory(point, ContextCompat.getColor(app, R.color.color_favorite));
-				icon = new CarIcon.Builder(IconCompat.createWithResource(
-						app, R.drawable.ic_action_favorite).setTint(color)).build();
-			}
-			if (description == null) {
-				description = "";
-			}
+			int color = app.getFavorites().getColorWithCategory(point, ContextCompat.getColor(app, R.color.color_favorite));
+			CarIcon icon = new CarIcon.Builder(IconCompat.createWithBitmap(
+					AndroidUtils.drawableToBitmap(PointImageDrawable.getFromFavorite(app, color, false, point)))).build();
+			String description = point.getSpecialPointType() != null ? point.getDescription() : point.getCategory();
 			double dist = MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 					location.getLatitude(), location.getLongitude());
-			SpannableString address = new SpannableString(" ");
-			DistanceSpan distanceSpan = DistanceSpan.create(Distance.create(dist / 1000.0, Distance.UNIT_KILOMETERS_P1));
+			SpannableString address = new SpannableString(Algorithms.isEmpty(description) ? " " : "  • " + description);
+			DistanceSpan distanceSpan = DistanceSpan.create(TripHelper.getDistance(app, dist));
 			address.setSpan(distanceSpan, 0, 1, SPAN_INCLUSIVE_INCLUSIVE);
-			listBuilder.addItem(
-					new Row.Builder()
-							.setTitle(title)
-							.setImage(icon)
-							.addText(address)
-							.setOnClickListener(() -> onClickFavorite(point))
-							.setMetadata(new Metadata.Builder()
-									.setPlace(new Place.Builder(CarLocation.create(
-											point.getLatitude(), point.getLongitude())).build())
-									.build())
-							.build());
+			listBuilder.addItem(new Row.Builder()
+					.setTitle(title)
+					.setImage(icon)
+					.addText(address)
+					.setOnClickListener(() -> onClickFavorite(point))
+					.setMetadata(new Metadata.Builder().setPlace(new Place.Builder(
+							CarLocation.create(point.getLatitude(), point.getLongitude())).build()).build())
+					.build());
 		}
 
 		return new PlaceListNavigationTemplate.Builder()
