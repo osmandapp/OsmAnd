@@ -1,15 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
-import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
-import static net.osmand.plus.download.DownloadOsmandIndexesHelper.listLocalRecordedVoiceIndexes;
-import static net.osmand.plus.download.DownloadOsmandIndexesHelper.listTtsVoiceIndexes;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_TTS;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC;
-import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -21,12 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -47,6 +31,7 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -62,6 +47,22 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import static net.osmand.IndexConstants.VOICE_PROVIDER_SUFFIX;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.listLocalRecordedVoiceIndexes;
+import static net.osmand.plus.download.DownloadOsmandIndexesHelper.listTtsVoiceIndexes;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.OTHER_GROUP;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_REC;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_HEADER_TTS;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_REC;
+import static net.osmand.plus.download.DownloadResourceGroup.DownloadResourceGroupType.VOICE_TTS;
 
 public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet implements DownloadEvents {
 
@@ -100,8 +101,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	private InfoType defineSelectedVoiceType() {
 		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(getAppMode());
-		return Algorithms.isEmpty(voiceProvider) || voiceProvider.endsWith(VOICE_PROVIDER_SUFFIX)
-				|| voiceProvider.equals(OsmandSettings.VOICE_PROVIDER_NOT_USE)
+		return settings.isVoiceProviderNotSelected(getAppMode()) || voiceProvider.endsWith(VOICE_PROVIDER_SUFFIX)
 				? InfoType.TTS
 				: InfoType.RECORDED;
 	}
@@ -370,8 +370,12 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private void updateVoiceProvider(IndexItem indexItem, boolean forceDismiss) {
 		Activity activity = getActivity();
 		if (activity != null) {
+			boolean wasProviderNotSelected = settings.isVoiceProviderNotSelected(getAppMode());
+			if (wasProviderNotSelected) {
+				app.getRoutingHelper().getVoiceRouter().setMuteForMode(getAppMode(), false);
+			}
 			settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexItem.getBasename());
-			onVoiceProviderChanged();
+			onVoiceProviderChanged(wasProviderNotSelected);
 			app.initVoiceCommandPlayer(activity, getAppMode(), null, false,
 					false, false, false);
 		}
@@ -395,10 +399,12 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 				&& indexItem.getBasename().replaceAll("-tts", "").equals(app.getLanguage());
 	}
 
-	private void onVoiceProviderChanged() {
+	private void onVoiceProviderChanged(boolean wasProviderNotSelected) {
 		Fragment target = getTargetFragment();
 		if (target instanceof OnPreferenceChanged) {
 			((OnPreferenceChanged) target).onPreferenceChanged(settings.VOICE_PROVIDER.getId());
+		} else if (wasProviderNotSelected && target instanceof MapRouteInfoMenuFragment) {
+			((MapRouteInfoMenuFragment) target).updateInfo();
 		}
 	}
 

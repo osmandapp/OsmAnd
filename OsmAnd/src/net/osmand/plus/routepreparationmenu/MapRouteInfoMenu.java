@@ -1183,7 +1183,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	private void createMuteSoundRoutingParameterButton(final MapActivity mapActivity, final MuteSoundRoutingParameter parameter, final RouteMenuAppModes mode, LinearLayout optionsContainer) {
+	private void createMuteSoundRoutingParameterButton(final MapActivity mapActivity,
+	                                                   final MuteSoundRoutingParameter parameter,
+	                                                   final RouteMenuAppModes mode,
+	                                                   LinearLayout optionsContainer) {
 		final ApplicationMode appMode = mapActivity.getRoutingHelper().getAppMode();
 		final int colorActive = ContextCompat.getColor(mapActivity, ColorUtilities.getActiveColorId(nightMode));
 		final int colorDisabled = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
@@ -1195,22 +1198,25 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		View item = createToolbarOptionView(active, text, parameter.getActiveIconId(), parameter.getDisabledIconId(), v -> {
 			OsmandApplication app = getApp();
 			if (app != null) {
-				String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(appMode);
-				if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-					VoiceLanguageBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(),
-							null, appMode, true);
+				if (app.getSettings().isVoiceProviderNotSelected(appMode)) {
+					FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+					WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
+					MapRouteInfoMenuFragment fragment = fragmentRef == null ? null : fragmentRef.get();
+					VoiceLanguageBottomSheetFragment.showInstance(fragmentManager, fragment, appMode, true);
 				} else {
 					app.getRoutingOptionsHelper().switchSound();
 				}
 				boolean active1 = !app.getRoutingHelper().getVoiceRouter().isMuteForMode(appMode);
 				String text1 = app.getString(active1 ? R.string.shared_string_on : R.string.shared_string_off);
 
-				Drawable itemDrawable = app.getUIUtilities().getIcon(active1 ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
-				Drawable activeItemDrawable = app.getUIUtilities().getIcon(active1 ? parameter.getActiveIconId() : parameter.getDisabledIconId(), ColorUtilities.getActiveColorId(nightMode));
+				int soundMuteIconId = active1 ? parameter.getActiveIconId() : parameter.getDisabledIconId();
+				int soundMuteIconColorId = nightMode
+						? R.color.route_info_control_icon_color_dark
+						: R.color.route_info_control_icon_color_light;
+				Drawable itemDrawable = app.getUIUtilities().getIcon(soundMuteIconId, soundMuteIconColorId);
+				Drawable activeItemDrawable = app.getUIUtilities().getIcon(soundMuteIconId, ColorUtilities.getActiveColorId(nightMode));
 
-				if (Build.VERSION.SDK_INT >= 21) {
-					itemDrawable = AndroidUtils.createPressedStateListDrawable(itemDrawable, activeItemDrawable);
-				}
+				itemDrawable = AndroidUtils.createPressedStateListDrawable(itemDrawable, activeItemDrawable);
 				((ImageView) v.findViewById(R.id.route_option_image_view)).setImageDrawable(active1 ? activeItemDrawable : itemDrawable);
 				((TextView) v.findViewById(R.id.route_option_title)).setText(text1);
 				((TextView) v.findViewById(R.id.route_option_title)).setTextColor(active1 ? colorActive : colorDisabled);
