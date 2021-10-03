@@ -9,6 +9,7 @@
 	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
+-->
 
     <string name="upload_gpx_description_hint">Leave empty, track names will be used as description. Entered description will be applied for each track.</string>
     <string name="search_title">Search: %1$s</string>
