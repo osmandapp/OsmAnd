@@ -182,7 +182,7 @@ public class TripHelper {
 
 			int leftTurnTimeSec = routingHelper.getLeftTimeNextTurn();
 			long turnArrivalTime = System.currentTimeMillis() + leftTurnTimeSec * 1000L;
-			Distance stepDistance = getDistance(nextTurnDistance);
+			Distance stepDistance = getDistance(app, nextTurnDistance);
 			DateTimeWithZone stepDateTime = DateTimeWithZone.create(turnArrivalTime, TimeZone.getDefault());
 			TravelEstimate.Builder stepTravelEstimateBuilder = new TravelEstimate.Builder(stepDistance, stepDateTime);
 			stepTravelEstimateBuilder.setRemainingTimeSeconds(leftTurnTimeSec);
@@ -218,7 +218,7 @@ public class TripHelper {
 		destBuilder.setImage(new CarIcon.Builder(IconCompat.createWithResource(app,
 				R.drawable.ic_action_point_destination)).build());
 
-		Distance distance = getDistance(routingHelper.getLeftDistance());
+		Distance distance = getDistance(app, routingHelper.getLeftDistance());
 		int leftTimeSec = routingHelper.getLeftTime();
 		DateTimeWithZone dateTime = DateTimeWithZone.create(System.currentTimeMillis() + leftTimeSec * 1000L, TimeZone.getDefault());
 		TravelEstimate.Builder travelEstimateBuilder = new TravelEstimate.Builder(distance, dateTime);
@@ -238,7 +238,7 @@ public class TripHelper {
 		return bitmap;
 	}
 
-	private Distance getDistance(double meters) {
+	static Distance getDistance(@NonNull OsmandApplication app, double meters) {
 		MetricsConstants mc = app.getSettings().METRIC_SYSTEM.get();
 		int displayUnit;
 		float mainUnitInMeters;
@@ -253,7 +253,7 @@ public class TripHelper {
 			mainUnitInMeters = METERS_IN_ONE_MILE;
 		}
 		if (meters >= 100 * mainUnitInMeters) {
-			return Distance.create(meters / mainUnitInMeters + 0.5, displayUnit);
+			return Distance.create(meters / mainUnitInMeters, displayUnit);
 		} else if (meters > 9.99f * mainUnitInMeters) {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
 		} else if (meters > 0.999f * mainUnitInMeters) {
@@ -268,13 +268,13 @@ public class TripHelper {
 			return Distance.create(meters / mainUnitInMeters, displayUnit);
 		} else {
 			if (mc == net.osmand.plus.helpers.enums.MetricsConstants.KILOMETERS_AND_METERS || mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_METERS) {
-				return Distance.create(meters + 0.5,  Distance.UNIT_METERS);
+				return Distance.create(meters,  Distance.UNIT_METERS);
 			} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_FEET) {
-				return Distance.create(meters * FEET_IN_ONE_METER + 0.5, Distance.UNIT_FEET);
+				return Distance.create(meters * FEET_IN_ONE_METER, Distance.UNIT_FEET);
 			} else if (mc == net.osmand.plus.helpers.enums.MetricsConstants.MILES_AND_YARDS) {
-				return Distance.create(meters * YARDS_IN_ONE_METER + 0.5, Distance.UNIT_YARDS);
+				return Distance.create(meters * YARDS_IN_ONE_METER, Distance.UNIT_YARDS);
 			}
-			return Distance.create(meters + 0.5,  Distance.UNIT_METERS);
+			return Distance.create(meters,  Distance.UNIT_METERS);
 		}
 	}
 
