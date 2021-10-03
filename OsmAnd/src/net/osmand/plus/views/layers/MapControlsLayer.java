@@ -150,7 +150,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
 			initTopControls();
-			initTransparencyBar();
+			updateTransparencyBar();
 			initZooms();
 			initDasboardRelatedControls();
 			updateControls(mapView.getCurrentRotatedTileBox(), null);
@@ -825,9 +825,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		boolean isNight = isNightModeForMapControls(drawSettings);
 		int textColor = ContextCompat.getColor(mapActivity, isNight ? R.color.widgettext_night : R.color.widgettext_day);
-		// TODO nightMode
-		// updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);
-		// default buttons
 
 		RoutingHelper rh = app.getRoutingHelper();
 		WidgetsVisibilityHelper vh = mapActivity.getWidgetsVisibilityHelper();
@@ -864,6 +861,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showTopButtons = !isRouteDialogOpened && vh.shouldShowTopButtons();
 		layersHud.updateVisibility(showTopButtons);
 		quickSearchHud.updateVisibility(showTopButtons);
+
+		updateTransparencyBar();
 
 		if (mapView.isZooming()) {
 			lastZoom = System.currentTimeMillis();
@@ -997,7 +996,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	// /////////////// Transparency bar /////////////////////////
-	private void initTransparencyBar() {
+	private void updateTransparencyBar() {
 		MapActivity mapActivity = requireMapActivity();
 		transparencyBarLayout = mapActivity.findViewById(R.id.map_transparency_layout);
 		transparencySlider = mapActivity.findViewById(R.id.map_transparency_slider);
@@ -1036,16 +1035,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
+	public void showTransparencyBar(CommonPreference<Integer> transparentPreference,
 									boolean isTransparencyBarEnabled) {
 		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		if (MapControlsLayer.transparencySetting != transparenPreference) {
-			MapControlsLayer.transparencySetting = transparenPreference;
+		if (MapControlsLayer.transparencySetting != transparentPreference) {
+			MapControlsLayer.transparencySetting = transparentPreference;
 
 		}
-		if (transparenPreference != null && isTransparencyBarEnabled) {
+		if (transparentPreference != null && isTransparencyBarEnabled) {
 			transparencyBarLayout.setVisibility(View.VISIBLE);
-			transparencySlider.setValue(transparenPreference.get());
+			transparencySlider.setValue(transparentPreference.get());
 		} else {
 			transparencyBarLayout.setVisibility(View.GONE);
 		}
