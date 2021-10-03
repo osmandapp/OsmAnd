@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.osmedit.OsmEditingPlugin.UploadVisibility;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -21,15 +22,17 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 	private final WeakReference<Activity> activityRef;
 
 	private final String visibility;
-	private final String description;
-	private final String tagstring;
+	private final String commonDescription;
+	private final String tags;
 
-	public UploadGPXFilesTask(@NonNull Activity activity, String description, String tagsString,
-							  @Nullable UploadVisibility visibility) {
+	public UploadGPXFilesTask(@NonNull Activity activity,
+	                          @NonNull String commonDescription,
+	                          @NonNull String tags,
+	                          @Nullable UploadVisibility visibility) {
 		app = (OsmandApplication) activity.getApplication();
 		this.activityRef = new WeakReference<>(activity);
-		this.description = description;
-		this.tagstring = tagsString;
+		this.commonDescription = commonDescription;
+		this.tags = tags;
 		this.visibility = visibility != null ? visibility.asURLparam() : UploadVisibility.PRIVATE.asURLparam();
 	}
 
@@ -41,7 +44,10 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 			if (!isCancelled() && info.file != null) {
 				File file = info.file;
 				OpenstreetmapRemoteUtil remoteUtil = new OpenstreetmapRemoteUtil(app);
-				String warning = remoteUtil.uploadGPXFile(tagstring, description, visibility, file);
+				String gpxDescription = Algorithms.isEmpty(commonDescription.trim())
+						? Algorithms.getFileNameWithoutExtension(info.getFileName())
+						: commonDescription;
+				String warning = remoteUtil.uploadGPXFile(tags, gpxDescription, visibility, file);
 				total++;
 				if (warning == null) {
 					count++;
