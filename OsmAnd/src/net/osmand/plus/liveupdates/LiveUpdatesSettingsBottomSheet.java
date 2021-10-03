@@ -1,5 +1,6 @@
 package net.osmand.plus.liveupdates;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -8,7 +9,9 @@ import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.CompoundButton;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -367,6 +370,28 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
 		setStateViaWiFiButton(localUpdatePreference);
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		lockMaxViewHeight();
+	}
+
+	private void lockMaxViewHeight() {
+		Activity activity = getActivity();
+		final View mainView = getView();
+		if (activity != null && AndroidUiHelper.isOrientationPortrait(activity) && mainView != null) {
+			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+
+				@Override
+				public void onGlobalLayout() {
+					mainView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					LayoutParams newParams = new LayoutParams(LayoutParams.MATCH_PARENT, mainView.getHeight());
+					mainView.setLayoutParams(newParams);
+				}
+			});
+		}
 	}
 
 	@Override
