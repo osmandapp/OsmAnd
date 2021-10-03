@@ -422,7 +422,6 @@ public class BinaryRoutePlanner {
 		// +/- diff from middle point
 		short segmentPoint = segment.getSegmentStart();
 		boolean[] processFurther = new boolean[1];
-		RouteSegment previous = segment;
 		boolean dir = segment.isPositive();
 		while (directionAllowed) {
 			// mark previous interval as visited and move to next intersection
@@ -468,14 +467,16 @@ public class BinaryRoutePlanner {
 			final RouteSegment connectedSegments = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - ctx.memoryOverhead);
 			
 			// 3.1 find segment itself and initialize
-			RouteSegment segmentItself = null, roadIter = connectedSegments;
-			while (segmentItself == null && roadIter != null) {
-				if (connectedSegments.road.getId() == segment.getRoad().getId() && segmentPoint == segment.getSegmentStart()) {
+			RouteSegment segmentItself = null;
+			RouteSegment roadIter = connectedSegments;
+			while (roadIter != null) {
+				if (roadIter.road.getId() == segment.getRoad().id && segmentPoint == roadIter.getSegmentStart()) {
 					segmentItself = roadIter;
 					break;
 				}
-				roadIter = connectedSegments.getNext();
+				roadIter = roadIter.getNext();
 			}
+			segmentItself = segmentItself != null ? segmentItself.initRouteSegment(segment.isPositive()) : null;
 			if (segmentItself == null) {
 				// exceptional situation should not occur
 				segmentItself = new RouteSegment(segment.getRoad(), segmentPoint);
@@ -487,13 +488,12 @@ public class BinaryRoutePlanner {
 				directionAllowed = false;
 				break;
 			}
-			segmentItself = segmentItself.initRouteSegment(segment.isPositive());
 			segmentItself.distanceFromStart = distStartObstacles;
 			// toInsert.distanceToEnd = distanceToEnd;// not used in visitedSegments
 			segmentItself.setParentRoute(segment);
-			segmentItself.setParentSegmentEnd(segmentPoint); 
+			segmentItself.setParentSegmentEnd(segmentPoint);
 			long nextPntId = calculateRoutePointId(segment.getRoad(), prevSegmentPoint, segmentPoint);
-			
+
 			// 3.2 upload segment itself to visited segments
 			RouteSegment existingSegment = visitedSegments.put(nextPntId, segmentItself);
 			if (existingSegment != null && segmentItself.distanceFromStart > existingSegment.distanceFromStart) {
@@ -502,8 +502,8 @@ public class BinaryRoutePlanner {
 				directionAllowed = false;
 				break;
 			}
-			
-			// 3.3 check if segment was already visited in opposite direction 
+
+			// 3.3 check if segment was already visited in opposite direction
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(ctx, reverseWaySearch, graphSegments, segment, oppositeSegments,
 					prevSegmentPoint, segmentPoint);
 			if (alreadyVisited) {
@@ -755,12 +755,11 @@ public class BinaryRoutePlanner {
 	}
 
 
-	private RouteSegment processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
+	private void processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments,  float distFromStart, RouteSegment segment,
 			short segmentPoint, RouteSegment inputNext, boolean reverseWaySearch, boolean doNotAddIntersections, 
 			boolean[] processFurther) {
 		boolean thereAreRestrictions;
-		RouteSegment itself = null;
 		processFurther[0] = true;
 		Iterator<RouteSegment> nextIterator = null;
 		if (inputNext != null && inputNext.getRoad().getId() == segment.getRoad().getId() && inputNext.next == null) {
@@ -805,7 +804,6 @@ public class BinaryRoutePlanner {
 				hasNext = nextIterator.hasNext();
 			}
 		}
-		return itself;
 	}
 
 
