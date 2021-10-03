@@ -4327,7 +4327,7 @@
     <string name="horseback_riding">Jazdenie na koni</string>
     <string name="routing_attr_prefer_horse_routes_description">Uprednostniť trasy pre kone</string>
     <string name="routing_attr_prefer_horse_routes_name">Uprednostniť trasy pre kone</string>
-    <string name="routing_attr_only_permitted_ways_description">Použiť len vyslovene povolené cesty (poľné cesty, chodníčky, atď)</string>
+    <string name="routing_attr_only_permitted_ways_description">Použiť len vyslovene povolené cesty (poľné cesty, chodníčky, atď.)</string>
     <string name="routing_attr_only_permitted_ways_name">Len povolené cesty</string>
     <string name="routing_attr_only_permitted_streets_description">Použiť len vyslovene povolené ulice</string>
     <string name="routing_attr_only_permitted_streets_name">Len povolené ulice</string>
