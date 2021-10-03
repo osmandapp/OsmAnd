@@ -123,7 +123,7 @@ public class RasterMapMenu {
 				} else if (itemId == R.string.show_transparency_seekbar) {
 					if (isChecked) {
 						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);
-						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference, true);
+						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
 					} else // if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == currentMapTypeSeekbarMode)
 					{
 						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OFF);
@@ -152,7 +152,7 @@ public class RasterMapMenu {
 						@Override
 						public boolean onIntegerValueChangedListener(int newValue) {
 							mapTransparencyPreference.set(newValue);
-							mapActivity.getMapLayers().getMapControlsLayer().updateTransparencySlider();
+							mapActivity.getMapLayers().getMapControlsLayer().updateTransparencySliderValue();
 							mapActivity.refreshMap();
 							return false;
 						}

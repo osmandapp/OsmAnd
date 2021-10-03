@@ -128,7 +128,7 @@ public class MapOverlayAction extends SwitchableAction<Pair<String, String>> {
 					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OVERLAY);
 				}
 				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY) {
-					mapActivity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
+					mapActivity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 				}
 			} else {
 				settings.MAP_OVERLAY.set(null);

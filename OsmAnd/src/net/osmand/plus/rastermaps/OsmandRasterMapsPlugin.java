@@ -165,10 +165,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			MapLayers layers = mapActivity.getMapLayers();
 			if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY &&
 					underlayLayer.getMap() != null || underlayLayer.getMapTileAdapter() != null) {
-				layers.getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY, true);
+				layers.getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY);
 			} else if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY &&
 					overlayLayer.getMap() != null || overlayLayer.getMapTileAdapter() != null) {
-				layers.getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
+				layers.getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 			} else {
 				layers.getMapControlsLayer().hideTransparencyBar();
 			}

@@ -150,7 +150,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		super.setMapActivity(mapActivity);
 		if (mapActivity != null) {
 			initTopControls();
-			updateTransparencyBar();
+			initTransparencyBar();
 			initZooms();
 			initDasboardRelatedControls();
 			updateControls(mapView.getCurrentRotatedTileBox(), null);
@@ -862,7 +862,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		layersHud.updateVisibility(showTopButtons);
 		quickSearchHud.updateVisibility(showTopButtons);
 
-		updateTransparencyBar();
+		updateTransparencySliderUi();
 
 		if (mapView.isZooming()) {
 			lastZoom = System.currentTimeMillis();
@@ -996,7 +996,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	// /////////////// Transparency bar /////////////////////////
-	private void updateTransparencyBar() {
+	private void initTransparencyBar() {
 		MapActivity mapActivity = requireMapActivity();
 		transparencyBarLayout = mapActivity.findViewById(R.id.map_transparency_layout);
 		transparencySlider = mapActivity.findViewById(R.id.map_transparency_slider);
@@ -1017,14 +1017,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
-				showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
+				showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
-				showTransparencyBar(settings.MAP_TRANSPARENCY, true);
+				showTransparencyBar(settings.MAP_TRANSPARENCY);
 			}
 		}
 	}
 
-	public void updateTransparencySlider() {
+	public void updateTransparencySliderValue() {
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
@@ -1035,19 +1035,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void showTransparencyBar(CommonPreference<Integer> transparentPreference,
-									boolean isTransparencyBarEnabled) {
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
+	public void showTransparencyBar(@NonNull CommonPreference<Integer> transparentPreference) {
 		if (MapControlsLayer.transparencySetting != transparentPreference) {
 			MapControlsLayer.transparencySetting = transparentPreference;
+		}
+		transparencyBarLayout.setVisibility(View.VISIBLE);
+		transparencySlider.setValue(transparentPreference.get());
+		updateTransparencySliderUi();
+	}
 
-		}
-		if (transparentPreference != null && isTransparencyBarEnabled) {
-			transparencyBarLayout.setVisibility(View.VISIBLE);
-			transparencySlider.setValue(transparentPreference.get());
-		} else {
-			transparencyBarLayout.setVisibility(View.GONE);
-		}
+	private void updateTransparencySliderUi() {
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int selectedModeColor = appMode.getProfileColor(nightMode);
 		UiUtilities.setupSlider(transparencySlider, nightMode, selectedModeColor);
