@@ -16,7 +16,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -592,35 +591,47 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
 	}
 
-	private void showShadowButton() {
+	private void setupScrollShadow() {
+		final View scrollView = getBottomScrollView();
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+			boolean scrollToTopAvailable = scrollView.canScrollVertically(-1);
+			boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+			if (scrollToTopAvailable) {
+				showHeaderShadow();
+			} else {
+				hideHeaderShadow();
+			}
+			if (scrollToBottomAvailable) {
+				showButtonsShadow();
+			} else {
+				hideButtonsShadow();
+			}
+		});
+	}
+
+	private void showHeaderShadow() {
+		if (getBottomContainer() != null) {
+			getBottomContainer().setForeground(getIcon(R.drawable.bg_contextmenu_shadow));
+		}
+	}
+
+	private void hideHeaderShadow() {
+		if (getBottomContainer() != null) {
+			getBottomContainer().setForeground(null);
+		}
+	}
+
+	private void showButtonsShadow() {
 		buttonsShadow.setVisibility(View.VISIBLE);
 		buttonsShadow.animate()
 				.alpha(0.8f)
-				.setDuration(200)
-				.setListener(null);
+				.setDuration(200);
 	}
 
-	private void hideShadowButton() {
+	private void hideButtonsShadow() {
 		buttonsShadow.animate()
 				.alpha(0f)
 				.setDuration(200);
-
-	}
-
-	private void setupScrollShadow() {
-		final View scrollView = getBottomScrollView();
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-
-			@Override
-			public void onScrollChanged() {
-				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-				if (scrollToBottomAvailable) {
-					showShadowButton();
-				} else {
-					hideShadowButton();
-				}
-			}
-		});
 	}
 
 	private void saveCustomColorsToTracks(int prevColor, int newColor) {
