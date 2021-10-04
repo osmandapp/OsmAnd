@@ -38,8 +38,8 @@ import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -223,14 +223,15 @@ public abstract class OsmandPlugin {
 		return Collections.emptyList();
 	}
 
-	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params,
-											@Nullable Map<String, String> additionalParams,
-											@Nullable GetImageCardsListener listener) {
-		return Collections.emptyList();
+	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
+	                                            @NonNull Map<String, String> params,
+	                                            @Nullable Map<String, String> additionalParams,
+	                                            @Nullable GetImageCardsListener listener) {
 	}
 
-	protected ImageCard createContextMenuImageCard(@NonNull JSONObject imageObject) {
-		return null;
+	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
+	                                             @NonNull JSONObject imageObject) {
+		return false;
 	}
 
 	/**
@@ -541,11 +542,11 @@ public abstract class OsmandPlugin {
 
 	@TargetApi(Build.VERSION_CODES.M)
 	public void handleRequestPermissionsResult(int requestCode, String[] permissions,
-											   int[] grantResults) {
+	                                           int[] grantResults) {
 	}
 
 	public static void onRequestPermissionsResult(int requestCode, String[] permissions,
-												  int[] grantResults) {
+	                                              int[] grantResults) {
 		for (OsmandPlugin plugin : getAvailablePlugins()) {
 			plugin.handleRequestPermissionsResult(requestCode, permissions, grantResults);
 		}
@@ -555,7 +556,7 @@ public abstract class OsmandPlugin {
 	}
 
 	protected void registerMapContextMenuActions(@NonNull MapActivity mapActivity, double latitude, double longitude,
-												 ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	                                             ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 	}
 
 	protected void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {
@@ -824,7 +825,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void registerMapContextMenu(@NonNull MapActivity mapActivity, double latitude, double longitude,
-											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	                                          ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
 			plugin.registerMapContextMenuActions(mapActivity, latitude, longitude, adapter, selectedObj, configureMenu);
 		}
@@ -909,21 +910,26 @@ public abstract class OsmandPlugin {
 		return collection;
 	}
 
-	public static void populateContextMenuImageCards(@NonNull List<ImageCard> imageCards, @NonNull Map<String, String> params,
+	public static void populateContextMenuImageCards(@NonNull ImageCardsHolder holder, @NonNull Map<String, String> params,
 	                                                 @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			imageCards.addAll(plugin.getContextMenuImageCards(params, additionalParams, listener));
+			plugin.collectContextMenuImageCards(holder, params, additionalParams, listener);
 		}
 	}
 
-	public static ImageCard createImageCardForJson(@NonNull JSONObject imageObject) {
+	/**
+	 * @param holder an object to collect results
+	 * @param imageObject json object that contains data for create an image card
+	 * @return 'true' if an image card was created
+	 */
+	public static boolean createImageCardForJson(@NonNull ImageCardsHolder holder,
+	                                             @NonNull JSONObject imageObject) {
 		for (OsmandPlugin plugin : getEnabledPlugins()) {
-			ImageCard imageCard = plugin.createContextMenuImageCard(imageObject);
-			if (imageCard != null) {
-				return imageCard;
+			if (plugin.createContextMenuImageCard(holder, imageObject)) {
+				return true;
 			}
 		}
-		return null;
+		return false;
 	}
 
 	public static boolean isPackageInstalled(String packageInfo, Context ctx) {

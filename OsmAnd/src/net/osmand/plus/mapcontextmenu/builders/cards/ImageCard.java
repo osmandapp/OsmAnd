@@ -38,6 +38,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -423,7 +424,7 @@ public abstract class ImageCard extends AbstractCard {
 		@Override
 		protected List<ImageCard> doInBackground(Void... voids) {
 			TrafficStats.setThreadStatsTag(GET_IMAGE_CARD_THREAD_ID);
-			List<ImageCard> result = new ArrayList<>();
+			ImageCardsHolder holder = new ImageCardsHolder();
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
 				pms.put("lat", "" + (float) latLon.getLatitude());
@@ -440,7 +441,7 @@ public abstract class ImageCard extends AbstractCard {
 				if (!Algorithms.isEmpty(preferredLang)) {
 					pms.put("lang", preferredLang);
 				}
-				OsmandPlugin.populateContextMenuImageCards(result, pms, params, listener);
+				OsmandPlugin.populateContextMenuImageCards(holder, pms, params, listener);
 
 				String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place", pms,
 						"Requesting location images...", false, false);
@@ -453,12 +454,11 @@ public abstract class ImageCard extends AbstractCard {
 							try {
 								JSONObject imageObject = (JSONObject) images.get(i);
 								if (imageObject != JSONObject.NULL) {
-									ImageCard imageCard = OsmandPlugin.createImageCardForJson(imageObject);
-									if (imageCard == null) {
-										imageCard = ImageCard.createCard(mapActivity, imageObject);
-									}
-									if (imageCard != null) {
-										result.add(imageCard);
+									if (!OsmandPlugin.createImageCardForJson(holder, imageObject)) {
+										ImageCard imageCard = ImageCard.createCard(mapActivity, imageObject);
+										if (imageCard != null) {
+											holder.add(ImageCardType.OTHER, imageCard);
+										}
 									}
 								}
 							} catch (JSONException e) {
@@ -470,6 +470,8 @@ public abstract class ImageCard extends AbstractCard {
 			} catch (Exception e) {
 				LOG.error(e);
 			}
+
+			List<ImageCard> result = holder.getOrderedList();
 			if (listener != null) {
 				listener.onPostProcess(result);
 			}
@@ -508,5 +510,56 @@ public abstract class ImageCard extends AbstractCard {
 			}
 			update();
 		}
+	}
+
+	public enum ImageCardType {
+		OTHER,
+		MAPILLARY_AMENITY,
+		WIKIDATA,
+		WIKIMEDIA,
+		OPR,
+		MAPILLARY
+	}
+
+	public static class ImageCardsHolder {
+
+		private final Map<ImageCardType, List<ImageCard>> map = new HashMap<>();
+
+		public boolean add(@NonNull ImageCardType type, @Nullable ImageCard image) {
+			if (image != null) {
+				List<ImageCard> list = map.get(type);
+				if (list != null) {
+					list.add(image);
+				} else {
+					list = new ArrayList<>();
+					list.add(image);
+					map.put(type, list);
+				}
+				return true;
+			}
+			return false;
+		}
+
+		@NonNull
+		public List<ImageCard> getOrderedList() {
+			List<ImageCard> result = new ArrayList<>();
+			for (ImageCardType type : ImageCardType.values()) {
+				List<ImageCard> cards = map.get(type);
+				if (!Algorithms.isEmpty(cards)) {
+					result.addAll(cards);
+				}
+			}
+			return result;
+		}
+
+		@Nullable
+		public ImageCard getFirstItem() {
+			List<ImageCard> result = getOrderedList();
+			if (!Algorithms.isEmpty(result)) {
+				return result.get(0);
+			}
+			return null;
+		}
+
 	}
 }

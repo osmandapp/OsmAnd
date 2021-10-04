@@ -15,6 +15,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.util.Algorithms;
 
@@ -23,10 +25,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class OpenPlaceReviewsPlugin extends OsmandPlugin {
@@ -97,10 +97,10 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params,
-													   @Nullable Map<String, String> additionalParams,
-													   @Nullable GetImageCardsListener listener) {
-		List<ImageCard> imageCards = new ArrayList<>();
+	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
+	                                            @NonNull Map<String, String> params,
+	                                            @Nullable Map<String, String> additionalParams,
+	                                            @Nullable GetImageCardsListener listener) {
 		if (mapActivity != null) {
 			Object object = mapActivity.getMapLayers().getContextMenuLayer().getSelectedObject();
 			if (object instanceof Amenity) {
@@ -111,26 +111,26 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 				String response = AndroidNetworkUtils.sendRequest(app, url, Collections.<String, String>emptyMap(),
 						"Requesting location images...", false, false);
 				if (response != null) {
-					getPicturesForPlace(imageCards, response);
+					getPicturesForPlace(holder, response);
 					if (listener != null) {
 						listener.onPlaceIdAcquired(getIdFromResponse(response));
 					}
 				}
 			}
 		}
-		return imageCards;
 	}
 
 	@Override
-	protected ImageCard createContextMenuImageCard(@NonNull JSONObject imageObject) {
+	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
+	                                             @NonNull JSONObject imageObject) {
 		ImageCard imageCard = null;
 		if (mapActivity != null && imageObject != JSONObject.NULL) {
 			imageCard = createCardOpr(mapActivity, imageObject);
 		}
-		return imageCard;
+		return holder.add(ImageCardType.OPR, imageCard);
 	}
 
-	private void getPicturesForPlace(List<ImageCard> result, String response) {
+	private void getPicturesForPlace(ImageCardsHolder holder, String response) {
 		try {
 			if (!Algorithms.isEmpty(response)) {
 				JSONArray obj = new JSONObject(response).getJSONArray("objects");
@@ -145,7 +145,7 @@ public class OpenPlaceReviewsPlugin extends OsmandPlugin {
 								if (imageObject != JSONObject.NULL) {
 									ImageCard imageCard = createCardOpr(mapActivity, imageObject);
 									if (imageCard != null) {
-										result.add(imageCard);
+										holder.add(ImageCardType.OPR, imageCard);
 									}
 								}
 							} catch (JSONException e) {

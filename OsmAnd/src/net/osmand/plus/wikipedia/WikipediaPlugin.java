@@ -34,8 +34,8 @@ import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.search.QuickSearchDialogFragment;
@@ -498,24 +498,23 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params,
-	                                                   @Nullable Map<String, String> additionalParams,
-	                                                   @Nullable GetImageCardsListener listener) {
-		List<ImageCard> imageCards = new ArrayList<>();
+	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
+	                                            @NonNull Map<String, String> params,
+	                                            @Nullable Map<String, String> additionalParams,
+	                                            @Nullable GetImageCardsListener listener) {
 		if (mapActivity != null && additionalParams != null) {
 			String wikidataId = additionalParams.get(Amenity.WIKIDATA);
 			if (wikidataId != null) {
 				additionalParams.remove(Amenity.WIKIDATA);
-				WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, imageCards);
+				WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, holder);
 			}
 			String wikimediaContent = additionalParams.get(Amenity.WIKIMEDIA_COMMONS);
 			if (wikimediaContent != null) {
 				additionalParams.remove(Amenity.WIKIMEDIA_COMMONS);
-				WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, imageCards);
+				WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, holder);
 			}
 			params.putAll(additionalParams);
 		}
-		return imageCards;
 	}
 
 	public static boolean containsWikipediaExtension(@NonNull String fileName) {

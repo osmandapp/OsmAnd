@@ -34,6 +34,8 @@ import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
 import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -49,7 +51,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -251,33 +252,27 @@ public class MapillaryPlugin extends OsmandPlugin {
 		}
 	}
 
-	/**
-	 * Create Mapillary image from amenity tag
-	 */
 	@Override
-	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params,
-	                                                   @Nullable Map<String, String> additionalParams,
-	                                                   @Nullable GetImageCardsListener listener) {
-		List<ImageCard> imageCards = new ArrayList<>();
+	protected void collectContextMenuImageCards(@NonNull ImageCardsHolder holder,
+	                                            @NonNull Map<String, String> params,
+	                                            @Nullable Map<String, String> additionalParams,
+	                                            @Nullable GetImageCardsListener listener) {
 		if (mapActivity != null && additionalParams != null) {
 			String key = additionalParams.get(Amenity.MAPILLARY);
 			if (key != null) {
 				JSONObject imageObject = MapillaryOsmTagHelper.getImageByKey(key);
 				if (imageObject != null) {
-					imageCards.add(new MapillaryImageCard(mapActivity, imageObject));
+					holder.add(ImageCardType.MAPILLARY_AMENITY, new MapillaryImageCard(mapActivity, imageObject));
 				}
 				additionalParams.remove(Amenity.MAPILLARY);
 			}
 			params.putAll(additionalParams);
 		}
-		return imageCards;
 	}
 
-	/**
-	 * Create Mapillary images from OsmAnd response
-	 */
 	@Override
-	protected ImageCard createContextMenuImageCard(@NonNull JSONObject imageObject) {
+	protected boolean createContextMenuImageCard(@NonNull ImageCardsHolder holder,
+	                                             @NonNull JSONObject imageObject) {
 		ImageCard imageCard = null;
 		if (mapActivity != null) {
 			try {
@@ -293,7 +288,11 @@ public class MapillaryPlugin extends OsmandPlugin {
 				LOG.error(e);
 			}
 		}
-		return imageCard;
+		if (imageCard != null) {
+			holder.add(ImageCardType.MAPILLARY, imageCard);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
