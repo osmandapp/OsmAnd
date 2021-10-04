@@ -1198,7 +1198,7 @@
     <string name="plugin_ski_name">Suusakaardi vaade</string>
     <string name="osmand_parking_plugin_name">Parkimiskoht</string>
     <string name="osmand_distance_planning_plugin_name">Kauguse kalkulaator ja planeerimistöövahend</string>
-    <string name="osm_settings">OpenStreetMap\'i muutmine</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap\'i muutmine</string>
     <string name="rename_failed">Ümber nimetamine ebaõnnestus.</string>
     <string name="days_behind">päeva maas</string>
     <string name="watch">Vaata</string>

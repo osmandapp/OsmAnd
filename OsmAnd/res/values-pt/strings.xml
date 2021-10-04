@@ -272,7 +272,7 @@
     <string name="osm_settings_descr">Especifique as configurações de OpenStreetMap.org (OSM) para poder enviar alterações.</string>
     <string name="data_settings_descr">Especifique o idioma, descarregar/atualizar dados.</string>
     <string name="data_settings">Dados</string>
-    <string name="osm_settings">Edição do OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Edição do OpenStreetMap</string>
     <string name="auto_zoom_map_descr">Nível de ampliação automático de acordo com a velocidade (enquanto o mapa é sincronizado com a posição atual).</string>
     <string name="auto_zoom_map">Ampliação automática do mapa</string>
     <string name="additional_settings">Outras configurações</string>

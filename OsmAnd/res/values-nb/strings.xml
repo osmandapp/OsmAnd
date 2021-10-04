@@ -1002,7 +1002,7 @@
     <string name="map_overlay">Overleggskart</string>
     <string name="map_overlay_descr">Velg overleggskartet</string>
     <string name="audionotes_plugin_name">Audio/video-notater</string>
-    <string name="osm_settings">OSM-redigering</string>
+    <string name="osm_editing_plugin_name">OSM-redigering</string>
     <string name="plugin_ski_name">Skikartvisning</string>
     <string name="osmand_accessibility_description">Gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks. justering av talehastigheten for tekst-til-tale -stemmer, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for forstørrelseskontroll, eller tekst-til-tale-tilbakemelding, f.eks. auto-annonsering av din posisjon.</string>
     <string name="rename_failed">Navneendring feilet.</string>

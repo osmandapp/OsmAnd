@@ -1649,7 +1649,7 @@
     <string name="debugging_and_development">Razvoj OsmAnd-a</string>
     <string name="osmand_development_plugin_description">Podešavanja za razvoj i otklanjanje grrešaka kao što su simulacija navođenja, performanse iscrtavanja ili glasovni upiti. Namenjeno programerima, nepotrebno prilikom normalnog korišćenja.</string>
     <string name="osm_editing_plugin_description">Doprinosite OSM-u, preko pravljenja i izmena OSM objekata tačaka od interesa, otvaranja ili komentarisanja OSM beleški, i prilaganjem snimljenih GPX fajlova iz OsmAnd-a tako što date Vaše korisničko ime i lozinku. OpenStreetMap.org je globalni projekat mapiranja sveta u javnom domenu, vođen zajednicom.</string>
-    <string name="osm_settings">OpenStreetMap uređivanje</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap uređivanje</string>
     <string name="osmand_accessibility_description">Čini da se funkcije pristupačnosti iz uređaja mogu koristiti direktno u OsmAnd-u. Može da upravlja brzinom izgovora sintetizovanih glasova, podešavanje D-pada za navođenje, korišćenje trekbola za kontrolu zumiranja, izgovara tekst, npr. da Vam kaže položaj.</string>
     <string name="shared_string_accessibility">Pristupačnost</string>
     <string name="map_downloaded">Karta je preuzeta</string>

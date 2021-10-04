@@ -491,7 +491,7 @@
     <string name="osm_settings_descr">Indica los ajustes de OpenStreetMap.org (OSM) necesarios para subir ediciones.</string>
     <string name="data_settings_descr">Indica el idioma, descargar/recargar datos.</string>
     <string name="data_settings">Datos</string>
-    <string name="osm_settings">Edición de OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Edición de OpenStreetMap</string>
     <string name="auto_zoom_map_descr">Nivel de zoom según la velocidad (mientras el mapa se sincroniza con la ubicación actual).</string>
     <string name="auto_zoom_map">Zoom automático del mapa</string>
     <string name="additional_settings">Ajustes adicionales</string>

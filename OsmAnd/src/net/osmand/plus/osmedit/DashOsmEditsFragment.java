@@ -37,7 +37,7 @@ import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListe
 public class DashOsmEditsFragment extends DashBaseFragment
 		implements ProgressDialogPoiUploader, OsmAuthorizationListener {
 	public static final String TAG = "DASH_OSM_EDITS_FRAGMENT";
-	public static final int TITLE_ID = R.string.osm_settings;
+	public static final int TITLE_ID = R.string.osm_editing_plugin_name;
 
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
 

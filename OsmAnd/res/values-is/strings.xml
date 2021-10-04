@@ -1450,7 +1450,7 @@
     <string name="plugin_nautical_name">Sjókort</string>
     <string name="plugin_ski_name">Skíðakort</string>
     <string name="osmand_parking_plugin_name">Staðsetning bílastæðis</string>
-    <string name="osm_settings">Breytingar á OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Breytingar á OpenStreetMap</string>
     <string name="navigation_over_track">Hefja leiðsögn eftir ferlinum?</string>
     <string name="rendering_attr_roadStyle_name">Stíll götu</string>
     <string name="rendering_attr_roadStyle_description">Stíll götu</string>

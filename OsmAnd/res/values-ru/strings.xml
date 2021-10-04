@@ -828,7 +828,7 @@
     <string name="osm_settings_descr">Укажите настройки для загрузки данных в Openstreetmap.org (OSM).</string>
     <string name="data_settings_descr">Настройка данных: язык, обновление данных.</string>
     <string name="data_settings">Данные</string>
-    <string name="osm_settings">Правки OSM</string>
+    <string name="osm_editing_plugin_name">Правки OSM</string>
     <string name="auto_zoom_map_descr">Масштабирование по скорости (при отображении позиции на карте).</string>
     <string name="auto_zoom_map">Автомасштаб</string>
     <string name="additional_settings">Дополнительные настройки</string>

@@ -181,7 +181,7 @@
     <string name="osmand_distance_planning_plugin_description">Crie caminhos tocando no mapa ou usando ou modificando os arquivos GPX existentes para planejar uma viagem e medir a distância entre pontos. O resultado pode ser salvo como um arquivo GPX para uso posterior para orientação.</string>
     <string name="shared_string_accessibility">Acessibilidade</string>
     <string name="osmand_accessibility_description">Disponibiliza os recursos de acessibilidade do dispositivo diretamente no OsmAnd. Facilita p. ajustar a taxa de fala para vozes de texto para fala, configurar a navegação no D-pad, usar um trackball para controle de zoom ou feedback de texto para fala, por exemplo, para anunciar automaticamente sua posição.</string>
-    <string name="osm_settings">Edição no OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Edição no OpenStreetMap</string>
     <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
     <string name="rename_failed">Renomeação falhou.</string>
     <string name="back_to_map">Voltar ao mapa</string>

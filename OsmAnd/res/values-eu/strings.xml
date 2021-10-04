@@ -937,7 +937,7 @@
     <string name="osm_settings_descr">Ezarri OpenStreetMap.org (OSM)eko ezarpenak OSMrako bidalketentzat.</string>
     <string name="data_settings_descr">Ezarri hizkuntza, deskargatu/birkargatu datuak.</string>
     <string name="data_settings">Datuak</string>
-    <string name="osm_settings">OpenStreetMap edizioa</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap edizioa</string>
     <string name="additional_settings">Gainerako ezarpenak</string>
     <string name="shared_string_settings">Ezarpenak</string>
     <string name="save_current_track_descr">Gorde uneko lorratza GPX fitxategi gisa orain.</string>

@@ -599,7 +599,7 @@
     <string name="arrived_at_destination">Heu arribat.</string>
     <string name="invalid_locations">Coordenades no vàlides</string>
     <string name="saving_gpx_tracks">S\'estan desant el fitxer GPX…</string>
-    <string name="osm_settings">Edició d\'OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Edició d\'OpenStreetMap</string>
     <string name="save_track_interval">Interval d\'enregistrament durant la navegació</string>
     <string name="additional_settings">Preferències addicionals</string>
     <string name="data_settings_descr">Especifiqueu l\'idioma, baixada/recàrrega de dades.</string>

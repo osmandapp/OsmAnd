@@ -473,7 +473,7 @@
     <string name="osm_settings_descr">Indiquez les paramètres de connexion à OpenStreetMap.org (OSM) pour vos contributions.</string>
     <string name="data_settings_descr">Indiquez la langue, télécharger / mettre à jour les données.</string>
     <string name="data_settings">Données</string>
-    <string name="osm_settings">Édition OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Édition OpenStreetMap</string>
     <string name="auto_zoom_map_descr">Zoom de la carte adapté à votre vitesse (lorsque que votre position est affichée sur la carte).</string>
     <string name="auto_zoom_map">Zoom automatique de la carte</string>
     <string name="additional_settings">Paramètres supplémentaires</string>

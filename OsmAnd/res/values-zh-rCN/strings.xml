@@ -300,7 +300,7 @@
     <string name="use_online_routing">使用在线导航</string>
     <string name="osm_settings_descr">指定 OSM 提交所需的 OpenStreetMap.org （OSM） 设置。</string>
     <string name="data_settings">数据</string>
-    <string name="osm_settings">OpenStreetMap 编辑</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap 编辑</string>
     <string name="save_current_track">保存当前轨迹</string>
     <string name="save_track_to_gpx">导航时自动记录轨迹</string>
     <string name="map_view_3d_descr">启用地图的 3D 视图。</string>
