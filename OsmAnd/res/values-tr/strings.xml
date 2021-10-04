@@ -900,7 +900,7 @@
     <string name="reading_indexes">Yerel veri okunuyor…</string>
     <string name="saving_gpx_tracks">GPX dosyası kaydediliyor…</string>
     <string name="data_settings_descr">Dili belirtin, verileri indirin/yeniden yükleyin.</string>
-    <string name="osm_settings">OpenStreetMap düzenleme</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap düzenleme</string>
     <string name="app_settings">Uygulama ayarları</string>
     <string name="search_address">Adres ara</string>
     <string name="choose_building">Bina seç</string>

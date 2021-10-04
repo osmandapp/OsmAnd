@@ -1155,7 +1155,7 @@
     <string name="parking_place_limited">وقت وقوف السيارات يقتصر على</string>
     <string name="shared_string_collapse">تدلي</string>
     <string name="drawer">قائمة منبسطة</string>
-    <string name="osm_settings">تعديل OSM</string>
+    <string name="osm_editing_plugin_name">تعديل OSM</string>
     <string name="free">فارغ %1$s</string>
     <string name="parking_place">موقف السيارات</string>
     <string name="version_settings_descr">نزل الإصدارات الليلية.</string>
@@ -4399,4 +4399,14 @@
     <string name="sample_wikivoyage">عينة Wikivoyage</string>
     <string name="shared_string_mini">مصغر(ة)</string>
     <string name="horseback_riding">ركوب الخيل</string>
+    <string name="routing_attr_only_permitted_ways_name">الطرق المسموحة بها علنا</string>
+    <string name="routing_attr_only_permitted_streets_description">استخدم فقط الشوارع المسموحة بها علنا</string>
+    <string name="routing_attr_only_permitted_streets_name">الشوارع المسموحة بها علنا</string>
+    <string name="routing_attr_prefer_horse_routes_description">تفضيل طرق الخيل</string>
+    <string name="routing_attr_prefer_horse_routes_name">تفضيل طرق الخيل</string>
+    <string name="routing_attr_only_permitted_ways_description">استخدام الطرق (المسارات والدروب وما إلى ذلك) المسموح بها علنا فقط</string>
+    <string name="routing_attr_allow_gate_description">السماح باستخدام البوابات</string>
+    <string name="routing_attr_allow_gate_name">السماح باستخدام البوابة</string>
+    <string name="routing_attr_prefer_tactile_paving_description">تفضيل رصيف المكفوفين</string>
+    <string name="routing_attr_prefer_tactile_paving_name">تفضيل رصيف المكفوفين</string>
 </resources>

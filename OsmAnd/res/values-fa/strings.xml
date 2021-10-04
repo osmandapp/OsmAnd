@@ -591,7 +591,7 @@
     <string name="av_camera_focus_macro">حالت ماکرو (از نزدیک)</string>
     <string name="av_camera_focus_continuous">دوربین فوکوس را پیوسته تنظیم کند</string>
     <string name="choose_intersected_street">تقاطع را برگزینید</string>
-    <string name="osm_settings">ویرایش OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">ویرایش OpenStreetMap</string>
     <string name="save_current_track_descr">رد جاری را همین حالا در قالب پروندهٔ GPX ذخیره کن.</string>
     <string name="save_current_track">ذخیرهٔ رد جاری</string>
     <string name="save_track_interval">تناوب ردنگاری هنگام ناوبری</string>

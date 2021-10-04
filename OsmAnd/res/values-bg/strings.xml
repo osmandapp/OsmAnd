@@ -904,7 +904,7 @@
     <string name="osm_settings_descr">Настройки за изпращане на данни в Openstreetmap.org (OSM)</string>
     <string name="data_settings_descr">Определяне на език, изтегляне/презареждане на данни.</string>
     <string name="data_settings">Данни</string>
-    <string name="osm_settings">Редактиране на OSM</string>
+    <string name="osm_editing_plugin_name">Редактиране на OSM</string>
     <string name="additional_settings">Допълнителни настройки</string>
     <string name="shared_string_settings">Настройки</string>
     <string name="save_current_track_descr">Запиши текущата следа в SD картата</string>

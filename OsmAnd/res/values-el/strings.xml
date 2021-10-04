@@ -714,7 +714,7 @@
     <string name="osm_settings_descr">Καθορίστε τις ρυθμίσεις OpenStreetMap.org (OSM) που απαιτούνται για τις υποβολές OSM.</string>
     <string name="data_settings_descr">Καθορισμός γλώσσας, λήψη/επαναφόρτωση δεδομένων.</string>
     <string name="data_settings">Δεδομένα</string>
-    <string name="osm_settings">Επεξεργασία OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Επεξεργασία OpenStreetMap</string>
     <string name="additional_settings">Πρόσθετες ρυθμίσεις</string>
     <string name="save_current_track_descr">Αποθήκευση τρέχοντος ίχνους ως αρχείου GPX τώρα.</string>
     <string name="save_current_track">Αποθήκευση τρέχοντος ίχνους</string>

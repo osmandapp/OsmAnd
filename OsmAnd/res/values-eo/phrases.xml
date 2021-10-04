@@ -4028,4 +4028,6 @@
     <string name="poi_manufacturer">Produktinto</string>
     <string name="poi_callable">Ricevi telefonvokojn</string>
     <string name="poi_groundskeeping">Ĝarden-materiala vendejo</string>
+    <string name="poi_prep_school">Lernejo pretiganta</string>
+    <string name="poi_country_store">Ĝenerala vendejo (en vilaĝo)</string>
 </resources>

@@ -862,7 +862,7 @@
     <string name="osm_settings_descr">Angiv indstillinger for OpenStreetMap.org (OSM), som er nødvendige for overførelse til OSM.</string>
     <string name="data_settings_descr">Angiv sprog, hent/genindlæs data.</string>
     <string name="data_settings">Data</string>
-    <string name="osm_settings">OpenStreetMap redigering</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap redigering</string>
     <string name="additional_settings">Yderligere indstillinger</string>
     <string name="save_current_track_descr">Gem det aktuelle spor som en GPX-fil nu.</string>
     <string name="save_current_track">Gem det aktuelle spor</string>

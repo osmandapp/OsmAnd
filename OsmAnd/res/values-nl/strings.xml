@@ -526,7 +526,7 @@
     <string name="osm_settings_descr">Instellingen voor OpenStreetMap.org (OSM) om OSM-bijdragen te maken.</string>
     <string name="data_settings_descr">Specificeer taal, download/herlaad gegevens.</string>
     <string name="data_settings">Gegevens</string>
-    <string name="osm_settings">OpenStreetMap bewerken</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap bewerken</string>
     <string name="auto_zoom_map_descr">Kaart automatisch zoomen naargelang de snelheid (wanneer de kaart gesynchroniseerd is met de huidige positie).</string>
     <string name="auto_zoom_map">Kaart automatisch zoomen</string>
     <string name="additional_settings">Extra instellingen</string>

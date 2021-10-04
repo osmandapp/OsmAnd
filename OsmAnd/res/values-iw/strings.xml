@@ -717,7 +717,7 @@
     <string name="osm_settings_descr">נא לציין הגדרות OpenStreetMap.org‏ (OSM) הנדרשות לשליחות אל OSM.</string>
     <string name="data_settings_descr">הגדרת שפה, הורדה/רענון של הנתונים.</string>
     <string name="data_settings">נתונים</string>
-    <string name="osm_settings">עריכה של OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">עריכה של OpenStreetMap</string>
     <string name="additional_settings">הגדרות נוספות</string>
     <string name="shared_string_settings">הגדרות</string>
     <string name="save_current_track_descr">שמירת המסלול הנוכחי כקובץ GPX כעת.</string>

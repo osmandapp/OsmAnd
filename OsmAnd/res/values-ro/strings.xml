@@ -756,7 +756,7 @@
     <string name="osm_settings_descr">Specificați setările OpenStreetMap.org (OSM) necesare pentru transmiterea OSM.</string>
     <string name="data_settings_descr">Specificați limba, descărcați/încărcați datele.</string>
     <string name="data_settings">Date</string>
-    <string name="osm_settings">Editare OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Editare OpenStreetMap</string>
     <string name="additional_settings">Setări adiționale</string>
     <string name="shared_string_settings">Setări</string>
     <string name="save_current_track_descr">Salvează traseul curent ca fișier GPX acum.</string>

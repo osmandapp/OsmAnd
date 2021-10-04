@@ -733,7 +733,7 @@
     <string name="osm_settings_descr">Geben Sie die Einstellungen für OpenStreetMap.org (OSM) an, die für OSM-Übermittlungen erforderlich sind.</string>
     <string name="data_settings_descr">Sprache angeben, Daten herunter- oder neu laden.</string>
     <string name="data_settings">Daten</string>
-    <string name="osm_settings">OpenStreetMap-Bearbeitung</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap-Bearbeitung</string>
     <string name="additional_settings">Weitere Einstellungen</string>
     <string name="shared_string_settings">Einstellungen</string>
     <string name="update_tile">Aktualisieren</string>
