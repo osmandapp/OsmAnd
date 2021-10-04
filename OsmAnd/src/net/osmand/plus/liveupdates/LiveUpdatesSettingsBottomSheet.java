@@ -227,7 +227,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		LinearLayout itemTimeOfDayButtons = (LinearLayout) inflater.inflate(R.layout.custom_radio_buttons, null);
 		LinearLayout.MarginLayoutParams itemTimeOfDayParams = new LinearLayout.MarginLayoutParams(
 				LinearLayout.MarginLayoutParams.MATCH_PARENT, LinearLayout.MarginLayoutParams.WRAP_CONTENT);
-		AndroidUtils.setMargins(itemTimeOfDayParams, dp16, 0, dp16, dp8);
+		AndroidUtils.setMargins(itemTimeOfDayParams, dp16, 0, dp16, 0);
 		itemTimeOfDayButtons.setLayoutParams(itemTimeOfDayParams);
 
 		String morning = getString(R.string.morning);
@@ -262,7 +262,7 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 				(LinearLayout) inflater.inflate(R.layout.bottom_sheet_button_with_icon_center, null);
 		LinearLayout.MarginLayoutParams itemUpdateNowParams = new LinearLayout.MarginLayoutParams(
 				LinearLayout.MarginLayoutParams.MATCH_PARENT, dp36);
-		AndroidUtils.setMargins(itemUpdateNowParams, dp12, 0, dp16, dp12);
+		AndroidUtils.setMargins(itemUpdateNowParams, dp12, dp16, dp16, dp12);
 		itemUpdateNowButton.setLayoutParams(itemUpdateNowParams);
 		((AppCompatImageView) itemUpdateNowButton.findViewById(R.id.button_icon)).setImageDrawable(
 				AppCompatResources.getDrawable(app, R.drawable.ic_action_update));
@@ -362,10 +362,10 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		descriptionView.setMinimumHeight(descriptionHeight);
 		descriptionView.getLayoutParams().height = descriptionHeight;
 
-		int frequencyHelpMessageHeight = getDimen(R.dimen.context_menu_progress_min_height);
 		TextView frequencyHelpMessageView = (TextView) itemFrequencyHelpMessage.getView();
-		frequencyHelpMessageView.setMinimumHeight(frequencyHelpMessageHeight);
-		frequencyHelpMessageView.getLayoutParams().height = frequencyHelpMessageHeight;
+		frequencyHelpMessageView.getLayoutParams().height = LinearLayout.LayoutParams.WRAP_CONTENT;
+		int dp16 = getDimen(R.dimen.content_padding);
+		AndroidUtils.setPadding(frequencyHelpMessageView, dp16, dp16 / 2, dp16, 0);
 
 		CommonPreference<Boolean> localUpdatePreference = preferenceForLocalIndex(fileName, settings);
 		setStateViaWiFiButton(localUpdatePreference);
