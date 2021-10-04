@@ -734,7 +734,7 @@
     <string name="osm_settings_descr">指定 OSM 遞交所需的 OpenStreetMap.org (OSM) 設定。</string>
     <string name="data_settings_descr">指定語言，下載/重載資料。</string>
     <string name="data_settings">資料</string>
-    <string name="osm_settings">OpenStreetMap 編輯</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap 編輯</string>
     <string name="additional_settings">額外設定</string>
     <string name="save_current_track_descr">現在把目前的軌跡存為 GPX 檔案。</string>
     <string name="save_current_track">儲存目前的軌跡</string>

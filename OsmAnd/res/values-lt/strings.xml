@@ -607,7 +607,7 @@
     <string name="osm_settings_descr">Nurodyti Openstreetmap.org (OSM) nustatymus, reikalingus informacijai į OSM pateikti.</string>
     <string name="data_settings_descr">Nurodyti kalbą, parsiųsti/atnaujinti duomenis.</string>
     <string name="data_settings">Data</string>
-    <string name="osm_settings">OSM redagavimas</string>
+    <string name="osm_editing_plugin_name">OSM redagavimas</string>
     <string name="auto_zoom_map_descr">Priderinti žemėlapio mastelį pagal jūsų greitį (kai žemėlapis sinchronizuojamas su esama padėtimi).</string>
     <string name="auto_zoom_map">Automatiškai keisti mastelį</string>
     <string name="additional_settings">Papildomi nustatymai</string>

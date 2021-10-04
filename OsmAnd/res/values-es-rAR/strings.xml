@@ -133,7 +133,7 @@
     <string name="audionotes_plugin_name">Notas multimedia</string>
     <string name="osmand_parking_plugin_name">Estacionamiento</string>
     <string name="shared_string_accessibility">Accesibilidad</string>
-    <string name="osm_settings">Edición de OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Edición de OpenStreetMap</string>
     <string name="debugging_and_development">Desarrollo de OsmAnd</string>
     <string name="back_to_map">Volver al mapa</string>
     <string name="share_note">Compartir nota multimedia</string>

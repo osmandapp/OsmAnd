@@ -1180,7 +1180,7 @@
     <string name="osm_settings_descr">Dislinda sas impostatziones de OpenStreetMap.org (OSM) netzessàrias pro contribuire a OSM.</string>
     <string name="data_settings_descr">Dislinda sa limba, iscàrriga/torra a carrigare sos datos.</string>
     <string name="data_settings">Datos</string>
-    <string name="osm_settings">Modìfica de OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Modìfica de OpenStreetMap</string>
     <string name="additional_settings">Impostatziones agiuntivas</string>
     <string name="shared_string_settings">Impostatziones</string>
     <string name="save_current_track_descr">Sarva como sa rasta currente comente unu documentu GPX.</string>

@@ -1164,7 +1164,7 @@
     <string name="record_plugin_name">Nahrawanje jězbow</string>
     <string name="audionotes_plugin_name">Awdijowe/widejowe noticy</string>
     <string name="audionotes_plugin_description">Přidatk za awdijowe/widejowe noticy skići móžnosć, po puću awdijowe/fotowe/widejowe noticy za wěstu poziciju nahrać, pak přez kneflk na kartowym wobrazu, abo direktnje přez kontekstowy meni.</string>
-    <string name="osm_settings">Wobdźěłanje OSM</string>
+    <string name="osm_editing_plugin_name">Wobdźěłanje OSM</string>
     <string name="rendering_attr_roadStyle_name">Stil pućow</string>
     <string name="rendering_attr_roadStyle_description">Stil pućow</string>
     <string name="rendering_value__name">Standard</string>

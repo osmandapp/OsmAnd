@@ -597,7 +597,7 @@
     <string name="osm_settings_descr">Určiť nastavenia Openstreetmap.org (OSM) potrebné pre prispievanie do OSM.</string>
     <string name="data_settings_descr">Vybrať jazyk, stiahnutie/znovu načítanie údajov.</string>
     <string name="data_settings">Údaje</string>
-    <string name="osm_settings">Upravovanie OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Upravovanie OpenStreetMap</string>
     <string name="auto_zoom_map_descr">Priblíženie mapy podľa vašej rýchlosti (keď je mapa synchronizovaná s aktuálnou polohou).</string>
     <string name="auto_zoom_map">Automatické priblíženie mapy</string>
     <string name="additional_settings">Ďalšie nastavenia</string>

@@ -140,7 +140,7 @@
     <string name="shared_string_online_maps">Mapes en llinia</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="shared_string_accessibility">Accesibilidá</string>
-    <string name="osm_settings">OpenStreetMap editing</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
     <string name="debugging_and_development">Desendolcu d\'OsmAnd</string>
     <string name="notes">A/V notes</string>
     <string name="online_map">Online map</string>

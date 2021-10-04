@@ -583,7 +583,7 @@
     <string name="osm_settings_descr">Укажіть параметри OpenStreetMap.org (OSM), необхідні для подання.</string>
     <string name="data_settings_descr">Налаштування даних: мова, оновлення даних.</string>
     <string name="data_settings">Дані</string>
-    <string name="osm_settings">OpenStreetMap-редагування</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap-редагування</string>
     <string name="auto_zoom_map_descr">Зміна масштабу мапи згідно Вашої швидкості (якщо мапа синхронізована з поточним положенням).</string>
     <string name="auto_zoom_map">Самозменшення/збільшення</string>
     <string name="additional_settings">Додаткові налаштування</string>

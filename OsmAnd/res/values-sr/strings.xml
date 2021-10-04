@@ -592,7 +592,7 @@
 \n И време и положај су видљиви на командној табли, а и као справица на карти. Може се додати аларм на Андроид календару.</string>
     <string name="osmand_distance_planning_plugin_description">Креирајте путање тапкањем на карту, или употребом и изменом постојећих GPX фајлова, да бисте испланирали пут и мерили растојања између тачака. Резултат се може сачувати као GPX фајлови за касније навођење.</string>
     <string name="shared_string_accessibility">Приступачност</string>
-    <string name="osm_settings">OpenStreetMap уређивање</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap уређивање</string>
     <string name="debugging_and_development">Развој OsmAnd-а</string>
     <string name="days_behind">претходни дани</string>
     <string name="parking_place">Места за паркирање</string>

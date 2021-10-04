@@ -425,7 +425,7 @@
     <string name="osm_settings_descr">Skonfiguruj ustawienia potrzebne do wysyłania danych do Openstreetmap.org (OSM).</string>
     <string name="data_settings_descr">Ustaw język, pobierz/wczytaj ponownie dane.</string>
     <string name="data_settings">Dane</string>
-    <string name="osm_settings">Edytowanie OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Edytowanie OpenStreetMap</string>
     <string name="auto_zoom_map_descr">Przybliża mapę w zależności od prędkości (dopóki mapa zsynchronizowana jest z aktualnym położeniem).</string>
     <string name="auto_zoom_map">Automatyczne przybliżanie mapy</string>
     <string name="additional_settings">Dodatkowe ustawienia</string>
