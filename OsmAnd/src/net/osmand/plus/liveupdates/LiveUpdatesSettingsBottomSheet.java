@@ -382,13 +382,14 @@ public class LiveUpdatesSettingsBottomSheet extends MenuBottomSheetDialogFragmen
 		Activity activity = getActivity();
 		final View mainView = getView();
 		if (activity != null && AndroidUiHelper.isOrientationPortrait(activity) && mainView != null) {
-			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			View scrollView = mainView.findViewById(R.id.scroll_view);
+			scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 
 				@Override
 				public void onGlobalLayout() {
-					mainView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-					LayoutParams newParams = new LayoutParams(LayoutParams.MATCH_PARENT, mainView.getHeight());
-					mainView.setLayoutParams(newParams);
+					scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					LayoutParams newParams = new LayoutParams(LayoutParams.MATCH_PARENT, scrollView.getHeight());
+					scrollView.setLayoutParams(newParams);
 				}
 			});
 		}
