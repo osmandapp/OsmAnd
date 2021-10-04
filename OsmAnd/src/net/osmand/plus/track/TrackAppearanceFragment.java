@@ -780,8 +780,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			List<Integer> colors = getTrackColors();
 			colorsCard = new ColorsCard(mapActivity, null, this,
 					trackDrawInfo.getColor(), colors, settings.CUSTOM_TRACK_COLORS, true);
-			AndroidUiHelper.updateVisibility(colorsCard.build(mapActivity), trackDrawInfo.getColoringType().isTrackSolid());
 			addCard(container, colorsCard);
+			int dp12 = getResources().getDimensionPixelSize(R.dimen.card_padding);
+			AndroidUtils.setPadding(colorsCard.getView(), 0, dp12, 0, dp12);
+			boolean shouldShowColorsCard = trackDrawInfo.getColoringType().isTrackSolid();
+			AndroidUiHelper.updateVisibility(colorsCard.getView(), shouldShowColorsCard);
 		}
 	}
 
