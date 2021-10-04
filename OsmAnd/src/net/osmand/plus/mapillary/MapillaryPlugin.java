@@ -1,9 +1,5 @@
 package net.osmand.plus.mapillary;
 
-import static android.content.Intent.ACTION_VIEW;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +18,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.data.Amenity;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ContextMenuAdapter;
@@ -36,6 +33,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -51,7 +49,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import static android.content.Intent.ACTION_VIEW;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 public class MapillaryPlugin extends OsmandPlugin {
 
@@ -247,6 +251,31 @@ public class MapillaryPlugin extends OsmandPlugin {
 		}
 	}
 
+	/**
+	 * Create Mapillary image from amenity tag
+	 */
+	@Override
+	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params,
+	                                                   @Nullable Map<String, String> additionalParams,
+	                                                   @Nullable GetImageCardsListener listener) {
+		List<ImageCard> imageCards = new ArrayList<>();
+		if (mapActivity != null && additionalParams != null) {
+			String key = additionalParams.get(Amenity.MAPILLARY);
+			if (key != null) {
+				JSONObject imageObject = MapillaryOsmTagHelper.getImageByKey(key);
+				if (imageObject != null) {
+					imageCards.add(new MapillaryImageCard(mapActivity, imageObject));
+				}
+				additionalParams.remove(Amenity.MAPILLARY);
+			}
+			params.putAll(additionalParams);
+		}
+		return imageCards;
+	}
+
+	/**
+	 * Create Mapillary images from OsmAnd response
+	 */
 	@Override
 	protected ImageCard createContextMenuImageCard(@NonNull JSONObject imageObject) {
 		ImageCard imageCard = null;

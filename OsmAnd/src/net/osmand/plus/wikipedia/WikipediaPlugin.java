@@ -60,9 +60,9 @@ import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.WIKIPEDIA_ID;
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.osm.MapPoiTypes.WIKI_LANG;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
-import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
 import static net.osmand.plus.helpers.FileNameTranslationHelper.WIKI_NAME;
 
 public class WikipediaPlugin extends OsmandPlugin {
@@ -498,28 +498,28 @@ public class WikipediaPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params, @Nullable Map<String, String> additionalParams, @Nullable GetImageCardsListener listener) {
+	protected List<ImageCard> getContextMenuImageCards(@NonNull Map<String, String> params,
+	                                                   @Nullable Map<String, String> additionalParams,
+	                                                   @Nullable GetImageCardsListener listener) {
 		List<ImageCard> imageCards = new ArrayList<>();
-		if (mapActivity != null) {
-			if (additionalParams != null) {
-				String wikidataId = additionalParams.get(Amenity.WIKIDATA);
-				if (wikidataId != null) {
-					additionalParams.remove(Amenity.WIKIDATA);
-					WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, imageCards);
-				}
-				String wikimediaContent = additionalParams.get(Amenity.WIKIMEDIA_COMMONS);
-				if (wikimediaContent != null) {
-					additionalParams.remove(Amenity.WIKIMEDIA_COMMONS);
-					WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, imageCards);
-				}
-				params.putAll(additionalParams);
+		if (mapActivity != null && additionalParams != null) {
+			String wikidataId = additionalParams.get(Amenity.WIKIDATA);
+			if (wikidataId != null) {
+				additionalParams.remove(Amenity.WIKIDATA);
+				WikiImageHelper.addWikidataImageCards(mapActivity, wikidataId, imageCards);
 			}
+			String wikimediaContent = additionalParams.get(Amenity.WIKIMEDIA_COMMONS);
+			if (wikimediaContent != null) {
+				additionalParams.remove(Amenity.WIKIMEDIA_COMMONS);
+				WikiImageHelper.addWikimediaImageCards(mapActivity, wikimediaContent, imageCards);
+			}
+			params.putAll(additionalParams);
 		}
 		return imageCards;
 	}
 
 	public static boolean containsWikipediaExtension(@NonNull String fileName) {
 		return Algorithms.containsAny(fileName,
-				WIKI_NAME , IndexConstants.BINARY_WIKI_MAP_INDEX_EXT);
+				WIKI_NAME, IndexConstants.BINARY_WIKI_MAP_INDEX_EXT);
 	}
 }

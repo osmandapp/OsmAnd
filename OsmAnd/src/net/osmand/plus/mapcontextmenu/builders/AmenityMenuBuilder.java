@@ -65,6 +65,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.data.Amenity.MAPILLARY;
+
 public class AmenityMenuBuilder extends MenuBuilder {
 
 	private static final String WIKI_LINK = ".wikipedia.org/w";
@@ -837,14 +839,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected Map<String, String> getAdditionalCardParams() {
 		Map<String, String> params = new HashMap<>();
 		String imageValue = amenity.getAdditionalInfo("image");
-		String mapillaryValue = amenity.getAdditionalInfo("mapillary");
+		String mapillaryValue = amenity.getAdditionalInfo(MAPILLARY);
 		String wikidataValue = amenity.getAdditionalInfo(Amenity.WIKIDATA);
 		String wikimediaValue = amenity.getAdditionalInfo(Amenity.WIKIMEDIA_COMMONS);
 		if (!Algorithms.isEmpty(imageValue)) {
 			params.put("osm_image", getDecodedAdditionalInfo(imageValue));
 		}
 		if (!Algorithms.isEmpty(mapillaryValue)) {
-			params.put("osm_mapillary_key", getDecodedAdditionalInfo(mapillaryValue));
+			params.put(MAPILLARY, getDecodedAdditionalInfo(mapillaryValue));
 		}
 		if (!Algorithms.isEmpty(wikidataValue)) {
 			params.put(Amenity.WIKIDATA, getDecodedAdditionalInfo(wikidataValue));

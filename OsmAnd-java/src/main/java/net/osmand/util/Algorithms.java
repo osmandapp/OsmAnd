@@ -509,6 +509,17 @@ public class Algorithms {
 		return ((ch1 << 8) + ch2);
 	}
 
+	public static boolean equalsAny(Object o, Object ... args) {
+		if (o != null && args != null && args.length > 0) {
+			for (Object arg: args) {
+				if (objectEquals(o, arg)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public static boolean startsWithAny(String s, String ... args) {
 		if (!isEmpty(s) && args != null && args.length > 0) {
 			for (String arg : args) {
