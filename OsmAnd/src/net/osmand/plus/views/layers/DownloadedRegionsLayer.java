@@ -374,35 +374,30 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	private List<BinaryMapDataObject> queryData(RotatedTileBox tileBox) {
 		if (tileBox.getZoom() >= ZOOM_AFTER_BASEMAP) {
-			if(!checkIfMapEmpty(tileBox)) {
+			if (!checkIfMapEmpty(tileBox)) {
 				return Collections.emptyList();
 			}
 		}
 		LatLon lt = tileBox.getLeftTopLatLon();
 		LatLon rb = tileBox.getRightBottomLatLon();
-//		if (tileBox.getZoom() >= ZOOM_TO_SHOW_MAP_NAMES) {
-//			lt = rb = tileBox.getCenterLatLon();
-//		}
 
-		List<BinaryMapDataObject> result = null;
-		int left = MapUtils.get31TileNumberX(lt.getLongitude());
-		int right = MapUtils.get31TileNumberX(rb.getLongitude());
-		int top = MapUtils.get31TileNumberY(lt.getLatitude());
-		int bottom = MapUtils.get31TileNumberY(rb.getLatitude());
+		List<BinaryMapDataObject> result;
+		int left = MapUtils.get31TileNumberX(Math.min(lt.getLongitude(), rb.getLongitude()));
+		int right = MapUtils.get31TileNumberX(Math.max(lt.getLongitude(), rb.getLongitude()));
+		int top = MapUtils.get31TileNumberY(Math.max(lt.getLatitude(), rb.getLatitude()));
+		int bottom = MapUtils.get31TileNumberY(Math.min(lt.getLatitude(), rb.getLatitude()));
 
 		try {
 			result = osmandRegions.query(left, right, top, bottom, false);
 		} catch (IOException e) {
-			return result;
+			return null;
 		}
 
 		Iterator<BinaryMapDataObject> it = result.iterator();
 		while (it.hasNext()) {
 			BinaryMapDataObject o = it.next();
-			if (tileBox.getZoom() < ZOOM_TO_SHOW_SELECTION) {
-				//
-			} else {
-				if (!osmandRegions.contain(o, left / 2 + right / 2, top / 2 + bottom / 2)) {
+			if (tileBox.getZoom() >= ZOOM_TO_SHOW_SELECTION) {
+				if (!osmandRegions.contain(o, (left + right) / 2, (top + bottom) / 2)) {
 					it.remove();
 				}
 			}
@@ -412,26 +407,6 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	}
 
 	private boolean checkIfMapEmpty(RotatedTileBox tileBox) {
-//		RotatedTileBox cb = rm.getRenderer().getCheckedBox();
-		// old code to wait
-		// wait for image to be rendered
-//		int count = 0;
-//		while (cb == null || cb.getZoom() != tileBox.getZoom() || 
-//				!cb.containsLatLon(tileBox.getCenterLatLon())) {
-//			if (count++ > 5) {
-//				return false;
-//			}
-//			try {
-//				Thread.sleep(1000);
-//			} catch (InterruptedException e) {
-//				return false;
-//			}
-//			cb = rm.getRenderer().getCheckedBox();
-//		}
-//		if (cb == null || cb.getZoom() != tileBox.getZoom() || 
-//				!cb.containsLatLon(tileBox.getCenterLatLon())) {
-//			return false;
-//		}
 		int cState = rm.getRenderer().getCheckedRenderedState();
 		final boolean empty;
 		if (tileBox.getZoom() < ZOOM_AFTER_BASEMAP) {
