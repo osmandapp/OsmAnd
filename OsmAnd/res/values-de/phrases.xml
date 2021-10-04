@@ -4028,4 +4028,5 @@
     <string name="poi_callable_yes">Ja</string>
     <string name="poi_manufacturer">Hersteller</string>
     <string name="poi_groundskeeping">Laden für Gartenpflege</string>
+    <string name="poi_country_store">Landhandel</string>
 </resources>
