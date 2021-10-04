@@ -30,11 +30,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
@@ -159,13 +163,19 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 				|| sr.objectType == ObjectType.LOCATION
 				|| sr.objectType == ObjectType.HOUSE
 				|| sr.objectType == ObjectType.FAVORITE
+				|| sr.objectType == ObjectType.MAP_MARKER
+				|| sr.objectType == ObjectType.ROUTE
 				|| sr.objectType == ObjectType.RECENT_OBJ
 				|| sr.objectType == ObjectType.WPT
 				|| sr.objectType == ObjectType.STREET_INTERSECTION
 				|| sr.objectType == ObjectType.GPX_TRACK) {
 
 			getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
-					obj -> SearchScreen.this.onRouteSelected(sr));
+					obj -> {
+						if (obj != null) {
+							SearchScreen.this.onRouteSelected(sr);
+						}
+					});
 		} else {
 			searchHelper.completeQueryWithObject(sr);
 			if (sr.object instanceof AbstractPoiType || sr.object instanceof PoiUIFilter) {
@@ -333,12 +343,10 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 
 	@Override
 	public void onStart(AppInitializer init) {
-
 	}
 
 	@Override
 	public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
-
 	}
 
 	@Override
@@ -353,9 +361,31 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 		}
 	}
 
+	private void updateApplicationMode(ApplicationMode mode, ApplicationMode next) {
+		OsmandApplication app = getApp();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		OsmandPreference<ApplicationMode> appMode = app.getSettings().APPLICATION_MODE;
+		if (routingHelper.isFollowingMode() && appMode.get() == mode) {
+			appMode.set(next);
+		}
+		routingHelper.setAppMode(next);
+		app.initVoiceCommandPlayer(app, next, null, true,
+				false, false, true);
+		routingHelper.onSettingsChanged(true);
+	}
+
 	private void onRouteSelected(@NonNull SearchResult sr) {
-		// Start the same demo instructions. More will be added in the future.
-		//setResult(DemoScripts.getNavigateHome(getCarContext()));
+		OsmandApplication app = getApp();
+		if (sr.objectType == ObjectType.ROUTE) {
+			ApplicationMode lastAppMode = app.getSettings().LAST_ROUTE_APPLICATION_MODE.get();
+			ApplicationMode currentAppMode = app.getRoutingHelper().getAppMode();
+			if (lastAppMode == ApplicationMode.DEFAULT) {
+				lastAppMode = currentAppMode;
+			}
+			updateApplicationMode(currentAppMode, lastAppMode);
+			app.getTargetPointsHelper().restoreTargetPoints(true);
+		}
+		app.getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
 		finish();
 	}
 }

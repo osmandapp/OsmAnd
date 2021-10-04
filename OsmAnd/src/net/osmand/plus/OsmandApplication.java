@@ -3,7 +3,6 @@ package net.osmand.plus;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -30,6 +29,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.car.app.CarToast;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
@@ -79,8 +79,8 @@ import net.osmand.plus.openplacereviews.OprAuthHelper;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
@@ -520,7 +520,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return player;
 	}
 
-	public void initVoiceCommandPlayer(@NonNull Activity uiContext,
+	public void initVoiceCommandPlayer(@NonNull Context context,
 	                                   @NonNull ApplicationMode appMode,
 	                                   @Nullable Runnable onCommandPlayerCreated,
 	                                   boolean warnNoProvider,
@@ -531,12 +531,12 @@ public class OsmandApplication extends MultiDexApplication {
 		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			osmandSettings.VOICE_MUTE.setModeValue(appMode, true);
 		} else if (Algorithms.isEmpty(voiceProvider)) {
-			if (warnNoProvider && uiContext instanceof MapActivity) {
-				OsmAndDialogs.showVoiceProviderDialog((MapActivity) uiContext, appMode, applyAllModes);
+			if (warnNoProvider && context instanceof MapActivity) {
+				OsmAndDialogs.showVoiceProviderDialog((MapActivity) context, appMode, applyAllModes);
 			}
 		} else {
 			if (player == null || !voiceProvider.equals(player.getCurrentVoice()) || forceInitialization) {
-				appInitializer.initVoiceDataInDifferentThread(uiContext, appMode, voiceProvider,
+				appInitializer.initVoiceDataInDifferentThread(context, appMode, voiceProvider,
 						onCommandPlayerCreated, showProgress);
 			}
 		}
@@ -681,7 +681,6 @@ public class OsmandApplication extends MultiDexApplication {
 				// swallow all exceptions
 				android.util.Log.e(PlatformUtil.TAG, "Exception while handle other exception", e); 
 			}
-
 		}
 	}
 
@@ -698,37 +697,45 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void showShortToastMessage(final int msgId, final Object... args) {
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+		uiHandler.post(() -> {
+			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+			NavigationSession carNavigationSession = this.carNavigationSession;
+			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+				CarToast.makeText(carNavigationSession.getCarContext(),
+						getString(msgId, args), CarToast.LENGTH_SHORT).show();
 			}
 		});
 	}
 
 	public void showShortToastMessage(final String msg) {
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
+		uiHandler.post(() -> {
+			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
+			NavigationSession carNavigationSession = this.carNavigationSession;
+			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+				CarToast.makeText(carNavigationSession.getCarContext(),
+						msg, CarToast.LENGTH_SHORT).show();
 			}
 		});
 	}
 
 	public void showToastMessage(final int msgId, final Object... args) {
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
+		uiHandler.post(() -> {
+			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
+			NavigationSession carNavigationSession = this.carNavigationSession;
+			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+				CarToast.makeText(carNavigationSession.getCarContext(),
+						getString(msgId, args), CarToast.LENGTH_LONG).show();
 			}
 		});
 	}
 
 	public void showToastMessage(final String msg) {
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();				
+		uiHandler.post(() -> {
+			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();
+			NavigationSession carNavigationSession = this.carNavigationSession;
+			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+				CarToast.makeText(carNavigationSession.getCarContext(),
+						msg, CarToast.LENGTH_LONG).show();
 			}
 		});
 	}

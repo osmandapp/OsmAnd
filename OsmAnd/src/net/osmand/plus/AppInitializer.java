@@ -559,15 +559,15 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	public synchronized void initVoiceDataInDifferentThread(@NonNull final Activity uiContext,
+	public synchronized void initVoiceDataInDifferentThread(@NonNull final Context context,
 	                                                        @NonNull final ApplicationMode applicationMode,
 	                                                        @NonNull final String voiceProvider,
 	                                                        @Nullable final Runnable onFinishInitialization,
 	                                                        boolean showProgress) {
 		String progressTitle = app.getString(R.string.loading_data);
 		String progressMessage = app.getString(R.string.voice_data_initializing);
-		final ProgressDialog progressDialog = showProgress
-				? ProgressDialog.show(uiContext, progressTitle, progressMessage)
+		final ProgressDialog progressDialog = showProgress && context instanceof Activity
+				? ProgressDialog.show(context, progressTitle, progressMessage)
 				: null;
 
 		new Thread(() -> {
@@ -585,7 +585,7 @@ public class AppInitializer implements IProgress {
 					progressDialog.dismiss();
 				}
 				if (onFinishInitialization != null) {
-					uiContext.runOnUiThread(onFinishInitialization);
+					((OsmandApplication) context.getApplicationContext()).runInUIThread(onFinishInitialization);
 				}
 			}
 		}).start();

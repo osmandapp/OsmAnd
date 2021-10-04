@@ -128,7 +128,11 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 				|| sr.objectType == ObjectType.GPX_TRACK) {
 
 			getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
-					obj -> SearchResultsScreen.this.onRouteSelected(sr));
+					obj -> {
+						if (obj != null) {
+							SearchResultsScreen.this.onRouteSelected(sr);
+						}
+					});
 		} else {
 			searchHelper.completeQueryWithObject(sr);
 			invalidate();
@@ -147,8 +151,7 @@ public final class SearchResultsScreen extends Screen implements DefaultLifecycl
 	}
 
 	private void onRouteSelected(@NonNull SearchResult sr) {
-		// Start the same demo instructions. More will be added in the future.
-		//setResult(DemoScripts.getNavigateHome(getCarContext()));
+		getApp().getOsmandMap().getMapLayers().getMapControlsLayer().startNavigation();
 		finish();
 	}
 }
