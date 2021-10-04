@@ -230,6 +230,12 @@ public class WaypointHelper {
 					if (!atd.isTurnStateActive(0, d, STATE_LONG_PNT_APPROACH)) {
 						break;
 					}
+
+					// Set actual distance to speed camera
+					if (inf.getType() == AlarmInfoType.SPEED_CAMERA) {
+						inf.setFloatValue(d);
+					}
+
 					float time = speed > 0 ? d / speed : Integer.MAX_VALUE;
 					int vl = inf.updateDistanceAndGetPriority(time, d);
 					if (vl < value && (showCameras || inf.getType() != AlarmInfoType.SPEED_CAMERA)) {
@@ -460,7 +466,15 @@ public class WaypointHelper {
 						} else if (type == ALARMS) {
 							for (LocationPointWrapper pw : approachPoints) {
 								AlarmInfo alarm = (AlarmInfo) pw.point;
-								voiceRouter.announceAlarm(new AlarmInfo(alarm.getType(), -1), lastKnownLocation.getSpeed());
+								AlarmInfo alarmCopy = new AlarmInfo(alarm.getType(), -1);
+
+								// Set actual distance and copy max speed to speed camera
+								if (alarmCopy.getType() == AlarmInfoType.SPEED_CAMERA){
+									alarmCopy.setFloatValue(route.getDistanceToPoint(alarm.getLocationIndex()));
+									alarmCopy.setIntValue(alarm.getIntValue());
+								}
+
+								voiceRouter.announceAlarm(alarmCopy, lastKnownLocation.getSpeed());
 								lastAnnouncedAlarms.put(alarm.getType(), alarm);
 							}
 						} else if (type == FAVORITES) {

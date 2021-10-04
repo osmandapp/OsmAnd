@@ -321,15 +321,19 @@ public class VoiceRouter {
 		AlarmInfoType type = info.getType();
 		if (type == AlarmInfoType.SPEED_LIMIT) {
 			announceSpeedAlarm(info.getIntValue(), speed);
+		} else if (type == AlarmInfoType.SPEED_CAMERA) {
+			OsmandSettings settings = router.getSettings();
+			if (settings.SPEAK_SPEED_CAMERA.get()) {
+				announceSpeedCameraAlarm(info.getFloatValue(), info.getIntValue());
+			}
 		} else {
 			OsmandSettings settings = router.getSettings();
 			boolean speakTrafficWarnings = settings.SPEAK_TRAFFIC_WARNINGS.get();
 			boolean speakTunnels = type == AlarmInfoType.TUNNEL && settings.SPEAK_TUNNELS.get();
 			boolean speakPedestrian = type == AlarmInfoType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();
-			boolean speakSpeedCamera = type == AlarmInfoType.SPEED_CAMERA && settings.SPEAK_SPEED_CAMERA.get();
-			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN || type == AlarmInfoType.SPEED_CAMERA;
+			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN;
 
-			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
+			if (speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					p.attention(String.valueOf(type));
@@ -365,7 +369,19 @@ public class VoiceRouter {
 			}
 		}
 	}
-	
+
+	private void announceSpeedCameraAlarm(double dist, int maxSpeed) {
+		CommandBuilder p = getNewCommandPlayerToPlay();
+		if (p != null) {
+			if (dist > 0 && maxSpeed > 0) {
+				p.speedCameraAlarm(dist, maxSpeed);
+			} else {
+				p.attention(String.valueOf(AlarmInfoType.SPEED_CAMERA));
+			}
+		}
+		play(p);
+	}
+
 	private boolean isTargetPoint(NextDirectionInfo info) {
 		boolean in = info != null && info.intermediatePoint;
 		boolean target = info == null || info.directionInfo == null

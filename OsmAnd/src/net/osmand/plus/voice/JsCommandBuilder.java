@@ -80,6 +80,11 @@ public class JsCommandBuilder extends CommandBuilder{
 	}
 
 	@Override
+	public CommandBuilder speedCameraAlarm(double dist, int maxSpeed) {
+		return addCommand(C_SPEED_CAMERA_ALARM, dist, maxSpeed);
+	}
+
+	@Override
 	public CommandBuilder attention(String type) {
 		return addCommand(C_ATTENTION, type);
 	}

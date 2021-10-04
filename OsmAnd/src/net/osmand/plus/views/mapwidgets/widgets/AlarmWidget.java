@@ -265,7 +265,14 @@ public class AlarmWidget {
 			}
 			text = alarm.getIntValue() + "";
 		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.SPEED_CAMERA) {
-			locImgId = R.drawable.warnings_speed_camera;
+			int maxSpeed = alarm.getIntValue();
+			if (maxSpeed > 0) {
+				locImgId = R.drawable.warnings_speed_camera_w_limit;
+				text = maxSpeed + "";
+			}
+			else {
+				locImgId = R.drawable.warnings_speed_camera;
+			}
 		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.BORDER_CONTROL) {
 			locImgId = R.drawable.warnings_border_control;
 		} else if (alarm.getType() == AlarmInfo.AlarmInfoType.HAZARD) {
