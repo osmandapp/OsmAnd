@@ -57,6 +57,7 @@ import androidx.core.app.ActivityCompat;
 public class OsmAndLocationProvider implements SensorEventListener {
 
 	public static final int REQUEST_LOCATION_PERMISSION = 100;
+	public static final int TYPE_ORIENTATION_Q = 27;
 
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
 
@@ -428,9 +429,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 				if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
 					Log.e(PlatformUtil.TAG, "Sensor rotation could not be enabled. s=" + s);
-					s = sensorMgr.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
-					if (s == null || !sensorMgr.registerListener(this, s, 16000)) {
-						Log.e(PlatformUtil.TAG, "Sensor rotation could not be enabled. s=" + s);
+					s = sensorMgr.getDefaultSensor(TYPE_ORIENTATION_Q);
+					if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
+						Log.e(PlatformUtil.TAG, "Sensor orientation (27) could not be enabled. s=" + s);
 					}
 				}
 				List<Sensor> sensorsList = sensorMgr.getSensorList(Sensor.TYPE_ALL);
@@ -498,6 +499,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 						System.arraycopy(event.values, 0, mGeoMags, 0, 3);
 						break;
 					case Sensor.TYPE_ROTATION_VECTOR:
+					case TYPE_ORIENTATION_Q:
 						val = event.values[0];
 						break;
 					default:
