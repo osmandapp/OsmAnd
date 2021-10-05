@@ -76,7 +76,15 @@ public class RouteTestingTest {
 
 		for (int planRoadDirection = -1; planRoadDirection <= 1; planRoadDirection++) {
 			if (params.containsKey("wrongPlanRoadDirection")) {
-				if (params.get("wrongPlanRoadDirection").equals(planRoadDirection + "")) {
+				String[] plans = params.get("wrongPlanRoadDirection").split(",");
+				boolean isWrongPlan = false;
+				for (String plan : plans) {
+					if (plan.trim().equals(planRoadDirection + "")) {
+						isWrongPlan = true;
+						break;
+					}
+				}
+				if (isWrongPlan) {
 					continue;
 				}
 			}
@@ -123,6 +131,7 @@ public class RouteTestingTest {
 						break;
 				}
 			}
+			planRoadDirection++;
 		}
 	}
 }
