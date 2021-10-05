@@ -427,7 +427,15 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			} else {
 				Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 				if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
-					Log.e(PlatformUtil.TAG, "Sensor rotation could not be enabled");
+					Log.e(PlatformUtil.TAG, "Sensor rotation could not be enabled. s=" + s);
+					s = sensorMgr.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+					if (s == null || !sensorMgr.registerListener(this, s, 16000)) {
+						Log.e(PlatformUtil.TAG, "Sensor rotation could not be enabled. s=" + s);
+					}
+				}
+				List<Sensor> sensorsList = sensorMgr.getSensorList(Sensor.TYPE_ALL);
+				for (Sensor sensor : sensorsList) {
+					Log.d(PlatformUtil.TAG, sensor.toString());
 				}
 			}
 			sensorRegistered = true;
