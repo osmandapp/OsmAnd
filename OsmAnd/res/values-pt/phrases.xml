@@ -4028,4 +4028,6 @@
     <string name="poi_manufacturer">Fabricante</string>
     <string name="poi_callable">Recebe chamadas</string>
     <string name="poi_groundskeeping">Loja de manutenção de jardins</string>
+    <string name="poi_prep_school">Escola de preparação para exames</string>
+    <string name="poi_country_store">Loja rural</string>
 </resources>

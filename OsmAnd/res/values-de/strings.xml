@@ -4176,13 +4176,13 @@
     <string name="routing_attr_avoid_tunnels_description">Tunnel vermeiden</string>
     <string name="routing_attr_avoid_tunnels_name">Tunnel vermeiden</string>
     <string name="routing_attr_avoid_highway_description">Schnellstraßen vermeiden</string>
-    <string name="routing_attr_avoid_highway_name">Schnellstraßen vermeiden</string> 
+    <string name="routing_attr_avoid_highway_name">Schnellstraßen vermeiden</string>
     <string name="routing_attr_allow_gate_description">Schranken benutzen</string>
-    <string name="routing_attr_allow_gate_name">Schranken benutzen</string> 
+    <string name="routing_attr_allow_gate_name">Schranken benutzen</string>
     <string name="routing_attr_only_permitted_streets_description">Nur Straßen mit ausdrücklicher Genehmigung nutzen</string>
-    <string name="routing_attr_only_permitted_streets_name">Nur Straßen mit Genehmigung nutzen</string>      
+    <string name="routing_attr_only_permitted_streets_name">Nur Straßen mit Genehmigung nutzen</string>
     <string name="routing_attr_only_permitted_ways_description">Nur Geländewege mit ausdrücklicher Genehmigung nutzen</string>
-    <string name="routing_attr_only_permitted_ways_name">Nur Geländewege mit Genehmigung nutzen</string>      
+    <string name="routing_attr_only_permitted_ways_name">Nur Geländewege mit Genehmigung nutzen</string>
     <string name="routing_attr_prefer_horse_routes_description">Reitrouten bevorzugen</string>
     <string name="routing_attr_prefer_horse_routes_name">Reitrouten bevorzugen</string>
     <string name="send_crash_log">Crash Log senden</string>
@@ -4343,4 +4343,9 @@
     <string name="shared_string_files">Dateien</string>
     <string name="sample_wikivoyage">Wikivoyage Beispiel</string>
     <string name="shared_string_mini">mini</string>
+    <string name="search_title">Suche: %1$s</string>
+    <string name="upload_gpx_description_hint">Wenn leer, werden Tracknamen als Beschreibung verwendet. Eingegebene Beschreibungen werden auf alle Tracks angewendet.</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Taktile Oberflächen bevorzugen</string>
+    <string name="horseback_riding">Reiten</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Taktile Oberflächen bevorzugen</string>
 </resources>
