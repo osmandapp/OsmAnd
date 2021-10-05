@@ -363,19 +363,9 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return onMarkerSelectListener;
 	}
 
-	public void addTargetPointListener() {
-		OsmandApplication app = getApp();
+	public void addVoiceMuteChangeListener() {
 		if (app != null) {
-			app.getTargetPointsHelper().addListener(onStateChangedListener);
 			app.getSettings().VOICE_MUTE.addListener(voiceMuteChangeListener);
-		}
-	}
-
-	private void removeTargetPointListener() {
-		OsmandApplication app = getApp();
-		if (app != null) {
-			app.getTargetPointsHelper().removeListener(onStateChangedListener);
-			app.getSettings().VOICE_MUTE.removeListener(voiceMuteChangeListener);
 		}
 	}
 
@@ -1183,7 +1173,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		}
 	}
 
-	private void createMuteSoundRoutingParameterButton(final MapActivity mapActivity, final MuteSoundRoutingParameter parameter, final RouteMenuAppModes mode, LinearLayout optionsContainer) {
+	private void createMuteSoundRoutingParameterButton(final MapActivity mapActivity,
+	                                                   final MuteSoundRoutingParameter parameter,
+	                                                   final RouteMenuAppModes mode,
+	                                                   LinearLayout optionsContainer) {
 		final ApplicationMode appMode = mapActivity.getRoutingHelper().getAppMode();
 		final int colorActive = ContextCompat.getColor(mapActivity, ColorUtilities.getActiveColorId(nightMode));
 		final int colorDisabled = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
@@ -1195,8 +1188,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		View item = createToolbarOptionView(active, text, parameter.getActiveIconId(), parameter.getDisabledIconId(), v -> {
 			OsmandApplication app = getApp();
 			if (app != null) {
-				String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(appMode);
-				if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+				if (app.getSettings().isVoiceProviderNotSelected(appMode)) {
 					VoiceLanguageBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(),
 							null, appMode, true);
 				} else {
@@ -2276,22 +2268,24 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void routeWasFinished() {
 	}
 
-	public void onResume(Fragment fragment) {
+	public void onResume() {
 		OsmandApplication app = getApp();
 		if (app != null) {
 			app.getRoutingHelper().addListener(this);
 			app.getFavorites().addListener(this);
+			app.getTargetPointsHelper().addListener(onStateChangedListener);
+			addVoiceMuteChangeListener();
 		}
-		addTargetPointListener();
 	}
 
-	public void onPause(Fragment fragment) {
+	public void onPause() {
 		OsmandApplication app = getApp();
 		if (app != null) {
 			app.getRoutingHelper().removeListener(this);
 			app.getFavorites().removeListener(this);
+			app.getTargetPointsHelper().removeListener(onStateChangedListener);
+			app.getSettings().VOICE_MUTE.removeListener(voiceMuteChangeListener);
 		}
-		removeTargetPointListener();
 		menuCards = new ArrayList<>();
 	}
 

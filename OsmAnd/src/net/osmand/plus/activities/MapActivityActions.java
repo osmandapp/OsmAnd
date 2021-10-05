@@ -573,6 +573,10 @@ public class MapActivityActions implements DialogProvider {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 
+		if (showMenu) {
+			mapActivity.getMapRouteInfoMenu().addVoiceMuteChangeListener();
+		}
+
 		ApplicationMode mode = appMode != null ? appMode : getRouteMode();
 		//app.getSettings().setApplicationMode(mode, false);
 		app.getRoutingHelper().setAppMode(mode);
