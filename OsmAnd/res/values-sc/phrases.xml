@@ -2451,7 +2451,7 @@
     <string name="poi_socket_type3_output_filter">Casta 3 (SCAME)</string>
     <string name="poi_socket_cee_blue_output_filter">CEE blue</string>
     <string name="poi_socket_schuko_output_filter">Schuko</string>
-    <string name="poi_beachvolleyball">Bòcia a bolu de plaja</string>
+    <string name="poi_beachvolleyball">Botza a bolu de plaja</string>
     <string name="poi_seamark_clearance_height">Artària màssima</string>
     <string name="poi_seamark_clearance_height_closed">Artària màssima (serradu)</string>
     <string name="poi_seamark_clearance_height_open">Artària màssima (abertu)</string>
@@ -3356,7 +3356,7 @@
     <string name="poi_socket_schuko_yes">Schuko</string>
     <string name="poi_socket_bs1363_yes">BS 1363</string>
     <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
-    <string name="poi_volleyball">Bòcia a bolu</string>
+    <string name="poi_volleyball">Botza a bolu</string>
     <string name="poi_map_size_site">Mannària de sa mapa: giassu</string>
     <string name="poi_map_size_city">Mannària de sa mapa: tzitade</string>
     <string name="poi_map_size_region">Mannària de sa mapa: regione</string>
@@ -4027,4 +4027,7 @@
     <string name="poi_payment_reverse_charge_calls_yes">Mutidas cun addèbitu furriadu: eja</string>
     <string name="poi_payment_calling_cards_yes">Ischedas telefònicas</string>
     <string name="poi_payment_reverse_charge_calls_no">Mutidas cun addèbitu furriadu: nono</string>
+    <string name="poi_prep_school">Iscola preparativa privada</string>
+    <string name="poi_country_store">Butega pro su sartu</string>
+    <string name="poi_groundskeeping">Butega de giardinàgiu</string>
 </resources>

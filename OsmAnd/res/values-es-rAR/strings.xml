@@ -133,7 +133,7 @@
     <string name="audionotes_plugin_name">Notas multimedia</string>
     <string name="osmand_parking_plugin_name">Estacionamiento</string>
     <string name="shared_string_accessibility">Accesibilidad</string>
-    <string name="osm_settings">Edición de OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Edición de OpenStreetMap</string>
     <string name="debugging_and_development">Desarrollo de OsmAnd</string>
     <string name="back_to_map">Volver al mapa</string>
     <string name="share_note">Compartir nota multimedia</string>
@@ -3801,8 +3801,8 @@
 \nLa suscripción se renueva automáticamente a menos que se cancele antes de la fecha de renovación.
 \n
 \nGestiona o cancela las suscripciones cuando quieras, en los ajustes de AppGallery.</string>
-    <string name="routing_attr_avoid_footways_description">Evita pasar por las veredas o aceras</string>
-    <string name="routing_attr_avoid_footways_name">Evitar veredas/aceras</string>
+    <string name="routing_attr_avoid_footways_description">Evita pasar por veredas o aceras</string>
+    <string name="routing_attr_avoid_footways_name">Evitar veredas o aceras</string>
     <string name="development">Desarrollo</string>
     <string name="use_live_public_transport">Datos de «OsmAnd Live»</string>
     <string name="use_live_routing">Datos de «OsmAnd Live»</string>
@@ -4331,7 +4331,7 @@
     <string name="travel_route_types">Tipos de rutas</string>
     <string name="sample_wikivoyage">Ejemplo de Wikiviajes</string>
     <string name="shared_string_mini">mini</string>
-    <string name="horseback_riding">Cabalgatas</string>
+    <string name="horseback_riding">Cabalgata</string>
     <string name="routing_attr_prefer_horse_routes_description">Preferir las rutas a caballo</string>
     <string name="routing_attr_prefer_horse_routes_name">Preferir rutas a caballo</string>
     <string name="routing_attr_only_permitted_ways_name">Vías expresamente autorizadas</string>

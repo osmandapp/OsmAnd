@@ -1512,7 +1512,7 @@
 \n Ambaŭ loko kaj tempo estas montrataj en la stirpanelo de kaj sur la fenestraĵo sur la map‑ekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
     <string name="osmand_distance_planning_plugin_description">Ebligas difini kursojn per frapeti la mapon kaj modifi ekzistajn GPX‑dosierojn – por plani vojaĝon kaj mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX‑dosierojn, kiujn oni povas estonte uzi por gvidado.</string>
-    <string name="osm_settings">OSM-redaktilo</string>
+    <string name="osm_editing_plugin_name">OSM-redaktilo</string>
     <string name="osm_editing_plugin_description">Kontribuu al OSM per krei aŭ modifi punktojn (ekz. vendejojn, vidindaĵojn, hidrantojn), malfermi aŭ komenti rimarkojn kaj alŝuti registritajn GPX‑spurojn per OsmAnd. OpenStreetMap (OSM) estas komunuma, tutmonda kaj publika map‑projekto. Necesas krei konton ĉe OpenStreetMap.org por kontribui.</string>
     <string name="debugging_and_development">OsmAnd-programistilo</string>
     <string name="osmand_development_plugin_description">Agordoj pri evoluigo kaj senerarigado de OsmAnd: simuladi kurson, efikeco de ekran‑bildigado, voĉaj anoncoj. Destinitaj por programistoj, ne bezonataj por kutimaj uzantoj.</string>
@@ -4328,4 +4328,14 @@
     <string name="sample_wikivoyage">Vikivojaĝo (provaĵo)</string>
     <string name="shared_string_mini">eta</string>
     <string name="horseback_riding">Ĉeval-rajdado</string>
+    <string name="routing_attr_prefer_horse_routes_description">Preferi ĉevalajn kursojn</string>
+    <string name="routing_attr_prefer_horse_routes_name">Preferi ĉevalajn kursojn</string>
+    <string name="routing_attr_only_permitted_ways_description">Uzi nur vojojn, kiuj estas markitaj kiel permesataj</string>
+    <string name="routing_attr_only_permitted_ways_name">Nur certe permesataj vojoj</string>
+    <string name="routing_attr_only_permitted_streets_description">Uzi nur stratojn, kiuj estas markitaj kiel permesataj</string>
+    <string name="routing_attr_only_permitted_streets_name">Nur certe permesataj stratoj</string>
+    <string name="routing_attr_allow_gate_description">Permesi navigi tra pordegoj</string>
+    <string name="routing_attr_allow_gate_name">Permesi pordegojn</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Preferi irejojn kun randaĵo por blinduloj</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Preferi reliefon por blinduloj</string>
 </resources>

@@ -1337,7 +1337,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		changeKeyguardFlags();
 		updateMapSettings();
 		app.getPoiFilters().loadSelectedPoiFilters();
-		getMapViewTrackingUtilities().updateSettings();
+		getMapViewTrackingUtilities().updateSettings(false);
 		getMapViewTrackingUtilities().resetDrivingRegionUpdate();
 		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
 		OsmandMapTileView mapView = getMapView();
@@ -1473,6 +1473,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return hideTopControls;
 	}
 
+	@NonNull
 	public OsmandMapTileView getMapView() {
 		return app.getOsmandMap().getMapView();
 	}
@@ -1910,7 +1911,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		refreshMap();
 		RoutingHelper rh = app.getRoutingHelper();
-		if (newRoute && rh.isRoutePlanningMode() && getMapView() != null) {
+		if (newRoute && rh.isRoutePlanningMode() && !getMapView().isCarView()) {
 			app.runInUIThread(this::fitCurrentRouteToMap, 300);
 		}
 		if (app.getSettings().simulateNavigation) {
@@ -1922,50 +1923,19 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void fitCurrentRouteToMap() {
-		RoutingHelper rh = app.getRoutingHelper();
-		Location lt = rh.getLastProjection();
-		if (lt == null) {
-			lt = app.getTargetPointsHelper().getPointToStartLocation();
+		boolean portrait = true;
+		int leftBottomPaddingPx = 0;
+		WeakReference<MapRouteInfoMenuFragment> fragmentRef = mapRouteInfoMenu.findMenuFragment();
+		if (fragmentRef != null) {
+			MapRouteInfoMenuFragment f = fragmentRef.get();
+			portrait = f.isPortrait();
+			if (!portrait) {
+				leftBottomPaddingPx =  f.getWidth();
+			} else {
+				leftBottomPaddingPx = f.getHeight();
+			}
 		}
-		if (lt != null) {
-			double left = lt.getLongitude(), right = lt.getLongitude();
-			double top = lt.getLatitude(), bottom = lt.getLatitude();
-			List<Location> list = rh.getCurrentCalculatedRoute();
-			for (Location l : list) {
-				left = Math.min(left, l.getLongitude());
-				right = Math.max(right, l.getLongitude());
-				top = Math.max(top, l.getLatitude());
-				bottom = Math.min(bottom, l.getLatitude());
-			}
-			List<TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
-			if (rh.getRoute().hasMissingMaps()) {
-				TargetPoint pointToStart = app.getTargetPointsHelper().getPointToStart();
-				if (pointToStart != null) {
-					targetPoints.add(pointToStart);
-				}
-			}
-			for (TargetPoint l : targetPoints) {
-				left = Math.min(left, l.getLongitude());
-				right = Math.max(right, l.getLongitude());
-				top = Math.max(top, l.getLatitude());
-				bottom = Math.min(bottom, l.getLatitude());
-			}
-
-			RotatedTileBox tb = getMapView().getCurrentRotatedTileBox().copy();
-			int tileBoxWidthPx = 0;
-			int tileBoxHeightPx = 0;
-
-			WeakReference<MapRouteInfoMenuFragment> fragmentRef = mapRouteInfoMenu.findMenuFragment();
-			if (fragmentRef != null) {
-				MapRouteInfoMenuFragment f = fragmentRef.get();
-				if (!f.isPortrait()) {
-					tileBoxWidthPx = tb.getPixWidth() - f.getWidth();
-				} else {
-					tileBoxHeightPx = tb.getPixHeight() - f.getHeight();
-				}
-			}
-			getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
-		}
+		app.getOsmandMap().fitCurrentRouteToMap(portrait, leftBottomPaddingPx);
 	}
 
 	@Override

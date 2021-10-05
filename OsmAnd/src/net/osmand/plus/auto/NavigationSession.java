@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
 import androidx.car.app.CarToast;
 import androidx.car.app.Screen;
@@ -30,14 +29,12 @@ import net.osmand.plus.views.OsmandMapTileView;
  */
 public class NavigationSession extends Session implements NavigationScreen.Listener, OsmAndLocationListener {
 	static final String TAG = NavigationSession.class.getSimpleName();
-
 	static final String URI_SCHEME = "samples";
-
 	static final String URI_HOST = "navigation";
 
-	NavigationScreen mNavigationScreen;
-	SurfaceRenderer mNavigationCarSurface;
-	Action mSettingsAction;
+	NavigationScreen navigationScreen;
+	SurfaceRenderer navigationCarSurface;
+	Action settingsAction;
 
 	private OsmandMapTileView mapView;
 
@@ -45,11 +42,11 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	}
 
 	public NavigationScreen getNavigationScreen() {
-		return mNavigationScreen;
+		return navigationScreen;
 	}
 
 	public SurfaceRenderer getNavigationCarSurface() {
-		return mNavigationCarSurface;
+		return navigationCarSurface;
 	}
 
 	public OsmandMapTileView getMapView() {
@@ -58,14 +55,14 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 
 	public void setMapView(OsmandMapTileView mapView) {
 		this.mapView = mapView;
-		SurfaceRenderer navigationCarSurface = this.mNavigationCarSurface;
+		SurfaceRenderer navigationCarSurface = this.navigationCarSurface;
 		if (navigationCarSurface != null) {
 			navigationCarSurface.setMapView(mapView);
 		}
 	}
 
 	public boolean hasSurface() {
-		SurfaceRenderer navigationCarSurface = this.mNavigationCarSurface;
+		SurfaceRenderer navigationCarSurface = this.navigationCarSurface;
 		return navigationCarSurface != null && navigationCarSurface.hasSurface();
 	}
 
@@ -73,8 +70,7 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	@NonNull
 	public Screen onCreateScreen(@NonNull Intent intent) {
 		Log.i(TAG, "In onCreateScreen()");
-
-		mSettingsAction =
+		settingsAction =
 				new Action.Builder()
 						.setIcon(new CarIcon.Builder(
 								IconCompat.createWithResource(getCarContext(), R.drawable.ic_action_settings))
@@ -84,12 +80,12 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 								.push(new SettingsScreen(getCarContext())))
 						.build();
 
-		mNavigationCarSurface = new SurfaceRenderer(getCarContext(), getLifecycle());
+		navigationCarSurface = new SurfaceRenderer(getCarContext(), getLifecycle());
 		if (mapView != null) {
-			mNavigationCarSurface.setMapView(mapView);
+			navigationCarSurface.setMapView(mapView);
 		}
-		mNavigationScreen = new NavigationScreen(getCarContext(), mSettingsAction, this, mNavigationCarSurface);
-		mNavigationCarSurface.callback = mNavigationScreen;
+		navigationScreen = new NavigationScreen(getCarContext(), settingsAction, this, navigationCarSurface);
+		navigationCarSurface.callback = navigationScreen;
 
 		String action = intent.getAction();
 		if (CarContext.ACTION_NAVIGATE.equals(action)) {
@@ -102,11 +98,11 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 
 		if (ActivityCompat.checkSelfPermission(getCarContext(), Manifest.permission.ACCESS_FINE_LOCATION)
 				!= PackageManager.PERMISSION_GRANTED) {
-			getCarContext().getCarService(ScreenManager.class).push(mNavigationScreen);
+			getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
 			return new RequestPermissionScreen(getCarContext(), null);
 		}
 
-		return mNavigationScreen;
+		return navigationScreen;
 	}
 
 	@Override
@@ -123,22 +119,10 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 			screenManager.pushForResult(
 					new SearchResultsScreen(
 							getCarContext(),
-							mSettingsAction,
-							mNavigationCarSurface,
+							settingsAction,
+							navigationCarSurface,
 							query),
-					(obj) -> {
-						if (obj != null) {
-                            /*
-                            // Need to copy over each element to satisfy Java type safety.
-                            List<?> results = (List<?>) obj;
-                            List<Instruction> instructions = new ArrayList<Instruction>();
-                            for (Object result : results) {
-                                instructions.add((Instruction) result);
-                            }
-                            executeScript(instructions);
-                             */
-						}
-					});
+					(obj) -> { });
 
 			return;
 		}
@@ -162,17 +146,13 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 
 	@Override
 	public void onCarConfigurationChanged(@NonNull Configuration newConfiguration) {
-		if (mNavigationCarSurface != null) {
-			mNavigationCarSurface.onCarConfigurationChanged();
+		if (navigationCarSurface != null) {
+			navigationCarSurface.onCarConfigurationChanged();
 		}
 	}
 
 	@Override
 	public void updateNavigation(boolean navigating) {
-		OsmandMapTileView mapView = this.mapView;
-		if (mapView != null) {
-			mapView.setMapPositionX(navigating ? 1 : 0);
-		}
 	}
 
 	@Override
@@ -189,6 +169,6 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 
 	@Override
 	public void updateLocation(Location location) {
-		mNavigationCarSurface.updateLocation(location);
+		navigationCarSurface.updateLocation(location);
 	}
 }

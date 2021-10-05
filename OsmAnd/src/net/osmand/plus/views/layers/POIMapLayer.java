@@ -429,12 +429,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public int getTextShift(Amenity amenity, RotatedTileBox rb) {
-		int radiusPoi = getRadiusPoi(rb);
-		if (isPresentInFullObjects(amenity.getLocation())) {
-			radiusPoi += (app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size)
-					- app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_size_small)) / 2;
-		}
-		return (int) (radiusPoi * getTextScale());
+		return (int) (16 * rb.getDensity() * getTextScale());
 	}
 
 	@Override

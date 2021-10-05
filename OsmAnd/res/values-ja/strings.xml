@@ -362,7 +362,7 @@ POIの更新は利用できません</string>
     <string name="osm_settings_descr">Openstreetmap.org (OSM)にデータを提出する際に必要な項目の設定をおこないます。</string>
     <string name="data_settings_descr">言語、データのダウンロード/リロードを指定します</string>
     <string name="data_settings">データ</string>
-    <string name="osm_settings">OpenStreetMap編集</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap編集</string>
     <string name="auto_zoom_map_descr">移動速度を基準とした自動ズームレベルを設定します。(その間マップは現在位置と同期します)</string>
     <string name="auto_zoom_map">自動ズーム</string>
     <string name="additional_settings">追加設定</string>

@@ -13,14 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandApplication.NavigationSessionListener;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.auto.SurfaceRenderer;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,13 +37,16 @@ public class OsmandMap implements NavigationSessionListener {
 	private final MapViewTrackingUtilities mapViewTrackingUtilities;
 	private final OsmandMapTileView mapView;
 	private final MapLayers mapLayers;
+	private final MapActions mapActions;
 	private final IMapDownloaderCallback downloaderCallback;
 
 	private final List<OsmandMapListener> listeners = Collections.synchronizedList(new ArrayList<>());
 
 	public interface OsmandMapListener {
 		void onChangeZoom(int stp);
+
 		void onSetMapElevation(float angle);
+
 		void onSetupOpenGLView(boolean init);
 	}
 
@@ -56,6 +63,7 @@ public class OsmandMap implements NavigationSessionListener {
 	public OsmandMap(@NonNull OsmandApplication app) {
 		this.app = app;
 		mapViewTrackingUtilities = app.getMapViewTrackingUtilities();
+		mapActions = new MapActions(app);
 
 		int w;
 		int h;
@@ -103,6 +111,11 @@ public class OsmandMap implements NavigationSessionListener {
 	@NonNull
 	public MapLayers getMapLayers() {
 		return mapLayers;
+	}
+
+	@NonNull
+	public MapActions getMapActions() {
+		return mapActions;
 	}
 
 	public void refreshMap() {
@@ -203,5 +216,46 @@ public class OsmandMap implements NavigationSessionListener {
 			}
 		}
 		return 1f;
+	}
+
+	public void fitCurrentRouteToMap(boolean portrait, int leftBottomPaddingPx) {
+		RoutingHelper rh = app.getRoutingHelper();
+		Location lt = rh.getLastProjection();
+		if (lt == null) {
+			lt = app.getTargetPointsHelper().getPointToStartLocation();
+		}
+		if (lt != null) {
+			double left = lt.getLongitude(), right = lt.getLongitude();
+			double top = lt.getLatitude(), bottom = lt.getLatitude();
+			List<Location> list = rh.getCurrentCalculatedRoute();
+			for (Location l : list) {
+				left = Math.min(left, l.getLongitude());
+				right = Math.max(right, l.getLongitude());
+				top = Math.max(top, l.getLatitude());
+				bottom = Math.min(bottom, l.getLatitude());
+			}
+			List<TargetPointsHelper.TargetPoint> targetPoints = app.getTargetPointsHelper().getIntermediatePointsWithTarget();
+			if (rh.getRoute().hasMissingMaps()) {
+				TargetPointsHelper.TargetPoint pointToStart = app.getTargetPointsHelper().getPointToStart();
+				if (pointToStart != null) {
+					targetPoints.add(pointToStart);
+				}
+			}
+			for (TargetPointsHelper.TargetPoint l : targetPoints) {
+				left = Math.min(left, l.getLongitude());
+				right = Math.max(right, l.getLongitude());
+				top = Math.max(top, l.getLatitude());
+				bottom = Math.min(bottom, l.getLatitude());
+			}
+			RotatedTileBox tb = getMapView().getCurrentRotatedTileBox().copy();
+			int tileBoxWidthPx = 0;
+			int tileBoxHeightPx = 0;
+			if (!portrait) {
+				tileBoxWidthPx = tb.getPixWidth() - leftBottomPaddingPx;
+			} else {
+				tileBoxHeightPx = tb.getPixHeight() - leftBottomPaddingPx;
+			}
+			getMapView().fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+		}
 	}
 }

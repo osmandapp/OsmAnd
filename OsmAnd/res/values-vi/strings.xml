@@ -398,7 +398,7 @@
     <string name="osm_settings_descr">Thiết lập Openstreetmap.org (OSM)</string>
     <string name="data_settings_descr">Lựa chọn ngôn ngữ, dữ liệu</string>
     <string name="data_settings">Dữ liệu</string>
-    <string name="osm_settings">OSM</string>
+    <string name="osm_editing_plugin_name">OSM</string>
     <string name="auto_zoom_map_descr">Tự động Zoom bản đồ theo tốc độ di chuyển</string>
     <string name="auto_zoom_map">Tự động Zoom bản đồ</string>
     <string name="additional_settings">Thiết lập thêm</string>

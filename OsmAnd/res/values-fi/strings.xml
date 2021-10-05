@@ -1165,7 +1165,7 @@
     <string name="shared_string_logoff">Kirjaudu ulos</string>
     <string name="local_recordings_delete_all_confirm">Haluatko varmasti poistaa %1$d huomautukset\?</string>
     <string name="osmand_parking_plugin_name">Pysäköinnin sijainti</string>
-    <string name="osm_settings">OSM muokkaus</string>
+    <string name="osm_editing_plugin_name">OSM muokkaus</string>
     <string name="share_note">Jaa huomautus</string>
     <string name="location_on_map">Sijainti:
 \nLev %1$s

@@ -8,14 +8,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.textfield.TextInputEditText;
 
 import net.osmand.plus.OsmandApplication;
@@ -39,6 +31,14 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import static net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType.OPEN_STREET_MAP_EDITING;
 
@@ -77,10 +77,6 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		} else {
 			accountName.setText(settings.OSM_USER_NAME_OR_EMAIL.get());
 		}
-
-		String fileName = gpxInfos[0].getFileName();
-		messageField.setText(Algorithms.getFileNameWithoutExtension(fileName));
-		messageField.setSelection(messageField.getText().length());
 
 		final TextView visibilityName = sendGpxView.findViewById(R.id.visibility_name);
 		final TextView visibilityDescription = sendGpxView.findViewById(R.id.visibility_description);
@@ -160,12 +156,13 @@ public class SendGpxBottomSheetFragment extends MenuBottomSheetDialogFragment {
 	protected void onRightBottomButtonClick() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
-			Editable tagsText = tagsField.getText();
 			Editable descrText = messageField.getText();
+			Editable tagsText = tagsField.getText();
+			String commonDescription = descrText != null ? descrText.toString() : "";
 			String tags = tagsText != null ? tagsText.toString() : "";
-			String descr = descrText != null ? descrText.toString() : "";
 
-			UploadGPXFilesTask uploadGPXFilesTask = new UploadGPXFilesTask(activity, descr, tags, selectedUploadVisibility);
+			UploadGPXFilesTask uploadGPXFilesTask = new UploadGPXFilesTask(activity, commonDescription,
+					tags, selectedUploadVisibility);
 			uploadGPXFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxInfos);
 		}
 		dismiss();

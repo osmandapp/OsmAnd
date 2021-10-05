@@ -826,7 +826,7 @@
     <string name="osm_settings_descr">Ange inställningar för OpenStreetMap.org (OSM) som behövs för bidrag till OSM.</string>
     <string name="data_settings_descr">Ange språk, hämta/uppdatera data.</string>
     <string name="data_settings">Data</string>
-    <string name="osm_settings">OpenStreetMap-redigering</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap-redigering</string>
     <string name="additional_settings">Ytterligare inställningar</string>
     <string name="save_current_track_descr">Spara aktuellt spår som GPX-fil nu.</string>
     <string name="save_current_track">Spara aktuellt spår</string>

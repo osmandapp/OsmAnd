@@ -9,8 +9,9 @@
 	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
-
 -->
+    <string name="exit_pan_mode_descr">Press Select to exit the pan mode</string>
+    <string name="upload_gpx_description_hint">Leave empty, track names will be used as description. Entered description will be applied for each track.</string>
     <string name="search_title">Search: %1$s</string>
     <string name="routing_attr_prefer_tactile_paving_name">Prefer tactile paving</string>
     <string name="routing_attr_prefer_tactile_paving_description">Prefer tactile paving</string>
@@ -2595,7 +2596,7 @@
     <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The result can be saved as a GPX file to use later for guidance.</string>
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. It facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
-    <string name="osm_settings">OpenStreetMap editing</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap editing</string>
     <string name="osm_editing_plugin_description">Make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM notes, and contributing recorded GPX files in OsmAnd by supplying your username and password. OpenStreetMap.org is a community driven, global public domain mapping project.</string>
     <string name="osmand_development_plugin_description">Settings for development and debugging features, like navigation simulation, rendering performance, or voice prompting. Intended for developers, not needed for normal app use.</string>
     <string name="debugging_and_development">OsmAnd development</string>
