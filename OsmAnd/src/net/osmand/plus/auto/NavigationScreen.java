@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.car.app.CarContext;
@@ -35,6 +36,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.auto.SurfaceRenderer.SurfaceRendererCallback;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -93,6 +95,8 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 	CarIcon junctionImage;
 
 	private final AlarmWidget alarmWidget;
+	@DrawableRes
+	private int compassResId = R.drawable.ic_compass_niu;
 
 	private boolean panMode;
 
@@ -204,11 +208,17 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 
 		// Set the action strip.
 		ActionStrip.Builder actionStripBuilder = new ActionStrip.Builder();
+		updateCompass();
+		actionStripBuilder.addAction(
+				new Action.Builder()
+						.setIcon(new CarIcon.Builder(IconCompat.createWithResource(getCarContext(), compassResId)).build())
+						.setOnClickListener(this::compassClick)
+						.build());
 		actionStripBuilder.addAction(settingsAction);
 		if (navigating) {
 			actionStripBuilder.addAction(
 					new Action.Builder()
-							.setTitle("Stop")
+							.setTitle(getApp().getString(R.string.shared_string_control_stop))
 							.setOnClickListener(this::stopNavigation)
 							.build());
 		} else {
@@ -219,7 +229,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 							.build());
 			actionStripBuilder.addAction(
 					new Action.Builder()
-							.setTitle("Favorites")
+							.setTitle(getApp().getString(R.string.shared_string_favorites))
 							.setOnClickListener(this::openFavorites)
 							.build());
 		}
@@ -280,7 +290,7 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 		builder.setPanModeListener(isInPanMode -> {
 			if (isInPanMode) {
 				CarToast.makeText(getCarContext(),
-						"Press Select to exit the pan mode",
+						R.string.exit_pan_mode_descr,
 						CarToast.LENGTH_LONG).show();
 			}
 			panMode = isInPanMode;
@@ -337,6 +347,18 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 		return builder.build();
 	}
 
+	private void updateCompass() {
+		OsmandSettings settings = getApp().getSettings();
+		boolean nightMode = getCarContext().isDarkMode();
+		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
+			compassResId = !nightMode ? R.drawable.ic_compass_niu_white : R.drawable.ic_compass_niu;
+		} else if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING) {
+			compassResId = !nightMode ? R.drawable.ic_compass_bearing_white : R.drawable.ic_compass_bearing;
+		} else {
+			compassResId = !nightMode ? R.drawable.ic_compass_white : R.drawable.ic_compass;
+		}
+	}
+
 	private boolean isRerouting() {
 		return rerouting || destinations == null;
 	}
@@ -347,6 +369,10 @@ public final class NavigationScreen extends Screen implements SurfaceRendererCal
 
 	private void openFavorites() {
 		getScreenManager().pushForResult(new FavoritesScreen(getCarContext(), settingsAction, surfaceRenderer), (obj) -> { });
+	}
+
+	private void compassClick() {
+		getApp().getMapViewTrackingUtilities().switchRotateMapMode();
 	}
 
 	private void openSearch() {

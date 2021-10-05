@@ -215,6 +215,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 				List<SearchResult> recentResults = new ArrayList<>();
 
 				// Home / work
+				/* Disable since points exists at favorites screen
 				FavouritesDbHelper favorites = app.getFavorites();
 				FavouritePoint homePoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.HOME);
 				FavouritePoint workPoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.WORK);
@@ -234,7 +235,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 					result.localeName = workPoint.getAddress();
 					recentResults.add(result);
 				}
-
+				*/
 				// Previous route card
 				TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 				TargetPoint startPoint = targetPointsHelper.getPointToStartBackup();

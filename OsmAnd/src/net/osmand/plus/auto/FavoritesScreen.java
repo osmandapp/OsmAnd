@@ -83,7 +83,7 @@ public final class FavoritesScreen extends Screen {
 
 		return new PlaceListNavigationTemplate.Builder()
 				.setItemList(listBuilder.build())
-				.setTitle(app.getString(R.string.app_name))
+				.setTitle(app.getString(R.string.shared_string_favorites))
 				.setActionStrip(new ActionStrip.Builder().addAction(settingsAction).build())
 				.setHeaderAction(Action.BACK)
 				.build();

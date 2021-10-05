@@ -53,6 +53,7 @@ import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.auto.NavigationCarAppService;
+import net.osmand.plus.auto.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
@@ -587,6 +588,16 @@ public class OsmandApplication extends MultiDexApplication {
 		NavigationSessionListener navigationSessionListener = this.navigationSessionListener;
 		if (navigationSessionListener != null) {
 			navigationSessionListener.onNavigationSessionChanged(carNavigationSession);
+		}
+	}
+
+	public void refreshCarScreen() {
+		NavigationSession carNavigationSession = getCarNavigationSession();
+		if (carNavigationSession != null) {
+			NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
+			if (navigationScreen != null) {
+				navigationScreen.invalidate();
+			}
 		}
 	}
 
