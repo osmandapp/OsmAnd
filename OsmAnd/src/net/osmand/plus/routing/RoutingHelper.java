@@ -432,7 +432,7 @@ public class RoutingHelper {
 				List<Location> routeNodes = route.getImmutableAllLocations();
 				int currentRoute = route.currentRoute;
 				double allowableDeviation = route.getRouteRecalcDistance();
-				if (allowableDeviation == 0) {
+				if (allowableDeviation <= 0) {
 					allowableDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
 
@@ -443,7 +443,7 @@ public class RoutingHelper {
 					if (distOrth > allowableDeviation) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
 						isDeviatedFromRoute = true;
-						calculateRoute = true;
+						calculateRoute = !settings.DISABLE_OFFROUTE_RECALC.get();
 					}
 				}
 				// 3. Identify wrong movement direction
@@ -468,7 +468,7 @@ public class RoutingHelper {
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
 						voiceRouterStopped = false;
-					} else if (isDeviatedFromRoute && !voiceRouterStopped && !settings.DISABLE_OFFROUTE_RECALC.get()) {
+					} else if (isDeviatedFromRoute && !voiceRouterStopped) {
 						voiceRouter.interruptRouteCommands();
 						voiceRouterStopped = true; // Prevents excessive execution of stop() code
 					}
@@ -677,9 +677,7 @@ public class RoutingHelper {
 	}
 
 	private static float getDefaultAllowedDeviation(OsmandSettings settings, ApplicationMode mode, float posTolerance) {
-		if (settings.DISABLE_OFFROUTE_RECALC.getModeValue(mode)) {
-			return -1.0f;
-		} else if (mode.getRouteService() == RouteService.DIRECT_TO) {
+		if (mode.getRouteService() == RouteService.DIRECT_TO) {
 			return -1.0f;
 		} else if (mode.getRouteService() == RouteService.STRAIGHT) {
 			MetricsConstants mc = settings.METRIC_SYSTEM.getModeValue(mode);
