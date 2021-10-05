@@ -133,6 +133,10 @@ public class ImportHelper {
 		return gpxImportCompleteListener;
 	}
 
+	public OnGpxImportCompleteListener getGpxImportCompleteListener() {
+		return gpxImportCompleteListener;
+	}
+
 	public void handleContentImport(final Uri contentUri, Bundle extras, final boolean useImportDir) {
 		String name = getNameFromContentUri(app, contentUri);
 		handleFileImport(contentUri, name, extras, useImportDir);
