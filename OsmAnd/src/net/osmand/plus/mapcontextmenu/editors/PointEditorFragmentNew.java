@@ -401,7 +401,13 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			view.getViewTreeObserver().addOnGlobalLayoutListener(getOnGlobalLayoutListener());
 		}
+		showKeyboard();
 		return view;
+	}
+
+	private void showKeyboard() {
+		InputMethodManager imm = (InputMethodManager)   requireMyActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 	}
 
 	private void updateDescriptionIcon() {
