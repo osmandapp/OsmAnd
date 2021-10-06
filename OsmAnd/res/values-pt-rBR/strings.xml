@@ -4337,4 +4337,5 @@
     <string name="routing_attr_prefer_tactile_paving_name">Preferir pavimentação tátil</string>
     <string name="search_title">Pesquisar: %1$s</string>
     <string name="upload_gpx_description_hint">Deixe vazio, os nomes das trilhas serão usados como descrição. A descrição inserida será aplicada para cada faixa.</string>
+    <string name="exit_pan_mode_descr">Pressione SELECT para sair do modo PAN</string>
 </resources>
