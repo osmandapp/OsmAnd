@@ -4347,4 +4347,5 @@
     <string name="routing_attr_prefer_tactile_paving_name">Preferir pavimentação tátil</string>
     <string name="upload_gpx_description_hint">Deixe em branco se quiser usar os nomes dos trilhos GPX como descrição. A descrição inserida será aplicada para cada trilho.</string>
     <string name="search_title">Pesquisar: %1$s</string>
+    <string name="exit_pan_mode_descr">Pressione \"Selecionar\" para sair do modo deslocar</string>
 </resources>
