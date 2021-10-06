@@ -416,7 +416,7 @@ public class BinaryRoutePlanner {
 		while (true) {
 			// mark previous interval as visited and move to next intersection
 			short prevSegmentPoint = segmentPoint;
-			RouteSegment prev = segmentItself != null ? segmentItself : segment;
+			RouteSegment prevSegment = segmentItself != null ? segmentItself : segment;
 			if (dir) {
 				segmentPoint++;
 			} else {
@@ -428,7 +428,7 @@ public class BinaryRoutePlanner {
 
 			// 1 check if segment was already visited in opposite direction
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(reverseWaySearch, graphSegments, segment, oppositeSegments,
-					prevSegmentPoint, segmentPoint);
+					prevSegmentPoint, segmentPoint, prevSegment);
 			if (alreadyVisited) {
 				break;
 			}
@@ -489,7 +489,7 @@ public class BinaryRoutePlanner {
 
 			segmentItself.distanceFromStart = distStartObstacles;
 			segmentItself.obstacles = allObstacles;
-			segmentItself.setParentRoute(prev);
+			segmentItself.setParentRoute(prevSegment);
 			segmentItself.setParentSegmentEnd(segmentPoint);
 
 			long nextPntId = calculateRoutePointId(segment.getRoad(), prevSegmentPoint, segmentPoint);
@@ -580,7 +580,7 @@ public class BinaryRoutePlanner {
 
 	private boolean checkIfOppositeSegmentWasVisited(boolean reverseWaySearch,
 			PriorityQueue<RouteSegment> graphSegments, RouteSegment segment, TLongObjectHashMap<RouteSegment> oppositeSegments,
-			int prevSegmentPoint, int segmentPoint) {
+			int prevSegmentPoint, int segmentPoint, RouteSegment prevSegment) {
 		RouteDataObject road = segment.getRoad();
 		long opp = calculateRoutePointId(road, segmentPoint, prevSegmentPoint);
 		if (oppositeSegments.containsKey(opp)) {
@@ -588,9 +588,9 @@ public class BinaryRoutePlanner {
 			RouteSegment to = reverseWaySearch ? getParentDiffId(segment) : getParentDiffId(opposite);
 			RouteSegment from = !reverseWaySearch ? getParentDiffId(segment) : getParentDiffId(opposite);
 			if (checkViaRestrictions(from, to)) {
-				FinalRouteSegment frs = new FinalRouteSegment(road, prevSegmentPoint);
-				frs.setParentRoute(segment);
-				frs.setParentSegmentEnd(prevSegmentPoint);
+				FinalRouteSegment frs = new FinalRouteSegment(road, segmentPoint);
+				frs.setParentRoute(prevSegment);
+				frs.setParentSegmentEnd(segmentPoint);
 				frs.reverseWaySearch = reverseWaySearch;
 				frs.distanceFromStart = opposite.distanceFromStart + segment.distanceFromStart;
 				frs.distanceToEnd = 0;
