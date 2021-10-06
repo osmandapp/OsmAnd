@@ -909,7 +909,7 @@
     <string name="shared_string_search">بحث</string>
     <string name="shared_string_show_description">عرض الوصف.</string>
     <string name="shared_string_message">رسالة</string>
-    <string name="welmode_download_maps">تنزيل الخرائط</string>
+    <string name="welmode_download_maps">إدارة الخرائط</string>
     <string name="welcome_select_region">لعرض إشارات وقواعد المرور بشكل صحيح، من فضلك اختر منطقة القيادة:</string>
     <string name="shared_string_add_to_favorites">إضافة إلى المفضلة</string>
     <string name="shared_string_my_places">المعالم المفضلة</string>
@@ -4396,7 +4396,7 @@
     <string name="service_is_not_available_please_try_later">الخدمة غير متوفرة، يرجى المحاولة لاحقا</string>
     <string name="shared_string_files">الملفات</string>
     <string name="travel_route_types">أنواع المسار</string>
-    <string name="sample_wikivoyage">عينة Wikivoyage</string>
+    <string name="sample_wikivoyage">نموذج Wikivoyage</string>
     <string name="shared_string_mini">مصغر(ة)</string>
     <string name="horseback_riding">ركوب الخيل</string>
     <string name="routing_attr_only_permitted_ways_name">الطرق المسموحة بها علنا</string>

@@ -4341,4 +4341,5 @@
     <string name="routing_attr_prefer_tactile_paving_name">Надавати перевагу тактильному покриттю</string>
     <string name="search_title">Пошук: %1$s</string>
     <string name="upload_gpx_description_hint">Залиште порожніми, назви треків використовуватимуться як опис. Введений опис буде застосовано для кожного треку.</string>
+    <string name="exit_pan_mode_descr">Натисніть Вибрати, щоб вийти з режиму панорамування</string>
 </resources>
