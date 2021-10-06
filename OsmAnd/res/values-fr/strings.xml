@@ -4336,4 +4336,5 @@
     <string name="routing_attr_prefer_tactile_paving_name">Privilégier les chemins avec pavés tactiles</string>
     <string name="search_title">Recherche de : %1$s</string>
     <string name="upload_gpx_description_hint">Si vide, la description sera alimentée avec le nom de trace. La description saisie sera utilisée pour chaque trace.</string>
+    <string name="exit_pan_mode_descr">Appuyez sur Sélectionner pour quitter le mode panoramique</string>
 </resources>
