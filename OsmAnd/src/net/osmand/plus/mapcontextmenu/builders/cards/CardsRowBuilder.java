@@ -60,6 +60,9 @@ public class CardsRowBuilder {
 		if (!menuBuilder.isHidden()) {
 			viewPager.setSwipeLocked(itemsCount() < 2);
 			pagerAdapter.notifyDataSetChanged();
+			if (itemsCount() > 0 && menuBuilder.getCollapseExpandListener() != null) {
+				menuBuilder.getCollapseExpandListener().onCollapseExpand(false);
+			}
 		}
 	}
 
