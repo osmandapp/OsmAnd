@@ -466,7 +466,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 			if (iconRes != null && RenderingIcons.containsBigIcon(iconRes)) {
 				poiInfo.iconRes = RenderingIcons.getBigIconResourceId(iconRes);
 			} else {
-				poiInfo.iconRes = R.drawable.mx_user_defined;
+				poiInfo.iconRes = R.drawable.mx_special_custom_category;
 			}
 			poiInfo.isActive = !availableFiltersKeys.contains(filterId);
 			list.add(new ListItem(POI, poiInfo));

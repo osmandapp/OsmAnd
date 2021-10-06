@@ -422,7 +422,7 @@ public class MapLayers {
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
 			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {
-			builder.setIcon(R.drawable.mx_user_defined);
+			builder.setIcon(R.drawable.mx_special_custom_category);
 		}
 		builder.setColor(ctx, ContextMenuItem.INVALID_ID);
 		builder.setSkipPaintingWithoutColor(true);
