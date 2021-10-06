@@ -1,6 +1,10 @@
 package net.osmand;
 
 
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -64,6 +68,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
@@ -83,10 +88,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
@@ -573,7 +574,10 @@ public class AndroidUtils {
 	}
 
 	public static void addStatusBarPadding21v(Context ctx, View view) {
-		if (Build.VERSION.SDK_INT >= 21) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		if (Build.VERSION.SDK_INT >= 21
+				&& (!OsmandPlugin.isDevelopment()
+				|| app.getSettings().FULLSCREEN_MAP_DRAWING_MODE.get())) {
 			int paddingLeft = view.getPaddingLeft();
 			int paddingTop = view.getPaddingTop();
 			int paddingRight = view.getPaddingRight();

@@ -10,6 +10,7 @@ import androidx.preference.Preference;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -46,6 +47,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 
 		setupDebugRenderingInfoPref();
 		setupSimulateInitialStartupPref();
+		setupFullscreenMapDrawingModePref();
 		setupShouldShowFreeVersionBannerPref();
 		setupTestVoiceCommandsPref();
 		setupLogcatBufferPref();
@@ -95,7 +97,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupDebugRenderingInfoPref() {
-		SwitchPreferenceEx debugRenderingInfo = (SwitchPreferenceEx) findPreference(settings.DEBUG_RENDERING_INFO.getId());
+		SwitchPreferenceEx debugRenderingInfo = findPreference(settings.DEBUG_RENDERING_INFO.getId());
 		debugRenderingInfo.setDescription(getString(R.string.trace_rendering_descr));
 		debugRenderingInfo.setIconSpaceReserved(false);
 	}
@@ -106,9 +108,14 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupShouldShowFreeVersionBannerPref() {
-		SwitchPreferenceEx shouldShowFreeVersionBanner = (SwitchPreferenceEx) findPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER.getId());
+		SwitchPreferenceEx shouldShowFreeVersionBanner = findPreference(settings.SHOULD_SHOW_FREE_VERSION_BANNER.getId());
 		shouldShowFreeVersionBanner.setDescription(getString(R.string.show_free_version_banner_description));
 		shouldShowFreeVersionBanner.setIconSpaceReserved(false);
+	}
+
+	private void setupFullscreenMapDrawingModePref() {
+		SwitchPreferenceEx fullscreenMapDrawingMode = findPreference(settings.FULLSCREEN_MAP_DRAWING_MODE.getId());
+		fullscreenMapDrawingMode.setIconSpaceReserved(false);
 	}
 
 	private void setupTestVoiceCommandsPref() {
@@ -204,6 +211,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		String prefId = preference.getKey();
 		if (settings.SAFE_MODE.getId().equals(prefId) && newValue instanceof Boolean) {
 			loadNativeLibrary();
+			return true;
+		} else if (settings.FULLSCREEN_MAP_DRAWING_MODE.getId().equals(prefId) && newValue instanceof Boolean) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.restart();
+			}
 			return true;
 		}
 		return super.onPreferenceChange(preference, newValue);

@@ -4,7 +4,6 @@ package net.osmand.plus.settings.backend;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
-import static net.osmand.plus.auto.CarSurfaceView.TEXT_SCALE_DIVIDER_160;
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 import android.annotation.SuppressLint;
@@ -64,7 +63,6 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.ColoringType;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.srtmplugin.TerrainMode;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikipedia.WikiArticleShowImages;
@@ -1768,6 +1766,8 @@ public class OsmandSettings {
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference(this, "previous_installed_version", "").makeGlobal();
 
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
+
+	public final OsmandPreference<Boolean> FULLSCREEN_MAP_DRAWING_MODE = new BooleanPreference(this, "fullscreen_map_drawing_mode", true).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> MARKERS_DISTANCE_INDICATION_ENABLED = new BooleanPreference(this, "markers_distance_indication_enabled", true).makeProfile();
 
