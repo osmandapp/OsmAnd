@@ -10,6 +10,9 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="shared_storage_warning_description">Starting with the next update of OsmAnd, the app will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared strorage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
+    <string name="shared_storage_warning_title">Changes in storage access rules</string>
     <string name="exit_pan_mode_descr">Press Select to exit the pan mode</string>
     <string name="upload_gpx_description_hint">Leave empty, track names will be used as description. Entered description will be applied for each track.</string>
     <string name="search_title">Search: %1$s</string>

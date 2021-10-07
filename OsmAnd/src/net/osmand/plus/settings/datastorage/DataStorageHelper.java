@@ -1,14 +1,10 @@
 package net.osmand.plus.settings.datastorage;
 
-import android.os.Build;
-
-import androidx.annotation.NonNull;
-
 import net.osmand.IndexConstants;
 import net.osmand.ValueHolder;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.item.DirectoryItem;
 import net.osmand.plus.settings.datastorage.item.DirectoryItem.CheckingType;
 import net.osmand.plus.settings.datastorage.item.MemoryItem;
@@ -18,6 +14,8 @@ import net.osmand.plus.settings.datastorage.task.RefreshUsedMemoryTask;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
 
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
 import static net.osmand.IndexConstants.BACKUP_INDEX_DIR;
@@ -78,7 +76,7 @@ public class DataStorageHelper {
 		if (settings.getExternalStorageDirectoryTypeV19() >= 0) {
 			currentStorageType = settings.getExternalStorageDirectoryTypeV19();
 		} else {
-			ValueHolder<Integer> vh = new ValueHolder<Integer>();
+			ValueHolder<Integer> vh = new ValueHolder<>();
 			if (vh.value != null && vh.value >= 0) {
 				currentStorageType = vh.value;
 			} else {
@@ -87,78 +85,74 @@ public class DataStorageHelper {
 		}
 		currentStoragePath = settings.getExternalStorageDirectory().getAbsolutePath();
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+		//internal storage
+		String path = settings.getInternalAppPath().getAbsolutePath();
+		int iconId = R.drawable.ic_action_phone;
 
-			//internal storage
-			String path = settings.getInternalAppPath().getAbsolutePath();
-			File dir = new File(path);
-			int iconId = R.drawable.ic_action_phone;
+		StorageItem internalStorageItem = StorageItem.builder()
+				.setKey(INTERNAL_STORAGE)
+				.setTitle(app.getString(R.string.storage_directory_internal_app))
+				.setDirectory(path)
+				.setDescription(app.getString(R.string.internal_app_storage_description))
+				.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE)
+				.setIconResId(iconId)
+				.createItem();
+		addItem(internalStorageItem);
 
-			StorageItem internalStorageItem = StorageItem.builder()
-					.setKey(INTERNAL_STORAGE)
-					.setTitle(app.getString(R.string.storage_directory_internal_app))
-					.setDirectory(path)
-					.setDescription(app.getString(R.string.internal_app_storage_description))
-					.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE)
-					.setIconResId(iconId)
-					.createItem();
-			addItem(internalStorageItem);
+		//shared storage
+		File dir = settings.getDefaultInternalStorage();
+		path = dir.getAbsolutePath();
+		iconId = R.drawable.ic_action_phone;
 
-			//shared storage
-			dir = settings.getDefaultInternalStorage();
-			path = dir.getAbsolutePath();
-			iconId = R.drawable.ic_action_phone;
+		StorageItem sharedStorageItem = StorageItem.builder()
+				.setKey(SHARED_STORAGE)
+				.setTitle(app.getString(R.string.storage_directory_shared))
+				.setDirectory(path)
+				.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT)
+				.setIconResId(iconId)
+				.createItem();
+		addItem(sharedStorageItem);
 
-			StorageItem sharedStorageItem = StorageItem.builder()
-					.setKey(SHARED_STORAGE)
-					.setTitle(app.getString(R.string.storage_directory_shared))
-					.setDirectory(path)
-					.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT)
-					.setIconResId(iconId)
-					.createItem();
-			addItem(sharedStorageItem);
-
-			//external storage
-			File[] externals = app.getExternalFilesDirs(null);
-			if (externals != null) {
-				int i = 0;
-				for (File external : externals) {
-					if (external != null) {
-						++i;
-						dir = external;
-						path = dir.getAbsolutePath();
-						iconId = getIconForStorageType(dir);
-						StorageItem externalStorageItem = StorageItem.builder()
-								.setKey(EXTERNAL_STORAGE + i)
-								.setTitle(app.getString(R.string.storage_directory_external) + " " + i)
-								.setDirectory(path)
-								.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE)
-								.setIconResId(iconId)
-								.createItem();
-						addItem(externalStorageItem);
-					}
+		//external storage
+		File[] externals = app.getExternalFilesDirs(null);
+		if (externals != null) {
+			int i = 0;
+			for (File external : externals) {
+				if (external != null) {
+					++i;
+					dir = external;
+					path = dir.getAbsolutePath();
+					iconId = getIconForStorageType(dir);
+					StorageItem externalStorageItem = StorageItem.builder()
+							.setKey(EXTERNAL_STORAGE + i)
+							.setTitle(app.getString(R.string.storage_directory_external) + " " + i)
+							.setDirectory(path)
+							.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE)
+							.setIconResId(iconId)
+							.createItem();
+					addItem(externalStorageItem);
 				}
 			}
+		}
 
-			//multi user storage
-			File[] obbDirs = app.getObbDirs();
-			if (obbDirs != null) {
-				int i = 0;
-				for (File obb : obbDirs) {
-					if (obb != null) {
-						++i;
-						dir = obb;
-						path = dir.getAbsolutePath();
-						iconId = getIconForStorageType(dir);
-						StorageItem multiuserStorageItem = StorageItem.builder()
-								.setKey(MULTIUSER_STORAGE + i)
-								.setTitle(app.getString(R.string.storage_directory_multiuser) + " " + i)
-								.setDirectory(path)
-								.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB)
-								.setIconResId(iconId)
-								.createItem();
-						addItem(multiuserStorageItem);
-					}
+		//multi user storage
+		File[] obbDirs = app.getObbDirs();
+		if (obbDirs != null) {
+			int i = 0;
+			for (File obb : obbDirs) {
+				if (obb != null) {
+					++i;
+					dir = obb;
+					path = dir.getAbsolutePath();
+					iconId = getIconForStorageType(dir);
+					StorageItem multiuserStorageItem = StorageItem.builder()
+							.setKey(MULTIUSER_STORAGE + i)
+							.setTitle(app.getString(R.string.storage_directory_multiuser) + " " + i)
+							.setDirectory(path)
+							.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB)
+							.setIconResId(iconId)
+							.createItem();
+					addItem(multiuserStorageItem);
 				}
 			}
 		}
@@ -318,6 +312,11 @@ public class DataStorageHelper {
 		}
 		String formattedUsed = new DecimalFormat("#.##").format(memory);
 		return String.format(formatStrings[type], formattedUsed);
+	}
+
+	public static boolean isCurrentStorageShared(@NonNull OsmandApplication app) {
+		DataStorageHelper dataStorageHelper = new DataStorageHelper(app);
+		return SHARED_STORAGE.equals(dataStorageHelper.getCurrentStorage().getKey());
 	}
 
 	public interface UpdateMemoryInfoUIAdapter {
