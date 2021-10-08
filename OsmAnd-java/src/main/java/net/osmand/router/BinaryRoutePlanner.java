@@ -471,7 +471,15 @@ public class BinaryRoutePlanner {
 				// TODO double check is it correct??
 				distFromStartPlusSegmentTime = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxSpeed();
 			}
-			// 2. upload segment itself to visited segments
+			// 2. check if segment was already visited in opposite direction
+			// we check before we calculate segmentTime (to not calculate it twice with opposite) !
+			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
+			if (alreadyVisited) {
+				directionAllowed = false;
+				break;
+			}
+			
+			// 3. upload segment itself to visited segments
 			long nextPntId = calculateRoutePointId(currentSegment);
 			RouteSegment existingSegment = visitedSegments.put(nextPntId, currentSegment);
 			if (existingSegment != null && distFromStartPlusSegmentTime > existingSegment.distanceFromStart) {
@@ -490,12 +498,7 @@ public class BinaryRoutePlanner {
 			// reassign @distanceFromStart to make it correct for visited segment
 			currentSegment.distanceFromStart = distFromStartPlusSegmentTime;
 			
-			// 3. check if segment was already visited in opposite direction
-			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
-			if (alreadyVisited) {
-				directionAllowed = false;
-				break;
-			}
+
 
 			// 4. load road connections at the end of segment    
 			nextCurrentSegment = processIntersections(ctx, graphSegments, visitedSegments, currentSegment, reverseWaySearch, doNotAddIntersections);
@@ -566,13 +569,9 @@ public class BinaryRoutePlanner {
 				currentSegment.getSegmentEnd(), currentSegment.getSegmentStart());
 		if (oppositeSegments.containsKey(currPoint)) {
 			RouteSegment opposite = oppositeSegments.get(currPoint);
-			if(opposite.getParentRoute() != null) {
-				// take parent to not calculate penalty for this segment twice
-				opposite = opposite.getParentRoute();
-			}
 			FinalRouteSegment frs = new FinalRouteSegment(currentSegment.getRoad(), 
 					currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
-			frs.setParentRoute(currentSegment);
+			frs.setParentRoute(currentSegment.getParentRoute());
 			frs.reverseWaySearch = reverseWaySearch;
 			frs.distanceFromStart = opposite.distanceFromStart + currentSegment.distanceFromStart;
 			frs.distanceToEnd = 0;

@@ -569,10 +569,12 @@ public class RouteResultPreparation {
 					name += " (" + ref + ") ";
 				}
 				StringBuilder additional = new StringBuilder();
-				additional.append("time = \"").append(res.getSegmentTime()).append("\" ");
+				additional.append("time = \"").append(((int)res.getSegmentTime()*100)/100.0f).append("\" ");
 				if (res.getRoutingTime() > 0) {
-					additional.append("rspeed = \"")
-							.append((int) Math.round(res.getDistance() / res.getRoutingTime() * 3.6)).append("\" ");
+//					additional.append("rspeed = \"")
+//							.append((int) Math.round(res.getDistance() / res.getRoutingTime() * 3.6)).append("\" ");
+					additional.append("rtime = \"")
+						.append(((int)res.getRoutingTime()*100)/100.0f).append("\" ");
 				}
 				
 //				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
@@ -580,9 +582,10 @@ public class RouteResultPreparation {
 //				float ms = res.getSegmentSpeed();
 				float ms = res.getObject().getMaximumSpeed(res.isForwardDirection());
 				if(ms > 0) {
-					additional.append("maxspeed = \"").append((int) Math.round(ms * 3.6f)).append("\" ").append(res.getObject().getHighway()).append(" ");
+					additional.append("maxspeed = \"").append((int) Math.round(ms * 3.6f)).append("\" ");
 				}
-				additional.append("distance = \"").append(res.getDistance()).append("\" ");
+				additional.append("distance = \"").append(((int)res.getDistance()*100)/100.0f).append("\" ");
+				additional.append(res.getObject().getHighway()).append(" ");
 				if (res.getTurnType() != null) {
 					additional.append("turn = \"").append(res.getTurnType()).append("\" ");
 					additional.append("turn_angle = \"").append(res.getTurnType().getTurnAngle()).append("\" ");
