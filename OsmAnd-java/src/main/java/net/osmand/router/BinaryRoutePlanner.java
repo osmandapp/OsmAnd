@@ -28,7 +28,7 @@ public class BinaryRoutePlanner {
 
 	private static final int ROUTE_POINTS = 11;
 	private static final boolean ASSERT_CHECKS = true;
-	private static final boolean TRACE_ROUTING = true;
+	private static final boolean TRACE_ROUTING = false;
 	private static final int TEST_ID = 77031244;
 	private static final boolean TEST_SPECIFIC = false;
 
@@ -468,7 +468,7 @@ public class BinaryRoutePlanner {
 				// speed up calculation with calculated route by using different distance from start
 				final int x = road.getPoint31XTile(currentSegment.getSegmentStart());
 				final int y = road.getPoint31YTile(currentSegment.getSegmentStart());
-				// TODO double check??
+				// TODO double check is it correct??
 				distFromStartPlusSegmentTime = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxSpeed();
 			}
 			// 2. upload segment itself to visited segments
@@ -561,7 +561,9 @@ public class BinaryRoutePlanner {
 
 	private boolean checkIfOppositeSegmentWasVisited(boolean reverseWaySearch,
 			PriorityQueue<RouteSegment> graphSegments, RouteSegment currentSegment, TLongObjectHashMap<RouteSegment> oppositeSegments) {
-		long currPoint = calculateRoutePointId(currentSegment);
+		// check inverse direction for opposite
+		long currPoint = calculateRoutePointInternalId(currentSegment.getRoad(), 
+				currentSegment.getSegmentEnd(), currentSegment.getSegmentStart());
 		if (oppositeSegments.containsKey(currPoint)) {
 			RouteSegment opposite = oppositeSegments.get(currPoint);
 			if(opposite.getParentRoute() != null) {
@@ -574,7 +576,7 @@ public class BinaryRoutePlanner {
 			frs.reverseWaySearch = reverseWaySearch;
 			frs.distanceFromStart = opposite.distanceFromStart + currentSegment.distanceFromStart;
 			frs.distanceToEnd = 0;
-			frs.opposite = opposite.getParentRoute();
+			frs.opposite = opposite;
 			graphSegments.add(frs);
 			if (TRACE_ROUTING) {
 				printRoad("  >> Final segment : ", frs, reverseWaySearch);
