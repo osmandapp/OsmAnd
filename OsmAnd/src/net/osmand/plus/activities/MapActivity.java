@@ -329,7 +329,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
-		importHelper = new ImportHelper(this, getMyApplication(), getMapView());
+		importHelper = new ImportHelper(this, getMyApplication());
 		if (System.currentTimeMillis() - tm > 50) {
 			System.err.println("OnCreate for MapActivity took " + (System.currentTimeMillis() - tm) + " ms");
 		}
