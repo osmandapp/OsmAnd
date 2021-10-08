@@ -28,7 +28,7 @@ public class BinaryRoutePlanner {
 
 	private static final int ROUTE_POINTS = 11;
 	private static final boolean ASSERT_CHECKS = true;
-	private static final boolean TRACE_ROUTING = false;
+	private static final boolean TRACE_ROUTING = true;
 	private static final int TEST_ID = 77031244;
 	private static final boolean TEST_SPECIFIC = false;
 
@@ -134,9 +134,9 @@ public class BinaryRoutePlanner {
 			}
 			updateCalculationProgress(ctx, graphDirectSegments, graphReverseSegments);
 
-			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() <= 0, graphReverseSegments, end, visitedOppositeSegments,
+			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() <= 0, true, graphReverseSegments, end, visitedOppositeSegments,
 					"Route is not found to selected target point.");
-			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() >= 0, graphDirectSegments, start, visitedDirectSegments,
+			checkIfGraphIsEmpty(ctx, ctx.getPlanRoadDirection() >= 0, false, graphDirectSegments, start, visitedDirectSegments,
 					"Route is not found from selected start point.");
 			if (ctx.planRouteIn2Directions()) {
 				if (graphDirectSegments.isEmpty() || graphReverseSegments.isEmpty()) {
@@ -183,7 +183,7 @@ public class BinaryRoutePlanner {
 	}
 
 	protected void checkIfGraphIsEmpty(final RoutingContext ctx, boolean allowDirection,
-			PriorityQueue<RouteSegment> graphSegments, RouteSegmentPoint pnt, TLongObjectHashMap<RouteSegment> visited,
+			boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments, RouteSegmentPoint pnt, TLongObjectHashMap<RouteSegment> visited,
 			String msg) {
 		if (allowDirection && graphSegments.isEmpty()) {
 			if (pnt.others != null) {
@@ -194,21 +194,24 @@ public class BinaryRoutePlanner {
 					float estimatedDistance = (float) estimatedDistance(ctx, ctx.targetX, ctx.targetY, ctx.startX,
 							ctx.startY);
 					RouteSegment pos = next.initRouteSegment(true);
-					if (pos != null && !visited.containsKey(calculateRoutePointId(pos))) {
+					if (pos != null && !visited.containsKey(calculateRoutePointId(pos)) &&
+							checkMovementAllowed(ctx, reverseWaySearch, pos)) {
 						pos.setParentRoute(null);
 						pos.distanceFromStart = 0;
 						pos.distanceToEnd = estimatedDistance;
 						graphSegments.add(pos);
 					}
 					RouteSegment neg = next.initRouteSegment(false);
-					if (neg != null && !visited.containsKey(calculateRoutePointId(neg))) {
+					if (neg != null && !visited.containsKey(calculateRoutePointId(neg)) && 
+							checkMovementAllowed(ctx, reverseWaySearch, neg)) {
 						neg.setParentRoute(null);
 						neg.distanceFromStart = 0;
 						neg.distanceToEnd = estimatedDistance;
 						graphSegments.add(neg);
 					}
 					if (!graphSegments.isEmpty()) {
-						println("Reiterate point with new start/destination " + next.getRoad());
+						println("Reiterate point with new " + (!reverseWaySearch ? "start " : "destination ")
+								+ next.getRoad());
 						break;
 					}
 				}
@@ -796,7 +799,7 @@ public class BinaryRoutePlanner {
 	private void processOneRoadIntersection(RoutingContext ctx, boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, RouteSegment segment, RouteSegment next) {
 		if (next != null) {
-			if (checkMovementAllowed(ctx, reverseWaySearch, next)) {
+			if (!checkMovementAllowed(ctx, reverseWaySearch, next)) {
 				return;
 			}
 			float obstaclesTime = (float) ctx.getRouter().calculateTurnTime(next, 
@@ -864,7 +867,7 @@ public class BinaryRoutePlanner {
 	public static class RouteSegmentPoint extends RouteSegment {
 		
 		public RouteSegmentPoint(RouteDataObject road, int segmentStart, double distSquare) {
-			super(road, segmentStart, segmentStart);
+			super(road, segmentStart);
 			this.distSquare = distSquare;
 			this.preciseX = road.getPoint31XTile(segmentStart);
 			this.preciseY = road.getPoint31YTile(segmentStart);
