@@ -183,6 +183,11 @@
 				<data android:pathPattern=".*\\..*\\..*\\.gpx" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx" />
+				<data android:pathPattern=".*\\.gpx.zip" />
+				<data android:pathPattern=".*\\..*\\.gpx.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\.gpx.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.gpx.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx.zip" />
 			</intent-filter>
 
 			<intent-filter
@@ -200,6 +205,11 @@
 				<data android:pathPattern=".*\\..*\\..*\\.gpx" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\.gpx" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx" />
+				<data android:pathPattern=".*\\.gpx.zip" />
+				<data android:pathPattern=".*\\..*\\.gpx.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\.gpx.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.gpx.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.gpx.zip" />
 			</intent-filter>
 
 			<intent-filter
@@ -269,6 +279,11 @@
 				<data android:pathPattern=".*\\..*\\..*\\.obf" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\.obf" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.obf" />
+				<data android:pathPattern=".*\\.obf.zip" />
+				<data android:pathPattern=".*\\..*\\.obf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\.obf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.obf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.obf.zip" />
 			</intent-filter>
 
 			<intent-filter
@@ -286,6 +301,11 @@
 				<data android:pathPattern=".*\\..*\\..*\\.obf" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\.obf" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.obf" />
+				<data android:pathPattern=".*\\.obf.zip" />
+				<data android:pathPattern=".*\\..*\\.obf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\.obf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.obf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.obf.zip" />
 			</intent-filter>
 
 			<intent-filter
@@ -335,6 +355,11 @@
 				<data android:pathPattern=".*\\..*\\..*\\.osf" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\.osf" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.osf" />
+				<data android:pathPattern=".*\\.osf.zip" />
+				<data android:pathPattern=".*\\..*\\.osf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\.osf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.osf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.osf.zip" />
 			</intent-filter>
 
 			<intent-filter
@@ -353,6 +378,11 @@
 				<data android:pathPattern=".*\\..*\\..*\\.osf" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\.osf" />
 				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.osf" />
+				<data android:pathPattern=".*\\.osf.zip" />
+				<data android:pathPattern=".*\\..*\\.osf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\.osf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\.osf.zip" />
+				<data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.osf.zip" />
 			</intent-filter>
 
 			<intent-filter

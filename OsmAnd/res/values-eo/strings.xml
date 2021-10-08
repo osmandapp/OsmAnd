@@ -2742,7 +2742,7 @@
     <string name="coord_input_edit_point">Redakti punkton</string>
     <string name="coord_input_add_point">Aldoni punkton</string>
     <string name="coord_input_save_as_track">Konservi kiel spuron</string>
-    <string name="coord_input_save_as_track_descr">Vi aldonis %1$s punktojn. Enigu dosiernomon kaj frapetu “konservi”.</string>
+    <string name="coord_input_save_as_track_descr">Vi aldonis %1$s punktojn. Enigu dosiernomon kaj frapetu “Konservi”.</string>
     <string name="point_deleted">Forigis la punkton %1$s</string>
     <string name="shared_string_world">Mondo</string>
     <string name="send_search_query_description">Ni sendos vian serĉ-peton: “%1$s” kun via pozicio.
@@ -3290,7 +3290,7 @@
     <string name="desert_render_descr">Por dezertoj kaj aliaj maldense loĝataj lokoj. Pli detala.</string>
     <string name="select_navigation_icon">Emblemo de pozicio dum moviĝi</string>
     <string name="select_map_icon">Emblemo de pozicio dum nemoviĝi</string>
-    <string name="delete_profiles_descr">Frapetu “apliki” por porĉiame forigi forigitajn profilojn.</string>
+    <string name="delete_profiles_descr">Frapetu “Apliki” por porĉiame forigi forigitajn profilojn.</string>
     <string name="master_profile">Ĉefa profilo</string>
     <string name="select_color">Elekti koloron</string>
     <string name="edit_profiles_descr">Ne eblas forigi la implicitajn profilojn de OsmAnd, sed eblas malaktivigi ilin (ĉe la antaŭa ekrano) aŭ movi ilin suben.</string>
@@ -3368,7 +3368,7 @@
     <string name="rearrange_categories">Reordigi kategoriojn</string>
     <string name="create_custom_categories_list_promo">Vi povas ŝanĝi ordigon de la listo aŭ kaŝi kategoriojn. Ĉiuj ŝanĝoj estas enporteblaj/elporteblaj kiel profiloj.</string>
     <string name="add_new_custom_category_button_promo">Vi povas aldoni novan propran kategorion per elekti unu aŭ pli kategoriojn.</string>
-    <string name="reset_to_default_category_button_promo">Frapetu “restarigi implicitajn” por ke la ordigo de elementoj revenu al la postinstalada stato.</string>
+    <string name="reset_to_default_category_button_promo">Frapetu “Restarigi implicitajn” por ke la ordigo de elementoj revenu al la postinstalada stato.</string>
     <string name="accessibility_mode_disabled">Alirebleca reĝimo malaktivigita en Android.</string>
     <string name="use_system_screen_timeout">Malŝalti ekranon laŭ sistemaj agordoj</string>
     <string name="use_system_screen_timeout_promo">Implicite neaktiva: se OsmAnd laboras malfone, la ekrano ne malŝaltos aŭtomate. 
@@ -4338,4 +4338,7 @@
     <string name="routing_attr_allow_gate_name">Permesi pordegojn</string>
     <string name="routing_attr_prefer_tactile_paving_description">Preferi irejojn kun randaĵo por blinduloj</string>
     <string name="routing_attr_prefer_tactile_paving_name">Preferi reliefon por blinduloj</string>
+    <string name="upload_gpx_description_hint">Se malplena, nomo de spuro estos uzita kiel priskribo. Enigita priskribo aplikos al ĉiu spuro.</string>
+    <string name="search_title">Serĉi: %1$s</string>
+    <string name="exit_pan_mode_descr">Frapetu “Elekti” por eliri la ŝovuman reĝimon</string>
 </resources>

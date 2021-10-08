@@ -134,7 +134,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		MapActivity mapActivity = requireMapActivity();
-		importHelper = new ImportHelper(mapActivity, getMyApplication(), null);
+		importHelper = new ImportHelper(mapActivity, getMyApplication());
 
 		GPXRouteParamsBuilder routeParamsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 		if (routeParamsBuilder != null) {

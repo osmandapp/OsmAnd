@@ -203,7 +203,7 @@ public class ShowHidePoiAction extends QuickAction {
 			if (res instanceof String && RenderingIcons.containsBigIcon(res.toString())) {
 				holder.icon.setImageResource(RenderingIcons.getBigIconResourceId(res.toString()));
 			} else {
-				holder.icon.setImageResource(R.drawable.mx_user_defined);
+				holder.icon.setImageResource(R.drawable.mx_special_custom_category);
 			}
 
 			holder.title.setText(filter.getName());
@@ -350,7 +350,7 @@ public class ShowHidePoiAction extends QuickAction {
 		if (RenderingIcons.containsBigIcon(f.getIconId())) {
 			builder.setIcon(RenderingIcons.getBigIconResourceId(f.getIconId()));
 		} else {
-			builder.setIcon(R.drawable.mx_user_defined);
+			builder.setIcon(R.drawable.mx_special_custom_category);
 		}
 
 		builder.setSkipPaintingWithoutColor(true);
