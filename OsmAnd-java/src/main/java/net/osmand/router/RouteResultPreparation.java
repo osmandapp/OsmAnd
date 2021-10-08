@@ -440,54 +440,37 @@ public class RouteResultPreparation {
 			ctx.routingTime += finalSegment.distanceFromStart;
 			// println("Routing calculated time distance " + finalSegment.distanceFromStart);
 			// Get results from opposite direction roads
-			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment : 
-				finalSegment.opposite.getParentRoute();
-			int parentSegmentStart = finalSegment.reverseWaySearch ? finalSegment.opposite.getSegmentStart() : 
-				finalSegment.opposite.getParentSegmentEnd();
-			float parentRoutingTime = -1;
+			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment.parentRoute : finalSegment.opposite.getParentRoute();
 			while (segment != null) {
-				RouteSegmentResult res = new RouteSegmentResult(segment.road, parentSegmentStart, segment.getSegmentStart());
-				parentRoutingTime = calcRoutingTime(parentRoutingTime, finalSegment, segment, res);
-				parentSegmentStart = segment.getParentSegmentEnd();
+				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentEnd(), segment.getSegmentStart());
+				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
+				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
 				segment = segment.getParentRoute();
 				addRouteSegmentToResult(ctx, result, res, false);
 			}
 			// reverse it just to attach good direction roads
 			Collections.reverse(result);
-			segment = finalSegment.reverseWaySearch ? finalSegment.opposite.getParentRoute() : finalSegment;
-			int parentSegmentEnd = finalSegment.reverseWaySearch ? finalSegment.opposite.getParentSegmentEnd() : finalSegment.opposite.getSegmentStart();
-			parentRoutingTime = -1;
+			segment = finalSegment.reverseWaySearch ? finalSegment.opposite.getParentRoute() : finalSegment.parentRoute;
 			while (segment != null) {
-				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentStart(), parentSegmentEnd);
-				parentRoutingTime = calcRoutingTime(parentRoutingTime, finalSegment, segment, res);
-				parentSegmentEnd = segment.getParentSegmentEnd();
+				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentStart(), segment.getSegmentEnd());
+				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
+				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
 				segment = segment.getParentRoute();
 				// happens in smart recalculation
 				addRouteSegmentToResult(ctx, result, res, true);
 			}
 			Collections.reverse(result);
-			// checkTotalRoutingTime(result);
+			checkTotalRoutingTime(result, finalSegment.distanceFromStart);
 		}
 		return result;
 	}
 
-	protected void checkTotalRoutingTime(List<RouteSegmentResult> result) {
+	protected void checkTotalRoutingTime(List<RouteSegmentResult> result, float cmp) {
 		float totalRoutingTime = 0;
-		for(RouteSegmentResult r : result) {
+		for (RouteSegmentResult r : result) {
 			totalRoutingTime += r.getRoutingTime();
 		}
-		println("Total routing time ! " + totalRoutingTime);
-	}
-
-	private float calcRoutingTime(float parentRoutingTime, RouteSegment finalSegment, RouteSegment segment,
-			RouteSegmentResult res) {
-		if (segment != finalSegment) {
-			if (parentRoutingTime != -1) {
-				res.setRoutingTime(parentRoutingTime - segment.distanceFromStart);
-			}
-			parentRoutingTime = segment.distanceFromStart;
-		}
-		return parentRoutingTime;
+		println("Total sum routing time ! " + totalRoutingTime + " == " + cmp );
 	}
 	
 	private void addRouteSegmentToResult(RoutingContext ctx, List<RouteSegmentResult> result, RouteSegmentResult res, boolean reverse) {
@@ -1822,7 +1805,7 @@ public class RouteResultPreparation {
 				@Override
 				public RouteSegment next() {
 					RouteSegmentResult r = list[i++];
-					return new RouteSegment(r.getObject(), r.getStartPointIndex());
+					return new RouteSegment(r.getObject(), r.getStartPointIndex(), r.getEndPointIndex());
 				}
 
 				@Override

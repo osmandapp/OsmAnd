@@ -19,8 +19,6 @@ import org.apache.commons.logging.Log;
 
 public class BinaryRoutePlanner {
 
-	private static final int TEST_ID = 77031244;
-	private static final boolean TEST_SPECIFIC = false;
 
 	private static final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
 	/*private*/ static final int STANDARD_ROAD_IN_QUEUE_OVERHEAD = 220;
@@ -29,7 +27,10 @@ public class BinaryRoutePlanner {
 	protected static final Log log = PlatformUtil.getLog(BinaryRoutePlanner.class);
 
 	private static final int ROUTE_POINTS = 11;
+	private static final boolean ASSERT_CHECKS = true;
 	private static final boolean TRACE_ROUTING = false;
+	private static final int TEST_ID = 77031244;
+	private static final boolean TEST_SPECIFIC = false;
 
 
 	public static double squareRootDist(int x1, int y1, int x2, int y2) {
@@ -189,28 +190,24 @@ public class BinaryRoutePlanner {
 				Iterator<RouteSegmentPoint> pntIterator = pnt.others.iterator();
 				while (pntIterator.hasNext()) {
 					RouteSegmentPoint next = pntIterator.next();
-					boolean visitedAlready = false;
-					if (next.getSegmentStart() > 0 && visited.containsKey(calculateRoutePointId(next.road, 
-							next.getSegmentStart(), next.getSegmentStart() - 1))) {
-						visitedAlready = true;
-					} else if (next.getSegmentStart() < next.getRoad().getPointsLength() - 1
-							&& visited.containsKey(calculateRoutePointId(next.road, next.getSegmentStart(), next.getSegmentStart() + 1))) {
-						visitedAlready = true;
-					}
 					pntIterator.remove();
-					if (!visitedAlready) {
-						float estimatedDistance = (float) estimatedDistance(ctx, ctx.targetX, ctx.targetY, ctx.startX,
-								ctx.startY);
-						RouteSegment pos = next.initRouteSegment(true);
-						RouteSegment neg = next.initRouteSegment(false);
-						if (pos != null) {
-							pos.distanceToEnd = estimatedDistance;
-							graphSegments.add(pos);
-						}
-						if (neg != null) {
-							neg.distanceToEnd = estimatedDistance;
-							graphSegments.add(neg);
-						}
+					float estimatedDistance = (float) estimatedDistance(ctx, ctx.targetX, ctx.targetY, ctx.startX,
+							ctx.startY);
+					RouteSegment pos = next.initRouteSegment(true);
+					if (pos != null && !visited.containsKey(calculateRoutePointId(pos))) {
+						pos.setParentRoute(null);
+						pos.distanceFromStart = 0;
+						pos.distanceToEnd = estimatedDistance;
+						graphSegments.add(pos);
+					}
+					RouteSegment neg = next.initRouteSegment(false);
+					if (neg != null && !visited.containsKey(calculateRoutePointId(neg))) {
+						neg.setParentRoute(null);
+						neg.distanceFromStart = 0;
+						neg.distanceToEnd = estimatedDistance;
+						graphSegments.add(neg);
+					}
+					if (!graphSegments.isEmpty()) {
 						println("Reiterate point with new start/destination " + next.getRoad());
 						break;
 					}
@@ -347,7 +344,7 @@ public class BinaryRoutePlanner {
 		if (reverseWaySearch != null) {
 			p = (reverseWaySearch ? "B" : "F");
 		}
-		println(p + prefix + "" + segment.road + " dir=" + segment.getDirectionAssigned() + " ind=" + segment.getSegmentStart() +
+		println(p + prefix + "" + segment.road + " ind=" + segment.getSegmentStart() + "->" + segment.getSegmentEnd() +
 				" ds=" + ((float) segment.distanceFromStart) + " es=" + ((float) segment.distanceToEnd) + pr);
 	}
 
@@ -397,171 +394,117 @@ public class BinaryRoutePlanner {
 		}
 
 	}
+	
+	private double calculateRouteSegmentTime(RoutingContext ctx, boolean reverseWaySearch, RouteSegment segment) {
+		final RouteDataObject road = segment.road;
+		// store <segment> in order to not have unique <segment, direction> in visitedSegments
+		short segmentInd = !reverseWaySearch ? segment.getSegmentStart(): segment.getSegmentEnd();
+		short nextSegmentInd = reverseWaySearch ? segment.getSegmentStart(): segment.getSegmentEnd();
+		final int x = road.getPoint31XTile(segmentInd);
+		final int y = road.getPoint31YTile(segmentInd);
+		final int prevX = road.getPoint31XTile(nextSegmentInd);
+		final int prevY = road.getPoint31YTile(nextSegmentInd);
+
+		// calculate point and try to load neighbor ways if they are not loaded
+		double distOnRoadToPass = squareRootDist(x, y, prevX, prevY);
+		float priority = ctx.getRouter().defineSpeedPriority(road);
+		float speed = (ctx.getRouter().defineRoutingSpeed(road) * priority);
+		if (speed == 0) {
+			speed = (ctx.getRouter().getDefaultSpeed() * priority);
+		}
+		// speed can not exceed max default speed according to A*
+		if (speed > ctx.getRouter().getMaxSpeed()) {
+			speed = ctx.getRouter().getMaxSpeed();
+		}
+		
+		// calculate possible obstacle plus time
+		double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, nextSegmentInd > segmentInd);
+		if (obstacle < 0) {
+			return -1;
+		}
+		double heightObstacle = ctx.getRouter().defineHeightObstacle(road, segmentInd, nextSegmentInd);
+		if (heightObstacle < 0) {
+			return -1;
+		}
+		
+		return obstacle + heightObstacle + distOnRoadToPass / speed;
+
+	}
 
 
 	@SuppressWarnings("unused")
 	private void processRouteSegment(final RoutingContext ctx, boolean reverseWaySearch,
 			PriorityQueue<RouteSegment> graphSegments, TLongObjectHashMap<RouteSegment> visitedSegments, 
             RouteSegment startSegment, TLongObjectHashMap<RouteSegment> oppositeSegments, boolean doNotAddIntersections) {
-		final RouteDataObject road = startSegment.road;
-		boolean initDirectionAllowed = checkIfInitialMovementAllowedOnSegment(ctx, reverseWaySearch, visitedSegments, startSegment, road);
+		if (ASSERT_CHECKS && !checkMovementAllowed(ctx, reverseWaySearch, startSegment)) {
+			throw new IllegalStateException();
+		}
+		final RouteDataObject road = startSegment.getRoad();
 		if (TEST_SPECIFIC && road.getId() >> 6 == TEST_ID) {
 			printRoad(" ! "  + startSegment.distanceFromStart + " ", startSegment, reverseWaySearch);
 		}
-		boolean directionAllowed = initDirectionAllowed;
-		if (!directionAllowed) {
-			if (TRACE_ROUTING) {
-				println("  >> Already visited");
-			}
-			return;
-		}
+		boolean directionAllowed = true;
 		// Go through all point of the way and find ways to continue
 		// ! Actually there is small bug when there is restriction to move forward on the way (it doesn't take into account)
-		float obstaclesTime = 0;
-		float segmentDist = 0;
 		// +/- diff from middle point
-		short segmentPoint = startSegment.getSegmentStart();
-		boolean[] processFurther = new boolean[1];
+		RouteSegment nextCurrentSegment = startSegment;
 		RouteSegment currentSegment = null;
-		boolean dir = startSegment.isPositive();
-		while (directionAllowed) {
-			// mark previous interval as visited and move to next intersection
-			short prevSegmentPoint = segmentPoint;
-			RouteSegment prevSegment = currentSegment != null ? currentSegment : startSegment;
-			if (dir) {
-				segmentPoint++;
-			} else {
-				segmentPoint--;
-			}
-			if (segmentPoint < 0 || segmentPoint >= road.getPointsLength()) {
-				directionAllowed = false;
-				break;
-			}
-			// store <segment> in order to not have unique <segment, direction> in visitedSegments
-			final int x = road.getPoint31XTile(segmentPoint);
-			final int y = road.getPoint31YTile(segmentPoint);
-			final int prevX = road.getPoint31XTile(prevSegmentPoint);
-			final int prevY = road.getPoint31YTile(prevSegmentPoint);
-			if (x == prevX && y == prevY) {
-				continue;
-			}
-
-			// 2. calculate point and try to load neighbor ways if they are not loaded
-			segmentDist += squareRootDist(x, y, prevX, prevY);
-
-			// 2.1 calculate possible obstacle plus time
-			double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentPoint, (dir && !reverseWaySearch));
-			if (obstacle < 0) {
-				directionAllowed = false;
-				break;
-			}
-			double heightObstacle = ctx.getRouter().defineHeightObstacle(road, !reverseWaySearch ? prevSegmentPoint : segmentPoint,
-					!reverseWaySearch ? segmentPoint : prevSegmentPoint);
-			if (heightObstacle < 0) {
-				directionAllowed = false;
-				break;
-			}
-			obstaclesTime += obstacle;
-			obstaclesTime += heightObstacle;
-			float distStartObstacles = startSegment.distanceFromStart + obstaclesTime;
-
-			// 3. load road connections at this point    
-			final RouteSegment connectedSegment = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - ctx.memoryOverhead);
+		while (nextCurrentSegment != null) {
+			currentSegment = nextCurrentSegment;
+			nextCurrentSegment = null;
 			
-			// 3.1 find segment itself and initialize
-			RouteSegment roadIter = connectedSegment;
-			while (roadIter != null) {
-				if (roadIter.road.getId() == startSegment.getRoad().getId() && segmentPoint == roadIter.getSegmentStart()) {
-					currentSegment = roadIter.initRouteSegment(startSegment.isPositive());
-					break;
-				}
-				roadIter = roadIter.getNext();
-			}
-			if (currentSegment == null) {
-				// exceptional situation should not occur
-				currentSegment = new RouteSegment(startSegment.getRoad(), segmentPoint);
-			}
-
-			if (currentSegment.getParentRoute() != null
-					&& currentSegment.distanceFromStart < distStartObstacles) {
-				// we already processed that segment earlier or it is in graph segments
-				// and we had better results (so we shouldn't process)
+			// 1. calculate obstacle for passing this segment 
+			float segmentAndObstaclesTime = (float) calculateRouteSegmentTime(ctx, reverseWaySearch, currentSegment);
+			if (segmentAndObstaclesTime < 0) {
 				directionAllowed = false;
 				break;
 			}
-
-			currentSegment.distanceFromStart = distStartObstacles;
-			currentSegment.setParentRoute(prevSegment);
-			currentSegment.setParentSegmentEnd(segmentPoint);
-			long nextPntId = calculateRoutePointId(startSegment.getRoad(), prevSegmentPoint, segmentPoint);
-			
-			// 3.2 upload segment itself to visited segments
-			RouteSegment existingSegment = visitedSegments.put(nextPntId, prevSegment);
-			if (existingSegment != null && prevSegment.distanceFromStart > existingSegment.distanceFromStart) {
+			// calculate new start segment time as we're going to assign to put to visited segments
+			float distFromStartPlusSegmentTime = currentSegment.distanceFromStart + segmentAndObstaclesTime;
+			if (ctx.precalculatedRouteDirection != null && ctx.precalculatedRouteDirection.isFollowNext()) {
+				// speed up calculation with calculated route by using different distance from start
+				final int x = road.getPoint31XTile(currentSegment.getSegmentStart());
+				final int y = road.getPoint31YTile(currentSegment.getSegmentStart());
+				// TODO double check??
+				distFromStartPlusSegmentTime = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxSpeed();
+			}
+			// 2. upload segment itself to visited segments
+			long nextPntId = calculateRoutePointId(currentSegment);
+			RouteSegment existingSegment = visitedSegments.put(nextPntId, currentSegment);
+			if (existingSegment != null && distFromStartPlusSegmentTime > existingSegment.distanceFromStart) {
 				// insert back original segment (test case with large area way)
 				visitedSegments.put(nextPntId, existingSegment);
 				directionAllowed = false;
+				if (ctx.config.heuristicCoefficient <= 1) {
+					System.err.println("! Alert distance from start visited " + distFromStartPlusSegmentTime + " > "
+							+ existingSegment.distanceFromStart + ": " + road.toString());
+				}
+				if (TRACE_ROUTING) {
+					println("  >> Already visited");
+				}
 				break;
 			}
-
-			// 3.3 check if segment was already visited in opposite direction
-			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(reverseWaySearch, graphSegments, prevSegment, oppositeSegments,
-					prevSegmentPoint, segmentPoint);
+			// reassign @distanceFromStart to make it correct for visited segment
+			currentSegment.distanceFromStart = distFromStartPlusSegmentTime;
+			
+			// 3. check if segment was already visited in opposite direction
+			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
 			if (alreadyVisited) {
 				directionAllowed = false;
 				break;
 			}
-			if (ctx.precalculatedRouteDirection != null && ctx.precalculatedRouteDirection.isFollowNext()) {
-				// speed up calculation with calculated route by using different distance from start
-				distStartObstacles = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxSpeed();
-			}
 
-			// 4. Process all other outgoing connections
-			processIntersections(ctx, graphSegments, visitedSegments, distStartObstacles,
-					currentSegment, segmentPoint, connectedSegment, reverseWaySearch, doNotAddIntersections, processFurther);
+			// 4. load road connections at the end of segment    
+			nextCurrentSegment = processIntersections(ctx, graphSegments, visitedSegments, currentSegment, reverseWaySearch, doNotAddIntersections);
 		}
-		if (initDirectionAllowed && ctx.visitor != null) {
-			ctx.visitor.visitSegment(startSegment, segmentPoint, true);
+		if (ctx.visitor != null) {
+			ctx.visitor.visitSegment(startSegment, currentSegment.getSegmentEnd(), true);
 		}
 	}
-
-	private float countRouteSegmentObstacles(final RoutingContext ctx, RouteSegment segmentStart, RouteSegment segmentNext, boolean reverseWaySearch) {
-		final RouteDataObject roadStart = segmentStart.road;
-		final RouteDataObject roadNext = segmentNext.road;
-
-		final int x = roadStart.getPoint31XTile(segmentStart.segStart);
-		final int y = roadStart.getPoint31YTile(segmentStart.segStart);
-		final int nextX = roadNext.getPoint31XTile(segmentNext.segStart);
-		final int nextY = roadNext.getPoint31YTile(segmentNext.segStart);
-		if (x == nextX && y == nextY) {
-			return 0;
-		}
-
-		float segmentDist = (float) squareRootDist(x, y, nextX, nextY);
-
-		boolean dir = segmentNext.isPositive();
-
-		float obstacle = ctx.getRouter().defineRoutingObstacle(roadNext, segmentNext.segStart, (dir && !reverseWaySearch))
-				+ (float) ctx.getRouter().calculateTurnTime(segmentNext,
-				segmentNext.isPositive() ? segmentNext.getRoad().getPointsLength() - 1 : 0,
-				segmentNext,segmentNext.segStart);
-		if (obstacle < 0) {
-			return -1;
-		}
-
-		float heightObstacle = (float) ctx.getRouter().defineHeightObstacle(segmentStart.road, !reverseWaySearch ? segmentStart.segStart : segmentNext.segStart,
-				!reverseWaySearch ? segmentNext.segStart : segmentStart.segStart);
-		if (heightObstacle < 0) {
-			return -1;
-		}
-
-		return calculateTimeWithObstacles(ctx, segmentStart.road, segmentDist, obstacle + heightObstacle);
-	}
-
-	private boolean checkIfInitialMovementAllowedOnSegment(final RoutingContext ctx, boolean reverseWaySearch,
-			TLongObjectHashMap<RouteSegment> visitedSegments, RouteSegment segment, final RouteDataObject road) {
+	
+	private boolean checkMovementAllowed(final RoutingContext ctx, boolean reverseWaySearch, RouteSegment segment) {
 		boolean directionAllowed;
-		int oneway = ctx.getRouter().isOneWay(road);
+		int oneway = ctx.getRouter().isOneWay(segment.getRoad());
 		// use positive direction as agreed
 		if (!reverseWaySearch) {
 			if (segment.isPositive()) {
@@ -576,20 +519,13 @@ public class BinaryRoutePlanner {
 				directionAllowed = oneway >= 0;
 			}
 		}
-		RouteSegment visitedSegment = visitedSegments.get(calculateRoutePointId(segment));
-		if (directionAllowed && visitedSegment != null) {
-			if (visitedSegment.distanceFromStart <= segment.distanceFromStart) {
-				directionAllowed = false;
-			} else {
-				if (ctx.config.heuristicCoefficient <= 1) {
-					System.err.println("! Alert distance from start visited " + visitedSegment.distanceFromStart + " > "
-							+ segment.distanceFromStart + ": " + road.toString());
-				}
-			}
-		}
 		return directionAllowed;
 	}
 
+
+
+
+	// TODO double check clean up
 	private boolean checkViaRestrictions(RouteSegment from, RouteSegment to) {
 		if (from != null && to != null) {
 			long fid = to.getRoad().getId();
@@ -621,47 +557,33 @@ public class BinaryRoutePlanner {
 	}
 
 	private boolean checkIfOppositeSegmentWasVisited(boolean reverseWaySearch,
-			PriorityQueue<RouteSegment> graphSegments, RouteSegment currentSegment, TLongObjectHashMap<RouteSegment> oppositeSegments,
-			int prevSegmentPoint, int segmentPoint) {
-		RouteDataObject road = currentSegment.getRoad();
-		long currPoint = calculateRoutePointId(road, segmentPoint, prevSegmentPoint);
+			PriorityQueue<RouteSegment> graphSegments, RouteSegment currentSegment, TLongObjectHashMap<RouteSegment> oppositeSegments) {
+		long currPoint = calculateRoutePointId(currentSegment);
 		if (oppositeSegments.containsKey(currPoint)) {
 			RouteSegment opposite = oppositeSegments.get(currPoint);
-			RouteSegment to = reverseWaySearch ? getParentDiffId(currentSegment) : getParentDiffId(opposite);
-			RouteSegment from = !reverseWaySearch ? getParentDiffId(currentSegment) : getParentDiffId(opposite);
-			if (checkViaRestrictions(from, to)) {
-				FinalRouteSegment frs = new FinalRouteSegment(road, segmentPoint);
-				frs.setParentRoute(currentSegment);
-				frs.setParentSegmentEnd(segmentPoint);
-				frs.reverseWaySearch = reverseWaySearch;
-				frs.distanceFromStart = opposite.distanceFromStart + currentSegment.distanceFromStart;
-				frs.distanceToEnd = 0;
-				frs.opposite = opposite;
-				graphSegments.add(frs);
-				if (TRACE_ROUTING) {
-					printRoad("  >> Final segment : ", frs, reverseWaySearch);
-				}
-				return true;
+			if(opposite.getParentRoute() != null) {
+				// take parent to not calculate penalty for this segment twice
+				opposite = opposite.getParentRoute();
 			}
+			FinalRouteSegment frs = new FinalRouteSegment(currentSegment.getRoad(), 
+					currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
+			frs.setParentRoute(currentSegment);
+			frs.reverseWaySearch = reverseWaySearch;
+			frs.distanceFromStart = opposite.distanceFromStart + currentSegment.distanceFromStart;
+			frs.distanceToEnd = 0;
+			frs.opposite = opposite.getParentRoute();
+			graphSegments.add(frs);
+			if (TRACE_ROUTING) {
+				printRoad("  >> Final segment : ", frs, reverseWaySearch);
+			}
+			return true;
 		}
 		return false;
 	}
 
 
-	private float calculateTimeWithObstacles(RoutingContext ctx, RouteDataObject road, float distOnRoadToPass, float obstaclesTime) {
-		float priority = ctx.getRouter().defineSpeedPriority(road);
-		float speed = (ctx.getRouter().defineRoutingSpeed(road) * priority);
-		if (speed == 0) {
-			speed = (ctx.getRouter().getDefaultSpeed() * priority);
-		}
-		// speed can not exceed max default speed according to A*
-		if (speed > ctx.getRouter().getMaxSpeed()) {
-			speed = ctx.getRouter().getMaxSpeed();
-		}
-		return obstaclesTime + distOnRoadToPass / speed;
-	}
 
-	private long calculateRoutePointId(final RouteDataObject road, int pntId, int nextPntId) {
+	private long calculateRoutePointInternalId(final RouteDataObject road, int pntId, int nextPntId) {
 		int positive = nextPntId - pntId;
 		int pntLen = road.getPointsLength();
 		if (pntId < 0 || nextPntId < 0 || pntId >= pntLen || nextPntId >= pntLen || (positive != -1 && positive != 1)) {
@@ -672,8 +594,9 @@ public class BinaryRoutePlanner {
 	}
 
 	private long calculateRoutePointId(RouteSegment segm) {
-		return calculateRoutePointId(segm.getRoad(), segm.getSegmentStart(), 
+		return calculateRoutePointInternalId(segm.getRoad(), segm.getSegmentStart(), 
 				segm.isPositive() ? segm.getSegmentStart() + 1 : segm.getSegmentStart() - 1);
+		// return calculateRoutePointInternalId(segm.getRoad(), segm.getSegmentStart(), segm.getSegmentEnd()); 
 	}
 
 
@@ -788,46 +711,67 @@ public class BinaryRoutePlanner {
 		}
 	}
 
-
-	private void processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
-			TLongObjectHashMap<RouteSegment> visitedSegments,  float distFromStart, RouteSegment segment,
-			short segmentPoint, RouteSegment inputNext, boolean reverseWaySearch, boolean doNotAddIntersections, 
-			boolean[] processFurther) {
-		boolean thereAreRestrictions;
-		processFurther[0] = true;
-		Iterator<RouteSegment> nextIterator = null;
-		if (inputNext != null && inputNext.getRoad().getId() == segment.getRoad().getId() && inputNext.next == null) {
-			thereAreRestrictions = false;
-		} else {
-			thereAreRestrictions = proccessRestrictions(ctx, segment, inputNext, reverseWaySearch);
-			if (thereAreRestrictions) {
-				nextIterator = ctx.segmentsToVisitPrescripted.iterator();
-				if (TRACE_ROUTING) {
-					println("  >> There are restrictions");
-				}
-			}
-		}
+	private RouteSegment processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
+			TLongObjectHashMap<RouteSegment> visitedSegments,  RouteSegment currentSegment,
+			boolean reverseWaySearch, boolean doNotAddIntersections) {
+		RouteSegment nextCurrentSegment = null;
 		int targetEndX = reverseWaySearch ? ctx.startX : ctx.targetX;
 		int targetEndY = reverseWaySearch ? ctx.startY : ctx.targetY;
-		float distanceToEnd = h(ctx, segment.getRoad().getPoint31XTile(segmentPoint), segment.getRoad()
-				.getPoint31YTile(segmentPoint), targetEndX, targetEndY);
-		// Calculate possible ways to put into priority queue
-		RouteSegment next = inputNext;
+		final int x = currentSegment.getRoad().getPoint31XTile(currentSegment.getSegmentEnd());
+		final int y = currentSegment.getRoad().getPoint31YTile(currentSegment.getSegmentEnd());
+		float distanceToEnd = h(ctx, x, y, targetEndX, targetEndY);
+		// reassign @distanceToEnd to make it correct for visited segment
+		currentSegment.distanceToEnd = distanceToEnd; 
+		
+		final RouteSegment connectedNextSegment = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - ctx.memoryOverhead);
+		RouteSegment roadIter = connectedNextSegment;
+		boolean directionAllowed = true;
+		boolean singleRoad = true;
+		while (roadIter != null) {
+			if (currentSegment.getSegmentEnd() == roadIter.getSegmentStart() && roadIter.road.getId() == currentSegment.getRoad().getId() ) {
+				nextCurrentSegment = roadIter.initRouteSegment(currentSegment.isPositive());
+				if (nextCurrentSegment == null) {
+					// end of route (-1 or length + 1)
+					directionAllowed = false;
+				} else {
+					nextCurrentSegment.setParentRoute(currentSegment);
+					nextCurrentSegment.distanceFromStart = currentSegment.distanceFromStart;
+					nextCurrentSegment.distanceToEnd = distanceToEnd;
+				}
+			} else {
+				singleRoad = false;
+			}
+			roadIter = roadIter.getNext();
+		}
+		if (singleRoad) {
+			return nextCurrentSegment;
+		}
+		
+		// find restrictions and iterator
+		Iterator<RouteSegment> nextIterator = null;
+		boolean thereAreRestrictions = proccessRestrictions(ctx, currentSegment, connectedNextSegment, reverseWaySearch);
+		if (thereAreRestrictions) {
+			nextIterator = ctx.segmentsToVisitPrescripted.iterator();
+			if (TRACE_ROUTING) {
+				println("  >> There are restrictions");
+			}
+		}
+		
+		// Calculate possible turns to put into priority queue
+		RouteSegment next = connectedNextSegment;
 		boolean hasNext = nextIterator != null ? nextIterator.hasNext() : next != null;
 		while (hasNext) {
 			if (nextIterator != null) {
 				next = nextIterator.next();
 			}
-			if (next.getSegmentStart() == segmentPoint && 
-					next.getRoad().getId() == segment.getRoad().id) {
+			if (next.getSegmentStart() == currentSegment.getSegmentEnd() && 
+					next.getRoad().getId() == currentSegment.getRoad().getId()) {
 				// skip itself
 			} else if (!doNotAddIntersections) {
 				RouteSegment nextPos = next.initRouteSegment(true);
+				processOneRoadIntersection(ctx, reverseWaySearch, graphSegments, visitedSegments, currentSegment, nextPos);
 				RouteSegment nextNeg = next.initRouteSegment(false);
-				processOneRoadIntersection(ctx, graphSegments, visitedSegments, distFromStart, distanceToEnd, segment, segmentPoint,
-						nextPos);
-				processOneRoadIntersection(ctx, graphSegments, visitedSegments, distFromStart, distanceToEnd, segment, segmentPoint,
-						nextNeg);
+				processOneRoadIntersection(ctx, reverseWaySearch, graphSegments, visitedSegments, currentSegment, nextNeg);
 
 			}
 			// iterate to next road
@@ -838,22 +782,34 @@ public class BinaryRoutePlanner {
 				hasNext = nextIterator.hasNext();
 			}
 		}
+		
+		if (nextCurrentSegment == null) {
+			if (directionAllowed) {
+				// exception as it should not occur
+				throw new IllegalStateException();
+			}
+		}
+		return nextCurrentSegment;
 	}
 
 	@SuppressWarnings("unused")
-	private void processOneRoadIntersection(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
-			TLongObjectHashMap<RouteSegment> visitedSegments, float distFromStart, float distanceToEnd,  RouteSegment segment,
-			int segmentPoint, RouteSegment next) {
+	private void processOneRoadIntersection(RoutingContext ctx, boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments,
+			TLongObjectHashMap<RouteSegment> visitedSegments, RouteSegment segment, RouteSegment next) {
 		if (next != null) {
+			if (checkMovementAllowed(ctx, reverseWaySearch, next)) {
+				return;
+			}
 			float obstaclesTime = (float) ctx.getRouter().calculateTurnTime(next, 
 					next.isPositive() ? next.getRoad().getPointsLength() - 1 : 0,    
-					segment, segmentPoint);
-			distFromStart += obstaclesTime;
+					segment, segment.getSegmentEnd());
+			if (obstaclesTime < 0) {
+				return;
+			}
+			float distFromStart = obstaclesTime + segment.distanceFromStart;
 			if (TEST_SPECIFIC && next.road.getId() >> 6 == TEST_ID) {
-				printRoad(" !? distFromStart=" +distFromStart + " from " + segment.getRoad().getId() +
-						" dir=" + segment.getDirectionAssigned() +
-						" distToEnd=" + distanceToEnd +
-						" segmentPoint=" + segmentPoint + " -- ", next, true);
+				printRoad(" !? distFromStart=" + distFromStart + " from " + segment.getRoad().getId() +
+						" distToEnd=" + segment.distanceFromStart +
+						" segmentPoint=" + segment.getSegmentEnd() + " -- ", next, true);
 			}
 			RouteSegment visIt = visitedSegments.get(calculateRoutePointId(next));
 			boolean toAdd = true;
@@ -878,15 +834,14 @@ public class BinaryRoutePlanner {
 				}
 			}
 			if (toAdd && (next.getParentRoute() == null || ctx.roadPriorityComparator(next.distanceFromStart,
-					next.distanceToEnd, distFromStart, distanceToEnd) > 0)) {
+					next.distanceToEnd, distFromStart, segment.distanceToEnd) > 0)) {
 				next.distanceFromStart = distFromStart;
-				next.distanceToEnd = distanceToEnd;
+				next.distanceToEnd = segment.distanceToEnd;
 				if (TRACE_ROUTING) {
-					printRoad(" " + segmentPoint + ">>", next, null);
+					printRoad(" " + segment.getSegmentEnd() + ">>", next, null);
 				}
 				// put additional information to recover whole route after
 				next.setParentRoute(segment);
-				next.setParentSegmentEnd(segmentPoint);
 				graphSegments.add(next);
 			}
 		}
@@ -909,14 +864,14 @@ public class BinaryRoutePlanner {
 	public static class RouteSegmentPoint extends RouteSegment {
 		
 		public RouteSegmentPoint(RouteDataObject road, int segmentStart, double distSquare) {
-			super(road, segmentStart);
+			super(road, segmentStart, segmentStart);
 			this.distSquare = distSquare;
 			this.preciseX = road.getPoint31XTile(segmentStart);
 			this.preciseY = road.getPoint31YTile(segmentStart);
 		}
 		
 		public RouteSegmentPoint(RouteSegmentPoint pnt) {
-			super(pnt.road, pnt.segStart);
+			super(pnt.road, pnt.segStart, pnt.segEnd);
 			this.distSquare = pnt.distSquare;
 			this.preciseX = pnt.preciseX;
 			this.preciseY = pnt.preciseY;
@@ -941,6 +896,7 @@ public class BinaryRoutePlanner {
 
 	public static class RouteSegment {
 		final short segStart;
+		final short segEnd;
 		final RouteDataObject road;
 		// needed to store intersection of routes
 		RouteSegment next = null;
@@ -951,16 +907,21 @@ public class BinaryRoutePlanner {
 		RouteSegment parentRoute = null;
 		short parentSegmentEnd = 0;
 		// 1 - positive , -1 - negative, 0 not assigned
-		byte directionAssgn = 0;
+		// byte directionAssgn = 0;
 
 		// distance measured in time (seconds)
 		// doesn't inlude distance from @segStart to @segStart + @directionAssgn
 		float distanceFromStart = 0;
 		float distanceToEnd = 0;
 
-		public RouteSegment(RouteDataObject road, int segmentStart) {
+		public RouteSegment(RouteDataObject road, int segmentStart, int segmentEnd) {
 			this.road = road;
 			this.segStart = (short) segmentStart;
+			this.segEnd = (short) segmentEnd;
+		}
+		
+		public RouteSegment(RouteDataObject road, int segmentStart) {
+			this(road, segmentStart, segmentStart < road.getPointsLength() - 1 ? segmentStart + 1 : segmentStart - 1);
 		}
 
 		public RouteSegment initRouteSegment(boolean positiveDirection) {
@@ -970,26 +931,19 @@ public class BinaryRoutePlanner {
 			if (segStart == road.getPointsLength() - 1 && positiveDirection) {
 				return null;
 			}
-			RouteSegment rs = this;
-			if (directionAssgn == 0) {
-				rs.directionAssgn = (byte) (positiveDirection ? 1 : -1);
+			if (segStart == segEnd) {
+				throw new IllegalArgumentException();
 			} else {
-				if (positiveDirection != (directionAssgn == 1)) {
+				if (positiveDirection == (segEnd > segStart)) {
+					return this;
+				} else {
 					if (oppositeDirection == null) {
-						oppositeDirection = new RouteSegment(road, segStart);
-						oppositeDirection.directionAssgn = (byte) (positiveDirection ? 1 : -1);
+						oppositeDirection = new RouteSegment(road, segStart,
+								segEnd > segStart ? (segStart - 1) : (segStart + 1));
 					}
-					if ((oppositeDirection.directionAssgn == 1) != positiveDirection) {
-						throw new IllegalStateException();
-					}
-					rs = oppositeDirection;
+					return oppositeDirection;
 				}
 			}
-			return rs;
-		}
-
-		public byte getDirectionAssigned() {
-			return directionAssgn;
 		}
 
 		public RouteSegment getParentRoute() {
@@ -997,23 +951,11 @@ public class BinaryRoutePlanner {
 		}
 
 		public boolean isPositive() {
-			return directionAssgn == 1;
+			return segEnd > segStart;
 		}
 
 		public void setParentRoute(RouteSegment parentRoute) {
 			this.parentRoute = parentRoute;
-		}
-
-		public void assignDirection(byte b) {
-			directionAssgn = b;
-		}
-
-		public void setParentSegmentEnd(int parentSegmentEnd) {
-			this.parentSegmentEnd = (short) parentSegmentEnd;
-		}
-
-		public int getParentSegmentEnd() {
-			return parentSegmentEnd;
 		}
 
 		public RouteSegment getNext() {
@@ -1022,6 +964,10 @@ public class BinaryRoutePlanner {
 
 		public short getSegmentStart() {
 			return segStart;
+		}
+		
+		public short getSegmentEnd() {
+			return segEnd;
 		}
 
 		public float getDistanceFromStart() {
@@ -1072,8 +1018,8 @@ public class BinaryRoutePlanner {
 		boolean reverseWaySearch;
 		RouteSegment opposite;
 
-		public FinalRouteSegment(RouteDataObject road, int segmentStart) {
-			super(road, segmentStart);
+		public FinalRouteSegment(RouteDataObject road, int segmentStart, int segmentEnd) {
+			super(road, segmentStart, segmentEnd);
 		}
 
 	}
