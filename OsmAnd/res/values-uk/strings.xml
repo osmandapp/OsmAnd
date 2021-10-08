@@ -4342,4 +4342,5 @@
     <string name="search_title">Пошук: %1$s</string>
     <string name="upload_gpx_description_hint">Залиште порожніми, назви треків використовуватимуться як опис. Введений опис буде застосовано для кожного треку.</string>
     <string name="exit_pan_mode_descr">Натисніть Вибрати, щоб вийти з режиму панорамування</string>
+    <string name="icon_group_nautical">Морський</string>
 </resources>
