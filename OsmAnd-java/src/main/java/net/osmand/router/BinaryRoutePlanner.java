@@ -279,22 +279,22 @@ public class BinaryRoutePlanner {
 			ctx.targetY = recalculationEnd.getRoad().getPoint31YTile(recalculationEnd.getSegmentStart());
 		}
 		float estimatedDistance = (float) estimatedDistance(ctx, ctx.targetX, ctx.targetY, ctx.startX, ctx.startY);
-		if (startPos != null) {
+		if (startPos != null && checkMovementAllowed(ctx, false, startPos)) {
 			startPos.distanceToEnd = estimatedDistance;
 			graphDirectSegments.add(startPos);
 		}
-		if (startNeg != null) {
+		if (startNeg != null && checkMovementAllowed(ctx, false, startNeg)) {
 			startNeg.distanceToEnd = estimatedDistance;
 			graphDirectSegments.add(startNeg);
 		}
 		if (recalculationEnd != null) {
 			graphReverseSegments.add(recalculationEnd);
 		} else {
-			if (endPos != null) {
+			if (endPos != null && checkMovementAllowed(ctx, true, endPos)) {
 				endPos.distanceToEnd = estimatedDistance;
 				graphReverseSegments.add(endPos);
 			}
-			if (endNeg != null) {
+			if (endNeg != null && checkMovementAllowed(ctx, true, endNeg)) {
 				endNeg.distanceToEnd = estimatedDistance;
 				graphReverseSegments.add(endNeg);
 			}
