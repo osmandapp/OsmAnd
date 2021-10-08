@@ -14,6 +14,7 @@ import com.jwetherell.openmap.common.UTMPoint;
 import net.osmand.LocationConvert;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
+import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -57,13 +58,15 @@ public class OsmAndFormatter {
 
 	public static final float MILS_IN_DEGREE = 17.777778f;
 
-	public static final int FORMAT_DEGREES_SHORT = 6;
+	public static final int FORMAT_DEGREES_SHORT = 8;
 	public static final int FORMAT_DEGREES = LocationConvert.FORMAT_DEGREES;
 	public static final int FORMAT_MINUTES = LocationConvert.FORMAT_MINUTES;
 	public static final int FORMAT_SECONDS = LocationConvert.FORMAT_SECONDS;
 	public static final int UTM_FORMAT = LocationConvert.UTM_FORMAT;
 	public static final int OLC_FORMAT = LocationConvert.OLC_FORMAT;
 	public static final int MGRS_FORMAT = LocationConvert.MGRS_FORMAT;
+	public static final int SWISS_GRID_FORMAT = LocationConvert.SWISS_GRID_FORMAT;
+	public static final int SWISS_GRID_PLUS_FORMAT = LocationConvert.SWISS_GRID_PLUS_FORMAT;
 	private static final char DELIMITER_DEGREES = '°';
 	private static final char DELIMITER_MINUTES = '′';
 	private static final char DELIMITER_SECONDS = '″';
@@ -579,6 +582,20 @@ public class OsmAndFormatter {
 			} catch (java.lang.Error e) {
 				e.printStackTrace();
 			}
+		} else if (outputFormat == SWISS_GRID_FORMAT) {
+			double[] swissGrid = SwissGridApproximation.convertWGS84ToLV03(new LatLon(lat, lon));
+			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
+			formatSymbols.setDecimalSeparator('.');
+			formatSymbols.setGroupingSeparator(' ');
+			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
+			result.append(swissGridFormat.format(swissGrid[0]) + ", " + swissGridFormat.format(swissGrid[1]));
+		} else if (outputFormat == SWISS_GRID_PLUS_FORMAT) {
+			double[] swissGrid = SwissGridApproximation.convertWGS84ToLV95(new LatLon(lat, lon));
+			DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.US);
+			formatSymbols.setDecimalSeparator('.');
+			formatSymbols.setGroupingSeparator(' ');
+			DecimalFormat swissGridFormat = new DecimalFormat("###,###.##", formatSymbols);
+			result.append(swissGridFormat.format(swissGrid[0]) + ", " + swissGridFormat.format(swissGrid[1]));
 		}
 		return result.toString();
 	}

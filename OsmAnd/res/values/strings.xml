@@ -1083,6 +1083,8 @@
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
+    <string name="navigate_point_format_swiss_grid">Swiss Grid (CH1903)</string>
+    <string name="navigate_point_format_swiss_grid_plus">Swiss Grid (CH1903+)</string>
     <string name="coordinates_format_info">The selected format will be applied throughout the app.</string>
     <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s</string>
     <string name="change_default_settings">Change setting</string>
