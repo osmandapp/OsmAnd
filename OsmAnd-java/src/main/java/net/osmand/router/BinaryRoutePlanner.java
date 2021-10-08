@@ -29,7 +29,7 @@ public class BinaryRoutePlanner {
 	private static final int ROUTE_POINTS = 11;
 	private static final boolean ASSERT_CHECKS = true;
 	private static final boolean TRACE_ROUTING = false;
-	private static final int TEST_ID = 77031244;
+	private static final int TEST_ID = 886994848;
 	private static final boolean TEST_SPECIFIC = false;
 
 
@@ -472,7 +472,7 @@ public class BinaryRoutePlanner {
 				distFromStartPlusSegmentTime = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxSpeed();
 			}
 			// 2. check if segment was already visited in opposite direction
-			// we check before we calculate segmentTime (to not calculate it twice with opposite) !
+			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns onto each segment).
 			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
 			if (alreadyVisited) {
 				directionAllowed = false;
@@ -530,8 +530,6 @@ public class BinaryRoutePlanner {
 
 
 
-
-	// TODO double check clean up
 	private boolean checkViaRestrictions(RouteSegment from, RouteSegment to) {
 		if (from != null && to != null) {
 			long fid = to.getRoad().getId();
@@ -569,6 +567,12 @@ public class BinaryRoutePlanner {
 				currentSegment.getSegmentEnd(), currentSegment.getSegmentStart());
 		if (oppositeSegments.containsKey(currPoint)) {
 			RouteSegment opposite = oppositeSegments.get(currPoint);
+			RouteSegment curParent = getParentDiffId(currentSegment);
+			RouteSegment oppParent = getParentDiffId(opposite);
+			if (curParent != null && oppParent != null
+					&& !checkViaRestrictions(curParent, oppParent)) {
+				return true;
+			}
 			FinalRouteSegment frs = new FinalRouteSegment(currentSegment.getRoad(), 
 					currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
 			frs.setParentRoute(currentSegment.getParentRoute());
@@ -796,7 +800,6 @@ public class BinaryRoutePlanner {
 		return nextCurrentSegment;
 	}
 
-	@SuppressWarnings("unused")
 	private void processOneRoadIntersection(RoutingContext ctx, boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, RouteSegment segment, RouteSegment next) {
 		if (next != null) {
