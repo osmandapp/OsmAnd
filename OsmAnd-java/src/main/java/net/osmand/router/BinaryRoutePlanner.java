@@ -472,11 +472,14 @@ public class BinaryRoutePlanner {
 				distFromStartPlusSegmentTime = ctx.precalculatedRouteDirection.getDeviationDistance(x, y) / ctx.getRouter().getMaxSpeed();
 			}
 			// 2. check if segment was already visited in opposite direction
-			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns onto each segment).
-			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(reverseWaySearch, graphSegments, currentSegment, oppositeSegments);
-			if (alreadyVisited) {
-				directionAllowed = false;
-				break;
+			// We check before we calculate segmentTime (to not calculate it twice with opposite and calculate turns
+			// onto each segment).
+			boolean alreadyVisited = checkIfOppositeSegmentWasVisited(reverseWaySearch, graphSegments, currentSegment,
+					oppositeSegments);
+ 			if (alreadyVisited) {
+ 				// we don't stop here in order to allow improve found *potential* final segment - test case on short route
+				// directionAllowed = false;
+				// break;
 			}
 			
 			// 3. upload segment itself to visited segments
@@ -488,18 +491,17 @@ public class BinaryRoutePlanner {
 				directionAllowed = false;
 				if (ctx.config.heuristicCoefficient <= 1) {
 					System.err.println("! Alert distance from start visited " + distFromStartPlusSegmentTime + " > "
-							+ existingSegment.distanceFromStart + ": " + road.toString());
+							+ existingSegment.distanceFromStart + ": " + currentSegment + " - " + existingSegment);
 				}
 				if (TRACE_ROUTING) {
 					println("  >> Already visited");
 				}
 				break;
 			}
+						
 			// reassign @distanceFromStart to make it correct for visited segment
 			currentSegment.distanceFromStart = distFromStartPlusSegmentTime;
 			
-
-
 			// 4. load road connections at the end of segment    
 			nextCurrentSegment = processIntersections(ctx, graphSegments, visitedSegments, currentSegment, reverseWaySearch, doNotAddIntersections);
 		}
@@ -745,12 +747,19 @@ public class BinaryRoutePlanner {
 					nextCurrentSegment.setParentRoute(currentSegment);
 					nextCurrentSegment.distanceFromStart = currentSegment.distanceFromStart;
 					nextCurrentSegment.distanceToEnd = distanceToEnd;
+					final int nx = nextCurrentSegment.getRoad().getPoint31XTile(nextCurrentSegment.getSegmentEnd());
+					final int ny = nextCurrentSegment.getRoad().getPoint31YTile(nextCurrentSegment.getSegmentEnd());
+					if (nx == x && ny == y) {
+						// don't process other intersections (let process further segment)
+						return nextCurrentSegment;
+					}
 				}
 			} else {
 				singleRoad = false;
 			}
 			roadIter = roadIter.getNext();
 		}
+		
 		if (singleRoad) {
 			return nextCurrentSegment;
 		}
@@ -772,7 +781,9 @@ public class BinaryRoutePlanner {
 			if (nextIterator != null) {
 				next = nextIterator.next();
 			}
-			if (next.getSegmentStart() == currentSegment.getSegmentEnd() && 
+			// TODO double check not to add itself (doesn't look correct)
+			// TODO too many segments on 10. Longer route preferred
+			if (//next.getSegmentStart() == currentSegment.getSegmentEnd() && 
 					next.getRoad().getId() == currentSegment.getRoad().getId()) {
 				// skip itself
 			} else if (!doNotAddIntersections) {
@@ -800,6 +811,7 @@ public class BinaryRoutePlanner {
 		return nextCurrentSegment;
 	}
 
+	@SuppressWarnings("unused")
 	private void processOneRoadIntersection(RoutingContext ctx, boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, RouteSegment segment, RouteSegment next) {
 		if (next != null) {
@@ -827,14 +839,13 @@ public class BinaryRoutePlanner {
 				// 2. because we process not small segments but the whole road, it could be that
 				// deviation from the road is faster than following the whole road itself!
 				if (TRACE_ROUTING) {
-					printRoad(">?", visitedSegments.get(calculateRoutePointId(next)),
-							next.isPositive());
+					printRoad("  >?", visitedSegments.get(calculateRoutePointId(next)), null);
 				}
 				if (distFromStart < visIt.distanceFromStart && next.getParentRoute() == null) {
 					toAdd = true;
 					if (ctx.config.heuristicCoefficient <= 1) {
 						System.err.println("! Alert distance from start " + distFromStart + " < "
-								+ visIt.distanceFromStart + " id=" + next.road.id);
+								+ visIt.distanceFromStart + ": " + next + " - " + visIt);
 					}
 				} else {
 					toAdd = false;
@@ -991,6 +1002,11 @@ public class BinaryRoutePlanner {
 
 		public String getTestName() {
 			return MessageFormat.format("s{0,number,#.##} e{1,number,#.##}", ((float) distanceFromStart), ((float) distanceToEnd));
+		}
+		
+		@Override
+		public String toString() {
+			return road.toString() + " [" + segStart +"-" +segEnd+"]";
 		}
 
 
