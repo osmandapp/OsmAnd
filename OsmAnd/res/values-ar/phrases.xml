@@ -914,7 +914,7 @@
     <string name="poi_wiki_lang_kk">ويكي الكازاخية</string>
     <string name="poi_wiki_lang_uz">ويكي الأوزبكية</string>
     <string name="poi_internet_access_no">الوصول إلى الإنترنت : لا يوجد</string>
-    <string name="poi_internet_access_fee_no">الوصول إلى الانترنت : مجاني</string>
+    <string name="poi_internet_access_fee_no">الوصول إلى الانترنت : بدون رسوم</string>
     <string name="poi_information">معلومات</string>
     <string name="poi_clock">ساعة</string>
     <string name="poi_travel_agent">وكيل سفر</string>
@@ -1172,7 +1172,7 @@
     <string name="poi_payment_efectivo_no">افيكتيفو غير مقبولة</string>
     <string name="poi_payment_girocard_yes">جيروكارد</string>
     <string name="poi_payment_girocard_no">Girocard غير مقبول</string>
-    <string name="poi_payment_visa_electron_yes">Visa Electron</string>
+    <string name="poi_payment_visa_electron_yes">فيزا إلكترون</string>
     <string name="poi_payment_visa_electron_no">بطاقات فيزا إلكترون غير مقبولة</string>
     <string name="poi_payment_litecoin_yes">لايت كوين</string>
     <string name="poi_payment_cheque_yes">الشيكات</string>
@@ -1880,7 +1880,7 @@
     <string name="poi_surface_paving_stones">السطح: حجارة الرصف</string>
     <string name="poi_surface_cobblestone">السطح: حصى</string>
     <string name="poi_surface_sett">السطح: مرصوف</string>
-    <string name="poi_surface_concrete">السطح: الخرسانة</string>
+    <string name="poi_surface_concrete">السطح: خرسانة</string>
     <string name="poi_surface_asphalt">السطح: اسفلت</string>
     <string name="poi_surface_paved">السطح: معبد/مرصوف</string>
     <string name="poi_surface_unpaved">السطح: غير معبد/ممهد</string>
@@ -1986,11 +1986,11 @@
     <string name="poi_payment_mtsmoney_no">MTS-Money غير مقبولة</string>
     <string name="poi_payment_mtsmoney_yes">MTS-Money</string>
     <string name="poi_payment_union_card_no">Union Card غير مقبولة</string>
-    <string name="poi_payment_union_card_yes">Union Card</string>
+    <string name="poi_payment_union_card_yes">بطاقة الاتحاد</string>
     <string name="poi_payment_pro100_no">بطاقات PRO100 غير مقبولة</string>
     <string name="poi_payment_pro100_yes">PRO100</string>
     <string name="poi_payment_golden_crown_no">بطاقات Golden Crown غير مقبولة</string>
-    <string name="poi_payment_golden_crown_yes">Golden Crown</string>
+    <string name="poi_payment_golden_crown_yes">التاج الذهبي</string>
     <string name="poi_payment_token_no">Tokens غير مقبولة</string>
     <string name="poi_payment_token_yes">Tokens</string>
     <string name="poi_payment_u_key_no">U-Key غير مقبول</string>
@@ -2010,7 +2010,7 @@
     <string name="poi_payment_svg_no">SVG غير مقبولة</string>
     <string name="poi_payment_svg_yes">SVG</string>
     <string name="poi_payment_roadrunner_no">بطاقات Roadrunner غير مقبولة</string>
-    <string name="poi_payment_roadrunner_yes">Roadrunner</string>
+    <string name="poi_payment_roadrunner_yes">نقار الخشب</string>
     <string name="poi_payment_coinkite_no">Coinkite غير مقبولة</string>
     <string name="poi_payment_coinkite_yes">Coinkite</string>
     <string name="poi_payment_bankaxess_no">BankAxess غير مقبول</string>
@@ -2046,7 +2046,7 @@
     <string name="poi_payment_jcb_no">بطاقات JCB غير مقبولة</string>
     <string name="poi_payment_jcb_yes">JCB</string>
     <string name="poi_payment_icsf_no">IC Stored Fare غير مقبولة</string>
-    <string name="poi_payment_icsf_yes">IC Stored Fare</string>
+    <string name="poi_payment_icsf_yes">أجرة IC المخزنة</string>
     <string name="poi_payment_bancomat_no">Bancomat غير مقبول</string>
     <string name="poi_payment_bancomat_yes">بانكومات</string>
     <string name="poi_payment_routex_no">بطاقات وقود Routex غير مقبولة</string>
@@ -2056,7 +2056,7 @@
     <string name="poi_payment_pikepass_yes">PIKEPASS</string>
     <string name="poi_payment_litecoin_no">لايتكوين غير مقبول</string>
     <string name="poi_payment_discover_card_no">Discover Card غير مقبولة</string>
-    <string name="poi_payment_discover_card_yes">Discover Card</string>
+    <string name="poi_payment_discover_card_yes">اكتشف البطاقة</string>
     <string name="poi_payment_uta_no">بطاقات UTA غير مقبولة</string>
     <string name="poi_payment_uta_yes">UTA</string>
     <string name="poi_payment_dkv_no">DKV غير مقبولة</string>
@@ -2083,7 +2083,7 @@
     <string name="poi_aerialway_summer_access_entry">تصريح الصيف: دخول فقط</string>
     <string name="poi_aerialway_bicycle_yes">مسموح</string>
     <string name="poi_aerialway_bubble_no">لا يوجد غطاء واقي</string>
-    <string name="poi_aerialway_bubble_yes">غطاء واقي</string>
+    <string name="poi_aerialway_bubble_yes">فقاعة</string>
     <string name="poi_aerialway_duration">متوسط وقت التنقل، دقائق</string>
     <string name="poi_aerialway_occupancy">المقصورة / كرسي / سعة السيارة</string>
     <string name="poi_garden_style_japanese">نمط الحديقة: اليابانية</string>
@@ -3632,14 +3632,14 @@
     <string name="poi_religion_bahai">البهائية</string>
     <string name="poi_religion_jain">الديانة الجاينية الهندية</string>
     <string name="poi_religion_unitarian_universalist">التوحيد الكوني</string>
-    <string name="poi_attraction_train">قطار (سياحي)</string>
+    <string name="poi_attraction_train">قطار (جذب سياحي)</string>
     <string name="poi_attraction_swing_carousel">أرجوحة ملاهي دوارة</string>
     <string name="poi_attraction_summer_toboggan">التزحلق الصيفي</string>
     <string name="poi_attraction_roller_coaster">قطار الملاهي</string>
     <string name="poi_attraction_maze">متاهة</string>
-    <string name="poi_attraction_carousel">دائري</string>
-    <string name="poi_attraction_big_wheel">عجلة فيريس/ملاهي</string>
-    <string name="poi_attraction_animal">حيوان (جذب)</string>
+    <string name="poi_attraction_carousel">لعبة الأحصنة الدوارة</string>
+    <string name="poi_attraction_big_wheel">عجلة الملاهي الدوارة</string>
+    <string name="poi_attraction_animal">حيوان (منطقة جذب سياحي)</string>
     <string name="poi_attraction_amusement_ride">جولة تسلية</string>
     <string name="poi_tourism_yes">شيء سياحي</string>
     <string name="poi_attraction">جذب سياحى</string>
@@ -3813,9 +3813,9 @@
     <string name="poi_memorial_jizo">جيزو</string>
     <string name="poi_memorial_koshinto">كوشينتو</string>
     <string name="poi_memorial_stone">حجر</string>
-    <string name="poi_microbrewery_no">لا يوجد مصانع الجعة مصغر</string>
+    <string name="poi_microbrewery_no">لا يوجد مصنع جعة صغير</string>
     <string name="poi_brewery_additional">اسم مصنع الجعة</string>
-    <string name="poi_diet_vegetarian_few">نباتي (بعض)</string>
+    <string name="poi_diet_vegetarian_few">نباتي (قليل)</string>
     <string name="poi_events_venue">مكان الفعاليات</string>
     <string name="poi_love_hotel">فندق الحب</string>
     <string name="poi_content_beer">المحتوى: بيرة</string>
@@ -3951,7 +3951,7 @@
     <string name="poi_memorial_obelisk">مسلة</string>
     <string name="poi_memorial_bust">تمثال نصفي</string>
     <string name="poi_iwn_ref">عقدة شبكة المشي لمسافات طويلة دولية</string>
-    <string name="poi_callable">قابل للاستدعاء</string>
+    <string name="poi_callable">قابل للاتصال</string>
     <string name="poi_taekwondo">التايكوندو</string>
     <string name="poi_table_soccer">كرة القدم الطاولة</string>
     <string name="poi_sumo">سومو</string>
@@ -4023,4 +4023,11 @@
     <string name="poi_glacier_debris_cover_none">غطاء الحطام: لا شيء</string>
     <string name="poi_fruit">فاكهة</string>
     <string name="poi_ultralight_aviation">طيران فائق الخفة</string>
+    <string name="poi_pa">مستوطنة دفاعية (مستوطنة الماوري المحصنة)</string>
+    <string name="poi_country_store">متجر قروي (في قرية)</string>
+    <string name="poi_prep_school">مدرسة تعليمية</string>
+    <string name="poi_plateau">هضبة</string>
+    <string name="poi_health_post">مركز رعاية صحية</string>
+    <string name="poi_craft_caterer">ممون/متعهد طعام</string>
+    <string name="poi_craft_stand_builder">صانع كشك العرض</string>
 </resources>
