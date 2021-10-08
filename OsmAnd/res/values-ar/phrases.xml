@@ -3607,7 +3607,7 @@
     <string name="poi_denomination_nondenominational">غير طائفي</string>
     <string name="poi_denomination_assemblies_of_god">تجميعات الإله</string>
     <string name="poi_denomination_bulgarian_orthodox">الأرثوذكسية البلغارية</string>
-    <string name="poi_denomination_quaker">كواكر</string>
+    <string name="poi_denomination_quaker">عضو طائفة الأصدقاء المسيحية</string>
     <string name="poi_denomination_mennonite">مينونايت</string>
     <string name="poi_denomination_uniting">توحيد</string>
     <string name="poi_denomination_iglesia_ni_cristo">كنيسة إغليسيا ني كريستو</string>
@@ -3621,7 +3621,7 @@
     <string name="poi_denomination_church_of_england">كنيسة إنجلترا</string>
     <string name="poi_denomination_new_apostolic">رسولي جديد</string>
     <string name="poi_denomination_seventh_day_adventist">سبتي (مؤمن برجوع المسيح في اليوم السابع)</string>
-    <string name="poi_denomination_reformed">تم إصلاحه</string>
+    <string name="poi_denomination_reformed">مصلح</string>
     <string name="poi_denomination_greek_orthodox">الأرثوذكسية اليونانية</string>
     <string name="poi_denomination_jehovahs_witness">شهود يهوه</string>
     <string name="poi_denomination_mormon">المورمون</string>
