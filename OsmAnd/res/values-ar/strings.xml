@@ -4412,4 +4412,5 @@
     <string name="exit_pan_mode_descr">اضغط على تحديد للخروج من وضع التحريك</string>
     <string name="upload_gpx_description_hint">اتركه فارغًا ، سيتم استخدام أسماء المسارات كوصف. سيتم تطبيق الوصف الذي تم إدخاله على كل مسار.</string>
     <string name="search_title">بحث: %1$s</string>
+    <string name="icon_group_nautical">بحري</string>
 </resources>
