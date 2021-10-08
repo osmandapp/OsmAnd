@@ -3,11 +3,15 @@ package net.osmand.plus.dialogs;
 import android.os.Bundle;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DataStorageFragment;
+import net.osmand.plus.settings.datastorage.DataStorageHelper;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
@@ -59,10 +63,20 @@ public class SharedStorageWarningBottomSheet extends MenuBottomSheetDialogFragme
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+	public static void showInstance(@NonNull MapActivity mapActivity) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+			settings.SHARED_STORAGE_WARNING_DIALOG_SHOWN.set(true);
+
 			SharedStorageWarningBottomSheet fragment = new SharedStorageWarningBottomSheet();
 			fragment.show(fragmentManager, TAG);
 		}
+	}
+
+	public static boolean shouldShowStorageWarning(@NonNull OsmandApplication app) {
+		return DataStorageHelper.isCurrentStorageShared(app)
+				&& WhatsNewDialogFragment.isGone()
+				&& !app.getSettings().SHARED_STORAGE_WARNING_DIALOG_SHOWN.get();
 	}
 }

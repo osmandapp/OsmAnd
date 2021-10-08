@@ -20,16 +20,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.appcompat.widget.Toolbar;
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
@@ -45,6 +35,16 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.Toolbar;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 
 public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
@@ -245,15 +245,20 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	}
 
 	public static void showFullArticle(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
-		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
-				.build();
-		customTabsIntent.intent.setData(uri);
+		CustomTabsIntent customTabsIntent = createCustomTabsIntent(context, uri, nightMode);
 		if (AndroidUtils.isIntentSafe(context, customTabsIntent.intent)) {
 			customTabsIntent.launchUrl(context, uri);
 		} else {
 			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 		}
+	}
+
+	public static CustomTabsIntent createCustomTabsIntent(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
+		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
+				.build();
+		customTabsIntent.intent.setData(uri);
+		return customTabsIntent;
 	}
 
 	@Override
