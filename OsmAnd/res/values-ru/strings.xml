@@ -3830,7 +3830,7 @@
     <string name="icon_group_symbols">Символы</string>
     <string name="icon_group_sport">Спорт</string>
     <string name="icon_group_emergency">Экстренные службы</string>
-    <string name="icon_group_travel">Путешествия</string>
+    <string name="icon_group_travel">Путешествие</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd использует MGRS, который похож на формат UTM NATO.</string>
@@ -4349,4 +4349,7 @@
     <string name="routing_attr_prefer_tactile_paving_name">Предпочитать тактильное покрытие</string>
     <string name="search_title">Поиск: %1$s</string>
     <string name="upload_gpx_description_hint">Оставьте поле пустым, в качестве описания будут использованы названия треков. Введенное описание будет применено к каждому треку.</string>
+    <string name="exit_pan_mode_descr">Нажмите «Выбрать», чтобы выйти из режима панорамирования</string>
+    <string name="sample_wikivoyage">Образец Викигида</string>
+    <string name="icon_group_nautical">Морские</string>
 </resources>
