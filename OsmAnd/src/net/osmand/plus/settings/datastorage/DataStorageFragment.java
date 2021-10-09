@@ -29,9 +29,12 @@ import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.dialogs.SharedStorageWarningBottomSheet;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
@@ -50,13 +53,14 @@ import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_PATH;
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.*;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
 
-public class DataStorageFragment extends BaseSettingsFragment implements DataStorageHelper.UpdateMemoryInfoUIAdapter {
+public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter {
 	public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
 	public final static int UI_REFRESH_TIME_MS = 500;
 
@@ -220,12 +224,12 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 				ImageView ivIcon = itemView.findViewById(R.id.icon);
 				View divider = itemView.findViewById(R.id.divider);
 				View secondPart = itemView.findViewById(R.id.secondPart);
-				RadioButton radioButton = itemView.findViewById(android.R.id.checkbox);
 
-				tvTitle.setText(item.getTitle());
 				String currentKey = item.getKey();
-
+				setupStorageItemView(item, itemView);
+				tvTitle.setText(item.getTitle());
 				ivIcon.setImageDrawable(getStorageItemIcon(item));
+				setupDetailsButton(item, itemView.findViewById(R.id.details_button));
 
 				if (currentKey.equals(MANUALLY_SPECIFIED)) {
 					tvSummary.setText(getStorageItemDescriptionOrPath(item));
@@ -238,11 +242,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					tvAdditionalDescription.setVisibility(View.VISIBLE);
 					divider.setVisibility(View.VISIBLE);
 					tvAdditionalDescription.setText(getStorageItemDescriptionOrPath(item));
-					if (currentKey.equals(SHARED_STORAGE)) {
-						itemView.setClickable(false);
-						radioButton.setVisibility(View.GONE);
-						radioButton.setEnabled(false);
-					}
 				}
 			}
 		} else if (key.equals(CHANGE_DIRECTORY_BUTTON)) {
@@ -288,6 +287,12 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		}
 	}
 
+	private void setupStorageItemView(StorageItem item, View itemView) {
+		boolean notSharedStorage = !SHARED_STORAGE.equals(item.getKey());
+		itemView.setClickable(notSharedStorage);
+		AndroidUiHelper.updateVisibility(itemView.findViewById(android.R.id.checkbox), notSharedStorage);
+	}
+
 	private Drawable getStorageItemIcon(StorageItem item) {
 		boolean current = currentDataStorage.getKey().equals(item.getKey());
 		int iconId = current ? item.getSelectedIconResId() : item.getNotSelectedIconResId();
@@ -295,6 +300,23 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		int chosenIconColor = isNightMode() ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
 		int iconColor = current ? chosenIconColor : defaultIconColor;
 		return app.getUIUtilities().getIcon(iconId, iconColor);
+	}
+
+	private void setupDetailsButton(StorageItem item, View detailsButton) {
+		boolean sharedStorage = item.getKey().equals(SHARED_STORAGE);
+		AndroidUiHelper.updateVisibility(detailsButton, sharedStorage);
+
+		if (item.getKey().equals(SHARED_STORAGE)) {
+			detailsButton.setClickable(true);
+			UiUtilities.setupDialogButton(isNightMode(), detailsButton, DialogButtonType.SECONDARY,
+					R.string.shared_string_details);
+			detailsButton.setOnClickListener(v -> {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					SharedStorageWarningBottomSheet.showInstance(mapActivity);
+				}
+			});
+		}
 	}
 
 	private String getStorageItemDescriptionOrPath(StorageItem item) {

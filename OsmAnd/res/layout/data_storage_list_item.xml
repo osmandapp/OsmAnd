@@ -110,10 +110,20 @@
 					tools:text="@string/internal_app_storage_description"
 					android:paddingEnd="@dimen/content_padding" />
 
+				<include
+					android:id="@+id/details_button"
+					layout="@layout/bottom_sheet_dialog_button"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/dialog_button_height"
+					android:layout_marginTop="@dimen/content_padding_small"
+					android:layout_marginEnd="@dimen/content_padding"
+					android:visibility="gone"
+					tools:visibility="visible" />
+
 				<FrameLayout
 					android:id="@+id/divider"
 					android:layout_width="match_parent"
-					android:layout_height="@dimen/content_padding">
+					android:layout_height="@dimen/content_padding_small">
 
 					<View
 						android:layout_gravity="bottom"
