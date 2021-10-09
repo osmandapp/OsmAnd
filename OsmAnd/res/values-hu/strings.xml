@@ -4336,4 +4336,5 @@
     <string name="upload_gpx_description_hint">Ha üres marad, akkor a nyomvonalnevek fognak megjelenni leírásként. A megadott leírás minden egyes nyomvonalra vonatkozni fog.</string>
     <string name="search_title">Keresés: %1$s</string>
     <string name="exit_pan_mode_descr">A pásztázó módból való kilépéshez nyomja meg a Kijelölés gombot</string>
+    <string name="icon_group_nautical">Hajózás</string>
 </resources>
