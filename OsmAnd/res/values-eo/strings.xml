@@ -4341,4 +4341,5 @@
     <string name="upload_gpx_description_hint">Se malplena, nomo de spuro estos uzita kiel priskribo. Enigita priskribo aplikos al ĉiu spuro.</string>
     <string name="search_title">Serĉi: %1$s</string>
     <string name="exit_pan_mode_descr">Frapetu “Elekti” por eliri la ŝovuman reĝimon</string>
+    <string name="icon_group_nautical">Mar-navigado</string>
 </resources>
