@@ -86,30 +86,24 @@ public class DataStorageHelper {
 		currentStoragePath = settings.getExternalStorageDirectory().getAbsolutePath();
 
 		//internal storage
-		String path = settings.getInternalAppPath().getAbsolutePath();
-		int iconId = R.drawable.ic_action_phone;
-
 		StorageItem internalStorageItem = StorageItem.builder()
 				.setKey(INTERNAL_STORAGE)
 				.setTitle(app.getString(R.string.storage_directory_internal_app))
-				.setDirectory(path)
+				.setDirectory(settings.getInternalAppPath().getAbsolutePath())
 				.setDescription(app.getString(R.string.internal_app_storage_description))
 				.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE)
-				.setIconResId(iconId)
+				.setIconResIds(R.drawable.ic_action_phone, R.drawable.ic_action_phone_filled)
 				.createItem();
 		addItem(internalStorageItem);
 
 		//shared storage
-		File dir = settings.getDefaultInternalStorage();
-		path = dir.getAbsolutePath();
-		iconId = R.drawable.ic_action_phone;
-
 		StorageItem sharedStorageItem = StorageItem.builder()
 				.setKey(SHARED_STORAGE)
 				.setTitle(app.getString(R.string.storage_directory_shared))
-				.setDirectory(path)
+				.setDirectory(settings.getDefaultInternalStorage().getAbsolutePath())
+				.setDescription(app.getString(R.string.shared_app_storage_description))
 				.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT)
-				.setIconResId(iconId)
+				.setIconResId(R.drawable.ic_action_device_alert)
 				.createItem();
 		addItem(sharedStorageItem);
 
@@ -120,15 +114,12 @@ public class DataStorageHelper {
 			for (File external : externals) {
 				if (external != null) {
 					++i;
-					dir = external;
-					path = dir.getAbsolutePath();
-					iconId = getIconForStorageType(dir);
 					StorageItem externalStorageItem = StorageItem.builder()
 							.setKey(EXTERNAL_STORAGE + i)
 							.setTitle(app.getString(R.string.storage_directory_external) + " " + i)
-							.setDirectory(path)
+							.setDirectory(external.getAbsolutePath())
 							.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE)
-							.setIconResId(iconId)
+							.setIconResId(R.drawable.ic_action_folder)
 							.createItem();
 					addItem(externalStorageItem);
 				}
@@ -142,15 +133,12 @@ public class DataStorageHelper {
 			for (File obb : obbDirs) {
 				if (obb != null) {
 					++i;
-					dir = obb;
-					path = dir.getAbsolutePath();
-					iconId = getIconForStorageType(dir);
 					StorageItem multiuserStorageItem = StorageItem.builder()
 							.setKey(MULTIUSER_STORAGE + i)
 							.setTitle(app.getString(R.string.storage_directory_multiuser) + " " + i)
-							.setDirectory(path)
+							.setDirectory(obb.getAbsolutePath())
 							.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB)
-							.setIconResId(iconId)
+							.setIconResId(R.drawable.ic_action_folder)
 							.createItem();
 					addItem(multiuserStorageItem);
 				}
@@ -234,10 +222,6 @@ public class DataStorageHelper {
 
 	public ArrayList<StorageItem> getStorageItems() {
 		return storageItems;
-	}
-
-	private int getIconForStorageType(File dir) {
-		return R.drawable.ic_action_folder;
 	}
 
 	public StorageItem getCurrentStorage() {

@@ -65,11 +65,12 @@
 				android:id="@android:id/checkbox"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:paddingRight="@dimen/content_padding"
+				android:layout_marginEnd="@dimen/content_padding"
+				android:paddingStart="@dimen/content_padding"
+				android:paddingEnd="@dimen/content_padding"
 				android:background="@null"
 				android:clickable="true"
-				android:focusable="true"
-				android:paddingEnd="@dimen/content_padding" />
+				android:focusable="true" />
 
 		</LinearLayout>
 

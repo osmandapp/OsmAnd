@@ -6,11 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.BidiFormatter;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
 import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
 
 public class DataStorageFragment extends BaseSettingsFragment implements DataStorageHelper.UpdateMemoryInfoUIAdapter {
@@ -218,38 +220,28 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 				ImageView ivIcon = itemView.findViewById(R.id.icon);
 				View divider = itemView.findViewById(R.id.divider);
 				View secondPart = itemView.findViewById(R.id.secondPart);
+				RadioButton radioButton = itemView.findViewById(android.R.id.checkbox);
 
 				tvTitle.setText(item.getTitle());
 				String currentKey = item.getKey();
-				boolean isCurrent = currentDataStorage.getKey().equals(currentKey);
 
-				int defaultIconColor = ColorUtilities.getDefaultIconColorId(isNightMode());
-				int chosenIconColor = isNightMode() ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
-				Drawable icon = app.getUIUtilities().getIcon(item.getIconResId(),
-						isCurrent ? chosenIconColor : defaultIconColor);
-				ivIcon.setImageDrawable(icon);
+				ivIcon.setImageDrawable(getStorageItemIcon(item));
 
 				if (currentKey.equals(MANUALLY_SPECIFIED)) {
-					setFormattedPath(item, tvSummary);
+					tvSummary.setText(getStorageItemDescriptionOrPath(item));
 					secondPart.setVisibility(View.GONE);
 					tvAdditionalDescription.setVisibility(View.GONE);
 					divider.setVisibility(View.GONE);
 				} else {
+					setupStorageItemSummary(item, tvSummary);
+					secondPart.setVisibility(View.VISIBLE);
 					tvAdditionalDescription.setVisibility(View.VISIBLE);
 					divider.setVisibility(View.VISIBLE);
-					secondPart.setVisibility(View.VISIBLE);
-					String space = getSpaceDescription(item.getDirectory());
-					if (!space.isEmpty()) {
-						space = space.replaceAll(" • ", "  •  ");
-						tvSummary.setText(space);
-						tvSummary.setVisibility(View.VISIBLE);
-					} else {
-						tvSummary.setVisibility(View.GONE);
-					}
-					if (currentKey.equals(INTERNAL_STORAGE)) {
-						tvAdditionalDescription.setText(item.getDescription());
-					} else {
-						setFormattedPath(item, tvAdditionalDescription);
+					tvAdditionalDescription.setText(getStorageItemDescriptionOrPath(item));
+					if (currentKey.equals(SHARED_STORAGE)) {
+						itemView.setClickable(false);
+						radioButton.setVisibility(View.GONE);
+						radioButton.setEnabled(false);
 					}
 				}
 			}
@@ -273,13 +265,10 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					if (mi.getKey().equals(TILES_MEMORY) && !calculateTilesBtnPressed) {
 						summary = getString(R.string.shared_string_calculate);
 						color = activeColor;
-						tvMemory.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								calculateTilesBtnPressed = true;
-								calculateTilesMemoryTask = dataStorageHelper.calculateTilesMemoryUsed(DataStorageFragment.this);
-								updateAllSettings();
-							}
+						tvMemory.setOnClickListener(v -> {
+							calculateTilesBtnPressed = true;
+							calculateTilesMemoryTask = dataStorageHelper.calculateTilesMemoryUsed(DataStorageFragment.this);
+							updateAllSettings();
 						});
 					} else {
 						tvMemory.setOnClickListener(null);
@@ -299,12 +288,22 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		}
 	}
 
-	private void setFormattedPath(StorageItem item, TextView tvAdditionalDescription) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-			BidiFormatter pathRtlFormatter = BidiFormatter.getInstance();
-			tvAdditionalDescription.setText(pathRtlFormatter.unicodeWrap(item.getDirectory()));
+	private Drawable getStorageItemIcon(StorageItem item) {
+		boolean current = currentDataStorage.getKey().equals(item.getKey());
+		int iconId = current ? item.getSelectedIconResId() : item.getNotSelectedIconResId();
+		int defaultIconColor = ColorUtilities.getDefaultIconColorId(isNightMode());
+		int chosenIconColor = isNightMode() ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
+		int iconColor = current ? chosenIconColor : defaultIconColor;
+		return app.getUIUtilities().getIcon(iconId, iconColor);
+	}
+
+	private String getStorageItemDescriptionOrPath(StorageItem item) {
+		String key = item.getKey();
+		if (INTERNAL_STORAGE.equals(key) || SHARED_STORAGE.equals(key)) {
+			return item.getDescription();
 		} else {
-			tvAdditionalDescription.setText(String.format("\u200E%s", item.getDirectory()));
+			BidiFormatter pathRtlFormatter = BidiFormatter.getInstance();
+			return pathRtlFormatter.unicodeWrap(item.getDirectory());
 		}
 	}
 
@@ -437,6 +436,17 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		calculateTilesBtnPressed = false;
 		dataStorageHelper = new DataStorageHelper(app);
 		calculateMemoryTask = dataStorageHelper.calculateMemoryUsedInfo(this);
+	}
+
+	private void setupStorageItemSummary(StorageItem item, TextView summary) {
+		String space = getSpaceDescription(item.getDirectory());
+		if (!space.isEmpty()) {
+			space = space.replaceAll(" • ", "  •  ");
+			summary.setText(space);
+			summary.setVisibility(View.VISIBLE);
+		} else {
+			summary.setVisibility(View.GONE);
+		}
 	}
 
 	private String getSpaceDescription(String path) {
