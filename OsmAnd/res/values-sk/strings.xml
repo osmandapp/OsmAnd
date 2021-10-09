@@ -4338,4 +4338,5 @@
     <string name="search_title">Hľadať: %1$s</string>
     <string name="exit_pan_mode_descr">Stlačte \"Zvoliť\" pre opustenie režimu posúvania</string>
     <string name="upload_gpx_description_hint">Ak necháte prázdne, názvy stôp budú použité ako popis. Zadaný popis bude aplikovaný na každú stopu.</string>
+    <string name="icon_group_nautical">Námorné</string>
 </resources>
