@@ -3174,7 +3174,6 @@
     <string name="paste_Osmand_data_folder_path">Algluu dosier‑indikon por dosierujo de OsmAnd‑datumoj</string>
     <string name="change_osmand_data_folder_question">Ĉu ŝanĝi datum‑dosierujon OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Movi al la nova loko</string>
-    <string name="internal_app_storage_description">Interna konservejo por OsmAnd (kaŝita de uzanto kaj de aliaj aplikaĵoj).</string>
     <string name="change_data_storage_folder">Ŝanĝi dosierujon por konservi datumojn</string>
     <string name="rendering_attr_piste_type_snow_park_name">neĝ‑parko</string>
     <string name="rendering_attr_piste_type_sleigh_name">glitveturado (tirata de hundoj)</string>

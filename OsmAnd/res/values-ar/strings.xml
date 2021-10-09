@@ -3143,7 +3143,6 @@
     <string name="plugins_settings">ضبط الملحقات</string>
     <string name="shared_string_by_default">بشكل افتراضي</string>
     <string name="download_detailed_map">قم بتنزيل خريطة مفصلة%s لعرض هذه المنطقة.</string>
-    <string name="internal_app_storage_description">تخزين داخلي ، مخفي عن المستخدم والتطبيقات الأخرى ، يمكن الوصول إليه حصريا من أوسماند.</string>
     <string name="change_data_storage_folder">مجلد التخزين</string>
     <string name="rendering_attr_piste_type_snow_park_name">حديقة التضاريس</string>
     <string name="rendering_attr_piste_type_sleigh_name">زلاجة</string>

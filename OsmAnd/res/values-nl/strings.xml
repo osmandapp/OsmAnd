@@ -3053,7 +3053,6 @@
     <string name="enter_path_to_folder">Voer locatie naar de map in</string>
     <string name="shared_string_select_folder">Map…</string>
     <string name="move_maps_to_new_destination">Verplaats naar de nieuwe locatie</string>
-    <string name="internal_app_storage_description">Interne opslag voor OsmAnd (verborgen voor gebruikers en andere apps).</string>
     <string name="tts_initialization_error">Kan tekst-naar-spraak service niet starten.</string>
     <string name="export_profile">Exporteer profiel</string>
     <string name="exported_osmand_profile">OsmAnd profiel: %1$s</string>

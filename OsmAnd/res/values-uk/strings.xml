@@ -3180,7 +3180,6 @@
     <string name="paste_Osmand_data_folder_path">Вставте шлях до теки з даними OsmAnd</string>
     <string name="change_osmand_data_folder_question">Змінити теку даних OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Перемістити до нового місця призначення</string>
-    <string name="internal_app_storage_description">Внутрішнє сховище для OsmAnd, приховане від користувачів та інших додатків.</string>
     <string name="change_data_storage_folder">Змінити теку для зберігання</string>
     <string name="rendering_attr_piste_type_snow_park_name">Ландшафтний парк</string>
     <string name="rendering_attr_piste_type_sleigh_name">Запряжені сани, санчата</string>

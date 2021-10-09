@@ -3170,7 +3170,6 @@
     <string name="paste_Osmand_data_folder_path">Incolla il percorso della cartella con i dati OsmAnd</string>
     <string name="change_osmand_data_folder_question">Cambiare la cartella di dati OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Sposta nella nuova destinazione</string>
-    <string name="internal_app_storage_description">Memoria interna per OsmAnd, (nascosta agli utenti e alle altre app).</string>
     <string name="change_data_storage_folder">Cambia la cartella di memorizzazione</string>
     <string name="rendering_attr_piste_type_sleigh_name">Slitta</string>
     <string name="rendering_attr_piste_type_sled_name">Slitta</string>

@@ -2338,7 +2338,6 @@
     <string name="rendering_attr_piste_type_hike_name">Поход</string>
     <string name="rendering_attr_piste_type_sleigh_name">Шейна</string>
     <string name="change_data_storage_folder">Промяна на папката за съхранение</string>
-    <string name="internal_app_storage_description">Вътрешна памет за OsmAnd (скрита за потребителите и другите приложения).</string>
     <string name="change_osmand_data_folder_question">Промяна на папката с данни за OsmAnd\?</string>
     <string name="paste_Osmand_data_folder_path">Поставете пътя към папката с данни за OsmAnd</string>
     <string name="shared_string_select_folder">Папка…</string>

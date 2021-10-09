@@ -3181,7 +3181,6 @@
     <string name="paste_Osmand_data_folder_path">Límdu slóð á möppuna með OsmAnd-gögnum</string>
     <string name="change_osmand_data_folder_question">Skipta um OsmAnd-gagnamöppu\?</string>
     <string name="move_maps_to_new_destination">Færa á nýja staðinn</string>
-    <string name="internal_app_storage_description">Innri gagnageymsla OsmAnd (falin fyrir notandanum og öðrum forritum).</string>
     <string name="change_data_storage_folder">Breyta gagnageymslumöppu</string>
     <string name="rendering_attr_piste_type_snow_park_name">Snjógerði</string>
     <string name="rendering_attr_piste_type_sleigh_name">Sleðar</string>

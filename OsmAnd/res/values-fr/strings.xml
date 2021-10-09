@@ -3189,7 +3189,6 @@
     <string name="routeInfo_piste_difficulty_name">Difficulté de la piste</string>
     <string name="routing_attr_width_name">Limite de largeur</string>
     <string name="routing_attr_width_description">Indique la limite de largeur autorisée sur les itinéraires.</string>
-    <string name="internal_app_storage_description">Stockage interne OsmAnd (masqué aux utilisateurs et aux autres applications).</string>
     <string name="avoid_in_routing_descr_">Éviter certains types de route</string>
     <string name="app_mode_utv">Côte à côte</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Connexion</string>

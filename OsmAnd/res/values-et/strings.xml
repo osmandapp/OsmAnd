@@ -916,7 +916,6 @@
     <string name="paste_Osmand_data_folder_path">Kleebi OsmAnd andmekausta asukoht</string>
     <string name="change_osmand_data_folder_question">Muuta OsmAnd andmekausta\?</string>
     <string name="move_maps_to_new_destination">Liiguta uude asukohta</string>
-    <string name="internal_app_storage_description">Sisemine salvestusruum, kasutaja ja teiste rakenduste eest peidetud, juurdepääsetav ainult OsmAnd\'ile.</string>
     <string name="change_data_storage_folder">Muuda salvestamise kausta</string>
     <string name="rendering_attr_piste_type_snow_park_name">Maastikupark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Saan</string>

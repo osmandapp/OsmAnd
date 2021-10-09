@@ -3167,7 +3167,6 @@
     <string name="paste_Osmand_data_folder_path">Вставьте путь к папке с данными OsmAnd</string>
     <string name="change_osmand_data_folder_question">Изменить папку данных OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Переместить в новое место назначения</string>
-    <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений.</string>
     <string name="change_data_storage_folder">Изменение папки хранилища</string>
     <string name="avoid_in_routing_descr_">Исключить определённые маршруты и типы дорог</string>
     <string name="shared_string_memory_used_tb_desc">Использовано %1$s ТБ</string>

@@ -3173,7 +3173,6 @@
     <string name="paste_Osmand_data_folder_path">Vložte cestu k priečinku s dátami OsmAnd</string>
     <string name="change_osmand_data_folder_question">Zmeniť dátový priečinok OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Presunúť do nového umiestnenia</string>
-    <string name="internal_app_storage_description">Interné úložisko pre OsmAnd (skryté pred používateľom a inými aplikáciami).</string>
     <string name="change_data_storage_folder">Zmeniť priečinok na ukladanie dát</string>
     <string name="rendering_attr_piste_type_snow_park_name">Snežný terénny areál</string>
     <string name="rendering_attr_piste_type_sleigh_name">Sane v záprahu</string>

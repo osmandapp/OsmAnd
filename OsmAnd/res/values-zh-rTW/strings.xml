@@ -3170,7 +3170,6 @@
     <string name="paste_Osmand_data_folder_path">貼上有 OsmAnd 資料的資料夾路徑</string>
     <string name="change_osmand_data_folder_question">變更 OsmAnd 資料夾？</string>
     <string name="move_maps_to_new_destination">移動到新目的地</string>
-    <string name="internal_app_storage_description">OsmAnd 內部儲存空間（對使用者與其他應用程式隱藏）。</string>
     <string name="change_data_storage_folder">變更儲存資料夾</string>
     <string name="rendering_attr_piste_type_snow_park_name">地形公園</string>
     <string name="rendering_attr_piste_type_sleigh_name">雪橇</string>
