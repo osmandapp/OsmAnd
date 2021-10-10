@@ -268,6 +268,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		SwitchPreferenceEx useMagneticSensorPref = (SwitchPreferenceEx) findPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS.getId());
 		useMagneticSensorPref.setTitle(getString(R.string.use_magnetic_sensor));
 		useMagneticSensorPref.setDescription(getString(R.string.use_magnetic_sensor_descr));
+		useMagneticSensorPref.setVisible(app.getLocationProvider().hasOrientaionSensor());
 	}
 
 	private void setupMapEmptyStateAllowedPref() {

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.util.Pair;
@@ -631,36 +632,45 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		@Override
 		public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-			OsmandApplication app = getApp();
-			boolean nightMode = !app.getSettings().isLightContent();
 			if (holder instanceof ItemViewHolder) {
 				Object item = getItem(position);
 				ItemViewHolder favoriteViewHolder = (ItemViewHolder) holder;
 				if (item.equals(FAVORITES)) {
-					favoriteViewHolder.title.setText(R.string.shared_string_favorites);
-					favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_favorite));
-					favoriteViewHolder.description.setVisibility(View.GONE);
-				} else {
-					if (item instanceof FavouritePoint) {
-						FavouritePoint point = (FavouritePoint) item;
-						favoriteViewHolder.title.setText(point.getDisplayName(app));
-						if (((FavouritePoint) item).getSpecialPointType() != null) {
-							int iconColor = ColorUtilities.getDefaultIconColorId(nightMode);
-							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(
-									((FavouritePoint) item).getSpecialPointType().getIconId(app), iconColor));
-							favoriteViewHolder.description.setText(point.getDescription());
-						} else {
-							if (point.getCategory().isEmpty()) {
-								favoriteViewHolder.description.setText(R.string.shared_string_favorites);
-							} else {
-								favoriteViewHolder.description.setText(point.getCategory());
-							}
-							int color = app.getFavorites().getColorWithCategory(point, ContextCompat.getColor(app, R.color.color_favorite));
-							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_favorite, color));
-						}
-						favoriteViewHolder.description.setVisibility(View.VISIBLE);
-					}
+					bindFavoritesButton(favoriteViewHolder);
+				} else if (item instanceof FavouritePoint) {
+					bindFavoritePoint(favoriteViewHolder, (FavouritePoint) item);
 				}
+			}
+		}
+
+		private void bindFavoritesButton(ItemViewHolder viewHolder) {
+			viewHolder.title.setText(R.string.shared_string_favorites);
+			viewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_favorite));
+			viewHolder.description.setVisibility(View.GONE);
+		}
+
+		private void bindFavoritePoint(ItemViewHolder favoriteViewHolder, FavouritePoint point) {
+			OsmandApplication app = getApp();
+			boolean nightMode = !app.getSettings().isLightContent();
+
+			favoriteViewHolder.title.setText(point.getDisplayName(app));
+			favoriteViewHolder.description.setVisibility(View.VISIBLE);
+			if (point.getSpecialPointType() != null) {
+				int iconColor = ColorUtilities.getDefaultIconColorId(nightMode);
+				Drawable icon = app.getUIUtilities().getIcon(point.getSpecialPointType().getIconId(app), iconColor);
+				favoriteViewHolder.icon.setImageDrawable(icon);
+				favoriteViewHolder.description.setText(point.getDescription());
+			} else {
+				int defaultFavoritesColor = ContextCompat.getColor(app, R.color.color_favorite);
+				int pointColor = app.getFavorites().getColorWithCategory(point, defaultFavoritesColor);
+				int pointIconRes = point.getIconId() == 0 ? R.drawable.ic_action_favorite : point.getIconId();
+				Drawable pointIcon = app.getUIUtilities().getPaintedIcon(pointIconRes, pointColor);
+				favoriteViewHolder.icon.setImageDrawable(pointIcon);
+
+				String description = point.getCategory().isEmpty()
+						? getString(R.string.shared_string_favorites)
+						: point.getCategory();
+				favoriteViewHolder.description.setText(description);
 			}
 		}
 	}
