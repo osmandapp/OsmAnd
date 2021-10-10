@@ -4227,4 +4227,8 @@
     <string name="shared_string_mini">mini</string>
     <string name="sample_wikivoyage">Ukázka Wikivoyage</string>
     <string name="icon_group_nautical">Plavební</string>
+    <string name="routeInfo_roadClass_description">Zabarvení trasy nebo stopy podle klasifikace cesty.</string>
+    <string name="no_items_of_type_message">Nemáte žádné položky tohoto typu</string>
+    <string name="no_activity_for_intent">Nebyla nalezena žádná vhodná aplikace pro vykonání této akce</string>
+    <string name="empty_category_name">Prázdný název kategorie</string>
 </resources>
