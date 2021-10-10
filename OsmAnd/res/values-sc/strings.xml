@@ -4342,4 +4342,5 @@
     <string name="upload_gpx_description_hint">Lassende·lu bòidu sos nùmenes de sas rastas s\'ant a impreare comente descritziones. Sas descritziones insertadas s\'ant a impreare pro cada rasta.</string>
     <string name="search_title">Chirca: %1$s</string>
     <string name="exit_pan_mode_descr">Incarca in Ischerta pro essire dae sa modalidade panoràmica</string>
+    <string name="icon_group_nautical">Nàutica</string>
 </resources>
