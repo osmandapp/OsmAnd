@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -12,6 +13,7 @@ import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 
 import java.util.ArrayList;
@@ -21,15 +23,18 @@ import java.util.List;
 
 public class CardsRowBuilder {
 
-	private MenuBuilder menuBuilder;
-	private View view;
-	private MapActivity mapActivity;
-	private OsmandApplication app;
-	private boolean addToLayout;
-	private List<AbstractCard> cards = new ArrayList<>();
+	private final OsmandApplication app;
+	private final MapActivity mapActivity;
+
+	private final MenuBuilder menuBuilder;
+	private final List<AbstractCard> cards = new ArrayList<>();
+
+	private final View view;
 	private LockableViewPager viewPager;
 	private ViewsPagerAdapter pagerAdapter;
-	private int dp10;
+
+	private final boolean addToLayout;
+	private final int dp10;
 
 	public CardsRowBuilder(MenuBuilder menuBuilder, View view, boolean addToLayout) {
 		this.menuBuilder = menuBuilder;
@@ -48,7 +53,7 @@ public class CardsRowBuilder {
 		return viewPager;
 	}
 
-	public void setCards(AbstractCard ...cards) {
+	public void setCards(AbstractCard... cards) {
 		setCards(Arrays.asList(cards));
 	}
 
@@ -60,8 +65,10 @@ public class CardsRowBuilder {
 		if (!menuBuilder.isHidden()) {
 			viewPager.setSwipeLocked(itemsCount() < 2);
 			pagerAdapter.notifyDataSetChanged();
-			if (itemsCount() > 0 && menuBuilder.getCollapseExpandListener() != null) {
-				menuBuilder.getCollapseExpandListener().onCollapseExpand(false);
+
+			MapContextMenu mapContextMenu = menuBuilder.getMapContextMenu();
+			if (itemsCount() > 0 && mapContextMenu != null) {
+				mapContextMenu.updateLayout();
 			}
 		}
 	}
@@ -103,7 +110,7 @@ public class CardsRowBuilder {
 		}
 
 		@Override
-		public int getItemPosition(Object object) {
+		public int getItemPosition(@NonNull Object object) {
 			return POSITION_NONE;
 		}
 
@@ -112,6 +119,7 @@ public class CardsRowBuilder {
 			return itemsCount();
 		}
 
+		@NonNull
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 
@@ -122,12 +130,12 @@ public class CardsRowBuilder {
 		}
 
 		@Override
-		public void destroyItem(ViewGroup collection, int position, Object view) {
+		public void destroyItem(ViewGroup collection, int position, @NonNull Object view) {
 			collection.removeView((View) view);
 		}
 
 		@Override
-		public boolean isViewFromObject(View view, Object object) {
+		public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
 			return view == object;
 		}
 	}
