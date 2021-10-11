@@ -68,13 +68,14 @@ public class SharedStorageWarningBottomSheet extends MenuBottomSheetDialogFragme
 				&& !app.getSettings().SHARED_STORAGE_WARNING_DIALOG_SHOWN.get();
 	}
 
-	public static void showInstance(@NonNull MapActivity mapActivity) {
+	public static void showInstance(@NonNull MapActivity mapActivity, boolean usedOnMap) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 			settings.SHARED_STORAGE_WARNING_DIALOG_SHOWN.set(true);
 
 			SharedStorageWarningBottomSheet fragment = new SharedStorageWarningBottomSheet();
+			fragment.setUsedOnMap(usedOnMap);
 			fragment.show(fragmentManager, TAG);
 		}
 	}

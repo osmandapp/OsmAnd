@@ -709,7 +709,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (getFragment(WhatsNewDialogFragment.TAG) == null || WhatsNewDialogFragment.wasNotShown()) {
 			if (SharedStorageWarningBottomSheet.dialogShowRequired(app)) {
 				SecondSplashScreenFragment.SHOW = false;
-				SharedStorageWarningBottomSheet.showInstance(this);
+				SharedStorageWarningBottomSheet.showInstance(this, true);
 			}
 		}
 
