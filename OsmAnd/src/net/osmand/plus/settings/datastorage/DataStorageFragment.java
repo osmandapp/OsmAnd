@@ -220,29 +220,14 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 			if (item != null) {
 				TextView tvTitle = itemView.findViewById(android.R.id.title);
 				TextView tvSummary = itemView.findViewById(R.id.summary);
-				TextView tvAdditionalDescription = itemView.findViewById(R.id.additionalDescription);
 				ImageView ivIcon = itemView.findViewById(R.id.icon);
-				View divider = itemView.findViewById(R.id.divider);
 				View secondPart = itemView.findViewById(R.id.secondPart);
 
-				String currentKey = item.getKey();
 				setupStorageItemView(item, itemView);
 				tvTitle.setText(item.getTitle());
+				setupStorageItemSummary(item, tvSummary);
 				ivIcon.setImageDrawable(getStorageItemIcon(item));
-				setupDetailsButton(item, itemView.findViewById(R.id.details_button));
-
-				if (currentKey.equals(MANUALLY_SPECIFIED)) {
-					tvSummary.setText(getStorageItemDescriptionOrPath(item));
-					secondPart.setVisibility(View.GONE);
-					tvAdditionalDescription.setVisibility(View.GONE);
-					divider.setVisibility(View.GONE);
-				} else {
-					setupStorageItemSummary(item, tvSummary);
-					secondPart.setVisibility(View.VISIBLE);
-					tvAdditionalDescription.setVisibility(View.VISIBLE);
-					divider.setVisibility(View.VISIBLE);
-					tvAdditionalDescription.setText(getStorageItemDescriptionOrPath(item));
-				}
+				setupSecondPart(item, secondPart);
 			}
 		} else if (key.equals(CHANGE_DIRECTORY_BUTTON)) {
 			ImageView icon = itemView.findViewById(R.id.button_icon);
@@ -293,6 +278,43 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		AndroidUiHelper.updateVisibility(itemView.findViewById(android.R.id.checkbox), notSharedStorage);
 	}
 
+	private void setupStorageItemSummary(StorageItem item, TextView summary) {
+		if (!item.isStorageSizeDefineable()) {
+			summary.setText(getStorageItemDescriptionOrPath(item));
+			summary.setVisibility(View.VISIBLE);
+		} else {
+			String space = getSpaceDescription(item.getDirectory());
+			if (!space.isEmpty()) {
+				space = space.replaceAll(" • ", "  •  ");
+				summary.setText(space);
+				summary.setVisibility(View.VISIBLE);
+			} else {
+				summary.setVisibility(View.GONE);
+			}
+		}
+	}
+
+	private String getSpaceDescription(String path) {
+		File dir = new File(path);
+		File dirParent = dir.getParentFile();
+		while (!dir.exists() && dirParent != null) {
+			dir = dir.getParentFile();
+			dirParent = dir.getParentFile();
+		}
+		if (dir.exists()) {
+			DecimalFormat formatter = new DecimalFormat("#.##");
+			float freeSpace = AndroidUtils.getFreeSpaceGb(dir);
+			float totalSpace = AndroidUtils.getTotalSpaceGb(dir);
+			if (freeSpace < 0 || totalSpace < 0) {
+				return "";
+			}
+			return String.format(getString(R.string.data_storage_space_description),
+					formatter.format(freeSpace),
+					formatter.format(totalSpace));
+		}
+		return "";
+	}
+
 	private Drawable getStorageItemIcon(StorageItem item) {
 		boolean current = currentDataStorage.getKey().equals(item.getKey());
 		int iconId = current ? item.getSelectedIconResId() : item.getNotSelectedIconResId();
@@ -300,6 +322,32 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		int chosenIconColor = isNightMode() ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
 		int iconColor = current ? chosenIconColor : defaultIconColor;
 		return app.getUIUtilities().getIcon(iconId, iconColor);
+	}
+
+	private void setupSecondPart(StorageItem item, View secondPart) {
+		boolean manuallySpecified = item.getKey().equals(MANUALLY_SPECIFIED);
+		AndroidUiHelper.updateVisibility(secondPart, !manuallySpecified);
+		setupAdditionalDescription(item, secondPart.findViewById(R.id.additionalDescription));
+		setupDetailsButton(item, secondPart.findViewById(R.id.details_button));
+	}
+
+	private void setupAdditionalDescription(StorageItem item, TextView additionalDescription) {
+		if (item.isStorageSizeDefineable()) {
+			additionalDescription.setText(getStorageItemDescriptionOrPath(item));
+			additionalDescription.setVisibility(View.VISIBLE);
+		} else {
+			additionalDescription.setVisibility(View.GONE);
+		}
+	}
+
+	private String getStorageItemDescriptionOrPath(StorageItem item) {
+		String key = item.getKey();
+		if (INTERNAL_STORAGE.equals(key) || SHARED_STORAGE.equals(key)) {
+			return item.getDescription();
+		} else {
+			BidiFormatter pathRtlFormatter = BidiFormatter.getInstance();
+			return pathRtlFormatter.unicodeWrap(item.getDirectory());
+		}
 	}
 
 	private void setupDetailsButton(StorageItem item, View detailsButton) {
@@ -316,16 +364,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 					SharedStorageWarningBottomSheet.showInstance(mapActivity);
 				}
 			});
-		}
-	}
-
-	private String getStorageItemDescriptionOrPath(StorageItem item) {
-		String key = item.getKey();
-		if (INTERNAL_STORAGE.equals(key) || SHARED_STORAGE.equals(key)) {
-			return item.getDescription();
-		} else {
-			BidiFormatter pathRtlFormatter = BidiFormatter.getInstance();
-			return pathRtlFormatter.unicodeWrap(item.getDirectory());
 		}
 	}
 
@@ -458,38 +496,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		calculateTilesBtnPressed = false;
 		dataStorageHelper = new DataStorageHelper(app);
 		calculateMemoryTask = dataStorageHelper.calculateMemoryUsedInfo(this);
-	}
-
-	private void setupStorageItemSummary(StorageItem item, TextView summary) {
-		String space = getSpaceDescription(item.getDirectory());
-		if (!space.isEmpty()) {
-			space = space.replaceAll(" • ", "  •  ");
-			summary.setText(space);
-			summary.setVisibility(View.VISIBLE);
-		} else {
-			summary.setVisibility(View.GONE);
-		}
-	}
-
-	private String getSpaceDescription(String path) {
-		File dir = new File(path);
-		File dirParent = dir.getParentFile();
-		while (!dir.exists() && dirParent != null) {
-			dir = dir.getParentFile();
-			dirParent = dir.getParentFile();
-		}
-		if (dir.exists()) {
-			DecimalFormat formatter = new DecimalFormat("#.##");
-			float freeSpace = AndroidUtils.getFreeSpaceGb(dir);
-			float totalSpace = AndroidUtils.getTotalSpaceGb(dir);
-			if (freeSpace < 0 || totalSpace < 0) {
-				return "";
-			}
-			return String.format(getString(R.string.data_storage_space_description),
-					formatter.format(freeSpace),
-					formatter.format(totalSpace));
-		}
-		return "";
 	}
 
 	protected void reloadData() {

@@ -115,7 +115,6 @@
 					layout="@layout/bottom_sheet_dialog_button"
 					android:layout_width="match_parent"
 					android:layout_height="@dimen/dialog_button_height"
-					android:layout_marginTop="@dimen/content_padding_small"
 					android:layout_marginEnd="@dimen/content_padding"
 					android:visibility="gone"
 					tools:visibility="visible" />
