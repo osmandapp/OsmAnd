@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.datastorage;
 
+import android.os.Environment;
+
 import net.osmand.IndexConstants;
 import net.osmand.ValueHolder;
 import net.osmand.plus.OsmandApplication;
@@ -15,6 +17,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 import static net.osmand.IndexConstants.AV_INDEX_DIR;
@@ -110,39 +113,15 @@ public class DataStorageHelper {
 		//external storage
 		File[] externals = app.getExternalFilesDirs(null);
 		if (externals != null) {
-			int i = 0;
-			for (File external : externals) {
-				if (external != null) {
-					++i;
-					StorageItem externalStorageItem = StorageItem.builder()
-							.setKey(EXTERNAL_STORAGE + i)
-							.setTitle(app.getString(R.string.storage_directory_external) + " " + i)
-							.setDirectory(external.getAbsolutePath())
-							.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE)
-							.setIconResId(R.drawable.ic_action_folder)
-							.createItem();
-					addItem(externalStorageItem);
-				}
-			}
+			listExternalOrObbStorages(externals, EXTERNAL_STORAGE, R.string.storage_directory_external,
+					OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE);
 		}
 
 		//multi user storage
 		File[] obbDirs = app.getObbDirs();
 		if (obbDirs != null) {
-			int i = 0;
-			for (File obb : obbDirs) {
-				if (obb != null) {
-					++i;
-					StorageItem multiuserStorageItem = StorageItem.builder()
-							.setKey(MULTIUSER_STORAGE + i)
-							.setTitle(app.getString(R.string.storage_directory_multiuser) + " " + i)
-							.setDirectory(obb.getAbsolutePath())
-							.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB)
-							.setIconResId(R.drawable.ic_action_folder)
-							.createItem();
-					addItem(multiuserStorageItem);
-				}
-			}
+			listExternalOrObbStorages(obbDirs, MULTIUSER_STORAGE, R.string.storage_directory_multiuser,
+					OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB);
 		}
 
 		//manually specified storage
@@ -158,6 +137,32 @@ public class DataStorageHelper {
 		if (currentDataStorage == null) {
 			currentDataStorage = manuallySpecified;
 		}
+	}
+
+	private void listExternalOrObbStorages(File[] dirs, String keyPrefix, int titleRes, int storageType) {
+		int visibleIndex = 0;
+		for (File dir : dirs) {
+			if (dir != null) {
+				visibleIndex++;
+				int notSelectedIcon = getIconResForExternalStorage(dir, false);
+				int selectedIcon = getIconResForExternalStorage(dir, true);
+				StorageItem item = StorageItem.builder()
+						.setKey(keyPrefix + visibleIndex)
+						.setTitle(app.getString(titleRes) + " " + visibleIndex)
+						.setDirectory(dir.getAbsolutePath())
+						.setType(storageType)
+						.setIconResIds(notSelectedIcon, selectedIcon)
+						.createItem();
+				addItem(item);
+			}
+		}
+	}
+
+	@DrawableRes
+	private int getIconResForExternalStorage(File dir, boolean selected) {
+		return Environment.isExternalStorageRemovable(dir)
+				? selected ? R.drawable.ic_actiond_sdcard_filled : R.drawable.ic_sdcard
+				: R.drawable.ic_action_folder;
 	}
 
 	private void initUsedMemoryItems() {
