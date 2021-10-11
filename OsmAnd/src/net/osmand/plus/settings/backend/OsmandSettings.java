@@ -2732,6 +2732,10 @@ public class OsmandSettings {
 		}
 	}.makeProfile();
 
+	public boolean isVoiceProviderNotSelected(ApplicationMode appMode) {
+		String voiceProvider = VOICE_PROVIDER.getModeValue(appMode);
+		return Algorithms.isEmpty(voiceProvider) || VOICE_PROVIDER_NOT_USE.equals(voiceProvider);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> RENDERER = new StringPreference(this, "renderer", RendererRegistry.DEFAULT_RENDER) {
