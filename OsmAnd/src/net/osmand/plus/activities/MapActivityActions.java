@@ -530,10 +530,6 @@ public class MapActivityActions extends MapActions implements DialogProvider {
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, ApplicationMode appMode, LatLon from,
 											   PointDescription fromName, boolean useIntermediatePointsByDefault,
 											   boolean showMenu, int menuState) {
-		if (showMenu) {
-			mapActivity.getMapRouteInfoMenu().addVoiceMuteChangeListener();
-		}
-
 		super.enterRoutePlanningModeGivenGpx(gpxFile, appMode, from, fromName, useIntermediatePointsByDefault,
 				showMenu, menuState);
 		if (showMenu) {

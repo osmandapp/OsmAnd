@@ -363,12 +363,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return onMarkerSelectListener;
 	}
 
-	public void addVoiceMuteChangeListener() {
-		if (app != null) {
-			app.getSettings().VOICE_MUTE.addListener(voiceMuteChangeListener);
-		}
-	}
-
 	private void cancelStartPointAddressRequest() {
 		OsmandApplication app = getApp();
 		if (startPointRequest != null && app != null) {
@@ -2271,10 +2265,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void onResume() {
 		OsmandApplication app = getApp();
 		if (app != null) {
-			app.getRoutingHelper().addListener(this);
+			OsmandSettings settings = app.getSettings();
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			ApplicationMode mode = routingHelper.getAppMode();
+			currentMuteState = settings.VOICE_MUTE.getModeValue(mode);
+
+			routingHelper.addListener(this);
 			app.getFavorites().addListener(this);
+			settings.VOICE_MUTE.addListener(voiceMuteChangeListener);
 			app.getTargetPointsHelper().addListener(onStateChangedListener);
-			addVoiceMuteChangeListener();
 		}
 	}
 
