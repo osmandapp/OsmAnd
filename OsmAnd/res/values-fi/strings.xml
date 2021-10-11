@@ -3431,7 +3431,6 @@
     <string name="rendering_attr_piste_type_sled_name">Kelkka</string>
     <string name="rendering_attr_piste_type_sleigh_name">Reki</string>
     <string name="change_data_storage_folder">Vaihda tallennuskansio</string>
-    <string name="internal_app_storage_description">Sisäinen tallennustila OsmAndia varten (piilotettu käyttäjiltä ja muilta sovelluksilta).</string>
     <string name="paste_Osmand_data_folder_path">Liitä polku kansioon, jossa on OsmAnd-tiedot</string>
     <string name="change_osmand_data_folder_question">Muuta OsmAnd-tietokansiota\?</string>
     <string name="enter_path_to_folder">Anna kansion polku</string>

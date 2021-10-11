@@ -3194,7 +3194,6 @@
     <string name="paste_Osmand_data_folder_path">مسیر پوشهٔ دادهٔ OsmAnd را بچسبانید</string>
     <string name="change_osmand_data_folder_question">پوشهٔ دادهٔ OsmAnd تغییر کند؟</string>
     <string name="move_maps_to_new_destination">انتقال به مقصد جدید</string>
-    <string name="internal_app_storage_description">ذخیره‌گاه داخلی OsmAnd (از دید کاربران و سایر برنامه‌ها پنهان است).</string>
     <string name="change_data_storage_folder">تغییر پوشهٔ ذخیره‌سازی</string>
     <string name="rendering_attr_piste_type_snow_park_name">پارک برفی</string>
     <string name="rendering_attr_piste_type_sleigh_name">سورتمه کالسکه‌ای</string>

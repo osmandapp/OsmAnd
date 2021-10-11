@@ -3132,7 +3132,6 @@
     <string name="change_osmand_data_folder_question">Voleu canviar la carpeta de dades de OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Desplaça a la nova destinació</string>
     <string name="avoid_in_routing_descr_">Evita determinades rutes i tipus de carretera</string>
-    <string name="internal_app_storage_description">Emmagatzematge intern per a OsmAnd, (amagat a l\'usuari i a les altres aplicacions).</string>
     <string name="change_data_storage_folder">Canvia la carpeta d\'emmagatzematge</string>
     <string name="rendering_attr_piste_type_snow_park_name">Pista de terra</string>
     <string name="rendering_attr_piste_type_sleigh_name">Trineu</string>

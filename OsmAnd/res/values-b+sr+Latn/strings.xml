@@ -3662,7 +3662,6 @@
     <string name="rendering_attr_piste_type_sleigh_name">Saonice</string>
     <string name="rendering_attr_piste_type_snow_park_name">Zimski park</string>
     <string name="change_data_storage_folder">Promeni fasciklu skladišta</string>
-    <string name="internal_app_storage_description">Interno skladište za OsmAnd (skriveno od korisnika i drugih aplikacija).</string>
     <string name="move_maps_to_new_destination">Premesti na novo odredište</string>
     <string name="change_osmand_data_folder_question">Promeni OsmAnd fasciklu sa podacima\?</string>
     <string name="paste_Osmand_data_folder_path">Umetni putanju do fascikle sa OsmAnd podacima</string>

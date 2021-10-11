@@ -3182,7 +3182,6 @@
     <string name="paste_Osmand_data_folder_path">Indsæt sti til mappen med data</string>
     <string name="change_osmand_data_folder_question">Skift datamappe\?</string>
     <string name="move_maps_to_new_destination">Flyt til den nye destination</string>
-    <string name="internal_app_storage_description">Internt lager (skjult for bruger og andre programmer).</string>
     <string name="change_data_storage_folder">Skift lagringsmappe</string>
     <string name="rendering_attr_piste_type_snow_park_name">Snowpark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Slæde</string>

@@ -2456,7 +2456,6 @@
     <string name="paste_Osmand_data_folder_path">Lipește calea către dosar cu datele OsmAnd</string>
     <string name="change_osmand_data_folder_question">Schimbați dosarul de date ale OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Mută la noua destinație</string>
-    <string name="internal_app_storage_description">Stocare internă pentru OsmAnd (ascunsă de utilizator și alte aplicații).</string>
     <string name="change_data_storage_folder">Schimbați folderul de stocare</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parc</string>
     <string name="rendering_attr_piste_type_sleigh_name">Sanie</string>

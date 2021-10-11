@@ -1912,6 +1912,9 @@ public class OsmandSettings {
 		return map;
 	}
 
+	public final OsmandPreference<Boolean> SHARED_STORAGE_WARNING_DIALOG_SHOWN = new BooleanPreference(this,
+			"shared_storage_warning_dialog_shown", false).makeGlobal();
+
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 
 	public static final String EXTERNAL_STORAGE_DIR_V19 = "external_storage_dir_V19"; //$NON-NLS-1$

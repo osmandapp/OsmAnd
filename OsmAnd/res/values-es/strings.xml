@@ -3226,7 +3226,6 @@
     <string name="update_all_maps_q">¿Estás seguro de que quieres actualizar todos los (%1$d) mapas\?</string>
     <string name="enter_path_to_folder">Ingresa la ruta a la carpeta</string>
     <string name="paste_Osmand_data_folder_path">Pegar la ruta a la carpeta con los datos de OsmAnd</string>
-    <string name="internal_app_storage_description">Almacenamiento interno para OsmAnd, (oculto a los usuarios y otras aplicaciones).</string>
     <string name="rendering_attr_piste_type_downhill_name">Descenso</string>
     <string name="rendering_attr_piste_type_nordic_name">Nórdico</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">Avanzado</string>

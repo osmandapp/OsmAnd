@@ -87,6 +87,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.SharedStorageWarningBottomSheet;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
@@ -270,19 +271,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		trackDetailsMenu.setMapActivity(this);
 
 		super.onCreate(savedInstanceState);
-
-		// Full screen is not used here
-		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
-
 		enterToFullScreen();
 		// Navigation Drawer
 		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
 
-		if (app.getAppInitializer().checkAppVersionChanged() && WhatsNewDialogFragment.SHOW) {
-			SecondSplashScreenFragment.SHOW = false;
-			WhatsNewDialogFragment.SHOW = false;
-			new WhatsNewDialogFragment().show(getSupportFragmentManager(), null);
+		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
+			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager());
+			if (showed) {
+				SecondSplashScreenFragment.SHOW = false;
+			}
 		}
 		mapActions = new MapActivityActions(this);
 		mapWidgetsVisibilityHelper = new WidgetsVisibilityHelper(this);
@@ -707,6 +705,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		dashboardOnMap.updateLocation(true, true, false);
+
+		if (getFragment(WhatsNewDialogFragment.TAG) == null || WhatsNewDialogFragment.wasNotShown()) {
+			if (SharedStorageWarningBottomSheet.dialogShowRequired(app)) {
+				SecondSplashScreenFragment.SHOW = false;
+				SharedStorageWarningBottomSheet.showInstance(this, true);
+			}
+		}
 
 		getMyApplication().getNotificationHelper().refreshNotifications();
 		// fixing bug with action bar appearing on android 2.3.3

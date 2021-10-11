@@ -17,6 +17,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -96,31 +97,19 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 		View mainView = View.inflate(ctx, R.layout.bottom_sheet_change_data_storage, null);
 		
 		View btnDontMoveView = mainView.findViewById(R.id.btnDontMove);
-		btnDontMoveView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				positiveButtonsClick(false);
-			}
-		});
-		UiUtilities.setupDialogButton(nightMode, btnDontMoveView, UiUtilities.DialogButtonType.SECONDARY, getString(R.string.dont_move_maps), currentDirectory.getIconResId());
+		btnDontMoveView.setOnClickListener(v -> positiveButtonsClick(false));
+		UiUtilities.setupDialogButton(nightMode, btnDontMoveView, DialogButtonType.SECONDARY,
+				getString(R.string.dont_move_maps), currentDirectory.getSelectedIconResId());
 
 		View btnMoveView = mainView.findViewById(R.id.btnMove);
-		btnMoveView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				positiveButtonsClick(true);
-			}
-		});
-		UiUtilities.setupDialogButton(nightMode, btnMoveView, UiUtilities.DialogButtonType.PRIMARY, getString(R.string.move_maps_to_new_destination), R.drawable.ic_action_folder_move);
+		btnMoveView.setOnClickListener(v -> positiveButtonsClick(true));
+		UiUtilities.setupDialogButton(nightMode, btnMoveView, DialogButtonType.PRIMARY,
+				getString(R.string.move_maps_to_new_destination), R.drawable.ic_action_folder_move);
 
 		View btnCloseView = mainView.findViewById(R.id.btnClose);
-		btnCloseView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
-		UiUtilities.setupDialogButton(nightMode, btnCloseView, UiUtilities.DialogButtonType.SECONDARY, getString(R.string.shared_string_cancel), R.drawable.ic_action_undo_dark);
+		btnCloseView.setOnClickListener(v -> dismiss());
+		UiUtilities.setupDialogButton(nightMode, btnCloseView, DialogButtonType.SECONDARY,
+				getString(R.string.shared_string_cancel), R.drawable.ic_action_undo_dark);
 
 		BaseBottomSheetItem baseItem = new BaseBottomSheetItem.Builder()
 				.setCustomView(mainView)

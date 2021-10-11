@@ -3189,7 +3189,6 @@
     <string name="paste_Osmand_data_folder_path">Einfügen des Pfades zum Ordner mit OsmAnd-Daten</string>
     <string name="change_osmand_data_folder_question">OsmAnd-Datenordner ändern\?</string>
     <string name="move_maps_to_new_destination">Zum neuen Ziel verschieben</string>
-    <string name="internal_app_storage_description">Interner Speicher für OsmAnd, versteckt vor Benutzern und anderen Anwendungen.</string>
     <string name="change_data_storage_folder">Speicherordner ändern</string>
     <string name="rendering_attr_piste_type_snow_park_name">Winter-Funpark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Schlitten</string>

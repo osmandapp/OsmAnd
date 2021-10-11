@@ -3178,7 +3178,6 @@
     <string name="paste_Osmand_data_folder_path">Pegar la ruta a la carpeta con los datos de OsmAnd</string>
     <string name="change_osmand_data_folder_question">¿Cambiar la carpeta de datos de OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Mover al nuevo destino</string>
-    <string name="internal_app_storage_description">Almacenamiento interno para OsmAnd, (oculto a los usuarios y otras aplicaciones).</string>
     <string name="change_data_storage_folder">Cambiar la carpeta de almacenamiento</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parque de nieve</string>
     <string name="rendering_attr_piste_type_sleigh_name">Trineo</string>

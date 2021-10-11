@@ -3175,7 +3175,6 @@
     <string name="paste_Osmand_data_folder_path">Incolla s\'àndala pro sa cartella cun sos datos de OsmAnd</string>
     <string name="change_osmand_data_folder_question">Mudare sa cartella de sos datos de OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Tràmuda a sa destinatzione noa</string>
-    <string name="internal_app_storage_description">Memòria interna pro OsmAnd (cuada dae s\'impreadore e dae sas àteras aplicatziones).</string>
     <string name="change_data_storage_folder">Muda sa cartella de archiviatzione</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parcu de nie</string>
     <string name="rendering_attr_piste_type_sleigh_name">Islita tragiada</string>

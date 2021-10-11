@@ -3188,7 +3188,6 @@
     <string name="paste_Osmand_data_folder_path">Επικόλληση διαδρομής στον φάκελο με τα δεδομένα OsmAnd</string>
     <string name="change_osmand_data_folder_question">Αλλαγή του φακέλου δεδομένων του OsmAnd;</string>
     <string name="move_maps_to_new_destination">Μετακίνηση στον νέο προορισμό</string>
-    <string name="internal_app_storage_description">Εσωτερική αποθήκευση για το OsmAnd, (κρυφή από τους χρήστες και άλλες εφαρμογές).</string>
     <string name="change_data_storage_folder">Αλλαγή φακέλου αποθήκευσης</string>
     <string name="rendering_attr_piste_type_snow_park_name">Χιονοδρομικό πάρκο</string>
     <string name="rendering_attr_piste_type_sleigh_name">Έλκηθρο</string>
