@@ -53,6 +53,7 @@ import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -656,12 +657,14 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			boolean nightMode = !app.getSettings().isLightContent();
 
 			favoriteViewHolder.title.setText(point.getDisplayName(app));
-			favoriteViewHolder.description.setVisibility(View.VISIBLE);
 			if (point.getSpecialPointType() != null) {
 				int iconColor = ColorUtilities.getDefaultIconColorId(nightMode);
 				Drawable icon = app.getUIUtilities().getIcon(point.getSpecialPointType().getIconId(app), iconColor);
 				favoriteViewHolder.icon.setImageDrawable(icon);
-				favoriteViewHolder.description.setText(point.getDescription());
+
+				String description = point.getDescription();
+				favoriteViewHolder.description.setText(description);
+				AndroidUiHelper.updateVisibility(favoriteViewHolder.description, !Algorithms.isEmpty(description));
 			} else {
 				int defaultFavoritesColor = ContextCompat.getColor(app, R.color.color_favorite);
 				int pointColor = app.getFavorites().getColorWithCategory(point, defaultFavoritesColor);
@@ -678,6 +681,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						? getString(R.string.shared_string_favorites)
 						: point.getCategory();
 				favoriteViewHolder.description.setText(description);
+				favoriteViewHolder.description.setVisibility(View.VISIBLE);
 			}
 		}
 	}
