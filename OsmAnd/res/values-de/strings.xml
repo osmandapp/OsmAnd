@@ -4348,4 +4348,5 @@
     <string name="horseback_riding">Reiten</string>
     <string name="routing_attr_prefer_tactile_paving_name">Taktile Oberflächen bevorzugen</string>
     <string name="exit_pan_mode_descr">Auswählen drücken, um Schwenkmodus zu verlassen</string>
+    <string name="icon_group_nautical">Nautisch</string>
 </resources>

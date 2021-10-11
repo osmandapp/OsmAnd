@@ -4334,4 +4334,8 @@
     <string name="routing_attr_allow_gate_name">Povoliť použitie brán</string>
     <string name="routing_attr_prefer_tactile_paving_description">Uprednostniť dlažbu pre nevidiacich</string>
     <string name="routing_attr_prefer_tactile_paving_name">Uprednostniť dlažbu pre nevidiacich</string>
+    <string name="search_title">Hľadať: %1$s</string>
+    <string name="exit_pan_mode_descr">Stlačte \"Zvoliť\" pre opustenie režimu posúvania</string>
+    <string name="upload_gpx_description_hint">Ak necháte prázdne, názvy stôp budú použité ako popis. Zadaný popis bude aplikovaný na každú stopu.</string>
+    <string name="icon_group_nautical">Námorné</string>
 </resources>

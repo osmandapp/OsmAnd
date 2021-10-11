@@ -3984,10 +3984,10 @@
     <string name="activity_type_riding_name">Promenade</string>
     <string name="activity_type_offroad_name">Voies non revêtues</string>
     <string name="activity_type_motorbike_name">Moto</string>
-    <string name="open_place_reviews_plugin_description">Envoyer des photos, avis et liens des lieux publics comme les restaurants, hôtels, musées et points d\'intérêts en tant que données libres
-\nhttps://openplacereviews.org/data.
+    <string name="open_place_reviews_plugin_description">Envoyez vos photos, avis et liens concernant des lieux publics tels que les restaurants, hôtels, musées et points d\'intérêts pour alimentez en données libres https://openplacereviews.org/data.
 \n
-\nPour en savoir, consultez https://openplacereviews.org</string>
+\n
+\nPour en savoir plus, consultez https://openplacereviews.org</string>
     <string name="activity_type_racing_name">Course automobile</string>
     <string name="temporary_conditional_routing_descr">Utilisez les limitations routières actuellement actives sur la carte</string>
     <string name="track_recording_description">Arrêter l\'enregistrement \?
@@ -4336,4 +4336,5 @@
     <string name="search_title">Recherche de : %1$s</string>
     <string name="upload_gpx_description_hint">Si vide, la description sera alimentée avec le nom de trace. La description saisie sera utilisée pour chaque trace.</string>
     <string name="exit_pan_mode_descr">Appuyez sur Sélectionner pour quitter le mode panoramique</string>
+    <string name="icon_group_nautical">Nautisme</string>
 </resources>

@@ -4332,4 +4332,6 @@
     <string name="routing_attr_prefer_horse_routes_name">Preferuj trasy konne</string>
     <string name="routing_attr_only_permitted_ways_description">Korzystaj tylko z dróg (ścieżek, ścieżek itp.), które są wyraźnie dozwolone</string>
     <string name="routing_attr_only_permitted_streets_description">Korzystaj tylko z ulic, które są wyraźnie dozwolone</string>
+    <string name="upload_gpx_description_hint">Pozostaw puste, nazwy ścieżek zostaną użyte jako opis. Wprowadzony opis zostanie zastosowany do każdej ścieżki.</string>
+    <string name="search_title">Szukaj: %1$s</string>
 </resources>

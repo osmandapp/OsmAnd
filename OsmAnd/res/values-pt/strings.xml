@@ -4347,4 +4347,5 @@
     <string name="upload_gpx_description_hint">Deixe em branco se quiser usar os nomes dos trilhos GPX como descrição. A descrição inserida será aplicada para cada trilho.</string>
     <string name="search_title">Pesquisar: %1$s</string>
     <string name="exit_pan_mode_descr">Pressione \"Selecionar\" para sair do modo deslocar</string>
+    <string name="icon_group_nautical">Náutico</string>
 </resources>

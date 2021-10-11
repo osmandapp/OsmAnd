@@ -227,6 +227,10 @@ public class MenuBuilder {
 		return app;
 	}
 
+	public MapContextMenu getMapContextMenu() {
+		return mapContextMenu;
+	}
+
 	public LatLon getLatLon() {
 		return latLon;
 	}

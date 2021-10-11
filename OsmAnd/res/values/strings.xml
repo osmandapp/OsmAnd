@@ -16,6 +16,8 @@
     <string name="internal_app_storage_description">Internal storage, hidden from user and other apps, so no one except OsmAnd can’t get access to your data</string>
     <string name="shared_storage_warning_description">Starting with the next update of OsmAnd, the app will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared strorage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
     <string name="shared_storage_warning_title">Changes in storage access rules</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd offline maps and navigation on the screen of your vehicle. Integrate conveniently with your vehicle\'s controls.</string>
+    <string name="icon_group_nautical">Nautical</string>
     <string name="exit_pan_mode_descr">Press Select to exit the pan mode</string>
     <string name="upload_gpx_description_hint">Leave empty, track names will be used as description. Entered description will be applied for each track.</string>
     <string name="search_title">Search: %1$s</string>
@@ -294,8 +296,8 @@
     <string name="select_another_colorization">Please select another type of coloring.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Nature boundaries</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Hide nature reserve, protected areas, and national park boundaries.</string>
+    <string name="rendering_attr_noNatureReserves_name">Nature reserve</string>
+    <string name="rendering_attr_noNatureReserves_description">Hide nature reserve, protected areas, and national parks.</string>
     <string name="shared_string_interval">Interval</string>
     <string name="quick_action_show_hide_title">Show/hide</string>
     <string name="copy_poi_name">Copy POI name</string>
