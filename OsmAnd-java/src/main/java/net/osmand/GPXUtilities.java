@@ -848,7 +848,10 @@ public class GPXUtilities {
 						totalDistance += calculations[0];
 						segmentDistance += calculations[0];
 						point.distance = segmentDistance;
-						timeDiff = (int)((point.time - prev.time) / 1000);
+
+						// In case points are reversed and => time is decreasing
+						long timeDiffMillis = Math.max(0, point.time - prev.time);
+						timeDiff = (int) ((timeDiffMillis) / 1000);
 
 						//Last resort: Derive speed values from displacement if track does not originally contain speed
 						if (!hasSpeedInTrack && speed == 0 && timeDiff > 0) {
@@ -858,11 +861,12 @@ public class GPXUtilities {
 						// Motion detection:
 						//   speed > 0  uses GPS chipset's motion detection
 						//   calculations[0] > minDisplacment * time  is heuristic needed because tracks may be filtered at recording time, so points at rest may not be present in file at all
-						if ((speed > 0) && (calculations[0] > 0.1 / 1000f * (point.time - prev.time)) && point.time != 0 && prev.time != 0) {
-							timeMoving = timeMoving + (point.time - prev.time);
+						boolean timeSpecified = point.time != 0 && prev.time != 0;
+						if (speed > 0 && timeSpecified && calculations[0] > timeDiffMillis / 10000f) {
+							timeMoving = timeMoving + timeDiffMillis;
 							totalDistanceMoving += calculations[0];
 							if (s.segment.generalSegment && !point.firstPoint) {
-								timeMovingOfSingleSegment += point.time - prev.time;
+								timeMovingOfSingleSegment += timeDiffMillis;
 								distanceMovingOfSingleSegment += calculations[0];
 							}
 						}
