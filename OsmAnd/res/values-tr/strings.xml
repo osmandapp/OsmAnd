@@ -3178,7 +3178,6 @@
     <string name="paste_Osmand_data_folder_path">OsmAnd verilerinin bulunduğu klasörün yolunu yapıştırın</string>
     <string name="change_osmand_data_folder_question">OsmAnd veri klasörü değiştirilsin mi\?</string>
     <string name="move_maps_to_new_destination">Yeni hedefe taşı</string>
-    <string name="internal_app_storage_description">OsmAnd için dahili depolama alanı (kullanıcılardan ve diğer uygulamalardan gizlenir).</string>
     <string name="change_data_storage_folder">Depolama klasörünü değiştir</string>
     <string name="rendering_attr_piste_type_snow_park_name">Arazi parkı</string>
     <string name="rendering_attr_piste_type_sleigh_name">Atlı kızak</string>

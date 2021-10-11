@@ -3198,7 +3198,6 @@
     <string name="routeInfo_winter_ice_road_name">Vinter- og isveier</string>
     <string name="enter_path_to_folder">Skriv inn sti til mappen</string>
     <string name="paste_Osmand_data_folder_path">Lim inn sti til mappen inneholdende OsmAnd-data</string>
-    <string name="internal_app_storage_description">Internlagring for OsmAnd, (skjult fra bruker og andre programmer).</string>
     <string name="change_data_storage_folder">Endre lagringsmappe</string>
     <string name="rendering_attr_piste_type_snow_park_name">Snøpark</string>
     <string name="rendering_attr_piste_type_nordic_name">Langrenn</string>

@@ -1380,6 +1380,7 @@ public class RouteResultPreparation {
 			} else if (possibleTurns.length == 3) {
 				if ((!possiblyLeftTurn || !possiblyRightTurn) && TurnType.isSlightTurn(possibleTurns[1])) {
 					tp = possibleTurns[1];
+					rawLanes[1] |= 1;
 					t = TurnType.valueOf(tp, leftSide);
 				}
 			}
@@ -1397,7 +1398,9 @@ public class RouteResultPreparation {
 						|| (TurnType.isLeftTurn(sturn) && possiblyLeftTurn)) {
 					// we can't predict here whether it will be a left turn or straight on,
 					// it could be done during 2nd pass
-					TurnType.setSecondaryToPrimary(rawLanes, k);
+					if ((rawLanes[k] & 1) == 0) {
+						TurnType.setSecondaryToPrimary(rawLanes, k);
+					}
 					active = true;
 				} else if ((TurnType.isRightTurn(tturn) && possiblyRightTurn)
 						|| (TurnType.isLeftTurn(tturn) && possiblyLeftTurn)) {

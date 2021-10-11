@@ -1836,7 +1836,6 @@
     <string name="shared_string_turn_off">Nonaktifkan</string>
     <string name="shared_string_turn">Belok</string>
     <string name="change_data_storage_folder">Ubah folder penyimpanan</string>
-    <string name="internal_app_storage_description">Penyimpanan internal untuk OsmAnd, (disembunyikan dari pengguna dan aplikasi lain).</string>
     <string name="move_maps_to_new_destination">Pindahkan ke destinasi baru</string>
     <string name="change_osmand_data_folder_question">Ubah folder data OsmAnd\?</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>

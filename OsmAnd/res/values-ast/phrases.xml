@@ -51,7 +51,7 @@
     <string name="poi_piste_grooming">Piste grooming</string>
     <string name="poi_theatre_genre">Xéneru</string>
     <string name="poi_outdoor_seating">Outdoor seating</string>
-    <string name="poi_fee">Fee</string>
+    <string name="poi_fee">Tarifa</string>
     <string name="poi_smoking">Smoking</string>
     <string name="poi_delivery">Delivery</string>
     <string name="poi_drive_in">Drive-in</string>
@@ -274,7 +274,7 @@
     <string name="poi_tactile_paving_primitive">Primitive</string>
     <string name="poi_tactile_paving_contrasted">Contrasted</string>
     <string name="poi_traffic_signals_sound_locate">Only when walking is allowed</string>
-    <string name="poi_internet_access_fee_customers">Internet access: customers</string>
+    <string name="poi_internet_access_fee_customers">Accesu a internet: vecería</string>
     <string name="poi_video_no">Non</string>
     <string name="poi_video_yes">Sí</string>
     <string name="poi_booth">Booth type</string>
@@ -693,9 +693,9 @@
     <string name="poi_map_type_topo">Map type: topo</string>
     <string name="poi_charging_station_output">Сharging station output</string>
     <string name="poi_amperage">Amperaxe</string>
-    <string name="poi_parking_fee">Parking fee</string>
-    <string name="poi_parking_fee_no">Parking fee: no</string>
-    <string name="poi_parking_fee_yes">Parking fee: yes</string>
+    <string name="poi_parking_fee">Tarifa d\'aparcamientu</string>
+    <string name="poi_parking_fee_no">Tarifa d\'aparcamientu: non</string>
+    <string name="poi_parking_fee_yes">Tarifa d\'aparcamientu: sí</string>
     <string name="poi_truck_no">Camión: non</string>
     <string name="poi_truck_yes">Camión: sí</string>
     <string name="poi_scooter_no">Scooter: no</string>
@@ -1558,8 +1558,8 @@
     <string name="poi_social_facility_group_home">Group home</string>
     <string name="poi_refugee_no">Refugees: no</string>
     <string name="poi_refugee_yes">Amenities for refugees</string>
-    <string name="poi_dog_no">Dogs not allowed</string>
-    <string name="poi_dog_yes">Dogs allowed</string>
+    <string name="poi_dog_no">Nun se permiten perros</string>
+    <string name="poi_dog_yes">Permítense perros</string>
     <string name="poi_capacity_caravans">Maximum caravans</string>
     <string name="poi_capacity_tents">Maximum tents</string>
     <string name="poi_power_supply_nema_5_15">Power supply (socket): NEMA 5-15</string>
@@ -3091,7 +3091,7 @@
     <string name="poi_harbour">Harbor</string>
     <string name="poi_hunting_stand">Hunting stand</string>
     <string name="poi_leisure_fishing">Fishing place</string>
-    <string name="poi_dog_park">Dog park</string>
+    <string name="poi_dog_park">Parque canín</string>
     <string name="poi_beach_resort">Beach resort</string>
     <string name="poi_ski_resort">Ski resort</string>
     <string name="poi_stripclub">Club de striptease</string>
@@ -3202,8 +3202,8 @@
     <string name="poi_wayside_cross">Wayside cross</string>
     <string name="poi_religious">Área relixosa</string>
     <string name="poi_monastery">Monasteriu</string>
-    <string name="poi_internet_access_fee_no">Internet access: no fee</string>
-    <string name="poi_internet_access_fee_yes">Internet access: fee charged</string>
+    <string name="poi_internet_access_fee_no">Accesu a internet: ensin tarifa</string>
+    <string name="poi_internet_access_fee_yes">Accesu a internet: con tarifa</string>
     <string name="poi_internet_access_no">Accesu a internet: non</string>
     <string name="poi_internet_access_yes">Accesu a internet: sí</string>
     <string name="poi_internet_access_service">Internet access: service</string>
@@ -3325,7 +3325,7 @@
     <string name="poi_ice_hockey">Ice hockey</string>
     <string name="poi_field_hockey">Field hockey</string>
     <string name="poi_equestrian">Equestrian</string>
-    <string name="poi_dog_racing">Dog racing</string>
+    <string name="poi_dog_racing">Carreres de galgos</string>
     <string name="poi_scuba_diving">Scuba diving</string>
     <string name="poi_diving">Diving</string>
     <string name="poi_cycling">Cycling</string>
@@ -3367,7 +3367,7 @@
     <string name="poi_office_religion">Religious office</string>
     <string name="poi_bookmaker">Bookmaker</string>
     <string name="poi_studio">Estudiu</string>
-    <string name="poi_educational_institution">Educational institution</string>
+    <string name="poi_educational_institution">Institución educativa</string>
     <string name="poi_advertising_agency">Advertising agency</string>
     <string name="poi_architect">Architect office</string>
     <string name="poi_newspaper">Newspaper office</string>

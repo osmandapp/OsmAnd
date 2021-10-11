@@ -3175,7 +3175,6 @@
     <string name="paste_Osmand_data_folder_path">Incolla s\'àndala pro sa cartella cun sos datos de OsmAnd</string>
     <string name="change_osmand_data_folder_question">Mudare sa cartella de sos datos de OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Tràmuda a sa destinatzione noa</string>
-    <string name="internal_app_storage_description">Memòria interna pro OsmAnd (cuada dae s\'impreadore e dae sas àteras aplicatziones).</string>
     <string name="change_data_storage_folder">Muda sa cartella de archiviatzione</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parcu de nie</string>
     <string name="rendering_attr_piste_type_sleigh_name">Islita tragiada</string>
@@ -4339,4 +4338,8 @@
     <string name="routing_attr_allow_gate_description">Permite s\'impreu de cantzellos</string>
     <string name="routing_attr_prefer_tactile_paving_description">Preferi sos pamentos tàtiles</string>
     <string name="routing_attr_prefer_tactile_paving_name">Preferi sos pamentos tàtiles</string>
+    <string name="upload_gpx_description_hint">Lassende·lu bòidu sos nùmenes de sas rastas s\'ant a impreare comente descritziones. Sas descritziones insertadas s\'ant a impreare pro cada rasta.</string>
+    <string name="search_title">Chirca: %1$s</string>
+    <string name="exit_pan_mode_descr">Incarca in Ischerta pro essire dae sa modalidade panoràmica</string>
+    <string name="icon_group_nautical">Nàutica</string>
 </resources>

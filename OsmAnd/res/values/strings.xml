@@ -10,6 +10,14 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="shared_string_details">Details</string>
+    <string name="shared_app_storage_description">Shared memory is no longer available due to changes in the storage access rules in Android.</string>
+    <string name="internal_app_storage_description">Internal storage, hidden from user and other apps, so no one except OsmAnd can’t get access to your data</string>
+    <string name="shared_storage_warning_description">Starting with the next update of OsmAnd, the app will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared strorage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
+    <string name="shared_storage_warning_title">Changes in storage access rules</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd offline maps and navigation on the screen of your vehicle. Integrate conveniently with your vehicle\'s controls.</string>
+    <string name="icon_group_nautical">Nautical</string>
     <string name="exit_pan_mode_descr">Press Select to exit the pan mode</string>
     <string name="upload_gpx_description_hint">Leave empty, track names will be used as description. Entered description will be applied for each track.</string>
     <string name="search_title">Search: %1$s</string>
@@ -288,8 +296,8 @@
     <string name="select_another_colorization">Please select another type of coloring.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Nature boundaries</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Hide nature reserve, protected areas, and national park boundaries.</string>
+    <string name="rendering_attr_noNatureReserves_name">Nature reserve</string>
+    <string name="rendering_attr_noNatureReserves_description">Hide nature reserve, protected areas, and national parks.</string>
     <string name="shared_string_interval">Interval</string>
     <string name="quick_action_show_hide_title">Show/hide</string>
     <string name="copy_poi_name">Copy POI name</string>
@@ -1049,7 +1057,6 @@
     <string name="paste_Osmand_data_folder_path">Paste path to the folder with OsmAnd data</string>
     <string name="change_osmand_data_folder_question">Change OsmAnd data folder?</string>
     <string name="move_maps_to_new_destination">Move to the new destination</string>
-    <string name="internal_app_storage_description">Internal storage for OsmAnd, (hidden from users and other apps).</string>
     <string name="change_data_storage_folder">Change storage folder</string>
     <string name="rendering_attr_piste_type_snow_park_name">Terrain park</string>
     <string name="rendering_attr_piste_type_sleigh_name">Sleigh</string>
@@ -2683,7 +2690,6 @@
     <string name="rendering_attr_busRoutes_name">Bus routes</string>
     <string name="rendering_category_hide">Hide</string>
     <string name="rendering_category_routes">Routes</string>
-    <!--string name="shared_string_details">Details</string> use rendering_category_details -->
     <string name="rendering_category_details">Details</string>
     <string name="rendering_category_transport">Transport</string>
     <string name="rendering_category_others">Other map attributes</string>

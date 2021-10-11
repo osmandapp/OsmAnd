@@ -3167,7 +3167,6 @@
     <string name="paste_Osmand_data_folder_path">Вставьте путь к папке с данными OsmAnd</string>
     <string name="change_osmand_data_folder_question">Изменить папку данных OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Переместить в новое место назначения</string>
-    <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений.</string>
     <string name="change_data_storage_folder">Изменение папки хранилища</string>
     <string name="avoid_in_routing_descr_">Исключить определённые маршруты и типы дорог</string>
     <string name="shared_string_memory_used_tb_desc">Использовано %1$s ТБ</string>
@@ -3830,7 +3829,7 @@
     <string name="icon_group_symbols">Символы</string>
     <string name="icon_group_sport">Спорт</string>
     <string name="icon_group_emergency">Экстренные службы</string>
-    <string name="icon_group_travel">Путешествия</string>
+    <string name="icon_group_travel">Путешествие</string>
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd использует MGRS, который похож на формат UTM NATO.</string>
@@ -4012,7 +4011,7 @@
     <string name="live_update_delete_updates_msg">Удалить все live-обновления для %s\?</string>
     <string name="purchases">Покупки</string>
     <string name="quick_action_show_hide_title">Показать/скрыть</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_name">Природные границы</string>
+    <string name="rendering_attr_noNatureReserves_name">Заповедники</string>
     <string name="track_has_no_altitude">Трек не содержит данных о высоте.</string>
     <string name="track_has_no_speed">Трек не содержит данных о скорости.</string>
     <string name="select_another_colorization">Выберите другой тип окраски.</string>
@@ -4037,7 +4036,7 @@
     <string name="select_category_descr">Выберите категорию или добавьте новую</string>
     <string name="copy_poi_name">Копировать имя POI</string>
     <string name="shared_string_interval">Интервал</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">Скрыть границы заповедников, особо охраняемых природных территорий и национальных парков.</string>
+    <string name="rendering_attr_noNatureReserves_description">Скрыть заповедники, особо охраняемые природные территории и национальные парки.</string>
     <string name="gpx_upload_trackable_visibility_descr">«Отслеживаемый» означает, что трек не будет виден в любых общедоступных списках, но обработанные точки c отметками времени из него будут доступны через public GPS API (при этом трек не будет ассоциирован с вами). Другие пользователи смогут лишь загружать обработанные точки из вашего трека.</string>
     <string name="gpx_upload_identifiable_visibility_descr">«Идентифицируемый» означает, что трек будет виден всем в разделе треки пользователя, загрузившего трек и в общем списке треков, доступном на странице GPS-треки. Другие пользователи смогут загрузить данные трека и в свойствах трека будет указано имя пользователя, загрузившего трек. Отметки времени точек трека доступны через public GPS API будут ссылаться на страницу с вашим оригинальным треком.</string>
     <string name="gpx_upload_public_visibility_descr">«Общедоступный» означает, что трек будет виден всем в разделе треков пользователя, загрузившего трек и в общем списке треков, доступном на странице GPS-треки. Отметки времени точек трека не доступны через public GPS API. Однако, другие пользователи по-прежнему могут загрузить файл трека из общего списка треков и данные трека будут иметь все отметки времени.</string>
@@ -4337,7 +4336,7 @@
     <string name="travel_route_types">Типы маршрутов</string>
     <string name="shared_string_mini">мини</string>
     <string name="horseback_riding">Верховая езда</string>
-    <string name="routing_attr_only_permitted_ways_description">Использовать только специально разрешённые лесные и сельхоз дороги и тропы.</string>
+    <string name="routing_attr_only_permitted_ways_description">Использовать только специально разрешённые лесные и сельскохозяйственные дороги, а также тропы.</string>
     <string name="routing_attr_prefer_horse_routes_description">Предпочитать конные маршруты</string>
     <string name="routing_attr_prefer_horse_routes_name">Предпочитать конные маршруты</string>
     <string name="routing_attr_only_permitted_streets_description">Использовать только специально разрешённые улицы.</string>
@@ -4347,4 +4346,9 @@
     <string name="routing_attr_allow_gate_name">Разрешить использование ворот</string>
     <string name="routing_attr_prefer_tactile_paving_description">Предпочитать тактильное покрытие</string>
     <string name="routing_attr_prefer_tactile_paving_name">Предпочитать тактильное покрытие</string>
+    <string name="search_title">Поиск: %1$s</string>
+    <string name="upload_gpx_description_hint">Оставьте поле пустым, в качестве описания будут использованы названия треков. Введенное описание будет применено к каждому треку.</string>
+    <string name="exit_pan_mode_descr">Нажмите «Выбрать», чтобы выйти из режима панорамирования</string>
+    <string name="sample_wikivoyage">Образец Викигида</string>
+    <string name="icon_group_nautical">Морские</string>
 </resources>

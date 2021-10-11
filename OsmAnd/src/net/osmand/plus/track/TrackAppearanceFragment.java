@@ -16,7 +16,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -282,8 +281,35 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 	}
 
 	@Override
+	protected void setupControlButtons(@NonNull View view) {
+		if (isPortrait()) {
+			super.setupControlButtons(view);
+		} else {
+			View mapHudControls = view.findViewById(R.id.map_hud_controls);
+			AndroidUiHelper.updateVisibility(mapHudControls, false);
+			setupMapRulerWidget(view, requireMapActivity().getMapLayers());
+		}
+	}
+
+	@Override
 	public boolean shouldShowMapControls(int menuState) {
-		return menuState == MenuState.HEADER_ONLY || menuState == MenuState.HALF_SCREEN;
+		return menuState == MenuState.HEADER_ONLY
+				|| menuState == MenuState.HALF_SCREEN
+				|| !isPortrait();
+	}
+
+	@Override
+	public void updateMapControlsPos(@NonNull ContextMenuFragment fragment, int y, boolean animated) {
+		if (isPortrait()) {
+			super.updateMapControlsPos(fragment, y, animated);
+		} else {
+			View mainView = getMainView();
+			View mapBottomHudButtons = getMapBottomHudButtons();
+			if (mainView != null && mapBottomHudButtons != null) {
+				int bottomPadding = getResources().getDimensionPixelSize(R.dimen.map_button_margin);
+				AndroidUtils.setPadding(mapBottomHudButtons, mainView.getWidth(), 0, 0, bottomPadding);
+			}
+		}
 	}
 
 	@Override
@@ -592,35 +618,47 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 		AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider), true);
 	}
 
-	private void showShadowButton() {
+	private void setupScrollShadow() {
+		final View scrollView = getBottomScrollView();
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+			boolean scrollToTopAvailable = scrollView.canScrollVertically(-1);
+			boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
+			if (scrollToTopAvailable) {
+				showHeaderShadow();
+			} else {
+				hideHeaderShadow();
+			}
+			if (scrollToBottomAvailable) {
+				showButtonsShadow();
+			} else {
+				hideButtonsShadow();
+			}
+		});
+	}
+
+	private void showHeaderShadow() {
+		if (getBottomContainer() != null) {
+			getBottomContainer().setForeground(getIcon(R.drawable.bg_contextmenu_shadow));
+		}
+	}
+
+	private void hideHeaderShadow() {
+		if (getBottomContainer() != null) {
+			getBottomContainer().setForeground(null);
+		}
+	}
+
+	private void showButtonsShadow() {
 		buttonsShadow.setVisibility(View.VISIBLE);
 		buttonsShadow.animate()
 				.alpha(0.8f)
-				.setDuration(200)
-				.setListener(null);
+				.setDuration(200);
 	}
 
-	private void hideShadowButton() {
+	private void hideButtonsShadow() {
 		buttonsShadow.animate()
 				.alpha(0f)
 				.setDuration(200);
-
-	}
-
-	private void setupScrollShadow() {
-		final View scrollView = getBottomScrollView();
-		scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-
-			@Override
-			public void onScrollChanged() {
-				boolean scrollToBottomAvailable = scrollView.canScrollVertically(1);
-				if (scrollToBottomAvailable) {
-					showShadowButton();
-				} else {
-					hideShadowButton();
-				}
-			}
-		});
 	}
 
 	private void saveCustomColorsToTracks(int prevColor, int newColor) {
@@ -780,8 +818,11 @@ public class TrackAppearanceFragment extends ContextMenuScrollFragment implement
 			List<Integer> colors = getTrackColors();
 			colorsCard = new ColorsCard(mapActivity, null, this,
 					trackDrawInfo.getColor(), colors, settings.CUSTOM_TRACK_COLORS, true);
-			AndroidUiHelper.updateVisibility(colorsCard.build(mapActivity), trackDrawInfo.getColoringType().isTrackSolid());
 			addCard(container, colorsCard);
+			int dp12 = getResources().getDimensionPixelSize(R.dimen.card_padding);
+			AndroidUtils.setPadding(colorsCard.getView(), 0, dp12, 0, dp12);
+			boolean shouldShowColorsCard = trackDrawInfo.getColoringType().isTrackSolid();
+			AndroidUiHelper.updateVisibility(colorsCard.getView(), shouldShowColorsCard);
 		}
 	}
 

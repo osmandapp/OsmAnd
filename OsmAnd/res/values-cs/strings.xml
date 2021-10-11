@@ -3147,7 +3147,6 @@
     <string name="paste_Osmand_data_folder_path">Zadejte cestu k adresáři s OsmAnd daty</string>
     <string name="change_osmand_data_folder_question">Změnit adresář pro OsmAnd data\?</string>
     <string name="move_maps_to_new_destination">Přesunout do nového umístění</string>
-    <string name="internal_app_storage_description">Vnitřní úložiště pro OsmAnd (skryté před uživateli a jinými aplikacemi).</string>
     <string name="change_data_storage_folder">Změnit složku pro ukládání dat</string>
     <string name="routeInfo_piste_type_name">Typ sjezdovky</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Nováček</string>
@@ -4212,4 +4211,19 @@
     <string name="service_is_not_available_please_try_later">Služba není dostupná, zkuste to prosím později</string>
     <string name="shared_string_files">Soubory</string>
     <string name="travel_route_types">Typy tras</string>
+    <string name="routing_attr_only_permitted_streets_description">Použít pouze výslovně povolené ulice</string>
+    <string name="search_title">Hledat: %1$s</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Upřednostnit dlažbu pro nevidomé</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Upřednostnit dlažbu pro nevidomé</string>
+    <string name="routing_attr_allow_gate_name">Povolit použití bran</string>
+    <string name="routing_attr_allow_gate_description">Povolit použití bran</string>
+    <string name="routing_attr_only_permitted_streets_name">Pouze povolené ulice</string>
+    <string name="routing_attr_only_permitted_ways_name">Pouze povolené cesty</string>
+    <string name="routing_attr_only_permitted_ways_description">Použít pouze výslovně povolené cesty (polní cesty, stezky, atd.)</string>
+    <string name="routing_attr_prefer_horse_routes_name">Upřednostnit trasy pro koně</string>
+    <string name="routing_attr_prefer_horse_routes_description">Upřednostnit trasy pro koně</string>
+    <string name="horseback_riding">Jízda na koni</string>
+    <string name="shared_string_mini">mini</string>
+    <string name="sample_wikivoyage">Ukázka Wikivoyage</string>
+    <string name="icon_group_nautical">Plavební</string>
 </resources>

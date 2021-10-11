@@ -57,7 +57,6 @@ import androidx.core.app.ActivityCompat;
 public class OsmAndLocationProvider implements SensorEventListener {
 
 	public static final int REQUEST_LOCATION_PERMISSION = 100;
-	public static final int TYPE_ORIENTATION_Q = 27;
 
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
 
@@ -407,6 +406,16 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		} : null) : null;
 	}
 
+	public boolean hasOrientaionSensor() {
+		SensorManager sensorMgr = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
+		return hasOrientaionSensor(sensorMgr);
+	}
+
+	public boolean hasOrientaionSensor(@NonNull SensorManager sensorMgr) {
+		return sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION) != null
+				|| sensorMgr.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) != null;
+	}
+
 	public synchronized void registerOrUnregisterCompassListener(boolean register) {
 		if (sensorRegistered && !register) {
 			Log.d(PlatformUtil.TAG, "Disable sensor");
@@ -416,7 +425,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		} else if (!sensorRegistered && register) {
 			Log.d(PlatformUtil.TAG, "Enable sensor");
 			SensorManager sensorMgr = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
-			if (app.getSettings().USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
+			if (app.getSettings().USE_MAGNETIC_FIELD_SENSOR_COMPASS.get() || !hasOrientaionSensor(sensorMgr)) {
 				Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 				if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
 					Log.e(PlatformUtil.TAG, "Sensor accelerometer could not be enabled");
@@ -426,17 +435,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					Log.e(PlatformUtil.TAG, "Sensor magnetic field could not be enabled");
 				}
 			} else {
-				Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+				Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 				if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
-					Log.e(PlatformUtil.TAG, "Sensor rotation could not be enabled. s=" + s);
-					s = sensorMgr.getDefaultSensor(TYPE_ORIENTATION_Q);
+					Log.e(PlatformUtil.TAG, "Sensor orientation could not be enabled.");
+					s = sensorMgr.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 					if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
-						Log.e(PlatformUtil.TAG, "Sensor orientation (27) could not be enabled. s=" + s);
+						Log.e(PlatformUtil.TAG, "Sensor rotation could not be enabled.");
 					}
-				}
-				List<Sensor> sensorsList = sensorMgr.getSensorList(Sensor.TYPE_ALL);
-				for (Sensor sensor : sensorsList) {
-					Log.d(PlatformUtil.TAG, sensor.toString());
 				}
 			}
 			sensorRegistered = true;
@@ -498,8 +503,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					case Sensor.TYPE_MAGNETIC_FIELD:
 						System.arraycopy(event.values, 0, mGeoMags, 0, 3);
 						break;
+					case Sensor.TYPE_ORIENTATION:
 					case Sensor.TYPE_ROTATION_VECTOR:
-					case TYPE_ORIENTATION_Q:
 						val = event.values[0];
 						break;
 					default:
