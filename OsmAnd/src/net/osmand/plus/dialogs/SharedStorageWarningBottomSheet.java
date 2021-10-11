@@ -63,6 +63,11 @@ public class SharedStorageWarningBottomSheet extends MenuBottomSheetDialogFragme
 		dismiss();
 	}
 
+	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {
+		return DataStorageHelper.isCurrentStorageShared(app)
+				&& !app.getSettings().SHARED_STORAGE_WARNING_DIALOG_SHOWN.get();
+	}
+
 	public static void showInstance(@NonNull MapActivity mapActivity) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
@@ -72,11 +77,5 @@ public class SharedStorageWarningBottomSheet extends MenuBottomSheetDialogFragme
 			SharedStorageWarningBottomSheet fragment = new SharedStorageWarningBottomSheet();
 			fragment.show(fragmentManager, TAG);
 		}
-	}
-
-	public static boolean shouldShowStorageWarning(@NonNull OsmandApplication app) {
-		return DataStorageHelper.isCurrentStorageShared(app)
-				&& WhatsNewDialogFragment.isGone()
-				&& !app.getSettings().SHARED_STORAGE_WARNING_DIALOG_SHOWN.get();
 	}
 }

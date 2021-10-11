@@ -245,20 +245,15 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	}
 
 	public static void showFullArticle(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
-		CustomTabsIntent customTabsIntent = createCustomTabsIntent(context, uri, nightMode);
+		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
+				.build();
+		customTabsIntent.intent.setData(uri);
 		if (AndroidUtils.isIntentSafe(context, customTabsIntent.intent)) {
 			customTabsIntent.launchUrl(context, uri);
 		} else {
 			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 		}
-	}
-
-	public static CustomTabsIntent createCustomTabsIntent(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
-		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
-				.build();
-		customTabsIntent.intent.setData(uri);
-		return customTabsIntent;
 	}
 
 	@Override

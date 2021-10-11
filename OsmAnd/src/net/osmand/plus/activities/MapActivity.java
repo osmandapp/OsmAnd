@@ -706,9 +706,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		dashboardOnMap.updateLocation(true, true, false);
 
-		if (SharedStorageWarningBottomSheet.shouldShowStorageWarning(app)) {
-			SecondSplashScreenFragment.SHOW = false;
-			SharedStorageWarningBottomSheet.showInstance(this);
+		if (getFragment(WhatsNewDialogFragment.TAG) == null || WhatsNewDialogFragment.wasNotShown()) {
+			if (SharedStorageWarningBottomSheet.dialogShowRequired(app)) {
+				SecondSplashScreenFragment.SHOW = false;
+				SharedStorageWarningBottomSheet.showInstance(this);
+			}
 		}
 
 		getMyApplication().getNotificationHelper().refreshNotifications();

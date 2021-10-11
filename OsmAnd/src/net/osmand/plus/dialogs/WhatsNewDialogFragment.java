@@ -9,14 +9,12 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -24,20 +22,9 @@ import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
 
 public class WhatsNewDialogFragment extends DialogFragment {
 
-	private static final String TAG = WhatsNewDialogFragment.class.getSimpleName();
+	public static final String TAG = WhatsNewDialogFragment.class.getSimpleName();
 
-	private static final int OPEN_WIKIPEDIA_ARTICLE_REQUEST = 2001;
-
-	private static boolean show = true;
-	private static boolean showedAndClosedArticle = false;
-	private static boolean articleNotShown = true;
-	private static boolean dismissed;
-
-	@Override
-	public void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		dismissed = false;
-	}
+	private static boolean notShown = true;
 
 	@NonNull
 	@Override
@@ -48,7 +35,7 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
 		builder.setTitle(getString(R.string.whats_new) + " " + appVersion)
 				.setMessage(getString(R.string.release_4_0))
-				.setNegativeButton(R.string.shared_string_close, null);
+				.setNegativeButton(R.string.shared_string_close, (dialog, which) -> showSharedStorageWarningIfRequired());
 		builder.setPositiveButton(R.string.read_more, (dialog, which) -> {
 			showArticle();
 			dismiss();
@@ -62,31 +49,24 @@ public class WhatsNewDialogFragment extends DialogFragment {
 			OsmandApplication app = requireMyApplication();
 			Uri uri = Uri.parse(LATEST_CHANGES_URL);
 			boolean nightMode = !app.getSettings().isLightContent();
-			CustomTabsIntent customTabsIntent = WikipediaDialogFragment.createCustomTabsIntent(mapActivity, uri, nightMode);
-
-			if (AndroidUtils.isIntentSafe(mapActivity, customTabsIntent.intent)) {
-				ActivityResultListener listener = new ActivityResultListener(OPEN_WIKIPEDIA_ARTICLE_REQUEST,
-						(resultCode, resultData) -> showedAndClosedArticle = true);
-				mapActivity.registerActivityResultListener(listener);
-				startActivityForResult(customTabsIntent.intent, OPEN_WIKIPEDIA_ARTICLE_REQUEST);
-			} else {
-				app.showToastMessage(R.string.no_activity_for_intent);
-				articleNotShown = true;
-			}
+			WikipediaDialogFragment.showFullArticle(mapActivity, uri, nightMode);
 		}
 	}
 
 	@Override
-	public void onDismiss(@NonNull DialogInterface dialog) {
-		dismissed = true;
+	public void onCancel(@NonNull DialogInterface dialog) {
+		super.onCancel(dialog);
+		showSharedStorageWarningIfRequired();
+	}
+
+	private void showSharedStorageWarningIfRequired() {
 		MapActivity mapActivity = getMapActivity();
-		if (articleNotShown && mapActivity != null) {
+		if (mapActivity != null) {
 			OsmandApplication app = requireMyApplication();
-			if (SharedStorageWarningBottomSheet.shouldShowStorageWarning(app)) {
+			if (SharedStorageWarningBottomSheet.dialogShowRequired(app)) {
 				SharedStorageWarningBottomSheet.showInstance(mapActivity);
 			}
 		}
-		super.onDismiss(dialog);
 	}
 
 	@Nullable
@@ -99,17 +79,17 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		return ((OsmandApplication) requireActivity().getApplication());
 	}
 
-	public static boolean isGone() {
-		return show || showedAndClosedArticle || articleNotShown && dismissed;
+	public static boolean wasNotShown() {
+		return notShown;
 	}
 
 	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {
-		return app.getAppInitializer().checkAppVersionChanged() && show;
+		return app.getAppInitializer().checkAppVersionChanged() && notShown;
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			show = false;
+			notShown = false;
 			WhatsNewDialogFragment fragment = new WhatsNewDialogFragment();
 			fragment.show(fragmentManager, TAG);
 			return true;
