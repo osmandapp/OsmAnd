@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.FavouritePoint.BackgroundType;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ColorUtilities;
@@ -36,6 +37,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -539,9 +541,9 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		ItemViewHolder(View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			description = (TextView) itemView.findViewById(R.id.description);
-			icon = (ImageView) itemView.findViewById(R.id.icon);
+			title = itemView.findViewById(R.id.title);
+			description = itemView.findViewById(R.id.description);
+			icon = itemView.findViewById(R.id.icon);
 		}
 	}
 
@@ -664,7 +666,12 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				int defaultFavoritesColor = ContextCompat.getColor(app, R.color.color_favorite);
 				int pointColor = app.getFavorites().getColorWithCategory(point, defaultFavoritesColor);
 				int pointIconRes = point.getIconId() == 0 ? R.drawable.ic_action_favorite : point.getIconId();
-				Drawable pointIcon = app.getUIUtilities().getPaintedIcon(pointIconRes, pointColor);
+				BackgroundType backgroundType = point.getBackgroundType() == null
+						? BackgroundType.CIRCLE
+						: point.getBackgroundType();
+
+				Drawable pointIcon = PointImageDrawable.getOrCreate(app, pointColor, false,
+						false, pointIconRes, backgroundType);
 				favoriteViewHolder.icon.setImageDrawable(pointIcon);
 
 				String description = point.getCategory().isEmpty()
