@@ -44,6 +44,7 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.NavigationService;
@@ -402,6 +403,7 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 			return;
 		}
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final GpxSelectionHelper gpxSelectionHelper = app.getSelectedGpxHelper();
 		final CardView buttonShowTrack = showTrackContainer.findViewById(R.id.compound_container);
 		final CardView buttonAppearance = showTrackContainer.findViewById(R.id.additional_button_container);
 
@@ -409,33 +411,30 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		if (showTrackId != null) {
 			showTrackTextView.setText(showTrackId);
 		}
+
+		boolean showCurrentTrack = gpxSelectionHelper.updateCurrentTrackVisibility();
 		final CompoundButton showTrackCompound = buttonShowTrack.findViewById(R.id.compound_button);
-		showTrackCompound.setChecked(app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null);
+		showTrackCompound.setChecked(showCurrentTrack);
 		UiUtilities.setupCompoundButton(showTrackCompound, nightMode, GLOBAL);
 
 		setShowTrackItemBackground(buttonShowTrack, showTrackCompound.isChecked(), nightMode);
-		buttonShowTrack.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				boolean checked = !showTrackCompound.isChecked();
-				showTrackCompound.setChecked(checked);
-				app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), checked, false);
-				setShowTrackItemBackground(buttonShowTrack, checked, nightMode);
-				createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, checked, null);
-			}
+		buttonShowTrack.setOnClickListener(v -> {
+			boolean checked = !showTrackCompound.isChecked();
+			showTrackCompound.setChecked(checked);
+			app.getSettings().CURRENT_TRACK_SHOW.set(checked);
+			gpxSelectionHelper.selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), checked, false);
+			setShowTrackItemBackground(buttonShowTrack, checked, nightMode);
+			createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, checked, null);
 		});
 
 		updateTrackIcon(app, trackAppearanceIcon);
 		createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, showTrackCompound.isChecked(), null);
 		if (activity instanceof MapActivity) {
-			buttonAppearance.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (showTrackCompound.isChecked()) {
-						hideOnClickButtonAppearance.run();
-						SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
-						TrackAppearanceFragment.showInstance((MapActivity) activity, selectedGpxFile, target);
-					}
+			buttonAppearance.setOnClickListener(v -> {
+				if (showTrackCompound.isChecked()) {
+					hideOnClickButtonAppearance.run();
+					SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+					TrackAppearanceFragment.showInstance((MapActivity) activity, selectedGpxFile, target);
 				}
 			});
 		}

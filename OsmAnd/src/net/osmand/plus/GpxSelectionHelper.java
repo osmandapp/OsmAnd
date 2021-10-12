@@ -33,6 +33,7 @@ import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpxSplitType;
 import net.osmand.util.Algorithms;
 
@@ -769,6 +770,23 @@ public class GpxSelectionHelper {
 		if (selectedGPXFiles.contains(selectedGpxFile)) {
 			saveCurrentSelections();
 		}
+	}
+
+	public boolean updateCurrentTrackVisibility() {
+		OsmandSettings settings = app.getSettings();
+		boolean shouldShow = false;
+		if (settings.CURRENT_TRACK_SHOW.isSet()) {
+			shouldShow = settings.CURRENT_TRACK_SHOW.get();
+		} else {
+			for (SelectedGpxFile gpx : selectedGPXFiles) {
+				if (!gpx.isShowCurrentTrack()) {
+					shouldShow = true;
+					break;
+				}
+			}
+		}
+		selectGpxFile(savingTrackHelper.getCurrentGpx(), shouldShow, false);
+		return shouldShow;
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
