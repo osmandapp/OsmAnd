@@ -28,7 +28,7 @@
     <string name="shared_string_details">Details</string>
     <string name="shared_app_storage_description">Shared memory is no longer available due to changes in the storage access rules in Android.</string>
     <string name="internal_app_storage_description">Internal storage, hidden from user and other apps, so no one except OsmAnd can’t get access to your data</string>
-    <string name="shared_storage_warning_description">Starting with the next update of OsmAnd, the app will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared strorage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
+    <string name="shared_storage_warning_description">Starting with the next update of OsmAnd, the app will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared storage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
     <string name="shared_storage_warning_title">Changes in storage access rules</string>
     <string name="purchases_feature_desc_android_auto">OsmAnd offline maps and navigation on the screen of your vehicle. Integrate conveniently with your vehicle\'s controls.</string>
     <string name="icon_group_nautical">Nautical</string>
