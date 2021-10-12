@@ -4028,4 +4028,9 @@
     <string name="poi_destination">Úti cél</string>
     <string name="poi_resort_hunting">Vadászbázis</string>
     <string name="poi_tourist_camp">Turistatábor</string>
+    <string name="poi_prep_school">Tanoda</string>
+    <string name="poi_ticket_validator">Jegyérvényesítő</string>
+    <string name="poi_geoglyph">Geoglifa</string>
+    <string name="poi_country_store">Vidéki élet kellékeinek boltja</string>
+    <string name="poi_satellite_dish">Parabolaantenna</string>
 </resources>
