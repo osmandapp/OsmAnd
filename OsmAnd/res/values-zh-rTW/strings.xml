@@ -4335,4 +4335,5 @@
     <string name="upload_gpx_description_hint">留空，軌跡名稱將用作描述。輸入的描述將會套用於每個軌跡。</string>
     <string name="search_title">搜尋：%1$s</string>
     <string name="exit_pan_mode_descr">按選取退出平移模式</string>
+    <string name="icon_group_nautical">航海</string>
 </resources>

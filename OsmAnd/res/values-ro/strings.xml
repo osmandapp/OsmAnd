@@ -4348,4 +4348,5 @@
     <string name="upload_gpx_description_hint">Dacă se lasă gol, numele pieselor vor fi folosite ca descriere. Descrierea introdusă va fi aplicată pentru fiecare piesă.</string>
     <string name="search_title">Căutare: %1$s</string>
     <string name="routing_attr_allow_gate_name">Permite utilizarea porții</string>
+    <string name="icon_group_nautical">Nautică</string>
 </resources>
