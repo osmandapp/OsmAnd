@@ -44,6 +44,12 @@ public class MapPoiTypes {
 	public static final String OSM_WIKI_CATEGORY = "osmwiki";
 	public static final String SPEED_CAMERA = "speed_camera";
 
+	public static final String ROUTE_ARTICLE = "route_article";
+	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
+	public static final String CATEGORY = "category";
+	public static final String ROUTE_TRACK = "route_track";
+	public static final String ROUTE_TRACK_POINT = "route_track_point";
+
 	private PoiTranslator poiTranslator = null;
 	private boolean init;
 	Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();

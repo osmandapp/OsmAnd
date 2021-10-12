@@ -10,6 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
 -->
+    <string name="shared_string_articles">Articles</string>
+    <string name="included_categories">Included categories</string>
     <string name="release_4_1">
     • Cloud backup\n\n
     • Added initial support for Android Auto\n\n

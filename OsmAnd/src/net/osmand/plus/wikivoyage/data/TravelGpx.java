@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import net.osmand.data.Amenity;
 
 import static net.osmand.GPXUtilities.*;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK_POINT;
 
 public class TravelGpx extends TravelArticle {
 
@@ -15,9 +16,9 @@ public class TravelGpx extends TravelArticle {
 	public static final String MAX_ELEVATION = "max_ele";
 	public static final String MIN_ELEVATION = "min_ele";
 	public static final String AVERAGE_ELEVATION = "avg_ele";
+	public static final String ROUTE_RADIUS = "route_radius";
 	public static final String USER = "user";
 	public static final String ACTIVITY_TYPE = "route_activity_type";
-	public static final String ROUTE_TRACK_POINT = "route_track_point";
 
 	public String user;
 	public String activityType;
