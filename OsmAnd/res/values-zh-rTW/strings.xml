@@ -4336,4 +4336,14 @@
     <string name="search_title">搜尋：%1$s</string>
     <string name="exit_pan_mode_descr">按選取退出平移模式</string>
     <string name="icon_group_nautical">航海</string>
+    <string name="internal_app_storage_description">內部儲存空間，對使用者與其他應用程式隱藏，因此除了 OsmAnd 以外都無法存取您的資料</string>
+    <string name="shared_app_storage_description">因為 Android 中儲存空間存取規則的變更，所以分享記憶體不再可用。</string>
+    <string name="shared_storage_warning_title">儲存空間存取規則的變更</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd 離線地圖與您車輛螢幕上的導航。方便地與您的車輛控制裝置整合。</string>
+    <string name="shared_string_details">詳細資訊</string>
+    <string name="rendering_attr_noNatureReserves_name">自然保留區</string>
+    <string name="shared_storage_warning_description">從 OsmAnd 的下次更新開始，因為 Android 中儲存空間存取規則的變更，所以分享記憶體不再可用。
+\n
+\n請將儲存空間從共享儲存空間變更為其他可用的儲存空間，若不這樣做，應用程式將無法存取您的資料：包含離線地圖、GPX 軌跡與任何其他東西。</string>
+    <string name="rendering_attr_noNatureReserves_description">隱藏自然保留區、保護區與國家公園。</string>
 </resources>
