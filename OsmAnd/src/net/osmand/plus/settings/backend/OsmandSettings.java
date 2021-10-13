@@ -2185,7 +2185,7 @@ public class OsmandSettings {
 		edit.putInt(MAP_ZOOM_TO_SHOW, zoom);
 		edit.commit();
 		objectToShow = toShow;
-		if (addToHistory) {
+		if (addToHistory && pointDescription != null) {
 			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription);
 		}
 	}

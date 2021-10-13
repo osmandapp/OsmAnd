@@ -556,7 +556,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		addDestination(latLon, null);
 	}
 
-	public void addDestination(@NonNull LatLon latLon, @Nullable String name) {
+	public void addDestination(@NonNull LatLon latLon, @Nullable PointDescription pointDescription) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && !OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
 			requestedLatLon = latLon;
@@ -564,7 +564,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
 					REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION);
 		} else {
-			PointDescription pointDescription = getPointDescriptionForTarget(latLon, name);
+			if (pointDescription == null) {
+				pointDescription = getPointDescriptionForTarget(latLon, null);
+			}
 			if (mapActivity != null) {
 				mapActivity.getContextMenu().close();
 			}
@@ -601,10 +603,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		replaceDestination(latLon, null);
 	}
 
-	public void replaceDestination(@NonNull LatLon latLon, @Nullable String name) {
+	public void replaceDestination(@NonNull LatLon latLon, @Nullable PointDescription pointDescription) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-			PointDescription pointDescription = getPointDescriptionForTarget(latLon, name);
+			if (pointDescription == null) {
+				pointDescription = getPointDescriptionForTarget(latLon, null);
+			}
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.getContextMenu().close();
@@ -612,7 +616,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			final TargetPointsHelper targets = app.getTargetPointsHelper();
 			targets.navigateToPoint(latLon, true, -1, pointDescription);
 		} else {
-			addDestination(latLon, name);
+			addDestination(latLon, pointDescription);
 		}
 	}
 
