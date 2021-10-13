@@ -3828,4 +3828,16 @@
     <string name="contributions_may_calculate_with_delay">Les aportacions podrien trigar unes hores en incloure\'s.</string>
     <string name="map_updates_are_unavailable_yet">Encara no hi han actualitzacions del mapa :-(</string>
     <string name="connect_track_points_as">Connecta les fites</string>
+    <string name="search_title">Cerca: %1$s</string>
+    <string name="icon_group_nautical">Nàutica</string>
+    <string name="exit_pan_mode_descr">Premeu Selecciona per sortir del mode panoràmic</string>
+    <string name="upload_gpx_description_hint">Deixeu-ho buit, els noms de les traces s\'utilitzaran com a descripció. S\'aplicarà la descripció introduïda per a cada traça.</string>
+    <string name="shared_app_storage_description">La memòria compartida ja no està disponible donat els canvis en les normes d\'accés a l\'emmagatzematge d\'Android.</string>
+    <string name="internal_app_storage_description">Emmagatzematge intern, amagat a l\'usuari i a d\'altres aplicacions, fent que ningú excepte OsmAnd pot accedir a les vostres dades</string>
+    <string name="shared_storage_warning_title">Canvis en les normes d\'accés a l\'emmagatzematge</string>
+    <string name="purchases_feature_desc_android_auto">Mapes locals OsmAnd i navegació a la pantalla del vostre vehicle. S\'integra amb els controls del vostre vehicle.</string>
+    <string name="shared_string_details">Detalls</string>
+    <string name="shared_storage_warning_description">Des de la propera actualització d\'OsmAnd, l\'aplicació perdrà l\'accés a l\'emmagatzematge compartit, per la modificació de les regles d\'accés a l\'emmagatzematge a Android.
+\n
+\nCanvieu l\'emmagatzematge compartit a un altre disponible; si no feu això, l\'aplicació perdrà l\'accés a les vostres dades: siguin els mapes locals, les traces GPX com tota la resta.</string>
 </resources>
