@@ -277,11 +277,12 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 			View itemView = inflater.inflate(R.layout.list_item_icon_and_menu, null, false);
 			AndroidUtils.setBackground(itemView, UiUtilities.getSelectableDrawable(app));
 			String name;
+			String attrName = type.replace(ACTIVITY_TYPE + "_", "");
 			PoiType poiType = poiTypes.getTextPoiAdditionalByKey(type);
 			if (poiType != null) {
 				name = poiType.getTranslation();
 			} else {
-				name = Algorithms.capitalizeFirstLetterAndLowercase(type.replace(ACTIVITY_TYPE + "_", ""));
+				name = Algorithms.capitalizeFirstLetterAndLowercase(attrName);
 			}
 			updateTypeItemView(itemView, name, pref.get());
 			itemView.setOnClickListener(v -> {
@@ -290,7 +291,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 				updateTypeItemView(itemView, name, selected);
 				app.runInUIThread(() -> {
 					RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
-					rendererHelper.updateRouteTypeVisibility(storage, name, selected);
+					rendererHelper.updateRouteTypeVisibility(storage, attrName, selected);
 					app.getOsmandMap().refreshMap(true);
 					app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
 				});
