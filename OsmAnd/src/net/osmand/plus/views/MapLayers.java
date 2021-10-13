@@ -199,6 +199,11 @@ public class MapLayers {
 		});
 		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
 
+		createAdditionalLayers();
+	}
+
+	public void createAdditionalLayers() {
+		OsmandApplication app = getApplication();
 		OsmandPlugin.createLayers(ctx, null);
 		app.getAppCustomization().createLayers(ctx, null);
 		app.getAidlApi().registerMapLayers(ctx);

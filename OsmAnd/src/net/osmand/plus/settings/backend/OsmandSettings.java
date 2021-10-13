@@ -2792,7 +2792,7 @@ public class OsmandSettings {
 		return customBooleanRoutingProps.get(attrName);
 	}
 
-	public final OsmandPreference<Boolean> SHOW_TRAVEL = new BooleanPreference(this, "show_travel", true).makeProfile().cache();
+	public final OsmandPreference<Boolean> SHOW_TRAVEL = new BooleanPreference(this, "show_travel_routes", false).makeProfile().cache();
 
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference(this, "routing_recalc_distance", 0.f).makeProfile();
 	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference(this, "routing_straight_angle", 30.f).makeProfile();
