@@ -890,8 +890,8 @@
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Foto maken</string>
     <string name="recording_context_menu_precord">Foto maken</string>
-    <string name="stop_routing_confirm">Navigatie stoppen?</string>
-    <string name="clear_dest_confirm">Bestemming (en tussenpunten) wissen?</string>
+    <string name="stop_routing_confirm">Navigatie stoppen\?</string>
+    <string name="clear_dest_confirm">Bestemming (en tussenpunten) wissen\?</string>
     <string name="precise_routing_mode_descr">Schakel nauwkeurige routeberekening in om precieze routes te berekenen zonder fouten. Nog beperkt in afstand en langzaam.</string>
     <string name="precise_routing_mode">Nauwkeurige routeberekening (alpha)</string>
     <string name="local_indexes_cat_av">Audio/video-gegevens</string>
@@ -1189,7 +1189,7 @@
     <string name="rendering_attr_showAccess_name">Toon tol en toegangsverboden</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kwaliteit van wegen tonen</string>
     <string name="rendering_attr_showSurfaces_name">Wegoppervlak tonen</string>
-    <string name="rendering_attr_showCycleRoutes_name">Fietsroutes tonen</string>
+    <string name="rendering_attr_showCycleRoutes_name">Fietsroutes</string>
     <string name="map_preferred_locale_descr">Gewenste taal voor aanduidingen op de kaart (indien niet beschikbaar worden Engelse of plaatselijke namen gebruikt).</string>
     <string name="map_preferred_locale">Taal voor teksten op de kaart</string>
     <string name="local_map_names">Plaatselijke namen</string>
@@ -1219,7 +1219,7 @@
     <string name="pause_navigation">navigatie pauzeren</string>
     <string name="rendering_attr_alpineHiking_name">Alpinewandelschaal (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Paden volgens SAC-schaal kleuren.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Extra laag met symbolen van wandelroutes</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Wandelroutes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Paden speciaal kleuren.</string>
     <string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
     <string name="arrival_distance_factor_early">Vroegtijdig</string>
@@ -1903,7 +1903,7 @@
     <string name="full_report">Volledig Verslag</string>
     <string name="open_street_map_login_and_pass">OSM loginnaam and wachtwoord</string>
     <string name="report">Verslag</string>
-    <string name="file_name_containes_illegal_char">Bestandsnaam bevat ongeldig teken</string>
+    <string name="file_name_containes_illegal_char">Ongeldig teken in bestandsnaam</string>
     <string name="no_map_markers_found">Markeervlaggetjes kun je via de kaart toevoegen</string>
     <string name="no_waypoints_found">Geen punten gevonden</string>
     <string name="rendering_value_thin_name">Dun</string>
@@ -4247,4 +4247,31 @@
 \n</string>
     <string name="osmand_pro_tagline">Geniet van een maximum aan functies</string>
     <string name="shared_string_details">Details</string>
+    <string name="shared_app_storage_description">Het gedeeld geheugen is niet langer beschikbaar wegens veranderingen in de opslag gebruik regels van Andriod.</string>
+    <string name="internal_app_storage_description">Interne opslag, verborgen voor gebruikers en andere apps, dus niemand buiten OsmAnd heeft toegang tot jouw gegevens.</string>
+    <string name="shared_string_articles">Artikelen</string>
+    <string name="shared_storage_warning_title">Veranderingen in de opslag gebruik regels</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd offline kaarten en navigatie op het scherm van je wagen met gemakkelijke integratie met de besturing van je wagen.</string>
+    <string name="included_categories">Inbegrepen categorieën</string>
+    <string name="release_4_1">• Initiële ondersteuning voor Android Auto
+\n
+\n• Geüpdatete gebruikersinterface om UTM coördinaten te zoeken
+\n
+\n• Mogelijkheid om recent gebruikte iconen te zien bij favorieten
+\n
+\n• De routeplanning zal het geselecteerde profiel gebruiken na opstart
+\n
+\n• De Mapilarylaag is nu standaard uitgeschakeld
+\n
+\n• Een nieuw scherm toegevoegd om de geschiedenis te beheren in de app
+\n
+\n• De maporiëntatie wordt niet gereset na het herstarten van de app
+\n
+\n• Verbeterde SRTM hoogte markering
+\n
+\n• Weergave van Arabisch op de map opgelost
+\n
+\n• Verscheidene routingsproblemen opgelost
+\n
+\n</string>
 </resources>
