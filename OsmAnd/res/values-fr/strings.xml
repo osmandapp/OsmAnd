@@ -4304,7 +4304,7 @@
 \n
 \n• Distance par appui déplacé de la règle Rayon dans une option séparée
 \n
-\n• Planifier l’itinéraire: Vous pouvez maintenant modifier les options de navigation, accéder à la configuration de la carte et effectuer une recherche sans quitter la planification de l’itinéraire
+\n• Planifier l’itinéraire : Vous pouvez maintenant modifier les options de navigation, accéder à la configuration de la carte et effectuer une recherche sans quitter la planification de l’itinéraire
 \n
 \n• Nouvel écran « Achat » avec des informations d’achat détaillées
 \n
@@ -4337,4 +4337,14 @@
     <string name="upload_gpx_description_hint">Si vide, la description sera alimentée avec le nom de trace. La description saisie sera utilisée pour chaque trace.</string>
     <string name="exit_pan_mode_descr">Appuyez sur Sélectionner pour quitter le mode panoramique</string>
     <string name="icon_group_nautical">Nautisme</string>
+    <string name="shared_storage_warning_title">Évolutions des règles d\'accès au stockage</string>
+    <string name="shared_app_storage_description">La mémoire partagée n\'est plus disponible depuis l\'évolution des règles Android d\'accès au stockage.</string>
+    <string name="internal_app_storage_description">Stockage interne, masqué à l\'utilisateur et aux autres applications ; seul OsmAnd peut accéder à vos données.</string>
+    <string name="purchases_feature_desc_android_auto">Cartes et navigation hors ligne OsmAnd s\'affichant sur l\'écran de votre véhicule et répondant aux commandes de votre véhicule.</string>
+    <string name="shared_string_details">Détails</string>
+    <string name="rendering_attr_noNatureReserves_name">Réserve naturelle</string>
+    <string name="rendering_attr_noNatureReserves_description">Masquer les réserves naturelles, les zones protégées et les parcs nationaux.</string>
+    <string name="shared_storage_warning_description">Dès la prochaine mise à jour d\'OsmAnd et en raison d\'évolutions apportées par Android aux règles d\'accès au stockage, OsmAnd ne pourra plus accéder au stockage partagé.
+\n
+\nVeuillez modifier le stockage de stockage partagé à stockage disponible, sans quoi OsmAnd ne pourra plus accéder à vos données (ce qui inclut les cartes hors-ligne, vos traces GPX et bien plus encore ...).</string>
 </resources>

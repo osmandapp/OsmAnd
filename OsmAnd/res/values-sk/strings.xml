@@ -4338,4 +4338,14 @@
     <string name="exit_pan_mode_descr">Stlačte \"Zvoliť\" pre opustenie režimu posúvania</string>
     <string name="upload_gpx_description_hint">Ak necháte prázdne, názvy stôp budú použité ako popis. Zadaný popis bude aplikovaný na každú stopu.</string>
     <string name="icon_group_nautical">Námorné</string>
+    <string name="shared_storage_warning_description">Od nasledujúcej verzie OsmAndu aplikácia nebude mať prístup k Zdieľanému úložisku, kvôli zmenám prístupu k úložisku v Androide.
+\n
+\nProsím zmeňte úložisko zo Zdieľaného úložiska na dostupné úložisko, inak aplikácia stratí prístup k vašim údajom: vrátane stiahnutých máp, GPX stôp a všetkému ostatnému.</string>
+    <string name="shared_storage_warning_title">Zmeny v pravidlách prístupu k úložisku</string>
+    <string name="internal_app_storage_description">Interné úložisko, skryté pred používateľom a inými aplikáciami, kde nikto okrem OsmAnd nezíska vaše údaje</string>
+    <string name="shared_string_details">Podrobnosti</string>
+    <string name="shared_app_storage_description">Zdieľaná pamäť už nie je dostupná kvôli zmenám prístupu k úložisku v Androide.</string>
+    <string name="rendering_attr_noNatureReserves_description">Skryť prírodné rezervácie, chránené oblasti a národné parky.</string>
+    <string name="purchases_feature_desc_android_auto">Mapy a navigácia OsmAnd na obrazovke vášho vozidla. Integrujte pohodlne do ovládania vášho vozidla.</string>
+    <string name="rendering_attr_noNatureReserves_name">Prírodná rezervácia</string>
 </resources>

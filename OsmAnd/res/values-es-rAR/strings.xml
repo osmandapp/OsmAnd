@@ -4343,4 +4343,16 @@
     <string name="routing_attr_prefer_tactile_paving_name">Preferir pavimento táctil</string>
     <string name="search_title">Buscar: %1$s</string>
     <string name="upload_gpx_description_hint">Al dejarlo vacío, serán utilizados los nombres de las trazas como descripción. La descripción ingresada se aplica a cada traza.</string>
+    <string name="exit_pan_mode_descr">Pulsa «Elegir» para salir del modo panorámico</string>
+    <string name="shared_storage_warning_description">A partir de la próxima actualización de OsmAnd, la aplicación perderá el acceso al almacenamiento compartido, debido a los cambios en las reglas de acceso al almacenamiento en Android.
+\n
+\nPor favor, cambia de almacenamiento compartido a almacenamiento disponible, si esto no se hace la aplicación perderá el acceso a los datos: incluyendo mapas sin conexión, trazas GPX y todo lo demás.</string>
+    <string name="shared_storage_warning_title">Cambios en las normas de acceso al almacenamiento</string>
+    <string name="purchases_feature_desc_android_auto">Mapas y navegación sin conexión de OsmAnd, en la pantalla de su vehículo. Se integra cómodamente con los controles de tu vehículo.</string>
+    <string name="icon_group_nautical">Náutico</string>
+    <string name="shared_app_storage_description">La memoria compartida ya no está disponible debido a los cambios en las reglas de acceso al almacenamiento en Android.</string>
+    <string name="shared_string_details">Detalles</string>
+    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
+    <string name="internal_app_storage_description">Almacenamiento interno, oculto para el usuario y otras aplicaciones, por lo que nadie (excepto OsmAnd) puede acceder a los datos</string>
+    <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturales, áreas protegidas y parques nacionales.</string>
 </resources>

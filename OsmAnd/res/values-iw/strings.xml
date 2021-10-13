@@ -4295,4 +4295,6 @@
 \nניתן לנהל או לבטל את המינוי שלך דרך ההגדרות שלך ב־Amazon בכל עת.</string>
     <string name="search_title">חיפוש: %1$s</string>
     <string name="upload_gpx_description_hint">יש להשאיר ריק, שמות המסלולים ישמשו כתיאור. התיאור שנכתב יחול על כל אחד מהמסלולים.</string>
+    <string name="shared_app_storage_description">הזיכרון המשותף לא זמין עוד עקב שינויים בכללי גישה לאחסון ב־Android.</string>
+    <string name="shared_string_details">פרטים</string>
 </resources>

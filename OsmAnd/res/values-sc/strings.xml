@@ -4342,4 +4342,14 @@
     <string name="search_title">Chirca: %1$s</string>
     <string name="exit_pan_mode_descr">Incarca in Ischerta pro essire dae sa modalidade panoràmica</string>
     <string name="icon_group_nautical">Nàutica</string>
+    <string name="rendering_attr_noNatureReserves_description">Cua sas riservas naturales, sas àreas amparadas e sos parcos natzionales.</string>
+    <string name="shared_app_storage_description">Sa memòria cumpartzida no est prus a disponimentu pro neghe de modìficas a sas règulas de atzessu a s\'archiviatzione in Android.</string>
+    <string name="internal_app_storage_description">Memòria interna, cuada a s\'impreadore e a sas àteras aplicatziones, in manera chi nemos francu OsmAnd potzat atzèdere a sos datos tuos</string>
+    <string name="shared_storage_warning_title">Modìficas a sas règulas de atzessu a sa memòria</string>
+    <string name="purchases_feature_desc_android_auto">Mapas non in lìnia e navigatzione de OsmAnd in s\'ischermu de su veìculu tuo. S\'ìntegrat in manera discansosa cun sos controllos de su veìculu tuo.</string>
+    <string name="shared_storage_warning_description">Incumintzende dae s\'agiornamentu imbeniente de OsmAnd s\'aplicatzione at a pèrdere atzessu a sa memòria cumpartzida, pro neghe de modìficas a sas règulas de atzessu a sa memòria de Android.
+\n
+\nCàmbia s\'archiviatzione dae sa memòria cumpartzida a sa memòria a disponimentu. Si non l\'as a fàghere s\'aplicatzione at a pèrdere s\'atzessu a sos datos tuos: custu incluit sas mapas non in lìnias, sas rastas GPX e totu su restu.</string>
+    <string name="shared_string_details">Minujas</string>
+    <string name="rendering_attr_noNatureReserves_name">Riserva naturale</string>
 </resources>

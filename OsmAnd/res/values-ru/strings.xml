@@ -3833,7 +3833,7 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd использует MGRS, который похож на формат UTM NATO.</string>
-    <string name="use_native_pt">Развитие местного общественного транспорта</string>
+    <string name="use_native_pt">Нативные функции при расчёте общественного транспорта</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Добавьте не менее двух точек</string>
     <string name="message_need_calculate_route_before_show_graph">Данные %1$s доступны только для дорог, постройте маршрут с помощью «Маршрут между точками» для просмотра графиков.</string>
     <string name="enter_text_separated">Вводите теги через запятую.</string>
@@ -4351,4 +4351,12 @@
     <string name="exit_pan_mode_descr">Нажмите «Выбрать», чтобы выйти из режима панорамирования</string>
     <string name="sample_wikivoyage">Образец Викигида</string>
     <string name="icon_group_nautical">Морские</string>
+    <string name="shared_storage_warning_title">Изменения в правилах доступа к хранилищу</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd - оффлайн карты и навигация на экране вашего автомобиля. Удобная интеграция с органами управления вашего автомобиля.</string>
+    <string name="shared_storage_warning_description">Начиная со следующего обновления приложения, OsmAnd потеряет доступ к общему хранилищу в связи с изменением правил доступа к хранилищу в Android.
+\n
+\nИзмените хранилище с общего на доступное, если этого не сделать, приложение потеряет доступ к вашим данным: офлайн картам, GPX трекам и всему остальному.</string>
+    <string name="shared_app_storage_description">Общая память больше не доступна из-за изменений в правилах доступа к хранилищу в Android.</string>
+    <string name="shared_string_details">Детали</string>
+    <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений, никто кроме OsmAnd, не может получить доступ к вашим данным</string>
 </resources>
