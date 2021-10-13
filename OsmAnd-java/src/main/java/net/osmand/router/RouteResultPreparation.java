@@ -1335,6 +1335,14 @@ public class RouteResultPreparation {
 		}
 		
 		if (rs.keepLeft || rs.keepRight) {
+			//turn off keepLeft and keepRight for multi lane roads, when it doesn't affect turns
+			if (rawLanes.length > 1) {
+				List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
+				if (attachedRoutes.size() == 1 && getTurnLanesString(attachedRoutes.get(0)) == null) {
+					rs.keepLeft = false;
+					rs.keepRight = false;
+				}
+			}
 			String[] splitLaneOptions = turnLanes.split("\\|", -1);
 			int activeBeginIndex = findActiveIndex(rawLanes, splitLaneOptions, rs.leftLanes, true, 
 					rs.leftLanesInfo, rs.roadsOnLeft, rs.addRoadsOnLeft);
