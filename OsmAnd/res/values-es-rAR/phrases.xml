@@ -473,7 +473,7 @@
     <string name="poi_cabin">Cabaña</string>
     <string name="poi_lean_to">Cobertizo</string>
     <string name="poi_hunting_lodge">Pabellón de caza</string>
-    <string name="poi_place_of_worship">Lugar de culto</string>
+    <string name="poi_place_of_worship">Lugar de culto; Iglesia; Parroquia; Templo; Mezquita; Capilla; Monasterio</string>
     <string name="poi_religion_christian">Cristianismo</string>
     <string name="poi_religion_jewish">Judaísmo</string>
     <string name="poi_religion_muslim">Islamismo</string>
@@ -4027,7 +4027,7 @@
     <string name="poi_payment_calling_cards_no">No acepta tarjetas telefónicas</string>
     <string name="poi_manufacturer">Fabricante</string>
     <string name="poi_callable">Recibe llamadas</string>
-    <string name="poi_groundskeeping">Productos para mantenimiento de jardines</string>
+    <string name="poi_groundskeeping">Equipos de jardinería</string>
     <string name="poi_country_store">Productos de campo; Tienda de campo</string>
     <string name="poi_prep_school">Centro de tutorización; Academia de estudios;Profesor/a particular</string>
     <string name="poi_ticket_validator">Validador de entradas; Validador de billetes; Validador de boletos</string>
