@@ -17,11 +17,13 @@ import androidx.car.app.model.Action;
 import androidx.car.app.model.CarIcon;
 import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.lifecycle.Lifecycle;
 
 import net.osmand.Location;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 
 /**
@@ -33,6 +35,7 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	static final String URI_HOST = "navigation";
 
 	NavigationScreen navigationScreen;
+	RequestPurchaseScreen requestPurchaseScreen;
 	SurfaceRenderer navigationCarSurface;
 	Action settingsAction;
 
@@ -59,6 +62,11 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 		if (navigationCarSurface != null) {
 			navigationCarSurface.setMapView(mapView);
 		}
+	}
+
+	public boolean hasStarted() {
+		Lifecycle.State state = getLifecycle().getCurrentState();
+		return state == Lifecycle.State.STARTED || state == Lifecycle.State.RESUMED;
 	}
 
 	public boolean hasSurface() {
@@ -96,6 +104,13 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 					.show();
 		}
 
+		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
+		if (!InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
+			getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
+			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
+			return requestPurchaseScreen;
+		}
+
 		if (ActivityCompat.checkSelfPermission(getCarContext(), Manifest.permission.ACCESS_FINE_LOCATION)
 				!= PackageManager.PERMISSION_GRANTED) {
 			getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
@@ -103,6 +118,15 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 		}
 
 		return navigationScreen;
+	}
+
+	public void onPurchaseDone() {
+		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
+		if (requestPurchaseScreen != null && InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
+			requestPurchaseScreen.finish();
+			requestPurchaseScreen = null;
+			app.getOsmandMap().getMapView().setupOpenGLView();
+		}
 	}
 
 	@Override

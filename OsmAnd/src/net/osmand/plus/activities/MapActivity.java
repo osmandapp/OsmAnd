@@ -105,6 +105,7 @@ import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
@@ -463,6 +464,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void setupOpenGLView(boolean init) {
 		OsmandMapTileView mapView = getMapView();
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		View androidAutoPlaceholder = findViewById(R.id.AndroidAutoPlaceholder);
+		boolean useAndroidAuto = carNavigationSession != null && carNavigationSession.hasStarted()
+				&& InAppPurchaseHelper.isAndroidAutoAvailable(app);
 		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			ViewStub stub = findViewById(R.id.atlasMapRendererViewStub);
 			if (atlasMapRendererView == null) {
@@ -472,12 +476,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			}
 			OsmAndMapLayersView ml = findViewById(R.id.MapLayersView);
-			if (carNavigationSession == null || !carNavigationSession.hasSurface()) {
-				ml.setVisibility(View.VISIBLE);
-				ml.setMapView(mapView);
-			} else {
+			if (useAndroidAuto) {
 				ml.setVisibility(View.GONE);
 				ml.setMapView(null);
+				androidAutoPlaceholder.setVisibility(View.VISIBLE);
+			} else {
+				ml.setVisibility(View.VISIBLE);
+				ml.setMapView(mapView);
+				androidAutoPlaceholder.setVisibility(View.GONE);
 			}
 			getMapViewTrackingUtilities().setMapView(mapView);
 			mapView.setMapRender(atlasMapRendererView);
@@ -485,12 +491,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			surf.setVisibility(View.GONE);
 		} else {
 			OsmAndMapSurfaceView surf = findViewById(R.id.MapView);
-			if (carNavigationSession == null || !carNavigationSession.hasSurface()) {
-				surf.setVisibility(View.VISIBLE);
-				surf.setMapView(mapView);
-			} else {
+			if (useAndroidAuto) {
 				surf.setVisibility(View.GONE);
 				surf.setMapView(null);
+				androidAutoPlaceholder.setVisibility(View.VISIBLE);
+			} else {
+				surf.setVisibility(View.VISIBLE);
+				surf.setMapView(mapView);
+				androidAutoPlaceholder.setVisibility(View.GONE);
 			}
 		}
 	}
@@ -1261,7 +1269,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		if (carNavigationSession == null || !carNavigationSession.hasSurface()) {
+		if (carNavigationSession == null) {
 			getMapViewTrackingUtilities().setMapView(null);
 		}
 		if (atlasMapRendererView != null) {

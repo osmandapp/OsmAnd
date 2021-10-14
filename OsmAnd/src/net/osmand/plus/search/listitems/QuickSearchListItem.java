@@ -39,6 +39,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchSettings;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -420,8 +421,16 @@ public class QuickSearchListItem {
 
 	@NonNull
 	public static Pair<PointDescription, Object> getPointDescriptionObject(@NonNull OsmandApplication app, @NonNull SearchResult searchResult) {
-		String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
-		boolean transliterate = searchResult.requiredSearchPhrase.getSettings().isTransliterate();
+		SearchSettings settings = searchResult.requiredSearchPhrase.getSettings();
+		String lang;
+		boolean transliterate;
+		if (settings != null) {
+			lang = settings.getLang();
+			transliterate = settings.isTransliterate();
+		} else {
+			lang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+			transliterate = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+		}
 		PointDescription pointDescription = null;
 		Object object = searchResult.object;
 		switch (searchResult.objectType) {
@@ -477,10 +486,10 @@ public class QuickSearchListItem {
 				String typeNameHouse = null;
 				String name = searchResult.localeName;
 				if (searchResult.relatedObject instanceof City) {
-					name = ((City) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true) + " " + name;
+					name = ((City) searchResult.relatedObject).getName(lang, true) + " " + name;
 				} else if (searchResult.relatedObject instanceof Street) {
-					String s = ((Street) searchResult.relatedObject).getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
-					typeNameHouse = ((Street) searchResult.relatedObject).getCity().getName(searchResult.requiredSearchPhrase.getSettings().getLang(), true);
+					String s = ((Street) searchResult.relatedObject).getName(lang, true);
+					typeNameHouse = ((Street) searchResult.relatedObject).getCity().getName(lang, true);
 					name = s + " " + name;
 				} else if (searchResult.localeRelatedObjectName != null) {
 					name = searchResult.localeRelatedObjectName + " " + name;

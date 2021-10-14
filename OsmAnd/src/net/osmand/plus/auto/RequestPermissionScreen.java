@@ -14,6 +14,8 @@ import androidx.car.app.model.OnClickListener;
 import androidx.car.app.model.ParkedOnlyOnClickListener;
 import androidx.car.app.model.Template;
 
+import net.osmand.plus.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +48,7 @@ public class RequestPermissionScreen extends Screen {
 		List<String> permissions = new ArrayList<>();
 		permissions.add(ACCESS_FINE_LOCATION);
 
-		String message = "This app needs access to location in order to navigate";
+		String message = getCarContext().getString(R.string.location_access_request_title);
 
 		OnClickListener listener = ParkedOnlyOnClickListener.create(() ->
 				getCarContext().requestPermissions(
@@ -54,7 +56,7 @@ public class RequestPermissionScreen extends Screen {
 						(approved, rejected) -> {
 							CarToast.makeText(
 									getCarContext(),
-									String.format("Approved: %s Rejected: %s", approved, rejected),
+									getCarContext().getString(R.string.location_access_request_result, approved, rejected),
 									CarToast.LENGTH_LONG).show();
 							if (!approved.isEmpty()) {
 								LocationPermissionCheckCallback locationPermissionCheckCallback = mLocationPermissionCheckCallback;
@@ -66,7 +68,7 @@ public class RequestPermissionScreen extends Screen {
 						}));
 
 		Action action = new Action.Builder()
-				.setTitle("Grant Access")
+				.setTitle(getCarContext().getString(R.string.location_access_request_action))
 				.setBackgroundColor(CarColor.GREEN)
 				.setOnClickListener(listener)
 				.build();

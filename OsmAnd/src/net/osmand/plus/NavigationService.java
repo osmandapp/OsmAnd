@@ -138,7 +138,7 @@ public class NavigationService extends Service {
 					if (!locations.isEmpty()) {
 						Location location = locations.get(locations.size() - 1);
 						NavigationSession carNavigationSession = app.getCarNavigationSession();
-						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasSurface();
+						boolean hasCarSurface = carNavigationSession != null && carNavigationSession.hasStarted();
 						if (!settings.MAP_ACTIVITY_ENABLED.get() || hasCarSurface) {
 							locationProvider.setLocationFromService(location);
 						}
