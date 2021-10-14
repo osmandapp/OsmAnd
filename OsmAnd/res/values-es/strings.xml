@@ -4242,4 +4242,27 @@
     <string name="regular_price">Precio habitual</string>
     <string name="offline_wikivoyage">Wikivoyage fuera de linea</string>
     <string name="backup_delete_types_descr">¿Borrar toda la información de tipos de datos obsoletos de OsmAnd Cloud\?</string>
+    <string name="release_4_1">• Copia de seguridad en la nube
+\n
+\n• Se ha añadido la compatibilidad inicial con Android Auto
+\n
+\n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM
+\n
+\n• Favoritos: se ha añadido la posibilidad de ver los iconos utilizados recientemente
+\n
+\n• Planificación de rutas: se utiliza el perfil elegido tras la ejecución
+\n
+\n• Se ha corregido la capa de Mapillary, el complemento se desactivada de forma predefinida
+\n
+\n• Se ha añadido una pantalla para gestionar todo el historial de la aplicación
+\n
+\n• La orientación del mapa no se restablece luego de reiniciar la aplicación
+\n
+\n• Se ha mejorado la visualización del marcador SRTM de altura
+\n
+\n• Se ha corregido la visualización en árabe en el mapa
+\n
+\n• Se ha corregido diferentes problemas de navegación
+\n
+\n</string>
 </resources>
