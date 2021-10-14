@@ -4346,4 +4346,29 @@
 \n
 \n請將儲存空間從共享儲存空間變更為其他可用的儲存空間，若不這樣做，應用程式將無法存取您的資料：包含離線地圖、GPX 軌跡與任何其他東西。</string>
     <string name="rendering_attr_noNatureReserves_description">隱藏自然保留區、保護區與國家公園。</string>
+    <string name="included_categories">包含分類</string>
+    <string name="shared_string_articles">文章</string>
+    <string name="release_4_1">• 雲端備份
+\n
+\n • 新增對 Android Auto 的初步支援
+\n
+\n • UTM 座標搜尋的使用者介面
+\n
+\n • 最愛：新增檢視最近使用圖示的功能
+\n
+\n • 路線規劃：啟動後將使用選定的設定檔
+\n
+\n • 修復 Mapillary 圖層，外掛程式目前預設停用
+\n
+\n • 新增管理應用程式中所有歷史紀錄的畫面
+\n
+\n • 重新啟動應用程式後不會重設地圖方向
+\n
+\n • 改善 SRTM 高度標記繪製
+\n
+\n • 修復地圖上的阿拉伯文顯示問題
+\n
+\n • 修復了不同的路徑規劃問題
+\n
+\n</string>
 </resources>
