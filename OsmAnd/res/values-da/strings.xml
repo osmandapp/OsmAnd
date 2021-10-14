@@ -4357,4 +4357,7 @@
     <string name="shared_app_storage_description">Delt hukommelse er ikke længere tilgængelig på grund af ændringer i reglerne for adgang til lagerplads i Android.</string>
     <string name="rendering_attr_noNatureReserves_description">Skjul naturreservater, beskyttede områder og nationalparker.</string>
     <string name="rendering_attr_noNatureReserves_name">Naturreservat</string>
+    <string name="shared_string_articles">Artikler</string>
+    <string name="internal_app_storage_description">Intern lagring, skjult for brugeren og andre apps, så ingen andre end OsmAnd kan få adgang til dine data</string>
+    <string name="included_categories">Inkluderede kategorier</string>
 </resources>
