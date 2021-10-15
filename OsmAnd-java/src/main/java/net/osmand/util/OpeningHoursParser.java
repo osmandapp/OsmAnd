@@ -295,7 +295,7 @@ public class OpeningHoursParser {
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
 					if (i > 0) {
-						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
+						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1), false);
 					}
 					boolean open = rule.isOpenedForTime(cal);
 					if (open || (!overlap && !checkNext)) {
@@ -428,7 +428,7 @@ public class OpeningHoursParser {
 			OpeningHoursRule prevRule = null;
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					if (atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule)) {
+					if (atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule, true)) {
 						return atTime;
 					} else {
 						atTime = r.getTime(cal, false, limit, opening);
@@ -475,7 +475,7 @@ public class OpeningHoursParser {
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
 					if (i > 0) {
-						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
+						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1), false);
 					}
 					boolean open = rule.isOpenedForTime(cal);
 					if (open || (!overlap && !checkNext)) {
@@ -627,7 +627,7 @@ public class OpeningHoursParser {
 		 * @param r the rule to check
 		 * @return true if the this rule times overlap with r times
 		 */
-		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r);
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r, boolean info);
 
 		/**
 		 * @param cal
@@ -1451,7 +1451,7 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r) {
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r, boolean info) {
 			if (off) {
 				return true;
 			}
@@ -1475,7 +1475,8 @@ public class OpeningHoursParser {
 								rEndTime = 24 * 60 + rEndTime;
 							}
 							if ((rStartTime >= startTime && rStartTime < endTime)
-									|| (startTime >= rStartTime && startTime < rEndTime)) {
+									|| (startTime >= rStartTime && startTime < rEndTime)
+									|| (info && startTime <= rEndTime)) {
 								return true;
 							}
 						}
@@ -1563,7 +1564,7 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r) {
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r, boolean info) {
 			return false;
 		}
 
