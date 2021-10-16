@@ -571,22 +571,22 @@ public class BinaryRoutePlanner {
 			RouteSegment opposite = oppositeSegments.get(currPoint);
 			RouteSegment curParent = getParentDiffId(currentSegment);
 			RouteSegment oppParent = getParentDiffId(opposite);
-			if (curParent != null && oppParent != null
-					&& !checkViaRestrictions(curParent, oppParent)) {
+			RouteSegment to = reverseWaySearch ? curParent : oppParent;
+			RouteSegment from = !reverseWaySearch ? curParent : oppParent;
+			if (checkViaRestrictions(from, to)) {
+				FinalRouteSegment frs = new FinalRouteSegment(currentSegment.getRoad(),
+						currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
+				frs.setParentRoute(currentSegment.getParentRoute());
+				frs.reverseWaySearch = reverseWaySearch;
+				frs.distanceFromStart = opposite.distanceFromStart + currentSegment.distanceFromStart;
+				frs.distanceToEnd = 0;
+				frs.opposite = opposite;
+				graphSegments.add(frs);
+				if (TRACE_ROUTING) {
+					printRoad("  >> Final segment : ", frs, reverseWaySearch);
+				}
 				return true;
 			}
-			FinalRouteSegment frs = new FinalRouteSegment(currentSegment.getRoad(), 
-					currentSegment.getSegmentStart(), currentSegment.getSegmentEnd());
-			frs.setParentRoute(currentSegment.getParentRoute());
-			frs.reverseWaySearch = reverseWaySearch;
-			frs.distanceFromStart = opposite.distanceFromStart + currentSegment.distanceFromStart;
-			frs.distanceToEnd = 0;
-			frs.opposite = opposite;
-			graphSegments.add(frs);
-			if (TRACE_ROUTING) {
-				printRoad("  >> Final segment : ", frs, reverseWaySearch);
-			}
-			return true;
 		}
 		return false;
 	}
