@@ -4348,4 +4348,6 @@
     <string name="shared_storage_warning_title">Mudanças nas regras de acesso de armazenamento</string>
     <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
     <string name="rendering_attr_noNatureReserves_description">Ocultar reserva natural, áreas protegidas e parques nacionais.</string>
+    <string name="shared_string_articles">Artigos</string>
+    <string name="included_categories">Categorias incluídas</string>
 </resources>
