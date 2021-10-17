@@ -760,6 +760,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			atlasMapRendererView.handleOnResume();
 		}
 
+		app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 		app.getDownloadThread().setUiActivity(this);
 
 		boolean routeWasFinished = routingHelper.isRouteWasFinished();
