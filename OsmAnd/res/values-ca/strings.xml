@@ -3840,4 +3840,36 @@
     <string name="shared_storage_warning_description">Des de la propera actualització d\'OsmAnd, l\'aplicació perdrà l\'accés a l\'emmagatzematge compartit, per la modificació de les regles d\'accés a l\'emmagatzematge a Android.
 \n
 \nCanvieu l\'emmagatzematge compartit a un altre disponible; si no feu això, l\'aplicació perdrà l\'accés a les vostres dades: siguin els mapes locals, les traces GPX com tota la resta.</string>
+    <string name="included_categories">Categories incloses</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Prefereix el paviment tàctil</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Prefereix el paviment tàctil</string>
+    <string name="routing_attr_allow_gate_name">Permet l\'ús de portes</string>
+    <string name="routing_attr_allow_gate_description">Permet l\'ús de portes</string>
+    <string name="travel_route_types">Tipus de rutes</string>
+    <string name="shared_string_files">Fitxers</string>
+    <string name="service_is_not_available_please_try_later">El servei no està disponible, si us plau, proveu-ho més tard</string>
+    <string name="shared_string_articles">Articles</string>
+    <string name="release_4_1">• Còpia de seguretat al núvol
+\n
+\n • Afegit suport inicial per a Android Auto
+\n
+\n • Actualització de la interfície d’usuari per a la cerca de coordenades UTM
+\n
+\n • Favorits: afegida la possibilitat de veure icones utilitzades recentment
+\n
+\n • Planificació de la ruta: utilitzarà el perfil seleccionat després del llançament
+\n
+\n • S\'ha corregit la capa Mapillary, el connector ara està desactivat per defecte
+\n
+\n • S\'ha afegit una pantalla per gestionar tot l\'historial de l\'aplicació
+\n
+\n • L\'orientació del mapa no es restableix després de reiniciar l\'aplicació
+\n
+\n • Millora de la representació del marcador d’alçada SRTM
+\n
+\n • S\'ha corregit la visualització àrab al mapa
+\n
+\n • S\'han solucionat diferents problemes d\'encaminament
+\n
+\n</string>
 </resources>
