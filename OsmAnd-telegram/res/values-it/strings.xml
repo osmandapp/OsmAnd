@@ -267,7 +267,7 @@
     <string name="shared_string_error_short">ERR</string>
     <string name="logcat_buffer_descr">Controlla e condividi i log dettagliati dell\'applicazione</string>
     <string name="logcat_buffer">Logcat buffer</string>
-    <string name="send_report">Invia rapporto</string>
+    <string name="send_report">Invia segnalazione</string>
     <string name="shared_string_export">Esporta</string>
     <string name="unit_of_speed_system_descr">Specifica l\'unità di misura della velocità.</string>
     <string name="time_zone_descr">Seleziona il fuso orario da mostrare nei messaggi sulla posizione.</string>
