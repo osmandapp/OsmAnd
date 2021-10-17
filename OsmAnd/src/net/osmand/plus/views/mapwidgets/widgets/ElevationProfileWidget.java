@@ -36,6 +36,7 @@ import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonGraphAdapter;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.plus.views.layers.MapQuickActionLayer;
@@ -70,7 +71,7 @@ public class ElevationProfileWidget {
 	private Location myLocation;
 
 	private boolean showSlopes = false;
-	private boolean shouldSetupGraph = false;
+	private RouteCalculationResult route;
 
 	public ElevationProfileWidget(MapActivity map) {
 		this.map = map;
@@ -119,22 +120,21 @@ public class ElevationProfileWidget {
 	}
 
 	private void updateInfoImpl() {
-		updateSettings();
-		if (shouldSetupGraph) {
+		if (updateSettings()) {
 			setupGraph();
 		}
 		updateGraph();
 		updateWidgets();
 	}
 
-	private void updateSettings() {
-		boolean previousShowSlopes = showSlopes;
-		showSlopes = settings.SHOW_SLOPES_ON_ELEVATION_WIDGET.get();
-		boolean slopesChanged = previousShowSlopes != showSlopes;
-
-		if (!shouldSetupGraph) {
-			shouldSetupGraph = slopesChanged;
-		}
+	private boolean updateSettings() {
+		RouteCalculationResult route = app.getRoutingHelper().getRoute();
+		boolean routeChanged = this.route != route;
+		this.route = route;
+		boolean showSlopes = settings.SHOW_SLOPES_ON_ELEVATION_WIDGET.get();
+		boolean slopesChanged = showSlopes != this.showSlopes;
+		this.showSlopes = showSlopes;
+		return routeChanged || slopesChanged;
 	}
 
 	private void setupGraph() {
@@ -169,7 +169,6 @@ public class ElevationProfileWidget {
 			setupZoom(chart);
 			shiftQuickActionButton();
 			chart.setVisibility(View.VISIBLE);
-			shouldSetupGraph = false;
 		} else {
 			chart.setVisibility(View.GONE);
 		}
@@ -308,5 +307,4 @@ public class ElevationProfileWidget {
 		save.postTranslate(-x, -y);
 		handler.refresh(save, chart, false);
 	}
-
 }
