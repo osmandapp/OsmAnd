@@ -34,6 +34,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseCommonGraphAdapter;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.layers.GPXLayer;
@@ -139,14 +140,14 @@ public class ElevationProfileWidget {
 	private void setupGraph() {
 		gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
 		analysis = gpx.getAnalysis(0);
-		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, true);
+		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
 
 		chart = (LineChart) view.findViewById(R.id.line_chart);
 		Drawable markerIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_location_color);
 		GpxUiHelper.setupGPXChart(chart, 4, 24f, 16f, !isNightMode(), true, markerIcon);
 		chart.setHighlightPerTapEnabled(false);
 		chart.setHighlightPerDragEnabled(false);
-		graphAdapter = new BaseCommonGraphAdapter(chart, true);
+		graphAdapter = new BaseCommonGraphAdapter(app, chart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
@@ -275,10 +276,6 @@ public class ElevationProfileWidget {
 		if (quickActionLayer != null) {
 			quickActionLayer.refreshLayer();
 		}
-	}
-
-	public void onRouteCalculated() {
-		shouldSetupGraph = true;
 	}
 
 	@Nullable

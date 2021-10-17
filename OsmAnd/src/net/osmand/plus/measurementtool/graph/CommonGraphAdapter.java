@@ -19,7 +19,7 @@ import java.util.Map;
 public class CommonGraphAdapter extends BaseCommonGraphAdapter {
 
 	private Highlight highlight;
-	private Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
+	private final Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
 	private ExternalGestureListener externalGestureListener;
 
 	public CommonGraphAdapter(OsmandApplication app, LineChart chart, boolean usedOnMap) {

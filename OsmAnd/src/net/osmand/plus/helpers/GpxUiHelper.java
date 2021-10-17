@@ -2285,8 +2285,8 @@ public class GpxUiHelper {
 		return dataSet;
 	}
 
-	public static GpxDisplayItem makeGpxDisplayItem(OsmandApplication app, GPXFile gpxFile,
-	                                                ChartPointLayer chartPointLayer) {
+	public static GpxDisplayItem makeGpxDisplayItem(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	                                                @NonNull ChartPointLayer chartPointLayer) {
 		GpxDisplayGroup group = null;
 		if (!Algorithms.isEmpty(gpxFile.tracks)) {
 			GpxSelectionHelper helper = app.getSelectedGpxHelper();

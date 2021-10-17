@@ -393,7 +393,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 						if (mil != null) {
 							mil.recreateControls();
 						}
-						updateListAdapter(registry.getViewConfigureMenuAdapter());
+						updateListAdapter(registry.getViewConfigureMenuAdapter(mapActivity));
 					}
 					return false;
 				}
@@ -703,7 +703,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 		listView.setEmptyView(null);
 		ContextMenuAdapter cm = null;
 		if (visibleType == DashboardType.CONFIGURE_SCREEN) {
-			cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter();
+			cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
 		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
 			cm = new ConfigureMapMenu().createListAdapter(mapActivity);
 		} else if (visibleType == DashboardType.LIST_MENU) {
