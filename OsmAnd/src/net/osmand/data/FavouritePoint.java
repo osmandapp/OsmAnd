@@ -1,5 +1,8 @@
 package net.osmand.data;
 
+import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
+import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -17,7 +20,9 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.BooleanPreference;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
@@ -28,9 +33,9 @@ import java.io.Serializable;
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 
-	public static final String PASSED_TIMESTAMP = "passed_timestamp";
 	private static final String HIDDEN = "hidden";
 	private static final String ADDRESS_EXTENSION = "address";
+	private static final String CALENDAR_EXTENSION = "calendar_event";
 	public static final BackgroundType DEFAULT_BACKGROUND_TYPE = BackgroundType.CIRCLE;
 	public static final int DEFAULT_UI_ICON_ID = R.drawable.mx_special_star;
 
@@ -48,7 +53,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private BackgroundType backgroundType = null;
 	private double altitude = Double.NaN;
 	private long timestamp;
-	private long passedTimestamp;
+	private long visitedDate;
+	private long creationDate;
+	private boolean calendarEvent;
 
 	public FavouritePoint() {
 	}
@@ -92,7 +99,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.backgroundType = favouritePoint.backgroundType;
 		this.altitude = favouritePoint.altitude;
 		this.timestamp = favouritePoint.timestamp;
-		this.passedTimestamp = favouritePoint.passedTimestamp;
+		this.visitedDate = favouritePoint.visitedDate;
+		this.creationDate = favouritePoint.creationDate;
 		initPersonalType();
 	}
 
@@ -157,6 +165,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public int getIconId() {
+		return iconId;
+	}
+
+	public int getIconIdOrDefault() {
 		return iconId == 0 ? DEFAULT_UI_ICON_ID : iconId;
 	}
 
@@ -168,8 +180,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.iconId = iconId;
 	}
 
-	public void setIconIdFromName(Context ctx, String iconName) {
-		this.iconId = ctx.getResources().getIdentifier("mx_" + iconName, "drawable", ctx.getPackageName());
+	public void setIconIdFromName(String iconName) {
+		this.iconId = RenderingIcons.getBigIconId(iconName);
 	}
 
 	public boolean isSpecialPoint() {
@@ -205,7 +217,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId(ctx);
 		}
-		return getIconId();
+		return getIconIdOrDefault();
 	}
 
 	public double getLatitude() {
@@ -240,12 +252,28 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.timestamp = timestamp;
 	}
 
-	public long getPassedTimestamp() {
-		return passedTimestamp;
+	public boolean getCalendarEvent() {
+		return calendarEvent;
 	}
 
-	public void setPassedTimestamp(long passedTimestamp) {
-		this.passedTimestamp = passedTimestamp;
+	public void setCalendarEvent(boolean calendarEvent) {
+		this.calendarEvent = calendarEvent;
+	}
+
+	public long getVisitedDate() {
+		return visitedDate;
+	}
+
+	public void setVisitedDate(long visitedDate) {
+		this.visitedDate = visitedDate;
+	}
+
+	public long getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(long creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public String getCategory() {
@@ -337,7 +365,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 				&& (this.longitude == fp.longitude)
 				&& (this.altitude == fp.altitude)
 				&& (this.timestamp == fp.timestamp)
-				&& (this.passedTimestamp == fp.passedTimestamp);
+				&& (this.visitedDate == fp.visitedDate)
+				&& (this.creationDate == fp.creationDate);
 	}
 
 	@Override
@@ -348,7 +377,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + (int) Math.floor(longitude * 10000);
 		result = prime * result + (int) Math.floor(altitude * 10000);
 		result = prime * result + (int) (timestamp ^ (timestamp >>> 32));
-		result = prime * result + (int) (passedTimestamp ^ (passedTimestamp >>> 32));
+		result = prime * result + (int) (visitedDate ^ (visitedDate >>> 32));
+		result = prime * result + (int) (creationDate ^ (creationDate >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -359,7 +389,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public enum SpecialPointType {
 		HOME("home", R.string.home_button, R.drawable.mx_special_house),
 		WORK("work", R.string.work_button, R.drawable.mx_special_building),
-		PARKING("parking", R.string.map_widget_parking, R.drawable.mx_parking);
+		PARKING("parking", R.string.osmand_parking_position_name, R.drawable.mx_parking);
 
 		private String typeName;
 		@StringRes
@@ -474,16 +504,24 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (pt.comment != null) {
 			fp.setOriginObjectName(pt.comment);
 		}
-		if (pt.getExtensionsToWrite().containsKey(PASSED_TIMESTAMP)) {
-			String time = pt.getExtensionsToWrite().get(PASSED_TIMESTAMP);
-			fp.setPassedTimestamp(Algorithms.parseLongSilently(time, 0));
+		if (pt.getExtensionsToWrite().containsKey(VISITED_DATE)) {
+			String time = pt.getExtensionsToWrite().get(VISITED_DATE);
+			fp.setVisitedDate(ItineraryDataHelper.parseTime(time));
+		}
+		if (pt.getExtensionsToWrite().containsKey(CREATION_DATE)) {
+			String time = pt.getExtensionsToWrite().get(CREATION_DATE);
+			fp.setCreationDate(ItineraryDataHelper.parseTime(time));
+		}
+		if (pt.getExtensionsToWrite().containsKey(CALENDAR_EXTENSION)) {
+			String calendarEvent = pt.getExtensionsToWrite().get(CALENDAR_EXTENSION);
+			fp.setCalendarEvent(calendarEvent.equals("true"));
 		}
 		fp.setColor(pt.getColor(0));
 		fp.setVisible(!pt.getExtensionsToRead().containsKey(HIDDEN));
 		fp.setAddress(pt.getExtensionsToRead().get(ADDRESS_EXTENSION));
 		String iconName = pt.getIconName();
 		if (iconName != null) {
-			fp.setIconIdFromName(ctx, iconName);
+			fp.setIconIdFromName(iconName);
 		}
 		BackgroundType backgroundType = BackgroundType.getByTypeName(pt.getBackgroundType(), null);
 		fp.setBackgroundType(backgroundType);
@@ -502,8 +540,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (isAddressSpecified()) {
 			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
 		}
-		if (getPassedTimestamp() != 0) {
-			pt.getExtensionsToWrite().put(PASSED_TIMESTAMP, String.valueOf(getPassedTimestamp()));
+		if (getVisitedDate() != 0) {
+			pt.getExtensionsToWrite().put(VISITED_DATE, ItineraryDataHelper.formatTime(getVisitedDate()));
+		}
+		if (getCreationDate() != 0) {
+			pt.getExtensionsToWrite().put(CREATION_DATE, ItineraryDataHelper.formatTime(getCreationDate()));
+		}
+		if (getCalendarEvent()) {
+			pt.getExtensionsToWrite().put(CALENDAR_EXTENSION, "true");
 		}
 		if (iconId != 0) {
 			pt.setIconName(getIconEntryName(ctx).substring(3));

@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -20,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -34,16 +34,12 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.RouteSegmentResult;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem.INVALID_ID;
-
 
 public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -79,11 +75,12 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
+		final OsmandApplication app = requiredMyApplication();
+		int activeColor = ColorUtilities.getActiveColor(app, nightMode);
 		routingOptionsHelper = app.getRoutingOptionsHelper();
+		compoundButtonColor = appMode != null
+				? appMode.getProfileColor(nightMode)
+				: app.getSettings().getApplicationMode().getProfileColor(nightMode);
 		if (savedInstanceState != null) {
 			hideImpassableRoads = savedInstanceState.getBoolean(HIDE_IMPASSABLE_ROADS_KEY);
 			if (savedInstanceState.containsKey(AVOID_ROADS_TYPES_KEY)) {
@@ -149,7 +146,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			final View buttonView = themedInflater.inflate(R.layout.bottom_sheet_item_btn, null);
 			TextView buttonDescription = (TextView) buttonView.findViewById(R.id.button_descr);
 			buttonDescription.setText(R.string.shared_string_select_on_map);
-			buttonDescription.setTextColor(getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+			buttonDescription.setTextColor(activeColor);
 
 			FrameLayout buttonContainer = buttonView.findViewById(R.id.button_container);
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -187,10 +184,8 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	private void populateImpassableRoadsObjects() {
-		Context context = getContext();
-		if (context == null) {
-			return;
-		}
+		Context context = requireContext();
+		int activeColor = ColorUtilities.getActiveColor(context, nightMode);
 		AvoidSpecificRoads avoidSpecificRoads = getMyApplication().getAvoidSpecificRoads();
 
 		int counter = 0;
@@ -211,7 +206,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 			TextView titleTv = (TextView) view.findViewById(R.id.title);
 			titleTv.setText(name);
-			titleTv.setTextColor(getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+			titleTv.setTextColor(activeColor);
 
 			ImageView icon = (ImageView) view.findViewById(R.id.icon);
 			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
@@ -269,7 +264,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(AVOID_ROADS_TYPES_KEY, routingParametersMap);
 		outState.putSerializable(AVOID_ROADS_OBJECTS_KEY, (Serializable) removedImpassableRoads);

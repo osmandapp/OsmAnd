@@ -30,20 +30,19 @@ import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
+import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.util.List;
 
-import static net.osmand.plus.settings.backend.backup.FileSettingsItem.FileSubtype;
+import static net.osmand.plus.settings.backend.backup.items.FileSettingsItem.FileSubtype;
 
 public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -99,7 +98,7 @@ public class DuplicatesSettingsAdapter extends RecyclerView.Adapter<RecyclerView
 					if (appMode != null) {
 						profileName = appMode.toHumanString();
 					} else {
-						profileName = StringUtils.capitalize(modeBean.stringKey);
+						profileName = Algorithms.capitalizeFirstLetter(modeBean.stringKey);
 					}
 				}
 				itemHolder.title.setText(profileName);

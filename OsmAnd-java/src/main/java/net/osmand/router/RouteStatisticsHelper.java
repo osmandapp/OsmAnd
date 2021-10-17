@@ -4,6 +4,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +18,7 @@ public class RouteStatisticsHelper {
 
 	public static final String UNDEFINED_ATTR = "undefined";
 	public static final String ROUTE_INFO_PREFIX = "routeInfo_";
+
 	private static final double H_STEP = 5;
 	private static final double H_SLOPE_APPROX = 100;
 	private static final int MIN_INCLINE = -101;
@@ -26,6 +28,8 @@ public class RouteStatisticsHelper {
 	private static final int STEP = 4;
 	private static final int[] BOUNDARIES_ARRAY;
 	private static final String[] BOUNDARIES_CLASS;
+
+	private static final String ROUTE_INFO_STEEPNESS = "routeInfo_steepness";
 
 	static {
 		int NUM = ((MAX_DIVIDED_INCLINE - MIN_DIVIDED_INCLINE) / STEP) + 3;
@@ -40,8 +44,6 @@ public class RouteStatisticsHelper {
 		BOUNDARIES_ARRAY[NUM - 1] = MAX_INCLINE;
 		BOUNDARIES_CLASS[NUM - 1] = "steepness="+MAX_DIVIDED_INCLINE+"_"+MAX_INCLINE;
 	}
-
-
 
 	public static class RouteStatistics {
 		public final List<RouteSegmentAttribute> elements;
@@ -80,10 +82,44 @@ public class RouteStatisticsHelper {
 		int[] slopeClass;
 	}
 
-	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route, RenderingRulesStorage currentRenderer,
-																RenderingRulesStorage defaultRenderer, RenderingRuleSearchRequest currentSearchRequest,
-																RenderingRuleSearchRequest defaultSearchRequest) {
+	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route,
+	                                                            RenderingRulesStorage currentRenderer,
+	                                                            RenderingRulesStorage defaultRenderer,
+	                                                            RenderingRuleSearchRequest currentSearchRequest,
+	                                                            RenderingRuleSearchRequest defaultSearchRequest) {
+		return calculateRouteStatistic(route, null, currentRenderer, defaultRenderer,
+				currentSearchRequest, defaultSearchRequest);
+	}
+
+	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route,
+	                                                            List<String> attributesNames,
+	                                                            RenderingRulesStorage currentRenderer,
+	                                                            RenderingRulesStorage defaultRenderer,
+	                                                            RenderingRuleSearchRequest currentSearchRequest,
+	                                                            RenderingRuleSearchRequest defaultSearchRequest) {
+		if (route == null) {
+			return Collections.emptyList();
+		}
 		List<RouteSegmentWithIncline> routeSegmentWithInclines = calculateInclineRouteSegments(route);
+		List<RouteStatistics>  result = new ArrayList<>();
+		if (Algorithms.isEmpty(attributesNames)) {
+			attributesNames = getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, false);
+		}
+		for (String attr : attributesNames) {
+			RouteStatisticComputer statisticComputer =
+					new RouteStatisticComputer(currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
+			RouteStatistics routeStatistics = statisticComputer.computeStatistic(routeSegmentWithInclines, attr);
+			Map<String, RouteSegmentAttribute> partitions = routeStatistics.partition;
+			if (!partitions.isEmpty() && (partitions.size() != 1 || !routeStatistics.partition.containsKey(UNDEFINED_ATTR))) {
+				result.add(routeStatistics);
+			}
+		}
+		return result;
+	}
+
+	public static List<String> getRouteStatisticAttrsNames(RenderingRulesStorage currentRenderer,
+	                                                       RenderingRulesStorage defaultRenderer,
+	                                                       boolean excludeSteepness) {
 		List<String> attributeNames = new ArrayList<>();
 		if (currentRenderer != null) {
 			for (String s : currentRenderer.getRenderingAttributeNames()) {
@@ -92,30 +128,20 @@ public class RouteStatisticsHelper {
 				}
 			}
 		}
-		if(attributeNames.isEmpty()) {
+		if (attributeNames.isEmpty()) {
 			for (String s : defaultRenderer.getRenderingAttributeNames()) {
 				if (s.startsWith(ROUTE_INFO_PREFIX)) {
 					attributeNames.add(s);
 				}
 			}
 		}
-
-		// "steepnessColor", "surfaceColor", "roadClassColor", "smoothnessColor"
-		// steepness=-19_-16
-		List<RouteStatistics>  result = new ArrayList<>();
-		for(String attributeName : attributeNames) {
-			RouteStatisticComputer statisticComputer =
-					new RouteStatisticComputer(currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
-			RouteStatistics routeStatistics = statisticComputer.computeStatistic(routeSegmentWithInclines, attributeName);
-			if (!routeStatistics.partition.isEmpty() && (routeStatistics.partition.size() != 1 || !routeStatistics.partition.containsKey(UNDEFINED_ATTR))) {
-				result.add(routeStatistics);
-			}
+		if (excludeSteepness) {
+			attributeNames.remove(ROUTE_INFO_STEEPNESS);
 		}
-
-		return result;
+		return attributeNames;
 	}
 
-	private static List<RouteSegmentWithIncline>  calculateInclineRouteSegments(List<RouteSegmentResult> route) {
+	private static List<RouteSegmentWithIncline> calculateInclineRouteSegments(List<RouteSegmentResult> route) {
 		List<RouteSegmentWithIncline> input = new ArrayList<>();
 		float prevHeight = 0;
 		int totalArrayHeightsLength = 0;
@@ -127,12 +153,12 @@ public class RouteStatisticsHelper {
 			input.add(incl);
 			float prevH = prevHeight;
 			int indStep = 0;
-			if(incl.dist > H_STEP) {
+			if (incl.dist > H_STEP) {
 				// for 10.1 meters 3 points (0, 5, 10)
 				incl.interpolatedHeightByStep = new float[(int) ((incl.dist) / H_STEP) + 1];
 				totalArrayHeightsLength += incl.interpolatedHeightByStep.length;
 			}
-			if(heightValues != null && heightValues.length > 0) {
+			if (heightValues != null && heightValues.length > 0) {
 				int indH = 2;
 				float distCum = 0;
 				prevH = heightValues[1];
@@ -140,7 +166,7 @@ public class RouteStatisticsHelper {
 				if(incl.interpolatedHeightByStep != null && incl.interpolatedHeightByStep.length > indStep) {
 					incl.interpolatedHeightByStep[indStep++] = prevH;
 				}
-				while(incl.interpolatedHeightByStep != null && 
+				while (incl.interpolatedHeightByStep != null &&
 						indStep < incl.interpolatedHeightByStep.length && indH < heightValues.length) {
 					float dist = heightValues[indH] + distCum;
 					if(dist > indStep * H_STEP) {
@@ -226,21 +252,21 @@ public class RouteStatisticsHelper {
 		return input;
 	}
 
-
 	private static String formatSlopeString(int slope, int next) {
 		return String.format("%d%% .. %d%%", slope, next);
 	}
 
 
-	private static class RouteStatisticComputer {
+	public static class RouteStatisticComputer {
 
 		final RenderingRulesStorage currentRenderer;
 		final RenderingRulesStorage defaultRenderer;
 		final RenderingRuleSearchRequest currentRenderingRuleSearchRequest;
 		final RenderingRuleSearchRequest defaultRenderingRuleSearchRequest;
 
-		RouteStatisticComputer(RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
-							   RenderingRuleSearchRequest currentRenderingRuleSearchRequest, RenderingRuleSearchRequest defaultRenderingRuleSearchRequest) {
+		public RouteStatisticComputer(RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
+		                              RenderingRuleSearchRequest currentRenderingRuleSearchRequest,
+		                              RenderingRuleSearchRequest defaultRenderingRuleSearchRequest) {
 			this.currentRenderer = currentRenderer;
 			this.defaultRenderer = defaultRenderer;
 			this.currentRenderingRuleSearchRequest = currentRenderingRuleSearchRequest;
@@ -304,7 +330,7 @@ public class RouteStatisticsHelper {
 			RouteSegmentAttribute prev = null;
 			for (RouteSegmentWithIncline segment : route) {
 				if(segment.slopeClass == null || segment.slopeClass.length == 0) {
-					RouteSegmentAttribute current = classifySegment(attribute, -1, segment);
+					RouteSegmentAttribute current = classifySegment(attribute, -1, segment.obj);
 					current.distance = segment.dist;
 					if (prev != null && prev.getPropertyName() != null &&
 						prev.getPropertyName().equals(current.getPropertyName())) {
@@ -320,7 +346,7 @@ public class RouteStatisticsHelper {
 							prev.incrementDistanceBy(d);
 						} else {
 							RouteSegmentAttribute current = classifySegment(attribute, 
-									segment.slopeClass[i], segment);
+									segment.slopeClass[i], segment.obj);
 							current.distance = d;
 							if (prev != null && prev.getPropertyName() != null &&
 								prev.getPropertyName().equals(current.getPropertyName())) {
@@ -339,17 +365,17 @@ public class RouteStatisticsHelper {
 			return routes;
 		}
 
-
-		public RouteSegmentAttribute classifySegment(String attribute, int slopeClass, RouteSegmentWithIncline segment) {
+		public RouteSegmentAttribute classifySegment(String attribute, int slopeClass, RouteDataObject routeObject) {
 			RouteSegmentAttribute res = new RouteSegmentAttribute(UNDEFINED_ATTR, 0, -1);
 			RenderingRuleSearchRequest currentRequest = 
 					currentRenderer == null ? null : new RenderingRuleSearchRequest(currentRenderingRuleSearchRequest);
-			if (currentRenderer != null && searchRenderingAttribute(attribute, currentRenderer, currentRequest, segment, slopeClass)) {
+			if (currentRenderer != null
+					&& searchRenderingAttribute(attribute, currentRenderer, currentRequest, routeObject, slopeClass)) {
 				res = new RouteSegmentAttribute(currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE),
 						currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE), slopeClass);
 			} else {
 				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderingRuleSearchRequest);
-				if (searchRenderingAttribute(attribute, defaultRenderer, defaultRequest, segment, slopeClass)) {
+				if (searchRenderingAttribute(attribute, defaultRenderer, defaultRequest, routeObject, slopeClass)) {
 					res = new RouteSegmentAttribute(
 							defaultRequest.getStringPropertyValue(defaultRenderer.PROPS.R_ATTR_STRING_VALUE),
 							defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE), slopeClass);
@@ -358,15 +384,14 @@ public class RouteStatisticsHelper {
 			return res;
 		}
 
-		protected boolean searchRenderingAttribute(String attribute,
-												   RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RouteSegmentWithIncline segment,
+		protected boolean searchRenderingAttribute(String attribute, RenderingRulesStorage rrs,
+		                                           RenderingRuleSearchRequest req, RouteDataObject routeObject,
 												   int slopeClass) {
 			//String additional = attrName + "=" + attribute;
 			boolean mainTagAdded = false;
 			StringBuilder additional = new StringBuilder(slopeClass >= 0 ? (BOUNDARIES_CLASS[slopeClass] + ";") : "");
-			RouteDataObject obj = segment.obj;
-			for (int type : obj.getTypes()) {
-				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(type);
+			for (int type : routeObject.getTypes()) {
+				BinaryMapRouteReaderAdapter.RouteTypeRule tp = routeObject.region.quickGetEncodingRule(type);
 				if (tp.getTag().equals("highway") || tp.getTag().equals("route")
 						|| tp.getTag().equals("railway") || tp.getTag().equals("aeroway")
 						|| tp.getTag().equals("aerialway") || tp.getTag().equals("piste:type")) {
@@ -434,6 +459,4 @@ public class RouteStatisticsHelper {
 			return String.format("%s - %.0f m %d", getUserPropertyName(), getDistance(), getColor());
 		}
 	}
-
-
 }

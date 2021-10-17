@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.AndroidUtils;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.R;
@@ -35,9 +38,9 @@ public class AudioVideoNoteRecordingMenu {
 	protected double lat;
 	protected double lon;
 
-	private int screenHeight;
-	private int buttonsHeight;
-	private int statusBarHeight;
+	private final int screenHeight;
+	private final int buttonsHeight;
+	private final int statusBarHeight;
 
 	public static boolean showViewfinder = true;
 
@@ -47,22 +50,28 @@ public class AudioVideoNoteRecordingMenu {
 		this.lon = lon;
 		handler = new Handler();
 
-		MapActivity mapActivity = plugin.getMapActivity();
+		MapActivity mapActivity = requireMapActivity();
 		portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		initView(mapActivity);
 		viewfinder = (LinearLayout) view.findViewById(R.id.viewfinder);
 		showViewfinder = true;
 
-		screenHeight = AndroidUtils.getScreenHeight(getMapActivity());
-		statusBarHeight = AndroidUtils.getStatusBarHeight(getMapActivity());
-		buttonsHeight = getMapActivity().getResources().getDimensionPixelSize(R.dimen.map_route_buttons_height);
+		screenHeight = AndroidUtils.getScreenHeight(mapActivity);
+		statusBarHeight = AndroidUtils.getStatusBarHeight(mapActivity);
+		buttonsHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_route_buttons_height);
 
 		update();
 	}
 
+	@Nullable
 	public MapActivity getMapActivity() {
 		return plugin.getMapActivity();
+	}
+
+	@NonNull
+	public MapActivity requireMapActivity() {
+		return plugin.requireMapActivity();
 	}
 
 	protected void initView(MapActivity mapActivity) {
@@ -108,7 +117,7 @@ public class AudioVideoNoteRecordingMenu {
 	}
 
 	public void show() {
-		plugin.getMapActivity().getContextMenu().hide();
+		requireMapActivity().getContextMenu().hide();
 		view.setVisibility(View.VISIBLE);
 		if (plugin.getCurrentRecording().getType() != AVActionType.REC_PHOTO) {
 			startCounter();
@@ -124,7 +133,7 @@ public class AudioVideoNoteRecordingMenu {
 
 	public void update() {
 		CurrentRecording recording = plugin.getCurrentRecording();
-		UiUtilities iconsCache = plugin.getMapActivity().getMyApplication().getUIUtilities();
+		UiUtilities iconsCache = requireMapActivity().getMyApplication().getUIUtilities();
 
 		ImageView leftButtonIcon = (ImageView) view.findViewById(R.id.leftButtonIcon);
 		View leftButtonView = view.findViewById(R.id.leftButtonView);
@@ -139,12 +148,7 @@ public class AudioVideoNoteRecordingMenu {
 			leftButtonView.setVisibility(View.INVISIBLE);
 			viewfinder.setVisibility(View.GONE);
 		}
-		leftButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showHideViewfinder();
-			}
-		});
+		leftButtonView.setOnClickListener(v -> showHideViewfinder());
 
 		View centerButtonView = view.findViewById(R.id.centerButtonView);
 		ImageView recIcon = (ImageView) view.findViewById(R.id.centerButtonIcon);
@@ -165,12 +169,7 @@ public class AudioVideoNoteRecordingMenu {
 				timeView.setVisibility(View.INVISIBLE);
 				break;
 		}
-		centerButtonView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				rec(plugin.getMapActivity(), false);
-			}
-		});
+		centerButtonView.setOnClickListener(v -> rec(requireMapActivity(), false));
 		applyViewfinderVisibility();
 	}
 
@@ -184,7 +183,7 @@ public class AudioVideoNoteRecordingMenu {
 			int duration = (int) ((System.currentTimeMillis() - startTime) / 1000);
 			restart = duration >= clipLength;
 			if (restart) {
-				rec(getMapActivity(), true);
+				rec(requireMapActivity(), true);
 			}
 		}
 		return restart;
@@ -194,7 +193,7 @@ public class AudioVideoNoteRecordingMenu {
 		if (plugin.getCurrentRecording() != null) {
 			TextView timeText = (TextView) view.findViewById(R.id.timeText);
 			int duration = (int) ((System.currentTimeMillis() - startTime) / 1000);
-			timeText.setText(Algorithms.formatDuration(duration, getMapActivity().getMyApplication().accessibilityEnabled()));
+			timeText.setText(Algorithms.formatDuration(duration, requireMapActivity().getMyApplication().accessibilityEnabled()));
 		}
 	}
 
@@ -222,15 +221,16 @@ public class AudioVideoNoteRecordingMenu {
 	public int getViewfinderWidth() {
 		int res;
 		CurrentRecording recording = plugin.getCurrentRecording();
+		MapActivity mapActivity = requireMapActivity();
 		if (recording.getType() == AVActionType.REC_PHOTO) {
 			DisplayMetrics dm = new DisplayMetrics();
-			getMapActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+			mapActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
 			res = dm.widthPixels;
 		} else {
 			if (isLandscapeLayout()) {
-				res = AndroidUtils.dpToPx(getMapActivity(), 320 - 16f);
+				res = AndroidUtils.dpToPx(mapActivity, 320 - 16f);
 			} else {
-				res = AndroidUtils.dpToPx(getMapActivity(), 240f);
+				res = AndroidUtils.dpToPx(mapActivity, 240f);
 			}
 		}
 		return res;
@@ -239,21 +239,22 @@ public class AudioVideoNoteRecordingMenu {
 	public int getViewfinderHeight() {
 		int res;
 		CurrentRecording recording = plugin.getCurrentRecording();
+		MapActivity mapActivity = requireMapActivity();
 		if (recording.getType() == AVActionType.REC_PHOTO) {
 			DisplayMetrics dm = new DisplayMetrics();
-			getMapActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+			mapActivity.getWindowManager().getDefaultDisplay().getMetrics(dm);
 			res = dm.heightPixels;
 		} else {
 			if (isLandscapeLayout()) {
 				res = screenHeight - statusBarHeight - buttonsHeight;
 			} else {
-				res = AndroidUtils.dpToPx(getMapActivity(), 240f);
+				res = AndroidUtils.dpToPx(mapActivity, 240f);
 			}
 		}
 		return res;
 	}
 
-	public void rec(final MapActivity mapActivity, final boolean restart) {
+	public void rec(final @NonNull MapActivity mapActivity, final boolean restart) {
 		stopCounter();
 		final CurrentRecording recording = plugin.getCurrentRecording();
 		int delay;
@@ -262,33 +263,27 @@ public class AudioVideoNoteRecordingMenu {
 		} else {
 			delay = 1;
 		}
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				if (recording != null) {
-					if (recording.getType() == AVActionType.REC_PHOTO) {
-						plugin.shoot();
-					} else {
-						plugin.stopRecording(mapActivity, restart);
-						if (restart) {
-							startCounter();
-						}
+		handler.postDelayed(() -> {
+			if (recording != null) {
+				if (recording.getType() == AVActionType.REC_PHOTO) {
+					plugin.shoot();
+				} else {
+					plugin.stopRecording(mapActivity, restart);
+					if (restart) {
+						startCounter();
 					}
 				}
 			}
 		}, delay);
 	}
 
-	public void recExternal(final MapActivity mapActivity) {
+	public void recExternal(final @NonNull MapActivity mapActivity) {
 		stopCounter();
-		handler.postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				CurrentRecording recording = plugin.getCurrentRecording();
-				if (recording != null) {
-					if (recording.getType() == AVActionType.REC_PHOTO) {
-						plugin.takePhotoExternal(lat, lon, mapActivity);
-					}
+		handler.postDelayed(() -> {
+			CurrentRecording recording = plugin.getCurrentRecording();
+			if (recording != null) {
+				if (recording.getType() == AVActionType.REC_PHOTO) {
+					plugin.takePhotoExternal(lat, lon, mapActivity);
 				}
 			}
 		}, 20);
@@ -304,12 +299,9 @@ public class AudioVideoNoteRecordingMenu {
 
 			@Override
 			public void run() {
-				handler.post(new Runnable() {
-					@Override
-					public void run() {
-						if (!restartRecordingIfNeeded()) {
-							updateDuration();
-						}
+				handler.post(() -> {
+					if (!restartRecordingIfNeeded()) {
+						updateDuration();
 					}
 				});
 			}

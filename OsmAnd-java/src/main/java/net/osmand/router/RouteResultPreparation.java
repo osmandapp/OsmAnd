@@ -171,7 +171,12 @@ public class RouteResultPreparation {
 
 	List<RouteSegmentResult> prepareResult(RoutingContext ctx, List<RouteSegmentResult> result, boolean recalculation) throws IOException {
 		for(int i = 0; i < result.size(); i++) {
-			checkAndInitRouteRegion(ctx, result.get(i).getObject());
+			RouteDataObject road = result.get(i).getObject();
+			checkAndInitRouteRegion(ctx, road);
+			//"osmand_dp" using for backward compatibility from native lib RoutingConfiguration directionPoints
+			if (road.region != null) {
+				road.region.findOrCreateRouteType(RoutingConfiguration.DirectionPoint.TAG, RoutingConfiguration.DirectionPoint.DELETE_TYPE);
+			}
 		}
 		combineWayPointsForAreaRouting(ctx, result);
 		validateAllPointsConnected(result);
@@ -282,7 +287,7 @@ public class RouteResultPreparation {
 	// reference speed 30ms (108kmh) - 2ms (7kmh)
 	private static final double SLOW_DOWN_SPEED = 2;
 	
-	private void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
+	public static void calculateTimeSpeed(RoutingContext ctx, List<RouteSegmentResult> result) {
 		//for Naismith
 		boolean usePedestrianHeight = ((((GeneralRouter) ctx.getRouter()).getProfile() == GeneralRouterProfile.PEDESTRIAN) && ((GeneralRouter) ctx.getRouter()).getHeightObstacles());
 
@@ -1375,6 +1380,7 @@ public class RouteResultPreparation {
 			} else if (possibleTurns.length == 3) {
 				if ((!possiblyLeftTurn || !possiblyRightTurn) && TurnType.isSlightTurn(possibleTurns[1])) {
 					tp = possibleTurns[1];
+					rawLanes[1] |= 1;
 					t = TurnType.valueOf(tp, leftSide);
 				}
 			}
@@ -1392,7 +1398,9 @@ public class RouteResultPreparation {
 						|| (TurnType.isLeftTurn(sturn) && possiblyLeftTurn)) {
 					// we can't predict here whether it will be a left turn or straight on,
 					// it could be done during 2nd pass
-					TurnType.setSecondaryToPrimary(rawLanes, k);
+					if ((rawLanes[k] & 1) == 0) {
+						TurnType.setSecondaryToPrimary(rawLanes, k);
+					}
 					active = true;
 				} else if ((TurnType.isRightTurn(tturn) && possiblyRightTurn)
 						|| (TurnType.isLeftTurn(tturn) && possiblyLeftTurn)) {
@@ -1400,6 +1408,8 @@ public class RouteResultPreparation {
 					active = true;
 				} else if ((TurnType.isRightTurn(turn) && possiblyRightTurn)
 						|| (TurnType.isLeftTurn(turn) && possiblyLeftTurn)) {
+					active = true;
+				} else if (TurnType.isSlightTurn(turn) && !possiblyRightTurn && !possiblyLeftTurn) {
 					active = true;
 					// } else if (turn == TurnType.C) {
 				} else if (turn == tp) {
@@ -1550,10 +1560,6 @@ public class RouteResultPreparation {
 			} else {
 				lanes[it] = (laneType << 1) + 1;
 			}
-		}
-		// sometimes links are
-		if ((current <= rs.leftLanes + rs.rightLanes) && (rs.leftLanes > 1 || rs.rightLanes > 1)) {
-			rs.speak = true;
 		}
 		t.setSkipToSpeak(!rs.speak);
 		t.setLanes(lanes);

@@ -7,7 +7,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
-import net.osmand.IProgress;
+import androidx.annotation.NonNull;
+
 import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -79,12 +80,12 @@ public class MapRenderRepositories {
 	);
 
 	static int zoomForBaseRouteRendering  = 14;
-	private Handler handler;
-	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
-	private Set<String> nativeFiles = new HashSet<String>();
-	private OsmandRenderer renderer;
-	
-
+	private final Handler handler;
+	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<>();
+	private final Set<String> nativeFiles = new HashSet<>();
+	private final Set<String> hiddenFileNames = new HashSet<>();
+	private final Set<String> hiddenFileExtensions = new HashSet<>();
+	private final OsmandRenderer renderer;
 
 	// lat/lon box of requested vector data
 	private QuadRect cObjectsBox = new QuadRect();
@@ -136,7 +137,7 @@ public class MapRenderRepositories {
 	public Context getContext() {
 		return context;
 	}
-	
+
 	public OsmandRenderer getRenderer() {
 		return renderer;
 	}
@@ -145,22 +146,46 @@ public class MapRenderRepositories {
 		return visibleRenderingContext;
 	}
 
-	public void initializeNewResource(final IProgress progress, File file, BinaryMapIndexReader reader) {
-		if (files.containsKey(file.getName())) {
-			closeConnection(file.getName());
-		
-		}
-		LinkedHashMap<String, BinaryMapIndexReader> cpfiles = new LinkedHashMap<String, BinaryMapIndexReader>(files);
-		cpfiles.put(file.getName(), reader);
-		files = cpfiles;
-	}
-
 	public RotatedTileBox getBitmapLocation() {
 		return bmpLocation;
 	}
 
 	public RotatedTileBox getPrevBmpLocation() {
 		return prevBmpLocation;
+	}
+
+	public void addHiddenFileName(@NonNull String fileName) {
+		hiddenFileNames.add(fileName);
+	}
+
+	public void removeHiddenFileName(@NonNull String fileName) {
+		hiddenFileNames.remove(fileName);
+	}
+
+	public void addHiddenFileExtension(@NonNull String extension) {
+		hiddenFileExtensions.add(extension);
+	}
+
+	public void removeHiddenFileExtension(@NonNull String extension) {
+		hiddenFileExtensions.remove(extension);
+	}
+
+	public void initializeNewResource(File file, BinaryMapIndexReader reader) {
+		String fileName = file.getName();
+		if (files.containsKey(fileName)) {
+			closeConnection(fileName);
+		}
+		if (hiddenFileNames.contains(fileName)) {
+			return;
+		}
+		for (String extension : hiddenFileExtensions) {
+			if (fileName.endsWith(extension)) {
+				return;
+			}
+		}
+		LinkedHashMap<String, BinaryMapIndexReader> cpfiles = new LinkedHashMap<>(files);
+		cpfiles.put(fileName, reader);
+		files = cpfiles;
 	}
 
 	public synchronized void closeConnection(String file) {
@@ -274,8 +299,7 @@ public class MapRenderRepositories {
 		}
 		return false;
 	}
-	
-	
+
 	private boolean loadVectorDataNative(QuadRect dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq, 
 			NativeOsmandLibrary library) {
 		int leftX = MapUtils.get31TileNumberX(dataBox.left);
@@ -507,8 +531,6 @@ public class MapRenderRepositories {
 		return true;
 	}
 
-	
-
 	private MapIndex readMapObjectsForRendering(final int zoom, final RenderingRuleSearchRequest renderingReq,
 			ArrayList<BinaryMapDataObject> tempResult, ArrayList<BinaryMapDataObject> basemapResult, 
 			TLongSet ids, int[] count, boolean[] ocean, boolean[] land, List<BinaryMapDataObject> coastLines,
@@ -632,8 +654,6 @@ public class MapRenderRepositories {
 		return checkedRenderedState;
 	}
 
-	
-
 	public synchronized void loadMap(RotatedTileBox tileRect, MapTileDownloader mapTileDownloader) {
 		boolean prevInterrupted = interrupted;
 		interrupted = false;
@@ -731,7 +751,8 @@ public class MapRenderRepositories {
 					prefs.MAP_PREFERRED_LOCALE.get() != null && prefs.MAP_PREFERRED_LOCALE.get().isEmpty()) {
 				currentRenderingContext.preferredLocale = app.getLanguage();
 				currentRenderingContext.transliterate =
-						!languagesNotTransliterateOnBasemap.contains(app.getLanguage());
+						!languagesNotTransliterateOnBasemap.contains(app.getLanguage())
+						&& prefs.MAP_TRANSLITERATE_NAMES.get();
 			} else {
 				currentRenderingContext.preferredLocale = prefs.MAP_PREFERRED_LOCALE.get();
 				currentRenderingContext.transliterate = prefs.MAP_TRANSLITERATE_NAMES.get();
@@ -741,7 +762,7 @@ public class MapRenderRepositories {
 			//Text/icon scales according to mapDensity (so text is size of road)
 //			currentRenderingContext.textScale = (requestedBox.getDensity()*app.getSettings().TEXT_SCALE.get()); 
 			//Text/icon stays same for all sizes 
-			currentRenderingContext.textScale = (requestedBox.getDensity() * app.getSettings().TEXT_SCALE.get())
+			currentRenderingContext.textScale = (requestedBox.getDensity() * app.getOsmandMap().getTextScale())
 					/ mapDensity;
 			
 			currentRenderingContext.screenDensityRatio = 1 / Math.max(1, requestedBox.getDensity()) ;
@@ -809,7 +830,7 @@ public class MapRenderRepositories {
 			// keep cache
 			// this.prevBmp = null;
 			this.prevBmpLocation = null;
-			if (prefs.DEBUG_RENDERING_INFO.get() && OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
+			if (prefs.DEBUG_RENDERING_INFO.get() && OsmandPlugin.isActive(OsmandDevelopmentPlugin.class)) {
 				String timeInfo = "Searching: " + searchTime + " ms"; //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 				if (renderingDebugInfo != null) {
 					timeInfo += "\n" + renderingDebugInfo;
@@ -1251,8 +1272,4 @@ public class MapRenderRepositories {
 
 		return lineEnded;
 	}
-
-	
-
-
 }

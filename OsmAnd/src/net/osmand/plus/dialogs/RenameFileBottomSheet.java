@@ -8,7 +8,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -20,6 +19,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.FileUtils.RenameCallback;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -47,8 +47,8 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private OsmandApplication app;
 
-	private TextInputEditText editText;
 	private TextInputLayout nameTextBox;
+	private TextInputEditText editText;
 
 	private File file;
 	private String selectedFileName;
@@ -67,16 +67,31 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 		items.add(new TitleItem(getString(R.string.shared_string_rename)));
 
-		View view = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
-		nameTextBox = view.findViewById(R.id.name_text_box);
-		nameTextBox.setBoxBackgroundColorResource(nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light);
-		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_name));
-		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
-				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
-		nameTextBox.setDefaultHintTextColor(colorStateList);
+		View mainView = UiUtilities.getInflater(app, nightMode).inflate(R.layout.track_name_edit_text, null);
+		nameTextBox = setupTextBox(mainView);
+		editText = setupEditText(mainView);
+		AndroidUtils.softKeyboardDelayed(getActivity(), editText);
 
-		editText = view.findViewById(R.id.name_edit_text);
+		BaseBottomSheetItem editFolderName = new BaseBottomSheetItem.Builder()
+				.setCustomView(mainView)
+				.create();
+		items.add(editFolderName);
+	}
+
+	private TextInputLayout setupTextBox(View mainView) {
+		TextInputLayout nameTextBox = mainView.findViewById(R.id.name_text_box);
+		int backgroundId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
+		nameTextBox.setBoxBackgroundColorResource(backgroundId);
+		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_name));
+		ColorStateList colorStateList = ColorStateList.valueOf(ColorUtilities.getSecondaryTextColor(app, nightMode));
+		nameTextBox.setDefaultHintTextColor(colorStateList);
+		return nameTextBox;
+	}
+
+	private TextInputEditText setupEditText(View mainView) {
+		TextInputEditText editText = mainView.findViewById(R.id.name_edit_text);
 		editText.setText(selectedFileName);
+		editText.requestFocus();
 		editText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -91,11 +106,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 				updateFileName(s.toString());
 			}
 		});
-
-		BaseBottomSheetItem editFolderName = new BaseBottomSheetItem.Builder()
-				.setCustomView(view)
-				.create();
-		items.add(editFolderName);
+		return editText;
 	}
 
 	private void updateFileName(String name) {
@@ -116,7 +127,7 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putString(SOURCE_FILE_NAME_KEY, file.getAbsolutePath());
 		outState.putString(SELECTED_FILE_NAME_KEY, selectedFileName);
 		super.onSaveInstanceState(outState);
@@ -128,19 +139,21 @@ public class RenameFileBottomSheet extends MenuBottomSheetDialogFragment {
 		if (activity != null) {
 			AndroidUtils.hideSoftKeyboard(activity, editText);
 		}
-		File dest;
-		int index = file.getName().lastIndexOf('.');
-		String ext = index == -1 ? "" : file.getName().substring(index);
-		String newName = selectedFileName;
-		if (selectedFileName.endsWith(ext)) {
-			newName = selectedFileName.substring(0, selectedFileName.lastIndexOf(ext));
+
+		int idxOfLastDot = file.getName().lastIndexOf('.');
+		String extension = idxOfLastDot == -1 ? "" : file.getName().substring(idxOfLastDot).trim();
+		String newValidName = selectedFileName.trim();
+		if (newValidName.endsWith(extension)) {
+			newValidName = newValidName.substring(0, newValidName.lastIndexOf(extension)).trim();
 		}
-		if (SQLiteTileSource.EXT.equals(ext)) {
-			dest = renameSQLiteFile(app, file, newName + ext, null);
-		} else if (IndexConstants.GPX_FILE_EXT.equals(ext)) {
-			dest = renameGpxFile(app, file, newName + ext, false, null);
+
+		File dest;
+		if (SQLiteTileSource.EXT.equals(extension)) {
+			dest = renameSQLiteFile(app, file, newValidName + extension, null);
+		} else if (IndexConstants.GPX_FILE_EXT.equals(extension)) {
+			dest = renameGpxFile(app, file, newValidName + extension, false, null);
 		} else {
-			dest = renameFile(app, file, newName + ext, false, null);
+			dest = renameFile(app, file, newValidName + extension, false, null);
 		}
 		if (dest != null) {
 			Fragment fragment = getTargetFragment();

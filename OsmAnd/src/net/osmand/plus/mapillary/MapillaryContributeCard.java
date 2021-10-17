@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
@@ -26,7 +27,7 @@ public class MapillaryContributeCard extends ImageCard {
 		if (view != null) {
 			boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 			MapActivity ctx = getMapActivity();
-			AndroidUtils.setBackgroundColor(ctx, view, night, R.color.list_background_color_light, R.color.list_background_color_dark);
+			AndroidUtils.setBackgroundColor(ctx, view, ColorUtilities.getListBgColorId(night));
 			AndroidUtils.setTextPrimaryColor(ctx, (TextView) view.findViewById(R.id.title), night);
 			AndroidUtils.setBackground(ctx, view.findViewById(R.id.card_background), night,
 					R.drawable.context_menu_card_light, R.drawable.context_menu_card_dark);

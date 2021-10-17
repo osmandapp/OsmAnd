@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -30,16 +32,16 @@ public class NavAutoZoomMapAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 
-		OsmandSettings settings = activity.getMyApplication().getSettings();
+		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		settings.AUTO_ZOOM_MAP.set(!settings.AUTO_ZOOM_MAP.get());
-		Toast.makeText(activity, activity.getString(!settings.AUTO_ZOOM_MAP.get()
+		Toast.makeText(mapActivity, mapActivity.getString(!settings.AUTO_ZOOM_MAP.get()
 				? R.string.quick_action_auto_zoom_off : R.string.quick_action_auto_zoom_on), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);

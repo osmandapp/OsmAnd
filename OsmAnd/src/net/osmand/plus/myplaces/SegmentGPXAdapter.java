@@ -6,9 +6,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -49,7 +49,7 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 		boolean create = false;
 		if (row == null) {
 			create = true;
-			row = createGpxTabsView(displayHelper, parent, listener, nightMode);
+			row = createGpxTabsView(parent, nightMode);
 		}
 		GpxDisplayItem item = getItem(position);
 		if (item != null) {
@@ -66,13 +66,14 @@ public class SegmentGPXAdapter extends ArrayAdapter<GpxDisplayItem> {
 		return row;
 	}
 
-	public static View createGpxTabsView(TrackDisplayHelper displayHelper, ViewGroup root,
-										 SegmentActionsListener listener, boolean nightMode) {
+	public static View createGpxTabsView(ViewGroup root, boolean nightMode) {
 		Context context = root.getContext();
 		View row = UiUtilities.getInflater(context, nightMode).inflate(R.layout.gpx_list_item_tab_content, root, false);
 
 		PagerSlidingTabStrip tabLayout = row.findViewById(R.id.sliding_tabs);
 		tabLayout.setTabBackground(AndroidUtils.resolveAttribute(context, R.attr.btn_bg_border_inactive));
+		tabLayout.setDividerWidth(AndroidUtils.dpToPx(context, 1));
+		tabLayout.setDividerColor(ColorUtilities.getStrokedButtonsOutlineColor(context, nightMode));
 		tabLayout.setIndicatorHeight(0);
 		tabLayout.setShouldExpand(true);
 		WrapContentHeightViewPager pager = row.findViewById(R.id.pager);

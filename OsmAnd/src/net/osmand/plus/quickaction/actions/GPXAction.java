@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.data.LatLon;
@@ -25,7 +26,7 @@ public class GPXAction extends QuickAction {
 
 	public static final QuickActionType TYPE = new QuickActionType(6,
 			"gpx.add", GPXAction.class).
-			nameRes(R.string.quick_action_add_gpx).iconRes(R.drawable.ic_action_flag).
+			nameRes(R.string.quick_action_add_gpx).iconRes(R.drawable.ic_action_gnew_label_dark).
 			category(QuickActionType.CREATE_CATEGORY);
 
 	public static final String KEY_NAME = "name";
@@ -42,9 +43,9 @@ public class GPXAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(final MapActivity activity) {
+	public void execute(@NonNull final MapActivity mapActivity) {
 
-		final LatLon latLon = activity.getMapView()
+		final LatLon latLon = mapActivity.getMapView()
 				.getCurrentRotatedTileBox()
 				.getCenterLatLon();
 
@@ -52,7 +53,7 @@ public class GPXAction extends QuickAction {
 
 		if (title == null || title.isEmpty()) {
 
-			final Dialog progressDialog = new ProgressDialog(activity);
+			final Dialog progressDialog = new ProgressDialog(mapActivity);
 			progressDialog.setCancelable(false);
 			progressDialog.setTitle(R.string.search_address);
 			progressDialog.show();
@@ -65,7 +66,7 @@ public class GPXAction extends QuickAction {
 						public void geocodingDone(String address) {
 
 							progressDialog.dismiss();
-							activity.getContextMenu().addWptPt(latLon, address,
+							mapActivity.getContextMenu().addWptPt(latLon, address,
 									getParams().get(KEY_CATEGORY_NAME),
 									Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
 									!Boolean.valueOf(getParams().get(KEY_DIALOG)));
@@ -73,16 +74,16 @@ public class GPXAction extends QuickAction {
 
 					}, null);
 
-			activity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
+			mapActivity.getMyApplication().getGeocodingLookupService().lookupAddress(lookupRequest);
 
-		} else activity.getContextMenu().addWptPt(latLon, title,
+		} else mapActivity.getContextMenu().addWptPt(latLon, title,
 				getParams().get(KEY_CATEGORY_NAME),
 				Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)),
 				!Boolean.valueOf(getParams().get(KEY_DIALOG)));
 	}
 
 	@Override
-	public void drawUI(final ViewGroup parent, final MapActivity activity) {
+	public void drawUI(@NonNull final ViewGroup parent, @NonNull final MapActivity mapActivity) {
 
 		final View root = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_gpx, parent, false);
@@ -104,13 +105,13 @@ public class GPXAction extends QuickAction {
 			if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)) == 0) {
 
 				categoryEdit.setText("");
-				categoryImage.setColorFilter(activity.getResources().getColor(R.color.icon_color_default_light));
+				categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.icon_color_default_light));
 			}
 
 		} else {
 
 			categoryEdit.setText("");
-			categoryImage.setColorFilter(activity.getResources().getColor(R.color.icon_color_default_light));
+			categoryImage.setColorFilter(mapActivity.getResources().getColor(R.color.icon_color_default_light));
 
 			getParams().put(KEY_CATEGORY_NAME, "");
 			getParams().put(KEY_CATEGORY_COLOR, "0");
@@ -123,7 +124,7 @@ public class GPXAction extends QuickAction {
 				SelectFavoriteCategoryBottomSheet dialogFragment = SelectFavoriteCategoryBottomSheet.createInstance("", "");
 
 				dialogFragment.show(
-						activity.getSupportFragmentManager(),
+						mapActivity.getSupportFragmentManager(),
 						SelectFavoriteCategoryBottomSheet.TAG);
 
 				dialogFragment.setSelectionListener(new SelectFavoriteCategoryBottomSheet.CategorySelectionListener() {
@@ -137,7 +138,7 @@ public class GPXAction extends QuickAction {
 		});
 
 		SelectFavoriteCategoryBottomSheet dialogFragment = (SelectFavoriteCategoryBottomSheet)
-				activity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
+				mapActivity.getSupportFragmentManager().findFragmentByTag(SelectCategoryDialogFragment.TAG);
 
 		if (dialogFragment != null) {
 
@@ -152,7 +153,7 @@ public class GPXAction extends QuickAction {
 		} else {
 
 			EditCategoryDialogFragment dialog = (EditCategoryDialogFragment)
-					activity.getSupportFragmentManager().findFragmentByTag(EditCategoryDialogFragment.TAG);
+					mapActivity.getSupportFragmentManager().findFragmentByTag(EditCategoryDialogFragment.TAG);
 
 			if (dialog != null) {
 
@@ -168,7 +169,7 @@ public class GPXAction extends QuickAction {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 
 		getParams().put(KEY_NAME, ((EditText) root.findViewById(R.id.name_edit)).getText().toString());
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));

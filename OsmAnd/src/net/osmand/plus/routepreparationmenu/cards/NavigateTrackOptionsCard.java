@@ -1,5 +1,9 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,23 +12,28 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
+import net.osmand.plus.settings.backend.ApplicationMode;
 
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
+public class NavigateTrackOptionsCard extends MapBaseCard {
 
-public class NavigateTrackOptionsCard extends BaseCard {
+	private final LocalRoutingParameter passWholeRoute;
+	private final LocalRoutingParameter navigationType;
+	private final LocalRoutingParameter connectPointsStraightly;
 
-	private LocalRoutingParameter passWholeRoute;
-	private LocalRoutingParameter navigationType;
+	private final boolean userIntermediateRtePoints;
 
 	public NavigateTrackOptionsCard(@NonNull MapActivity mapActivity,
-	                                @NonNull LocalRoutingParameter passWholeRoute,
-	                                @NonNull LocalRoutingParameter navigationType) {
+									@NonNull LocalRoutingParameter passWholeRoute,
+									@NonNull LocalRoutingParameter navigationType,
+									@NonNull LocalRoutingParameter connectPointsStraightly,
+									boolean useIntermediateRtePoints) {
 		super(mapActivity);
 		this.passWholeRoute = passWholeRoute;
 		this.navigationType = navigationType;
+		this.connectPointsStraightly = connectPointsStraightly;
+		this.userIntermediateRtePoints = useIntermediateRtePoints;
 	}
 
 	@Override
@@ -35,10 +44,17 @@ public class NavigateTrackOptionsCard extends BaseCard {
 	@Override
 	protected void updateContent() {
 		setupPassWholeRoute(view.findViewById(R.id.pass_whole_route_container));
-		setupNavigationType(view.findViewById(R.id.navigation_type_container));
+		View navTypeContainer = view.findViewById(R.id.navigation_type_container);
+		if (userIntermediateRtePoints) {
+			setupConnectTrackPoints(navTypeContainer, connectPointsStraightly);
+		} else {
+			setupNavigationType(navTypeContainer, navigationType);
+		}
 	}
 
 	private void setupPassWholeRoute(final View parameterView) {
+		AndroidUiHelper.updateVisibility(parameterView, true);
+
 		View buttonsView = parameterView.findViewById(R.id.custom_radio_buttons);
 		TextView leftButton = parameterView.findViewById(R.id.left_button);
 		TextView rightButton = parameterView.findViewById(R.id.right_button);
@@ -70,33 +86,56 @@ public class NavigateTrackOptionsCard extends BaseCard {
 		});
 	}
 
-	private void setupNavigationType(final View parameterView) {
-		View buttonsView = parameterView.findViewById(R.id.custom_radio_buttons);
+	private void setupConnectTrackPoints(View parameterView, LocalRoutingParameter parameter) {
+		setupParameterView(parameterView, parameter);
+
 		TextView description = parameterView.findViewById(R.id.description);
 		TextView leftButton = parameterView.findViewById(R.id.left_button);
 		TextView rightButton = parameterView.findViewById(R.id.right_button);
 
+		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+		leftButton.setText(appMode.toHumanString());
+		rightButton.setText(R.string.routing_profile_straightline);
+		description.setText(R.string.connect_track_points_as);
+	}
+
+	private void setupNavigationType(View parameterView, LocalRoutingParameter parameter) {
+		setupParameterView(parameterView, parameter);
+
+		TextView description = parameterView.findViewById(R.id.description);
+		TextView leftButton = parameterView.findViewById(R.id.left_button);
+		TextView rightButton = parameterView.findViewById(R.id.right_button);
+
+		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
 		description.setText(R.string.nav_type_hint);
 		leftButton.setText(R.string.routing_profile_straightline);
-		rightButton.setText(app.getRoutingHelper().getAppMode().toHumanString());
+		rightButton.setText(appMode.toHumanString());
+	}
 
-		boolean enabled = navigationType.isSelected(app.getSettings());
+	private void setupParameterView(final View parameterView, LocalRoutingParameter parameter) {
+		AndroidUiHelper.updateVisibility(parameterView, true);
+
+		View buttonsView = parameterView.findViewById(R.id.custom_radio_buttons);
+		TextView leftButton = parameterView.findViewById(R.id.left_button);
+		TextView rightButton = parameterView.findViewById(R.id.right_button);
+
+		boolean enabled = parameter.isSelected(app.getSettings());
 		CustomRadioButtonType buttonType = enabled ? END : START;
 		UiUtilities.updateCustomRadioButtons(app, buttonsView, nightMode, buttonType);
 
 		leftButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (navigationType.isSelected(app.getSettings())) {
-					applyParameter(parameterView, navigationType, START, false);
+				if (parameter.isSelected(app.getSettings())) {
+					applyParameter(parameterView, parameter, START, false);
 				}
 			}
 		});
 		rightButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (!navigationType.isSelected(app.getSettings())) {
-					applyParameter(parameterView, navigationType, END, true);
+				if (!parameter.isSelected(app.getSettings())) {
+					applyParameter(parameterView, parameter, END, true);
 				}
 			}
 		});

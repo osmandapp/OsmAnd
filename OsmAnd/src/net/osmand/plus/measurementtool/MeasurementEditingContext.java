@@ -2,7 +2,9 @@ package net.osmand.plus.measurementtool;
 
 import android.util.Pair;
 
-import net.osmand.AndroidUtils;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
@@ -10,6 +12,7 @@ import net.osmand.Location;
 import net.osmand.LocationsHolder;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.command.ApplyGpxApproximationCommand;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
@@ -44,12 +47,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.NEXT_SEGMENT;
 import static net.osmand.plus.measurementtool.MeasurementEditingContext.CalculationMode.WHOLE_TRACK;
 import static net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType.APPROXIMATE_POINTS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class MeasurementEditingContext implements IRouteSettingsListener {
 
@@ -77,7 +77,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 	private int calculatedPairs;
 	private int pointsToCalculateSize;
 	private CalculationMode lastCalculationMode = WHOLE_TRACK;
-	private ApplicationMode appMode = DEFAULT_APP_MODE;
+	private ApplicationMode appMode;
 
 	private SnapToRoadProgressListener progressListener;
 	private RouteCalculationProgress calculationProgress;
@@ -95,8 +95,12 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		ADD_BEFORE,
 	}
 
-	public void setApplication(OsmandApplication application) {
-		this.application = application;
+	public MeasurementEditingContext(OsmandApplication app) {
+		this.application = app;
+		appMode = app.getSettings().getApplicationMode();
+		if (PUBLIC_TRANSPORT_KEY.equals(appMode.getRoutingProfile())) {
+			appMode = ApplicationMode.DEFAULT;
+		}
 	}
 
 	public void setupRouteSettingsListener() {
@@ -773,7 +777,7 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			return;
 		}
 		GPXFile gpxFile = gpxData.getGpxFile();
-		if(gpxFile.hasRtePt() && !gpxFile.hasTrkPt()){
+		if (gpxFile.hasRtePt() && !gpxFile.hasTrkPt()) {
 			addPoints(gpxFile.getRoutePoints());
 			return;
 		}
@@ -957,7 +961,6 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		reg.initRouteEncodingRule(0, "highway", RouteResultPreparation.UNMATCHED_HIGHWAY_TYPE);
 
 		final RouteCalculationParams params = new RouteCalculationParams();
-		params.inSnapToRoadMode = true;
 		params.start = start;
 
 		ApplicationMode appMode = ApplicationMode.valueOfStringKey(currentPair.first.getProfileType(), DEFAULT_APP_MODE);
@@ -987,12 +990,16 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 			}
 
 			@Override
+			public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+			}
+
+			@Override
 			public void finish() {
 				calculatedPairs = 0;
 				pointsToCalculateSize = 0;
 			}
 		};
-		params.resultListener = new RouteCalculationResultListener() {
+		params.alternateResultListener = new RouteCalculationResultListener() {
 			@Override
 			public void onRouteCalculated(RouteCalculationResult route) {
 				List<Location> locations = route.getRouteLocations();
@@ -1061,7 +1068,13 @@ public class MeasurementEditingContext implements IRouteSettingsListener {
 		if (application == null || before.points.isEmpty()) {
 			return null;
 		}
-		return RouteExporter.exportRoute(gpxName, getRouteSegments(), null);
+		List<WptPt> points = null;
+		GpxData gpxData = getGpxData();
+		if (gpxData != null && gpxData.getGpxFile() != null) {
+			points = gpxData.getGpxFile().getPoints();
+		}
+
+		return RouteExporter.exportRoute(gpxName, getRouteSegments(), points, getRoutePoints());
 	}
 
 	private TrkSegment getRouteSegment(int startPointIndex, int endPointIndex) {

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 
 import androidx.annotation.NonNull;
@@ -124,6 +125,8 @@ public class ExternalApiHelper {
 	public static final String PARAM_LON = "lon";
 	public static final String PARAM_MAP_LAT = "map_lat";
 	public static final String PARAM_MAP_LON = "map_lon";
+	public static final String PARAM_DESTINATION_LAT = "destination_lat";
+	public static final String PARAM_DESTINATION_LON = "destination_lon";
 	public static final String PARAM_COLOR = "color";
 	public static final String PARAM_VISIBLE = "visible";
 
@@ -407,7 +410,7 @@ public class ExternalApiHelper {
 					|| API_CMD_RECORD_VIDEO.equals(cmd)
 					|| API_CMD_RECORD_PHOTO.equals(cmd)
 					|| API_CMD_STOP_AV_REC.equals(cmd)) {
-				AudioVideoNotesPlugin plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+				AudioVideoNotesPlugin plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -443,26 +446,19 @@ public class ExternalApiHelper {
 					result.putExtra(PARAM_MAP_LON, mapLocation.getLongitude());
 				}
 
-				final RoutingHelper routingHelper = app.getRoutingHelper();
+				RoutingHelper routingHelper = app.getRoutingHelper();
 				if (routingHelper.isRouteCalculated()) {
-					int time = routingHelper.getLeftTime();
-					result.putExtra(PARAM_TIME_LEFT, time);
-					long eta = time + System.currentTimeMillis() / 1000;
-					result.putExtra(PARAM_ETA, eta);
-					result.putExtra(PARAM_DISTANCE_LEFT, routingHelper.getLeftDistance());
+					LatLon finalLocation = routingHelper.getFinalLocation();
+					result.putExtra(PARAM_DESTINATION_LAT, finalLocation.getLatitude());
+					result.putExtra(PARAM_DESTINATION_LON, finalLocation.getLongitude());
 
-					NextDirectionInfo ni = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
-					if (ni.distanceTo > 0) {
-						updateTurnInfo("next_", result, ni);
-						ni = routingHelper.getNextRouteDirectionInfoAfter(ni, new NextDirectionInfo(), true);
-						if (ni.distanceTo > 0) {
-							updateTurnInfo("after_next", result, ni);
-						}
-					}
-					routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
-					if (ni.distanceTo > 0) {
-						updateTurnInfo("no_speak_next_", result, ni);
-					}
+					int time = routingHelper.getLeftTime();
+					long eta = time + System.currentTimeMillis() / 1000;
+
+					result.putExtra(PARAM_ETA, eta);
+					result.putExtra(PARAM_TIME_LEFT, time);
+					result.putExtra(PARAM_DISTANCE_LEFT, routingHelper.getLeftDistance());
+					result.putExtras(getRouteDirectionsInfo(app));
 				}
 				result.putExtra(PARAM_VERSION, VERSION_CODE);
 
@@ -516,7 +512,7 @@ public class ExternalApiHelper {
 						PointDescription.POINT_TYPE_MAP_MARKER, name != null ? name : "");
 
 				MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-				markersHelper.addMapMarker(new LatLon(lat, lon), pd);
+				markersHelper.addMapMarker(new LatLon(lat, lon), pd, null);
 
 				MapMarker marker = markersHelper.getFirstMapMarker();
 				if (marker != null) {
@@ -530,7 +526,7 @@ public class ExternalApiHelper {
 				showOnMap(lat, lon, null, null);
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_START_GPX_REC.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -543,7 +539,7 @@ public class ExternalApiHelper {
 				}
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_STOP_GPX_REC.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -556,7 +552,7 @@ public class ExternalApiHelper {
 				}
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_SAVE_GPX.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -568,7 +564,7 @@ public class ExternalApiHelper {
 				}
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_CLEAR_GPX.equals(cmd)) {
-				OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				OsmandMonitoringPlugin plugin = OsmandPlugin.getActivePlugin(OsmandMonitoringPlugin.class);
 				if (plugin == null) {
 					resultCode = RESULT_CODE_ERROR_PLUGIN_INACTIVE;
 					finish = true;
@@ -692,20 +688,45 @@ public class ExternalApiHelper {
 		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	private void updateTurnInfo(String prefix, Intent result, NextDirectionInfo ni) {
-		result.putExtra(prefix + PARAM_NT_DISTANCE, ni.distanceTo);
-		result.putExtra(prefix + PARAM_NT_IMMINENT, ni.imminent);
-		if (ni.directionInfo != null && ni.directionInfo.getTurnType() != null) {
-			TurnType tt = ni.directionInfo.getTurnType();
-			RouteDirectionInfo a = ni.directionInfo;
-			result.putExtra(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelperUtils.formatStreetName(a.getStreetName(), a.getRef(), a.getDestinationName(), ""));
-			result.putExtra(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
-			result.putExtra(prefix + PARAM_NT_DIRECTION_ANGLE, tt.getTurnAngle());
-			result.putExtra(prefix + PARAM_NT_DIRECTION_POSSIBLY_LEFT, tt.isPossibleLeftTurn());
-			result.putExtra(prefix + PARAM_NT_DIRECTION_POSSIBLY_RIGHT, tt.isPossibleRightTurn());
-			if (tt.getLanes() != null) {
-				result.putExtra(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
+	public static void updateTurnInfo(String prefix, Bundle bundle, NextDirectionInfo nextInfo) {
+		bundle.putInt(prefix + PARAM_NT_DISTANCE, nextInfo.distanceTo);
+		bundle.putInt(prefix + PARAM_NT_IMMINENT, nextInfo.imminent);
+		if (nextInfo.directionInfo != null && nextInfo.directionInfo.getTurnType() != null) {
+			updateRouteDirectionInfo(prefix, bundle, nextInfo.directionInfo);
+		}
+	}
+
+	public static Bundle getRouteDirectionsInfo(OsmandApplication app) {
+		Bundle bundle = new Bundle();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		RouteDirectionInfo directionInfo = routingHelper.getRoute().getCurrentDirection();
+		if (directionInfo != null) {
+			updateRouteDirectionInfo("current_", bundle, directionInfo);
+		}
+		NextDirectionInfo ni = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+		if (ni.distanceTo > 0) {
+			updateTurnInfo("next_", bundle, ni);
+			ni = routingHelper.getNextRouteDirectionInfoAfter(ni, new NextDirectionInfo(), true);
+			if (ni.distanceTo > 0) {
+				updateTurnInfo("after_next", bundle, ni);
 			}
+		}
+		routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
+		if (ni.distanceTo > 0) {
+			updateTurnInfo("no_speak_next_", bundle, ni);
+		}
+		return bundle;
+	}
+
+	public static void updateRouteDirectionInfo(String prefix, Bundle bundle, RouteDirectionInfo info) {
+		TurnType tt = info.getTurnType();
+		bundle.putString(prefix + PARAM_NT_DIRECTION_NAME, RoutingHelperUtils.formatStreetName(info.getStreetName(), info.getRef(), info.getDestinationName(), ""));
+		bundle.putString(prefix + PARAM_NT_DIRECTION_TURN, tt.toXmlString());
+		bundle.putFloat(prefix + PARAM_NT_DIRECTION_ANGLE, tt.getTurnAngle());
+		bundle.putBoolean(prefix + PARAM_NT_DIRECTION_POSSIBLY_LEFT, tt.isPossibleLeftTurn());
+		bundle.putBoolean(prefix + PARAM_NT_DIRECTION_POSSIBLY_RIGHT, tt.isPossibleRightTurn());
+		if (tt.getLanes() != null) {
+			bundle.putString(prefix + PARAM_NT_DIRECTION_LANES, Arrays.toString(tt.getLanes()));
 		}
 	}
 
@@ -972,7 +993,7 @@ public class ExternalApiHelper {
 			}
 
 			if (intent != null) {
-				mapActivity.startActivity(intent);
+				AndroidUtils.startActivityIfSafe(mapActivity, intent);
 			}
 
 		} catch (Exception e) {

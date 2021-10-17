@@ -1,5 +1,8 @@
 package net.osmand.plus.mapmarkers;
 
+import static net.osmand.plus.settings.backend.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
+import static net.osmand.plus.settings.backend.OsmandSettings.MIDDLE_TOP_CONSTANT;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -39,6 +42,7 @@ import net.osmand.TspAnt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -64,9 +68,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.settings.backend.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
-import static net.osmand.plus.settings.backend.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
 public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocationListener {
 
@@ -173,8 +174,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final int backgroundColor = ContextCompat.getColor(mapActivity,
-				nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
+		final int backgroundColor = ColorUtilities.getActivityBgColor(mapActivity, nightMode);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		fullScreen = portrait && planRouteContext.isMarkersListOpened();
 		int layoutRes = fullScreen ? R.layout.fragment_plan_route_full_screen : R.layout.fragment_plan_route_half_screen;
@@ -347,7 +347,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 			public void onDragEnded(RecyclerView.ViewHolder holder) {
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0) {
-					mapActivity.getMyApplication().getMapMarkersHelper().reorderActiveMarkersIfNeeded();
+					mapActivity.getMyApplication().getMapMarkersHelper().saveMarkersOrder();
 					mapActivity.refreshMap();
 					adapter.reloadData();
 					try {
@@ -452,7 +452,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+		return getIcon(id, ColorUtilities.getDefaultIconColorId(nightMode));
 	}
 
 	private Drawable getActiveIcon(@DrawableRes int id) {
@@ -793,13 +793,17 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 	private void showHideMarkersList() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && portrait) {
-			cancelSnapToRoad = false;
-			planRouteContext.setMarkersListOpened(!planRouteContext.isMarkersListOpened());
-			int containerRes = planRouteContext.isMarkersListOpened() ? R.id.fragmentContainer : R.id.bottomFragmentContainer;
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.remove(this)
-					.add(containerRes, new PlanRouteFragment(), PlanRouteFragment.TAG)
-					.commitAllowingStateLoss();
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			if (fragmentManager.findFragmentByTag(TAG) == null) {
+				cancelSnapToRoad = false;
+				planRouteContext.setMarkersListOpened(!planRouteContext.isMarkersListOpened());
+				int containerRes = planRouteContext.isMarkersListOpened() ?
+						R.id.fragmentContainer : R.id.bottomFragmentContainer;
+				fragmentManager.beginTransaction()
+						.remove(this)
+						.add(containerRes, new PlanRouteFragment(), TAG)
+						.commitAllowingStateLoss();
+			}
 		}
 	}
 
@@ -868,23 +872,30 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			planRouteContext.setFragmentVisible(false);
-			activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
+			activity.getSupportFragmentManager()
+					.beginTransaction()
+					.remove(this)
+					.commitAllowingStateLoss();
 		}
 	}
 
-	public static boolean showInstance(MapActivity mapActivity) {
-		try {
+	public static boolean showInstance(@NonNull MapActivity mapActivity) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			boolean fullscreen = portrait && mapActivity.getMyApplication().getMapMarkersHelper().getPlanRouteContext().isMarkersListOpened();
-			int containerRes = portrait ? (fullscreen ? R.id.fragmentContainer : R.id.bottomFragmentContainer) : R.id.topFragmentContainer;
-			FragmentManager fm = mapActivity.getSupportFragmentManager();
-			fm.beginTransaction()
+			boolean markersListOpened = mapActivity.getMyApplication().getMapMarkersHelper()
+					.getPlanRouteContext()
+					.isMarkersListOpened();
+			boolean fullscreen = portrait && markersListOpened;
+			int containerRes = portrait
+					? (fullscreen ? R.id.fragmentContainer : R.id.bottomFragmentContainer)
+					: R.id.topFragmentContainer;
+			fragmentManager.beginTransaction()
 					.add(containerRes, new PlanRouteFragment(), PlanRouteFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (Exception e) {
-			return false;
 		}
+		return false;
 	}
 
 	private void sortSelectedMarkersDoorToDoor(final MapActivity mapActivity, final boolean startFromLoc, final Location myLoc) {

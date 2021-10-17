@@ -39,6 +39,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.CityItem;
@@ -95,6 +96,8 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.maps_in_category_fragment, container, false);
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 
 		if (savedInstanceState != null) {
 			searchText = savedInstanceState.getString(SEARCH_TEXT_DLG_KEY);
@@ -116,12 +119,10 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			downloadTypesToShow.add(DownloadActivityType.NORMAL_FILE.getTag());
 		}
 
-		boolean isLightContent = getMyApplication().getSettings().isLightContent();
-		int iconColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
-
+		int iconColorResId = ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode);
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		Drawable icBack = getMyApplication().getUIUtilities().getIcon(
-				AndroidUtils.getNavigationIconResId(getContext()), iconColorResId);
+		Drawable icBack = app.getUIUtilities().getIcon(
+				AndroidUtils.getNavigationIconResId(app), iconColorResId);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -158,12 +159,12 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_map_hint);
-		searchEditText.setTextColor(ContextCompat.getColor(activity, isLightContent ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
-		searchEditText.setHintTextColor(ContextCompat.getColor(activity, isLightContent ? R.color.inactive_item_orange : R.color.searchbar_tab_inactive_dark));
+		searchEditText.setTextColor(ColorUtilities.getPrimaryTextColor(activity, !nightMode));
+		searchEditText.setHintTextColor(ContextCompat.getColor(activity, nightMode ? R.color.inactive_item_orange : R.color.searchbar_tab_inactive_dark));
 
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
 		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
-		clearButton.setColorFilter(ContextCompat.getColor(getMyApplication(), iconColorResId));
+		clearButton.setColorFilter(ContextCompat.getColor(app, iconColorResId));
 		clearButton.setVisibility(View.GONE);
 
 		searchEditText.addTextChangedListener(new TextWatcher() {
@@ -201,13 +202,13 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setShowsDialog(true);
-		final boolean isLightContent = getMyApplication().getSettings().isLightContent();
-		final int colorId = isLightContent ? R.color.list_background_color_light : R.color.list_background_color_dark;
-		listView.setBackgroundColor(ContextCompat.getColor(getActivity(), colorId));
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		listView.setBackgroundColor(ColorUtilities.getListBgColor(app, nightMode));
 	}
 
 	@Override
-	public void newDownloadIndexes() {
+	public void onUpdatedIndexesList() {
 		if(banner != null) {
 			banner.updateBannerInProgress();
 		}
@@ -566,7 +567,7 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 								if (count++ > searchCityLimit) {
 									return false;
 								}
-								List<String> otherNames = amenity.getAllNames(true);
+								List<String> otherNames = amenity.getOtherNames(true);
 								String localeName = amenity.getName(lang, translit);
 								String subType = amenity.getSubType();
 								if (!citySubTypes.contains(subType)

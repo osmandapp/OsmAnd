@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -29,20 +31,18 @@ public class ShowHideOSMBugAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
-
-		activity.getMyApplication().getSettings().SHOW_OSM_BUGS.set(
-				!activity.getMyApplication().getSettings().SHOW_OSM_BUGS.get());
-
-		OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+	public void execute(@NonNull MapActivity mapActivity) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		app.getSettings().SHOW_OSM_BUGS.set(!app.getSettings().SHOW_OSM_BUGS.get());
+		OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		if (plugin != null) {
-			plugin.updateLayers(activity.getMapView(), activity);
-			activity.getMapView().refreshMap(true);
+			plugin.updateLayers(mapActivity, mapActivity);
+			mapActivity.getMapView().refreshMap(true);
 		}
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);

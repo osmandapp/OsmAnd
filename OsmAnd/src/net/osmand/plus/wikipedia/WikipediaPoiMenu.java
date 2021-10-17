@@ -2,6 +2,7 @@ package net.osmand.plus.wikipedia;
 
 import android.widget.ArrayAdapter;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -65,7 +66,7 @@ public class WikipediaPoiMenu {
 		int toggleIconId = R.drawable.ic_plugin_wikipedia;
 		int toggleIconColorId;
 		if (enabled) {
-			toggleIconColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			toggleIconColorId = ColorUtilities.getActiveColorId(nightMode);
 		} else {
 			toggleIconColorId = ContextMenuItem.INVALID_ID;
 		}
@@ -99,11 +100,8 @@ public class WikipediaPoiMenu {
 				downloadThread.runReloadIndexFiles();
 			}
 		}
-		final boolean downloadIndexes = settings.isInternetConnectionAvailable()
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
-		if (downloadIndexes) {
+		if (downloadThread.shouldDownloadIndexes()) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setTitleId(R.string.shared_string_download_map, mapActivity)
 					.setDescription(app.getString(R.string.wiki_menu_download_descr))

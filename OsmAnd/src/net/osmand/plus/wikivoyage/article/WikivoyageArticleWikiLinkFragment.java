@@ -1,5 +1,7 @@
 package net.osmand.plus.wikivoyage.article;
 
+import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -20,8 +23,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleDividerItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
-
-import static net.osmand.plus.download.ui.SearchDialogFragment.SHOW_WIKI_KEY;
 
 public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFragment {
 
@@ -72,19 +73,16 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 				.setIcon(downloadIcon)
 				.setTitle(getString(R.string.download_wikipedia_label))
 				.setLayoutId(R.layout.bottom_sheet_item_in_frame_with_descr_and_icon)
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						FragmentActivity activity = getActivity();
-						OsmandApplication app = getMyApplication();
-						if (activity != null && app != null) {
-							Intent newIntent = new Intent(activity, app.getAppCustomization().getDownloadActivity());
-							newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-							newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
-							newIntent.putExtra(SHOW_WIKI_KEY, true);
-							activity.startActivity(newIntent);
-							dismiss();
-						}
+				.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					OsmandApplication app = getMyApplication();
+					if (activity != null && app != null) {
+						Intent newIntent = new Intent(activity, app.getAppCustomization().getDownloadActivity());
+						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+						newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
+						newIntent.putExtra(SHOW_WIKI_KEY, true);
+						AndroidUtils.startActivityIfSafe(app, newIntent);
+						dismiss();
 					}
 				})
 				.create();
@@ -109,7 +107,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(ARTICLE_URL_KEY, articleUrl);
 		outState.putString(WIKI_REGION, wikiRegion);

@@ -22,7 +22,7 @@ import static net.osmand.router.RouteExporter.OSMAND_ROUTER_V2;
 
 public class GPXRouteParams {
 
-	private static final String OSMAND_ROUTER = "OsmAndRouter";
+	public static final String OSMAND_ROUTER = "OsmAndRouter";
 
 	protected List<LocationPoint> wpt;
 	protected List<RouteSegmentResult> route;
@@ -33,6 +33,7 @@ public class GPXRouteParams {
 	protected boolean reverse;
 	protected boolean passWholeRoute;
 	protected boolean calculateOsmAndRoute;
+	protected boolean connectPointsStraightly;
 	protected boolean useIntermediatePointsRTE;
 	protected boolean calculateOsmAndRouteParts;
 
@@ -44,20 +45,6 @@ public class GPXRouteParams {
 
 	public List<LocationPoint> getWpt() {
 		return wpt;
-	}
-
-	public Location getStartPointForRoute() {
-		if (!points.isEmpty()) {
-			return points.get(0);
-		}
-		return null;
-	}
-
-	public Location getEndPointForRoute() {
-		if (!points.isEmpty()) {
-			return points.get(points.size());
-		}
-		return null;
 	}
 
 	public LatLon getLastPoint() {
@@ -73,10 +60,11 @@ public class GPXRouteParams {
 		reverse = builder.reverse;
 		passWholeRoute = builder.passWholeRoute;
 		calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
-		useIntermediatePointsRTE = builder.isUseIntermediatePointsRTE();
+		connectPointsStraightly = builder.connectPointsStraightly;
+		useIntermediatePointsRTE = builder.useIntermediateRtePoints();
 		builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
 		if (!file.isPointsEmpty()) {
-			wpt = new ArrayList<LocationPoint>(file.getPoints().size());
+			wpt = new ArrayList<>(file.getPoints().size());
 			for (WptPt w : file.getPoints()) {
 				wpt.add(new WptLocationPoint(w));
 			}
@@ -136,14 +124,15 @@ public class GPXRouteParams {
 		boolean calculateOsmAndRoute = false;
 		// parameters
 		private final GPXFile file;
+		private final boolean leftSide;
 		private boolean reverse;
-		private boolean leftSide;
 		private boolean passWholeRoute;
 		private boolean calculateOsmAndRouteParts;
+		private boolean connectPointsStraightly;
 		private int selectedSegment = -1;
 
 		public GPXRouteParamsBuilder(GPXFile file, OsmandSettings settings) {
-			leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+			this.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 			this.file = file;
 		}
 
@@ -159,7 +148,7 @@ public class GPXRouteParams {
 			this.calculateOsmAndRouteParts = calculateOsmAndRouteParts;
 		}
 
-		public boolean isUseIntermediatePointsRTE() {
+		public boolean useIntermediateRtePoints() {
 			return file.hasRtePt() && !file.hasTrkPt();
 		}
 
@@ -169,6 +158,14 @@ public class GPXRouteParams {
 
 		public void setCalculateOsmAndRoute(boolean calculateOsmAndRoute) {
 			this.calculateOsmAndRoute = calculateOsmAndRoute;
+		}
+
+		public boolean shouldConnectPointsStraightly() {
+			return connectPointsStraightly;
+		}
+
+		public void setConnectPointStraightly(boolean connectPointStraightly) {
+			this.connectPointsStraightly = connectPointStraightly;
 		}
 
 		public int getSelectedSegment() {

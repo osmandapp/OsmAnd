@@ -4,21 +4,21 @@ package net.osmand.plus.activities.search;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 
 import androidx.appcompat.app.ActionBar.OnNavigationListener;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 
+import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityAssistant;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.FavouritePoint;
@@ -26,14 +26,16 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavoritesListActivity;
 import net.osmand.plus.activities.FavoritesListFragment;
 import net.osmand.plus.activities.NavigatePointFragment;
 import net.osmand.plus.activities.TabActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.Serializable;
 import java.lang.ref.WeakReference;
@@ -44,6 +46,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class SearchActivity extends TabActivity implements OsmAndLocationListener {
+
+	private static final Log LOG = PlatformUtil.getLog(SearchActivity.class);
+
 	public static final int POI_TAB_INDEX = 0;
 	public static final int ADDRESS_TAB_INDEX = 1;
 	public static final int LOCATION_TAB_INDEX = 2;
@@ -63,7 +68,6 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	public static final String SEARCH_LON = "net.osmand.search_lon"; //$NON-NLS-1$
 	public static final String SHOW_ONLY_ONE_TAB = "SHOW_ONLY_ONE_TAB"; //$NON-NLS-1$
 
-	Button searchPOIButton;
 	private LatLon searchPoint = null;
 	private LatLon reqSearchPoint = null;
 	private boolean searchAroundCurrentLocation = false;
@@ -76,8 +80,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	
 	private AccessibilityAssistant accessibilityAssistant;
 	private NavigationInfo navigationInfo;
-	private View spinnerView;
-	
+
 	public interface SearchActivityChild {
 		
 		public void locationUpdate(LatLon l);
@@ -131,19 +134,10 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 			});
 		} else {
 			setContentView(R.layout.search_activity_single);
-			Class<?> cl = getFragment(tab);
-			try {
-				getSupportFragmentManager().beginTransaction().replace(R.id.layout, (Fragment) cl.newInstance()).commit();
-			} catch (InstantiationException e) {
-				throw new IllegalStateException(e);
-			} catch (IllegalAccessException e) {
-				throw new IllegalStateException(e);
-			}
+			showFragment(tab);
         }
         setTopSpinner();
-		
-		Log.i("net.osmand", "Start on create " + (System.currentTimeMillis() - t ));
-		
+
 		Intent intent = getIntent();
 		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
 		LatLon last = settings.getLastKnownMapLocation();
@@ -162,16 +156,29 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 				}
 			}
 		}
-		if(searchPoint == null){
-			if(!Algorithms.objectEquals(reqSearchPoint, last)){
+		if (searchPoint == null) {
+			if (!Algorithms.objectEquals(reqSearchPoint, last)) {
 				reqSearchPoint = last;
 				updateSearchPoint(last, getString(R.string.select_search_position) + " " + getString(R.string.search_position_map_view), false);
 			}
 		}
-    }
+
+		LOG.info("Start on create " + (System.currentTimeMillis() - t));
+	}
+
+	private void showFragment(Integer tab) {
+		Fragment fragment = instantiateFragment(getFragment(tab));
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		String tag = fragment.getClass().getName();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, tag)) {
+			fragmentManager.beginTransaction()
+					.replace(R.id.layout, fragment, tag)
+					.commitAllowingStateLoss();
+		}
+	}
 
 	protected Class<?> getFragment(int tab) {
-		if(tab == POI_TAB_INDEX) {
+		if (tab == POI_TAB_INDEX) {
 			return SearchPoiFilterFragment.class;
 		} else if(tab == ADDRESS_TAB_INDEX) {
 			return SearchAddressFragment.class;
@@ -183,6 +190,18 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 			return FavoritesListFragment.class;
 		}
 		return SearchPoiFilterFragment.class;
+	}
+
+	private Fragment instantiateFragment(Class<?> clazz) {
+		try {
+			return (Fragment) clazz.newInstance();
+		} catch (InstantiationException e) {
+			LOG.error(e);
+			throw new IllegalStateException();
+		} catch (IllegalAccessException e) {
+			LOG.error(e);
+			throw new IllegalStateException();
+		}
 	}
 
 	public AccessibilityAssistant getAccessibilityAssistant() {
@@ -223,7 +242,6 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 					}
 				};
 		spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-		spinnerView = LayoutInflater.from(spinnerAdapter.getContext()).inflate(R.layout.spinner_item, null);
         getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
 			
 			@Override
@@ -245,13 +263,13 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 							Intent intent = new Intent(SearchActivity.this, FavoritesListActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							intent.putExtra(FavoritesListFragment.SELECT_FAVORITE_POINT_INTENT_KEY, (Serializable) null);
-							startActivityForResult(intent, REQUEST_FAVORITE_SELECT);
+							AndroidUtils.startActivityForResultIfSafe(SearchActivity.this, intent, REQUEST_FAVORITE_SELECT);
 							getSupportActionBar().setSelectedNavigationItem(0);
 						} else if (position == POSITION_ADDRESS) {
 							Intent intent = new Intent(SearchActivity.this, SearchAddressActivity.class);
 							intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 							intent.putExtra(SearchAddressFragment.SELECT_ADDRESS_POINT_INTENT_KEY, (String) null);
-							startActivityForResult(intent, REQUEST_ADDRESS_SELECT);
+							AndroidUtils.startActivityForResultIfSafe(SearchActivity.this, intent, REQUEST_ADDRESS_SELECT);
 							getSupportActionBar().setSelectedNavigationItem(0);
 						}
 					}
@@ -397,12 +415,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 	}
 	
 	public void setAddressSpecContent() {
-		Intent intent = getIntent();
 		finish();
-		startActivity(intent);
+		AndroidUtils.startActivityIfSafe(this, getIntent());
 	}
-	
-
-
-
 }

@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
-
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -24,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by Denis
@@ -49,15 +49,12 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 
 	@Override
 	public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+		plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
 		((TextView) view.findViewById(R.id.fav_text)).setText(TITLE_ID);
-		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startFavoritesActivity(AudioVideoNotesPlugin.NOTES_TAB);
-				closeDashboard();
-			}
+		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
+			startFavoritesActivity(AudioVideoNotesPlugin.NOTES_TAB);
+			closeDashboard();
 		});
 		return view;
 	}
@@ -65,7 +62,7 @@ public class DashAudioVideoNotesFragment extends DashBaseFragment {
 	@Override
 	public void onOpenDash() {
 		if (plugin == null) {
-			plugin = OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class);
+			plugin = OsmandPlugin.getActivePlugin(AudioVideoNotesPlugin.class);
 		}
 		setupNotes();
 	}

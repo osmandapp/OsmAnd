@@ -63,7 +63,7 @@ public abstract class DownloadItem {
 	@Nullable
 	public abstract String getAdditionalDescription(Context ctx);
 
-	protected abstract double getSizeToDownloadInMb();
+	public abstract double getSizeToDownloadInMb();
 
 	public abstract double getArchiveSizeMB();
 
@@ -84,5 +84,4 @@ public abstract class DownloadItem {
 		String size = String.format(Locale.US, "%.2f", sizeInMb);
 		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, "MB");
 	}
-
 }

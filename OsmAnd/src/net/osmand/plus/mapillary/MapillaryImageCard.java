@@ -3,7 +3,6 @@ package net.osmand.plus.mapillary;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;

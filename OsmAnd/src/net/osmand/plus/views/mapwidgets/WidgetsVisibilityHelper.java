@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityLayers;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MapContextMenuFragment;
@@ -24,7 +24,7 @@ public class WidgetsVisibilityHelper {
 	private final MapActivity mapActivity;
 	private final OsmandSettings settings;
 	private final RoutingHelper routingHelper;
-	private final MapActivityLayers mapLayers;
+	private final MapLayers mapLayers;
 
 	public WidgetsVisibilityHelper(@NonNull MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -152,6 +152,10 @@ public class WidgetsVisibilityHelper {
 				&& !isInFollowTrackMode()
 				&& !isContextMenuFragmentVisible()
 				&& !isMultiSelectionMenuFragmentVisible();
+	}
+
+	public boolean shouldShowDownloadMapWidget() {
+		return !isInRouteLineAppearanceMode();
 	}
 
 	private boolean isQuickActionLayerOn() {

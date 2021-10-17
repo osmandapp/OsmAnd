@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -26,6 +25,7 @@ import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -91,13 +91,13 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		booleanRoutingPrefListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				recalculateRoute(app, getSelectedAppMode());
+				app.runInUIThread(() -> recalculateRoute(app, getSelectedAppMode()));
 			}
 		};
 		customRoutingPrefListener = new StateChangedListener<String>() {
 			@Override
 			public void stateChanged(String change) {
-				recalculateRoute(app, getSelectedAppMode());
+				app.runInUIThread(() -> recalculateRoute(app, getSelectedAppMode()));
 			}
 		};
 	}
@@ -131,8 +131,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		}
 		String key = preference.getKey();
 		if (ROUTE_PARAMETERS_INFO.equals(key)) {
-			int colorRes = isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
-			holder.itemView.setBackgroundColor(ContextCompat.getColor(app, colorRes));
+			holder.itemView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, isNightMode()));
 		} else if (ROUTE_PARAMETERS_IMAGE.equals(key)) {
 			ImageView imageView = (ImageView) holder.itemView.findViewById(R.id.device_image);
 			if (imageView != null) {
@@ -167,7 +166,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		useOsmLiveForPublicTransport.setDescription(getString(R.string.use_osm_live_public_transport_description));
 		useOsmLiveForPublicTransport.setSummaryOn(R.string.shared_string_enabled);
 		useOsmLiveForPublicTransport.setSummaryOff(R.string.shared_string_disabled);
-		useOsmLiveForPublicTransport.setIcon(getContentIcon(R.drawable.ic_action_osm_live));
+		useOsmLiveForPublicTransport.setIcon(getPersistentPrefIcon(R.drawable.ic_action_osm_live));
 		useOsmLiveForPublicTransport.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(useOsmLiveForPublicTransport);
 	}
@@ -188,7 +187,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		useOsmLiveForRouting.setDescription(getString(R.string.use_osm_live_routing_description));
 		useOsmLiveForRouting.setSummaryOn(R.string.shared_string_enabled);
 		useOsmLiveForRouting.setSummaryOff(R.string.shared_string_disabled);
-		useOsmLiveForRouting.setIcon(getContentIcon(R.drawable.ic_action_osm_live));
+		useOsmLiveForRouting.setIcon(getPersistentPrefIcon(R.drawable.ic_action_osm_live));
 		useOsmLiveForRouting.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(useOsmLiveForRouting);
 	}
@@ -209,7 +208,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		useFastRecalculation.setDescription(getString(R.string.use_fast_recalculation_desc));
 		useFastRecalculation.setSummaryOn(R.string.shared_string_enabled);
 		useFastRecalculation.setSummaryOff(R.string.shared_string_disabled);
-		useFastRecalculation.setIcon(getContentIcon(R.drawable.ic_action_route_part));
+		useFastRecalculation.setIcon(getPersistentPrefIcon(R.drawable.ic_action_route_part));
 		useFastRecalculation.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(useFastRecalculation);
 	}
@@ -328,7 +327,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		setupSelectRouteRecalcDistance(screen);
 		setupReverseDirectionRecalculation(screen);
 
-		if (OsmandPlugin.isPluginEnabled(OsmandDevelopmentPlugin.class)) {
+		if (OsmandPlugin.isActive(OsmandDevelopmentPlugin.class)) {
 			setupDevelopmentCategoryPreferences(screen, am);
 		}
 	}
@@ -379,10 +378,11 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
 			setupOsmLiveForPublicTransportPref();
 			setupNativePublicTransport();
-		}
-		if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+		} else {
 			setupOsmLiveForRoutingPref();
-			setupDisableComplexRoutingPref();
+			if (am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+				setupDisableComplexRoutingPref();
+			}
 		}
 		setupFastRecalculationPref();
 	}

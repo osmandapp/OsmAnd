@@ -1,9 +1,5 @@
 package net.osmand.util;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
@@ -11,7 +7,10 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.QuadRect;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
-import static com.jwetherell.openmap.common.MoreMath.QUAD_PI;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import static com.jwetherell.openmap.common.MoreMath.QUAD_PI_D;
 
 
@@ -103,34 +102,27 @@ public class MapUtils {
 	}
 
 	public static Location calculateMidPoint(Location s1, Location s2) {
-		double lat1 = s1.getLatitude() / 180 * Math.PI;
-		double lon1 = s1.getLongitude() / 180 * Math.PI;
-		double lat2 = s2.getLatitude() / 180 * Math.PI;
-		double lon2 = s2.getLongitude() / 180 * Math.PI;
-		double Bx = Math.cos(lat2) * Math.cos(lon2 - lon1);
-		double By = Math.cos(lat2) * Math.sin(lon2 - lon1);
-		double latMid = Math.atan2(Math.sin(lat1) + Math.sin(lat2),
-				Math.sqrt((Math.cos(lat1) + Bx) * (Math.cos(lat1) + Bx) + By * By));
-		double lonMid = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
-		Location r = new Location("");
-		r.setLatitude(MapUtils.checkLatitude(latMid * 180 / Math.PI));
-		r.setLongitude(MapUtils.checkLongitude(lonMid * 180 / Math.PI));
-		return r;
+		double[] latLon = calculateMidPoint(s1.getLatitude(), s1.getLongitude(), s2.getLatitude(), s2.getLongitude());
+		return new Location("", latLon[0], latLon[1]);
 	}
 
 	public static LatLon calculateMidPoint(LatLon s1, LatLon s2) {
-		double lat1 = s1.getLatitude() / 180 * Math.PI;
-		double lon1 = s1.getLongitude() / 180 * Math.PI;
-		double lat2 = s2.getLatitude() / 180 * Math.PI;
-		double lon2 = s2.getLongitude() / 180 * Math.PI;
+		double[] latLon = calculateMidPoint(s1.getLatitude(), s1.getLongitude(), s2.getLatitude(), s2.getLongitude());
+		return new LatLon(latLon[0], latLon[1]);
+	}
+
+	public static double[] calculateMidPoint(double firstLat, double firstLon, double secondLat, double secondLon) {
+		double lat1 = firstLat / 180 * Math.PI;
+		double lon1 = firstLon / 180 * Math.PI;
+		double lat2 = secondLat / 180 * Math.PI;
+		double lon2 = secondLon / 180 * Math.PI;
 		double Bx = Math.cos(lat2) * Math.cos(lon2 - lon1);
 		double By = Math.cos(lat2) * Math.sin(lon2 - lon1);
 		double latMid = Math.atan2(Math.sin(lat1) + Math.sin(lat2),
 				Math.sqrt((Math.cos(lat1) + Bx) * (Math.cos(lat1) + Bx) + By * By));
 		double lonMid = lon1 + Math.atan2(By, Math.cos(lat1) + Bx);
-		LatLon m = new LatLon(MapUtils.checkLatitude(latMid * 180 / Math.PI),
-				MapUtils.checkLongitude(lonMid * 180 / Math.PI));
-		return m;
+		return new double[] {MapUtils.checkLatitude(latMid * 180 / Math.PI),
+				MapUtils.checkLongitude(lonMid * 180 / Math.PI)};
 	}
 
 	public static double getOrthogonalDistance(double lat, double lon, double fromLat, double fromLon, double toLat, double toLon) {
@@ -190,12 +182,17 @@ public class MapUtils {
 		return (2 * R * 1000 * Math.asin(Math.sqrt(a)));
 	}
 
-
-	
 	/**
 	 * Gets distance in meters
 	 */
 	public static double getDistance(LatLon l1, LatLon l2) {
+		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
+	}
+
+	/**
+	 * Gets distance in meters
+	 */
+	public static double getDistance(Location l1, Location l2) {
 		return getDistance(l1.getLatitude(), l1.getLongitude(), l2.getLatitude(), l2.getLongitude());
 	}
 
@@ -750,5 +747,48 @@ public class MapUtils {
 
 	public static double getSqrtDistance(float startX, float startY, float endX, float endY) {
 		return Math.sqrt((endX - startX) * (endX - startX) + (endY - startY) * (endY - startY));
+	}
+
+	/**
+	 * convert distance to char to store in the obf file
+	 *
+	 * @param dist        integer distance in meters
+	 * @param firstLetter first letter to start sequence
+	 * @param firstDist   distance to start sequence
+	 * @param mult1       first multiplier
+	 * @param mult2       second multiplier
+	 * @return String
+	 * for firstLetter = A, firstDist = 5000, mult1 = 2, mult2 = 5 return letter will be depends on distance
+	 * A <= 5 km, B <= 10 km, C <= 50 km, D <= 100 km, E <= 500 km, F <= 1000 km, G <= 5000 km, H <= 10000 km
+	 */
+
+	public static String convertDistToChar(int dist, char firstLetter, int firstDist, int mult1, int mult2) {
+		int iteration = 0;
+		while (dist - firstDist > 0) {
+			iteration++;
+			firstDist = firstDist * (iteration % 2 == 1 ? mult1 : mult2);
+		}
+		return String.valueOf((char) (firstLetter + iteration));
+	}
+
+	/**
+	 * convert char to distance
+	 *
+	 * @param ch          input char
+	 * @param firstLetter first letter to start sequence
+	 * @param firstDist   distance to start sequence
+	 * @param mult1       first multiplier
+	 * @param mult2       second multiplier
+	 * @return integer distance in meters
+	 * for firstLetter = A, firstDist = 5000, mult1 = 2, mult2 = 5 return will be depends on input char
+	 * *  A = 5000, B = 10000, C = 50000, D = 100000, E = 500000, F = 1000000, G = 5000000, H = 10000000
+	 */
+
+	public static int convertCharToDist(char ch, char firstLetter, int firstDist, int mult1, int mult2) {
+		int dist = firstDist;
+		for (int iteration = 1; iteration < ch - firstLetter + 1; iteration++) {
+			dist = dist * (iteration % 2 == 1 ? mult1 : mult2);
+		}
+		return dist;
 	}
 }

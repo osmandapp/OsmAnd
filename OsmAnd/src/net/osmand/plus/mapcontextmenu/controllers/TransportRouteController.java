@@ -218,7 +218,7 @@ public class TransportRouteController extends MenuController {
 		List<TransportStop> stops = transportRoute.route.getForwardStops();
 		for (int i = 0; i < stops.size(); i++) {
 			final TransportStop stop = stops.get(i);
-			if (stop.getName().equals(transportRoute.stop.getName())) {
+			if (stop.getId().equals(transportRoute.stop.getId())) {
 				return i;
 			}
 		}
@@ -272,7 +272,7 @@ public class TransportRouteController extends MenuController {
 			startPosition = (currentStop == -1 ? 0 : currentStop);
 			if (currentStop > 0) {
 				addPlainMenuItem(defaultIcon, mapActivity.getString(R.string.shared_string_show),
-						mapActivity.getString(R.string.route_stops_before, currentStop),
+						mapActivity.getString(R.string.route_stops_before, String.valueOf(currentStop)),
 						false, false, new OnClickListener() {
 
 							@Override
@@ -320,7 +320,7 @@ public class TransportRouteController extends MenuController {
 		if (mapActivity != null) {
 			TransportStopsLayer stopsLayer = mapActivity.getMapLayers().getTransportStopsLayer();
 			int cz = transportRoute.calculateZoom(0, mapActivity.getMapView().getCurrentRotatedTileBox());
-			mapActivity.changeZoom(cz - mapActivity.getMapView().getZoom());
+			mapActivity.getMyApplication().getOsmandMap().changeZoom(cz - mapActivity.getMapView().getZoom());
 			stopsLayer.setRoute(transportRoute);
 		}
 	}

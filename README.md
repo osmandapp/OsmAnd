@@ -79,22 +79,15 @@ By buying OsmAnd+ and subscribing to OsmAnd Live, you help the application becom
 It is also possible to make a general donation (see https://osmand.net/help-online#buy_app).
 
 
-#### Approximate map coverage and quality:
-| Region         |      |
-|----------------|------|
-| Western Europe | ++++ |
-| Eastern Europe | +++  |
-| Russia         | +++  |
-| North America  | +++  |
-| South America  | ++   |
-| Asia           | ++   |
-| Japan & Korea  | +++  |
-| Middle East    | ++   |
-| Africa         | ++   |
-| Antarctica     | +    |
+#### Map Coverage and Quality - How Good is OSM Data?
+
+According to research, OSM map data rivals and often surpasses commercially available maps both in terms of data completeness and data actuality. This is indicated by different metrics like the amount of road distance mapped, or the number of objects like points of interest or buildings mapped. The fact that the maps are globally crowd-sourced ensures continuous improvements and updates, the incorporation of local on-the-ground expertise, and reflects things like neighborhood development, ongoing construction, or even the results of recent natural disasters.
+
+Comparing the different metrics, it is safe to say that OSM maps cover all continents and countries globally for all your travel needs, and you will find their quality and completeness nothing less than stunning in the vast majority of countries. Latest research mentions only few countries in continental Asia and central Africa where e.g the incorporation of a noticeable portion or roadways is still ongoing to catch up with the high levels already reached anywhere else.
+
 
 ##### List of countries supported
-Basically world wide: Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla,
+Coverage is world wide, e.g.: Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla,
 Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan,
 Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda,
 Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil,

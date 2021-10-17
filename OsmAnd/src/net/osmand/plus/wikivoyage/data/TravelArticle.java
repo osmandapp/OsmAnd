@@ -1,5 +1,11 @@
 package net.osmand.plus.wikivoyage.data;
 
+import static net.osmand.GPXUtilities.GPXFile;
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.GPXUtilities.WptPt;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -8,13 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Size;
 
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -23,6 +34,7 @@ import java.net.URLEncoder;
 
 public class TravelArticle {
 
+	private static final Log LOG = PlatformUtil.getLog(TravelArticle.class);
 	private static final String IMAGE_ROOT_URL = "https://upload.wikimedia.org/wikipedia/commons/";
 	private static final String THUMB_PREFIX = "320px-";
 	private static final String REGULAR_PREFIX = "1280px-";//1280, 1024, 800
@@ -37,6 +49,8 @@ public class TravelArticle {
 	String imageTitle;
 	GPXFile gpxFile;
 	String routeId;
+	int routeRadius = -1;
+	public String ref;
 	String routeSource = "";
 	long originalId;
 	String lang;
@@ -161,6 +175,54 @@ public class TravelArticle {
 		String prefix = thumbnail ? THUMB_PREFIX : REGULAR_PREFIX;
 		String suffix = imageTitle.endsWith(".svg") ? ".png" : "";
 		return IMAGE_ROOT_URL + "thumb/" + hash[0] + "/" + hash[1] + "/" + imageTitle + "/" + prefix + imageTitle + suffix;
+	}
+
+	@NonNull
+	public String getPointFilterString(){
+		return ROUTE_ARTICLE_POINT;
+	}
+
+	@NonNull
+	public WptPt createWptPt(@NonNull Amenity amenity, @Nullable String lang) {
+		WptPt wptPt = new WptPt();
+		wptPt.name = amenity.getName();
+		wptPt.lat = amenity.getLocation().getLatitude();
+		wptPt.lon = amenity.getLocation().getLongitude();
+		wptPt.desc = amenity.getDescription(lang);
+		wptPt.link = amenity.getSite();
+		String color = amenity.getColor();
+		if (color != null) {
+			wptPt.setColor(ColorDialogs.getColorByTag(color));
+		}
+		String iconName = amenity.getGpxIcon();
+		if (iconName != null) {
+			wptPt.setIconName(iconName);
+		}
+		String category = amenity.getTagSuffix("category_");
+		if (category != null) {
+			wptPt.category = capitalizeFirstLetter(category);
+		}
+		return wptPt;
+	}
+
+	@Nullable
+	public GPXTrackAnalysis getAnalysis() {
+		return null;
+	}
+
+	@NonNull
+	public BinaryMapIndexReader.SearchPoiTypeFilter getSearchFilter(String filterSubcategory) {
+		return new BinaryMapIndexReader.SearchPoiTypeFilter() {
+			@Override
+			public boolean accept(PoiCategory type, String subcategory) {
+				return subcategory.equals(filterSubcategory);
+			}
+
+			@Override
+			public boolean isEmpty() {
+				return false;
+			}
+		};
 	}
 
 	@Size(2)

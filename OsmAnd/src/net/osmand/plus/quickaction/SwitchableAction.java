@@ -1,5 +1,7 @@
 package net.osmand.plus.quickaction;
 
+import static net.osmand.AndroidUtils.isLayoutRtl;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -14,24 +16,26 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static net.osmand.AndroidUtils.isLayoutRtl;
 
 public abstract class SwitchableAction<T> extends QuickAction {
 
@@ -58,7 +62,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, final MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull final MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_switchable_action, parent, false);
 
@@ -75,7 +79,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		});
 
 		RecyclerView list = view.findViewById(R.id.list);
-		adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
+		adapter = new Adapter(mapActivity, new QuickActionListFragment.OnStartDragListener() {
 			@Override
 			public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
 				touchHelper.startDrag(viewHolder);
@@ -99,7 +103,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		dscrTitle.setText(parent.getContext().getString(getDiscrTitle()) + ":");
 		dscrHint.setText(getDiscrHint());
 		addBtn.setText(getAddBtnText());
-		addBtn.setOnClickListener(getOnAddBtnClickListener(activity, adapter));
+		addBtn.setOnClickListener(getOnAddBtnClickListener(mapActivity, adapter));
 
 		parent.addView(view);
 	}
@@ -107,19 +111,18 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	@Override
 	public String getActionText(OsmandApplication app) {
 		String arrowDirection = isLayoutRtl(app) ? "\u25c0" : "\u25b6";
-
-		List<QuickAction> actions = app.getQuickActionRegistry().collectQuickActionsByType(getActionType());
-		if (actions.size() > 1) {
-			String item = getNextSelectedItem(app);
-			return "\u2026" + arrowDirection + getTranslatedItemName(app, item);
-		} else {
+		String disabledItem = getDisabledItem(app);
+		String nextItem = getNextSelectedItem(app);
+		if (Algorithms.stringsEqual(nextItem, disabledItem)) {
 			String item = getSelectedItem(app);
 			return getTranslatedItemName(app, item) + arrowDirection + "\u2026";
+		} else {
+			return getTranslatedItemName(app, nextItem) + arrowDirection + "\u2026";
 		}
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		final RecyclerView list = root.findViewById(R.id.list);
 		final Adapter adapter = (Adapter) list.getAdapter();
 
@@ -136,9 +139,11 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	public abstract List<T> loadListFromParams();
 
-	public abstract void executeWithParams(MapActivity activity, String params);
+	public abstract void executeWithParams(@NonNull MapActivity activity, String params);
 
 	public abstract String getTranslatedItemName(Context context, String item);
+
+	public abstract String getDisabledItem(OsmandApplication app);
 
 	public abstract String getSelectedItem(OsmandApplication app);
 
@@ -150,6 +155,32 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		args.putLong(KEY_ID, id);
 		fragment.setArguments(args);
 		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
+	}
+
+	public String getNextItemFromSources(@NonNull OsmandApplication app,
+										 @NonNull List<Pair<String, String>> sources,
+										 @NonNull String defValue) {
+		if (!Algorithms.isEmpty(sources)) {
+			String currentSource = getSelectedItem(app);
+			if (sources.size() > 1) {
+				int index = -1;
+				for (int idx = 0; idx < sources.size(); idx++) {
+					if (Algorithms.stringsEqual(sources.get(idx).first, currentSource)) {
+						index = idx;
+						break;
+					}
+				}
+				Pair<String, String> nextSource = sources.get(0);
+				if (index >= 0 && index + 1 < sources.size()) {
+					nextSource = sources.get(index + 1);
+				}
+				return nextSource.first;
+			} else {
+				String source = sources.get(0).first;
+				return Algorithms.stringsEqual(source, currentSource) ? defValue : source;
+			}
+		}
+		return null;
 	}
 
 	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
@@ -328,7 +359,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	@ColorInt
 	protected int getItemIconColor(OsmandApplication app, T item) {
 		boolean nightMode = !app.getSettings().isLightContent();
-		int colorRes = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		int colorRes = ColorUtilities.getDefaultIconColorId(nightMode);
 		return ContextCompat.getColor(app, colorRes);
 	}
 

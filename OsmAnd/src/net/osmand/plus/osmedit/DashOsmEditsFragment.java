@@ -37,7 +37,7 @@ import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListe
 public class DashOsmEditsFragment extends DashBaseFragment
 		implements ProgressDialogPoiUploader, OsmAuthorizationListener {
 	public static final String TAG = "DASH_OSM_EDITS_FRAGMENT";
-	public static final int TITLE_ID = R.string.osm_settings;
+	public static final int TITLE_ID = R.string.osm_editing_plugin_name;
 
 	private static final String ROW_NUMBER_TAG = TAG + "_row_number";
 
@@ -56,19 +56,16 @@ public class DashOsmEditsFragment extends DashBaseFragment
 
 	@Override
 	public View initView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 
 		View view = getActivity().getLayoutInflater().inflate(R.layout.dash_common_fragment, container, false);
-		TextView header = ((TextView) view.findViewById(R.id.fav_text));
+		TextView header = view.findViewById(R.id.fav_text);
 		header.setText(TITLE_ID);
-		Button manage = ((Button) view.findViewById(R.id.show_all));
+		Button manage = view.findViewById(R.id.show_all);
 		manage.setText(R.string.shared_string_manage);
-		(view.findViewById(R.id.show_all)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startFavoritesActivity(R.string.osm_edits);
-				closeDashboard();
-			}
+		(view.findViewById(R.id.show_all)).setOnClickListener(v -> {
+			startFavoritesActivity(R.string.osm_edits);
+			closeDashboard();
 		});
 
 		return view;
@@ -77,7 +74,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 	@Override
 	public void onOpenDash() {
 		if (plugin == null) {
-			plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+			plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		}
 		setupEditings();
 	}

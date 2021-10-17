@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<dimen name="splash_icon_size">64dp</dimen>
+	<dimen name="splash_text_padding_horizontal">48dp</dimen>
+
 	<dimen name="card_content_padding_large">28dp</dimen>
 	<dimen name="contex_menu_top_shadow_height">16dp</dimen>
 	<dimen name="dialog_button_ex_height">60dp</dimen>
@@ -92,6 +95,8 @@
 	<dimen name="dialog_content_bottom_margin">16dp</dimen>
 	<dimen name="local_size_height">34dp</dimen>
 	<dimen name="standard_icon_size">24dp</dimen>
+	<dimen name="big_icon_size">36dp</dimen>
+	<dimen name="icon_background_size">56dp</dimen>
 	<dimen name="poi_icon_size">16dp</dimen>
 	<dimen name="gpx_small_icon_margin">3dp</dimen>
 	<dimen name="gpx_small_text_margin">14dp</dimen>
@@ -209,6 +214,8 @@
     <dimen name="default_desc_text_size">14sp</dimen>
     <dimen name="default_sub_text_size">12sp</dimen>
 	<dimen name="default_sub_text_size_small">10sp</dimen>
+	<dimen name="default_header_text_size">21sp</dimen>
+	<dimen name="big_header_text_size">30sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>
 	<dimen name="text_button_text_size">15sp</dimen>
 	<dimen name="travel_card_primary_text_size">15sp</dimen>
@@ -252,6 +259,7 @@
 	<dimen name="content_padding_small">12dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="content_padding_small_half">6dp</dimen>
+	<dimen name="content_padding_medium">9dp</dimen>
 	<dimen name="horizontal_divider_height">24dp</dimen>
 	<dimen name="bottom_sheet_content_padding_small">8dp</dimen>
 	<dimen name="measurement_tool_menu_title_padding_top">13dp</dimen>
@@ -421,4 +429,8 @@
 	<dimen name="descriptionLineSpacingExtra">3sp</dimen>
 
 	<dimen name="list_item_triple_row_height">80dp</dimen>
+
+	<dimen name="radius_normal">6dp</dimen>
+	<dimen name="radius_small">3dp</dimen>
+	<dimen name="radius_large">9dp</dimen>
 </resources>

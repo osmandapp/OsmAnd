@@ -19,7 +19,7 @@
     <string name="no_route">沒有路由</string>
     <string name="delete_target_point">删除目的地</string>
     <string name="shared_string_target_points">目的地</string>
-    <string name="map_widget_intermediate_distance">途径目的地</string>
+    <string name="map_widget_intermediate_distance">中转点</string>
     <string name="poi_filter_parking">停車</string>
     <string name="poi_filter_emergency">紧急救助</string>
     <string name="poi_filter_public_transport">公共交通</string>
@@ -274,8 +274,8 @@
     <string name="map_orientation_landscape">横屏</string>
     <string name="map_screen_orientation">屏幕方向</string>
     <string name="transport_Routes">路线</string>
-    <string name="transport_Stop">停止</string>
-    <string name="transport_stops">停止</string>
+    <string name="transport_Stop">站点</string>
+    <string name="transport_stops">站点</string>
     <string name="transport_search_after">后续路由</string>
     <string name="transport_search_before">此前路线</string>
     <string name="transport_finish_search">完成搜索</string>
@@ -300,7 +300,7 @@
     <string name="use_online_routing">使用在线导航</string>
     <string name="osm_settings_descr">指定 OSM 提交所需的 OpenStreetMap.org （OSM） 设置。</string>
     <string name="data_settings">数据</string>
-    <string name="osm_settings">OpenStreetMap 编辑</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap 编辑</string>
     <string name="save_current_track">保存当前轨迹</string>
     <string name="save_track_to_gpx">导航时自动记录轨迹</string>
     <string name="map_view_3d_descr">启用地图的 3D 视图。</string>
@@ -322,8 +322,8 @@
     <string name="search_address_region">地区</string>
     <string name="search_address_city">城市</string>
     <string name="search_address_street">街道</string>
-    <string name="search_address_building">大厦</string>
-    <string name="search_address_building_option">大厦</string>
+    <string name="search_address_building">建筑</string>
+    <string name="search_address_building_option">建筑</string>
     <string name="search_address_street_option">相交的街道</string>
     <string name="shared_string_yes">是</string>
     <string name="shared_string_cancel">取消</string>
@@ -339,8 +339,8 @@
     <string name="download_hillshade_maps">山体阴影层</string>
     <string name="prefer_in_routing_descr">首选高速公路。</string>
     <string name="local_indexes_cat_av">音频/视频数据</string>
-    <string name="stop_routing_confirm">是否确定停止导航？</string>
-    <string name="clear_dest_confirm">是否确定清楚目标点？</string>
+    <string name="stop_routing_confirm">停止导航？</string>
+    <string name="clear_dest_confirm">删除目的地（和中转点）？</string>
     <string name="precise_routing_mode_descr">启用精确路径计算，受实地距离限制不使用本地库。</string>
     <string name="recording_photo_description">图片 %1$s of %2$s</string>
     <string name="dropbox_plugin_description">Dropbox的插件可以让你的Dropbox帐户同步轨道和音频/视频数据。</string>
@@ -440,7 +440,7 @@
     <string name="av_settings">音频/视频设置 </string>
     <string name="recording_error">录制失败</string>
     <string name="recording_camera_not_available">摄像头不可用</string>
-    <string name="recording_is_recorded">音频/视频正在记录，要停止请点击AV窗体。</string>
+    <string name="recording_is_recorded">正在录制音频/视频，点击AV组件停止。</string>
     <string name="recording_open_external_player">打开外部播放器</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd 的离线等高线插件</string>
     <string name="map_widget_distancemeasurement">距离测量</string>
@@ -452,7 +452,7 @@
     <string name="rendering_attr_showRoadMaps_name">仅包含道路的地图</string>
     <string name="safe_mode_description">在安全模式运行应用（使用较慢的 Android 代码代替原生代码）。</string>
     <string name="native_library_not_running">应用正运行在安全模式下（可在“设置”中关闭）。</string>
-    <string name="background_service_is_enabled_question">OsmAnd 睡眠模式服务仍在运行。是否要关闭？</string>
+    <string name="background_service_is_enabled_question">OsmAnd 后台服务仍在运行。是否也要关闭？</string>
     <string name="close_changeset">关闭修改集</string>
     <string name="zxing_barcode_scanner_not_found">ZXing 条形码扫描应用未安装，是否转到应用市场中搜索？</string>
     <string name="rendering_attr_roadColors_description">选择道路颜色主题：</string>
@@ -1606,10 +1606,7 @@
     <string name="record_plugin_description">这个插件在地图屏幕上，并手动轻击 GPX 记录小工具，以启动去录制和保存您轨迹的功能，或是自动记录您所有的导航路线到 GPX 文件。 
 \n
 \n录制的轨迹可以与您的朋友共享或用作为 OSM 的贡献。运动选手可以使用录制的轨迹，监看他们的训练。一些基本的轨迹分析，可以直接在 OsmAnd 进行，如一圈的时间、平均速度等，而轨迹当然也可于事后在专门的第三方分析工具解析。</string>
-    <string name="osmand_srtm_long_description_1000_chars">这个插件同时提供了等高在线层和（地貌）地形阴影层，显示在 OsmAnd 标准地图的顶部。此功能会让运动选手、健行旅游者、背包客，和对起伏的地理构成感兴趣的任何人。 
-\n
-\n全球数据（在北纬 70 度至南纬 70 度之间）的测量基于 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安装在美国太空总署地球观测系统的旗舰卫星 Terra 上的遥测仪器，ASTER 是美国太空总署、日本经济产业省(METI)、日本太空系统 (J-spacesystems)之间的通力合作产物。</string>
-    <string name="srtm_plugin_description">这个插件组件同时提供了等高在线层和（地貌）地形阴影层，显示在 OsmAnd 标准地图的顶部。此功能会让运动选手、健行旅游者、背包客，和对起伏的地理构成感兴趣的任何人。（请注意，等高线和地貌数据是各自独立的，在插件组件启用后可以追加下载。） 
+    <string name="srtm_plugin_description">这个插件组件同时提供了等高在线层和（地貌）地形阴影层，显示在 OsmAnd 标准地图的顶部。此功能会让运动选手、健行旅游者、背包客，和对起伏的地理构成感兴趣的任何人。（请注意，等高线和地貌数据是各自独立的，在插件组件启用后可以追加下载。）
 \n
 \n全球数据（在 70 度以北和 70 度以南之间）的测量基于 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安装在美国太空总署地球观测系统的旗舰卫星 Terra 上的遥测仪器，ASTER 是美国太空总署、日本经济产业省（METI）、日本太空系统（J-spacesystems）之间的通力合作的产物。</string>
     <string name="plugin_touringview_name">旅游地图视图</string>
@@ -1617,7 +1614,7 @@
     <string name="audionotes_plugin_description">在旅途中使用地图按钮或位置上下文菜单进行音频/照片/视频注记。</string>
     <string name="osmand_parking_plugin_description">停车位置插件让你记住你的车停在哪里，还有多少泊车时间 （如果有时间限制）。
 \n位置和时间上均可见 OsmAnd 操控板在地图屏幕上的小部件。警报可以作为提醒添加到 Android 的日历。</string>
-    <string name="osmand_distance_planning_plugin_description">这个插件提供一个允许通过在地图上，点击创建路径或使用或修改现有的 GPX 文件，计划一次旅行和测量点之间的距离的地图屏幕小部件。结果可以保存为 GPX 文件，以后可以用于导航。</string>
+    <string name="osmand_distance_planning_plugin_description">点击地图创建路径，或使用或修改现有的 GPX 文件，计划旅程和测量点之间的距离。结果可以保存为 GPX 文件，以后可以用于导航。</string>
     <string name="osm_editing_plugin_description">通过提供您的用户名和密码，做出 OSM 贡献，如创建或修改 OSM 兴趣点对象，打开或评论 OSM 注释，以及在 OsmAnd 中贡献记录的 GPX 文件。OpenStreetMap.org 是一个社区驱动的全球公共领域地图项目。</string>
     <string name="osmand_development_plugin_description">开发和调试功能的设置，如导航模拟、渲染性能或语音提示。适用于开发人员，正常应用使用时不需要。</string>
     <string name="rename_failed">重命名失败。</string>
@@ -2726,7 +2723,7 @@
     <string name="by_transport_type">乘坐 %1$s</string>
     <string name="step_by_step">逐步</string>
     <string name="routeInfo_road_types_name">道路类型</string>
-    <string name="exit_at">退出于</string>
+    <string name="exit_at">在该站下车</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">在地图上显示或隐藏所选轨迹的按钮。</string>
     <string name="add_destination_query">请先设置目的地</string>
     <string name="use_osm_live_public_transport_description">为OsmAnd Live启用公共交通的变更情况。</string>
@@ -2866,7 +2863,7 @@
     <string name="import_from_file">从文件导入</string>
     <string name="multimedia_notes_prefs_descr">照片尺寸、音频和视频质量</string>
     <string name="login_and_pass">用户名和密码</string>
-    <string name="multimedia_use_system_camera">使用系统应用程序</string>
+    <string name="multimedia_use_system_camera">使用系统应用</string>
     <string name="multimedia_photo_play_sound">相机快门声音</string>
     <string name="osm_authorization_success">授权成功</string>
     <string name="day">日</string>
@@ -2922,7 +2919,7 @@
     <string name="vessel_width_limit_description">设置船只宽度以避免狭窄的桥梁</string>
     <string name="item_deleted">%1$s 已删除</string>
     <string name="shared_string_uninstall_and_restart">卸载并重新启动</string>
-    <string name="quick_action_remove_next_destination">删除下一个目的地</string>
+    <string name="quick_action_remove_next_destination">删除最近的目的地点</string>
     <string name="use_volume_buttons_as_zoom_descr">启用以使用设备音量键控制地图缩放级别。</string>
     <string name="use_volume_buttons_as_zoom">音量键用于缩放</string>
     <string name="please_provide_point_name_error">请提供该点的名称</string>
@@ -2989,7 +2986,7 @@
     <string name="download_maps_travel">旅行指南</string>
     <string name="shared_string_travel_guides">旅游指南</string>
     <string name="wikivoyage_travel_guide">旅行指南</string>
-    <string name="map_widget_intermediate_time">中转时间</string>
+    <string name="map_widget_intermediate_time">中转点时间</string>
     <string name="update_is_available">有更新可用</string>
     <string name="purchase_dialog_title">选择规划</string>
     <string name="images_cache">图片缓存</string>
@@ -3188,7 +3185,7 @@
     <string name="shared_string_done">完成</string>
     <string name="overwrite_track">覆盖轨迹</string>
     <string name="save_as_new_track">保存为新的轨迹</string>
-    <string name="plan_route_exit_dialog_descr">你确定要放弃计划路线中的所有更改吗？</string>
+    <string name="plan_route_exit_dialog_descr">放弃计划路线中的所有更改？</string>
     <string name="reverse_route">反转路线</string>
     <string name="route_between_points_whole_track_button_desc">全部路线会以选择的配置文件进行重新计算。</string>
     <string name="route_between_points_desc">选择以直线或以选择的导航文件来计算路线的方式去连接导航点。</string>
@@ -3329,7 +3326,6 @@
     <string name="icon_group_amenity">便利设施</string>
     <string name="icon_group_special">特殊</string>
     <string name="voice_prompts_timetable">语音提示时间</string>
-    <string name="elevation_data">你可以使用海拔数据来计算行程的上升/下降</string>
     <string name="subscription_expired_title">OsmAnd Live 订阅已过期</string>
     <string name="subscription_paused_title">OsmAnd Live 订阅已暂停</string>
     <string name="subscription_on_hold_title">OsmAnd Live 订阅已暂停</string>
@@ -3341,7 +3337,7 @@
     <string name="gpx_upload_trackable_visibility_descr">“可追踪”意味着该轨迹不会出现在任何公开的列表中，但经过处理的轨迹点与其中的时间戳（不能直接与你关联）会通过从公共 GPS API 下载。</string>
     <string name="osm_edit_close_note">关闭 OSM 注记</string>
     <string name="osm_edit_comment_note">评论 OSM 注记</string>
-    <string name="osm_login_descr">你可以使用安全的 OAuth 方式登录，或者使用你的登录名和密码。</string>
+    <string name="osm_login_descr">使用 OAuth 方式或者你的 OSM 登录名和密码进行登录。</string>
     <string name="shared_string_add_photo">添加照片</string>
     <string name="register_on_openplacereviews">注册
 \nOpenPlaceReviews.org</string>
@@ -3454,7 +3450,7 @@
     <string name="logcat_buffer_descr">检查并共享应用程序的详细日志</string>
     <string name="import_profile_dialog_description">导入的配置文件包含附加数据。单击 \"导入\"，只导入配置文件数据，或选择其他数据。</string>
     <string name="shared_string_include_data">包括补充数据</string>
-    <string name="access_intermediate_arrival_time">中间到达时间</string>
+    <string name="access_intermediate_arrival_time">中转点到达时间</string>
     <string name="transport_nearby_routes_within">附近的路线</string>
     <string name="updated">已更新：%s</string>
     <string name="shared_string_save_as_gpx">保存为新的轨迹文件</string>
@@ -3495,7 +3491,7 @@
     <string name="login_open_street_map_org">登录 OpenStreetMap.org</string>
     <string name="sign_in_with_open_street_map">用 OpenStreetMap 登录</string>
     <string name="osm_edits_view_descr">在 %1$s 中查看所有尚未上传的编辑或 OSM 错误。已经上传的修改将不会再显示。</string>
-    <string name="use_login_password">使用登录名和密码</string>
+    <string name="use_login_password">使用用户名和密码</string>
     <string name="login_account">帐户</string>
     <string name="user_login">登录</string>
     <string name="manage_subscription">管理订阅</string>
@@ -3513,34 +3509,34 @@
     <string name="map_orientation_threshold_descr">如果速度低于阈值，不要旋转地图视图</string>
     <string name="restart">重新启动</string>
     <string name="shared_strings_all_regions">所有区域</string>
-    <string name="delete_number_files_question">删除 %1$d 文件？</string>
+    <string name="delete_number_files_question">删除 %1$d 个文件？</string>
     <string name="track_recording_stop_without_saving">停止而不保存</string>
     <string name="track_recording_save_and_stop">保存并停止录制</string>
-    <string name="track_recording_description">你确定要停止录制吗？
+    <string name="track_recording_description">停止录制？
 \n所有未保存的数据都将丢失。</string>
     <string name="on_pause">暂停</string>
-    <string name="app_restart_required">应用某些设置时需要重新启动应用程序。</string>
-    <string name="routing_attr_height_obstacles_description">路线可以避开强势上坡。</string>
+    <string name="app_restart_required">应用需要重新启动以应用某些设置。</string>
+    <string name="routing_attr_height_obstacles_description">路线可以避开陡上坡。</string>
     <string name="quick_action_coordinates_widget_descr">显示或隐藏地图上的坐标小部件。</string>
-    <string name="map_widget_distance_by_tap">点击距离</string>
+    <string name="map_widget_distance_by_tap">点击测距</string>
     <string name="latest_openstreetmap_update">最新的 OpenStreetMap 更新可用：</string>
     <string name="last_time_checked">上次检查： %s</string>
     <string name="update_frequency">更新频率</string>
     <string name="live_update_frequency_week_variant">地图更新将每周检查一次。下次 %1$s 在 %2$s 。</string>
     <string name="live_update_frequency_day_variant">地图更新将每天检查。下次 %1$s 在 %2$s 。</string>
-    <string name="live_update_frequency_hour_variant">地图更新将每小时检查一次。下次 %1$s 在 %2$s 。</string>
+    <string name="live_update_frequency_hour_variant">将每小时检查一次地图更新。下次 %1$s 在 %2$s 。</string>
     <string name="purchases">购买</string>
     <string name="select_category_descr">选择类别或添加新类别</string>
     <string name="track_recording_will_be_continued">录制将继续。</string>
     <string name="copy_poi_name">复制兴趣点名称</string>
     <string name="quick_action_show_hide_title">显示/隐藏</string>
     <string name="shared_string_interval">间隔</string>
-    <string name="rendering_attr_noNatureReserveBoundaries_description">隐藏自然保护区、保护区和国家公园的边界</string>
+    <string name="rendering_attr_noNatureReserveBoundaries_description">隐藏自然保护区、保护区和国家公园边界。</string>
     <string name="track_has_no_altitude">轨迹不包含高度数据。</string>
     <string name="track_has_no_speed">轨迹不包含速度数据。</string>
-    <string name="select_another_colorization">请选择另一种颜色。</string>
+    <string name="select_another_colorization">请选择另一类颜色。</string>
     <string name="delete_updates">删除更新</string>
-    <string name="live_update_delete_updates_msg">您确认想要删除所有 %s 实时更新吗？</string>
+    <string name="live_update_delete_updates_msg">删除所有 %s 实时更新？</string>
     <string name="keep_both_desc">导入的项目将添加前缀</string>
     <string name="replace_all">全部替换</string>
     <string name="recalc_angle_dialog_title">我的位置和路线之间的最小角度</string>
@@ -3629,4 +3625,159 @@
     <string name="downloaded_maps_collect_descr">帮助我们了解国家和地区地图的受欢迎程度。</string>
     <string name="collected_data_descr">定义允许 OsmAnd 分享哪些数据。</string>
     <string name="choose_data_to_share">选择要分享的数据类型：</string>
+    <string name="external_input_device_descr">选择一个外部控制设备，如键盘或WunderLINQ。</string>
+    <string name="apply_to_all_profiles">应用于所有配置</string>
+    <string name="apply_to_current_profile">仅应用于 “%1$s”</string>
+    <string name="apply_preference_to_all_profiles">将更改应用于所有或者所选配置。</string>
+    <string name="change_default_settings">改变设置</string>
+    <string name="turn_screen_on_descr">选择屏幕唤醒选项（确保设备被锁定时OsmAnd处于前台）：</string>
+    <string name="turn_screen_on_wake_time_descr">选择唤醒后屏幕超时。 （“%1$s”表示禁用超时。）</string>
+    <string name="system_screen_timeout">使用系统屏幕超时</string>
+    <string name="use_system_language">使用系统语言</string>
+    <string name="turn_screen_on_sensor_descr">在屏幕上挥手点亮屏幕。</string>
+    <string name="voice_announces_descr">导航指示和公告</string>
+    <string name="turn_screen_on_navigation_instructions_descr">每个导航指令都会点亮屏幕。</string>
+    <string name="turn_screen_on_navigation_instructions">导航指示</string>
+    <string name="profile_appearance">配置外观</string>
+    <string name="edit_profile_screen_options_subtitle">选择页面选项</string>
+    <string name="map_look_descr">地图显示</string>
+    <string name="configure_profile_info">配置选项：</string>
+    <string name="configure_profile">更改配置</string>
+    <string name="osmand_live">实时OsmAnd</string>
+    <string name="contributions_may_calculate_with_delay">计算贡献可能需要几个小时。</string>
+    <string name="map_updates_are_unavailable_yet">地图尚无更新。 :-(</string>
+    <string name="connect_track_points_as">连接路线点</string>
+    <string name="pro_features">专业功能</string>
+    <string name="sit_on_the_stop">在该站上车</string>
+    <string name="shared_string_relation">关系</string>
+    <string name="use_login_and_password">使用用户名和密码</string>
+    <string name="available_until">直至%1$s可用</string>
+    <string name="enough_contributions_descr">恭喜，你对OpenStreetMap贡献已经足够，现在请享受无限制的OsmAnd地图更新吧！</string>
+    <string name="not_enough_contributions_descr">需要%2$s天内至少%1$s的OpenStreetMap贡献。</string>
+    <string name="shared_string_contributions">贡献</string>
+    <string name="purchases_restored">购买已恢复</string>
+    <string name="grey_color_undefined">灰色用于没有数据的部分。</string>
+    <string name="empty_category_name">类别名为空</string>
+    <string name="no_activity_for_intent">未找到能够进行此操作的应用</string>
+    <string name="gpx_monitoring_stop">暂停旅程记录</string>
+    <string name="gpx_monitoring_start">继续旅程记录</string>
+    <string name="routing_attr_allow_intermediate_name">允许中转点线路</string>
+    <string name="shared_string_includes">包括</string>
+    <string name="complete_purchase">完全购买</string>
+    <string name="regular_price">正常价格</string>
+    <string name="from_with_param">来自 %1$s</string>
+    <string name="backup_delete_types_descr">从OsmAnd Cloud中删除所有已废弃的数据类型的数据？</string>
+    <string name="backup_delete_types">删除禁用的数据类型</string>
+    <string name="shared_string_discussion">讨论</string>
+    <string name="shared_string_view_all">查看全部</string>
+    <string name="backup_error_user_is_already_registered">此电子邮件地址正被另一个帐户使用</string>
+    <string name="backup_error_subscription_was_expired">订阅已过期</string>
+    <string name="backup_error_subscription_was_expired_descr">您的 OsmAnd Pro 订阅已过期，请续订以使用备份。您仍然可以从云端恢复数据。</string>
+    <string name="backup_error_subscription_was_used">订阅或促销活动由另一个账户使用%1$s</string>
+    <string name="backup_error_size_is_exceeded">超过了OsmAnd云的最大尺寸 %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">该文件应以.gzip格式发送</string>
+    <string name="backup_error_file_not_available">文件不可用</string>
+    <string name="backup_error_token_is_not_valid">所提供的设备ID或令牌有问题</string>
+    <string name="backup_error_token_is_not_valid_or_expired">无效或过期的令牌</string>
+    <string name="backup_error_user_is_not_registered">没有用户用该电子邮件地址注册</string>
+    <string name="backup_error_no_valid_subscription">没有有效的订阅</string>
+    <string name="contour_lines_hillshades_slope">等高线、丘陵阴影、坡度</string>
+    <string name="approximate_route_description">将路线附在地图上的道路上，以获得所有的转弯和附加数据，如平整度、道路类型等。</string>
+    <string name="release_4_0">- 云备份
+\n
+\n - 为 \"Topo \"地图风格增加了夜间模式
+\n
+\n - 增加了下载以英尺为单位等高线的选项
+\n
+\n - 现在可以按海拔高度、速度或坡度对轨迹进行着色
+\n
+\n - 更新了 \"行程记录 \"对话框
+\n
+\n - 点击的距离从半径标尺移到一个单独的选项中
+\n
+\n - 规划路线：你现在可以改变导航选项，访问地图配置和搜索，而不必离开路线规划。
+\n
+\n - 新的 \"购买 \"屏幕上有详细的购买信息
+\n
+\n - 增加了改变航线外观的选项
+\n
+\n - OsmAnd实时更新移至 \"下载&gt;更新\"。
+\n
+\n</string>
+    <string name="duration_moment_ago">刚才</string>
+    <string name="logout_from_osmand_cloud">从 OsmAnd Cloud 注销</string>
+    <string name="logout_from_osmand_cloud_decsr">登出？
+\n您需要重新登录才能备份或恢复数据。</string>
+    <string name="backup_deleting_all_data">正在删除所有数据…</string>
+    <string name="backup_deleted_all_data">删除了所有数据。</string>
+    <string name="backup_deleting_all_data_descr">请等待 OsmAnd 从云端删除您的数据。设备上的所有数据将保持不变。</string>
+    <string name="backup_deleted_all_data_descr">你的所有数据已经成功地从OsmAnd Cloud中删除。</string>
+    <string name="backup_version_history_removed">所有的版本历史已经被删除。</string>
+    <string name="backup_data_removed">所有数据已被删除。</string>
+    <string name="shared_string_progress">进展</string>
+    <string name="backup_do_not_have_any">你还没有在线备份。</string>
+    <string name="backup_dont_have_any_descr">安排自动备份，永不丢失数据。</string>
+    <string name="backup_welcome_back">欢迎回来!</string>
+    <string name="backup_welcome_back_descr">使用现有的备份恢复该设备上的数据，或将数据备份到OsmAnd云。</string>
+    <string name="backup_setup">设置备份</string>
+    <string name="backup_restore_now">立即恢复</string>
+    <string name="attribute">属性</string>
+    <string name="shared_string_purchased">已购买</string>
+    <string name="explore_wikipedia_offline">离线浏览维基百科。</string>
+    <string name="on_hold_since">自 %1$s 起暂停</string>
+    <string name="active_till">活动至 %1$s</string>
+    <string name="promo_subscription">优惠订阅</string>
+    <string name="track_has_no_needed_data">该轨道不包含所需的数据。</string>
+    <string name="option_available_only_in_osmand_pro">该选项作为 OsmAnd Pro 订阅的一部分提供。</string>
+    <string name="purchases_feature_desc_pro_widgets">获得 OsmAnd Pro 功能：路线着色等。</string>
+    <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd Plans 以找到适合您的产品。</string>
+    <string name="routes_color_by_type">根据 … 对路线着色</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">根据他们各自的本地颜色（如果 OpenStreetMap 上存在）和远足盾牌符号为路线着色。</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">按网络从属着色。</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">根据其节点网络类型（国际、区域、本地）对路线进行着色。</string>
+    <string name="walking_route_osmc_description">根据各自的本地颜色（如果在OpenStreetMap上存在）和类型（国际、区域、本地）给路线着色。</string>
+    <string name="travel_routes">旅行路线</string>
+    <string name="setting_supported_by_style">此设置由地图样式“%1$s”提供</string>
+    <string name="direct_line_maps_required_descr">路线计算的时间比平时长。
+\n
+\n也许有些地图没有被加载。</string>
+    <string name="online_direct_line_maps_link">检查必要的地图。</string>
+    <string name="offline_maps_required_descr">缺少此路线所需的一些离线地图。</string>
+    <string name="online_maps_required_descr">不幸的是，OsmAnd 无法为您的设置确定路线。
+\n
+\n可能有些地图没有加载，您可以在线检查所需的地图。</string>
+    <string name="map_updates_for_mappers">为绘图者提供的地图更新</string>
+    <string name="benefits_for_contributors">活跃的 OSM 贡献者的好处</string>
+    <string name="benefits_for_contributors_primary_descr">如果你是OpenStreetMap.org的积极贡献者，你可能有权获得每小时无限次的地图更新。</string>
+    <string name="benefits_for_contributors_secondary_descr">登录 OpenStreetMap 以检查您是否有资格获得无限制的每月和每小时地图更新。</string>
+    <string name="osm_live_payment_subscription_management_amz">确认购买时，将从您的亚马逊帐户中收取费用。
+\n
+\n除非在选定的续订期之前取消，否则它会续订。
+\n
+\n随时从您的亚马逊设置管理或取消您的订阅。</string>
+    <string name="cancel_anytime_in_amazon_app">在亚马逊应用程序中随时取消</string>
+    <string name="amz_manage_subscription_descr">要管理您的订阅，请使用设备上的亚马逊应用程序或在您的个人资料下打开Amazon.com网站。</string>
+    <string name="online_maps_searching_descr">在线搜索…</string>
+    <string name="reset_to_original">重置为原始状态</string>
+    <string name="backup_error_no_subscription">当前无订阅</string>
+    <string name="no_items_of_type_message">你没有该类项目</string>
+    <string name="routeInfo_tracktype_description">根据道路的表面构成，按照道路的状况给路线或轨道线着色。通常适用于主要道路网由非铺装道路组成的道路。</string>
+    <string name="routeInfo_winter_ice_road_description">根据冬季道路分类，给只在冬季可用的路线或轨道线涂上颜色。</string>
+    <string name="routeInfo_smoothness_description">提供关于轮式车辆的物理可用性的分类方案，特别是关于表面规则性/平整度。</string>
+    <string name="routeInfo_surface_description">提供有关道路/人行道物理表面的补充信息。</string>
+    <string name="routeInfo_roadClass_description">根据道路分类给路线或轨道线着色。</string>
+    <string name="add_group_to_markers">添加组别到标记列表</string>
+    <string name="remove_group_from_markers">在标记列表中删除组</string>
+    <string name="last_intermediate_dest_description">添加中间站</string>
+    <string name="more_transport_on_stop_hint">自该站有更多的交通方式。</string>
+    <string name="routing_attr_avoid_tunnels_description">避开隧道</string>
+    <string name="send_crash_log">发送崩溃日志</string>
+    <string name="offline_wikipeadia">离线维基百科</string>
+    <string name="redeem_promo_code">兑换优惠码</string>
+    <string name="shared_string_learn_more">了解更多信息</string>
+    <string name="cancel_anytime_in_gplay">随时在 Google Play 上取消。</string>
+    <string name="start_point">开始</string>
+    <string name="service_is_not_available_please_try_later">服务不可用，请稍后再试</string>
+    <string name="shared_string_files">文件</string>
+    <string name="travel_route_types">路线类型</string>
 </resources>

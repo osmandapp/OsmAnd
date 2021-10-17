@@ -23,6 +23,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.IndexConstants;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
@@ -61,7 +62,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		final boolean nightMode = !app.getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final int textPrimaryColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+		final int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
 		LinearLayout contentLayout = (LinearLayout) mainView.findViewById(R.id.content_linear_layout);

@@ -40,6 +40,7 @@ import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.OsmAndFormatter;
@@ -76,7 +77,6 @@ public class FavoritesSearchFragment extends DialogFragment {
 	private FavoritesSearchListAdapter listAdapter;
 
 	private String searchQuery;
-	private boolean paused;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -208,13 +208,11 @@ public class FavoritesSearchFragment extends DialogFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		paused = false;
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		paused = true;
 		hideProgressBar();
 	}
 
@@ -323,9 +321,9 @@ public class FavoritesSearchFragment extends DialogFragment {
 			this.helper = app.getFavorites();
 			location = app.getSettings().getLastKnownMapLocation();
 			boolean light = app.getSettings().isLightContent();
-			enabledColor = light ? R.color.text_color_primary_light : R.color.text_color_primary_dark;
-			disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
-			disabledIconColor = light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+			enabledColor = ColorUtilities.getPrimaryTextColorId(!light);
+			disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
+			disabledIconColor = ColorUtilities.getDefaultIconColorId(!light);
 		}
 
 		public void setAccessibilityAssistant(AccessibilityAssistant accessibilityAssistant) {

@@ -36,7 +36,7 @@
     <string name="recording_context_menu_play">Pokreni</string>
     <string name="recording_description">Snimanje %1$s %2$s of %3$s</string>
     <string name="recording_default_name">snimanje</string>
-    <string name="shared_string_control_stop">stani</string>
+    <string name="shared_string_control_stop">Zaustavi</string>
     <string name="shared_string_control_start">Započni</string>
     <string name="map_widget_av_notes">Zvučni i video zapisi</string>
     <string name="map_widget_distancemeasurement">Mjerenje udaljenosti</string>
@@ -311,7 +311,7 @@
     <string name="saving_gpx_tracks">Spremanje GPX staza na memorijsku karticu…</string>
     <string name="finished_task">Gotovo</string>
     <string name="search_address_building_option">Zgrada</string>
-    <string name="osm_settings">OSM uređivanje</string>
+    <string name="osm_editing_plugin_name">OSM uređivanje</string>
     <string name="data_settings_descr">Odredite jezik, preuzmite ili ponovno učitajte podatke</string>
     <string name="loading_data">Učitavanje podataka…</string>
     <string name="go_back_to_osmand">Vrati se na OsmAnd kartu</string>

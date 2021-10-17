@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.helpers.enums.MetricsConstants;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -71,17 +72,14 @@ public class RoutingHelper {
 	private List<LatLon> intermediatePoints;
 	private Location lastProjection;
 	private Location lastFixedLocation;
-
-	private RouteCalculationResult originalRoute = null;
-
 	private boolean routeWasFinished;
-
 	private ApplicationMode mode;
 
 	private static boolean isDeviatedFromRoute = false;
 	private long deviateFromRouteDetected = 0;
 	//private long wrongMovementDetected = 0;
 	private boolean voiceRouterStopped = false;
+	private long lastCarNavUpdateTime = 0;
 
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;
@@ -203,7 +201,6 @@ public class RoutingHelper {
 		route = new RouteCalculationResult("");
 		isDeviatedFromRoute = false;
 		routeRecalculationHelper.resetEvalWaitInterval();
-		originalRoute = null;
 		app.getWaypointHelper().setNewRoute(route);
 		app.runInUIThread(new Runnable() {
 			@Override
@@ -231,6 +228,14 @@ public class RoutingHelper {
 			setFollowingMode(false);
 		}
 		transportRoutingHelper.clearCurrentRoute(newFinalLocation);
+	}
+
+	public synchronized boolean isMissingMapsOnlineSearching() {
+		return routeRecalculationHelper.isMissingMapsSearching();
+	}
+
+	public synchronized boolean startMissingMapsOnlineSearch() {
+		return routeRecalculationHelper.startMissingMapsOnlineSearch();
 	}
 
 	private synchronized void finishCurrentRoute() {
@@ -417,7 +422,7 @@ public class RoutingHelper {
 
 			// 0. Route empty or needs to be extended? Then re-calculate route.
 			if (route.isEmpty()) {
-				calculateRoute = true;
+				calculateRoute = !route.hasMissingMaps();
 			} else {
 				// 1. Update current route position status according to latest received location
 				boolean finished = updateCurrentRouteStatus(currentLocation, posTolerance);
@@ -427,7 +432,7 @@ public class RoutingHelper {
 				List<Location> routeNodes = route.getImmutableAllLocations();
 				int currentRoute = route.currentRoute;
 				double allowableDeviation = route.getRouteRecalcDistance();
-				if (allowableDeviation == 0) {
+				if (allowableDeviation <= 0) {
 					allowableDeviation = RoutingHelper.getDefaultAllowedDeviation(settings, route.getAppMode(), posTolerance);
 				}
 
@@ -438,7 +443,7 @@ public class RoutingHelper {
 					if (distOrth > allowableDeviation) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
 						isDeviatedFromRoute = true;
-						calculateRoute = true;
+						calculateRoute = !settings.DISABLE_OFFROUTE_RECALC.get();
 					}
 				}
 				// 3. Identify wrong movement direction
@@ -463,7 +468,7 @@ public class RoutingHelper {
 					if (!inRecalc && !wrongMovementDirection) {
 						voiceRouter.updateStatus(currentLocation, false);
 						voiceRouterStopped = false;
-					} else if (isDeviatedFromRoute && !voiceRouterStopped && !settings.DISABLE_OFFROUTE_RECALC.get()) {
+					} else if (isDeviatedFromRoute && !voiceRouterStopped) {
 						voiceRouter.interruptRouteCommands();
 						voiceRouterStopped = true; // Prevents excessive execution of stop() code
 					}
@@ -652,11 +657,17 @@ public class RoutingHelper {
 				}
 				route.updateNextVisiblePoint(nextPoint, next);
 			}
+		}
 
+		// 5. Update car navigation
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		NavigationService navigationService = app.getNavigationService();
+		if (carNavigationSession != null && navigationService != null && System.currentTimeMillis() - lastCarNavUpdateTime > 1000) {
+			lastCarNavUpdateTime = System.currentTimeMillis();
+			app.runInUIThread(navigationService::updateCarNavigation);
 		}
 		return false;
 	}
-
 
 	private static float getPosTolerance(float accuracy) {
 		if (accuracy > 0) {
@@ -666,9 +677,7 @@ public class RoutingHelper {
 	}
 
 	private static float getDefaultAllowedDeviation(OsmandSettings settings, ApplicationMode mode, float posTolerance) {
-		if (settings.DISABLE_OFFROUTE_RECALC.getModeValue(mode)) {
-			return -1.0f;
-		} else if (mode.getRouteService() == RouteService.DIRECT_TO) {
+		if (mode.getRouteService() == RouteService.DIRECT_TO) {
 			return -1.0f;
 		} else if (mode.getRouteService() == RouteService.STRAIGHT) {
 			MetricsConstants mc = settings.METRIC_SYSTEM.getModeValue(mode);
@@ -722,6 +731,10 @@ public class RoutingHelper {
 
 	public int getLeftTime() {
 		return route.getLeftTime(lastFixedLocation);
+	}
+
+	public int getLeftTimeNextTurn() {
+		return route.getLeftTimeToNextTurn(lastFixedLocation);
 	}
 
 	public int getLeftTimeNextIntermediate() {
@@ -820,12 +833,6 @@ public class RoutingHelper {
 		} else {
 			routeRecalculationHelper.recalculateRouteInBackground(lastFixedLocation, finalLocation,
 					intermediatePoints, currentGPXRoute, route, true, false);
-		}
-	}
-
-	void updateOriginalRoute() {
-		if (originalRoute == null) {
-			originalRoute = route;
 		}
 	}
 

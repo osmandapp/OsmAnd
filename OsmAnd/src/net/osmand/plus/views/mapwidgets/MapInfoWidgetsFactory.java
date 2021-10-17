@@ -1,8 +1,6 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -44,14 +42,12 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.CurrentPositionHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.CurrentStreetName;
-import net.osmand.plus.routing.RoutingHelperUtils;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -60,13 +56,17 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.TextRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
+import net.osmand.plus.routing.CurrentStreetName;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelperUtils;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.layers.RadiusRulerControlLayer.RadiusRulerMode;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
@@ -893,7 +893,8 @@ public class MapInfoWidgetsFactory {
 			TextInfoWidget.updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
 					(TextView) waypointInfoBar.findViewById(R.id.waypoint_text_shadow),
 					textColor, textShadowColor, bold, rad / 2);
-			exitRefText.setTextColor(nightMode ? map.getResources().getColor(R.color.text_color_primary_dark) :
+			exitRefText.setTextColor(nightMode ?
+					map.getResources().getColor(R.color.text_color_primary_dark) :
 					map.getResources().getColor(R.color.color_white));
 
 			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
@@ -965,6 +966,10 @@ public class MapInfoWidgetsFactory {
 				if (streetName.shieldObject != null && streetName.shieldObject.nameIds != null
 						&& setRoadShield(shieldIcon, streetName.shieldObject)) {
 					AndroidUiHelper.updateVisibility(shieldIcon, true);
+					int indexOf = streetName.text.indexOf("»");
+					if (indexOf > 0) {
+						streetName.text = streetName.text.substring(indexOf);
+					}
 				} else {
 					AndroidUiHelper.updateVisibility(shieldIcon, false);
 				}
@@ -1006,14 +1011,14 @@ public class MapInfoWidgetsFactory {
 			for (int i = 0; i < object.nameIds.length; i++) {
 				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
 				String val = object.names.get(object.nameIds[i]);
-				if (!key.startsWith("road_ref")) {
+				if (!key.endsWith("_ref") && !key.startsWith("route_road")) {
 					additional.append(key).append("=").append(val).append(";");
 				}
 			}
 			for (int i = 0; i < object.nameIds.length; i++) {
 				String key = object.region.routeEncodingRules.get(object.nameIds[i]).getTag();
 				String val = object.names.get(object.nameIds[i]);
-				if (key.startsWith("road_ref")) {
+				if (key.startsWith("route_road") && key.endsWith("_ref")) {
 					boolean visible = setRoadShield(view, object, key, val, additional);
 					if (visible) {
 						return true;
@@ -1274,24 +1279,20 @@ public class MapInfoWidgetsFactory {
 		}
 
 		private void copyToClipboard(@NonNull String text) {
-			Object systemService = map.getSystemService(Activity.CLIPBOARD_SERVICE);
-			if (systemService instanceof ClipboardManager) {
-				((ClipboardManager) systemService).setText(text);
+			if (ShareMenu.copyToClipboard(map, text)) {
 				showShareSnackbar(text, map);
 			}
 		}
 
 		private void showShareSnackbar(@NonNull final String text, @NonNull final Context ctx) {
 			Snackbar snackbar = Snackbar.make(map.getLayout(), ctx.getResources().getString(R.string.copied_to_clipboard) + ":\n" + text, Snackbar.LENGTH_LONG)
-					.setAction(R.string.shared_string_share, new View.OnClickListener() {
-						@Override
-						public void onClick(View view) {
-							Intent intent = new Intent(Intent.ACTION_SEND);
-							intent.setAction(Intent.ACTION_SEND);
-							intent.putExtra(Intent.EXTRA_TEXT, text);
-							intent.setType("text/plain");
-							ctx.startActivity(Intent.createChooser(intent, ctx.getString(R.string.send_location)));
-						}
+					.setAction(R.string.shared_string_share, view -> {
+						Intent intent = new Intent(Intent.ACTION_SEND);
+						intent.setAction(Intent.ACTION_SEND);
+						intent.putExtra(Intent.EXTRA_TEXT, text);
+						intent.setType("text/plain");
+						Intent chooserIntent = Intent.createChooser(intent, ctx.getString(R.string.send_location));
+						AndroidUtils.startActivityIfSafe(ctx, intent, chooserIntent);
 					});
 			UiUtilities.setupSnackbar(snackbar, nightMode, 5);
 			snackbar.show();
@@ -1311,7 +1312,7 @@ public class MapInfoWidgetsFactory {
 			int textColor = ContextCompat.getColor(map, nightMode ? R.color.activity_background_light : R.color.activity_background_light);
 			latitudeText.setTextColor(textColor);
 			longitudeText.setTextColor(textColor);
-			coordinatesDivider.setBackgroundColor(ContextCompat.getColor(map, nightMode ? R.color.divider_color_dark : R.color.divider_color_dark));
+			coordinatesDivider.setBackgroundColor(ColorUtilities.getDividerColor(map, nightMode));
 			latitudeText.setTypeface(Typeface.DEFAULT, bold ? Typeface.BOLD : Typeface.NORMAL);
 			longitudeText.setTypeface(Typeface.DEFAULT, bold ? Typeface.BOLD : Typeface.NORMAL);
 		}

@@ -20,7 +20,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.InterruptedIOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -79,12 +81,42 @@ public class Algorithms {
 		return s;
 	}
 
+	/**
+	 * Split string by words and convert to lowercase, use as delimiter all chars except letters and digits
+	 * @param str input string
+	 * @return result words list
+	 */
+
+	public static List<String> splitByWordsLowercase(String str) {
+		List<String> splitStr = new ArrayList<>();
+		int prev = -1;
+		for (int i = 0; i <= str.length(); i++) {
+			if (i == str.length() ||
+					(!Character.isLetter(str.charAt(i)) && !Character.isDigit(str.charAt(i)))) {
+				if (prev != -1) {
+					String subStr = str.substring(prev, i);
+					splitStr.add(subStr.toLowerCase());
+					prev = -1;
+				}
+			} else {
+				if (prev == -1) {
+					prev = i;
+				}
+			}
+		}
+		return splitStr;
+	}
+
 	public static boolean isEmpty(Map<?, ?> map) {
 		return map == null || map.size() == 0;
 	}
 
 	public static String emptyIfNull(String s) {
 		return s == null ? "" : s;
+	}
+
+	public static String trimIfNotNull(String s) {
+		return s == null ? null : s.trim();
 	}
 
 	public static boolean isEmpty(CharSequence s) {
@@ -154,22 +186,31 @@ public class Algorithms {
 		return true;
 	}
 
+	/**
+	 * @see <a href="http://alienryderflex.com/polygon/">Determining Whether A Point Is Inside A Complex Polygon</a>
+	 * @param point
+	 * @param polygon
+	 * @return true if the point is in the area of the polygon
+	 */
 	public static boolean isPointInsidePolygon(LatLon point,
 	                                           List<LatLon> polygon) {
-		double pointX = point.getLongitude();
-		double pointY = point.getLatitude();
-		boolean result = false;
+		double px = point.getLongitude();
+		double py = point.getLatitude();
+		boolean oddNodes = false;
 		for (int i = 0, j = polygon.size() - 1; i < polygon.size(); j = i++) {
 			double x1 = polygon.get(i).getLongitude();
 			double y1 = polygon.get(i).getLatitude();
 			double x2 = polygon.get(j).getLongitude();
 			double y2 = polygon.get(j).getLatitude();
-			if ((y1 > pointY) != (y2 > pointY)
-					&& (pointX < (x2 - x1) * (pointY - y1) / (y2-y1) + x1)) {
-				result = !result;
+			if ((y1 < py && y2 >= py
+					|| y2 < py && y1 >= py)
+					&& (x1 <= px || x2 <= px)) {
+				if (x1 + (py - y1) / (y2 - y1) * (x2 - x1) < px) {
+					oddNodes = !oddNodes;
+				}
 			}
 		}
-		return result;
+		return oddNodes;
 	}
 
 	public static String getFileNameWithoutExtension(File f) {
@@ -187,7 +228,10 @@ public class Algorithms {
 	}
 
 	public static String getFileExtension(File f) {
-		String name = f.getName();
+		return getFileNameExtension(f.getName());
+	}
+
+	public static String getFileNameExtension(String name) {
 		int i = name.lastIndexOf(".");
 		return name.substring(i + 1);
 	}
@@ -268,14 +312,14 @@ public class Algorithms {
         };
     }
 
-	private static final char CHAR_TOSPLIT = 0x01;
+	private static final char CHAR_TO_SPLIT = 0x01;
 
 	public static Map<String, String> decodeMap(String s) {
 		if (isEmpty(s)) {
 			return Collections.emptyMap();
 		}
 		Map<String, String> names = new HashMap<String, String>();
-		String[] split = s.split(CHAR_TOSPLIT + "");
+		String[] split = s.split(CHAR_TO_SPLIT + "");
 		// last split is an empty string
 		for (int i = 1; i < split.length; i += 2) {
 			names.put(split[i - 1], split[i]);
@@ -289,9 +333,9 @@ public class Algorithms {
 			StringBuilder bld = new StringBuilder();
 			while (it.hasNext()) {
 				Entry<String, String> e = it.next();
-				bld.append(e.getKey()).append(CHAR_TOSPLIT)
-						.append(e.getValue().replace(CHAR_TOSPLIT, (char) (CHAR_TOSPLIT + 1)));
-				bld.append(CHAR_TOSPLIT);
+				bld.append(e.getKey()).append(CHAR_TO_SPLIT)
+						.append(e.getValue().replace(CHAR_TO_SPLIT, (char) (CHAR_TO_SPLIT + 1)));
+				bld.append(CHAR_TO_SPLIT);
 			}
 			return bld.toString();
 		}
@@ -299,11 +343,7 @@ public class Algorithms {
 	}
 
 	public static Set<String> decodeStringSet(String s) {
-		return decodeStringSet(s, String.valueOf(CHAR_TOSPLIT));
-	}
-
-	public static String encodeStringSet(Set<String> set) {
-		return encodeStringSet(set, String.valueOf(CHAR_TOSPLIT));
+		return decodeStringSet(s, String.valueOf(CHAR_TO_SPLIT));
 	}
 
 	public static Set<String> decodeStringSet(String s, String split) {
@@ -313,11 +353,15 @@ public class Algorithms {
 		return new HashSet<>(Arrays.asList(s.split(split)));
 	}
 
-	public static String encodeStringSet(Set<String> set, String split) {
-		if (set != null) {
+	public static <T> String encodeCollection(Collection<T> collection) {
+		return encodeCollection(collection, String.valueOf(CHAR_TO_SPLIT));
+	}
+
+	public static <T> String encodeCollection(Collection<T> collection, String split) {
+		if (collection != null) {
 			StringBuilder sb = new StringBuilder();
-			for (String s : set) {
-				sb.append(s).append(split);
+			for (T item : collection) {
+				sb.append(item).append(split);
 			}
 			return sb.toString();
 		}
@@ -463,6 +507,39 @@ public class Algorithms {
 		if ((ch1 | ch2) < 0)
 			throw new EOFException();
 		return ((ch1 << 8) + ch2);
+	}
+
+	public static boolean startsWithAny(String s, String ... args) {
+		if (!isEmpty(s) && args != null && args.length > 0) {
+			for (String arg : args) {
+				if (s.startsWith(arg)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean containsAny(String s, String ... args) {
+		if (!isEmpty(s) && args != null && args.length > 0) {
+			for (String arg : args) {
+				if (s.contains(arg)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static boolean endsWithAny(String s, String ... args) {
+		if (!isEmpty(s) && args != null && args.length > 0) {
+			for (String arg : args) {
+				if (s.endsWith(arg)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public static String capitalizeFirstLetterAndLowercase(String s) {
@@ -623,6 +700,9 @@ public class Algorithms {
 			if (pg != null && cp > bytesDivisor) {
 				pg.progress(cp / bytesDivisor);
 				cp = cp % bytesDivisor;
+				if (pg.isInterrupted()) {
+					throw new InterruptedIOException();
+				}
 			}
 		}
 	}
@@ -877,6 +957,14 @@ public class Algorithms {
 		return pointsCount == 1;
 	}
 
+	public static <T> T getPercentile(List<T> sortedValues, int percentile) throws IllegalArgumentException {
+		if (percentile < 0 || percentile > 100) {
+			throw new IllegalArgumentException("invalid percentile " + percentile + ", should be 0-100");
+		}
+		int index = (sortedValues.size() - 1) * percentile / 100;
+		return sortedValues.get(index);
+	}
+
 	public static String formatDuration(int seconds, boolean fullForm) {
 		String sec;
 		if (seconds % 60 < 10) {
@@ -1111,29 +1199,41 @@ public class Algorithms {
 		return false;
 	}
 
-	public static int[] stringToGradientPalette(String str) {
+	public static int[] stringToGradientPalette(String str, String gradientScaleType) {
+		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
 		if (Algorithms.isBlank(str)) {
-			return RouteColorize.colors;
+			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		String[] arr = str.split(" ");
-		if (arr.length != 3) {
-			return RouteColorize.colors;
+		if (arr.length < 2) {
+			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
-		int[] colors = new int[3];
+		int[] colors = new int[arr.length];
 		try {
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < arr.length; i++) {
 				colors[i] = Algorithms.parseColor(arr[i]);
 			}
 		} catch (IllegalArgumentException e) {
-			return RouteColorize.colors;
+			return isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
 		}
 		return colors;
 	}
 
-	public static String gradientPaletteToString(int[] colors) {
-		int[] src = (colors != null && colors.length == 3) ? colors : RouteColorize.colors;
-		return Algorithms.colorToString(src[0]) + " " +
-				Algorithms.colorToString(src[1]) + " " +
-				Algorithms.colorToString(src[2]);
+	public static String gradientPaletteToString(int[] palette, String gradientScaleType) {
+		boolean isSlope = "gradient_slope_color".equals(gradientScaleType);
+		int[] src;
+		if (palette != null && palette.length >= 2) {
+			src = palette;
+		} else {
+			src = isSlope ? RouteColorize.SLOPE_COLORS : RouteColorize.COLORS;
+		}
+		StringBuilder stringPalette = new StringBuilder();
+		for (int i = 0; i < src.length; i++) {
+			stringPalette.append(colorToString(src[i]));
+			if (i + 1 != src.length) {
+				stringPalette.append(" ");
+			}
+		}
+		return stringPalette.toString();
 	}
 }

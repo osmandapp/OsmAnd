@@ -103,13 +103,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	private MenuAction searchDoneAction;
 
-	private LinkedList<MapContextMenuData> historyStack = new LinkedList<>();
+	private final LinkedList<MapContextMenuData> historyStack = new LinkedList<>();
 
 	public static class MapContextMenuData {
-		private LatLon latLon;
-		private PointDescription pointDescription;
-		private Object object;
-		private boolean backAction;
+
+		private final LatLon latLon;
+		private final PointDescription pointDescription;
+		private final Object object;
+		private final boolean backAction;
 
 		public MapContextMenuData(LatLon latLon, PointDescription pointDescription, Object object, boolean backAction) {
 			this.latLon = latLon;
@@ -200,6 +201,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
+	@Nullable
 	public MapMultiSelectionMenu getMultiSelectionMenu() {
 		return mapMultiSelectionMenu;
 	}
@@ -1068,7 +1070,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (mapActivity != null) {
 			LatLon latLon = getLatLon();
 			for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {
-				layer.populateObjectContextMenu(latLon, getObject(), menuAdapter, mapActivity);
+				layer.populateObjectContextMenu(latLon, getObject(), menuAdapter);
 			}
 			mapActivity.getMapActions().addActionsToAdapter(configure ? 0 : latLon.getLatitude(), configure ? 0 : latLon.getLongitude(), menuAdapter, configure ? null : getObject(), configure);
 		}
@@ -1163,7 +1165,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			final List<SelectedGpxFile> list
 					= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
 			if ((list.isEmpty() || (list.size() == 1 && list.get(0).getGpxFile().showCurrentTrack))
-					&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+					&& OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 				GPXFile gpxFile = mapActivity.getMyApplication().getSavingTrackHelper().getCurrentGpx();
 				WptPtEditor wptPtPointEditor = getWptPtPointEditor();
 				if (wptPtPointEditor != null) {

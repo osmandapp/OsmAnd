@@ -14,18 +14,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.dialogs.ConfigureMapUtils;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.render.RenderingRuleProperty;
 
 import java.util.ArrayList;
@@ -196,7 +195,7 @@ public class TransportLinesMenu {
 
 	public static List<RenderingRuleProperty> getTransportRules(OsmandApplication app) {
 		List<RenderingRuleProperty> transportRules = new ArrayList<>();
-		for (RenderingRuleProperty property : ConfigureMapMenu.getCustomRules(app)) {
+		for (RenderingRuleProperty property : ConfigureMapUtils.getCustomRules(app)) {
 			if (RENDERING_CATEGORY_TRANSPORT.equals(property.getCategory()) && property.isBoolean()) {
 				transportRules.add(property);
 			}
@@ -220,7 +219,7 @@ public class TransportLinesMenu {
 
 	private static void refreshMap(MapActivity mapActivity) {
 		mapActivity.refreshMapComplete();
-		mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+		mapActivity.getMapLayers().updateLayers(mapActivity);
 	}
 
 	public static boolean isShowLines(@NonNull OsmandApplication app) {

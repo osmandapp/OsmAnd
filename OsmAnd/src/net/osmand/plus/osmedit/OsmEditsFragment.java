@@ -1,5 +1,8 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -40,6 +43,7 @@ import net.osmand.IndexConstants;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -76,9 +80,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-import static net.osmand.plus.osmedit.OsmEditingPlugin.OSM_EDIT_TAB;
 
 public class OsmEditsFragment extends OsmAndListFragment implements ProgressDialogPoiUploader,
 		OnNodeCommittedListener, FavoritesFragmentStateHolder, OsmAuthorizationListener {
@@ -147,20 +148,20 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
 		if (savedInstanceState != null) {
 			exportType = savedInstanceState.getInt(EXPORT_TYPE_KEY);
 		}
 
 		setHasOptionsMenu(true);
-		plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 
 		View view = inflater.inflate(R.layout.update_index, container, false);
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 		ViewStub emptyStub = (ViewStub) view.findViewById(R.id.empty_view_stub);
 		emptyStub.setLayoutResource(R.layout.empty_state_osm_edits);
 		emptyView = emptyStub.inflate();
-		emptyView.setBackgroundColor(getResources().getColor(getMyApplication().getSettings()
-				.isLightContent() ? R.color.activity_background_color_light : R.color.activity_background_color_dark));
+		emptyView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
 			int icRes = getMyApplication().getSettings().isLightContent()
@@ -416,9 +417,9 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getListView().setBackgroundColor(getResources().getColor(getMyApplication().getSettings().isLightContent()
-				? R.color.activity_background_color_light
-				: R.color.activity_background_color_dark));
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		getListView().setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
 	@Override
@@ -738,7 +739,7 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			final OsmEditsFragment parentFragment = (OsmEditsFragment) getParentFragment();
-			final OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+			final OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 			@SuppressWarnings("unchecked")
 			final ArrayList<OsmPoint> points = (ArrayList<OsmPoint>) getArguments().getSerializable(POINTS_LIST);
 
@@ -922,17 +923,20 @@ public class OsmEditsFragment extends OsmAndListFragment implements ProgressDial
 
 		@Override
 		protected void onPostExecute(String result) {
-			getActivity().setProgressBarIndeterminateVisibility(false);
-			if (result != null) {
-				Toast.makeText(getActivity(), getString(R.string.local_osm_changes_backup_failed) + " " + result, Toast.LENGTH_LONG).show();
-			} else {
-				final Intent sendIntent = new Intent();
-				sendIntent.setAction(Intent.ACTION_SEND);
-				sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_osm_edits_subject));
-				sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), osmchange));
-				sendIntent.setType("text/plain");
-				sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-				startActivity(sendIntent);
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				activity.setProgressBarIndeterminateVisibility(false);
+				if (result != null) {
+					Toast.makeText(activity, getString(R.string.local_osm_changes_backup_failed) + " " + result, Toast.LENGTH_LONG).show();
+				} else {
+					Intent sendIntent = new Intent();
+					sendIntent.setAction(Intent.ACTION_SEND);
+					sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_osm_edits_subject));
+					sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), osmchange));
+					sendIntent.setType("text/plain");
+					sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+					AndroidUtils.startActivityIfSafe(activity, sendIntent);
+				}
 			}
 		}
 	}

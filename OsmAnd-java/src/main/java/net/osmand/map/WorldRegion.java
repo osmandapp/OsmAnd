@@ -1,5 +1,6 @@
 package net.osmand.map;
 
+import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.util.Algorithms;
@@ -43,6 +44,7 @@ public class WorldRegion implements Serializable {
 	protected String regionSearchText;
 	protected String regionDownloadName;
 	protected boolean regionMapDownload;
+	protected boolean regionRoadsDownload;
 	protected LatLon regionCenter;
 	protected QuadRect boundingBox;
 	protected List<LatLon> polygon;
@@ -80,10 +82,12 @@ public class WorldRegion implements Serializable {
 		}
 	}
 
-
-
 	public boolean isRegionMapDownload() {
 		return regionMapDownload;
+	}
+
+	public boolean isRegionRoadsDownload() {
+		return regionRoadsDownload;
 	}
 
 	public String getLocaleName() {
@@ -128,7 +132,6 @@ public class WorldRegion implements Serializable {
 		return subregions;
 	}
 
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -148,7 +151,7 @@ public class WorldRegion implements Serializable {
 		this.regionFullName = regionFullName;
 		this.regionDownloadName = downloadName;
 		superregion = null;
-		subregions = new LinkedList<WorldRegion>();
+		subregions = new LinkedList<>();
 
 	}
 	public WorldRegion(String id) {
@@ -189,15 +192,28 @@ public class WorldRegion implements Serializable {
 		return res;
 	}
 
-	public boolean containsRegion(WorldRegion region) {
-		if (containsBoundingBox(region.boundingBox)) {
-			// check polygon only if bounding box match
-			return containsPolygon(region.polygon);
+	public boolean containsRegion(WorldRegion another) {
+		// Firstly check rectangles for greater efficiency
+		if (!containsBoundingBox(another.boundingBox)) {
+			return false;
 		}
-		return false;
+
+		// Secondly check whole polygons
+		if (!containsPolygon(another.polygon)) {
+			return false;
+		}
+
+		// Finally check inner point
+		boolean isInnerPoint = Algorithms.isPointInsidePolygon(another.regionCenter, another.polygon);
+		if (isInnerPoint) {
+			return Algorithms.isPointInsidePolygon(another.regionCenter, this.polygon);
+		} else {
+			// in this case we should find real inner point and check it
+		}
+		return true;
 	}
 
-	private boolean containsBoundingBox(QuadRect rectangle) {
+	public boolean containsBoundingBox(QuadRect rectangle) {
 		return (boundingBox != null && rectangle != null) &&
 				boundingBox.contains(rectangle);
 	}
@@ -232,5 +248,33 @@ public class WorldRegion implements Serializable {
 		}
 		copy.removeAll(duplicates);
 		return copy;
+	}
+
+	public String getObfFileName() {
+		return getObfFileName(regionDownloadName);
+	}
+
+	public String getRoadObfFileName() {
+		return getRoadObfFileName(regionDownloadName);
+	}
+
+	public static String getObfFileName(String regionDownloadName) {
+		return Algorithms.capitalizeFirstLetterAndLowercase(regionDownloadName) + IndexConstants.BINARY_MAP_INDEX_EXT;
+	}
+
+	public static String getRoadObfFileName(String regionDownloadName) {
+		return Algorithms.capitalizeFirstLetterAndLowercase(regionDownloadName) + ".road" + IndexConstants.BINARY_MAP_INDEX_EXT;
+	}
+
+	public static String getRegionDownloadName(String obfFileName) {
+		String obfExt = IndexConstants.BINARY_MAP_INDEX_EXT;
+		String roadObfExt = ".road" + IndexConstants.BINARY_MAP_INDEX_EXT;
+		if (obfFileName.endsWith(roadObfExt)) {
+			return obfFileName.toLowerCase().substring(0, obfFileName.length() - roadObfExt.length());
+		} else if (obfFileName.endsWith(obfExt)) {
+			return obfFileName.toLowerCase().substring(0, obfFileName.length() - obfExt.length());
+		} else {
+			return obfFileName.toLowerCase();
+		}
 	}
 }

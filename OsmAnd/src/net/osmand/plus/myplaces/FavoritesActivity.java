@@ -1,7 +1,8 @@
 package net.osmand.plus.myplaces;
 
+import static net.osmand.plus.track.TrackMenuFragment.TRACK_DELETED_KEY;
+
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -20,10 +21,10 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -32,6 +33,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.importfiles.ImportHelper;
 import net.osmand.plus.importfiles.ImportHelper.OnGpxImportCompleteListener;
+import net.osmand.plus.importfiles.ImportHelper.OnSuccessfulGpxImport;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -41,8 +43,6 @@ import org.apache.commons.logging.Log;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.myplaces.TrackSegmentFragment.TRACK_DELETED_KEY;
 
 /**
  *
@@ -69,23 +69,24 @@ public class FavoritesActivity extends TabActivity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		OsmandApplication app = (OsmandApplication) getApplication();
+		OsmandApplication app = getMyApplication();
 		app.applyTheme(this);
 		super.onCreate(savedInstanceState);
 
 		app.logEvent("myplaces_open");
 
-		importHelper = new ImportHelper(this, getMyApplication(), null);
+		importHelper = new ImportHelper(this, app);
 
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);
 		getSupportActionBar().setElevation(0);
 
 		setContentView(R.layout.tab_content);
+		viewPager = findViewById(R.id.pager);
+		
 		List<TabItem> mTabs = getTabItems();
 		setTabs(mTabs);
 
-		viewPager = findViewById(R.id.pager);
 		if (savedInstanceState == null) {
 			Intent intent = getIntent();
 			if (intent != null && intent.hasExtra(MapActivity.INTENT_PARAMS)) {
@@ -105,20 +106,12 @@ public class FavoritesActivity extends TabActivity {
 
 	public void addTrack() {
 		Intent intent = ImportHelper.getImportTrackIntent();
-		try {
-			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
-		} catch (ActivityNotFoundException e) {
-			LOG.error(e.getMessage(), e);
-		}
+		AndroidUtils.startActivityForResultIfSafe(this, intent, OPEN_GPX_DOCUMENT_REQUEST);
 	}
 
 	public void importFavourites() {
 		Intent intent = ImportHelper.getImportTrackIntent();
-		try {
-			startActivityForResult(intent, IMPORT_FAVOURITES_REQUEST);
-		} catch (ActivityNotFoundException e) {
-			LOG.error(e.getMessage(), e);
-		}
+		AndroidUtils.startActivityForResultIfSafe(this, intent, IMPORT_FAVOURITES_REQUEST);
 	}
 
 	@Override
@@ -145,7 +138,7 @@ public class FavoritesActivity extends TabActivity {
 
 					}
 				});
-				if (!importHelper.handleGpxImport(uri, false)) {
+				if (!importHelper.handleGpxImport(uri, OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU, false)) {
 					if (gpxFragment!= null) {
 						gpxFragment.finishImport(false);
 					}
@@ -179,20 +172,19 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	private void setTabs(List<TabItem> mTabs) {
-		PagerSlidingTabStrip mSlidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
-		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
-		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+		PagerSlidingTabStrip mSlidingTabLayout = findViewById(R.id.sliding_tabs);
+		OsmandSettings settings = getMyApplication().getSettings();
 		Integer tabId = settings.FAVORITES_TAB.get();
 		int tab = 0;
-		for(int i = 0; i < mTabs.size(); i++) {
-			if(mTabs.get(i).resId == tabId) {
+		for (int i = 0; i < mTabs.size(); i++) {
+			if (mTabs.get(i).resId == tabId) {
 				tab = i;
 			}
 		}
 		tabSize = mTabs.size();
-		setViewPagerAdapter(mViewPager, mTabs);
-		mSlidingTabLayout.setViewPager(mViewPager);
-		mViewPager.setCurrentItem(tab);
+		setViewPagerAdapter(viewPager, mTabs);
+		mSlidingTabLayout.setViewPager(viewPager);
+		viewPager.setCurrentItem(tab);
 	}
 
 	private List<TabItem> getTabItems() {
@@ -229,14 +221,33 @@ public class FavoritesActivity extends TabActivity {
 		if (mTabs.size() != tabSize) {
 			setTabs(mTabs);
 		}
+		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				OsmandApplication app = getMyApplication();
+				if (app != null) {
+					app.getSettings().FAVORITES_TAB.set(mTabs.get(position).resId);
+				}
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+			}
+		});
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		viewPager.clearOnPageChangeListeners();
 	}
 
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
-	}
-
-	private OsmAndLocationProvider getLocationProvider() {
-		return getMyApplication().getLocationProvider();
 	}
 
 	@Override
@@ -298,4 +309,3 @@ public class FavoritesActivity extends TabActivity {
 		context.startActivity(intent);
 	}
 }
-

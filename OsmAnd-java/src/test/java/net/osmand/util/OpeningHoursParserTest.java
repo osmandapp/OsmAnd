@@ -116,8 +116,13 @@ public class OpeningHoursParserTest {
 		Locale locale = Locale.getDefault();
 		try {
 			Locale.setDefault(Locale.forLanguageTag("en-US"));
-
-			OpeningHours hours = parseOpenedHours("Mo-Fr 08:00-12:30, Mo-We 12:30-16:30 \"Sur rendez-vous\", Fr 12:30-15:30 \"Sur rendez-vous\"");
+			OpeningHours hours = parseOpenedHours("PH,Mo-Su 09:00-22:00");
+			System.out.println(hours);
+			testOpened("13.10.2021 11:54", hours, true);
+			hours = parseOpenedHours("Mo-We 07:00-21:00, Th-Fr 07:00-21:30, PH,Sa-Su 08:00-21:00");
+			System.out.println(hours);
+			testOpened("29.08.2021 10:09", hours, true);
+			hours = parseOpenedHours("Mo-Fr 08:00-12:30, Mo-We 12:30-16:30 \"Sur rendez-vous\", Fr 12:30-15:30 \"Sur rendez-vous\"");
 			System.out.println(hours);
 			testInfo("13.10.2019 18:00", hours, "Will open tomorrow at 08:00");
 
@@ -300,6 +305,10 @@ public class OpeningHoursParserTest {
 			testOpened("08.08.2012 23:59", hours, true);
 			testOpened("08.08.2012 12:23", hours, true);
 			testOpened("08.08.2012 06:23", hours, true);
+			hours = parseOpenedHours("24/7 closed \"Temporarily, for major repairs\"");
+			System.out.println(hours);
+			testOpened("13.10.2019 18:00", hours, false);
+			testInfo("13.10.2019 18:00", hours, "24/7 off - Temporarily, for major repairs");
 
 			// some people seem to use the following syntax:
 			hours = parseOpenedHours("Sa-Su 24/7");

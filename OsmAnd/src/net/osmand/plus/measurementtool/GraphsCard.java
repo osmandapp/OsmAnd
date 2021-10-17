@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,6 +31,7 @@ import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.MeasurementToolFragment.OnUpdateInfoListener;
 import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
@@ -38,7 +40,7 @@ import net.osmand.plus.measurementtool.graph.CustomGraphAdapter.LegendViewType;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper.RefreshMapCallback;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.util.Algorithms;
 
@@ -54,7 +56,7 @@ import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SPEED;
 import static net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
 import static net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
-public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
+public class GraphsCard extends MapBaseCard implements OnUpdateInfoListener {
 
 	private static String GRAPH_DATA_GPX_FILE_NAME = "graph_data_tmp";
 	private static int INVALID_ID = -1;
@@ -97,8 +99,8 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 		messageContainer = view.findViewById(R.id.message_container);
 		LineChart lineChart = (LineChart) view.findViewById(R.id.line_chart);
 		HorizontalBarChart barChart = (HorizontalBarChart) view.findViewById(R.id.horizontal_chart);
-		commonGraphAdapter = new CommonGraphAdapter(lineChart, true);
-		customGraphAdapter = new CustomGraphAdapter(barChart, true);
+		commonGraphAdapter = new CommonGraphAdapter(app, lineChart, true);
+		customGraphAdapter = new CustomGraphAdapter(app, barChart, true);
 
 		customGraphAdapter.setLegendContainer((ViewGroup) view.findViewById(R.id.route_legend));
 		customGraphAdapter.setLayoutChangeListener(new BaseGraphAdapter.LayoutChangeListener() {
@@ -154,7 +156,7 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 
 	private void fillInMenu() {
 		OsmandApplication app = getMyApplication();
-		int activeColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
 		final HorizontalSelectionAdapter adapter = new HorizontalSelectionAdapter(app, nightMode);
 		final ArrayList<HorizontalSelectionItem> items = new ArrayList<>();
 		for (GraphType type : graphTypes) {
@@ -292,7 +294,9 @@ public class GraphsCard extends BaseCard implements OnUpdateInfoListener {
 		OsmandApplication app = getMyApplication();
 		gpxFile = getGpxFile();
 		analysis = gpxFile != null ? gpxFile.getAnalysis(0) : null;
-		gpxItem = gpxFile != null ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile, true) : null;
+		gpxItem = gpxFile != null
+				? GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.MEASUREMENT_TOOL)
+				: null;
 		if (gpxItem != null) {
 			trackDetailsMenu.setGpxItem(gpxItem);
 		}

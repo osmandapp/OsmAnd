@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -26,13 +28,13 @@ public class NavVoiceAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
-		boolean mute = activity.getMyApplication().getSettings().VOICE_MUTE.get();
-		activity.getMyApplication().getSettings().VOICE_MUTE.set(!mute);
+	public void execute(@NonNull MapActivity mapActivity) {
+		boolean mute = mapActivity.getMyApplication().getSettings().VOICE_MUTE.get();
+		mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(!mute);
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
 

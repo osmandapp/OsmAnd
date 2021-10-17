@@ -83,7 +83,7 @@
     <string name="gps_not_available">Bitte schalten Sie \"Standort\" in den Systemeinstellungen ein</string>
     <string name="osmand_service">Hintergrundmodus</string>
     <string name="osmand_service_descr">OsmAnd Tracker läuft bei ausgeschaltetem Bildschirm im Hintergrund.</string>
-    <string name="shared_string_distance">Distanz</string>
+    <string name="shared_string_distance">Entfernung</string>
     <string name="share_location">Standort teilen</string>
     <string name="process_service">OsmAnd Tracker-Service</string>
     <string name="osmand_logo">OsmAnd-Logo</string>
@@ -208,7 +208,7 @@
     <string name="disable_monitoring">Aufzeichnung deaktivieren</string>
     <string name="timeline_description">Aufzeichnung aktivieren, um den Standortverlauf zu speichern.</string>
     <string name="show_gps_points_descr">Anzahl gesammelter und gesendeter GPS-Punkte anzeigen.</string>
-    <string name="privacy_policy_agree">Wenn Sie auf \"Fortfahren\" klicken, willigen Sie in die Bedingungen der Datenschutzerklärungen von Telegram und OsmAnd ein.</string>
+    <string name="privacy_policy_agree">Wenn Sie auf \"Fortfahren\" tippen, willigen Sie in die Bedingungen der Datenschutzerklärungen von Telegram und OsmAnd ein.</string>
     <string name="privacy_policy_telegram_client">Osmand Tracker ist eine der Apps die Telegrams offene Plattform nutzt. Ihre Kontake können beliebige andere Telegram-Apps nutzen.</string>
     <string name="timeline_available_for_free_now">Die Timeline ist eine Funktion, die jetzt kostenlos zur Verfügung steht.</string>
     <string name="search_contacts">Kontakte suchen</string>
@@ -255,7 +255,7 @@
     <string name="unit_of_speed_system_descr">Geschwindigkeitseinheit festlegen.</string>
     <string name="unit_of_speed_system">Geschwindigkeitseinheit</string>
     <string name="time_zone_descr">Wählen Sie die Zeitzone aus, die in Ihren Standortmeldungen angezeigt werden soll.</string>
-    <string name="unit_of_length_descr">Maß für Entfernungen ändern.</string>
+    <string name="unit_of_length_descr">Ändern Sie, in welcher Entfernung gemessen wird.</string>
     <string name="buffer_time_descr">Maximale Zeit zum Speichern von Punkten im Puffer</string>
     <string name="buffer_time">Verfallszeit des Puffers</string>
     <string name="shared_string_suggested">Empfohlen</string>

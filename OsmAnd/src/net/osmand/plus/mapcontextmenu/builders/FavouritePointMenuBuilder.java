@@ -16,6 +16,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -97,7 +98,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 		List<FavouritePoint> groupFavourites = favoriteGroup.getPoints();
 		if (groupFavourites.size() > 0) {
 			int color = favoriteGroup.getColor() == 0 ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
-			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
+			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
 			color = favoriteGroup.isVisible() ? (color | 0xff000000) : view.getResources().getColor(disabledColor);
 			String name = view.getContext().getString(R.string.context_menu_points_of_group);
 			buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color), null, name, 0, null,

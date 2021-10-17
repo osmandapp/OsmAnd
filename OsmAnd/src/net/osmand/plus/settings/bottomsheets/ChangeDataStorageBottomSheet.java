@@ -7,14 +7,17 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.FileUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -58,8 +61,8 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 
 		items.add(new TitleItem(getString(R.string.change_osmand_data_folder_question)));
 
-		int textColorPrimary = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
-		int activeColor = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int textColorPrimary = ColorUtilities.getPrimaryTextColorId(nightMode);
+		int activeColor = ColorUtilities.getActiveColorId(nightMode);
 		CharSequence desc = null;
 		
 		File currentStorageFile = new File(currentDirectory.getDirectory());
@@ -94,31 +97,19 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 		View mainView = View.inflate(ctx, R.layout.bottom_sheet_change_data_storage, null);
 		
 		View btnDontMoveView = mainView.findViewById(R.id.btnDontMove);
-		btnDontMoveView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				positiveButtonsClick(false);
-			}
-		});
-		UiUtilities.setupDialogButton(nightMode, btnDontMoveView, UiUtilities.DialogButtonType.SECONDARY, getString(R.string.dont_move_maps), currentDirectory.getIconResId());
+		btnDontMoveView.setOnClickListener(v -> positiveButtonsClick(false));
+		UiUtilities.setupDialogButton(nightMode, btnDontMoveView, DialogButtonType.SECONDARY,
+				getString(R.string.dont_move_maps), currentDirectory.getSelectedIconResId());
 
 		View btnMoveView = mainView.findViewById(R.id.btnMove);
-		btnMoveView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				positiveButtonsClick(true);
-			}
-		});
-		UiUtilities.setupDialogButton(nightMode, btnMoveView, UiUtilities.DialogButtonType.PRIMARY, getString(R.string.move_maps_to_new_destination), R.drawable.ic_action_folder_move);
+		btnMoveView.setOnClickListener(v -> positiveButtonsClick(true));
+		UiUtilities.setupDialogButton(nightMode, btnMoveView, DialogButtonType.PRIMARY,
+				getString(R.string.move_maps_to_new_destination), R.drawable.ic_action_folder_move);
 
 		View btnCloseView = mainView.findViewById(R.id.btnClose);
-		btnCloseView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
-		UiUtilities.setupDialogButton(nightMode, btnCloseView, UiUtilities.DialogButtonType.SECONDARY, getString(R.string.shared_string_cancel), R.drawable.ic_action_undo_dark);
+		btnCloseView.setOnClickListener(v -> dismiss());
+		UiUtilities.setupDialogButton(nightMode, btnCloseView, DialogButtonType.SECONDARY,
+				getString(R.string.shared_string_cancel), R.drawable.ic_action_undo_dark);
 
 		BaseBottomSheetItem baseItem = new BaseBottomSheetItem.Builder()
 				.setCustomView(mainView)
@@ -147,7 +138,7 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putParcelable(CURRENT_DIRECTORY, currentDirectory);
 		outState.putParcelable(NEW_DIRECTORY, newDirectory);

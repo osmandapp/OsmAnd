@@ -69,7 +69,7 @@ public class SendPoiBottomSheetFragment extends MenuBottomSheetDialogFragment {
 		final TextView accountName = sendOsmPoiView.findViewById(R.id.user_name);
 		OsmandSettings settings = app.getSettings();
 		String userNameOAuth = settings.OSM_USER_DISPLAY_NAME.get();
-		String userNameOpenID = settings.OSM_USER_NAME.get();
+		String userNameOpenID = settings.OSM_USER_NAME_OR_EMAIL.get();
 		String userName = isLoginOAuth(settings) ? userNameOAuth : userNameOpenID;
 		accountName.setText(userName);
 		final int paddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);

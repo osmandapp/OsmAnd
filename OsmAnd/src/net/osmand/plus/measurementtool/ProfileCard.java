@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.List;
 
 import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
-public class ProfileCard extends BaseCard {
+public class ProfileCard extends MapBaseCard {
 
 	private ApplicationMode selectedMode;
 	private ProfileCardListener listener;

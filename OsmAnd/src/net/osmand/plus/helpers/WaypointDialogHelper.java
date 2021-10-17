@@ -19,6 +19,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -46,13 +47,11 @@ import java.util.List;
  *
  */
 public class WaypointDialogHelper {
-	private MapActivity mapActivity;
-	private OsmandApplication app;
-	private WaypointHelper waypointHelper;
-	private List<WaypointDialogHelperCallback> helperCallbacks = new ArrayList<>();
 
-	private boolean flat;
-	private List<LocationPointWrapper> deletedPoints;
+	private final OsmandApplication app;
+	private final WaypointHelper waypointHelper;
+	private final MapActivity mapActivity;
+	private final List<WaypointDialogHelperCallback> helperCallbacks = new ArrayList<>();
 
 	public interface WaypointDialogHelperCallback {
 		void reloadAdapter();
@@ -80,11 +79,11 @@ public class WaypointDialogHelper {
 										   final boolean edit, final boolean topBar) {
 		WaypointHelper wh = app.getWaypointHelper();
 		final LocationPoint point = ps.getPoint();
-		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
+		TextView text = localView.findViewById(R.id.waypoint_text);
 		if (!topBar) {
 			AndroidUtils.setTextPrimaryColor(activity, text, nightMode);
 		}
-		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
+		TextView textShadow = localView.findViewById(R.id.waypoint_text_shadow);
 		if (!edit) {
 			localView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -93,7 +92,7 @@ public class WaypointDialogHelper {
 				}
 			});
 		}
-		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
+		TextView textDist = localView.findViewById(R.id.waypoint_dist);
 		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(activity, app, nightMode));
 		int dist = -1;
 		boolean startPoint = ps.type == WaypointHelper.TARGETS && ((TargetPoint) ps.point).start;
@@ -114,13 +113,13 @@ public class WaypointDialogHelper {
 			textDist.setText("");
 		}
 
-		TextView textDeviation = (TextView) localView.findViewById(R.id.waypoint_deviation);
+		TextView textDeviation = localView.findViewById(R.id.waypoint_deviation);
 		if (textDeviation != null) {
 			if (dist > 0 && ps.deviationDistance > 0) {
 				String devStr = "+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
 				textDeviation.setText(devStr);
 				if (!topBar) {
-					int colorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+					int colorId = ColorUtilities.getSecondaryTextColorId(nightMode);
 					AndroidUtils.setTextSecondaryColor(activity, textDeviation, nightMode);
 					if (ps.deviationDirectionRight) {
 						textDeviation.setCompoundDrawablesWithIntrinsicBounds(
@@ -153,7 +152,7 @@ public class WaypointDialogHelper {
 		text.setText(descr);
 
 		String pointDescription = "";
-		TextView descText = (TextView) localView.findViewById(R.id.waypoint_desc_text);
+		TextView descText = localView.findViewById(R.id.waypoint_desc_text);
 		if (descText != null) {
 			AndroidUtils.setTextSecondaryColor(activity, descText, nightMode);
 			switch (ps.type) {
@@ -212,7 +211,7 @@ public class WaypointDialogHelper {
 								new PointDescription(PointDescription.POINT_TYPE_LOCATION,
 										oname));
 					}
-					points.add(new LocationPointWrapper(null, WaypointHelper.TARGETS, start, 0f, 0));
+					points.add(new LocationPointWrapper(WaypointHelper.TARGETS, start, 0f, 0));
 
 				}
 				if (tp != null && tp.size() > 0) {
@@ -535,7 +534,7 @@ public class WaypointDialogHelper {
 					.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							onWaypointItemClick(addWaypointItem);
+							onWaypointItemClick();
 						}
 					})
 					.create();
@@ -578,7 +577,7 @@ public class WaypointDialogHelper {
 			fragment.show(mapActivity.getSupportFragmentManager(), AddPointBottomSheetDialog.TAG);
 		}
 
-		private void onWaypointItemClick(BaseBottomSheetItem[] addWaypointItem) {
+		private void onWaypointItemClick() {
 			final MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				openAddPointDialog(mapActivity);

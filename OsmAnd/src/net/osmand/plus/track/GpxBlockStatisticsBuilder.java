@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -22,6 +23,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
@@ -30,6 +32,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.myplaces.GPXTabItemType;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.widgets.TextViewEx;
@@ -43,8 +46,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import static net.osmand.plus.liveupdates.LiveUpdatesFragment.getDefaultIconColorId;
 
 public class GpxBlockStatisticsBuilder {
 
@@ -81,8 +82,24 @@ public class GpxBlockStatisticsBuilder {
 		this.blocksClickable = blocksClickable;
 	}
 
-	public void setBlocksView(RecyclerView blocksView) {
+	public void setBlocksView(final RecyclerView blocksView, boolean isParentExpandable) {
 		this.blocksView = blocksView;
+		if (isParentExpandable) {
+			blocksView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					if (blocksView.getHeight() != 0) {
+						ViewTreeObserver obs = blocksView.getViewTreeObserver();
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+							obs.removeOnGlobalLayoutListener(this);
+						} else {
+							obs.removeGlobalOnLayoutListener(this);
+						}
+						blocksView.setMinimumHeight(blocksView.getHeight());
+					}
+				}
+			});
+		}
 	}
 
 	public void setTabItem(GPXTabItemType tabItem) {
@@ -91,15 +108,17 @@ public class GpxBlockStatisticsBuilder {
 
 	@Nullable
 	public GpxDisplayItem getDisplayItem(GPXFile gpxFile) {
-		return gpxFile.tracks.size() > 0 ? GpxUiHelper.makeGpxDisplayItem(app, gpxFile, false) : null;
+		return gpxFile.tracks.size() > 0 ?
+				GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX) : null;
 	}
 
 	private GPXFile getGPXFile() {
 		return selectedGpxFile.getGpxFile();
 	}
 
-	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor) {
-		initItems();
+	public void initStatBlocks(@Nullable SegmentActionsListener actionsListener, @ColorInt int activeColor,
+	                           @Nullable GPXTrackAnalysis analysis) {
+		initItems(analysis);
 		adapter = new BlockStatisticsAdapter(getDisplayItem(getGPXFile()), actionsListener, activeColor);
 		adapter.setItems(items);
 		blocksView.setLayoutManager(new LinearLayoutManager(app, LinearLayoutManager.HORIZONTAL, false));
@@ -136,23 +155,31 @@ public class GpxBlockStatisticsBuilder {
 	}
 
 	public void initItems() {
+		initItems(null);
+	}
+
+	public void initItems(@Nullable GPXTrackAnalysis initAnalysis) {
 		GPXFile gpxFile = getGPXFile();
 		if (app == null || gpxFile == null) {
 			return;
 		}
-		analysis = null;
-		boolean withoutGaps = true;
-		if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
-			GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
-			analysis = currentGpx.getAnalysis(0);
-			withoutGaps = !selectedGpxFile.isJoinSegments()
-					&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
-		} else {
-			GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
-			if (gpxDisplayItem != null) {
-				analysis = gpxDisplayItem.analysis;
-				withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+		boolean withoutGaps = false;
+		if (initAnalysis == null) {
+			withoutGaps = true;
+			if (gpxFile.equals(app.getSavingTrackHelper().getCurrentGpx())) {
+				GPXFile currentGpx = app.getSavingTrackHelper().getCurrentTrack().getGpxFile();
+				analysis = currentGpx.getAnalysis(0);
+				withoutGaps = !selectedGpxFile.isJoinSegments()
+						&& (Algorithms.isEmpty(currentGpx.tracks) || currentGpx.tracks.get(0).generalTrack);
+			} else {
+				GpxDisplayItem gpxDisplayItem = getDisplayItem(gpxFile);
+				if (gpxDisplayItem != null) {
+					analysis = gpxDisplayItem.analysis;
+					withoutGaps = !selectedGpxFile.isJoinSegments() && gpxDisplayItem.isGeneralTrack();
+				}
 			}
+		} else {
+			analysis = initAnalysis;
 		}
 		items.clear();
 		if (analysis != null) {
@@ -282,7 +309,7 @@ public class GpxBlockStatisticsBuilder {
 
 	public void prepareData(String title, String value, @DrawableRes int imageResId,
 							GPXDataSetType firstType, GPXDataSetType secondType, ItemType itemType) {
-		prepareData(title, value, imageResId, getDefaultIconColorId(nightMode), firstType, secondType, itemType);
+		prepareData(title, value, imageResId, ColorUtilities.getDefaultIconColorId(nightMode), firstType, secondType, itemType);
 	}
 
 	public void prepareData(String title, String value, @DrawableRes int imageResId, @ColorRes int imageColorId,
@@ -436,7 +463,7 @@ public class GpxBlockStatisticsBuilder {
 			});
 			Drawable icon = app.getUIUtilities().getIcon(item.imageResId, item.imageColorId);
 			holder.imageView.setImageDrawable(icon);
-			AndroidUtils.setBackgroundColor(app, holder.divider, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
+			AndroidUtils.setBackgroundColor(app, holder.divider, ColorUtilities.getDividerColorId(nightMode));
 			AndroidUiHelper.updateVisibility(holder.divider, position != items.size() - 1);
 		}
 

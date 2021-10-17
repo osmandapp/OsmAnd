@@ -1,13 +1,12 @@
 package net.osmand.plus.dialogs;
 
-import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
@@ -18,7 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityLayers;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -34,18 +33,18 @@ import java.util.Map;
 
 final class MapLayerMenuListener extends OnRowItemClick {
 
-	private MapActivity mapActivity;
-	private ContextMenuAdapter menuAdapter;
+	private final MapActivity mapActivity;
+	private final ContextMenuAdapter menuAdapter;
 
 	MapLayerMenuListener(MapActivity mapActivity, ContextMenuAdapter menuAdapter) {
 		this.mapActivity = mapActivity;
 		this.menuAdapter = menuAdapter;
 	}
 
+	@NonNull
 	private List<String> getAlreadySelectedGpx() {
 		GpxSelectionHelper selectedGpxHelper = mapActivity.getMyApplication().getSelectedGpxHelper();
 		List<SelectedGpxFile> selectedGpxFiles = selectedGpxHelper.getSelectedGPXFiles();
-
 		List<String> files = GpxUiHelper.getSelectedTrackPaths(mapActivity.getMyApplication());
 		if (selectedGpxFiles.isEmpty()) {
 			Map<GPXFile, Long> fls = selectedGpxHelper.getSelectedGpxFilesBackUp();
@@ -58,7 +57,6 @@ final class MapLayerMenuListener extends OnRowItemClick {
 				}
 			}
 		}
-
 		return files;
 	}
 
@@ -72,16 +70,13 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			return false;
 		} else if (itemId == R.string.rendering_category_transport) {
 			final ContextMenuItem item = adapter.getItem(pos);
-			TransportLinesMenu.showTransportsDialog(mapActivity, new CallbackWithObject<Boolean>() {
-				@Override
-				public boolean processResult(Boolean result) {
-					if (item != null) {
-						item.setSelected(result);
-						item.setColor(mapActivity, result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-						adapter.notifyDataSetChanged();
-					}
-					return true;
+			TransportLinesMenu.showTransportsDialog(mapActivity, result -> {
+				if (item != null) {
+					item.setSelected(result);
+					item.setColor(mapActivity, result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+					adapter.notifyDataSetChanged();
 				}
+				return true;
 			});
 			boolean selected = TransportLinesMenu.isShowLines(mapActivity.getMyApplication());
 			if (!selected && item != null) {
@@ -91,7 +86,7 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			}
 			return false;
 		} else {
-			CompoundButton btn = (CompoundButton) view.findViewById(R.id.toggle_item);
+			CompoundButton btn = view.findViewById(R.id.toggle_item);
 			if (btn != null && btn.getVisibility() == View.VISIBLE) {
 				btn.setChecked(!btn.isChecked());
 				menuAdapter.getItem(pos).setColor(mapActivity, btn.isChecked() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
@@ -135,45 +130,37 @@ final class MapLayerMenuListener extends OnRowItemClick {
 			}
 		} else if (itemId == R.string.rendering_category_transport) {
 			boolean selected = TransportLinesMenu.isShowLines(mapActivity.getMyApplication());
-			TransportLinesMenu.toggleTransportLines(mapActivity, !selected, new CallbackWithObject<Boolean>() {
-				@Override
-				public boolean processResult(Boolean result) {
-					item.setSelected(result);
-					item.setColor(mapActivity, result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-					adapter.notifyDataSetChanged();
-					return true;
-				}
+			TransportLinesMenu.toggleTransportLines(mapActivity, !selected, result -> {
+				item.setSelected(result);
+				item.setColor(mapActivity, result ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+				adapter.notifyDataSetChanged();
+				return true;
 			});
 		} else if (itemId == R.string.map_markers) {
 			settings.SHOW_MAP_MARKERS.set(isChecked);
 		} else if (itemId == R.string.layer_map) {
-			if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
+			if (!OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 				PluginsFragment.showInstance(mapActivity.getSupportFragmentManager());
 			} else {
 				ContextMenuItem it = adapter.getItem(pos);
-				mapActivity.getMapLayers().selectMapLayer(mapActivity.getMapView(), it, adapter);
+				mapActivity.getMapLayers().selectMapLayer(mapActivity, it, adapter);
 			}
 		}
 		adapter.notifyDataSetChanged();
-		mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
-		mapActivity.getMapView().refreshMap();
+		mapActivity.updateLayers();
+		mapActivity.refreshMap();
 		return false;
 	}
 
-	private void showGpxSelectionDialog(final ArrayAdapter<ContextMenuItem> adapter,
-	                                    final ContextMenuItem item) {
-		AlertDialog dialog = mapActivity.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(),
-				mapActivity.getMapView());
-		dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				OsmandApplication app = mapActivity.getMyApplication();
-				boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
-				item.setSelected(selected);
-				item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
-				item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-				adapter.notifyDataSetChanged();
-			}
+	private void showGpxSelectionDialog(final ArrayAdapter<ContextMenuItem> adapter, final ContextMenuItem item) {
+		AlertDialog dialog = mapActivity.getMapLayers().showGPXFileLayer(getAlreadySelectedGpx(), mapActivity);
+		dialog.setOnDismissListener(dlg -> {
+			OsmandApplication app = mapActivity.getMyApplication();
+			boolean selected = app.getSelectedGpxHelper().isShowingAnyGpxFiles();
+			item.setSelected(selected);
+			item.setDescription(app.getSelectedGpxHelper().getGpxDescription());
+			item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+			adapter.notifyDataSetChanged();
 		});
 	}
 
@@ -181,25 +168,20 @@ final class MapLayerMenuListener extends OnRowItemClick {
 	                                   final ContextMenuItem item) {
 		final PoiFiltersHelper poiFiltersHelper = mapActivity.getMyApplication().getPoiFilters();
 		final PoiUIFilter wiki = poiFiltersHelper.getTopWikiPoiFilter();
-		MapActivityLayers.DismissListener dismissListener =
-				new MapActivityLayers.DismissListener() {
-					@Override
-					public void dismiss() {
-						PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();
-						boolean selected = pf.isShowingAnyPoi(wiki);
-						item.setSelected(selected);
-						item.setDescription(pf.getSelectedPoiFiltersName(wiki));
-						item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-						adapter.notifyDataSetChanged();
-					}
+		MapLayers.DismissListener dismissListener =
+				() -> {
+					PoiFiltersHelper pf = mapActivity.getMyApplication().getPoiFilters();
+					boolean selected = pf.isShowingAnyPoi(wiki);
+					item.setSelected(selected);
+					item.setDescription(pf.getSelectedPoiFiltersName(wiki));
+					item.setColor(mapActivity, selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+					adapter.notifyDataSetChanged();
 				};
 		boolean isMultichoose = poiFiltersHelper.getSelectedPoiFilters(wiki).size() > 1;
 		if (isMultichoose) {
-			mapActivity.getMapLayers().showMultichoicePoiFilterDialog(mapActivity.getMapView(),
-					dismissListener);
+			mapActivity.getMapLayers().showMultichoicePoiFilterDialog(mapActivity, dismissListener);
 		} else {
-			mapActivity.getMapLayers().showSingleChoicePoiFilterDialog(mapActivity.getMapView(),
-					dismissListener);
+			mapActivity.getMapLayers().showSingleChoicePoiFilterDialog(mapActivity, dismissListener);
 		}
 	}
 }

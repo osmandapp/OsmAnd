@@ -40,6 +40,7 @@ import gnu.trove.list.array.TIntArrayList;
 public class OsmandRegions {
 
 	public static final String MAP_TYPE = "region_map";
+	public static final String ROADS_TYPE = "region_roads";
 
 	public static final String FIELD_DOWNLOAD_NAME = "download_name";
 	public static final String FIELD_NAME = "name";
@@ -52,6 +53,8 @@ public class OsmandRegions {
 	public static final String FIELD_LEFT_HAND_DRIVING = "region_left_hand_navigation";
 	public static final String FIELD_WIKI_LINK = "region_wiki_link";
 	public static final String FIELD_POPULATION = "region_population";
+	public static final String LOCALE_NAME_DEFAULT_FORMAT = "%1$s %2$s";
+	public static final String LOCALE_NAME_REVERSED_FORMAT = "%2$s, %1$s";
 
 	private BinaryMapIndexReader reader;
 	private String locale = "en";
@@ -165,15 +168,20 @@ public class OsmandRegions {
 
 
 	public String getLocaleName(String downloadName, boolean includingParent) {
+		return getLocaleName(downloadName, includingParent, false);
+	}
+
+	public String getLocaleName(String downloadName, boolean includingParent, boolean reversed) {
 		final String lc = downloadName.toLowerCase();
 		if (downloadNamesToFullNames.containsKey(lc)) {
 			String fullName = downloadNamesToFullNames.get(lc);
-			return getLocaleNameByFullName(fullName, includingParent);
+			return getLocaleNameByFullName(fullName, includingParent, reversed
+					? LOCALE_NAME_REVERSED_FORMAT : LOCALE_NAME_DEFAULT_FORMAT);
 		}
 		return downloadName.replace('_', ' ');
 	}
 
-	public String getLocaleNameByFullName(String fullName, boolean includingParent) {
+	public String getLocaleNameByFullName(String fullName, boolean includingParent, String format) {
 		WorldRegion rd = fullNamesToRegionData.get(fullName);
 		if (rd == null) {
 			return fullName.replace('_', ' ');
@@ -186,12 +194,12 @@ public class OsmandRegions {
 				return rd.getLocaleName();
 			}
 			if (parentParent.getRegionId().equals(WorldRegion.RUSSIA_REGION_ID)) {
-				return parentParent.getLocaleName() + " " + rd.getLocaleName();
+				return String.format(format, parentParent.getLocaleName(), rd.getLocaleName());
 			}
 			if (parentParent.getRegionId().equals(WorldRegion.JAPAN_REGION_ID)) {
-				return parentParent.getLocaleName() + " " + rd.getLocaleName();
+				return String.format(format, parentParent.getLocaleName(), rd.getLocaleName());
 			}
-			return parent.getLocaleName() + " " + rd.getLocaleName();
+			return String.format(format, parent.getLocaleName(), rd.getLocaleName());
 		} else {
 			return rd.getLocaleName();
 		}
@@ -200,7 +208,6 @@ public class OsmandRegions {
 	public WorldRegion getWorldRegion() {
 		return worldRegion;
 	}
-
 
 	public boolean isInitialized() {
 		return reader != null;
@@ -459,6 +466,7 @@ public class OsmandRegions {
 		rd.params.population = mapIndexFields.get(mapIndexFields.populationType, object);
 		rd.regionSearchText = getSearchIndex(object);
 		rd.regionMapDownload = isDownloadOfType(object, MAP_TYPE);
+		rd.regionRoadsDownload = isDownloadOfType(object, ROADS_TYPE);
 		return rd;
 	}
 
@@ -468,38 +476,33 @@ public class OsmandRegions {
 		}
 
 		List<LatLon> polygon = new ArrayList<>();
-		double currentX = object.getPoint31XTile(0);
-		double currentY = object.getPoint31YTile(0);
-		polygon.add(new LatLon(currentX, currentY));
-		double minX = currentX;
-		double maxX = currentX;
-		double minY = currentY;
-		double maxY = currentY;
+		double x = MapUtils.get31LongitudeX(object.getPoint31XTile(0));
+		double y = MapUtils.get31LatitudeY(object.getPoint31YTile(0));
+		polygon.add(new LatLon(y, x));
+		double minX = x;
+		double maxX = x;
+		double minY = y;
+		double maxY = y;
 
 		if (object.getPointsLength() > 1) {
 			for (int i = 1; i < object.getPointsLength(); i++) {
-				currentX = object.getPoint31XTile(i);
-				currentY = object.getPoint31YTile(i);
-				if (currentX > maxX) {
-					maxX = currentX;
-				} else if (currentX < minX) {
-					minX = currentX;
+				x = MapUtils.get31LongitudeX(object.getPoint31XTile(i));
+				y = MapUtils.get31LatitudeY(object.getPoint31YTile(i));
+				if (x > maxX) {
+					maxX = x;
+				} else if (x < minX) {
+					minX = x;
 				}
-				if (currentY > maxY) {
-					maxY = currentY;
-				} else if (currentY < minY) {
-					minY = currentY;
+				if (y < maxY) {
+					maxY = y;
+				} else if (y > minY) {
+					minY = y;
 				}
-				polygon.add(new LatLon(currentX, currentY));
+				polygon.add(new LatLon(y, x));
 			}
 		}
 
-		minX = MapUtils.get31LongitudeX((int) minX);
-		maxX = MapUtils.get31LongitudeX((int) maxX);
-		double revertedMinY = MapUtils.get31LatitudeY((int) maxY);
-		double revertedMaxY = MapUtils.get31LatitudeY((int) minY);
-
-		rd.boundingBox = new QuadRect(minX, revertedMinY, maxX, revertedMaxY);
+		rd.boundingBox = new QuadRect(minX, minY, maxX, maxY);
 		rd.polygon = polygon;
 	}
 
@@ -639,7 +642,7 @@ public class OsmandRegions {
 				if(or.mapIndexFields.nameLocale2Type != null) {
 					localName = b.getNameByType(or.mapIndexFields.nameLocale2Type);
 				}
-				System.out.println(String.format("Region %s %s", b.getName(), localName));
+				System.out.printf("Region %s %s%n", b.getName(), localName);
 			}
 		}
 
@@ -767,7 +770,11 @@ public class OsmandRegions {
 	}
 
 	public List<WorldRegion> getWorldRegionsAt(LatLon latLon) throws IOException {
-		Map<WorldRegion, BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsWithRegionsAt(latLon);
+		return getWorldRegionsAt(latLon, false);
+	}
+
+	public List<WorldRegion> getWorldRegionsAt(LatLon latLon, boolean includeRoadRegions) throws IOException {
+		Map<WorldRegion, BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsWithRegionsAt(latLon, includeRoadRegions);
 		return new ArrayList<>(mapDataObjects.keySet());
 	}
 
@@ -793,6 +800,10 @@ public class OsmandRegions {
 	}
 
 	private Map<WorldRegion, BinaryMapDataObject> getBinaryMapDataObjectsWithRegionsAt(LatLon latLon) throws IOException {
+		return getBinaryMapDataObjectsWithRegionsAt(latLon, false);
+	}
+
+	private Map<WorldRegion, BinaryMapDataObject> getBinaryMapDataObjectsWithRegionsAt(LatLon latLon, boolean includeRoadRegions) throws IOException {
 		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
 		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
 		Map<WorldRegion, BinaryMapDataObject> foundObjects = new LinkedHashMap<>();
@@ -802,20 +813,17 @@ public class OsmandRegions {
 		} catch (IOException e) {
 			throw new IOException("Error while calling queryBbox");
 		}
-
-		if (mapDataObjects != null) {
-			Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
-			while (it.hasNext()) {
-				BinaryMapDataObject o = it.next();
-				if (o.getTypes() != null) {
-					WorldRegion downloadRegion = getRegionData(getFullName(o));
-					if ( downloadRegion == null
-							|| !downloadRegion.isRegionMapDownload()
-							|| !contain(o, point31x, point31y)) {
-						it.remove();
-					} else {
-						foundObjects.put(downloadRegion, o);
-					}
+		Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
+		while (it.hasNext()) {
+			BinaryMapDataObject o = it.next();
+			if (o.getTypes() != null) {
+				WorldRegion downloadRegion = getRegionData(getFullName(o));
+				if ( downloadRegion == null
+						|| (includeRoadRegions ? !downloadRegion.isRegionRoadsDownload() && !downloadRegion.isRegionMapDownload() : !downloadRegion.isRegionMapDownload())
+						|| !contain(o, point31x, point31y)) {
+					it.remove();
+				} else {
+					foundObjects.put(downloadRegion, o);
 				}
 			}
 		}

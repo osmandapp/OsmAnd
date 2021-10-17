@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="poi_rtsa_scale_1a">1A</string>
+    <string name="poi_socket_type3_yes">Math 3</string>
+    <string name="poi_socket_type2_yes">Math 2</string>
+    <string name="poi_socket_type1_yes">Math 1</string>
+    <string name="poi_gambling_type">Math</string>
+    <string name="poi_volcano_type">Math</string>
+    <string name="poi_bath_type">Math</string>
+    <string name="poi_substation_type">Math</string>
+    <string name="poi_zoo_type">Math</string>
+    <string name="poi_information_type">Math</string>
+    <string name="poi_archaeological_site_type">Math</string>
+    <string name="poi_animal_training_type">Math</string>
+    <string name="poi_telescope_type">Math</string>
+    <string name="poi_payment_toll_type">Dull talu</string>
+    <string name="poi_water_source">Ffynhonnell dŵr</string>
+    <string name="poi_fire_hydrant_position">Lleoliad</string>
+    <string name="poi_fire_hydrant_type">Math</string>
+    <string name="poi_shoes_type">Math</string>
+    <string name="poi_clothes_type">Math</string>
+    <string name="poi_bicycle_service">Gwasanaeth beicio</string>
+    <string name="poi_vending_type">Dull gwerthu</string>
+    <string name="poi_internet_access_type">Math o gysylltiad rhyngrwyd</string>
+    <string name="poi_additional_type">Ychwanegol</string>
+    <string name="poi_payment_fuel_type">Cardiau tanwydd</string>
+    <string name="poi_payment_type">Dull talu</string>
+    <string name="poi_fuel_avia_type">Math o danwydd (avia)</string>
+    <string name="poi_fuel_type">Math o danwydd</string>
+    <string name="poi_defibrillator_location">Lleoliad</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
+    <string name="poi_rtsa_scale_3b">3B</string>
+    <string name="poi_rtsa_scale_3a_asterisk">3A*</string>
+    <string name="poi_rtsa_scale_3a">3A</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2B*</string>
+    <string name="poi_rtsa_scale_2b">2B</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2A*</string>
+    <string name="poi_rtsa_scale_2a">2A</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
+    <string name="poi_rtsa_scale_1b">1B</string>
+    <string name="poi_rtsa_scale_1a_asterisk">1A*</string>
+    <string name="poi_site_type_fortification">Amddiffynfa</string>
+</resources>

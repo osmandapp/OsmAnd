@@ -44,11 +44,11 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.LineGraphType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.track.TrackDisplayHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -70,10 +70,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 
 	private static final int CHART_LABEL_COUNT = 4;
 
-	private OsmandApplication app;
-	private UiUtilities iconsCache;
-	private TrackDisplayHelper displayHelper;
-	private Map<GPXTabItemType, List<ILineDataSet>> dataSetsMap = new HashMap<>();
+	private final OsmandApplication app;
+	private final UiUtilities iconsCache;
+	private final TrackDisplayHelper displayHelper;
+	private final Map<GPXTabItemType, List<ILineDataSet>> dataSetsMap = new HashMap<>();
 
 	private WptPt selectedWpt;
 	private TrkSegment segment;
@@ -122,7 +122,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			GPXFile gpxFile = displayHelper.getGpx();
 			if (gpxFile != null && !gpxFile.isEmpty()) {
 				analysis = gpxFile.getAnalysis(0);
-				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, false);
+				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX);
 			}
 		} else {
 			if (gpxItem != null) {
@@ -173,49 +173,38 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return dataSets;
 	}
 
+	@Nullable
 	private TrkSegment getTrackSegment(LineChart chart) {
 		if (segment == null) {
 			LineData lineData = chart.getLineData();
 			List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
-			if (ds != null && ds.size() > 0) {
+			if (!Algorithms.isEmpty(ds)) {
 				segment = getSegmentForAnalysis(gpxItem, analysis);
 			}
 		}
 		return segment;
 	}
 
+	@Nullable
 	private WptPt getPoint(LineChart chart, float pos) {
-		WptPt wpt = null;
 		LineData lineData = chart.getLineData();
-		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
-		if (ds != null && ds.size() > 0) {
-			TrkSegment segment = getTrackSegment(chart);
-			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+		List<ILineDataSet> dataSets = lineData != null ? lineData.getDataSets() : null;
+		TrkSegment segment = getTrackSegment(chart);
+		if (!Algorithms.isEmpty(dataSets) && segment != null) {
+			GPXFile gpxFile = gpxItem.group.getGpx();
+			boolean joinSegments = displayHelper.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
 				float time = pos * 1000;
-				for (WptPt p : segment.points) {
-					if (p.time - analysis.startTime >= time) {
-						wpt = p;
-						break;
-					}
-				}
+				return GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, false,
+						joinSegments);
 			} else {
-				float distance = pos * dataSet.getDivX();
-				double totalDistance = 0;
-				for (int i = 0; i < segment.points.size(); i++) {
-					WptPt currentPoint = segment.points.get(i);
-					if (i != 0) {
-						WptPt previousPoint = segment.points.get(i - 1);
-						totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
-					}
-					if (currentPoint.distance >= distance || Math.abs(totalDistance - distance) < 0.1) {
-						wpt = currentPoint;
-						break;
-					}
-				}
+				OrderedLineDataSet dataSet = (OrderedLineDataSet) dataSets.get(0);
+				float distance = dataSet.getDivX() * pos;
+				return GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, false,
+						joinSegments);
 			}
 		}
-		return wpt;
+		return null;
 	}
 
 	@Override
@@ -291,13 +280,13 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 			if (!onlyGraphs) {
 				((ImageView) view.findViewById(R.id.average_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_speed));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_speed_16));
 				((ImageView) view.findViewById(R.id.max_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_max_speed));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_max_speed_16));
 				((ImageView) view.findViewById(R.id.time_moving_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
 				((ImageView) view.findViewById(R.id.distance_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
 
 				String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
 				String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
@@ -363,13 +352,13 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 			if (!onlyGraphs) {
 				((ImageView) view.findViewById(R.id.average_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average_16));
 				((ImageView) view.findViewById(R.id.range_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average_16));
 				((ImageView) view.findViewById(R.id.ascent_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_ascent));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_ascent_16));
 				((ImageView) view.findViewById(R.id.descent_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_descent));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_descent_16));
 
 				String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
 				String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
@@ -430,13 +419,13 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			}
 			if (!onlyGraphs) {
 				((ImageView) view.findViewById(R.id.distance_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_polygom_dark));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
 				((ImageView) view.findViewById(R.id.duration_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_span_16));
 				((ImageView) view.findViewById(R.id.start_time_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_start));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_start_16));
 				((ImageView) view.findViewById(R.id.end_time_icon))
-						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_end));
+						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_end_16));
 
 				view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -833,6 +822,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 	}
 
+	@Nullable
 	public static TrkSegment getSegmentForAnalysis(GpxDisplayItem gpxItem, GPXTrackAnalysis analysis) {
 		for (Track track : gpxItem.group.getGpx().tracks) {
 			for (TrkSegment segment : track.segments) {

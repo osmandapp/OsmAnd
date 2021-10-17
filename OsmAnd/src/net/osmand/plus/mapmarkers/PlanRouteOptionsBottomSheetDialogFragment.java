@@ -51,7 +51,7 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 
 		BaseBottomSheetItem navigateItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark))
-				.setTitle(getString(R.string.get_directions))
+				.setTitle(getString(R.string.shared_string_navigation))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override

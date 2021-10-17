@@ -94,7 +94,7 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 	}
 
 	@Override
-	protected double getSizeToDownloadInMb() {
+	public double getSizeToDownloadInMb() {
 		return Algorithms.parseDoubleSilently(size, 0.0);
 	}
 
@@ -162,21 +162,12 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		return getFileName().compareTo(another.getFileName());
 	}
 
-	
-	public String getDaysBehind(OsmandApplication app) {
-		if (localTimestamp > 0) {
-			long days = Math.max(1, (getTimestamp() - localTimestamp) / (24 * 60 * 60 * 1000) + 1);
-			return days + " " + app.getString(R.string.days_behind);
-		}
-		return "";
-	}
-
 	public String getDate(@NonNull DateFormat dateFormat, boolean remote) {
 		return remote ? getRemoteDate(dateFormat) : getLocalDate(dateFormat);
 	}
 	
 	public String getRemoteDate(DateFormat dateFormat) {
-		if(timestamp <= 0) {
+		if (timestamp <= 0) {
 			return "";
 		}
 		return dateFormat.format(new Date(timestamp));
@@ -254,7 +245,6 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 		public boolean isAsset;
 		public String assetName;
 		public DownloadActivityType type;
-		
 
 		public DownloadEntry() {
 		}
@@ -266,5 +256,4 @@ public class IndexItem extends DownloadItem implements Comparable<IndexItem> {
 			isAsset = true;
 		}
 	}
-
 }

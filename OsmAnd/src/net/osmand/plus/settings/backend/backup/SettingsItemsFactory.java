@@ -5,6 +5,28 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.DataSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.DownloadsItem;
+import net.osmand.plus.settings.backend.backup.items.FavoritesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GlobalSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.GpxSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.HistoryMarkersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ItinerarySettingsItem;
+import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.MarkersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.OnlineRoutingSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.OsmEditsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.OsmNotesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.PluginSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ResourcesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SearchHistorySettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SuggestedDownloadsItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONArray;
@@ -16,14 +38,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class SettingsItemsFactory {
+public class SettingsItemsFactory {
 
-	private OsmandApplication app;
-	private List<SettingsItem> items = new ArrayList<>();
+	private final OsmandApplication app;
+	private final List<SettingsItem> items = new ArrayList<>();
 
-	SettingsItemsFactory(@NonNull OsmandApplication app, String jsonStr) throws IllegalArgumentException, JSONException {
+	public SettingsItemsFactory(@NonNull OsmandApplication app, JSONObject json) throws IllegalArgumentException, JSONException {
 		this.app = app;
-		collectItems(new JSONObject(jsonStr));
+		collectItems(json);
+	}
+
+	public SettingsItemsFactory(@NonNull OsmandApplication app, String jsonStr) throws IllegalArgumentException, JSONException {
+		this(app, new JSONObject(jsonStr));
 	}
 
 	private void collectItems(JSONObject json) throws IllegalArgumentException, JSONException {
@@ -38,6 +64,10 @@ class SettingsItemsFactory {
 			SettingsItem item;
 			try {
 				item = createItem(itemJson);
+				// unknown type
+				if (item == null) {
+					continue;
+				}
 				items.add(item);
 				String pluginId = item.getPluginId();
 				if (pluginId != null && item.getType() != SettingsItemType.PLUGIN) {
@@ -53,9 +83,6 @@ class SettingsItemsFactory {
 			} catch (IllegalArgumentException e) {
 				SettingsHelper.LOG.error("Error creating item from json: " + itemJson, e);
 			}
-		}
-		if (items.size() == 0) {
-			throw new IllegalArgumentException("No items");
 		}
 		for (SettingsItem item : items) {
 			if (item instanceof PluginSettingsItem) {
@@ -83,10 +110,13 @@ class SettingsItemsFactory {
 		return null;
 	}
 
-	@NonNull
+	@Nullable
 	private SettingsItem createItem(@NonNull JSONObject json) throws IllegalArgumentException, JSONException {
 		SettingsItem item = null;
 		SettingsItemType type = SettingsItem.parseItemType(json);
+		if (type == null) {
+			return null;
+		}
 		OsmandSettings settings = app.getSettings();
 		switch (type) {
 			case GLOBAL:

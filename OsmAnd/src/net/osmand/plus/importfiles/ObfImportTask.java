@@ -26,7 +26,10 @@ class ObfImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 
 	@Override
 	protected String doInBackground(Void... voids) {
-		String error = ImportHelper.copyFile(app, getObfDestFile(name), uri, false);
+		boolean unzip = name.endsWith(IndexConstants.ZIP_EXT);
+		String fileName = unzip ? name.replace(IndexConstants.ZIP_EXT, "") : name;
+		File dest = getObfDestFile(fileName);
+		String error = ImportHelper.copyFile(app, dest, uri, false, unzip);
 		if (error == null) {
 			app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
 			app.getDownloadThread().updateLoadedFiles();
@@ -47,6 +50,8 @@ class ObfImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 			return app.getAppPath(IndexConstants.ROADS_INDEX_DIR + name);
 		} else if (name.endsWith(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT)) {
 			return app.getAppPath(IndexConstants.WIKI_INDEX_DIR + name);
+		} else if (name.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+			return app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR + name);
 		}
 		return app.getAppPath(name);
 	}

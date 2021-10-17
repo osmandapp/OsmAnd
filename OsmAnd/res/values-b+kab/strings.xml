@@ -1121,11 +1121,11 @@
     <string name="local_indexes_cat_backup">Tamahilt-agi tensa akka tura.</string>
     <string name="local_index_map_data">Takarḍa</string>
     <string name="local_index_poi_data">Isefka</string>
-    <string name="local_index_items_restored"><ph id="mtc_1" equiv-text="base64:JTEkZA=="/> seg <ph id="mtc_2" equiv-text="base64:JTIkZA=="/> n yiferdisen remden akken iwata.</string>
-    <string name="local_index_items_deleted"><ph id="mtc_1" equiv-text="base64:JTEkZA=="/> seg <ph id="mtc_2" equiv-text="base64:JTIkZA=="/> n yiferdisen ttwakksen akken iwata.</string>
-    <string name="local_index_items_backuped"><ph id="mtc_1" equiv-text="base64:JTEkZA=="/> seg <ph id="mtc_2" equiv-text="base64:JTIkZA=="/> n yiferdisen nsan akken iwata.</string>
+    <string name="local_index_items_restored"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen remden akken iwata.</string>
+    <string name="local_index_items_deleted"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen ttwakksen akken iwata.</string>
+    <string name="local_index_items_backuped"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen nsan akken iwata.</string>
     <string name="local_index_mi_upload_gpx">Azen i...</string>
-    <string name="local_index_items_uploaded"><ph id="mtc_1" equiv-text="base64:JTEkZA=="/> seg <ph id="mtc_2" equiv-text="base64:JTIkZA=="/> n yiferdisen ulin akken iwata.</string>
+    <string name="local_index_items_uploaded"><ph equiv-text="base64:JTEkZA==" id="mtc_1"/> seg <ph equiv-text="base64:JTIkZA==" id="mtc_2"/> n yiferdisen ulin akken iwata.</string>
     <string name="file_with_name_already_exists">Tabzimt s yisem-agi tella yakan.</string>
     <string name="file_can_not_be_renamed">Ur yezmir ara ad ibeddel isem ufaylu \"$1\" ar \"$2\".</string>
     <string name="free_version_title">lqem</string>
@@ -1280,7 +1280,7 @@
     <string name="nm">nmi</string>
     <string name="foot">ft</string>
     <string name="osm_editing_plugin_description">Ttekki deg OpenStreetMap (OSM) srid seg usnas OSMAnd. Amedya: rnu neɣ beddel agazen yelhan n OSM, rnu neɣ beddel tizmilin OSM sakin azen iberdan-ik GPX (aya ilaq umiḍan OSM). OpenStreetMap d tarbaɛt yeldin, tamaḍalant n tkarḍa tazayazt.</string>
-    <string name="osm_settings">Taẓrigt OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Taẓrigt OpenStreetMap</string>
     <string name="osmand_accessibility_description">Rmed, deg OsmAnd, iɣewwaren n tuffart n yibenk-ik (ṣeggem arured n taɣect-ik n uɛqal n taɣect, seqdec tignit trackball i usemɣer neɣ i urmad n yilɣa s taɣect n wadig-ik).</string>
     <string name="travel_item">Asikel (Wikivoyage d Wikipedia)</string>
     <string name="favorites_item">Inurifen</string>
@@ -1333,4 +1333,8 @@
     <string name="shared_string_is_saved">Ittwasekles</string>
     <string name="profile_type_osmand_string">Amaɣnu OsmAnd</string>
     <string name="profile_type_user_string">Amaɣnu n useqdac</string>
+    <string name="shared_string_logout">Tuffɣa</string>
+    <string name="duration_ago">%1$s aya</string>
+    <string name="logcat_buffer">Logcat buffer</string>
+    <string name="logcat_buffer_descr">Senqed daɣen bḍu iɣmisen lqayen n usnas</string>
 </resources>

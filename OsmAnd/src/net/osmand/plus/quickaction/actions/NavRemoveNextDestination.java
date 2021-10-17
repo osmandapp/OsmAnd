@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -31,17 +33,17 @@ public class NavRemoveNextDestination extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
-		TargetPointsHelper targetsHelper = activity.getMyApplication().getTargetPointsHelper();
+	public void execute(@NonNull MapActivity mapActivity) {
+		TargetPointsHelper targetsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
 		if (targetsHelper.getIntermediatePoints().size() > 0) {
 			targetsHelper.removeWayPoint(true, 0);
 		} else {
-			DestinationReachedMenu.show(activity);
+			DestinationReachedMenu.show(mapActivity);
 		}
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_with_text, parent, false);
 		((TextView) view.findViewById(R.id.text)).setText(R.string.quick_action_remove_next_destination_descr);

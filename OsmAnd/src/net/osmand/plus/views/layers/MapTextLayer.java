@@ -1,26 +1,27 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
+
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
-
-import gnu.trove.set.hash.TIntHashSet;
 import net.osmand.plus.R;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class MapTextLayer extends OsmandMapLayer {
 
@@ -45,6 +46,10 @@ public class MapTextLayer extends OsmandMapLayer {
 		boolean isFakeBoldText();
 	}
 
+	public MapTextLayer(@NonNull Context ctx) {
+		super(ctx);
+	}
+
 	public void putData(OsmandMapLayer ml, Collection<?> objects) {
 		if (objects == null || objects.isEmpty()) {
 			textObjects.remove(ml);
@@ -60,7 +65,7 @@ public class MapTextLayer extends OsmandMapLayer {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
-		TIntHashSet set = new TIntHashSet();
+		QuadTree<QuadRect> intersections = initBoundIntersections(tileBox);
 		for (Map.Entry<OsmandMapLayer, Collection<?>> entry : textObjects.entrySet()) {
 			OsmandMapLayer l = entry.getKey();
 			MapTextProvider provider = (MapTextProvider) l;
@@ -70,48 +75,26 @@ public class MapTextLayer extends OsmandMapLayer {
 
 			updateTextSize();
 			paintTextIcon.setFakeBoldText(provider.isFakeBoldText());
+			float textSize = paintTextIcon.getTextSize();
 			for (Object o : entry.getValue()) {
 				LatLon loc = provider.getTextLocation(o);
 				String name = provider.getText(o);
 				if (loc == null || TextUtils.isEmpty(name)) {
 					continue;
 				}
+				int r = provider.getTextShift(o, tileBox);
+				float x = tileBox.getPixXFromLatLon(loc.getLatitude(), loc.getLongitude());
+				float y = tileBox.getPixYFromLatLon(loc.getLatitude(), loc.getLongitude());
 
-				int x = (int) tileBox.getPixXFromLatLon(loc.getLatitude(), loc.getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(loc.getLatitude(), loc.getLongitude());
-				int tx = tileBox.getPixXFromLonNoRot(loc.getLongitude());
-				int ty = tileBox.getPixYFromLatNoRot(loc.getLatitude());
-
-				int lines = 0;
-				while (lines < TEXT_LINES) {
-					if (set.contains(division(tx, ty, 0, lines)) || set.contains(division(tx, ty, -1, lines))
-							|| set.contains(division(tx, ty, +1, lines))) {
-						break;
-					}
-					lines++;
-				}
-				if (lines != 0) {
-					int r = provider.getTextShift(o, tileBox);
-					drawWrappedText(canvas, name, paintTextIcon.getTextSize(), x,
-							y + r + 2 + paintTextIcon.getTextSize() / 2, lines);
-					while (lines > 0) {
-						set.add(division(tx, ty, 1, lines - 1));
-						set.add(division(tx, ty, -1, lines - 1));
-						set.add(division(tx, ty, 0, lines - 1));
-						lines--;
-					}
-				}
+				drawWrappedText(canvas, name, intersections, x, y + r + 2 + textSize / 2, settings.isNightMode());
 			}
 		}
 	}
 
-	private int division(int x, int y, int sx, int sy) {
-		// make numbers positive
-		return ((((x + 10000) >> 4) + sx) << 16) | (((y + 10000) >> 4) + sy);
-	}
-
-	private void drawWrappedText(Canvas cv, String text, float textSize, float x, float y, int lines) {
-		boolean nightMode = view.getApplication().getDaynightHelper().isNightMode();
+	private void drawWrappedText(@NonNull Canvas canvas, @NonNull String text,
+								 @NonNull QuadTree<QuadRect> intersections, float x, float y,
+								 boolean nightMode) {
+		float textSize = paintTextIcon.getTextSize();
 		if (text.length() > TEXT_WRAP) {
 			int start = 0;
 			int end = text.length();
@@ -119,7 +102,7 @@ public class MapTextLayer extends OsmandMapLayer {
 			int line = 0;
 			int pos = 0;
 			int limit = 0;
-			while (pos < end && (line < lines)) {
+			while (pos < end && (line < TEXT_LINES)) {
 				lastSpace = -1;
 				limit += TEXT_WRAP;
 				while (pos < limit && pos < end) {
@@ -129,60 +112,72 @@ public class MapTextLayer extends OsmandMapLayer {
 					pos++;
 				}
 				if (lastSpace == -1 || (pos == end)) {
-					drawShadowText(cv, text.substring(start, pos), x, y + line * (textSize + 2), nightMode);
+					String subtext = text.substring(start, pos);
+					if (!drawShadowTextLine(canvas, subtext, intersections, x, y, line, nightMode)) {
+						break;
+					}
 					start = pos;
 				} else {
 					String subtext = text.substring(start, lastSpace);
-					if (line + 1 == lines) {
+					if (line + 1 == TEXT_LINES) {
 						subtext += "..";
 					}
-					drawShadowText(cv, subtext, x, y + line * (textSize + 2), nightMode);
-
+					if (!drawShadowTextLine(canvas, subtext, intersections, x, y, line, nightMode)) {
+						break;
+					}
 					start = lastSpace + 1;
 					limit += (start - pos) - 1;
 				}
-
 				line++;
 			}
-		} else {
-			drawShadowText(cv, text, x, y, nightMode);
+		} else if (!intersects(intersections, x, y, paintTextIcon.measureText(text), textSize)) {
+			drawShadowText(canvas, text, x, y, nightMode);
 		}
+	}
+
+	private boolean drawShadowTextLine(@NonNull Canvas canvas, @NonNull String text,
+									   @NonNull QuadTree<QuadRect> intersections, float x, float y,
+									   int line, boolean nightMode) {
+		float textSize = paintTextIcon.getTextSize();
+		float centerY = y + line * (textSize + 2);
+		if (!intersects(intersections, x, centerY, paintTextIcon.measureText(text), textSize)) {
+			drawShadowText(canvas, text, x, centerY, nightMode);
+			return true;
+		}
+		return false;
 	}
 
 	private void drawShadowText(Canvas cv, String text, float centerX, float centerY, boolean nightMode) {
 		Resources r = view.getApplication().getResources();
 		paintTextIcon.setStyle(Style.STROKE);
 		paintTextIcon.setColor(nightMode
-			? r.getColor(R.color.widgettext_shadow_night)
-			: r.getColor(R.color.widgettext_shadow_day));
+				? r.getColor(R.color.widgettext_shadow_night)
+				: r.getColor(R.color.widgettext_shadow_day));
 		paintTextIcon.setStrokeWidth(2);
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 		// reset
 		paintTextIcon.setStrokeWidth(2);
 		paintTextIcon.setStyle(Style.FILL);
 		paintTextIcon.setColor(nightMode
-			? r.getColor(R.color.widgettext_night)
-			: r.getColor(R.color.widgettext_day));
+				? r.getColor(R.color.widgettext_night)
+				: r.getColor(R.color.widgettext_day));
 		cv.drawText(text, centerX, centerY, paintTextIcon);
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView v) {
+	public void initLayer(@NonNull OsmandMapTileView v) {
 		this.view = v;
 		paintTextIcon = new Paint();
 		updateTextSize();
 		paintTextIcon.setTextAlign(Align.CENTER);
 		paintTextIcon.setAntiAlias(true);
-		Map<OsmandMapLayer, Collection<?>> textObjectsLoc = new TreeMap<>(new Comparator<OsmandMapLayer>() {
-			@Override
-			public int compare(OsmandMapLayer lhs, OsmandMapLayer rhs) {
-				if (view != null) {
-					float z1 = view.getZorder(lhs);
-					float z2 = view.getZorder(rhs);
-					return Float.compare(z1, z2);
-				}
-				return 0;
+		Map<OsmandMapLayer, Collection<?>> textObjectsLoc = new TreeMap<>((lhs, rhs) -> {
+			if (view != null) {
+				float z1 = view.getZorder(lhs);
+				float z2 = view.getZorder(rhs);
+				return Float.compare(z1, z2);
 			}
+			return 0;
 		});
 		textObjectsLoc.putAll(this.textObjects);
 		this.textObjects = textObjectsLoc;
@@ -202,7 +197,7 @@ public class MapTextLayer extends OsmandMapLayer {
 	}
 
 	private void updateTextSize() {
-		float scale = view.getApplication().getSettings().TEXT_SCALE.get();
+		float scale = getTextScale();
 		float textSize = scale * TEXT_SIZE * view.getDensity();
 		if (paintTextIcon.getTextSize() != textSize) {
 			paintTextIcon.setTextSize(textSize);

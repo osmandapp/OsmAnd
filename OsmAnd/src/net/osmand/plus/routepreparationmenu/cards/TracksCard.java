@@ -9,13 +9,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -31,7 +31,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class TracksCard extends BaseCard {
+public class TracksCard extends MapBaseCard {
 
 	private final List<GPXFile> gpxFiles;
 	private boolean showLimited = true;
@@ -88,7 +88,7 @@ public class TracksCard extends BaseCard {
 
 		int mainFontColor = getMainFontColor();
 		int descriptionColor = getSecondaryColor();
-		int dividerColor = ContextCompat.getColor(mapActivity, nightMode ? R.color.divider_color_dark : R.color.divider_color_light);
+		int dividerColor = ColorUtilities.getDividerColor(mapActivity, nightMode);
 
 		int i = 0;
 		boolean showLimitExceeds = list.size() > 4;
@@ -127,7 +127,8 @@ public class TracksCard extends BaseCard {
 						ApplicationMode mode = ApplicationMode.valueOfStringKey(points.get(0).getProfileType(), null);
 						if (mode != null) {
 							app.getRoutingHelper().setAppMode(mode);
-							app.initVoiceCommandPlayer(mapActivity, mode, true, null, false, false, true);
+							app.initVoiceCommandPlayer(mapActivity, mode, null,
+									true, false, false, true);
 						}
 					}
 					if (item.file.getNonEmptySegmentsCount() > 1) {

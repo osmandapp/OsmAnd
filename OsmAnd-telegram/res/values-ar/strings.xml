@@ -75,7 +75,7 @@
     <string name="last_response_duration">الرد الأخير: قبل٪ 1 $ s</string>
     <string name="shared_string_error_short">خطا</string>
     <string name="privacy_policy_telegram_client">تتبع أوسماند هوأحد العملاء الذين يستخدمون منصة تيليجرام المفتوحة. يمكن لجهات الاتصال الخاصة بك استخدام أي عميل تيليجرام آخر.</string>
-    <string name="privacy_policy_agree">من خلال النقر على \"متابعة\" فإنك توافق على شروط سياسة الخصوصية تيليجرام وأوسماند.</string>
+    <string name="privacy_policy_agree">من خلال النقر على \"متابعة\" أنت توافق على شروط سياسة الخصوصية لتطبيقي تيليجرام وأوسماند.</string>
     <string name="shared_string_accept">قبول</string>
     <string name="telegram_privacy_policy">سياسة خصوصية تيليجرام</string>
     <string name="osmand_privacy_policy">سياسة الخصوصية Osmand</string>
@@ -202,12 +202,12 @@
     <string name="initialization">بدء</string>
     <string name="logging_out">تسجيل الخروج</string>
     <string name="closing">اغلاق</string>
-    <string name="gps_network_not_enabled">تشغيل \"الموقع\"؟</string>
+    <string name="gps_network_not_enabled">تشغيل خدمة \"الموقع\"؟</string>
     <string name="not_logged_in">لم تقم بتسجيل الدخول</string>
-    <string name="no_location_permission">التطبيق يفتقر إلى إذن للوصول إلى بيانات الموقع.</string>
-    <string name="gps_not_available">الرجاء تشغيل \"الموقع\" في إعدادات النظام</string>
+    <string name="no_location_permission">التطبيق يفتقر إلى إذن الوصول إلى بيانات الموقع.</string>
+    <string name="gps_not_available">الرجاء تشغيل خدمة \"الموقع\" في إعدادات النظام</string>
     <string name="location_service_no_gps_available">حدد أحد موفري الموقع لمشاركة موقعك.</string>
-    <string name="osmand_service_descr">يعمل OsmAnd Tracker في الخلفية مع إيقاف تشغيل الشاشة.</string>
+    <string name="osmand_service_descr">يعمل متتبع التطبيق في الخلفية مع الشاشة منطفئة.</string>
     <string name="share_location">مشاركة الموقع</string>
     <string name="sharing_location">مشاركة الموقع</string>
     <string name="process_service">خدمة تتبع أوسماند</string>

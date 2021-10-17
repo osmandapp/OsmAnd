@@ -33,10 +33,21 @@ public class RouteColorize {
     public static final int GREEN = rgbaToDecimal(90, 220, 95, 255);
     public static final int YELLOW = rgbaToDecimal(212, 239, 50, 255);
     public static final int RED = rgbaToDecimal(243, 55, 77, 255);
-    public static final int[] colors = new int[] {GREEN, YELLOW, RED};
+    public static final int GREEN_SLOPE = rgbaToDecimal(46, 185, 0, 255);
+    public static final int WHITE = rgbaToDecimal(255, 255, 255, 255);
+    public static final int YELLOW_SLOPE = rgbaToDecimal(255, 222, 2, 255);
+    public static final int RED_SLOPE = rgbaToDecimal(255, 1, 1, 255);
+    public static final int PURPLE_SLOPE = rgbaToDecimal(130, 1, 255, 255);
+
+    public static final int[] COLORS = new int[] {GREEN, YELLOW, RED};
+    public static final int[] SLOPE_COLORS = new int[] {GREEN_SLOPE, WHITE, YELLOW_SLOPE, RED_SLOPE, PURPLE_SLOPE};
+
+    public static final double SLOPE_MIN_VALUE = -0.25;//25%
+    public static final double SLOPE_MAX_VALUE = 1.0;//100%
+    public static final double[][] SLOPE_PALETTE = {{SLOPE_MIN_VALUE, GREEN_SLOPE}, {0.0, WHITE}, {0.125, YELLOW_SLOPE}, {0.25, RED_SLOPE}, {SLOPE_MAX_VALUE, PURPLE_SLOPE}};
 
     private static final float DEFAULT_BASE = 17.2f;
-    private static final int MAX_SLOPE_VALUE = 25;
+    public static double MAX_CORRECT_ELEVATION_DISTANCE = 100.0;// in meters
 
     public enum ColorizationType {
         ELEVATION,
@@ -133,8 +144,7 @@ public class RouteColorize {
         } else {
             values = listToArray(valList);
         }
-        calculateMinMaxValue();
-        maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
+        calculateMinMaxValue(analysis, maxProfileSpeed);
         checkPalette();
         sortPalette();
     }
@@ -154,7 +164,7 @@ public class RouteColorize {
      * @return slopes array, in the begin and the end present NaN values!
      */
     public double[] calculateSlopesByElevations(double[] latitudes, double[] longitudes, double[] elevations, double slopeRange) {
-
+        correctElevations(latitudes, longitudes, elevations);
         double[] newElevations = elevations;
         for (int i = 2; i < elevations.length - 2; i++) {
             newElevations[i] = elevations[i - 2]
@@ -191,6 +201,53 @@ public class RouteColorize {
         return slopes;
     }
 
+    private void correctElevations(double[] latitudes, double[] longitudes, double[] elevations) {
+        for (int i = 0; i < elevations.length; i++) {
+            if (Double.isNaN(elevations[i])) {
+                double leftDist = MAX_CORRECT_ELEVATION_DISTANCE;
+                double rightDist = MAX_CORRECT_ELEVATION_DISTANCE;
+                double leftElevation = Double.NaN;
+                double rightElevation = Double.NaN;
+                for (int left = i - 1; left > 0 && leftDist <= MAX_CORRECT_ELEVATION_DISTANCE; left--) {
+                    if (!Double.isNaN(elevations[left])) {
+                        double dist = MapUtils.getDistance(latitudes[left], longitudes[left], latitudes[i], longitudes[i]);
+                        if (dist < leftDist) {
+                            leftDist = dist;
+                            leftElevation = elevations[left];
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                for (int right = i + 1; right < elevations.length && rightDist <= MAX_CORRECT_ELEVATION_DISTANCE; right++) {
+                    if (!Double.isNaN(elevations[right])) {
+                        double dist = MapUtils.getDistance(latitudes[right], longitudes[right], latitudes[i], longitudes[i]);
+                        if (dist < rightDist) {
+                            rightElevation = elevations[right];
+                            rightDist = dist;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                if (!Double.isNaN(leftElevation) && !Double.isNaN(rightElevation)) {
+                    elevations[i] = (leftElevation + rightElevation) / 2;
+                } else if (Double.isNaN(leftElevation) && !Double.isNaN(rightElevation)) {
+                    elevations[i] = rightElevation;
+                } else if (!Double.isNaN(leftElevation) && Double.isNaN(rightElevation)) {
+                    elevations[i] = leftElevation;
+                } else {
+                    for (int right = i + 1; right < elevations.length; right++) {
+                        if (!Double.isNaN(elevations[right])) {
+                            elevations[i] = elevations[right];
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public List<RouteColorizationPoint> getResult(boolean simplify) {
         List<RouteColorizationPoint> result = new ArrayList<>();
         if (simplify) {
@@ -208,7 +265,7 @@ public class RouteColorize {
 
     public int getColorByValue(double value) {
         if (Double.isNaN(value)) {
-            value = colorizationType == ColorizationType.SLOPE ? minValue : (minValue + maxValue) / 2;
+            return LIGHT_GREY;
         }
         for (int i = 0; i < palette.length - 1; i++) {
             if (value == palette[i][VALUE_INDEX])
@@ -219,8 +276,13 @@ public class RouteColorize {
                 double minPaletteValue = palette[i][VALUE_INDEX];
                 double maxPaletteValue = palette[i + 1][VALUE_INDEX];
                 double percent = (value - minPaletteValue) / (maxPaletteValue - minPaletteValue);
-                return getGradientColor(minPaletteColor, maxPaletteColor, percent);
+                return getIntermediateColor(minPaletteColor, maxPaletteColor, percent);
             }
+        }
+        if (value <= palette[0][0]) {
+            return (int)palette[0][1];
+        } else if (value >= palette[palette.length-1][0]) {
+            return (int) palette[palette.length-1][1];
         }
         return getTransparentColor();
     }
@@ -322,14 +384,7 @@ public class RouteColorize {
     private void checkPalette() {
         if (palette == null || palette.length < 2 || palette[0].length < 2 || palette[1].length < 2) {
             LOG.info("Will use default palette");
-            palette = new double[3][2];
-
-            double[][] defaultPalette = {
-                    {minValue, GREEN},
-                    {(minValue + maxValue) / 2, YELLOW},
-                    {maxValue, RED}
-            };
-            palette = defaultPalette;
+            palette = getDefaultPalette(colorizationType);
         }
         double min;
         double max = min = palette[0][VALUE_INDEX];
@@ -429,20 +484,32 @@ public class RouteColorize {
     }
 
     public static double getMinValue(ColorizationType type, GPXTrackAnalysis analysis) {
-        return type == ColorizationType.ELEVATION ? analysis.minElevation : 0.0;
-    }
-
-    public static double getMaxValue(ColorizationType type, GPXTrackAnalysis analysis, double minValue, double maxProfileSpeed) {
-        if (type == ColorizationType.SPEED) {
-            return Math.max(analysis.maxSpeed, maxProfileSpeed);
-        } else if (type == ColorizationType.ELEVATION) {
-            return Math.max(analysis.maxElevation, minValue + 50);
-        } else {
-            return MAX_SLOPE_VALUE;
+        switch (type) {
+            case SPEED:
+                return 0.0;
+            case ELEVATION:
+                return analysis.minElevation;
+            case SLOPE:
+                return SLOPE_MIN_VALUE;
+            default:
+                return -1;
         }
     }
 
-    public static int getGradientColor(int minPaletteColor, int maxPaletteColor, double percent) {
+    public static double getMaxValue(ColorizationType type, GPXTrackAnalysis analysis, double minValue, double maxProfileSpeed) {
+        switch (type) {
+            case SPEED:
+                return Math.max(analysis.maxSpeed, maxProfileSpeed);
+            case ELEVATION:
+                return Math.max(analysis.maxElevation, minValue + 50);
+            case SLOPE:
+                return SLOPE_MAX_VALUE;
+            default:
+                return -1;
+        }
+    }
+
+    public static int getIntermediateColor(int minPaletteColor, int maxPaletteColor, double percent) {
         double resultRed = getRed(minPaletteColor) + percent * (getRed(maxPaletteColor) - getRed(minPaletteColor));
         double resultGreen = getGreen(minPaletteColor) + percent * (getGreen(maxPaletteColor) - getGreen(minPaletteColor));
         double resultBlue = getBlue(minPaletteColor) + percent * (getBlue(maxPaletteColor) - getBlue(minPaletteColor));
@@ -464,12 +531,30 @@ public class RouteColorize {
         }
     }
 
+    private void calculateMinMaxValue(GPXTrackAnalysis analysis, float maxProfileSpeed) {
+        calculateMinMaxValue();
+        // set strict limitations for maxValue
+        maxValue = getMaxValue(colorizationType, analysis, minValue, maxProfileSpeed);
+    }
+
     private double[] listToArray(List<Double> doubleList) {
         double[] result = new double[doubleList.size()];
         for (int i = 0; i < doubleList.size(); i++) {
             result[i] = doubleList.get(i);
         }
         return result;
+    }
+
+    private double[][] getDefaultPalette(ColorizationType colorizationType) {
+        if (colorizationType == ColorizationType.SLOPE) {
+            return SLOPE_PALETTE;
+        } else {
+            return new double[][] {
+                    {minValue, GREEN},
+                    {(minValue + maxValue) / 2, YELLOW},
+                    {maxValue, RED}
+            };
+        }
     }
 
     private static int rgbaToDecimal(int r, int g, int b, int a) {

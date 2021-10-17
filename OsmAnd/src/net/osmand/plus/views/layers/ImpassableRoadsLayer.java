@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -33,7 +34,6 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	private static final int START_ZOOM = 10;
 
-	private final MapActivity activity;
 	private AvoidSpecificRoads avoidSpecificRoads;
 	private ContextMenuLayer contextMenuLayer;
 
@@ -41,13 +41,13 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	private Paint activePaint;
 	private Paint paint;
 
-	public ImpassableRoadsLayer(MapActivity activity) {
-		this.activity = activity;
+	public ImpassableRoadsLayer(@NonNull Context ctx) {
+		super(ctx);
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
-		avoidSpecificRoads = activity.getMyApplication().getAvoidSpecificRoads();
+	public void initLayer(@NonNull OsmandMapTileView view) {
+		avoidSpecificRoads = getApplication().getAvoidSpecificRoads();
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_pin_avoid_road);
 		activePaint = new Paint();
@@ -93,7 +93,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	}
 
 	private void drawPoint(Canvas canvas, float x, float y, boolean active) {
-		float textScale = activity.getMyApplication().getSettings().TEXT_SCALE.get();
+		float textScale = getTextScale();
 		y -= roadWorkIcon.getHeight() / 2f * textScale;
 		Rect destRect = getIconDestinationRect(x, y, roadWorkIcon.getWidth(), roadWorkIcon.getHeight(), textScale);
 		canvas.drawBitmap(roadWorkIcon, null, destRect, active ? activePaint : paint);
@@ -152,7 +152,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 		if (tileBox.getZoom() >= START_ZOOM) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			int compare = getScaledTouchRadius(activity.getMyApplication(), getRadiusPoi(tileBox));
+			int compare = getScaledTouchRadius(getApplication(), getRadiusPoi(tileBox));
 			int radius = compare * 3 / 2;
 
 			for (Map.Entry<LatLon, AvoidRoadInfo> entry : avoidSpecificRoads.getImpassableRoads().entrySet()) {
@@ -197,10 +197,11 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	public void applyNewObjectPosition(@NonNull Object o,
 									   @NonNull LatLon position,
 									   @Nullable final ApplyMovedObjectCallback callback) {
-		if (o instanceof AvoidRoadInfo) {
+		MapActivity mapActivity = getMapActivity();
+		if (o instanceof AvoidRoadInfo && mapActivity != null) {
 			final AvoidRoadInfo object = (AvoidRoadInfo) o;
-			final OsmandApplication application = activity.getMyApplication();
-			application.getAvoidSpecificRoads().replaceImpassableRoad(activity, object, position, false, new AvoidSpecificRoadsCallback() {
+			final OsmandApplication application = getApplication();
+			application.getAvoidSpecificRoads().replaceImpassableRoad(mapActivity, object, position, false, new AvoidSpecificRoadsCallback() {
 				@Override
 				public void onAddImpassableRoad(boolean success, AvoidRoadInfo newObject) {
 					if (callback != null) {

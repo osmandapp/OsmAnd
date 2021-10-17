@@ -13,12 +13,15 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.profiles.data.ProfileDataObject;
+import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 
@@ -78,10 +81,8 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 				.inflate(R.layout.bottom_sheet_item_with_descr_and_checkbox_56dp, null);
 
 		int profileColor = profile.getIconColor(nightMode);
-		int activeColorId = nightMode ?
-				R.color.active_color_primary_dark : R.color.active_color_primary_light;
-		int disableColorId = nightMode ?
-				R.color.icon_color_default_dark : R.color.icon_color_default_light;
+		int activeColorId = ColorUtilities.getActiveColorId(nightMode);
+		int disableColorId = ColorUtilities.getDefaultIconColorId(nightMode);
 		int disableColor = ContextCompat.getColor(app, disableColorId);
 		boolean enable = profile.isEnabled();
 
@@ -128,7 +129,7 @@ public class SelectMultipleProfilesBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putStringArrayList(SELECTED_KEYS, new ArrayList<>(selectedProfiles));
 		outState.putStringArrayList(DISABLED_KEYS, new ArrayList<>(disabledProfiles));

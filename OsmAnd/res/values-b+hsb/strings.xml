@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="app_mode_bus">Bus</string>
     <string name="app_mode_train">Ćah</string>
@@ -1164,7 +1164,7 @@
     <string name="record_plugin_name">Nahrawanje jězbow</string>
     <string name="audionotes_plugin_name">Awdijowe/widejowe noticy</string>
     <string name="audionotes_plugin_description">Přidatk za awdijowe/widejowe noticy skići móžnosć, po puću awdijowe/fotowe/widejowe noticy za wěstu poziciju nahrać, pak přez kneflk na kartowym wobrazu, abo direktnje přez kontekstowy meni.</string>
-    <string name="osm_settings">Wobdźěłanje OSM</string>
+    <string name="osm_editing_plugin_name">Wobdźěłanje OSM</string>
     <string name="rendering_attr_roadStyle_name">Stil pućow</string>
     <string name="rendering_attr_roadStyle_description">Stil pućow</string>
     <string name="rendering_value__name">Standard</string>
@@ -1543,7 +1543,6 @@
     <string name="shared_string_select_folder">Rjadowak…</string>
     <string name="change_osmand_data_folder_question">Rjadowak za OsmAnd-daty změnić\?</string>
     <string name="move_maps_to_new_destination">Na nowe městno přesunyć</string>
-    <string name="internal_app_storage_description">Interny skład, schowany před wužiwarjemi a druhimi aplikacijemi, jenož za OsmAnd přistupny</string>
     <string name="change_data_storage_folder">Rjadowak za składowanje datow změnić</string>
     <string name="rendering_attr_piste_type_connection_name">Zwisk</string>
     <string name="rendering_attr_piste_difficulty_novice_name">nowačk</string>

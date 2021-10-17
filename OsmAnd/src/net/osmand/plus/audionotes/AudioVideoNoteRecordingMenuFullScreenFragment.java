@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 
 public class AudioVideoNoteRecordingMenuFullScreenFragment extends Fragment {
@@ -28,13 +30,13 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 	}
 
 	@Override
@@ -45,17 +47,17 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends Fragment {
 		}
 	}
 
-	public static void showInstance(AudioVideoNoteRecordingMenuFullScreen menu) {
-
-		AudioVideoNoteRecordingMenuFullScreenFragment fragment = new AudioVideoNoteRecordingMenuFullScreenFragment();
-		fragment.menu = menu;
-		FragmentManager fragmentManager = menu.getMapActivity().getSupportFragmentManager();
-		fragmentManager.beginTransaction()
-				//.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out, R.anim.abc_fade_in, R.anim.abc_fade_out)
-				.add(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commit();
-
-		fragmentManager.executePendingTransactions();
+	public static void showInstance(@NonNull AudioVideoNoteRecordingMenuFullScreen menu) {
+		FragmentManager fragmentManager = menu.requireMapActivity().getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			AudioVideoNoteRecordingMenuFullScreenFragment fragment = new AudioVideoNoteRecordingMenuFullScreenFragment();
+			fragment.menu = menu;
+			fragmentManager.beginTransaction()
+					.add(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
+			fragmentManager.executePendingTransactions();
+		}
 	}
 
 	public void dismiss() {

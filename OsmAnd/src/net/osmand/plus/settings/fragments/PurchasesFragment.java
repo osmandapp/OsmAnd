@@ -18,7 +18,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.appbar.AppBarLayout;
 
 import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -26,21 +25,21 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.chooseplan.NoPurchasesCard;
+import net.osmand.plus.chooseplan.TroubleshootingCard;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.liveupdates.CountrySelectionFragment;
 import net.osmand.plus.liveupdates.CountrySelectionFragment.OnFragmentInteractionListener;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 import net.osmand.util.Algorithms;
 
-import org.apache.commons.logging.Log;
+import java.util.List;
 
 public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurchaseListener, OnFragmentInteractionListener {
 
-	private static final Log log = PlatformUtil.getLog(PurchasesFragment.class);
 	public static final String TAG = PurchasesFragment.class.getName();
-
-	public static final String KEY_IS_SUBSCRIBER = "action_is_new";
 
 	private static final String OSMAND_PURCHASES_URL = "https://docs.osmand.net/en/main@latest/osmand/purchases";
 
@@ -48,81 +47,70 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 	private InAppPurchaseHelper purchaseHelper;
 
 	private ViewGroup cardsContainer;
-	private SubscriptionsCard subscriptionsCard;
 
 	private boolean nightMode;
-	private Boolean isPaidVersion;
 
-	public static boolean showInstance(FragmentManager fragmentManager) {
-		try {
+	public static void showInstance(@NonNull FragmentManager fragmentManager) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			PurchasesFragment fragment = new PurchasesFragment();
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			log.error(e);
-			return false;
 		}
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		app = requireMyApplication();
+		nightMode = !app.getSettings().isLightContent();
 	}
 
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		app = getMyApplication();
-		isPaidVersion = Version.isPaidVersion(app);
-		nightMode = !app.getSettings().isLightContent();
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), nightMode);
 
-		View mainView = themedInflater.inflate(R.layout.purchases_layout, container, false);
-		AndroidUtils.addStatusBarPadding21v(getActivity(), mainView);
-		createToolbar(mainView, nightMode);
-		cardsContainer = mainView.findViewById(R.id.cards_container);
+		View view = themedInflater.inflate(R.layout.purchases_layout, container, false);
+		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+		createToolbar(view, nightMode);
+		cardsContainer = view.findViewById(R.id.cards_container);
 
-		return mainView;
+		return view;
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		updateCards();
+
+		if (purchaseHelper != null) {
+			purchaseHelper.requestInventory(false);
+		}
 	}
 
 	private void updateCards() {
 		MapActivity mapActivity = getMapActivity();
 		purchaseHelper = getInAppPurchaseHelper();
-		cardsContainer.removeAllViews();
 		if (mapActivity == null || purchaseHelper == null) {
 			return;
 		}
+		cardsContainer.removeAllViews();
 
-		boolean hasSubscriptions = !Algorithms.isEmpty(purchaseHelper.getEverMadeSubscriptions());
-		if (hasSubscriptions) {
-			subscriptionsCard = new SubscriptionsCard(mapActivity, this, purchaseHelper);
-			cardsContainer.addView(subscriptionsCard.build(mapActivity));
+		List<InAppPurchase> mainPurchases = purchaseHelper.getEverMadeMainPurchases();
+		for (int i = 0; i < mainPurchases.size(); i++) {
+			InAppPurchase purchase = mainPurchases.get(i);
+			cardsContainer.addView(new InAppPurchaseCard(mapActivity, purchaseHelper, purchase).build(mapActivity));
+		}
+		boolean promoActive = app.getSettings().BACKUP_PROMOCODE_ACTIVE.get();
+		if (promoActive) {
+			cardsContainer.addView(new PromoPurchaseCard(mapActivity).build(mapActivity));
 		}
 
-		cardsContainer.addView(new TroubleshootingOrPurchasingCard(mapActivity, purchaseHelper, isPaidVersion)
-				.build(mapActivity));
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(KEY_IS_SUBSCRIBER, isPaidVersion);
-	}
-
-	@Override
-	public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-		super.onViewStateRestored(savedInstanceState);
-		if (savedInstanceState != null) {
-			isPaidVersion = savedInstanceState.getBoolean(KEY_IS_SUBSCRIBER);
+		if (!Version.isPaidVersion(app) || Algorithms.isEmpty(mainPurchases)) {
+			cardsContainer.addView(new NoPurchasesCard(mapActivity, false).build(mapActivity));
 		}
+		cardsContainer.addView(new TroubleshootingCard(mapActivity, purchaseHelper, false).build(mapActivity));
 	}
 
 	@Nullable
@@ -174,17 +162,13 @@ public class PurchasesFragment extends BaseOsmAndFragment implements InAppPurcha
 
 	@Override
 	public void onGetItems() {
-		if (app != null) {
-			isPaidVersion = Version.isPaidVersion(app);
-		}
 		updateCards();
 	}
 
 	@Override
 	public void onItemPurchased(String sku, boolean active) {
-		isPaidVersion = true;
 		if (purchaseHelper != null) {
-			purchaseHelper.requestInventory();
+			purchaseHelper.requestInventory(false);
 		}
 	}
 

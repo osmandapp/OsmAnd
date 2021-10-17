@@ -1,11 +1,11 @@
 package net.osmand.plus.base;
 
+import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
+
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,20 +40,19 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.LockableScrollView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.InterceptorLinearLayout;
+import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
-import net.osmand.plus.views.layers.MapControlsLayer;
+import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 
-import static net.osmand.plus.mapcontextmenu.MapContextMenuFragment.CURRENT_Y_UNDEFINED;
-
-public abstract class ContextMenuFragment extends BaseOsmAndFragment
-		implements MapControlsLayer.MapControlsThemeInfoProvider {
+public abstract class ContextMenuFragment extends BaseOsmAndFragment implements MapControlsThemeInfoProvider {
 
 	public static class MenuState {
 		public static final int HEADER_ONLY = 1;
@@ -256,6 +255,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 		return cardsContainer;
 	}
 
+	@Nullable
 	public FrameLayout getBottomContainer() {
 		return bottomContainer;
 	}
@@ -310,7 +310,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 
 		if (getTopViewId() != 0) {
 			topView = view.findViewById(getTopViewId());
-			AndroidUtils.setBackground(app, topView, nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+			AndroidUtils.setBackground(app, topView, ColorUtilities.getCardAndListBackgroundColorId(nightMode));
 		}
 		if (!portrait) {
 			currentMenuState = MenuState.FULL_SCREEN;
@@ -598,7 +598,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 		super.onResume();
 		paused = false;
 		dismissing = false;
-		ViewParent parent = view.getParent();
+		ViewParent parent = view != null ? view.getParent() : null;
 		if (parent != null && containerLayoutListener != null) {
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
 		}
@@ -1081,27 +1081,18 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment
 	}
 
 	protected void copyToClipboard(@NonNull String text, @NonNull Context ctx) {
-		Object systemService = ctx.getSystemService(Activity.CLIPBOARD_SERVICE);
-		if (systemService instanceof ClipboardManager) {
-			((ClipboardManager) systemService).setText(text);
-			Toast.makeText(ctx,
-					ctx.getResources().getString(R.string.copied_to_clipboard) + ":\n" + text,
-					Toast.LENGTH_SHORT).show();
-		}
+		ShareMenu.copyToClipboardWithToast(ctx, text, Toast.LENGTH_SHORT);
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity, ContextMenuFragment fragment) {
-		try {
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
-					.replace(R.id.routeMenuContainer, fragment, fragment.getFragmentTag())
-					.addToBackStack(fragment.getFragmentTag())
+	public static boolean showInstance(@NonNull FragmentManager manager, @NonNull ContextMenuFragment fragment) {
+		String tag = fragment.getFragmentTag();
+		if (AndroidUtils.isFragmentCanBeAdded(manager, tag)) {
+			manager.beginTransaction()
+					.replace(R.id.routeMenuContainer, fragment, tag)
+					.addToBackStack(tag)
 					.commitAllowingStateLoss();
-
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

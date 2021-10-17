@@ -27,13 +27,14 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
 import net.osmand.plus.routing.RoutingHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RouteStatisticCard extends BaseCard {
+public class RouteStatisticCard extends MapBaseCard {
 
 	public static final int DETAILS_BUTTON_INDEX = 0;
 	public static final int START_BUTTON_INDEX = 1;
@@ -52,7 +53,7 @@ public class RouteStatisticCard extends BaseCard {
 		super(mapActivity);
 		this.gpx = gpx;
 		this.onAnalyseClickListener = onAnalyseClickListener;
-		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, true);
+		this.gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
 	}
 
 	@Nullable
@@ -212,7 +213,7 @@ public class RouteStatisticCard extends BaseCard {
 	private void buildHeader(GPXTrackAnalysis analysis) {
 		LineChart mChart = (LineChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupGPXChart(mChart, 4, 24f, 16f, !nightMode, true);
-		graphAdapter = new CommonGraphAdapter(mChart, true);
+		graphAdapter = new CommonGraphAdapter(app, mChart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();

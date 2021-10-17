@@ -4,16 +4,17 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
+import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
@@ -36,9 +37,7 @@ public class ContourLinesMenu {
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
 		SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		if (plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
-			OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
-		}
+		OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 		boolean nightMode = isNightMode(mapActivity.getMyApplication());
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
@@ -53,7 +52,7 @@ public class ContourLinesMenu {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		final boolean srtmEnabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null || InAppPurchaseHelper.isContourLinesPurchased(app);
+		final boolean srtmEnabled = OsmandPlugin.isActive(SRTMPlugin.class) || InAppPurchaseHelper.isContourLinesPurchased(app);
 
 		final RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		final RenderingRuleProperty colorSchemeProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_SCHEME_ATTR);
@@ -140,8 +139,7 @@ public class ContourLinesMenu {
 						}
 					});
 				} else if (itemId == R.string.srtm_plugin_name) {
-					ChoosePlanDialogFragment.showDialogInstance(mapActivity.getMyApplication(),
-							mapActivity.getSupportFragmentManager(), ChoosePlanDialogType.HILLSHADE_SRTM_PLUGIN);
+					ChoosePlanFragment.showInstance(mapActivity, OsmAndFeature.TERRAIN);
 					closeDashboard(mapActivity);
 				} else if (contourWidthProp != null && itemId == contourWidthName.hashCode()) {
 					plugin.selectPropertyValue(mapActivity, contourWidthProp, widthPref, new Runnable() {
@@ -177,8 +175,7 @@ public class ContourLinesMenu {
 		int toggleIconId;
 		if (selected) {
 			toggleIconId = R.drawable.ic_action_view;
-			toggleIconColorId = nightMode ?
-					R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			toggleIconColorId = ColorUtilities.getActiveColorId(nightMode);
 		} else {
 			toggleIconId = R.drawable.ic_action_hide;
 			toggleIconColorId = ContextMenuItem.INVALID_ID;
@@ -237,11 +234,8 @@ public class ContourLinesMenu {
 					downloadThread.runReloadIndexFiles();
 				}
 			}
-			final boolean downloadIndexes = settings.isInternetConnectionAvailable()
-					&& !downloadThread.getIndexes().isDownloadedFromInternet
-					&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
-			if (downloadIndexes) {
+			if (downloadThread.shouldDownloadIndexes()) {
 				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setTitleId(R.string.shared_string_download_map, mapActivity)
 						.setDescription(app.getString(R.string.srtm_menu_download_descr))

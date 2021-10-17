@@ -47,14 +47,11 @@ import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -63,7 +60,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
@@ -77,11 +76,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import static android.content.Context.POWER_SERVICE;
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -105,12 +106,9 @@ public class AndroidUtils {
 	}
 
 	public static void softKeyboardDelayed(final Activity activity, final View view) {
-		view.post(new Runnable() {
-			@Override
-			public void run() {
-				if (!isHardwareKeyboardAvailable(view.getContext())) {
-					showSoftKeyboard(activity,view);
-				}
+		view.post(() -> {
+			if (!isHardwareKeyboardAvailable(view.getContext())) {
+				showSoftKeyboard(activity,view);
 			}
 		});
 	}
@@ -175,15 +173,42 @@ public class AndroidUtils {
 		}
 	}
 
-	public static boolean isIntentSafe(Context context, Intent intent) {
+	public static boolean isIntentSafe(@NonNull Context context, @NonNull Intent intent) {
 		return intent.resolveActivity(context.getPackageManager()) != null;
 	}
 
-	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {
-		if (Build.VERSION.SDK_INT >= 17) {
-			return activity != null && !activity.isFinishing() && !activity.isDestroyed();
+	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent) {
+		return startActivityIfSafe(context, intent, null);
+	}
+
+	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent, @Nullable Intent chooserIntent) {
+		if (isIntentSafe(context, intent)) {
+			context.startActivity(chooserIntent != null ? chooserIntent : intent);
+			return true;
+		} else {
+			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
+			app.showToastMessage(R.string.no_activity_for_intent);
+			return false;
 		}
-		return activity != null && !activity.isFinishing();
+	}
+
+	public static boolean startActivityForResultIfSafe(@NonNull Activity activity, @NonNull Intent intent, int requestCode) {
+		if (isIntentSafe(activity, intent)) {
+			activity.startActivityForResult(intent, requestCode);
+			return true;
+		} else {
+			OsmandApplication app = (OsmandApplication) activity.getApplicationContext();
+			app.showToastMessage(R.string.no_activity_for_intent);
+			return false;
+		}
+	}
+
+	public static boolean isActivityNotDestroyed(@Nullable Activity activity) {
+		return activity != null && !activity.isFinishing() && !activity.isDestroyed();
+	}
+
+	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag) {
+		return !manager.isStateSaved() && manager.findFragmentByTag(tag) == null;
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {
@@ -242,23 +267,21 @@ public class AndroidUtils {
 		return DateFormat.getTimeFormat(ctx).format(new Date(time));
 	}
 
-
 	public static String formatSize(Context ctx, long sizeBytes) {
-		int sizeKb = (int) ((sizeBytes + 512) >> 10);
-		if (sizeKb > 0) {
-
+		if (sizeBytes > 0) {
+			int sizeKb = (int) ((sizeBytes + 512) >> 10);
 			String size = "";
 			String numSuffix = "MB";
 			if (sizeKb > 1 << 20) {
-				size = formatGb.format(new Object[]{(float) sizeKb / (1 << 20)});
+				size = formatGb.format(new Object[] {(float) sizeKb / (1 << 20)});
 				numSuffix = "GB";
 			} else if (sizeBytes > (100 * (1 << 10))) {
-				size = formatMb.format(new Object[]{(float) sizeBytes / (1 << 20)});
+				size = formatMb.format(new Object[] {(float) sizeBytes / (1 << 20)});
 			} else {
-				size = formatKb.format(new Object[]{(float) sizeBytes / (1 << 10)});
+				size = formatKb.format(new Object[] {(float) sizeBytes / (1 << 10)});
 				numSuffix = "kB";
 			}
-			if(ctx == null) {
+			if (ctx == null) {
 				return size + " " + numSuffix;
 			}
 			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, numSuffix);
@@ -274,11 +297,11 @@ public class AndroidUtils {
 	public static View findParentViewById(View view, int id) {
 		ViewParent viewParent = view.getParent();
 
-		while (viewParent != null && viewParent instanceof View) {
+		while (viewParent instanceof View) {
 			View parentView = (View) viewParent;
-			if (parentView.getId() == id)
+			if (parentView.getId() == id) {
 				return parentView;
-
+			}
 			viewParent = parentView.getParent();
 		}
 
@@ -341,10 +364,10 @@ public class AndroidUtils {
 						new int[] {}
 				},
 				new int[] {
-						ContextCompat.getColor(ctx, night? R.color.text_color_secondary_dark : R.color.text_color_secondary_light),
-						ContextCompat.getColor(ctx, night? R.color.active_color_primary_dark : R.color.active_color_primary_light),
-						ContextCompat.getColor(ctx, night? R.color.text_color_secondary_dark : R.color.text_color_secondary_light)}
-		);
+						ColorUtilities.getSecondaryTextColor(ctx, night),
+						ColorUtilities.getActiveColor(ctx, night),
+						ColorUtilities.getSecondaryTextColor(ctx, night)}
+				);
 	}
 
 	public static ColorStateList createCheckedColorIntStateList(@ColorInt int normal, @ColorInt int checked) {
@@ -422,7 +445,11 @@ public class AndroidUtils {
 	}
 
 	public static void setBackground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
-		setBackground(view, AppCompatResources.getDrawable(ctx, night ? darkResId : lightResId));
+		setBackground(ctx, view, night ? darkResId : lightResId);
+	}
+
+	public static void setBackground(Context ctx, View view, int resId) {
+		setBackground(view, AppCompatResources.getDrawable(ctx, resId));
 	}
 
 	public static void setBackground(View view, Drawable drawable) {
@@ -441,64 +468,32 @@ public class AndroidUtils {
 		}
 	}
 
-	public static void updateImageButton(OsmandApplication ctx, ImageButton button,
-	                                     @DrawableRes int iconLightId, @DrawableRes int iconDarkId,
-	                                     @DrawableRes int bgLightId, @DrawableRes int bgDarkId, boolean night) {
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			button.setBackground(ctx.getUIUtilities().getIcon(night ? bgDarkId : bgLightId));
-		} else {
-			button.setBackgroundDrawable(ctx.getUIUtilities().getIcon(night ? bgDarkId : bgLightId));
-		}
-		int btnSizePx = button.getLayoutParams().height;
-		int iconSizePx = ctx.getResources().getDimensionPixelSize(R.dimen.map_widget_icon);
-		int iconPadding = (btnSizePx - iconSizePx) / 2;
-		button.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
-		button.setScaleType(ImageView.ScaleType.FIT_CENTER);
-		button.setImageDrawable(ctx.getUIUtilities().getMapIcon(night ? iconDarkId : iconLightId, !night));
-	}
-
 	public static void setDashButtonBackground(Context ctx, View view, boolean night) {
 		setBackground(ctx, view, night, R.drawable.dashboard_button_light, R.drawable.dashboard_button_dark);
 	}
 
 	public static void setBackgroundColor(Context ctx, View view, boolean night, int lightResId, int darkResId) {
-		view.setBackgroundColor(ctx.getResources().getColor(night ? darkResId : lightResId));
+		setBackgroundColor(ctx, view, night ? darkResId : lightResId);
+	}
+
+	public static void setBackgroundColor(Context ctx, View view, @ColorRes int colorId) {
+		view.setBackgroundColor(ContextCompat.getColor(ctx, colorId));
 	}
 
 	public static void setListItemBackground(Context ctx, View view, boolean night) {
-		setBackgroundColor(ctx, view, night, R.color.list_background_color_light, R.color.list_background_color_dark);
-	}
-
-	public static void setListBackground(Context ctx, View view, boolean night) {
-		setBackgroundColor(ctx, view, night, R.color.activity_background_color_light, R.color.activity_background_color_dark);
+		setBackgroundColor(ctx, view, ColorUtilities.getListBgColorId(night));
 	}
 
 	public static void setTextPrimaryColor(Context ctx, TextView textView, boolean night) {
-		textView.setTextColor(night ?
-				ctx.getResources().getColor(R.color.text_color_primary_dark)
-				: ctx.getResources().getColor(R.color.text_color_primary_light));
+		textView.setTextColor(ColorUtilities.getPrimaryTextColor(ctx, night));
 	}
 
 	public static void setTextSecondaryColor(Context ctx, TextView textView, boolean night) {
-		textView.setTextColor(night ?
-				ctx.getResources().getColor(R.color.text_color_secondary_dark)
-				: ctx.getResources().getColor(R.color.text_color_secondary_light));
+		textView.setTextColor(ColorUtilities.getSecondaryTextColor(ctx, night));
 	}
 
 	public static void setHintTextSecondaryColor(Context ctx, TextView textView, boolean night) {
-		textView.setHintTextColor(night ?
-				ctx.getResources().getColor(R.color.text_color_secondary_dark)
-				: ctx.getResources().getColor(R.color.text_color_secondary_light));
-	}
-
-	@ColorRes
-	public static int getPrimaryTextColorId(boolean nightMode) {
-		return nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
-	}
-
-	@ColorRes
-	public static int getSecondaryTextColorId(boolean nightMode) {
-		return nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+		textView.setHintTextColor(ColorUtilities.getSecondaryTextColor(ctx, night));
 	}
 
 	public static int getTextMaxWidth(float textSize, List<String> titles) {
@@ -878,7 +873,7 @@ public class AndroidUtils {
 				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
 					return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
 				} else {
-					return fs.getAvailableBlocks() * fs.getBlockSize();
+					return (long)(fs.getAvailableBlocks()) * fs.getBlockSize();
 				}
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
@@ -894,7 +889,7 @@ public class AndroidUtils {
 				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
 					return fs.getBlockCountLong() * fs.getBlockSizeLong();
 				} else {
-					return fs.getBlockCount() * fs.getBlockSize();
+					return (long)(fs.getBlockCount()) * fs.getBlockSize();
 				}
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
@@ -998,6 +993,23 @@ public class AndroidUtils {
 		return builder;
 	}
 
+	@NonNull
+	public static String createDbInsertQuery(@NonNull String tableName, @NonNull Set<String> rowKeys) {
+		StringBuilder keys = new StringBuilder();
+		StringBuilder values = new StringBuilder();
+		String split = ", ";
+		Iterator<String> iterator = rowKeys.iterator();
+		while (iterator.hasNext()) {
+			keys.append(iterator.next());
+			values.append("?");
+			if (iterator.hasNext()) {
+				keys.append(split);
+				values.append(split);
+			}
+		}
+		return "INSERT INTO " + tableName + " (" + keys.toString() + ") VALUES (" + values.toString() + ")";
+	}
+
 	public static String getRoutingStringPropertyName(Context ctx, String propertyName, String defValue) {
 		String value = getStringByProperty(ctx, "routing_attr_" + propertyName + "_name");
 		return value != null ? value : defValue;
@@ -1023,6 +1035,7 @@ public class AndroidUtils {
 		return value != null ? value : propertyName;
 	}
 
+	@NonNull
 	public static String getRenderingStringPropertyValue(Context ctx, String propertyValue) {
 		if (propertyValue == null) {
 			return "";
@@ -1032,6 +1045,17 @@ public class AndroidUtils {
 		return value != null ? value : propertyValue;
 	}
 
+	@NonNull
+	public static String getRenderingStringPropertyDescription(Context ctx, String propertyValue) {
+		if (propertyValue == null) {
+			return "";
+		}
+		String propertyValueReplaced = propertyValue.replaceAll("\\s+", "_");
+		String value = getStringByProperty(ctx, "rendering_value_" + propertyValueReplaced + "_description");
+		return value != null ? value : propertyValue;
+	}
+
+	@NonNull
 	public static String getStringRouteInfoPropertyValue(Context ctx, String propertyValue) {
 		if (propertyValue == null) {
 			return "";
@@ -1041,12 +1065,23 @@ public class AndroidUtils {
 		return value != null ? value : propertyValue;
 	}
 
+	@NonNull
+	public static String getStringRouteInfoPropertyDescription(Context ctx, String propertyValue) {
+		if (propertyValue == null) {
+			return "";
+		}
+		String propertyValueReplaced = propertyValue.replaceAll("\\s+", "_");
+		String value = getStringByProperty(ctx, "routeInfo_" + propertyValueReplaced + "_description");
+		return value != null ? value : propertyValue;
+	}
+
 
 	public static String getActivityTypeStringPropertyName(Context ctx, String propertyName, String defValue) {
 		String value = getStringByProperty(ctx, "activity_type_" + propertyName + "_name");
 		return value != null ? value : defValue;
 	}
 
+	@Nullable
 	private static String getStringByProperty(@NonNull Context ctx, @NonNull String property) {
 		try {
 			Field field = R.string.class.getField(property);
@@ -1057,6 +1092,7 @@ public class AndroidUtils {
 		return null;
 	}
 
+	@Nullable
 	private static String getStringForField(@NonNull Context ctx, @Nullable Field field) throws IllegalAccessException {
 		if (field != null) {
 			Integer in = (Integer) field.get(null);

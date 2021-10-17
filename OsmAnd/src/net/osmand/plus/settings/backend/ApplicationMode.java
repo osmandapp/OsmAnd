@@ -1,35 +1,5 @@
 package net.osmand.plus.settings.backend;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.core.content.ContextCompat;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
-
-import net.osmand.StateChangedListener;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
-import net.osmand.plus.profiles.ProfileIconColors;
-import net.osmand.plus.routing.RouteService;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_ALTITUDE;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BATTERY;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_BEARING;
@@ -48,6 +18,34 @@ import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_PLAIN_TI
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_RADIUS_RULER;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_SPEED;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WIDGET_TIME;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.core.content.ContextCompat;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+
+import net.osmand.StateChangedListener;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.profiles.NavigationIcon;
+import net.osmand.plus.profiles.ProfileIconColors;
+import net.osmand.plus.routing.RouteService;
+import net.osmand.util.Algorithms;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ApplicationMode {
 
@@ -117,6 +115,10 @@ public class ApplicationMode {
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
 			.icon(R.drawable.ic_action_skiing)
 			.description(R.string.base_profile_descr_ski).reg();
+
+	public static final ApplicationMode HORSE = createBase(R.string.horseback_riding, "horse")
+			.icon(R.drawable.ic_action_horse)
+			.description(R.string.horseback_riding).reg();
 
 	public static List<ApplicationMode> values(OsmandApplication app) {
 		if (customizationListener == null) {
@@ -189,14 +191,15 @@ public class ApplicationMode {
 	}
 
 	private static void initRegVisibility() {
-		// DEFAULT, CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK
-		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, MOTORCYCLE};
+		// CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, HORSE
+		ApplicationMode[] exceptDefault = new ApplicationMode[] {CAR, BICYCLE, PEDESTRIAN,
+				PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, MOTORCYCLE, HORSE};
 		ApplicationMode[] all = null;
-		ApplicationMode[] none = new ApplicationMode[]{};
+		ApplicationMode[] none = new ApplicationMode[] {};
 
 		// left
-		ApplicationMode[] navigationSet1 = new ApplicationMode[]{CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE};
-		ApplicationMode[] navigationSet2 = new ApplicationMode[]{PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
+		ApplicationMode[] navigationSet1 = new ApplicationMode[] {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
+		ApplicationMode[] navigationSet2 = new ApplicationMode[] {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
 		regWidgetVisibility(WIDGET_NEXT_TURN, navigationSet1);
 		regWidgetVisibility(WIDGET_NEXT_TURN_SMALL, navigationSet2);
@@ -210,7 +213,8 @@ public class ApplicationMode {
 		regWidgetVisibility(WIDGET_DISTANCE, all);
 		regWidgetVisibility(WIDGET_TIME, all);
 		regWidgetVisibility(WIDGET_INTERMEDIATE_TIME, all);
-		regWidgetVisibility(WIDGET_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK, MOTORCYCLE);
+		regWidgetVisibility(WIDGET_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
+				MOTORCYCLE, HORSE);
 		regWidgetVisibility(WIDGET_MAX_SPEED, CAR, TRUCK, MOTORCYCLE);
 		regWidgetVisibility(WIDGET_ALTITUDE, PEDESTRIAN, BICYCLE);
 		regWidgetAvailability(WIDGET_INTERMEDIATE_DISTANCE, all);
@@ -336,7 +340,7 @@ public class ApplicationMode {
 			if (keyName != -1) {
 				return app.getString(keyName);
 			} else {
-				return StringUtils.capitalize(getStringKey());
+				return Algorithms.capitalizeFirstLetter(getStringKey());
 			}
 		} else {
 			return userProfileName;
@@ -439,6 +443,10 @@ public class ApplicationMode {
 		return app.getSettings().ROUTING_PROFILE.getModeValue(this);
 	}
 
+	public String getDefaultRoutingProfile() {
+		return app.getSettings().ROUTING_PROFILE.getProfileDefaultValue(this);
+	}
+
 	public void setRoutingProfile(String routingProfile) {
 		if (!Algorithms.isEmpty(routingProfile)) {
 			app.getSettings().ROUTING_PROFILE.setModeValue(this, routingProfile);
@@ -531,29 +539,36 @@ public class ApplicationMode {
 		reorderAppModes();
 	}
 
-	private static void initModesParams(OsmandApplication app) {
+	private static void initModesParams(final OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
 		if (iconNameListener == null) {
 			iconNameListener = new StateChangedListener<String>() {
 				@Override
 				public void stateChanged(String change) {
-					for (ApplicationMode mode : allPossibleValues()) {
-						mode.updateAppModeIcon();
-					}
+					app.runInUIThread(() -> {
+						List<ApplicationMode> modes = new ArrayList<>(allPossibleValues());
+						for (ApplicationMode mode : modes) {
+							mode.updateAppModeIcon();
+						}
+					});
 				}
 			};
-			app.getSettings().ICON_RES_NAME.addListener(iconNameListener);
+			settings.ICON_RES_NAME.addListener(iconNameListener);
 		}
 		for (ApplicationMode mode : allPossibleValues()) {
 			mode.app = app;
 			mode.updateAppModeIcon();
 		}
-		if (app.getSettings().APP_MODE_ORDER.isSetForMode(PEDESTRIAN)) {
-			if (!app.getSettings().APP_MODE_ORDER.isSetForMode(TRUCK)) {
+		if (settings.APP_MODE_ORDER.isSetForMode(PEDESTRIAN)) {
+			if (!settings.APP_MODE_ORDER.isSetForMode(TRUCK)) {
 				TRUCK.setOrder(PEDESTRIAN.getOrder() + 1);
 			}
-			if (!app.getSettings().APP_MODE_ORDER.isSetForMode(MOTORCYCLE)) {
+			if (!settings.APP_MODE_ORDER.isSetForMode(MOTORCYCLE)) {
 				MOTORCYCLE.setOrder(PEDESTRIAN.getOrder() + 1);
 			}
+		}
+		if (settings.APP_MODE_ORDER.isSetForMode(SKI) && !settings.APP_MODE_ORDER.isSetForMode(HORSE)) {
+			HORSE.setOrder(SKI.getOrder() + 1);
 		}
 	}
 

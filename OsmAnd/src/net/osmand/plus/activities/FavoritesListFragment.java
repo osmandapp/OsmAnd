@@ -42,13 +42,14 @@ import java.util.List;
 
 public class FavoritesListFragment extends OsmAndListFragment implements SearchActivityChild, OsmAndCompassListener {
 
+	public static final String TAG = FavoritesListFragment.class.getName();
+
 	public static final String SELECT_FAVORITE_POINT_INTENT_KEY = "SELECT_FAVORITE_POINT_INTENT_KEY";
 	public static final int SELECT_FAVORITE_POINT_RESULT_OK = 1;
 
 	private FavouritesAdapter favouritesAdapter;
 
 	private boolean selectFavoriteMode;
-	private OsmandSettings settings;
 	private boolean compassRegistered;
 
 	float lastHeading ; 
@@ -57,7 +58,6 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		Intent intent = activity.getIntent();
-		settings = getApplication().getSettings();
 		OsmandApplication app = getApplication();
 		favouritesAdapter = new FavouritesAdapter(activity, app.getFavorites().getFavouritePoints(),
 				false);

@@ -272,7 +272,6 @@
     <string name="poi_dive">Nirēju aprīkojums</string>
     <string name="poi_doityourself">Mājsaimniecības preces</string>
     <string name="poi_erotic">Intīmpreču veikals</string>
-    <string name="poi_fashion">Modes veikals</string>
     <string name="poi_free_flying">Brīvā lidojuma preces</string>
     <string name="poi_gas">Gāzes balonu veikals</string>
     <string name="poi_glaziery">Stikla izstrādājumi</string>
@@ -304,7 +303,6 @@
     <string name="poi_bed">Guļamistabas mēbeles</string>
     <string name="poi_copyshop">Kopētava</string>
     <string name="poi_herbalist">Augu un zāļu veikals</string>
-    <string name="poi_tableware">Virtuves trauki</string>
     <string name="poi_model">Modelēšana</string>
     <string name="poi_emergency_access_point">Palīdzības infodēlis</string>
     <string name="poi_traffic_calming_chicane">Guļošie policisti (cits)</string>
@@ -342,7 +340,6 @@
     <string name="poi_dam">Dambis</string>
     <string name="poi_power_substation">Apakšstacijas</string>
     <string name="poi_power_transformer">Transformators</string>
-    <string name="poi_power_cable_distribution_cabinet">Sadales skapis</string>
     <string name="poi_power_plant">Elektrostacijas</string>
     <string name="poi_power_generator">Ğenerators</string>
     <string name="poi_post_office">Pasts</string>
@@ -449,7 +446,6 @@
     <string name="poi_pension_fund">Pensijas fonds</string>
     <string name="poi_migration">Migrācija</string>
     <string name="poi_tax_inspection">Nodokļu inspekcija</string>
-    <string name="poi_office_administrative">Administrācija</string>
     <string name="poi_customs">Muita</string>
     <string name="poi_country">Valsts</string>
     <string name="poi_city">Pilsēta</string>

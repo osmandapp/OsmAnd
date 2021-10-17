@@ -1,5 +1,7 @@
 package net.osmand.plus.onlinerouting.ui;
 
+import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -42,8 +44,8 @@ import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.OnlineRoutingHelper;
 import net.osmand.plus.onlinerouting.OnlineRoutingUtils;
 import net.osmand.plus.onlinerouting.VehicleType;
-import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.engine.EngineType;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.onlinerouting.ui.OnlineRoutingCard.OnTextChangedListener;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -56,8 +58,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.CUSTOM_VEHICLE;
 
 public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 
@@ -80,6 +80,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private OnlineRoutingCard typeCard;
 	private OnlineRoutingCard vehicleCard;
 	private OnlineRoutingCard apiKeyCard;
+	private OnlineRoutingCard approximateCard;
 	private OnlineRoutingCard exampleCard;
 	private View testResultsContainer;
 	private View saveButton;
@@ -134,6 +135,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		setupNameCard();
 		setupTypeCard();
 		setupVehicleCard();
+		setupApproximateCard();
 		setupApiKeyCard();
 		setupExampleCard();
 		setupResultsContainer();
@@ -274,6 +276,18 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 						return false;
 					}
 				});
+	}
+
+	private void setupApproximateCard() {
+		approximateCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
+		approximateCard.build(mapActivity);
+		approximateCard.setHeaderTitle(getString(R.string.attach_to_the_roads));
+		approximateCard.setCheckBox(getString(R.string.approximate_route_description), engine.shouldApproximateRoute(), result -> {
+			engine.put(EngineParameter.APPROXIMATE_ROUTE, String.valueOf(result));
+			return false;
+		});
+		approximateCard.showDivider();
+		segmentsContainer.addView(approximateCard.getView());
 	}
 
 	private void setupApiKeyCard() {
@@ -510,17 +524,9 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			} else if (typeCard.equals(card)) {
 				typeCard.setHeaderSubtitle(engine.getType().getTitle());
 				typeCard.setEditedText(engine.getBaseUrl());
-				if (engine.isParameterAllowed(EngineParameter.API_KEY)) {
-					apiKeyCard.show();
-				} else {
-					apiKeyCard.hide();
-				}
-				if (engine.isParameterAllowed(EngineParameter.VEHICLE_KEY)) {
-					vehicleCard.show();
-				} else {
-
-					vehicleCard.hide();
-				}
+				updateCardVisibility(apiKeyCard, EngineParameter.API_KEY);
+				updateCardVisibility(vehicleCard, EngineParameter.VEHICLE_KEY);
+				updateCardVisibility(approximateCard, EngineParameter.APPROXIMATE_ROUTE);
 
 			} else if (vehicleCard.equals(card)) {
 				VehicleType vt = engine.getSelectedVehicleType();
@@ -535,6 +541,14 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 			} else if (exampleCard.equals(card)) {
 				exampleCard.setEditedText(getTestUrl());
 			}
+		}
+	}
+
+	private void updateCardVisibility(OnlineRoutingCard card, EngineParameter parameter) {
+		if (engine.isParameterAllowed(parameter)) {
+			card.show();
+		} else {
+			card.hide();
 		}
 	}
 
@@ -677,14 +691,15 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	public static void showInstance(@NonNull FragmentActivity activity,
 									@NonNull ApplicationMode appMode,
 									@Nullable String editedEngineKey) {
-		FragmentManager fm = activity.getSupportFragmentManager();
-		if (!fm.isStateSaved() && fm.findFragmentByTag(OnlineRoutingEngineFragment.TAG) == null) {
+		FragmentManager fragmentManager = activity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			OnlineRoutingEngineFragment fragment = new OnlineRoutingEngineFragment();
 			fragment.appMode = appMode;
 			fragment.editedEngineKey = editedEngineKey;
-			fm.beginTransaction()
+			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
 	}
 

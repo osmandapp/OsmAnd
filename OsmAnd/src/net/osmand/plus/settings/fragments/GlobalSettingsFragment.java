@@ -6,14 +6,18 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.widget.ImageView;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
+import androidx.preference.SwitchPreferenceCompat;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.dialogs.ConfigureMapUtils;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate;
 import net.osmand.plus.dialogs.SpeedCamerasBottomSheet;
-import net.osmand.plus.profiles.SelectProfileBottomSheet;
-import net.osmand.plus.profiles.SelectProfileBottomSheet.DialogMode;
+import net.osmand.plus.profiles.SelectDefaultProfileBottomSheet;
 import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -21,11 +25,6 @@ import net.osmand.plus.settings.datastorage.DataStorageHelper;
 import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
-import androidx.preference.SwitchPreferenceCompat;
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
@@ -127,9 +126,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 		if (prefId.equals(settings.DEFAULT_APPLICATION_MODE.getId())) {
 			if (getActivity() != null) {
 				String defaultModeKey = settings.DEFAULT_APPLICATION_MODE.get().getStringKey();
-				SelectProfileBottomSheet.showInstance(
-						getActivity(), DialogMode.DEFAULT_PROFILE, this,
-						getSelectedAppMode(), defaultModeKey, false);
+				SelectDefaultProfileBottomSheet.showInstance(
+						getActivity(), this, getSelectedAppMode(), defaultModeKey, false);
 			}
 		} else if (settings.SPEED_CAMERAS_UNINSTALLED.getId().equals(prefId) && !settings.SPEED_CAMERAS_UNINSTALLED.get()) {
 			FragmentManager fm = getFragmentManager();
@@ -392,8 +390,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 				ctx.getString(R.string.lang_zh_cn) + incompleteSuffix,
 				ctx.getString(R.string.lang_zh_tw)};
 
-		String[] valuesPl = ConfigureMapMenu.getSortedMapNamesIds(ctx, entries, entries);
-		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(ctx, entryValues, entries);
+		String[] valuesPl = ConfigureMapUtils.getSortedMapNamesIds(ctx, entries, entries);
+		String[] idsPl = ConfigureMapUtils.getSortedMapNamesIds(ctx, entryValues, entries);
 
 		return Pair.create(valuesPl, idsPl);
 	}

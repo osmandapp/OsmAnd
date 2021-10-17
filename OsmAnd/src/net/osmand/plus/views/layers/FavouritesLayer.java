@@ -1,5 +1,6 @@
 package net.osmand.plus.views.layers;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.util.Pair;
@@ -20,6 +21,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -32,11 +34,11 @@ import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider,
-		MapTextProvider<FavouritePoint> {
+public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvider,
+		IMoveObjectProvider, MapTextProvider<FavouritePoint> {
 
 	protected int startZoom = 6;
-	
+
 	protected OsmandMapTileView view;
 	private FavouritesDbHelper favouritesDbHelper;
 	private MapMarkersHelper mapMarkersHelper;
@@ -48,12 +50,13 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private int grayColor;
 	private OsmandSettings settings;
 	private ContextMenuLayer contextMenuLayer;
-	protected String getObjName() {
-		return view.getContext().getString(R.string.favorite);
+
+	public FavouritesLayer(@NonNull Context ctx) {
+		super(ctx);
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		settings = view.getApplication().getSettings();
 		favouritesDbHelper = view.getApplication().getFavorites();
@@ -65,14 +68,14 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
-		return (Math.abs(objx - ex) <= radius * 1.5 && Math.abs(objy - ey) <= radius * 1.5) ;
+		return (Math.abs(objx - ex) <= radius * 1.5 && Math.abs(objy - ey) <= radius * 1.5);
 //		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 		//return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 	}
 
 	@Override
 	public void destroyLayer() {
-		
+
 	}
 
 	@Override
@@ -86,7 +89,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 			FavouritePoint objectInMotion = (FavouritePoint) contextMenuLayer.getMoveableObject();
 			PointF pf = contextMenuLayer.getMovableCenterPoint(tileBox);
 			MapMarker mapMarker = mapMarkersHelper.getMapMarker(objectInMotion);
-			float textScale = this.settings.TEXT_SCALE.get();
+			float textScale = getTextScale();
 			drawBigPoint(canvas, objectInMotion, pf.x, pf.y, mapMarker, textScale);
 		}
 	}
@@ -96,7 +99,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 		cache.clear();
 		if (this.settings.SHOW_FAVORITES.get() && favouritesDbHelper.isFavoritesLoaded()) {
 			if (tileBox.getZoom() >= startZoom) {
-				float textScale = this.settings.TEXT_SCALE.get();
+				float textScale = getTextScale();
 				float iconSize = getIconSize(view.getApplication());
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
@@ -106,7 +109,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				List<LatLon> smallObjectsLatLon = new ArrayList<>();
 				for (FavoriteGroup group : favouritesDbHelper.getFavoriteGroups()) {
 					List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
-					boolean synced = mapMarkersHelper.getMarkersGroup(group) != null;
+					boolean synced = isSynced(group);
 					for (FavouritePoint favoritePoint : group.getPoints()) {
 						double lat = favoritePoint.getLatitude();
 						double lon = favoritePoint.getLongitude();
@@ -114,10 +117,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
 								&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 							MapMarker marker = null;
-							if (synced) {
-								if ((marker = mapMarkersHelper.getMapMarker(favoritePoint)) == null) {
-									continue;
-								}
+							if (synced && (marker = mapMarkersHelper.getMapMarker(favoritePoint)) == null) {
+								continue;
 							}
 							cache.add(favoritePoint);
 							float x = tileBox.getPixXFromLatLon(lat, lon);
@@ -129,10 +130,10 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 								if (marker != null && marker.history) {
 									color = grayColor;
 								} else {
-									color = favouritesDbHelper.getColorWithCategory(favoritePoint,defaultColor);
+									color = favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor);
 								}
 								PointImageDrawable pointImageDrawable = PointImageDrawable.getFromFavorite(
-										view.getContext(), color,true, favoritePoint);
+										view.getContext(), color, true, favoritePoint);
 								pointImageDrawable.drawSmallPoint(canvas, x, y, textScale);
 								smallObjectsLatLon.add(new LatLon(lat, lon));
 							} else {
@@ -152,23 +153,28 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
 		}
-		if(isTextVisible()) {
+		if (isTextVisible()) {
 			textLayer.putData(this, cache);
 		}
 
 	}
 
+	private boolean isSynced(@NonNull FavoriteGroup group) {
+		MapMarkersGroup markersGroup = mapMarkersHelper.getMarkersGroup(group);
+		return markersGroup != null && !markersGroup.isDisabled();
+	}
+
 	private void drawBigPoint(Canvas canvas, FavouritePoint favoritePoint, float x, float y, @Nullable MapMarker marker,
-	                          float textScale) {
+							  float textScale) {
 		PointImageDrawable pointImageDrawable;
 		boolean history = false;
 		if (marker != null) {
 			pointImageDrawable = PointImageDrawable.getOrCreateSyncedIcon(view.getContext(),
-					favouritesDbHelper.getColorWithCategory(favoritePoint,defaultColor), favoritePoint);
+					favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor), favoritePoint);
 			history = marker.history;
 		} else {
 			pointImageDrawable = PointImageDrawable.getFromFavorite(view.getContext(),
-					favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor),true, favoritePoint);
+					favouritesDbHelper.getColorWithCategory(favoritePoint, defaultColor), true, favoritePoint);
 		}
 		pointImageDrawable.drawPoint(canvas, x, y, textScale, history);
 	}
@@ -189,7 +195,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	private void getFavFromPoint(RotatedTileBox tb, List<? super FavouritePoint> res, int r, int ex, int ey,
-			FavouritePoint n) {
+								 FavouritePoint n) {
 		if (n.isVisible()) {
 			int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 			int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
@@ -201,8 +207,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if(o instanceof FavouritePoint){
-			return ((FavouritePoint) o).getPointDescription(view.getContext()); //$NON-NLS-1$
+		if (o instanceof FavouritePoint) {
+			return ((FavouritePoint) o).getPointDescription(view.getContext());
 		}
 		return null;
 	}
@@ -241,8 +247,8 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if(o instanceof FavouritePoint){
-			return new LatLon(((FavouritePoint)o).getLatitude(), ((FavouritePoint)o).getLongitude());
+		if (o instanceof FavouritePoint) {
+			return new LatLon(((FavouritePoint) o).getLatitude(), ((FavouritePoint) o).getLongitude());
 		}
 		return null;
 	}
@@ -254,7 +260,7 @@ public class FavouritesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public int getTextShift(FavouritePoint o, RotatedTileBox rb) {
-		return (int) (16 * rb.getDensity());
+		return (int) (16 * rb.getDensity() * getTextScale());
 	}
 
 	@Override

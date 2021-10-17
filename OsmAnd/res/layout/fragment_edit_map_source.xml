@@ -24,7 +24,7 @@
             android:layout_marginEnd="@dimen/list_item_button_padding"
             android:layout_marginRight="@dimen/list_item_button_padding"
             android:contentDescription="@string/back_to_map"
-            app:srcCompat="@drawable/ic_action_help" />
+            app:srcCompat="@drawable/ic_action_help_online" />
 
     </androidx.appcompat.widget.Toolbar>
 

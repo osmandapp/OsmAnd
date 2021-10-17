@@ -1,11 +1,11 @@
 package net.osmand.plus.rastermaps;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.util.Pair;
@@ -13,6 +13,7 @@ import androidx.core.util.Pair;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -59,31 +60,20 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
+	public String getDisabledItem(OsmandApplication app) {
+		return KEY_NO_UNDERLAY;
+	}
+
+	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		return app.getSettings().MAP_UNDERLAY.get() != null ? app.getSettings().MAP_UNDERLAY.get() : KEY_NO_UNDERLAY;
+		String mapUnderlay = app.getSettings().MAP_UNDERLAY.get();
+		return mapUnderlay != null ? mapUnderlay : KEY_NO_UNDERLAY;
 	}
 
 	@Override
 	public String getNextSelectedItem(OsmandApplication app) {
 		List<Pair<String, String>> sources = loadListFromParams();
-		if (sources.size() > 0) {
-			String currentSource = getSelectedItem(app);
-
-			int index = -1;
-			for (int idx = 0; idx < sources.size(); idx++) {
-				if (Algorithms.stringsEqual(sources.get(idx).first, currentSource)) {
-					index = idx;
-					break;
-				}
-			}
-
-			Pair<String, String> nextSource = sources.get(0);
-			if (index >= 0 && index + 1 < sources.size()) {
-				nextSource = sources.get(index + 1);
-			}
-			return nextSource.first;
-		}
-		return null;
+		return getNextItemFromSources(app, sources, KEY_NO_UNDERLAY);
 	}
 
 	@Override
@@ -108,27 +98,27 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+	public void execute(@NonNull MapActivity mapActivity) {
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();
 			if (sources.size() > 0) {
 				boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 				if (showBottomSheetStyles) {
-					showChooseDialog(activity.getSupportFragmentManager());
+					showChooseDialog(mapActivity.getSupportFragmentManager());
 					return;
 				}
-				String nextItem = getNextSelectedItem(activity.getMyApplication());
-				executeWithParams(activity, nextItem);
+				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());
+				executeWithParams(mapActivity, nextItem);
 			}
 		}
 	}
 
 	@Override
-	public void executeWithParams(MapActivity activity, String params) {
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
-			OsmandSettings settings = activity.getMyApplication().getSettings();
+			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 			boolean hasUnderlay = !params.equals(KEY_NO_UNDERLAY);
 			if (hasUnderlay) {
 				settings.MAP_UNDERLAY.set(params);
@@ -137,17 +127,17 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.UNDERLAY);
 				}
 				if (settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.UNDERLAY) {
-					activity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY, true);
+					mapActivity.getMapLayers().getMapControlsLayer().showTransparencyBar(settings.MAP_TRANSPARENCY);
 				}
 			} else {
 				settings.MAP_UNDERLAY.set(null);
-				activity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
+				mapActivity.getMapLayers().getMapControlsLayer().hideTransparencyBar();
 				settings.MAP_UNDERLAY_PREVIOUS.set(null);
 			}
-			plugin.updateMapLayers(activity.getMapView(), settings.MAP_UNDERLAY, activity.getMapLayers());
-			activity.refreshMapComplete();
-			Toast.makeText(activity, activity.getString(R.string.quick_action_map_underlay_switch,
-					getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
+			plugin.updateMapLayers(mapActivity, mapActivity, settings.MAP_UNDERLAY);
+			mapActivity.refreshMapComplete();
+			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_underlay_switch,
+					getTranslatedItemName(mapActivity, params)), Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -156,7 +146,9 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 		if (item.equals(KEY_NO_UNDERLAY)) {
 			return context.getString(R.string.no_underlay);
 		} else {
-			return item;
+			return item.endsWith(IndexConstants.SQLITE_EXT)
+					? Algorithms.getFileNameWithoutExtension(item)
+					: item;
 		}
 	}
 
@@ -182,50 +174,44 @@ public class MapUnderlayAction extends SwitchableAction<Pair<String, String>> {
 
 	@Override
 	protected View.OnClickListener getOnAddBtnClickListener(final MapActivity activity, final Adapter adapter) {
-		return new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				OsmandApplication app = activity.getMyApplication();
+		return view -> {
+			OsmandApplication app = activity.getMyApplication();
 
-				Map<String, String> entriesMap = app.getSettings().getTileSourceEntries();
-				entriesMap.put(KEY_NO_UNDERLAY, activity.getString(R.string.no_underlay));
+			Map<String, String> entriesMap = app.getSettings().getTileSourceEntries();
+			entriesMap.put(KEY_NO_UNDERLAY, activity.getString(R.string.no_underlay));
 
-				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-				Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+			boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
 
-				AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
-				final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
-				final String[] items = new String[entriesMap.size()];
-				int i = 0;
+			AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+			final ArrayList<String> keys = new ArrayList<>(entriesMap.keySet());
+			final String[] items = new String[entriesMap.size()];
+			int i = 0;
 
-				for (String it : entriesMap.values()) {
-					items[i++] = it;
-				}
-
-				final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
-				arrayAdapter.addAll(items);
-				builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int i) {
-
-						Pair<String, String> layer = new Pair<>(
-								keys.get(i), items[i]);
-
-						adapter.addItem(layer, activity);
-
-						dialog.dismiss();
-
-					}
-				}).setNegativeButton(R.string.shared_string_cancel, null);
-
-				builder.show();
+			for (String it : entriesMap.values()) {
+				items[i++] = it;
 			}
+
+			final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(themedContext, R.layout.dialog_text_item);
+			arrayAdapter.addAll(items);
+			builder.setAdapter(arrayAdapter, (dialog, i1) -> {
+
+				Pair<String, String> layer = new Pair<>(
+						keys.get(i1), items[i1]);
+
+				adapter.addItem(layer, activity);
+
+				dialog.dismiss();
+
+			}).setNegativeButton(R.string.shared_string_cancel, null);
+
+			builder.show();
 		};
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-		return super.fillParams(root, activity);
+		return super.fillParams(root, mapActivity);
 	}
 }

@@ -28,6 +28,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.WptLocationPoint;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -46,8 +47,10 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 
 	private OsmandApplication app;
 	private MapMarkersGroupsAdapter adapter;
-	private Paint backgroundPaint = new Paint();
-	private Paint textPaint = new Paint();
+
+	private final Paint backgroundPaint = new Paint();
+	private final Paint textPaint = new Paint();
+
 	private Snackbar snackbar;
 	private View mainView;
 	private String groupIdToOpen;
@@ -88,7 +91,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			}
 		});
 
-		backgroundPaint.setColor(ContextCompat.getColor(getActivity(), night ? R.color.divider_color_dark : R.color.divider_color_light));
+		backgroundPaint.setColor(ColorUtilities.getDividerColor(getActivity(), night));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		backgroundPaint.setAntiAlias(true);
 		textPaint.setTextSize(getResources().getDimension(R.dimen.default_desc_text_size));
@@ -143,8 +146,8 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 						colorIcon = R.color.map_widget_blue;
 						colorText = R.color.map_widget_blue;
 					} else {
-						colorIcon = night ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
-						colorText = night ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+						colorIcon = ColorUtilities.getDefaultIconColorId(night);
+						colorText = ColorUtilities.getSecondaryTextColorId(night);
 					}
 					textPaint.setColor(ContextCompat.getColor(app, colorText));
 					Drawable icon = app.getUIUtilities().getIcon(

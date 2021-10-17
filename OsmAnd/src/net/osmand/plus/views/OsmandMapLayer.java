@@ -1,5 +1,8 @@
 package net.osmand.plus.views;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -17,8 +20,13 @@ import android.os.AsyncTask;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
+import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -36,14 +44,22 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public abstract class OsmandMapLayer {
+	private static final Log LOG = PlatformUtil.getLog(OsmandMapLayer.class);
 
 	public static final float ICON_VISIBLE_PART_RATIO = 0.45f;
+
+	@NonNull
+	private final Context ctx;
+	@Nullable
+	private MapActivity mapActivity;
+
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
 
@@ -53,11 +69,55 @@ public abstract class OsmandMapLayer {
 		TWO_POINTERS_ZOOM_OUT
 	}
 
+	protected OsmandMapLayer(@NonNull Context ctx) {
+		this.ctx = ctx;
+	}
+
+	@NonNull
+	public Context getContext() {
+		return ctx;
+	}
+
+	@Nullable
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
+	public void setMapActivity(@Nullable MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+	}
+
+	@NonNull
+	public MapActivity requireMapActivity() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			throw new IllegalStateException("Layer " + this + " not attached to MapActivity.");
+		}
+		return mapActivity;
+	}
+
+	@NonNull
+	public OsmandApplication getApplication() {
+		return (OsmandApplication) ctx.getApplicationContext();
+	}
+
+	public String getString(@StringRes int resId) {
+		return ctx.getString(resId);
+	}
+
+	public String getString(@StringRes int resId, Object... formatArgs) {
+		return ctx.getString(resId, formatArgs);
+	}
+
+	public OsmandMapTileView getMapView() {
+		return getApplication().getOsmandMap().getMapView();
+	}
+
 	public boolean isMapGestureAllowed(MapGestureType type) {
 		return true;
 	}
 
-	public abstract void initLayer(OsmandMapTileView view);
+	public abstract void initLayer(@NonNull OsmandMapTileView view);
 
 	public abstract void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings);
 
@@ -66,10 +126,7 @@ public abstract class OsmandMapLayer {
 
 	public abstract void destroyLayer();
 
-	public void onRetainNonConfigurationInstance(Map<String, Object> map) {
-	}
-
-	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
+	public void populateObjectContextMenu(@NonNull LatLon latLon, @Nullable Object o, @NonNull ContextMenuAdapter adapter) {
 	}
 
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
@@ -114,16 +171,27 @@ public abstract class OsmandMapLayer {
 	public abstract boolean drawInScreenPixels();
 
 	public static class DrawSettings {
+
+		public long mapRefreshTimestamp;
+
 		private final boolean nightMode;
 		private final boolean updateVectorRendering;
+		private final float density;
 
 		public DrawSettings(boolean nightMode) {
-			this(nightMode, false);
+			this(nightMode, false, 0);
 		}
 
 		public DrawSettings(boolean nightMode, boolean updateVectorRendering) {
 			this.nightMode = nightMode;
 			this.updateVectorRendering = updateVectorRendering;
+			this.density = 0;
+		}
+
+		public DrawSettings(boolean nightMode, boolean updateVectorRendering, float density) {
+			this.nightMode = nightMode;
+			this.updateVectorRendering = updateVectorRendering;
+			this.density = density;
 		}
 
 		public boolean isUpdateVectorRendering() {
@@ -132,6 +200,10 @@ public abstract class OsmandMapLayer {
 
 		public boolean isNightMode() {
 			return nightMode;
+		}
+
+		public float getDensity() {
+			return density;
 		}
 	}
 
@@ -236,7 +308,7 @@ public abstract class OsmandMapLayer {
 	}
 
 	protected float getIconSize(OsmandApplication app) {
-		return app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size) * ICON_VISIBLE_PART_RATIO * app.getSettings().TEXT_SCALE.get();
+		return app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size) * ICON_VISIBLE_PART_RATIO * getTextScale();
 	}
 
 	public Rect getIconDestinationRect(float x, float y, int width, int height, float scale) {
@@ -252,7 +324,7 @@ public abstract class OsmandMapLayer {
 	}
 
 	public int getScaledTouchRadius(OsmandApplication app, int radiusPoi) {
-		float textScale = app.getSettings().TEXT_SCALE.get();
+		float textScale = getTextScale();
 		if (textScale < 1.0f) {
 			textScale = 1.0f;
 		}
@@ -266,6 +338,33 @@ public abstract class OsmandMapLayer {
 		imageView.setPadding(iconPadding, iconPadding, iconPadding, iconPadding);
 		imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 		imageView.setImageDrawable(icon);
+	}
+
+	@Nullable
+	protected Bitmap getScaledBitmap(@DrawableRes int drawableId) {
+		return getScaledBitmap(drawableId, getTextScale());
+	}
+
+	protected Bitmap getScaledBitmap(@DrawableRes int drawableId, float scale) {
+		OsmandApplication app = getApplication();
+		Bitmap bitmap = BitmapFactory.decodeResource(app.getResources(), drawableId);
+		if (bitmap != null && scale != 1f && scale > 0) {
+			bitmap = AndroidUtils.scaleBitmap(bitmap,
+					(int) (bitmap.getWidth() * scale), (int) (bitmap.getHeight() * scale), false);
+		}
+		return bitmap;
+	}
+
+	public float getTextScale() {
+		return getApplication().getOsmandMap().getTextScale();
+	}
+
+	public float getMapDensity() {
+		return getApplication().getOsmandMap().getMapDensity();
+	}
+
+	public float getCarScaleCoef(boolean textScale) {
+		return getApplication().getOsmandMap().getCarScaleCoef(textScale);
 	}
 
 	public abstract class MapLayerData<T> {
@@ -318,8 +417,8 @@ public abstract class OsmandMapLayer {
 		protected abstract T calculateResult(RotatedTileBox tileBox);
 
 		public class Task extends AsyncTask<Object, Object, T> {
-			private RotatedTileBox dataBox;
-			private RotatedTileBox requestedBox;
+			private final RotatedTileBox dataBox;
+			private final RotatedTileBox requestedBox;
 
 			public Task(RotatedTileBox requestedBox, RotatedTileBox dataBox) {
 				this.requestedBox = requestedBox;
@@ -427,7 +526,7 @@ public abstract class OsmandMapLayer {
 					req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, isNight);
 					if (req.searchRenderingAttribute(renderingAttribute)) {
 						RenderingContext rc = new OsmandRenderer.RenderingContext(app);
-						rc.setDensityValue((float) tileBox.getDensity());
+						rc.setDensityValue(tileBox.getDensity());
 						// cachedColor = req.getIntPropertyValue(rrs.PROPS.R_COLOR);
 						renderer.updatePaint(req, paint, 0, false, rc);
 						isPaint2 = renderer.updatePaint(req, paint2, 1, false, rc);

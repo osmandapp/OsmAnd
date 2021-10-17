@@ -1,5 +1,10 @@
 package net.osmand.plus.track;
 
+import static net.osmand.plus.routing.ColoringType.ALTITUDE;
+import static net.osmand.plus.routing.ColoringType.ATTRIBUTE;
+import static net.osmand.plus.routing.ColoringType.SLOPE;
+import static net.osmand.plus.routing.ColoringType.SPEED;
+
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -8,46 +13,50 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities.Elevation;
-import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.routing.ColoringType;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteStatisticsHelper;
 
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+public class TrackColoringCard extends MapBaseCard {
 
-public class TrackColoringCard extends BaseCard {
-
-	private final static String SOLID_COLOR = "solid_color";
 	private static final Log log = PlatformUtil.getLog(TrackColoringCard.class);
 
-	private GPXTrackAnalysis gpxTrackAnalysis;
-	private TrackDrawInfo trackDrawInfo;
+	private final SelectedGpxFile selectedGpxFile;
+	private final TrackDrawInfo trackDrawInfo;
 
 	private TrackColoringAdapter coloringAdapter;
 	private TrackAppearanceItem selectedAppearanceItem;
 	private List<TrackAppearanceItem> appearanceItems;
 
-	public TrackColoringCard(MapActivity mapActivity, GPXTrackAnalysis gpxTrackAnalysis, TrackDrawInfo trackDrawInfo) {
+	public TrackColoringCard(@NonNull MapActivity mapActivity,
+							 @NonNull SelectedGpxFile selectedGpxFile,
+							 @NonNull TrackDrawInfo trackDrawInfo) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
-		this.gpxTrackAnalysis = gpxTrackAnalysis;
-		appearanceItems = getTrackAppearanceItems();
+		this.selectedGpxFile = selectedGpxFile;
+		appearanceItems = listTrackAppearanceItems();
 	}
 
 	@Override
@@ -74,28 +83,61 @@ public class TrackColoringCard extends BaseCard {
 		}
 	}
 
-	public GradientScaleType getSelectedScaleType() {
-		String attrName = selectedAppearanceItem.getAttrName();
-		return attrName.equals(SOLID_COLOR) ? null : GradientScaleType.valueOf(attrName.toUpperCase());
+	@NonNull
+	public ColoringType getSelectedColoringType() {
+		return ColoringType.getNonNullTrackColoringTypeByName(selectedAppearanceItem.getAttrName());
 	}
 
-	private List<TrackAppearanceItem> getTrackAppearanceItems() {
+	@Nullable
+	public String getRouteInfoAttribute() {
+		return ColoringType.getRouteInfoAttribute(selectedAppearanceItem.getAttrName());
+	}
+
+	private List<TrackAppearanceItem> listTrackAppearanceItems() {
 		List<TrackAppearanceItem> items = new ArrayList<>();
-		items.add(new TrackAppearanceItem(SOLID_COLOR, app.getString(R.string.track_coloring_solid), R.drawable.ic_action_circle, true));
-		for (GradientScaleType scaleType : GradientScaleType.values()) {
-			boolean isAvailable = gpxTrackAnalysis.isColorizationTypeAvailable(scaleType.toColorizationType());
-			items.add(new TrackAppearanceItem(scaleType.getTypeName(),
-					scaleType.getHumanString(app), scaleType.getIconId(), isAvailable));
-		}
+		items.addAll(listStaticAppearanceItems());
+		items.addAll(listRouteInfoAttributes());
 		return items;
+	}
+
+	private List<TrackAppearanceItem> listStaticAppearanceItems() {
+		List<TrackAppearanceItem> staticItems = new ArrayList<>();
+		for (ColoringType coloringType : ColoringType.getTrackColoringTypes()) {
+			if (coloringType.isRouteInfoAttribute()) {
+				continue;
+			}
+			boolean isAvailable = coloringType.isAvailableForDrawingTrack(app, selectedGpxFile, null);
+			staticItems.add(new TrackAppearanceItem(coloringType.getName(null),
+					coloringType.getHumanString(app, null),
+					coloringType.getIconId(), isAvailable || trackDrawInfo.isCurrentRecording()));
+		}
+		return staticItems;
+	}
+
+	private List<TrackAppearanceItem> listRouteInfoAttributes() {
+		List<TrackAppearanceItem> routeInfoAttributes = new ArrayList<>();
+		RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		RenderingRulesStorage defaultRenderer = app.getRendererRegistry().defaultRender();
+		List<String> attributes = RouteStatisticsHelper
+				.getRouteStatisticAttrsNames(currentRenderer, defaultRenderer, true);
+
+		for (String attribute : attributes) {
+			boolean isAvailable = ATTRIBUTE.isAvailableForDrawingTrack(app, selectedGpxFile, attribute);
+			String property = attribute.replace(RouteStatisticsHelper.ROUTE_INFO_PREFIX, "");
+			routeInfoAttributes.add(new TrackAppearanceItem(attribute,
+					AndroidUtils.getStringRouteInfoPropertyValue(app, property),
+					ATTRIBUTE.getIconId(), isAvailable));
+		}
+
+		return routeInfoAttributes;
 	}
 
 	private TrackAppearanceItem getSelectedAppearanceItem() {
 		if (selectedAppearanceItem == null) {
-			GradientScaleType scaleType = trackDrawInfo.getGradientScaleType();
+			ColoringType coloringType = trackDrawInfo.getColoringType();
+			String routeInfoAttribute = trackDrawInfo.getRouteInfoAttribute();
 			for (TrackAppearanceItem item : appearanceItems) {
-				if (scaleType == null && item.getAttrName().equals(SOLID_COLOR)
-						|| scaleType != null && scaleType.getTypeName().equals(item.getAttrName())) {
+				if (item.getAttrName().equals(coloringType.getName(routeInfoAttribute))) {
 					selectedAppearanceItem = item;
 					break;
 				}
@@ -117,13 +159,10 @@ public class TrackColoringCard extends BaseCard {
 		descriptionView.setText(getSelectedAppearanceItem().getLocalizedValue());
 	}
 
-	public void setGradientScaleType(TrackAppearanceItem item) {
+	public void setColoringType(TrackAppearanceItem item) {
 		selectedAppearanceItem = item;
-		if (item.getAttrName().equals(SOLID_COLOR)) {
-			trackDrawInfo.setGradientScaleType(null);
-		} else {
-			trackDrawInfo.setGradientScaleType(GradientScaleType.valueOf(item.getAttrName().toUpperCase()));
-		}
+		trackDrawInfo.setColoringType(ColoringType.getNonNullTrackColoringTypeByName(item.getAttrName()));
+		trackDrawInfo.setRouteInfoAttribute(ColoringType.getRouteInfoAttribute(item.getAttrName()));
 		mapActivity.refreshMap();
 
 		updateHeader();
@@ -131,7 +170,7 @@ public class TrackColoringCard extends BaseCard {
 
 	private class TrackColoringAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
 
-		private List<TrackAppearanceItem> items;
+		private final List<TrackAppearanceItem> items;
 
 		private TrackColoringAdapter(List<TrackAppearanceItem> items) {
 			this.items = items;
@@ -144,6 +183,7 @@ public class TrackColoringCard extends BaseCard {
 			View view = themedInflater.inflate(R.layout.point_editor_group_select_item, parent, false);
 			view.getLayoutParams().width = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_width);
 			view.getLayoutParams().height = app.getResources().getDimensionPixelSize(R.dimen.gpx_group_button_height);
+			((TextView) view.findViewById(R.id.groupName)).setMaxLines(1);
 			return new AppearanceViewHolder(view);
 		}
 
@@ -172,7 +212,7 @@ public class TrackColoringCard extends BaseCard {
 					selectedAppearanceItem = items.get(holder.getAdapterPosition());
 					notifyItemChanged(holder.getAdapterPosition());
 					notifyItemChanged(prevSelectedPosition);
-					setGradientScaleType(selectedAppearanceItem);
+					setColoringType(selectedAppearanceItem);
 					if (getListener() != null) {
 						getListener().onCardPressed(TrackColoringCard.this);
 					}
@@ -228,10 +268,12 @@ public class TrackColoringCard extends BaseCard {
 				textColorId = iconColorId;
 			}
 
-			if (item.getAttrName().equals(SOLID_COLOR)) {
+			if (item.getAttrName().equals(ColoringType.TRACK_SOLID.getName(null))) {
 				iconColorId = trackDrawInfo.getColor();
 			}
-
+			if (iconColorId == 0) {
+				iconColorId = TrackAppearanceFragment.getTrackColor(app);
+			}
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(item.getIconId(), iconColorId));
 			holder.title.setTextColor(textColorId);
 		}
@@ -240,8 +282,15 @@ public class TrackColoringCard extends BaseCard {
 			if (view == null || mapActivity == null) {
 				return;
 			}
-			String text = attrName.equals(GradientScaleType.SPEED.getTypeName()) ?
-					app.getString(R.string.track_has_no_speed) : app.getString(R.string.track_has_no_altitude);
+			String text = "";
+			if (attrName.equals(SPEED.getName(null))) {
+				text = app.getString(R.string.track_has_no_speed);
+			} else if (attrName.equals(ALTITUDE.getName(null))
+					|| attrName.equals(SLOPE.getName(null))) {
+				text = app.getString(R.string.track_has_no_altitude);
+			} else if (attrName.startsWith(RouteStatisticsHelper.ROUTE_INFO_PREFIX)) {
+				text = app.getString(R.string.track_has_no_needed_data);
+			}
 			text += " " + app.getString(R.string.select_another_colorization);
 			Snackbar snackbar = Snackbar.make(view, text, Snackbar.LENGTH_LONG)
 					.setAnchorView(mapActivity.findViewById(R.id.dismiss_button));

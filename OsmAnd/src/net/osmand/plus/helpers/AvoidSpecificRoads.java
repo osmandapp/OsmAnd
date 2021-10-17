@@ -50,13 +50,20 @@ public class AvoidSpecificRoads {
 
 	private static final float MAX_AVOID_ROUTE_SEARCH_RADIUS_DP = 32f;
 
-	private OsmandApplication app;
-
-	private Map<LatLon, AvoidRoadInfo> impassableRoads = new LinkedHashMap<>();
+	private final OsmandApplication app;
+	private final Map<LatLon, AvoidRoadInfo> impassableRoads = new LinkedHashMap<>();
 
 	public AvoidSpecificRoads(final OsmandApplication app) {
 		this.app = app;
 		loadImpassableRoads();
+	}
+
+	public long getLastModifiedTime() {
+		return app.getSettings().getImpassableRoadsLastModifiedTime();
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		app.getSettings().setImpassableRoadsLastModifiedTime(lastModifiedTime);
 	}
 
 	public void loadImpassableRoads() {
@@ -215,14 +222,7 @@ public class AvoidSpecificRoads {
 	}
 
 	public void selectFromMap(@NonNull final MapActivity mapActivity) {
-		ContextMenuLayer cm = mapActivity.getMapLayers().getContextMenuLayer();
-		cm.setSelectOnMap(new CallbackWithObject<LatLon>() {
-			@Override
-			public boolean processResult(LatLon result) {
-				addImpassableRoad(mapActivity, result, true, false, null);
-				return true;
-			}
-		});
+		selectFromMap(mapActivity, null);
 	}
 
 	public void selectFromMap(@NonNull final MapActivity mapActivity, @Nullable final ApplicationMode mode) {

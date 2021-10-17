@@ -9,11 +9,17 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_DASHBOARD_ID = DRAWER_ITEM_ID_SCHEME + "dashboard";
 	String DRAWER_MAP_MARKERS_ID = DRAWER_ITEM_ID_SCHEME + "map_markers";
 	String DRAWER_MY_PLACES_ID = DRAWER_ITEM_ID_SCHEME + "my_places";
+	String DRAWER_FAVORITES_ID = DRAWER_ITEM_ID_SCHEME + "favorites";
+	String DRAWER_TRACKS_ID = DRAWER_ITEM_ID_SCHEME + "tracks";
+	String DRAWER_AV_NOTES_ID = DRAWER_ITEM_ID_SCHEME + "av_notes";
+	String DRAWER_OSM_EDITS_ID = DRAWER_ITEM_ID_SCHEME + "osm_edits";
+	String DRAWER_BACKUP_RESTORE_ID = DRAWER_ITEM_ID_SCHEME + "backup_restore";
 	String DRAWER_SEARCH_ID = DRAWER_ITEM_ID_SCHEME + "search";
 	String DRAWER_DIRECTIONS_ID = DRAWER_ITEM_ID_SCHEME + "directions";
 	String DRAWER_TRIP_RECORDING_ID = DRAWER_ITEM_ID_SCHEME + "trip_recording";
 	String DRAWER_CONFIGURE_MAP_ID = DRAWER_ITEM_ID_SCHEME + "configure_map";
 	String DRAWER_DOWNLOAD_MAPS_ID = DRAWER_ITEM_ID_SCHEME + "download_maps";
+	String DRAWER_LIVE_UPDATES_ID = DRAWER_ITEM_ID_SCHEME + "live_updates";
 	String DRAWER_OSMAND_LIVE_ID = DRAWER_ITEM_ID_SCHEME + "osmand_live";
 	String DRAWER_TRAVEL_GUIDES_ID = DRAWER_ITEM_ID_SCHEME + "travel_guides";
 	String DRAWER_MEASURE_DISTANCE_ID = DRAWER_ITEM_ID_SCHEME + "measure_distance";

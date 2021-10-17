@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,19 +20,20 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.CompoundButtonType;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionAdapterListener;
 import net.osmand.plus.mapcontextmenu.other.HorizontalSelectionAdapter.HorizontalSelectionItem;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 
 import java.util.List;
 
-public class OnlineRoutingCard extends BaseCard {
+public class OnlineRoutingCard extends MapBaseCard {
 
 	private View headerContainer;
 	private TextView tvHeaderTitle;
@@ -40,6 +41,9 @@ public class OnlineRoutingCard extends BaseCard {
 	private RecyclerView rvSelectionMenu;
 	private HorizontalSelectionAdapter adapter;
 	private TextView tvDescription;
+	private View checkBoxContainer;
+	private CheckBox checkBox;
+	private TextView tvCheckBoxDescription;
 	private View fieldBoxContainer;
 	private OsmandTextFieldBoxes textFieldBoxes;
 	private EditText editText;
@@ -70,6 +74,9 @@ public class OnlineRoutingCard extends BaseCard {
 		tvHeaderSubtitle = view.findViewById(R.id.subtitle);
 		rvSelectionMenu = view.findViewById(R.id.selection_menu);
 		tvDescription = view.findViewById(R.id.description);
+		checkBoxContainer = view.findViewById(R.id.checkbox_container);
+		checkBox = view.findViewById(R.id.checkbox);
+		tvCheckBoxDescription = view.findViewById(R.id.checkbox_description);
 		fieldBoxContainer = view.findViewById(R.id.field_box_container);
 		textFieldBoxes = view.findViewById(R.id.field_box);
 		editText = view.findViewById(R.id.edit_text);
@@ -151,6 +158,18 @@ public class OnlineRoutingCard extends BaseCard {
 	public void setDescription(@NonNull String description) {
 		showElements(tvDescription);
 		tvDescription.setText(description);
+	}
+
+	public void setCheckBox(@NonNull String title, boolean checked,
+	                        @NonNull CallbackWithObject<Boolean> callback) {
+		showElements(checkBoxContainer);
+		tvCheckBoxDescription.setText(title);
+		checkBoxContainer.setOnClickListener(v -> {
+			checkBox.setChecked(!checkBox.isChecked());
+			callback.processResult(checkBox.isChecked());
+		});
+		UiUtilities.setupCompoundButton(checkBox, nightMode, CompoundButtonType.GLOBAL);
+		checkBox.setChecked(checked);
 	}
 
 	public void setFieldBoxLabelText(@NonNull String labelText) {

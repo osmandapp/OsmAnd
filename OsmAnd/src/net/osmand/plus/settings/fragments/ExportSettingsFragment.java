@@ -1,5 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,9 +27,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ApplicationMode.ApplicationModeBean;
 import net.osmand.plus.settings.backend.ExportSettingsType;
-import net.osmand.plus.settings.backend.backup.FileSettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsExportListener;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper.SettingsExportListener;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -41,12 +42,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static net.osmand.plus.settings.fragments.BaseSettingsFragment.APP_MODE_KEY;
-
 public class ExportSettingsFragment extends BaseSettingsListFragment {
 
-	public static final String TAG = ImportSettingsFragment.class.getSimpleName();
-	public static final Log LOG = PlatformUtil.getLog(ImportSettingsFragment.class.getSimpleName());
+	public static final String TAG = ExportSettingsFragment.class.getSimpleName();
+	public static final Log LOG = PlatformUtil.getLog(ExportSettingsFragment.class.getSimpleName());
 
 	private static final String GLOBAL_EXPORT_KEY = "global_export_key";
 	private static final String EXPORT_START_TIME_KEY = "export_start_time_key";
@@ -78,7 +77,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			progressValue = savedInstanceState.getInt(PROGRESS_VALUE_KEY);
 		}
 		exportMode = true;
-		dataList = app.getSettingsHelper().getSettingsByCategory(true);
+		dataList = app.getFileSettingsHelper().getSettingsByCategory(true);
 		if (!globalExport && savedInstanceState == null) {
 			updateSelectedProfile();
 		}
@@ -126,7 +125,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		super.onPause();
 		if (exportingStarted) {
 			File file = getExportFile();
-			app.getSettingsHelper().updateExportListener(file, null);
+			app.getFileSettingsHelper().updateExportListener(file, null);
 		}
 	}
 
@@ -151,9 +150,9 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 			showExportProgressDialog();
 			File tempDir = FileUtils.getTempDir(app);
 			String fileName = getFileName();
-			List<SettingsItem> items = app.getSettingsHelper().prepareSettingsItems(adapter.getData(), Collections.<SettingsItem>emptyList(), true);
+			List<SettingsItem> items = app.getFileSettingsHelper().prepareSettingsItems(adapter.getData(), Collections.emptyList(), true);
 			progress.setMax(getMaxProgress(items));
-			app.getSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
+			app.getFileSettingsHelper().exportSettings(tempDir, fileName, getSettingsExportListener(), items, true);
 		}
 	}
 
@@ -207,7 +206,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	private void cancelExport() {
-		app.getSettingsHelper().cancelExportForFile(getExportFile());
+		app.getFileSettingsHelper().cancelExportForFile(getExportFile());
 		progress.dismiss();
 		dismissFragment();
 	}
@@ -221,7 +220,9 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 					dismissExportProgressDialog();
 					exportingStarted = false;
 					if (succeed) {
-						shareProfile(file);
+						if (AndroidUtils.isActivityNotDestroyed(getActivity())) {
+							shareProfile(file);
+						}
 					} else {
 						app.showToastMessage(R.string.export_profile_failed);
 					}
@@ -239,12 +240,12 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	private void checkExportingFile() {
 		if (exportingStarted) {
 			File file = getExportFile();
-			boolean fileExporting = app.getSettingsHelper().isFileExporting(file);
+			boolean fileExporting = app.getFileSettingsHelper().isFileExporting(file);
 			if (fileExporting) {
 				showExportProgressDialog();
 				progress.setMax(progressMax);
 				progress.setProgress(progressValue);
-				app.getSettingsHelper().updateExportListener(file, getSettingsExportListener());
+				app.getFileSettingsHelper().updateExportListener(file, getSettingsExportListener());
 			} else if (file.exists()) {
 				dismissExportProgressDialog();
 				shareProfile(file);
@@ -266,23 +267,23 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	private void shareProfile(@NonNull File file) {
-		try {
-			final Intent sendIntent = new Intent();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Intent sendIntent = new Intent();
 			sendIntent.setAction(Intent.ACTION_SEND);
 			sendIntent.putExtra(Intent.EXTRA_SUBJECT, file.getName());
-			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
+			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(app, file));
 			sendIntent.setType("*/*");
 			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			startActivity(sendIntent);
+			AndroidUtils.startActivityIfSafe(activity, sendIntent);
 			dismissFragment();
-		} catch (Exception e) {
-			Toast.makeText(requireContext(), R.string.export_profile_failed, Toast.LENGTH_SHORT).show();
-			LOG.error("Share profile error", e);
 		}
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull ApplicationMode appMode, boolean globalExport) {
-		try {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
+	                                   @NonNull ApplicationMode appMode,
+	                                   boolean globalExport) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			ExportSettingsFragment fragment = new ExportSettingsFragment();
 			fragment.appMode = appMode;
 			fragment.globalExport = globalExport;
@@ -291,8 +292,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 					.addToBackStack(SETTINGS_LIST_TAG)
 					.commitAllowingStateLoss();
 			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 }

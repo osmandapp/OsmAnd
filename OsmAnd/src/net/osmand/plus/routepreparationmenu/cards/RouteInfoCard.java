@@ -18,7 +18,7 @@ import net.osmand.plus.measurementtool.graph.CustomGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CustomGraphAdapter.LegendViewType;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 
-public class RouteInfoCard extends BaseCard {
+public class RouteInfoCard extends MapBaseCard {
 	private RouteStatistics statistics;
 	private GPXTrackAnalysis analysis;
 	private CustomGraphAdapter graphAdapter;
@@ -43,7 +43,7 @@ public class RouteInfoCard extends BaseCard {
 		HorizontalBarChart chart = (HorizontalBarChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupHorizontalGPXChart(getMyApplication(), chart, 5, 9, 24, true, nightMode);
 		BarData barData = GpxUiHelper.buildStatisticChart(app, chart, statistics, analysis, true, nightMode);
-		graphAdapter = new CustomGraphAdapter(chart, true);
+		graphAdapter = new CustomGraphAdapter(app, chart, true);
 		graphAdapter.setLegendContainer(container);
 		graphAdapter.updateData(barData, statistics);
 		updateView();

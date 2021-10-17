@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -19,20 +18,12 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.PopupMenu;
-import androidx.appcompat.widget.Toolbar;
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.Amenity;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -44,6 +35,16 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.appcompat.widget.Toolbar;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 
 public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
@@ -129,7 +130,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 			public boolean onTouch(View v, MotionEvent event) {
 				int action = event.getAction();
 
-				switch(action) {
+				switch (action) {
 					case (MotionEvent.ACTION_DOWN):
 						initialY = event.getY();
 					case (MotionEvent.ACTION_UP):
@@ -148,7 +149,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 					readFullArticleButton.setVisibility(View.GONE);
 				}
 
-				return false; 
+				return false;
 			}
 		});
 
@@ -177,7 +178,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		sb.append("<h1>").append(title).append("</h1>");
 		sb.append(article);
 		sb.append(FOOTER_INNER);
-		if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
+		if (OsmandPlugin.isActive(OsmandDevelopmentPlugin.class)) {
 			writeOutHTML(sb, new File(getMyApplication().getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR), "page.html"));
 		}
 		return sb.toString();
@@ -244,15 +245,14 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	}
 
 	public static void showFullArticle(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
-		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-			CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-					.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light))
-					.build();
+		CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+				.setToolbarColor(ColorUtilities.getAppBarColor(context, nightMode))
+				.build();
+		customTabsIntent.intent.setData(uri);
+		if (AndroidUtils.isIntentSafe(context, customTabsIntent.intent)) {
 			customTabsIntent.launchUrl(context, uri);
 		} else {
-			Intent i = new Intent(Intent.ACTION_VIEW);
-			i.setData(uri);
-			context.startActivity(i);
+			Toast.makeText(context, R.string.no_activity_for_intent, Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -299,7 +299,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 		}
 	}
 
-	private Drawable getIcon(int resId) {
+	protected Drawable getIcon(int resId) {
 		int colorId = nightMode ? R.color.ctx_menu_controller_button_text_color_dark_n : R.color.ctx_menu_controller_button_text_color_light_n;
 		return getIcon(resId, colorId);
 	}

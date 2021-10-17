@@ -12,7 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 
-public class HomeWorkCard extends BaseCard {
+public class HomeWorkCard extends MapBaseCard {
 
 	public HomeWorkCard(MapActivity mapActivity) {
 		super(mapActivity);

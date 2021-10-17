@@ -12,15 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class BaseCard {
 
 	protected OsmandApplication app;
-	protected MapActivity mapActivity;
+	protected FragmentActivity activity;
 
 	protected View view;
 
@@ -38,13 +40,13 @@ public abstract class BaseCard {
 		void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex);
 	}
 
-	public BaseCard(@NonNull MapActivity mapActivity) {
-		this(mapActivity, true);
+	public BaseCard(@NonNull FragmentActivity activity) {
+		this(activity, true);
 	}
 
-	public BaseCard(@NonNull MapActivity mapActivity, boolean usedOnMap) {
-		this.mapActivity = mapActivity;
-		this.app = mapActivity.getMyApplication();
+	public BaseCard(@NonNull FragmentActivity activity, boolean usedOnMap) {
+		this.activity = activity;
+		this.app = (OsmandApplication) activity.getApplicationContext();
 		nightMode = usedOnMap ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 	}
 
@@ -98,10 +100,6 @@ public abstract class BaseCard {
 		return view;
 	}
 
-	public MapActivity getMapActivity() {
-		return mapActivity;
-	}
-
 	public OsmandApplication getMyApplication() {
 		return app;
 	}
@@ -113,12 +111,12 @@ public abstract class BaseCard {
 
 	@ColorInt
 	protected int getActiveColor() {
-		return getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		return ColorUtilities.getActiveColor(app, nightMode);
 	}
 
 	@ColorInt
 	protected int getMainFontColor() {
-		return getResolvedColor(nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		return ColorUtilities.getPrimaryTextColor(app, nightMode);
 	}
 
 	@ColorInt
@@ -131,15 +129,19 @@ public abstract class BaseCard {
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int icon) {
-		return getColoredIcon(icon, R.color.active_color_primary_light, R.color.active_color_primary_dark);
+		return getColoredIcon(icon, ColorUtilities.getActiveColorId(nightMode));
 	}
 
-	protected Drawable getColoredIcon(@DrawableRes int icon, @ColorRes int colorLight, @ColorRes int colorDark) {
-		return getColoredIcon(icon, nightMode ? colorDark : colorLight);
+	protected Drawable getIcon(@DrawableRes int icon) {
+		return app.getUIUtilities().getIcon(icon);
 	}
 
 	protected Drawable getColoredIcon(@DrawableRes int icon, @ColorRes int color) {
 		return app.getUIUtilities().getIcon(icon, color);
+	}
+
+	protected Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
+		return app.getUIUtilities().getPaintedIcon(id, color);
 	}
 
 	public void setShowTopShadow(boolean showTopShadow) {
@@ -164,5 +166,15 @@ public abstract class BaseCard {
 
 	public void setTransparentBackground(boolean transparentBackground) {
 		this.transparentBackground = transparentBackground;
+	}
+
+	public void updateVisibility(boolean show) {
+		if (view != null) {
+			AndroidUiHelper.updateVisibility(view, show);
+		}
+	}
+
+	public boolean isVisible() {
+		return view != null && view.getVisibility() == View.VISIBLE;
 	}
 }

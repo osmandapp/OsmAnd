@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.util.Stack;
 
 /**
- * Thread to load map objects (POI, transport stops )async
+ * Thread to load map objects (POI, transport stops) async
  */
 public class AsyncLoadingThread extends Thread {
 
@@ -27,11 +27,11 @@ public class AsyncLoadingThread extends Thread {
 
 	private static final Log log = PlatformUtil.getLog(AsyncLoadingThread.class);
 
-	private final Stack<Object> requests = new Stack<Object>();
+	private final Stack<Object> requests = new Stack<>();
 	private final ResourceManager resourceManger;
 
 	public AsyncLoadingThread(ResourceManager resourceManger) {
-		super("Loader map objects (synchronizer)"); //$NON-NLS-1$
+		super("Loader map objects (synchronizer)");
 		this.resourceManger = resourceManger;
 	}
 
@@ -69,9 +69,7 @@ public class AsyncLoadingThread extends Thread {
 					resourceManger.getMapTileDownloader().fireLoadCallback(null);
 				}
 				sleep(750);
-			} catch (InterruptedException e) {
-				log.error(e, e);
-			} catch (RuntimeException e) {
+			} catch (InterruptedException | RuntimeException e) {
 				log.error(e, e);
 			}
 		}
@@ -126,20 +124,20 @@ public class AsyncLoadingThread extends Thread {
 		public final File dirWithTiles;
 		public final ITileSource tileSource;
 
+		public final long timestamp;
+
 		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId, ITileSource source, int tileX,
-				int tileY, int zoom) {
+				int tileY, int zoom, long timestamp) {
 			super(url, fileToSave, tileX, tileY, zoom);
 			this.dirWithTiles = dirWithTiles;
 			this.tileSource = source;
 			this.tileId = tileId;
+			this.timestamp = timestamp;
 		}
 		
 		public TileLoadDownloadRequest(File dirWithTiles, String url, File fileToSave, String tileId, ITileSource source, int tileX,
-				int tileY, int zoom, String referer, String userAgent) {
-			super(url, fileToSave, tileX, tileY, zoom);
-			this.dirWithTiles = dirWithTiles;
-			this.tileSource = source;
-			this.tileId = tileId;
+				int tileY, int zoom, long timestamp, String referer, String userAgent) {
+			this(dirWithTiles, url, fileToSave, tileId, source, tileX, tileY, zoom, timestamp);
 			this.referer = referer;
 			this.userAgent = userAgent;
 		}

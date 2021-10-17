@@ -34,14 +34,6 @@ public class OsmAndDialogs {
 		}
 		return null;
 	}
-	
-	public static void prepareDialog(int dialogID, Activity activity, Bundle args, Dialog dlg) {
-		OsmAndAction action = dialogActions.get(dialogID);
-		if(action != null) {
-			action.prepareDialog(activity, args, dlg);
-		}
-	}
-
 
 	public static void showVoiceProviderDialog(final MapActivity activity, final ApplicationMode applicationMode, final boolean applyAllModes) {
 		OsmandApplication app = activity.getMyApplication();
@@ -118,16 +110,9 @@ public class OsmAndDialogs {
 		}
 	}
 			
-	public static final int DIALOG_ADD_FAVORITE = 200;
-	public static final int DIALOG_REPLACE_FAVORITE = 201;
 	public static final int DIALOG_ADD_WAYPOINT = 202;
 	public static final int DIALOG_RELOAD_TITLE = 203;
 	public static final int DIALOG_SHARE_LOCATION = 204;
 	public static final int DIALOG_SAVE_DIRECTIONS = 206;
 	public static final int DIALOG_START_GPS = 207;
-	
-	
-	public static int getPluginDialogId(int pluginId, int dialogId) {
-		return (pluginId + 3) * 100 + dialogId;
-	}
 }

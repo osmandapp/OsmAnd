@@ -17,7 +17,6 @@ import androidx.annotation.Nullable;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.backend.CommonPreference;
@@ -196,7 +195,7 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	public void onStart(@NonNull Activity activity) {
+	public void onStart() {
 		switchSensor(false);
 	}
 

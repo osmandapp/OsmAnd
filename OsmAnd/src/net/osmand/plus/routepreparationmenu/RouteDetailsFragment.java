@@ -38,6 +38,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmAndFormatter;
@@ -45,7 +46,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.helpers.FontCache;
@@ -54,6 +54,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.CollapsableView;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
 import net.osmand.plus.measurementtool.graph.BaseGraphAdapter;
 import net.osmand.plus.measurementtool.graph.CommonGraphAdapter;
 import net.osmand.plus.measurementtool.graph.GraphAdapterHelper;
@@ -247,14 +248,18 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			LinearLayout cardsContainer = getCardsContainer();
 			View topShadow = getTopShadow();
 			FrameLayout bottomContainer = getBottomContainer();
+			if (bottomContainer == null) {
+				return;
+			}
 			if (getCurrentMenuState() == MenuState.HEADER_ONLY) {
 				topShadow.setVisibility(View.INVISIBLE);
 				bottomContainer.setBackgroundDrawable(null);
 				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
 			} else {
 				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+				int cardsAndListBgColorId = ColorUtilities.getCardAndListBackgroundColorId(isNightMode());
+				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, cardsAndListBgColorId);
+				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, cardsAndListBgColorId);
 			}
 		}
 	}
@@ -767,13 +772,13 @@ public class RouteDetailsFragment extends ContextMenuFragment
 	@ColorInt
 	private int getActiveColor() {
 		OsmandApplication app = requireMyApplication();
-		return ContextCompat.getColor(app, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		return ContextCompat.getColor(app, ColorUtilities.getActiveColorId(isNightMode()));
 	}
 
 	@ColorInt
 	protected int getMainFontColor() {
 		OsmandApplication app = requireMyApplication();
-		return ContextCompat.getColor(app, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		return ColorUtilities.getPrimaryTextColor(app, isNightMode());
 	}
 
 	@ColorInt
@@ -1380,11 +1385,11 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			ImageView transportStopRouteImageView = (ImageView) convertView.findViewById(R.id.transport_stop_route_icon);
 
 			int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
-			transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, UiUtilities.getContrastColor(mapActivity, bgColor, true)));
+			transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, ColorUtilities.getContrastColor(mapActivity, bgColor, true)));
 			transportStopRouteTextView.setText(routeRef + ": " + routeDescription);
 			GradientDrawable gradientDrawableBg = (GradientDrawable) convertView.getBackground();
 			gradientDrawableBg.setColor(bgColor);
-			transportStopRouteTextView.setTextColor(UiUtilities.getContrastColor(mapActivity, bgColor, true));
+			transportStopRouteTextView.setTextColor(ColorUtilities.getContrastColor(mapActivity, bgColor, true));
 		}
 
 		return convertView;
@@ -1433,14 +1438,14 @@ public class RouteDetailsFragment extends ContextMenuFragment
 			AndroidUtils.setMargins(llHorLineParams, dpToPx(64), 0, 0, 0);
 		}
 		horizontalLine.setLayoutParams(llHorLineParams);
-		horizontalLine.setBackgroundColor(ContextCompat.getColor(app, isNightMode() ? R.color.divider_color_dark : R.color.divider_color_light));
+		horizontalLine.setBackgroundColor(ColorUtilities.getDividerColor(app, isNightMode()));
 		((LinearLayout) view).addView(horizontalLine);
 	}
 
 	private void makeGpx() {
 		OsmandApplication app = requireMyApplication();
 		gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
-		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, true);
+		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
 	}
 
 	void openDetails() {

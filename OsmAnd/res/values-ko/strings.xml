@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
     <string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
@@ -480,7 +480,7 @@
     <string name="osm_settings_descr">OSM 로그인에 필요한 OSM 설정을 지정합니다</string>
     <string name="data_settings_descr">언어를 지정하고, 데이터를 다운로드/재로드 합니다</string>
     <string name="data_settings">데이터</string>
-    <string name="osm_settings">OSM 편집</string>
+    <string name="osm_editing_plugin_name">OSM 편집</string>
     <string name="auto_zoom_map_descr">속도에 따라 자동으로 지도 줌(zoom)을 합니다</string>
     <string name="auto_zoom_map">자동 맵 줌</string>
     <string name="additional_settings">추가 설정</string>
@@ -1108,8 +1108,6 @@
     <string name="voice_pref_title">음성</string>
     <string name="misc_pref_title">기타</string>
     <string name="localization_pref_title">현지화</string>
-    <string name="osmand_srtm_long_description_1000_chars">"이 플러그인은 등고선 오버레이와 음영레이어 모두 제공합니다. OsmAnd 오프라인 지도의 상단에 표시 할 수 있습니다. 이 기능은  운동선수, 하이커, 트레커등 음영에 관심이 있는 사람들이 즐겨 사용할 것이다.
-\n↵\n↵\n(70도 북쪽과 남쪽 70도 사이의) 글로벌 데이터는  SRTM (Shuttle Radar Topography Mission:셔틀 레이더 지형 미션)과 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer:고급 우주선 열 방출 및 반사 복사계)에 의한 측정을 기반으로 합니다, 테라 온보드 영상 측정, NASA의 지구 관찰 시스템의 주력 위성 . ASTER는 NASA, 일본 경제 산업성(METI), 일본 우주 시스템 (J-spacesystems) 사이의 협력적인 노력의 결과입니다.\n\n\n이 플러그인은 OsmAnd 의 오프라인 지도에 표시할 수 있는 등고선을 제공합니다. (북쪽으로 70도 남쪽으로 70도 사이 ) 글로벌 데이터는 SRTM (셔틀 레이더 지형 미션 :Shuttle Radar Topography Mission) 과 ASTER (고급화된 Spaceborne 열 방출 및 반사 복사계 테라 온보드영상 기기 : Advanced Spaceborne Thermal Emission and Reflection Radiometer) NASA 의 주력 위성에 의한 측정을 기반으로 합니다. 지구 관측 시스템의 ASTER 는 NASA , 일본의 경제 산업성(METI ), 일본 우주 시스템 (J- spacesystems )의 장관 사이의 협력한 노력의 결실입니다. "</string>
     <string name="interrupt_music_descr">음성안내를 할 때 음악을 중지</string>
     <string name="interrupt_music">음악 중지</string>
     <string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>

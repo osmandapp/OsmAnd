@@ -35,6 +35,10 @@ public class ZonedUTMPoint extends UTMPoint {
         this.zone_letter = zone_letter;
     }
 
+    public LatLonPoint ZonedUTMtoLL() {
+        return ZonedUTMtoLL(Ellipsoid.WGS_84, northing, easting, zone_number, zone_letter, new LatLonPoint());
+    }
+
     /**
      * Converts UTM coords to lat/long given an ellipsoid.
      * <p>

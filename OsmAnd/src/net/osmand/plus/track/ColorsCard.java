@@ -6,15 +6,19 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.ListStringPreference;
 import net.osmand.plus.track.CustomColorBottomSheet.ColorPickerListener;
@@ -27,7 +31,7 @@ import org.apache.commons.logging.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ColorsCard extends BaseCard implements ColorPickerListener {
+public class ColorsCard extends MapBaseCard implements ColorPickerListener {
 
 	public static final int MAX_CUSTOM_COLORS = 6;
 	public static final double MINIMUM_CONTRAST_RATIO = 1.5;
@@ -51,13 +55,14 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		return R.layout.colors_card;
 	}
 
-	public ColorsCard(MapActivity mapActivity,
-	                  int selectedColor,
-	                  Fragment targetFragment,
-	                  List<Integer> colors,
-	                  ListStringPreference colorsListPreference,
-	                  ApplicationMode appMode) {
-		super(mapActivity);
+	public ColorsCard(@NonNull MapActivity mapActivity,
+	                  @Nullable ApplicationMode appMode,
+	                  @Nullable Fragment targetFragment,
+	                  @ColorInt int selectedColor,
+	                  @NonNull List<Integer> colors,
+	                  @NonNull ListStringPreference colorsListPreference,
+	                  boolean usedOnMap) {
+		super(mapActivity, usedOnMap);
 		this.targetFragment = targetFragment;
 		this.selectedColor = selectedColor;
 		this.colors = colors;
@@ -66,11 +71,12 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		this.appMode = appMode;
 	}
 
+	@ColorInt
 	public int getSelectedColor() {
 		return selectedColor;
 	}
 
-	public void setSelectedColor(int selectedColor) {
+	public void setSelectedColor(@ColorInt int selectedColor) {
 		this.selectedColor = selectedColor;
 		updateContent();
 	}
@@ -122,17 +128,20 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		updateColorSelector(selectedColor);
 	}
 
-	private void updateColorSelector(int color) {
-		View oldColor = view.findViewWithTag(selectedColor);
-		if (oldColor != null) {
-			oldColor.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
-			ImageView icon = oldColor.findViewById(R.id.icon);
-			icon.setImageDrawable(UiUtilities.tintDrawable(icon.getDrawable(),
-					getResolvedColor(nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light)));
+	private void updateColorSelector(int newColor) {
+		View oldColorContainer = view.findViewWithTag(selectedColor);
+		if (oldColorContainer != null) {
+			oldColorContainer.findViewById(R.id.outline).setVisibility(View.INVISIBLE);
+			ImageView icon = oldColorContainer.findViewById(R.id.icon);
+			icon.setImageDrawable(UiUtilities.tintDrawable(
+					icon.getDrawable(), ColorUtilities.getDefaultIconColor(app, nightMode)));
 		}
-		View newColor = view.findViewWithTag(color);
-		if (newColor != null) {
-			newColor.findViewById(R.id.outline).setVisibility(View.VISIBLE);
+		View newColorContainer = view.findViewWithTag(newColor);
+		if (newColorContainer != null) {
+			AppCompatImageView outline = newColorContainer.findViewById(R.id.outline);
+			Drawable border = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle_contour, newColor);
+			outline.setImageDrawable(border);
+			outline.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -144,10 +153,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		Drawable transparencyIcon = getTransparencyIcon(app, color);
 		Drawable colorIcon = app.getUIUtilities().getPaintedIcon(R.drawable.bg_point_circle, color);
 		Drawable layeredIcon = UiUtilities.getLayeredIcon(transparencyIcon, colorIcon);
-		int listBgColorId = nightMode ?
-				R.color.card_and_list_background_dark :
-				R.color.card_and_list_background_light;
-		int listBgColor = getResolvedColor(listBgColorId);
+		int listBgColor = ColorUtilities.getCardAndListBackgroundColor(app, nightMode);
 		double contrastRatio = ColorUtils.calculateContrast(color, listBgColor);
 		if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
 			backgroundCircle.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
@@ -185,7 +191,7 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 		View colorItemView = createCircleView(rootView);
 		ImageView backgroundCircle = colorItemView.findViewById(R.id.background);
 
-		int bgColorId = nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+		int bgColorId = ColorUtilities.getActivityBgColorId(nightMode);
 		Drawable backgroundIcon = app.getUIUtilities().getIcon(R.drawable.bg_point_circle, bgColorId);
 
 		ImageView icon = colorItemView.findViewById(R.id.icon);
@@ -208,17 +214,12 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 
 	private View createCircleView(FlowLayout rootView) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
-		View circleView = themedInflater.inflate(R.layout.point_editor_button, rootView, false);
-		ImageView outline = circleView.findViewById(R.id.outline);
-		int colorId = nightMode ? R.color.stroked_buttons_and_links_outline_dark : R.color.stroked_buttons_and_links_outline_light;
-		Drawable contourIcon = app.getUIUtilities().getIcon(R.drawable.bg_point_circle_contour, colorId);
-		outline.setImageDrawable(contourIcon);
-		return circleView;
+		return themedInflater.inflate(R.layout.point_editor_button, rootView, false);
 	}
 
 	private Drawable getTransparencyIcon(OsmandApplication app, @ColorInt int color) {
-		int colorWithoutAlpha = UiUtilities.removeAlpha(color);
-		int transparencyColor = UiUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
+		int colorWithoutAlpha = ColorUtilities.removeAlpha(color);
+		int transparencyColor = ColorUtilities.getColorWithAlpha(colorWithoutAlpha, 0.8f);
 		return app.getUIUtilities().getPaintedIcon(R.drawable.ic_bg_transparency, transparencyColor);
 	}
 
@@ -247,10 +248,6 @@ public class ColorsCard extends BaseCard implements ColorPickerListener {
 			}
 		}
 		return colors;
-	}
-
-	public int getIndexOfSelectedColor() {
-		return customColors.indexOf(selectedColor);
 	}
 
 	public boolean isBaseColor(int color) {

@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.util.Algorithms;
 
@@ -53,7 +55,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 		this.bottomButton = !Algorithms.isEmpty(bottomButtonText);
 		this.bottomButtonText = bottomButtonText;
 		this.nightMode = nightMode;
-		int selectedIconColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int selectedIconColorRes = ColorUtilities.getActiveColorId(nightMode);
 		selectedIconColor = ContextCompat.getColor(app, selectedIconColorRes);
 	}
 
@@ -107,7 +109,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
 
 			if (selectedMode) {
-				Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.15f)), drawable};
+				Drawable[] layers = {new ColorDrawable(ColorUtilities.getColorWithAlpha(colorNoAlpha, 0.15f)), drawable};
 				drawable = new LayerDrawable(layers);
 			}
 			AndroidUtils.setBackground(holder.profileOptions, drawable);
@@ -123,9 +125,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			holder.descr.setVisibility(View.GONE);
 			holder.compoundButton.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
-			int color = ContextCompat.getColor(app, nightMode
-					? R.color.active_color_primary_dark
-					: R.color.active_color_primary_light);
+			int color = ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode));
 			holder.title.setTextColor(color);
 			holder.title.setText(bottomButtonText);
 

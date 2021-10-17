@@ -14,6 +14,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -23,7 +24,7 @@ import net.osmand.plus.views.DirectionDrawable;
 
 import java.util.List;
 
-public class MapMarkersCard extends BaseCard {
+public class MapMarkersCard extends MapBaseCard {
 	private List<MapMarker> markers;
 	private boolean showLimited = true;
 	private LatLon loc;
@@ -98,7 +99,7 @@ public class MapMarkersCard extends BaseCard {
 			ImageView arrow = (ImageView) v.findViewById(R.id.direction);
 			Drawable arrowIcon = arrow.getDrawable();
 			if (arrowIcon instanceof DirectionDrawable) {
-				((DirectionDrawable) arrowIcon).setImage(R.drawable.ic_direction_arrow, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+				((DirectionDrawable) arrowIcon).setImage(R.drawable.ic_direction_arrow, ColorUtilities.getActiveColorId(nightMode));
 			}
 
 			v.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));
@@ -116,7 +117,7 @@ public class MapMarkersCard extends BaseCard {
 				LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(ctx, 1f));
 				AndroidUtils.setMargins(p, listTextPadding, 0, 0, 0);
 				div.setLayoutParams(p);
-				AndroidUtils.setBackgroundColor(ctx, div, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
+				AndroidUtils.setBackgroundColor(ctx, div, ColorUtilities.getDividerColorId(nightMode));
 				div.setVisibility(View.VISIBLE);
 				root.addView(div);
 			}

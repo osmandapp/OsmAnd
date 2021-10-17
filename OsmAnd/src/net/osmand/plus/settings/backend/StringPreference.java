@@ -13,7 +13,8 @@ public class StringPreference extends CommonPreference<String> {
 
 	@Override
 	protected boolean setValue(Object prefs, String val) {
-		return getSettingsAPI().edit(prefs).putString(getId(), (val != null) ? val.trim() : val).commit();
+		return super.setValue(prefs, val)
+				&& getSettingsAPI().edit(prefs).putString(getId(), (val != null) ? val.trim() : val).commit();
 	}
 
 	@Override

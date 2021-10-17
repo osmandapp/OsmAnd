@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 
-import net.osmand.data.FavouritePoint.SpecialPointType;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -53,7 +52,7 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 	}
 
 	private void addParkingPosition(boolean limited) {
-		ParkingPositionPlugin plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
+		ParkingPositionPlugin plugin = OsmandPlugin.getActivePlugin(ParkingPositionPlugin.class);
 		if (plugin != null) {
 			MapActivity mapActivity = (MapActivity) getActivity();
 			Bundle args = getArguments();
@@ -72,8 +71,7 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				plugin.setParkingPosition(latitude, longitude, false);
 			}
 			mapActivity.refreshMap();
-			mapActivity.getMyApplication().getFavorites().setSpecialPoint(
-					plugin.getParkingPosition(), SpecialPointType.PARKING, null);
+			mapActivity.getMyApplication().getFavorites().setParkingPoint(plugin.getParkingPosition(), null, plugin.getParkingTime(), plugin.isParkingEventAdded());
 			if (!limited) {
 				plugin.showContextMenuIfNeeded(mapActivity, true);
 			}

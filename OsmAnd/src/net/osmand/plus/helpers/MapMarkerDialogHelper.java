@@ -10,10 +10,11 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
-import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.views.DirectionDrawable;
 
 
@@ -58,7 +59,7 @@ public class MapMarkerDialogHelper {
 		if (!marker.history) {
 			dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
 		} else {
-			dd.setImage(arrowResId, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+			dd.setImage(arrowResId, ColorUtilities.getSecondaryTextColorId(nightMode));
 		}
 		if (loc == null || heading == null || marker.point == null) {
 			dd.setAngle(0);

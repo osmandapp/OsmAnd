@@ -18,6 +18,7 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -25,34 +26,32 @@ import net.osmand.plus.dialogs.GpxAppearanceAdapter;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.AppearanceListItem;
 import net.osmand.plus.dialogs.GpxAppearanceAdapter.GpxAppearanceAdapterType;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.track.TrackAppearanceFragment.OnNeedScrollListener;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
 
-public class TrackWidthCard extends BaseCard {
+public class TrackWidthCard extends MapBaseCard {
 
 	private final static String CUSTOM_WIDTH = "custom_width";
 	private final static int CUSTOM_WIDTH_MIN = 1;
 	private final static int CUSTOM_WIDTH_MAX = 24;
 
-	private TrackDrawInfo trackDrawInfo;
-	private OnNeedScrollListener onNeedScrollListener;
+	private final TrackDrawInfo trackDrawInfo;
+	private final OnNeedScrollListener onNeedScrollListener;
 
-	private AppearanceListItem selectedItem;
 	private List<AppearanceListItem> appearanceItems;
 
 	private GpxWidthAdapter widthAdapter;
 	private View sliderContainer;
 	private RecyclerView groupRecyclerView;
 
-	public TrackWidthCard(MapActivity mapActivity, TrackDrawInfo trackDrawInfo,
-	                      OnNeedScrollListener onNeedScrollListener) {
+	public TrackWidthCard(@NonNull MapActivity mapActivity, @NonNull TrackDrawInfo trackDrawInfo,
+						  @NonNull OnNeedScrollListener onNeedScrollListener) {
 		super(mapActivity);
 		this.trackDrawInfo = trackDrawInfo;
 		this.onNeedScrollListener = onNeedScrollListener;
-		appearanceItems = getWidthAppearanceItems();
 	}
 
 	@Override
@@ -62,6 +61,7 @@ public class TrackWidthCard extends BaseCard {
 
 	@Override
 	protected void updateContent() {
+		appearanceItems = getWidthAppearanceItems();
 		updateHeader();
 		updateCustomWidthSlider();
 
@@ -70,8 +70,6 @@ public class TrackWidthCard extends BaseCard {
 		groupRecyclerView.setAdapter(widthAdapter);
 		groupRecyclerView.setLayoutManager(new LinearLayoutManager(app, RecyclerView.HORIZONTAL, false));
 		scrollMenuToSelectedItem();
-
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
 	}
 
 	public void updateItems() {
@@ -82,18 +80,15 @@ public class TrackWidthCard extends BaseCard {
 
 	@Nullable
 	private AppearanceListItem getSelectedItem() {
-		if (selectedItem == null) {
-			String selectedWidth = trackDrawInfo.getWidth();
-			for (AppearanceListItem item : appearanceItems) {
-				if (selectedWidth != null && (Algorithms.objectEquals(item.getValue(), selectedWidth)
-						|| Algorithms.isEmpty(selectedWidth) && Algorithms.isEmpty(item.getValue())
-						|| Algorithms.isInt(selectedWidth) && CUSTOM_WIDTH.equals(item.getAttrName()))) {
-					selectedItem = item;
-					break;
-				}
+		String selectedWidth = trackDrawInfo.getWidth();
+		for (AppearanceListItem item : appearanceItems) {
+			if (selectedWidth != null && (Algorithms.objectEquals(item.getValue(), selectedWidth)
+					|| Algorithms.isEmpty(selectedWidth) && Algorithms.isEmpty(item.getValue())
+					|| Algorithms.isInt(selectedWidth) && CUSTOM_WIDTH.equals(item.getAttrName()))) {
+				return item;
 			}
 		}
-		return selectedItem;
+		return null;
 	}
 
 	private List<AppearanceListItem> getWidthAppearanceItems() {
@@ -178,6 +173,7 @@ public class TrackWidthCard extends BaseCard {
 	}
 
 	private void scrollMenuToSelectedItem() {
+		AppearanceListItem selectedItem = getSelectedItem();
 		int position = widthAdapter.getItemPosition(selectedItem);
 		if (position != -1) {
 			groupRecyclerView.scrollToPosition(position);
@@ -186,7 +182,7 @@ public class TrackWidthCard extends BaseCard {
 
 	private class GpxWidthAdapter extends RecyclerView.Adapter<AppearanceViewHolder> {
 
-		private List<AppearanceListItem> items;
+		private final List<AppearanceListItem> items;
 
 		private GpxWidthAdapter(List<AppearanceListItem> items) {
 			this.items = items;
@@ -220,7 +216,7 @@ public class TrackWidthCard extends BaseCard {
 				@Override
 				public void onClick(View view) {
 					int prevSelectedPosition = getItemPosition(getSelectedItem());
-					selectedItem = items.get(holder.getAdapterPosition());
+					AppearanceListItem selectedItem = items.get(holder.getAdapterPosition());
 					notifyItemChanged(holder.getAdapterPosition());
 					notifyItemChanged(prevSelectedPosition);
 
@@ -248,6 +244,9 @@ public class TrackWidthCard extends BaseCard {
 			} else {
 				iconId = TrackAppearanceFragment.getWidthIconId(item.getValue());
 			}
+			if (color == 0) {
+				color = TrackAppearanceFragment.getTrackColor(app);
+			}
 			holder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconId, color));
 		}
 
@@ -255,7 +254,7 @@ public class TrackWidthCard extends BaseCard {
 			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
 				if (getSelectedItem() != null && getSelectedItem().equals(item)) {
-					int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+					int strokeColor = ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode));
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), strokeColor);
 				} else {
 					int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.stroked_buttons_and_links_outline_dark

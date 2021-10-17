@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import com.google.gson.Gson;
@@ -84,34 +85,34 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 		List<String> profiles = loadListFromParams();
 		if (profiles.size() == 0) {
-			Toast.makeText(activity, activity.getString(R.string.profiles_for_action_not_found),
+			Toast.makeText(mapActivity, mapActivity.getString(R.string.profiles_for_action_not_found),
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
 
 		boolean showDialog = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 		if (showDialog) {
-			showChooseDialog(activity.getSupportFragmentManager());
+			showChooseDialog(mapActivity.getSupportFragmentManager());
 			return;
 		}
-		String nextProfile = getNextSelectedItem(activity.getMyApplication());
-		executeWithParams(activity, nextProfile);
+		String nextProfile = getNextSelectedItem(mapActivity.getMyApplication());
+		executeWithParams(mapActivity, nextProfile);
 	}
 
 	@Override
-	public void executeWithParams(final MapActivity activity, final String params) {
+	public void executeWithParams(@NonNull MapActivity mapActivity, final String params) {
 		ApplicationMode appMode = getModeForKey(params);
 		if (appMode != null) {
-			OsmandApplication app = activity.getMyApplication();
+			OsmandApplication app = mapActivity.getMyApplication();
 			app.getSettings().setApplicationMode(appMode);
 			app.getQuickActionRegistry().setQuickActionFabState(true);
 
-			String message = String.format(activity.getString(
+			String message = String.format(mapActivity.getString(
 					R.string.application_profile_changed), appMode.toHumanString());
-			Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+			Toast.makeText(mapActivity, message, Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -127,6 +128,11 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 			return appMode.toHumanString();
 		}
 		return item;
+	}
+
+	@Override
+	public String getDisabledItem(OsmandApplication app) {
+		return null;
 	}
 
 	@Override
@@ -217,9 +223,9 @@ public class SwitchProfileAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-		return super.fillParams(root, activity);
+		return super.fillParams(root, mapActivity);
 	}
 
 	@Override

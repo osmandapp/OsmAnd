@@ -18,7 +18,6 @@ import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.ExitInfo;
@@ -113,9 +112,11 @@ public class VoiceRouter {
 		settings.VOICE_MUTE.addListener(new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				if (!isMute() && soundPool == null) {
-					loadCameraSound();
-				}
+				app.runInUIThread(() -> {
+					if (!isMute() && soundPool == null) {
+						loadCameraSound();
+					}
+				});
 			}
 		});
 	}
@@ -207,7 +208,7 @@ public class VoiceRouter {
 	}
 
 	public void announceOffRoute(double dist) {
-		if (dist > atd.getOffRouteDistance() && !settings.DISABLE_OFFROUTE_RECALC.get()) {
+		if (dist > atd.getOffRouteDistance()) {
 			long ms = System.currentTimeMillis();
 			if (waitAnnouncedOffRoute == 0 || ms - lastAnnouncedOffRoute > waitAnnouncedOffRoute) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
@@ -320,35 +321,18 @@ public class VoiceRouter {
 		AlarmInfoType type = info.getType();
 		if (type == AlarmInfoType.SPEED_LIMIT) {
 			announceSpeedAlarm(info.getIntValue(), speed);
-		} else if (type == AlarmInfoType.SPEED_CAMERA) {
-			if (router.getSettings().SPEAK_SPEED_CAMERA.get()) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					p.attention(type+"");
-				}
-				play(p);
-			}
-		} else if (type == AlarmInfoType.PEDESTRIAN) {
-			if (router.getSettings().SPEAK_PEDESTRIAN.get()) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					p.attention(type+"");
-				}
-				play(p);
-			}
-		} else if (type == AlarmInfoType.TUNNEL) {
-			if (router.getSettings().SPEAK_TUNNELS.get()) {
-				CommandBuilder p = getNewCommandPlayerToPlay();
-				if (p != null) {
-					p.attention(type+"");
-				}
-				play(p);
-			}
 		} else {
-			if (router.getSettings().SPEAK_TRAFFIC_WARNINGS.get()) {
+			OsmandSettings settings = router.getSettings();
+			boolean speakTrafficWarnings = settings.SPEAK_TRAFFIC_WARNINGS.get();
+			boolean speakTunnels = type == AlarmInfoType.TUNNEL && settings.SPEAK_TUNNELS.get();
+			boolean speakPedestrian = type == AlarmInfoType.PEDESTRIAN && settings.SPEAK_PEDESTRIAN.get();
+			boolean speakSpeedCamera = type == AlarmInfoType.SPEED_CAMERA && settings.SPEAK_SPEED_CAMERA.get();
+			boolean speakPrefType = type == AlarmInfoType.TUNNEL || type == AlarmInfoType.PEDESTRIAN || type == AlarmInfoType.SPEED_CAMERA;
+
+			if (speakSpeedCamera || speakPedestrian || speakTunnels || speakTrafficWarnings && !speakPrefType) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
-					p.attention(type+"");
+					p.attention(String.valueOf(type));
 				}
 				play(p);
 				// See Issue 2377: Announce destination again - after some motorway tolls roads split shortly after the toll
@@ -370,7 +354,7 @@ public class VoiceRouter {
 			// If we wait before more than 20 sec (reset counter)
 			if (ms - waitAnnouncedSpeedLimit > 20 * 1000) {
 				waitAnnouncedSpeedLimit = 0;
-			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get()  && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
+			} else if (router.getSettings().SPEAK_SPEED_LIMIT.get() && ms - waitAnnouncedSpeedLimit > 10 * 1000 ) {
 				CommandBuilder p = getNewCommandPlayerToPlay();
 				if (p != null) {
 					lastAnnouncedSpeedLimit = ms;
@@ -565,7 +549,8 @@ public class VoiceRouter {
 			if (includeDest == true) {
 				result.put(TO_REF, getNonNullString(getSpeakablePointName(i.getRef())));
 				result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(i.getStreetName())));
-				result.put(TO_DEST, getNonNullString(getSpeakablePointName(i.getDestinationName())));
+				String dest = cutLongDestination(getSpeakablePointName(i.getDestinationName()));
+				result.put(TO_DEST, getNonNullString(dest));
 			} else {
 				result.put(TO_REF, getNonNullString(getSpeakablePointName(i.getRef())));
 				result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(i.getStreetName())));
@@ -579,8 +564,9 @@ public class VoiceRouter {
 							settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))));
 					result.put(FROM_STREET_NAME, getNonNullString(getSpeakablePointName(obj.getName(settings.MAP_PREFERRED_LOCALE.get(),
 							settings.MAP_TRANSLITERATE_NAMES.get()))));
-					result.put(FROM_DEST, getNonNullString(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
-							settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection()))));
+					String dest = cutLongDestination(getSpeakablePointName(obj.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
+							settings.MAP_TRANSLITERATE_NAMES.get(), currentSegment.isForwardDirection())));
+					result.put(FROM_DEST, getNonNullString(dest));
 				} else {
 					RouteDataObject obj = currentSegment.getObject();
 					result.put(FROM_REF, getNonNullString(getSpeakablePointName(obj.getRef(settings.MAP_PREFERRED_LOCALE.get(),
@@ -604,15 +590,10 @@ public class VoiceRouter {
 		if (exitInfo == null || !router.getSettings().SPEAK_STREET_NAMES.get()) {
 			return new StreetName(result);
 		}
-		if (player != null && player.supportsStructuredStreetNames()) {
-			result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
-			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitStreetName())));
-			result.put(TO_DEST, includeDest ? getNonNullString(getSpeakablePointName(routeInfo.getRef())) : "");
-		} else {
-			result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
-			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitStreetName())));
-			result.put(TO_DEST, "");
-		}
+		result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
+		String dest = cutLongDestination(getSpeakablePointName(routeInfo.getDestinationName()));
+		result.put(TO_DEST, getNonNullString(dest));
+		result.put(TO_STREET_NAME, "");
 		return new StreetName(result);
 	}
 
@@ -826,21 +807,21 @@ public class VoiceRouter {
 	
 	private String getTurnType(TurnType t) {
 		if (TurnType.TL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT;
+			return CommandPlayer.A_LEFT;
 		} else if (TurnType.TSHL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_SH;
+			return CommandPlayer.A_LEFT_SH;
 		} else if (TurnType.TSLL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_SL;
+			return CommandPlayer.A_LEFT_SL;
 		} else if (TurnType.TR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT;
+			return CommandPlayer.A_RIGHT;
 		} else if (TurnType.TSHR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_SH;
+			return CommandPlayer.A_RIGHT_SH;
 		} else if (TurnType.TSLR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_SL;
+			return CommandPlayer.A_RIGHT_SL;
 		} else if (TurnType.KL == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_LEFT_KEEP;
+			return CommandPlayer.A_LEFT_KEEP;
 		} else if (TurnType.KR == t.getValue()) {
-			return AbstractPrologCommandPlayer.A_RIGHT_KEEP;
+			return CommandPlayer.A_RIGHT_KEEP;
 		}
 		return null;
 	}
@@ -949,9 +930,9 @@ public class VoiceRouter {
 	private void play(CommandBuilder p) {
 		if (p != null) {
 			List<String> played = p.play();
-			notifyOnVoiceMessage(p.getListCommands(), played);
+			notifyOnVoiceMessage(p.getCommandsList(), played);
 		} else {
-			notifyOnVoiceMessage(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+			notifyOnVoiceMessage(Collections.emptyList(), Collections.emptyList());
 		}
 	}
 
@@ -996,5 +977,16 @@ public class VoiceRouter {
 			voiceMessageListeners.add(new WeakReference<>(listener));
 		}
 		return voiceMessageListeners;
+	}
+
+	private String cutLongDestination(String destination) {
+		if (destination == null) {
+			return null;
+		}
+		String[] words = destination.split(",");
+		if (words.length > 3) {
+			return words[0] + "," + words[1] + "," + words[2];
+		}
+		return destination;
 	}
 }

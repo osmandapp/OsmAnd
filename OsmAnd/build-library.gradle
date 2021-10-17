@@ -5,7 +5,7 @@ apply from: 'build-common.gradle'
 android {
 
 	defaultConfig {
-		minSdkVersion 15
+		minSdkVersion 21
 	}
 
 	lintOptions {

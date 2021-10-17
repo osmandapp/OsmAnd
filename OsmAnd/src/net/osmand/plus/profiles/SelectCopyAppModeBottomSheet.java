@@ -70,7 +70,7 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(CURRENT_APP_MODE_KEY, currentAppMode.getStringKey());
 		if (selectedAppMode != null) {

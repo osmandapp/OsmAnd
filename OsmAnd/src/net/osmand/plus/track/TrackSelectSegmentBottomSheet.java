@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -36,8 +36,6 @@ import net.osmand.plus.helpers.TrackSelectSegmentAdapter;
 import net.osmand.plus.helpers.TrackSelectSegmentAdapter.OnItemClickListener;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
-
-import java.util.List;
 
 public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -59,7 +57,7 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		String selectSegmentDescription = getString(R.string.select_segments_description, titleGpxTrack);
 		SpannableString gpxTrackName = new SpannableString(selectSegmentDescription);
 		int startIndex = selectSegmentDescription.indexOf(titleGpxTrack);
-		int descriptionColor = getResolvedColor(nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
+		int descriptionColor = ColorUtilities.getSecondaryTextColor(app, nightMode);
 		int endIndex = startIndex + titleGpxTrack.length();
 		gpxTrackName.setSpan(new CustomTypefaceSpan(typeface), startIndex, endIndex, 0);
 		gpxTrackName.setSpan(new ForegroundColorSpan(descriptionColor), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -107,8 +105,7 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setNestedScrollingEnabled(false);
 
-		List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
-		TrackSelectSegmentAdapter adapterSegments = new TrackSelectSegmentAdapter(context, segments);
+		TrackSelectSegmentAdapter adapterSegments = new TrackSelectSegmentAdapter(context, gpxFile);
 		adapterSegments.setAdapterListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(int position) {

@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -180,12 +181,10 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		OsmandApplication app = (OsmandApplication)activity.getApplication();
 		UiUtilities iconsCache = app.getUIUtilities();
 		boolean light = app.getSettings().isLightContent();
-		return iconsCache.getIcon(iconId,
-				light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
+		return iconsCache.getIcon(iconId, ColorUtilities.getDefaultIconColorId(!light));
 	}
 
 	private static Drawable getIcon(final Activity activity, int resId, int color) {
-		OsmandApplication app = (OsmandApplication)activity.getApplication();
 		Drawable d = AppCompatResources.getDrawable(activity, resId);
 		if (d != null) {
 			d = DrawableCompat.wrap(d).mutate();

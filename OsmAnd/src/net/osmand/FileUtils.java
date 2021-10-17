@@ -20,6 +20,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class FileUtils {
@@ -112,8 +113,6 @@ public class FileUtils {
 				selected.getGpxFile().path = dest.getAbsolutePath();
 				helper.updateSelectedGpxFile(selected);
 			}
-			RenameGpxAsyncTask renameGpxAsyncTask = new RenameGpxAsyncTask(app, dest);
-			renameGpxAsyncTask.execute();
 			return dest;
 		}
 		return null;
@@ -198,37 +197,24 @@ public class FileUtils {
 		return isWriteable;
 	}
 
-	public interface RenameCallback {
-		void renamedTo(File file);
+	public static boolean isTempFile(@NonNull OsmandApplication app, @Nullable String path) {
+		return path != null && path.startsWith(getTempDir(app).getAbsolutePath());
 	}
 
-	private static class RenameGpxAsyncTask extends AsyncTask<Void, Void, Exception> {
-
-		private OsmandApplication app;
-		private File file;
-
-		private RenameGpxAsyncTask(@NonNull OsmandApplication app, @NonNull File file) {
-			this.app = app;
-			this.file = file;
-		}
-
-		@Override
-		protected Exception doInBackground(Void... voids) {
-			GpxSelectionHelper helper = app.getSelectedGpxHelper();
-			SelectedGpxFile selected = helper.getSelectedFileByPath(file.getAbsolutePath());
-
-			GPXFile gpxFile;
-			if (selected != null && selected.getGpxFile() != null) {
-				gpxFile = selected.getGpxFile();
-			} else {
-				gpxFile = GPXUtilities.loadGPXFile(file);
+	public static void collectDirFiles(@NonNull File file, @NonNull List<File> list) {
+		if (file.isDirectory()) {
+			File[] files = file.listFiles();
+			if (files != null) {
+				for (File subfolderFile : files) {
+					collectDirFiles(subfolderFile, list);
+				}
 			}
-			if (gpxFile.metadata == null) {
-				gpxFile.metadata = new Metadata();
-			}
-			gpxFile.metadata.name = Algorithms.getFileNameWithoutExtension(file.getName());
-
-			return GPXUtilities.writeGpxFile(file, gpxFile);
+		} else {
+			list.add(file);
 		}
+	}
+
+	public interface RenameCallback {
+		void renamedTo(File file);
 	}
 }

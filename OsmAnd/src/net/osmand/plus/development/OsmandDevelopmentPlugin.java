@@ -1,9 +1,15 @@
 package net.osmand.plus.development;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.widget.ArrayAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -15,12 +21,10 @@ import net.osmand.plus.activities.ContributionVersionActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 
@@ -52,8 +56,10 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayers(MapActivity activity) {
-		registerWidget(activity);
+	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		if (mapActivity != null) {
+			registerWidget(mapActivity);
+		}
 	}
 
 	@Override
@@ -76,14 +82,16 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (isActive()) {
-			registerWidget(activity);
-		} else {
-			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
-			if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) != null) {
-				mapInfoLayer.removeSideWidget(mapInfoLayer.getSideWidget(FPSTextInfoWidget.class));
-				mapInfoLayer.recreateControls();
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		if (mapActivity != null) {
+			if (isActive()) {
+				registerWidget(mapActivity);
+			} else {
+				MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+				if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) != null) {
+					mapInfoLayer.removeSideWidget(mapInfoLayer.getSideWidget(FPSTextInfoWidget.class));
+					mapInfoLayer.recreateControls();
+				}
 			}
 		}
 	}
@@ -110,11 +118,12 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 
-	private void registerWidget(MapActivity activity) {
+	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		final OsmandMapTileView mv = activity.getMapView();
 		if (mapInfoLayer != null && mapInfoLayer.getSideWidget(FPSTextInfoWidget.class) == null) {
 			FPSTextInfoWidget fps = new FPSTextInfoWidget(mv, activity);
+			fps.setIcons(R.drawable.widget_fps_day, R.drawable.widget_fps_night);
 			mapInfoLayer.registerSideWidget(fps, R.drawable.ic_action_fps,
 					R.string.map_widget_fps_info, "fps", false, 50);
 			mapInfoLayer.recreateControls();

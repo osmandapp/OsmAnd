@@ -2,7 +2,6 @@ package net.osmand.plus.activities;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -20,7 +19,8 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseInitCallback;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
-import net.osmand.plus.liveupdates.SubscriptionRestartBottomSheetDialogFragment;
+import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
@@ -49,12 +49,13 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 
 	private void initInAppPurchaseHelper() {
 		deinitInAppPurchaseHelper();
+		OsmandApplication app = getMyApplication();
+		OsmandSettings settings = app.getSettings();
 		if (purchaseHelper == null) {
-			OsmandApplication app = getMyApplication();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-			if (app.getSettings().isInternetConnectionAvailable()
+			if (settings.isInternetConnectionAvailable()
 					&& isInAppPurchaseAllowed()
-					&& isInAppPurchaseSupported()) {
+					&& Version.isInAppPurchaseSupported()) {
 				this.purchaseHelper = purchaseHelper;
 			}
 		}
@@ -67,7 +68,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 					if (!activityDestroyed && AndroidUtils.isActivityNotDestroyed(activity)) {
 						purchaseHelper.setUiActivity(activity);
 						if (purchaseHelper.needRequestInventory()) {
-							purchaseHelper.requestInventory();
+							purchaseHelper.requestInventory(false);
 						}
 					}
 				}
@@ -76,6 +77,11 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 				public void onFail() {
 				}
 			});
+		} else if (isInAppPurchaseAllowed() && settings.isInternetConnectionAvailable()) {
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null && purchaseHelper.needRequestPromo()) {
+				purchaseHelper.checkPromoAsync(null);
+			}
 		}
 	}
 
@@ -103,11 +109,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 				app.logEvent("paid_version_redirect");
 				Intent intent = new Intent(Intent.ACTION_VIEW,
 						Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
-				try {
-					activity.startActivity(intent);
-				} catch (ActivityNotFoundException e) {
-					LOG.error("ActivityNotFoundException", e);
-				}
+				AndroidUtils.startActivityIfSafe(activity, intent);
 			}
 		}
 	}
@@ -155,10 +157,6 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		return false;
 	}
 
-	public boolean isInAppPurchaseSupported() {
-		return Version.isGooglePlayEnabled() || Version.isHuawei();
-	}
-
 	@Override
 	public void onError(InAppPurchaseTaskType taskType, String error) {
 		onInAppPurchaseError(taskType, error);
@@ -195,16 +193,11 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		if (purchaseHelper != null && purchaseHelper.getSubscriptions().containsSku(sku)) {
 			getMyApplication().logEvent("live_osm_subscription_purchased");
-
-			if (!active && !fragmentManager.isStateSaved()) {
-				SubscriptionRestartBottomSheetDialogFragment fragment = new SubscriptionRestartBottomSheetDialogFragment();
-				fragment.setUsedOnMap(this instanceof MapActivity);
-				fragment.show(fragmentManager, SubscriptionRestartBottomSheetDialogFragment.TAG);
-			}
 		}
 		onInAppPurchaseItemPurchased(sku);
 		fireInAppPurchaseItemPurchasedOnFragments(fragmentManager, sku, active);
-		if (purchaseHelper != null && purchaseHelper.getFullVersion().getSku().equals(sku)) {
+		InAppPurchase fullVersion = purchaseHelper != null ? purchaseHelper.getFullVersion() : null;
+		if (fullVersion != null && fullVersion.getSku().equals(sku)) {
 			if (!(this instanceof MapActivity)) {
 				finish();
 			}
@@ -244,7 +237,7 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 	}
 
 	public void fireInAppPurchaseDismissProgressOnFragments(@NonNull FragmentManager fragmentManager,
-														 InAppPurchaseTaskType taskType) {
+															InAppPurchaseTaskType taskType) {
 		List<Fragment> fragments = fragmentManager.getFragments();
 		for (Fragment f : fragments) {
 			if (f instanceof InAppPurchaseListener && f.isAdded()) {

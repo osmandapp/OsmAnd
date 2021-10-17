@@ -1,23 +1,32 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.LocationConvert;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.ShareDialog;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -27,12 +36,14 @@ import java.util.Locale;
 
 public class ShareMenu extends BaseMenuController {
 
+	private static final String KEY_SHARE_MENU_LATLON = "key_share_menu_latlon";
+	private static final String KEY_SHARE_MENU_POINT_TITLE = "key_share_menu_point_title";
+	private static final String ZXING_BARCODE_SCANNER_COMPONENT = "com.google.zxing.client.android";
+	private static final String ZXING_BARCODE_SCANNER_ACTIVITY = "com.google.zxing.client.android.ENCODE";
+
 	private LatLon latLon;
 	private String title;
 	private String address;
-
-	private static final String KEY_SHARE_MENU_LATLON = "key_share_menu_latlon";
-	private static final String KEY_SHARE_MENU_POINT_TITLE = "key_share_menu_point_title";
 
 	public enum ShareItem {
 		MESSAGE(R.drawable.ic_action_message, R.string.shared_string_send),
@@ -85,9 +96,7 @@ public class ShareMenu extends BaseMenuController {
 	}
 
 	public static void show(LatLon latLon, String title, String address, @NonNull MapActivity mapActivity) {
-
 		ShareMenu menu = new ShareMenu(mapActivity);
-
 		menu.latLon = latLon;
 		menu.title = title;
 		menu.address = address;
@@ -122,14 +131,14 @@ public class ShareMenu extends BaseMenuController {
 		String sms = sb.toString();
 		switch (item) {
 			case MESSAGE:
-				ShareDialog.sendMessage(mapActivity, sms);
+				sendMessage(mapActivity, sms);
 				break;
 			case CLIPBOARD:
-				ShareDialog.sendToClipboard(mapActivity, sms);
+				copyToClipboardWithToast(mapActivity, sms, Toast.LENGTH_LONG);
 				break;
 			case ADDRESS:
 				if (!Algorithms.isEmpty(address)) {
-					ShareDialog.sendToClipboard(mapActivity, address);
+					copyToClipboardWithToast(mapActivity, address, Toast.LENGTH_LONG);
 				} else {
 					Toast.makeText(mapActivity,
 							R.string.no_address_found,
@@ -138,7 +147,7 @@ public class ShareMenu extends BaseMenuController {
 				break;
 			case NAME:
 				if (!Algorithms.isEmpty(title)) {
-					ShareDialog.sendToClipboard(mapActivity, title);
+					copyToClipboardWithToast(mapActivity, title, Toast.LENGTH_LONG);
 				} else {
 					Toast.makeText(mapActivity,
 							R.string.toast_empty_name_error,
@@ -148,18 +157,18 @@ public class ShareMenu extends BaseMenuController {
 			case COORDINATES:
 				OsmandSettings st = ((OsmandApplication) mapActivity.getApplicationContext()).getSettings();
 				int f = st.COORDINATES_FORMAT.get();
-				ShareDialog.sendToClipboard(mapActivity,
-						OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), f));
+				String coordinates = OsmAndFormatter.getFormattedCoordinates(latLon.getLatitude(), latLon.getLongitude(), f);
+				copyToClipboardWithToast(mapActivity, coordinates, Toast.LENGTH_LONG);
 				break;
 			case GEO:
 				Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUrl));
-				mapActivity.startActivity(mapIntent);
+				AndroidUtils.startActivityIfSafe(mapActivity, mapIntent);
 				break;
 			case QR_CODE:
 				Bundle bundle = new Bundle();
 				bundle.putFloat("LAT", (float) latLon.getLatitude());
 				bundle.putFloat("LONG", (float) latLon.getLongitude());
-				ShareDialog.sendQRCode(mapActivity, "LOCATION_TYPE", bundle, null);
+				sendQRCode(mapActivity, "LOCATION_TYPE", bundle, null);
 				break;
 		}
 	}
@@ -170,16 +179,100 @@ public class ShareMenu extends BaseMenuController {
 	}
 
 	public static ShareMenu restoreMenu(Bundle bundle, MapActivity mapActivity) {
-
 		ShareMenu menu = new ShareMenu(mapActivity);
-
 		menu.title = bundle.getString(KEY_SHARE_MENU_POINT_TITLE);
 		Object latLonObj = bundle.getSerializable(KEY_SHARE_MENU_LATLON);
 		if (latLonObj != null) {
 			menu.latLon = (LatLon) latLonObj;
 		}
-
 		return menu;
 	}
 
+	public static void sendSms(Activity activity, String sms) {
+		Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+		sendIntent.putExtra("sms_body", sms);
+		sendIntent.setType("vnd.android-dir/mms-sms");
+		AndroidUtils.startActivityIfSafe(activity, sendIntent);
+	}
+
+	public static void sendEmail(Activity activity, String email) {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("vnd.android.cursor.dir/email");
+		intent.putExtra(Intent.EXTRA_SUBJECT, "Location");
+		intent.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(email));
+		intent.setType("text/html");
+		Intent chooserIntent = Intent.createChooser(intent, activity.getString(R.string.send_location));
+		AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
+	}
+
+	public static void sendMessage(Activity activity, String text) {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setAction(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_TEXT, text);
+		intent.setType("text/plain");
+		Intent chooserIntent = Intent.createChooser(intent, activity.getString(R.string.send_location));
+		AndroidUtils.startActivityIfSafe(activity, intent, chooserIntent);
+	}
+
+	public static void sendQRCode(final Activity activity, String encodeType, Bundle encodeData, String strEncodeData) {
+		Intent intent = new Intent();
+		intent.addCategory(Intent.CATEGORY_DEFAULT);
+		intent.setAction(ZXING_BARCODE_SCANNER_ACTIVITY);
+		ResolveInfo resolved = activity.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY);
+		if (resolved != null) {
+			intent.putExtra("ENCODE_TYPE", encodeType);
+			if (strEncodeData != null) {
+				intent.putExtra("ENCODE_DATA", strEncodeData);
+			} else {
+				intent.putExtra("ENCODE_DATA", encodeData);
+			}
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+			AndroidUtils.startActivityIfSafe(activity, intent);
+		} else {
+			if (Version.isMarketEnabled()) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+				builder.setMessage(activity.getString(R.string.zxing_barcode_scanner_not_found));
+				builder.setPositiveButton(activity.getString(R.string.shared_string_yes), (dialog, which) -> {
+					OsmandApplication app = ((OsmandApplication) activity.getApplication());
+					Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, ZXING_BARCODE_SCANNER_COMPONENT));
+					Intent viewIntent = new Intent(Intent.ACTION_VIEW, uri);
+					AndroidUtils.startActivityIfSafe(activity, viewIntent);
+				});
+				builder.setNegativeButton(activity.getString(R.string.shared_string_no), null);
+				builder.show();
+			} else {
+				Toast.makeText(activity, R.string.zxing_barcode_scanner_not_found, Toast.LENGTH_LONG).show();
+			}
+		}
+	}
+
+	public static void copyToClipboardWithToast(@NonNull Context context, @NonNull String text, int duration) {
+		copyToClipboard(context, text, true, duration);
+	}
+
+	/**
+	 * @return true if text was copied
+	 */
+	public static boolean copyToClipboard(@NonNull Context context, @NonNull String text) {
+		return copyToClipboard(context, text, false, -1);
+	}
+
+	/**
+	 * @return true if text was copied
+	 */
+	private static boolean copyToClipboard(@NonNull Context context, @NonNull String text,
+										   boolean showToast, int duration) {
+		Object object = context.getSystemService(Activity.CLIPBOARD_SERVICE);
+		if (object instanceof ClipboardManager) {
+			ClipboardManager clipboardManager = (ClipboardManager) object;
+			clipboardManager.setPrimaryClip(ClipData.newPlainText("", text));
+			if (showToast) {
+				String toastMessage = context.getString(R.string.copied_to_clipboard) + ":\n" + text;
+				Toast.makeText(context, toastMessage, duration).show();
+			}
+			return true;
+		}
+		return false;
+	}
 }

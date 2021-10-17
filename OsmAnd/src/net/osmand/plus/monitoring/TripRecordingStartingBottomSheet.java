@@ -1,6 +1,5 @@
 package net.osmand.plus.monitoring;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -8,14 +7,9 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.slider.RangeSlider;
 
@@ -24,7 +18,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.base.SideMenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
@@ -33,14 +27,19 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
+
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
-import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createItemActive;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createItem;
+import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createItemActive;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.createShowTrackItem;
 import static net.osmand.plus.monitoring.TripRecordingBottomSheet.updateTrackIcon;
 
-public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragment {
+public class TripRecordingStartingBottomSheet extends SideMenuBottomSheetDialogFragment {
 
 	public static final String TAG = TripRecordingStartingBottomSheet.class.getSimpleName();
 	public static final String UPDATE_LOGGING_INTERVAL = "update_logging_interval";
@@ -71,7 +70,6 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 				showInstance(fragmentManager);
 			} else {
 				startRecording(app);
-				TripRecordingBottomSheet.showInstance(fragmentManager);
 			}
 		}
 	}
@@ -113,36 +111,43 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 				});
 
 		updateUpDownBtn();
+	}
 
-		CardView cardLeft = itemView.findViewById(R.id.button_left);
-		createItem(app, nightMode, cardLeft, ItemType.CANCEL, true, null);
-		cardLeft.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dismiss();
-			}
-		});
+	@Override
+	protected void setupBottomButtons(ViewGroup view) {
+		LayoutInflater themedInflater = UiUtilities.getInflater(view.getContext(), nightMode);
+		int contentPadding = getDimen(R.dimen.content_padding);
+		int topPadding = getDimen(R.dimen.context_menu_first_line_top_margin);
+		View buttonsContainer = themedInflater.inflate(R.layout.preference_button_with_icon_triple, null);
+		buttonsContainer.setPadding(contentPadding, topPadding, contentPadding, contentPadding);
+		view.addView(buttonsContainer);
 
-		CardView cardCenter = itemView.findViewById(R.id.button_center);
-		createItemActive(app, nightMode, cardCenter, ItemType.START_RECORDING);
-		cardCenter.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				startRecording();
-			}
-		});
+		setupCancelButton(buttonsContainer);
+		setupStartButton(buttonsContainer);
+		setupSettingsButton(buttonsContainer);
+	}
 
-		CardView cardRight = itemView.findViewById(R.id.button_right);
-		createItem(app, nightMode, cardRight, ItemType.SETTINGS, true, null);
-		cardRight.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					hide();
-					BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS,
-							null, new Bundle(), TripRecordingStartingBottomSheet.this);
-				}
+	private void setupCancelButton(View buttonsContainer) {
+		CardView cancelButton = buttonsContainer.findViewById(R.id.button_left);
+		createItem(app, nightMode, cancelButton, ItemType.CANCEL, true, null);
+		cancelButton.setOnClickListener(v -> dismiss());
+	}
+
+	private void setupStartButton(View buttonsContainer) {
+		CardView startButton = buttonsContainer.findViewById(R.id.button_center);
+		createItemActive(app, nightMode, startButton, ItemType.START_RECORDING);
+		startButton.setOnClickListener(v -> startRecording());
+	}
+
+	private void setupSettingsButton(View buttonsContainer) {
+		CardView settingsButton = buttonsContainer.findViewById(R.id.button_right);
+		createItem(app, nightMode, settingsButton, ItemType.SETTINGS, true, null);
+		settingsButton.setOnClickListener(v -> {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				hide();
+				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.MONITORING_SETTINGS,
+						null, new Bundle(), TripRecordingStartingBottomSheet.this);
 			}
 		});
 	}
@@ -249,15 +254,6 @@ public class TripRecordingStartingBottomSheet extends MenuBottomSheetDialogFragm
 		if (dialog != null) {
 			dialog.hide();
 		}
-	}
-
-	@Nullable
-	public MapActivity getMapActivity() {
-		Activity activity = getActivity();
-		if (activity instanceof MapActivity) {
-			return (MapActivity) activity;
-		}
-		return null;
 	}
 
 	@Override

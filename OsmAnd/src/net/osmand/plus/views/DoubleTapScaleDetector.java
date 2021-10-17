@@ -45,7 +45,7 @@ public class DoubleTapScaleDetector {
 		displayHeightPx = tileBox.getPixHeight();
 		zoomCenter = new PointF(centerScreen.x, centerScreen.y);
 
-		final ViewConfiguration configuration = ViewConfiguration.get(view.getContext());
+		final ViewConfiguration configuration = ViewConfiguration.get(view.getMapActivity());
 		int touchSlop = configuration.getScaledTouchSlop();
 		mTouchSlopSquare = touchSlop * touchSlop;
 		int doubleTapSlop = (int) (configuration.getScaledDoubleTapSlop() * 0.5);

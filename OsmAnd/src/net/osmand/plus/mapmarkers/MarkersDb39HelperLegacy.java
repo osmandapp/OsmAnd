@@ -52,7 +52,7 @@ public class MarkersDb39HelperLegacy {
 	public void migrateMarkersGroups() {
 		List<MapMarkersGroup> markersGroups = loadGroupsLegacy();
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-		markersHelper.getDataHelper().saveGroups(markersGroups);
+		markersHelper.getDataHelper().saveGroups(markersGroups, null);
 	}
 
 	public List<MapMarkersGroup> loadGroupsLegacy() {

@@ -46,8 +46,10 @@ import net.osmand.plus.myplaces.GPXItemPagerAdapter;
 import net.osmand.plus.views.layers.GPXLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarView;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
 import net.osmand.plus.widgets.popup.PopUpMenuItem;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -224,7 +226,7 @@ public class TrackDetailsMenu {
 		if (mapActivity != null && gpxItem != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			GPXFile groupGpx = gpxItem.group.getGpx();
-			if (groupGpx != null && !gpxItem.route) {
+			if (groupGpx != null && gpxItem.chartPointLayer == ChartPointLayer.GPX) {
 				gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(groupGpx.path) == null;
 				app.getSelectedGpxHelper().setGpxFileToDisplay(groupGpx);
 			}
@@ -267,7 +269,8 @@ public class TrackDetailsMenu {
 		GpxDisplayItem gpxItem = getGpxItem();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (gpxItem != null && !gpxItem.route && gpxItem.wasHidden && gpxItem.group != null && gpxItem.group.getGpx() != null) {
+			if (gpxItem != null && gpxItem.chartPointLayer == ChartPointLayer.GPX && gpxItem.wasHidden
+					&& gpxItem.group != null && gpxItem.group.getGpx() != null) {
 				mapActivity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpxItem.group.getGpx(), false, false);
 			}
 			TrackDetailsBarController toolbarController = this.toolbarController;
@@ -278,7 +281,7 @@ public class TrackDetailsMenu {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
 			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
 			mapActivity.getMapView().setMapPositionX(0);
-			mapActivity.getMapView().refreshMap();
+			mapActivity.refreshMap();
 		}
 		if (hidding) {
 			hidding = false;
@@ -311,60 +314,29 @@ public class TrackDetailsMenu {
 
 	@Nullable
 	private LatLon getLocationAtPos(LineChart chart, float pos) {
-		LatLon latLon = null;
+		WptPt point = null;
 		LineData lineData = chart.getLineData();
 		List<ILineDataSet> ds = lineData != null ? lineData.getDataSets() : null;
 		GpxDisplayItem gpxItem = getGpxItem();
-		if (ds != null && ds.size() > 0 && gpxItem != null) {
+		if (!Algorithms.isEmpty(ds) && gpxItem != null) {
 			TrkSegment segment = getTrackSegment(chart);
 			if (segment == null) {
 				return null;
 			}
 			OrderedLineDataSet dataSet = (OrderedLineDataSet) ds.get(0);
+			GPXFile gpxFile = gpxItem.group.getGpx();
+			boolean joinSegments = selectedGpxFile != null && selectedGpxFile.isJoinSegments();
 			if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME ||
 					gpxItem.chartAxisType == GPXDataSetAxisType.TIMEOFDAY) {
 				float time = pos * 1000;
-				WptPt previousPoint = null;
-				for (WptPt currentPoint : segment.points) {
-					long totalTime = currentPoint.time - gpxItem.analysis.startTime;
-					if (totalTime >= time) {
-						if (previousPoint != null) {
-							double percent = 1 - (totalTime - time) / (currentPoint.time - previousPoint.time);
-							double dLat = (currentPoint.lat - previousPoint.lat) * percent;
-							double dLon = (currentPoint.lon - previousPoint.lon) * percent;
-							latLon = new LatLon(previousPoint.lat + dLat, previousPoint.lon + dLon);
-						} else {
-							latLon = new LatLon(currentPoint.lat, currentPoint.lon);
-						}
-						break;
-					}
-					previousPoint = currentPoint;
-				}
+				point = GpxUiHelper.getSegmentPointByTime(segment, gpxFile, time, true, joinSegments);
 			} else {
 				float distance = pos * dataSet.getDivX();
-				double totalDistance = 0;
-				WptPt previousPoint = null;
-				for (int i = 0; i < segment.points.size(); i++) {
-					WptPt currentPoint = segment.points.get(i);
-					if (previousPoint != null) {
-						totalDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, currentPoint.lat, currentPoint.lon);
-					}
-					if (currentPoint.distance >= distance || totalDistance >= distance) {
-						if (previousPoint != null && currentPoint.distance >= distance) {
-							double percent = 1 - (totalDistance - distance) / (currentPoint.distance - previousPoint.distance);
-							double dLat = (currentPoint.lat - previousPoint.lat) * percent;
-							double dLon = (currentPoint.lon - previousPoint.lon) * percent;
-							latLon = new LatLon(previousPoint.lat + dLat, previousPoint.lon + dLon);
-						} else {
-							latLon = new LatLon(currentPoint.lat, currentPoint.lon);
-						}
-						break;
-					}
-					previousPoint = currentPoint;
-				}
+				point = GpxUiHelper.getSegmentPointByDistance(segment, gpxFile, distance, true,
+						joinSegments);
 			}
 		}
-		return latLon;
+		return point == null ? null : new LatLon(point.lat, point.lon);
 	}
 
 	private QuadRect getRect(LineChart chart, float startPos, float endPos) {
@@ -528,10 +500,12 @@ public class TrackDetailsMenu {
 		if (shouldShowXAxisPoints()) {
 			trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
 		}
-		if (gpxItem.route) {
-			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
-		} else {
+		if (gpxItem.chartPointLayer == ChartPointLayer.ROUTE) {
+			mapActivity.getMapLayers().getRouteLayer().setTrackChartPoints(trackChartPoints);
+		} else if (gpxItem.chartPointLayer == ChartPointLayer.GPX) {
 			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
+		} else if (gpxItem.chartPointLayer == ChartPointLayer.MEASUREMENT_TOOL) {
+			mapActivity.getMapLayers().getMeasurementToolLayer().setTrackChartPoints(trackChartPoints);
 		}
 		if (location != null) {
 			mapActivity.refreshMap();
@@ -880,6 +854,12 @@ public class TrackDetailsMenu {
 		}
 	}
 
+	public enum ChartPointLayer {
+		GPX,
+		ROUTE,
+		MEASUREMENT_TOOL
+	}
+
 	private static class TrackDetailsBarController extends TopToolbarController {
 
 		TrackDetailsBarController() {
@@ -894,9 +874,9 @@ public class TrackDetailsMenu {
 		}
 
 		@Override
-		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
+		public void updateToolbar(TopToolbarView view) {
 			super.updateToolbar(view);
-			view.getShadowView().setVisibility(View.GONE);
+			AndroidUiHelper.updateVisibility(view.getShadowView(), false);
 		}
 
 		@Override

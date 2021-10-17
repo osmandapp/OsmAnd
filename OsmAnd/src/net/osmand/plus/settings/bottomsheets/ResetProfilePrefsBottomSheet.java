@@ -8,11 +8,11 @@ import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import net.osmand.plus.profiles.ProfileDataUtils;
+import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -41,7 +41,7 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 		int colorNoAlpha = mode.getProfileColor(nightMode);
 
 		Drawable backgroundIcon = UiUtilities.getColoredSelectableDrawable(ctx, colorNoAlpha, 0.3f);
-		Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.10f)), backgroundIcon};
+		Drawable[] layers = {new ColorDrawable(ColorUtilities.getColorWithAlpha(colorNoAlpha, 0.10f)), backgroundIcon};
 
 		BaseBottomSheetItem profileItem = new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(true)

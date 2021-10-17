@@ -1,5 +1,11 @@
 package net.osmand.plus.poi;
 
+import static net.osmand.plus.poi.PoiUIFilter.CUSTOM_FILTER_ID;
+import static net.osmand.plus.poi.PoiUIFilter.USER_PREFIX;
+import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.DESCRIPTION;
+import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.POI;
+import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.SPACE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -34,13 +40,14 @@ import com.google.android.material.snackbar.Snackbar;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.search.listitems.QuickSearchListItem;
-import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import org.apache.commons.logging.Log;
@@ -50,12 +57,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-
-import static net.osmand.plus.poi.PoiUIFilter.CUSTOM_FILTER_ID;
-import static net.osmand.plus.poi.PoiUIFilter.USER_PREFIX;
-import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.DESCRIPTION;
-import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.POI;
-import static net.osmand.plus.poi.RearrangePoiFiltersFragment.ItemType.SPACE;
 
 public class RearrangePoiFiltersFragment extends DialogFragment implements SelectAppModesBottomSheetDialogFragment.AppModeChangedListener {
 
@@ -318,7 +319,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 			int iconColor = getSelectedAppMode().getProfileColor(nightMode);
 			int bgColor = ContextCompat.getColor(app, nightMode ?
 					R.color.divider_color_dark : R.color.active_buttons_and_links_text_light);
-			int selectedColor = UiUtilities.getColorWithAlpha(iconColor, 0.3f);
+			int selectedColor = ColorUtilities.getColorWithAlpha(iconColor, 0.3f);
 
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 				int bgResId = R.drawable.circle_background_light;
@@ -465,7 +466,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 			if (iconRes != null && RenderingIcons.containsBigIcon(iconRes)) {
 				poiInfo.iconRes = RenderingIcons.getBigIconResourceId(iconRes);
 			} else {
-				poiInfo.iconRes = R.drawable.mx_user_defined;
+				poiInfo.iconRes = R.drawable.mx_special_custom_category;
 			}
 			poiInfo.isActive = !availableFiltersKeys.contains(filterId);
 			list.add(new ListItem(POI, poiInfo));
@@ -612,7 +613,7 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		public void onBindViewHolder(final @NonNull RecyclerView.ViewHolder holder, int position) {
 			ListItem item = items.get(position);
 			boolean nightMode = isNightMode(app, usedOnMap);
-			int activeColorResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			int activeColorResId = ColorUtilities.getActiveColorId(nightMode);
 			if (holder instanceof PoiViewHolder) {
 				PoiViewHolder h = (PoiViewHolder) holder;
 				PoiUIFilterDataObject poiInfo = (PoiUIFilterDataObject) item.value;
@@ -745,11 +746,9 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		}
 
 		private class DividerViewHolder extends RecyclerView.ViewHolder implements ReorderItemTouchHelperCallback.UnmovableItem {
-			View divider;
 
 			public DividerViewHolder(View itemView) {
 				super(itemView);
-				divider = itemView.findViewById(R.id.divider);
 			}
 
 			@Override
@@ -817,12 +816,10 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 		private class PoiViewHolder extends RecyclerView.ViewHolder implements ReorderItemTouchHelperCallback.UnmovableItem {
 
 			private TextView title;
-			private TextView description;
 			private ImageView icon;
 			private ImageView actionIcon;
 			private ImageView actionDelete;
 			private ImageView moveIcon;
-			private View itemsContainer;
 
 			public PoiViewHolder(View itemView) {
 				super(itemView);
@@ -831,7 +828,6 @@ public class RearrangePoiFiltersFragment extends DialogFragment implements Selec
 				actionDelete = itemView.findViewById(R.id.action_delete);
 				icon = itemView.findViewById(R.id.icon);
 				moveIcon = itemView.findViewById(R.id.move_icon);
-				itemsContainer = itemView.findViewById(R.id.selectable_list_item);
 			}
 
 			@Override

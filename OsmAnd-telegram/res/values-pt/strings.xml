@@ -30,7 +30,7 @@
     <string name="shared_string_add">Adicionar</string>
     <string name="shared_string_hide">Ocultar</string>
     <string name="shared_string_later">Mais tarde</string>
-    <string name="shared_string_status">Situação</string>
+    <string name="shared_string_status">Estado</string>
     <string name="shared_string_sort_by">Ordenar por</string>
     <string name="shared_string_end">Fim</string>
     <string name="shared_string_start">Iniciar</string>
@@ -60,7 +60,7 @@
     <string name="timeline_description">Ative a monitorização para gravar todos os locais no histórico.</string>
     <string name="privacy_policy_use_telegram">O Telegram (a aplicação de mensagens) é usado para conectar e comunicar com outras pessoas.</string>
     <string name="privacy_policy_telegram_client">OsmAnd Tracker é um dos clientes que usam a Plataforma aberta do Telegram. Os seus contactos podem usar qualquer outro cliente Telegram.</string>
-    <string name="privacy_policy_agree">Ao clicar em \"Continuar\" concorda com as condições da política de privacidade do Telegram e OsmAnd.</string>
+    <string name="privacy_policy_agree">Ao pressionar o botão \"Continuar\" concorda com as condições da política de privacidade do Telegram e OsmAnd.</string>
     <string name="shared_string_accept">Aceitar</string>
     <string name="telegram_privacy_policy">Política de privacidade do Telegram</string>
     <string name="osmand_privacy_policy">Política de privacidade do OsmAnd</string>
@@ -267,7 +267,7 @@
     <string name="last_response_date">Última resposta: %1$s</string>
     <string name="last_update_from_telegram_date">Última atualização do Telegram: %1$s</string>
     <string name="shared_string_error_short">ERR</string>
-    <string name="send_report">Enviar o relatório</string>
+    <string name="send_report">Enviar relatório</string>
     <string name="shared_string_export">Exportar</string>
     <string name="logcat_buffer">Buffer de logcat</string>
     <string name="logcat_buffer_descr">Verifique e partilhe registos detalhados da aplicação</string>

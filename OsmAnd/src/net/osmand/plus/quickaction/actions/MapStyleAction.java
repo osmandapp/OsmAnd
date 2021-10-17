@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 
@@ -49,6 +50,11 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
+	public String getDisabledItem(OsmandApplication app) {
+		return null;
+	}
+
+	@Override
 	public String getSelectedItem(OsmandApplication app) {
 		return app.getSettings().RENDERER.get();
 	}
@@ -70,37 +76,37 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 		List<String> mapStyles = getFilteredStyles();
 		if (!Algorithms.isEmpty(mapStyles)) {
 			boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 			if (showBottomSheetStyles) {
-				showChooseDialog(activity.getSupportFragmentManager());
+				showChooseDialog(mapActivity.getSupportFragmentManager());
 				return;
 			}
-			String nextStyle = getNextSelectedItem(activity.getMyApplication());
-			executeWithParams(activity, nextStyle);
+			String nextStyle = getNextSelectedItem(mapActivity.getMyApplication());
+			executeWithParams(mapActivity, nextStyle);
 		} else {
-			Toast.makeText(activity, R.string.quick_action_need_to_add_item_to_list,
+			Toast.makeText(mapActivity, R.string.quick_action_need_to_add_item_to_list,
 					Toast.LENGTH_LONG).show();
 		}
 	}
 
 	@Override
-	public void executeWithParams(MapActivity activity, String params) {
-		OsmandApplication app = activity.getMyApplication();
+	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
+		OsmandApplication app = mapActivity.getMyApplication();
 		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(params);
 		if (loaded != null) {
-			OsmandMapTileView view = activity.getMapView();
+			OsmandMapTileView view = mapActivity.getMapView();
 			view.getSettings().RENDERER.set(params);
 
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
-			activity.refreshMapComplete();
+			mapActivity.refreshMapComplete();
 
-			Toast.makeText(activity, activity.getString(R.string.quick_action_map_style_switch,
-					getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
+			Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_style_switch,
+					getTranslatedItemName(mapActivity, params)), Toast.LENGTH_SHORT).show();
 		} else {
-			Toast.makeText(activity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+			Toast.makeText(mapActivity, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -112,7 +118,7 @@ public class MapStyleAction extends SwitchableAction<String> {
 	public List<String> getFilteredStyles() {
 
 		List<String> filtered = new ArrayList<>();
-		boolean enabled = OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) != null;
+		boolean enabled = OsmandPlugin.isActive(NauticalMapsPlugin.class);
 
 		if (enabled) return loadListFromParams();
 		else {
@@ -212,9 +218,9 @@ public class MapStyleAction extends SwitchableAction<String> {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-		return super.fillParams(root, activity);
+		return super.fillParams(root, mapActivity);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package net.osmand.plus.routepreparationmenu;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -20,12 +18,12 @@ import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -36,6 +34,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.CustomizeRouteLineRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DividerItem;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.GpxLocalRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
@@ -54,6 +53,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ElevationDateBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.VoiceLanguageBottomSheetFragment;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.util.Algorithms;
@@ -153,13 +153,13 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		voiceMuteChangeListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				updateWhenMuteChanged();
+				app.runInUIThread(() -> updateWhenMuteChanged());
 			}
 		};
 		useHeightChangeListener = new StateChangedListener<Boolean>() {
 			@Override
 			public void stateChanged(Boolean change) {
-				updateWhenUseHeightChanged();
+				app.runInUIThread(() -> updateWhenUseHeightChanged());
 			}
 		};
 		useHeightPref = settings.getCustomRoutingBooleanProperty(USE_HEIGHT_OBSTACLES, false);
@@ -168,7 +168,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		items.add(new TitleItem(app.getString(R.string.shared_string_settings), nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+		items.add(new TitleItem(app.getString(R.string.shared_string_settings), ColorUtilities.getActiveColorId(nightMode)));
 
 		List<LocalRoutingParameter> list = getRoutingParameters(applicationMode);
 		for (final LocalRoutingParameter optionsItem : list) {
@@ -196,6 +196,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				items.add(createTimeConditionalRoutingItem(optionsItem));
 			} else if (optionsItem instanceof OtherSettingsRoutingParameter) {
 				items.add(createOtherSettingsRoutingItem(optionsItem));
+			} else if (optionsItem instanceof CustomizeRouteLineRoutingParameter) {
+				items.add(createCustomizeRouteLineRoutingItem(optionsItem));
 			} else if (USE_HEIGHT_OBSTACLES.equals(optionsItem.getKey()) && hasReliefParameters()) {
 				items.add(inflateElevationParameter(optionsItem));
 			} else {
@@ -255,7 +257,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		boolean changedState = app.getSettings().VOICE_MUTE.getModeValue(applicationMode);
 		if (changedState != currentMuteState) {
 			currentMuteState = changedState;
-			updateParameters();
+			updateMenuItems();
 			updateMenu();
 		}
 	}
@@ -264,7 +266,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		boolean changedState = useHeightPref.getModeValue(applicationMode);
 		if (changedState != currentUseHeightState) {
 			currentUseHeightState = changedState;
-			updateParameters();
+			updateMenuItems();
 			updateMenu();
 		}
 	}
@@ -297,7 +299,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
 				String voiceProvider = app.getSettings().VOICE_PROVIDER.getModeValue(applicationMode);
 				if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-					OsmAndDialogs.showVoiceProviderDialog(mapActivity, applicationMode, false);
+					VoiceLanguageBottomSheetFragment.showInstance(mapActivity.getSupportFragmentManager(),
+							RouteOptionsBottomSheet.this, applicationMode, usedOnMap);
 				} else {
 					cb.setChecked(!active);
 					icon.setImageDrawable(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
@@ -317,7 +320,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		voicePromptsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.VOICE_ANNOUNCES);
+				BaseSettingsFragment.showInstance(mapActivity, SettingsScreenType.VOICE_ANNOUNCES, applicationMode);
 				dismiss();
 			}
 		});
@@ -504,10 +507,10 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		String description = null;
 		int descriptionColorId;
 		if (routeParamsBuilder == null) {
-			descriptionColorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
+			descriptionColorId = ColorUtilities.getSecondaryTextColorId(nightMode);
 			description = mapActivity.getString(R.string.follow_track_descr);
 		} else {
-			descriptionColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			descriptionColorId = ColorUtilities.getActiveColorId(nightMode);
 			GPXFile gpxFile = routeParamsBuilder.getFile();
 			if (!Algorithms.isEmpty(gpxFile.path)) {
 				description = new File(gpxFile.path).getName();
@@ -558,6 +561,22 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 					}
 				})
 				.create();
+	}
+
+	private BaseBottomSheetItem createCustomizeRouteLineRoutingItem(
+			final LocalRoutingParameter lineCustomizationItem) {
+		return new SimpleBottomSheetItem.Builder()
+				.setIcon(getContentIcon(lineCustomizationItem.getActiveIconId()))
+				.setTitle(getString(R.string.customize_route_line))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
+				.setOnClickListener(v -> {
+					if (mapActivity != null) {
+						MapRouteInfoMenu mapRouteInfoMenu = mapActivity.getMapRouteInfoMenu();
+						mapRouteInfoMenu.hide();
+						mapRouteInfoMenu.customizeRouteLine();
+						dismiss();
+					}
+				}).create();
 	}
 
 	private void inflateRoutingParameter(final LocalRoutingParameter parameter) {
@@ -712,24 +731,6 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		}
 	}
 
-	public void updateParameters() {
-		Activity activity = getActivity();
-		View mainView = getView();
-		if (activity != null && mainView != null) {
-			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
-					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
-			if (itemsContainer != null) {
-				itemsContainer.removeAllViews();
-			}
-			items.clear();
-			createMenuItems(null);
-			for (BaseBottomSheetItem item : items) {
-				item.inflate(activity, itemsContainer, nightMode);
-			}
-			setupHeightAndBackground(mainView);
-		}
-	}
-
 	public enum AppModeOptions {
 
 		CAR(MuteSoundRoutingParameter.KEY,
@@ -744,6 +745,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
 		BICYCLE(MuteSoundRoutingParameter.KEY,
@@ -757,6 +759,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
 		PEDESTRIAN(MuteSoundRoutingParameter.KEY,
@@ -768,6 +771,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
 		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY,
@@ -786,6 +790,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
 		STRAIGHT(MuteSoundRoutingParameter.KEY,
@@ -794,6 +799,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY),
 
 		DIRECT_TO(MuteSoundRoutingParameter.KEY,
@@ -802,6 +808,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
+				CustomizeRouteLineRoutingParameter.KEY,
 				RouteSimulationItem.KEY);
 
 

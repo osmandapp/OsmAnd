@@ -12,7 +12,7 @@
 	app:contentInsetStart="0dp"
 	app:contentInsetRight="0dp"
 	app:contentInsetEnd="0dp"
-	app:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+	android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -76,7 +76,9 @@
 
 		</LinearLayout>
 
-		<include layout="@layout/preference_toolbar_switch" />
+		<include
+			layout="@layout/preference_toolbar_switch"
+			tools:visibility="gone" />
 
 	</LinearLayout>
 

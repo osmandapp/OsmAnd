@@ -45,11 +45,7 @@ public class OsmOAuthHelper {
 	}
 
 	public void authorize(@NonNull String oauthVerifier) {
-		if (oauthVerifier != null) {
-			authorizationAdapter.authorize(oauthVerifier, this);
-		} else {
-			updateAdapter();
-		}
+		authorizationAdapter.authorize(oauthVerifier, this);
 	}
 
 	public void resetAuthorization() {
@@ -58,14 +54,15 @@ public class OsmOAuthHelper {
 			settings.OSM_USER_ACCESS_TOKEN_SECRET.resetToDefault();
 			authorizationAdapter.resetToken();
 		} else if (isLoginExists()) {
-			settings.OSM_USER_NAME.resetToDefault();
+			settings.OSM_USER_NAME_OR_EMAIL.resetToDefault();
 			settings.OSM_USER_PASSWORD.resetToDefault();
 		}
+		settings.MAPPER_LIVE_UPDATES_EXPIRE_TIME.resetToDefault();
 		updateAdapter();
 	}
 
 	private boolean isLoginExists() {
-		return !Algorithms.isEmpty(settings.OSM_USER_NAME.get()) && !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
+		return !Algorithms.isEmpty(settings.OSM_USER_NAME_OR_EMAIL.get()) && !Algorithms.isEmpty(settings.OSM_USER_PASSWORD.get());
 	}
 
 	public void notifyAndRemoveListeners() {

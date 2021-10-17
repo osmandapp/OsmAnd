@@ -7,9 +7,11 @@ import android.graphics.PointF;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.views.layers.geometry.GeometryWayDrawer.DrawPathData;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
 import net.osmand.util.MapUtils;
 
@@ -170,26 +172,37 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		}
 		GeometryWayProvider locationProvider = this.locationProvider;
 		int previous = -1;
+		int previousVisibleIdx = -1;
+		boolean ignorePrevious = false;
+
 		for (int i = startLocationIndex; i < locationProvider.getSize(); i++) {
 			style = getStyle(i, defaultWayStyle);
 			if (shouldSkipLocation(simplification, styleMap, i)) {
 				continue;
 			}
 			if (shouldAddLocation(simplification, leftLongitude, rightLongitude, bottomLatitude, topLatitude,
-					locationProvider, i)) {
+					locationProvider, previousVisibleIdx, i)) {
 				double dist = previous == -1 ? 0 : odistances.get(i);
-				if (!previousVisible) {
-					if (previous != -1) {
-						addLocation(tb, previous, style, tx, ty, angles, distances, dist, styles);
+				if (!previousVisible && !ignorePrevious) {
+					if (previous != -1 && !isPreviousPointFarAway(locationProvider, previous, i)) {
+						addLocation(tb, previous, dist, style, tx, ty, angles, distances, styles);
 					} else if (lastProjection != null) {
 						addLocation(tb, lastProjection.getLatitude(), lastProjection.getLongitude(),
-								getStyle(i - 1, style), tx, ty, angles, distances, dist, styles); // first point
+								dist, getStyle(i - 1, style), tx, ty, angles, distances, styles); // first point
 					}
 				}
-				addLocation(tb, i, style, tx, ty, angles, distances, dist, styles);
+				addLocation(tb, i, dist, style, tx, ty, angles, distances, styles);
 				previousVisible = true;
+				previousVisibleIdx = i;
+				ignorePrevious = false;
 			} else if (previousVisible) {
-				addLocation(tb, i, style, tx, ty, angles, distances, previous == -1 ? 0 : odistances.get(i), styles);
+				if (isPreviousPointFarAway(locationProvider, previousVisibleIdx, i)) {
+					ignorePrevious = true;
+					previousVisibleIdx = -1;
+				} else {
+					addLocation(tb, i, previous == -1 ? 0 : odistances.get(i), style, tx, ty, angles, distances, styles);
+					ignorePrevious = false;
+				}
 				double distToFinish = 0;
 				for (int ki = i + 1; ki < odistances.size(); ki++) {
 					distToFinish += odistances.get(ki);
@@ -207,23 +220,44 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 		return simplification.getQuick(locationIdx) == 0 && !styleMap.containsKey(locationIdx);
 	}
 
-	protected boolean shouldAddLocation(TByteArrayList simplification, double leftLon, double rightLon, double bottomLat,
-										double topLat, GeometryWayProvider provider, int currLocationIdx) {
+	protected boolean shouldAddLocation(TByteArrayList simplification, double leftLon, double rightLon,
+	                                    double bottomLat, double topLat, GeometryWayProvider provider,
+	                                    int previousVisible, int currLocationIdx) {
 		double lat = provider.getLatitude(currLocationIdx);
 		double lon = provider.getLongitude(currLocationIdx);
-		return leftLon <= lon && lon <= rightLon && bottomLat <= lat && lat <= topLat;
+		boolean insideOfBounds = leftLon <= lon && lon <= rightLon && bottomLat <= lat && lat <= topLat;
+		if (!insideOfBounds) {
+			return false;
+		} else if (previousVisible >= 0) {
+			double prevLon = provider.getLongitude(previousVisible);
+			boolean primeMeridianPoints = Math.max(prevLon, lon) == GPXUtilities.PRIME_MERIDIAN
+					&& Math.min(prevLon, lon) == -GPXUtilities.PRIME_MERIDIAN;
+			return !primeMeridianPoints;
+		} else {
+			return true;
+		}
 	}
 
-	protected void addLocation(RotatedTileBox tb, int locationIdx, GeometryWayStyle<?> style,
-							   List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances,
-							   double dist, List<GeometryWayStyle<?>> styles) {
+	private boolean isPreviousPointFarAway(GeometryWayProvider locations, int prevLocationIdx,
+	                                       int currLocationIdx) {
+		if (prevLocationIdx < 0) {
+			return false;
+		}
+		double prevLon = locations.getLongitude(prevLocationIdx);
+		double currLon = locations.getLongitude(currLocationIdx);
+		return Math.abs(currLon - prevLon) >= 180;
+	}
+
+	protected void addLocation(RotatedTileBox tb, int locationIdx, double dist, GeometryWayStyle<?> style,
+	                           List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances,
+	                           List<GeometryWayStyle<?>> styles) {
 		addLocation(tb, locationProvider.getLatitude(locationIdx), locationProvider.getLongitude(locationIdx),
-				style, tx, ty, angles, distances, dist, styles);
+				dist, style, tx, ty, angles, distances, styles);
 	}
 
-	protected void addLocation(RotatedTileBox tb, double latitude, double longitude, GeometryWayStyle<?> style,
-							 List<Float> tx, List<Float> ty, List<Double> angles, List<Double> distances,
-							 double dist, List<GeometryWayStyle<?>> styles) {
+	protected void addLocation(RotatedTileBox tb, double latitude, double longitude, double dist,
+	                           GeometryWayStyle<?> style, List<Float> tx, List<Float> ty,
+	                           List<Double> angles, List<Double> distances, List<GeometryWayStyle<?>> styles) {
 		float x = tb.getPixXFromLatLon(latitude, longitude);
 		float y = tb.getPixYFromLatLon(latitude, longitude);
 		float px = x;
@@ -251,10 +285,14 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 									  Location lastPoint, int startLocationIndex) {
 		if (leftLongitude <= lastPoint.getLongitude() && lastPoint.getLongitude() <= rightLongitude
 				&& bottomLatitude <= lastPoint.getLatitude() && lastPoint.getLatitude() <= topLatitude) {
-			addLocation(tb, lastPoint.getLatitude(), lastPoint.getLongitude(), style, tx, ty, angles, distances, 0, styles);
+			addLocation(tb, lastPoint.getLatitude(), lastPoint.getLongitude(), 0, style, tx, ty, angles, distances, styles);
 			previousVisible = true;
 		}
 		return previousVisible;
+	}
+
+	protected boolean shouldDrawArrows() {
+		return true;
 	}
 
 	private void clearArrays() {
@@ -380,29 +418,38 @@ public abstract class GeometryWay<T extends GeometryWayContext, D extends Geomet
 				canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 				calculatePath(tb, tx, ty, styles, pathsData);
 
-				drawer.drawFullBorder(canvas, tb.getZoom(), pathsData);
-				drawer.drawSegmentBorder(canvas, tb.getZoom(), pathsData.get(0));
-				for (int i = 1; i <= pathsData.size(); i++) {
-					if (i != pathsData.size()) {
-						DrawPathData prev = pathsData.get(i);
-						if (prev.style.hasPathLine()) {
-							drawer.drawSegmentBorder(canvas, tb.getZoom(), prev);
-						}
-					}
-
-					DrawPathData pd = pathsData.get(i - 1);
-					GeometryWayStyle<?> style = pd.style;
-					if (style.hasPathLine()) {
-						drawer.drawPath(canvas, pd);
-					}
+				if (!Algorithms.isEmpty(pathsData)) {
+					drawPathLine(canvas, tb, pathsData);
 				}
+
 				context.clearCustomColor();
 				context.clearCustomShader();
 			}
-			drawer.drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
+			if (shouldDrawArrows()) {
+				drawer.drawArrowsOverPath(canvas, tb, tx, ty, angles, distances, distToFinish, styles);
+			}
 		} finally {
 			if (hasPathLine) {
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+			}
+		}
+	}
+
+	private void drawPathLine(Canvas canvas, RotatedTileBox tb, List<DrawPathData> pathsData) {
+		drawer.drawFullBorder(canvas, tb.getZoom(), pathsData);
+		drawer.drawSegmentBorder(canvas, tb.getZoom(), pathsData.get(0));
+		for (int i = 1; i <= pathsData.size(); i++) {
+			if (i != pathsData.size()) {
+				DrawPathData prev = pathsData.get(i);
+				if (prev.style.hasPathLine()) {
+					drawer.drawSegmentBorder(canvas, tb.getZoom(), prev);
+				}
+			}
+
+			DrawPathData pd = pathsData.get(i - 1);
+			GeometryWayStyle<?> style = pd.style;
+			if (style.hasPathLine()) {
+				drawer.drawPath(canvas, pd);
 			}
 		}
 	}

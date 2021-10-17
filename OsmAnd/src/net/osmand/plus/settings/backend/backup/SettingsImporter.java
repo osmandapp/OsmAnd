@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.backend.backup.items.FileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONException;
@@ -52,7 +54,7 @@ class SettingsImporter {
 					try {
 						itemsJson = Algorithms.readFromInputStream(ois, false).toString();
 					} catch (IOException e) {
-						SettingsHelper.LOG.error("Error reading items.json: " + itemsJson, e);
+						SettingsHelper.LOG.error("Error reading items.json", e);
 						throw new IllegalArgumentException("No items");
 					} finally {
 						zis.closeEntry();
@@ -60,8 +62,10 @@ class SettingsImporter {
 					try {
 						SettingsItemsFactory itemsFactory = new SettingsItemsFactory(app, itemsJson);
 						List<SettingsItem> settingsItemList = itemsFactory.getItems();
-						updateFilesInfo(file, settingsItemList);
-						items.addAll(settingsItemList);
+						if (!settingsItemList.isEmpty()) {
+							updateFilesInfo(file, settingsItemList);
+							items.addAll(settingsItemList);
+						}
 					} catch (IllegalArgumentException e) {
 						SettingsHelper.LOG.error("Error parsing items: " + itemsJson, e);
 						throw new IllegalArgumentException("No items");
@@ -92,7 +96,7 @@ class SettingsImporter {
 						&& zipEntry.getName().equals(settingsItem.getFileName())) {
 					FileSettingsItem fileSettingsItem = (FileSettingsItem) settingsItem;
 					fileSettingsItem.setSize(size);
-					fileSettingsItem.setLastModified(zipEntry.getTime());
+					fileSettingsItem.setLastModifiedTime(zipEntry.getTime());
 					break;
 				}
 			}
@@ -103,10 +107,9 @@ class SettingsImporter {
 		boolean collecting = items == null;
 		if (collecting) {
 			items = getItemsFromJson(file);
-		} else {
-			if (items.size() == 0) {
-				throw new IllegalArgumentException("No items");
-			}
+		}
+		if (items.isEmpty()) {
+			throw new IllegalArgumentException("No items");
 		}
 		ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
 		InputStream ois = new BufferedInputStream(zis);
@@ -128,12 +131,9 @@ class SettingsImporter {
 						if (reader != null) {
 							reader.readFromStream(ois, fileName);
 						}
-						item.applyAdditionalParams();
-					} catch (IllegalArgumentException e) {
-						item.warnings.add(app.getString(R.string.settings_item_read_error, item.getName()));
-						SettingsHelper.LOG.error("Error reading item data: " + item.getName(), e);
-					} catch (IOException e) {
-						item.warnings.add(app.getString(R.string.settings_item_read_error, item.getName()));
+						item.applyAdditionalParams(reader);
+					} catch (IllegalArgumentException | IOException e) {
+						item.getWarnings().add(app.getString(R.string.settings_item_read_error, item.getName()));
 						SettingsHelper.LOG.error("Error reading item data: " + item.getName(), e);
 					} finally {
 						zis.closeEntry();

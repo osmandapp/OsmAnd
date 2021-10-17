@@ -10,11 +10,11 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -26,7 +26,7 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.util.List;
 
-public class TrackEditCard extends BaseCard {
+public class TrackEditCard extends MapBaseCard {
 
 	private final GPXFile gpxFile;
 
@@ -78,7 +78,7 @@ public class TrackEditCard extends BaseCard {
 		if (gpxFile.getNonEmptySegmentsCount() > 1 && routeParams != null && routeParams.getSelectedSegment() != -1) {
 			int selectedSegmentCount = routeParams.getSelectedSegment() + 1;
 			int totalSegmentCount = routeParams.getFile().getNonEmptyTrkSegments(false).size();
-			title = app.getResources().getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + title;
+			title = app.getString(R.string.of, selectedSegmentCount, totalSegmentCount) + ", " + title;
 		}
 		GpxUiHelper.updateGpxInfoView(view, title, gpxInfo, dataItem, false, app);
 
@@ -124,7 +124,7 @@ public class TrackEditCard extends BaseCard {
 		AndroidUtils.setPadding(container, listContentPadding, 0, 0, 0);
 
 		int activeColor = getActiveColor();
-		int bgColor = UiUtilities.getColorWithAlpha(activeColor, 0.1f);
+		int bgColor = ColorUtilities.getColorWithAlpha(activeColor, 0.1f);
 		view.setBackgroundDrawable(new ColorDrawable(bgColor));
 	}
 }

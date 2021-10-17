@@ -15,7 +15,7 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.MapActivityLayers;
+import net.osmand.plus.views.MapLayers;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
@@ -39,7 +39,7 @@ public class RasterMapMenu {
 										  final RasterMapType type) {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
-		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+		final OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		assert plugin != null;
 		final CommonPreference<Integer> mapTransparencyPreference;
 		final CommonPreference<String> mapTypePreference;
@@ -90,14 +90,14 @@ public class RasterMapMenu {
 						}
 					}
 				};
-		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
+		final MapLayers mapLayers = mapActivity.getMapLayers();
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
 										  View view, int itemId, int pos) {
 				if (itemId == mapTypeString) {
 					if (mapSelected) {
-						plugin.selectMapOverlayLayer(mapActivity.getMapView(), mapTypePreference,
+						plugin.selectMapOverlayLayer(mapTypePreference,
 								exMapTypePreference, true, mapActivity, onMapSelectedCallback);
 					}
 					return false;
@@ -123,7 +123,7 @@ public class RasterMapMenu {
 				} else if (itemId == R.string.show_transparency_seekbar) {
 					if (isChecked) {
 						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);
-						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference, true);
+						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
 					} else // if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == currentMapTypeSeekbarMode)
 					{
 						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OFF);
@@ -152,8 +152,8 @@ public class RasterMapMenu {
 						@Override
 						public boolean onIntegerValueChangedListener(int newValue) {
 							mapTransparencyPreference.set(newValue);
-							mapActivity.getMapLayers().getMapControlsLayer().updateTransparencySlider();
-							mapActivity.getMapView().refreshMap();
+							mapActivity.getMapLayers().getMapControlsLayer().updateTransparencySliderValue();
+							mapActivity.refreshMap();
 							return false;
 						}
 					};

@@ -78,7 +78,9 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 		descriptionTv = view.findViewById(R.id.description);
 		if (descriptionTv != null) {
 			changeDescriptionVisibility();
-			descriptionTv.setText(description);
+			if (description != null) {
+				descriptionTv.setText(description);
+			}
 			if (descriptionColorId != INVALID_ID) {
 				descriptionTv.setTextColor(ContextCompat.getColor(context, descriptionColorId));
 			}
@@ -92,7 +94,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	}
 
 	private void changeDescriptionVisibility() {
-		if (Algorithms.isEmpty(description)) {
+		if (Algorithms.isEmpty(description) && Algorithms.isEmpty(descriptionTv.getText())) {
 			descriptionTv.setVisibility(View.GONE);
 		} else {
 			descriptionTv.setVisibility(View.VISIBLE);

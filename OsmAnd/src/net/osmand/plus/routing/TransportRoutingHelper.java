@@ -12,6 +12,7 @@ import net.osmand.ValueHolder;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
+import net.osmand.map.WorldRegion;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -568,6 +569,10 @@ public class TransportRoutingHelper {
 				}
 
 				@Override
+				public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
+				}
+
+				@Override
 				public void finish() {
 					if (walkingSegmentsToCalculate.isEmpty()) {
 						walkingSegmentsCalculated = true;
@@ -580,7 +585,7 @@ public class TransportRoutingHelper {
 					}
 				}
 			};
-			params.resultListener = new RouteCalculationResultListener() {
+			params.alternateResultListener = new RouteCalculationResultListener() {
 				@Override
 				public void onRouteCalculated(RouteCalculationResult route) {
 					RouteRecalculationTask.this.walkingRouteSegments.put(new Pair<>(walkingRouteSegment.s1, walkingRouteSegment.s2), route);

@@ -1753,37 +1753,39 @@ public class OpeningHoursParser {
 		}
 		// recognize day of week
 		for (Token t : tokens) {
-			if(t.type == TokenType.TOKEN_UNKNOWN) {
+			if (t.type == TokenType.TOKEN_UNKNOWN) {
 				findInArray(t, daysStr, TokenType.TOKEN_DAY_WEEK);
 			}
-			if(t.type == TokenType.TOKEN_UNKNOWN) {
+			if (t.type == TokenType.TOKEN_UNKNOWN) {
 				findInArray(t, monthsStr, TokenType.TOKEN_MONTH);
 			}
-			if(t.type == TokenType.TOKEN_UNKNOWN) {
+			if (t.type == TokenType.TOKEN_UNKNOWN) {
 				findInArray(t, holidayStr, TokenType.TOKEN_HOLIDAY);
 			}
-			if(t.type == TokenType.TOKEN_UNKNOWN && ("off".equals(t.text) || "closed".equals(t.text))) {
+			if (t.type == TokenType.TOKEN_UNKNOWN && ("off".equals(t.text) || "closed".equals(t.text))) {
 				t.type = TokenType.TOKEN_OFF_ON;
 				t.mainNumber = 0;
 			}
-			if(t.type == TokenType.TOKEN_UNKNOWN && ("24/7".equals(t.text) || "open".equals(t.text))) {
+			if (t.type == TokenType.TOKEN_UNKNOWN && ("24/7".equals(t.text) || "open".equals(t.text))) {
 				t.type = TokenType.TOKEN_OFF_ON;
 				t.mainNumber = 1;
 			}
 		}
 		// recognize hours minutes ( Dec 25: 08:30-20:00)
-		for(int i = tokens.size() - 1; i >= 0; i --) {
-			if(tokens.get(i).type == TokenType.TOKEN_COLON) {
-				if(i > 0 && i < tokens.size() - 1) {
-					if(tokens.get(i - 1).type == TokenType.TOKEN_UNKNOWN && tokens.get(i - 1).mainNumber != -1 && 
-							tokens.get(i + 1).type == TokenType.TOKEN_UNKNOWN && tokens.get(i + 1).mainNumber != -1 ) {
+		for (int i = tokens.size() - 1; i > 0; i--) {
+			if (tokens.get(i).type == TokenType.TOKEN_COLON) {
+				if (i < tokens.size() - 1) {
+					if (tokens.get(i - 1).type == TokenType.TOKEN_UNKNOWN && tokens.get(i - 1).mainNumber != -1 &&
+							tokens.get(i + 1).type == TokenType.TOKEN_UNKNOWN && tokens.get(i + 1).mainNumber != -1) {
 						tokens.get(i).mainNumber = 60 * tokens.get(i - 1).mainNumber + tokens.get(i + 1).mainNumber;
 						tokens.get(i).type = TokenType.TOKEN_HOUR_MINUTES;
 						tokens.remove(i + 1);
 						tokens.remove(i - 1);
 					}
 				}
-				
+			} else if (tokens.get(i).type == TokenType.TOKEN_OFF_ON
+					&& tokens.get(i - 1).type == TokenType.TOKEN_OFF_ON) {
+				tokens.remove(i - 1);
 			}
 		}
 		// recognize other numbers
@@ -1999,7 +2001,7 @@ public class OpeningHoursParser {
 				!presentTokens.contains(TokenType.TOKEN_DAY_MONTH)) {
 			Arrays.fill(basic.getDays(), true);
 			basic.hasDays = true;
-		} else if (presentTokens.contains(TokenType.TOKEN_DAY_WEEK)) {
+		} else if (presentTokens.contains(TokenType.TOKEN_DAY_WEEK) || presentTokens.contains(TokenType.TOKEN_HOLIDAY)) {
 			basic.hasDays = true;
 		}
 		rules.add(0, basic);

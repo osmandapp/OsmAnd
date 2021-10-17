@@ -2,6 +2,7 @@ package net.osmand.plus.parkingpoint;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -13,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentManager;
 
@@ -193,18 +196,28 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayers(MapActivity activity) {
-		registerWidget(activity);
+	public void mapActivityPause(MapActivity activity) {
+		parkingPlaceControl = null;
 	}
 
 	@Override
-	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		if (mapActivity != null) {
+			registerWidget(mapActivity);
+		}
+	}
+
+	@Override
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		if (mapActivity == null) {
+			return;
+		}
 		if (isActive()) {
 			if (parkingPlaceControl == null) {
-				registerWidget(activity);
+				registerWidget(mapActivity);
 			}
 		} else {
-			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null && parkingPlaceControl != null) {
 				mapInfoLayer.removeSideWidget(parkingPlaceControl);
 				mapInfoLayer.recreateControls();
@@ -213,7 +226,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void registerWidget(MapActivity activity) {
+	private void registerWidget(@NonNull MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null) {
 			parkingPlaceControl = createParkingPlaceInfoControl(activity);
@@ -224,9 +237,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerMapContextMenuActions(final MapActivity mapActivity,
-			final double latitude, final double longitude,
-			ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
+	public void registerMapContextMenuActions(@NonNull final MapActivity mapActivity,
+											  final double latitude, final double longitude,
+											  ContextMenuAdapter adapter, Object selectedObj, boolean configureMenu) {
 
 		ItemClickListener addListener = new ItemClickListener() {
 			@Override
@@ -369,9 +382,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				cal.add(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
 				cal.add(Calendar.MINUTE, timePicker.getCurrentMinute());
 				setParkingTime(cal.getTimeInMillis());
+				app.getFavorites().setParkingPoint(getParkingPosition(), null, getParkingTime(), isParkingEventAdded());
 				CheckBox addCalendarEvent = (CheckBox) setTimeParking.findViewById(R.id.check_event_in_calendar);
 				if (addCalendarEvent.isChecked()) {
-					addCalendarEvent(setTimeParking);
+					addCalendarEvent(setTimeParking.getContext());
 					addOrRemoveParkingEvent(true);
 				} else {
 					addOrRemoveParkingEvent(false);
@@ -385,16 +399,16 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	
 	/**
 	 * Opens a Calendar app with added notification to pick up the car from time-limited parking.
-	 * @param view
+	 * @param context
 	 */
-	private void addCalendarEvent(View view) { 
+	public void addCalendarEvent(final Context context) {
 		Intent intent = new Intent(Intent.ACTION_EDIT);
 		intent.setType("vnd.android.cursor.item/event"); //$NON-NLS-1$
 		intent.putExtra("calendar_id", 1); //$NON-NLS-1$
-		intent.putExtra("title", view.getContext().getString(R.string.osmand_parking_event)); //$NON-NLS-1$
+		intent.putExtra("title", context.getString(R.string.osmand_parking_event)); //$NON-NLS-1$
 		intent.putExtra("beginTime", getParkingTime()); //$NON-NLS-1$
 		intent.putExtra("endTime", getParkingTime() + 60 * 60 * 1000); //$NON-NLS-1$
-		view.getContext().startActivity(intent);
+		context.startActivity(intent);
 	}
 
 	/**

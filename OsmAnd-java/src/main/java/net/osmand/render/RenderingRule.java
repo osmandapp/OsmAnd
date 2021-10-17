@@ -1,5 +1,7 @@
 package net.osmand.render;
 
+import net.osmand.util.Algorithms;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,8 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import net.osmand.util.Algorithms;
 
 public class RenderingRule {
 	
@@ -18,13 +18,12 @@ public class RenderingRule {
 	private float[] floatProperties;
 	private List<RenderingRule> ifElseChildren;
 	private List<RenderingRule> ifChildren;
-	private boolean isGroup;
-	
+	private final boolean isGroup;
+
 	private final RenderingRulesStorage storage;
 	private Map<String, String> attributes;
 	
 	public RenderingRule(Map<String, String> attributes, boolean isGroup, RenderingRulesStorage storage){
-
 		this.isGroup = isGroup;
 		this.storage = storage;
 		init(attributes);
@@ -36,6 +35,15 @@ public class RenderingRule {
 	
 	public Map<String, String> getAttributes() {
 		return attributes == null ? Collections.EMPTY_MAP : attributes;
+	}
+
+	public boolean hasAttributes(Map<String, String> attributes) {
+		for (Entry<String, String> tagValue : attributes.entrySet()) {
+			if (!tagValue.getValue().equals(this.attributes.get(tagValue.getKey()))) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public void init(Map<String, String> attributes) {
@@ -169,8 +177,23 @@ public class RenderingRule {
 	public boolean isGroup() {
 		return isGroup;
 	}
-	
-	
+
+	public void removeIfChildren(RenderingRule rule) {
+		if (ifChildren != null) {
+			List<RenderingRule> children = new ArrayList<>(ifChildren);
+			children.remove(rule);
+			ifChildren = children;
+		}
+	}
+
+	public void removeIfElseChildren(RenderingRule rule) {
+		if (ifElseChildren != null) {
+			List<RenderingRule> children = new ArrayList<>(ifElseChildren);
+			children.remove(rule);
+			ifElseChildren = children;
+		}
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder bls = new StringBuilder();
@@ -205,7 +228,6 @@ public class RenderingRule {
 		
 		return bls;
 	}
-	
 
 	protected void printAttrs(StringBuilder bls, boolean in) {
 		for(RenderingRuleProperty p : getProperties()){
@@ -224,5 +246,4 @@ public class RenderingRule {
 			} 
 		}
 	}
-
 }

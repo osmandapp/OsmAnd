@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+  <string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -610,7 +612,7 @@
   <string name="osm_settings_descr">Spesifiseer Openstreetmap.org (OSM) stellings benodig vir OSM toevoegings</string>
   <string name="data_settings_descr">Spesifiseer taal, aflaai/herlaai inligting</string>
   <string name="data_settings">Inligting</string>
-    <string name="osm_settings">OSM veranderings</string>
+    <string name="osm_editing_plugin_name">OSM veranderings</string>
   <string name="auto_zoom_map_descr">Outo vergroot kaart volgens jou spoed</string>
   <string name="auto_zoom_map">Vergroot kaart outomaties</string>
   <string name="additional_settings">Bykomende stellings</string>
@@ -862,7 +864,6 @@
     <string name="shared_string_control_start">begin</string>
     <string name="map_widget_av_notes">Oudio/video notas</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd inlasmodule vir aflyn kontoerlyne</string>
-    <string name="osmand_srtm_long_description_1000_chars">Hierdie inlasmodule verskaf kontoerlyne wat in OsmAnd aflyn kaarte getoon kan word.Die wêreld inligting (van 70 grade noord tot 70 grade suid) is gebaseer op metings deur SRTM (Shuttle Radar Topography Mission)en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer),`n beeld-instrument aanboord Terra, die vlagskip sateliet van NASA se Aarde Observasie Stelsel. ASTER is `n samewerkingsprojek tussen NASA, Japan se Ministerie van Ekonomie, Handel en Industrie (MEHI), en Japan Ruimte Stelsels (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
     <string name="index_srtm_parts">dele</string>
     <string name="audionotes_plugin_name">Oudio/video notas</string>

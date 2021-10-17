@@ -1,9 +1,16 @@
 package net.osmand.plus.poi;
 
 
+import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+import static net.osmand.osm.MapPoiTypes.ROUTES;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -20,6 +27,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -39,16 +47,13 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
-import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
-
 public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>, CustomSearchPoiFilter {
 
-	public final static String STD_PREFIX = "std_"; //$NON-NLS-1$
-	public final static String USER_PREFIX = "user_"; //$NON-NLS-1$
-	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id"; //$NON-NLS-1$
-	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name"; //$NON-NLS-1$
-	public final static int INVALID_ORDER  = -1;
+	public final static String STD_PREFIX = "std_";
+	public final static String USER_PREFIX = "user_";
+	public final static String CUSTOM_FILTER_ID = USER_PREFIX + "custom_id";
+	public final static String BY_NAME_FILTER_ID = USER_PREFIX + "by_name";
+	public final static int INVALID_ORDER = -1;
 
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = new LinkedHashMap<>();
 	private Map<PoiCategory, LinkedHashSet<String>> acceptedTypesOrigin = new LinkedHashMap<>();
@@ -65,7 +70,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	protected int distanceInd = 0;
 	// in kilometers
-	protected double[] distanceToSearchValues = new double[]{1, 2, 5, 10, 20, 50, 100, 200, 500};
+	protected double[] distanceToSearchValues = new double[] {1, 2, 5, 10, 20, 50, 100, 200, 500};
 
 	private final MapPoiTypes poiTypes;
 
@@ -79,7 +84,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public PoiUIFilter(AbstractPoiType type, OsmandApplication application, String idSuffix) {
 		this.app = application;
 		isStandardFilter = true;
-		standardIconId = (type == null ? null : type.getKeyName());
+		standardIconId = type == null ? null : type.getKeyName();
 		filterId = STD_PREFIX + standardIconId + idSuffix;
 
 		poiTypes = application.getPoiTypes();
@@ -94,7 +99,6 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			updateTypesToAccept(type);
 		}
 	}
-
 
 	// search by name standard
 	protected PoiUIFilter(OsmandApplication application) {
@@ -160,6 +164,18 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		return filterId.equals(STD_PREFIX + OSM_WIKI_CATEGORY);
 	}
 
+	public boolean isRoutesFilter() {
+		return filterId.startsWith(STD_PREFIX + ROUTES);
+	}
+
+	public boolean isRouteArticleFilter() {
+		return filterId.startsWith(STD_PREFIX + ROUTE_ARTICLE);
+	}
+
+	public boolean isRouteArticlePointFilter() {
+		return filterId.startsWith(STD_PREFIX + ROUTE_ARTICLE_POINT);
+	}
+
 	public String getFilterByName() {
 		return filterByName;
 	}
@@ -197,7 +213,6 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		return savedFilterByName;
 	}
 
-
 	public List<Amenity> searchAgain(double lat, double lon) {
 		List<Amenity> amenityList;
 		if (currentSearchResult != null) {
@@ -223,7 +238,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		for (PoiCategory t : poiTypes.getCategories(false)) {
 			acceptedTypes.put(t, null);
 		}
-		distanceToSearchValues = new double[]{0.5, 1, 2, 5, 10, 20, 50, 100};
+		distanceToSearchValues = new double[] {0.5, 1, 2, 5, 10, 20, 50, 100};
 	}
 
 	public boolean isSearchFurtherAvailable() {
@@ -860,12 +875,51 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	}
 
 	public String getIconId() {
+		String iconName = null;
 		if (filterId.startsWith(STD_PREFIX)) {
-			return standardIconId;
+			iconName = standardIconId;
 		} else if (filterId.startsWith(USER_PREFIX)) {
-			return filterId.substring(USER_PREFIX.length()).toLowerCase();
+			iconName = filterId.substring(USER_PREFIX.length()).toLowerCase();
 		}
-		return filterId;
+		if (RenderingIcons.containsBigIcon(iconName)) {
+			return iconName;
+		} else {
+			iconName = getCustomFilterIconName(this);
+			return RenderingIcons.containsBigIcon(iconName) ? iconName : filterId;
+		}
+	}
+
+	public static String getCustomFilterIconName(@Nullable PoiUIFilter filter) {
+		if (filter != null) {
+			Map<PoiCategory, LinkedHashSet<String>> acceptedTypes = filter.getAcceptedTypes();
+			List<PoiCategory> categories = new ArrayList<>(acceptedTypes.keySet());
+			if (categories.size() == 1) {
+				PoiCategory category = categories.get(0);
+				LinkedHashSet<String> filters = acceptedTypes.get(category);
+				if (filters == null || filters.size() > 1) {
+					return category.getIconKeyName();
+				} else {
+					return getPoiTypeIconName(category.getPoiTypeByKeyName(filters.iterator().next()));
+				}
+			}
+		}
+		return null;
+	}
+
+	@Nullable
+	public static String getPoiTypeIconName(@Nullable AbstractPoiType abstractPoiType) {
+		if (abstractPoiType != null && RenderingIcons.containsBigIcon(abstractPoiType.getIconKeyName())) {
+			return abstractPoiType.getIconKeyName();
+		} else if (abstractPoiType instanceof PoiType) {
+			PoiType poiType = (PoiType) abstractPoiType;
+			String iconId = poiType.getOsmTag() + "_" + poiType.getOsmValue();
+			if (RenderingIcons.containsBigIcon(iconId)) {
+				return iconId;
+			} else if (poiType.getParentType() != null) {
+				return getPoiTypeIconName(poiType.getParentType());
+			}
+		}
+		return null;
 	}
 
 	public boolean isStandardFilter() {
@@ -940,7 +994,6 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public interface AmenityNameFilter {
 
-		public boolean accept(Amenity a);
+		boolean accept(Amenity a);
 	}
-
 }

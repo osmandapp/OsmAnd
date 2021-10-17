@@ -6,19 +6,11 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
-import androidx.annotation.WorkerThread;
-import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
@@ -34,8 +26,8 @@ import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.DayNightHelper;
@@ -52,9 +44,9 @@ import net.osmand.plus.openplacereviews.OprAuthHelper;
 import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
-import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
@@ -62,14 +54,11 @@ import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
-import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
-import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
-import net.osmand.plus.voice.MediaCommandPlayerImpl;
-import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.plus.wikivoyage.data.TravelObfHelper;
@@ -78,6 +67,7 @@ import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
+import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
@@ -92,6 +82,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.annotation.WorkerThread;
 import btools.routingapp.IBRouterService;
 
 import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
@@ -104,30 +98,26 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
 import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 /**
+ *
  */
 public class AppInitializer implements IProgress {
 
-	public static final boolean TIPS_AND_TRICKS = false;
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-android-4-1-released";
 
-	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
+	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-9-released";
-//	public static final String LATEST_CHANGES_URL = null; // not enough to read
-	public static final int APP_EXIT_CODE = 4;
-	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
-	private OsmandApplication app;
-	private AppVersionUpgradeOnInit appVersionUpgrade;
-	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(AppInitializer.class);
+	private final OsmandApplication app;
+	private final AppVersionUpgradeOnInit appVersionUpgrade;
 
 	private boolean initSettings = false;
 	private boolean activityChangesShowed = false;
 	private long startTime;
 	private long startBgTime;
 	private boolean appInitializing = true;
-	private List<String> warnings = new ArrayList<>();
+	private final List<String> warnings = new ArrayList<>();
 	private String taskName;
-	private List<AppInitializeListener> listeners = new ArrayList<>();
+	private final List<AppInitializeListener> listeners = new ArrayList<>();
 	private SharedPreferences startPrefs;
 
 	public enum InitEvents {
@@ -148,7 +138,7 @@ public class AppInitializer implements IProgress {
 		@UiThread
 		void onFinish(AppInitializer init);
 	}
-	
+
 	public interface LoadRoutingFilesCallback {
 		void onRoutingFilesLoaded();
 	}
@@ -159,7 +149,6 @@ public class AppInitializer implements IProgress {
 		appVersionUpgrade = new AppVersionUpgradeOnInit(app);
 	}
 
-
 	public List<String> getWarnings() {
 		return warnings;
 	}
@@ -168,10 +157,9 @@ public class AppInitializer implements IProgress {
 		return appInitializing;
 	}
 
-
 	@SuppressLint({"CommitPrefEdits", "ApplySharedPref"})
 	public void initVariables() {
-		if(initSettings) {
+		if (initSettings) {
 			return;
 		}
 		ApplicationMode.onApplicationStart(app);
@@ -222,7 +210,7 @@ public class AppInitializer implements IProgress {
 
 	private void checkMapUpdates() {
 		long diff = System.currentTimeMillis() - app.getSettings().LAST_CHECKED_UPDATES.get();
-		if (diff >= 2 * 24 * 60 * 60l  && new Random().nextInt(5) == 0 &&
+		if (diff >= 2 * 24 * 60 * 60L && new Random().nextInt(5) == 0 &&
 				app.getSettings().isInternetConnectionAvailable()) {
 			app.getDownloadThread().runReloadIndexFiles();
 		} else if (Version.isDeveloperVersion(app)) {
@@ -249,42 +237,6 @@ public class AppInitializer implements IProgress {
 		return false;
 	}
 
-	// TODO
-	public void checkVectorIndexesDownloaded(final Activity ctx) {
-		OsmandApplication app = (OsmandApplication)ctx.getApplication();
-		MapRenderRepositories maps = app.getResourceManager().getRenderer();
-		SharedPreferences pref = ctx.getPreferences(Context.MODE_PRIVATE);
-		boolean check = pref.getBoolean(VECTOR_INDEXES_CHECK, true);
-		// do not show each time
-		if (check && new Random().nextInt() % 5 == 1) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-			if (maps.isEmpty()) {
-				builder.setMessage(R.string.vector_data_missing);
-			} else if (!maps.basemapExists()) {
-				builder.setMessage(R.string.basemap_missing);
-			} else {
-				return;
-			}
-			builder.setPositiveButton(R.string.shared_string_download, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					ctx.startActivity(new Intent(ctx, DownloadActivity.class));
-				}
-
-			});
-			builder.setNeutralButton(R.string.shared_string_no_thanks, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					ctx.getPreferences(Context.MODE_PRIVATE).edit().putBoolean(VECTOR_INDEXES_CHECK, false).commit();
-				}
-			});
-			builder.setNegativeButton(R.string.first_time_continue, null);
-			builder.show();
-		}
-
-	}
-
 	private void indexRegionsBoundaries(List<String> warnings) {
 		File file = app.getAppPath("regions.ocbf");
 		try {
@@ -304,7 +256,7 @@ public class AppInitializer implements IProgress {
 	}
 
 	Resources getLocalizedResources(String loc) {
-		if(Build.VERSION.SDK_INT < 17) {
+		if (Build.VERSION.SDK_INT < 17) {
 			return null;
 		}
 		Locale desiredLocale = new Locale(loc);
@@ -343,7 +295,7 @@ public class AppInitializer implements IProgress {
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
 						String val = app.getString(in);
-						if(val != null) {
+						if (val != null) {
 							int ind = val.indexOf(';');
 							if (ind > 0) {
 								return val.substring(0, ind);
@@ -374,9 +326,9 @@ public class AppInitializer implements IProgress {
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
 						String val = app.getString(in);
-						if(val != null) {
+						if (val != null) {
 							int ind = val.indexOf(';');
-							if(ind > 0) {
+							if (ind > 0) {
 								return val.substring(ind + 1);
 							}
 							return "";
@@ -408,9 +360,9 @@ public class AppInitializer implements IProgress {
 					if (f != null) {
 						Integer in = (Integer) f.get(null);
 						String val = en.getString(in);
-						if(val != null) {
+						if (val != null) {
 							int ind = val.indexOf(';');
-							if(ind > 0) {
+							if (ind > 0) {
 								return val.substring(0, ind);
 							}
 						}
@@ -438,6 +390,7 @@ public class AppInitializer implements IProgress {
 		getLazyRoutingConfig();
 		app.applyTheme(app);
 		startupInit(app.reconnectToBRouter(), IBRouterService.class);
+		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelperImpl(app), InAppPurchaseHelperImpl.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
 		app.transportRoutingHelper = startupInit(new TransportRoutingHelper(app), TransportRoutingHelper.class);
@@ -468,18 +421,20 @@ public class AppInitializer implements IProgress {
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 		app.mapViewTrackingUtilities = startupInit(new MapViewTrackingUtilities(app), MapViewTrackingUtilities.class);
+		app.osmandMap = startupInit(new OsmandMap(app), OsmandMap.class);
 
-		// TODOTRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
-		app.travelHelper = !TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
-		app.travelHelper = startupInit(app.travelHelper, TravelHelper.class);
+		// TODO TRAVEL_OBF_HELPER check ResourceManager and use TravelObfHelper
+		TravelHelper travelHelper = !TravelDbHelper.checkIfDbFileExists(app) ? new TravelObfHelper(app) : new TravelDbHelper(app);
+		app.travelHelper = startupInit(travelHelper, TravelHelper.class);
+		app.travelRendererHelper = startupInit(new TravelRendererHelper(app), TravelRendererHelper.class);
 
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
-		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
+		app.fileSettingsHelper = startupInit(new FileSettingsHelper(app), FileSettingsHelper.class);
+		app.networkSettingsHelper = startupInit(new NetworkSettingsHelper(app), NetworkSettingsHelper.class);
 		app.quickActionRegistry = startupInit(new QuickActionRegistry(app.getSettings()), QuickActionRegistry.class);
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
 		app.oprAuthHelper = startupInit(new OprAuthHelper(app), OprAuthHelper.class);
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
-		app.backupHelper = startupInit(new BackupHelper(app), BackupHelper.class);
 
 		initOpeningHoursParser();
 	}
@@ -501,23 +456,23 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			public String getTranslation(String id) {
-				if(WorldRegion.AFRICA_REGION_ID.equals(id)){
+				if (WorldRegion.AFRICA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_africa);
-				} else if(WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID.equals(id)){
+				} else if (WorldRegion.AUSTRALIA_AND_OCEANIA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_oceania);
-				} else if(WorldRegion.ASIA_REGION_ID.equals(id)){
+				} else if (WorldRegion.ASIA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_asia);
-				} else if(WorldRegion.CENTRAL_AMERICA_REGION_ID.equals(id)){
+				} else if (WorldRegion.CENTRAL_AMERICA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_central_america);
-				} else if(WorldRegion.EUROPE_REGION_ID.equals(id)){
+				} else if (WorldRegion.EUROPE_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_europe);
-				} else if(WorldRegion.RUSSIA_REGION_ID.equals(id)){
+				} else if (WorldRegion.RUSSIA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_russia);
-				} else if(WorldRegion.NORTH_AMERICA_REGION_ID.equals(id)){
+				} else if (WorldRegion.NORTH_AMERICA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_north_america);
-				} else if(WorldRegion.SOUTH_AMERICA_REGION_ID.equals(id)){
+				} else if (WorldRegion.SOUTH_AMERICA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_south_america);
-				} else if(WorldRegion.ANTARCTICA_REGION_ID.equals(id)){
+				} else if (WorldRegion.ANTARCTICA_REGION_ID.equals(id)) {
 					return app.getString(R.string.index_name_antarctica);
 				}
 				return null;
@@ -529,8 +484,8 @@ public class AppInitializer implements IProgress {
 
 	private <T> T startupInit(T object, Class<T> class1) {
 		long t = System.currentTimeMillis();
-		if(t - startTime > 7) {
-			System.err.println("Startup service " + class1.getName() + " took too long " + (t - startTime)  + " ms");
+		if (t - startTime > 7) {
+			System.err.println("Startup service " + class1.getName() + " took too long " + (t - startTime) + " ms");
 		}
 		startTime = t;
 		return object;
@@ -604,57 +559,33 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext,
-															final ApplicationMode applicationMode,
-															final String voiceProvider,
-															final Runnable run,
-															boolean showDialog) {
+	public synchronized void initVoiceDataInDifferentThread(@NonNull final Context context,
+	                                                        @NonNull final ApplicationMode applicationMode,
+	                                                        @NonNull final String voiceProvider,
+	                                                        @Nullable final Runnable onFinishInitialization,
+	                                                        boolean showProgress) {
+		String progressTitle = app.getString(R.string.loading_data);
+		String progressMessage = app.getString(R.string.voice_data_initializing);
+		final ProgressDialog progressDialog = showProgress && context instanceof Activity
+				? ProgressDialog.show(context, progressTitle, progressMessage)
+				: null;
 
-		final ProgressDialog dlg = showDialog ? ProgressDialog.show(uiContext, app.getString(R.string.loading_data),
-				app.getString(R.string.voice_data_initializing)) : null;
-		new Thread(new Runnable() {
-
-			public CommandPlayer createCommandPlayer(String voiceProvider, ApplicationMode applicationMode,
-													 OsmandApplication osmandApplication, Activity ctx)
-					throws CommandPlayerException {
-				if (voiceProvider != null) {
-					File parent = osmandApplication.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-					File voiceDir = new File(parent, voiceProvider);
-					if (!voiceDir.exists()) {
-						throw new CommandPlayerException(ctx.getString(R.string.voice_data_unavailable));
-					}
-					if (JSTTSCommandPlayerImpl.isMyData(voiceDir)) {
-						return new JSTTSCommandPlayerImpl(ctx, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
-					} else if (JSMediaCommandPlayerImpl.isMyData(voiceDir)) {
-						return new JSMediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
-					} else if (TTSCommandPlayerImpl.isMyData(voiceDir)) {
-						return new TTSCommandPlayerImpl(ctx, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
-					} else if (MediaCommandPlayerImpl.isMyData((voiceDir))) {
-						return new MediaCommandPlayerImpl(osmandApplication, applicationMode, osmandApplication.getRoutingHelper().getVoiceRouter(), voiceProvider);
-					}
-					throw new CommandPlayerException(ctx.getString(R.string.voice_data_not_supported));
+		new Thread(() -> {
+			try {
+				if (app.player != null) {
+					app.player.clear();
 				}
-				return null;
-			}
-			@Override
-			public void run() {
-				try {
-					if (app.player != null) {
-						app.player.clear();
-					}
-					app.player = createCommandPlayer(voiceProvider, applicationMode, app, uiContext);
-					app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
-					if(dlg != null) {
-						dlg.dismiss();
-					}
-					if (run != null && uiContext != null) {
-						uiContext.runOnUiThread(run);
-					}
-				} catch (CommandPlayerException e) {
-					if(dlg != null) {
-						dlg.dismiss();
-					}
-					app.showToastMessage(e.getError());
+				app.player = CommandPlayer.createCommandPlayer(app, applicationMode, voiceProvider);
+				app.getRoutingHelper().getVoiceRouter().setPlayer(app.player);
+			} catch (CommandPlayerException e) {
+				app.showToastMessage(e.getError());
+				LOG.error("Failed to create CommandPlayer", e);
+			} finally {
+				if (progressDialog != null) {
+					progressDialog.dismiss();
+				}
+				if (onFinishInitialization != null) {
+					((OsmandApplication) context.getApplicationContext()).runInUIThread(onFinishInitialization);
 				}
 			}
 		}).start();
@@ -697,14 +628,13 @@ public class AppInitializer implements IProgress {
 			app.searchUICore.initSearchUICore();
 
 			checkLiveUpdatesAlerts();
-			
 		} catch (RuntimeException e) {
 			e.printStackTrace();
 			warnings.add(e.getMessage());
 		} finally {
 			appInitializing = false;
 			notifyFinish();
-			if (warnings != null && !warnings.isEmpty()) {
+			if (!Algorithms.isEmpty(warnings)) {
 				app.showToastMessage(AndroidUtils.formatWarnings(warnings).toString());
 			}
 		}
@@ -770,7 +700,7 @@ public class AppInitializer implements IProgress {
 				app.savingTrackHelper.loadGpxFromDatabase();
 			}
 		}
-		if(app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null){
+		if (app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() && OsmandPlugin.isActive(OsmandMonitoringPlugin.class)) {
 			app.startNavigationService(NavigationService.USED_BY_GPX);
 		}
 	}
@@ -809,7 +739,7 @@ public class AppInitializer implements IProgress {
 				startTask(app.getString(R.string.init_native_library), -1);
 				RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 				NativeOsmandLibrary lib = NativeOsmandLibrary.getLibrary(storage, app);
-				boolean initialized =  lib != null;
+				boolean initialized = lib != null;
 				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 				if (!initialized) {
 					LOG.info("Native library could not be loaded!");
@@ -834,12 +764,13 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			public void run() {
-				for(AppInitializeListener l : listeners) {
+				for (AppInitializeListener l : listeners) {
 					l.onFinish(AppInitializer.this);
 				}
 			}
 		});
 	}
+
 	public void notifyEvent(final InitEvents event) {
 		if (event != InitEvents.TASK_CHANGED) {
 			long time = System.currentTimeMillis();
@@ -850,7 +781,7 @@ public class AppInitializer implements IProgress {
 
 			@Override
 			public void run() {
-				for(AppInitializeListener l : listeners) {
+				for (AppInitializeListener l : listeners) {
 					l.onProgress(AppInitializer.this, event);
 				}
 			}
@@ -913,21 +844,21 @@ public class AppInitializer implements IProgress {
 		}
 		applicationBgInitializing = true;
 		new Thread(new Runnable() { //$NON-NLS-1$
-					@Override
-					public void run() {
-						try {
-							startApplicationBackground();
-						} finally {
-							applicationBgInitializing = false;
-						}
-					}
-				}, "Initializing app").start();
+			@Override
+			public void run() {
+				try {
+					startApplicationBackground();
+				} finally {
+					applicationBgInitializing = false;
+				}
+			}
+		}, "Initializing app").start();
 	}
 
 
 	public void addListener(AppInitializeListener listener) {
 		this.listeners.add(listener);
-		if(!appInitializing) {
+		if (!appInitializing) {
 			listener.onFinish(this);
 		}
 	}

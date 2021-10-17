@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat.Builder;
 import androidx.core.app.NotificationManagerCompat;
 
+import net.osmand.plus.auto.CarAppNotification;
 import net.osmand.plus.notifications.DownloadNotification;
 import net.osmand.plus.notifications.ErrorNotification;
 import net.osmand.plus.notifications.GpxNotification;
@@ -24,13 +25,14 @@ import java.util.List;
 public class NotificationHelper {
 
 	public static final String NOTIFICATION_CHANEL_ID = "osmand_background_service";
-	private OsmandApplication app;
+	private final OsmandApplication app;
 
 	private NavigationNotification navigationNotification;
 	private GpxNotification gpxNotification;
+	private CarAppNotification carAppNotification;
 	private DownloadNotification downloadNotification;
 	private ErrorNotification errorNotification;
-	private List<OsmandNotification> all = new ArrayList<>();
+	private final List<OsmandNotification> all = new ArrayList<>();
 
 	public NotificationHelper(OsmandApplication app) {
 		this.app = app;
@@ -41,10 +43,12 @@ public class NotificationHelper {
 		navigationNotification = new NavigationNotification(app);
 		gpxNotification = new GpxNotification(app);
 		downloadNotification = new DownloadNotification(app);
+		carAppNotification = new CarAppNotification(app);
 		errorNotification = new ErrorNotification(app);
 		all.add(navigationNotification);
 		all.add(gpxNotification);
 		all.add(downloadNotification);
+		all.add(carAppNotification);
 	}
 
 	public Notification buildTopNotification() {
@@ -80,6 +84,8 @@ public class NotificationHelper {
 			return navigationNotification;
 		} else if (gpxNotification.isEnabled() && gpxNotification.isActive()) {
 			return gpxNotification;
+		} else if (carAppNotification.isEnabled() && carAppNotification.isActive()) {
+			return carAppNotification;
 		} else {
 			return null;
 		}

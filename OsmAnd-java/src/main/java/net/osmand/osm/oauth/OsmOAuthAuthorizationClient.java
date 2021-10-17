@@ -4,10 +4,18 @@ package net.osmand.osm.oauth;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.builder.api.DefaultApi10a;
 import com.github.scribejava.core.builder.api.OAuth1SignatureType;
+import com.github.scribejava.core.exceptions.OAuthException;
 import com.github.scribejava.core.httpclient.jdk.JDKHttpClientConfig;
-import com.github.scribejava.core.model.*;
+import com.github.scribejava.core.model.OAuth1AccessToken;
+import com.github.scribejava.core.model.OAuth1RequestToken;
+import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
+import com.github.scribejava.core.model.OAuthRequest;
+import com.github.scribejava.core.model.Response;
+import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth10aService;
+
 import net.osmand.PlatformUtil;
+
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
@@ -132,11 +140,7 @@ public class OsmOAuthAuthorizationClient {
     public OAuth1RequestToken startOAuth() {
         try {
             requestToken = service.getRequestToken();
-        } catch (IOException e) {
-            log.error(e);
-        } catch (InterruptedException e) {
-            log.error(e);
-        } catch (ExecutionException e) {
+        } catch (IOException | InterruptedException | ExecutionException e) {
             log.error(e);
         }
         return requestToken;
@@ -145,18 +149,14 @@ public class OsmOAuthAuthorizationClient {
     public OAuth1AccessToken authorize(String oauthVerifier) {
         try {
             setAccessToken(service.getAccessToken(requestToken, oauthVerifier));
-        } catch (IOException e) {
-            log.error(e);
-        } catch (InterruptedException e) {
-            log.error(e);
-        } catch (ExecutionException e) {
+        } catch (OAuthException | IOException | InterruptedException | ExecutionException | IllegalArgumentException e) {
             log.error(e);
         }
         return accessToken;
     }
 
     public boolean isValidToken() {
-        return !(accessToken == null);
+        return accessToken != null;
     }
 
     private Verb parseRequestMethod(String method) {

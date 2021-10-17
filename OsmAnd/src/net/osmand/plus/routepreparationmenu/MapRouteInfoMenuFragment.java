@@ -1,5 +1,7 @@
 package net.osmand.plus.routepreparationmenu;
 
+import static net.osmand.plus.track.TrackMenuFragment.startNavigationForGPX;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,26 +16,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
+import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routing.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.track.TrackMenuFragment;
-import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
+import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.widgets.TextViewExProgress;
 
-import static net.osmand.plus.track.TrackMenuFragment.startNavigationForGPX;
-
-public class MapRouteInfoMenuFragment extends ContextMenuFragment implements TrackSelectSegmentBottomSheet.OnSegmentSelectedListener {
+public class MapRouteInfoMenuFragment extends ContextMenuFragment
+		implements OnSegmentSelectedListener, DownloadEvents {
 	public static final String TAG = MapRouteInfoMenuFragment.class.getName();
 
 	@Nullable
@@ -113,12 +116,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 			modesLayoutListContainer = view.findViewById(R.id.modes_layout_list_container);
 			modesLayout = view.findViewById(R.id.modes_layout);
 
-			view.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dismiss();
-				}
-			});
+			view.setOnClickListener(v -> dismiss());
 
 			buildBottomView();
 
@@ -159,7 +157,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 					updateRouteCalculationProgress(0);
 				}
 			}
-			menu.onResume(this);
+			menu.onResume();
 		}
 	}
 
@@ -167,7 +165,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 	public void onPause() {
 		super.onPause();
 		if (menu != null) {
-			menu.onPause(this);
+			menu.onPause();
 		}
 	}
 
@@ -188,12 +186,15 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 
 	@Override
 	protected void updateMenuState(int currentMenuState, int newMenuState) {
-		if (getMyApplication().getRoutingHelper().isRouteCalculated()) {
-			ApplicationMode mV = getMyApplication().getRoutingHelper().getAppMode();
-			if (newMenuState == MenuState.HEADER_ONLY && currentMenuState == MenuState.HALF_SCREEN) {
-				getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.setModeValue(mV, true);
-			} else if (currentMenuState == MenuState.HEADER_ONLY && newMenuState == MenuState.HALF_SCREEN) {
-				getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.resetModeToDefault(mV);
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			if (app.getRoutingHelper().isRouteCalculated()) {
+				ApplicationMode mV = app.getRoutingHelper().getAppMode();
+				if (newMenuState == MenuState.HEADER_ONLY && currentMenuState == MenuState.HALF_SCREEN) {
+					app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.setModeValue(mV, true);
+				} else if (currentMenuState == MenuState.HEADER_ONLY && newMenuState == MenuState.HALF_SCREEN) {
+					app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.resetModeToDefault(mV);
+				}
 			}
 		}
 	}
@@ -228,7 +229,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
-				return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
+				return ColorUtilities.getDividerColorId(nightMode);
 			} else {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -244,15 +245,14 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 			return;
 		}
 		int y = getViewY();
+		ViewGroup parent = (ViewGroup) modesLayout.getParent();
 		if (y < getFullScreenTopPosY()) {
-			ViewGroup parent = (ViewGroup) modesLayout.getParent();
 			if (parent != null && parent != modesLayoutToolbarContainer) {
 				parent.removeView(modesLayout);
 				((ViewGroup) modesLayoutToolbarContainer).addView(modesLayout);
 			}
 			modesLayoutToolbar.setVisibility(View.VISIBLE);
 		} else {
-			ViewGroup parent = (ViewGroup) modesLayout.getParent();
 			if (parent != null && parent != modesLayoutListContainer) {
 				parent.removeView(modesLayout);
 				((ViewGroup) modesLayoutListContainer).addView(modesLayout);
@@ -404,19 +404,21 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 		textViewExProgress.percent = 0;
 	}
 
-	public void show(MapActivity mapActivity) {
-		int slideInAnim = 0;
-		int slideOutAnim = 0;
-		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			slideInAnim = R.anim.slide_in_bottom;
-			slideOutAnim = R.anim.slide_out_bottom;
+	public void show(@NonNull MapActivity mapActivity) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			int slideInAnim = 0;
+			int slideOutAnim = 0;
+			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				slideInAnim = R.anim.slide_in_bottom;
+				slideOutAnim = R.anim.slide_out_bottom;
+			}
+			fragmentManager.beginTransaction()
+					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+					.add(R.id.routeMenuContainer, this, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 		}
-		mapActivity.getSupportFragmentManager()
-				.beginTransaction()
-				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
-				.add(R.id.routeMenuContainer, this, TAG)
-				.addToBackStack(TAG)
-				.commitAllowingStateLoss();
 	}
 
 	public void applyDayNightMode() {
@@ -428,16 +430,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 		}
 		updateNightMode();
 
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), isNightMode(),
-				R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.toLayoutDivider), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), isNightMode(),
-				R.color.divider_color_light, R.color.divider_color_dark);
+		int dividerColorId = ColorUtilities.getDividerColorId(isNightMode());
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), dividerColorId);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), dividerColorId);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.toLayoutDivider), dividerColorId);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), dividerColorId);
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), dividerColorId);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
 		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), isNightMode(),
@@ -449,17 +447,17 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 
 		if (getTopView() != null) {
 			View topView = getTopView();
-			AndroidUtils.setBackground(ctx, topView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+			AndroidUtils.setBackground(ctx, topView, ColorUtilities.getCardAndListBackgroundColorId(isNightMode()));
 		}
 
-		int activeColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		int activeColor = ContextCompat.getColor(ctx, ColorUtilities.getActiveColorId(isNightMode()));
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.from_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.via_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.to_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.map_options_route_button_title)).setTextColor(activeColor);
 
-		int mainFontColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		int mainFontColor = ColorUtilities.getPrimaryTextColor(ctx, isNightMode());
 		((TextView) mainView.findViewById(R.id.fromText)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.toText)).setTextColor(mainFontColor);
@@ -469,57 +467,75 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment implements Tra
 		((TextView) mainView.findViewById(R.id.ViaSubView)).setTextColor(descriptionColor);
 		((TextView) mainView.findViewById(R.id.toTitle)).setTextColor(descriptionColor);
 
-		ctx.setupRouteCalculationProgressBar((ProgressBar) mainView.findViewById(R.id.progress_bar));
+		ctx.setupRouteCalculationProgressBar(mainView.findViewById(R.id.progress_bar));
 	}
 
-	public static boolean showInstance(final MapActivity mapActivity, int initialMenuState) {
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		int slideInAnim = 0;
-		int slideOutAnim = 0;
-		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
-			if (portrait) {
-				slideInAnim = R.anim.slide_in_bottom;
-				slideOutAnim = R.anim.slide_out_bottom;
-			} else {
-				boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
-				slideInAnim = isLayoutRtl ? R.anim.slide_in_right : R.anim.slide_in_left;
-				slideOutAnim = isLayoutRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
+	public static boolean showInstance(@NonNull MapActivity mapActivity, int initialMenuState) {
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+			int slideInAnim = 0;
+			int slideOutAnim = 0;
+			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				if (portrait) {
+					slideInAnim = R.anim.slide_in_bottom;
+					slideOutAnim = R.anim.slide_out_bottom;
+				} else {
+					boolean isLayoutRtl = AndroidUtils.isLayoutRtl(mapActivity);
+					slideInAnim = isLayoutRtl ? R.anim.slide_in_right : R.anim.slide_in_left;
+					slideOutAnim = isLayoutRtl ? R.anim.slide_out_right : R.anim.slide_out_left;
+				}
 			}
-		}
-
-		try {
 			mapActivity.getContextMenu().hideMenues();
 
-			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
 			Bundle args = new Bundle();
+			args.putInt(MENU_STATE_KEY, initialMenuState);
+			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
 			fragment.setArguments(args);
-			args.putInt(ContextMenuFragment.MENU_STATE_KEY, initialMenuState);
-			mapActivity.getSupportFragmentManager()
-					.beginTransaction()
+			fragmentManager.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.routeMenuContainer, fragment, TAG)
 					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
-
 			return true;
-
-		} catch (RuntimeException e) {
-			return false;
 		}
+		return false;
 	}
 
 	@Override
 	public void onSegmentSelect(GPXUtilities.GPXFile gpxFile, int selectedSegment) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			mapActivity.getMyApplication().getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
+			OsmandApplication app = mapActivity.getMyApplication();
+			app.getSettings().GPX_ROUTE_SEGMENT.set(selectedSegment);
 			startNavigationForGPX(gpxFile, mapActivity.getMapActions(), mapActivity);
-			GPXRouteParams.GPXRouteParamsBuilder paramsBuilder = getMyApplication().getRoutingHelper().getCurrentGPXRoute();
+			GPXRouteParams.GPXRouteParamsBuilder paramsBuilder = app.getRoutingHelper().getCurrentGPXRoute();
 			if (paramsBuilder != null) {
 				paramsBuilder.setSelectedSegment(selectedSegment);
-				getMyApplication().getRoutingHelper().onSettingsChanged(true);
+				app.getRoutingHelper().onSettingsChanged(true);
 			}
 			dismiss();
+		}
+	}
+
+	@Override
+	public void onUpdatedIndexesList() {
+		if (menu != null) {
+			menu.onUpdatedIndexesList();
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+		if (menu != null) {
+			menu.downloadInProgress();
+		}
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		if (menu != null) {
+			menu.downloadHasFinished();
 		}
 	}
 }

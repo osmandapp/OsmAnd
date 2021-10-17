@@ -22,7 +22,7 @@ import net.osmand.util.MapUtils;
 // Immutable object !
 public class SearchPhrase {
 	public static final String DELIMITER = " ";
-	private static final String ALLDELIMITERS = "\\s|,";
+	private static final String ALLDELIMITERS = "\\s|,|-";
 	private static final Pattern reg = Pattern.compile(ALLDELIMITERS);
 	private static Comparator<String> commonWordsComparator;
 	private static Set<String> conjunctions = new TreeSet<>();
@@ -192,8 +192,8 @@ public class SearchPhrase {
 	}
 	
 	// init search phrase
-	private SearchPhrase createNewSearchPhrase(SearchSettings settings, String fullText, List<SearchWord> foundWords,
-			String textToSearch) {
+	private SearchPhrase createNewSearchPhrase(final SearchSettings settings, String fullText, List<SearchWord> foundWords,
+											   String textToSearch) {
 		SearchPhrase sp = new SearchPhrase(settings, this.clt);
 		sp.words = foundWords;
 		sp.fullTextSearchPhrase = fullText;
@@ -209,19 +209,33 @@ public class SearchPhrase {
 				String wd = ws[i].trim();
 				boolean conjunction = conjunctions.contains(wd.toLowerCase());
 				boolean lastAndIncomplete = i == ws.length - 1 && !sp.lastUnknownSearchWordComplete;
+				boolean decryptAbbreviations = needDecryptAbbreviations();
 				if (wd.length() > 0 && (!conjunction || lastAndIncomplete)) {
 					if (first) {
-						sp.firstUnknownSearchWord = Abbreviations.replace(wd);
+						sp.firstUnknownSearchWord = decryptAbbreviations ? Abbreviations.replace(wd) : wd;
 						first = false;
 					} else {
-						sp.otherUnknownWords.add(Abbreviations.replace(wd));
+						sp.otherUnknownWords.add(decryptAbbreviations ? Abbreviations.replace(wd) : wd);
 					}
 				}
 			}
 		}
 		return sp;
 	}
-	
+
+	private boolean needDecryptAbbreviations() {
+		String langs = settings != null ? settings.getRegionLang() : null;
+		if (langs != null) {
+			String[] langArr = langs.split(",");
+			for (String lang : langArr) {
+				if (lang.equals("en")) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public static List<String> splitWords(String w, List<String> ws) {
 		if (!Algorithms.isEmpty(w)) {
 			String[] wrs = w.split(ALLDELIMITERS);
@@ -551,7 +565,7 @@ public class SearchPhrase {
 		}
 		return firstUnknownNameStringMatcher;
 	}
-	
+
 	public NameStringMatcher getUnknownNameStringMatcher(int i) {
 		while (unknownWordsMatcher.size() <= i) {
 			int ind = unknownWordsMatcher.size();
@@ -560,18 +574,21 @@ public class SearchPhrase {
 		}
 		return unknownWordsMatcher.get(i);
 	}
-	
-	
+
+	public NameStringMatcher getFullNameStringMatcher() {
+		return getNameStringMatcher(fullTextSearchPhrase, false);
+	}
+
 	private NameStringMatcher getNameStringMatcher(String word, boolean complete) {
-		return new NameStringMatcher(word, 
-				(complete ?  
-					StringMatcherMode.CHECK_EQUALS_FROM_SPACE : 
+		return new NameStringMatcher(word,
+				(complete ?
+					StringMatcherMode.CHECK_EQUALS_FROM_SPACE :
 					StringMatcherMode.CHECK_STARTS_FROM_SPACE));
 	}
-	
+
 	public boolean hasObjectType(ObjectType p) {
-		for(SearchWord s : words) {
-			if(s.getType() == p) {
+		for (SearchWord s : words) {
+			if (s.getType() == p) {
 				return true;
 			}
 		}

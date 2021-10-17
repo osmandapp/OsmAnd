@@ -18,10 +18,12 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -72,21 +74,22 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		Context ctx = requireContext();
 		file = new File(app.getAppCustomization().getTracksDir(), savedGpxName + IndexConstants.GPX_FILE_EXT);
 		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		final int textPrimaryColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+		final int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 		View mainView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.save_gpx_fragment, null);
 
-		OsmandTextFieldBoxes textBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.name_text_box);
+		OsmandTextFieldBoxes textBox = mainView.findViewById(R.id.name_text_box);
 		if (nightMode) {
 			textBox.setPrimaryColor(ContextCompat.getColor(app, R.color.active_color_primary_dark));
 		}
+		int iconColor = ColorUtilities.getDefaultIconColorId(nightMode);
+		textBox.setClearButton(getIcon(R.drawable.ic_action_remove_circle, iconColor));
 
-		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
+		final EditText nameEditText = mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(savedGpxName);
 		nameEditText.setTextColor(ContextCompat.getColor(ctx, textPrimaryColor));
 		nameEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
 			}
 
 			@Override
@@ -112,6 +115,16 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 					return true;
 				}
 				return false;
+			}
+		});
+
+		nameEditText.setOnFocusChangeListener((v, hasFocus) -> {
+			if (hasFocus) {
+				FragmentActivity activity = getActivity();
+				if (activity != null) {
+					nameEditText.setSelection(nameEditText.getText().length());
+					AndroidUtils.showSoftKeyboard(activity, nameEditText);
+				}
 			}
 		});
 
@@ -216,7 +229,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 						mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, mapView.getZoom(), true);
 						mapView.refreshMap();
 					} else {
-						mapActivity.setMapLocation(loc.lat, loc.lon);
+						app.getOsmandMap().setMapLocation(loc.lat, loc.lon);
 					}
 				}
 			}

@@ -34,7 +34,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.FavoritesListFragment.FavouritesAdapter;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
-import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragmentNew;
+import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -92,12 +92,12 @@ public class FavoriteDialogs {
 						MapActivity mapActivity = (MapActivity) activity;
 						Fragment fragment = mapActivity.getSupportFragmentManager()
 								.findFragmentByTag(FavoritePointEditor.TAG);
-						if (fragment instanceof FavoritePointEditorFragmentNew) {
-							((FavoritePointEditorFragmentNew) fragment).exitEditing();
+						if (fragment instanceof FavoritePointEditorFragment) {
+							((FavoritePointEditorFragment) fragment).exitEditing();
 						}
 						mapActivity.getContextMenu()
 								.show(new LatLon(point.getLatitude(), point.getLongitude()), fp.getPointDescription(activity), fp);
-						mapActivity.getMapView().refreshMap();
+						mapActivity.refreshMap();
 					}
 				}
 			}

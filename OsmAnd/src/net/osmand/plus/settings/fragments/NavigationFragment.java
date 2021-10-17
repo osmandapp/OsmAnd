@@ -3,41 +3,45 @@ package net.osmand.plus.settings.fragments;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.profiles.SelectNavProfileBottomSheet;
+import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
+import net.osmand.plus.profiles.data.ProfileDataObject;
+import net.osmand.plus.profiles.data.RoutingDataObject.RoutingProfilesResources;
+import net.osmand.plus.profiles.data.RoutingDataUtils;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
+import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
+import net.osmand.plus.routing.RouteService;
+import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.util.Algorithms;
+
+import java.util.Map;
+
 import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
 
-import net.osmand.plus.measurementtool.MeasurementToolFragment;
-import net.osmand.plus.profiles.ProfileDataObject;
-import net.osmand.plus.profiles.ProfileDataUtils;
-import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet;
-import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
-import net.osmand.plus.routing.RouteService;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
-import net.osmand.plus.profiles.SelectProfileBottomSheet;
-import net.osmand.plus.profiles.SelectProfileBottomSheet.OnSelectProfileCallback;
-import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.util.Algorithms;
-
-import java.util.Map;
-
 import static net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine.ONLINE_ROUTING_ENGINE_PREFIX;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILES_LIST_UPDATED_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
 import static net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DIALOG_MODE_KEY;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class NavigationFragment extends BaseSettingsFragment implements OnSelectProfileCallback {
 
 	public static final String TAG = NavigationFragment.class.getSimpleName();
 	public static final String NAVIGATION_TYPE = "navigation_type";
 
+	private static final String CUSTOMIZE_ROUTE_LINE = "customize_route_line";
+
 	private Map<String, ProfileDataObject> routingProfileDataObjects;
 	private Preference navigationType;
+	private RoutingDataUtils routingDataUtils;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -76,14 +80,15 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		setupNavigationTypePref();
 
 		Preference routeParameters = findPreference("route_parameters");
-		SwitchPreferenceCompat showRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
-		SwitchPreferenceEx animateMyLocation = (SwitchPreferenceEx) findPreference(settings.ANIMATE_MY_LOCATION.getId());
+		SwitchPreferenceCompat showRoutingAlarms = findPreference(settings.SHOW_ROUTING_ALARMS.getId());
+		SwitchPreferenceEx animateMyLocation = findPreference(settings.ANIMATE_MY_LOCATION.getId());
 
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
 		showRoutingAlarms.setIcon(getPersistentPrefIcon(R.drawable.ic_action_alert));
 
 		setupSpeakRoutingAlarmsPref();
 		setupVehicleParametersPref();
+		showHideCustomizeRouteLinePref();
 
 		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
 	}
@@ -104,9 +109,18 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 		Drawable enabled = getActiveIcon(R.drawable.ic_action_volume_up);
 		Drawable icon = getPersistentPrefIcon(enabled, disabled);
 
-		SwitchPreferenceCompat speakRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.VOICE_MUTE.getId());
+		SwitchPreferenceCompat speakRoutingAlarms = findPreference(settings.VOICE_MUTE.getId());
 		speakRoutingAlarms.setIcon(icon);
 		speakRoutingAlarms.setChecked(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
+	}
+
+	private void showHideCustomizeRouteLinePref() {
+		Preference preference = findPreference(CUSTOMIZE_ROUTE_LINE);
+		if (preference != null) {
+			String routingProfile = getSelectedAppMode().getRoutingProfile();
+			boolean isPublicTransport = PUBLIC_TRANSPORT_KEY.equals(routingProfile);
+			preference.setVisible(!isPublicTransport);
+		}
 	}
 
 	@Override
@@ -121,20 +135,33 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference.getKey().equals(NAVIGATION_TYPE)) {
-			String routingProfileKey =
-					getSelectedAppMode() != null ? getSelectedAppMode().getRoutingProfile() : null;
+		String prefId = preference.getKey();
+		if (NAVIGATION_TYPE.equals(prefId)) {
+			ApplicationMode appMode = getSelectedAppMode();
+			String selected = appMode != null ? appMode.getRoutingProfile() : null;
 			if (getActivity() != null) {
-				SelectProfileBottomSheet.showInstance(
-						getActivity(), SelectProfileBottomSheet.DialogMode.NAVIGATION_PROFILE,
-						this, getSelectedAppMode(), routingProfileKey, false);
+				SelectNavProfileBottomSheet.showInstance(
+						getActivity(), this, getSelectedAppMode(), selected, false);
+			}
+		} else if (CUSTOMIZE_ROUTE_LINE.equals(prefId)) {
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				ApplicationMode appMode = getSelectedAppMode();
+				RouteLineAppearanceFragment.showInstance(mapActivity, appMode);
 			}
 		}
 		return false;
 	}
 
 	private void updateRoutingProfilesDataObjects() {
-		routingProfileDataObjects = ProfileDataUtils.getRoutingProfiles(app);
+		routingProfileDataObjects = getRoutingDataUtils().getRoutingProfiles();
+	}
+
+	private RoutingDataUtils getRoutingDataUtils() {
+		if (routingDataUtils == null) {
+			routingDataUtils = new RoutingDataUtils(app);
+		}
+		return routingDataUtils;
 	}
 
 	void updateRoutingProfile(String profileKey) {
@@ -185,5 +212,6 @@ public class NavigationFragment extends BaseSettingsFragment implements OnSelect
 			updateRoutingProfilesDataObjects();
 		}
 		updateRoutingProfile(args.getString(PROFILE_KEY_ARG));
+		showHideCustomizeRouteLinePref();
 	}
 }

@@ -22,13 +22,15 @@ import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 
+import androidx.annotation.NonNull;
+
 public class MapVectorLayer extends BaseMapLayer {
 
 	private OsmandMapTileView view;
 	private ResourceManager resourceManager;
 	private Paint paintImg;
 
-	private RectF destImage = new RectF();
+	private final RectF destImage = new RectF();
 	private final MapTileLayer tileLayer;
 	private boolean visible = false;
 	private boolean oldRender = false;
@@ -37,7 +39,8 @@ public class MapVectorLayer extends BaseMapLayer {
 	private String cachedOverlay;
 	private Integer cachedOverlayTransparency;
 
-	public MapVectorLayer(MapTileLayer tileLayer, boolean oldRender) {
+	public MapVectorLayer(@NonNull MapTileLayer tileLayer, boolean oldRender) {
+		super(tileLayer.getContext());
 		this.tileLayer = tileLayer;
 		this.oldRender = oldRender;
 	}
@@ -52,7 +55,7 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 
 	@Override
-	public void initLayer(OsmandMapTileView view) {
+	public void initLayer(@NonNull OsmandMapTileView view) {
 		this.view = view;
 		resourceManager = view.getApplication().getResourceManager();
 		paintImg = new Paint();
@@ -103,7 +106,6 @@ public class MapVectorLayer extends BaseMapLayer {
 		if (mapRenderer != null && !oldRender) {
 			NativeCoreContext.getMapRendererContext().setNightMode(drawSettings.isNightMode());
 			OsmandSettings st = view.getApplication().getSettings();
-			/* TODO: Commented to avoid crash (looks like IMapTiledDataProvider.Request parameter does not pass correctly or cannot be resolved while calling obtainImage method)
 			if (!Algorithms.objectEquals(st.MAP_UNDERLAY.get(), cachedUnderlay)) {
 				cachedUnderlay = st.MAP_UNDERLAY.get();
 				ITileSource tileSource = st.getTileSourceByName(cachedUnderlay, false);
@@ -117,14 +119,12 @@ public class MapVectorLayer extends BaseMapLayer {
 					mapRenderer.resetMapLayerProvider(-1);
 				}
 			}
-			*/
 			if (!Algorithms.objectEquals(st.MAP_TRANSPARENCY.get(), cachedMapTransparency)) {
 				cachedMapTransparency = st.MAP_TRANSPARENCY.get();
 				MapLayerConfiguration mapLayerConfiguration = new MapLayerConfiguration();
 				mapLayerConfiguration.setOpacityFactor(((float) cachedMapTransparency) / 255.0f);
 				mapRenderer.setMapLayerConfiguration(0, mapLayerConfiguration);
 			}
-			/* TODO: Commented to avoid crash (looks like IMapTiledDataProvider.Request parameter does not pass correctly or cannot be resolved while calling obtainImage method)
 			if (!Algorithms.objectEquals(st.MAP_OVERLAY.get(), cachedOverlay)) {
 				cachedOverlay = st.MAP_OVERLAY.get();
 				ITileSource tileSource = st.getTileSourceByName(cachedOverlay, false);
@@ -144,7 +144,6 @@ public class MapVectorLayer extends BaseMapLayer {
 				mapLayerConfiguration.setOpacityFactor(((float) cachedOverlayTransparency) / 255.0f);
 				mapRenderer.setMapLayerConfiguration(1, mapLayerConfiguration);
 			}
-			*/
 			// opengl renderer
 			LatLon ll = tilesRect.getLatLonFromPixel(tilesRect.getPixWidth() / 2, tilesRect.getPixHeight() / 2);
 			mapRenderer.setTarget(new PointI(MapUtils.get31TileNumberX(ll.getLongitude()), MapUtils.get31TileNumberY(ll
@@ -152,7 +151,7 @@ public class MapVectorLayer extends BaseMapLayer {
 			mapRenderer.setAzimuth(-tilesRect.getRotate());
 			mapRenderer.setZoom((float) (tilesRect.getZoom() + tilesRect.getZoomAnimation() + tilesRect
 					.getZoomFloatPart()));
-			float zoomMagnifier = st.MAP_DENSITY.get();
+			float zoomMagnifier = getMapDensity();
 			mapRenderer.setVisualZoomShift(zoomMagnifier - 1.0f);
 		} else {
 			if (!view.isZooming()) {

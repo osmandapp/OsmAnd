@@ -88,7 +88,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 
 	private static void showUploadItemsProgressDialog(Fragment fragment, OsmPoint[] toUpload) {
 		FragmentActivity activity = fragment.getActivity();
-		OsmEditingPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+		OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 		OsmEditsUploadListenerHelper helper = new OsmEditsUploadListenerHelper(activity,
 				activity.getResources().getString(R.string.local_openstreetmap_were_uploaded));
 
@@ -120,8 +120,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			builder.setNeutralButton(getResources().getString(R.string.delete_change),
 					new DialogInterface.OnClickListener() {
 						public void onClick(@Nullable DialogInterface dialog, int id) {
-							OsmEditingPlugin plugin =
-									OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class);
+							OsmEditingPlugin plugin = OsmandPlugin.getActivePlugin(OsmEditingPlugin.class);
 							assert point != null;
 							assert plugin != null;
 							if (point.getGroup() == OsmPoint.Group.BUG) {

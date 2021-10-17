@@ -3,6 +3,7 @@ package net.osmand.plus;
 import android.content.Context;
 import android.text.format.DateUtils;
 
+import androidx.annotation.NonNull;
 import androidx.core.text.TextUtilsCompat;
 import androidx.core.view.ViewCompat;
 
@@ -31,9 +32,13 @@ import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static java.util.Calendar.DAY_OF_YEAR;
+import static java.util.Calendar.ERA;
+import static java.util.Calendar.YEAR;
 import static net.osmand.data.PointDescription.getLocationOlcName;
 
 public class OsmAndFormatter {
@@ -43,6 +48,8 @@ public class OsmAndFormatter {
 
 	public final static float YARDS_IN_ONE_METER = 1.0936f;
 	public final static float FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f;
+
+	private static final int MIN_DURATION_FOR_DATE_FORMAT = 48 * 60 * 60;
 	private static final DecimalFormat fixed2 = new DecimalFormat("0.00");
 	private static final DecimalFormat fixed1 = new DecimalFormat("0.0");
 	private static final SimpleDateFormat SIMPLE_TIME_OF_DAY_FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
@@ -73,17 +80,36 @@ public class OsmAndFormatter {
 		fixed2.setMinimumIntegerDigits(1);
 	}
 
-	public static String getFormattedDuration(int seconds, OsmandApplication ctx) {
+	public static String getFormattedDuration(int seconds, @NonNull OsmandApplication app) {
 		int hours = seconds / (60 * 60);
 		int minutes = (seconds / 60) % 60;
 		if (hours > 0) {
 			return hours + " "
-					+ ctx.getString(R.string.osmand_parking_hour)
+					+ app.getString(R.string.osmand_parking_hour)
 					+ (minutes > 0 ? " " + minutes + " "
-					+ ctx.getString(R.string.osmand_parking_minute) : "");
+					+ app.getString(R.string.osmand_parking_minute) : "");
+		} else if (minutes > 0) {
+			return minutes + " " + app.getString(R.string.osmand_parking_minute);
 		} else {
-			return minutes + " " + ctx.getString(R.string.osmand_parking_minute);
+			return "<1 " + app.getString(R.string.osmand_parking_minute);
 		}
+	}
+
+	public static String getFormattedPassedTime(@NonNull OsmandApplication app, long lastUploadedTimems, String def) {
+		if (lastUploadedTimems > 0) {
+			long duration = (System.currentTimeMillis() - lastUploadedTimems) / 1000;
+			if (duration > MIN_DURATION_FOR_DATE_FORMAT) {
+				return getFormattedDate(app, lastUploadedTimems);
+			} else {
+				String formattedDuration = OsmAndFormatter.getFormattedDuration((int) duration, app);
+				if (Algorithms.isEmpty(formattedDuration)) {
+					return app.getString(R.string.duration_moment_ago);
+				} else {
+					return app.getString(R.string.duration_ago, formattedDuration);
+				}
+			}
+		}
+		return def;
 	}
 
 	public static String getFormattedDurationShort(int seconds) {
@@ -106,7 +132,7 @@ public class OsmAndFormatter {
 		} else {
 			calendar.setTimeInMillis(seconds * 1000);
 		}
-		if (org.apache.commons.lang3.time.DateUtils.isSameDay(calendar, Calendar.getInstance())) {
+		if (isSameDay(calendar, Calendar.getInstance())) {
 			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime());
 		} else {
 			return SIMPLE_TIME_OF_DAY_FORMAT.format(calendar.getTime()) + " " + localDaysStr[calendar.get(Calendar.DAY_OF_WEEK)];
@@ -380,6 +406,19 @@ public class OsmAndFormatter {
 		}
 	}
 
+	public static boolean isSameDay(@NonNull Date firstDate, @NonNull Date secondDate) {
+		Calendar firstCal = Calendar.getInstance();
+		firstCal.setTime(firstDate);
+		Calendar secondCal = Calendar.getInstance();
+		secondCal.setTime(secondDate);
+		return isSameDay(firstCal, secondCal);
+	}
+
+	public static boolean isSameDay(@NonNull Calendar first, @NonNull Calendar second) {
+		return first.get(ERA) == second.get(ERA)
+				&& first.get(YEAR) == second.get(YEAR)
+				&& first.get(DAY_OF_YEAR) == second.get(DAY_OF_YEAR);
+	}
 
 	public static String toPublicString(CityType t, Context ctx) {
 		switch (t) {
@@ -434,7 +473,7 @@ public class OsmAndFormatter {
 		List<String> res = new ArrayList<>();
 		String localName = amenity.getName(locale, transliterate);
 		addPoiString(typeName, localName, res);
-		for (String name : amenity.getAllNames(true)) {
+		for (String name : amenity.getOtherNames(true)) {
 			addPoiString(typeName, name, res);
 		}
 		for (String name : amenity.getAdditionalInfoValues(false)) {

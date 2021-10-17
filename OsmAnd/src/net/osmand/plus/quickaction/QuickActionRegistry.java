@@ -74,7 +74,7 @@ public class QuickActionRegistry {
 
 	private List<QuickAction> quickActions;
 	private final Gson gson;
-	private List<QuickActionType> quickActionTypes = new ArrayList<>();
+	private List<QuickActionType> enabledTypes = new ArrayList<>();
 	private Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 	private Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
 
@@ -100,6 +100,14 @@ public class QuickActionRegistry {
 
 	public List<QuickAction> getFilteredQuickActions() {
 		return getQuickActions();
+	}
+
+	public long getLastModifiedTime() {
+		return settings.QUICK_ACTION_LIST.getLastModifiedTime();
+	}
+
+	public void setLastModifiedTime(long lastModifiedTime) {
+		settings.QUICK_ACTION_LIST.setLastModifiedTime(lastModifiedTime);
 	}
 
 	public void addQuickAction(QuickAction action) {
@@ -215,44 +223,46 @@ public class QuickActionRegistry {
 	}
 
 	public List<QuickActionType> updateActionTypes() {
-		List<QuickActionType> quickActionTypes = new ArrayList<>();
-		quickActionTypes.add(FavoriteAction.TYPE);
-		quickActionTypes.add(GPXAction.TYPE);
-		quickActionTypes.add(MarkerAction.TYPE);
+		List<QuickActionType> allTypes = new ArrayList<>();
+		allTypes.add(FavoriteAction.TYPE);
+		allTypes.add(GPXAction.TYPE);
+		allTypes.add(MarkerAction.TYPE);
 		// configure map
-		quickActionTypes.add(ShowHideFavoritesAction.TYPE);
-		quickActionTypes.add(ShowHideGpxTracksAction.TYPE);
-		quickActionTypes.add(ShowHidePoiAction.TYPE);
-		quickActionTypes.add(MapStyleAction.TYPE);
-		quickActionTypes.add(DayNightModeAction.TYPE);
-		quickActionTypes.add(ShowHideTransportLinesAction.TYPE);
-		quickActionTypes.add(ShowHideMapillaryAction.TYPE);
-		quickActionTypes.add(ShowHideCoordinatesWidgetAction.TYPE);
+		allTypes.add(ShowHideFavoritesAction.TYPE);
+		allTypes.add(ShowHideGpxTracksAction.TYPE);
+		allTypes.add(ShowHidePoiAction.TYPE);
+		allTypes.add(MapStyleAction.TYPE);
+		allTypes.add(DayNightModeAction.TYPE);
+		allTypes.add(ShowHideTransportLinesAction.TYPE);
+		allTypes.add(ShowHideMapillaryAction.TYPE);
+		allTypes.add(ShowHideCoordinatesWidgetAction.TYPE);
 		// navigation
-		quickActionTypes.add(NavVoiceAction.TYPE);
-		quickActionTypes.add(NavDirectionsFromAction.TYPE);
-		quickActionTypes.add(NavAddDestinationAction.TYPE);
-		quickActionTypes.add(NavAddFirstIntermediateAction.TYPE);
-		quickActionTypes.add(NavReplaceDestinationAction.TYPE);
-		quickActionTypes.add(NavAutoZoomMapAction.TYPE);
-		quickActionTypes.add(NavStartStopAction.TYPE);
-		quickActionTypes.add(NavResumePauseAction.TYPE);
-		quickActionTypes.add(SwitchProfileAction.TYPE);
-		quickActionTypes.add(NavRemoveNextDestination.TYPE);
-		OsmandPlugin.registerQuickActionTypesPlugins(quickActionTypes);
+		allTypes.add(NavVoiceAction.TYPE);
+		allTypes.add(NavDirectionsFromAction.TYPE);
+		allTypes.add(NavAddDestinationAction.TYPE);
+		allTypes.add(NavAddFirstIntermediateAction.TYPE);
+		allTypes.add(NavReplaceDestinationAction.TYPE);
+		allTypes.add(NavAutoZoomMapAction.TYPE);
+		allTypes.add(NavStartStopAction.TYPE);
+		allTypes.add(NavResumePauseAction.TYPE);
+		allTypes.add(SwitchProfileAction.TYPE);
+		allTypes.add(NavRemoveNextDestination.TYPE);
+
+		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
+		OsmandPlugin.registerQuickActionTypesPlugins(allTypes, enabledTypes);
 
 		Map<Integer, QuickActionType> quickActionTypesInt = new TreeMap<>();
 		Map<String, QuickActionType> quickActionTypesStr = new TreeMap<>();
-		for (QuickActionType qt : quickActionTypes) {
+		for (QuickActionType qt : allTypes) {
 			quickActionTypesInt.put(qt.getId(), qt);
 			quickActionTypesStr.put(qt.getStringId(), qt);
 		}
-		this.quickActionTypes = quickActionTypes;
+		this.enabledTypes = enabledTypes;
 		this.quickActionTypesInt = quickActionTypesInt;
 		this.quickActionTypesStr = quickActionTypesStr;
 		// reparse to get new quick actions
 		parseActiveActionsList(settings.QUICK_ACTION_LIST.get());
-		return quickActionTypes;
+		return enabledTypes;
 	}
 
 	public List<QuickActionType> produceTypeActionsListWithHeaders() {
@@ -270,7 +280,7 @@ public class QuickActionRegistry {
 		for (QuickAction qa : quickActions) {
 			set.add(qa.getActionType().getId());
 		}
-		for (QuickActionType t : quickActionTypes) {
+		for (QuickActionType t : enabledTypes) {
 			if (t.getCategory() == filter.getCategory()) {
 				if (!t.isActionEditable()) {
 					boolean instanceInList = set.contains(t.getId());

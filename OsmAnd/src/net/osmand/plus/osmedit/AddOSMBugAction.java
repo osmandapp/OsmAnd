@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 
 import net.osmand.data.LatLon;
@@ -34,23 +35,23 @@ public class AddOSMBugAction extends QuickAction {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
+	public void execute(@NonNull MapActivity mapActivity) {
 
 		OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 
 		if (plugin != null) {
 
-			LatLon latLon = activity.getMapView()
+			LatLon latLon = mapActivity.getMapView()
 					.getCurrentRotatedTileBox()
 					.getCenterLatLon();
 
 			if (getParams().isEmpty()) {
 
-				plugin.openOsmNote(activity, latLon.getLatitude(), latLon.getLongitude(), "", true);
+				plugin.openOsmNote(mapActivity, latLon.getLatitude(), latLon.getLongitude(), "", true);
 
 			} else {
 
-				plugin.openOsmNote(activity, latLon.getLatitude(), latLon.getLongitude(),
+				plugin.openOsmNote(mapActivity, latLon.getLatitude(), latLon.getLongitude(),
 						getParams().get(KEY_MESSAGE),
 						!Boolean.valueOf(getParams().get(KEY_SHO_DIALOG)));
 			}
@@ -58,7 +59,7 @@ public class AddOSMBugAction extends QuickAction {
 	}
 
 	@Override
-	public void drawUI(ViewGroup parent, MapActivity activity) {
+	public void drawUI(@NonNull ViewGroup parent, @NonNull MapActivity mapActivity) {
 
 		View view = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.quick_action_add_bug, parent, false);
@@ -76,7 +77,7 @@ public class AddOSMBugAction extends QuickAction {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 
 		SwitchCompat showDialog = (SwitchCompat) root.findViewById(R.id.dialogSwitch);
 		EditText message = (EditText) root.findViewById(R.id.message_edit);

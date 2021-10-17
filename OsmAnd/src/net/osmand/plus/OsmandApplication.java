@@ -1,7 +1,8 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -28,7 +29,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatDelegate;
+import androidx.car.app.CarToast;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
@@ -46,13 +47,16 @@ import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
-import net.osmand.plus.activities.ExitActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.auto.NavigationCarAppService;
+import net.osmand.plus.auto.NavigationScreen;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
+import net.osmand.plus.backup.NetworkSettingsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
@@ -77,6 +81,7 @@ import net.osmand.plus.osmedit.oauth.OsmOAuthHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RoutingHelper;
@@ -85,7 +90,8 @@ import net.osmand.plus.search.QuickSearchHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
+import net.osmand.plus.settings.backend.backup.FileSettingsHelper;
+import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.wikivoyage.data.TravelHelper;
 import net.osmand.router.GeneralRouter;
@@ -110,8 +116,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
-import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
-
 public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log";
 	public static final String OSMAND_PRIVACY_POLICY_URL = "https://osmand.net/help-online/privacy-policy";
@@ -124,6 +128,9 @@ public class OsmandApplication extends MultiDexApplication {
 	NavigationService navigationService;
 	DownloadService downloadService;
 	OsmandAidlApi aidlApi;
+
+	NavigationCarAppService navigationCarAppService;
+	NavigationSession carNavigationSession;
 
 	private final SQLiteAPI sqliteAPI = new SQLiteAPIImpl(this);
 	private final OsmAndTaskManager taskManager = new OsmAndTaskManager(this);
@@ -160,8 +167,10 @@ public class OsmandApplication extends MultiDexApplication {
 	TravelHelper travelHelper;
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
+	OsmandMap osmandMap;
 	LockHelper lockHelper;
-	SettingsHelper settingsHelper;
+	FileSettingsHelper fileSettingsHelper;
+	NetworkSettingsHelper networkSettingsHelper;
 	GpxDbHelper gpxDbHelper;
 	QuickActionRegistry quickActionRegistry;
 	OsmOAuthHelper osmOAuthHelper;
@@ -169,8 +178,9 @@ public class OsmandApplication extends MultiDexApplication {
 	MeasurementEditingContext measurementEditingContext;
 	OnlineRoutingHelper onlineRoutingHelper;
 	BackupHelper backupHelper;
+	TravelRendererHelper travelRendererHelper;
 
-	private Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
+	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
 	private boolean externalStorageDirectoryReadOnly;
 
@@ -187,9 +197,6 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 		super.onCreate();
-		if (Build.VERSION.SDK_INT < 21) {
-			AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-		}
 		createInUiThread();
 		uiHandler = new Handler();
 		appCustomization = new OsmAndAppCustomization();
@@ -224,6 +231,9 @@ public class OsmandApplication extends MultiDexApplication {
 //		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
 //			targetPointsHelper.clearPointToNavigate(false);
 //		}
+		osmandMap.getMapLayers().createLayers(osmandMap.getMapView());
+		osmandMap.getMapLayers().updateLayers(null);
+
 		startApplication();
 		System.out.println("Time to start application " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		timeToStart = System.currentTimeMillis();
@@ -231,6 +241,7 @@ public class OsmandApplication extends MultiDexApplication {
 		System.out.println("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 
 		SearchUICore.setDebugMode(OsmandPlugin.isDevelopment());
+		BackupHelper.DEBUG = true;//OsmandPlugin.isDevelopment();
 	}
 
 	public boolean isPlusVersionInApp() {
@@ -278,11 +289,11 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
-	
+
+	@NonNull
 	public UiUtilities getUIUtilities() {
 		return iconsCache;
 	}
-	
 	
 	@Override
 	public void onTerminate() {
@@ -391,8 +402,12 @@ public class OsmandApplication extends MultiDexApplication {
 		return lockHelper;
 	}
 
-	public SettingsHelper getSettingsHelper() {
-		return settingsHelper;
+	public FileSettingsHelper getFileSettingsHelper() {
+		return fileSettingsHelper;
+	}
+
+	public NetworkSettingsHelper getNetworkSettingsHelper() {
+		return networkSettingsHelper;
 	}
 
 	public OsmOAuthHelper getOsmOAuthHelper() {
@@ -436,7 +451,7 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void checkApplicationIsBeingInitialized(Activity activity, AppInitializeListener listener) {
+	public void checkApplicationIsBeingInitialized(AppInitializeListener listener) {
 		// start application if it was previously closed
 		startApplication();
 		if (listener != null) {
@@ -494,6 +509,10 @@ public class OsmandApplication extends MultiDexApplication {
 		return travelHelper;
 	}
 
+	public TravelRendererHelper getTravelRendererHelper() {
+		return travelRendererHelper;
+	}
+
 	public InAppPurchaseHelper getInAppPurchaseHelper() {
 		return inAppPurchaseHelper;
 	}
@@ -502,18 +521,24 @@ public class OsmandApplication extends MultiDexApplication {
 		return player;
 	}
 
-	public void initVoiceCommandPlayer(final Activity uiContext, final ApplicationMode applicationMode,
-	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force, final boolean applyAllModes) {
-		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
-		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-			if (warningNoneProvider && voiceProvider == null) {
-				if (uiContext instanceof MapActivity) {
-					OsmAndDialogs.showVoiceProviderDialog((MapActivity) uiContext, applicationMode, applyAllModes);
-				}
+	public void initVoiceCommandPlayer(@NonNull Context context,
+	                                   @NonNull ApplicationMode appMode,
+	                                   @Nullable Runnable onCommandPlayerCreated,
+	                                   boolean warnNoProvider,
+	                                   boolean showProgress,
+	                                   boolean forceInitialization,
+	                                   boolean applyAllModes) {
+		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(appMode);
+		if (OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
+			osmandSettings.VOICE_MUTE.setModeValue(appMode, true);
+		} else if (Algorithms.isEmpty(voiceProvider)) {
+			if (warnNoProvider && context instanceof MapActivity) {
+				OsmAndDialogs.showVoiceProviderDialog((MapActivity) context, appMode, applyAllModes);
 			}
 		} else {
-			if (player == null || !Algorithms.objectEquals(voiceProvider, player.getCurrentVoice()) || force) {
-				appInitializer.initVoiceDataInDifferentThread(uiContext, applicationMode, voiceProvider, run, showDialog);
+			if (player == null || !voiceProvider.equals(player.getCurrentVoice()) || forceInitialization) {
+				appInitializer.initVoiceDataInDifferentThread(context, appMode, voiceProvider,
+						onCommandPlayerCreated, showProgress);
 			}
 		}
 	}
@@ -524,6 +549,56 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setNavigationService(NavigationService navigationService) {
 		this.navigationService = navigationService;
+	}
+
+	public interface NavigationSessionListener {
+		void onNavigationSessionChanged(@Nullable NavigationSession navigationSession);
+	}
+
+	private NavigationSessionListener navigationSessionListener;
+
+	public void setNavigationSessionListener(@Nullable NavigationSessionListener navigationSessionListener) {
+		this.navigationSessionListener = navigationSessionListener;
+	}
+
+	@Nullable
+	public NavigationCarAppService getNavigationCarAppService() {
+		return navigationCarAppService;
+	}
+
+	public void setNavigationCarAppService(@Nullable NavigationCarAppService navigationCarAppService) {
+		this.navigationCarAppService = navigationCarAppService;
+	}
+
+	@Nullable
+	public NavigationSession getCarNavigationSession() {
+		return carNavigationSession;
+	}
+
+	public void setCarNavigationSession(@Nullable NavigationSession carNavigationSession) {
+		NavigationService navigationService = this.navigationService;
+		if (carNavigationSession == null) {
+			if (navigationService != null) {
+				navigationService.stopIfNeeded(this, NavigationService.USED_BY_CAR_APP);
+			}
+		} else {
+			startNavigationService(NavigationService.USED_BY_CAR_APP);
+		}
+		this.carNavigationSession = carNavigationSession;
+		NavigationSessionListener navigationSessionListener = this.navigationSessionListener;
+		if (navigationSessionListener != null) {
+			navigationSessionListener.onNavigationSessionChanged(carNavigationSession);
+		}
+	}
+
+	public void refreshCarScreen() {
+		NavigationSession carNavigationSession = getCarNavigationSession();
+		if (carNavigationSession != null) {
+			NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
+			if (navigationScreen != null) {
+				navigationScreen.invalidate();
+			}
+		}
 	}
 
 	public DownloadService getDownloadService() {
@@ -550,69 +625,6 @@ public class OsmandApplication extends MultiDexApplication {
 		targetPointsHelper.removeAllWayPoints(false, false);
 	}
 
-	private void fullExit() {
-		// http://stackoverflow.com/questions/2092951/how-to-close-android-application
-		System.runFinalizersOnExit(true);
-		System.exit(0);
-	}
-
-	public synchronized void closeApplication(final Activity activity) {
-		if (getNavigationService() != null) {
-			AlertDialog.Builder bld = new AlertDialog.Builder(activity);
-			bld.setMessage(R.string.background_service_is_enabled_question);
-			bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					closeApplicationAnywayImpl(activity, true);
-				}
-			});
-			bld.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					closeApplicationAnywayImpl(activity, false);
-				}
-			});
-			bld.show();
-		} else {
-			closeApplicationAnywayImpl(activity, true);
-		}
-	}
-	
-	private void closeApplicationAnyway(final Activity activity, boolean disableService) {
-		activity.finish();
-		Intent newIntent = new Intent(activity, ExitActivity.class);
-		newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-		newIntent.putExtra(ExitActivity.DISABLE_SERVICE, disableService);
-		startActivity(newIntent);
-	}
-
-	public void closeApplicationAnywayImpl(final Activity activity, boolean disableService) {
-		if (appInitializer.isAppInitializing()) {
-			resourceManager.close();
-		}
-		activity.finish();
-		if (getNavigationService() == null) {
-			fullExit();
-		} else if (disableService) {
-			final Intent serviceIntent = new Intent(this, NavigationService.class);
-			stopService(serviceIntent);
-
-			new Thread(new Runnable() {
-				public void run() {
-					//wait until the service has fully stopped
-					while (getNavigationService() != null) {
-						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
-						}
-					}
-
-					fullExit();
-				}
-			}).start();
-		}
-	}
-
 	public void startApplication() {
 		UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 		if (!(uncaughtExceptionHandler instanceof DefaultExceptionHandler)) {
@@ -626,8 +638,8 @@ public class OsmandApplication extends MultiDexApplication {
 
 	private class DefaultExceptionHandler implements UncaughtExceptionHandler {
 
-		private UncaughtExceptionHandler defaultHandler;
-		private PendingIntent intent;
+		private final UncaughtExceptionHandler defaultHandler;
+		private final PendingIntent intent;
 
 		public DefaultExceptionHandler() {
 			defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
@@ -659,7 +671,7 @@ public class OsmandApplication extends MultiDexApplication {
 						.append("Exception occured in thread ")
 						.append(thread.toString())
 						.append(" : \n")
-						.append(new String(out.toByteArray()));
+						.append(out.toString());
 
 				if (file.getParentFile().canWrite()) {
 					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
@@ -680,7 +692,6 @@ public class OsmandApplication extends MultiDexApplication {
 				// swallow all exceptions
 				android.util.Log.e(PlatformUtil.TAG, "Exception while handle other exception", e); 
 			}
-
 		}
 	}
 
@@ -697,37 +708,45 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void showShortToastMessage(final int msgId, final Object... args) {
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+		uiHandler.post(() -> {
+			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+			NavigationSession carNavigationSession = this.carNavigationSession;
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
+				CarToast.makeText(carNavigationSession.getCarContext(),
+						getString(msgId, args), CarToast.LENGTH_SHORT).show();
 			}
 		});
 	}
 
 	public void showShortToastMessage(final String msg) {
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
+		uiHandler.post(() -> {
+			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
+			NavigationSession carNavigationSession = this.carNavigationSession;
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
+				CarToast.makeText(carNavigationSession.getCarContext(),
+						msg, CarToast.LENGTH_SHORT).show();
 			}
 		});
 	}
 
 	public void showToastMessage(final int msgId, final Object... args) {
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
+		uiHandler.post(() -> {
+			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
+			NavigationSession carNavigationSession = this.carNavigationSession;
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
+				CarToast.makeText(carNavigationSession.getCarContext(),
+						getString(msgId, args), CarToast.LENGTH_LONG).show();
 			}
 		});
 	}
 
 	public void showToastMessage(final String msg) {
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();				
+		uiHandler.post(() -> {
+			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();
+			NavigationSession carNavigationSession = this.carNavigationSession;
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
+				CarToast.makeText(carNavigationSession.getCarContext(),
+						msg, CarToast.LENGTH_LONG).show();
 			}
 		});
 	}
@@ -872,8 +891,8 @@ public class OsmandApplication extends MultiDexApplication {
 	@Nullable
 	public GeneralRouter getRouter(Builder builder, ApplicationMode am) {
 		GeneralRouter router = builder.getRouter(am.getRoutingProfile());
-		if (router == null && am.getParent() != null) {
-			router = builder.getRouter(am.getParent().getStringKey());
+		if (router == null) {
+			router = builder.getRouter(am.getDefaultRoutingProfile());
 		}
 		return router;
 	}
@@ -888,7 +907,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
 		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
-		if (OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
+		if (!OsmandPlugin.isActive(AccessibilityPlugin.class)) {
 			return false;
 		}
 		if (mode == AccessibilityMode.ON) {
@@ -929,7 +948,7 @@ public class OsmandApplication extends MultiDexApplication {
 			
 		}
 		serviceIntent.putExtra(NavigationService.USAGE_INTENT, intent);
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 			startForegroundService(serviceIntent);
 		} else {
 			startService(serviceIntent);
@@ -1043,6 +1062,10 @@ public class OsmandApplication extends MultiDexApplication {
 		return mapViewTrackingUtilities;
 	}
 
+	public OsmandMap getOsmandMap() {
+		return osmandMap;
+	}
+
 	public void sendCrashLog() {
 		File file = getAppPath(OsmandApplication.EXCEPTION_PATH);
 		sendCrashLog(file);
@@ -1058,17 +1081,17 @@ public class OsmandApplication extends MultiDexApplication {
 		intent.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
 		Intent chooserIntent = Intent.createChooser(intent, getString(R.string.send_report));
 		chooserIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(chooserIntent);
+		AndroidUtils.startActivityIfSafe(this, intent, chooserIntent);
 	}
 
 	public void sendSupportEmail(String screenName) {
-		final Intent emailIntent = new Intent(Intent.ACTION_SEND)
+		Intent emailIntent = new Intent(Intent.ACTION_SEND)
 				.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-				.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@osmand.net"})
+				.putExtra(Intent.EXTRA_EMAIL, new String[] {"support@osmand.net"})
 				.putExtra(Intent.EXTRA_SUBJECT, screenName)
 				.putExtra(Intent.EXTRA_TEXT, getDeviceInfo());
 		emailIntent.setSelector(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:")));
-		startActivity(emailIntent);
+		AndroidUtils.startActivityIfSafe(this, emailIntent);
 	}
 
 	public String getDeviceInfo() {

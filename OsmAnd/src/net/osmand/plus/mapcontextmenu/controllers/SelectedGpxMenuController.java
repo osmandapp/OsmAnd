@@ -11,6 +11,7 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -44,7 +45,7 @@ public class SelectedGpxMenuController extends MenuController {
 			public void buttonPressed() {
 				mapContextMenu.close();
 				SelectedGpxFile selectedGpxFile = selectedGpxPoint.getSelectedGpxFile();
-				TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint, null, null, false);
+				TrackMenuFragment.showInstance(mapActivity, selectedGpxFile, selectedGpxPoint);
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_open_track);
@@ -174,51 +175,45 @@ public class SelectedGpxMenuController extends MenuController {
 	}
 
 	@Override
-	public Drawable getRightIcon() {
-		int color = isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
-		return getIcon(R.drawable.ic_action_polygom_dark, color);
+	public boolean displayDistanceDirection() {
+		return true;
 	}
 
 	@Override
-	public void share(LatLon latLon, String title, String address) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && selectedGpxPoint != null) {
-			final GPXFile gpxFile = selectedGpxPoint.getSelectedGpxFile().getGpxFile();
-			if (gpxFile != null) {
-				OsmandApplication app = mapActivity.getMyApplication();
-				if (Algorithms.isEmpty(gpxFile.path)) {
-					GpxUiHelper.saveAndShareCurrentGpx(app, gpxFile);
-				} else {
-					GpxUiHelper.saveAndShareGpxWithAppearance(app, gpxFile);
-				}
-			}
-		} else {
-			super.share(latLon, title, "");
-		}
+	public Drawable getRightIcon() {
+		int color = ColorUtilities.getActiveColorId(!isLight());
+		return getIcon(R.drawable.ic_action_polygom_dark, color);
 	}
 
 	public static class SelectedGpxPoint {
 
+		private final SelectedGpxFile selectedGpxFile;
+		private final WptPt selectedPoint;
 		private final WptPt prevPoint;
 		private final WptPt nextPoint;
-		private final WptPt selectedPoint;
-		private final SelectedGpxFile selectedGpxFile;
 		private final float bearing;
+		private final boolean showTrackPointMenu;
 
-		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint, WptPt nextPoint, float bearing) {
+		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint) {
+			this(selectedGpxFile, selectedPoint, null, null, Float.NaN, false);
+		}
+
+		public SelectedGpxPoint(SelectedGpxFile selectedGpxFile, WptPt selectedPoint, WptPt prevPoint,
+		                        WptPt nextPoint, float bearing, boolean showTrackPointMenu) {
 			this.prevPoint = prevPoint;
 			this.nextPoint = nextPoint;
 			this.selectedPoint = selectedPoint;
 			this.selectedGpxFile = selectedGpxFile;
 			this.bearing = bearing;
-		}
-
-		public WptPt getSelectedPoint() {
-			return selectedPoint;
+			this.showTrackPointMenu = showTrackPointMenu;
 		}
 
 		public SelectedGpxFile getSelectedGpxFile() {
 			return selectedGpxFile;
+		}
+
+		public WptPt getSelectedPoint() {
+			return selectedPoint;
 		}
 
 		public float getBearing() {
@@ -231,6 +226,10 @@ public class SelectedGpxMenuController extends MenuController {
 
 		public WptPt getNextPoint() {
 			return nextPoint;
+		}
+
+		public boolean shouldShowTrackPointMenu() {
+			return showTrackPointMenu;
 		}
 	}
 }

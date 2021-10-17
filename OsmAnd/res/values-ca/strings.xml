@@ -599,7 +599,7 @@
     <string name="arrived_at_destination">Heu arribat.</string>
     <string name="invalid_locations">Coordenades no vàlides</string>
     <string name="saving_gpx_tracks">S\'estan desant el fitxer GPX…</string>
-    <string name="osm_settings">Edició d\'OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Edició d\'OpenStreetMap</string>
     <string name="save_track_interval">Interval d\'enregistrament durant la navegació</string>
     <string name="additional_settings">Preferències addicionals</string>
     <string name="data_settings_descr">Especifiqueu l\'idioma, baixada/recàrrega de dades.</string>
@@ -1112,9 +1112,6 @@
     <string name="shared_string_favorite">Preferida</string>
     <string name="route_preferences">Preferències de ruta</string>
     <string name="route_info">Informació de ruta</string>
-    <string name="osmand_srtm_long_description_1000_chars">Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. 
-\n 
-\nLes dades globals (entre 70 ° nord i 70 ° sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
     <string name="keep_and_add_destination_point">Afegeix com el següent punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Càlcul sense Internet d\'un segment de ruta a l\'OsmAnd</string>
     <string name="gpx_option_calculate_first_last_segment">Calcula una ruta OsmAnd al primer i al darrer segment de la ruta</string>
@@ -3135,7 +3132,6 @@
     <string name="change_osmand_data_folder_question">Voleu canviar la carpeta de dades de OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Desplaça a la nova destinació</string>
     <string name="avoid_in_routing_descr_">Evita determinades rutes i tipus de carretera</string>
-    <string name="internal_app_storage_description">Emmagatzematge intern per a OsmAnd, (amagat a l\'usuari i a les altres aplicacions).</string>
     <string name="change_data_storage_folder">Canvia la carpeta d\'emmagatzematge</string>
     <string name="rendering_attr_piste_type_snow_park_name">Pista de terra</string>
     <string name="rendering_attr_piste_type_sleigh_name">Trineu</string>
@@ -3289,7 +3285,6 @@
     <string name="select_color">Seleccioneu el color</string>
     <string name="edit_profiles_descr">Els perfils predeterminats de l\'OsmAnd no es poden esborrar però si desactivar-se (a la pantalla anterior) o reordenar-se cap al el final.</string>
     <string name="edit_profiles">Edita els perfils</string>
-    <string name="select_nav_profile_dialog_message">El \'tipus de navegació\' determina com es calculen les rutes.</string>
     <string name="profile_appearance">Aparença del perfil</string>
     <string name="choose_icon_color_name">Icona, color i nom</string>
     <string name="reorder_profiles">Edita la llista de perfils</string>
@@ -3824,4 +3819,25 @@
     <string name="track_has_no_altitude">La traça no conté dades d\'altitud.</string>
     <string name="track_has_no_speed">La traça no conté dades de velocitat.</string>
     <string name="select_another_colorization">Seleccioneu un altre tipus de coloració.</string>
+    <string name="verification_code_missing_description">El retard pel codi pot ser de 10 minuts, verifiqueu també la vostra carpeta de correu brossa. Si això no us ajuda, utilitzeu el botó de sota.</string>
+    <string name="use_login_and_password">Utilitzeu nom d\'usuari i contrasenya</string>
+    <string name="available_until">Disponible fins al %1$s</string>
+    <string name="enough_contributions_descr">Enhorabona, heu fet prou contribucions a OpenStreetMap per disposar il·limitadament d\'actualitzacions de mapes.</string>
+    <string name="not_enough_contributions_descr">Heu de fer com a mínim %1$s contribucions al mapa de OpenStreetMap en els darrers %2$s dies.</string>
+    <string name="shared_string_contributions">Aportacions</string>
+    <string name="contributions_may_calculate_with_delay">Les aportacions podrien trigar unes hores en incloure\'s.</string>
+    <string name="map_updates_are_unavailable_yet">Encara no hi han actualitzacions del mapa :-(</string>
+    <string name="connect_track_points_as">Connecta les fites</string>
+    <string name="search_title">Cerca: %1$s</string>
+    <string name="icon_group_nautical">Nàutica</string>
+    <string name="exit_pan_mode_descr">Premeu Selecciona per sortir del mode panoràmic</string>
+    <string name="upload_gpx_description_hint">Deixeu-ho buit, els noms de les traces s\'utilitzaran com a descripció. S\'aplicarà la descripció introduïda per a cada traça.</string>
+    <string name="shared_app_storage_description">La memòria compartida ja no està disponible donat els canvis en les normes d\'accés a l\'emmagatzematge d\'Android.</string>
+    <string name="internal_app_storage_description">Emmagatzematge intern, amagat a l\'usuari i a d\'altres aplicacions, fent que ningú excepte OsmAnd pot accedir a les vostres dades</string>
+    <string name="shared_storage_warning_title">Canvis en les normes d\'accés a l\'emmagatzematge</string>
+    <string name="purchases_feature_desc_android_auto">Mapes locals OsmAnd i navegació a la pantalla del vostre vehicle. S\'integra amb els controls del vostre vehicle.</string>
+    <string name="shared_string_details">Detalls</string>
+    <string name="shared_storage_warning_description">Des de la propera actualització d\'OsmAnd, l\'aplicació perdrà l\'accés a l\'emmagatzematge compartit, per la modificació de les regles d\'accés a l\'emmagatzematge a Android.
+\n
+\nCanvieu l\'emmagatzematge compartit a un altre disponible; si no feu això, l\'aplicació perdrà l\'accés a les vostres dades: siguin els mapes locals, les traces GPX com tota la resta.</string>
 </resources>

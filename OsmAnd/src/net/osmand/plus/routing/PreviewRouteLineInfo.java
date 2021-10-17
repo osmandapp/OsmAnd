@@ -3,18 +3,18 @@ package net.osmand.plus.routing;
 import android.graphics.Rect;
 import android.os.Bundle;
 
-import net.osmand.plus.track.GradientScaleType;
 import net.osmand.util.Algorithms;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class PreviewRouteLineInfo {
 
-	private static final String LINE_COLOR_DAY = "line_color_day";
-	private static final String LINE_COLOR_NIGHT = "line_color_night";
-	private static final String LINE_COLOR_GRADIENT = "line_color_gradient";
+	private static final String CUSTOM_COLOR_DAY = "custom_color_day";
+	private static final String CUSTOM_COLOR_NIGHT = "custom_color_night";
+	private static final String ROUTE_COLORING_TYPE = "route_coloring_type";
 	private static final String LINE_WIDTH = "line_width";
 	private static final String NAVIGATION_ICON_ID = "navigation_icon_id";
 	private static final String NAVIGATION_ICON_COLOR = "navigation_icon_color";
@@ -22,32 +22,35 @@ public class PreviewRouteLineInfo {
 	private static final String CENTER_X = "center_x";
 	private static final String CENTER_Y = "center_y";
 	private static final String SCREEN_HEIGHT = "screen_height";
-	private static final String USE_DEFAULT_COLOR = "use_default_color";
 
 	// parameters to save
 	@ColorInt
-	private Integer colorDay;
-	private Integer colorNight;
-	private GradientScaleType scaleType;
+	private int customColorDay;
+	@ColorInt
+	private int customColorNight;
+	private ColoringType coloringType = ColoringType.DEFAULT;
+	private String routeInfoAttribute;
 	private String width;
 
 	// temporally parameters to show in preview
 	@ColorInt
 	private int iconColor;
+	@DrawableRes
 	private int iconId;
 	private Rect lineBounds;
 	private int centerX;
 	private int centerY;
 	private int screenHeight;
-	private boolean useDefaultColor;
 
-	public PreviewRouteLineInfo(@Nullable @ColorInt Integer colorDay,
-								@Nullable @ColorInt Integer colorNight,
-								@Nullable GradientScaleType gradientScaleType,
-								@Nullable String width) {
-		this.colorDay = colorDay;
-		this.colorNight = colorNight;
-		this.scaleType = gradientScaleType;
+	public PreviewRouteLineInfo(@ColorInt int customColorDay,
+	                            @ColorInt int customColorNight,
+	                            @NonNull ColoringType coloringType,
+	                            @Nullable String routeInfoAttribute,
+	                            @Nullable String width) {
+		this.customColorDay = customColorDay;
+		this.customColorNight = customColorNight;
+		this.coloringType = coloringType;
+		this.routeInfoAttribute = routeInfoAttribute;
 		this.width = width;
 	}
 
@@ -56,9 +59,10 @@ public class PreviewRouteLineInfo {
 	}
 
 	public PreviewRouteLineInfo(@NonNull PreviewRouteLineInfo existed) {
-		this.colorDay = existed.colorDay;
-		this.colorNight = existed.colorNight;
-		this.scaleType = existed.scaleType;
+		this.customColorDay = existed.customColorDay;
+		this.customColorNight = existed.customColorNight;
+		this.coloringType = existed.coloringType;
+		this.routeInfoAttribute = existed.routeInfoAttribute;
 		this.width = existed.width;
 		this.iconId = existed.iconId;
 		this.iconColor = existed.iconColor;
@@ -66,23 +70,22 @@ public class PreviewRouteLineInfo {
 		this.centerX = existed.centerX;
 		this.centerY = existed.centerY;
 		this.screenHeight = existed.screenHeight;
-		this.useDefaultColor = existed.useDefaultColor;
 	}
 
-	public void setColor(@ColorInt int color, boolean nightMode) {
+	public void setCustomColor(@ColorInt int color, boolean nightMode) {
 		if (nightMode) {
-			colorNight = color;
+			customColorNight = color;
 		} else {
-			colorDay = color;
+			customColorDay = color;
 		}
 	}
 
-	public void setUseDefaultColor(boolean useDefaultColor) {
-		this.useDefaultColor = useDefaultColor;
+	public void setRouteColoringType(@NonNull ColoringType coloringType) {
+		this.coloringType = coloringType;
 	}
 
-	public void setGradientScaleType(@Nullable GradientScaleType scaleType) {
-		this.scaleType = scaleType;
+	public void setRouteInfoAttribute(@Nullable String routeInfoAttribute) {
+		this.routeInfoAttribute = routeInfoAttribute;
 	}
 
 	public void setWidth(@Nullable String width) {
@@ -113,22 +116,18 @@ public class PreviewRouteLineInfo {
 		this.screenHeight = screenHeight;
 	}
 
-	@Nullable
-	public Integer getColor(boolean nightMode) {
-		if (!useDefaultColor) {
-			return getColorIgnoreDefault(nightMode);
-		}
-		return null;
+	public int getCustomColor(boolean nightMode) {
+		return nightMode ? customColorNight : customColorDay;
+	}
+
+	@NonNull
+	public ColoringType getRouteColoringType() {
+		return coloringType;
 	}
 
 	@Nullable
-	public Integer getColorIgnoreDefault(boolean nightMode) {
-		return nightMode ? colorNight : colorDay;
-	}
-
-	@Nullable
-	public GradientScaleType getGradientScaleType() {
-		return scaleType;
+	public String getRouteInfoAttribute() {
+		return routeInfoAttribute;
 	}
 
 	@Nullable
@@ -162,38 +161,27 @@ public class PreviewRouteLineInfo {
 	}
 
 	private void readBundle(@NonNull Bundle bundle) {
-		if (bundle.containsKey(LINE_COLOR_DAY)) {
-			colorDay = bundle.getInt(LINE_COLOR_DAY);
+		if (bundle.containsKey(CUSTOM_COLOR_DAY)) {
+			customColorDay = bundle.getInt(CUSTOM_COLOR_DAY);
 		}
-		if (bundle.containsKey(LINE_COLOR_NIGHT)) {
-			colorNight = bundle.getInt(LINE_COLOR_NIGHT);
+		if (bundle.containsKey(CUSTOM_COLOR_NIGHT)) {
+			customColorNight = bundle.getInt(CUSTOM_COLOR_NIGHT);
 		}
-		if (bundle.containsKey(LINE_COLOR_GRADIENT)) {
-			String scaleTypeName = bundle.getString(LINE_COLOR_GRADIENT);
-			if (!Algorithms.isEmpty(scaleTypeName)) {
-				scaleType = GradientScaleType.getGradientTypeByName(scaleTypeName);
-			}
-		}
+		coloringType = ColoringType.getRouteColoringTypeByName(bundle.getString(ROUTE_COLORING_TYPE));
+		routeInfoAttribute = ColoringType.getRouteInfoAttribute(bundle.getString(ROUTE_COLORING_TYPE));
 		width = bundle.getString(LINE_WIDTH);
 		iconId = bundle.getInt(NAVIGATION_ICON_ID);
 		iconColor = bundle.getInt(NAVIGATION_ICON_COLOR);
-		lineBounds = (Rect) bundle.getParcelable(LINE_BOUNDS);
+		lineBounds = bundle.getParcelable(LINE_BOUNDS);
 		centerX = bundle.getInt(CENTER_X);
 		centerY = bundle.getInt(CENTER_Y);
 		screenHeight = bundle.getInt(SCREEN_HEIGHT);
-		useDefaultColor = bundle.getBoolean(USE_DEFAULT_COLOR);
 	}
 
 	public void saveToBundle(@NonNull Bundle bundle) {
-		if (colorDay != null) {
-			bundle.putInt(LINE_COLOR_DAY, colorDay);
-		}
-		if (colorNight != null) {
-			bundle.putInt(LINE_COLOR_NIGHT, colorNight);
-		}
-		if (scaleType != null) {
-			bundle.putString(LINE_COLOR_GRADIENT, scaleType.getTypeName());
-		}
+		bundle.putInt(CUSTOM_COLOR_DAY, customColorDay);
+		bundle.putInt(CUSTOM_COLOR_NIGHT, customColorNight);
+		bundle.putString(ROUTE_COLORING_TYPE, coloringType.getName(routeInfoAttribute));
 		if (width != null) {
 			bundle.putString(LINE_WIDTH, width);
 		}
@@ -203,7 +191,6 @@ public class PreviewRouteLineInfo {
 		bundle.putInt(CENTER_X, centerX);
 		bundle.putInt(CENTER_Y, centerY);
 		bundle.putInt(SCREEN_HEIGHT, screenHeight);
-		bundle.putBoolean(USE_DEFAULT_COLOR, useDefaultColor);
 	}
 
 	@Override
@@ -213,17 +200,19 @@ public class PreviewRouteLineInfo {
 
 		PreviewRouteLineInfo that = (PreviewRouteLineInfo) o;
 
-		if (!Algorithms.objectEquals(getColor(false), that.getColor(false))) return false;
-		if (!Algorithms.objectEquals(getColor(true), that.getColor(true))) return false;
-		if (!Algorithms.objectEquals(scaleType, that.scaleType)) return false;
+		if (getCustomColor(false) != that.getCustomColor(false)) return false;
+		if (getCustomColor(true) != that.getCustomColor(true)) return false;
+		if (!Algorithms.objectEquals(coloringType, that.coloringType)) return false;
+		if (!Algorithms.objectEquals(routeInfoAttribute, that.routeInfoAttribute)) return false;
 		return Algorithms.objectEquals(width, that.width);
 	}
 
 	@Override
 	public int hashCode() {
-		int result = colorDay != null ? colorDay.hashCode() : 0;
-		result = 31 * result + (colorNight != null ? colorNight.hashCode() : 0);
-		result = 31 * result + (scaleType != null ? scaleType.getTypeName().hashCode() : 0);
+		int result = customColorDay;
+		result = 31 * result + customColorNight;
+		result = 31 * result + coloringType.ordinal();
+		result = 31 * result + (routeInfoAttribute != null ? routeInfoAttribute.hashCode() : 0);
 		result = 31 * result + (width != null ? width.hashCode() : 0);
 		return result;
 	}

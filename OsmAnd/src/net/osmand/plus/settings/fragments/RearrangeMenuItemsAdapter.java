@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -32,8 +33,13 @@ import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AV_NOTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BACKUP_RESTORE_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DIVIDER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_OSM_EDITS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRACKS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
@@ -76,12 +82,8 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 		this.items = items;
 		uiUtilities = app.getUIUtilities();
 		this.nightMode = nightMode;
-		activeColorRes = nightMode
-				? R.color.active_color_primary_dark
-				: R.color.active_color_primary_light;
-		textColorRes = nightMode
-				? R.color.text_color_primary_dark
-				: R.color.text_color_primary_light;
+		activeColorRes = ColorUtilities.getActiveColorId(nightMode);
+		textColorRes = ColorUtilities.getPrimaryTextColorId(nightMode);
 	}
 
 	@Override
@@ -492,6 +494,13 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 
 	private int getDescription(String id) {
 		switch (id) {
+			case DRAWER_FAVORITES_ID:
+			case DRAWER_TRACKS_ID:
+			case DRAWER_AV_NOTES_ID:
+			case DRAWER_OSM_EDITS_ID:
+				return R.string.shared_string_my_places;
+			case DRAWER_BACKUP_RESTORE_ID:
+				return R.string.shared_string_settings;
 			case DRAWER_BUILDS_ID:
 				return R.string.developer_plugin;
 			case GPX_FILES_ID:
@@ -515,7 +524,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			case MAP_CONTEXT_MENU_CREATE_POI:
 			case MAP_CONTEXT_MENU_MODIFY_OSM_NOTE:
 			case MAP_CONTEXT_MENU_OPEN_OSM_NOTE:
-				return R.string.osm_settings;
+				return R.string.osm_editing_plugin_name;
 			case MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC:
 				return R.string.parking_positions;
 			default:

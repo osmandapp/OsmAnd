@@ -30,7 +30,6 @@ import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.helpers.enums.DrivingRegion;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -269,6 +268,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		SwitchPreferenceEx useMagneticSensorPref = (SwitchPreferenceEx) findPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS.getId());
 		useMagneticSensorPref.setTitle(getString(R.string.use_magnetic_sensor));
 		useMagneticSensorPref.setDescription(getString(R.string.use_magnetic_sensor_descr));
+		useMagneticSensorPref.setVisible(app.getLocationProvider().hasOrientaionSensor());
 	}
 
 	private void setupMapEmptyStateAllowedPref() {

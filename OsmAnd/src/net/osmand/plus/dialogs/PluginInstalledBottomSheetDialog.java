@@ -8,15 +8,14 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -34,7 +33,7 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.profiles.ProfileDataUtils;
+import net.osmand.plus.profiles.data.ProfileDataUtils;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
@@ -93,12 +92,11 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		if (pluginIcon.getConstantState() != null) {
 			pluginIcon = pluginIcon.getConstantState().newDrawable().mutate();
 		}
-		pluginIcon = UiUtilities.tintDrawable(pluginIcon, ContextCompat.getColor(
-				context, nightMode ? R.color.icon_color_default_light : R.color.icon_color_default_dark));
+		pluginIcon = UiUtilities.tintDrawable(pluginIcon, ColorUtilities.getDefaultIconColor(app, nightMode));
 
 		BaseBottomSheetItem pluginTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(pluginTitleSpan)
-				.setTitleColorId(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light)
+				.setTitleColorId(ColorUtilities.getActiveColorId(nightMode))
 				.setIcon(pluginIcon)
 				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
 				.create();
@@ -136,8 +134,8 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	@Override
-	public void newDownloadIndexes() {
-		updateItems();
+	public void onUpdatedIndexesList() {
+		updateMenuItems();
 	}
 
 	@Override
@@ -172,7 +170,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	@Override
 	public void downloadHasFinished() {
-		updateItems();
+		updateMenuItems();
 	}
 
 	@Override
@@ -205,7 +203,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(PLUGIN_ID_KEY, pluginId);
 	}
@@ -309,25 +307,6 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 		}
 	}
 
-	private void updateItems() {
-		Activity activity = getActivity();
-		Context themedCtx = UiUtilities.getThemedContext(activity, nightMode);
-		View mainView = getView();
-		if (activity != null && mainView != null) {
-			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
-					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
-			if (itemsContainer != null) {
-				itemsContainer.removeAllViews();
-			}
-			items.clear();
-			createMenuItems(null);
-			for (BaseBottomSheetItem item : items) {
-				item.inflate(themedCtx, itemsContainer, nightMode);
-			}
-			setupHeightAndBackground(mainView);
-		}
-	}
-
 	public static void showInstance(@NonNull FragmentManager fm, String pluginId, Boolean usedOnMap) {
 		try {
 			if (!fm.isStateSaved()) {
@@ -346,7 +325,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 	public interface PluginStateListener {
 
-		void onPluginStateChanged(OsmandPlugin plugin);
+		void onPluginStateChanged(@NonNull OsmandPlugin plugin);
 
 	}
 }

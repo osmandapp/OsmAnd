@@ -42,6 +42,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String VEHICLE_WEIGHT = "weight";
 	public static final String VEHICLE_WIDTH = "width";
 	public static final String VEHICLE_LENGTH = "length";
+	public static final String CHECK_ALLOW_PRIVATE_NEEDED = "check_allow_private_needed";
 
 	private static boolean USE_CACHE = true;
 	public static long TIMER = 0;
@@ -76,6 +77,7 @@ public class GeneralRouter implements VehicleRouter {
 	private float maxVehicleSpeed;
 
 	private TLongHashSet impassableRoads;
+	
 	private GeneralRouterProfile profile;
 	
 	Map<RouteRegion, Map<IntHolder, Float>>[] evalCache;	
@@ -110,9 +112,9 @@ public class GeneralRouter implements VehicleRouter {
 		PEDESTRIAN,
 		BICYCLE,
 		BOAT,
-		PUBLIC_TRANSPORT
+		PUBLIC_TRANSPORT,
+		HORSEBACKRIDING
 	}
-
 	
 	public enum RoutingParameterType {
 		NUMERIC,
@@ -268,11 +270,11 @@ public class GeneralRouter implements VehicleRouter {
 	@Override
 	public boolean acceptLine(RouteDataObject way) {
 		Float res = getCache(RouteDataObjectAttribute.ACCESS, way);
-		if(res == null) {
+		if (res == null) {
 			res = (float) getObjContext(RouteDataObjectAttribute.ACCESS).evaluateInt(way, 0);
 			putCache(RouteDataObjectAttribute.ACCESS, way, res);
 		}
-		if(impassableRoads != null && impassableRoads.contains(way.id)) {
+		if (impassableRoads != null && impassableRoads.contains(way.id)) {
 			return false;
 		}
 		return res >= 0;
@@ -882,7 +884,7 @@ public class GeneralRouter implements VehicleRouter {
 			}
 			for(int k = 0; k < types.length; k++) {
 				Integer nid = map.get(types[k]);
-				if(nid == null){
+				if (nid == null) {
 					RouteTypeRule r = reg.quickGetEncodingRule(types[k]);
 					nid = registerTagValueAttribute(r.getTag(), r.getValue());
 					map.put(types[k], nid);

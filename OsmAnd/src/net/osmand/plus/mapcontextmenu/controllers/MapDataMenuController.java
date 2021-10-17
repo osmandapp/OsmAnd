@@ -84,7 +84,7 @@ public class MapDataMenuController extends MenuController {
 			}
 		}
 
-		srtmDisabled = OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) == null
+		srtmDisabled = !OsmandPlugin.isActive(SRTMPlugin.class)
 				&& !InAppPurchaseHelper.isContourLinesPurchased(app);
 		OsmandPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 		srtmNeedsInstallation = srtmPlugin == null || srtmPlugin.needsInstallation();
@@ -425,9 +425,6 @@ public class MapDataMenuController extends MenuController {
 
 		boolean internetConnectionAvailable =
 				mapActivity.getMyApplication().getSettings().isInternetConnectionAvailable();
-		boolean downloadIndexes = internetConnectionAvailable
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
 		boolean isDownloading = indexItem != null && downloadThread.isDownloading(indexItem);
 		if (isDownloading) {
@@ -452,7 +449,7 @@ public class MapDataMenuController extends MenuController {
 				titleProgressController.caption = v;
 			}
 			titleProgressController.visible = true;
-		} else if (downloadIndexes) {
+		} else if (downloadThread.shouldDownloadIndexes()) {
 			titleProgressController.setIndexesDownloadMode(mapActivity);
 			titleProgressController.visible = true;
 		} else if (!internetConnectionAvailable) {

@@ -14,7 +14,6 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatCheckedTextView;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -25,9 +24,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -41,10 +37,11 @@ import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.voice.JSMediaCommandPlayerImpl;
-import net.osmand.plus.voice.JSTTSCommandPlayerImpl;
-import net.osmand.plus.voice.MediaCommandPlayerImpl;
-import net.osmand.plus.voice.TTSCommandPlayerImpl;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.voice.JsMediaCommandPlayer;
+import net.osmand.plus.voice.JsTtsCommandPlayer;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -196,20 +193,23 @@ public class RoutingOptionsHelper {
 			}
 		}
 		VP.setModeValue(selectedAppMode, provider);
-		app.initVoiceCommandPlayer(mapActivity, selectedAppMode, false, null, true, false, applyAllModes);
+		app.initVoiceCommandPlayer(mapActivity, selectedAppMode, null,
+				false, true, false, applyAllModes);
 	}
 
 	public Set<String> getVoiceFiles(Activity activity) {
 		// read available voice data
 		OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		File extStorage = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-		Set<String> setFiles = new LinkedHashSet<String>();
+		Set<String> setFiles = new LinkedHashSet<>();
 		if (extStorage.exists()) {
-			for (File f : extStorage.listFiles()) {
-				if (f.isDirectory()) {
-					if (JSMediaCommandPlayerImpl.isMyData(f) || JSTTSCommandPlayerImpl.isMyData(f)
-							|| MediaCommandPlayerImpl.isMyData(f) || TTSCommandPlayerImpl.isMyData(f)) {
-						setFiles.add(f.getName());
+			File[] voiceDirs = extStorage.listFiles();
+			if (voiceDirs != null) {
+				for (File f : voiceDirs) {
+					if (f.isDirectory()) {
+						if (JsMediaCommandPlayer.isMyData(f) || JsTtsCommandPlayer.isMyData(f)) {
+							setFiles.add(f.getName());
+						}
 					}
 				}
 			}
@@ -242,33 +242,30 @@ public class RoutingOptionsHelper {
 				TargetPointsHelper tg = app.getTargetPointsHelper();
 				List<Location> ps = rp.getPoints(app);
 				if (ps.size() > 0) {
+					Location firstLoc = ps.get(0);
+					Location lastLoc = ps.get(ps.size() - 1);
 					TargetPoint pointToStart = tg.getPointToStart();
 					TargetPoint pointToNavigate = tg.getPointToNavigate();
 					if (rp.getFile().hasRoute()) {
-						TargetPoint endPoint = selected ? pointToStart : null;
-						Location lastLoc = ps.get(ps.size() - 1);
-						Location firstLoc = ps.get(0);
 						LatLon firstLatLon = new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude());
-						LatLon endLocation = endPoint != null ? endPoint.point : new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude());
-						LatLon startLocation = selected ? firstLatLon : (pointToNavigate != null ? pointToNavigate.point : firstLatLon);
+						LatLon endLocation = pointToStart != null ? pointToStart.point : new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude());
+						LatLon startLocation = pointToNavigate != null ? pointToNavigate.point : firstLatLon;
 						tg.navigateToPoint(endLocation, false, -1);
 						if (pointToStart != null) {
 							tg.setStartPoint(startLocation, false, null);
 						}
 						tg.updateRouteAndRefresh(true);
 					} else {
-						Location first = ps.get(0);
-						Location end = ps.get(ps.size() - 1);
 						boolean update = false;
 						if (pointToNavigate == null
-								|| MapUtils.getDistance(pointToNavigate.point, new LatLon(first.getLatitude(), first.getLongitude())) < 10) {
-							tg.navigateToPoint(new LatLon(end.getLatitude(), end.getLongitude()), false, -1);
+								|| MapUtils.getDistance(pointToNavigate.point, new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude())) < 10) {
+							tg.navigateToPoint(new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude()), false, -1);
 							update = true;
 						}
 						if (pointToStart == null
 								|| MapUtils.getDistance(pointToStart.point,
-								new LatLon(end.getLatitude(), end.getLongitude())) < 10) {
-							tg.setStartPoint(new LatLon(first.getLatitude(), first.getLongitude()), false, null);
+								new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude())) < 10) {
+							tg.setStartPoint(new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude()), false, null);
 							update = true;
 						}
 						if (update) {
@@ -284,6 +281,8 @@ public class RoutingOptionsHelper {
 			} else if (gpxParam.id == R.string.calculate_osmand_route_gpx) {
 				settings.GPX_ROUTE_CALC.set(selected);
 				rp.setCalculateOsmAndRoute(selected);
+			} else if (gpxParam.id == R.string.connect_track_points_as) {
+				rp.setConnectPointStraightly(selected);
 			}
 		}
 		if (gpxParam.id == R.string.calculate_osmand_route_without_internet) {
@@ -414,6 +413,8 @@ public class RoutingOptionsHelper {
 				return new TimeConditionalRoutingItem();
 			case OtherSettingsRoutingParameter.KEY:
 				return new OtherSettingsRoutingParameter();
+			case CustomizeRouteLineRoutingParameter.KEY:
+				return new CustomizeRouteLineRoutingParameter();
 			default:
 				return getRoutingParameterInnerById(am, parameter);
 		}
@@ -484,7 +485,7 @@ public class RoutingOptionsHelper {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_reverse_route,
 						app.getString(R.string.gpx_option_reverse_route), rparams.isReverse()));
 			}
-			if (!rparams.isUseIntermediatePointsRTE()) {
+			if (!rparams.useIntermediateRtePoints()) {
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_from_start_point,
 						app.getString(R.string.gpx_option_from_start_point), rparams.isPassWholeRoute()));
 				list.add(new OtherLocalRoutingParameter(R.string.gpx_option_calculate_first_last_segment,
@@ -961,6 +962,35 @@ public class RoutingOptionsHelper {
 		}
 	}
 
+	public static class CustomizeRouteLineRoutingParameter extends LocalRoutingParameter {
+
+		public static final String KEY = "CustomizeRouteLineRoutingParameter";
+
+		public CustomizeRouteLineRoutingParameter() {
+			super(null);
+		}
+
+		@Override
+		public String getKey() {
+			return KEY;
+		}
+
+		@Override
+		public boolean canAddToRouteMenu() {
+			return false;
+		}
+
+		@Override
+		public int getActiveIconId() {
+			return R.drawable.ic_action_appearance;
+		}
+
+		@Override
+		public int getDisabledIconId() {
+			return R.drawable.ic_action_appearance;
+		}
+	}
+
 	public static class OtherLocalRoutingParameter extends LocalRoutingParameter {
 
 		public static final String KEY = "OtherLocalRoutingParameter";
@@ -1056,6 +1086,7 @@ public class RoutingOptionsHelper {
 		BOAT(MuteSoundRoutingParameter.KEY),
 		AIRCRAFT(MuteSoundRoutingParameter.KEY),
 		SKI(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
+		HORSE(MuteSoundRoutingParameter.KEY),
 		OTHER(MuteSoundRoutingParameter.KEY);
 
 		List<String> routingParameters;
@@ -1084,6 +1115,8 @@ public class RoutingOptionsHelper {
 				return PermanentAppModeOptions.AIRCRAFT.routingParameters;
 			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.SKI)) {
 				return PermanentAppModeOptions.SKI.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.HORSE)) {
+				return PermanentAppModeOptions.HORSE.routingParameters;
 			} else {
 				return PermanentAppModeOptions.OTHER.routingParameters;
 			}

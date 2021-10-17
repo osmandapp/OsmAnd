@@ -25,17 +25,17 @@ import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.AbstractPoiType;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
-import net.osmand.plus.chooseplan.ChoosePlanDialogFragment.ChoosePlanDialogType;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.search.listitems.QuickSearchBannerListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
@@ -285,12 +285,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		LinearLayout view = getLinearLayout(convertView, R.layout.read_wikipedia_ofline_banner);
 		View btnGet = view.findViewById(R.id.btn_get);
 		if (btnGet != null) {
-			btnGet.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					ChoosePlanDialogFragment.showDialogInstance(app, activity.getSupportFragmentManager(), ChoosePlanDialogType.WIKIPEDIA);
-				}
-			});
+			btnGet.setOnClickListener(
+					v -> ChoosePlanFragment.showInstance(activity, OsmAndFeature.WIKIPEDIA));
 		}
 		return view;
 	}
@@ -545,10 +541,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	}
 
 	private void setupBackground(View view) {
-		int bgColorResId = isNightMode() ?
-				R.color.list_background_color_dark :
-				R.color.list_background_color_light;
-		view.setBackgroundColor(app.getResources().getColor(bgColorResId));
+		view.setBackgroundColor(ColorUtilities.getListBgColor(app, isNightMode()));
 	}
 
 	private void setupDivider(final int position,

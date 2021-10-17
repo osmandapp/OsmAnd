@@ -1,6 +1,5 @@
 package net.osmand.plus.wikivoyage.article;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -22,11 +21,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
-import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ProgressItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
@@ -48,8 +47,6 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	public static final String SELECTED_LANG_KEY = "selected_lang";
 
 	public static final int OPEN_ARTICLE_REQUEST_CODE = 2;
-
-	private static final long UNDEFINED = -1;
 
 	private TravelArticleIdentifier articleId;
 	private String selectedLang;
@@ -107,7 +104,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putParcelable(ARTICLE_ID_KEY, articleId);
 		outState.putString(SELECTED_LANG_KEY, selectedLang);
@@ -128,9 +125,9 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fm,
-	                                   @Nullable Fragment targetFragment,
-	                                   @NonNull TravelArticleIdentifier articleId,
-	                                   @NonNull String selectedLang) {
+									   @Nullable Fragment targetFragment,
+									   @NonNull TravelArticleIdentifier articleId,
+									   @NonNull String selectedLang) {
 		try {
 			Bundle args = new Bundle();
 			args.putParcelable(ARTICLE_ID_KEY, articleId);
@@ -224,8 +221,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 				txtListChild.setTextColor(ContextCompat.getColor(context, nightMode
 						? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			} else {
-				txtListChild.setTextColor(ContextCompat.getColor(context, nightMode
-						? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
+				txtListChild.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
 			}
 			txtListChild.setCompoundDrawablesWithIntrinsicBounds(itemChildIcon, null, null, null);
 
@@ -250,17 +246,16 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 				lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode
 						? R.color.wikivoyage_contents_parent_icon_dark : R.color.wikivoyage_contents_parent_icon_light));
 			} else {
-				lblListHeader.setTextColor(ContextCompat.getColor(context, nightMode
-						? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
+				lblListHeader.setTextColor(ColorUtilities.getSecondaryTextColor(context, nightMode));
 			}
 			lblListHeader.setCompoundDrawablesWithIntrinsicBounds(itemGroupIcon, null, null, null);
 
 			adjustIndicator(getMyApplication(), groupPosition, isExpanded, convertView, !nightMode);
-			ImageView indicator = (ImageView) convertView.findViewById(R.id.explist_indicator);
+			ImageView indicator = (ImageView) convertView.findViewById(R.id.explicit_indicator);
 			indicator.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(isExpanded){
+					if (isExpanded) {
 						expListView.collapseGroup(groupPosition);
 					} else {
 						expListView.expandGroup(groupPosition);
@@ -278,24 +273,6 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		@Override
 		public boolean isChildSelectable(int groupPosition, int childPosition) {
 			return true;
-		}
-	}
-
-	public void updateMenu() {
-		Activity activity = getActivity();
-		View mainView = getView();
-		if (activity != null && mainView != null) {
-			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
-					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
-			if (itemsContainer != null) {
-				itemsContainer.removeAllViews();
-			}
-			items.clear();
-			createMenuItems(null);
-			for (BaseBottomSheetItem item : items) {
-				item.inflate(activity, itemsContainer, nightMode);
-			}
-			setupHeightAndBackground(mainView);
 		}
 	}
 
@@ -357,7 +334,7 @@ public class WikivoyageArticleNavigationFragment extends MenuBottomSheetDialogFr
 		@Override
 		protected void onPostExecute(Map<WikivoyageSearchResult, List<WikivoyageSearchResult>> navigationMap) {
 			WikivoyageArticleNavigationFragment.this.navigationMap = navigationMap;
-			updateMenu();
+			updateMenuItems();
 		}
 	}
 }

@@ -1,11 +1,13 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +29,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.SelectMapStyleBottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -38,34 +40,42 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.fragments.ImportedSettingsItemsAdapter.OnItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.settings.fragments.BaseSettingsListFragment.SETTINGS_LIST_TAG;
-
 public class ImportCompleteFragment extends BaseOsmAndFragment {
-	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
-	private OsmandApplication app;
-	private RecyclerView recyclerView;
-	private List<SettingsItem> settingsItems;
-	private String fileName;
-	private boolean needRestart;
-	private boolean nightMode;
 
-	public static void showInstance(FragmentManager fm, @NonNull List<SettingsItem> settingsItems,
-									@NonNull String fileName, boolean needRestart) {
-		ImportCompleteFragment fragment = new ImportCompleteFragment();
-		fragment.setSettingsItems(settingsItems);
-		fragment.setFileName(fileName);
-		fragment.setRetainInstance(true);
-		fragment.setNeedRestart(needRestart);
-		fm.beginTransaction()
-				.replace(R.id.fragmentContainer, fragment, TAG)
-				.addToBackStack(SETTINGS_LIST_TAG)
-				.commitAllowingStateLoss();
+	public static final String TAG = ImportCompleteFragment.class.getSimpleName();
+
+	private static final String KEY_SOURCE_NAME = "key_source_name";
+	private static final String KEY_NEED_RESTART = "key_need_restart";
+
+	private OsmandApplication app;
+	private List<SettingsItem> settingsItems = new ArrayList<>();
+
+	private RecyclerView recyclerView;
+	private String sourceName;
+	private boolean nightMode;
+	private boolean needRestart;
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+									@NonNull List<SettingsItem> settingsItems,
+									@NonNull String sourceName, boolean needRestart) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			ImportCompleteFragment fragment = new ImportCompleteFragment();
+			fragment.settingsItems.addAll(settingsItems);
+			fragment.setSourceName(sourceName);
+			fragment.setRetainInstance(true);
+			fragment.setNeedRestart(needRestart);
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, TAG)
+					.addToBackStack(SETTINGS_LIST_TAG)
+					.commitAllowingStateLoss();
+		}
 	}
 
 	@Override
@@ -79,6 +89,10 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				dismissFragment();
 			}
 		});
+		if (savedInstanceState != null) {
+			sourceName = savedInstanceState.getString(KEY_SOURCE_NAME);
+			needRestart = savedInstanceState.getBoolean(KEY_NEED_RESTART);
+		}
 	}
 
 	@Nullable
@@ -92,8 +106,8 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		final ViewGroup buttonContainer = root.findViewById(R.id.button_container);
 		recyclerView = root.findViewById(R.id.list);
 		description.setText(UiUtilities.createSpannableString(
-				String.format(getString(R.string.import_complete_description), fileName),
-				new StyleSpan(Typeface.BOLD), fileName
+				String.format(getString(R.string.import_complete_description), sourceName),
+				Typeface.BOLD, sourceName
 		));
 		btnClose.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -132,9 +146,9 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		if (settingsItems != null) {
 			ImportedSettingsItemsAdapter adapter = new ImportedSettingsItemsAdapter(
 					app,
-					SettingsHelper.getSettingsToOperate(settingsItems, true),
+					SettingsHelper.getSettingsToOperate(settingsItems, true, false),
 					nightMode,
-					new ImportedSettingsItemsAdapter.OnItemClickListener() {
+					new OnItemClickListener() {
 						@Override
 						public void onItemClick(ExportSettingsType type) {
 							navigateTo(type);
@@ -152,9 +166,16 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		}
 	}
 
+	@Override
+	public void onSaveInstanceState(@NonNull Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString(KEY_SOURCE_NAME, sourceName);
+		outState.putBoolean(KEY_NEED_RESTART, needRestart);
+	}
+
 	private void navigateTo(ExportSettingsType type) {
 		FragmentManager fm = getFragmentManager();
-		Activity activity = requireActivity();
+		FragmentActivity activity = requireActivity();
 		if (fm == null || fm.isStateSaved()) {
 			return;
 		}
@@ -168,9 +189,7 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				BaseSettingsFragment.showInstance(requireActivity(), SettingsScreenType.MAIN_SETTINGS);
 				break;
 			case QUICK_ACTIONS:
-				fm.beginTransaction()
-						.add(R.id.fragmentContainer, new QuickActionListFragment(), QuickActionListFragment.TAG)
-						.addToBackStack(QuickActionListFragment.TAG).commit();
+				QuickActionListFragment.showInstance(activity);
 				break;
 			case POI_TYPES:
 				if (activity instanceof MapActivity) {
@@ -186,19 +205,18 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 				break;
 			case MAP_SOURCES:
 				if (activity instanceof MapActivity) {
-					((MapActivity) activity).getDashboard()
-							.setDashboardVisibility(
-									true,
-									DashboardOnMap.DashboardType.CONFIGURE_MAP,
-									null
-							);
+					((MapActivity) activity).getDashboard().setDashboardVisibility(true,
+							DashboardType.CONFIGURE_MAP, null);
 				}
 				break;
 			case CUSTOM_RENDER_STYLE:
-				new SelectMapStyleBottomSheetDialogFragment().show(fm, SelectMapStyleBottomSheetDialogFragment.TAG);
+				SelectMapStyleBottomSheetDialogFragment.showInstance(fm);
 				break;
 			case AVOID_ROADS:
-				new AvoidRoadsBottomSheetDialogFragment().show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
+				if (AndroidUtils.isFragmentCanBeAdded(fm, TAG)) {
+					new AvoidRoadsBottomSheetDialogFragment()
+							.show(fm, AvoidRoadsBottomSheetDialogFragment.TAG);
+				}
 				break;
 			case TRACKS:
 			case OSM_NOTES:
@@ -272,12 +290,8 @@ public class ImportCompleteFragment extends BaseOsmAndFragment {
 		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
-	public void setSettingsItems(List<SettingsItem> settingsItems) {
-		this.settingsItems = settingsItems;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setSourceName(String sourceName) {
+		this.sourceName = sourceName;
 	}
 
 	public void setNeedRestart(boolean needRestart) {

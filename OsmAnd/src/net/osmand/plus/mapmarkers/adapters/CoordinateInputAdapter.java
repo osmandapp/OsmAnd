@@ -1,13 +1,9 @@
 package net.osmand.plus.mapmarkers.adapters;
 
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -68,9 +65,9 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 
 		holder.iconDirection.setVisibility(View.VISIBLE);
 		holder.icon.setImageDrawable(PointImageDrawable.getFromWpt(app, wpt.getColor(), false, wpt));
-		holder.mainLayout.setBackgroundColor(getResolvedColor(nightTheme ? R.color.list_background_color_dark : R.color.list_background_color_light));
-		holder.title.setTextColor(getResolvedColor(nightTheme ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
-		holder.divider.setBackgroundColor(getResolvedColor(nightTheme ? R.color.coordinate_input_edit_text_normal_dark : R.color.divider_color_light));
+		holder.mainLayout.setBackgroundColor(ColorUtilities.getListBgColor(app, nightTheme));
+		holder.title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightTheme));
+		holder.divider.setBackgroundColor(ContextCompat.getColor(app, nightTheme ? R.color.coordinate_input_edit_text_normal_dark : R.color.divider_color_light));
 		holder.iconReorder.setVisibility(View.GONE);
 		holder.numberText.setVisibility(View.VISIBLE);
 		holder.numberText.setText(String.valueOf(position + 1));
@@ -100,7 +97,6 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		return getItemCount() == 0;
 	}
 
-
 	public WptPt getItem(int position) {
 		return gpx.getPoints().get(position);
 	}
@@ -119,14 +115,5 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	public void setGpx(GPXFile gpx) {
 		this.gpx = gpx;
 		notifyDataSetChanged();
-	}
-	
-	private Drawable getColoredIcon(@DrawableRes int resId, @ColorRes int colorResId) {
-		return uiUtilities.getIcon(resId, colorResId);
-	}
-
-	@ColorInt
-	private int getResolvedColor(@ColorRes int colorResId) {
-		return ContextCompat.getColor(app, colorResId);
 	}
 }

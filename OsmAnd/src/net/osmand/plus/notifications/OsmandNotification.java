@@ -19,12 +19,14 @@ public abstract class OsmandNotification {
 	public final static int GPX_NOTIFICATION_SERVICE_ID = 6;
 	public final static int ERROR_NOTIFICATION_SERVICE_ID = 7;
 	public final static int DOWNLOAD_NOTIFICATION_SERVICE_ID = 8;
+	public final static int CAR_APP_NOTIFICATION_SERVICE_ID = 9;
 	public final static int TOP_NOTIFICATION_SERVICE_ID = 100;
 
 	public final static int WEAR_NAVIGATION_NOTIFICATION_SERVICE_ID = 1005;
 	public final static int WEAR_GPX_NOTIFICATION_SERVICE_ID = 1006;
 	public final static int WEAR_ERROR_NOTIFICATION_SERVICE_ID = 1007;
 	public final static int WEAR_DOWNLOAD_NOTIFICATION_SERVICE_ID = 1008;
+	public final static int WEAR_CAR_APP_NOTIFICATION_SERVICE_ID = 1009;
 
 	protected OsmandApplication app;
 	protected boolean ongoing = true;
@@ -32,7 +34,7 @@ public abstract class OsmandNotification {
 	protected int icon;
 	protected boolean top;
 
-	private String groupName;
+	private final String groupName;
 
 	private Notification currentNotification;
 
@@ -42,6 +44,7 @@ public abstract class OsmandNotification {
 		GPS,
 		ERROR,
 		DOWNLOAD,
+		CAR_APP,
 	}
 
 	public OsmandNotification(OsmandApplication app, String groupName) {

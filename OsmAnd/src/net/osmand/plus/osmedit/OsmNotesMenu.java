@@ -2,30 +2,31 @@ package net.osmand.plus.osmedit;
 
 import android.content.Context;
 import android.view.ContextThemeWrapper;
-import android.view.View;
 import android.widget.ArrayAdapter;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 
 import java.util.Arrays;
 
 public class OsmNotesMenu {
 
-	private static Integer[] zoomIntValues = {8, 9, 10, 11, 12, 13, 14, 15, 16};
+	private static final Integer[] zoomIntValues = {8, 9, 10, 11, 12, 13, 14, 15, 16};
 
-	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
+	public static ContextMenuAdapter createListAdapter(@NonNull final MapActivity mapActivity) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity.getMyApplication());
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
@@ -35,7 +36,7 @@ public class OsmNotesMenu {
 		return adapter;
 	}
 
-	private static void createLayersItems(final ContextMenuAdapter adapter, final MapActivity mapActivity) {
+	private static void createLayersItems(@NonNull final ContextMenuAdapter adapter, @NonNull final MapActivity mapActivity) {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		final OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
@@ -58,31 +59,28 @@ public class OsmNotesMenu {
 
 		final String[] zoomStrings = getZoomStrings(mapActivity);
 
-		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
+		OnRowItemClick l = new OnRowItemClick() {
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId,
 											  final int position, boolean isChecked, int[] viewCoordinates) {
 				if (itemId == osmNotesStringId) {
 					showOsmBugsPref.set(isChecked);
-					plugin.updateLayers(mapActivity.getMapView(), mapActivity);
+					plugin.updateLayers(mapActivity, mapActivity);
 					mapActivity.refreshMap();
 					mapActivity.getDashboard().refreshContent(true);
 				} else if (itemId == showZoomLevelStringId) {
 					int checked = Arrays.asList(zoomIntValues).indexOf(showOsmBugsZoomPref.get());
 
 					DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
-							zoomStrings, nightMode, checked, app, selectedModeColor, themeRes, new View.OnClickListener() {
-								@Override
-								public void onClick(View v) {
-									int which = (int) v.getTag();
-									showOsmBugsZoomPref.set(zoomIntValues[which]);
-									ContextMenuItem item = adapter.getItem(position);
-									if (item != null) {
-										item.setDescription(zoomStrings[which]);
-										adapter.notifyDataSetChanged();
-									}
-									mapActivity.refreshMap();
+							zoomStrings, nightMode, checked, app, selectedModeColor, themeRes, v -> {
+								int which = (int) v.getTag();
+								showOsmBugsZoomPref.set(zoomIntValues[which]);
+								ContextMenuItem item = adapter.getItem(position);
+								if (item != null) {
+									item.setDescription(zoomStrings[which]);
+									adapter.notifyDataSetChanged();
 								}
+								mapActivity.refreshMap();
 							}
 					);
 					AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, themeRes))
@@ -101,7 +99,7 @@ public class OsmNotesMenu {
 		boolean showOsmBugs = showOsmBugsPref.get();
 		int toggleIconColorId;
 		if (showOsmBugs) {
-			toggleIconColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+			toggleIconColorId = ColorUtilities.getActiveColorId(nightMode);
 		} else {
 			toggleIconColorId = ContextMenuItem.INVALID_ID;
 		}

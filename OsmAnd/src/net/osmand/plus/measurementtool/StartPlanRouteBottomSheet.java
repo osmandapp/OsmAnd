@@ -1,7 +1,9 @@
 package net.osmand.plus.measurementtool;
 
+import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
+import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
+
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -38,9 +40,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import static net.osmand.plus.helpers.GpxUiHelper.getSortedGPXFilesInfo;
-import static net.osmand.plus.measurementtool.SelectFileBottomSheet.Mode.OPEN_TRACK;
-
 public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragment {
 
 	public static final String TAG = StartPlanRouteBottomSheet.class.getSimpleName();
@@ -54,7 +53,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		importHelper = new ImportHelper((AppCompatActivity) getActivity(), getMyApplication(), null);
+		importHelper = new ImportHelper((AppCompatActivity) getActivity(), getMyApplication());
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.bottom_sheet_plan_route_start, null);
@@ -157,10 +156,9 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 	private void importTrack() {
 		Intent intent = ImportHelper.getImportTrackIntent();
-		try {
-			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
-		} catch (ActivityNotFoundException e) {
-			LOG.error(e.getMessage(), e);
+		Activity activity = getActivity();
+		if (activity != null) {
+			AndroidUtils.startActivityForResultIfSafe(activity, intent, OPEN_GPX_DOCUMENT_REQUEST);
 		}
 	}
 
@@ -181,7 +179,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 					}
 				});
-				importHelper.handleGpxImport(uri, false, false);
+				importHelper.handleGpxImport(uri, ImportHelper.OnSuccessfulGpxImport.OPEN_PLAN_ROUTE_FRAGMENT, false);
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);
@@ -228,7 +226,8 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 		if (mapActivity != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.hide(this).commit();
+					.hide(this)
+					.commitAllowingStateLoss();
 		}
 	}
 
@@ -237,7 +236,8 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 		if (mapActivity != null) {
 			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			manager.beginTransaction()
-					.show(this).commit();
+					.show(this)
+					.commitAllowingStateLoss();
 		}
 	}
 

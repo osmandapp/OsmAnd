@@ -2,8 +2,11 @@ package net.osmand.plus.mapmarkers;
 
 import android.util.Pair;
 
+import androidx.annotation.Nullable;
+
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.map.WorldRegion;
 import net.osmand.plus.routing.RouteCalculationProgressCallback;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.GPXUtilities.TrkSegment;
@@ -211,7 +214,6 @@ public class MarkersPlanRouteContext {
 		LatLon end = new LatLon(currentPair.second.getLatitude(), currentPair.second.getLongitude());
 
 		final RouteCalculationParams params = new RouteCalculationParams();
-		params.inSnapToRoadMode = true;
 		params.start = start;
 		params.end = end;
 		RoutingHelper.applyApplicationSettings(params, app.getSettings(), snappedMode);
@@ -237,7 +239,10 @@ public class MarkersPlanRouteContext {
 
 			@Override
 			public void requestPrivateAccessRouting() {
+			}
 
+			@Override
+			public void updateMissingMaps(@Nullable List<WorldRegion> missingMaps, boolean onlineSearch) {
 			}
 
 			@Override
@@ -245,7 +250,7 @@ public class MarkersPlanRouteContext {
 				calculatedPairs = 0;
 			}
 		};
-		params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
+		params.alternateResultListener = new RouteCalculationParams.RouteCalculationResultListener() {
 			@Override
 			public void onRouteCalculated(RouteCalculationResult route) {
 				List<Location> locations = route.getRouteLocations();

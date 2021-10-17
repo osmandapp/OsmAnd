@@ -7,10 +7,10 @@
     <string name="map_widget_show_destination_arrow">Hedef yönü göster</string>
     <string name="enable_plugin_monitoring_services">Konum günlüğü hizmetlerini kullanmak için \"Yolculuk kaydı\" eklentisini etkinleştirin (GPX günlüğü, çevrim içi izleme)</string>
     <string name="non_optimal_route_calculation">Uzak hedefler için tahmini rotayı hesapla</string>
-    <string name="gps_not_available">Lütfen GPS\'yi ayarlardan açık konuma getirin</string>
-    <string name="map_widget_monitoring_services">Günlük kayıt hizmetleri</string>
-    <string name="no_route">Rota yok</string>
-    <string name="delete_target_point">Varış Noktasını kaldır</string>
+    <string name="gps_not_available">Lütfen ayarlarda GPS\'i etkinleştirin</string>
+    <string name="map_widget_monitoring_services">Günlük kaydı hizmetleri</string>
+    <string name="no_route">Güzergah yok</string>
+    <string name="delete_target_point">Varış noktasını kaldır</string>
     <string name="target_point">Varış noktası %1$s</string>
     <string name="intermediate_point">Intermediate hedef %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Son ara nokta olarak ekle</string>
@@ -80,8 +80,8 @@
     <string name="native_library_not_running">Uygulama güvenli modda çalışıyor (\'Ayarlar\'dan kapatın).</string>
     <string name="background_service_is_enabled_question">OsmAnd arka plan hizmeti hala çalışıyor. O da durdurulsun mu\?</string>
     <string name="local_indexes_cat_av">Ses/Video verisi</string>
-    <string name="stop_routing_confirm">Navigasyonu durdurmak istediğinizden emin misiniz\?</string>
-    <string name="clear_dest_confirm">Hedefi (ve ara hedefleri) temizlemek istediğinizden emin misiniz\?</string>
+    <string name="stop_routing_confirm">Navigasyon durdurulsun mu\?</string>
+    <string name="clear_dest_confirm">Hedefiniz (ve ara hedefleriniz) kaldırılsın mı\?</string>
     <string name="precise_routing_mode">Hassas yönlendirme (alfa)</string>
     <string name="recording_context_menu_show">Göster</string>
     <string name="recording_photo_description">Fotoğraf %1$s %2$s</string>
@@ -124,9 +124,6 @@
     <string name="shared_string_control_start">Başlat</string>
     <string name="map_widget_av_notes">Ses/video notları</string>
     <string name="osmand_srtm_short_description_80_chars">Çevrim dışı eş yükselti eğrileri için OsmAnd eklentisi</string>
-    <string name="osmand_srtm_long_description_1000_chars">Bu eklenti, OsmAnd\'ın standart haritalarının üstünde hem eş yükselti eğrisi üst katmanının hem de (kabartma) tepe gölgesi katmanının gösterilmesini sağlamaktadır. Bu işlevsellik çoğunlukla sporcular, uzun yürüyüşcüler, doğa yürüyüşçüleri ve manzaranın kabartma yapısıyla ilgilenen herkes tarafından takdir edilecektir. 
-\n 
-\nKüresel veriler (70° kuzey ve 70° güney arasındaki) SRTM (Shuttle Radar Topography Mission) ve ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), NASA\'nın Dünya Gözlem Sisteminin amiral uydusu olan Terra üzerindeki bir görüntüleme aracı, tarafından yapılan ölçümlere dayanmaktadır. ASTER NASA, Japonya Ekonomi, Ticaret ve Sanayi Bakanlığı (METI) , ve Japon Uzay Sistemleri (J-spacesystems) arasında ortak bir çalışmadır.</string>
     <string name="map_widget_distancemeasurement">Mesafe ölçümü</string>
     <string name="audionotes_location_not_defined">Konuma bir not eklemek için \'Konumu kullan…\' düğmesine dokunun.</string>
     <string name="map_widget_audionotes">Sesli notlar</string>
@@ -237,7 +234,7 @@
     <string name="unknown_from_location">Kalkış noktası henüz belirlenmedi.</string>
     <string name="unknown_location">Konum henüz bilinmiyor.</string>
     <string name="confirm_interrupt_download">İndirme iptal edilsin mi\?</string>
-    <string name="select_index_file_to_download">Hiçbir şey bulunamadı. Eğer bölgenizi bulamıyorsanız, kendiniz yapabilirsiniz (bakınız: https://osmand.net).</string>
+    <string name="select_index_file_to_download">Hiçbir şey bulunamadı, ama kendiniz yapabilirsiniz (https://osmand.net adresine bakın).</string>
     <string name="local_indexes_cat_map">Standart haritalar (vektör)</string>
     <string name="shared_string_online_maps">Çevrim içi haritalar</string>
     <string name="default_buttons_support">Destek</string>
@@ -261,7 +258,7 @@
     <string name="amenity_type_user_defined">Kullanıcı tanımlı</string>
     <string name="settings_preset">Öntanımlı profil</string>
     <string name="user_password">Parola</string>
-    <string name="download_files_not_enough_space">İndirme için yeterli yer yok: %1$s MB (free: %2$s).</string>
+    <string name="download_files_not_enough_space">%1$s MB indirmek için yeterli boş alan yok (boş: %2$s).</string>
     <string name="animate_route_off">Animasyonu durdur</string>
     <string name="animate_route">Animasyonu başlat</string>
     <string name="file_can_not_be_renamed">Dosya yeniden adlandırılamadı.</string>
@@ -341,7 +338,7 @@
     <string name="route_tshl">Sola keskince dönün ve ilerleyin</string>
     <string name="route_tsll">Sola hafifçe dönün ve ilerleyin</string>
     <string name="route_tu">U dönüşü yapın ve ilerleyin</string>
-    <string name="first_time_continue">Sonra</string>
+    <string name="first_time_continue">Daha Sonra</string>
     <string name="search_poi_location">Sinyal bekleniyor…</string>
     <string name="transport_Routes">Güzergah</string>
     <string name="shared_string_ok">Tamam</string>
@@ -432,7 +429,7 @@
 \n Konum ve saat hem gösterge tablosunda hem de harita widget\'ında görülebilir. Android takvimine bir alarm hatırlatıcısı eklenebilir.</string>
     <string name="osmand_parking_plugin_name">Park etme pozisyonu</string>
     <string name="context_menu_item_delete_parking_point">Park etme işaretini sil</string>
-    <string name="gpxup_public">Halk</string>
+    <string name="gpxup_public">Genel</string>
     <string name="gpxup_identifiable">Teşhis edilebilir</string>
     <string name="gpxup_trackable">Takip edilebilir</string>
     <string name="gpxup_private">Özel</string>
@@ -550,7 +547,7 @@
     <string name="live_monitoring_url">Web adresinden izlemeyi canlı izlemek</string>
     <string name="gpx_monitoring_disabled_warn">Track\'ın kaydını GPX widget\'ı kullanarak ya da \'Seyahat kaydetme\' ayarları aracılığıyla tut.</string>
     <string name="show_current_gpx_title">Geçerli izi göster</string>
-    <string name="free_version_message">%1$s haritayı indirebilir ya da güncelleyebilirsin.</string>
+    <string name="free_version_message">%1$s harita indirme veya güncelleme.</string>
     <string name="free_version_title">Ücretsiz sürüm</string>
     <string name="index_name_north_america">Kuzey Amerika</string>
     <string name="index_name_us">Kuzey Amerika - Amerika Birleşik Devletleri</string>
@@ -573,7 +570,7 @@
     <string name="user_name">OSM kullanıcı adınız</string>
     <string name="open_street_map_login_descr">openstreetmap.org gönderimleri için gereklidir.</string>
     <string name="osmand_service">Arka plan modu</string>
-    <string name="osmand_service_descr">OsmAnd ekran kapalıyken arka planda çalışır.</string>
+    <string name="osmand_service_descr">OsmAnd, ekran kapalıyken arka planda çalışır.</string>
     <string name="download_files_question_space">{0} dosya indirilsin mi\?
 \n ({2} MB\'tan) {1} MB kullanılacak.</string>
     <string name="use_transparent_map_theme">Şeffaf tema</string>
@@ -599,9 +596,9 @@
     <string name="item_checked">işaretli</string>
     <string name="item_unchecked">işaretsiz</string>
     <string name="shared_string_map">Harita</string>
-    <string name="prefer_motorways">Otoyol tercih et</string>
+    <string name="prefer_motorways">Otoyolları tercih et</string>
     <string name="prefer_in_routing_title">Tercih et…</string>
-    <string name="prefer_in_routing_descr">Otoyolları yeğle.</string>
+    <string name="prefer_in_routing_descr">Otoyolları tercih et.</string>
     <string name="max_speed_none">hiçbiri</string>
     <string name="av_def_action_choose">İstek üzerine\?</string>
     <string name="osmand_play_title_30_chars">OsmAnd Haritalar &amp; Navigasyon</string>
@@ -625,7 +622,7 @@
     <string name="local_index_mi_upload_gpx">OSM\'ye Gönder</string>
     <string name="show_more_map_detail">Haritayı daha ayrıntılı göster</string>
     <string name="favourites_delete_multiple_succesful">Sık kullanılan noktalar silindi.</string>
-    <string name="favorite_delete_multiple">%1$d Sık Kullanılanlar ve %2$d Sık Kullanılan grupları silmek istediğinizden emin misiniz\?</string>
+    <string name="favorite_delete_multiple">%1$d Sık Kullanılanlar ve %2$d Sık Kullanılan grupları silinsin mi\?</string>
     <string name="local_index_gpx_info_show">"
 \n
 \nSeçenekler için uzun basın"</string>
@@ -671,7 +668,7 @@
     <string name="route_to">Buraya:</string>
     <string name="route_via">Üzerinden:</string>
     <string name="route_from">Buradan:</string>
-    <string name="destination_point">Varış Noktası %1$s</string>
+    <string name="destination_point">Varış noktası %1$s</string>
     <string name="context_menu_item_destination_point">Varış noktası olarak ayarla</string>
     <string name="please_select_address">Önce şehri veya caddeyi ayarlayın</string>
     <string name="search_street_in_neighborhood_cities">Komşu şehirlerdeki sokak için ara</string>
@@ -803,7 +800,7 @@
     <string name="download_files_question">{0} dosya indirilecek ({1} MB)?</string>
     <string name="items_were_selected">{0} öge seçildi</string>
     <string name="filter_existing_indexes">İndirilen</string>
-    <string name="fast_route_mode_descr">En hızlı rotayı hesaplamayı etkinleştirin veya yakıt tasarrufu rotası için devre dışı bırakın.</string>
+    <string name="fast_route_mode_descr">En hızlı güzergahı hesaplamayı etkinleştirin veya yakıt tasarrufu güzergahı için devre dışı bırakın.</string>
     <string name="continuous_rendering">Sürekli görselleştirme</string>
     <string name="rendering_exception">Seçilen alan çizilemedi.</string>
     <string name="show_point_options">Konumu kullan…</string>
@@ -903,7 +900,7 @@
     <string name="reading_indexes">Yerel veri okunuyor…</string>
     <string name="saving_gpx_tracks">GPX dosyası kaydediliyor…</string>
     <string name="data_settings_descr">Dili belirtin, verileri indirin/yeniden yükleyin.</string>
-    <string name="osm_settings">OpenStreetMap düzenleme</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap düzenleme</string>
     <string name="app_settings">Uygulama ayarları</string>
     <string name="search_address">Adres ara</string>
     <string name="choose_building">Bina seç</string>
@@ -984,7 +981,7 @@
     <string name="app_mode_motorcycle">Motosikletler</string>
     <string name="app_mode_boat">Tekne</string>
     <string name="app_mode_aircraft">Uçak</string>
-    <string name="local_osm_changes_delete_all_confirm">%1$d OSM değişikliğini silmek istediğinizden emin misiniz\?</string>
+    <string name="local_osm_changes_delete_all_confirm">%1$d OSM değişikliği silinsin mi\?</string>
     <string name="shared_string_delete_all">Tümünü sil</string>
     <string name="animate_routing_route_not_calculated">Lütfen ilk olarak rotayı hesaplayın</string>
     <string name="animate_routing_route">Hesaplanan rotayı kullanarak simülasyon </string>
@@ -1014,7 +1011,7 @@
     <string name="filter_poi_hint">Ada göre süz</string>
     <string name="search_poi_category_hint">Tümünü aramak için yazın</string>
     <string name="shared_string_is_open">Şimdi aç</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">OSM Eşleştiricisi Yardımcısı</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSM haritalama yardımcısı</string>
     <string name="agps_info">A-GPS bilgisi</string>
     <string name="shared_string_manage">Yönet</string>
     <string name="shared_string_edit">Düzenle</string>
@@ -1117,7 +1114,7 @@
     <string name="shared_string_gpx_points">Noktalar</string>
     <string name="rendering_attr_roadStyle_name">Yol tarzı</string>
     <string name="rendering_value__name">Öntanımlı</string>
-    <string name="rendering_value_default_name">Standart</string>
+    <string name="rendering_value_default_name">Öntanımlı</string>
     <string name="traffic_warning_pedestrian">Yaya geçidi</string>
     <string name="show_pedestrian_warnings">Yaya geçitleri</string>
     <string name="dash_download_msg_none">Çevrim dışı haritaları indirin\?</string>
@@ -1146,9 +1143,9 @@
     <string name="confirm_every_run">Her zaman sor</string>
     <string name="shared_string_import2osmand">OsmAnd\'a aktar</string>
     <string name="read_full_article">Tüm metni oku (çevrim içi)</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">OSMC yürüyüş sembolüne göre renk</string>
-    <string name="local_recordings_delete_all_confirm">%1$d notu silmek istediğinizden emin misiniz\?</string>
-    <string name="local_osm_changes_upload_all_confirm">%1$d değişikliği OSM\'ye yüklemek istediğinizden emin misiniz\?</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">OSMC</string>
+    <string name="local_recordings_delete_all_confirm">%1$d not silinsin mi\?</string>
+    <string name="local_osm_changes_upload_all_confirm">%1$d değişiklik OSM\'ye yüklensin mi\?</string>
     <string name="plugin_nautical_name">Deniz haritası görünümü</string>
     <string name="plugin_ski_name">Kayak haritası görünümü</string>
     <string name="text_size">Yazı boyutu</string>
@@ -1214,7 +1211,7 @@
     <string name="routing_attr_avoid_shuttle_train_name">Shuttle treni yok</string>
     <string name="local_indexes_cat_wiki">Vikipedi</string>
     <string name="osm_edit_context_menu_delete">OSM düzeltmesini sil</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Ağ bağlantısına göre renk</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Ağ bağlantısı</string>
     <string name="shared_string_logoff">Oturumu kapat</string>
     <string name="application_dir_change_warning3">OsmAnd veri dosyalarını yeni hedefe taşı\?</string>
     <string name="welcome_select_region">Doğru trafik işaretleri ve düzenlemeleri yansıtmak için sürüş bölgenizi seçin:</string>
@@ -1279,7 +1276,7 @@
     <string name="osn_close_dialog_error">Not kapatılamadı.</string>
     <string name="shared_string_commit">Yap</string>
     <string name="context_menu_item_delete_waypoint">GPX waypoint\'i silinsin mi?</string>
-    <string name="context_menu_item_edit_waypoint">GPX waypoint\'i düzenle</string>
+    <string name="context_menu_item_edit_waypoint">GPX ara noktasını düzenle</string>
     <string name="shared_string_location">Konum</string>
     <string name="share_osm_edits_subject">Osmand üzerinden paylaşılan OSM düzenlemeler</string>
     <string name="lang_nds">Aşağı Almanca</string>
@@ -1315,7 +1312,7 @@
     <string name="feedback">Görüşleriniz</string>
     <string name="contact_us">İletişim</string>
     <string name="map_legend">Harita lejandı</string>
-    <string name="save_poi_without_poi_type_message">Türü olmadan POI\'yi gerçekten kaydetmek istiyor musunuz\?</string>
+    <string name="save_poi_without_poi_type_message">POI tür olmadan kaydedilsin mi\?</string>
     <string name="poi_context_menu_modify_osm_change">OSM değişikliği değiştirme</string>
     <string name="new_version">Yeni Sürüm</string>
     <string name="begin_with_osmand_menu_group">OsmAnd ile ilk adımları</string>
@@ -1342,11 +1339,11 @@
     <string name="activate_srtm_plugin">Lütfen \'Eş yükselti eğrileri\' eklentisini etkinleştirin</string>
     <string name="later">Daha Sonra</string>
     <string name="get_full_version">Tam Sürüm</string>
-    <string name="downloads">Yüklemeler</string>
-    <string name="free_downloads_used">Kullanılan Ücretsiz indirme</string>
+    <string name="downloads">İndirmeler</string>
+    <string name="free_downloads_used">Kullanılan ücretsiz indirme</string>
     <string name="free_downloads_used_description">Kalan ücretsiz indirme miktarını görüntüler.</string>
     <string name="roads">Yollar</string>
-    <string name="downloading_number_of_files">İndiriliyor -%1$d dosya</string>
+    <string name="downloading_number_of_files">%1$d dosya indiriliyor…</string>
     <string name="show_free_version_banner">Ücretsiz sürümü banner göster</string>
     <string name="show_free_version_banner_description">Ücretli sürümde bile ücretsiz sürümün afişini göster.</string>
     <string name="poi_deleted_localy">Yaptığınız değişiklikleri karşıya kez POI silinecektir</string>
@@ -1515,7 +1512,7 @@
     <string name="arrival_distance_descr">Varış duyurusunu ne yakınlıkta istiyorsunuz\?</string>
     <string name="rendering_attr_alpineHiking_name">Alp yürüyüş ölçeği (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">SAC ölçeğine göre yolları görselleştir.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Yürüyüş sembolü üst katmanı</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Yürüyüş güzergahları</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMC izlerine göre yolları görselleştir.</string>
     <string name="interrupt_music_descr">Sesli uyarılar müzik çalmayı duraklatır.</string>
     <string name="interrupt_music">Müziği duraklat</string>
@@ -1601,7 +1598,7 @@
     <string name="index_item_world_altitude_correction">Dünya rakım düzeltme</string>
     <string name="index_item_world_seamarks">Dünya deniz işaretleri</string>
     <string name="select_destination_and_intermediate_points">Hedefleri ayarla</string>
-    <string name="layer_amenity_label">POI üst katmanı etiketleri</string>
+    <string name="layer_amenity_label">Nokta Etiketleri (POI, Sık Kullanılanlar)</string>
     <string name="loading_smth">%1$s yükleniyor …</string>
     <string name="map_widget_plain_time">Şimdiki zaman</string>
     <string name="shared_string_waypoint">Mevki</string>
@@ -1711,7 +1708,7 @@
     <string name="traffic_warning_railways">Demiryolu geçidi</string>
     <string name="show_railway_warnings">Demiryolu geçitleri</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikan yol atlası</string>
-    <string name="routing_attr_no_new_routing_name">Hiçbir v1.9 yönlendirme kuralları</string>
+    <string name="routing_attr_no_new_routing_name">v1.9 yönlendirme kuralı yok</string>
     <string name="routing_attr_no_new_routing_description">V1.9\'da tanıtılan yönlendirme kuralları kullanmayın.</string>
     <string name="rendering_attr_transportStops_name">Ulaşım durakları</string>
     <string name="navigate_point_zone">Bölge</string>
@@ -1724,7 +1721,7 @@
     <string name="search_for">Arama</string>
     <string name="rendering_attr_publicTransportMode_name">Otobüs, troleybüs, mekik yolları</string>
     <string name="rendering_attr_tramTrainRoutes_name">Tramvay ve tren yolları</string>
-    <string name="rendering_attr_subwayMode_name">Metro güzergah</string>
+    <string name="rendering_attr_subwayMode_name">Metro güzergahları</string>
     <string name="lock_screen_request_explanation">%1$s ihtiyaçları güç tasarrufu özelliği ekranını kapatmak için bu izni.</string>
     <string name="wake_on_voice">Ekranı aç</string>
     <string name="wake_on_voice_descr">Bir dönüşe yaklaşırken (kapalı ise) aygıtın ekranını aç.</string>
@@ -1799,7 +1796,7 @@
     <string name="rendering_attr_hideAccess_name">Erişim kısıtlamaları</string>
     <string name="rendering_attr_showAccess_name">Geçiş hakkındaki kısıtlamaları ve geçiş ücretlerini göster</string>
     <string name="rendering_attr_showSurfaces_name">Yol yüzeyi göster</string>
-    <string name="rendering_attr_showCycleRoutes_name">Döngüsü yolları göster</string>
+    <string name="rendering_attr_showCycleRoutes_name">Bisiklet güzergahları</string>
     <string name="only_download_over_wifi">Sadece Wi-Fi üzerinden indir</string>
     <string name="live_update">Canlı güncelleştirme</string>
     <string name="route_distance">Mesafe:</string>
@@ -1808,9 +1805,9 @@
     <string name="missing_write_external_storage_permission">OsmAnd hafıza kartını kullanma iznine sahip değil</string>
     <string name="select_voice_provider">Sesli yönlendirme seç</string>
     <string name="select_voice_provider_descr">Diliniz için sesli yönlendirme seçin veya indirin.</string>
-    <string name="impassable_road_desc">Navigasyon esnasında kaçınmak istediğiniz yolları seçiniz.</string>
+    <string name="impassable_road_desc">Navigasyon sırasında kaçınmak istediğiniz yolları seçin.</string>
     <string name="shared_string_sound">Ses</string>
-    <string name="no_location_permission">Konum verisine erişim izni ver.</string>
+    <string name="no_location_permission">Konum verilerine erişim izni ver.</string>
     <string name="live_updates">Canlı güncellemeler</string>
     <string name="available_maps">Mevcut haritalar</string>
     <string name="no_camera_permission">Kameraya erişim izni ver.</string>
@@ -1856,7 +1853,7 @@
     <string name="shared_string_read_more">Devamını oku</string>
     <string name="show_polygons">Çokgenleri göster</string>
     <string name="find_parking">Park yeri bul</string>
-    <string name="rendering_attr_showMtbRoutes_name">Dağ bisikleti parkurlarını göster</string>
+    <string name="rendering_attr_showMtbRoutes_name">Dağ bisikleti parkurları</string>
     <string name="map_marker_1st">İlk harita işaretleyicisi</string>
     <string name="map_marker_2nd">İkinci harita işaretleyicisi</string>
     <string name="shared_string_toolbar">Araç çubuğu</string>
@@ -2073,7 +2070,7 @@
     <string name="make_round_trip">Gidiş-dönüş seyahat yap</string>
     <string name="coordinates_format">Koordinat biçimi</string>
     <string name="use_system_keyboard">Sistemde tanımlı klavyeyi kullan</string>
-    <string name="fast_coordinates_input_descr">Koordinat giriş biçimini seçin. Bunu her zaman \'Seçenekler\'den değiştirebilirsiniz.</string>
+    <string name="fast_coordinates_input_descr">Koordinat giriş biçimini seçin. Değiştirmek için \'Seçenekler\' bölümüne dokunun.</string>
     <string name="fast_coordinates_input">Hızlı koordinat girişi</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Buzlu yol veya nehir geçişleri yok</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Buzlu yollardan ve nehir geçişlerinden kaçınır.</string>
@@ -2081,8 +2078,8 @@
     <string name="today">Bugün</string>
     <string name="yesterday">Dün</string>
     <string name="shared_string_install">Yükle</string>
-    <string name="empty_state_osm_edits">OSM nesnesi oluştur veya değiştir</string>
-    <string name="empty_state_osm_edits_descr">OSM POI\'leri oluşturun veya değiştirin, OSM notları açın veya yorum ekleyin, ve kaydedilmiş GPX dosyalarını paylaşarak katkıda bulunun.</string>
+    <string name="empty_state_osm_edits">OpenStreetMap nesnesi oluştur veya değiştir</string>
+    <string name="empty_state_osm_edits_descr">OpenStreetMap POI\'leri oluşturun veya değiştirin, OSM notları açın veya yorum ekleyin, ve kaydedilmiş GPX dosyalarını paylaşarak katkıda bulunun.</string>
     <string name="shared_string_deleted">Silindi</string>
     <string name="shared_string_edited">Değiştirildi</string>
     <string name="shared_string_added">Eklendi</string>
@@ -2182,7 +2179,7 @@
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd uygulamanın hangi kısımlarını açtığınızla ilgili bilgi toplar. Konum bilginiz, ya da uygulamaya girdiğiniz herhangi bir şey veya görüntülediğiniz, aradığınız ya da indirdiğiniz bölgelerin ayrıntıları asla gönderilmez.</string>
     <string name="do_not_show_startup_messages">Başlangıç mesajlarını gösterme</string>
     <string name="routing_attr_driving_style_speed_name">daha kısa rotalar</string>
-    <string name="points_delete_multiple">%1$d noktayı silmek istediğinizden emin misiniz\?</string>
+    <string name="points_delete_multiple">%1$d nokta silinsin mi\?</string>
     <string name="wiki_around">Yakındaki Wikipedia makaleleri</string>
     <string name="route_calculation">Rota hesaplama</string>
     <string name="shared_string_notifications">Bildirimler</string>
@@ -2201,7 +2198,7 @@
     <string name="allow_access_location">Konum erişimine izin ver</string>
     <string name="search_my_location">Konumumu bul</string>
     <string name="update_all_maps_now">Tüm haritaları şimdi güncelle\?</string>
-    <string name="replace_favorite_confirmation">Sık kullanılanlardan %1$s\'ı yenisiyle değiştirmek istediğinizden emin misiniz\?</string>
+    <string name="replace_favorite_confirmation">\"%1$s\" sık kullanılan değiştirilsin mi\?</string>
     <string name="back_to_search">Aramaya geri dön</string>
     <string name="confirmation_to_delete_history_items">Seçilen ögeler \'Geçmiş’ten kaldırılsın mı\?</string>
     <string name="show_something_on_map">%1$s \'ı haritada göster</string>
@@ -2231,9 +2228,9 @@
     <string name="open_mapillary">Mapillary\'yi aç</string>
     <string name="mapillary_widget">Mapillary widget\'ı</string>
     <string name="mapillary_widget_descr">Mapillary\'ye hızlıca katkıda bulunmanıza imkan verir.</string>
-    <string name="mapillary_descr">Herkes için sokak seviyesinde fotoğraflar. Yerler keşfedin, katkıda bulunun, dünyayı yakalatın.</string>
+    <string name="mapillary_descr">Herkes için çevrim içi sokak düzeyinde fotoğraflar. Yeni yerler keşfedin, işbirliği yapın, dünyayı yakalayın.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="plugin_mapillary_descr">Herkes için sokak seviyesinde fotoğraflar. Yerler keşfedin, katkıda bulunun, dünyayı yakalayın.</string>
+    <string name="plugin_mapillary_descr">Herkes için sokak düzeyinde fotoğraflar. Yeni yerler keşfedin, işbirliği yapın, dünyayı yakalayın.</string>
     <string name="parking_options">Park etme seçenekleri</string>
     <string name="routing_attr_allow_motorway_name">Otoyolları kullan</string>
     <string name="routing_attr_allow_motorway_description">Otoyollara izin verir.</string>
@@ -2278,7 +2275,7 @@
     <string name="add_point_before">Öncesinde nokta ekle</string>
     <string name="add_point_after">Sonrasında nokta ekle</string>
     <string name="map_widget_ruler_control">Yarıçap cetveli</string>
-    <string name="mapillary_action_descr">Sokak seviyesinde görüşünüzü Mapillary ile paylaşın.</string>
+    <string name="mapillary_action_descr">Sokak düzeyinde görüşünüzü Mapillary ile paylaşın.</string>
     <string name="type_city_town">Şehir/kasaba/bölgeyi yazın</string>
     <string name="quick_action_auto_zoom_desc">Hız denetimi otomatik yakınlaştırma özelliğini açmak veya kapatmak için düğme.</string>
     <string name="quick_action_add_first_intermediate">Seyahatteki ilk ara-noktayı ekleyin</string>
@@ -2291,7 +2288,7 @@
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Düzlük</string>
     <string name="routing_attr_driving_style_balance_name">Dengeli</string>
     <string name="routing_attr_driving_style_safety_name">Ana yol harici yan yolları tercih et</string>
-    <string name="relief_smoothness_factor_descr">Tercih edilen arazi: düz ya da engebeli.</string>
+    <string name="relief_smoothness_factor_descr">Tercih edilen arazi: düz veya engebeli.</string>
     <string name="shared_string_slope">Yamaç</string>
     <string name="shared_string_time_moving">Hareket zamanı</string>
     <string name="shared_string_time_span">Zaman aralığı</string>
@@ -2324,7 +2321,7 @@
     <string name="access_direction_haptic_feedback">Dokunsal yön tarifleri</string>
     <string name="access_smart_autoannounce_descr">Sadece hedef noktaya yön değiştiğinde bildir.</string>
     <string name="access_autoannounce_period">Otomatik-sesli-bildirim periyodu</string>
-    <string name="no_waypoints_found">Uğranacak-ara-noktalar bulunamadı</string>
+    <string name="no_waypoints_found">Uğranacak ara nokta bulunamadı</string>
     <string name="lang_es_us">İspanyolca (Amerikan)</string>
     <string name="moving_time">Hareket halindeki zaman</string>
     <string name="purchase_dialog_title">Plan seçin</string>
@@ -2332,11 +2329,11 @@
     <string name="purchase_dialog_subtitle">Uygun ögeyi seçin</string>
     <string name="shared_string_dont">Yapma</string>
     <string name="shared_string_do">Yap</string>
-    <string name="shared_string_only_with_wifi">Sadece Kablosuz\'la</string>
+    <string name="shared_string_only_with_wifi">Yalnızca Wi-Fi\'de</string>
     <string name="wikivoyage_download_pics">Resimleri indir</string>
     <string name="wikivoyage_download_pics_descr">Makalelerdeki resimler çevrim dışı kullanım için indirilebilir. 
 \n Bu ayar her zaman \'Gezinti\' → \'Seçenekler\' de bulunabilir.</string>
-    <string name="shared_string_wifi_only">Sadece Kablosuz\'la</string>
+    <string name="shared_string_wifi_only">Yalnızca Wi-Fi\'de</string>
     <string name="select_travel_book">Bir seyahat kitabı seçin</string>
     <string name="shared_string_travel_book">Seyahat kitabı</string>
     <string name="online_webpage_warning">Sayfa yalnızca çevrim içi kullanılabilir. Tarayıcıda açılsın mı?</string>
@@ -2493,7 +2490,7 @@
     <string name="quick_action_take_photo_note">Yeni resim notu</string>
     <string name="quick_action_add_osm_bug">OSM notu oluştur</string>
     <string name="quick_action_add_parking">Otopark ekle</string>
-    <string name="quick_action_add_favorite">Favorilere ekle</string>
+    <string name="quick_action_add_favorite">Sık kullanılanlara ekle</string>
     <string name="quick_favorites_show_favorites_dialog">Favorileri göster</string>
     <string name="routing_attr_avoid_sett_description">Parke ve kaldırım taşından kaçınır</string>
     <string name="rate_dialog_descr">Lütfen geri bildirimlerinizi paylaşın ve çalışmalarımızı Google Play\'de değerlendirin.</string>
@@ -2530,7 +2527,7 @@
     <string name="profile_alert_need_save_title">Değişiklikleri kaydet</string>
     <string name="profile_alert_need_save_msg">Önce profile yapılan değişiklikleri kaydet</string>
     <string name="profile_alert_delete_title">Profili sil</string>
-    <string name="profile_alert_delete_msg">\"%s\" profilini silmek istediğinizden emin misiniz</string>
+    <string name="profile_alert_delete_msg">\"%s\" profilini sil</string>
     <string name="select_base_profile_dialog_title">Başlanacak profili seç</string>
     <string name="select_nav_profile_dialog_title">Gezinme türünü seçin</string>
     <string name="base_profile_descr_car">Araba, kamyon, motorsiklet</string>
@@ -2605,7 +2602,7 @@
     <string name="downloaded_maps_collect_descr">Ülke ve bölge haritası popülaritesini anlamamıza yardımcı olur.</string>
     <string name="privacy_and_security_change_descr">%1$s\'lerimizi kabul ediyorsanız \"İzin Ver\"e dokunun</string>
     <string name="nav_type_hint">Navigasyon türü</string>
-    <string name="osmand_routing_promo">routing.xml dosyasının değiştirilmiş versiyonunu ..osmand/routing dizinine ekleyebilirsiniz</string>
+    <string name="osmand_routing_promo">routing.xml dosyasının değiştirilmiş halini ..osmand/routing dizinine ekleyin</string>
     <string name="show_compass_ruler">Pusula cetvelini göster</string>
     <string name="hide_compass_ruler">Pusula cetvelini gizle</string>
     <string name="profile_alert_need_routing_type_msg">Lütfen yeni uygulama profili için bir navigasyon türü seçin</string>
@@ -2792,7 +2789,7 @@
     <string name="show_closed_notes">Kapalı notları göster</string>
     <string name="switch_osm_notes_visibility_desc">Haritada OSM notlarını göster veya gizle.</string>
     <string name="gpx_file_desc">GPX - JOSM veya diğer OSM düzenleyicilerine aktarmak için uygundur.</string>
-    <string name="osc_file_desc">OSC - OSM\'ye aktarmak için uygundur.</string>
+    <string name="osc_file_desc">OSC - OpenStreetMap\'e aktarmak için uygundur.</string>
     <string name="osc_file">OSC dosyası</string>
     <string name="choose_file_type">Dosya türünü seçin</string>
     <string name="osm_edits_export_desc">OSM notları, POI\'ler veya her ikisi olarak dışa aktarın.</string>
@@ -2856,7 +2853,7 @@
     <string name="light_rs_render_descr">Basit sürüş tarzı. Yumuşak gece modu, eş yükselti eğrileri, turuncu tarzdaki zıtlaştırılmış yollar, ikincil harita nesnelerini karartma.</string>
     <string name="topo_render_descr">Yürüyüş, doğa yürüyüşü ve doğa bisikleti için. Dış mekanda okunabilir. Zıtlaştırılmış yollar ve doğal nesneler, farklı rota türleri, gelişmiş eş yükselti eğrisi seçenekleri, ilave ayrıntılar. Yüzey bütünlüğünün ayarlanması yol kalitesini ayırt eder. Gece modu yok.</string>
     <string name="mapnik_render_descr">Eski öntanımlı \'Mapnik\' tarzı. \'Mapnik\' ile benzer renkler.</string>
-    <string name="default_render_descr">Genel amaçlı tarz. Yoğun şehirler temiz bir şekilde gösterilmiştir. Eş yükselti eğrileri, rotalar, yüzey kalitesi, erişim kısıtlamaları, yol kalkanları, SAC ölçeğine göre yol görselleştirme, akarsu sporları ögeleri içermektedir.</string>
+    <string name="default_render_descr">Genel amaçlı tarz. Yoğun şehirler temiz bir şekilde gösterilmiştir. Eş yükselti eğrileri, rotalar, yüzey kalitesi, erişim kısıtlamaları, yol levhaları, SAC ölçeğine göre yol görselleştirme, akarsu sporları ögeleri içermektedir.</string>
     <string name="touring_view_render_descr">Yüksek zıtlık ve en fazla ayrıntı ile gezi tarzı. OsmAnd öntanımlı tarzının tüm seçenekleri ile birlikte, mümkün olduğu kadar çok ayrıntıyı, özellikle de yolları, patikaları ve seyahat etmenin diğer yollarını gösterir. Yol türleri arasındaki \"touring atlas\" ayrımını kaldırın. Gündüz, gece ve dış mekan kullanımı için uygundur.</string>
     <string name="off_road_render_descr">\'Topo\' tarzına dayalı arazi sürüşleri ve yeşil uydu görüntüleriyle alt tabaka olarak kullanım için. Ana yol kalınlığı azaltılmış, izlenen yollar, patikalar, bisiklet ve diğer rotaların kalınlığı arttırılmıştır.</string>
     <string name="unirs_render_descr">Yaya ve bisiklet yollarının zıtlığını artırmak için öntanımlı tarzın değiştirilmesi. Eski Mapnik renklerini kullanır.</string>
@@ -2952,7 +2949,7 @@
     <string name="quick_action_navigation_voice_on">Sesi Kapat</string>
     <string name="quick_action_edit_action">Eylemi düzenle</string>
     <string name="quick_actions_delete">Eylemi sil</string>
-    <string name="quick_actions_delete_text">\"%s\" eylemini silmek istediğinizden emin misiniz\?</string>
+    <string name="quick_actions_delete_text">\"%s\" eylemi silinsin mi\?</string>
     <string name="quick_favorites_name_preset">İsim hazır ayarı</string>
     <string name="favorite_autofill_toast_text">" kaydedildi "</string>
     <string name="favorite_empty_place_name">Yer</string>
@@ -3181,7 +3178,6 @@
     <string name="paste_Osmand_data_folder_path">OsmAnd verilerinin bulunduğu klasörün yolunu yapıştırın</string>
     <string name="change_osmand_data_folder_question">OsmAnd veri klasörü değiştirilsin mi\?</string>
     <string name="move_maps_to_new_destination">Yeni hedefe taşı</string>
-    <string name="internal_app_storage_description">OsmAnd için dahili depolama alanı (kullanıcılardan ve diğer uygulamalardan gizlenir).</string>
     <string name="change_data_storage_folder">Depolama klasörünü değiştir</string>
     <string name="rendering_attr_piste_type_snow_park_name">Arazi parkı</string>
     <string name="rendering_attr_piste_type_sleigh_name">Atlı kızak</string>
@@ -3230,7 +3226,7 @@
     <string name="routing_attr_prefer_unpaved_name">Asfaltsız yolları tercih et</string>
     <string name="routing_attr_prefer_unpaved_description">Asfaltsız yolları tercih et.</string>
     <string name="update_all_maps">Tüm haritaları güncelle</string>
-    <string name="update_all_maps_q">Tüm (%1$d) haritaları güncellemek istediğinizden emin misiniz\?</string>
+    <string name="update_all_maps_q">Tüm (%1$d) haritalar güncellensin mi\?</string>
     <string name="release_3_5">• Güncellenmiş uygulama ve profil ayarları. Ayarlar türlerine göre düzenlendi. Her profil ayrı olarak özelleştirilebilir. 
 \n 
 \n • Gezinirken indirilecek bir haritayı öneren yeni harita indirme iletişim kutusu 
@@ -3248,7 +3244,7 @@
 \n • Diğer hata düzeltmeleri
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Bu değişikliği tümüne veya yalnızca seçili profile uygulayabilirsiniz.</string>
+    <string name="apply_preference_to_all_profiles">Bu değişikliği tümüne veya seçili profile uygula.</string>
     <string name="shared_preference">Paylaşılan</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Asfaltsız yolları tercih et</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Yönlendirme için asfaltsız yolları asfaltlılara tercih et.</string>
@@ -3302,7 +3298,6 @@
     <string name="select_color">Renk seç</string>
     <string name="edit_profiles_descr">OsmAnd öntanımlı profilleri silinemez, ancak (önceki ekranda) devre dışı bırakılabilir veya en altta sıralanabilir.</string>
     <string name="edit_profiles">Profilleri düzenle</string>
-    <string name="select_nav_profile_dialog_message">\'Navigasyon türü\' güzergahın nasıl hesaplandığını yönetir.</string>
     <string name="profile_appearance">Profil görünümü</string>
     <string name="choose_icon_color_name">Simge, renk ve isim</string>
     <string name="reorder_profiles">Profil listesini düzenle</string>
@@ -3366,8 +3361,8 @@
     <string name="multimedia_photo_play_sound">Kamera deklanşör sesi</string>
     <string name="osm_authorization_success">Yetkilendirme başarılı</string>
     <string name="rearrange_categories">Kategorileri yeniden düzenle</string>
-    <string name="create_custom_categories_list_promo">Liste sıralama düzenini değiştirin, kategorileri gizleyin. Profillerle tüm değişiklikleri içe veya dışa aktarabilirsiniz.</string>
-    <string name="add_new_custom_category_button_promo">Bir veya daha fazla kategori seçerek yeni bir özel kategori ekleyebilirsiniz.</string>
+    <string name="create_custom_categories_list_promo">Liste düzenini değiştirin ve kategorileri gizleyin. Tüm değişiklikleri profiller olarak içe veya dışa aktarın.</string>
+    <string name="add_new_custom_category_button_promo">Bir veya daha fazla kategori seçerek yeni bir özel kategori ekleyin.</string>
     <string name="shared_string_available">Mevcut</string>
     <string name="add_custom_category">Özel kategori ekle</string>
     <string name="rendering_attr_streetLightingNight_name">Sadece geceleri göster</string>
@@ -3422,7 +3417,7 @@
     <string name="shared_string_routing">Yönlendirme</string>
     <string name="shared_string_include_data">İlave veriler ekle</string>
     <string name="import_profile_dialog_description">İçe aktarılan profil ek veriler içermektedir. Sadece profil verilerini içe aktarmak için \"İçe Aktar\" düğmesine tıklayın veya ek verileri seçin.</string>
-    <string name="export_profile_dialog_description">Profil ile birlikte dışa aktarılacak ilave veriler seçebilirsiniz.</string>
+    <string name="export_profile_dialog_description">Profil ile birlikte dışa aktarılacak ilave veriler seçin.</string>
     <string name="index_name_antarctica">Antarktika</string>
     <string name="shared_string_app_default_w_val">Uygulama Öntanımlı Değeri (%s)</string>
     <string name="no_recalculation_setting">Yeniden hesaplama yok</string>
@@ -3456,13 +3451,13 @@
     <string name="terrain_slider_description">Katmanın görüntüleneceği en düşük ve en yüksek yakınlaştırma seviyelerini ayarlayın.</string>
     <string name="hillshade_download_description">Harita üzerinde tepe gölgesi görüntülemek için ek haritalara ihtiyaç vardır.</string>
     <string name="slope_download_description">Harita üzerinde yamaçları görüntülemek için ek haritalara ihtiyaç vardır.</string>
-    <string name="slope_read_more">%1$s\'de yamaçlar hakkında daha fazla bilgi edinebilirsiniz.</string>
+    <string name="slope_read_more">%1$s\'de yamaçlar hakkında daha fazla bilgi edinin.</string>
     <string name="shared_string_transparency">Şeffaflık</string>
     <string name="shared_string_zoom_levels">Yakınlaştırma seviyeleri</string>
     <string name="shared_string_legend">Lejant</string>
-    <string name="terrain_empty_state_text">Tepe gölgesi veya yamaç haritasını görüntülemeyi etkinleştir. Bu harita türleri hakkında sitemizde daha fazla bilgi edinebilirsiniz.</string>
+    <string name="terrain_empty_state_text">Haritada tepe gölgelerini veya yamaçları gösterir. Sitemizde bu harita türleri hakkında daha fazla bilgi edinin.</string>
     <string name="shared_string_hillshade">Tepe gölgesi</string>
-    <string name="import_complete_description">%1$s\'deki tüm veriler içe aktarıldı, yönetmek amacıyla uygulamanın gerekli bölümünü açmak için aşağıdaki düğmeleri kullanabilirsiniz.</string>
+    <string name="import_complete_description">%1$s\'deki tüm veriler içe aktarıldı. Yönetmek üzere uygulamanın gerekli bölümünü açmak için aşağıdaki düğmeleri kullanabilirsiniz.</string>
     <string name="shared_string_import_complete">İçe aktarma tamamlandı</string>
     <string name="items_added">Eklenen ögeler</string>
     <string name="checking_for_duplicate_description">OsmAnd, uygulamadaki mevcut ögelerle yinelenme durumu için %1$s\'i denetliyor. 
@@ -3474,7 +3469,7 @@
     <string name="saving_new_profile">Yeni profil kaydediliyor</string>
     <string name="restore_all_profile_settings">Tüm profil ayarları geri yüklensin mi\?</string>
     <string name="restore_all_profile_settings_descr">Bu profili oluşturduktan/ içe aktardıktan sonra tüm profil ayarları orijinal değerlerine geri yüklenecektir.</string>
-    <string name="clear_recorded_data_warning">Kayıtlı verileri silmek istediğinize emin misiniz\?</string>
+    <string name="clear_recorded_data_warning">Kayıtlı veriler silinsin mi\?</string>
     <string name="recalculate_route_in_deviation">Sapma durumunda güzergahı yeniden hesapla</string>
     <string name="select_distance_route_will_recalc">Güzergahın yeniden hesaplanacağı mesafeyi seçin.</string>
     <string name="recalculate_route_distance_promo">Güzergahtan geçerli konuma olan mesafe seçilen değerden fazla ise güzergah yeniden hesaplanacaktır.</string>
@@ -3518,10 +3513,10 @@
     <string name="hidden_items_descr">Bu ögeler menüden gizlenir, ancak temsil edilen seçenekler veya eklentiler çalışmaya devam eder.</string>
     <string name="main_actions_descr">Sadece 4 düğme var.</string>
     <string name="main_actions">Ana eylemler</string>
-    <string name="move_inside_category">Ögeleri yalnızca bu kategorinin içine taşıyabilirsiniz.</string>
+    <string name="move_inside_category">Ögeler yalnızca bu kategori içinde taşınabilir.</string>
     <string name="developer_plugin">Geliştirici Eklentisi</string>
     <string name="select_wikipedia_article_langs">Haritadaki Wikipedia makalelerinin dillerini seçin. Makaleyi okurken kullanılabilir herhangi bir dile geçiş yapın.</string>
-    <string name="some_articles_may_not_available_in_lang">Bazı Wikipedia makaleleri sizin dilinizde mevcut olmayabilir.</string>
+    <string name="some_articles_may_not_available_in_lang">Bazı Wikipedia makaleleri sizin dilinizde kullanılamayabilir.</string>
     <string name="lang_zhyue">Kantonca</string>
     <string name="lang_zhminnan">Güney Mince</string>
     <string name="lang_yo">Yorubaca</string>
@@ -3553,11 +3548,11 @@
     <string name="extra_maps_menu_group">Ek haritalar</string>
     <string name="download_unsupported_action">Desteklenmeyen eylem %1$s</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">Ödeme, satın alma onaylandığında Google Play hesabınızdan alınacaktır.
+    <string name="osm_live_payment_subscription_management">Satın alma işlemi onaylanırken ödeme Google Play hesabınızdan tahsil edilir.
 \n
-\n Yenileme tarihinden önce iptal edilmedikçe abonelik otomatik olarak yenilenir. Hesabınızdan yenileme süresi (ay/üç ay/yıl) için sadece yenileme tarihinde ücret alınacaktır.
+\nSeçilen yenileme döneminden önce iptal edilmediği sürece yenilenir.
 \n
-\n Google Play ayarlarınıza giderek aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
+\nAboneliklerinizi istediğiniz zaman Google Play ayarlarınızdan yönetin veya iptal edin.</string>
     <string name="search_poi_types">POI türleri ara</string>
     <string name="search_poi_types_descr">Farklı kategorilerdeki POI türlerini birleştirin. Tümünü seçmek için düğmeye, kategori seçimi için sol tarafa dokunun.</string>
     <string name="radius_ruler_item">Yarıçap cetveli</string>
@@ -3592,7 +3587,7 @@
 \n
 \n</string>
     <string name="shared_string_resume">Devam ettir</string>
-    <string name="additional_actions_descr">Bu eylemlere “%1$s” düğmesine dokunarak erişebilirsiniz.</string>
+    <string name="additional_actions_descr">“%1$s” düğmesine dokunarak bu eylemlere erişin.</string>
     <string name="quick_action_transport_descr">Haritada toplu taşıma araçlarını gösteren veya gizleyen düğme.</string>
     <string name="create_edit_poi">POI oluştur veya düzenle</string>
     <string name="parking_positions">Park etme alanları</string>
@@ -3642,9 +3637,9 @@
 \nBir ay 43 829 dakikadır.</string>
     <string name="tiles_storage_descr">İndirilen döşemelerin nasıl saklanacağını seçin.</string>
     <string name="default_screen_timeout">Öntanımlı ekran zaman aşımı</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Uygulama profilleri ile hızlı eylemleri içe veya dışa aktarabilirsiniz.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Uygulama profilleri ile hızlı eylemleri içe veya dışa aktarın.</string>
     <string name="shared_string_delete_all_q">Hepsini sil\?</string>
-    <string name="delete_all_actions_message_q">%d hızlı eylemi geri döndürülemez bir şekilde silmek istediğinizden emin misiniz\?</string>
+    <string name="delete_all_actions_message_q">%d hızlı eylem geri döndürülemez bir şekilde silinsin mi\?</string>
     <string name="screen_timeout">Ekran zaman aşımı</string>
     <string name="width_limit_description">Aracınızın genişliğini belirtin, geniş araçlar için bazı güzergah kısıtlamaları geçerli olabilir.</string>
     <string name="height_limit_description">Aracınızın yüksekliğini belirtin, yüksek araçlar için bazı güzergah kısıtlamaları geçerli olabilir.</string>
@@ -3657,7 +3652,7 @@
     <string name="add_online_source">Çevrim içi kaynak ekle</string>
     <string name="clear_tiles_warning">Bu değişiklikleri uygulamak, bu döşeme kaynağı için önbelleğe alınan verileri temizleyecektir</string>
     <string name="vessel_height_warning_link">Gemi yüksekliğini ayarla</string>
-    <string name="vessel_height_warning">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayabilirsiniz. Köprü hareket edebiliyorsa, açık durumdaki yüksekliğini kullanacağımızı unutmayın.</string>
+    <string name="vessel_height_warning">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayın. Köprü hareket edebiliyorsa, açık durumdaki yükseklik kullanılır.</string>
     <string name="vessel_height_limit_description">Alçak köprülerden kaçınmak için gemi yüksekliğini ayarlayın. Köprü hareket edebiliyorsa, açık durumdaki yüksekliğini kullanacağımızı unutmayın.</string>
     <string name="vessel_width_limit_description">Dar köprülerden kaçınmak için gemi genişliğini ayarlayın</string>
     <string name="quick_action_showhide_mapillary_descr">Harita üzerinde Mapillary katmanını göstermek veya gizlemek için bir geçiş.</string>
@@ -3700,7 +3695,7 @@
     <string name="set_working_days_to_continue">Devam etmek için çalışma günlerini ayarla</string>
     <string name="route_between_points">Noktalar arasındaki güzergah</string>
     <string name="plan_a_route">Güzergah planla</string>
-    <string name="add_hidden_group_info">Seçilen grup gizli olduğu için eklenen nokta haritada görünmeyecek, \"%s\" içinde bulabilirsiniz.</string>
+    <string name="add_hidden_group_info">Eklenen nokta \"%s\" içinde bulunabilir. Haritada göstermek için seçilen grubun gizlenmesini iptal edin.</string>
     <string name="track_show_start_finish_icons">Başlangıç ve bitiş simgelerini göster</string>
     <string name="select_track_width">Genişlik seç</string>
     <string name="gpx_split_interval_descr">Yol üzerinde mesafe veya zaman işaretlerinin görüntüleneceği aralığı seçin.</string>
@@ -3726,8 +3721,8 @@
     <string name="threshold_distance">Eşik mesafesi</string>
     <string name="navigation_profile">Navigasyon profili</string>
     <string name="route_between_points_add_track_desc">Kendisine yeni bir bölümün ekleneceği bir yol dosyası seçin.</string>
-    <string name="street_level_imagery">Sokak seviyesi görüntüleri</string>
-    <string name="plan_route_exit_dialog_descr">Planlanan güzergahtaki tüm değişiklikleri atmak istediğinizden emin misiniz\?</string>
+    <string name="street_level_imagery">Sokak düzeyinde görüntüler</string>
+    <string name="plan_route_exit_dialog_descr">Planlanan güzergahtaki tüm değişiklikler atılsın mı\?</string>
     <string name="in_case_of_reverse_direction">Ters yön durumunda</string>
     <string name="monitoring_control_start">REC</string>
     <string name="open_saved_track">Kaydedilen yolu aç</string>
@@ -3799,11 +3794,11 @@
     <string name="start_finish_icons">Başlangıç ve bitiş simgeleri</string>
     <string name="contour_lines_thanks">\'Eş yükselti eğrileri\'ni satın aldığınız için teşekkürler</string>
     <string name="osm_live_payment_desc_hw">Abonelik seçilen dönem başına ücretlendirilir. İstediğiniz zaman AppGallery\'den iptal edin.</string>
-    <string name="osm_live_payment_subscription_management_hw">Satın alma onayının ardından AppGallery hesabınızdan ücret alınır.
+    <string name="osm_live_payment_subscription_management_hw">Satın alma işlemi onaylanırken ödeme AppGallery hesabınızdan tahsil edilir.
 \n
-\nYenileme tarihinden önce iptal edilmediği sürece abonelik otomatik olarak uzatılır. Hesabınızdan yenileme süresi (ay/üç ay/yıl) için yalnızca yenileme tarihinde ücret alınacaktır.
+\nSeçilen yenileme döneminden önce iptal edilmediği sürece yenilenir.
 \n
-\n AppGallery ayarlarınızda aboneliklerinizi yönetebilir ve iptal edebilirsiniz.</string>
+\nAboneliklerinizi istediğiniz zaman AppGallery ayarlarınızdan yönetin veya iptal edin.</string>
     <string name="routing_attr_avoid_footways_description">Yaya yollarından kaçın</string>
     <string name="routing_attr_avoid_footways_name">Yaya yollarından kaçın</string>
     <string name="development">Geliştirme</string>
@@ -3840,10 +3835,10 @@
     <string name="message_you_need_add_two_points_to_show_graphs">En az iki nokta ekleyin</string>
     <string name="login_open_street_map">OpenStreetMap\'te oturum aç</string>
     <string name="login_open_street_map_org">OpenStreetMap.org\'da oturum aç</string>
-    <string name="open_street_map_login_mode">Yenilikleri veya değişiklikleri karşıya yüklemek için oturum açmanız gerekir.
+    <string name="open_street_map_login_mode">Önce yeni veya değiştirilen değişiklikleri karşıya yüklemek için oturum açın.
 \n
-\nGüvenli OAuth yöntemini kullanarak oturum açabilir veya giriş bilgilerinizi ve parolanızı kullanabilirsiniz.</string>
-    <string name="use_login_password">Giriş bilgisi ve parola kullan</string>
+\nOAuth yöntemini veya OSM kullanıcı adınızı ve parolanızı kullanın.</string>
+    <string name="use_login_password">Kullanıcı adı ve parola kullan</string>
     <string name="user_login">Giriş bilgisi</string>
     <string name="login_account">Hesap</string>
     <string name="manage_subscription">Aboneliği yönet</string>
@@ -3861,7 +3856,7 @@
     <string name="gpx_upload_trackable_visibility_descr">\"Takip edilebilir\", izlemenin herkese açık herhangi bir listede gösterilmediği, ancak (sizinle doğrudan ilişkilendirilemeyen) zaman damgaları olan işlenen izleme noktalarının herkese açık GPS API\'sinden indirmeler yoluyla göründüğü anlamına gelir.</string>
     <string name="osm_edit_close_note">OSM Notunu Kapat</string>
     <string name="osm_edit_comment_note">OSM Notuna Yorum Yap</string>
-    <string name="osm_login_descr">Güvenli OAuth yöntemini kullanarak oturum açabilir veya giriş bilgilerinizi ve parolanızı kullanabilirsiniz.</string>
+    <string name="osm_login_descr">OAuth yöntemini veya OSM kullanıcı adınızı ve parolanızı kullanarak oturum açın.</string>
     <string name="shared_string_add_photo">Fotoğraf ekle</string>
     <string name="register_on_openplacereviews">OpenPlaceReviews.org\'a
 \nkaydolun</string>
@@ -3875,7 +3870,7 @@
     <string name="add_to_opr">OpenPlaceReviews\'a ekle</string>
     <string name="add_photos_descr">OsmAnd çeşitli kaynaklardan fotoğraflar gösterir:
 \nOpenPlaceReviews - POI fotoğrafları;
-\nMapillary - sokak seviyesi görüntüleri;
+\nMapillary - sokak düzeyinde görüntüler;
 \nİnternet / Wikimedia - OpenStreetMap verilerine göre POI fotoğrafları.</string>
     <string name="shared_string_resources">Kaynaklar</string>
     <string name="approximate_file_size">Yaklaşık dosya boyutu</string>
@@ -3983,11 +3978,9 @@
     <string name="uploaded_count">%1$d / %2$d karşıya yüklendi</string>
     <string name="toast_select_edits_for_upload">Karşıya yüklenecek düzenlemeleri seçin</string>
     <string name="hillshade_slope_contour_lines">tepe gölgesi / yamaç / eş yükselti eğrileri</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews, restoranlar, oteller, müzeler, ara noktalar gibi halka açık yerler hakkında topluluk tarafından yürütülen bir projedir. Fotoğraflar, yorumlar, OpenStreetMap, Wikipedia gibi diğer sistemlere bağlantılar gibi onlar hakkındaki tüm halka açık bilgileri toplar.
+    <string name="open_place_reviews_plugin_description">Restoranlar, oteller, müzeler ve ara noktalar gibi halka açık yerler hakkında fotoğrafları, incelemeleri ve bağlantıları açık veri olarak gönderin https://openplacereviews.org/data/.
 \n
-\nTüm OpenPlaceReview verileri açık ve herkes tarafından kullanılabilir: http://openplacereviews.org/data
-\n
-\nDaha fazlasını şu adresten okuyabilirsiniz: http://openplacereviews.org</string>
+\nhttps://openplacereviews.org adresinde daha fazlasını okuyun</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">test.openplacereviews.org adresini kullan</string>
     <string name="login_open_place_reviews">OpenPlaceReviews\'te oturum aç</string>
@@ -4018,7 +4011,7 @@
     <string name="track_recording_stop_without_saving">Kaydetmeden durdur</string>
     <string name="track_recording_save_and_stop">Kaydet ve kaydı durdur</string>
     <string name="track_recording_title">Yol kaydı durduruldu</string>
-    <string name="track_recording_description">Kaydı durdurmak istediğinizden emin misiniz\?
+    <string name="track_recording_description">Kayıt durdurulsun mu\?
 \nKaydedilmemiş tüm veriler kaybolacak.</string>
     <string name="on_pause">Duraklatıldığında</string>
     <string name="app_restart_required">Bazı ayarların uygulanması için uygulamanın yeniden başlatılması gerekiyor.</string>
@@ -4033,7 +4026,7 @@
     <string name="live_update_frequency_day_variant">Harita güncellemeleri her gün denetlenecek. Bir sonraki: %1$s, %2$s.</string>
     <string name="live_update_frequency_hour_variant">Harita güncellemeleri her saat denetlenecek. Bir sonraki: %1$s, %2$s.</string>
     <string name="delete_updates">Güncellemeleri sil</string>
-    <string name="live_update_delete_updates_msg">%s canlı güncellemenin hepsini silmek istediğinizden emin misiniz\?</string>
+    <string name="live_update_delete_updates_msg">Tüm %s canlı güncelleme silinsin mi\?</string>
     <string name="purchases">Satın almalar</string>
     <string name="select_category_descr">Kategori seçin veya yeni bir tane ekleyin</string>
     <string name="track_recording_will_be_continued">Kayıt devam edecek.</string>
@@ -4088,7 +4081,6 @@
     <string name="announce_when_exceeded">Aşıldığında duyur</string>
     <string name="user_points">Kullanıcı puanları</string>
     <string name="output">Çıkış</string>
-    <string name="map_quick_action_pattern">%1$s → …</string>
     <string name="shared_string_feet">fit</string>
     <string name="srtm_unit_format">Eş yükselti eğrileri birimi çeşidi</string>
     <string name="srtm_download_list_help_message">OsmAnd, metre ve fit cinsinden eş yükselti eğrileri verileri sağlar. Biçimi değiştirmek için dosyayı yeniden indirmeniz gerekecek.</string>
@@ -4109,4 +4101,232 @@
     <string name="routing_attr_avoid_low_emission_zone_name">Düşük emisyon bölgelerinden kaçın</string>
     <string name="search_more">Daha fazla ara…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
+    <string name="backup_and_restore">Yedekle &amp; Geri Yükle</string>
+    <string name="last_backup">Son yedekleme</string>
+    <string name="duration_ago">%1$s önce</string>
+    <string name="osmand_cloud">OsmAnd Cloud</string>
+    <string name="osmand_cloud_authorize_descr">Verilerinizi asla kaybetmeyin. Tüm bilgileri kolayca yedekleyin ve geri yükleyin.</string>
+    <string name="local_backup">Yerel yedekleme</string>
+    <string name="local_backup_descr">Yerel bir dosyadan verileri yedekleyin veya geri yükleyin.</string>
+    <string name="backup_into_file">Dosya olarak yedekle</string>
+    <string name="restore_from_file">Dosyadan geri yükle</string>
+    <string name="osmand_cloud_help_descr">Yardıma mı ihtiyacınız var\? Lütfen %1$s adresinden bizimle iletişime geçin</string>
+    <string name="osmand_cloud_create_account_descr">Lütfen e-posta adresinizi girin, bu adrese bir doğrulama kodu gönderilecek,
+\nve tüm verileriniz ona bağlanacaktır.</string>
+    <string name="osmand_cloud_login_descr">Lütfen kayıt olduğunuz e-posta adresini girin. Bu adrese bir sonraki adım için tek seferlik bir parola gönderilecek.</string>
+    <string name="verify_email_address">E-posta adresini doğrula</string>
+    <string name="verify_email_address_descr">Doğrulama kodu %1$s adresine gönderildi. Lütfen onu aşağıdaki alana girin.</string>
+    <string name="cloud_email_not_registered">Bu e-posta adresi OsmAnd Cloud için kayıtlı değil</string>
+    <string name="cloud_email_already_registered">Bu e-posta adresi zaten kayıtlı.</string>
+    <string name="resend_verification_code">Yeniden gönder</string>
+    <string name="verification_code_missing">Doğrulama kodunu almadım</string>
+    <string name="verification_code_missing_description">10 dakika sürebilir. Spam klasörünüzde değilse aşağıdaki düğmeyi kullanın.</string>
+    <string name="select_nav_profile_dialog_message">\'Navigasyon türü\', kullanılabilir çevrim dışı ve çevrim içi yönlendirme motorlarıyla güzergahların nasıl hesaplanacağını seçer.</string>
+    <string name="loading_list_of_routing_services">Kullanılabilir yönlendirme hizmetlerinin listesi yükleniyor</string>
+    <string name="shared_string_offline">Çevrim dışı</string>
+    <string name="shared_string_online">Çevrim içi</string>
+    <string name="osmand_online_routing_promo">Önceden tanımlanan şablonlar kullanın veya OSRM, Graphhopper, openrouteservice veya GPX çevrim içi yönlendirme ekleyin.</string>
+    <string name="shared_string_external">Harici</string>
+    <string name="provided_by">%1$s tarafından sağlanan</string>
+    <string name="failed_loading_predefined_engines">Önceden tanımlanan şablonların listesi yüklenemedi.
+\nLütfen internet bağlantınızı gözden geçirin.</string>
+    <string name="shared_string_predefined">Önceden tanımlanan</string>
+    <string name="backup_complete">Yedekleme tamamlandı</string>
+    <string name="backup_now">Şimdi yedekle</string>
+    <string name="make_backup">Yedekle</string>
+    <string name="make_backup_descr">Bu aygıtta birçok değişiklik var, lütfen bu verileri kaybetmemek için yedekleyin.</string>
+    <string name="backup_conflicts">Çakışmalar</string>
+    <string name="backup_confilcts_descr">Sunucuda daha yeni bir sürüm bulunduğu için bazı dosyalar sunucuya yüklenemedi.</string>
+    <string name="backup_view_conflicts">Çakışmaları görüntüle</string>
+    <string name="backup_no_internet_descr">İnternet bağlantınızı gözden geçirin ve tekrar indirin.</string>
+    <string name="backup_pause_all">Tümünü duraklat</string>
+    <string name="upload_local_version">Yerel sürümü karşıya yükle</string>
+    <string name="download_server_version">Sunucu sürümünü indir</string>
+    <string name="shared_string_logout">Oturumu kapat</string>
+    <string name="backup_delete_all_data">Tüm verilerimi sil</string>
+    <string name="backup_delete_all_data_descr">OsmAnd Cloud üzerindeki tüm veriler silinecek. Yerel sürümlere dokunulmayacak.</string>
+    <string name="backup_delete_all_data_warning">Sürüm geçmişi de dahil olmak üzere daha önce OsmAnd Cloud\'a yüklenen tüm verileri silmek üzeresiniz.
+\n
+\nSilinen verileri kurtaramazsınız.</string>
+    <string name="backup_danger_zone">Tehlike bölgesi</string>
+    <string name="delete_all_confirmation">Evet, tümünü sil</string>
+    <string name="backup_delete_old_data">Eski sürümleri kaldır</string>
+    <string name="backup_delete_old_data_descr">Verilerinizin geçerli sürümleri OsmAnd Cloud üzerinde korunacak</string>
+    <string name="backup_delete_old_data_warning">Önceden yüklenen veriler için değişiklik geçmişini silmek üzeresiniz.
+\n
+\nVerilerin geçerli sürümü sunucuya kaydedilecek, ancak daha önce yapılan değişikliklere geri dönemeyeceksiniz.</string>
+    <string name="backup_data">Verileri yedekle</string>
+    <string name="select_backup_data_descr">Yedeklenecek verileri ve klasörleri seçin.</string>
+    <string name="backup_restore_data_descr">Çevrim içi yedeklemeleri kullanarak aygıttaki verileri geri yükleyin.</string>
+    <string name="backup_restore_data">Verileri geri yükle</string>
+    <string name="restore_from_osmand_cloud">OsmAnd Cloud\'dan geri yükle</string>
+    <string name="choose_what_to_restore">Neyin geri yükleneceğini seçin.</string>
+    <string name="restore_selected_data">Seçili verileri geri yükle</string>
+    <string name="receiving_data_from_server">Veriler sunucudan alınıyor…</string>
+    <string name="restore_complete">Geri yüklendi</string>
+    <string name="backup_storage_taken">Alınan depolama</string>
+    <string name="you_can_get_feature_as_part_of_pattern">“%1$s” edinin (%2$s planının bir parçası olarak). Karşılaştırma:</string>
+    <string name="osmand_maps_plus_tagline">Genişletilmiş özellikleri edinin</string>
+    <string name="osmand_pro_tagline">Azami özellikleri edinin</string>
+    <string name="shared_string_not_included">Dahil değil</string>
+    <string name="shared_string_includes">Dahil</string>
+    <string name="complete_purchase">Satın almayı tamamla</string>
+    <string name="from_with_param">%1$s\'den</string>
+    <string name="shared_string_progress">İlerleme</string>
+    <string name="attribute">Özellik</string>
+    <string name="shared_string_purchased">Satın alındı</string>
+    <string name="track_has_no_needed_data">Yol gerekli verileri içermiyor.</string>
+    <string name="enter_verification_code">Tek seferlik parolayı girin</string>
+    <string name="backup_version_history">Sürüm geçmişi</string>
+    <string name="backup_version_history_delete_descr">Kullanımdan kaldırılan veri türleri için değişiklik günlüğü OsmAnd Cloud\'dan silinsin mi\?</string>
+    <string name="delete_version_history">Sürüm geçmişini sil</string>
+    <string name="routing_attr_avoid_tunnels_description">Tünellerden kaçının</string>
+    <string name="routing_attr_avoid_tunnels_name">Tünellerden kaçın</string>
+    <string name="backup_promocode">Tanıtım kodu</string>
+    <string name="send_crash_log">Çökme günlük kaydı gönder</string>
+    <string name="send_logcat_log">Logcat günlük kaydı gönder</string>
+    <string name="purchases_feature_desc_nautical">Deniz derinliği bilgilerine erişin</string>
+    <string name="purchases_feature_desc_terrain">Arazi eş yükselti eğrileri, koyu gölgeli tam tepe gölgesi haritası ve tepelerle ovaları göstermek için renkli yamaç haritaları.</string>
+    <string name="purchases_feature_desc_wikivoyage">Wikivoyage\'ı çevrim dışı keşfedin. Makaleler ülkelere ve bölgelere göre ayrılmıştır ve tüm dillerde kullanılabilir.</string>
+    <string name="purchases_feature_desc_wikipedia">Wikipedia\'yı çevrim dışı keşfedin. Makaleler ülkelere ve bölgelere göre ayrılmıştır ve tüm dillerde kullanılabilir.</string>
+    <string name="purchases_feature_desc_combined_wiki">İnternet bağlantısı olmadan hareket halindeyken Wikipedia makalelerini keşfedin. Çevrim dışı veriler ülkelere göre ayrılmıştır ve tüm dillerde kullanılabilir.</string>
+    <string name="purchases_feature_desc_unlimited_map_download">Tüm kıtalar ve bölgelerin çevrim dışı haritaları için sınırsız indirme elde edin.</string>
+    <string name="purchases_feature_desc_monthly_map_updates">Çevrim dışı haritalar için düzenli aylık güncellemelere erişin.</string>
+    <string name="purchases_feature_desc_hourly_map_updates">Daha sık harita güncellemelerine erişin. Saatlik, günlük veya haftalık güncellemeler. Güncellemeler, yalnızca değiştirilen alan için aşamalı olarak indirilir.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Tüm OsmAnd verilerini çevrim içi depolamak için OsmAnd Cloud edinin. Yeniden kurduktan sonra veri kaybı yok. Tüm bilgileri kolayca yedekleyin ve geri yükleyin.</string>
+    <string name="unlimited_map_downloads">Sınırsız harita indirme</string>
+    <string name="wikipedia_and_wikivoyage_offline">Çevrim dışı Wikipedia ve Wikivoyage</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Arazi haritaları: eş yükselti eğrileri, tepe gölgeleri, yamaç</string>
+    <string name="offline_wikipeadia">Çevrim dışı Wikipedia</string>
+    <string name="offline_wikivoyage">Çevrim dışı Wikivoyage</string>
+    <string name="terrain_maps">Arazi haritaları</string>
+    <string name="nautical_depth">Deniz derinliği</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s veya %2$s</string>
+    <string name="continue_with">%1$s ile devam et</string>
+    <string name="not_available_with">%1$s ile kullanılamıyor</string>
+    <string name="redeem_promo_code">Tanıtım kodunu kullan</string>
+    <string name="shared_string_learn_more">Daha fazla bilgi edinin</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Huawei AppGallery\'de istediğiniz zaman iptal edin</string>
+    <string name="cancel_anytime_in_gplay">Google Play\'de istediğiniz zaman iptal edin.</string>
+    <string name="regular_price">Normal fiyat</string>
+    <string name="backup_delete_types_descr">Kullanımdan kaldırılan veri türleri için tüm veriler OsmAnd Cloud\'dan silinsin mi\?</string>
+    <string name="backup_delete_types">Devre dışı bırakılan veri türlerini sil</string>
+    <string name="shared_string_discussion">Tartışma</string>
+    <string name="shared_string_view_all">Tümünü görüntüle</string>
+    <string name="backup_error_user_is_already_registered">Bu e-posta adresi başka bir hesapta kullanılıyor</string>
+    <string name="backup_error_subscription_was_expired">Süresi dolmuş abonelik</string>
+    <string name="backup_error_subscription_was_expired_descr">OsmAnd Pro aboneliğinizin süresi doldu, yedeklemeyi kullanmak için yenileyin. Buluttan verileri hala geri yükleyebilirsiniz.</string>
+    <string name="backup_error_subscription_was_used">Abonelik veya tanıtım başka bir hesap tarafından kullanıldı %1$s</string>
+    <string name="backup_error_size_is_exceeded">OsmAnd Cloud\'un azami boyutu aşıldı %1$s</string>
+    <string name="backup_error_gzip_only_supported_upload">Dosya .gzip biçiminde gönderilmelidir</string>
+    <string name="backup_error_file_not_available">Dosya kullanılamıyor</string>
+    <string name="backup_error_token_is_not_valid">Sağlanan aygıt kimliği veya belirteçle ilgili bir sorun var</string>
+    <string name="backup_error_token_is_not_valid_or_expired">Geçersiz veya süresi dolmuş belirteç</string>
+    <string name="backup_error_user_is_not_registered">Bu e-posta adresiyle kayıtlı kullanıcı yok</string>
+    <string name="backup_error_no_valid_subscription">Geçerli abonelik yok</string>
+    <string name="contour_lines_hillshades_slope">Eş yükselti eğrileri, tepe gölgeleri, yamaç</string>
+    <string name="approximate_route_description">Tüm dönüşleri ve düzgünlük, yol türleri vb. gibi ek verileri almak için güzergahı haritadaki yollara ekle.</string>
+    <string name="release_4_0">• Bulut yedekleme
+\n
+\n • \"Topo\" harita tarzı için gece modu eklendi
+\n
+\n • Eş yükselti eğrilerini fit cinsinden indirme seçeneği eklendi
+\n
+\n • Yollar artık rakım, hız veya eğime göre renklendirilebilir
+\n
+\n • \"Seyahat kaydetme\" iletişim kutusu güncellendi
+\n
+\n • Dokunma mesafesi, Yarıçap cetvelinden ayrı bir seçeneğe taşındı
+\n
+\n • Güzergah Planla: Artık güzergah planlamasından ayrılmadan navigasyon seçeneklerini değiştirebilir, harita yapılandırmasına erişebilir ve arama yapabilirsiniz.
+\n
+\n • Ayrıntılı satın alma bilgilerini içeren yeni \"Satın al\" ekranı
+\n
+\n • Güzergah çizgisi görünümünü değiştirme seçeneği eklendi
+\n
+\n • OsmAnd Live güncellemeleri \"İndirmeler &gt; Güncellemeler\" bölümüne taşındı
+\n
+\n</string>
+    <string name="duration_moment_ago">az önce</string>
+    <string name="logout_from_osmand_cloud">OsmAnd Cloud oturumunu kapat</string>
+    <string name="logout_from_osmand_cloud_decsr">Oturum kapatılsın mı\?
+\nVerileri yedeklemek veya geri yüklemek için tekrar oturum açmanız gerekecek.</string>
+    <string name="backup_deleting_all_data">Tüm veriler siliniyor…</string>
+    <string name="backup_deleted_all_data">Tüm veriler silindi.</string>
+    <string name="backup_deleting_all_data_descr">Lütfen OsmAnd verilerinizi buluttan silene kadar bekleyin. Aygıttaki tüm veriler dokunulmadan kalacak.</string>
+    <string name="backup_deleted_all_data_descr">Tüm verileriniz OsmAnd Cloud\'dan başarıyla silindi.</string>
+    <string name="backup_version_history_removed">Tüm sürüm geçmişi kaldırıldı.</string>
+    <string name="backup_data_removed">Tüm veriler kaldırıldı.</string>
+    <string name="backup_do_not_have_any">Henüz çevrim içi yedeklemeniz yok.</string>
+    <string name="backup_dont_have_any_descr">Otomatik yedeklemeler planlayın ve asla veri kaybetmeyin.</string>
+    <string name="backup_welcome_back">Tekrar hoş geldiniz!</string>
+    <string name="backup_setup">Yedeklemeyi ayarla</string>
+    <string name="backup_welcome_back_descr">Var olan yedeklemeleri kullanarak bu aygıttaki verileri geri yükleyin veya verileri OsmAnd Cloud\'a yedekleyin.</string>
+    <string name="backup_restore_now">Şimdi geri yükle</string>
+    <string name="explore_wikipedia_offline">Wikipedia\'yı çevrim dışı keşfedin.</string>
+    <string name="on_hold_since">%1$s tarihinden beri beklemede</string>
+    <string name="active_till">%1$s tarihine kadar etkin</string>
+    <string name="promo_subscription">Tanıtım aboneliği</string>
+    <string name="option_available_only_in_osmand_pro">Bu seçenek, OsmAnd Pro aboneliğinin bir parçası olarak kullanılabilir.</string>
+    <string name="pro_features">Pro özellikleri</string>
+    <string name="purchases_feature_desc_pro_widgets">OsmAnd Pro özelliklerine erişin: Güzergah renklendirme ve daha fazlası.</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Size uygun olanı bulmak için OsmAnd Planlarını keşfedin.</string>
+    <string name="routes_color_by_type">Güzergah renklendirme ölçütü…</string>
+    <string name="shared_string_relation">İlişki</string>
+    <string name="rendering_value_walkingRoutesOSMC_description">Güzergahları kendi yerel renklerine (OpenStreetMap\'te varsa) ve yürüyüş levhası sembolüne göre renklendir.</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Ağ bağlantısına göre renklendir.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">Güzergahları düğüm ağ türlerine (uluslararası, bölgesel, yerel) göre renklendir.</string>
+    <string name="walking_route_osmc_description">Güzergahları kendi yerel renklerine (OpenStreetMap\'te varsa) ve türlerine (uluslararası, bölgesel, yerel) göre renklendir.</string>
+    <string name="travel_routes">Seyahat güzergahları</string>
+    <string name="setting_supported_by_style">Bu ayar, \'%1$s\' harita tarzı tarafından sağlanıyor</string>
+    <string name="direct_line_maps_required_descr">Güzergah hesaplaması normalden uzun sürüyor.
+\n
+\nBelki bazı haritalar yüklenmedi.</string>
+    <string name="online_direct_line_maps_link">Gerekli haritaları denetle.</string>
+    <string name="offline_maps_required_descr">Bu güzergah için gereken bazı çevrim dışı haritalar eksik.</string>
+    <string name="online_maps_required_descr">Maalesef OsmAnd, ayarlarınız için bir güzergah belirleyemedi.
+\n
+\nBelki bazı haritalar yüklenmedi, gerekli haritalar için çevrim içi bir denetim yapabilirsiniz.</string>
+    <string name="online_maps_searching_descr">Çevrim içi ara…</string>
+    <string name="reset_to_original">Orijinale sıfırla</string>
+    <string name="backup_error_no_subscription">Abonelik yok</string>
+    <string name="map_updates_for_mappers">Haritacılar için harita güncellemeleri</string>
+    <string name="benefits_for_contributors">OSM\'ye etkin olarak katkıda bulunanlara faydaları</string>
+    <string name="benefits_for_contributors_primary_descr">OpenStreetMap.org\'a etkin olarak katkıda bulunuyorsanız sınırsız saatlik harita güncellemelerine hakkınız olabilir.</string>
+    <string name="benefits_for_contributors_secondary_descr">Sınırsız aylık ve saatlik harita güncellemelerine uygun olup olmadığınızı denetlemek için OpenStreetMap\'te oturum açın.</string>
+    <string name="use_login_and_password">Kullanıcı adı ve parola kullan</string>
+    <string name="available_until">%1$s tarihine kadar kullanılabilir</string>
+    <string name="enough_contributions_descr">Tebrikler, OpenStreetMap\'e yeterince katkıda bulundunuz ve artık sınırsız OsmAnd harita güncellemesinin keyfini çıkarabilirsiniz!</string>
+    <string name="not_enough_contributions_descr">OpenStreetMap\'a en az %1$s katkıda bulunma (%2$s gün içinde) gereklidir.</string>
+    <string name="shared_string_contributions">Katkıda bulunmalar</string>
+    <string name="contributions_may_calculate_with_delay">Katkıda bulunmaların hesaplanması birkaç saat sürebilir.</string>
+    <string name="map_updates_are_unavailable_yet">Henüz harita güncellemeleri yok. :-(</string>
+    <string name="connect_track_points_as">Güzergah noktalarını bağla</string>
+    <string name="purchases_restored">Satın alınanlar geri yüklendi</string>
+    <string name="grey_color_undefined">Gri renk veri içermeyen parçalar için kullanılır.</string>
+    <string name="osm_live_payment_subscription_management_amz">Satın alma işlemini onaylarken ödeme Amazon hesabınızdan tahsil edilir.
+\n
+\nSeçilen yenileme döneminden önce iptal edilmediği sürece yenilenir.
+\n
+\nAboneliklerinizi istediğiniz zaman Amazon ayarlarınızdan yönetin veya iptal edin.</string>
+    <string name="cancel_anytime_in_amazon_app">Amazon uygulamasında istediğiniz zaman iptal edin</string>
+    <string name="amz_manage_subscription_descr">Aboneliğinizi yönetmek için aygıttaki Amazon uygulamasını kullanın veya profilinizin altındaki Amazon.com web sitesini açın.</string>
+    <string name="empty_category_name">Boş kategori adı</string>
+    <string name="no_activity_for_intent">Bu eylemi gerçekleştirmek için uygun uygulama bulunamadı</string>
+    <string name="no_items_of_type_message">Bu türden herhangi bir ögeniz yok</string>
+    <string name="routeInfo_tracktype_description">Yüzey oluşumlarını temel alarak yolların durumuna göre bir güzergah veya yol hattının renklendirilmesi. Genellikle ana yol ağının asfaltsız yollardan oluştuğu yollara uygulanır.</string>
+    <string name="routeInfo_winter_ice_road_description">Sadece kış aylarında kullanılabilen kış yolu sınıflandırmasına göre güzergah veya yol hattının renklendirilmesi.</string>
+    <string name="routeInfo_smoothness_description">Tekerlekli araçlar için bir yolun fiziksel olarak kullanılabilirliği, özellikle yüzey düzgünlüğü/düzlüğü ile ilgili bir sınıflandırma şeması sağlar.</string>
+    <string name="routeInfo_surface_description">Yolların/patikaların fiziksel yüzeyi hakkında ek bilgi sağlar.</string>
+    <string name="routeInfo_roadClass_description">Yol sınıflandırmasına göre güzergah veya yol hattının renklendirilmesi.</string>
+    <string name="add_group_to_markers">İşaretleyiciler listesine grup ekle</string>
+    <string name="remove_group_from_markers">Grubu işaretleyiciler listesinden kaldır</string>
+    <string name="start_point">Başlangıç</string>
+    <string name="mapillary_menu_filter_description_new">Görüntüleri tarihe veya türe göre filtrele. Yalnızca yakın çekimde etkindir.</string>
+    <string name="service_is_not_available_please_try_later">Hizmet kullanılamıyor, lütfen daha sonra deneyin</string>
+    <string name="shared_string_files">Dosyalar</string>
+    <string name="travel_route_types">Güzergah türleri</string>
+    <string name="sample_wikivoyage">Örnek Wikivoyage</string>
+    <string name="shared_string_mini">küçük</string>
+    <string name="horseback_riding">At binme</string>
 </resources>

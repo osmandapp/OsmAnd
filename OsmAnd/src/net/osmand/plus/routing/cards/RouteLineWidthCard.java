@@ -20,11 +20,12 @@ import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.PreviewRouteLineInfo;
 import net.osmand.plus.settings.fragments.HeaderInfo;
 import net.osmand.plus.settings.fragments.HeaderUiAdapter;
@@ -35,7 +36,7 @@ import net.osmand.util.Algorithms;
 import java.util.Arrays;
 import java.util.List;
 
-public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
+public class RouteLineWidthCard extends MapBaseCard implements HeaderInfo {
 
 	private final static int CUSTOM_WIDTH_MIN = 1;
 	private final static int CUSTOM_WIDTH_MAX = 36;
@@ -96,7 +97,6 @@ public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
 		tvSelectedType = view.findViewById(R.id.descr);
 		tvDescription = view.findViewById(R.id.description);
 		sliderContainer = view.findViewById(R.id.slider_container);
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.top_divider), isShowDivider());
 
 		initSelectedMode();
 	}
@@ -293,7 +293,7 @@ public class RouteLineWidthCard extends BaseCard implements HeaderInfo {
 			GradientDrawable rectContourDrawable = (GradientDrawable) AppCompatResources.getDrawable(app, R.drawable.bg_select_group_button_outline);
 			if (rectContourDrawable != null) {
 				if (selectedMode == item) {
-					int strokeColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+					int strokeColor = ContextCompat.getColor(app, ColorUtilities.getActiveColorId(nightMode));
 					rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), strokeColor);
 				} else {
 					int strokeColor = ContextCompat.getColor(app, nightMode ?

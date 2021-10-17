@@ -9,21 +9,25 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
+import net.osmand.plus.ContextMenuAdapter.OnRowItemClick;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.chooseplan.OsmAndFeature;
+import net.osmand.plus.chooseplan.button.PurchasingUtils;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
-import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.quickaction.QuickActionType;
@@ -34,10 +38,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
@@ -92,8 +94,8 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	protected boolean pluginAvailable(OsmandApplication app) {
-		return super.pluginAvailable(app)
+	protected boolean isAvailable(OsmandApplication app) {
+		return super.isAvailable(app)
 				|| InAppPurchaseHelper.isContourLinesPurchased(app);
 	}
 
@@ -104,6 +106,11 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean isPaid() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnableByDefault() {
 		return true;
 	}
 
@@ -147,14 +154,14 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayers(MapActivity activity) {
+	public void registerLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		if (terrainLayer != null) {
-			activity.getMapView().removeLayer(terrainLayer);
+			app.getOsmandMap().getMapView().removeLayer(terrainLayer);
 		}
 		if (settings.TERRAIN.get()) {
-			terrainLayer = new TerrainLayer(activity, this);
-
-			activity.getMapView().addLayer(terrainLayer, 0.6f);
+			terrainLayer = new TerrainLayer(context, this);
+			app.getOsmandMap().getMapView().addLayer(terrainLayer, 0.6f);
 		}
 	}
 
@@ -244,26 +251,38 @@ public class SRTMPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+	public void updateLayers(@NonNull Context context, @Nullable MapActivity mapActivity) {
+		OsmandMapTileView mapView = app.getOsmandMap().getMapView();
 		if (settings.TERRAIN.get() && isActive()) {
-			removeTerrainLayer(mapView, activity);
-			registerLayers(activity);
+			removeTerrainLayer(mapView);
+			registerLayers(context, mapActivity);
 		} else {
-			removeTerrainLayer(mapView, activity);
+			removeTerrainLayer(mapView);
 		}
 	}
 
-	private void removeTerrainLayer(OsmandMapTileView mapView, MapActivity activity) {
+	private void removeTerrainLayer(@NonNull OsmandMapTileView mapView) {
 		if (terrainLayer != null) {
 			mapView.removeLayer(terrainLayer);
 			terrainLayer = null;
-			activity.refreshMap();
+			mapView.refreshMap();
 		}
 	}
 
 	@Override
-	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
-		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
+	protected void registerLayerContextMenuActions(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+		if (isLocked()) {
+			PurchasingUtils.createPromoItem(adapter, mapActivity, OsmAndFeature.TERRAIN,
+					TERRAIN,
+					R.string.shared_string_terrain,
+					R.string.contour_lines_hillshades_slope);
+		} else {
+			createContextMenuItems(adapter, mapActivity);
+		}
+	}
+
+	private void createContextMenuItems(@NonNull ContextMenuAdapter adapter, @NonNull MapActivity mapActivity) {
+		ItemClickListener listener = new OnRowItemClick() {
 
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
@@ -280,10 +299,10 @@ public class SRTMPlugin extends OsmandPlugin {
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
-											  final int itemId,
-											  final int position,
-											  final boolean isChecked,
-											  final int[] viewCoordinates) {
+			                                  final int itemId,
+			                                  final int position,
+			                                  final boolean isChecked,
+			                                  final int[] viewCoordinates) {
 				if (itemId == R.string.srtm_plugin_name) {
 					toggleContourLines(mapActivity, isChecked, new Runnable() {
 						@Override
@@ -294,9 +313,7 @@ public class SRTMPlugin extends OsmandPlugin {
 								boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
 
 								SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-								if (selected && plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
-									OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
-								}
+								OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 
 								ContextMenuItem item = adapter.getItem(position);
 								if (item != null) {
@@ -316,8 +333,8 @@ public class SRTMPlugin extends OsmandPlugin {
 						public void run() {
 							boolean selected = settings.TERRAIN.get();
 							SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-							if (selected && plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
-								OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
+							if (selected) {
+								OsmandPlugin.enablePluginIfNeeded(mapActivity, mapActivity.getMyApplication(), plugin, true);
 							}
 							ContextMenuItem item = adapter.getItem(position);
 							if (item != null) {
@@ -325,7 +342,7 @@ public class SRTMPlugin extends OsmandPlugin {
 								item.setSelected(selected);
 								adapter.notifyDataSetChanged();
 							}
-							updateLayers(mapView, mapActivity);
+							updateLayers(mapActivity, mapActivity);
 							mapActivity.refreshMapComplete();
 						}
 					});
@@ -377,11 +394,7 @@ public class SRTMPlugin extends OsmandPlugin {
 			downloadThread.runReloadIndexFiles();
 		}
 
-		boolean downloadIndexes = settings.isInternetConnectionAvailable()
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
-
-		if (!downloadIndexes) {
+		if (!downloadThread.shouldDownloadIndexes()) {
 			LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
 			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SRTM_COUNTRY_FILE));
 			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.HILLSHADE_FILE));
@@ -389,15 +402,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		}
 
 		return suggestedMaps;
-	}
-
-	private List<IndexItem> getMapsForType(LatLon latLon, DownloadActivityType type) {
-		try {
-			return DownloadResources.findIndexItemsAt(app, latLon, type);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return Collections.emptyList();
 	}
 
 	public void toggleContourLines(final MapActivity activity,

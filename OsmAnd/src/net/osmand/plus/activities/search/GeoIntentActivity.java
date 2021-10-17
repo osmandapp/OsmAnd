@@ -8,20 +8,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import net.osmand.data.Amenity;
-import net.osmand.data.LatLon;
-import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
-import net.osmand.data.Street;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
-import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
@@ -29,16 +23,14 @@ import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 public class GeoIntentActivity extends OsmandListActivity {
 
 	private ProgressDialog progressDlg;
-	private LatLon location;
-	protected static final boolean DO_NOT_SEARCH_ADDRESS = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_address_offline);
 		getSupportActionBar().setTitle(R.string.search_osm_offline);
-		
-		getMyApplication().checkApplicationIsBeingInitialized(this, new AppInitializeListener() {
+
+		getMyApplication().checkApplicationIsBeingInitialized(new AppInitializeListener() {
 			@Override
 			public void onStart(AppInitializer init) {
 
@@ -47,13 +39,11 @@ public class GeoIntentActivity extends OsmandListActivity {
 			@Override
 			public void onProgress(AppInitializer init, InitEvents event) {
 			}
-			
+
 			@Override
 			public void onFinish(AppInitializer init) {
 			}
 		});
-		location = getMyApplication().getSettings().getLastKnownMapLocation();
-
 		final Intent intent = getIntent();
 		if (intent != null) {
 			final ProgressDialog progress = ProgressDialog.show(GeoIntentActivity.this, getString(R.string.searching),
@@ -73,20 +63,8 @@ public class GeoIntentActivity extends OsmandListActivity {
 		}
 	}
 
-	
-	private PointDescription getString(MapObject o) {
-		if (o instanceof Amenity) {
-			OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
-			return new PointDescription(PointDescription.POINT_TYPE_POI,
-					OsmAndFormatter.getPoiStringWithoutType((Amenity) o, settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()));
-		}
-		if (o instanceof Street) {
-			return new PointDescription(PointDescription.POINT_TYPE_ADDRESS, ((Street) o).getCity().getName() + " " + o.getName());
-		}
-		return new PointDescription(PointDescription.POINT_TYPE_ADDRESS, o.toString());
-	}
-
 	private class GeoIntentTask extends AsyncTask<Void, Void, GeoParsedPoint> {
+
 		private final ProgressDialog progress;
 		private final Intent intent;
 
@@ -101,14 +79,13 @@ public class GeoIntentActivity extends OsmandListActivity {
 
 		/**
 		 * Extracts information from geo and map intents:
-		 * 
+		 * <p>
 		 * geo:47.6,-122.3<br/>
 		 * geo:47.6,-122.3?z=11<br/>
 		 * geo:0,0?q=34.99,-106.61(Treasure)<br/>
 		 * geo:0,0?q=1600+Amphitheatre+Parkway%2C+CA<br/>
-		 * 
-		 * @param uri
-		 *            The intent uri
+		 *
+		 * @param uri The intent uri
 		 * @return
 		 */
 		@Override
@@ -125,7 +102,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		}
 
 		@Override
-		protected void onPostExecute(GeoPointParserUtil.GeoParsedPoint p ) {
+		protected void onPostExecute(GeoParsedPoint p) {
 			if (progress != null && progress.isShowing()) {
 				try {
 					progress.dismiss();
@@ -168,6 +145,4 @@ public class GeoIntentActivity extends OsmandListActivity {
 			progressDlg = null;
 		}
 	}
-	
-
 }

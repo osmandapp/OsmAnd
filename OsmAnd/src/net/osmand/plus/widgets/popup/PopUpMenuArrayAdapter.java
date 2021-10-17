@@ -14,8 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.List;
 
@@ -67,10 +69,11 @@ public class PopUpMenuArrayAdapter extends ArrayAdapter<PopUpMenuItem> {
 				if (item.isShowCompoundBtn()) {
 					radio.setChecked(true);
 				} else {
-					convertView.setBackgroundColor(UiUtilities.getColorWithAlpha(
+					convertView.setBackgroundColor(ColorUtilities.getColorWithAlpha(
 							AndroidUtils.getColorFromAttr(getContext(), R.attr.active_color_basic), 0.1f));
 				}
 			}
+			AndroidUiHelper.updateVisibility(convertView.findViewById(R.id.divider), item.shouldShowTopDivider());
 		}
 		return convertView;
 	}

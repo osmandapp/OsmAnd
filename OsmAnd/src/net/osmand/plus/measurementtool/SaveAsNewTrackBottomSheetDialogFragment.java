@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -29,6 +30,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -86,6 +88,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			return;
 		}
 
+		Context themedCtx = UiUtilities.getThemedContext(app, nightMode);
 		int highlightColorId = nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light;
 		if (savedInstanceState != null) {
 			showOnMap = savedInstanceState.getBoolean(SHOW_ON_MAP_KEY);
@@ -101,13 +104,11 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new TitleItem(getString(R.string.save_as_new_track)));
 
-		View editNameView = View.inflate(UiUtilities.getThemedContext(app, nightMode),
-				R.layout.track_name_edit_text, null);
+		View editNameView = View.inflate(themedCtx, R.layout.track_name_edit_text, null);
 		nameTextBox = editNameView.findViewById(R.id.name_text_box);
 		nameTextBox.setBoxBackgroundColorResource(highlightColorId);
 		nameTextBox.setHint(AndroidUtils.addColon(app, R.string.shared_string_file_name));
-		ColorStateList colorStateList = ColorStateList.valueOf(ContextCompat
-				.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light));
+		ColorStateList colorStateList = ColorStateList.valueOf(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
 		TextInputEditText nameText = editNameView.findViewById(R.id.name_edit_text);
 		nameText.setText(fileName);
@@ -137,7 +138,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 		items.add(new DividerSpaceItem(app, contentPaddingSmall));
 
-		View selectFolderView = View.inflate(UiUtilities.getThemedContext(app, nightMode), R.layout.select_folder_row, null);
+		View selectFolderView = View.inflate(themedCtx, R.layout.select_folder_row, null);
 		selectFolderView.findViewById(R.id.select_folder_button).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -158,8 +159,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		adapter.setFolders(getFolders());
 		if (adapter.getItemCount() > 0) {
 			adapter.setListener(createFolderSelectListener());
-			View view = View.inflate(UiUtilities.getThemedContext(app, nightMode), R.layout.bottom_sheet_item_recyclerview,
-					null);
+			View view = View.inflate(themedCtx, R.layout.bottom_sheet_item_recyclerview, null);
 			recyclerView = view.findViewById(R.id.recycler_view);
 			recyclerView.setPadding(contentPaddingHalf, 0, contentPaddingHalf, 0);
 			BaseBottomSheetItem scrollItem = new HorizontalRecyclerBottomSheetItem.Builder()
@@ -171,7 +171,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			items.add(new DividerSpaceItem(app, app.getResources().getDimensionPixelSize(R.dimen.dialog_content_margin)));
 		}
 
-		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColorRes = ColorUtilities.getActiveColorId(nightMode);
 
 		if (showSimplifiedButton) {
 			final BottomSheetItemWithCompoundButton[] simplifiedTrackItem = new BottomSheetItemWithCompoundButton[1];
@@ -268,7 +268,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	}
 
 	@Override
-	public void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBoolean(SHOW_ON_MAP_KEY, showOnMap);
 		outState.putBoolean(SIMPLIFIED_TRACK_KEY, simplifiedTrack);
 		outState.putString(FOLDER_NAME_KEY, folderName);

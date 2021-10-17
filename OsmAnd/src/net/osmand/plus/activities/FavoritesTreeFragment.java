@@ -1,5 +1,12 @@
 package net.osmand.plus.activities;
 
+import static android.view.Gravity.CENTER;
+import static net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import static net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
+import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,27 +46,27 @@ import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
-import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.settings.backend.OsmandPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
+import net.osmand.plus.base.PointImageDrawable;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.mapmarkers.MapMarkersHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
+import net.osmand.plus.settings.backend.OsmandPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -69,18 +76,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static android.view.Gravity.CENTER;
-import static net.osmand.plus.OsmAndLocationProvider.*;
-import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
-import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
-
 
 public class FavoritesTreeFragment extends OsmandExpandableListFragment implements FavoritesFragmentStateHolder,
 		OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final int SEARCH_ID = -1;
-	//	public static final int EXPORT_ID = 0;
-	// public static final int IMPORT_ID = 1;
 	public static final int DELETE_ID = 2;
 	public static final int DELETE_ACTION_ID = 3;
 	public static final int SHARE_ID = 4;
@@ -96,11 +96,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	private OsmandApplication app;
 	private boolean selectionMode = false;
-	private LinkedHashMap<String, Set<FavouritePoint>> favoritesSelected = new LinkedHashMap<>();
-	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<>();
+	private final LinkedHashMap<String, Set<FavouritePoint>> favoritesSelected = new LinkedHashMap<>();
+	private final Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<>();
 	private ActionMode actionMode;
 	private Drawable arrowImageDisabled;
-	private HashMap<String, OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
+	private final HashMap<String, OsmandPreference<Boolean>> preferenceCache = new HashMap<>();
 	private View footerView;
 	private Location lastLocation;
 	private float lastHeading;
@@ -141,8 +141,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		boolean light = getMyApplication().getSettings().isLightContent();
 		arrowImageDisabled = AppCompatResources.getDrawable(context, R.drawable.ic_direction_arrow);
 		arrowImageDisabled.mutate();
-		arrowImageDisabled.setColorFilter(ContextCompat.getColor(
-				context, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark), PorterDuff.Mode.MULTIPLY);
+		arrowImageDisabled.setColorFilter(ColorUtilities.getDefaultIconColor(context, !light), PorterDuff.Mode.MULTIPLY);
 
 	}
 
@@ -175,13 +174,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.favorites_tree, container, false);
-		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
+		ExpandableListView listView = view.findViewById(android.R.id.list);
 		favouritesAdapter.synchronizeGroups();
 		if (!favouritesAdapter.isEmpty()) {
-			boolean light = getMyApplication().getSettings().isLightContent();
-			View searchView = inflater.inflate(R.layout.search_fav_list_item, null);
-			searchView.setBackgroundResource(light ? R.color.list_background_color_light : R.color.list_background_color_dark);
-			TextView title = (TextView) searchView.findViewById(R.id.title);
+			boolean nightMode = !getMyApplication().getSettings().isLightContent();
+			View searchView = inflater.inflate(R.layout.search_fav_list_item, listView, false);
+			searchView.setBackgroundResource(ColorUtilities.getListBgColorId(nightMode));
+			TextView title = searchView.findViewById(R.id.title);
 			Drawable searchIcon = getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_search_dark);
 			AndroidUtils.setCompoundDrawablesWithIntrinsicBounds(title, searchIcon, null, null, null);
 			searchView.setOnClickListener(new View.OnClickListener() {
@@ -197,13 +196,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			listView.addFooterView(footerView);
 		}
 		View emptyView = view.findViewById(android.R.id.empty);
-		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
+		ImageView emptyImageView = emptyView.findViewById(R.id.empty_state_image_view);
 		if (Build.VERSION.SDK_INT >= 18) {
 			emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day : R.drawable.ic_empty_state_favorites_night);
 		} else {
 			emptyImageView.setVisibility(View.INVISIBLE);
 		}
-		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
+		Button importButton = emptyView.findViewById(R.id.import_button);
 		importButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -261,9 +260,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		listView.setBackgroundColor(getResources().getColor(
-				getMyApplication().getSettings().isLightContent() ? R.color.activity_background_color_light
-						: R.color.activity_background_color_dark));
+		OsmandApplication app = requireMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		listView.setBackgroundColor(ColorUtilities.getActivityBgColor(app, nightMode));
 	}
 
 	@Override
@@ -383,7 +382,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		if (selectionMode) {
-			CheckBox ch = (CheckBox) v.findViewById(R.id.toggle_item);
+			CheckBox ch = v.findViewById(R.id.toggle_item);
 			FavouritePoint model = favouritesAdapter.getChild(groupPosition, childPosition);
 			FavoriteGroup group = favouritesAdapter.getGroup(groupPosition);
 			ch.setChecked(!ch.isChecked());
@@ -458,7 +457,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 		if (!mi.isActionViewExpanded()) {
 			createMenuItem(menu, IMPORT_FAVOURITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_plus, MenuItem.SHOW_AS_ACTION_ALWAYS);
-			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark, MenuItem.SHOW_AS_ACTION_ALWAYS, true);
+			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark, MenuItem.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SELECT_MAP_MARKERS_ID, R.string.select_map_markers, R.drawable.ic_action_flag, MenuItem.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, DELETE_ID, R.string.shared_string_delete, R.drawable.ic_action_delete_dark, MenuItem.SHOW_AS_ACTION_ALWAYS);
 		}
@@ -707,79 +706,29 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			@Override
 			protected void onPostExecute(Void res) {
 				hideProgressBar();
-				if (getActivity() == null) {
-					// user quit application
-					return;
-				}
-				try {
-					if (src != null && dst != null) {
-						Algorithms.fileCopy(src, dst);
+				Activity activity = getActivity();
+				if (activity != null) {
+					try {
+						if (src != null && dst != null) {
+							Algorithms.fileCopy(src, dst);
+						}
+						Intent sendIntent = new Intent();
+						sendIntent.setAction(Intent.ACTION_SEND)
+								.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject))
+								.putExtra(Intent.EXTRA_TEXT, descriptionOfPoints)
+								.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(activity, dst))
+								.setType("text/plain")
+								.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						AndroidUtils.startActivityIfSafe(activity, sendIntent);
+					} catch (IOException e) {
+						Toast.makeText(activity, "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+						e.printStackTrace();
 					}
-					final Intent sendIntent = new Intent();
-					sendIntent.setAction(Intent.ACTION_SEND)
-							.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_fav_subject))
-							.putExtra(Intent.EXTRA_TEXT, descriptionOfPoints)
-							.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), dst))
-							.setType("text/plain")
-							.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					startActivity(sendIntent);
-				} catch (IOException e) {
-					Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-					e.printStackTrace();
 				}
 			}
 		};
 
 		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
-	protected void export() {
-		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
-		if (favouritesAdapter.isEmpty()) {
-			Toast.makeText(getActivity(), R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
-		} else if (!tosave.getParentFile().exists()) {
-			Toast.makeText(getActivity(), R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
-		} else {
-			final AsyncTask<Void, Void, Exception > exportTask = new AsyncTask<Void, Void, Exception >() {
-				@Override
-				protected Exception doInBackground(Void... params) {
-					return helper.exportFavorites();
-				}
-
-				@Override
-				protected void onPreExecute() {
-					showProgressBar();
-				}
-
-				@Override
-				protected void onPostExecute(Exception  warning) {
-					hideProgressBar();
-					if (warning == null) {
-						Toast.makeText(
-								getActivity(),
-								MessageFormat.format(getString(R.string.fav_saved_sucessfully),
-										tosave.getAbsolutePath()), Toast.LENGTH_LONG).show();
-					} else {
-						Toast.makeText(getActivity(), warning.getMessage(), Toast.LENGTH_LONG).show();
-					}
-				}
-			};
-
-			if (tosave.exists()) {
-				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
-				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-					}
-				});
-				bld.setNegativeButton(R.string.shared_string_no, null);
-				bld.setMessage(R.string.fav_export_confirmation);
-				bld.show();
-			} else {
-				exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-			}
-		}
 	}
 
 	private void initListExpandedState() {
@@ -847,7 +796,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		List<FavoriteGroup> groups = new ArrayList<FavoriteGroup>();
 		Filter myFilter;
 		private Set<?> filter;
-		private UiUtilities.UpdateLocationViewCache cache;
+		private final UiUtilities.UpdateLocationViewCache cache;
 
 		FavouritesAdapter() {
 			cache = app.getUIUtilities().getUpdateLocationViewCache();
@@ -940,20 +889,20 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			boolean light = app.getSettings().isLightContent();
 			final FavoriteGroup model = getGroup(groupPosition);
 			boolean visible = model.isVisible();
-			int enabledColor = light ? R.color.text_color_primary_light : R.color.text_color_primary_dark;
-			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
+			int enabledColor = ColorUtilities.getPrimaryTextColorId(!light);
+			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
 			int color = model.getColor() == 0 ? getResources().getColor(R.color.color_favorite) : model.getColor();
 			if (!model.isPersonal()) {
-				setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
+				setCategoryIcon(app.getUIUtilities().getPaintedIcon(
 						R.drawable.ic_action_folder, visible ? color : getResources().getColor(disabledColor)),
-						groupPosition, isExpanded, row, light);
+						row);
 			}
 			adjustIndicator(app, groupPosition, isExpanded, row, light);
-			TextView label = (TextView) row.findViewById(R.id.category_name);
+			TextView label = row.findViewById(R.id.category_name);
 			label.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			if (visible) {
-				Typeface typeface = FontCache.getFont(getContext(), "fonts/Roboto-Medium.ttf");
+				Typeface typeface = FontCache.getFont(getContext(), "ui-fonts/Roboto-Medium.ttf");
 				label.setTypeface(typeface, Typeface.NORMAL);
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
@@ -961,7 +910,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			label.setText(model.getName().length() == 0 ? getString(R.string.shared_string_favorites) : model.getDisplayName(app));
 
 			if (selectionMode) {
-				final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
+				final CheckBox ch = row.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(groupsToDelete.contains(model));
 
@@ -990,7 +939,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				});
 				row.findViewById(R.id.category_icon).setVisibility(View.GONE);
 			} else {
-				final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
+				final CheckBox ch = row.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.GONE);
 				row.findViewById(R.id.category_icon).setVisibility(View.VISIBLE);
 			}
@@ -1026,14 +975,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 			OsmandApplication app = getMyApplication();
 			boolean light = app.getSettings().isLightContent();
-			int enabledColor = light ? R.color.text_color_primary_light : R.color.text_color_primary_dark;
-			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
-			int disabledIconColor = light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+			int enabledColor = ColorUtilities.getPrimaryTextColorId(!light);
+			int disabledColor = ColorUtilities.getSecondaryTextColorId(!light);
+			int disabledIconColor = ColorUtilities.getDefaultIconColorId(!light);
 
-			TextView name = (TextView) row.findViewById(R.id.favourite_label);
-			TextView distanceText = (TextView) row.findViewById(R.id.distance);
-			TextView addressText = (TextView) row.findViewById(R.id.group_name);
-			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
+			TextView name = row.findViewById(R.id.favourite_label);
+			TextView distanceText = row.findViewById(R.id.distance);
+			TextView addressText = row.findViewById(R.id.group_name);
+			ImageView icon = row.findViewById(R.id.favourite_icon);
 
 			final FavouritePoint model = getChild(groupPosition, childPosition);
 			final FavoriteGroup group = getGroup(groupPosition);
@@ -1041,7 +990,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			row.setTag(model);
 
 			if (showOptionsButton) {
-				ImageView options = (ImageView) row.findViewById(R.id.options);
+				ImageView options = row.findViewById(R.id.options);
 				options.setFocusable(false);
 				options.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(
 						R.drawable.ic_overflow_menu_white));
@@ -1066,7 +1015,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			icon.setLayoutParams(lp);
 			row.findViewById(R.id.group_image).setVisibility(View.GONE);
 
-			ImageView direction = (ImageView) row.findViewById(R.id.direction);
+			ImageView direction = row.findViewById(R.id.direction);
 			app.getUIUtilities().updateLocationView(cache, direction, distanceText, model.getLatitude(), model.getLongitude());
 			if (model.isAddressSpecified()) {
 				String addComma = app.getString(R.string.ltr_or_rtl_combine_via_comma);
@@ -1078,7 +1027,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				direction.setImageDrawable(arrowImageDisabled);
 			}
 
-			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
+			final CheckBox ch = row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(favoritesSelected.get(group.getName()) != null && favoritesSelected.get(group.getName()).contains(model));

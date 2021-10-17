@@ -97,10 +97,10 @@
     <string name="timeline_available_for_free_now">La timeline est maintenant disponible gratuitement.</string>
     <string name="disable_monitoring">Désactiver le suivi</string>
     <string name="timeline_description">Activer le suivi pour enregistrer tous les emplacements dans l\'historique.</string>
-    <string name="app_name_short">OsmAnd Tracker</string>
+    <string name="app_name_short">Suivi de position par OsmAnd</string>
     <string name="privacy_policy_use_telegram">Telegram (l\'application de messagerie) est utilisée pour se connecter et communiquer avec d\'autres personnes.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker est l\'un des clients qui utilise la plateforme ouverte Telegram. Vos contacts peuvent utiliser n\'importe quel autre client Telegram.</string>
-    <string name="privacy_policy_agree">En appuyant sur « Continuer » vous acceptez les conditions des politiques de confidentialité de Telegram et d\'OsmAnd.</string>
+    <string name="privacy_policy_agree">En appuyant sur « Continuer », vous acceptez les conditions des politiques de confidentialité de Telegram et d\'OsmAnd.</string>
     <string name="telegram_privacy_policy">Politique de confidentialité de Telegram</string>
     <string name="osmand_privacy_policy">Politique de confidentialité d\'OsmAnd</string>
     <string name="how_it_works">Comment cela fonctionne</string>
@@ -124,7 +124,7 @@
     <string name="shared_string_cancel">Annuler</string>
     <string name="shared_string_settings">Paramètres</string>
     <string name="yard">yd</string>
-    <string name="foot">ft</string>
+    <string name="foot">pieds</string>
     <string name="mile">mi</string>
     <string name="km">km</string>
     <string name="m">m</string>
@@ -140,7 +140,7 @@
     <string name="si_min_km">Minutes par kilomètre</string>
     <string name="si_min_m">Minutes par mile</string>
     <string name="si_mi_feet">Miles/pieds</string>
-    <string name="si_mi_yard">Miles/yards</string>
+    <string name="si_mi_yard">Miles / yards</string>
     <string name="si_km_m">Kilomètres/mètres</string>
     <string name="si_nm">Miles nautiques</string>
     <string name="si_mi_meters">Miles / Mètres</string>
@@ -180,7 +180,7 @@
     <string name="sharing_location">Partage de la position</string>
     <string name="share_location">Partager la position</string>
     <string name="not_logged_in">Vous n\'êtes pas connecté·e</string>
-    <string name="gps_network_not_enabled">Activer la « position » \?</string>
+    <string name="gps_network_not_enabled">Activer la « Géolocalisation » \?</string>
     <string name="closing">Fermeture</string>
     <string name="logging_out">Déconnexion</string>
     <string name="initialization">Démarrage</string>
@@ -213,7 +213,7 @@
     <string name="by_group">Par groupe</string>
     <string name="by_distance">Par distance</string>
     <string name="logout_from_osmand_telegram">Se déconnecter d\'OsmAnd Tracker \?</string>
-    <string name="logout_from_osmand_telegram_descr">Êtes-vous certain de vouloir vous déconnecter d\'OsmAnd Tracker \? Vous ne pourrez pas partager votre position ni voir la position des autres.</string>
+    <string name="logout_from_osmand_telegram_descr">Êtes-vous certain de vouloir vous déconnecter d\'OsmAnd Tracker \? Vous ne pourrez plus partager votre position ni afficher celles des autres.</string>
     <string name="live_now_description">Contacts et groupes partageant leur position avec vous.</string>
     <string name="share_location_as">Partager la position comme</string>
     <string name="add_device">Ajouter un périphérique</string>
@@ -244,7 +244,7 @@
     <string name="monitoring_is_disabled">La surveillance est désactivée</string>
     <string name="osmand_connect_desc">Choisissez la version d\'OsmAnd qu\'OsmAnd Tracker utilise pour afficher les positions.</string>
     <string name="disconnect_from_telegram_desc">Pour révoquer l\'accès au partage de localisation. Ouvrez Telegram, allez dans Paramètres → Vie privée et sécurité → Sessions, et terminez la session OsmAnd Tracker.</string>
-    <string name="no_location_permission">L\'application n\'a pas l\'autorisation d\'accéder aux données de localisation.</string>
+    <string name="no_location_permission">L\'application n\'est pas autorisée à accéder aux données de positionnement.</string>
     <string name="start_location_sharing">Partager la position</string>
     <string name="show_on_map">Afficher sur la carte</string>
     <string name="already_registered_in_telegram">Vous avez besoin d\'un compte Telegram enregistré et d\'un numéro de téléphone</string>

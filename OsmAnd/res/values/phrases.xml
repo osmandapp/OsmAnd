@@ -145,6 +145,20 @@
 	<string name="poi_diplomatic_services_immigrant_visas_filter">Immigrant visas</string>
 	<string name="poi_diplomatic_services_citizen_services_filter">Citizen services</string>
 	<string name="poi_bay_filter">Bay type</string>
+	<string name="poi_access_general">General access</string>
+	<string name="poi_access_motorcar">Motorcar access</string>
+	<string name="poi_access_bicycle">Bicycle access</string>
+	<string name="poi_access_scooter">Scooter access</string>
+	<string name="poi_authentication_contactless">Contactless auth</string>
+	<string name="poi_authentication_chip_card">Auth by chip card</string>
+	<string name="poi_authentication_key">Auth by key</string>
+	<string name="poi_authentication_app">Auth by app</string>
+	<string name="poi_authentication_phone_call">Auth by phone call</string>
+	<string name="poi_authentication_short_message">Auth by short message</string>
+	<string name="poi_authentication_none">Auth not required</string>
+	<string name="poi_permanent_camping">Permanent camping</string>
+	<string name="poi_shelter_filter">Shelter</string>
+	<string name="poi_callable">Callable</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3651,13 +3665,11 @@
 	<string name="poi_socket_as3112_current">Socket: AS/NZS 3112: current</string>
 	<string name="poi_socket_as3112_output">Socket: AS/NZS 3112: output</string>
 
-	<string name="poi_car_yes">Car: yes</string>
 	<string name="poi_car_no">Car: no</string>
 	<string name="poi_bicycle_yes">Bicycle: yes</string>
 	<string name="poi_bicycle_no">Bicycle: no</string>
 	<string name="poi_scooter_yes">Scooter: yes</string>
 	<string name="poi_scooter_no">Scooter: no</string>
-	<string name="poi_truck_yes">Truck: yes</string>
 	<string name="poi_truck_no">Truck: no</string>
 
 	<string name="poi_parking_fee_yes">Parking fee: yes</string>
@@ -3730,6 +3742,9 @@
 	<string name="poi_climbing_summit_log_yes">Climbing summit log: yes</string>
 	<string name="poi_climbing_summit_log_no">Climbing summit log: no</string>
 	<string name="poi_climbing_routes">Climbing routes</string>
+	<string name="poi_climbing_grade_saxon_min">Easiest route (Saxon grade) </string>
+	<string name="poi_climbing_grade_french_min">Easiest route (French grade) </string>
+	<string name="poi_climbing_grade_uiaa_min">Easiest route (UIAA grade) </string>
 
 	<string name="poi_circumference">Circumference</string>
 	<string name="poi_diameter_crown">Diameter of the crown</string>
@@ -3993,7 +4008,7 @@
 	<string name="poi_vehicle_delivery">Vehicle access: delivery</string>
 	<string name="poi_vehicle_forestry">Vehicle access: forestry</string>
 
-	<string name="poi_motorcar_yes">Motorcar access: yes</string>
+	<string name="poi_motorcar_yes">Yes</string>
 	<string name="poi_motorcar_private">Motorcar access: private</string>
 	<string name="poi_motorcar_no">Motorcar access: no</string>
 	<string name="poi_motorcar_destination">Motorcar access: destination</string>
@@ -4428,5 +4443,84 @@
 	<string name="poi_glacier_status_retreat">Glacier status: retreat</string>
 	<string name="poi_glacier_status_marked_retreat">Glacier status: marked retreat</string>
 	<string name="poi_glacier_status_oscillating">Glacier status: oscillating</string>
+
+	<string name="poi_power_terminal">Power terminal</string>
+
+	<string name="poi_fuel_propane">Propane</string>
+
+	<string name="poi_picnic_table_yes">Picnic table: yes</string>
+	<string name="poi_picnic_table_no">Picnic table: no</string>
+
+	<string name="poi_memorial_subject">Subject</string>
+
+	<string name="poi_power_portal">Power portal</string>
+
+	<string name="poi_contact_linkedin">LinkedIn</string>
+	<string name="poi_contact_webcam">Webcam</string>
+	<string name="poi_contact_vhf">VHF</string>
+	<string name="poi_contact_xing">Xing</string>
+
+	<string name="poi_outdoor_seating_poi">Outdoor seating</string>
+
+	<string name="poi_internet_access_ssid">SSID</string>
+
+	<string name="poi_share_taxi_yes">Share taxi: yes</string>
+
+	<string name="poi_authentication_contactless_no">Contactless auth: no</string>
+	<string name="poi_authentication_contactless_yes">Yes</string>
+	<string name="poi_authentication_chip_card_no">Auth by chip card: no</string>
+	<string name="poi_authentication_chip_card_yes">Yes</string>
+	<string name="poi_authentication_key_no">Auth by key: no</string>
+	<string name="poi_authentication_key_yes">Yes</string>
+	<string name="poi_authentication_app_no">Auth by app: no</string>
+	<string name="poi_authentication_app_yes">Yes</string>
+	<string name="poi_authentication_phone_call_no">Auth by phone call: no</string>
+	<string name="poi_authentication_phone_call_yes">Yes</string>
+	<string name="poi_authentication_phone_call_number">Phone number used for auth</string>
+	<string name="poi_authentication_short_message_no">Auth by short message: no</string>
+	<string name="poi_authentication_short_message_yes">Yes</string>
+	<string name="poi_authentication_short_message_number">Short message number used for auth</string>
+	<string name="poi_authentication_short_message_text">Short message text used for auth</string>
+	<string name="poi_authentication_none_no">Auth not required: no</string>
+	<string name="poi_authentication_none_yes">Yes</string>
+
+	<string name="poi_permanent_camping_yes">Yes</string>
+	<string name="poi_permanent_camping_no">No</string>
+	<string name="poi_permanent_camping_only">Only</string>
+
+	<string name="poi_destination">Destination</string>
+	<string name="poi_direction_north">North direction</string>
+	<string name="poi_direction_east">East direction</string>
+	<string name="poi_direction_south">South direction</string>
+	<string name="poi_direction_west">West direction</string>
+	<string name="poi_direction_northeast">Northeast direction</string>
+	<string name="poi_direction_northwest">Northwest direction</string>
+	<string name="poi_direction_southeast">Southeast direction</string>
+	<string name="poi_direction_southwest">Southwest direction</string>
+
+	<string name="poi_lounger">Lounger</string>
+
+	<string name="poi_shelter_no">Shelter: no</string>
+	<string name="poi_shelter_yes">Yes</string>
+
+	<string name="poi_arch">Arch</string>
+
+	<string name="poi_manufacturer">Manufacturer</string>
+	<string name="poi_payment_calling_cards_no">Calling cards not accepted</string>
+	<string name="poi_payment_reverse_charge_calls_no">Reverse charge calls: no</string>
+	<string name="poi_payment_calling_cards_yes">Calling cards accepted</string>
+	<string name="poi_payment_reverse_charge_calls_yes">Reverse charge calls: yes</string>
+	<string name="poi_callable_yes">Yes</string>
+	<string name="poi_callable_no">No</string>
+
+	<string name="poi_groundskeeping">Groundskeeping store</string>
+	<string name="poi_country_store">Country store</string>
+
+	<string name="poi_prep_school">Tutorial school</string>
+	<string name="poi_ticket_validator">Ticket validator</string>
+
+	<string name="poi_geoglyph">Geoglyph</string>
+
+	<string name="poi_satellite_dish">Satellite dish</string>
 
 </resources>

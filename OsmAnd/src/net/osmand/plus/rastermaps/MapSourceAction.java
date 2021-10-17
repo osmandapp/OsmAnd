@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.util.Pair;
@@ -13,6 +14,7 @@ import androidx.core.util.Pair;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -59,33 +61,20 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
+	public String getDisabledItem(OsmandApplication app) {
+		return LAYER_OSM_VECTOR;
+	}
+
+	@Override
 	public String getSelectedItem(OsmandApplication app) {
-		return app.getSettings().MAP_ONLINE_DATA.get()
-				? app.getSettings().MAP_TILE_SOURCES.get()
-				: MapSourceAction.LAYER_OSM_VECTOR;
+		OsmandSettings settings = app.getSettings();
+		return settings.MAP_ONLINE_DATA.get() ? settings.MAP_TILE_SOURCES.get() : LAYER_OSM_VECTOR;
 	}
 
 	@Override
 	public String getNextSelectedItem(OsmandApplication app) {
 		List<Pair<String, String>> sources = loadListFromParams();
-		if (sources.size() > 0) {
-			String currentSource = getSelectedItem(app);
-
-			int index = -1;
-			for (int idx = 0; idx < sources.size(); idx++) {
-				if (Algorithms.stringsEqual(sources.get(idx).first, currentSource)) {
-					index = idx;
-					break;
-				}
-			}
-
-			Pair<String, String> nextSource = sources.get(0);
-			if (index >= 0 && index + 1 < sources.size()) {
-				nextSource = sources.get(index + 1);
-			}
-			return nextSource.first;
-		}
-		return null;
+		return getNextItemFromSources(app, sources, LAYER_OSM_VECTOR);
 	}
 
 	@Override
@@ -110,35 +99,35 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public void execute(MapActivity activity) {
-		OsmandRasterMapsPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class);
+	public void execute(@NonNull MapActivity mapActivity) {
+		OsmandRasterMapsPlugin plugin = OsmandPlugin.getActivePlugin(OsmandRasterMapsPlugin.class);
 		if (plugin != null) {
 			List<Pair<String, String>> sources = loadListFromParams();
 			if (sources.size() > 0) {
 				boolean showBottomSheetStyles = Boolean.parseBoolean(getParams().get(KEY_DIALOG));
 				if (showBottomSheetStyles) {
-					showChooseDialog(activity.getSupportFragmentManager());
+					showChooseDialog(mapActivity.getSupportFragmentManager());
 					return;
 				}
-				String nextItem = getNextSelectedItem(activity.getMyApplication());
-				executeWithParams(activity, nextItem);
+				String nextItem = getNextSelectedItem(mapActivity.getMyApplication());
+				executeWithParams(mapActivity, nextItem);
 			}
 		}
 	}
 
 	@Override
-	public void executeWithParams(MapActivity activity, String params) {
-		OsmandSettings settings = activity.getMyApplication().getSettings();
+	public void executeWithParams(@NonNull MapActivity mapActivity, String params) {
+		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 		if (params.equals(LAYER_OSM_VECTOR)) {
 			settings.MAP_ONLINE_DATA.set(false);
-			activity.getMapLayers().updateMapSource(activity.getMapView(), null);
+			mapActivity.getMapLayers().updateMapSource(mapActivity.getMapView(), null);
 		} else {
 			settings.MAP_TILE_SOURCES.set(params);
 			settings.MAP_ONLINE_DATA.set(true);
-			activity.getMapLayers().updateMapSource(activity.getMapView(), settings.MAP_TILE_SOURCES);
+			mapActivity.getMapLayers().updateMapSource(mapActivity.getMapView(), settings.MAP_TILE_SOURCES);
 		}
-		Toast.makeText(activity, activity.getString(R.string.quick_action_map_source_switch,
-				getTranslatedItemName(activity, params)), Toast.LENGTH_SHORT).show();
+		Toast.makeText(mapActivity, mapActivity.getString(R.string.quick_action_map_source_switch,
+				getTranslatedItemName(mapActivity, params)), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -146,7 +135,9 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 		if (item.equals(LAYER_OSM_VECTOR)) {
 			return context.getString(R.string.vector_data);
 		} else {
-			return item;
+			return item.endsWith(IndexConstants.SQLITE_EXT)
+					? Algorithms.getFileNameWithoutExtension(item)
+					: item;
 		}
 	}
 
@@ -219,8 +210,8 @@ public class MapSourceAction extends SwitchableAction<Pair<String, String>> {
 	}
 
 	@Override
-	public boolean fillParams(View root, MapActivity activity) {
+	public boolean fillParams(@NonNull View root, @NonNull MapActivity mapActivity) {
 		getParams().put(KEY_DIALOG, Boolean.toString(((SwitchCompat) root.findViewById(R.id.saveButton)).isChecked()));
-		return super.fillParams(root, activity);
+		return super.fillParams(root, mapActivity);
 	}
 }

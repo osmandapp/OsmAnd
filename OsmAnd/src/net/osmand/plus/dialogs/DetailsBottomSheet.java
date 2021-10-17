@@ -1,5 +1,9 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
+import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,10 +16,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -30,13 +34,9 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.render.RenderingRuleProperty;
-import net.osmand.render.RenderingRuleStorageProperties;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.transport.TransportLinesMenu.RENDERING_CATEGORY_TRANSPORT;
-import static net.osmand.render.RenderingRuleStorageProperties.UI_CATEGORY_DETAILS;
 
 public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 
@@ -83,8 +83,8 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		if (properties == null || preferences == null) {
 			properties = new ArrayList<>();
 			preferences = new ArrayList<>();
-			List<RenderingRuleProperty> customRules = ConfigureMapMenu.getCustomRules(app,
-					RenderingRuleStorageProperties.UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
+			List<RenderingRuleProperty> customRules = ConfigureMapUtils.getCustomRules(app,
+					UI_CATEGORY_HIDDEN, RENDERING_CATEGORY_TRANSPORT);
 			for (RenderingRuleProperty pr : customRules) {
 				if (UI_CATEGORY_DETAILS.equals(pr.getCategory()) && pr.isBoolean()) {
 					properties.add(pr);
@@ -109,14 +109,14 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		title.setTypeface(FontCache.getRobotoMedium(app));
 		title.setText(R.string.rendering_category_details);
 		title.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
-		title.setTextColor(nightMode ? ContextCompat.getColor(app, R.color.text_color_primary_dark) : ContextCompat.getColor(app, R.color.text_color_primary_light));
+		title.setTextColor(ColorUtilities.getPrimaryTextColor(app, nightMode));
 
 		TextView description = new TextView(app);
 		description.setLineSpacing(spacing, 1.0f);
 		description.setPadding(padding, 0, padding, paddingSmall);
 		description.setText(R.string.details_dialog_decr);
 		description.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen.default_desc_text_size));
-		description.setTextColor(nightMode ? ContextCompat.getColor(app, R.color.text_color_secondary_dark) : ContextCompat.getColor(app, R.color.text_color_secondary_light));
+		description.setTextColor(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		linearLayout.addView(title);
 		linearLayout.addView(description);
 		items.add(new BaseBottomSheetItem.Builder().setCustomView(linearLayout).create());
@@ -230,7 +230,7 @@ public class DetailsBottomSheet extends BasePreferenceBottomSheet {
 		if (activity instanceof MapActivity) {
 			MapActivity mapActivity = (MapActivity) activity;
 			mapActivity.refreshMapComplete();
-			mapActivity.getMapLayers().updateLayers(mapActivity.getMapView());
+			mapActivity.getMapLayers().updateLayers(mapActivity);
 		}
 		super.onDismiss(dialog);
 	}

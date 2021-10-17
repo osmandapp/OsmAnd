@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="offline_navigation_not_available">OsmAnd-ით ნავიგაცია გათიშულ რეჟიმში დროებით მიუწვდომელია.</string>
     <string name="left_side_navigation">მარცხენა ხელით ტარება</string>
@@ -556,7 +556,7 @@
     <string name="osm_settings_descr">მიუთუთეთ Openstreetmap.org (OSM) პარამეტრები OSM-სთან დასაკავშირებლად.</string>
     <string name="data_settings_descr">მიუთითეთ ენა, მონაცემების ხელახლა წაკითხვა/ჩამოტვირთვა.</string>
     <string name="data_settings">მონაცემები</string>
-    <string name="osm_settings">OpenStreetMap-ის გამართვა</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap-ის გამართვა</string>
     <string name="auto_zoom_map_descr">სიჩქარეზე რუკის ავტომატური გადიდება.</string>
     <string name="auto_zoom_map">რუკის ავტომატური გადიდება</string>
     <string name="additional_settings">დამატებითი პარამეტრები</string>
@@ -856,7 +856,6 @@
     <string name="recording_default_name">მიმდინარეობს ჩაწერა</string>
     <string name="map_widget_av_notes">ხმოვანი/ვიდეო შენიშვნები</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-ის დამატება გათიშული კონტურული ხაზებისათვის</string>
-    <string name="osmand_srtm_long_description_1000_chars">ეს დამატება უზრუნველყოფს კონტურულ ხაზებს, რომლებიც შეიძლება ნაჩვენები იქნას OsmAnd-ის გათიშულ რუკებზე. გლობალური მონაცემები (70 გრადუს ჩრდილოეთსა და 70 გრადუს სამხრეთს შორის) ემყარება SRTM (Shuttle Radar Topography Mission) და ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)-ის მონაცემებს, რომელიც წარმოადგენს ფოტოკამერას Terra-ზე, NASA-ს წამყვან თანამგზავრზე, რომელიც ემსახურება დედამიწის დათვალიერების სისტემას. ASTER წარმოადგენს ერთობლივ პროექტს NASA-ს, იაპონიის ეკონომიკის სამინისტროს, ვაჭრობისა და ინდუსტრიის (METI), და იაპონიის კოსმოსურ სისტემებს (J-spacesystems) შორის.</string>
     <string name="map_widget_distancemeasurement">მანძილის გაზომვა</string>
     <string name="audionotes_location_not_defined">გამოიყენეთ \"მდებარეობის გამოყენება…\" შენიშვნის სასურველი მდებარეობისათვის მისანიჭებლად.</string>
     <string name="map_widget_audionotes">ხმოვანი შენიშვნები</string>

@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentManager;
 import com.github.ksoichiro.android.observablescrollview.ScrollUtils;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -44,7 +45,7 @@ import java.util.Map;
 
 public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implements OnItemSelectedListener {
 
-	protected static final String SETTINGS_LIST_TAG = "settings_list_tag";
+	public static final String SETTINGS_LIST_TAG = "settings_list_tag";
 
 	protected OsmandApplication app;
 
@@ -183,9 +184,8 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	}
 
 	private void setupToolbar(Toolbar toolbar) {
-		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, nightMode
-				? getResources().getColor(R.color.active_buttons_and_links_text_dark)
-				: getResources().getColor(R.color.active_buttons_and_links_text_light)));
+		int color = ColorUtilities.getActiveButtonsAndLinksTextColor(app, nightMode);
+		toolbar.setNavigationIcon(getPaintedContentIcon(R.drawable.ic_action_close, color));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -199,11 +199,12 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 		});
 	}
 
-	private void setupListView(@NonNull final ListView listView) {
+	public static void setupListView(@NonNull final ListView listView) {
 		if (listView.getFooterViewsCount() == 0) {
-			int padding = getResources().getDimensionPixelSize(R.dimen.toolbar_height_expanded);
+			Context context = listView.getContext();
+			int padding = context.getResources().getDimensionPixelSize(R.dimen.toolbar_height_expanded);
 
-			View emptyView = new View(listView.getContext());
+			View emptyView = new View(context);
 			emptyView.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, padding));
 			listView.addFooterView(emptyView);
 			ScrollUtils.addOnGlobalLayoutListener(listView, new Runnable() {
@@ -274,7 +275,7 @@ public abstract class BaseSettingsListFragment extends BaseOsmAndFragment implem
 	@Override
 	public void onCategorySelected(ExportSettingsCategory category, boolean selected) {
 		SettingsCategoryItems categoryItems = dataList.get(category);
-		for (ExportSettingsType type : categoryItems.getTypes()) {
+		for (ExportSettingsType type : categoryItems.getNotEmptyTypes()) {
 			List<?> selectedItems = selected ? categoryItems.getItemsForType(type) : new ArrayList<>();
 			selectedItemsMap.put(type, selectedItems);
 		}

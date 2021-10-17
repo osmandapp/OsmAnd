@@ -9,11 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -22,8 +22,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.controllers.SelectedGpxMenuController.SelectedGpxPoint;
 import net.osmand.util.Algorithms;
-
-import org.apache.commons.lang3.time.DateUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,7 +38,9 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		super(mapActivity);
 		this.selectedGpxPoint = selectedGpxPoint;
 		selectedPoint = selectedGpxPoint.getSelectedPoint();
-		analysis = selectedGpxPoint.getSelectedGpxFile().getTrackAnalysis(mapActivity.getMyApplication());
+		analysis = selectedGpxPoint.getSelectedGpxFile() == null
+				? new GPXTrackAnalysis()
+				: selectedGpxPoint.getSelectedGpxFile().getTrackAnalysis(mapActivity.getMyApplication());
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		Date end = new Date(analysis.endTime);
 		DateFormat startFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
 		DateFormat endFormat;
-		if (DateUtils.isSameDay(start, end)) {
+		if (OsmAndFormatter.isSameDay(start, end)) {
 			endFormat = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 		} else {
 			endFormat = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT);
@@ -186,7 +186,7 @@ public class SelectedGpxMenuBuilder extends MenuBuilder {
 		int gpxSmallTextMargin = (int) ll.getResources().getDimension(R.dimen.gpx_small_text_margin);
 		float gpxTextSize = ll.getResources().getDimension(R.dimen.default_desc_text_size);
 
-		int textColor = ContextCompat.getColor(ll.getContext(), light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
+		int textColor = ColorUtilities.getPrimaryTextColor(ll.getContext(), !light);
 
 		buildIcon(ll, gpxSmallIconMargin, R.drawable.ic_action_distance_16);
 		buildTextView(ll, gpxSmallTextMargin, gpxTextSize, textColor,

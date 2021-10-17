@@ -3,6 +3,8 @@ package net.osmand.plus.mapmarkers;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import net.osmand.IndexConstants;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 import net.osmand.util.Algorithms;
 
@@ -44,8 +46,8 @@ public class MapMarkersGroup {
 		return id;
 	}
 
-	public String getGpxPath() {
-		return id;
+	public String getGpxPath(@NonNull OsmandApplication app) {
+		return app.getAppPath(IndexConstants.GPX_INDEX_DIR + id).getAbsolutePath();
 	}
 
 	public TravelArticle getWikivoyageArticle() {
@@ -135,7 +137,7 @@ public class MapMarkersGroup {
 	@Nullable
 	public String getWptCategoriesString() {
 		if (wptCategories != null) {
-			return Algorithms.encodeStringSet(wptCategories);
+			return Algorithms.encodeCollection(wptCategories);
 		}
 		return null;
 	}

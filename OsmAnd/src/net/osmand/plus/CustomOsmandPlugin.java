@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import static net.osmand.IndexConstants.SQLITE_EXT;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -26,15 +28,15 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionRegistry;
 import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.settings.backend.backup.AvoidRoadsSettingsItem;
-import net.osmand.plus.settings.backend.backup.MapSourcesSettingsItem;
-import net.osmand.plus.settings.backend.backup.PluginSettingsItem;
-import net.osmand.plus.settings.backend.backup.PoiUiFiltersSettingsItem;
-import net.osmand.plus.settings.backend.backup.ProfileSettingsItem;
-import net.osmand.plus.settings.backend.backup.QuickActionsSettingsItem;
-import net.osmand.plus.settings.backend.backup.SettingsHelper;
-import net.osmand.plus.settings.backend.backup.SettingsHelper.SettingsCollectListener;
-import net.osmand.plus.settings.backend.backup.SettingsItem;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.CollectListener;
+import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
+import net.osmand.plus.settings.backend.backup.items.AvoidRoadsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.MapSourcesSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.PluginSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.PoiUiFiltersSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.ProfileSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.QuickActionsSettingsItem;
+import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -43,16 +45,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.IndexConstants.SQLITE_EXT;
 
 public class CustomOsmandPlugin extends OsmandPlugin {
 
@@ -192,11 +190,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			downloadThread.runReloadIndexFiles();
 		}
 
-		boolean downloadIndexes = app.getSettings().isInternetConnectionAvailable()
-				&& !downloadThread.getIndexes().isDownloadedFromInternet
-				&& !downloadThread.getIndexes().downloadFromInternetFailed;
-
-		if (!downloadIndexes) {
+		if (!downloadThread.shouldDownloadIndexes()) {
 			for (SuggestedDownloadItem item : suggestedDownloadItems) {
 				DownloadActivityType type = DownloadActivityType.getIndexType(item.scopeId);
 				if (type != null) {
@@ -235,18 +229,33 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 			progress.show();
 		}
 
-		final SettingsHelper.SettingsImportListener importListener = new SettingsHelper.SettingsImportListener() {
+		final ImportListener importListener = new ImportListener() {
 			@Override
-			public void onSettingsImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
+			public void onImportItemStarted(@NonNull String type, @NonNull String fileName, int work) {
+
+			}
+
+			@Override
+			public void onImportItemProgress(@NonNull String type, @NonNull String fileName, int value) {
+
+			}
+
+			@Override
+			public void onImportItemFinished(@NonNull String type, @NonNull String fileName) {
+
+			}
+
+			@Override
+			public void onImportFinished(boolean succeed, boolean needRestart, @NonNull List<SettingsItem> items) {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
 			}
 		};
 
-		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
+		app.getFileSettingsHelper().collectSettings(file, "", 1, new CollectListener() {
 			@Override
-			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+			public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 				if (succeed && !items.isEmpty()) {
 					for (Iterator<SettingsItem> iterator = items.iterator(); iterator.hasNext(); ) {
 						SettingsItem item = iterator.next();
@@ -262,7 +271,7 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 							item.setShouldReplace(true);
 						}
 					}
-					app.getSettingsHelper().importSettings(file, items, "", 1, importListener);
+					app.getFileSettingsHelper().importSettings(file, items, "", 1, importListener);
 				}
 			}
 		});
@@ -276,9 +285,9 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 	}
 
 	private void removePluginItemsFromFile(final File file, final PluginItemsListener itemsListener) {
-		app.getSettingsHelper().collectSettings(file, "", 1, new SettingsCollectListener() {
+		app.getFileSettingsHelper().collectSettings(file, "", 1, new CollectListener() {
 			@Override
-			public void onSettingsCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
+			public void onCollectFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items) {
 				if (succeed && !items.isEmpty()) {
 					for (SettingsItem item : items) {
 						if (item instanceof QuickActionsSettingsItem) {
@@ -469,15 +478,6 @@ public class CustomOsmandPlugin extends OsmandPlugin {
 
 	public void updateDownloadItems(List<WorldRegion> items) {
 		customRegions = new ArrayList<>(items);
-	}
-
-	private List<IndexItem> getMapsForType(LatLon latLon, DownloadActivityType type) {
-		try {
-			return DownloadResources.findIndexItemsAt(app, latLon, type);
-		} catch (IOException e) {
-			LOG.error(e);
-		}
-		return Collections.emptyList();
 	}
 
 	private List<IndexItem> getMapsForType(List<String> names, DownloadActivityType type, int limit) {

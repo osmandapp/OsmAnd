@@ -26,8 +26,7 @@
 			android:layout_height="wrap_content"
 			android:inputType="textMultiLine"
 			android:scrollHorizontally="false"
-			android:maxLines="4"
-			tools:text="@string/lorem_ipsum" />
+			android:maxLines="4" />
 
 	</net.osmand.plus.widgets.OsmandTextFieldBoxes>
 </LinearLayout>

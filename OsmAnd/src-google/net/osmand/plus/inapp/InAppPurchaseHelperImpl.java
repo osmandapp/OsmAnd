@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.android.billingclient.api.AccountIdentifiers;
 import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingResult;
@@ -34,9 +37,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map.Entry;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 
@@ -168,7 +168,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 									skuDetailsList.addAll(skuDetailsListSubscriptions);
 									InAppPurchaseHelperImpl.this.skuDetailsList = skuDetailsList;
 
-									mSkuDetailsResponseListener.onSkuDetailsResponse(billingResult, skuDetailsList);
+									getSkuDetailsResponseListener(runnable.userRequested()).onSkuDetailsResponse(billingResult, skuDetailsList);
 								}
 							});
 						}
@@ -247,11 +247,12 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	@Override
 	public void purchaseContourLines(@NonNull Activity activity) throws UnsupportedOperationException {
 		OsmandPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
-		if(plugin == null || plugin.getInstallURL() == null) {
+		if (plugin == null || plugin.getInstallURL() == null) {
 			Toast.makeText(activity.getApplicationContext(),
 					activity.getString(R.string.activate_srtm_plugin), Toast.LENGTH_LONG).show();
 		} else {
-			activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+			Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL()));
+			AndroidUtils.startActivityIfSafe(activity, intent);
 		}
 	}
 
@@ -262,7 +263,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			url += "&sku=" + sku;
 		}
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-		ctx.startActivity(intent);
+		AndroidUtils.startActivityIfSafe(ctx, intent);
 	}
 
 	@Nullable
@@ -299,169 +300,196 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	// Listener that's called when we finish querying the items and subscriptions we own
-	private final SkuDetailsResponseListener mSkuDetailsResponseListener = new SkuDetailsResponseListener() {
+	private SkuDetailsResponseListener getSkuDetailsResponseListener(boolean userRequested) {
+		return new SkuDetailsResponseListener() {
 
-		@NonNull
-		private List<String> getAllOwnedSubscriptionSkus() {
-			List<String> result = new ArrayList<>();
-			BillingManager billingManager = getBillingManager();
-			if (billingManager != null) {
-				for (Purchase p : billingManager.getPurchases()) {
-					if (getInAppPurchases().getInAppSubscriptionBySku(p.getSku()) != null) {
-						result.add(p.getSku());
+			@NonNull
+			private List<String> getAllOwnedSubscriptionSkus() {
+				List<String> result = new ArrayList<>();
+				BillingManager billingManager = getBillingManager();
+				if (billingManager != null) {
+					for (Purchase p : billingManager.getPurchases()) {
+						if (getInAppPurchases().getInAppSubscriptionBySku(p.getSku()) != null) {
+							result.add(p.getSku());
+						}
 					}
 				}
-			}
-			for (Entry<String, SubscriptionStateHolder> entry : subscriptionStateMap.entrySet()) {
-				SubscriptionState state = entry.getValue().state;
-				if (state == SubscriptionState.PAUSED || state == SubscriptionState.ON_HOLD) {
-					String sku = entry.getKey();
-					if (!result.contains(sku)) {
-						result.add(sku);
+				for (Entry<String, SubscriptionStateHolder> entry : subscriptionStateMap.entrySet()) {
+					SubscriptionState state = entry.getValue().state;
+					if (state == SubscriptionState.PAUSED || state == SubscriptionState.ON_HOLD) {
+						String sku = entry.getKey();
+						if (!result.contains(sku)) {
+							result.add(sku);
+						}
 					}
 				}
-			}
-			return result;
-		}
-
-		@Override
-		public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> skuDetailsList) {
-
-			logDebug("Query sku details finished.");
-
-			// Have we been disposed of in the meantime? If so, quit.
-			if (getBillingManager() == null) {
-				stop(true);
-				return;
+				return result;
 			}
 
-			// Is it a failure?
-			if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
-				logError("Failed to query inventory: " + billingResult.getResponseCode());
-				notifyError(InAppPurchaseTaskType.REQUEST_INVENTORY, billingResult.getDebugMessage());
-				stop(true);
-				return;
-			}
+			@Override
+			public void onSkuDetailsResponse(@NonNull BillingResult billingResult, List<SkuDetails> skuDetailsList) {
 
-			logDebug("Query sku details was successful.");
+				logDebug("Query sku details finished.");
 
-			/*
-			 * Check for items we own. Notice that for each purchase, we check
-			 * the developer payload to see if it's correct! See
-			 * verifyDeveloperPayload().
-			 */
+				// Have we been disposed of in the meantime? If so, quit.
+				if (getBillingManager() == null) {
+					stop(true);
+					return;
+				}
 
-			List<String> allOwnedSubscriptionSkus = getAllOwnedSubscriptionSkus();
-			for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
-				if (hasDetails(s.getSku())) {
-					Purchase purchase = getPurchase(s.getSku());
-					SkuDetails liveUpdatesDetails = getSkuDetails(s.getSku());
+				// Is it a failure?
+				if (billingResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+					logError("Failed to query inventory: " + billingResult.getResponseCode());
+					notifyError(InAppPurchaseTaskType.REQUEST_INVENTORY, billingResult.getDebugMessage());
+					stop(true);
+					return;
+				}
+
+				logDebug("Query sku details was successful.");
+
+				/*
+				 * Check for items we own. Notice that for each purchase, we check
+				 * the developer payload to see if it's correct! See
+				 * verifyDeveloperPayload().
+				 */
+
+				List<String> allOwnedSubscriptionSkus = getAllOwnedSubscriptionSkus();
+				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
+					if (hasDetails(s.getSku())) {
+						Purchase purchase = getPurchase(s.getSku());
+						SkuDetails liveUpdatesDetails = getSkuDetails(s.getSku());
+						if (liveUpdatesDetails != null) {
+							fetchInAppPurchase(s, liveUpdatesDetails, purchase);
+						}
+						allOwnedSubscriptionSkus.remove(s.getSku());
+					}
+				}
+				for (String sku : allOwnedSubscriptionSkus) {
+					Purchase purchase = getPurchase(sku);
+					SkuDetails liveUpdatesDetails = getSkuDetails(sku);
 					if (liveUpdatesDetails != null) {
+						InAppSubscription s = getSubscriptions().upgradeSubscription(sku);
+						if (s == null) {
+							s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
+						}
 						fetchInAppPurchase(s, liveUpdatesDetails, purchase);
 					}
-					allOwnedSubscriptionSkus.remove(s.getSku());
 				}
-			}
-			for (String sku : allOwnedSubscriptionSkus) {
-				Purchase purchase = getPurchase(sku);
-				SkuDetails liveUpdatesDetails = getSkuDetails(sku);
-				if (liveUpdatesDetails != null) {
-					InAppSubscription s = getSubscriptions().upgradeSubscription(sku);
-					if (s == null) {
-						s = new InAppPurchaseLiveUpdatesOldSubscription(liveUpdatesDetails);
-					}
-					fetchInAppPurchase(s, liveUpdatesDetails, purchase);
-				}
-			}
 
-			InAppPurchase fullVersion = getFullVersion();
-			if (hasDetails(fullVersion.getSku())) {
-				Purchase purchase = getPurchase(fullVersion.getSku());
-				SkuDetails fullPriceDetails = getSkuDetails(fullVersion.getSku());
-				if (fullPriceDetails != null) {
-					fetchInAppPurchase(fullVersion, fullPriceDetails, purchase);
-				}
-			}
-
-			InAppPurchase depthContours = getDepthContours();
-			if (hasDetails(depthContours.getSku())) {
-				Purchase purchase = getPurchase(depthContours.getSku());
-				SkuDetails depthContoursDetails = getSkuDetails(depthContours.getSku());
-				if (depthContoursDetails != null) {
-					fetchInAppPurchase(depthContours, depthContoursDetails, purchase);
-				}
-			}
-
-			InAppPurchase contourLines = getContourLines();
-			if (hasDetails(contourLines.getSku())) {
-				Purchase purchase = getPurchase(contourLines.getSku());
-				SkuDetails contourLinesDetails = getSkuDetails(contourLines.getSku());
-				if (contourLinesDetails != null) {
-					fetchInAppPurchase(contourLines, contourLinesDetails, purchase);
-				}
-			}
-
-			Purchase fullVersionPurchase = getPurchase(fullVersion.getSku());
-			boolean fullVersionPurchased = fullVersionPurchase != null;
-			if (fullVersionPurchased) {
-				ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
-			}
-
-			Purchase depthContoursPurchase = getPurchase(depthContours.getSku());
-			boolean depthContoursPurchased = depthContoursPurchase != null;
-			if (depthContoursPurchased) {
-				ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
-			}
-
-			// Do we have the live updates?
-			boolean subscribedToLiveUpdates = false;
-			List<Purchase> subscriptionPurchases = new ArrayList<>();
-			for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
-				Purchase purchase = getPurchase(s.getSku());
-				if (purchase != null || s.getState().isActive()) {
-					if (purchase != null) {
-						subscriptionPurchases.add(purchase);
-					}
-					if (!subscribedToLiveUpdates
-							&& (purchases.isLiveUpdatesSubscription(s) || purchases.isOsmAndProSubscription(s))) {
-						subscribedToLiveUpdates = true;
+				InAppPurchase fullVersion = getFullVersion();
+				if (hasDetails(fullVersion.getSku())) {
+					Purchase purchase = getPurchase(fullVersion.getSku());
+					SkuDetails fullPriceDetails = getSkuDetails(fullVersion.getSku());
+					if (fullPriceDetails != null) {
+						fetchInAppPurchase(fullVersion, fullPriceDetails, purchase);
 					}
 				}
+
+				InAppPurchase depthContours = getDepthContours();
+				if (hasDetails(depthContours.getSku())) {
+					Purchase purchase = getPurchase(depthContours.getSku());
+					SkuDetails depthContoursDetails = getSkuDetails(depthContours.getSku());
+					if (depthContoursDetails != null) {
+						fetchInAppPurchase(depthContours, depthContoursDetails, purchase);
+					}
+				}
+
+				InAppPurchase contourLines = getContourLines();
+				if (hasDetails(contourLines.getSku())) {
+					Purchase purchase = getPurchase(contourLines.getSku());
+					SkuDetails contourLinesDetails = getSkuDetails(contourLines.getSku());
+					if (contourLinesDetails != null) {
+						fetchInAppPurchase(contourLines, contourLinesDetails, purchase);
+					}
+				}
+
+				Purchase fullVersionPurchase = getPurchase(fullVersion.getSku());
+				boolean fullVersionPurchased = fullVersionPurchase != null;
+				if (fullVersionPurchased) {
+					ctx.getSettings().FULL_VERSION_PURCHASED.set(true);
+				}
+
+				Purchase depthContoursPurchase = getPurchase(depthContours.getSku());
+				boolean depthContoursPurchased = depthContoursPurchase != null;
+				if (depthContoursPurchased) {
+					ctx.getSettings().DEPTH_CONTOURS_PURCHASED.set(true);
+				}
+
+				// Do we have the live updates?
+				boolean subscribedToLiveUpdates = false;
+				boolean subscribedToOsmAndPro = false;
+				boolean subscribedToMaps = false;
+				List<Purchase> subscriptionPurchases = new ArrayList<>();
+				for (InAppSubscription s : getSubscriptions().getAllSubscriptions()) {
+					Purchase purchase = getPurchase(s.getSku());
+					if (purchase != null || s.getState().isActive()) {
+						if (purchase != null) {
+							subscriptionPurchases.add(purchase);
+						}
+						if (!subscribedToLiveUpdates && purchases.isLiveUpdatesSubscription(s)) {
+							subscribedToLiveUpdates = true;
+						}
+						if (!subscribedToOsmAndPro && purchases.isOsmAndProSubscription(s)) {
+							subscribedToOsmAndPro = true;
+						}
+						if (!subscribedToMaps && purchases.isMapsSubscription(s)) {
+							subscribedToMaps = true;
+						}
+					}
+				}
+				if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
+					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
+				} else if (subscribedToLiveUpdates) {
+					ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
+				}
+				if (!subscribedToOsmAndPro && ctx.getSettings().OSMAND_PRO_PURCHASED.get()) {
+					ctx.getSettings().OSMAND_PRO_PURCHASED.set(false);
+				} else if (subscribedToOsmAndPro) {
+					ctx.getSettings().OSMAND_PRO_PURCHASED.set(true);
+				}
+				if (!subscribedToMaps && ctx.getSettings().OSMAND_MAPS_PURCHASED.get()) {
+					ctx.getSettings().OSMAND_MAPS_PURCHASED.set(false);
+				} else if (subscribedToMaps) {
+					ctx.getSettings().OSMAND_MAPS_PURCHASED.set(true);
+				}
+				if (!subscribedToLiveUpdates && !subscribedToOsmAndPro && !subscribedToMaps) {
+					onSubscriptionExpired();
+				}
+
+				lastValidationCheckTime = System.currentTimeMillis();
+				logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE") + " live updates purchased.");
+				logDebug("User " + (subscribedToOsmAndPro ? "HAS" : "DOES NOT HAVE") + " OsmAnd Pro purchased.");
+				logDebug("User " + (subscribedToMaps ? "HAS" : "DOES NOT HAVE") + " Maps purchased.");
+
+				OsmandSettings settings = ctx.getSettings();
+				settings.INAPPS_READ.set(true);
+
+				List<Purchase> tokensToSend = new ArrayList<>();
+				if (subscriptionPurchases.size() > 0) {
+					List<String> tokensSent = Arrays.asList(settings.BILLING_PURCHASE_TOKENS_SENT.get().split(";"));
+					for (Purchase purchase : subscriptionPurchases) {
+						if (needRestoreUserInfo()) {
+							restoreUserInfo(purchase);
+						}
+						if (!tokensSent.contains(purchase.getSku())) {
+							tokensToSend.add(purchase);
+						}
+					}
+				}
+				List<PurchaseInfo> purchaseInfoList = new ArrayList<>();
+				for (Purchase purchase : tokensToSend) {
+					purchaseInfoList.add(getPurchaseInfo(purchase));
+				}
+				onSkuDetailsResponseDone(purchaseInfoList, userRequested);
 			}
-			if (!subscribedToLiveUpdates && ctx.getSettings().LIVE_UPDATES_PURCHASED.get()) {
-				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(false);
+
+			private void onSubscriptionExpired() {
 				if (!isDepthContoursPurchased(ctx)) {
 					ctx.getSettings().getCustomRenderBooleanProperty("depthContours").set(false);
 				}
-			} else if (subscribedToLiveUpdates) {
-				ctx.getSettings().LIVE_UPDATES_PURCHASED.set(true);
 			}
-
-			lastValidationCheckTime = System.currentTimeMillis();
-			logDebug("User " + (subscribedToLiveUpdates ? "HAS" : "DOES NOT HAVE") + " live updates purchased.");
-
-			OsmandSettings settings = ctx.getSettings();
-			settings.INAPPS_READ.set(true);
-
-			List<Purchase> tokensToSend = new ArrayList<>();
-			if (subscriptionPurchases.size() > 0) {
-				List<String> tokensSent = Arrays.asList(settings.BILLING_PURCHASE_TOKENS_SENT.get().split(";"));
-				for (Purchase purchase : subscriptionPurchases) {
-					if (needRestoreUserInfo()) {
-						restoreUserInfo(purchase);
-					}
-					if (!tokensSent.contains(purchase.getSku())) {
-						tokensToSend.add(purchase);
-					}
-				}
-			}
-			List<PurchaseInfo> purchaseInfoList = new ArrayList<>();
-			for (Purchase purchase : tokensToSend) {
-				purchaseInfoList.add(getPurchaseInfo(purchase));
-			}
-			onSkuDetailsResponseDone(purchaseInfoList);
-		}
-	};
+		};
+	}
 
 	private void restoreUserInfo(Purchase purchase) {
 		boolean restored = restoreUserInfoFromString(purchase.getDeveloperPayload());
@@ -579,8 +607,14 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 	}
 
 	@Override
-	protected InAppCommand getRequestInventoryCommand() {
+	protected InAppCommand getRequestInventoryCommand(boolean userRequested) {
 		return new InAppCommand() {
+
+			@Override
+			protected boolean userRequested() {
+				return userRequested;
+			}
+
 			@Override
 			public void run(InAppPurchaseHelper helper) {
 				logDebug("Setup successful. Querying inventory.");

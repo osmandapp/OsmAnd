@@ -2,19 +2,16 @@ package net.osmand.plus;
 
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.core.content.ContextCompat;
 
 import com.google.android.material.slider.Slider;
 
-import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -52,41 +49,40 @@ public class OsmAndLocationSimulation {
 //		}
 //	}
 
-	
-	public void startStopRouteAnimation(final Activity ma, boolean useGpx, final Runnable runnable) {
+	public void startStopRouteAnimation(@Nullable Activity activity, boolean useGpx, final Runnable runnable) {
 		if (!isRouteAnimating()) {
 			if (useGpx) {
+				if (activity == null) {
+					stop();
+					if (runnable != null) {
+						runnable.run();
+					}
+					return;
+				}
 				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 				int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 				ApplicationMode appMode = app.getSettings().getApplicationMode();
 				int selectedModeColor = appMode.getProfileColor(nightMode);
-				AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ma, themeRes));
+				AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 				builder.setTitle(R.string.animate_route);
 
-				final View view = ma.getLayoutInflater().inflate(R.layout.animate_route, null);
+				final View view = activity.getLayoutInflater().inflate(R.layout.animate_route, null);
 				((TextView) view.findViewById(R.id.MinSpeedup)).setText("1"); //$NON-NLS-1$
 				((TextView) view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$
 				final Slider speedup = (Slider) view.findViewById(R.id.Speedup);
 				speedup.setValueTo(3);
 				UiUtilities.setupSlider(speedup, nightMode, selectedModeColor, true);
 				builder.setView(view);
-				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						boolean nightMode = ma instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
-						GpxUiHelper.selectGPXFile(ma, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
-							@Override
-							public boolean processResult(GPXUtilities.GPXFile[] result) {
-								GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-								startAnimationThread(app, builder.getPoints(app), true, speedup.getValue() + 1);
-								if (runnable != null) {
-									runnable.run();
-								}
-								return true;
-							}
-						}, nightMode);
-					}
+				builder.setPositiveButton(R.string.shared_string_ok, (dialog, which) -> {
+					boolean nightMode1 = activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
+					GpxUiHelper.selectGPXFile(activity, false, false, result -> {
+						GPXRouteParamsBuilder gpxParamsBuilder = new GPXRouteParamsBuilder(result[0], app.getSettings());
+						startAnimationThread(app, gpxParamsBuilder.getPoints(app), true, speedup.getValue() + 1);
+						if (runnable != null) {
+							runnable.run();
+						}
+						return true;
+					}, nightMode1);
 				});
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
@@ -110,12 +106,12 @@ public class OsmAndLocationSimulation {
 		}
 	}
 	
-	public void startStopRouteAnimation(final Activity ma)  {
-		startStopRouteAnimation(ma, false, null);
+	public void startStopRouteAnimation(@Nullable Activity activity)  {
+		startStopRouteAnimation(activity, false, null);
 	}
 
-	public void startStopGpxAnimation(final Activity ma)  {
-		startStopRouteAnimation(ma, true, null);
+	public void startStopGpxAnimation(@Nullable Activity activity)  {
+		startStopRouteAnimation(activity, true, null);
 	}
 
 	private void startAnimationThread(final OsmandApplication app, final List<Location> directions, final boolean locTime, final float coeff) {

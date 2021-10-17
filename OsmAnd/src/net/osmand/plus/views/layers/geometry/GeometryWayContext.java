@@ -19,17 +19,17 @@ public abstract class GeometryWayContext {
 
 	public static final int DEFAULT_SIMPLIFICATION_ZOOM = 16;
 
-	private Context ctx;
-	private float density;
+	private final Context ctx;
+	private final float density;
 	private boolean nightMode;
 	private int simplificationZoom = DEFAULT_SIMPLIFICATION_ZOOM;
 
-	private Paint paintIcon;
-	private Paint paintIconCustom;
+	private final Paint paintIcon;
+	private final Paint paintIconCustom;
 
 	private RenderingLineAttributes attrs;
 
-	private Bitmap arrowBitmap;
+	private final Bitmap arrowBitmap;
 
 	public GeometryWayContext(Context ctx, float density) {
 		this.ctx = ctx;
@@ -81,6 +81,10 @@ public abstract class GeometryWayContext {
 	@DrawableRes
 	protected abstract int getArrowBitmapResId();
 
+	public void setNightMode(boolean nightMode) {
+		this.nightMode = nightMode;
+	}
+
 	public void updatePaints(boolean nightMode, @NonNull RenderingLineAttributes attrs) {
 		this.attrs = attrs;
 		paintIcon.setColorFilter(new PorterDuffColorFilter(attrs.paint2.getColor(), PorterDuff.Mode.MULTIPLY));
@@ -102,11 +106,15 @@ public abstract class GeometryWayContext {
 	}
 
 	public void clearCustomColor() {
-		attrs.customColor = 0;
+		if (hasAttrs()) {
+			attrs.customColor = 0;
+		}
 	}
 
 	public void clearCustomShader() {
-		attrs.customColorPaint.setShader(null);
+		if (hasAttrs()) {
+			attrs.customColorPaint.setShader(null);
+		}
 	}
 
 	public int getStrokeColor(int sourceColor) {

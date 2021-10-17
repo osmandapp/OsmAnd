@@ -15,6 +15,7 @@
 		<attr name="list_divider" format="color"/>
 		<attr name="btn_flat_bg" format="reference" />
 		<attr name="btn_border_bg" format="reference" />
+		<attr name="banner_border_bg" format="reference" />
 		<attr name="expandable_list_item_background" format="color"/>
 		<attr name="expandable_list_background" format="color"/>
 		<attr name="bg_color" format="reference" />
@@ -105,14 +106,18 @@
 		<attr name="wikivoyage_travel_card_stroke_bg" format="reference"/>
 		<attr name="wikivoyage_secondary_btn_bg" format="reference"/>
 		<attr name="wikivoyage_primary_btn_bg" format="reference"/>
+
         <attr name="purchase_dialog_shadow_btn_bg" format="reference"/>
 		<attr name="purchase_dialog_outline_btn_bg" format="reference"/>
+        <attr name="purchase_dialog_active_card_bg" format="reference"/>
+        <attr name="purchase_sc_feature_list_bg" format="color"/>
+        <attr name="purchase_sc_selected_plan_bg" format="color"/>
+        <attr name="purchase_sc_header_icon_bg" format="color"/>
+        <attr name="promo_banner_title_color" format="color"/>
 
         <attr name="bottom_bar_background_color" format="color" />
 
         <attr name="bottom_nav_shadow" format="reference"/>
-
-        <attr name="purchase_dialog_active_card_bg" format="reference"/>
 
 		<attr name="text_rounded_bg_regular" format="reference" />
 		<attr name="text_rounded_bg_active" format="reference" />
@@ -133,17 +138,21 @@
 		<attr name="dlg_btn_secondary" format="reference" />
 		<attr name="dlg_btn_secondary_text" format="reference" />
 		<attr name="dlg_btn_stroked" format="reference" />
+        <attr name="stroked_btn_contour" format="reference" />
 		<attr name="profile_save_btn" format="reference"/>
 		<attr name="profile_cancel_btn" format="reference"/>
 		<attr name="btn_bg_border_inactive" format="reference"/>
 		<attr name="btn_radio_button_left" format="reference"/>
 		<attr name="btn_radio_button_right" format="reference"/>
 		<attr name="btn_radio_button_center" format="reference"/>
+        <attr name="radio_button_outline" format="reference"/>
 		<attr name="bg_dash_line" format="reference"/>
 		<attr name="text_input_background" format="reference"/>
 		<attr name="image_help_announcement_time" format="reference"/>
 		<attr name="switch_button_active" format="reference" />
 		<attr name="bottom_navigation_item_background" format="reference" />
+		<attr name="ic_action_osmand_pro_logo_colored" format="reference" />
+		<attr name="ic_action_android_auto_logo_colored" format="reference" />
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">
