@@ -116,6 +116,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	// public static final int ACTION_ID = 0;
 	// protected static final int DELETE_ACTION_ID = 1;
 	private boolean selectionMode = false;
+	private boolean uploadMode = false;
 	private List<GpxInfo> selectedItems = new ArrayList<>();
 	private Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
@@ -617,6 +618,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
+	public void enableUploadMode() {
+		this.uploadMode = true;
+	}
+
 	private void updateSelectionMode(ActionMode m) {
 		if (selectedItems.size() > 0) {
 			m.setTitle(selectedItems.size() + " " + app.getString(R.string.shared_string_selected_lowercase));
@@ -749,6 +754,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
+				uploadMode = false;
 				enableSelectionMode(false);
 				allGpxAdapter.notifyDataSetChanged();
 			}
@@ -1147,6 +1153,16 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 					onChildClick(null, v, groupPosition, childPosition, 0);
 				}
 			});
+
+			GpxDataItem dataItem = app.getGpxDbHelper().getItem(child.file);
+			boolean uploaded = dataItem.getFileLastUploadedTime() >= dataItem.getFileLastModifiedTime();
+			if (uploadMode && uploaded) {
+				ImageView uploadedI = (ImageView) v.findViewById(R.id.already_uploaded_icon);
+				uploadedI.setImageDrawable(app.getUIUtilities().getThemedIcon(R.drawable.ic_action_checkmark_transparent));
+				v.findViewById(R.id.already_uploaded).setVisibility(View.VISIBLE);
+			} else {
+				v.findViewById(R.id.already_uploaded).setVisibility(View.GONE);
+			}
 			return v;
 		}
 
@@ -1768,7 +1784,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null && sgpx.isLoaded()) {
-				analysis = sgpx.getTrackAnalysis(app);
+			analysis = sgpx.getTrackAnalysis(app);
 		} else if (gpxInfo.currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (gpxInfo.file != null) {

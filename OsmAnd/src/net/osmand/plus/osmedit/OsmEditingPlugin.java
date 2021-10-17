@@ -399,6 +399,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setIcon(R.drawable.ic_action_upload_to_openstreetmap)
 					.setColor(app, R.color.color_white)
 					.setListener((adapter, itemId, pos, isChecked, viewCoordinates) -> {
+						f.enableUploadMode();
 						f.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_upload_to_openstreetmap,
 								R.drawable.ic_action_upload_to_openstreetmap, (dialog, which) -> {
 									List<GpxInfo> selectedItems = f.getSelectedItems();

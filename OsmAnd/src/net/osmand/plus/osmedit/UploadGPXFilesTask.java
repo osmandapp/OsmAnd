@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.GPXDatabase;
+import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
@@ -51,6 +53,8 @@ public class UploadGPXFilesTask extends AsyncTask<GpxInfo, String, String> {
 				total++;
 				if (warning == null) {
 					count++;
+					GPXDatabase.GpxDataItem item = app.getGpxDbHelper().getItem(info.file);
+					app.getGpxDbHelper().updateLastUploadedTime(item, System.currentTimeMillis());
 				} else {
 					publishProgress(warning);
 				}
