@@ -4348,7 +4348,7 @@
 \n
 \nPor favor, cambia de almacenamiento compartido a almacenamiento disponible, si esto no se hace la aplicación perderá el acceso a los datos: incluyendo mapas sin conexión, trazas GPX y todo lo demás.</string>
     <string name="shared_storage_warning_title">Cambios en las normas de acceso al almacenamiento</string>
-    <string name="purchases_feature_desc_android_auto">Mapas y navegación sin conexión de OsmAnd, en la pantalla de su vehículo. Se integra cómodamente con los controles de tu vehículo.</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd: Mapas y navegación sin conexión, se integra cómodamente en la pantalla y controles del vehículo.</string>
     <string name="icon_group_nautical">Náutico</string>
     <string name="shared_app_storage_description">La memoria compartida ya no está disponible debido a los cambios en las reglas de acceso al almacenamiento en Android.</string>
     <string name="shared_string_details">Detalles</string>
@@ -4357,9 +4357,7 @@
     <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="included_categories">Categorías incluidas</string>
     <string name="shared_string_articles">Artículos</string>
-    <string name="release_4_1">• Copia de seguridad en la nube
-\n
-\n• Se ha añadido la compatibilidad inicial con Android Auto
+    <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto
 \n
 \n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM
 \n
@@ -4380,4 +4378,11 @@
 \n• Se ha corregido diferentes problemas de navegación
 \n
 \n</string>
+    <string name="location_access_request_result">Aprobado: %1$s Rechazado: %2$s</string>
+    <string name="android_auto_map_placeholder_title">El mapa se muestra en la pantalla del vehículo.</string>
+    <string name="android_auto_purchase_request_title">Comprar «OsmAnd Pro» o «Maps+» para usar OsmAnd con Android Auto</string>
+    <string name="android_auto_map_placeholder_descr">Desconecta el dispositivo de Android Auto para ver el mapa en la aplicación.</string>
+    <string name="location_access_request_title">OsmAnd debe acceder a la ubicación para poder navegar</string>
+    <string name="location_access_request_action">Dar acceso</string>
+    <string name="continue_on_phone">Continuar en el teléfono</string>
 </resources>
