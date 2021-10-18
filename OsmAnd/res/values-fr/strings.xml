@@ -4349,4 +4349,11 @@
 \nVeuillez modifier le stockage de stockage partagé vers l\'un des stockages disponibles, sans quoi OsmAnd ne pourra plus accéder à vos données (y compris les cartes hors-ligne, vos traces GPX et bien plus encore ...).</string>
     <string name="shared_string_articles">Articles</string>
     <string name="included_categories">Catégories incluses</string>
+    <string name="android_auto_map_placeholder_title">La carte s\'affiche sur l\'écran du véhicule.</string>
+    <string name="location_access_request_result">Approuvé : %1$s Refusé : %2$s</string>
+    <string name="android_auto_map_placeholder_descr">Déconnectez votre appareil d\'Android Auto pour afficher la carte dans l\'application.</string>
+    <string name="android_auto_purchase_request_title">Achetez OsmAnd Pro ou Maps+ pour utiliser OsmAnd avec Android Auto</string>
+    <string name="continue_on_phone">Continuer sur le téléphone</string>
+    <string name="location_access_request_action">Accorder l\'accès</string>
+    <string name="location_access_request_title">OsmAnd doit connaitre votre position pour vous guider</string>
 </resources>
