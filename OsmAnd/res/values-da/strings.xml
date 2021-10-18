@@ -4360,4 +4360,11 @@
     <string name="shared_string_articles">Artikler</string>
     <string name="internal_app_storage_description">Intern lagring, skjult for brugeren og andre apps, så ingen andre end OsmAnd kan få adgang til dine data</string>
     <string name="included_categories">Inkluderede kategorier</string>
+    <string name="android_auto_purchase_request_title">Køb OsmAnd Pro eller Maps+ for at bruge OsmAnd med Android Auto</string>
+    <string name="android_auto_map_placeholder_descr">Frakobl din enhed fra Android Auto for at se kortet i appen.</string>
+    <string name="android_auto_map_placeholder_title">Kortet vises på køretøjets skærm.</string>
+    <string name="continue_on_phone">Fortsæt på telefon</string>
+    <string name="location_access_request_result">Godkendt: %1$s Afvist: %2$s</string>
+    <string name="location_access_request_title">OsmAnd skal have adgang til placering for at navigere</string>
+    <string name="location_access_request_action">Giv adgang</string>
 </resources>
