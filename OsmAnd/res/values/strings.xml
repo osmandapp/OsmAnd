@@ -20,7 +20,6 @@
     <string name="shared_string_articles">Articles</string>
     <string name="included_categories">Included categories</string>
     <string name="release_4_1">
-    • Cloud backup\n\n
     • Added initial support for Android Auto\n\n
     • User interface update for UTM coordinate search\n\n
     • Favorites: added ability to view recently used icons\n\n
