@@ -10,6 +10,17 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="search_history_is_disabled_descr">You can enable search history in Settings</string>
+    <string name="markers_history_is_disabled_descr">Enable history to get list of visited map markers.</string>
+    <string name="history_is_disabled_descr">Enable history to get quicker access to last used results.</string>
+    <string name="is_disabled">%1$s is disabled</string>
+    <string name="clear_all_history_warning">Are you sure you want to clear all history in the app?\n\nThe search, navigation and marker history will be cleared.</string>
+    <string name="clear_all_history">Clear all history</string>
+    <string name="history_actions_descr">You can export history into a file.</string>
+    <string name="map_markers_history">Map markers history</string>
+    <string name="navigation_history">Navigation history</string>
+    <string name="history_preferences_descr">You can disable history logging individually for each history type.</string>
     <string name="android_auto_map_placeholder_title">The map is displayed on the vehicle screen.</string>
     <string name="android_auto_map_placeholder_descr">Disconnect your device from Android Auto to view the map in the app.</string>
     <string name="android_auto_purchase_request_title">Purchase OsmAnd Pro or Maps+ to use OsmAnd with Android Auto</string>
