@@ -10,6 +10,7 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
 -->
+    <string name="track_already_uploaded">Already uploaded</string>
     <string name="android_auto_map_placeholder_title">The map is displayed on the vehicle screen.</string>
     <string name="android_auto_map_placeholder_descr">Disconnect your device from Android Auto to view the map in the app.</string>
     <string name="android_auto_purchase_request_title">Purchase OsmAnd Pro or Maps+ to use OsmAnd with Android Auto</string>
