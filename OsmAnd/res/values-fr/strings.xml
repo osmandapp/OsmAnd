@@ -4346,5 +4346,7 @@
     <string name="rendering_attr_noNatureReserves_description">Masquer les réserves naturelles, les zones protégées et les parcs nationaux.</string>
     <string name="shared_storage_warning_description">Dès la prochaine mise à jour d\'OsmAnd et en raison d\'évolutions apportées par Android aux règles d\'accès au stockage, OsmAnd ne pourra plus accéder au stockage partagé.
 \n
-\nVeuillez modifier le stockage de stockage partagé à stockage disponible, sans quoi OsmAnd ne pourra plus accéder à vos données (ce qui inclut les cartes hors-ligne, vos traces GPX et bien plus encore ...).</string>
+\nVeuillez modifier le stockage de stockage partagé vers l\'un des stockages disponibles, sans quoi OsmAnd ne pourra plus accéder à vos données (y compris les cartes hors-ligne, vos traces GPX et bien plus encore ...).</string>
+    <string name="shared_string_articles">Articles</string>
+    <string name="included_categories">Catégories incluses</string>
 </resources>

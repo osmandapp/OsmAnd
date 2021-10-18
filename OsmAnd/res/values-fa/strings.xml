@@ -572,7 +572,7 @@
     <string name="shared_string_download_map">بارگیری نقشه</string>
     <string name="select_max_zoom_preload_area">حداکثر زوم برای پیش‌بار</string>
     <string name="show_point_options">استفاده از مکان…</string>
-    <string name="settings_preset">نمایه پیش‌فرض</string>
+    <string name="settings_preset">نمایهٔ پیش‌فرض</string>
     <string name="settings_preset_descr">نمای نقشه و تنظیمات ناوبری برای هر نمایه جداگانه ذخیره می‌شود. نمایه پیش‌فرض خود را اینجا تنظیم کنید.</string>
     <string name="osmand_background_plugin_description">تنظیمات مربوط به فعال‌سازی ردگیری و ناوبری در پس‌زمینه را نشان می‌دهد که با ارسال پیام‌های بیدارباش متناوب به جی‌پی‌اس دستگاه این کار را انجام می‌دهد (با نمایشگر خاموش).</string>
     <string name="av_def_action_choose">هنگام درخواست؟</string>

@@ -291,7 +291,7 @@
     <string name="fav_saved_sucessfully">Preferiti salvati in {0}</string>
     <string name="no_fav_to_save">Nessun Preferito da salvare</string>
     <string name="error_occurred_loading_gpx">Non posso caricare il file GPX.</string>
-    <string name="send_report">Invia rapporto</string>
+    <string name="send_report">Invia segnalazione</string>
     <string name="none_region_found">Non trovo nessuna mappa scaricata sulla memory card.</string>
     <string name="poi_namefinder_query_empty">Scrivi per trovare un PDI</string>
     <string name="any_poi">Tutti</string>
@@ -4341,4 +4341,29 @@
 \nCambia la memorizzazione da Memoria condivisa alla memoria disponibile, se non verrà fatto l\'app perderà l\'accesso ai tuoi dati: comprese mappe offline, tracce GPX e tutto il resto.</string>
     <string name="rendering_attr_noNatureReserves_description">Nascondi riserve naturali, aree protette e parchi nazionali.</string>
     <string name="shared_string_details">Dettagli</string>
+    <string name="shared_string_articles">Articoli</string>
+    <string name="included_categories">Categorie incluse</string>
+    <string name="release_4_1">• Cloud backup
+\n
+\n • Aggiunto un iniziale supporto ad Android Auto
+\n
+\n • Interfaccia utente aggiornata per la ricerca con coordinate UTM
+\n
+\n • Preferiti: aggiunta la capacità di visualizzare le icone usate recenti
+\n
+\n • Pianificazione del percorso: utilizzerà il profilo scelto dopo l\'avvio
+\n
+\n • Corretta lo strato Mapillary, il componente aggiuntivo è disabilitato per preimpostazione
+\n
+\n • Aggiunta la schermata per gestire tutta la cronologia dell\'app
+\n
+\n • L\'orientamento della mappa non viene più reimpostato al riavvio dell\'app
+\n
+\n • Migliorato la rappresentazione delle linee isoipse SRTM
+\n
+\n • Corretta la visualizzazione nella mappa dell\'Arabo
+\n
+\n • Corretti diversi errori di calcolo del percorso
+\n
+\n</string>
 </resources>

@@ -4265,4 +4265,20 @@
     <string name="shared_string_files">Filer</string>
     <string name="travel_route_types">Rutetyper</string>
     <string name="shared_string_mini">mini</string>
+    <string name="search_title">Søk: %1$s</string>
+    <string name="routing_attr_allow_gate_description">Tillat bruk av grind/porter</string>
+    <string name="routing_attr_only_permitted_streets_name">Ettertrykkelig tillatte gater</string>
+    <string name="routing_attr_only_permitted_streets_description">Kun bruk gater som godkjennes spesifikt</string>
+    <string name="routing_attr_only_permitted_ways_name">Ettertrykkelig tillate veier</string>
+    <string name="routing_attr_prefer_horse_routes_name">Foretrekk hestetråkk</string>
+    <string name="horseback_riding">Ridning</string>
+    <string name="exit_pan_mode_descr">Trykk «Velg» for å avslutte panoreringsmodus</string>
+    <string name="routing_attr_prefer_horse_routes_description">Foretrekk hestetråkk</string>
+    <string name="shared_string_details">Detaljer</string>
+    <string name="included_categories">Inkluderte kategorier</string>
+    <string name="shared_storage_warning_title">Endringer i lagringstilgangsregler</string>
+    <string name="shared_string_articles">Artikler</string>
+    <string name="shared_app_storage_description">Tilgang til delt minne har forsvunnet som følge av nye lagringstilgangsregler i Android.</string>
+    <string name="internal_app_storage_description">Internlagring, skjult fra bruker og andre programmer, så ingen andre enn OsmAnd får tilgang til dataen din</string>
+    <string name="rendering_attr_noNatureReserves_name">Naturreservat</string>
 </resources>

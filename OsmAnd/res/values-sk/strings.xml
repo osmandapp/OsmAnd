@@ -4348,4 +4348,29 @@
     <string name="rendering_attr_noNatureReserves_description">Skryť prírodné rezervácie, chránené oblasti a národné parky.</string>
     <string name="purchases_feature_desc_android_auto">Mapy a navigácia OsmAnd na obrazovke vášho vozidla. Integrujte pohodlne do ovládania vášho vozidla.</string>
     <string name="rendering_attr_noNatureReserves_name">Prírodná rezervácia</string>
+    <string name="shared_string_articles">Články</string>
+    <string name="included_categories">Zahrnuté kategórie</string>
+    <string name="release_4_1">• Zálohovanie do cloudu
+\n
+\n • Prvotná podpora pre Android Auto
+\n
+\n • Zmena rozhrania pre vyhľadávanie súradníc UTM
+\n
+\n • Obľúbené: pridaná možnosť zobraziť naposledy použité ikony
+\n
+\n • Plánovanie trasy: po spustení použije práve vybraný profil
+\n
+\n • Opravená vrstva Mapillary, modul je teraz predvolene vypnutý
+\n
+\n • Pridaná obrazovka na správu všetkých histórií v aplikácii
+\n
+\n • Orientácia mapy nie je resetovaná po reštarte aplikácie
+\n
+\n • Vylepšené vykreslenie výškovej značky SRTM
+\n
+\n • Opravené zobrazenie arabčiny na mape
+\n
+\n • Opravené rôzne problémy výpočtu trasy
+\n
+\n</string>
 </resources>

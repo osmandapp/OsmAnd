@@ -4352,4 +4352,29 @@
 \nCàmbia s\'archiviatzione dae sa memòria cumpartzida a sa memòria a disponimentu. Si non l\'as a fàghere s\'aplicatzione at a pèrdere s\'atzessu a sos datos tuos: custu incluit sas mapas non in lìnias, sas rastas GPX e totu su restu.</string>
     <string name="shared_string_details">Minujas</string>
     <string name="rendering_attr_noNatureReserves_name">Riserva naturale</string>
+    <string name="included_categories">Categorias incluidas</string>
+    <string name="shared_string_articles">Artìculos</string>
+    <string name="release_4_1">• Còpia de seguresa in sa nue
+\n
+\n • Annanghidura de unu suportu de incumintzu pro Android Auto
+\n
+\n • Agiornamentu de s\'interfache de impreadore pro sas chircas cun coordinadas UTM
+\n
+\n • Preferidos: annanghidura de sa possibilidade de bìdere sas iconas impreadas dae pagu
+\n
+\n • Pianificatzione de s\'àndala: at a impreare su profilu seletzionadu a pustis de s\'allughìngiu
+\n
+\n • Istratu de Mapillary acontzadu, s\'estensione como est disabilitada comente impostatzione predefinida
+\n
+\n • Annanghidura de un\'ischermada pro amministrare totu sa cronologia in s\'aplicatzione
+\n
+\n • S\'orientamentu de sa mapa non si resetat a pustis de s\'allughìngiu nou de s\'aplicatzione
+\n
+\n • Renderizatzione de sos marcadores de artària SRTM megiorada
+\n
+\n • Visualizatzione de s\'àrabu in sa mapa megiorada
+\n
+\n • Medas problemas de càrculu de s\'àndala risoltos
+\n
+\n</string>
 </resources>
