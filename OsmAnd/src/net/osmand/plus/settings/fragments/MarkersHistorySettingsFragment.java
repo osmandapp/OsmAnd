@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter.createHistoryGroups;
-
 import android.util.Pair;
 import android.view.View;
 import android.widget.TextView;
@@ -44,7 +42,7 @@ public class MarkersHistorySettingsFragment extends HistoryItemsFragment {
 		}
 
 		Map<Integer, List<MapMarker>> markerGroups = new HashMap<>();
-		createHistoryGroups(pairs, markerGroups, items);
+		HistoryAdapter.createHistoryGroups(pairs, markerGroups, items);
 		for (Map.Entry<Integer, List<MapMarker>> entry : markerGroups.entrySet()) {
 			itemsGroups.put(entry.getKey(), new ArrayList<>(entry.getValue()));
 		}

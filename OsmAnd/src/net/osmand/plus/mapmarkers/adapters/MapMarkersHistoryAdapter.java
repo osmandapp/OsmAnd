@@ -18,25 +18,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.mapmarkers.MapMarker;
+import net.osmand.plus.settings.fragments.HistoryAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 	private static final int HEADER_TYPE = 1;
 	private static final int MARKER_TYPE = 2;
-
-	private static final int TODAY_HEADER = 56;
-	private static final int YESTERDAY_HEADER = 57;
-	private static final int LAST_SEVEN_DAYS_HEADER = 58;
-	private static final int THIS_YEAR_HEADER = 59;
 
 	private final OsmandApplication app;
 	private List<Object> items = new ArrayList<>();
@@ -61,62 +53,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			for (MapMarker marker : markersHistory) {
 				pairs.add(new Pair<>(marker.visitedDate, marker));
 			}
-			createHistoryGroups(pairs, markerGroups, items);
-		}
-	}
-
-	public static <T> void createHistoryGroups(List<Pair<Long, T>> pairs, Map<Integer, List<T>> groups, List<Object> items) {
-		int previousHeader = -1;
-		int monthsDisplayed = 0;
-
-		Calendar currentDateCalendar = Calendar.getInstance();
-		currentDateCalendar.setTimeInMillis(System.currentTimeMillis());
-		int currentDay = currentDateCalendar.get(Calendar.DAY_OF_YEAR);
-		int currentMonth = currentDateCalendar.get(Calendar.MONTH);
-		int currentYear = currentDateCalendar.get(Calendar.YEAR);
-		Calendar markerCalendar = Calendar.getInstance();
-		for (int i = 0; i < pairs.size(); i++) {
-			Pair<Long, T> pair = pairs.get(i);
-
-			markerCalendar.setTimeInMillis(pair.first);
-			int markerDay = markerCalendar.get(Calendar.DAY_OF_YEAR);
-			int markerMonth = markerCalendar.get(Calendar.MONTH);
-			int markerYear = markerCalendar.get(Calendar.YEAR);
-			if (markerYear == currentYear) {
-				if (markerDay == currentDay && previousHeader != TODAY_HEADER) {
-					items.add(TODAY_HEADER);
-					previousHeader = TODAY_HEADER;
-				} else if (markerDay == currentDay - 1 && previousHeader != YESTERDAY_HEADER) {
-					items.add(YESTERDAY_HEADER);
-					previousHeader = YESTERDAY_HEADER;
-				} else if (currentDay - markerDay >= 2 && currentDay - markerDay <= 8 && previousHeader != LAST_SEVEN_DAYS_HEADER) {
-					items.add(LAST_SEVEN_DAYS_HEADER);
-					previousHeader = LAST_SEVEN_DAYS_HEADER;
-				} else if (currentDay - markerDay > 8 && monthsDisplayed < 3 && previousHeader != markerMonth) {
-					items.add(markerMonth);
-					previousHeader = markerMonth;
-					monthsDisplayed++;
-				} else if (currentMonth - markerMonth >= 4 && previousHeader != markerMonth && previousHeader != THIS_YEAR_HEADER) {
-					items.add(THIS_YEAR_HEADER);
-					previousHeader = THIS_YEAR_HEADER;
-				}
-			} else if (previousHeader != markerYear) {
-				items.add(markerYear);
-				previousHeader = markerYear;
-			}
-			addMarkerToGroup(groups, previousHeader, pair.second);
-			items.add(pair.second);
-		}
-	}
-
-	private static <T> void addMarkerToGroup(Map<Integer, List<T>> markerGroups, Integer groupHeader, T marker) {
-		List<T> group = markerGroups.get(groupHeader);
-		if (group != null) {
-			group.add(marker);
-		} else {
-			group = new ArrayList<>();
-			group.add(marker);
-			markerGroups.put(groupHeader, group);
+			HistoryAdapter.createHistoryGroups(pairs, markerGroups, items);
 		}
 	}
 
@@ -207,7 +144,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			final Integer dateHeader = (Integer) getItem(position);
 
 			dateViewHolder.disableGroupSwitch.setVisibility(View.GONE);
-			dateViewHolder.title.setText(getDateForHeader(app, dateHeader));
+			dateViewHolder.title.setText(HistoryAdapter.getDateForHeader(app, dateHeader));
 			dateViewHolder.clearButton.setVisibility(View.VISIBLE);
 			dateViewHolder.articleDescription.setVisibility(View.GONE);
 
@@ -260,33 +197,6 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 	public Object getItem(int position) {
 		return items.get(position);
-	}
-
-	public static String getDateForHeader(@NonNull OsmandApplication app, int header) {
-		if (header == TODAY_HEADER) {
-			return app.getString(R.string.today);
-		} else if (header == YESTERDAY_HEADER) {
-			return app.getString(R.string.yesterday);
-		} else if (header == LAST_SEVEN_DAYS_HEADER) {
-			return app.getString(R.string.last_seven_days);
-		} else if (header == THIS_YEAR_HEADER) {
-			return app.getString(R.string.this_year);
-		} else if (header / 100 == 0) {
-			return getMonth(header);
-		} else {
-			return String.valueOf(header);
-		}
-	}
-
-	public static String getMonth(int month) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
-		Date date = new Date();
-		date.setMonth(month);
-		String monthStr = dateFormat.format(date);
-		if (monthStr.length() > 1) {
-			monthStr = Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
-		}
-		return monthStr;
 	}
 
 	public interface MapMarkersHistoryAdapterListener {

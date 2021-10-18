@@ -14,7 +14,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
 import net.osmand.search.core.SearchResult;
 
@@ -44,7 +43,7 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 		Map<Integer, List<SearchResult>> historyGroups = new HashMap<>();
 		List<Pair<Long, SearchResult>> pairs = createHistoryPairsByDate(searchResults);
 
-		MapMarkersHistoryAdapter.createHistoryGroups(pairs, historyGroups, items);
+		HistoryAdapter.createHistoryGroups(pairs, historyGroups, items);
 		for (Map.Entry<Integer, List<SearchResult>> entry : historyGroups.entrySet()) {
 			itemsGroups.put(entry.getKey(), new ArrayList<>(entry.getValue()));
 		}

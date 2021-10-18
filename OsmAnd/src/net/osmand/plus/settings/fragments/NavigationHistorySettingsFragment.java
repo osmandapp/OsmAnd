@@ -1,6 +1,7 @@
 package net.osmand.plus.settings.fragments;
 
 
+import static net.osmand.plus.settings.fragments.HistoryAdapter.PREVIOUS_ROUTE_HEADER;
 import static net.osmand.plus.settings.fragments.HistorySettingsFragment.getNavigationHistoryResults;
 import static net.osmand.plus.settings.fragments.SearchHistorySettingsFragment.createHistoryPairsByDate;
 import static net.osmand.plus.settings.fragments.SearchHistorySettingsFragment.sortSearchResults;
@@ -17,13 +18,15 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
-import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
 import net.osmand.plus.search.ShareHistoryAsyncTask;
 import net.osmand.search.core.SearchResult;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,10 +48,22 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 		List<SearchResult> searchResults = getNavigationHistoryResults(app);
 		sortSearchResults(searchResults);
 
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		TargetPoint startBackup = targetPointsHelper.getPointToStartBackup();
+		if (startBackup == null) {
+			startBackup = targetPointsHelper.getMyLocationToStart();
+		}
+		TargetPoint destinationBackup = targetPointsHelper.getPointToNavigateBackup();
+		if (startBackup != null && destinationBackup != null) {
+			items.add(PREVIOUS_ROUTE_HEADER);
+			items.add(destinationBackup);
+			itemsGroups.put(PREVIOUS_ROUTE_HEADER, new ArrayList<>(Collections.singleton(destinationBackup)));
+		}
+
 		Map<Integer, List<SearchResult>> historyGroups = new HashMap<>();
 		List<Pair<Long, SearchResult>> pairs = createHistoryPairsByDate(searchResults);
 
-		MapMarkersHistoryAdapter.createHistoryGroups(pairs, historyGroups, items);
+		HistoryAdapter.createHistoryGroups(pairs, historyGroups, items);
 		for (Map.Entry<Integer, List<SearchResult>> entry : historyGroups.entrySet()) {
 			itemsGroups.put(entry.getKey(), new ArrayList<>(entry.getValue()));
 		}
@@ -93,12 +108,18 @@ public class NavigationHistorySettingsFragment extends HistoryItemsFragment {
 
 	@Override
 	protected void deleteSelectedItems() {
-		SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
+		boolean clearBackupPoints = false;
+		SearchHistoryHelper historyHelper = SearchHistoryHelper.getInstance(app);
 		for (Object item : selectedItems) {
 			if (item instanceof SearchResult) {
 				SearchResult searchResult = (SearchResult) item;
-				helper.remove(searchResult.object);
+				historyHelper.remove(searchResult.object);
+			} else if (item instanceof TargetPoint) {
+				clearBackupPoints = true;
 			}
+		}
+		if (clearBackupPoints) {
+			app.getTargetPointsHelper().clearBackupPoints();
 		}
 	}
 

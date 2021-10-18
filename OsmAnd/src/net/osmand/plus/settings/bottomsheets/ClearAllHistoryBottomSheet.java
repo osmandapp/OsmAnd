@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.fragments;
+package net.osmand.plus.settings.bottomsheets;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,5 +1,6 @@
 package net.osmand.plus.settings.fragments;
 
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,20 +18,25 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
 import net.osmand.plus.mapmarkers.MapMarker;
-import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
+import net.osmand.plus.routepreparationmenu.cards.PreviousRouteCard;
 import net.osmand.plus.search.QuickSearchListAdapter;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -39,6 +45,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 	private static final int MARKER_TYPE = 2;
 	private static final int SEARCH_TYPE = 3;
 	private static final int TRACK_TYPE = 4;
+	private static final int TARGET_POINT_TYPE = 5;
+
+	private static final int TODAY_HEADER = 56;
+	private static final int YESTERDAY_HEADER = 57;
+	private static final int LAST_SEVEN_DAYS_HEADER = 58;
+	private static final int THIS_YEAR_HEADER = 59;
+	public static final int PREVIOUS_ROUTE_HEADER = 60;
 
 	private final OsmandApplication app;
 	private final UiUtilities uiUtilities;
@@ -48,20 +61,26 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 	private List<?> selectedItems = new ArrayList<>();
 	private Map<Integer, List<?>> itemsGroups = new HashMap<>();
 
+	private final LayoutInflater themedInflater;
 	private final OnItemSelectedListener listener;
+	private final int activeColorId;
+	private final int defaultColorId;
 	private final boolean nightMode;
 
 	public HistoryAdapter(@NonNull OsmandApplication app, @Nullable OnItemSelectedListener listener, boolean nightMode) {
 		this.app = app;
 		this.listener = listener;
 		this.nightMode = nightMode;
+		activeColorId = ColorUtilities.getActiveColorId(nightMode);
+		defaultColorId = ColorUtilities.getDefaultIconColorId(nightMode);
 		uiUtilities = app.getUIUtilities();
+		themedInflater = UiUtilities.getInflater(app, nightMode);
 		locationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
 	}
 
-	public void updateSettingsItems(List<Object> items,
-									Map<Integer, List<?>> markerGroups,
-									List<?> selectedItems) {
+	public void updateSettingsItems(@NonNull List<Object> items,
+									@NonNull Map<Integer, List<?>> markerGroups,
+									@NonNull List<?> selectedItems) {
 		this.items = items;
 		this.itemsGroups = markerGroups;
 		this.selectedItems = selectedItems;
@@ -71,23 +90,21 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 	@NonNull
 	@Override
 	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-		LayoutInflater inflater = UiUtilities.getInflater(viewGroup.getContext(), nightMode);
 		switch (viewType) {
 			case HEADER_TYPE: {
-				View view = inflater.inflate(R.layout.history_preference_header, viewGroup, false);
-				return new HeaderViewHolder(view);
+				return new HeaderViewHolder(themedInflater.inflate(R.layout.history_preference_header, viewGroup, false));
 			}
 			case MARKER_TYPE: {
-				View view = inflater.inflate(R.layout.history_preference_item, viewGroup, false);
-				return new MarkerViewHolder(view);
+				return new MarkerViewHolder(themedInflater.inflate(R.layout.history_preference_item, viewGroup, false));
 			}
 			case SEARCH_TYPE: {
-				View view = inflater.inflate(R.layout.history_preference_item, viewGroup, false);
-				return new SearchItemViewHolder(view);
+				return new SearchItemViewHolder(themedInflater.inflate(R.layout.history_preference_item, viewGroup, false));
+			}
+			case TARGET_POINT_TYPE: {
+				return new TargetPointViewHolder(themedInflater.inflate(R.layout.history_preference_item, viewGroup, false));
 			}
 			case TRACK_TYPE: {
-				View view = inflater.inflate(R.layout.history_gpx_item, viewGroup, false);
-				return new TrackViewHolder(view);
+				return new TrackViewHolder(themedInflater.inflate(R.layout.history_gpx_item, viewGroup, false));
 			}
 			default:
 				throw new IllegalArgumentException("Unsupported view type");
@@ -96,103 +113,91 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 	@Override
 	public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
-		if (holder instanceof SearchItemViewHolder) {
-			SearchItemViewHolder viewHolder = (SearchItemViewHolder) holder;
-			SearchResult searchResult = (SearchResult) getItem(position);
-
-			QuickSearchListItem listItem = new QuickSearchListItem(app, searchResult);
-			QuickSearchListAdapter.bindSearchResult((LinearLayout) viewHolder.itemView, listItem);
-
-			viewHolder.compoundButton.setChecked(selectedItems.contains(searchResult));
-			viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					boolean selected = !viewHolder.compoundButton.isChecked();
-					if (listener != null) {
-						listener.onItemSelected(searchResult, selected);
-					}
-					notifyDataSetChanged();
-				}
-			});
-
-			int iconColorId = nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light;
-			int iconColor = ContextCompat.getColor(app, iconColorId);
-			viewHolder.icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
-
-			boolean lastItem = position == getItemCount() - 1;
-			AndroidUiHelper.updateVisibility(viewHolder.divider, lastItem);
-			updateCompassVisibility(viewHolder.compassView, searchResult.location);
-			UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), viewHolder.compoundButton);
+		if (holder instanceof HeaderViewHolder) {
+			Integer dateHeader = (Integer) getItem(position);
+			bindHeaderItem((HeaderViewHolder) holder, dateHeader, position);
 		} else if (holder instanceof TrackViewHolder) {
-			TrackViewHolder viewHolder = (TrackViewHolder) holder;
 			SearchResult searchResult = (SearchResult) getItem(position);
+			bindTrackItem((TrackViewHolder) holder, searchResult, position);
+		} else if (holder instanceof HistoryItemViewHolder) {
+			Object item = getItem(position);
+			HistoryItemViewHolder viewHolder = (HistoryItemViewHolder) holder;
 
-			QuickSearchListItem listItem = new QuickSearchListItem(app, searchResult);
-			GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
-			QuickSearchListAdapter.bindGpxTrack(viewHolder.itemView, listItem, gpxInfo);
-
-			viewHolder.compoundButton.setChecked(selectedItems.contains(searchResult));
-			viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					boolean selected = !viewHolder.compoundButton.isChecked();
-					if (listener != null) {
-						listener.onItemSelected(searchResult, selected);
-					}
-					notifyDataSetChanged();
-				}
-			});
-
-			int iconColorId = nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light;
-			int iconColor = ContextCompat.getColor(app, iconColorId);
-			viewHolder.icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
-
-			UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), viewHolder.compoundButton);
-		} else if (holder instanceof MarkerViewHolder) {
-			MarkerViewHolder viewHolder = (MarkerViewHolder) holder;
-			MapMarker mapMarker = (MapMarker) getItem(position);
-
-			boolean selected = selectedItems.contains(mapMarker);
-			int color = selected ? MapMarker.getColorId(mapMarker.colorIndex) : ColorUtilities.getDefaultIconColorId(nightMode);
-
-			viewHolder.title.setText(mapMarker.getName(app));
-			viewHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_flag, color));
+			boolean selected = selectedItems.contains(item);
 			viewHolder.compoundButton.setChecked(selected);
-			viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					boolean selected = !viewHolder.compoundButton.isChecked();
-					if (listener != null) {
-						listener.onItemSelected(mapMarker, selected);
-					}
-					notifyDataSetChanged();
+			viewHolder.itemView.setOnClickListener(v -> {
+				boolean checked = !viewHolder.compoundButton.isChecked();
+				if (listener != null) {
+					listener.onItemSelected(item, checked);
 				}
+				notifyDataSetChanged();
 			});
+			if (holder instanceof SearchItemViewHolder) {
+				SearchResult searchResult = (SearchResult) getItem(position);
+				QuickSearchListItem listItem = new QuickSearchListItem(app, searchResult);
+				QuickSearchListAdapter.bindSearchResult((LinearLayout) viewHolder.itemView, listItem);
+
+				int iconColor = ContextCompat.getColor(app, selected ? activeColorId : defaultColorId);
+				viewHolder.icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
+				updateCompassVisibility(viewHolder.compassView, searchResult.location);
+			} else if (holder instanceof TargetPointViewHolder) {
+				TargetPoint targetPoint = (TargetPoint) getItem(position);
+				int colorId = selected ? activeColorId : defaultColorId;
+				viewHolder.title.setText(PreviousRouteCard.getPointName(app, targetPoint));
+				viewHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_marker_dark, colorId));
+				updateCompassVisibility(viewHolder.compassView, targetPoint.point);
+			} else if (holder instanceof MarkerViewHolder) {
+				MapMarker mapMarker = (MapMarker) getItem(position);
+				int colorId = selected ? MapMarker.getColorId(mapMarker.colorIndex) : defaultColorId;
+				viewHolder.title.setText(mapMarker.getName(app));
+				viewHolder.icon.setImageDrawable(uiUtilities.getIcon(R.drawable.ic_action_flag, colorId));
+				updateCompassVisibility(viewHolder.compassView, mapMarker.point);
+			}
 			boolean lastItem = position == getItemCount() - 1;
 			AndroidUiHelper.updateVisibility(viewHolder.divider, lastItem);
-			updateCompassVisibility(viewHolder.compassView, mapMarker.point);
-			UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), viewHolder.compoundButton);
-		} else if (holder instanceof HeaderViewHolder) {
-			final HeaderViewHolder viewHolder = (HeaderViewHolder) holder;
-			final Integer dateHeader = (Integer) getItem(position);
-
-			viewHolder.title.setText(MapMarkersHistoryAdapter.getDateForHeader(app, dateHeader));
-			viewHolder.compoundButton.setChecked(selectedItems.containsAll(itemsGroups.get(dateHeader)));
-
-			viewHolder.itemView.setOnClickListener(v -> {
-				List<?> items = itemsGroups.get(dateHeader);
-				if (items != null) {
-					boolean selected = !viewHolder.compoundButton.isChecked();
-					if (listener != null) {
-						listener.onCategorySelected(new ArrayList<>(items), selected);
-					}
-					notifyDataSetChanged();
-				}
-			});
-			AndroidUiHelper.updateVisibility(viewHolder.divider, position > 0);
-			AndroidUiHelper.updateVisibility(viewHolder.shadowDivider, position == 0);
-			UiUtilities.setupCompoundButton(nightMode, ColorUtilities.getActiveColor(app, nightMode), viewHolder.compoundButton);
+			UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app, activeColorId), viewHolder.compoundButton);
 		}
+	}
+
+	public void bindHeaderItem(HeaderViewHolder viewHolder, Integer dateHeader, int position) {
+		viewHolder.title.setText(getDateForHeader(app, dateHeader));
+		viewHolder.compoundButton.setChecked(selectedItems.containsAll(itemsGroups.get(dateHeader)));
+
+		viewHolder.itemView.setOnClickListener(v -> {
+			List<?> items = itemsGroups.get(dateHeader);
+			if (items != null) {
+				boolean selected = !viewHolder.compoundButton.isChecked();
+				if (listener != null) {
+					listener.onCategorySelected(new ArrayList<>(items), selected);
+				}
+				notifyDataSetChanged();
+			}
+		});
+		AndroidUiHelper.updateVisibility(viewHolder.divider, position > 0);
+		AndroidUiHelper.updateVisibility(viewHolder.shadowDivider, position == 0);
+		UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app, activeColorId), viewHolder.compoundButton);
+	}
+
+	public void bindTrackItem(TrackViewHolder viewHolder, SearchResult searchResult, int position) {
+		GPXInfo gpxInfo = (GPXInfo) searchResult.relatedObject;
+		QuickSearchListItem listItem = new QuickSearchListItem(app, searchResult);
+		QuickSearchListAdapter.bindGpxTrack(viewHolder.itemView, listItem, gpxInfo);
+
+		boolean selected = selectedItems.contains(searchResult);
+		viewHolder.compoundButton.setChecked(selected);
+		viewHolder.itemView.setOnClickListener(v -> {
+			boolean checked = !viewHolder.compoundButton.isChecked();
+			if (listener != null) {
+				listener.onItemSelected(searchResult, checked);
+			}
+			notifyDataSetChanged();
+		});
+		int iconColor = ContextCompat.getColor(app, selected ? activeColorId : defaultColorId);
+		viewHolder.icon.setImageDrawable(UiUtilities.tintDrawable(listItem.getIcon(), iconColor));
+
+		boolean lastItem = position == getItemCount() - 1;
+		AndroidUiHelper.updateVisibility(viewHolder.divider, lastItem);
+		UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app, activeColorId), viewHolder.compoundButton);
 	}
 
 	@Override
@@ -202,6 +207,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 			return HEADER_TYPE;
 		} else if (item instanceof MapMarker) {
 			return MARKER_TYPE;
+		} else if (item instanceof TargetPoint) {
+			return TARGET_POINT_TYPE;
 		} else if (item instanceof SearchResult) {
 			SearchResult searchResult = (SearchResult) item;
 			return searchResult.objectType == ObjectType.GPX_TRACK ? TRACK_TYPE : SEARCH_TYPE;
@@ -238,6 +245,90 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 	}
 
+	public static <T> void createHistoryGroups(List<Pair<Long, T>> pairs, Map<Integer, List<T>> groups, List<Object> items) {
+		int previousHeader = -1;
+		int monthsDisplayed = 0;
+
+		Calendar currentDateCalendar = Calendar.getInstance();
+		currentDateCalendar.setTimeInMillis(System.currentTimeMillis());
+		int currentDay = currentDateCalendar.get(Calendar.DAY_OF_YEAR);
+		int currentMonth = currentDateCalendar.get(Calendar.MONTH);
+		int currentYear = currentDateCalendar.get(Calendar.YEAR);
+		Calendar markerCalendar = Calendar.getInstance();
+		for (int i = 0; i < pairs.size(); i++) {
+			Pair<Long, T> pair = pairs.get(i);
+
+			markerCalendar.setTimeInMillis(pair.first);
+			int markerDay = markerCalendar.get(Calendar.DAY_OF_YEAR);
+			int markerMonth = markerCalendar.get(Calendar.MONTH);
+			int markerYear = markerCalendar.get(Calendar.YEAR);
+			if (markerYear == currentYear) {
+				if (markerDay == currentDay && previousHeader != TODAY_HEADER) {
+					items.add(TODAY_HEADER);
+					previousHeader = TODAY_HEADER;
+				} else if (markerDay == currentDay - 1 && previousHeader != YESTERDAY_HEADER) {
+					items.add(YESTERDAY_HEADER);
+					previousHeader = YESTERDAY_HEADER;
+				} else if (currentDay - markerDay >= 2 && currentDay - markerDay <= 8 && previousHeader != LAST_SEVEN_DAYS_HEADER) {
+					items.add(LAST_SEVEN_DAYS_HEADER);
+					previousHeader = LAST_SEVEN_DAYS_HEADER;
+				} else if (currentDay - markerDay > 8 && monthsDisplayed < 3 && previousHeader != markerMonth) {
+					items.add(markerMonth);
+					previousHeader = markerMonth;
+					monthsDisplayed++;
+				} else if (currentMonth - markerMonth >= 4 && previousHeader != markerMonth && previousHeader != THIS_YEAR_HEADER) {
+					items.add(THIS_YEAR_HEADER);
+					previousHeader = THIS_YEAR_HEADER;
+				}
+			} else if (previousHeader != markerYear) {
+				items.add(markerYear);
+				previousHeader = markerYear;
+			}
+			addMarkerToGroup(groups, previousHeader, pair.second);
+			items.add(pair.second);
+		}
+	}
+
+	private static <T> void addMarkerToGroup(Map<Integer, List<T>> markerGroups, Integer groupHeader, T marker) {
+		List<T> group = markerGroups.get(groupHeader);
+		if (group != null) {
+			group.add(marker);
+		} else {
+			group = new ArrayList<>();
+			group.add(marker);
+			markerGroups.put(groupHeader, group);
+		}
+	}
+
+	public static String getDateForHeader(@NonNull OsmandApplication app, int header) {
+		if (header == TODAY_HEADER) {
+			return app.getString(R.string.today);
+		} else if (header == YESTERDAY_HEADER) {
+			return app.getString(R.string.yesterday);
+		} else if (header == LAST_SEVEN_DAYS_HEADER) {
+			return app.getString(R.string.last_seven_days);
+		} else if (header == THIS_YEAR_HEADER) {
+			return app.getString(R.string.this_year);
+		} else if (header == PREVIOUS_ROUTE_HEADER) {
+			return app.getString(R.string.previous_route);
+		} else if (header / 100 == 0) {
+			return getMonth(header);
+		} else {
+			return String.valueOf(header);
+		}
+	}
+
+	public static String getMonth(int month) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
+		Date date = new Date();
+		date.setMonth(month);
+		String monthStr = dateFormat.format(date);
+		if (monthStr.length() > 1) {
+			monthStr = Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
+		}
+		return monthStr;
+	}
+
 	private static class HeaderViewHolder extends RecyclerView.ViewHolder {
 
 		final TextView title;
@@ -254,7 +345,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 		}
 	}
 
-	private static class SearchItemViewHolder extends RecyclerView.ViewHolder {
+	private abstract static class HistoryItemViewHolder extends RecyclerView.ViewHolder {
 
 		final TextView title;
 		final ImageView icon;
@@ -262,7 +353,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 		final View divider;
 		final View compassView;
 
-		public SearchItemViewHolder(final View itemView) {
+		public HistoryItemViewHolder(@NonNull View itemView) {
 			super(itemView);
 			title = itemView.findViewById(R.id.title);
 			icon = itemView.findViewById(R.id.imageView);
@@ -272,21 +363,24 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 		}
 	}
 
-	private static class MarkerViewHolder extends RecyclerView.ViewHolder {
+	private static class SearchItemViewHolder extends HistoryItemViewHolder {
 
-		final TextView title;
-		final ImageView icon;
-		final CompoundButton compoundButton;
-		final View divider;
-		final View compassView;
-
-		public MarkerViewHolder(final View itemView) {
+		public SearchItemViewHolder(@NonNull View itemView) {
 			super(itemView);
-			title = itemView.findViewById(R.id.title);
-			icon = itemView.findViewById(R.id.imageView);
-			divider = itemView.findViewById(R.id.divider);
-			compoundButton = itemView.findViewById(R.id.toggle_item);
-			compassView = itemView.findViewById(R.id.compass_layout);
+		}
+	}
+
+	private static class MarkerViewHolder extends HistoryItemViewHolder {
+
+		public MarkerViewHolder(@NonNull View itemView) {
+			super(itemView);
+		}
+	}
+
+	private static class TargetPointViewHolder extends HistoryItemViewHolder {
+
+		public TargetPointViewHolder(View itemView) {
+			super(itemView);
 		}
 	}
 
@@ -294,12 +388,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 		final TextView title;
 		final ImageView icon;
+		final View divider;
 		final CompoundButton compoundButton;
 
-		public TrackViewHolder(final View itemView) {
+		public TrackViewHolder(@NonNull View itemView) {
 			super(itemView);
 			title = itemView.findViewById(R.id.title);
 			icon = itemView.findViewById(R.id.icon);
+			divider = itemView.findViewById(R.id.divider);
 			compoundButton = itemView.findViewById(R.id.toggle_item);
 		}
 	}

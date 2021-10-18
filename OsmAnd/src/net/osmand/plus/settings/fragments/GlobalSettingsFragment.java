@@ -69,10 +69,21 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		if (DIALOGS_AND_NOTIFICATIONS_PREF_ID.equals(preference.getKey())) {
+
+		String prefId = preference.getKey();
+		if (DIALOGS_AND_NOTIFICATIONS_PREF_ID.equals(prefId)) {
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null) {
 				boolean enabled = preference.isEnabled() && (!settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || settings.SHOW_DOWNLOAD_MAP_DIALOG.get());
+				imageView.setEnabled(enabled);
+			}
+		} else if (HISTORY_PREF_ID.equals(prefId)) {
+			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
+			if (imageView != null) {
+				boolean enabled = preference.isEnabled()
+						&& (settings.SEARCH_HISTORY.get()
+						|| settings.NAVIGATION_HISTORY.get()
+						|| settings.MAP_MARKERS_HISTORY.get());
 				imageView.setEnabled(enabled);
 			}
 		}
@@ -236,7 +247,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 	private void setupHistoryPref() {
 		Preference enableProxy = findPreference(HISTORY_PREF_ID);
-		enableProxy.setIcon(getContentIcon(R.drawable.ic_action_history));
+		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_history));
 	}
 
 	private void setupUninstallSpeedCamerasPref() {

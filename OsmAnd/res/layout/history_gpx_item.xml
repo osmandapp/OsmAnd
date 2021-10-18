@@ -161,4 +161,8 @@
 
 	</LinearLayout>
 
+	<include
+		android:id="@+id/divider"
+		layout="@layout/card_bottom_divider" />
+
 </LinearLayout>

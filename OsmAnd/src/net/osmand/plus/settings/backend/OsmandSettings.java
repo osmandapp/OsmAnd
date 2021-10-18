@@ -2282,9 +2282,11 @@ public class OsmandSettings {
 	}
 
 	public void backupTargetPoints() {
-		backupPointToStart();
-		backupPointToNavigate();
-		backupIntermediatePoints();
+		if (NAVIGATION_HISTORY.get()) {
+			backupPointToStart();
+			backupPointToNavigate();
+			backupIntermediatePoints();
+		}
 	}
 
 	public void restoreTargetPoints() {
@@ -2400,7 +2402,6 @@ public class OsmandSettings {
 		return vl;
 	}
 
-
 	public boolean clearIntermediatePoints() {
 		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS).remove(INTERMEDIATE_POINTS_DESCRIPTION).commit();
 	}
@@ -2441,6 +2442,20 @@ public class OsmandSettings {
 	public boolean clearPointToStart() {
 		return settingsAPI.edit(globalPreferences).remove(START_POINT_LAT).remove(START_POINT_LON).
 				remove(START_POINT_DESCRIPTION).commit();
+	}
+
+	public boolean clearPointToNavigateBackup() {
+		return settingsAPI.edit(globalPreferences).remove(POINT_NAVIGATE_LAT_BACKUP).remove(POINT_NAVIGATE_LON_BACKUP).
+				remove(POINT_NAVIGATE_DESCRIPTION_BACKUP).commit();
+	}
+
+	public boolean clearPointToStartBackup() {
+		return settingsAPI.edit(globalPreferences).remove(START_POINT_LAT_BACKUP).remove(START_POINT_LON_BACKUP).
+				remove(START_POINT_DESCRIPTION_BACKUP).commit();
+	}
+
+	public boolean clearIntermediatePointsBackup() {
+		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS_BACKUP).remove(INTERMEDIATE_POINTS_DESCRIPTION_BACKUP).commit();
 	}
 
 	public boolean setPointToNavigate(double latitude, double longitude, PointDescription p) {
