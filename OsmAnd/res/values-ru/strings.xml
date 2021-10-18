@@ -4384,4 +4384,11 @@
 \n• Исправлены различные проблемы с маршрутизацией
 \n
 \n</string>
+    <string name="android_auto_map_placeholder_descr">Отключите устройство от Android Auto, для просмотра карты в приложении.</string>
+    <string name="continue_on_phone">Продолжить на телефоне</string>
+    <string name="android_auto_map_placeholder_title">Карта отображается на экране автомобиля.</string>
+    <string name="android_auto_purchase_request_title">Приобретите OsmAnd Pro или Maps+, чтобы использовать OsmAnd с Android Auto</string>
+    <string name="location_access_request_title">OsmAnd требуется доступ к местоположению для навигации</string>
+    <string name="location_access_request_action">Предоставление доступа</string>
+    <string name="location_access_request_result">Одобрено: %1$s Отклонено: %2$s</string>
 </resources>
