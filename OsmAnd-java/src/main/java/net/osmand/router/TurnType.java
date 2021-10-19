@@ -4,8 +4,6 @@ import net.osmand.util.Algorithms;
 
 import gnu.trove.set.hash.TIntHashSet;
 
-import java.util.ArrayList;
-
 public class TurnType {
 	public static final int C = 1;//"C"; // continue (go straight) //$NON-NLS-1$
 	public static final int TL = 2; // turn left //$NON-NLS-1$
