@@ -9,7 +9,6 @@ import static net.osmand.search.core.SearchCoreFactory.SEARCH_AMENITY_TYPE_PRIOR
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -56,9 +55,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -86,7 +82,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
@@ -96,13 +91,17 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.poi.RearrangePoiFiltersFragment;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
+import net.osmand.plus.search.ShareHistoryAsyncTask.OnShareHistoryListener;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
+import net.osmand.plus.search.listitems.QuickSearchDisabledHistoryItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.fragments.OnPreferenceChanged;
+import net.osmand.plus.settings.fragments.SearchHistorySettingsFragment;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
@@ -123,7 +122,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuickSearchDialogFragment extends DialogFragment implements OsmAndCompassListener,
-		OsmAndLocationListener, DownloadEvents {
+		OsmAndLocationListener, DownloadEvents, OnPreferenceChanged {
 
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(QuickSearchDialogFragment.class);
 
@@ -1560,14 +1559,25 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void reloadHistoryInternal() {
 		if (historySearchFragment != null) {
 			try {
-				SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null, false, false);
 				List<QuickSearchListItem> rows = new ArrayList<>();
-				if (res != null) {
-					for (SearchResult sr : res.getCurrentSearchResults()) {
-						rows.add(new QuickSearchListItem(app, sr));
+				boolean historyEnabled = app.getSettings().SEARCH_HISTORY.get();
+				if (historyEnabled) {
+					SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null, false, false);
+					if (res != null) {
+						for (SearchResult sr : res.getCurrentSearchResults()) {
+							rows.add(new QuickSearchListItem(app, sr));
+						}
 					}
+				} else {
+					OnClickListener listener = v -> {
+						FragmentManager fragmentManager = getFragmentManager();
+						if (fragmentManager != null) {
+							SearchHistorySettingsFragment.showInstance(getFragmentManager(), QuickSearchDialogFragment.this);
+						}
+					};
+					rows.add(new QuickSearchDisabledHistoryItem(app, listener));
 				}
-				historySearchFragment.updateListAdapter(rows, false);
+				historySearchFragment.updateListAdapter(rows, false, historyEnabled);
 			} catch (Exception e) {
 				e.printStackTrace();
 				app.showToastMessage(e.getMessage());
@@ -2165,6 +2175,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	@Override
+	public void onPreferenceChanged(String prefId) {
+		reloadHistory();
+	}
+
+	@Override
 	public void updateCompassValue(final float value) {
 		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
 		// on non-compass devices
@@ -2252,54 +2267,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void shareHistory(final List<HistoryEntry> historyEntries) {
+	private void shareHistory(List<HistoryEntry> historyEntries) {
 		if (!historyEntries.isEmpty()) {
-			final AsyncTask<Void, Void, GPXFile> exportTask = new AsyncTask<Void, Void, GPXFile>() {
+			OnShareHistoryListener listener = new OnShareHistoryListener() {
 				@Override
-				protected GPXFile doInBackground(Void... params) {
-					GPXFile gpx = new GPXFile(Version.getFullVersion(getMyApplication()));
-					for (HistoryEntry h : historyEntries) {
-						WptPt pt = new WptPt();
-						pt.lat = h.getLat();
-						pt.lon = h.getLon();
-						pt.name = h.getName().getName();
-						boolean hasTypeInDescription = !Algorithms.isEmpty(h.getName().getTypeName());
-						if (hasTypeInDescription) {
-							pt.desc = h.getName().getTypeName();
-						}
-						gpx.addPoint(pt);
-					}
-					return gpx;
-				}
-
-				@Override
-				protected void onPreExecute() {
+				public void onShareHistoryStarted() {
 					showProgressBar();
 				}
 
 				@Override
-				protected void onPostExecute(GPXFile gpxFile) {
-					FragmentActivity activity = getActivity();
-					if (activity != null) {
-						hideProgressBar();
-						File dir = new File(activity.getCacheDir(), "share");
-						if (!dir.exists()) {
-							dir.mkdir();
-						}
-						File dst = new File(dir, "History.gpx");
-						GPXUtilities.writeGpxFile(dst, gpxFile);
-
-						final Intent sendIntent = new Intent();
-						sendIntent.setAction(Intent.ACTION_SEND);
-						sendIntent.putExtra(Intent.EXTRA_TEXT, "History.gpx:\n\n\n" + GPXUtilities.asString(gpxFile));
-						sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_history_subject));
-						sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMapActivity(), dst));
-						sendIntent.setType("text/plain");
-						sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						AndroidUtils.startActivityIfSafe(activity, sendIntent);
-					}
+				public void onShareHistoryFinished() {
+					hideProgressBar();
 				}
 			};
+			ShareHistoryAsyncTask exportTask = new ShareHistoryAsyncTask(app, historyEntries, listener);
 			exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}

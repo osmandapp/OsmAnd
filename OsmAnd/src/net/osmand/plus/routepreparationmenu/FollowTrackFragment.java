@@ -20,7 +20,6 @@ import androidx.fragment.app.FragmentActivity;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
@@ -57,8 +56,6 @@ import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 import net.osmand.plus.widgets.popup.PopUpMenuHelper;
@@ -416,24 +413,16 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
-				if (gpxFile.getNonEmptySegmentsCount() > 1) {
-					TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), gpxFile, this);
-				} else {
-					selectTrackToFollow(gpxFile);
-					updateSelectionMode(false);
-				}
+				selectTrackToFollow(gpxFile);
+				updateSelectionMode(gpxFile.getNonEmptySegmentsCount() <= 1);
 			} else {
 				CallbackWithObject<GPXFile[]> callback = new CallbackWithObject<GPXFile[]>() {
 					@Override
 					public boolean processResult(GPXFile[] result) {
 						MapActivity mapActivity = getMapActivity();
 						if (mapActivity != null) {
-							if (result[0].getNonEmptySegmentsCount() > 1) {
-								TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), result[0], FollowTrackFragment.this);
-							} else {
-								selectTrackToFollow(result[0]);
-								updateSelectionMode(false);
-							}
+							selectTrackToFollow(result[0]);
+							updateSelectionMode(result[0].getNonEmptySegmentsCount() <= 1);
 						}
 						return true;
 					}
@@ -444,22 +433,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 	}
 
-	private void selectTrackToFollow(GPXFile gpxFile) {
+	private void selectTrackToFollow(@NonNull GPXFile gpxFile) {
+		this.gpxFile = gpxFile;
+
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			this.gpxFile = gpxFile;
-			List<WptPt> points = gpxFile.getRoutePoints();
-			if (!points.isEmpty()) {
-				ApplicationMode mode = ApplicationMode.valueOfStringKey(points.get(0).getProfileType(), null);
-				if (mode != null) {
-					app.getRoutingHelper().setAppMode(mode);
-					app.initVoiceCommandPlayer(mapActivity, mode, null,
-							true, false, false, true);
-				}
-			}
-			mapActivity.getMapActions().setGPXRouteParams(gpxFile);
-			app.getTargetPointsHelper().updateRouteAndRefresh(true);
-			app.getRoutingHelper().onSettingsChanged(true);
+			mapActivity.getMapRouteInfoMenu().selectTrack(gpxFile);
 		}
 	}
 

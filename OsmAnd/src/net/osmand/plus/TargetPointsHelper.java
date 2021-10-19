@@ -534,6 +534,13 @@ public class TargetPointsHelper {
 		updateRouteAndRefresh(updateRoute);
 	}
 
+	public void clearBackupPoints() {
+		settings.clearPointToStartBackup();
+		settings.clearIntermediatePointsBackup();
+		settings.clearPointToNavigateBackup();
+		readFromSettings();
+	}
+
 	public void reorderAllTargetPoints(List<TargetPoint> point, boolean updateRoute) {
 		cancelTargetPointAddressRequest();
 		cancelAllIntermediatePointsAddressRequests();

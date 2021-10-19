@@ -1,5 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
+import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
+
 import android.util.Pair;
 
 import androidx.annotation.IntDef;
@@ -42,8 +44,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
 
 // TODO rename after 4.0 MapMarkersHelper -> ItineraryHelper
 public class MapMarkersHelper {
@@ -646,6 +646,13 @@ public class MapMarkersHelper {
 
 	public void removeMarker(MapMarker marker) {
 		removeMarker(marker, true);
+	}
+
+	public void removeMarkers(List<MapMarker> mapMarkers) {
+		for (MapMarker marker : mapMarkers) {
+			removeMarker(marker, false);
+		}
+		refresh();
 	}
 
 	private void removeMarker(MapMarker marker, boolean refresh) {

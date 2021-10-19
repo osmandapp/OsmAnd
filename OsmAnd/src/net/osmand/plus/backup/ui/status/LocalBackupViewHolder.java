@@ -1,5 +1,8 @@
 package net.osmand.plus.backup.ui.status;
 
+import static net.osmand.plus.activities.OsmandBaseExpandableListAdapter.adjustIndicator;
+import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
+
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,9 +22,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.fragments.ExportSettingsFragment;
-
-import static net.osmand.plus.activities.OsmandBaseExpandableListAdapter.adjustIndicator;
-import static net.osmand.plus.importfiles.ImportHelper.ImportType.SETTINGS;
 
 public class LocalBackupViewHolder extends RecyclerView.ViewHolder {
 
@@ -66,7 +66,7 @@ public class LocalBackupViewHolder extends RecyclerView.ViewHolder {
 		backupToFile.setOnClickListener(v -> {
 			if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 				ApplicationMode mode = getApplication().getSettings().getApplicationMode();
-				ExportSettingsFragment.showInstance(mapActivity.getSupportFragmentManager(), mode, true);
+				ExportSettingsFragment.showInstance(mapActivity.getSupportFragmentManager(), mode, null, true);
 			}
 		});
 		setupSelectableBackground(backupToFile);
