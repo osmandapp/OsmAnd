@@ -268,11 +268,6 @@ public class TurnType {
             int st = TurnType.getSecondaryTurn(lns[h]);
             if (st != 0) {
                 s.append(",").append(TurnType.valueOf(st, false).toXmlString());
-//				s.append(",");
-//				if (lns[h] % 2 == 1) {
-//					s.append("+");
-//				}
-//				s.append(TurnType.valueOf(st, false).toXmlString());
             }
             int tt = TurnType.getTertiaryTurn(lns[h]);
             if (tt != 0) {
