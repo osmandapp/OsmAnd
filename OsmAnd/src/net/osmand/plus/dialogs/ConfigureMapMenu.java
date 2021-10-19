@@ -779,7 +779,7 @@ public class ConfigureMapMenu {
 	}
 
 	private void showRendererSnackbarForAttr(@NonNull MapActivity activity, @NonNull String attrName, boolean nightMode,
-	                                         CommonPreference<Boolean> pref) {
+	                                         @Nullable CommonPreference<Boolean> pref) {
 		String renderer = getRendererForAttr(attrName);
 		if (renderer != null) {
 			OsmandApplication app = activity.getMyApplication();
