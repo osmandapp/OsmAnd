@@ -3182,7 +3182,6 @@
     <string name="paste_Osmand_data_folder_path">Indsæt sti til mappen med data</string>
     <string name="change_osmand_data_folder_question">Skift datamappe\?</string>
     <string name="move_maps_to_new_destination">Flyt til den nye destination</string>
-    <string name="internal_app_storage_description">Internt lager (skjult for bruger og andre programmer).</string>
     <string name="change_data_storage_folder">Skift lagringsmappe</string>
     <string name="rendering_attr_piste_type_snow_park_name">Snowpark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Slæde</string>
@@ -4349,4 +4348,16 @@
     <string name="upload_gpx_description_hint">Lad stå tom. Spornavne vil blive brugt som beskrivelse. Indtastet beskrivelse vil blive anvendt for hvert spor.</string>
     <string name="exit_pan_mode_descr">Tryk på Vælg for at forlade panoreringstilstanden</string>
     <string name="icon_group_nautical">Nautisk</string>
+    <string name="shared_storage_warning_description">Fra og med den næste opdatering af OsmAnd vil appen miste adgangen til Delt lagerplads på grund af ændrede adgangsregler for lagerplads i Android.
+\n
+\nÆndr venligst lagerplads fra Delt lagerplads til Tilgængelig lagerplads, hvis du ikke gør det, mister appen adgangen til dine data: herunder offlinekort, GPX-spor og alt andet.</string>
+    <string name="shared_storage_warning_title">Ændringer i regler for adgang til lagring</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd offline kort og navigation på skærmen i dit køretøj. Integreres bekvemt med bilens betjeningselementer.</string>
+    <string name="shared_string_details">Detaljer</string>
+    <string name="shared_app_storage_description">Delt hukommelse er ikke længere tilgængelig på grund af ændringer i reglerne for adgang til lagerplads i Android.</string>
+    <string name="rendering_attr_noNatureReserves_description">Skjul naturreservater, beskyttede områder og nationalparker.</string>
+    <string name="rendering_attr_noNatureReserves_name">Naturreservat</string>
+    <string name="shared_string_articles">Artikler</string>
+    <string name="internal_app_storage_description">Intern lagring, skjult for brugeren og andre apps, så ingen andre end OsmAnd kan få adgang til dine data</string>
+    <string name="included_categories">Inkluderede kategorier</string>
 </resources>

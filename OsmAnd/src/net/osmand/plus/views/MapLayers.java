@@ -199,6 +199,11 @@ public class MapLayers {
 		});
 		app.getSettings().MAP_TRANSPARENCY.addListener(transparencyListener);
 
+		createAdditionalLayers();
+	}
+
+	public void createAdditionalLayers() {
+		OsmandApplication app = getApplication();
 		OsmandPlugin.createLayers(ctx, null);
 		app.getAppCustomization().createLayers(ctx, null);
 		app.getAidlApi().registerMapLayers(ctx);
@@ -296,7 +301,10 @@ public class MapLayers {
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(app);
 		final List<PoiUIFilter> list = new ArrayList<>();
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
-			if (!f.isTopWikiFilter()) {
+			if (!f.isTopWikiFilter()
+					&& !f.isRoutesFilter()
+					&& !f.isRouteArticleFilter()
+					&& !f.isRouteArticlePointFilter()) {
 				addFilterToList(adapter, list, f, true);
 			}
 		}
@@ -362,7 +370,10 @@ public class MapLayers {
 		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(poiFilters.getCustomPOIFilter());
 		for (PoiUIFilter f : poiFilters.getSortedPoiFilters(true)) {
-			if (!f.isTopWikiFilter()) {
+			if (!f.isTopWikiFilter()
+					&& !f.isRoutesFilter()
+					&& !f.isRouteArticleFilter()
+					&& !f.isRouteArticlePointFilter()) {
 				addFilterToList(adapter, list, f, false);
 			}
 		}

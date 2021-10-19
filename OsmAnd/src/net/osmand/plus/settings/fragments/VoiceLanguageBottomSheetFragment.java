@@ -100,8 +100,7 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 
 	private InfoType defineSelectedVoiceType() {
 		String voiceProvider = settings.VOICE_PROVIDER.getModeValue(getAppMode());
-		return Algorithms.isEmpty(voiceProvider) || voiceProvider.endsWith(VOICE_PROVIDER_SUFFIX)
-				|| voiceProvider.equals(OsmandSettings.VOICE_PROVIDER_NOT_USE)
+		return settings.isVoiceProviderNotSelected(getAppMode()) || voiceProvider.endsWith(VOICE_PROVIDER_SUFFIX)
 				? InfoType.TTS
 				: InfoType.RECORDED;
 	}
@@ -370,6 +369,10 @@ public class VoiceLanguageBottomSheetFragment extends BasePreferenceBottomSheet 
 	private void updateVoiceProvider(IndexItem indexItem, boolean forceDismiss) {
 		Activity activity = getActivity();
 		if (activity != null) {
+			boolean wasProviderNotSelected = settings.isVoiceProviderNotSelected(getAppMode());
+			if (wasProviderNotSelected) {
+				app.getRoutingHelper().getVoiceRouter().setMuteForMode(getAppMode(), false);
+			}
 			settings.VOICE_PROVIDER.setModeValue(getAppMode(), indexItem.getBasename());
 			onVoiceProviderChanged();
 			app.initVoiceCommandPlayer(activity, getAppMode(), null, false,

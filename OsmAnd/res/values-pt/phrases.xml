@@ -4030,4 +4030,7 @@
     <string name="poi_groundskeeping">Loja de manutenção de jardins</string>
     <string name="poi_prep_school">Escola de preparação para exames</string>
     <string name="poi_country_store">Loja rural</string>
+    <string name="poi_ticket_validator">Validador de bilhetes</string>
+    <string name="poi_geoglyph">Geoglifo</string>
+    <string name="poi_satellite_dish">Antena de satélite</string>
 </resources>

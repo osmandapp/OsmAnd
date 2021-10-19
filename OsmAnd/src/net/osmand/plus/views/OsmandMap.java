@@ -178,7 +178,7 @@ public class OsmandMap implements NavigationSessionListener {
 			listener.onSetupOpenGLView(init);
 		}
 		NavigationSession navigationSession = app.getCarNavigationSession();
-		if (navigationSession != null && navigationSession.hasSurface()) {
+		if (navigationSession != null) {
 			navigationSession.setMapView(mapView);
 			app.getMapViewTrackingUtilities().setMapView(mapView);
 		} else if (mapView.getMapActivity() == null) {

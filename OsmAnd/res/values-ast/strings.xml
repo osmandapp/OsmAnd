@@ -3689,7 +3689,6 @@
     <string name="rendering_attr_piste_type_sleigh_name">Sleigh</string>
     <string name="rendering_attr_piste_type_snow_park_name">Terrain park</string>
     <string name="change_data_storage_folder">Cambéu de la carpeta d\'almacenamientu</string>
-    <string name="internal_app_storage_description">Internal storage for OsmAnd, (hidden from users and other apps).</string>
     <string name="move_maps_to_new_destination">Mover al destín nuevu</string>
     <string name="change_osmand_data_folder_question">Change OsmAnd data folder\?</string>
     <string name="paste_Osmand_data_folder_path">Paste path to the folder with OsmAnd data</string>

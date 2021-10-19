@@ -2606,7 +2606,7 @@
     <string name="shared_string_current">Поточний</string>
     <string name="last_intermediate_dest_description">Додає проміжну зупинку</string>
     <string name="first_intermediate_dest_description">Додає першу зупинку</string>
-    <string name="subsequent_dest_description">Пересунути призначення далі і створити його</string>
+    <string name="subsequent_dest_description">Перемістити пункт призначення і створити його</string>
     <string name="show_closed_notes">Показати закриті примітки</string>
     <string name="switch_osm_notes_visibility_desc">Показати чи приховати примітки OSM на мапі.</string>
     <string name="gpx_file_desc">GPX — підходить для експорту в JOSM та інші OSM-редактори.</string>
@@ -3180,7 +3180,6 @@
     <string name="paste_Osmand_data_folder_path">Вставте шлях до теки з даними OsmAnd</string>
     <string name="change_osmand_data_folder_question">Змінити теку даних OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Перемістити до нового місця призначення</string>
-    <string name="internal_app_storage_description">Внутрішнє сховище для OsmAnd, приховане від користувачів та інших додатків.</string>
     <string name="change_data_storage_folder">Змінити теку для зберігання</string>
     <string name="rendering_attr_piste_type_snow_park_name">Ландшафтний парк</string>
     <string name="rendering_attr_piste_type_sleigh_name">Запряжені сани, санчата</string>
@@ -4343,4 +4342,39 @@
     <string name="upload_gpx_description_hint">Залиште порожніми, назви треків використовуватимуться як опис. Введений опис буде застосовано для кожного треку.</string>
     <string name="exit_pan_mode_descr">Натисніть Вибрати, щоб вийти з режиму панорамування</string>
     <string name="icon_group_nautical">Морський</string>
+    <string name="rendering_attr_noNatureReserves_name">Природний заповідник</string>
+    <string name="shared_app_storage_description">Спільна пам\'ять більше не доступна через зміни в правилах доступу до сховища в Android.</string>
+    <string name="shared_storage_warning_title">Зміни в правилах доступу до сховища</string>
+    <string name="purchases_feature_desc_android_auto">Офлайн-мапи та навігація OsmAnd на екрані вашого автомобіля. Зручна інтеграція з органами керування вашого автомобіля.</string>
+    <string name="shared_storage_warning_description">Починаючи з наступного оновлення OsmAnd, застосунок втратить доступ до Спільного сховища через зміну правил доступу до сховищ в Android.
+\n
+\nБудь ласка, змініть сховище зі спільного сховища на доступне сховище, якщо цього не буде зроблено, застосунок втратить доступ до ваших даних: включно з офлайн-мапами, треками GPX тощо.</string>
+    <string name="shared_string_details">Подробиці</string>
+    <string name="internal_app_storage_description">Внутрішнє сховище, схована від користувача та інших застосунків, тому ніхто, крім OsmAnd не може отримати доступ до ваших даних</string>
+    <string name="rendering_attr_noNatureReserves_description">Сховати заповідники, заповідні території та національні парки.</string>
+    <string name="included_categories">Включені категорії</string>
+    <string name="shared_string_articles">Статті</string>
+    <string name="release_4_1">• Резервне копіювання в хмарі
+\n
+\n• Додано початкову підтримку Android Auto
+\n
+\n• Оновлення інтерфейсу користувача для пошуку координат UTM
+\n
+\n• Уподобання: додана можливість перегляду нещодавно використаних піктограм
+\n
+\n• Планування маршруту: буде використовувати вибраний профіль після запуску
+\n
+\n• Виправлено шар mapillary, плагін тепер типово вимкнено
+\n
+\n• Додано сторінку керування всією історією в застосунку
+\n
+\n• Орієнтація мапи не скидається після перезапуску застосунку
+\n
+\n• Покращено вигляд маркера висоти SRTM
+\n
+\n• Виправлено показ арабської мови на мапі
+\n
+\n• Виправлені різні проблеми маршрутизації
+\n
+\n</string>
 </resources>

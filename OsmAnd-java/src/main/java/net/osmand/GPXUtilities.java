@@ -33,6 +33,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -70,7 +71,9 @@ public class GPXUtilities {
 	// speed, ele, hdop
 	private final static NumberFormat decimalFormat = new DecimalFormat("#.#", new DecimalFormatSymbols(
 			new Locale("EN", "US")));
+
 	public static final int RADIUS_DIVIDER = 5000;
+	public static final double PRIME_MERIDIAN = 179.999991234;
 
 	public enum GPXColor {
 		BLACK(0xFF000000),
@@ -848,7 +851,10 @@ public class GPXUtilities {
 						totalDistance += calculations[0];
 						segmentDistance += calculations[0];
 						point.distance = segmentDistance;
-						timeDiff = (int)((point.time - prev.time) / 1000);
+
+						// In case points are reversed and => time is decreasing
+						long timeDiffMillis = Math.max(0, point.time - prev.time);
+						timeDiff = (int) ((timeDiffMillis) / 1000);
 
 						//Last resort: Derive speed values from displacement if track does not originally contain speed
 						if (!hasSpeedInTrack && speed == 0 && timeDiff > 0) {
@@ -858,11 +864,12 @@ public class GPXUtilities {
 						// Motion detection:
 						//   speed > 0  uses GPS chipset's motion detection
 						//   calculations[0] > minDisplacment * time  is heuristic needed because tracks may be filtered at recording time, so points at rest may not be present in file at all
-						if ((speed > 0) && (calculations[0] > 0.1 / 1000f * (point.time - prev.time)) && point.time != 0 && prev.time != 0) {
-							timeMoving = timeMoving + (point.time - prev.time);
+						boolean timeSpecified = point.time != 0 && prev.time != 0;
+						if (speed > 0 && timeSpecified && calculations[0] > timeDiffMillis / 10000f) {
+							timeMoving = timeMoving + timeDiffMillis;
 							totalDistanceMoving += calculations[0];
 							if (s.segment.generalSegment && !point.firstPoint) {
-								timeMovingOfSingleSegment += point.time - prev.time;
+								timeMovingOfSingleSegment += timeDiffMillis;
 								distanceMovingOfSingleSegment += calculations[0];
 							}
 						}
@@ -1969,17 +1976,20 @@ public class GPXUtilities {
 	}
 
 	private static void writeRoutes(XmlSerializer serializer, GPXFile file, SimpleDateFormat format, IProgress progress) throws IOException {
-		for (Route track : file.routes) {
+		for (Route route : file.routes) {
 			serializer.startTag(null, "rte"); //$NON-NLS-1$
-			writeNotNullText(serializer, "name", track.name);
-			writeNotNullText(serializer, "desc", track.desc);
+			writeNotNullText(serializer, "name", route.name);
+			writeNotNullText(serializer, "desc", route.desc);
 
-			for (WptPt p : track.points) {
-				serializer.startTag(null, "rtept"); //$NON-NLS-1$
-				writeWpt(format, serializer, p, progress);
-				serializer.endTag(null, "rtept"); //$NON-NLS-1$
+			for (WptPt p : route.points) {
+				boolean artificial = Math.abs(p.lon) == PRIME_MERIDIAN;
+				if (!artificial) {
+					serializer.startTag(null, "rtept"); //$NON-NLS-1$
+					writeWpt(format, serializer, p, progress);
+					serializer.endTag(null, "rtept"); //$NON-NLS-1$
+				}
 			}
-			writeExtensions(serializer, track, null);
+			writeExtensions(serializer, route, null);
 			serializer.endTag(null, "rte"); //$NON-NLS-1$
 		}
 	}
@@ -1994,9 +2004,12 @@ public class GPXUtilities {
 					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
 					writeNotNullText(serializer, "name", segment.name);
 					for (WptPt p : segment.points) {
-						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
-						writeWpt(format, serializer, p, progress);
-						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
+						boolean artificial = Math.abs(p.lon) == PRIME_MERIDIAN;
+						if (!artificial) {
+							serializer.startTag(null, "trkpt"); //$NON-NLS-1$
+							writeWpt(format, serializer, p, progress);
+							serializer.endTag(null, "trkpt"); //$NON-NLS-1$
+						}
 					}
 					assignRouteExtensionWriter(segment);
 					writeExtensions(serializer, segment, null);
@@ -2620,6 +2633,9 @@ public class GPXUtilities {
 			gpxFile.error = e;
 			log.error("Error reading gpx", e); //$NON-NLS-1$
 		}
+
+		createArtificialPrimeMeridianPoints(gpxFile);
+
 		return gpxFile;
 	}
 
@@ -2729,5 +2745,48 @@ public class GPXUtilities {
 		if (from.error != null) {
 			to.error = from.error;
 		}
+	}
+
+	public static void createArtificialPrimeMeridianPoints(GPXFile gpxFile) {
+		if (gpxFile.getNonEmptySegmentsCount() == 0) {
+			for (Route route : gpxFile.routes) {
+				createArtificialPrimeMeridianPoints(route.points);
+			}
+		} else {
+			for (Track track : gpxFile.tracks) {
+				for (TrkSegment segment : track.segments) {
+					createArtificialPrimeMeridianPoints(segment.points);
+				}
+			}
+		}
+	}
+
+	private static void createArtificialPrimeMeridianPoints(List<WptPt> points) {
+		for (int i = 1; i < points.size(); ) {
+			WptPt previous = points.get(i - 1);
+			WptPt current = points.get(i);
+			if (Math.abs(current.lon - previous.lon) >= 180) {
+				WptPt projection = projectionOnPrimeMeridian(previous, current);
+				WptPt oppositeSideProjection = new WptPt(projection);
+				oppositeSideProjection.lon = -oppositeSideProjection.lon;
+				points.addAll(i, Arrays.asList(projection, oppositeSideProjection));
+				i+= 2;
+			}
+			i++;
+		}
+	}
+
+	private static WptPt projectionOnPrimeMeridian(WptPt previous, WptPt next) {
+		double lat = MapUtils.getProjection(0, 0, previous.lat, previous.lon, next.lat, next.lon)
+				.getLatitude();
+		double lon = previous.lon < 0 ? -PRIME_MERIDIAN : PRIME_MERIDIAN;
+		double projectionCoeff = MapUtils.getProjectionCoeff(0, 0, previous.lat, previous.lon,
+				next.lat, next.lon);
+		long time = (long) (previous.time + (next.time - previous.time) * projectionCoeff);
+		double ele = Double.isNaN(previous.ele + next.ele)
+				? Double.NaN
+				: previous.ele + (next.ele - previous.ele) * projectionCoeff;
+		double speed = previous.speed + (next.speed - previous.speed) * projectionCoeff;
+		return new WptPt(lat, lon, time, ele, speed, Double.NaN);
 	}
 }

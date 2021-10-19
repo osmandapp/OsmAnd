@@ -152,6 +152,7 @@
 		<attr name="switch_button_active" format="reference" />
 		<attr name="bottom_navigation_item_background" format="reference" />
 		<attr name="ic_action_osmand_pro_logo_colored" format="reference" />
+		<attr name="ic_action_android_auto_logo_colored" format="reference" />
 	</declare-styleable>
 
     <declare-styleable name="PagerSlidingTabStrip">

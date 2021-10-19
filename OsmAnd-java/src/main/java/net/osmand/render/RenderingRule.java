@@ -37,6 +37,15 @@ public class RenderingRule {
 		return attributes == null ? Collections.EMPTY_MAP : attributes;
 	}
 
+	public boolean hasAttributes(Map<String, String> attributes) {
+		for (Entry<String, String> tagValue : attributes.entrySet()) {
+			if (!tagValue.getValue().equals(this.attributes.get(tagValue.getKey()))) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public void init(Map<String, String> attributes) {
 		ArrayList<RenderingRuleProperty> props = new ArrayList<RenderingRuleProperty>(attributes.size());
 		intProperties = new int[attributes.size()];

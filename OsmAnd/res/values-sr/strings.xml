@@ -3175,7 +3175,6 @@
     <string name="paste_Osmand_data_folder_path">Уметни путању до фасцикле са OsmAnd подацима</string>
     <string name="change_osmand_data_folder_question">Промени OsmAnd фасциклу са подацима\?</string>
     <string name="move_maps_to_new_destination">Премести на ново одредиште</string>
-    <string name="internal_app_storage_description">Интерно складиште за OsmAnd (скривено од корисника и других апликација).</string>
     <string name="change_data_storage_folder">Промени фасциклу складишта</string>
     <string name="rendering_attr_piste_type_snow_park_name">Зимски парк</string>
     <string name="rendering_attr_piste_type_sleigh_name">Саонице</string>

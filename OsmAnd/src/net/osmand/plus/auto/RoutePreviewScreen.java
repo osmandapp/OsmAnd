@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
@@ -55,8 +56,8 @@ public final class RoutePreviewScreen extends Screen implements IRouteInformatio
 		getLifecycle().addObserver(this);
 
 		calculating = true;
-		getApp().getOsmandMap().getMapLayers().getMapControlsLayer()
-				.replaceDestination(searchResult.location, searchResult.localeName);
+		getApp().getOsmandMap().getMapLayers().getMapControlsLayer().replaceDestination(
+				searchResult.location, QuickSearchListItem.getPointDescriptionObject(getApp(), searchResult).first);
 	}
 
 	@NonNull

@@ -58,6 +58,16 @@ public final class NavigationCarAppService extends CarAppService {
 				.addObserver(
 						new DefaultLifecycleObserver() {
 							@Override
+							public void onStart(@NonNull LifecycleOwner owner) {
+								getApp().getOsmandMap().getMapView().setupOpenGLView();
+							}
+
+							@Override
+							public void onStop(@NonNull LifecycleOwner owner) {
+								getApp().getOsmandMap().getMapView().setupOpenGLView();
+							}
+
+							@Override
 							public void onDestroy(@NonNull LifecycleOwner owner) {
 								getApp().getLocationProvider().removeLocationListener(session);
 								getApp().setCarNavigationSession(null);

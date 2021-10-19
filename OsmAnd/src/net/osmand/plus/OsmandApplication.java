@@ -716,7 +716,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
 						getString(msgId, args), CarToast.LENGTH_SHORT).show();
 			}
@@ -727,7 +727,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
 						msg, CarToast.LENGTH_SHORT).show();
 			}
@@ -738,7 +738,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
 						getString(msgId, args), CarToast.LENGTH_LONG).show();
 			}
@@ -749,7 +749,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
 						msg, CarToast.LENGTH_LONG).show();
 			}

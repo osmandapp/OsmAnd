@@ -1912,6 +1912,9 @@ public class OsmandSettings {
 		return map;
 	}
 
+	public final OsmandPreference<Boolean> SHARED_STORAGE_WARNING_DIALOG_SHOWN = new BooleanPreference(this,
+			"shared_storage_warning_dialog_shown", false).makeGlobal();
+
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 
 	public static final String EXTERNAL_STORAGE_DIR_V19 = "external_storage_dir_V19"; //$NON-NLS-1$
@@ -2182,7 +2185,7 @@ public class OsmandSettings {
 		edit.putInt(MAP_ZOOM_TO_SHOW, zoom);
 		edit.commit();
 		objectToShow = toShow;
-		if (addToHistory) {
+		if (addToHistory && pointDescription != null) {
 			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription);
 		}
 	}
@@ -2729,6 +2732,10 @@ public class OsmandSettings {
 		}
 	}.makeProfile();
 
+	public boolean isVoiceProviderNotSelected(ApplicationMode appMode) {
+		String voiceProvider = VOICE_PROVIDER.getModeValue(appMode);
+		return Algorithms.isEmpty(voiceProvider) || VOICE_PROVIDER_NOT_USE.equals(voiceProvider);
+	}
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> RENDERER = new StringPreference(this, "renderer", RendererRegistry.DEFAULT_RENDER) {
@@ -2785,7 +2792,7 @@ public class OsmandSettings {
 		return customBooleanRoutingProps.get(attrName);
 	}
 
-	public final OsmandPreference<Boolean> SHOW_TRAVEL = new BooleanPreference(this, "show_travel", true).makeProfile().cache();
+	public final OsmandPreference<Boolean> SHOW_TRAVEL = new BooleanPreference(this, "show_travel_routes", false).makeProfile().cache();
 
 	public final CommonPreference<Float> ROUTE_RECALCULATION_DISTANCE = new FloatPreference(this, "routing_recalc_distance", 0.f).makeProfile();
 	public final CommonPreference<Float> ROUTE_STRAIGHT_ANGLE = new FloatPreference(this, "routing_straight_angle", 30.f).makeProfile();

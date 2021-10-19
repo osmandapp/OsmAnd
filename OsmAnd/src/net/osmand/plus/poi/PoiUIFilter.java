@@ -2,6 +2,9 @@ package net.osmand.plus.poi;
 
 
 import static net.osmand.osm.MapPoiTypes.OSM_WIKI_CATEGORY;
+import static net.osmand.osm.MapPoiTypes.ROUTES;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.osm.MapPoiTypes.WIKI_PLACE;
 
 import android.content.Context;
@@ -159,6 +162,18 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public boolean isTopWikiFilter() {
 		return filterId.equals(STD_PREFIX + OSM_WIKI_CATEGORY);
+	}
+
+	public boolean isRoutesFilter() {
+		return filterId.startsWith(STD_PREFIX + ROUTES);
+	}
+
+	public boolean isRouteArticleFilter() {
+		return filterId.startsWith(STD_PREFIX + ROUTE_ARTICLE);
+	}
+
+	public boolean isRouteArticlePointFilter() {
+		return filterId.startsWith(STD_PREFIX + ROUTE_ARTICLE_POINT);
 	}
 
 	public String getFilterByName() {

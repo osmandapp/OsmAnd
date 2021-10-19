@@ -1,5 +1,10 @@
 package net.osmand.plus.helpers;
 
+import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
+import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
+import static net.osmand.plus.track.TrackMenuFragment.RETURN_SCREEN_NAME;
+import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,7 +23,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsFragment;
+import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.plus.mapsource.EditMapSourceDialogFragment;
@@ -39,11 +47,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static net.osmand.plus.track.TrackMenuFragment.CURRENT_RECORDING;
-import static net.osmand.plus.track.TrackMenuFragment.TRACK_FILE_NAME;
-import static net.osmand.plus.osmedit.oauth.OsmOAuthHelper.OsmAuthorizationListener;
-import static net.osmand.plus.track.TrackMenuFragment.RETURN_SCREEN_NAME;
 
 public class IntentHelper {
 
@@ -265,6 +268,27 @@ public class IntentHelper {
 				boolean currentRecording = intent.getBooleanExtra(CURRENT_RECORDING, false);
 				TrackMenuFragment.showInstance(mapActivity, path, currentRecording, name, null);
 				mapActivity.setIntent(null);
+			}
+			if (intent.getExtras() != null) {
+				Bundle extras = intent.getExtras();
+				if (extras.containsKey(ChoosePlanFragment.OPEN_CHOOSE_PLAN)) {
+					String featureValue = extras.getString(ChoosePlanFragment.CHOOSE_PLAN_FEATURE);
+					if (!Algorithms.isEmpty(featureValue)) {
+						try {
+							OsmAndFeature feature = OsmAndFeature.valueOf(featureValue);
+							if (feature == OsmAndFeature.ANDROID_AUTO) {
+								if (!InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
+									ChoosePlanFragment.showInstance(mapActivity, feature);
+								}
+							} else {
+								ChoosePlanFragment.showInstance(mapActivity, feature);
+							}
+						} catch (Exception e) {
+							LOG.error(e.getMessage(), e);
+						}
+					}
+				}
+				clearIntent(intent);
 			}
 		}
 	}

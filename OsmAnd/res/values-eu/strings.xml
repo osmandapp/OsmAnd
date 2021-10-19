@@ -3176,7 +3176,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="paste_Osmand_data_folder_path">Itsatsi OsmAnd datuak dituen karpetara bidea</string>
     <string name="change_osmand_data_folder_question">Aldatu OsmAnd datuen karpeta\?</string>
     <string name="move_maps_to_new_destination">Eraman xede berrira</string>
-    <string name="internal_app_storage_description">OsmAnd-en barne biltegiratzea (erabiltzaileari eta beste aplikazioei ezkutatuta).</string>
     <string name="change_data_storage_folder">Aldatu biltegiratzeko karpeta</string>
     <string name="rendering_attr_piste_type_snow_park_name">Elur parkea</string>
     <string name="rendering_attr_piste_type_sleigh_name">Lera</string>

@@ -768,7 +768,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		routingHelper.updateLocation(location);
 		app.getWaypointHelper().locationChanged(location);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+		if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 			carNavigationSession.updateLocation(location);
 			net.osmand.Location updatedLocation = location;
 			if (routingHelper.isFollowingMode()) {

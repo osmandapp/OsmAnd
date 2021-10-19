@@ -4030,4 +4030,7 @@
     <string name="poi_groundskeeping">Kinnistuhooldusvahendite pood</string>
     <string name="poi_prep_school">Järeleaitamiskool</string>
     <string name="poi_country_store">Maarahva pood</string>
+    <string name="poi_ticket_validator">Piletivalidaator</string>
+    <string name="poi_geoglyph">Geoglüüf</string>
+    <string name="poi_satellite_dish">Satelliiditaldrik</string>
 </resources>

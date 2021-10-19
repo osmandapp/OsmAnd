@@ -3147,7 +3147,6 @@
     <string name="paste_Osmand_data_folder_path">Zadejte cestu k adresáři s OsmAnd daty</string>
     <string name="change_osmand_data_folder_question">Změnit adresář pro OsmAnd data\?</string>
     <string name="move_maps_to_new_destination">Přesunout do nového umístění</string>
-    <string name="internal_app_storage_description">Vnitřní úložiště pro OsmAnd (skryté před uživateli a jinými aplikacemi).</string>
     <string name="change_data_storage_folder">Změnit složku pro ukládání dat</string>
     <string name="routeInfo_piste_type_name">Typ sjezdovky</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Nováček</string>
@@ -4227,4 +4226,8 @@
     <string name="shared_string_mini">mini</string>
     <string name="sample_wikivoyage">Ukázka Wikivoyage</string>
     <string name="icon_group_nautical">Plavební</string>
+    <string name="routeInfo_roadClass_description">Zabarvení trasy nebo stopy podle klasifikace cesty.</string>
+    <string name="no_items_of_type_message">Nemáte žádné položky tohoto typu</string>
+    <string name="no_activity_for_intent">Nebyla nalezena žádná vhodná aplikace pro vykonání této akce</string>
+    <string name="empty_category_name">Prázdný název kategorie</string>
 </resources>
