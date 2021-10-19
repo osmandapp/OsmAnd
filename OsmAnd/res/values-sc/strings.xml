@@ -4354,9 +4354,7 @@
     <string name="rendering_attr_noNatureReserves_name">Riserva naturale</string>
     <string name="included_categories">Categorias incluidas</string>
     <string name="shared_string_articles">Artìculos</string>
-    <string name="release_4_1">• Còpia de seguresa in sa nue
-\n
-\n • Annanghidura de unu suportu de incumintzu pro Android Auto
+    <string name="release_4_1">• Annanghidura de unu suportu de incumintzu pro Android Auto
 \n
 \n • Agiornamentu de s\'interfache de impreadore pro sas chircas cun coordinadas UTM
 \n
@@ -4377,4 +4375,11 @@
 \n • Medas problemas de càrculu de s\'àndala risoltos
 \n
 \n</string>
+    <string name="location_access_request_title">OsmAnd tenet bisòngiu de s\'atzessu a sa positzione pro pòdere navigare</string>
+    <string name="location_access_request_action">Fruni s\'atzessu</string>
+    <string name="location_access_request_result">Aprovadu: %1$s Negadu: %2$s</string>
+    <string name="continue_on_phone">Sighi in su telèfonu</string>
+    <string name="android_auto_map_placeholder_title">Sa mapa est ammustrada in s\'ischermu de su veìculu.</string>
+    <string name="android_auto_map_placeholder_descr">Istaca su dispositivu tuo dae Android Auto pro bìdere sa mapa in s\'aplicatzione.</string>
+    <string name="android_auto_purchase_request_title">Còmpora OsmAnd Pro o Maps+ pro impreare OsmAnd cun Android Auto</string>
 </resources>
