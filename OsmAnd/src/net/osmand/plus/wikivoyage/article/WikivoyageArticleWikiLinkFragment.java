@@ -81,7 +81,7 @@ public class WikivoyageArticleWikiLinkFragment extends MenuBottomSheetDialogFrag
 						newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						newIntent.putExtra(DownloadActivity.REGION_TO_SEARCH, wikiRegion);
 						newIntent.putExtra(SHOW_WIKI_KEY, true);
-						AndroidUtils.startActivityIfSafe(app, newIntent);
+						AndroidUtils.startActivityIfSafe(activity, newIntent);
 						dismiss();
 					}
 				})

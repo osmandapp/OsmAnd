@@ -1,6 +1,10 @@
 package net.osmand;
 
 
+import static android.content.Context.POWER_SERVICE;
+import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static android.util.TypedValue.COMPLEX_UNIT_SP;
+
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -84,10 +88,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import static android.content.Context.POWER_SERVICE;
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 public class AndroidUtils {
 	private static final Log LOG = PlatformUtil.getLog(AndroidUtils.class);
 
@@ -108,7 +108,7 @@ public class AndroidUtils {
 	public static void softKeyboardDelayed(final Activity activity, final View view) {
 		view.post(() -> {
 			if (!isHardwareKeyboardAvailable(view.getContext())) {
-				showSoftKeyboard(activity,view);
+				showSoftKeyboard(activity, view);
 			}
 		});
 	}
@@ -118,7 +118,7 @@ public class AndroidUtils {
 		if (imm != null) {
 			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 				KeyguardManager keyguardManager = (KeyguardManager) view.getContext().getSystemService(Context.KEYGUARD_SERVICE);
-				keyguardManager.requestDismissKeyguard(activity,null);
+				keyguardManager.requestDismissKeyguard(activity, null);
 			}
 			imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
 		}
@@ -183,6 +183,9 @@ public class AndroidUtils {
 
 	public static boolean startActivityIfSafe(@NonNull Context context, @NonNull Intent intent, @Nullable Intent chooserIntent) {
 		if (isIntentSafe(context, intent)) {
+			if (!(context instanceof Activity)) {
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			}
 			context.startActivity(chooserIntent != null ? chooserIntent : intent);
 			return true;
 		} else {
@@ -324,8 +327,8 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createEnabledColorStateList(Context ctx, boolean night,
-	                                                         @ColorRes int lightNormal, @ColorRes int lightPressed,
-	                                                         @ColorRes int darkNormal, @ColorRes int darkPressed) {
+															 @ColorRes int lightNormal, @ColorRes int lightPressed,
+															 @ColorRes int darkNormal, @ColorRes int darkPressed) {
 		return createColorStateList(ctx, night, android.R.attr.state_enabled,
 				lightNormal, lightPressed, darkNormal, darkPressed);
 	}
@@ -345,11 +348,11 @@ public class AndroidUtils {
 													   @ColorRes int lightNormal, @ColorRes int lightState,
 													   @ColorRes int darkNormal, @ColorRes int darkState) {
 		return new ColorStateList(
-				new int[][]{
-						new int[]{state},
-						new int[]{}
+				new int[][] {
+						new int[] {state},
+						new int[] {}
 				},
-				new int[]{
+				new int[] {
 						ContextCompat.getColor(ctx, night ? darkState : lightState),
 						ContextCompat.getColor(ctx, night ? darkNormal : lightNormal)
 				}
@@ -367,7 +370,7 @@ public class AndroidUtils {
 						ColorUtilities.getSecondaryTextColor(ctx, night),
 						ColorUtilities.getActiveColor(ctx, night),
 						ColorUtilities.getSecondaryTextColor(ctx, night)}
-				);
+		);
 	}
 
 	public static ColorStateList createCheckedColorIntStateList(@ColorInt int normal, @ColorInt int checked) {
@@ -375,8 +378,8 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createCheckedColorIntStateList(boolean night,
-															 @ColorInt int lightNormal, @ColorInt int lightChecked,
-															 @ColorInt int darkNormal, @ColorInt int darkChecked) {
+																@ColorInt int lightNormal, @ColorInt int lightChecked,
+																@ColorInt int darkNormal, @ColorInt int darkChecked) {
 		return createColorIntStateList(night, android.R.attr.state_checked,
 				lightNormal, lightChecked, darkNormal, darkChecked);
 	}
@@ -386,21 +389,21 @@ public class AndroidUtils {
 	}
 
 	public static ColorStateList createEnabledColorIntStateList(boolean night,
-															 @ColorInt int lightNormal, @ColorInt int lightPressed,
-															 @ColorInt int darkNormal, @ColorInt int darkPressed) {
+																@ColorInt int lightNormal, @ColorInt int lightPressed,
+																@ColorInt int darkNormal, @ColorInt int darkPressed) {
 		return createColorIntStateList(night, android.R.attr.state_enabled,
 				lightNormal, lightPressed, darkNormal, darkPressed);
 	}
 
 	private static ColorStateList createColorIntStateList(boolean night, int state,
-													   @ColorInt int lightNormal, @ColorInt int lightState,
-													   @ColorInt int darkNormal, @ColorInt int darkState) {
+														  @ColorInt int lightNormal, @ColorInt int lightState,
+														  @ColorInt int darkNormal, @ColorInt int darkState) {
 		return new ColorStateList(
-				new int[][]{
-						new int[]{state},
-						new int[]{}
+				new int[][] {
+						new int[] {state},
+						new int[] {}
 				},
-				new int[]{
+				new int[] {
 						night ? darkState : lightState,
 						night ? darkNormal : lightNormal
 				}
@@ -421,8 +424,8 @@ public class AndroidUtils {
 
 	private static StateListDrawable createStateListDrawable(Drawable normal, Drawable stateDrawable, int state) {
 		StateListDrawable res = new StateListDrawable();
-		res.addState(new int[]{state}, stateDrawable);
-		res.addState(new int[]{}, normal);
+		res.addState(new int[] {state}, stateDrawable);
+		res.addState(new int[] {}, normal);
 		return res;
 	}
 
@@ -433,7 +436,7 @@ public class AndroidUtils {
 		ShapeDrawable progress = new ShapeDrawable();
 		progress.getPaint().setColor(progressColor);
 
-		LayerDrawable res = new LayerDrawable(new Drawable[]{
+		LayerDrawable res = new LayerDrawable(new Drawable[] {
 				bg,
 				new ClipDrawable(progress, Gravity.START, ClipDrawable.HORIZONTAL)
 		});
@@ -740,7 +743,7 @@ public class AndroidUtils {
 		}
 	}
 
-	public static void setCompoundDrawablesWithIntrinsicBounds(@NonNull TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom){
+	public static void setCompoundDrawablesWithIntrinsicBounds(@NonNull TextView tv, Drawable start, Drawable top, Drawable end, Drawable bottom) {
 		if (isSupportRTL()) {
 			tv.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
 		} else {
@@ -748,7 +751,7 @@ public class AndroidUtils {
 		}
 	}
 
-	public static Drawable[] getCompoundDrawables(@NonNull TextView tv){
+	public static Drawable[] getCompoundDrawables(@NonNull TextView tv) {
 		if (isSupportRTL()) {
 			return tv.getCompoundDrawablesRelative();
 		}
@@ -788,12 +791,12 @@ public class AndroidUtils {
 	}
 
 	public static Drawable getDrawableForDirection(@NonNull Context ctx,
-	                                               @NonNull Drawable drawable) {
+												   @NonNull Drawable drawable) {
 		return isLayoutRtl(ctx) ? getMirroredDrawable(ctx, drawable) : drawable;
 	}
 
 	public static Drawable getMirroredDrawable(@NonNull Context ctx,
-	                                           @NonNull Drawable drawable) {
+											   @NonNull Drawable drawable) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 			drawable.setAutoMirrored(true);
 			return drawable;
@@ -805,13 +808,13 @@ public class AndroidUtils {
 	public static Bitmap drawableToBitmap(Drawable drawable) {
 		if (drawable instanceof BitmapDrawable) {
 			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-			if(bitmapDrawable.getBitmap() != null) {
+			if (bitmapDrawable.getBitmap() != null) {
 				return bitmapDrawable.getBitmap();
 			}
 		}
 
 		Bitmap bitmap = null;
-		if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+		if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
 			bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
 		} else {
 			bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -873,7 +876,7 @@ public class AndroidUtils {
 				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
 					return fs.getAvailableBlocksLong() * fs.getBlockSizeLong();
 				} else {
-					return (long)(fs.getAvailableBlocks()) * fs.getBlockSize();
+					return (long) (fs.getAvailableBlocks()) * fs.getBlockSize();
 				}
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
@@ -889,7 +892,7 @@ public class AndroidUtils {
 				if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR2) {
 					return fs.getBlockCountLong() * fs.getBlockSizeLong();
 				} else {
-					return (long)(fs.getBlockCount()) * fs.getBlockSize();
+					return (long) (fs.getBlockCount()) * fs.getBlockSize();
 				}
 			} catch (IllegalArgumentException e) {
 				LOG.error(e);
@@ -923,17 +926,17 @@ public class AndroidUtils {
 		if (replaceStyle != null || baseStyle != null || indexOfPlaceholder != -1) {
 			String nStr = baseString.toString().replace(STRING_PLACEHOLDER, stringToInsertAndStyle);
 			SpannableStringBuilder ssb = new SpannableStringBuilder(nStr);
-			if(baseStyle != null) {
-				if(indexOfPlaceholder > 0) {
+			if (baseStyle != null) {
+				if (indexOfPlaceholder > 0) {
 					ssb.setSpan(baseStyle, 0, indexOfPlaceholder, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
-				if(indexOfPlaceholder + stringToInsertAndStyle.length() < nStr.length()) {
+				if (indexOfPlaceholder + stringToInsertAndStyle.length() < nStr.length()) {
 					ssb.setSpan(baseStyle,
 							indexOfPlaceholder + stringToInsertAndStyle.length(),
 							nStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 				}
 			}
-			if(replaceStyle != null) {
+			if (replaceStyle != null) {
 				ssb.setSpan(replaceStyle, indexOfPlaceholder,
 						indexOfPlaceholder + stringToInsertAndStyle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
@@ -959,7 +962,7 @@ public class AndroidUtils {
 			char c = nameWithoutExt.charAt(i);
 			if (Character.isDigit(c)) {
 				numberSection.insert(0, c);
-			} else if(Character.isSpaceChar(c) && numberSection.length() > 0) {
+			} else if (Character.isSpaceChar(c) && numberSection.length() > 0) {
 				hasNameNumberSection = true;
 				break;
 			} else {
