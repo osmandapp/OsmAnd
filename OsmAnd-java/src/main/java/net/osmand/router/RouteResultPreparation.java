@@ -868,6 +868,7 @@ public class RouteResultPreparation {
 							turnType = tt;
 						}
 						int commonTurn = inferCommonActiveLane(turnType, nextSegment.getTurnType());
+						//change turnType to the right turnType, that was found during 2nd pass
 						if (commonTurn > 0) {
 							turnType.setValue(commonTurn);
 						}
