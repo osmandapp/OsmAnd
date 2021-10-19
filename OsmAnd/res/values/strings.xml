@@ -10,7 +10,8 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
 -->
-    <string name="fullscreen_map_drawing_mode">Fullscreen map drawing mode</string>
+    <string name="transparent_status_bar_descr">Display map under status bar</string>
+    <string name="transparent_status_bar">Transparent status bar</string>
     <string name="exit_pan_mode_descr">Press Select to exit the pan mode</string>
     <string name="upload_gpx_description_hint">Leave empty, track names will be used as description. Entered description will be applied for each track.</string>
     <string name="search_title">Search: %1$s</string>

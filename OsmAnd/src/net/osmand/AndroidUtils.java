@@ -577,7 +577,7 @@ public class AndroidUtils {
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
 		if (Build.VERSION.SDK_INT >= 21
 				&& (!OsmandPlugin.isDevelopment()
-				|| app.getSettings().FULLSCREEN_MAP_DRAWING_MODE.get())) {
+				|| app.getSettings().TRANSPARENT_STATUS_BAR.get())) {
 			int paddingLeft = view.getPaddingLeft();
 			int paddingTop = view.getPaddingTop();
 			int paddingRight = view.getPaddingRight();

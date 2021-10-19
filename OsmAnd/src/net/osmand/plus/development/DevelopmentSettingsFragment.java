@@ -114,7 +114,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupFullscreenMapDrawingModePref() {
-		SwitchPreferenceEx fullscreenMapDrawingMode = findPreference(settings.FULLSCREEN_MAP_DRAWING_MODE.getId());
+		SwitchPreferenceEx fullscreenMapDrawingMode = findPreference(settings.TRANSPARENT_STATUS_BAR.getId());
+		fullscreenMapDrawingMode.setDescription(getString(R.string.transparent_status_bar_descr));
 		fullscreenMapDrawingMode.setIconSpaceReserved(false);
 	}
 
@@ -212,7 +213,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		if (settings.SAFE_MODE.getId().equals(prefId) && newValue instanceof Boolean) {
 			loadNativeLibrary();
 			return true;
-		} else if (settings.FULLSCREEN_MAP_DRAWING_MODE.getId().equals(prefId) && newValue instanceof Boolean) {
+		} else if (settings.TRANSPARENT_STATUS_BAR.getId().equals(prefId) && newValue instanceof Boolean) {
 			MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				mapActivity.restart();

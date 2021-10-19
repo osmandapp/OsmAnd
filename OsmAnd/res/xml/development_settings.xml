@@ -50,11 +50,11 @@
 		android:title="@string/trace_rendering" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="fullscreen_map_drawing_mode"
+		android:key="transparent_status_bar"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/fullscreen_map_drawing_mode" />
+		android:title="@string/transparent_status_bar" />
 
 	<Preference
 		android:key="simulate_initial_startup"

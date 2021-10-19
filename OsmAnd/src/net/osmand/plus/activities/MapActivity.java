@@ -362,13 +362,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void exitFromFullScreen(View view) {
-		if (!OsmandPlugin.isDevelopment() || settings.FULLSCREEN_MAP_DRAWING_MODE.get()) {
+		if (!OsmandPlugin.isDevelopment() || settings.TRANSPARENT_STATUS_BAR.get()) {
 			AndroidUtils.exitFromFullScreen(this, view);
 		}
 	}
 
 	public void enterToFullScreen() {
-		if (!OsmandPlugin.isDevelopment() || settings.FULLSCREEN_MAP_DRAWING_MODE.get()) {
+		if (!OsmandPlugin.isDevelopment() || settings.TRANSPARENT_STATUS_BAR.get()) {
 			AndroidUtils.enterToFullScreen(this, getLayout());
 		}
 	}

@@ -1767,7 +1767,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOULD_SHOW_FREE_VERSION_BANNER = new BooleanPreference(this, "should_show_free_version_banner", false).makeGlobal().makeShared().cache();
 
-	public final OsmandPreference<Boolean> FULLSCREEN_MAP_DRAWING_MODE = new BooleanPreference(this, "fullscreen_map_drawing_mode", true).makeGlobal().makeShared();
+	public final OsmandPreference<Boolean> TRANSPARENT_STATUS_BAR = new BooleanPreference(this, "transparent_status_bar", true).makeGlobal().makeShared();
 
 	public final OsmandPreference<Boolean> MARKERS_DISTANCE_INDICATION_ENABLED = new BooleanPreference(this, "markers_distance_indication_enabled", true).makeProfile();
 
