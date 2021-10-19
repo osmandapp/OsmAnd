@@ -4,6 +4,8 @@ import net.osmand.util.Algorithms;
 
 import gnu.trove.set.hash.TIntHashSet;
 
+import java.util.ArrayList;
+
 public class TurnType {
 	public static final int C = 1;//"C"; // continue (go straight) //$NON-NLS-1$
 	public static final int TL = 2; // turn left //$NON-NLS-1$
@@ -125,7 +127,7 @@ public class TurnType {
 //		return null;
 	}
 
-	private final int value;
+	private int value;
 	private int exitOut;
 	// calculated clockwise head rotation if previous direction to NORTH
 	private float turnAngle;
@@ -166,6 +168,9 @@ public class TurnType {
 
 	public int getValue() {
 		return value;
+	}
+	public void setValue(int value) {
+		this.value = value;
 	}
 
 	public int getExitOut() {
@@ -263,6 +268,11 @@ public class TurnType {
             int st = TurnType.getSecondaryTurn(lns[h]);
             if (st != 0) {
                 s.append(",").append(TurnType.valueOf(st, false).toXmlString());
+//				s.append(",");
+//				if (lns[h] % 2 == 1) {
+//					s.append("+");
+//				}
+//				s.append(TurnType.valueOf(st, false).toXmlString());
             }
             int tt = TurnType.getTertiaryTurn(lns[h]);
             if (tt != 0) {

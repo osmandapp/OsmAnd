@@ -867,7 +867,10 @@ public class RouteResultPreparation {
 							currentSegment.setTurnType(tt);
 							turnType = tt;
 						}
-						inferCommonActiveLane(turnType, nextSegment.getTurnType());
+						int commonTurn = inferCommonActiveLane(turnType, nextSegment.getTurnType());
+						if (commonTurn > 0) {
+							turnType.setValue(commonTurn);
+						}
 						merged = true;
 					}
 				}
@@ -1031,50 +1034,103 @@ public class RouteResultPreparation {
 		currentTurn.setLanes(active.disabledLanes);
 		return true;
 	}
-	
-	private void inferCommonActiveLane(TurnType currentTurn, TurnType nextTurn) {
-		int[] lanes = currentTurn.getLanes();
-		TIntHashSet turnSet = new TIntHashSet();
-		for(int i = 0; i < lanes.length; i++) {
-			if(lanes[i] % 2 == 1 ) {
-				int singleTurn = TurnType.getPrimaryTurn(lanes[i]);
+
+	private void getActiveTurns(int[] lanes, TIntHashSet turnSet) {
+		for (int lane : lanes) {
+			if (lane % 2 == 1) {
+				int singleTurn = TurnType.getPrimaryTurn(lane);
 				turnSet.add(singleTurn);
-				if(TurnType.getSecondaryTurn(lanes[i]) != 0) {
-					turnSet.add(TurnType.getSecondaryTurn(lanes[i]));
+				if (TurnType.getSecondaryTurn(lane) != 0) {
+					turnSet.add(TurnType.getSecondaryTurn(lane));
 				}
-				if(TurnType.getTertiaryTurn(lanes[i]) != 0) {
-					turnSet.add(TurnType.getTertiaryTurn(lanes[i]));
+				if (TurnType.getTertiaryTurn(lane) != 0) {
+					turnSet.add(TurnType.getTertiaryTurn(lane));
 				}
 			}
 		}
+	}
+
+	private boolean bothSegmentsHaveCommonLanesButDiffActive(int[] currentLanes, TurnType currentTurn, TurnType nextTurn) {
+		TIntHashSet nextTurnSet = new TIntHashSet();
+		int[] nextLanes = nextTurn.getLanes();
+		getActiveTurns(nextLanes, nextTurnSet);
+
+		for (int lane : currentLanes) {
+			if (lane % 2 == 1) {
+				int turnSize = 0;
+				if (TurnType.getPrimaryTurn(lane) != 0) {
+					turnSize++;
+				}
+				if (TurnType.getSecondaryTurn(lane) != 0) {
+					turnSize++;
+				}
+				if (TurnType.getTertiaryTurn(lane) != 0) {
+					turnSize++;
+				}
+				// currentTurn.getTurnAngle() == nextTurn.getTurnAngle() - strict comparison
+				// that in most cases allow converting only from TL=>C or TR=>C and work only for 0.0 == 0.0
+				if (turnSize == nextLanes.length
+						&& currentTurn.getTurnAngle() == nextTurn.getTurnAngle()
+						&& hasCommonLanes(nextLanes, lane, turnSize, nextTurnSet)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	private boolean hasCommonLanes(int[] nextLanes, int lane, int turnSize, TIntHashSet nextTurnSet) {
+		if(turnSize == 1) {
+			return true;
+		}
+		if(turnSize == 2
+				&& TurnType.getPrimaryTurn(nextLanes[0]) == TurnType.getPrimaryTurn(lane)
+				&& TurnType.getPrimaryTurn(nextLanes[1]) == TurnType.getSecondaryTurn(lane)
+				&& !nextTurnSet.contains(TurnType.getPrimaryTurn(lane))
+				&& nextTurnSet.contains(TurnType.getSecondaryTurn(lane))) {
+			return true;
+		}
+		return turnSize == 3
+				&& TurnType.getPrimaryTurn(nextLanes[0]) == TurnType.getPrimaryTurn(lane)
+				&& TurnType.getPrimaryTurn(nextLanes[1]) == TurnType.getSecondaryTurn(lane)
+				&& TurnType.getPrimaryTurn(nextLanes[2]) == TurnType.getTertiaryTurn(lane)
+				&& !nextTurnSet.contains(TurnType.getPrimaryTurn(lane))
+				&& (nextTurnSet.contains(TurnType.getSecondaryTurn(lane)) || nextTurnSet.contains(TurnType.getTertiaryTurn(lane)));
+	}
+
+	private int inferCommonActiveLane(TurnType currentTurn, TurnType nextTurn) {
+		int[] lanes = currentTurn.getLanes();
+		TIntHashSet turnSet = new TIntHashSet();
+		getActiveTurns(lanes, turnSet);
 		int singleTurn = 0;
-		if(turnSet.size() == 1) {
+		if (turnSet.size() == 1) {
 			singleTurn = turnSet.iterator().next();
-		} else if(currentTurn.goAhead() && turnSet.contains(nextTurn.getValue())) {
+		} else if (turnSet.contains(nextTurn.getValue())) {
 			if (currentTurn.isPossibleLeftTurn() && TurnType.isLeftTurn(nextTurn.getValue())) {
 				singleTurn = nextTurn.getValue();
 			} else if (currentTurn.isPossibleLeftTurn() && TurnType.isLeftTurn(nextTurn.getActiveCommonLaneTurn())) {
 				singleTurn = nextTurn.getActiveCommonLaneTurn();
-			} else if(currentTurn.isPossibleRightTurn() && 
+			} else if (currentTurn.isPossibleRightTurn() &&
 					TurnType.isRightTurn(nextTurn.getValue())) {
 				singleTurn = nextTurn.getValue();
-			} else if(currentTurn.isPossibleRightTurn() && 
+			} else if (currentTurn.isPossibleRightTurn() &&
 					TurnType.isRightTurn(nextTurn.getActiveCommonLaneTurn())) {
+				singleTurn = nextTurn.getActiveCommonLaneTurn();
+			} else if (bothSegmentsHaveCommonLanesButDiffActive(lanes, currentTurn, nextTurn)) {
 				singleTurn = nextTurn.getActiveCommonLaneTurn();
 			}
 		}
 		if (singleTurn == 0) {
 			singleTurn = currentTurn.getValue();
-			if(singleTurn == TurnType.KL || singleTurn == TurnType.KR) {
-				return;
+			if (singleTurn == TurnType.KL || singleTurn == TurnType.KR) {
+				return -1;
 			}
 		}
-		for(int i = 0; i < lanes.length; i++) {
-			if(lanes[i] % 2 == 1 && TurnType.getPrimaryTurn(lanes[i]) != singleTurn) {
-				if(TurnType.getSecondaryTurn(lanes[i]) == singleTurn) {
-					TurnType.setSecondaryTurn(lanes, i, TurnType.getPrimaryTurn(lanes[i]));
-					TurnType.setPrimaryTurn(lanes, i, singleTurn);
-				} else if(TurnType.getTertiaryTurn(lanes[i]) == singleTurn) {
+		for (int i = 0; i < lanes.length; i++) {
+			if (lanes[i] % 2 == 1 && TurnType.getPrimaryTurn(lanes[i]) != singleTurn) {
+				if (TurnType.getSecondaryTurn(lanes[i]) == singleTurn) {
+					TurnType.setSecondaryToPrimary(lanes, i);
+				} else if (TurnType.getTertiaryTurn(lanes[i]) == singleTurn) {
 					TurnType.setTertiaryTurn(lanes, i, TurnType.getPrimaryTurn(lanes[i]));
 					TurnType.setPrimaryTurn(lanes, i, singleTurn);
 				} else {
@@ -1083,7 +1139,7 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		
+		return singleTurn;
 	}
 
 	private static final int MAX_SPEAK_PRIORITY = 5;
