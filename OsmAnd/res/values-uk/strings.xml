@@ -4354,9 +4354,7 @@
     <string name="rendering_attr_noNatureReserves_description">Сховати заповідники, заповідні території та національні парки.</string>
     <string name="included_categories">Включені категорії</string>
     <string name="shared_string_articles">Статті</string>
-    <string name="release_4_1">• Резервне копіювання в хмарі
-\n
-\n• Додано початкову підтримку Android Auto
+    <string name="release_4_1">• Додано початкову підтримку Android Auto
 \n
 \n• Оновлення інтерфейсу користувача для пошуку координат UTM
 \n

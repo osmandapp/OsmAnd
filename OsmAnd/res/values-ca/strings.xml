@@ -3849,9 +3849,7 @@
     <string name="shared_string_files">Fitxers</string>
     <string name="service_is_not_available_please_try_later">El servei no està disponible, si us plau, proveu-ho més tard</string>
     <string name="shared_string_articles">Articles</string>
-    <string name="release_4_1">• Còpia de seguretat al núvol
-\n
-\n • Afegit suport inicial per a Android Auto
+    <string name="release_4_1">• Afegit suport inicial per a Android Auto
 \n
 \n • Actualització de la interfície d’usuari per a la cerca de coordenades UTM
 \n

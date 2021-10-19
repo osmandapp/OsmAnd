@@ -4350,9 +4350,7 @@
     <string name="rendering_attr_noNatureReserves_name">Prírodná rezervácia</string>
     <string name="shared_string_articles">Články</string>
     <string name="included_categories">Zahrnuté kategórie</string>
-    <string name="release_4_1">• Zálohovanie do cloudu
-\n
-\n • Prvotná podpora pre Android Auto
+    <string name="release_4_1">• Prvotná podpora pre Android Auto
 \n
 \n • Zmena rozhrania pre vyhľadávanie súradníc UTM
 \n

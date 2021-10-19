@@ -4361,9 +4361,7 @@
     <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений, никто кроме OsmAnd не может получить доступ к вашим данным</string>
     <string name="included_categories">Включённые категории</string>
     <string name="shared_string_articles">Статьи</string>
-    <string name="release_4_1">• Облачное резервное копирование
-\n
-\n• Добавлена начальная поддержка Android Auto
+    <string name="release_4_1">• Добавлена начальная поддержка Android Auto
 \n
 \n• Обновление пользовательского интерфейса для поиска координат UTM
 \n

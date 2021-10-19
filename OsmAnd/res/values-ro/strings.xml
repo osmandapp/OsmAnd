@@ -4353,9 +4353,7 @@
     <string name="shared_string_details">Detalii</string>
     <string name="rendering_attr_noNatureReserves_name">Rezervație naturală</string>
     <string name="shared_string_articles">Articole</string>
-    <string name="release_4_1">• Backup în cloud
-\n
-\n • A fost adăugat suportul inițial pentru Android Auto
+    <string name="release_4_1">• A fost adăugat suportul inițial pentru Android Auto
 \n
 \n • Actualizare a interfeței utilizatorului pentru căutarea coordonatelor UTM
 \n

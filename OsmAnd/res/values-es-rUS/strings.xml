@@ -4344,9 +4344,7 @@
     <string name="included_categories">Categorías incluidas</string>
     <string name="internal_app_storage_description">Almacenamiento interno, oculto para el usuario y otras aplicaciones, por lo que nadie (excepto OsmAnd) puede acceder a los datos</string>
     <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
-    <string name="release_4_1">• Copia de seguridad en la nube
-\n
-\n• Se ha añadido la compatibilidad inicial con Android Auto
+    <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto
 \n
 \n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM
 \n

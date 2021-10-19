@@ -4242,9 +4242,7 @@
     <string name="regular_price">Precio habitual</string>
     <string name="offline_wikivoyage">Wikivoyage fuera de linea</string>
     <string name="backup_delete_types_descr">¿Borrar toda la información de tipos de datos obsoletos de OsmAnd Cloud\?</string>
-    <string name="release_4_1">• Copia de seguridad en la nube
-\n
-\n• Se ha añadido la compatibilidad inicial con Android Auto
+    <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto
 \n
 \n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM
 \n

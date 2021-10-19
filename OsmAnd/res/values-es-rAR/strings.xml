@@ -4357,9 +4357,7 @@
     <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="included_categories">Categorías incluidas</string>
     <string name="shared_string_articles">Artículos</string>
-    <string name="release_4_1">• Copia de seguridad en la nube
-\n
-\n• Se ha añadido la compatibilidad inicial con Android Auto
+    <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto
 \n
 \n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM
 \n

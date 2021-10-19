@@ -4353,9 +4353,7 @@
     <string name="rendering_attr_noNatureReserves_description">Kaŝi natur-rezervejojn, protektatajn aerojn kaj naciajn parkojn.</string>
     <string name="rendering_attr_noNatureReserves_name">Naturrezervejoj</string>
     <string name="shared_string_articles">Artikoloj</string>
-    <string name="release_4_1">• sekurkopio en nubo
-\n
-\n• komenca subteno por Android Auto
+    <string name="release_4_1">• komenca subteno por Android Auto
 \n
 \n• plibonigoj al serĉado laŭ UTM-koordinatoj
 \n

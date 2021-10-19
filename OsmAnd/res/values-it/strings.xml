@@ -4343,9 +4343,7 @@
     <string name="shared_string_details">Dettagli</string>
     <string name="shared_string_articles">Articoli</string>
     <string name="included_categories">Categorie incluse</string>
-    <string name="release_4_1">• Cloud backup
-\n
-\n • Aggiunto un iniziale supporto ad Android Auto
+    <string name="release_4_1">• Aggiunto un iniziale supporto ad Android Auto
 \n
 \n • Interfaccia utente aggiornata per la ricerca con coordinate UTM
 \n

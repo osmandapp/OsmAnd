@@ -4348,9 +4348,7 @@
     <string name="rendering_attr_noNatureReserves_name">Természetvédelmi terület</string>
     <string name="shared_string_articles">Cikkek</string>
     <string name="included_categories">Tartalmazott kategóriák</string>
-    <string name="release_4_1">- Felhőalapú biztonsági mentés
-\n
-\n - Android Auto kezdeti támogatás
+    <string name="release_4_1">- Android Auto kezdeti támogatás
 \n
 \n - Felhasználói felület frissítése UTM koordináták kereséséhez
 \n
