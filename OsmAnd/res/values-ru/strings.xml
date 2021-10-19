@@ -4353,9 +4353,6 @@
     <string name="icon_group_nautical">Морские</string>
     <string name="shared_storage_warning_title">Изменения в правилах доступа к хранилищу</string>
     <string name="purchases_feature_desc_android_auto">OsmAnd - оффлайн карты и навигация на экране вашего автомобиля. Удобная интеграция с органами управления вашего автомобиля.</string>
-    <string name="shared_storage_warning_description">Начиная со следующего обновления приложения, OsmAnd потеряет доступ к общему хранилищу в связи с изменением правил доступа в Android.
-\n
-\nИзмените хранилище с общего на доступное. Если этого не сделать, приложение потеряет доступ к вашим данным: офлайн картам, GPX трекам и всему остальному.</string>
     <string name="shared_app_storage_description">Общая память больше не доступна из-за изменений в правилах доступа к хранилищу в Android.</string>
     <string name="shared_string_details">Детали</string>
     <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений, никто кроме OsmAnd не может получить доступ к вашим данным</string>

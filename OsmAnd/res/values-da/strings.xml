@@ -4348,9 +4348,6 @@
     <string name="upload_gpx_description_hint">Lad stå tom. Spornavne vil blive brugt som beskrivelse. Indtastet beskrivelse vil blive anvendt for hvert spor.</string>
     <string name="exit_pan_mode_descr">Tryk på Vælg for at forlade panoreringstilstanden</string>
     <string name="icon_group_nautical">Nautisk</string>
-    <string name="shared_storage_warning_description">Fra og med den næste opdatering af OsmAnd vil appen miste adgangen til Delt lagerplads på grund af ændrede adgangsregler for lagerplads i Android.
-\n
-\nÆndr venligst lagerplads fra Delt lagerplads til Tilgængelig lagerplads, hvis du ikke gør det, mister appen adgangen til dine data: herunder offlinekort, GPX-spor og alt andet.</string>
     <string name="shared_storage_warning_title">Ændringer i regler for adgang til lagring</string>
     <string name="purchases_feature_desc_android_auto">OsmAnd offline kort og navigation på skærmen i dit køretøj. Integreres bekvemt med bilens betjeningselementer.</string>
     <string name="shared_string_details">Detaljer</string>

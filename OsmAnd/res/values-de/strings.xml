@@ -4373,9 +4373,6 @@
 \n
 \n</string>
     <string name="rendering_attr_noNatureReserves_name">Naturschutzgebiet</string>
-    <string name="shared_storage_warning_description">Beginnend mit dem nächsten Update von OsmAnd wird die App den Zugriff auf den gemeinsamen Speicher aufgrund geänderter Speicherzugriffsregeln in Android verlieren.
-\n
-\nBitte ändern Sie den Speicher von gemeinsamem Speicher auf verfügbaren Speicher. Wird dies nicht getan, wird die App den Zugriff auf Ihre Daten verlieren: einschließlich Offline-Karten, GPX Tracks und alles andere.</string>
     <string name="rendering_attr_noNatureReserves_description">Ausblenden von Naturschutzgebieten, Schutzgebieten und Nationalparks.</string>
     <string name="internal_app_storage_description">Interner Speicher, versteckt vor dem Benutzer und anderen Anwendungen, so dass niemand außer OsmAnd Zugriff auf Ihre Daten hat</string>
     <string name="shared_string_details">Details</string>
