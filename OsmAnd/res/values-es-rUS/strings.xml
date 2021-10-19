@@ -4372,9 +4372,6 @@
     <string name="upload_gpx_description_hint">Al dejarlo vacío, serán utilizados los nombres de las trazas como descripción. La descripción ingresada se aplica a cada traza.</string>
     <string name="search_title">Buscar: %1$s</string>
     <string name="icon_group_nautical">Náutico</string>
-    <string name="shared_storage_warning_description">A partir de la próxima actualización de OsmAnd, la aplicación perderá el acceso al almacenamiento compartido, debido a los cambios en las reglas de acceso al almacenamiento en Android.
-\n
-\nPor favor, cambia de almacenamiento compartido a almacenamiento disponible, si esto no se hace la aplicación perderá el acceso a los datos: incluyendo mapas sin conexión, trazas GPX y todo lo demás.</string>
     <string name="shared_storage_warning_title">Cambios en las normas de acceso al almacenamiento</string>
     <string name="purchases_feature_desc_android_auto">Mapas y navegación sin conexión de OsmAnd, en la pantalla de su vehículo. Se integra cómodamente con los controles de tu vehículo.</string>
 </resources>

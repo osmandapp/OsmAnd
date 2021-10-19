@@ -4342,9 +4342,6 @@
     <string name="rendering_attr_noNatureReserves_description">Természetvédelmi területek, védett területek és nemzeti parkok elrejtése.</string>
     <string name="shared_string_details">Részletek</string>
     <string name="shared_app_storage_description">A megosztott memória már nem érhető el az Android tárhely-hozzáférési szabályainak változásai miatt.</string>
-    <string name="shared_storage_warning_description">Az OsmAnd következő frissítésétől kezdve – az Android megváltozott tárhely-hozzáférési szabályai miatt – az alkalmazás elveszíti a hozzáférést a megosztott tárhelyhez.
-\n
-\nKérjük, módosítsa a tárhelyet a megosztott tárhelyről valamely rendelkezésre álló tárhelyre. Ha ez nem történik meg, az alkalmazás elveszíti a hozzáférést az adataihoz (az offline térképekhez, a GPX-nyomvonalakhoz és minden máshoz).</string>
     <string name="rendering_attr_noNatureReserves_name">Természetvédelmi terület</string>
     <string name="shared_string_articles">Cikkek</string>
     <string name="included_categories">Tartalmazott kategóriák</string>

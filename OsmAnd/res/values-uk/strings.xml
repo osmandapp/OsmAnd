@@ -4346,9 +4346,6 @@
     <string name="shared_app_storage_description">Спільна пам\'ять більше не доступна через зміни в правилах доступу до сховища в Android.</string>
     <string name="shared_storage_warning_title">Зміни в правилах доступу до сховища</string>
     <string name="purchases_feature_desc_android_auto">Офлайн-мапи та навігація OsmAnd на екрані вашого автомобіля. Зручна інтеграція з органами керування вашого автомобіля.</string>
-    <string name="shared_storage_warning_description">Починаючи з наступного оновлення OsmAnd, застосунок втратить доступ до Спільного сховища через зміну правил доступу до сховищ в Android.
-\n
-\nБудь ласка, змініть сховище зі спільного сховища на доступне сховище, якщо цього не буде зроблено, застосунок втратить доступ до ваших даних: включно з офлайн-мапами, треками GPX тощо.</string>
     <string name="shared_string_details">Подробиці</string>
     <string name="internal_app_storage_description">Внутрішнє сховище, схована від користувача та інших застосунків, тому ніхто, крім OsmAnd не може отримати доступ до ваших даних</string>
     <string name="rendering_attr_noNatureReserves_description">Сховати заповідники, заповідні території та національні парки.</string>

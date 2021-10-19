@@ -4347,9 +4347,6 @@
     <string name="shared_storage_warning_title">Ŝanĝo en reguloj de aliro al la konservejo</string>
     <string name="purchases_feature_desc_android_auto">Malkonektaj mapoj kaj navigado OsmAnd sur ekrano de via veturilo. Oportune integriĝas kun sistemo de via aŭtomobilo.</string>
     <string name="included_categories">Ampleksataj kategorioj</string>
-    <string name="shared_storage_warning_description">Kun la sekva versio de OsmAnd, la aplikaĵo perdos aliron al komuna konservejo pro ŝanĝo en reguloj de aliro al la konservejo en la operaciumo Android.
-\n
-\nŜanĝu lokon uzatan de OsmAnd por konservi datumojn; aliokaze la aplikaĵo perdos aliron al viajn datumojn: inkluzivante malkonektajn mapojn, GPX-spurojn kaj pli.</string>
     <string name="rendering_attr_noNatureReserves_description">Kaŝi natur-rezervejojn, protektatajn aerojn kaj naciajn parkojn.</string>
     <string name="rendering_attr_noNatureReserves_name">Naturrezervejoj</string>
     <string name="shared_string_articles">Artikoloj</string>

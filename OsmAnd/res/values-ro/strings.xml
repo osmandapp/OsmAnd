@@ -4375,9 +4375,6 @@
 \n
 \n</string>
     <string name="shared_app_storage_description">Memoria partajată nu mai este disponibilă din cauza unor modificări ale regulilor de acces la spațiul de stocare din Android.</string>
-    <string name="shared_storage_warning_description">Începând cu următoarea actualizare a aplicației OsmAnd, aplicația va pierde accesul la Stocarea partajată, din cauza modificării regulilor de acces la stocare în Android.
-\n
-\nVă rugăm să schimbați stocarea din Stocare partajată în Stocare disponibilă, dacă nu se face acest lucru, aplicația va pierde accesul la datele voastre: inclusiv hărțile offline, piesele GPX și orice altceva.</string>
     <string name="shared_storage_warning_title">Modificări ale normelor de acces la stocare</string>
     <string name="purchases_feature_desc_android_auto">OsmAnd hărți și navigație offline pe ecranul vehiculului dumneavoastră. Integrați-vă convenabil cu comenzile vehiculului vostru.</string>
     <string name="rendering_attr_noNatureReserves_description">Ascundeți rezervațiile naturale, zonele protejate și parcurile naționale.</string>

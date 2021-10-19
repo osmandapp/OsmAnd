@@ -4336,9 +4336,6 @@
     <string name="search_title">Szukaj: %1$s</string>
     <string name="exit_pan_mode_descr">Naciśnij przycisk Wybierz, aby wyjść z trybu panoramowania</string>
     <string name="icon_group_nautical">Morski</string>
-    <string name="shared_storage_warning_description">Od następnej aktualizacji OsmAnd, aplikacja straci dostęp do współdzielonej pamięci masowej, z powodu zmiany zasad dostępu do pamięci masowej w systemie Android.
-\n
-\nZmień pamięć ze współdzielonej na dostępną, jeśli nie zostanie to zrobione, aplikacja utraci dostęp do Twoich danych: w tym map offline, ścieżek GPX i wszystkiego innego.</string>
     <string name="shared_string_details">Szczegóły</string>
     <string name="shared_app_storage_description">Pamięć współdzielona nie jest już dostępna ze względu na zmiany w zasadach dostępu do pamięci masowej w systemie Android.</string>
     <string name="internal_app_storage_description">Pamięć wewnętrzna, ukryta przed użytkownikiem i innymi aplikacjami, więc nikt poza OsmAnd nie ma dostępu do Twoich danych</string>

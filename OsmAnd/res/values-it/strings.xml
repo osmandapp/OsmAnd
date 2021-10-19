@@ -4336,9 +4336,6 @@
     <string name="shared_app_storage_description">La memoria condivisa non è più disponibile a causa delle modifiche alle regole di accesso all\'archiviazione in Android.</string>
     <string name="internal_app_storage_description">Memorizzazione interna, nascosto all\'utilizzatore e alle altre app, così nessuno può accedere ai tuoi dati</string>
     <string name="rendering_attr_noNatureReserves_name">Riserva naturale</string>
-    <string name="shared_storage_warning_description">Dal prossimo aggiornamento di OsmAnd, l\'app perderà l\'accesso alla Memoria condivisa, a causa del cambiamento delle regole di accesso alla memoria di Android.
-\n
-\nCambia la memorizzazione da Memoria condivisa alla memoria disponibile, se non verrà fatto l\'app perderà l\'accesso ai tuoi dati: comprese mappe offline, tracce GPX e tutto il resto.</string>
     <string name="rendering_attr_noNatureReserves_description">Nascondi riserve naturali, aree protette e parchi nazionali.</string>
     <string name="shared_string_details">Dettagli</string>
     <string name="shared_string_articles">Articoli</string>

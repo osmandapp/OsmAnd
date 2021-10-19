@@ -4351,9 +4351,6 @@
     <string name="shared_storage_warning_title">Alterações nas regras de acesso ao armazenamento</string>
     <string name="purchases_feature_desc_android_auto">OsmAnd mapas e navegação offline no ecrã do seu veículo. Integre-o nos comandos do seu veículo.</string>
     <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturais, áreas protegidas e parques nacionais.</string>
-    <string name="shared_storage_warning_description">A partir da próxima atualização do OsmAnd, a aplicação perderá o acesso ao armazenamento partilhado, devido às regras de acesso ao armazenamento que foram alteradas pelo Android.
-\n
-\nPor favor altere o armazenamento de \"Armazenamento partilhado\" para o armazenamento disponível, se isso não for feito a aplicação perderá acesso aos seus dados: incluindo mapas offline, trilhos GPX e tudo o resto.</string>
     <string name="shared_string_details">Detalhes</string>
     <string name="shared_app_storage_description">A memória partilhada deixou de estar disponível devido a mudanças nas regras de acesso ao armazenamento no Android.</string>
     <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
