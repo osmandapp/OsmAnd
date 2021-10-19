@@ -3170,7 +3170,6 @@
     <string name="paste_Osmand_data_folder_path">נא להדביק את הנתיב לתיקייה עם הנתונים של OsmAnd</string>
     <string name="change_osmand_data_folder_question">להחליף את תיקיית הנתונים של OsmAnd\?</string>
     <string name="move_maps_to_new_destination">העברה ליעד החדש</string>
-    <string name="internal_app_storage_description">אחסון פנימי עבור OsmAnd (נסתר מהמשתמשים ומיישומונים אחרים).</string>
     <string name="change_data_storage_folder">החלפת תיקיית אחסון</string>
     <string name="rendering_attr_piste_type_snow_park_name">פארק גלישה על שלג</string>
     <string name="rendering_attr_piste_type_sleigh_name">מזחלת נגררת</string>
@@ -3800,11 +3799,11 @@
     <string name="routing_attr_avoid_footways_description">הימנעות משבילי הולכי רגל</string>
     <string name="routing_attr_avoid_footways_name">הימנעות משבילי הולכי רגל</string>
     <string name="osm_live_payment_desc_hw">המינוי מחויב לפי התקופה הנבחרת. ניתן לבטל אותו דרך ה־AppGallery בכל עת.</string>
-    <string name="osm_live_payment_subscription_management_hw">חשבון ה־AppGallery שלך יחויב עם אישור הרכישה.
+    <string name="osm_live_payment_subscription_management_hw">התשלום יחויב מחשבון ה־AppGallery שלך יחויב עם אישור הרכישה.
 \n
-\nתוקף המינוי מתארך אוטומטי אלא אם כן בוטל בטרם תאריך החידוש. החשבון שלך יחויב על תקופת החידוש (חודש/שלושה חודשים/שנה) רק בתאריך החידוש.
+\nהמינוי מתחדש אוטומטית אלא אם כן בוטל בטרם תקופת החידוש הנבחרת.
 \n
-\nניתן לנהל ולבטל את המינויים שלך בהגדרות ב־AppGallery שלך.</string>
+\nניתן לנהל ולבטל את המינויים שלך בהגדרות ב־AppGallery שלך בכל עת.</string>
     <string name="what_is_new">מה חדש</string>
     <string name="development">פיתוח</string>
     <string name="use_live_public_transport">נתוני זמן אמת של OsmAnd</string>
@@ -4296,4 +4295,10 @@
 \nניתן לנהל או לבטל את המינוי שלך דרך ההגדרות שלך ב־Amazon בכל עת.</string>
     <string name="search_title">חיפוש: %1$s</string>
     <string name="upload_gpx_description_hint">יש להשאיר ריק, שמות המסלולים ישמשו כתיאור. התיאור שנכתב יחול על כל אחד מהמסלולים.</string>
+    <string name="shared_app_storage_description">הזיכרון המשותף לא זמין עוד עקב שינויים בכללי גישה לאחסון ב־Android.</string>
+    <string name="shared_string_details">פרטים</string>
+    <string name="included_categories">קטגוריות כלולות</string>
+    <string name="internal_app_storage_description">אחסון פנימי, נסתר מהמשתמש ומיישומונים אחרים, כדי שלאף אחד למעט OsmAnd לא תהיה גישה לנתונים שלך</string>
+    <string name="shared_storage_warning_title">שינוי בכללי הגישה לאחסון</string>
+    <string name="shared_string_articles">ערכים</string>
 </resources>

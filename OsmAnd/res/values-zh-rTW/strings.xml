@@ -3170,7 +3170,6 @@
     <string name="paste_Osmand_data_folder_path">貼上有 OsmAnd 資料的資料夾路徑</string>
     <string name="change_osmand_data_folder_question">變更 OsmAnd 資料夾？</string>
     <string name="move_maps_to_new_destination">移動到新目的地</string>
-    <string name="internal_app_storage_description">OsmAnd 內部儲存空間（對使用者與其他應用程式隱藏）。</string>
     <string name="change_data_storage_folder">變更儲存資料夾</string>
     <string name="rendering_attr_piste_type_snow_park_name">地形公園</string>
     <string name="rendering_attr_piste_type_sleigh_name">雪橇</string>
@@ -4333,4 +4332,41 @@
     <string name="routing_attr_only_permitted_streets_name">明確允許的街道</string>
     <string name="routing_attr_allow_gate_description">允許使用閘門</string>
     <string name="routing_attr_allow_gate_name">允許使用閘門</string>
+    <string name="upload_gpx_description_hint">留空，軌跡名稱將用作描述。輸入的描述將會套用於每個軌跡。</string>
+    <string name="search_title">搜尋：%1$s</string>
+    <string name="exit_pan_mode_descr">按選取退出平移模式</string>
+    <string name="icon_group_nautical">航海</string>
+    <string name="internal_app_storage_description">內部儲存空間，對使用者與其他應用程式隱藏，因此除了 OsmAnd 以外都無法存取您的資料</string>
+    <string name="shared_app_storage_description">因為 Android 中儲存空間存取規則的變更，所以分享記憶體不再可用。</string>
+    <string name="shared_storage_warning_title">儲存空間存取規則的變更</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd 離線地圖與您車輛螢幕上的導航。方便地與您的車輛控制裝置整合。</string>
+    <string name="shared_string_details">詳細資訊</string>
+    <string name="rendering_attr_noNatureReserves_name">自然保留區</string>
+    <string name="shared_storage_warning_description">從 OsmAnd 的下次更新開始，因為 Android 中儲存空間存取規則的變更，所以分享記憶體不再可用。
+\n
+\n請將儲存空間從共享儲存空間變更為其他可用的儲存空間，若不這樣做，應用程式將無法存取您的資料：包含離線地圖、GPX 軌跡與任何其他東西。</string>
+    <string name="rendering_attr_noNatureReserves_description">隱藏自然保留區、保護區與國家公園。</string>
+    <string name="included_categories">包含分類</string>
+    <string name="shared_string_articles">文章</string>
+    <string name="release_4_1">• 新增對 Android Auto 的初步支援
+\n
+\n • UTM 座標搜尋的使用者介面
+\n
+\n • 最愛：新增檢視最近使用圖示的功能
+\n
+\n • 路線規劃：啟動後將使用選定的設定檔
+\n
+\n • 修復 Mapillary 圖層，外掛程式目前預設停用
+\n
+\n • 新增管理應用程式中所有歷史紀錄的畫面
+\n
+\n • 重新啟動應用程式後不會重設地圖方向
+\n
+\n • 改善 SRTM 高度標記繪製
+\n
+\n • 修復地圖上的阿拉伯文顯示問題
+\n
+\n • 修復了不同的路徑規劃問題
+\n
+\n</string>
 </resources>

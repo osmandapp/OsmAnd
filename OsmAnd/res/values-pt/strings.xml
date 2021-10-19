@@ -3181,7 +3181,6 @@
     <string name="paste_Osmand_data_folder_path">Colar caminho para a pasta com dados do OsmAnd</string>
     <string name="change_osmand_data_folder_question">Alterar a pasta de dados do OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Mover para o novo destino</string>
-    <string name="internal_app_storage_description">Armazenamento interno para o OsmAnd (oculto aos utilizadores e outras aplicações).</string>
     <string name="change_data_storage_folder">Alterar pasta de armazenamento</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parque de neve</string>
     <string name="rendering_attr_piste_type_sleigh_name">Trenó puxado por animais</string>
@@ -4347,4 +4346,16 @@
     <string name="routing_attr_prefer_tactile_paving_name">Preferir pavimentação tátil</string>
     <string name="upload_gpx_description_hint">Deixe em branco se quiser usar os nomes dos trilhos GPX como descrição. A descrição inserida será aplicada para cada trilho.</string>
     <string name="search_title">Pesquisar: %1$s</string>
+    <string name="exit_pan_mode_descr">Pressione \"Selecionar\" para sair do modo deslocar</string>
+    <string name="icon_group_nautical">Náutico</string>
+    <string name="shared_storage_warning_title">Alterações nas regras de acesso ao armazenamento</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd mapas e navegação offline no ecrã do seu veículo. Integre-o nos comandos do seu veículo.</string>
+    <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturais, áreas protegidas e parques nacionais.</string>
+    <string name="shared_storage_warning_description">A partir da próxima atualização do OsmAnd, a aplicação perderá o acesso ao armazenamento partilhado, devido às regras de acesso ao armazenamento que foram alteradas pelo Android.
+\n
+\nPor favor altere o armazenamento de \"Armazenamento partilhado\" para o armazenamento disponível, se isso não for feito a aplicação perderá acesso aos seus dados: incluindo mapas offline, trilhos GPX e tudo o resto.</string>
+    <string name="shared_string_details">Detalhes</string>
+    <string name="shared_app_storage_description">A memória partilhada deixou de estar disponível devido a mudanças nas regras de acesso ao armazenamento no Android.</string>
+    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
+    <string name="internal_app_storage_description">Armazenamento interno, oculto ao utilizador e outras aplicações, de modo a que ninguém, a não ser o OsmAnd, pode ter acesso aos seus dados</string>
 </resources>

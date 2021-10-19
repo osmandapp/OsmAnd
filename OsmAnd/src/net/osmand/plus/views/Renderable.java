@@ -181,7 +181,7 @@ public class Renderable {
             Path path = new Path();
             for (int i = 1; i < pts.size(); i++) {
                 WptPt pt = pts.get(i);
-                if (arePointsInsideTile(pt, lastPt, tileBounds)) {
+                if (arePointsInsideTile(pt, lastPt, tileBounds) && !arePrimeMeridianPoints(pt, lastPt)) {
                     if (recalculateLastXY) {
                         recalculateLastXY = false;
                         float lastX = tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon);
@@ -227,7 +227,7 @@ public class Renderable {
                 float nextY = nextPt == null ? 0 : tileBox.getPixYFromLatLon(nextPt.lat, nextPt.lon);
                 float lastX = 0;
                 float lastY = 0;
-                if (arePointsInsideTile(pt, lastPt, tileBounds)) {
+                if (arePointsInsideTile(pt, lastPt, tileBounds) && !arePrimeMeridianPoints(pt, lastPt)) {
                     if (recalculateLastXY) {
                         recalculateLastXY = false;
                         lastX = tileBox.getPixXFromLatLon(lastPt.lat, lastPt.lon);
@@ -318,8 +318,15 @@ public class Renderable {
             if (first == null || second == null) {
                 return false;
             }
-            return Math.min(first.lon, second.lon) < tileBounds.right && Math.max(first.lon, second.lon) > tileBounds.left
-                    && Math.min(first.lat, second.lat) < tileBounds.top && Math.max(first.lat, second.lat) > tileBounds.bottom;
+            return Math.min(first.lon, second.lon) < tileBounds.right
+                    && Math.max(first.lon, second.lon) > tileBounds.left
+                    && Math.min(first.lat, second.lat) < tileBounds.top
+                    && Math.max(first.lat, second.lat) > tileBounds.bottom;
+        }
+
+        protected boolean arePrimeMeridianPoints(WptPt first, WptPt second) {
+            return Math.max(first.lon, second.lon) == GPXUtilities.PRIME_MERIDIAN
+                    && Math.min(first.lon, second.lon) == -GPXUtilities.PRIME_MERIDIAN;
         }
     }
 

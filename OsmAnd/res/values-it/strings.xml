@@ -291,7 +291,7 @@
     <string name="fav_saved_sucessfully">Preferiti salvati in {0}</string>
     <string name="no_fav_to_save">Nessun Preferito da salvare</string>
     <string name="error_occurred_loading_gpx">Non posso caricare il file GPX.</string>
-    <string name="send_report">Invia rapporto</string>
+    <string name="send_report">Invia segnalazione</string>
     <string name="none_region_found">Non trovo nessuna mappa scaricata sulla memory card.</string>
     <string name="poi_namefinder_query_empty">Scrivi per trovare un PDI</string>
     <string name="any_poi">Tutti</string>
@@ -3170,7 +3170,6 @@
     <string name="paste_Osmand_data_folder_path">Incolla il percorso della cartella con i dati OsmAnd</string>
     <string name="change_osmand_data_folder_question">Cambiare la cartella di dati OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Sposta nella nuova destinazione</string>
-    <string name="internal_app_storage_description">Memoria interna per OsmAnd, (nascosta agli utenti e alle altre app).</string>
     <string name="change_data_storage_folder">Cambia la cartella di memorizzazione</string>
     <string name="rendering_attr_piste_type_sleigh_name">Slitta</string>
     <string name="rendering_attr_piste_type_sled_name">Slitta</string>
@@ -4318,4 +4317,51 @@
     <string name="service_is_not_available_please_try_later">Sevizio indisponibile, prova più tardi</string>
     <string name="shared_string_files">File</string>
     <string name="travel_route_types">Tipi di percorso</string>
+    <string name="upload_gpx_description_hint">Lascia vuoto, il nome della traccia sarà utilizzato come descrizione. La descrizione immessa sarà applicata per ogni traccia.</string>
+    <string name="routing_attr_only_permitted_ways_description">Utilizza solo vie (tracce, sentieri, ecc.) che sono espressamente permesse</string>
+    <string name="exit_pan_mode_descr">Premi Seleziona per uscire dal modo panoramico</string>
+    <string name="search_title">Cerca: %1$s</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Preferisci la pavimentazione tattile</string>
+    <string name="routing_attr_allow_gate_name">Permetti l\'utilizzo dei cancelli</string>
+    <string name="routing_attr_allow_gate_description">Permetti l\'utilizzo dei cancelli</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Preferisci la pavimentazione tattile</string>
+    <string name="shared_storage_warning_title">Cambiamenti delle regole di acceso alla memorizzazione</string>
+    <string name="purchases_feature_desc_android_auto">Mappe OsmAnd offline e navigazione nello schermo del tuo veicolo. Integrato opportunamente con i comandi del tuo veicolo.</string>
+    <string name="icon_group_nautical">Nautico</string>
+    <string name="routing_attr_only_permitted_streets_name">Strade esplicitamente permesse</string>
+    <string name="routing_attr_only_permitted_streets_description">Utilizza solo le strade esplicitamente permesse</string>
+    <string name="routing_attr_only_permitted_ways_name">Vie esplicitamente permesse</string>
+    <string name="routing_attr_prefer_horse_routes_name">Preferisci i percorsi per cavalli</string>
+    <string name="routing_attr_prefer_horse_routes_description">Preferisci i percorsi per cavalli</string>
+    <string name="shared_app_storage_description">La memoria condivisa non è più disponibile a causa delle modifiche alle regole di accesso all\'archiviazione in Android.</string>
+    <string name="internal_app_storage_description">Memorizzazione interna, nascosto all\'utilizzatore e alle altre app, così nessuno può accedere ai tuoi dati</string>
+    <string name="rendering_attr_noNatureReserves_name">Riserva naturale</string>
+    <string name="shared_storage_warning_description">Dal prossimo aggiornamento di OsmAnd, l\'app perderà l\'accesso alla Memoria condivisa, a causa del cambiamento delle regole di accesso alla memoria di Android.
+\n
+\nCambia la memorizzazione da Memoria condivisa alla memoria disponibile, se non verrà fatto l\'app perderà l\'accesso ai tuoi dati: comprese mappe offline, tracce GPX e tutto il resto.</string>
+    <string name="rendering_attr_noNatureReserves_description">Nascondi riserve naturali, aree protette e parchi nazionali.</string>
+    <string name="shared_string_details">Dettagli</string>
+    <string name="shared_string_articles">Articoli</string>
+    <string name="included_categories">Categorie incluse</string>
+    <string name="release_4_1">• Aggiunto un iniziale supporto ad Android Auto
+\n
+\n • Interfaccia utente aggiornata per la ricerca con coordinate UTM
+\n
+\n • Preferiti: aggiunta la capacità di visualizzare le icone usate recenti
+\n
+\n • Pianificazione del percorso: utilizzerà il profilo scelto dopo l\'avvio
+\n
+\n • Corretta lo strato Mapillary, il componente aggiuntivo è disabilitato per preimpostazione
+\n
+\n • Aggiunta la schermata per gestire tutta la cronologia dell\'app
+\n
+\n • L\'orientamento della mappa non viene più reimpostato al riavvio dell\'app
+\n
+\n • Migliorato la rappresentazione delle linee isoipse SRTM
+\n
+\n • Corretta la visualizzazione nella mappa dell\'Arabo
+\n
+\n • Corretti diversi errori di calcolo del percorso
+\n
+\n</string>
 </resources>

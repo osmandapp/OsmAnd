@@ -3178,7 +3178,6 @@
     <string name="paste_Osmand_data_folder_path">Pegar la ruta a la carpeta con los datos de OsmAnd</string>
     <string name="change_osmand_data_folder_question">¿Cambiar la carpeta de datos de OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Mover al nuevo destino</string>
-    <string name="internal_app_storage_description">Almacenamiento interno para OsmAnd, (oculto a los usuarios y otras aplicaciones).</string>
     <string name="change_data_storage_folder">Cambiar la carpeta de almacenamiento</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parque de nieve</string>
     <string name="rendering_attr_piste_type_sleigh_name">Trineo</string>
@@ -4344,4 +4343,39 @@
     <string name="routing_attr_prefer_tactile_paving_name">Preferir pavimento táctil</string>
     <string name="search_title">Buscar: %1$s</string>
     <string name="upload_gpx_description_hint">Al dejarlo vacío, serán utilizados los nombres de las trazas como descripción. La descripción ingresada se aplica a cada traza.</string>
+    <string name="exit_pan_mode_descr">Pulsa «Elegir» para salir del modo panorámico</string>
+    <string name="shared_storage_warning_description">A partir de la próxima actualización de OsmAnd, la aplicación perderá el acceso al almacenamiento compartido, debido a los cambios en las reglas de acceso al almacenamiento en Android.
+\n
+\nPor favor, cambia de almacenamiento compartido a almacenamiento disponible, si esto no se hace la aplicación perderá el acceso a los datos: incluyendo mapas sin conexión, trazas GPX y todo lo demás.</string>
+    <string name="shared_storage_warning_title">Cambios en las normas de acceso al almacenamiento</string>
+    <string name="purchases_feature_desc_android_auto">Mapas y navegación sin conexión de OsmAnd, en la pantalla de su vehículo. Se integra cómodamente con los controles de tu vehículo.</string>
+    <string name="icon_group_nautical">Náutico</string>
+    <string name="shared_app_storage_description">La memoria compartida ya no está disponible debido a los cambios en las reglas de acceso al almacenamiento en Android.</string>
+    <string name="shared_string_details">Detalles</string>
+    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
+    <string name="internal_app_storage_description">Almacenamiento interno, oculto para el usuario y otras aplicaciones, por lo que nadie (excepto OsmAnd) puede acceder a los datos</string>
+    <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturales, áreas protegidas y parques nacionales.</string>
+    <string name="included_categories">Categorías incluidas</string>
+    <string name="shared_string_articles">Artículos</string>
+    <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto
+\n
+\n• Actualización de la interfaz de usuario para la búsqueda de coordenadas UTM
+\n
+\n• Favoritos: se ha añadido la posibilidad de ver los iconos utilizados recientemente
+\n
+\n• Planificación de rutas: se utiliza el perfil elegido tras la ejecución
+\n
+\n• Se ha corregido la capa de Mapillary, el complemento se desactivada de forma predefinida
+\n
+\n• Se ha añadido una pantalla para gestionar todo el historial de la aplicación
+\n
+\n• La orientación del mapa no se restablece luego de reiniciar la aplicación
+\n
+\n• Se ha mejorado la visualización del marcador SRTM de altura
+\n
+\n• Se ha corregido la visualización en árabe en el mapa
+\n
+\n• Se ha corregido diferentes problemas de navegación
+\n
+\n</string>
 </resources>

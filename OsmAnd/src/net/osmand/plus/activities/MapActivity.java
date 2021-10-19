@@ -87,6 +87,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
+import net.osmand.plus.dialogs.SharedStorageWarningBottomSheet;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
@@ -104,6 +105,7 @@ import net.osmand.plus.helpers.RateUsHelper;
 import net.osmand.plus.helpers.ScrollHelper;
 import net.osmand.plus.helpers.ScrollHelper.OnScrollEventListener;
 import net.osmand.plus.importfiles.ImportHelper;
+import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.AdditionalActionsBottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
@@ -270,19 +272,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		trackDetailsMenu.setMapActivity(this);
 
 		super.onCreate(savedInstanceState);
-
-		// Full screen is not used here
-		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
-
 		enterToFullScreen();
 		// Navigation Drawer
 		AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
 
-		if (app.getAppInitializer().checkAppVersionChanged() && WhatsNewDialogFragment.SHOW) {
-			SecondSplashScreenFragment.SHOW = false;
-			WhatsNewDialogFragment.SHOW = false;
-			new WhatsNewDialogFragment().show(getSupportFragmentManager(), null);
+		if (WhatsNewDialogFragment.shouldShowDialog(app)) {
+			boolean showed = WhatsNewDialogFragment.showInstance(getSupportFragmentManager());
+			if (showed) {
+				SecondSplashScreenFragment.SHOW = false;
+			}
 		}
 		mapActions = new MapActivityActions(this);
 		mapWidgetsVisibilityHelper = new WidgetsVisibilityHelper(this);
@@ -303,6 +302,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		});
 		mapView.setAccessibilityActions(new MapAccessibilityActions(this));
 		getMapViewTrackingUtilities().setMapView(mapView);
+		getMapLayers().createAdditionalLayers();
 
 		createProgressBarForRouting();
 		updateStatusBarColor();
@@ -468,6 +468,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void setupOpenGLView(boolean init) {
 		OsmandMapTileView mapView = getMapView();
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		View androidAutoPlaceholder = findViewById(R.id.AndroidAutoPlaceholder);
+		boolean useAndroidAuto = carNavigationSession != null && carNavigationSession.hasStarted()
+				&& InAppPurchaseHelper.isAndroidAutoAvailable(app);
 		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
 			ViewStub stub = findViewById(R.id.atlasMapRendererViewStub);
 			if (atlasMapRendererView == null) {
@@ -477,12 +480,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			}
 			OsmAndMapLayersView ml = findViewById(R.id.MapLayersView);
-			if (carNavigationSession == null || !carNavigationSession.hasSurface()) {
-				ml.setVisibility(View.VISIBLE);
-				ml.setMapView(mapView);
-			} else {
+			if (useAndroidAuto) {
 				ml.setVisibility(View.GONE);
 				ml.setMapView(null);
+				androidAutoPlaceholder.setVisibility(View.VISIBLE);
+			} else {
+				ml.setVisibility(View.VISIBLE);
+				ml.setMapView(mapView);
+				androidAutoPlaceholder.setVisibility(View.GONE);
 			}
 			getMapViewTrackingUtilities().setMapView(mapView);
 			mapView.setMapRender(atlasMapRendererView);
@@ -490,12 +495,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			surf.setVisibility(View.GONE);
 		} else {
 			OsmAndMapSurfaceView surf = findViewById(R.id.MapView);
-			if (carNavigationSession == null || !carNavigationSession.hasSurface()) {
-				surf.setVisibility(View.VISIBLE);
-				surf.setMapView(mapView);
-			} else {
+			if (useAndroidAuto) {
 				surf.setVisibility(View.GONE);
 				surf.setMapView(null);
+				androidAutoPlaceholder.setVisibility(View.VISIBLE);
+			} else {
+				surf.setVisibility(View.VISIBLE);
+				surf.setMapView(mapView);
+				androidAutoPlaceholder.setVisibility(View.GONE);
 			}
 		}
 	}
@@ -680,7 +687,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onResume() {
 		super.onResume();
 
-		if (activityRestartNeeded || !getMapLayers().hasMapActivity()) {
+		MapActivity mapViewMapActivity = getMapView().getMapActivity();
+		if (activityRestartNeeded || !getMapLayers().hasMapActivity()
+				|| (mapViewMapActivity != null && mapViewMapActivity != this)) {
 			activityRestartNeeded = false;
 			recreate();
 			return;
@@ -711,6 +720,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		dashboardOnMap.updateLocation(true, true, false);
+
+		if (getFragment(WhatsNewDialogFragment.TAG) == null || WhatsNewDialogFragment.wasNotShown()) {
+			if (SharedStorageWarningBottomSheet.dialogShowRequired(app)) {
+				SecondSplashScreenFragment.SHOW = false;
+				SharedStorageWarningBottomSheet.showInstance(this, true);
+			}
+		}
 
 		getMyApplication().getNotificationHelper().refreshNotifications();
 		// fixing bug with action bar appearing on android 2.3.3
@@ -764,6 +780,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			atlasMapRendererView.handleOnResume();
 		}
 
+		app.getLauncherShortcutsHelper().updateLauncherShortcuts();
 		app.getDownloadThread().setUiActivity(this);
 
 		boolean routeWasFinished = routingHelper.isRouteWasFinished();
@@ -1259,7 +1276,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
 		NavigationSession carNavigationSession = app.getCarNavigationSession();
-		if (carNavigationSession == null || !carNavigationSession.hasSurface()) {
+		if (carNavigationSession == null) {
 			getMapViewTrackingUtilities().setMapView(null);
 		}
 		if (atlasMapRendererView != null) {

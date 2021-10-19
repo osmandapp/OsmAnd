@@ -3042,7 +3042,6 @@
     <string name="route_parameters">Útvonal paraméterek</string>
     <string name="plugins_settings">Bővítménybeállítások</string>
     <string name="download_detailed_map">Töltsd le a részletes %s térképet a terület megtekintéséhez.</string>
-    <string name="internal_app_storage_description">Az OsmAnd belső tárolója (felhasználók és más alkalmazások számára rejtett).</string>
     <string name="change_data_storage_folder">Tároló mappa módosítása</string>
     <string name="routing_attr_width_name">Szélességkorlátozás</string>
     <string name="routing_attr_width_description">Adja meg az útvonalakon a járművekre vonatkozó szélességkorlátozást.</string>
@@ -4335,4 +4334,39 @@
     <string name="routing_attr_prefer_tactile_paving_name">Vakvezető burkolat előnyben részesítése</string>
     <string name="upload_gpx_description_hint">Ha üres marad, akkor a nyomvonalnevek fognak megjelenni leírásként. A megadott leírás minden egyes nyomvonalra vonatkozni fog.</string>
     <string name="search_title">Keresés: %1$s</string>
+    <string name="exit_pan_mode_descr">A pásztázó módból való kilépéshez nyomja meg a Kijelölés gombot</string>
+    <string name="icon_group_nautical">Hajózás</string>
+    <string name="internal_app_storage_description">Belső tárhely (elrejtve a felhasználó és más alkalmazások elől), így az OsmAnd-on kívül senki sem férhet hozzá az adataihoz</string>
+    <string name="shared_storage_warning_title">Változások a tárhely-hozzáférési szabályokban</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd offline térképek és navigáció az autója képernyőjén. Kényelmesen integrálható a jármű kezelőszerveivel.</string>
+    <string name="rendering_attr_noNatureReserves_description">Természetvédelmi területek, védett területek és nemzeti parkok elrejtése.</string>
+    <string name="shared_string_details">Részletek</string>
+    <string name="shared_app_storage_description">A megosztott memória már nem érhető el az Android tárhely-hozzáférési szabályainak változásai miatt.</string>
+    <string name="shared_storage_warning_description">Az OsmAnd következő frissítésétől kezdve – az Android megváltozott tárhely-hozzáférési szabályai miatt – az alkalmazás elveszíti a hozzáférést a megosztott tárhelyhez.
+\n
+\nKérjük, módosítsa a tárhelyet a megosztott tárhelyről valamely rendelkezésre álló tárhelyre. Ha ez nem történik meg, az alkalmazás elveszíti a hozzáférést az adataihoz (az offline térképekhez, a GPX-nyomvonalakhoz és minden máshoz).</string>
+    <string name="rendering_attr_noNatureReserves_name">Természetvédelmi terület</string>
+    <string name="shared_string_articles">Cikkek</string>
+    <string name="included_categories">Tartalmazott kategóriák</string>
+    <string name="release_4_1">- Android Auto kezdeti támogatás
+\n
+\n - Felhasználói felület frissítése UTM koordináták kereséséhez
+\n
+\n - Kedvencek: megtekinthetők a legutóbb használt ikonok
+\n
+\n - Útvonaltervezés: indítás után a kiválasztott profil használata
+\n
+\n - Javult a Mapillary-réteg, a bővítmény mostantól alapértelmezés szerint le van tiltva
+\n
+\n - Új képernyő az alkalmazásban lévő összes előzmény kezeléséhez
+\n
+\n - Az alkalmazás újraindítása után a térkép tájolása nem áll vissza az alapértelmezés szerinti irányba
+\n
+\n - Javult az SRTM magasságjelző renderelése
+\n
+\n - Javult az arab nyelv megjelenítése a térképen
+\n
+\n - Különböző útvonaltervezési problémák javítása
+\n
+\n</string>
 </resources>

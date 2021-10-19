@@ -61,7 +61,8 @@ public abstract class CommandPlayer {
 
 		File voicesDir = app.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 		File voiceProviderDir = new File(voicesDir, voiceProvider);
-		if (!voiceProviderDir.exists()) {
+		File ttsFile = getTtsFileFromDir(voiceProviderDir);
+		if (!ttsFile.exists()) {
 			throw new CommandPlayerException(app.getString(R.string.voice_data_unavailable));
 		}
 
@@ -100,9 +101,8 @@ public abstract class CommandPlayer {
 		context.setOptimizationLevel(-1);
 		ScriptableObject jsScope = context.initSafeStandardObjects();
 		try {
-			String pathToTtsFile = voiceProviderDir.getAbsolutePath() + "/" + language
-					+ "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS;
-			BufferedReader bufferedReader = new BufferedReader(new FileReader(pathToTtsFile));
+			String ttsFilePath = getTtsFileFromDir(voiceProviderDir).getAbsolutePath();
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(ttsFilePath));
 			context.evaluateReader(jsScope, bufferedReader, "JS", 1, null);
 			bufferedReader.close();
 		} catch (Exception e) {
@@ -111,6 +111,12 @@ public abstract class CommandPlayer {
 			org.mozilla.javascript.Context.exit();
 		}
 		return jsScope;
+	}
+
+	private static File getTtsFileFromDir(@NonNull File voiceProviderDir) {
+		String ttsFileName = voiceProviderDir.getName()
+				.replace("-tts", "_" + IndexConstants.TTSVOICE_INDEX_EXT_JS);
+		return new File(voiceProviderDir, ttsFileName);
 	}
 
 	public abstract CommandBuilder newCommandBuilder();

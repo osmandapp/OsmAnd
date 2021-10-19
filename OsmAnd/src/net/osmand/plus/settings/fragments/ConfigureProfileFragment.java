@@ -439,7 +439,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			} else if (RESET_TO_DEFAULT.equals(prefId)) {
 				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, selectedMode);
 			} else if (EXPORT_PROFILE.equals(prefId)) {
-				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, false);
+				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, null, false);
 			} else if (DELETE_PROFILE.equals(prefId)) {
 				onDeleteProfileClick();
 			} else if (UI_CUSTOMIZATION.equals(prefId)) {

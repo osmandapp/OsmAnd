@@ -4027,4 +4027,10 @@
     <string name="poi_payment_calling_cards_no">Telefonkort accepteras inte</string>
     <string name="poi_manufacturer">Tillverkare</string>
     <string name="poi_callable">Uppringbar</string>
+    <string name="poi_groundskeeping">Trädgårdsbutik</string>
+    <string name="poi_country_store">Lanthandel</string>
+    <string name="poi_prep_school">Hjälpskola</string>
+    <string name="poi_ticket_validator">Biljettvaliderare</string>
+    <string name="poi_geoglyph">Geoglyf</string>
+    <string name="poi_satellite_dish">Parabol</string>
 </resources>

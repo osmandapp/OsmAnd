@@ -102,7 +102,7 @@ import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIn
  */
 public class AppInitializer implements IProgress {
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-android-4-0-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-android-4-1-released";
 
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);
@@ -435,6 +435,7 @@ public class AppInitializer implements IProgress {
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
 		app.oprAuthHelper = startupInit(new OprAuthHelper(app), OprAuthHelper.class);
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
+		app.launcherShortcutsHelper = startupInit(new LauncherShortcutsHelper(app), LauncherShortcutsHelper.class);
 
 		initOpeningHoursParser();
 	}

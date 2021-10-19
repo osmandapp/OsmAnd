@@ -15,6 +15,7 @@ public enum OsmAndFeature {
 	HOURLY_MAP_UPDATES(R.string.daily_map_updates, R.string.purchases_feature_desc_hourly_map_updates, R.drawable.ic_action_map_updates_colored_day, R.drawable.ic_action_map_updates_colored_night),
 	MONTHLY_MAP_UPDATES(R.string.monthly_map_updates, R.string.purchases_feature_desc_monthly_map_updates, R.drawable.ic_action_monthly_map_updates_colored_day, R.drawable.ic_action_monthly_map_updates_colored_night),
 	UNLIMITED_MAP_DOWNLOADS(R.string.unlimited_map_downloads, R.string.purchases_feature_desc_unlimited_map_download, R.drawable.ic_action_unlimited_downloads_colored_day, R.drawable.ic_action_unlimited_download_colored_night),
+	ANDROID_AUTO(R.string.android_auto, R.string.purchases_feature_desc_android_auto, R.drawable.ic_action_android_auto_colored, R.drawable.ic_action_android_auto_colored_night),
 	COMBINED_WIKI(R.string.wikipedia_and_wikivoyage_offline, R.string.purchases_feature_desc_combined_wiki, R.drawable.ic_action_wikipedia_download_colored_day, R.drawable.ic_action_wikipedia_download_colored_night),
 	WIKIPEDIA(R.string.offline_wikipeadia, R.string.purchases_feature_desc_wikipedia, R.drawable.ic_action_wikipedia_download_colored_day, R.drawable.ic_action_wikipedia_download_colored_night),
 	WIKIVOYAGE(R.string.offline_wikivoyage, R.string.purchases_feature_desc_wikivoyage, R.drawable.ic_action_backpack_colored_day, R.drawable.ic_action_backpack_colored_night),
@@ -65,45 +66,49 @@ public enum OsmAndFeature {
 	}
 
 	public static final List<OsmAndFeature> OSMAND_PRO_FEATURES = Arrays.asList(
-			OsmAndFeature.OSMAND_CLOUD,
-			OsmAndFeature.ADVANCED_WIDGETS,
-			OsmAndFeature.HOURLY_MAP_UPDATES,
-			OsmAndFeature.MONTHLY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
-			OsmAndFeature.COMBINED_WIKI,
-			OsmAndFeature.WIKIPEDIA,
-			OsmAndFeature.WIKIVOYAGE,
-			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL
+			OSMAND_CLOUD,
+			ADVANCED_WIDGETS,
+			HOURLY_MAP_UPDATES,
+			MONTHLY_MAP_UPDATES,
+			UNLIMITED_MAP_DOWNLOADS,
+			ANDROID_AUTO,
+			COMBINED_WIKI,
+			WIKIPEDIA,
+			WIKIVOYAGE,
+			TERRAIN,
+			NAUTICAL
 	);
 
 	public static final List<OsmAndFeature> OSMAND_PRO_PREVIEW_FEATURES = Arrays.asList(
-			OsmAndFeature.OSMAND_CLOUD,
-			OsmAndFeature.ADVANCED_WIDGETS,
-			OsmAndFeature.HOURLY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
-			OsmAndFeature.COMBINED_WIKI,
-			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL
+			OSMAND_CLOUD,
+			ADVANCED_WIDGETS,
+			HOURLY_MAP_UPDATES,
+			UNLIMITED_MAP_DOWNLOADS,
+			ANDROID_AUTO,
+			COMBINED_WIKI,
+			TERRAIN,
+			NAUTICAL
 	);
 
 	public static final List<OsmAndFeature> MAPS_PLUS_FEATURES = Arrays.asList(
-			OsmAndFeature.MONTHLY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
-			OsmAndFeature.COMBINED_WIKI,
-			OsmAndFeature.WIKIPEDIA,
-			OsmAndFeature.WIKIVOYAGE,
-			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL);
+			MONTHLY_MAP_UPDATES,
+			UNLIMITED_MAP_DOWNLOADS,
+			ANDROID_AUTO,
+			COMBINED_WIKI,
+			WIKIPEDIA,
+			WIKIVOYAGE,
+			TERRAIN,
+			NAUTICAL);
 
 	public static final List<OsmAndFeature> MAPS_PLUS_PREVIEW_FEATURES = Arrays.asList(
-			OsmAndFeature.OSMAND_CLOUD,
-			OsmAndFeature.ADVANCED_WIDGETS,
-			OsmAndFeature.HOURLY_MAP_UPDATES,
-			OsmAndFeature.MONTHLY_MAP_UPDATES,
-			OsmAndFeature.UNLIMITED_MAP_DOWNLOADS,
-			OsmAndFeature.COMBINED_WIKI,
-			OsmAndFeature.TERRAIN,
-			OsmAndFeature.NAUTICAL
+			OSMAND_CLOUD,
+			ADVANCED_WIDGETS,
+			HOURLY_MAP_UPDATES,
+			MONTHLY_MAP_UPDATES,
+			UNLIMITED_MAP_DOWNLOADS,
+			ANDROID_AUTO,
+			COMBINED_WIKI,
+			TERRAIN,
+			NAUTICAL
 	);
 }

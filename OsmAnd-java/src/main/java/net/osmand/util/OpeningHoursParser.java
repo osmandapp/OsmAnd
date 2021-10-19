@@ -2001,7 +2001,7 @@ public class OpeningHoursParser {
 				!presentTokens.contains(TokenType.TOKEN_DAY_MONTH)) {
 			Arrays.fill(basic.getDays(), true);
 			basic.hasDays = true;
-		} else if (presentTokens.contains(TokenType.TOKEN_DAY_WEEK)) {
+		} else if (presentTokens.contains(TokenType.TOKEN_DAY_WEEK) || presentTokens.contains(TokenType.TOKEN_HOLIDAY)) {
 			basic.hasDays = true;
 		}
 		rules.add(0, basic);
