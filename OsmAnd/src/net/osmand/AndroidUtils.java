@@ -68,6 +68,7 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
@@ -576,7 +577,10 @@ public class AndroidUtils {
 	}
 
 	public static void addStatusBarPadding21v(Context ctx, View view) {
-		if (Build.VERSION.SDK_INT >= 21) {
+		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
+		if (Build.VERSION.SDK_INT >= 21
+				&& (!OsmandPlugin.isDevelopment()
+				|| app.getSettings().TRANSPARENT_STATUS_BAR.get())) {
 			int paddingLeft = view.getPaddingLeft();
 			int paddingTop = view.getPaddingTop();
 			int paddingRight = view.getPaddingRight();

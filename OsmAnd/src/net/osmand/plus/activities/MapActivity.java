@@ -362,11 +362,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void exitFromFullScreen(View view) {
-		AndroidUtils.exitFromFullScreen(this, view);
+		if (!OsmandPlugin.isDevelopment() || settings.TRANSPARENT_STATUS_BAR.get()) {
+			AndroidUtils.exitFromFullScreen(this, view);
+		}
 	}
 
 	public void enterToFullScreen() {
-		AndroidUtils.enterToFullScreen(this, getLayout());
+		if (!OsmandPlugin.isDevelopment() || settings.TRANSPARENT_STATUS_BAR.get()) {
+			AndroidUtils.enterToFullScreen(this, getLayout());
+		}
 	}
 
 	@Override
@@ -1858,7 +1862,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		try {
 			FragmentManager manager = getSupportFragmentManager();
 			String fragmentName = pref.getFragment();
-			Fragment fragment =  manager.getFragmentFactory().instantiate(this.getClassLoader(), fragmentName);
+			Fragment fragment = manager.getFragmentFactory().instantiate(this.getClassLoader(), fragmentName);
 			if (caller instanceof BaseSettingsFragment) {
 				fragment.setArguments(((BaseSettingsFragment) caller).buildArguments());
 			}
@@ -1947,7 +1951,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			MapRouteInfoMenuFragment f = fragmentRef.get();
 			portrait = f.isPortrait();
 			if (!portrait) {
-				leftBottomPaddingPx =  f.getWidth();
+				leftBottomPaddingPx = f.getWidth();
 			} else {
 				leftBottomPaddingPx = f.getHeight();
 			}
@@ -2236,6 +2240,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void onOsmAndSettingsCustomized() {
+		restart();
+	}
+
+	public void restart() {
 		if (stopped) {
 			activityRestartNeeded = true;
 		} else {
