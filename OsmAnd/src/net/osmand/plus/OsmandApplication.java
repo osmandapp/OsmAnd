@@ -179,6 +179,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OnlineRoutingHelper onlineRoutingHelper;
 	BackupHelper backupHelper;
 	TravelRendererHelper travelRendererHelper;
+	LauncherShortcutsHelper launcherShortcutsHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -515,6 +516,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public InAppPurchaseHelper getInAppPurchaseHelper() {
 		return inAppPurchaseHelper;
+	}
+
+	public LauncherShortcutsHelper getLauncherShortcutsHelper() {
+		return launcherShortcutsHelper;
 	}
 
 	public CommandPlayer getPlayer() {

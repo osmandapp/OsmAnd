@@ -147,6 +147,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return specialPointType;
 	}
 
+	public boolean isHomeOrWork() {
+		return specialPointType == SpecialPointType.HOME || specialPointType == SpecialPointType.WORK;
+	}
+
 	public int getColor() {
 		return color;
 	}
