@@ -4373,5 +4373,12 @@
     <string name="search_title">Buscar: %1$s</string>
     <string name="icon_group_nautical">Náutico</string>
     <string name="shared_storage_warning_title">Cambios en las normas de acceso al almacenamiento</string>
-    <string name="purchases_feature_desc_android_auto">Mapas y navegación sin conexión de OsmAnd, en la pantalla de su vehículo. Se integra cómodamente con los controles de tu vehículo.</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd: Mapas y navegación sin conexión, se integra cómodamente en la pantalla y controles del vehículo.</string>
+    <string name="android_auto_map_placeholder_descr">Desconecta el dispositivo de Android Auto para ver el mapa en la aplicación.</string>
+    <string name="android_auto_map_placeholder_title">El mapa se muestra en la pantalla del vehículo.</string>
+    <string name="android_auto_purchase_request_title">Comprar «OsmAnd Pro» o «Maps+» para usar OsmAnd con Android Auto</string>
+    <string name="continue_on_phone">Continuar en el teléfono</string>
+    <string name="location_access_request_action">Dar acceso</string>
+    <string name="location_access_request_result">Aprobado: %1$s Rechazado: %2$s</string>
+    <string name="location_access_request_title">OsmAnd debe acceder a la ubicación para poder navegar</string>
 </resources>

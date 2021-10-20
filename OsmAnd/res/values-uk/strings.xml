@@ -4372,4 +4372,11 @@
 \n• Виправлені різні проблеми маршрутизації
 \n
 \n</string>
+    <string name="android_auto_purchase_request_title">Придбати OsmAnd Pro або Maps+ для використання OsmAnd з Android Auto</string>
+    <string name="continue_on_phone">Продовжити на телефоні</string>
+    <string name="location_access_request_title">OsmAnd потрібен доступ до місця розташування для навігації</string>
+    <string name="android_auto_map_placeholder_title">Мапа показана на екрані автомобіля.</string>
+    <string name="android_auto_map_placeholder_descr">Від\'єднайте пристрій від Android Auto, щоб переглянути мапу в застосунку.</string>
+    <string name="location_access_request_action">Надати доступ</string>
+    <string name="location_access_request_result">Затверджено: %1$s Відхилено: %2$s</string>
 </resources>

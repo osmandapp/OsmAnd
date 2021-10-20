@@ -4355,4 +4355,34 @@
     <string name="shared_app_storage_description">A memória partilhada deixou de estar disponível devido a mudanças nas regras de acesso ao armazenamento no Android.</string>
     <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
     <string name="internal_app_storage_description">Armazenamento interno, oculto ao utilizador e outras aplicações, de modo a que ninguém, a não ser o OsmAnd, pode ter acesso aos seus dados</string>
+    <string name="android_auto_map_placeholder_descr">Desconecte o seu aparelho do Android Auto para ver o mapa na app.</string>
+    <string name="android_auto_purchase_request_title">Compre OsmAnd Pro ou Maps+ para usar o OsmAnd com o Android Auto</string>
+    <string name="continue_on_phone">Continuar no telefone</string>
+    <string name="shared_string_articles">Artigos</string>
+    <string name="android_auto_map_placeholder_title">O mapa é apresentado no ecrã do veículo.</string>
+    <string name="location_access_request_title">OsmAnd precisa de acesso à localização para navegar</string>
+    <string name="location_access_request_action">Conceder acesso</string>
+    <string name="location_access_request_result">Aprovado: %1$s Rejeitado: %2$s</string>
+    <string name="included_categories">Categorias incluídas</string>
+    <string name="release_4_1">- Adicionado o suporte inicial para o Android Auto
+\n
+\n - Atualização da interface do utilizador para busca de coordenadas UTM
+\n
+\n - Favoritos: adicionada a capacidade de visualizar ícones usados recentemente
+\n
+\n - Planeamento de rotas: utilizará o perfil selecionado após o lançamento
+\n
+\n - Camada Mapilar fixa, a extensão está agora desativada por defeito
+\n
+\n - Adicionado ecrã para gerir todo o histórico na app
+\n
+\n - A orientação do mapa não é redefinida após reiniciar a app
+\n
+\n - Melhoria da renderização do marcador de altura SRTM
+\n
+\n - Corrigida a visualização arábica no mapa
+\n
+\n - Corrigidos diferentes problemas de roteamento
+\n
+\n</string>
 </resources>

@@ -4366,4 +4366,11 @@
 \n • 修復了不同的路徑規劃問題
 \n
 \n</string>
+    <string name="continue_on_phone">在手機上繼續</string>
+    <string name="location_access_request_title">OsmAnd 需要存取位置才能導航</string>
+    <string name="location_access_request_action">授予存取權限</string>
+    <string name="location_access_request_result">准許：%1$s 拒絕：%2$s</string>
+    <string name="android_auto_map_placeholder_title">地圖顯示在車輛螢幕上。</string>
+    <string name="android_auto_map_placeholder_descr">將您的裝置從 Android Auto 斷開連線以在應用程式中檢視地圖。</string>
+    <string name="android_auto_purchase_request_title">購買 OsmAnd Pro 或 Maps+ 以將 OsmAnd 與 Android Auto 搭配使用</string>
 </resources>

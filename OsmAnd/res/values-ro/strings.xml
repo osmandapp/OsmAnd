@@ -4379,4 +4379,11 @@
     <string name="purchases_feature_desc_android_auto">OsmAnd hărți și navigație offline pe ecranul vehiculului dumneavoastră. Integrați-vă convenabil cu comenzile vehiculului vostru.</string>
     <string name="rendering_attr_noNatureReserves_description">Ascundeți rezervațiile naturale, zonele protejate și parcurile naționale.</string>
     <string name="internal_app_storage_description">Stocare internă, ascunsă de utilizator și de alte aplicații, astfel încât nimeni, cu excepția OsmAnd, nu poate avea acces la datele voastre</string>
+    <string name="android_auto_map_placeholder_title">Harta este afișată pe ecranul vehiculului.</string>
+    <string name="location_access_request_action">Acordarea accesului</string>
+    <string name="android_auto_map_placeholder_descr">Deconectați dispozitivul de la Android Auto pentru a vizualiza harta în aplicație.</string>
+    <string name="android_auto_purchase_request_title">Achiziționați OsmAnd Pro sau Maps+ pentru a utiliza OsmAnd cu Android Auto</string>
+    <string name="location_access_request_result">Aprobat: %1$s Respins: %2$s</string>
+    <string name="continue_on_phone">Continuați la telefon</string>
+    <string name="location_access_request_title">OsmAnd are nevoie de acces la locație pentru a naviga</string>
 </resources>

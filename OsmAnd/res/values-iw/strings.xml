@@ -4301,4 +4301,11 @@
     <string name="internal_app_storage_description">אחסון פנימי, נסתר מהמשתמש ומיישומונים אחרים, כדי שלאף אחד למעט OsmAnd לא תהיה גישה לנתונים שלך</string>
     <string name="shared_storage_warning_title">שינוי בכללי הגישה לאחסון</string>
     <string name="shared_string_articles">ערכים</string>
+    <string name="android_auto_map_placeholder_title">המפה מוצגת על המסך במכונית.</string>
+    <string name="continue_on_phone">להמשיך בטלפון</string>
+    <string name="android_auto_purchase_request_title">יש לרכוש את OsmAnd Pro או את Maps+‎ כדי להשתמש ב־OsmAnd עם Android Auto</string>
+    <string name="location_access_request_title">ל־OsmAnd דרושה גישה למיקום לצורך ניווט</string>
+    <string name="location_access_request_action">הענקת גישה</string>
+    <string name="android_auto_map_placeholder_descr">נא לנתק את המכשיר שלך מ־Android Auto כדי לצפות במפה ביישומון.</string>
+    <string name="location_access_request_result">אושר: %1$s נדחה: %2$s</string>
 </resources>
