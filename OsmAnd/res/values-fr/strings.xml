@@ -4353,4 +4353,25 @@
     <string name="continue_on_phone">Continuer sur le téléphone</string>
     <string name="location_access_request_action">Accorder l\'accès</string>
     <string name="location_access_request_title">OsmAnd doit connaitre votre position pour vous guider</string>
+    <string name="shared_storage_warning_description">À partir de novembre 2021, OsmAnd 4.2 n\'aura plus accès au stockage partagé, car Android va modifier les règles d\'accès au stockage.
+\n
+\nVeuillez remplacer le stockage partagé par une autre stockage disponible, sans quoi l\'application ne pourra plus accéder à vos données comme les cartes hors ligne, les traces GPX ...</string>
+    <string name="markers_history_is_disabled_descr">Activez l\'historique pour avoir la liste des marques visitées.</string>
+    <string name="is_disabled">%1$s est désactivé</string>
+    <string name="shortcut_navigate_to">Naviguer vers…</string>
+    <string name="clear_all_history_warning">Êtes-vous certain de vouloir effacer tout l\'historique de l\'application \?
+\n
+\nLes historiques de recherche, de navigation et des marques seront effacés.</string>
+    <string name="history_preferences_descr">Vous pouvez désactiver l\'historique unitairement pour chaque type d\'historique.</string>
+    <string name="shortcut_navigate_to_home">Naviguer vers Domicile</string>
+    <string name="navigation_history">Historique de navigation</string>
+    <string name="search_history_is_disabled_descr">Vous pouvez activer l\'historique des recherches dans les Paramètres.</string>
+    <string name="clear_all_history">Effacer tout l\'historique</string>
+    <string name="history_actions_descr">Vous pouvez exporter l\'historique dans un fichier.</string>
+    <string name="map_markers_history">Historique des marques</string>
+    <string name="shortcut_start_recording">Démarrer l\'enregistrement</string>
+    <string name="shortcut_navigate_to_work">Naviguer vers Travail</string>
+    <string name="transparent_status_bar_descr">Afficher la carte sous la barre d\'état</string>
+    <string name="transparent_status_bar">Barre d\'état transparente</string>
+    <string name="history_is_disabled_descr">Activez l\'historique pour accéder rapidement aux derniers résultats de recherche.</string>
 </resources>
