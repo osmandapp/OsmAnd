@@ -4379,4 +4379,25 @@
     <string name="android_auto_map_placeholder_descr">Від\'єднайте пристрій від Android Auto, щоб переглянути мапу в застосунку.</string>
     <string name="location_access_request_action">Надати доступ</string>
     <string name="location_access_request_result">Затверджено: %1$s Відхилено: %2$s</string>
+    <string name="is_disabled">%1$s вимкнено</string>
+    <string name="clear_all_history">Очистити всю історію</string>
+    <string name="markers_history_is_disabled_descr">Увімкніть історію, щоб отримати список відвіданих позначок мапи.</string>
+    <string name="clear_all_history_warning">Ви впевнені, що хочете очистити всю історію в застосунку\?
+\n
+\nІсторія пошуку, навігації та позначки буде очищено.</string>
+    <string name="shortcut_navigate_to_home">Маршрут Додому</string>
+    <string name="shared_storage_warning_description">Починаючи з наступного оновлення OsmAnd, застосунок втратить доступ до Спільного сховища через зміну правил доступу до сховищ в Android.
+\n
+\nБудь ласка, змініть сховище зі спільного сховища на доступне сховище, якщо цього не буде зроблено, застосунок втратить доступ до ваших даних: включно з офлайн-мапами, треками GPX тощо.</string>
+    <string name="search_history_is_disabled_descr">Увімкнути історію пошуку можна в Налаштуваннях</string>
+    <string name="history_is_disabled_descr">Увімкніть історію, щоб отримати швидкий доступ до останніх використаних результатів.</string>
+    <string name="transparent_status_bar">Прозорий рядок стану</string>
+    <string name="history_actions_descr">Ви можете експортувати історію в файл.</string>
+    <string name="map_markers_history">Історія позначок мап</string>
+    <string name="navigation_history">Історія навігації</string>
+    <string name="history_preferences_descr">Ви можете вимкнути ведення журналу історії окремо для кожного типу історії.</string>
+    <string name="shortcut_start_recording">Почати запис</string>
+    <string name="shortcut_navigate_to">Маршрут до…</string>
+    <string name="shortcut_navigate_to_work">Маршрут до Роботи</string>
+    <string name="transparent_status_bar_descr">Показ мапи під рядком стану</string>
 </resources>
