@@ -32,6 +32,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -1498,8 +1499,19 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
 
-	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW = new BooleanPreference(this, "current_track_show",
-			false).makeGlobal();
+	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_IN_RECORDING_DIALOGS = new BooleanPreference(this, "current_track_show",
+			false) {
+		@Override
+		protected Boolean getDefaultValue() {
+			for (SelectedGpxFile selectedGpxFile : ctx.getSelectedGpxHelper().getSelectedGPXFiles()) {
+				if (!selectedGpxFile.isShowCurrentTrack()) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}.makeGlobal().makeShared();
+
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,
 			"current_track_coloring_type", ColoringType.TRACK_SOLID,

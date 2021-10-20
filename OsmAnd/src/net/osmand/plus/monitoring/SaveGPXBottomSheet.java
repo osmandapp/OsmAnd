@@ -8,9 +8,7 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -127,11 +125,10 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		});
 
-		boolean showTrack = app.getSelectedGpxHelper().updateCurrentTrackVisibility();
 		SwitchCompat showOnMapButton = mainView.findViewById(R.id.btn_show_on_map);
-		showOnMapButton.setChecked(showTrack);
+		showOnMapButton.setChecked(app.getSettings().CURRENT_TRACK_SHOW_IN_RECORDING_DIALOGS.get());
 		showOnMapButton.setOnCheckedChangeListener((buttonView, isChecked) ->
-				app.getSettings().CURRENT_TRACK_SHOW.set(isChecked));
+				app.getSettings().CURRENT_TRACK_SHOW_IN_RECORDING_DIALOGS.set(isChecked));
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(mainView)
@@ -178,7 +175,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		super.onDismiss(dialog);
 		FragmentActivity activity = getActivity();
 		if (file != null && activity != null) {
-			boolean showTrack = requiredMyApplication().getSettings().CURRENT_TRACK_SHOW.get();
+			boolean showTrack = requiredMyApplication().getSettings().CURRENT_TRACK_SHOW_IN_RECORDING_DIALOGS.get();
 			if (showTrack) {
 				showOnMap(file, !openTrack);
 			}

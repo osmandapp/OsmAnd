@@ -772,23 +772,6 @@ public class GpxSelectionHelper {
 		}
 	}
 
-	public boolean updateCurrentTrackVisibility() {
-		OsmandSettings settings = app.getSettings();
-		boolean shouldShow = false;
-		if (settings.CURRENT_TRACK_SHOW.isSet()) {
-			shouldShow = settings.CURRENT_TRACK_SHOW.get();
-		} else {
-			for (SelectedGpxFile gpx : selectedGPXFiles) {
-				if (!gpx.isShowCurrentTrack()) {
-					shouldShow = true;
-					break;
-				}
-			}
-		}
-		selectGpxFile(savingTrackHelper.getCurrentGpx(), shouldShow, false);
-		return shouldShow;
-	}
-
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog) {
 		return selectGpxFile(gpx, show, notShowNavigationDialog, true, true, true);
 	}
