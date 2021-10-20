@@ -49,7 +49,7 @@
     </string>
     <string name="shared_string_details">Details</string>
     <string name="shared_app_storage_description">Shared memory is now unavailable due to storage access changes in Android.</string>
-    <string name="internal_app_storage_description">Internal storage, hidden from all users and other apps, so only OsmAnd can access your data</string>
+    <string name="internal_app_storage_description">Internal storage, hidden from all users and other apps, so only OsmAnd can access your data.</string>
     <string name="shared_storage_warning_title">Changes to storage access rules</string>
     <string name="purchases_feature_desc_android_auto">OsmAnd offline maps and navigation on the vehicle screen. Integrates with vehicle controls.</string>
     <string name="icon_group_nautical">Nautical</string>
