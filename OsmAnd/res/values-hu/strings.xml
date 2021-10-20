@@ -4373,4 +4373,25 @@
     <string name="android_auto_map_placeholder_descr">A térképnek az alkalmazásban történő megjelenítéséhez válassza le a készüléket az Android Auto rendszerről.</string>
     <string name="location_access_request_action">Hozzáférés engedélyezése</string>
     <string name="location_access_request_result">Jóváhagyva: %1$s Elutasítva: %2$s</string>
+    <string name="clear_all_history_warning">Biztosan törli az alkalmazás összes előzményét\?
+\n
+\nA keresési, navigációs és térképjelölő-előelőzmények is törlődni fognak.</string>
+    <string name="clear_all_history">Az összes előzmény törlése</string>
+    <string name="history_actions_descr">Az előzményeket exportálhatja egy fájlba.</string>
+    <string name="map_markers_history">Térképjelölők előzményei</string>
+    <string name="navigation_history">Navigációs előzmények</string>
+    <string name="history_preferences_descr">Az előzmények naplózását külön-külön is letilthatja az egyes előzménytípusoknál.</string>
+    <string name="shortcut_start_recording">Felvétel indítása</string>
+    <string name="shortcut_navigate_to">Navigálás ide:</string>
+    <string name="transparent_status_bar_descr">Térkép megjelenítése az állapotsor alatt</string>
+    <string name="transparent_status_bar">Átlátszó állapotsor</string>
+    <string name="search_history_is_disabled_descr">A keresési előzményeket a Beállításokban engedélyezheti</string>
+    <string name="markers_history_is_disabled_descr">A meglátogatott térképjelölők listájának lekérdezéséhez engedélyezze az előzményeket.</string>
+    <string name="shared_storage_warning_description">2021 novemberétől az OsmAnd 4.2 elveszíti a hozzáférést a megosztott tárhelyhez, az Android megváltozott tárhely-hozzáférési szabályai miatt.
+\n
+\nKérjük, módosítsa a tárhelyet Megosztott tárhelyről elérhető tárhelyre. Ha ez nem történik meg, az alkalmazás elveszíti a hozzáférést az adataihoz, köztük az offline térképekhez, a GPX-nyomvonalakhoz és minden máshoz.</string>
+    <string name="shortcut_navigate_to_work">Navigálás a munkahelyemre</string>
+    <string name="history_is_disabled_descr">A legutóbb felhasznált keresési találatok eléréséhez engedélyezze az előzményeket.</string>
+    <string name="is_disabled">%1$s le van tiltva</string>
+    <string name="shortcut_navigate_to_home">Navigálás haza</string>
 </resources>
