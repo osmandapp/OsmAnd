@@ -4364,4 +4364,43 @@
     <string name="location_access_request_result">Godkendt: %1$s Afvist: %2$s</string>
     <string name="location_access_request_title">OsmAnd skal have adgang til placering for at navigere</string>
     <string name="location_access_request_action">Giv adgang</string>
+    <string name="clear_all_history_warning">Er du sikker på, at du vil slette al historik i appen\?
+\n
+\nHistorikken for søgning, navigation og markeringer slettes.</string>
+    <string name="clear_all_history">Ryd al historik</string>
+    <string name="history_actions_descr">Du kan eksportere historik til en fil.</string>
+    <string name="navigation_history">Navigationshistorik</string>
+    <string name="history_preferences_descr">Du kan deaktivere historiklogning individuelt for hver historiktype.</string>
+    <string name="shortcut_start_recording">Start optagelse</string>
+    <string name="shortcut_navigate_to">Naviger til…</string>
+    <string name="transparent_status_bar_descr">Vis kort under statuslinjen</string>
+    <string name="transparent_status_bar">Gennemsigtig statuslinje</string>
+    <string name="search_history_is_disabled_descr">Du kan aktivere søgehistorik i Indstillinger</string>
+    <string name="shortcut_navigate_to_work">Naviger til arbejde</string>
+    <string name="history_is_disabled_descr">Aktiver historik for at få hurtigere adgang til de senest anvendte resultater.</string>
+    <string name="shortcut_navigate_to_home">Naviger til hjem</string>
+    <string name="markers_history_is_disabled_descr">Aktiver historik for at få en liste over besøgte kortmarkører.</string>
+    <string name="is_disabled">%1$s er deaktiveret</string>
+    <string name="map_markers_history">Kortmarkørhistorik</string>
+    <string name="release_4_1">- Tilføjet indledende understøttelse af Android Auto
+\n
+\n - Opdatering af brugergrænseflade til søgning efter UTM-koordinater
+\n
+\n - Favoritter: tilføjede mulighed for at få vist senest anvendte ikoner
+\n
+\n - Ruteplanlægning: vil bruge den valgte profil efter start
+\n
+\n - Rettet Mapillary-lag, plugin\'et er nu deaktiveret som standard
+\n
+\n - Tilføjet skærm til administration af al historik i appen
+\n
+\n - Kortets orientering nulstilles ikke efter genstart af appen
+\n
+\n - Forbedret gengivelse af SRTM-højdemarkører
+\n
+\n - Rettet arabisk visning på kortet
+\n
+\n - Rettet forskellige problemer med ruteføring
+\n
+\n</string>
 </resources>
