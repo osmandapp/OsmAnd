@@ -4381,4 +4381,30 @@
 \n"</string>
     <string name="rendering_attr_noNatureReserves_name">Looduskaitseala</string>
     <string name="rendering_attr_noNatureReserves_description">Peida looduskaitsealad, kaitsealad ja rahvuspargid.</string>
+    <string name="is_disabled">%1$s on välja lülitatud</string>
+    <string name="history_is_disabled_descr">Selleks, et saaksid lihtsamini kasutada varasemaid tulemusi, võta kasutusele ajaloo salvestamine.</string>
+    <string name="transparent_status_bar_descr">Näita olekuriba all kaarti</string>
+    <string name="map_markers_history">Kaardimarkerite ajalugu</string>
+    <string name="history_actions_descr">Sa saad ajaloo eksportida faili.</string>
+    <string name="location_access_request_result">Kinnitatud: %1$s Tagasi lükatud: %2$s</string>
+    <string name="location_access_request_action">Luba juurdepääs</string>
+    <string name="location_access_request_title">OsmAnd vajab navigeerimiseks juurdepääsu asukohale</string>
+    <string name="continue_on_phone">Jätka telefonis</string>
+    <string name="android_auto_purchase_request_title">Kui soovid kasutada OsmAnd\'i Android Auto\'s, siis palun osta OsmAnd Pro või Maps+</string>
+    <string name="android_auto_map_placeholder_descr">Vaatamaks kaarte rakenduses, katkesta Android Auto ühendus.</string>
+    <string name="android_auto_map_placeholder_title">Kaarti kuvame sõiduki ekraanil.</string>
+    <string name="internal_app_storage_description">Sisemine salvestusruum, kasutaja ja teiste rakenduste eest peidetud, ainult OsmAnd juurdepääsetav</string>
+    <string name="transparent_status_bar">Läbipaistev olekuriba</string>
+    <string name="shortcut_navigate_to_home">Näita teed koju</string>
+    <string name="shortcut_navigate_to_work">Näita teed töökohta</string>
+    <string name="shortcut_navigate_to">Näita teed…</string>
+    <string name="shortcut_start_recording">Alusta salvestamist</string>
+    <string name="history_preferences_descr">Ajaloo logimist saad sa iga ajalootüübi puhul eraldi keelata.</string>
+    <string name="navigation_history">Navigeerimise ajalugu</string>
+    <string name="clear_all_history">Kustuta kogu ajalugu</string>
+    <string name="clear_all_history_warning">Kas sa oled kindel, et soovid kogu rakenduse ajaloo kustutada\?
+\n
+\nSellega eemaldame otsingute, teekonna juhatamise ja markerite ajaloo.</string>
+    <string name="markers_history_is_disabled_descr">Selleks, et saaksid lihtsamini leida külastatud kaardimarkereid, võta kasutusele ajaloo salvestamine.</string>
+    <string name="search_history_is_disabled_descr">Otsinguajaloo salvestamise saad kasutusele võtta seadistustes</string>
 </resources>
