@@ -856,7 +856,7 @@
     <string name="route_descr_select_destination">Təyinat nöqtəsi seçin</string>
     <string name="routing_attr_avoid_toll_description">Pullu yollardan yayın</string>
     <string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan yayın</string>
-    <string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan yayın.</string>
+    <string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan yayınır</string>
     <string name="routing_attr_avoid_ferries_name">Bərələrdən yayın</string>
     <string name="routing_attr_avoid_ferries_description">Bərələrdən yayın</string>
     <string name="routing_attr_avoid_motorway_name">Avtomagistrallardan yayın</string>
@@ -1009,7 +1009,7 @@
     <string name="direction_style_sidewise">Yan-yana (8 sektor)</string>
     <string name="direction_style_clockwise">Saat istiqamətində (12 sektor)</string>
     <string name="settings_direction_style">İstiqamət stili</string>
-    <string name="settings_direction_style_descr">Hərəkət zamanı nisbi istiqamətləri ifadə etmək üçün stil seçin.</string>
+    <string name="settings_direction_style_descr">Hərəkət zamanı nisbi istiqamətləri ifadə etmək üçün stil seçin</string>
     <string name="accessibility_preferences_descr">Xüsusi imkanlarla əlaqəli seçimlər.</string>
     <string name="rendering_out_of_memory">Seçilən sahəni göstərmək üçün kifayət qədər proses yaddaşı yoxdur</string>
     <string name="free_version_message">%1$s xəritə endirə və ya yeniləyə bilərsiniz.</string>
@@ -1087,7 +1087,7 @@
     <string name="error_calculating_route">Marşrut hesablana bilmədi.</string>
     <string name="error_calculating_route_occured">Marşrut hesablana bilmədi.</string>
     <string name="empty_route_calculated">Hesablanan marşrut boşdur.</string>
-    <string name="arrived_at_destination">Təyinat nöqtənizə gəlib çatdınız</string>
+    <string name="arrived_at_destination">Gəlib çatdınız.</string>
     <string name="invalid_locations">Yanlış koordinatlar</string>
     <string name="use_online_routing_descr">Marşrutu hesablamaq üçün internet istifadə et.</string>
     <string name="use_online_routing">Onlayn naviqasiya istifadə et</string>
@@ -1333,7 +1333,7 @@
     <string name="routing_attr_avoid_stairs_name">Pilləkənlərdən yayın</string>
     <string name="routing_attr_avoid_stairs_description">Pilləkənlərdən yayın</string>
     <string name="routing_attr_avoid_borders_name">Sərhəd keçidlərindən yayın</string>
-    <string name="routing_attr_avoid_borders_description">Başqa ölkə ilə sərhəd kəsişmələrindən yayın.</string>
+    <string name="routing_attr_avoid_borders_description">Milli sərhədləri keçməkdən yayınır</string>
     <string name="routing_attr_weight_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin çəkisini təyin edin.</string>
     <string name="routing_attr_height_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin hündürlüyünü təyin edin.</string>
     <string name="calculate_osmand_route_gpx">OsmAnd oflayn marşrut hesablanması</string>
@@ -1474,7 +1474,8 @@
     <string name="local_recordings_delete_all_confirm">%1$d qeyd silinsin\?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d dəyişiklik OSM-a yüklənsin\?</string>
     <string name="osm_live_subscription">OsmAnd Live abunəliyi</string>
-    <string name="osm_live_thanks">OsmAnd-ı dəstəklədiyiniz üçün təşəkkür edirik. Bütün yeni xüsusiyyətləri aktivləşdirmək üçün OsmAnd-ı yenidən başladın.</string>
+    <string name="osm_live_thanks">OsmAnd-ı dəstəklədiyiniz üçün təşəkkür edirik.
+\nBütün yeni xüsusiyyətləri aktivləşdirmək üçün OsmAnd-ı yenidən başladın.</string>
     <string name="osm_live_ask_for_purchase">Zəhmət olmasa əvvəlcə OsmAnd Live abunəliyini alın</string>
     <string name="storage_directory_shared">Paylaşılan yaddaş</string>
     <string name="donations">İanələr</string>
@@ -1498,10 +1499,10 @@
     <string name="wrong_user_name">Yanlış istifadəçi adı</string>
     <string name="shared_string_to">Bu tarixədək:</string>
     <string name="mapillary_menu_date_from">Bu tarixdən:</string>
-    <string name="mapillary_menu_descr_dates">Müəyyən dövrdə əlavə edilmiş şəkillərə baxın.</string>
+    <string name="mapillary_menu_descr_dates">Yalnız əlavə edilmiş şəkillərə bax</string>
     <string name="mapillary_menu_title_dates">Tarix</string>
     <string name="mapillary_menu_edit_text_hint">İstifadəçi adını yazın</string>
-    <string name="mapillary_menu_descr_username">Bir istifadəçinin əlavə etdiyi şəkillərə baxın.</string>
+    <string name="mapillary_menu_descr_username">Yalnız bu şəxsin əlavə etdiyi şəkillərə bax:</string>
     <string name="mapillary_menu_title_username">İstifadəçi adı</string>
     <string name="no_address_found">Ünvan müəyyən deyil</string>
     <string name="context_menu_item_open_note">OSM qeydini aç</string>
@@ -1751,7 +1752,7 @@
     <string name="init_native_library">Yerli kitabxana başladılır…</string>
     <string name="pref_overlay">Örtük / altlıq</string>
     <string name="file_can_not_be_renamed">Fayl yenidən adlandırıla bilməz.</string>
-    <string name="poi_query_by_name_matches_categories">Sorguya uyğun bir neçə POI kateqoriyası tapıldı:</string>
+    <string name="poi_query_by_name_matches_categories">Bir neçə əlaqəli POI kateqoriyası tapıldı.</string>
     <string name="data_to_search_poi_not_available">POI axtarmaq üçün yerli məlumatlar yoxdur.</string>
     <string name="update_poi_file_not_found">POI dəyişikliklərini saxlamaq üçün yerli fayl tapılmadı və yaradıla bilmədi.</string>
     <string name="map_version_changed_info">Yeni xəritə fayllarını istifadə edə bilmək üçün proqramın yeni versiyasını endirin.</string>
@@ -2218,4 +2219,8 @@
 \nMəlumatların nüsxəsini çıxarmaq və ya bərpa etmək üçün yenidən daxil olmalısınız.</string>
     <string name="logout_from_osmand_cloud">OsmAnd Cloud-dan çıx</string>
     <string name="duration_moment_ago">indicə</string>
+    <string name="history_actions_descr">Tarixçəni bir fayla ixrac edə bilərsiniz.</string>
+    <string name="clear_all_history">Bütün tarixi təmizlə</string>
+    <string name="search_history_is_disabled_descr">Axtarış tarixçəsini parametrlərdən aktiv edə bilərsiniz</string>
+    <string name="history_is_disabled_descr">Son istifadə olunan nəticələrə daha sürətli daxil olmaq üçün tarixçəni aktiv edin.</string>
 </resources>
