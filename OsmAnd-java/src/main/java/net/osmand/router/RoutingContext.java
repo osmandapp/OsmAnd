@@ -117,7 +117,6 @@ public class RoutingContext {
 					RouteSegment s = rs;
 					while (s != null) {
 						s.parentRoute = null;
-						s.parentSegmentEnd = 0;
 						s.distanceFromStart = 0;
 						s.distanceToEnd = 0;
 						s = s.next;
@@ -676,6 +675,10 @@ public class RoutingContext {
 	}
 	
 	public void unloadUnusedTiles(long memoryLimit) {
+		// TODO DELETE this check
+		if(true) {
+			return;
+		}
 		float desirableSize = memoryLimit * 0.7f;
 		List<RoutingSubregionTile> list = new ArrayList<RoutingSubregionTile>(subregionTiles.size() / 2);
 		int loaded = 0;
@@ -786,7 +789,7 @@ public class RoutingContext {
 							excludeDuplications.put(ro.id, ro);
 							toFillIn.add(ro);
 						}
-						rs = rs.next;
+						rs = rs.nextLoaded;
 					}
 				}
 			} else if(searchResult != null) {
@@ -814,11 +817,13 @@ public class RoutingContext {
 					if (!isExcluded(ro.id, subregions, subregionIndex)
 							&& (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())) {
 						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
-						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
-						s.next = original;
-						original = s;
+//						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
+//						s.next = original;
+//						original = s;
+						segment.next = original;
+						original = segment;
 					}
-					segment = segment.next;
+					segment = segment.nextLoaded;
 				}
 			} else {
 				throw new UnsupportedOperationException("Not clear how it could be used with native");
@@ -878,10 +883,10 @@ public class RoutingContext {
 					routes.put(l, segment);
 				} else {
 					RouteSegment orig = routes.get(l);
-					while (orig.next != null) {
-						orig = orig.next;
+					while (orig.nextLoaded != null) {
+						orig = orig.nextLoaded;
 					}
-					orig.next = segment;
+					orig.nextLoaded = segment;
 				}
 			}
 		}

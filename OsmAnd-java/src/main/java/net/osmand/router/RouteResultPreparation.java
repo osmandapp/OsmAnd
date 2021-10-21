@@ -14,6 +14,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -441,12 +442,20 @@ public class RouteResultPreparation {
 			// println("Routing calculated time distance " + finalSegment.distanceFromStart);
 			// Get results from opposite direction roads
 			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment.parentRoute : finalSegment.opposite;
+			Set<String> unique = new TreeSet<String>();
 			while (segment != null) {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentEnd(), segment.getSegmentStart());
 				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
 				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
+				// TODO delete
+				System.out.println(segment);
+				if(!unique.add(segment.toString())) {
+					System.out.println("???");
+					break;	
+				}
 				segment = segment.getParentRoute();
 				addRouteSegmentToResult(ctx, result, res, false);
+				
 			}
 			// reverse it just to attach good direction roads
 			Collections.reverse(result);
