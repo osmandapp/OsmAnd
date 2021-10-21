@@ -66,8 +66,10 @@
 
 	<PreferenceCategory
 		android:key="plugin_settings"
-		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/plugins_settings" />
+		android:layout="@layout/preference_plugin_settings"
+		android:title="@string/plugins_settings"
+		android:summary="@string/no_plugins_enabled"
+		android:icon="@drawable/ic_action_info_dark" />
 
 	<Preference
 		android:layout="@layout/list_item_divider"

@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="no_plugins_enabled">You have no plugins enabled. You can find list of all available plugins in Menu – Plugins.</string>
     <string name="shared_storage_warning_description">Starting November 2021 OsmAnd 4.2 will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared storage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
     <string name="search_history_is_disabled_descr">You can enable search history in Settings</string>
     <string name="markers_history_is_disabled_descr">Enable history to get list of visited map markers.</string>
