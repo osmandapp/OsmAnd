@@ -4385,4 +4385,25 @@
 \n - Corrigidos diferentes problemas de roteamento
 \n
 \n</string>
+    <string name="is_disabled">%1$s está desativado</string>
+    <string name="shared_storage_warning_description">A partir de novembro de 2021 o OsmAnd 4.2 vai perder o acesso ao armazenamento partilhado, devido às regras de acesso ao armazenamento alteradas pelo Android.
+\n
+\nPor favor, altere o armazenamento de \"Armazenamento partilhado\" para o armazenamento disponível, se isso não for feito a aplicação perderá o acesso aos seus dados: incluindo mapas offline, trilhos GPX e todo o resto.</string>
+    <string name="shortcut_navigate_to">Navegar para…</string>
+    <string name="markers_history_is_disabled_descr">Ative o histórico para obter uma lista de marcadores de mapa visitados.</string>
+    <string name="clear_all_history_warning">Tem a certeza que quer limpar todo o histórico da aplicação\?
+\n
+\nOs históricos de busca, navegação e marcadores serão apagados.</string>
+    <string name="clear_all_history">Limpar todo o histórico</string>
+    <string name="search_history_is_disabled_descr">Pode ativar o histórico de pesquisa em Configurações</string>
+    <string name="history_is_disabled_descr">Ative o histórico para obter acesso mais rápido aos últimos resultados usados.</string>
+    <string name="map_markers_history">Histórico de marcadores de mapa</string>
+    <string name="shortcut_start_recording">Começar a gravar</string>
+    <string name="shortcut_navigate_to_home">Navegar para casa</string>
+    <string name="history_actions_descr">Pode exportar o histórico para um ficheiro.</string>
+    <string name="navigation_history">Histórico de navegação</string>
+    <string name="history_preferences_descr">Pode desativar o registo de histórico individualmente para cada tipo de histórico.</string>
+    <string name="shortcut_navigate_to_work">Navegar para o trabalho</string>
+    <string name="transparent_status_bar_descr">Mostrar o mapa por baixo da barra de estado</string>
+    <string name="transparent_status_bar">Barra de estado transparente</string>
 </resources>

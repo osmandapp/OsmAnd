@@ -4308,4 +4308,24 @@
     <string name="location_access_request_action">הענקת גישה</string>
     <string name="android_auto_map_placeholder_descr">נא לנתק את המכשיר שלך מ־Android Auto כדי לצפות במפה ביישומון.</string>
     <string name="location_access_request_result">אושר: %1$s נדחה: %2$s</string>
+    <string name="shortcut_navigate_to_work">ניווט לעבודה</string>
+    <string name="clear_all_history">פינוי כל ההיסטוריה</string>
+    <string name="map_markers_history">היסטוריית סמני המפה</string>
+    <string name="shortcut_navigate_to">ניווט אל…</string>
+    <string name="shortcut_navigate_to_home">ניווט הביתה</string>
+    <string name="history_actions_descr">אפשר לייצא היסטוריה לקובץ.</string>
+    <string name="navigation_history">היסטוריית ניווט</string>
+    <string name="history_preferences_descr">אפשר להשבית את תיעוד ההיסטוריה באופן פרטני לכל סוג של היסטוריה.</string>
+    <string name="shortcut_start_recording">התחלת הקלטה</string>
+    <string name="routeInfo_surface_description">אספקת מידע נוסף על המשטח הפיזי של כבישים/דרכים.</string>
+    <string name="exit_pan_mode_descr">יש ללחוץ על בחירה כדי לצאת ממצב הסריקה</string>
+    <string name="purchases_feature_desc_android_auto">המפות הבלתי מקוונות של OsmAnd והניווט ישירות על מסך המכונית שלך. עם שילוב נוח בפקדי המכונית.</string>
+    <string name="clear_all_history_warning">לפנות את כל ההיסטוריה ביישומון\?
+\n
+\nהחיפוש, הניווט והיסטוריית הסמנים יימחקו.</string>
+    <string name="icon_group_nautical">ימי</string>
+    <string name="transparent_status_bar_descr">הצגת מפה מתחת לסרגל המצב</string>
+    <string name="transparent_status_bar">סרגל מצב שקוף</string>
+    <string name="search_history_is_disabled_descr">אפשר להפעיל היסטוריית חיפוש בהגדרות</string>
+    <string name="markers_history_is_disabled_descr">הפעלת היסטוריה תאפשר לך לקבל רשימת סמני מפה שביקרת בהם.</string>
 </resources>

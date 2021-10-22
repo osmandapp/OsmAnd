@@ -4368,4 +4368,8 @@
 \n • Opravené rôzne problémy výpočtu trasy
 \n
 \n</string>
+    <string name="search_history_is_disabled_descr">Zapnúť históriu vyhľadávania môžete v Nastaveniach</string>
+    <string name="shared_storage_warning_description">Od novembra 2021 OsmAnd 4.2 stratí prístup k zdieľanému úložisku, kvôli zmenám prístupových pravidiel v systéme Android.
+\n
+\nProsím zmente úložisko zo zdieľaného na iné dostupné úložisko. Ak to nebude vykonané, aplikácia stratí prístup k vašim údajom: mapám, GPX stopám a všetkému ostatnému.</string>
 </resources>

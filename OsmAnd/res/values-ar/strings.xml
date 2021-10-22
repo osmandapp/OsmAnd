@@ -4419,9 +4419,7 @@
     <string name="shared_app_storage_description">لم تعد الذاكرة المشتركة متاحة بسبب التغييرات في قواعد الوصول إلى التخزين في الجهاز Android.</string>
     <string name="internal_app_storage_description">التخزين الداخلي ، مخفي عن المستخدم والتطبيقات الأخرى ، لذلك لا أحد يمكنه الوصول إلى بياناتك باستثناء OsmAnd</string>
     <string name="rendering_attr_noNatureReserves_name">محمية طبيعية</string>
-    <string name="release_4_1">• احتياط سحابي
-\n
-\n • تمت إضافة الدعم الأولي لنظام Android Auto
+    <string name="release_4_1">• تمت إضافة الدعم الأولي لنظام Android Auto
 \n
 \n • تحديث واجهة المستخدم ل تنسيق البحث UTM
 \n
@@ -4444,4 +4442,32 @@
 \n</string>
     <string name="shared_storage_warning_title">تغييرات في قواعد الوصول إلى التخزين</string>
     <string name="purchases_feature_desc_android_auto">خرائط OsmAnd غير المتصلة بالإنترنت والملاحة على شاشة سيارتك. تتكامل بسهولة مع أدوات التحكم في سيارتك.</string>
+    <string name="search_history_is_disabled_descr">يمكنك تفعيل سجل البحث في الإعدادات</string>
+    <string name="shared_storage_warning_description">ابتداء من نوفمبر 2021 سوف يفقد OsmAnd 4.2 الوصول إلى التخزين المشترك، بسبب تغيير قواعد الوصول إلى التخزين في نظام Android.
+\n
+\nيرجى تغيير التخزين من التخزين المشترك إلى التخزين المتاح، إذا لم يتم ذلك، سيفقد التطبيق الوصول إلى بياناتك: بما في ذلك الخرائط غير المتصلة بالإنترنت ومسارات GPX وكل شيء آخر.</string>
+    <string name="markers_history_is_disabled_descr">تفعيل السجل للحصول على قائمة بعلامات الخريطة التي تمت زيارتها.</string>
+    <string name="shortcut_navigate_to">التنقل إلى…</string>
+    <string name="history_is_disabled_descr">تفعيل السجل للحصول على وصول أسرع إلى آخر النتائج المستخدمة.</string>
+    <string name="is_disabled">%1$s معطل</string>
+    <string name="clear_all_history">مسح كل السجل</string>
+    <string name="clear_all_history_warning">هل تريد بالتأكيد مسح كل السجل في التطبيق؟
+\n
+\nسيتم مسح البحث والملاحة والعلامات.</string>
+    <string name="history_actions_descr">يمكنك تصدير السجل إلى ملف.</string>
+    <string name="history_preferences_descr">يمكنك تعطيل السجل بشكل فردي لكل نوع سجل.</string>
+    <string name="map_markers_history">سجل علامات الخريطة</string>
+    <string name="shortcut_navigate_to_work">انتقل إلى العمل</string>
+    <string name="navigation_history">سجل التنقل</string>
+    <string name="shortcut_start_recording">بدء التسجيل</string>
+    <string name="transparent_status_bar">شريط معلومات شفاف</string>
+    <string name="transparent_status_bar_descr">اعرض الخريطة تحت شريط المعلومات</string>
+    <string name="shortcut_navigate_to_home">انتقل إلى البيت</string>
+    <string name="android_auto_map_placeholder_title">يتم عرض الخريطة على شاشة السيارة.</string>
+    <string name="android_auto_map_placeholder_descr">افصل جهازك عن Android Auto لعرض الخريطة في التطبيق.</string>
+    <string name="android_auto_purchase_request_title">قم بشراء OsmAnd Pro أو +Maps لاستخدام التطبيق مع Android Auto</string>
+    <string name="continue_on_phone">المتابعة على الهاتف</string>
+    <string name="location_access_request_title">OsmAnd يحتاج إلى الوصول إلى خاصية الموقع من أجل التنقل</string>
+    <string name="location_access_request_action">منح حق الوصول</string>
+    <string name="location_access_request_result">مصادق عليه: %1$s مرفوض: %2$s</string>
 </resources>

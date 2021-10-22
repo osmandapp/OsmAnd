@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="driving_region_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">Видимые</string>
+    <string name="shared_string_visible">Видно</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -792,7 +792,7 @@
     <string name="fav_points_not_exist">Избранные точки отсутствуют</string>
     <string name="update_existing">Заменить</string>
     <string name="only_show">Только показать</string>
-    <string name="follow">Запуск сопровождения</string>
+    <string name="follow">Запуск навигации</string>
     <string name="recalculate_route_to_your_location">Вид транспорта:</string>
     <string name="mark_final_location_first">Сначала задайте пункт назначения</string>
     <string name="get_directions">Маршрут</string>
@@ -4386,4 +4386,25 @@
     <string name="location_access_request_title">OsmAnd требуется доступ к местоположению для навигации</string>
     <string name="location_access_request_action">Предоставление доступа</string>
     <string name="location_access_request_result">Одобрено: %1$s Отклонено: %2$s</string>
+    <string name="markers_history_is_disabled_descr">Включите историю для получения списка посещённых маркеров карты.</string>
+    <string name="history_is_disabled_descr">Включите историю для быстрого доступа к последним использованным результатам.</string>
+    <string name="is_disabled">%1$s отключена</string>
+    <string name="clear_all_history_warning">Очистить всю историю в приложении\?
+\n
+\nИстория поиска, навигации и маркеров будет очищена.</string>
+    <string name="clear_all_history">Очистить всю историю</string>
+    <string name="search_history_is_disabled_descr">Включить историю поиска можно в настройках</string>
+    <string name="transparent_status_bar">Прозрачная строка состояния</string>
+    <string name="shortcut_navigate_to_home">Следовать домой</string>
+    <string name="shortcut_navigate_to">Следовать до…</string>
+    <string name="shortcut_navigate_to_work">Следовать на работу</string>
+    <string name="transparent_status_bar_descr">Показать карту под строкой состояния</string>
+    <string name="shared_storage_warning_description">Начиная с ноября 2021 года OsmAnd 4.2 потеряет доступ к общему хранилищу в связи с изменением правил доступа в Android.
+\n
+\nИзмените хранилище с общего на доступное. Если этого не сделать, приложение потеряет доступ к вашим данным: офлайн картам, GPX трекам и всему остальному.</string>
+    <string name="navigation_history">История навигации</string>
+    <string name="history_preferences_descr">Вы можете отключить ведение журнала индивидуально для каждого типа истории.</string>
+    <string name="history_actions_descr">Вы можете экспортировать историю в файл.</string>
+    <string name="map_markers_history">История маркеров карты</string>
+    <string name="shortcut_start_recording">Начать запись</string>
 </resources>

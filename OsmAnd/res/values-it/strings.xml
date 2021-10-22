@@ -4361,4 +4361,29 @@
 \n • Corretti diversi errori di calcolo del percorso
 \n
 \n</string>
+    <string name="clear_all_history_warning">Sei sicuro di voler cancellare la completa cronologia dell\'app\?
+\n
+\nLa ricerca, la cronologia di navigazione e i marcatori saranno cancellati.</string>
+    <string name="clear_all_history">Cancella tutta la cronologia</string>
+    <string name="history_actions_descr">Puoi esportare la cronologia in un file.</string>
+    <string name="navigation_history">Cronologia di navigazione</string>
+    <string name="shortcut_start_recording">Avvia registrazione</string>
+    <string name="shortcut_navigate_to">Naviga verso…</string>
+    <string name="shortcut_navigate_to_home">Naviga fino a casa</string>
+    <string name="android_auto_map_placeholder_descr">Scollega il tuo dispositivo da Android Auto per visualizzare la mappa nell\'app.</string>
+    <string name="android_auto_purchase_request_title">Acquista OsmAnd Pro o Maps+ per utilizzare OsmAnd con Android Auto</string>
+    <string name="continue_on_phone">Prosegui sul telefono</string>
+    <string name="location_access_request_title">Per navigare OsmAnd ha bisogno di accedere alla localizzazione</string>
+    <string name="location_access_request_action">Dai il permesso</string>
+    <string name="transparent_status_bar">Barra di stato trasparente</string>
+    <string name="map_markers_history">Cronologia dei marcatori della mappa</string>
+    <string name="search_history_is_disabled_descr">Puoi abilitare la ricerca nella cronologia nelle Impostazioni</string>
+    <string name="markers_history_is_disabled_descr">Abilita la cronologia per ottenere la lista dei marcatori della mappa visitati.</string>
+    <string name="history_is_disabled_descr">Abilita la cronologia per ottenere un accesso veloce agli ultimi risultati.</string>
+    <string name="is_disabled">%1$s è disabilitato</string>
+    <string name="location_access_request_result">Approvati: %1$s Rifiutati: %2$s</string>
+    <string name="transparent_status_bar_descr">Mostra la mappa sotto la barra di stato</string>
+    <string name="history_preferences_descr">Puoi disabilitare la registrazione della cronologia singolarmente per ogni tipo di cronologia.</string>
+    <string name="shortcut_navigate_to_work">Naviga fino al lavoro</string>
+    <string name="android_auto_map_placeholder_title">La mappa è visualizzata nello schermo del veicolo</string>
 </resources>
