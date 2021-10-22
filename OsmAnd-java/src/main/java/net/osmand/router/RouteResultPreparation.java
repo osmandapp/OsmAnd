@@ -1729,10 +1729,6 @@ public class RouteResultPreparation {
 		}
 		return infer;
 	}
-
-	private Integer[] getPossibleTurnsFromActiveLanes(int[] oLanes, boolean onlyPrimary) {
-		return getPossibleTurns(oLanes, onlyPrimary, true);
-	}
 	
 	private Integer[] getPossibleTurns(int[] oLanes, boolean onlyPrimary, boolean uniqueFromActive) {
 		Set<Integer> possibleTurns = new LinkedHashSet<>();
