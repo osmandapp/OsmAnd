@@ -1056,7 +1056,7 @@ public class RouteResultPreparation {
 		}
 		if (singleTurn == 0) {
 			singleTurn = currentTurn.getValue();
-			if(singleTurn == TurnType.KL || singleTurn == TurnType.KR) {
+			if (singleTurn == TurnType.KL || singleTurn == TurnType.KR) {
 				return;
 			}
 		}
@@ -1345,7 +1345,7 @@ public class RouteResultPreparation {
 			if (tp != 0) {
 				// add extra lanes with same turn
 				for(int i = 0; i < rawLanes.length; i++) {
-					if(TurnType.getSecondaryTurn(rawLanes[i]) == tp) {
+					if (TurnType.getSecondaryTurn(rawLanes[i]) == tp) {
 						TurnType.setSecondaryToPrimary(rawLanes, i);
 						rawLanes[i] |= 1;
 					} else if(TurnType.getPrimaryTurn(rawLanes[i]) == tp) {
@@ -1358,9 +1358,9 @@ public class RouteResultPreparation {
 			} else {
 				//use keepRight and keepLeft turns when attached road doesn't have lanes
 				//or prev segment has more then 1 turn to the active lane
-				if (rs.keepRight && TurnType.getSecondaryTurn(rawLanes[activeEndIndex]) == 0) {
+				if (rs.keepRight) {
 					t = getTurnByCurrentTurns(rs.leftLanesInfo, rawLanes, TurnType.KR, leftSide);
-				} else if (rs.keepLeft && TurnType.getSecondaryTurn(rawLanes[activeBeginIndex]) == 0) {
+				} else if (rs.keepLeft ) {
 					t = getTurnByCurrentTurns(rs.rightLanesInfo, rawLanes, TurnType.KL, leftSide);
 				}
 			}
@@ -1709,7 +1709,7 @@ public class RouteResultPreparation {
 
 	
 	private int inferSlightTurnFromActiveLanes(int[] oLanes, boolean mostLeft, boolean mostRight) {
-		Integer[] possibleTurns = getPossibleTurns(oLanes, false, true);
+		Integer[] possibleTurns = getPossibleTurns(oLanes, false, false);
 		if (possibleTurns.length == 0) {
 			// No common turns, so can't determine anything.
 			return 0;
@@ -1717,14 +1717,15 @@ public class RouteResultPreparation {
 		int infer = 0;
 		if (possibleTurns.length == 1) {
 			infer = possibleTurns[0];
-		} else {
+		} else if (possibleTurns.length == 2) {
+			// this method could be adapted for 3+ turns 
 			if (mostLeft && !mostRight) {
 				infer = possibleTurns[0];
-			} else if(mostRight && !mostLeft) {
+			} else if (mostRight && !mostLeft) {
 				infer = possibleTurns[possibleTurns.length - 1];
 			} else {
 				infer = possibleTurns[1];
-//				infer = TurnType.C;
+				// infer = TurnType.C;
 			}
 		}
 		return infer;
