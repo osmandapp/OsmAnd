@@ -1207,7 +1207,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public void onChartTouch() {
-		getBottomScrollView().requestDisallowInterceptTouchEvent(true);
+		if (segmentsCard != null) {
+			segmentsCard.disallowScrollOnChartTouch();
+		}
 	}
 
 	@Override

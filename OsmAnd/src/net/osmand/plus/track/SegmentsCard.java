@@ -66,6 +66,10 @@ public class SegmentsCard extends MapBaseCard {
 		((RecyclerView) view).clearOnScrollListeners();
 	}
 
+	public void disallowScrollOnChartTouch() {
+		((RecyclerView) view).requestDisallowInterceptTouchEvent(true);
+	}
+
 	@Override
 	protected void updateContent() {
 		List<GpxDisplayItem> items = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
