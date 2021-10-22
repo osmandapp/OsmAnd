@@ -1101,7 +1101,7 @@
     <string name="no_index_file_to_download">Завантажень не знайдено. Будь ласка, перевірте з’єднання з Інтернет.</string>
     <string name="none_selected_gpx">Не вибрано GPX-файл. Виберіть один довгим натисненням.</string>
     <string name="local_index_select_gpx_file">Виберіть трек</string>
-    <string name="gpx_split_interval">Інтервал розбиття</string>
+    <string name="gpx_split_interval">Розділений інтервал</string>
     <string name="sort_by_distance">Сортувати за відстанню</string>
     <string name="sort_by_name">Сортувати за назвою</string>
     <string name="show_zoom_buttons_navigation_descr">Показувати кнопки зміни маштабу під час навігації.</string>
@@ -3090,7 +3090,7 @@
     <string name="shared_string_file_is_saved">%s збережено</string>
     <string name="shared_string_open_track">Відкрити трек</string>
     <string name="shared_string_track_is_saved">Трек %s збережено</string>
-    <string name="gpx_join_gaps">Об\'єднати прогалини</string>
+    <string name="gpx_join_gaps">Об\'єднати проміжки</string>
     <string name="app_mode_camper">Табірник</string>
     <string name="app_mode_campervan">Дім на колесах</string>
     <string name="rendering_attr_showLez_description">Показати на мапі зони низьких викидів. Не впливає на маршрутизацію.</string>
@@ -3689,16 +3689,16 @@
     <string name="app_mode_wheelchair_forward">Інвалідне крісло попереду</string>
     <string name="app_mode_go_cart">Картинг</string>
     <string name="osm_edit_closed_note">Закрита примітка OSM</string>
-    <string name="shared_string_custom">Власне</string>
+    <string name="shared_string_custom">Власний</string>
     <string name="add_hidden_group_info">Додану точку можна знайти у «%s». Показати вибрану групу, щоб вона з\'явилася на мапі.</string>
     <string name="set_working_days_to_continue">Зазначте робочі дні, щоб продовжити</string>
     <string name="route_between_points">Маршрут між точками</string>
     <string name="plan_a_route">Планування маршруту</string>
     <string name="add_to_a_track">Додати до треку</string>
-    <string name="track_show_start_finish_icons">Показувати значки початку та завершення</string>
+    <string name="track_show_start_finish_icons">Показати піктограми початку та завершення</string>
     <string name="select_track_width">Установити ширину</string>
-    <string name="gpx_split_interval_descr">Виберіть інтервал показу міток часу або відстані для показу поверх треку.</string>
-    <string name="gpx_split_interval_none_descr">Виберіть власний варіант поділу: за часом чи відстанню.</string>
+    <string name="gpx_split_interval_descr">Виберіть інтервал, впродовж якого зображатимуться позначки відстані або часу на треку.</string>
+    <string name="gpx_split_interval_none_descr">Виберіть потрібний варіант поділу: за часом або за відстанню.</string>
     <string name="gpx_direction_arrows">Стрілки напрямку</string>
     <string name="track_coloring_solid">Суцільний</string>
     <string name="plan_route_last_edited">В останнє змінено</string>
@@ -3932,7 +3932,7 @@
     <string name="select_folder_descr">Виберіть теку або додайте нову</string>
     <string name="shared_string_empty">Порожньо</string>
     <string name="analyze_by_intervals">Аналізувати розділені інтервали</string>
-    <string name="upload_to_openstreetmap">Відвантажити на OpenStreetMap</string>
+    <string name="upload_to_openstreetmap">Вивантажити на OpenStreetMap</string>
     <string name="edit_track">Редагувати трек</string>
     <string name="rename_track">Перейменувати трек</string>
     <string name="change_folder">Змінити теку</string>
