@@ -3687,9 +3687,9 @@
     <string name="add_to_a_track">Ajouter à une trace</string>
     <string name="shared_string_custom">Personnalisé</string>
     <string name="add_hidden_group_info">Le point ajouté se trouve dans \"%s\". Afficher ce groupe pour rendre le point visible sur la carte.</string>
-    <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle d\'affichage sur la trace des marques de distance ou de durée.</string>
-    <string name="gpx_split_interval_none_descr">Sélectionner l\'option de découpage : durée ou distance.</string>
-    <string name="track_coloring_solid">Continu</string>
+    <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle auquel les marques de distance ou de temps sur la trace seront affichées.</string>
+    <string name="gpx_split_interval_none_descr">Sélectionnez l\'option de fractionnement souhaitée : par temps ou par distance.</string>
+    <string name="track_coloring_solid">Opaque</string>
     <string name="track_show_start_finish_icons">Afficher les icônes de départ et d\'arrivée</string>
     <string name="select_track_width">Sélectionner la largeur</string>
     <string name="gpx_direction_arrows">Flèches de direction</string>
@@ -3932,7 +3932,7 @@
     <string name="show_track_on_map">Afficher la trace sur la carte</string>
     <string name="routing_engine_vehicle_type_scooter">Trottinette</string>
     <string name="routing_engine_vehicle_type_small_truck">Camionnette</string>
-    <string name="upload_to_openstreetmap">Envoyer vers OpenStreetMap</string>
+    <string name="upload_to_openstreetmap">Envoyer sur OpenStreetMap</string>
     <string name="edit_track">Modifier la trace</string>
     <string name="rename_track">Renommer la trace</string>
     <string name="change_folder">Modifier le dossier</string>
