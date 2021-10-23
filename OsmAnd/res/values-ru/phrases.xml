@@ -3996,4 +3996,17 @@
     <string name="poi_callable_yes">Да</string>
     <string name="poi_satellite_dish">Спутниковая антенна</string>
     <string name="poi_geoglyph">Геоглиф</string>
+    <string name="poi_trailhead">Начало маршрута</string>
+    <string name="poi_sports_hall">Спортивный зал</string>
+    <string name="poi_couplings">Муфты</string>
+    <string name="poi_payment_calling_cards_yes">Принимаются телефонные карты</string>
+    <string name="poi_payment_calling_cards_no">Телефонные карты не принимаются</string>
+    <string name="poi_local_ref">Местный номер</string>
+    <string name="poi_camp_pitch">Место в лагере</string>
+    <string name="poi_zurkhaneh_sport">Зорхана</string>
+    <string name="poi_prep_school">Подготовительные курсы</string>
+    <string name="poi_ticket_validator">Валидатор билетов</string>
+    <string name="poi_hampshire_gate">Хэмпширские ворота</string>
+    <string name="poi_driver_training">Учебная площадка автошколы</string>
+    <string name="poi_research_institute">Научно-исследовательский институт</string>
 </resources>
