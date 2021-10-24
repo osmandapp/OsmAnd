@@ -1106,6 +1106,11 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	@Override
+	public void gpsFilterOnClick() {
+		// todo gps
+	}
+
+	@Override
 	public void onMovePoint() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {

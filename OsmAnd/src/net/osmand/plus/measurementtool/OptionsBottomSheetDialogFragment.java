@@ -18,6 +18,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescriptionDifHeight;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem.Builder;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
@@ -175,6 +176,20 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 				.create();
 		items.add(reverse);
 
+		BaseBottomSheetItem gpsFilter = new Builder()
+				.setIcon(getContentIcon(R.drawable.ic_action_filter))
+				.setTitle(getString(R.string.shared_string_gps_filter))
+				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
+				.setOnClickListener(v -> {
+					Fragment fragment = getTargetFragment();
+					if (fragment instanceof OptionsFragmentListener) {
+						((OptionsFragmentListener) fragment).gpsFilterOnClick();
+					}
+					dismiss();
+				})
+				.create();
+		items.add(gpsFilter);
+
 		items.add(new OptionsDividerItem(getContext()));
 
 		BaseBottomSheetItem clearAllItem = new SimpleBottomSheetItem.Builder()
@@ -260,6 +275,8 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		void directionsOnClick();
 
 		void reverseRouteOnClick();
+
+		void gpsFilterOnClick();
 
 		void clearAllOnClick();
 	}

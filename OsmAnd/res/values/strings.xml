@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_gps_filter">GPS filter</string>
     <string name="safe_settings">Safe</string>
     <string name="approx_safe_mode">Safe gpx approximation</string>
     <string name="approx_safe_mode_description">Do gpx approximation using slower Android instead of native code.</string>

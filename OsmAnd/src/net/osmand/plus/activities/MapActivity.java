@@ -140,6 +140,7 @@ import net.osmand.plus.settings.datastorage.DataStorageFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.fragments.ConfigureProfileFragment;
+import net.osmand.plus.track.GpsFilterFragment;
 import net.osmand.plus.track.TrackAppearanceFragment;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;

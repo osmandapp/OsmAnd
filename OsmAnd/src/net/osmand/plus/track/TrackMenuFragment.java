@@ -115,6 +115,7 @@ import static net.osmand.plus.track.OptionsCard.CHANGE_FOLDER_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.DELETE_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.DIRECTIONS_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.EDIT_BUTTON_INDEX;
+import static net.osmand.plus.track.OptionsCard.GPS_FILTER_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.JOIN_GAPS_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.RENAME_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.SHARE_BUTTON_INDEX;
@@ -921,7 +922,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (mapActivity == null) {
 			return;
 		}
+
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		GPXFile gpxFile = getGpx();
+
 		if (card instanceof OptionsCard || card instanceof OverviewCard) {
 			if (buttonIndex == SHOW_ON_MAP_BUTTON_INDEX) {
 				if (FileUtils.isTempFile(app, getGpx().path)) {
@@ -940,7 +944,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == DIRECTIONS_BUTTON_INDEX) {
 				MapActivityActions mapActions = mapActivity.getMapActions();
 				if (gpxFile.getNonEmptySegmentsCount() > 1) {
-					TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), gpxFile, this);
+					TrackSelectSegmentBottomSheet.showInstance(fragmentManager, gpxFile, this);
 				} else {
 					startNavigationForGPX(gpxFile, mapActions, mapActivity);
 					dismiss();
@@ -957,7 +961,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				new OpenGpxDetailsTask(selectedGpxFile, null, mapActivity).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				dismiss();
 			} else if (buttonIndex == ANALYZE_BY_INTERVALS_BUTTON_INDEX) {
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				TrkSegment segment = gpxFile.getGeneralSegment();
 				if (segment == null) {
 					List<TrkSegment> segments = gpxFile.getNonEmptyTrkSegments(false);
@@ -989,12 +992,13 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 				dismiss();
 				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
-				MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), fileName);
+				MeasurementToolFragment.showInstance(fragmentManager, fileName);
 			} else if (buttonIndex == RENAME_BUTTON_INDEX) {
 				FileUtils.renameFile(mapActivity, new File(gpxFile.path), this, true);
 			} else if (buttonIndex == CHANGE_FOLDER_BUTTON_INDEX) {
-				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 				MoveGpxFileBottomSheet.showInstance(fragmentManager, this, gpxFile.path, true, false);
+			} else if (buttonIndex == GPS_FILTER_BUTTON_INDEX) {
+				GpsFilterFragment.showInstance(fragmentManager, selectedGpxFile);
 			} else if (buttonIndex == DELETE_BUTTON_INDEX) {
 				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
 
