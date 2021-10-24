@@ -1,6 +1,6 @@
 package net.osmand.plus.measurementtool;
 
-import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
@@ -28,7 +28,7 @@ public class MeasurementEditingContextUtils {
 		return true;
 	}
 
-	static int findPointIndex(GPXUtilities.WptPt point, List<GPXUtilities.WptPt> points, int firstIndex) {
+	static int findPointIndex(WptPt point, List<WptPt> points, int firstIndex) {
 		double minDistance = Double.MAX_VALUE;
 		int index = 0;
 		for (int i = Math.max(0, firstIndex); i < points.size(); i++) {
@@ -41,18 +41,19 @@ public class MeasurementEditingContextUtils {
 		return index;
 	}
 
-	static void addPointToArray(List<GPXUtilities.WptPt> points, RouteSegmentResult seg, int index, float[] heightArray) {
+	static WptPt addPointToArray(List<WptPt> points, RouteSegmentResult seg, int index, float[] heightArray) {
 		LatLon l = seg.getPoint(index);
-		GPXUtilities.WptPt pt = new GPXUtilities.WptPt();
+		WptPt pt = new WptPt();
 		if (heightArray != null && heightArray.length > index * 2 + 1) {
 			pt.ele = heightArray[index * 2 + 1];
 		}
 		pt.lat = l.getLatitude();
 		pt.lon = l.getLongitude();
 		points.add(pt);
+		return pt;
 	}
 
-	static void fillPointsArray(List<GPXUtilities.WptPt> points, RouteSegmentResult seg, boolean includeEndPoint) {
+	static void fillPointsArray(List<WptPt> points, RouteSegmentResult seg, boolean includeEndPoint) {
 		int ind = seg.getStartPointIndex();
 		boolean plus = seg.isForwardDirection();
 		float[] heightArray = seg.getObject().calculateHeightArray();

@@ -110,6 +110,14 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		return false;
 	}
 
+	public boolean useExternalTimestamps() {
+		String value = get(EngineParameter.USE_EXTERNAL_TIMESTAMPS);
+		if (!Algorithms.isEmpty(value)) {
+			return Boolean.parseBoolean(value);
+		}
+		return false;
+	}
+
 	@NonNull
 	public String getFullUrl(@NonNull List<LatLon> path) {
 		StringBuilder sb = new StringBuilder(getBaseUrl());
@@ -256,7 +264,9 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 		private List<Location> route;
 		private List<RouteDirectionInfo> directions;
+
 		private GPXFile gpxFile;
+		private boolean calculatedTimeSpeed;
 
 		// constructor for JSON responses
 		public OnlineRoutingResponse(List<Location> route, List<RouteDirectionInfo> directions) {
@@ -265,8 +275,9 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 		}
 
 		// constructor for GPX responses
-		public OnlineRoutingResponse(GPXFile gpxFile) {
+		public OnlineRoutingResponse(GPXFile gpxFile, boolean calculatedTimeSpeed) {
 			this.gpxFile = gpxFile;
+			this.calculatedTimeSpeed = calculatedTimeSpeed;
 		}
 
 		public List<Location> getRoute() {
@@ -279,6 +290,10 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 		public GPXFile getGpxFile() {
 			return gpxFile;
+		}
+
+		public boolean hasCalculatedTimeSpeed() {
+			return calculatedTimeSpeed;
 		}
 	}
 

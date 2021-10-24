@@ -11,6 +11,10 @@
 	Thx - Hardy
 -->
 
+    <string name="approx_safe_mode">Safe gpx approximation</string>
+    <string name="approx_safe_mode_description">Do gpx approximation using slower Android instead of native code.</string>
+    <string name="use_external_timestamps">Use external timestamps</string>
+    <string name="use_external_timestamps_description">Use online router\'s timestamps to adjust estimated time and average speed</string>
     <string name="no_plugins_enabled">You have no plugins enabled. You can find list of all available plugins in Menu – Plugins.</string>
     <string name="shared_storage_warning_description">Starting November 2021 OsmAnd 4.2 will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared storage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
     <string name="search_history_is_disabled_descr">You can enable search history in Settings</string>

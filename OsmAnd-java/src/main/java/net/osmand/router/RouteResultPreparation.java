@@ -351,6 +351,31 @@ public class RouteResultPreparation {
 		}
 	}
 
+	public static void recalculateTimeDistance(List<RouteSegmentResult> result) {
+		for (int i = 0; i < result.size(); i++) {
+			RouteSegmentResult rr = result.get(i);
+			RouteDataObject road = rr.getObject();
+			double distOnRoadToPass = 0;
+			double speed = rr.getSegmentSpeed();
+			if (speed == 0) {
+				continue;
+			}
+			boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
+			int next;
+			double distance = 0;
+			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
+				next = plus ? j + 1 : j - 1;
+				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
+						road.getPoint31YTile(next));
+				distance += d;
+				distOnRoadToPass += d / speed;  //this is time in seconds
+			}
+			rr.setSegmentTime((float) distOnRoadToPass);
+			rr.setSegmentSpeed((float) speed);
+			rr.setDistance((float) distance);
+		}
+	}
+
 	private void splitRoadsAndAttachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, boolean recalculation) throws IOException {
 		for (int i = 0; i < result.size(); i++) {
 			if (ctx.checkIfMemoryLimitCritical(ctx.config.memoryLimitation)) {

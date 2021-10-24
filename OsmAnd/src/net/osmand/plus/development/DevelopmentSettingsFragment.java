@@ -41,6 +41,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		setupSafeModePref();
 
 		setupSimulateYourLocationPref();
+		setupApproximationSafeModePref();
 
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
@@ -80,6 +81,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 			safeMode.setEnabled(false);
 			safeMode.setChecked(true);
 		}
+	}
+
+	private void setupApproximationSafeModePref() {
+		SwitchPreferenceEx safeMode = findPreference(settings.APPROX_SAFE_MODE.getId());
+		safeMode.setDescription(getString(R.string.approx_safe_mode_description));
+		safeMode.setIconSpaceReserved(false);
 	}
 
 	private void setupSimulateYourLocationPref() {
