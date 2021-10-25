@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="safe_settings">Safe</string>
     <string name="approx_safe_mode">Safe gpx approximation</string>
     <string name="approx_safe_mode_description">Do gpx approximation using slower Android instead of native code.</string>
     <string name="use_external_timestamps">Use external timestamps</string>

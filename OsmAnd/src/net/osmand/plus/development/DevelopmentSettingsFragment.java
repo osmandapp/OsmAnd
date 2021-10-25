@@ -34,14 +34,18 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		Preference developmentInfo = findPreference("development_info");
 		developmentInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
+		setupOpenglRenderPref();
+
+		Preference safeCategory = findPreference("safe");
+		safeCategory.setIconSpaceReserved(false);
+
+		setupSafeModePref();
+		setupApproximationSafeModePref();
+
 		Preference routingCategory = findPreference("routing");
 		routingCategory.setIconSpaceReserved(false);
 
-		setupOpenglRenderPref();
-		setupSafeModePref();
-
 		setupSimulateYourLocationPref();
-		setupApproximationSafeModePref();
 
 		Preference debuggingAndDevelopment = findPreference("debugging_and_development");
 		debuggingAndDevelopment.setIconSpaceReserved(false);
