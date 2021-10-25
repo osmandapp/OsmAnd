@@ -31,6 +31,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
@@ -1361,7 +1362,6 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_TO_GPX = new BooleanPreference(this, "save_global_track_to_gpx", false).makeGlobal().cache();
 	public final CommonPreference<Integer> SAVE_GLOBAL_TRACK_INTERVAL = new IntPreference(this, "save_global_track_interval", 5000).makeProfile().cache();
 	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_REMEMBER = new BooleanPreference(this, "save_global_track_remember", false).makeProfile().cache();
-	public final CommonPreference<Boolean> SHOW_SAVED_TRACK_REMEMBER = new BooleanPreference(this, "show_saved_track_remember", true).makeGlobal().makeShared();
 	public final CommonPreference<Boolean> SHOW_TRIP_REC_START_DIALOG = new BooleanPreference(this, "show_trip_recording_start_dialog", true).makeGlobal().makeShared();
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference(this, "save_track_to_gpx", false).makeProfile().cache();
@@ -1371,6 +1371,18 @@ public class OsmandSettings {
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, false);
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
+
+	public final CommonPreference<Boolean> SHOW_SAVED_TRACK_REMEMBER = new BooleanPreference(this, "show_saved_track_remember", false) {
+		@Override
+		protected Boolean getDefaultValue() {
+			for (SelectedGpxFile selectedGpxFile : ctx.getSelectedGpxHelper().getSelectedGPXFiles()) {
+				if (!selectedGpxFile.isShowCurrentTrack()) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}.makeGlobal().makeShared();
 
 	public static final Integer REC_DIRECTORY = 0;
 	public static final Integer MONTHLY_DIRECTORY = 1;
