@@ -247,12 +247,6 @@ public class InAppPurchasesImpl extends InAppPurchases {
 			return 0;
 		}
 
-		@Override
-		public String getRegularPrice(@NonNull Context ctx, @NonNull InAppSubscription monthlyLiveUpdates) {
-			double regularPrice = getPriceValue();
-			return getFormattedPrice(ctx, regularPrice, getPriceCurrencyCode());
-		}
-
 		@Nullable
 		@Override
 		protected InAppSubscription newInstance(@NonNull String sku) {

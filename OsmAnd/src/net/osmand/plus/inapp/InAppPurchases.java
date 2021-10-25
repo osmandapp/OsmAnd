@@ -980,11 +980,7 @@ public abstract class InAppPurchases {
 		}
 
 		public String getRegularPrice(@NonNull Context ctx) {
-			Period period = getSubscriptionPeriod();
-			if (period != null) {
-				return getFormattedPrice(ctx, getOriginalPriceValue(), getPriceCurrencyCode());
-			}
-			return "";
+			return getFormattedPrice(ctx, getOriginalPriceValue(), getPriceCurrencyCode());
 		}
 
 		public String getPriceWithPeriod(Context ctx) {
