@@ -112,15 +112,20 @@ public class UiUtilities {
 	}
 
 	private Drawable getPaintedDrawable(@DrawableRes int resId, @ColorInt int color) {
-		long hash = ((long) resId << 31l) + color;
-		Drawable d = drawableCache.get(hash);
-		if (d == null) {
-			d = AppCompatResources.getDrawable(app, resId);
-			d = tintDrawable(d, color);
+		Drawable drawable = null;
+		if (resId != 0) {
+			long hash = ((long) resId << 31L) + color;
+			drawable = drawableCache.get(hash);
+			if (drawable == null) {
+				drawable = AppCompatResources.getDrawable(app, resId);
+				drawable = tintDrawable(drawable, color);
 
-			drawableCache.put(hash, d);
+				drawableCache.put(hash, drawable);
+			}
+		} else {
+			LOG.warn("Invalid icon identifier");
 		}
-		return d;
+		return drawable;
 	}
 
 	public Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
