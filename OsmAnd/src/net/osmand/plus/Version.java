@@ -155,7 +155,8 @@ public class Version {
 		}
 		File nativeLibraryDir = new File(app.getApplicationInfo().nativeLibraryDir);
 		if (checkOpenGlExists(nativeLibraryDir)) return true;
-		return false;
+		// check opengl doesn't work correctly on some devices when native libs are not unpacked
+		return true;
 	}
 
 	public static boolean checkOpenGlExists(File nativeLibraryDir) {
