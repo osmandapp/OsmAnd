@@ -45,7 +45,7 @@ public class PurchasingUtils {
 			String discount = subscription.getDiscount(liveUpdates);
 			String discountTitle = subscription.getDiscountTitle(app, liveUpdates);
 
-			boolean salesApplied = Algorithms.stringsEqual(subscription.getPrice(app), subscription.getOriginalPrice(app));
+			boolean salesApplied = !Algorithms.stringsEqual(subscription.getPrice(app), subscription.getOriginalPrice(app));
 			subscriptionButton.setSalesApplied(salesApplied);
 			subscriptionButton.setDiscount(salesApplied ? discount : discountTitle);
 
