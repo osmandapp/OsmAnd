@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="save_changes_into_file">Save changes into file</string>
+    <string name="save_as_copy">Save as copy</string>
+    <string name="gps_filter_actions_description">OsmAnd applying changes to the track without saving it to the file. You can save changes manually.</string>
     <string name="shared_string_gps_filter">GPS filter</string>
     <string name="safe_settings">Safe</string>
     <string name="approx_safe_mode">Safe gpx approximation</string>
