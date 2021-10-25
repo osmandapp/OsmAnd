@@ -1308,19 +1308,19 @@ public class RouteResultPreparation {
 
 	private TurnType attachKeepLeftInfoAndLanes(boolean leftSide, RouteSegmentResult prevSegm, RouteSegmentResult currentSegm) {
 		List<RouteSegmentResult> attachedRoutes = currentSegm.getAttachedRoutes(currentSegm.getStartPointIndex());
-		if(attachedRoutes == null || attachedRoutes.size() == 0) {
+		if(attachedRoutes == null || attachedRoutes.isEmpty()) {
 			return null;
 		}
+		String turnLanesPrevSegm = getTurnLanesString(prevSegm);
 		// keep left/right
-		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes);
+		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm);
 		if(rs.roadsOnLeft  + rs.roadsOnRight == 0) {
 			return null;
 		}
 		
 		// turn lanes exist
-		String turnLanes = getTurnLanesString(prevSegm);
-		if (turnLanes != null) {
-			return createKeepLeftRightTurnBasedOnTurnTypes(rs, prevSegm, currentSegm, turnLanes, leftSide);
+		if (turnLanesPrevSegm != null) {
+			return createKeepLeftRightTurnBasedOnTurnTypes(rs, prevSegm, currentSegm, turnLanesPrevSegm, leftSide);
 		}
 
 		// turn lanes don't exist
@@ -1477,8 +1477,8 @@ public class RouteResultPreparation {
 		for(int[] li : lanesInfo) {
 			TIntHashSet set = new TIntHashSet();
 			if(li != null) {
-				for(int k = 0; k < li.length; k++) {
-					TurnType.collectTurnTypes(li[k], set);
+				for (int i : li) {
+					TurnType.collectTurnTypes(i, set);
 				}
 			}
 			increaseTurnRoads = Math.max(set.size() - 1, 0);
@@ -1498,7 +1498,6 @@ public class RouteResultPreparation {
 					}
 				}
 				lanes -= cnt;
-				//lanes--;
 				// we already found slight turn others are turn in different direction
 				lookupSlightTurn = false;
 			}
@@ -1513,7 +1512,7 @@ public class RouteResultPreparation {
 	}
 
 	protected RoadSplitStructure calculateRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
-			List<RouteSegmentResult> attachedRoutes) {
+			List<RouteSegmentResult> attachedRoutes, String turnLanesPrevSegm) {
 		RoadSplitStructure rs = new RoadSplitStructure();
 		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway()), highwaySpeakPriority(currentSegm.getObject().getHighway()));
 		for (RouteSegmentResult attached : attachedRoutes) {
@@ -1532,7 +1531,7 @@ public class RouteResultPreparation {
 			double mpi = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), attached.getBearingBegin()));
 			int rsSpeakPriority = highwaySpeakPriority(attached.getObject().getHighway());
 			int lanes = countLanesMinOne(attached);
-			int[] turnLanes = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * Math.PI / 180);
+			int[] turnLanesAttachedRoad = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * Math.PI / 180);
 			boolean smallStraightVariation = mpi < TURN_DEGREE_MIN;
 			boolean smallTargetVariation = Math.abs(ex) < TURN_DEGREE_MIN;
 			boolean attachedOnTheRight = ex >= 0;
@@ -1541,19 +1540,19 @@ public class RouteResultPreparation {
 			} else {
 				rs.roadsOnLeft++;
 			}
-			if (rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
+			if (turnLanesPrevSegm != null || rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
 				if (smallTargetVariation || smallStraightVariation) {
 					if (attachedOnTheRight) {
 						rs.keepLeft = true;
 						rs.rightLanes += lanes;
-						if(turnLanes != null) {
-							rs.rightLanesInfo.add(turnLanes);
+						if(turnLanesAttachedRoad != null) {
+							rs.rightLanesInfo.add(turnLanesAttachedRoad);
 						}
 					} else {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
-						if(turnLanes != null) {
-							rs.leftLanesInfo.add(turnLanes);
+						if(turnLanesAttachedRoad != null) {
+							rs.leftLanesInfo.add(turnLanesAttachedRoad);
 						}
 					}
 					rs.speak = rs.speak || rsSpeakPriority <= speakPriority;
