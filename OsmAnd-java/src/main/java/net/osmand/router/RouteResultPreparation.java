@@ -812,8 +812,8 @@ public class RouteResultPreparation {
 			if (tnext != null && result.get(i).getDistance() < 50) { //
 				boolean ut = true;
 				if (i > 0) {
-					double uTurn = MapUtils.degreesDiff(result.get(i - 1).getBearingEnd(), result
-							.get(i + 1).getBearingBegin());
+					double uTurn = MapUtils.degreesDiff(result.get(i - 1).getBearingEnd(), 
+							result.get(i + 1).getBearingBegin());
 					if (Math.abs(uTurn) < 120) {
 						ut = false;
 					}
@@ -1051,14 +1051,14 @@ public class RouteResultPreparation {
 	private void inferCommonActiveLane(TurnType currentTurn, TurnType nextTurn) {
 		int[] lanes = currentTurn.getLanes();
 		TIntHashSet turnSet = new TIntHashSet();
-		for(int i = 0; i < lanes.length; i++) {
-			if(lanes[i] % 2 == 1 ) {
+		for (int i = 0; i < lanes.length; i++) {
+			if (lanes[i] % 2 == 1) {
 				int singleTurn = TurnType.getPrimaryTurn(lanes[i]);
 				turnSet.add(singleTurn);
-				if(TurnType.getSecondaryTurn(lanes[i]) != 0) {
+				if (TurnType.getSecondaryTurn(lanes[i]) != 0) {
 					turnSet.add(TurnType.getSecondaryTurn(lanes[i]));
 				}
-				if(TurnType.getTertiaryTurn(lanes[i]) != 0) {
+				if (TurnType.getTertiaryTurn(lanes[i]) != 0) {
 					turnSet.add(TurnType.getTertiaryTurn(lanes[i]));
 				}
 			}
