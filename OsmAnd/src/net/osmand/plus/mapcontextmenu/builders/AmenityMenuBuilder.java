@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.builders;
 
+import static net.osmand.data.Amenity.MAPILLARY;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -64,8 +66,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.data.Amenity.MAPILLARY;
 
 public class AmenityMenuBuilder extends MenuBuilder {
 

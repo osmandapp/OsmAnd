@@ -1,5 +1,9 @@
 package net.osmand.plus.mapillary;
 
+import static android.content.Intent.ACTION_VIEW;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -34,8 +38,8 @@ import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardType;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.openplacereviews.OpenPlaceReviewsPlugin;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -53,10 +57,6 @@ import org.json.JSONObject;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
-
-import static android.content.Intent.ACTION_VIEW;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
-import static net.osmand.plus.ContextMenuAdapter.makeDeleteAction;
 
 public class MapillaryPlugin extends OsmandPlugin {
 

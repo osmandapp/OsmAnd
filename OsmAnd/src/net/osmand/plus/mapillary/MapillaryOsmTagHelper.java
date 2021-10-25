@@ -1,5 +1,9 @@
 package net.osmand.plus.mapillary;
 
+import static net.osmand.map.TileSourceManager.MAPILLARY_ACCESS_TOKEN;
+import static net.osmand.plus.mapillary.MapillaryImageDialog.MAPILLARY_VIEWER_URL_TEMPLATE;
+import static net.osmand.plus.mapillary.MapillaryPlugin.TYPE_MAPILLARY_PHOTO;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -11,10 +15,6 @@ import org.apache.commons.logging.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static net.osmand.map.TileSourceManager.MAPILLARY_ACCESS_TOKEN;
-import static net.osmand.plus.mapillary.MapillaryImageDialog.MAPILLARY_VIEWER_URL_TEMPLATE;
-import static net.osmand.plus.mapillary.MapillaryPlugin.TYPE_MAPILLARY_PHOTO;
 
 public class MapillaryOsmTagHelper {
 
@@ -88,7 +88,8 @@ public class MapillaryOsmTagHelper {
 
 			if (response.has(CAMERA_TYPE)) {
 				String cameraType = response.getString(CAMERA_TYPE);
-				boolean is360 = Algorithms.equalsAny(cameraType, "equirectangular", "spherical");
+				boolean is360 = Algorithms.stringsEqual(cameraType, "equirectangular")
+						|| Algorithms.stringsEqual(cameraType, "spherical");
 				result.put("360", is360);
 			}
 

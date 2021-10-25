@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
+import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
+
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -94,8 +96,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 public class MenuBuilder {
 

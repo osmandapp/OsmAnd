@@ -1,5 +1,8 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
+import static net.osmand.plus.mapillary.MapillaryPlugin.TYPE_MAPILLARY_CONTRIBUTE;
+import static net.osmand.plus.mapillary.MapillaryPlugin.TYPE_MAPILLARY_PHOTO;
+
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -43,9 +46,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import static net.osmand.plus.mapillary.MapillaryPlugin.TYPE_MAPILLARY_CONTRIBUTE;
-import static net.osmand.plus.mapillary.MapillaryPlugin.TYPE_MAPILLARY_PHOTO;
 
 public abstract class ImageCard extends AbstractCard {
 
@@ -523,17 +523,17 @@ public abstract class ImageCard extends AbstractCard {
 
 	public static class ImageCardsHolder {
 
-		private final Map<ImageCardType, List<ImageCard>> map = new HashMap<>();
+		private final Map<ImageCardType, List<ImageCard>> cardsByType = new HashMap<>();
 
 		public boolean add(@NonNull ImageCardType type, @Nullable ImageCard image) {
 			if (image != null) {
-				List<ImageCard> list = map.get(type);
+				List<ImageCard> list = cardsByType.get(type);
 				if (list != null) {
 					list.add(image);
 				} else {
 					list = new ArrayList<>();
 					list.add(image);
-					map.put(type, list);
+					cardsByType.put(type, list);
 				}
 				return true;
 			}
@@ -544,7 +544,7 @@ public abstract class ImageCard extends AbstractCard {
 		public List<ImageCard> getOrderedList() {
 			List<ImageCard> result = new ArrayList<>();
 			for (ImageCardType type : ImageCardType.values()) {
-				List<ImageCard> cards = map.get(type);
+				List<ImageCard> cards = cardsByType.get(type);
 				if (!Algorithms.isEmpty(cards)) {
 					result.addAll(cards);
 				}
