@@ -45,17 +45,19 @@ public class PurchasingUtils {
 			String discount = subscription.getDiscount(liveUpdates);
 			String discountTitle = subscription.getDiscountTitle(app, liveUpdates);
 
-			boolean discountApplied = !Algorithms.stringsEqual(subscription.getPrice(app), subscription.getOriginalPrice(app));
-			subscriptionButton.setDiscountApplied(discountApplied);
-			subscriptionButton.setDiscount(discountApplied ? discount : discountTitle);
-
 			InAppSubscriptionIntroductoryInfo info = subscription.getIntroductoryInfo();
 			if (info != null) {
 				Pair<Spannable, Spannable> pair = info.getFormattedDescription(app, primaryTextColor);
+				subscriptionButton.setDiscount(discount);
+				subscriptionButton.setDiscountApplied(!Algorithms.isEmpty(discount));
 				subscriptionButton.setPrice(pair.first.toString());
 				subscriptionButton.setDescription(pair.second.toString());
 			} else {
 				subscriptionButton.setPrice(subscription.getPriceWithPeriod(app));
+
+				boolean discountApplied = !Algorithms.stringsEqual(subscription.getPrice(app), subscription.getOriginalPrice(app));
+				subscriptionButton.setDiscountApplied(discountApplied);
+				subscriptionButton.setDiscount(discountApplied ? discount : discountTitle);
 
 				if (!Algorithms.isEmpty(discount) && discountApplied) {
 					String pattern = app.getString(R.string.ltr_or_rtl_combine_via_colon);
