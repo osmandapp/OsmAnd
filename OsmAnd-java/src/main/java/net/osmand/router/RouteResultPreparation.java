@@ -1311,16 +1311,16 @@ public class RouteResultPreparation {
 		if(attachedRoutes == null || attachedRoutes.isEmpty()) {
 			return null;
 		}
-		String turnLanes = getTurnLanesString(prevSegm);
+		String turnLanesPrevSegm = getTurnLanesString(prevSegm);
 		// keep left/right
-		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanes);
+		RoadSplitStructure rs = calculateRoadSplitStructure(prevSegm, currentSegm, attachedRoutes, turnLanesPrevSegm);
 		if(rs.roadsOnLeft  + rs.roadsOnRight == 0) {
 			return null;
 		}
 		
 		// turn lanes exist
-		if (turnLanes != null) {
-			return createKeepLeftRightTurnBasedOnTurnTypes(rs, prevSegm, currentSegm, turnLanes, leftSide);
+		if (turnLanesPrevSegm != null) {
+			return createKeepLeftRightTurnBasedOnTurnTypes(rs, prevSegm, currentSegm, turnLanesPrevSegm, leftSide);
 		}
 
 		// turn lanes don't exist
@@ -1512,7 +1512,7 @@ public class RouteResultPreparation {
 	}
 
 	protected RoadSplitStructure calculateRoadSplitStructure(RouteSegmentResult prevSegm, RouteSegmentResult currentSegm,
-			List<RouteSegmentResult> attachedRoutes, String hasTurnLanes) {
+			List<RouteSegmentResult> attachedRoutes, String turnLanesPrevSegm) {
 		RoadSplitStructure rs = new RoadSplitStructure();
 		int speakPriority = Math.max(highwaySpeakPriority(prevSegm.getObject().getHighway()), highwaySpeakPriority(currentSegm.getObject().getHighway()));
 		for (RouteSegmentResult attached : attachedRoutes) {
@@ -1531,7 +1531,7 @@ public class RouteResultPreparation {
 			double mpi = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), attached.getBearingBegin()));
 			int rsSpeakPriority = highwaySpeakPriority(attached.getObject().getHighway());
 			int lanes = countLanesMinOne(attached);
-			int[] turnLanes = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * Math.PI / 180);
+			int[] turnLanesAttachedRoad = parseTurnLanes(attached.getObject(), attached.getBearingBegin() * Math.PI / 180);
 			boolean smallStraightVariation = mpi < TURN_DEGREE_MIN;
 			boolean smallTargetVariation = Math.abs(ex) < TURN_DEGREE_MIN;
 			boolean attachedOnTheRight = ex >= 0;
@@ -1540,19 +1540,19 @@ public class RouteResultPreparation {
 			} else {
 				rs.roadsOnLeft++;
 			}
-			if (hasTurnLanes != null || rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
+			if (turnLanesPrevSegm != null || rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
 				if (smallTargetVariation || smallStraightVariation) {
 					if (attachedOnTheRight) {
 						rs.keepLeft = true;
 						rs.rightLanes += lanes;
-						if(turnLanes != null) {
-							rs.rightLanesInfo.add(turnLanes);
+						if(turnLanesAttachedRoad != null) {
+							rs.rightLanesInfo.add(turnLanesAttachedRoad);
 						}
 					} else {
 						rs.keepRight = true;
 						rs.leftLanes += lanes;
-						if(turnLanes != null) {
-							rs.leftLanesInfo.add(turnLanes);
+						if(turnLanesAttachedRoad != null) {
+							rs.leftLanesInfo.add(turnLanesAttachedRoad);
 						}
 					}
 					rs.speak = rs.speak || rsSpeakPriority <= speakPriority;
