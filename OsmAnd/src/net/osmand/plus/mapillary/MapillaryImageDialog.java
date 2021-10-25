@@ -19,6 +19,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
+
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
 
@@ -49,9 +52,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import androidx.annotation.NonNull;
-import androidx.core.util.Pair;
-
 import static net.osmand.plus.mapillary.MapillaryImage.IMAGE_ID_KEY;
 import static net.osmand.plus.mapillary.MapillaryImage.SEQUENCE_ID_KEY;
 import static net.osmand.plus.mapillary.MapillaryVectorLayer.EXTENT;
@@ -66,7 +66,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private static final String KEY_MAPILLARY_DIALOG_LATLON = "key_mapillary_dialog_latlon";
 	private static final String KEY_MAPILLARY_DIALOG_COMPASS_ANGLE = "key_mapillary_dialog_compass_angle";
 
-	private static final String MAPILLARY_VIEWER_URL_TEMPLATE =
+	public static final String MAPILLARY_VIEWER_URL_TEMPLATE =
 			"https://osmand.net/api/mapillary/photo-viewer?photo_id=";
 	private static final String MAPILLARY_HIRES_IMAGE_URL_TEMPLATE =
 			"https://osmand.net/api/mapillary/get_photo?hires=true&photo_id=";

@@ -1,6 +1,5 @@
 package net.osmand.plus.mapillary;
 
-import android.view.View;
 import android.view.View.OnClickListener;
 
 import net.osmand.plus.R;
@@ -17,13 +16,11 @@ public class MapillaryImageCard extends ImageCard {
 		if (topIconId == 0) {
 			topIconId = R.drawable.ic_logo_mapillary;
 		}
-		OnClickListener onClickListener = new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				getMapActivity().getContextMenu().close();
-				MapillaryImageDialog.show(getMapActivity(), getKey(), getImageHiresUrl(), getUrl(), getLocation(),
-						getCa(), getMyApplication().getString(R.string.mapillary), null, true);
-			}
+		OnClickListener onClickListener = v -> {
+			MapActivity activity = getMapActivity();
+			activity.getContextMenu().close();
+			MapillaryImageDialog.show(activity, getKey(), getImageHiresUrl(), getUrl(), getLocation(),
+					getCa(), activity.getString(R.string.mapillary), null, true);
 		};
 		if (!Algorithms.isEmpty(buttonText)) {
 			this.onButtonClickListener = onClickListener;
