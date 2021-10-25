@@ -24,8 +24,8 @@ import java.util.List;
 public class OsmAndLocationSimulation {
 
 	private Thread routeAnimation;
-	private OsmAndLocationProvider provider;
-	private OsmandApplication app;
+	private final OsmAndLocationProvider provider;
+	private final OsmandApplication app;
 	
 	public OsmAndLocationSimulation(OsmandApplication app, OsmAndLocationProvider provider){
 		this.app = app;
@@ -69,7 +69,7 @@ public class OsmAndLocationSimulation {
 				final View view = activity.getLayoutInflater().inflate(R.layout.animate_route, null);
 				((TextView) view.findViewById(R.id.MinSpeedup)).setText("1"); //$NON-NLS-1$
 				((TextView) view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$
-				final Slider speedup = (Slider) view.findViewById(R.id.Speedup);
+				final Slider speedup = view.findViewById(R.id.Speedup);
 				speedup.setValueTo(3);
 				UiUtilities.setupSlider(speedup, nightMode, selectedModeColor, true);
 				builder.setView(view);
@@ -124,22 +124,21 @@ public class OsmAndLocationSimulation {
 				Location prev = current;
 				long prevTime = current == null ? 0 : current.getTime();
 				float meters = metersToGoInFiveSteps(directions, current);
-				if(current != null) {
+				if (current != null) {
 					current.setProvider(OsmAndLocationProvider.SIMULATED_PROVIDER);
 				}
 
 				while (!directions.isEmpty() && routeAnimation != null) {
-					int timeout = (int) (time  * 1000);
+					long timeout = (long) (time * 1000);
 					float intervalTime = time;
 					if (useLocationTime) {
 						current = directions.remove(0);
 						meters = current.distanceTo(prev);
 						if (!directions.isEmpty()) {
-							timeout = (int) (directions.get(0).getTime() - current.getTime());
-							intervalTime = (current.getTime() - prevTime)  / 1000f;
+							timeout = Math.abs((directions.get(0).getTime() - current.getTime()));
+							intervalTime = Math.abs((current.getTime() - prevTime) / 1000f);
 							prevTime = current.getTime();
 						}
-						
 					} else {
 						if (current.distanceTo(directions.get(0)) > meters) {
 							current = middleLocation(current, directions.get(0), meters);
@@ -148,25 +147,20 @@ public class OsmAndLocationSimulation {
 							meters = metersToGoInFiveSteps(directions, current);
 						}
 					}
-					if(intervalTime != 0) {
-						current.setSpeed(meters / intervalTime * coeff);	
+					if (intervalTime != 0) {
+						current.setSpeed(meters / intervalTime * coeff);
 					}
 					current.setTime(System.currentTimeMillis());
-					if(!current.hasAccuracy() || Double.isNaN(current.getAccuracy())) {
+					if (!current.hasAccuracy() || Double.isNaN(current.getAccuracy())) {
 						current.setAccuracy(5);
 					}
 					if (prev != null && prev.distanceTo(current) > 3) {
 						current.setBearing(prev.bearingTo(current));
 					}
 					final Location toset = current;
-					app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							provider.setLocationFromSimulation(toset);
-						}
-					});
+					app.runInUIThread(() -> provider.setLocationFromSimulation(toset));
 					try {
-						Thread.sleep((long)(timeout / coeff));
+						Thread.sleep((long) (timeout / coeff));
 					} catch (InterruptedException e) {
 						// do nothing
 					}
@@ -179,8 +173,7 @@ public class OsmAndLocationSimulation {
 		routeAnimation.start();
 	}
 	
-	private float metersToGoInFiveSteps(
-			final List<Location> directions, Location current) {
+	private float metersToGoInFiveSteps(List<Location> directions, Location current) {
 		return directions.isEmpty() ? 20.0f : Math.max(20.0f, current.distanceTo(directions.get(0)) / 2 );
 	}
 
@@ -188,8 +181,7 @@ public class OsmAndLocationSimulation {
 		routeAnimation = null;
 	}
 
-	public static Location middleLocation(Location start, Location end,
-			float meters) {
+	public static Location middleLocation(Location start, Location end, float meters) {
 		double lat1 = toRad(start.getLatitude());
 		double lon1 = toRad(start.getLongitude());
 		double R = 6371; // radius of earth in km
@@ -214,6 +206,4 @@ public class OsmAndLocationSimulation {
 	private static double toRad(double degree) {
 		return degree * Math.PI / 180;
 	}
-
-	
 }
