@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.IdRes;
 
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
+
 public class StorageItem implements Parcelable, Cloneable {
 
 	private String key;
@@ -13,20 +16,24 @@ public class StorageItem implements Parcelable, Cloneable {
 	private String description;
 	private String directory;
 	@IdRes
-	private int iconResId;
+	private int notSelectedIconResId;
+	@IdRes
+	private int selectedIconResId;
 
 	private StorageItem(String key,
 	                    int type,
 	                    String title,
 	                    String description,
 	                    String directory,
-	                    int iconResId) {
+	                    int notSelectedIconResId,
+	                    int selectedIconResId) {
 		this.key = key;
 		this.type = type;
 		this.title = title;
 		this.description = description;
 		this.directory = directory;
-		this.iconResId = iconResId;
+		this.notSelectedIconResId = notSelectedIconResId;
+		this.selectedIconResId = selectedIconResId;
 	}
 
 	private StorageItem(Parcel in) {
@@ -49,8 +56,12 @@ public class StorageItem implements Parcelable, Cloneable {
 		return directory;
 	}
 
-	public int getIconResId() {
-		return iconResId;
+	public int getNotSelectedIconResId() {
+		return notSelectedIconResId;
+	}
+
+	public int getSelectedIconResId() {
+		return selectedIconResId;
 	}
 
 	public String getKey() {
@@ -81,8 +92,8 @@ public class StorageItem implements Parcelable, Cloneable {
 		this.directory = directory;
 	}
 
-	public void setIconResId(int iconResId) {
-		this.iconResId = iconResId;
+	public boolean isStorageSizeDefineable() {
+		return !SHARED_STORAGE.equals(key) && !MANUALLY_SPECIFIED.equals(key);
 	}
 
 	public static DataStorageMenuItemBuilder builder() {
@@ -123,7 +134,9 @@ public class StorageItem implements Parcelable, Cloneable {
 		private String description;
 		private String directory;
 		@IdRes
-		private int iconResId;
+		private int notSelectedIconResId;
+		@IdRes
+		private int selectedIconResId;
 
 		public DataStorageMenuItemBuilder setKey(String key) {
 			this.key = key;
@@ -151,12 +164,19 @@ public class StorageItem implements Parcelable, Cloneable {
 		}
 
 		public DataStorageMenuItemBuilder setIconResId(int iconResId) {
-			this.iconResId = iconResId;
+			this.notSelectedIconResId = iconResId;
+			this.selectedIconResId = iconResId;
+			return this;
+		}
+
+		public DataStorageMenuItemBuilder setIconResIds(int notSelectedIconResId, int selectedIconResId) {
+			this.notSelectedIconResId = notSelectedIconResId;
+			this.selectedIconResId = selectedIconResId;
 			return this;
 		}
 
 		public StorageItem createItem() {
-			return new StorageItem(key, type, title, description, directory, iconResId);
+			return new StorageItem(key, type, title, description, directory, notSelectedIconResId, selectedIconResId);
 		}
 	}
 
@@ -168,7 +188,7 @@ public class StorageItem implements Parcelable, Cloneable {
 				.setDescription(this.description)
 				.setDirectory(this.directory)
 				.setType(this.type)
-				.setIconResId(this.iconResId)
+				.setIconResIds(this.notSelectedIconResId, this.selectedIconResId)
 				.createItem();
 	}
 }

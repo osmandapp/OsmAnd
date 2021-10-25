@@ -75,7 +75,7 @@ public class FavoritesActivity extends TabActivity {
 
 		app.logEvent("myplaces_open");
 
-		importHelper = new ImportHelper(this, app, null);
+		importHelper = new ImportHelper(this, app);
 
 		//noinspection ConstantConditions
 		getSupportActionBar().setTitle(R.string.shared_string_my_places);

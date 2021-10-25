@@ -107,12 +107,16 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		}
 	}
 
-	private void setupControlButtons(@NonNull View view) {
+	@Nullable
+	protected View getMapBottomHudButtons() {
+		return mapBottomHudButtons;
+	}
+
+	protected void setupControlButtons(@NonNull View view) {
 		MapActivity mapActivity = requireMapActivity();
 		View zoomInButtonView = view.findViewById(R.id.map_zoom_in_button);
 		View zoomOutButtonView = view.findViewById(R.id.map_zoom_out_button);
 		View myLocButtonView = view.findViewById(R.id.map_my_location_button);
-		View mapRulerView = view.findViewById(R.id.map_ruler_layout);
 
 		MapLayers mapLayers = mapActivity.getMapLayers();
 
@@ -124,6 +128,11 @@ public abstract class ContextMenuScrollFragment extends ContextMenuFragment impl
 		mapControlsLayer.setupZoomOutButton(zoomOutButtonView, longClickListener, ZOOM_OUT_BUTTON_ID);
 		mapControlsLayer.setupBackToLocationButton(myLocButtonView, false, BACK_TO_LOC_BUTTON_ID);
 
+		setupMapRulerWidget(view, mapLayers);
+	}
+
+	protected void setupMapRulerWidget(@NonNull View view, @NonNull MapLayers mapLayers) {
+		View mapRulerView = view.findViewById(R.id.map_ruler_layout);
 		MapInfoLayer mapInfoLayer = mapLayers.getMapInfoLayer();
 		rulerWidget = mapInfoLayer.setupRulerWidget(mapRulerView);
 	}

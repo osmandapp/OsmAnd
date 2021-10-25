@@ -9,10 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.Fragment;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.plus.ColorUtilities;
@@ -21,9 +19,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
-import net.osmand.plus.settings.backend.ApplicationMode;
-import net.osmand.plus.track.TrackSelectSegmentBottomSheet;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,8 +28,8 @@ import java.util.List;
 
 public class TracksCard extends MapBaseCard {
 
-	private final List<GPXFile> gpxFiles;
 	private boolean showLimited = true;
+	private final List<GpxItem> gpxItems = new ArrayList<>();
 
 	private static class GpxItem {
 		String title;
@@ -48,9 +43,16 @@ public class TracksCard extends MapBaseCard {
 		}
 	}
 
-	public TracksCard(MapActivity mapActivity, List<GPXFile> gpxFiles) {
+	public TracksCard(@NonNull MapActivity mapActivity, @NonNull List<GPXFile> gpxFiles) {
 		super(mapActivity);
-		this.gpxFiles = gpxFiles;
+
+		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
+		for (GPXFile gpx : gpxFiles) {
+			File f = new File(gpx.path);
+			String fileName = gpx.path.startsWith(gpxDir) ? gpx.path.substring(gpxDir.length() + 1) : f.getName();
+			gpxItems.add(new GpxItem(GpxUiHelper.getGpxTitle(f.getName()), gpx, new GPXInfo(fileName, f.lastModified(), f.length())));
+		}
+		Collections.sort(gpxItems, Comparator.comparing(i -> i.title.toLowerCase()));
 	}
 
 	@Override
@@ -65,20 +67,6 @@ public class TracksCard extends MapBaseCard {
 	@SuppressLint("DefaultLocale")
 	@Override
 	protected void updateContent() {
-		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
-		final List<GpxItem> list = new ArrayList<>();
-		for (GPXFile gpx : gpxFiles) {
-			File f = new File(gpx.path);
-			String fileName = gpx.path.startsWith(gpxDir) ? gpx.path.substring(gpxDir.length() + 1) : f.getName();
-			list.add(new GpxItem(GpxUiHelper.getGpxTitle(f.getName()), gpx, new GPXInfo(fileName, f.lastModified(), f.length())));
-		}
-		Collections.sort(list, new Comparator<GpxItem>() {
-			@Override
-			public int compare(GpxItem i1, GpxItem i2) {
-				return i1.title.toLowerCase().compareTo(i2.title.toLowerCase());
-			}
-		});
-
 		LinearLayout tracks = view.findViewById(R.id.items);
 		tracks.removeAllViews();
 
@@ -90,11 +78,11 @@ public class TracksCard extends MapBaseCard {
 		int descriptionColor = getSecondaryColor();
 		int dividerColor = ColorUtilities.getDividerColor(mapActivity, nightMode);
 
-		int i = 0;
-		boolean showLimitExceeds = list.size() > 4;
+		boolean showLimitExceeds = gpxItems.size() > 4;
 		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		LayoutInflater inflater = LayoutInflater.from(ctx);
-		for (final GpxItem item : list) {
+		for (int i = 0; i < gpxItems.size(); i++) {
+			GpxItem item = gpxItems.get(i);
 			if (showLimitExceeds && i >= 3 && showLimited) {
 				break;
 			}
@@ -119,35 +107,14 @@ public class TracksCard extends MapBaseCard {
 			LinearLayout container = v.findViewById(R.id.container);
 			container.setMinimumHeight(minCardHeight);
 			AndroidUtils.setPadding(container, listContentPadding, 0, 0, 0);
-			v.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					List<GPXUtilities.WptPt> points = item.file.getRoutePoints();
-					if (!points.isEmpty()) {
-						ApplicationMode mode = ApplicationMode.valueOfStringKey(points.get(0).getProfileType(), null);
-						if (mode != null) {
-							app.getRoutingHelper().setAppMode(mode);
-							app.initVoiceCommandPlayer(mapActivity, mode, null,
-									true, false, false, true);
-						}
-					}
-					if (item.file.getNonEmptySegmentsCount() > 1) {
-						Fragment targetFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapRouteInfoMenuFragment.TAG);
-						TrackSelectSegmentBottomSheet.showInstance(mapActivity.getSupportFragmentManager(), item.file, targetFragment);
-					} else {
-						mapActivity.getMapActions().setGPXRouteParams(item.file);
-						app.getTargetPointsHelper().updateRouteAndRefresh(true);
-					}
-				}
-			});
+			v.setOnClickListener(v1 -> mapActivity.getMapRouteInfoMenu().selectTrack(item.file));
 			tracks.addView(v);
-			i++;
 		}
 
 		View showAllButton = view.findViewById(R.id.show_all_button);
 		if (showLimited && showLimitExceeds) {
 			((TextView) view.findViewById(R.id.show_all_title)).setText(
-					String.format("%s — %d", app.getString(R.string.shared_string_show_all).toUpperCase(), list.size()));
+					String.format("%s — %d", app.getString(R.string.shared_string_show_all).toUpperCase(), gpxItems.size()));
 			showAllButton.setVisibility(View.VISIBLE);
 			showAllButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -162,7 +129,7 @@ public class TracksCard extends MapBaseCard {
 		}
 
 		((TextView) view.findViewById(R.id.gpx_card_title)).setText(
-				String.format("%s (%d)", app.getString(R.string.tracks_on_map), list.size()));
+				String.format("%s (%d)", app.getString(R.string.tracks_on_map), gpxItems.size()));
 	}
 
 	@Override

@@ -67,7 +67,7 @@ class SettingsImportTask extends BaseLoadAsyncTask<Void, Void, String> {
 	protected String doInBackground(Void... voids) {
 		File tempDir = FileUtils.getTempDir(app);
 		File dest = new File(tempDir, name);
-		return ImportHelper.copyFile(app, dest, uri, true);
+		return ImportHelper.copyFile(app, dest, uri, true, false);
 	}
 
 	@Override

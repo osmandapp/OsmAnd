@@ -21,6 +21,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -172,6 +173,10 @@ public abstract class InAppPurchaseHelper {
 		return Version.isDeveloperBuild(ctx)
 				|| isSubscribedToPromo(ctx)
 				|| isSubscribedToOsmAndPro(ctx);
+	}
+
+	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication ctx) {
+		return Version.isDeveloperBuild(ctx) || Version.isPaidVersion(ctx);
 	}
 
 	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {
@@ -743,9 +748,11 @@ public abstract class InAppPurchaseHelper {
 			subscription.setPurchaseState(PurchaseState.PURCHASED);
 			subscription.setPurchaseInfo(ctx, info);
 			subscription.setState(ctx, SubscriptionState.UNDEFINED);
+			logDebug("Sending tokens...");
 			sendTokens(Collections.singletonList(info), new OnRequestResultListener() {
 				@Override
 				public void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode) {
+					logDebug("Tokens sent");
 					boolean active = false;
 					if (liveUpdates || pro) {
 						active = ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
@@ -763,6 +770,11 @@ public abstract class InAppPurchaseHelper {
 					}
 					notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
 					notifyItemPurchased(sku, active);
+					NavigationSession carNavigationSession = ctx.getCarNavigationSession();
+					if (carNavigationSession != null) {
+						logDebug("Call Android Auto");
+						carNavigationSession.onPurchaseDone();
+					}
 					stop(true);
 				}
 			});

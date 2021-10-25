@@ -3181,7 +3181,6 @@
     <string name="paste_Osmand_data_folder_path">Colar caminho para a pasta com dados do OsmAnd</string>
     <string name="change_osmand_data_folder_question">Alterar a pasta de dados do OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Mover para o novo destino</string>
-    <string name="internal_app_storage_description">Armazenamento interno para o OsmAnd (oculto aos utilizadores e outras aplicações).</string>
     <string name="change_data_storage_folder">Alterar pasta de armazenamento</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parque de neve</string>
     <string name="rendering_attr_piste_type_sleigh_name">Trenó puxado por animais</string>
@@ -4345,4 +4344,66 @@
     <string name="routing_attr_allow_gate_name">Permitir utilização de portões</string>
     <string name="routing_attr_prefer_tactile_paving_description">Preferir pavimentação tátil</string>
     <string name="routing_attr_prefer_tactile_paving_name">Preferir pavimentação tátil</string>
+    <string name="upload_gpx_description_hint">Deixe em branco se quiser usar os nomes dos trilhos GPX como descrição. A descrição inserida será aplicada para cada trilho.</string>
+    <string name="search_title">Pesquisar: %1$s</string>
+    <string name="exit_pan_mode_descr">Pressione \"Selecionar\" para sair do modo deslocar</string>
+    <string name="icon_group_nautical">Náutico</string>
+    <string name="shared_storage_warning_title">Alterações nas regras de acesso ao armazenamento</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd mapas e navegação offline no ecrã do seu veículo. Integre-o nos comandos do seu veículo.</string>
+    <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturais, áreas protegidas e parques nacionais.</string>
+    <string name="shared_string_details">Detalhes</string>
+    <string name="shared_app_storage_description">A memória partilhada deixou de estar disponível devido a mudanças nas regras de acesso ao armazenamento no Android.</string>
+    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
+    <string name="internal_app_storage_description">Armazenamento interno, oculto ao utilizador e outras aplicações, de modo a que ninguém, a não ser o OsmAnd, pode ter acesso aos seus dados</string>
+    <string name="android_auto_map_placeholder_descr">Desconecte o seu aparelho do Android Auto para ver o mapa na app.</string>
+    <string name="android_auto_purchase_request_title">Compre OsmAnd Pro ou Maps+ para usar o OsmAnd com o Android Auto</string>
+    <string name="continue_on_phone">Continuar no telefone</string>
+    <string name="shared_string_articles">Artigos</string>
+    <string name="android_auto_map_placeholder_title">O mapa é apresentado no ecrã do veículo.</string>
+    <string name="location_access_request_title">OsmAnd precisa de acesso à localização para navegar</string>
+    <string name="location_access_request_action">Conceder acesso</string>
+    <string name="location_access_request_result">Aprovado: %1$s Rejeitado: %2$s</string>
+    <string name="included_categories">Categorias incluídas</string>
+    <string name="release_4_1">- Adicionado o suporte inicial para o Android Auto
+\n
+\n - Atualização da interface do utilizador para busca de coordenadas UTM
+\n
+\n - Favoritos: adicionada a capacidade de visualizar ícones usados recentemente
+\n
+\n - Planeamento de rotas: utilizará o perfil selecionado após o lançamento
+\n
+\n - Camada Mapilar fixa, a extensão está agora desativada por defeito
+\n
+\n - Adicionado ecrã para gerir todo o histórico na app
+\n
+\n - A orientação do mapa não é redefinida após reiniciar a app
+\n
+\n - Melhoria da renderização do marcador de altura SRTM
+\n
+\n - Corrigida a visualização arábica no mapa
+\n
+\n - Corrigidos diferentes problemas de roteamento
+\n
+\n</string>
+    <string name="is_disabled">%1$s está desativado</string>
+    <string name="shared_storage_warning_description">A partir de novembro de 2021 o OsmAnd 4.2 vai perder o acesso ao armazenamento partilhado, devido às regras de acesso ao armazenamento alteradas pelo Android.
+\n
+\nPor favor, altere o armazenamento de \"Armazenamento partilhado\" para o armazenamento disponível, se isso não for feito a aplicação perderá o acesso aos seus dados: incluindo mapas offline, trilhos GPX e todo o resto.</string>
+    <string name="shortcut_navigate_to">Navegar para…</string>
+    <string name="markers_history_is_disabled_descr">Ative o histórico para obter uma lista de marcadores de mapa visitados.</string>
+    <string name="clear_all_history_warning">Tem a certeza que quer limpar todo o histórico da aplicação\?
+\n
+\nOs históricos de busca, navegação e marcadores serão apagados.</string>
+    <string name="clear_all_history">Limpar todo o histórico</string>
+    <string name="search_history_is_disabled_descr">Pode ativar o histórico de pesquisa em Configurações</string>
+    <string name="history_is_disabled_descr">Ative o histórico para obter acesso mais rápido aos últimos resultados usados.</string>
+    <string name="map_markers_history">Histórico de marcadores de mapa</string>
+    <string name="shortcut_start_recording">Começar a gravar</string>
+    <string name="shortcut_navigate_to_home">Navegar para casa</string>
+    <string name="history_actions_descr">Pode exportar o histórico para um ficheiro.</string>
+    <string name="navigation_history">Histórico de navegação</string>
+    <string name="history_preferences_descr">Pode desativar o registo de histórico individualmente para cada tipo de histórico.</string>
+    <string name="shortcut_navigate_to_work">Navegar para o trabalho</string>
+    <string name="transparent_status_bar_descr">Mostrar o mapa por baixo da barra de estado</string>
+    <string name="transparent_status_bar">Barra de estado transparente</string>
 </resources>

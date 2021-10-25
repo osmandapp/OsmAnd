@@ -53,7 +53,7 @@ public class StartPlanRouteBottomSheet extends BottomSheetBehaviourDialogFragmen
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		importHelper = new ImportHelper((AppCompatActivity) getActivity(), getMyApplication(), null);
+		importHelper = new ImportHelper((AppCompatActivity) getActivity(), getMyApplication());
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.bottom_sheet_plan_route_start, null);

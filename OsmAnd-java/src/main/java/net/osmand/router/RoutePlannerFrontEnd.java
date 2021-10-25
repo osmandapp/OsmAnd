@@ -32,7 +32,7 @@ public class RoutePlannerFrontEnd {
 	// Check issue #8649
 	protected static final double GPS_POSSIBLE_ERROR = 7;
 	public boolean useSmartRouteRecalculation = true;
-	public static final boolean USE_NATIVE_APPROXIMATION = true;
+	public boolean useNativeApproximation = true;
 
 	
 	public RoutePlannerFrontEnd() {
@@ -230,10 +230,14 @@ public class RoutePlannerFrontEnd {
 		useSmartRouteRecalculation = use;
 	}
 
+	public void setUseNativeApproximation(boolean useNativeApproximation) {
+		this.useNativeApproximation = useNativeApproximation;
+	}
+
 	public GpxRouteApproximation searchGpxRoute(GpxRouteApproximation gctx, List<GpxPoint> gpxPoints, ResultMatcher<GpxRouteApproximation> resultMatcher) throws IOException, InterruptedException {
 		long timeToCalculate = System.nanoTime();
 		NativeLibrary nativeLib = gctx.ctx.nativeLib;
-		if (nativeLib != null && USE_NATIVE_APPROXIMATION) {
+		if (nativeLib != null && useNativeApproximation) {
 			gctx = nativeLib.runNativeSearchGpxRoute(gctx, gpxPoints);
 		} else {
 			gctx.ctx.keepNativeRoutingContext = true;

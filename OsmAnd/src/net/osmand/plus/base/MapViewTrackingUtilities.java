@@ -468,6 +468,9 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			app.showShortToastMessage(rotMode);
 			updateSettings(true);
 			mapView.refreshMap();
+			if (mapView.isCarView()) {
+				app.refreshCarScreen();
+			}
 		}
 	}
 	

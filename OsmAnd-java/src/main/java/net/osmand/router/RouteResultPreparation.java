@@ -351,6 +351,31 @@ public class RouteResultPreparation {
 		}
 	}
 
+	public static void recalculateTimeDistance(List<RouteSegmentResult> result) {
+		for (int i = 0; i < result.size(); i++) {
+			RouteSegmentResult rr = result.get(i);
+			RouteDataObject road = rr.getObject();
+			double distOnRoadToPass = 0;
+			double speed = rr.getSegmentSpeed();
+			if (speed == 0) {
+				continue;
+			}
+			boolean plus = rr.getStartPointIndex() < rr.getEndPointIndex();
+			int next;
+			double distance = 0;
+			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
+				next = plus ? j + 1 : j - 1;
+				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
+						road.getPoint31YTile(next));
+				distance += d;
+				distOnRoadToPass += d / speed;  //this is time in seconds
+			}
+			rr.setSegmentTime((float) distOnRoadToPass);
+			rr.setSegmentSpeed((float) speed);
+			rr.setDistance((float) distance);
+		}
+	}
+
 	private void splitRoadsAndAttachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, boolean recalculation) throws IOException {
 		for (int i = 0; i < result.size(); i++) {
 			if (ctx.checkIfMemoryLimitCritical(ctx.config.memoryLimitation)) {
@@ -858,16 +883,7 @@ public class RouteResultPreparation {
 					}
 					if (dist < mergeDistance) {
 						mergeTurnLanes(leftside, currentSegment, nextSegment);
-						TurnType turnType = currentSegment.getTurnType();
-						Integer[] possibleTurn = getPossibleTurnsFromActiveLanes(turnType.getLanes(), true);
-						if (possibleTurn.length == 1) {
-							TurnType tt = TurnType.valueOf(possibleTurn[0], currentSegment.getTurnType().isLeftSide());
-							tt.setLanes(turnType.getLanes());
-							tt.setSkipToSpeak(turnType.isSkipToSpeak());
-							currentSegment.setTurnType(tt);
-							turnType = tt;
-						}
-						inferCommonActiveLane(turnType, nextSegment.getTurnType());
+						inferCommonActiveLane(currentSegment.getTurnType(), nextSegment.getTurnType());
 						merged = true;
 					}
 				}
@@ -1065,7 +1081,7 @@ public class RouteResultPreparation {
 		}
 		if (singleTurn == 0) {
 			singleTurn = currentTurn.getValue();
-			if(singleTurn == TurnType.KL || singleTurn == TurnType.KR) {
+			if (singleTurn == TurnType.KL || singleTurn == TurnType.KR) {
 				return;
 			}
 		}
@@ -1354,7 +1370,7 @@ public class RouteResultPreparation {
 			if (tp != 0) {
 				// add extra lanes with same turn
 				for(int i = 0; i < rawLanes.length; i++) {
-					if(TurnType.getSecondaryTurn(rawLanes[i]) == tp) {
+					if (TurnType.getSecondaryTurn(rawLanes[i]) == tp) {
 						TurnType.setSecondaryToPrimary(rawLanes, i);
 						rawLanes[i] |= 1;
 					} else if(TurnType.getPrimaryTurn(rawLanes[i]) == tp) {
@@ -1365,10 +1381,12 @@ public class RouteResultPreparation {
 			if (tp != t.getValue() && tp != 0) {
 				t = TurnType.valueOf(tp, leftSide);
 			} else {
-				if (rs.keepRight && TurnType.getSecondaryTurn(rawLanes[activeEndIndex]) == 0) {
-					t = TurnType.valueOf(TurnType.getPrimaryTurn(rawLanes[activeEndIndex]), leftSide);
-				} else if (rs.keepLeft && TurnType.getSecondaryTurn(rawLanes[activeBeginIndex]) == 0) {
-					t = TurnType.valueOf(TurnType.getPrimaryTurn(rawLanes[activeBeginIndex]), leftSide);
+				//use keepRight and keepLeft turns when attached road doesn't have lanes
+				//or prev segment has more then 1 turn to the active lane
+				if (rs.keepRight) {
+					t = getTurnByCurrentTurns(rs.leftLanesInfo, rawLanes, TurnType.KR, leftSide);
+				} else if (rs.keepLeft ) {
+					t = getTurnByCurrentTurns(rs.rightLanesInfo, rawLanes, TurnType.KL, leftSide);
 				}
 			}
 		} else {
@@ -1380,6 +1398,7 @@ public class RouteResultPreparation {
 			} else if (possibleTurns.length == 3) {
 				if ((!possiblyLeftTurn || !possiblyRightTurn) && TurnType.isSlightTurn(possibleTurns[1])) {
 					tp = possibleTurns[1];
+					rawLanes[1] |= 1;
 					t = TurnType.valueOf(tp, leftSide);
 				}
 			}
@@ -1397,7 +1416,9 @@ public class RouteResultPreparation {
 						|| (TurnType.isLeftTurn(sturn) && possiblyLeftTurn)) {
 					// we can't predict here whether it will be a left turn or straight on,
 					// it could be done during 2nd pass
-					TurnType.setSecondaryToPrimary(rawLanes, k);
+					if ((rawLanes[k] & 1) == 0) {
+						TurnType.setSecondaryToPrimary(rawLanes, k);
+					}
 					active = true;
 				} else if ((TurnType.isRightTurn(tturn) && possiblyRightTurn)
 						|| (TurnType.isLeftTurn(tturn) && possiblyLeftTurn)) {
@@ -1408,7 +1429,6 @@ public class RouteResultPreparation {
 					active = true;
 				} else if (TurnType.isSlightTurn(turn) && !possiblyRightTurn && !possiblyLeftTurn) {
 					active = true;
-					// } else if (turn == TurnType.C) {
 				} else if (turn == tp) {
 					active = true;
 				}
@@ -1422,6 +1442,28 @@ public class RouteResultPreparation {
 		t.setPossibleLeftTurn(possiblyLeftTurn);
 		t.setPossibleRightTurn(possiblyRightTurn);
 		return t;
+	}
+
+	private TurnType getTurnByCurrentTurns(List<int[]> lanesInfo, int[] rawLanes, int keepTurnType, boolean leftSide) {
+		TIntHashSet followTurns = new TIntHashSet();
+		if (lanesInfo != null) {
+			for (int[] li : lanesInfo) {
+				if (li != null) {
+					for (int i : li) {
+						TurnType.collectTurnTypes(i, followTurns);
+					}
+				}
+			}
+		}
+		TIntHashSet currentTurns = new TIntHashSet();
+		for (int ln : rawLanes) {
+			TurnType.collectTurnTypes(ln, currentTurns);
+		}
+		currentTurns.removeAll(followTurns);
+		if (currentTurns.size() == 1) {
+			return TurnType.valueOf(currentTurns.iterator().next(), leftSide);
+		}
+		return TurnType.valueOf(keepTurnType, leftSide);
 	}
 
 	protected int findActiveIndex(int[] rawLanes, String[] splitLaneOptions, int lanes, boolean left, 
@@ -1692,7 +1734,7 @@ public class RouteResultPreparation {
 
 	
 	private int inferSlightTurnFromActiveLanes(int[] oLanes, boolean mostLeft, boolean mostRight) {
-		Integer[] possibleTurns = getPossibleTurns(oLanes, false, true);
+		Integer[] possibleTurns = getPossibleTurns(oLanes, false, false);
 		if (possibleTurns.length == 0) {
 			// No common turns, so can't determine anything.
 			return 0;
@@ -1700,21 +1742,18 @@ public class RouteResultPreparation {
 		int infer = 0;
 		if (possibleTurns.length == 1) {
 			infer = possibleTurns[0];
-		} else {
+		} else if (possibleTurns.length == 2) {
+			// this method could be adapted for 3+ turns 
 			if (mostLeft && !mostRight) {
 				infer = possibleTurns[0];
-			} else if(mostRight && !mostLeft) {
+			} else if (mostRight && !mostLeft) {
 				infer = possibleTurns[possibleTurns.length - 1];
 			} else {
 				infer = possibleTurns[1];
-//				infer = TurnType.C;
+				// infer = TurnType.C;
 			}
 		}
 		return infer;
-	}
-
-	private Integer[] getPossibleTurnsFromActiveLanes(int[] oLanes, boolean onlyPrimary) {
-		return getPossibleTurns(oLanes, onlyPrimary, true);
 	}
 	
 	private Integer[] getPossibleTurns(int[] oLanes, boolean onlyPrimary, boolean uniqueFromActive) {

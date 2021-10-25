@@ -60,6 +60,9 @@ public class PoiCategory extends PoiFilter {
 		return keyName.equals(MapPoiTypes.OSM_WIKI_CATEGORY);
 	}
 
+	public boolean isRoutes() {
+		return keyName.equals(MapPoiTypes.ROUTES);
+	}
 
 	public int ordinal() {
 		return regId;

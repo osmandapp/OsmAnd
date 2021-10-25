@@ -159,6 +159,9 @@
 	<string name="poi_permanent_camping">Permanent camping</string>
 	<string name="poi_shelter_filter">Shelter</string>
 	<string name="poi_callable">Callable</string>
+	<string name="poi_butcher_type">Primary meat type</string>
+	<string name="poi_coffee_filter">Coffee</string>
+	<string name="poi_ice_cream_filter">Ice cream</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4517,5 +4520,45 @@
 	<string name="poi_country_store">Country store</string>
 
 	<string name="poi_prep_school">Tutorial school</string>
+	<string name="poi_ticket_validator">Ticket validator</string>
+
+	<string name="poi_geoglyph">Geoglyph</string>
+
+	<string name="poi_satellite_dish">Satellite dish</string>
+
+	<string name="poi_trailhead">Trailhead</string>
+
+	<string name="poi_hampshire_gate">Hampshire gate</string>
+
+	<string name="poi_driver_training">Driver training place</string>
+	<string name="poi_research_institute">Research institute</string>
+
+	<string name="poi_sports_hall">Sports hall</string>
+	<string name="poi_couplings">Couplings</string>
+
+	<string name="poi_winery">Winery</string>
+	<string name="poi_wine_region">Wine region</string>
+	<string name="poi_wine_grape">Grape</string>
+	<string name="poi_wine_vineyard">Vineyard</string>
+	<string name="poi_wine_type">Type</string>
+	<string name="poi_distillery">Distillery</string>
+	<string name="poi_reusable_packaging_accept_yes">Reusable packaging accept: yes</string>
+	<string name="poi_reusable_packaging_accept_no">Reusable packaging accept: no</string>
+	<string name="poi_reusable_packaging_accept_only">Reusable packaging accept: only</string>
+	<string name="poi_reusable_packaging_offer_yes">Reusable packaging offer: yes</string>
+	<string name="poi_reusable_packaging_offer_no">Reusable packaging offer: no</string>
+	<string name="poi_reusable_packaging_offer_only">Reusable packaging offer: only</string>
+	<string name="poi_zero_waste_yes">Zero waste: yes</string>
+	<string name="poi_zero_waste_no">Zero waste: no</string>
+	<string name="poi_zero_waste_only">Zero waste: only</string>
+	<string name="poi_butcher_poultry">Poultry</string>
+	<string name="poi_butcher_beef">Beef</string>
+	<string name="poi_butcher_horse">Horse</string>
+	<string name="poi_butcher_lamb">Lamb</string>
+	<string name="poi_butcher_pork">Pork</string>
+	<string name="poi_butcher_halal">Halal</string>
+	<string name="poi_coffee_yes">Yes</string>
+	<string name="poi_coffee_no">No</string>
+	<string name="poi_ice_cream_yes">Yes</string>
 
 </resources>

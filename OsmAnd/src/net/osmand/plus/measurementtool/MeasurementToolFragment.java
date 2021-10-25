@@ -1849,6 +1849,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	protected static void showGpxOnMap(OsmandApplication app, GPXFile gpx, boolean isNewGpx) {
+		GPXUtilities.createArtificialPrimeMeridianPoints(gpx);
 		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 		if (sf != null && !isNewGpx) {
 			sf.processPoints(app);

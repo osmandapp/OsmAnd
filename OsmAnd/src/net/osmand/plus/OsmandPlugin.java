@@ -673,6 +673,17 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
+	@NonNull
+	public static List<OsmandPlugin> getEnabledSettingsScreenPlugins() {
+		List<OsmandPlugin> plugins = new ArrayList<>();
+		for (OsmandPlugin plugin : getEnabledPlugins()) {
+			if (plugin.getSettingsScreenType() != null) {
+				plugins.add(plugin);
+			}
+		}
+		return plugins;
+	}
+
 	@SuppressWarnings("unchecked")
 	public static <T extends OsmandPlugin> T getEnabledPlugin(Class<T> clz) {
 		for (OsmandPlugin lr : getEnabledPlugins()) {

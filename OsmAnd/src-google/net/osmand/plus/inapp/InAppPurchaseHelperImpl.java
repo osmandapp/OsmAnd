@@ -263,7 +263,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			url += "&sku=" + sku;
 		}
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-		AndroidUtils.isIntentSafe(ctx, intent);
+		AndroidUtils.startActivityIfSafe(ctx, intent);
 	}
 
 	@Nullable

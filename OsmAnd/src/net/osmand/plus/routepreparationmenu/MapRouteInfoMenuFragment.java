@@ -157,7 +157,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 					updateRouteCalculationProgress(0);
 				}
 			}
-			menu.onResume(this);
+			menu.onResume();
 		}
 	}
 
@@ -165,7 +165,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment
 	public void onPause() {
 		super.onPause();
 		if (menu != null) {
-			menu.onPause(this);
+			menu.onPause();
 		}
 	}
 

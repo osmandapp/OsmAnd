@@ -295,7 +295,7 @@ public class OpeningHoursParser {
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
 					if (i > 0) {
-						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
+						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1), false);
 					}
 					boolean open = rule.isOpenedForTime(cal);
 					if (open || (!overlap && !checkNext)) {
@@ -428,7 +428,7 @@ public class OpeningHoursParser {
 			OpeningHoursRule prevRule = null;
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					if (atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule)) {
+					if (atTime.length() > 0 && prevRule != null && !r.hasOverlapTimes(cal, prevRule, true)) {
 						return atTime;
 					} else {
 						atTime = r.getTime(cal, false, limit, opening);
@@ -475,7 +475,7 @@ public class OpeningHoursParser {
 				OpeningHoursRule rule = rules.get(i);
 				if (rule.contains(cal)) {
 					if (i > 0) {
-						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1));
+						checkNext = !rule.hasOverlapTimes(cal, rules.get(i - 1), false);
 					}
 					boolean open = rule.isOpenedForTime(cal);
 					if (open || (!overlap && !checkNext)) {
@@ -625,9 +625,10 @@ public class OpeningHoursParser {
 		 *
 		 * @param cal the date to check
 		 * @param r the rule to check
+		 * @param strictOverlap detect overlap even if r rule time end at rule time start (2:00-5:00, 5:00-7:00)
 		 * @return true if the this rule times overlap with r times
 		 */
-		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r);
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r, boolean strictOverlap);
 
 		/**
 		 * @param cal
@@ -1451,7 +1452,7 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r) {
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r, boolean strictOverlap) {
 			if (off) {
 				return true;
 			}
@@ -1474,8 +1475,8 @@ public class OpeningHoursParser {
 							} else if (rStartTime >= rEndTime) {
 								rEndTime = 24 * 60 + rEndTime;
 							}
-							if ((rStartTime >= startTime && rStartTime < endTime)
-									|| (startTime >= rStartTime && startTime < rEndTime)) {
+							if ((rStartTime >= startTime && (strictOverlap ? rStartTime <= endTime : rStartTime < endTime))
+									|| (startTime >= rStartTime && (strictOverlap ? startTime <= rEndTime : startTime < rEndTime))) {
 								return true;
 							}
 						}
@@ -1563,7 +1564,7 @@ public class OpeningHoursParser {
 		}
 
 		@Override
-		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r) {
+		public boolean hasOverlapTimes(Calendar cal, OpeningHoursRule r, boolean strictOverlap) {
 			return false;
 		}
 
@@ -2001,7 +2002,7 @@ public class OpeningHoursParser {
 				!presentTokens.contains(TokenType.TOKEN_DAY_MONTH)) {
 			Arrays.fill(basic.getDays(), true);
 			basic.hasDays = true;
-		} else if (presentTokens.contains(TokenType.TOKEN_DAY_WEEK)) {
+		} else if (presentTokens.contains(TokenType.TOKEN_DAY_WEEK) || presentTokens.contains(TokenType.TOKEN_HOLIDAY)) {
 			basic.hasDays = true;
 		}
 		rules.add(0, basic);

@@ -77,18 +77,19 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		final int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 		View mainView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.save_gpx_fragment, null);
 
-		OsmandTextFieldBoxes textBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.name_text_box);
+		OsmandTextFieldBoxes textBox = mainView.findViewById(R.id.name_text_box);
 		if (nightMode) {
 			textBox.setPrimaryColor(ContextCompat.getColor(app, R.color.active_color_primary_dark));
 		}
+		int iconColor = ColorUtilities.getDefaultIconColorId(nightMode);
+		textBox.setClearButton(getIcon(R.drawable.ic_action_remove_circle, iconColor));
 
-		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
+		final EditText nameEditText = mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(savedGpxName);
 		nameEditText.setTextColor(ContextCompat.getColor(ctx, textPrimaryColor));
 		nameEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
 			}
 
 			@Override

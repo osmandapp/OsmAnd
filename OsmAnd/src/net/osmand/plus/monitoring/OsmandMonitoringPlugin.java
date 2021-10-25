@@ -101,6 +101,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		app.getLauncherShortcutsHelper().updateLauncherShortcuts();
+	}
+
+	@Override
 	public void updateLocation(Location location) {
 		liveMonitoringHelper.updateLocation(location);
 	}

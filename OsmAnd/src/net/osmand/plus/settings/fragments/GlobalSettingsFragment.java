@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -26,15 +29,13 @@ import net.osmand.plus.settings.datastorage.item.StorageItem;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.PROFILE_KEY_ARG;
-import static net.osmand.plus.profiles.SelectProfileBottomSheet.USE_LAST_PROFILE_ARG;
-
 
 public class GlobalSettingsFragment extends BaseSettingsFragment
 		implements OnSendAnalyticsPrefsUpdate, OnPreferenceChanged, OnSelectProfileCallback {
 
 	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
+	private static final String HISTORY_PREF_ID = "history";
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 	private static final String DIALOGS_AND_NOTIFICATIONS_PREF_ID = "dialogs_and_notifications";
 
@@ -46,6 +47,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 
 		setupSendAnonymousDataPref();
 		setupDialogsAndNotificationsPref();
+		setupHistoryPref();
 		setupEnableProxyPref();
 		setupUninstallSpeedCamerasPref();
 	}
@@ -67,10 +69,21 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
-		if (DIALOGS_AND_NOTIFICATIONS_PREF_ID.equals(preference.getKey())) {
+
+		String prefId = preference.getKey();
+		if (DIALOGS_AND_NOTIFICATIONS_PREF_ID.equals(prefId)) {
 			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
 			if (imageView != null) {
 				boolean enabled = preference.isEnabled() && (!settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || settings.SHOW_DOWNLOAD_MAP_DIALOG.get());
+				imageView.setEnabled(enabled);
+			}
+		} else if (HISTORY_PREF_ID.equals(prefId)) {
+			ImageView imageView = (ImageView) holder.findViewById(android.R.id.icon);
+			if (imageView != null) {
+				boolean enabled = preference.isEnabled()
+						&& (settings.SEARCH_HISTORY.get()
+						|| settings.NAVIGATION_HISTORY.get()
+						|| settings.MAP_MARKERS_HISTORY.get());
 				imageView.setEnabled(enabled);
 			}
 		}
@@ -230,6 +243,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment
 	private void setupEnableProxyPref() {
 		SwitchPreferenceEx enableProxy = (SwitchPreferenceEx) findPreference(settings.ENABLE_PROXY.getId());
 		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_proxy));
+	}
+
+	private void setupHistoryPref() {
+		Preference enableProxy = findPreference(HISTORY_PREF_ID);
+		enableProxy.setIcon(getPersistentPrefIcon(R.drawable.ic_action_history));
 	}
 
 	private void setupUninstallSpeedCamerasPref() {

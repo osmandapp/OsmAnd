@@ -1,7 +1,5 @@
 package net.osmand.plus.settings.fragments;
 
-import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,18 +15,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.PreferenceGroupAdapter;
-import androidx.recyclerview.widget.RecyclerView;
-
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -37,11 +23,13 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.PluginsFragment;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog.PluginStateListener;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -50,7 +38,6 @@ import net.osmand.plus.settings.backend.backup.SettingsHelper.ImportListener;
 import net.osmand.plus.settings.backend.backup.items.SettingsItem;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
-import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
 import org.apache.commons.logging.Log;
 
@@ -58,7 +45,24 @@ import java.io.File;
 import java.util.Collections;
 import java.util.List;
 
-public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceGroupAdapter;
+import androidx.preference.PreferenceViewHolder;
+import androidx.recyclerview.widget.RecyclerView;
+
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
+
+public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener,
+		ResetAppModePrefsListener, PluginStateListener {
 
 	public static final String TAG = ConfigureProfileFragment.class.getSimpleName();
 
@@ -283,6 +287,28 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	}
 
 	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+
+		if (PLUGIN_SETTINGS.equals(preference.getKey())) {
+			View noPluginsPart = holder.findViewById(R.id.no_plugins_part);
+			boolean hasPlugins = OsmandPlugin.getEnabledSettingsScreenPlugins().size() > 0;
+			AndroidUiHelper.updateVisibility(noPluginsPart, !hasPlugins);
+
+			View openPluginsButton = noPluginsPart.findViewById(R.id.open_plugins_button);
+			if (!hasPlugins) {
+				UiUtilities.setupDialogButton(isNightMode(), openPluginsButton, DialogButtonType.SECONDARY, R.string.plugins_screen);
+				openPluginsButton.setOnClickListener(v -> {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						PluginsFragment.showInstance(activity.getSupportFragmentManager(), ConfigureProfileFragment.this);
+					}
+				});
+			}
+		}
+	}
+
+	@Override
 	protected void setupPreferences() {
 		Preference generalSettings = findPreference("general_settings");
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
@@ -293,10 +319,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		setupProfileAppearancePref();
 		setupUiCustomizationPref();
 
-		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference(PLUGIN_SETTINGS);
+		PreferenceCategory pluginSettings = findPreference(PLUGIN_SETTINGS);
 		setupOsmandPluginsPref(pluginSettings);
 
-		PreferenceCategory settingsActions = (PreferenceCategory) findPreference(SETTINGS_ACTIONS);
+		PreferenceCategory settingsActions = findPreference(SETTINGS_ACTIONS);
 		settingsActions.setIconSpaceReserved(false);
 
 		setupCopyProfileSettingsPref();
@@ -389,21 +415,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 		if (ctx == null) {
 			return;
 		}
-		List<OsmandPlugin> plugins = OsmandPlugin.getAvailablePlugins();
-		for (OsmandPlugin plugin : plugins) {
-			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin || plugin.getSettingsScreenType() == null) {
-				continue;
-			}
-			Preference preference = new Preference(ctx);
-			preference.setPersistent(false);
-			preference.setKey(plugin.getId());
-			preference.setTitle(plugin.getName());
-			preference.setSummary(plugin.getPrefsDescription());
-			preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
-			preference.setLayoutResource(R.layout.preference_with_descr);
-			preference.setFragment(plugin.getSettingsScreenType().fragmentName);
+		List<OsmandPlugin> plugins = OsmandPlugin.getEnabledSettingsScreenPlugins();
+		if (plugins.size() != 0) {
+			for (OsmandPlugin plugin : plugins) {
+				Preference preference = new Preference(ctx);
+				preference.setPersistent(false);
+				preference.setKey(plugin.getId());
+				preference.setTitle(plugin.getName());
+				preference.setSummary(plugin.getPrefsDescription());
+				preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
+				preference.setLayoutResource(R.layout.preference_with_descr);
+				preference.setFragment(plugin.getSettingsScreenType().fragmentName);
 
-			preferenceCategory.addPreference(preference);
+				preferenceCategory.addPreference(preference);
+			}
 		}
 	}
 
@@ -439,7 +464,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			} else if (RESET_TO_DEFAULT.equals(prefId)) {
 				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, selectedMode);
 			} else if (EXPORT_PROFILE.equals(prefId)) {
-				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, false);
+				ExportSettingsFragment.showInstance(fragmentManager, selectedMode, null, false);
 			} else if (DELETE_PROFILE.equals(prefId)) {
 				onDeleteProfileClick();
 			} else if (UI_CUSTOMIZATION.equals(prefId)) {
@@ -447,6 +472,13 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onPluginStateChanged(@NonNull OsmandPlugin plugin) {
+		if (plugin.getSettingsScreenType() != null) {
+			updateAllSettings();
+		}
 	}
 
 	private void onDeleteProfileClick() {

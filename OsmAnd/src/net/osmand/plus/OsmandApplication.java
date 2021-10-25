@@ -53,6 +53,7 @@ import net.osmand.plus.activities.actions.OsmAndDialogs;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.auto.NavigationCarAppService;
+import net.osmand.plus.auto.NavigationScreen;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.backup.BackupHelper;
 import net.osmand.plus.backup.NetworkSettingsHelper;
@@ -178,6 +179,7 @@ public class OsmandApplication extends MultiDexApplication {
 	OnlineRoutingHelper onlineRoutingHelper;
 	BackupHelper backupHelper;
 	TravelRendererHelper travelRendererHelper;
+	LauncherShortcutsHelper launcherShortcutsHelper;
 
 	private final Map<String, Builder> customRoutingConfigs = new ConcurrentHashMap<>();
 	private File externalStorageDirectory;
@@ -516,6 +518,10 @@ public class OsmandApplication extends MultiDexApplication {
 		return inAppPurchaseHelper;
 	}
 
+	public LauncherShortcutsHelper getLauncherShortcutsHelper() {
+		return launcherShortcutsHelper;
+	}
+
 	public CommandPlayer getPlayer() {
 		return player;
 	}
@@ -587,6 +593,16 @@ public class OsmandApplication extends MultiDexApplication {
 		NavigationSessionListener navigationSessionListener = this.navigationSessionListener;
 		if (navigationSessionListener != null) {
 			navigationSessionListener.onNavigationSessionChanged(carNavigationSession);
+		}
+	}
+
+	public void refreshCarScreen() {
+		NavigationSession carNavigationSession = getCarNavigationSession();
+		if (carNavigationSession != null) {
+			NavigationScreen navigationScreen = carNavigationSession.getNavigationScreen();
+			if (navigationScreen != null) {
+				navigationScreen.invalidate();
+			}
 		}
 	}
 
@@ -700,7 +716,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_SHORT).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
 						getString(msgId, args), CarToast.LENGTH_SHORT).show();
 			}
@@ -711,7 +727,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_SHORT).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
 						msg, CarToast.LENGTH_SHORT).show();
 			}
@@ -722,7 +738,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, getString(msgId, args), Toast.LENGTH_LONG).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
 						getString(msgId, args), CarToast.LENGTH_LONG).show();
 			}
@@ -733,7 +749,7 @@ public class OsmandApplication extends MultiDexApplication {
 		uiHandler.post(() -> {
 			Toast.makeText(OsmandApplication.this, msg, Toast.LENGTH_LONG).show();
 			NavigationSession carNavigationSession = this.carNavigationSession;
-			if (carNavigationSession != null && carNavigationSession.hasSurface()) {
+			if (carNavigationSession != null && carNavigationSession.hasStarted()) {
 				CarToast.makeText(carNavigationSession.getCarContext(),
 						msg, CarToast.LENGTH_LONG).show();
 			}

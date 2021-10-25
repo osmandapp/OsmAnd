@@ -3178,7 +3178,6 @@
     <string name="paste_Osmand_data_folder_path">Wprowadza ścieżkę do katalogu z danymi OsmAnd</string>
     <string name="change_osmand_data_folder_question">Zmienić katalog danych OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Przenieś do nowej lokalizacji</string>
-    <string name="internal_app_storage_description">Wewnętrzna pamięć dla OsmAnd (ukryta przed użytkownikami i innymi aplikacjami).</string>
     <string name="change_data_storage_folder">Wybór katalogu przechowywania</string>
     <string name="rendering_attr_piste_type_snow_park_name">Park terenowy</string>
     <string name="rendering_attr_piste_type_sleigh_name">Sanie</string>
@@ -4333,4 +4332,14 @@
     <string name="routing_attr_prefer_horse_routes_name">Preferuj trasy konne</string>
     <string name="routing_attr_only_permitted_ways_description">Korzystaj tylko z dróg (ścieżek, ścieżek itp.), które są wyraźnie dozwolone</string>
     <string name="routing_attr_only_permitted_streets_description">Korzystaj tylko z ulic, które są wyraźnie dozwolone</string>
+    <string name="upload_gpx_description_hint">Pozostaw puste, nazwy ścieżek zostaną użyte jako opis. Wprowadzony opis zostanie zastosowany do każdej ścieżki.</string>
+    <string name="search_title">Szukaj: %1$s</string>
+    <string name="exit_pan_mode_descr">Naciśnij przycisk Wybierz, aby wyjść z trybu panoramowania</string>
+    <string name="icon_group_nautical">Morski</string>
+    <string name="shared_string_details">Szczegóły</string>
+    <string name="shared_app_storage_description">Pamięć współdzielona nie jest już dostępna ze względu na zmiany w zasadach dostępu do pamięci masowej w systemie Android.</string>
+    <string name="internal_app_storage_description">Pamięć wewnętrzna, ukryta przed użytkownikiem i innymi aplikacjami, więc nikt poza OsmAnd nie ma dostępu do Twoich danych</string>
+    <string name="shared_storage_warning_title">Zmiany w zasadach dostępu do pamięci masowej</string>
+    <string name="rendering_attr_noNatureReserves_name">Rezerwat przyrody</string>
+    <string name="rendering_attr_noNatureReserves_description">Ukryj rezerwaty przyrody, obszary chronione i parki narodowe.</string>
 </resources>
