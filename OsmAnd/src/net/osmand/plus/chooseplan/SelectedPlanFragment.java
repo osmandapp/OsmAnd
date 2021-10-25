@@ -242,7 +242,7 @@ public abstract class SelectedPlanFragment extends BasePurchaseDialogFragment {
 			AndroidUiHelper.updateVisibility(tvDesc, !Algorithms.isEmpty(button.getDescription()));
 			AndroidUiHelper.updateVisibility(tvDiscount, !Algorithms.isEmpty(button.getDiscount()));
 
-			int iconId = button.isSalesApplied() ? R.drawable.purchase_sc_discount_rectangle : R.drawable.purchase_save_discount_rectangle;
+			int iconId = button.isDiscountApplied() ? R.drawable.purchase_sc_discount_rectangle : R.drawable.purchase_save_discount_rectangle;
 			AndroidUtils.setBackground(tvDiscount, getIcon(iconId));
 
 			itemView.setOnClickListener(v -> {

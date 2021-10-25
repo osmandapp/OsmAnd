@@ -45,9 +45,9 @@ public class PurchasingUtils {
 			String discount = subscription.getDiscount(liveUpdates);
 			String discountTitle = subscription.getDiscountTitle(app, liveUpdates);
 
-			boolean salesApplied = !Algorithms.stringsEqual(subscription.getPrice(app), subscription.getOriginalPrice(app));
-			subscriptionButton.setSalesApplied(salesApplied);
-			subscriptionButton.setDiscount(salesApplied ? discount : discountTitle);
+			boolean discountApplied = !Algorithms.stringsEqual(subscription.getPrice(app), subscription.getOriginalPrice(app));
+			subscriptionButton.setDiscountApplied(discountApplied);
+			subscriptionButton.setDiscount(discountApplied ? discount : discountTitle);
 
 			InAppSubscriptionIntroductoryInfo info = subscription.getIntroductoryInfo();
 			if (info != null) {
@@ -57,9 +57,9 @@ public class PurchasingUtils {
 			} else {
 				subscriptionButton.setPrice(subscription.getPriceWithPeriod(app));
 
-				if (!Algorithms.isEmpty(discount)) {
+				if (!Algorithms.isEmpty(discount) && discountApplied) {
 					String pattern = app.getString(R.string.ltr_or_rtl_combine_via_colon);
-					String regularPrice = subscription.getRegularPrice(app, liveUpdates);
+					String regularPrice = subscription.getRegularPrice(app);
 					subscriptionButton.setDescription(String.format(pattern, app.getString(R.string.regular_price), regularPrice));
 				}
 			}

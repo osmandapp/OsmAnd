@@ -979,13 +979,10 @@ public abstract class InAppPurchases {
 			return 0;
 		}
 
-		public String getRegularPrice(@NonNull Context ctx, @NonNull InAppSubscription monthlyLiveUpdates) {
+		public String getRegularPrice(@NonNull Context ctx) {
 			Period period = getSubscriptionPeriod();
 			if (period != null) {
-				double price = monthlyLiveUpdates.getPriceValue();
-				double months = period.getUnit().getMonthsValue();
-				double regularPrice = price * months;
-				return getFormattedPrice(ctx, regularPrice, getPriceCurrencyCode());
+				return getFormattedPrice(ctx, getOriginalPriceValue(), getPriceCurrencyCode());
 			}
 			return "";
 		}

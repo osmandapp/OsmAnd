@@ -15,7 +15,7 @@ public abstract class PriceButton<T extends InAppPurchase> implements Comparable
 	protected String discount;
 	protected String description;
 	protected T purchaseItem;
-	protected boolean salesApplied;
+	protected boolean discountApplied;
 
 	public PriceButton(@NonNull String id, @NonNull T purchaseItem) {
 		this.id = id;
@@ -48,8 +48,8 @@ public abstract class PriceButton<T extends InAppPurchase> implements Comparable
 		return purchaseItem;
 	}
 
-	public boolean isSalesApplied() {
-		return salesApplied;
+	public boolean isDiscountApplied() {
+		return discountApplied;
 	}
 
 	public void setTitle(CharSequence title) {
@@ -68,8 +68,8 @@ public abstract class PriceButton<T extends InAppPurchase> implements Comparable
 		this.description = description;
 	}
 
-	public void setSalesApplied(boolean salesApplied) {
-		this.salesApplied = salesApplied;
+	public void setDiscountApplied(boolean discountApplied) {
+		this.discountApplied = discountApplied;
 	}
 
 	@Override
