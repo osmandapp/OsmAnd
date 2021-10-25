@@ -1,5 +1,8 @@
 package net.osmand.plus.chooseplan.button;
 
+import android.text.Spannable;
+import android.util.Pair;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -27,32 +30,40 @@ public class PurchasingUtils {
 
 	public static final String PROMO_PREFIX = "promo_";
 
-	public static List<SubscriptionButton> collectSubscriptionButtons(OsmandApplication app,
-	                                                                  InAppPurchaseHelper purchaseHelper,
-	                                                                  List<InAppSubscription> subscriptions,
-	                                                                  boolean nightMode) {
-		int priceColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
+	public static List<SubscriptionButton> collectSubscriptionButtons(@NonNull OsmandApplication app,
+																	  @NonNull InAppPurchaseHelper purchaseHelper,
+																	  @NonNull List<InAppSubscription> subscriptions,
+																	  boolean nightMode) {
 		List<SubscriptionButton> priceButtons = new ArrayList<>();
+		InAppSubscription liveUpdates = purchaseHelper.getMonthlyLiveUpdates();
+		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 
-		for (InAppSubscription s : subscriptions) {
-			InAppSubscriptionIntroductoryInfo introductoryInfo = s.getIntroductoryInfo();
-			boolean hasIntroductoryInfo = introductoryInfo != null;
-			SubscriptionButton priceBtn = new SubscriptionButton(s.getSku(), s);
-			priceBtn.setTitle(s.getTitle(app));
+		for (InAppSubscription subscription : subscriptions) {
+			SubscriptionButton subscriptionButton = new SubscriptionButton(subscription.getSku(), subscription);
+			subscriptionButton.setTitle(subscription.getTitle(app));
 
-			CharSequence priceTitle = hasIntroductoryInfo ?
-					introductoryInfo.getFormattedDescription(app, priceColor) : s.getPriceWithPeriod(app);
-			priceBtn.setPrice(priceTitle);
+			String discount = subscription.getDiscount(liveUpdates);
+			String discountTitle = subscription.getDiscountTitle(app, liveUpdates);
 
-			String discount = s.getDiscount(purchaseHelper.getMonthlyLiveUpdates());
-			if (!Algorithms.isEmpty(discount)) {
-				priceBtn.setDiscount(discount);
+			boolean salesApplied = Algorithms.stringsEqual(subscription.getPrice(app), subscription.getOriginalPrice(app));
+			subscriptionButton.setSalesApplied(salesApplied);
+			subscriptionButton.setDiscount(salesApplied ? discount : discountTitle);
 
-				String regularPrice = s.getRegularPrice(app, purchaseHelper.getMonthlyLiveUpdates());
-				priceBtn.setRegularPrice(regularPrice);
+			InAppSubscriptionIntroductoryInfo info = subscription.getIntroductoryInfo();
+			if (info != null) {
+				Pair<Spannable, Spannable> pair = info.getFormattedDescription(app, primaryTextColor);
+				subscriptionButton.setPrice(pair.first.toString());
+				subscriptionButton.setDescription(pair.second.toString());
+			} else {
+				subscriptionButton.setPrice(subscription.getPriceWithPeriod(app));
+
+				if (!Algorithms.isEmpty(discount)) {
+					String pattern = app.getString(R.string.ltr_or_rtl_combine_via_colon);
+					String regularPrice = subscription.getRegularPrice(app, liveUpdates);
+					subscriptionButton.setDescription(String.format(pattern, app.getString(R.string.regular_price), regularPrice));
+				}
 			}
-
-			priceButtons.add(priceBtn);
+			priceButtons.add(subscriptionButton);
 		}
 		return priceButtons;
 	}
@@ -111,5 +122,4 @@ public class PurchasingUtils {
 			}
 		}
 	}
-
 }

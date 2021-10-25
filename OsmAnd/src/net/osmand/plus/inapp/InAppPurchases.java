@@ -1,11 +1,11 @@
 package net.osmand.plus.inapp;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.util.Pair;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -261,12 +261,15 @@ public abstract class InAppPurchases {
 		private final int featureId;
 		private final String sku;
 		private String price;
+		private String originalPrice;
 		private double priceValue;
+		private double originalPriceValue;
 		private String priceCurrencyCode;
 		private PurchaseState purchaseState = PurchaseState.UNKNOWN;
 		private PurchaseInfo purchaseInfo;
 
 		double monthlyPriceValue;
+		double monthlyOriginalPriceValue;
 		boolean donationSupported = false;
 
 		private NumberFormat currencyFormatter;
@@ -336,8 +339,20 @@ public abstract class InAppPurchases {
 			}
 		}
 
+		public String getOriginalPrice(Context ctx) {
+			if (!Algorithms.isEmpty(originalPrice)) {
+				return originalPrice;
+			} else {
+				return getDefaultPrice(ctx);
+			}
+		}
+
 		public void setPrice(String price) {
 			this.price = price;
+		}
+
+		public void setOriginalPrice(String originalPrice) {
+			this.originalPrice = originalPrice;
 		}
 
 		public long getPurchaseTime() {
@@ -400,8 +415,16 @@ public abstract class InAppPurchases {
 			return priceValue;
 		}
 
+		public double getOriginalPriceValue() {
+			return originalPriceValue;
+		}
+
 		public void setPriceValue(double priceValue) {
 			this.priceValue = priceValue;
+		}
+
+		public void setOriginalPriceValue(double originalPriceValue) {
+			this.originalPriceValue = originalPriceValue;
 		}
 
 		public double getMonthlyPriceValue() {
@@ -597,7 +620,7 @@ public abstract class InAppPurchases {
 			}
 		}
 
-		public CharSequence getFormattedDescription(@NonNull Context ctx, @ColorInt int textColor) {
+		public Pair<Spannable, Spannable> getFormattedDescription(@NonNull Context ctx, @ColorInt int textColor) {
 			long totalPeriods = getTotalPeriods();
 			String singleUnitStr = getUnitString(ctx).toLowerCase();
 			String unitStr = getTotalUnitsString(ctx, false).toLowerCase();
@@ -637,8 +660,8 @@ public abstract class InAppPurchases {
 			String periodPriceStr = introductoryCycles == 1 ? priceStr : pricePeriod;
 
 			int firstPartRes = totalPeriods == 1 ? R.string.get_discount_first_part : R.string.get_discount_first_few_part;
-			SpannableStringBuilder mainPart = new SpannableStringBuilder(ctx.getString(firstPartRes, periodPriceStr, getDisountPeriodString(unitStr, totalPeriods)));
-			SpannableStringBuilder thenPart = new SpannableStringBuilder(ctx.getString(R.string.get_discount_second_part, originalPricePeriod));
+			Spannable mainPart = new SpannableStringBuilder(ctx.getString(firstPartRes, periodPriceStr, getDisountPeriodString(unitStr, totalPeriods)));
+			Spannable thenPart = new SpannableStringBuilder(ctx.getString(R.string.get_discount_second_part, originalPricePeriod));
 			Typeface typefaceRegular = FontCache.getRobotoRegular(ctx);
 			Typeface typefaceBold = FontCache.getRobotoMedium(ctx);
 			mainPart.setSpan(new ForegroundColorSpan(textColor), 0, mainPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -647,7 +670,7 @@ public abstract class InAppPurchases {
 			thenPart.setSpan(new ForegroundColorSpan(secondaryTextColor), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			thenPart.setSpan(new CustomTypefaceSpan(typefaceRegular), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-			return new SpannableStringBuilder(mainPart).append("\n").append(thenPart);
+			return new Pair<>(mainPart, thenPart);
 		}
 	}
 
@@ -1024,6 +1047,12 @@ public abstract class InAppPurchases {
 		}
 
 		@Override
+		public void setOriginalPriceValue(double originalPriceValue) {
+			super.setOriginalPriceValue(originalPriceValue);
+			monthlyOriginalPriceValue = originalPriceValue;
+		}
+
+		@Override
 		public String getDefaultPrice(Context ctx) {
 			return ctx.getString(R.string.osm_pro_monthly_price);
 		}
@@ -1077,6 +1106,12 @@ public abstract class InAppPurchases {
 		}
 
 		@Override
+		public void setOriginalPriceValue(double originalPriceValue) {
+			super.setOriginalPriceValue(originalPriceValue);
+			monthlyOriginalPriceValue = originalPriceValue / 3d;
+		}
+
+		@Override
 		public String getDefaultPrice(Context ctx) {
 			return ctx.getString(R.string.osm_live_3_months_price);
 		}
@@ -1122,6 +1157,12 @@ public abstract class InAppPurchases {
 		public void setPriceValue(double priceValue) {
 			super.setPriceValue(priceValue);
 			monthlyPriceValue = priceValue / 12d;
+		}
+
+		@Override
+		public void setOriginalPriceValue(double originalPriceValue) {
+			super.setOriginalPriceValue(originalPriceValue);
+			monthlyOriginalPriceValue = originalPriceValue / 12d;
 		}
 
 		@Override
