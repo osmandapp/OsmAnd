@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="duration_ago">%1$s əvvəl</string>
+    <string name="shared_string_logout">Çıx</string>
 </resources>

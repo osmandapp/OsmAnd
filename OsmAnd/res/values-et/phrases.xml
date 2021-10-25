@@ -4037,4 +4037,6 @@
     <string name="poi_hampshire_gate">Traadist kerge värav</string>
     <string name="poi_driver_training">Õppesõidu rada</string>
     <string name="poi_research_institute">Teadusasutus</string>
+    <string name="poi_sports_hall">Spordisaal</string>
+    <string name="poi_couplings">Liitmikud</string>
 </resources>
