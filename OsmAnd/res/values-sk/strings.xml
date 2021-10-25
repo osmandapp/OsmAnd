@@ -4338,4 +4338,38 @@
     <string name="exit_pan_mode_descr">Stlačte \"Zvoliť\" pre opustenie režimu posúvania</string>
     <string name="upload_gpx_description_hint">Ak necháte prázdne, názvy stôp budú použité ako popis. Zadaný popis bude aplikovaný na každú stopu.</string>
     <string name="icon_group_nautical">Námorné</string>
+    <string name="shared_storage_warning_title">Zmeny v pravidlách prístupu k úložisku</string>
+    <string name="internal_app_storage_description">Interné úložisko, skryté pred používateľom a inými aplikáciami, kde nikto okrem OsmAnd nezíska vaše údaje</string>
+    <string name="shared_string_details">Podrobnosti</string>
+    <string name="shared_app_storage_description">Zdieľaná pamäť už nie je dostupná kvôli zmenám prístupu k úložisku v Androide.</string>
+    <string name="rendering_attr_noNatureReserves_description">Skryť prírodné rezervácie, chránené oblasti a národné parky.</string>
+    <string name="purchases_feature_desc_android_auto">Mapy a navigácia OsmAnd na obrazovke vášho vozidla. Integrujte pohodlne do ovládania vášho vozidla.</string>
+    <string name="rendering_attr_noNatureReserves_name">Prírodná rezervácia</string>
+    <string name="shared_string_articles">Články</string>
+    <string name="included_categories">Zahrnuté kategórie</string>
+    <string name="release_4_1">• Prvotná podpora pre Android Auto
+\n
+\n • Zmena rozhrania pre vyhľadávanie súradníc UTM
+\n
+\n • Obľúbené: pridaná možnosť zobraziť naposledy použité ikony
+\n
+\n • Plánovanie trasy: po spustení použije práve vybraný profil
+\n
+\n • Opravená vrstva Mapillary, modul je teraz predvolene vypnutý
+\n
+\n • Pridaná obrazovka na správu všetkých histórií v aplikácii
+\n
+\n • Orientácia mapy nie je resetovaná po reštarte aplikácie
+\n
+\n • Vylepšené vykreslenie výškovej značky SRTM
+\n
+\n • Opravené zobrazenie arabčiny na mape
+\n
+\n • Opravené rôzne problémy výpočtu trasy
+\n
+\n</string>
+    <string name="search_history_is_disabled_descr">Zapnúť históriu vyhľadávania môžete v Nastaveniach</string>
+    <string name="shared_storage_warning_description">Od novembra 2021 OsmAnd 4.2 stratí prístup k zdieľanému úložisku, kvôli zmenám prístupových pravidiel v systéme Android.
+\n
+\nProsím zmente úložisko zo zdieľaného na iné dostupné úložisko. Ak to nebude vykonané, aplikácia stratí prístup k vašim údajom: mapám, GPX stopám a všetkému ostatnému.</string>
 </resources>

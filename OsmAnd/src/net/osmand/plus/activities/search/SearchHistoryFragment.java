@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.BufferType;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
@@ -287,7 +288,7 @@ public class SearchHistoryFragment extends OsmAndListFragment implements SearchA
 		}
 	}
 
-	public static int getItemIcon(PointDescription pd) {
+	public static int getItemIcon(@NonNull PointDescription pd) {
 		int iconId;
 		if (pd.isAddress()) {
 			iconId = R.drawable.ic_action_street_name;

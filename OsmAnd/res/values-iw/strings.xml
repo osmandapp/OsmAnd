@@ -3799,11 +3799,11 @@
     <string name="routing_attr_avoid_footways_description">הימנעות משבילי הולכי רגל</string>
     <string name="routing_attr_avoid_footways_name">הימנעות משבילי הולכי רגל</string>
     <string name="osm_live_payment_desc_hw">המינוי מחויב לפי התקופה הנבחרת. ניתן לבטל אותו דרך ה־AppGallery בכל עת.</string>
-    <string name="osm_live_payment_subscription_management_hw">חשבון ה־AppGallery שלך יחויב עם אישור הרכישה.
+    <string name="osm_live_payment_subscription_management_hw">התשלום יחויב מחשבון ה־AppGallery שלך יחויב עם אישור הרכישה.
 \n
-\nתוקף המינוי מתארך אוטומטי אלא אם כן בוטל בטרם תאריך החידוש. החשבון שלך יחויב על תקופת החידוש (חודש/שלושה חודשים/שנה) רק בתאריך החידוש.
+\nהמינוי מתחדש אוטומטית אלא אם כן בוטל בטרם תקופת החידוש הנבחרת.
 \n
-\nניתן לנהל ולבטל את המינויים שלך בהגדרות ב־AppGallery שלך.</string>
+\nניתן לנהל ולבטל את המינויים שלך בהגדרות ב־AppGallery שלך בכל עת.</string>
     <string name="what_is_new">מה חדש</string>
     <string name="development">פיתוח</string>
     <string name="use_live_public_transport">נתוני זמן אמת של OsmAnd</string>
@@ -4295,4 +4295,37 @@
 \nניתן לנהל או לבטל את המינוי שלך דרך ההגדרות שלך ב־Amazon בכל עת.</string>
     <string name="search_title">חיפוש: %1$s</string>
     <string name="upload_gpx_description_hint">יש להשאיר ריק, שמות המסלולים ישמשו כתיאור. התיאור שנכתב יחול על כל אחד מהמסלולים.</string>
+    <string name="shared_app_storage_description">הזיכרון המשותף לא זמין עוד עקב שינויים בכללי גישה לאחסון ב־Android.</string>
+    <string name="shared_string_details">פרטים</string>
+    <string name="included_categories">קטגוריות כלולות</string>
+    <string name="internal_app_storage_description">אחסון פנימי, נסתר מהמשתמש ומיישומונים אחרים, כדי שלאף אחד למעט OsmAnd לא תהיה גישה לנתונים שלך</string>
+    <string name="shared_storage_warning_title">שינוי בכללי הגישה לאחסון</string>
+    <string name="shared_string_articles">ערכים</string>
+    <string name="android_auto_map_placeholder_title">המפה מוצגת על המסך במכונית.</string>
+    <string name="continue_on_phone">להמשיך בטלפון</string>
+    <string name="android_auto_purchase_request_title">יש לרכוש את OsmAnd Pro או את Maps+‎ כדי להשתמש ב־OsmAnd עם Android Auto</string>
+    <string name="location_access_request_title">ל־OsmAnd דרושה גישה למיקום לצורך ניווט</string>
+    <string name="location_access_request_action">הענקת גישה</string>
+    <string name="android_auto_map_placeholder_descr">נא לנתק את המכשיר שלך מ־Android Auto כדי לצפות במפה ביישומון.</string>
+    <string name="location_access_request_result">אושר: %1$s נדחה: %2$s</string>
+    <string name="shortcut_navigate_to_work">ניווט לעבודה</string>
+    <string name="clear_all_history">פינוי כל ההיסטוריה</string>
+    <string name="map_markers_history">היסטוריית סמני המפה</string>
+    <string name="shortcut_navigate_to">ניווט אל…</string>
+    <string name="shortcut_navigate_to_home">ניווט הביתה</string>
+    <string name="history_actions_descr">אפשר לייצא היסטוריה לקובץ.</string>
+    <string name="navigation_history">היסטוריית ניווט</string>
+    <string name="history_preferences_descr">אפשר להשבית את תיעוד ההיסטוריה באופן פרטני לכל סוג של היסטוריה.</string>
+    <string name="shortcut_start_recording">התחלת הקלטה</string>
+    <string name="routeInfo_surface_description">אספקת מידע נוסף על המשטח הפיזי של כבישים/דרכים.</string>
+    <string name="exit_pan_mode_descr">יש ללחוץ על בחירה כדי לצאת ממצב הסריקה</string>
+    <string name="purchases_feature_desc_android_auto">המפות הבלתי מקוונות של OsmAnd והניווט ישירות על מסך המכונית שלך. עם שילוב נוח בפקדי המכונית.</string>
+    <string name="clear_all_history_warning">לפנות את כל ההיסטוריה ביישומון\?
+\n
+\nהחיפוש, הניווט והיסטוריית הסמנים יימחקו.</string>
+    <string name="icon_group_nautical">ימי</string>
+    <string name="transparent_status_bar_descr">הצגת מפה מתחת לסרגל המצב</string>
+    <string name="transparent_status_bar">סרגל מצב שקוף</string>
+    <string name="search_history_is_disabled_descr">אפשר להפעיל היסטוריית חיפוש בהגדרות</string>
+    <string name="markers_history_is_disabled_descr">הפעלת היסטוריה תאפשר לך לקבל רשימת סמני מפה שביקרת בהם.</string>
 </resources>

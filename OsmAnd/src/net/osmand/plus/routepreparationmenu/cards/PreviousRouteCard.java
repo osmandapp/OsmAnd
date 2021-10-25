@@ -3,7 +3,11 @@ package net.osmand.plus.routepreparationmenu.cards;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.data.PointDescription;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -24,8 +28,8 @@ public class PreviousRouteCard extends MapBaseCard {
 	@Override
 	protected void updateContent() {
 		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		TextView startTitle = (TextView) view.findViewById(R.id.start_title);
-		TextView destinationTitle = (TextView) view.findViewById(R.id.destination_title);
+		TextView startTitle = view.findViewById(R.id.start_title);
+		TextView destinationTitle = view.findViewById(R.id.destination_title);
 
 		TargetPoint startPoint = targetPointsHelper.getPointToStartBackup();
 		boolean myLocation = false;
@@ -35,7 +39,7 @@ public class PreviousRouteCard extends MapBaseCard {
 		}
 		StringBuilder startText = new StringBuilder(myLocation ? mapActivity.getText(R.string.my_location) : "");
 		if (startPoint != null) {
-			String descr = getPointName(startPoint);
+			String descr = getPointName(app, startPoint);
 			if (!Algorithms.isEmpty(descr)) {
 				if (startText.length() > 0) {
 					startText.append(" — ");
@@ -46,7 +50,7 @@ public class PreviousRouteCard extends MapBaseCard {
 		startTitle.setText(startText.toString());
 		TargetPoint destinationPoint = targetPointsHelper.getPointToNavigateBackup();
 		String destinationName = "";
-		destinationName = getPointName(destinationPoint);
+		destinationName = getPointName(app, destinationPoint);
 		destinationTitle.setText(destinationName);
 		View button = view.findViewById(R.id.card_button);
 		button.setOnClickListener(new View.OnClickListener() {
@@ -60,16 +64,16 @@ public class PreviousRouteCard extends MapBaseCard {
 		});
 	}
 
-	private String getPointName(TargetPoint targetPoint) {
+	public static String getPointName(@NonNull OsmandApplication app, @Nullable TargetPoint point) {
 		String name = "";
-		if (targetPoint != null) {
-			PointDescription description = targetPoint.getOriginalPointDescription();
+		if (point != null) {
+			PointDescription description = point.getOriginalPointDescription();
 			if (description != null && !Algorithms.isEmpty(description.getName()) &&
-					!description.getName().equals(mapActivity.getString(R.string.no_address_found))) {
+					!description.getName().equals(app.getString(R.string.no_address_found))) {
 				name = description.getName();
 			} else {
-				name = PointDescription.getLocationName(mapActivity,
-						targetPoint.point.getLatitude(), targetPoint.point.getLongitude(), true).replace('\n', ' ');
+				name = PointDescription.getLocationName(app, point.point.getLatitude(), point.point.getLongitude(), true)
+						.replace('\n', ' ');
 			}
 		}
 		return name;

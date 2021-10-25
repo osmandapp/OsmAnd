@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="driving_region_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">Видимые</string>
+    <string name="shared_string_visible">Видно</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -792,7 +792,7 @@
     <string name="fav_points_not_exist">Избранные точки отсутствуют</string>
     <string name="update_existing">Заменить</string>
     <string name="only_show">Только показать</string>
-    <string name="follow">Запуск сопровождения</string>
+    <string name="follow">Запуск навигации</string>
     <string name="recalculate_route_to_your_location">Вид транспорта:</string>
     <string name="mark_final_location_first">Сначала задайте пункт назначения</string>
     <string name="get_directions">Маршрут</string>
@@ -3833,7 +3833,7 @@
     <string name="navigate_point_mgrs">MGRS</string>
     <string name="navigate_point_format_mgrs">MGRS</string>
     <string name="mgrs_format_descr">OsmAnd использует MGRS, который похож на формат UTM NATO.</string>
-    <string name="use_native_pt">Развитие местного общественного транспорта</string>
+    <string name="use_native_pt">Нативные функции при расчёте общественного транспорта</string>
     <string name="message_you_need_add_two_points_to_show_graphs">Добавьте не менее двух точек</string>
     <string name="message_need_calculate_route_before_show_graph">Данные %1$s доступны только для дорог, постройте маршрут с помощью «Маршрут между точками» для просмотра графиков.</string>
     <string name="enter_text_separated">Вводите теги через запятую.</string>
@@ -4351,4 +4351,60 @@
     <string name="exit_pan_mode_descr">Нажмите «Выбрать», чтобы выйти из режима панорамирования</string>
     <string name="sample_wikivoyage">Образец Викигида</string>
     <string name="icon_group_nautical">Морские</string>
+    <string name="shared_storage_warning_title">Изменения в правилах доступа к хранилищу</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd - оффлайн карты и навигация на экране вашего автомобиля. Удобная интеграция с органами управления вашего автомобиля.</string>
+    <string name="shared_app_storage_description">Общая память больше не доступна из-за изменений в правилах доступа к хранилищу в Android.</string>
+    <string name="shared_string_details">Детали</string>
+    <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений, никто кроме OsmAnd не может получить доступ к вашим данным</string>
+    <string name="included_categories">Включённые категории</string>
+    <string name="shared_string_articles">Статьи</string>
+    <string name="release_4_1">• Добавлена начальная поддержка Android Auto
+\n
+\n• Обновление пользовательского интерфейса для поиска координат UTM
+\n
+\n• Избранные: добавлена возможность просмотра недавно использованных значков
+\n
+\n• Планирование маршрута: после запуска будет использоваться выбранный профиль
+\n
+\n• Исправлен слой Mapillary, плагин теперь отключен по умолчанию
+\n
+\n• Добавлен экран для управления всей историей в приложении
+\n
+\n• Ориентация карты не сбрасывается после перезапуска приложения
+\n
+\n• Улучшена отрисовка отметок высот SRTM
+\n
+\n• Исправлено отображение арабского языка на карте
+\n
+\n• Исправлены различные проблемы с маршрутизацией
+\n
+\n</string>
+    <string name="android_auto_map_placeholder_descr">Отключите устройство от Android Auto, для просмотра карты в приложении.</string>
+    <string name="continue_on_phone">Продолжить на телефоне</string>
+    <string name="android_auto_map_placeholder_title">Карта отображается на экране автомобиля.</string>
+    <string name="android_auto_purchase_request_title">Приобретите OsmAnd Pro или Maps+, чтобы использовать OsmAnd с Android Auto</string>
+    <string name="location_access_request_title">OsmAnd требуется доступ к местоположению для навигации</string>
+    <string name="location_access_request_action">Предоставление доступа</string>
+    <string name="location_access_request_result">Одобрено: %1$s Отклонено: %2$s</string>
+    <string name="markers_history_is_disabled_descr">Включите историю для получения списка посещённых маркеров карты.</string>
+    <string name="history_is_disabled_descr">Включите историю для быстрого доступа к последним использованным результатам.</string>
+    <string name="is_disabled">%1$s отключена</string>
+    <string name="clear_all_history_warning">Очистить всю историю в приложении\?
+\n
+\nИстория поиска, навигации и маркеров будет очищена.</string>
+    <string name="clear_all_history">Очистить всю историю</string>
+    <string name="search_history_is_disabled_descr">Включить историю поиска можно в настройках</string>
+    <string name="transparent_status_bar">Прозрачная строка состояния</string>
+    <string name="shortcut_navigate_to_home">Следовать домой</string>
+    <string name="shortcut_navigate_to">Следовать до…</string>
+    <string name="shortcut_navigate_to_work">Следовать на работу</string>
+    <string name="transparent_status_bar_descr">Показать карту под строкой состояния</string>
+    <string name="shared_storage_warning_description">Начиная с ноября 2021 года OsmAnd 4.2 потеряет доступ к общему хранилищу в связи с изменением правил доступа в Android.
+\n
+\nИзмените хранилище с общего на доступное. Если этого не сделать, приложение потеряет доступ к вашим данным: офлайн картам, GPX трекам и всему остальному.</string>
+    <string name="navigation_history">История навигации</string>
+    <string name="history_preferences_descr">Вы можете отключить ведение журнала индивидуально для каждого типа истории.</string>
+    <string name="history_actions_descr">Вы можете экспортировать историю в файл.</string>
+    <string name="map_markers_history">История маркеров карты</string>
+    <string name="shortcut_start_recording">Начать запись</string>
 </resources>

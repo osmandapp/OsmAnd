@@ -3923,7 +3923,7 @@
     <string name="poi_health_post">velskripunkt</string>
     <string name="poi_club_social">seltsimaja</string>
     <string name="poi_plateau">platoo</string>
-    <string name="poi_bay_filter">Lahe tüüp</string>
+    <string name="poi_bay_filter">Lahe liik</string>
     <string name="poi_pillory">häbipost</string>
     <string name="poi_shop_water">joogivee kauplus</string>
     <string name="poi_pest_control">kahjuritõrjevahendite kauplus</string>
@@ -4030,4 +4030,11 @@
     <string name="poi_groundskeeping">Kinnistuhooldusvahendite pood</string>
     <string name="poi_prep_school">Järeleaitamiskool</string>
     <string name="poi_country_store">Maarahva pood</string>
+    <string name="poi_ticket_validator">Piletivalidaator</string>
+    <string name="poi_geoglyph">Geoglüüf</string>
+    <string name="poi_satellite_dish">Satelliiditaldrik</string>
+    <string name="poi_trailhead">Raja alg- või lõpppunkt</string>
+    <string name="poi_hampshire_gate">Traadist kerge värav</string>
+    <string name="poi_driver_training">Õppesõidu rada</string>
+    <string name="poi_research_institute">Teadusasutus</string>
 </resources>

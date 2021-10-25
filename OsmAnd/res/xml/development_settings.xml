@@ -18,12 +18,24 @@
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/use_opengl_render" />
 
+	<PreferenceCategory
+		android:key="safe"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/safe_settings" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="safe_mode"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/safe_mode" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="approx_safe_mode"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/approx_safe_mode" />
 
 	<PreferenceCategory
 		android:key="routing"
@@ -48,6 +60,13 @@
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/trace_rendering" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="transparent_status_bar"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/transparent_status_bar" />
 
 	<Preference
 		android:key="simulate_initial_startup"

@@ -19,18 +19,15 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.PlatformUtil;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.auto.SearchHelper.SearchHelperListener;
 import net.osmand.plus.mapmarkers.MapMarker;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -42,7 +39,9 @@ import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.ObjectType;
+import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
+import net.osmand.search.core.SearchWord;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -70,6 +69,7 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 	private boolean loading;
 	private boolean destroyed;
 	private List<SearchResult> recentResults;
+	private boolean showResult;
 
 	public SearchScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
 						@NonNull SurfaceRenderer surfaceRenderer) {
@@ -95,7 +95,6 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 	public SearchUICore getSearchUICore() {
 		return getApp().getSearchUICore().getCore();
 	}
-
 
 	@Override
 	public void onDestroy(@NonNull LifecycleOwner owner) {
@@ -170,13 +169,11 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 				|| sr.objectType == ObjectType.STREET_INTERSECTION
 				|| sr.objectType == ObjectType.GPX_TRACK) {
 
-			getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
-					obj -> {
-						if (obj != null) {
-							SearchScreen.this.onRouteSelected(sr);
-						}
-					});
+			showResult(sr);
 		} else {
+			if (sr.objectType == ObjectType.CITY || sr.objectType == ObjectType.VILLAGE || sr.objectType == ObjectType.STREET) {
+				showResult = true;
+			}
 			searchHelper.completeQueryWithObject(sr);
 			if (sr.object instanceof AbstractPoiType || sr.object instanceof PoiUIFilter) {
 				reloadHistory();
@@ -185,15 +182,34 @@ public final class SearchScreen extends Screen implements DefaultLifecycleObserv
 		}
 	}
 
+	private void showResult(SearchResult sr) {
+		showResult = false;
+		getScreenManager().pushForResult(new RoutePreviewScreen(getCarContext(), settingsAction, surfaceRenderer, sr),
+				obj -> {
+					if (obj != null) {
+						SearchScreen.this.onRouteSelected(sr);
+					}
+				});
+	}
+
 	@Override
 	public void onClickSearchMore() {
 		invalidate();
 	}
 
 	@Override
-	public void onSearchDone(@Nullable List<SearchResult> searchResults, @Nullable ItemList itemList) {
-		this.itemList = itemList;
-		invalidate();
+	public void onSearchDone(@NonNull SearchPhrase phrase, @Nullable List<SearchResult> searchResults,
+							 @Nullable ItemList itemList, int resultsCount) {
+		SearchWord lastSelectedWord = phrase.getLastSelectedWord();
+		if (showResult && resultsCount == 0 && lastSelectedWord != null) {
+			showResult(lastSelectedWord.getResult());
+		} else {
+			if (resultsCount > 0) {
+				showResult = false;
+			}
+			this.itemList = itemList;
+			invalidate();
+		}
 	}
 
 	private ItemList.Builder withNoResults(ItemList.Builder builder) {

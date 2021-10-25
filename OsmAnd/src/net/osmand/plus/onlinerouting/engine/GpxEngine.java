@@ -88,6 +88,7 @@ public class GpxEngine extends OnlineRoutingEngine {
 		params.add(EngineParameter.NAME_INDEX);
 		params.add(EngineParameter.CUSTOM_URL);
 		params.add(EngineParameter.APPROXIMATE_ROUTE);
+		params.add(EngineParameter.USE_EXTERNAL_TIMESTAMPS);
 	}
 
 	@Override
@@ -106,36 +107,39 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app,
 	                                              @NonNull GPXFile gpxFile) {
+		boolean calculatedTimeSpeed = false;
 		if (shouldApproximateRoute()) {
-			GPXFile approximated = approximateGpx(app, gpxFile);
-			gpxFile = approximated != null ? approximated : gpxFile;
+			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
+			if (ctx != null) {
+				GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
+				if (approximated != null) {
+					calculatedTimeSpeed = ctx.hasCalculatedTimeSpeed();
+					gpxFile = approximated;
+				}
+			}
 		}
-		return new OnlineRoutingResponse(gpxFile);
+		return new OnlineRoutingResponse(gpxFile, calculatedTimeSpeed);
 	}
 
-	private GPXFile approximateGpx(@NonNull OsmandApplication app,
-	                               @NonNull GPXFile gpxFile) {
+	@Nullable
+	private MeasurementEditingContext prepareApproximationContext(@NonNull OsmandApplication app,
+	                                                              @NonNull GPXFile gpxFile) {
 		try {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			ApplicationMode appMode = routingHelper.getAppMode();
-
 			List<WptPt> points = gpxFile.getAllSegmentsPoints();
 			LocationsHolder holder = new LocationsHolder(points);
-
 			if (holder.getSize() > 1) {
 				LatLon start = holder.getLatLon(0);
 				LatLon end = holder.getLatLon(holder.getSize() - 1);
 				RoutingEnvironment env = routingHelper.getRoutingEnvironment(app, appMode, start, end);
-
 				GpxRouteApproximation gctx = new GpxRouteApproximation(env.getCtx());
 				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
 				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
-
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
-				ctx.setPoints(gpxApproximation, points, appMode);
-				return ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
+				ctx.setPoints(gpxApproximation, points, appMode, useExternalTimestamps());
+				return ctx;
 			}
-
 		} catch (IOException | InterruptedException e) {
 			LOG.error(e.getMessage(), e);
 		}

@@ -66,7 +66,8 @@ public class SearchHelper {
 
 		void onClickSearchMore();
 
-		void onSearchDone(@Nullable List<SearchResult> searchResults, @Nullable ItemList itemList);
+		void onSearchDone(@NonNull SearchPhrase phrase, @Nullable List<SearchResult> searchResults,
+						  @Nullable ItemList itemList, int resultsCount);
 	}
 
 	SearchHelper(@NonNull OsmandApplication app, boolean showDescription, int contentLimit) {
@@ -215,11 +216,12 @@ public class SearchHelper {
 				builder.setBrowsable(true);
 				itemList.addItem(builder.build());
 			}
+			int resultsCount = count;
 			app.runInUIThread(() -> {
 				this.searchResults = searchResults;
 				searching = false;
 				if (listener != null) {
-					listener.onSearchDone(searchResults, itemList.build());
+					listener.onSearchDone(phrase, searchResults, itemList.build(), resultsCount);
 				}
 			});
 		});

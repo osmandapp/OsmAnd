@@ -1101,7 +1101,7 @@
     <string name="no_index_file_to_download">Завантажень не знайдено. Будь ласка, перевірте з’єднання з Інтернет.</string>
     <string name="none_selected_gpx">Не вибрано GPX-файл. Виберіть один довгим натисненням.</string>
     <string name="local_index_select_gpx_file">Виберіть трек</string>
-    <string name="gpx_split_interval">Інтервал розбиття</string>
+    <string name="gpx_split_interval">Розділений інтервал</string>
     <string name="sort_by_distance">Сортувати за відстанню</string>
     <string name="sort_by_name">Сортувати за назвою</string>
     <string name="show_zoom_buttons_navigation_descr">Показувати кнопки зміни маштабу під час навігації.</string>
@@ -2606,7 +2606,7 @@
     <string name="shared_string_current">Поточний</string>
     <string name="last_intermediate_dest_description">Додає проміжну зупинку</string>
     <string name="first_intermediate_dest_description">Додає першу зупинку</string>
-    <string name="subsequent_dest_description">Пересунути призначення далі і створити його</string>
+    <string name="subsequent_dest_description">Перемістити пункт призначення і створити його</string>
     <string name="show_closed_notes">Показати закриті примітки</string>
     <string name="switch_osm_notes_visibility_desc">Показати чи приховати примітки OSM на мапі.</string>
     <string name="gpx_file_desc">GPX — підходить для експорту в JOSM та інші OSM-редактори.</string>
@@ -3090,7 +3090,7 @@
     <string name="shared_string_file_is_saved">%s збережено</string>
     <string name="shared_string_open_track">Відкрити трек</string>
     <string name="shared_string_track_is_saved">Трек %s збережено</string>
-    <string name="gpx_join_gaps">Об\'єднати прогалини</string>
+    <string name="gpx_join_gaps">Об\'єднати проміжки</string>
     <string name="app_mode_camper">Табірник</string>
     <string name="app_mode_campervan">Дім на колесах</string>
     <string name="rendering_attr_showLez_description">Показати на мапі зони низьких викидів. Не впливає на маршрутизацію.</string>
@@ -3689,16 +3689,16 @@
     <string name="app_mode_wheelchair_forward">Інвалідне крісло попереду</string>
     <string name="app_mode_go_cart">Картинг</string>
     <string name="osm_edit_closed_note">Закрита примітка OSM</string>
-    <string name="shared_string_custom">Власне</string>
+    <string name="shared_string_custom">Власний</string>
     <string name="add_hidden_group_info">Додану точку можна знайти у «%s». Показати вибрану групу, щоб вона з\'явилася на мапі.</string>
     <string name="set_working_days_to_continue">Зазначте робочі дні, щоб продовжити</string>
     <string name="route_between_points">Маршрут між точками</string>
     <string name="plan_a_route">Планування маршруту</string>
     <string name="add_to_a_track">Додати до треку</string>
-    <string name="track_show_start_finish_icons">Показувати значки початку та завершення</string>
+    <string name="track_show_start_finish_icons">Показати піктограми початку та завершення</string>
     <string name="select_track_width">Установити ширину</string>
-    <string name="gpx_split_interval_descr">Виберіть інтервал показу міток часу або відстані для показу поверх треку.</string>
-    <string name="gpx_split_interval_none_descr">Виберіть власний варіант поділу: за часом чи відстанню.</string>
+    <string name="gpx_split_interval_descr">Виберіть інтервал, впродовж якого зображатимуться позначки відстані або часу на треку.</string>
+    <string name="gpx_split_interval_none_descr">Виберіть потрібний варіант поділу: за часом або за відстанню.</string>
     <string name="gpx_direction_arrows">Стрілки напрямку</string>
     <string name="track_coloring_solid">Суцільний</string>
     <string name="plan_route_last_edited">В останнє змінено</string>
@@ -3932,7 +3932,7 @@
     <string name="select_folder_descr">Виберіть теку або додайте нову</string>
     <string name="shared_string_empty">Порожньо</string>
     <string name="analyze_by_intervals">Аналізувати розділені інтервали</string>
-    <string name="upload_to_openstreetmap">Відвантажити на OpenStreetMap</string>
+    <string name="upload_to_openstreetmap">Вивантажити на OpenStreetMap</string>
     <string name="edit_track">Редагувати трек</string>
     <string name="rename_track">Перейменувати трек</string>
     <string name="change_folder">Змінити теку</string>
@@ -4342,4 +4342,62 @@
     <string name="upload_gpx_description_hint">Залиште порожніми, назви треків використовуватимуться як опис. Введений опис буде застосовано для кожного треку.</string>
     <string name="exit_pan_mode_descr">Натисніть Вибрати, щоб вийти з режиму панорамування</string>
     <string name="icon_group_nautical">Морський</string>
+    <string name="rendering_attr_noNatureReserves_name">Природний заповідник</string>
+    <string name="shared_app_storage_description">Спільна пам\'ять більше не доступна через зміни в правилах доступу до сховища в Android.</string>
+    <string name="shared_storage_warning_title">Зміни в правилах доступу до сховища</string>
+    <string name="purchases_feature_desc_android_auto">Офлайн-мапи та навігація OsmAnd на екрані вашого автомобіля. Зручна інтеграція з органами керування вашого автомобіля.</string>
+    <string name="shared_string_details">Подробиці</string>
+    <string name="internal_app_storage_description">Внутрішнє сховище, схована від користувача та інших застосунків, тому ніхто, крім OsmAnd не може отримати доступ до ваших даних</string>
+    <string name="rendering_attr_noNatureReserves_description">Сховати заповідники, заповідні території та національні парки.</string>
+    <string name="included_categories">Включені категорії</string>
+    <string name="shared_string_articles">Статті</string>
+    <string name="release_4_1">• Додано початкову підтримку Android Auto
+\n
+\n• Оновлення інтерфейсу користувача для пошуку координат UTM
+\n
+\n• Уподобання: додана можливість перегляду нещодавно використаних піктограм
+\n
+\n• Планування маршруту: буде використовувати вибраний профіль після запуску
+\n
+\n• Виправлено шар mapillary, плагін тепер типово вимкнено
+\n
+\n• Додано сторінку керування всією історією в застосунку
+\n
+\n• Орієнтація мапи не скидається після перезапуску застосунку
+\n
+\n• Покращено вигляд маркера висоти SRTM
+\n
+\n• Виправлено показ арабської мови на мапі
+\n
+\n• Виправлені різні проблеми маршрутизації
+\n
+\n</string>
+    <string name="android_auto_purchase_request_title">Придбати OsmAnd Pro або Maps+ для використання OsmAnd з Android Auto</string>
+    <string name="continue_on_phone">Продовжити на телефоні</string>
+    <string name="location_access_request_title">OsmAnd потрібен доступ до місця розташування для навігації</string>
+    <string name="android_auto_map_placeholder_title">Мапа показана на екрані автомобіля.</string>
+    <string name="android_auto_map_placeholder_descr">Від\'єднайте пристрій від Android Auto, щоб переглянути мапу в застосунку.</string>
+    <string name="location_access_request_action">Надати доступ</string>
+    <string name="location_access_request_result">Затверджено: %1$s Відхилено: %2$s</string>
+    <string name="is_disabled">%1$s вимкнено</string>
+    <string name="clear_all_history">Очистити всю історію</string>
+    <string name="markers_history_is_disabled_descr">Увімкніть історію, щоб отримати список відвіданих позначок мапи.</string>
+    <string name="clear_all_history_warning">Ви впевнені, що хочете очистити всю історію в застосунку\?
+\n
+\nІсторія пошуку, навігації та позначки буде очищено.</string>
+    <string name="shortcut_navigate_to_home">Маршрут Додому</string>
+    <string name="shared_storage_warning_description">Починаючи з наступного оновлення OsmAnd, застосунок втратить доступ до Спільного сховища через зміну правил доступу до сховищ в Android.
+\n
+\nБудь ласка, змініть сховище зі спільного сховища на доступне сховище, якщо цього не буде зроблено, застосунок втратить доступ до ваших даних: включно з офлайн-мапами, треками GPX тощо.</string>
+    <string name="search_history_is_disabled_descr">Увімкнути історію пошуку можна в Налаштуваннях</string>
+    <string name="history_is_disabled_descr">Увімкніть історію, щоб отримати швидкий доступ до останніх використаних результатів.</string>
+    <string name="transparent_status_bar">Прозорий рядок стану</string>
+    <string name="history_actions_descr">Ви можете експортувати історію в файл.</string>
+    <string name="map_markers_history">Історія позначок мап</string>
+    <string name="navigation_history">Історія навігації</string>
+    <string name="history_preferences_descr">Ви можете вимкнути ведення журналу історії окремо для кожного типу історії.</string>
+    <string name="shortcut_start_recording">Почати запис</string>
+    <string name="shortcut_navigate_to">Маршрут до…</string>
+    <string name="shortcut_navigate_to_work">Маршрут до Роботи</string>
+    <string name="transparent_status_bar_descr">Показ мапи під рядком стану</string>
 </resources>

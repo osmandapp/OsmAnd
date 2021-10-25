@@ -4028,4 +4028,8 @@
     <string name="poi_groundskeeping">Magazin de grădinărit</string>
     <string name="poi_country_store">Magazin de țară</string>
     <string name="poi_prep_school">Școala Tutorial</string>
+    <string name="poi_ticket_validator">Validator de bilete</string>
+    <string name="poi_geoglyph">Geoglifă</string>
+    <string name="poi_satellite_dish">Antenă satelit</string>
+    <string name="poi_trailhead">Punct de pornire</string>
 </resources>

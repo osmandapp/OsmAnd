@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -151,6 +152,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	private void enableDisablePlugin(OsmandPlugin plugin) {
 		if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, !plugin.isEnabled())) {
 			adapter.notifyDataSetChanged();
+			notifyPluginStateListener(plugin);
 		}
 	}
 
@@ -159,6 +161,7 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 		OsmandPlugin plugin = OsmandPlugin.getPlugin(connectedApp.getPack());
 		if (plugin != null) {
 			OsmandPlugin.enablePlugin(getActivity(), app, plugin, connectedApp.isEnabled());
+			notifyPluginStateListener(plugin);
 		}
 		adapter.notifyDataSetChanged();
 	}
@@ -166,6 +169,14 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	@Override
 	public void onPluginStateChanged(@NonNull OsmandPlugin plugin) {
 		adapter.notifyDataSetChanged();
+		notifyPluginStateListener(plugin);
+	}
+
+	private void notifyPluginStateListener(@NonNull OsmandPlugin plugin) {
+		Fragment target = getTargetFragment();
+		if (target instanceof PluginStateListener) {
+			((PluginStateListener) target).onPluginStateChanged(plugin);
+		}
 	}
 
 	protected class PluginsListAdapter extends ArrayAdapter<Object> {
@@ -348,8 +359,13 @@ public class PluginsFragment extends BaseOsmAndFragment implements PluginStateLi
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager) {
+		return showInstance(fragmentManager, null);
+	}
+
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			PluginsFragment fragment = new PluginsFragment();
+			fragment.setTargetFragment(target, 0);
 			fragmentManager.beginTransaction()
 					.add(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(TAG)

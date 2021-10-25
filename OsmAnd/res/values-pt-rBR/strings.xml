@@ -4338,4 +4338,41 @@
     <string name="upload_gpx_description_hint">Deixe vazio, os nomes das trilhas serão usados como descrição. A descrição inserida será aplicada para cada faixa.</string>
     <string name="exit_pan_mode_descr">Pressione SELECT para sair do modo PAN</string>
     <string name="icon_group_nautical">Náutico</string>
+    <string name="shared_app_storage_description">A memória compartilhada não está mais disponível devido a alterações nas regras de acesso de armazenamento no Android.</string>
+    <string name="shared_string_details">Detalhes</string>
+    <string name="purchases_feature_desc_android_auto">Osmand offline mapas e navegação na tela do seu veículo. Integrar convenientemente com os controles do seu veículo.</string>
+    <string name="internal_app_storage_description">Armazenamento interno, oculto a partir do usuário e outros aplicativos, portanto, ninguém, exceto OSMand, não pode obter acesso aos seus dados</string>
+    <string name="shared_storage_warning_title">Mudanças nas regras de acesso de armazenamento</string>
+    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
+    <string name="rendering_attr_noNatureReserves_description">Ocultar reserva natural, áreas protegidas e parques nacionais.</string>
+    <string name="shared_string_articles">Artigos</string>
+    <string name="included_categories">Categorias incluídas</string>
+    <string name="markers_history_is_disabled_descr">Ative o histórico para obter uma lista de marcadores de mapa visitados.</string>
+    <string name="is_disabled">%1$s está desabilitado</string>
+    <string name="clear_all_history">Limpar todo o histórico</string>
+    <string name="history_actions_descr">Você pode exportar o histórico para um arquivo.</string>
+    <string name="map_markers_history">Histórico de marcadores de mapa</string>
+    <string name="navigation_history">Histórico de navegação</string>
+    <string name="history_preferences_descr">Você pode desativar o registro do histórico individualmente para cada tipo de histórico.</string>
+    <string name="shortcut_start_recording">Comece a gravar</string>
+    <string name="shortcut_navigate_to">Navegar para…</string>
+    <string name="shortcut_navigate_to_work">Navegue para o trabalho</string>
+    <string name="android_auto_map_placeholder_title">O mapa é exibido na tela do veículo.</string>
+    <string name="android_auto_purchase_request_title">Compre OsmAnd Pro ou Maps+ para usar OsmAnd com Android Auto</string>
+    <string name="continue_on_phone">Continuar no telefone</string>
+    <string name="location_access_request_title">OsmAnd precisa de acesso ao local para navegar</string>
+    <string name="location_access_request_action">Garantir acesso</string>
+    <string name="location_access_request_result">Aprovado: %1$s Rejeitado: %2$s</string>
+    <string name="transparent_status_bar_descr">Exibir mapa na barra de status</string>
+    <string name="clear_all_history_warning">Tem certeza de que deseja limpar todo o histórico do aplicativo\?
+\n
+\nA pesquisa, navegação e histórico de marcadores serão apagados.</string>
+    <string name="search_history_is_disabled_descr">Você pode ativar o histórico de pesquisa em Configurações</string>
+    <string name="history_is_disabled_descr">Ative o histórico para obter acesso mais rápido aos últimos resultados usados.</string>
+    <string name="shared_storage_warning_description">A partir de novembro de 2021, o OsmAnd 4.2 perderá o acesso ao armazenamento compartilhado devido a alterações nas regras de acesso ao armazenamento no Android.
+\n
+\nPor favor, altere o armazenamento de armazenamento compartilhado para armazenamento disponível, se isso não for feito, o aplicativo perderá o acesso aos seus dados: incluindo mapas offline, trilhas GPX e tudo mais.</string>
+    <string name="shortcut_navigate_to_home">Navegar para a casa</string>
+    <string name="transparent_status_bar">Barra de status transparente</string>
+    <string name="android_auto_map_placeholder_descr">Desconecte seu dispositivo do Android Auto para visualizar o mapa no aplicativo.</string>
 </resources>

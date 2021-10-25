@@ -4349,4 +4349,62 @@
     <string name="routing_attr_prefer_tactile_paving_name">Taktile Oberflächen bevorzugen</string>
     <string name="exit_pan_mode_descr">Auswählen drücken, um Schwenkmodus zu verlassen</string>
     <string name="icon_group_nautical">Nautisch</string>
+    <string name="shared_string_articles">Artikel</string>
+    <string name="included_categories">Enthaltene Kategorien</string>
+    <string name="release_4_1">• Erste Unterstützung für Android Auto hinzugefügt
+\n
+\n • Aktualisierung der Benutzeroberfläche für die Suche nach UTM Koordinaten
+\n
+\n • Favoriten: Möglichkeit zur Anzeige der zuletzt verwendeten Symbole hinzugefügt
+\n
+\n • Routenplanung: verwendet nach dem Start das ausgewählte Profil
+\n
+\n • Mapillary Ebene korrigiert, das Modul ist nun standardmäßig deaktiviert
+\n
+\n • Anzeige zur Verwaltung des gesamten Verlaufs der App hinzugefügt
+\n
+\n • Die Kartenausrichtung wird nach dem Neustart der App nicht zurückgesetzt
+\n
+\n • Verbesserte Darstellung von SRTM Höhenmarkierungen
+\n
+\n • Arabische Schrift auf der Karte korrigiert
+\n
+\n • Verschiedene Routingprobleme behoben
+\n
+\n</string>
+    <string name="rendering_attr_noNatureReserves_name">Naturschutzgebiet</string>
+    <string name="rendering_attr_noNatureReserves_description">Ausblenden von Naturschutzgebieten, Schutzgebieten und Nationalparks.</string>
+    <string name="internal_app_storage_description">Interner Speicher, versteckt vor dem Benutzer und anderen Anwendungen, so dass niemand außer OsmAnd Zugriff auf Ihre Daten hat</string>
+    <string name="shared_string_details">Details</string>
+    <string name="shared_app_storage_description">Gemeinsamer Speicher ist aufgrund von Änderungen der Speicherzugriffsregeln in Android nicht mehr verfügbar.</string>
+    <string name="shared_storage_warning_title">Änderungen der Speicherzugriffsregeln</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd Offlinekarten und Navigation auf dem Bildschirm Ihres Fahrzeugs. Integrieren Sie es bequem in die Bedienelemente Ihres Fahrzeugs.</string>
+    <string name="location_access_request_action">Zugang gewähren</string>
+    <string name="location_access_request_result">Zugelassen: %1$s Abgelehnt: %2$s</string>
+    <string name="is_disabled">%1$s ist deaktiviert</string>
+    <string name="shortcut_start_recording">Aufzeichnung starten</string>
+    <string name="shortcut_navigate_to">Navigieren nach…</string>
+    <string name="shortcut_navigate_to_work">Zur Arbeit navigieren</string>
+    <string name="shortcut_navigate_to_home">Nach Hause navigieren</string>
+    <string name="android_auto_map_placeholder_title">Die Karte wird auf dem Bildschirm des Fahrzeugs angezeigt.</string>
+    <string name="android_auto_map_placeholder_descr">Trennen Sie Ihr Gerät von Android Auto, um die Karte in der App anzuzeigen.</string>
+    <string name="android_auto_purchase_request_title">Kaufen Sie OsmAnd Pro oder Maps+, um OsmAnd mit Android Auto zu verwenden</string>
+    <string name="location_access_request_title">OsmAnd benötigt Zugang zum Standort, um zu navigieren</string>
+    <string name="transparent_status_bar">Transparente Statusleiste</string>
+    <string name="markers_history_is_disabled_descr">Verlauf aktivieren, um eine Liste der besuchten Kartenmarkierungen zu erhalten.</string>
+    <string name="history_actions_descr">Sie können den Verlauf in eine Datei exportieren.</string>
+    <string name="navigation_history">Verlauf der Navigation</string>
+    <string name="history_preferences_descr">Sie können die Protokollierung des Verlaufs für jeden Verlaufstyp einzeln deaktivieren.</string>
+    <string name="shared_storage_warning_description">Ab November 2021 wird OsmAnd 4.2 den Zugriff auf den gemeinsamen Speicher aufgrund der geänderten Speicherzugriffsregeln in Android verlieren.
+\n
+\nBitte ändern Sie den Speicher von gemeinsamem Speicher auf verfügbaren Speicher. Wenn dies nicht geschieht, wird die App den Zugriff auf Ihre Daten verlieren: einschließlich Offlinekarten, GPX Tracks und alles andere.</string>
+    <string name="search_history_is_disabled_descr">Sie können den Suchverlauf unter Einstellungen aktivieren</string>
+    <string name="history_is_disabled_descr">Verlauf aktivieren, um einen schnelleren Zugriff auf die zuletzt verwendeten Ergebnisse zu erhalten.</string>
+    <string name="clear_all_history_warning">Sicher, dass Sie den gesamten Verlauf in der App löschen möchten\?
+\n
+\nDer Such-, Navigations- und Markierungsverlauf wird gelöscht.</string>
+    <string name="clear_all_history">Gesamten Verlauf löschen</string>
+    <string name="map_markers_history">Verlauf der Kartenmarkierungen</string>
+    <string name="continue_on_phone">Weiter auf dem Telefon</string>
+    <string name="transparent_status_bar_descr">Karte unter der Statusleiste anzeigen</string>
 </resources>

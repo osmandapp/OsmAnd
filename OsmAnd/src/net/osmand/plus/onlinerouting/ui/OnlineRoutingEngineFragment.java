@@ -81,6 +81,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 	private OnlineRoutingCard vehicleCard;
 	private OnlineRoutingCard apiKeyCard;
 	private OnlineRoutingCard approximateCard;
+	private OnlineRoutingCard useExternalTimestampsCard;
 	private OnlineRoutingCard exampleCard;
 	private View testResultsContainer;
 	private View saveButton;
@@ -136,6 +137,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		setupTypeCard();
 		setupVehicleCard();
 		setupApproximateCard();
+		setupExternalTimestampsCard();
 		setupApiKeyCard();
 		setupExampleCard();
 		setupResultsContainer();
@@ -288,6 +290,18 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 		});
 		approximateCard.showDivider();
 		segmentsContainer.addView(approximateCard.getView());
+	}
+
+	private void setupExternalTimestampsCard() {
+		useExternalTimestampsCard = new OnlineRoutingCard(mapActivity, isNightMode(), appMode);
+		useExternalTimestampsCard.build(mapActivity);
+		useExternalTimestampsCard.setHeaderTitle(getString(R.string.use_external_timestamps));
+		useExternalTimestampsCard.setCheckBox(getString(R.string.use_external_timestamps_description), engine.useExternalTimestamps(), result -> {
+			engine.put(EngineParameter.USE_EXTERNAL_TIMESTAMPS, String.valueOf(result));
+			return false;
+		});
+		useExternalTimestampsCard.showDivider();
+		segmentsContainer.addView(useExternalTimestampsCard.getView());
 	}
 
 	private void setupApiKeyCard() {
@@ -527,6 +541,7 @@ public class OnlineRoutingEngineFragment extends BaseOsmAndFragment {
 				updateCardVisibility(apiKeyCard, EngineParameter.API_KEY);
 				updateCardVisibility(vehicleCard, EngineParameter.VEHICLE_KEY);
 				updateCardVisibility(approximateCard, EngineParameter.APPROXIMATE_ROUTE);
+				updateCardVisibility(useExternalTimestampsCard, EngineParameter.USE_EXTERNAL_TIMESTAMPS);
 
 			} else if (vehicleCard.equals(card)) {
 				VehicleType vt = engine.getSelectedVehicleType();

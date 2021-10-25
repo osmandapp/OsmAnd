@@ -4030,4 +4030,11 @@
     <string name="poi_groundskeeping">Laden für Gartenpflege</string>
     <string name="poi_country_store">Landhandel</string>
     <string name="poi_prep_school">Nachhilfe für Schüler</string>
+    <string name="poi_ticket_validator">Fahrkartenentwerter</string>
+    <string name="poi_geoglyph">Erdzeichnung</string>
+    <string name="poi_satellite_dish">Satellitenantenne</string>
+    <string name="poi_trailhead">Ausgangspunkt eines Wanderwegs</string>
+    <string name="poi_hampshire_gate">Drahtzaun (über den Weg gespannt, als Ersatz für ein Tor)</string>
+    <string name="poi_driver_training">Verkehrsübungsplatz</string>
+    <string name="poi_research_institute">Forschungsinstitut</string>
 </resources>

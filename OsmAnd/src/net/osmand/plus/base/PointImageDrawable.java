@@ -1,7 +1,9 @@
 package net.osmand.plus.base;
 
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
@@ -11,12 +13,11 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
-import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -28,28 +29,26 @@ import net.osmand.plus.UiUtilities;
 
 import java.util.TreeMap;
 
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-
 public class PointImageDrawable extends Drawable {
 
 	private final int dp_12_px;
-	private boolean withShadow;
+	private final boolean withShadow;
 	private boolean history;
-	private Drawable mapIcon;
+	private final Drawable mapIcon;
 	private Bitmap mapIconBitmap;
-	private Bitmap mapIconBackgroundTop;
-	private Bitmap mapIconBackgroundCenter;
-	private Bitmap mapIconBackgroundBottom;
-	private Bitmap mapIconBackgroundTopSmall;
-	private Bitmap mapIconBackgroundCenterSmall;
-	private Bitmap mapIconBackgroundBottomSmall;
-	private Drawable uiListIcon;
-	private Drawable uiBackgroundIcon;
-	private Paint paintIcon = new Paint();
-	private Paint paintBackground = new Paint();
-	private ColorFilter colorFilter;
-	private ColorFilter grayFilter;
+	private final Bitmap mapIconBackgroundTop;
+	private final Bitmap mapIconBackgroundCenter;
+	private final Bitmap mapIconBackgroundBottom;
+	private final Bitmap mapIconBackgroundTopSmall;
+	private final Bitmap mapIconBackgroundCenterSmall;
+	private final Bitmap mapIconBackgroundBottomSmall;
+	private final Drawable uiListIcon;
+	private final Drawable uiBackgroundIcon;
+	private final Paint paintIcon = new Paint();
+	private final Paint paintForeground = new Paint();
+	private final Paint paintBackground = new Paint();
+	private final ColorFilter colorFilter;
+	private final ColorFilter grayFilter;
 	private float scale = 1.0f;
 	private int mapIconSize = 0;
 	private int backSize = 0;
@@ -58,16 +57,17 @@ public class PointImageDrawable extends Drawable {
 	public static final int ICON_SIZE_VECTOR_PX = 12;
 
 	private PointImageDrawable(PointInfo pointInfo) {
+		paintForeground.setAntiAlias(true);
+		paintBackground.setAntiAlias(true);
 		withShadow = pointInfo.withShadow;
 		Context ctx = pointInfo.ctx;
-		Resources res = ctx.getResources();
 		UiUtilities uiUtilities = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities();
 		int overlayIconId = pointInfo.overlayIconId;
 		mapIcon = uiUtilities.getIcon(pointInfo.synced
 						? R.drawable.ic_action_flag
 						: getMapIconId(ctx, overlayIconId),
 				R.color.color_white);
-		int col = pointInfo.color == 0 ? res.getColor(R.color.color_favorite) : pointInfo.color;
+		int col = pointInfo.color == 0 ? ContextCompat.getColor(ctx, R.color.color_favorite) : pointInfo.color;
 		uiListIcon = uiUtilities.getIcon(overlayIconId, R.color.color_white);
 		BackgroundType backgroundType = pointInfo.backgroundType;
 		int uiBackgroundIconId = backgroundType.getIconId();
@@ -79,7 +79,7 @@ public class PointImageDrawable extends Drawable {
 		mapIconBackgroundCenterSmall = backgroundType.getMapBackgroundIconId(ctx, "center", true);
 		mapIconBackgroundBottomSmall = backgroundType.getMapBackgroundIconId(ctx, "bottom", true);
 		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.SRC_IN);
-		grayFilter = new PorterDuffColorFilter(res.getColor(R.color.color_favorite_gray), PorterDuff.Mode.SRC_IN);
+		grayFilter = new PorterDuffColorFilter(ContextCompat.getColor(ctx, R.color.color_favorite_gray), PorterDuff.Mode.SRC_IN);
 		dp_12_px = AndroidUtils.dpToPx(pointInfo.ctx, 12);
 	}
 
@@ -123,14 +123,14 @@ public class PointImageDrawable extends Drawable {
 		paintBackground.setColorFilter(history ? grayFilter : colorFilter);
 		Rect bs = getBounds();
 		if (withShadow) {
-			drawBitmap(canvas, bs, mapIconBackgroundBottom, null);
+			drawBitmap(canvas, bs, mapIconBackgroundBottom, paintForeground);
 			drawBitmap(canvas, bs, mapIconBackgroundCenter, paintBackground);
-			drawBitmap(canvas, bs, mapIconBackgroundTop, null);
+			drawBitmap(canvas, bs, mapIconBackgroundTop, paintForeground);
 			int offsetX = bs.centerX() - mapIconSize / 2;
 			int offsetY = bs.centerY() - mapIconSize / 2;
 			Rect mapIconBounds = new Rect(offsetX, offsetY, (offsetX + mapIconSize),
 					offsetY + mapIconSize);
-			drawBitmap(canvas, mapIconBounds, mapIconBitmap, null);
+			drawBitmap(canvas, mapIconBounds, mapIconBitmap, paintForeground);
 		} else {
 			uiBackgroundIcon.draw(canvas);
 			uiListIcon.draw(canvas);
@@ -179,9 +179,9 @@ public class PointImageDrawable extends Drawable {
 		}
 		Rect destRect = new Rect(0, 0, scaledWidth, scaledHeight);
 		destRect.offset((int) x - scaledWidth / 2, (int) y - scaledHeight / 2);
-		canvas.drawBitmap(mapIconBackgroundBottomSmall, null, destRect, null);
+		canvas.drawBitmap(mapIconBackgroundBottomSmall, null, destRect, paintForeground);
 		canvas.drawBitmap(mapIconBackgroundCenterSmall, null, destRect, paintBackground);
-		canvas.drawBitmap(mapIconBackgroundTopSmall, null, destRect, null);
+		canvas.drawBitmap(mapIconBackgroundTopSmall, null, destRect, paintForeground);
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class PointImageDrawable extends Drawable {
 		paintIcon.setColorFilter(cf);
 	}
 
-	private static TreeMap<String, PointImageDrawable> cache = new TreeMap<>();
+	private static final TreeMap<String, PointImageDrawable> cache = new TreeMap<>();
 
 	private static PointImageDrawable getOrCreate(@NonNull PointInfo pointInfo) {
 

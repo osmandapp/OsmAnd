@@ -3687,9 +3687,9 @@
     <string name="add_to_a_track">Ajouter à une trace</string>
     <string name="shared_string_custom">Personnalisé</string>
     <string name="add_hidden_group_info">Le point ajouté se trouve dans \"%s\". Afficher ce groupe pour rendre le point visible sur la carte.</string>
-    <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle d\'affichage sur la trace des marques de distance ou de durée.</string>
-    <string name="gpx_split_interval_none_descr">Sélectionner l\'option de découpage : durée ou distance.</string>
-    <string name="track_coloring_solid">Continu</string>
+    <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle auquel les marques de distance ou de temps sur la trace seront affichées.</string>
+    <string name="gpx_split_interval_none_descr">Sélectionnez l\'option de fractionnement souhaitée : par temps ou par distance.</string>
+    <string name="track_coloring_solid">Opaque</string>
     <string name="track_show_start_finish_icons">Afficher les icônes de départ et d\'arrivée</string>
     <string name="select_track_width">Sélectionner la largeur</string>
     <string name="gpx_direction_arrows">Flèches de direction</string>
@@ -3932,7 +3932,7 @@
     <string name="show_track_on_map">Afficher la trace sur la carte</string>
     <string name="routing_engine_vehicle_type_scooter">Trottinette</string>
     <string name="routing_engine_vehicle_type_small_truck">Camionnette</string>
-    <string name="upload_to_openstreetmap">Envoyer vers OpenStreetMap</string>
+    <string name="upload_to_openstreetmap">Envoyer sur OpenStreetMap</string>
     <string name="edit_track">Modifier la trace</string>
     <string name="rename_track">Renommer la trace</string>
     <string name="change_folder">Modifier le dossier</string>
@@ -4304,7 +4304,7 @@
 \n
 \n• Distance par appui déplacé de la règle Rayon dans une option séparée
 \n
-\n• Planifier l’itinéraire: Vous pouvez maintenant modifier les options de navigation, accéder à la configuration de la carte et effectuer une recherche sans quitter la planification de l’itinéraire
+\n• Planifier l’itinéraire : Vous pouvez maintenant modifier les options de navigation, accéder à la configuration de la carte et effectuer une recherche sans quitter la planification de l’itinéraire
 \n
 \n• Nouvel écran « Achat » avec des informations d’achat détaillées
 \n
@@ -4337,4 +4337,41 @@
     <string name="upload_gpx_description_hint">Si vide, la description sera alimentée avec le nom de trace. La description saisie sera utilisée pour chaque trace.</string>
     <string name="exit_pan_mode_descr">Appuyez sur Sélectionner pour quitter le mode panoramique</string>
     <string name="icon_group_nautical">Nautisme</string>
+    <string name="shared_storage_warning_title">Évolutions des règles d\'accès au stockage</string>
+    <string name="shared_app_storage_description">La mémoire partagée n\'est plus disponible depuis l\'évolution des règles Android d\'accès au stockage.</string>
+    <string name="internal_app_storage_description">Stockage interne, masqué à l\'utilisateur et aux autres applications ; seul OsmAnd peut accéder à vos données.</string>
+    <string name="purchases_feature_desc_android_auto">Cartes et navigation hors ligne OsmAnd s\'affichant sur l\'écran de votre véhicule et répondant aux commandes de votre véhicule.</string>
+    <string name="shared_string_details">Détails</string>
+    <string name="rendering_attr_noNatureReserves_name">Réserve naturelle</string>
+    <string name="rendering_attr_noNatureReserves_description">Masquer les réserves naturelles, les zones protégées et les parcs nationaux.</string>
+    <string name="shared_string_articles">Articles</string>
+    <string name="included_categories">Catégories incluses</string>
+    <string name="android_auto_map_placeholder_title">La carte s\'affiche sur l\'écran du véhicule.</string>
+    <string name="location_access_request_result">Approuvé : %1$s Refusé : %2$s</string>
+    <string name="android_auto_map_placeholder_descr">Déconnectez votre appareil d\'Android Auto pour afficher la carte dans l\'application.</string>
+    <string name="android_auto_purchase_request_title">Achetez OsmAnd Pro ou Maps+ pour utiliser OsmAnd avec Android Auto</string>
+    <string name="continue_on_phone">Continuer sur le téléphone</string>
+    <string name="location_access_request_action">Accorder l\'accès</string>
+    <string name="location_access_request_title">OsmAnd doit connaitre votre position pour vous guider</string>
+    <string name="shared_storage_warning_description">À partir de novembre 2021, OsmAnd 4.2 n\'aura plus accès au stockage partagé, car Android va modifier les règles d\'accès au stockage.
+\n
+\nVeuillez remplacer le stockage partagé par une autre stockage disponible, sans quoi l\'application ne pourra plus accéder à vos données comme les cartes hors ligne, les traces GPX ...</string>
+    <string name="markers_history_is_disabled_descr">Activez l\'historique pour avoir la liste des marques visitées.</string>
+    <string name="is_disabled">%1$s est désactivé</string>
+    <string name="shortcut_navigate_to">Naviguer vers…</string>
+    <string name="clear_all_history_warning">Êtes-vous certain de vouloir effacer tout l\'historique de l\'application \?
+\n
+\nLes historiques de recherche, de navigation et des marques seront effacés.</string>
+    <string name="history_preferences_descr">Vous pouvez désactiver l\'historique unitairement pour chaque type d\'historique.</string>
+    <string name="shortcut_navigate_to_home">Naviguer vers Domicile</string>
+    <string name="navigation_history">Historique de navigation</string>
+    <string name="search_history_is_disabled_descr">Vous pouvez activer l\'historique des recherches dans les Paramètres.</string>
+    <string name="clear_all_history">Effacer tout l\'historique</string>
+    <string name="history_actions_descr">Vous pouvez exporter l\'historique dans un fichier.</string>
+    <string name="map_markers_history">Historique des marques</string>
+    <string name="shortcut_start_recording">Démarrer l\'enregistrement</string>
+    <string name="shortcut_navigate_to_work">Naviguer vers Travail</string>
+    <string name="transparent_status_bar_descr">Afficher la carte sous la barre d\'état</string>
+    <string name="transparent_status_bar">Barre d\'état transparente</string>
+    <string name="history_is_disabled_descr">Activez l\'historique pour accéder rapidement aux derniers résultats de recherche.</string>
 </resources>

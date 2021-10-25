@@ -856,7 +856,7 @@
     <string name="route_descr_select_destination">Təyinat nöqtəsi seçin</string>
     <string name="routing_attr_avoid_toll_description">Pullu yollardan yayın</string>
     <string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan yayın</string>
-    <string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan yayın.</string>
+    <string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan yayınır</string>
     <string name="routing_attr_avoid_ferries_name">Bərələrdən yayın</string>
     <string name="routing_attr_avoid_ferries_description">Bərələrdən yayın</string>
     <string name="routing_attr_avoid_motorway_name">Avtomagistrallardan yayın</string>
@@ -1009,7 +1009,7 @@
     <string name="direction_style_sidewise">Yan-yana (8 sektor)</string>
     <string name="direction_style_clockwise">Saat istiqamətində (12 sektor)</string>
     <string name="settings_direction_style">İstiqamət stili</string>
-    <string name="settings_direction_style_descr">Hərəkət zamanı nisbi istiqamətləri ifadə etmək üçün stil seçin.</string>
+    <string name="settings_direction_style_descr">Hərəkət zamanı nisbi istiqamətləri ifadə etmək üçün stil seçin</string>
     <string name="accessibility_preferences_descr">Xüsusi imkanlarla əlaqəli seçimlər.</string>
     <string name="rendering_out_of_memory">Seçilən sahəni göstərmək üçün kifayət qədər proses yaddaşı yoxdur</string>
     <string name="free_version_message">%1$s xəritə endirə və ya yeniləyə bilərsiniz.</string>
@@ -1087,7 +1087,7 @@
     <string name="error_calculating_route">Marşrut hesablana bilmədi.</string>
     <string name="error_calculating_route_occured">Marşrut hesablana bilmədi.</string>
     <string name="empty_route_calculated">Hesablanan marşrut boşdur.</string>
-    <string name="arrived_at_destination">Təyinat nöqtənizə gəlib çatdınız</string>
+    <string name="arrived_at_destination">Gəlib çatdınız.</string>
     <string name="invalid_locations">Yanlış koordinatlar</string>
     <string name="use_online_routing_descr">Marşrutu hesablamaq üçün internet istifadə et.</string>
     <string name="use_online_routing">Onlayn naviqasiya istifadə et</string>
@@ -1333,7 +1333,7 @@
     <string name="routing_attr_avoid_stairs_name">Pilləkənlərdən yayın</string>
     <string name="routing_attr_avoid_stairs_description">Pilləkənlərdən yayın</string>
     <string name="routing_attr_avoid_borders_name">Sərhəd keçidlərindən yayın</string>
-    <string name="routing_attr_avoid_borders_description">Başqa ölkə ilə sərhəd kəsişmələrindən yayın.</string>
+    <string name="routing_attr_avoid_borders_description">Milli sərhədləri keçməkdən yayınır</string>
     <string name="routing_attr_weight_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin çəkisini təyin edin.</string>
     <string name="routing_attr_height_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin hündürlüyünü təyin edin.</string>
     <string name="calculate_osmand_route_gpx">OsmAnd oflayn marşrut hesablanması</string>
@@ -1474,7 +1474,8 @@
     <string name="local_recordings_delete_all_confirm">%1$d qeyd silinsin\?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d dəyişiklik OSM-a yüklənsin\?</string>
     <string name="osm_live_subscription">OsmAnd Live abunəliyi</string>
-    <string name="osm_live_thanks">OsmAnd-ı dəstəklədiyiniz üçün təşəkkür edirik. Bütün yeni xüsusiyyətləri aktivləşdirmək üçün OsmAnd-ı yenidən başladın.</string>
+    <string name="osm_live_thanks">OsmAnd-ı dəstəklədiyiniz üçün təşəkkür edirik.
+\nBütün yeni xüsusiyyətləri aktivləşdirmək üçün OsmAnd-ı yenidən başladın.</string>
     <string name="osm_live_ask_for_purchase">Zəhmət olmasa əvvəlcə OsmAnd Live abunəliyini alın</string>
     <string name="storage_directory_shared">Paylaşılan yaddaş</string>
     <string name="donations">İanələr</string>
@@ -1498,10 +1499,10 @@
     <string name="wrong_user_name">Yanlış istifadəçi adı</string>
     <string name="shared_string_to">Bu tarixədək:</string>
     <string name="mapillary_menu_date_from">Bu tarixdən:</string>
-    <string name="mapillary_menu_descr_dates">Müəyyən dövrdə əlavə edilmiş şəkillərə baxın.</string>
+    <string name="mapillary_menu_descr_dates">Yalnız əlavə edilmiş şəkillərə bax</string>
     <string name="mapillary_menu_title_dates">Tarix</string>
     <string name="mapillary_menu_edit_text_hint">İstifadəçi adını yazın</string>
-    <string name="mapillary_menu_descr_username">Bir istifadəçinin əlavə etdiyi şəkillərə baxın.</string>
+    <string name="mapillary_menu_descr_username">Yalnız bu şəxsin əlavə etdiyi şəkillərə bax:</string>
     <string name="mapillary_menu_title_username">İstifadəçi adı</string>
     <string name="no_address_found">Ünvan müəyyən deyil</string>
     <string name="context_menu_item_open_note">OSM qeydini aç</string>
@@ -1751,7 +1752,7 @@
     <string name="init_native_library">Yerli kitabxana başladılır…</string>
     <string name="pref_overlay">Örtük / altlıq</string>
     <string name="file_can_not_be_renamed">Fayl yenidən adlandırıla bilməz.</string>
-    <string name="poi_query_by_name_matches_categories">Sorguya uyğun bir neçə POI kateqoriyası tapıldı:</string>
+    <string name="poi_query_by_name_matches_categories">Bir neçə əlaqəli POI kateqoriyası tapıldı.</string>
     <string name="data_to_search_poi_not_available">POI axtarmaq üçün yerli məlumatlar yoxdur.</string>
     <string name="update_poi_file_not_found">POI dəyişikliklərini saxlamaq üçün yerli fayl tapılmadı və yaradıla bilmədi.</string>
     <string name="map_version_changed_info">Yeni xəritə fayllarını istifadə edə bilmək üçün proqramın yeni versiyasını endirin.</string>
@@ -2167,4 +2168,59 @@
     <string name="shared_string_view_all">Hamısına bax</string>
     <string name="backup_restore_now">İndi bərpa et</string>
     <string name="shared_string_files">Fayllar</string>
+    <string name="travel_route_types">Marşrut növləri</string>
+    <string name="map_updates_for_mappers">Xəritəçəkənlər üçün xəritə yeniləmələri</string>
+    <string name="backup_error_no_subscription">Abunəlik yoxdur</string>
+    <string name="reset_to_original">Orijinala sıfırla</string>
+    <string name="attribute">Atribut</string>
+    <string name="service_is_not_available_please_try_later">Xidmət mövcud deyil, sonra cəhd edin</string>
+    <string name="start_point">Başlanğıc</string>
+    <string name="no_items_of_type_message">Bu növ elementləriniz yoxdur</string>
+    <string name="amz_manage_subscription_descr">Abunəliyinizi idarə etmək üçün cihazda Amazon App-dan istifadə edin və ya profilinizin altında Amazon.com veb saytını açın.</string>
+    <string name="shared_string_relation">Münasibət</string>
+    <string name="explore_osmnad_plans_to_find_suitable">Sizə uyğun olanı tapmaq üçün OsmAnd Planlarını kəşf edin.</string>
+    <string name="option_available_only_in_osmand_pro">Seçim OsmAnd Pro abunəliyinin bir hissəsi olaraq mövcuddur.</string>
+    <string name="active_till">%1$s tarixinə qədər aktivdir</string>
+    <string name="on_hold_since">%1$s tarixindən gözləmədə</string>
+    <string name="backup_welcome_back_descr">Mövcud nüsxələri istifadə edərək bu cihazdakı məlumatları bərpa edin və ya məlumatları OsmAnd Cloud-a nüsxələyin.</string>
+    <string name="backup_do_not_have_any">Hələ onlayn nüsxəniz yoxdur.</string>
+    <string name="backup_data_removed">Bütün məlumatlar silindi.</string>
+    <string name="shared_string_details">Detallar</string>
+    <string name="continue_on_phone">Telefonda davam et</string>
+    <string name="shared_string_articles">Məqalələr</string>
+    <string name="pro_features">Pro xüsusiyyətləri</string>
+    <string name="shared_app_storage_description">Android-də saxlama giriş qaydalarında dəyişiklik edildiyinə görə paylaşılan yaddaş artıq mövcud deyil.</string>
+    <string name="use_login_and_password">İstifadəçi adı və şifrə istifadə et</string>
+    <string name="backup_deleted_all_data_descr">Bütün məlumatlarınız OsmAnd Cloud-dan uğurla silindi.</string>
+    <string name="android_auto_purchase_request_title">OsmAnd-ı Android Auto ilə istifadə etmək üçün OsmAnd Pro və ya Maps+ alın</string>
+    <string name="included_categories">Daxil edilən kateqoriyalar</string>
+    <string name="search_title">Axtarış: %1$s</string>
+    <string name="no_activity_for_intent">Bu fəaliyyəti yerinə yetirmək üçün uyğun proqram tapılmadı</string>
+    <string name="empty_category_name">Boş kateqoriya adı</string>
+    <string name="cancel_anytime_in_amazon_app">İstənilən vaxt Amazon App-da ləğv edin</string>
+    <string name="grey_color_undefined">Məlumat olmayan hissələr üçün boz rəng istifadə olunur.</string>
+    <string name="purchases_restored">Alışlar bərpa edildi</string>
+    <string name="connect_track_points_as">Marşrut nöqtələrini birləşdir</string>
+    <string name="shared_string_purchased">Alındı</string>
+    <string name="map_updates_are_unavailable_yet">Xəritə yeniləmələri hələ mövcud deyil. :-(</string>
+    <string name="online_direct_line_maps_link">Lazım olan xəritələri yoxla.</string>
+    <string name="benefits_for_contributors_secondary_descr">Limitsiz aylıq və saatlıq xəritə yeniləmələrinə uyğun olub-olmadığınızı yoxlamaq üçün OpenStreetMap-a daxil olun.</string>
+    <string name="online_maps_searching_descr">Onlayn axtarılır…</string>
+    <string name="offline_maps_required_descr">Bu marşrut üçün lazım olan bəzi oflayn xəritələr yoxdur.</string>
+    <string name="direct_line_maps_required_descr">Marşrutun hesablanması həmişəkindən daha uzun çəkir.
+\n
+\n Bəlkə də bəzi xəritələr yüklənmir.</string>
+    <string name="backup_version_history_removed">Bütün versiya tarixi silindi.</string>
+    <string name="backup_error_gzip_only_supported_upload">Fayl .gzip formatında göndərilməlidir</string>
+    <string name="backup_deleting_all_data_descr">OsmAnd məlumatlarınızı buluddan silənə qədər gözləyin. Cihazdakı bütün məlumatlar toxunulmaz olaraq qalacaq.</string>
+    <string name="backup_deleted_all_data">Bütün məlumatlar silindi.</string>
+    <string name="backup_deleting_all_data">Bütün məlumatlar silinir…</string>
+    <string name="logout_from_osmand_cloud_decsr">Çıxış edilsin\?
+\nMəlumatların nüsxəsini çıxarmaq və ya bərpa etmək üçün yenidən daxil olmalısınız.</string>
+    <string name="logout_from_osmand_cloud">OsmAnd Cloud-dan çıx</string>
+    <string name="duration_moment_ago">indicə</string>
+    <string name="history_actions_descr">Tarixçəni bir fayla ixrac edə bilərsiniz.</string>
+    <string name="clear_all_history">Bütün tarixi təmizlə</string>
+    <string name="search_history_is_disabled_descr">Axtarış tarixçəsini parametrlərdən aktiv edə bilərsiniz</string>
+    <string name="history_is_disabled_descr">Son istifadə olunan nəticələrə daha sürətli daxil olmaq üçün tarixçəni aktiv edin.</string>
 </resources>

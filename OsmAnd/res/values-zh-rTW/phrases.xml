@@ -4030,4 +4030,11 @@
     <string name="poi_groundskeeping">草皮維護商店</string>
     <string name="poi_prep_school">補習班</string>
     <string name="poi_country_store">鄉村商店</string>
+    <string name="poi_ticket_validator">打票機</string>
+    <string name="poi_geoglyph">地畫</string>
+    <string name="poi_satellite_dish">碟型衛星天線</string>
+    <string name="poi_trailhead">起點</string>
+    <string name="poi_hampshire_gate">漢普郡閘門</string>
+    <string name="poi_driver_training">駕訓班</string>
+    <string name="poi_research_institute">研究機構</string>
 </resources>

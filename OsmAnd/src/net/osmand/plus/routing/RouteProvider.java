@@ -224,7 +224,9 @@ public class RouteProvider {
 			gpxRouteResult = gpxRoute;
 		}
 		if (!Algorithms.isEmpty(gpxRouteResult)) {
-			calculateGpxRouteTimeSpeed(routeParams, gpxRouteResult);
+			if (!gpxParams.calculatedRouteTimeSpeed) {
+				calculateGpxRouteTimeSpeed(routeParams, gpxRouteResult);
+			}
 			if (calcWholeRoute && !calculateOsmAndRouteParts) {
 				return new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
 						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, true);
@@ -632,6 +634,7 @@ public class RouteProvider {
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd();
 		OsmandSettings settings = params.ctx.getSettings();
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
+		router.setUseNativeApproximation(!settings.APPROX_SAFE_MODE.get());
 
 		RoutingConfiguration.Builder config = params.ctx.getRoutingConfigForMode(params.mode);
 		GeneralRouter generalRouter = params.ctx.getRouter(config, params.mode);
@@ -1074,6 +1077,7 @@ public class RouteProvider {
 		if (response != null) {
 			if (response.getGpxFile() != null) {
 				GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(response.getGpxFile(), settings);
+				builder.setCalculatedRouteTimeSpeed(response.hasCalculatedTimeSpeed());
 				params.gpxRoute = builder.build(app);
 				return calculateGpxRoute(params);
 			}
