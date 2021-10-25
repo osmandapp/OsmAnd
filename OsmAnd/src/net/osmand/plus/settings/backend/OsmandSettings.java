@@ -1372,6 +1372,18 @@ public class OsmandSettings {
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 
+	public final CommonPreference<Boolean> SHOW_SAVED_TRACK_REMEMBER = new BooleanPreference(this, "show_saved_track_remember", false) {
+		@Override
+		protected Boolean getDefaultValue() {
+			for (SelectedGpxFile selectedGpxFile : ctx.getSelectedGpxHelper().getSelectedGPXFiles()) {
+				if (!selectedGpxFile.isShowCurrentTrack()) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}.makeGlobal().makeShared();
+
 	public static final Integer REC_DIRECTORY = 0;
 	public static final Integer MONTHLY_DIRECTORY = 1;
 //	public static final Integer DAILY_DIRECTORY = 2;
@@ -1496,19 +1508,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> PREFER_MOTORWAYS = new BooleanPreference(this, "prefer_motorways", false).makeProfile().cache();
 
 	public final OsmandPreference<Long> LAST_UPDATES_CARD_REFRESH = new LongPreference(this, "last_updates_card_refresh", 0).makeGlobal();
-
-	public final CommonPreference<Boolean> CURRENT_TRACK_SHOW_IN_RECORDING_DIALOGS = new BooleanPreference(this, "current_track_show",
-			false) {
-		@Override
-		protected Boolean getDefaultValue() {
-			for (SelectedGpxFile selectedGpxFile : ctx.getSelectedGpxHelper().getSelectedGPXFiles()) {
-				if (!selectedGpxFile.isShowCurrentTrack()) {
-					return true;
-				}
-			}
-			return false;
-		}
-	}.makeGlobal().makeShared();
 
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference(this, "current_track_color", 0).makeGlobal().makeShared().cache();
 	public final CommonPreference<ColoringType> CURRENT_TRACK_COLORING_TYPE = new EnumStringPreference<>(this,

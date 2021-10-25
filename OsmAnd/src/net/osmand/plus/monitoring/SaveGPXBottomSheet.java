@@ -1,5 +1,7 @@
 package net.osmand.plus.monitoring;
 
+import static net.osmand.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -40,8 +42,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = "SaveGPXBottomSheetFragment";
@@ -126,9 +126,9 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		});
 
 		SwitchCompat showOnMapButton = mainView.findViewById(R.id.btn_show_on_map);
-		showOnMapButton.setChecked(app.getSettings().CURRENT_TRACK_SHOW_IN_RECORDING_DIALOGS.get());
+		showOnMapButton.setChecked(app.getSettings().SHOW_SAVED_TRACK_REMEMBER.get());
 		showOnMapButton.setOnCheckedChangeListener((buttonView, isChecked) ->
-				app.getSettings().CURRENT_TRACK_SHOW_IN_RECORDING_DIALOGS.set(isChecked));
+				app.getSettings().SHOW_SAVED_TRACK_REMEMBER.set(isChecked));
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(mainView)
@@ -175,7 +175,7 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		super.onDismiss(dialog);
 		FragmentActivity activity = getActivity();
 		if (file != null && activity != null) {
-			boolean showTrack = requiredMyApplication().getSettings().CURRENT_TRACK_SHOW_IN_RECORDING_DIALOGS.get();
+			boolean showTrack = requiredMyApplication().getSettings().SHOW_SAVED_TRACK_REMEMBER.get();
 			if (showTrack) {
 				showOnMap(file, !openTrack);
 			}

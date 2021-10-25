@@ -412,8 +412,10 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 			showTrackTextView.setText(showTrackId);
 		}
 
-		boolean showCurrentTrack = app.getSettings().CURRENT_TRACK_SHOW_IN_RECORDING_DIALOGS.get();
-		gpxSelectionHelper.selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), showCurrentTrack, false);
+		SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
+		boolean showCurrentTrack = app.getSettings().SHOW_SAVED_TRACK_REMEMBER.get();
+		gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), showCurrentTrack, false);
+
 		final CompoundButton showTrackCompound = buttonShowTrack.findViewById(R.id.compound_button);
 		showTrackCompound.setChecked(showCurrentTrack);
 		UiUtilities.setupCompoundButton(showTrackCompound, nightMode, GLOBAL);
@@ -422,8 +424,8 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 		buttonShowTrack.setOnClickListener(v -> {
 			boolean checked = !showTrackCompound.isChecked();
 			showTrackCompound.setChecked(checked);
-			app.getSettings().CURRENT_TRACK_SHOW_IN_RECORDING_DIALOGS.set(checked);
-			gpxSelectionHelper.selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), checked, false);
+			app.getSettings().SHOW_SAVED_TRACK_REMEMBER.set(checked);
+			gpxSelectionHelper.selectGpxFile(selectedGpxFile.getGpxFile(), checked, false);
 			setShowTrackItemBackground(buttonShowTrack, checked, nightMode);
 			createItem(app, nightMode, buttonAppearance, ItemType.APPEARANCE, checked, null);
 		});
@@ -434,7 +436,6 @@ public class TripRecordingBottomSheet extends SideMenuBottomSheetDialogFragment 
 			buttonAppearance.setOnClickListener(v -> {
 				if (showTrackCompound.isChecked()) {
 					hideOnClickButtonAppearance.run();
-					SelectedGpxFile selectedGpxFile = app.getSavingTrackHelper().getCurrentTrack();
 					TrackAppearanceFragment.showInstance((MapActivity) activity, selectedGpxFile, target);
 				}
 			});
