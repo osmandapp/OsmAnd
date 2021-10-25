@@ -1064,18 +1064,17 @@ public class RouteResultPreparation {
 			}
 		}
 		int singleTurn = 0;
-		if(turnSet.size() == 1) {
+		if (turnSet.size() == 1) {
 			singleTurn = turnSet.iterator().next();
-		} else if(currentTurn.goAhead() && turnSet.contains(nextTurn.getValue())) {
+		} else if((currentTurn.goAhead() || currentTurn.keepLeft() || currentTurn.keepRight())  
+				&& turnSet.contains(nextTurn.getValue())) {
 			if (currentTurn.isPossibleLeftTurn() && TurnType.isLeftTurn(nextTurn.getValue())) {
 				singleTurn = nextTurn.getValue();
 			} else if (currentTurn.isPossibleLeftTurn() && TurnType.isLeftTurn(nextTurn.getActiveCommonLaneTurn())) {
 				singleTurn = nextTurn.getActiveCommonLaneTurn();
-			} else if(currentTurn.isPossibleRightTurn() && 
-					TurnType.isRightTurn(nextTurn.getValue())) {
+			} else if (currentTurn.isPossibleRightTurn() && TurnType.isRightTurn(nextTurn.getValue())) {
 				singleTurn = nextTurn.getValue();
-			} else if(currentTurn.isPossibleRightTurn() && 
-					TurnType.isRightTurn(nextTurn.getActiveCommonLaneTurn())) {
+			} else if (currentTurn.isPossibleRightTurn() && TurnType.isRightTurn(nextTurn.getActiveCommonLaneTurn())) {
 				singleTurn = nextTurn.getActiveCommonLaneTurn();
 			}
 		}
@@ -1085,12 +1084,12 @@ public class RouteResultPreparation {
 				return;
 			}
 		}
-		for(int i = 0; i < lanes.length; i++) {
-			if(lanes[i] % 2 == 1 && TurnType.getPrimaryTurn(lanes[i]) != singleTurn) {
-				if(TurnType.getSecondaryTurn(lanes[i]) == singleTurn) {
+		for (int i = 0; i < lanes.length; i++) {
+			if (lanes[i] % 2 == 1 && TurnType.getPrimaryTurn(lanes[i]) != singleTurn) {
+				if (TurnType.getSecondaryTurn(lanes[i]) == singleTurn) {
 					TurnType.setSecondaryTurn(lanes, i, TurnType.getPrimaryTurn(lanes[i]));
 					TurnType.setPrimaryTurn(lanes, i, singleTurn);
-				} else if(TurnType.getTertiaryTurn(lanes[i]) == singleTurn) {
+				} else if (TurnType.getTertiaryTurn(lanes[i]) == singleTurn) {
 					TurnType.setTertiaryTurn(lanes, i, TurnType.getPrimaryTurn(lanes[i]));
 					TurnType.setPrimaryTurn(lanes, i, singleTurn);
 				} else {
