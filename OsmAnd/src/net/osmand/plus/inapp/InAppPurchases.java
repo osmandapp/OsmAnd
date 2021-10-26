@@ -46,8 +46,8 @@ public abstract class InAppPurchases {
 	protected InAppPurchase fullVersion;
 	protected InAppPurchase depthContours;
 	protected InAppPurchase contourLines;
-	protected InAppSubscription monthlyLiveUpdates;
-	protected InAppSubscription legacyMonthlyLiveUpdates;
+	protected InAppSubscription monthlySubscriptions;
+	protected InAppSubscription legacyMonthlySubscriptions;
 	protected InAppSubscriptionList subscriptions;
 	protected InAppPurchase[] inAppPurchases;
 
@@ -83,16 +83,16 @@ public abstract class InAppPurchases {
 		return null;
 	}
 
-	public InAppSubscription getMonthlyLiveUpdates() {
-		return monthlyLiveUpdates;
+	public InAppSubscription getMonthlySubscriptions() {
+		return monthlySubscriptions;
 	}
 
 	@Nullable
-	public InAppSubscription getPurchasedMonthlyLiveUpdates() {
-		if (monthlyLiveUpdates.isAnyPurchased()) {
-			return monthlyLiveUpdates;
-		} else if (legacyMonthlyLiveUpdates != null && legacyMonthlyLiveUpdates.isAnyPurchased()) {
-			return legacyMonthlyLiveUpdates;
+	public InAppSubscription getPurchasedMonthlySubscriptions() {
+		if (monthlySubscriptions.isAnyPurchased()) {
+			return monthlySubscriptions;
+		} else if (legacyMonthlySubscriptions != null && legacyMonthlySubscriptions.isAnyPurchased()) {
+			return legacyMonthlySubscriptions;
 		}
 		return null;
 	}

@@ -35,15 +35,15 @@ public class PurchasingUtils {
 	                                                                  @NonNull List<InAppSubscription> subscriptions,
 	                                                                  boolean nightMode) {
 		List<SubscriptionButton> priceButtons = new ArrayList<>();
-		InAppSubscription liveUpdates = purchaseHelper.getMonthlyLiveUpdates();
+		InAppSubscription monthlySubscriptions = purchaseHelper.getMonthlySubscriptions();
 		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 
 		for (InAppSubscription subscription : subscriptions) {
 			SubscriptionButton subscriptionButton = new SubscriptionButton(subscription.getSku(), subscription);
 			subscriptionButton.setTitle(subscription.getTitle(app));
 
-			String discount = subscription.getDiscount(liveUpdates);
-			String discountTitle = subscription.getDiscountTitle(app, liveUpdates);
+			String discount = subscription.getDiscount(monthlySubscriptions);
+			String discountTitle = subscription.getDiscountTitle(app, monthlySubscriptions);
 
 			InAppSubscriptionIntroductoryInfo info = subscription.getIntroductoryInfo();
 			if (info != null) {
