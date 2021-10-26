@@ -4032,7 +4032,7 @@
     <string name="track_recording_will_be_continued">Salvestamist jätkatakse.</string>
     <string name="copy_poi_name">Kopeeri huvipunkti nimi</string>
     <string name="quick_action_show_hide_title">Kuva/peida</string>
-    <string name="shared_string_interval">Intervall</string>
+    <string name="shared_string_interval">Välp</string>
     <string name="track_has_no_altitude">Teekond ei sisalda kõrguse andmeid.</string>
     <string name="track_has_no_speed">Teekond ei sisalda kiiruse andmeid.</string>
     <string name="select_another_colorization">Palun vali muud moodi värvimine.</string>

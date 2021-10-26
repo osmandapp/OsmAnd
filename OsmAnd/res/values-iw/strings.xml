@@ -4328,4 +4328,12 @@
     <string name="transparent_status_bar">סרגל מצב שקוף</string>
     <string name="search_history_is_disabled_descr">אפשר להפעיל היסטוריית חיפוש בהגדרות</string>
     <string name="markers_history_is_disabled_descr">הפעלת היסטוריה תאפשר לך לקבל רשימת סמני מפה שביקרת בהם.</string>
+    <string name="travel_routes">מסלולי טיול</string>
+    <string name="direct_line_maps_required_descr">חישוב המסלול אורך מעבר למתוכנן.
+\n
+\nאולי חלק מהמפות לא נטענו.</string>
+    <string name="offline_maps_required_descr">חלק מהמפות הבלתי מקוונות שדרושות למסלול הזה חסרות.</string>
+    <string name="online_direct_line_maps_link">נא לבדוק את המפות החסרות.</string>
+    <string name="setting_supported_by_style">הגדרה זו מסופקת על ידי סגנון המפה ‚%1$s’</string>
+    <string name="is_disabled">%1$s מושבת</string>
 </resources>

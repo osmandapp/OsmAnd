@@ -3701,9 +3701,9 @@
     <string name="select_track_width">Espessura da linha do trilho</string>
     <string name="gpx_split_interval_descr">Selecione o intervalo em que as marcas com distância ou tempo no trilho serão mostradas.</string>
     <string name="gpx_split_interval_none_descr">Selecione a opção de divisão desejada: por tempo ou por distância.</string>
-    <string name="shared_string_custom">Definir</string>
+    <string name="shared_string_custom">Personalizado</string>
     <string name="gpx_direction_arrows">Setas de direção</string>
-    <string name="track_coloring_solid">Sólida</string>
+    <string name="track_coloring_solid">Sólido</string>
     <string name="plan_route_last_edited">Última edição</string>
     <string name="plan_route_import_track">Importar trilho</string>
     <string name="plan_route_open_existing_track">Abrir trilho existente</string>
