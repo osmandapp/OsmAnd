@@ -210,6 +210,11 @@ public class NavigationService extends Service {
 						@Override
 						public void onAutoDriveEnabled() {
 							CarToast.makeText(carContext, "Auto drive enabled", CarToast.LENGTH_LONG).show();
+							OsmAndLocationSimulation sim = getApp().getLocationProvider().getLocationSimulation();
+							RoutingHelper routingHelper = getApp().getRoutingHelper();
+							if (!sim.isRouteAnimating() && routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
+								sim.startStopRouteAnimation(null);
+							}
 						}
 					});
 
