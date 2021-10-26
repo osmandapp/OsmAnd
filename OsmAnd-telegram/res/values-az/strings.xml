@@ -2,4 +2,5 @@
 <resources>
     <string name="duration_ago">%1$s əvvəl</string>
     <string name="shared_string_logout">Çıx</string>
+    <string name="units_and_formats">Vahidlər və formatlar</string>
 </resources>
