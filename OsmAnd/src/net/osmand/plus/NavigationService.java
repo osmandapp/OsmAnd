@@ -204,7 +204,7 @@ public class NavigationService extends Service {
 					new NavigationManagerCallback() {
 						@Override
 						public void onStopNavigation() {
-							NavigationService.this.stopCarNavigation();
+							getApp().stopNavigation();
 						}
 
 						@Override
