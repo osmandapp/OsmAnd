@@ -13,6 +13,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.routing.RouteCalculationParams;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.util.Algorithms;
 
@@ -141,9 +143,8 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 	public abstract String getStandardUrl();
 
 	@Nullable
-	public abstract OnlineRoutingResponse parseResponse(@NonNull String content,
-	                                                    @NonNull OsmandApplication app,
-	                                                    boolean leftSideNavigation) throws JSONException;
+	public abstract OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
+	                                                    boolean leftSideNavigation, boolean initialCalculation) throws JSONException;
 
 	public abstract boolean isResultOk(@NonNull StringBuilder errorMessage,
 	                                   @NonNull String content) throws JSONException;
@@ -192,6 +193,9 @@ public abstract class OnlineRoutingEngine implements Cloneable {
 
 	public boolean isPredefined() {
 		return isPredefinedEngineKey(getStringKey());
+	}
+
+	public void updateRouteParameters(@NonNull RouteCalculationParams params, @Nullable RouteCalculationResult previousRoute) {
 	}
 
 	@Nullable

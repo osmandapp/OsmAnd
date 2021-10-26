@@ -229,10 +229,12 @@ public class RouteProvider {
 			}
 			if (calcWholeRoute && !calculateOsmAndRouteParts) {
 				return new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
-						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, true);
+						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null,
+						gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation);
 			}
-			RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
-						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, false);
+			RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult,
+					routeParams.start, routeParams.end, routeParams.intermediates, routeParams.ctx,
+					routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, false, routeParams.initialCalculation);
 			List<Location> gpxRouteLocations = result.getImmutableAllLocations();
 			int nearestGpxPointInd = calcWholeRoute ? 0 : findNearestGpxPointIndexFromRoute(gpxRouteLocations, routeParams.start, calculateOsmAndRouteParts);
 			Location nearestGpxLocation = null;
@@ -286,7 +288,8 @@ public class RouteProvider {
 				newGpxRoute.addAll(lastSegmentRoute);
 			}
 			return new RouteCalculationResult(newGpxRoute, routeParams.start, routeParams.end,
-					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, true);
+					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null,
+					gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation);
 		}
 
 		if (routeParams.gpxRoute.useIntermediatePointsRTE) {
@@ -815,7 +818,7 @@ public class RouteProvider {
 			} else {
 				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end,
 						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute  == null? null: params.gpxRoute.wpt,
-								params.mode, true);
+								params.mode, true, params.initialCalculation);
 				return res;
 			}
 		} catch (RuntimeException e) {
@@ -1072,7 +1075,7 @@ public class RouteProvider {
 		OsmandSettings settings = app.getSettings();
 		String engineKey = params.mode.getRoutingProfile();
 		OnlineRoutingResponse response =
-				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.leftSide);
+				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.leftSide, params.initialCalculation);
 
 		if (response != null) {
 			if (response.getGpxFile() != null) {
