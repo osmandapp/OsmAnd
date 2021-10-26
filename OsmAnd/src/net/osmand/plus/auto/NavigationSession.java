@@ -17,19 +17,24 @@ import androidx.car.app.model.Action;
 import androidx.car.app.model.CarIcon;
 import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.drawable.IconCompat;
+import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
+import net.osmand.ValueHolder;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.views.OsmandMapTileView;
 
 /**
  * Session class for the Navigation sample app.
  */
-public class NavigationSession extends Session implements NavigationScreen.Listener, OsmAndLocationListener {
+public class NavigationSession extends Session implements NavigationScreen.Listener, OsmAndLocationListener,
+		DefaultLifecycleObserver, IRouteInformationListener {
 	static final String TAG = NavigationSession.class.getSimpleName();
 	static final String URI_SCHEME = "samples";
 	static final String URI_HOST = "navigation";
@@ -42,6 +47,7 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	private OsmandMapTileView mapView;
 
 	NavigationSession() {
+		getLifecycle().addObserver(this);
 	}
 
 	public NavigationScreen getNavigationScreen() {
@@ -62,6 +68,25 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 		if (navigationCarSurface != null) {
 			navigationCarSurface.setMapView(mapView);
 		}
+	}
+
+	private OsmandApplication getApp() {
+		return (OsmandApplication) getCarContext().getApplicationContext();
+	}
+
+	@Override
+	public void onStart(@NonNull LifecycleOwner owner) {
+		getApp().getRoutingHelper().addListener(this);
+	}
+
+	@Override
+	public void onStop(@NonNull LifecycleOwner owner) {
+		getApp().getRoutingHelper().removeListener(this);
+	}
+
+	@Override
+	public void onDestroy(@NonNull LifecycleOwner owner) {
+		getLifecycle().removeObserver(this);
 	}
 
 	public boolean hasStarted() {
@@ -104,7 +129,7 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 					.show();
 		}
 
-		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
+		OsmandApplication app = getApp();
 		if (!InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
 			getCarContext().getCarService(ScreenManager.class).push(navigationScreen);
 			requestPurchaseScreen = new RequestPurchaseScreen(getCarContext());
@@ -121,7 +146,7 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	}
 
 	public void onPurchaseDone() {
-		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
+		OsmandApplication app = getApp();
 		if (requestPurchaseScreen != null && InAppPurchaseHelper.isAndroidAutoAvailable(app)) {
 			requestPurchaseScreen.finish();
 			requestPurchaseScreen = null;
@@ -181,7 +206,7 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 
 	@Override
 	public void stopNavigation() {
-		OsmandApplication app = (OsmandApplication) getCarContext().getApplicationContext();
+		OsmandApplication app = getApp();
 		if (app != null) {
 			app.stopNavigation();
 			NavigationScreen navigationScreen = getNavigationScreen();
@@ -194,5 +219,18 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 	@Override
 	public void updateLocation(Location location) {
 		navigationCarSurface.updateLocation(location);
+	}
+
+	@Override
+	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+	}
+
+	@Override
+	public void routeWasCancelled() {
+	}
+
+	@Override
+	public void routeWasFinished() {
+		getApp().stopNavigation();
 	}
 }
