@@ -1,10 +1,12 @@
 package net.osmand.plus.notifications;
 
+import static net.osmand.plus.NavigationService.DEEP_LINK_ACTION_OPEN_ROOT_SCREEN;
 import static net.osmand.plus.NavigationService.USED_BY_NAVIGATION;
 
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -15,9 +17,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.View;
 
+import androidx.car.app.notification.CarAppExtender;
+import androidx.car.app.notification.CarPendingIntent;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationCompat.BigTextStyle;
 import androidx.core.app.NotificationCompat.Builder;
+import androidx.core.app.NotificationManagerCompat;
 
 import net.osmand.Location;
 import net.osmand.plus.NavigationService;
@@ -26,6 +31,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.auto.NavigationCarAppService;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -225,8 +232,21 @@ public class NavigationNotification extends OsmandNotification {
 
 		final Builder notificationBuilder = createBuilder(wearable)
 				.setContentTitle(notificationTitle)
+				.setCategory(NotificationCompat.CATEGORY_NAVIGATION)
 				.setStyle(new BigTextStyle().bigText(notificationText))
 				.setLargeIcon(turnBitmap);
+
+		NavigationSession carNavigationSession = app.getCarNavigationSession();
+		if (carNavigationSession != null) {
+			Intent intent = new Intent(Intent.ACTION_VIEW)
+					.setComponent(new ComponentName(app, NavigationCarAppService.class))
+					.setData(NavigationCarAppService.createDeepLinkUri(DEEP_LINK_ACTION_OPEN_ROOT_SCREEN));
+			notificationBuilder.extend(
+					new CarAppExtender.Builder()
+							//.setImportance(NotificationManagerCompat.IMPORTANCE_HIGH)
+							.setContentIntent(CarPendingIntent.getCarApp(app, intent.hashCode(), intent, 0))
+							.build());
+		}
 
 		Intent stopIntent = new Intent(OSMAND_STOP_NAVIGATION_SERVICE_ACTION);
 		PendingIntent stopPendingIntent = PendingIntent.getBroadcast(app, 0, stopIntent,

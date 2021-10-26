@@ -23,6 +23,7 @@ import androidx.lifecycle.LifecycleOwner;
 
 import net.osmand.Location;
 import net.osmand.ValueHolder;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -36,8 +37,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 public class NavigationSession extends Session implements NavigationScreen.Listener, OsmAndLocationListener,
 		DefaultLifecycleObserver, IRouteInformationListener {
 	static final String TAG = NavigationSession.class.getSimpleName();
-	static final String URI_SCHEME = "samples";
-	static final String URI_HOST = "navigation";
+	static final String URI_SCHEME = "osmand";
+	static final String URI_HOST = "car_navigation";
 
 	NavigationScreen navigationScreen;
 	RequestPurchaseScreen requestPurchaseScreen;
@@ -184,12 +185,10 @@ public class NavigationSession extends Session implements NavigationScreen.Liste
 				&& URI_SCHEME.equals(uri.getScheme())
 				&& URI_HOST.equals(uri.getSchemeSpecificPart())) {
 
-			/*
 			Screen top = screenManager.getTop();
-			if (NavigationService.DEEP_LINK_ACTION.equals(uri.getFragment()) && !(top instanceof NavigationScreen)) {
+			if (NavigationService.DEEP_LINK_ACTION_OPEN_ROOT_SCREEN.equals(uri.getFragment()) && !(top instanceof NavigationScreen)) {
 				screenManager.popToRoot();
 			}
-			 */
 		}
 	}
 
