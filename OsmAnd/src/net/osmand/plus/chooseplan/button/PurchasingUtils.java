@@ -31,9 +31,9 @@ public class PurchasingUtils {
 	public static final String PROMO_PREFIX = "promo_";
 
 	public static List<SubscriptionButton> collectSubscriptionButtons(@NonNull OsmandApplication app,
-																	  @NonNull InAppPurchaseHelper purchaseHelper,
-																	  @NonNull List<InAppSubscription> subscriptions,
-																	  boolean nightMode) {
+	                                                                  @NonNull InAppPurchaseHelper purchaseHelper,
+	                                                                  @NonNull List<InAppSubscription> subscriptions,
+	                                                                  boolean nightMode) {
 		List<SubscriptionButton> priceButtons = new ArrayList<>();
 		InAppSubscription liveUpdates = purchaseHelper.getMonthlyLiveUpdates();
 		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
@@ -91,11 +91,11 @@ public class PurchasingUtils {
 	}
 
 	public static void createPromoItem(@NonNull ContextMenuAdapter adapter,
-									   @NonNull MapActivity mapActivity,
-									   @NonNull OsmAndFeature feature,
-									   @NonNull String id,
-									   @StringRes int titleId,
-									   @StringRes int descriptionId) {
+	                                   @NonNull MapActivity mapActivity,
+	                                   @NonNull OsmAndFeature feature,
+	                                   @NonNull String id,
+	                                   @StringRes int titleId,
+	                                   @StringRes int descriptionId) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
