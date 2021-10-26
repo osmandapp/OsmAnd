@@ -218,13 +218,13 @@ public abstract class InAppPurchaseHelper {
 		return purchases.getContourLines();
 	}
 
-	public InAppSubscription getMonthlySubscriptions() {
-		return purchases.getMonthlySubscriptions();
+	public InAppSubscription getMonthlySubscription() {
+		return purchases.getMonthlySubscription();
 	}
 
 	@Nullable
-	public InAppSubscription getPurchasedMonthlyLiveUpdates() {
-		return purchases.getPurchasedMonthlySubscriptions();
+	public InAppSubscription getPurchasedMonthlySubscription() {
+		return purchases.getPurchasedMonthlySubscription();
 	}
 
 	@Nullable

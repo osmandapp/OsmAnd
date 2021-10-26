@@ -58,9 +58,9 @@ public class InAppPurchasesImpl extends InAppPurchases {
 		for (InAppSubscription s : subscriptions.getAllSubscriptions()) {
 			if (s instanceof InAppPurchaseMonthlySubscription) {
 				if (s.isLegacy()) {
-					legacyMonthlySubscriptions = s;
+					legacyMonthlySubscription = s;
 				} else {
-					monthlySubscriptions = s;
+					monthlySubscription = s;
 				}
 			}
 		}
