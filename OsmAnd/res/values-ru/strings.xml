@@ -338,7 +338,7 @@
     <string name="download_roads_only_item">Только дороги</string>
     <string name="download_regular_maps">Стандартная карта</string>
     <string name="download_roads_only_maps">Карта дорог</string>
-    <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только функции Android).</string>
+    <string name="safe_mode_description">Запустить приложение в безопасном режиме (используя более медленный код Android вместо нативного).</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение работает в безопасном режиме (отключается в разделе «Настройки»).</string>
     <string name="background_service_is_enabled_question">Фоновая служба OsmAnd всё ещё работает. Остановите её тоже\?</string>
@@ -4407,4 +4407,10 @@
     <string name="history_actions_descr">Вы можете экспортировать историю в файл.</string>
     <string name="map_markers_history">История маркеров карты</string>
     <string name="shortcut_start_recording">Начать запись</string>
+    <string name="approx_safe_mode_description">Выполнить аппроксимацию gpx, используя более медленный код Android вместо нативного.</string>
+    <string name="no_plugins_enabled">У вас не включены плагины. Список всех доступных плагинов можно найти в «Меню» → «Плагины».</string>
+    <string name="approx_safe_mode">Безопасная аппроксимация gpx</string>
+    <string name="use_external_timestamps">Использовать внешние временные метки</string>
+    <string name="safe_settings">Безопасные операции</string>
+    <string name="use_external_timestamps_description">Использовать метки времени онлайн-маршрутизатора для настройки расчетного времени и средней скорости</string>
 </resources>

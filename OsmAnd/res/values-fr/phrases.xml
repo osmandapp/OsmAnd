@@ -4037,4 +4037,26 @@
     <string name="poi_hampshire_gate">Barrière en barbelés</string>
     <string name="poi_research_institute">Institut de recherche</string>
     <string name="poi_driver_training">Auto-école</string>
+    <string name="poi_coffee_filter">Café</string>
+    <string name="poi_ice_cream_filter">Glace</string>
+    <string name="poi_mattress_filter">Matelas</string>
+    <string name="poi_heating_filter">Chauffage</string>
+    <string name="poi_agrarian_agricultural_machinery">Machines agricoles</string>
+    <string name="poi_agrarian_type">Intrants agricoles</string>
+    <string name="poi_agrarian_tools">Outils</string>
+    <string name="poi_tobacco_filter">Tabac</string>
+    <string name="poi_membership_filter">Membres uniquement</string>
+    <string name="poi_fridge_filter">Réfrigérateur</string>
+    <string name="poi_generator_source_biogas">Source d\'énergie : biogaz</string>
+    <string name="poi_furniture_filter">Meubles</string>
+    <string name="poi_wine_type">Type</string>
+    <string name="poi_distillery">Distillerie</string>
+    <string name="poi_winery">Domaine viticole</string>
+    <string name="poi_wine_region">Région viticole</string>
+    <string name="poi_wine_grape">Raisin</string>
+    <string name="poi_wine_vineyard">Vignoble</string>
+    <string name="poi_generator_method_fusion">Méthode du générateur : fusion</string>
+    <string name="poi_generator_source_biofuel">Source d\'énergie : biocarburant</string>
+    <string name="poi_generator_source_waste">Source d\'énergie : déchets</string>
+    <string name="poi_generator_method_fission">Méthode du générateur : fission</string>
 </resources>

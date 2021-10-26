@@ -1723,7 +1723,7 @@
     <string name="first_usage_item_description">Cómo descargar mapas, definir ajustes básicos.</string>
     <string name="navigation_item_description">Configuración de navegación.</string>
     <string name="faq_item">Preguntas Frecuentes</string>
-    <string name="faq_item_description">Preguntas Frecuentes</string>
+    <string name="faq_item_description">Preguntas frecuentes.</string>
     <string name="map_viewing_item">Vista del mapa</string>
     <string name="search_on_the_map_item">Búsqueda en el mapa</string>
     <string name="planning_trip_item">Planificación de viaje</string>
@@ -4403,4 +4403,10 @@
     <string name="shortcut_navigate_to_work">Ir al trabajo</string>
     <string name="transparent_status_bar_descr">Mostrar mapa debajo de la barra de estado</string>
     <string name="transparent_status_bar">Barra de estado transparente</string>
+    <string name="approx_safe_mode_description">Hacer una aproximación GPX usando un Android más lento en lugar del código nativo.</string>
+    <string name="safe_settings">Seguro</string>
+    <string name="use_external_timestamps">Usar marcas de tiempo externas</string>
+    <string name="approx_safe_mode">Aproximación segura de GPX</string>
+    <string name="use_external_timestamps_description">Usa las marcas de tiempo del navegador en línea para ajustar el tiempo estimado y la velocidad media</string>
+    <string name="no_plugins_enabled">No tienes ningún complemento activado. Puedes encontrar la lista de todos los complementos disponibles en «Menú → Complementos».</string>
 </resources>

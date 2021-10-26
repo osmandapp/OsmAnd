@@ -1715,7 +1715,7 @@
     <string name="first_usage_item_description">Comment télécharger des cartes et définir les paramètres de base.</string>
     <string name="navigation_item_description">Paramétrer le guidage.</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Foire Aux Questions</string>
+    <string name="faq_item_description">Foire Aux Questions.</string>
     <string name="map_viewing_item">Affichage de la carte</string>
     <string name="search_on_the_map_item">Rechercher sur la carte</string>
     <string name="planning_trip_item">Préparer un itinéraire</string>
@@ -4374,4 +4374,7 @@
     <string name="transparent_status_bar_descr">Afficher la carte sous la barre d\'état</string>
     <string name="transparent_status_bar">Barre d\'état transparente</string>
     <string name="history_is_disabled_descr">Activez l\'historique pour accéder rapidement aux derniers résultats de recherche.</string>
+    <string name="no_plugins_enabled">Aucun greffon n\'est activé. Consultez la liste des greffons disponibles dans : Menu &gt; Greffons.</string>
+    <string name="use_external_timestamps">Utiliser des estimations externes</string>
+    <string name="use_external_timestamps_description">Utilisez les estimations de routeurs en ligne pour ajuster la durée et la vitesse moyenne</string>
 </resources>
