@@ -1187,7 +1187,7 @@
     <string name="get_discount_title">Get %1$d %2$s at %3$s off.</string>
     <string name="get_discount_first_part">%1$s for the first %2$s</string>
     <string name="get_discount_first_few_part">%1$s for the first %2$s</string>
-    <string name="get_discount_second_part">then %1$s</string>
+    <string name="get_discount_second_part">Then %1$s</string>
     <string name="cancel_subscription">Cancel subscription</string>
     <string name="price_and_discount">%1$s • Save %2$s</string>
     <string name="app_mode_wagon">Wagon</string>
