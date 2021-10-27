@@ -345,65 +345,77 @@ public class OsmAndFormatter {
 		}
 	}
 
-	public static String getFormattedSpeed(float metersperseconds, OsmandApplication ctx) {
+	public static String getFormattedSpeed(float metersPerSeconds, OsmandApplication ctx) {
+		return getFormattedSpeed(metersPerSeconds, ctx, true);
+	}
+
+	public static String getFormattedSpeed(float metersPerSeconds, OsmandApplication ctx, boolean unitNeeded) {
 		OsmandSettings settings = ctx.getSettings();
 		SpeedConstants mc = settings.SPEED_SYSTEM.get();
 		ApplicationMode am = settings.getApplicationMode();
-		float kmh = metersperseconds * 3.6f;
+		float kmh = metersPerSeconds * 3.6f;
 		if (mc == SpeedConstants.KILOMETERS_PER_HOUR) {
 			// e.g. car case and for high-speeds: Display rounded to 1 km/h (5% precision at 20 km/h)
 			if (kmh >= 20 || am.hasFastSpeed()) {
-				return ((int) Math.round(kmh)) + " " + mc.toShortString(ctx);
+				return getFormattedSpeed((int) Math.round(kmh), mc.toShortString(ctx), unitNeeded);
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
 			int kmh10 = (int) Math.round(kmh * 10f);
-			return (kmh10 / 10f) + " " + mc.toShortString(ctx);
+			return getFormattedSpeed(kmh10 / 10f, mc.toShortString(ctx), unitNeeded);
 		} else if (mc == SpeedConstants.MILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
 			if (mph >= 20 || am.hasFastSpeed()) {
-				return ((int) Math.round(mph)) + " " + mc.toShortString(ctx);
+				return getFormattedSpeed((int) Math.round(mph), mc.toShortString(ctx), unitNeeded);
 			} else {
 				int mph10 = (int) Math.round(mph * 10f);
-				return (mph10 / 10f) + " " + mc.toShortString(ctx);
+				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), unitNeeded);
 			}
 		} else if (mc == SpeedConstants.NAUTICALMILES_PER_HOUR) {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE;
 			if (mph >= 20 || am.hasFastSpeed()) {
-				return ((int) Math.round(mph)) + " " + mc.toShortString(ctx);
+				return getFormattedSpeed((int) Math.round(mph), mc.toShortString(ctx), unitNeeded);
 			} else {
 				int mph10 = (int) Math.round(mph * 10f);
-				return (mph10 / 10f) + " " + mc.toShortString(ctx);
+				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), unitNeeded);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_KILOMETER) {
-			if (metersperseconds < 0.111111111) {
-				return "-" + mc.toShortString(ctx);
+			if (metersPerSeconds < 0.111111111) {
+				return unitNeeded ? "-" + mc.toShortString(ctx) : "-";
 			}
-			float minperkm = METERS_IN_KILOMETER / (metersperseconds * 60);
-			if (minperkm >= 10) {
-				return ((int) Math.round(minperkm)) + " " + mc.toShortString(ctx);
+			float minPerKm = METERS_IN_KILOMETER / (metersPerSeconds * 60);
+			if (minPerKm >= 10) {
+				return getFormattedSpeed((int) Math.round(minPerKm), mc.toShortString(ctx), unitNeeded);
 			} else {
-				int seconds = Math.round(minperkm * 60);
-				return Algorithms.formatDuration(seconds, false) + " " + mc.toShortString(ctx);
+				int seconds = Math.round(minPerKm * 60);
+				return unitNeeded
+						? Algorithms.formatDuration(seconds, false) + " " + mc.toShortString(ctx)
+						: Algorithms.formatDuration(seconds, false);
 			}
 		} else if (mc == SpeedConstants.MINUTES_PER_MILE) {
-			if (metersperseconds < 0.111111111) {
-				return "-" + mc.toShortString(ctx);
+			if (metersPerSeconds < 0.111111111) {
+				return unitNeeded ? "-" + mc.toShortString(ctx) : "-";
 			}
-			float minperm = (METERS_IN_ONE_MILE) / (metersperseconds * 60);
-			if (minperm >= 10) {
-				return ((int) Math.round(minperm)) + " " + mc.toShortString(ctx);
+			float minPerM = (METERS_IN_ONE_MILE) / (metersPerSeconds * 60);
+			if (minPerM >= 10) {
+				return getFormattedSpeed((int) Math.round(minPerM), mc.toShortString(ctx), unitNeeded);
 			} else {
-				int mph10 = (int) Math.round(minperm * 10f);
-				return (mph10 / 10f) + " " + mc.toShortString(ctx);
+				int mph10 = (int) Math.round(minPerM * 10f);
+				return getFormattedSpeed(mph10 / 10f, mc.toShortString(ctx), unitNeeded);
 			}
 		} else /*if (mc == SpeedConstants.METERS_PER_SECOND) */ {
-			if (metersperseconds >= 10) {
-				return ((int) Math.round(metersperseconds)) + " " + SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
+			if (metersPerSeconds >= 10) {
+				String unit = SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
+				return getFormattedSpeed((int) Math.round(metersPerSeconds), unit, unitNeeded);
 			}
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
-			int kmh10 = (int) Math.round(metersperseconds * 10f);
-			return (kmh10 / 10f) + " " + SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
+			int kmh10 = (int) Math.round(metersPerSeconds * 10f);
+			String unit = SpeedConstants.METERS_PER_SECOND.toShortString(ctx);
+			return getFormattedSpeed(kmh10 / 10f, unit, unitNeeded);
 		}
+	}
+
+	public static String getFormattedSpeed(Number speed, String unit, boolean unitNeeded) {
+		return unitNeeded ? speed + " " + unit : String.valueOf(speed);
 	}
 
 	public static boolean isSameDay(@NonNull Date firstDate, @NonNull Date secondDate) {

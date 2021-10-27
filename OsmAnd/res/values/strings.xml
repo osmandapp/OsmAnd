@@ -11,6 +11,14 @@
 	Thx - Hardy
 -->
 
+    <string name="gps_filter_hdop_desc">Set the maximum allowable value for HDOP.\nPoints greater than the set parameter will be hidden.</string>
+    <string name="gps_filter_altitude_desc">The track points matching the set interval will be visible on the chart and map, the rest will be hidden.</string>
+    <string name="gps_filter_speed_desc">The track points matching the set interval will be visible on the chart and map, the rest will be hidden.</string>
+    <string name="gps_filter_smoothing_desc">Set the threshold distance between points.\nTrack points that are at least X distance from the last visible point will be hidden.\nBe careful the greater the distance, the simpler the track geometry.</string>
+    <string name="max_hdop">Max. HDOP</string>
+    <string name="distance_between_points">Distance between points</string>
+    <string name="gps_filter_precision">Min GPS Precision</string>
+    <string name="gps_filter_smoothing">Smoothing</string>
     <string name="save_changes_into_file">Save changes into file</string>
     <string name="save_as_copy">Save as copy</string>
     <string name="gps_filter_actions_description">OsmAnd applying changes to the track without saving it to the file. You can save changes manually.</string>
