@@ -1688,7 +1688,7 @@
     <string name="contact_us">Email</string>
     <string name="map_legend">Legenda do mapa</string>
     <string name="techical_articles_item">Artigos técnicos</string>
-    <string name="faq_item_description">Perguntas mais frequentes</string>
+    <string name="faq_item_description">Perguntas mais frequentes.</string>
     <string name="map_viewing_item">Visualização do mapa</string>
     <string name="search_on_the_map_item">Pesquisar no mapa</string>
     <string name="instalation_troubleshooting_item">Instalação e resolução de problemas</string>
@@ -3117,7 +3117,7 @@
     <string name="months_3">Três meses</string>
     <string name="price_free">Grátis</string>
     <string name="get_discount_title">Obtenha %1$d %2$s com %3$s de desconto.</string>
-    <string name="get_discount_second_part">depois %1$s</string>
+    <string name="get_discount_second_part">Depois %1$s</string>
     <string name="cancel_subscription">Cancelar subscrição</string>
     <string name="price_and_discount">%1$s - Poupe %2$s</string>
     <string name="get_discount_first_part">%1$s para o primeiro %2$s</string>
@@ -4022,7 +4022,7 @@
     <string name="contact_support_description">Se tiver alguma dúvida, contacte-nos em %1$s.</string>
     <string name="announcement_time_intervals">Intervalos de tempo e distância</string>
     <string name="map_widget_distance_by_tap">Distância com 2 dedos</string>
-    <string name="contact_support">Contacte o suporte</string>
+    <string name="contact_support">Contactar o apoio ao cliente</string>
     <string name="troubleshooting_description">Aceda a este link se tiver algum problema com assinaturas.</string>
     <string name="update_all_maps_added">Atualizar todos os mapas adicionados a %1$s\?</string>
     <string name="routing_attr_short_way_description">Rota mais curta otimizada (mais económica)</string>
@@ -4104,8 +4104,8 @@
     <string name="poi_routes">Rotas</string>
     <string name="search_more">Pesquisar mais…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_into_file">Restaurar de um ficheiro</string>
-    <string name="restore_from_file">Restaurar de um ficheiro</string>
+    <string name="backup_into_file">Fazer cópia de segurança para um ficheiro</string>
+    <string name="restore_from_file">Restaurar de um ficheiro de cópia de segurança</string>
     <string name="osmand_cloud_help_descr">Precisa de ajuda\? Contacte-nos em %1$s</string>
     <string name="osmand_cloud_create_account_descr">Introduza o seu endereço de email. Será enviado um código de verificação para esse endereço.
 \nTodos os seus dados serão ligados a ele.</string>
@@ -4121,7 +4121,7 @@
     <string name="last_backup">Última cópia de segurança</string>
     <string name="duration_ago">%1$s atrás</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="osmand_cloud_authorize_descr">Nunca perca os seus dados, faça uma cópia de segurança e restaure todas as informações sem problemas.</string>
+    <string name="osmand_cloud_authorize_descr">Nunca perca os seus dados, faça uma cópia de segurança e restaure todos os seus dados facilmente.</string>
     <string name="local_backup">Cópia de segurança local</string>
     <string name="local_backup_descr">Faça um cópia de segurança ou restaure dados de um ficheiro no seu dispositivo.</string>
     <string name="select_nav_profile_dialog_message">O \"tipo de navegação\" determina como as rotas são calculadas, com mecanismos de roteamento offline e online.</string>
@@ -4177,14 +4177,14 @@
     <string name="send_logcat_log">Enviar registo logcat</string>
     <string name="backup_promocode">Código promocional</string>
     <string name="purchases_feature_desc_nautical">Tenha acesso a informações de profundidade náutica</string>
-    <string name="purchases_feature_desc_terrain">Curvas de nível do terreno, mapa em sombras de relevo com tons escuros e mapas de declive com cores para mostrar picos e planícies.</string>
-    <string name="purchases_feature_desc_wikivoyage">Explore o Wikivoyage offline. Os artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
-    <string name="purchases_feature_desc_wikipedia">Explore a Wikipédia offline. Artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
+    <string name="purchases_feature_desc_terrain">Veja curvas de nível do terreno, mapas em sombras de relevo com tons escuros e mapas de declive com cores para mostrar picos e planícies.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explore o Wikivoyage offline. Os artigos estão divididos em conjuntos de países e regiões e disponíveis em todos os idiomas.</string>
+    <string name="purchases_feature_desc_wikipedia">Explore a Wikipédia offline. Os artigos estão divididos em cunjuntos de países e regiões e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore os artigos da Wikipédia em qualquer lugar, sem uma ligação à Internet. Estes dados offline estão divididos por países e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Obtenha descarregamentos ilimitados para todos os mapas offline de continentes e regiões.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtenha acesso a atualizações mensais regulares para mapas offline.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Tenha acesso a atualizações de mapas com mais frequência. Atualizações de hora em hora, diárias ou semanais. As atualizações são descarregadas de forma incremental, apenas para a área alterada.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Obtenha o OsmAnd Cloud para armazenar todos os dados do OsmAnd online. Não perca os seus dados após reinstalações. Faça cópias de segurança e restaure todas as informações facilmente.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtenha o OsmAnd Cloud para armazenar todos os dados do OsmAnd online. Não perca os seus dados após reinstalações. Faça cópias de segurança e restaure todos os seus dados facilmente.</string>
     <string name="unlimited_map_downloads">Descarregamentos ilimitados de mapas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia e Wikivoyage offline</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Mapas de terreno: curvas de nível, sombras de relevo, declives</string>
@@ -4406,4 +4406,10 @@
     <string name="shortcut_navigate_to_work">Navegar para o trabalho</string>
     <string name="transparent_status_bar_descr">Mostrar o mapa por baixo da barra de estado</string>
     <string name="transparent_status_bar">Barra de estado transparente</string>
+    <string name="safe_settings">Segurança</string>
+    <string name="approx_safe_mode">Aproximação segura do GPX</string>
+    <string name="use_external_timestamps_description">Use os carimbos de tempo do roteador online para ajustar o tempo estimado e a velocidade média</string>
+    <string name="no_plugins_enabled">Não tem extensões ativadas. Pode encontrar a lista de todas as extensões disponíveis no Menu - Extensões.</string>
+    <string name="approx_safe_mode_description">Fazer a aproximação GPX usando o mais lento em vez do código nativo.</string>
+    <string name="use_external_timestamps">Usar carimbos temporais externos</string>
 </resources>
