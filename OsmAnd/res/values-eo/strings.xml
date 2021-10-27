@@ -4396,7 +4396,13 @@
     <string name="map_markers_history">Historio de map-markoj</string>
     <string name="navigation_history">Historio de navigo</string>
     <string name="android_auto_map_placeholder_title">La mapo estas vidigata sur la ekrano de via aŭtomobilo.</string>
-    <string name="location_access_request_result">Akceptita: %1$s Rifuzita: %2$s</string>
+    <string name="location_access_request_result">Akceptita: %1$s; rifuzita: %2$s</string>
     <string name="transparent_status_bar_descr">Vidigi la mapon sub la stata strio</string>
     <string name="transparent_status_bar">Travidebla stata strio</string>
+    <string name="safe_settings">Pane-toleraj agordoj</string>
+    <string name="approx_safe_mode">Sekura proksimumigo de GPX</string>
+    <string name="approx_safe_mode_description">Proksimumigi GPX-spurojn uzante pli malrapidan Androidan kodon anstataŭ la indiĝenan.</string>
+    <string name="use_external_timestamps">Uzi eksterajn tempindikojn</string>
+    <string name="use_external_timestamps_description">Uzi tempindikojn de enreta navigilo por alĝustigi proksimuman tempon kaj mezuman rapidon</string>
+    <string name="no_plugins_enabled">Neniu kromprogramo estas aktiva. Vi povas trovi la liston de ĉiuj disponeblaj profiloj per la menuo → “Kromprogramoj”.</string>
 </resources>
