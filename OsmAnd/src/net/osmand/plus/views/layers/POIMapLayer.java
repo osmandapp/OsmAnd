@@ -68,7 +68,7 @@ import java.util.TreeSet;
 public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener {
 	private static final int START_ZOOM = 9;
-	private static final int END_ZOOM_ROUTE_ARTICLE = 13;
+	private static final int END_ZOOM_ROUTE_ARTICLE = 14;
 
 	public static final org.apache.commons.logging.Log log = PlatformUtil.getLog(POIMapLayer.class);
 
