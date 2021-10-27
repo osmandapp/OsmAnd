@@ -855,7 +855,7 @@
     <string name="get_discount_title">Hangi %1$d %2$s soodustusega %3$s.</string>
     <string name="get_discount_first_part">%1$s esimese %2$s eest</string>
     <string name="get_discount_first_few_part">%1$s esimese %2$s jaoks</string>
-    <string name="get_discount_second_part">seejärel %1$s</string>
+    <string name="get_discount_second_part">Seejärel %1$s</string>
     <string name="cancel_subscription">Tühista tellimus</string>
     <string name="price_and_discount">%1$s • Säästa %2$s</string>
     <string name="configure_profile_info">Seaded profiilile:</string>
@@ -3051,7 +3051,7 @@
     <string name="first_usage_item_description">Kuidas kaarte alla laadida ja põhiseadeid seada.</string>
     <string name="navigation_item_description">Seadistage navigeerimine.</string>
     <string name="faq_item">KKK</string>
-    <string name="faq_item_description">Korduma kippuvad küsimused</string>
+    <string name="faq_item_description">Korduma kippuvad küsimused.</string>
     <string name="map_viewing_item">Kaardi vaatamine</string>
     <string name="search_on_the_map_item">Kaardiotsing</string>
     <string name="instalation_troubleshooting_item">Paigaldamine ja tõrkeotsing</string>
@@ -4362,7 +4362,7 @@
 \n
 \n • Kasutajaliidese värskendus UTM -i koordinaatide otsimiseks
 \n
-\n  • Lemmikud: lisatud võimalus vaadata hiljuti kasutatud ikoone
+\n • Lemmikud: lisatud võimalus vaadata hiljuti kasutatud ikoone
 \n
 \n  • Marsruudi planeerimine: kasutab pärast käivitamist valitud profiili
 \n
