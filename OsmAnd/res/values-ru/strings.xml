@@ -4410,7 +4410,7 @@
     <string name="approx_safe_mode_description">Выполнить аппроксимацию gpx, используя более медленный код Android вместо нативного.</string>
     <string name="no_plugins_enabled">У вас не включены плагины. Список всех доступных плагинов можно найти в «Меню» → «Плагины».</string>
     <string name="approx_safe_mode">Безопасная аппроксимация gpx</string>
-    <string name="use_external_timestamps">Использовать внешние временные метки</string>
+    <string name="use_external_timestamps">Использовать внешние метки времени</string>
     <string name="safe_settings">Безопасные операции</string>
     <string name="use_external_timestamps_description">Использовать метки времени онлайн-маршрутизатора для настройки расчетного времени и средней скорости</string>
 </resources>
