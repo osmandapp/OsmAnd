@@ -3502,7 +3502,7 @@
     <string name="wiki_menu_download_descr">Vikipedia huvipunktide kuvamiseks on vaja täiendavaid kaarte.</string>
     <string name="select_wikipedia_article_langs">Valige kaardil olevad Vikipeedia artiklite keeled. Artikli lugemise ajal kasuta ükskõik millist saadaolevat keelt.</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="search_poi_types">Otsi huvipunktide tüüpe</string>
+    <string name="search_poi_types">Otsi huvipunktide liike</string>
     <string name="quick_action_transport_descr">Tegevusnupp ühistranspordiandmete kuvamiseks või peitmiseks kaardil.</string>
     <string name="create_edit_poi">Lisa või muuda huvipunkti</string>
     <string name="shared_string_night_map">Öine kaart</string>
@@ -3686,8 +3686,8 @@
 \n
 \nValides %2$s kustutatakse kõik kiiruskaameratega seotud andmed, nagu hoiatused, teated ja huvipunktid seniks, kuni sa OsmAnd\'ile ei tee täiesti uut paigaldust.</string>
     <string name="quick_action_remove_next_destination_descr">Kustutab järgmise marsruudi sihtkoha. Kui see on lõppsihtkoht, siis navigeerimine peatub.</string>
-    <string name="plan_route_change_route_type_after">Muuda teekonna tüüpi pärast</string>
-    <string name="plan_route_change_route_type_before">Muuda teekonna tüüpi enne</string>
+    <string name="plan_route_change_route_type_after">Muuda teekonna liiki pärast</string>
+    <string name="plan_route_change_route_type_before">Muuda teekonna liiki enne</string>
     <string name="plan_route_trim_after">Kärbi pärast</string>
     <string name="plan_route_trim_before">Kärbi enne</string>
     <string name="attach_to_the_roads">Kinnita teede külge</string>
@@ -4032,7 +4032,7 @@
     <string name="track_recording_will_be_continued">Salvestamist jätkatakse.</string>
     <string name="copy_poi_name">Kopeeri huvipunkti nimi</string>
     <string name="quick_action_show_hide_title">Kuva/peida</string>
-    <string name="shared_string_interval">Intervall</string>
+    <string name="shared_string_interval">Välp</string>
     <string name="track_has_no_altitude">Teekond ei sisalda kõrguse andmeid.</string>
     <string name="track_has_no_speed">Teekond ei sisalda kiiruse andmeid.</string>
     <string name="select_another_colorization">Palun vali muud moodi värvimine.</string>
@@ -4190,7 +4190,7 @@
     <string name="shared_string_min_height">Min. kõrgus</string>
     <string name="shared_string_max_height">Maks. kõrgus</string>
     <string name="language_description">Vali eelistatud keel ja hääljuhiste liik.</string>
-    <string name="tts_description">Tekstist kõneks (TTS) suudab hääldada igat tüüpi juhiseid: tänavanimed, pöördejuhised, POI-de nimed jne.</string>
+    <string name="tts_description">Tekstist kõneks (TTS) suudab hääldada igat liiki juhiseid: tänavanimed, pöördejuhised, POI-de nimed jne.</string>
     <string name="tts_title">TTS</string>
     <string name="recorded_description">Salvestatud hääl kõlab paremini, kuid suudab hääldada ainult ette salvestatud fraase: pööramisjuhised. Ei suuda hääldada tänavate ega huvipunktide nimesid.</string>
     <string name="use_system_language">Kasuta süsteemi keelt</string>
@@ -4312,7 +4312,7 @@
     <string name="amz_manage_subscription_descr">Tellimuse haldamiseks kasuta seadmes olevat Amazoni rakendust või ava Amazon.com veebileht oma profiili alt.</string>
     <string name="empty_category_name">Tühi kategooria nimi</string>
     <string name="no_activity_for_intent">Selle toimingu teostamiseks ei leitud ühtegi sobivat rakendust</string>
-    <string name="no_items_of_type_message">Sul ei ole ühtegi sellist tüüpi eset</string>
+    <string name="no_items_of_type_message">Sul ei ole ühtegi sellist liiki eset</string>
     <string name="routeInfo_tracktype_description">Teekonna või raja joone värvimine vastavalt teede seisukorrale, mis põhineb nende pinna koostisel. Kasutatakse tavaliselt teede puhul, kus peamine teedevõrk koosneb katmata teedest.</string>
     <string name="routeInfo_winter_ice_road_description">Värvi teekond või rada vastavalt ainult talvel kasutatavale talvise tee klassifikatsioonile.</string>
     <string name="routeInfo_smoothness_description">Pakub klassifikatsioonisüsteemi, mis käsitleb tee füüsilist kasutatavust ratassõidukitele, eelkõige pinna korrapärasust ja tasasust.</string>
@@ -4335,4 +4335,76 @@
     <string name="sample_wikivoyage">Wikivoyage\'i näidis</string>
     <string name="shared_string_mini">mini</string>
     <string name="horseback_riding">Ratsutamine</string>
+    <string name="exit_pan_mode_descr">Paanimisrežiimist väljumiseks vajuta Vali</string>
+    <string name="upload_gpx_description_hint">Jäta tühjaks, raja nimesid kasutatakse kirjeldustena. Sisestatud kirjeldust kasutatakse iga raja puhul.</string>
+    <string name="search_title">Otsi: %1$s</string>
+    <string name="shared_string_articles">Artiklid</string>
+    <string name="included_categories">kaasa arvatud kategooriad</string>
+    <string name="shared_string_details">Üksikasjad</string>
+    <string name="shared_app_storage_description">Jagatud mälu ei ole enam saadaval, kuna Androidi salvestusruumi kasutamise reeglid on muutunud.</string>
+    <string name="shared_storage_warning_title">Muudatused salvestusruumi juurdepääsu eeskirjades</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd võrguühenduseta kaardid ja navigatsioon Sinu sõiduki ekraanil. Integreerub mugavalt sõiduki juhtimisseadmetega.</string>
+    <string name="icon_group_nautical">Merendus</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Eelista kombatava sillutise kasutamist</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Eelista kombatava sillutise kasutamist</string>
+    <string name="routing_attr_allow_gate_name">Luba värava kasutamist</string>
+    <string name="routing_attr_allow_gate_description">Luba väravate kasutamist</string>
+    <string name="routing_attr_only_permitted_streets_name">Selgelt lubatud tänavad</string>
+    <string name="routing_attr_only_permitted_streets_description">Kasuta ainult selgesõnaliselt lubatud tänavaid</string>
+    <string name="routing_attr_only_permitted_ways_name">Selgelt lubatud teed</string>
+    <string name="routing_attr_only_permitted_ways_description">Kasuta ainult selgesõnaliselt lubatud teid (jälgi, radu jne)</string>
+    <string name="routing_attr_prefer_horse_routes_name">Eelista hobuste marsruute</string>
+    <string name="routing_attr_prefer_horse_routes_description">Eelista hobuste marsruute</string>
+    <string name="shared_storage_warning_description">Alates novembrist 2021 kaotab OsmAnd 4.2 juurdepääsu jagatud salvestusruumile Androidi muudetud salvestusruumi juurdepääsu reeglite tõttu.
+\n
+\nPalun muuda salvestusruum jagatud salvestusruumist saadaolevaks salvestusruumiks, kui seda ei tehta, kaotab rakendus juurdepääsu teie andmetele, sealhulgas võrguühenduseta kaartidele, GPX -rajale ja kõigele muule.</string>
+    <string name="release_4_1">"• Lisatud Android Auto esialgne tugi
+\n
+\n • Kasutajaliidese värskendus UTM -i koordinaatide otsimiseks
+\n
+\n  • Lemmikud: lisatud võimalus vaadata hiljuti kasutatud ikoone
+\n
+\n  • Marsruudi planeerimine: kasutab pärast käivitamist valitud profiili
+\n
+\n  • Fikseeritud Mapillary kiht, pistikprogramm on nüüd vaikimisi keelatud
+\n
+\n  • Lisatud ekraan rakenduse kogu ajaloo haldamiseks
+\n
+\n  • Kaardi orientatsiooni ei lähtestata pärast rakenduse taaskäivitamist
+\n
+\n  • Täiustatud SRTM kõrguse markerite renderdamine
+\n
+\n  • Fikseeritud araabia kuva kaardil
+\n
+\n  • Parandatud erinevad marsruutimisprobleemid
+\n
+\n"</string>
+    <string name="rendering_attr_noNatureReserves_name">Looduskaitseala</string>
+    <string name="rendering_attr_noNatureReserves_description">Peida looduskaitsealad, kaitsealad ja rahvuspargid.</string>
+    <string name="is_disabled">%1$s on välja lülitatud</string>
+    <string name="history_is_disabled_descr">Selleks, et saaksid lihtsamini kasutada varasemaid tulemusi, võta kasutusele ajaloo salvestamine.</string>
+    <string name="transparent_status_bar_descr">Näita olekuriba all kaarti</string>
+    <string name="map_markers_history">Kaardimarkerite ajalugu</string>
+    <string name="history_actions_descr">Sa saad ajaloo eksportida faili.</string>
+    <string name="location_access_request_result">Kinnitatud: %1$s Tagasi lükatud: %2$s</string>
+    <string name="location_access_request_action">Luba juurdepääs</string>
+    <string name="location_access_request_title">OsmAnd vajab navigeerimiseks juurdepääsu asukohale</string>
+    <string name="continue_on_phone">Jätka telefonis</string>
+    <string name="android_auto_purchase_request_title">Kui soovid kasutada OsmAnd\'i Android Auto\'s, siis palun osta OsmAnd Pro või Maps+</string>
+    <string name="android_auto_map_placeholder_descr">Vaatamaks kaarte rakenduses, katkesta Android Auto ühendus.</string>
+    <string name="android_auto_map_placeholder_title">Kaarti kuvame sõiduki ekraanil.</string>
+    <string name="internal_app_storage_description">Sisemine salvestusruum, kasutaja ja teiste rakenduste eest peidetud, ainult OsmAnd juurdepääsetav</string>
+    <string name="transparent_status_bar">Läbipaistev olekuriba</string>
+    <string name="shortcut_navigate_to_home">Näita teed koju</string>
+    <string name="shortcut_navigate_to_work">Näita teed töökohta</string>
+    <string name="shortcut_navigate_to">Näita teed…</string>
+    <string name="shortcut_start_recording">Alusta salvestamist</string>
+    <string name="history_preferences_descr">Ajaloo logimist saad sa iga ajalootüübi puhul eraldi keelata.</string>
+    <string name="navigation_history">Navigeerimise ajalugu</string>
+    <string name="clear_all_history">Kustuta kogu ajalugu</string>
+    <string name="clear_all_history_warning">Kas sa oled kindel, et soovid kogu rakenduse ajaloo kustutada\?
+\n
+\nSellega eemaldame otsingute, teekonna juhatamise ja markerite ajaloo.</string>
+    <string name="markers_history_is_disabled_descr">Selleks, et saaksid lihtsamini leida külastatud kaardimarkereid, võta kasutusele ajaloo salvestamine.</string>
+    <string name="search_history_is_disabled_descr">Otsinguajaloo salvestamise saad kasutusele võtta seadistustes</string>
 </resources>

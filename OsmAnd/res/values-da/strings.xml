@@ -3279,7 +3279,7 @@
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Vis cykelrute-knudepunkter</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Nodenetværk</string>
     <string name="suggested_maps">Foreslåede kort</string>
-    <string name="suggested_maps_descr">Disse kort er nødvendige for udvidelser.</string>
+    <string name="suggested_maps_descr">Disse kort er nødvendige for udvidelsen.</string>
     <string name="added_profiles">Tilføjede profiler</string>
     <string name="added_profiles_descr">Profiler tilføjet af udvidelse</string>
     <string name="shared_string_turn_off">Sluk</string>
@@ -3347,7 +3347,7 @@
     <string name="monitoring_min_speed">Min. hastighed</string>
     <string name="monitoring_min_accuracy">Min. nøjagtighed</string>
     <string name="monitoring_min_distance">Min. forskydning</string>
-    <string name="reset_plugin_to_default">Nulstil indstillingerne for udvidelser til standard</string>
+    <string name="reset_plugin_to_default">Nulstil udvidelser-indstillinger til standard</string>
     <string name="multimedia_rec_split_title">Optagelse automatisk opdelt</string>
     <string name="multimedia_use_system_camera">Brug systemprogram</string>
     <string name="osm_authorization_success">Autorisationen lykkes</string>
@@ -3357,7 +3357,7 @@
     <string name="shared_string_available">Tilgængelig</string>
     <string name="add_custom_category">Tilføje brugerdefineret kategori</string>
     <string name="rendering_attr_streetLightingNight_name">Vis kun om natten</string>
-    <string name="plugin_prefs_reset_successful">Alle udvidelseindstillinger gendannes til standard.</string>
+    <string name="plugin_prefs_reset_successful">Alle udvidelsesindstillinger gendannet til standard.</string>
     <string name="profile_prefs_reset_successful">Alle profilindstillinger gendannes til standardtilstand.</string>
     <string name="ltr_or_rtl_combine_via_slash">%1$s/%2$s</string>
     <string name="sunset_at">Solnedgang kl. %1$s</string>
@@ -3489,7 +3489,7 @@
     <string name="main_actions_descr">Har kun 4 knapper.</string>
     <string name="main_actions">Vigtigste handlinger</string>
     <string name="move_inside_category">Elementer kan kun flyttes inden for denne kategori.</string>
-    <string name="developer_plugin">Udvikler udvidelse</string>
+    <string name="developer_plugin">Udvikler-udvidelse</string>
     <string name="shared_string_items">Elementer</string>
     <string name="lang_min">Minangkabau</string>
     <string name="select_wikipedia_article_langs">Vælg sprog for Wikipedia-artikler på kortet. Skift mellem alle tilgængelige sprog, mens artiklen læses.</string>
@@ -4364,4 +4364,49 @@
     <string name="location_access_request_result">Godkendt: %1$s Afvist: %2$s</string>
     <string name="location_access_request_title">OsmAnd skal have adgang til placering for at navigere</string>
     <string name="location_access_request_action">Giv adgang</string>
+    <string name="clear_all_history_warning">Er du sikker på, at du vil slette al historik i appen\?
+\n
+\nHistorikken for søgning, navigation og markeringer slettes.</string>
+    <string name="clear_all_history">Ryd al historik</string>
+    <string name="history_actions_descr">Du kan eksportere historik til en fil.</string>
+    <string name="navigation_history">Navigationshistorik</string>
+    <string name="history_preferences_descr">Du kan deaktivere historiklogning individuelt for hver historiktype.</string>
+    <string name="shortcut_start_recording">Start optagelse</string>
+    <string name="shortcut_navigate_to">Naviger til…</string>
+    <string name="transparent_status_bar_descr">Vis kort under statuslinjen</string>
+    <string name="transparent_status_bar">Gennemsigtig statuslinje</string>
+    <string name="search_history_is_disabled_descr">Du kan aktivere søgehistorik i Indstillinger</string>
+    <string name="shortcut_navigate_to_work">Naviger til arbejde</string>
+    <string name="history_is_disabled_descr">Aktiver historik for at få hurtigere adgang til de senest anvendte resultater.</string>
+    <string name="shortcut_navigate_to_home">Naviger til hjem</string>
+    <string name="markers_history_is_disabled_descr">Aktiver historik for at få en liste over besøgte kortmarkører.</string>
+    <string name="is_disabled">%1$s er deaktiveret</string>
+    <string name="map_markers_history">Kortmarkørhistorik</string>
+    <string name="release_4_1">- Tilføjet indledende understøttelse af Android Auto
+\n
+\n - Opdatering af brugergrænseflade til søgning efter UTM-koordinater
+\n
+\n - Favoritter: tilføjede mulighed for at få vist senest anvendte ikoner
+\n
+\n - Ruteplanlægning: vil bruge den valgte profil efter start
+\n
+\n - Rettet Mapillary-lag, plugin\'et er nu deaktiveret som standard
+\n
+\n - Tilføjet skærm til administration af al historik i appen
+\n
+\n - Kortets orientering nulstilles ikke efter genstart af appen
+\n
+\n - Forbedret gengivelse af SRTM-højdemarkører
+\n
+\n - Rettet arabisk visning på kortet
+\n
+\n - Rettet forskellige problemer med ruteføring
+\n
+\n</string>
+    <string name="safe_settings">Sikker</string>
+    <string name="approx_safe_mode">Sikker gpx-approksimation</string>
+    <string name="use_external_timestamps">Brug eksterne tidsstempler</string>
+    <string name="use_external_timestamps_description">Brug online ruteberegners tidsstempler til at justere den forventede tid og gennemsnitshastighed</string>
+    <string name="no_plugins_enabled">Du har ingen aktiverede udvidelser. Du kan finde en liste over alle tilgængelige udvidelser i Menu - Udvidelser.</string>
+    <string name="approx_safe_mode_description">Lav gpx-approximation ved hjælp af langsommere Android i stedet for indbygget kode.</string>
 </resources>

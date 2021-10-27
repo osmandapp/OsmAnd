@@ -39,11 +39,11 @@ public class PublicTransportGeometryWayDrawer extends GeometryWayDrawer<PublicTr
 		GeometryWayStyle<?> style = pathData.style;
 		if (style instanceof GeometryTransportWayStyle) {
 			RenderingLineAttributes attrsPT = getContext().getAttrsPT();
-			attrsPT.customColor = style.getStrokeColor();
+			attrsPT.customColor = style.getStrokeColor(0);
 			attrsPT.customColorPaint.setStrokeWidth(attrsPT.paint2.getStrokeWidth());
 			attrsPT.drawPath(canvas, path);
 			attrsPT.customColorPaint.setStrokeWidth(attrsPT.paint.getStrokeWidth());
-			attrsPT.customColor = style.getColor();
+			attrsPT.customColor = style.getColor(0);
 			attrsPT.drawPath(canvas, path);
 		} else {
 			super.drawPath(canvas, pathData);

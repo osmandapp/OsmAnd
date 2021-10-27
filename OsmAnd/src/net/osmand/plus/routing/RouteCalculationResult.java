@@ -64,6 +64,7 @@ public class RouteCalculationResult {
 	protected final RouteService routeService;
 	protected final double routeRecalcDistance;
 	protected final double routeVisibleAngle;
+	protected final boolean initialCalculation;
 
 	// Note always currentRoute > get(currentDirectionInfo).routeOffset, 
 	//         but currentRoute <= get(currentDirectionInfo+1).routeOffset 
@@ -92,6 +93,7 @@ public class RouteCalculationResult {
 		this.appMode = null;
 		this.routeRecalcDistance = 0;
 		this.routeVisibleAngle = 0;
+		this.initialCalculation = false;
 	}
 
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
@@ -134,10 +136,13 @@ public class RouteCalculationResult {
 			this.routeRecalcDistance = 0;
 			this.routeVisibleAngle = 0;
 		}
+		this.initialCalculation = params.initialCalculation;
 	}
 
-	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,
-								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode, boolean calculateFirstAndLastPoint) {
+	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end,
+	                              List<LatLon> intermediates, OsmandApplication ctx, boolean leftSide,
+	                              RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode,
+								  boolean calculateFirstAndLastPoint, boolean initialCalculation) {
 		if (rctx != null) {
 			this.routingTime = rctx.routingTime;
 			this.visitedSegments = rctx.getVisitedSegments();
@@ -180,6 +185,7 @@ public class RouteCalculationResult {
 		this.routeRecalcDistance = ctx.getSettings().ROUTE_RECALCULATION_DISTANCE.getModeValue(mode);
 		this.routeVisibleAngle = routeService == RouteService.STRAIGHT ?
 				ctx.getSettings().ROUTE_STRAIGHT_ANGLE.getModeValue(mode) : 0;
+		this.initialCalculation = initialCalculation;
 	}
 
 	public ApplicationMode getAppMode() {
@@ -202,8 +208,12 @@ public class RouteCalculationResult {
 		return !Algorithms.isEmpty(missingMaps);
 	}
 
+	public boolean isInitialCalculation() {
+		return initialCalculation;
+	}
+
 	private static void calculateIntermediateIndexes(Context ctx, List<Location> locations,
-													 List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
+	                                                 List<LatLon> intermediates, List<RouteDirectionInfo> localDirections, int[] intermediatePoints) {
 		if (intermediates != null && localDirections != null) {
 			int[] interLocations = new int[intermediates.size()];
 			for (int currentIntermediate = 0; currentIntermediate < intermediates.size(); currentIntermediate++) {

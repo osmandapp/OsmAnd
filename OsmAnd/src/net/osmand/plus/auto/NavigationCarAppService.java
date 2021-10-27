@@ -31,8 +31,7 @@ public final class NavigationCarAppService extends CarAppService {
 	 */
 	@NonNull
 	public static Uri createDeepLinkUri(@NonNull String deepLinkAction) {
-		return Uri.fromParts(
-				NavigationSession.URI_SCHEME, NavigationSession.URI_HOST, deepLinkAction);
+		return Uri.fromParts(NavigationSession.URI_SCHEME, NavigationSession.URI_HOST, deepLinkAction);
 	}
 
 	@Override

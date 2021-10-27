@@ -36,6 +36,7 @@ public class GPXRouteParams {
 	protected boolean connectPointsStraightly;
 	protected boolean useIntermediatePointsRTE;
 	protected boolean calculateOsmAndRouteParts;
+	protected boolean calculatedRouteTimeSpeed;
 
 	boolean addMissingTurns = true;
 
@@ -60,6 +61,7 @@ public class GPXRouteParams {
 		reverse = builder.reverse;
 		passWholeRoute = builder.passWholeRoute;
 		calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
+		calculatedRouteTimeSpeed = builder.calculatedRouteTimeSpeed;
 		connectPointsStraightly = builder.connectPointsStraightly;
 		useIntermediatePointsRTE = builder.useIntermediateRtePoints();
 		builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
@@ -128,6 +130,7 @@ public class GPXRouteParams {
 		private boolean reverse;
 		private boolean passWholeRoute;
 		private boolean calculateOsmAndRouteParts;
+		private boolean calculatedRouteTimeSpeed;
 		private boolean connectPointsStraightly;
 		private int selectedSegment = -1;
 
@@ -158,6 +161,14 @@ public class GPXRouteParams {
 
 		public void setCalculateOsmAndRoute(boolean calculateOsmAndRoute) {
 			this.calculateOsmAndRoute = calculateOsmAndRoute;
+		}
+
+		public boolean hasCalculatedRouteTimeSpeed() {
+			return calculatedRouteTimeSpeed;
+		}
+
+		public void setCalculatedRouteTimeSpeed(boolean calculatedRouteTimeSpeed) {
+			this.calculatedRouteTimeSpeed = calculatedRouteTimeSpeed;
 		}
 
 		public boolean shouldConnectPointsStraightly() {

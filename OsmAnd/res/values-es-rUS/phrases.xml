@@ -473,7 +473,7 @@
     <string name="poi_cabin">Cabaña</string>
     <string name="poi_lean_to">Cobertizo</string>
     <string name="poi_hunting_lodge">Pabellón de caza</string>
-    <string name="poi_place_of_worship">Lugar de culto</string>
+    <string name="poi_place_of_worship">Lugar de culto; Iglesia; Parroquia; Templo; Mezquita; Capilla; Monasterio; Sinagoga</string>
     <string name="poi_religion_christian">Cristianismo</string>
     <string name="poi_religion_jewish">Judaísmo</string>
     <string name="poi_religion_muslim">Islamismo</string>
@@ -4033,4 +4033,10 @@
     <string name="poi_ticket_validator">Validador de entradas; Validador de billetes; Validador de boletos</string>
     <string name="poi_geoglyph">Geoglifo</string>
     <string name="poi_satellite_dish">Antena parabólica</string>
+    <string name="poi_hampshire_gate">Tranquera de alambre;Portón de alambre;Puerta de Hampshire</string>
+    <string name="poi_research_institute">Instituto de investigación</string>
+    <string name="poi_trailhead">Cabecera del camino</string>
+    <string name="poi_driver_training">Escuela de manejo</string>
+    <string name="poi_sports_hall">Pabellón deportivo</string>
+    <string name="poi_couplings">Acoplamientos</string>
 </resources>

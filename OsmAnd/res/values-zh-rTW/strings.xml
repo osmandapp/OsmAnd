@@ -4373,4 +4373,25 @@
     <string name="android_auto_map_placeholder_title">地圖顯示在車輛螢幕上。</string>
     <string name="android_auto_map_placeholder_descr">將您的裝置從 Android Auto 斷開連線以在應用程式中檢視地圖。</string>
     <string name="android_auto_purchase_request_title">購買 OsmAnd Pro 或 Maps+ 以將 OsmAnd 與 Android Auto 搭配使用</string>
+    <string name="markers_history_is_disabled_descr">啟用歷史紀錄以取得造訪過的地圖標記清單。</string>
+    <string name="is_disabled">%1$s 已停用</string>
+    <string name="clear_all_history_warning">您確定您想要清除應用程式中所有的歷史紀錄嗎？
+\n
+\n將會清除搜尋、導航與標記的歷史紀錄。</string>
+    <string name="history_preferences_descr">您可以為每種歷史紀錄類型單獨停用紀錄。</string>
+    <string name="shortcut_start_recording">開始錄製</string>
+    <string name="shortcut_navigate_to">導航至……</string>
+    <string name="transparent_status_bar_descr">在狀態列下顯示地圖</string>
+    <string name="transparent_status_bar">透明狀態列</string>
+    <string name="history_is_disabled_descr">啟用歷史紀錄以更快存取上次使用的結果。</string>
+    <string name="clear_all_history">清除所有歷史紀錄</string>
+    <string name="map_markers_history">地圖標記歷史紀錄</string>
+    <string name="shortcut_navigate_to_work">導航至工作地點</string>
+    <string name="shortcut_navigate_to_home">導航至家裡</string>
+    <string name="shared_storage_warning_description">從2021年11月開始，因為 Android 的儲存空間存取規則的變化，OsmAnd 將無法再存取共享儲存空間。
+\n
+\n請將儲存空間從共享儲存空間變更為其他可用的儲存空間，若不這樣做，應用程式將無法存取您的資料：包含離線地圖、GPX 軌跡與任何其他東西。</string>
+    <string name="search_history_is_disabled_descr">您可以在設定中啟用搜尋歷史</string>
+    <string name="history_actions_descr">您可以將歷史紀錄匯出為檔案。</string>
+    <string name="navigation_history">導航歷史紀錄</string>
 </resources>

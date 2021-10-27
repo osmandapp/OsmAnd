@@ -4033,4 +4033,10 @@
     <string name="poi_ticket_validator">Bilet-kontrolilo</string>
     <string name="poi_geoglyph">Surtera desegnaĵo (geoglifo)</string>
     <string name="poi_satellite_dish">Parabola anteno</string>
+    <string name="poi_trailhead">Komenco de turisma kurso</string>
+    <string name="poi_sports_hall">Sporthalo</string>
+    <string name="poi_couplings">Nombro da kunigaĵoj</string>
+    <string name="poi_hampshire_gate">Drata pordego</string>
+    <string name="poi_driver_training">Ŝofora ekzercejo</string>
+    <string name="poi_research_institute">Esplorada instituto</string>
 </resources>

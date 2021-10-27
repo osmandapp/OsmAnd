@@ -1723,7 +1723,7 @@
     <string name="first_usage_item_description">Cómo descargar mapas, definir ajustes básicos.</string>
     <string name="navigation_item_description">Configuración de navegación.</string>
     <string name="faq_item">Preguntas Frecuentes</string>
-    <string name="faq_item_description">Preguntas Frecuentes</string>
+    <string name="faq_item_description">Preguntas frecuentes.</string>
     <string name="map_viewing_item">Vista del mapa</string>
     <string name="search_on_the_map_item">Búsqueda en el mapa</string>
     <string name="planning_trip_item">Planificación de viaje</string>
@@ -3051,7 +3051,7 @@
 \n</string>
     <string name="app_mode_personal_transporter">Transportador personal</string>
     <string name="app_mode_monowheel">Monociclo</string>
-    <string name="app_mode_scooter">Motoneta</string>
+    <string name="app_mode_scooter">Escúter (motoneta)</string>
     <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisión horizontal: %s</string>
     <string name="app_mode_offroad">Todo terreno</string>
@@ -3962,7 +3962,7 @@
     <string name="routing_engine_vehicle_type_hgv">Vehículos pesados</string>
     <string name="routing_engine_vehicle_type_small_truck">Camión pequeño</string>
     <string name="routing_engine_vehicle_type_truck">Camión</string>
-    <string name="routing_engine_vehicle_type_scooter">Motoneta</string>
+    <string name="routing_engine_vehicle_type_scooter">Escúter (motoneta)</string>
     <string name="routing_engine_vehicle_type_racingbike">Bicicleta de carreras</string>
     <string name="routing_engine_vehicle_type_mtb">Bicicleta de montaña</string>
     <string name="message_server_error">Error de servidor: %1$s</string>
@@ -4280,7 +4280,7 @@
     <string name="walking_route_osmc_description">Colorea las rutas según su color local individual (si está presente en OpenStreetMap) y el tipo (internacional, regional, local).</string>
     <string name="travel_routes">Rutas turísticas</string>
     <string name="setting_supported_by_style">Este ajuste es provisto por el estilo de mapa «%1$s»</string>
-    <string name="direct_line_maps_required_descr">El cálculo de la ruta está demorando más de lo habitual.
+    <string name="direct_line_maps_required_descr">El cálculo de la ruta demora más de lo habitual.
 \n
 \nQuizás algunos mapas no estén cargados.</string>
     <string name="online_direct_line_maps_link">Consulta los mapas necesarios.</string>
@@ -4293,7 +4293,7 @@
     <string name="backup_error_no_subscription">Sin suscripción válida</string>
     <string name="map_updates_for_mappers">Actualizaciones de mapas para cartógrafos</string>
     <string name="benefits_for_contributors">Beneficios para colaboradores activos de OSM</string>
-    <string name="benefits_for_contributors_primary_descr">Puedes tener derecho a actualizaciones ilimitadas del mapa cada hora, si es un colaborador activo de OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">Podrás beneficiarte de actualizaciones ilimitadas de los mapas cada hora si eres un colaborador activo de OpenStreetMap.org.</string>
     <string name="benefits_for_contributors_secondary_descr">Accede a OpenStreetMap para comprobar si tienes derecho a actualizaciones mensuales y horarias ilimitadas de los mapas.</string>
     <string name="use_login_and_password">Usar nombre de usuario y contraseña</string>
     <string name="available_until">Disponible hasta el %1$s</string>
@@ -4325,7 +4325,7 @@
     <string name="remove_group_from_markers">Quitar grupo de la lista de marcadores</string>
     <string name="start_point">Iniciar</string>
     <string name="mapillary_menu_filter_description_new">Filtrar imágenes por fecha o tipo. Sólo activado en los primeros zums.</string>
-    <string name="service_is_not_available_please_try_later">Servicio no disponible, por favor intente más tarde</string>
+    <string name="service_is_not_available_please_try_later">Servicio no disponible, por favor intenta más tarde</string>
     <string name="shared_string_files">Archivos</string>
     <string name="travel_route_types">Tipos de rutas</string>
     <string name="sample_wikivoyage">Ejemplo de Wikiviajes</string>
@@ -4336,7 +4336,7 @@
     <string name="routing_attr_only_permitted_ways_name">Vías expresamente autorizadas</string>
     <string name="routing_attr_only_permitted_streets_description">Usar sólo las calles que estén expresamente autorizadas</string>
     <string name="routing_attr_only_permitted_streets_name">Calles expresamente autorizadas</string>
-    <string name="routing_attr_only_permitted_ways_description">Usar únicamente las vías (caminos, senderos, etc.) que estén expresamente autorizadas</string>
+    <string name="routing_attr_only_permitted_ways_description">Usar sólo las vías (caminos, senderos, etc.) que estén expresamente autorizadas</string>
     <string name="routing_attr_allow_gate_description">Permitir el uso de puertas</string>
     <string name="routing_attr_allow_gate_name">Permitir usar puertas</string>
     <string name="routing_attr_prefer_tactile_paving_description">Preferir el pavimento táctil</string>
@@ -4382,4 +4382,31 @@
     <string name="location_access_request_title">OsmAnd debe acceder a la ubicación para poder navegar</string>
     <string name="location_access_request_action">Dar acceso</string>
     <string name="continue_on_phone">Continuar en el teléfono</string>
+    <string name="shared_storage_warning_description">A partir de noviembre de 2021, OsmAnd 4.2 perderá el acceso al almacenamiento compartido, debido al cambio en las reglas de acceso al almacenamiento en Android.
+\n
+\nPor favor, cambia el modo de almacenamiento de «Almacenamiento compartido» a «Almacenamiento disponible», si esto no se hace la aplicación perderá el acceso a los datos: incluyendo los mapas sin conexión, las trazas GPX y todo lo demás.</string>
+    <string name="search_history_is_disabled_descr">Puedes activar el historial de búsqueda en los ajustes</string>
+    <string name="is_disabled">%1$s desactivado</string>
+    <string name="clear_all_history_warning">¿Borrar todo el historial de la aplicación\?
+\n
+\nEl historial de búsqueda, navegación y marcadores serán vaciados.</string>
+    <string name="shortcut_navigate_to_home">Ir a casa</string>
+    <string name="clear_all_history">Vaciar todo el historial</string>
+    <string name="history_actions_descr">Puedes exportar el historial a un archivo.</string>
+    <string name="navigation_history">Historial de navegación</string>
+    <string name="shortcut_start_recording">Iniciar grabación</string>
+    <string name="markers_history_is_disabled_descr">Activar el historial para obtener la lista de marcadores de mapa visitados.</string>
+    <string name="history_is_disabled_descr">Activa el historial para acceder más rápido a los últimos resultados.</string>
+    <string name="map_markers_history">Historial de los marcadores del mapa</string>
+    <string name="history_preferences_descr">Puedes desactivar el registro del historial individualmente para cada tipo de historial.</string>
+    <string name="shortcut_navigate_to">Navegar a…</string>
+    <string name="shortcut_navigate_to_work">Ir al trabajo</string>
+    <string name="transparent_status_bar_descr">Mostrar mapa debajo de la barra de estado</string>
+    <string name="transparent_status_bar">Barra de estado transparente</string>
+    <string name="approx_safe_mode_description">Hacer una aproximación GPX usando un Android más lento en lugar del código nativo.</string>
+    <string name="safe_settings">Seguro</string>
+    <string name="use_external_timestamps">Usar marcas de tiempo externas</string>
+    <string name="approx_safe_mode">Aproximación segura de GPX</string>
+    <string name="use_external_timestamps_description">Usa las marcas de tiempo del navegador en línea para ajustar el tiempo estimado y la velocidad media</string>
+    <string name="no_plugins_enabled">No tienes ningún complemento activado. Puedes encontrar la lista de todos los complementos disponibles en «Menú → Complementos».</string>
 </resources>

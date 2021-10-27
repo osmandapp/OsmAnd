@@ -1120,7 +1120,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Traseele pentru biciclete</string>
     <string name="no_index_file_to_download">Descărcările nu au fost găsite, verificați conexiunea la Internet.</string>
     <string name="local_index_select_gpx_file">Selectați un track</string>
-    <string name="gpx_split_interval">Intervalul de împărțire</string>
+    <string name="gpx_split_interval">Interval de divizare</string>
     <string name="sort_by_distance">Sortare după distanță</string>
     <string name="sort_by_name">Sortare după nume</string>
     <string name="show_zoom_buttons_navigation_descr">Arată butoanele de zoom în timpul navigării.</string>
@@ -2617,7 +2617,7 @@
     <string name="shared_string_file_is_saved">%s este salvat</string>
     <string name="shared_string_open_track">Deschide pista</string>
     <string name="shared_string_track_is_saved">Traseul %s este salvat</string>
-    <string name="gpx_join_gaps">Completati traseele gpx lipsa</string>
+    <string name="gpx_join_gaps">Alăturați lacunele</string>
     <string name="app_mode_camper">Camping</string>
     <string name="app_mode_campervan">Rulota</string>
     <string name="rendering_attr_showLez_description">Afișează zonele cu emisii reduse pe hartă. Nu afectează rutarea.</string>
@@ -2871,7 +2871,7 @@
     <string name="add_to_a_track">Adăugați la un traseu</string>
     <string name="shared_string_custom">Personalizat</string>
     <string name="gpx_direction_arrows">Săgeți direcționale</string>
-    <string name="track_coloring_solid">Solidă</string>
+    <string name="track_coloring_solid">Masiv</string>
     <string name="plan_route_last_edited">Ultima modificare</string>
     <string name="plan_route_import_track">Importare traseu</string>
     <string name="plan_route_open_existing_track">Deschideți o rută existentă</string>
@@ -3413,7 +3413,7 @@
     <string name="shared_string_empty">Gol</string>
     <string name="analyze_by_intervals">Analizați intervalele de divizare</string>
     <string name="upload_to_openstreetmap">Încărcați pe OpenStreetMap</string>
-    <string name="edit_track">Editați track-ul</string>
+    <string name="edit_track">Editați pista</string>
     <string name="rename_track">Redenumiți track-ul</string>
     <string name="change_folder">Schimbați directorul</string>
     <string name="shared_string_sec">secundă</string>
@@ -4386,4 +4386,25 @@
     <string name="location_access_request_result">Aprobat: %1$s Respins: %2$s</string>
     <string name="continue_on_phone">Continuați la telefon</string>
     <string name="location_access_request_title">OsmAnd are nevoie de acces la locație pentru a naviga</string>
+    <string name="search_history_is_disabled_descr">Puteți activa istoricul căutărilor în Setări</string>
+    <string name="shared_storage_warning_description">Începând cu noiembrie 2021, OsmAnd 4.2 va pierde accesul la Stocarea partajată, din cauza modificării regulilor de acces la stocare în Android.
+\n
+\nVă rugăm să schimbați stocarea din Stocare partajată în Stocare disponibilă, dacă nu se face acest lucru, aplicația va pierde accesul la datele voastre: inclusiv hărțile offline, piesele GPX și orice altceva.</string>
+    <string name="transparent_status_bar">Bara de stare transparentă</string>
+    <string name="map_markers_history">Istoria marcajelor de pe hartă</string>
+    <string name="navigation_history">Istoricul navigației</string>
+    <string name="shortcut_navigate_to">Navigați către…</string>
+    <string name="transparent_status_bar_descr">Afișarea hărții sub bara de stare</string>
+    <string name="history_preferences_descr">Puteți dezactiva înregistrarea istoricului în mod individual pentru fiecare tip de istoric.</string>
+    <string name="shortcut_start_recording">Începeți înregistrarea</string>
+    <string name="shortcut_navigate_to_work">Navigați spre locul de muncă</string>
+    <string name="shortcut_navigate_to_home">Navigați la Acasă</string>
+    <string name="markers_history_is_disabled_descr">Activați istoricul pentru a obține o listă a reperelor de hartă vizitate.</string>
+    <string name="history_is_disabled_descr">Activați istoricul pentru a obține un acces mai rapid la ultimele rezultate utilizate.</string>
+    <string name="is_disabled">%1$s este dezactivat</string>
+    <string name="clear_all_history_warning">Sunteți sigur că doriți să ștergeți tot istoricul din aplicație\?
+\n
+\nIstoricul de căutare, de navigare și de marcare va fi șters.</string>
+    <string name="clear_all_history">Ștergeți tot istoricul</string>
+    <string name="history_actions_descr">Puteți exporta istoricul într-un fișier.</string>
 </resources>

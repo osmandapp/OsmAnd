@@ -1,5 +1,9 @@
 package net.osmand.plus.settings.fragments;
 
+import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
+import static net.osmand.view.ThreeStateCheckbox.State.MISC;
+import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
+
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -69,10 +73,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.view.ThreeStateCheckbox.State.CHECKED;
-import static net.osmand.view.ThreeStateCheckbox.State.MISC;
-import static net.osmand.view.ThreeStateCheckbox.State.UNCHECKED;
 
 public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -323,7 +323,8 @@ public class ExportItemsBottomSheet extends MenuBottomSheetDialogFragment {
 			} else {
 				actualIconColor = ContextCompat.getColor(app, secondaryColorRes);
 			}
-			item.setIcon(uiUtilities.getPaintedIcon(profileIconRes, actualIconColor));
+			int iconRes = profileIconRes != 0 ? profileIconRes : R.drawable.ic_world_globe_dark;
+			item.setIcon(uiUtilities.getPaintedIcon(iconRes, actualIconColor));
 		} else if (object instanceof QuickAction) {
 			QuickAction quickAction = (QuickAction) object;
 			item.setTitle(quickAction.getName(app));

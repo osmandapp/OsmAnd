@@ -11,6 +11,12 @@
 	Thx - Hardy
 -->
 
+    <string name="safe_settings">Safe</string>
+    <string name="approx_safe_mode">Safe GPX approximation</string>
+    <string name="approx_safe_mode_description">Approximate GPX using slower Android method instead of native code.</string>
+    <string name="use_external_timestamps">Use external timestamps</string>
+    <string name="use_external_timestamps_description">Use online router\'s timestamps to adjust estimated time and average speed</string>
+    <string name="no_plugins_enabled">If you want to use any plugins there is a full list in \'Menu\' → \'Plugins\'.</string>
     <string name="shared_storage_warning_description">If you are using Android 4.2, change from shared to available storage before Nov. 2021 to retain access to offline maps, GPX tracks, etc.</string>
     <string name="search_history_is_disabled_descr">You can turn on search history in the settings</string>
     <string name="markers_history_is_disabled_descr">Turn on history to get a list of visited map markers.</string>
@@ -1181,7 +1187,7 @@
     <string name="get_discount_title">Get %1$d %2$s at %3$s off.</string>
     <string name="get_discount_first_part">%1$s for the first %2$s</string>
     <string name="get_discount_first_few_part">%1$s for the first %2$s</string>
-    <string name="get_discount_second_part">then %1$s</string>
+    <string name="get_discount_second_part">Then %1$s</string>
     <string name="cancel_subscription">Cancel subscription</string>
     <string name="price_and_discount">%1$s • Save %2$s</string>
     <string name="app_mode_wagon">Wagon</string>
@@ -4190,7 +4196,7 @@
     <string name="shared_string_undo">Undo</string>
     <string name="shared_string_skip">Skip</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="offline_maps_and_navigation">Offline Maps\n&amp; Navigation</string>
+    <string name="offline_maps_and_navigation">Offline Maps\nand Navigation</string>
     <string name="commit_poi">Commit POI</string>
     <string name="tab_title_basic">Basic</string>
     <string name="tab_title_advanced">Advanced</string>
@@ -4241,7 +4247,7 @@
     <string name="navigation_item_description">Set up navigation.</string>
     <string name="planning_trip_item">Planning a trip</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Frequently asked questions</string>
+    <string name="faq_item_description">Frequently asked questions.</string>
     <string name="map_viewing_item">Map viewing</string>
     <string name="search_on_the_map_item">Searching on the map</string>
     <string name="instalation_troubleshooting_item">Installation and troubleshooting</string>

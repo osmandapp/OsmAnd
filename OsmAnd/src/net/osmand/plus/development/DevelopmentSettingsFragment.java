@@ -34,11 +34,16 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		Preference developmentInfo = findPreference("development_info");
 		developmentInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
+		setupOpenglRenderPref();
+
+		Preference safeCategory = findPreference("safe");
+		safeCategory.setIconSpaceReserved(false);
+
+		setupSafeModePref();
+		setupApproximationSafeModePref();
+
 		Preference routingCategory = findPreference("routing");
 		routingCategory.setIconSpaceReserved(false);
-
-		setupOpenglRenderPref();
-		setupSafeModePref();
 
 		setupSimulateYourLocationPref();
 
@@ -80,6 +85,12 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 			safeMode.setEnabled(false);
 			safeMode.setChecked(true);
 		}
+	}
+
+	private void setupApproximationSafeModePref() {
+		SwitchPreferenceEx safeMode = findPreference(settings.APPROX_SAFE_MODE.getId());
+		safeMode.setDescription(getString(R.string.approx_safe_mode_description));
+		safeMode.setIconSpaceReserved(false);
 	}
 
 	private void setupSimulateYourLocationPref() {

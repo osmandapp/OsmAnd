@@ -821,7 +821,7 @@ public class MapPoiTypes {
 		return getBasePoiName(abstractPoiType);
 	}
 
-	private String getBasePoiName(AbstractPoiType abstractPoiType) {
+	public String getBasePoiName(AbstractPoiType abstractPoiType) {
 		String name = abstractPoiType.getKeyName();
 		if(name.startsWith("osmand_")) {
 			name = name.substring("osmand_".length());

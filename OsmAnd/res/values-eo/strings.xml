@@ -3862,7 +3862,7 @@
     <string name="register_on_openplacereviews_desc">Fotoj estas liverataj de la malferm‑datuma projekto OpenPlaceReviews.org. Por alŝuti viajn fotojn, vi devas enlasaluti en la retejon.</string>
     <string name="register_opr_create_new_account">Krei novan konton</string>
     <string name="register_opr_have_account">Mi jam havas konton</string>
-    <string name="shared_string_search_history">Serĉi en historio</string>
+    <string name="shared_string_search_history">Historio de serĉoj</string>
     <string name="app_mode_kayak">Kajako</string>
     <string name="app_mode_motorboat">Motorboato</string>
     <string name="add_photos_descr">OsmAnd montras fotojn el diversaj fontoj:
@@ -4371,4 +4371,32 @@
 \n• riparitaj diversaj problemoj pri kurs-difinado
 \n
 \n</string>
+    <string name="search_history_is_disabled_descr">Vi povas aktivigi historion de serĉoj en agordoj</string>
+    <string name="shortcut_navigate_to_home">Navigi al hejmo</string>
+    <string name="is_disabled">%1$s estas malaktiva</string>
+    <string name="clear_all_history_warning">Ĉu vi certe volas forviŝi ĉiun historion en la aplikaĵo\?
+\n
+\nLa historio de serĉo, navigo kaj map-markoj estos forviŝita.</string>
+    <string name="shortcut_start_recording">Ekigi registradon</string>
+    <string name="markers_history_is_disabled_descr">Aktivigu historion por akiri liston de vizititaj map-markoj.</string>
+    <string name="history_preferences_descr">Vi povas malaktivigi historion de ĉiu speco aparte.</string>
+    <string name="shortcut_navigate_to">Navigi al…</string>
+    <string name="shortcut_navigate_to_work">Navigi al laborejo</string>
+    <string name="location_access_request_title">OsmAnd bezonas aliron por via pozicio por navigi</string>
+    <string name="android_auto_map_placeholder_descr">Malkonektu vian aparaton de Android Auto por vidigi la mapon en la aplikaĵo.</string>
+    <string name="android_auto_purchase_request_title">Aĉetu OsmAnd Pro aŭ Maps+ por povi uzi OsmAnd kun Android Auto</string>
+    <string name="continue_on_phone">Pluigi per telefono</string>
+    <string name="location_access_request_action">Permesi</string>
+    <string name="shared_storage_warning_description">Ekde la versio 4.2 (eldonota en Novembro 2021), OsmAnd perdos aliron al komuna konservejo pro ŝanĝo en reguloj de aliro al la konservejo en la operaciumo Android.
+\n
+\nŜanĝu dosierujon el komuna konservejo al disponebla konservejo, aliokaze la aplikaĵo perdos aliron al viaj datumoj: malkonektaj mapoj, GPX-spuroj kaj pli.</string>
+    <string name="history_is_disabled_descr">Aktivigu historion por havigi rapidan aliron al la antaŭaj rezultoj.</string>
+    <string name="clear_all_history">Forviŝi ĉiun historion</string>
+    <string name="history_actions_descr">Vi povas elporti historion al dosiero.</string>
+    <string name="map_markers_history">Historio de map-markoj</string>
+    <string name="navigation_history">Historio de navigo</string>
+    <string name="android_auto_map_placeholder_title">La mapo estas vidigata sur la ekrano de via aŭtomobilo.</string>
+    <string name="location_access_request_result">Akceptita: %1$s Rifuzita: %2$s</string>
+    <string name="transparent_status_bar_descr">Vidigi la mapon sub la stata strio</string>
+    <string name="transparent_status_bar">Travidebla stata strio</string>
 </resources>

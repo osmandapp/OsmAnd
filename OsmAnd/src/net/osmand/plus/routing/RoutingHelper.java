@@ -813,13 +813,15 @@ public class RoutingHelper {
 	public void onSettingsChanged(@Nullable ApplicationMode mode, boolean forceRouteRecalculation) {
 		if (forceRouteRecalculation ||
 				((mode == null || mode.equals(this.mode)) && (isRouteCalculated() || isRouteBeingCalculated()))) {
-			recalculateRouteDueToSettingsChange();
+			recalculateRouteDueToSettingsChange(true);
 		}
 		fireRouteSettingsChangedEvent(mode);
 	}
 
-	private void recalculateRouteDueToSettingsChange() {
-		clearCurrentRoute(finalLocation, intermediatePoints);
+	public void recalculateRouteDueToSettingsChange(boolean clearCurrentRoute) {
+		if (clearCurrentRoute) {
+			clearCurrentRoute(finalLocation, intermediatePoints);
+		}
 		if (isPublicTransportMode()) {
 			Location start = lastFixedLocation;
 			LatLon finish = finalLocation;
