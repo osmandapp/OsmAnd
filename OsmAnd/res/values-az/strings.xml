@@ -751,7 +751,7 @@
     <string name="quick_action_map_styles">Xəritə stilləri</string>
     <string name="increase_search_radius">Axtarış radiusunu artır</string>
     <string name="nothing_found_descr">Axtarışı dəyişin və ya radiusunu artırın.</string>
-    <string name="quick_action_showhide_osmbugs_descr">Bu fəaliyyət düyməsinə toxunulduqda, xəritədə OSM qeydləri göstəriləcək və ya gizlədiləcək.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Xəritədə OSM qeydlərini göstərmək və ya gizlətmək üçün düymə.</string>
     <string name="sorted_by_distance">Məsafəyə görə sırala</string>
     <string name="search_favorites">Favoritlərdə axtar</string>
     <string name="srtm_menu_download_descr">Bu regionda istifadə etmək üçün “Kontur xətləri” xəritəsini endirin.</string>
@@ -765,7 +765,7 @@
     <string name="type_postcode">Poçt kodu yazın</string>
     <string name="nearest_cities">Yaxındakı şəhərlər</string>
     <string name="select_city">Şəhər seçin</string>
-    <string name="select_postcode">Poçt kodu seçin</string>
+    <string name="select_postcode">Poçt kodu axtarışı</string>
     <string name="quick_action_add_destination">Təyinat nöqtəsi əlavə et</string>
     <string name="quick_action_replace_destination">Təyinat nöqtəsini əvəz et</string>
     <string name="average_speed">Ortalama sürət</string>
@@ -805,7 +805,7 @@
     <string name="allow_access_location">Məkan girişinə icazə ver</string>
     <string name="search_my_location">Mövqeyimi tap</string>
     <string name="update_all_maps_now">Bütün xəritələr indi yenilənsin?</string>
-    <string name="replace_favorite_confirmation">%1$s Favoritini əvəz etmək istəyirsiniz\?</string>
+    <string name="replace_favorite_confirmation">“%1$s” Favoriti əvəz edilsin\?</string>
     <string name="rendering_attr_hideOverground_name">Yerüstü obyektlər</string>
     <string name="coords_search">Koordinatlarla axtar</string>
     <string name="advanced_coords_search">Təkmil koordinatlar axtarışı</string>
@@ -1275,7 +1275,7 @@
     <string name="recording_is_recorded">Səs/video qeyd edilir. Dayandırmaq üçün AV widget-inə toxunun.</string>
     <string name="building_number">Bina nömrəsi</string>
     <string name="shared_string_permissions">İcazələr</string>
-    <string name="import_gpx_failed_descr">OsmAnd faylı idxal edə bilmir. OsmAnd-ın həmin yerdən fayl oxumaq icazəsi olub-olmadığını yoxlayın.</string>
+    <string name="import_gpx_failed_descr">Faylı idxal etmək olmadı. Zəhmə olmasa, OsmAnd-ın oxumağa icazəsi olduğundan əmin olun.</string>
     <string name="shared_string_import2osmand">OsmAnd-a idxal et</string>
     <string name="shared_string_import">İdxal et</string>
     <string name="fav_imported_sucessfully">Favoritlər idxal edildi</string>
@@ -1416,7 +1416,7 @@
     <string name="quick_action_add_configure_map">Xəritəni tənzimlə</string>
     <string name="recording_delete_confirm">Bu element silinsin?</string>
     <string name="routing_attr_allow_motorway_name">Avtomagistrallara icazə ver</string>
-    <string name="routing_attr_allow_motorway_description">Avtomagistrallara icazə ver.</string>
+    <string name="routing_attr_allow_motorway_description">Avtomagistrallara icazə verir.</string>
     <string name="trip_rec_notification_settings">Səyahət qeydetmə (məlumat yoxdur)</string>
     <string name="trip_rec_notification_settings_desc">Səyahət qeydinə başlamağa imkan verən sistem bildirişi göstər.</string>
     <string name="save_track_min_speed">Minimum qeydiyyat sürəti</string>
@@ -1508,7 +1508,7 @@
     <string name="context_menu_item_open_note">OSM qeydini aç</string>
     <string name="storage_directory">Xəritənin saxlandığı yer</string>
     <string name="shared_string_reset">Sıfırla</string>
-    <string name="mapillary_menu_filter_description">Şəkilləri təqdim edənə və ya tarixə görə filtrlə. Yalnız yaxın miqyasda aktivdir.</string>
+    <string name="mapillary_menu_filter_description">Şəkilləri təqdim edənə, tarixə və ya növə görə filtrlə. Yalnız yaxın miqyasda aktivdir.</string>
     <string name="general_settings_descr">Proqramın ekran və ümumi parametrlərini tənzimləyin.</string>
     <string name="open_street_map_login_descr">openstreetmap.org təqdimlər üçün lazımdır.</string>
     <string name="no_map_markers_found">Zəhmət olmasa xəritədə işarələr əlavə edin</string>
@@ -1544,10 +1544,10 @@
     <string name="favorite_delete_multiple">%1$d favorit və %2$d favorit qrupu silinsin\?</string>
     <string name="downloads_left_template">%1$s endirmə qalıb</string>
     <string name="quick_action_resume_pause_navigation">Naviqasiyaya fasilə/davam</string>
-    <string name="quick_action_resume_pause_navigation_descr">Naviqasiyaya fasilə vermək və ya davam etmək üçün bu düyməyə toxunun.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Naviqasiyaya fasilə vermək və ya davam etmək üçün düymə.</string>
     <string name="quick_action_show_navigation_finish_dialog">“Naviqasiya bitdi” dialoqunu göstər</string>
     <string name="quick_action_start_stop_navigation">Naviqasiyanı başlat/dayandır</string>
-    <string name="quick_action_start_stop_navigation_descr">Naviqasiyanı başlatmaq və ya bitirmək üçün bu düyməyə toxunun.</string>
+    <string name="quick_action_start_stop_navigation_descr">Naviqasiyanı başlatmaq və ya bitirmək üçün düymə.</string>
     <string name="mappilary_no_internet_desc">Mapillary-dən şəkillərə baxmaq üçün internetiniz olmalıdır.</string>
     <string name="retry">Təkrar cəhd</string>
     <string name="osm_edit_modified_poi">Dəyişdirilmiş OSM POI</string>
@@ -1636,7 +1636,7 @@
     <string name="import_track">GPX faylı idxal et</string>
     <string name="context_menu_read_full_article">Tam məqaləni oxu</string>
     <string name="context_menu_read_article">Məqaləni oxu</string>
-    <string name="modify_the_search_query">Axtarış sorğusunu dəyiş.</string>
+    <string name="modify_the_search_query">Axtarış sorğunuzu dəyişin.</string>
     <string name="passed">Son istifadə: %1$s</string>
     <string name="shared_string_without_name">Ad olmadan</string>
     <string name="what_is_here">Burada nə var:</string>
@@ -1657,7 +1657,7 @@
     <string name="looking_for_tracks_with_waypoints">Yol nöqtələri olan izlər axtarılır</string>
     <string name="shared_string_more_without_dots">Daha çox</string>
     <string name="appearance_on_the_map">Xəritədə görünüş</string>
-    <string name="add_favourites_group_to_markers_descr">İşarələrə əlavə etmək üçün favorit kateqoriya seçin.</string>
+    <string name="add_favourites_group_to_markers_descr">İşarələrə əlavə etmək üçün Favoritlər kateqoriyası seçin.</string>
     <string name="favourites_group">Favoritlər kateqoriyası</string>
     <string name="empty_state_markers_active">Xəritə işarələri yarat!</string>
     <string name="empty_state_markers_active_desc">“Yerlər”ə uzun və ya qısa basın, sonra bayraq düyməsinə toxunun.</string>
@@ -1813,7 +1813,7 @@
     <string name="send_location_way_choose_title">İstifadə etməklə paylaş</string>
     <string name="gpx_file_desc">GPX - JOSM və ya digər OSM redaktorlarına ixrac üçün uygundur.</string>
     <string name="osc_file_desc">OSC - OpenStreetMap-a ixrac üçün uyğundur.</string>
-    <string name="osm_edits_export_desc">İxrac növünü seçin: OSM qeydləri, POI və ya hər ikisi.</string>
+    <string name="osm_edits_export_desc">OSM qeydləri, POI-lər və ya hər ikisi kimi ixrac edin.</string>
     <string name="rendering_attr_hidePOILabels_name">POI adları</string>
     <string name="without_time_limit">Vaxt limiti olmadan</string>
     <string name="plan_route">Marşrut planlaşdır</string>
@@ -2491,7 +2491,7 @@
     <string name="edit_profile_screen_options_subtitle">Profil üçün ekran seçimlərini seçin</string>
     <string name="get_discount_first_part">İlk %2$s üçün %1$s</string>
     <string name="get_discount_first_few_part">İlk %2$s üçün %1$s</string>
-    <string name="get_discount_second_part">sonra %1$s</string>
+    <string name="get_discount_second_part">Sonra %1$s</string>
     <string name="routing_attr_max_num_changes_name">Dəyişikliklərin sayı</string>
     <string name="shared_string_privacy_policy">Gizlilik Siyasəti</string>
     <string name="settings_privacy_and_security">Gizlilik və təhlükəsizlik</string>
@@ -2561,4 +2561,6 @@
     <string name="rendering_attr_surface_metal_name">Metal</string>
     <string name="button_rate">Qiymətləndir</string>
     <string name="changes_applied_to_profile">Dəyişikliklər “%1$s” profilinə tətbiq edildi.</string>
+    <string name="gpx_monitoring_start"></string>
+    <string name="routing_attr_height_obstacles_description"></string>
 </resources>
