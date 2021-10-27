@@ -4039,4 +4039,24 @@
     <string name="poi_driver_training">Місце навчання водіїв</string>
     <string name="poi_sports_hall">Спортивна зала</string>
     <string name="poi_couplings">Муфти</string>
+    <string name="poi_butcher_type">Основний тип м\'яса</string>
+    <string name="poi_coffee_filter">Кава</string>
+    <string name="poi_ice_cream_filter">Морозиво</string>
+    <string name="poi_wine_region">Виноробний регіон</string>
+    <string name="poi_medical_supply_filter">Категорія медичного забезпечення</string>
+    <string name="poi_agrarian_type">Сільськогосподарські ресурси</string>
+    <string name="poi_membership_filter">Членство обов\'язкове</string>
+    <string name="poi_tobacco_filter">Тютюн</string>
+    <string name="poi_service_fleurop_filter">Служба Fleurop</string>
+    <string name="poi_mattress_filter">Матрац</string>
+    <string name="poi_furniture_filter">Меблі</string>
+    <string name="poi_heating_filter">Опалення</string>
+    <string name="poi_fridge_filter">Холодильник</string>
+    <string name="poi_winery">Виноробня</string>
+    <string name="poi_wine_grape">Виноград</string>
+    <string name="poi_wine_vineyard">Виноградник</string>
+    <string name="poi_wine_type">Тип</string>
+    <string name="poi_reusable_packaging_accept_no">Приймається багаторазове пакування: ні</string>
+    <string name="poi_distillery">Винокурня</string>
+    <string name="poi_reusable_packaging_accept_yes">Приймається багаторазове пакування: так</string>
 </resources>
