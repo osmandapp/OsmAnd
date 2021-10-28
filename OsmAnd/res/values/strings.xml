@@ -17,7 +17,7 @@
     <string name="use_external_timestamps">Use external timestamps</string>
     <string name="use_external_timestamps_description">Use online router\'s timestamps to adjust estimated time and average speed</string>
     <string name="no_plugins_enabled">If you want to use any plugins there is a full list in \'Menu\' → \'Plugins\'.</string>
-    <string name="shared_storage_warning_description">If you are using Android 4.2, change from shared to available storage before Nov. 2021 to retain access to offline maps, GPX tracks, etc.</string>
+    <string name="shared_storage_warning_description">If you are using OsmAnd 4.2 or later, change from shared to available storage before Nov. 2021 to retain access to offline maps, GPX tracks, etc.</string>
     <string name="search_history_is_disabled_descr">You can turn on search history in the settings</string>
     <string name="markers_history_is_disabled_descr">Turn on history to get a list of visited map markers.</string>
     <string name="history_is_disabled_descr">Turn on history to access last used results quicker.</string>
