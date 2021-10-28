@@ -6,6 +6,7 @@ import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
 import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 import static net.osmand.render.RenderingRulesStorage.LINE_RULES;
 import static net.osmand.render.RenderingRulesStorage.ORDER_RULES;
+import static net.osmand.render.RenderingRulesStorage.POINT_RULES;
 
 import android.os.AsyncTask;
 import android.text.TextUtils;
@@ -270,14 +271,13 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 		RenderingRule lineSegmentRule = storage.getRule(LINE_RULES, key);
 		if (lineSegmentRule != null && lineSegmentRule.getAttributes() != null) {
 			Map<String, String> attributes = new HashMap<>(lineSegmentRule.getAttributes());
-			attributes.put("minzoom", "15");
+			attributes.put("minzoom", "14");
 			lineSegmentRule.init(attributes);
 			lineSegmentRule.storeAttributes(attributes);
 			changed = true;
 		}
 
 		if (selected) {
-			//int key = storage.getTagValueKey("route", "segment");
 			RenderingRule orderSegmentRule = storage.getRule(ORDER_RULES, key);
 			if (orderSegmentRule != null) {
 				RenderingRule activityRule = null;
@@ -300,6 +300,47 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 				log.error(e);
 			}
 		}
+
+		attrsMap = new LinkedHashMap<>();
+		attrsMap.put("order", "-2");
+		attrsMap.put("tag", "route");
+		attrsMap.put("value", "point");
+		attrsMap.put("additional", "route_activity_type=" + name);
+
+		key = storage.getTagValueKey("route", "point");
+		RenderingRule pointSegmentRule = storage.getRule(POINT_RULES, key);
+		if (pointSegmentRule != null && pointSegmentRule.getAttributes() != null) {
+			Map<String, String> attributes = new HashMap<>(pointSegmentRule.getAttributes());
+			attributes.put("minzoom", "14");
+			pointSegmentRule.init(attributes);
+			pointSegmentRule.storeAttributes(attributes);
+			changed = true;
+		}
+
+		if (selected) {
+			RenderingRule orderSegmentRule = storage.getRule(ORDER_RULES, key);
+			if (orderSegmentRule != null) {
+				RenderingRule activityRule = null;
+				for (RenderingRule renderingRule : orderSegmentRule.getIfElseChildren()) {
+					if (Algorithms.objectEquals(renderingRule.getAttributes(), attrsMap)) {
+						activityRule = renderingRule;
+						break;
+					}
+				}
+				orderSegmentRule.removeIfElseChildren(activityRule);
+				changed = true;
+			}
+		} else {
+			try {
+				RenderingRule rule = new RenderingRule(attrsMap, false, storage);
+				rule.storeAttributes(attrsMap);
+				storage.registerTopLevel(rule, null, attrsMap, ORDER_RULES, true);
+				changed = true;
+			} catch (XmlPullParserException e) {
+				log.error(e);
+			}
+		}
+
 		if (changed && cloneStorage) {
 			app.getRendererRegistry().updateRenderer(storage);
 		}
