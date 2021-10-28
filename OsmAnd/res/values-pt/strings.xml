@@ -3993,7 +3993,7 @@
     <string name="delete_online_routing_engine">Remover este motor de roteamento online\?</string>
     <string name="context_menu_read_full">Ler tudo</string>
     <string name="context_menu_edit_descr">Editar descrição</string>
-    <string name="delete_waypoints">Eliminar pontos do trilho</string>
+    <string name="delete_waypoints">Eliminar pontos de rotas</string>
     <string name="copy_to_map_markers">Copiar para os marcadores</string>
     <string name="copy_to_map_favorites">Copiar para os favoritos</string>
     <string name="upload_photo">A enviar</string>
