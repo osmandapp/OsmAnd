@@ -3106,7 +3106,7 @@
     <string name="years_5">Années</string>
     <string name="months_3">Trois mois</string>
     <string name="price_free">Gratuit</string>
-    <string name="get_discount_second_part">puis %1$s</string>
+    <string name="get_discount_second_part">Puis %1$s</string>
     <string name="cancel_subscription">Annuler l\'abonnement</string>
     <string name="get_discount_first_part">%1$s pour le premier %2$s</string>
     <string name="get_discount_first_few_part">%1$s pour le premier %2$s</string>
@@ -4377,4 +4377,7 @@
     <string name="no_plugins_enabled">Aucun greffon n\'est activé. Consultez la liste des greffons disponibles dans : Menu &gt; Greffons.</string>
     <string name="use_external_timestamps">Utiliser des estimations externes</string>
     <string name="use_external_timestamps_description">Utilisez les estimations de routeurs en ligne pour ajuster la durée et la vitesse moyenne</string>
+    <string name="safe_settings">Précis</string>
+    <string name="approx_safe_mode">Approximation précise des gpx</string>
+    <string name="approx_safe_mode_description">Effectuer les approximations des gpx en utilisant Android (qui est plus lent) au lieu du code natif.</string>
 </resources>

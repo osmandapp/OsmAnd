@@ -4085,4 +4085,22 @@
     <string name="poi_medical_supply_mobility">Мобільність</string>
     <string name="poi_medical_supply_diagnostic">Діагностика</string>
     <string name="poi_medical_supply_respiratory">Респіраторне</string>
+    <string name="poi_agrarian_feed">Живлення</string>
+    <string name="poi_beauty_salon_tanning">Засмага</string>
+    <string name="poi_beauty_salon_cosmetics">Косметика</string>
+    <string name="poi_beauty_salon_waxing">Епіляція воском</string>
+    <string name="poi_beauty_salon_hair_removal">Видалення волосся</string>
+    <string name="poi_beauty_salon_aesthetic">Естетика</string>
+    <string name="poi_beauty_salon_massage">Масаж</string>
+    <string name="poi_beauty_salon_eyelash">Вії</string>
+    <string name="poi_beauty_salon_pedicure">Педикюр</string>
+    <string name="poi_massage_chiropractic">Мануальна терапія</string>
+    <string name="poi_massage_shiatsu">Шіацу</string>
+    <string name="poi_agrarian_yes">Так</string>
+    <string name="poi_agrarian_pesticide">Пестицид</string>
+    <string name="poi_agrarian_fertilizer">Добрива</string>
+    <string name="poi_agrarian_seed">Насіння</string>
+    <string name="poi_agrarian_tools">Інструменти</string>
+    <string name="poi_agrarian_machine_parts">Деталі машин</string>
+    <string name="poi_agrarian_agricultural_machinery">Сільськогосподарська техніка</string>
 </resources>
