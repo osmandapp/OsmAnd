@@ -85,7 +85,7 @@ public class Reshaper {
 
 					while (ind != end) {
 						char ch = s.charAt(ind);
-						if (!ltr) { // !
+						if (!ltr && mirror) { // !
 							ch = mirror(ch);
 						}
 						res.append(ch);
