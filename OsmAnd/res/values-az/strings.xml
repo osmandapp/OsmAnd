@@ -1974,7 +1974,7 @@
 \n(Yalnız {2} MB yer var.)</string>
     <string name="download_files_question_space_with_temp">{0} fayl endirilsin\?
 \n Müvəqqəti {3} MB, daimi {1} MB istifadə edir. ({2} MB-dan.)</string>
-    <string name="rendering_attr_showMtbRoutes_name">MTB marşrutlarını göstər</string>
+    <string name="rendering_attr_showMtbRoutes_name">Dağ velosipedi marşrutları</string>
     <string name="shared_string_status">Status</string>
     <string name="av_video_quality">Video çıxış keyfiyyəti</string>
     <string name="av_video_quality_descr">Video keyfiyyətini seçin.</string>
@@ -2447,7 +2447,7 @@
     <string name="shared_string_items">Elementlər</string>
     <string name="main_actions">Əsas fəaliyyətlər</string>
     <string name="shared_string_drawer">Siyirmə</string>
-    <string name="reorder_or_hide_from">“%1$s”dən elementləri gizlət və ya yenidən sırala.</string>
+    <string name="reorder_or_hide_from">%1$s-də elementləri yenidən sırala və ya gizlət.</string>
     <string name="shared_string_divider">Ayırıcı</string>
     <string name="additional_actions_descr">“%1$s” düyməsinə toxunaraq bu fəaliyyətlərə daxil olun.</string>
     <string name="replace_point_descr">Başqa bir nöqtəni bununla əvəz et.</string>
@@ -2561,6 +2561,18 @@
     <string name="rendering_attr_surface_metal_name">Metal</string>
     <string name="button_rate">Qiymətləndir</string>
     <string name="changes_applied_to_profile">Dəyişikliklər “%1$s” profilinə tətbiq edildi.</string>
-    <string name="gpx_monitoring_start"></string>
-    <string name="routing_attr_height_obstacles_description"></string>
+    <string name="gpx_monitoring_start"/>
+    <string name="routing_attr_height_obstacles_description"/>
+    <string name="add_to_opr">OpenPlaceReviews-a əlavə et</string>
+    <string name="add_online_source">Onlayn mənbə əlavə et</string>
+    <string name="details_dialog_decr">Əlavə xəritə detallarını göstər və ya gizlət</string>
+    <string name="add_edit_favorite">Favorit əlavə et və ya düzəliş et</string>
+    <string name="add_new_custom_category_button_promo">Bir və ya daha çox kateqoriya seçərək yeni fərdi kateqoriya əlavə edin.</string>
+    <string name="add_new_profile_q">Yeni “%1$s” profili əlavə edilsin\?</string>
+    <string name="osmand_routing_promo">routing.xml faylının özünüz dəyişdirdiyiniz versiyasını ..osmand/routing qovluğuna əlavə edin</string>
+    <string name="backup_error_user_is_not_registered">Bu e-poçt ünvanı ilə qeydiyyatdan keçmiş istifadəçi yoxdur</string>
+    <string name="backup_error_user_is_already_registered">Bu e-poçt ünvanı başqa hesabda istifadə olunur</string>
+    <string name="edit_online_source">Onlayn mənbəyə düzəliş et</string>
+    <string name="create_edit_poi">POI yarat və ya düzəliş et</string>
+    <string name="quick_action_edit_actions">Fəaliyyətlərə düzəliş et</string>
 </resources>
