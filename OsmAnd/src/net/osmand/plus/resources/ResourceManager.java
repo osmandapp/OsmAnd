@@ -939,7 +939,11 @@ public class ResourceManager {
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
 		List<AmenityIndexRepository> res = new ArrayList<>();
 		for (String fileName : fileNames) {
-			if (!includeTravel && fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+			if (!includeTravel) {
+				if (fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+					continue;
+				}
+			} else if (!context.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()) {
 				continue;
 			}
 			AmenityIndexRepository r = amenityRepositories.get(fileName);

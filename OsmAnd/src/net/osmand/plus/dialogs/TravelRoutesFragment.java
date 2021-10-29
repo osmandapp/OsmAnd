@@ -4,6 +4,7 @@ import static net.osmand.plus.wikivoyage.data.TravelGpx.ACTIVITY_TYPE;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,6 @@ import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.OsmAndCollator;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.OsmandRegions;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiType;
@@ -37,6 +37,7 @@ import net.osmand.plus.render.TravelRendererHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton;
 import net.osmand.plus.widgets.multistatetoggle.TextToggleButton.TextRadioItem;
 import net.osmand.render.RenderingRulesStorage;
@@ -61,8 +62,8 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 	private boolean nightMode;
 
 	private enum TravelType {
-		ROUTE_TYPES(R.string.travel_route_types),
-		TRAVEL_FILES(R.string.shared_string_files),
+		ROUTE_TYPES(R.string.shared_string_tracks),
+		TRAVEL_FILES(R.string.shared_string_travelbooks),
 		ROUTE_POINTS(R.string.shared_string_gpx_points);
 
 		@StringRes
@@ -76,7 +77,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 	private enum DescriptionType {
 		HIDDEN,
 		ENABLED_DISABLED,
-		VISIBLE_HIDDEN;
+		VISIBLE_HIDDEN
 	}
 
 	@Override
@@ -86,12 +87,8 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		settings = app.getSettings();
 		rendererHelper = app.getTravelRendererHelper();
 		nightMode = app.getDaynightHelper().isNightModeForMapControls();
-		List<String> routesTypes = app.getResourceManager().searchPoiSubTypesByPrefix(ACTIVITY_TYPE);
-		Collections.sort(routesTypes, OsmAndCollator.primaryCollator()::compare);
-		this.routeTypes = routesTypes;
-		List<String> routesCategories = app.getResourceManager().searchPoiSubTypesByPrefix(MapPoiTypes.CATEGORY);
-		Collections.sort(routesCategories, OsmAndCollator.primaryCollator()::compare);
-		this.pointCategories = routesCategories;
+		updateRouteTypes();
+		updatePointCategories();
 
 		if (savedInstanceState != null) {
 			travelType = TravelType.valueOf(savedInstanceState.getString(TRAVEL_TYPE_KEY));
@@ -113,6 +110,18 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		setupTypeRadioGroup(view);
 		setupBottomEmptySpace(view);
 		return view;
+	}
+
+	private void updateRouteTypes() {
+		List<String> routesTypes = app.getResourceManager().searchPoiSubTypesByPrefix(ACTIVITY_TYPE);
+		Collections.sort(routesTypes, OsmAndCollator.primaryCollator()::compare);
+		this.routeTypes = routesTypes;
+	}
+
+	private void updatePointCategories() {
+		List<String> routesCategories = app.getResourceManager().searchPoiSubTypesByPrefix(MapPoiTypes.CATEGORY);
+		Collections.sort(routesCategories, OsmAndCollator.primaryCollator()::compare);
+		this.pointCategories = routesCategories;
 	}
 
 	private void setupHeader(@NonNull View view) {
@@ -238,12 +247,13 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
 
 		OsmandRegions regions = app.getRegions();
-		for (BinaryMapIndexReader reader : app.getResourceManager().getTravelMapRepositories()) {
-			String fileName = reader.getFile().getName();
-			CommonPreference<Boolean> pref = rendererHelper.getFileProperty(fileName);
+		List<String> travelRepositoryNames = app.getResourceManager().getTravelRepositoryNames();
+		Collections.sort(travelRepositoryNames);
+		for (String fileName : travelRepositoryNames) {
+			CommonPreference<Boolean> pref = rendererHelper.getFileVisibilityProperty(fileName);
 
 			String title = FileNameTranslationHelper.getFileName(app, regions, fileName);
-			View itemView = inflater.inflate(R.layout.list_item_icon_and_menu, null, false);
+			View itemView = inflater.inflate(R.layout.list_item_icon_and_menu, container, false);
 			AndroidUtils.setBackground(itemView, UiUtilities.getSelectableDrawable(app));
 
 			updateTypeItemView(itemView, title, pref.get());
@@ -253,6 +263,9 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 				updateTypeItemView(itemView, title, pref.get());
 
 				rendererHelper.updateFileVisibility(fileName, selected);
+				rendererHelper.updateRouteArticlePointsFilter();
+				updateRouteTypes();
+				updatePointCategories();
 				new ReloadIndexesTask(app, new ReloadIndexesListener() {
 					@Override
 					public void reloadIndexesStarted() {
@@ -267,14 +280,40 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 			});
 			container.addView(itemView);
 		}
+		if (travelRepositoryNames.isEmpty()) {
+			TextViewEx emptyView = createEmptyView(container, R.string.shared_string_empty);
+			container.addView(emptyView);
+		}
 	}
 
 	private void setupRouteTypes(ViewGroup container) {
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
+
+		CommonPreference<Boolean> tracksPref = rendererHelper.getRouteTracksProperty();
+		View articleView = inflater.inflate(R.layout.list_item_icon_and_menu, container, false);
+		AndroidUtils.setBackground(articleView, UiUtilities.getSelectableDrawable(app));
+		updateItemView(articleView, getString(R.string.display_route_tracks), R.drawable.ic_action_track_16,
+				tracksPref.get(), DescriptionType.VISIBLE_HIDDEN);
+		articleView.setOnClickListener(v -> {
+			boolean selected = !tracksPref.get();
+			tracksPref.set(selected);
+			updateItemView(articleView, getString(R.string.display_route_tracks), R.drawable.ic_action_track_16,
+					selected, DescriptionType.VISIBLE_HIDDEN);
+			app.runInUIThread(() -> {
+				rendererHelper.updateRouteTrackFilter();
+				rendererHelper.updateRouteTypesVisibility();
+				app.getOsmandMap().refreshMap(true);
+				app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
+			});
+		});
+		container.addView(articleView);
+
+		container.addView(inflater.inflate(R.layout.divider, container, false));
+
 		for (String type : routeTypes) {
 			CommonPreference<Boolean> pref = rendererHelper.getRouteTypeProperty(type);
-			View itemView = inflater.inflate(R.layout.list_item_icon_and_menu, null, false);
+			View itemView = inflater.inflate(R.layout.list_item_icon_and_menu, container, false);
 			AndroidUtils.setBackground(itemView, UiUtilities.getSelectableDrawable(app));
 			String name;
 			String attrName = type.replace(ACTIVITY_TYPE + "_", "");
@@ -298,12 +337,16 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 			});
 			container.addView(itemView);
 		}
+		if (routeTypes.isEmpty()) {
+			TextViewEx emptyView = createEmptyView(container, R.string.shared_string_empty);
+			container.addView(emptyView);
+		}
 	}
 
 	private void setupRoutePoints(ViewGroup container) {
 		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
 		CommonPreference<Boolean> articlePointsPref = rendererHelper.getRouteArticlePointsProperty();
-		View pointsView = inflater.inflate(R.layout.list_item_icon_and_menu, null, false);
+		View pointsView = inflater.inflate(R.layout.list_item_icon_and_menu, container, false);
 		AndroidUtils.setBackground(pointsView, UiUtilities.getSelectableDrawable(app));
 		updateItemView(pointsView, getString(R.string.poi), R.drawable.ic_action_info_dark,
 				articlePointsPref.get(), DescriptionType.VISIBLE_HIDDEN);
@@ -318,7 +361,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		container.addView(pointsView);
 
 		CommonPreference<Boolean> articlesPref = rendererHelper.getRouteArticlesProperty();
-		View articleView = inflater.inflate(R.layout.list_item_icon_and_menu, null, false);
+		View articleView = inflater.inflate(R.layout.list_item_icon_and_menu, container, false);
 		AndroidUtils.setBackground(articleView, UiUtilities.getSelectableDrawable(app));
 		updateItemView(articleView, getString(R.string.shared_string_articles), R.drawable.ic_action_read_article,
 				articlesPref.get(), DescriptionType.VISIBLE_HIDDEN);
@@ -332,7 +375,10 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		});
 		container.addView(articleView);
 
-		View categoriesHeaderView = inflater.inflate(R.layout.list_item_text_header, null, false);
+		if (pointCategories.isEmpty()) {
+			return;
+		}
+		View categoriesHeaderView = inflater.inflate(R.layout.list_item_text_header, container, false);
 		TextView title = categoriesHeaderView.findViewById(R.id.title);
 		title.setText(R.string.included_categories);
 		categoriesHeaderView.findViewById(R.id.divider_top).setVisibility(View.VISIBLE);
@@ -341,7 +387,7 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		MapPoiTypes poiTypes = app.getPoiTypes();
 		for (String category : pointCategories) {
 			CommonPreference<Boolean> categoryPref = rendererHelper.getRoutePointCategoryProperty(category);
-			View itemView = inflater.inflate(R.layout.list_item_icon_and_switch_small, null, false);
+			View itemView = inflater.inflate(R.layout.list_item_icon_and_switch_small, container, false);
 			AndroidUtils.setBackground(itemView, UiUtilities.getSelectableDrawable(app));
 			String name;
 			PoiType poiType = poiTypes.getTextPoiAdditionalByKey(category);
@@ -360,6 +406,14 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 			});
 			container.addView(itemView);
 		}
+	}
+
+	private TextViewEx createEmptyView(@NonNull ViewGroup container, @StringRes int titleId) {
+		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
+		TextViewEx emptyView = (TextViewEx) inflater.inflate(R.layout.bottom_sheet_item_title, container, false);
+		emptyView.setGravity(Gravity.CENTER);
+		emptyView.setText(titleId);
+		return emptyView;
 	}
 
 	private void setupBottomEmptySpace(@NonNull View view) {
