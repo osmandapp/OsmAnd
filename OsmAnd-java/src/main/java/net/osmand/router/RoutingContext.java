@@ -827,6 +827,7 @@ public class RoutingContext {
 						if (reverseWaySearch) {
 							if (segment.reverseSearch == null) {
 								segment.reverseSearch = new RouteSegment(ro, segment.getSegmentStart());
+								segment.reverseSearch.reverseSearchFlag = true;
 								segment.reverseSearch.reverseSearch = segment;
 								segment.reverseSearch.nextLoaded = segment.nextLoaded;
 							}

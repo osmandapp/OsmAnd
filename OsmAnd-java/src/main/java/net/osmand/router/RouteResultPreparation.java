@@ -443,9 +443,9 @@ public class RouteResultPreparation {
 			// Get results from opposite direction roads
 			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment.parentRoute : finalSegment.opposite;
 			Set<String> unique = new TreeSet<String>();
-			while (segment != null) {
+			while (segment != null && segment!= RouteSegment.NULL) {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentEnd(), segment.getSegmentStart());
-				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
+				float parentRoutingTime = segment.getParentRoute() != null && segment.getParentRoute() != RouteSegment.NULL ? segment.getParentRoute().distanceFromStart : 0;
 				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
 				// TODO delete
 				System.out.println(segment);
@@ -460,10 +460,16 @@ public class RouteResultPreparation {
 			// reverse it just to attach good direction roads
 			Collections.reverse(result);
 			segment = finalSegment.reverseWaySearch ? finalSegment.opposite : finalSegment.parentRoute;
-			while (segment != null) {
+			while (segment != null && segment!= RouteSegment.NULL) {
 				RouteSegmentResult res = new RouteSegmentResult(segment.road, segment.getSegmentStart(), segment.getSegmentEnd());
-				float parentRoutingTime = segment.getParentRoute() != null ? segment.getParentRoute().distanceFromStart : 0;
+				float parentRoutingTime = segment.getParentRoute() != null && segment.getParentRoute() != RouteSegment.NULL ? segment.getParentRoute().distanceFromStart : 0;
 				res.setRoutingTime(segment.distanceFromStart - parentRoutingTime);
+				// TODO delete
+				System.out.println(segment);
+				if(!unique.add(segment.toString())) {
+					System.out.println("???");
+					break;	
+				}				
 				segment = segment.getParentRoute();
 				// happens in smart recalculation
 				addRouteSegmentToResult(ctx, result, res, true);
