@@ -21,6 +21,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard;
 import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 
@@ -36,6 +37,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment {
 	private static final String KEY_GPX_FILE_PATH = "gpx_file_path";
 
 	private OsmandApplication app;
+	private GpsFilterHelper gpsFilterHelper;
 	private SelectedGpxFile selectedGpxFile;
 
 	private int toolbarHeight;
@@ -83,6 +85,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
+		gpsFilterHelper = app.getGpsFilterHelper();
 		toolbarHeight = getResources().getDimensionPixelSize(R.dimen.toolbar_height);
 
 		if (savedInstanceState != null && selectedGpxFile == null) {
@@ -99,6 +102,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment {
 	private void restoreSelectedGpxFile(String gpxFilePath) {
 		TrackMenuFragment.loadSelectedGpxFile(requireMapActivity(), gpxFilePath, false, (gpxFile) -> {
 			selectedGpxFile = gpxFile;
+			gpsFilterHelper.setSelectedGpxFile(gpxFile);
 			if (view != null) {
 				initContent();
 			}
@@ -116,6 +120,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment {
 				updateCardsLayout();
 			}
 			if (selectedGpxFile != null) {
+				gpsFilterHelper.setSelectedGpxFile(selectedGpxFile);
 				initContent();
 			}
 		}
@@ -216,6 +221,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitGpsFilterMode();
+		gpsFilterHelper.disableFilter();
 	}
 
 	private void enterGpsFilterMode() {

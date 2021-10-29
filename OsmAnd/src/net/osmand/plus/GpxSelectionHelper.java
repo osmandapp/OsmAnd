@@ -23,6 +23,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
@@ -187,9 +188,15 @@ public class GpxSelectionHelper {
 		if (app == null || app.isApplicationInitializing()) {
 			return false;
 		}
+
+		GpsFilterHelper gpsFilterHelper = app.getGpsFilterHelper();
 		List<GpxDataItem> items = app.getGpxDbHelper().getSplitItems();
 		for (GpxDataItem dataItem : items) {
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(dataItem.getFile().getAbsolutePath());
+			String path = dataItem.getFile().getAbsolutePath();
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
+			if (selectedGpxFile != null && gpsFilterHelper.isSourceOfFilteredGpxFile(selectedGpxFile)) {
+				selectedGpxFile = gpsFilterHelper.getFilteredSelectedGpxFile();
+			}
 			if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);

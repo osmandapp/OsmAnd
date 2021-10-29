@@ -35,7 +35,7 @@ public class GpsFiltersCard extends MapBaseCard {
 	public GpsFiltersCard(@NonNull MapActivity mapActivity, @NonNull SelectedGpxFile selectedGpxFile) {
 		super(mapActivity);
 		this.selectedGpxFile = selectedGpxFile;
-		this.filterHelper = new GpsFilterHelper(app, selectedGpxFile);
+		this.filterHelper = app.getGpsFilterHelper();
 	}
 
 	@Override
@@ -45,14 +45,14 @@ public class GpsFiltersCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
-		setupPointsRatio();
+		updatePointsRatio();
 		setupSmoothingFilter();
 		setupSpeedFilter();
 		setupAltitudeFilter();
 		setupHdopFilter();
 	}
 
-	private void setupPointsRatio() {
+	private void updatePointsRatio() {
 		String pointsString = app.getString(R.string.shared_string_gpx_points);
 		String leftPoints = String.valueOf(filterHelper.getLeftPoints());
 		String totalPoints = String.valueOf(filterHelper.getTotalPoints());
@@ -67,19 +67,19 @@ public class GpsFiltersCard extends MapBaseCard {
 	}
 
 	private void setupSmoothingFilter() {
-		setupFilter(view.findViewById(R.id.smoothing_filter), filterHelper.smoothingFilter);
+		setupFilter(view.findViewById(R.id.smoothing_filter), filterHelper.getSmoothingFilter());
 	}
 
 	private void setupSpeedFilter() {
-		setupFilter(view.findViewById(R.id.speed_filter), filterHelper.speedFilter);
+		setupFilter(view.findViewById(R.id.speed_filter), filterHelper.getSpeedFilter());
 	}
 
 	private void setupAltitudeFilter() {
-		setupFilter(view.findViewById(R.id.altitude_filter), filterHelper.altitudeFilter);
+		setupFilter(view.findViewById(R.id.altitude_filter), filterHelper.getAltitudeFilter());
 	}
 
 	private void setupHdopFilter() {
-		setupFilter(view.findViewById(R.id.hdop_filter), filterHelper.hdopFilter);
+		setupFilter(view.findViewById(R.id.hdop_filter), filterHelper.getHdopFilter());
 	}
 
 	private void setupFilter(View container, GpsFilter filter) {
@@ -100,7 +100,7 @@ public class GpsFiltersCard extends MapBaseCard {
 		});
 
 		setupSlider(container, filter);
-		updateDisplayedNumbers(container, filter);
+		updateDisplayedFilterNumbers(container, filter);
 
 		TextView minFilterValue = container.findViewById(R.id.min_filter_value);
 		minFilterValue.setText(filter.getFormattedStyledValue(filter.getMinValue()));
@@ -134,7 +134,9 @@ public class GpsFiltersCard extends MapBaseCard {
 				List<Float> values = rangeSlider.getValues();
 				if (fromUser && values.size() == 2) {
 					filter.updateValues((values.get(0)), values.get(1));
-					updateDisplayedNumbers(container, filter);
+					updateDisplayedFilterNumbers(container, filter);
+					app.getGpsFilterHelper().filterGpxFile();
+					updatePointsRatio();
 				}
 			});
 			UiUtilities.setupSlider(rangeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), false);
@@ -145,14 +147,16 @@ public class GpsFiltersCard extends MapBaseCard {
 			slider.addOnChangeListener((slider1, value, fromUser) -> {
 				if (fromUser) {
 					filter.updateValue((slider.getValue()));
-					updateDisplayedNumbers(container, filter);
+					updateDisplayedFilterNumbers(container, filter);
+					app.getGpsFilterHelper().filterGpxFile();
+					updatePointsRatio();
 				}
 			});
 			UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode));
 		}
 	}
 
-	private void updateDisplayedNumbers(View container, GpsFilter filter) {
+	private void updateDisplayedFilterNumbers(View container, GpsFilter filter) {
 		TextView title = container.findViewById(R.id.filter_title);
 		title.setText(filter.getFilterTitle());
 

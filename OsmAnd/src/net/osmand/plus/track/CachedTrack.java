@@ -42,6 +42,11 @@ public class CachedTrack {
 		this.selectedGpxFile = selectedGpxFile;
 	}
 
+	@NonNull
+	public SelectedGpxFile getSelectedGpxFile() {
+		return selectedGpxFile;
+	}
+
 	public List<RouteSegmentResult> getCachedRouteSegments(int nonEmptySegmentIdx) {
 		GPXFile gpxFile = selectedGpxFile.getGpxFile();
 

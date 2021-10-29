@@ -6,15 +6,23 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.GPXUtilities.Track;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
@@ -24,24 +32,164 @@ import androidx.annotation.StringRes;
 public class GpsFilterHelper {
 
 	private final OsmandApplication app;
-	private final SelectedGpxFile selectedGpxFile;
 
-	public final SmoothingFilter smoothingFilter;
-	public final SpeedFilter speedFilter;
-	public final AltitudeFilter altitudeFilter;
-	public final HdopFilter hdopFilter;
+	private SelectedGpxFile sourceSelectedGpxFile;
+	private final SelectedGpxFile filteredSelectedGpxFile = new SelectedGpxFile();
+
+	private SmoothingFilter smoothingFilter;
+	private SpeedFilter speedFilter;
+	private AltitudeFilter altitudeFilter;
+	private HdopFilter hdopFilter;
 
 	private int leftPoints;
 	private int totalPoints;
 
-	public GpsFilterHelper(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
+	public GpsFilterHelper(@NonNull OsmandApplication app) {
 		this.app = app;
-		this.selectedGpxFile = selectedGpxFile;
+	}
 
-		this.smoothingFilter = new SmoothingFilter(app, selectedGpxFile);
-		this.speedFilter = new SpeedFilter(app, selectedGpxFile);
-		this.altitudeFilter = new AltitudeFilter(app, selectedGpxFile);
-		this.hdopFilter = new HdopFilter(app, selectedGpxFile);
+	public void setSelectedGpxFile(@NonNull SelectedGpxFile selectedGpxFile) {
+		sourceSelectedGpxFile = selectedGpxFile;
+
+		smoothingFilter = new SmoothingFilter(app, selectedGpxFile);
+		speedFilter = new SpeedFilter(app, selectedGpxFile);
+		altitudeFilter = new AltitudeFilter(app, selectedGpxFile);
+		hdopFilter = new HdopFilter(app, selectedGpxFile);
+
+		filterGpxFile();
+	}
+
+	@NonNull
+	public SelectedGpxFile getFilteredSelectedGpxFile() {
+		return filteredSelectedGpxFile;
+	}
+
+	public boolean isEnabled() {
+		return sourceSelectedGpxFile != null;
+	}
+
+	public boolean isSourceOfFilteredGpxFile(@NonNull SelectedGpxFile selectedGpxFile) {
+		GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GPXFile filteredGpxFile = filteredSelectedGpxFile.getGpxFile();
+		return filteredGpxFile != null && gpxFile != null
+				&& filteredGpxFile.path.equals(gpxFile.path)
+				&& !selectedGpxFile.equals(filteredSelectedGpxFile);
+	}
+
+	public void disableFilter() {
+		sourceSelectedGpxFile = null;
+
+		filteredSelectedGpxFile.getModifiablePointsToDisplay().clear();
+		GPXFile filteredGpxFile = filteredSelectedGpxFile.getGpxFile();
+		if (filteredGpxFile != null) {
+			filteredGpxFile.tracks.clear();
+		}
+	}
+
+	public List<SelectedGpxFile> replaceWithFilteredTrack(@NonNull List<SelectedGpxFile> selectedGpxFiles) {
+		if (filteredSelectedGpxFile.getGpxFile() == null) {
+			return selectedGpxFiles;
+		} else if (selectedGpxFiles.size() == 0) {
+			return Collections.singletonList(filteredSelectedGpxFile);
+		}
+
+		List<SelectedGpxFile> tempList = new ArrayList<>(selectedGpxFiles.size());
+		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
+			if (Algorithms.objectEquals(selectedGpxFile.getGpxFile().path, filteredSelectedGpxFile.getGpxFile().path)) {
+				tempList.add(filteredSelectedGpxFile);
+			} else {
+				tempList.add(selectedGpxFile);
+			}
+		}
+		return tempList;
+	}
+
+	public void filterGpxFile() {
+		GPXFile filteredGpxFile = copyGpxFile(sourceSelectedGpxFile.getGpxFile());
+
+		leftPoints = 0;
+		totalPoints = 0;
+
+		GPXFile sourceGpxFile = sourceSelectedGpxFile.getGpxFile();
+		for (Track track : sourceGpxFile.tracks) {
+
+			Track filteredTrack = copyTrack(track);
+
+			for (TrkSegment segment : track.segments) {
+
+				if (segment.generalSegment) {
+					continue;
+				}
+
+				TrkSegment filteredSegment = copySegment(segment);
+
+				double cumulativeDistance = 0;
+				WptPt previousPoint = null;
+				List<WptPt> points = segment.points;
+
+				for (int i = 0; i < points.size(); i++) {
+					WptPt point = points.get(i);
+
+					if (previousPoint != null) {
+						cumulativeDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, point.lat, point.lon);
+					}
+					boolean firstOrLast = i == 0 || i + 1 == points.size();
+
+					if (acceptPoint(point, totalPoints, cumulativeDistance, firstOrLast)) {
+						filteredSegment.points.add(point);
+						leftPoints++;
+						cumulativeDistance = 0;
+					}
+
+					totalPoints++;
+					previousPoint = point;
+				}
+
+				if (filteredSegment.points.size() != 0) {
+					filteredTrack.segments.add(filteredSegment);
+				}
+			}
+
+			if (filteredTrack.segments.size() != 0) {
+				filteredGpxFile.tracks.add(filteredTrack);
+			}
+		}
+
+		filteredSelectedGpxFile.setGpxFile(filteredGpxFile, app);
+	}
+
+	private GPXFile copyGpxFile(GPXFile source) {
+		GPXFile copy = new GPXFile(Version.getFullVersion(app));
+		copy.author = source.author;
+		copy.metadata = source.metadata;
+		copy.addPoints(source.getPoints());
+		copy.routes = source.routes;
+		copy.path = source.path;
+		copy.hasAltitude = source.hasAltitude;
+		copy.modifiedTime = System.currentTimeMillis();
+		return copy;
+	}
+
+	private Track copyTrack(Track source) {
+		Track copy = new Track();
+		copy.name = source.name;
+		copy.desc = source.desc;
+		return copy;
+	}
+
+	private TrkSegment copySegment(TrkSegment source) {
+		TrkSegment copy = new TrkSegment();
+		copy.name = source.name;
+		copy.routeSegments = source.routeSegments;
+		copy.routeTypes = source.routeTypes;
+		return copy;
+	}
+
+	private boolean acceptPoint(WptPt point, int pointIndex, double distance, boolean firstOrLast) {
+		return speedFilter.acceptPoint(point, pointIndex, distance)
+				&& altitudeFilter.acceptPoint(point, pointIndex, distance)
+				&& hdopFilter.acceptPoint(point, pointIndex, distance)
+				&& (firstOrLast || smoothingFilter.acceptPoint(point, pointIndex, distance));
 	}
 
 	public int getLeftPoints() {
@@ -52,11 +200,26 @@ public class GpsFilterHelper {
 		return totalPoints;
 	}
 
-	public abstract class GpsFilter<T extends Number> {
+	public SmoothingFilter getSmoothingFilter() {
+		return smoothingFilter;
+	}
+
+	public SpeedFilter getSpeedFilter() {
+		return speedFilter;
+	}
+
+	public AltitudeFilter getAltitudeFilter() {
+		return altitudeFilter;
+	}
+
+	public HdopFilter getHdopFilter() {
+		return hdopFilter;
+	}
+
+	public static abstract class GpsFilter<T extends Number> {
 
 		protected static final int SPAN_FLAGS = Spanned.SPAN_EXCLUSIVE_INCLUSIVE;
 
-		protected final SelectedGpxFile selectedGpxFile;
 		protected final GPXTrackAnalysis analysis;
 		protected final Map<String, String> extensions;
 
@@ -70,7 +233,6 @@ public class GpsFilterHelper {
 		protected final StyleSpan boldSpan;
 
 		public GpsFilter(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
-			this.selectedGpxFile = selectedGpxFile;
 			this.analysis = selectedGpxFile.getTrackAnalysis(app);
 			this.extensions = selectedGpxFile.getGpxFile().getExtensionsToRead();
 
@@ -127,7 +289,7 @@ public class GpsFilterHelper {
 
 		public abstract boolean isRangeSupported();
 
-		public abstract boolean accept(@NonNull WptPt point);
+		public abstract boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint);
 
 		public abstract T getMinValue();
 
@@ -217,8 +379,8 @@ public class GpsFilterHelper {
 		}
 
 		@Override
-		public boolean accept(@NonNull WptPt point) {
-			return true; // todo gps
+		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
+			return getSelectedMaxValue() == 0 || distanceToLastSurvivedPoint > getSelectedMaxValue();
 		}
 
 		@Override
@@ -294,9 +456,9 @@ public class GpsFilterHelper {
 		}
 
 		@Override
-		public boolean accept(@NonNull WptPt point) {
-			return false;
-			// todo gps
+		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
+			float speed = transformSpeed(analysis.speedData.get(pointIndex).speed);
+			return getSelectedMinValue() <= speed && speed <= getSelectedMaxValue();
 		}
 
 		@Override
@@ -394,8 +556,9 @@ public class GpsFilterHelper {
 		}
 
 		@Override
-		public boolean accept(@NonNull WptPt point) {
-			return false; // todo gps
+		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
+			float altitude = analysis.elevationData.get(pointIndex).elevation;
+			return getSelectedMinValue() <= altitude && altitude <= getSelectedMaxValue();
 		}
 
 		@Override
@@ -485,8 +648,8 @@ public class GpsFilterHelper {
 		}
 
 		@Override
-		public boolean accept(@NonNull WptPt point) {
-			return false; // todo gps
+		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
+			return point.hdop <= getSelectedMaxValue();
 		}
 
 		@Override
