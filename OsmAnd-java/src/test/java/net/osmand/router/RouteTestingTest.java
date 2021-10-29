@@ -92,6 +92,7 @@ public class RouteTestingTest {
 			Set<Long> reachedSegments = new TreeSet<Long>();
 			Assert.assertNotNull(routeSegments);
 			int prevSegment = -1;
+			System.out.println("*planRoadDirection* " + planRoadDirection);
 			for (int i = 0; i <= routeSegments.size(); i++) {
 				if (i == routeSegments.size() || routeSegments.get(i).getTurnType() != null) {
 					if (prevSegment >= 0) {
@@ -111,15 +112,15 @@ public class RouteTestingTest {
 				switch (es.getValue()) {
 					case "false":
 						Assert.assertFalse("Expected segment " + (es.getKey()) + " was wrongly reached in route segments "
-								+ reachedSegments, reachedSegments.contains(es.getKey()));
+								+ reachedSegments + ", planRoadDirection " + planRoadDirection, reachedSegments.contains(es.getKey()));
 						break;
 					case "true":
 						Assert.assertTrue("Expected segment " + (es.getKey()) + " weren't reached in route segments "
-								+ reachedSegments, reachedSegments.contains(es.getKey()));
+								+ reachedSegments + ", planRoadDirection " + planRoadDirection, reachedSegments.contains(es.getKey()));
 						break;
 					case "visitedSegments":
 						Assert.assertTrue("Expected segments visit " + (es.getKey()) + " less then actually visited segments "
-								+ ctx.getVisitedSegments(), ctx.getVisitedSegments() < es.getKey());
+								+ ctx.getVisitedSegments() + ", planRoadDirection " + planRoadDirection, ctx.getVisitedSegments() < es.getKey());
 						break;
 				}
 			}

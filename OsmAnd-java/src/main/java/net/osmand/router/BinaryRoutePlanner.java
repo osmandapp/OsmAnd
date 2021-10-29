@@ -80,8 +80,7 @@ public class BinaryRoutePlanner {
 		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
 		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
 
-		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments, 
-				visitedDirectSegments, visitedOppositeSegments);
+		initQueuesWithStartEnd(ctx, start, end, recalculationEnd, graphDirectSegments, graphReverseSegments);
 
 		// Extract & analyze segment with min(f(x)) from queue while final segment is not found
 		boolean forwardSearch = true;
@@ -253,10 +252,9 @@ public class BinaryRoutePlanner {
 
 
 	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegment start, RouteSegment end,
-			RouteSegment recalculationEnd, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
-			TLongObjectHashMap<RouteSegment> visitedDirectSegments, TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
-		RouteSegment startPos = initRouteSegment(ctx, start, true, false);
-		RouteSegment startNeg = initRouteSegment(ctx, start, false, false);
+			RouteSegment recalculationEnd, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments) {
+		RouteSegment startPos = initRouteSegment(ctx, start, true, true);
+		RouteSegment startNeg = initRouteSegment(ctx, start, false, true);
 		RouteSegment endPos = initRouteSegment(ctx, end, true, true);
 		RouteSegment endNeg = initRouteSegment(ctx, end, false, true);
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
@@ -454,7 +452,6 @@ public class BinaryRoutePlanner {
 		RouteSegment currentSegment = null;
 		while (nextCurrentSegment != null) {
 			currentSegment = nextCurrentSegment;
-			nextCurrentSegment = null;
 			
 			// 1. calculate obstacle for passing this segment 
 			float segmentAndObstaclesTime = (float) calculateRouteSegmentTime(ctx, reverseWaySearch, currentSegment);
@@ -785,7 +782,7 @@ public class BinaryRoutePlanner {
 			}
 			// TODO double check not to add itself (doesn't look correct)
 			// TODO too many segments on 10. Longer route preferred
-			if (//next.getSegmentStart() == currentSegment.getSegmentEnd() && 
+			if (next.getSegmentStart() == currentSegment.getSegmentStart() &&
 					next.getRoad().getId() == currentSegment.getRoad().getId()) {
 				// skip itself
 			} else if (!doNotAddIntersections) {
