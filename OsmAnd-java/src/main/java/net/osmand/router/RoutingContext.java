@@ -678,10 +678,10 @@ public class RoutingContext {
 	}
 	
 	public void unloadUnusedTiles(long memoryLimit) {
-		// TODO DELETE this check
-		if (true) {
-			return;
-		}
+		// TODO DELETE this check (test with & without it carefully !)
+//		if (true) {
+//			return;
+//		}
 		float desirableSize = memoryLimit * 0.7f;
 		List<RoutingSubregionTile> list = new ArrayList<RoutingSubregionTile>(subregionTiles.size() / 2);
 		int loaded = 0;
@@ -827,7 +827,6 @@ public class RoutingContext {
 						if (reverseWaySearch) {
 							if (segment.reverseSearch == null) {
 								segment.reverseSearch = new RouteSegment(ro, segment.getSegmentStart());
-								segment.reverseSearch.reverseSearchFlag = true;
 								segment.reverseSearch.reverseSearch = segment;
 								segment.reverseSearch.nextLoaded = segment.nextLoaded;
 							}

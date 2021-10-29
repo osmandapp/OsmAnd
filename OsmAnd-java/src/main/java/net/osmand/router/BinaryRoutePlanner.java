@@ -787,8 +787,7 @@ public class BinaryRoutePlanner {
 			if (nextIterator != null) {
 				next = nextIterator.next();
 			}
-			// TODO double check not to add itself (doesn't look correct)
-			// TODO too many segments on 10. Longer route preferred
+			// TODO - (OK) double check not to add itself (doesn't look correct)
 			if (next.getSegmentStart() == currentSegment.getSegmentEnd() && 
 					next.getRoad().getId() == currentSegment.getRoad().getId()) {
 				// skip itself
@@ -816,7 +815,6 @@ public class BinaryRoutePlanner {
 		return nextCurrentSegment;
 	}
 
-	@SuppressWarnings("unused")
 	private void processOneRoadIntersection(RoutingContext ctx, boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, RouteSegment segment, RouteSegment next) {
 		if (next != null) {
@@ -930,7 +928,6 @@ public class BinaryRoutePlanner {
 		RouteSegment next = null;
 		RouteSegment nextLoaded = null;
 		RouteSegment oppositeDirection = null;
-		boolean reverseSearchFlag = false; // TODO debug
 		RouteSegment reverseSearch = null;
 
 		// search context (needed for searching route)
@@ -971,7 +968,6 @@ public class BinaryRoutePlanner {
 						oppositeDirection = new RouteSegment(road, segStart,
 								segEnd > segStart ? (segStart - 1) : (segStart + 1));
 						oppositeDirection.oppositeDirection = this;
-						oppositeDirection.reverseSearchFlag = reverseSearchFlag;
 					}
 					return oppositeDirection;
 				}
