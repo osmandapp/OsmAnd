@@ -278,9 +278,8 @@ public class GpsFilterFragment extends ContextMenuScrollFragment {
 
 	private void adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getMapView();
-			GPXFile gpxFile = selectedGpxFile.getGpxFile();
+		GPXFile gpxFile = gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile();
+		if (mapActivity != null && gpxFile != null) {
 			QuadRect r = gpxFile.getRect();
 
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
