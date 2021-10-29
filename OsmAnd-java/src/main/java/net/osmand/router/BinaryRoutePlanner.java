@@ -28,7 +28,7 @@ public class BinaryRoutePlanner {
 
 	private static final int ROUTE_POINTS = 11;
 	private static final boolean ASSERT_CHECKS = true;
-	private static final boolean TRACE_ROUTING = true;
+	private static final boolean TRACE_ROUTING = false;
 	private static final int TEST_ID = 50725;
 	private static final boolean TEST_SPECIFIC = true;
 
@@ -537,7 +537,7 @@ public class BinaryRoutePlanner {
 
 
 	private boolean checkViaRestrictions(RouteSegment from, RouteSegment to) {
-		if (from != null && to != null && from != RouteSegment.NULL && to != RouteSegment.NULL) {
+		if (from != null && to != null) {
 			long fid = to.getRoad().getId();
 			for (int i = 0; i < from.getRoad().getRestrictionLength(); i++) {
 				long id = from.getRoad().getRestrictionId(i);
@@ -560,8 +560,7 @@ public class BinaryRoutePlanner {
 	}
 
 	private RouteSegment getParentDiffId(RouteSegment s) {
-		while (!(s.getParentRoute() == null || s.getParentRoute() == RouteSegment.NULL) && 
-				s.getParentRoute().getRoad().getId() == s.getRoad().getId()) {
+		while (s.getParentRoute() != null && s.getParentRoute().getRoad().getId() == s.getRoad().getId()) {
 			s = s.getParentRoute();
 		}
 		return s.getParentRoute();
@@ -620,13 +619,13 @@ public class BinaryRoutePlanner {
 		RouteDataObject road = segment.getRoad();
 		RouteSegment parent = getParentDiffId(segment);
 		if (!reverseWay && road.getRestrictionLength() == 0 &&
-				(parent == null || parent == RouteSegment.NULL|| parent.getRoad().getRestrictionLength() == 0)) {
+				(parent == null || parent.getRoad().getRestrictionLength() == 0)) {
 			return false;
 		}
 		ctx.segmentsToVisitPrescripted.clear();
 		ctx.segmentsToVisitNotForbidden.clear();
 		processRestriction(ctx, inputNext, reverseWay, 0, road);
-		if (parent != null && parent != RouteSegment.NULL) {
+		if (parent != null) {
 			processRestriction(ctx, inputNext, reverseWay, road.id, parent.getRoad());
 		}
 		return true;
@@ -746,7 +745,7 @@ public class BinaryRoutePlanner {
 				if (nextCurrentSegment == null) { 
 					// end of route (-1 or length + 1)
 					directionAllowed = false;
-				} else if(nextCurrentSegment.getParentRoute() != null && 
+				} else if(nextCurrentSegment.isSegmentAttachedToStart() && 
 						ctx.roadPriorityComparator(nextCurrentSegment.distanceFromStart,
 								nextCurrentSegment.distanceToEnd, currentSegment.distanceFromStart, distanceToEnd) <= 0) {
 					directionAllowed = false;
@@ -858,7 +857,7 @@ public class BinaryRoutePlanner {
 					toAdd = false;
 				}
 			}
-			if (toAdd && (next.getParentRoute() == null || ctx.roadPriorityComparator(next.distanceFromStart,
+			if (toAdd && (!next.isSegmentAttachedToStart() || ctx.roadPriorityComparator(next.distanceFromStart,
 					next.distanceToEnd, distFromStart, segment.distanceToEnd) > 0)) {
 			//if (toAdd && next.getParentRoute() == null) {
 				next.distanceFromStart = distFromStart;
@@ -978,9 +977,13 @@ public class BinaryRoutePlanner {
 				}
 			}
 		}
+		
+		public boolean isSegmentAttachedToStart() {
+			return parentRoute != null;
+		}
 
 		public RouteSegment getParentRoute() {
-			return parentRoute;
+			return parentRoute == NULL ? null : parentRoute;
 		}
 
 		public boolean isPositive() {
