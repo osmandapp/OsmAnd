@@ -4033,4 +4033,8 @@
     <string name="poi_ticket_validator">مصادق التذكرة</string>
     <string name="poi_geoglyph">جيوغليف</string>
     <string name="poi_satellite_dish">طبق استقبال أقمار صناعية</string>
+    <string name="poi_tobacco_filter">تبغ</string>
+    <string name="poi_butcher_type">نوع اللحم الأساسي</string>
+    <string name="poi_coffee_filter">قهوة</string>
+    <string name="poi_ice_cream_filter">بوظة</string>
 </resources>
