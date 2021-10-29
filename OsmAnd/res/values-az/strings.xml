@@ -1418,7 +1418,7 @@
     <string name="routing_attr_allow_motorway_name">Avtomagistrallara icazə ver</string>
     <string name="routing_attr_allow_motorway_description">Avtomagistrallara icazə verir.</string>
     <string name="trip_rec_notification_settings">Səyahət qeydetmə (məlumat yoxdur)</string>
-    <string name="trip_rec_notification_settings_desc">Səyahət qeydinə başlamağa imkan verən sistem bildirişi göstər.</string>
+    <string name="trip_rec_notification_settings_desc">Səyahət qeydini başlatmağa imkan verən sistem bildirişi göstər.</string>
     <string name="save_track_min_speed">Minimum qeydiyyat sürəti</string>
     <string name="new_filter_desc">Yeni filtr üçün ad daxil edin. Bu, sizin “Kateqoriyalar” bölmənizə əlavə olunur.</string>
     <string name="donation_to_osm">OSM cəmiyyəti üçün ianə</string>
@@ -2575,4 +2575,19 @@
     <string name="edit_online_source">Onlayn mənbəyə düzəliş et</string>
     <string name="create_edit_poi">POI yarat və ya düzəliş et</string>
     <string name="quick_action_edit_actions">Fəaliyyətlərə düzəliş et</string>
+    <string name="safe_settings">Təhlükəsiz</string>
+    <string name="user_points">İstifadəçi nöqtələri</string>
+    <string name="add_new_rule">Yeni qayda əlavə et</string>
+    <string name="shared_string_not_included">Daxil deyil</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="download_additional_maps">Çatışmayan %1$s xəritələri endirilsin (%2$d MB)\?</string>
+    <string name="rendering_value_black_name">Qara</string>
+    <string name="live_update_frequency_day_variant">Xəritə yeniləmələri hər gün yoxlanılacaq. Növbəti dəfə %1$s %2$s.</string>
+    <string name="shared_string_includes">Daxil olanlar</string>
+    <string name="change_data_storage_full_description">OsmAnd məlumat faylları yeni təyinat yerinə daşınsın\?
+\n%1$s &gt; %2$s</string>
+    <string name="default_speed_setting_title">Standart sürət</string>
+    <string name="rendering_value_browse_map_name">Xəritəyə bax</string>
+    <string name="daynight_descr">Gecə və gündüz rejimi arasında keçidi tənzimləyin.</string>
+    <string name="app_mode_enduro_motorcycle">Enduro motosikleti</string>
 </resources>
