@@ -255,8 +255,11 @@ public class RoutingContext {
 		return ind;
 	}
 	
-	
 	public RouteSegment loadRouteSegment(int x31, int y31, long memoryLimit) {
+		return loadRouteSegment(x31, y31, memoryLimit, false);
+	}
+	
+	public RouteSegment loadRouteSegment(int x31, int y31, long memoryLimit, boolean reverseWaySearch) {
 		long tileId = getRoutingTile(x31, y31, memoryLimit);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 		RouteSegment original = null;
@@ -264,7 +267,7 @@ public class RoutingContext {
 		if (subregions != null) {
 			for (int j = 0; j < subregions.size(); j++) {
 				original = subregions.get(j).loadRouteSegment(x31, y31, this, excludeDuplications, 
-						original, subregions, j);
+						original, subregions, j, reverseWaySearch);
 			}
 		}
 		return original;
@@ -676,7 +679,7 @@ public class RoutingContext {
 	
 	public void unloadUnusedTiles(long memoryLimit) {
 		// TODO DELETE this check
-		if(true) {
+		if (true) {
 			return;
 		}
 		float desirableSize = memoryLimit * 0.7f;
@@ -806,7 +809,8 @@ public class RoutingContext {
 		}
 		
 		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
-				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex) {
+				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex, 
+				boolean reverseWaySearch) {
 			access++;
 			if (routes != null) {
 				long l = (((long) x31) << 31) + (long) y31;
@@ -817,11 +821,20 @@ public class RoutingContext {
 					if (!isExcluded(ro.id, subregions, subregionIndex)
 							&& (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())) {
 						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
-//						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
-//						s.next = original;
-//						original = s;
+						// RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
+						// s.next = original;
+						// original = s;
+						if (reverseWaySearch) {
+							if (segment.reverseSearch == null) {
+								segment.reverseSearch = new RouteSegment(ro, segment.getSegmentStart());
+								segment.reverseSearch.reverseSearch = segment;
+								segment.reverseSearch.nextLoaded = segment.nextLoaded;
+							}
+							segment = segment.reverseSearch;
+						}
 						segment.next = original;
 						original = segment;
+
 					}
 					segment = segment.nextLoaded;
 				}

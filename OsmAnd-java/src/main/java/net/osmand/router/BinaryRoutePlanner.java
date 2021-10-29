@@ -28,7 +28,7 @@ public class BinaryRoutePlanner {
 
 	private static final int ROUTE_POINTS = 11;
 	private static final boolean ASSERT_CHECKS = true;
-	private static final boolean TRACE_ROUTING = true;
+	private static final boolean TRACE_ROUTING = false;
 	private static final int TEST_ID = 50725;
 	private static final boolean TEST_SPECIFIC = true;
 
@@ -222,13 +222,13 @@ public class BinaryRoutePlanner {
 		}
 	}
 
-	public RouteSegment initRouteSegment(final RoutingContext ctx, RouteSegment segment, boolean positiveDirection) {
+	public RouteSegment initRouteSegment(final RoutingContext ctx, RouteSegment segment, boolean positiveDirection, boolean reverseSearchWay) {
 		if (segment.getSegmentStart() == 0 && !positiveDirection && segment.getRoad().getPointsLength() > 0) {
-			segment = loadSameSegment(ctx, segment, 1);
+			segment = loadSameSegment(ctx, segment, 1, reverseSearchWay);
 //		} else if (segment.getSegmentStart() == segment.getRoad().getPointsLength() - 1 && positiveDirection && segment.getSegmentStart() > 0) {
 		// assymetric cause we calculate initial point differently (segmentStart means that point is between ]segmentStart-1, segmentStart]
 		} else if (segment.getSegmentStart() > 0 && positiveDirection) {
-			segment = loadSameSegment(ctx, segment, segment.getSegmentStart() - 1);
+			segment = loadSameSegment(ctx, segment, segment.getSegmentStart() - 1, reverseSearchWay);
 		}
 		if (segment == null) {
 			return null;
@@ -237,10 +237,10 @@ public class BinaryRoutePlanner {
 	}
 
 
-	protected RouteSegment loadSameSegment(final RoutingContext ctx, RouteSegment segment, int ind) {
+	protected RouteSegment loadSameSegment(final RoutingContext ctx, RouteSegment segment, int ind, boolean reverseSearchWay) {
 		int x31 = segment.getRoad().getPoint31XTile(ind);
 		int y31 = segment.getRoad().getPoint31YTile(ind);
-		RouteSegment s = ctx.loadRouteSegment(x31, y31, 0);
+		RouteSegment s = ctx.loadRouteSegment(x31, y31, 0, reverseSearchWay);
 		while (s != null) {
 			if (s.getRoad().getId() == segment.getRoad().getId()) {
 				segment = s;
@@ -255,10 +255,10 @@ public class BinaryRoutePlanner {
 	private void initQueuesWithStartEnd(final RoutingContext ctx, RouteSegment start, RouteSegment end,
 			RouteSegment recalculationEnd, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments, TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
-		RouteSegment startPos = initRouteSegment(ctx, start, true);
-		RouteSegment startNeg = initRouteSegment(ctx, start, false);
-		RouteSegment endPos = initRouteSegment(ctx, end, true);
-		RouteSegment endNeg = initRouteSegment(ctx, end, false);
+		RouteSegment startPos = initRouteSegment(ctx, start, true, false);
+		RouteSegment startNeg = initRouteSegment(ctx, start, false, false);
+		RouteSegment endPos = initRouteSegment(ctx, end, true, true);
+		RouteSegment endNeg = initRouteSegment(ctx, end, false, true);
 		// for start : f(start) = g(start) + h(start) = 0 + h(start) = h(start)
 		if (ctx.config.initialDirection != null) {
 			// mark here as positive for further check
@@ -731,7 +731,7 @@ public class BinaryRoutePlanner {
 		// reassign @distanceToEnd to make it correct for visited segment
 		currentSegment.distanceToEnd = distanceToEnd; 
 		
-		final RouteSegment connectedNextSegment = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - ctx.memoryOverhead);
+		final RouteSegment connectedNextSegment = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - ctx.memoryOverhead, reverseWaySearch);
 		RouteSegment roadIter = connectedNextSegment;
 		boolean directionAllowed = true;
 		boolean singleRoad = true;
@@ -923,6 +923,7 @@ public class BinaryRoutePlanner {
 		RouteSegment next = null;
 		RouteSegment nextLoaded = null;
 		RouteSegment oppositeDirection = null;
+		RouteSegment reverseSearch = null;
 
 		// search context (needed for searching route)
 		// Initially it should be null (!) because it checks was it segment visited before
