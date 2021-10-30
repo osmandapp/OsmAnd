@@ -4406,4 +4406,6 @@
     <string name="safe_settings">Безпечно</string>
     <string name="approx_safe_mode_description">Виконайте апроксимацію gpx, використовуючи повільніший код Android замість нативного.</string>
     <string name="use_external_timestamps_description">Використовувати часові позначки онлайн-маршрутизатора, щоб налаштувати очікуваний час і середню швидкість</string>
+    <string name="shared_string_travelbooks">Путівники</string>
+    <string name="display_route_tracks">Показати треки</string>
 </resources>
