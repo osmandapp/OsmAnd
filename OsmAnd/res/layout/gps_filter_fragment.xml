@@ -45,27 +45,19 @@
 			android:foregroundGravity="fill_horizontal|top"
 			android:foreground="@drawable/bg_contextmenu_shadow">
 
-			<net.osmand.plus.LockableScrollView
-				android:id="@+id/route_menu_bottom_scroll"
+			<LinearLayout
+				android:id="@+id/route_menu_cards_container"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:background="?attr/route_info_bg">
+				android:layout_height="wrap_content"
+				android:background="?attr/route_info_bg"
+				android:orientation="vertical">
 
-				<LinearLayout
-					android:id="@+id/route_menu_cards_container"
+				<androidx.viewpager.widget.ViewPager
+					android:id="@+id/pager"
 					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:background="?attr/route_info_bg"
-					android:orientation="vertical">
+					android:layout_height="match_parent" />
 
-					<androidx.viewpager.widget.ViewPager
-						android:id="@+id/pager"
-						android:layout_width="match_parent"
-						android:layout_height="match_parent" />
-
-				</LinearLayout>
-
-			</net.osmand.plus.LockableScrollView>
+			</LinearLayout>
 
 		</FrameLayout>
 

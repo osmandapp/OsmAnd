@@ -22,8 +22,10 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +37,8 @@ public class GpsFilterHelper {
 
 	private SelectedGpxFile sourceSelectedGpxFile;
 	private final SelectedGpxFile filteredSelectedGpxFile = new SelectedGpxFile();
+
+	private final Set<GpsFilterActionsListener> listeners = new HashSet<>();
 
 	private SmoothingFilter smoothingFilter;
 	private SpeedFilter speedFilter;
@@ -84,6 +88,8 @@ public class GpsFilterHelper {
 		if (filteredGpxFile != null) {
 			filteredGpxFile.tracks.clear();
 		}
+
+		listeners.clear();
 	}
 
 	public List<SelectedGpxFile> replaceWithFilteredTrack(@NonNull List<SelectedGpxFile> selectedGpxFiles) {
@@ -102,6 +108,22 @@ public class GpsFilterHelper {
 			}
 		}
 		return tempList;
+	}
+
+	public void addListener(@NonNull GpsFilterActionsListener listener) {
+		listeners.add(listener);
+	}
+
+	public void resetFilters() {
+		smoothingFilter.reset();
+		speedFilter.reset();
+		altitudeFilter.reset();
+		hdopFilter.reset();
+		filterGpxFile();
+
+		for (GpsFilterActionsListener listener : listeners) {
+			listener.onFiltersReset();
+		}
 	}
 
 	public void filterGpxFile() {
@@ -310,6 +332,14 @@ public class GpsFilterHelper {
 			// Not implemented
 		}
 
+		public void reset() {
+			if (isRangeSupported()) {
+				updateValues(getMinValue().floatValue(), getMaxValue().floatValue());
+			} else {
+				updateValue(getMaxValue().floatValue());
+			}
+		}
+
 		public final T getSelectedMinValue() {
 			return isRangeSupported() ? selectedMinValue : getMinValue();
 		}
@@ -396,6 +426,11 @@ public class GpsFilterHelper {
 		@Override
 		public void updateValue(float maxValue) {
 			selectedMaxValue = ((int) maxValue);
+		}
+
+		@Override
+		public void reset() {
+			updateValue(getMinValue());
 		}
 
 		@Override
@@ -703,5 +738,11 @@ public class GpsFilterHelper {
 		public int getDescriptionId() {
 			return R.string.gps_filter_hdop_desc;
 		}
+	}
+
+	public interface GpsFilterActionsListener {
+
+		void onFiltersReset();
+
 	}
 }

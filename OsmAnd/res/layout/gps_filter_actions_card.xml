@@ -7,6 +7,19 @@
 	android:orientation="vertical"
 	android:background="?attr/list_background_color">
 
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding"
+		android:foreground="@drawable/bg_contextmenu_shadow"
+		android:foregroundGravity="fill_horizontal|top">
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/activity_background_basic" />
+
+	</FrameLayout>
+
 	<LinearLayout
 		android:id="@+id/header"
 		android:layout_width="match_parent"
@@ -65,5 +78,18 @@
 			android:orientation="vertical" />
 
 	</LinearLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/list_header_height"
+		android:foreground="@drawable/bg_contextmenu_shadow"
+		android:foregroundGravity="fill_horizontal|top">
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/activity_background_basic" />
+
+	</FrameLayout>
 
 </LinearLayout>

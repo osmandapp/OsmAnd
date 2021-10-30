@@ -6,36 +6,35 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 
 import net.osmand.plus.ColorUtilities;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.GpsFilterHelper.GpsFilter;
+import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterActionsListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.util.Algorithms;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 
-public class GpsFiltersCard extends MapBaseCard {
+public class GpsFiltersCard extends MapBaseCard implements GpsFilterActionsListener {
 
-	private final SelectedGpxFile selectedGpxFile;
 	private final GpsFilterHelper filterHelper;
 
-	public GpsFiltersCard(@NonNull MapActivity mapActivity, @NonNull SelectedGpxFile selectedGpxFile) {
+	public GpsFiltersCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
-		this.selectedGpxFile = selectedGpxFile;
-		this.filterHelper = app.getGpsFilterHelper();
+		filterHelper = app.getGpsFilterHelper();
+		filterHelper.addListener(this);
 	}
 
 	@Override
@@ -50,6 +49,7 @@ public class GpsFiltersCard extends MapBaseCard {
 		setupSpeedFilter();
 		setupAltitudeFilter();
 		setupHdopFilter();
+		setupActionsCard();
 	}
 
 	private void updatePointsRatio() {
@@ -165,5 +165,16 @@ public class GpsFiltersCard extends MapBaseCard {
 
 		TextView rightText = container.findViewById(R.id.right_text);
 		rightText.setText(filter.getRightText());
+	}
+
+	private void setupActionsCard() {
+		ViewGroup actionsCardContainer = view.findViewById(R.id.actions_card_container);
+		actionsCardContainer.removeAllViews();
+		actionsCardContainer.addView(new GpsFilterActionsCard(mapActivity).build(mapActivity));
+	}
+
+	@Override
+	public void onFiltersReset() {
+		update();
 	}
 }

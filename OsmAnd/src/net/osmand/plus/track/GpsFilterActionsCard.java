@@ -11,6 +11,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpsFilterHelper;
+import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 
 import java.util.ArrayList;
@@ -23,10 +25,13 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 public class GpsFilterActionsCard extends MapBaseCard {
 
+	private final GpsFilterHelper gpsFilterHelper;
+
 	private final List<BaseBottomSheetItem> actionButtonsItems;
 
 	public GpsFilterActionsCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
+		gpsFilterHelper = app.getGpsFilterHelper();
 		actionButtonsItems = createActionButtons();
 	}
 
@@ -54,7 +59,7 @@ public class GpsFilterActionsCard extends MapBaseCard {
 
 	private void onActionButtonClick(@NonNull ActionButton actionButton) {
 		if (actionButton == ActionButton.RESET_TO_ORIGINAL) {
-			resetGpsFiltersToOriginal();
+			gpsFilterHelper.resetFilters();
 		} else if (actionButton == ActionButton.SAVE_AS_COPY) {
 			saveAsCopy();
 		} else {
@@ -65,10 +70,6 @@ public class GpsFilterActionsCard extends MapBaseCard {
 		if (listener != null) {
 			listener.onCardButtonPressed(this, actionButton.ordinal());
 		}
-	}
-
-	private void resetGpsFiltersToOriginal() {
-		// todo gps
 	}
 
 	private void saveAsCopy() {

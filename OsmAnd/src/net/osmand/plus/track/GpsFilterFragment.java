@@ -143,9 +143,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment {
 		closeButton.setImageResource(AndroidUtils.getNavigationIconResId(toolbar.getContext()));
 
 		View resetToOriginalButton = toolbar.findViewById(R.id.reset_to_original_button);
-		resetToOriginalButton.setOnClickListener(v -> {
-			// todo
-		});
+		resetToOriginalButton.setOnClickListener(v -> gpsFilterHelper.resetFilters());
 
 		View scrollToActionsButton = toolbar.findViewById(R.id.scroll_to_actions_button);
 		scrollToActionsButton.setOnClickListener(v -> {
