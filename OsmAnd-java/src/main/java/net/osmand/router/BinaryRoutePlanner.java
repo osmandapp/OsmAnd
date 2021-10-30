@@ -845,19 +845,20 @@ public class BinaryRoutePlanner {
 				// 1. when we underestimate distanceToEnd - wrong h() of A*
 				// 2. because we process not small segments but the whole road, it could be that
 				// deviation from the road is faster than following the whole road itself!
-				if (distFromStart < visIt.distanceFromStart  ) { // TODO ??? && next.getParentRoute() == null
-					// TODO can we add again ? without breaking final segment
-					// Here it's not very legitimate cause we need to go up to final segment & decrease final time
+				if (distFromStart < visIt.distanceFromStart) { // TODO ??? && next.getParentRoute() == null
 					double routeSegmentTime = calculateRouteSegmentTime(ctx, reverseWaySearch, visIt);
 					if (distFromStart + routeSegmentTime < visIt.distanceFromStart) {
+						// TODO can we add again ? without breaking final segment
+						// Here it's not very legitimate cause we need to go up to final segment & decrease final time
+						toAdd = true;
 						if (ctx.config.heuristicCoefficient <= 1) {
-							System.err.println("! Alert distance from start " + distFromStart + " < "
+							System.err.println("! Alert distance put: " + distFromStart + " < "
 									+ visIt.distanceFromStart + ": " + next + " - " + visIt);
 						}
-//						visIt.setParentRoute(segment);
-//						visIt.distanceFromStart = distFromStart;
-//						visIt.distanceToEnd = segment.distanceToEnd;
-						toAdd = true;
+						// TODO is it needed here (works with and without)s?
+						visIt.setParentRoute(segment);
+						visIt.distanceFromStart = (float) (distFromStart + routeSegmentTime);
+						visIt.distanceToEnd = segment.distanceToEnd;
 					}
 				}
 				
