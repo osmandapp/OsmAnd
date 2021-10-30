@@ -4180,4 +4180,14 @@
     <string name="poi_heating_yes">Ja</string>
     <string name="poi_heating_no">Nein</string>
     <string name="poi_heating_fireplace">Feuerstelle</string>
+    <string name="poi_lgbtq_primary">LGBTQ: Primär</string>
+    <string name="poi_lgbtq_only">LGBTQ ausschließlich</string>
+    <string name="poi_generator_type_boiler">Generatortyp: Dampfkessel</string>
+    <string name="poi_heating_stove">Herd</string>
+    <string name="poi_heating_district_heating">Fernwärme</string>
+    <string name="poi_heating_gas">Gas</string>
+    <string name="poi_heating_radiator">Heizkörper</string>
+    <string name="poi_fridge_yes">Ja</string>
+    <string name="poi_fridge_no">Nein</string>
+    <string name="poi_fumarole">Fumarole</string>
 </resources>

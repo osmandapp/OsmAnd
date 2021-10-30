@@ -1308,7 +1308,7 @@
     <string name="traffic_warning_stop">Panneau stop</string>
     <string name="traffic_warning_calming">Ralentisseur</string>
     <string name="traffic_warning_speed_camera">Radar de vitesse</string>
-    <string name="traffic_warning">Alerte de circulation</string>
+    <string name="traffic_warning">Éléments sur la route</string>
     <string name="local_index_description">Cliquez sur un élément pour voir plus de détails, maintenez appuyé pour désactiver ou supprimer. Données actuellement sur l\'appareil (%1$s libre) :</string>
     <string name="text_size">Taille du texte</string>
     <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un favori</string>
