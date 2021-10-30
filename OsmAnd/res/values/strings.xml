@@ -30,8 +30,8 @@
     <string name="history_preferences_descr">You can turn off logging for each history type.</string>
     <string name="shortcut_start_recording">Start Recording</string>
     <string name="shortcut_navigate_to">Navigate To…</string>
-    <string name="shortcut_navigate_to_work">Work</string>
-    <string name="shortcut_navigate_to_home">Home</string>
+    <string name="shortcut_navigate_to_work">Navigate to work</string>
+    <string name="shortcut_navigate_to_home">Navigate to home</string>
     <string name="android_auto_map_placeholder_title">The map is displayed on the vehicle screen.</string>
     <string name="android_auto_map_placeholder_descr">Disconnect your device from Android Auto to view the map in the app.</string>
     <string name="android_auto_purchase_request_title">Purchase OsmAnd Pro or Maps+ to use OsmAnd with Android Auto</string>
@@ -904,7 +904,7 @@
     <string name="no_recalculation_setting">No recalculation</string>
     <string name="open_settings">Open settings</string>
     <string name="plugin_disabled">Plugin off</string>
-    <string name="plugin_disabled_descr">This plugin is a separate app, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
+    <string name="plugin_disabled_descr">Remove this plugin if you don't use it.\n\nIt will remain on the device after removing OsmAnd.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="route_recalculation_dist_title">Minimal distance to recalculate route</string>
@@ -3192,7 +3192,7 @@
     <string name="search_villages_and_postcodes">Search for more villages/postcodes</string>
     <string name="rendering_attr_showRoadMaps_description">Choose when to display roads-only maps:</string>
     <string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
-    <string name="safe_mode_description">Run the app in safe mode (using slower Android instead of native code).</string>
+    <string name="safe_mode_description">Run the app in safe mode (using slower Android code).</string>
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The app is running in safe mode (turn it off in \'Settings\').</string>
     <string name="close_changeset">Close changeset</string>
