@@ -1,11 +1,14 @@
 package net.osmand.plus.track;
 
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -15,8 +18,11 @@ import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,13 +72,8 @@ public class GpsFilterActionsCard extends MapBaseCard {
 			gpsFilterHelper.resetFilters();
 		} else if (actionButton == ActionButton.SAVE_AS_COPY) {
 			saveAsCopy();
-		} else {
+		} else if (actionButton == ActionButton.SAVE_INTO_FILE) {
 			saveIntoFile();
-		}
-
-		CardListener listener = getListener();
-		if (listener != null) {
-			listener.onCardButtonPressed(this, actionButton.ordinal());
 		}
 	}
 
@@ -87,7 +88,33 @@ public class GpsFilterActionsCard extends MapBaseCard {
 	}
 
 	private void saveIntoFile() {
-		// todo gps
+		SelectedGpxFile sourceSelectedGpxFile = gpsFilterHelper.getSourceSelectedGpxFile();
+		GPXFile newGpxFile = gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile();
+		if (sourceSelectedGpxFile != null) {
+			sourceSelectedGpxFile.setGpxFile(newGpxFile, app);
+			gpsFilterHelper.setSelectedGpxFile(sourceSelectedGpxFile);
+
+			File outFile = new File(newGpxFile.path);
+			new SaveGpxAsyncTask(outFile, newGpxFile, new SaveGpxListener() {
+
+				@Override
+				public void gpxSavingStarted() {
+				}
+
+				@Override
+				public void gpxSavingFinished(Exception errorMessage) {
+					String toastMessage = errorMessage == null
+							? MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), newGpxFile.path)
+							: errorMessage.getMessage();
+					app.showToastMessage(toastMessage);
+				}
+			}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+			CardListener listener = getListener();
+			if (listener != null) {
+				listener.onCardButtonPressed(this, ActionButton.SAVE_INTO_FILE.ordinal());
+			}
+		}
 	}
 
 	@Override

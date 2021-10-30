@@ -63,6 +63,11 @@ public class GpsFilterHelper {
 		filterGpxFile();
 	}
 
+	@Nullable
+	public SelectedGpxFile getSourceSelectedGpxFile() {
+		return sourceSelectedGpxFile;
+	}
+
 	@NonNull
 	public SelectedGpxFile getFilteredSelectedGpxFile() {
 		return filteredSelectedGpxFile;

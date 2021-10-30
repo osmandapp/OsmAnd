@@ -20,7 +20,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.GpsFilterHelper.GpsFilter;
 import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterActionsListener;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard;
+import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.plus.track.GpsFilterActionsCard.ActionButton;
 
 import java.util.List;
 
@@ -28,7 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
-public class GpsFiltersCard extends MapBaseCard implements GpsFilterActionsListener {
+public class GpsFiltersCard extends MapBaseCard implements GpsFilterActionsListener, CardListener {
 
 	private final GpsFilterHelper filterHelper;
 	private final Fragment target;
@@ -173,11 +176,28 @@ public class GpsFiltersCard extends MapBaseCard implements GpsFilterActionsListe
 	private void setupActionsCard() {
 		ViewGroup actionsCardContainer = view.findViewById(R.id.actions_card_container);
 		actionsCardContainer.removeAllViews();
-		actionsCardContainer.addView(new GpsFilterActionsCard(mapActivity, target).build(mapActivity));
+		GpsFilterActionsCard gpsFilterActionsCard = new GpsFilterActionsCard(mapActivity, target);
+		actionsCardContainer.addView(gpsFilterActionsCard.build(mapActivity));
+		gpsFilterActionsCard.setListener(this);
 	}
 
 	@Override
 	public void onFiltersReset() {
 		update();
+	}
+
+	@Override
+	public void onCardLayoutNeeded(@NonNull BaseCard card) {
+	}
+
+	@Override
+	public void onCardPressed(@NonNull BaseCard card) {
+	}
+
+	@Override
+	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
+		if (card instanceof GpsFilterActionsCard && buttonIndex == ActionButton.SAVE_INTO_FILE.ordinal()) {
+			update();
+		}
 	}
 }
