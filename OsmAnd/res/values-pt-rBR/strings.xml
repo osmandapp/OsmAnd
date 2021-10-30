@@ -4402,4 +4402,6 @@
 \n - Corrigidos diferentes problemas de roteamento
 \n
 \n</string>
+    <string name="shared_string_travelbooks">Livros de viagem</string>
+    <string name="display_route_tracks">Exibir trilhas</string>
 </resources>
