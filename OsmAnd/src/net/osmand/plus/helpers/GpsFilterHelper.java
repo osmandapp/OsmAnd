@@ -17,14 +17,12 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import androidx.annotation.NonNull;
@@ -233,7 +231,6 @@ public class GpsFilterHelper {
 		protected static final int SPAN_FLAGS = Spanned.SPAN_EXCLUSIVE_INCLUSIVE;
 
 		protected final GPXTrackAnalysis analysis;
-		protected final Map<String, String> extensions;
 
 		protected T selectedMinValue;
 		protected T selectedMaxValue;
@@ -246,39 +243,17 @@ public class GpsFilterHelper {
 
 		public GpsFilter(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
 			this.analysis = selectedGpxFile.getTrackAnalysis(app);
-			this.extensions = selectedGpxFile.getGpxFile().getExtensionsToRead();
 
-			selectedMaxValue = parseConfigValueFromGpx(getMaxValueTag(), getMaxValue());
+			this.selectedMaxValue = getMaxValue();
 			if (isRangeSupported()) {
-				selectedMinValue = parseConfigValueFromGpx(getMinValueTag(), getMinValue());
+				this.selectedMinValue = getMinValue();
 			}
-			checkSelectedValues();
 
 			nightMode = app.getDaynightHelper().isNightModeForMapControls();
 
 			blackTextSpan = new ForegroundColorSpan(ColorUtilities.getPrimaryTextColor(app, nightMode));
 			greyTextSpan = new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode));
 			boldSpan = new StyleSpan(Typeface.BOLD);
-		}
-
-		protected T parseConfigValueFromGpx(String tag, T defaultValue) {
-			if (Algorithms.isEmpty(tag)) {
-				return defaultValue;
-			}
-			String stringValue = extensions.get(tag);
-			if (stringValue == null) {
-				return defaultValue;
-			}
-			try {
-				if (defaultValue instanceof Integer) {
-					return ((T) Integer.valueOf(stringValue));
-				} else if (defaultValue instanceof Double) {
-					return ((T) Double.valueOf(stringValue));
-				}
-				return defaultValue;
-			} catch (NumberFormatException e) {
-				return defaultValue;
-			}
 		}
 
 		protected void checkSelectedValues() {
@@ -306,13 +281,6 @@ public class GpsFilterHelper {
 		public abstract T getMinValue();
 
 		public abstract T getMaxValue();
-
-		@Nullable
-		public String getMinValueTag() {
-			return null;
-		}
-
-		public abstract String getMaxValueTag();
 
 		public void updateValue(float maxValue) {
 			// Not implemented
@@ -381,11 +349,9 @@ public class GpsFilterHelper {
 
 	public class SmoothingFilter extends GpsFilter<Integer> {
 
-		private static final String TAG_SMOOTHING_FILTER = "filter_min_distance_between_points";
-
 		public SmoothingFilter(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
 			super(app, selectedGpxFile);
-			selectedMaxValue = parseConfigValueFromGpx(getMaxValueTag(), getMinValue());
+			selectedMaxValue = getMinValue();
 		}
 
 		@Override
@@ -423,11 +389,6 @@ public class GpsFilterHelper {
 			updateValue(getMinValue());
 		}
 
-		@Override
-		public String getMaxValueTag() {
-			return TAG_SMOOTHING_FILTER;
-		}
-
 		@NonNull
 		@Override
 		public String getFormattedValue(@NonNull Integer value) {
@@ -462,9 +423,6 @@ public class GpsFilterHelper {
 	}
 
 	public class SpeedFilter extends GpsFilter<Integer> {
-
-		private static final String TAG_MIN_SPEED = "filter_min_speed";
-		private static final String TAG_MAX_SPEED = "filter_max_speed";
 
 		public SpeedFilter(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
 			super(app, selectedGpxFile);
@@ -506,16 +464,6 @@ public class GpsFilterHelper {
 		private int transformSpeed(float metersPerSecond) {
 			String speedInUnits = OsmAndFormatter.getFormattedSpeed(metersPerSecond, app, false);
 			return (int) Math.ceil(Double.parseDouble(speedInUnits));
-		}
-
-		@Override
-		public String getMinValueTag() {
-			return TAG_MIN_SPEED;
-		}
-
-		@Override
-		public String getMaxValueTag() {
-			return TAG_MAX_SPEED;
 		}
 
 		@NonNull
@@ -563,9 +511,6 @@ public class GpsFilterHelper {
 
 	public class AltitudeFilter extends GpsFilter<Integer> {
 
-		private static final String TAG_MIN_ALTITUDE = "filter_min_altitude";
-		private static final String TAG_MAX_ALTITUDE = "filter_max_altitude";
-
 		public AltitudeFilter(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
 			super(app, selectedGpxFile);
 		}
@@ -601,16 +546,6 @@ public class GpsFilterHelper {
 			selectedMinValue = ((int) minValue);
 			selectedMaxValue = ((int) maxValue);
 			checkSelectedValues();
-		}
-
-		@Override
-		public String getMinValueTag() {
-			return TAG_MIN_ALTITUDE;
-		}
-
-		@Override
-		public String getMaxValueTag() {
-			return TAG_MAX_ALTITUDE;
 		}
 
 		@NonNull
@@ -656,8 +591,6 @@ public class GpsFilterHelper {
 
 	public class HdopFilter extends GpsFilter<Double> {
 
-		private static final String TAG_MAX_HDOP = "filter_max_hdop";
-
 		public HdopFilter(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
 			super(app, selectedGpxFile);
 		}
@@ -692,11 +625,6 @@ public class GpsFilterHelper {
 			selectedMaxValue = ((double) maxValue);
 		}
 
-		@Override
-		public String getMaxValueTag() {
-			return TAG_MAX_HDOP;
-		}
-
 		@NonNull
 		@Override
 		public String getFormattedValue(@NonNull Double value) {
@@ -708,7 +636,7 @@ public class GpsFilterHelper {
 		public CharSequence getFilterTitle() {
 			String gpsPrecision = app.getString(R.string.gps_filter_precision);
 			String title = app.getString(R.string.ltr_or_rtl_combine_via_colon, gpsPrecision,
-					getFormattedValue(getSelectedMaxValue().doubleValue()));
+					getFormattedValue(getSelectedMaxValue()));
 			return styleFilterTitle(title, gpsPrecision.length() + 1);
 		}
 
