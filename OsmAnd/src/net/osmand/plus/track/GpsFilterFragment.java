@@ -1,6 +1,7 @@
 package net.osmand.plus.track;
 
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ColorUtilities;
@@ -22,17 +24,30 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
+import net.osmand.plus.measurementtool.SavedTrackBottomSheetDialogFragment;
+import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+
+import java.io.File;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public class GpsFilterFragment extends ContextMenuScrollFragment {
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.IndexConstants.GPX_INDEX_DIR;
+
+public class GpsFilterFragment extends ContextMenuScrollFragment implements SaveAsNewTrackFragmentListener {
 
 	public static final String TAG = GpsFilterFragment.class.getName();
+
+	private static final Log LOG = PlatformUtil.getLog(GpsFilterFragment.class);
 
 	private static final String KEY_GPX_FILE_PATH = "gpx_file_path";
 
@@ -330,11 +345,67 @@ public class GpsFilterFragment extends ContextMenuScrollFragment {
 		return TAG;
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, @NonNull SelectedGpxFile selectedGpxFile) {
+	@Override
+	public void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack) {
+		if (app != null) {
+			File destFile = app.getAppPath(GPX_INDEX_DIR);
+			if (!Algorithms.isEmpty(folderName) && !destFile.getName().equals(folderName)) {
+				destFile = new File(destFile, folderName);
+			}
+			destFile = new File(destFile, fileName + GPX_FILE_EXT);
+
+			GPXFile filteredGpxFile = gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile();
+			GPXFile gpxFileToWrite = GpsFilterHelper.copyGpxFile(app, filteredGpxFile);
+			gpxFileToWrite.path = destFile.getAbsolutePath();
+
+			new SaveGpxAsyncTask(destFile, gpxFileToWrite, new SaveGpxListener() {
+
+				@Override
+				public void gpxSavingStarted() {
+				}
+
+				@Override
+				public void gpxSavingFinished(Exception errorMessage) {
+					onGpxSavingFinished(gpxFileToWrite, errorMessage, showOnMap);
+				}
+			}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+
+	private void onGpxSavingFinished(GPXFile gpxFile, Exception error, boolean showOnMap) {
+		MapActivity mapActivity = getMapActivity();
+		if (error != null) {
+			LOG.error(error);
+		} else if (mapActivity != null && showOnMap) {
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper()
+					.selectGpxFile(gpxFile, true, false);
+			if (selectedGpxFile != null) {
+				selectedGpxFile.processPoints(app);
+			}
+
+			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+			SavedTrackBottomSheetDialogFragment.showInstance(fragmentManager, gpxFile.path, false);
+		}
+
+		dismiss();
+		Fragment target = getTargetFragment();
+		if (target instanceof TrackMenuFragment) {
+			((TrackMenuFragment) target).dismiss();
+		} else if (target instanceof MeasurementToolFragment) {
+			if (mapActivity != null) {
+				((MeasurementToolFragment) target).dismiss(mapActivity);
+			}
+		}
+	}
+
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
+	                                   @NonNull SelectedGpxFile selectedGpxFile,
+	                                   @NonNull Fragment target) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			GpsFilterFragment fragment = new GpsFilterFragment();
 			fragment.setRetainInstance(true);
 			fragment.selectedGpxFile = selectedGpxFile;
+			fragment.setTargetFragment(target, 0);
 
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)

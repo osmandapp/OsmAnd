@@ -58,10 +58,11 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	public static final String TAG = SaveAsNewTrackBottomSheetDialogFragment.class.getSimpleName();
 	private static final Log LOG = PlatformUtil.getLog(SaveAsNewTrackBottomSheetDialogFragment.class);
+
 	public static final String SHOW_ON_MAP_KEY = "show_on_map_key";
 	public static final String SIMPLIFIED_TRACK_KEY = "simplified_track_key";
-	public static final String FOLDER_NAME_KEY = "folder_name_key";
-	public static final String FILE_NAME_KEY = "file_name_key";
+	public static final String DEST_FOLDER_NAME_KEY = "dest_folder_name_key";
+	public static final String DEST_FILE_NAME_KEY = "dest_file_name_key";
 	public static final String SOURCE_FILE_NAME_KEY = "source_file_name_key";
 	public static final String SOURCE_FOLDER_NAME_KEY = "source_folder_name_key";
 	public static final String SHOW_SIMPLIFIED_BUTTON_KEY = "show_simplified_button_key";
@@ -72,7 +73,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	private TextInputLayout nameTextBox;
 	private RecyclerView recyclerView;
 
-	private String fileName;
+	private String destFileName;
 	private String sourceFileName;
 	private String sourceFolderName;
 	private String folderName;
@@ -93,8 +94,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		if (savedInstanceState != null) {
 			showOnMap = savedInstanceState.getBoolean(SHOW_ON_MAP_KEY);
 			simplifiedTrack = savedInstanceState.getBoolean(SIMPLIFIED_TRACK_KEY);
-			folderName = savedInstanceState.getString(FOLDER_NAME_KEY);
-			fileName = savedInstanceState.getString(FILE_NAME_KEY);
+			folderName = savedInstanceState.getString(DEST_FOLDER_NAME_KEY);
+			destFileName = savedInstanceState.getString(DEST_FILE_NAME_KEY);
 			sourceFileName = savedInstanceState.getString(SOURCE_FILE_NAME_KEY);
 			sourceFolderName = savedInstanceState.getString(SOURCE_FOLDER_NAME_KEY);
 			showSimplifiedButton = savedInstanceState.getBoolean(SHOW_SIMPLIFIED_BUTTON_KEY);
@@ -111,7 +112,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		ColorStateList colorStateList = ColorStateList.valueOf(ColorUtilities.getSecondaryTextColor(app, nightMode));
 		nameTextBox.setDefaultHintTextColor(colorStateList);
 		TextInputEditText nameText = editNameView.findViewById(R.id.name_edit_text);
-		nameText.setText(fileName);
+		nameText.setText(destFileName);
 		nameText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -131,7 +132,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 				.create();
 		this.items.add(editFileName);
 
-		updateFileNameFromEditText(fileName);
+		updateFileNameFromEditText(destFileName);
 
 		int contentPaddingSmall = app.getResources().getDimensionPixelSize(R.dimen.content_padding_small);
 		int contentPaddingHalf = app.getResources().getDimensionPixelSize(R.dimen.content_padding_half);
@@ -144,7 +145,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			public void onClick(View v) {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
-					File dest = getFile(app, folderName, fileName);
+					File dest = getFile(app, folderName, destFileName);
 					MoveGpxFileBottomSheet.showInstance(activity.getSupportFragmentManager(),
 							SaveAsNewTrackBottomSheetDialogFragment.this, dest.getAbsolutePath(), usedOnMap, true);
 				}
@@ -271,30 +272,12 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		outState.putBoolean(SHOW_ON_MAP_KEY, showOnMap);
 		outState.putBoolean(SIMPLIFIED_TRACK_KEY, simplifiedTrack);
-		outState.putString(FOLDER_NAME_KEY, folderName);
-		outState.putString(FILE_NAME_KEY, fileName);
+		outState.putString(DEST_FOLDER_NAME_KEY, folderName);
+		outState.putString(DEST_FILE_NAME_KEY, destFileName);
 		outState.putString(SOURCE_FILE_NAME_KEY, sourceFileName);
 		outState.putString(SOURCE_FOLDER_NAME_KEY, sourceFolderName);
 		outState.putBoolean(SHOW_SIMPLIFIED_BUTTON_KEY, showSimplifiedButton);
 		super.onSaveInstanceState(outState);
-	}
-
-	public static void showInstance(@NonNull FragmentManager fm, @Nullable Fragment targetFragment, String folderName,
-									String fileName, boolean showSimplifiedButton, boolean showOnMap) {
-		try {
-			if (!fm.isStateSaved()) {
-				SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
-				fragment.setTargetFragment(targetFragment, 0);
-				fragment.fileName = fileName;
-				fragment.sourceFileName = fileName;
-				fragment.sourceFolderName = folderName;
-				fragment.showSimplifiedButton = showSimplifiedButton;
-				fragment.showOnMap = showOnMap;
-				fragment.show(fm, TAG);
-			}
-		} catch (RuntimeException e) {
-			LOG.error("showInstance", e);
-		}
 	}
 
 	@Override
@@ -306,8 +289,8 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	protected void onRightBottomButtonClick() {
 		Fragment targetFragment = getTargetFragment();
 		if (targetFragment instanceof SaveAsNewTrackFragmentListener) {
-			((SaveAsNewTrackFragmentListener) targetFragment).onSaveAsNewTrack(folderName, fileName, showOnMap,
-					simplifiedTrack);
+			((SaveAsNewTrackFragmentListener) targetFragment)
+					.onSaveAsNewTrack(folderName, destFileName, showOnMap, simplifiedTrack);
 		} else {
 			renameFile();
 		}
@@ -318,7 +301,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			File source = getFile(app, sourceFolderName, sourceFileName);
-			File dest = getFile(app, folderName, fileName);
+			File dest = getFile(app, folderName, destFileName);
 			if (!source.equals(dest)) {
 				if (dest.exists()) {
 					Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
@@ -365,7 +348,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			nameTextBox.setErrorEnabled(false);
 			rightButtonEnabled = true;
 		}
-		fileName = text;
+		destFileName = text;
 		updateBottomButtons();
 	}
 
@@ -418,9 +401,28 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 
 	@Override
 	public void onTrackFolderAdd(String folderName) {
-		File file = getFile(app, this.folderName, fileName);
+		File file = getFile(app, this.folderName, destFileName);
 		File destFolder = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), folderName);
 		this.onFileMove(file, new File(destFolder, file.getName()));
+	}
+
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @Nullable Fragment targetFragment,
+	                                @Nullable String sourceFolderName,
+	                                @NonNull String sourceFileName,
+	                                @Nullable String destFileName,
+	                                boolean showSimplifiedButton,
+	                                boolean showOnMap) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
+			fragment.setTargetFragment(targetFragment, 0);
+			fragment.sourceFileName = sourceFileName;
+			fragment.sourceFolderName = sourceFolderName;
+			fragment.destFileName = destFileName == null ? sourceFileName : destFileName;
+			fragment.showSimplifiedButton = showSimplifiedButton;
+			fragment.showOnMap = showOnMap;
+			fragment.show(fragmentManager, TAG);
+		}
 	}
 
 	public interface SaveAsNewTrackFragmentListener {

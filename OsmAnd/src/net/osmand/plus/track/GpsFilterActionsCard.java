@@ -13,7 +13,9 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
+import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +24,19 @@ import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.Fragment;
 
 public class GpsFilterActionsCard extends MapBaseCard {
 
 	private final GpsFilterHelper gpsFilterHelper;
-
+	private final Fragment target;
 	private final List<BaseBottomSheetItem> actionButtonsItems;
 
-	public GpsFilterActionsCard(@NonNull MapActivity mapActivity) {
+	public GpsFilterActionsCard(@NonNull MapActivity mapActivity, @NonNull Fragment target) {
 		super(mapActivity);
-		gpsFilterHelper = app.getGpsFilterHelper();
-		actionButtonsItems = createActionButtons();
+		this.gpsFilterHelper = app.getGpsFilterHelper();
+		this.target = target;
+		this.actionButtonsItems = createActionButtons();
 	}
 
 	@Override
@@ -73,7 +77,13 @@ public class GpsFilterActionsCard extends MapBaseCard {
 	}
 
 	private void saveAsCopy() {
-		// todo gps
+		String sourceFilePath = gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile().path;
+		String sourceFileName = Algorithms.getFileNameWithoutExtension(Algorithms.getFileWithoutDirs(sourceFilePath));
+		String destFileName = sourceFileName + "-copy";
+		if (target instanceof SaveAsNewTrackFragmentListener) {
+			SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+					target, null, sourceFileName, destFileName, false, true);
+		}
 	}
 
 	private void saveIntoFile() {

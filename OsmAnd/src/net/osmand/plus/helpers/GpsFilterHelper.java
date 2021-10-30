@@ -73,11 +73,7 @@ public class GpsFilterHelper {
 	}
 
 	public boolean isSourceOfFilteredGpxFile(@NonNull SelectedGpxFile selectedGpxFile) {
-		GPXFile gpxFile = selectedGpxFile.getGpxFile();
-		GPXFile filteredGpxFile = filteredSelectedGpxFile.getGpxFile();
-		return filteredGpxFile != null && gpxFile != null
-				&& filteredGpxFile.path.equals(gpxFile.path)
-				&& !selectedGpxFile.equals(filteredSelectedGpxFile);
+		return selectedGpxFile.equals(sourceSelectedGpxFile);
 	}
 
 	public void disableFilter() {
@@ -101,7 +97,7 @@ public class GpsFilterHelper {
 
 		List<SelectedGpxFile> tempList = new ArrayList<>(selectedGpxFiles.size());
 		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
-			if (Algorithms.objectEquals(selectedGpxFile.getGpxFile().path, filteredSelectedGpxFile.getGpxFile().path)) {
+			if (isSourceOfFilteredGpxFile(selectedGpxFile)) {
 				tempList.add(filteredSelectedGpxFile);
 			} else {
 				tempList.add(selectedGpxFile);
@@ -127,7 +123,8 @@ public class GpsFilterHelper {
 	}
 
 	public void filterGpxFile() {
-		GPXFile filteredGpxFile = copyGpxFile(sourceSelectedGpxFile.getGpxFile());
+		GPXFile filteredGpxFile = copyGpxFile(app, sourceSelectedGpxFile.getGpxFile());
+		filteredGpxFile.tracks.clear();
 
 		leftPoints = 0;
 		totalPoints = 0;
@@ -178,18 +175,6 @@ public class GpsFilterHelper {
 		}
 
 		filteredSelectedGpxFile.setGpxFile(filteredGpxFile, app);
-	}
-
-	private GPXFile copyGpxFile(GPXFile source) {
-		GPXFile copy = new GPXFile(Version.getFullVersion(app));
-		copy.author = source.author;
-		copy.metadata = source.metadata;
-		copy.addPoints(source.getPoints());
-		copy.routes = source.routes;
-		copy.path = source.path;
-		copy.hasAltitude = source.hasAltitude;
-		copy.modifiedTime = System.currentTimeMillis();
-		return copy;
 	}
 
 	private Track copyTrack(Track source) {
@@ -738,6 +723,19 @@ public class GpsFilterHelper {
 		public int getDescriptionId() {
 			return R.string.gps_filter_hdop_desc;
 		}
+	}
+
+	public static GPXFile copyGpxFile(OsmandApplication app, GPXFile source) {
+		GPXFile copy = new GPXFile(Version.getFullVersion(app));
+		copy.author = source.author;
+		copy.metadata = source.metadata;
+		copy.tracks = new ArrayList<>(source.tracks);
+		copy.addPoints(source.getPoints());
+		copy.routes = new ArrayList<>(source.routes);
+		copy.path = source.path;
+		copy.hasAltitude = source.hasAltitude;
+		copy.modifiedTime = System.currentTimeMillis();
+		return copy;
 	}
 
 	public interface GpsFilterActionsListener {

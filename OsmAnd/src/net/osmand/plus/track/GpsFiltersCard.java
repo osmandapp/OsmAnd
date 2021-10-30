@@ -26,15 +26,18 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.fragment.app.Fragment;
 
 public class GpsFiltersCard extends MapBaseCard implements GpsFilterActionsListener {
 
 	private final GpsFilterHelper filterHelper;
+	private final Fragment target;
 
-	public GpsFiltersCard(@NonNull MapActivity mapActivity) {
+	public GpsFiltersCard(@NonNull MapActivity mapActivity, @NonNull Fragment target) {
 		super(mapActivity);
-		filterHelper = app.getGpsFilterHelper();
-		filterHelper.addListener(this);
+		this.filterHelper = app.getGpsFilterHelper();
+		this.filterHelper.addListener(this);
+		this.target = target;
 	}
 
 	@Override
@@ -170,7 +173,7 @@ public class GpsFiltersCard extends MapBaseCard implements GpsFilterActionsListe
 	private void setupActionsCard() {
 		ViewGroup actionsCardContainer = view.findViewById(R.id.actions_card_container);
 		actionsCardContainer.removeAllViews();
-		actionsCardContainer.addView(new GpsFilterActionsCard(mapActivity).build(mapActivity));
+		actionsCardContainer.addView(new GpsFilterActionsCard(mapActivity, target).build(mapActivity));
 	}
 
 	@Override

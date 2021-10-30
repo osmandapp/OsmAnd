@@ -998,7 +998,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			} else if (buttonIndex == CHANGE_FOLDER_BUTTON_INDEX) {
 				MoveGpxFileBottomSheet.showInstance(fragmentManager, this, gpxFile.path, true, false);
 			} else if (buttonIndex == GPS_FILTER_BUTTON_INDEX) {
-				GpsFilterFragment.showInstance(fragmentManager, selectedGpxFile);
+				GpsFilterFragment.showInstance(fragmentManager, selectedGpxFile, this);
 			} else if (buttonIndex == DELETE_BUTTON_INDEX) {
 				String fileName = Algorithms.getFileWithoutDirs(gpxFile.path);
 

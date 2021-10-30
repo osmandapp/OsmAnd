@@ -1496,7 +1496,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		if (mapActivity != null) {
 			if (editingCtx.getPointsCount() > 0) {
 				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-						this, "", getSuggestedFileName(), true, true);
+						this, "", getSuggestedFileName(), null,	true, true);
 			} else {
 				Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 			}
@@ -1836,7 +1836,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					case SHOW_IS_SAVED_FRAGMENT:
 						editingCtx.setChangesSaved();
 						SavedTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-								outFile.getAbsolutePath());
+								outFile.getAbsolutePath(), true);
 						dismiss(mapActivity);
 						break;
 					case SHOW_TOAST:
@@ -2023,7 +2023,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	private void dismiss(@NonNull MapActivity mapActivity) {
+	public void dismiss(@NonNull MapActivity mapActivity) {
 		dismiss(mapActivity, true);
 	}
 
