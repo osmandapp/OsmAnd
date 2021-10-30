@@ -4409,4 +4409,6 @@
     <string name="use_external_timestamps_description">Brug online ruteberegners tidsstempler til at justere den forventede tid og gennemsnitshastighed</string>
     <string name="no_plugins_enabled">Du har ingen aktiverede udvidelser. Du kan finde en liste over alle tilgængelige udvidelser i Menu - Udvidelser.</string>
     <string name="approx_safe_mode_description">Lav gpx-approximation ved hjælp af langsommere Android i stedet for indbygget kode.</string>
+    <string name="display_route_tracks">Vis spor</string>
+    <string name="shared_string_travelbooks">Rejsebøger</string>
 </resources>
