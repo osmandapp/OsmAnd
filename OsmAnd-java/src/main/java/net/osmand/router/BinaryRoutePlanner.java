@@ -406,11 +406,11 @@ public class BinaryRoutePlanner {
 		final RouteDataObject road = segment.road;
 		// store <segment> in order to not have unique <segment, direction> in visitedSegments
 		short segmentInd = !reverseWaySearch ? segment.getSegmentStart(): segment.getSegmentEnd();
-		short nextSegmentInd = reverseWaySearch ? segment.getSegmentStart(): segment.getSegmentEnd();
+		short prevSegmentInd = reverseWaySearch ? segment.getSegmentStart(): segment.getSegmentEnd();
 		final int x = road.getPoint31XTile(segmentInd);
 		final int y = road.getPoint31YTile(segmentInd);
-		final int prevX = road.getPoint31XTile(nextSegmentInd);
-		final int prevY = road.getPoint31YTile(nextSegmentInd);
+		final int prevX = road.getPoint31XTile(prevSegmentInd);
+		final int prevY = road.getPoint31YTile(prevSegmentInd);
 
 		// calculate point and try to load neighbor ways if they are not loaded
 		double distOnRoadToPass = squareRootDist(x, y, prevX, prevY);
@@ -425,15 +425,14 @@ public class BinaryRoutePlanner {
 		}
 		
 		// calculate possible obstacle plus time
-		double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, nextSegmentInd > segmentInd);
+		double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentInd, prevSegmentInd > segmentInd);
 		if (obstacle < 0) {
 			return -1;
 		}
-		double heightObstacle = ctx.getRouter().defineHeightObstacle(road, segmentInd, nextSegmentInd);
+		double heightObstacle = ctx.getRouter().defineHeightObstacle(road, segmentInd, prevSegmentInd);
 		if (heightObstacle < 0) {
 			return -1;
 		}
-		
 		return obstacle + heightObstacle + distOnRoadToPass / speed;
 
 	}
@@ -836,24 +835,32 @@ public class BinaryRoutePlanner {
 			RouteSegment visIt = visitedSegments.get(calculateRoutePointId(next));
 			boolean toAdd = true;
 			if (visIt != null) {
-				// the segment was already visited! We need to follow better route if it exists
-				// that is very exceptional situation and almost exception, it can happen
-				// 1. when we underestimate distnceToEnd - wrong h()
-				// 2. because we process not small segments but the whole road, it could be that
-				// deviation from the road is faster than following the whole road itself!
 				if (TRACE_ROUTING) {
 					printRoad("  >?", visitedSegments.get(calculateRoutePointId(next)), null);
 				}
+				toAdd = false;
+				// TODO update comment
+				// the segment was already visited! We need to follow better route if it exists
+				// that is very exceptional situation and almost exception, it can happen
+				// 1. when we underestimate distanceToEnd - wrong h() of A*
+				// 2. because we process not small segments but the whole road, it could be that
+				// deviation from the road is faster than following the whole road itself!
 				if (distFromStart < visIt.distanceFromStart  ) { // TODO ??? && next.getParentRoute() == null
 					// TODO can we add again ? without breaking final segment
-					toAdd = true;
-					if (ctx.config.heuristicCoefficient <= 1) {
-						System.err.println("! Alert distance from start " + distFromStart + " < "
-								+ visIt.distanceFromStart + ": " + next + " - " + visIt);
+					// Here it's not very legitimate cause we need to go up to final segment & decrease final time
+					double routeSegmentTime = calculateRouteSegmentTime(ctx, reverseWaySearch, visIt);
+					if (distFromStart + routeSegmentTime < visIt.distanceFromStart) {
+						if (ctx.config.heuristicCoefficient <= 1) {
+							System.err.println("! Alert distance from start " + distFromStart + " < "
+									+ visIt.distanceFromStart + ": " + next + " - " + visIt);
+						}
+//						visIt.setParentRoute(segment);
+//						visIt.distanceFromStart = distFromStart;
+//						visIt.distanceToEnd = segment.distanceToEnd;
+						toAdd = true;
 					}
-				} else {
-					toAdd = false;
 				}
+				
 			}
 			if (toAdd && (!next.isSegmentAttachedToStart() || ctx.roadPriorityComparator(next.distanceFromStart,
 					next.distanceToEnd, distFromStart, segment.distanceToEnd) > 0)) {
@@ -932,12 +939,12 @@ public class BinaryRoutePlanner {
 
 		// search context (needed for searching route)
 		// Initially it should be null (!) because it checks was it segment visited before
+		// TODO explain NULL
 		RouteSegment parentRoute = null;
-		// 1 - positive , -1 - negative, 0 not assigned
-		// byte directionAssgn = 0;
 
 		// distance measured in time (seconds)
-		// doesn't inlude distance from @segStart to @segStart + @directionAssgn
+		// doesn't include distance from @segStart to @segStart + @directionAssgn
+		// TODO explain difference for visited & non visited segment
 		float distanceFromStart = 0;
 		float distanceToEnd = 0;
 
@@ -1020,7 +1027,12 @@ public class BinaryRoutePlanner {
 		
 		@Override
 		public String toString() {
-			return (road == null ? "NULL" : road.toString()) + " [" + segStart +"-" +segEnd+"]";
+			int x = road.getPoint31XTile(segStart);
+			int y = road.getPoint31YTile(segStart);
+			int xe = road.getPoint31XTile(segEnd);
+			int ye = road.getPoint31YTile(segEnd);
+			float dst = ((int)(Math.sqrt(MapUtils.squareDist31TileMetric(x, y, xe, ye)) * 10)) / 10.0f;
+			return (road == null ? "NULL" : road.toString()) + " [" + segStart +"-" +segEnd+"] " + dst + " m";
 		}
 
 
