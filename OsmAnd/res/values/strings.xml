@@ -4196,7 +4196,7 @@
     <string name="shared_string_undo">Undo</string>
     <string name="shared_string_skip">Skip</string>
     <string name="app_name_osmand">OsmAnd</string>
-    <string name="offline_maps_and_navigation">Offline Maps\nand Navigation</string>
+    <string name="offline_maps_and_navigation">Offline Maps\n&amp; Navigation</string>
     <string name="commit_poi">Commit POI</string>
     <string name="tab_title_basic">Basic</string>
     <string name="tab_title_advanced">Advanced</string>
