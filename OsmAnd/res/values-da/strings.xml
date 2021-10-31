@@ -4411,4 +4411,5 @@
     <string name="approx_safe_mode_description">Lav gpx-approximation ved hjælp af langsommere Android i stedet for indbygget kode.</string>
     <string name="display_route_tracks">Vis spor</string>
     <string name="shared_string_travelbooks">Rejsebøger</string>
+    <string name="display_route_tracks_as_poi">Vis spor som IP</string>
 </resources>

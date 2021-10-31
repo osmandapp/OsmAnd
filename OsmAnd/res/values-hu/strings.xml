@@ -3215,7 +3215,7 @@
     <string name="get_discount_title">Szerezze meg %1$d %2$s %3$s kedvezménnyel.</string>
     <string name="get_discount_first_part">%1$s az első %2$s</string>
     <string name="get_discount_first_few_part">%1$s az első %2$s</string>
-    <string name="get_discount_second_part">utána %1$s</string>
+    <string name="get_discount_second_part">Utána %1$s</string>
     <string name="price_and_discount">%1$s • %2$s megtakarítás</string>
     <string name="osmand_plus_extended_description_part3">Térképnézet
 \n • Megjeleníti a pozícióját és az irányultságát
@@ -4397,4 +4397,10 @@
     <string name="approx_safe_mode">Biztonságos GPX-közelítés</string>
     <string name="safe_settings">Biztonságos</string>
     <string name="use_external_timestamps">Az online útvonaltervező időbélyegzőinek használata a becsült idő és az átlagsebesség beállításához</string>
+    <string name="display_route_tracks">Nyomvonalak megjelenítése</string>
+    <string name="shared_string_travelbooks">Útikönyv</string>
+    <string name="approx_safe_mode_description">A GPX-közelítés a lassabb Androidot használja a natív kód helyett.</string>
+    <string name="use_external_timestamps_description">Az online útvonaltervező időbélyegzőinek használata a becsült idő és átlagsebesség beállításához</string>
+    <string name="no_plugins_enabled">Nincs engedélyezett bővítmény. Az összes elérhető bővítmény felsorolását megtalálja a Menü &gt; Bővítmények menüpontban.</string>
+    <string name="display_route_tracks_as_poi">Nyomvonalak megjelenítése érdekes pontként (POI-ként)</string>
 </resources>

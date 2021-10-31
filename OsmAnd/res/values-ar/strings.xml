@@ -4476,4 +4476,7 @@
     <string name="no_plugins_enabled">لا يوجد لديك ملحقات مفعلة. يمكنك العثور على لائحة بجميع الملحقات الإضافية المتاحة في القائمة – الملحقات الإضافية.</string>
     <string name="approx_safe_mode_description">قم بتقريب gpx باستخدام Android أبطأ بدلاً من البرمجة المحلية.</string>
     <string name="use_external_timestamps">استخدم طوابع زمنية خارجية</string>
+    <string name="display_route_tracks">عرض المسارات</string>
+    <string name="shared_string_travelbooks">كتب السفر</string>
+    <string name="display_route_tracks_as_poi">عرض المسارات على هيئة POI</string>
 </resources>

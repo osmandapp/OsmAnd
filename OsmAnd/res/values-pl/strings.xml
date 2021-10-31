@@ -3149,7 +3149,7 @@
     <string name="manage_profiles">Zarządzaj profilami aplikacji…</string>
     <string name="new_route_calculated_dist_dbg">Trasa: dystans %1$s, czas routera %2$s \nObliczanie: %3$.1f sek., %4$d dróg, %5$d płytek)</string>
     <string name="get_discount_first_few_part">%1$s dla pierwszych %2$s</string>
-    <string name="get_discount_second_part">następnie %1$s</string>
+    <string name="get_discount_second_part">Wtedy %1$s</string>
     <string name="navigate_point_format_olc">Otwórz kod lokalizacji</string>
     <string name="analytics_pref_title">Analityka</string>
     <string name="turn_screen_on_info">Wyświetla mapę na ekranie blokady podczas nawigacji.</string>
@@ -4401,4 +4401,11 @@
     <string name="routing_attr_prefer_tactile_paving_description">Preferuj nawierzchnię brukową</string>
     <string name="routing_attr_allow_gate_description">Zezwalaj na korzystanie z bram</string>
     <string name="routing_attr_only_permitted_streets_name">Celowo dozwolone ulice</string>
+    <string name="shared_string_travelbooks">Książki podróżnicze</string>
+    <string name="safe_settings">Bezpieczny</string>
+    <string name="approx_safe_mode">Bezpieczne przybliżenie gpx</string>
+    <string name="approx_safe_mode_description">Wykonaj przybliżenie gpx przy użyciu wolniejszego Androida zamiast kodu natywnego.</string>
+    <string name="use_external_timestamps">Użyj zewnętrznych znaczników czasu</string>
+    <string name="use_external_timestamps_description">Użyj znaczników czasu routera online, aby dostosować szacowany czas i średnią prędkość.</string>
+    <string name="no_plugins_enabled">Nie masz włączonych wtyczek. Listę wszystkich dostępnych wtyczek znajdziesz w Menu – Wtyczki.</string>
 </resources>

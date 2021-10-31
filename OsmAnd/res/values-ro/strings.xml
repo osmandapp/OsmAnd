@@ -4413,4 +4413,7 @@
     <string name="use_external_timestamps_description">Utilizați marcajele de timp ale routerului online pentru a ajusta timpul estimat și viteza medie</string>
     <string name="safe_settings">Siguranță</string>
     <string name="no_plugins_enabled">Nu aveți niciun plugin activat. Puteți găsi lista tuturor plugin-urilor disponibile în Meniu - Plugin-uri.</string>
+    <string name="display_route_tracks">Afișarea traseelor</string>
+    <string name="shared_string_travelbooks">Cărți de călătorie</string>
+    <string name="display_route_tracks_as_poi">Afișarea traseelor ca POI</string>
 </resources>

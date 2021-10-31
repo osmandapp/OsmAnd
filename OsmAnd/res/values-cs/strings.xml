@@ -4230,4 +4230,7 @@
     <string name="no_items_of_type_message">Nemáte žádné položky tohoto typu</string>
     <string name="no_activity_for_intent">Nebyla nalezena žádná vhodná aplikace pro vykonání této akce</string>
     <string name="empty_category_name">Prázdný název kategorie</string>
+    <string name="reset_to_original">Resetovat do původního stavu</string>
+    <string name="attribute">Atribut</string>
+    <string name="contour_lines_hillshades_slope">Vrstevnice, stínování svahů, sklon svahů</string>
 </resources>
