@@ -70,7 +70,7 @@ import java.util.TreeSet;
 public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener, OnFileVisibilityChangeListener {
 	private static final int START_ZOOM = 9;
-	private static final int START_ZOOM_ROUTE_ARTICLE = 11;
+	private static final int START_ZOOM_ROUTE_TRACK = 11;
 	private static final int END_ZOOM_ROUTE_TRACK = 13;
 
 	public static final org.apache.commons.logging.Log log = PlatformUtil.getLog(POIMapLayer.class);
@@ -87,6 +87,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 	private boolean routeArticleFilterEnabled;
 	private boolean routeArticlePointsFilterEnabled;
 	private boolean routeTrackFilterEnabled;
+	private boolean routeTrackAsPoiFilterEnabled;
 	private PoiUIFilter routeArticleFilter;
 	private PoiUIFilter routeArticlePointsFilter;
 	private PoiUIFilter routeTrackFilter;
@@ -141,7 +142,9 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 							&& !Algorithms.isEmpty(routeArticlePointsFilter.getFilterByName())) {
 						calculatedFilters.add(routeArticlePointsFilter);
 					}
-					if (routeTrackFilter != null) {
+					boolean routeTrackAsPoiFilterEnabled = POIMapLayer.this.routeTrackAsPoiFilterEnabled;
+					PoiUIFilter routeTrackFilter = POIMapLayer.this.routeTrackFilter;
+					if (routeTrackAsPoiFilterEnabled && routeTrackFilter != null) {
 						calculatedFilters.add(routeTrackFilter);
 					}
 				}
@@ -150,6 +153,18 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			@Override
 			public void layerOnPostExecute() {
 				app.getOsmandMap().refreshMap();
+			}
+
+			private boolean shouldAddToResult(@NonNull List<Amenity> results, @NonNull Amenity amenity) {
+				String routeId = amenity.getRouteId();
+				if (!Algorithms.isEmpty(routeId)) {
+					for (Amenity a : results) {
+						if (routeId.equals(a.getRouteId())) {
+							return false;
+						}
+					}
+				}
+				return true;
 			}
 
 			@Override
@@ -163,7 +178,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				List<Amenity> res = new ArrayList<>();
 				PoiUIFilter.combineStandardPoiFilters(calculatedFilters, app);
 				for (PoiUIFilter filter : calculatedFilters) {
-					res.addAll(filter.searchAmenities(latLonBounds.top, latLonBounds.left,
+					List<Amenity> amenities = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, z, new ResultMatcher<Amenity>() {
 
 								@Override
@@ -175,7 +190,26 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 								public boolean isCancelled() {
 									return isInterrupted();
 								}
-							}));
+							});
+					if (filter.isRouteTrackFilter()) {
+						for (Amenity amenity : amenities) {
+							boolean hasRoute = false;
+							String routeId = amenity.getRouteId();
+							if (!Algorithms.isEmpty(routeId)) {
+								for (Amenity a : res) {
+									if (routeId.equals(a.getRouteId())) {
+										hasRoute = true;
+										break;
+									}
+								}
+							}
+							if (!hasRoute) {
+								res.add(amenity);
+							}
+						}
+					} else {
+						res.addAll(amenities);
+					}
 				}
 
 				Collections.sort(res, (lhs, rhs) -> lhs.getId() < rhs.getId()
@@ -248,10 +282,15 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		if (!filters.isEmpty() && tileBox.getZoom() >= START_ZOOM) {
 			return true;
 		} else if (filters.isEmpty()) {
-			return (travelRendererHelper.getRouteArticlesProperty().get() && routeArticleFilter != null
-					|| travelRendererHelper.getRouteArticlePointsProperty().get() && routeArticlePointsFilter != null
-					|| travelRendererHelper.getRouteTracksProperty().get() && routeTrackFilter != null)
-					&& tileBox.getZoom() >= START_ZOOM_ROUTE_ARTICLE;
+			if ((travelRendererHelper.getRouteArticlesProperty().get() && routeArticleFilter != null
+					|| travelRendererHelper.getRouteArticlePointsProperty().get() && routeArticlePointsFilter != null)
+					&& tileBox.getZoom() >= START_ZOOM) {
+				return true;
+			}
+			if (travelRendererHelper.getRouteTracksAsPoiProperty().get() && routeTrackFilter != null) {
+				return travelRendererHelper.getRouteTracksProperty().get()
+						? tileBox.getZoom() >= START_ZOOM : tileBox.getZoom() >= START_ZOOM_ROUTE_TRACK;
+			}
 		}
 		return false;
 	}
@@ -261,12 +300,12 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				|| ROUTE_ARTICLE.equals(amenity.getSubType());
 		boolean routeTrack = ROUTE_TRACK.equals(amenity.getSubType());
 		if (routeArticle) {
-			return tileBox.getZoom() >= START_ZOOM_ROUTE_ARTICLE;
+			return tileBox.getZoom() >= START_ZOOM;
 		}  else if (routeTrack) {
 			if (travelRendererHelper.getRouteTracksProperty().get()) {
-				return tileBox.getZoom() >= START_ZOOM_ROUTE_ARTICLE && tileBox.getZoom() <= END_ZOOM_ROUTE_TRACK;
+				return tileBox.getZoom() >= START_ZOOM && tileBox.getZoom() <= END_ZOOM_ROUTE_TRACK;
 			} else {
-				return tileBox.getZoom() >= START_ZOOM_ROUTE_ARTICLE;
+				return tileBox.getZoom() >= START_ZOOM_ROUTE_TRACK;
 			}
 		} else {
 			return tileBox.getZoom() >= START_ZOOM;
@@ -285,6 +324,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		boolean routeArticleFilterEnabled = travelRendererHelper.getRouteArticlesProperty().get();
 		boolean routeArticlePointsFilterEnabled = travelRendererHelper.getRouteArticlePointsProperty().get();
 		boolean routeTrackFilterEnabled = travelRendererHelper.getRouteTracksProperty().get();
+		boolean routeTrackAsPoiFilterEnabled = travelRendererHelper.getRouteTracksAsPoiProperty().get();
 		PoiUIFilter routeArticleFilter = travelRendererHelper.getRouteArticleFilter();
 		PoiUIFilter routeArticlePointsFilter = travelRendererHelper.getRouteArticlePointsFilter();
 		PoiUIFilter routeTrackFilter = travelRendererHelper.getRouteTrackFilter();
@@ -294,6 +334,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				|| this.routeArticleFilterEnabled != routeArticleFilterEnabled
 				|| this.routeArticlePointsFilterEnabled != routeArticlePointsFilterEnabled
 				|| this.routeTrackFilterEnabled != routeTrackFilterEnabled
+				|| this.routeTrackAsPoiFilterEnabled != routeTrackAsPoiFilterEnabled
 				|| this.routeArticleFilter != routeArticleFilter
 				|| this.routeArticlePointsFilter != routeArticlePointsFilter
 				|| this.routeTrackFilter != routeTrackFilter
@@ -304,6 +345,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 			this.routeArticleFilterEnabled = routeArticleFilterEnabled;
 			this.routeArticlePointsFilterEnabled = routeArticlePointsFilterEnabled;
 			this.routeTrackFilterEnabled = routeTrackFilterEnabled;
+			this.routeTrackAsPoiFilterEnabled = routeTrackAsPoiFilterEnabled;
 			this.routeArticleFilter = routeArticleFilter;
 			this.routeArticlePointsFilter = routeArticlePointsFilter;
 			this.routeTrackFilter = routeTrackFilter;

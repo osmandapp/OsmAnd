@@ -12,6 +12,7 @@
 -->
 
     <string name="display_route_tracks">Display tracks</string>
+    <string name="display_route_tracks_as_poi">Display tracks as POI</string>
     <string name="shared_string_travelbooks">Travelbooks</string>
     <string name="safe_settings">Safe</string>
     <string name="approx_safe_mode">Safe gpx approximation</string>

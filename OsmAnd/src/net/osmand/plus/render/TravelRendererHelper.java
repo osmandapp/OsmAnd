@@ -54,6 +54,7 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 	private static final String ROUTE_ARTICLE_POINTS_PREFERENCE = "travel_route_article_points_preference";
 	private static final String ROUTE_ARTICLES_PREFERENCE = "travel_route_articles_preference";
 	private static final String ROUTE_TRACKS_PREFERENCE = "travel_route_tracks_preference";
+	private static final String ROUTE_TRACKS_AS_POI_PREFERENCE = "travel_route_tracks_as_poi_preference";
 
 	private final OsmandApplication app;
 	private final OsmandSettings settings;
@@ -242,6 +243,10 @@ public class TravelRendererHelper implements IRendererLoadedEventListener {
 
 	public CommonPreference<Boolean> getRouteTracksProperty() {
 		return settings.registerBooleanPreference(ROUTE_TRACKS_PREFERENCE, true).makeProfile();
+	}
+
+	public CommonPreference<Boolean> getRouteTracksAsPoiProperty() {
+		return settings.registerBooleanPreference(ROUTE_TRACKS_AS_POI_PREFERENCE, true).makeProfile();
 	}
 
 	@Nullable

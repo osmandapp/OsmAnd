@@ -291,14 +291,14 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 		LayoutInflater inflater = UiUtilities.getInflater(container.getContext(), nightMode);
 
 		CommonPreference<Boolean> tracksPref = rendererHelper.getRouteTracksProperty();
-		View articleView = inflater.inflate(R.layout.list_item_icon_and_menu, container, false);
-		AndroidUtils.setBackground(articleView, UiUtilities.getSelectableDrawable(app));
-		updateItemView(articleView, getString(R.string.display_route_tracks), R.drawable.ic_action_track_16,
+		View tracksView = inflater.inflate(R.layout.list_item_icon_and_menu, container, false);
+		AndroidUtils.setBackground(tracksView, UiUtilities.getSelectableDrawable(app));
+		updateItemView(tracksView, getString(R.string.display_route_tracks), R.drawable.ic_action_track_16,
 				tracksPref.get(), DescriptionType.VISIBLE_HIDDEN);
-		articleView.setOnClickListener(v -> {
+		tracksView.setOnClickListener(v -> {
 			boolean selected = !tracksPref.get();
 			tracksPref.set(selected);
-			updateItemView(articleView, getString(R.string.display_route_tracks), R.drawable.ic_action_track_16,
+			updateItemView(tracksView, getString(R.string.display_route_tracks), R.drawable.ic_action_track_16,
 					selected, DescriptionType.VISIBLE_HIDDEN);
 			app.runInUIThread(() -> {
 				rendererHelper.updateRouteTrackFilter();
@@ -307,7 +307,26 @@ public class TravelRoutesFragment extends BaseOsmAndFragment {
 				app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
 			});
 		});
-		container.addView(articleView);
+		container.addView(tracksView);
+
+		CommonPreference<Boolean> tracksAsPoiPref = rendererHelper.getRouteTracksAsPoiProperty();
+		View tracksAsPoiView = inflater.inflate(R.layout.list_item_icon_and_menu, container, false);
+		AndroidUtils.setBackground(tracksAsPoiView, UiUtilities.getSelectableDrawable(app));
+		updateItemView(tracksAsPoiView, getString(R.string.display_route_tracks_as_poi), R.drawable.ic_action_info_dark,
+				tracksAsPoiPref.get(), DescriptionType.VISIBLE_HIDDEN);
+		tracksAsPoiView.setOnClickListener(v -> {
+			boolean selected = !tracksAsPoiPref.get();
+			tracksAsPoiPref.set(selected);
+			updateItemView(tracksAsPoiView, getString(R.string.display_route_tracks_as_poi), R.drawable.ic_action_info_dark,
+					selected, DescriptionType.VISIBLE_HIDDEN);
+			app.runInUIThread(() -> {
+				rendererHelper.updateRouteTrackFilter();
+				rendererHelper.updateRouteTypesVisibility();
+				app.getOsmandMap().refreshMap(true);
+				app.getOsmandMap().getMapLayers().updateLayers((MapActivity) getMyActivity());
+			});
+		});
+		container.addView(tracksAsPoiView);
 
 		container.addView(inflater.inflate(R.layout.divider, container, false));
 

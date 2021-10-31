@@ -251,7 +251,8 @@ public class ConfigureMapMenu {
 		}
 		OsmandApplication app = activity.getMyApplication();
 		ResourceManager manager = app.getResourceManager();
-		if (!Algorithms.isEmpty(manager.getTravelMapRepositories()) || !Algorithms.isEmpty(manager.getTravelRepositories())) {
+		if (OsmandPlugin.isDevelopment() &&
+				(!Algorithms.isEmpty(manager.getTravelMapRepositories()) || !Algorithms.isEmpty(manager.getTravelRepositories()))) {
 			adapter.addItem(createTravelRoutesItem(activity, nightMode));
 		}
 	}
