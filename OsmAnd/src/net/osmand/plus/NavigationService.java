@@ -36,6 +36,8 @@ public class NavigationService extends Service {
 	public static class NavigationServiceBinder extends Binder {
 	}
 
+	public static final String DEEP_LINK_ACTION_OPEN_ROOT_SCREEN = "net.osmand.plus.navigation.car.OpenRootScreen";
+
 	// global id don't conflict with others
 	public static int USED_BY_NAVIGATION = 1;
 	public static int USED_BY_GPX = 2;
@@ -204,12 +206,17 @@ public class NavigationService extends Service {
 					new NavigationManagerCallback() {
 						@Override
 						public void onStopNavigation() {
-							NavigationService.this.stopCarNavigation();
+							getApp().stopNavigation();
 						}
 
 						@Override
 						public void onAutoDriveEnabled() {
 							CarToast.makeText(carContext, "Auto drive enabled", CarToast.LENGTH_LONG).show();
+							OsmAndLocationSimulation sim = getApp().getLocationProvider().getLocationSimulation();
+							RoutingHelper routingHelper = getApp().getRoutingHelper();
+							if (!sim.isRouteAnimating() && routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
+								sim.startStopRouteAnimation(null);
+							}
 						}
 					});
 

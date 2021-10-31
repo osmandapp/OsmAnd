@@ -18,6 +18,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.LauncherShortcutsHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -215,6 +216,9 @@ public class IntentHelper {
 						if (apiHelper.needFinish()) {
 							mapActivity.finish();
 						}
+					} else if (LauncherShortcutsHelper.INTENT_SCHEME.equals(scheme)) {
+						app.getLauncherShortcutsHelper().parseIntent(mapActivity, intent);
+						clearIntent(intent);
 					}
 				}
 			}

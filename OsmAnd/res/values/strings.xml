@@ -10,6 +10,31 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
 -->
+
+    <string name="display_route_tracks">Display tracks</string>
+    <string name="display_route_tracks_as_poi">Display tracks as POI</string>
+    <string name="shared_string_travelbooks">Travelbooks</string>
+    <string name="safe_settings">Safe</string>
+    <string name="approx_safe_mode">Safe gpx approximation</string>
+    <string name="approx_safe_mode_description">Do gpx approximation using slower Android instead of native code.</string>
+    <string name="use_external_timestamps">Use external timestamps</string>
+    <string name="use_external_timestamps_description">Use online router\'s timestamps to adjust estimated time and average speed</string>
+    <string name="no_plugins_enabled">You have no plugins enabled. You can find list of all available plugins in Menu – Plugins.</string>
+    <string name="shared_storage_warning_description">Starting November 2021 OsmAnd 4.2 will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared storage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
+    <string name="search_history_is_disabled_descr">You can enable search history in Settings</string>
+    <string name="markers_history_is_disabled_descr">Enable history to get list of visited map markers.</string>
+    <string name="history_is_disabled_descr">Enable history to get quicker access to last used results.</string>
+    <string name="is_disabled">%1$s is disabled</string>
+    <string name="clear_all_history_warning">Are you sure you want to clear all history in the app?\n\nThe search, navigation and marker history will be cleared.</string>
+    <string name="clear_all_history">Clear all history</string>
+    <string name="history_actions_descr">You can export history into a file.</string>
+    <string name="map_markers_history">Map markers history</string>
+    <string name="navigation_history">Navigation history</string>
+    <string name="history_preferences_descr">You can disable history logging individually for each history type.</string>
+    <string name="shortcut_start_recording">Start Recording</string>
+    <string name="shortcut_navigate_to">Navigate To…</string>
+    <string name="shortcut_navigate_to_work">Navigate to Work</string>
+    <string name="shortcut_navigate_to_home">Navigate to Home</string>
     <string name="android_auto_map_placeholder_title">The map is displayed on the vehicle screen.</string>
     <string name="android_auto_map_placeholder_descr">Disconnect your device from Android Auto to view the map in the app.</string>
     <string name="android_auto_purchase_request_title">Purchase OsmAnd Pro or Maps+ to use OsmAnd with Android Auto</string>
@@ -20,7 +45,6 @@
     <string name="shared_string_articles">Articles</string>
     <string name="included_categories">Included categories</string>
     <string name="release_4_1">
-    • Cloud backup\n\n
     • Added initial support for Android Auto\n\n
     • User interface update for UTM coordinate search\n\n
     • Favorites: added ability to view recently used icons\n\n
@@ -35,10 +59,11 @@
     <string name="shared_string_details">Details</string>
     <string name="shared_app_storage_description">Shared memory is no longer available due to changes in the storage access rules in Android.</string>
     <string name="internal_app_storage_description">Internal storage, hidden from user and other apps, so no one except OsmAnd can’t get access to your data</string>
-    <string name="shared_storage_warning_description">Starting with the next update of OsmAnd, the app will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared storage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
     <string name="shared_storage_warning_title">Changes in storage access rules</string>
     <string name="purchases_feature_desc_android_auto">OsmAnd offline maps and navigation on the screen of your vehicle. Integrate conveniently with your vehicle\'s controls.</string>
     <string name="icon_group_nautical">Nautical</string>
+    <string name="transparent_status_bar_descr">Display map under status bar</string>
+    <string name="transparent_status_bar">Transparent status bar</string>
     <string name="exit_pan_mode_descr">Press Select to exit the pan mode</string>
     <string name="upload_gpx_description_hint">Leave empty, track names will be used as description. Entered description will be applied for each track.</string>
     <string name="search_title">Search: %1$s</string>
@@ -1171,7 +1196,7 @@
     <string name="get_discount_title">Get %1$d %2$s at %3$s off.</string>
     <string name="get_discount_first_part">%1$s for the first %2$s</string>
     <string name="get_discount_first_few_part">%1$s for the first %2$s</string>
-    <string name="get_discount_second_part">then %1$s</string>
+    <string name="get_discount_second_part">Then %1$s</string>
     <string name="cancel_subscription">Cancel subscription</string>
     <string name="price_and_discount">%1$s • Save %2$s</string>
     <string name="app_mode_wagon">Wagon</string>
@@ -4231,7 +4256,7 @@
     <string name="navigation_item_description">Set up navigation.</string>
     <string name="planning_trip_item">Planning a trip</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Frequently asked questions</string>
+    <string name="faq_item_description">Frequently asked questions.</string>
     <string name="map_viewing_item">Map viewing</string>
     <string name="search_on_the_map_item">Searching on the map</string>
     <string name="instalation_troubleshooting_item">Installation and troubleshooting</string>

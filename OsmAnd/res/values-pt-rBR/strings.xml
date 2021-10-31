@@ -1763,7 +1763,7 @@
     <string name="navigation_item_description">Configurar a navegação.</string>
     <string name="planning_trip_item">Planejando uma viagem</string>
     <string name="faq_item">Perguntas frequentes</string>
-    <string name="faq_item_description">Respostas às perguntas frequentes</string>
+    <string name="faq_item_description">Respostas às perguntas frequentes.</string>
     <string name="map_viewing_item">Visualização de mapa</string>
     <string name="search_on_the_map_item">Pesquisando no mapa</string>
     <string name="instalation_troubleshooting_item">Instalação e solução de problemas</string>
@@ -3084,7 +3084,7 @@
     <string name="rendering_attr_tracktype_grade3_name">Principalmente sólido</string>
     <string name="rendering_attr_tracktype_grade4_name">Principalmente macio</string>
     <string name="rendering_attr_tracktype_grade5_name">Suave</string>
-    <string name="gpx_join_gaps">Mesclar espaços</string>
+    <string name="gpx_join_gaps">Unir espaços</string>
     <string name="app_mode_camper">Casa móvel (campista)</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baixa emissão no mapa. Não afeta o roteamento.</string>
@@ -3113,7 +3113,7 @@
     <string name="get_discount_title">Obter %1$d %2$s de %3$s desconto.</string>
     <string name="get_discount_first_part">%1$s para primeiro %2$s</string>
     <string name="get_discount_first_few_part">%1$s para primeiro %2$s</string>
-    <string name="get_discount_second_part">em seguida %1$s</string>
+    <string name="get_discount_second_part">Em seguida %1$s</string>
     <string name="cancel_subscription">Cancelar assinatura</string>
     <string name="price_and_discount">%1$s • Economizar %2$s</string>
     <string name="shared_string_example">Exemplo</string>
@@ -3692,7 +3692,7 @@
     <string name="add_hidden_group_info">O ponto adicionado pode ser encontrado em \"%s\". Reexibir o grupo selecionado para mostrá-lo no mapa.</string>
     <string name="track_show_start_finish_icons">Mostrar ícones de início e fim</string>
     <string name="select_track_width">Selecionar largura</string>
-    <string name="gpx_split_interval_descr">Selecione o intervalo no qual as marcas com distância ou tempo na pista serão exibidas.</string>
+    <string name="gpx_split_interval_descr">Selecione o intervalo em que as marcas com distância ou tempo na trilha serão mostradas.</string>
     <string name="gpx_split_interval_none_descr">Selecione a opção de divisão desejada: por tempo ou por distância.</string>
     <string name="shared_string_custom">Personalizados</string>
     <string name="gpx_direction_arrows">Setas de direção</string>
@@ -4057,7 +4057,7 @@
     <string name="new_device_account">Novo dispositivo / nova conta</string>
     <string name="contact_support_description">Se você tiver alguma dúvida, entre em contato conosco em %1$s.</string>
     <string name="empty_purchases_description">Se suas compras não aparecerem aqui, toque em \"%1$s\", ou entre em contato com nossa equipe de suporte.</string>
-    <string name="contact_support">Contato com o suporte</string>
+    <string name="contact_support">Contatar o suporte</string>
     <string name="troubleshooting">Solução de problemas</string>
     <string name="troubleshooting_description">Por favor, siga este link se tiver problemas com as compras.</string>
     <string name="osmand_live">OsmAnd Live</string>
@@ -4282,7 +4282,7 @@
     <string name="online_direct_line_maps_link">Verifique os mapas necessários.</string>
     <string name="offline_maps_required_descr">Faltam alguns mapas offline necessários para esta rota.</string>
     <string name="online_maps_searching_descr">Pesquisando online…</string>
-    <string name="reset_to_original">Redefinir para o original</string>
+    <string name="reset_to_original">Redefinir para original</string>
     <string name="backup_error_no_subscription">Sem assinatura presente</string>
     <string name="map_updates_for_mappers">Atualizações de mapas para mapeadores</string>
     <string name="benefits_for_contributors">Benefícios para contribuidores OSM ativos</string>
@@ -4342,10 +4342,64 @@
     <string name="shared_string_details">Detalhes</string>
     <string name="purchases_feature_desc_android_auto">Osmand offline mapas e navegação na tela do seu veículo. Integrar convenientemente com os controles do seu veículo.</string>
     <string name="internal_app_storage_description">Armazenamento interno, oculto a partir do usuário e outros aplicativos, portanto, ninguém, exceto OSMand, não pode obter acesso aos seus dados</string>
-    <string name="shared_storage_warning_description">Começando com a próxima atualização do Osmand, o aplicativo perderá o acesso ao armazenamento compartilhado, devido a regras de acesso de armazenamento alteradas no Android.
-\n
-\nPor favor, altere o armazenamento de strorrage compartilhado para o armazenamento disponível, se isso não for feito, o aplicativo perderá o acesso aos seus dados: incluindo mapas offline, trilhas de GPX e tudo mais.</string>
     <string name="shared_storage_warning_title">Mudanças nas regras de acesso de armazenamento</string>
     <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
     <string name="rendering_attr_noNatureReserves_description">Ocultar reserva natural, áreas protegidas e parques nacionais.</string>
+    <string name="shared_string_articles">Artigos</string>
+    <string name="included_categories">Categorias incluídas</string>
+    <string name="markers_history_is_disabled_descr">Ative o histórico para obter uma lista de marcadores de mapa visitados.</string>
+    <string name="is_disabled">%1$s está desabilitado</string>
+    <string name="clear_all_history">Limpar todo o histórico</string>
+    <string name="history_actions_descr">Você pode exportar o histórico para um arquivo.</string>
+    <string name="map_markers_history">Histórico de marcadores de mapa</string>
+    <string name="navigation_history">Histórico de navegação</string>
+    <string name="history_preferences_descr">Você pode desativar o registro do histórico individualmente para cada tipo de histórico.</string>
+    <string name="shortcut_start_recording">Comece a gravar</string>
+    <string name="shortcut_navigate_to">Navegar para…</string>
+    <string name="shortcut_navigate_to_work">Navegue para o trabalho</string>
+    <string name="android_auto_map_placeholder_title">O mapa é exibido na tela do veículo.</string>
+    <string name="android_auto_purchase_request_title">Compre OsmAnd Pro ou Maps+ para usar OsmAnd com Android Auto</string>
+    <string name="continue_on_phone">Continuar no telefone</string>
+    <string name="location_access_request_title">OsmAnd precisa de acesso ao local para navegar</string>
+    <string name="location_access_request_action">Garantir acesso</string>
+    <string name="location_access_request_result">Aprovado: %1$s Rejeitado: %2$s</string>
+    <string name="transparent_status_bar_descr">Exibir mapa na barra de status</string>
+    <string name="clear_all_history_warning">Tem certeza de que deseja limpar todo o histórico do aplicativo\?
+\n
+\nA pesquisa, navegação e histórico de marcadores serão apagados.</string>
+    <string name="search_history_is_disabled_descr">Você pode ativar o histórico de pesquisa em Configurações</string>
+    <string name="history_is_disabled_descr">Ative o histórico para obter acesso mais rápido aos últimos resultados usados.</string>
+    <string name="shared_storage_warning_description">A partir de novembro de 2021, o OsmAnd 4.2 perderá o acesso ao armazenamento compartilhado devido a alterações nas regras de acesso ao armazenamento no Android.
+\n
+\nPor favor, altere o armazenamento de armazenamento compartilhado para armazenamento disponível, se isso não for feito, o aplicativo perderá o acesso aos seus dados: incluindo mapas offline, trilhas GPX e tudo mais.</string>
+    <string name="shortcut_navigate_to_home">Navegar para a casa</string>
+    <string name="transparent_status_bar">Barra de status transparente</string>
+    <string name="android_auto_map_placeholder_descr">Desconecte seu dispositivo do Android Auto para visualizar o mapa no aplicativo.</string>
+    <string name="safe_settings">Segurança</string>
+    <string name="approx_safe_mode">Aproximação segura do GPX</string>
+    <string name="approx_safe_mode_description">Fazer a aproximação GPX usando o mais lento em vez do código nativo.</string>
+    <string name="use_external_timestamps">Use carimbos de data/hora externos</string>
+    <string name="use_external_timestamps_description">Use os carimbos de data/hora do roteador online para ajustar o tempo estimado e a velocidade média</string>
+    <string name="no_plugins_enabled">Não tem extensões ativadas. Pode encontrar a lista de todas as extensões disponíveis no Menu - Extensões.</string>
+    <string name="release_4_1">- Adicionado o suporte inicial para o Android Auto
+\n
+\n - Atualização da interface do usuário para busca de coordenadas UTM
+\n
+\n - Favoritos: adicionada a capacidade de visualizar ícones usados recentemente
+\n
+\n - Planeamento de rotas: utilizará o perfil selecionado após o lançamento
+\n
+\n - Camada Mapilar fixa, a extensão está agora desativada por defeito
+\n
+\n - Adicionado tela para gerenciar todo o histórico no app
+\n
+\n - A orientação do mapa não é redefinida após reiniciar o app
+\n
+\n - Melhoria da renderização do marcador de altura SRTM
+\n
+\n - Corrigida a visualização arábica no mapa
+\n
+\n - Corrigidos diferentes problemas de roteamento
+\n
+\n</string>
 </resources>

@@ -1,6 +1,7 @@
 package net.osmand.plus.dialogs;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.PISTE_ROUTES_ATTR;
 
 import android.app.Activity;
 import android.content.Context;
@@ -35,6 +36,8 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButt
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -141,7 +144,12 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(selectedStyle);
 		if (loaded != null) {
 			OsmandMapTileView view = mapActivity.getMapView();
-			view.getSettings().RENDERER.set(selectedStyle);
+			OsmandSettings settings = view.getSettings();
+			settings.RENDERER.set(selectedStyle);
+			final CommonPreference<Boolean> pisteRoutesPref = settings.getCustomRenderBooleanProperty(PISTE_ROUTES_ATTR);
+			if (pisteRoutesPref.get()) {
+				pisteRoutesPref.set(settings.RENDERER.get().equals(RendererRegistry.WINTER_SKI_RENDER));
+			}
 			app.getRendererRegistry().setCurrentSelectedRender(loaded);
 			mapActivity.refreshMapComplete();
 			mapActivity.getDashboard().refreshContent(true);

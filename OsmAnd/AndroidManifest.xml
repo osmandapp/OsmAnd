@@ -528,6 +528,12 @@
 				<data android:scheme="opr-oauth" />
 			</intent-filter>
 
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data android:scheme="osmand.shortcuts" />
+			</intent-filter>
+
 		</activity>
 
 		<activity android:name="net.osmand.plus.activities.HelpActivity" />

@@ -1688,7 +1688,7 @@
     <string name="contact_us">Email</string>
     <string name="map_legend">Legenda do mapa</string>
     <string name="techical_articles_item">Artigos técnicos</string>
-    <string name="faq_item_description">Perguntas mais frequentes</string>
+    <string name="faq_item_description">Perguntas mais frequentes.</string>
     <string name="map_viewing_item">Visualização do mapa</string>
     <string name="search_on_the_map_item">Pesquisar no mapa</string>
     <string name="instalation_troubleshooting_item">Instalação e resolução de problemas</string>
@@ -3117,7 +3117,7 @@
     <string name="months_3">Três meses</string>
     <string name="price_free">Grátis</string>
     <string name="get_discount_title">Obtenha %1$d %2$s com %3$s de desconto.</string>
-    <string name="get_discount_second_part">depois %1$s</string>
+    <string name="get_discount_second_part">Depois %1$s</string>
     <string name="cancel_subscription">Cancelar subscrição</string>
     <string name="price_and_discount">%1$s - Poupe %2$s</string>
     <string name="get_discount_first_part">%1$s para o primeiro %2$s</string>
@@ -3701,9 +3701,9 @@
     <string name="select_track_width">Espessura da linha do trilho</string>
     <string name="gpx_split_interval_descr">Selecione o intervalo em que as marcas com distância ou tempo no trilho serão mostradas.</string>
     <string name="gpx_split_interval_none_descr">Selecione a opção de divisão desejada: por tempo ou por distância.</string>
-    <string name="shared_string_custom">Definir</string>
+    <string name="shared_string_custom">Personalizado</string>
     <string name="gpx_direction_arrows">Setas de direção</string>
-    <string name="track_coloring_solid">Sólida</string>
+    <string name="track_coloring_solid">Sólido</string>
     <string name="plan_route_last_edited">Última edição</string>
     <string name="plan_route_import_track">Importar trilho</string>
     <string name="plan_route_open_existing_track">Abrir trilho existente</string>
@@ -3993,7 +3993,7 @@
     <string name="delete_online_routing_engine">Remover este motor de roteamento online\?</string>
     <string name="context_menu_read_full">Ler tudo</string>
     <string name="context_menu_edit_descr">Editar descrição</string>
-    <string name="delete_waypoints">Eliminar pontos do trilho</string>
+    <string name="delete_waypoints">Eliminar pontos de rotas</string>
     <string name="copy_to_map_markers">Copiar para os marcadores</string>
     <string name="copy_to_map_favorites">Copiar para os favoritos</string>
     <string name="upload_photo">A enviar</string>
@@ -4022,7 +4022,7 @@
     <string name="contact_support_description">Se tiver alguma dúvida, contacte-nos em %1$s.</string>
     <string name="announcement_time_intervals">Intervalos de tempo e distância</string>
     <string name="map_widget_distance_by_tap">Distância com 2 dedos</string>
-    <string name="contact_support">Contacte o suporte</string>
+    <string name="contact_support">Contactar o apoio ao cliente</string>
     <string name="troubleshooting_description">Aceda a este link se tiver algum problema com assinaturas.</string>
     <string name="update_all_maps_added">Atualizar todos os mapas adicionados a %1$s\?</string>
     <string name="routing_attr_short_way_description">Rota mais curta otimizada (mais económica)</string>
@@ -4104,8 +4104,8 @@
     <string name="poi_routes">Rotas</string>
     <string name="search_more">Pesquisar mais…</string>
     <string name="ltr_or_rtl_triple_combine_via_space">%1$s %2$s %3$s</string>
-    <string name="backup_into_file">Restaurar de um ficheiro</string>
-    <string name="restore_from_file">Restaurar de um ficheiro</string>
+    <string name="backup_into_file">Fazer cópia de segurança para um ficheiro</string>
+    <string name="restore_from_file">Restaurar de um ficheiro de cópia de segurança</string>
     <string name="osmand_cloud_help_descr">Precisa de ajuda\? Contacte-nos em %1$s</string>
     <string name="osmand_cloud_create_account_descr">Introduza o seu endereço de email. Será enviado um código de verificação para esse endereço.
 \nTodos os seus dados serão ligados a ele.</string>
@@ -4121,7 +4121,7 @@
     <string name="last_backup">Última cópia de segurança</string>
     <string name="duration_ago">%1$s atrás</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="osmand_cloud_authorize_descr">Nunca perca os seus dados, faça uma cópia de segurança e restaure todas as informações sem problemas.</string>
+    <string name="osmand_cloud_authorize_descr">Nunca perca os seus dados, faça uma cópia de segurança e restaure todos os seus dados facilmente.</string>
     <string name="local_backup">Cópia de segurança local</string>
     <string name="local_backup_descr">Faça um cópia de segurança ou restaure dados de um ficheiro no seu dispositivo.</string>
     <string name="select_nav_profile_dialog_message">O \"tipo de navegação\" determina como as rotas são calculadas, com mecanismos de roteamento offline e online.</string>
@@ -4177,14 +4177,14 @@
     <string name="send_logcat_log">Enviar registo logcat</string>
     <string name="backup_promocode">Código promocional</string>
     <string name="purchases_feature_desc_nautical">Tenha acesso a informações de profundidade náutica</string>
-    <string name="purchases_feature_desc_terrain">Curvas de nível do terreno, mapa em sombras de relevo com tons escuros e mapas de declive com cores para mostrar picos e planícies.</string>
-    <string name="purchases_feature_desc_wikivoyage">Explore o Wikivoyage offline. Os artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
-    <string name="purchases_feature_desc_wikipedia">Explore a Wikipédia offline. Artigos são divididos por países e regiões e disponíveis em todos os idiomas.</string>
+    <string name="purchases_feature_desc_terrain">Veja curvas de nível do terreno, mapas em sombras de relevo com tons escuros e mapas de declive com cores para mostrar picos e planícies.</string>
+    <string name="purchases_feature_desc_wikivoyage">Explore o Wikivoyage offline. Os artigos estão divididos em conjuntos de países e regiões e disponíveis em todos os idiomas.</string>
+    <string name="purchases_feature_desc_wikipedia">Explore a Wikipédia offline. Os artigos estão divididos em cunjuntos de países e regiões e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_combined_wiki">Explore os artigos da Wikipédia em qualquer lugar, sem uma ligação à Internet. Estes dados offline estão divididos por países e disponíveis em todos os idiomas.</string>
     <string name="purchases_feature_desc_unlimited_map_download">Obtenha descarregamentos ilimitados para todos os mapas offline de continentes e regiões.</string>
     <string name="purchases_feature_desc_monthly_map_updates">Obtenha acesso a atualizações mensais regulares para mapas offline.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Tenha acesso a atualizações de mapas com mais frequência. Atualizações de hora em hora, diárias ou semanais. As atualizações são descarregadas de forma incremental, apenas para a área alterada.</string>
-    <string name="purchases_feature_desc_osmand_cloud">Obtenha o OsmAnd Cloud para armazenar todos os dados do OsmAnd online. Não perca os seus dados após reinstalações. Faça cópias de segurança e restaure todas as informações facilmente.</string>
+    <string name="purchases_feature_desc_osmand_cloud">Obtenha o OsmAnd Cloud para armazenar todos os dados do OsmAnd online. Não perca os seus dados após reinstalações. Faça cópias de segurança e restaure todos os seus dados facilmente.</string>
     <string name="unlimited_map_downloads">Descarregamentos ilimitados de mapas</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipédia e Wikivoyage offline</string>
     <string name="terrain_maps_contour_lines_hillshade_slope">Mapas de terreno: curvas de nível, sombras de relevo, declives</string>
@@ -4351,11 +4351,65 @@
     <string name="shared_storage_warning_title">Alterações nas regras de acesso ao armazenamento</string>
     <string name="purchases_feature_desc_android_auto">OsmAnd mapas e navegação offline no ecrã do seu veículo. Integre-o nos comandos do seu veículo.</string>
     <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturais, áreas protegidas e parques nacionais.</string>
-    <string name="shared_storage_warning_description">A partir da próxima atualização do OsmAnd, a aplicação perderá o acesso ao armazenamento partilhado, devido às regras de acesso ao armazenamento que foram alteradas pelo Android.
-\n
-\nPor favor altere o armazenamento de \"Armazenamento partilhado\" para o armazenamento disponível, se isso não for feito a aplicação perderá acesso aos seus dados: incluindo mapas offline, trilhos GPX e tudo o resto.</string>
     <string name="shared_string_details">Detalhes</string>
     <string name="shared_app_storage_description">A memória partilhada deixou de estar disponível devido a mudanças nas regras de acesso ao armazenamento no Android.</string>
     <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
     <string name="internal_app_storage_description">Armazenamento interno, oculto ao utilizador e outras aplicações, de modo a que ninguém, a não ser o OsmAnd, pode ter acesso aos seus dados</string>
+    <string name="android_auto_map_placeholder_descr">Desconecte o seu aparelho do Android Auto para ver o mapa na app.</string>
+    <string name="android_auto_purchase_request_title">Compre OsmAnd Pro ou Maps+ para usar o OsmAnd com o Android Auto</string>
+    <string name="continue_on_phone">Continuar no telefone</string>
+    <string name="shared_string_articles">Artigos</string>
+    <string name="android_auto_map_placeholder_title">O mapa é apresentado no ecrã do veículo.</string>
+    <string name="location_access_request_title">OsmAnd precisa de acesso à localização para navegar</string>
+    <string name="location_access_request_action">Conceder acesso</string>
+    <string name="location_access_request_result">Aprovado: %1$s Rejeitado: %2$s</string>
+    <string name="included_categories">Categorias incluídas</string>
+    <string name="release_4_1">- Adicionado o suporte inicial para o Android Auto
+\n
+\n - Atualização da interface do utilizador para busca de coordenadas UTM
+\n
+\n - Favoritos: adicionada a capacidade de visualizar ícones usados recentemente
+\n
+\n - Planeamento de rotas: utilizará o perfil selecionado após o lançamento
+\n
+\n - Camada Mapilar fixa, a extensão está agora desativada por defeito
+\n
+\n - Adicionado ecrã para gerir todo o histórico na app
+\n
+\n - A orientação do mapa não é redefinida após reiniciar a app
+\n
+\n - Melhoria da renderização do marcador de altura SRTM
+\n
+\n - Corrigida a visualização arábica no mapa
+\n
+\n - Corrigidos diferentes problemas de roteamento
+\n
+\n</string>
+    <string name="is_disabled">%1$s está desativado</string>
+    <string name="shared_storage_warning_description">A partir de novembro de 2021 o OsmAnd 4.2 vai perder o acesso ao armazenamento partilhado, devido às regras de acesso ao armazenamento alteradas pelo Android.
+\n
+\nPor favor, altere o armazenamento de \"Armazenamento partilhado\" para o armazenamento disponível, se isso não for feito a aplicação perderá o acesso aos seus dados: incluindo mapas offline, trilhos GPX e todo o resto.</string>
+    <string name="shortcut_navigate_to">Navegar para…</string>
+    <string name="markers_history_is_disabled_descr">Ative o histórico para obter uma lista de marcadores de mapa visitados.</string>
+    <string name="clear_all_history_warning">Tem a certeza que quer limpar todo o histórico da aplicação\?
+\n
+\nOs históricos de busca, navegação e marcadores serão apagados.</string>
+    <string name="clear_all_history">Limpar todo o histórico</string>
+    <string name="search_history_is_disabled_descr">Pode ativar o histórico de pesquisa em Configurações</string>
+    <string name="history_is_disabled_descr">Ative o histórico para obter acesso mais rápido aos últimos resultados usados.</string>
+    <string name="map_markers_history">Histórico de marcadores de mapa</string>
+    <string name="shortcut_start_recording">Começar a gravar</string>
+    <string name="shortcut_navigate_to_home">Navegar para casa</string>
+    <string name="history_actions_descr">Pode exportar o histórico para um ficheiro.</string>
+    <string name="navigation_history">Histórico de navegação</string>
+    <string name="history_preferences_descr">Pode desativar o registo de histórico individualmente para cada tipo de histórico.</string>
+    <string name="shortcut_navigate_to_work">Navegar para o trabalho</string>
+    <string name="transparent_status_bar_descr">Mostrar o mapa por baixo da barra de estado</string>
+    <string name="transparent_status_bar">Barra de estado transparente</string>
+    <string name="safe_settings">Segurança</string>
+    <string name="approx_safe_mode">Aproximação segura do GPX</string>
+    <string name="use_external_timestamps_description">Use os carimbos de tempo do roteador online para ajustar o tempo estimado e a velocidade média</string>
+    <string name="no_plugins_enabled">Não tem extensões ativadas. Pode encontrar a lista de todas as extensões disponíveis no Menu - Extensões.</string>
+    <string name="approx_safe_mode_description">Fazer a aproximação GPX usando o mais lento em vez do código nativo.</string>
+    <string name="use_external_timestamps">Usar carimbos temporais externos</string>
 </resources>

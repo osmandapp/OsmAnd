@@ -4347,9 +4347,36 @@
     <string name="internal_app_storage_description">Memòria interna, cuada a s\'impreadore e a sas àteras aplicatziones, in manera chi nemos francu OsmAnd potzat atzèdere a sos datos tuos</string>
     <string name="shared_storage_warning_title">Modìficas a sas règulas de atzessu a sa memòria</string>
     <string name="purchases_feature_desc_android_auto">Mapas non in lìnia e navigatzione de OsmAnd in s\'ischermu de su veìculu tuo. S\'ìntegrat in manera discansosa cun sos controllos de su veìculu tuo.</string>
-    <string name="shared_storage_warning_description">Incumintzende dae s\'agiornamentu imbeniente de OsmAnd s\'aplicatzione at a pèrdere atzessu a sa memòria cumpartzida, pro neghe de modìficas a sas règulas de atzessu a sa memòria de Android.
-\n
-\nCàmbia s\'archiviatzione dae sa memòria cumpartzida a sa memòria a disponimentu. Si non l\'as a fàghere s\'aplicatzione at a pèrdere s\'atzessu a sos datos tuos: custu incluit sas mapas non in lìnias, sas rastas GPX e totu su restu.</string>
     <string name="shared_string_details">Minujas</string>
     <string name="rendering_attr_noNatureReserves_name">Riserva naturale</string>
+    <string name="included_categories">Categorias incluidas</string>
+    <string name="shared_string_articles">Artìculos</string>
+    <string name="release_4_1">• Annanghidura de unu suportu de incumintzu pro Android Auto
+\n
+\n • Agiornamentu de s\'interfache de impreadore pro sas chircas cun coordinadas UTM
+\n
+\n • Preferidos: annanghidura de sa possibilidade de bìdere sas iconas impreadas dae pagu
+\n
+\n • Pianificatzione de s\'àndala: at a impreare su profilu seletzionadu a pustis de s\'allughìngiu
+\n
+\n • Istratu de Mapillary acontzadu, s\'estensione como est disabilitada comente impostatzione predefinida
+\n
+\n • Annanghidura de un\'ischermada pro amministrare totu sa cronologia in s\'aplicatzione
+\n
+\n • S\'orientamentu de sa mapa non si resetat a pustis de s\'allughìngiu nou de s\'aplicatzione
+\n
+\n • Renderizatzione de sos marcadores de artària SRTM megiorada
+\n
+\n • Visualizatzione de s\'àrabu in sa mapa megiorada
+\n
+\n • Medas problemas de càrculu de s\'àndala risoltos
+\n
+\n</string>
+    <string name="location_access_request_title">OsmAnd tenet bisòngiu de s\'atzessu a sa positzione pro pòdere navigare</string>
+    <string name="location_access_request_action">Fruni s\'atzessu</string>
+    <string name="location_access_request_result">Aprovadu: %1$s Negadu: %2$s</string>
+    <string name="continue_on_phone">Sighi in su telèfonu</string>
+    <string name="android_auto_map_placeholder_title">Sa mapa est ammustrada in s\'ischermu de su veìculu.</string>
+    <string name="android_auto_map_placeholder_descr">Istaca su dispositivu tuo dae Android Auto pro bìdere sa mapa in s\'aplicatzione.</string>
+    <string name="android_auto_purchase_request_title">Còmpora OsmAnd Pro o Maps+ pro impreare OsmAnd cun Android Auto</string>
 </resources>

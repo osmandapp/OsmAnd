@@ -148,17 +148,27 @@ public class Version {
 		}
 		return v;
 	}
-
+	
 	public static boolean isOpenGlAvailable(OsmandApplication app) {
 		if ("qnx".equals(System.getProperty("os.name"))) {
 			return false;
 		}
 		File nativeLibraryDir = new File(app.getApplicationInfo().nativeLibraryDir);
+		if (checkOpenGlExists(nativeLibraryDir)) return true;
+		// check opengl doesn't work correctly on some devices when native libs are not unpacked
+		return true;
+	}
+
+	public static boolean checkOpenGlExists(File nativeLibraryDir) {
 		if (nativeLibraryDir.exists() && nativeLibraryDir.canRead()) {
 			File[] files = nativeLibraryDir.listFiles();
 			if (files != null) {
 				for (File file : files) {
-					if ("libOsmAndCoreWithJNI.so".equals(file.getName())) {
+					if (file.isDirectory()) {
+						if (checkOpenGlExists(file)) {
+							return true;
+						}
+					} else if ("libOsmAndCoreWithJNI.so".equals(file.getName())) {
 						return true;
 					}
 				}

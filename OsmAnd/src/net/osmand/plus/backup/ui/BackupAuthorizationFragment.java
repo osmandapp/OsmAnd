@@ -19,8 +19,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.osmand.plus.ColorUtilities;
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
@@ -162,7 +162,7 @@ public class BackupAuthorizationFragment extends BaseSettingsFragment implements
 			if (mapActivity != null) {
 				ApplicationMode mode = getSelectedAppMode();
 				FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
-				ExportSettingsFragment.showInstance(fragmentManager, mode, true);
+				ExportSettingsFragment.showInstance(fragmentManager, mode, null, true);
 				return true;
 			}
 		} else if (RESTORE_FROM_FILE.equals(prefId)) {

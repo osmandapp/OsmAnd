@@ -291,7 +291,7 @@
     <string name="fav_saved_sucessfully">Preferiti salvati in {0}</string>
     <string name="no_fav_to_save">Nessun Preferito da salvare</string>
     <string name="error_occurred_loading_gpx">Non posso caricare il file GPX.</string>
-    <string name="send_report">Invia rapporto</string>
+    <string name="send_report">Invia segnalazione</string>
     <string name="none_region_found">Non trovo nessuna mappa scaricata sulla memory card.</string>
     <string name="poi_namefinder_query_empty">Scrivi per trovare un PDI</string>
     <string name="any_poi">Tutti</string>
@@ -4336,9 +4336,54 @@
     <string name="shared_app_storage_description">La memoria condivisa non è più disponibile a causa delle modifiche alle regole di accesso all\'archiviazione in Android.</string>
     <string name="internal_app_storage_description">Memorizzazione interna, nascosto all\'utilizzatore e alle altre app, così nessuno può accedere ai tuoi dati</string>
     <string name="rendering_attr_noNatureReserves_name">Riserva naturale</string>
-    <string name="shared_storage_warning_description">Dal prossimo aggiornamento di OsmAnd, l\'app perderà l\'accesso alla Memoria condivisa, a causa del cambiamento delle regole di accesso alla memoria di Android.
-\n
-\nCambia la memorizzazione da Memoria condivisa alla memoria disponibile, se non verrà fatto l\'app perderà l\'accesso ai tuoi dati: comprese mappe offline, tracce GPX e tutto il resto.</string>
     <string name="rendering_attr_noNatureReserves_description">Nascondi riserve naturali, aree protette e parchi nazionali.</string>
     <string name="shared_string_details">Dettagli</string>
+    <string name="shared_string_articles">Articoli</string>
+    <string name="included_categories">Categorie incluse</string>
+    <string name="release_4_1">• Aggiunto un iniziale supporto ad Android Auto
+\n
+\n • Interfaccia utente aggiornata per la ricerca con coordinate UTM
+\n
+\n • Preferiti: aggiunta la capacità di visualizzare le icone usate recenti
+\n
+\n • Pianificazione del percorso: utilizzerà il profilo scelto dopo l\'avvio
+\n
+\n • Corretta lo strato Mapillary, il componente aggiuntivo è disabilitato per preimpostazione
+\n
+\n • Aggiunta la schermata per gestire tutta la cronologia dell\'app
+\n
+\n • L\'orientamento della mappa non viene più reimpostato al riavvio dell\'app
+\n
+\n • Migliorato la rappresentazione delle linee isoipse SRTM
+\n
+\n • Corretta la visualizzazione nella mappa dell\'Arabo
+\n
+\n • Corretti diversi errori di calcolo del percorso
+\n
+\n</string>
+    <string name="clear_all_history_warning">Sei sicuro di voler cancellare la completa cronologia dell\'app\?
+\n
+\nLa ricerca, la cronologia di navigazione e i marcatori saranno cancellati.</string>
+    <string name="clear_all_history">Cancella tutta la cronologia</string>
+    <string name="history_actions_descr">Puoi esportare la cronologia in un file.</string>
+    <string name="navigation_history">Cronologia di navigazione</string>
+    <string name="shortcut_start_recording">Avvia registrazione</string>
+    <string name="shortcut_navigate_to">Naviga verso…</string>
+    <string name="shortcut_navigate_to_home">Naviga fino a casa</string>
+    <string name="android_auto_map_placeholder_descr">Scollega il tuo dispositivo da Android Auto per visualizzare la mappa nell\'app.</string>
+    <string name="android_auto_purchase_request_title">Acquista OsmAnd Pro o Maps+ per utilizzare OsmAnd con Android Auto</string>
+    <string name="continue_on_phone">Prosegui sul telefono</string>
+    <string name="location_access_request_title">Per navigare OsmAnd ha bisogno di accedere alla localizzazione</string>
+    <string name="location_access_request_action">Dai il permesso</string>
+    <string name="transparent_status_bar">Barra di stato trasparente</string>
+    <string name="map_markers_history">Cronologia dei marcatori della mappa</string>
+    <string name="search_history_is_disabled_descr">Puoi abilitare la ricerca nella cronologia nelle Impostazioni</string>
+    <string name="markers_history_is_disabled_descr">Abilita la cronologia per ottenere la lista dei marcatori della mappa visitati.</string>
+    <string name="history_is_disabled_descr">Abilita la cronologia per ottenere un accesso veloce agli ultimi risultati.</string>
+    <string name="is_disabled">%1$s è disabilitato</string>
+    <string name="location_access_request_result">Approvati: %1$s Rifiutati: %2$s</string>
+    <string name="transparent_status_bar_descr">Mostra la mappa sotto la barra di stato</string>
+    <string name="history_preferences_descr">Puoi disabilitare la registrazione della cronologia singolarmente per ogni tipo di cronologia.</string>
+    <string name="shortcut_navigate_to_work">Naviga fino al lavoro</string>
+    <string name="android_auto_map_placeholder_title">La mappa è visualizzata nello schermo del veicolo</string>
 </resources>

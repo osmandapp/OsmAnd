@@ -61,6 +61,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.ImageCardsHolder;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
@@ -549,9 +550,9 @@ public class MenuBuilder {
 								public void run() {
 									if (AndroidUtils.isActivityNotDestroyed(mapActivity)) {
 										try {
-											ImageCard imageCard = OsmandPlugin.createImageCardForJson(new JSONObject(response));
-											if (imageCard != null) {
-												addImageCard(imageCard);
+											ImageCardsHolder holder = new ImageCardsHolder();
+											if (OsmandPlugin.createImageCardForJson(holder, new JSONObject(response))) {
+												addImageCard(holder.getFirstItem());
 											}
 										} catch (JSONException e) {
 											LOG.error(e);

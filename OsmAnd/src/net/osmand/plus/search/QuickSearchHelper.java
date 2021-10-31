@@ -454,6 +454,7 @@ public class QuickSearchHelper implements ResourceListener {
 					if (pt != null) {
 						sr.localeName = pt.getTranslation();
 						sr.object = pt;
+						sr.relatedObject = point;
 						sr.priorityDistance = 0;
 						sr.objectType = ObjectType.POI_TYPE;
 						publish = true;
@@ -463,6 +464,7 @@ public class QuickSearchHelper implements ResourceListener {
 					if (filter != null) {
 						sr.localeName = filter.getName();
 						sr.object = filter;
+						sr.relatedObject = point;
 						sr.objectType = ObjectType.POI_TYPE;
 						publish = true;
 					}

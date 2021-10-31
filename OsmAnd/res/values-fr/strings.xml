@@ -1308,7 +1308,7 @@
     <string name="traffic_warning_stop">Panneau stop</string>
     <string name="traffic_warning_calming">Ralentisseur</string>
     <string name="traffic_warning_speed_camera">Radar de vitesse</string>
-    <string name="traffic_warning">Alerte de circulation</string>
+    <string name="traffic_warning">Éléments sur la route</string>
     <string name="local_index_description">Cliquez sur un élément pour voir plus de détails, maintenez appuyé pour désactiver ou supprimer. Données actuellement sur l\'appareil (%1$s libre) :</string>
     <string name="text_size">Taille du texte</string>
     <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un favori</string>
@@ -1715,7 +1715,7 @@
     <string name="first_usage_item_description">Comment télécharger des cartes et définir les paramètres de base.</string>
     <string name="navigation_item_description">Paramétrer le guidage.</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Foire Aux Questions</string>
+    <string name="faq_item_description">Foire Aux Questions.</string>
     <string name="map_viewing_item">Affichage de la carte</string>
     <string name="search_on_the_map_item">Rechercher sur la carte</string>
     <string name="planning_trip_item">Préparer un itinéraire</string>
@@ -3106,7 +3106,7 @@
     <string name="years_5">Années</string>
     <string name="months_3">Trois mois</string>
     <string name="price_free">Gratuit</string>
-    <string name="get_discount_second_part">puis %1$s</string>
+    <string name="get_discount_second_part">Puis %1$s</string>
     <string name="cancel_subscription">Annuler l\'abonnement</string>
     <string name="get_discount_first_part">%1$s pour le premier %2$s</string>
     <string name="get_discount_first_few_part">%1$s pour le premier %2$s</string>
@@ -3687,9 +3687,9 @@
     <string name="add_to_a_track">Ajouter à une trace</string>
     <string name="shared_string_custom">Personnalisé</string>
     <string name="add_hidden_group_info">Le point ajouté se trouve dans \"%s\". Afficher ce groupe pour rendre le point visible sur la carte.</string>
-    <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle d\'affichage sur la trace des marques de distance ou de durée.</string>
-    <string name="gpx_split_interval_none_descr">Sélectionner l\'option de découpage : durée ou distance.</string>
-    <string name="track_coloring_solid">Continu</string>
+    <string name="gpx_split_interval_descr">Sélectionnez l\'intervalle auquel les marques de distance ou de temps sur la trace seront affichées.</string>
+    <string name="gpx_split_interval_none_descr">Sélectionnez l\'option de fractionnement souhaitée : par temps ou par distance.</string>
+    <string name="track_coloring_solid">Opaque</string>
     <string name="track_show_start_finish_icons">Afficher les icônes de départ et d\'arrivée</string>
     <string name="select_track_width">Sélectionner la largeur</string>
     <string name="gpx_direction_arrows">Flèches de direction</string>
@@ -3932,7 +3932,7 @@
     <string name="show_track_on_map">Afficher la trace sur la carte</string>
     <string name="routing_engine_vehicle_type_scooter">Trottinette</string>
     <string name="routing_engine_vehicle_type_small_truck">Camionnette</string>
-    <string name="upload_to_openstreetmap">Envoyer vers OpenStreetMap</string>
+    <string name="upload_to_openstreetmap">Envoyer sur OpenStreetMap</string>
     <string name="edit_track">Modifier la trace</string>
     <string name="rename_track">Renommer la trace</string>
     <string name="change_folder">Modifier le dossier</string>
@@ -4344,7 +4344,40 @@
     <string name="shared_string_details">Détails</string>
     <string name="rendering_attr_noNatureReserves_name">Réserve naturelle</string>
     <string name="rendering_attr_noNatureReserves_description">Masquer les réserves naturelles, les zones protégées et les parcs nationaux.</string>
-    <string name="shared_storage_warning_description">Dès la prochaine mise à jour d\'OsmAnd et en raison d\'évolutions apportées par Android aux règles d\'accès au stockage, OsmAnd ne pourra plus accéder au stockage partagé.
+    <string name="shared_string_articles">Articles</string>
+    <string name="included_categories">Catégories incluses</string>
+    <string name="android_auto_map_placeholder_title">La carte s\'affiche sur l\'écran du véhicule.</string>
+    <string name="location_access_request_result">Approuvé : %1$s Refusé : %2$s</string>
+    <string name="android_auto_map_placeholder_descr">Déconnectez votre appareil d\'Android Auto pour afficher la carte dans l\'application.</string>
+    <string name="android_auto_purchase_request_title">Achetez OsmAnd Pro ou Maps+ pour utiliser OsmAnd avec Android Auto</string>
+    <string name="continue_on_phone">Continuer sur le téléphone</string>
+    <string name="location_access_request_action">Accorder l\'accès</string>
+    <string name="location_access_request_title">OsmAnd doit connaitre votre position pour vous guider</string>
+    <string name="shared_storage_warning_description">À partir de novembre 2021, OsmAnd 4.2 n\'aura plus accès au stockage partagé, car Android va modifier les règles d\'accès au stockage.
 \n
-\nVeuillez modifier le stockage de stockage partagé à stockage disponible, sans quoi OsmAnd ne pourra plus accéder à vos données (ce qui inclut les cartes hors-ligne, vos traces GPX et bien plus encore ...).</string>
+\nVeuillez remplacer le stockage partagé par une autre stockage disponible, sans quoi l\'application ne pourra plus accéder à vos données comme les cartes hors ligne, les traces GPX ...</string>
+    <string name="markers_history_is_disabled_descr">Activez l\'historique pour avoir la liste des marques visitées.</string>
+    <string name="is_disabled">%1$s est désactivé</string>
+    <string name="shortcut_navigate_to">Naviguer vers…</string>
+    <string name="clear_all_history_warning">Êtes-vous certain de vouloir effacer tout l\'historique de l\'application \?
+\n
+\nLes historiques de recherche, de navigation et des marques seront effacés.</string>
+    <string name="history_preferences_descr">Vous pouvez désactiver l\'historique unitairement pour chaque type d\'historique.</string>
+    <string name="shortcut_navigate_to_home">Naviguer vers Domicile</string>
+    <string name="navigation_history">Historique de navigation</string>
+    <string name="search_history_is_disabled_descr">Vous pouvez activer l\'historique des recherches dans les Paramètres.</string>
+    <string name="clear_all_history">Effacer tout l\'historique</string>
+    <string name="history_actions_descr">Vous pouvez exporter l\'historique dans un fichier.</string>
+    <string name="map_markers_history">Historique des marques</string>
+    <string name="shortcut_start_recording">Démarrer l\'enregistrement</string>
+    <string name="shortcut_navigate_to_work">Naviguer vers Travail</string>
+    <string name="transparent_status_bar_descr">Afficher la carte sous la barre d\'état</string>
+    <string name="transparent_status_bar">Barre d\'état transparente</string>
+    <string name="history_is_disabled_descr">Activez l\'historique pour accéder rapidement aux derniers résultats de recherche.</string>
+    <string name="no_plugins_enabled">Aucun greffon n\'est activé. Consultez la liste des greffons disponibles dans : Menu &gt; Greffons.</string>
+    <string name="use_external_timestamps">Utiliser des estimations externes</string>
+    <string name="use_external_timestamps_description">Utilisez les estimations de routeurs en ligne pour ajuster la durée et la vitesse moyenne</string>
+    <string name="safe_settings">Précis</string>
+    <string name="approx_safe_mode">Approximation précise des gpx</string>
+    <string name="approx_safe_mode_description">Effectuer les approximations des gpx en utilisant Android (qui est plus lent) au lieu du code natif.</string>
 </resources>

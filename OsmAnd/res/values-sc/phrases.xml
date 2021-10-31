@@ -4033,4 +4033,5 @@
     <string name="poi_ticket_validator">Validadore de billetes</string>
     <string name="poi_geoglyph">Geoglifu</string>
     <string name="poi_satellite_dish">Antenna parabòlica</string>
+    <string name="poi_trailhead">Intrada de un\'àndala</string>
 </resources>

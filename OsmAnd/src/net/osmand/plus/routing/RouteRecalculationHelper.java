@@ -9,6 +9,7 @@ import net.osmand.data.LatLon;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.onlinerouting.engine.OnlineRoutingEngine;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -25,6 +26,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import static net.osmand.plus.notifications.OsmandNotification.NotificationType.NAVIGATION;
+import static net.osmand.plus.onlinerouting.engine.EngineType.GPX_TYPE;
 
 class RouteRecalculationHelper {
 
@@ -188,6 +190,9 @@ class RouteRecalculationHelper {
 		}
 		app.getWaypointHelper().setNewRoute(res);
 		routingHelper.newRouteCalculated(newRoute, res);
+		if (res.initialCalculation) {
+			app.runInUIThread(() -> routingHelper.recalculateRouteDueToSettingsChange(false));
+		}
 	}
 
 	void startRouteCalculationThread(RouteCalculationParams params, boolean paramsChanged, boolean updateProgress) {
@@ -206,7 +211,8 @@ class RouteRecalculationHelper {
 	}
 
 	public void recalculateRouteInBackground(final Location start, final LatLon end, final List<LatLon> intermediates,
-											 final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute, boolean paramsChanged, boolean onlyStartPointChanged) {
+											 final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute,
+											 boolean paramsChanged, boolean onlyStartPointChanged) {
 		if (start == null || end == null) {
 			return;
 		}
@@ -240,6 +246,12 @@ class RouteRecalculationHelper {
 			}
 			if (getLastProjection() != null) {
 				params.currentLocation = getLastFixedLocation();
+			}
+			if (params.mode.getRouteService() == RouteService.ONLINE) {
+				OnlineRoutingEngine engine = app.getOnlineRoutingHelper().getEngineByKey(params.mode.getRoutingProfile());
+				if (engine != null) {
+					engine.updateRouteParameters(params, previousRoute);
+				}
 			}
 			startRouteCalculationThread(params, paramsChanged, updateProgress);
 		}

@@ -1797,7 +1797,7 @@
     <string name="only_download_over_wifi">Sťahovať iba na Wi-Fi</string>
     <string name="live_update">Okamžité aktualizácie</string>
     <string name="missing_write_external_storage_permission">OsmAnd nemá oprávnenie použiť pamäťovú kartu</string>
-    <string name="impassable_road_desc">Vyberte cesty, ktorým sa chcete navigácii vyhnúť.</string>
+    <string name="impassable_road_desc">Vyberte cesty, ktorým sa chcete pri navigácii vyhnúť.</string>
     <string name="shared_string_sound">Zvuk</string>
     <string name="no_location_permission">Udeľte oprávnenie na prístup k údajom o polohe.</string>
     <string name="no_camera_permission">Udeľte oprávnenia na prístup k fotoaparátu.</string>
@@ -4338,9 +4338,6 @@
     <string name="exit_pan_mode_descr">Stlačte \"Zvoliť\" pre opustenie režimu posúvania</string>
     <string name="upload_gpx_description_hint">Ak necháte prázdne, názvy stôp budú použité ako popis. Zadaný popis bude aplikovaný na každú stopu.</string>
     <string name="icon_group_nautical">Námorné</string>
-    <string name="shared_storage_warning_description">Od nasledujúcej verzie OsmAndu aplikácia nebude mať prístup k Zdieľanému úložisku, kvôli zmenám prístupu k úložisku v Androide.
-\n
-\nProsím zmeňte úložisko zo Zdieľaného úložiska na dostupné úložisko, inak aplikácia stratí prístup k vašim údajom: vrátane stiahnutých máp, GPX stôp a všetkému ostatnému.</string>
     <string name="shared_storage_warning_title">Zmeny v pravidlách prístupu k úložisku</string>
     <string name="internal_app_storage_description">Interné úložisko, skryté pred používateľom a inými aplikáciami, kde nikto okrem OsmAnd nezíska vaše údaje</string>
     <string name="shared_string_details">Podrobnosti</string>
@@ -4348,4 +4345,55 @@
     <string name="rendering_attr_noNatureReserves_description">Skryť prírodné rezervácie, chránené oblasti a národné parky.</string>
     <string name="purchases_feature_desc_android_auto">Mapy a navigácia OsmAnd na obrazovke vášho vozidla. Integrujte pohodlne do ovládania vášho vozidla.</string>
     <string name="rendering_attr_noNatureReserves_name">Prírodná rezervácia</string>
+    <string name="shared_string_articles">Články</string>
+    <string name="included_categories">Zahrnuté kategórie</string>
+    <string name="release_4_1">• Prvotná podpora pre Android Auto
+\n
+\n • Zmena rozhrania pre vyhľadávanie súradníc UTM
+\n
+\n • Obľúbené: pridaná možnosť zobraziť naposledy použité ikony
+\n
+\n • Plánovanie trasy: po spustení použije práve vybraný profil
+\n
+\n • Opravená vrstva Mapillary, modul je teraz predvolene vypnutý
+\n
+\n • Pridaná obrazovka na správu všetkých histórií v aplikácii
+\n
+\n • Orientácia mapy nie je resetovaná po reštarte aplikácie
+\n
+\n • Vylepšené vykreslenie výškovej značky SRTM
+\n
+\n • Opravené zobrazenie arabčiny na mape
+\n
+\n • Opravené rôzne problémy výpočtu trasy
+\n
+\n</string>
+    <string name="search_history_is_disabled_descr">Zapnúť históriu vyhľadávania môžete v Nastaveniach</string>
+    <string name="shared_storage_warning_description">Od novembra 2021 OsmAnd 4.2 stratí prístup k zdieľanému úložisku, kvôli zmenám prístupových pravidiel v systéme Android.
+\n
+\nProsím zmente úložisko zo zdieľaného na iné dostupné úložisko. Ak to nebude vykonané, aplikácia stratí prístup k vašim údajom: mapám, GPX stopám a všetkému ostatnému.</string>
+    <string name="markers_history_is_disabled_descr">Zapnite históriu pre získanie zoznamu navštívených mapových značiek.</string>
+    <string name="history_is_disabled_descr">Zapnite históriu pre získanie rýchlejšieho prístupu k posledným výsledkom.</string>
+    <string name="clear_all_history_warning">Naozaj chcete vymazať všetky histórie v aplikácii\?
+\n
+\nHistória vyhľadávania, navigácie a značiek bude vymazaná.</string>
+    <string name="shortcut_navigate_to_home">Navigovať domov</string>
+    <string name="navigation_history">História navigácie</string>
+    <string name="android_auto_map_placeholder_title">Mapa je zobrazená na obrazovke vozidla.</string>
+    <string name="android_auto_map_placeholder_descr">Odpojte zariadenie od Android Auto, aby ste zobrazili mapu v aplikácii.</string>
+    <string name="android_auto_purchase_request_title">Kúpte si OsmAnd Pro alebo Mapy+, ak chcete použiť OsmAnd s Android Auto</string>
+    <string name="continue_on_phone">Pokračovať na telefóne</string>
+    <string name="location_access_request_action">Povoliť prístup</string>
+    <string name="is_disabled">%1$s je vypnuté</string>
+    <string name="clear_all_history">Vymazať celú históriu</string>
+    <string name="history_actions_descr">Históriu môžete vyexportovať do súboru.</string>
+    <string name="map_markers_history">História mapových značiek</string>
+    <string name="history_preferences_descr">Históriu môžete vypnúť pre jednotlivé typy činností.</string>
+    <string name="shortcut_start_recording">Spustiť záznam</string>
+    <string name="shortcut_navigate_to">Navigovať do…</string>
+    <string name="shortcut_navigate_to_work">Navigovať do práce</string>
+    <string name="location_access_request_title">Pre navigáciu potrebuje OsmAnd prístup k polohe</string>
+    <string name="location_access_request_result">Povolené: %1$s Zamietnuté: %2$s</string>
+    <string name="transparent_status_bar_descr">Zobraziť mapu pod stavovým riadkom</string>
+    <string name="transparent_status_bar">Priehľadný stavový riadok</string>
 </resources>

@@ -2151,8 +2151,8 @@
 \n</string>
     <string name="navigate_point_olc_info_short">Mallonga OLC
 \nBonvolu enigi plenan kodon</string>
-    <string name="navigate_point_olc_info_area">Ĝusta plena OLC 
-\nReprezentata areo: %1$s×%2$s</string>
+    <string name="navigate_point_olc_info_area">Ĝusta plena OLC
+\nReprezentata areo: %1$s × %2$s</string>
     <string name="quick_action_page_list_descr">Butono por foliumi tra la suba listo.</string>
     <string name="auto_split_recording_title">Aŭtomate dividi registraĵojn post paŭzo</string>
     <string name="auto_split_recording_descr">Komenci novan segmenton post 6 min paŭzo, novan registraĵon post 2 h, kaj novan dosieron post pli longaj paŭzoj, se dato ŝanĝiĝis.</string>
@@ -3862,7 +3862,7 @@
     <string name="register_on_openplacereviews_desc">Fotoj estas liverataj de la malferm‑datuma projekto OpenPlaceReviews.org. Por alŝuti viajn fotojn, vi devas enlasaluti en la retejon.</string>
     <string name="register_opr_create_new_account">Krei novan konton</string>
     <string name="register_opr_have_account">Mi jam havas konton</string>
-    <string name="shared_string_search_history">Serĉi en historio</string>
+    <string name="shared_string_search_history">Historio de serĉoj</string>
     <string name="app_mode_kayak">Kajako</string>
     <string name="app_mode_motorboat">Motorboato</string>
     <string name="add_photos_descr">OsmAnd montras fotojn el diversaj fontoj:
@@ -4342,4 +4342,67 @@
     <string name="exit_pan_mode_descr">Frapetu “Elekti” por eliri la ŝovuman reĝimon</string>
     <string name="icon_group_nautical">Mar-navigado</string>
     <string name="shared_string_details">Detaloj</string>
+    <string name="internal_app_storage_description">Interna konservejo, kaŝita de la uzanto kaj aliaj aplikaĵoj, do neniu escepte de OsmAnd povas aliri viajn datumojn</string>
+    <string name="shared_app_storage_description">Komuna memoro ne estas plue disponebla pro ŝanĝo en reguloj de aliro al la konservejo en la operaciumo Android.</string>
+    <string name="shared_storage_warning_title">Ŝanĝo en reguloj de aliro al la konservejo</string>
+    <string name="purchases_feature_desc_android_auto">Malkonektaj mapoj kaj navigado OsmAnd sur ekrano de via veturilo. Oportune integriĝas kun sistemo de via aŭtomobilo.</string>
+    <string name="included_categories">Ampleksataj kategorioj</string>
+    <string name="rendering_attr_noNatureReserves_description">Kaŝi natur-rezervejojn, protektatajn aerojn kaj naciajn parkojn.</string>
+    <string name="rendering_attr_noNatureReserves_name">Naturrezervejoj</string>
+    <string name="shared_string_articles">Artikoloj</string>
+    <string name="release_4_1">• komenca subteno por Android Auto
+\n
+\n• plibonigoj al serĉado laŭ UTM-koordinatoj
+\n
+\n• ŝatataj punktoj: eblo montri antaŭe uzatajn emblemojn
+\n
+\n• planado de kurso: la elektita profilo estos uzata post starto
+\n
+\n• riparita surtavolo Mapillary, la kromprogramo estos implicite malaktiva
+\n
+\n• nova ekrano por administri ĉiun historion de la aplikaĵo
+\n
+\n• map-orientiĝo ne nuliĝas post restarto de OsmAnd
+\n
+\n• plibonigoj al bildigado de nivelkurboj
+\n
+\n• riparita vidigo de la araba lingvo
+\n
+\n• riparitaj diversaj problemoj pri kurs-difinado
+\n
+\n</string>
+    <string name="search_history_is_disabled_descr">Vi povas aktivigi historion de serĉoj en agordoj</string>
+    <string name="shortcut_navigate_to_home">Navigi al hejmo</string>
+    <string name="is_disabled">%1$s estas malaktiva</string>
+    <string name="clear_all_history_warning">Ĉu vi certe volas forviŝi ĉiun historion en la aplikaĵo\?
+\n
+\nLa historio de serĉo, navigo kaj map-markoj estos forviŝita.</string>
+    <string name="shortcut_start_recording">Ekigi registradon</string>
+    <string name="markers_history_is_disabled_descr">Aktivigu historion por akiri liston de vizititaj map-markoj.</string>
+    <string name="history_preferences_descr">Vi povas malaktivigi historion de ĉiu speco aparte.</string>
+    <string name="shortcut_navigate_to">Navigi al…</string>
+    <string name="shortcut_navigate_to_work">Navigi al laborejo</string>
+    <string name="location_access_request_title">OsmAnd bezonas aliron por via pozicio por navigi</string>
+    <string name="android_auto_map_placeholder_descr">Malkonektu vian aparaton de Android Auto por vidigi la mapon en la aplikaĵo.</string>
+    <string name="android_auto_purchase_request_title">Aĉetu OsmAnd Pro aŭ Maps+ por povi uzi OsmAnd kun Android Auto</string>
+    <string name="continue_on_phone">Pluigi per telefono</string>
+    <string name="location_access_request_action">Permesi</string>
+    <string name="shared_storage_warning_description">Ekde la versio 4.2 (eldonota en Novembro 2021), OsmAnd perdos aliron al komuna konservejo pro ŝanĝo en reguloj de aliro al la konservejo en la operaciumo Android.
+\n
+\nŜanĝu dosierujon el komuna konservejo al disponebla konservejo, aliokaze la aplikaĵo perdos aliron al viaj datumoj: malkonektaj mapoj, GPX-spuroj kaj pli.</string>
+    <string name="history_is_disabled_descr">Aktivigu historion por havigi rapidan aliron al la antaŭaj rezultoj.</string>
+    <string name="clear_all_history">Forviŝi ĉiun historion</string>
+    <string name="history_actions_descr">Vi povas elporti historion al dosiero.</string>
+    <string name="map_markers_history">Historio de map-markoj</string>
+    <string name="navigation_history">Historio de navigo</string>
+    <string name="android_auto_map_placeholder_title">La mapo estas vidigata sur la ekrano de via aŭtomobilo.</string>
+    <string name="location_access_request_result">Akceptita: %1$s; rifuzita: %2$s</string>
+    <string name="transparent_status_bar_descr">Vidigi la mapon sub la stata strio</string>
+    <string name="transparent_status_bar">Travidebla stata strio</string>
+    <string name="safe_settings">Pane-toleraj agordoj</string>
+    <string name="approx_safe_mode">Sekura proksimumigo de GPX</string>
+    <string name="approx_safe_mode_description">Proksimumigi GPX-spurojn uzante pli malrapidan Androidan kodon anstataŭ la indiĝenan.</string>
+    <string name="use_external_timestamps">Uzi eksterajn tempindikojn</string>
+    <string name="use_external_timestamps_description">Uzi tempindikojn de enreta navigilo por alĝustigi proksimuman tempon kaj mezuman rapidon</string>
+    <string name="no_plugins_enabled">Neniu kromprogramo estas aktiva. Vi povas trovi la liston de ĉiuj disponeblaj profiloj per la menuo → “Kromprogramoj”.</string>
 </resources>
