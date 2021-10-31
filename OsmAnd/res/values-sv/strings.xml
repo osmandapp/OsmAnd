@@ -2417,7 +2417,7 @@
     <string name="routing_attr_relief_smoothness_factor_name">Välj höjdfluktuation</string>
     <string name="auto_split_recording_title">Auto-split-inspelningar efter lucka</string>
     <string name="auto_split_recording_descr">Starta nytt segment efter en lucka av 6 min, nya spår efter lucka på 2 timmar eller nya filer efter ett längre gap om datumet har ändrats.</string>
-    <string name="rendering_attr_surfaceIntegrity_name">Vägbaneintegritet</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Vägbanans kvalitet</string>
     <string name="rendering_attr_hideOverground_name">Ytobjekt</string>
     <string name="osm_recipient_stat">Redigeringar %1$s, summan %2$s mBTC</string>
     <string name="rec_split_title">Använd Recorder Split</string>
@@ -2583,8 +2583,8 @@
     <string name="off_road_render_descr">För terrängkörning baserad på Topo-stilen och för användning med gröna satellitbilder som underlag. Minskad tjocklek på huvudvägar, ökad tjocklek på spår, stigar, cykelvägar och andra vägar.</string>
     <string name="nautical_render_descr">För nautisk navigering. Innehåller bojar, fyrar, vattendrag, farleder och märken, hamnar, sjömärken, och djupkonturer.</string>
     <string name="ski_map_render_descr">För skidåkning. Innehåller pister, skidliftar, längdspår osv. Dämpar sekundära kartobjekt.</string>
-    <string name="light_rs_render_descr">Enkel körstil. Mjukt nattläge, konturlinjer, kontrasterande orangefärgade vägar, och dämpar sekundära kartobjekt.</string>
-    <string name="topo_render_descr">För vandring, trekking och cykling i naturen. Läsbar utomhus. Kontrasterande vägar och naturobjekt, olika rutttyper, avancerade alternativ för konturlinjer, extra detaljer. Justering av ytintegritet skiljer vägkvalitet åt. Inget nattläge.</string>
+    <string name="light_rs_render_descr">Enkel stil för bilkörning. Skonsamt nattläge, höjdkurvor, kontrasterande orangefärgade vägar, och nedtonade sekundära kartobjekt.</string>
+    <string name="topo_render_descr">För utflykter, vandring och cykling i naturen. God läsbarhet utomhus. Kontrasterande vägar och naturobjekt, olika ledtyper, avancerade alternativ för höjdkurvor, mer detaljrik. Inställning för att visa vägbanans kvalitet. Inget nattläge.</string>
     <string name="mapnik_render_descr">Gammal standard \"Mapnik\"-stil. Använder liknande färger som \"Mapnik\".</string>
     <string name="touring_view_render_descr">Turiststil med hög kontrast och maximal detaljrikedom. Innehåller alla alternativ i OsmAnd:s standardstil, samtidigt som den visar så mycket detaljer som möjligt, särskilt vägar, stigar, och andra sätt att resa. Tydlig distinktion mellan olika vägtyper som i en turistatlas. Lämplig för användning på dag, natt, och utomhus.</string>
     <string name="default_render_descr">Allmän stil. Täta städer visas rent. Funktioner konturlinjer, vägar, ytkvalitet, tillträdesbegränsningar, vägsköldar, vägar som återges enligt SAC-skalan, vitvattensportartiklar.</string>
@@ -3195,7 +3195,7 @@
 \n • Fixade problem med import / export av profilinställningar
 \n
 \n</string>
-    <string name="contour_lines_thanks">Tack för att du köpte \"Konturlinjer\"</string>
+    <string name="contour_lines_thanks">Tack för att du köpte \"Höjdkurvor\"!</string>
     <string name="osm_live_payment_subscription_management_hw">Ditt AppGallery-konto debiteras vid köpbekräftelsen.
 \n
 \nAbonnemanget förlängs automatiskt såvida det inte sägs upp före förnyelsedatumet.
@@ -3279,7 +3279,7 @@
 \nLäs mer på: http://openplacereviews.org</string>
     <string name="uploaded_count">Uppladdat %1$d av %2$d</string>
     <string name="toast_select_edits_for_upload">Välj redigeringar för uppladdning</string>
-    <string name="hillshade_slope_contour_lines">Berg relief/ sluttning / konturlinjer</string>
+    <string name="hillshade_slope_contour_lines">Terrängskuggning / Lutning / Höjdkurvor</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Använd test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Logga in på OpenPlaCereViews</string>
@@ -3387,13 +3387,17 @@
     <string name="customize_route_line">Anpassa ruttlinjen</string>
     <string name="shared_string_route_line">Ruttlinje</string>
     <string name="expired">Upphörd</string>
-    <string name="release_4_0_beta">• OsmAnd Live-uppdateringar flyttade till \"Nedladdningar&gt; Uppdateringar\"
+    <string name="release_4_0_beta">• Möjlighet att ladda ner höjdkurvor i fot
 \n
-\n• Spår kan nu färga efter höjd, hastighet eller lutning.
+\n• Planera rutt-vyn: lagt till flikar för att växla mellan punkter och grafer
+\n
+\n• OsmAnd Live-uppdateringar flyttade till \"Hämta kartor &gt; Uppdateringar\"
+\n
+\n• Spår kan nu färgläggas efter höjd, hastighet eller lutning.
 \n
 \n• Lagt till alternativ för att ändra utseendet på navigeringslinjen
 \n
-\n• Uppdaterad \"Trip recording\" -dialog
+\n• Uppdaterad \"Inspelning av resa\"-dialog
 \n
 \n</string>
     <string name="update_all_maps_added">Uppdatera alla kartor som lagts till i %1$s\?</string>
@@ -3482,7 +3486,7 @@
     <string name="poi_routes">Rutter</string>
     <string name="restore_selected_data">Återställ vald data</string>
     <string name="backup_error_gzip_only_supported_upload">Filen ska vara i .gzip-format</string>
-    <string name="contour_lines_hillshades_slope">Konturlinjer, höjdskuggor, lutning</string>
+    <string name="contour_lines_hillshades_slope">Höjdkurvor, terrängskuggning, lutning</string>
     <string name="shared_string_purchased">Köpt</string>
     <string name="on_hold_since">Pausad sedan %1$s</string>
     <string name="active_till">Aktiv till %1$s</string>
@@ -3584,7 +3588,7 @@
     <string name="shared_string_calculate">Beräkna</string>
     <string name="update_all_maps_q">Uppdatera alla (%1$d) kartor\?</string>
     <string name="update_all_maps">Uppdatera alla kartor</string>
-    <string name="contour_lines_and_hillshade">Konturlinjer och höjdskugga</string>
+    <string name="contour_lines_and_hillshade">Höjdkurvor och terrängskuggning</string>
     <string name="sunrise_at">Soluppgång %1$s</string>
     <string name="sunset_at">Solnedgång %1$s</string>
     <string name="rendering_attr_streetLightingNight_name">Visa endast på natten</string>
@@ -3641,7 +3645,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Få tillgång till regelbundna månatliga uppdateringar av offline-kartor.</string>
     <string name="unlimited_map_downloads">Obegränsade kartnedladdningar</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia och Wikivoyage i nedkopplat läge</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrängkartor: konturlinjer, höjdskuggor, lutning</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Terrängkartor: höjdkurvor, terrängskuggning, lutning</string>
     <string name="offline_wikipeadia">Wikipedia i nedkopplat läge</string>
     <string name="offline_wikivoyage">Wikivoyage i nedkopplat läge</string>
     <string name="terrain_maps">Terrängkartor</string>
@@ -3798,7 +3802,7 @@
     <string name="rendering_attr_piste_difficulty_easy_name">Lätt</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">Friåkning</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Anslutning</string>
-    <string name="purchases_feature_desc_terrain">Höjdkurvor, terrängskuggning och reliefkartor, samt sluttningskartor med färger för att visa toppar och dalar.</string>
+    <string name="purchases_feature_desc_terrain">Höjdkurvor, terrängskuggning/relief och sluttningskartor med färgläggning, för att visa toppar och dalar.</string>
     <string name="amz_manage_subscription_descr">Du kan hantera din prenumeration i Amazon-appen på enheten eller i din profil på webbplatsen amazon.com.</string>
     <string name="hidden_items_descr">Dessa objekt döljs från menyn, men de innehållande valen, funktionerna eller insticksprogrammen fortsätter att fungera.</string>
     <string name="test_voice_desrc">Tryck på en knapp och lyssna på motsvarande röstinspelning för att höra om den saknas eller är felaktig.</string>
@@ -3833,4 +3837,26 @@
     <string name="rendering_attr_undefined_name">Odefinierad</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="upload_gpx_description_hint">Lämna tomt, spårnamnen används som beskrivning. Inmatad beskrivning kommer appliceras på varje spår.</string>
+    <string name="quick_action_contour_lines_descr">Knapp som visar eller döljer höjdkurvor i kartan.</string>
+    <string name="release_4_0">- Säkerhetskopiering i molnet
+\n
+\n - Nattläge för Topo-kartstilen har lagts till.
+\n
+\n - Höjdkurvor i fot möjliga att ladda ner.
+\n
+\n - Spår kan nu färgläggas efter höjd, hastighet eller lutning.
+\n
+\n - Uppdaterad dialogruta \"Inspelning av resa\".
+\n
+\n - Avståndsmätning genom tryck flyttas från Radielinjal till ett separat alternativ.
+\n
+\n - Planera rutt: Du kan nu ändra navigeringsalternativ, komma åt kartkonfigurationen och söka utan att lämna ruttplaneringen.
+\n
+\n - Ny skärmvy för köp med mer detaljerad information.
+\n
+\n - Möjlighet att ändra utseendet på navigeringslinjen.
+\n
+\n - OsmAnd Live-uppdateringar har flyttats till \"Hämta kartor &gt; Uppdateringar\".
+\n
+\n</string>
 </resources>
