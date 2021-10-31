@@ -4408,4 +4408,5 @@
     <string name="shared_storage_warning_description">A partire dae santandria/onniasantu 2021 OsmAnd 4.2 at a p+rdere s\'atzessu a sa memòria cumpartzida, pro neghe de sas modìficas a sas règulas de atzessu de Android.
 \n
 \nPro preghere muda sa memòria de archiviatzione dae sa memòria cumpartzida a sa memòria a disponimentu. Si non l\'as a fàghere s\'aplicatzione at a pèrdere s\'atzessu a sos datos tuos: datos chi incluint sas mapas non in lìnia, sas rastas GPX e totu su restu.</string>
+    <string name="display_route_tracks_as_poi">Ammustra sas rastas comente PDI</string>
 </resources>
