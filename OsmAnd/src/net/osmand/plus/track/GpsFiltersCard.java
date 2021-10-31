@@ -6,7 +6,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.google.android.material.slider.RangeSlider;
@@ -19,11 +18,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.GpsFilterHelper.GpsFilter;
-import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterActionsListener;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard;
-import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
-import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.track.GpsFilterActionsCard.ActionButton;
 
 import java.util.List;
 
@@ -31,37 +25,36 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
-public class GpsFiltersCard extends MapBaseCard implements GpsFilterActionsListener, CardListener {
+public class GpsFiltersCard extends GpsFilterBaseCard {
 
-	private final GpsFilterHelper filterHelper;
-	private final Fragment target;
+	private View view;
 
 	public GpsFiltersCard(@NonNull MapActivity mapActivity, @NonNull Fragment target) {
-		super(mapActivity);
-		this.filterHelper = app.getGpsFilterHelper();
-		this.filterHelper.addListener(this);
-		this.target = target;
+		super(mapActivity, target);
 	}
 
 	@Override
-	public int getCardLayoutId() {
-		return R.layout.gps_filters_card;
+	protected int getMainContentLayoutId() {
+		return R.layout.gps_filters_list;
 	}
 
 	@Override
-	protected void updateContent() {
+	protected void updateMainContent() {
+		if (view == null) {
+			view = inflateMainContent();
+		}
+
 		updatePointsRatio();
 		setupSmoothingFilter();
 		setupSpeedFilter();
 		setupAltitudeFilter();
 		setupHdopFilter();
-		setupActionsCard();
 	}
 
 	private void updatePointsRatio() {
 		String pointsString = app.getString(R.string.shared_string_gpx_points);
-		String leftPoints = String.valueOf(filterHelper.getLeftPoints());
-		String totalPoints = String.valueOf(filterHelper.getTotalPoints());
+		String leftPoints = String.valueOf(gpsFilterHelper.getLeftPoints());
+		String totalPoints = String.valueOf(gpsFilterHelper.getTotalPoints());
 		String ratio = app.getString(R.string.ltr_or_rtl_combine_via_slash_with_space, leftPoints, totalPoints);
 		String fullText = app.getString(R.string.ltr_or_rtl_combine_via_colon, pointsString, ratio);
 		SpannableString spannedText = new SpannableString(fullText);
@@ -73,19 +66,19 @@ public class GpsFiltersCard extends MapBaseCard implements GpsFilterActionsListe
 	}
 
 	private void setupSmoothingFilter() {
-		setupFilter(view.findViewById(R.id.smoothing_filter), filterHelper.getSmoothingFilter());
+		setupFilter(view.findViewById(R.id.smoothing_filter), gpsFilterHelper.getSmoothingFilter());
 	}
 
 	private void setupSpeedFilter() {
-		setupFilter(view.findViewById(R.id.speed_filter), filterHelper.getSpeedFilter());
+		setupFilter(view.findViewById(R.id.speed_filter), gpsFilterHelper.getSpeedFilter());
 	}
 
 	private void setupAltitudeFilter() {
-		setupFilter(view.findViewById(R.id.altitude_filter), filterHelper.getAltitudeFilter());
+		setupFilter(view.findViewById(R.id.altitude_filter), gpsFilterHelper.getAltitudeFilter());
 	}
 
 	private void setupHdopFilter() {
-		setupFilter(view.findViewById(R.id.hdop_filter), filterHelper.getHdopFilter());
+		setupFilter(view.findViewById(R.id.hdop_filter), gpsFilterHelper.getHdopFilter());
 	}
 
 	private void setupFilter(View container, GpsFilter filter) {
@@ -171,33 +164,5 @@ public class GpsFiltersCard extends MapBaseCard implements GpsFilterActionsListe
 
 		TextView rightText = container.findViewById(R.id.right_text);
 		rightText.setText(filter.getRightText());
-	}
-
-	private void setupActionsCard() {
-		ViewGroup actionsCardContainer = view.findViewById(R.id.actions_card_container);
-		actionsCardContainer.removeAllViews();
-		GpsFilterActionsCard gpsFilterActionsCard = new GpsFilterActionsCard(mapActivity, target);
-		actionsCardContainer.addView(gpsFilterActionsCard.build(mapActivity));
-		gpsFilterActionsCard.setListener(this);
-	}
-
-	@Override
-	public void onFiltersReset() {
-		update();
-	}
-
-	@Override
-	public void onCardLayoutNeeded(@NonNull BaseCard card) {
-	}
-
-	@Override
-	public void onCardPressed(@NonNull BaseCard card) {
-	}
-
-	@Override
-	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
-		if (card instanceof GpsFilterActionsCard && buttonIndex == ActionButton.SAVE_INTO_FILE.ordinal()) {
-			update();
-		}
 	}
 }

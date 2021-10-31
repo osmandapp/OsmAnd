@@ -2,6 +2,7 @@ package net.osmand.plus.track;
 
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -10,11 +11,13 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
+import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterActionsListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -27,27 +30,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
-public class GpsFilterActionsCard extends MapBaseCard {
+public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilterActionsListener {
 
-	private final GpsFilterHelper gpsFilterHelper;
+	protected final GpsFilterHelper gpsFilterHelper;
+
 	private final Fragment target;
 	private final List<BaseBottomSheetItem> actionButtonsItems;
 
-	public GpsFilterActionsCard(@NonNull MapActivity mapActivity, @NonNull Fragment target) {
+	public GpsFilterBaseCard(@NonNull MapActivity mapActivity, @NonNull Fragment target) {
 		super(mapActivity);
 		this.gpsFilterHelper = app.getGpsFilterHelper();
+		this.gpsFilterHelper.addListener(this);
 		this.target = target;
 		this.actionButtonsItems = createActionButtons();
 	}
 
 	@Override
-	public int getCardLayoutId() {
-		return R.layout.gps_filter_actions_card;
+	public final int getCardLayoutId() {
+		return R.layout.gps_filter_base_card;
 	}
 
 	private List<BaseBottomSheetItem> createActionButtons() {
@@ -110,15 +116,27 @@ public class GpsFilterActionsCard extends MapBaseCard {
 				}
 			}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-			CardListener listener = getListener();
-			if (listener != null) {
-				listener.onCardButtonPressed(this, ActionButton.SAVE_INTO_FILE.ordinal());
-			}
+			updateMainContent();
 		}
 	}
 
 	@Override
-	protected void updateContent() {
+	protected final void updateContent() {
+		updateMainContent();
+		updateActionsButtons();
+	}
+
+	@LayoutRes
+	protected abstract int getMainContentLayoutId();
+
+	protected View inflateMainContent() {
+		return UiUtilities.getInflater(mapActivity, nightMode)
+				.inflate(getMainContentLayoutId(), view.findViewById(R.id.main_content));
+	}
+
+	protected abstract void updateMainContent();
+
+	private void updateActionsButtons() {
 		View header = view.findViewById(R.id.header);
 		View content = view.findViewById(R.id.content);
 		AppCompatImageView upDownButton = view.findViewById(R.id.up_down_button);
@@ -142,7 +160,12 @@ public class GpsFilterActionsCard extends MapBaseCard {
 		}
 	}
 
-	public enum ActionButton {
+	@Override
+	public void onFiltersReset() {
+		updateMainContent();
+	}
+
+	private enum ActionButton {
 
 		RESET_TO_ORIGINAL(R.drawable.ic_action_reset_to_default_dark, R.string.reset_to_original),
 		SAVE_AS_COPY(R.drawable.ic_action_save_as_copy, R.string.save_as_copy),
