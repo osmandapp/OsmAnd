@@ -4412,4 +4412,7 @@
     <string name="no_plugins_enabled">Não tem extensões ativadas. Pode encontrar a lista de todas as extensões disponíveis no Menu - Extensões.</string>
     <string name="approx_safe_mode_description">Fazer a aproximação GPX usando o mais lento em vez do código nativo.</string>
     <string name="use_external_timestamps">Usar carimbos temporais externos</string>
+    <string name="display_route_tracks">Mostrar trilhos</string>
+    <string name="shared_string_travelbooks">Livros de viagem</string>
+    <string name="display_route_tracks_as_poi">Mostrar trilhos como POI</string>
 </resources>
