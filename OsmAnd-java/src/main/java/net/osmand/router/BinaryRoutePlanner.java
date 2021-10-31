@@ -13,6 +13,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
+import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -805,10 +806,17 @@ public class BinaryRoutePlanner {
 			}
 		}
 		
-		if (nextCurrentSegment == null) {
-			if (directionAllowed) {
+		if (nextCurrentSegment == null && directionAllowed) {
+			if (ctx.calculationMode != RouteCalculationMode.BASE) {
 				// exception as it should not occur
 				throw new IllegalStateException();
+			} else {
+				// TODO (create issue): we know bug in data, so we workaround it
+				int newEnd = currentSegment.getSegmentEnd() + (currentSegment.isPositive() ? +1 :-1);
+				if (newEnd >= 0 && newEnd < currentSegment.getRoad().getPointsLength() - 1) {
+					nextCurrentSegment = new RouteSegment(currentSegment.getRoad(), currentSegment.getSegmentEnd(),
+							newEnd);
+				}
 			}
 		}
 		return nextCurrentSegment;
