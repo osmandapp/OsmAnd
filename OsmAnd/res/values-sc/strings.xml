@@ -402,7 +402,7 @@
     <string name="select_index_file_to_download">No est istadu agatadu nudda. Si no agatades sa zona bostra la podides creare bois (bie https://osmand.net).</string>
     <string name="none_selected_gpx">In antis dislinda unu documentu GPX cun un\'incarcu longu.</string>
     <string name="local_index_select_gpx_file">Ischerta una rasta</string>
-    <string name="gpx_split_interval">Intervallu partidura</string>
+    <string name="gpx_split_interval">Intervallu de partidura</string>
     <string name="sort_by_distance">Òrdina pro distàntzia</string>
     <string name="sort_by_name">Òrdina pro nùmene</string>
     <string name="show_zoom_buttons_navigation_descr">Ammustra sos butones de s\'ismanniamentu durante sa navigatzione.</string>
@@ -1723,7 +1723,7 @@
     <string name="first_usage_item_description">Comente iscarrigare sas mapas e definire sas impostatziones de base.</string>
     <string name="navigation_item_description">Cunfigura sa navigatzione.</string>
     <string name="faq_item">Preguntas fitianas (FAQ)</string>
-    <string name="faq_item_description">Dimandas fitianas</string>
+    <string name="faq_item_description">Preguntas fitianas.</string>
     <string name="map_viewing_item">Visione de sa mapa</string>
     <string name="search_on_the_map_item">Chirchende in sa mapa</string>
     <string name="planning_trip_item">Pranificare unu biàgiu</string>
@@ -3116,7 +3116,7 @@
     <string name="get_discount_title">Otene %1$d %2$s a su %3$s de iscontu.</string>
     <string name="get_discount_first_part">%1$s pro su primu %2$s</string>
     <string name="get_discount_first_few_part">%1$s pro su primu %2$s</string>
-    <string name="get_discount_second_part">a pustis %1$s</string>
+    <string name="get_discount_second_part">A pustis %1$s</string>
     <string name="cancel_subscription">Annulla s\'abbonamentu</string>
     <string name="price_and_discount">%1$s • Rispàrmia %2$s</string>
     <string name="shared_string_example">Esèmpiu</string>
@@ -4379,4 +4379,33 @@
     <string name="android_auto_map_placeholder_title">Sa mapa est ammustrada in s\'ischermu de su veìculu.</string>
     <string name="android_auto_map_placeholder_descr">Istaca su dispositivu tuo dae Android Auto pro bìdere sa mapa in s\'aplicatzione.</string>
     <string name="android_auto_purchase_request_title">Còmpora OsmAnd Pro o Maps+ pro impreare OsmAnd cun Android Auto</string>
+    <string name="shared_string_travelbooks">Libros de biàgiu</string>
+    <string name="use_external_timestamps">Imprea sas marcas temporales esternas</string>
+    <string name="no_plugins_enabled">Non tenes estensiones abilitadas. Podes agatare sa lista de totu sas estensiones a disponimentu in Menù – Estensiones.</string>
+    <string name="search_history_is_disabled_descr">Podes abilitare sa cronologia de chirca in sas impostatziones</string>
+    <string name="markers_history_is_disabled_descr">Abìlita sa cronologia pro otènnere una lista de sos marcadores de mapa bisitados.</string>
+    <string name="history_is_disabled_descr">Abìlita sa cronologia pro otènnere un\'atzessu prus lestru a sos ùrtimos resurtados impreados.</string>
+    <string name="is_disabled">%1$s est disabilitadu</string>
+    <string name="clear_all_history">Isbòida totu sa cronologia</string>
+    <string name="history_actions_descr">Podes esportare sa cronologia a unu documentu.</string>
+    <string name="map_markers_history">Cronologia de sos marcadores de mapa</string>
+    <string name="navigation_history">Cronologia de navigatzione</string>
+    <string name="use_external_timestamps_description">Imprea sas marcas temporales de s\'incaminadore de retze in lìnia pro acontzare su tempus e sa lestresa mèdios</string>
+    <string name="shortcut_start_recording">Incumintza a registrare</string>
+    <string name="shortcut_navigate_to">Nàviga cara a…</string>
+    <string name="transparent_status_bar_descr">Ammustra sa apa in suta de sa barra de istadu</string>
+    <string name="transparent_status_bar">Barra de istadu trasparente</string>
+    <string name="display_route_tracks">Ammustra sas rastas</string>
+    <string name="clear_all_history_warning">Ses seguru de chèrrere isboidare totu sa cronologia de s\'aplicatzione\?
+\n
+\nSas cronologias de chirca, de navigatzione e de sos marcadores s\'ant a isboidare.</string>
+    <string name="history_preferences_descr">Podes disabilitare sa registratzione de sa cronologia in manera individuale pro cada genia de cronologia.</string>
+    <string name="safe_settings">Seguru</string>
+    <string name="approx_safe_mode">Aprossimatzione segura de sos gpx</string>
+    <string name="approx_safe_mode_description">Faghe s\'aprossimatzione de sos gpx impreende Android (chi est prus lentu) in logu de su còdighe nativu.</string>
+    <string name="shortcut_navigate_to_home">Nàviga cara a domo</string>
+    <string name="shortcut_navigate_to_work">Nàviga cara a traballu</string>
+    <string name="shared_storage_warning_description">A partire dae santandria/onniasantu 2021 OsmAnd 4.2 at a p+rdere s\'atzessu a sa memòria cumpartzida, pro neghe de sas modìficas a sas règulas de atzessu de Android.
+\n
+\nPro preghere muda sa memòria de archiviatzione dae sa memòria cumpartzida a sa memòria a disponimentu. Si non l\'as a fàghere s\'aplicatzione at a pèrdere s\'atzessu a sos datos tuos: datos chi incluint sas mapas non in lìnia, sas rastas GPX e totu su restu.</string>
 </resources>
