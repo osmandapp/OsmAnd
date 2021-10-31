@@ -4380,4 +4380,6 @@
     <string name="safe_settings">Précis</string>
     <string name="approx_safe_mode">Approximation précise des gpx</string>
     <string name="approx_safe_mode_description">Effectuer les approximations des gpx en utilisant Android (qui est plus lent) au lieu du code natif.</string>
+    <string name="shared_string_travelbooks">Carnets de voyage</string>
+    <string name="display_route_tracks">Afficher les traces</string>
 </resources>

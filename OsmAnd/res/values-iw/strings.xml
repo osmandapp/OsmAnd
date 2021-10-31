@@ -4340,4 +4340,19 @@
     <string name="safe_settings">בטוח</string>
     <string name="approx_safe_mode">הערכה בטוח של gpx</string>
     <string name="no_plugins_enabled">אין לך תוספים פעילים. אפשר למצוא את רשימת כל התוספים הזמינים תחת תפריט - תוספים.</string>
+    <string name="shared_string_travelbooks">ספרי טיולים</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">צביעת מסלולים לפי סוג רשת הנקודות (בינלאומי, אזורי, מקומי).</string>
+    <string name="shared_string_relation">יחס</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">צביעה לפי השתייכות לרשת.</string>
+    <string name="display_route_tracks">הצגת מסלולים</string>
+    <string name="walking_route_osmc_description">צביעת מסלולים לפי הצבע המקומי הייחודי שלהם (אם קיים ב־OpenStreetMap) וסוג (בינלאומי, אזורי, מקומי).</string>
+    <string name="rendering_attr_noNatureReserves_name">שמורת טבע</string>
+    <string name="rendering_attr_noNatureReserves_description">הסתרת שמורות טבע, אזורים מוגנים ופארקים לאומיים.</string>
+    <string name="use_external_timestamps">שימוש בחותמות זמן חיצוניות</string>
+    <string name="approx_safe_mode_description">ביצוע הערכת gpx באמצעות שיטה אטית של Android במקום בקוד מובנה.</string>
+    <string name="history_is_disabled_descr">יש להפעיל היסטוריה כדי לגשת לתוצאות בהן השתמשת לאחרונה מהר יותר.</string>
+    <string name="routes_color_by_type">צביעת מסלולים לפי…</string>
+    <string name="explore_osmnad_plans_to_find_suitable">ניתן לחקור את התכניות של OsmAnd ולמצוא אחת שמתאימה לך.</string>
+    <string name="purchases_feature_desc_pro_widgets">קבלת גישה לתכונות מקצועיות של OsmAnd: צביעת מסלולים ועוד.</string>
+    <string name="option_available_only_in_osmand_pro">האפשרות הזאת קיימת כחלק ממינוי OsmAnd Pro.</string>
 </resources>
