@@ -155,18 +155,6 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 				app.getOsmandMap().refreshMap();
 			}
 
-			private boolean shouldAddToResult(@NonNull List<Amenity> results, @NonNull Amenity amenity) {
-				String routeId = amenity.getRouteId();
-				if (!Algorithms.isEmpty(routeId)) {
-					for (Amenity a : results) {
-						if (routeId.equals(a.getRouteId())) {
-							return false;
-						}
-					}
-				}
-				return true;
-			}
-
 			@Override
 			protected List<Amenity> calculateResult(RotatedTileBox tileBox) {
 				QuadRect latLonBounds = tileBox.getLatLonBounds();
