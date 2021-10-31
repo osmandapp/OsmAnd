@@ -102,8 +102,6 @@ public class BinaryRoutePlanner {
 			if (TRACE_ROUTING) {
 				printRoad(">", segment, !forwardSearch);
 			}
-//			if(segment.getParentRoute() != null)
-//			System.out.println(segment.getRoad().getId() + " - " + segment.getParentRoute().getRoad().getId());
 			if (segment instanceof FinalRouteSegment) {
 				if (RoutingContext.SHOW_GC_SIZE) {
 					log.warn("Estimated overhead " + (ctx.memoryOverhead / (1 << 20)) + " mb");
@@ -489,18 +487,22 @@ public class BinaryRoutePlanner {
 			// 3. upload segment itself to visited segments
 			long nextPntId = calculateRoutePointId(currentSegment);
 			RouteSegment existingSegment = visitedSegments.put(nextPntId, currentSegment);
-			if (existingSegment != null && distFromStartPlusSegmentTime > existingSegment.distanceFromStart) {
-				// insert back original segment (test case with large area way)
-				visitedSegments.put(nextPntId, existingSegment);
-				directionAllowed = false;
-				if (ctx.config.heuristicCoefficient <= 1) {
-					System.err.println("! Alert distance from start visited " + distFromStartPlusSegmentTime + " > "
-							+ existingSegment.distanceFromStart + ": " + currentSegment + " - " + existingSegment);
+			if (existingSegment != null) {
+				if (distFromStartPlusSegmentTime > existingSegment.distanceFromStart) {
+					// insert back original segment (test case with large area way)
+					visitedSegments.put(nextPntId, existingSegment);
+					directionAllowed = false;
+					
+					if (TRACE_ROUTING) {
+						println("  >> Already visited");
+					}
+					break;
+				} else {
+					if (ctx.config.heuristicCoefficient <= 1) {
+						System.err.println("! ALERT slower segment was visited earlier " + distFromStartPlusSegmentTime + " > "
+								+ existingSegment.distanceFromStart + ": " + currentSegment + " - " + existingSegment);
+					}
 				}
-				if (TRACE_ROUTING) {
-					println("  >> Already visited");
-				}
-				break;
 			}
 						
 			// reassign @distanceFromStart to make it correct for visited segment
@@ -745,19 +747,21 @@ public class BinaryRoutePlanner {
 				if (nextCurrentSegment == null) { 
 					// end of route (-1 or length + 1)
 					directionAllowed = false;
-				} else if(nextCurrentSegment.isSegmentAttachedToStart() && 
-						ctx.roadPriorityComparator(nextCurrentSegment.distanceFromStart,
-								nextCurrentSegment.distanceToEnd, currentSegment.distanceFromStart, distanceToEnd) <= 0) {
-					directionAllowed = false;
 				} else {
-					nextCurrentSegment.setParentRoute(currentSegment);
-					nextCurrentSegment.distanceFromStart = currentSegment.distanceFromStart;
-					nextCurrentSegment.distanceToEnd = distanceToEnd;
-					final int nx = nextCurrentSegment.getRoad().getPoint31XTile(nextCurrentSegment.getSegmentEnd());
-					final int ny = nextCurrentSegment.getRoad().getPoint31YTile(nextCurrentSegment.getSegmentEnd());
-					if (nx == x && ny == y) {
-						// don't process other intersections (let process further segment)
-						return nextCurrentSegment;
+					if (nextCurrentSegment.isSegmentAttachedToStart()) {
+						directionAllowed = processOneRoadIntersection(ctx, reverseWaySearch, null, 
+								visitedSegments, currentSegment, nextCurrentSegment);
+//						directionAllowed = false;
+					} else {
+						nextCurrentSegment.setParentRoute(currentSegment);
+						nextCurrentSegment.distanceFromStart = currentSegment.distanceFromStart;
+						nextCurrentSegment.distanceToEnd = distanceToEnd;
+						final int nx = nextCurrentSegment.getRoad().getPoint31XTile(nextCurrentSegment.getSegmentEnd());
+						final int ny = nextCurrentSegment.getRoad().getPoint31YTile(nextCurrentSegment.getSegmentEnd());
+						if (nx == x && ny == y) {
+							// don't process other intersections (let process further segment)
+							return nextCurrentSegment;
+						}
 					}
 				}
 			} else {
@@ -816,23 +820,26 @@ public class BinaryRoutePlanner {
 				if (newEnd >= 0 && newEnd < currentSegment.getRoad().getPointsLength() - 1) {
 					nextCurrentSegment = new RouteSegment(currentSegment.getRoad(), currentSegment.getSegmentEnd(),
 							newEnd);
+					nextCurrentSegment.setParentRoute(currentSegment);
+					nextCurrentSegment.distanceFromStart = currentSegment.distanceFromStart;
+					nextCurrentSegment.distanceToEnd = distanceToEnd;
 				}
 			}
 		}
 		return nextCurrentSegment;
 	}
 
-	private void processOneRoadIntersection(RoutingContext ctx, boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments,
+	private boolean processOneRoadIntersection(RoutingContext ctx, boolean reverseWaySearch, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments, RouteSegment segment, RouteSegment next) {
 		if (next != null) {
 			if (!checkMovementAllowed(ctx, reverseWaySearch, next)) {
-				return;
+				return false;
 			}
 			float obstaclesTime = (float) ctx.getRouter().calculateTurnTime(next, 
 					next.isPositive() ? next.getRoad().getPointsLength() - 1 : 0,    
 					segment, segment.getSegmentEnd());
 			if (obstaclesTime < 0) {
-				return;
+				return false;
 			}
 			float distFromStart = obstaclesTime + segment.distanceFromStart;
 			if (TEST_SPECIFIC && next.road.getId() >> 6 == TEST_ID) {
@@ -860,13 +867,13 @@ public class BinaryRoutePlanner {
 						// Here it's not very legitimate cause we need to go up to final segment & decrease final time
 						toAdd = true;
 						if (ctx.config.heuristicCoefficient <= 1) {
-							System.err.println("! Alert distance put: " + distFromStart + " < "
+							System.err.println("! ALERT new faster path to a visited segment: " + (distFromStart + routeSegmentTime) + " < "
 									+ visIt.distanceFromStart + ": " + next + " - " + visIt);
 						}
 						// TODO is it needed here (works with and without)s?
-						visIt.setParentRoute(segment);
-						visIt.distanceFromStart = (float) (distFromStart + routeSegmentTime);
-						visIt.distanceToEnd = segment.distanceToEnd;
+//						visIt.setParentRoute(segment);
+//						visIt.distanceFromStart = (float) (distFromStart + routeSegmentTime);
+//						visIt.distanceToEnd = segment.distanceToEnd;
 					}
 				}
 				
@@ -881,9 +888,13 @@ public class BinaryRoutePlanner {
 				}
 				// put additional information to recover whole route after
 				next.setParentRoute(segment);
-				graphSegments.add(next);
+				if (graphSegments != null) {
+					graphSegments.add(next);
+				}
+				return true;
 			}
 		}
+		return false;
 	}
 	
 
