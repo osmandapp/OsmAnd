@@ -39,6 +39,7 @@ public class RoutingConfiguration {
 	// 1.1 tile load parameters (should not affect routing)
 	public int ZOOM_TO_LOAD_TILES = 16;
 	public long memoryLimitation;
+	public long nativeMemoryLimitation;
 
 	// 1.2 Build A* graph in backward/forward direction (can affect results)
 	// 0 - 2 ways, 1 - direct way, -1 - reverse way
@@ -162,14 +163,15 @@ public class RoutingConfiguration {
 			i.router.addImpassableRoads(new HashSet<>(impassableRoadLocations));
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
-			if(desirable != 0) {
+			if (desirable != 0) {
 				i.memoryLimitation = desirable * (1l << 20);
 			} else {
-				if(memoryLimitMB == 0) {
+				if (memoryLimitMB == 0) {
 					memoryLimitMB = DEFAULT_MEMORY_LIMIT;
 				}
 				i.memoryLimitation = memoryLimitMB * (1l << 20);
 			}
+			i.nativeMemoryLimitation = parseSilentInt(getAttribute(i.router, "nativeMemoryLimitInMB"), 0) * (1l << 20); 
 			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
 			if (directionPointsBuilder != null) {
 				QuadRect rect = new QuadRect(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
