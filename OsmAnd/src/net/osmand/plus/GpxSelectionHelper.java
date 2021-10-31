@@ -854,6 +854,7 @@ public class GpxSelectionHelper {
 
 		public boolean notShowNavigationDialog = false;
 		public boolean selectedByUser = true;
+		public boolean filtered = false;
 
 		private GPXFile gpxFile;
 		private GPXTrackAnalysis trackAnalysis;
@@ -916,7 +917,7 @@ public class GpxSelectionHelper {
 				if (gpxFile != null && gpxFile.getGeneralTrack() != null) {
 					return gpxFile.getGeneralTrack().segments;
 				} else {
-					return Collections.emptyList();
+					return filtered ? processedPointsToDisplay : Collections.emptyList();
 				}
 			}
 			return processedPointsToDisplay;

@@ -70,7 +70,7 @@ public class SegmentsCard extends MapBaseCard {
 			WrapContentHeightViewPager pager = segmentView.findViewById(R.id.pager);
 			PagerSlidingTabStrip tabLayout = segmentView.findViewById(R.id.sliding_tabs);
 
-			pager.setAdapter(new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode, listener, false));
+			pager.setAdapter(new GPXItemPagerAdapter(app, displayItem, displayHelper, nightMode, listener, false, false));
 			tabLayout.setViewPager(pager);
 
 			container.addView(segmentView);

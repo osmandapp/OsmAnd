@@ -165,4 +165,8 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 		TextView rightText = container.findViewById(R.id.right_text);
 		rightText.setText(filter.getRightText());
 	}
+
+	@Override
+	public void onFinishFiltering() {
+	}
 }

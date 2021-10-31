@@ -36,7 +36,7 @@ public class GpsFilterHelper {
 	private SelectedGpxFile sourceSelectedGpxFile;
 	private final SelectedGpxFile filteredSelectedGpxFile = new SelectedGpxFile();
 
-	private final Set<GpsFilterActionsListener> listeners = new HashSet<>();
+	private final Set<GpsFilterListener> listeners = new HashSet<>();
 
 	private SmoothingFilter smoothingFilter;
 	private SpeedFilter speedFilter;
@@ -48,10 +48,12 @@ public class GpsFilterHelper {
 
 	public GpsFilterHelper(@NonNull OsmandApplication app) {
 		this.app = app;
+		this.filteredSelectedGpxFile.filtered = true;
 	}
 
 	public void setSelectedGpxFile(@NonNull SelectedGpxFile selectedGpxFile) {
 		sourceSelectedGpxFile = selectedGpxFile;
+		filteredSelectedGpxFile.setJoinSegments(sourceSelectedGpxFile.isJoinSegments());
 
 		smoothingFilter = new SmoothingFilter(app, selectedGpxFile);
 		speedFilter = new SpeedFilter(app, selectedGpxFile);
@@ -109,7 +111,7 @@ public class GpsFilterHelper {
 		return tempList;
 	}
 
-	public void addListener(@NonNull GpsFilterActionsListener listener) {
+	public void addListener(@NonNull GpsFilterListener listener) {
 		listeners.add(listener);
 	}
 
@@ -120,7 +122,7 @@ public class GpsFilterHelper {
 		hdopFilter.reset();
 		filterGpxFile();
 
-		for (GpsFilterActionsListener listener : listeners) {
+		for (GpsFilterListener listener : listeners) {
 			listener.onFiltersReset();
 		}
 	}
@@ -177,7 +179,15 @@ public class GpsFilterHelper {
 			}
 		}
 
+		if (filteredSelectedGpxFile.isJoinSegments()) {
+			filteredGpxFile.addGeneralTrack();
+		}
+
 		filteredSelectedGpxFile.setGpxFile(filteredGpxFile, app);
+
+		for (GpsFilterListener listener : listeners) {
+			listener.onFinishFiltering();
+		}
 	}
 
 	private Track copyTrack(Track source) {
@@ -671,7 +681,9 @@ public class GpsFilterHelper {
 		return copy;
 	}
 
-	public interface GpsFilterActionsListener {
+	public interface GpsFilterListener {
+
+		void onFinishFiltering();
 
 		void onFiltersReset();
 

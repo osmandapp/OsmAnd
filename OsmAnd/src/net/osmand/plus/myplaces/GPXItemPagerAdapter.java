@@ -85,8 +85,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private SegmentActionsListener actionsListener;
 
 	private boolean chartClicked;
-	private boolean nightMode;
-	private boolean onlyGraphs;
+
+	private final boolean nightMode;
+	private final boolean onlyGraphs;
+	private final boolean hideJoinGapsBottomButtons;
+
 	private int chartHMargin = 0;
 
 	public void setChartHMargin(int chartHMargin) {
@@ -97,12 +100,18 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return displayHelper.getGpx() != null && displayHelper.getGpx().showCurrentTrack;
 	}
 
+	private boolean isFilteredTrack() {
+		GPXFile filteredGpxFile = app.getGpsFilterHelper().getFilteredSelectedGpxFile().getGpxFile();
+		return displayHelper.getGpx() != null && displayHelper.getGpx().equals(filteredGpxFile);
+	}
+
 	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
-							   @Nullable GpxDisplayItem gpxItem,
-							   @NonNull TrackDisplayHelper displayHelper,
-							   boolean nightMode,
-							   @NonNull SegmentActionsListener actionsListener,
-							   boolean onlyGraphs) {
+	                           @Nullable GpxDisplayItem gpxItem,
+	                           @NonNull TrackDisplayHelper displayHelper,
+	                           boolean nightMode,
+	                           @NonNull SegmentActionsListener actionsListener,
+	                           boolean onlyGraphs,
+	                           boolean hideJoinGapsBottomButtons) {
 		super();
 		this.app = app;
 		this.gpxItem = gpxItem;
@@ -110,6 +119,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		this.nightMode = nightMode;
 		this.actionsListener = actionsListener;
 		this.onlyGraphs = onlyGraphs;
+		this.hideJoinGapsBottomButtons = hideJoinGapsBottomButtons;
 		iconsCache = app.getUIUtilities();
 
 		updateAnalysis();
@@ -124,10 +134,14 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				analysis = gpxFile.getAnalysis(0);
 				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX);
 			}
-		} else {
-			if (gpxItem != null) {
-				analysis = gpxItem.analysis;
-			}
+		} else if (isFilteredTrack()) {
+			GPXFile gpxFile = app.getGpsFilterHelper().getFilteredSelectedGpxFile().getGpxFile();
+			gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX);
+			analysis = gpxItem == null
+					? gpxFile.getAnalysis(System.currentTimeMillis())
+					: gpxItem.analysis;
+		} else if (gpxItem != null) {
+			analysis = gpxItem.analysis;
 		}
 	}
 
@@ -255,15 +269,18 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			layoutResId = R.layout.gpx_item_general;
 		}
 		View view = inflater.inflate(layoutResId, container, false);
-		if (onlyGraphs) {
+		if (hideJoinGapsBottomButtons) {
 			AndroidUiHelper.setVisibility(View.GONE,
 					view.findViewById(R.id.gpx_join_gaps_container),
-					view.findViewById(R.id.top_line_blocks),
-					view.findViewById(R.id.list_divider),
-					view.findViewById(R.id.bottom_line_blocks),
 					view.findViewById(R.id.details_divider),
 					view.findViewById(R.id.details_view)
 			);
+			if (onlyGraphs) {
+				AndroidUiHelper.setVisibility(View.GONE,
+						view.findViewById(R.id.top_line_blocks),
+						view.findViewById(R.id.list_divider),
+						view.findViewById(R.id.bottom_line_blocks));
+			}
 		}
 		return view;
 	}
@@ -287,12 +304,6 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_time_moving_16));
 				((ImageView) view.findViewById(R.id.distance_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
-
-				String avg = OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app);
-				String max = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
-
-				((TextView) view.findViewById(R.id.average_text)).setText(avg);
-				((TextView) view.findViewById(R.id.max_text)).setText(max);
 
 				view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -359,17 +370,6 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_ascent_16));
 				((ImageView) view.findViewById(R.id.descent_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_descent_16));
-
-				String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-				String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-				String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-				String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
-
-				((TextView) view.findViewById(R.id.average_text))
-						.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
-				((TextView) view.findViewById(R.id.range_text)).setText(String.format("%s - %s", min, max));
-				((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
-				((TextView) view.findViewById(R.id.descent_text)).setText(desc);
 
 				view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -676,40 +676,85 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return views.get(position);
 	}
 
-	void updateChart(int position) {
+	private void updateChart(int position) {
 		View view = getViewAtPosition(position);
 		if (view != null) {
 			updateChart((LineChart) view.findViewById(R.id.chart));
 		}
 	}
 
-	void updateJoinGapsInfo(View view, int position) {
+	private void updateJoinGapsInfo(View view, int position) {
 		if (view != null) {
 			GPXTabItemType tabType = tabTypes[position];
 			boolean generalTrack = gpxItem.isGeneralTrack();
 			boolean joinSegments = displayHelper.isJoinSegments();
-			boolean visible = generalTrack && analysis != null && tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), visible);
+
+			boolean showJoinGapsSwitch = !hideJoinGapsBottomButtons && generalTrack
+					&& analysis != null && tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
+			AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), showJoinGapsSwitch);
 			((SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch)).setChecked(joinSegments);
+
 			if (analysis != null) {
-				if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL)) {
-					float totalDistance = !joinSegments && generalTrack ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-					float timeSpan = !joinSegments && generalTrack ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
-
-					((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
-					((TextView) view.findViewById(R.id.duration_text)).setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
-				} else if (tabType.equals(GPX_TAB_ITEM_SPEED)) {
-					long timeMoving = !joinSegments && generalTrack ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
-					float totalDistanceMoving = !joinSegments && generalTrack ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
-
-					((TextView) view.findViewById(R.id.time_moving_text)).setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
-					((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
+				if (tabType == GPX_TAB_ITEM_GENERAL) {
+					updateGeneralTabInfo(view);
+				} else if (tabType == GPX_TAB_ITEM_ALTITUDE) {
+					updateAltitudeTabInfo(view);
+				} else if (tabType == GPX_TAB_ITEM_SPEED) {
+					updateSpeedTabInfo(view);
 				}
 			}
 		}
 	}
 
-	void updateChart(LineChart chart) {
+	private void updateGeneralTabInfo(View container) {
+		boolean joinSegments = displayHelper.isJoinSegments();
+		boolean generalTrack = gpxItem.isGeneralTrack();
+
+		float totalDistance = !joinSegments && generalTrack ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+		float timeSpan = !joinSegments && generalTrack ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+
+		TextView distanceText = container.findViewById(R.id.distance_text);
+		TextView durationText = container.findViewById(R.id.duration_text);
+
+		distanceText.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
+		durationText.setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
+	}
+
+	private void updateAltitudeTabInfo(View container) {
+		String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
+		String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+
+		TextView averageAltitudeText = container.findViewById(R.id.average_text);
+		TextView altitudeRangeText = container.findViewById(R.id.range_text);
+		TextView ascentText = container.findViewById(R.id.ascent_text);
+		TextView descentText = container.findViewById(R.id.descent_text);
+
+		averageAltitudeText.setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+		altitudeRangeText.setText(String.format("%s - %s", min, max));
+		ascentText.setText(OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app));
+		descentText.setText(OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
+	}
+
+	private void updateSpeedTabInfo(View container) {
+		boolean joinSegments = displayHelper.isJoinSegments();
+		boolean generalTrack = gpxItem.isGeneralTrack();
+
+		long timeMoving = !joinSegments && generalTrack ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+		float totalDistanceMoving = !joinSegments && generalTrack ?
+				analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+
+		TextView averageSpeedText = container.findViewById(R.id.average_text);
+		TextView maxSpeedText = container.findViewById(R.id.max_text);
+		TextView timeMovingText = container.findViewById(R.id.time_moving_text);
+		TextView distanceText = container.findViewById(R.id.distance_text);
+
+		averageSpeedText.setText(OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
+		maxSpeedText.setText(OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app));
+		timeMovingText.setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
+		distanceText.setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
+	}
+
+	private void updateChart(LineChart chart) {
 		if (chart != null && !chart.isEmpty()) {
 			if (gpxItem != null) {
 				if (gpxItem.chartMatrix != null) {
@@ -756,7 +801,10 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			} else if (tabTypes[position] == GPX_TAB_ITEM_GENERAL) {
 				secondType = SPEED;
 			}
-			LineChart chart = getViewAtPosition(position).findViewById(R.id.chart);
+
+			View container = getViewAtPosition(position);
+
+			LineChart chart = container.findViewById(R.id.chart);
 			List<ILineDataSet> dataSets = getDataSets(chart, tabTypes[position], firstType, secondType);
 			boolean isEmptyDataSets = Algorithms.isEmpty(dataSets);
 			AndroidUiHelper.updateVisibility(chart, !isEmptyDataSets);
@@ -769,6 +817,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
 			}
 			updateChart(chart);
+
+			updateJoinGapsInfo(container, position);
 		}
 		notifyDataSetChanged();
 	}

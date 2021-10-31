@@ -2,9 +2,9 @@ package net.osmand.plus.track;
 
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
@@ -17,7 +17,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
-import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterActionsListener;
+import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -36,7 +36,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 
-public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilterActionsListener {
+public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilterListener {
 
 	protected final GpsFilterHelper gpsFilterHelper;
 
@@ -118,6 +118,10 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 
 			updateMainContent();
 		}
+	}
+
+	protected void disallowScroll() {
+		((ScrollView) view).requestDisallowInterceptTouchEvent(true);
 	}
 
 	@Override
