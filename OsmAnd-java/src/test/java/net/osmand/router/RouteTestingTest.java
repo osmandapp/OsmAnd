@@ -26,6 +26,7 @@ import com.google.gson.GsonBuilder;
 public class RouteTestingTest {
 	private TestEntry te;
 
+	private static final int TIMEOUT = 500;
 
 	public RouteTestingTest(String name, TestEntry te) {
 		this.te = te;
@@ -54,7 +55,7 @@ public class RouteTestingTest {
 
 	}
 
-	@Test
+	@Test(timeout = TIMEOUT)
 	public void testRouting() throws Exception {
 		String fl = "src/test/resources/Routing_test.obf";
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
@@ -83,6 +84,12 @@ public class RouteTestingTest {
 			RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
 					RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, params);
 
+			System.out.println("planRoadDirection: " + planRoadDirection);
+
+			if (params.containsKey("heuristicCoefficient")) {
+				config.heuristicCoefficient = Float.parseFloat(params.get("heuristicCoefficient"));
+			}
+
 			config.planRoadDirection = planRoadDirection;
 			RoutingContext ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
 					RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);
@@ -107,6 +114,10 @@ public class RouteTestingTest {
 				}
 			}
 			Map<Long, String> expectedResults = te.getExpectedResults();
+			if (expectedResults == null) {
+				System.out.println("This is test on hanging routing");
+				break;
+			}
 			for (Entry<Long, String> es : expectedResults.entrySet()) {
 				switch (es.getValue()) {
 					case "false":
