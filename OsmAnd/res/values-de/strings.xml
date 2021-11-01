@@ -4413,4 +4413,7 @@
     <string name="use_external_timestamps_description">Zeitstempel des Online Routers verwenden, um die geschätzte Zeit und die durchschnittliche Geschwindigkeit anzupassen</string>
     <string name="safe_settings">Sicher</string>
     <string name="no_plugins_enabled">Sie haben keine Erweiterungen aktiviert. Eine Liste aller verfügbaren Erweiterungen finden Sie unter Menü - Erweiterungen.</string>
+    <string name="display_route_tracks">Tracks anzeigen</string>
+    <string name="shared_string_travelbooks">Reiseführer</string>
+    <string name="display_route_tracks_as_poi">Tracks als POI anzeigen</string>
 </resources>
