@@ -16,13 +16,13 @@ import net.osmand.plus.OsmandApplication;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommonGraphAdapter extends BaseCommonGraphAdapter {
+public class CommonChartAdapter extends BaseCommonChartAdapter {
 
 	private Highlight highlight;
 	private final Map<String, ExternalValueSelectedListener> externalValueSelectedListeners = new HashMap<>();
 	private ExternalGestureListener externalGestureListener;
 
-	public CommonGraphAdapter(OsmandApplication app, LineChart chart, boolean usedOnMap) {
+	public CommonChartAdapter(OsmandApplication app, LineChart chart, boolean usedOnMap) {
 		super(app, chart, usedOnMap);
 	}
 

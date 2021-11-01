@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets.widgets;
 
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.util.Pair;
 import android.view.View;
@@ -35,7 +36,7 @@ import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.ChartPointLayer;
-import net.osmand.plus.measurementtool.graph.BaseCommonGraphAdapter;
+import net.osmand.plus.measurementtool.graph.BaseCommonChartAdapter;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.layers.GPXLayer;
@@ -61,7 +62,7 @@ public class ElevationProfileWidget {
 	private View downhillView;
 	private View gradeView;
 	private LineChart chart;
-	private BaseCommonGraphAdapter graphAdapter;
+	private BaseCommonChartAdapter chartAdapter;
 
 	private GPXTrackAnalysis analysis;
 	private GpxDisplayItem gpxItem;
@@ -105,6 +106,9 @@ public class ElevationProfileWidget {
 		TextView title = blockView.findViewById(R.id.title);
 		title.setText(textId);
 
+		TextView text = blockView.findViewById(R.id.widget_text);
+		text.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+
 		ImageView icon = blockView.findViewById(R.id.image);
 		icon.setImageResource(iconId);
 
@@ -121,9 +125,9 @@ public class ElevationProfileWidget {
 
 	private void updateInfoImpl() {
 		if (updateSettings()) {
-			setupGraph();
+			setupChart();
 		}
-		updateGraph();
+		updateChart();
 		updateWidgets();
 	}
 
@@ -137,17 +141,17 @@ public class ElevationProfileWidget {
 		return routeChanged || slopesChanged;
 	}
 
-	private void setupGraph() {
+	private void setupChart() {
 		gpx = GpxUiHelper.makeGpxFromRoute(app.getRoutingHelper().getRoute(), app);
 		analysis = gpx.getAnalysis(0);
 		gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpx, ChartPointLayer.ROUTE);
 
-		chart = (LineChart) view.findViewById(R.id.line_chart);
+		chart = view.findViewById(R.id.line_chart);
 		Drawable markerIcon = app.getUIUtilities().getIcon(R.drawable.ic_action_location_color);
 		GpxUiHelper.setupGPXChart(chart, 4, 24f, 16f, !isNightMode(), true, markerIcon);
 		chart.setHighlightPerTapEnabled(false);
 		chart.setHighlightPerDragEnabled(false);
-		graphAdapter = new BaseCommonGraphAdapter(app, chart, true);
+		chartAdapter = new BaseCommonChartAdapter(app, chart, true);
 
 		if (analysis.hasElevationData) {
 			List<ILineDataSet> dataSets = new ArrayList<>();
@@ -163,18 +167,17 @@ public class ElevationProfileWidget {
 				}
 			}
 
-			graphAdapter.updateContent(new LineData(dataSets), gpxItem);
+			chartAdapter.updateContent(new LineData(dataSets), gpxItem);
 			toMetersMultiplier = ((OrderedLineDataSet) dataSets.get(0)).getDivX();
 
 			setupZoom(chart);
-			shiftQuickActionButton();
 			chart.setVisibility(View.VISIBLE);
 		} else {
 			chart.setVisibility(View.GONE);
 		}
 	}
 
-	private void updateGraph() {
+	private void updateChart() {
 		Location location = app.getLocationProvider().getLastKnownLocation();
 		if (myLocation != null && MapUtils.areLatLonEqual(myLocation, location)) return;
 		myLocation = location;
@@ -267,13 +270,6 @@ public class ElevationProfileWidget {
 			float scaleX = maxValue / MAX_DISTANCE_TO_SHOW_IM_METERS;
 			chart.zoom(scaleX, 1.0f, 0, 0);
 			chart.scrollTo(0, 0);
-		}
-	}
-
-	private void shiftQuickActionButton() {
-		MapQuickActionLayer quickActionLayer = map.getMapLayers().getMapQuickActionLayer();
-		if (quickActionLayer != null) {
-			quickActionLayer.refreshLayer();
 		}
 	}
 

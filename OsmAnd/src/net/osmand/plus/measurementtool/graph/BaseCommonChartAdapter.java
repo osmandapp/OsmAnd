@@ -8,9 +8,9 @@ import com.github.mikephil.charting.data.LineData;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.OsmandApplication;
 
-public class BaseCommonGraphAdapter extends BaseGraphAdapter<LineChart, LineData, GpxDisplayItem>{
+public class BaseCommonChartAdapter extends BaseChartAdapter<LineChart, LineData, GpxDisplayItem> {
 
-	public BaseCommonGraphAdapter(@NonNull OsmandApplication app, @NonNull LineChart chart, boolean usedOnMap) {
+	public BaseCommonChartAdapter(@NonNull OsmandApplication app, @NonNull LineChart chart, boolean usedOnMap) {
 		super(app, chart, usedOnMap);
 	}
 

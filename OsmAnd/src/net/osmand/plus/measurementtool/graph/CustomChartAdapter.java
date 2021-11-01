@@ -36,7 +36,7 @@ import java.util.List;
 
 import static net.osmand.plus.track.ColorsCard.MINIMUM_CONTRAST_RATIO;
 
-public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, BarData, RouteStatistics> {
+public class CustomChartAdapter extends BaseChartAdapter<HorizontalBarChart, BarData, RouteStatistics> {
 
 	private String selectedPropertyName;
 	private ViewGroup legendContainer;
@@ -49,7 +49,7 @@ public class CustomGraphAdapter extends BaseGraphAdapter<HorizontalBarChart, Bar
 		GONE
 	}
 
-	public CustomGraphAdapter(@NonNull OsmandApplication app, @NonNull HorizontalBarChart chart, boolean usedOnMap) {
+	public CustomChartAdapter(@NonNull OsmandApplication app, @NonNull HorizontalBarChart chart, boolean usedOnMap) {
 		super(app, chart, usedOnMap);
 	}
 

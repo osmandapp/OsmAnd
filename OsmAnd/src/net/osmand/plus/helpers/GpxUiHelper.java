@@ -67,8 +67,8 @@ import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IFillFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -1235,10 +1235,10 @@ public class GpxUiHelper {
 		final String mainUnitX = ctx.getString(mainUnitStr);
 
 		axisBase.setGranularity(granularity);
-		axisBase.setValueFormatter(new IAxisValueFormatter() {
+		axisBase.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				if (!Algorithms.isEmpty(formatX)) {
 					return MessageFormat.format(formatX + mainUnitX, value);
 				} else {
@@ -1253,9 +1253,9 @@ public class GpxUiHelper {
 	private static float setupXAxisTime(XAxis xAxis, long timeSpan) {
 		final boolean useHours = timeSpan / 3600000 > 0;
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter(new IAxisValueFormatter() {
+		xAxis.setValueFormatter(new ValueFormatter() {
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				int seconds = (int)value;
 				if (useHours) {
 					int hours = seconds / (60 * 60);
@@ -1275,9 +1275,9 @@ public class GpxUiHelper {
 
 	private static float setupXAxisTimeOfDay(XAxis xAxis, final long startTime) {
 		xAxis.setGranularity(1f);
-		xAxis.setValueFormatter(new IAxisValueFormatter() {
+		xAxis.setValueFormatter(new ValueFormatter() {
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				long seconds = (long) (startTime/1000 + value);
 				return OsmAndFormatter.getFormattedTimeShort(seconds);
 			}
@@ -1468,10 +1468,10 @@ public class GpxUiHelper {
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_blue_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter(new IAxisValueFormatter() {
+		yAxis.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				return (int)value + " " + mainUnitY;
 			}
 		});
@@ -1627,10 +1627,10 @@ public class GpxUiHelper {
 			format = "{0,number,0.#} ";
 		}
 		final String formatY = format;
-		yAxis.setValueFormatter(new IAxisValueFormatter() {
+		yAxis.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				if (!Algorithms.isEmpty(formatY)) {
 					return MessageFormat.format(formatY + mainUnitY, value);
 				} else {
@@ -1726,10 +1726,10 @@ public class GpxUiHelper {
 		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_green_grid));
 		yAxis.setGranularity(1f);
 		yAxis.resetAxisMinimum();
-		yAxis.setValueFormatter(new IAxisValueFormatter() {
+		yAxis.setValueFormatter(new ValueFormatter() {
 
 			@Override
-			public String getFormattedValue(float value, AxisBase axis) {
+			public String getFormattedValue(float value) {
 				return (int)value + " " + mainUnitY;
 			}
 		});

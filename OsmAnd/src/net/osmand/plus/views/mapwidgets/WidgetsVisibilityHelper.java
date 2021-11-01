@@ -139,6 +139,7 @@ public class WidgetsVisibilityHelper {
 	public boolean shouldShowElevationProfileWidget() {
 		return settings.SHOW_ELEVATION_PROFILE_WIDGET.get()
 				&& isRouteCalculated()
+				&& !isDashboardVisible()
 				&& !isInChangeMarkerPositionMode()
 				&& !isInGpxDetailsMode()
 				&& !isInMeasurementToolMode()
@@ -218,6 +219,10 @@ public class WidgetsVisibilityHelper {
 
 	private boolean isInFollowTrackMode() {
 		return MapRouteInfoMenu.followTrackVisible;
+	}
+
+	public boolean isDashboardVisible() {
+		return mapActivity.getDashboard().isVisible();
 	}
 
 	private boolean isContextMenuFragmentVisible() {

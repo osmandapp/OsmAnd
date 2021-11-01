@@ -199,7 +199,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
 
         int rightMargin = fabMargin != null ? fabMargin.first : defRightMargin;
         int bottomMargin = fabMargin != null ? fabMargin.second : defBottomMargin;
-        bottomMargin += calculateAdditionalBottomMargin(mapActivity);
         // check limits
         if (rightMargin < 0) {
             rightMargin = defRightMargin;
@@ -215,13 +214,6 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionUp
         params.rightMargin = rightMargin;
         params.bottomMargin = bottomMargin;
         quickActionButton.setLayoutParams(params);
-    }
-
-    private int calculateAdditionalBottomMargin(@NonNull MapActivity mapActivity) {
-        if (mapActivity.getWidgetsVisibilityHelper().shouldShowElevationProfileWidget()) {
-            return mapActivity.findViewById(R.id.elevation_profile_widget_layout).getHeight();
-        }
-        return 0;
     }
 
     private int calculateTotalSizePx(@DimenRes int... dimensId) {
