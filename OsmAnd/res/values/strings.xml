@@ -904,7 +904,7 @@
     <string name="no_recalculation_setting">No recalculation</string>
     <string name="open_settings">Open settings</string>
     <string name="plugin_disabled">Plugin off</string>
-    <string name="plugin_disabled_descr">Remove this plugin if you don't use it.\n\nIt will remain on the device after removing OsmAnd.</string>
+    <string name="plugin_disabled_descr">Remove this plugin if you don't use it or uninstall OsmAnd.\n\nOtherwise it remains as an app on the device.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="route_recalculation_dist_title">Minimal distance to recalculate route</string>
