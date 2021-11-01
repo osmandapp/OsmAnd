@@ -4415,4 +4415,5 @@
     <string name="display_route_tracks">Kuva rajad</string>
     <string name="shared_string_travelbooks">Reisiraamatud</string>
     <string name="approx_safe_mode">Turvaline gpx ühtlustamine</string>
+    <string name="display_route_tracks_as_poi">Näita teekondi huvipunktidena</string>
 </resources>
