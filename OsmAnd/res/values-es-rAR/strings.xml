@@ -4409,4 +4409,7 @@
     <string name="approx_safe_mode">Aproximación segura de GPX</string>
     <string name="use_external_timestamps_description">Usa las marcas de tiempo del navegador en línea para ajustar el tiempo estimado y la velocidad media</string>
     <string name="no_plugins_enabled">No tienes ningún complemento activado. Puedes encontrar la lista de todos los complementos disponibles en «Menú → Complementos».</string>
+    <string name="display_route_tracks_as_poi">Mostrar trazas como PDI</string>
+    <string name="shared_string_travelbooks">Libro de viajes</string>
+    <string name="display_route_tracks">Mostrar trazas</string>
 </resources>
