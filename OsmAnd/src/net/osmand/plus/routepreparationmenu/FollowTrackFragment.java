@@ -414,7 +414,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 			if (selectedGpxFile != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				selectTrackToFollow(gpxFile);
-				updateSelectionMode(gpxFile.getNonEmptySegmentsCount() <= 1);
+				updateSelectionMode(gpxFile.getNonEmptySegmentsCount() != 1);
 			} else {
 				CallbackWithObject<GPXFile[]> callback = new CallbackWithObject<GPXFile[]>() {
 					@Override
