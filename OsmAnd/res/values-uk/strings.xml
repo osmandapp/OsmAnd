@@ -1689,7 +1689,7 @@
     <string name="traffic_warning_hazard">Небезпека</string>
     <string name="rendering_value_boldOutline_name">Жирний контур</string>
     <string name="no_updates_available">Немає доступних оновлень</string>
-    <string name="download_live_updates">Самооновлення</string>
+    <string name="download_live_updates">Оновлення OsmAnd Live</string>
     <string name="rendering_attr_currentTrackColor_description">Колір GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Товщина GPX</string>
     <string name="shared_string_wikipedia">Вікіпедія</string>
@@ -1792,7 +1792,7 @@
     <string name="route_distance">Відстань:</string>
     <string name="route_duration">Час:</string>
     <string name="rec_split_storage_size">Розмір сховища</string>
-    <string name="live_updates">Самооновлення</string>
+    <string name="live_updates">Оновлення Osmand Live</string>
     <string name="available_maps">Доступні мапи</string>
     <string name="select_voice_provider">Виберіть голосові вказівки</string>
     <string name="select_voice_provider_descr">Виберіть або завантажте голосові вказівки для Вашої мови.</string>
@@ -1843,7 +1843,7 @@
     <string name="rec_split_clip_length_desc">Верхня межа часу записаного кліпу.</string>
     <string name="rec_split_storage_size_desc">Обсяг пам’яті, який може бути зайнятий всіма записаними кліпами.</string>
     <string name="dashboard_or_drawer_title">Стільниця або меню керування</string>
-    <string name="live_update">Оновлення</string>
+    <string name="live_update">Оновлення Osmand Live</string>
     <string name="reports_for">Відзвітувати</string>
     <string name="rendering_attr_showMtbRoutes_name">Маршрути для гірських велосипедів</string>
     <string name="show_on_start_description">\"Вимкнено\" запускає мапу безпосередньо.</string>
@@ -4024,7 +4024,7 @@
     <string name="live_update_frequency_hour_variant">Наявність оновлень мап перевірятиметься щогодини. Наступного разу %1$s в %2$s.</string>
     <string name="live_update_frequency_day_variant">Наявність оновлень мап перевірятиметься щодня. Наступного разу %1$s в %2$s.</string>
     <string name="delete_updates">Видалити оновлення</string>
-    <string name="live_update_delete_updates_msg">Видалити всі %s поточні оновлення\?</string>
+    <string name="live_update_delete_updates_msg">Видалити всі live-оновлення для %s\?</string>
     <string name="purchases">Покупки</string>
     <string name="select_category_descr">Виберіть категорію або додайте нову</string>
     <string name="track_recording_will_be_continued">Записування буде продовжено.</string>
