@@ -184,19 +184,26 @@ public class GpxSelectionHelper {
 		return null;
 	}
 
-	public static boolean processSplit(OsmandApplication app) {
+	public static boolean processSplit(@Nullable OsmandApplication app,
+	                                   @Nullable SelectedGpxFile fileToProcess) {
 		if (app == null || app.isApplicationInitializing()) {
 			return false;
 		}
 
 		GpsFilterHelper gpsFilterHelper = app.getGpsFilterHelper();
 		List<GpxDataItem> items = app.getGpxDbHelper().getSplitItems();
+
 		for (GpxDataItem dataItem : items) {
 			String path = dataItem.getFile().getAbsolutePath();
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
 			if (selectedGpxFile != null && gpsFilterHelper.isSourceOfFilteredGpxFile(selectedGpxFile)) {
 				selectedGpxFile = gpsFilterHelper.getFilteredSelectedGpxFile();
 			}
+
+			if (fileToProcess != null && !fileToProcess.equals(selectedGpxFile)) {
+				continue;
+			}
+
 			if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
 				List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
@@ -892,11 +899,15 @@ public class GpxSelectionHelper {
 
 		private void update(OsmandApplication app) {
 			modifiedTime = gpxFile.modifiedTime;
-			trackAnalysis = gpxFile.getAnalysis(
-					Algorithms.isEmpty(gpxFile.path) ? System.currentTimeMillis() :
-							new File(gpxFile.path).lastModified());
+
+			long fileTimestamp = Algorithms.isEmpty(gpxFile.path)
+					? System.currentTimeMillis()
+					: new File(gpxFile.path).lastModified();
+			trackAnalysis = gpxFile.getAnalysis(fileTimestamp);
+
 			displayGroups = null;
-			splitProcessed = GpxSelectionHelper.processSplit(app);
+			SelectedGpxFile fileToProcess = filtered ? this : null;
+			splitProcessed = GpxSelectionHelper.processSplit(app, fileToProcess);
 		}
 
 		public void processPoints(OsmandApplication app) {
