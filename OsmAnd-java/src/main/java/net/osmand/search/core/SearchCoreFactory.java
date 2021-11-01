@@ -1501,11 +1501,30 @@ public class SearchCoreFactory {
 			List<Object> all = new ArrayList<>();
 			List<String> strings = new ArrayList<>();
 			LocationParser.splitObjects(s, d, all, strings);
-			if (d.size() == 0) {
-				return null;
+			if (isValidPartialCoordinate(all, s)) {
+				double lat = LocationParser.parse1Coordinate(all, 0, all.size());
+				return new LatLon(lat, 0);
 			}
-			double lat = LocationParser.parse1Coordinate(all, 0, all.size());
-			return new LatLon(lat, 0);
+			return null;
+		}
+
+		private boolean isValidPartialCoordinate(List<Object> all, String s) {
+			int firstNumeralIdx = -1;
+			for (int i = 0; i < all.size(); i++) {
+				if (all.get(i) instanceof Double) {
+					firstNumeralIdx = i;
+					break;
+				}
+			}
+			if (firstNumeralIdx != -1) {
+				if (all.size() > firstNumeralIdx + 1 && all.get(firstNumeralIdx + 1) instanceof String) {
+					return (s.charAt(s.indexOf((String) all.get(firstNumeralIdx + 1)) - 1) != ' ');
+				} else {
+					return true;
+				}
+			} else {
+				return false;
+			}
 		}
 
 		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
