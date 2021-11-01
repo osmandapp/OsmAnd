@@ -56,6 +56,10 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 		return R.layout.gps_filter_base_card;
 	}
 
+	public void softScrollToActionCard() {
+		((ScrollView) view).smoothScrollTo(0, ((int) view.findViewById(R.id.header).getY()));
+	}
+
 	private List<BaseBottomSheetItem> createActionButtons() {
 		List<BaseBottomSheetItem> actionButtons = new ArrayList<>();
 		for (ActionButton actionButton : ActionButton.values()) {

@@ -31,12 +31,13 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 	private final Fragment target;
 	private final boolean nightMode;
 
-	private final List<View> views = new ArrayList<>(2);
-
 	@ColorInt
 	private final int selectedTextColor;
 	@ColorInt
 	private final int unselectedTextColor;
+
+	private final List<GpsFilterBaseCard> cards = new ArrayList<>(2);
+	private int currentPosition;
 
 	public GpsFilterScreensAdapter(MapActivity mapActivity, Fragment target, boolean nightMode) {
 		this.app = mapActivity.getMyApplication();
@@ -46,6 +47,10 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 
 		this.selectedTextColor = ColorUtilities.getPrimaryTextColor(mapActivity, nightMode);
 		this.unselectedTextColor = ColorUtilities.getActiveColor(mapActivity, nightMode);
+	}
+
+	public void softScrollToActionsCard() {
+		cards.get(currentPosition).softScrollToActionCard();
 	}
 
 	@Override
@@ -78,8 +83,8 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 	@Override
 	public void select(View tab) {
 		View parent = (View) tab.getParent();
-		int position = (int) tab.getTag();
-		updateCustomRadioButtons(parent, position);
+		currentPosition = (int) tab.getTag();
+		updateCustomRadioButtons(parent, currentPosition);
 	}
 
 	@Override
@@ -101,17 +106,20 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 	@NonNull
 	@Override
 	public Object instantiateItem(@NonNull ViewGroup container, int position) {
-		View view = position == 0
-				? new GpsFiltersCard(mapActivity, target).build(mapActivity)
-				: new GpsFilterGraphCard(mapActivity, target).build(mapActivity);
-		container.addView(view);
-		views.add(view);
-		return view;
+		GpsFilterBaseCard card = position == 0
+				? new GpsFiltersCard(mapActivity, target)
+				: new GpsFilterGraphCard(mapActivity, target);
+		cards.add(card);
+		View cardView = card.build(mapActivity);
+		container.addView(cardView);
+		return cardView;
 	}
 
 	@Override
 	public View getViewAtPosition(int position) {
-		return 0 <= position && position < SCREENS_NUMBER ? views.get(position) : null;
+		return 0 <= position && position < SCREENS_NUMBER
+				? cards.get(position).getView()
+				: null;
 	}
 
 	@Override
@@ -121,7 +129,7 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 
 	@Override
 	public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object item) {
-		views.remove(position);
+		cards.remove(position);
 		container.removeView(((View) item));
 	}
 }

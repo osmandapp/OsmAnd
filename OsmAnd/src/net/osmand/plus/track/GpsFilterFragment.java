@@ -63,6 +63,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 	private View routeMenuTopShadowAll;
 	private View view;
+	private GpsFilterScreensAdapter gpsFilterScreensAdapter;
 
 	@Override
 	public int getMainLayoutId() {
@@ -165,16 +166,15 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		resetToOriginalButton.setOnClickListener(v -> gpsFilterHelper.resetFilters());
 
 		View scrollToActionsButton = toolbar.findViewById(R.id.scroll_to_actions_button);
-		scrollToActionsButton.setOnClickListener(v -> {
-			// todo
-		});
+		scrollToActionsButton.setOnClickListener(v -> gpsFilterScreensAdapter.softScrollToActionsCard());
 	}
 
 	private void setupTabsAndPager() {
 		PagerSlidingTabStrip tabLayout = view.findViewById(R.id.sliding_tabs);
 		WrapContentHeightViewPager pager = view.findViewById(R.id.pager);
 
-		pager.setAdapter(new GpsFilterScreensAdapter(requireMapActivity(), this, isNightMode()));
+		gpsFilterScreensAdapter = new GpsFilterScreensAdapter(requireMapActivity(), this, isNightMode());
+		pager.setAdapter(gpsFilterScreensAdapter);
 		pager.setOffscreenPageLimit(1);
 		pager.setSwipeable(true);
 
