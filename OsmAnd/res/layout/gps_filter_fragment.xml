@@ -48,11 +48,11 @@
 			<LinearLayout
 				android:id="@+id/route_menu_cards_container"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
+				android:layout_height="match_parent"
 				android:background="?attr/route_info_bg"
 				android:orientation="vertical">
 
-				<androidx.viewpager.widget.ViewPager
+				<net.osmand.plus.views.controls.WrapContentHeightViewPager
 					android:id="@+id/pager"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent" />

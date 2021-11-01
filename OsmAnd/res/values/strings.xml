@@ -11,6 +11,7 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_statistic">Statistic</string>
     <string name="gps_filter_hdop_desc">Set the maximum allowable value for HDOP.\nPoints greater than the set parameter will be hidden.</string>
     <string name="gps_filter_altitude_desc">The track points matching the set interval will be visible on the chart and map, the rest will be hidden.</string>
     <string name="gps_filter_speed_desc">The track points matching the set interval will be visible on the chart and map, the rest will be hidden.</string>

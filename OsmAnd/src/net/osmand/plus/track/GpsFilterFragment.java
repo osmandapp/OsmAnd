@@ -1,5 +1,6 @@
 package net.osmand.plus.track;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SavedTrackBottomSheetDialogFragment;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
+import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -145,6 +148,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	private void initContent() {
 		updateStatusBarColor();
 		setupToolbar();
+		setupTabsAndPager();
 		enterGpsFilterMode();
 		runLayoutListener();
 	}
@@ -164,6 +168,21 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		scrollToActionsButton.setOnClickListener(v -> {
 			// todo
 		});
+	}
+
+	private void setupTabsAndPager() {
+		PagerSlidingTabStrip tabLayout = view.findViewById(R.id.sliding_tabs);
+		WrapContentHeightViewPager pager = view.findViewById(R.id.pager);
+
+		pager.setAdapter(new GpsFilterScreensAdapter(requireMapActivity(), this, isNightMode()));
+		pager.setOffscreenPageLimit(1);
+		pager.setSwipeable(true);
+
+		tabLayout.setTabBackground(0);
+		tabLayout.setShouldExpand(true);
+		tabLayout.setIndicatorHeight(dpToPx(2));
+		tabLayout.setIndicatorBgColor(Color.TRANSPARENT);
+		tabLayout.setViewPager(pager);
 	}
 
 	@Override
