@@ -3192,7 +3192,7 @@
     <string name="search_villages_and_postcodes">Search for more villages/postcodes</string>
     <string name="rendering_attr_showRoadMaps_description">Choose when to display roads-only maps:</string>
     <string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
-    <string name="safe_mode_description">Run the app in safe mode (using slower Android code).</string>
+    <string name="safe_mode_description">Run the app in (slower) safe mode.</string>
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The app is running in safe mode (turn it off in \'Settings\').</string>
     <string name="close_changeset">Close changeset</string>
