@@ -4413,4 +4413,7 @@
     <string name="use_external_timestamps">Использовать внешние метки времени</string>
     <string name="safe_settings">Безопасные операции</string>
     <string name="use_external_timestamps_description">Использовать метки времени онлайн-маршрутизатора для настройки расчетного времени и средней скорости</string>
+    <string name="display_route_tracks">Показать треки</string>
+    <string name="shared_string_travelbooks">Путеводители</string>
+    <string name="display_route_tracks_as_poi">Показать треки как POI</string>
 </resources>
