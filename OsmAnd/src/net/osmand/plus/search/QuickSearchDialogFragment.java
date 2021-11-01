@@ -2441,12 +2441,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 				@Override
 				public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-					if (selectionMode) {
-						return false;
-					} else {
-						getDialogFragment().enableSelectionMode(true, position - getListView().getHeaderViewsCount());
-						return true;
+					QuickSearchDialogFragment dialogFragment = getDialogFragment();
+					FragmentManager fragmentManager = dialogFragment.getFragmentManager();
+					if (fragmentManager != null) {
+						SearchHistorySettingsFragment.showInstance(fragmentManager, dialogFragment);
 					}
+					return true;
 				}
 			});
 			getListAdapter().setSelectionListener(new QuickSearchListAdapter.OnSelectionListener() {
