@@ -3859,4 +3859,13 @@
 \n - OsmAnd Live-uppdateringar har flyttats till \"Hämta kartor &gt; Uppdateringar\".
 \n
 \n</string>
+    <string name="display_route_tracks">Visa spår</string>
+    <string name="location_access_request_action">Bevilja åtkomst</string>
+    <string name="location_access_request_result">Godkänd: %1$s Avvisad: %2$s</string>
+    <string name="included_categories">Inkluderade kategorier</string>
+    <string name="safe_settings">Säker</string>
+    <string name="shortcut_navigate_to">Navigera till…</string>
+    <string name="shortcut_navigate_to_work">Navigera till arbete</string>
+    <string name="shortcut_navigate_to_home">Navigera till hem</string>
+    <string name="continue_on_phone">Fortsätta på mobil</string>
 </resources>
