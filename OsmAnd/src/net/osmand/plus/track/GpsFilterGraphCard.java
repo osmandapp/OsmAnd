@@ -4,11 +4,13 @@ import android.view.View;
 
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
+import net.osmand.data.LatLon;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.other.TrackChartPoints;
 import net.osmand.plus.myplaces.GPXItemPagerAdapter;
 import net.osmand.plus.myplaces.SegmentActionsListener;
 import net.osmand.plus.myplaces.SegmentGPXAdapter;
@@ -25,6 +27,7 @@ import androidx.fragment.app.Fragment;
 public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 	private final TrackDisplayHelper displayHelper;
+	private final TrackChartPoints trackChartPoints;
 
 	private View view;
 	PagerSlidingTabStrip slidingTabs;
@@ -33,6 +36,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 	public GpsFilterGraphCard(@NonNull MapActivity mapActivity, @NonNull Fragment target) {
 		super(mapActivity, target);
 		displayHelper = createTrackDisplayHelper();
+		trackChartPoints = new TrackChartPoints();
 	}
 
 	private TrackDisplayHelper createTrackDisplayHelper() {
@@ -98,6 +102,11 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 			@Override
 			public void onPointSelected(TrkSegment segment, double lat, double lon) {
+				int segmentColor = segment != null ? segment.getColor(0) : 0;
+				trackChartPoints.setSegmentColor(segmentColor);
+				trackChartPoints.setHighlightedPoint(new LatLon(lat, lon));
+				mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
+				mapActivity.refreshMap();
 			}
 
 			@Override
@@ -117,6 +126,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 	@Override
 	public void onFinishFiltering() {
 		displayHelper.setGpx(gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile());
+		trackChartPoints.setGpx(displayHelper.getGpx());
 		for (int i = 0; i < pagerAdapter.getCount(); i++) {
 			pagerAdapter.updateGraph(i);
 		}
