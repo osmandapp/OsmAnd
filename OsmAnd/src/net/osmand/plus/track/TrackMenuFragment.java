@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -165,7 +164,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	private ViewGroup headerContainer;
 	private View routeMenuTopShadowAll;
 	private BottomNavigationView bottomNav;
-	private OnGlobalLayoutListener scrollViewLayoutListener;
 
 	private String gpxTitle;
 	private String returnScreenName;
@@ -435,24 +433,19 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	}
 
 	private void updateHeadersBottomShadow() {
-		View scrollView = getBottomScrollView();
 		if (menuType != TrackMenuType.TRACK) {
 			showBottomHeaderShadow();
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-				scrollView.getViewTreeObserver().removeOnGlobalLayoutListener(scrollViewLayoutListener);
-			} else {
-				scrollView.getViewTreeObserver().removeGlobalOnLayoutListener(scrollViewLayoutListener);
+			if (segmentsCard != null) {
+				segmentsCard.removeScrollAvailabilityListener();
 			}
-		} else {
-			scrollViewLayoutListener = () -> {
-				boolean scrollToTopAvailable = scrollView.canScrollVertically(-1);
+		} else if (segmentsCard != null) {
+			segmentsCard.setScrollAvailabilityListener((scrollToTopAvailable) -> {
 				if (scrollToTopAvailable) {
 					showBottomHeaderShadow();
 				} else {
 					hideBottomHeaderShadow();
 				}
-			};
-			scrollView.getViewTreeObserver().addOnGlobalLayoutListener(scrollViewLayoutListener);
+			});
 		}
 	}
 
@@ -1218,7 +1211,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	@Override
 	public void onChartTouch() {
-		getBottomScrollView().requestDisallowInterceptTouchEvent(true);
+		if (segmentsCard != null) {
+			segmentsCard.disallowScrollOnChartTouch();
+		}
 	}
 
 	@Override

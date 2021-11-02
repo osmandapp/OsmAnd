@@ -479,21 +479,28 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		OsmandApplication app = getApp();
 		if (app != null && fragmentRef != null && fragment.isVisible()) {
+			RouteCalculationResult route = app.getRoutingHelper().getRoute();
 			boolean routeCalculating = app.getRoutingHelper().isRouteBeingCalculated() || app.getTransportRoutingHelper().isRouteBeingCalculated();
+			if (routeCalculating && route.isCalculated() && route.isInitialCalculation()) {
+				openMenuAfterCalculation(fragment, app);
+			}
 			if (setRouteCalculationInProgress(routeCalculating)) {
 				fragment.updateInfo();
 				if (!routeCalculationInProgress) {
 					fragment.hideRouteCalculationProgressBar();
-					if (!app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.getModeValue(app.getRoutingHelper().getAppMode())
-							|| app.getRoutingHelper().getRoute().hasMissingMaps()) {
-						fragment.openMenuHalfScreen();
-					} else {
-						fragment.openMenuHeaderOnly();
-					}
+					openMenuAfterCalculation(fragment, app);
 				}
 			}
 		}
+	}
 
+	private void openMenuAfterCalculation(MapRouteInfoMenuFragment fragment, OsmandApplication app) {
+		if (!app.getSettings().OPEN_ONLY_HEADER_STATE_ROUTE_CALCULATED.getModeValue(app.getRoutingHelper().getAppMode())
+				|| app.getRoutingHelper().getRoute().hasMissingMaps()) {
+			fragment.openMenuHalfScreen();
+		} else {
+			fragment.openMenuHeaderOnly();
+		}
 	}
 
 	public void openMenuFullScreen() {

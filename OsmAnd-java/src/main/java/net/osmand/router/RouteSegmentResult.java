@@ -58,6 +58,21 @@ public class RouteSegmentResult implements StringExternalizable<RouteDataBundle>
 		updateCapacity();
 	}
 
+	public RouteSegmentResult(RouteDataObject object, int startPointIndex, int endPointIndex,
+	                          RouteSegmentResult[][] preAttachedRoutes, float segmentTime,
+	                          float routingTime, float speed, float distance, TurnType turnType) {
+		this.object = object;
+		this.startPointIndex = startPointIndex;
+		this.endPointIndex = endPointIndex;
+		this.preAttachedRoutes = preAttachedRoutes;
+		this.segmentTime = segmentTime;
+		this.routingTime = routingTime;
+		this.speed = speed;
+		this.distance = distance;
+		this.turnType = turnType;
+		updateCapacity();
+	}
+
 	void collectTypes(RouteDataResources resources) {
 		Map<RouteTypeRule, Integer> rules = resources.getRules();
 		if (object.types != null) {

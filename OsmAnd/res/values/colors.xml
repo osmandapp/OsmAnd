@@ -54,6 +54,7 @@
 	<color name="purchase_sc_toolbar_active_dark">#FFC30D</color>
 	<color name="purchase_sc_toolbar_active_light">#223EA4</color>
 	<color name="purchase_sc_discount">#EE5622</color>
+	<color name="purchase_save_discount">#12B38B</color>
 
 	<color name="map_toolbar_switch_track_color">#c5d2e6</color>
 

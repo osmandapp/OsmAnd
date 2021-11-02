@@ -1545,7 +1545,7 @@
     <string name="first_usage_item_description">كيفية تحميل الخرائط وتعيين الإعدادات الأساسية.</string>
     <string name="planning_trip_item">التخطيط لرحلة</string>
     <string name="faq_item">الأسئلة المتداولة</string>
-    <string name="faq_item_description">الأسئلة المتداولة</string>
+    <string name="faq_item_description">الأسئلة المتداولة.</string>
     <string name="search_on_the_map_item">تقنيات البحث في الخريطة</string>
     <string name="instalation_troubleshooting_item">التثبيت واستكشاف الأخطاء وإصلاحها</string>
     <string name="techical_articles_item">مقالات تقنية</string>
@@ -4037,7 +4037,7 @@
     <string name="delete_online_routing_engine">هل تريد حذف محرك التوجيه عبر الإنترنت؟</string>
     <string name="context_menu_read_full">قراءة كاملة</string>
     <string name="context_menu_edit_descr">تحرير الوصف</string>
-    <string name="delete_waypoints">حذف نقاط الطريق</string>
+    <string name="delete_waypoints">احذف الإحداثيات</string>
     <string name="copy_to_map_markers">نسخ لعلامات الخريطة</string>
     <string name="copy_to_map_favorites">نسخ للمفضلة</string>
     <string name="upload_photo">يتم الرفع</string>
@@ -4470,4 +4470,13 @@
     <string name="location_access_request_title">OsmAnd يحتاج إلى الوصول إلى خاصية الموقع من أجل التنقل</string>
     <string name="location_access_request_action">منح حق الوصول</string>
     <string name="location_access_request_result">مصادق عليه: %1$s مرفوض: %2$s</string>
+    <string name="safe_settings">آمن</string>
+    <string name="approx_safe_mode">تقريب gpx الآمن</string>
+    <string name="use_external_timestamps_description">استخدم الطوابع الزمنية لجهاز التوجيه عبر الإنترنت لضبط الوقت المقدر ومتوسط السرعة</string>
+    <string name="no_plugins_enabled">لا يوجد لديك ملحقات مفعلة. يمكنك العثور على لائحة بجميع الملحقات الإضافية المتاحة في القائمة – الملحقات الإضافية.</string>
+    <string name="approx_safe_mode_description">قم بتقريب gpx باستخدام Android أبطأ بدلاً من البرمجة المحلية.</string>
+    <string name="use_external_timestamps">استخدم طوابع زمنية خارجية</string>
+    <string name="display_route_tracks">عرض المسارات</string>
+    <string name="shared_string_travelbooks">كتب السفر</string>
+    <string name="display_route_tracks_as_poi">عرض المسارات على هيئة POI</string>
 </resources>

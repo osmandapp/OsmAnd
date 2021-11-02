@@ -203,7 +203,7 @@ public class RouteLayer extends BaseRouteLayer implements IContextMenuProvider {
 		if (actionPoints.size() > 0) {
 			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			try {
-				float routeWidth = routeGeometry.getDefaultWayStyle().getWidth();
+				float routeWidth = routeGeometry.getDefaultWayStyle().getWidth(0);
 				Path pth = new Path();
 				Matrix matrix = new Matrix();
 				boolean first = true;

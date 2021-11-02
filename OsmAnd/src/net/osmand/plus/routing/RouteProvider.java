@@ -229,10 +229,12 @@ public class RouteProvider {
 			}
 			if (calcWholeRoute && !calculateOsmAndRouteParts) {
 				return new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
-						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, true);
+						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null,
+						gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation);
 			}
-			RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult, routeParams.start, routeParams.end,
-						routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, false);
+			RouteCalculationResult result = new RouteCalculationResult(gpxRouteResult,
+					routeParams.start, routeParams.end, routeParams.intermediates, routeParams.ctx,
+					routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, false, routeParams.initialCalculation);
 			List<Location> gpxRouteLocations = result.getImmutableAllLocations();
 			int nearestGpxPointInd = calcWholeRoute ? 0 : findNearestGpxPointIndexFromRoute(gpxRouteLocations, routeParams.start, calculateOsmAndRouteParts);
 			Location nearestGpxLocation = null;
@@ -286,7 +288,8 @@ public class RouteProvider {
 				newGpxRoute.addAll(lastSegmentRoute);
 			}
 			return new RouteCalculationResult(newGpxRoute, routeParams.start, routeParams.end,
-					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null, gpxParams.wpt, routeParams.mode, true);
+					routeParams.intermediates, routeParams.ctx, routeParams.leftSide, null,
+					gpxParams.wpt, routeParams.mode, true, routeParams.initialCalculation);
 		}
 
 		if (routeParams.gpxRoute.useIntermediatePointsRTE) {
@@ -464,9 +467,12 @@ public class RouteProvider {
 		}
 	}
 
-	public void insertIntermediateSegments(RouteCalculationParams routeParams, List<Location> points, List<RouteDirectionInfo> directions,
-										   List<Location> segmentEndpoints, boolean calculateOsmAndRouteParts) {
-		for (int i = 0; i < segmentEndpoints.size() - 1; i++) {
+	public void insertIntermediateSegments(RouteCalculationParams routeParams,
+	                                       List<Location> points,
+	                                       List<RouteDirectionInfo> directions,
+	                                       List<Location> segmentEndpoints,
+	                                       boolean calculateOsmAndRouteParts) {
+		for (int i = 0; i < segmentEndpoints.size() - 1; i += 2) {
 			Location prevSegmentPoint = segmentEndpoints.get(i);
 			Location newSegmentPoint = segmentEndpoints.get(i + 1);
 
@@ -479,13 +485,13 @@ public class RouteProvider {
 				RouteCalculationResult newRes = findOfflineRouteSegment(routeParams, prevSegmentPoint, end);
 
 				if (newRes != null && newRes.isCalculated()) {
-					List<Location> loct = newRes.getImmutableAllLocations();
+					List<Location> locations = newRes.getImmutableAllLocations();
 					List<RouteDirectionInfo> dt = newRes.getImmutableAllDirections();
 
 					for (RouteDirectionInfo directionInfo : dt) {
 						directionInfo.routePointOffset += points.size();
 					}
-					points.addAll(index, loct);
+					points.addAll(index, locations);
 					directions.addAll(dt);
 				}
 			}
@@ -493,14 +499,14 @@ public class RouteProvider {
 	}
 
 	public List<RouteSegmentResult> findRouteWithIntermediateSegments(RouteCalculationParams routeParams,
-																	  RouteCalculationResult result,
-																	  List<Location> gpxRouteLocations,
-																	  List<Location> segmentEndpoints,
-																	  int nearestGpxPointInd) {
+	                                                                  RouteCalculationResult result,
+	                                                                  List<Location> gpxRouteLocations,
+	                                                                  List<Location> segmentEndpoints,
+	                                                                  int nearestGpxPointInd) {
 		List<RouteSegmentResult> newGpxRoute = new ArrayList<>();
 
 		int lastIndex = nearestGpxPointInd;
-		for (int i = 0; i < segmentEndpoints.size() - 1; i++) {
+		for (int i = 0; i < segmentEndpoints.size() - 1; i += 2) {
 			Location prevSegmentPoint = segmentEndpoints.get(i);
 			Location newSegmentPoint = segmentEndpoints.get(i + 1);
 
@@ -510,7 +516,10 @@ public class RouteProvider {
 			int indexNew = findNearestGpxPointIndexFromRoute(gpxRouteLocations, newSegmentPoint, routeParams.gpxRoute.calculateOsmAndRouteParts);
 			int indexPrev = findNearestGpxPointIndexFromRoute(gpxRouteLocations, prevSegmentPoint, routeParams.gpxRoute.calculateOsmAndRouteParts);
 			if (indexPrev != -1 && indexPrev > nearestGpxPointInd && indexNew != -1) {
-				newGpxRoute.addAll(result.getOriginalRoute(lastIndex, indexPrev, true));
+				List<RouteSegmentResult> route = result.getOriginalRoute(lastIndex, indexPrev, true);
+				if (!Algorithms.isEmpty(route)) {
+					newGpxRoute.addAll(route);
+				}
 				lastIndex = indexNew;
 
 				LatLon end = new LatLon(newSegmentPoint.getLatitude(), newSegmentPoint.getLongitude());
@@ -521,7 +530,11 @@ public class RouteProvider {
 				}
 			}
 		}
-		newGpxRoute.addAll(result.getOriginalRoute(lastIndex));
+
+		List<RouteSegmentResult> route = result.getOriginalRoute(lastIndex);
+		if (!Algorithms.isEmpty(route)) {
+			newGpxRoute.addAll(route);
+		}
 
 		return newGpxRoute;
 	}
@@ -815,7 +828,7 @@ public class RouteProvider {
 			} else {
 				RouteCalculationResult res = new RouteCalculationResult(result, params.start, params.end,
 						params.intermediates, params.ctx, params.leftSide, ctx, params.gpxRoute  == null? null: params.gpxRoute.wpt,
-								params.mode, true);
+								params.mode, true, params.initialCalculation);
 				return res;
 			}
 		} catch (RuntimeException e) {
@@ -1072,7 +1085,7 @@ public class RouteProvider {
 		OsmandSettings settings = app.getSettings();
 		String engineKey = params.mode.getRoutingProfile();
 		OnlineRoutingResponse response =
-				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.leftSide);
+				helper.calculateRouteOnline(engineKey, getPathFromParams(params), params.leftSide, params.initialCalculation);
 
 		if (response != null) {
 			if (response.getGpxFile() != null) {

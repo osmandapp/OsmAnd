@@ -1308,7 +1308,7 @@
     <string name="traffic_warning_stop">Panneau stop</string>
     <string name="traffic_warning_calming">Ralentisseur</string>
     <string name="traffic_warning_speed_camera">Radar de vitesse</string>
-    <string name="traffic_warning">Alerte de circulation</string>
+    <string name="traffic_warning">Éléments sur la route</string>
     <string name="local_index_description">Cliquez sur un élément pour voir plus de détails, maintenez appuyé pour désactiver ou supprimer. Données actuellement sur l\'appareil (%1$s libre) :</string>
     <string name="text_size">Taille du texte</string>
     <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un favori</string>
@@ -1715,7 +1715,7 @@
     <string name="first_usage_item_description">Comment télécharger des cartes et définir les paramètres de base.</string>
     <string name="navigation_item_description">Paramétrer le guidage.</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Foire Aux Questions</string>
+    <string name="faq_item_description">Foire Aux Questions.</string>
     <string name="map_viewing_item">Affichage de la carte</string>
     <string name="search_on_the_map_item">Rechercher sur la carte</string>
     <string name="planning_trip_item">Préparer un itinéraire</string>
@@ -3106,7 +3106,7 @@
     <string name="years_5">Années</string>
     <string name="months_3">Trois mois</string>
     <string name="price_free">Gratuit</string>
-    <string name="get_discount_second_part">puis %1$s</string>
+    <string name="get_discount_second_part">Puis %1$s</string>
     <string name="cancel_subscription">Annuler l\'abonnement</string>
     <string name="get_discount_first_part">%1$s pour le premier %2$s</string>
     <string name="get_discount_first_few_part">%1$s pour le premier %2$s</string>
@@ -4374,4 +4374,13 @@
     <string name="transparent_status_bar_descr">Afficher la carte sous la barre d\'état</string>
     <string name="transparent_status_bar">Barre d\'état transparente</string>
     <string name="history_is_disabled_descr">Activez l\'historique pour accéder rapidement aux derniers résultats de recherche.</string>
+    <string name="no_plugins_enabled">Aucun greffon n\'est activé. Consultez la liste des greffons disponibles dans : Menu &gt; Greffons.</string>
+    <string name="use_external_timestamps">Utiliser des estimations externes</string>
+    <string name="use_external_timestamps_description">Utilisez les estimations de routeurs en ligne pour ajuster la durée et la vitesse moyenne</string>
+    <string name="safe_settings">Précis</string>
+    <string name="approx_safe_mode">Approximation précise des gpx</string>
+    <string name="approx_safe_mode_description">Effectuer les approximations des gpx en utilisant Android (qui est plus lent) au lieu du code natif.</string>
+    <string name="shared_string_travelbooks">Carnets de voyage</string>
+    <string name="display_route_tracks">Afficher les traces</string>
+    <string name="display_route_tracks_as_poi">Afficher les traces en tant que PI</string>
 </resources>

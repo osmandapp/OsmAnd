@@ -1716,7 +1716,7 @@
     <string name="first_usage_item_description">如何下載地圖、設置基本設定。</string>
     <string name="navigation_item_description">設定導航。</string>
     <string name="faq_item">常見問題</string>
-    <string name="faq_item_description">常見的問題</string>
+    <string name="faq_item_description">常見問題。</string>
     <string name="map_viewing_item">地圖檢視</string>
     <string name="search_on_the_map_item">正在地圖上搜尋</string>
     <string name="planning_trip_item">規劃一次旅程</string>
@@ -4394,4 +4394,10 @@
     <string name="search_history_is_disabled_descr">您可以在設定中啟用搜尋歷史</string>
     <string name="history_actions_descr">您可以將歷史紀錄匯出為檔案。</string>
     <string name="navigation_history">導航歷史紀錄</string>
+    <string name="approx_safe_mode_description">使用較慢的 Android 而非原生程式碼來進行 GPX 近似。</string>
+    <string name="safe_settings">安全</string>
+    <string name="approx_safe_mode">安全 GPX 近似</string>
+    <string name="use_external_timestamps">使用外部時間戳</string>
+    <string name="use_external_timestamps_description">使用線上路徑規劃服務的時間戳來調整預估時間與平均速度</string>
+    <string name="no_plugins_enabled">您未啟用外掛程式。您可以在選單→「外掛程式」中找到所有可用外掛程式的清單。</string>
 </resources>

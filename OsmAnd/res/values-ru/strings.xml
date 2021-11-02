@@ -81,7 +81,7 @@
     <string name="do_not_send_anonymous_app_usage">Не отсылать анонимную статистику использования</string>
     <string name="driving_region_automatic">Авто</string>
     <string name="right_side_navigation">Правостороннее движение</string>
-    <string name="shared_string_visible">Видно</string>
+    <string name="shared_string_visible">Видны</string>
     <string name="restore_purchases">Восстановить покупки</string>
     <string name="fonts_header">Шрифты карты</string>
     <string name="analyze_on_map">Анализ на карте</string>
@@ -338,7 +338,7 @@
     <string name="download_roads_only_item">Только дороги</string>
     <string name="download_regular_maps">Стандартная карта</string>
     <string name="download_roads_only_maps">Карта дорог</string>
-    <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только функции Android).</string>
+    <string name="safe_mode_description">Запустить приложение в безопасном режиме (используя более медленный код Android вместо нативного).</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение работает в безопасном режиме (отключается в разделе «Настройки»).</string>
     <string name="background_service_is_enabled_question">Фоновая служба OsmAnd всё ещё работает. Остановите её тоже\?</string>
@@ -1329,8 +1329,8 @@
     <string name="app_mode_motorcycle">Мотоцикл</string>
     <string name="local_osm_changes_delete_all_confirm">Удалить изменения (%1$d)\?</string>
     <string name="animate_routing_route_not_calculated">Сначала постройте маршрут</string>
-    <string name="animate_routing_route">Симуляция использования рассчитанного маршрута </string>
-    <string name="animate_routing_gpx">Симуляция использования трека GPX</string>
+    <string name="animate_routing_route">Моделирование с использованием рассчитанного маршрута</string>
+    <string name="animate_routing_gpx">Моделирование с использованием GPX трека</string>
     <string name="auto_zoom_none">Без автомасштаба</string>
     <string name="auto_zoom_close">К ближнему плану</string>
     <string name="auto_zoom_far">К среднему плану</string>
@@ -3300,7 +3300,7 @@
     <string name="rendering_attr_piste_difficulty_undefined_name">Неопределённая</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Канатная дорога</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Соединение</string>
-    <string name="simulate_your_location_gpx_descr">Симулировать свою позицию используя записанный GPX трек.</string>
+    <string name="simulate_your_location_gpx_descr">Моделируйте свое местоположение с помощью записанного GPX трека.</string>
     <string name="route_start_point">Пункт отправления</string>
     <string name="shared_string_revert">Сброс</string>
     <string name="suggested_maps_descr">Эти карты необходимо использовать с плагином.</string>
@@ -3513,7 +3513,7 @@
     <string name="context_menu_actions">Действия контекстного меню</string>
     <string name="reorder_or_hide_from">Изменить порядок или скрыть элементы из %1$s.</string>
     <string name="shared_string_divider">Разделитель</string>
-    <string name="shared_string_hidden">Скрыто</string>
+    <string name="shared_string_hidden">Скрыты</string>
     <string name="hidden_items_descr">Эти элементы скрыты из меню, но представляемые ими функции или плагины продолжают работать.</string>
     <string name="reset_items_descr">Скрытие настроек сбрасывает их в исходное состояние.</string>
     <string name="main_actions_descr">Только четыре кнопки.</string>
@@ -4379,7 +4379,7 @@
 \n• Исправлены различные проблемы с маршрутизацией
 \n
 \n</string>
-    <string name="android_auto_map_placeholder_descr">Отключите устройство от Android Auto, для просмотра карты в приложении.</string>
+    <string name="android_auto_map_placeholder_descr">Отключите устройство от Android Auto для просмотра карты в приложении.</string>
     <string name="continue_on_phone">Продолжить на телефоне</string>
     <string name="android_auto_map_placeholder_title">Карта отображается на экране автомобиля.</string>
     <string name="android_auto_purchase_request_title">Приобретите OsmAnd Pro или Maps+, чтобы использовать OsmAnd с Android Auto</string>
@@ -4395,9 +4395,9 @@
     <string name="clear_all_history">Очистить всю историю</string>
     <string name="search_history_is_disabled_descr">Включить историю поиска можно в настройках</string>
     <string name="transparent_status_bar">Прозрачная строка состояния</string>
-    <string name="shortcut_navigate_to_home">Следовать домой</string>
+    <string name="shortcut_navigate_to_home">Домой</string>
     <string name="shortcut_navigate_to">Следовать до…</string>
-    <string name="shortcut_navigate_to_work">Следовать на работу</string>
+    <string name="shortcut_navigate_to_work">На работу</string>
     <string name="transparent_status_bar_descr">Показать карту под строкой состояния</string>
     <string name="shared_storage_warning_description">Начиная с ноября 2021 года OsmAnd 4.2 потеряет доступ к общему хранилищу в связи с изменением правил доступа в Android.
 \n
@@ -4407,4 +4407,10 @@
     <string name="history_actions_descr">Вы можете экспортировать историю в файл.</string>
     <string name="map_markers_history">История маркеров карты</string>
     <string name="shortcut_start_recording">Начать запись</string>
+    <string name="approx_safe_mode_description">Выполнить аппроксимацию gpx, используя более медленный код Android вместо нативного.</string>
+    <string name="no_plugins_enabled">У вас не включены плагины. Список всех доступных плагинов можно найти в «Меню» → «Плагины».</string>
+    <string name="approx_safe_mode">Безопасная аппроксимация gpx</string>
+    <string name="use_external_timestamps">Использовать внешние метки времени</string>
+    <string name="safe_settings">Безопасные операции</string>
+    <string name="use_external_timestamps_description">Использовать метки времени онлайн-маршрутизатора для настройки расчетного времени и средней скорости</string>
 </resources>

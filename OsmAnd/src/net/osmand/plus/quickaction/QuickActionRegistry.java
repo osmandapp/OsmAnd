@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.quickaction.actions.DayNightModeAction;
+import net.osmand.plus.quickaction.actions.DisplayPositionAction;
 import net.osmand.plus.quickaction.actions.FavoriteAction;
 import net.osmand.plus.quickaction.actions.GPXAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
@@ -68,6 +69,8 @@ public class QuickActionRegistry {
 			nameRes(R.string.quick_action_add_navigation).category(QuickActionType.NAVIGATION);
 	public static final QuickActionType TYPE_CONFIGURE_SCREEN = new QuickActionType(0, "").
 			nameRes(R.string.map_widget_config).category(QuickActionType.CONFIGURE_SCREEN);
+	public static final QuickActionType TYPE_SETTINGS = new QuickActionType(0, "").
+			nameRes(R.string.shared_string_settings).category(QuickActionType.SETTINGS);
 
 
 	private final OsmandSettings settings;
@@ -247,6 +250,8 @@ public class QuickActionRegistry {
 		allTypes.add(NavResumePauseAction.TYPE);
 		allTypes.add(SwitchProfileAction.TYPE);
 		allTypes.add(NavRemoveNextDestination.TYPE);
+		// settings
+		allTypes.add(DisplayPositionAction.TYPE);
 
 		List<QuickActionType> enabledTypes = new ArrayList<>(allTypes);
 		OsmandPlugin.registerQuickActionTypesPlugins(allTypes, enabledTypes);
@@ -271,6 +276,7 @@ public class QuickActionRegistry {
 		filterQuickActions(TYPE_CONFIGURE_MAP, result);
 		filterQuickActions(TYPE_NAVIGATION, result);
 		filterQuickActions(TYPE_CONFIGURE_SCREEN, result);
+		filterQuickActions(TYPE_SETTINGS, result);
 		return result;
 	}
 

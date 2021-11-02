@@ -3,49 +3,70 @@ package net.osmand.plus.views.layers.geometry;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.util.Algorithms;
 
 public abstract class GeometryWayStyle<T extends GeometryWayContext> {
 
-	private T context;
+	private final T context;
 	protected Integer color;
 	protected Float width;
 
-	public GeometryWayStyle(T context) {
+	public GeometryWayStyle(@NonNull T context) {
 		this.context = context;
 	}
 
-	public GeometryWayStyle(T context, Integer color) {
+	public GeometryWayStyle(@NonNull T context, Integer color) {
 		this.context = context;
 		this.color = color;
 	}
 
-	public GeometryWayStyle(T context, Integer color, Float width) {
+	public GeometryWayStyle(@NonNull T context, Integer color, Float width) {
 		this.context = context;
 		this.color = color;
 		this.width = width;
 	}
 
+	@NonNull
 	public T getContext() {
 		return context;
 	}
 
+	@NonNull
 	public Context getCtx() {
 		return context.getCtx();
 	}
 
+	@Nullable
 	public Integer getColor() {
 		return color;
 	}
 
+	public Integer getColor(Integer def) {
+		return color != null ? color : def;
+	}
+
+	@Nullable
 	public Float getWidth() {
 		return width;
 	}
 
-	public Integer getStrokeColor() {
-		return context.getStrokeColor(color);
+	public Float getWidth(Integer def) {
+		return width != null ? width : def;
 	}
 
+	@Nullable
+	public Integer getStrokeColor() {
+		return color != null ? context.getStrokeColor(color) : null;
+	}
+
+	public Integer getStrokeColor(Integer def) {
+		return color != null ? context.getStrokeColor(color) : def;
+	}
+
+	@Nullable
 	public Integer getPointColor() {
 		return null;
 	}

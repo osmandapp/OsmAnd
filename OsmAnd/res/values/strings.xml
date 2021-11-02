@@ -24,6 +24,12 @@
     <string name="save_as_copy">Save as copy</string>
     <string name="gps_filter_actions_description">OsmAnd applying changes to the track without saving it to the file. You can save changes manually.</string>
     <string name="shared_string_gps_filter">GPS filter</string>
+    <string name="delete_history_items_descr">Are you sure you want to delete selected history items?</string>
+    <string name="delete_history_items">Delete %1$s history items?</string>
+    <string name="quick_action_toggle_preference">A toggle to switch selected preference state.</string>
+    <string name="display_route_tracks">Display tracks</string>
+    <string name="display_route_tracks_as_poi">Display tracks as POI</string>
+    <string name="shared_string_travelbooks">Travelbooks</string>
     <string name="safe_settings">Safe</string>
     <string name="approx_safe_mode">Safe gpx approximation</string>
     <string name="approx_safe_mode_description">Do gpx approximation using slower Android instead of native code.</string>
@@ -1200,7 +1206,7 @@
     <string name="get_discount_title">Get %1$d %2$s at %3$s off.</string>
     <string name="get_discount_first_part">%1$s for the first %2$s</string>
     <string name="get_discount_first_few_part">%1$s for the first %2$s</string>
-    <string name="get_discount_second_part">then %1$s</string>
+    <string name="get_discount_second_part">Then %1$s</string>
     <string name="cancel_subscription">Cancel subscription</string>
     <string name="price_and_discount">%1$s • Save %2$s</string>
     <string name="app_mode_wagon">Wagon</string>

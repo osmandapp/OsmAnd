@@ -153,7 +153,7 @@ public class PreviewRouteLineLayer extends BaseRouteLayer {
 		if (customTurnArrowColor != 0) {
 			attrs.paint3.setColor(customTurnArrowColor);
 		}
-		float routeWidth = previewLineGeometry.getDefaultWayStyle().getWidth();
+		float routeWidth = previewLineGeometry.getDefaultWayStyle().getWidth(0);
 		if (routeWidth != 0) {
 			attrs.paint3.setStrokeWidth(routeWidth / 2);
 			//attrs.paint3.setStrokeWidth(Math.min(previewLineGeometry.getContext().getAttrs().defaultWidth3, routeWidth / 2));

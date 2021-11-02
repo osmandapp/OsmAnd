@@ -26,9 +26,8 @@ public abstract class JsonOnlineRoutingEngine extends OnlineRoutingEngine {
 	}
 
 	@Nullable
-	public OnlineRoutingResponse parseResponse(@NonNull String content,
-	                                           @NonNull OsmandApplication app,
-	                                           boolean leftSideNavigation) throws JSONException {
+	public OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
+	                                           boolean leftSideNavigation, boolean initialCalculation) throws JSONException {
 		JSONObject root = parseRootResponseObject(content);
 		return root != null ? parseServerResponse(root, app, leftSideNavigation) : null;
 	}

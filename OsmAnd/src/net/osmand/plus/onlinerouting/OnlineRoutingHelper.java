@@ -94,20 +94,18 @@ public class OnlineRoutingHelper {
 	}
 
 	@Nullable
-	public OnlineRoutingResponse calculateRouteOnline(@Nullable String stringKey,
-	                                                  @NonNull List<LatLon> path,
-	                                                  boolean leftSideNavigation) throws IOException, JSONException {
+	public OnlineRoutingResponse calculateRouteOnline(@Nullable String stringKey, @NonNull List<LatLon> path,
+	                                                  boolean leftSideNavigation, boolean initialCalculation) throws IOException, JSONException {
 		OnlineRoutingEngine engine = getEngineByKey(stringKey);
-		return engine != null ? calculateRouteOnline(engine, path, leftSideNavigation) : null;
+		return engine != null ? calculateRouteOnline(engine, path, leftSideNavigation, initialCalculation) : null;
 	}
 
 	@Nullable
-	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine,
-													  @NonNull List<LatLon> path,
-													  boolean leftSideNavigation) throws IOException, JSONException {
+	public OnlineRoutingResponse calculateRouteOnline(@NonNull OnlineRoutingEngine engine, @NonNull List<LatLon> path,
+													  boolean leftSideNavigation, boolean initialCalculation) throws IOException, JSONException {
 		String url = engine.getFullUrl(path);
 		String content = makeRequest(url);
-		return engine.parseResponse(content, app, leftSideNavigation);
+		return engine.parseResponse(content, app, leftSideNavigation, initialCalculation);
 	}
 
 	@NonNull

@@ -2158,7 +2158,7 @@
     <string name="poi_wetland_tidalflat">مسطح المد والجزر</string>
     <string name="poi_wetland_swamp">مستنقع</string>
     <string name="poi_wetland_reedbed">رطب صعب المشي فيه،قصب</string>
-    <string name="poi_wetland_marsh">اهوار</string>
+    <string name="poi_wetland_marsh">سباخ/أهوار</string>
     <string name="poi_wetland_bog">مستنقع</string>
     <string name="poi_wetland_wet_meadow">مرعى/مرج رطب طوال العام</string>
     <string name="poi_resource_tuff">الطفة البركانية</string>
@@ -4033,4 +4033,18 @@
     <string name="poi_ticket_validator">مصادق التذكرة</string>
     <string name="poi_geoglyph">جيوغليف</string>
     <string name="poi_satellite_dish">طبق استقبال أقمار صناعية</string>
+    <string name="poi_tobacco_filter">تبغ</string>
+    <string name="poi_butcher_type">نوع اللحم الأساسي</string>
+    <string name="poi_coffee_filter">قهوة</string>
+    <string name="poi_ice_cream_filter">بوظة</string>
+    <string name="poi_winery">مخمرة</string>
+    <string name="poi_furniture_filter">أثاث</string>
+    <string name="poi_heating_filter">تدفئة</string>
+    <string name="poi_fridge_filter">ثلاجة</string>
+    <string name="poi_wine_region">منطقة نبيذ</string>
+    <string name="poi_wine_grape">عنب</string>
+    <string name="poi_reusable_packaging_offer_no">عرض التعبئة والتغليف القابل لإعادة الاستخدام: لا</string>
+    <string name="poi_sports_hall">صالة رياضية</string>
+    <string name="poi_couplings">وصلات</string>
+    <string name="poi_hampshire_gate">بوابة هامبشاير</string>
 </resources>

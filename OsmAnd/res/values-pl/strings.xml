@@ -3149,7 +3149,7 @@
     <string name="manage_profiles">Zarządzaj profilami aplikacji…</string>
     <string name="new_route_calculated_dist_dbg">Trasa: dystans %1$s, czas routera %2$s \nObliczanie: %3$.1f sek., %4$d dróg, %5$d płytek)</string>
     <string name="get_discount_first_few_part">%1$s dla pierwszych %2$s</string>
-    <string name="get_discount_second_part">następnie %1$s</string>
+    <string name="get_discount_second_part">Wtedy %1$s</string>
     <string name="navigate_point_format_olc">Otwórz kod lokalizacji</string>
     <string name="analytics_pref_title">Analityka</string>
     <string name="turn_screen_on_info">Wyświetla mapę na ekranie blokady podczas nawigacji.</string>
@@ -4330,8 +4330,8 @@
     <string name="horseback_riding">Jazda konna</string>
     <string name="routing_attr_prefer_horse_routes_description">Preferuj trasy konne</string>
     <string name="routing_attr_prefer_horse_routes_name">Preferuj trasy konne</string>
-    <string name="routing_attr_only_permitted_ways_description">Korzystaj tylko z dróg (ścieżek, ścieżek itp.), które są wyraźnie dozwolone</string>
-    <string name="routing_attr_only_permitted_streets_description">Korzystaj tylko z ulic, które są wyraźnie dozwolone</string>
+    <string name="routing_attr_only_permitted_ways_description">Korzystaj tylko z dróg (ścieżek, dróg itp.), które są celowo dozwolone</string>
+    <string name="routing_attr_only_permitted_streets_description">Korzystaj tylko z ulic, które są celowo dozwolone</string>
     <string name="upload_gpx_description_hint">Pozostaw puste, nazwy ścieżek zostaną użyte jako opis. Wprowadzony opis zostanie zastosowany do każdej ścieżki.</string>
     <string name="search_title">Szukaj: %1$s</string>
     <string name="exit_pan_mode_descr">Naciśnij przycisk Wybierz, aby wyjść z trybu panoramowania</string>
@@ -4342,4 +4342,70 @@
     <string name="shared_storage_warning_title">Zmiany w zasadach dostępu do pamięci masowej</string>
     <string name="rendering_attr_noNatureReserves_name">Rezerwat przyrody</string>
     <string name="rendering_attr_noNatureReserves_description">Ukryj rezerwaty przyrody, obszary chronione i parki narodowe.</string>
+    <string name="clear_all_history_warning">Czy na pewno chcesz wyczyścić całą historię w aplikacji\?
+\n
+\nHistoria wyszukiwania, nawigacji i znaczników zostanie wyczyszczona.</string>
+    <string name="markers_history_is_disabled_descr">Włącz historię, aby uzyskać listę odwiedzonych znaczników mapy.</string>
+    <string name="search_history_is_disabled_descr">Możesz włączyć w ustawieniach historię wyszukiwania</string>
+    <string name="history_is_disabled_descr">Włącz historię, aby uzyskać szybszy dostęp do ostatnio używanych wyników.</string>
+    <string name="clear_all_history">Wyczyść całą historię</string>
+    <string name="history_preferences_descr">Rejestrowanie historii można wyłączyć indywidualnie dla każdego typu historii.</string>
+    <string name="shortcut_navigate_to_home">Nawiguj do domu</string>
+    <string name="android_auto_map_placeholder_descr">Odłącz urządzenie od Android Auto, aby wyświetlić mapę w aplikacji.</string>
+    <string name="release_4_1">"• Dodano początkową obsługę Android Auto
+\n
+\n  • Aktualizacja interfejsu użytkownika dla wyszukiwania współrzędnych UTM
+\n
+\n  • Ulubione: dodano możliwość przeglądania ostatnio używanych ikon
+\n
+\n  • Planowanie trasy: użyje wybranego profilu po uruchomieniu
+\n
+\n  • Naprawiono warstwę Mapillary, wtyczka jest teraz domyślnie wyłączona
+\n
+\n  • Dodano ekran do zarządzania całą historią w aplikacji
+\n
+\n  • Orientacja mapy nie jest resetowana po ponownym uruchomieniu aplikacji
+\n
+\n  • Ulepszone renderowanie znaczników wysokości SRTM
+\n
+\n  • Poprawiono wyświetlanie arabskiego na mapie
+\n
+\n  • Naprawiono różne problemy z routingiem
+\n
+\n"</string>
+    <string name="routing_attr_allow_gate_name">Zezwól na użycie bramy</string>
+    <string name="routing_attr_only_permitted_ways_name">Celowo dozwolone ulice</string>
+    <string name="purchases_feature_desc_android_auto">Mapy offline i nawigacja OsmAnd na ekranie Twojego pojazdu. Wygodna integracja z elementami sterującymi pojazd.</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Preferuj nawierzchnię brukową</string>
+    <string name="shared_storage_warning_description">Od listopada 2021 OsmAnd 4.2 utraci dostęp do pamięci współdzielonej z powodu zmienionych zasad dostępu do pamięci w systemie Android.
+\n
+\nZmień pamięć z pamięci współdzielonej na dostępną, jeśli nie zostanie to zrobione, aplikacja utraci dostęp do Twoich danych: w tym map offline, śladów GPX i wszystkiego innego.</string>
+    <string name="android_auto_map_placeholder_title">Mapa jest wyświetlana na ekranie pojazdu.</string>
+    <string name="shared_string_mini">mini</string>
+    <string name="is_disabled">%1$s jest wyłączony</string>
+    <string name="history_actions_descr">Możesz wyeksportować historię do pliku.</string>
+    <string name="map_markers_history">Historia znaczników na mapie</string>
+    <string name="navigation_history">Historia nawigacji</string>
+    <string name="shortcut_start_recording">Rozpocznij nagrywanie</string>
+    <string name="shortcut_navigate_to">Nawiguj do…</string>
+    <string name="shortcut_navigate_to_work">Nawiguj do pracy</string>
+    <string name="android_auto_purchase_request_title">Kup OsmAnd Pro lub Maps+, aby używać OsmAnd z Android Auto</string>
+    <string name="continue_on_phone">Kontynuuj przez telefon</string>
+    <string name="location_access_request_title">OsmAnd potrzebuje dostępu do lokalizacji w celu nawigacji</string>
+    <string name="location_access_request_action">Dotacja uznana</string>
+    <string name="location_access_request_result">Zatwierdzono: %1$s Odrzucono: %2$s</string>
+    <string name="shared_string_articles">Artykuły</string>
+    <string name="included_categories">Uwzględnione kategorie</string>
+    <string name="transparent_status_bar_descr">Wyświetl mapę pod paskiem stanu</string>
+    <string name="transparent_status_bar">Przejrzysty pasek stanu</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Preferuj nawierzchnię brukową</string>
+    <string name="routing_attr_allow_gate_description">Zezwalaj na korzystanie z bram</string>
+    <string name="routing_attr_only_permitted_streets_name">Celowo dozwolone ulice</string>
+    <string name="shared_string_travelbooks">Książki podróżnicze</string>
+    <string name="safe_settings">Bezpieczny</string>
+    <string name="approx_safe_mode">Bezpieczne przybliżenie gpx</string>
+    <string name="approx_safe_mode_description">Wykonaj przybliżenie gpx przy użyciu wolniejszego Androida zamiast kodu natywnego.</string>
+    <string name="use_external_timestamps">Użyj zewnętrznych znaczników czasu</string>
+    <string name="use_external_timestamps_description">Użyj znaczników czasu routera online, aby dostosować szacowany czas i średnią prędkość.</string>
+    <string name="no_plugins_enabled">Nie masz włączonych wtyczek. Listę wszystkich dostępnych wtyczek znajdziesz w Menu – Wtyczki.</string>
 </resources>

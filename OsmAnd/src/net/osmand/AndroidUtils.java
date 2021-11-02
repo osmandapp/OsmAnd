@@ -212,7 +212,7 @@ public class AndroidUtils {
 	}
 
 	public static boolean isFragmentCanBeAdded(@NonNull FragmentManager manager, @Nullable String tag) {
-		return !manager.isStateSaved() && manager.findFragmentByTag(tag) == null;
+		return !manager.isStateSaved();
 	}
 
 	public static Spannable replaceCharsWithIcon(String text, Drawable icon, String[] chars) {

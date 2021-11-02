@@ -1729,7 +1729,7 @@
     <string name="navigation_item_description">Navigation einrichten.</string>
     <string name="planning_trip_item">Eine Strecke planen</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Häufige Fragen</string>
+    <string name="faq_item_description">Häufige Fragen.</string>
     <string name="map_viewing_item">Kartenansicht</string>
     <string name="search_on_the_map_item">Suche auf der Karte</string>
     <string name="instalation_troubleshooting_item">Installation und Problembehebung</string>
@@ -2932,7 +2932,7 @@
     <string name="files_present">%1$d Dateien (%2$s) sind am vorherigen Ort „%3$s“ vorhanden.</string>
     <string name="move_maps">Karten verschieben</string>
     <string name="dont_move_maps">Nicht verschieben</string>
-    <string name="public_transport_ped_route_title">Die Route zu Fuß beträgt ca. %1$s und könnte schneller sein als mit öffentlichen Verkehrsmitteln</string>
+    <string name="public_transport_ped_route_title">Die Route zu Fuß beträgt ca. %1$s und könnte schneller sein, als mit öffentlichen Verkehrsmitteln</string>
     <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
     <string name="searching_gps">Suche GPS</string>
     <string name="coordinates_widget">Koordinaten-Widget</string>
@@ -3125,7 +3125,7 @@
     <string name="years_5">Jahre</string>
     <string name="months_3">Drei Monate</string>
     <string name="price_free">Kostenlos</string>
-    <string name="get_discount_second_part">dann %1$s</string>
+    <string name="get_discount_second_part">Dann %1$s</string>
     <string name="cancel_subscription">Abonnement beenden</string>
     <string name="price_and_discount">%1$s • Spare %2$s</string>
     <string name="get_discount_title">Bekommen Sie %1$d %2$s mit %3$s Rabatt.</string>
@@ -4407,4 +4407,10 @@
     <string name="map_markers_history">Verlauf der Kartenmarkierungen</string>
     <string name="continue_on_phone">Weiter auf dem Telefon</string>
     <string name="transparent_status_bar_descr">Karte unter der Statusleiste anzeigen</string>
+    <string name="approx_safe_mode">Sichere gpx Approximation</string>
+    <string name="approx_safe_mode_description">gpx Approximation mit langsamerem Androidcode statt nativem Code.</string>
+    <string name="use_external_timestamps">Externe Zeitstempel verwenden</string>
+    <string name="use_external_timestamps_description">Zeitstempel des Online Routers verwenden, um die geschätzte Zeit und die durchschnittliche Geschwindigkeit anzupassen</string>
+    <string name="safe_settings">Sicher</string>
+    <string name="no_plugins_enabled">Sie haben keine Erweiterungen aktiviert. Eine Liste aller verfügbaren Erweiterungen finden Sie unter Menü - Erweiterungen.</string>
 </resources>

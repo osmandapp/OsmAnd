@@ -12,6 +12,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.routing.RouteCalculationParams;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingEnvironment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -92,23 +94,30 @@ public class GpxEngine extends OnlineRoutingEngine {
 	}
 
 	@Override
+	public void updateRouteParameters(@NonNull RouteCalculationParams params, @Nullable RouteCalculationResult previousRoute) {
+		super.updateRouteParameters(params, previousRoute);
+		if ((previousRoute == null || previousRoute.isEmpty()) && shouldApproximateRoute()) {
+			params.initialCalculation = true;
+		}
+	}
+
+	@Override
 	public OnlineRoutingEngine newInstance(Map<String, String> params) {
 		return new GpxEngine(params);
 	}
 
 	@Override
 	@Nullable
-	public OnlineRoutingResponse parseResponse(@NonNull String content,
-	                                           @NonNull OsmandApplication app,
-	                                           boolean leftSideNavigation) {
+	public OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
+	                                           boolean leftSideNavigation, boolean initialCalculation) {
 		GPXFile gpxFile = parseGpx(content);
-		return gpxFile != null ? prepareResponse(app, gpxFile) : null;
+		return gpxFile != null ? prepareResponse(app, gpxFile, initialCalculation) : null;
 	}
 
-	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app,
-	                                              @NonNull GPXFile gpxFile) {
+	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	                                              boolean initialCalculation) {
 		boolean calculatedTimeSpeed = false;
-		if (shouldApproximateRoute()) {
+		if (shouldApproximateRoute() && !initialCalculation) {
 			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
 			if (ctx != null) {
 				GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);

@@ -1758,7 +1758,7 @@
     <string name="navigation_item_description">Налаштувати навігацію.</string>
     <string name="planning_trip_item">Планування подорожі</string>
     <string name="faq_item">Питання та відповіді</string>
-    <string name="faq_item_description">Часті запитання</string>
+    <string name="faq_item_description">Часті запитання.</string>
     <string name="map_viewing_item">Перегляд мапи</string>
     <string name="search_on_the_map_item">Пошук на мапі</string>
     <string name="instalation_troubleshooting_item">Установлення та вирішення проблем</string>
@@ -3118,7 +3118,7 @@
     <string name="get_discount_title">Отримайте %1$d %2$s зі знижкою %3$s.</string>
     <string name="get_discount_first_part">%1$s за перший %2$s</string>
     <string name="get_discount_first_few_part">%1$s за перші %2$s</string>
-    <string name="get_discount_second_part">далі %1$s</string>
+    <string name="get_discount_second_part">Далі %1$s</string>
     <string name="cancel_subscription">Скасувати передплату</string>
     <string name="price_and_discount">%1$s • Заощадити %2$s</string>
     <string name="configure_profile_info">Налаштування для профілю:</string>
@@ -4400,4 +4400,12 @@
     <string name="shortcut_navigate_to">Маршрут до…</string>
     <string name="shortcut_navigate_to_work">Маршрут до Роботи</string>
     <string name="transparent_status_bar_descr">Показ мапи під рядком стану</string>
+    <string name="approx_safe_mode">Безпечне наближення gpx</string>
+    <string name="no_plugins_enabled">У вас немає ввімкнених розширень. Ви можете знайти список усіх доступних розширень у Меню – Розширення.</string>
+    <string name="use_external_timestamps">Використовувати зовнішні позначки часу</string>
+    <string name="safe_settings">Безпечно</string>
+    <string name="approx_safe_mode_description">Виконайте апроксимацію gpx, використовуючи повільніший код Android замість нативного.</string>
+    <string name="use_external_timestamps_description">Використовувати часові позначки онлайн-маршрутизатора, щоб налаштувати очікуваний час і середню швидкість</string>
+    <string name="shared_string_travelbooks">Путівники</string>
+    <string name="display_route_tracks">Показати треки</string>
 </resources>

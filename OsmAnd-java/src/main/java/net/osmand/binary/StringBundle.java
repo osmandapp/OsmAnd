@@ -3,10 +3,12 @@ package net.osmand.binary;
 import net.osmand.util.Algorithms;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -15,11 +17,11 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class StringBundle {
 
-	private static final DecimalFormat TWO_DIGITS_FORMATTER = new DecimalFormat("#.##");
-	private static final DecimalFormat THREE_DIGITS_FORMATTER = new DecimalFormat("#.###");
-	private static final DecimalFormat FOUR_DIGITS_FORMATTER = new DecimalFormat("#.####");
-	private static final DecimalFormat FIVE_DIGITS_FORMATTER = new DecimalFormat("#.#####");
-	private static final DecimalFormat SIX_DIGITS_FORMATTER = new DecimalFormat("#.######");
+	private static final DecimalFormat TWO_DIGITS_FORMATTER = new DecimalFormat("#.##", DecimalFormatSymbols.getInstance(Locale.US));
+	private static final DecimalFormat THREE_DIGITS_FORMATTER = new DecimalFormat("#.###", DecimalFormatSymbols.getInstance(Locale.US));
+	private static final DecimalFormat FOUR_DIGITS_FORMATTER = new DecimalFormat("#.####", DecimalFormatSymbols.getInstance(Locale.US));
+	private static final DecimalFormat FIVE_DIGITS_FORMATTER = new DecimalFormat("#.#####", DecimalFormatSymbols.getInstance(Locale.US));
+	private static final DecimalFormat SIX_DIGITS_FORMATTER = new DecimalFormat("#.######", DecimalFormatSymbols.getInstance(Locale.US));
 
 	private Map<String, Item<?>> map = new LinkedHashMap<>();
 
@@ -42,9 +44,9 @@ public class StringBundle {
 
 	public static abstract class Item<T> {
 
-		private String name;
-		private ItemType type;
-		private T value;
+		private final String name;
+		private final ItemType type;
+		private final T value;
 
 		private Item(String name, ItemType type, T value) {
 			this.name = name;

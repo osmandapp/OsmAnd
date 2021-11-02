@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.backup.ui.DeleteAllDataConfirmationBottomSheet.OnConfirmDeletionListener;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -41,7 +43,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment implements OnItemSelectedListener, OsmAndCompassListener, OsmAndLocationListener {
+public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment implements OnItemSelectedListener,
+		OsmAndCompassListener, OsmAndLocationListener, OnConfirmDeletionListener {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -130,11 +133,11 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		boolean checked = isHistoryEnabled();
 
 		if (checked) {
-			shareButton.setImageDrawable(getIcon(R.drawable.ic_action_export));
+			shareButton.setImageDrawable(getIcon(R.drawable.ic_action_upload));
 		} else {
 			int color = ContextCompat.getColor(app, R.color.active_buttons_and_links_text_light);
 			int colorWithAlpha = ColorUtilities.getColorWithAlpha(color, 0.5f);
-			shareButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_export, colorWithAlpha));
+			shareButton.setImageDrawable(getPaintedContentIcon(R.drawable.ic_action_upload, colorWithAlpha));
 		}
 		shareButton.setEnabled(checked);
 
@@ -161,10 +164,10 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 		deleteButton = view.findViewById(R.id.right_bottom_button);
 		deleteButton.setOnClickListener(v -> {
-			deleteSelectedItems();
-			updateHistoryItems();
-			updateButtonsState();
-			adapter.notifyDataSetChanged();
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				DeleteHistoryConfirmationBottomSheet.showInstance(fragmentManager, selectedItems.size(), this);
+			}
 		});
 		selectAllButton = view.findViewById(R.id.dismiss_button);
 		selectAllButton.setOnClickListener(v -> {
@@ -217,6 +220,14 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			selectedItems.removeAll(items);
 		}
 		updateButtonsState();
+	}
+
+	@Override
+	public void onDeletionConfirmed() {
+		deleteSelectedItems();
+		updateHistoryItems();
+		updateButtonsState();
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
