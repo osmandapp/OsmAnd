@@ -174,6 +174,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			for (List<?> items : itemsGroups.values()) {
 				selectedItems.addAll(items);
 			}
+			updateButtonsState();
 			adapter.notifyDataSetChanged();
 		});
 
