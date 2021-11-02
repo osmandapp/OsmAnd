@@ -1080,7 +1080,7 @@
     <string name="local_osm_changes_delete_all_confirm">Eliminar %1$d alterações do OpenStreetMap\?</string>
     <string name="shared_string_delete_all">Eliminar tudo</string>
     <string name="amenity_type_osmwiki">Wikipédia (offline)</string>
-    <string name="amenity_type_seamark">Marca marítima</string>
+    <string name="amenity_type_seamark">Baliza marítima</string>
     <string name="app_modes_choose_descr">Escolha os perfis a mostrar.</string>
     <string name="app_modes_choose">Perfis da aplicação</string>
     <string name="route_descr_destination">Destino</string>
@@ -1100,7 +1100,7 @@
     <string name="localization_pref_title">Localização</string>
     <string name="index_item_nation_addresses">endereços de todo o país</string>
     <string name="index_item_world_altitude_correction">Correção de altitude mundial</string>
-    <string name="index_item_world_seamarks">Marcas marítimas mundiais</string>
+    <string name="index_item_world_seamarks">Balizas marítimas mundiais</string>
     <string name="index_item_world_bitcoin_payments">Pagamentos de bitcoin do mundo</string>
     <string name="index_item_world_basemap">Mapa de visão geral do mundo</string>
     <string name="index_item_world_ski">Mapa mundial de esqui</string>
@@ -1111,7 +1111,7 @@
     <string name="lang_af">Africâner</string>
     <string name="lang_hy">Arménio</string>
     <string name="calculate_osmand_route_without_internet">Calcular segmento de rota OsmAnd sem Internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Calcular rota de OsmAnd para o primeiro e último segmento da rota</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcular rota OsmAnd para o primeiro e último segmento da rota</string>
     <string name="use_displayed_track_for_navigation">Usar o trajeto mostrado para a navegação\?</string>
     <string name="keep_and_add_destination_point">Adicionar destino posterior</string>
     <string name="select_gpx">Selecionar GPX…</string>
@@ -1953,7 +1953,7 @@
     <string name="no_underlay">Sem camada inferior</string>
     <string name="subscribe_email_error">Erro</string>
     <string name="subscribe_email_desc">Inscreva-se na nossa lista de email sobre descontos da aplicação e ganhe mais 3 descarregamentos de mapas!</string>
-    <string name="depth_contour_descr">Curvas de nível de profundidade marítima e marcas marítimas.</string>
+    <string name="depth_contour_descr">Curvas de nível de profundidade marítima e balizas marítimas.</string>
     <string name="sea_depth_thanks">Muito obrigado por comprar \'Curvas de profundidades náuticas\'</string>
     <string name="index_item_depth_contours_osmand_ext">Curvas de profundidades náuticas</string>
     <string name="index_item_depth_points_southern_hemisphere">Pontos de profundidade náutica do hemisfério sul</string>
@@ -2152,7 +2152,7 @@
     <string name="osm_live_payment_header">Frequência do pagamento:</string>
     <string name="osm_live_payment_contribute_descr">Os donativos ajudam a financiar a cartografia do OpenStreetMap.</string>
     <string name="off_road_render_descr">Para condução todo-o-terreno com base no estilo \'Topo\' e para utilização com imagens de satélite verdes na camada inferior. Redução da espessura das estradas principais, aumento da espessura dos trajetos, caminhos, ciclovias e outras vias.</string>
-    <string name="nautical_render_descr">Para navegação náutica. Características: bóias, faróis, cursos de rios, vias marítimas e marcas, portos, serviços de navegação, curvas de profundidade.</string>
+    <string name="nautical_render_descr">Para navegação náutica. Características: bóias, faróis, cursos de rios, vias e balizas marítimas, portos, serviços de navegação marítima e curvas de profundidade.</string>
     <string name="ski_map_render_descr">Para esquiar. Contém pistas de esqui, elevadores, pistas de cross country, etc. Escurece objetos secundários do mapa.</string>
     <string name="light_rs_render_descr">Estilo simples e contrastante para a navegação do carro. É suave para os olhos no modo noturno. Características principais: curvas de nível, estradas contrastantes de estilo laranja, menos objetos secundários do mapa para evitar distrações.</string>
     <string name="topo_render_descr">Para caminhadas, pedestrianismo e ciclismo de natureza. Legível em exteriores. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de linha de contorno, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
