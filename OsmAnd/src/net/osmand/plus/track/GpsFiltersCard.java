@@ -87,6 +87,7 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 		AppCompatImageView upDownButton = container.findViewById(R.id.up_down_button);
 
 		if (!filter.isNeeded()) {
+			updateDisplayedFilterNumbers(container, filter);
 			updateUpDownButton(upDownButton, false);
 			AndroidUiHelper.updateVisibility(content, false);
 			return;

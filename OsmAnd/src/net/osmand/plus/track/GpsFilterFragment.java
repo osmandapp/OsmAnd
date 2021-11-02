@@ -119,14 +119,16 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	}
 
 	private void restoreSelectedGpxFile(String gpxFilePath) {
-		TrackMenuFragment.loadSelectedGpxFile(requireMapActivity(), gpxFilePath, false, (gpxFile) -> {
-			selectedGpxFile = gpxFile;
-			gpsFilterHelper.setSelectedGpxFile(gpxFile);
-			if (view != null) {
-				initContent();
-			}
-			return true;
-		});
+		if (!Algorithms.isEmpty(gpxFilePath)) {
+			TrackMenuFragment.loadSelectedGpxFile(requireMapActivity(), gpxFilePath, false, (gpxFile) -> {
+				selectedGpxFile = gpxFile;
+				setFileToFilter(selectedGpxFile);
+				if (view != null) {
+					initContent();
+				}
+				return true;
+			});
+		}
 	}
 
 	@Override
@@ -139,11 +141,17 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 				updateCardsLayout();
 			}
 			if (selectedGpxFile != null) {
-				gpsFilterHelper.setSelectedGpxFile(selectedGpxFile);
+				setFileToFilter(selectedGpxFile);
 				initContent();
 			}
 		}
 		return view;
+	}
+
+	private void setFileToFilter(@NonNull SelectedGpxFile selectedGpxFile) {
+		if (!selectedGpxFile.equals(gpsFilterHelper.getSourceSelectedGpxFile())) {
+			gpsFilterHelper.setSelectedGpxFile(selectedGpxFile);
+		}
 	}
 
 	private void initContent() {
@@ -253,7 +261,6 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitGpsFilterMode();
-		gpsFilterHelper.disableFilter();
 	}
 
 	private void enterGpsFilterMode() {
@@ -414,6 +421,15 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 			if (mapActivity != null) {
 				((MeasurementToolFragment) target).dismiss(mapActivity);
 			}
+		}
+	}
+
+	@Override
+	public void dismiss() {
+		super.dismiss();
+		gpsFilterHelper.disableFilter();
+		if (getTargetFragment() instanceof MeasurementToolFragment) {
+			((MeasurementToolFragment) getTargetFragment()).onGpsFilterClosed();
 		}
 	}
 

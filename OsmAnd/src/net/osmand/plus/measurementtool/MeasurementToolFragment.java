@@ -69,6 +69,7 @@ import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.GpxApproximationFragment.GpxApproximationFragmentListener;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
@@ -94,6 +95,7 @@ import net.osmand.plus.routepreparationmenu.RouteOptionsBottomSheet.DialogMode;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.GpsFilterFragment;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -415,11 +417,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 				if (mapActivity != null) {
 					boolean trackSnappedToRoad = !editingCtx.isApproximationNeeded();
 					boolean addNewSegmentAllowed = editingCtx.isAddNewSegmentAllowed();
+					boolean plainTrack = editingCtx.getPointsCount() > 0
+							&& !editingCtx.hasRoutePoints() && !editingCtx.hasRoute();
 					OptionsBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
 							MeasurementToolFragment.this,
 							trackSnappedToRoad, addNewSegmentAllowed,
-							editingCtx.getAppMode().getStringKey()
-					);
+							editingCtx.getAppMode().getStringKey(), plainTrack);
 				}
 			}
 		});
@@ -1107,7 +1110,43 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	@Override
 	public void gpsFilterOnClick() {
-		// todo gps
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = requireMyApplication();
+			GPXFile sourceGpx = editingCtx.getGpxData() != null
+					? editingCtx.getGpxData().getGpxFile()
+					: new GPXFile(Version.getFullVersion(app));
+			GPXFile gpxFile = SaveGpxRouteAsyncTask.generateGpxFile(getMeasurementLayer(),
+					getSuggestedFileName(), sourceGpx, false, false);
+			if (editingCtx.getGpxData() != null) {
+				gpxFile.path = editingCtx.getGpxData().getGpxFile().path;
+			}
+
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+
+			hide();
+			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.snap_to_road_image_button,
+					R.id.map_ruler_container);
+			GpsFilterFragment.showInstance(mapActivity.getSupportFragmentManager(), selectedGpxFile, this);
+		}
+	}
+
+	public void onGpsFilterClosed() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			updateSnapToRoadControls();
+			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
+			show();
+
+			GpsFilterHelper gpsFilterHelper = requireMyApplication().getGpsFilterHelper();
+			String path = gpsFilterHelper.getLastSavedFilePath();
+			if (!Algorithms.isEmpty(path)) {
+				editingCtx.clearSegments();
+				editingCtx.setChangesSaved();
+				GPXFile newGpxFile = GPXUtilities.loadGPXFile(new File(path));
+				addNewGpxData(newGpxFile);
+			}
+		}
 	}
 
 	@Override
@@ -1716,7 +1755,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private String getSuggestedFileName() {
-		GpxData gpxData = editingCtx.getGpxData();
+		return getSuggestedFileName(requireMyApplication(), editingCtx.getGpxData());
+	}
+
+	public static String getSuggestedFileName(@NonNull OsmandApplication app, @Nullable GpxData gpxData) {
 		String displayedName = null;
 		if (gpxData != null) {
 			GPXFile gpxFile = gpxData.getGpxFile();
@@ -1728,7 +1770,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 		if (gpxData == null || displayedName == null) {
 			String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
-			displayedName = FileUtils.createUniqueFileName(requireMyApplication(), suggestedName, GPX_INDEX_DIR, GPX_FILE_EXT);
+			displayedName = FileUtils.createUniqueFileName(app, suggestedName, GPX_INDEX_DIR, GPX_FILE_EXT);
 		} else {
 			displayedName = Algorithms.getFileNameWithoutExtension(new File(gpxData.getGpxFile().path).getName());
 		}
@@ -2216,11 +2258,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void enterApproximationMode(MapActivity mapActivity) {
 		MeasurementToolLayer layer = getMeasurementLayer();
 		if (layer != null) {
-			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			manager.beginTransaction()
-					.hide(this)
-					.commitAllowingStateLoss();
 			layer.setTapsDisabled(true);
+			hide();
+			FragmentManager manager = mapActivity.getSupportFragmentManager();
 			SnapTrackWarningFragment.showInstance(manager, this);
 			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.map_ruler_container);
 		}
@@ -2231,12 +2271,29 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MeasurementToolLayer layer = getMeasurementLayer();
 		MapActivity mapActivity = getMapActivity();
 		if (layer != null && mapActivity != null) {
-			FragmentManager manager = mapActivity.getSupportFragmentManager();
-			manager.beginTransaction()
+			layer.setTapsDisabled(false);
+			show();
+			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
+		}
+	}
+
+	private void show() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
 					.show(this)
 					.commitAllowingStateLoss();
-			layer.setTapsDisabled(false);
-			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
+		}
+	}
+
+	private void hide() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
+					.hide(this)
+					.commitAllowingStateLoss();
 		}
 	}
 

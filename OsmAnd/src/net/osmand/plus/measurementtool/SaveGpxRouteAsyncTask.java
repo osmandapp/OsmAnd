@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
@@ -74,12 +75,11 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
         MapActivity mapActivity = (MapActivity) fragment.getActivity();
         OsmandApplication app = mapActivity.getMyApplication();
         MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
-        MeasurementEditingContext editingCtx = fragment.getEditingCtx();
         Exception res = null;
         if (gpxFile == null) {
             String fileName = outFile.getName();
             String trackName = fileName.substring(0, fileName.length() - GPX_FILE_EXT.length());
-            GPXFile gpx = generateGpxFile(measurementLayer, editingCtx, trackName, new GPXFile(Version.getFullVersion(app)));
+            GPXFile gpx = generateGpxFile(measurementLayer, trackName, new GPXFile(Version.getFullVersion(app)));
             res = GPXUtilities.writeGpxFile(outFile, gpx);
             gpx.path = outFile.getAbsolutePath();
             savedGpxFile = gpx;
@@ -89,7 +89,7 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
         } else {
             backupFile = FileUtils.backupFile(app, outFile);
             String trackName = Algorithms.getFileNameWithoutExtension(outFile);
-            GPXFile gpx = generateGpxFile(measurementLayer, editingCtx, trackName, gpxFile);
+            GPXFile gpx = generateGpxFile(measurementLayer, trackName, gpxFile);
             if (gpxFile.metadata != null) {
                 gpx.metadata = new Metadata();
                 gpx.metadata.getExtensionsToWrite().putAll(gpxFile.metadata.getExtensionsToRead());
@@ -109,9 +109,17 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
         return res;
     }
 
-    private GPXFile generateGpxFile(MeasurementToolLayer measurementLayer, MeasurementEditingContext editingCtx,
-                                    String trackName, @NonNull GPXFile gpx) {
+    private GPXFile generateGpxFile(@NonNull MeasurementToolLayer measurementLayer, String trackName, @NonNull GPXFile gpx) {
+        return generateGpxFile(measurementLayer, trackName, gpx, simplified, addToTrack);
+    }
+
+    public static GPXFile generateGpxFile(@Nullable MeasurementToolLayer measurementLayer,
+                                          @NonNull String trackName,
+                                          @NonNull GPXFile gpx,
+                                          boolean simplified,
+                                          boolean addToTrack) {
         if (measurementLayer != null) {
+            MeasurementEditingContext editingCtx = measurementLayer.getEditingCtx();
             List<TrkSegment> before = editingCtx.getBeforeTrkSegmentLine();
             List<TrkSegment> after = editingCtx.getAfterTrkSegmentLine();
             if (simplified) {

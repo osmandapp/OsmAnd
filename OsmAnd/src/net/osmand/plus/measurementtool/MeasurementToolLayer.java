@@ -263,6 +263,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+		if (shouldPauseDrawing()) {
+			return;
+		}
+
 		if (inMeasurementMode) {
 			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 
@@ -308,6 +312,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
+		if (shouldPauseDrawing()) {
+			return;
+		}
+
 		if (inMeasurementMode) {
 			lineAttrs.updatePaints(view.getApplication(), settings, tb);
 			if (!editingCtx.isInApproximationMode()) {
@@ -348,6 +356,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements IContextMenu
 				canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 			}
 		}
+	}
+
+	private boolean shouldPauseDrawing() {
+		return getApplication().getGpsFilterHelper().isEnabled();
 	}
 
 	private boolean isInTileBox(RotatedTileBox tb, WptPt point) {

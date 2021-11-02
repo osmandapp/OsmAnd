@@ -17,6 +17,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class GpsFilterHelper {
 	private int leftPoints;
 	private int totalPoints;
 
+	private String lastSavedFilePath;
+
 	public GpsFilterHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.filteredSelectedGpxFile.filtered = true;
@@ -54,6 +57,8 @@ public class GpsFilterHelper {
 	public void setSelectedGpxFile(@NonNull SelectedGpxFile selectedGpxFile) {
 		sourceSelectedGpxFile = selectedGpxFile;
 		filteredSelectedGpxFile.setJoinSegments(sourceSelectedGpxFile.isJoinSegments());
+
+		lastSavedFilePath = null;
 
 		smoothingFilter = new SmoothingFilter(app, selectedGpxFile);
 		speedFilter = new SpeedFilter(app, selectedGpxFile);
@@ -81,7 +86,19 @@ public class GpsFilterHelper {
 		return selectedGpxFile.equals(sourceSelectedGpxFile);
 	}
 
+	public void onSavedFile(String path) {
+		lastSavedFilePath = path;
+	}
+
+	public String getLastSavedFilePath() {
+		return lastSavedFilePath;
+	}
+
 	public void disableFilter() {
+		GPXFile sourceGpxFile = sourceSelectedGpxFile.getGpxFile();
+		if (Algorithms.isEmpty(sourceGpxFile.path)) {
+			app.getSelectedGpxHelper().selectGpxFile(sourceGpxFile, false, false);
+		}
 		sourceSelectedGpxFile = null;
 
 		filteredSelectedGpxFile.getModifiablePointsToDisplay().clear();
@@ -376,7 +393,7 @@ public class GpsFilterHelper {
 
 		@Override
 		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
-			return getSelectedMaxValue() == 0 || distanceToLastSurvivedPoint > getSelectedMaxValue();
+			return !isNeeded() || getSelectedMaxValue() == 0 || distanceToLastSurvivedPoint > getSelectedMaxValue();
 		}
 
 		@Override
@@ -451,7 +468,7 @@ public class GpsFilterHelper {
 		@Override
 		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
 			float speed = transformSpeed(analysis.speedData.get(pointIndex).speed);
-			return getSelectedMinValue() <= speed && speed <= getSelectedMaxValue();
+			return !isNeeded() || getSelectedMinValue() <= speed && speed <= getSelectedMaxValue();
 		}
 
 		@Override
@@ -538,7 +555,7 @@ public class GpsFilterHelper {
 		@Override
 		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
 			float altitude = analysis.elevationData.get(pointIndex).elevation;
-			return getSelectedMinValue() <= altitude && altitude <= getSelectedMaxValue();
+			return !isNeeded() || getSelectedMinValue() <= altitude && altitude <= getSelectedMaxValue();
 		}
 
 		@Override
@@ -617,7 +634,7 @@ public class GpsFilterHelper {
 
 		@Override
 		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
-			return point.hdop <= getSelectedMaxValue();
+			return !isNeeded() || point.hdop <= getSelectedMaxValue();
 		}
 
 		@Override
@@ -645,8 +662,10 @@ public class GpsFilterHelper {
 		@Override
 		public CharSequence getFilterTitle() {
 			String gpsPrecision = app.getString(R.string.gps_filter_precision);
-			String title = app.getString(R.string.ltr_or_rtl_combine_via_colon, gpsPrecision,
-					getFormattedValue(getSelectedMaxValue()));
+			String value = isNeeded()
+					? getFormattedValue(getSelectedMaxValue())
+					: app.getString(R.string.gpx_logging_no_data);
+			String title = app.getString(R.string.ltr_or_rtl_combine_via_colon, gpsPrecision, value);
 			return styleFilterTitle(title, gpsPrecision.length() + 1);
 		}
 
