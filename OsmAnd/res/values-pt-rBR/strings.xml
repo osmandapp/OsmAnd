@@ -4404,4 +4404,5 @@
 \n</string>
     <string name="shared_string_travelbooks">Livros de viagem</string>
     <string name="display_route_tracks">Exibir trilhas</string>
+    <string name="display_route_tracks_as_poi">Exibir trilhas como POI</string>
 </resources>
