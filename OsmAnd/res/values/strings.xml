@@ -18,17 +18,17 @@
     <string name="display_route_tracks_as_poi">Display tracks as POI</string>
     <string name="shared_string_travelbooks">Travelbooks</string>
     <string name="safe_settings">Safe</string>
-    <string name="approx_safe_mode">Safe gpx approximation</string>
-    <string name="approx_safe_mode_description">Do gpx approximation using slower Android instead of native code.</string>
+    <string name="approx_safe_mode">Safe GPX approximation</string>
+    <string name="approx_safe_mode_description">Perform the GPX approximation using slower Android instead of native code.</string>
     <string name="use_external_timestamps">Use external timestamps</string>
     <string name="use_external_timestamps_description">Use online router\'s timestamps to adjust estimated time and average speed</string>
-    <string name="no_plugins_enabled">You have no plugins enabled. You can find list of all available plugins in Menu – Plugins.</string>
-    <string name="shared_storage_warning_description">Starting November 2021 OsmAnd 4.2 will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared storage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
-    <string name="search_history_is_disabled_descr">You can enable search history in Settings</string>
-    <string name="markers_history_is_disabled_descr">Enable history to get list of visited map markers.</string>
-    <string name="history_is_disabled_descr">Enable history to get quicker access to last used results.</string>
+    <string name="no_plugins_enabled">You have no plugins enabled. You can find a list of available plugins under \'Menu\' → \'Plugins\'.</string>
+    <string name="shared_storage_warning_description">Due to new Android rules, starting November 2021 OsmAnd 4.2 will lose access to Shared storage.\n\nPlease move the data folder from Shared storage to available storage, otherwise the app will lose access to your data like offline maps, GPX tracks, etc.</string>
+    <string name="search_history_is_disabled_descr">You can enable the search history in the settings.</string>
+    <string name="markers_history_is_disabled_descr">Enable the history to remember a list of visited map markers.</string>
+    <string name="history_is_disabled_descr">Enable the history to get quicker access to the last used results.</string>
     <string name="is_disabled">%1$s is disabled</string>
-    <string name="clear_all_history_warning">Are you sure you want to clear all history in the app?\n\nThe search, navigation and marker history will be cleared.</string>
+    <string name="clear_all_history_warning">Clear all app history entries including search, navigation, and marker history?</string>
     <string name="clear_all_history">Clear all history</string>
     <string name="history_actions_descr">You can export history into a file.</string>
     <string name="map_markers_history">Map markers history</string>
@@ -36,14 +36,14 @@
     <string name="history_preferences_descr">You can disable history logging individually for each history type.</string>
     <string name="shortcut_start_recording">Start Recording</string>
     <string name="shortcut_navigate_to">Navigate To…</string>
-    <string name="shortcut_navigate_to_work">Navigate to Work</string>
-    <string name="shortcut_navigate_to_home">Navigate to Home</string>
+    <string name="shortcut_navigate_to_work">Navigate to \'Work\'</string>
+    <string name="shortcut_navigate_to_home">Navigate to \'Home\'</string>
     <string name="android_auto_map_placeholder_title">The map is displayed on the vehicle screen.</string>
     <string name="android_auto_map_placeholder_descr">Disconnect your device from Android Auto to view the map in the app.</string>
     <string name="android_auto_purchase_request_title">Purchase OsmAnd Pro or Maps+ to use OsmAnd with Android Auto</string>
-    <string name="continue_on_phone">Continue on Phone</string>
-    <string name="location_access_request_title">OsmAnd needs access to location in order to navigate</string>
-    <string name="location_access_request_action">Grant Access</string>
+    <string name="continue_on_phone">Continue on the mobile device</string>
+    <string name="location_access_request_title">OsmAnd needs Location permission to navigate.</string>
+    <string name="location_access_request_action">Grant access</string>
     <string name="location_access_request_result">Approved: %1$s Rejected: %2$s</string>
     <string name="shared_string_articles">Articles</string>
     <string name="included_categories">Included categories</string>
@@ -56,14 +56,14 @@
     • Added screen to manage all history in the app\n\n
     • Map orientation is not reset after restarting the app\n\n
     • Improved SRTM height marker rendering\n\n
-    • Fixed Arabic display on the map \n\n
+    • Fixed Arabic map captions\n\n
     • Fixed different routing issues\n\n
     </string>
     <string name="shared_string_details">Details</string>
-    <string name="shared_app_storage_description">Shared memory is no longer available due to changes in the storage access rules in Android.</string>
-    <string name="internal_app_storage_description">Internal storage, hidden from user and other apps, so no one except OsmAnd can’t get access to your data</string>
-    <string name="shared_storage_warning_title">Changes in storage access rules</string>
-    <string name="purchases_feature_desc_android_auto">OsmAnd offline maps and navigation on the screen of your vehicle. Integrate conveniently with your vehicle\'s controls.</string>
+    <string name="shared_app_storage_description">Shared memory is no longer available due to changed Android storage access.</string>
+    <string name="internal_app_storage_description">Internal storage, hidden from all users and other apps, so only OsmAnd can access your data.</string>
+    <string name="shared_storage_warning_title">Changes to storage access rules</string>
+    <string name="purchases_feature_desc_android_auto">Brings OsmAnd offline maps and navigation to your vehicle screen and integrates with your vehicle\'s controls.</string>
     <string name="icon_group_nautical">Nautical</string>
     <string name="transparent_status_bar_descr">Display map under status bar</string>
     <string name="transparent_status_bar">Transparent status bar</string>
@@ -910,7 +910,7 @@
     <string name="no_recalculation_setting">No recalculation</string>
     <string name="open_settings">Open settings</string>
     <string name="plugin_disabled">Plugin off</string>
-    <string name="plugin_disabled_descr">This plugin is a separate app, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
+    <string name="plugin_disabled_descr">This plugin is a separate app, disabling it does not remove it.\n\nIt can be uninstalled in the Android \'Apps\' setting.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="route_recalculation_dist_title">Minimal distance to recalculate route</string>
@@ -3198,7 +3198,7 @@
     <string name="search_villages_and_postcodes">Search for more villages/postcodes</string>
     <string name="rendering_attr_showRoadMaps_description">Choose when to display roads-only maps:</string>
     <string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
-    <string name="safe_mode_description">Run the app in safe mode (using slower Android instead of native code).</string>
+    <string name="safe_mode_description">Run the app in (slower) safe mode.</string>
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The app is running in safe mode (turn it off in \'Settings\').</string>
     <string name="close_changeset">Close changeset</string>
