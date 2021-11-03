@@ -422,7 +422,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						MapActivity mapActivity = getMapActivity();
 						if (mapActivity != null) {
 							selectTrackToFollow(result[0]);
-							updateSelectionMode(result[0].getNonEmptySegmentsCount() <= 1);
+							updateSelectionMode(result[0].getNonEmptySegmentsCount() != 1);
 						}
 						return true;
 					}
