@@ -1720,7 +1720,7 @@
     <string name="first_usage_item_description">Ako sťahovať mapy, urobiť základné nastavenia.</string>
     <string name="navigation_item_description">Nastaviť navigáciu.</string>
     <string name="faq_item">Otázky</string>
-    <string name="faq_item_description">Často kladené otázky</string>
+    <string name="faq_item_description">Často kladené otázky.</string>
     <string name="map_viewing_item">Prezeranie mapy</string>
     <string name="search_on_the_map_item">Hľadanie na mape</string>
     <string name="planning_trip_item">Plánovanie výletu</string>
@@ -3101,7 +3101,7 @@
     <string name="get_discount_title">Získajte %1$d %2$s pri zľave %3$s.</string>
     <string name="get_discount_first_part">%1$s za prvé %2$s</string>
     <string name="get_discount_first_few_part">%1$s za prvé %2$s</string>
-    <string name="get_discount_second_part">potom %1$s</string>
+    <string name="get_discount_second_part">Potom %1$s</string>
     <string name="cancel_subscription">Zrušiť predplatné</string>
     <string name="price_and_discount">%1$s • Ušetrite %2$s</string>
     <string name="day">Deň</string>
@@ -4396,4 +4396,13 @@
     <string name="location_access_request_result">Povolené: %1$s Zamietnuté: %2$s</string>
     <string name="transparent_status_bar_descr">Zobraziť mapu pod stavovým riadkom</string>
     <string name="transparent_status_bar">Priehľadný stavový riadok</string>
+    <string name="shared_string_travelbooks">Cestovné denníky</string>
+    <string name="safe_settings">Bezpečné</string>
+    <string name="display_route_tracks_as_poi">Zobraziť stopy ako body záujmu</string>
+    <string name="approx_safe_mode">Bezpečné aproximácie GPX</string>
+    <string name="use_external_timestamps">Použiť externé časové značky</string>
+    <string name="use_external_timestamps_description">Použiť časové značky online navigačnej služby pre úpravu odhadovaného času a priemernej rýchlosti</string>
+    <string name="no_plugins_enabled">Nemáte zapnuté žiadne zásuvné moduly. Zoznam dostupných modulov môžete nájsť v Menu – Zásuvné moduly.</string>
+    <string name="display_route_tracks">Zobraziť stopy</string>
+    <string name="approx_safe_mode_description">Vykonať aproximácie GPX pomocou pomalšieho kódu pre Android namiesto natívneho kódu.</string>
 </resources>

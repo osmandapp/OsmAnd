@@ -378,7 +378,7 @@
     <string name="shared_string_address">Adreso</string>
     <string name="shared_string_add">Aldoni</string>
     <string name="shared_string_my_places">Miaj ejoj</string>
-    <string name="shared_string_tracks">Spuroj</string>
+    <string name="shared_string_tracks">Kursoj</string>
     <string name="shared_string_audio">Sono</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Foto</string>
@@ -3509,7 +3509,7 @@
     <string name="shared_string_divider">Disigilo</string>
     <string name="divider_descr">La jenaj elementoj troviĝos en la menuo sub la horizontala linio.</string>
     <string name="hidden_items_descr">La jenaj elementoj estas kaŝitaj el la menuo, sed la rilataj eblaĵoj kaj kromprogramoj plue funkcios.</string>
-    <string name="shared_string_hidden">Kaŝitaj</string>
+    <string name="shared_string_hidden">Kaŝita</string>
     <string name="reset_items_descr">Per kaŝi agordojn, ili revenos al la implicitaj valoroj.</string>
     <string name="select_wikipedia_article_langs">Elektu lingvojn por artikoloj de Vikipedio montrataj sur la mapo. Eblos baskuli inter ĉiuj disponeblaj lingvoj dum legi artikolon.</string>
     <string name="some_articles_may_not_available_in_lang">Iuj artikoloj de Vikipedio povas ne esti disponeblaj en via lingvo.</string>
@@ -4405,4 +4405,7 @@
     <string name="use_external_timestamps">Uzi eksterajn tempindikojn</string>
     <string name="use_external_timestamps_description">Uzi tempindikojn de enreta navigilo por alĝustigi proksimuman tempon kaj mezuman rapidon</string>
     <string name="no_plugins_enabled">Neniu kromprogramo estas aktiva. Vi povas trovi la liston de ĉiuj disponeblaj profiloj per la menuo → “Kromprogramoj”.</string>
+    <string name="shared_string_travelbooks">Vojaĝ-gvidiloj</string>
+    <string name="display_route_tracks_as_poi">Montri kursojn kiel interesejojn</string>
+    <string name="display_route_tracks">Montri kursojn</string>
 </resources>

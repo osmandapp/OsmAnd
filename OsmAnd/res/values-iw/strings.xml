@@ -4355,4 +4355,5 @@
     <string name="explore_osmnad_plans_to_find_suitable">ניתן לחקור את התכניות של OsmAnd ולמצוא אחת שמתאימה לך.</string>
     <string name="purchases_feature_desc_pro_widgets">קבלת גישה לתכונות מקצועיות של OsmAnd: צביעת מסלולים ועוד.</string>
     <string name="option_available_only_in_osmand_pro">האפשרות הזאת קיימת כחלק ממינוי OsmAnd Pro.</string>
+    <string name="display_route_tracks_as_poi">הצגת מסלולים כנקודות עניין</string>
 </resources>

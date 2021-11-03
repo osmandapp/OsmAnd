@@ -4348,7 +4348,7 @@
 \n
 \n • Pianificazione del percorso: utilizzerà il profilo scelto dopo l\'avvio
 \n
-\n • Corretta lo strato Mapillary, il componente aggiuntivo è disabilitato per preimpostazione
+\n • Corretto lo strato Mapillary, il componente aggiuntivo è disabilitato per preimpostazione
 \n
 \n • Aggiunta la schermata per gestire tutta la cronologia dell\'app
 \n
@@ -4386,4 +4386,13 @@
     <string name="history_preferences_descr">Puoi disabilitare la registrazione della cronologia singolarmente per ogni tipo di cronologia.</string>
     <string name="shortcut_navigate_to_work">Naviga fino al lavoro</string>
     <string name="android_auto_map_placeholder_title">La mappa è visualizzata nello schermo del veicolo</string>
+    <string name="display_route_tracks">Mostra tracce</string>
+    <string name="shared_string_travelbooks">Guide di viaggio</string>
+    <string name="display_route_tracks_as_poi">Visualizza le tracce come PDI</string>
+    <string name="safe_settings">Sicuro</string>
+    <string name="approx_safe_mode">Approssimazione gpx sicura</string>
+    <string name="approx_safe_mode_description">Approssima i gpx utilizzando il codice Android invece del codice nativo.</string>
+    <string name="use_external_timestamps">Utilizza le marche temporali esterne</string>
+    <string name="use_external_timestamps_description">Utilizza le marche temporali del navigatore online per correggere il tempo stimato e la velocità media</string>
+    <string name="no_plugins_enabled">Non hai alcun componente aggiuntivo abilitato. Puoi vedere la lista dei componenti aggiuntivi nel Menu - Componenti aggiuntivi.</string>
 </resources>

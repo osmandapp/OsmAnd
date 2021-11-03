@@ -4400,4 +4400,7 @@
     <string name="use_external_timestamps">使用外部時間戳</string>
     <string name="use_external_timestamps_description">使用線上路徑規劃服務的時間戳來調整預估時間與平均速度</string>
     <string name="no_plugins_enabled">您未啟用外掛程式。您可以在選單→「外掛程式」中找到所有可用外掛程式的清單。</string>
+    <string name="display_route_tracks_as_poi">將軌跡顯示為 POI</string>
+    <string name="shared_string_travelbooks">旅遊書</string>
+    <string name="display_route_tracks">顯示軌跡</string>
 </resources>
