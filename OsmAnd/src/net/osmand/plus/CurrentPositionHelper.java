@@ -19,7 +19,6 @@ import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -314,10 +313,13 @@ public class CurrentPositionHelper {
 			});
 			return;
 		}
-
-		Collections.sort(complete, (o1, o2) -> Algorithms.objectEquals(o1.streetName, o2.streetName)
-				? Double.compare(o1.getDistance(), o2.getDistance()) : 0);
-
+		Collections.sort(complete, (o1, o2) -> {
+			int projectionCompare = Double.compare(o1.getDistanceP(), o2.getDistanceP());
+			if (projectionCompare != 0) {
+				return projectionCompare;
+			}
+			return Double.compare(o1.getDistance(), o2.getDistance());
+		});
 		final GeocodingResult rts = complete.size() > 0 ? complete.get(0) : new GeocodingResult();
 		app.runInUIThread(new Runnable() {
 			public void run() {
