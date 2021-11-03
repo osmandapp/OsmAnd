@@ -80,6 +80,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashBaseFragment;
@@ -124,7 +125,6 @@ import net.osmand.plus.monitoring.TripRecordingStartingBottomSheet;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RouteCalculationProgressCallback;
 import net.osmand.plus.routing.RoutingHelper;
@@ -1946,9 +1946,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void fitCurrentRouteToMap() {
 		boolean portrait = true;
 		int leftBottomPaddingPx = 0;
-		WeakReference<MapRouteInfoMenuFragment> fragmentRef = mapRouteInfoMenu.findMenuFragment();
+		WeakReference fragmentRef = mapRouteInfoMenu.findMenuFragment();
+		if (fragmentRef == null) {
+			fragmentRef = mapRouteInfoMenu.findFollowTrackFragment();
+		}
 		if (fragmentRef != null) {
-			MapRouteInfoMenuFragment f = fragmentRef.get();
+			ContextMenuFragment f = (ContextMenuFragment) fragmentRef.get();
 			portrait = f.isPortrait();
 			if (!portrait) {
 				leftBottomPaddingPx = f.getWidth();
