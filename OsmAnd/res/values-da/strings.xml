@@ -65,7 +65,7 @@
     <string name="rendering_attr_roadColors_description">Vælg et farveskema til veje:</string>
     <string name="rendering_attr_roadColors_name">Farveskema for veje</string>
     <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
-    <string name="enable_plugin_monitoring_services">Aktiver \"Optagelse af tur\" udvidelsen for at bruge positionlogningstjenester (GPX-logning, online sporing)</string>
+    <string name="enable_plugin_monitoring_services">Aktiver \"Optagelse af tur\"-udvidelsen for at bruge positionlogningstjenester (GPX-logning, online sporing)</string>
     <string name="non_optimal_route_calculation">Beregn en muligvis ikke-optimal rute over lange afstande</string>
     <string name="gps_not_available">Aktiver GPS i indstillinger</string>
     <string name="map_widget_monitoring_services">Logningstjenester</string>
@@ -982,7 +982,7 @@
     <string name="av_camera_focus_macro">Makrofokustilstand (nærbillede)</string>
     <string name="av_camera_focus_edof">Udvidet dybdeskarphed (EDOF)</string>
     <string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
-    <string name="av_photo_play_sound_descr">Vælg lyd eller stilhed når der optages fotos.</string>
+    <string name="av_photo_play_sound_descr">Vælg lyd eller stilhed, når der tages fotos.</string>
     <string name="av_photo_play_sound">Afspil kameralyd</string>
     <string name="speak_traffic_warnings">Trafikadvarsler</string>
     <string name="speak_cameras">Fartkameraer</string>
@@ -1477,7 +1477,7 @@
 \nLængdegrad %2$s</string>
     <string name="tips_and_tricks_descr">Ofte stillede spørgsmål, de seneste ændringer og andre oplysninger.</string>
     <string name="routing_settings_2">Navigationsindstillinger</string>
-    <string name="general_settings_2">Globale indstillinger</string>
+    <string name="general_settings_2">Generelle indstillinger</string>
     <string name="shared_string_clear_all">Slet alle</string>
     <string name="shared_string_my_location">Position</string>
     <string name="shared_string_my_favorites">Favoritter</string>
@@ -1529,7 +1529,7 @@
     <string name="copying_osmand_file_failed">Flytning af filer mislykkedes</string>
     <string name="storage_directory_external">Ekstern lager</string>
     <string name="storage_directory_multiuser">Flerbruger lager</string>
-    <string name="storage_directory_internal_app">Intern programhukommelse</string>
+    <string name="storage_directory_internal_app">Intern app-hukommelse</string>
     <string name="storage_directory_manual">Manuelt angivet</string>
     <string name="storage_directory_default">Internhukommelse</string>
     <string name="storage_directory">Kortlagring</string>
@@ -1714,7 +1714,7 @@
     <string name="show_on_start_description">\'Fra\' starter direkte på kortet.</string>
     <string name="map_downloaded">Kort hentet</string>
     <string name="map_downloaded_descr">%1$s kortet er klar til brug.</string>
-    <string name="go_to_map">Vis kortet</string>
+    <string name="go_to_map">Vis kort</string>
     <string name="shared_string_qr_code">QR kode</string>
     <string name="enter_country_name">Indtast landenavn</string>
     <string name="world_map_download_descr">Verdensgrundkortet (dækker hele verden ved lave zoomniveauer) mangler eller er forældet. Hent det for en komplet oversigt.</string>
@@ -1728,7 +1728,7 @@
     <string name="first_usage_item_description">Sådan hentes kort og angives grundlæggende indstillinger.</string>
     <string name="navigation_item_description">Konfiguration af navigation.</string>
     <string name="faq_item">OSS</string>
-    <string name="faq_item_description">Ofte stillede spørgsmål</string>
+    <string name="faq_item_description">Ofte stillede spørgsmål.</string>
     <string name="map_viewing_item">Kortvisning</string>
     <string name="search_on_the_map_item">Søgning på kortet</string>
     <string name="planning_trip_item">Turplanlægning</string>
@@ -3002,7 +3002,7 @@
     <string name="routing_attr_piste_type_downhill_description">Skiløjper til alpint skiløb eller downhill og adgang til skilifte.</string>
     <string name="routing_attr_piste_type_nordic_name">Langrend og nordisk skiløb</string>
     <string name="routing_attr_piste_type_nordic_description">Spor til nordisk eller langrend.</string>
-    <string name="routing_attr_piste_type_skitour_name">Langrend ski</string>
+    <string name="routing_attr_piste_type_skitour_name">Turski</string>
     <string name="routing_attr_piste_type_skitour_description">Spor til langrend ski.</string>
     <string name="routing_attr_piste_type_sled_name">Slæde</string>
     <string name="routing_attr_piste_type_sled_description">Pister til kælkning.</string>
@@ -3012,10 +3012,10 @@
     <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige forhindringer og stejle sektioner.</string>
     <string name="routing_attr_allow_expert_name">Tillad ekspert ruter</string>
     <string name="routing_attr_allow_expert_description">Ekstremt vanskelige ruter, med farlige forhindringer og omgivelser.</string>
-    <string name="routing_attr_allow_skating_only_name">Tillad kun skøjteløb ruter</string>
+    <string name="routing_attr_allow_skating_only_name">Tillad ruter kun for skøjteløb</string>
     <string name="routing_attr_allow_skating_only_description">Ruter forberedt til freestyle eller kun skøjteløb uden klassiske spor.</string>
     <string name="routing_attr_allow_classic_only_name">Tillad kun klassiske ruter</string>
-    <string name="routing_attr_allow_classic_only_description">Ruter forberedt til den klassiske stil uden skøjtebaner. Omfatter ruter udarbejdet af en mindre snescooter med løsere pister og spor lavet manuelt af skiløbere.</string>
+    <string name="routing_attr_allow_classic_only_description">Ruter forberedt til den klassiske stil uden skøjtebaner. Dette omfatter ruter forberedt af en mindre snescooter med løsere pister og spor lavet manuelt af skiløbere.</string>
     <string name="routing_attr_difficulty_preference_name">Foretrukket sværhedsgrad</string>
     <string name="routing_attr_difficulty_preference_description">Foretræk ruter med denne vanskelighed, selv om ruteplanlægning over sværere eller lettere pister stadig er muligt, hvis de er kortere.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
@@ -3123,7 +3123,7 @@
     <string name="get_discount_title">Få %1$d %2$s med %3$s rabat.</string>
     <string name="get_discount_first_part">%1$s for de første %2$s</string>
     <string name="get_discount_first_few_part">%1$s for de første %2$s</string>
-    <string name="get_discount_second_part">derefter %1$s</string>
+    <string name="get_discount_second_part">Derefter %1$s</string>
     <string name="cancel_subscription">Annuller abonnement</string>
     <string name="price_and_discount">%1$s • Spar %2$s</string>
     <string name="utm_format_descr">OsmAnd bruger UTM standard, som er tilsvarende, men ikke identisk med UTM NATO format.</string>
@@ -3183,7 +3183,7 @@
     <string name="change_osmand_data_folder_question">Skift datamappe\?</string>
     <string name="move_maps_to_new_destination">Flyt til den nye destination</string>
     <string name="change_data_storage_folder">Skift lagringsmappe</string>
-    <string name="rendering_attr_piste_type_snow_park_name">Snowpark</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Terrænpark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Slæde</string>
     <string name="rendering_attr_piste_type_sled_name">Kælk</string>
     <string name="rendering_attr_piste_type_hike_name">Vandretur</string>
@@ -3219,7 +3219,7 @@
     <string name="data_storage_space_description">%1$s GB ledig (af %2$s GB)</string>
     <string name="track_storage_directory">Mappe til lagring af spor</string>
     <string name="track_storage_directory_descrp">Spor kan gemmes i \'rec\' mappen eller i månedlige eller daglige mapper.</string>
-    <string name="store_tracks_in_rec_directory">Optag spor til \'rec\' mappen</string>
+    <string name="store_tracks_in_rec_directory">Optag spor til \'rec\'-mappen</string>
     <string name="store_tracks_in_daily_directories">Optag spor i daglige mapper</string>
     <string name="store_tracks_in_daily_directories_descrp">Optag spor i undermapper pr. optagelsesdag (f.eks. 2018-01-01).</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB brugt</string>
@@ -3324,7 +3324,7 @@
     <string name="live_monitoring_descr">Tillader deling af den aktuelle placering ved hjælp af tur-optagelse.</string>
     <string name="live_monitoring">Online sporing</string>
     <string name="save_track_logging_accuracy">Lognøjagtighed</string>
-    <string name="tracks_view_descr">Optagede spor er i %1$s eller i OsmAnd mappen.</string>
+    <string name="tracks_view_descr">Dine optagede spor er i %1$s eller i OsmAnd-mappen.</string>
     <string name="multimedia_notes_view_descr">Noter er i %1$s.</string>
     <string name="video_notes">Video noter</string>
     <string name="photo_notes">Foto noter</string>
@@ -3927,7 +3927,7 @@
     <string name="shared_string_subtype">Undertype</string>
     <string name="shared_string_vehicle">Køretøj</string>
     <string name="shared_string_api_key">API-nøgle</string>
-    <string name="backup_data">Sikkerhedskopier data</string>
+    <string name="backup_data">Sikkerhedskopiér data</string>
     <string name="backup_restore_data_descr">Gendan data på enheden med online sikkerhedskopier.</string>
     <string name="select_backup_data_descr">Vælg data og mapper til sikkerhedskopiering.</string>
     <string name="backup_restore_data">Gendan data</string>
@@ -4000,7 +4000,7 @@
     <string name="shared_string_view_all">Se alle</string>
     <string name="backup_error_user_is_already_registered">Denne e-mailadresse er i brug på en anden konto</string>
     <string name="backup_error_subscription_was_expired">Udløbet abonnement</string>
-    <string name="backup_error_subscription_was_expired_descr">Dit OsmAnd Pro-abonnement er udløbet, forny det for at bruge backup. Du kan stadig gendanne data fra Cloud.</string>
+    <string name="backup_error_subscription_was_expired_descr">Dit OsmAnd Pro-abonnement er udløbet, forny det for at bruge sikkerhedskopi. Du kan stadig gendanne data fra Cloud.</string>
     <string name="backup_error_subscription_was_used">Abonnement eller kampagne anvendes af en anden konto %1$s</string>
     <string name="backup_error_size_is_exceeded">Den maksimale størrelse på OsmAnd Cloud er overskredet %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">Filen skal sendes i .gzip-format</string>
@@ -4072,8 +4072,8 @@
     <string name="osmand_cloud">OsmAnd Cloud</string>
     <string name="osmand_cloud_authorize_descr">Mist aldrig dine data. Sikkerhedskopier og gendan nemt alle informationer.</string>
     <string name="local_backup">Lokal sikkerhedskopiering</string>
-    <string name="local_backup_descr">Sikkerhedskopier eller gendan data fra en lokal fil.</string>
-    <string name="backup_into_file">Sikkerhedskopier som fil</string>
+    <string name="local_backup_descr">Sikkerhedskopiér eller gendan data fra en lokal fil.</string>
+    <string name="backup_into_file">Sikkerhedskopiér som fil</string>
     <string name="restore_from_file">Gendan fra fil</string>
     <string name="osmand_cloud_help_descr">Brug for hjælp\? Kontakt os venligst på %1$s</string>
     <string name="osmand_cloud_create_account_descr">Indtast din e-mailadresse, en bekræftelseskode vil blive sendt dertil,
@@ -4096,13 +4096,13 @@
 \nKontroller venligst din internetforbindelse.</string>
     <string name="shared_string_predefined">Foruddefineret</string>
     <string name="backup_complete">Sikkerhedskopiering fuldført</string>
-    <string name="backup_now">Sikkerhedskopier nu</string>
+    <string name="backup_now">Sikkerhedskopiér nu</string>
     <string name="make_backup">Lav en sikkerhedskopi</string>
     <string name="make_backup_descr">Der er mange ændringer på denne enhed. Tag en sikkerhedskopi af disse data for ikke at miste dem.</string>
     <string name="backup_conflicts">Konflikter</string>
     <string name="backup_confilcts_descr">Nogle filer kunne ikke uploades til serveren, fordi en nyere version er gemt på serveren.</string>
     <string name="backup_view_conflicts">Se konflikter</string>
-    <string name="backup_no_internet_descr">Tjek din internetforbindelse, og download igen.</string>
+    <string name="backup_no_internet_descr">Tjek din internetforbindelse, og hent igen.</string>
     <string name="backup_pause_all">Sæt alle på pause</string>
     <string name="upload_local_version">Upload lokal version</string>
     <string name="download_server_version">Download serverversion</string>
@@ -4176,7 +4176,7 @@
     <string name="tiles_storage_descr">Vælg hvordan du vil gemme downloadede brikker.</string>
     <string name="export_import_quick_actions_with_profiles_promo">Eksporter eller importer hurtige handlinger med app-profiler.</string>
     <string name="quick_action_showhide_mapillary_descr">En omskifter til at vise eller skjule Mapillary-laget på kortet.</string>
-    <string name="track_coloring_solid">Solid</string>
+    <string name="track_coloring_solid">Ensfarvet</string>
     <string name="route_between_points_warning_desc">Fastgør derefter dit spor til den nærmeste tilladte vej med en af dine navigationsprofiler for at bruge denne mulighed.</string>
     <string name="shared_string_enter_param">Angiv param</string>
     <string name="delete_all_actions_message_q">Vil du uigenkaldeligt slette %d hurtige handlinger\?</string>
@@ -4225,7 +4225,7 @@
     <string name="send_logcat_log">Send logcat-log</string>
     <string name="attribute">Attribut</string>
     <string name="save_global_track_interval_descr">Angiv logningsintervallet for den generelle sporregistrering (aktiveres via widgetten \"Optagelse af tur\" på kortet).</string>
-    <string name="release_4_0">• Cloud backup
+    <string name="release_4_0">• Sikkerhedskopiering til skyen
 \n
 \n • Tilføjet nattilstand for \"Topo\" kortstil
 \n
@@ -4246,7 +4246,7 @@
 \n • OsmAnd Live opdateringer flyttet til \"Downloads &gt; Opdateringer\"
 \n
 \n</string>
-    <string name="use_native_pt_desc">Skift til Java (sikker) Ruteberegning med offentlig transport</string>
+    <string name="use_native_pt_desc">Skift til Java (sikker) ruteberegning med offentlig transport</string>
     <string name="message_need_calculate_route_before_show_graph">%1$s data er kun tilgængelige på veje, beregn en rute ved hjælp af \"Rute mellem punkter\" for at se graferne.</string>
     <string name="add_online_routing_engine">Tilføj online ruteberegningsmotor</string>
     <string name="edit_online_routing_engine">Rediger online ruteberegningsmotor</string>
@@ -4412,4 +4412,7 @@
     <string name="display_route_tracks">Vis spor</string>
     <string name="shared_string_travelbooks">Rejsebøger</string>
     <string name="display_route_tracks_as_poi">Vis spor som IP</string>
+    <string name="shared_storage_warning_description">Fra november 2021 vil OsmAnd 4.2 miste adgangen til delt lagerplads på grund af ændrede regler for adgang til lagerplads i Android.
+\n
+\nDu bedes ændre lageret fra Delt lager til tilgængeligt lager. Hvis dette ikke gøres, vil appen miste adgangen til dine data: herunder offlinekort, GPX-spor og alt andet.</string>
 </resources>
