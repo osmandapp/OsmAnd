@@ -391,6 +391,8 @@ public class LocationParser {
 					char delimiter = s.charAt(s.indexOf((String) all.get(nextTokenIdx)) - 1);
 					partial[0] = delimiter != ' ';
 				}
+			} else {
+				partial[0] = true;
 			}
 		}
 	}
