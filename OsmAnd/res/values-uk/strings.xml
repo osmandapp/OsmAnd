@@ -2179,11 +2179,11 @@
     <string name="shared_string_gpx_track">Трек</string>
     <string name="max_speed">Найбільша швидкість</string>
     <string name="average_speed">Середня швидкість</string>
-    <string name="shared_string_time_moving">Час в русі</string>
-    <string name="shared_string_time_span">Загальний час</string>
+    <string name="shared_string_time_moving">Час переміщення</string>
+    <string name="shared_string_time_span">Проміжок часу</string>
     <string name="shared_string_max">Макс.</string>
     <string name="shared_string_start_time">Час початку</string>
-    <string name="shared_string_end_time">Час прибуття</string>
+    <string name="shared_string_end_time">Час завершення</string>
     <string name="shared_string_color">Колір</string>
     <string name="shared_string_slope">Ухил</string>
     <string name="lang_ber">Берберська</string>
@@ -2401,7 +2401,7 @@
     <string name="improve_coverage_mapillary">Поліпшити фотопокриття Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Установіть Mapillary, щоб додати світлини до цього місця на мапі.</string>
     <string name="mapillary_image">Зображення Mapillary</string>
-    <string name="distance_moving">Відстань виправлена</string>
+    <string name="distance_moving">Відкоригована відстань</string>
     <string name="shared_string_permissions">Права доступу</string>
     <string name="import_gpx_failed_descr">OsmAnd не може імпортувати файл. Будь ласка, перевірте, чи OsmAnd має дозвіл на читання файлу з його місця розташування.</string>
     <string name="map_widget_ruler_control">Радіусна лінійка</string>
@@ -4387,7 +4387,7 @@
     <string name="shared_storage_warning_description">Через нові правила Android починаючи з листопада 2021 року OsmAnd 4.2 втратить доступ до спільної пам’яті.
 \n
 \nБудь ласка, перемістіть теку даних із спільного сховища в доступне сховище, інакше застосунок утратить доступ до ваших даних, як-от офлайн-мапи, треки GPX тощо.</string>
-    <string name="search_history_is_disabled_descr">Увімкнути історію пошуку можна в Налаштуваннях</string>
+    <string name="search_history_is_disabled_descr">Увімкнути історію пошуку можна в налаштуваннях.</string>
     <string name="history_is_disabled_descr">Увімкніть історію, щоб отримати швидкий доступ до останніх використаних результатів.</string>
     <string name="transparent_status_bar">Прозорий рядок стану</string>
     <string name="history_actions_descr">Ви можете експортувати історію в файл.</string>
@@ -4398,13 +4398,16 @@
     <string name="shortcut_navigate_to">Маршрут до…</string>
     <string name="shortcut_navigate_to_work">Маршрут до \"Роботи\"</string>
     <string name="transparent_status_bar_descr">Показ мапи під рядком стану</string>
-    <string name="approx_safe_mode">Безпечне наближення gpx</string>
+    <string name="approx_safe_mode">Безпечне наближення GPX</string>
     <string name="no_plugins_enabled">У вас немає ввімкнених розширень. Ви можете знайти список усіх доступних розширень у Меню → Розширення.</string>
     <string name="use_external_timestamps">Використовувати зовнішні позначки часу</string>
     <string name="safe_settings">Безпечно</string>
-    <string name="approx_safe_mode_description">Виконайте апроксимацію gpx, використовуючи повільніший код Android замість нативного.</string>
+    <string name="approx_safe_mode_description">Виконати апроксимацію GPX, використовуючи повільніший код Android замість нативного.</string>
     <string name="use_external_timestamps_description">Використовувати часові позначки онлайн-маршрутизатора, щоб налаштувати очікуваний час і середню швидкість</string>
     <string name="shared_string_travelbooks">Путівники</string>
     <string name="display_route_tracks">Показати треки</string>
     <string name="display_route_tracks_as_poi">Показувати треки як POI</string>
+    <string name="delete_history_items_descr">Ви впевнені, що хочете видалити вибрані елементи історії\?</string>
+    <string name="delete_history_items">Видалити елементи історії %1$s\?</string>
+    <string name="quick_action_toggle_preference">Перемикач для перемикання вибраного стану налаштувань.</string>
 </resources>
