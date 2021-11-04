@@ -1714,7 +1714,7 @@
     <string name="first_usage_item_description">Come scaricare le mappe, imposta la configurazione di base.</string>
     <string name="navigation_item_description">Impostazioni di navigazione.</string>
     <string name="faq_item">FAQ</string>
-    <string name="faq_item_description">Domande frequenti</string>
+    <string name="faq_item_description">Domande frequenti.</string>
     <string name="map_viewing_item">Mappa visualizzata</string>
     <string name="search_on_the_map_item">Ricerca mappa</string>
     <string name="planning_trip_item">Pianifica un viaggio</string>
@@ -4295,7 +4295,7 @@
     <string name="cancel_anytime_in_gplay">Cancellalo in ogni momento in Google Play.</string>
     <string name="shared_string_not_included">Non include</string>
     <string name="amz_manage_subscription_descr">Per gestire la tua sottoscrizione usa l\'app Amazon dal dispositivo o il tuo profilo nel sito Amazon.com.</string>
-    <string name="no_activity_for_intent">Non è stata trovata alcuna applicazione per completare l\'azione</string>
+    <string name="no_activity_for_intent">Installa una applicazione che possa completare l\'azione.</string>
     <string name="grey_color_undefined">Il grigio è utilizzato per le parti in cui non sono presenti dati.</string>
     <string name="osm_live_payment_subscription_management_amz">Il pagamento viene addebitato sul tuo account Amazon alla conferma dell\'acquisto.
 \n
@@ -4314,7 +4314,7 @@
     <string name="remove_group_from_markers">Rimuovere il gruppo dall\'elenco dei marcatori</string>
     <string name="start_point">Partenza</string>
     <string name="mapillary_menu_filter_description_new">Filtra le immagini per data o tipo. Attivo solo a zoom elevati.</string>
-    <string name="service_is_not_available_please_try_later">Sevizio indisponibile, prova più tardi</string>
+    <string name="service_is_not_available_please_try_later">Sevizio indisponibile, prova più tardi.</string>
     <string name="shared_string_files">File</string>
     <string name="travel_route_types">Tipi di percorso</string>
     <string name="upload_gpx_description_hint">Lascia vuoto, il nome della traccia sarà utilizzato come descrizione. La descrizione immessa sarà applicata per ogni traccia.</string>
@@ -4334,7 +4334,7 @@
     <string name="routing_attr_prefer_horse_routes_name">Preferisci i percorsi per cavalli</string>
     <string name="routing_attr_prefer_horse_routes_description">Preferisci i percorsi per cavalli</string>
     <string name="shared_app_storage_description">La memoria condivisa non è più disponibile a causa delle modifiche alle regole di accesso all\'archiviazione in Android.</string>
-    <string name="internal_app_storage_description">Memorizzazione interna, nascosto all\'utilizzatore e alle altre app, così nessuno può accedere ai tuoi dati</string>
+    <string name="internal_app_storage_description">Memorizzazione interna, nascosto all\'utilizzatore e alle altre app, così solo OsmAnd può accedere ai tuoi dati.</string>
     <string name="rendering_attr_noNatureReserves_name">Riserva naturale</string>
     <string name="rendering_attr_noNatureReserves_description">Nascondi riserve naturali, aree protette e parchi nazionali.</string>
     <string name="shared_string_details">Dettagli</string>
@@ -4361,9 +4361,7 @@
 \n • Corretti diversi errori di calcolo del percorso
 \n
 \n</string>
-    <string name="clear_all_history_warning">Sei sicuro di voler cancellare la completa cronologia dell\'app\?
-\n
-\nLa ricerca, la cronologia di navigazione e i marcatori saranno cancellati.</string>
+    <string name="clear_all_history_warning">Cancellare la completa cronologia dell\'app comprese le ricerche, la cronologia di navigazione e i marcatori\?</string>
     <string name="clear_all_history">Cancella tutta la cronologia</string>
     <string name="history_actions_descr">Puoi esportare la cronologia in un file.</string>
     <string name="navigation_history">Cronologia di navigazione</string>
@@ -4373,11 +4371,11 @@
     <string name="android_auto_map_placeholder_descr">Scollega il tuo dispositivo da Android Auto per visualizzare la mappa nell\'app.</string>
     <string name="android_auto_purchase_request_title">Acquista OsmAnd Pro o Maps+ per utilizzare OsmAnd con Android Auto</string>
     <string name="continue_on_phone">Prosegui sul telefono</string>
-    <string name="location_access_request_title">Per navigare OsmAnd ha bisogno di accedere alla localizzazione</string>
+    <string name="location_access_request_title">Per navigare OsmAnd ha bisogno di accedere alla localizzazione.</string>
     <string name="location_access_request_action">Dai il permesso</string>
     <string name="transparent_status_bar">Barra di stato trasparente</string>
     <string name="map_markers_history">Cronologia dei marcatori della mappa</string>
-    <string name="search_history_is_disabled_descr">Puoi abilitare la ricerca nella cronologia nelle Impostazioni</string>
+    <string name="search_history_is_disabled_descr">Puoi abilitare la ricerca nella cronologia dalle Impostazioni.</string>
     <string name="markers_history_is_disabled_descr">Abilita la cronologia per ottenere la lista dei marcatori della mappa visitati.</string>
     <string name="history_is_disabled_descr">Abilita la cronologia per ottenere un accesso veloce agli ultimi risultati.</string>
     <string name="is_disabled">%1$s è disabilitato</string>
@@ -4385,7 +4383,7 @@
     <string name="transparent_status_bar_descr">Mostra la mappa sotto la barra di stato</string>
     <string name="history_preferences_descr">Puoi disabilitare la registrazione della cronologia singolarmente per ogni tipo di cronologia.</string>
     <string name="shortcut_navigate_to_work">Naviga fino al lavoro</string>
-    <string name="android_auto_map_placeholder_title">La mappa è visualizzata nello schermo del veicolo</string>
+    <string name="android_auto_map_placeholder_title">La mappa è visualizzata nello schermo del veicolo.</string>
     <string name="display_route_tracks">Mostra tracce</string>
     <string name="shared_string_travelbooks">Guide di viaggio</string>
     <string name="display_route_tracks_as_poi">Visualizza le tracce come PDI</string>
