@@ -1488,7 +1488,6 @@ public class SearchCoreFactory {
 			return super.search(phrase, resultMatcher);
 		}
 
-
 		LatLon parsePartialLocation(String s) {
 			s = s.trim();
 			if (s.length() == 0 || !(s.charAt(0) == '-' || Character.isDigit(s.charAt(0))
@@ -1497,34 +1496,16 @@ public class SearchCoreFactory {
 					|| s.contains("://"))) {
 				return null;
 			}
+			boolean[] partial = new boolean[]{false};
 			List<Double> d = new ArrayList<>();
 			List<Object> all = new ArrayList<>();
 			List<String> strings = new ArrayList<>();
-			LocationParser.splitObjects(s, d, all, strings);
-			if (isValidPartialCoordinate(all, s)) {
+			LocationParser.splitObjects(s, d, all, strings, partial);
+			if (partial[0]) {
 				double lat = LocationParser.parse1Coordinate(all, 0, all.size());
 				return new LatLon(lat, 0);
 			}
 			return null;
-		}
-
-		private boolean isValidPartialCoordinate(List<Object> all, String s) {
-			int firstNumeralIdx = -1;
-			for (int i = 0; i < all.size(); i++) {
-				if (all.get(i) instanceof Double) {
-					firstNumeralIdx = i;
-					break;
-				}
-			}
-			if (firstNumeralIdx != -1) {
-				if (all.size() > firstNumeralIdx + 1 && all.get(firstNumeralIdx + 1) instanceof String) {
-					return (s.charAt(s.indexOf((String) all.get(firstNumeralIdx + 1)) - 1) != ' ');
-				} else {
-					return true;
-				}
-			} else {
-				return false;
-			}
 		}
 
 		private void parseLocation(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
