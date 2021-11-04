@@ -146,7 +146,7 @@
     <string name="nothing_found_descr">Muuda otsingu päringut või laienda selle raadiust.</string>
     <string name="shared_string_permissions">Load</string>
     <string name="import_gpx_failed_descr">Faili ei saa importida. Palun veendu, et OsmAnd\'il on õigus seda faili lugeda.</string>
-    <string name="distance_moving">Kaugus parandatud</string>
+    <string name="distance_moving">Korrigeeritud vahemaa</string>
     <string name="mapillary_image">Mapillary pilt</string>
     <string name="open_mapillary">Ava Mapillary</string>
     <string name="shared_string_install">Paigalda</string>
