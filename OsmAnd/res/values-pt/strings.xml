@@ -674,7 +674,7 @@
     <string name="build_installed">A compilação {0} foi instalada ({1}).</string>
     <string name="downloading_build">A descarregar a compilação…</string>
     <string name="install_selected_build">Instalar OsmAnd - {0} de {1} {2} MB \?</string>
-    <string name="loading_builds_failed">A obtenção da lista de compilações do OsmAnd falhou</string>
+    <string name="loading_builds_failed">Não foi possível obter a lista de compilações do OsmAnd</string>
     <string name="loading_builds">A carregar compilações do OsmAnd…</string>
     <string name="select_build_to_install">Selecionar a compilação a instalar</string>
     <string name="contribution_activity">Instalar versão</string>
@@ -844,7 +844,7 @@
     <string name="download_roads_only_item">Só estradas</string>
     <string name="download_regular_maps">Mapa padrão</string>
     <string name="download_roads_only_maps">Mapas só de estradas</string>
-    <string name="safe_mode_description">Executar a aplicação no modo de segurança (usando o código do Android mais lento em vez do nativo).</string>
+    <string name="safe_mode_description">Executar a aplicação no modo de segurança (mais lento).</string>
     <string name="safe_mode">Modo de segurança</string>
     <string name="native_library_not_running">A aplicação está a ser executada no modo de segurança (desative em \"Configurações\").</string>
     <string name="background_service_is_enabled_question">O serviço de segundo plano OsmAnd ainda está em execução. Também quer pará-lo\?</string>
@@ -3384,9 +3384,9 @@
     <string name="shared_string_routing">Roteamento</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_menu">Menu</string>
-    <string name="plugin_disabled_descr">Esta extensão é uma aplicação separada, terá de removê-la separadamente se não tenciona usá-la mais.
+    <string name="plugin_disabled_descr">Esta extensão é uma aplicação separada, se a desativar, esta não é removida.
 \n
-\nA extensão permanecerá no aparelho após remover o OsmAnd.</string>
+\nPode ser desinstalada no ecrã do Android em Definições → Aplicações → OsmAnd → Desinstalar.</string>
     <string name="plugin_disabled">Extensão desativada</string>
     <string name="open_settings">Abrir configurações</string>
     <string name="please_provide_profile_name_message">Atribua um nome ao perfil</string>
@@ -4271,10 +4271,10 @@
     <string name="on_hold_since">Em espera desde %1$s</string>
     <string name="active_till">Ativa até %1$s</string>
     <string name="promo_subscription">Subscrição promocional</string>
-    <string name="track_has_no_needed_data">O trilho não contém os dados necessários.</string>
+    <string name="track_has_no_needed_data">O trilho não contém os respetivos dados.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Cor por afiliação de rede.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Atribuir uma cor a rotas de acordo com o tipo de rede do nó (internacional, regional, local).</string>
-    <string name="walking_route_osmc_description">Atribua uma cor às rotas de acordo com a sua cor local individual (se existir no OpenStreetMap) e tipo (internacional, regional, local).</string>
+    <string name="walking_route_osmc_description">Colorir as rotas pela cor local individual delas (se existirem no OpenStreetMap) e pelo tipo (internacional, regional, local).</string>
     <string name="travel_routes">Rotas de viagem</string>
     <string name="setting_supported_by_style">Esta configuração é fornecida pelo estilo de mapa \"%1$s\'\"</string>
     <string name="direct_line_maps_required_descr">O cálculo da rota está a demorar mais tempo do que o normal.
@@ -4288,7 +4288,7 @@
     <string name="online_maps_searching_descr">A pesquisar online…</string>
     <string name="reset_to_original">Repor o original</string>
     <string name="benefits_for_contributors">Benefícios para contribuidores do OpenStreetMap ativos</string>
-    <string name="benefits_for_contributors_primary_descr">Pode se beneficiar de atualizações ilimitadas de mapas por hora, se for um contribuidor ativo do OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">Os colaboradores ativos do OpenStreetMap.org podem ter direito a atualizações de mapas de hora em hora ilimitadas.</string>
     <string name="benefits_for_contributors_secondary_descr">Autentique-se no OpenStreetMap e verifique se está qualificado para obter atualizações de mapas mensais e por hora ilimitadas.</string>
     <string name="use_login_and_password">Usar nome de utilizador e palavra-passe</string>
     <string name="available_until">Disponível até %1$s</string>
@@ -4305,33 +4305,33 @@
     <string name="backup_error_no_subscription">Sem subscrição presente</string>
     <string name="map_updates_for_mappers">Atualizações de mapas para mapeadores</string>
     <string name="pro_features">Recursos Pro</string>
-    <string name="option_available_only_in_osmand_pro">A opção está disponível na subscrição do OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">Disponível na subscrição do OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Obtenha acesso às funcionalidades OsmAnd Pro: coloração de rotas e mais.</string>
     <string name="purchases_restored">Compras restauradas</string>
-    <string name="grey_color_undefined">A cor cinzenta é usada nas partes sem dados.</string>
+    <string name="grey_color_undefined">As partes sem dados são mostradas a cinzento.</string>
     <string name="osm_live_payment_subscription_management_amz">O pagamento é cobrado da sua conta Amazon ao confirmar a compra.
 \n
 \nEste é renovado a não ser que seja cancelado antes do período de renovação selecionado.
 \n
 \nFaça a gestão ou cancele as suas subscrições nas configurações da Amazon a qualquer momento.</string>
     <string name="cancel_anytime_in_amazon_app">Cancele a qualquer momento na App Amazon</string>
-    <string name="amz_manage_subscription_descr">Para gerir a sua subscrição, use a App Amazon no dispositivo ou abra o site Amazon.com no seu perfil.</string>
+    <string name="amz_manage_subscription_descr">Faça a gestão da sua subscrição usando a App Amazon ou o site Amazon.com</string>
     <string name="empty_category_name">Nome de categoria vazio</string>
-    <string name="no_activity_for_intent">Não foi encontrada nenhuma aplicação adequada para executar esta ação</string>
-    <string name="no_items_of_type_message">Você não tem nenhum item deste tipo</string>
-    <string name="routeInfo_tracktype_description">Colorir uma rota ou linha do trilho de acordo com as condições das estradas com base na composição da superfície. Normalmente aplicado a estradas em que a rede de estradas principal consiste em estradas não pavimentadas.</string>
-    <string name="routeInfo_winter_ice_road_description">Colorir a rota ou linha do trilho de acordo com a classificação da estrada de inverno que só pode ser usada durante o inverno.</string>
-    <string name="routeInfo_smoothness_description">Fornece um esquema de classificação em relação à usabilidade física de uma via para veículos com rodas, particularmente em relação à regularidade / planicidade da superfície.</string>
-    <string name="routeInfo_surface_description">Fornece informações adicionais sobre a superfície física das estradas/caminhos pedonais.</string>
-    <string name="routeInfo_roadClass_description">Colorir a rota ou a linha da via de acordo com a classificação da estrada.</string>
+    <string name="no_activity_for_intent">Instale uma aplicação que possa lidar com esta ação.</string>
+    <string name="no_items_of_type_message">Não tem nenhum item deste tipo</string>
+    <string name="routeInfo_tracktype_description">Colorir a rota ou linha da pista pela sua composição da superfície. Normalmente aplica-se quando a rede de estradas não é asfaltada em grande parte.</string>
+    <string name="routeInfo_winter_ice_road_description">Colorir a rota ou linha do trilho pela classificação da estrada de inverno.</string>
+    <string name="routeInfo_smoothness_description">Classificação de manobrabilidade da estrada/caminho para veículos de rodas, em particular no que diz respeito à regularidade/lisura da superfície.</string>
+    <string name="routeInfo_surface_description">Fornece informações sobre a superfície física das estradas/caminhos pedonais.</string>
+    <string name="routeInfo_roadClass_description">Colorir a rota ou a linha da via pela classificação da estrada.</string>
     <string name="add_group_to_markers">Adicionar grupo à lista de marcadores</string>
     <string name="remove_group_from_markers">Remover grupo da lista de marcadores</string>
     <string name="start_point">Iniciar</string>
     <string name="mapillary_menu_filter_description_new">Filtre as imagens por data ou tipo. Ativo apenas em ampliação alta.</string>
-    <string name="service_is_not_available_please_try_later">O serviço não está disponível, tente mais tarde</string>
+    <string name="service_is_not_available_please_try_later">Serviço indisponível. Tente mais tarde.</string>
     <string name="shared_string_files">Ficheiros</string>
     <string name="travel_route_types">Tipos de rotas</string>
-    <string name="sample_wikivoyage">Amostra do Wikivoyage</string>
+    <string name="sample_wikivoyage">Exemplo do Wikivoyage</string>
     <string name="shared_string_mini">mini</string>
     <string name="horseback_riding">Equitação</string>
     <string name="routing_attr_only_permitted_ways_name">Vias com permissão expressa</string>
@@ -4348,71 +4348,72 @@
     <string name="search_title">Pesquisar: %1$s</string>
     <string name="exit_pan_mode_descr">Pressione \"Selecionar\" para sair do modo deslocar</string>
     <string name="icon_group_nautical">Náutico</string>
-    <string name="shared_storage_warning_title">Alterações nas regras de acesso ao armazenamento</string>
-    <string name="purchases_feature_desc_android_auto">OsmAnd mapas e navegação offline no ecrã do seu veículo. Integre-o nos comandos do seu veículo.</string>
+    <string name="shared_storage_warning_title">Alterações no acesso ao armazenamento</string>
+    <string name="purchases_feature_desc_android_auto">Mostra os mapas offline do OsmAnd e a navegação no ecrã do seu veículo e integra-se nos comandos deste.</string>
     <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturais, áreas protegidas e parques nacionais.</string>
     <string name="shared_string_details">Detalhes</string>
-    <string name="shared_app_storage_description">A memória partilhada deixou de estar disponível devido a mudanças nas regras de acesso ao armazenamento no Android.</string>
+    <string name="shared_app_storage_description">A memória partilhada deixou de estar disponível devido a alterações ao acesso ao armazenamento no Android.</string>
     <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
-    <string name="internal_app_storage_description">Armazenamento interno, oculto ao utilizador e outras aplicações, de modo a que ninguém, a não ser o OsmAnd, pode ter acesso aos seus dados</string>
+    <string name="internal_app_storage_description">Armazenamento interno oculto a todos os utilizadores e outras aplicações, por isso só OsmAnd pode ter acesso aos seus dados.</string>
     <string name="android_auto_map_placeholder_descr">Desconecte o seu aparelho do Android Auto para ver o mapa na app.</string>
     <string name="android_auto_purchase_request_title">Compre OsmAnd Pro ou Maps+ para usar o OsmAnd com o Android Auto</string>
-    <string name="continue_on_phone">Continuar no telefone</string>
+    <string name="continue_on_phone">Continuar no dispositivo móvel</string>
     <string name="shared_string_articles">Artigos</string>
     <string name="android_auto_map_placeholder_title">O mapa é apresentado no ecrã do veículo.</string>
-    <string name="location_access_request_title">OsmAnd precisa de acesso à localização para navegar</string>
+    <string name="location_access_request_title">OsmAnd precisa do acesso à localização para navegar.</string>
     <string name="location_access_request_action">Conceder acesso</string>
     <string name="location_access_request_result">Aprovado: %1$s Rejeitado: %2$s</string>
     <string name="included_categories">Categorias incluídas</string>
     <string name="release_4_1">- Adicionado o suporte inicial para o Android Auto
 \n
-\n - Atualização da interface do utilizador para busca de coordenadas UTM
+\n - Atualização da interface do utilizador para pesquisa de coordenadas UTM
 \n
-\n - Favoritos: adicionada a capacidade de visualizar ícones usados recentemente
+\n - Favoritos: agora pode-se ver os ícones usados recentemente
 \n
-\n - Planeamento de rotas: utilizará o perfil selecionado após o lançamento
+\n - Planeamento de rotas: agora usa o perfil selecionado ao abrir a aplicação
 \n
-\n - Camada Mapilar fixa, a extensão está agora desativada por defeito
+\n - Correção da camada Mapilary, a extensão está agora desativada por predefinição
 \n
-\n - Adicionado ecrã para gerir todo o histórico na app
+\n - Novo ecrã para gerir todo o histórico da aplicação
 \n
-\n - A orientação do mapa não é redefinida após reiniciar a app
+\n - A orientação do mapa não é redefinida após reiniciar a aplicação
 \n
 \n - Melhoria da renderização do marcador de altura SRTM
 \n
-\n - Corrigida a visualização arábica no mapa
+\n - Corrigida a visualização em árabe no mapa
 \n
 \n - Corrigidos diferentes problemas de roteamento
 \n
 \n</string>
     <string name="is_disabled">%1$s está desativado</string>
-    <string name="shared_storage_warning_description">A partir de novembro de 2021 o OsmAnd 4.2 vai perder o acesso ao armazenamento partilhado, devido às regras de acesso ao armazenamento alteradas pelo Android.
+    <string name="shared_storage_warning_description">Devido a novas regras do Android, partir de novembro de 2021 o OsmAnd 4.2 vai perder o acesso ao armazenamento partilhado.
 \n
-\nPor favor, altere o armazenamento de \"Armazenamento partilhado\" para o armazenamento disponível, se isso não for feito a aplicação perderá o acesso aos seus dados: incluindo mapas offline, trilhos GPX e todo o resto.</string>
+\nPor favor mova a localização da pasta dos dados de \"Armazenamento partilhado\" para um dos outros armazenamentos disponíveis, caso contrário, irá perder o acesso aos seus dados: incluindo mapas offline, trilhos GPX, etc.</string>
     <string name="shortcut_navigate_to">Navegar para…</string>
-    <string name="markers_history_is_disabled_descr">Ative o histórico para obter uma lista de marcadores de mapa visitados.</string>
-    <string name="clear_all_history_warning">Tem a certeza que quer limpar todo o histórico da aplicação\?
-\n
-\nOs históricos de busca, navegação e marcadores serão apagados.</string>
+    <string name="markers_history_is_disabled_descr">Ative o histórico para memorizar uma lista de marcadores de mapa visitados.</string>
+    <string name="clear_all_history_warning">Limpar todas as entradas do histórico da aplicação, incluindo pesquisas, navegações feitas e o histórico de marcadores\?</string>
     <string name="clear_all_history">Limpar todo o histórico</string>
-    <string name="search_history_is_disabled_descr">Pode ativar o histórico de pesquisa em Configurações</string>
+    <string name="search_history_is_disabled_descr">Pode ativar o histórico de pesquisa em Configurações.</string>
     <string name="history_is_disabled_descr">Ative o histórico para obter acesso mais rápido aos últimos resultados usados.</string>
     <string name="map_markers_history">Histórico de marcadores de mapa</string>
     <string name="shortcut_start_recording">Começar a gravar</string>
-    <string name="shortcut_navigate_to_home">Navegar para casa</string>
+    <string name="shortcut_navigate_to_home">Navegar para \"Casa\"</string>
     <string name="history_actions_descr">Pode exportar o histórico para um ficheiro.</string>
     <string name="navigation_history">Histórico de navegação</string>
     <string name="history_preferences_descr">Pode desativar o registo de histórico individualmente para cada tipo de histórico.</string>
-    <string name="shortcut_navigate_to_work">Navegar para o trabalho</string>
+    <string name="shortcut_navigate_to_work">Navegar para \"Trabalho\"</string>
     <string name="transparent_status_bar_descr">Mostrar o mapa por baixo da barra de estado</string>
     <string name="transparent_status_bar">Barra de estado transparente</string>
     <string name="safe_settings">Segurança</string>
     <string name="approx_safe_mode">Aproximação segura do GPX</string>
     <string name="use_external_timestamps_description">Use os carimbos de tempo do roteador online para ajustar o tempo estimado e a velocidade média</string>
-    <string name="no_plugins_enabled">Não tem extensões ativadas. Pode encontrar a lista de todas as extensões disponíveis no Menu - Extensões.</string>
-    <string name="approx_safe_mode_description">Fazer a aproximação GPX usando o mais lento em vez do código nativo.</string>
+    <string name="no_plugins_enabled">Não tem extensões ativadas. Pode encontrar a lista das extensões disponíveis no botão ≡ (Menu) → Extensões.</string>
+    <string name="approx_safe_mode_description">Fazer a aproximação GPX mais lenta do Android em vez do código nativo.</string>
     <string name="use_external_timestamps">Usar carimbos temporais externos</string>
     <string name="display_route_tracks">Mostrar trilhos</string>
     <string name="shared_string_travelbooks">Livros de viagem</string>
     <string name="display_route_tracks_as_poi">Mostrar trilhos como POI</string>
+    <string name="delete_history_items_descr">Quer mesmo eliminar os itens do histórico selecionados\?</string>
+    <string name="delete_history_items">Eliminar %1$s itens do histórico\?</string>
+    <string name="quick_action_toggle_preference">Um alternador para trocar o estado de preferência selecionado.</string>
 </resources>
