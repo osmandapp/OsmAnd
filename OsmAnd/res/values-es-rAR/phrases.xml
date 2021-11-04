@@ -4193,4 +4193,20 @@
     <string name="poi_generator_type_boiler">Tipo de generador: caldera</string>
     <string name="poi_heating_district_heating">Calefacción urbana</string>
     <string name="poi_heating_radiator">Radiador</string>
+    <string name="poi_faculty_filter">Facultad</string>
+    <string name="poi_faculty_aerospace">Aeroespacial</string>
+    <string name="poi_faculty_education">Educación</string>
+    <string name="poi_faculty_biology">Biología</string>
+    <string name="poi_faculty_communication">Comunicación</string>
+    <string name="poi_faculty_economics">Ciencias económicas</string>
+    <string name="poi_faculty_engineering">Ingenieria</string>
+    <string name="poi_faculty_geography">Geografía</string>
+    <string name="poi_faculty_law">Leyes</string>
+    <string name="poi_faculty_psychology">Psicología</string>
+    <string name="poi_faculty_mathematics">Matemáticas</string>
+    <string name="poi_faculty_nursing">Enfermería</string>
+    <string name="poi_faculty_medicine">Medicina</string>
+    <string name="poi_faculty_architecture">Arquitectura</string>
+    <string name="poi_faculty_arts">Artes</string>
+    <string name="poi_faculty_chemistry">Química</string>
 </resources>
