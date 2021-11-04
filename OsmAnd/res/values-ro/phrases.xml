@@ -4191,4 +4191,20 @@
     <string name="poi_generator_type_pelton_turbine">Tipul de generator: turbină Pelton</string>
     <string name="poi_generator_type_steam_generator">Tip generator: producător de abur</string>
     <string name="poi_generator_type_solar_photovoltaic_panel">Tipul de generator: panou solar fotovoltaic</string>
+    <string name="poi_faculty_architecture">Arhitectură</string>
+    <string name="poi_faculty_biology">Biologie</string>
+    <string name="poi_faculty_aerospace">Aerospațial</string>
+    <string name="poi_faculty_filter">Facultate</string>
+    <string name="poi_faculty_arts">Arte</string>
+    <string name="poi_faculty_chemistry">Chimie</string>
+    <string name="poi_faculty_communication">Comunicare</string>
+    <string name="poi_faculty_economics">Economie</string>
+    <string name="poi_faculty_education">Educație</string>
+    <string name="poi_faculty_engineering">Inginerie</string>
+    <string name="poi_faculty_geography">Geografie</string>
+    <string name="poi_faculty_law">Lege</string>
+    <string name="poi_faculty_mathematics">Matematică</string>
+    <string name="poi_faculty_medicine">Medicină</string>
+    <string name="poi_faculty_nursing">Asistență medicală</string>
+    <string name="poi_faculty_psychology">Psihologie</string>
 </resources>
