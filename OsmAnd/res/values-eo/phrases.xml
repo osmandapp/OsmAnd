@@ -4116,4 +4116,18 @@
     <string name="poi_agrarian_pesticide">pesticidoj</string>
     <string name="poi_agrarian_seed">semoj</string>
     <string name="poi_agrarian_agricultural_machinery">agrokulturaj maŝinoj</string>
+    <string name="poi_generator_method_photovoltaic">Metodo de energi-produktado: sunpaneloj</string>
+    <string name="poi_generator_method_gasification">Metodo de energi-produktado: gasigo</string>
+    <string name="poi_generator_method_wind_turbine">Metodo de energi-produktado: ventoturbinoj</string>
+    <string name="poi_generator_method_water_pumped_storage">Metodo de energi-produktado: akvoturbinoj (pumprezervujo)</string>
+    <string name="poi_generator_method_barrage">Metodo de energi-produktado: tajda akvobaraĵo</string>
+    <string name="poi_generator_method_thermal">Metodo de energi-produktado: sunkolektoroj</string>
+    <string name="poi_generator_method_combustion">Metodo de energi-produktado: bruligo</string>
+    <string name="poi_generator_method_anaerobic_digestion">Metodo de energi-produktado: senoksigena fermentado</string>
+    <string name="poi_generator_method_battery_storage">Metodo de energi-produktado: el baterioj</string>
+    <string name="poi_generator_method_fission">Metodo de energi-produktado: nuklea kunfandiĝo</string>
+    <string name="poi_generator_method_fusion">Metodo de energi-produktado: nuklea fendiĝo</string>
+    <string name="poi_generator_method_water_storage">Metodo de energi-produktado: akvoturbinoj (rezervujo)</string>
+    <string name="poi_generator_method_run_of_the_river">Metodo de energi-produktado: akvoturbinoj (sen rezervujo)</string>
+    <string name="poi_generator_method_stream">Metodo de energi-produktado: tajda turbino</string>
 </resources>
