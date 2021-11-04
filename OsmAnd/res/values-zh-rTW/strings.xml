@@ -524,7 +524,7 @@
     <string name="build_installed">編譯 {0} 已安裝({1})。</string>
     <string name="downloading_build">正在下載編譯…</string>
     <string name="install_selected_build">要安裝 OsmAnd - {0} 之中的 {1} {2} MB？</string>
-    <string name="loading_builds_failed">檢索 OsmAnd 編譯列表失敗</string>
+    <string name="loading_builds_failed">無法擷取 OsmAnd 建置清單</string>
     <string name="loading_builds">正在載入 OsmAnd 編譯…</string>
     <string name="select_build_to_install">選取要安裝的 OsmAnd 組建</string>
     <string name="contribution_activity">安裝的版本</string>
@@ -950,7 +950,7 @@
     <string name="search_villages_and_postcodes">搜尋更多城鎮／郵遞區號</string>
     <string name="rendering_attr_showRoadMaps_description">選擇何時顯示僅有道路的地圖：</string>
     <string name="rendering_attr_showRoadMaps_name">僅有道路的地圖</string>
-    <string name="safe_mode_description">在安全模式下執行應用程式(使用較慢的 Android 而非原生碼)。</string>
+    <string name="safe_mode_description">在（較慢的）安全模式下執行應用程式。</string>
     <string name="safe_mode">安全模式</string>
     <string name="native_library_not_running">應用程式是在安全模式中執行（在「設定」裡關閉）。</string>
     <string name="background_service_is_enabled_question">OsmAnd 服務仍在背景執行。也要中止它嗎？</string>
@@ -3401,9 +3401,9 @@
     <string name="please_provide_profile_name_message">請為設定檔命名</string>
     <string name="open_settings">開啟設定</string>
     <string name="plugin_disabled">外掛程式關閉</string>
-    <string name="plugin_disabled_descr">此外掛程式是獨立的應用程式，如果您不打算再使用它，請將其移除。
+    <string name="plugin_disabled_descr">此外掛程式是獨立的應用程式，停用它並不會將其移除。
 \n
-\n在您移除 OsmAnd 後，這類的外掛程式仍將繼續存在於裝置上。</string>
+\n其可在 Android 的「應用程式」設定中解除安裝。</string>
     <string name="shared_string_menu">選單</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">路徑</string>
@@ -4258,8 +4258,8 @@
     <string name="on_hold_since">自 %1$s 起暫停</string>
     <string name="active_till">有效至 %1$s</string>
     <string name="promo_subscription">促銷訂閱</string>
-    <string name="track_has_no_needed_data">軌跡不包含所需的資料。</string>
-    <string name="option_available_only_in_osmand_pro">此選項作為 OsmAnd Pro 訂閱的一部分提供。</string>
+    <string name="track_has_no_needed_data">軌跡遺失對應的資料。</string>
+    <string name="option_available_only_in_osmand_pro">作為 OsmAnd Pro 訂閱的一部分提供。</string>
     <string name="pro_widgets">Pro 小工具</string>
     <string name="purchases_feature_desc_pro_widgets">存取 OsmAnd Pro 功能：路線著色等。</string>
     <string name="explore_osmnad_plans_to_find_suitable">探索 OsmAnd 方案以找到適合您的。</string>
@@ -4268,7 +4268,7 @@
     <string name="rendering_value_walkingRoutesOSMC_description">根據其各自的當地顏色（如果存在於 OpenStreetMap 之上的話）與健行盾牌符號為路線著色。</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">按網路關係分配著色。</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">根據其節點網路類型（國際、區域、當地）為路線著色。</string>
-    <string name="walking_route_osmc_description">根據其各自的當地顏色（如果存在於 OpenStreetMap 之上的話）與類型（國際、區域、當地）為路線著色。</string>
+    <string name="walking_route_osmc_description">按其各自的當地顏色（如果存在於 OpenStreetMap 之上的話）與類型（國際、區域、當地）為路線著色。</string>
     <string name="travel_routes">旅行路線</string>
     <string name="setting_supported_by_style">地圖樣式「%1$s」提供此設定</string>
     <string name="direct_line_maps_required_descr">路線計算需要比平常還要久的時間。
@@ -4284,11 +4284,11 @@
     <string name="backup_error_no_subscription">無訂閱</string>
     <string name="map_updates_for_mappers">圖客的地圖更新</string>
     <string name="benefits_for_contributors">活躍 OSM 貢獻者的好處</string>
-    <string name="benefits_for_contributors_primary_descr">如果您是 OpenStreetMap.org 活躍貢獻者，您或許可以獲得無限制的每小時地圖更新。</string>
-    <string name="benefits_for_contributors_secondary_descr">登入 OpenStreetMap 以檢查您是否有資格獲得無限制的每月或每小時地圖更新。</string>
+    <string name="benefits_for_contributors_primary_descr">活躍的 OpenStreetMap.org 貢獻者可能有權獲得無限制的每小時地圖更新。</string>
+    <string name="benefits_for_contributors_secondary_descr">登入 OpenStreetMap 以檢查您是否有資格獲得無限制的每月與每小時地圖更新。</string>
     <string name="use_login_and_password">使用使用者名稱與密碼</string>
     <string name="available_until">可用至 %1$s</string>
-    <string name="enough_contributions_descr">恭喜您為 OpenStreetMap 提供了夠多的貢獻，現在可以享受無限的 OsmAnd 地圖更新了！</string>
+    <string name="enough_contributions_descr">恭喜！您提供 OpenStreetMap 夠多的貢獻，現在可以享受無限的 OsmAnd 地圖更新了！</string>
     <string name="not_enough_contributions_descr">在%2$s天內至少需要 %1$s 次 OpenStreetMap 貢獻。</string>
     <string name="shared_string_contributions">貢獻</string>
     <string name="contributions_may_calculate_with_delay">計算貢獻可能需要數小時。</string>
@@ -4296,27 +4296,27 @@
     <string name="connect_track_points_as">連結路線點</string>
     <string name="pro_features">Pro 功能</string>
     <string name="purchases_restored">購買已復原</string>
-    <string name="grey_color_undefined">灰色用於無資料的部份。</string>
+    <string name="grey_color_undefined">沒有資料的部份是灰色的。</string>
     <string name="osm_live_payment_subscription_management_amz">確認購買後，將從您的 Amazon 帳號中收取費用。
 \n
 \n除非在選定的續訂週期前取消，否則其會續訂。
 \n
 \n隨時從您的 Amazon 設定中管理或取消您的訂閱。</string>
-    <string name="cancel_anytime_in_amazon_app">隨時在 Amazon 應用程式中取消</string>
-    <string name="amz_manage_subscription_descr">要管理您的訂閱，請在裝置上使用 Amazon 應用程式，或是以您的個人檔案開啟 Amazon.com。</string>
+    <string name="cancel_anytime_in_amazon_app">隨時透過 Amazon 應用程式取消</string>
+    <string name="amz_manage_subscription_descr">使用 Amazon 應用程式或 Amazon 網站管理您的訂閱。</string>
     <string name="empty_category_name">空的分類名稱</string>
-    <string name="no_activity_for_intent">找不到適合執行此動作的應用程式</string>
-    <string name="no_items_of_type_message">您沒有任何此類型的項目</string>
-    <string name="routeInfo_tracktype_description">根據道路的表面組成，根據道路狀況為路線或軌跡線著色。通常適用於主要道路路網由未鋪裝道路組成的道路。</string>
-    <string name="routeInfo_winter_ice_road_description">根據僅在冬季可用的冬季道路分類為路線或軌跡線著色。</string>
-    <string name="routeInfo_smoothness_description">提供關於有輪子的載具的物理可用性的分類方案，特別是關於表面規則性或平整度。</string>
-    <string name="routeInfo_surface_description">提供關於道路或人行道鋪面的額外資訊。</string>
-    <string name="routeInfo_roadClass_description">根據道路分類為路線或軌跡線著色。</string>
+    <string name="no_activity_for_intent">安裝應用程式以執行此動作。</string>
+    <string name="no_items_of_type_message">您沒有此類型的項目</string>
+    <string name="routeInfo_tracktype_description">按表面組成為路線或軌跡著色。通常適用於路網大部分未鋪設的情況。</string>
+    <string name="routeInfo_winter_ice_road_description">按冬季道路分類為路線或軌跡著色。</string>
+    <string name="routeInfo_smoothness_description">輪式車輛的道路／人行道機動性分類，特別是表面規則性／平整度。</string>
+    <string name="routeInfo_surface_description">提供道路／人行道的鋪面資訊。</string>
+    <string name="routeInfo_roadClass_description">按道路分類為路線或軌跡線著色。</string>
     <string name="add_group_to_markers">將群組新增至標記清單</string>
     <string name="remove_group_from_markers">從標記清單中移除群組</string>
     <string name="start_point">開始</string>
     <string name="mapillary_menu_filter_description_new">按日期或類型過濾圖片。僅在超近縮放中有用。</string>
-    <string name="service_is_not_available_please_try_later">服務不可用，請再試一次</string>
+    <string name="service_is_not_available_please_try_later">服務不可用。請稍後再試。</string>
     <string name="shared_string_files">檔案</string>
     <string name="travel_route_types">路線類型</string>
     <string name="sample_wikivoyage">維基導遊範例</string>
@@ -4336,10 +4336,10 @@
     <string name="search_title">搜尋：%1$s</string>
     <string name="exit_pan_mode_descr">按選取退出平移模式</string>
     <string name="icon_group_nautical">航海</string>
-    <string name="internal_app_storage_description">內部儲存空間，對使用者與其他應用程式隱藏，因此除了 OsmAnd 以外都無法存取您的資料</string>
-    <string name="shared_app_storage_description">因為 Android 中儲存空間存取規則的變更，所以分享記憶體不再可用。</string>
+    <string name="internal_app_storage_description">內部儲存空間，對所有使用者與其他應用程式隱藏，因此僅有 OsmAnd 可以存取您的資料。</string>
+    <string name="shared_app_storage_description">因為 Android 儲存空間存取規則的變更，所以共享記憶體不再可用。</string>
     <string name="shared_storage_warning_title">儲存空間存取規則的變更</string>
-    <string name="purchases_feature_desc_android_auto">OsmAnd 離線地圖與您車輛螢幕上的導航。方便地與您的車輛控制裝置整合。</string>
+    <string name="purchases_feature_desc_android_auto">將 OsmAnd 離線地圖與導航帶到您的車輛螢幕上，並與您的車輛控制介面整合。</string>
     <string name="shared_string_details">詳細資訊</string>
     <string name="rendering_attr_noNatureReserves_name">自然保留區</string>
     <string name="rendering_attr_noNatureReserves_description">隱藏自然保留區、保護區與國家公園。</string>
@@ -4366,18 +4366,16 @@
 \n • 修復了不同的路徑規劃問題
 \n
 \n</string>
-    <string name="continue_on_phone">在手機上繼續</string>
-    <string name="location_access_request_title">OsmAnd 需要存取位置才能導航</string>
+    <string name="continue_on_phone">在行動裝置上繼續</string>
+    <string name="location_access_request_title">OsmAnd 需要「位置」權限才能導航。</string>
     <string name="location_access_request_action">授予存取權限</string>
     <string name="location_access_request_result">准許：%1$s 拒絕：%2$s</string>
     <string name="android_auto_map_placeholder_title">地圖顯示在車輛螢幕上。</string>
     <string name="android_auto_map_placeholder_descr">將您的裝置從 Android Auto 斷開連線以在應用程式中檢視地圖。</string>
     <string name="android_auto_purchase_request_title">購買 OsmAnd Pro 或 Maps+ 以將 OsmAnd 與 Android Auto 搭配使用</string>
-    <string name="markers_history_is_disabled_descr">啟用歷史紀錄以取得造訪過的地圖標記清單。</string>
+    <string name="markers_history_is_disabled_descr">啟用歷史紀錄以記住造訪過的地圖標記清單。</string>
     <string name="is_disabled">%1$s 已停用</string>
-    <string name="clear_all_history_warning">您確定您想要清除應用程式中所有的歷史紀錄嗎？
-\n
-\n將會清除搜尋、導航與標記的歷史紀錄。</string>
+    <string name="clear_all_history_warning">清除所有應用程式歷史紀錄條目，包含搜尋、導航與標記歷史紀錄？</string>
     <string name="history_preferences_descr">您可以為每種歷史紀錄類型單獨停用紀錄。</string>
     <string name="shortcut_start_recording">開始錄製</string>
     <string name="shortcut_navigate_to">導航至……</string>
@@ -4386,21 +4384,24 @@
     <string name="history_is_disabled_descr">啟用歷史紀錄以更快存取上次使用的結果。</string>
     <string name="clear_all_history">清除所有歷史紀錄</string>
     <string name="map_markers_history">地圖標記歷史紀錄</string>
-    <string name="shortcut_navigate_to_work">導航至工作地點</string>
-    <string name="shortcut_navigate_to_home">導航至家裡</string>
-    <string name="shared_storage_warning_description">從2021年11月開始，因為 Android 的儲存空間存取規則的變化，OsmAnd 將無法再存取共享儲存空間。
+    <string name="shortcut_navigate_to_work">導航至「工作地點」</string>
+    <string name="shortcut_navigate_to_home">導航至「家裡」</string>
+    <string name="shared_storage_warning_description">因為新的 Android 規則，從2021年11月的 OsmAnd 4.2 將無法再存取共享儲存空間。
 \n
-\n請將儲存空間從共享儲存空間變更為其他可用的儲存空間，若不這樣做，應用程式將無法存取您的資料：包含離線地圖、GPX 軌跡與任何其他東西。</string>
-    <string name="search_history_is_disabled_descr">您可以在設定中啟用搜尋歷史</string>
+\n請將存放資料的資料夾從共享儲存空間移動至可用的儲存空間，否則應用程式將無法存取您的資料（如離線地圖、GPX 軌跡等等）。</string>
+    <string name="search_history_is_disabled_descr">您可以在設定中啟用搜尋歷史。</string>
     <string name="history_actions_descr">您可以將歷史紀錄匯出為檔案。</string>
     <string name="navigation_history">導航歷史紀錄</string>
-    <string name="approx_safe_mode_description">使用較慢的 Android 而非原生程式碼來進行 GPX 近似。</string>
+    <string name="approx_safe_mode_description">使用較慢的 Android 而非原生程式碼來執行 GPX 近似。</string>
     <string name="safe_settings">安全</string>
     <string name="approx_safe_mode">安全 GPX 近似</string>
     <string name="use_external_timestamps">使用外部時間戳</string>
     <string name="use_external_timestamps_description">使用線上路徑規劃服務的時間戳來調整預估時間與平均速度</string>
-    <string name="no_plugins_enabled">您未啟用外掛程式。您可以在選單→「外掛程式」中找到所有可用外掛程式的清單。</string>
+    <string name="no_plugins_enabled">您未啟用外掛程式。您可以在「選單」→「外掛程式」中找到可用外掛程式的清單。</string>
     <string name="display_route_tracks_as_poi">將軌跡顯示為 POI</string>
     <string name="shared_string_travelbooks">旅遊書</string>
     <string name="display_route_tracks">顯示軌跡</string>
+    <string name="delete_history_items">刪除 %1$s 歷史紀錄項目嗎？</string>
+    <string name="quick_action_toggle_preference">用於切換所選偏好設定狀態的開關。</string>
+    <string name="delete_history_items_descr">您確定要刪除選定的歷史紀錄項目嗎？</string>
 </resources>
