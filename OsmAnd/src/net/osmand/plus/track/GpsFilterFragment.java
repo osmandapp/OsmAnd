@@ -288,7 +288,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public int getStatusBarColorId() {
 		View view = getView();
-		if (view != null) {
+		if (view != null && !isDismissing()) {
 			boolean nightMode = isNightMode();
 			if (!nightMode) {
 				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);

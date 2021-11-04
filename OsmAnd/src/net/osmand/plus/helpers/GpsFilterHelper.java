@@ -18,7 +18,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -164,26 +163,22 @@ public class GpsFilterHelper {
 
 				TrkSegment filteredSegment = copySegment(segment);
 
-				double cumulativeDistance = 0;
-				WptPt previousPoint = null;
+				double previousPointDistance = 0;
 				List<WptPt> points = segment.points;
 
 				for (int i = 0; i < points.size(); i++) {
 					WptPt point = points.get(i);
 
-					if (previousPoint != null) {
-						cumulativeDistance += MapUtils.getDistance(previousPoint.lat, previousPoint.lon, point.lat, point.lon);
-					}
+					double cumulativeDistance = point.distance - previousPointDistance;
 					boolean firstOrLast = i == 0 || i + 1 == points.size();
 
 					if (acceptPoint(point, totalPoints, cumulativeDistance, firstOrLast)) {
-						filteredSegment.points.add(point);
+						filteredSegment.points.add(new WptPt(point));
 						leftPoints++;
-						cumulativeDistance = 0;
+						previousPointDistance = point.distance;
 					}
 
 					totalPoints++;
-					previousPoint = point;
 				}
 
 				if (filteredSegment.points.size() != 0) {
@@ -532,7 +527,7 @@ public class GpsFilterHelper {
 
 		@Override
 		public int getDescriptionId() {
-			return R.string.gps_filter_speed_desc;
+			return R.string.gps_filter_speed_altitude_desc;
 		}
 	}
 
@@ -612,7 +607,7 @@ public class GpsFilterHelper {
 
 		@Override
 		public int getDescriptionId() {
-			return R.string.gps_filter_altitude_desc;
+			return R.string.gps_filter_speed_altitude_desc;
 		}
 	}
 

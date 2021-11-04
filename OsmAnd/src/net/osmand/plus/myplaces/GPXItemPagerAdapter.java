@@ -87,7 +87,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private boolean chartClicked;
 
 	private final boolean nightMode;
-	private final boolean onlyGraphs;
+	private final boolean hideStatistics;
 	private final boolean hideJoinGapsBottomButtons;
 
 	private int chartHMargin = 0;
@@ -110,7 +110,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	                           @NonNull TrackDisplayHelper displayHelper,
 	                           boolean nightMode,
 	                           @NonNull SegmentActionsListener actionsListener,
-	                           boolean onlyGraphs,
+	                           boolean hideStatistics,
 	                           boolean hideJoinGapsBottomButtons) {
 		super();
 		this.app = app;
@@ -118,7 +118,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		this.displayHelper = displayHelper;
 		this.nightMode = nightMode;
 		this.actionsListener = actionsListener;
-		this.onlyGraphs = onlyGraphs;
+		this.hideStatistics = hideStatistics;
 		this.hideJoinGapsBottomButtons = hideJoinGapsBottomButtons;
 		iconsCache = app.getUIUtilities();
 
@@ -275,12 +275,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 					view.findViewById(R.id.details_divider),
 					view.findViewById(R.id.details_view)
 			);
-			if (onlyGraphs) {
-				AndroidUiHelper.setVisibility(View.GONE,
-						view.findViewById(R.id.top_line_blocks),
-						view.findViewById(R.id.list_divider),
-						view.findViewById(R.id.bottom_line_blocks));
-			}
+		}
+		if (hideStatistics) {
+			AndroidUiHelper.setVisibility(View.GONE,
+					view.findViewById(R.id.top_line_blocks),
+					view.findViewById(R.id.list_divider),
+					view.findViewById(R.id.bottom_line_blocks));
 		}
 		return view;
 	}
@@ -295,7 +295,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			} else {
 				chart.setVisibility(View.GONE);
 			}
-			if (!onlyGraphs) {
+			if (!hideStatistics) {
 				((ImageView) view.findViewById(R.id.average_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_speed_16));
 				((ImageView) view.findViewById(R.id.max_icon))
@@ -324,7 +324,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 		}
-		if (!onlyGraphs) {
+		if (!hideStatistics) {
 			updateJoinGapsInfo(view, position);
 			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -361,7 +361,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			} else {
 				chart.setVisibility(View.GONE);
 			}
-			if (!onlyGraphs) {
+			if (!hideStatistics) {
 				((ImageView) view.findViewById(R.id.average_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_altitude_average_16));
 				((ImageView) view.findViewById(R.id.range_icon))
@@ -390,7 +390,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 		}
-		if (!onlyGraphs) {
+		if (!hideStatistics) {
 			updateJoinGapsInfo(view, position);
 			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -417,7 +417,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			} else {
 				chart.setVisibility(View.GONE);
 			}
-			if (!onlyGraphs) {
+			if (!hideStatistics) {
 				((ImageView) view.findViewById(R.id.distance_icon))
 						.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_distance_16));
 				((ImageView) view.findViewById(R.id.duration_icon))
@@ -460,7 +460,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 			view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 			view.findViewById(R.id.bottom_line_blocks).setVisibility(View.GONE);
 		}
-		if (!onlyGraphs) {
+		if (!hideStatistics) {
 			updateJoinGapsInfo(view, position);
 			view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -650,7 +650,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	public void tabStylesUpdated(View tabsContainer, int currentPosition) {
 		if (getCount() > 0) {
 			ViewGroup.MarginLayoutParams params = (MarginLayoutParams) tabsContainer.getLayoutParams();
-			params.height = app.getResources().getDimensionPixelSize(!onlyGraphs ? R.dimen.dialog_button_height : R.dimen.context_menu_buttons_bottom_height);
+			int dimenId = hideStatistics ? R.dimen.context_menu_buttons_bottom_height : R.dimen.dialog_button_height;
+			params.height = app.getResources().getDimensionPixelSize(dimenId);
 			tabsContainer.setLayoutParams(params);
 			UiUtilities.updateCustomRadioButtons(app, tabsContainer, nightMode, getCustomRadioButtonType(currentPosition));
 		}

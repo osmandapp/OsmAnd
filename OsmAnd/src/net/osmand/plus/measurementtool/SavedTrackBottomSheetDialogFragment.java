@@ -2,15 +2,8 @@ package net.osmand.plus.measurementtool;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -19,12 +12,15 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -35,17 +31,6 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	private String fileName;
 	private boolean showCreateNewRouteButton;
-
-	@Nullable
-	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, parent, savedInstanceState);
-		if (view != null && !showCreateNewRouteButton) {
-			AndroidUiHelper.updateVisibility(rightButton, false);
-			AndroidUiHelper.updateVisibility(view.findViewById(R.id.buttons_divider_top), false);
-		}
-		return view;
-	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -86,6 +71,11 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	}
 
 	@Override
+	protected boolean useVerticalButtons() {
+		return true;
+	}
+
+	@Override
 	protected int getThirdBottomButtonTextId() {
 		return R.string.shared_string_share;
 	}
@@ -111,7 +101,7 @@ public class SavedTrackBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 	@Override
 	protected int getRightBottomButtonTextId() {
-		return R.string.plan_route_create_new_route;
+		return showCreateNewRouteButton ? R.string.plan_route_create_new_route : DEFAULT_VALUE;
 	}
 
 	@Override

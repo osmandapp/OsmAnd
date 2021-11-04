@@ -1114,13 +1114,14 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = requireMyApplication();
-			GPXFile sourceGpx = editingCtx.getGpxData() != null
-					? editingCtx.getGpxData().getGpxFile()
+			GpxData gpxData = editingCtx.getGpxData();
+			GPXFile sourceGpx = gpxData != null
+					? gpxData.getGpxFile()
 					: new GPXFile(Version.getFullVersion(app));
-			GPXFile gpxFile = SaveGpxRouteAsyncTask.generateGpxFile(getMeasurementLayer(),
+			GPXFile gpxFile = SaveGpxRouteAsyncTask.generateGpxFile(editingCtx,
 					getSuggestedFileName(), sourceGpx, false, false);
-			if (editingCtx.getGpxData() != null) {
-				gpxFile.path = editingCtx.getGpxData().getGpxFile().path;
+			if (gpxData != null) {
+				gpxFile.path = gpxData.getGpxFile().path;
 			}
 
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
