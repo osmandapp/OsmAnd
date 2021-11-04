@@ -837,7 +837,7 @@
     <string name="search_villages_and_postcodes">Шукати ще по селу/індексу</string>
     <string name="rendering_attr_showRoadMaps_description">Виберіть коли показувати тільки дорожні мапи:</string>
     <string name="rendering_attr_showRoadMaps_name">Тільки дорожні мапи</string>
-    <string name="safe_mode_description">Запустити застосунок в (повільнішому) безпечному режимі.</string>
+    <string name="safe_mode_description">Запустити застосунок у (повільнішому) безпечному режимі.</string>
     <string name="safe_mode">Безпечний режим</string>
     <string name="native_library_not_running">Програму запущено в безпечному режимі (вимкніть його в \'Налаштуваннях\').</string>
     <string name="audionotes_location_not_defined">Виберіть \"Використати місцеперебування...\" для прив\'язки примітки до поточного розташування.</string>
@@ -4265,17 +4265,17 @@
     <string name="active_till">Активна до %1$s</string>
     <string name="promo_subscription">Промо-передплата</string>
     <string name="track_has_no_needed_data">У треці відсутні відповідні дані.</string>
-    <string name="benefits_for_contributors_primary_descr">Активні учасники OpenStreetMap.org можуть мати право на необмежене погодинне оновлення мапи.</string>
+    <string name="benefits_for_contributors_primary_descr">Активні учасники OpenStreetMap.org можуть мати право на необмежене погодинне оновлення мап.</string>
     <string name="benefits_for_contributors_secondary_descr">Увійдіть в OpenStreetMap, щоб перевірити, чи маєте ви право отримувати необмежені щомісячні та погодинні оновлення мап.</string>
     <string name="use_login_and_password">Ввести ім\'я користувача та пароль</string>
     <string name="available_until">Доступно до %1$s</string>
     <string name="enough_contributions_descr">Вітаємо, ви надали достатньо внесків OpenStreetMap і тепер можете насолоджуватися необмеженою кількістю оновлень мап OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Необхідно внести щонайменше %1$s OpenStreetMap внесків протягом %2$s днів.</string>
+    <string name="not_enough_contributions_descr">Необхідно зробити щонайменше %1$s внесків до OpenStreetMap протягом %2$s днів.</string>
     <string name="shared_string_contributions">Внески</string>
     <string name="contributions_may_calculate_with_delay">Обчислення внесків може тривати кілька годин.</string>
     <string name="map_updates_are_unavailable_yet">Оновлення мап досі недоступні. :-(</string>
     <string name="connect_track_points_as">З\'єднати точки маршруту</string>
-    <string name="option_available_only_in_osmand_pro">Доступно як частина підписки OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">Доступно частиною передплати OsmAnd Pro.</string>
     <string name="pro_widgets">Віджети Pro</string>
     <string name="purchases_feature_desc_pro_widgets">Отримайте доступ до можливостей OsmAnd Pro: Забарвлення маршруту та багато іншого.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Ознайомтеся з планами OsmAnd, щоб знайти відповідний для вас.</string>
@@ -4310,7 +4310,7 @@
 \n
 \nКеруйте або скасовуйте свої підписки в налаштуваннях Amazon будь-коли.</string>
     <string name="cancel_anytime_in_amazon_app">Скасуйте її будь-коли в застосунку Amazon</string>
-    <string name="amz_manage_subscription_descr">Керуйте своєю підпискою за допомогою застосунку Amazon або вебсайту Amazon.</string>
+    <string name="amz_manage_subscription_descr">Керуйте своєю передплатою за допомогою застосунку Amazon або вебсайту Amazon.</string>
     <string name="empty_category_name">Нема назви категорії</string>
     <string name="no_items_of_type_message">У вас немає елементів цього типу</string>
     <string name="routeInfo_tracktype_description">Забарвлення маршруту або треку за складом поверхні. Зазвичай застосовують, коли дорожня мережа в основному ґрунтова.</string>
@@ -4382,11 +4382,11 @@
     <string name="is_disabled">%1$s вимкнено</string>
     <string name="clear_all_history">Очистити всю історію</string>
     <string name="markers_history_is_disabled_descr">Увімкніть історію, щоб пригадати список відвіданих позначок мапи.</string>
-    <string name="clear_all_history_warning">Очистити всі записи історії застосунків, включаючи пошук, навігацію та історію позначок\?</string>
+    <string name="clear_all_history_warning">Очистити всі записи історії застосунків, включно з пошуком, навігацією та історією позначок\?</string>
     <string name="shortcut_navigate_to_home">Маршрут \"Додому\"</string>
     <string name="shared_storage_warning_description">Через нові правила Android починаючи з листопада 2021 року OsmAnd 4.2 втратить доступ до спільної пам’яті.
 \n
-\nБудь ласка, перемістіть теку даних із спільного сховища в доступне сховище, інакше застосунок утратить доступ до ваших даних, як-от офлайн-мапи, треки GPX тощо.</string>
+\nБудь ласка, перемістіть теку даних зі спільного сховища в доступне сховище, інакше застосунок утратить доступ до ваших даних, як-от офлайн-мапи, треки GPX тощо.</string>
     <string name="search_history_is_disabled_descr">Увімкнути історію пошуку можна в налаштуваннях.</string>
     <string name="history_is_disabled_descr">Увімкніть історію, щоб отримати швидкий доступ до останніх використаних результатів.</string>
     <string name="transparent_status_bar">Прозорий рядок стану</string>
