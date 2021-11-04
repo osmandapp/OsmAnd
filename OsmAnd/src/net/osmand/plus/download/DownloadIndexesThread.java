@@ -243,7 +243,7 @@ public class DownloadIndexesThread {
 			MultipleDownloadItem multipleDownloadItem = (MultipleDownloadItem) item;
 			cancelDownload(multipleDownloadItem.getAllIndexes());
 		} else if (item instanceof SrtmDownloadItem) {
-			IndexItem indexItem = ((SrtmDownloadItem) item).getIndexItem();
+			IndexItem indexItem = ((SrtmDownloadItem) item).getIndexItem(this);
 			cancelDownload(indexItem);
 		} else if (item instanceof IndexItem) {
 			IndexItem indexItem = (IndexItem) item;
