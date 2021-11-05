@@ -584,9 +584,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		String startTime = getFormattedTime(getStartParkingTime());
 		if (getParkingType()) {
 			parkingStartDesc.append(ctx.getString(R.string.osmand_parking_position_name));
-			parkingStartDesc.append(", ");
-			parkingStartDesc.append(ctx.getString(R.string.parked_at));
-			parkingStartDesc.append(" ").append(startTime);
+			if (getStartParkingTime() > 0) {
+				parkingStartDesc.append(", ");
+				parkingStartDesc.append(ctx.getString(R.string.parked_at));
+				parkingStartDesc.append(" ").append(startTime);
+			}
 		} else {
 			parkingStartDesc.append(ctx.getString(R.string.osmand_parking_position_description_add_time));
 			parkingStartDesc.append(" ");

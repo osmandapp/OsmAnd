@@ -127,6 +127,7 @@ public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup>
 								boolean isTimeRestricted = item.getTimestamp() > 0;
 								plugin.setParkingType(isTimeRestricted);
 								plugin.setParkingTime(isTimeRestricted ? item.getTimestamp() : 0);
+								plugin.setParkingStartTime(item.getCreationDate());
 								plugin.setParkingPosition(item.getLatitude(), item.getLongitude());
 								plugin.addOrRemoveParkingEvent(item.getCalendarEvent());
 								if (item.getCalendarEvent()) {

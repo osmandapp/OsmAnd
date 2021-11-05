@@ -67,8 +67,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -593,6 +597,9 @@ public class ImportHelper {
 					point.setIconIdFromName(iconName);
 				}
 				point.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
+				if (!Algorithms.isEmpty(extensions.get("creation_date"))) {
+					point.setCreationDate(parseTime(extensions.get("creation_date")));
+				}
 				favourites.add(point);
 			}
 		}
@@ -622,5 +629,27 @@ public class ImportHelper {
 		} else {
 			importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 		}
+	}
+
+	public static long parseTime(String text) {
+		long time = 0;
+		if (text != null) {
+			try {
+				String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+				SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
+				format.setTimeZone(TimeZone.getTimeZone("UTC"));
+				time = format.parse(text).getTime();
+			} catch (ParseException e1) {
+				try {
+					String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+					SimpleDateFormat formatMillis = new SimpleDateFormat(GPX_TIME_FORMAT_MILLIS, Locale.US);
+					formatMillis.setTimeZone(TimeZone.getTimeZone("UTC"));
+					time = formatMillis.parse(text).getTime();
+				} catch (ParseException e2) {
+
+				}
+			}
+		}
+		return time;
 	}
 }
