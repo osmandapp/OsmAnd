@@ -272,7 +272,7 @@
     <string name="osm_settings_descr">Especifique as configurações de OpenStreetMap.org (OSM) para poder enviar alterações.</string>
     <string name="data_settings_descr">Especifique o idioma, descarregar/atualizar dados.</string>
     <string name="data_settings">Dados</string>
-    <string name="osm_editing_plugin_name">Edição do OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">Editar o OpenStreetMap</string>
     <string name="auto_zoom_map_descr">Nível de ampliação automático de acordo com a velocidade (enquanto o mapa é sincronizado com a posição atual).</string>
     <string name="auto_zoom_map">Ampliação automática do mapa</string>
     <string name="additional_settings">Outras configurações</string>
@@ -1298,7 +1298,7 @@
     <string name="rendering_attr_subwayMode_name">Rotas de metropolitanos</string>
     <string name="lock_screen_request_explanation">%1$s precisa desta permissão para desligar o ecrã para economizar energia.</string>
     <string name="shared_string_never">Nunca</string>
-    <string name="impassable_road">Evitar estradas…</string>
+    <string name="impassable_road">Evitar…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Rotas de comboio</string>
     <string name="rendering_attr_tramRoutes_name">Rotas de elétrico</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Rotas de táxis partilhados</string>
@@ -2083,7 +2083,7 @@
     <string name="osmand_plus_banner_desc">Descarregamentos ilimitados de mapas, atualizações e a extensão Wikipédia.</string>
     <string name="si_mi_meters">Milhas/metros</string>
     <string name="search_map">À procura de mapas…</string>
-    <string name="first_usage_wizard_desc">Deixe o OsmAnd determinar a sua localização e sugerir mapas para descarregar para esta região.</string>
+    <string name="first_usage_wizard_desc">Autorize o OsmAnd a determinar a sua localização para sugerir automaticamente os mapas a descarregar na sua localização.</string>
     <string name="location_not_found">Localização não encontrada</string>
     <string name="no_inet_connection">Sem ligação à Internet</string>
     <string name="no_inet_connection_desc_map">Necessário para descarregar mapas.</string>
@@ -2139,7 +2139,7 @@
     <string name="start_search_from_city">Pesquisa progressiva cidade&gt;vila&gt;aldeia&gt;nº</string>
     <string name="osm_live_plan_pricing">Planos e preços</string>
     <string name="osm_live_payment_monthly_title">Mensalmente</string>
-    <string name="osm_live_payment_3_months_title">A cada três meses</string>
+    <string name="osm_live_payment_3_months_title">Trimestralmente</string>
     <string name="osm_live_payment_annual_title">Anualmente</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mês</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mês</string>
@@ -4097,8 +4097,8 @@
     <string name="recorded_description">A voz gravada soa melhor, mas só consegue pronunciar frases pré-gravadas: apenas estão disponíveis as instruções de viragem. Não pode pronunciar nomes de ruas ou nomes de POI.</string>
     <string name="use_system_language">Usar idioma do sistema</string>
     <string name="shared_string_itinerary">Itinerário</string>
-    <string name="routing_attr_avoid_low_emission_zone_description">Evitar zonas baixa em. poluente</string>
-    <string name="routing_attr_avoid_low_emission_zone_name">Evitar zonas baixa em. poluente</string>
+    <string name="routing_attr_avoid_low_emission_zone_description">Evitar zonas onde só são permitidos veículos com baixas emissões poluentes, como carros elétricos (ou a combustão, dependendo da legislação local)</string>
+    <string name="routing_attr_avoid_low_emission_zone_name">Zonas de baixa emissão poluente</string>
     <string name="route_line_use_map_style_width">Usar a espessura padrão das linhas do estilo do mapa (%1$s).</string>
     <string name="route_line_use_map_style_color">Usar a cor predefinida do estilo do mapa (%1$s).</string>
     <string name="poi_routes">Rotas</string>
