@@ -249,7 +249,7 @@
     <string name="lock_screen_request_explanation">%1$s precisa dessa permissão para desligar a tela para economizar energia.</string>
     <string name="wake_on_voice">Ligar tela</string>
     <string name="wake_on_voice_descr">Ligar tela do aparelho (se estiver desligada) quando se aproxima da manobra.</string>
-    <string name="impassable_road">Evitar vias…</string>
+    <string name="impassable_road">Evitar…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Linhas de trem</string>
     <string name="rendering_attr_tramRoutes_name">Linhas de bonde</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Rotas de táxi compartilhado</string>
