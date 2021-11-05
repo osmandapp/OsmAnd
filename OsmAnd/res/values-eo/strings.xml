@@ -1006,7 +1006,7 @@
     <string name="rendering_attr_showRoadMaps_name">Nur-vojaj mapoj</string>
     <string name="rendering_attr_showRoadMaps_description">Elektu kiam montri nur-vojajn mapojn:</string>
     <string name="safe_mode">Sendanĝera reĝimo</string>
-    <string name="safe_mode_description">Lanĉi la aplikaĵon en sendanĝera reĝimo (uzante pli malrapidan Androidan kodon anstataŭ indiĝenan).</string>
+    <string name="safe_mode_description">Lanĉi la aplikaĵon en (pli malrapida) sendanĝera reĝimo.</string>
     <string name="native_library_not_running">La aplikaĵo funkcias en sendanĝera reĝimo (malaktivigi ĝin en “agordoj”).</string>
     <string name="close_changeset">Fermi ŝanĝaron</string>
     <string name="zxing_barcode_scanner_not_found">La aplikaĵo ZXing Barcode Scanner ne estas instalita. Ĉu serĉi ĝin en Google Play?</string>
@@ -1572,7 +1572,7 @@
     <string name="build_installed">Instalis kompilaĵon {0} ({1}).</string>
     <string name="downloading_build">Elŝutado de kompilaĵo…</string>
     <string name="install_selected_build">Ĉu instali OsmAnd - {0} de {1} {2} MB?</string>
-    <string name="loading_builds_failed">Elŝutado de listo de OsmAnd kompilaĵoj malsukcesis</string>
+    <string name="loading_builds_failed">Ne povas elŝuti la liston de kompilaĵoj de OsmAnd.</string>
     <string name="loading_builds">Ŝargado de listo de OsmAnd kompilaĵoj…</string>
     <string name="select_build_to_install">Elekti kompilaĵon de OsmAnd por instali</string>
     <string name="gps_status_app_not_found">Aplikaĵo por stato de GPS ne estas instalita. Ĉu serĉi ĝin en la vendejo?</string>
@@ -3405,9 +3405,9 @@
     <string name="please_provide_profile_name_message">Bonvolu enigi nomon por la profilo</string>
     <string name="open_settings">Malfermi agordojn</string>
     <string name="plugin_disabled">Kromprogramo malaktiva</string>
-    <string name="plugin_disabled_descr">Tiu ĉi kromprogramo estas aparta aplikaĵo, vi devos malinstali ĝin se vi ne plu volas uzi ĝin.
+    <string name="plugin_disabled_descr">Tiu ĉi kromprogramo estas aparta aplikaĵo, tie ĉi vi povas nur malaktivigi ĝin.
 \n
-\nLa kromprogramo restos en via aparato eĉ post malinstali OsmAnd.</string>
+\nPor malinstali tiun ĉi kromprogramo, uzu la menuon “Agordoj pri aplikaĵoj” en Android.</string>
     <string name="shared_string_menu">Menuo</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Kurs‑difinado</string>
@@ -4264,13 +4264,13 @@
     <string name="on_hold_since">Ĉesigita ekde %1$s</string>
     <string name="active_till">Aktiva ĝis %1$s</string>
     <string name="promo_subscription">Reklamkoda abono</string>
-    <string name="track_has_no_needed_data">La spuro enhavas ne enhavas bezonatajn datumojn.</string>
+    <string name="track_has_no_needed_data">La spuro ne enhavas bezonatajn datumojn.</string>
     <string name="routes_color_by_type">Kolorigi kursojn laŭ…</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Kolorigi kursojn laŭ iliaj koloroj kaj emblemoj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”).</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolorigi kursojn laŭ prizorganto.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolorigi kursojn laŭ speco de reto (interŝtata, regiona, loka).</string>
     <string name="walking_route_osmc_description">Kolorigi kursojn laŭ iliaj koloroj en la realo (se ekzistas en OSM – ŝlosilo “osmc:symbol=”) aŭ laŭ ilia speco (interŝtata, regiona, loka).</string>
-    <string name="option_available_only_in_osmand_pro">Eblaĵo disponebla por abonantoj de la plano OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">Havebla por abonantoj de la plano OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Akiru aliron al altnivelaj agordoj: kolorigo de kursoj kaj pli.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Ekkonu kun planoj de OsmAnd por trovi la plej taŭgan por vi.</string>
     <string name="shared_string_relation">Rilato</string>
@@ -4289,7 +4289,7 @@
     <string name="backup_error_no_subscription">Neniu abono</string>
     <string name="map_updates_for_mappers">Map-ĝisdatigoj por mapigistoj</string>
     <string name="benefits_for_contributors">Profitoj por aktivaj kontribuantoj al OSM</string>
-    <string name="benefits_for_contributors_primary_descr">Vi povas akiri senlimajn ĉiuhorajn ĝisdatigojn de mapoj, se vi aktive kontribuas al OpenStreetMap.</string>
+    <string name="benefits_for_contributors_primary_descr">Aktivaj OpenStreetMap-kontribuantoj povas esti rekompencitaj per senlimaj ĉiuhoraj ĝisdatigoj de mapoj.</string>
     <string name="benefits_for_contributors_secondary_descr">Ensalutu al OpenStreetMap por kontroli ĉu vi povas akiri senlimajn ĉiumonataj kaj ĉiuhorajn ĝisdatigojn de mapoj.</string>
     <string name="use_login_and_password">Uzi uzantnomon kaj pasvorton</string>
     <string name="available_until">Disponeblaj ĝis %1$s</string>
@@ -4301,27 +4301,27 @@
     <string name="connect_track_points_as">Kunigi punktojn de kurso</string>
     <string name="pro_features">Altnivelaj eblaĵoj</string>
     <string name="purchases_restored">Aĉetoj restarigitaj</string>
-    <string name="grey_color_undefined">La griza koloro estas uzata por fragmentoj sen datumoj.</string>
+    <string name="grey_color_undefined">Fragmentoj sen datumoj estas grizaj.</string>
     <string name="osm_live_payment_subscription_management_amz">La pago estos prenita el via konto Amazon post konfirmi aĉeton.
 \n
 \nLa abono aŭtomate renoviĝos escepte se ĝi estos nuligita antaŭ la dato de renoviĝo.
 \n
 \nVi povas administri kaj rezigni viajn abonojn per agordoj de via konto Amazon.</string>
     <string name="cancel_anytime_in_amazon_app">Rezignebla iam ajn per la aplikaĵo Amazon.</string>
-    <string name="amz_manage_subscription_descr">Por administri vian abonon uzu la aplikaĵon Amazon e via aparato aŭ malfermu vian profilon en la retejo Amazon.com.</string>
+    <string name="amz_manage_subscription_descr">Vi povas administri vian abonon per la aplikaĵo aŭ retejo de Amazon.</string>
     <string name="empty_category_name">Malplena nomo de kategorio</string>
-    <string name="no_activity_for_intent">Neniu kongrua aplikaĵo por plenumi tiun ĉi agon</string>
+    <string name="no_activity_for_intent">Instalu aplikaĵon, kiu povas priservi tiun ĉi agon.</string>
     <string name="no_items_of_type_message">Neniu elemento de tiu ĉi speco</string>
-    <string name="routeInfo_tracktype_description">Linio de spuro aŭ kurso estas kolorigata laŭ kvalitoj de vojoj: iliaj firmecoj. Uzebla nur por regionoj kie reto de ŝosea reto konsistas ĉefe el tervojoj.</string>
-    <string name="routeInfo_winter_ice_road_description">Klasifikas vintrajn vojojn (ŝoseojn uzeblajn nur dum vintro) laŭ ilia uzeblo.</string>
-    <string name="routeInfo_smoothness_description">Klasifikas vojojn laŭ ilia uzeblo por radveturiloj: glateco kaj krateretoj.</string>
-    <string name="routeInfo_surface_description">Liveras aldonajn informojn pri ŝosea kovro de voj(et)oj.</string>
+    <string name="routeInfo_tracktype_description">Linio de spuro aŭ kurso estas kolorigata laŭ pavimo. Uzebla por regionoj kie ŝosea reto konsistas ĉefe el tervojoj.</string>
+    <string name="routeInfo_winter_ice_road_description">Klasifikas vojojn laŭ ilia veturebleco dum vintro.</string>
+    <string name="routeInfo_smoothness_description">Klasifikas vojojn laŭ ilia veturebleco por radveturiloj: glateco kaj krateretoj.</string>
+    <string name="routeInfo_surface_description">Liveras informojn pri ŝosea kovro de voj(et)oj.</string>
     <string name="routeInfo_roadClass_description">Linio de spuro aŭ kurso estas kolorigata laŭ speco de vojo.</string>
     <string name="add_group_to_markers">Aldoni grupon al la listo de map-markoj</string>
     <string name="remove_group_from_markers">Forigi grupon el la listo de map-markoj</string>
     <string name="start_point">Komenco</string>
     <string name="mapillary_menu_filter_description_new">Filtri bildojn laŭ dato aŭ laŭ tipo; aktiva nur je pligrandigo.</string>
-    <string name="service_is_not_available_please_try_later">Servo ne estas disponebla, reprovu poste</string>
+    <string name="service_is_not_available_please_try_later">Servo ne estas disponebla. Reprovu poste.</string>
     <string name="shared_string_files">Dosieroj</string>
     <string name="travel_route_types">Specoj de kursoj</string>
     <string name="sample_wikivoyage">Vikivojaĝo (provaĵo)</string>
@@ -4342,10 +4342,10 @@
     <string name="exit_pan_mode_descr">Frapetu “Elekti” por eliri la ŝovuman reĝimon</string>
     <string name="icon_group_nautical">Mar-navigado</string>
     <string name="shared_string_details">Detaloj</string>
-    <string name="internal_app_storage_description">Interna konservejo, kaŝita de la uzanto kaj aliaj aplikaĵoj, do neniu escepte de OsmAnd povas aliri viajn datumojn</string>
-    <string name="shared_app_storage_description">Komuna memoro ne estas plue disponebla pro ŝanĝo en reguloj de aliro al la konservejo en la operaciumo Android.</string>
+    <string name="internal_app_storage_description">Interna konservejo, kaŝita de ĉiuj uzantoj kaj aliaj aplikaĵoj, do neniu escepte de OsmAnd povas aliri viajn datumojn.</string>
+    <string name="shared_app_storage_description">Komuna memoro ne estas plue disponebla pro ŝanĝo en aliro al konservejo en Android.</string>
     <string name="shared_storage_warning_title">Ŝanĝo en reguloj de aliro al la konservejo</string>
-    <string name="purchases_feature_desc_android_auto">Malkonektaj mapoj kaj navigado OsmAnd sur ekrano de via veturilo. Oportune integriĝas kun sistemo de via aŭtomobilo.</string>
+    <string name="purchases_feature_desc_android_auto">Havigu mapojn kaj navigadon OsmAnd sur ekrano de via veturilo, oportune integriĝas kun sistemoj de via aŭtomobilo.</string>
     <string name="included_categories">Ampleksataj kategorioj</string>
     <string name="rendering_attr_noNatureReserves_description">Kaŝi natur-rezervejojn, protektatajn aerojn kaj naciajn parkojn.</string>
     <string name="rendering_attr_noNatureReserves_name">Naturrezervejoj</string>
@@ -4366,31 +4366,29 @@
 \n
 \n• plibonigoj al bildigado de nivelkurboj
 \n
-\n• riparita vidigo de la araba lingvo
+\n• riparita vidigo de tekstoj en la araba lingvo
 \n
 \n• riparitaj diversaj problemoj pri kurs-difinado
 \n
 \n</string>
-    <string name="search_history_is_disabled_descr">Vi povas aktivigi historion de serĉoj en agordoj</string>
-    <string name="shortcut_navigate_to_home">Navigi al hejmo</string>
+    <string name="search_history_is_disabled_descr">Vi povas aktivigi la historion de serĉoj en la agordoj.</string>
+    <string name="shortcut_navigate_to_home">Navigi al “hejmo”</string>
     <string name="is_disabled">%1$s estas malaktiva</string>
-    <string name="clear_all_history_warning">Ĉu vi certe volas forviŝi ĉiun historion en la aplikaĵo\?
-\n
-\nLa historio de serĉo, navigo kaj map-markoj estos forviŝita.</string>
+    <string name="clear_all_history_warning">Ĉu forviŝi la tutan historion de la aplikaĵo inkluzivante historion de serĉoj, navigo kaj map-markoj\?</string>
     <string name="shortcut_start_recording">Ekigi registradon</string>
-    <string name="markers_history_is_disabled_descr">Aktivigu historion por akiri liston de vizititaj map-markoj.</string>
+    <string name="markers_history_is_disabled_descr">Aktivigu la historion por akiri la liston de vizititaj map-markoj.</string>
     <string name="history_preferences_descr">Vi povas malaktivigi historion de ĉiu speco aparte.</string>
     <string name="shortcut_navigate_to">Navigi al…</string>
-    <string name="shortcut_navigate_to_work">Navigi al laborejo</string>
-    <string name="location_access_request_title">OsmAnd bezonas aliron por via pozicio por navigi</string>
+    <string name="shortcut_navigate_to_work">Navigi al “laborejo”</string>
+    <string name="location_access_request_title">OsmAnd bezonas la permeson al determini pozicion por navigi.</string>
     <string name="android_auto_map_placeholder_descr">Malkonektu vian aparaton de Android Auto por vidigi la mapon en la aplikaĵo.</string>
     <string name="android_auto_purchase_request_title">Aĉetu OsmAnd Pro aŭ Maps+ por povi uzi OsmAnd kun Android Auto</string>
-    <string name="continue_on_phone">Pluigi per telefono</string>
+    <string name="continue_on_phone">Pluigi per la portebla aparato</string>
     <string name="location_access_request_action">Permesi</string>
-    <string name="shared_storage_warning_description">Ekde la versio 4.2 (eldonota en Novembro 2021), OsmAnd perdos aliron al komuna konservejo pro ŝanĝo en reguloj de aliro al la konservejo en la operaciumo Android.
+    <string name="shared_storage_warning_description">Ekde la versio 4.2 (eldonota en Novembro 2021), OsmAnd perdos aliron al komuna konservejo.
 \n
 \nŜanĝu dosierujon el komuna konservejo al disponebla konservejo, aliokaze la aplikaĵo perdos aliron al viaj datumoj: malkonektaj mapoj, GPX-spuroj kaj pli.</string>
-    <string name="history_is_disabled_descr">Aktivigu historion por havigi rapidan aliron al la antaŭaj rezultoj.</string>
+    <string name="history_is_disabled_descr">Aktivigu la historion por havigi rapidan aliron al la antaŭaj rezultoj.</string>
     <string name="clear_all_history">Forviŝi ĉiun historion</string>
     <string name="history_actions_descr">Vi povas elporti historion al dosiero.</string>
     <string name="map_markers_history">Historio de map-markoj</string>
@@ -4404,8 +4402,11 @@
     <string name="approx_safe_mode_description">Proksimumigi GPX-spurojn uzante pli malrapidan Androidan kodon anstataŭ la indiĝenan.</string>
     <string name="use_external_timestamps">Uzi eksterajn tempindikojn</string>
     <string name="use_external_timestamps_description">Uzi tempindikojn de enreta navigilo por alĝustigi proksimuman tempon kaj mezuman rapidon</string>
-    <string name="no_plugins_enabled">Neniu kromprogramo estas aktiva. Vi povas trovi la liston de ĉiuj disponeblaj profiloj per la menuo → “Kromprogramoj”.</string>
+    <string name="no_plugins_enabled">Neniu kromprogramo estas aktiva. Vi povas trovi la liston de disponeblaj kromprogramoj per la menuo → “Kromprogramoj”.</string>
     <string name="shared_string_travelbooks">Vojaĝ-gvidiloj</string>
     <string name="display_route_tracks_as_poi">Montri kursojn kiel interesejojn</string>
     <string name="display_route_tracks">Montri kursojn</string>
+    <string name="delete_history_items_descr">Ĉu vi certe volas forigi la elektitajn objektojn el historio\?</string>
+    <string name="delete_history_items">Ĉu forigi %1$s objektojn el historio\?</string>
+    <string name="quick_action_toggle_preference">Ŝaltilo por ŝanĝi elektitan agordon.</string>
 </resources>
