@@ -1876,8 +1876,8 @@
     <string name="route_roundabout">Rundkjøring: Ta avkjøring %1$d og fortsett</string>
     <string name="support_new_features">Støtt nye funksjoner</string>
     <string name="max_speed">Maksimumsfart</string>
-    <string name="shared_string_start_time">Starttid</string>
-    <string name="shared_string_end_time">Sluttid</string>
+    <string name="shared_string_start_time">Start</string>
+    <string name="shared_string_end_time">Slutt</string>
     <string name="shared_string_color">Farge</string>
     <string name="file_can_not_be_moved">Kunne ikke flytte fil.</string>
     <string name="shared_string_move">Flytt</string>
@@ -2088,7 +2088,7 @@
     <string name="routing_attr_driving_style_balance_name">Balansert</string>
     <string name="track_points_category_name">Rutepunkter, interessepunkter, navngitte objekter</string>
     <string name="shared_string_time_moving">Tid i bevegelse</string>
-    <string name="shared_string_time_span">Varighet</string>
+    <string name="shared_string_time_span">Tidsrom</string>
     <string name="shared_string_max">Maks.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Velg preferanse for høydeforskjeller</string>
     <string name="move_all_to_history">Flytt alle til historikk</string>
