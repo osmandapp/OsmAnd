@@ -4193,4 +4193,20 @@
     <string name="poi_trailhead">بداية المسار</string>
     <string name="poi_driver_training">مكان تدريب السائقين</string>
     <string name="poi_research_institute">معهد البحوث</string>
+    <string name="poi_faculty_filter">كلية</string>
+    <string name="poi_faculty_aerospace">الفضاء</string>
+    <string name="poi_faculty_architecture">هندسة معمارية</string>
+    <string name="poi_faculty_law">قانون</string>
+    <string name="poi_faculty_geography">جغرافيا</string>
+    <string name="poi_faculty_mathematics">رياضيات</string>
+    <string name="poi_faculty_arts">فنون</string>
+    <string name="poi_faculty_biology">علم الاحياء</string>
+    <string name="poi_faculty_chemistry">كيمياء</string>
+    <string name="poi_faculty_communication">تواصل</string>
+    <string name="poi_faculty_economics">اقتصاد</string>
+    <string name="poi_faculty_education">تعليم</string>
+    <string name="poi_faculty_engineering">هندسة</string>
+    <string name="poi_faculty_medicine">طب</string>
+    <string name="poi_faculty_nursing">التمريض</string>
+    <string name="poi_faculty_psychology">علم النفس</string>
 </resources>
