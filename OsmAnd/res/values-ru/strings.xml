@@ -4416,4 +4416,5 @@
     <string name="display_route_tracks">Показать треки</string>
     <string name="shared_string_travelbooks">Путеводители</string>
     <string name="display_route_tracks_as_poi">Показать треки как POI</string>
+    <string name="delete_history_items">Удалить элементы истории %1$s\?</string>
 </resources>
