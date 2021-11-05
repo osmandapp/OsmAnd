@@ -3704,7 +3704,7 @@
     <string name="poi_craft_cabinet_maker">Möbelbauer</string>
     <string name="poi_charge">Gebühr</string>
     <string name="poi_pet_grooming">Haustierpflege</string>
-    <string name="poi_atm_yes">Geldausgabeautomat: ja</string>
+    <string name="poi_atm_yes">Geldautomat: ja</string>
     <string name="poi_cash_withdrawal_bank_card">Bargeldbezug</string>
     <string name="poi_cash_withdrawal_yes">Bargeldbezug: ja</string>
     <string name="poi_cash_withdrawal">Bargeldbezug</string>
