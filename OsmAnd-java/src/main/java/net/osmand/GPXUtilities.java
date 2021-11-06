@@ -676,24 +676,17 @@ public class GPXUtilities {
 			double totalSpeedSum = 0;
 			points = 0;
 
-			double channelThresMin = 10;           // Minimum oscillation amplitude considered as relevant or as above noise for accumulated Ascent/Descent analysis
-			double channelThres = channelThresMin; // Actual oscillation amplitude considered as above noise (dynamic channel adjustment, accomodates depedency on current VDOP/getAccuracy if desired)
-			double channelBase;
-			double channelTop;
-			double channelBottom;
-			boolean climb = false;
-
 			elevationData = new ArrayList<>();
 			speedData = new ArrayList<>();
 
-			for (SplitSegment s : splitSegments) {
+			for (final SplitSegment s : splitSegments) {
 				final int numberOfPoints = s.getNumberOfPoints();
-
-				channelBase = 99999;
-				channelTop = channelBase;
-				channelBottom = channelBase;
-				//channelThres = channelThresMin; //only for dynamic channel adjustment
-
+				ElevationDiffsCalculator elevationDiffsCalc = new ElevationDiffsCalculator(numberOfPoints) {
+					@Override
+					public WptPt getPoint(int index) {
+						return s.get(index);
+					}
+				};
 				float segmentDistance = 0f;
 				metricEnd += s.metricEnd;
 				secondaryMetricEnd += s.secondaryMetricEnd;
@@ -756,80 +749,7 @@ public class GPXUtilities {
 						hasSpeedInTrack = true;
 					}
 
-					// Trend channel analysis for elevation gain/loss, Hardy 2015-09-22, LPF filtering added 2017-10-26:
-					// - Detect the consecutive elevation trend channels: Only use the net elevation changes of each trend channel (i.e. between the turnarounds) to accumulate the Ascent/Descent values.
-					// - Perform the channel evaluation on Low Pass Filter (LPF) smoothed ele data instead of on the raw ele data
-					// Parameters:
-					// - channelThresMin (in meters): defines the channel turnaround detection, i.e. oscillations smaller than this are ignored as irrelevant or noise.
-					// - smoothWindow (number of points): is the LPF window
-					// NOW REMOVED, as no relevant examples found: Dynamic channel adjustment: To suppress unreliable measurement points, could relax the turnaround detection from the constant channelThresMin to channelThres which is e.g. based on the maximum VDOP of any point which contributed to the current trend. (Good assumption is VDOP=2*HDOP, which accounts for invisibility of lower hemisphere satellites.)
-
-					// LPF smooting of ele data, usually smooth over odd number of values like 5
-					final int smoothWindow = 5;
-					double eleSmoothed = Double.NaN;
-					int j2 = 0;
-					for (int j1 = - smoothWindow + 1; j1 <= 0; j1++) {
-						if ((j + j1 >= 0) && !Double.isNaN(s.get(j + j1).ele)) {
-							j2++;
-							if (!Double.isNaN(eleSmoothed)) {
-								eleSmoothed = eleSmoothed + s.get(j + j1).ele;
-							} else {
-								eleSmoothed = s.get(j + j1).ele;
-							}
-						}
-					}
-					if (!Double.isNaN(eleSmoothed)) {
-						eleSmoothed = eleSmoothed / j2;
-					}
-
-					if (!Double.isNaN(eleSmoothed)) {
-						// Init channel
-						if (channelBase == 99999) {
-							channelBase = eleSmoothed;
-							channelTop = channelBase;
-							channelBottom = channelBase;
-							//channelThres = channelThresMin; //only for dynamic channel adjustment
-						}
-						// Channel maintenance
-						if (eleSmoothed > channelTop) {
-							channelTop = eleSmoothed;
-							//if (!Double.isNaN(point.hdop)) {
-							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
-							//}
-						} else if (eleSmoothed < channelBottom) {
-							channelBottom = eleSmoothed;
-							//if (!Double.isNaN(point.hdop)) {
-							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
-							//}
-						}
-						// Turnaround (breakout) detection
-						if ((eleSmoothed <= (channelTop - channelThres)) && (climb == true)) {
-							if ((channelTop - channelBase) >= channelThres) {
-								diffElevationUp += channelTop - channelBase;
-							}
-							channelBase = channelTop;
-							channelBottom = eleSmoothed;
-							climb = false;
-							//channelThres = channelThresMin; //only for dynamic channel adjustment
-						} else if ((eleSmoothed >= (channelBottom + channelThres)) && (climb == false)) {
-							if ((channelBase - channelBottom) >= channelThres) {
-								diffElevationDown += channelBase - channelBottom;
-							}
-							channelBase = channelBottom;
-							channelTop = eleSmoothed;
-							climb = true;
-							//channelThres = channelThresMin; //only for dynamic channel adjustment
-						}
-						// End detection without breakout
-						if (j == (numberOfPoints - 1)) {
-							if ((channelTop - channelBase) >= channelThres) {
-								diffElevationUp += channelTop - channelBase;
-							}
-							if ((channelBase - channelBottom) >= channelThres) {
-								diffElevationDown += channelBase - channelBottom;
-							}
-						}
-					}
+					elevationDiffsCalc.calculateElevationDiff(j);
 
 					if (j > 0) {
 						WptPt prev = s.get(j - 1);
@@ -925,6 +845,8 @@ public class GPXUtilities {
 						}
 					}
 				}
+				diffElevationUp += elevationDiffsCalc.diffElevationUp;
+				diffElevationDown += elevationDiffsCalc.diffElevationDown;
 			}
 			if (totalDistance < 0) {
 				hasElevationData = false;
@@ -963,6 +885,115 @@ public class GPXUtilities {
 			return this;
 		}
 
+		public abstract static class ElevationDiffsCalculator {
+
+			private final int numberOfPoints;
+
+			private final double channelThresMin = 10;           // Minimum oscillation amplitude considered as relevant or as above noise for accumulated Ascent/Descent analysis
+			private double channelThres = channelThresMin; // Actual oscillation amplitude considered as above noise (dynamic channel adjustment, accomodates depedency on current VDOP/getAccuracy if desired)
+			private double channelBase;
+			private double channelTop;
+			private double channelBottom;
+			private boolean climb = false;
+
+			private double diffElevationUp = 0;
+			private double diffElevationDown = 0;
+
+			public ElevationDiffsCalculator(int numberOfPoints) {
+				this.numberOfPoints = numberOfPoints;
+				channelBase = 99999;
+				channelTop = channelBase;
+				channelBottom = channelBase;
+				//channelThres = channelThresMin; //only for dynamic channel adjustment
+			}
+
+			public abstract WptPt getPoint(int index);
+
+			public double getDiffElevationUp() {
+				return diffElevationUp;
+			}
+
+			public double getDiffElevationDown() {
+				return diffElevationDown;
+			}
+
+			public void calculateElevationDiff(int index) {
+				// Trend channel analysis for elevation gain/loss, Hardy 2015-09-22, LPF filtering added 2017-10-26:
+				// - Detect the consecutive elevation trend channels: Only use the net elevation changes of each trend channel (i.e. between the turnarounds) to accumulate the Ascent/Descent values.
+				// - Perform the channel evaluation on Low Pass Filter (LPF) smoothed ele data instead of on the raw ele data
+				// Parameters:
+				// - channelThresMin (in meters): defines the channel turnaround detection, i.e. oscillations smaller than this are ignored as irrelevant or noise.
+				// - smoothWindow (number of points): is the LPF window
+				// NOW REMOVED, as no relevant examples found: Dynamic channel adjustment: To suppress unreliable measurement points, could relax the turnaround detection from the constant channelThresMin to channelThres which is e.g. based on the maximum VDOP of any point which contributed to the current trend. (Good assumption is VDOP=2*HDOP, which accounts for invisibility of lower hemisphere satellites.)
+
+				// LPF smooting of ele data, usually smooth over odd number of values like 5
+				final int smoothWindow = 5;
+				double eleSmoothed = Double.NaN;
+				int j2 = 0;
+				for (int j1 = -smoothWindow + 1; j1 <= 0; j1++) {
+					if ((index + j1 >= 0) && !Double.isNaN(getPoint(index + j1).ele)) {
+						j2++;
+						if (!Double.isNaN(eleSmoothed)) {
+							eleSmoothed = eleSmoothed + getPoint(index + j1).ele;
+						} else {
+							eleSmoothed = getPoint(index + j1).ele;
+						}
+					}
+				}
+				if (!Double.isNaN(eleSmoothed)) {
+					eleSmoothed = eleSmoothed / j2;
+				}
+
+				if (!Double.isNaN(eleSmoothed)) {
+					// Init channel
+					if (channelBase == 99999) {
+						channelBase = eleSmoothed;
+						channelTop = channelBase;
+						channelBottom = channelBase;
+						//channelThres = channelThresMin; //only for dynamic channel adjustment
+					}
+					// Channel maintenance
+					if (eleSmoothed > channelTop) {
+						channelTop = eleSmoothed;
+						//if (!Double.isNaN(point.hdop)) {
+						//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
+						//}
+					} else if (eleSmoothed < channelBottom) {
+						channelBottom = eleSmoothed;
+						//if (!Double.isNaN(point.hdop)) {
+						//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
+						//}
+					}
+					// Turnaround (breakout) detection
+					if ((eleSmoothed <= (channelTop - channelThres)) && (climb == true)) {
+						if ((channelTop - channelBase) >= channelThres) {
+							diffElevationUp += channelTop - channelBase;
+						}
+						channelBase = channelTop;
+						channelBottom = eleSmoothed;
+						climb = false;
+						//channelThres = channelThresMin; //only for dynamic channel adjustment
+					} else if ((eleSmoothed >= (channelBottom + channelThres)) && (climb == false)) {
+						if ((channelBase - channelBottom) >= channelThres) {
+							diffElevationDown += channelBase - channelBottom;
+						}
+						channelBase = channelBottom;
+						channelTop = eleSmoothed;
+						climb = true;
+						//channelThres = channelThresMin; //only for dynamic channel adjustment
+					}
+					// End detection without breakout
+					if (index == (numberOfPoints - 1)) {
+						if ((channelTop - channelBase) >= channelThres) {
+							diffElevationUp += channelTop - channelBase;
+						}
+						if ((channelBase - channelBottom) >= channelThres) {
+							diffElevationDown += channelBase - channelBottom;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private static class SplitSegment {
@@ -1368,7 +1399,7 @@ public class GPXUtilities {
 
 		public int getPointIndexByDistance(List<WptPt> points, double distance) {
 			int index = 0;
-			double minDistanceChange = 99999;
+			double minDistanceChange = Double.MAX_VALUE;
 			for (int i = 0; i < points.size(); i++) {
 				WptPt point = points.get(i);
 				double currentDistanceChange = Math.abs(point.distance - distance);

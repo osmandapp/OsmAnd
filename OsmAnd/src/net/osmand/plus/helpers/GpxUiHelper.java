@@ -1510,12 +1510,7 @@ public class GpxUiHelper {
 
 		//dataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
-		dataSet.setFillFormatter(new IFillFormatter() {
-			@Override
-			public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-				return dataProvider.getYChartMin();
-			}
-		});
+		dataSet.setFillFormatter((ds, dataProvider) -> dataProvider.getYChartMin());
 		if (useRightAxis) {
 			dataSet.setAxisDependency(YAxis.AxisDependency.RIGHT);
 		}
@@ -1995,12 +1990,32 @@ public class GpxUiHelper {
 		}
 	}
 
+	public static class GPXHighlight extends Highlight {
+
+		private final boolean showIcon;
+
+		public GPXHighlight(float x, int dataSetIndex, boolean showIcon) {
+			super(x, Float.NaN, dataSetIndex);
+			this.showIcon = showIcon;
+		}
+
+		public GPXHighlight(float x, float y, int dataSetIndex, boolean showIcon) {
+			super(x, y, dataSetIndex);
+			this.showIcon = showIcon;
+		}
+
+		public boolean shouldShowIcon() {
+			return showIcon;
+		}
+	}
+
 	@SuppressLint("ViewConstructor")
 	private static class GPXMarkerView extends MarkerView {
 
 		private final View textAltView;
 		private final View textSpdView;
 		private final View textSlpView;
+		private final boolean hasIcon;
 
 		public GPXMarkerView(@NonNull Context context,
 		                     @Nullable Drawable icon) {
@@ -2013,13 +2028,19 @@ public class GpxUiHelper {
 				findViewById(R.id.icon_container).setVisibility(VISIBLE);
 				((ImageView) findViewById(R.id.icon)).setImageDrawable(icon);
 			}
+			hasIcon = icon != null;
 		}
 
 		// callbacks everytime the MarkerView is redrawn, can be used to update the
 		// content (user-interface)
 		@Override
 		public void refreshContent(Entry e, Highlight highlight) {
-			ChartData chartData = getChartView().getData();
+			ChartData<?> chartData = getChartView().getData();
+			if (hasIcon && highlight instanceof GPXHighlight) {
+				boolean showIcon = ((GPXHighlight) highlight).shouldShowIcon();
+				AndroidUiHelper.setVisibility(showIcon ? VISIBLE : GONE, findViewById(R.id.icon_divider));
+				AndroidUiHelper.setVisibility(showIcon ? VISIBLE : GONE, findViewById(R.id.icon_container));
+			}
 			if (chartData.getDataSetCount() == 1) {
 				OrderedLineDataSet dataSet = (OrderedLineDataSet) chartData.getDataSetByIndex(0);
 				String value = (int) e.getY() + " ";
