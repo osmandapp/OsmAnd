@@ -2150,7 +2150,7 @@
     <string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
     <string name="quick_action_page_list_descr">Bouton pour faire défiler la liste ci-dessous.</string>
     <string name="rendering_attr_depthContours_description">Afficher les lignes et points de sonde.</string>
-    <string name="rendering_attr_depthContours_name">Lignes de sonde de profondeur</string>
+    <string name="rendering_attr_depthContours_name">Lignes de sonde marines</string>
     <string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
     <string name="average_altitude">Altitude moyenne</string>
     <string name="total_distance">Distance totale</string>
@@ -2243,7 +2243,7 @@
 \n 
 \nFonctionnalités principales :</string>
     <string name="sea_depth_thanks">Merci d\'avoir acheté le greffon Lignes de sonde marines</string>
-    <string name="index_item_depth_contours_osmand_ext">Isobathes</string>
+    <string name="index_item_depth_contours_osmand_ext">Lignes de sonde marines</string>
     <string name="index_item_depth_points_southern_hemisphere">Lignes de sonde marines pour l\'hémisphère sud</string>
     <string name="index_item_depth_points_northern_hemisphere">Lignes de sonde marines pour l\'hémisphère nord</string>
     <string name="download_depth_countours">Lignes de sonde marines</string>
