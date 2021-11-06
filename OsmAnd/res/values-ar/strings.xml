@@ -4435,7 +4435,7 @@
 \n
 \n • تحسين عرض علامة ارتفاع SRTM
 \n
-\n • إصلاح عرض العربية على الخريطة
+\n • إصلاح تسميات الخريطة التوضيحية العربية
 \n
 \n • إصلاح مشكلات التوجيه المختلفة
 \n
@@ -4446,34 +4446,38 @@
     <string name="shared_storage_warning_description">ابتداء من نوفمبر 2021 سوف يفقد OsmAnd 4.2 الوصول إلى التخزين المشترك، بسبب تغيير قواعد الوصول إلى التخزين في نظام Android.
 \n
 \nيرجى تغيير التخزين من التخزين المشترك إلى التخزين المتاح، إذا لم يتم ذلك، سيفقد التطبيق الوصول إلى بياناتك: بما في ذلك الخرائط غير المتصلة بالإنترنت ومسارات GPX وكل شيء آخر.</string>
-    <string name="markers_history_is_disabled_descr">تفعيل السجل للحصول على قائمة بعلامات الخريطة التي تمت زيارتها.</string>
+    <string name="markers_history_is_disabled_descr">تفعيل السجل لتذكر قائمة بعلامات الخريطة التي تمت زيارتها.</string>
     <string name="shortcut_navigate_to">التنقل إلى…</string>
     <string name="history_is_disabled_descr">تفعيل السجل للحصول على وصول أسرع إلى آخر النتائج المستخدمة.</string>
     <string name="is_disabled">%1$s معطل</string>
     <string name="clear_all_history">مسح كل السجل</string>
-    <string name="clear_all_history_warning">هل تريد بالتأكيد مسح كل السجل في التطبيق؟
-\n
-\nسيتم مسح البحث والملاحة والعلامات.</string>
+    <string name="clear_all_history_warning">مسح كل السجل في التطبيق بما في ذلك البحث، الملاحة والعلامات؟</string>
     <string name="history_actions_descr">يمكنك تصدير السجل إلى ملف.</string>
     <string name="history_preferences_descr">يمكنك تعطيل السجل بشكل فردي لكل نوع سجل.</string>
     <string name="map_markers_history">سجل علامات الخريطة</string>
-    <string name="shortcut_navigate_to_work">انتقل إلى العمل</string>
+    <string name="shortcut_navigate_to_work">انتقل إلى \'العمل\'</string>
     <string name="navigation_history">سجل التنقل</string>
     <string name="shortcut_start_recording">بدء التسجيل</string>
     <string name="transparent_status_bar">شريط معلومات شفاف</string>
     <string name="transparent_status_bar_descr">اعرض الخريطة تحت شريط المعلومات</string>
-    <string name="shortcut_navigate_to_home">انتقل إلى البيت</string>
+    <string name="shortcut_navigate_to_home">انتقل إلى \'البيت\'</string>
     <string name="android_auto_map_placeholder_title">يتم عرض الخريطة على شاشة السيارة.</string>
     <string name="android_auto_map_placeholder_descr">افصل جهازك عن Android Auto لعرض الخريطة في التطبيق.</string>
     <string name="android_auto_purchase_request_title">قم بشراء OsmAnd Pro أو +Maps لاستخدام التطبيق مع Android Auto</string>
     <string name="continue_on_phone">المتابعة على الهاتف</string>
-    <string name="location_access_request_title">OsmAnd يحتاج إلى الوصول إلى خاصية الموقع من أجل التنقل</string>
+    <string name="location_access_request_title">OsmAnd يحتاج إذن خاصية الموقع من أجل التنقل</string>
     <string name="location_access_request_action">منح حق الوصول</string>
     <string name="location_access_request_result">مصادق عليه: %1$s مرفوض: %2$s</string>
     <string name="safe_settings">آمن</string>
-    <string name="approx_safe_mode">تقريب gpx الآمن</string>
+    <string name="approx_safe_mode">تقريب GPX الآمن</string>
     <string name="use_external_timestamps_description">استخدم الطوابع الزمنية لجهاز التوجيه عبر الإنترنت لضبط الوقت المقدر ومتوسط السرعة</string>
-    <string name="no_plugins_enabled">لا يوجد لديك ملحقات مفعلة. يمكنك العثور على لائحة بجميع الملحقات الإضافية المتاحة في القائمة – الملحقات الإضافية.</string>
-    <string name="approx_safe_mode_description">قم بتقريب gpx باستخدام Android أبطأ بدلاً من البرمجة المحلية.</string>
+    <string name="no_plugins_enabled">لا يوجد لديك ملحقات مفعلة. يمكنك العثور على لائحة الملحقات الإضافية المتاحة في \'القائمة\' ← \'الملحقات الإضافية\'.</string>
+    <string name="approx_safe_mode_description">قم بتقريب GPX باستخدام Android أبطأ بدلاً من البرمجة المحلية.</string>
     <string name="use_external_timestamps">استخدم طوابع زمنية خارجية</string>
+    <string name="display_route_tracks">عرض المسارات</string>
+    <string name="shared_string_travelbooks">كتب السفر</string>
+    <string name="display_route_tracks_as_poi">عرض المسارات على هيئة POI</string>
+    <string name="delete_history_items_descr">هل تريد بالتأكيد حذف عناصر السجل المحددة؟</string>
+    <string name="delete_history_items">حذف %1$s عنصر سجل؟</string>
+    <string name="quick_action_toggle_preference">كبسة لتبديل حالة خيارات محددة.</string>
 </resources>

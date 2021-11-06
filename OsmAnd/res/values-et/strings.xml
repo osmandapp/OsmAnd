@@ -146,7 +146,7 @@
     <string name="nothing_found_descr">Muuda otsingu päringut või laienda selle raadiust.</string>
     <string name="shared_string_permissions">Load</string>
     <string name="import_gpx_failed_descr">Faili ei saa importida. Palun veendu, et OsmAnd\'il on õigus seda faili lugeda.</string>
-    <string name="distance_moving">Kaugus parandatud</string>
+    <string name="distance_moving">Korrigeeritud vahemaa</string>
     <string name="mapillary_image">Mapillary pilt</string>
     <string name="open_mapillary">Ava Mapillary</string>
     <string name="shared_string_install">Paigalda</string>
@@ -3530,7 +3530,7 @@
     <string name="app_mode_enduro_motorcycle">Enduro mootorratas</string>
     <string name="app_mode_motor_scooter">Motoroller</string>
     <string name="gpx_split_interval_descr">Vali välp, mille alusel kuvatakse rajal aja- või vahemaamärgid.</string>
-    <string name="gpx_split_interval_none_descr">Vali soovitud jagamise viis - kas aja või vahemaa alusel.</string>
+    <string name="gpx_split_interval_none_descr">Vali soovitud jaotamise võimalus: aja või vahemaa järgi.</string>
     <string name="track_coloring_solid">Ühtlane</string>
     <string name="turn_screen_on_navigation_instructions_descr">Iga navigeerimisjuhis lülitab ekraani tööle.</string>
     <string name="turn_screen_on_navigation_instructions">Navigeerimisjuhised</string>
@@ -3952,7 +3952,7 @@
     <string name="select_folder_descr">Vali kaust või lisa uus</string>
     <string name="shared_string_empty">Tühi</string>
     <string name="analyze_by_intervals">Analüüsi poolitamise intervalle</string>
-    <string name="upload_to_openstreetmap">OpenStreetMap teenusesse laadimine</string>
+    <string name="upload_to_openstreetmap">Lae üles OpenStreetMap-i</string>
     <string name="change_folder">Vaheta kaust</string>
     <string name="shared_string_sec">sek</string>
     <string name="announcement_time_passing">Möödasõit</string>
@@ -3980,7 +3980,7 @@
     <string name="routing_engine_vehicle_type_mtb">Mägiratas (MTB)</string>
     <string name="context_menu_read_full">Loe kõik</string>
     <string name="context_menu_edit_descr">Muuda kirjeldust</string>
-    <string name="delete_waypoints">Kustuta kontollpunktid</string>
+    <string name="delete_waypoints">Kustuta teekonnapunktid</string>
     <string name="copy_to_map_markers">Kopeeri kaardi markeritesse</string>
     <string name="copy_to_map_favorites">Kopeeri lemmikutesse</string>
     <string name="select_segments">Vali segmendid</string>
@@ -4007,7 +4007,7 @@
     <string name="activity_type_car_name">Auto</string>
     <string name="temporary_conditional_routing_descr">Kasuta tee piiranguid, mis on kaardil hetkel aktiivsed</string>
     <string name="routing_attr_driving_style_description">Vali sõidu eesmärk, et leida lühem, kiirem või turvalisem marsruut</string>
-    <string name="edit_track">Muuda teekonda</string>
+    <string name="edit_track">Muuda rada</string>
     <string name="rename_track">Nimeta teekond ümber</string>
     <string name="show_track_on_map">Kuva teekond kaardil</string>
     <string name="map_orientation_threshold_descr">Ära pööra kaardivaadet, kui kiirus on täpsuse lävest madalam</string>
@@ -4358,27 +4358,27 @@
     <string name="shared_storage_warning_description">Alates novembrist 2021 kaotab OsmAnd 4.2 juurdepääsu jagatud salvestusruumile Androidi muudetud salvestusruumi juurdepääsu reeglite tõttu.
 \n
 \nPalun muuda salvestusruum jagatud salvestusruumist saadaolevaks salvestusruumiks, kui seda ei tehta, kaotab rakendus juurdepääsu teie andmetele, sealhulgas võrguühenduseta kaartidele, GPX -rajale ja kõigele muule.</string>
-    <string name="release_4_1">"• Lisatud Android Auto esialgne tugi
+    <string name="release_4_1">• Lisatud Android Auto esialgne tugi
 \n
 \n • Kasutajaliidese värskendus UTM -i koordinaatide otsimiseks
 \n
 \n • Lemmikud: lisatud võimalus vaadata hiljuti kasutatud ikoone
 \n
-\n  • Marsruudi planeerimine: kasutab pärast käivitamist valitud profiili
+\n • Marsruudi planeerimine: kasutab pärast käivitamist valitud profiili
 \n
-\n  • Fikseeritud Mapillary kiht, pistikprogramm on nüüd vaikimisi keelatud
+\n • Fikseeritud Mapillary kiht, pistikprogramm on nüüd vaikimisi keelatud
 \n
-\n  • Lisatud ekraan rakenduse kogu ajaloo haldamiseks
+\n • Lisatud ekraan rakenduse kogu ajaloo haldamiseks
 \n
-\n  • Kaardi orientatsiooni ei lähtestata pärast rakenduse taaskäivitamist
+\n • Kaardi orientatsiooni ei lähtestata pärast rakenduse taaskäivitamist
 \n
-\n  • Täiustatud SRTM kõrguse markerite renderdamine
+\n • Täiustatud SRTM kõrguse markerite renderdamine
 \n
-\n  • Fikseeritud araabia kuva kaardil
+\n • Fikseeritud araabia kuva kaardil
 \n
-\n  • Parandatud erinevad marsruutimisprobleemid
+\n • Parandatud erinevad marsruutimisprobleemid
 \n
-\n"</string>
+\n</string>
     <string name="rendering_attr_noNatureReserves_name">Looduskaitseala</string>
     <string name="rendering_attr_noNatureReserves_description">Peida looduskaitsealad, kaitsealad ja rahvuspargid.</string>
     <string name="is_disabled">%1$s on välja lülitatud</string>
@@ -4407,4 +4407,13 @@
 \nSellega eemaldame otsingute, teekonna juhatamise ja markerite ajaloo.</string>
     <string name="markers_history_is_disabled_descr">Selleks, et saaksid lihtsamini leida külastatud kaardimarkereid, võta kasutusele ajaloo salvestamine.</string>
     <string name="search_history_is_disabled_descr">Otsinguajaloo salvestamise saad kasutusele võtta seadistustes</string>
+    <string name="use_external_timestamps">Kasuta väliseid ajatempleid</string>
+    <string name="no_plugins_enabled">Sul ei ole pistikprogrammid lubatud. Kõigi olemasolevate pistikprogrammide loetelu leiad menüüst Pistikprogrammid.</string>
+    <string name="use_external_timestamps_description">Kasuta veebiruuteri ajatempleid, et kohandada hinnangulist aega ja keskmist kiirust</string>
+    <string name="safe_settings">Turvaline</string>
+    <string name="approx_safe_mode_description">Tee gpx-i ühtlustamine, kasutades aeglasemat Androidi kohaliku koodi asemel.</string>
+    <string name="display_route_tracks">Kuva rajad</string>
+    <string name="shared_string_travelbooks">Reisiraamatud</string>
+    <string name="approx_safe_mode">Turvaline gpx ühtlustamine</string>
+    <string name="display_route_tracks_as_poi">Näita teekondi huvipunktidena</string>
 </resources>

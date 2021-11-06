@@ -171,6 +171,7 @@
 	<string name="poi_furniture_filter">Furniture</string>
 	<string name="poi_heating_filter">Heating</string>
 	<string name="poi_fridge_filter">Fridge</string>
+	<string name="poi_faculty_filter">Faculty</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4688,5 +4689,21 @@
 	<string name="poi_fridge_yes">Yes</string>
 	<string name="poi_fridge_no">No</string>
 	<string name="poi_fumarole">Fumarole</string>
+
+	<string name="poi_faculty_aerospace">Aerospace</string>
+	<string name="poi_faculty_architecture">Architecture</string>
+	<string name="poi_faculty_arts">Arts</string>
+	<string name="poi_faculty_biology">Biology</string>
+	<string name="poi_faculty_chemistry">Chemistry</string>
+	<string name="poi_faculty_communication">Communication</string>
+	<string name="poi_faculty_economics">Economics</string>
+	<string name="poi_faculty_education">Education</string>
+	<string name="poi_faculty_engineering">Engineering</string>
+	<string name="poi_faculty_geography">Geography</string>
+	<string name="poi_faculty_law">Law</string>
+	<string name="poi_faculty_mathematics">Mathematics</string>
+	<string name="poi_faculty_medicine">Medicine</string>
+	<string name="poi_faculty_nursing">Nursing</string>
+	<string name="poi_faculty_psychology">Psychology</string>
 
 </resources>

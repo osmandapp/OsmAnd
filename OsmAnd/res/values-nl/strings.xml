@@ -4247,7 +4247,7 @@
 \n</string>
     <string name="osmand_pro_tagline">Geniet van een maximum aan functies</string>
     <string name="shared_string_details">Details</string>
-    <string name="shared_app_storage_description">Het gedeeld geheugen is niet langer beschikbaar wegens veranderingen in de opslag gebruik regels van Andriod.</string>
+    <string name="shared_app_storage_description">Het gedeeld geheugen is niet langer beschikbaar wegens veranderingen in Androids opslag gebruik.</string>
     <string name="internal_app_storage_description">Interne opslag, verborgen voor gebruikers en andere apps, dus niemand buiten OsmAnd heeft toegang tot jouw gegevens.</string>
     <string name="shared_string_articles">Artikelen</string>
     <string name="shared_storage_warning_title">Veranderingen in de opslag gebruik regels</string>
@@ -4269,9 +4269,40 @@
 \n
 \n• Verbeterde SRTM hoogte markering
 \n
-\n• Weergave van Arabisch op de map opgelost
+\n• Weergave van arabische opschriften opgelost
 \n
 \n• Verscheidene routingsproblemen opgelost
 \n
 \n</string>
+    <string name="no_plugins_enabled">Je hebt geen plug-ins ingeschakeld. Je kan een lijst van beschikbare plug-ins vinden onder \'Menu\' → \'Plug-ins\'.</string>
+    <string name="delete_history_items_descr">Ben je zeker dat je de geselecteerde items uit je geschiedenis wil verwijderen\?</string>
+    <string name="use_external_timestamps">Gebruik externe tijdstempels</string>
+    <string name="display_route_tracks">Tracks weergeven</string>
+    <string name="android_auto_purchase_request_title">Koop OsmAnd Pro of Maps+ om OsmAnd met Android Auto te gebruiken</string>
+    <string name="shared_string_travelbooks">Reisboeken</string>
+    <string name="search_history_is_disabled_descr">Je kan de zoekgeschiedenis inschakelen via de instellingen.</string>
+    <string name="markers_history_is_disabled_descr">Schakel de geschiedenis in om een lijst van bezochte map markeringen te onthouden.</string>
+    <string name="history_is_disabled_descr">Schakel de geschiedenis in om sneller toegang te krijgen tot je laatst gebruikte resultaten.</string>
+    <string name="is_disabled">%1$s is uitgeschakeld</string>
+    <string name="clear_all_history_warning">Verwijder alle geschiedenisitems waaronder zoekgeschiedenis, navigatie en markeringen\?</string>
+    <string name="clear_all_history">Verwijder alle geschiedenis</string>
+    <string name="history_actions_descr">Je kan de geschiedenis exporteren naar een bestand.</string>
+    <string name="map_markers_history">Geschiedenis van mapmarkeringen</string>
+    <string name="navigation_history">Navigatie geschiedenis</string>
+    <string name="history_preferences_descr">Je kan het verzamelen van geschiedenis voor ieder item individueel uitschakelen.</string>
+    <string name="shortcut_start_recording">Opname starten</string>
+    <string name="shortcut_navigate_to">Navigeer naar…</string>
+    <string name="shortcut_navigate_to_work">Navigeer naar \'Werk\'</string>
+    <string name="shortcut_navigate_to_home">Navigeer naar \'Huis\'</string>
+    <string name="android_auto_map_placeholder_descr">Verbreek de verbinding van je toestel met Android Auto om de kaart terug in de app weer te geven.</string>
+    <string name="continue_on_phone">Ga verder op je telefoon</string>
+    <string name="location_access_request_title">OsmAnd heeft toegang nodig tot je locatie om te kunnen navigeren.</string>
+    <string name="location_access_request_action">Verleen toegang</string>
+    <string name="location_access_request_result">Goedgekeurd: %1$s Afgewezen: %2$s</string>
+    <string name="safe_settings">Veilig</string>
+    <string name="use_external_timestamps_description">Gebruik de tijdstempels van de online router om de geschatte tijd en gemiddelde snelheid aan te passen</string>
+    <string name="delete_history_items">Verwijder %1$s items uit je geschiedenis\?</string>
+    <string name="quick_action_toggle_preference">Een knop om te schakelen tussen je voorkeursstatus.</string>
+    <string name="display_route_tracks_as_poi">Geef tracks weer als POI</string>
+    <string name="android_auto_map_placeholder_title">De kaart wordt op het wagenscherm weergegeven.</string>
 </resources>

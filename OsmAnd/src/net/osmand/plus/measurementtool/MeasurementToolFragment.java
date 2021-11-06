@@ -239,7 +239,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		editingCtx = new MeasurementEditingContext(requireMyApplication());
+		if (editingCtx == null) {
+			editingCtx = new MeasurementEditingContext(requireMyApplication());
+		}
 		onBackPressedCallback = new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				quit(true);
@@ -555,8 +557,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		});
 		updateToolbar();
 
-		final GpxData gpxData = editingCtx.getGpxData();
-
 		ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
 		snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
 		snapToRoadBtn.setOnClickListener(new OnClickListener() {
@@ -596,6 +596,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
+		GpxData gpxData = editingCtx.getGpxData();
 		initMeasurementMode(gpxData, savedInstanceState == null);
 		if (savedInstanceState == null) {
 			if (fileName != null) {
@@ -1939,7 +1940,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 								R.id.map_center_info,
 								R.id.map_route_info_button,
 								R.id.map_menu_button,
-								R.id.map_quick_actions_button);;
+								R.id.map_quick_actions_button);
 					}
 				}
 			};
@@ -2183,16 +2184,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void startTrackNavigation() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (editingCtx.hasRoute() || editingCtx.hasChanges()) {
-				String trackName = getSuggestedFileName();
-				GPXFile gpx = editingCtx.exportGpx(trackName);
-				if (gpx != null) {
-					ApplicationMode appMode = editingCtx.getAppMode();
-					dismiss(mapActivity);
-					runNavigation(gpx, appMode);
-				} else {
-					Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
-				}
+			String trackName = getSuggestedFileName();
+			GPXFile gpx = editingCtx.exportGpx(trackName);
+			if (gpx != null) {
+				ApplicationMode appMode = editingCtx.getAppMode();
+				dismiss(mapActivity);
+				runNavigation(gpx, appMode);
 			} else {
 				Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
 			}
@@ -2242,5 +2239,4 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public interface OnUpdateInfoListener {
 		void onUpdateInfo();
 	}
-
 }

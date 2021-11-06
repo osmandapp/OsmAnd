@@ -1,6 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -238,27 +237,20 @@ public class MappersFragment extends BaseOsmAndFragment {
 
 	private void setupButtonBackground(@NonNull View button, @ColorInt int normalColor, @ColorInt int pressedColor) {
 		Drawable normal = createRoundedDrawable(normalColor, ButtonBackground.ROUNDED_SMALL);
-		Drawable pressed = createRoundedDrawable(pressedColor, ButtonBackground.ROUNDED_SMALL);
-		setupRoundedBackground(button, normal, pressed);
+
+		Drawable background;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			Drawable pressed = AppCompatResources.getDrawable(app, ButtonBackground.ROUNDED_SMALL.getRippleId(nightMode));
+			background = UiUtilities.getLayeredIcon(normal, pressed);
+		} else {
+			Drawable pressed = createRoundedDrawable(pressedColor, ButtonBackground.ROUNDED_SMALL);
+			background = AndroidUtils.createPressedStateListDrawable(normal, pressed);
+		}
+		AndroidUtils.setBackground(button, background);
 	}
 
 	protected Drawable createRoundedDrawable(@ColorInt int color, ButtonBackground background) {
 		return UiUtilities.createTintedDrawable(app, background.drawableId, color);
-	}
-
-	protected void setupRoundedBackground(@NonNull View view, @NonNull Drawable normal, @NonNull Drawable selected) {
-		Drawable background;
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			background = UiUtilities.getLayeredIcon(normal, getRippleDrawable());
-		} else {
-			background = AndroidUtils.createPressedStateListDrawable(normal, selected);
-		}
-		AndroidUtils.setBackground(view, background);
-	}
-
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
-	protected Drawable getRippleDrawable() {
-		return AppCompatResources.getDrawable(app, nightMode ? R.drawable.purchase_button_ripple_dark : R.drawable.purchase_button_ripple_light);
 	}
 
 	public void refreshContributions() {

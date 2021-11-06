@@ -176,7 +176,7 @@
     <string name="rendering_attr_noPolygons_description">Gör alla ytor på kartan transparenta.</string>
     <string name="rendering_attr_noPolygons_name">Polygoner</string>
     <string name="rendering_attr_appMode_name">Renderingsläge</string>
-    <string name="rendering_attr_contourLines_description">Visning från zoomnivå (kräver höjdkurvsdata):</string>
+    <string name="rendering_attr_contourLines_description">Visa från zoomnivå (kräver höjdkurvsdata):</string>
     <string name="rendering_attr_contourLines_name">Visa höjdkurvor</string>
     <string name="rendering_attr_hmRendered_description">Öka antalet kartdetaljer som visas.</string>
     <string name="rendering_attr_hmRendered_name">Visa mer kartdetaljer</string>
@@ -215,26 +215,26 @@
     <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan hämta en i Inställningar (Hantera kartfiler) eller byta till online-kartor (aktivera modulen för online-kartor för detta).</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
-\nOsmAnd är en programvara för öppen källkodsnavigering med tillgång till ett stort antal globala OSM-data. Alla kartdata (vektor- eller brickor) kan lagras på telefonens minneskort för offline-användning. Offline- och online-dirigeringsfunktioner erbjuds också, inklusive röstvägledning för sväng.
+\nOsmAnd är en kart- och navigationsapp med öppen källkod som ger tillgång till en stor mängd globala OpenStreetMap (OSM)-data. Alla kartdata (vektor- och rasterkartor) kan lagras på telefonens minneskort för användning offline. Navigeringsfunktioner både offline och online erbjuds också, inklusive röstinstruktioner steg-för-steg.
 \n
-\nNågra av kärnfunktionerna:
-\n- Komplett offline-funktionalitet (lagra nedladdad vektor eller kakelkartor i enhetens lagring)
-\n- Kompakta offlinevektorkartor för hela världen
+\nNågra av de viktigaste funktionerna:
+\n- Fullständig offline-funktionalitet (lagra nedladdade vektor- eller rasterkartor i enhetens lagring)
+\n- Kompakta offline-vektorkartor för hela världen
 \n- Ladda ner land- eller regionkartor direkt från appen
-\n- Överlagring av flera kartlager möjliga, som GPX eller navigationsspår, intressanta platser, favoriter, konturlinjer, kollektivtrafikstopp, ytterligare kartor med anpassningsbar transparens
+\n- Överlagring av flera kartlager möjligt, som GPX eller navigationsspår, intressepunkter (POI), favoriter, höjdkurvor, hållplatser för kollektivtrafik, ytterligare kartor med anpassningsbar transparens
 \n- Offline sökning efter adresser och platser (POI)
-\n- Offline-dirigering för medelstora avstånd
+\n- Offline-navigering för medelstora avstånd
 \n- Lägen för bil, cykel och fotgängare med tillval:
-\n- Automatisk växling mellan dag och natt
+\n- Automatisk växling mellan dag- och nattläge
 \n- Hastighetsberoende kartzoomning
-\n- Kartinriktning enligt kompass eller rörelseriktning
-\n- Fältvägledning, hastighetsgränsvisning, inspelade och text-till-tal-röster
+\n- Kartorientering enligt kompass eller rörelseriktning
+\n- Körfältsvägledning, hastighetsgränsvisning, inspelad röst och text-till-tal (TTS)
 \n
-\nBegränsningar av denna gratisversion av OsmAnd:
+\nBegränsningar i denna gratisversion av OsmAnd:
 \n- Antalet nedladdningar av kartor begränsat
-\n- Ingen offlineåtkomst till Wikipedia-intressepunkter
+\n- Ingen offlineåtkomst till Wikipedia-artiklar om intressepunkter
 \n
-\nOsmAnd utvecklas aktivt och vårt projekt och dess fortsatta framsteg är beroende av ekonomiska bidrag för utveckling och testning av ny funktionalitet. Överväg att köpa OsmAnd +, eller finansiera specifika nya funktioner eller göra en allmän donation på https://osmand.net.</string>
+\nOsmAnd utvecklas aktivt men vårt projekt och dess fortsatta framsteg är beroende av ekonomiska bidrag för utveckling och testning av ny funktionalitet. Överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller ge en allmän gåva på https://osmand.net.</string>
     <string name="native_rendering">Inbyggd rendering</string>
     <string name="default_buttons_support">Support</string>
     <string name="support_new_features">Ge stöd till nya funktioner</string>
@@ -672,7 +672,7 @@
     <string name="searching_address">Söker adress …</string>
     <string name="hint_search_online">Online-sökning: Husnummer, gata, stad</string>
     <string name="search_offline_address">Offline</string>
-    <string name="max_level_download_tile_descr">Bläddra inte i kartor på nätet för zoomnivåer bortom denna.</string>
+    <string name="max_level_download_tile_descr">Ladda inte ner onlinekartor för zoomnivåer bortom denna.</string>
     <string name="route_general_information">Total sträcka %1$s, restid %2$d h %3$d min.</string>
     <string name="router_service_descr">Online- eller offline-navigeringstjänst.</string>
     <string name="router_service">Navigeringstjänst</string>
@@ -757,7 +757,7 @@
     <string name="recording_description">Inspelning %1$s %3$s %2$s</string>
     <string name="recording_default_name">Spelar in</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd-modul för höjdkurvor offline</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-insticksmodul för höjdkurvor offline</string>
     <string name="map_widget_distancemeasurement">Avståndsmätning</string>
     <string name="map_widget_audionotes">Ljudanteckningar</string>
     <string name="audionotes_plugin_description">Gör ljud-/foto-/videoanteckningar under en resa, med antingen en kartknapp eller platsens snabbmeny.</string>
@@ -780,7 +780,7 @@
     <string name="recording_context_menu_precord">Ta ett foto</string>
     <string name="dropbox_plugin_name">Modul för Dropbox</string>
     <string name="intermediate_points_change_order">Ändra ordning</string>
-    <string name="srtm_paid_version_title">Modul för höjdkurvor</string>
+    <string name="srtm_paid_version_title">Insticksmodul för höjdkurvor</string>
     <string name="av_def_action_video">Spela in video</string>
     <string name="precise_routing_mode">Exakt ruttning (alfa)</string>
     <string name="av_def_action_picture">Ta ett foto</string>
@@ -797,9 +797,9 @@
     <string name="av_settings">Inställningar för ljud och video </string>
     <string name="recording_error">Inspelning misslyckades</string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
-    <string name="srtm_plugin_description">Denna modul erbjuder överlägg med höjdkurvor som kan visas i kombination med OsmAnds standardkartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnader i landskapet.
+    <string name="srtm_plugin_description">Denna insticksmodul tillhandahåller överläggslager med höjdkurvor och terrängskuggning som kan visas ovanpå OsmAnds kartor. Funktionaliteten uppskattas av idrottare, vandrare, terrängcyklister och alla som är intresserade av höjdskillnader i landskapet.
 \n
-\nDessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppet i NASA:s Earth Observing System. ASTER är ett samprojekt mellan NASA, Japans Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
+\nDessa globala data (mellan 70°N och 70°S) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppssatelliten i NASA:s Earth Observing System. ASTER är ett samarbete mellan NASA, Japans handelsministerium (METI), och Japan Space Systems (J-spacesystems).</string>
     <string name="delete_target_point">Ta bort destination</string>
     <string name="intermediate_point">Mellanliggande destination %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
@@ -1644,14 +1644,14 @@
     <string name="min_mile">min/mi</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
-    <string name="srtm_plugin_disabled">Konturlinjer inaktiverade</string>
+    <string name="srtm_plugin_disabled">Höjdkurvor är inaktiverade</string>
     <string name="regions">Regioner</string>
     <string name="region_maps">Regionskartor</string>
     <string name="world_maps">Världskartor</string>
     <string name="downloads">Nedladdningar</string>
     <string name="buy">Köp</string>
     <string name="activate_seamarks_plugin">Aktivera modulen Sjömärken</string>
-    <string name="activate_srtm_plugin">Aktivera modulen \'Contour lines\'</string>
+    <string name="activate_srtm_plugin">Aktivera insticksmodulen \'Höjdkurvor\'</string>
     <string name="later">Senare</string>
     <string name="get_full_version">Fullversionen</string>
     <string name="favorite_category_dublicate_message">Använd ett kategorinamn som inte redan finns.</string>
@@ -1986,7 +1986,7 @@
     <string name="search_map">Söker efter kartor …</string>
     <string name="first_usage_greeting">Erhåll vägbeskrivningar och upptäck nya platser utan Internetuppkoppling</string>
     <string name="search_my_location">Sök efter min plats</string>
-    <string name="rendering_attr_contourColorScheme_description">Färgschema för konturer</string>
+    <string name="rendering_attr_contourColorScheme_description">Färgschema för höjdkurvor</string>
     <string name="save_track_min_speed">Minsta loggningshastighet</string>
     <string name="save_track_min_speed_descr">Filter: ingen loggning av punkter under denna hastighet.</string>
     <string name="save_track_min_distance">Loggning av minimal rörelse</string>
@@ -1997,7 +1997,7 @@
     <string name="christmas_desc_q">Visa POI:er för julhelgen\?</string>
     <string name="rendering_value_light_brown_name">Ljusbrun</string>
     <string name="rendering_value_dark_brown_name">Mörkbrun</string>
-    <string name="rendering_attr_contourColorScheme_name">Färgschema för konturer</string>
+    <string name="rendering_attr_contourColorScheme_name">Färgschema för höjdkurvor</string>
     <string name="shared_string_notifications">Aviseringar</string>
     <string name="shared_string_continue">Fortsätt</string>
     <string name="shared_string_pause">Pausa</string>
@@ -2019,18 +2019,18 @@
     <string name="shared_string_appearance">Utseende</string>
     <string name="trip_rec_notification_settings">Aktivera snabbinspelning</string>
     <string name="christmas_desc">Förutse jul- och nyårsferier kan du välja att visa tillhörande intressepunkter som julgranar och marknader etc.</string>
-    <string name="rendering_attr_contourWidth_name">Bredd på konturlinjen</string>
+    <string name="rendering_attr_contourWidth_name">Linjebredd för höjdkurvor</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vatten</string>
     <string name="osm_live_payment_desc">Prenumerationen debiteras per vald period. Avbryt det på Google Play när som helst.</string>
     <string name="donation_to_osm_desc">En del av din donation skickas till OSM-bidragsgivare. Prenumerationskostnaden förblir densamma.</string>
     <string name="osm_live_subscription_desc">En prenumeration aktiverar uppdateringar varje timme, dag eller vecka och obegränsade nedladdningar av alla kartor globalt.</string>
     <string name="osm_live_banner_desc">Få obegränsad nedladdning av kartor, lägg till uppdateringar varje vecka, dagligen eller till och med varje timme.</string>
     <string name="rendering_value_low_name">Låg</string>
-    <string name="rendering_attr_contourWidth_description">Bredd på konturlinjen</string>
+    <string name="rendering_attr_contourWidth_description">Linjebredd för höjdkurvor</string>
     <string name="rendering_value_high_name">Hög</string>
     <string name="rendering_value_medium_w_name">Mellan</string>
-    <string name="rendering_attr_contourDensity_description">Täthet på konturlinjen</string>
-    <string name="rendering_attr_contourDensity_name">Täthet på konturlinjen</string>
+    <string name="rendering_attr_contourDensity_description">Täthet för höjdkurvor (ekvidistans)</string>
+    <string name="rendering_attr_contourDensity_name">Täthet mellan höjdkurvorna (ekvidistans)</string>
     <string name="lang_zh_hk">Kinesiska (Hong Kong)</string>
     <string name="driving_region_australia">Australien</string>
     <string name="rendering_attr_hideWaterPolygons_name">Dölj vatten</string>
@@ -2063,7 +2063,7 @@
     <string name="quick_action_map_underlay_title">Kartunderlägg</string>
     <string name="quick_action_map_underlay">Ändra kartunderlägg</string>
     <string name="quick_action_map_underlay_switch">Kartunderlägget ändrat till \"%s\".</string>
-    <string name="rendering_attr_depthContours_name">Konturer för sjödjup</string>
+    <string name="rendering_attr_depthContours_name">Nautiska djupkurvor</string>
     <string name="rendering_value_fine_name">Fin</string>
     <string name="navigate_point_olc">Öppna platskod</string>
     <string name="navigate_point_olc_info_invalid">Ogiltig OLC
@@ -2115,7 +2115,7 @@
     <string name="quick_action_map_overlay_switch">Kartöverlägget har ändrats till \"%s\".</string>
     <string name="quick_action_btn_tutorial_descr">Genom att trycka länge och dra knappen ändras dess position på skärmen.</string>
     <string name="routing_attr_height_obstacles_name">Använd höjddata</string>
-    <string name="rendering_attr_depthContours_description">Visa djupkonturer och punkter.</string>
+    <string name="rendering_attr_depthContours_description">Visa djupkurvor och -punkter.</string>
     <string name="shared_string_slope">Sluttning</string>
     <string name="altitude_range">Höjdområde</string>
     <string name="relief_smoothness_factor_descr">Föredragen terräng: slätt eller kuperat.</string>
@@ -2389,10 +2389,10 @@
     <string name="plugin_mapillary_descr">Gatunivå bilder för alla. Upptäck platser, samarbeta, fånga världen.</string>
     <string name="private_access_routing_req">Din destination är belägen i ett område med privat tillträde. Tillåt anvädning av privata vägar för denna resa\?</string>
     <string name="hillshade_menu_download_descr">Ladda ner \'Hillshade\' överläggskartan för att visa vertikal skuggning.</string>
-    <string name="hillshade_purchase_header">Installera plugin-programmet \'Contour lines\' för att visa graderade vertikala områden.</string>
+    <string name="hillshade_purchase_header">Installera insticksmodulen \'Höjdkurvor\' för att visa terrängskuggning, visualiserade höjdskillnader i gråskala.</string>
     <string name="hide_from_zoom_level">Dölj start från zoomnivå</string>
-    <string name="srtm_menu_download_descr">Ladda ner kartan \"Konturlinje\" för användning i denna region.</string>
-    <string name="srtm_purchase_header">Köp och installera pluginprogrammet \'Contour lines\' för att visa graderade vertikala områden.</string>
+    <string name="srtm_menu_download_descr">Ladda ner \'Höjdkurvsdata\' för denna region.</string>
+    <string name="srtm_purchase_header">Köp och installera insticksmodulen \'Höjdkurvor\' för att kunna visa höjdkurvor i kartan.</string>
     <string name="show_from_zoom_level">Visa från zoom-nivå</string>
     <string name="routing_attr_allow_private_name">Tillåt privat åtkomst</string>
     <string name="routing_attr_allow_private_description">Tillåta åtkomst till privata områden.</string>
@@ -2407,17 +2407,17 @@
     <string name="quick_action_replace_destination_desc">En knapp för att göra skärmen centrerad till den nya ruttdestinationen och ersätta den tidigare valda destinationen (om någon).</string>
     <string name="quick_action_add_first_intermediate_desc">En knapp för att göra skärmens centrum till den första mellanliggande destinationen.</string>
     <string name="subscribe_email_desc">Anmäl dig till vår e-postlista om apprabatter och få 3 extra kartnedladdningar!</string>
-    <string name="depth_contour_descr">Havsdjupskonturer och sjömärken.</string>
-    <string name="sea_depth_thanks">Tack för att du köpt \"Nautiska djupkonturer\"</string>
-    <string name="index_item_depth_contours_osmand_ext">Nautiska djupkonturer</string>
+    <string name="depth_contour_descr">Djupkurvor och sjömärken.</string>
+    <string name="sea_depth_thanks">Tack för att du köpt \'Nautiska djupkurvor\'!</string>
+    <string name="index_item_depth_contours_osmand_ext">Nautiska djupkurvor</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautiska djuppunkter på södra halvklotet</string>
     <string name="index_item_depth_points_northern_hemisphere">Nautiska djuppunkter på norra halvklotet</string>
-    <string name="download_depth_countours">Nautiska djupkonturer</string>
+    <string name="download_depth_countours">Nautiska djupkurvor</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd samlar in information om vilka delar av appen du öppnar. Din plats skickas aldrig, inte heller någonting du anger i appen eller detaljer om områden du visar, söker eller hämtar.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Välj höjdfluktuation</string>
     <string name="auto_split_recording_title">Auto-split-inspelningar efter lucka</string>
     <string name="auto_split_recording_descr">Starta nytt segment efter en lucka av 6 min, nya spår efter lucka på 2 timmar eller nya filer efter ett längre gap om datumet har ändrats.</string>
-    <string name="rendering_attr_surfaceIntegrity_name">Vägbaneintegritet</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Vägbanans kvalitet</string>
     <string name="rendering_attr_hideOverground_name">Ytobjekt</string>
     <string name="osm_recipient_stat">Redigeringar %1$s, summan %2$s mBTC</string>
     <string name="rec_split_title">Använd Recorder Split</string>
@@ -2442,9 +2442,9 @@
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
     <string name="route_is_too_long_v2">För långa avständ: vänligen lägg till mellanliggande destinationer om ingen rutt hittas inom 10 minuter.</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) är en kartnavigationsapp med tillgång till gratis, världsomfattande OpenStreetMap (OSM)-data av hög kvalitet.
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) är en kart- och navigeringsapp med tillgång till gratis, världsomspännande OpenStreetMap (OSM)-data av hög kvalitet.
 \n
-\nNjut av röstnavigation eller visuell navigation, visning av POI (points of interest - nyttoplatser), att skapa och hantera GPX-spår, visa höjdkurvor och höjdinfo (via plugin), val mellan bil-, cykel-, fotgängar-lägen, OSM-redigering och mycket mer.</string>
+\nNjut av röst- och visuell navigering, att visa POI (\"points of interest\" - intressepunkter), skapa och hantera GPX-spår, visa höjdkurvor och höjdinfo (via plugin), visningslägen för bil, cykel och fotgängare, redigera OSM-data och mycket mer.</string>
     <string name="osmand_extended_description_part2">GPS-navigering
 \n• Välj mellan offline- (inga roaming-avgifter när du är utomlands) eller online-läge a(snabbare)
 \n• Steg-för-steg röstguidning leder dig längs vägen (inspelade och genererade röster)
@@ -2470,10 +2470,10 @@
 \nOsmAnd skidkartor plugin gör att du kan se skidspår svårighetsgrad och en del kompletterande information, som plats för liftar och andra faciliteter.</string>
     <string name="osmand_extended_description_part5">Cykling
 \n• Hitta cykelvägar på kartan
-\n• GPS-navigering i cykelläge bygger din rutt med cykelvägar
+\n• GPS-navigering i cykelläge planerar din rutt med cykelvägar
 \n• Se din hastighet och höjd
-\n• Med GPX-inspelningsalternativ kan du spela in din resa och dela den
-\n• Via ett extra plugin kan du aktivera konturlinjer och backskuggning</string>
+\n• Med GPX-inspelningsalternativ kan du spela in din resa, spara och dela den
+\n• Med en extra plugin kan du aktivera höjdkurvor och terrängskuggning</string>
     <string name="osmand_extended_description_part6">Promenader, vandring, stadsrundtur
 \n • Kartan visar promenad- och vandringsleder
 \n • Wikipedia på ditt föredragna språk kan berätta en hel del under en stadsrundtur
@@ -2583,11 +2583,11 @@
     <string name="off_road_render_descr">För terrängkörning baserad på Topo-stilen och för användning med gröna satellitbilder som underlag. Minskad tjocklek på huvudvägar, ökad tjocklek på spår, stigar, cykelvägar och andra vägar.</string>
     <string name="nautical_render_descr">För nautisk navigering. Innehåller bojar, fyrar, vattendrag, farleder och märken, hamnar, sjömärken, och djupkonturer.</string>
     <string name="ski_map_render_descr">För skidåkning. Innehåller pister, skidliftar, längdspår osv. Dämpar sekundära kartobjekt.</string>
-    <string name="light_rs_render_descr">Enkel körstil. Mjukt nattläge, konturlinjer, kontrasterande orangefärgade vägar, och dämpar sekundära kartobjekt.</string>
-    <string name="topo_render_descr">För vandring, trekking och cykling i naturen. Läsbar utomhus. Kontrasterande vägar och naturobjekt, olika rutttyper, avancerade alternativ för konturlinjer, extra detaljer. Justering av ytintegritet skiljer vägkvalitet åt. Inget nattläge.</string>
+    <string name="light_rs_render_descr">Enkel stil för bilkörning. Skonsamt nattläge, höjdkurvor, kontrasterande orangefärgade vägar, och nedtonade sekundära kartobjekt.</string>
+    <string name="topo_render_descr">För utflykter, vandring och cykling i naturen. God läsbarhet utomhus. Kontrasterande vägar och naturobjekt, olika ledtyper, avancerade alternativ för höjdkurvor, mer detaljrik. Inställning för att visa vägbanans kvalitet. Inget nattläge.</string>
     <string name="mapnik_render_descr">Gammal standard \"Mapnik\"-stil. Använder liknande färger som \"Mapnik\".</string>
     <string name="touring_view_render_descr">Turiststil med hög kontrast och maximal detaljrikedom. Innehåller alla alternativ i OsmAnd:s standardstil, samtidigt som den visar så mycket detaljer som möjligt, särskilt vägar, stigar, och andra sätt att resa. Tydlig distinktion mellan olika vägtyper som i en turistatlas. Lämplig för användning på dag, natt, och utomhus.</string>
-    <string name="default_render_descr">Allmän stil. Täta städer visas rent. Funktioner konturlinjer, vägar, ytkvalitet, tillträdesbegränsningar, vägsköldar, vägar som återges enligt SAC-skalan, vitvattensportartiklar.</string>
+    <string name="default_render_descr">Allmän stil. Tydlig återgivning i tät bebyggelse. Visar höjdkurvor, leder, vägbanekvalitet, åtkomstbegränsningar, vägnummer, stigar enligt SAC-skalan, vattensportobjekt.</string>
     <string name="open_wikipedia_link_online">Öppna Wikipedia-länk på internet</string>
     <string name="open_wikipedia_link_online_description">Länken kommer att öppnas i en webbläsare.</string>
     <string name="read_wikipedia_offline_description">Skaffa OsmAnd Live-prenumeration för att läsa Wikipedia och Wikivoyage-artiklar frånkopplad.</string>
@@ -2625,7 +2625,7 @@
     <string name="wikivoyage_offline">Wikivoyage frånkopplad</string>
     <string name="unlimited_downloads">Obegränsat antal nedladdningar</string>
     <string name="wikipedia_offline">Wikipedia frånkopplad</string>
-    <string name="contour_lines_hillshade_maps">Höjdkurvor &amp; höjdreliefer</string>
+    <string name="contour_lines_hillshade_maps">Höjdkurvor &amp; terrängskuggningskartor</string>
     <string name="unlock_all_features">Låsa upp alla OsmAnd-funktioner</string>
     <string name="purchase_dialog_title">Välj abonnemang</string>
     <string name="purchase_dialog_travel_description">Köp något av följande för att läsa researtiklar frånkopplad:</string>
@@ -2665,12 +2665,12 @@
 \n• Dela din position så att dina vänner kan hitta dig
 \n</string>
     <string name="osmand_plus_extended_description_part6">Funktioner för cykel och gående
-\n• Se vägar för gående och cyklande samt vandringsstigar, utmärkta för utomhusaktiviteter
-\n• Speciella ruttval och visningsläge för cykel och gående
-\n• Valfria kollektivtrafiksplatser (buss, spårvagn, tåg) inklusive linjenamn
-\n• Valfri reseinspelning till lokal GPX-fil eller onlinetjänst
-\n• Valfri visning av hastighet och höjd
-\n• Visa konturlinjer och höjdreliefer (via separat plugin)</string>
+\n• Se gång- och cykelvägar, stigar, samt cykel- och vandringsleder, utmärkt för utomhusaktiviteter
+\n• Särskilda ruttval och visningslägen för cykel och gående
+\n• Valbar visning av kollektivtrafikhållplatser (buss, spårvagn, tåg) inklusive linjenamn
+\n• GPS-spårinspelning till lokal GPX-fil eller onlinetjänst
+\n• Valbar visning av hastighet och höjd
+\n• Visa höjdkurvor och terrängskuggning (via separat plugin)</string>
     <string name="osmand_plus_extended_description_part7">Bidra direkt till OSM
 \n• Rapportera databuggar
 \n• Ladda upp GPX-spår till OSM direkt från appen
@@ -3195,7 +3195,7 @@
 \n • Fixade problem med import / export av profilinställningar
 \n
 \n</string>
-    <string name="contour_lines_thanks">Tack för att du köpte \"Konturlinjer\"</string>
+    <string name="contour_lines_thanks">Tack för att du köpte \"Höjdkurvor\"!</string>
     <string name="osm_live_payment_subscription_management_hw">Ditt AppGallery-konto debiteras vid köpbekräftelsen.
 \n
 \nAbonnemanget förlängs automatiskt såvida det inte sägs upp före förnyelsedatumet.
@@ -3279,7 +3279,7 @@
 \nLäs mer på: http://openplacereviews.org</string>
     <string name="uploaded_count">Uppladdat %1$d av %2$d</string>
     <string name="toast_select_edits_for_upload">Välj redigeringar för uppladdning</string>
-    <string name="hillshade_slope_contour_lines">Berg relief/ sluttning / konturlinjer</string>
+    <string name="hillshade_slope_contour_lines">Terrängskuggning / Lutning / Höjdkurvor</string>
     <string name="open_place_reviews">OpenPlaceReviews</string>
     <string name="opr_use_dev_url">Använd test.openplacereviews.org</string>
     <string name="login_open_place_reviews">Logga in på OpenPlaCereViews</string>
@@ -3387,13 +3387,17 @@
     <string name="customize_route_line">Anpassa ruttlinjen</string>
     <string name="shared_string_route_line">Ruttlinje</string>
     <string name="expired">Upphörd</string>
-    <string name="release_4_0_beta">• OsmAnd Live-uppdateringar flyttade till \"Nedladdningar&gt; Uppdateringar\"
+    <string name="release_4_0_beta">• Möjlighet att ladda ner höjdkurvor i fot
 \n
-\n• Spår kan nu färga efter höjd, hastighet eller lutning.
+\n• Planera rutt-vyn: lagt till flikar för att växla mellan punkter och grafer
+\n
+\n• OsmAnd Live-uppdateringar flyttade till \"Hämta kartor &gt; Uppdateringar\"
+\n
+\n• Spår kan nu färgläggas efter höjd, hastighet eller lutning.
 \n
 \n• Lagt till alternativ för att ändra utseendet på navigeringslinjen
 \n
-\n• Uppdaterad \"Trip recording\" -dialog
+\n• Uppdaterad \"Inspelning av resa\"-dialog
 \n
 \n</string>
     <string name="update_all_maps_added">Uppdatera alla kartor som lagts till i %1$s\?</string>
@@ -3482,7 +3486,7 @@
     <string name="poi_routes">Rutter</string>
     <string name="restore_selected_data">Återställ vald data</string>
     <string name="backup_error_gzip_only_supported_upload">Filen ska vara i .gzip-format</string>
-    <string name="contour_lines_hillshades_slope">Konturlinjer, höjdskuggor, lutning</string>
+    <string name="contour_lines_hillshades_slope">Höjdkurvor, terrängskuggning, lutning</string>
     <string name="shared_string_purchased">Köpt</string>
     <string name="on_hold_since">Pausad sedan %1$s</string>
     <string name="active_till">Aktiv till %1$s</string>
@@ -3584,7 +3588,7 @@
     <string name="shared_string_calculate">Beräkna</string>
     <string name="update_all_maps_q">Uppdatera alla (%1$d) kartor\?</string>
     <string name="update_all_maps">Uppdatera alla kartor</string>
-    <string name="contour_lines_and_hillshade">Konturlinjer och höjdskugga</string>
+    <string name="contour_lines_and_hillshade">Höjdkurvor och terrängskuggning</string>
     <string name="sunrise_at">Soluppgång %1$s</string>
     <string name="sunset_at">Solnedgång %1$s</string>
     <string name="rendering_attr_streetLightingNight_name">Visa endast på natten</string>
@@ -3641,7 +3645,7 @@
     <string name="purchases_feature_desc_monthly_map_updates">Få tillgång till regelbundna månatliga uppdateringar av offline-kartor.</string>
     <string name="unlimited_map_downloads">Obegränsade kartnedladdningar</string>
     <string name="wikipedia_and_wikivoyage_offline">Wikipedia och Wikivoyage i nedkopplat läge</string>
-    <string name="terrain_maps_contour_lines_hillshade_slope">Terrängkartor: konturlinjer, höjdskuggor, lutning</string>
+    <string name="terrain_maps_contour_lines_hillshade_slope">Terrängkartor: höjdkurvor, terrängskuggning, lutning</string>
     <string name="offline_wikipeadia">Wikipedia i nedkopplat läge</string>
     <string name="offline_wikivoyage">Wikivoyage i nedkopplat läge</string>
     <string name="terrain_maps">Terrängkartor</string>
@@ -3798,7 +3802,7 @@
     <string name="rendering_attr_piste_difficulty_easy_name">Lätt</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">Friåkning</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Anslutning</string>
-    <string name="purchases_feature_desc_terrain">Höjdkurvor, terrängskuggning och reliefkartor, samt sluttningskartor med färger för att visa toppar och dalar.</string>
+    <string name="purchases_feature_desc_terrain">Höjdkurvor, terrängskuggning/relief och sluttningskartor med färgläggning, för att visa toppar och dalar.</string>
     <string name="amz_manage_subscription_descr">Du kan hantera din prenumeration i Amazon-appen på enheten eller i din profil på webbplatsen amazon.com.</string>
     <string name="hidden_items_descr">Dessa objekt döljs från menyn, men de innehållande valen, funktionerna eller insticksprogrammen fortsätter att fungera.</string>
     <string name="test_voice_desrc">Tryck på en knapp och lyssna på motsvarande röstinspelning för att höra om den saknas eller är felaktig.</string>
@@ -3833,4 +3837,35 @@
     <string name="rendering_attr_undefined_name">Odefinierad</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="upload_gpx_description_hint">Lämna tomt, spårnamnen används som beskrivning. Inmatad beskrivning kommer appliceras på varje spår.</string>
+    <string name="quick_action_contour_lines_descr">Knapp som visar eller döljer höjdkurvor i kartan.</string>
+    <string name="release_4_0">- Säkerhetskopiering i molnet
+\n
+\n - Nattläge för Topo-kartstilen har lagts till.
+\n
+\n - Höjdkurvor i fot möjliga att ladda ner.
+\n
+\n - Spår kan nu färgläggas efter höjd, hastighet eller lutning.
+\n
+\n - Uppdaterad dialogruta \"Inspelning av resa\".
+\n
+\n - Avståndsmätning genom tryck flyttas från Radielinjal till ett separat alternativ.
+\n
+\n - Planera rutt: Du kan nu ändra navigeringsalternativ, komma åt kartkonfigurationen och söka utan att lämna ruttplaneringen.
+\n
+\n - Ny skärmvy för köp med mer detaljerad information.
+\n
+\n - Möjlighet att ändra utseendet på navigeringslinjen.
+\n
+\n - OsmAnd Live-uppdateringar har flyttats till \"Hämta kartor &gt; Uppdateringar\".
+\n
+\n</string>
+    <string name="display_route_tracks">Visa spår</string>
+    <string name="location_access_request_action">Bevilja åtkomst</string>
+    <string name="location_access_request_result">Godkänd: %1$s Avvisad: %2$s</string>
+    <string name="included_categories">Inkluderade kategorier</string>
+    <string name="safe_settings">Säker</string>
+    <string name="shortcut_navigate_to">Navigera till…</string>
+    <string name="shortcut_navigate_to_work">Navigera till arbete</string>
+    <string name="shortcut_navigate_to_home">Navigera till hem</string>
+    <string name="continue_on_phone">Fortsätta på mobil</string>
 </resources>
