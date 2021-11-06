@@ -90,6 +90,7 @@ import net.osmand.plus.routepreparationmenu.cards.BaseCard.CardListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
 import net.osmand.plus.search.QuickSearchDialogFragment;
+import net.osmand.plus.track.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -126,7 +127,7 @@ import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
 
 public class TrackMenuFragment extends ContextMenuScrollFragment implements CardListener,
 		SegmentActionsListener, RenameCallback, OnTrackFileMoveListener, OnPointsDeleteListener,
-		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener {
+		OsmAndLocationListener, OsmAndCompassListener, OnSegmentSelectedListener, GpsFilterFragmentLister {
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
 	public static final String OPEN_POINTS_TAB = "OPEN_POINTS_TAB";
@@ -1407,6 +1408,19 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					.beginTransaction()
 					.show(this)
 					.commitAllowingStateLoss();
+		}
+	}
+
+	@Override
+	public void onDismissGpsFilterFragment(boolean savedCopy, String savedFilePath) {
+		if (savedCopy) {
+			dismiss();
+		} else {
+			boolean modifiedByFilter = !Algorithms.isEmpty(savedFilePath);
+			if (modifiedByFilter) {
+				onSelectedGpxFileAvailable();
+				updateContent();
+			}
 		}
 	}
 

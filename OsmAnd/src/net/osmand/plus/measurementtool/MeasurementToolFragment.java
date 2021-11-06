@@ -54,6 +54,7 @@ import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.plus.ColorUtilities;
@@ -96,6 +97,7 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.track.GpsFilterFragment;
+import net.osmand.plus.track.GpsFilterFragment.GpsFilterFragmentLister;
 import net.osmand.plus.track.TrackMenuFragment;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -121,7 +123,7 @@ import java.util.Locale;
 
 public class MeasurementToolFragment extends BaseOsmAndFragment implements RouteBetweenPointsFragmentListener,
 		OptionsFragmentListener, GpxApproximationFragmentListener, SelectedPointFragmentListener,
-		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider {
+		SaveAsNewTrackFragmentListener, MapControlsThemeInfoProvider, GpsFilterFragmentLister {
 
 	public static final String TAG = MeasurementToolFragment.class.getSimpleName();
 	public static final String TAPS_DISABLED_KEY = "taps_disabled_key";
@@ -1120,9 +1122,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 					: new GPXFile(Version.getFullVersion(app));
 			GPXFile gpxFile = SaveGpxRouteAsyncTask.generateGpxFile(editingCtx,
 					getSuggestedFileName(), sourceGpx, false, false);
-			if (gpxData != null) {
-				gpxFile.path = gpxData.getGpxFile().path;
-			}
+			gpxFile.path = gpxData != null
+					? gpxData.getGpxFile().path
+					: app.getAppPath(GPX_INDEX_DIR) + "/" + getSuggestedFileName() + GPX_FILE_EXT;
 
 			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
 
@@ -1130,24 +1132,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			AndroidUiHelper.setVisibility(mapActivity, View.GONE, R.id.snap_to_road_image_button,
 					R.id.map_ruler_container);
 			GpsFilterFragment.showInstance(mapActivity.getSupportFragmentManager(), selectedGpxFile, this);
-		}
-	}
-
-	public void onGpsFilterClosed() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			updateSnapToRoadControls();
-			AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
-			show();
-
-			GpsFilterHelper gpsFilterHelper = requireMyApplication().getGpsFilterHelper();
-			String path = gpsFilterHelper.getLastSavedFilePath();
-			if (!Algorithms.isEmpty(path)) {
-				editingCtx.clearSegments();
-				editingCtx.setChangesSaved();
-				GPXFile newGpxFile = GPXUtilities.loadGPXFile(new File(path));
-				addNewGpxData(newGpxFile);
-			}
 		}
 	}
 
@@ -1757,10 +1741,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	private String getSuggestedFileName() {
-		return getSuggestedFileName(requireMyApplication(), editingCtx.getGpxData());
-	}
-
-	public static String getSuggestedFileName(@NonNull OsmandApplication app, @Nullable GpxData gpxData) {
+		GpxData gpxData = editingCtx.getGpxData();
 		String displayedName = null;
 		if (gpxData != null) {
 			GPXFile gpxFile = gpxData.getGpxFile();
@@ -1772,7 +1753,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 		if (gpxData == null || displayedName == null) {
 			String suggestedName = new SimpleDateFormat("EEE dd MMM yyyy", Locale.US).format(new Date());
-			displayedName = FileUtils.createUniqueFileName(app, suggestedName, GPX_INDEX_DIR, GPX_FILE_EXT);
+			displayedName = FileUtils.createUniqueFileName(requireMyApplication(), suggestedName, GPX_INDEX_DIR, GPX_FILE_EXT);
 		} else {
 			displayedName = Algorithms.getFileNameWithoutExtension(new File(gpxData.getGpxFile().path).getName());
 		}
@@ -2067,7 +2048,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		}
 	}
 
-	public void dismiss(@NonNull MapActivity mapActivity) {
+	private void dismiss(@NonNull MapActivity mapActivity) {
 		dismiss(mapActivity, true);
 	}
 
@@ -2297,6 +2278,33 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	public boolean isNightModeForMapControls() {
 		return nightMode;
+	}
+
+	@Override
+	public void onDismissGpsFilterFragment(boolean savedCopy, String savedFilePath) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			if (savedCopy) {
+				dismiss(mapActivity);
+			} else {
+				updateSnapToRoadControls();
+				AndroidUiHelper.setVisibility(mapActivity, View.VISIBLE, R.id.map_ruler_container);
+				show();
+
+				boolean modifiedByFilter = !Algorithms.isEmpty(savedFilePath);
+				if (modifiedByFilter) {
+					editingCtx.clearSegments();
+					editingCtx.clearCommands();
+
+					updateUndoRedoButton(false, undoBtn);
+					updateUndoRedoButton(false, redoBtn);
+					updateUndoRedoCommonStuff();
+
+					GPXFile newGpxFile = GPXUtilities.loadGPXFile(new File(savedFilePath));
+					addNewGpxData(newGpxFile);
+				}
+			}
+		}
 	}
 
 	public interface OnUpdateInfoListener {

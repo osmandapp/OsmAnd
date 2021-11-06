@@ -8,7 +8,6 @@ import android.widget.ScrollView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.IndexConstants;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
@@ -19,7 +18,6 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.GpsFilterHelper.GpsFilterListener;
-import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
@@ -66,12 +64,18 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 		List<BaseBottomSheetItem> actionButtons = new ArrayList<>();
 		for (ActionButton actionButton : ActionButton.values()) {
 
-			Drawable icon = getActiveIcon(actionButton.iconId);
+			boolean actionAvailable = actionButton != ActionButton.SAVE_AS_COPY || gpsFilterHelper.isSourceGpxFileExist();
+			int colorId = actionAvailable
+					? ColorUtilities.getActiveColorId(nightMode)
+					: ColorUtilities.getDefaultIconColorId(nightMode);
+			Drawable icon = getColoredIcon(actionButton.iconId, colorId);
+
 			BaseBottomSheetItem actionButtonItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(AndroidUtils.getDrawableForDirection(app, icon))
 					.setTitle(app.getString(actionButton.titleId))
 					.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
 					.setOnClickListener(v -> onActionButtonClick(actionButton))
+					.setTag(actionButton.ordinal())
 					.create();
 
 			actionButtons.add(actionButtonItem);
@@ -92,13 +96,10 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 	private void saveAsCopy() {
 		String sourceFilePath = gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile().path;
 		String sourceFileName = Algorithms.getFileNameWithoutExtension(Algorithms.getFileWithoutDirs(sourceFilePath));
-		String finalFileName = Algorithms.isEmpty(sourceFileName)
-				? MeasurementToolFragment.getSuggestedFileName(app, null)
-				: sourceFileName;
-		String destFileName = finalFileName + "-copy";
+		String destFileName = sourceFileName + "-copy";
 		if (target instanceof SaveAsNewTrackFragmentListener) {
 			SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-					target, null, finalFileName, destFileName, false, true);
+					target, null, sourceFileName, destFileName, false, true);
 		}
 	}
 
@@ -109,10 +110,7 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 			sourceSelectedGpxFile.setGpxFile(newGpxFile, app);
 			gpsFilterHelper.setSelectedGpxFile(sourceSelectedGpxFile);
 
-			String path = Algorithms.isEmpty(newGpxFile.path)
-					? app.getAppPath(IndexConstants.GPX_INDEX_DIR) + MeasurementToolFragment.getSuggestedFileName(app, null)
-					: newGpxFile.path;
-			File outFile = new File(path);
+			File outFile = new File(newGpxFile.path);
 			new SaveGpxAsyncTask(outFile, newGpxFile, new SaveGpxListener() {
 
 				@Override
@@ -173,9 +171,15 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 		ViewGroup actionButtonsContainer = view.findViewById(R.id.action_buttons_container);
 		actionButtonsContainer.removeAllViews();
 		for (BaseBottomSheetItem actionButton : actionButtonsItems) {
-			actionButton.inflate(mapActivity, (ViewGroup) actionButtonsContainer, nightMode);
+			actionButton.inflate(mapActivity, actionButtonsContainer, nightMode);
 			int dp20 = view.getResources().getDimensionPixelSize(R.dimen.title_padding);
 			AndroidUtils.setPadding(actionButton.getView(), dp20, 0, 0, 0);
+
+			boolean disableSaveAsCopy = !gpsFilterHelper.isSourceGpxFileExist()
+					&& Algorithms.objectEquals(actionButton.getTag(), ActionButton.SAVE_AS_COPY.ordinal());
+			if (disableSaveAsCopy) {
+				actionButton.getView().setEnabled(false);
+			}
 		}
 	}
 

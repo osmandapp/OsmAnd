@@ -25,7 +25,6 @@ import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.base.ContextMenuScrollFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpsFilterHelper;
-import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SavedTrackBottomSheetDialogFragment;
 import net.osmand.plus.track.SaveGpxAsyncTask.SaveGpxListener;
@@ -113,7 +112,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 		requireMyActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
-				dismiss();
+				dismiss(false);
 			}
 		});
 	}
@@ -167,7 +166,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		AndroidUiHelper.updateVisibility(toolbar, isPortrait());
 
 		ImageButton closeButton = toolbar.findViewById(R.id.close_button);
-		closeButton.setOnClickListener(v -> dismiss());
+		closeButton.setOnClickListener(v -> dismiss(false));
 		closeButton.setImageResource(AndroidUtils.getNavigationIconResId(toolbar.getContext()));
 
 		View resetToOriginalButton = toolbar.findViewById(R.id.reset_to_original_button);
@@ -402,34 +401,24 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		MapActivity mapActivity = getMapActivity();
 		if (error != null) {
 			LOG.error(error);
-		} else if (mapActivity != null && showOnMap) {
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper()
-					.selectGpxFile(gpxFile, true, false);
-			if (selectedGpxFile != null) {
-				selectedGpxFile.processPoints(app);
-			}
+		} else if (mapActivity != null) {
+			app.getSelectedGpxHelper().selectGpxFile(gpxFile, showOnMap, false);
 
 			FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 			SavedTrackBottomSheetDialogFragment.showInstance(fragmentManager, gpxFile.path, false);
 		}
 
-		dismiss();
-		Fragment target = getTargetFragment();
-		if (target instanceof TrackMenuFragment) {
-			((TrackMenuFragment) target).dismiss();
-		} else if (target instanceof MeasurementToolFragment) {
-			if (mapActivity != null) {
-				((MeasurementToolFragment) target).dismiss(mapActivity);
-			}
-		}
+		dismiss(true);
 	}
 
-	@Override
-	public void dismiss() {
-		super.dismiss();
+	private void dismiss(boolean savedCopy) {
+		dismiss();
 		gpsFilterHelper.disableFilter();
-		if (getTargetFragment() instanceof MeasurementToolFragment) {
-			((MeasurementToolFragment) getTargetFragment()).onGpsFilterClosed();
+
+		Fragment target = getTargetFragment();
+		if (target instanceof GpsFilterFragmentLister) {
+			((GpsFilterFragmentLister) target)
+					.onDismissGpsFilterFragment(savedCopy, gpsFilterHelper.getLastSavedFilePath());
 		}
 	}
 
@@ -449,5 +438,10 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 			return true;
 		}
 		return false;
+	}
+
+	public interface GpsFilterFragmentLister {
+
+		void onDismissGpsFilterFragment(boolean savedCopy, String savedFilePath);
 	}
 }

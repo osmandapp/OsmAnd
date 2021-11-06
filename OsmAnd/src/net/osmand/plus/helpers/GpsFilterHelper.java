@@ -17,8 +17,8 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.util.Algorithms;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -85,17 +85,23 @@ public class GpsFilterHelper {
 		return selectedGpxFile.equals(sourceSelectedGpxFile);
 	}
 
+	public boolean isSourceGpxFileExist() {
+		GPXFile gpxFile = filteredSelectedGpxFile.getGpxFile();
+		return gpxFile != null && new File(gpxFile.path).exists();
+	}
+
 	public void onSavedFile(String path) {
 		lastSavedFilePath = path;
 	}
 
+	@Nullable
 	public String getLastSavedFilePath() {
 		return lastSavedFilePath;
 	}
 
 	public void disableFilter() {
 		GPXFile sourceGpxFile = sourceSelectedGpxFile.getGpxFile();
-		if (Algorithms.isEmpty(sourceGpxFile.path)) {
+		if (!isSourceGpxFileExist()) {
 			app.getSelectedGpxHelper().selectGpxFile(sourceGpxFile, false, false);
 		}
 		sourceSelectedGpxFile = null;

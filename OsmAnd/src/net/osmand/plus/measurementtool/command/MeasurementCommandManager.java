@@ -31,6 +31,12 @@ public class MeasurementCommandManager {
 		return redoCommands.size() > 0;
 	}
 
+	public void clearCommands() {
+		resetChangesCounter();
+		undoCommands.clear();
+		redoCommands.clear();
+	}
+
 	public boolean execute(MeasurementModeCommand command) {
 		if (command.execute()) {
 			undoCommands.push(command);
