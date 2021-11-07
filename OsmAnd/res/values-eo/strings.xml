@@ -4011,9 +4011,9 @@
     <string name="routing_attr_height_obstacles_description">Eviti krutajn deklivojn dum navigi.</string>
     <string name="quick_action_coordinates_widget_descr">Ŝaltilo por montri aŭ kaŝi la fenestraĵon de koordinatoj sur la mapo.</string>
     <string name="map_widget_distance_by_tap">Distanco je frapeto</string>
-    <string name="live_update_frequency_week_variant">Kontrolos pri map‑ĝisdatigoj ĉiusemajne. Sekva ĝisdatigo okazos %1$s je %2$s.</string>
-    <string name="live_update_frequency_day_variant">Kontrolos pri map‑ĝisdatigoj ĉiutage. Sekva ĝisdatigo okazos %1$s je %2$s.</string>
-    <string name="live_update_frequency_hour_variant">Kontrolos pri map‑ĝisdatigoj ĉiuhore. Sekva ĝisdatigo okazos %1$s je %2$s.</string>
+    <string name="live_update_frequency_week_variant">Kontrolas pri map‑ĝisdatigoj ĉiusemajne. Sekva ĝisdatigo okazos je %1$s %2$s.</string>
+    <string name="live_update_frequency_day_variant">Kontrolas pri map‑ĝisdatigoj ĉiutage. Sekva ĝisdatigo okazos je %1$s %2$s.</string>
+    <string name="live_update_frequency_hour_variant">Kontrolas pri map‑ĝisdatigoj ĉiuhore. Sekva ĝisdatigo okazos je %1$s %2$s.</string>
     <string name="live_update_delete_updates_msg">Ĉu forigi ĉiujn %s ĝisdatigojn OsmAnd Live\?</string>
     <string name="track_recording_will_be_continued">La registrado pluos.</string>
     <string name="track_has_no_altitude">La spuro ne enhavas datumojn pri altitudo.</string>
