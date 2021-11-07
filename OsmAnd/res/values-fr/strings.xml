@@ -250,7 +250,7 @@
     <string name="build_installed">Version {0} installée avec succès ({1}).</string>
     <string name="downloading_build">Téléchargement de l\'application…</string>
     <string name="install_selected_build">Installer OsmAnd - {0} sur {1} {2} Mo ?</string>
-    <string name="loading_builds_failed">Le chargement des versions disponibles a échoué.</string>
+    <string name="loading_builds_failed">Le chargement des versions OsmAnd a échoué.</string>
     <string name="loading_builds">Chargement des versions disponibles…</string>
     <string name="select_build_to_install">Sélectionnez la version d\'OsmAnd à installer</string>
     <string name="contribution_activity">Fonction spéciale pour la version des contributeurs</string>
@@ -857,7 +857,7 @@
     <string name="zxing_barcode_scanner_not_found">L’application ZXing Barcode Scanner n\'est pas installée. Souhaitez-vous l\'installer depuis Google Play ?</string>
     <string name="close_changeset">Clôturer les modifications</string>
     <string name="background_service_is_enabled_question">Le service OsmAnd s\'exécute encore en arrière-plan. Souhaitez-vous aussi l\'arrêter \?</string>
-    <string name="safe_mode_description">Exécuter l\'application en mode sûr (utiliser le code Android plus lent plutôt que le code natif).</string>
+    <string name="safe_mode_description">Exécuter l\'application en mode sûr (mais plus lent).</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (désactivez ce mode dans Paramètres).</string>
     <string name="rendering_attr_showRoadMaps_description">Sélectionnez quand afficher les cartes routières :</string>
@@ -3399,9 +3399,9 @@
     <string name="please_provide_profile_name_message">Veuillez saisir un nom de profil</string>
     <string name="open_settings">Ouvrir les paramètres</string>
     <string name="plugin_disabled">Greffon désactivé</string>
-    <string name="plugin_disabled_descr">Ce greffon est une application indépendante, vous devrez la désinstaller séparément si vous ne souhaitez plus l\'utiliser.
+    <string name="plugin_disabled_descr">Ce greffon est une application indépendante. Désactiver le greffon ne le désinstalle pas.
 \n
-\nLe greffon sera toujours présent sur l\'appareil après avoir désinstallé OsmAnd.</string>
+\nPour désinstaller le greffon, utilisez les Paramètres \'Applications\' d\'Android.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Calcul d\'itinéraire</string>
@@ -4262,24 +4262,24 @@
     <string name="online_maps_required_descr">Malheureusement, OsmAnd n\'a pas trouvé d\'itinéraire avec vos paramètres.
 \n
 \nPeut-être que certaines cartes sont absentes. Vous pouvez vérifier en ligne, les cartes nécessaires.</string>
-    <string name="option_available_only_in_osmand_pro">L\'option est disponible avec un abonnement OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">Disponible avec un abonnement OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Accédez aux fonctionnalités d\'OsmAnd Pro comme les itinéraires colorés et bien plus encore.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explorez les offres OsmAnd et trouvez celle qui vous convient.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Couleur des itinéraires en fonction du type de réseau (international, régional, local).</string>
     <string name="walking_route_osmc_description">Couleur des itinéraires en fonction de leurs définitions locale (si elle est connue d’OpenStreetMap) et du type d\'itinéraire (international, régional, local).</string>
     <string name="backup_error_no_subscription">Aucun abonnement en cours</string>
     <string name="map_updates_for_mappers">Mises à jour des cartes pour les contributeurs OSM</string>
-    <string name="benefits_for_contributors_primary_descr">Vous pouvez bénéficier de mises à jour horaires et illimitées des cartes à condition d\'être un contributeur actif d\'OpenStreetMap.</string>
+    <string name="benefits_for_contributors_primary_descr">Les contributeurs actifs d\'OpenStreetMap bénéficient des mises à jour horaires et illimitées des cartes.</string>
     <string name="benefits_for_contributors_secondary_descr">Connectez-vous à OpenStreetMap pour vérifiez si vous êtes éligible aux mises à jour illimitées.</string>
     <string name="enough_contributions_descr">Félicitations, vous avez suffisamment contribué à OpenStreetMap pour profiter de mises à jour illimitées des cartes OsmAnd !</string>
     <string name="not_enough_contributions_descr">Vous devez avoir effectué au moins %1$s contributions à OpenStreetMap au cours des %2$s derniers jours.</string>
-    <string name="contributions_may_calculate_with_delay">Le calcul des contributions peut prendre plusieurs heures.</string>
+    <string name="contributions_may_calculate_with_delay">Le calcul des contributions peut durer plusieurs heures.</string>
     <string name="pro_features">Fonctionnalités Pro</string>
     <string name="purchases_restored">Achats restaurés</string>
-    <string name="grey_color_undefined">Les parties grisées signalent l\'absence de donnée.</string>
-    <string name="no_activity_for_intent">Aucune application n\'a été trouvée pour effectuer cette action</string>
-    <string name="amz_manage_subscription_descr">Pour gérer votre abonnement, utilisez l\'application Amazon sur votre appareil ou connectez-vous sur le site Amazon.com.</string>
-    <string name="cancel_anytime_in_amazon_app">Annulez-le à tout moment dans l\'application Amazon</string>
+    <string name="grey_color_undefined">Les parties sans données sont grisées.</string>
+    <string name="no_activity_for_intent">Installez une application pour réaliser cette action.</string>
+    <string name="amz_manage_subscription_descr">Gérez votre abonnement depuis l\'application Amazon ou le site web d\'Amazon.</string>
+    <string name="cancel_anytime_in_amazon_app">Annulez-le à tout moment depuis l\'application Amazon.</string>
     <string name="empty_category_name">Nom de catégorie vide</string>
     <string name="osm_live_payment_subscription_management_amz">Le montant sera débité de votre compte Amazon lors de la confirmation de l\'achat.
 \n
@@ -4317,7 +4317,7 @@
     <string name="remove_group_from_markers">Supprimer le groupe de la liste des marques</string>
     <string name="start_point">Départ</string>
     <string name="mapillary_menu_filter_description_new">Filtrer les images par date ou par type. Disponible uniquement après avoir zoomé.</string>
-    <string name="service_is_not_available_please_try_later">Le service n\'est pas disponible actuellement, veuillez réessayer plus tard</string>
+    <string name="service_is_not_available_please_try_later">Le service est indisponible actuellement, veuillez réessayer plus tard.</string>
     <string name="shared_string_files">Fichiers</string>
     <string name="travel_route_types">Types d\'itinéraires</string>
     <string name="sample_wikivoyage">Exemple Wikivoyage</string>
@@ -4337,7 +4337,7 @@
     <string name="upload_gpx_description_hint">Si vide, la description sera alimentée avec le nom de trace. La description saisie sera utilisée pour chaque trace.</string>
     <string name="exit_pan_mode_descr">Appuyez sur Sélectionner pour quitter le mode panoramique</string>
     <string name="icon_group_nautical">Nautisme</string>
-    <string name="shared_storage_warning_title">Évolutions des règles d\'accès au stockage</string>
+    <string name="shared_storage_warning_title">Modification des règles d\'accès au stockage</string>
     <string name="shared_app_storage_description">La mémoire partagée n\'est plus disponible depuis l\'évolution des règles Android d\'accès au stockage.</string>
     <string name="internal_app_storage_description">Stockage interne, masqué à l\'utilisateur et aux autres applications ; seul OsmAnd peut accéder à vos données.</string>
     <string name="purchases_feature_desc_android_auto">Cartes et navigation hors ligne OsmAnd s\'affichant sur l\'écran de votre véhicule et répondant aux commandes de votre véhicule.</string>
@@ -4350,27 +4350,25 @@
     <string name="location_access_request_result">Approuvé : %1$s Refusé : %2$s</string>
     <string name="android_auto_map_placeholder_descr">Déconnectez votre appareil d\'Android Auto pour afficher la carte dans l\'application.</string>
     <string name="android_auto_purchase_request_title">Achetez OsmAnd Pro ou Maps+ pour utiliser OsmAnd avec Android Auto</string>
-    <string name="continue_on_phone">Continuer sur le téléphone</string>
+    <string name="continue_on_phone">Continuer sur l\'appareil mobile</string>
     <string name="location_access_request_action">Accorder l\'accès</string>
-    <string name="location_access_request_title">OsmAnd doit connaitre votre position pour vous guider</string>
+    <string name="location_access_request_title">OsmAnd doit connaitre votre position pour vous guider.</string>
     <string name="shared_storage_warning_description">À partir de novembre 2021, OsmAnd 4.2 n\'aura plus accès au stockage partagé, car Android va modifier les règles d\'accès au stockage.
 \n
 \nVeuillez remplacer le stockage partagé par une autre stockage disponible, sans quoi l\'application ne pourra plus accéder à vos données comme les cartes hors ligne, les traces GPX ...</string>
-    <string name="markers_history_is_disabled_descr">Activez l\'historique pour avoir la liste des marques visitées.</string>
+    <string name="markers_history_is_disabled_descr">Activez l\'historique pour mémoriser les marques visitées.</string>
     <string name="is_disabled">%1$s est désactivé</string>
     <string name="shortcut_navigate_to">Naviguer vers…</string>
-    <string name="clear_all_history_warning">Êtes-vous certain de vouloir effacer tout l\'historique de l\'application \?
-\n
-\nLes historiques de recherche, de navigation et des marques seront effacés.</string>
+    <string name="clear_all_history_warning">Effacer tout l\'historique de l\'application comme les historiques de recherche, de navigation et de marques \?</string>
     <string name="history_preferences_descr">Vous pouvez désactiver l\'historique unitairement pour chaque type d\'historique.</string>
-    <string name="shortcut_navigate_to_home">Naviguer vers Domicile</string>
+    <string name="shortcut_navigate_to_home">Naviguer vers \'Domicile\'</string>
     <string name="navigation_history">Historique de navigation</string>
     <string name="search_history_is_disabled_descr">Vous pouvez activer l\'historique des recherches dans les Paramètres.</string>
     <string name="clear_all_history">Effacer tout l\'historique</string>
     <string name="history_actions_descr">Vous pouvez exporter l\'historique dans un fichier.</string>
     <string name="map_markers_history">Historique des marques</string>
     <string name="shortcut_start_recording">Démarrer l\'enregistrement</string>
-    <string name="shortcut_navigate_to_work">Naviguer vers Travail</string>
+    <string name="shortcut_navigate_to_work">Naviguer vers \'Travail\'</string>
     <string name="transparent_status_bar_descr">Afficher la carte sous la barre d\'état</string>
     <string name="transparent_status_bar">Barre d\'état transparente</string>
     <string name="history_is_disabled_descr">Activez l\'historique pour accéder rapidement aux derniers résultats de recherche.</string>
@@ -4378,9 +4376,11 @@
     <string name="use_external_timestamps">Utiliser des estimations externes</string>
     <string name="use_external_timestamps_description">Utilisez les estimations de routeurs en ligne pour ajuster la durée et la vitesse moyenne</string>
     <string name="safe_settings">Précis</string>
-    <string name="approx_safe_mode">Approximation précise des gpx</string>
-    <string name="approx_safe_mode_description">Effectuer les approximations des gpx en utilisant Android (qui est plus lent) au lieu du code natif.</string>
+    <string name="approx_safe_mode">Approximation précise des GPX</string>
+    <string name="approx_safe_mode_description">Effectuer les approximations des GPX en utilisant Android (qui est plus lent) au lieu du code natif.</string>
     <string name="shared_string_travelbooks">Carnets de voyage</string>
     <string name="display_route_tracks">Afficher les traces</string>
     <string name="display_route_tracks_as_poi">Afficher les traces en tant que PI</string>
+    <string name="delete_history_items_descr">Voulez-vous vraiment supprimer les éléments d’historique sélectionnés \?</string>
+    <string name="delete_history_items">Supprimer %1$s éléments d’historique \?</string>
 </resources>
