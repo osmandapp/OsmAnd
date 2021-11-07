@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -11,6 +12,9 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.download.DownloadItem;
+import net.osmand.plus.download.SelectIndexesHelper;
+import net.osmand.plus.download.SrtmDownloadItem;
 import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.R;
@@ -22,10 +26,17 @@ import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.render.RenderingRuleProperty;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.List;
 
+import androidx.annotation.Nullable;
+
+import static net.osmand.plus.ContextMenuAdapter.*;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_DISABLED_VALUE;
@@ -33,6 +44,8 @@ import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_WIDTH_ATTR;
 
 public class ContourLinesMenu {
+
+	private static final Log LOG = PlatformUtil.getLog(ContourLinesMenu.class);
 	private static final String TAG = "ContourLinesMenu";
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
@@ -91,7 +104,7 @@ public class ContourLinesMenu {
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
 		final int colorSchemeStringId = R.string.srtm_color_scheme;
 
-		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
+		OnRowItemClick l = new OnRowItemClick() {
 			@Override
 			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter,
 										  View view, int itemId, int pos) {
@@ -236,11 +249,7 @@ public class ContourLinesMenu {
 			}
 
 			if (downloadThread.shouldDownloadIndexes()) {
-				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-						.setTitleId(R.string.shared_string_download_map, mapActivity)
-						.setDescription(app.getString(R.string.srtm_menu_download_descr))
-						.setCategory(true)
-						.setLayout(R.layout.list_group_title_with_descr).createItem());
+				contextMenuAdapter.addItem(createDownloadSrtmMapsItem(mapActivity));
 				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 						.setLayout(R.layout.list_item_icon_and_download)
 						.setTitleId(R.string.downloading_list_indexes, mapActivity)
@@ -248,85 +257,122 @@ public class ContourLinesMenu {
 						.setListener(l).createItem());
 			} else {
 				try {
-					IndexItem currentDownloadingItem = downloadThread.getCurrentDownloadingItem();
-					int currentDownloadingProgress = downloadThread.getCurrentDownloadingItemProgress();
 					List<IndexItem> srtms = DownloadResources.findIndexItemsAt(
-							app, mapActivity.getMapLocation(), DownloadActivityType.SRTM_COUNTRY_FILE);
-					if (srtms.size() > 0) {
-						contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-								.setTitleId(R.string.shared_string_download_map, mapActivity)
-								.setDescription(app.getString(R.string.srtm_menu_download_descr))
-								.setCategory(true)
-								.setLayout(R.layout.list_group_title_with_descr).createItem());
-						for (final IndexItem indexItem : srtms) {
-							ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
-									.setLayout(R.layout.list_item_icon_and_download)
-									.setTitle(indexItem.getVisibleName(app, app.getRegions(), false))
-									.setDescription(DownloadActivityType.SRTM_COUNTRY_FILE.getString(app) + " • " + indexItem.getSizeDescription(app))
-									.setIcon(DownloadActivityType.SRTM_COUNTRY_FILE.getIconResource())
-									.setListener(new ContextMenuAdapter.ItemClickListener() {
-										@Override
-										public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-											ContextMenuItem item = adapter.getItem(position);
-											if (downloadThread.isDownloading(indexItem)) {
-												downloadThread.cancelDownload(indexItem);
-												if (item != null) {
-													item.setProgress(ContextMenuItem.INVALID_ID);
-													item.setLoading(false);
-													item.setSecondaryIcon(R.drawable.ic_action_import);
-													adapter.notifyDataSetChanged();
-												}
-											} else {
-												new DownloadValidationManager(app).startDownload(mapActivity, indexItem);
-												if (item != null) {
-													item.setProgress(ContextMenuItem.INVALID_ID);
-													item.setLoading(true);
-													item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-													adapter.notifyDataSetChanged();
-												}
-											}
-											return false;
-										}
-									})
-									.setProgressListener(new ContextMenuAdapter.ProgressListener() {
-										@Override
-										public boolean onProgressChanged(Object progressObject, int progress,
-																		 ArrayAdapter<ContextMenuItem> adapter,
-																		 int itemId, int position) {
-											if (progressObject != null && progressObject instanceof IndexItem) {
-												IndexItem progressItem = (IndexItem) progressObject;
-												if (indexItem.compareTo(progressItem) == 0) {
-													ContextMenuItem item = adapter.getItem(position);
-													if (item != null) {
-														item.setProgress(progress);
-														item.setLoading(true);
-														item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-														adapter.notifyDataSetChanged();
-													}
-													return true;
-												}
-											}
-											return false;
-										}
-									});
-
-							if (indexItem == currentDownloadingItem) {
-								itemBuilder.setLoading(true)
-										.setProgress(currentDownloadingProgress)
-										.setSecondaryIcon(R.drawable.ic_action_remove_dark);
-							} else {
-								itemBuilder.setSecondaryIcon(R.drawable.ic_action_import);
-							}
-							contextMenuAdapter.addItem(itemBuilder.createItem());
-						}
+							app, mapActivity.getMapLocation(), DownloadActivityType.SRTM_COUNTRY_FILE,
+							false, 1, true);
+					SrtmDownloadItem srtmDownloadItem = convertToSrtmDownloadItem(srtms);
+					if (srtmDownloadItem != null) {
+						contextMenuAdapter.addItem(createDownloadSrtmMapsItem(mapActivity));
+						contextMenuAdapter.addItem(createSrtmDownloadItem(mapActivity, srtmDownloadItem));
 					}
 				} catch (IOException e) {
-					e.printStackTrace();
+					LOG.error(e);
 				}
 			}
 		}
 	}
-	
+
+	private static ContextMenuItem createDownloadSrtmMapsItem(MapActivity mapActivity) {
+		return new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.shared_string_download_map, mapActivity)
+				.setDescription(mapActivity.getString(R.string.srtm_menu_download_descr))
+				.setCategory(true)
+				.setLayout(R.layout.list_group_title_with_descr)
+				.createItem();
+	}
+
+	@Nullable
+	private static SrtmDownloadItem convertToSrtmDownloadItem(List<IndexItem> srtms) {
+		if (Algorithms.isEmpty(srtms)) {
+			return null;
+		}
+		List<DownloadItem> individualResources = srtms.get(0).getRelatedGroup().getIndividualDownloadItems();
+		for (DownloadItem downloadItem : individualResources) {
+			if (downloadItem instanceof SrtmDownloadItem) {
+				return (SrtmDownloadItem) downloadItem;
+			}
+		}
+		return null;
+	}
+
+	private static ContextMenuItem createSrtmDownloadItem(MapActivity mapActivity, SrtmDownloadItem srtmDownloadItem) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+
+		ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
+				.setLayout(R.layout.list_item_icon_and_download)
+				.setTitle(srtmDownloadItem.getVisibleName(app, app.getRegions(), false))
+				.setDescription(DownloadActivityType.SRTM_COUNTRY_FILE.getString(app))
+				.setIcon(DownloadActivityType.SRTM_COUNTRY_FILE.getIconResource())
+				.setListener(getOnSrtmItemClickListener(mapActivity, srtmDownloadItem))
+				.setProgressListener(getSrtmItemProgressListener(srtmDownloadItem, downloadThread));
+
+		if (srtmDownloadItem.isCurrentlyDownloading(downloadThread)) {
+			itemBuilder.setLoading(true)
+					.setProgress(downloadThread.getCurrentDownloadingItemProgress())
+					.setSecondaryIcon(R.drawable.ic_action_remove_dark);
+		} else {
+			itemBuilder.setSecondaryIcon(R.drawable.ic_action_import);
+		}
+
+		return itemBuilder.createItem();
+	}
+
+	private static ItemClickListener getOnSrtmItemClickListener(MapActivity mapActivity,
+	                                                            SrtmDownloadItem srtmDownloadItem) {
+		return (adapter, itemId, position, isChecked, viewCoordinates) -> {
+
+			OsmandApplication app = mapActivity.getMyApplication();
+			DownloadIndexesThread downloadThread = app.getDownloadThread();
+			ContextMenuItem item = adapter.getItem(position);
+			IndexItem indexItem = srtmDownloadItem.getIndexItem(downloadThread);
+
+			if (downloadThread.isDownloading(indexItem)) {
+				downloadThread.cancelDownload(indexItem);
+				if (item != null) {
+					item.setProgress(ContextMenuItem.INVALID_ID);
+					item.setLoading(false);
+					item.setSecondaryIcon(R.drawable.ic_action_import);
+					adapter.notifyDataSetChanged();
+				}
+			} else {
+				DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(mapActivity);
+				SelectIndexesHelper.showDialog(srtmDownloadItem, mapActivity, dateFormat, true, items -> {
+					IndexItem[] toDownload = new IndexItem[items.size()];
+					new DownloadValidationManager(app).startDownload(mapActivity, items.toArray(toDownload));
+					if (item != null) {
+						item.setProgress(ContextMenuItem.INVALID_ID);
+						item.setLoading(true);
+						item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
+						adapter.notifyDataSetChanged();
+					}
+				});
+			}
+
+			return false;
+		};
+	}
+
+	private static ProgressListener getSrtmItemProgressListener(SrtmDownloadItem srtmDownloadItem,
+	                                                            DownloadIndexesThread downloadThread) {
+		return (progressObject, progress, adapter, itemId, position) -> {
+			if (progressObject instanceof IndexItem) {
+				IndexItem progressItem = (IndexItem) progressObject;
+				if (srtmDownloadItem.getIndexItem(downloadThread).compareTo(progressItem) == 0) {
+					ContextMenuItem item = adapter.getItem(position);
+					if (item != null) {
+						item.setProgress(progress);
+						item.setLoading(true);
+						item.setSecondaryIcon(R.drawable.ic_action_remove_dark);
+						adapter.notifyDataSetChanged();
+					}
+					return true;
+				}
+			}
+			return false;
+		};
+	}
+
 	public static boolean isNightMode(OsmandApplication app) {
 		if (app == null) {
 			return false;

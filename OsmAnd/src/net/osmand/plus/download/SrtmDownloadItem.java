@@ -48,8 +48,13 @@ public class SrtmDownloadItem extends DownloadItem {
 
 	@NonNull
 	public IndexItem getIndexItem() {
+		return getIndexItem(null);
+	}
+
+	@NonNull
+	public IndexItem getIndexItem(@Nullable DownloadIndexesThread downloadThread) {
 		for (IndexItem index : indexes) {
-			if (index.isDownloaded()) {
+			if (index.isDownloaded() || (downloadThread != null && downloadThread.isDownloading(index))) {
 				return index;
 			}
 		}
@@ -110,6 +115,15 @@ public class SrtmDownloadItem extends DownloadItem {
 	public boolean isDownloading(@NonNull DownloadIndexesThread thread) {
 		for (IndexItem item : indexes) {
 			if (thread.isDownloading(item)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isCurrentlyDownloading(@NonNull DownloadIndexesThread thread) {
+		for (IndexItem item : indexes) {
+			if (item.equals(thread.getCurrentDownloadingItem())) {
 				return true;
 			}
 		}
