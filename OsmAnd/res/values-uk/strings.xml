@@ -398,7 +398,7 @@
     <string name="renderers_descr">Виберіть стиль відтворення мапи</string>
     <string name="poi_context_menu_website">Показати сайт POI</string>
     <string name="poi_context_menu_call">Показати телефон POI</string>
-    <string name="website">Веб-сайт</string>
+    <string name="website">Вебсайт</string>
     <string name="phone">телефон</string>
     <string name="download_type_to_filter">фільтрувати</string>
     <string name="use_high_res_maps">Дисплей високої роздільної здатності</string>

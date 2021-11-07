@@ -2150,7 +2150,7 @@
     <string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
     <string name="quick_action_page_list_descr">Bouton pour faire défiler la liste ci-dessous.</string>
     <string name="rendering_attr_depthContours_description">Afficher les lignes et points de sonde.</string>
-    <string name="rendering_attr_depthContours_name">Lignes de sonde de profondeur</string>
+    <string name="rendering_attr_depthContours_name">Lignes de sonde marines</string>
     <string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
     <string name="average_altitude">Altitude moyenne</string>
     <string name="total_distance">Distance totale</string>
@@ -2243,7 +2243,7 @@
 \n 
 \nFonctionnalités principales :</string>
     <string name="sea_depth_thanks">Merci d\'avoir acheté le greffon Lignes de sonde marines</string>
-    <string name="index_item_depth_contours_osmand_ext">Isobathes</string>
+    <string name="index_item_depth_contours_osmand_ext">Lignes de sonde marines</string>
     <string name="index_item_depth_points_southern_hemisphere">Lignes de sonde marines pour l\'hémisphère sud</string>
     <string name="index_item_depth_points_northern_hemisphere">Lignes de sonde marines pour l\'hémisphère nord</string>
     <string name="download_depth_countours">Lignes de sonde marines</string>
@@ -4238,7 +4238,7 @@
     <string name="on_hold_since">En attente depuis %1$s</string>
     <string name="active_till">Actif jusqu\'au %1$s</string>
     <string name="promo_subscription">Abonnement promotionnel</string>
-    <string name="track_has_no_needed_data">Il manque des données nécessaires dans la trace.</string>
+    <string name="track_has_no_needed_data">La trace ne contient pas ces données.</string>
     <string name="connect_track_points_as">Relier les points de passage</string>
     <string name="direct_line_maps_required_descr">Le calcul d\'itinéraire est plus long que d\'habitude.
 \n
@@ -4266,7 +4266,7 @@
     <string name="purchases_feature_desc_pro_widgets">Accédez aux fonctionnalités d\'OsmAnd Pro comme les itinéraires colorés et bien plus encore.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explorez les offres OsmAnd et trouvez celle qui vous convient.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Couleur des itinéraires en fonction du type de réseau (international, régional, local).</string>
-    <string name="walking_route_osmc_description">Couleur des itinéraires en fonction de leurs définitions locale (si elle est connue d’OpenStreetMap) et du type d\'itinéraire (international, régional, local).</string>
+    <string name="walking_route_osmc_description">Colore les itinéraires en fonction de leurs définitions locale (si elle est connue d’OpenStreetMap) et du type d\'itinéraire (international, régional, local).</string>
     <string name="backup_error_no_subscription">Aucun abonnement en cours</string>
     <string name="map_updates_for_mappers">Mises à jour des cartes pour les contributeurs OSM</string>
     <string name="benefits_for_contributors_primary_descr">Les contributeurs actifs d\'OpenStreetMap bénéficient des mises à jour horaires et illimitées des cartes.</string>
@@ -4286,11 +4286,11 @@
 \nCe débit sera renouvelé automatiquement sauf si vous annulez votre abonnement.
 \n
 \nGérez ou annulez vos abonnements à tout moment depuis vos paramètres Amazon.</string>
-    <string name="routeInfo_tracktype_description">Colore les routes et chemins en fonction de leur surface. S\'applique généralement aux routes non revêtues.</string>
-    <string name="routeInfo_roadClass_description">Colore les routes et chemins en fonction d\'une classification.</string>
+    <string name="routeInfo_tracktype_description">Colore les routes et chemins en fonction de leur surface. Très utile lorsque le réseau routier contient beaucoup de routes non revêtues.</string>
+    <string name="routeInfo_roadClass_description">Colore les routes et chemins selon leur classification.</string>
     <string name="routeInfo_winter_ice_road_description">Colore les routes et chemins selon si ils sont praticables ou non en période hivernale.</string>
-    <string name="routeInfo_smoothness_description">Fournit un système de classification en fonction des caractéristiques physiques des voies pour les véhicules à roues, notamment en ce qui concerne la nature et la régularité de leurs surfaces.</string>
-    <string name="routeInfo_surface_description">Fournit des informations supplémentaires sur la surface physique des routes / chemins.</string>
+    <string name="routeInfo_smoothness_description">Classification des caractéristiques physiques des voies pour les véhicules à roues, notamment la nature et la régularité de leurs surfaces.</string>
+    <string name="routeInfo_surface_description">Fournit des informations sur la surface des routes / chemins.</string>
     <string name="no_items_of_type_message">Vous n’avez aucun élément de ce type</string>
     <string name="release_4_0">• Sauvegarde dans le cloud
 \n
@@ -4338,9 +4338,9 @@
     <string name="exit_pan_mode_descr">Appuyez sur Sélectionner pour quitter le mode panoramique</string>
     <string name="icon_group_nautical">Nautisme</string>
     <string name="shared_storage_warning_title">Modification des règles d\'accès au stockage</string>
-    <string name="shared_app_storage_description">La mémoire partagée n\'est plus disponible depuis l\'évolution des règles Android d\'accès au stockage.</string>
+    <string name="shared_app_storage_description">La mémoire partagée n\'est plus disponible depuis l\'évolution des règles Android sur l\'accès au stockage.</string>
     <string name="internal_app_storage_description">Stockage interne, masqué à l\'utilisateur et aux autres applications ; seul OsmAnd peut accéder à vos données.</string>
-    <string name="purchases_feature_desc_android_auto">Cartes et navigation hors ligne OsmAnd s\'affichant sur l\'écran de votre véhicule et répondant aux commandes de votre véhicule.</string>
+    <string name="purchases_feature_desc_android_auto">Les cartes et la navigation hors ligne OsmAnd s\'affichent sur l\'écran de votre véhicule et répondent aux commandes de votre véhicule.</string>
     <string name="shared_string_details">Détails</string>
     <string name="rendering_attr_noNatureReserves_name">Réserve naturelle</string>
     <string name="rendering_attr_noNatureReserves_description">Masquer les réserves naturelles, les zones protégées et les parcs nationaux.</string>
@@ -4355,7 +4355,7 @@
     <string name="location_access_request_title">OsmAnd doit connaitre votre position pour vous guider.</string>
     <string name="shared_storage_warning_description">À partir de novembre 2021, OsmAnd 4.2 n\'aura plus accès au stockage partagé, car Android va modifier les règles d\'accès au stockage.
 \n
-\nVeuillez remplacer le stockage partagé par une autre stockage disponible, sans quoi l\'application ne pourra plus accéder à vos données comme les cartes hors ligne, les traces GPX ...</string>
+\nVeuillez remplacer le stockage partagé par une autre stockage disponible, sans quoi l\'application ne pourra plus accéder à vos données comme les cartes hors ligne ou vos traces GPX ...</string>
     <string name="markers_history_is_disabled_descr">Activez l\'historique pour mémoriser les marques visitées.</string>
     <string name="is_disabled">%1$s est désactivé</string>
     <string name="shortcut_navigate_to">Naviguer vers…</string>
@@ -4383,4 +4383,26 @@
     <string name="display_route_tracks_as_poi">Afficher les traces en tant que PI</string>
     <string name="delete_history_items_descr">Voulez-vous vraiment supprimer les éléments d’historique sélectionnés \?</string>
     <string name="delete_history_items">Supprimer %1$s éléments d’historique \?</string>
+    <string name="quick_action_toggle_preference">Un bouton à bascule pour modifier l\'état de l\'option sélectionnée.</string>
+    <string name="release_4_1">- Première prise en charge d\'Android Auto
+\n
+\n - Mise à jour de l\'interface utilisateur pour la recherche de coordonnées UTM
+\n
+\n - Favoris : possibilité d\'afficher les icônes récemment utilisés
+\n
+\n - Planification d\'itinéraire : le profil sélectionné est désormais utilisé
+\n
+\n - Correction de la couche Mapillary, le greffon est maintenant désactivé par défaut
+\n
+\n - Ajout d\'un écran pour gérer tout l\'historique dans l\'application
+\n
+\n - L\'orientation de la carte n\'est pas réinitialisée après le redémarrage de l\'application
+\n
+\n - Amélioration du rendu des marqueurs de hauteur SRTM
+\n
+\n - Correction des légendes de cartes en arabe
+\n
+\n - Correction de différents problèmes de routage
+\n
+\n</string>
 </resources>

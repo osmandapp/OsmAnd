@@ -4009,7 +4009,7 @@
     <string name="poi_hampshire_gate">Хэмпширские ворота</string>
     <string name="poi_driver_training">Учебная площадка автошколы</string>
     <string name="poi_research_institute">Научно-исследовательский институт</string>
-    <string name="poi_coffee_yes">Да</string>
+    <string name="poi_coffee_yes">Есть</string>
     <string name="poi_coffee_no">Нет</string>
     <string name="poi_butcher_beef">Говядина</string>
     <string name="poi_butcher_poultry">Птица</string>
@@ -4018,8 +4018,8 @@
     <string name="poi_payment_reverse_charge_calls_yes">За счёт вызываемого абонента: да</string>
     <string name="poi_butcher_pork">Свинина</string>
     <string name="poi_butcher_halal">Халяль</string>
-    <string name="poi_ice_cream_yes">Да</string>
-    <string name="poi_tobacco_yes">Да</string>
+    <string name="poi_ice_cream_yes">Есть</string>
+    <string name="poi_tobacco_yes">Есть</string>
     <string name="poi_membership_yes">Да</string>
     <string name="poi_agrarian_tools">Инструменты</string>
     <string name="poi_membership_no">Нет</string>
@@ -4036,9 +4036,9 @@
     <string name="poi_beauty_salon_massage">Массаж</string>
     <string name="poi_beauty_salon_pedicure">Педикюр</string>
     <string name="poi_agrarian_agricultural_machinery">Сельскохозяйственная техника</string>
-    <string name="poi_agrarian_yes">Да</string>
+    <string name="poi_agrarian_yes">Есть</string>
     <string name="poi_heating_radiator">Радиатор</string>
-    <string name="poi_fridge_yes">Да</string>
+    <string name="poi_fridge_yes">Есть</string>
     <string name="poi_fridge_no">Нет</string>
     <string name="poi_fumarole">Фумарола</string>
     <string name="poi_glacier_status_marked_retreat">Состояние ледника: заметное отступление</string>
@@ -4054,4 +4054,22 @@
     <string name="poi_butcher_horse">Конина</string>
     <string name="poi_butcher_lamb">Баранина</string>
     <string name="poi_beauty_salon_eyelash">Ресницы</string>
+    <string name="poi_faculty_aerospace">Космонавтика</string>
+    <string name="poi_faculty_chemistry">Химия</string>
+    <string name="poi_faculty_economics">Экономика</string>
+    <string name="poi_faculty_architecture">Архитектура</string>
+    <string name="poi_faculty_arts">Искусство</string>
+    <string name="poi_faculty_communication">Коммуникация</string>
+    <string name="poi_faculty_biology">Биология</string>
+    <string name="poi_membership_filter">Требуется членство</string>
+    <string name="poi_agrarian_type">Сельскохозяйственные товары</string>
+    <string name="poi_fridge_filter">Холодильник</string>
+    <string name="poi_faculty_education">Образование</string>
+    <string name="poi_faculty_engineering">Инжиниринг</string>
+    <string name="poi_faculty_geography">География</string>
+    <string name="poi_faculty_law">Право</string>
+    <string name="poi_faculty_mathematics">Математика</string>
+    <string name="poi_faculty_medicine">Медицина</string>
+    <string name="poi_faculty_nursing">Уход</string>
+    <string name="poi_faculty_psychology">Психология</string>
 </resources>
