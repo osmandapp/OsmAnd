@@ -4270,7 +4270,7 @@
     <string name="remove_group_from_markers">הסרת קבוצה מרשימת הסמנים</string>
     <string name="start_point">התחלה</string>
     <string name="mapillary_menu_filter_description_new">סינון תמונות לפי תאריך או לפי סוג. פעיל רק בתקריב קרוב.</string>
-    <string name="service_is_not_available_please_try_later">השירות אינו זמין, נא לנסות שוב בהמשך</string>
+    <string name="service_is_not_available_please_try_later">השירות אינו זמין. נא לנסות שוב בהמשך.</string>
     <string name="shared_string_files">קבצים</string>
     <string name="travel_route_types">סוגי מסלולים</string>
     <string name="no_items_of_type_message">אין לך פריטים מהסוג הזה</string>
@@ -4302,9 +4302,9 @@
     <string name="shared_storage_warning_title">שינוי בכללי הגישה לאחסון</string>
     <string name="shared_string_articles">ערכים</string>
     <string name="android_auto_map_placeholder_title">המפה מוצגת על המסך במכונית.</string>
-    <string name="continue_on_phone">להמשיך בטלפון</string>
+    <string name="continue_on_phone">להמשיך במכשיר הנייד</string>
     <string name="android_auto_purchase_request_title">יש לרכוש את OsmAnd Pro או את Maps+‎ כדי להשתמש ב־OsmAnd עם Android Auto</string>
-    <string name="location_access_request_title">ל־OsmAnd דרושה גישה למיקום לצורך ניווט</string>
+    <string name="location_access_request_title">ל־OsmAnd דרושה הרשאה למיקום כדי לנווט.</string>
     <string name="location_access_request_action">הענקת גישה</string>
     <string name="android_auto_map_placeholder_descr">נא לנתק את המכשיר שלך מ־Android Auto כדי לצפות במפה ביישומון.</string>
     <string name="location_access_request_result">אושר: %1$s נדחה: %2$s</string>
@@ -4320,14 +4320,12 @@
     <string name="routeInfo_surface_description">אספקת מידע נוסף על המשטח הפיזי של כבישים/דרכים.</string>
     <string name="exit_pan_mode_descr">יש ללחוץ על בחירה כדי לצאת ממצב הסריקה</string>
     <string name="purchases_feature_desc_android_auto">המפות הבלתי מקוונות של OsmAnd והניווט ישירות על מסך המכונית שלך. עם שילוב נוח בפקדי המכונית.</string>
-    <string name="clear_all_history_warning">לפנות את כל ההיסטוריה ביישומון\?
-\n
-\nהחיפוש, הניווט והיסטוריית הסמנים יימחקו.</string>
+    <string name="clear_all_history_warning">לפנות את כל ההיסטוריה ביישומון לרבות החיפוש, הניווט והיסטוריית הסמנים\?</string>
     <string name="icon_group_nautical">ימי</string>
     <string name="transparent_status_bar_descr">הצגת מפה מתחת לסרגל המצב</string>
     <string name="transparent_status_bar">סרגל מצב שקוף</string>
-    <string name="search_history_is_disabled_descr">אפשר להפעיל היסטוריית חיפוש בהגדרות</string>
-    <string name="markers_history_is_disabled_descr">הפעלת היסטוריה תאפשר לך לקבל רשימת סמני מפה שביקרת בהם.</string>
+    <string name="search_history_is_disabled_descr">אפשר להפעיל את היסטוריית החיפוש בהגדרות.</string>
+    <string name="markers_history_is_disabled_descr">יש להפעיל את ההיסטוריה כדי לזכור את רשימת סמני המפה שביקרת בהם.</string>
     <string name="travel_routes">מסלולי טיול</string>
     <string name="direct_line_maps_required_descr">חישוב המסלול אורך מעבר למתוכנן.
 \n
@@ -4350,7 +4348,7 @@
     <string name="rendering_attr_noNatureReserves_description">הסתרת שמורות טבע, אזורים מוגנים ופארקים לאומיים.</string>
     <string name="use_external_timestamps">שימוש בחותמות זמן חיצוניות</string>
     <string name="approx_safe_mode_description">ביצוע הערכת GPX באמצעות שיטה אטית של Android במקום בקוד מובנה.</string>
-    <string name="history_is_disabled_descr">יש להפעיל היסטוריה כדי לגשת לתוצאות בהן השתמשת לאחרונה מהר יותר.</string>
+    <string name="history_is_disabled_descr">יש להפעיל את ההיסטוריה כדי לגשת לתוצאות בהן השתמשת לאחרונה מהר יותר.</string>
     <string name="routes_color_by_type">צביעת מסלולים לפי…</string>
     <string name="explore_osmnad_plans_to_find_suitable">ניתן לחקור את התכניות של OsmAnd ולמצוא אחת שמתאימה לך.</string>
     <string name="purchases_feature_desc_pro_widgets">קבלת גישה לתכונות מקצועיות של OsmAnd: צביעת מסלולים ועוד.</string>
