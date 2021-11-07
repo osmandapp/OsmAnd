@@ -53,15 +53,7 @@ public class PreviousRouteCard extends MapBaseCard {
 		destinationName = getPointName(app, destinationPoint);
 		destinationTitle.setText(destinationName);
 		View button = view.findViewById(R.id.card_button);
-		button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CardListener listener = getListener();
-				if (listener != null) {
-					listener.onCardButtonPressed(PreviousRouteCard.this, 0);
-				}
-			}
-		});
+		button.setOnClickListener(v -> notifyButtonPressed(0));
 	}
 
 	public static String getPointName(@NonNull OsmandApplication app, @Nullable TargetPoint point) {

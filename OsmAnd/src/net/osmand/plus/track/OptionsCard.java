@@ -1,15 +1,8 @@
 package net.osmand.plus.track;
 
-import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-
-import androidx.annotation.NonNull;
 
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
@@ -33,6 +26,11 @@ import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+
+import static net.osmand.plus.GpxSelectionHelper.isGpxFileSelected;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
 
 public class OptionsCard extends MapBaseCard {
 
@@ -140,7 +138,7 @@ public class OptionsCard extends MapBaseCard {
 					showOnMapItem[0].setChecked(checked);
 					showOnMapItem[0].setIcon(checked ? showIcon : hideIcon);
 
-					notifyCardListener(SHOW_ON_MAP_BUTTON_INDEX);
+					notifyButtonPressed(SHOW_ON_MAP_BUTTON_INDEX);
 				})
 				.create();
 		return showOnMapItem[0];
@@ -151,7 +149,7 @@ public class OptionsCard extends MapBaseCard {
 				.setIcon(getActiveIcon(R.drawable.ic_action_appearance))
 				.setTitle(app.getString(R.string.shared_string_appearance))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> notifyCardListener(APPEARANCE_BUTTON_INDEX))
+				.setOnClickListener(v -> notifyButtonPressed(APPEARANCE_BUTTON_INDEX))
 				.create();
 	}
 
@@ -160,7 +158,7 @@ public class OptionsCard extends MapBaseCard {
 				.setIcon(getActiveIcon(R.drawable.ic_action_gdirections_dark))
 				.setTitle(app.getString(R.string.follow_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> notifyCardListener(DIRECTIONS_BUTTON_INDEX))
+				.setOnClickListener(v -> notifyButtonPressed(DIRECTIONS_BUTTON_INDEX))
 				.create();
 	}
 
@@ -180,7 +178,7 @@ public class OptionsCard extends MapBaseCard {
 					joinGapsItem[0].setChecked(checked);
 					joinGapsItem[0].setIcon(checked ? joinGapsEnabledIcon : joinGapsDisabledIcon);
 
-					notifyCardListener(JOIN_GAPS_BUTTON_INDEX);
+					notifyButtonPressed(JOIN_GAPS_BUTTON_INDEX);
 				})
 				.create();
 		return joinGapsItem[0];
@@ -191,7 +189,7 @@ public class OptionsCard extends MapBaseCard {
 				.setIcon(getActiveIcon(R.drawable.ic_action_analyze_intervals))
 				.setTitle(app.getString(R.string.analyze_on_map))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> notifyCardListener(ANALYZE_ON_MAP_BUTTON_INDEX))
+				.setOnClickListener(v -> notifyButtonPressed(ANALYZE_ON_MAP_BUTTON_INDEX))
 				.create();
 	}
 
@@ -200,7 +198,7 @@ public class OptionsCard extends MapBaseCard {
 				.setIcon(getActiveIcon(R.drawable.ic_action_analyze_intervals))
 				.setTitle(app.getString(R.string.analyze_by_intervals))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> notifyCardListener(ANALYZE_BY_INTERVALS_BUTTON_INDEX))
+				.setOnClickListener(v -> notifyButtonPressed(ANALYZE_BY_INTERVALS_BUTTON_INDEX))
 				.create();
 	}
 
@@ -210,7 +208,7 @@ public class OptionsCard extends MapBaseCard {
 				.setIcon(AndroidUtils.getDrawableForDirection(app, shareIcon))
 				.setTitle(app.getString(R.string.shared_string_share))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> notifyCardListener(SHARE_BUTTON_INDEX))
+				.setOnClickListener(v -> notifyButtonPressed(SHARE_BUTTON_INDEX))
 				.create();
 	}
 
@@ -221,7 +219,7 @@ public class OptionsCard extends MapBaseCard {
 					.setIcon(getActiveIcon(R.drawable.ic_action_upload_to_openstreetmap))
 					.setTitle(app.getString(R.string.upload_to_openstreetmap))
 					.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-					.setOnClickListener(v -> notifyCardListener(UPLOAD_OSM_BUTTON_INDEX))
+					.setOnClickListener(v -> notifyButtonPressed(UPLOAD_OSM_BUTTON_INDEX))
 					.create();
 		}
 		return null;
@@ -233,7 +231,7 @@ public class OptionsCard extends MapBaseCard {
 				.setIcon(AndroidUtils.getDrawableForDirection(app, editIcon))
 				.setTitle(app.getString(R.string.edit_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> notifyCardListener(EDIT_BUTTON_INDEX))
+				.setOnClickListener(v -> notifyButtonPressed(EDIT_BUTTON_INDEX))
 				.create();
 	}
 
@@ -243,7 +241,7 @@ public class OptionsCard extends MapBaseCard {
 				.setIcon(AndroidUtils.getDrawableForDirection(app, renameIcon))
 				.setTitle(app.getString(R.string.rename_track))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> notifyCardListener(RENAME_BUTTON_INDEX))
+				.setOnClickListener(v -> notifyButtonPressed(RENAME_BUTTON_INDEX))
 				.create();
 	}
 
@@ -258,15 +256,7 @@ public class OptionsCard extends MapBaseCard {
 				.setIcon(AndroidUtils.getDrawableForDirection(app, changeFolderIcon))
 				.setTitle(app.getString(R.string.change_folder))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_pad_32dp)
-				.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						CardListener listener = getListener();
-						if (listener != null) {
-							listener.onCardButtonPressed(OptionsCard.this, CHANGE_FOLDER_BUTTON_INDEX);
-						}
-					}
-				})
+				.setOnClickListener(v -> notifyButtonPressed(CHANGE_FOLDER_BUTTON_INDEX))
 				.create();
 	}
 
@@ -276,7 +266,7 @@ public class OptionsCard extends MapBaseCard {
 				.setIcon(AndroidUtils.getDrawableForDirection(app, gpxFilterIcon))
 				.setTitle(app.getString(R.string.shared_string_gps_filter))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> notifyCardListener(GPS_FILTER_BUTTON_INDEX))
+				.setOnClickListener(v -> notifyButtonPressed(GPS_FILTER_BUTTON_INDEX))
 				.create();
 	}
 
@@ -288,15 +278,8 @@ public class OptionsCard extends MapBaseCard {
 				.setIcon(getColoredIcon(R.drawable.ic_action_delete_dark, R.color.color_osm_edit_delete))
 				.setTitle(UiUtilities.createCustomFontSpannable(typeface, delete, delete))
 				.setLayoutId(R.layout.bottom_sheet_item_simple_pad_32dp)
-				.setOnClickListener(v -> notifyCardListener(DELETE_BUTTON_INDEX))
+				.setOnClickListener(v -> notifyButtonPressed(DELETE_BUTTON_INDEX))
 				.create();
-	}
-
-	private void notifyCardListener(int buttonIndex) {
-		CardListener listener = getListener();
-		if (listener != null) {
-			listener.onCardButtonPressed(this, buttonIndex);
-		}
 	}
 
 	private void inflateItems() {

@@ -40,12 +40,7 @@ public class ActionsCard extends BaseCard {
 		title.setTextColor(AndroidUtils.getColorFromAttr(view.getContext(), android.R.attr.textColorPrimary));
 		icon.setImageDrawable(getActiveIcon(R.drawable.ic_action_reset));
 
-		button.setOnClickListener(v -> {
-			CardListener listener = getListener();
-			if (listener != null) {
-				listener.onCardButtonPressed(ActionsCard.this, RESET_BUTTON_INDEX);
-			}
-		});
+		button.setOnClickListener(v -> notifyButtonPressed(RESET_BUTTON_INDEX));
 		if (button.getBackground() == null) {
 			AndroidUtils.setBackground(button, UiUtilities.getSelectableDrawable(app));
 		}
