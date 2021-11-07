@@ -22,7 +22,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.ValueHolder;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ColorUtilities;
@@ -54,7 +53,6 @@ import net.osmand.plus.routepreparationmenu.cards.SelectedTrackToFollowCard;
 import net.osmand.plus.routepreparationmenu.cards.TrackEditCard;
 import net.osmand.plus.routepreparationmenu.cards.TracksToFollowCard;
 import net.osmand.plus.routing.GPXRouteParams.GPXRouteParamsBuilder;
-import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.track.TrackSelectSegmentBottomSheet.OnSegmentSelectedListener;
 import net.osmand.plus.views.layers.MapControlsLayer.MapControlsThemeInfoProvider;
@@ -69,7 +67,7 @@ import java.util.List;
 
 
 public class FollowTrackFragment extends ContextMenuScrollFragment implements CardListener,
-		IRouteInformationListener, MapControlsThemeInfoProvider, OnSegmentSelectedListener {
+		MapControlsThemeInfoProvider, OnSegmentSelectedListener {
 
 	public static final String TAG = FollowTrackFragment.class.getName();
 
@@ -228,14 +226,12 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 	@Override
 	public void onResume() {
 		super.onResume();
-		app.getRoutingHelper().addListener(this);
 		MapRouteInfoMenu.followTrackVisible = true;
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		app.getRoutingHelper().removeListener(this);
 		MapRouteInfoMenu.followTrackVisible = false;
 	}
 
@@ -275,7 +271,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		}
 
 		RoutingHelper rh = app.getRoutingHelper();
-		if (rh.isRoutePlanningMode() && mapActivity.getMapView() != null) {
+		if (rh.isRoutePlanningMode()) {
 			QuadRect rect = mapActivity.getMapRouteInfoMenu().getRouteRect(mapActivity);
 
 			if (gpxFile != null) {
@@ -422,7 +418,7 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 						MapActivity mapActivity = getMapActivity();
 						if (mapActivity != null) {
 							selectTrackToFollow(result[0]);
-							updateSelectionMode(result[0].getNonEmptySegmentsCount() <= 1);
+							updateSelectionMode(result[0].getNonEmptySegmentsCount() != 1);
 						}
 						return true;
 					}
@@ -595,24 +591,6 @@ public class FollowTrackFragment extends ContextMenuScrollFragment implements Ca
 		} catch (Exception e) {
 			log.error(e);
 		}
-	}
-
-	@Override
-	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && newRoute && app.getRoutingHelper().isRoutePlanningMode()) {
-			adjustMapPosition(getHeight());
-		}
-	}
-
-	@Override
-	public void routeWasCancelled() {
-
-	}
-
-	@Override
-	public void routeWasFinished() {
-
 	}
 
 	@Override

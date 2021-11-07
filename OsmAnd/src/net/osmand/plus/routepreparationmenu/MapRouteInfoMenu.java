@@ -2150,6 +2150,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		return null;
 	}
 
+	@Nullable
+	public WeakReference<FollowTrackFragment> findFollowTrackFragment() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(FollowTrackFragment.TAG);
+			if (fragment instanceof FollowTrackFragment && !((FollowTrackFragment) fragment).isPaused()) {
+				return new WeakReference<>((FollowTrackFragment) fragment);
+			}
+		}
+		return null;
+	}
+
 	public static void showLocationOnMap(MapActivity mapActivity, double latitude, double longitude) {
 		RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
 		int tileBoxWidthPx = 0;
