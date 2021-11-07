@@ -37,6 +37,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
@@ -53,6 +54,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXInfo;
+import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.settings.backend.ExportSettingsType;
 import net.osmand.plus.settings.backend.backup.SettingsHelper;
@@ -67,12 +69,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -241,12 +239,12 @@ public class ImportHelper {
 	}
 
 	private void handleGpxImport(@NonNull Uri gpxFile, @NonNull String fileName, @Nullable OnSuccessfulGpxImport onGpxImport,
-								 boolean useImportDir, boolean save) {
+	                             boolean useImportDir, boolean save) {
 		executeImportTask(new GpxImportTask(this, activity, gpxFile, fileName, onGpxImport, useImportDir, save));
 	}
 
 	protected void handleGpxOrFavouritesImport(Uri fileUri, String fileName, boolean save, boolean useImportDir,
-											   boolean forceImportFavourites, boolean forceImportGpx) {
+	                                           boolean forceImportFavourites, boolean forceImportGpx) {
 		executeImportTask(new GpxOrFavouritesImportTask(this, activity, fileUri, fileName, save, useImportDir, forceImportFavourites, forceImportGpx));
 	}
 
@@ -295,8 +293,8 @@ public class ImportHelper {
 	}
 
 	protected void handleOsmAndSettingsImport(Uri uri, String name, final List<ExportSettingsType> settingsTypes,
-											  final boolean replace, boolean silentImport, String latestChanges, int version,
-											  CallbackWithObject<List<SettingsItem>> callback) {
+	                                          final boolean replace, boolean silentImport, String latestChanges, int version,
+	                                          CallbackWithObject<List<SettingsItem>> callback) {
 		executeImportTask(new SettingsImportTask(activity, uri, name, settingsTypes, replace, silentImport,
 				latestChanges, version, callback));
 	}
@@ -412,14 +410,14 @@ public class ImportHelper {
 	}
 
 	protected void handleResult(GPXFile result, String name, long fileSize, boolean save,
-								boolean useImportDir, boolean forceImportFavourites) {
+	                            boolean useImportDir, boolean forceImportFavourites) {
 		handleResult(result, name, OnSuccessfulGpxImport.OPEN_GPX_CONTEXT_MENU, fileSize, save, useImportDir,
 				forceImportFavourites);
 	}
 
 	protected void handleResult(final GPXFile result, final String name, OnSuccessfulGpxImport onGpxImport,
-								long fileSize, final boolean save, final boolean useImportDir,
-								boolean forceImportFavourites) {
+	                            long fileSize, final boolean save, final boolean useImportDir,
+	                            boolean forceImportFavourites) {
 		if (result != null) {
 			if (result.error != null) {
 				app.showToastMessage(result.error.getMessage());
@@ -524,8 +522,8 @@ public class ImportHelper {
 	}
 
 	protected void importGpxOrFavourites(final GPXFile gpxFile, final String fileName, final long fileSize,
-										 final boolean save, final boolean useImportDir,
-										 final boolean forceImportFavourites, final boolean forceImportGpx) {
+	                                     final boolean save, final boolean useImportDir,
+	                                     final boolean forceImportFavourites, final boolean forceImportGpx) {
 		if (gpxFile == null || gpxFile.isPointsEmpty()) {
 			if (forceImportFavourites) {
 				if (AndroidUtils.isActivityNotDestroyed(activity)) {
@@ -597,8 +595,8 @@ public class ImportHelper {
 					point.setIconIdFromName(iconName);
 				}
 				point.setBackgroundType(BackgroundType.getByTypeName(p.getBackgroundType(), DEFAULT_BACKGROUND_TYPE));
-				if (!Algorithms.isEmpty(extensions.get("creation_date"))) {
-					point.setCreationDate(parseTime(extensions.get("creation_date")));
+				if (!Algorithms.isEmpty(extensions.get(ItineraryDataHelper.CREATION_DATE))) {
+					point.setCreationDate(GPXUtilities.parseTime(extensions.get(ItineraryDataHelper.CREATION_DATE)));
 				}
 				favourites.add(point);
 			}
@@ -629,27 +627,5 @@ public class ImportHelper {
 		} else {
 			importTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 		}
-	}
-
-	public static long parseTime(String text) {
-		long time = 0;
-		if (text != null) {
-			try {
-				String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
-				SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
-				format.setTimeZone(TimeZone.getTimeZone("UTC"));
-				time = format.parse(text).getTime();
-			} catch (ParseException e1) {
-				try {
-					String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
-					SimpleDateFormat formatMillis = new SimpleDateFormat(GPX_TIME_FORMAT_MILLIS, Locale.US);
-					formatMillis.setTimeZone(TimeZone.getTimeZone("UTC"));
-					time = formatMillis.parse(text).getTime();
-				} catch (ParseException e2) {
-
-				}
-			}
-		}
-		return time;
 	}
 }

@@ -1,5 +1,8 @@
 package net.osmand.plus.settings.backend.backup.items;
 
+import static net.osmand.IndexConstants.GPX_FILE_EXT;
+import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
+
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -28,9 +31,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.IndexConstants.GPX_FILE_EXT;
-import static net.osmand.plus.importfiles.ImportHelper.asFavourites;
 
 public class FavoritesSettingsItem extends CollectionSettingsItem<FavoriteGroup> {
 
