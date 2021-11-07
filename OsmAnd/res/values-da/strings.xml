@@ -36,7 +36,7 @@
     <string name="audionotes_plugin_name">Lyd-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Udvidelsen giver både en højdekurver overlejring og et reliefskygger, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.(Bemærk, at højdekurver og/eller relieflag er separate, yderligere data er tilgængelige efter aktivering af udvidelse.)
+    <string name="srtm_plugin_description">Udvidelsen giver både en højdekurve-overlejring og et lag med terrænskygger, der vises ovenpå OsmAnds standardkort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.(Bemærk, at højdekurver og/eller terrænskyggelag er separate, yderligere data er tilgængelige efter aktivering af udvidelse.)
 \n
 \nDe globale data (mellem 70° nord og 70° syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="srtm_plugin_name">Højdekurver</string>
@@ -215,7 +215,7 @@
     <string name="route_roundabout">Rundkørsel: tag afkørsel %1$d</string>
     <string name="route_kl">Hold til venstre og kør</string>
     <string name="route_kr">Hold til højre og kør</string>
-    <string name="layer_hillshade">Reliefskygger</string>
+    <string name="layer_hillshade">Terrænskyggelag</string>
     <string name="shared_string_target_points">Destinationer</string>
     <string name="map_widget_intermediate_distance">Mellemliggende destination</string>
     <string name="osmand_play_title_30_chars">OsmAnd kort &amp; navigation</string>
@@ -255,7 +255,7 @@
     <string name="online_map_settings_descr">Vælg online- eller cachelagrede kilder til kortfliser.</string>
     <string name="osmand_background_plugin_description">Viser indstillinger til at aktivere baggrundssporing og navigation ved periodisk at vække GPS-enheden (med slukket skærm).</string>
     <string name="osmand_accessibility_description">Gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller tekst-til-tale-tilbagemeldinger, fx automatisk at annoncere positionen.</string>
-    <string name="osmand_rastermaps_plugin_description">Adgang til mange typer af online (såkaldte kortfliser eller raster) kort, fra foruddefinerede OSM-kortfliser (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og reliefskygger osv.
+    <string name="osmand_rastermaps_plugin_description">Adgang til mange typer af online (såkaldte kortfliser eller raster) kort, fra foruddefinerede OSM-kortfliser (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og terrænskygger osv.
 \n
 \nEthvert af disse kort kan enten bruges som det vigtigste (basis) kort, der skal vises på skærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd\'s standard offline kort). Visse elementer af OsmAnd vektorkort kan skjules via \'Konfigurer kort\'-menuen for at gøre et eventuelt underlejringskortet mere synligt.
 \n
@@ -1688,7 +1688,7 @@
     <string name="show_free_version_banner_description">Vis banneret for den gratis version selv i den betalte version.</string>
     <string name="downloading_number_of_files">Henter - %1$d fil…</string>
     <string name="buy">Køb</string>
-    <string name="hillshade_layer_disabled">Reliefskygger er deaktiveret</string>
+    <string name="hillshade_layer_disabled">Terrænskyggelaget deaktiveret</string>
     <string name="activate_seamarks_plugin">Aktiver \'Søkort\' udvidelsen</string>
     <string name="activate_srtm_plugin">Aktiver Højdekurve-udvidelsen</string>
     <string name="later">Senere</string>
@@ -2085,7 +2085,7 @@
     <string name="rendering_value_medium_w_name">Mellem</string>
     <string name="rendering_value_low_name">Lav</string>
     <string name="rendering_attr_hideWaterPolygons_name">Skjul vand</string>
-    <string name="configure_screen_quick_action">Genveje</string>
+    <string name="configure_screen_quick_action">Genvej</string>
     <string name="quick_action_item_action">Genvej %d</string>
     <string name="quick_action_item_screen">Skærm %d</string>
     <string name="quick_action_add_marker">Tilføj kortmarkør</string>
@@ -2105,7 +2105,7 @@
     <string name="quick_action_add_favorite">Tilføj Favorit</string>
     <string name="dialog_add_action_title">Tilføj genvej</string>
     <string name="quick_actions_delete">Slet genvej</string>
-    <string name="quick_actions_delete_text">Slet genvej \"%s\"\?</string>
+    <string name="quick_actions_delete_text">Slet genvejen \"%s\"\?</string>
     <string name="quick_favorites_show_favorites_dialog">Vis dialogen Favoritter</string>
     <string name="quick_favorites_name_preset">Forudindstillet navn</string>
     <string name="quick_action_add_marker_descr">En knap til at tilføje en kortmarkør på skærmens centrum.</string>
@@ -2264,12 +2264,12 @@
 \n</string>
     <string name="osmand_extended_description_part4">Skikort 
 \nUdvidelsen viser skiløjper med angivelse af sværhedsgrad og yderligere oplysninger, såsom placering af lifte og andre faciliteter.</string>
-    <string name="osmand_extended_description_part5">Cykling 
-\n • Find cykelstier på kortet 
+    <string name="osmand_extended_description_part5">Cykling
+\n • Find cykelstier på kortet
 \n • GPS-navigation i cykeltilstand laver ruten ved hjælp af cykelstier
 \n • Se hastighed og højde
 \n • GPX optagelse kan optage turen og dele den
-\n • Via ekstra udvidelser kan der aktiveres højdekurver og relieflag</string>
+\n • Via ekstra udvidelser kan der aktiveres højdekurver og terrænskygger</string>
     <string name="osmand_extended_description_part6">Gåture, vandring, byrundtur
 \n • Kortet viser gang- og vandrestier
 \n • Wikipedia på det foretrukne sprog kan fortælle en masse i løbet af en byrundtur
@@ -2319,7 +2319,7 @@
 \n • Valgfrie stoppesteder for offentlig transport (bus, sporvogn, tog), herunder også linjenavne
 \n • Valgfri turoptagelse til lokal GPX-fil eller online tjeneste
 \n • Valgfri hastigheds og højdevisning
-\n • Visning af højdekurver og relieflag (med ekstra udvidelse)</string>
+\n • Visning af højdekurver og terrænskygger (med ekstra udvidelse)</string>
     <string name="osmand_plus_extended_description_part8">Anslået kortdækning og kvalitet:
 \n • Vesteuropa: ****
 \n • Østeuropa: ***
@@ -2384,7 +2384,7 @@
     <string name="srtm_menu_download_descr">Hent \'Højdekurve\' kort til brug i området.</string>
     <string name="shared_string_plugin">Udvidelse</string>
     <string name="srtm_purchase_header">Køb og installer Højdekurve-udvidelsen for at få vist graduerede lodrette områder.</string>
-    <string name="hillshade_menu_download_descr">Download overlejringskortet \'Reliefskygger\' for at vise vertikale skygger.</string>
+    <string name="hillshade_menu_download_descr">Download overlejringskortet \'Terrænskygger\' for at vise vertikale skygger.</string>
     <string name="hillshade_purchase_header">Installer Højdekurve-udvidelsen for at få vist graduerede lodrette områder.</string>
     <string name="hide_from_zoom_level">Begynd at skjule fra zoom-niveau</string>
     <string name="sorted_by_distance">Sorteret efter afstand</string>
@@ -2711,7 +2711,7 @@
     <string name="start_editing">Begynd redigering</string>
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
     <string name="welcome_to_open_beta">Velkommen til den åbne beta</string>
-    <string name="contour_lines_hillshade_maps">Højdekurver &amp; reliefskyggekort</string>
+    <string name="contour_lines_hillshade_maps">Højdekurver &amp; terrænskyggekort</string>
     <string name="download_wikipedia_description">Hent Wikipedia-artikler for %1$s og læs dem offline.</string>
     <string name="download_wikipedia_label">Hent Wikipedia-data</string>
     <string name="open_in_browser_wiki">Åbn artiklen online</string>
@@ -2998,7 +2998,7 @@
     <string name="third_party_routing_type">Tredjepartsruteberegning</string>
     <string name="application_profiles_descr">Vælg de profiler, der skal være synlige.</string>
     <string name="application_profiles">App-profiler</string>
-    <string name="quick_action_need_to_add_item_to_list">Tilføj mindst ét punkt til listen i \'Hurtig Handling\' under \'Indstillinger\'</string>
+    <string name="quick_action_need_to_add_item_to_list">Tilføj mindst ét punkt til listen i \'Genvej\' under \'Indstillinger\'</string>
     <string name="routing_attr_piste_type_downhill_name">Alpint og downhill skiløb</string>
     <string name="routing_attr_piste_type_downhill_description">Skiløjper til alpint skiløb eller downhill og adgang til skilifte.</string>
     <string name="routing_attr_piste_type_nordic_name">Langrend og nordisk skiløb</string>
@@ -3227,7 +3227,7 @@
     <string name="shared_string_memory_used_gb_desc">%1$s GB brugt</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB brugt</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB brugt</string>
-    <string name="contour_lines_and_hillshade">Højdekurver og reliefskygger</string>
+    <string name="contour_lines_and_hillshade">Højdekurver og terrænskygge</string>
     <string name="routing_attr_prefer_unpaved_name">Foretræk ikke-asfalterede veje</string>
     <string name="routing_attr_prefer_unpaved_description">Foretræk ikke-asfalterede veje.</string>
     <string name="update_all_maps">Opdater alle kort</string>
@@ -3451,17 +3451,17 @@
     <string name="recalc_angle_dialog_title">Mindste vinkel mellem placering og rute</string>
     <string name="recalc_angle_dialog_descr">Ekstra lige segment mellem placering og den beregnede rute vises, indtil ruten genberegnes</string>
     <string name="shared_string_terrain">Terræn</string>
-    <string name="hillshade_description">Reliefskyggekort viser hjælp af mørke nuancer skråninger, toppe og lavland.</string>
+    <string name="hillshade_description">Terrænskyggekort viser hjælp af mørke nuancer skråninger, toppe og lavland.</string>
     <string name="slope_description">Hældning bruger farver til visualisering af terrænstejlhed.</string>
     <string name="terrain_slider_description">Angiv de min. og max. zoomniveauer, som laget vil blive vist på.</string>
-    <string name="hillshade_download_description">Yderligere kort er nødvendige for at se reliefskygger på kortet.</string>
+    <string name="hillshade_download_description">Yderligere kort er nødvendige for at se terrænskygge på kortet.</string>
     <string name="slope_download_description">Yderligere kort er nødvendige for at se hældninger på kortet.</string>
     <string name="slope_read_more">Læs mere om hældninger på %1$s.</string>
     <string name="shared_string_transparency">Gennemsigtighed</string>
     <string name="shared_string_zoom_levels">Zoomniveauer</string>
     <string name="shared_string_legend">Tegnforklaring</string>
     <string name="terrain_empty_state_text">Viser terrænskygger eller hældninger på kortet. Læs mere om disse korttyper på vores hjemmeside.</string>
-    <string name="shared_string_hillshade">Reliefskygge</string>
+    <string name="shared_string_hillshade">Terrænskygge</string>
     <string name="import_complete_description">Alle data fra %1$s er importeret. Brug knapperne nedenfor til at åbne den nødvendige del af appen for at håndtere det.</string>
     <string name="items_added">Poster tilføjet</string>
     <string name="app_mode_ski_touring">Ski touring</string>
@@ -3528,7 +3528,7 @@
     <string name="search_poi_types">Søg efter IP-typer</string>
     <string name="search_poi_types_descr">Kombiner IP-typer fra forskellige kategorier. Tryk på knappen for at vælge alt, tryk på venstre side for valg af kategori.</string>
     <string name="mapillary_item">OsmAnd + Mapillary</string>
-    <string name="quick_action_item">Genveje</string>
+    <string name="quick_action_item">Genvej</string>
     <string name="radius_ruler_item">Radiusmåler</string>
     <string name="measure_distance_item">Mål afstand</string>
     <string name="travel_item">Rejser (Wikivoyage og Wikipedia)</string>
@@ -3551,7 +3551,7 @@
 \nDeaktiver ubrugte udvidelser for at skjule deres kontrolelementer. %1$s.</string>
     <string name="additional_actions_descr">Få adgang til disse handlinger ved at trykke på knappen “%1$s”.</string>
     <string name="legend_item_description">Vejledning til symbolik på kort.</string>
-    <string name="quick_action_switch_profile_descr">Handlingsknappen skifter mellem valgte profiler.</string>
+    <string name="quick_action_switch_profile_descr">Denne genvejsknap skifter mellem valgte profiler.</string>
     <string name="change_application_profile">Ændr app-profil</string>
     <string name="profiles_for_action_not_found">Kunne ikke finde sådanne profiler.</string>
     <string name="index_item_world_basemap_detailed">Verdensoversigtskort (detaljeret)</string>
@@ -4175,12 +4175,12 @@
 \nEn uge er 10080 minutter.
 \nEn måned er 43829 minutter.</string>
     <string name="tiles_storage_descr">Vælg hvordan du vil gemme downloadede kortfliser.</string>
-    <string name="export_import_quick_actions_with_profiles_promo">Eksporter eller importer hurtige handlinger med app-profiler.</string>
+    <string name="export_import_quick_actions_with_profiles_promo">Eksporter eller importer genveje med app-profiler.</string>
     <string name="quick_action_showhide_mapillary_descr">En omskifter til at vise eller skjule Mapillary-laget på kortet.</string>
     <string name="track_coloring_solid">Ensfarvet</string>
     <string name="route_between_points_warning_desc">Fastgør derefter dit spor til den nærmeste tilladte vej med en af dine navigationsprofiler for at bruge denne mulighed.</string>
     <string name="shared_string_enter_param">Angiv param</string>
-    <string name="delete_all_actions_message_q">Vil du uigenkaldeligt slette %d hurtige handlinger\?</string>
+    <string name="delete_all_actions_message_q">Vil du uigenkaldeligt slette %d genveje\?</string>
     <string name="screen_timeout">Skærm-timeout</string>
     <string name="uninstall_speed_cameras">Afinstaller fartkameraer</string>
     <string name="speed_camera_pois">Fartkamera-IP\'er</string>
