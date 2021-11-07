@@ -4320,18 +4320,18 @@
 \nВы можете управлять подписками и отменять их в настройках Amazon в любое время.</string>
     <string name="cancel_anytime_in_amazon_app">Отмена в любое время в Amazon App</string>
     <string name="amz_manage_subscription_descr">Для управления подпиской используйте приложение Amazon App или откройте веб-сайт Amazon.com под своим профилем.</string>
-    <string name="no_activity_for_intent">Не найдено подходящих приложений для выполнения этого действия</string>
+    <string name="no_activity_for_intent">Установите приложение, которое может выполнить это действие.</string>
     <string name="add_group_to_markers">Добавить группу в список маркеров</string>
     <string name="remove_group_from_markers">Удалить группу из списка маркеров</string>
     <string name="no_items_of_type_message">У вас нет элементов этого типа</string>
-    <string name="routeInfo_tracktype_description">Раскрашивание маршрута или трека в соответствии с состоянием дорог на основе состава их поверхности. Обычно применяется для дорог, где основная дорожная сеть состоит из грунтовых дорог.</string>
-    <string name="routeInfo_winter_ice_road_description">Раскрашивание маршрута или трека в соответствии с классификацией зимних дорог (зимников), которые доступны только в зимний период.</string>
-    <string name="routeInfo_smoothness_description">Предоставляет схему классификации в отношении физической пригодности пути для колесных транспортных средств, в отношении регулярности/ровности поверхности.</string>
-    <string name="routeInfo_surface_description">Предоставляет дополнительную информацию о физическом покрытии дорог/тротуаров.</string>
+    <string name="routeInfo_tracktype_description">Раскрашивание маршрута или трека на основе состава их поверхности. Обычно применяется, когда дорожная сеть в основном не имеет покрытия.</string>
+    <string name="routeInfo_winter_ice_road_description">Раскрашивание маршрута или трека в соответствии с классификацией зимних дорог (зимников).</string>
+    <string name="routeInfo_smoothness_description">Классификация пригодности дорог/тротуаров для колесных транспортных средств, в отношении регулярности/ровности поверхности.</string>
+    <string name="routeInfo_surface_description">Предоставляет информацию о физическом покрытии дорог/тротуаров.</string>
     <string name="routeInfo_roadClass_description">Раскрашивание маршрута или трека в соответствии с классификацией дорог.</string>
     <string name="start_point">Старт</string>
     <string name="mapillary_menu_filter_description_new">Фильтр изображений по дате или по типу. Активен только при увеличении крупным планом.</string>
-    <string name="service_is_not_available_please_try_later">Сервис недоступен, попробуйте позже</string>
+    <string name="service_is_not_available_please_try_later">Сервис недоступен. Повторите попытку позже.</string>
     <string name="shared_string_files">Файлы</string>
     <string name="travel_route_types">Типы маршрутов</string>
     <string name="shared_string_mini">мини</string>
@@ -4352,10 +4352,10 @@
     <string name="sample_wikivoyage">Образец Викигида</string>
     <string name="icon_group_nautical">Морские</string>
     <string name="shared_storage_warning_title">Изменения в правилах доступа к хранилищу</string>
-    <string name="purchases_feature_desc_android_auto">OsmAnd - оффлайн карты и навигация на экране вашего автомобиля. Удобная интеграция с органами управления вашего автомобиля.</string>
-    <string name="shared_app_storage_description">Общая память больше не доступна из-за изменений в правилах доступа к хранилищу в Android.</string>
+    <string name="purchases_feature_desc_android_auto">Выводит локальные карты и навигацию OsmAnd на экран вашего автомобиля и интегрируется с его элементами управления.</string>
+    <string name="shared_app_storage_description">Общая память больше не доступна из-за изменения доступа к хранилищу в Android.</string>
     <string name="shared_string_details">Детали</string>
-    <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений, никто кроме OsmAnd не может получить доступ к вашим данным</string>
+    <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от всех пользователей и других приложений, поэтому только OsmAnd может получить доступ к вашим данным.</string>
     <string name="included_categories">Включённые категории</string>
     <string name="shared_string_articles">Статьи</string>
     <string name="release_4_1">• Добавлена начальная поддержка Android Auto
@@ -4374,24 +4374,22 @@
 \n
 \n• Улучшена отрисовка отметок высот SRTM
 \n
-\n• Исправлено отображение арабского языка на карте
+\n• Исправлены надписи на карте на арабском языке
 \n
 \n• Исправлены различные проблемы с маршрутизацией
 \n
 \n</string>
     <string name="android_auto_map_placeholder_descr">Отключите устройство от Android Auto для просмотра карты в приложении.</string>
-    <string name="continue_on_phone">Продолжить на телефоне</string>
+    <string name="continue_on_phone">Продолжить на мобильном устройстве</string>
     <string name="android_auto_map_placeholder_title">Карта отображается на экране автомобиля.</string>
     <string name="android_auto_purchase_request_title">Приобретите OsmAnd Pro или Maps+, чтобы использовать OsmAnd с Android Auto</string>
-    <string name="location_access_request_title">OsmAnd требуется доступ к местоположению для навигации</string>
+    <string name="location_access_request_title">OsmAnd требуется доступ к местоположению для навигации.</string>
     <string name="location_access_request_action">Предоставление доступа</string>
     <string name="location_access_request_result">Одобрено: %1$s Отклонено: %2$s</string>
-    <string name="markers_history_is_disabled_descr">Включите историю для получения списка посещённых маркеров карты.</string>
+    <string name="markers_history_is_disabled_descr">Включите историю для запоминания списка посещённых маркеров карты.</string>
     <string name="history_is_disabled_descr">Включите историю для быстрого доступа к последним использованным результатам.</string>
     <string name="is_disabled">%1$s отключена</string>
-    <string name="clear_all_history_warning">Очистить всю историю в приложении\?
-\n
-\nИстория поиска, навигации и маркеров будет очищена.</string>
+    <string name="clear_all_history_warning">Очистить все записи истории приложения, включая поиск, навигацию и историю маркеров\?</string>
     <string name="clear_all_history">Очистить всю историю</string>
     <string name="search_history_is_disabled_descr">Включить историю поиска можно в настройках</string>
     <string name="transparent_status_bar">Прозрачная строка состояния</string>
@@ -4399,23 +4397,23 @@
     <string name="shortcut_navigate_to">Следовать до…</string>
     <string name="shortcut_navigate_to_work">На работу</string>
     <string name="transparent_status_bar_descr">Показать карту под строкой состояния</string>
-    <string name="shared_storage_warning_description">Начиная с ноября 2021 года OsmAnd 4.2 потеряет доступ к общему хранилищу в связи с изменением правил доступа в Android.
+    <string name="shared_storage_warning_description">В связи с новыми правилами Android, начиная с ноября 2021 года OsmAnd 4.2 потеряет доступ к общему хранилищу.
 \n
-\nИзмените хранилище с общего на доступное. Если этого не сделать, приложение потеряет доступ к вашим данным: офлайн картам, GPX трекам и всему остальному.</string>
+\nПереместите папку с данными из общего хранилища в доступное. Если этого не сделать, приложение потеряет доступ к вашим данным, таким как локальные карты, GPX треки и т.д.</string>
     <string name="navigation_history">История навигации</string>
     <string name="history_preferences_descr">Вы можете отключить ведение журнала индивидуально для каждого типа истории.</string>
     <string name="history_actions_descr">Вы можете экспортировать историю в файл.</string>
     <string name="map_markers_history">История маркеров карты</string>
     <string name="shortcut_start_recording">Начать запись</string>
-    <string name="approx_safe_mode_description">Выполнить аппроксимацию gpx, используя более медленный код Android вместо нативного.</string>
-    <string name="no_plugins_enabled">У вас не включены плагины. Список всех доступных плагинов можно найти в «Меню» → «Плагины».</string>
-    <string name="approx_safe_mode">Безопасная аппроксимация gpx</string>
+    <string name="approx_safe_mode_description">Выполнить аппроксимацию GPX, используя более медленный код Android вместо нативного.</string>
+    <string name="no_plugins_enabled">У вас не включены плагины. Список доступных плагинов можно найти в «Меню» → «Плагины».</string>
+    <string name="approx_safe_mode">Безопасная аппроксимация GPX</string>
     <string name="use_external_timestamps">Использовать внешние метки времени</string>
     <string name="safe_settings">Безопасные операции</string>
     <string name="use_external_timestamps_description">Использовать метки времени онлайн-маршрутизатора для настройки расчетного времени и средней скорости</string>
     <string name="display_route_tracks">Показать треки</string>
     <string name="shared_string_travelbooks">Путеводители</string>
     <string name="display_route_tracks_as_poi">Показать треки как POI</string>
-    <string name="delete_history_items">Удалить элементы истории %1$s\?</string>
+    <string name="delete_history_items">Удалить элементы истории (%1$s шт.)\?</string>
     <string name="delete_history_items_descr">Удалить выбранные элементы истории\?</string>
 </resources>
