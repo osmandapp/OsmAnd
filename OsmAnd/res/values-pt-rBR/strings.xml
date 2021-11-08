@@ -4343,8 +4343,7 @@
     <string name="purchases_feature_desc_android_auto">OsmAnd offline mapas e navegação na tela do seu veículo. Integrar convenientemente com os controles do seu veículo.</string>
     <string name="internal_app_storage_description">Armazenamento interno, oculto a partir do usuário e outros aplicativos, portanto, ninguém, exceto OsmAnd, não pode obter acesso aos seus dados</string>
     <string name="shared_storage_warning_title">Mudanças nas regras de acesso de armazenamento</string>
-    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
-    <string name="rendering_attr_noNatureReserves_description">Ocultar reserva natural, áreas protegidas e parques nacionais.</string>
+    <string name="rendering_attr_natureReserves_name">Reserva natural</string>
     <string name="shared_string_articles">Artigos</string>
     <string name="included_categories">Categorias incluídas</string>
     <string name="markers_history_is_disabled_descr">Ative o histórico para obter uma lista de marcadores de mapa visitados.</string>

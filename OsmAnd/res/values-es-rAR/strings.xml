@@ -4349,9 +4349,8 @@
     <string name="icon_group_nautical">Náutico</string>
     <string name="shared_app_storage_description">La memoria compartida ya no está disponible debido al cambio en el acceso al almacenamiento de Android.</string>
     <string name="shared_string_details">Detalles</string>
-    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
+    <string name="rendering_attr_natureReserves_name">Reserva natural</string>
     <string name="internal_app_storage_description">Almacenamiento interno, oculto para todos los usuarios y otras aplicaciones, por lo que sólo OsmAnd puede acceder a los datos.</string>
-    <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturales, áreas protegidas y parques nacionales.</string>
     <string name="included_categories">Categorías incluidas</string>
     <string name="shared_string_articles">Artículos</string>
     <string name="release_4_1">• Se ha añadido la compatibilidad inicial con Android Auto

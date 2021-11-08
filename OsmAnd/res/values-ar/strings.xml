@@ -4415,10 +4415,9 @@
     <string name="included_categories">الفئات المدرجة</string>
     <string name="shared_string_details">تفاصيل</string>
     <string name="shared_string_articles">مقالات</string>
-    <string name="rendering_attr_noNatureReserves_description">إخفاء المحميات الطبيعية والمناطق المحمية والمتنزهات الوطنية.</string>
     <string name="shared_app_storage_description">لم تعد الذاكرة المشتركة متاحة بسبب تغيير اذ الوصول للتخزين في Android.</string>
     <string name="internal_app_storage_description">التخزين الداخلي ، مخفي عن جميع المستخدمين والتطبيقات الأخرى ، لذلك لا أحد يمكنه الوصول إلى بياناتك باستثناء OsmAnd.</string>
-    <string name="rendering_attr_noNatureReserves_name">محمية طبيعية</string>
+    <string name="rendering_attr_natureReserves_name">محمية طبيعية</string>
     <string name="release_4_1">• تمت إضافة الدعم الأولي لنظام Android Auto
 \n
 \n • تحديث واجهة المستخدم ل تنسيق البحث UTM

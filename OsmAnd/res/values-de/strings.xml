@@ -4372,8 +4372,7 @@
 \n • Verschiedene Routingprobleme behoben
 \n
 \n</string>
-    <string name="rendering_attr_noNatureReserves_name">Naturschutzgebiet</string>
-    <string name="rendering_attr_noNatureReserves_description">Ausblenden von Naturschutzgebieten, Schutzgebieten und Nationalparks.</string>
+    <string name="rendering_attr_natureReserves_name">Naturschutzgebiet</string>
     <string name="internal_app_storage_description">Interner Speicher, versteckt vor allen Benutzern und anderen Anwendungen, so dass nur OsmAnd auf Ihre Daten zugreifen kann.</string>
     <string name="shared_string_details">Details</string>
     <string name="shared_app_storage_description">Gemeinsamer Speicher ist aufgrund des geänderten Android Speicherzugriffs nicht mehr verfügbar.</string>

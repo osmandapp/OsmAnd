@@ -4339,10 +4339,9 @@
     <string name="internal_app_storage_description">Belső tárhely (elrejtve a felhasználó és más alkalmazások elől), így az OsmAnd-on kívül senki sem férhet hozzá az adataihoz</string>
     <string name="shared_storage_warning_title">Változások a tárhely-hozzáférési szabályokban</string>
     <string name="purchases_feature_desc_android_auto">OsmAnd offline térképek és navigáció az autója képernyőjén. Kényelmesen integrálható a jármű kezelőszerveivel.</string>
-    <string name="rendering_attr_noNatureReserves_description">Természetvédelmi területek, védett területek és nemzeti parkok elrejtése.</string>
     <string name="shared_string_details">Részletek</string>
     <string name="shared_app_storage_description">A megosztott memória már nem érhető el az Android tárhely-hozzáférési szabályainak változásai miatt.</string>
-    <string name="rendering_attr_noNatureReserves_name">Természetvédelmi terület</string>
+    <string name="rendering_attr_natureReserves_name">Természetvédelmi terület</string>
     <string name="shared_string_articles">Cikkek</string>
     <string name="included_categories">Tartalmazott kategóriák</string>
     <string name="release_4_1">- Android Auto kezdeti támogatás
