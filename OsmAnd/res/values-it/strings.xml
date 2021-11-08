@@ -3290,7 +3290,7 @@
     <string name="edit_profiles">Modifica i profili</string>
     <string name="profile_appearance">Aspetto del profilo</string>
     <string name="choose_icon_color_name">Icona, colore e nome</string>
-    <string name="reorder_profiles">Modifica la lista del profilo</string>
+    <string name="reorder_profiles">Modifica la lista dei profili</string>
     <string name="selected_profile">Profilo selezionato</string>
     <string name="reset_confirmation_descr">Cliccando %1$s, tutte le modifiche andranno perse.</string>
     <string name="reset_all_profile_settings_descr">Tutte le impostazioni del profilo saranno reimpostate come da prima installazione.</string>
@@ -4399,4 +4399,5 @@
     <string name="shared_storage_warning_description">A causa delle nuove regole Android da novembre 2021 OsmAnd 4.2 perderà l\'accesso alla memoria condivisa.
 \n
 \nSposta i dati dalla Memoria condivisa alla memoria disponibile oppure l\'app perderà l\'accesso a dati quali mappe offline, tracce GPX, ecc.</string>
+    <string name="horseback_riding">A cavallo</string>
 </resources>
