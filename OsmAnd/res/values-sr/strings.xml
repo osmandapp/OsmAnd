@@ -4251,7 +4251,6 @@
     <string name="use_login_and_password">Користите своје корисничко име и лозинку</string>
     <string name="available_until">Доступно до %1$s</string>
     <string name="enough_contributions_descr">Честитамо, стекли сте довољно доприноса ОпенСртитМапама и сада можете уживати неограничено у освежавању карата Османда!</string>
-    <string name="not_enough_contributions_descr">Најмање %1$s доприноса OpenStreetMap карти кроз %2$s дана је неопходно.</string>
     <string name="shared_string_contributions">Доприноси</string>
     <string name="contributions_may_calculate_with_delay">Прорачунавање учешћа може потрајати неколико часова.</string>
     <string name="map_updates_are_unavailable_yet">Надоградње карата још увек нису доступне. :=(</string>

@@ -4365,7 +4365,6 @@
     <string name="use_login_and_password">استخدم اسم المستخدم وكلمة المرور</string>
     <string name="available_until">متاح حتى %1$s</string>
     <string name="enough_contributions_descr">تهانينا ، لقد قدمت ما يكفي من مساهمات OpenStreetMap ويمكنك الآن الاستمتاع بتحديثات خرائط OsmAnd غير محدودة!</string>
-    <string name="not_enough_contributions_descr">مطلوب ما لا يقل عن %1$s مساهمات OpenStreetMap في غضون %2$s يومًا.</string>
     <string name="shared_string_contributions">مساهمات</string>
     <string name="contributions_may_calculate_with_delay">حساب المساهمات قد يستغرق عدة ساعات .</string>
     <string name="map_updates_are_unavailable_yet">تحديث الخريطة غير متوفرة بعد :-(</string>

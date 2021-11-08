@@ -4310,7 +4310,6 @@
     <string name="use_login_and_password">Benutzername und Passwort verwenden</string>
     <string name="available_until">Verfügbar bis %1$s</string>
     <string name="enough_contributions_descr">Herzlichen Glückwunsch, Sie haben genügend Beiträge zu OpenStreetMap geleistet und können nun unbegrenzte Kartenaktualisierungen genießen!</string>
-    <string name="not_enough_contributions_descr">Mindestens %1$s Kartenbeiträge zu OpenStreetMap müssen innerhalb der letzten %2$s Tage verfasst worden sein.</string>
     <string name="shared_string_contributions">Beiträge</string>
     <string name="contributions_may_calculate_with_delay">Das Berechnen der Beiträge kann mehrere Stunden dauern.</string>
     <string name="map_updates_are_unavailable_yet">Kartenupdates sind noch nicht verfügbar :-(</string>

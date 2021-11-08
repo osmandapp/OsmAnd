@@ -4270,7 +4270,7 @@
     <string name="use_login_and_password">Ввести ім\'я користувача та пароль</string>
     <string name="available_until">Доступно до %1$s</string>
     <string name="enough_contributions_descr">Вітаємо, ви надали достатньо внесків OpenStreetMap і тепер можете насолоджуватися необмеженою кількістю оновлень мап OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Необхідно зробити щонайменше %1$s внесків до OpenStreetMap протягом %2$s днів.</string>
+    <string name="not_enough_contributions_descr">Щоб отримати безкоштовні оновлення, зробіть мінімум %1$s змін, у сумі за останні два місяці %2$s</string>
     <string name="shared_string_contributions">Внески</string>
     <string name="contributions_may_calculate_with_delay">Обчислення внесків може тривати кілька годин.</string>
     <string name="map_updates_are_unavailable_yet">Оновлення мап досі недоступні. :-(</string>

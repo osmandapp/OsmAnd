@@ -4276,7 +4276,6 @@
     <string name="use_login_and_password">Usar un nome d\'usuariu y una contraseña</string>
     <string name="available_until">Available until %1$s</string>
     <string name="enough_contributions_descr">Norabona, collaboresti abondo n\'OpenStreetMap y agora pues esfrutar de los anovamientos ensin llende pa los mapes d\'OsmAnd.</string>
-    <string name="not_enough_contributions_descr">At least %1$s OpenStreetMap contributions within %2$s days are required.</string>
     <string name="shared_string_contributions">Contributions</string>
     <string name="contributions_may_calculate_with_delay">Calculating the contributions may take several hours.</string>
     <string name="map_updates_are_unavailable_yet">Map updates are not yet available. :-(</string>

@@ -3730,7 +3730,6 @@
     <string name="use_login_and_password">Använd användarnamn och lösenord</string>
     <string name="available_until">Tillgänglig till %1$s</string>
     <string name="enough_contributions_descr">Grattis, du har bidragit tillräckligt mycket till OpenStreetMap och kan nu dra nytta av obegränsade kartuppdateringar i OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Minst %1$s bidrag till OpenStreetMap inom %2$s dagar krävs.</string>
     <string name="map_updates_are_unavailable_yet">Kartuppdateringar är ännu inte tillgängliga. :-(</string>
     <string name="shared_string_min_height">Lägsta höjd</string>
     <string name="shared_string_max_height">Högsta höjd</string>

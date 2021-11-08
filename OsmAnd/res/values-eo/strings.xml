@@ -4294,7 +4294,6 @@
     <string name="use_login_and_password">Uzi uzantnomon kaj pasvorton</string>
     <string name="available_until">Disponeblaj ĝis %1$s</string>
     <string name="enough_contributions_descr">Gratulon, vi sufiĉe kontribuis al OpenStreetMap kaj nun povas ĝui senlimajn ĝisdatigojn de mapoj!</string>
-    <string name="not_enough_contributions_descr">Almenaŭ %1$s kontribuoj al OpenStreetMap dum %2$s tagoj estas postulataj.</string>
     <string name="shared_string_contributions">Kontribuoj</string>
     <string name="contributions_may_calculate_with_delay">Kalkulado de kontribuoj povas okupi kelkajn horojn.</string>
     <string name="map_updates_are_unavailable_yet">Ĝisdatigoj de mapoj ankoraŭ ne estas disponeblaj :-(</string>

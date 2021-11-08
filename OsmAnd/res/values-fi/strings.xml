@@ -3648,7 +3648,6 @@
     <string name="purchases_feature_desc_monthly_map_updates">Saat käyttöösi säännölliset kuukausittaiset päivitykset offline-karttoihin.</string>
     <string name="purchases_feature_desc_hourly_map_updates">Hanki pääsy käyttämään tiheämpiä karttapäivityksiä. Tuntikohtaiset, päivittäiset tai viikoittaiset päivitykset. Päivitykset ladataan asteittain vain muutetulle alueelle.</string>
     <string name="purchases_feature_desc_osmand_cloud">Hanki OsmAnd Cloud tallentaaksesi kaikki OsmAnd tiedot verkkoon. Et menetä tietoja uudelleenasennuksen jälkeen. Varmuuskopioi ja palauta kaikki tiedot helposti.</string>
-    <string name="not_enough_contributions_descr">Vähintään %1$s OpenStreetMap-julkaisua vaaditaan %2$s päivän kuluessa.</string>
     <string name="voice_prompts_timetable">Äänikehotteiden ajat</string>
     <string name="osmand_plus_extended_description_part5">Turvallisuusominaisuudet
 \n - Valinnainen automaattinen päivä-/yönäkymän vaihto

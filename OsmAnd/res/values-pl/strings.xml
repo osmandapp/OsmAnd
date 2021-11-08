@@ -4297,7 +4297,6 @@
     <string name="walking_route_osmc_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i typu (międzynarodowe, regionalne, lokalne).</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolor trasy według typu sieci węzłów (międzynarodowy, regionalny, lokalny).</string>
     <string name="benefits_for_contributors_primary_descr">Aktywni współtwórcy OpenStreetMap.org mogą być uprawnieni do nieograniczonych godzinnych aktualizacji map.</string>
-    <string name="not_enough_contributions_descr">Wymagany jest co najmniej %1$s wkład OpenStreetMap w ciągu %2$s dni.</string>
     <string name="shared_string_contributions">Wkłady w rozwój</string>
     <string name="contributions_may_calculate_with_delay">Wkłady mogą być obliczane z kilkugodzinnymi opóźnieniami.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolor wg przeznaczenia trasy.</string>

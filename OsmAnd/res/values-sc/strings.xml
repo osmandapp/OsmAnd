@@ -4298,7 +4298,6 @@
     <string name="use_login_and_password">Imprea unu nùmene impreadore e una crae de intrada</string>
     <string name="available_until">A disponimentu finas a su %1$s</string>
     <string name="enough_contributions_descr">Bene meda, as fatu contributziones bastantes a OpenStreetMap e como ti podes godire agiornamentos chene lìmites de sas mapas de OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Serbint a su nessi %1$s contributziones a OpenStreetMap in sas ùrtimas %2$s dies.</string>
     <string name="shared_string_contributions">Contributziones</string>
     <string name="contributions_may_calculate_with_delay">Su càrculu de sas contributziones diat pòdere durare unas cantas oras.</string>
     <string name="map_updates_are_unavailable_yet">Non bi sunt galu agiornamentos a disponimentu pro sas mapas :-(</string>

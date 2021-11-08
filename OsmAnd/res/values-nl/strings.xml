@@ -4131,7 +4131,6 @@
     <string name="use_login_and_password">Gebruik gebruikersnaam en wachtwoord</string>
     <string name="available_until">Beschikbaar tot %1$s</string>
     <string name="enough_contributions_descr">Proficiat, je hebt genoeg bijdragen geleverd aan OpenStreetMap en kan nu genieten van onbeperkte OsmAnd kaart updates!</string>
-    <string name="not_enough_contributions_descr">Er zijn minsten %1$s OpenStreetMap bijdragen nodig in %2$s dagen.</string>
     <string name="shared_string_contributions">Bijdragen</string>
     <string name="contributions_may_calculate_with_delay">Het berekenen van de bijdragen kan enkele uren duren.</string>
     <string name="map_updates_are_unavailable_yet">Kaart updates zijn nog niet beschikbaar. :-(</string>

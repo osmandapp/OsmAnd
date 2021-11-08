@@ -4285,7 +4285,7 @@
     <string name="use_login_and_password">Используйте логин и пароль</string>
     <string name="available_until">Доступно до %1$s</string>
     <string name="enough_contributions_descr">Вы внесли достойный вклад в OpenStreetMap и теперь можете обновлять карты OsmAnd без ограничений!</string>
-    <string name="not_enough_contributions_descr">У вас должно быть не менее %1$s правок на OpenStreetMap за последние %2$s дней.</string>
+    <string name="not_enough_contributions_descr">Чтобы получить бесплатные обновления, сделайте минимум %1$s изменений, в сумме за последение два месяца %2$s</string>
     <string name="map_updates_are_unavailable_yet">Обновления карт пока недоступны :-(</string>
     <string name="online_maps_searching_descr">Онлайн-поиск.…</string>
     <string name="walking_route_osmc_description">Окраска на основе индивидуального цвета (если задано на OpenStreetMap) и типа (международный, региональный, местный).</string>

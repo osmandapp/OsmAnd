@@ -4284,7 +4284,6 @@ POIの更新は利用できません</string>
     <string name="use_login_and_password">パスワードを使用したログイン</string>
     <string name="available_until">まで利用可能</string>
     <string name="enough_contributions_descr">おめでとうございます。OpenStreetMapに十分な貢献をしたと判断され、無制限のマップ更新を受けることが可能になりました。</string>
-    <string name="not_enough_contributions_descr">過去%2$s日間、OpenStreetMapに少なくとも%1$sのマップコントリビューションを行う必要があります。</string>
     <string name="shared_string_contributions">貢献</string>
     <string name="contributions_may_calculate_with_delay">貢献度は、数時間の遅延で計算される場合があります。</string>
     <string name="map_updates_are_unavailable_yet">マップ更新はまだ利用できません(T-T )</string>

@@ -4262,7 +4262,6 @@
     <string name="on_hold_since">Pozastavené od %1$s</string>
     <string name="active_till">Aktívne do %1$s</string>
     <string name="track_has_no_needed_data">V stope chýbajú potrebné údaje.</string>
-    <string name="not_enough_contributions_descr">Vyžaduje sa aspoň %1$s príspevkov do OpenStreetMap za posledných %2$s dní.</string>
     <string name="shared_string_contributions">Príspevky</string>
     <string name="contributions_may_calculate_with_delay">Výpočet príspevkov môže trvať niekoľko hodín.</string>
     <string name="map_updates_are_unavailable_yet">Aktualizácie máp ešte nie sú dostupné :-(</string>
