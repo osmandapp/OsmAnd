@@ -4264,7 +4264,6 @@
     <string name="benefits_for_contributors_primary_descr">Korlátlan óránkénti térképfrissítésre lehet jogosult, ha aktívan hozzájárul az OpenStreetMap.org-hoz.</string>
     <string name="benefits_for_contributors_secondary_descr">Jelentkezzen be az OpenStreetMapre, hogy ellenőrizze, jogosult-e korlátlan havi és óránkénti térképfrissítésre.</string>
     <string name="enough_contributions_descr">Gratulálunk, elegendő szerkesztést végzett az OpenStreetMapen, így mostantól korlátlanul élvezheti az OsmAnd térképfrissítéseit!</string>
-    <string name="not_enough_contributions_descr">%2$s napon belül legalább %1$s OpenStreetMap-szerkesztés szükséges.</string>
     <string name="shared_string_contributions">Szerkesztések</string>
     <string name="contributions_may_calculate_with_delay">A szerkesztések kiszámítása több órát is igénybe vehet.</string>
     <string name="map_updates_are_unavailable_yet">Még nem érhető el térképfrissítés :-(</string>

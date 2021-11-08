@@ -4291,7 +4291,6 @@
     <string name="use_login_and_password">Use nome de usuário e senha</string>
     <string name="available_until">Disponível até %1$s</string>
     <string name="enough_contributions_descr">Parabéns, você forneceu contribuições suficientes para o OpenStreetMap e agora pode desfrutar de atualizações ilimitadas de mapas OsmAnd!</string>
-    <string name="not_enough_contributions_descr">São necessárias pelo menos %1$s contribuições do OpenStreetMap em %2$s dias.</string>
     <string name="shared_string_contributions">Contribuições</string>
     <string name="contributions_may_calculate_with_delay">O cálculo das contribuições pode levar várias horas.</string>
     <string name="map_updates_are_unavailable_yet">As atualizações do mapa ainda não estão disponíveis :-(</string>

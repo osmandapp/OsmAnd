@@ -3653,7 +3653,6 @@
     <string name="use_login_and_password">使用用户名和密码</string>
     <string name="available_until">直至%1$s可用</string>
     <string name="enough_contributions_descr">恭喜，你对OpenStreetMap贡献已经足够，现在请享受无限制的OsmAnd地图更新吧！</string>
-    <string name="not_enough_contributions_descr">需要%2$s天内至少%1$s的OpenStreetMap贡献。</string>
     <string name="shared_string_contributions">贡献</string>
     <string name="purchases_restored">购买已恢复</string>
     <string name="grey_color_undefined">灰色用于没有数据的部分。</string>

@@ -4289,7 +4289,6 @@
     <string name="use_login_and_password">使用使用者名稱與密碼</string>
     <string name="available_until">可用至 %1$s</string>
     <string name="enough_contributions_descr">恭喜！您提供 OpenStreetMap 夠多的貢獻，現在可以享受無限的 OsmAnd 地圖更新了！</string>
-    <string name="not_enough_contributions_descr">在%2$s天內至少需要 %1$s 次 OpenStreetMap 貢獻。</string>
     <string name="shared_string_contributions">貢獻</string>
     <string name="contributions_may_calculate_with_delay">計算貢獻可能需要數小時。</string>
     <string name="map_updates_are_unavailable_yet">地圖更新尚不可用 :-(</string>

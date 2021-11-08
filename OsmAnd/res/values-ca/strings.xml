@@ -3823,7 +3823,6 @@
     <string name="use_login_and_password">Utilitzeu nom d\'usuari i contrasenya</string>
     <string name="available_until">Disponible fins al %1$s</string>
     <string name="enough_contributions_descr">Enhorabona, heu fet prou contribucions a OpenStreetMap per disposar il·limitadament d\'actualitzacions de mapes.</string>
-    <string name="not_enough_contributions_descr">Heu de fer com a mínim %1$s contribucions al mapa de OpenStreetMap en els darrers %2$s dies.</string>
     <string name="shared_string_contributions">Aportacions</string>
     <string name="contributions_may_calculate_with_delay">Les aportacions podrien trigar unes hores en incloure\'s.</string>
     <string name="map_updates_are_unavailable_yet">Encara no hi han actualitzacions del mapa :-(</string>

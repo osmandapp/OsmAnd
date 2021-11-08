@@ -4157,7 +4157,6 @@
     <string name="benefits_for_contributors">Fordeler for aktive OSM-bidragsytere</string>
     <string name="use_login_and_password">Bruk brukernavn og passord</string>
     <string name="available_until">Tilgjengelig til %1$s</string>
-    <string name="not_enough_contributions_descr">Det kreves minst %1$s kartbidrag til OpenStreetMap de siste %2$s dagene.</string>
     <string name="shared_string_contributions">Bidrag</string>
     <string name="connect_track_points_as">Forbind rutepunkter</string>
     <string name="offline_maps_required_descr">Noen frakoblede kart mangler for denne ruten.</string>

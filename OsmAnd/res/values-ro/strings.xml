@@ -4296,7 +4296,6 @@
     <string name="use_login_and_password">Utilizați numele de utilizator și parola</string>
     <string name="available_until">Disponibil până la %1$s</string>
     <string name="enough_contributions_descr">Felicitări, ați furnizat suficiente contribuții OpenStreetMap și acum vă puteți bucura de actualizări nelimitate ale hărții OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Este necesar un minim de %1$s contribuții OpenStreetMap în %2$s zile.</string>
     <string name="shared_string_contributions">Contribuții</string>
     <string name="contributions_may_calculate_with_delay">Calcularea contribuțiilor poate dura câteva ore.</string>
     <string name="map_updates_are_unavailable_yet">Actualizările hărților nu sunt încă disponibile. :-(</string>

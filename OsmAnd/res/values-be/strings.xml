@@ -4055,7 +4055,6 @@
     <string name="snap_to_road_descr">Значок бягучага месцазнаходжання будзе прыаязвацца да бягучага маршруту навігацыі</string>
     <string name="routing_attr_height_obstacles_description">Разлік маршруту дапаможа пазбегнуць вялікіх схілаў.</string>
     <string name="purchases">Куплі</string>
-    <string name="not_enough_contributions_descr">У вас павінна быць прынамсі %1$s унёскаў на OpenStreetMap на працягу апошніх %2$s дзён.</string>
     <string name="shared_string_contributions">Унёскі</string>
     <string name="contributions_may_calculate_with_delay">Унёскі могуць разлічвацца з затрымкай у некалькі гадзін.</string>
     <string name="map_updates_are_unavailable_yet">Абнаўленні мапаў пакуль што недаступныя. :-(</string>

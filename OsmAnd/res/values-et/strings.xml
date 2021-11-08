@@ -4258,7 +4258,6 @@
     <string name="use_login_and_password">Kasuta kasutajanime ja salasõna</string>
     <string name="available_until">Saadaval kuni %1$s</string>
     <string name="enough_contributions_descr">Õnnitleme! Olete teinud OpenStreetMapile piisavalt kaastööd ja saate nüüd nautida piiramatult OsmAnd kaardivärskendusi!</string>
-    <string name="not_enough_contributions_descr">Nõutav on vähemalt %1$s OpenStreetMapi kaastööd %2$s päeva jooksul.</string>
     <string name="contributions_may_calculate_with_delay">Kaastööde arvutamine võib võtta mitu tundi.</string>
     <string name="shared_string_contributions">Kaastööd</string>
     <string name="map_updates_are_unavailable_yet">Kaardi värskendused pole veel saadaval. :-(</string>

@@ -3961,7 +3961,6 @@
     <string name="use_login_and_password">Benyt brugernavn og adgangskode</string>
     <string name="available_until">Tilgængelig indtil %1$s</string>
     <string name="enough_contributions_descr">Tillykke, du har bidraget nok til OpenStreetMap og kan nu nyde godt af ubegrænsede OsmAnd-kortopdateringer!</string>
-    <string name="not_enough_contributions_descr">Der kræves mindst %1$s OpenStreetMap-bidrag inden for %2$s dage.</string>
     <string name="shared_string_contributions">Bidrag</string>
     <string name="contributions_may_calculate_with_delay">Beregning af bidrag kan tage adskillige timer.</string>
     <string name="map_updates_are_unavailable_yet">Kortopdateringer er endnu ikke tilgængelige. :-(</string>

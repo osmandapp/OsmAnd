@@ -46,7 +46,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class MappersFragment extends BaseOsmAndFragment {
@@ -54,9 +53,9 @@ public class MappersFragment extends BaseOsmAndFragment {
 	public static final String TAG = MappersFragment.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(MappersFragment.class);
 
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM", Locale.US);
-	private static final SimpleDateFormat MONTH_FORMAT = new SimpleDateFormat("MMMM", Locale.US);
-	private static final SimpleDateFormat CONTRIBUTION_FORMAT = new SimpleDateFormat("MMMM yyyy", Locale.US);
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM");
+	private static final SimpleDateFormat MONTH_FORMAT = new SimpleDateFormat("MMMM");
+	private static final SimpleDateFormat CONTRIBUTION_FORMAT = new SimpleDateFormat("MMMM yyyy");
 
 	private static final String CONTRIBUTIONS_URL = "https://www.openstreetmap.org/user/";
 	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
@@ -176,12 +175,10 @@ public class MappersFragment extends BaseOsmAndFragment {
 			title = getString(R.string.available_until, date);
 			description = getString(R.string.enough_contributions_descr);
 		} else {
-			int size = getChangesSize(changesInfo);
 			titleColor = ColorUtilities.getPrimaryTextColor(app, nightMode);
 			title = getString(R.string.map_updates_are_unavailable_yet);
 			description = getString(R.string.not_enough_contributions_descr,
-					String.valueOf(CHANGES_FOR_MAPPER_PROMO - size),
-					String.valueOf(DAYS_FOR_MAPPER_PROMO_CHECK));
+					String.valueOf(CHANGES_FOR_MAPPER_PROMO), "(" + getMonthPeriod() + ")");
 		}
 
 		TextView tvTitle = mainView.findViewById(R.id.header_title);
@@ -197,13 +194,17 @@ public class MappersFragment extends BaseOsmAndFragment {
 		TextView tvInterval = container.findViewById(R.id.interval);
 		TextView tvCount = container.findViewById(R.id.total_contributions);
 
+		tvInterval.setText(getMonthPeriod());
+		tvCount.setText(String.valueOf(getChangesSize(changesInfo)));
+	}
+
+	private String getMonthPeriod() {
 		Calendar calendar = Calendar.getInstance();
 		String currentMonth = MONTH_FORMAT.format(calendar.getTimeInMillis());
 		calendar.add(Calendar.MONTH, -1);
 		String prevMonth = MONTH_FORMAT.format(calendar.getTimeInMillis());
 
-		tvInterval.setText(getString(R.string.ltr_or_rtl_combine_via_dash, prevMonth, currentMonth));
-		tvCount.setText(String.valueOf(getChangesSize(changesInfo)));
+		return getString(R.string.ltr_or_rtl_combine_via_dash, prevMonth, currentMonth);
 	}
 
 	private void updateContributionsList() {
