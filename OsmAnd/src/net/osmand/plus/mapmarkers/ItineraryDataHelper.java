@@ -346,7 +346,7 @@ public class ItineraryDataHelper {
 		marker.id = getMarkerId(app, marker, group);
 		marker.favouritePoint = point;
 		marker.creationDate = point.getCreationDate();
-		marker.creationDate = point.getVisitedDate();
+		marker.visitedDate = point.getVisitedDate();
 		marker.history = marker.visitedDate != 0;
 
 		if (group != null) {
