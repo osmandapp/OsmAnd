@@ -398,7 +398,7 @@ public class GpsFilterHelper {
 		}
 	}
 
-	public class SpeedFilter extends GpsFilter<Integer> {
+	public class SpeedFilter extends GpsFilter<Float> {
 
 		public SpeedFilter(@NonNull OsmandApplication app, @NonNull SelectedGpxFile selectedGpxFile) {
 			super(app, selectedGpxFile);
@@ -416,36 +416,31 @@ public class GpsFilterHelper {
 
 		@Override
 		public boolean acceptPoint(@NonNull WptPt point, int pointIndex, double distanceToLastSurvivedPoint) {
-			float speed = transformSpeed(analysis.speedData.get(pointIndex).speed);
+			float speed = analysis.speedData.get(pointIndex).speed;
 			return !isNeeded() || getSelectedMinValue() <= speed && speed <= getSelectedMaxValue();
 		}
 
 		@Override
-		public Integer getMinValue() {
-			return 0;
+		public Float getMinValue() {
+			return 0f;
 		}
 
 		@Override
-		public Integer getMaxValue() {
-			return transformSpeed(analysis.maxSpeed);
+		public Float getMaxValue() {
+			return analysis.maxSpeed;
 		}
 
 		@Override
 		public void updateValues(float minValue, float maxValue) {
-			selectedMinValue = ((int) minValue);
-			selectedMaxValue = ((int) maxValue);
+			selectedMinValue = minValue;
+			selectedMaxValue = maxValue;
 			checkSelectedValues();
-		}
-
-		private int transformSpeed(float metersPerSecond) {
-			String speedInUnits = OsmAndFormatter.getFormattedSpeed(metersPerSecond, app, false);
-			return (int) Math.ceil(Double.parseDouble(speedInUnits));
 		}
 
 		@NonNull
 		@Override
-		public String getFormattedValue(@NonNull Integer value) {
-			return OsmAndFormatter.getFormattedSpeed(value, null, false);
+		public String getFormattedValue(@NonNull Float value) {
+			return OsmAndFormatter.getFormattedSpeed(value, app, true);
 		}
 
 		@NonNull
@@ -456,8 +451,8 @@ public class GpsFilterHelper {
 			if (!isNeeded()) {
 				value = app.getString(R.string.gpx_logging_no_data);
 			} else {
-				String min = getFormattedValue(getSelectedMinValue());
-				String max = getFormattedValue(getSelectedMaxValue());
+				String min = OsmAndFormatter.getFormattedSpeed(getSelectedMinValue(), app, false);
+				String max = OsmAndFormatter.getFormattedSpeed(getSelectedMaxValue(), app, false);
 				String range = app.getString(R.string.ltr_or_rtl_combine_via_dash, min, max);
 				String unit = app.getSettings().SPEED_SYSTEM.get().toShortString(app);
 				value = app.getString(R.string.ltr_or_rtl_combine_via_space, range, unit);
