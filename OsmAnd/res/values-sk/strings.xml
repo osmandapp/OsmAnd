@@ -4342,9 +4342,8 @@
     <string name="internal_app_storage_description">Interné úložisko, skryté pred všetkými používateľmi a inými aplikáciami, kde len OsmAnd môže použiť vaše údaje.</string>
     <string name="shared_string_details">Podrobnosti</string>
     <string name="shared_app_storage_description">Zdieľaná pamäť už nie je dostupná kvôli zmenám prístupu k úložisku v Androide.</string>
-    <string name="rendering_attr_noNatureReserves_description">Skryť prírodné rezervácie, chránené oblasti a národné parky.</string>
     <string name="purchases_feature_desc_android_auto">Prináša mapy a navigáciu OsmAnd na obrazovku vášho vozidla a zapojí sa do ovládania vášho vozidla.</string>
-    <string name="rendering_attr_noNatureReserves_name">Prírodná rezervácia</string>
+    <string name="rendering_attr_natureReserves_name">Prírodná rezervácia</string>
     <string name="shared_string_articles">Články</string>
     <string name="included_categories">Zahrnuté kategórie</string>
     <string name="release_4_1">• Prvotná podpora pre Android Auto

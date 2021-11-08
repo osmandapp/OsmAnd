@@ -4347,8 +4347,7 @@
     <string name="shared_storage_warning_title">Ŝanĝo en reguloj de aliro al la konservejo</string>
     <string name="purchases_feature_desc_android_auto">Havigu mapojn kaj navigadon OsmAnd sur ekrano de via veturilo, oportune integriĝas kun sistemoj de via aŭtomobilo.</string>
     <string name="included_categories">Ampleksataj kategorioj</string>
-    <string name="rendering_attr_noNatureReserves_description">Kaŝi natur-rezervejojn, protektatajn aerojn kaj naciajn parkojn.</string>
-    <string name="rendering_attr_noNatureReserves_name">Naturrezervejoj</string>
+    <string name="rendering_attr_natureReserves_name">Naturrezervejoj</string>
     <string name="shared_string_articles">Artikoloj</string>
     <string name="release_4_1">• komenca subteno por Android Auto
 \n

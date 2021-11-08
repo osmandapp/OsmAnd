@@ -4351,7 +4351,7 @@
     <string name="icon_group_nautical">Nautică</string>
     <string name="included_categories">Categorii incluse</string>
     <string name="shared_string_details">Detalii</string>
-    <string name="rendering_attr_noNatureReserves_name">Rezervație naturală</string>
+    <string name="rendering_attr_natureReserves_name">Rezervație naturală</string>
     <string name="shared_string_articles">Articole</string>
     <string name="release_4_1">• A fost adăugat suportul inițial pentru Android Auto
 \n
@@ -4377,7 +4377,6 @@
     <string name="shared_app_storage_description">Memoria partajată nu mai este disponibilă din cauza modificării accesului la memoria Android.</string>
     <string name="shared_storage_warning_title">Modificări ale regulilor de acces la stocare</string>
     <string name="purchases_feature_desc_android_auto">Aduce hărțile și navigația offline OsmAnd pe ecranul vehiculului dumneavoastră și se integrează cu comenzile vehiculului.</string>
-    <string name="rendering_attr_noNatureReserves_description">Ascundeți rezervațiile naturale, zonele protejate și parcurile naționale.</string>
     <string name="internal_app_storage_description">Stocarea internă, ascunsă de toți utilizatorii și de alte aplicații, astfel încât numai OsmAnd poate accesa datele tale.</string>
     <string name="android_auto_map_placeholder_title">Harta este afișată pe ecranul vehiculului.</string>
     <string name="location_access_request_action">Acordarea Accesului</string>

@@ -4403,8 +4403,7 @@
     <string name="purchases_feature_desc_android_auto">OsmAnd offline maps and navigation on the screen of your vehicle. Integrate conveniently with your vehicle\'s controls.</string>
     <string name="transparent_status_bar_descr">Display map under status bar</string>
     <string name="transparent_status_bar">Transparent status bar</string>
-    <string name="rendering_attr_noNatureReserves_name">Nature reserve</string>
-    <string name="rendering_attr_noNatureReserves_description">Hide nature reserve, protected areas, and national parks.</string>
+    <string name="rendering_attr_natureReserves_name">Nature reserve</string>
     <string name="exit_pan_mode_descr">Press Select to exit the pan mode</string>
     <string name="icon_group_nautical">Nautical</string>
     <string name="continue_on_phone">Continue on Phone</string>

@@ -4340,8 +4340,7 @@
     <string name="shared_app_storage_description">Pamięć współdzielona nie jest już dostępna z powodu zmienionego dostępu do pamięci masowej systemu Android.</string>
     <string name="internal_app_storage_description">Pamięć wewnętrzna, ukryta przed wszystkimi użytkownikami i innymi aplikacjami, dzięki czemu tylko OsmAnd może uzyskać dostęp do Twoich danych.</string>
     <string name="shared_storage_warning_title">Zmiany w zasadach dostępu do pamięci masowej</string>
-    <string name="rendering_attr_noNatureReserves_name">Rezerwat przyrody</string>
-    <string name="rendering_attr_noNatureReserves_description">Ukryj rezerwaty przyrody, obszary chronione i parki narodowe.</string>
+    <string name="rendering_attr_natureReserves_name">Rezerwat przyrody</string>
     <string name="clear_all_history_warning">Wyczyścić wszystkie wpisy historii aplikacji, w tym historię wyszukiwania, nawigacji i znaczników\?</string>
     <string name="markers_history_is_disabled_descr">Włącz historię, aby zapamiętać listę odwiedzonych znaczników mapy.</string>
     <string name="search_history_is_disabled_descr">Historię wyszukiwania można włączyć w ustawieniach.</string>
