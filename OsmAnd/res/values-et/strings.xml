@@ -4379,8 +4379,7 @@
 \n • Parandatud erinevad marsruutimisprobleemid
 \n
 \n</string>
-    <string name="rendering_attr_noNatureReserves_name">Looduskaitseala</string>
-    <string name="rendering_attr_noNatureReserves_description">Peida looduskaitsealad, kaitsealad ja rahvuspargid.</string>
+    <string name="rendering_attr_natureReserves_name">Looduskaitseala</string>
     <string name="is_disabled">%1$s on välja lülitatud</string>
     <string name="history_is_disabled_descr">Selleks, et saaksid lihtsamini kasutada varasemaid tulemusi, võta kasutusele ajaloo salvestamine.</string>
     <string name="transparent_status_bar_descr">Näita olekuriba all kaarti</string>

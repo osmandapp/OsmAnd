@@ -4280,7 +4280,7 @@
     <string name="shared_string_articles">Artikler</string>
     <string name="shared_app_storage_description">Tilgang til delt minne har forsvunnet som følge av nye lagringstilgangsregler i Android.</string>
     <string name="internal_app_storage_description">Internlagring, skjult fra bruker og andre programmer, så ingen andre enn OsmAnd får tilgang til dataen din</string>
-    <string name="rendering_attr_noNatureReserves_name">Naturreservat</string>
+    <string name="rendering_attr_natureReserves_name">Naturreservat</string>
     <string name="icon_group_nautical">Nautisk</string>
     <string name="transparent_status_bar_descr">Vis kart under statusfeltet</string>
     <string name="is_disabled">%1$s er avskrudd</string>
@@ -4322,6 +4322,5 @@
     <string name="approx_safe_mode_description">Utfør GPX-anslag ved bruk av tregere Android-metode istedenfor systemspesifikk kode.</string>
     <string name="use_external_timestamps_description">Bruk den nettbaserte ruterens tidsstempler til å justere estimert tid og gjennomsnittshastighet</string>
     <string name="routing_attr_prefer_tactile_paving_description">Foretrekk taktile ledelinjer</string>
-    <string name="rendering_attr_noNatureReserves_description">Skjul naturreservat, beskyttede områder, og nasjonalparker.</string>
     <string name="enter_verification_code">Skriv inn engangspassord</string>
 </resources>

@@ -4341,8 +4341,7 @@
     <string name="shared_storage_warning_title">儲存空間存取規則的變更</string>
     <string name="purchases_feature_desc_android_auto">將 OsmAnd 離線地圖與導航帶到您的車輛螢幕上，並與您的車輛控制介面整合。</string>
     <string name="shared_string_details">詳細資訊</string>
-    <string name="rendering_attr_noNatureReserves_name">自然保留區</string>
-    <string name="rendering_attr_noNatureReserves_description">隱藏自然保留區、保護區與國家公園。</string>
+    <string name="rendering_attr_natureReserves_name">自然保留區</string>
     <string name="included_categories">包含分類</string>
     <string name="shared_string_articles">文章</string>
     <string name="release_4_1">• 新增對 Android Auto 的初步支援

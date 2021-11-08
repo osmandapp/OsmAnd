@@ -4344,8 +4344,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_description">צביעה לפי השתייכות לרשת.</string>
     <string name="display_route_tracks">הצגת מסלולים</string>
     <string name="walking_route_osmc_description">צביעת מסלולים לפי הצבע המקומי הייחודי שלהם (אם קיים ב־OpenStreetMap) וסוג (בינלאומי, אזורי, מקומי).</string>
-    <string name="rendering_attr_noNatureReserves_name">שמורת טבע</string>
-    <string name="rendering_attr_noNatureReserves_description">הסתרת שמורות טבע, אזורים מוגנים ופארקים לאומיים.</string>
+    <string name="rendering_attr_natureReserves_name">שמורת טבע</string>
     <string name="use_external_timestamps">שימוש בחותמות זמן חיצוניות</string>
     <string name="approx_safe_mode_description">ביצוע הערכת GPX באמצעות שיטה אטית של Android במקום בקוד מובנה.</string>
     <string name="history_is_disabled_descr">יש להפעיל את ההיסטוריה כדי לגשת לתוצאות בהן השתמשת לאחרונה מהר יותר.</string>

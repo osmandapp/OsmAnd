@@ -4350,10 +4350,9 @@
     <string name="icon_group_nautical">Náutico</string>
     <string name="shared_storage_warning_title">Alterações no acesso ao armazenamento</string>
     <string name="purchases_feature_desc_android_auto">Mostra os mapas offline do OsmAnd e a navegação no ecrã do seu veículo e integra-se nos comandos deste.</string>
-    <string name="rendering_attr_noNatureReserves_description">Ocultar reservas naturais, áreas protegidas e parques nacionais.</string>
     <string name="shared_string_details">Detalhes</string>
     <string name="shared_app_storage_description">A memória partilhada deixou de estar disponível devido a alterações ao acesso ao armazenamento no Android.</string>
-    <string name="rendering_attr_noNatureReserves_name">Reserva natural</string>
+    <string name="rendering_attr_natureReserves_name">Reserva natural</string>
     <string name="internal_app_storage_description">Armazenamento interno oculto a todos os utilizadores e outras aplicações, por isso só OsmAnd pode ter acesso aos seus dados.</string>
     <string name="android_auto_map_placeholder_descr">Desconecte o seu aparelho do Android Auto para ver o mapa na app.</string>
     <string name="android_auto_purchase_request_title">Compre OsmAnd Pro ou Maps+ para usar o OsmAnd com o Android Auto</string>

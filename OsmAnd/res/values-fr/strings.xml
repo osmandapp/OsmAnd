@@ -4342,8 +4342,7 @@
     <string name="internal_app_storage_description">Stockage interne, masqué à l\'utilisateur et aux autres applications ; seul OsmAnd peut accéder à vos données.</string>
     <string name="purchases_feature_desc_android_auto">Les cartes et la navigation hors ligne OsmAnd s\'affichent sur l\'écran de votre véhicule et répondent aux commandes de votre véhicule.</string>
     <string name="shared_string_details">Détails</string>
-    <string name="rendering_attr_noNatureReserves_name">Réserve naturelle</string>
-    <string name="rendering_attr_noNatureReserves_description">Masquer les réserves naturelles, les zones protégées et les parcs nationaux.</string>
+    <string name="rendering_attr_natureReserves_name">Réserve naturelle</string>
     <string name="shared_string_articles">Articles</string>
     <string name="included_categories">Catégories incluses</string>
     <string name="android_auto_map_placeholder_title">La carte s\'affiche sur l\'écran du véhicule.</string>

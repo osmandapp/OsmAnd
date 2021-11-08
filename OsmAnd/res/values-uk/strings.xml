@@ -4342,13 +4342,13 @@
     <string name="upload_gpx_description_hint">Залиште порожніми, назви треків використовуватимуться як опис. Введений опис буде застосовано для кожного треку.</string>
     <string name="exit_pan_mode_descr">Натисніть Вибрати, щоб вийти з режиму панорамування</string>
     <string name="icon_group_nautical">Морський</string>
-    <string name="rendering_attr_noNatureReserves_name">Природний заповідник</string>
+    <string name="rendering_attr_natureReserves_name">Природний заповідник</string>
     <string name="shared_app_storage_description">Спільна пам’ять більше не доступна через зміну доступу до пам’яті Android.</string>
     <string name="shared_storage_warning_title">Зміни в правилах доступу до сховища</string>
     <string name="purchases_feature_desc_android_auto">Офлайн-мапи та навігація OsmAnd на екрані вашого автомобіля. Зручна інтеграція з органами керування вашого автомобіля.</string>
     <string name="shared_string_details">Подробиці</string>
     <string name="internal_app_storage_description">Внутрішнє сховище сховано від усіх користувачів та інших застосунків, тому лише OsmAnd може отримати доступ до ваших даних.</string>
-    <string name="rendering_attr_noNatureReserves_description">Сховати заповідники, заповідні території та національні парки.</string>
+    <string name="rendering_attr_natureReserves_description">Показати заповідники, заповідні території та національні парки.</string>
     <string name="included_categories">Включені категорії</string>
     <string name="shared_string_articles">Статті</string>
     <string name="release_4_1">• Додано початкову підтримку Android Auto

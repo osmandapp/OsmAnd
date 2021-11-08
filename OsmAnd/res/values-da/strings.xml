@@ -4353,8 +4353,7 @@
     <string name="purchases_feature_desc_android_auto">Giver dig OsmAnd offline kort og navigation på skærmen i dit køretøj og integreres med bilens betjeningselementer.</string>
     <string name="shared_string_details">Detaljer</string>
     <string name="shared_app_storage_description">Delt hukommelse er ikke længere tilgængelig på grund af ændret adgang til lagerplads i Android.</string>
-    <string name="rendering_attr_noNatureReserves_description">Skjul naturreservater, beskyttede områder og nationalparker.</string>
-    <string name="rendering_attr_noNatureReserves_name">Naturreservat</string>
+    <string name="rendering_attr_natureReserves_name">Naturreservat</string>
     <string name="shared_string_articles">Artikler</string>
     <string name="internal_app_storage_description">Intern lagring, skjult for alle brugere og andre apps, så kun OsmAnd kan få adgang til dine data.</string>
     <string name="included_categories">Inkluderede kategorier</string>
