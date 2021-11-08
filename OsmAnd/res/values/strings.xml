@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="display_groups_visibility_dialog_description">You can control groups visibility on the map. If track is hidden, all groups will be hidden too.</string>
+    <string name="shared_string_hide_all">Hide all</string>
     <string name="delete_history_items_descr">Are you sure you want to delete selected history items?</string>
     <string name="delete_history_items">Delete %1$s history items?</string>
     <string name="quick_action_toggle_preference">A toggle to switch selected preference state.</string>
