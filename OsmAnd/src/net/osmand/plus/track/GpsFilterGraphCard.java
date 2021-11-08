@@ -61,6 +61,9 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 		GpxDisplayItem displayItem = getGpxDisplayItem();
 		if (displayItem != null) {
 			setupGraph(displayItem);
+			AndroidUiHelper.updateVisibility(view, true);
+		} else {
+			AndroidUiHelper.updateVisibility(view, false);
 		}
 	}
 
@@ -127,8 +130,13 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 	public void onFinishFiltering() {
 		displayHelper.setGpx(gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile());
 		trackChartPoints.setGpx(displayHelper.getGpx());
-		for (int i = 0; i < pagerAdapter.getCount(); i++) {
-			pagerAdapter.updateGraph(i);
+
+		if (pagerAdapter.isTabTypesSetChanged()) {
+			updateMainContent();
+		} else {
+			for (int i = 0; i < pagerAdapter.getCount(); i++) {
+				pagerAdapter.updateGraph(i);
+			}
 		}
 	}
 }

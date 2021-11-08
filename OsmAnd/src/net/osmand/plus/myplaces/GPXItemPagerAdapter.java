@@ -54,6 +54,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -81,8 +82,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private GPXTrackAnalysis analysis;
 	private GPXTabItemType[] tabTypes;
 
-	private SparseArray<View> views = new SparseArray<>();
-	private SegmentActionsListener actionsListener;
+	private final SparseArray<View> views = new SparseArray<>();
+	private final SegmentActionsListener actionsListener;
 
 	private boolean chartClicked;
 
@@ -685,7 +686,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	private void updateJoinGapsInfo(View view, int position) {
-		if (view != null) {
+		if (view != null && gpxItem != null) {
 			GPXTabItemType tabType = tabTypes[position];
 			boolean generalTrack = gpxItem.isGeneralTrack();
 			boolean joinSegments = displayHelper.isJoinSegments();
@@ -791,37 +792,62 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		return false;
 	}
 
+	public boolean isTabTypesSetChanged() {
+		GPXTabItemType[] oldTabs = Arrays.copyOf(tabTypes, tabTypes.length);
+		updateAnalysis();
+		fetchTabTypes();
+
+		if (oldTabs.length != tabTypes.length) {
+			return true;
+		}
+		for (int i = 0; i < oldTabs.length; i++) {
+			if (oldTabs[i] != tabTypes[i])
+				return true;
+		}
+		return false;
+	}
+
 	public void updateGraph(int position) {
+		updateGraph(Collections.singletonList(position));
+	}
+
+	public void updateGraph(List<Integer> positions) {
 		updateAnalysis();
 		fetchTabTypes();
 		if (getCount() > 0 && views.size() > 0) {
-			LineGraphType firstType = tabTypes[position] == GPX_TAB_ITEM_SPEED ? SPEED : ALTITUDE;
-			LineGraphType secondType = null;
-			if (tabTypes[position] == GPX_TAB_ITEM_ALTITUDE) {
-				secondType = SLOPE;
-			} else if (tabTypes[position] == GPX_TAB_ITEM_GENERAL) {
-				secondType = SPEED;
+			for (int position : positions) {
+				updateGraphTab(position);
 			}
-
-			View container = getViewAtPosition(position);
-
-			LineChart chart = container.findViewById(R.id.chart);
-			List<ILineDataSet> dataSets = getDataSets(chart, tabTypes[position], firstType, secondType);
-			boolean isEmptyDataSets = Algorithms.isEmpty(dataSets);
-			AndroidUiHelper.updateVisibility(chart, !isEmptyDataSets);
-			chart.clear();
-			if (!isEmptyDataSets) {
-				chart.setData(new LineData(dataSets));
-			}
-			if (chart.getAxisRight().getLabelCount() != CHART_LABEL_COUNT
-					|| chart.getAxisLeft().getLabelCount() != CHART_LABEL_COUNT) {
-				GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
-			}
-			updateChart(chart);
-
-			updateJoinGapsInfo(container, position);
 		}
 		notifyDataSetChanged();
+	}
+
+	private void updateGraphTab(int position) {
+		LineGraphType firstType = tabTypes[position] == GPX_TAB_ITEM_SPEED ? SPEED : ALTITUDE;
+		LineGraphType secondType = null;
+		if (tabTypes[position] == GPX_TAB_ITEM_ALTITUDE) {
+			secondType = SLOPE;
+		} else if (tabTypes[position] == GPX_TAB_ITEM_GENERAL) {
+			secondType = SPEED;
+		}
+
+		View container = getViewAtPosition(position);
+
+		LineChart chart = container.findViewById(R.id.chart);
+		List<ILineDataSet> dataSets = getDataSets(chart, tabTypes[position], firstType, secondType);
+		boolean isEmptyDataSets = Algorithms.isEmpty(dataSets);
+		AndroidUiHelper.updateVisibility(chart, !isEmptyDataSets);
+		chart.clear();
+		if (!isEmptyDataSets) {
+			chart.setData(new LineData(dataSets));
+		}
+		if (chart.getAxisRight().getLabelCount() != CHART_LABEL_COUNT
+				|| chart.getAxisLeft().getLabelCount() != CHART_LABEL_COUNT) {
+			GpxUiHelper.setupGPXChart(app, chart, CHART_LABEL_COUNT);
+		}
+		updateChart(chart);
+
+		updateJoinGapsInfo(container, position);
 	}
 
 	private TrkSegment getTrkSegment() {
