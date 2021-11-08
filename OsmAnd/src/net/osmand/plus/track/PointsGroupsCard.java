@@ -28,6 +28,7 @@ import java.util.List;
 public class PointsGroupsCard extends MapBaseCard {
 
 	public static final int SELECT_GROUP_INDEX = 0;
+	public static final int SHOW_HIDE_GROUP_INDEX = 1;
 
 	private GpxDisplayGroup selectedGroup;
 	private final SelectedGpxFile selectedGpxFile;
@@ -98,25 +99,27 @@ public class PointsGroupsCard extends MapBaseCard {
 			TextView title = view.findViewById(R.id.title);
 			title.setText(R.string.shared_string_show_on_map);
 
-			final String name = Algorithms.isEmpty(selectedGroup.getName()) ? null : selectedGroup.getName();
-			boolean checked = !selectedGpxFile.getHiddenGroups().contains(name);
+			final String groupName = Algorithms.isEmpty(selectedGroup.getName()) ? null : selectedGroup.getName();
+			boolean checked = !selectedGpxFile.isGroupHidden(groupName);
 			CompoundButton compoundButton = view.findViewById(R.id.compound_button);
 			compoundButton.setChecked(checked);
 			UiUtilities.setupCompoundButton(compoundButton, nightMode, CompoundButtonType.GLOBAL);
 
-			view.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					boolean checked = !compoundButton.isChecked();
-					if (checked) {
-						selectedGpxFile.removeHiddenGroups(name);
-					} else {
-						selectedGpxFile.addHiddenGroups(name);
-					}
-					app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
+			view.setOnClickListener(v -> {
+				boolean showGroup = !compoundButton.isChecked();
+				if (showGroup) {
+					selectedGpxFile.removeHiddenGroups(groupName);
+				} else {
+					selectedGpxFile.addHiddenGroups(groupName);
+				}
+				app.getSelectedGpxHelper().updateSelectedGpxFile(selectedGpxFile);
 
-					compoundButton.setChecked(checked);
-					mapActivity.refreshMap();
+				compoundButton.setChecked(showGroup);
+				mapActivity.refreshMap();
+
+				CardListener listener = getListener();
+				if (listener != null) {
+					listener.onCardButtonPressed(PointsGroupsCard.this, SHOW_HIDE_GROUP_INDEX);
 				}
 			});
 		}

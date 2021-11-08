@@ -1,11 +1,15 @@
 package net.osmand.plus.track;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,9 +32,11 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -63,6 +69,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	public static final int OPEN_WAYPOINT_INDEX = 2;
 
 	private final TrackDisplayHelper displayHelper;
+	private final SelectedGpxFile selectedGpxFile;
 	private final GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS};
 
 	private GpxDisplayGroup selectedGroup;
@@ -76,9 +83,12 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	private View addWaypointActionView;
 	private View deleteWaypointActionView;
 
-	public TrackPointsCard(@NonNull MapActivity mapActivity, @NonNull TrackDisplayHelper displayHelper) {
+	public TrackPointsCard(@NonNull MapActivity mapActivity,
+	                       @NonNull TrackDisplayHelper displayHelper,
+	                       @NonNull SelectedGpxFile selectedGpxFile) {
 		super(mapActivity);
 		this.displayHelper = displayHelper;
+		this.selectedGpxFile = selectedGpxFile;
 		adapter = new PointGPXAdapter();
 	}
 
@@ -134,6 +144,10 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 	public List<GpxDisplayGroup> getGroups() {
 		return adapter.groups;
+	}
+
+	public void onGroupVisibilityChanged() {
+		adapter.notifyDataSetChanged();
 	}
 
 	private void addActions(LayoutInflater inflater) {
@@ -288,6 +302,8 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	}
 
 	private class PointGPXAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
+
+		private static final int SPANNED_FLAG = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 
 		private final List<GpxDisplayGroup> groups = new ArrayList<>();
 		private final Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups = new LinkedHashMap<>();
@@ -461,79 +477,90 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		@Override
 		public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			final GpxDisplayGroup group = getGroup(groupPosition);
+			Context context = view.getContext();
 			View row = convertView;
 			if (row == null) {
-				LayoutInflater inflater = LayoutInflater.from(view.getContext());
+				LayoutInflater inflater = LayoutInflater.from(context);
 				row = inflater.inflate(R.layout.wpt_list_item, parent, false);
 			}
 
-			row.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (listView.isGroupExpanded(groupPosition)) {
-						listView.collapseGroup(groupPosition);
-					} else {
-						listView.expandGroup(groupPosition);
-					}
+			row.setOnClickListener(v -> {
+				if (listView.isGroupExpanded(groupPosition)) {
+					listView.collapseGroup(groupPosition);
+				} else {
+					listView.expandGroup(groupPosition);
 				}
 			});
 
-			String categoryName = group.getName();
-			if (TextUtils.isEmpty(categoryName)) {
-				categoryName = app.getString(R.string.shared_string_gpx_points);
-			}
-			SpannableStringBuilder text = new SpannableStringBuilder(categoryName)
-					.append(" – ")
-					.append(String.valueOf(getChildrenCount(groupPosition)));
-			text.setSpan(new ForegroundColorSpan(AndroidUtils.getColorFromAttr(view.getContext(), R.attr.wikivoyage_primary_text_color)),
-					0, categoryName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-			text.setSpan(new ForegroundColorSpan(ContextCompat.getColor(app, R.color.wikivoyage_secondary_text)),
-					categoryName.length() + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			String groupName = group.getName();
+			String nameToDisplay = Algorithms.isEmpty(groupName)
+					? app.getString(R.string.shared_string_gpx_points)
+					: groupName;
 
 			TextView title = row.findViewById(R.id.label);
-			title.setText(text);
+			title.setText(createStyledGroupTitle(context, nameToDisplay, groupPosition));
 
-			ImageView icon = row.findViewById(R.id.icon);
-			icon.setImageDrawable(getContentIcon(R.drawable.ic_action_folder));
+			Drawable icon = selectedGpxFile.isGroupHidden(Algorithms.isEmpty(groupName) ? null : groupName)
+					? getColoredIcon(R.drawable.ic_action_folder_hidden, ColorUtilities.getSecondaryTextColorId(nightMode))
+					: getContentIcon(R.drawable.ic_action_folder);
+			ImageView groupImage = row.findViewById(R.id.icon);
+			groupImage.setImageDrawable(icon);
 
 			boolean expanded = listView.isGroupExpanded(groupPosition);
 			ImageView expandImage = row.findViewById(R.id.expand_image);
 			expandImage.setImageDrawable(getContentIcon(expanded ? R.drawable.ic_action_arrow_up : R.drawable.ic_action_arrow_down));
 
-			final CheckBox checkBox = (CheckBox) row.findViewById(R.id.toggle_item);
+			final CheckBox checkBox = row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
 				checkBox.setChecked(selectedGroups.contains(groupPosition));
-				checkBox.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						List<GpxDisplayItem> items = itemGroups.get(group);
-						setGroupSelection(items, groupPosition, checkBox.isChecked());
-						adapter.notifyDataSetInvalidated();
-						updateSelectionMode();
-					}
+				checkBox.setOnClickListener(v -> {
+					List<GpxDisplayItem> items = itemGroups.get(group);
+					setGroupSelection(items, groupPosition, checkBox.isChecked());
+					adapter.notifyDataSetInvalidated();
+					updateSelectionMode();
 				});
 				AndroidUiHelper.updateVisibility(checkBox, true);
 			} else {
 				AndroidUiHelper.updateVisibility(checkBox, false);
 			}
 
-			ImageView options = (ImageView) row.findViewById(R.id.options);
-			options.setImageDrawable(getContentIcon(R.drawable.ic_overflow_menu_white));
-			options.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
+			ImageView options = row.findViewById(R.id.options);
+			options.setImageDrawable(getContentIcon(R.drawable.ic_overflow_menu_with_background));
+			options.setOnClickListener(v ->
 					EditTrackGroupDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-							group, mapActivity.getTrackMenuFragment());
-				}
-			});
+							group, mapActivity.getTrackMenuFragment()));
 
 			AndroidUiHelper.updateVisibility(expandImage, true);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider), true);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.description), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.group_divider), true);
+			AndroidUiHelper.updateVisibility(row.findViewById(R.id.vertical_divider), true);
 
 			return row;
+		}
+
+		private CharSequence createStyledGroupTitle(Context context, String groupName, int groupPosition) {
+			SpannableStringBuilder spannedName = new SpannableStringBuilder(groupName)
+					.append(" – ")
+					.append(String.valueOf(getChildrenCount(groupPosition)));
+
+			if (selectedGpxFile.isGroupHidden(groupName)) {
+				int secondaryTextColor = ColorUtilities.getSecondaryTextColor(context, nightMode);
+				spannedName.setSpan(new ForegroundColorSpan(secondaryTextColor), 0, spannedName.length(), SPANNED_FLAG);
+				spannedName.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannedName.length(), SPANNED_FLAG);
+			} else {
+				int nameColor = AndroidUtils.getColorFromAttr(context, R.attr.wikivoyage_primary_text_color);
+				int countColor = ContextCompat.getColor(context, R.color.wikivoyage_secondary_text);
+
+				spannedName.setSpan(new ForegroundColorSpan(nameColor), 0, groupName.length(), SPANNED_FLAG);
+				spannedName.setSpan(new ForegroundColorSpan(countColor), groupName.length() + 1,
+						spannedName.length(), SPANNED_FLAG);
+			}
+
+			spannedName.setSpan(new StyleSpan(Typeface.BOLD), 0, groupName.length(), SPANNED_FLAG);
+
+			return spannedName;
 		}
 
 		@Override
@@ -603,6 +630,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			}
 
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider), false);
+			AndroidUiHelper.updateVisibility(row.findViewById(R.id.vertical_divider), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.options), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), true);
 

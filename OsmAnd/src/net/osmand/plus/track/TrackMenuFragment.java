@@ -119,6 +119,8 @@ import static net.osmand.plus.track.OptionsCard.RENAME_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.SHARE_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.SHOW_ON_MAP_BUTTON_INDEX;
 import static net.osmand.plus.track.OptionsCard.UPLOAD_OSM_BUTTON_INDEX;
+import static net.osmand.plus.track.PointsGroupsCard.SELECT_GROUP_INDEX;
+import static net.osmand.plus.track.PointsGroupsCard.SHOW_HIDE_GROUP_INDEX;
 import static net.osmand.plus.track.TrackPointsCard.ADD_WAYPOINT_INDEX;
 import static net.osmand.plus.track.TrackPointsCard.DELETE_WAYPOINTS_INDEX;
 import static net.osmand.plus.track.TrackPointsCard.OPEN_WAYPOINT_INDEX;
@@ -641,7 +643,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 					}
 					cardsContainer.addView(pointsCard.getView());
 				} else {
-					pointsCard = new TrackPointsCard(mapActivity, displayHelper);
+					pointsCard = new TrackPointsCard(mapActivity, displayHelper, selectedGpxFile);
 					pointsCard.setListener(this);
 					cardsContainer.addView(pointsCard.build(mapActivity));
 				}
@@ -1028,11 +1030,17 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				dismiss();
 			}
 		} else if (card instanceof PointsGroupsCard) {
-			PointsGroupsCard groupsCard = (PointsGroupsCard) card;
-			GpxDisplayGroup group = groupsCard.getSelectedGroup();
-			if (pointsCard != null) {
-				pointsCard.setSelectedGroup(group);
-				pointsCard.updateContent();
+			if (buttonIndex == SELECT_GROUP_INDEX) {
+				PointsGroupsCard groupsCard = (PointsGroupsCard) card;
+				GpxDisplayGroup group = groupsCard.getSelectedGroup();
+				if (pointsCard != null) {
+					pointsCard.setSelectedGroup(group);
+					pointsCard.updateContent();
+				}
+			} else if (buttonIndex == SHOW_HIDE_GROUP_INDEX) {
+				if (pointsCard != null) {
+					pointsCard.onGroupVisibilityChanged();
+				}
 			}
 		}
 	}

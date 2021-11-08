@@ -931,6 +931,10 @@ public class GpxSelectionHelper {
 			hiddenGroups.remove(group);
 		}
 
+		public boolean isGroupHidden(@Nullable String groupName) {
+			return hiddenGroups.contains(groupName);
+		}
+
 		public GPXFile getGpxFile() {
 			return gpxFile;
 		}
