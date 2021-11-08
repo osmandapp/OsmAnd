@@ -136,7 +136,6 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 					filter.updateValues((values.get(0)), values.get(1));
 					updateDisplayedFilterNumbers(container, filter);
 					app.getGpsFilterHelper().filterGpxFile();
-					updatePointsRatio();
 				}
 			});
 			UiUtilities.setupSlider(rangeSlider, nightMode, ColorUtilities.getActiveColor(app, nightMode), false);
@@ -149,7 +148,6 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 					filter.updateValue((slider.getValue()));
 					updateDisplayedFilterNumbers(container, filter);
 					app.getGpsFilterHelper().filterGpxFile();
-					updatePointsRatio();
 				}
 			});
 			UiUtilities.setupSlider(slider, nightMode, ColorUtilities.getActiveColor(app, nightMode));
@@ -169,5 +167,6 @@ public class GpsFiltersCard extends GpsFilterBaseCard {
 
 	@Override
 	public void onFinishFiltering() {
+		updatePointsRatio();
 	}
 }

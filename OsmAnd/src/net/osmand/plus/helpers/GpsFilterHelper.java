@@ -1,6 +1,7 @@
 package net.osmand.plus.helpers;
 
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -48,6 +49,8 @@ public class GpsFilterHelper {
 
 	private String lastSavedFilePath;
 
+	private GpsFilterTask gpsFilterTask = null;
+
 	public GpsFilterHelper(@NonNull OsmandApplication app) {
 		this.app = app;
 		this.filteredSelectedGpxFile.filtered = true;
@@ -55,16 +58,26 @@ public class GpsFilterHelper {
 
 	public void setSelectedGpxFile(@NonNull SelectedGpxFile selectedGpxFile) {
 		sourceSelectedGpxFile = selectedGpxFile;
+
 		filteredSelectedGpxFile.setJoinSegments(sourceSelectedGpxFile.isJoinSegments());
+		filteredSelectedGpxFile.setGpxFile(copyGpxFile(app, selectedGpxFile.getGpxFile()), app);
+		if (filteredSelectedGpxFile.isJoinSegments()) {
+			filteredSelectedGpxFile.getGpxFile().addGeneralTrack();
+		}
 
 		lastSavedFilePath = null;
+
+		int pointsCount = 0;
+		for (TrkSegment segment : filteredSelectedGpxFile.getGpxFile().getNonEmptyTrkSegments(false)) {
+			pointsCount += segment.points.size();
+		}
+		leftPoints = pointsCount;
+		totalPoints = pointsCount;
 
 		smoothingFilter = new SmoothingFilter(app, selectedGpxFile);
 		speedFilter = new SpeedFilter(app, selectedGpxFile);
 		altitudeFilter = new AltitudeFilter(app, selectedGpxFile);
 		hdopFilter = new HdopFilter(app, selectedGpxFile);
-
-		filterGpxFile();
 	}
 
 	@Nullable
@@ -150,77 +163,12 @@ public class GpsFilterHelper {
 	}
 
 	public void filterGpxFile() {
-		GPXFile filteredGpxFile = copyGpxFile(app, sourceSelectedGpxFile.getGpxFile());
-		filteredGpxFile.tracks.clear();
-
-		leftPoints = 0;
-		totalPoints = 0;
-
-		GPXFile sourceGpxFile = sourceSelectedGpxFile.getGpxFile();
-		for (Track track : sourceGpxFile.tracks) {
-
-			Track filteredTrack = copyTrack(track);
-
-			for (TrkSegment segment : track.segments) {
-
-				if (segment.generalSegment) {
-					continue;
-				}
-
-				TrkSegment filteredSegment = copySegment(segment);
-
-				double previousPointDistance = 0;
-				List<WptPt> points = segment.points;
-
-				for (int i = 0; i < points.size(); i++) {
-					WptPt point = points.get(i);
-
-					double cumulativeDistance = point.distance - previousPointDistance;
-					boolean firstOrLast = i == 0 || i + 1 == points.size();
-
-					if (acceptPoint(point, totalPoints, cumulativeDistance, firstOrLast)) {
-						filteredSegment.points.add(new WptPt(point));
-						leftPoints++;
-						previousPointDistance = point.distance;
-					}
-
-					totalPoints++;
-				}
-
-				if (filteredSegment.points.size() != 0) {
-					filteredTrack.segments.add(filteredSegment);
-				}
-			}
-
-			if (filteredTrack.segments.size() != 0) {
-				filteredGpxFile.tracks.add(filteredTrack);
-			}
+		if (gpsFilterTask != null) {
+			gpsFilterTask.cancel(true);
 		}
 
-		if (filteredSelectedGpxFile.isJoinSegments()) {
-			filteredGpxFile.addGeneralTrack();
-		}
-
-		filteredSelectedGpxFile.setGpxFile(filteredGpxFile, app);
-
-		for (GpsFilterListener listener : listeners) {
-			listener.onFinishFiltering();
-		}
-	}
-
-	private Track copyTrack(Track source) {
-		Track copy = new Track();
-		copy.name = source.name;
-		copy.desc = source.desc;
-		return copy;
-	}
-
-	private TrkSegment copySegment(TrkSegment source) {
-		TrkSegment copy = new TrkSegment();
-		copy.name = source.name;
-		copy.routeSegments = source.routeSegments;
-		copy.routeTypes = source.routeTypes;
-		return copy;
+		gpsFilterTask = new GpsFilterTask();
+		gpsFilterTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private boolean acceptPoint(WptPt point, int pointIndex, double distance, boolean firstOrLast) {
@@ -688,6 +636,88 @@ public class GpsFilterHelper {
 		}
 	}
 
+	private class GpsFilterTask extends AsyncTask<Void, Void, GPXFile> {
+
+		private final GPXFile sourceGpx;
+
+		private int leftPoints = 0;
+		private int totalPoints = 0;
+
+		public GpsFilterTask() {
+			this.sourceGpx = getSourceSelectedGpxFile().getGpxFile();
+		}
+
+		@Override
+		protected GPXFile doInBackground(Void... voids) {
+			GPXFile filteredGpxFile = copyGpxFile(app, sourceGpx);
+			filteredGpxFile.tracks.clear();
+
+			for (Track track : sourceGpx.tracks) {
+
+				Track filteredTrack = copyTrack(track);
+
+				for (TrkSegment segment : track.segments) {
+
+					if (segment.generalSegment) {
+						continue;
+					}
+
+					TrkSegment filteredSegment = copySegment(segment);
+
+					double previousPointDistance = 0;
+					List<WptPt> points = segment.points;
+
+					for (int i = 0; i < points.size(); i++) {
+
+						if (isCancelled()) {
+							return null;
+						}
+
+						WptPt point = points.get(i);
+
+						double cumulativeDistance = point.distance - previousPointDistance;
+						boolean firstOrLast = i == 0 || i + 1 == points.size();
+
+						if (acceptPoint(point, totalPoints, cumulativeDistance, firstOrLast)) {
+							filteredSegment.points.add(new WptPt(point));
+							previousPointDistance = point.distance;
+							leftPoints++;
+						}
+
+						totalPoints++;
+					}
+
+					if (filteredSegment.points.size() != 0) {
+						filteredTrack.segments.add(filteredSegment);
+					}
+				}
+
+				if (filteredTrack.segments.size() != 0) {
+					filteredGpxFile.tracks.add(filteredTrack);
+				}
+			}
+
+			if (filteredSelectedGpxFile.isJoinSegments()) {
+				filteredGpxFile.addGeneralTrack();
+			}
+
+			return filteredGpxFile;
+		}
+
+		@Override
+		protected void onPostExecute(GPXFile filteredGpx) {
+			if (filteredGpx != null && !isCancelled()) {
+				filteredSelectedGpxFile.setGpxFile(filteredGpx, app);
+				GpsFilterHelper.this.leftPoints = leftPoints;
+				GpsFilterHelper.this.totalPoints = totalPoints;
+
+				for (GpsFilterListener listener : listeners) {
+					listener.onFinishFiltering();
+				}
+			}
+		}
+	}
+
 	public static GPXFile copyGpxFile(OsmandApplication app, GPXFile source) {
 		GPXFile copy = new GPXFile(Version.getFullVersion(app));
 		copy.author = source.author;
@@ -701,11 +731,25 @@ public class GpsFilterHelper {
 		return copy;
 	}
 
+	private Track copyTrack(Track source) {
+		Track copy = new Track();
+		copy.name = source.name;
+		copy.desc = source.desc;
+		return copy;
+	}
+
+	private TrkSegment copySegment(TrkSegment source) {
+		TrkSegment copy = new TrkSegment();
+		copy.name = source.name;
+		copy.routeSegments = source.routeSegments;
+		copy.routeTypes = source.routeTypes;
+		return copy;
+	}
+
 	public interface GpsFilterListener {
 
 		void onFinishFiltering();
 
 		void onFiltersReset();
-
 	}
 }
