@@ -53,9 +53,9 @@ public class MappersFragment extends BaseOsmAndFragment {
 	public static final String TAG = MappersFragment.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(MappersFragment.class);
 
-	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM");
-	private static final SimpleDateFormat MONTH_FORMAT = new SimpleDateFormat("MMMM");
-	private static final SimpleDateFormat CONTRIBUTION_FORMAT = new SimpleDateFormat("MMMM yyyy");
+	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-LL");
+	private static final SimpleDateFormat MONTH_FORMAT = new SimpleDateFormat("LLLL");
+	private static final SimpleDateFormat CONTRIBUTION_FORMAT = new SimpleDateFormat("LLLL yyyy");
 
 	private static final String CONTRIBUTIONS_URL = "https://www.openstreetmap.org/user/";
 	private static final String USER_CHANGES_URL = "https://osmand.net/changesets/user-changes";
