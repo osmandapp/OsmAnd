@@ -174,7 +174,7 @@ MB)をダウンロードしますか?</string>
     <string name="transport_searching_transport">交通機関の検索結果(目的地無し):</string>
     <string name="transport_searching_route">交通機関を検索結果(目的地は{0}):</string>
     <string name="transport_search_again">交通機関検索をリセット</string>
-    <string name="voice">記録音声</string>
+    <string name="voice">録音音声</string>
     <string name="no_vector_map_loaded">ベクターマップはロードされませんでした</string>
     <string name="gpx_files_not_found">GPXファイルがtracksフォルダ内に見つかりません</string>
     <string name="error_reading_gpx">GPXデータを読み取れませんでした。</string>
@@ -938,7 +938,7 @@ POIの更新は利用できません</string>
     <string name="index_name_oceania">オーストラリアとオセアニア</string>
     <string name="index_name_other">ワールドワイドとトピックマップ</string>
     <string name="index_name_wiki">ワールドワイドウィキペディアPOI</string>
-    <string name="index_name_voice">音声案内(記録音声、機能限定)</string>
+    <string name="index_name_voice">音声案内(録音音声、機能限定)</string>
     <string name="index_name_tts_voice">音声案内(TTS合成音声、推奨)</string>
     <string name="amenity_type_user_defined">ユーザー定義</string>
     <string name="fav_export_confirmation">以前にエクスポートしたお気に入りのファイルが存在します。置き換えますか？</string>
@@ -2094,7 +2094,7 @@ POIの更新は利用できません</string>
     <string name="trip_rec_notification_settings_desc">旅行記録を開始できるようにシステム通知を表示するよう設定します。</string>
     <string name="shared_string_notifications">通知</string>
     <string name="shared_string_trip">旅行</string>
-    <string name="shared_string_recorded">記録</string>
+    <string name="shared_string_recorded">録音音声</string>
     <string name="shared_string_record">記録</string>
     <string name="gpx_logging_no_data">データなし</string>
     <string name="routing_attr_short_way_name">燃費を抑えたルート</string>
@@ -4172,7 +4172,7 @@ POIの更新は利用できません</string>
     <string name="osmand_pro_tagline">全ての機能を手に入れる</string>
     <string name="release_4_0">• クラウドバックアップの実装
 \n
-\n• \"Topo\"レンダリングスタイルにナイトモードを追加
+\n• \"Topo\"マップスタイルにナイトモードを追加
 \n
 \n• 等高線をフィート単位でダウンロードするオプションを追加
 \n
@@ -4182,9 +4182,9 @@ POIの更新は利用できません</string>
 \n
 \n• タップによる距離測定が半径定規から独立したオプションに
 \n
-\n• ルート計画：ルート計画メニューから離れずに、ナビゲーションオプションの変更、マップや検索設定にアクセスできる機能を追加
+\n• ルート計画：ルート計画画面から離れずに、ナビゲーションオプションの変更やマップ構成にアクセスしたり、検索できるように変更
 \n
-\n• 購入に関する詳細情報が表示された新しい\"購入\"画面の採用
+\n• 購入に関する詳細情報がを含む新しい\"購入\"画面の採用
 \n
 \n• ルートラインの外観を変更するオプションを追加
 \n
@@ -4290,4 +4290,94 @@ POIの更新は利用できません</string>
     <string name="map_updates_are_unavailable_yet">マップ更新はまだ利用できません(T-T )</string>
     <string name="connect_track_points_as">ルート地点間の接続</string>
     <string name="pro_features">Pro版</string>
+    <string name="clear_all_history">すべての履歴を消去</string>
+    <string name="shared_string_travelbooks">旅行ガイド</string>
+    <string name="display_route_tracks">経路を表示</string>
+    <string name="approx_safe_mode_description">ネイティブコードの代わりに低速のAndroid用コードを使用してGPXの概算を実行します。</string>
+    <string name="shared_storage_warning_description">新しいAndroidの仕様により、2021年11月以降OsmAnd 4.2は共有ストレージにアクセスできなくなります。
+\n
+\nデータフォルダを共有ストレージから使用可能なストレージに移動してください。放置した場合アプリはオフラインマップ、GPX経路などのデータにアクセスできなくなります。</string>
+    <string name="shared_app_storage_description">Androidストレージへのアクセス仕様が変更されたため、共有メモリは使用できなくなりました。</string>
+    <string name="internal_app_storage_description">すべてのユーザーや他のアプリから内部ストレージが見えなくなりました、したがってOsmAndのみがデータにアクセスできるようになります。</string>
+    <string name="use_external_timestamps_description">オンラインルート計算機能のタイムスタンプを使用して、推定時間と平均速度を調整します</string>
+    <string name="use_external_timestamps">外部タイムスタンプを使用</string>
+    <string name="release_4_1">• Android Autoに対する初歩的な補助機能を追加
+\n
+\n• UTM座標検索のユーザーインターフェイスの更新
+\n
+\n• お気に入り:最近使用したアイコンを表示する機能の追加
+\n
+\n• ルートプランニング:起動後に選択したプロファイルを使用
+\n
+\n• Mapillaryレイヤーの修正、プラグインは標準状態では無効へと変更
+\n
+\n• アプリのすべての履歴を管理するための画面を追加
+\n
+\n• アプリを再起動した後、マップの向きがリセットされないように変更
+\n
+\n• SRTMでの高さを示すマーカーのレンダリング改善
+\n
+\n• アラビア語のマップキャプションを修正
+\n
+\n• さまざまなルーティングの問題を修正
+\n
+\n</string>
+    <string name="exit_pan_mode_descr">[選択]を押してパンモードを終了します</string>
+    <string name="routing_attr_prefer_tactile_paving_name">触覚舗装を優先</string>
+    <string name="routing_attr_allow_gate_name">ゲートの使用を許可</string>
+    <string name="routing_attr_only_permitted_ways_description">明示的な許可のある小道(わだち、通路など)を使用します</string>
+    <string name="safe_settings">安全</string>
+    <string name="no_plugins_enabled">プラグインが有効になっていません。利用可能なプラグインの一覧は、\'メニュー\'→\'プラグイン\'にあります。</string>
+    <string name="approx_safe_mode">セーフモードGPX概算</string>
+    <string name="is_disabled">%1$sは無効化されました</string>
+    <string name="history_actions_descr">履歴をファイルにエクスポートできます。</string>
+    <string name="map_markers_history">マップマーカー履歴</string>
+    <string name="navigation_history">ナビゲーション履歴</string>
+    <string name="history_preferences_descr">履歴の項目は個別にログを無効化できます。</string>
+    <string name="shortcut_start_recording">記録の開始</string>
+    <string name="shortcut_navigate_to">案内を開始する</string>
+    <string name="shortcut_navigate_to_home">自宅へ案内する</string>
+    <string name="android_auto_map_placeholder_title">マップは車載モニターに表示されます。</string>
+    <string name="shortcut_navigate_to_work">職場へ案内する</string>
+    <string name="android_auto_map_placeholder_descr">Android Autoから端末を切り離し、アプリ側でマップを表示します。</string>
+    <string name="android_auto_purchase_request_title">OsmAnd ProまたはMaps +を購入して、OsmAndでAndroid Autoを利用します</string>
+    <string name="continue_on_phone">モバイル端末で続行</string>
+    <string name="location_access_request_action">アクセス許可</string>
+    <string name="location_access_request_title">ナビを有効にするには、OsmAndにロケーション取得権限が必要です。</string>
+    <string name="location_access_request_result">承認済:%1$s 拒否済:%2$s</string>
+    <string name="shared_string_articles">記事</string>
+    <string name="included_categories">内包カテゴリ</string>
+    <string name="shared_string_details">詳細</string>
+    <string name="routing_attr_allow_gate_description">ゲートの通行を許可します</string>
+    <string name="routing_attr_prefer_horse_routes_description">馬が通れるルートを優先します</string>
+    <string name="sample_wikivoyage">Wikivoyageの例</string>
+    <string name="shared_storage_warning_title">ストレージアクセスルールの変更</string>
+    <string name="purchases_feature_desc_android_auto">OsmAndオフラインマップとナビゲーションを車載モニターに表示し、車両側との操作を統合します。</string>
+    <string name="icon_group_nautical">航海</string>
+    <string name="transparent_status_bar_descr">ステータスバーの下にマップを表示</string>
+    <string name="transparent_status_bar">透過式ステータスバー</string>
+    <string name="search_title">検索: %1$s</string>
+    <string name="shared_string_files">ファイル</string>
+    <string name="mapillary_menu_filter_description_new">日付または種類で画像をフィルタリングします。拡大時のみ有効になります。</string>
+    <string name="routing_attr_prefer_horse_routes_name">乗馬ルートを優先</string>
+    <string name="travel_route_types">ルートタイプ</string>
+    <string name="service_is_not_available_please_try_later">サービスは利用できません。後ほどもう一度やり直してください。</string>
+    <string name="start_point">開始</string>
+    <string name="routeInfo_roadClass_description">道路種別によってルートまたは経路のラインに色を付けます。</string>
+    <string name="routeInfo_surface_description">道路/歩道の表面や舗装状態に関する情報を提供します。</string>
+    <string name="remove_group_from_markers">マーカーリストからグループを削除</string>
+    <string name="add_group_to_markers">マーカーリストにグループを追加</string>
+    <string name="routing_attr_prefer_tactile_paving_description">触覚舗装がある場所を優先します</string>
+    <string name="routing_attr_only_permitted_streets_description">明示的な許可のある道路のみを使用します</string>
+    <string name="routing_attr_only_permitted_streets_name">許可された道路のみ通行</string>
+    <string name="horseback_riding">乗馬</string>
+    <string name="delete_history_items_descr">選択した履歴品目を削除してもよろしいですか？</string>
+    <string name="delete_history_items">%1$sの履歴品目を削除しますか？</string>
+    <string name="quick_action_toggle_preference">選択した設定状態を切り替えるトグルボタンです。</string>
+    <string name="display_route_tracks_as_poi">経路ををPOIとして表示</string>
+    <string name="search_history_is_disabled_descr">設定で検索履歴を有効にできます。</string>
+    <string name="markers_history_is_disabled_descr">訪問したマップマーカーのリストを履歴に残すようにします。</string>
+    <string name="history_is_disabled_descr">履歴を有効にして、最後に使用した項目にすばやくアクセスできるようにします。</string>
+    <string name="clear_all_history_warning">検索、ナビゲーション、マーカー履歴を含むすべてのアプリ履歴を消去しますか？</string>
+    <string name="routing_attr_only_permitted_ways_name">許可された道のみ通行</string>
 </resources>
