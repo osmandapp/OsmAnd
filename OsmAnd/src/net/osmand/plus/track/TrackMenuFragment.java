@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -394,12 +395,22 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 				FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(widthNoShadow, ViewGroup.LayoutParams.WRAP_CONTENT);
 				params.gravity = Gravity.BOTTOM | Gravity.START;
 				bottomNav.setLayoutParams(params);
+				shiftMapControls(widthNoShadow);
 			}
 			if (selectedGpxFile != null) {
 				initContent(view);
 			}
 		}
 		return view;
+	}
+
+	private void shiftMapControls(int viewWidth) {
+		boolean isLayoutRtl = AndroidUtils.isLayoutRtl(getContext());
+		int shiftPosition = viewWidth;
+		int start = isLayoutRtl ? 0 : shiftPosition;
+		int end = isLayoutRtl ? shiftPosition : 0;
+		AndroidUtils.setMargins((MarginLayoutParams) backButtonContainer.getLayoutParams(), start, 0, end, 0);
+		AndroidUtils.setMargins((MarginLayoutParams) displayGroupsWidget.getLayoutParams(), start, 0, end, 0);
 	}
 
 	private void initContent(@NonNull View view) {
