@@ -25,6 +25,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,6 +51,7 @@ public class GpsFilterHelper {
 
 	private String lastSavedFilePath;
 
+	private final Executor singleThreadExecutor = Executors.newSingleThreadExecutor();
 	private GpsFilterTask gpsFilterTask = null;
 
 	public GpsFilterHelper(@NonNull OsmandApplication app) {
@@ -172,7 +175,7 @@ public class GpsFilterHelper {
 		}
 
 		gpsFilterTask = new GpsFilterTask();
-		gpsFilterTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		gpsFilterTask.executeOnExecutor(singleThreadExecutor);
 	}
 
 	private boolean acceptPoint(WptPt point, int pointIndex, double distance, boolean firstOrLast) {
@@ -635,21 +638,21 @@ public class GpsFilterHelper {
 		}
 	}
 
-	private class GpsFilterTask extends AsyncTask<Void, Void, GPXFile> {
+	private class GpsFilterTask extends AsyncTask<Void, Void, Boolean> {
 
 		private final GPXFile sourceGpx;
-
-		private int leftPoints = 0;
-		private int totalPoints = 0;
 
 		public GpsFilterTask() {
 			this.sourceGpx = getSourceSelectedGpxFile().getGpxFile();
 		}
 
 		@Override
-		protected GPXFile doInBackground(Void... voids) {
+		protected Boolean doInBackground(Void... voids) {
 			GPXFile filteredGpxFile = copyGpxFile(app, sourceGpx);
 			filteredGpxFile.tracks.clear();
+
+			leftPoints = 0;
+			totalPoints = 0;
 
 			for (Track track : sourceGpx.tracks) {
 
@@ -669,7 +672,7 @@ public class GpsFilterHelper {
 					for (int i = 0; i < points.size(); i++) {
 
 						if (isCancelled()) {
-							return null;
+							return false;
 						}
 
 						WptPt point = points.get(i);
@@ -700,16 +703,14 @@ public class GpsFilterHelper {
 				filteredGpxFile.addGeneralTrack();
 			}
 
-			return filteredGpxFile;
+			filteredSelectedGpxFile.setGpxFile(filteredGpxFile, app);
+
+			return true;
 		}
 
 		@Override
-		protected void onPostExecute(GPXFile filteredGpx) {
-			if (filteredGpx != null && !isCancelled()) {
-				filteredSelectedGpxFile.setGpxFile(filteredGpx, app);
-				GpsFilterHelper.this.leftPoints = leftPoints;
-				GpsFilterHelper.this.totalPoints = totalPoints;
-
+		protected void onPostExecute(Boolean successfulFinish) {
+			if (successfulFinish && !isCancelled()) {
 				for (GpsFilterListener listener : listeners) {
 					listener.onFinishFiltering();
 				}
