@@ -1729,21 +1729,6 @@ public class GPXUtilities {
 			return qr;
 		}
 
-		private void updateQR(QuadRect q, WptPt p, double defLat, double defLon) {
-			if (q.left == defLon && q.top == defLat && 
-					q.right == defLon && q.bottom == defLat) {
-				q.left = p.getLongitude();
-				q.right = p.getLongitude();
-				q.top = p.getLatitude();
-				q.bottom = p.getLatitude();
-			} else {
-				q.left = Math.min(q.left, p.getLongitude());
-				q.right = Math.max(q.right, p.getLongitude());
-				q.top = Math.max(q.top, p.getLatitude());
-				q.bottom = Math.min(q.bottom, p.getLatitude());
-			}			
-		}
-
 		public String getColoringType() {
 			if (extensions != null) {
 				return extensions.get("coloring_type");
@@ -1867,6 +1852,21 @@ public class GPXUtilities {
 				size++;
 			}
 			return size;
+		}
+	}
+
+	public static void updateQR(QuadRect q, WptPt p, double defLat, double defLon) {
+		if (q.left == defLon && q.top == defLat &&
+				q.right == defLon && q.bottom == defLat) {
+			q.left = p.getLongitude();
+			q.right = p.getLongitude();
+			q.top = p.getLatitude();
+			q.bottom = p.getLatitude();
+		} else {
+			q.left = Math.min(q.left, p.getLongitude());
+			q.right = Math.max(q.right, p.getLongitude());
+			q.top = Math.max(q.top, p.getLatitude());
+			q.bottom = Math.min(q.bottom, p.getLatitude());
 		}
 	}
 

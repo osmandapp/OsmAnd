@@ -40,7 +40,7 @@ import net.osmand.plus.myplaces.DeletePointsTask;
 import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.EditTrackGroupDialogFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
-import net.osmand.plus.track.SynchronizedGroupsHelper.SynchronizedGroups;
+import net.osmand.plus.track.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -297,11 +297,11 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		private Set<?> filteredItems;
 
 		public void synchronizeGroups(@NonNull List<GpxDisplayGroup> displayGroups) {
-			SynchronizedGroups synchronizedGroups = SynchronizedGroupsHelper.getGroups(app, displayGroups, filteredItems);
+			DisplayGroupsHolder displayGroupsHolder = DisplayPointsGroupsHelper.getGroups(app, displayGroups, filteredItems);
 			groups.clear();
 			itemGroups.clear();
-			groups.addAll(synchronizedGroups.groups);
-			itemGroups.putAll(synchronizedGroups.itemGroups);
+			groups.addAll(displayGroupsHolder.groups);
+			itemGroups.putAll(displayGroupsHolder.itemGroups);
 			notifyDataSetChanged();
 		}
 

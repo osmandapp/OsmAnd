@@ -1,6 +1,7 @@
 package net.osmand.plus.track;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -15,6 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -22,10 +26,10 @@ import net.osmand.plus.UiUtilities.CompoundButtonType;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.SelectionBottomSheet.SelectableItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
+import net.osmand.plus.track.DisplayPointsGroupsHelper.DisplayGroupsHolder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,30 +39,32 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = DisplayGroupsBottomSheet.class.getSimpleName();
 
 	private OsmandApplication app;
-	private LayoutInflater inflater;
-	private UiUtilities uiUtilities;
+	private TrackDisplayHelper displayHelper;
+	private SelectedGpxFile selectedGpxFile;
 
-	private List<SelectableItem> allItems = new ArrayList<>();
-	private Set<SelectableItem> visibleItems = new HashSet<>();
+	private List<SelectableItem> uiItems = new ArrayList<>();
 	private Map<SelectableItem, View> listViews = new HashMap<>();
+	private LayoutInflater inflater;
 	private LinearLayout listContainer;
 	private TextView sizeIndication;
 	private View hideAllButton;
 
-	private int defaultIconColor;
+	private DisplayPointGroupsCallback callback;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		initData();
+	}
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-		app = requiredMyApplication();
-		uiUtilities = app.getUIUtilities();
 		inflater = UiUtilities.getInflater(requireContext(), nightMode);
-		defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
-
 		View view = inflater.inflate(R.layout.bottom_sheet_display_groups_visibility, null);
 		sizeIndication = view.findViewById(R.id.selected_size);
 		hideAllButton = view.findViewById(R.id.hide_all_button);
 		listContainer = view.findViewById(R.id.list);
-		createItemsList();
+		updateListItems();
 		setupHideAllButton();
 		items.add(new SimpleBottomSheetItem.Builder().setCustomView(view).create());
 	}
@@ -69,10 +75,43 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 		fullUpdate();
 	}
 
-	private void createItemsList() {
+	private void initData() {
+		app = requiredMyApplication();
+		callback = (DisplayPointGroupsCallback) getTargetFragment();
+		if (callback != null) {
+			displayHelper = callback.getDisplayHelper();
+			selectedGpxFile = callback.getSelectedGpx();
+			initSelectableItems();
+		}
+	}
+
+	private void initSelectableItems() {
+		List<GpxDisplayGroup> displayGroups = displayHelper.getPointsOriginalGroups();
+		DisplayGroupsHolder groupsHolder = DisplayPointsGroupsHelper.getGroups(app, displayGroups, null);
+		uiItems.clear();
+		for (GpxDisplayGroup group : groupsHolder.groups) {
+			SelectableItem uiItem = new SelectableItem();
+			List<GpxDisplayItem> groupItems = groupsHolder.itemGroups.get(group);
+
+			String categoryName = group.getName();
+			if (TextUtils.isEmpty(categoryName)) {
+				categoryName = app.getString(R.string.shared_string_gpx_points);
+			}
+			uiItem.setTitle(categoryName);
+			uiItem.setColor(group.getColor());
+
+			int size = groupItems != null ? groupItems.size() : 0;
+			uiItem.setDescription(String.valueOf(size));
+
+			uiItem.setObject(group);
+			uiItems.add(uiItem);
+		}
+	}
+
+	private void updateListItems() {
 		listContainer.removeAllViews();
 		listViews.clear();
-		for (SelectableItem item : allItems) {
+		for (SelectableItem item : uiItems) {
 			View view = inflater.inflate(R.layout.bottom_sheet_item_with_descr_and_switch_56dp, listContainer, false);
 			TextView title = view.findViewById(R.id.title);
 			title.setText(item.getTitle());
@@ -84,18 +123,9 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 			UiUtilities.setupCompoundButton(cb, nightMode, CompoundButtonType.GLOBAL);
 
 			view.setOnClickListener(v -> {
-				boolean newVisible = !cb.isChecked();
-				if (newVisible) {
-					visibleItems.add(item);
-				} else {
-					visibleItems.remove(item);
-				}
-				if (getTargetFragment() instanceof DisplayPointGroupsVisibilityListener) {
-					DisplayPointGroupsVisibilityListener listener =
-							(DisplayPointGroupsVisibilityListener) getTargetFragment();
-					listener.onChangePointsGroupVisibility(item, newVisible);
-					fullUpdate();
-				}
+				updateGroupVisibility(item.getTitle(), !cb.isChecked());
+				callback.onPointGroupsVisibilityChanged();
+				fullUpdate();
 			});
 
 			listContainer.addView(view);
@@ -105,14 +135,28 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private void setupHideAllButton() {
 		hideAllButton.setOnClickListener(view -> {
-			visibleItems.clear();
-			if (getTargetFragment() instanceof DisplayPointGroupsVisibilityListener) {
-				DisplayPointGroupsVisibilityListener listener =
-						(DisplayPointGroupsVisibilityListener) getTargetFragment();
-				listener.onHideAllPointGroups(allItems);
-				fullUpdate();
+			for (String groupName : getGroupsNames()) {
+				updateGroupVisibility(groupName, false);
 			}
+			callback.onPointGroupsVisibilityChanged();
+			fullUpdate();
 		});
+	}
+
+	private void updateGroupVisibility(String groupName, boolean isVisible) {
+		if (isVisible) {
+			selectedGpxFile.removeHiddenGroups(groupName);
+		} else {
+			selectedGpxFile.addHiddenGroups(groupName);
+		}
+	}
+
+	private List<String> getGroupsNames() {
+		List<String> names = new ArrayList<>();
+		for (SelectableItem item : uiItems) {
+			names.add(item.getTitle());
+		}
+		return names;
 	}
 
 	private void fullUpdate() {
@@ -121,51 +165,57 @@ public class DisplayGroupsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateSizeView() {
+		int totalCount = uiItems.size();
+		int hiddenCount = selectedGpxFile.getHiddenGroups().size();
+		int visibleCount = totalCount - hiddenCount;
 		String description = getString(
 				R.string.ltr_or_rtl_combine_via_slash,
-				String.valueOf(visibleItems.size()),
-				String.valueOf(allItems.size())
+				String.valueOf(visibleCount),
+				String.valueOf(totalCount)
 		);
 		sizeIndication.setText(description);
 	}
 
 	private void updateList() {
-		for (SelectableItem item : allItems) {
+		int defaultIconColor = ColorUtilities.getDefaultIconColor(app, nightMode);
+		Set<String> hiddenGroupsNames = selectedGpxFile.getHiddenGroups();
+		for (SelectableItem item : uiItems) {
 			View view = listViews.get(item);
 			if (view == null) {
 				continue;
 			}
-			boolean isVisible = visibleItems.contains(item);
+			boolean isVisible = !hiddenGroupsNames.contains(item.getTitle());
 			int iconId = isVisible ? R.drawable.ic_action_folder : R.drawable.ic_action_folder_hidden;
 			int iconColor = item.getColor();
 			if (iconColor == 0 || !isVisible) {
 				iconColor = defaultIconColor;
 			}
 			ImageView icon = view.findViewById(R.id.icon);
-			icon.setImageDrawable(uiUtilities.getPaintedIcon(iconId, iconColor));
+			icon.setImageDrawable(getPaintedIcon(iconId, iconColor));
 			CompoundButton cb = view.findViewById(R.id.compound_button);
 			cb.setChecked(isVisible);
 		}
 	}
 
 	public static DisplayGroupsBottomSheet showInstance(@NonNull AppCompatActivity activity,
-	                                                    @NonNull List<SelectableItem> allItems,
-	                                                    @Nullable Set<SelectableItem> visibleItems,
 	                                                    @NonNull Fragment targetFragment,
 	                                                    boolean usedOnMap) {
 		DisplayGroupsBottomSheet fragment = new DisplayGroupsBottomSheet();
 		fragment.setUsedOnMap(usedOnMap);
 		fragment.setTargetFragment(targetFragment, 0);
-		fragment.allItems = allItems;
-		fragment.visibleItems = visibleItems;
 		FragmentManager fm = activity.getSupportFragmentManager();
 		fragment.show(fm, TAG);
 		return fragment;
 	}
 
-	public interface DisplayPointGroupsVisibilityListener {
-		void onChangePointsGroupVisibility(SelectableItem item, boolean newState);
-		void onHideAllPointGroups(List<SelectableItem> items);
+	public interface DisplayPointGroupsCallback {
+
+		void onPointGroupsVisibilityChanged();
+
+		SelectedGpxFile getSelectedGpx();
+
+		TrackDisplayHelper getDisplayHelper();
+
 	}
 
 }

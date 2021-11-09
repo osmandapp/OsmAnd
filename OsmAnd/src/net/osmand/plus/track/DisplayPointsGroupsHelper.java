@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class SynchronizedGroupsHelper {
+public class DisplayPointsGroupsHelper {
 
 	private final OsmandApplication app;
 	private final Comparator<String> comparator;
@@ -29,19 +29,19 @@ public class SynchronizedGroupsHelper {
 	private List<GpxDisplayGroup> groups = new ArrayList<>();
 	private Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups = new LinkedHashMap<>();
 
-	private SynchronizedGroupsHelper(OsmandApplication app) {
+	private DisplayPointsGroupsHelper(OsmandApplication app) {
 		this.app = app;
 		comparator = OsmAndCollator.primaryCollator()::compare;
 	}
 
-	public static SynchronizedGroups getGroups(@NonNull OsmandApplication app,
-	                                           @NonNull List<GpxDisplayGroup> displayGroups,
-	                                           @Nullable Set<?> filteredItems) {
-		return new SynchronizedGroupsHelper(app).getGroups(displayGroups, filteredItems);
+	public static DisplayGroupsHolder getGroups(@NonNull OsmandApplication app,
+	                                            @NonNull List<GpxDisplayGroup> displayGroups,
+	                                            @Nullable Set<?> filteredItems) {
+		return new DisplayPointsGroupsHelper(app).getGroups(displayGroups, filteredItems);
 	}
 
-	private SynchronizedGroups getGroups(@NonNull List<GpxDisplayGroup> displayGroups,
-	                                     @Nullable Set<?> filteredItems) {
+	private DisplayGroupsHolder getGroups(@NonNull List<GpxDisplayGroup> displayGroups,
+	                                      @Nullable Set<?> filteredItems) {
 		Collections.sort(displayGroups, (g1, g2) -> {
 			int i1 = g1.getType().ordinal();
 			int i2 = g2.getType().ordinal();
@@ -58,7 +58,7 @@ public class SynchronizedGroupsHelper {
 		}
 		processDisplayGroups(trackPointsGroups, filteredItems);
 		processDisplayGroups(routePointsGroups, filteredItems);
-		return new SynchronizedGroups(groups, itemGroups);
+		return new DisplayGroupsHolder(groups, itemGroups);
 	}
 
 	private void processDisplayGroups(List<GpxDisplayGroup> displayGroups, Set<?> filteredItems) {
@@ -148,12 +148,12 @@ public class SynchronizedGroupsHelper {
 		}
 	}
 
-	public static class SynchronizedGroups {
+	public static class DisplayGroupsHolder {
 		public List<GpxDisplayGroup> groups;
 		public Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups;
 
-		public SynchronizedGroups(@NonNull List<GpxDisplayGroup> groups,
-		                          @NonNull Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups) {
+		public DisplayGroupsHolder(@NonNull List<GpxDisplayGroup> groups,
+		                           @NonNull Map<GpxDisplayGroup, List<GpxDisplayItem>> itemGroups) {
 			this.groups = groups;
 			this.itemGroups = itemGroups;
 		}
