@@ -338,7 +338,7 @@
     <string name="download_roads_only_item">Только дороги</string>
     <string name="download_regular_maps">Стандартная карта</string>
     <string name="download_roads_only_maps">Карта дорог</string>
-    <string name="safe_mode_description">Запустить приложение в безопасном режиме (используя более медленный код Android вместо нативного).</string>
+    <string name="safe_mode_description">Запустить приложение в безопасном (более медленном) режиме.</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение работает в безопасном режиме (отключается в разделе «Настройки»).</string>
     <string name="background_service_is_enabled_question">Фоновая служба OsmAnd всё ещё работает. Остановите её тоже\?</string>
@@ -1991,7 +1991,7 @@
     <string name="instalation_troubleshooting_item">Установка и решение проблем</string>
     <string name="search_on_the_map_item">Поиск на карте</string>
     <string name="map_viewing_item">Обзор карты</string>
-    <string name="faq_item_description">Часто задаваемые вопросы</string>
+    <string name="faq_item_description">Часто задаваемые вопросы.</string>
     <string name="faq_item">Вопросы и ответы</string>
     <string name="first_usage_item">Первый запуск</string>
     <string name="first_usage_item_description">Как загрузить карты, установить основные настройки.</string>
@@ -2176,7 +2176,7 @@
     <string name="coords_search">Поиск по координатам</string>
     <string name="advanced_coords_search">Расширенный поиск по координатам</string>
     <string name="back_to_search">Вернуться в поиск</string>
-    <string name="confirmation_to_delete_history_items">Удалить выбранные элементы из истории\?</string>
+    <string name="confirmation_to_delete_history_items">Удалить выбранные записи из истории\?</string>
     <string name="show_something_on_map">Показать %1$s на карте</string>
     <string name="dist_away_from_my_location">Искать за %1$s от местоположения</string>
     <string name="share_history_subject"> поделились через OsmAnd</string>
@@ -3361,9 +3361,9 @@
     <string name="please_provide_profile_name_message">Укажите имя профиля</string>
     <string name="open_settings">Открыть настройки</string>
     <string name="plugin_disabled">Плагин отключён</string>
-    <string name="plugin_disabled_descr">Плагин является отдельным приложением, удалите его отдельно, если больше не собираетесь использовать.
+    <string name="plugin_disabled_descr">Плагин является отдельным приложением, его отключение не приведёт к его удалению.
 \n
-\nПосле удаления OsmAnd плагин останется на устройстве.</string>
+\nУдалить плагин можно в настройках Android в меню «Приложения».</string>
     <string name="shared_string_menu">Меню</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Маршрутизация</string>
@@ -3507,7 +3507,7 @@
 \nОтключите неиспользуемые плагины, чтобы скрыть их элементы управления. %1$s.</string>
     <string name="ui_customization_short_descr">Элементы панели, контекстное меню</string>
     <string name="shared_string_drawer">Боковое меню</string>
-    <string name="divider_descr">Элементы ниже разделенные делителем.</string>
+    <string name="divider_descr">Элементы ниже разделённые делителем.</string>
     <string name="shared_string_items">Элементы</string>
     <string name="ui_customization">Настройки интерфейса</string>
     <string name="context_menu_actions">Действия контекстного меню</string>
@@ -4272,7 +4272,7 @@
     <string name="on_hold_since">Приостановлена с %1$s</string>
     <string name="active_till">Активна до %1$s</string>
     <string name="backup_deleted_all_data">Все данные удалены.</string>
-    <string name="track_has_no_needed_data">Трек не содержит необходимых данных.</string>
+    <string name="track_has_no_needed_data">В треке отсутствуют соответствующие данные.</string>
     <string name="enter_verification_code">Введите одноразовый пароль</string>
     <string name="reset_to_original">Сбросить к начальному значению</string>
     <string name="backup_error_no_subscription">Подписка отсутствует</string>
@@ -4280,18 +4280,18 @@
     <string name="benefits_for_contributors">Преимущества для активных участников OSM</string>
     <string name="benefits_for_contributors_primary_descr">Являясь активным участником OpenStreetMap.org, вы можете получать ежечасные обновления карт без ограничений.</string>
     <string name="shared_string_contributions">Вклады</string>
-    <string name="contributions_may_calculate_with_delay">Вклады могут рассчитываться с задержкой в несколько часов.</string>
-    <string name="benefits_for_contributors_secondary_descr">Войдите в OpenStreetMap для проверки, имеете ли вы право на неограниченное ежемесячное и ежечасное обновление карт.</string>
+    <string name="contributions_may_calculate_with_delay">Расчет вкладов может занять несколько часов.</string>
+    <string name="benefits_for_contributors_secondary_descr">Войдите в OpenStreetMap, чтобы проверить, имеете ли вы право на неограниченное ежемесячное и ежечасное обновление карт.</string>
     <string name="use_login_and_password">Используйте логин и пароль</string>
     <string name="available_until">Доступно до %1$s</string>
     <string name="enough_contributions_descr">Вы внесли достойный вклад в OpenStreetMap и теперь можете обновлять карты OsmAnd без ограничений!</string>
-    <string name="not_enough_contributions_descr">У вас должно быть не менее %1$s правок на OpenStreetMap за последние %2$s дней.</string>
+    <string name="not_enough_contributions_descr">Необходимо внести не менее %1$s правок на OpenStreetMap за последние %2$s дней.</string>
     <string name="map_updates_are_unavailable_yet">Обновления карт пока недоступны :-(</string>
     <string name="online_maps_searching_descr">Онлайн-поиск.…</string>
     <string name="walking_route_osmc_description">Окраска на основе индивидуального цвета (если задано на OpenStreetMap) и типа (международный, региональный, местный).</string>
     <string name="purchases_feature_desc_pro_widgets">Получите доступ к функциям OsmAnd Pro: раскраска маршрутов и многое другое.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Изучите планы OsmAnd, чтобы выбрать подходящий.</string>
-    <string name="option_available_only_in_osmand_pro">Опция доступна в рамках подписки OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">Доступно в рамках подписки OsmAnd Pro.</string>
     <string name="shared_string_relation">Отношение</string>
     <string name="routes_color_by_type">Раскраска маршрутов…</string>
     <string name="setting_supported_by_style">Параметр поддерживается стилем карты «%1$s»</string>
@@ -4311,7 +4311,7 @@
 \nВозможно, некоторые карты не загружены.</string>
     <string name="connect_track_points_as">Соедините точки маршрута</string>
     <string name="purchases_restored">Покупки восстановлены</string>
-    <string name="grey_color_undefined">Серый цвет используется для участков без данных.</string>
+    <string name="grey_color_undefined">Серым отмечены участки без данных.</string>
     <string name="empty_category_name">Не задано название категории</string>
     <string name="osm_live_payment_subscription_management_amz">Оплата будет списана со счёта, привязанного к вашему аккаунту Amazon , при подтверждении покупки.
 \n
@@ -4319,7 +4319,7 @@
 \n
 \nВы можете управлять подписками и отменять их в настройках Amazon в любое время.</string>
     <string name="cancel_anytime_in_amazon_app">Отмена в любое время в Amazon App</string>
-    <string name="amz_manage_subscription_descr">Для управления подпиской используйте приложение Amazon App или откройте веб-сайт Amazon.com под своим профилем.</string>
+    <string name="amz_manage_subscription_descr">Управляйте подпиской с помощью приложения или веб-сайта Amazon.</string>
     <string name="no_activity_for_intent">Установите приложение, которое может выполнить это действие.</string>
     <string name="add_group_to_markers">Добавить группу в список маркеров</string>
     <string name="remove_group_from_markers">Удалить группу из списка маркеров</string>
@@ -4349,7 +4349,7 @@
     <string name="search_title">Поиск: %1$s</string>
     <string name="upload_gpx_description_hint">Оставьте поле пустым, в качестве описания будут использованы названия треков. Введенное описание будет применено к каждому треку.</string>
     <string name="exit_pan_mode_descr">Нажмите «Выбрать», чтобы выйти из режима панорамирования</string>
-    <string name="sample_wikivoyage">Образец Викигида</string>
+    <string name="sample_wikivoyage">Викигид (образец)</string>
     <string name="icon_group_nautical">Морские</string>
     <string name="shared_storage_warning_title">Изменения в правилах доступа к хранилищу</string>
     <string name="purchases_feature_desc_android_auto">Выводит локальные карты и навигацию OsmAnd на экран вашего автомобиля и интегрируется с его элементами управления.</string>
@@ -4414,6 +4414,7 @@
     <string name="display_route_tracks">Показать треки</string>
     <string name="shared_string_travelbooks">Путеводители</string>
     <string name="display_route_tracks_as_poi">Показать треки как POI</string>
-    <string name="delete_history_items">Удалить элементы истории (%1$s шт.)\?</string>
-    <string name="delete_history_items_descr">Удалить выбранные элементы истории\?</string>
+    <string name="delete_history_items">Удалить записи в истории (%1$s шт.)\?</string>
+    <string name="delete_history_items_descr">Удалить выбранные записи\?</string>
+    <string name="quick_action_toggle_preference">Переключатель для выбранного состояния предпочтений.</string>
 </resources>
