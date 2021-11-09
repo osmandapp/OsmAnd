@@ -56,6 +56,14 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 		return R.layout.gps_filter_base_card;
 	}
 
+	public void startListeningGpsFilter() {
+		gpsFilterHelper.addListener(this);
+	}
+
+	public void stopListeningGpsFilter() {
+		gpsFilterHelper.removeListener(this);
+	}
+
 	public void softScrollToActionCard() {
 		((ScrollView) view).smoothScrollTo(0, ((int) view.findViewById(R.id.header).getY()));
 	}

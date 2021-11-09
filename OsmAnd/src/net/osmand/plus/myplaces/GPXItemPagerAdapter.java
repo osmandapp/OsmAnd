@@ -796,15 +796,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		GPXTabItemType[] oldTabs = Arrays.copyOf(tabTypes, tabTypes.length);
 		updateAnalysis();
 		fetchTabTypes();
-
-		if (oldTabs.length != tabTypes.length) {
-			return true;
-		}
-		for (int i = 0; i < oldTabs.length; i++) {
-			if (oldTabs[i] != tabTypes[i])
-				return true;
-		}
-		return false;
+		return !Arrays.equals(oldTabs, tabTypes);
 	}
 
 	public void updateGraph(int position) {

@@ -53,6 +53,18 @@ public class GpsFilterScreensAdapter extends PagerAdapter implements CustomTabPr
 		cards.get(currentPosition).softScrollToActionCard();
 	}
 
+	public void startListeningGpsFilter() {
+		for (GpsFilterBaseCard card : cards) {
+			card.startListeningGpsFilter();
+		}
+	}
+
+	public void stopListeningGpsFilter() {
+		for (GpsFilterBaseCard card : cards) {
+			card.stopListeningGpsFilter();
+		}
+	}
+
 	@Override
 	public int getCount() {
 		return SCREENS_NUMBER;

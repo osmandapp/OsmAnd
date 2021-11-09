@@ -150,6 +150,10 @@ public class GpsFilterHelper {
 		listeners.add(listener);
 	}
 
+	public void removeListener(@NonNull GpsFilterListener listener) {
+		listeners.remove(listener);
+	}
+
 	public void resetFilters() {
 		smoothingFilter.reset();
 		speedFilter.reset();

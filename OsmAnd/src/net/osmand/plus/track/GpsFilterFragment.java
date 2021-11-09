@@ -173,7 +173,11 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		resetToOriginalButton.setOnClickListener(v -> gpsFilterHelper.resetFilters());
 
 		View scrollToActionsButton = toolbar.findViewById(R.id.scroll_to_actions_button);
-		scrollToActionsButton.setOnClickListener(v -> gpsFilterScreensAdapter.softScrollToActionsCard());
+		scrollToActionsButton.setOnClickListener(v -> {
+			if (gpsFilterScreensAdapter != null) {
+				gpsFilterScreensAdapter.softScrollToActionsCard();
+			}
+		});
 	}
 
 	private void setupTabsAndPager() {
@@ -181,6 +185,8 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		WrapContentHeightViewPager pager = view.findViewById(R.id.pager);
 
 		gpsFilterScreensAdapter = new GpsFilterScreensAdapter(requireMapActivity(), this, isNightMode());
+		gpsFilterScreensAdapter.startListeningGpsFilter();
+
 		pager.setAdapter(gpsFilterScreensAdapter);
 		pager.setOffscreenPageLimit(1);
 		pager.setSwipeable(true);
@@ -259,6 +265,9 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		if (gpsFilterScreensAdapter != null) {
+			gpsFilterScreensAdapter.stopListeningGpsFilter();
+		}
 		exitGpsFilterMode();
 	}
 
