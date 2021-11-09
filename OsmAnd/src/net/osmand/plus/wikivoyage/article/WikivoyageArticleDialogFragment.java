@@ -1,8 +1,5 @@
 package net.osmand.plus.wikivoyage.article;
 
-import static net.osmand.plus.track.TrackMenuFragment.openTrack;
-import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -41,6 +38,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.track.TrackMenuFragment.TrackMenuType;
 import net.osmand.plus.wikipedia.WikiArticleBaseDialogFragment;
 import net.osmand.plus.wikipedia.WikiArticleHelper;
 import net.osmand.plus.wikivoyage.WikivoyageShowPicturesDialogFragment;
@@ -57,6 +55,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import static net.osmand.plus.track.TrackMenuFragment.openTrack;
+import static net.osmand.plus.wikipedia.WikiArticleShowImages.OFF;
 
 
 public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragment {
@@ -160,7 +161,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 				}
 				TravelHelper travelHelper = getMyApplication().getTravelHelper();
 				File file = travelHelper.createGpxFile(article);
-				openTrack(activity, new File(file.getAbsolutePath()), null, getString(R.string.icon_group_travel));
+				openTrack(activity, new File(file.getAbsolutePath()), null, getString(R.string.icon_group_travel), TrackMenuType.POINTS);
 			}
 		});
 		trackButton.setVisibility(View.GONE);

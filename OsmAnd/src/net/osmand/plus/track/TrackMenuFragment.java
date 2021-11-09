@@ -132,8 +132,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		DisplayPointGroupsCallback {
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
-	public static final String OPEN_POINTS_TAB = "OPEN_POINTS_TAB";
-	public static final String OPEN_TRACKS_LIST = "OPEN_TRACKS_LIST";
+	public static final String OPEN_TAB_NAME = "open_tab_name";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
 	public static final String SHOW_TEMPORARILY = "SHOW_TEMPORARILY";
 	public static final String OPEN_TRACK_MENU = "open_track_menu";
@@ -202,6 +201,10 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 		public final int menuItemId;
 		public final int titleId;
+	}
+
+	public void setMenuType(TrackMenuType menuType) {
+		this.menuType = menuType;
 	}
 
 	@Override
@@ -1208,7 +1211,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		BottomNavigationView bottomNav = view.findViewById(R.id.bottom_navigation);
 		bottomNav.setItemIconTintList(navColorStateList);
 		bottomNav.setItemTextColor(navColorStateList);
-		bottomNav.setSelectedItemId(R.id.action_overview);
+		bottomNav.setSelectedItemId(menuType.menuItemId);
 		bottomNav.setOnNavigationItemSelectedListener(item -> {
 			for (TrackMenuType type : TrackMenuType.values()) {
 				if (type.menuItemId == item.getItemId()) {
@@ -1500,16 +1503,22 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 
 	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams,
 	                             @Nullable String returnScreenName) {
+		openTrack(context, file, prevIntentParams, returnScreenName, TrackMenuType.OVERVIEW);
+	}
+
+	public static void openTrack(@NonNull Context context, @Nullable File file, @Nullable Bundle prevIntentParams,
+	                             @Nullable String returnScreenName, TrackMenuType tabToOpen) {
 		boolean currentRecording = file == null;
 		String path = file != null ? file.getAbsolutePath() : null;
 		if (context instanceof MapActivity) {
-			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording, null, null);
+			TrackMenuFragment.showInstance((MapActivity) context, path, currentRecording, null, null, null);
 		} else {
 			Bundle bundle = new Bundle();
 			bundle.putString(TRACK_FILE_NAME, path);
 			bundle.putBoolean(OPEN_TRACK_MENU, true);
 			bundle.putBoolean(CURRENT_RECORDING, currentRecording);
 			bundle.putString(RETURN_SCREEN_NAME, returnScreenName);
+			bundle.putString(OPEN_TAB_NAME, tabToOpen.name());
 			MapActivity.launchMapActivityMoveToTop(context, prevIntentParams, null, bundle);
 		}
 	}
@@ -1555,14 +1564,15 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                @Nullable String path,
 	                                boolean showCurrentTrack,
 	                                @Nullable final String returnScreenName,
-	                                @Nullable final String callingFragmentTag) {
+	                                @Nullable final String callingFragmentTag,
+	                                @Nullable final String tabToOpenName) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		loadSelectedGpxFile(mapActivity, path, showCurrentTrack, new CallbackWithObject<SelectedGpxFile>() {
 			@Override
 			public boolean processResult(SelectedGpxFile selectedGpxFile) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null && selectedGpxFile != null) {
-					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, true, null);
+					showInstance(mapActivity, selectedGpxFile, null, returnScreenName, callingFragmentTag, tabToOpenName, true, null);
 				}
 				return true;
 			}
@@ -1572,7 +1582,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
 	                                   @NonNull SelectedGpxFile selectedGpxFile,
 	                                   @Nullable SelectedGpxPoint gpxPoint) {
-		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, false, null);
+		return showInstance(mapActivity, selectedGpxFile, gpxPoint, null, null, null, false, null);
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity,
@@ -1580,6 +1590,7 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 	                                   @Nullable SelectedGpxPoint gpxPoint,
 	                                   @Nullable String returnScreenName,
 	                                   @Nullable String callingFragmentTag,
+	                                   @Nullable String tabToOpenName,
 	                                   boolean adjustMapPosition,
 	                                   @Nullable GPXTrackAnalysis analyses) {
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
@@ -1595,6 +1606,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			fragment.setReturnScreenName(returnScreenName);
 			fragment.setCallingFragmentTag(callingFragmentTag);
 			fragment.setAdjustMapPosition(adjustMapPosition);
+			if (tabToOpenName != null) {
+				fragment.setMenuType(TrackMenuType.valueOf(tabToOpenName));
+			}
 
 			if (gpxPoint != null) {
 				WptPt wptPt = gpxPoint.getSelectedPoint();
