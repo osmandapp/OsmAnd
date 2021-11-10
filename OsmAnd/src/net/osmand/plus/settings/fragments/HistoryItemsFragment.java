@@ -59,6 +59,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected HistoryAdapter adapter;
 	protected RecyclerView recyclerView;
 	protected View warningCard;
+	protected boolean isHistoryExportListEmpty;
 
 	private Float heading;
 	private Location location;
@@ -125,7 +126,13 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		closeButton.setOnClickListener(v -> dismiss());
 
 		shareButton = appbar.findViewById(R.id.action_button_icon);
-		shareButton.setOnClickListener(v -> shareItems());
+		shareButton.setOnClickListener(v -> {
+			if(isHistoryExportListEmpty){
+				UiUtilities.showSnackBar(view, getString(R.string.export_history_no_items_selected_warning));
+			} else {
+				shareItems();
+			}
+		});
 		updateToolbarSwitch(appbar);
 	}
 
