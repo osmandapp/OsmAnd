@@ -460,6 +460,13 @@ public class WptPtEditorFragmentNew extends PointEditorFragmentNew {
 		return iconId != 0 ? iconId : DEFAULT_UI_ICON_ID;
 	}
 
+	@Nullable
+	@Override
+	public String getPreselectedIconName() {
+		PointEditor editor = getEditor();
+		return editor == null || !editor.isNew ? null : iconName;
+	}
+
 	@Override
 	public Set<String> getCategories() {
 		return categoriesMap.keySet();
