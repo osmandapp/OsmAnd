@@ -48,6 +48,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
+	private View view;
 
 	protected final List<Object> items = new ArrayList<>();
 	protected final List<Object> selectedItems = new ArrayList<>();
@@ -59,7 +60,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected HistoryAdapter adapter;
 	protected RecyclerView recyclerView;
 	protected View warningCard;
-	protected boolean isHistoryExportListEmpty;
+	protected boolean isHistoryItemsSelected = true;
 
 	private Float heading;
 	private Location location;
@@ -80,7 +81,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) requireActivity();
-		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.history_preferences_fragment, container, false);
+		view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.history_preferences_fragment, container, false);
 
 		recyclerView = view.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(mapActivity));
@@ -123,13 +124,17 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 		ImageView closeButton = appbar.findViewById(R.id.close_button);
 		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));
-		closeButton.setOnClickListener(v -> dismiss());
+		closeButton.setOnClickListener(v -> {
+
+			dismiss();
+		});
 
 		shareButton = appbar.findViewById(R.id.action_button_icon);
 		shareButton.setOnClickListener(v -> {
-			if(isHistoryExportListEmpty){
-				UiUtilities.showSnackBar(view, getString(R.string.export_history_no_items_selected_warning));
-			} else {
+			if(isHistoryItemsSelected){
+				app.showShortToastMessage(getString(R.string.export_history_no_items_selected_warning));
+			}
+			else {
 				shareItems();
 			}
 		});
@@ -139,7 +144,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected void updateToolbarSwitch(@NonNull View view) {
 		boolean checked = isHistoryEnabled();
 
-		if (checked) {
+		if (checked && !isHistoryItemsSelected) {
 			shareButton.setImageDrawable(getIcon(R.drawable.ic_action_upload));
 		} else {
 			int color = ContextCompat.getColor(app, R.color.active_buttons_and_links_text_light);
@@ -214,8 +219,14 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	public void onItemSelected(Object item, boolean selected) {
 		if (selected) {
 			selectedItems.add(item);
+			isHistoryItemsSelected = false;
+			setupToolbar(view);
 		} else {
 			selectedItems.remove(item);
+			if (selectedItems.size() == 0){
+				isHistoryItemsSelected = true;
+				setupToolbar(view);
+			}
 		}
 		updateButtonsState();
 	}
@@ -224,9 +235,12 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	public void onCategorySelected(List<Object> items, boolean selected) {
 		if (selected) {
 			selectedItems.addAll(items);
+			isHistoryItemsSelected = false;
 		} else {
 			selectedItems.removeAll(items);
+			isHistoryItemsSelected = true;
 		}
+		setupToolbar(view);
 		updateButtonsState();
 	}
 
