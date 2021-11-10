@@ -241,8 +241,8 @@ public class GPXUtilities {
 		public int speedColor = 0;
 		public int altitudeColor = 0;
 		public int slopeColor = 0;
-		public int colourARGB = 0;                    // point colour (used for altitude/speed colouring)
-		public double distance = 0.0;                // cumulative distance, if in a track
+		public int colourARGB = 0;    // point colour (used for altitude/speed colouring)
+		public double distance = 0.0; // cumulative distance, if in a track; depends on split type of GPX-file
 
 		public WptPt() {
 		}

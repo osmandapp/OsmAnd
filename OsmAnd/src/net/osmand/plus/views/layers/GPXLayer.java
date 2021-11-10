@@ -37,6 +37,7 @@ import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ChartPointsHelper;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.FilteredSelectedGpxFile;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxSelectionHelper;
@@ -1030,7 +1031,12 @@ public class GPXLayer extends OsmandMapLayer implements IContextMenuProvider, IM
 
 			boolean trackHidden = !selectedTracksPaths.contains(cachedTrackPath);
 			boolean replacedByFilteredTrack = gpx != null && gpsFilterHelper.isSourceOfFilteredGpxFile(gpx);
-			boolean oldFilteredTrack = gpx != null && gpx.equals(gpsFilterHelper.getFilteredSelectedGpxFile());
+			boolean oldFilteredTrack = false;
+			if (gpx instanceof FilteredSelectedGpxFile) {
+				FilteredSelectedGpxFile filteredGpx = ((FilteredSelectedGpxFile) gpx);
+				oldFilteredTrack = gpsFilterHelper.isSourceOfFilteredGpxFile(filteredGpx.getSourceSelectedGpxFile());
+			}
+
 			if (trackHidden || replacedByFilteredTrack || oldFilteredTrack) {
 				iterator.remove();
 			}

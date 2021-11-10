@@ -17,6 +17,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.FilteredSelectedGpxFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -148,7 +149,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	}
 
 	private void setFileToFilter(@NonNull SelectedGpxFile selectedGpxFile) {
-		if (!selectedGpxFile.equals(gpsFilterHelper.getSourceSelectedGpxFile())) {
+		if (gpsFilterHelper.getCurrentFilteredGpxFile() == null) {
 			gpsFilterHelper.setSelectedGpxFile(selectedGpxFile);
 		}
 	}
@@ -216,7 +217,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		setupCenterOnTrackButton(view.findViewById(R.id.map_center_on_track));
 	}
 
-	private void setupCenterOnTrackButton(ImageButton centerOnTrackButton) {
+	private void setupCenterOnTrackButton(@NonNull ImageButton centerOnTrackButton) {
 		int backgroundId = isNightMode() ? R.drawable.btn_circle_night : R.drawable.btn_circle;
 		centerOnTrackButton.setBackgroundResource(backgroundId);
 
@@ -325,8 +326,9 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 	private void adjustMapPosition(int y) {
 		MapActivity mapActivity = getMapActivity();
-		GPXFile gpxFile = gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile();
-		if (mapActivity != null && gpxFile != null) {
+		FilteredSelectedGpxFile filteredSelectedGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
+		if (mapActivity != null && filteredSelectedGpxFile != null) {
+			GPXFile gpxFile = filteredSelectedGpxFile.getGpxFile();
 			QuadRect r = gpxFile.getRect();
 
 			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
@@ -380,15 +382,17 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 	}
 
 	@Override
-	public void onSaveAsNewTrack(String folderName, String fileName, boolean showOnMap, boolean simplifiedTrack) {
-		if (app != null) {
+	public void onSaveAsNewTrack(@Nullable String folderName, @NonNull String fileName,
+	                             boolean showOnMap, boolean simplifiedTrack) {
+		SelectedGpxFile selectedFilteredGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
+		if (app != null && selectedFilteredGpxFile != null) {
 			File destFile = app.getAppPath(GPX_INDEX_DIR);
 			if (!Algorithms.isEmpty(folderName) && !destFile.getName().equals(folderName)) {
 				destFile = new File(destFile, folderName);
 			}
 			destFile = new File(destFile, fileName + GPX_FILE_EXT);
 
-			GPXFile filteredGpxFile = gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile();
+			GPXFile filteredGpxFile = selectedFilteredGpxFile.getGpxFile();
 			GPXFile gpxFileToWrite = GpsFilterHelper.copyGpxFile(app, filteredGpxFile);
 			gpxFileToWrite.path = destFile.getAbsolutePath();
 
@@ -406,7 +410,7 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 		}
 	}
 
-	private void onGpxSavingFinished(GPXFile gpxFile, Exception error, boolean showOnMap) {
+	private void onGpxSavingFinished(@NonNull GPXFile gpxFile, @Nullable Exception error, boolean showOnMap) {
 		MapActivity mapActivity = getMapActivity();
 		if (error != null) {
 			LOG.error(error);
@@ -451,6 +455,6 @@ public class GpsFilterFragment extends ContextMenuScrollFragment implements Save
 
 	public interface GpsFilterFragmentLister {
 
-		void onDismissGpsFilterFragment(boolean savedCopy, String savedFilePath);
+		void onDismissGpsFilterFragment(boolean savedCopy, @Nullable String savedFilePath);
 	}
 }

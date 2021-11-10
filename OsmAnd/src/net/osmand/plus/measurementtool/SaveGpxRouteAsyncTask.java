@@ -4,9 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import net.osmand.AndroidUtils;
 import net.osmand.FileUtils;
 import net.osmand.GPXUtilities;
@@ -23,6 +20,8 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 import static net.osmand.IndexConstants.GPX_FILE_EXT;
 
@@ -110,7 +109,9 @@ class SaveGpxRouteAsyncTask extends AsyncTask<Void, Void, Exception> {
         return res;
     }
 
-    private GPXFile generateGpxFile(@NonNull MeasurementEditingContext editingCtx, String trackName, @NonNull GPXFile gpx) {
+    private GPXFile generateGpxFile(@NonNull MeasurementEditingContext editingCtx,
+                                    @NonNull String trackName,
+                                    @NonNull GPXFile gpx) {
         return generateGpxFile(editingCtx, trackName, gpx, simplified, addToTrack);
     }
 

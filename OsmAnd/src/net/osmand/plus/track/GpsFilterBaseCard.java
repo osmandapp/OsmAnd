@@ -9,6 +9,7 @@ import android.widget.ScrollView;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.FilteredSelectedGpxFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -102,43 +103,50 @@ public abstract class GpsFilterBaseCard extends MapBaseCard implements GpsFilter
 	}
 
 	private void saveAsCopy() {
-		String sourceFilePath = gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile().path;
-		String sourceFileName = Algorithms.getFileNameWithoutExtension(Algorithms.getFileWithoutDirs(sourceFilePath));
-		String destFileName = sourceFileName + "-copy";
-		if (target instanceof SaveAsNewTrackFragmentListener) {
-			SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
-					target, null, sourceFileName, destFileName, false, true);
+		FilteredSelectedGpxFile currentFilteredGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
+		if (currentFilteredGpxFile != null) {
+			String sourceFilePath = currentFilteredGpxFile.getGpxFile().path;
+			String sourceFileNameWithExtension = Algorithms.getFileWithoutDirs(sourceFilePath);
+			String sourceFileName = Algorithms.getFileNameWithoutExtension(sourceFileNameWithExtension);
+			String destFileName = sourceFileName + "-copy";
+			if (target instanceof SaveAsNewTrackFragmentListener) {
+				SaveAsNewTrackBottomSheetDialogFragment.showInstance(mapActivity.getSupportFragmentManager(),
+						target, null, sourceFileName, destFileName, false, true);
+			}
 		}
 	}
 
 	private void saveIntoFile() {
-		SelectedGpxFile sourceSelectedGpxFile = gpsFilterHelper.getSourceSelectedGpxFile();
-		GPXFile newGpxFile = gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile();
-		if (sourceSelectedGpxFile != null) {
-			sourceSelectedGpxFile.setGpxFile(newGpxFile, app);
-			gpsFilterHelper.setSelectedGpxFile(sourceSelectedGpxFile);
-
-			File outFile = new File(newGpxFile.path);
-			new SaveGpxAsyncTask(outFile, newGpxFile, new SaveGpxListener() {
-
-				@Override
-				public void gpxSavingStarted() {
-				}
-
-				@Override
-				public void gpxSavingFinished(Exception errorMessage) {
-					if (app != null) {
-						String toastMessage = errorMessage == null
-								? MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), newGpxFile.path)
-								: errorMessage.getMessage();
-						app.showToastMessage(toastMessage);
-					}
-					gpsFilterHelper.onSavedFile(newGpxFile.path);
-				}
-			}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-			updateMainContent();
+		FilteredSelectedGpxFile currentFilteredGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
+		if (currentFilteredGpxFile == null) {
+			return;
 		}
+
+		SelectedGpxFile sourceSelectedGpxFile = currentFilteredGpxFile.getSourceSelectedGpxFile();
+		GPXFile newGpxFile = currentFilteredGpxFile.getGpxFile();
+		sourceSelectedGpxFile.setGpxFile(newGpxFile, app);
+		gpsFilterHelper.setSelectedGpxFile(sourceSelectedGpxFile);
+
+		File outFile = new File(newGpxFile.path);
+		new SaveGpxAsyncTask(outFile, newGpxFile, new SaveGpxListener() {
+
+			@Override
+			public void gpxSavingStarted() {
+			}
+
+			@Override
+			public void gpxSavingFinished(Exception errorMessage) {
+				if (app != null) {
+					String toastMessage = errorMessage == null
+							? MessageFormat.format(app.getString(R.string.gpx_saved_sucessfully), newGpxFile.path)
+							: errorMessage.getMessage();
+					app.showToastMessage(toastMessage);
+				}
+				gpsFilterHelper.onSavedFile(newGpxFile.path);
+			}
+		}).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+		updateMainContent();
 	}
 
 	protected void disallowScroll() {

@@ -11,11 +11,6 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.viewpager.widget.PagerAdapter;
-
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -33,6 +28,7 @@ import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -59,6 +55,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.viewpager.widget.PagerAdapter;
 
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.ALTITUDE;
 import static net.osmand.plus.helpers.GpxUiHelper.LineGraphType.SLOPE;
@@ -102,8 +103,12 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	}
 
 	private boolean isFilteredTrack() {
-		GPXFile filteredGpxFile = app.getGpsFilterHelper().getFilteredSelectedGpxFile().getGpxFile();
-		return displayHelper.getGpx() != null && displayHelper.getGpx().equals(filteredGpxFile);
+		SelectedGpxFile currentFilteredGpxFile = app.getGpsFilterHelper().getCurrentFilteredGpxFile();
+		if (currentFilteredGpxFile != null) {
+			GPXFile filteredGpxFile = currentFilteredGpxFile.getGpxFile();
+			return displayHelper.getGpx() != null && displayHelper.getGpx().equals(filteredGpxFile);
+		}
+		return false;
 	}
 
 	public GPXItemPagerAdapter(@NonNull OsmandApplication app,
@@ -135,8 +140,8 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 				analysis = gpxFile.getAnalysis(0);
 				gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX);
 			}
-		} else if (isFilteredTrack()) {
-			GPXFile gpxFile = app.getGpsFilterHelper().getFilteredSelectedGpxFile().getGpxFile();
+		} else if (isFilteredTrack() && app.getGpsFilterHelper().getCurrentFilteredGpxFile() != null) {
+			GPXFile gpxFile = app.getGpsFilterHelper().getCurrentFilteredGpxFile().getGpxFile();
 			gpxItem = GpxUiHelper.makeGpxDisplayItem(app, gpxFile, ChartPointLayer.GPX);
 			analysis = gpxItem == null
 					? gpxFile.getAnalysis(System.currentTimeMillis())
@@ -681,11 +686,11 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 	private void updateChart(int position) {
 		View view = getViewAtPosition(position);
 		if (view != null) {
-			updateChart((LineChart) view.findViewById(R.id.chart));
+			updateChart(view.findViewById(R.id.chart));
 		}
 	}
 
-	private void updateJoinGapsInfo(View view, int position) {
+	private void updateJoinGapsInfo(@Nullable View view, int position) {
 		if (view != null && gpxItem != null) {
 			GPXTabItemType tabType = tabTypes[position];
 			boolean generalTrack = gpxItem.isGeneralTrack();
@@ -708,7 +713,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		}
 	}
 
-	private void updateGeneralTabInfo(View container) {
+	private void updateGeneralTabInfo(@NonNull View container) {
 		boolean joinSegments = displayHelper.isJoinSegments();
 		boolean generalTrack = gpxItem.isGeneralTrack();
 
@@ -722,7 +727,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		durationText.setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
 	}
 
-	private void updateAltitudeTabInfo(View container) {
+	private void updateAltitudeTabInfo(@NonNull View container) {
 		String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
 		String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
 
@@ -737,7 +742,7 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		descentText.setText(OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app));
 	}
 
-	private void updateSpeedTabInfo(View container) {
+	private void updateSpeedTabInfo(@NonNull View container) {
 		boolean joinSegments = displayHelper.isJoinSegments();
 		boolean generalTrack = gpxItem.isGeneralTrack();
 
@@ -803,7 +808,15 @@ public class GPXItemPagerAdapter extends PagerAdapter implements CustomTabProvid
 		updateGraph(Collections.singletonList(position));
 	}
 
-	public void updateGraph(List<Integer> positions) {
+	public void updateAllGraph() {
+		List<Integer> positions = new ArrayList<>();
+		for (int i = 0; i < getCount(); i++) {
+			positions.add(i);
+		}
+		updateGraph(positions);
+	}
+
+	private void updateGraph(@NonNull List<Integer> positions) {
 		updateAnalysis();
 		fetchTabTypes();
 		if (getCount() > 0 && views.size() > 0) {

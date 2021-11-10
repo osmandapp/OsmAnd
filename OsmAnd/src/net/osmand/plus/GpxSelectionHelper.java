@@ -5,10 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.os.AsyncTask;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -23,7 +19,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.helpers.GpsFilterHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
@@ -54,6 +49,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.StringTokenizer;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 public class GpxSelectionHelper {
 
@@ -190,42 +189,54 @@ public class GpxSelectionHelper {
 			return false;
 		}
 
-		GpsFilterHelper gpsFilterHelper = app.getGpsFilterHelper();
 		List<GpxDataItem> items = app.getGpxDbHelper().getSplitItems();
 
 		for (GpxDataItem dataItem : items) {
 			String path = dataItem.getFile().getAbsolutePath();
-			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
-			if (selectedGpxFile != null && gpsFilterHelper.isSourceOfFilteredGpxFile(selectedGpxFile)) {
-				selectedGpxFile = gpsFilterHelper.getFilteredSelectedGpxFile();
+			SelectedGpxFile selectedGpxFile;
+
+			GPXFile gpxFileToProcess = fileToProcess == null ? null : fileToProcess.getGpxFile();
+			if (gpxFileToProcess != null && path.equals(gpxFileToProcess.path)) {
+				selectedGpxFile = fileToProcess;
+			} else {
+				selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(path);
 			}
 
-			if (fileToProcess != null && !fileToProcess.equals(selectedGpxFile)) {
+			if (selectedGpxFile == null || fileToProcess != null && !fileToProcess.equals(selectedGpxFile)) {
 				continue;
 			}
 
-			if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+			if (selectedGpxFile.getGpxFile() != null) {
 				GPXFile gpxFile = selectedGpxFile.getGpxFile();
-				List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
-
-				GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(dataItem.getSplitType());
-				if (splitType == GpxSplitType.NO_SPLIT) {
-					for (GpxDisplayGroup model : groups) {
-						model.noSplit(app);
-					}
-				} else if (splitType == GpxSplitType.DISTANCE) {
-					for (GpxDisplayGroup model : groups) {
-						model.splitByDistance(app, dataItem.getSplitInterval(), dataItem.isJoinSegments());
-					}
-				} else if (splitType == GpxSplitType.TIME) {
-					for (GpxDisplayGroup model : groups) {
-						model.splitByTime(app, (int) dataItem.getSplitInterval(), dataItem.isJoinSegments());
-					}
-				}
-				selectedGpxFile.setDisplayGroups(groups, app);
+				List<GpxDisplayGroup> displayGroups = processSplit(app, dataItem, gpxFile);
+				selectedGpxFile.setDisplayGroups(displayGroups, app);
 			}
 		}
-		return true;
+		return fileToProcess == null || fileToProcess.splitProcessed;
+	}
+
+	@NonNull
+	public static List<GpxDisplayGroup> processSplit(@NonNull OsmandApplication app,
+	                                                 @NonNull GpxDataItem dataItem,
+	                                                 @NonNull GPXFile gpxFile) {
+		List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
+
+		GpxSplitType splitType = GpxSplitType.getSplitTypeByTypeId(dataItem.getSplitType());
+		if (splitType == GpxSplitType.NO_SPLIT) {
+			for (GpxDisplayGroup model : groups) {
+				model.noSplit(app);
+			}
+		} else if (splitType == GpxSplitType.DISTANCE) {
+			for (GpxDisplayGroup model : groups) {
+				model.splitByDistance(app, dataItem.getSplitInterval(), dataItem.isJoinSegments());
+			}
+		} else if (splitType == GpxSplitType.TIME) {
+			for (GpxDisplayGroup model : groups) {
+				model.splitByTime(app, (int) dataItem.getSplitInterval(), dataItem.isJoinSegments());
+			}
+		}
+
+		return groups;
 	}
 
 	private String getString(int resId, Object... formatArgs) {
@@ -861,22 +872,21 @@ public class GpxSelectionHelper {
 
 		public boolean notShowNavigationDialog = false;
 		public boolean selectedByUser = true;
-		public boolean filtered = false;
 
-		private GPXFile gpxFile;
-		private GPXTrackAnalysis trackAnalysis;
+		protected GPXFile gpxFile;
+		protected GPXTrackAnalysis trackAnalysis;
 
-		private Set<String> hiddenGroups = new HashSet<>();
-		private List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
-		private List<GpxDisplayGroup> displayGroups;
+		protected Set<String> hiddenGroups = new HashSet<>();
+		protected List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
+		protected List<GpxDisplayGroup> displayGroups;
 
-		private int color;
-		private long modifiedTime = -1;
+		protected int color;
+		protected long modifiedTime = -1;
 
 		private boolean routePoints;
-		private boolean joinSegments;
+		protected boolean joinSegments;
 		private boolean showCurrentTrack;
-		private boolean splitProcessed = false;
+		protected boolean splitProcessed = false;
 
 		public void setGpxFile(GPXFile gpxFile, OsmandApplication app) {
 			this.gpxFile = gpxFile;
@@ -906,8 +916,11 @@ public class GpxSelectionHelper {
 			trackAnalysis = gpxFile.getAnalysis(fileTimestamp);
 
 			displayGroups = null;
-			SelectedGpxFile fileToProcess = filtered ? this : null;
-			splitProcessed = GpxSelectionHelper.processSplit(app, fileToProcess);
+			splitProcessed = processSplit(app);
+		}
+
+		protected boolean processSplit(@Nullable OsmandApplication app) {
+			return GpxSelectionHelper.processSplit(app, null);
 		}
 
 		public void processPoints(OsmandApplication app) {
@@ -925,11 +938,9 @@ public class GpxSelectionHelper {
 
 		public List<TrkSegment> getPointsToDisplay() {
 			if (joinSegments) {
-				if (gpxFile != null && gpxFile.getGeneralTrack() != null) {
-					return gpxFile.getGeneralTrack().segments;
-				} else {
-					return filtered ? processedPointsToDisplay : Collections.emptyList();
-				}
+				return gpxFile != null && gpxFile.getGeneralTrack() != null
+						? gpxFile.getGeneralTrack().segments
+						: Collections.emptyList();
 			}
 			return processedPointsToDisplay;
 		}

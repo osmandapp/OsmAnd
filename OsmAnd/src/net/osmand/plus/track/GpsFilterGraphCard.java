@@ -5,6 +5,7 @@ import android.view.View;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.data.LatLon;
+import net.osmand.plus.FilteredSelectedGpxFile;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.R;
@@ -22,6 +23,7 @@ import java.io.File;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class GpsFilterGraphCard extends GpsFilterBaseCard {
@@ -41,9 +43,12 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 	private TrackDisplayHelper createTrackDisplayHelper() {
 		TrackDisplayHelper displayHelper = new TrackDisplayHelper(app);
-		GPXFile gpxFile = gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile();
-		displayHelper.setFile(new File(gpxFile.path));
-		displayHelper.setGpx(gpxFile);
+		FilteredSelectedGpxFile currentFilteredGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
+		if (currentFilteredGpxFile != null) {
+			GPXFile gpxFile = currentFilteredGpxFile.getGpxFile();
+			displayHelper.setFile(new File(gpxFile.path));
+			displayHelper.setGpx(gpxFile);
+		}
 		return displayHelper;
 	}
 
@@ -67,6 +72,7 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 		}
 	}
 
+	@Nullable
 	private GpxDisplayItem getGpxDisplayItem() {
 		GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {GpxDisplayItemType.TRACK_SEGMENT};
 		List<GpxDisplayItem> displayItems = TrackDisplayHelper.flatten(displayHelper.getOriginalGroups(filterTypes));
@@ -128,14 +134,16 @@ public class GpsFilterGraphCard extends GpsFilterBaseCard {
 
 	@Override
 	public void onFinishFiltering() {
-		displayHelper.setGpx(gpsFilterHelper.getFilteredSelectedGpxFile().getGpxFile());
-		trackChartPoints.setGpx(displayHelper.getGpx());
+		FilteredSelectedGpxFile currentFilteredGpxFile = gpsFilterHelper.getCurrentFilteredGpxFile();
+		if (currentFilteredGpxFile != null) {
+			GPXFile filteredGpx = currentFilteredGpxFile.getGpxFile();
+			displayHelper.setGpx(filteredGpx);
+			trackChartPoints.setGpx(filteredGpx);
 
-		if (pagerAdapter.isTabTypesSetChanged()) {
-			updateMainContent();
-		} else {
-			for (int i = 0; i < pagerAdapter.getCount(); i++) {
-				pagerAdapter.updateGraph(i);
+			if (pagerAdapter.isTabTypesSetChanged()) {
+				updateMainContent();
+			} else {
+				pagerAdapter.updateAllGraph();
 			}
 		}
 	}
