@@ -1,5 +1,16 @@
 package net.osmand.plus.settings.datastorage;
 
+import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.CHOSEN_DIRECTORY;
+import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
+import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_PATH;
+import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.UpdateMemoryInfoUIAdapter;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -9,9 +20,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.BidiFormatter;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +41,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
-import net.osmand.plus.dialogs.SharedStorageWarningBottomSheet;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
@@ -48,17 +56,6 @@ import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.CHOSEN_DIRECTORY;
-import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
-import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_PATH;
-import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.*;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
 
 public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter {
 	public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
@@ -356,12 +353,11 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 
 		if (item.getKey().equals(SHARED_STORAGE)) {
 			detailsButton.setClickable(true);
-			UiUtilities.setupDialogButton(isNightMode(), detailsButton, DialogButtonType.SECONDARY,
-					R.string.shared_string_details);
+			UiUtilities.setupDialogButton(isNightMode(), detailsButton, DialogButtonType.SECONDARY, R.string.shared_string_migration);
 			detailsButton.setOnClickListener(v -> {
 				MapActivity mapActivity = getMapActivity();
 				if (mapActivity != null) {
-					SharedStorageWarningBottomSheet.showInstance(mapActivity, false);
+					SharedStorageWarningFragment.showInstance(mapActivity, false);
 				}
 			});
 		}

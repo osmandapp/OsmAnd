@@ -88,7 +88,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
-import net.osmand.plus.dialogs.SharedStorageWarningBottomSheet;
+import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.dialogs.WhatsNewDialogFragment;
 import net.osmand.plus.dialogs.XMasDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
@@ -722,9 +722,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		dashboardOnMap.updateLocation(true, true, false);
 
 		if (getFragment(WhatsNewDialogFragment.TAG) == null || WhatsNewDialogFragment.wasNotShown()) {
-			if (SharedStorageWarningBottomSheet.dialogShowRequired(app)) {
+			if (SharedStorageWarningFragment.dialogShowRequired(app)) {
 				SecondSplashScreenFragment.SHOW = false;
-				SharedStorageWarningBottomSheet.showInstance(this, true);
+				SharedStorageWarningFragment.showInstance(this, true);
 			}
 		}
 

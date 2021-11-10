@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import androidx.annotation.NonNull;
@@ -63,8 +64,8 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = requireMyApplication();
-			if (SharedStorageWarningBottomSheet.dialogShowRequired(app)) {
-				SharedStorageWarningBottomSheet.showInstance(mapActivity, true);
+			if (SharedStorageWarningFragment.dialogShowRequired(app)) {
+				SharedStorageWarningFragment.showInstance(mapActivity, true);
 			}
 		}
 	}
