@@ -738,6 +738,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		if (overviewCard != null && menuType == TrackMenuType.OVERVIEW && isCurrentRecordingTrack()) {
 			overviewCard.getBlockStatisticsBuilder().runUpdatingStatBlocksIfNeeded();
 		}
+		if (pointsCard != null) {
+			pointsCard.startListeningLocationUpdates();
+		}
 	}
 
 	@Override
@@ -751,6 +754,9 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 		stopLocationUpdate();
 		if (overviewCard != null) {
 			overviewCard.getBlockStatisticsBuilder().stopUpdatingStatBlocks();
+		}
+		if (pointsCard != null) {
+			pointsCard.stopListeningLocationUpdates();
 		}
 	}
 

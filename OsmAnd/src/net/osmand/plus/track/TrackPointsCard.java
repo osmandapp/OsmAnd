@@ -14,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
@@ -24,21 +26,27 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.Collator;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.Location;
 import net.osmand.OsmAndCollator;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.PointImageDrawable;
@@ -49,8 +57,10 @@ import net.osmand.plus.myplaces.DeletePointsTask.OnPointsDeleteListener;
 import net.osmand.plus.myplaces.EditTrackGroupDialogFragment;
 import net.osmand.plus.routepreparationmenu.cards.MapBaseCard;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -62,7 +72,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class TrackPointsCard extends MapBaseCard implements OnChildClickListener, OnPointsDeleteListener {
+public class TrackPointsCard extends MapBaseCard implements OnChildClickListener, OnPointsDeleteListener,
+		OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final int ADD_WAYPOINT_INDEX = 0;
 	public static final int DELETE_WAYPOINTS_INDEX = 1;
@@ -82,6 +93,10 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 	private View addActionsView;
 	private View addWaypointActionView;
 	private View deleteWaypointActionView;
+
+	private Location lastLocation;
+	private float lastHeading;
+	private boolean locationDataUpdateAllowed = true;
 
 	public TrackPointsCard(@NonNull MapActivity mapActivity,
 	                       @NonNull TrackDisplayHelper displayHelper,
@@ -116,6 +131,18 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		if (listView.getAdapter() == null) {
 			listView.setAdapter(adapter);
 		}
+
+		listView.setOnScrollListener(new OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				locationDataUpdateAllowed = scrollState == SCROLL_STATE_IDLE;
+			}
+
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+			}
+		});
+
 		LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
 		if (addActionsView == null && addWaypointActionView == null) {
 			listView.addFooterView(inflater.inflate(R.layout.list_shadow_footer, listView, false));
@@ -148,6 +175,22 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 	public void onGroupVisibilityChanged() {
 		adapter.notifyDataSetChanged();
+	}
+
+	public void startListeningLocationUpdates() {
+		OsmAndLocationProvider locationProvider = app.getLocationProvider();
+		locationProvider.resumeAllUpdates();
+		locationProvider.addCompassListener(this);
+		locationProvider.addLocationListener(this);
+		locationProvider.removeCompassListener(locationProvider.getNavigationInfo());
+		onLocationDataUpdate();
+	}
+
+	public void stopListeningLocationUpdates() {
+		OsmAndLocationProvider locationProvider = app.getLocationProvider();
+		locationProvider.removeCompassListener(this);
+		locationProvider.removeLocationListener(this);
+		locationProvider.addCompassListener(locationProvider.getNavigationInfo());
 	}
 
 	private void addActions(LayoutInflater inflater) {
@@ -301,6 +344,28 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		adapter.getFilter().filter(text);
 	}
 
+	@Override
+	public void updateCompassValue(float heading) {
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			lastHeading = heading;
+			onLocationDataUpdate();
+		}
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		if (!MapUtils.areLatLonEqual(lastLocation, location)) {
+			lastLocation = location;
+			onLocationDataUpdate();
+		}
+	}
+
+	private void onLocationDataUpdate() {
+		if (locationDataUpdateAllowed) {
+			app.runInUIThread(adapter::notifyDataSetChanged);
+		}
+	}
+
 	private class PointGPXAdapter extends OsmandBaseExpandableListAdapter implements Filterable {
 
 		private static final int SPANNED_FLAG = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
@@ -311,14 +376,17 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		private Filter pointsFilter;
 		private Set<?> filteredItems;
 
+		private final UpdateLocationViewCache locationViewCache;
+
+		private final Map<GpxDisplayItem, String> addresses = new HashMap<>();
+		private final String searchingAddressMsg;
+		private final String addressNotFoundMsg;
+
 		PointGPXAdapter() {
-			final Collator collator = OsmAndCollator.primaryCollator();
-			comparator = new Comparator<String>() {
-				@Override
-				public int compare(String s1, String s2) {
-					return collator.compare(s1, s2);
-				}
-			};
+			comparator = OsmAndCollator.primaryCollator()::compare;
+			locationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
+			searchingAddressMsg = PointDescription.getSearchAddressStr(app);
+			addressNotFoundMsg = PointDescription.getAddressNotFoundStr(app);
 		}
 
 		public void synchronizeGroups(@NonNull List<GpxDisplayGroup> displayGroups) {
@@ -344,6 +412,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			}
 			processDisplayGroups(trackPointsGroups, filtered);
 			processDisplayGroups(routePointsGroups, filtered);
+			lookupAddresses();
 			notifyDataSetChanged();
 		}
 
@@ -431,6 +500,31 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				headerGroupItems.addAll(values);
 				itemGroups.put(headerGroup, values);
 				this.groups.add(headerGroup);
+			}
+		}
+
+		private void lookupAddresses() {
+			Collection<List<GpxDisplayItem>> allGroupsItems = itemGroups.values();
+
+			int count = 0;
+			for (List<GpxDisplayItem> displayItems : allGroupsItems) {
+				count += displayItems.size();
+			}
+			final long allItemsCount = count;
+
+			for (List<GpxDisplayItem> groupItems: allGroupsItems) {
+				for (final GpxDisplayItem item : groupItems) {
+					LatLon latLon = new LatLon(item.locationStart.lat, item.locationStart.lon);
+					AddressLookupRequest lookupRequest = new AddressLookupRequest(latLon, address -> {
+						String addressToShow = Algorithms.isBlank(address) ? addressNotFoundMsg : address;
+						addresses.put(item, addressToShow);
+						boolean allAddressesDefined = allItemsCount == addresses.size();
+						if (allAddressesDefined) {
+							notifyDataSetChanged();
+						}
+					}, null);
+					app.getGeocodingLookupService().lookupAddress(lookupRequest);
+				}
 			}
 		}
 
@@ -532,10 +626,11 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 			AndroidUiHelper.updateVisibility(expandImage, true);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider), true);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.description), false);
+			AndroidUiHelper.updateVisibility(row.findViewById(R.id.waypoint_description), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.group_divider), true);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.vertical_divider), true);
+			AndroidUiHelper.updateVisibility(row.findViewById(R.id.location_data), false);
 
 			return row;
 		}
@@ -563,6 +658,25 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			return spannedName;
 		}
 
+		private void setGroupSelection(List<GpxDisplayItem> items, int groupPosition, boolean select) {
+			GpxDisplayGroup group = groups.get(groupPosition);
+			if (select) {
+				selectedGroups.add(groupPosition);
+				if (items != null) {
+					Set<GpxDisplayItem> set = selectedItems.get(group.getType());
+					if (set != null) {
+						set.addAll(items);
+					} else {
+						set = new LinkedHashSet<>(items);
+						selectedItems.put(group.getType(), set);
+					}
+				}
+			} else {
+				selectedGroups.remove(groupPosition);
+				selectedItems.remove(group.getType());
+			}
+		}
+
 		@Override
 		public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
 			View row = convertView;
@@ -577,7 +691,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			TextView title = row.findViewById(R.id.label);
 			title.setText(gpxItem.name);
 
-			TextView description = row.findViewById(R.id.description);
+			TextView description = row.findViewById(R.id.waypoint_description);
 			if (!Algorithms.isEmpty(gpxItem.description)) {
 				description.setText(gpxItem.description);
 				AndroidUiHelper.updateVisibility(description, true);
@@ -585,7 +699,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				AndroidUiHelper.updateVisibility(description, false);
 			}
 
-			final CheckBox checkBox = (CheckBox) row.findViewById(R.id.toggle_item);
+			final CheckBox checkBox = row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
 				checkBox.setVisibility(View.VISIBLE);
 				checkBox.setChecked(selectedItems.get(group.getType()) != null && selectedItems.get(group.getType()).contains(gpxItem));
@@ -629,31 +743,27 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 				AndroidUiHelper.updateVisibility(checkBox, false);
 			}
 
+			setupLocationData(row, gpxItem);
+
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.divider), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.vertical_divider), false);
 			AndroidUiHelper.updateVisibility(row.findViewById(R.id.options), false);
-			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), true);
+			AndroidUiHelper.updateVisibility(row.findViewById(R.id.list_divider), childPosition != 0);
 
 			return row;
 		}
 
-		private void setGroupSelection(List<GpxDisplayItem> items, int groupPosition, boolean select) {
-			GpxDisplayGroup group = groups.get(groupPosition);
-			if (select) {
-				selectedGroups.add(groupPosition);
-				if (items != null) {
-					Set<GpxDisplayItem> set = selectedItems.get(group.getType());
-					if (set != null) {
-						set.addAll(items);
-					} else {
-						set = new LinkedHashSet<>(items);
-						selectedItems.put(group.getType(), set);
-					}
-				}
-			} else {
-				selectedGroups.remove(groupPosition);
-				selectedItems.remove(group.getType());
-			}
+		private void setupLocationData(View container, GpxDisplayItem displayItem) {
+			AppCompatImageView directionArrow = container.findViewById(R.id.direction_arrow);
+			TextView distanceText = container.findViewById(R.id.distance);
+			WptPt point = displayItem.locationStart;
+			app.getUIUtilities().updateLocationView(locationViewCache, directionArrow, distanceText,
+					point.lat, point.lon);
+
+			String definedAddress = addresses.get(displayItem);
+			String addressToShow = definedAddress == null ? searchingAddressMsg : definedAddress;
+			TextView addressContainer = container.findViewById(R.id.address);
+			addressContainer.setText(addressToShow);
 		}
 
 		@Override
