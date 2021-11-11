@@ -124,10 +124,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 		ImageView closeButton = appbar.findViewById(R.id.close_button);
 		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));
-		closeButton.setOnClickListener(v -> {
-
-			dismiss();
-		});
+		closeButton.setOnClickListener(v -> dismiss());
 
 		shareButton = appbar.findViewById(R.id.action_button_icon);
 		shareButton.setOnClickListener(v -> {
