@@ -110,20 +110,15 @@
 					osmand:mpb_setBothDrawables="true"
 					osmand:mpb_useIntrinsicPadding="false" />
 
-				<net.osmand.plus.widgets.TextViewEx
+				<include
 					android:id="@+id/copy_files_descr"
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:letterSpacing="@dimen/text_button_letter_spacing"
-					android:paddingLeft="@dimen/content_padding"
-					android:paddingTop="@dimen/content_padding"
-					android:paddingRight="@dimen/content_padding"
-					android:paddingBottom="@dimen/content_padding_small"
-					android:text="@string/storage_copying_files_size"
-					android:textColor="?android:textColorPrimary"
-					android:textSize="@dimen/default_list_text_size"
-					osmand:lineHeight="@dimen/default_title_line_height"
-					osmand:typeface="@string/font_roboto_regular" />
+					layout="@layout/preference_with_descr" />
+
+				<include layout="@layout/simple_divider_item" />
+
+				<include
+					android:id="@+id/remaining_files_container"
+					layout="@layout/preference_with_descr" />
 
 			</LinearLayout>
 

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.documentfile.provider.DocumentFile;
 
+import net.osmand.IProgress;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.util.Algorithms;
@@ -16,17 +17,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-class CopyFilesAsyncTask extends AsyncTask<Void, Void, Void> {
+class CopyFilesAsyncTask extends AsyncTask<Void, Object, Void> {
 
 	private final OsmandApplication app;
 	private final DocumentFile folderFile;
 	private final CopyFilesListener listener;
+	private final long size;
 
 	public CopyFilesAsyncTask(@NonNull OsmandApplication app, @NonNull DocumentFile folderFile,
-	                          @Nullable CopyFilesListener listener) {
+	                          @Nullable CopyFilesListener listener, long size) {
 		this.app = app;
 		this.folderFile = folderFile;
 		this.listener = listener;
+		this.size = size;
 	}
 
 	@Override
@@ -38,24 +41,67 @@ class CopyFilesAsyncTask extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... params) {
-		copyFilesFromDir(folderFile);
+		OnUploadItemListener uploadListener = getOnUploadItemListener(size);
+		copyFilesFromDir(folderFile, uploadListener);
 		return null;
 	}
 
-	private void copyFilesFromDir(@NonNull DocumentFile documentFile) {
+	private OnUploadItemListener getOnUploadItemListener(long size) {
+		return new OnUploadItemListener() {
+
+			private int progress = 0;
+			private int deltaProgress = 0;
+
+			@Override
+			public void onItemUploadStarted(@NonNull String fileName) {
+				publishProgress(fileName);
+			}
+
+			@Override
+			public void onItemUploadProgress(@NonNull String fileName, int progress, int deltaWork) {
+				deltaProgress += deltaWork;
+				if ((deltaProgress > (size / 100)) || ((progress + deltaProgress) >= size)) {
+					this.progress += deltaProgress;
+					publishProgress(this.progress);
+					deltaProgress = 0;
+				}
+			}
+		};
+	}
+
+	@Override
+	protected void onProgressUpdate(Object... values) {
+		if (listener != null) {
+			for (Object object : values) {
+				if (object instanceof String) {
+					listener.onFileCopyStarted((String) object);
+				} else if (object instanceof Integer) {
+					listener.onFilesCopyProgress((Integer) object);
+				}
+			}
+		}
+	}
+
+	public interface OnUploadItemListener {
+		void onItemUploadStarted(@NonNull String fileName);
+
+		void onItemUploadProgress(@NonNull String fileName, int progress, int deltaWork);
+	}
+
+	private void copyFilesFromDir(@NonNull DocumentFile documentFile, OnUploadItemListener uploadListener) {
 		if (documentFile.isDirectory()) {
 			DocumentFile[] files = documentFile.listFiles();
 			for (DocumentFile f : files) {
-				copyFilesFromDir(f);
+				copyFilesFromDir(f, uploadListener);
 				//boolean deleted = f.delete();
 				//Log.d("delete ", f.getName() + " deleted " + deleted);
 			}
 		} else {
-			copyFile(documentFile);
+			copyFile(documentFile, uploadListener);
 		}
 	}
 
-	private void copyFile(@NonNull DocumentFile d) {
+	private void copyFile(@NonNull DocumentFile d, OnUploadItemListener uploadListener) {
 		try {
 			Uri childuri = d.getUri();
 			String name = d.getName();
@@ -72,30 +118,31 @@ class CopyFilesAsyncTask extends AsyncTask<Void, Void, Void> {
 			}
 			InputStream stream = app.getContentResolver().openInputStream(childuri);
 			FileOutputStream outputStream = new FileOutputStream(testDir);
-			Algorithms.streamCopy(stream, outputStream, new AbstractProgress() {
+
+			IProgress progress = new AbstractProgress() {
 				private int work = 0;
 				private int progress = 0;
 				private int deltaProgress = 0;
 
 				@Override
 				public void startWork(int work) {
-					if (listener != null) {
-						this.work = work > 0 ? work : 1;
-					}
+					this.work = work > 0 ? work : 1;
+					uploadListener.onItemUploadStarted(name);
 				}
 
 				@Override
 				public void progress(int deltaWork) {
-					if (listener != null) {
-						deltaProgress += deltaWork;
-						if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
-							progress += deltaProgress;
-							listener.onFilesCopyProgress(progress);
-							deltaProgress = 0;
-						}
+					deltaProgress += deltaWork;
+					if ((deltaProgress > (work / 100)) || ((progress + deltaProgress) >= work)) {
+						progress += deltaProgress;
+						uploadListener.onItemUploadProgress(name, progress, deltaProgress);
+						deltaProgress = 0;
 					}
 				}
-			}, 1024);
+			};
+			progress.startWork((int) d.length());
+
+			Algorithms.streamCopy(stream, outputStream, progress, 1024);
 			stream.close();
 			outputStream.close();
 
@@ -116,6 +163,8 @@ class CopyFilesAsyncTask extends AsyncTask<Void, Void, Void> {
 	public interface CopyFilesListener {
 
 		void onFilesCopyStarted();
+
+		void onFileCopyStarted(String fileName);
 
 		void onFilesCopyProgress(int progress);
 

@@ -25,6 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
+import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.datastorage.CopyFilesAsyncTask.CopyFilesListener;
 import net.osmand.plus.settings.datastorage.SkipStorageMigrationBottomSheet.OnConfirmMigrationSkipListener;
@@ -97,8 +98,13 @@ public class SharedStorageMigrationFragment extends BaseOsmAndDialogFragment imp
 
 		String formattedSize = AndroidUtils.formatSize(app, getFilesSize());
 		String warning = getString(R.string.storage_copying_files_size, String.valueOf(documentFiles.size()), formattedSize);
-		TextView warningInfo = view.findViewById(R.id.copy_files_descr);
+		View container = view.findViewById(R.id.copy_files_descr);
+		TextView warningInfo = container.findViewById(android.R.id.title);
+		TextView summary = container.findViewById(android.R.id.summary);
+
 		warningInfo.setText(warning);
+		summary.setText(getString(R.string.from_to_with_params, getString(R.string.shared_storage), dataStorageHelper.getCurrentStorage().getTitle()));
+		AndroidUiHelper.updateVisibility(container.findViewById(android.R.id.icon), false);
 
 		progressBar.setMin(0);
 		progressBar.setMax((int) (getFilesSize() / 1024));
@@ -205,7 +211,7 @@ public class SharedStorageMigrationFragment extends BaseOsmAndDialogFragment imp
 					if (copyFinished) {
 						app.restartApp(activity);
 					} else {
-						copyFilesTask = new CopyFilesAsyncTask(app, folderFile, SharedStorageMigrationFragment.this);
+						copyFilesTask = new CopyFilesAsyncTask(app, folderFile, SharedStorageMigrationFragment.this, getFilesSize() / 1024);
 						copyFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					}
 				}
@@ -223,9 +229,22 @@ public class SharedStorageMigrationFragment extends BaseOsmAndDialogFragment imp
 	}
 
 	@Override
+	public void onFileCopyStarted(String fileName) {
+		View container = mainView.findViewById(R.id.remaining_files_container);
+		TextView title = container.findViewById(android.R.id.title);
+		TextView summary = container.findViewById(android.R.id.summary);
+		AndroidUiHelper.updateVisibility(container.findViewById(android.R.id.icon), false);
+
+		summary.setText(getString(R.string.copying_file, fileName));
+	}
+
+	@Override
 	public void onFilesCopyProgress(int progress) {
 		progressBar.setProgress(progress);
-		progressTitle.setText(getString(R.string.ltr_or_rtl_combine_via_space, progress + "%", getString(R.string.shared_string_complete)));
+
+		int maxProgress = progressBar.getMax();
+		int percentage = maxProgress != 0 ? BasicProgressAsyncTask.normalizeProgress(progress * 100 / maxProgress) : 0;
+		progressTitle.setText(getString(R.string.ltr_or_rtl_combine_via_space, percentage + "%", getString(R.string.shared_string_complete)));
 	}
 
 	@Override

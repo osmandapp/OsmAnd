@@ -11,6 +11,8 @@
 	Thx - Hardy
 -->
 
+    <string name="copying_file">Copying file %1$s</string>
+    <string name="from_to_with_params">From %1$s to %2$s</string>
     <string name="shared_string_complete">complete</string>
     <string name="copying_completed">Copying completed</string>
     <string name="shared_string_copy_to">Copy to</string>
