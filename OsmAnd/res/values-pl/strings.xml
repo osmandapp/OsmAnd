@@ -4266,7 +4266,7 @@
     <string name="active_till">Aktywna do %1$s</string>
     <string name="promo_subscription">Subskrypcja promocyjna</string>
     <string name="track_has_no_needed_data">Trasa nie zawiera potrzebnych danych.</string>
-    <string name="option_available_only_in_osmand_pro">Opcja jest dostępna w ramach subskrypcji OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">Dostępne w ramach subskrypcji OsmAnd Pro.</string>
     <string name="pro_widgets">Widżety Pro</string>
     <string name="purchases_feature_desc_pro_widgets">Uzyskaj dostęp do funkcji OsmAnd Pro: Kolorowanie tras i nie tylko.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Poznaj plany OsmAnd, aby znaleźć odpowiedni dla Ciebie.</string>
@@ -4297,9 +4297,9 @@
     <string name="walking_route_osmc_description">Przypisz kolor trasom na podstawie ich indywidualnie przypisanego lokalnie koloru (jeśli dostępny w OpenStreetMap) i typu (międzynarodowe, regionalne, lokalne).</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Kolor trasy według typu sieci węzłów (międzynarodowy, regionalny, lokalny).</string>
     <string name="benefits_for_contributors_primary_descr">Aktywni współtwórcy OpenStreetMap.org mogą być uprawnieni do nieograniczonych godzinnych aktualizacji map.</string>
-    <string name="not_enough_contributions_descr">Wymagany jest co najmniej %1$s wkład OpenStreetMap w ciągu %2$s dni.</string>
+    <string name="not_enough_contributions_descr">Wymagane jest co najmniej %1$s wkładów OpenStreetMap w ciągu %2$s dni.</string>
     <string name="shared_string_contributions">Wkłady w rozwój</string>
-    <string name="contributions_may_calculate_with_delay">Wkłady mogą być obliczane z kilkugodzinnymi opóźnieniami.</string>
+    <string name="contributions_may_calculate_with_delay">Obliczanie składek może potrwać kilka godzin.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Kolor wg przeznaczenia trasy.</string>
     <string name="pro_features">Funkcje Pro</string>
     <string name="purchases_restored">Przywrócono zakupy</string>
@@ -4315,7 +4315,7 @@
 \nZarządzaj lub anuluj subskrypcje w ustawieniach Amazon w dowolnym momencie.</string>
     <string name="no_items_of_type_message">Nie masz żadnych elementów tego typu</string>
     <string name="routeInfo_winter_ice_road_description">Pokoloruj trasę lub linię śladu według zimowej klasyfikacji dróg.</string>
-    <string name="routeInfo_smoothness_description">Zapewnia schemat klasyfikacji dotyczący fizycznej użyteczności drogi dla pojazdów kołowych, w szczególności w odniesieniu do regularności/płaskości powierzchni.</string>
+    <string name="routeInfo_smoothness_description">Klasyfikacja zwrotności drogi/ścieżki dla pojazdów kołowych, w szczególności w odniesieniu do regularności/płaskości nawierzchni.</string>
     <string name="routeInfo_surface_description">Podaj informacje o fizycznej powierzchni drogi/chodnika.</string>
     <string name="routeInfo_roadClass_description">Pokoloruj trasę lub linię śladu według klasyfikacji dróg.</string>
     <string name="add_group_to_markers">Dodaj grupę do listy znaczników</string>
@@ -4326,7 +4326,7 @@
     <string name="service_is_not_available_please_try_later">Usługa niedostępna. Spróbuj ponownie później.</string>
     <string name="shared_string_files">Pliki</string>
     <string name="travel_route_types">Typy tras</string>
-    <string name="sample_wikivoyage">Przykładowe Wikipodróże</string>
+    <string name="sample_wikivoyage">Przykład Wikipodróży</string>
     <string name="horseback_riding">Jazda konna</string>
     <string name="routing_attr_prefer_horse_routes_description">Preferuj trasy konne</string>
     <string name="routing_attr_prefer_horse_routes_name">Preferuj trasy konne</string>
@@ -4389,7 +4389,7 @@
     <string name="shortcut_navigate_to_work">Nawiguj do pracy</string>
     <string name="android_auto_purchase_request_title">Kup OsmAnd Pro lub Maps+, aby używać OsmAnd z Android Auto</string>
     <string name="continue_on_phone">Kontynuuj na urządzeniu mobilnym</string>
-    <string name="location_access_request_title">OsmAnd potrzebuje dostępu do lokalizacji w celu nawigacji</string>
+    <string name="location_access_request_title">OsmAnd potrzebuje dostępu do lokalizacji w celu nawigacji.</string>
     <string name="location_access_request_action">Dotacja uznana</string>
     <string name="location_access_request_result">Zatwierdzono: %1$s Odrzucono: %2$s</string>
     <string name="shared_string_articles">Artykuły</string>
