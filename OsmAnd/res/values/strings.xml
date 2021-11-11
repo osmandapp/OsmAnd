@@ -10,7 +10,12 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="fold_unfold_button">fold/unfold button</string>
+    <string name="app_profile_type">App profile type</string>
+    <string name="map_marker_options">Map marker options</string>
+    <string name="add_new_category">Add new category</string>
+    <string name="favourites_folder">Favourites folder</string>
+    <string name="app_modes_options">Choose App modes</string>
     <string name="delete_history_items_descr">Are you sure you want to delete selected history items?</string>
     <string name="delete_history_items">Delete %1$s history items?</string>
     <string name="quick_action_toggle_preference">A toggle to switch selected preference state.</string>
@@ -4427,5 +4432,6 @@
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
+
 
 </resources>

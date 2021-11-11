@@ -58,6 +58,7 @@
 						<androidx.appcompat.widget.AppCompatImageView
 							android:id="@+id/fold_button"
 							android:layout_width="wrap_content"
+							android:contentDescription="@string/fold_unfold_button"
 							android:layout_height="match_parent"
 							android:background="?attr/selectableItemBackgroundBorderless"
 							android:paddingLeft="@dimen/route_info_icon_padding_right"
@@ -78,6 +79,7 @@
 
 						<androidx.appcompat.widget.AppCompatImageView
 							android:id="@+id/app_modes_options"
+							android:contentDescription="@string/app_modes_options"
 							android:layout_width="wrap_content"
 							android:layout_height="match_parent"
 							android:background="?attr/selectableItemBackgroundBorderless"

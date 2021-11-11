@@ -11,6 +11,7 @@
 		android:id="@+id/profile_icon"
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
+		android:contentDescription="@string/app_profile_type"
 		android:layout_gravity="center"
 		tools:src="@drawable/ic_action_car_dark"
 		tools:tint="@color/active_color_primary_light" />
