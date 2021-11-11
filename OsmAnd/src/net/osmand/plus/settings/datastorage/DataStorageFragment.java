@@ -180,7 +180,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 						if (newDataStorage.getType() == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT
 								&& !DownloadActivity.hasPermissionToWriteExternalStorage(activity)) {
 							ActivityCompat.requestPermissions(activity,
-									new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+									new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
 									DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 						} else if (key.equals(MANUALLY_SPECIFIED)) {
 							showFolderSelectionDialog();
@@ -204,7 +204,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements UpdateM
 		int activeColor = ColorUtilities.getActiveColor(app, isNightMode());
 		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, isNightMode());
 
-		String[] memoryUnitsFormats = new String[]{
+		String[] memoryUnitsFormats = new String[] {
 				getString(R.string.shared_string_memory_kb_desc),
 				getString(R.string.shared_string_memory_mb_desc),
 				getString(R.string.shared_string_memory_gb_desc),

@@ -25,6 +25,7 @@ import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.settings.backend.OsmandSettings;
 
 public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
+
 	private UiUtilities iconsCache;
 
 	private int statusBarColor = -1;

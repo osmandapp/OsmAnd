@@ -14,9 +14,9 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
-public class SkipStorageMigrationBottomSheet extends MenuBottomSheetDialogFragment {
+public class SkipMigrationBottomSheet extends MenuBottomSheetDialogFragment {
 
-	public static final String TAG = SkipStorageMigrationBottomSheet.class.getSimpleName();
+	public static final String TAG = SkipMigrationBottomSheet.class.getSimpleName();
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class SkipStorageMigrationBottomSheet extends MenuBottomSheetDialogFragme
 
 	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target, boolean usedOnMap) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
-			SkipStorageMigrationBottomSheet fragment = new SkipStorageMigrationBottomSheet();
+			SkipMigrationBottomSheet fragment = new SkipMigrationBottomSheet();
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
