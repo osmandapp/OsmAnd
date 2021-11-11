@@ -7,12 +7,37 @@
 	   1. To not produce duplicate strings (check by name if a string already exists)
 	   2. Every apostrophe (quote) is preceded by a backslash.
 	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
-	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
+	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
 
+
     <string name="display_groups_visibility_dialog_description">You can control groups visibility on the map. If track is hidden, all groups will be hidden too.</string>
     <string name="shared_string_hide_all">Hide all</string>
+    <string name="files_remaining">Files remaining: %1$s %2$s</string>
+    <string name="copying_file">Copying file %1$s</string>
+    <string name="from_to_with_params">From %1$s to %2$s</string>
+    <string name="progress_complete">%1$s complete</string>
+    <string name="storage_found_files_descr">Tap “%1$s” to copy %2$s files from “%3$s” to “%4$s”. It may take some time.</string>
+    <string name="storage_copied_files_size">Copied %1$s files %2$s</string>
+    <string name="storage_copying_files_size">Copying %1$s files %2$s</string>
+    <string name="storage_found_files_size">Found %1$s files %2$s</string>
+    <string name="shared_string_skip_warning">Are you sure you want to skip the migration? OsmAnd no longer has access to your files in Shared storage.\n\nThe application will start in the new folder with your data.</string>
+    <string name="shared_storage_last_step">You will be able to specify a new data storage after selecting Shared storage.</string>
+    <string name="shared_storage_third_step">Give permission to access the folder. Without this permission OsmAnd cannot copy files.</string>
+    <string name="shared_storage_first_step">Press \"%1$s\".\nThe file manager opens where you need to find and open the osmand folder.</string>
+    <string name="shared_storage_migration_descr">Due to changes for storage access rules in Android, OsmAnd can no longer use %1$s.\n\nYou need to copy all your data, to the new storage location.</string>
+    <string name="shared_storage_second_step">Click \"Use this folder\".</string>
+    <string name="folder_access_denied">Permission is required to access selected folder.</string>
+    <string name="copying_completed">Copying completed</string>
+    <string name="shared_string_copy_to">Copy to</string>
+    <string name="start_copying">Start copying</string>
+    <string name="skip_confirmation">Yes, skip</string>
+    <string name="shared_storage">Shared storage</string>
+    <string name="shared_storage_migration">Shared storage migration</string>
+    <string name="shared_string_migration">Migration</string>
+    <string name="icon_group_education">Education</string>
+    <string name="icon_group_industrial">Industrial</string>
     <string name="delete_history_items_descr">Are you sure you want to delete selected history items?</string>
     <string name="delete_history_items">Delete %1$s history items?</string>
     <string name="quick_action_toggle_preference">A toggle to switch selected preference state.</string>
