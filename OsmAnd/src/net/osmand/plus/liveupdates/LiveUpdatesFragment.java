@@ -155,15 +155,20 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
-		createToolbar((ViewGroup) view.findViewById(R.id.app_bar));
+		createToolbar(view.findViewById(R.id.app_bar));
 
-		listView = (ExpandableListView) view.findViewById(android.R.id.list);
+		listView = view.findViewById(android.R.id.list);
+
+		View headerView = inflater.inflate(R.layout.list_item_import, listView, false);
+		View bottomShadowView = inflater.inflate(R.layout.card_bottom_divider, listView, false);
+
+		listView.addHeaderView(headerView);
+		listView.addFooterView(bottomShadowView);
+
 		adapter = new LiveMapsAdapter();
 		listView.setAdapter(adapter);
 		expandAllGroups();
 
-		View bottomShadowView = inflater.inflate(R.layout.card_bottom_divider, listView, false);
-		listView.addFooterView(bottomShadowView);
 		listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
@@ -194,11 +199,9 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 			}
 		});
 
-		View headerView = inflater.inflate(R.layout.list_item_import, listView, false);
 		View timeContainer = headerView.findViewById(R.id.item_import_container);
 		AndroidUtils.setListItemBackground(app, timeContainer, nightMode);
 		AndroidUiHelper.setVisibility(View.VISIBLE, headerView.findViewById(R.id.bottom_divider));
-		listView.addHeaderView(headerView);
 
 		AppCompatImageView descriptionIcon = timeContainer.findViewById(R.id.icon);
 		Drawable icon = UiUtilities.createTintedDrawable(app, R.drawable.ic_action_time,
@@ -274,11 +277,11 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		AppBarLayout appBarLayout = (AppBarLayout) UiUtilities.getInflater(getActivity(), nightMode)
 				.inflate(R.layout.global_preferences_toolbar_with_switch, appBar);
 
-		Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
-		TextViewEx toolbarTitle = (TextViewEx) toolbar.findViewById(R.id.toolbar_title);
+		Toolbar toolbar = appBarLayout.findViewById(R.id.toolbar);
+		TextViewEx toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(R.string.osm_live);
 
-		ImageView closeButton = (ImageView) toolbar.findViewById(R.id.close_button);
+		ImageView closeButton = toolbar.findViewById(R.id.close_button);
 		UiUtilities.rotateImageByLayoutDirection(closeButton);
 		closeButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -446,10 +449,10 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 
 		@Override
 		public View getChildView(final int groupPosition, final int childPosition,
-								 boolean isLastChild, View convertView, ViewGroup parent) {
+		                         boolean isLastChild, View convertView, ViewGroup parent) {
 			LayoutInflater inflater = UiUtilities.getInflater(app, nightMode);
 			convertView = inflater.inflate(R.layout.list_item_triple_row_icon_and_menu, parent, false);
-			ImageView secondaryIcon = (ImageView) convertView.findViewById(R.id.secondary_icon);
+			ImageView secondaryIcon = convertView.findViewById(R.id.secondary_icon);
 			UiUtilities.rotateImageByLayoutDirection(secondaryIcon);
 			LiveMapsViewHolder viewHolder = new LiveMapsViewHolder(convertView);
 			convertView.setTag(viewHolder);
@@ -472,10 +475,10 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 				topShadowView.setVisibility(View.VISIBLE);
 			}
 
-			TextViewEx titleView = ((TextViewEx) view.findViewById(R.id.title));
+			TextViewEx titleView = view.findViewById(R.id.title);
 			titleView.setText(getGroup(groupPosition));
 
-			TextViewEx countView = ((TextViewEx) view.findViewById(R.id.description));
+			TextViewEx countView = view.findViewById(R.id.description);
 			AndroidUtils.setTextSecondaryColor(app, countView, nightMode);
 
 			return view;
@@ -520,11 +523,11 @@ public class LiveUpdatesFragment extends BaseOsmAndDialogFragment implements OnL
 		private final CompoundButton compoundButton;
 
 		private LiveMapsViewHolder(View view) {
-			statusIcon = (AppCompatImageView) view.findViewById(R.id.icon);
-			title = (TextView) view.findViewById(R.id.title);
-			subTitle = (TextView) view.findViewById(R.id.sub_title);
-			description = (TextView) view.findViewById(R.id.description);
-			compoundButton = (CompoundButton) view.findViewById(R.id.compound_button);
+			statusIcon = view.findViewById(R.id.icon);
+			title = view.findViewById(R.id.title);
+			subTitle = view.findViewById(R.id.sub_title);
+			description = view.findViewById(R.id.description);
+			compoundButton = view.findViewById(R.id.compound_button);
 		}
 
 		public void bindLocalIndexInfo(@NonNull final String item) {
