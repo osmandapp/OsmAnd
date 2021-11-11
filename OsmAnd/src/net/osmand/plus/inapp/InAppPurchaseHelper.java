@@ -176,6 +176,8 @@ public abstract class InAppPurchaseHelper {
 	}
 
 	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication ctx) {
+		// TODO disable for 4.1 Beta build
+		// return Version.isDeveloperBuild(ctx) || Version.isPaidVersion(ctx);
 		return true;
 	}
 
