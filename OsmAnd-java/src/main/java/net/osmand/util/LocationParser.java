@@ -386,12 +386,7 @@ public class LocationParser {
 		partial[0] = false;
 		if (firstNumeralIdx != -1) {
 			int nextTokenIdx = firstNumeralIdx + 1;
-			if (all.size() > nextTokenIdx) {
-				if (all.get(nextTokenIdx) instanceof String) {
-					char delimiter = s.charAt(s.indexOf((String) all.get(nextTokenIdx)) - 1);
-					partial[0] = delimiter != ' ';
-				}
-			} else {
+			if (all.size() <= nextTokenIdx) {
 				partial[0] = true;
 			}
 		}

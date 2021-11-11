@@ -1487,7 +1487,7 @@ public class SearchCoreFactory {
 			}
 			return super.search(phrase, resultMatcher);
 		}
-
+		
 		LatLon parsePartialLocation(String s) {
 			s = s.trim();
 			if (s.length() == 0 || !(s.charAt(0) == '-' || Character.isDigit(s.charAt(0))
