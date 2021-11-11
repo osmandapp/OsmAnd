@@ -2334,7 +2334,7 @@
     <string name="ascent_descent">Podjazd/zjazd</string>
     <string name="moving_time">Czas w ruchu</string>
     <string name="max_min">Maks./min.</string>
-    <string name="quick_action_resume_pause_navigation">Zatrzymaj/wznów nawigację</string>
+    <string name="quick_action_resume_pause_navigation">Wstrzymaj/wznów nawigację</string>
     <string name="quick_action_resume_pause_navigation_descr">Przycisk do zatrzymania lub wznowienia nawigacji.</string>
     <string name="quick_action_start_stop_navigation">Rozpocznij/zakończ nawigację</string>
     <string name="quick_action_start_stop_navigation_descr">Przycisk rozpoczęcia lub zakończenia nawigacji.</string>
@@ -4185,7 +4185,7 @@
     <string name="shared_string_includes">Zawiera</string>
     <string name="from_with_param">Od %1$s</string>
     <string name="complete_purchase">Zakończ zakup</string>
-    <string name="regular_price">Zwykła cena</string>
+    <string name="regular_price">Standardowa cena</string>
     <string name="purchases_feature_desc_nautical">Uzyskaj dostęp do informacji o głębokości morskiej</string>
     <string name="purchases_feature_desc_terrain">Poziomice terenu, pełna mapa cieniowana w ciemnych odcieniach oraz mapy nachylenia z kolorami pokazującymi szczyty i niziny.</string>
     <string name="purchases_feature_desc_wikivoyage">Przeglądaj Wikipodróże w trybie offline. Artykuły podzielone według krajów i regionów, dostępne we wszystkich językach.</string>
@@ -4208,7 +4208,7 @@
     <string name="backup_delete_types_descr">Usunąć wszystkie dane z chmury OsmAnd Cloud dla nieaktualnych typów\?</string>
     <string name="shared_string_discussion">Dyskusja</string>
     <string name="backup_error_user_is_already_registered">Ten adres e-mail jest już w użyciu na innym koncie</string>
-    <string name="backup_error_subscription_was_expired">Subskrypcja nieważna</string>
+    <string name="backup_error_subscription_was_expired">Subskrypcja wygasła</string>
     <string name="backup_error_subscription_was_used">Subskrypcja lub promocja wykorzystana przez inne konto %1$s</string>
     <string name="backup_error_size_is_exceeded">Przekroczono maksymalny rozmiar chmury OsmAnd Cloud %1$s</string>
     <string name="backup_error_gzip_only_supported_upload">Plik powinien zostać przesłany w formacie gzip</string>
@@ -4407,7 +4407,7 @@
     <string name="use_external_timestamps_description">Użyj znaczników czasu routera online, aby dostosować szacowany czas i średnią prędkość.</string>
     <string name="no_plugins_enabled">Nie masz włączonych wtyczek. Listę dostępnych wtyczek znajdziesz w \'Menu\' → \'Wtyczki\'.</string>
     <string name="delete_history_items_descr">Czy na pewno chcesz usunąć wybrane elementy historii\?</string>
-    <string name="delete_history_items">Usunąć elementy historii %1$s\?</string>
+    <string name="delete_history_items">Liczba elementów historii do usunięcia %1$. Usunąć\?</string>
     <string name="display_route_tracks">Wyświetlanie ścieżek</string>
     <string name="display_route_tracks_as_poi">Wyświetlanie ścieżek jako POI</string>
     <string name="quick_action_toggle_preference">Przełącznik do przełączania wybranego stanu preferencji.</string>
