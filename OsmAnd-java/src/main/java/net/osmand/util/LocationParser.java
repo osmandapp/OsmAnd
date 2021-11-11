@@ -317,7 +317,7 @@ public class LocationParser {
 		return d;
 	}
 
-	private static void splitObjects(String s, List<Double> d, List<Object> all, List<String> strings) {
+	public static void splitObjects(String s, List<Double> d, List<Object> all, List<String> strings) {
 		splitObjects(s, d, all, strings, new boolean[]{false});
 	}
 
