@@ -607,7 +607,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	}
 
 	protected int getIconIdByName(String iconName) {
-		return RenderingIcons.getBigIconId(iconName);
+		return RenderingIcons.getBigIconResourceId(iconName);
 	}
 
 	private void createIconSelector() {

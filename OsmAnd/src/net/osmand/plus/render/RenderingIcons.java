@@ -192,10 +192,6 @@ public class RenderingIcons {
 		return null;
 	}
 
-	public static int getBigIconId(String iconName) {
-		return getResId("mx_" + iconName);
-	}
-
 	public static Integer getResId(@NonNull String id) {
 		if (id.startsWith("mx_")) {
 			return bigIcons.get(id.substring(3));
