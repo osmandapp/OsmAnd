@@ -4413,7 +4413,7 @@
     <string name="copying_file">Копіювання файлу %1$s</string>
     <string name="from_to_with_params">З %1$s до %2$s</string>
     <string name="progress_complete">%1$s завершено</string>
-    <string name="storage_found_files_descr">Торкніться «%1$s», щоб скопіювати файли %2$s з «%3$s» на «%4$s». Це може зайняти деякий час.</string>
+    <string name="storage_found_files_descr">Торкніться «%1$s», щоб скопіювати файли %2$s з «%3$s» на «%4$s». Це може тривати деякий час.</string>
     <string name="storage_copied_files_size">Скопійовано %1$s файлів %2$s</string>
     <string name="storage_copying_files_size">Копіювання %1$s файлів %2$s</string>
     <string name="storage_found_files_size">Знайдено %1$s файлів %2$s</string>
