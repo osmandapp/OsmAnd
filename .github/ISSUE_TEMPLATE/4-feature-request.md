@@ -27,8 +27,8 @@ Please be sure to read our [FAQ](https://osmand.net/help-online) before creating
 
 ### Describe the solution you'd like
 
-<!-- ✍️--> If you have a solution in mind, please describe it.
+<!-- ✍️ If you have a solution in mind, please describe it. -->
 
 ### Describe alternatives you've considered
 
-<!-- ✍️--> Have you considered any alternative solutions or workarounds?
+<!-- ✍️ Have you considered any alternative solutions or workarounds? -->

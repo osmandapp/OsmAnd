@@ -68,6 +68,7 @@ import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmAndAppCustomization;
 import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapActions;
 import net.osmand.plus.views.OsmandMap;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -332,12 +333,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void stopNavigation() {
-		MapActivity mapActivity = requireMapActivity();
-		mapRouteInfoMenu.hide();
-		if (app.getRoutingHelper().isFollowingMode()) {
-			mapActivity.getMapActions().stopNavigationActionConfirm(null);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapRouteInfoMenu.hide();
+			if (app.getRoutingHelper().isFollowingMode()) {
+				mapActivity.getMapActions().stopNavigationActionConfirm(null);
+			} else {
+				mapActivity.getMapActions().stopNavigationWithoutConfirm();
+			}
 		} else {
-			mapActivity.getMapActions().stopNavigationWithoutConfirm();
+			app.getOsmandMap().getMapActions().stopNavigationWithoutConfirm();
 		}
 	}
 
@@ -519,51 +524,58 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void startRoutePlanningWithDestination(LatLon latLon, PointDescription pointDescription, TargetPointsHelper targets) {
-		MapActivity mapActivity = requireMapActivity();
+		MapActivity mapActivity = getMapActivity();
+		MapActions mapActions = mapActivity != null ? mapActivity.getMapActions() : app.getOsmandMap().getMapActions();
 		boolean hasPointToStart = settings.restorePointToStart();
 		targets.navigateToPoint(latLon, true, -1, pointDescription);
 		if (!hasPointToStart) {
-			mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
+			mapActions.enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 		} else {
 			TargetPoint start = targets.getPointToStart();
 			if (start != null) {
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true, MenuState.HEADER_ONLY);
+				mapActions.enterRoutePlanningModeGivenGpx(null, start.point, start.getOriginalPointDescription(), true, true, MenuState.HEADER_ONLY);
 			} else {
-				mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
+				mapActions.enterRoutePlanningModeGivenGpx(null, null, null, true, true, MenuState.HEADER_ONLY);
 			}
 		}
 	}
 
-	private PointDescription getPointDescriptionForTarget(LatLon latLon) {
-		MapActivity mapActivity = requireMapActivity();
-		final MapContextMenu menu = mapActivity.getContextMenu();
-		PointDescription pointDescription;
-		if (menu.isActive() && latLon.equals(menu.getLatLon())) {
-			pointDescription = menu.getPointDescriptionForTarget();
-		} else {
-			pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
-		}
-		return pointDescription;
+	private PointDescription getPointDescriptionForTarget(@NonNull LatLon latLon) {
+		return getPointDescriptionForTarget(latLon, null);
 	}
 
-	public void addDestination(LatLon latLon) {
-		MapActivity mapActivity = requireMapActivity();
-		if (latLon != null) {
-			if (!OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
-				requestedLatLon = latLon;
-				ActivityCompat.requestPermissions(mapActivity,
-						new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
-						REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION);
-			} else {
-				PointDescription pointDescription = getPointDescriptionForTarget(latLon);
+	private PointDescription getPointDescriptionForTarget(@NonNull LatLon latLon, @Nullable String name) {
+		MapActivity mapActivity = getMapActivity();
+		MapContextMenu menu = mapActivity != null ? mapActivity.getContextMenu() : null;
+		return menu != null && menu.isActive() && latLon.equals(menu.getLatLon())
+				? menu.getPointDescriptionForTarget()
+				: new PointDescription(PointDescription.POINT_TYPE_LOCATION, Algorithms.isEmpty(name) ? "" : name);
+	}
+
+	public void addDestination(@NonNull LatLon latLon) {
+		addDestination(latLon, null);
+	}
+
+	public void addDestination(@NonNull LatLon latLon, @Nullable PointDescription pointDescription) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+			requestedLatLon = latLon;
+			ActivityCompat.requestPermissions(mapActivity,
+					new String[] {Manifest.permission.ACCESS_FINE_LOCATION},
+					REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION);
+		} else {
+			if (pointDescription == null) {
+				pointDescription = getPointDescriptionForTarget(latLon, null);
+			}
+			if (mapActivity != null) {
 				mapActivity.getContextMenu().close();
-				final TargetPointsHelper targets = app.getTargetPointsHelper();
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-					targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, pointDescription);
-				} else if (targets.getIntermediatePoints().isEmpty()) {
-					startRoutePlanningWithDestination(latLon, pointDescription, targets);
-				}
+			}
+			final TargetPointsHelper targets = app.getTargetPointsHelper();
+			RoutingHelper routingHelper = app.getRoutingHelper();
+			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+				targets.navigateToPoint(latLon, true, targets.getIntermediatePoints().size() + 1, pointDescription);
+			} else if (targets.getIntermediatePoints().isEmpty()) {
+				startRoutePlanningWithDestination(latLon, pointDescription, targets);
 			}
 		}
 	}
@@ -587,18 +599,24 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void replaceDestination(LatLon latLon) {
-		MapActivity mapActivity = requireMapActivity();
+	public void replaceDestination(@NonNull LatLon latLon) {
+		replaceDestination(latLon, null);
+	}
+
+	public void replaceDestination(@NonNull LatLon latLon, @Nullable PointDescription pointDescription) {
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		if (latLon != null) {
-			if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
-				PointDescription pointDescription = getPointDescriptionForTarget(latLon);
-				mapActivity.getContextMenu().close();
-				final TargetPointsHelper targets = app.getTargetPointsHelper();
-				targets.navigateToPoint(latLon, true, -1, pointDescription);
-			} else {
-				addDestination(latLon);
+		if (routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode()) {
+			if (pointDescription == null) {
+				pointDescription = getPointDescriptionForTarget(latLon, null);
 			}
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.getContextMenu().close();
+			}
+			final TargetPointsHelper targets = app.getTargetPointsHelper();
+			targets.navigateToPoint(latLon, true, -1, pointDescription);
+		} else {
+			addDestination(latLon, pointDescription);
 		}
 	}
 
@@ -776,7 +794,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void startNavigation() {
-		MapActivity mapActivity = requireMapActivity();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		if (routingHelper.isFollowingMode()) {
 			switchToRouteFollowingLayout();
@@ -801,7 +818,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				} else if (routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
 					OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 					if (!sim.isRouteAnimating()) {
-						sim.startStopRouteAnimation(mapActivity);
+						sim.startStopRouteAnimation(getMapActivity());
 					}
 				}
 			}
@@ -825,9 +842,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		boolean isNight = isNightModeForMapControls(drawSettings);
 		int textColor = ContextCompat.getColor(mapActivity, isNight ? R.color.widgettext_night : R.color.widgettext_day);
-		// TODO nightMode
-		// updatextColor(textColor, shadw, rulerControl, zoomControls, mapMenuControls);
-		// default buttons
 
 		RoutingHelper rh = app.getRoutingHelper();
 		WidgetsVisibilityHelper vh = mapActivity.getWidgetsVisibilityHelper();
@@ -864,6 +878,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showTopButtons = !isRouteDialogOpened && vh.shouldShowTopButtons();
 		layersHud.updateVisibility(showTopButtons);
 		quickSearchHud.updateVisibility(showTopButtons);
+
+		updateTransparencySliderUi();
 
 		if (mapView.isZooming()) {
 			lastZoom = System.currentTimeMillis();
@@ -1018,14 +1034,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
-				showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
+				showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY);
 			} else if (seekbarMode == LayerTransparencySeekbarMode.UNDERLAY && settings.MAP_UNDERLAY.get() != null) {
-				showTransparencyBar(settings.MAP_TRANSPARENCY, true);
+				showTransparencyBar(settings.MAP_TRANSPARENCY);
 			}
 		}
 	}
 
-	public void updateTransparencySlider() {
+	public void updateTransparencySliderValue() {
 		LayerTransparencySeekbarMode seekbarMode = settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get();
 		if (OsmandPlugin.isActive(OsmandRasterMapsPlugin.class)) {
 			if (seekbarMode == LayerTransparencySeekbarMode.OVERLAY && settings.MAP_OVERLAY.get() != null) {
@@ -1036,19 +1052,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
-									boolean isTransparencyBarEnabled) {
-		ApplicationMode appMode = app.getSettings().getApplicationMode();
-		if (MapControlsLayer.transparencySetting != transparenPreference) {
-			MapControlsLayer.transparencySetting = transparenPreference;
+	public void showTransparencyBar(@NonNull CommonPreference<Integer> transparentPreference) {
+		if (MapControlsLayer.transparencySetting != transparentPreference) {
+			MapControlsLayer.transparencySetting = transparentPreference;
+		}
+		transparencyBarLayout.setVisibility(View.VISIBLE);
+		transparencySlider.setValue(transparentPreference.get());
+		updateTransparencySliderUi();
+	}
 
-		}
-		if (transparenPreference != null && isTransparencyBarEnabled) {
-			transparencyBarLayout.setVisibility(View.VISIBLE);
-			transparencySlider.setValue(transparenPreference.get());
-		} else {
-			transparencyBarLayout.setVisibility(View.GONE);
-		}
+	private void updateTransparencySliderUi() {
+		ApplicationMode appMode = app.getSettings().getApplicationMode();
 		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		int selectedModeColor = appMode.getProfileColor(nightMode);
 		UiUtilities.setupSlider(transparencySlider, nightMode, selectedModeColor);
@@ -1394,7 +1408,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 							navigateButton();
 							break;
 						case REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION:
-							addDestination(requestedLatLon);
+							if (requestedLatLon != null) {
+								addDestination(requestedLatLon);
+							}
 							break;
 					}
 				} else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {

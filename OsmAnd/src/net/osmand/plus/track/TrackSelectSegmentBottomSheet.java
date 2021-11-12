@@ -45,6 +45,11 @@ public class TrackSelectSegmentBottomSheet extends MenuBottomSheetDialogFragment
 	private GPXFile gpxFile;
 
 	@Override
+	protected boolean useScrollableItemsContainer() {
+		return false;
+	}
+
+	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		app = requiredMyApplication();
 		Context context = requireContext();

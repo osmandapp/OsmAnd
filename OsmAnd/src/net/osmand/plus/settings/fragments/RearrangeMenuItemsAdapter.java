@@ -524,7 +524,7 @@ public class RearrangeMenuItemsAdapter extends RecyclerView.Adapter<RecyclerView
 			case MAP_CONTEXT_MENU_CREATE_POI:
 			case MAP_CONTEXT_MENU_MODIFY_OSM_NOTE:
 			case MAP_CONTEXT_MENU_OPEN_OSM_NOTE:
-				return R.string.osm_settings;
+				return R.string.osm_editing_plugin_name;
 			case MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC:
 				return R.string.parking_positions;
 			default:

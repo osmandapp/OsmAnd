@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
@@ -29,8 +31,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
 import java.util.List;
-
-import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE_POINT;
 
 public class AmenityMenuController extends MenuController {
 

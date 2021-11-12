@@ -5,10 +5,10 @@
 	android:title="@string/osmand_settings">
 
 	<Preference
-		android:key="default_application_mode_string"
 		android:icon="@drawable/ic_world_globe_dark"
-		android:persistent="false"
+		android:key="default_application_mode_string"
 		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
 		android:title="@string/settings_preset" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
@@ -51,6 +51,14 @@
 		app:fragment="net.osmand.plus.settings.fragments.DialogsAndNotificationsSettingsFragment"
 		tools:icon="@drawable/ic_action_notification" />
 
+	<Preference
+		android:key="history"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/shared_string_history"
+		app:fragment="net.osmand.plus.settings.fragments.HistorySettingsFragment"
+		tools:icon="@drawable/ic_action_history" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="enable_proxy"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
@@ -60,6 +68,10 @@
 		app:fragment="net.osmand.plus.settings.fragments.ProxySettingsFragment"
 		tools:icon="@drawable/ic_action_proxy" />
 
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
 	<PreferenceCategory
 		android:key="legal"
 		android:layout="@layout/preference_category_with_descr"
@@ -67,9 +79,9 @@
 
 	<Preference
 		android:key="speed_cameras_uninstalled"
-		android:persistent="false"
 		android:layout="@layout/preference_with_descr"
-		tools:title="@string/uninstall_speed_cameras"
-		tools:icon="@drawable/ic_speed_camera_disabled" />
+		android:persistent="false"
+		tools:icon="@drawable/ic_speed_camera_disabled"
+		tools:title="@string/uninstall_speed_cameras" />
 
 </PreferenceScreen>

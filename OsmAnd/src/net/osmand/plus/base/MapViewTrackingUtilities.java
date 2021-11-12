@@ -274,16 +274,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void switchToRoutePlanningMode() {
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		routePlanningMode = routingHelper.isRoutePlanningMode();
-		updateSettings();
+		updateSettings(false);
 		if(!routePlanningMode && followingMode) {
 			backToLocationImpl();
 		}
 
 	}
 
-	public void updateSettings(){
+	public void updateSettings(boolean resetMapRotation) {
 		if (mapView != null) {
-			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE || routePlanningMode) {
+			if (resetMapRotation && settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE) {
 				mapView.setRotate(0, true);
 			}
 			if (isMapLinkedToLocation) {
@@ -426,7 +426,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				backToLocationWithDelay(autoFollow);
 			}
 		} else {
-			updateSettings();
+			updateSettings(false);
 		}
 	}
 
@@ -454,9 +454,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private void switchRotateMapModeImpl(){
 		if (mapView != null) {
 			String rotMode = app.getString(R.string.rotate_map_none_opt);
-			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE && mapView.getRotate() != 0) {
-				// reset manual rotation
-			} else {
+			if (settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE || mapView.getRotate() == 0) {
 				int vl = (settings.ROTATE_MAP.get() + 1) % 3;
 				settings.ROTATE_MAP.set(vl);
 
@@ -468,8 +466,11 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			}
 			rotMode = app.getString(R.string.rotate_map_to_bearing) + ":\n" + rotMode;
 			app.showShortToastMessage(rotMode);
-			updateSettings();
+			updateSettings(true);
 			mapView.refreshMap();
+			if (mapView.isCarView()) {
+				app.refreshCarScreen();
+			}
 		}
 	}
 	

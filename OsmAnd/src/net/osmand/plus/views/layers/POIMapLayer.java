@@ -1,5 +1,10 @@
 package net.osmand.plus.views.layers;
 
+import static net.osmand.AndroidUtils.dpToPx;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,6 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -33,13 +43,17 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.PointImageDrawable;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.render.TravelRendererHelper;
+import net.osmand.plus.render.TravelRendererHelper.OnFileVisibilityChangeListener;
 import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 import net.osmand.plus.widgets.WebViewEx;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
@@ -53,18 +67,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-
-import static net.osmand.AndroidUtils.dpToPx;
-import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_ARTICLE;
-import static net.osmand.plus.wikivoyage.data.TravelObfHelper.ROUTE_TRACK;
-
-public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
-		MapTextProvider<Amenity>, IRouteInformationListener {
-	private static final int startZoom = 9;
+public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
+		MapTextProvider<Amenity>, IRouteInformationListener, OnFileVisibilityChangeListener {
+	private static final int START_ZOOM = 9;
+	private static final int START_ZOOM_ROUTE_TRACK = 11;
+	private static final int END_ZOOM_ROUTE_TRACK = 13;
 
 	public static final org.apache.commons.logging.Log log = PlatformUtil.getLog(POIMapLayer.class);
 
@@ -75,6 +82,18 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	private Set<PoiUIFilter> filters = new TreeSet<>();
 	private MapTextLayer mapTextLayer;
 
+	private final TravelRendererHelper travelRendererHelper;
+	private boolean showTravel;
+	private boolean routeArticleFilterEnabled;
+	private boolean routeArticlePointsFilterEnabled;
+	private boolean routeTrackFilterEnabled;
+	private boolean routeTrackAsPoiFilterEnabled;
+	private PoiUIFilter routeArticleFilter;
+	private PoiUIFilter routeArticlePointsFilter;
+	private PoiUIFilter routeTrackFilter;
+	private String routeArticlePointsFilterByName;
+	private boolean fileVisibilityChanged;
+
 	/// cache for displayed POI
 	// Work with cache (for map copied from AmenityIndexRepositoryOdb)
 	private final MapLayerData<List<Amenity>> data;
@@ -83,7 +102,18 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		super(context);
 		app = (OsmandApplication) context.getApplicationContext();
 		routingHelper = app.getRoutingHelper();
+
+		travelRendererHelper = app.getTravelRendererHelper();
+		showTravel = app.getSettings().SHOW_TRAVEL.get();
+		routeArticleFilterEnabled = travelRendererHelper.getRouteArticlesProperty().get();
+		routeArticlePointsFilterEnabled = travelRendererHelper.getRouteArticlePointsProperty().get();
+		routeArticleFilter = travelRendererHelper.getRouteArticleFilter();
+		routeArticlePointsFilter = travelRendererHelper.getRouteArticlePointsFilter();
+		routeTrackFilter = travelRendererHelper.getRouteTrackFilter();
+		routeArticlePointsFilterByName = routeArticlePointsFilter != null ? routeArticlePointsFilter.getFilterByName() : null;
+
 		routingHelper.addListener(this);
+		travelRendererHelper.addFileVisibilityListener(this);
 		data = new OsmandMapLayer.MapLayerData<List<Amenity>>() {
 
 			Set<PoiUIFilter> calculatedFilters;
@@ -100,6 +130,24 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 			@Override
 			public void layerOnPreExecute() {
 				calculatedFilters = new TreeSet<>(filters);
+				if (showTravel) {
+					boolean routeArticleFilterEnabled = POIMapLayer.this.routeArticleFilterEnabled;
+					PoiUIFilter routeArticleFilter = POIMapLayer.this.routeArticleFilter;
+					if (routeArticleFilterEnabled && routeArticleFilter != null) {
+						calculatedFilters.add(routeArticleFilter);
+					}
+					boolean routeArticlePointsFilterEnabled = POIMapLayer.this.routeArticlePointsFilterEnabled;
+					PoiUIFilter routeArticlePointsFilter = POIMapLayer.this.routeArticlePointsFilter;
+					if (routeArticlePointsFilterEnabled && routeArticlePointsFilter != null
+							&& !Algorithms.isEmpty(routeArticlePointsFilter.getFilterByName())) {
+						calculatedFilters.add(routeArticlePointsFilter);
+					}
+					boolean routeTrackAsPoiFilterEnabled = POIMapLayer.this.routeTrackAsPoiFilterEnabled;
+					PoiUIFilter routeTrackFilter = POIMapLayer.this.routeTrackFilter;
+					if (routeTrackAsPoiFilterEnabled && routeTrackFilter != null) {
+						calculatedFilters.add(routeTrackFilter);
+					}
+				}
 			}
 
 			@Override
@@ -118,7 +166,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				List<Amenity> res = new ArrayList<>();
 				PoiUIFilter.combineStandardPoiFilters(calculatedFilters, app);
 				for (PoiUIFilter filter : calculatedFilters) {
-					res.addAll(filter.searchAmenities(latLonBounds.top, latLonBounds.left,
+					List<Amenity> amenities = filter.searchAmenities(latLonBounds.top, latLonBounds.left,
 							latLonBounds.bottom, latLonBounds.right, z, new ResultMatcher<Amenity>() {
 
 								@Override
@@ -130,7 +178,26 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 								public boolean isCancelled() {
 									return isInterrupted();
 								}
-							}));
+							});
+					if (filter.isRouteTrackFilter()) {
+						for (Amenity amenity : amenities) {
+							boolean hasRoute = false;
+							String routeId = amenity.getRouteId();
+							if (!Algorithms.isEmpty(routeId)) {
+								for (Amenity a : res) {
+									if (routeId.equals(a.getRouteId())) {
+										hasRoute = true;
+										break;
+									}
+								}
+							}
+							if (!hasRoute) {
+								res.add(amenity);
+							}
+						}
+					} else {
+						res.addAll(amenities);
+					}
 				}
 
 				Collections.sort(res, (lhs, rhs) -> lhs.getId() < rhs.getId()
@@ -173,7 +240,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	public int getRadiusPoi(RotatedTileBox tb) {
 		int r;
 		final double zoom = tb.getZoom();
-		if (zoom < startZoom) {
+		if (zoom < START_ZOOM) {
 			r = 0;
 		} else if (zoom <= 15) {
 			r = 10;
@@ -188,30 +255,109 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		return (int) (r * view.getScaleCoefficient());
 	}
 
+	private int getColor(@NonNull Amenity amenity) {
+		int color = 0;
+		if (ROUTE_ARTICLE_POINT.equals(amenity.getSubType())) {
+			String colorStr = amenity.getColor();
+			if (colorStr != null) {
+				color = ColorDialogs.getColorByTag(colorStr);
+			}
+		}
+		return color != 0 ? color : ContextCompat.getColor(app, R.color.osmand_orange);
+	}
+
+	private boolean shouldDraw(@NonNull RotatedTileBox tileBox) {
+		if (!filters.isEmpty() && tileBox.getZoom() >= START_ZOOM) {
+			return true;
+		} else if (filters.isEmpty()) {
+			if ((travelRendererHelper.getRouteArticlesProperty().get() && routeArticleFilter != null
+					|| travelRendererHelper.getRouteArticlePointsProperty().get() && routeArticlePointsFilter != null)
+					&& tileBox.getZoom() >= START_ZOOM) {
+				return true;
+			}
+			if (travelRendererHelper.getRouteTracksAsPoiProperty().get() && routeTrackFilter != null) {
+				return travelRendererHelper.getRouteTracksProperty().get()
+						? tileBox.getZoom() >= START_ZOOM : tileBox.getZoom() >= START_ZOOM_ROUTE_TRACK;
+			}
+		}
+		return false;
+	}
+
+	private boolean shouldDraw(@NonNull RotatedTileBox tileBox, @NonNull Amenity amenity) {
+		boolean routeArticle = ROUTE_ARTICLE_POINT.equals(amenity.getSubType())
+				|| ROUTE_ARTICLE.equals(amenity.getSubType());
+		boolean routeTrack = ROUTE_TRACK.equals(amenity.getSubType());
+		if (routeArticle) {
+			return tileBox.getZoom() >= START_ZOOM;
+		}  else if (routeTrack) {
+			if (travelRendererHelper.getRouteTracksProperty().get()) {
+				return tileBox.getZoom() >= START_ZOOM && tileBox.getZoom() <= END_ZOOM_ROUTE_TRACK;
+			} else {
+				return tileBox.getZoom() >= START_ZOOM_ROUTE_TRACK;
+			}
+		} else {
+			return tileBox.getZoom() >= START_ZOOM;
+		}
+	}
+
+	@Override
+	public void fileVisibilityChanged() {
+		this.fileVisibilityChanged = true;
+	}
+
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
 		Set<PoiUIFilter> selectedPoiFilters = app.getPoiFilters().getSelectedPoiFilters();
-		if (this.filters != selectedPoiFilters) {
+		boolean showTravel = app.getSettings().SHOW_TRAVEL.get();
+		boolean routeArticleFilterEnabled = travelRendererHelper.getRouteArticlesProperty().get();
+		boolean routeArticlePointsFilterEnabled = travelRendererHelper.getRouteArticlePointsProperty().get();
+		boolean routeTrackFilterEnabled = travelRendererHelper.getRouteTracksProperty().get();
+		boolean routeTrackAsPoiFilterEnabled = travelRendererHelper.getRouteTracksAsPoiProperty().get();
+		PoiUIFilter routeArticleFilter = travelRendererHelper.getRouteArticleFilter();
+		PoiUIFilter routeArticlePointsFilter = travelRendererHelper.getRouteArticlePointsFilter();
+		PoiUIFilter routeTrackFilter = travelRendererHelper.getRouteTrackFilter();
+		String routeArticlePointsFilterByName = routeArticlePointsFilter != null ? routeArticlePointsFilter.getFilterByName() : null;
+		if (this.filters != selectedPoiFilters
+				|| this.showTravel != showTravel
+				|| this.routeArticleFilterEnabled != routeArticleFilterEnabled
+				|| this.routeArticlePointsFilterEnabled != routeArticlePointsFilterEnabled
+				|| this.routeTrackFilterEnabled != routeTrackFilterEnabled
+				|| this.routeTrackAsPoiFilterEnabled != routeTrackAsPoiFilterEnabled
+				|| this.routeArticleFilter != routeArticleFilter
+				|| this.routeArticlePointsFilter != routeArticlePointsFilter
+				|| this.routeTrackFilter != routeTrackFilter
+				|| this.fileVisibilityChanged
+				|| !Algorithms.stringsEqual(this.routeArticlePointsFilterByName, routeArticlePointsFilterByName)) {
 			this.filters = selectedPoiFilters;
+			this.showTravel = showTravel;
+			this.routeArticleFilterEnabled = routeArticleFilterEnabled;
+			this.routeArticlePointsFilterEnabled = routeArticlePointsFilterEnabled;
+			this.routeTrackFilterEnabled = routeTrackFilterEnabled;
+			this.routeTrackAsPoiFilterEnabled = routeTrackAsPoiFilterEnabled;
+			this.routeArticleFilter = routeArticleFilter;
+			this.routeArticlePointsFilter = routeArticlePointsFilter;
+			this.routeTrackFilter = routeTrackFilter;
+			this.routeArticlePointsFilterByName = routeArticlePointsFilterByName;
+			this.fileVisibilityChanged = false;
 			data.clearCache();
 		}
 
 		List<Amenity> fullObjects = new ArrayList<>();
 		List<LatLon> fullObjectsLatLon = new ArrayList<>();
 		List<LatLon> smallObjectsLatLon = new ArrayList<>();
-		if (!filters.isEmpty()) {
-			if (tileBox.getZoom() >= startZoom) {
-				data.queryNewData(tileBox);
-				List<Amenity> objects = data.getResults();
-				if (objects != null) {
-					float textScale = getTextScale();
-					float iconSize = getIconSize(app);
-					QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
-					WaypointHelper wph = app.getWaypointHelper();
-					PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(view.getContext(),
-							ContextCompat.getColor(app, R.color.osmand_orange), true);
-					pointImageDrawable.setAlpha(0.8f);
-					for (Amenity o : objects) {
+		if (shouldDraw(tileBox)) {
+			data.queryNewData(tileBox);
+			List<Amenity> objects = data.getResults();
+			if (objects != null) {
+				float textScale = getTextScale();
+				float iconSize = getIconSize(app);
+				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
+				WaypointHelper wph = app.getWaypointHelper();
+				for (Amenity o : objects) {
+					if (shouldDraw(tileBox, o)) {
+						PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(
+								view.getContext(), getColor(o), true);
+						pointImageDrawable.setAlpha(0.8f);
 						LatLon latLon = o.getLocation();
 						float x = tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 						float y = tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
@@ -229,37 +375,36 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 							}
 						}
 					}
-					for (Amenity o : fullObjects) {
-						LatLon latLon = o.getLocation();
-						int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-						int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
-						if (tileBox.containsPoint(x, y, iconSize)) {
-							String id = o.getGpxIcon();
-							if (id == null) {
-								PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
-								if (st != null) {
-									if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
-										id = st.getIconKeyName();
-									} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-										id = st.getOsmTag() + "_" + st.getOsmValue();
-									}
+				}
+				for (Amenity o : fullObjects) {
+					LatLon latLon = o.getLocation();
+					int x = (int) tileBox.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					int y = (int) tileBox.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+					if (tileBox.containsPoint(x, y, iconSize)) {
+						String id = o.getGpxIcon();
+						if (id == null) {
+							PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
+							if (st != null) {
+								if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
+									id = st.getIconKeyName();
+								} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
+									id = st.getOsmTag() + "_" + st.getOsmValue();
 								}
 							}
-							if (id != null) {
-								pointImageDrawable = PointImageDrawable.getOrCreate(view.getContext(),
-										ContextCompat.getColor(app, R.color.osmand_orange), true,
-										RenderingIcons.getResId(id));
-								pointImageDrawable.setAlpha(0.8f);
-								pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
-							}
+						}
+						if (id != null) {
+							PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(
+									view.getContext(), getColor(o), true, RenderingIcons.getResId(id));
+							pointImageDrawable.setAlpha(0.8f);
+							pointImageDrawable.drawPoint(canvas, x, y, textScale, false);
 						}
 					}
-					this.fullObjectsLatLon = fullObjectsLatLon;
-					this.smallObjectsLatLon = smallObjectsLatLon;
 				}
+				this.fullObjectsLatLon = fullObjectsLatLon;
+				this.smallObjectsLatLon = smallObjectsLatLon;
 			}
 		}
-		mapTextLayer.putData(this, fullObjects);
+		mapTextLayer.putData(this,fullObjects);
 	}
 
 	@Override
@@ -269,6 +414,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public void destroyLayer() {
 		routingHelper.removeListener(this);
+		travelRendererHelper.removeFileVisibilityListener(this);
 	}
 
 	@Override
@@ -370,7 +516,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects, boolean unknownLocation) {
-		if (tileBox.getZoom() >= startZoom) {
+		if (tileBox.getZoom() >= START_ZOOM) {
 			getAmenityFromPoint(tileBox, point, objects);
 		}
 	}
@@ -429,12 +575,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public int getTextShift(Amenity amenity, RotatedTileBox rb) {
-		int radiusPoi = getRadiusPoi(rb);
-		if (isPresentInFullObjects(amenity.getLocation())) {
-			radiusPoi += (app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_outline_size)
-					- app.getResources().getDimensionPixelSize(R.dimen.favorites_icon_size_small)) / 2;
-		}
-		return (int) (radiusPoi * getTextScale());
+		return (int) (16 * rb.getDensity() * getTextScale());
 	}
 
 	@Override

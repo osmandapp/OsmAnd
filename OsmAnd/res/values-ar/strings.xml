@@ -85,7 +85,7 @@
     <string name="show_warnings_title">عرض التنبيهات…</string>
     <string name="use_compass_navigation">استخدم البوصلة</string>
     <string name="avoid_motorway">تجنب الطرق السريعة</string>
-    <string name="show_lanes">الممرات</string>
+    <string name="show_lanes">عرض مسارات الطريق</string>
     <string name="avoid_unpaved">تجنب الطرق غير المعبدة</string>
     <string name="avoid_ferries">تجنب العبارات</string>
     <string name="avoid_in_routing_title">التجنب…</string>
@@ -310,7 +310,7 @@
     <string name="rendering_attr_noAdminboundaries_description">منع عرض الحدود الإقليمية (المستويات الإدارية من 5-9).</string>
     <string name="rendering_attr_showRoadMaps_description">تحديد وقت عرض خرائط الطرقات فقط :</string>
     <string name="rendering_attr_showRoadMaps_name">خرائط الطرقات فقط</string>
-    <string name="safe_mode_description">تشغيل التطبيق في الوضع الآمن (باستخدام تعليمات أندرويد البطيئة بدلا من التعليمات البرمجية الأصلية) .</string>
+    <string name="safe_mode_description">قم بتشغيل التطبيق في الوضع الآمن (أبطأ).</string>
     <string name="native_library_not_running">يعمل التطبيق في الوضع الآمن ( عطّله من الإعدادات ).</string>
     <string name="background_service_is_enabled_question">خدمة أوسماند لا تزال قيد التشغيل في الخلفية. هل تريد إيقافها ؟</string>
     <string name="rendering_attr_roadColors_description">اختر نظام ألوان الطريق:</string>
@@ -366,7 +366,7 @@
     <string name="day_night_info">مواقيت الشروق والغروب</string>
     <string name="map_widget_vector_attributes">سمات التقديم</string>
     <string name="map_widget_renderer">نمط الخريطة</string>
-    <string name="layer_map_appearance">الاختصارات</string>
+    <string name="layer_map_appearance">تخصيص الشاشة</string>
     <string name="map_widget_fluorescent">طرق فلورية</string>
     <string name="map_widget_show_ruler">مسطرة</string>
     <string name="map_widget_view_direction">عرض الاتجاه</string>
@@ -375,7 +375,7 @@
 \n التطبيق في الخلفية</string>
     <string name="bg_service_sleep_mode_on">إيقاف 
 \n التشغيل في الخلفية</string>
-    <string name="map_widget_config">الاختصارات</string>
+    <string name="map_widget_config">تخصيص الشاشة</string>
     <string name="map_widget_back_to_loc">أين أنا</string>
     <string name="map_widget_lock_screen">اقفل الشاشة</string>
     <string name="map_widget_compass">البوصلة</string>
@@ -451,7 +451,7 @@
     <string name="osmand_development_plugin_description">هذا الملحق يعرض إعدادات لتطوير وتصحيح الميزات كاختبار أو محاكاة التوجيه، أداء الشاشة، أو الإشعار الصوتي. هذه الإعدادات معدة للمطورين و المستخدم العام لا يحتاجها.</string>
     <string name="plugins_screen">الملحقات</string>
     <string name="prefs_plugins_descr">تقوم الملحقات بتفعيل إعدادات متقدمة ووظائف إضافية.</string>
-    <string name="osm_editing_plugin_description">قدم مساهمات مثل إنشاء أو تعديل كائنات OSM POI ، وفتح ملاحظات OSM أو التعليق عليها ، والمساهمة في ملفات GPX المسجلة في OsmAnd ومن خلال توفير اسم المستخدم وكلمة المرور. OpenStreetMap.org هو مشروع عالمي لرسم خرائط المجال العام يحركه المجتمع.</string>
+    <string name="osm_editing_plugin_description">قدم مساهماتك مثل إنشاء أو تعديل عناصر ونقاط خريطة الشارع المفتوحة، وفتح ملاحظات على خريطة الشارع المفتوحة أو التعليق عليها ، كما يمكنك المساهمة برفع ملفات المسارات المسجلة عبر أوسماند بصيغة GPX وذلك من خلال وضعك اسم المستخدم الخاص بك وكلمة المرور التي سجلت بها على OpenStreetMap.org (المشروع العالمي لرسم خرائط بشكل عام ويديره المجتمع).</string>
     <string name="vector_maps_may_display_faster_on_some_devices">عادة تعرض الخرائط الاتجاهية أسرع. ربما لا تعمل جيدا على بعض الأجهزة.</string>
     <string name="play_commands_of_currently_selected_voice">شغل أوامر الصوت المحدد الحالي:</string>
     <string name="switch_to_raster_map_to_see">لا توجد خرائط توجيه لهذا المكان. قم بتحميل إحدها ، أو التغيير لخرائط الإنترنت (فعّل ملحق خرائط الإنترنت).</string>
@@ -909,7 +909,7 @@
     <string name="shared_string_search">بحث</string>
     <string name="shared_string_show_description">عرض الوصف.</string>
     <string name="shared_string_message">رسالة</string>
-    <string name="welmode_download_maps">تنزيل الخرائط</string>
+    <string name="welmode_download_maps">إدارة الخرائط</string>
     <string name="welcome_select_region">لعرض إشارات وقواعد المرور بشكل صحيح، من فضلك اختر منطقة القيادة:</string>
     <string name="shared_string_add_to_favorites">إضافة إلى المفضلة</string>
     <string name="shared_string_my_places">المعالم المفضلة</string>
@@ -1155,7 +1155,7 @@
     <string name="parking_place_limited">وقت وقوف السيارات يقتصر على</string>
     <string name="shared_string_collapse">تدلي</string>
     <string name="drawer">قائمة منبسطة</string>
-    <string name="osm_settings">تعديل OSM</string>
+    <string name="osm_editing_plugin_name">تعديل خريطة الشارع المفتوحة</string>
     <string name="free">فارغ %1$s</string>
     <string name="parking_place">موقف السيارات</string>
     <string name="version_settings_descr">نزل الإصدارات الليلية.</string>
@@ -1545,7 +1545,7 @@
     <string name="first_usage_item_description">كيفية تحميل الخرائط وتعيين الإعدادات الأساسية.</string>
     <string name="planning_trip_item">التخطيط لرحلة</string>
     <string name="faq_item">الأسئلة المتداولة</string>
-    <string name="faq_item_description">الأسئلة المتداولة</string>
+    <string name="faq_item_description">الأسئلة المتداولة.</string>
     <string name="search_on_the_map_item">تقنيات البحث في الخريطة</string>
     <string name="instalation_troubleshooting_item">التثبيت واستكشاف الأخطاء وإصلاحها</string>
     <string name="techical_articles_item">مقالات تقنية</string>
@@ -1638,7 +1638,7 @@
     <string name="shared_string_status">الحالة</string>
     <string name="shared_string_save_changes">حفظ التعديلات</string>
     <string name="shared_string_email_address">البريد الإلكتروني</string>
-    <string name="rendering_attr_hideUnderground_name">أشياء تحت الأرض</string>
+    <string name="rendering_attr_hideUnderground_name">الأشياء تحت مستوى سطح الأرض</string>
     <string name="data_is_not_available">البيانات غير متوفرة</string>
     <string name="shared_string_read_more">اقرأ المزيد</string>
     <string name="road_blocked">الطريق محظور</string>
@@ -1676,7 +1676,7 @@
     <string name="shared_string_update">تحديث</string>
     <string name="shared_string_upload">رفع</string>
     <string name="shared_string_qr_code">رمز QR</string>
-    <string name="go_to_map">عرض الخريطة</string>
+    <string name="go_to_map">إظهار الخريطة</string>
     <string name="map_downloaded">تم تحميل الخريطة</string>
     <string name="simulate_initial_startup">محاكاة طريقة تشغيل التطبيق للمرة الأولى</string>
     <string name="share_geo">تطبيق آخر:</string>
@@ -1690,7 +1690,7 @@
     <string name="si_m_s">م/ث</string>
     <string name="si_min_km">دقيقة/كم</string>
     <string name="si_min_m">دقيقة/ميل</string>
-    <string name="si_nm_h">ميل بحري/س (عقدة)</string>
+    <string name="si_nm_h">أميال بحرية في الساعة (عقدة)</string>
     <string name="min_mile">د/م</string>
     <string name="min_km">د/كم</string>
     <string name="m_s">م/ث</string>
@@ -1901,7 +1901,7 @@
     <string name="build_installed">إصدار {0} تثبيت بنجاح ({1}).</string>
     <string name="downloading_build">جار تحميل الإصدار…</string>
     <string name="install_selected_build">هل تريد تثبيت أوسماند - {0} من {1} {2} مب ؟</string>
-    <string name="loading_builds_failed">فشل في الحصول على قائمة إصدارات التطبيق</string>
+    <string name="loading_builds_failed">تعذر استرداد قائمة OsmAnd builds</string>
     <string name="loading_builds">عملية تحميل إصدارات التطبيق جارية …</string>
     <string name="select_build_to_install">حدد إصدار التطبيق للتثبيت</string>
     <string name="voice_is_not_available_msg">التوجيهات الصوتية غير متوفرة، يرجى الذهاب إلى \"إدارة الخرائط\" ← \"تحميلات متاحة\" ← \"التوجيه الصوتي\" وحدد أو حمل حزمة صوت.</string>
@@ -2245,14 +2245,14 @@
     <string name="restore_purchases">استرجاع الشراء</string>
     <string name="do_not_send_anonymous_app_usage">لا ترسل إحصاءات مجهولة عن استخدام التطبيق</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">هضابي</string>
-    <string name="shared_string_time_moving">وقت التنقل</string>
+    <string name="shared_string_time_moving">الوقت المتحرك</string>
     <string name="shared_string_time_span">الفترة الزمنية</string>
     <string name="route_altitude">ارتفاع الطريق</string>
     <string name="routing_attr_relief_smoothness_factor_name">تحديد تذبذب الإرتفاع</string>
     <string name="map_widget_ruler_control">دوائر القياس</string>
     <string name="shared_string_permissions">ترخيصات</string>
     <string name="import_gpx_failed_descr">لا يمكن لأوسماند استيراد الملف. الرجاء التحقق إذا كان أوسماند لديه إذن قراءة الملف من موقعه.</string>
-    <string name="distance_moving">تصحيح المسافة</string>
+    <string name="distance_moving">المسافة المصححة</string>
     <string name="mapillary_image">صور مابيلاري</string>
     <string name="open_mapillary">فتح مابيلاري</string>
     <string name="shared_string_install">تثبيت</string>
@@ -2303,9 +2303,9 @@
     <string name="auto_split_recording_descr">بدء مقطع جديدة بعد فارق 6 دقائق، مسار جديد بعد فارق 2 ساعة، أو ملف جديد بعد فارق أطول إذا تغير التاريخ.</string>
     <string name="shared_string_paused">متوقف مؤقتاً</string>
     <string name="route_is_too_long_v2">للمسافات الطويلة: يرجى إضافة وجهات اضافية وسطية إذا لم يتم العثور على مسار في غضون 10 دقائق.</string>
-    <string name="osmand_extended_description_part1">أوسماند(توجيهات OSM للتنقل الآلية) تطبيق خريطة وتنقل مع إمكانية الوصول إلى بيانات (OSM) مجاناً وفي جميع أنحاء العالم، وبجودة عالية 
-\n 
-\n. استمتع بمستكشف بالصوت والصورة، وعرض (نقاط الاهتمام)، إنشاء وإدارة مسارات GPX، استخدام عرض ارتفاع بيانات الخطوط الكنتورية(عن طريق الملحق)، اختيار بين نمط القيادة، ركوب الدراجات والمشاة، التعديل على الموقع وغيرها.</string>
+    <string name="osmand_extended_description_part1">أوسماند(الملاحة والتوجيه الآلي عبر خرائط OSM) تطبيق خرائط وملاحة مجاني وعالمي عبر بيانات (OSM) عالية الجودة، وبجودة عالية.
+\n
+\n استمتع بالملاحة بالصوت والصورة، وعرض (نقاط الاهتمام)، وإنشاء وتسجيل وإدارة مسارات GPX، واستخدام وتمثيل بيانات الخطوط الكنتورية وبيانات الارتفاعات (عن طريق الملحق)، كما يمكنك التنقل بأوضاع مختلفة مثل وضع القيادة، وركوب الدراجات والمشي، والتعديل على المواقع التي على الخريطة وغيرها.</string>
     <string name="osmand_extended_description_part2">التنقل عبر GPS 
 \n• يمكنك أن تختار بين وضع دون اتصال (لا رسوم تجوال عندما تكون في الخارج) أو بالإنترنت (أسرع) 
 \n• التوجيه الصوتي بالتفصيل يوجهك طوال الطريق (مسجل أو مدرج) 
@@ -3143,7 +3143,6 @@
     <string name="plugins_settings">ضبط الملحقات</string>
     <string name="shared_string_by_default">بشكل افتراضي</string>
     <string name="download_detailed_map">قم بتنزيل خريطة مفصلة%s لعرض هذه المنطقة.</string>
-    <string name="internal_app_storage_description">تخزين داخلي ، مخفي عن المستخدم والتطبيقات الأخرى ، يمكن الوصول إليه حصريا من أوسماند.</string>
     <string name="change_data_storage_folder">مجلد التخزين</string>
     <string name="rendering_attr_piste_type_snow_park_name">حديقة التضاريس</string>
     <string name="rendering_attr_piste_type_sleigh_name">زلاجة</string>
@@ -3389,7 +3388,7 @@
     <string name="accessibility_announce">أعلن</string>
     <string name="login_and_pass">اسم المستخدم و كلمة السر</string>
     <string name="plugin_global_prefs_info">إعدادات الملحق هذه شاملة، وتنطبق على جميع الأوضاع</string>
-    <string name="osm_editing">تعديل OpenStreetMap</string>
+    <string name="osm_editing">تعديل خريطة الشارع المفتوحة</string>
     <string name="app_mode_osm">Osm</string>
     <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
     <string name="button_rate">قيم</string>
@@ -3478,9 +3477,9 @@
     <string name="shared_string_include_data">تضمين بيانات إضافية</string>
     <string name="export_profile_dialog_description">حدد بيانات إضافية للتصدير مع ملف التعريف.</string>
     <string name="index_name_antarctica">القارة القطبية الجنوبية</string>
-    <string name="plugin_disabled_descr">هذا الملحق هو تطبيق منفصل ، بإمكانك إزالته بشكل منفصل إذا لم تعد تخطط لاستخدامه. 
-\n 
-\nسيبقى الملحق الإضافي على الجهاز بعد إزالة أوسماند.</string>
+    <string name="plugin_disabled_descr">هذه الأداة الملخقة هو تطبيق منفصل ، ولا يؤدي تعطيله إلى إزالته.
+\n
+\nيمكن إلغاء تثبيته في إعدادات \"تطبيقات\" على جهازك.</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="import_profile_dialog_description">يحتوي الوضع المستوردة على بيانات إضافية. انقر فوق \"استيراد\" لاستيراد بيانات الوضع فقط أو حدد بيانات إضافية لاستيرادها.</string>
     <string name="shared_string_app_default_w_val">التطبيق الافتراضي (%s)</string>
@@ -3868,8 +3867,8 @@
 \nيتم تمديد الاشتراك تلقائيًا ما لم يتم إلغاؤه قبل تاريخ التجديد المحدد.
 \n
 \nيمكنك إدارة وإلغاء الاشتراكات الخاصة بك في إعدادات AppGallery في أي وقت.</string>
-    <string name="routing_attr_avoid_footways_description">تجنب الممرات</string>
-    <string name="routing_attr_avoid_footways_name">تجنب الممرات</string>
+    <string name="routing_attr_avoid_footways_description">تجنب طرق المشاة</string>
+    <string name="routing_attr_avoid_footways_name">تجنب طرق المشاة</string>
     <string name="what_is_new">ما الجديد</string>
     <string name="development">تطوير</string>
     <string name="use_live_public_transport">بيانات أوسماند لايف</string>
@@ -4038,7 +4037,7 @@
     <string name="delete_online_routing_engine">هل تريد حذف محرك التوجيه عبر الإنترنت؟</string>
     <string name="context_menu_read_full">قراءة كاملة</string>
     <string name="context_menu_edit_descr">تحرير الوصف</string>
-    <string name="delete_waypoints">حذف نقاط الطريق</string>
+    <string name="delete_waypoints">احذف الإحداثيات</string>
     <string name="copy_to_map_markers">نسخ لعلامات الخريطة</string>
     <string name="copy_to_map_favorites">نسخ للمفضلة</string>
     <string name="upload_photo">يتم الرفع</string>
@@ -4335,8 +4334,8 @@
     <string name="on_hold_since">معلقة منذ %1$s</string>
     <string name="active_till">نشط حتى %1$s</string>
     <string name="promo_subscription">اشتراك برومو</string>
-    <string name="track_has_no_needed_data">لا يحتوي المسار على البيانات المطلوبة.</string>
-    <string name="option_available_only_in_osmand_pro">الخيار متاح كجزء من اشتراك أوسماند برو.</string>
+    <string name="track_has_no_needed_data">يفتقد المسار إلى البيانات المعنية.</string>
+    <string name="option_available_only_in_osmand_pro">متاح كجزء من اشتراك OsmAnd Pro.</string>
     <string name="pro_widgets">ويدجت برو</string>
     <string name="purchases_feature_desc_pro_widgets">احصل على إمكانية الوصول إلى ميزات أوسماند الاحترافية: تلوين المسار وأكثر.</string>
     <string name="explore_osmnad_plans_to_find_suitable">استكشف خطط أوسماند لتجد التي تناسبك.</string>
@@ -4345,7 +4344,7 @@
     <string name="rendering_value_walkingRoutesOSMC_description">لون الطرق وفقا للون المحلي الفردي (إذا كان موجودا على OpenStreetMap) ورمز درع المشي/التنزه.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">تلوين وفق الانتماء للشبكة.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">لون الطرق وفقا لنوع نقطة التشابك الخاصة بهم (دولية، إقليمية، محلية).</string>
-    <string name="walking_route_osmc_description">لون الطرق وفقا للونها المحلي الفردي (إذا كانت موجودة على OpenStreetMap) والنوع حسب (دولي، إقليمي، محلي).</string>
+    <string name="walking_route_osmc_description">لون المسارات حسب لونها المحلي الفردي (إذا كان موجودًا على OpenStreetMap) والنوع (دولي ، إقليمي ، محلي).</string>
     <string name="travel_routes">طرق السفر</string>
     <string name="setting_supported_by_style">يتم توفير هذا الإعداد حسب نمط الخريطة \'%1$s\'</string>
     <string name="direct_line_maps_required_descr">يستغرق حساب المسار وقتا أطول من المعتاد.
@@ -4361,39 +4360,122 @@
     <string name="backup_error_no_subscription">لا يوجد اشتراك موجود</string>
     <string name="map_updates_for_mappers">تحديثات خرائط لمصممي الخرائط</string>
     <string name="benefits_for_contributors">فوائد للمساهمين النشطين في OSM</string>
-    <string name="benefits_for_contributors_primary_descr">قد يحق لك الحصول على تحديثات خريطة غير محدودة كل ساعة إذا كنت مساهما نشطا في OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">قد يحق للمساهمين النشطين في OpenStreetMap.org الحصول على تحديثات خرائط غير محدودة كل ساعة.</string>
     <string name="benefits_for_contributors_secondary_descr">سجل الدخول إلى خريطة الشارع المفتوح للتحقق مما إذا كنت مؤهلا للحصول على تحديثات خرائط شهرية أو ساعية غير محدودة .</string>
     <string name="use_login_and_password">استخدم اسم المستخدم وكلمة المرور</string>
     <string name="available_until">متاح حتى %1$s</string>
-    <string name="enough_contributions_descr">تهانينا، لقد قدمت ما يكفي من المساهمات إلى خريطة الشارع المفتوح، ويمكن الآن التمتع بتحديثات غير محدودة لخريطة OsmAnd!</string>
-    <string name="not_enough_contributions_descr">مطلوب مساهمات خريطة الشارع المفتوح على الأقل %1$s في غضون %2$s يوما.</string>
+    <string name="enough_contributions_descr">تهانينا ، لقد قدمت ما يكفي من مساهمات OpenStreetMap ويمكنك الآن الاستمتاع بتحديثات خرائط OsmAnd غير محدودة!</string>
     <string name="shared_string_contributions">مساهمات</string>
     <string name="contributions_may_calculate_with_delay">حساب المساهمات قد يستغرق عدة ساعات .</string>
     <string name="map_updates_are_unavailable_yet">تحديث الخريطة غير متوفرة بعد :-(</string>
     <string name="connect_track_points_as">ربط نقاط الطريق</string>
     <string name="pro_features">ميزات احترافية</string>
     <string name="purchases_restored">تمت استعادة المشتريات</string>
-    <string name="grey_color_undefined">يستخدم اللون الرمادي لأجزاء بدون بيانات.</string>
+    <string name="grey_color_undefined">الأجزاء التي لا تحتوي على بيانات رمادية اللون.</string>
     <string name="osm_live_payment_subscription_management_amz">يتم الدفع من حساب أمازون الخاص بك عند تأكيد الشراء.
 \n
 \nيتم تجديده ما لم يتم إلغاؤه قبل فترة التجديد المحددة.
 \n
 \nإدارة أو إلغاء اشتراكاتك من إعدادات Amazon الخاصة بك في أي وقت.</string>
-    <string name="cancel_anytime_in_amazon_app">قم بإلغائه في أي وقت في تطبيق أمازون</string>
-    <string name="amz_manage_subscription_descr">لإدارة اشتراكك ، استخدم تطبيق Amazon على الجهاز أو افتح موقع Amazon.com بالحساب الخاص بك.</string>
+    <string name="cancel_anytime_in_amazon_app">قم بإلغائه في أي وقت عبر تطبيق Amazon</string>
+    <string name="amz_manage_subscription_descr">قم بإدارة اشتراكك باستخدام تطبيق Amazon أو موقع Amazon الإلكتروني.</string>
     <string name="empty_category_name">اسم فئة فارغ</string>
-    <string name="no_activity_for_intent">لم يتم العثور على تطبيقات مناسبة لتنفيذ هذا الإجراء</string>
-    <string name="no_items_of_type_message">ليس لديك أي عناصر من هذا النوع</string>
-    <string name="routeInfo_tracktype_description">تلوين مسار أو خط المسار وفقا لحالة الطرق على أساس تكوينها السطحي. تطبق عادة على الطرق التي تتكون فيها شبكة الطرق الرئيسية من طرق غير معبدة.</string>
-    <string name="routeInfo_winter_ice_road_description">تلوين الطريق أو خط المسار وفقا لتصنيف الطريق في فصل الشتاء التي هي قابلة للاستخدام فقط خلال فصل الشتاء.</string>
-    <string name="routeInfo_smoothness_description">يوفر نظام تصنيف بشأن الاستخدام المادي لطريق المركبات ذات العجلات، لا سيما فيما يتعلق بانتظام السطح / وتسطيحه.</string>
-    <string name="routeInfo_surface_description">تقديم معلومات إضافية حول السطح المادي للطرق/ممرات المشاة.</string>
-    <string name="routeInfo_roadClass_description">تلوين الطريق أو خط المسار وفقا لتصنيف الطرق.</string>
-    <string name="add_group_to_markers">إضافة مجموعة إلى قائمة العلامات</string>
-    <string name="remove_group_from_markers">إزالة المجموعة من قائمة العلامات</string>
+    <string name="no_activity_for_intent">قم بتثبيت تطبيق يمكنه تنفيذ هذا الإجراء.</string>
+    <string name="no_items_of_type_message">لا يوجد لديك عناصر من هذا النوع</string>
+    <string name="routeInfo_tracktype_description">لون المسار أو خط المسار من خلال تكوين سطحه. يتم تطبيقه عادةً عندما تكون شبكة الطرق غير معبدة إلى حد كبير.</string>
+    <string name="routeInfo_winter_ice_road_description">لون الطريق أو خط المسار حسب تصنيف طرق الشتاء.</string>
+    <string name="routeInfo_smoothness_description">تصنيف القدرة على المناورة على الطريق/ممر المشاة للمركبات ذات العجلات ، لا سيما فيما يتعلق بانتظام السطح / وتسطيحه.</string>
+    <string name="routeInfo_surface_description">توفير معلومات حول السطح المادي للطرق/ممرات المشاة.</string>
+    <string name="routeInfo_roadClass_description">لون الطريق أو خط المسار وفقا لتصنيف الطرق.</string>
+    <string name="add_group_to_markers">إضافة مجموعة إلى قائمة العلامة</string>
+    <string name="remove_group_from_markers">إزالة المجموعة من قائمة العلامة</string>
     <string name="mapillary_menu_filter_description_new">تصفية الصور حسب التاريخ أو النوع. خاصية نشطة أثناء التكبير عن كثب فقط..</string>
     <string name="start_point">ابدأ</string>
-    <string name="service_is_not_available_please_try_later">الخدمة غير متوفرة، يرجى المحاولة لاحقا</string>
+    <string name="service_is_not_available_please_try_later">الخدمة غير متوفرة، يرجى المحاولة لاحقا.</string>
     <string name="shared_string_files">الملفات</string>
     <string name="travel_route_types">أنواع المسار</string>
+    <string name="sample_wikivoyage">مثال عن Wikivoyage</string>
+    <string name="shared_string_mini">مصغرة</string>
+    <string name="horseback_riding">ركوب الخيل</string>
+    <string name="routing_attr_only_permitted_ways_name">الطرق المسموحة بها علنا</string>
+    <string name="routing_attr_only_permitted_streets_description">استخدم فقط الشوارع المسموحة بها علنا</string>
+    <string name="routing_attr_only_permitted_streets_name">الشوارع المسموحة بها علنا</string>
+    <string name="routing_attr_prefer_horse_routes_description">تفضيل طرق الخيل</string>
+    <string name="routing_attr_prefer_horse_routes_name">تفضيل طرق الخيل</string>
+    <string name="routing_attr_only_permitted_ways_description">استخدام الطرق (المسارات والدروب وما إلى ذلك) المسموح بها علنا فقط</string>
+    <string name="routing_attr_allow_gate_description">السماح باستخدام البوابات</string>
+    <string name="routing_attr_allow_gate_name">السماح باستخدام البوابة</string>
+    <string name="routing_attr_prefer_tactile_paving_description">تفضيل رصيف المكفوفين</string>
+    <string name="routing_attr_prefer_tactile_paving_name">تفضيل رصيف المكفوفين</string>
+    <string name="exit_pan_mode_descr">اضغط على تحديد للخروج من وضع التحريك</string>
+    <string name="upload_gpx_description_hint">اتركه فارغًا ، سيتم استخدام أسماء المسارات كوصف. سيتم تطبيق الوصف الذي تم إدخاله على كل مسار.</string>
+    <string name="search_title">بحث: %1$s</string>
+    <string name="icon_group_nautical">بحري</string>
+    <string name="included_categories">الفئات المدرجة</string>
+    <string name="shared_string_details">تفاصيل</string>
+    <string name="shared_string_articles">مقالات</string>
+    <string name="shared_app_storage_description">لم تعد الذاكرة المشتركة متاحة بسبب تغيير اذ الوصول للتخزين في Android.</string>
+    <string name="internal_app_storage_description">التخزين الداخلي ، مخفي عن جميع المستخدمين والتطبيقات الأخرى ، لذلك لا أحد يمكنه الوصول إلى بياناتك باستثناء OsmAnd.</string>
+    <string name="rendering_attr_natureReserves_name">محمية طبيعية</string>
+    <string name="release_4_1">• تمت إضافة الدعم الأولي لنظام Android Auto
+\n
+\n • تحديث واجهة المستخدم ل تنسيق البحث UTM
+\n
+\n • المفضلة: تمت إضافة القدرة على عرض الأيقونات المستخدمة مؤخرا
+\n
+\n • تخطيط الطريق: سيستخدم ملف التعريف المحدد بعد البدأ
+\n
+\n • طبقة Mapillary ثابتة ، تم تعطيل الأداة الملحقة الآن افتراضيًا
+\n
+\n • شاشة مضافة لإدارة كامل السجل في التطبيق
+\n
+\n • لا يتم إعادة تعيين اتجاه الخريطة الى الوضع الافتراضي بعد إعادة تشغيل التطبيق
+\n
+\n • تحسين عرض علامة ارتفاع SRTM
+\n
+\n • إصلاح تسميات الخريطة التوضيحية العربية
+\n
+\n • إصلاح مشكلات التوجيه المختلفة
+\n
+\n</string>
+    <string name="shared_storage_warning_title">تغييرات لقواعد الوصول إلى التخزين</string>
+    <string name="purchases_feature_desc_android_auto">يوفر خرائط OsmAnd غير المتصلة بالإنترنت والملاحة على شاشة سيارتك ويتكامل بسهولة مع أدوات التحكم في سيارتك.</string>
+    <string name="search_history_is_disabled_descr">يمكنك تفعيل سجل البحث في الإعدادات.</string>
+    <string name="shared_storage_warning_description">بسبب قواعد Android الجديدة، ابتداء من نوفمبر 2021 سوف يفقد OsmAnd 4.2 الوصول إلى التخزين المشترك.
+\n
+\nيرجى تغيير التخزين من التخزين المشترك إلى التخزين المتاح، وإلا سيفقد التطبيق الوصول إلى بياناتكثل الخرائط غير المتصلة بالإنترنت ومسارات GPX وكل شيء آخر.</string>
+    <string name="markers_history_is_disabled_descr">تفعيل السجل لتذكر قائمة بعلامات الخريطة التي تمت زيارتها.</string>
+    <string name="shortcut_navigate_to">التنقل إلى…</string>
+    <string name="history_is_disabled_descr">تفعيل السجل للحصول على وصول أسرع إلى آخر النتائج المستخدمة.</string>
+    <string name="is_disabled">%1$s معطل</string>
+    <string name="clear_all_history">مسح كل السجل</string>
+    <string name="clear_all_history_warning">مسح كل السجل في التطبيق بما في ذلك البحث، الملاحة والعلامات؟</string>
+    <string name="history_actions_descr">يمكنك تصدير السجل إلى ملف.</string>
+    <string name="history_preferences_descr">يمكنك تعطيل السجل بشكل فردي لكل نوع سجل.</string>
+    <string name="map_markers_history">سجل علامات الخريطة</string>
+    <string name="shortcut_navigate_to_work">انتقل إلى \'العمل\'</string>
+    <string name="navigation_history">سجل التنقل</string>
+    <string name="shortcut_start_recording">بدء التسجيل</string>
+    <string name="transparent_status_bar">شريط معلومات شفاف</string>
+    <string name="transparent_status_bar_descr">اعرض الخريطة تحت شريط المعلومات</string>
+    <string name="shortcut_navigate_to_home">انتقل إلى \'البيت\'</string>
+    <string name="android_auto_map_placeholder_title">يتم عرض الخريطة على شاشة السيارة.</string>
+    <string name="android_auto_map_placeholder_descr">افصل جهازك عن Android Auto لعرض الخريطة في التطبيق.</string>
+    <string name="android_auto_purchase_request_title">قم بشراء OsmAnd Pro أو +Maps لاستخدام التطبيق مع Android Auto</string>
+    <string name="continue_on_phone">المتابعة على الهاتف</string>
+    <string name="location_access_request_title">OsmAnd يحتاج إذن خاصية الموقع من أجل التنقل.</string>
+    <string name="location_access_request_action">منح حق الوصول</string>
+    <string name="location_access_request_result">مصادق عليه: %1$s مرفوض: %2$s</string>
+    <string name="safe_settings">آمن</string>
+    <string name="approx_safe_mode">تقريب GPX الآمن</string>
+    <string name="use_external_timestamps_description">استخدم الطوابع الزمنية لجهاز التوجيه عبر الإنترنت لضبط الوقت المقدر ومتوسط السرعة</string>
+    <string name="no_plugins_enabled">لا يوجد لديك ملحقات مفعلة. يمكنك العثور على لائحة الملحقات الإضافية المتاحة في \'القائمة\' ← \'الملحقات الإضافية\'.</string>
+    <string name="approx_safe_mode_description">قم بتقريب GPX باستخدام Android أبطأ بدلاً من البرمجة المحلية.</string>
+    <string name="use_external_timestamps">استخدم طوابع زمنية خارجية</string>
+    <string name="display_route_tracks">عرض المسارات</string>
+    <string name="shared_string_travelbooks">كتب السفر</string>
+    <string name="display_route_tracks_as_poi">عرض المسارات على هيئة POI</string>
+    <string name="delete_history_items_descr">هل تريد بالتأكيد حذف عناصر السجل المحددة؟</string>
+    <string name="delete_history_items">حذف %1$s عنصر سجل؟</string>
+    <string name="quick_action_toggle_preference">كبسة لتبديل حالة خيارات محددة.</string>
 </resources>

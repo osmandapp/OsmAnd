@@ -1,12 +1,22 @@
 package net.osmand.plus.settings.datastorage;
 
+import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.CHOSEN_DIRECTORY;
+import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
+import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_PATH;
+import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.SHARED_STORAGE;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
+import static net.osmand.plus.settings.datastorage.DataStorageHelper.UpdateMemoryInfoUIAdapter;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.BidiFormatter;
 import android.view.View;
@@ -28,9 +38,11 @@ import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
@@ -45,16 +57,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.CHOSEN_DIRECTORY;
-import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
-import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_PATH;
-import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.INTERNAL_STORAGE;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.MANUALLY_SPECIFIED;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.OTHER_MEMORY;
-import static net.osmand.plus.settings.datastorage.DataStorageHelper.TILES_MEMORY;
-
-public class DataStorageFragment extends BaseSettingsFragment implements DataStorageHelper.UpdateMemoryInfoUIAdapter {
+public class DataStorageFragment extends BaseSettingsFragment implements UpdateMemoryInfoUIAdapter {
 	public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
 	public final static int UI_REFRESH_TIME_MS = 500;
 
@@ -177,7 +180,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 						if (newDataStorage.getType() == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT
 								&& !DownloadActivity.hasPermissionToWriteExternalStorage(activity)) {
 							ActivityCompat.requestPermissions(activity,
-									new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+									new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
 									DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 						} else if (key.equals(MANUALLY_SPECIFIED)) {
 							showFolderSelectionDialog();
@@ -201,7 +204,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		int activeColor = ColorUtilities.getActiveColor(app, isNightMode());
 		int primaryTextColor = ColorUtilities.getPrimaryTextColor(app, isNightMode());
 
-		String[] memoryUnitsFormats = new String[]{
+		String[] memoryUnitsFormats = new String[] {
 				getString(R.string.shared_string_memory_kb_desc),
 				getString(R.string.shared_string_memory_mb_desc),
 				getString(R.string.shared_string_memory_gb_desc),
@@ -214,44 +217,14 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			if (item != null) {
 				TextView tvTitle = itemView.findViewById(android.R.id.title);
 				TextView tvSummary = itemView.findViewById(R.id.summary);
-				TextView tvAdditionalDescription = itemView.findViewById(R.id.additionalDescription);
 				ImageView ivIcon = itemView.findViewById(R.id.icon);
-				View divider = itemView.findViewById(R.id.divider);
 				View secondPart = itemView.findViewById(R.id.secondPart);
 
+				setupStorageItemView(item, itemView);
 				tvTitle.setText(item.getTitle());
-				String currentKey = item.getKey();
-				boolean isCurrent = currentDataStorage.getKey().equals(currentKey);
-
-				int defaultIconColor = ColorUtilities.getDefaultIconColorId(isNightMode());
-				int chosenIconColor = isNightMode() ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
-				Drawable icon = app.getUIUtilities().getIcon(item.getIconResId(),
-						isCurrent ? chosenIconColor : defaultIconColor);
-				ivIcon.setImageDrawable(icon);
-
-				if (currentKey.equals(MANUALLY_SPECIFIED)) {
-					setFormattedPath(item, tvSummary);
-					secondPart.setVisibility(View.GONE);
-					tvAdditionalDescription.setVisibility(View.GONE);
-					divider.setVisibility(View.GONE);
-				} else {
-					tvAdditionalDescription.setVisibility(View.VISIBLE);
-					divider.setVisibility(View.VISIBLE);
-					secondPart.setVisibility(View.VISIBLE);
-					String space = getSpaceDescription(item.getDirectory());
-					if (!space.isEmpty()) {
-						space = space.replaceAll(" • ", "  •  ");
-						tvSummary.setText(space);
-						tvSummary.setVisibility(View.VISIBLE);
-					} else {
-						tvSummary.setVisibility(View.GONE);
-					}
-					if (currentKey.equals(INTERNAL_STORAGE)) {
-						tvAdditionalDescription.setText(item.getDescription());
-					} else {
-						setFormattedPath(item, tvAdditionalDescription);
-					}
-				}
+				setupStorageItemSummary(item, tvSummary);
+				ivIcon.setImageDrawable(getStorageItemIcon(item));
+				setupSecondPart(item, secondPart);
 			}
 		} else if (key.equals(CHANGE_DIRECTORY_BUTTON)) {
 			ImageView icon = itemView.findViewById(R.id.button_icon);
@@ -273,13 +246,10 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					if (mi.getKey().equals(TILES_MEMORY) && !calculateTilesBtnPressed) {
 						summary = getString(R.string.shared_string_calculate);
 						color = activeColor;
-						tvMemory.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								calculateTilesBtnPressed = true;
-								calculateTilesMemoryTask = dataStorageHelper.calculateTilesMemoryUsed(DataStorageFragment.this);
-								updateAllSettings();
-							}
+						tvMemory.setOnClickListener(v -> {
+							calculateTilesBtnPressed = true;
+							calculateTilesMemoryTask = dataStorageHelper.calculateTilesMemoryUsed(DataStorageFragment.this);
+							updateAllSettings();
 						});
 					} else {
 						tvMemory.setOnClickListener(null);
@@ -299,12 +269,97 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		}
 	}
 
-	private void setFormattedPath(StorageItem item, TextView tvAdditionalDescription) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-			BidiFormatter pathRtlFormatter = BidiFormatter.getInstance();
-			tvAdditionalDescription.setText(pathRtlFormatter.unicodeWrap(item.getDirectory()));
+	private void setupStorageItemView(StorageItem item, View itemView) {
+		boolean notSharedStorage = !SHARED_STORAGE.equals(item.getKey());
+		itemView.setClickable(notSharedStorage);
+		AndroidUiHelper.updateVisibility(itemView.findViewById(android.R.id.checkbox), notSharedStorage);
+	}
+
+	private void setupStorageItemSummary(StorageItem item, TextView summary) {
+		if (!item.isStorageSizeDefineable()) {
+			summary.setText(getStorageItemDescriptionOrPath(item));
+			summary.setVisibility(View.VISIBLE);
 		} else {
-			tvAdditionalDescription.setText(String.format("\u200E%s", item.getDirectory()));
+			String space = getSpaceDescription(item.getDirectory());
+			if (!space.isEmpty()) {
+				space = space.replaceAll(" • ", "  •  ");
+				summary.setText(space);
+				summary.setVisibility(View.VISIBLE);
+			} else {
+				summary.setVisibility(View.GONE);
+			}
+		}
+	}
+
+	private String getSpaceDescription(String path) {
+		File dir = new File(path);
+		File dirParent = dir.getParentFile();
+		while (!dir.exists() && dirParent != null) {
+			dir = dir.getParentFile();
+			dirParent = dir.getParentFile();
+		}
+		if (dir.exists()) {
+			DecimalFormat formatter = new DecimalFormat("#.##");
+			float freeSpace = AndroidUtils.getFreeSpaceGb(dir);
+			float totalSpace = AndroidUtils.getTotalSpaceGb(dir);
+			if (freeSpace < 0 || totalSpace < 0) {
+				return "";
+			}
+			return String.format(getString(R.string.data_storage_space_description),
+					formatter.format(freeSpace),
+					formatter.format(totalSpace));
+		}
+		return "";
+	}
+
+	private Drawable getStorageItemIcon(StorageItem item) {
+		boolean current = currentDataStorage.getKey().equals(item.getKey());
+		int iconId = current ? item.getSelectedIconResId() : item.getNotSelectedIconResId();
+		int defaultIconColor = ColorUtilities.getDefaultIconColorId(isNightMode());
+		int chosenIconColor = isNightMode() ? R.color.icon_color_osmand_dark : R.color.icon_color_osmand_light;
+		int iconColor = current ? chosenIconColor : defaultIconColor;
+		return app.getUIUtilities().getIcon(iconId, iconColor);
+	}
+
+	private void setupSecondPart(StorageItem item, View secondPart) {
+		boolean manuallySpecified = item.getKey().equals(MANUALLY_SPECIFIED);
+		AndroidUiHelper.updateVisibility(secondPart, !manuallySpecified);
+		setupAdditionalDescription(item, secondPart.findViewById(R.id.additionalDescription));
+		setupDetailsButton(item, secondPart.findViewById(R.id.details_button));
+	}
+
+	private void setupAdditionalDescription(StorageItem item, TextView additionalDescription) {
+		if (item.isStorageSizeDefineable()) {
+			additionalDescription.setText(getStorageItemDescriptionOrPath(item));
+			additionalDescription.setVisibility(View.VISIBLE);
+		} else {
+			additionalDescription.setVisibility(View.GONE);
+		}
+	}
+
+	private String getStorageItemDescriptionOrPath(StorageItem item) {
+		String key = item.getKey();
+		if (INTERNAL_STORAGE.equals(key) || SHARED_STORAGE.equals(key)) {
+			return item.getDescription();
+		} else {
+			BidiFormatter pathRtlFormatter = BidiFormatter.getInstance();
+			return pathRtlFormatter.unicodeWrap(item.getDirectory());
+		}
+	}
+
+	private void setupDetailsButton(StorageItem item, View detailsButton) {
+		boolean sharedStorage = item.getKey().equals(SHARED_STORAGE);
+		AndroidUiHelper.updateVisibility(detailsButton, sharedStorage);
+
+		if (item.getKey().equals(SHARED_STORAGE)) {
+			detailsButton.setClickable(true);
+			UiUtilities.setupDialogButton(isNightMode(), detailsButton, DialogButtonType.SECONDARY, R.string.shared_string_migration);
+			detailsButton.setOnClickListener(v -> {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					SharedStorageWarningFragment.showInstance(mapActivity, false);
+				}
+			});
 		}
 	}
 
@@ -437,27 +492,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		calculateTilesBtnPressed = false;
 		dataStorageHelper = new DataStorageHelper(app);
 		calculateMemoryTask = dataStorageHelper.calculateMemoryUsedInfo(this);
-	}
-
-	private String getSpaceDescription(String path) {
-		File dir = new File(path);
-		File dirParent = dir.getParentFile();
-		while (!dir.exists() && dirParent != null) {
-			dir = dir.getParentFile();
-			dirParent = dir.getParentFile();
-		}
-		if (dir.exists()) {
-			DecimalFormat formatter = new DecimalFormat("#.##");
-			float freeSpace = AndroidUtils.getFreeSpaceGb(dir);
-			float totalSpace = AndroidUtils.getTotalSpaceGb(dir);
-			if (freeSpace < 0 || totalSpace < 0) {
-				return "";
-			}
-			return String.format(getString(R.string.data_storage_space_description),
-					formatter.format(freeSpace),
-					formatter.format(totalSpace));
-		}
-		return "";
 	}
 
 	protected void reloadData() {

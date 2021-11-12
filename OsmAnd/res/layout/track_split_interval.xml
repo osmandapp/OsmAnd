@@ -29,6 +29,7 @@
 		android:id="@+id/slider_container"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding"
 		android:orientation="vertical">
 
 		<LinearLayout

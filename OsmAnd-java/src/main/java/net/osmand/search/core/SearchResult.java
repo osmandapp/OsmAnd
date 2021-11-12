@@ -16,6 +16,8 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class SearchResult {
+	private static final double MAX_TYPE_WEIGHT = 10;
+
 	// search phrase that makes search result valid
 	public SearchPhrase requiredSearchPhrase;
 
@@ -45,10 +47,13 @@ public class SearchResult {
 
 	private double unknownPhraseMatchWeight = 0;
 
+	public SearchResult() {
+		this.requiredSearchPhrase = SearchPhrase.emptyPhrase();
+	}
+
 	public SearchResult(SearchPhrase sp) {
 		this.requiredSearchPhrase = sp;
 	}
-	private static final double MAX_TYPE_WEIGHT = 10;
 
 	// maximum corresponds to the top entry
 	public double getUnknownPhraseMatchWeight() {

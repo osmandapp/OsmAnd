@@ -251,7 +251,8 @@ public class ConfigureMapMenu {
 		}
 		OsmandApplication app = activity.getMyApplication();
 		ResourceManager manager = app.getResourceManager();
-		if (OsmandPlugin.isDevelopment() && !Algorithms.isEmpty(manager.getTravelMapRepositories())) {
+		if (OsmandPlugin.isDevelopment() &&
+				(!Algorithms.isEmpty(manager.getTravelMapRepositories()) || !Algorithms.isEmpty(manager.getTravelRepositories()))) {
 			adapter.addItem(createTravelRoutesItem(activity, nightMode));
 		}
 	}
@@ -277,7 +278,7 @@ public class ConfigureMapMenu {
 						if (property != null) {
 							activity.getDashboard().setDashboardVisibility(true, DashboardType.CYCLE_ROUTES, AndroidUtils.getCenterViewCoordinates(view));
 						} else {
-							showRendererSnackbarForAttr(activity, attrName, nightMode);
+							showRendererSnackbarForAttr(activity, attrName, nightMode, null);
 						}
 						return false;
 					}
@@ -295,7 +296,7 @@ public class ConfigureMapMenu {
 							activity.refreshMap();
 							activity.updateLayers();
 						} else {
-							showRendererSnackbarForAttr(activity, attrName, nightMode);
+							showRendererSnackbarForAttr(activity, attrName, nightMode, null);
 						}
 						return false;
 					}
@@ -758,7 +759,7 @@ public class ConfigureMapMenu {
 							activity.updateLayers();
 						} else {
 							isChecked = pref.get();
-							showRendererSnackbarForAttr(activity, attrName, nightMode);
+							showRendererSnackbarForAttr(activity, attrName, nightMode, pref);
 						}
 						ContextMenuItem item = adapter.getItem(pos);
 						if (item != null) {
@@ -777,7 +778,8 @@ public class ConfigureMapMenu {
 				.createItem();
 	}
 
-	private void showRendererSnackbarForAttr(@NonNull MapActivity activity, @NonNull String attrName, boolean nightMode) {
+	private void showRendererSnackbarForAttr(@NonNull MapActivity activity, @NonNull String attrName, boolean nightMode,
+	                                         @Nullable CommonPreference<Boolean> pref) {
 		String renderer = getRendererForAttr(attrName);
 		if (renderer != null) {
 			OsmandApplication app = activity.getMyApplication();
@@ -790,6 +792,9 @@ public class ConfigureMapMenu {
 							RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
 							if (loaded != null) {
 								app.getSettings().RENDERER.set(renderer);
+								if (pref != null) {
+									pref.set(!pref.get());
+								}
 								app.getRendererRegistry().setCurrentSelectedRender(loaded);
 								activity.refreshMapComplete();
 								activity.getDashboard().updateListAdapter(createListAdapter(activity));

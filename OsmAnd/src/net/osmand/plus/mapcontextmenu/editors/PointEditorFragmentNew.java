@@ -161,7 +161,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				nightMode ? R.color.app_bar_color_dark : R.color.list_background_color_light));
 		toolbar.setTitle(getToolbarTitle());
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
-				ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode));
+				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.description_font_and_bottom_sheet_icons);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -360,7 +360,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 			deleteIcon.setVisibility(View.GONE);
 			nameEdit.selectAll();
 			nameEdit.requestFocus();
-			AndroidUtils.softKeyboardDelayed(getActivity(), nameEdit);
+			showKeyboard();
 		} else {
 			toolbarAction.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark, activeColorResId));
 			deleteButton.setVisibility(View.VISIBLE);
@@ -857,6 +857,16 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 	@Override
 	protected boolean isFullScreenAllowed() {
 		return true;
+	}
+
+	private void showKeyboard() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+			if (inputMethodManager != null) {
+				inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+			}
+		}
 	}
 
 	private void hideKeyboard() {

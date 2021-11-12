@@ -263,7 +263,7 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			url += "&sku=" + sku;
 		}
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-		AndroidUtils.isIntentSafe(ctx, intent);
+		AndroidUtils.startActivityIfSafe(ctx, intent);
 	}
 
 	@Nullable
@@ -536,9 +536,13 @@ public class InAppPurchaseHelperImpl extends InAppPurchaseHelper {
 			inAppPurchase.restorePurchaseInfo(ctx);
 		}
 		inAppPurchase.setPrice(skuDetails.getPrice());
+		inAppPurchase.setOriginalPrice(skuDetails.getOriginalPrice());
 		inAppPurchase.setPriceCurrencyCode(skuDetails.getPriceCurrencyCode());
 		if (skuDetails.getPriceAmountMicros() > 0) {
 			inAppPurchase.setPriceValue(skuDetails.getPriceAmountMicros() / 1000000d);
+		}
+		if (skuDetails.getOriginalPriceAmountMicros() > 0) {
+			inAppPurchase.setOriginalPriceValue(skuDetails.getOriginalPriceAmountMicros() / 1000000d);
 		}
 		String subscriptionPeriod = skuDetails.getSubscriptionPeriod();
 		if (!Algorithms.isEmpty(subscriptionPeriod)) {

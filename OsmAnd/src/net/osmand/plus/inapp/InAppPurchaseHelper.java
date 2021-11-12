@@ -21,6 +21,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
@@ -174,6 +175,12 @@ public abstract class InAppPurchaseHelper {
 				|| isSubscribedToOsmAndPro(ctx);
 	}
 
+	public static boolean isAndroidAutoAvailable(@NonNull OsmandApplication ctx) {
+		// TODO disable for 4.1 Beta build
+		// return Version.isDeveloperBuild(ctx) || Version.isPaidVersion(ctx);
+		return true;
+	}
+
 	public static boolean isFullVersionPurchased(@NonNull OsmandApplication ctx) {
 		return Version.isDeveloperBuild(ctx) || ctx.getSettings().FULL_VERSION_PURCHASED.get();
 	}
@@ -213,13 +220,13 @@ public abstract class InAppPurchaseHelper {
 		return purchases.getContourLines();
 	}
 
-	public InAppSubscription getMonthlyLiveUpdates() {
-		return purchases.getMonthlyLiveUpdates();
+	public InAppSubscription getMonthlySubscription() {
+		return purchases.getMonthlySubscription();
 	}
 
 	@Nullable
-	public InAppSubscription getPurchasedMonthlyLiveUpdates() {
-		return purchases.getPurchasedMonthlyLiveUpdates();
+	public InAppSubscription getPurchasedMonthlySubscription() {
+		return purchases.getPurchasedMonthlySubscription();
 	}
 
 	@Nullable
@@ -743,9 +750,11 @@ public abstract class InAppPurchaseHelper {
 			subscription.setPurchaseState(PurchaseState.PURCHASED);
 			subscription.setPurchaseInfo(ctx, info);
 			subscription.setState(ctx, SubscriptionState.UNDEFINED);
+			logDebug("Sending tokens...");
 			sendTokens(Collections.singletonList(info), new OnRequestResultListener() {
 				@Override
 				public void onResult(@Nullable String result, @Nullable String error, @Nullable Integer resultCode) {
+					logDebug("Tokens sent");
 					boolean active = false;
 					if (liveUpdates || pro) {
 						active = ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
@@ -763,6 +772,11 @@ public abstract class InAppPurchaseHelper {
 					}
 					notifyDismissProgress(InAppPurchaseTaskType.PURCHASE_SUBSCRIPTION);
 					notifyItemPurchased(sku, active);
+					NavigationSession carNavigationSession = ctx.getCarNavigationSession();
+					if (carNavigationSession != null) {
+						logDebug("Call Android Auto");
+						carNavigationSession.onPurchaseDone();
+					}
 					stop(true);
 				}
 			});

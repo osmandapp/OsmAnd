@@ -116,6 +116,10 @@ public class ApplicationMode {
 			.icon(R.drawable.ic_action_skiing)
 			.description(R.string.base_profile_descr_ski).reg();
 
+	public static final ApplicationMode HORSE = createBase(R.string.horseback_riding, "horse")
+			.icon(R.drawable.ic_action_horse)
+			.description(R.string.horseback_riding).reg();
+
 	public static List<ApplicationMode> values(OsmandApplication app) {
 		if (customizationListener == null) {
 			customizationListener = new OsmAndAppCustomization.OsmAndAppCustomizationListener() {
@@ -187,14 +191,15 @@ public class ApplicationMode {
 	}
 
 	private static void initRegVisibility() {
-		// DEFAULT, CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK
-		ApplicationMode[] exceptDefault = new ApplicationMode[]{CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, MOTORCYCLE};
+		// CAR, BICYCLE, PEDESTRIAN, PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, HORSE
+		ApplicationMode[] exceptDefault = new ApplicationMode[] {CAR, BICYCLE, PEDESTRIAN,
+				PUBLIC_TRANSPORT, BOAT, AIRCRAFT, SKI, TRUCK, MOTORCYCLE, HORSE};
 		ApplicationMode[] all = null;
-		ApplicationMode[] none = new ApplicationMode[]{};
+		ApplicationMode[] none = new ApplicationMode[] {};
 
 		// left
-		ApplicationMode[] navigationSet1 = new ApplicationMode[]{CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE};
-		ApplicationMode[] navigationSet2 = new ApplicationMode[]{PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
+		ApplicationMode[] navigationSet1 = new ApplicationMode[] {CAR, BICYCLE, BOAT, SKI, TRUCK, MOTORCYCLE, HORSE};
+		ApplicationMode[] navigationSet2 = new ApplicationMode[] {PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
 		regWidgetVisibility(WIDGET_NEXT_TURN, navigationSet1);
 		regWidgetVisibility(WIDGET_NEXT_TURN_SMALL, navigationSet2);
@@ -208,7 +213,8 @@ public class ApplicationMode {
 		regWidgetVisibility(WIDGET_DISTANCE, all);
 		regWidgetVisibility(WIDGET_TIME, all);
 		regWidgetVisibility(WIDGET_INTERMEDIATE_TIME, all);
-		regWidgetVisibility(WIDGET_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK, MOTORCYCLE);
+		regWidgetVisibility(WIDGET_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT, TRUCK,
+				MOTORCYCLE, HORSE);
 		regWidgetVisibility(WIDGET_MAX_SPEED, CAR, TRUCK, MOTORCYCLE);
 		regWidgetVisibility(WIDGET_ALTITUDE, PEDESTRIAN, BICYCLE);
 		regWidgetAvailability(WIDGET_INTERMEDIATE_DISTANCE, all);
@@ -533,7 +539,8 @@ public class ApplicationMode {
 		reorderAppModes();
 	}
 
-	private static void initModesParams(OsmandApplication app) {
+	private static void initModesParams(final OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
 		if (iconNameListener == null) {
 			iconNameListener = new StateChangedListener<String>() {
 				@Override
@@ -546,19 +553,22 @@ public class ApplicationMode {
 					});
 				}
 			};
-			app.getSettings().ICON_RES_NAME.addListener(iconNameListener);
+			settings.ICON_RES_NAME.addListener(iconNameListener);
 		}
 		for (ApplicationMode mode : allPossibleValues()) {
 			mode.app = app;
 			mode.updateAppModeIcon();
 		}
-		if (app.getSettings().APP_MODE_ORDER.isSetForMode(PEDESTRIAN)) {
-			if (!app.getSettings().APP_MODE_ORDER.isSetForMode(TRUCK)) {
+		if (settings.APP_MODE_ORDER.isSetForMode(PEDESTRIAN)) {
+			if (!settings.APP_MODE_ORDER.isSetForMode(TRUCK)) {
 				TRUCK.setOrder(PEDESTRIAN.getOrder() + 1);
 			}
-			if (!app.getSettings().APP_MODE_ORDER.isSetForMode(MOTORCYCLE)) {
+			if (!settings.APP_MODE_ORDER.isSetForMode(MOTORCYCLE)) {
 				MOTORCYCLE.setOrder(PEDESTRIAN.getOrder() + 1);
 			}
+		}
+		if (settings.APP_MODE_ORDER.isSetForMode(SKI) && !settings.APP_MODE_ORDER.isSetForMode(HORSE)) {
+			HORSE.setOrder(SKI.getOrder() + 1);
 		}
 	}
 

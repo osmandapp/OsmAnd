@@ -542,7 +542,7 @@
     <string name="osm_settings_descr">Norādiet Openstreetmap.org (OSM) iestatījumus datu nosūtīšanai OSM</string>
     <string name="data_settings_descr">Iestatiet valodu, lejupielādējiet/atjaunojiet datus</string>
     <string name="data_settings">Dati</string>
-    <string name="osm_settings">OSM labošana</string>
+    <string name="osm_editing_plugin_name">OSM labošana</string>
     <string name="auto_zoom_map_descr">Automātiski mērogot karti atkarībā no pārvietošanās ātruma.</string>
     <string name="auto_zoom_map">Automātiski mērogot karti</string>
     <string name="additional_settings">Papildus iestatījumi</string>

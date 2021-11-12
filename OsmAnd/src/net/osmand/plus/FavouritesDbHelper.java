@@ -316,6 +316,9 @@ public class FavouritesDbHelper {
 					group.points.remove(p);
 					groupsToSync.add(group);
 				}
+				if (p.isHomeOrWork()) {
+					context.getLauncherShortcutsHelper().updateLauncherShortcuts();
+				}
 				cachedFavoritePoints.remove(p);
 			}
 			for (FavoriteGroup gr : groupsToSync) {
@@ -328,6 +331,9 @@ public class FavouritesDbHelper {
 				favoriteGroups.remove(g);
 				cachedFavoritePoints.removeAll(g.points);
 				removeFromMarkers(g);
+				if (g.isPersonal()) {
+					context.getLauncherShortcutsHelper().updateLauncherShortcuts();
+				}
 			}
 		}
 		saveCurrentPointsIntoFile();
@@ -345,6 +351,9 @@ public class FavouritesDbHelper {
 				runSyncWithMarkers(group);
 			}
 			cachedFavoritePoints.remove(p);
+			if (p.isHomeOrWork()) {
+				context.getLauncherShortcutsHelper().updateLauncherShortcuts();
+			}
 		}
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
@@ -364,6 +373,7 @@ public class FavouritesDbHelper {
 		} else {
 			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
+			point.setCreationDate(System.currentTimeMillis());
 			point.setTimestamp(pickupTimestamp);
 			point.setCalendarEvent(addToCalendar);
 			point.setIconId(specialType.getIconId(context));
@@ -422,7 +432,11 @@ public class FavouritesDbHelper {
 			sortAll();
 			saveCurrentPointsIntoFile();
 		}
+
 		runSyncWithMarkers(group);
+		if (p.isHomeOrWork()) {
+			context.getLauncherShortcutsHelper().updateLauncherShortcuts();
+		}
 
 		return true;
 	}

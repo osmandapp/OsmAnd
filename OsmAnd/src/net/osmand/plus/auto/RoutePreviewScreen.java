@@ -1,104 +1,155 @@
 package net.osmand.plus.auto;
 
 import android.text.SpannableString;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.car.app.CarContext;
 import androidx.car.app.Screen;
 import androidx.car.app.model.Action;
 import androidx.car.app.model.ActionStrip;
+import androidx.car.app.model.Distance;
+import androidx.car.app.model.DistanceSpan;
 import androidx.car.app.model.DurationSpan;
 import androidx.car.app.model.ItemList;
 import androidx.car.app.model.Row;
 import androidx.car.app.model.Template;
 import androidx.car.app.navigation.model.RoutePreviewNavigationTemplate;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 
+import net.osmand.ValueHolder;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.search.listitems.QuickSearchListItem;
+import net.osmand.search.core.SearchResult;
+import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The route preview screen for the app.
  */
-public final class RoutePreviewScreen extends Screen {
-	private static final String TAG = "NavigationDemo";
+public final class RoutePreviewScreen extends Screen implements IRouteInformationListener,
+		DefaultLifecycleObserver {
 
 	@NonNull
-	private final Action mSettingsAction;
+	private final Action settingsAction;
 	@NonNull
-	private final SurfaceRenderer mSurfaceRenderer;
+	private final SurfaceRenderer surfaceRenderer;
 	@NonNull
-	private final List<Row> mRouteRows;
+	private final SearchResult searchResult;
+	@NonNull
+	private List<Row> routeRows = new ArrayList<>();
 
-	int mLastSelectedIndex = -1;
+	private boolean calculating;
 
-	public RoutePreviewScreen(
-			@NonNull CarContext carContext,
-			@NonNull Action settingsAction,
-			@NonNull SurfaceRenderer surfaceRenderer) {
+	public RoutePreviewScreen(@NonNull CarContext carContext, @NonNull Action settingsAction,
+							  @NonNull SurfaceRenderer surfaceRenderer, @NonNull SearchResult searchResult) {
 		super(carContext);
-		mSettingsAction = settingsAction;
-		mSurfaceRenderer = surfaceRenderer;
+		this.settingsAction = settingsAction;
+		this.surfaceRenderer = surfaceRenderer;
+		this.searchResult = searchResult;
 
-		mRouteRows = new ArrayList<>();
-		SpannableString firstRoute = new SpannableString("   \u00b7 Shortest route");
-		firstRoute.setSpan(DurationSpan.create(TimeUnit.HOURS.toSeconds(26)), 0, 1, 0);
-		SpannableString secondRoute = new SpannableString("   \u00b7 Less busy");
-		secondRoute.setSpan(DurationSpan.create(TimeUnit.HOURS.toSeconds(24)), 0, 1, 0);
-		SpannableString thirdRoute = new SpannableString("   \u00b7 HOV friendly");
-		thirdRoute.setSpan(DurationSpan.create(TimeUnit.MINUTES.toSeconds(867)), 0, 1, 0);
+		getLifecycle().addObserver(this);
 
-		mRouteRows.add(new Row.Builder().setTitle(firstRoute).addText("Via NE 8th Street").build());
-		mRouteRows.add(new Row.Builder().setTitle(secondRoute).addText("Via NE 1st Ave").build());
-		mRouteRows.add(new Row.Builder().setTitle(thirdRoute).addText("Via NE 4th Street").build());
+		calculating = true;
+		getApp().getOsmandMap().getMapLayers().getMapControlsLayer().replaceDestination(
+				searchResult.location, QuickSearchListItem.getPointDescriptionObject(getApp(), searchResult).first);
+	}
+
+	@NonNull
+	public OsmandApplication getApp() {
+		return (OsmandApplication) getCarContext().getApplicationContext();
+	}
+
+	@Override
+	public void onCreate(@NonNull LifecycleOwner owner) {
+		getApp().getRoutingHelper().addListener(this);
+	}
+
+	@Override
+	public void onDestroy(@NonNull LifecycleOwner owner) {
+		OsmandApplication app = getApp();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		routingHelper.removeListener(this);
+		if (routingHelper.isRoutePlanningMode()) {
+			app.stopNavigation();
+		}
+		getLifecycle().removeObserver(this);
 	}
 
 	@NonNull
 	@Override
 	public Template onGetTemplate() {
-		Log.i(TAG, "In RoutePreviewScreen.onGetTemplate()");
-		onRouteSelected(0);
-
 		ItemList.Builder listBuilder = new ItemList.Builder();
 		listBuilder
 				.setOnSelectedListener(this::onRouteSelected)
 				.setOnItemsVisibilityChangedListener(this::onRoutesVisible);
-		for (Row row : mRouteRows) {
+		for (Row row : routeRows) {
 			listBuilder.addItem(row);
 		}
-		return new RoutePreviewNavigationTemplate.Builder()
-				.setItemList(listBuilder.build())
+		RoutePreviewNavigationTemplate.Builder builder = new RoutePreviewNavigationTemplate.Builder();
+		if (calculating) {
+			builder.setLoading(true);
+		} else {
+			builder.setLoading(false);
+			if (!Algorithms.isEmpty(routeRows)) {
+				builder.setItemList(listBuilder.build());
+			}
+		}
+		builder
 				.setTitle(getCarContext().getString(R.string.current_route))
-				.setActionStrip(new ActionStrip.Builder().addAction(mSettingsAction).build())
+				.setActionStrip(new ActionStrip.Builder().addAction(settingsAction).build())
 				.setHeaderAction(Action.BACK)
 				.setNavigateAction(
 						new Action.Builder()
-								.setTitle("Continue to route")
+								.setTitle(getApp().getString(R.string.shared_string_control_start))
 								.setOnClickListener(this::onNavigate)
-								.build())
-				.build();
+								.build());
+		return builder.build();
 	}
 
 	private void onRouteSelected(int index) {
-		mLastSelectedIndex = index;
-		mSurfaceRenderer.updateMarkerVisibility(
-				/* showMarkers=*/ true,
-				/* numMarkers=*/ mRouteRows.size(),
-				/* activeMarker=*/ mLastSelectedIndex);
 	}
 
 	private void onRoutesVisible(int startIndex, int endIndex) {
-		if (Log.isLoggable(TAG, Log.INFO)) {
-			Log.i(TAG, "In RoutePreviewScreen.onRoutesVisible start:" + startIndex + " end:"
-					+ endIndex);
-		}
 	}
 
 	private void onNavigate() {
-		setResult(mLastSelectedIndex);
+		setResult(searchResult);
 		finish();
+	}
+
+	@Override
+	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
+		OsmandApplication app = getApp();
+		RoutingHelper rh = app.getRoutingHelper();
+		Distance distance = null;
+		int leftTimeSec = 0;
+		if (newRoute && rh.isRoutePlanningMode()) {
+			distance = TripHelper.getDistance(app, rh.getLeftDistance());
+			leftTimeSec = rh.getLeftTime();
+		}
+		if (distance != null && leftTimeSec > 0) {
+			List<Row> routeRows = new ArrayList<>();
+			SpannableString description = new SpannableString("  •  ");
+			description.setSpan(DistanceSpan.create(distance), 0, 1, 0);
+			description.setSpan(DurationSpan.create(leftTimeSec), 4, 5, 0);
+			routeRows.add(new Row.Builder().setTitle(searchResult.localeName).addText(description).build());
+			this.routeRows = routeRows;
+			calculating = false;
+			invalidate();
+		}
+	}
+
+	@Override
+	public void routeWasCancelled() {
+	}
+
+	@Override
+	public void routeWasFinished() {
 	}
 }

@@ -44,6 +44,13 @@ public class MapPoiTypes {
 	public static final String OSM_WIKI_CATEGORY = "osmwiki";
 	public static final String SPEED_CAMERA = "speed_camera";
 
+	public static final String ROUTES = "routes";
+	public static final String ROUTE_ARTICLE = "route_article";
+	public static final String ROUTE_ARTICLE_POINT = "route_article_point";
+	public static final String CATEGORY = "category";
+	public static final String ROUTE_TRACK = "route_track";
+	public static final String ROUTE_TRACK_POINT = "route_track_point";
+
 	private PoiTranslator poiTranslator = null;
 	private boolean init;
 	Map<String, PoiType> poiTypesByTag = new LinkedHashMap<String, PoiType>();
@@ -139,6 +146,16 @@ public class MapPoiTypes {
 		for (int i = 0; i < categories.size(); i++) {
 			PoiCategory category = categories.get(i);
 			if (category.isWiki()) {
+				return category;
+			}
+		}
+		return null;
+	}
+
+	public PoiCategory getRoutes() {
+		for (int i = 0; i < categories.size(); i++) {
+			PoiCategory category = categories.get(i);
+			if (category.isRoutes()) {
 				return category;
 			}
 		}
@@ -804,7 +821,7 @@ public class MapPoiTypes {
 		return getBasePoiName(abstractPoiType);
 	}
 
-	private String getBasePoiName(AbstractPoiType abstractPoiType) {
+	public String getBasePoiName(AbstractPoiType abstractPoiType) {
 		String name = abstractPoiType.getKeyName();
 		if(name.startsWith("osmand_")) {
 			name = name.substring("osmand_".length());

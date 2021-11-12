@@ -1,5 +1,14 @@
 package net.osmand.plus;
 
+import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
+import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -11,6 +20,11 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.annotation.WorkerThread;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
@@ -82,27 +96,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
-import androidx.annotation.WorkerThread;
 import btools.routingapp.IBRouterService;
-
-import static net.osmand.plus.AppVersionUpgradeOnInit.LAST_APP_VERSION;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.getPendingIntent;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceForLocalIndex;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceLastCheck;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceTimeOfDayToUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.preferenceUpdateFrequency;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.runLiveUpdate;
-import static net.osmand.plus.liveupdates.LiveUpdatesHelper.setAlarmForPendingIntent;
 
 /**
  *
  */
 public class AppInitializer implements IProgress {
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-android-4-0-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-android-4-1-released";
 
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 	private static final Log LOG = PlatformUtil.getLog(AppInitializer.class);
@@ -283,7 +284,13 @@ public class AppInitializer implements IProgress {
 			public String getTranslation(AbstractPoiType type) {
 				AbstractPoiType baseLangType = type.getBaseLangType();
 				if (baseLangType != null) {
-					return getTranslation(baseLangType) + " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
+					String translation = getTranslation(baseLangType);
+					String langTranslation = " (" + app.getLangTranslation(type.getLang()).toLowerCase() + ")";
+					if (translation != null) {
+						return translation + langTranslation;
+					} else {
+						return app.poiTypes.getBasePoiName(baseLangType) + langTranslation;
+					}
 				}
 				return getTranslation(type.getIconKeyName());
 			}
@@ -435,6 +442,7 @@ public class AppInitializer implements IProgress {
 		app.osmOAuthHelper = startupInit(new OsmOAuthHelper(app), OsmOAuthHelper.class);
 		app.oprAuthHelper = startupInit(new OprAuthHelper(app), OprAuthHelper.class);
 		app.onlineRoutingHelper = startupInit(new OnlineRoutingHelper(app), OnlineRoutingHelper.class);
+		app.launcherShortcutsHelper = startupInit(new LauncherShortcutsHelper(app), LauncherShortcutsHelper.class);
 
 		initOpeningHoursParser();
 	}
@@ -559,15 +567,15 @@ public class AppInitializer implements IProgress {
 	}
 
 
-	public synchronized void initVoiceDataInDifferentThread(@NonNull final Activity uiContext,
+	public synchronized void initVoiceDataInDifferentThread(@NonNull final Context context,
 	                                                        @NonNull final ApplicationMode applicationMode,
 	                                                        @NonNull final String voiceProvider,
 	                                                        @Nullable final Runnable onFinishInitialization,
 	                                                        boolean showProgress) {
 		String progressTitle = app.getString(R.string.loading_data);
 		String progressMessage = app.getString(R.string.voice_data_initializing);
-		final ProgressDialog progressDialog = showProgress
-				? ProgressDialog.show(uiContext, progressTitle, progressMessage)
+		final ProgressDialog progressDialog = showProgress && context instanceof Activity
+				? ProgressDialog.show(context, progressTitle, progressMessage)
 				: null;
 
 		new Thread(() -> {
@@ -585,7 +593,7 @@ public class AppInitializer implements IProgress {
 					progressDialog.dismiss();
 				}
 				if (onFinishInitialization != null) {
-					uiContext.runOnUiThread(onFinishInitialization);
+					((OsmandApplication) context.getApplicationContext()).runInUIThread(onFinishInitialization);
 				}
 			}
 		}).start();

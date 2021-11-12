@@ -56,4 +56,14 @@
 
 	</LinearLayout>
 
+	<FrameLayout
+		android:id="@+id/bottom_divider"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/dialog_content_margin"
+		android:visibility="gone">
+
+		<include layout="@layout/card_bottom_divider" />
+
+	</FrameLayout>
+
 </LinearLayout>

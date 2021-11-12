@@ -556,7 +556,7 @@
     <string name="osm_settings_descr">მიუთუთეთ Openstreetmap.org (OSM) პარამეტრები OSM-სთან დასაკავშირებლად.</string>
     <string name="data_settings_descr">მიუთითეთ ენა, მონაცემების ხელახლა წაკითხვა/ჩამოტვირთვა.</string>
     <string name="data_settings">მონაცემები</string>
-    <string name="osm_settings">OpenStreetMap-ის გამართვა</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap-ის გამართვა</string>
     <string name="auto_zoom_map_descr">სიჩქარეზე რუკის ავტომატური გადიდება.</string>
     <string name="auto_zoom_map">რუკის ავტომატური გადიდება</string>
     <string name="additional_settings">დამატებითი პარამეტრები</string>

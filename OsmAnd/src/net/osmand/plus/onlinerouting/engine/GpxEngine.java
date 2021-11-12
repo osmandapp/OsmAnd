@@ -12,6 +12,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.onlinerouting.EngineParameter;
 import net.osmand.plus.onlinerouting.VehicleType;
+import net.osmand.plus.routing.RouteCalculationParams;
+import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.plus.routing.RoutingEnvironment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.backend.ApplicationMode;
@@ -88,6 +90,15 @@ public class GpxEngine extends OnlineRoutingEngine {
 		params.add(EngineParameter.NAME_INDEX);
 		params.add(EngineParameter.CUSTOM_URL);
 		params.add(EngineParameter.APPROXIMATE_ROUTE);
+		params.add(EngineParameter.USE_EXTERNAL_TIMESTAMPS);
+	}
+
+	@Override
+	public void updateRouteParameters(@NonNull RouteCalculationParams params, @Nullable RouteCalculationResult previousRoute) {
+		super.updateRouteParameters(params, previousRoute);
+		if ((previousRoute == null || previousRoute.isEmpty()) && shouldApproximateRoute()) {
+			params.initialCalculation = true;
+		}
 	}
 
 	@Override
@@ -97,45 +108,47 @@ public class GpxEngine extends OnlineRoutingEngine {
 
 	@Override
 	@Nullable
-	public OnlineRoutingResponse parseResponse(@NonNull String content,
-	                                           @NonNull OsmandApplication app,
-	                                           boolean leftSideNavigation) {
+	public OnlineRoutingResponse parseResponse(@NonNull String content, @NonNull OsmandApplication app,
+	                                           boolean leftSideNavigation, boolean initialCalculation) {
 		GPXFile gpxFile = parseGpx(content);
-		return gpxFile != null ? prepareResponse(app, gpxFile) : null;
+		return gpxFile != null ? prepareResponse(app, gpxFile, initialCalculation) : null;
 	}
 
-	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app,
-	                                              @NonNull GPXFile gpxFile) {
-		if (shouldApproximateRoute()) {
-			GPXFile approximated = approximateGpx(app, gpxFile);
-			gpxFile = approximated != null ? approximated : gpxFile;
+	private OnlineRoutingResponse prepareResponse(@NonNull OsmandApplication app, @NonNull GPXFile gpxFile,
+	                                              boolean initialCalculation) {
+		boolean calculatedTimeSpeed = false;
+		if (shouldApproximateRoute() && !initialCalculation) {
+			MeasurementEditingContext ctx = prepareApproximationContext(app, gpxFile);
+			if (ctx != null) {
+				GPXFile approximated = ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
+				if (approximated != null) {
+					calculatedTimeSpeed = ctx.hasCalculatedTimeSpeed();
+					gpxFile = approximated;
+				}
+			}
 		}
-		return new OnlineRoutingResponse(gpxFile);
+		return new OnlineRoutingResponse(gpxFile, calculatedTimeSpeed);
 	}
 
-	private GPXFile approximateGpx(@NonNull OsmandApplication app,
-	                               @NonNull GPXFile gpxFile) {
+	@Nullable
+	private MeasurementEditingContext prepareApproximationContext(@NonNull OsmandApplication app,
+	                                                              @NonNull GPXFile gpxFile) {
 		try {
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			ApplicationMode appMode = routingHelper.getAppMode();
-
 			List<WptPt> points = gpxFile.getAllSegmentsPoints();
 			LocationsHolder holder = new LocationsHolder(points);
-
 			if (holder.getSize() > 1) {
 				LatLon start = holder.getLatLon(0);
 				LatLon end = holder.getLatLon(holder.getSize() - 1);
 				RoutingEnvironment env = routingHelper.getRoutingEnvironment(app, appMode, start, end);
-
 				GpxRouteApproximation gctx = new GpxRouteApproximation(env.getCtx());
 				List<GpxPoint> gpxPoints = routingHelper.generateGpxPoints(env, gctx, holder);
 				GpxRouteApproximation gpxApproximation = routingHelper.calculateGpxApproximation(env, gctx, gpxPoints, null);
-
 				MeasurementEditingContext ctx = new MeasurementEditingContext(app);
-				ctx.setPoints(gpxApproximation, points, appMode);
-				return ctx.exportGpx(ONLINE_ROUTING_GPX_FILE_NAME);
+				ctx.setPoints(gpxApproximation, points, appMode, useExternalTimestamps());
+				return ctx;
 			}
-
 		} catch (IOException | InterruptedException e) {
 			LOG.error(e.getMessage(), e);
 		}

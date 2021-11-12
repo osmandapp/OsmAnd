@@ -717,7 +717,7 @@
     <string name="osm_settings_descr">נא לציין הגדרות OpenStreetMap.org‏ (OSM) הנדרשות לשליחות אל OSM.</string>
     <string name="data_settings_descr">הגדרת שפה, הורדה/רענון של הנתונים.</string>
     <string name="data_settings">נתונים</string>
-    <string name="osm_settings">עריכה של OpenStreetMap</string>
+    <string name="osm_editing_plugin_name">עריכה של OpenStreetMap</string>
     <string name="additional_settings">הגדרות נוספות</string>
     <string name="shared_string_settings">הגדרות</string>
     <string name="save_current_track_descr">שמירת המסלול הנוכחי כקובץ GPX כעת.</string>
@@ -1773,7 +1773,7 @@
     <string name="navigation_item_description">הגדרת ניווט.</string>
     <string name="planning_trip_item">תכנון טיול</string>
     <string name="faq_item">שו״ת</string>
-    <string name="faq_item_description">שאלות נפוצות</string>
+    <string name="faq_item_description">שאלות נפוצות.</string>
     <string name="map_viewing_item">צפייה במפה</string>
     <string name="search_on_the_map_item">חיפוש במפה</string>
     <string name="instalation_troubleshooting_item">התקנה וטיפול בתקלות</string>
@@ -2068,7 +2068,7 @@
 \nאורך %2$s</string>
     <string name="tips_and_tricks_descr">שאלות נפוצות, שינויים אחרונים ועוד.</string>
     <string name="routing_settings_2">הגדרות ניווט</string>
-    <string name="general_settings_2">הגדרות גלובליות</string>
+    <string name="general_settings_2">הגדרות כלליות</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_dismiss">התעלמות</string>
     <string name="shared_string_do_not_use">לא להשתמש</string>
@@ -3170,7 +3170,6 @@
     <string name="paste_Osmand_data_folder_path">נא להדביק את הנתיב לתיקייה עם הנתונים של OsmAnd</string>
     <string name="change_osmand_data_folder_question">להחליף את תיקיית הנתונים של OsmAnd\?</string>
     <string name="move_maps_to_new_destination">העברה ליעד החדש</string>
-    <string name="internal_app_storage_description">אחסון פנימי עבור OsmAnd (נסתר מהמשתמשים ומיישומונים אחרים).</string>
     <string name="change_data_storage_folder">החלפת תיקיית אחסון</string>
     <string name="rendering_attr_piste_type_snow_park_name">פארק גלישה על שלג</string>
     <string name="rendering_attr_piste_type_sleigh_name">מזחלת נגררת</string>
@@ -3432,7 +3431,7 @@
 \nהתהליך עשוי לארוך זמן מה.</string>
     <string name="items_added">נוספו פריטים</string>
     <string name="shared_string_import_complete">הייבוא הושלם</string>
-    <string name="import_complete_description">כל הנתונים מתוך %1$s כבר ייובאו, ניתן להשתמש בכפתור שלהלן כדי לפתוח את החלק הנחוץ ביישומון כדי לנהל זאת.</string>
+    <string name="import_complete_description">כל הנתונים מתוך %1$s כבר ייובאו. ניתן להשתמש בכפתורים שלהלן כדי לפתוח כל חלק שהוא ביישומון כדי לנהל אותם.</string>
     <string name="recalculate_route_distance_promo">המסלול יחושב מחדש אם המרחק מהמסלול למיקום הנוכחי עובר את הערך הנבחר.</string>
     <string name="select_distance_route_will_recalc">נא לבחור את המרחק שלאחריו המסלול יחושב מחדש.</string>
     <string name="recalculate_route_in_deviation">חישוב המסלול מחדש במקרה של סטייה</string>
@@ -3445,7 +3444,7 @@
     <string name="shared_string_transparency">שקיפות</string>
     <string name="shared_string_zoom_levels">רמות תקריב</string>
     <string name="shared_string_legend">מקרא</string>
-    <string name="terrain_empty_state_text">יש להפעיל כדי לצפות במפת הצללה או מדרונות. ניתן לקרוא עוד על סוגי המפות האלו באתר שלנו.</string>
+    <string name="terrain_empty_state_text">מציג הצללה או מדרונות במפה. ניתן לקרוא עוד על סוגי המפות האלו באתר שלנו.</string>
     <string name="shared_string_hillshade">הצללה</string>
     <string name="n_items_of_z">%1$s מתוך %2$s</string>
     <string name="download_slope_maps">מדרונות</string>
@@ -3545,11 +3544,11 @@
     <string name="lang_war">וראי</string>
     <string name="download_unsupported_action">הפעולה %1$s אינה נתמכת</string>
     <string name="ltr_or_rtl_combine_via_slash_with_space">%1$s / %2$s</string>
-    <string name="osm_live_payment_subscription_management">התשלום יחויב דרך חשבון ה־Google Play שלך יחויב בעת אישור הרכישה.
+    <string name="osm_live_payment_subscription_management">התשלום מחויב דרך חשבון ה־Google Play שלך בעת אישור הרכישה.
 \n
-\nהמינוי מתחדש אוטומטית אלמלא בוטל בטרם תאריך החידוש. החשבון שלך יחויב על תקופת החידוש (חודש/שלושה חודשים/שנה) רק במועד החידוש.
+\nהוא מתחדש אוטומטית אלמלא בוטל בטרם תקופת החידוש.
 \n
-\nניתן לנהל ולבטל את המינויים שלך דרך ההגדרות שלך ב־Google Play.</string>
+\nניתן לנהל ולבטל את המינויים שלך דרך ההגדרות שלך ב־Google Play בכל עת.</string>
     <string name="search_poi_types">חיפוש סוגי נקודות עניין</string>
     <string name="search_poi_types_descr">שילוב סוגי נקודות עניין מקטגוריות שונות. נגיעה ב„החלפה” בוחרת את כולן, נגיעה בצד השמאלי בוחרת קטגוריה.</string>
     <string name="tracker_item">עוקב OsmAnd</string>
@@ -3656,7 +3655,7 @@
     <string name="add_online_source">הוספת מקור מקוון</string>
     <string name="clear_tiles_warning">החלת השינויים האלו תפנה את הנתונים שנשמרו עבור מקור אריחים זה</string>
     <string name="vessel_height_warning_link">הגדרת גובה כלי השיט</string>
-    <string name="vessel_height_warning">ניתן להגדיר את גובה כלי השיט כדי להימנע מגשרים נמוכים. נא לשים לב שאם הגשר נע, אנו נשתמש בגובהו במצב הפתוח.</string>
+    <string name="vessel_height_warning">ניתן להגדיר את גובה כלי השיט כדי להימנע מגשרים נמוכים. אם הגשר נע, יחושב הגובה במצב הפתוח.</string>
     <string name="vessel_height_limit_description">יש להגדיר את גובה כלי השיט כדי להימנע מגשרים נמוכים. נא לשים לב שאם הגשר נע, אנו נשתמש בגובהו במצב הפתוח.</string>
     <string name="vessel_width_limit_description">הגדרת רוחב כלי השיט כדי להימנע מגשרים צרים</string>
     <string name="quick_action_showhide_mapillary_descr">מפסק להצגה או הסתרה של שכבת Mapillary על גבי המפה.</string>
@@ -3699,7 +3698,7 @@
     <string name="route_between_points">מסלול בין נקודות</string>
     <string name="plan_a_route">תכנון מסלול</string>
     <string name="add_to_a_track">הוספה למסלול</string>
-    <string name="add_hidden_group_info">הנקודה שנוספה לא תופיע על המפה מאחר שהקבוצה הנבחרת מוסתרת, ניתן למצוא אותה תחת „%s”.</string>
+    <string name="add_hidden_group_info">את הנקודה שנוספה ניתן למצוא תחת „%s”. ביטול הסתרת הקבוצה הנבחרת תציג אותה על המפה.</string>
     <string name="gpx_split_interval_descr">נא לבחור את משך הזמן בו סמנים עם מרחק או זמן יופיעו על גבי המסלול.</string>
     <string name="track_show_start_finish_icons">הצגת סמני התחלה וסוף</string>
     <string name="select_track_width">בחירת רוחב</string>
@@ -3800,11 +3799,11 @@
     <string name="routing_attr_avoid_footways_description">הימנעות משבילי הולכי רגל</string>
     <string name="routing_attr_avoid_footways_name">הימנעות משבילי הולכי רגל</string>
     <string name="osm_live_payment_desc_hw">המינוי מחויב לפי התקופה הנבחרת. ניתן לבטל אותו דרך ה־AppGallery בכל עת.</string>
-    <string name="osm_live_payment_subscription_management_hw">חשבון ה־AppGallery שלך יחויב עם אישור הרכישה.
+    <string name="osm_live_payment_subscription_management_hw">התשלום יחויב מחשבון ה־AppGallery שלך יחויב עם אישור הרכישה.
 \n
-\nתוקף המינוי מתארך אוטומטי אלא אם כן בוטל בטרם תאריך החידוש. החשבון שלך יחויב על תקופת החידוש (חודש/שלושה חודשים/שנה) רק בתאריך החידוש.
+\nהמינוי מתחדש אוטומטית אלא אם כן בוטל בטרם תקופת החידוש הנבחרת.
 \n
-\nניתן לנהל ולבטל את המינויים שלך בהגדרות ב־AppGallery שלך.</string>
+\nניתן לנהל ולבטל את המינויים שלך בהגדרות ב־AppGallery שלך בכל עת.</string>
     <string name="what_is_new">מה חדש</string>
     <string name="development">פיתוח</string>
     <string name="use_live_public_transport">נתוני זמן אמת של OsmAnd</string>
@@ -3846,9 +3845,9 @@
     <string name="manage_subscription">ניהול מינוי</string>
     <string name="subscription_expired_title">תוקף המינוי ל־OsmAnd Live פג</string>
     <string name="subscription_paused_title">המינוי ל־OsmAnd Live הושהה</string>
-    <string name="open_street_map_login_mode">עליך להיכנס כדי להעלות שינויים חדשים או כאלו שנערכו.
+    <string name="open_street_map_login_mode">עליך להיכנס תחילה כדי להעלות שינויים חדשים או כאלו שנערכו.
 \n
-\nניתן להיכנס בשיטת OAuth המאובטחת או באמצעות שם הכניסה והססמה שלך.</string>
+\nניתן להשתמש ב־OAuth או בשם המשתמש והססמה שלך.</string>
     <string name="subscription_payment_issue_title">יש לגעת בכפתור כדי להגדיר שיטת תשלום ב־Google Play ולתקן את המינוי שלך.</string>
     <string name="subscription_on_hold_title">המינוי ל־OsmAnd Live מוחזק</string>
     <string name="markers_history">היסטוריית סמנים</string>
@@ -3857,7 +3856,7 @@
     <string name="gpx_upload_trackable_visibility_descr">„ניתן למעקב” משמעו שהמסלול לא מופיע ברישומים ציבוריים אך נקודות המעקב שעובדו עם חותמות זמן ממנו (שלא ניתן לשייך אליך ישירות) תהיינה דרך ההורדות מה־API הציבורי של ה־GPS.</string>
     <string name="osm_edit_close_note">סגירת הערת OSM</string>
     <string name="osm_edit_comment_note">להגיב על הערת OSM</string>
-    <string name="osm_login_descr">ניתן להיכנס באמצעות שיטת האימות המאובטחת OAuth או להיכנס עם שם הכניסה והססמה שלך.</string>
+    <string name="osm_login_descr">ניתן להיכנס באמצעות שיטת OAuth או להיכנס עם שם המשתמש והססמה שלך ב־OSM.</string>
     <string name="shared_string_add_photo">הוספת תמונה</string>
     <string name="register_on_openplacereviews">יש להירשם בכתובת
 \nOpenPlaceReviews.org</string>
@@ -4111,25 +4110,25 @@
     <string name="cloud_email_already_registered">כתובת הדוא״ל הזו כבר רשומה.</string>
     <string name="resend_verification_code">לשלוח שוב</string>
     <string name="verification_code_missing">לא קיבלתי קוד אימות</string>
-    <string name="verification_code_missing_description">זמן ההמתנה לקוד יכול לארוך עד 10 דקות, כדאי גם לחפש בתיקיית הספאם שלך. אם זה לא עזר, יש להשתמש בכפתור שלהלן.</string>
+    <string name="verification_code_missing_description">יכול לארוך עד 10 דקות. יש להשתמש בכפתור שלהלן אם ההודעה לא הגיעה לתיקיית הספאם שלך.</string>
     <string name="backup_and_restore">גיבוי ושחזור</string>
     <string name="last_backup">גיבוי אחרון</string>
     <string name="duration_ago">לפני %1$s</string>
     <string name="osmand_cloud">OsmAnd Cloud</string>
-    <string name="osmand_cloud_authorize_descr">הנתונים שלך לעולם לא ילכו לאיבוד, ניתן לגבות ולשחזר את המידע שלך ללא כל קושי.</string>
+    <string name="osmand_cloud_authorize_descr">הנתונים שלך לעולם לא ילכו לאיבוד. ניתן לגבות ולשחזר את המידע שלך בקלות.</string>
     <string name="local_backup">גיבוי מקומי</string>
     <string name="local_backup_descr">גיבוי ושחזור נתונים מקובץ מקומי.</string>
     <string name="backup_into_file">גיבוי כקובץ</string>
     <string name="restore_from_file">שחזור מקובץ</string>
     <string name="osmand_cloud_help_descr">הסתבכת\? ניתן ליצור אתנו קשר דרך %1$s</string>
-    <string name="osmand_cloud_create_account_descr">נא למלא את כתובת הדוא״ל שלך, כל הנתונים שלך יקושרו אליה.
-\nאנו נשלח לך קוד אימות לכתובת הדוא״ל הזו.</string>
-    <string name="osmand_cloud_login_descr">נא להקליד את כתובת הדוא״ל בה השתמשת להרשמה. אנו נשלח לך תוך זמן קצר ססמה חד־פעמית שנחוצה לשלב הבא.</string>
+    <string name="osmand_cloud_create_account_descr">נא למלא את כתובת הדוא״ל שלך, אליה ישלח קוד האימות,
+\nוכל הנתונים שלך יקושרו אליה.</string>
+    <string name="osmand_cloud_login_descr">נא להקליד את כתובת הדוא״ל בה השתמשת להרשמה. אנו נשלח לך ססמה חד־פעמית שנחוצה לשלב הבא.</string>
     <string name="select_nav_profile_dialog_message">‚סוג הניווט’ בוחר איך המסלולים מחושבים, עם מנגנוני ניווט מקוונים ובלתי מקוונים זמינים.</string>
     <string name="loading_list_of_routing_services">רשימת שירותי הניווט הזמינים נטענת</string>
     <string name="shared_string_offline">בלתי מקוון</string>
     <string name="shared_string_online">מקוון</string>
-    <string name="osmand_online_routing_promo">ניתן להשתמש בתבניות שהוגדרו מראש או להוסיף ניווט מקוון מותאם אישית, נתמכים: OSRM,‏ Graphhopper,‏ openrouteservice,‏ GPX.</string>
+    <string name="osmand_online_routing_promo">ניתן להשתמש בתבניות שהוגדרו או להוסיף ניווט מקוון דרך OSRM,‏ Graphhopper,‏ openrouteservice,‏ GPX.</string>
     <string name="shared_string_external">חיצוני</string>
     <string name="provided_by">סופק על ידי %1$s</string>
     <string name="failed_loading_predefined_engines">לא ניתן לטעון את התבניות שהוגדרו מראש.
@@ -4239,7 +4238,7 @@
     <string name="backup_data_removed">כל הנתונים הוסרו.</string>
     <string name="shared_string_progress">תהליך</string>
     <string name="backup_do_not_have_any">עדיין אין לך גיבוי מקוון.</string>
-    <string name="backup_dont_have_any_descr">ניתן להקים גיבוי אוטומטי כדי שנתונים אבודים לא יטרידו אותך.</string>
+    <string name="backup_dont_have_any_descr">ניתן לתזמן גיבויים אוטומטיים ולא לאבד עוד מידע.</string>
     <string name="track_has_no_needed_data">המסלול לא כולל את הנתונים הדרושים.</string>
     <string name="online_maps_searching_descr">מתבצע חיפוש מקוון…</string>
     <string name="reset_to_original">איפוס למקור</string>
@@ -4261,7 +4260,6 @@
     <string name="online_maps_required_descr">לרוע המזל, OsmAnd לא הצליח למצוא מסלול להגדרות שלך.
 \n
 \nאולי חלק מהמפות לא נטענו, ניתן להריץ בדיקה מקוונת של המפות הנחוצות.</string>
-    <string name="not_enough_contributions_descr">נדרשות לפחות %1$s תרומות ל־OpenStreetMap תוך %2$s ימים.</string>
     <string name="grey_color_undefined">הצבע האפור משמש לחלקים ללא נתונים.</string>
     <string name="cancel_anytime_in_amazon_app">ניתן לבטל בכל עת דרך יישומון Amazon</string>
     <string name="amz_manage_subscription_descr">כדי לנהל את המינויים שלך עלי להשתמש ביישומון של Amazon במכשיר או לפתוח את האתר Amazon.com תחת הפרופיל שלך.</string>
@@ -4271,7 +4269,90 @@
     <string name="remove_group_from_markers">הסרת קבוצה מרשימת הסמנים</string>
     <string name="start_point">התחלה</string>
     <string name="mapillary_menu_filter_description_new">סינון תמונות לפי תאריך או לפי סוג. פעיל רק בתקריב קרוב.</string>
-    <string name="service_is_not_available_please_try_later">השירות אינו זמין, נא לנסות שוב בהמשך</string>
+    <string name="service_is_not_available_please_try_later">השירות אינו זמין. נא לנסות שוב בהמשך.</string>
     <string name="shared_string_files">קבצים</string>
     <string name="travel_route_types">סוגי מסלולים</string>
+    <string name="no_items_of_type_message">אין לך פריטים מהסוג הזה</string>
+    <string name="routeInfo_roadClass_description">צביעת המסלול או מתאר הדרך בהתאם לסיווג הדרך.</string>
+    <string name="sample_wikivoyage">דוגמה מוויקימסע</string>
+    <string name="shared_string_mini">מוקטן</string>
+    <string name="horseback_riding">רכיבה על סוסים</string>
+    <string name="routing_attr_prefer_horse_routes_description">להעדיף מסלולי סוסים</string>
+    <string name="routing_attr_prefer_horse_routes_name">להעדיף מסלולי סוסים</string>
+    <string name="routing_attr_only_permitted_ways_description">להשתמש רק בדרכים (כבישים, מסלולים וכו׳) שהורשו באופן מפורש</string>
+    <string name="routing_attr_only_permitted_ways_name">דרכים שהותרו במפורש</string>
+    <string name="routing_attr_only_permitted_streets_description">להשתמש רק ברחובות שהורשו באופן מפורש</string>
+    <string name="routing_attr_only_permitted_streets_name">רחובות שהותרו במפורש</string>
+    <string name="routing_attr_allow_gate_description">לאפשר שימוש בשערים</string>
+    <string name="routing_attr_allow_gate_name">לאפשר שימוש בשערים</string>
+    <string name="routing_attr_prefer_tactile_paving_description">להעדיף ריצוף מישושי</string>
+    <string name="routing_attr_prefer_tactile_paving_name">להעדיף ריצוף מישושי</string>
+    <string name="osm_live_payment_subscription_management_amz">התשלום מחויב דרך החשבון שלך ב־Amazon בעת אישור הרכישה.
+\n
+\nהוא מחודש אלמלא ביטלת אותו בטרם בחירת תקופת החידוש.
+\n
+\nניתן לנהל או לבטל את המינוי שלך דרך ההגדרות שלך ב־Amazon בכל עת.</string>
+    <string name="search_title">חיפוש: %1$s</string>
+    <string name="upload_gpx_description_hint">יש להשאיר ריק, שמות המסלולים ישמשו כתיאור. התיאור שנכתב יחול על כל אחד מהמסלולים.</string>
+    <string name="shared_app_storage_description">הזיכרון המשותף לא זמין עוד עקב שינויים בכללי גישה לאחסון ב־Android.</string>
+    <string name="shared_string_details">פרטים</string>
+    <string name="included_categories">קטגוריות כלולות</string>
+    <string name="internal_app_storage_description">אחסון פנימי, נסתר מהמשתמש ומיישומונים אחרים, כדי שלאף אחד למעט OsmAnd לא תהיה גישה לנתונים שלך</string>
+    <string name="shared_storage_warning_title">שינוי בכללי הגישה לאחסון</string>
+    <string name="shared_string_articles">ערכים</string>
+    <string name="android_auto_map_placeholder_title">המפה מוצגת על המסך במכונית.</string>
+    <string name="continue_on_phone">להמשיך במכשיר הנייד</string>
+    <string name="android_auto_purchase_request_title">יש לרכוש את OsmAnd Pro או את Maps+‎ כדי להשתמש ב־OsmAnd עם Android Auto</string>
+    <string name="location_access_request_title">ל־OsmAnd דרושה הרשאה למיקום כדי לנווט.</string>
+    <string name="location_access_request_action">הענקת גישה</string>
+    <string name="android_auto_map_placeholder_descr">נא לנתק את המכשיר שלך מ־Android Auto כדי לצפות במפה ביישומון.</string>
+    <string name="location_access_request_result">אושר: %1$s נדחה: %2$s</string>
+    <string name="shortcut_navigate_to_work">ניווט לעבודה</string>
+    <string name="clear_all_history">פינוי כל ההיסטוריה</string>
+    <string name="map_markers_history">היסטוריית סמני המפה</string>
+    <string name="shortcut_navigate_to">ניווט אל…</string>
+    <string name="shortcut_navigate_to_home">ניווט הביתה</string>
+    <string name="history_actions_descr">אפשר לייצא היסטוריה לקובץ.</string>
+    <string name="navigation_history">היסטוריית ניווט</string>
+    <string name="history_preferences_descr">אפשר להשבית את תיעוד ההיסטוריה באופן פרטני לכל סוג של היסטוריה.</string>
+    <string name="shortcut_start_recording">התחלת הקלטה</string>
+    <string name="routeInfo_surface_description">אספקת מידע נוסף על המשטח הפיזי של כבישים/דרכים.</string>
+    <string name="exit_pan_mode_descr">יש ללחוץ על בחירה כדי לצאת ממצב הסריקה</string>
+    <string name="purchases_feature_desc_android_auto">המפות הבלתי מקוונות של OsmAnd והניווט ישירות על מסך המכונית שלך. עם שילוב נוח בפקדי המכונית.</string>
+    <string name="clear_all_history_warning">לפנות את כל ההיסטוריה ביישומון לרבות החיפוש, הניווט והיסטוריית הסמנים\?</string>
+    <string name="icon_group_nautical">ימי</string>
+    <string name="transparent_status_bar_descr">הצגת מפה מתחת לסרגל המצב</string>
+    <string name="transparent_status_bar">סרגל מצב שקוף</string>
+    <string name="search_history_is_disabled_descr">אפשר להפעיל את היסטוריית החיפוש בהגדרות.</string>
+    <string name="markers_history_is_disabled_descr">יש להפעיל את ההיסטוריה כדי לזכור את רשימת סמני המפה שביקרת בהם.</string>
+    <string name="travel_routes">מסלולי טיול</string>
+    <string name="direct_line_maps_required_descr">חישוב המסלול אורך מעבר למתוכנן.
+\n
+\nאולי חלק מהמפות לא נטענו.</string>
+    <string name="offline_maps_required_descr">חלק מהמפות הבלתי מקוונות שדרושות למסלול הזה חסרות.</string>
+    <string name="online_direct_line_maps_link">נא לבדוק את המפות החסרות.</string>
+    <string name="setting_supported_by_style">הגדרה זו מסופקת על ידי סגנון המפה ‚%1$s’</string>
+    <string name="is_disabled">%1$s מושבת</string>
+    <string name="use_external_timestamps_description">להשתמש בחותמות הזמן של המנווט המקוון כדי לכוון את הזמן המוערך ואת המהירות הממוצעת</string>
+    <string name="safe_settings">בטוח</string>
+    <string name="approx_safe_mode">הערכה בטוח של GPX</string>
+    <string name="no_plugins_enabled">אין לך תוספים פעילים. אפשר למצוא את רשימת התוספים הזמינים תחת ‚תפריט’ ← ‚תוספים’.</string>
+    <string name="shared_string_travelbooks">ספרי טיולים</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_description">צביעת מסלולים לפי סוג רשת הנקודות (בינלאומי, אזורי, מקומי).</string>
+    <string name="shared_string_relation">יחס</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">צביעה לפי השתייכות לרשת.</string>
+    <string name="display_route_tracks">הצגת מסלולים</string>
+    <string name="walking_route_osmc_description">צביעת מסלולים לפי הצבע המקומי הייחודי שלהם (אם קיים ב־OpenStreetMap) וסוג (בינלאומי, אזורי, מקומי).</string>
+    <string name="rendering_attr_natureReserves_name">שמורת טבע</string>
+    <string name="use_external_timestamps">שימוש בחותמות זמן חיצוניות</string>
+    <string name="approx_safe_mode_description">ביצוע הערכת GPX באמצעות שיטה אטית של Android במקום בקוד מובנה.</string>
+    <string name="history_is_disabled_descr">יש להפעיל את ההיסטוריה כדי לגשת לתוצאות בהן השתמשת לאחרונה מהר יותר.</string>
+    <string name="routes_color_by_type">צביעת מסלולים לפי…</string>
+    <string name="explore_osmnad_plans_to_find_suitable">ניתן לחקור את התכניות של OsmAnd ולמצוא אחת שמתאימה לך.</string>
+    <string name="purchases_feature_desc_pro_widgets">קבלת גישה לתכונות מקצועיות של OsmAnd: צביעת מסלולים ועוד.</string>
+    <string name="option_available_only_in_osmand_pro">האפשרות הזאת קיימת כחלק ממינוי OsmAnd Pro.</string>
+    <string name="display_route_tracks_as_poi">הצגת מסלולים כנקודות עניין</string>
+    <string name="quick_action_toggle_preference">מתג להחלפת מצב העדפה נבחר.</string>
+    <string name="delete_history_items_descr">למחוק את פריטי ההיסטוריה הנבחרים\?</string>
+    <string name="delete_history_items">למחוק %1$s פריטי היסטוריה\?</string>
 </resources>

@@ -61,7 +61,9 @@ public class SearchHistoryHelper {
 
 	public void addNewItemToHistory(PoiUIFilter filter) {
 		addNewItemToHistory(new HistoryEntry(0, 0, createPointDescription(filter)));
-		context.getPoiFilters().markHistory(filter.getFilterId(), true);
+		if (context.getSettings().SEARCH_HISTORY.get()) {
+			context.getPoiFilters().markHistory(filter.getFilterId(), true);
+		}
 	}
 
 	public void addNewItemToHistory(GPXInfo gpxInfo) {
@@ -145,18 +147,20 @@ public class SearchHistoryHelper {
 	}
 
 	private void addNewItemToHistory(HistoryEntry model) {
-		HistoryItemDBHelper helper = checkLoadedEntries();
-		if (mp.containsKey(model.getName())) {
-			model = mp.get(model.getName());
-			model.markAsAccessed(System.currentTimeMillis());
-			helper.update(model);
-		} else {
-			loadedEntries.add(model);
-			mp.put(model.getName(), model);
-			model.markAsAccessed(System.currentTimeMillis());
-			helper.add(model);
+		if (context.getSettings().SEARCH_HISTORY.get()) {
+			HistoryItemDBHelper helper = checkLoadedEntries();
+			if (mp.containsKey(model.getName())) {
+				model = mp.get(model.getName());
+				model.markAsAccessed(System.currentTimeMillis());
+				helper.update(model);
+			} else {
+				loadedEntries.add(model);
+				mp.put(model.getName(), model);
+				model.markAsAccessed(System.currentTimeMillis());
+				helper.add(model);
+			}
+			updateEntriesList();
 		}
-		updateEntriesList();
 	}
 
 	public void addItemsToHistory(List<HistoryEntry> entries) {

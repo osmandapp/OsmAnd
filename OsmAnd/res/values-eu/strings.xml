@@ -937,7 +937,7 @@
     <string name="osm_settings_descr">Ezarri OpenStreetMap.org (OSM)eko ezarpenak OSMrako bidalketentzat.</string>
     <string name="data_settings_descr">Ezarri hizkuntza, deskargatu/birkargatu datuak.</string>
     <string name="data_settings">Datuak</string>
-    <string name="osm_settings">OpenStreetMap edizioa</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap edizioa</string>
     <string name="additional_settings">Gainerako ezarpenak</string>
     <string name="shared_string_settings">Ezarpenak</string>
     <string name="save_current_track_descr">Gorde uneko lorratza GPX fitxategi gisa orain.</string>
@@ -3176,7 +3176,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="paste_Osmand_data_folder_path">Itsatsi OsmAnd datuak dituen karpetara bidea</string>
     <string name="change_osmand_data_folder_question">Aldatu OsmAnd datuen karpeta\?</string>
     <string name="move_maps_to_new_destination">Eraman xede berrira</string>
-    <string name="internal_app_storage_description">OsmAnd-en barne biltegiratzea (erabiltzaileari eta beste aplikazioei ezkutatuta).</string>
     <string name="change_data_storage_folder">Aldatu biltegiratzeko karpeta</string>
     <string name="rendering_attr_piste_type_snow_park_name">Elur parkea</string>
     <string name="rendering_attr_piste_type_sleigh_name">Lera</string>
@@ -4073,7 +4072,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="use_login_and_password">Erabili erabiltzaile izena eta pasahitza</string>
     <string name="available_until">Erabilgarri %1$s arte</string>
     <string name="enough_contributions_descr">Zorionak, OpenStreetMapen nahikoa ekarpen egin dituzu eta mugarik gabeko mapen eguneraketaz baliatu ahal izango duzu.</string>
-    <string name="not_enough_contributions_descr">"Gutxienez %1$s mapa ekarpen egin behar dituzu OpenStreetMapen azken  %2$s egunetan."</string>
     <string name="shared_string_contributions">Ekarpenak</string>
     <string name="contributions_may_calculate_with_delay">Ekarpenen inplementazioa zenbait orduz atzeratu daitezke.</string>
     <string name="map_updates_are_unavailable_yet">Mapen eguneraketak oraindik ez daude erabilgarri :-(</string>

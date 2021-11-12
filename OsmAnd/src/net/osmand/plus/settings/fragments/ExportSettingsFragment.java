@@ -52,6 +52,7 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	private static final String EXPORTING_STARTED_KEY = "exporting_started_key";
 	private static final String PROGRESS_MAX_KEY = "progress_max_key";
 	private static final String PROGRESS_VALUE_KEY = "progress_value_key";
+	private static final String SELECTED_TYPES = "selected_types";
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yy", Locale.US);
 
@@ -78,8 +79,22 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 		}
 		exportMode = true;
 		dataList = app.getFileSettingsHelper().getSettingsByCategory(true);
-		if (!globalExport && savedInstanceState == null) {
-			updateSelectedProfile();
+
+		if (savedInstanceState == null) {
+			if (!globalExport) {
+				updateSelectedProfile();
+			}
+			Bundle args = getArguments();
+			if (args != null && args.containsKey(SELECTED_TYPES)) {
+				List<String> selectedTypes = args.getStringArrayList(SELECTED_TYPES);
+				if (!Algorithms.isEmpty(selectedTypes)) {
+					for (String type : selectedTypes) {
+						ExportSettingsType settingsType = ExportSettingsType.valueOf(type);
+						List<Object> items = getItemsForType(settingsType);
+						selectedItemsMap.put(settingsType, items);
+					}
+				}
+			}
 		}
 	}
 
@@ -281,12 +296,24 @@ public class ExportSettingsFragment extends BaseSettingsListFragment {
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-	                                   @NonNull ApplicationMode appMode,
-	                                   boolean globalExport) {
+									   @NonNull ApplicationMode appMode,
+									   @Nullable List<ExportSettingsType> selectedTypes,
+									   boolean globalExport) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
+			Bundle args = null;
+			if (!Algorithms.isEmpty(selectedTypes)) {
+				ArrayList<String> types = new ArrayList<>();
+				for (ExportSettingsType type : selectedTypes) {
+					types.add(type.name());
+				}
+				args = new Bundle();
+				args.putStringArrayList(SELECTED_TYPES, types);
+			}
+
 			ExportSettingsFragment fragment = new ExportSettingsFragment();
 			fragment.appMode = appMode;
 			fragment.globalExport = globalExport;
+			fragment.setArguments(args);
 			fragmentManager.beginTransaction().
 					replace(R.id.fragmentContainer, fragment, TAG)
 					.addToBackStack(SETTINGS_LIST_TAG)

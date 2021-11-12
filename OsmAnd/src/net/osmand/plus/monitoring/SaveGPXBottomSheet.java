@@ -1,5 +1,7 @@
 package net.osmand.plus.monitoring;
 
+import static net.osmand.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
+
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -8,11 +10,10 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -41,8 +42,6 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.FileUtils.ILLEGAL_FILE_NAME_CHARACTERS;
 
 public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	public static final String TAG = "SaveGPXBottomSheetFragment";
@@ -77,18 +76,19 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 		final int textPrimaryColor = ColorUtilities.getPrimaryTextColorId(nightMode);
 		View mainView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.save_gpx_fragment, null);
 
-		OsmandTextFieldBoxes textBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.name_text_box);
+		OsmandTextFieldBoxes textBox = mainView.findViewById(R.id.name_text_box);
 		if (nightMode) {
 			textBox.setPrimaryColor(ContextCompat.getColor(app, R.color.active_color_primary_dark));
 		}
+		int iconColor = ColorUtilities.getDefaultIconColorId(nightMode);
+		textBox.setClearButton(getIcon(R.drawable.ic_action_remove_circle, iconColor));
 
-		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
+		final EditText nameEditText = mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(savedGpxName);
 		nameEditText.setTextColor(ContextCompat.getColor(ctx, textPrimaryColor));
 		nameEditText.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
 			}
 
 			@Override
@@ -106,15 +106,13 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 				}
 			}
 		});
-		nameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-					doRename(false);
-					return true;
-				}
-				return false;
+		nameEditText.setOnEditorActionListener((v, actionId, event) -> {
+			if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER))
+					|| (actionId == EditorInfo.IME_ACTION_DONE)) {
+				doRename(false);
+				return true;
 			}
+			return false;
 		});
 
 		nameEditText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -127,14 +125,10 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 			}
 		});
 
-		SwitchCompat showOnMapButton = (SwitchCompat) mainView.findViewById(R.id.btn_show_on_map);
+		SwitchCompat showOnMapButton = mainView.findViewById(R.id.btn_show_on_map);
 		showOnMapButton.setChecked(app.getSettings().SHOW_SAVED_TRACK_REMEMBER.get());
-		showOnMapButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				app.getSettings().SHOW_SAVED_TRACK_REMEMBER.set(isChecked);
-			}
-		});
+		showOnMapButton.setOnCheckedChangeListener((buttonView, isChecked) ->
+				app.getSettings().SHOW_SAVED_TRACK_REMEMBER.set(isChecked));
 
 		SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
 				.setCustomView(mainView)
@@ -177,15 +171,15 @@ public class SaveGPXBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	@Override
-	public void onDismiss(DialogInterface dialog) {
+	public void onDismiss(@NonNull DialogInterface dialog) {
 		super.onDismiss(dialog);
-		if (file != null) {
-			OsmandApplication app = getMyApplication();
-			if (app != null && app.getSettings().SHOW_SAVED_TRACK_REMEMBER.get()) {
+		FragmentActivity activity = getActivity();
+		if (file != null && activity != null) {
+			boolean showTrack = requiredMyApplication().getSettings().SHOW_SAVED_TRACK_REMEMBER.get();
+			if (showTrack) {
 				showOnMap(file, !openTrack);
 			}
-			FragmentActivity activity = getActivity();
-			if (openTrack && activity != null) {
+			if (openTrack) {
 				TrackMenuFragment.openTrack(activity, file, null);
 			}
 		}

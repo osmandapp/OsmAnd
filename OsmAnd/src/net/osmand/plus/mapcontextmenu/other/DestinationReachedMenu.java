@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu.other;
 
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.auto.NavigationSession;
 import net.osmand.plus.mapcontextmenu.BaseMenuController;
 
 public class DestinationReachedMenu extends BaseMenuController {
@@ -22,8 +23,11 @@ public class DestinationReachedMenu extends BaseMenuController {
 	public static void show(MapActivity mapActivity) {
 		if (!DestinationReachedMenuFragment.isExists()) {
 			shown = true;
-			DestinationReachedMenu menu = new DestinationReachedMenu(mapActivity);
-			DestinationReachedMenuFragment.showInstance(menu);
+			NavigationSession carNavigationSession = mapActivity.getMyApplication().getCarNavigationSession();
+			if (carNavigationSession == null || !carNavigationSession.hasStarted()) {
+				DestinationReachedMenu menu = new DestinationReachedMenu(mapActivity);
+				DestinationReachedMenuFragment.showInstance(menu);
+			}
 		}
 	}
 }

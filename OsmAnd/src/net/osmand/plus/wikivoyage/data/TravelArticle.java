@@ -1,5 +1,11 @@
 package net.osmand.plus.wikivoyage.data;
 
+import static net.osmand.GPXUtilities.GPXFile;
+import static net.osmand.GPXUtilities.GPXTrackAnalysis;
+import static net.osmand.GPXUtilities.WptPt;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.util.Algorithms.capitalizeFirstLetter;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -26,16 +32,12 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
-import static net.osmand.GPXUtilities.*;
-import static net.osmand.util.Algorithms.capitalizeFirstLetter;
-
 public class TravelArticle {
 
 	private static final Log LOG = PlatformUtil.getLog(TravelArticle.class);
 	private static final String IMAGE_ROOT_URL = "https://upload.wikimedia.org/wikipedia/commons/";
 	private static final String THUMB_PREFIX = "320px-";
 	private static final String REGULAR_PREFIX = "1280px-";//1280, 1024, 800
-	private static final String ROUTE_ARTICLE_POINT = "route_article_point";
 
 	File file;
 	String title;

@@ -112,15 +112,20 @@ public class UiUtilities {
 	}
 
 	private Drawable getPaintedDrawable(@DrawableRes int resId, @ColorInt int color) {
-		long hash = ((long) resId << 31l) + color;
-		Drawable d = drawableCache.get(hash);
-		if (d == null) {
-			d = AppCompatResources.getDrawable(app, resId);
-			d = tintDrawable(d, color);
+		Drawable drawable = null;
+		if (resId != 0) {
+			long hash = ((long) resId << 31L) + color;
+			drawable = drawableCache.get(hash);
+			if (drawable == null) {
+				drawable = AppCompatResources.getDrawable(app, resId);
+				drawable = tintDrawable(drawable, color);
 
-			drawableCache.put(hash, d);
+				drawableCache.put(hash, drawable);
+			}
+		} else {
+			LOG.warn("Invalid icon identifier");
 		}
-		return d;
+		return drawable;
 	}
 
 	public Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
@@ -187,6 +192,9 @@ public class UiUtilities {
 		Drawable coloredDrawable = null;
 		if (drawable != null) {
 			coloredDrawable = DrawableCompat.wrap(drawable);
+			if (coloredDrawable.getConstantState() != null) {
+				coloredDrawable = coloredDrawable.getConstantState().newDrawable();
+			}
 			coloredDrawable.mutate();
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP && coloredDrawable instanceof RippleDrawable) {
 				((RippleDrawable) coloredDrawable).setColor(ColorStateList.valueOf(color));
@@ -223,6 +231,7 @@ public class UiUtilities {
 			double toLat, double toLon) {
 		updateLocationView(cache, arrow, txt, new LatLon(toLat, toLon));
 	}
+
 	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
 			LatLon toLoc) {
 		float[] mes = new float[2];
@@ -244,7 +253,7 @@ public class UiUtilities {
 				stale = false;
 				fromLoc = app.getMapViewTrackingUtilities().getMapLocation();
 				h = app.getMapViewTrackingUtilities().getMapRotate();
-				if(h != null) {
+				if (h != null) {
 					h = -h;
 				}
 			}
@@ -278,7 +287,7 @@ public class UiUtilities {
 			if (fromLoc == null || h == null || toLoc == null) {
 				dd.setAngle(0);
 			} else {
-				float orientation = (cache == null ? 0 : cache.screenOrientation) ;
+				float orientation = (cache == null ? 0 : cache.screenOrientation);
 				dd.setAngle(mes[1] - h + 180 + orientation);
 			}
 			if (newImage) {
@@ -413,9 +422,9 @@ public class UiUtilities {
 		background.setStroke(AndroidUtils.dpToPx(app, 1), ColorUtilities.getColorWithAlpha(activeColor, 0.5f));
 		if (buttonType == CustomRadioButtonType.START) {
 			if (isLayoutRtl) {
-				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
+				background.setCornerRadii(new float[] {0, 0, radius, radius, radius, radius, 0, 0});
 			} else {
-				background.setCornerRadii(new float[]{radius, radius, 0, 0, 0, 0, radius, radius});
+				background.setCornerRadii(new float[] {radius, radius, 0, 0, 0, 0, radius, radius});
 			}
 			TextView startButtonText = startButtonContainer.findViewById(R.id.left_button);
 			TextView endButtonText = endButtonContainer.findViewById(R.id.right_button);
@@ -452,7 +461,7 @@ public class UiUtilities {
 			if (isLayoutRtl) {
 				background.setCornerRadii(new float[] {radius, radius, 0, 0, 0, 0, radius, radius});
 			} else {
-				background.setCornerRadii(new float[]{0, 0, radius, radius, radius, radius, 0, 0});
+				background.setCornerRadii(new float[] {0, 0, radius, radius, radius, radius, 0, 0});
 			}
 			TextView startButtonText = startButtonContainer.findViewById(R.id.left_button);
 			TextView endButtonText = endButtonContainer.findViewById(R.id.right_button);
@@ -472,19 +481,19 @@ public class UiUtilities {
 
 	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
 		int inactiveColor = ColorUtilities.getDefaultIconColor(ctx, nightMode);
-		int[][] states = new int[][]{
-				new int[]{-android.R.attr.state_checked},
-				new int[]{android.R.attr.state_checked}
+		int[][] states = new int[][] {
+				new int[] {-android.R.attr.state_checked},
+				new int[] {android.R.attr.state_checked}
 		};
-		ColorStateList csl = new ColorStateList(states, new int[]{inactiveColor, activeColor});
+		ColorStateList csl = new ColorStateList(states, new int[] {inactiveColor, activeColor});
 		DrawableCompat.setTintList(DrawableCompat.wrap(drawable), csl);
 	}
 
 	public static void setupCompoundButton(boolean nightMode, @ColorInt int activeColor, CompoundButton compoundButton) {
-	    if (compoundButton == null) {
-	        return;
-        }
-	    Context ctx = compoundButton.getContext();
+		if (compoundButton == null) {
+			return;
+		}
+		Context ctx = compoundButton.getContext();
 		int inactiveColorPrimary = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
 		int inactiveColorSecondary = ColorUtilities.getColorWithAlpha(inactiveColorPrimary, 0.45f);
 		setupCompoundButton(compoundButton, activeColor, inactiveColorPrimary, inactiveColorSecondary);
@@ -535,7 +544,7 @@ public class UiUtilities {
 			DrawableCompat.setTintList(DrawableCompat.wrap(sc.getThumbDrawable()), new ColorStateList(states, thumbColors));
 			DrawableCompat.setTintList(DrawableCompat.wrap(sc.getTrackDrawable()), new ColorStateList(states, trackColors));
 		} else if (compoundButton instanceof TintableCompoundButton) {
-			ColorStateList csl = new ColorStateList(states, new int[]{inactiveColorPrimary, activeColor});
+			ColorStateList csl = new ColorStateList(states, new int[] {inactiveColorPrimary, activeColor});
 			((TintableCompoundButton) compoundButton).setSupportButtonTintList(csl);
 		}
 		compoundButton.setBackgroundColor(Color.TRANSPARENT);
@@ -684,7 +693,7 @@ public class UiUtilities {
 					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				}
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
-				textAndIconColorResId =  R.color.color_osm_edit_delete;
+				textAndIconColorResId = R.color.color_osm_edit_delete;
 				break;
 			case STROKED:
 				if (v21) {

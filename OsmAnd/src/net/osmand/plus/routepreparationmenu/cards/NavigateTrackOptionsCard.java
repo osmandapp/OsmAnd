@@ -1,5 +1,9 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
+import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,10 +16,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.LocalRoutingParameter;
 import net.osmand.plus.settings.backend.ApplicationMode;
 
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.START;
-import static net.osmand.plus.UiUtilities.CustomRadioButtonType.END;
-
 public class NavigateTrackOptionsCard extends MapBaseCard {
 
 	private final LocalRoutingParameter passWholeRoute;
@@ -25,10 +25,10 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 	private final boolean userIntermediateRtePoints;
 
 	public NavigateTrackOptionsCard(@NonNull MapActivity mapActivity,
-	                                @NonNull LocalRoutingParameter passWholeRoute,
-	                                @NonNull LocalRoutingParameter navigationType,
-	                                @NonNull LocalRoutingParameter connectPointsStraightly,
-	                                boolean useIntermediateRtePoints) {
+									@NonNull LocalRoutingParameter passWholeRoute,
+									@NonNull LocalRoutingParameter navigationType,
+									@NonNull LocalRoutingParameter connectPointsStraightly,
+									boolean useIntermediateRtePoints) {
 		super(mapActivity);
 		this.passWholeRoute = passWholeRoute;
 		this.navigationType = navigationType;
@@ -43,47 +43,13 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 
 	@Override
 	protected void updateContent() {
+		setupPassWholeRoute(view.findViewById(R.id.pass_whole_route_container));
+		View navTypeContainer = view.findViewById(R.id.navigation_type_container);
 		if (userIntermediateRtePoints) {
-			setupConnectTrackPoints(view.findViewById(R.id.connect_track_points_container));
+			setupConnectTrackPoints(navTypeContainer, connectPointsStraightly);
 		} else {
-			setupPassWholeRoute(view.findViewById(R.id.pass_whole_route_container));
-			setupNavigationType(view.findViewById(R.id.navigation_type_container));
+			setupNavigationType(navTypeContainer, navigationType);
 		}
-	}
-
-	private void setupConnectTrackPoints(final View parameterView) {
-		AndroidUiHelper.updateVisibility(parameterView, true);
-
-		TextView description = parameterView.findViewById(R.id.description);
-		View buttonsView = parameterView.findViewById(R.id.custom_radio_buttons);
-		TextView leftButton = parameterView.findViewById(R.id.left_button);
-		TextView rightButton = parameterView.findViewById(R.id.right_button);
-
-		boolean enabled = connectPointsStraightly.isSelected(app.getSettings());
-		CustomRadioButtonType buttonType = enabled ? END : START;
-		UiUtilities.updateCustomRadioButtons(app, buttonsView, nightMode, buttonType);
-
-		ApplicationMode routingProfile = app.getRoutingHelper().getAppMode();
-		leftButton.setText(routingProfile.toHumanString());
-		rightButton.setText(R.string.routing_profile_straightline);
-		description.setText(R.string.connect_track_points_as);
-
-		leftButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (connectPointsStraightly.isSelected(app.getSettings())) {
-					applyParameter(parameterView, connectPointsStraightly, START, false);
-				}
-			}
-		});
-		rightButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (!connectPointsStraightly.isSelected(app.getSettings())) {
-					applyParameter(parameterView, connectPointsStraightly, END, true);
-				}
-			}
-		});
 	}
 
 	private void setupPassWholeRoute(final View parameterView) {
@@ -120,35 +86,56 @@ public class NavigateTrackOptionsCard extends MapBaseCard {
 		});
 	}
 
-	private void setupNavigationType(final View parameterView) {
-		AndroidUiHelper.updateVisibility(parameterView, true);
+	private void setupConnectTrackPoints(View parameterView, LocalRoutingParameter parameter) {
+		setupParameterView(parameterView, parameter);
 
-		View buttonsView = parameterView.findViewById(R.id.custom_radio_buttons);
 		TextView description = parameterView.findViewById(R.id.description);
 		TextView leftButton = parameterView.findViewById(R.id.left_button);
 		TextView rightButton = parameterView.findViewById(R.id.right_button);
 
+		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+		leftButton.setText(appMode.toHumanString());
+		rightButton.setText(R.string.routing_profile_straightline);
+		description.setText(R.string.connect_track_points_as);
+	}
+
+	private void setupNavigationType(View parameterView, LocalRoutingParameter parameter) {
+		setupParameterView(parameterView, parameter);
+
+		TextView description = parameterView.findViewById(R.id.description);
+		TextView leftButton = parameterView.findViewById(R.id.left_button);
+		TextView rightButton = parameterView.findViewById(R.id.right_button);
+
+		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
 		description.setText(R.string.nav_type_hint);
 		leftButton.setText(R.string.routing_profile_straightline);
-		rightButton.setText(app.getRoutingHelper().getAppMode().toHumanString());
+		rightButton.setText(appMode.toHumanString());
+	}
 
-		boolean enabled = navigationType.isSelected(app.getSettings());
+	private void setupParameterView(final View parameterView, LocalRoutingParameter parameter) {
+		AndroidUiHelper.updateVisibility(parameterView, true);
+
+		View buttonsView = parameterView.findViewById(R.id.custom_radio_buttons);
+		TextView leftButton = parameterView.findViewById(R.id.left_button);
+		TextView rightButton = parameterView.findViewById(R.id.right_button);
+
+		boolean enabled = parameter.isSelected(app.getSettings());
 		CustomRadioButtonType buttonType = enabled ? END : START;
 		UiUtilities.updateCustomRadioButtons(app, buttonsView, nightMode, buttonType);
 
 		leftButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (navigationType.isSelected(app.getSettings())) {
-					applyParameter(parameterView, navigationType, START, false);
+				if (parameter.isSelected(app.getSettings())) {
+					applyParameter(parameterView, parameter, START, false);
 				}
 			}
 		});
 		rightButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (!navigationType.isSelected(app.getSettings())) {
-					applyParameter(parameterView, navigationType, END, true);
+				if (!parameter.isSelected(app.getSettings())) {
+					applyParameter(parameterView, parameter, END, true);
 				}
 			}
 		});

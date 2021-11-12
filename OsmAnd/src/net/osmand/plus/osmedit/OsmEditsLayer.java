@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +24,9 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.layers.ContextMenuLayer;
+import net.osmand.plus.views.layers.ContextMenuLayer.ApplyMovedObjectCallback;
+import net.osmand.plus.views.layers.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.layers.ContextMenuLayer.IMoveObjectProvider;
 import net.osmand.plus.views.layers.MapTextLayer;
 import net.osmand.plus.views.layers.MapTextLayer.MapTextProvider;
 
@@ -32,9 +34,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider,
-		ContextMenuLayer.IMoveObjectProvider, MapTextProvider<OpenstreetmapPoint> {
+public class OsmEditsLayer extends OsmandMapLayer implements IContextMenuProvider, IMoveObjectProvider,
+		MapTextProvider<OpenstreetmapPoint> {
+
 	private static final int startZoom = 10;
+
 	private final OsmandApplication app;
 	private final OsmEditingPlugin plugin;
 	private final Context ctx;
@@ -89,7 +93,7 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	private List<OsmPoint> drawPoints(Canvas canvas, RotatedTileBox tileBox,
-	                                  List<? extends OsmPoint> objects, List<LatLon> fullObjectsLatLon) {
+									  List<? extends OsmPoint> objects, List<LatLon> fullObjectsLatLon) {
 		float iconSize = getIconSize(app);
 		List<OsmPoint> fullObjects = new ArrayList<>();
 		for (OsmPoint o : objects) {
@@ -172,8 +176,8 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	private int getFromPoint(RotatedTileBox tileBox, List<? super OsmPoint> am, int ex, int ey, int compare,
-	                         int radius, List<? extends OsmPoint> pnts) {
-		for (OsmPoint n : pnts) {
+							 int radius, List<? extends OsmPoint> points) {
+		for (OsmPoint n : points) {
 			int x = (int) tileBox.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 			int y = (int) tileBox.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
 			if (calculateBelongs(ex, ey, x, y, compare)) {
@@ -238,7 +242,6 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		return null;
 	}
 
-
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof OsmPoint) {
@@ -263,14 +266,14 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	}
 
 	@Override
-	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position, @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback) {
+	public void applyNewObjectPosition(@NonNull Object o, @NonNull LatLon position, @Nullable ApplyMovedObjectCallback callback) {
 		if (o instanceof OsmPoint) {
 			if (o instanceof OpenstreetmapPoint) {
 				OpenstreetmapPoint objectInMotion = (OpenstreetmapPoint) o;
 				Entity entity = objectInMotion.getEntity();
 				entity.setLatitude(position.getLatitude());
 				entity.setLongitude(position.getLongitude());
-				new SaveOsmChangeAsyncTask(mOsmChangeUtil, callback, objectInMotion).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				new SaveOsmChangeAsyncTask(mOsmChangeUtil, objectInMotion, callback).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else if (o instanceof OsmNotesPoint) {
 				OsmNotesPoint objectInMotion = (OsmNotesPoint) o;
 				objectInMotion.setLatitude(position.getLatitude());
@@ -304,72 +307,5 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	@Override
 	public boolean isFakeBoldText() {
 		return false;
-	}
-
-	static class SaveOsmChangeAsyncTask extends AsyncTask<Void, Void, Entity> {
-		private final OpenstreetmapLocalUtil mOpenstreetmapUtil;
-		@Nullable
-		private final ContextMenuLayer.ApplyMovedObjectCallback mCallback;
-		private final OpenstreetmapPoint objectInMotion;
-
-		SaveOsmChangeAsyncTask(OpenstreetmapLocalUtil openstreetmapUtil,
-		                       @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback, OpenstreetmapPoint objectInMotion) {
-			this.mOpenstreetmapUtil = openstreetmapUtil;
-			this.mCallback = callback;
-			this.objectInMotion = objectInMotion;
-		}
-
-		@Override
-		protected Entity doInBackground(Void... params) {
-			Entity entity = objectInMotion.getEntity();
-			return mOpenstreetmapUtil.commitEntityImpl(objectInMotion.getAction(), entity,
-					mOpenstreetmapUtil.getEntityInfo(entity.getId()), "", false, null);
-		}
-
-		@Override
-		protected void onPostExecute(Entity newEntity) {
-			if (mCallback != null) {
-				mCallback.onApplyMovedObject(newEntity != null, objectInMotion);
-			}
-		}
-	}
-
-	private static class SaveOsmNoteAsyncTask extends AsyncTask<OsmNotesPoint, Void, OsmNotesPoint> {
-		private final String mText;
-		private final Context mContext;
-		@Nullable
-		private final ContextMenuLayer.ApplyMovedObjectCallback mCallback;
-		private final OsmEditingPlugin plugin;
-		private final OsmBugsUtil mOsmbugsUtil;
-
-		public SaveOsmNoteAsyncTask(String text,
-		                            @NonNull Context context,
-		                            @Nullable ContextMenuLayer.ApplyMovedObjectCallback callback,
-		                            OsmEditingPlugin plugin, OsmBugsUtil osmbugsUtil) {
-			mText = text;
-			mContext = context;
-			mCallback = callback;
-			this.plugin = plugin;
-			mOsmbugsUtil = osmbugsUtil;
-		}
-
-		@Override
-		protected OsmNotesPoint doInBackground(OsmNotesPoint... params) {
-			OsmNotesPoint mOsmNotesPoint = params[0];
-			OsmPoint.Action action = mOsmNotesPoint.getAction();
-			plugin.getDBBug().deleteAllBugModifications(mOsmNotesPoint);
-			OsmBugsUtil.OsmBugResult result = mOsmbugsUtil.commit(mOsmNotesPoint, mText, action);
-			return result == null ? null : result.local;
-		}
-
-		@Override
-		protected void onPostExecute(OsmNotesPoint point) {
-			if (point != null) {
-				Toast.makeText(mContext, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
-			}
-			if (mCallback != null) {
-				mCallback.onApplyMovedObject(point != null, point);
-			}
-		}
 	}
 }

@@ -79,6 +79,7 @@ public class WaypointHelper {
 	public static final int MAX = 5;
 	public static final int[] SEARCH_RADIUS_VALUES = {50, 100, 200, 500, 1000, 2000, 5000};
 	private static final double DISTANCE_IGNORE_DOUBLE_SPEEDCAMS = 150;
+	private static final double DISTANCE_IGNORE_DOUBLE_RAILWAYS = 50;
 
 	private List<List<LocationPointWrapper>> locationPoints = new ArrayList<>();
 	private ConcurrentHashMap<LocationPoint, Integer> locationPointsStates = new ConcurrentHashMap<>();
@@ -658,6 +659,7 @@ public class WaypointHelper {
 			return;
 		}
 		AlarmInfo prevSpeedCam = null;
+		AlarmInfo prevRailway = null;
 		for (AlarmInfo alarmInfo : route.getAlarmInfo()) {
 			AlarmInfoType type = alarmInfo.getType();
 			if (type == AlarmInfoType.SPEED_CAMERA) {
@@ -676,6 +678,12 @@ public class WaypointHelper {
 			} else if (type == AlarmInfoType.PEDESTRIAN) {
 				if (settings.SHOW_PEDESTRIAN.getModeValue(mode) || settings.SPEAK_PEDESTRIAN.getModeValue(mode)) {
 					addPointWrapper(alarmInfo, array, settings.SPEAK_PEDESTRIAN.getModeValue(mode));
+				}
+			} else if (type == AlarmInfoType.RAILWAY) {
+				if (prevRailway == null || MapUtils.getDistance(prevRailway.getLatitude(), prevRailway.getLongitude(),
+						alarmInfo.getLatitude(), alarmInfo.getLongitude()) >= DISTANCE_IGNORE_DOUBLE_RAILWAYS) {
+					addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));
+					prevRailway = alarmInfo;
 				}
 			} else if (settings.SHOW_TRAFFIC_WARNINGS.getModeValue(mode) || settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
 				addPointWrapper(alarmInfo, array, settings.SPEAK_TRAFFIC_WARNINGS.getModeValue(mode));

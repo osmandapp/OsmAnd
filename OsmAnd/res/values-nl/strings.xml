@@ -314,7 +314,7 @@
     <string name="osmand_net_previously_installed">Een oudere OsmAnd versie is al geïnstalleerd. Alle offline gegevens blijven werken in het nieuwe programma, maar Favorieten moeten worden geëxporteerd in de oude versie en dan worden geïmporteerd in de nieuwe.</string>
     <string name="build_installed">Versie {0} succesvol geïnstalleerd ({1}).</string>
     <string name="downloading_build">Downloaden versie…</string>
-    <string name="install_selected_build">Doorgaan met de installatie van OsmAnd - {0} van {1} {2} MB ?</string>
+    <string name="install_selected_build">Doorgaan met de installatie van OsmAnd - {0} van {1} {2} MB\?</string>
     <string name="loading_builds_failed">Het ophalen van de lijst met de versies van OsmAnd is mislukt</string>
     <string name="loading_builds">OsmAnd-versies worden geladen…</string>
     <string name="select_build_to_install">Kies de OsmAnd-versie om te installeren</string>
@@ -482,7 +482,7 @@
     <string name="router_service_descr">Online of offline routeberekening-dienst.</string>
     <string name="router_service">Routeberekening</string>
     <string name="sd_dir_not_accessible">De opslagmap op de geheugenkaart is niet toegankelijk!</string>
-    <string name="download_question">Download {0} - {1} ?</string>
+    <string name="download_question">Download {0} - {1}\?</string>
     <string name="download_question_exist">Offline gegevens voor {0} bestaan al ({1}). Wil je deze bijwerken ({2})?</string>
     <string name="address">Adres</string>
     <string name="downloading_list_indexes">Lijst van beschikbare regio\'s wordt gedownload…</string>
@@ -526,7 +526,7 @@
     <string name="osm_settings_descr">Instellingen voor OpenStreetMap.org (OSM) om OSM-bijdragen te maken.</string>
     <string name="data_settings_descr">Specificeer taal, download/herlaad gegevens.</string>
     <string name="data_settings">Gegevens</string>
-    <string name="osm_settings">OpenStreetMap bewerken</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap bewerken</string>
     <string name="auto_zoom_map_descr">Kaart automatisch zoomen naargelang de snelheid (wanneer de kaart gesynchroniseerd is met de huidige positie).</string>
     <string name="auto_zoom_map">Kaart automatisch zoomen</string>
     <string name="additional_settings">Extra instellingen</string>
@@ -620,7 +620,7 @@
     <string name="default_buttons_commit">Bevestigen</string>
     <string name="filter_current_poiButton">Filter</string>
     <string name="edit_filter_save_as_menu_item">Bewaar als</string>
-    <string name="edit_filter_delete_dialog_title">Verwijder dit filter\?</string>
+    <string name="edit_filter_delete_dialog_title">Verwijder deze filter\?</string>
     <string name="edit_filter_delete_message">Filter %1$s verwijderd</string>
     <string name="edit_filter_create_message">Filter \'%1$s\' aangemaakt</string>
     <string name="offline_navigation_not_available">OsmAnd offline navigatie is tijdelijk niet beschikbaar.</string>
@@ -890,8 +890,8 @@
     <string name="recording_photo_description">Foto %1$s %2$s</string>
     <string name="av_def_action_picture">Foto maken</string>
     <string name="recording_context_menu_precord">Foto maken</string>
-    <string name="stop_routing_confirm">Navigatie stoppen?</string>
-    <string name="clear_dest_confirm">Bestemming (en tussenpunten) wissen?</string>
+    <string name="stop_routing_confirm">Navigatie stoppen\?</string>
+    <string name="clear_dest_confirm">Bestemming (en tussenpunten) wissen\?</string>
     <string name="precise_routing_mode_descr">Schakel nauwkeurige routeberekening in om precieze routes te berekenen zonder fouten. Nog beperkt in afstand en langzaam.</string>
     <string name="precise_routing_mode">Nauwkeurige routeberekening (alpha)</string>
     <string name="local_indexes_cat_av">Audio/video-gegevens</string>
@@ -927,7 +927,7 @@
     <string name="files_limit">%1$d resterende bestanden</string>
     <string name="available_downloads_left">%1$d resterende bestanden nog te downloaden</string>
     <string name="install_paid">Volledige versie</string>
-    <string name="cancel_route">Annuleer route \?</string>
+    <string name="cancel_route">Annuleer route\?</string>
     <string name="cancel_navigation">Stop navigatie</string>
     <string name="clear_destination">Bestemming wissen</string>
     <string name="use_magnetic_sensor_descr">Gebruik magnetische sensor in plaats van oriëntatiesensor voor het kompas.</string>
@@ -1189,7 +1189,7 @@
     <string name="rendering_attr_showAccess_name">Toon tol en toegangsverboden</string>
     <string name="rendering_attr_showSurfaceGrade_name">Kwaliteit van wegen tonen</string>
     <string name="rendering_attr_showSurfaces_name">Wegoppervlak tonen</string>
-    <string name="rendering_attr_showCycleRoutes_name">Fietsroutes tonen</string>
+    <string name="rendering_attr_showCycleRoutes_name">Fietsroutes</string>
     <string name="map_preferred_locale_descr">Gewenste taal voor aanduidingen op de kaart (indien niet beschikbaar worden Engelse of plaatselijke namen gebruikt).</string>
     <string name="map_preferred_locale">Taal voor teksten op de kaart</string>
     <string name="local_map_names">Plaatselijke namen</string>
@@ -1219,7 +1219,7 @@
     <string name="pause_navigation">navigatie pauzeren</string>
     <string name="rendering_attr_alpineHiking_name">Alpinewandelschaal (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Paden volgens SAC-schaal kleuren.</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Extra laag met symbolen van wandelroutes</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Wandelroutes</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Paden speciaal kleuren.</string>
     <string name="rendering_attr_coloredBuildings_name">Gebouwen kleuren per soort</string>
     <string name="arrival_distance_factor_early">Vroegtijdig</string>
@@ -1481,7 +1481,7 @@
     <string name="shared_string_my_favorites">Favorieten</string>
     <string name="shared_string_tracks">GPX-tracks</string>
     <string name="shared_string_currently_recording_track">Huidige GPX-track</string>
-    <string name="local_osm_changes_upload_all_confirm">Je gaat %1$d wijziging(en) naar OSM sturen. Weet je dat zeker?</string>
+    <string name="local_osm_changes_upload_all_confirm">%1$d wijziging(en) naar OSM versturen\?</string>
     <string name="confirmation_to_clear_history">Wil je de geschiedenis verwijderen?</string>
     <string name="osmand_parking_overdue">overschreden</string>
     <string name="confirm_usage_speed_cameras">In veel landen (Duitsland, Frankrijk, Italië en meer) is het verboden om waarschuwingen voor snelheidscontroles te gebruiken. OsmAnd neemt geen verantwoording als je de wet overtreedt. Druk alleen op Ja als je deze functie mag gebruiken.</string>
@@ -1534,7 +1534,7 @@
     <string name="read_full_article">Lees volledig artikel (online)</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_show_details">Toon details</string>
-    <string name="local_recordings_delete_all_confirm">Je staat op het punt %1$d notities te verwijderen. Weet je dat zeker?</string>
+    <string name="local_recordings_delete_all_confirm">%1$d notities verwijderen\?</string>
     <string name="light_theme">Licht</string>
     <string name="dark_theme">Donker</string>
     <string name="lang_tl">Tagalog</string>
@@ -1596,7 +1596,7 @@
     <string name="lang_gl">Galicisch</string>
     <string name="lang_et">Estisch</string>
     <string name="lang_ceb">Cebuano</string>
-    <string name="do_you_like_osmand">Vind je Osmand fijn?</string>
+    <string name="do_you_like_osmand">Vind je OsmAnd fijn\?</string>
     <string name="we_really_care_about_your_opinion">We geven om je mening en horen graag van je.</string>
     <string name="rate_this_app">Beoordeel deze app</string>
     <string name="user_hates_app_get_feedback">Vertel ons waarom.</string>
@@ -1760,7 +1760,7 @@
     <string name="activate_seamarks_plugin">Activeer de Zeebakens-plugin</string>
     <string name="activate_srtm_plugin">Activeer de Hoogtelijnen-plugin</string>
     <string name="get_full_version">Volledige versie</string>
-    <string name="save_poi_without_poi_type_message">Deze POI echt bewaren zonder het type aan te geven?</string>
+    <string name="save_poi_without_poi_type_message">POI opslaan zonder het type te vermelden\?</string>
     <string name="poi_context_menu_modify_osm_change">Verander OSM-wijziging</string>
     <string name="dashboard_or_drawer_title">Kies tussen Dashboard of Menu</string>
     <string name="please_specify_poi_type_only_from_list">Geef het juiste type POI of sla dit over.</string>
@@ -1903,7 +1903,7 @@
     <string name="full_report">Volledig Verslag</string>
     <string name="open_street_map_login_and_pass">OSM loginnaam and wachtwoord</string>
     <string name="report">Verslag</string>
-    <string name="file_name_containes_illegal_char">Bestandsnaam bevat ongeldig teken</string>
+    <string name="file_name_containes_illegal_char">Ongeldig teken in bestandsnaam</string>
     <string name="no_map_markers_found">Markeervlaggetjes kun je via de kaart toevoegen</string>
     <string name="no_waypoints_found">Geen punten gevonden</string>
     <string name="rendering_value_thin_name">Dun</string>
@@ -1978,7 +1978,7 @@
     <string name="shared_string_change">Wijzig</string>
     <string name="get_started">Aan de slag</string>
     <string name="routing_attr_short_way_name">Economische route</string>
-    <string name="replace_favorite_confirmation">Wil je Favoriet %1$s inderdaad vervangen\?</string>
+    <string name="replace_favorite_confirmation">Vervang Favoriet %1$s\?</string>
     <string name="update_all_maps_now">Nu alle kaarten updaten\?</string>
     <string name="si_mi_meters">Mijl/meter</string>
     <string name="skip_map_downloading">Kaarten later downloaden</string>
@@ -2096,7 +2096,7 @@
     <string name="quick_action_add_favorite">Favoriet toevoegen</string>
     <string name="dialog_add_action_title">Actie toevoegen</string>
     <string name="quick_actions_delete">Sneltoets verwijderen</string>
-    <string name="quick_actions_delete_text">Weet je zeker dat je sneltoets \"%s\" wilt verwijderen\?</string>
+    <string name="quick_actions_delete_text">Sneltoets \"%s\" verwijderen\?</string>
     <string name="quick_favorites_show_favorites_dialog">Toon Favorieten-scherm</string>
     <string name="quick_favorites_name_preset">Naam voorstellen</string>
     <string name="quick_action_add_marker_descr">Een toets om een Markeervlaggetje toe te voegen in het midden van het scherm.</string>
@@ -2707,7 +2707,7 @@
     <string name="download_wiki_region_placeholder">deze regio</string>
     <string name="wiki_article_search_text">Zoeken naar het bijbehorende wiki-artikel</string>
     <string name="wiki_article_not_found">Artikel niet gevonden</string>
-    <string name="how_to_open_wiki_title">Hoe Wikipedia-artikelen te openen?</string>
+    <string name="how_to_open_wiki_title">Hoe Wikipedia-artikelen openen\?</string>
     <string name="quick_action_edit_actions">Wijzig sneltoetsen</string>
     <string name="shared_string_bookmark">Bladwijzer</string>
     <string name="point_deleted">Punt %1$s verwijderd</string>
@@ -3043,7 +3043,7 @@
     <string name="routing_attr_prefer_unpaved_name">Voorkeur voor onverharde wegen</string>
     <string name="routing_attr_prefer_unpaved_description">Voorkeur voor onverharde wegen.</string>
     <string name="update_all_maps">Alle kaarten bijwerken</string>
-    <string name="update_all_maps_q">Weet je zeker dat je alle (%1$d) kaarten wil bijwerken\?</string>
+    <string name="update_all_maps_q">Werk alle (%1$d) kaarten bij\?</string>
     <string name="apply_preference_to_all_profiles">Je kunt deze wijziging op alle of alleen op het geselecteerde profiel toepassen.</string>
     <string name="shared_preference">Gedeeld</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Voorkeur voor onverharde wegen</string>
@@ -3053,7 +3053,6 @@
     <string name="enter_path_to_folder">Voer locatie naar de map in</string>
     <string name="shared_string_select_folder">Map…</string>
     <string name="move_maps_to_new_destination">Verplaats naar de nieuwe locatie</string>
-    <string name="internal_app_storage_description">Interne opslag voor OsmAnd (verborgen voor gebruikers en andere apps).</string>
     <string name="tts_initialization_error">Kan tekst-naar-spraak service niet starten.</string>
     <string name="export_profile">Exporteer profiel</string>
     <string name="exported_osmand_profile">OsmAnd profiel: %1$s</string>
@@ -3146,7 +3145,7 @@
     <string name="special_routing_type">Speciale routering</string>
     <string name="third_party_routing_type">Third-party routering</string>
     <string name="quick_action_need_to_add_item_to_list">Voeg tenminste één item toe aan de lijst via de instelling \'Sneltoetsen\'</string>
-    <string name="routing_attr_piste_type_downhill_name">Alpine/afdaling ski</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpine skiën en ski-afdalingen</string>
     <string name="routing_attr_piste_type_downhill_description">Hellingen voor alpine en bergafwaarts skiën en toegang tot skiliften.</string>
     <string name="routing_attr_piste_type_nordic_name">Cross country en langlaufen</string>
     <string name="routing_attr_piste_type_nordic_description">Sporen voor nordic of cross-country skiën.</string>
@@ -3575,7 +3574,7 @@
     <string name="map_source_zoom_levels">Stel een minimum en maximum zoomniveau in om de online kaart te tonen of te laden.</string>
     <string name="shared_string_delete_all_q">Alles wissen\?</string>
     <string name="export_import_quick_actions_with_profiles_promo">Snelle acties kunnen geëxporteerd of geïmporteerd worden met app-profielen.</string>
-    <string name="delete_all_actions_message_q">Weet je zeker dat je %d sneltoetsen onherroepelijk wil verwijderen\?</string>
+    <string name="delete_all_actions_message_q">Onherroepelijk de %d sneltoetsen verwijderen\?</string>
     <string name="speed_cameras_legal_descr">In sommige landen of regio’s is het gebruik van toepassingen om te waarschuwen voor snelheidscamera’s in strijd met de wet.
 \n
 \nMaak een keuze op basis van de geldende wet.
@@ -4132,7 +4131,6 @@
     <string name="use_login_and_password">Gebruik gebruikersnaam en wachtwoord</string>
     <string name="available_until">Beschikbaar tot %1$s</string>
     <string name="enough_contributions_descr">Proficiat, je hebt genoeg bijdragen geleverd aan OpenStreetMap en kan nu genieten van onbeperkte OsmAnd kaart updates!</string>
-    <string name="not_enough_contributions_descr">Er zijn minsten %1$s OpenStreetMap bijdragen nodig in %2$s dagen.</string>
     <string name="shared_string_contributions">Bijdragen</string>
     <string name="contributions_may_calculate_with_delay">Het berekenen van de bijdragen kan enkele uren duren.</string>
     <string name="map_updates_are_unavailable_yet">Kaart updates zijn nog niet beschikbaar. :-(</string>
@@ -4167,4 +4165,143 @@
     <string name="routeInfo_smoothness_description">Voorziet een classificatieschema volgens de bruikbaarheid van een weg voor wielvoertuigen in het bijzonder voor de regelmatigheid en vlakte van de ondergrond.</string>
     <string name="shared_string_files">Bestanden</string>
     <string name="travel_route_types">Routetypes</string>
+    <string name="sample_wikivoyage">Voorbeeld van Wikivoyage</string>
+    <string name="search_title">Zoek: %1$s</string>
+    <string name="routing_attr_prefer_tactile_paving_description">Verkies blindengeleidestroken</string>
+    <string name="routing_attr_allow_gate_name">Gebruik van poorten toelaten</string>
+    <string name="routing_attr_allow_gate_description">Gebruik van poorten toelaten</string>
+    <string name="routing_attr_only_permitted_streets_name">Uitdrukkelijk toegestane straten</string>
+    <string name="routing_attr_only_permitted_ways_name">Uitdrukkelijk toegestane wegen</string>
+    <string name="routing_attr_only_permitted_ways_description">Gebruik enkel wegen (paden, land- en boswegen) die uitdrukkelijk zijn toegelaten</string>
+    <string name="active_till">Actief tot %1$s</string>
+    <string name="backup_restore_now">Herstel nu</string>
+    <string name="duration_moment_ago">een ogenblik geleden</string>
+    <string name="shared_string_mini">mini</string>
+    <string name="shared_string_relation">Relatie</string>
+    <string name="routes_color_by_type">Kleur routes in volgens…</string>
+    <string name="routing_attr_prefer_tactile_paving_name">Verkies blindengeleidestroken</string>
+    <string name="routing_attr_only_permitted_streets_description">Gebruik enkel straten die uitdrukkelijk zijn toegelaten</string>
+    <string name="routing_attr_prefer_horse_routes_description">Verkies paardrijroutes</string>
+    <string name="horseback_riding">Paardrijden</string>
+    <string name="routing_attr_prefer_horse_routes_name">Verkies paardrijroutes</string>
+    <string name="empty_category_name">Lege categorie naam</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_description">Kleur in volgens netwerkrelatie.</string>
+    <string name="option_available_only_in_osmand_pro">Deze optie is beschikbaar als onderdeel van het OsmAnd Pro abonnement.</string>
+    <string name="track_has_no_needed_data">Het pad bevat niet de nodige gegevens.</string>
+    <string name="logout_from_osmand_cloud">Log uit bij OsmAnd Cloud</string>
+    <string name="explore_wikipedia_offline">Verken Wikipedia offline.</string>
+    <string name="backup_version_history_removed">Alle versiehistoriek is verwijderd.</string>
+    <string name="backup_deleted_all_data_descr">Al je gegevens zijn succesvol verwijderd van OsmAnd Cloud.</string>
+    <string name="logout_from_osmand_cloud_decsr">Uitloggen\?
+\nJe zal opnieuw moeten aanmelden om je gegevens te herstellen of back-uppen.</string>
+    <string name="backup_delete_all_data_descr">Alle gegevens zullen worden verwijderd van OsmAnd Cloud. Lokale versies blijven onaangetast.</string>
+    <string name="download_server_version">Download de serverversie</string>
+    <string name="upload_local_version">Load lokale versie op</string>
+    <string name="make_backup_descr">Er zijn vele veranderingen op dit apparaat. Maak alsjeblieft een back-up om geen van deze verandering te verliezen.</string>
+    <string name="upload_gpx_description_hint">Indien je dit leeg laat zullen de track namen gebruikt worden als beschrijving. De ingevulde beschrijving word toegepast op iedere track.</string>
+    <string name="promo_subscription">Promotie op het abonnement</string>
+    <string name="backup_setup">Stel back-ups in</string>
+    <string name="on_hold_since">Op pauze gezet sinds %1$s</string>
+    <string name="backup_deleting_all_data_descr">Gelieve te wachten totdat de gegevens op OsmAnd cloud zijn verwijderd. Alle gegevens op het lokale apparaat blijven onaangetast.</string>
+    <string name="exit_pan_mode_descr">Tik op selecteren om de meedraai modus te verlaten</string>
+    <string name="amz_manage_subscription_descr">Om je abonnement te beheren maak je gebruik van de Amazon app op je toestel of open je je profiel op de Amazon.com website.</string>
+    <string name="osm_live_payment_subscription_management_amz">De betaling wordt in rekening gebracht op je Amazon account wanneer je de aankoop bevestigt.
+\n
+\nHet abonnement wordt automatisch verlengd tenzij het is geannuleerd voor de vernieuwingsdatum.
+\n
+\nBeheer of annuleer je abonnement op ieder moment via de Amazon instellingen.</string>
+    <string name="backup_version_history_delete_descr">Verwijder de versiegeschiedenis van verouderde gegevens van OsmAnd Cloud\?</string>
+    <string name="cancel_anytime_in_huawei_appgallery">Annuleer op ieder moment naar keuze in de Huawei AppGallery</string>
+    <string name="shared_string_learn_more">Meer weten</string>
+    <string name="osmand_maps_plus_tagline">Geniet van uitgebreide functionaliteit</string>
+    <string name="redeem_promo_code">Promotiecode bemachtigen</string>
+    <string name="not_available_with">Niet beschikbaar met %1$s</string>
+    <string name="continue_with">Verdergaan met %1$s</string>
+    <string name="ltr_or_rtl_combine_via_or">%1$s of %2$s</string>
+    <string name="icon_group_nautical">Nautisch</string>
+    <string name="backup_delete_types_descr">Verwijder alle gegevens waarvan de gegevens zijn verouderd van OsmAnd Cloud\?</string>
+    <string name="osmand_cloud_help_descr">Hulp nodig\? Neem gelieve contact met ons op via %1$s.</string>
+    <string name="purchases_feature_desc_pro_widgets">Krijg toegang tot OsmAnd Pro functies zoals routekleuringen en meer.</string>
+    <string name="backup_welcome_back_descr">Herstel jouw gegevens op dit apparaat gebruikmakend van bestaande back-ups of back-up je gegevens naar OsmAnd Cloud.</string>
+    <string name="release_4_0">• Cloud back-ups
+\n
+\n• Nachtmodus voor de \"Topo\" kaartstijl
+\n
+\n• Mogelijkheid om contourlijnen te downloaden in voet
+\n
+\n• Het kleuren van tracks volgens snelheid, hoogte of helling
+\n
+\n• De mogelijkheid om de verschijning van de routelijn te veranderen
+\n
+\n• Een vernieuwd scherm om tracks op te nemen
+\n
+\n• Afstand bij tikken is verhuisd van de cirkel meetlat naar een aparte optie
+\n
+\n• De plan een route functie kan nu verschillende navigatie opties combineren zonder de functie te verlaten
+\n
+\n• Een nieuw aankoop scherm met gedetailleerde informatie
+\n
+\n• OsmAnd Live updates zijn verhuisd van Downloads naar Updates
+\n
+\n</string>
+    <string name="osmand_pro_tagline">Geniet van een maximum aan functies</string>
+    <string name="shared_string_details">Details</string>
+    <string name="shared_app_storage_description">Het gedeeld geheugen is niet langer beschikbaar wegens veranderingen in Androids opslag gebruik.</string>
+    <string name="internal_app_storage_description">Interne opslag, verborgen voor gebruikers en andere apps, dus niemand buiten OsmAnd heeft toegang tot jouw gegevens.</string>
+    <string name="shared_string_articles">Artikelen</string>
+    <string name="shared_storage_warning_title">Veranderingen in de opslag gebruik regels</string>
+    <string name="purchases_feature_desc_android_auto">OsmAnd offline kaarten en navigatie op het scherm van je wagen met gemakkelijke integratie met de besturing van je wagen.</string>
+    <string name="included_categories">Inbegrepen categorieën</string>
+    <string name="release_4_1">• Initiële ondersteuning voor Android Auto
+\n
+\n• Geüpdatete gebruikersinterface om UTM coördinaten te zoeken
+\n
+\n• Mogelijkheid om recent gebruikte iconen te zien bij favorieten
+\n
+\n• De routeplanning zal het geselecteerde profiel gebruiken na opstart
+\n
+\n• De Mapilarylaag is nu standaard uitgeschakeld
+\n
+\n• Een nieuw scherm toegevoegd om de geschiedenis te beheren in de app
+\n
+\n• De maporiëntatie wordt niet gereset na het herstarten van de app
+\n
+\n• Verbeterde SRTM hoogte markering
+\n
+\n• Weergave van arabische opschriften opgelost
+\n
+\n• Verscheidene routingsproblemen opgelost
+\n
+\n</string>
+    <string name="no_plugins_enabled">Je hebt geen plug-ins ingeschakeld. Je kan een lijst van beschikbare plug-ins vinden onder \'Menu\' → \'Plug-ins\'.</string>
+    <string name="delete_history_items_descr">Ben je zeker dat je de geselecteerde items uit je geschiedenis wil verwijderen\?</string>
+    <string name="use_external_timestamps">Gebruik externe tijdstempels</string>
+    <string name="display_route_tracks">Tracks weergeven</string>
+    <string name="android_auto_purchase_request_title">Koop OsmAnd Pro of Maps+ om OsmAnd met Android Auto te gebruiken</string>
+    <string name="shared_string_travelbooks">Reisboeken</string>
+    <string name="search_history_is_disabled_descr">Je kan de zoekgeschiedenis inschakelen via de instellingen.</string>
+    <string name="markers_history_is_disabled_descr">Schakel de geschiedenis in om een lijst van bezochte map markeringen te onthouden.</string>
+    <string name="history_is_disabled_descr">Schakel de geschiedenis in om sneller toegang te krijgen tot je laatst gebruikte resultaten.</string>
+    <string name="is_disabled">%1$s is uitgeschakeld</string>
+    <string name="clear_all_history_warning">Verwijder alle geschiedenisitems waaronder zoekgeschiedenis, navigatie en markeringen\?</string>
+    <string name="clear_all_history">Verwijder alle geschiedenis</string>
+    <string name="history_actions_descr">Je kan de geschiedenis exporteren naar een bestand.</string>
+    <string name="map_markers_history">Geschiedenis van mapmarkeringen</string>
+    <string name="navigation_history">Navigatie geschiedenis</string>
+    <string name="history_preferences_descr">Je kan het verzamelen van geschiedenis voor ieder item individueel uitschakelen.</string>
+    <string name="shortcut_start_recording">Opname starten</string>
+    <string name="shortcut_navigate_to">Navigeer naar…</string>
+    <string name="shortcut_navigate_to_work">Navigeer naar \'Werk\'</string>
+    <string name="shortcut_navigate_to_home">Navigeer naar \'Huis\'</string>
+    <string name="android_auto_map_placeholder_descr">Verbreek de verbinding van je toestel met Android Auto om de kaart terug in de app weer te geven.</string>
+    <string name="continue_on_phone">Ga verder op je telefoon</string>
+    <string name="location_access_request_title">OsmAnd heeft toegang nodig tot je locatie om te kunnen navigeren.</string>
+    <string name="location_access_request_action">Verleen toegang</string>
+    <string name="location_access_request_result">Goedgekeurd: %1$s Afgewezen: %2$s</string>
+    <string name="safe_settings">Veilig</string>
+    <string name="use_external_timestamps_description">Gebruik de tijdstempels van de online router om de geschatte tijd en gemiddelde snelheid aan te passen</string>
+    <string name="delete_history_items">Verwijder %1$s items uit je geschiedenis\?</string>
+    <string name="quick_action_toggle_preference">Een knop om te schakelen tussen je voorkeursstatus.</string>
+    <string name="display_route_tracks_as_poi">Geef tracks weer als POI</string>
+    <string name="android_auto_map_placeholder_title">De kaart wordt op het wagenscherm weergegeven.</string>
 </resources>

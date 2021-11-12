@@ -1,6 +1,8 @@
 package net.osmand.plus.resources;
 
 
+import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
+
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
@@ -9,13 +11,14 @@ import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import net.osmand.AndroidUtils;
-import net.osmand.Collator;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -69,18 +72,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import static net.osmand.IndexConstants.VOICE_INDEX_DIR;
 
 /**
  * Resource manager is responsible to work with all resources
@@ -939,7 +939,11 @@ public class ResourceManager {
 		Collections.sort(fileNames, Algorithms.getStringVersionComparator());
 		List<AmenityIndexRepository> res = new ArrayList<>();
 		for (String fileName : fileNames) {
-			if (!includeTravel && fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+			if (!includeTravel) {
+				if (fileName.endsWith(IndexConstants.BINARY_TRAVEL_GUIDE_MAP_INDEX_EXT)) {
+					continue;
+				}
+			} else if (!context.getTravelRendererHelper().getFileVisibilityProperty(fileName).get()) {
 				continue;
 			}
 			AmenityIndexRepository r = amenityRepositories.get(fileName);
@@ -981,17 +985,18 @@ public class ResourceManager {
 	}
 
 	@NonNull
-	public List<PoiSubType> searchPoiSubTypesByPrefix(@NonNull String prefix) {
-		List<PoiSubType> poiSubTypes = new ArrayList<>();
+	public List<String> searchPoiSubTypesByPrefix(@NonNull String prefix) {
+		Set<String> poiSubTypes = new HashSet<>();
 		for (AmenityIndexRepository index : getAmenityRepositories()) {
 			if (index instanceof AmenityIndexRepositoryBinary) {
 				AmenityIndexRepositoryBinary repository = (AmenityIndexRepositoryBinary) index;
-				poiSubTypes.addAll(repository.searchPoiSubTypesByPrefix(prefix));
+				List<PoiSubType> subTypes = repository.searchPoiSubTypesByPrefix(prefix);
+				for (PoiSubType subType : subTypes) {
+					poiSubTypes.add(subType.name);
+				}
 			}
 		}
-		final Collator collator = OsmAndCollator.primaryCollator();
-		Collections.sort(poiSubTypes, (o1, o2) -> collator.compare(o1.name, o2.name));
-		return poiSubTypes;
+		return new ArrayList<>(poiSubTypes);
 	}
 
 	public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter,

@@ -900,7 +900,7 @@
     <string name="reading_indexes">Yerel veri okunuyor…</string>
     <string name="saving_gpx_tracks">GPX dosyası kaydediliyor…</string>
     <string name="data_settings_descr">Dili belirtin, verileri indirin/yeniden yükleyin.</string>
-    <string name="osm_settings">OpenStreetMap düzenleme</string>
+    <string name="osm_editing_plugin_name">OpenStreetMap düzenleme</string>
     <string name="app_settings">Uygulama ayarları</string>
     <string name="search_address">Adres ara</string>
     <string name="choose_building">Bina seç</string>
@@ -3178,7 +3178,6 @@
     <string name="paste_Osmand_data_folder_path">OsmAnd verilerinin bulunduğu klasörün yolunu yapıştırın</string>
     <string name="change_osmand_data_folder_question">OsmAnd veri klasörü değiştirilsin mi\?</string>
     <string name="move_maps_to_new_destination">Yeni hedefe taşı</string>
-    <string name="internal_app_storage_description">OsmAnd için dahili depolama alanı (kullanıcılardan ve diğer uygulamalardan gizlenir).</string>
     <string name="change_data_storage_folder">Depolama klasörünü değiştir</string>
     <string name="rendering_attr_piste_type_snow_park_name">Arazi parkı</string>
     <string name="rendering_attr_piste_type_sleigh_name">Atlı kızak</string>
@@ -4298,7 +4297,6 @@
     <string name="use_login_and_password">Kullanıcı adı ve parola kullan</string>
     <string name="available_until">%1$s tarihine kadar kullanılabilir</string>
     <string name="enough_contributions_descr">Tebrikler, OpenStreetMap\'e yeterince katkıda bulundunuz ve artık sınırsız OsmAnd harita güncellemesinin keyfini çıkarabilirsiniz!</string>
-    <string name="not_enough_contributions_descr">OpenStreetMap\'a en az %1$s katkıda bulunma (%2$s gün içinde) gereklidir.</string>
     <string name="shared_string_contributions">Katkıda bulunmalar</string>
     <string name="contributions_may_calculate_with_delay">Katkıda bulunmaların hesaplanması birkaç saat sürebilir.</string>
     <string name="map_updates_are_unavailable_yet">Henüz harita güncellemeleri yok. :-(</string>
@@ -4327,4 +4325,7 @@
     <string name="service_is_not_available_please_try_later">Hizmet kullanılamıyor, lütfen daha sonra deneyin</string>
     <string name="shared_string_files">Dosyalar</string>
     <string name="travel_route_types">Güzergah türleri</string>
+    <string name="sample_wikivoyage">Örnek Wikivoyage</string>
+    <string name="shared_string_mini">küçük</string>
+    <string name="horseback_riding">At binme</string>
 </resources>

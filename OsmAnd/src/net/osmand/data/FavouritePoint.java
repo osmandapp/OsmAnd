@@ -1,5 +1,8 @@
 package net.osmand.data;
 
+import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
+import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -10,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -17,7 +21,6 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.mapmarkers.ItineraryDataHelper;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.settings.backend.BooleanPreference;
@@ -25,9 +28,6 @@ import net.osmand.plus.settings.backend.OsmandPreference;
 import net.osmand.util.Algorithms;
 
 import java.io.Serializable;
-
-import static net.osmand.plus.mapmarkers.ItineraryDataHelper.CREATION_DATE;
-import static net.osmand.plus.mapmarkers.ItineraryDataHelper.VISITED_DATE;
 
 
 public class FavouritePoint implements Serializable, LocationPoint {
@@ -145,6 +145,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public SpecialPointType getSpecialPointType() {
 		return specialPointType;
+	}
+
+	public boolean isHomeOrWork() {
+		return specialPointType == SpecialPointType.HOME || specialPointType == SpecialPointType.WORK;
 	}
 
 	public int getColor() {
@@ -389,7 +393,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public enum SpecialPointType {
 		HOME("home", R.string.home_button, R.drawable.mx_special_house),
 		WORK("work", R.string.work_button, R.drawable.mx_special_building),
-		PARKING("parking", R.string.map_widget_parking, R.drawable.mx_parking);
+		PARKING("parking", R.string.osmand_parking_position_name, R.drawable.mx_parking);
 
 		private String typeName;
 		@StringRes
@@ -506,11 +510,11 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		if (pt.getExtensionsToWrite().containsKey(VISITED_DATE)) {
 			String time = pt.getExtensionsToWrite().get(VISITED_DATE);
-			fp.setVisitedDate(ItineraryDataHelper.parseTime(time));
+			fp.setVisitedDate(GPXUtilities.parseTime(time));
 		}
 		if (pt.getExtensionsToWrite().containsKey(CREATION_DATE)) {
 			String time = pt.getExtensionsToWrite().get(CREATION_DATE);
-			fp.setCreationDate(ItineraryDataHelper.parseTime(time));
+			fp.setCreationDate(GPXUtilities.parseTime(time));
 		}
 		if (pt.getExtensionsToWrite().containsKey(CALENDAR_EXTENSION)) {
 			String calendarEvent = pt.getExtensionsToWrite().get(CALENDAR_EXTENSION);
@@ -541,10 +545,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
 		}
 		if (getVisitedDate() != 0) {
-			pt.getExtensionsToWrite().put(VISITED_DATE, ItineraryDataHelper.formatTime(getVisitedDate()));
+			pt.getExtensionsToWrite().put(VISITED_DATE, GPXUtilities.formatTime(getVisitedDate()));
 		}
 		if (getCreationDate() != 0) {
-			pt.getExtensionsToWrite().put(CREATION_DATE, ItineraryDataHelper.formatTime(getCreationDate()));
+			pt.getExtensionsToWrite().put(CREATION_DATE, GPXUtilities.formatTime(getCreationDate()));
 		}
 		if (getCalendarEvent()) {
 			pt.getExtensionsToWrite().put(CALENDAR_EXTENSION, "true");

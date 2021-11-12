@@ -43,6 +43,8 @@ public class ChoosePlanFragment extends BasePurchaseDialogFragment implements Ca
 	public static final String TAG = ChoosePlanFragment.class.getSimpleName();
 	private static final Log log = PlatformUtil.getLog(ChoosePlanFragment.class);
 
+	public static final String OPEN_CHOOSE_PLAN = "open_choose_plan";
+	public static final String CHOOSE_PLAN_FEATURE = "choose_plan_feature";
 	public static final String SELECTED_FEATURE = "selected_feature";
 
 	private LinearLayout listContainer;

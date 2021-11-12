@@ -159,7 +159,8 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		} else {
 			widthKey = view.getSettings().ROUTE_LINE_WIDTH.getModeValue(getAppMode());
 		}
-		return widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
+		float width = widthKey != null ? getWidthByKey(tileBox, widthKey) : attrs.paint.getStrokeWidth();
+		return width * getCarScaleCoef(false);
 	}
 
 	@Nullable
@@ -211,7 +212,7 @@ public abstract class BaseRouteLayer extends OsmandMapLayer {
 		matrix.reset();
 		matrix.postTranslate(0, -actionArrow.getHeight() / 2f);
 		matrix.postRotate((float) angle, actionArrow.getWidth() / 2f, 0);
-		if (scale > 1.0f) {
+		if (scale > 0) {
 			matrix.postScale(scale, scale);
 			scaledWidth *= scale;
 		}

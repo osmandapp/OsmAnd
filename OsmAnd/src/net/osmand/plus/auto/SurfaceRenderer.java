@@ -176,13 +176,6 @@ public final class SurfaceRenderer implements DefaultLifecycleObserver {
 	}
 
 	/**
-	 * Updates the markers drawn on the surface.
-	 */
-	public void updateMarkerVisibility(boolean showMarkers, int numMarkers, int activeMarker) {
-		renderFrame();
-	}
-
-	/**
 	 * Updates the location coordinate string drawn on the surface.
 	 */
 	public void updateLocation(@Nullable Location location) {

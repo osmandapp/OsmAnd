@@ -634,7 +634,7 @@ public class TileSourceManager {
 		final List<TileSourceTemplate> templates = new ArrayList<>();
 		try {
 			URLConnection connection = NetworkUtils.getHttpURLConnection((https ? "https" : "http")
-					+ "://test.osmand.net/tile_sources?" + versionAsUrl);
+					+ "://download.osmand.net/tile_sources?" + versionAsUrl);
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(connection.getInputStream(), "UTF-8");
 			int tok;

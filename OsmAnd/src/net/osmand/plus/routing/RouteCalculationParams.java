@@ -27,6 +27,7 @@ public class RouteCalculationParams {
 	public boolean targetTransportStop;
 	public boolean inPublicTransportMode;
 	public boolean extraIntermediates;
+	public boolean initialCalculation;
 
 	public RouteCalculationProgress calculationProgress;
 	public RouteCalculationProgressCallback calculationProgressCallback;

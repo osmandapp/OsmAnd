@@ -239,7 +239,9 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		editingCtx = new MeasurementEditingContext(requireMyApplication());
+		if (editingCtx == null) {
+			editingCtx = new MeasurementEditingContext(requireMyApplication());
+		}
 		onBackPressedCallback = new OnBackPressedCallback(true) {
 			public void handleOnBackPressed() {
 				quit(true);
@@ -555,8 +557,6 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 		});
 		updateToolbar();
 
-		final GpxData gpxData = editingCtx.getGpxData();
-
 		ImageButton snapToRoadBtn = mapActivity.findViewById(R.id.snap_to_road_image_button);
 		snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
 		snapToRoadBtn.setOnClickListener(new OnClickListener() {
@@ -596,6 +596,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 			}
 		});
 
+		GpxData gpxData = editingCtx.getGpxData();
 		initMeasurementMode(gpxData, savedInstanceState == null);
 		if (savedInstanceState == null) {
 			if (fileName != null) {
@@ -1849,6 +1850,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	}
 
 	protected static void showGpxOnMap(OsmandApplication app, GPXFile gpx, boolean isNewGpx) {
+		GPXUtilities.createArtificialPrimeMeridianPoints(gpx);
 		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 		if (sf != null && !isNewGpx) {
 			sf.processPoints(app);
@@ -1927,23 +1929,18 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 
 	private OnGlobalLayoutListener getWidgetsLayoutListener() {
 		if (widgetsLayoutListener == null) {
-			widgetsLayoutListener = new OnGlobalLayoutListener() {
-				@Override
-				public void onGlobalLayout() {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						int visibility = portrait ? View.INVISIBLE : View.GONE;
-						View rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
-						if (rightWidgetsPanel.getVisibility() != visibility) {
-							AndroidUiHelper.setVisibility(mapActivity, visibility,
-									R.id.map_left_widgets_panel,
-									R.id.map_right_widgets_panel,
-									R.id.map_center_info);
-							AndroidUiHelper.setVisibility(mapActivity, View.GONE,
-									R.id.map_route_info_button,
-									R.id.map_menu_button,
-									R.id.map_quick_actions_button);
-						}
+			widgetsLayoutListener = () -> {
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					View rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
+					if (rightWidgetsPanel.getVisibility() != View.GONE) {
+						AndroidUiHelper.setVisibility(mapActivity, View.GONE,
+								R.id.map_left_widgets_panel,
+								R.id.map_right_widgets_panel,
+								R.id.map_center_info,
+								R.id.map_route_info_button,
+								R.id.map_menu_button,
+								R.id.map_quick_actions_button);
 					}
 				}
 			};
@@ -2187,16 +2184,12 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	private void startTrackNavigation() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (editingCtx.hasRoute() || editingCtx.hasChanges()) {
-				String trackName = getSuggestedFileName();
-				GPXFile gpx = editingCtx.exportGpx(trackName);
-				if (gpx != null) {
-					ApplicationMode appMode = editingCtx.getAppMode();
-					dismiss(mapActivity);
-					runNavigation(gpx, appMode);
-				} else {
-					Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
-				}
+			String trackName = getSuggestedFileName();
+			GPXFile gpx = editingCtx.exportGpx(trackName);
+			if (gpx != null) {
+				ApplicationMode appMode = editingCtx.getAppMode();
+				dismiss(mapActivity);
+				runNavigation(gpx, appMode);
 			} else {
 				Toast.makeText(mapActivity, getString(R.string.error_occurred_saving_gpx), Toast.LENGTH_SHORT).show();
 			}
@@ -2246,5 +2239,4 @@ public class MeasurementToolFragment extends BaseOsmAndFragment implements Route
 	public interface OnUpdateInfoListener {
 		void onUpdateInfo();
 	}
-
 }

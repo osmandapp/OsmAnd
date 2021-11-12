@@ -4027,4 +4027,8 @@
     <string name="poi_payment_calling_cards_no">Ekki tekið við símakortum</string>
     <string name="poi_manufacturer">Framleiðandi</string>
     <string name="poi_callable">Hægt að ná í</string>
+    <string name="poi_groundskeeping">Garðvöruverslun</string>
+    <string name="poi_satellite_dish">Gervihnattadiskur</string>
+    <string name="poi_research_institute">Rannsóknastofnun</string>
+    <string name="poi_driver_training">Akstursæfingasvæði</string>
 </resources>
