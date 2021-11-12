@@ -4338,4 +4338,15 @@
 \n • Ажурирања за OsmAnd Уживо померена у „Преузми карте &gt; Надоградње”
 \n
 \n</string>
+    <string name="copying_file">Копирање датотеке %1$s</string>
+    <string name="progress_complete">%1$s завршено</string>
+    <string name="storage_copied_files_size">Копирано %1$s фајлова %2$s</string>
+    <string name="storage_copying_files_size">Копирање %1$s фајлова %2$s</string>
+    <string name="files_remaining">Преостале датотеке: %1$s %2$s</string>
+    <string name="storage_found_files_descr">Додирните „%1$s]“ да бисте копирали %2$s датотеке са „%3$s“ на „%4$s“. Може потрајати неко време.</string>
+    <string name="from_to_with_params">Од %1$s до %2$s</string>
+    <string name="storage_found_files_size">Пронађено %1$s фајлова %2$s</string>
+    <string name="shared_string_skip_warning">Да ли сте сигурни да желите да прескочите миграцију\? ОсмАнд више нема приступ вашим датотекама у дељеном складишту.
+\n
+\nАпликација ће почети у новом фолдеру са вашим подацима.</string>
 </resources>

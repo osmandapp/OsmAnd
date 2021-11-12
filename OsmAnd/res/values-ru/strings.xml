@@ -4417,4 +4417,30 @@
     <string name="delete_history_items">Удалить записи в истории (%1$s шт.)\?</string>
     <string name="delete_history_items_descr">Удалить выбранные записи\?</string>
     <string name="quick_action_toggle_preference">Переключатель для выбранного состояния предпочтений.</string>
+    <string name="from_to_with_params">Из %1$s в %2$s</string>
+    <string name="progress_complete">%1$s завершено</string>
+    <string name="shared_string_migration">Миграция</string>
+    <string name="shared_string_copy_to">Копировать в</string>
+    <string name="copying_completed">Копирование завершено</string>
+    <string name="start_copying">Начать копирование</string>
+    <string name="shared_storage_migration">Миграция общего хранилища</string>
+    <string name="shared_storage_migration_descr">В связи с изменениями правил доступа к хранилищу в Android, OsmAnd больше не может использовать %1$s.
+\n
+\nВам необходимо скопировать все свои данные в новое место хранения.</string>
+    <string name="shared_storage">Общее хранилище</string>
+    <string name="icon_group_education">Образование</string>
+    <string name="shared_storage_second_step">Нажмите «Использовать эту папку».</string>
+    <string name="folder_access_denied">Для доступа к выбранной папке требуется разрешение.</string>
+    <string name="skip_confirmation">Да, пропустить</string>
+    <string name="icon_group_industrial">Промышленность</string>
+    <string name="files_remaining">Осталось файлов: %1$s %2$s</string>
+    <string name="copying_file">Копирование файла %1$s</string>
+    <string name="storage_found_files_descr">Нажмите «%1$s», чтобы скопировать файлы %2$s из «%3$s» в «%4$s». Это может занять некоторое время.</string>
+    <string name="shared_storage_third_step">Предоставьте разрешение на доступ к папке. Без этого разрешения OsmAnd не может копировать файлы.</string>
+    <string name="shared_string_skip_warning">Вы уверены, что хотите пропустить миграцию\? OsmAnd больше не имеет доступа к вашим файлам в общем хранилище.
+\n
+\nПриложение запустится в новой папке с вашими данными.</string>
+    <string name="shared_storage_last_step">Вы сможете указать новое хранилище данных после выбора общего хранилища.</string>
+    <string name="shared_storage_first_step">Нажмите «%1$s».
+\nОткроется файловый менеджер, в котором нужно найти и открыть папку osmand.</string>
 </resources>

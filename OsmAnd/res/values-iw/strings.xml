@@ -4273,7 +4273,7 @@
     <string name="shared_string_files">קבצים</string>
     <string name="travel_route_types">סוגי מסלולים</string>
     <string name="no_items_of_type_message">אין לך פריטים מהסוג הזה</string>
-    <string name="routeInfo_roadClass_description">צביעת המסלול או מתאר הדרך בהתאם לסיווג הדרך.</string>
+    <string name="routeInfo_roadClass_description">צביעת המסלול או מתאר הדרך לפי סיווג הדרך.</string>
     <string name="sample_wikivoyage">דוגמה מוויקימסע</string>
     <string name="shared_string_mini">מוקטן</string>
     <string name="horseback_riding">רכיבה על סוסים</string>
@@ -4355,4 +4355,57 @@
     <string name="quick_action_toggle_preference">מתג להחלפת מצב העדפה נבחר.</string>
     <string name="delete_history_items_descr">למחוק את פריטי ההיסטוריה הנבחרים\?</string>
     <string name="delete_history_items">למחוק %1$s פריטי היסטוריה\?</string>
+    <string name="copying_file">הקובץ %1$s מועתק</string>
+    <string name="progress_complete">%1$s הושלמו</string>
+    <string name="storage_copied_files_size">%1$s קבצים הועתקו %2$s</string>
+    <string name="storage_copying_files_size">%1$s קבצים מועתקים %2$s</string>
+    <string name="storage_found_files_size">%1$s קבצים נמצאו %2$s</string>
+    <string name="shared_storage_last_step">תהיה לך אפשרות לציין אחסון נתונים חדש לאחר בחירה באחסון משותף.</string>
+    <string name="shared_storage_third_step">יש להעניק הרשאת גישה לתיקייה. ללא ההרשאה הזאת ל־OsmAnd הרשאה להעתיק קבצים.</string>
+    <string name="shared_storage_first_step">יש ללחוץ על „%1$s”.
+\nמנהל הקבצים ייפתח איפה שעליך לאתר ולפתוח את תיקיית osmand.</string>
+    <string name="folder_access_denied">נדרשת הרשאה כדי לגשת לתיקייה הנבחרת.</string>
+    <string name="shared_string_copy_to">העתקה אל</string>
+    <string name="start_copying">התחלת העתקה</string>
+    <string name="shared_storage">אחסון משותף</string>
+    <string name="shared_storage_migration">המרת אחסון משותף</string>
+    <string name="shared_string_migration">המרה</string>
+    <string name="icon_group_industrial">תעשייתי</string>
+    <string name="icon_group_education">חינוכי</string>
+    <string name="files_remaining">קבצים שנותרו: %1$s %2$s</string>
+    <string name="shared_string_skip_warning">לדלג על ההמרה\? ל־OsmAnd אין עוד קשר לקבצים באחסון המשותף שלך.
+\n
+\nהיישומון ייפתח בתיקייה החדשה עם הנתונים שלך.</string>
+    <string name="from_to_with_params">מתוך %1$s אל %2$s</string>
+    <string name="shared_storage_second_step">יש ללחוץ על „להשתמש בתיקייה זו”.</string>
+    <string name="copying_completed">ההעתקה הושלמה</string>
+    <string name="skip_confirmation">כן, לדלג</string>
+    <string name="storage_found_files_descr">יש לגעת ב־„%1$s” כדי להעתיק %2$s קבצים מתוך „%3$s” אל „%4$s”. עשוי לארוך זמן מה.</string>
+    <string name="shared_storage_migration_descr">עקב שינויים בכללי הגישה לאחסון ב־Android, ל־OsmAnd אין עוד אפשרות להשתמש ב־%1$s.
+\n
+\nעליך להעתיק את כל הנתונים שלך למקום האחסון החדש.</string>
+    <string name="shared_storage_warning_description">עקב כללים חדשים ב־Android, החל מנובמבר 2021, OsmAnd בגרסה 4.2 יאבד את הגישה לאחסון המשותף.
+\n
+\nנא להעביר את תיקיית הנתונים מהתיקייה המשותפת לאחסון הזמין, אחרת היישומון יאבד כישה לכל הנתונים שלך כגון מפות בלתי מקוונות, מסלולי GPX וכו׳.</string>
+    <string name="release_4_1">• נוספה תמיכה ראשונית ב־Android Auto
+\n
+\n • עדכון מנשק משתמש לחיפוש נקודות ציון UTM
+\n
+\n • מועדפים: נוספה היכולת לצפות בסמלים בהם נעשה שימוש לאחרונה
+\n
+\n • תכנון מסלול: ישתמש בפרופיל הנבחר לאחר ההפעלה
+\n
+\n • תוקנה שכבת Mapillary התוסף מושבת כרגע כבררת מחדל
+\n
+\n • נוסף מסך לניהול כל היסטוריית היישומון
+\n
+\n • כיוון המפה לא מתאפס לאחר הפעלת היישומון מחדש.
+\n
+\n • עיבוד סמן הגובה SRTM השתפר
+\n
+\n • הכיתוב הערבי במפה השתפר
+\n
+\n • תוקנו מגוון תקלות ניווט
+\n
+\n</string>
 </resources>

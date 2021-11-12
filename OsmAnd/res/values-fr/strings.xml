@@ -4403,4 +4403,35 @@
 \n - Correction de différents problèmes de routage
 \n
 \n</string>
+    <string name="from_to_with_params">De %1$s vers %2$s</string>
+    <string name="progress_complete">%1$s terminé</string>
+    <string name="storage_copied_files_size">%1$s fichiers copiés sur %2$s</string>
+    <string name="storage_copying_files_size">Copie de %1$s fichiers sur %2$s</string>
+    <string name="storage_found_files_size">%1$s fichiers trouvés sur %2$s</string>
+    <string name="storage_found_files_descr">Appuyez sur « %1$s » pour copier %2$s fichiers de « %3$s » vers « %4$s ». Cette opération peut prendre un peu de temps.</string>
+    <string name="shared_string_skip_warning">Souhaitez-vous vraiment ignorer la migration \? OsmAnd ne peut plus accéder à vos fichiers dans le stockage partagé.
+\n
+\nL\'application démarrera en utilisant un nouveau dossier de données.</string>
+    <string name="shared_storage_last_step">Vous pourrez indiquer un nouvel emplacement de stockage de vos données après avoir sélectionné le stockage partagé.</string>
+    <string name="shared_storage_third_step">Accordez l’accès au dossier. Sans cette autorisation, OsmAnd ne pourra pas copier les fichiers.</string>
+    <string name="shared_string_copy_to">Copier vers</string>
+    <string name="start_copying">Démarrer la copie</string>
+    <string name="skip_confirmation">Oui, ignorer</string>
+    <string name="shared_storage">Stockage partagé</string>
+    <string name="shared_storage_migration">Migration du stockage partagé</string>
+    <string name="shared_string_migration">Migration</string>
+    <string name="icon_group_industrial">Industrie</string>
+    <string name="shared_storage_migration_descr">En raison des modifications des règles d\'accès au stockage par Android, OsmAnd ne peut plus utiliser %1$s.
+\n
+\nVous devez copier toutes vos données vers le nouvel emplacement de stockage.</string>
+    <string name="copying_file">Copie du fichier %1$s</string>
+    <string name="shared_storage_second_step">Appuyez sur \"Utiliser ce dossier\".</string>
+    <string name="icon_group_education">Enseignement</string>
+    <string name="files_remaining">Fichiers restants : %1$s %2$s</string>
+    <string name="folder_access_denied">Une autorisation est requise pour accéder au dossier sélectionné.</string>
+    <string name="copying_completed">Copie terminée</string>
+    <string name="rendering_attr_natureReserves_description">Afficher les réserves naturelles, les zones protégées et les parcs nationaux.</string>
+    <string name="shared_storage_first_step">Appuyez sur \"%1$s\".
+\nLe gestionnaire de fichiers va afficher le dossier qui devrait contenir un dossier Osmand.</string>
+    <string name="not_enough_contributions_descr">Un minimum de %1$s modifications au cours des deux derniers mois %2$s est requis pour bénéficier de la mise à jour horaire des cartes en illimité.</string>
 </resources>

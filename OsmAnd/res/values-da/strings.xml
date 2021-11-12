@@ -4415,4 +4415,35 @@
     <string name="delete_history_items_descr">Er du sikker på, at du vil slette udvalgte historikelementer\?</string>
     <string name="delete_history_items">Slet %1$s historikelementer\?</string>
     <string name="quick_action_toggle_preference">En skifter til at ændre den valgte præference-indstilling.</string>
+    <string name="copying_file">Kopierer fil %1$s</string>
+    <string name="from_to_with_params">Fra %1$s til %2$s</string>
+    <string name="progress_complete">%1$s fuldført</string>
+    <string name="storage_found_files_descr">Tryk på “%1$s” for at kopiere %2$s filer fra “%3$s” til “%4$s”. Det kan tage noget tid.</string>
+    <string name="storage_copied_files_size">Kopierede %1$s filer %2$s</string>
+    <string name="storage_copying_files_size">Kopierer %1$s filer %2$s</string>
+    <string name="storage_found_files_size">Fandt %1$s filer %2$s</string>
+    <string name="shared_string_skip_warning">Er du sikker på, at du vil springe overflytningen over\? OsmAnd har ikke længere adgang til dine filer i Delt lager.
+\n
+\nApplikationen vil starte i den nye mappe med dine data.</string>
+    <string name="shared_storage_last_step">Du kan angive et nyt datalager, når du har valgt Delt lager.</string>
+    <string name="shared_storage_third_step">Giv tilladelse til at få adgang til mappen. Uden denne tilladelse kan OsmAnd ikke kopiere filer.</string>
+    <string name="shared_storage_first_step">Tryk på \"%1$s\".
+\nFilhåndteringsprogrammet åbnes, hvorefter du skal finde og åbne osmand-mappen.</string>
+    <string name="shared_storage_second_step">Tryk på \"Brug denne mappe\".</string>
+    <string name="folder_access_denied">Der kræves tilladelse for at få adgang til den valgte mappe.</string>
+    <string name="copying_completed">Kopiering fuldført</string>
+    <string name="shared_string_copy_to">Kopier til</string>
+    <string name="start_copying">Start kopiering</string>
+    <string name="skip_confirmation">Ja, spring over</string>
+    <string name="shared_storage_migration">Overflytning af delt lager</string>
+    <string name="shared_string_migration">Overflytning</string>
+    <string name="icon_group_education">Uddannelse</string>
+    <string name="icon_group_industrial">Industriel</string>
+    <string name="files_remaining">Resterende filer: %1$s %2$s</string>
+    <string name="shared_storage_migration_descr">På grund af ændringer i reglerne for adgang til lagerplads i Android kan OsmAnd ikke længere bruge %1$s.
+\n
+\nDu skal kopiere alle dine data til den nye lagringsplads.</string>
+    <string name="shared_storage">Delt lagerplads</string>
+    <string name="rendering_attr_natureReserves_description">Vis naturreservater, beskyttede områder og nationalparker.</string>
+    <string name="not_enough_contributions_descr">Der kræves mindst %1$s ændringer i løbet af de sidste to måneder %2$s for at få adgang til ubegrænsede kortopdateringer hver time.</string>
 </resources>
