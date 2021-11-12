@@ -4292,7 +4292,7 @@
     <string name="use_login_and_password">Use nome de usuário e senha</string>
     <string name="available_until">Disponível até %1$s</string>
     <string name="enough_contributions_descr">Parabéns, você forneceu contribuições suficientes do OpenStreetMap e agora pode desfrutar de atualizações ilimitadas do mapa OsmAnd!</string>
-    <string name="not_enough_contributions_descr">É necessário um mínimo de %1$s contribuições do OpenStreetMap em %2$s dias.</string>
+    <string name="not_enough_contributions_descr">É necessário um mínimo de %1$s alterações nos últimos dois meses %2$s para obter acesso para atualizações de mapa por hora ilimitadas.</string>
     <string name="shared_string_contributions">Contribuições</string>
     <string name="contributions_may_calculate_with_delay">O cálculo das contribuições pode levar várias horas.</string>
     <string name="map_updates_are_unavailable_yet">As atualizações do mapa ainda não estão disponíveis :-(</string>
@@ -4406,4 +4406,34 @@
     <string name="quick_action_toggle_preference">Uma alternância para alternar o estado de preferência selecionado.</string>
     <string name="delete_history_items_descr">Tem certeza de que deseja apagar os itens selecionados do histórico\?</string>
     <string name="delete_history_items">Apagar itens do histórico %1$s\?</string>
+    <string name="progress_complete">%1$s completo</string>
+    <string name="storage_found_files_descr">Toque em “%1$s” para copiar %2$s arquivos de “%3$s” para “%4$s”. Pode levar algum tempo.</string>
+    <string name="storage_copied_files_size">%1$s arquivos copiados %2$s</string>
+    <string name="storage_copying_files_size">Copiando %1$s arquivos %2$s</string>
+    <string name="shared_storage_second_step">Clique em \"Usar esta pasta\".</string>
+    <string name="folder_access_denied">É necessária permissão para acessar a pasta selecionada.</string>
+    <string name="copying_completed">Cópia concluída</string>
+    <string name="shared_string_copy_to">Copiar para</string>
+    <string name="skip_confirmation">Sim, pular</string>
+    <string name="shared_storage">Armazenamento compartilhado</string>
+    <string name="shared_storage_migration">Migração de armazenamento compartilhado</string>
+    <string name="shared_string_migration">Migração</string>
+    <string name="icon_group_education">Educação</string>
+    <string name="icon_group_industrial">Industrial</string>
+    <string name="rendering_attr_natureReserves_description">Mostre reservas naturais, áreas protegidas e parques nacionais.</string>
+    <string name="files_remaining">Arquivos restantes: %1$s %2$s</string>
+    <string name="copying_file">Copiando arquivo %1$s</string>
+    <string name="from_to_with_params">De %1$s para %2$s</string>
+    <string name="storage_found_files_size">%1$s arquivos encontrados %2$s</string>
+    <string name="shared_string_skip_warning">Tem certeza de que deseja pular a migração\? OsmAnd não tem mais acesso aos seus arquivos no armazenamento compartilhado.
+\n
+\nO aplicativo será iniciado na nova pasta com seus dados.</string>
+    <string name="shared_storage_last_step">Você poderá especificar um novo armazenamento de dados após selecionar armazenamento compartilhado.</string>
+    <string name="start_copying">Comece a copiar</string>
+    <string name="shared_storage_third_step">Dê permissão para acessar a pasta. Sem esta permissão, OsmAnd não pode copiar arquivos.</string>
+    <string name="shared_storage_first_step">Pressione \"%1$s\".
+\nO gerenciador de arquivos é aberto onde você precisa encontrar e abrir a pasta osmand.</string>
+    <string name="shared_storage_migration_descr">Devido a mudanças nas regras de acesso ao armazenamento no Android, OsmAnd não pode mais usar %1$s.
+\n
+\nVocê precisa copiar todos os seus dados para o novo local de armazenamento.</string>
 </resources>
