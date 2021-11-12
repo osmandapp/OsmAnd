@@ -32,6 +32,7 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.SkipMigrationBottomSheet.OnConfirmMigrationSkipListener;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
@@ -292,8 +293,9 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	}
 
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {
-		return VERSION.SDK_INT >= 30 && DataStorageHelper.isCurrentStorageShared(app)
-				&& !app.getSettings().SHARED_STORAGE_MIGRATION_DIALOG_SHOWN.get();
+		OsmandSettings settings = app.getSettings();
+		return VERSION.SDK_INT >= 30 && settings.getDefaultInternalStorage().exists()
+				&& !settings.SHARED_STORAGE_MIGRATION_DIALOG_SHOWN.get();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, boolean usedOnMap) {
