@@ -4209,4 +4209,6 @@
     <string name="poi_faculty_communication">Зв\'язку</string>
     <string name="poi_faculty_engineering">Інженерний</string>
     <string name="poi_faculty_psychology">Психології</string>
+    <string name="poi_escape_game">Квест-гра</string>
+    <string name="poi_tool_hire">Прокат інструментів</string>
 </resources>
