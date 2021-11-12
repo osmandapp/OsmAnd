@@ -4,7 +4,9 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="?attr/list_background_color">
+	android:background="?attr/list_background_color"
+	android:clickable="true"
+	android:focusable="true">
 
 	<ScrollView
 		android:id="@+id/list"
@@ -61,6 +63,7 @@
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
 						android:gravity="center_horizontal"
+						android:scrollbars="none"
 						android:text="1"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/default_list_text_size_large"
@@ -96,6 +99,7 @@
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
 						android:gravity="center_horizontal"
+						android:scrollbars="none"
 						android:text="2"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/default_list_text_size_large"
@@ -131,6 +135,7 @@
 						android:layout_width="@dimen/standard_icon_size"
 						android:layout_height="@dimen/standard_icon_size"
 						android:gravity="center_horizontal"
+						android:scrollbars="none"
 						android:text="3"
 						android:textColor="?attr/active_color_basic"
 						android:textSize="@dimen/default_list_text_size_large"
