@@ -487,8 +487,8 @@
     <string name="choose_intersected_street">Scegli incrocio</string>
     <string name="Closest_Amenities">Amenità più vicine</string>
     <string name="app_mode_default">Scorri la mappa</string>
-    <string name="app_mode_car">Alla guida</string>
-    <string name="app_mode_bicycle">In bicicletta</string>
+    <string name="app_mode_car">Automobile</string>
+    <string name="app_mode_bicycle">Bicicletta</string>
     <string name="app_mode_pedestrian">A piedi</string>
     <string name="position_on_map_center">Al centro</string>
     <string name="position_on_map_bottom">In basso</string>
@@ -2210,9 +2210,9 @@
     <string name="subscribe_email_error">Errore</string>
     <string name="subscribe_email_desc">Sottoscrivi la mailing list delle offerte dell\'applicazione e otterrai ulteriori 3 download di mappe!</string>
     <string name="quick_action_auto_zoom">Zoom della mappa automatico acceso/spento</string>
-    <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione si accende o spegne lo zoom automatico della mappa in base alla tua velocità.</string>
-    <string name="quick_action_auto_zoom_on">Abilita lo zoom automatico della mappa</string>
-    <string name="quick_action_auto_zoom_off">Disattiva lo zoom automatico della mappa</string>
+    <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione si accende o spegne lo zoom automatico in base alla velocità.</string>
+    <string name="quick_action_auto_zoom_on">Abilita lo zoom automatico</string>
+    <string name="quick_action_auto_zoom_off">Disattiva lo zoom automatico</string>
     <string name="quick_action_add_destination">Imposta destinazione</string>
     <string name="quick_action_replace_destination">Sostituisci la destinazione</string>
     <string name="quick_action_add_first_intermediate">Aggiungi il primo intermedio</string>
@@ -3290,7 +3290,7 @@
     <string name="edit_profiles">Modifica i profili</string>
     <string name="profile_appearance">Aspetto del profilo</string>
     <string name="choose_icon_color_name">Icona, colore e nome</string>
-    <string name="reorder_profiles">Modifica la lista del profilo</string>
+    <string name="reorder_profiles">Modifica la lista dei profili</string>
     <string name="selected_profile">Profilo selezionato</string>
     <string name="reset_confirmation_descr">Cliccando %1$s, tutte le modifiche andranno perse.</string>
     <string name="reset_all_profile_settings_descr">Tutte le impostazioni del profilo saranno reimpostate come da prima installazione.</string>
@@ -4293,7 +4293,7 @@
     <string name="cancel_anytime_in_huawei_appgallery">Cancellalo in ogni momento in Huawei AppGallery</string>
     <string name="cancel_anytime_in_gplay">Cancellalo in ogni momento in Google Play.</string>
     <string name="shared_string_not_included">Non include</string>
-    <string name="amz_manage_subscription_descr">Per gestire la tua sottoscrizione usa l\'app Amazon dal dispositivo o il tuo profilo nel sito Amazon.com.</string>
+    <string name="amz_manage_subscription_descr">Gestisci la tua sottoscrizione usando l\'app Amazon o dal sito Amazon.com.</string>
     <string name="no_activity_for_intent">Installa una applicazione che possa completare l\'azione.</string>
     <string name="grey_color_undefined">Il grigio è utilizzato per le parti in cui non sono presenti dati.</string>
     <string name="osm_live_payment_subscription_management_amz">Il pagamento viene addebitato sul tuo account Amazon alla conferma dell\'acquisto.
@@ -4365,12 +4365,12 @@
     <string name="navigation_history">Cronologia di navigazione</string>
     <string name="shortcut_start_recording">Avvia registrazione</string>
     <string name="shortcut_navigate_to">Naviga verso…</string>
-    <string name="shortcut_navigate_to_home">Naviga fino a casa</string>
+    <string name="shortcut_navigate_to_home">Naviga fino a \'Casa\'</string>
     <string name="android_auto_map_placeholder_descr">Scollega il tuo dispositivo da Android Auto per visualizzare la mappa nell\'app.</string>
     <string name="android_auto_purchase_request_title">Acquista OsmAnd Pro o Maps+ per utilizzare OsmAnd con Android Auto</string>
-    <string name="continue_on_phone">Prosegui sul telefono</string>
+    <string name="continue_on_phone">Prosegui sul dispositivo mobile</string>
     <string name="location_access_request_title">Per navigare OsmAnd ha bisogno di accedere alla localizzazione.</string>
-    <string name="location_access_request_action">Dai il permesso</string>
+    <string name="location_access_request_action">Concedi il permesso</string>
     <string name="transparent_status_bar">Barra di stato trasparente</string>
     <string name="map_markers_history">Cronologia dei marcatori della mappa</string>
     <string name="search_history_is_disabled_descr">Puoi abilitare la ricerca nella cronologia dalle Impostazioni.</string>
@@ -4380,7 +4380,7 @@
     <string name="location_access_request_result">Approvati: %1$s Rifiutati: %2$s</string>
     <string name="transparent_status_bar_descr">Mostra la mappa sotto la barra di stato</string>
     <string name="history_preferences_descr">Puoi disabilitare la registrazione della cronologia singolarmente per ogni tipo di cronologia.</string>
-    <string name="shortcut_navigate_to_work">Naviga fino al lavoro</string>
+    <string name="shortcut_navigate_to_work">Naviga fino al \'Lavoro\'</string>
     <string name="android_auto_map_placeholder_title">La mappa è visualizzata nello schermo del veicolo.</string>
     <string name="display_route_tracks">Mostra tracce</string>
     <string name="shared_string_travelbooks">Guide di viaggio</string>
@@ -4394,4 +4394,8 @@
     <string name="delete_history_items_descr">Sei sicuro di voler eliminare gli elementi della cronologia selezionati\?</string>
     <string name="delete_history_items">Eliminare gli elementi della cronologia %1$s\?</string>
     <string name="quick_action_toggle_preference">Un cursore per cambiare lo stato delle preferenze selezionate.</string>
+    <string name="shared_storage_warning_description">A causa delle nuove regole Android da novembre 2021 OsmAnd 4.2 perderà l\'accesso alla memoria condivisa.
+\n
+\nSposta i dati dalla Memoria condivisa alla memoria disponibile oppure l\'app perderà l\'accesso a dati quali mappe offline, tracce GPX, ecc.</string>
+    <string name="horseback_riding">A cavallo</string>
 </resources>
