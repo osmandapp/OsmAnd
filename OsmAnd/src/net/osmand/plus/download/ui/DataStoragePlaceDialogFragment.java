@@ -67,7 +67,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-							 Bundle savedInstanceState) {
+	                         Bundle savedInstanceState) {
 
 		Activity activity = getActivity();
 
@@ -119,7 +119,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		deviceStorageDescription.setText(AndroidUtils.getFreeSpace(activity, deviceStorage));
 
 		View sharedMemoryRow = view.findViewById(R.id.sharedMemoryRow);
-		if (hasExternalStoragePermission && sharedStorage != null) {
+		if (hasExternalStoragePermission && sharedStorage != null && Build.VERSION.SDK_INT < 30) {
 			sharedMemoryRow.setOnClickListener(sharedMemoryOnClickListener);
 			ImageView sharedMemoryImageView = (ImageView) view.findViewById(R.id.sharedMemoryImageView);
 			sharedMemoryImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_phone));
