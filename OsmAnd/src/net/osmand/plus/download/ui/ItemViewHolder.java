@@ -11,6 +11,7 @@ import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -31,19 +32,19 @@ import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsFragment;
-import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.chooseplan.ChoosePlanFragment;
+import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.download.CityItem;
 import net.osmand.plus.download.CustomIndexItem;
-import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadItem;
 import net.osmand.plus.download.DownloadResourceGroup;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.SelectIndexesHelper;
 import net.osmand.plus.download.SelectIndexesHelper.ItemsToDownloadSelectedListener;
-import net.osmand.plus.download.MultipleDownloadItem;
 import net.osmand.plus.download.ui.LocalIndexesFragment.LocalIndexOperationTask;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -104,7 +105,6 @@ public class ItemViewHolder {
 
 		ViewCompat.setAccessibilityDelegate(view, context.getAccessibilityAssistant());
 		ViewCompat.setAccessibilityDelegate(rightButton, context.getAccessibilityAssistant());
-		ViewCompat.setAccessibilityDelegate(rightImageButton, context.getAccessibilityAssistant());
 
 		TypedValue typedValue = new TypedValue();
 		Resources.Theme theme = context.getTheme();
@@ -167,6 +167,19 @@ public class ItemViewHolder {
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		nameTextView.setText(text);
+
+		rightImageButton.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+			public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+				super.onInitializeAccessibilityNodeInfo(host, info);
+				info.setContentDescription(context.getString(R.string.download) + text);
+				info.addAction(new AccessibilityNodeInfo.AccessibilityAction(
+						AccessibilityNodeInfo.ACTION_CLICK, context.getString(R.string.download)
+				));
+				info.setEnabled(host.isEnabled());
+			}
+		});
+
+
 		if (!disabled) {
 			nameTextView.setTextColor(textColorPrimary);
 		} else {
