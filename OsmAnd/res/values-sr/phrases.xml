@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="poi_fuel_type">Врста горива</string>
     <string name="poi_payment_type">Начин плаћања</string>
@@ -149,7 +149,6 @@
     <string name="poi_fabric">Продавница тканине</string>
     <string name="poi_doors">Врата</string>
     <string name="poi_erotic">Секс шоп</string>
-    
     <string name="poi_florist">Цвећара</string>
     <string name="poi_frame">Продавница рамова</string>
     <string name="poi_gift">Продавница поклона</string>
@@ -516,7 +515,6 @@
     <string name="poi_bailiff">Судски извршитељ</string>
     <string name="poi_migration">Миграционо</string>
     <string name="poi_tax_inspection">Пореска инспекција</string>
-    
     <string name="poi_isolated_dwelling">Изоловано место становања</string>
     <string name="poi_quarter">Четврт</string>
     <string name="poi_neighbourhood">Комшилук</string>
@@ -1466,7 +1464,6 @@
     <string name="poi_radiotechnics">Радиотехничка продавница</string>
     <string name="poi_ship_chandler">Бродска опрема</string>
     <string name="poi_stationery">Продавница канцеларијске опреме</string>
-    
     <string name="poi_trade">Трговачки терминал</string>
     <string name="poi_variety_store">Продавница мешане робе</string>
     <string name="poi_window_blind">Продавница прозорских застора</string>
@@ -1510,7 +1507,6 @@
     <string name="poi_weir">Ниска брана</string>
     <string name="poi_groyne">Седиментна брана</string>
     <string name="poi_power_substation">Подстаница</string>
-    
     <string name="poi_power_tower">Електрични торањ</string>
     <string name="poi_power_pole">Електрични стуб</string>
     <string name="poi_bell_tower">Телефонски торањ</string>
@@ -2523,7 +2519,7 @@
     <string name="poi_vehicle_military">Приступ возилом: војни</string>
     <string name="poi_vehicle_delivery">Приступ возилом: достава</string>
     <string name="poi_vehicle_forestry">Приступ возилом: шумски саобраћај</string>
-    <string name="poi_motorcar_yes">Приступ моторним аутом: да</string>
+    <string name="poi_motorcar_yes">Да</string>
     <string name="poi_motorcar_private">Приступ моторним аутом: приватни</string>
     <string name="poi_motorcar_no">Приступ моторним аутом: не</string>
     <string name="poi_motorcar_destination">Приступ моторним аутом: само до одредишта</string>
@@ -3096,7 +3092,6 @@
     <string name="poi_organic_no">Не</string>
     <string name="poi_organic_yes">Да</string>
     <string name="poi_min_age">Минимална старост</string>
-    
     <string name="poi_aquaculture_mussels">Аквакултура: дагње</string>
     <string name="poi_aquaculture_fish">Аквакултура: риба</string>
     <string name="poi_aquaculture_shrimp">Аквакултура: шкампи</string>
@@ -3276,7 +3271,7 @@
     <string name="poi_counselling_type_rehabilitation_yes">Саветовање (рехабилитација): да</string>
     <string name="poi_counselling_type_nutrition_nfire_hydo">Саветовање (исхрана): не</string>
     <string name="poi_counselling_type_nutrition_yes">Саветовање (исхрана): да</string>
-    <string name="poi_atoll">Корална обала</string>
+    <string name="poi_atoll">Атол</string>
     <string name="poi_blood_donation">Донација крви</string>
     <string name="poi_laboratory">Медицинска лабораторија</string>
     <string name="poi_shop_wholesale">Велепродаја</string>
@@ -3341,7 +3336,7 @@
     <string name="poi_cable_number">Број кабла</string>
     <string name="poi_via_ferrata">Заштићена рута</string>
     <string name="poi_climbing_adventure">Авантура пењања</string>
-    <string name="poi_aerialway_zip_line">Зип линија</string>
+    <string name="poi_aerialway_zip_line">Зип лајн</string>
     <string name="poi_service_vehicle_tyres_yes">Гуме</string>
     <string name="poi_service_vehicle_insurance_yes">Осигурање</string>
     <string name="poi_service_vehicle_motor_yes">Мотор</string>
@@ -3738,20 +3733,20 @@
     <string name="poi_rescue_box">Спасилачка кутија</string>
     <string name="poi_change_delete">Избрисани објект</string>
     <string name="poi_flare">Гасна бакља;Гомила бакљи</string>
-    <string name="poi_rtsa_scale_3b_asterisk">3Б*</string>
-    <string name="poi_rtsa_scale_3b">3Б</string>
+    <string name="poi_rtsa_scale_3b_asterisk">3B*</string>
+    <string name="poi_rtsa_scale_3b">3B</string>
     <string name="poi_rtsa_scale_3a_asterisk">3А*</string>
     <string name="poi_rtsa_scale_3a">3А</string>
-    <string name="poi_rtsa_scale_2b_asterisk">2Б*</string>
-    <string name="poi_rtsa_scale_2b">2Б</string>
-    <string name="poi_rtsa_scale_2a_asterisk">2А*</string>
-    <string name="poi_rtsa_scale_2a">2А</string>
-    <string name="poi_rtsa_scale_1b_asterisk">1Б*</string>
-    <string name="poi_rtsa_scale_1b">1Б</string>
+    <string name="poi_rtsa_scale_2b_asterisk">2B*</string>
+    <string name="poi_rtsa_scale_2b">2B</string>
+    <string name="poi_rtsa_scale_2a_asterisk">2A*</string>
+    <string name="poi_rtsa_scale_2a">2A</string>
+    <string name="poi_rtsa_scale_1b_asterisk">1B*</string>
+    <string name="poi_rtsa_scale_1b">1B</string>
     <string name="poi_rtsa_scale_1a_asterisk">1А*</string>
     <string name="poi_rtsa_scale_1a">1А</string>
-    <string name="poi_rtsa_scale_nc_asterisk">н/к*</string>
-    <string name="poi_rtsa_scale_nc">н/к</string>
+    <string name="poi_rtsa_scale_nc_asterisk">n/c*</string>
+    <string name="poi_rtsa_scale_nc">n/c</string>
     <string name="poi_park_ride_ferry">Трајект</string>
     <string name="poi_park_ride_tram">Трамвај</string>
     <string name="poi_park_ride_hov">ВОВ</string>
@@ -3976,4 +3971,65 @@
     <string name="poi_picnic_table_no">Сто за пикник: не</string>
     <string name="poi_picnic_table_yes">Сто за пикник: да</string>
     <string name="poi_outdoor_seating_poi">Седење напољу</string>
+    <string name="poi_access_general">Општи приступ</string>
+    <string name="poi_faculty_filter">Факултет</string>
+    <string name="poi_fridge_filter">Фрижидер</string>
+    <string name="poi_heating_filter">Грејање</string>
+    <string name="poi_authentication_key_no">Провера идентитета кључем: не</string>
+    <string name="poi_authentication_phone_call_yes">Да</string>
+    <string name="poi_authentication_contactless_no">Безконтактна провера идентитета: не</string>
+    <string name="poi_authentication_app_yes">Да</string>
+    <string name="poi_direction_northeast">Североисточни смер</string>
+    <string name="poi_authentication_chip_card_yes">Да</string>
+    <string name="poi_authentication_app_no">Провера идентитета апликацијом: не</string>
+    <string name="poi_share_taxi_yes">Дељени такси: да</string>
+    <string name="poi_authentication_key_yes">Да</string>
+    <string name="poi_authentication_contactless_yes">Да</string>
+    <string name="poi_direction_west">Западни смер</string>
+    <string name="poi_direction_northwest">Северозападни смер</string>
+    <string name="poi_internet_access_ssid">SSID</string>
+    <string name="poi_access_motorcar">Приступ за моторна возила</string>
+    <string name="poi_access_bicycle">Приступ за бицикле</string>
+    <string name="poi_access_scooter">Приступ за скутере</string>
+    <string name="poi_authentication_contactless">Безконтактна провера идентитета</string>
+    <string name="poi_authentication_chip_card">Провера идентитета картицом са чипом</string>
+    <string name="poi_authentication_key">Провера идентитета кључем</string>
+    <string name="poi_authentication_app">Провера идентитета апликацијом</string>
+    <string name="poi_authentication_phone_call">Провера идентитета телефонским позивом</string>
+    <string name="poi_authentication_short_message">Провера идентитета кратком поруком</string>
+    <string name="poi_authentication_none">Провера идентитета није потребна</string>
+    <string name="poi_authentication_phone_call_no">Провера идентитета телефонским позивом: не</string>
+    <string name="poi_direction_southeast">Јужноисточни смер</string>
+    <string name="poi_direction_southwest">Јужнозападни смер</string>
+    <string name="poi_permanent_camping">Трајно камповање</string>
+    <string name="poi_shelter_filter">Склониште</string>
+    <string name="poi_butcher_type">Примарна врста меса</string>
+    <string name="poi_coffee_filter">Кафа</string>
+    <string name="poi_ice_cream_filter">Сладолед</string>
+    <string name="poi_tobacco_filter">Дуван</string>
+    <string name="poi_membership_filter">Потребно је чланство</string>
+    <string name="poi_medical_supply_filter">Категорија медицинске опреме</string>
+    <string name="poi_agrarian_type">Пољопривредни улази</string>
+    <string name="poi_mattress_filter">Душек</string>
+    <string name="poi_furniture_filter">Намештај</string>
+    <string name="poi_authentication_chip_card_no">Провера идентитета картицом са чипом: не</string>
+    <string name="poi_authentication_phone_call_number">Телефонски број за проверу идентитета</string>
+    <string name="poi_authentication_short_message_yes">Да</string>
+    <string name="poi_authentication_short_message_no">Провера идентитета SMS-ом: не</string>
+    <string name="poi_authentication_short_message_number">Број телефона SMS-а за проверу идентитета</string>
+    <string name="poi_authentication_short_message_text">Текст SMS поруке приликом провере идентитета</string>
+    <string name="poi_authentication_none_no">Провера идентитета није потребна: не</string>
+    <string name="poi_authentication_none_yes">Да</string>
+    <string name="poi_permanent_camping_yes">Да</string>
+    <string name="poi_permanent_camping_no">Не</string>
+    <string name="poi_permanent_camping_only">Искључиво</string>
+    <string name="poi_destination">Одредиште</string>
+    <string name="poi_direction_north">Северни смер</string>
+    <string name="poi_direction_east">Источни смер</string>
+    <string name="poi_direction_south">Јужни смер</string>
+    <string name="poi_shelter_no">Склониште: не</string>
+    <string name="poi_shelter_yes">Да</string>
+    <string name="poi_arch">Архитектура</string>
+    <string name="poi_manufacturer">Произвођач</string>
+    <string name="poi_satellite_dish">Сателитски тањир</string>
 </resources>
