@@ -168,6 +168,27 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/layer_param_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="@dimen/map_button_size"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/layer_param_slider"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dashPadding"
+                    android:layout_marginRight="@dimen/dashPadding"
+                    android:layout_marginStart="@dimen/dashPadding"
+                    android:layout_marginEnd="@dimen/dashPadding" />
+
+            </LinearLayout>
+
             <me.zhanghai.android.materialprogressbar.MaterialProgressBar
                 android:id="@+id/map_horizontal_progress"
                 android:layout_width="match_parent"

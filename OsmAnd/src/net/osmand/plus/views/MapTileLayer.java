@@ -12,10 +12,13 @@ import android.os.Build;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import net.osmand.StateChangedListener;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
+import net.osmand.map.ParameterType;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandPlugin;
@@ -23,7 +26,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 public class MapTileLayer extends BaseMapLayer {
@@ -44,6 +49,7 @@ public class MapTileLayer extends BaseMapLayer {
 	protected OsmandSettings settings;
 	private boolean visible = true;
 	private boolean useSampling;
+	private StateChangedListener<Float> parameterListener;
 
 	public MapTileLayer(@NonNull Context context, boolean mainMap) {
 		super(context);
@@ -60,6 +66,7 @@ public class MapTileLayer extends BaseMapLayer {
 		this.view = view;
 		settings = view.getSettings();
 		resourceManager = view.getApplication().getResourceManager();
+		parameterListener = change -> getApplication().runInUIThread(this::updateParameter);
 
 		useSampling = Build.VERSION.SDK_INT < 28;
 
@@ -79,7 +86,52 @@ public class MapTileLayer extends BaseMapLayer {
 			paintBitmap.setAlpha(alpha);
 		}
 	}
-	
+
+	public void setupParameterListener() {
+		CommonPreference<Float> paramValuePref = getParamValuePref();
+		if (paramValuePref != null) {
+			paramValuePref.addListener(parameterListener);
+		}
+	}
+
+	public void resetParameterListener() {
+		CommonPreference<Float> paramValuePref = getParamValuePref();
+		if (paramValuePref != null) {
+			paramValuePref.removeListener(parameterListener);
+		}
+	}
+
+	public void updateParameter() {
+		if (map != null) {
+			ParameterType paramType = map.getParamType();
+			if (paramType != ParameterType.UNDEFINED) {
+				CommonPreference<Float> paramStepPref = getParamStepPref();
+				CommonPreference<Float> paramValuePref = getParamValuePref();
+				if (paramValuePref != null && paramStepPref != null) {
+					float step = paramStepPref.get();
+					float newValue = paramValuePref.get();
+					float currentValue = Float.NaN;
+					String param = map.getUrlParameter(TileSourceManager.PARAMETER_NAME);
+					if (!Algorithms.isEmpty(param)) {
+						try {
+							currentValue = Float.parseFloat(param);
+						} catch (NumberFormatException ignore) {
+						}
+					}
+					if (paramType == ParameterType.DATE) {
+						newValue += System.currentTimeMillis() / 1000f;
+					}
+					if (Float.isNaN(currentValue) || Math.abs(newValue - currentValue) >= step) {
+						map.setUrlParameter(TileSourceManager.PARAMETER_NAME, "" + (long) newValue);
+						ResourceManager mgr = resourceManager;
+						mgr.clearCacheAndTiles(map);
+					}
+				}
+			}
+		}
+	}
+
+
 	public void setMapTileAdapter(MapTileAdapter mapTileAdapter) {
 		if (this.mapTileAdapter == mapTileAdapter) {
 			return;
@@ -103,11 +155,24 @@ public class MapTileLayer extends BaseMapLayer {
 	public void setMap(ITileSource map) {
 		MapTileAdapter target = null;
 		if (map instanceof TileSourceTemplate) {
-			if (TileSourceManager.RULE_YANDEX_TRAFFIC.equals(((TileSourceTemplate) map).getRule())) {
+			if (TileSourceManager.RULE_YANDEX_TRAFFIC.equals(map.getRule())) {
 				map = null;
 				target = new YandexTrafficAdapter();
+			} else {
+				this.map = map;
+				long paramMin = map.getParamMin();
+				long paramMax = map.getParamMax();
+				long paramStep = map.getParamStep();
+				CommonPreference<Float> paramMinPref = getParamMinPref();
+				CommonPreference<Float> paramMaxPref = getParamMaxPref();
+				CommonPreference<Float> paramStepPref = getParamStepPref();
+				if (paramMinPref != null && paramMaxPref != null && paramStepPref != null) {
+					paramMinPref.set((float) paramMin);
+					paramMaxPref.set((float) paramMax);
+					paramStepPref.set((float) paramStep);
+				}
+				updateParameter();
 			}
-			
 		}
 		this.map = map;
 		setMapTileAdapter(target);
@@ -116,7 +181,43 @@ public class MapTileLayer extends BaseMapLayer {
 	public MapTileAdapter getMapTileAdapter() {
 		return mapTileAdapter;
 	}
-	
+
+	@Nullable
+	public CommonPreference<Float> getParamMinPref() {
+		ITileSource map = this.map;
+		if (map != null) {
+			return settings.registerFloatPreference(map.getName() + "_param_min", 0f).makeProfile().makeShared();
+		}
+		return null;
+	}
+
+	@Nullable
+	public CommonPreference<Float> getParamMaxPref() {
+		ITileSource map = this.map;
+		if (map != null) {
+			return settings.registerFloatPreference(map.getName() + "_param_max", 0f).makeProfile().makeShared();
+		}
+		return null;
+	}
+
+	@Nullable
+	public CommonPreference<Float> getParamStepPref() {
+		ITileSource map = this.map;
+		if (map != null) {
+			return settings.registerFloatPreference(map.getName() + "_param_step", 0f).makeProfile().makeShared();
+		}
+		return null;
+	}
+
+	@Nullable
+	public CommonPreference<Float> getParamValuePref() {
+		ITileSource map = this.map;
+		if (map != null) {
+			return settings.registerFloatPreference(map.getName() + "_param_value", 0f).makeProfile().makeShared();
+		}
+		return null;
+	}
+
 	@SuppressLint("WrongCall")
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
@@ -165,18 +266,16 @@ public class MapTileLayer extends BaseMapLayer {
 
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
-				int leftPlusI = left + i;
-				int topPlusJ = top + j;
+				int tileX = left + i;
+				int tileY = top + j;
 
-				int x1 = tileBox.getPixXFromTileXNoRot(leftPlusI);
-				int x2 = tileBox.getPixXFromTileXNoRot(leftPlusI + 1);
+				int x1 = tileBox.getPixXFromTileXNoRot(tileX);
+				int x2 = tileBox.getPixXFromTileXNoRot(tileX + 1);
 
-				int y1 = tileBox.getPixYFromTileYNoRot(topPlusJ - ellipticTileCorrection);
-				int y2 = tileBox.getPixYFromTileYNoRot(topPlusJ + 1 - ellipticTileCorrection);
+				int y1 = tileBox.getPixYFromTileYNoRot(tileY - ellipticTileCorrection);
+				int y2 = tileBox.getPixYFromTileYNoRot(tileY + 1 - ellipticTileCorrection);
 				bitmapToDraw.set(x1, y1, x2 , y2);
 				
-				final int tileX = leftPlusI;
-				final int tileY = topPlusJ;
 				Bitmap bmp = null;
 				String ordImgTile = mgr.calculateTileId(map, tileX, tileY, nzoom);
 				// asking tile image async
