@@ -4434,4 +4434,5 @@
     <string name="shared_storage_first_step">Appuyez sur \"%1$s\".
 \nLe gestionnaire de fichiers va afficher le dossier qui devrait contenir un dossier Osmand.</string>
     <string name="not_enough_contributions_descr">Un minimum de %1$s modifications au cours des deux derniers mois %2$s est requis pour bénéficier de la mise à jour horaire des cartes en illimité.</string>
+    <string name="show_parameter_seekbar">Afficher la barre de recherche des paramètres</string>
 </resources>

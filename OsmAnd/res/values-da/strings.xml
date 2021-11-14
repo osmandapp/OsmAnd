@@ -4446,4 +4446,5 @@
     <string name="shared_storage">Delt lagerplads</string>
     <string name="rendering_attr_natureReserves_description">Vis naturreservater, beskyttede områder og nationalparker.</string>
     <string name="not_enough_contributions_descr">Der kræves mindst %1$s ændringer i løbet af de sidste to måneder %2$s for at få adgang til ubegrænsede kortopdateringer hver time.</string>
+    <string name="show_parameter_seekbar">Vis parameter-søgefelt</string>
 </resources>
