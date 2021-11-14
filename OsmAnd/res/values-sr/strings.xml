@@ -4053,11 +4053,9 @@
     <string name="announce_when_exceeded">Објави када се премаши</string>
     <string name="user_points">Кориснички поени</string>
     <string name="output">Излаз</string>
-    <string name="open_place_reviews_plugin_description">OpenPlaceReviews је пројакат покретан од стране заједнице о јавним местима, као што су ресторани, хотели, пролазне тачке. Пројекат сакупља јавне информације о њима, као што су слике, рецензије, везе ка другим местима као OpenStreetMap или Википедија.
+    <string name="open_place_reviews_plugin_description">Шаљите фотографије, рецензије и везе о јавним местима као што су ресторани, хотели, музеји и путне тачке као отворене податке на https://openplacereviews.org/data/.
 \n
-\nСви подаци на OpenPlaceReview су отворени и доступни свима: http://openplacereviews.org/data.
-\n
-\nМожете прочитати више на: http://openplacereviews.org</string>
+\nПрочитајте више на https://openplacereviews.org</string>
     <string name="release_4_0_beta">• Додата могућност преузимања изохипси у стопама
 \n
 \n• Планирајте пејзаж руте: додати језичци да се пребацује између тачака и графика
@@ -4219,8 +4217,8 @@
     <string name="routeInfo_smoothness_description">Доставља податке о правилима бојења у зависности од употребљивости путева за возила на точковима, нарочито према исправности/равности површине.</string>
     <string name="routeInfo_surface_description">Доставља додатне податке о врсти подлоге путева/стаза.</string>
     <string name="routeInfo_roadClass_description">Бојење линије путање или стазе по врсти пута.</string>
-    <string name="add_group_to_markers">Додај групу списку обележивача</string>
-    <string name="remove_group_from_markers">Уклони групу из списка обележивача</string>
+    <string name="add_group_to_markers">Додајте групу на маркер листу</string>
+    <string name="remove_group_from_markers">Уклони групу са маркер листе</string>
     <string name="start_point">Почетак</string>
     <string name="mapillary_menu_filter_description_new">Разврстај слике по времену и врсти. Ради само при увећању.</string>
     <string name="service_is_not_available_please_try_later">Услуга није доступна. Молимо покушајте поново касније.</string>
@@ -4383,4 +4381,58 @@
     <string name="safe_settings">Безбедна</string>
     <string name="approx_safe_mode">Безбедна GPX апроксимација</string>
     <string name="approx_safe_mode_description">Изводи GPX апроксимацију користећи спороји Андроид приступ уместо локалног кода.</string>
+    <string name="search_history_is_disabled_descr">Можете омогућити историју претраге у подешавањима.</string>
+    <string name="markers_history_is_disabled_descr">Омогућите историју ради памћења листе посећених маркера на мапи.</string>
+    <string name="shortcut_navigate_to">Иди на…</string>
+    <string name="shortcut_navigate_to_work">Идите на „Посао“</string>
+    <string name="shortcut_navigate_to_home">Идите до \'Хоме\'</string>
+    <string name="shared_string_articles">Чланци</string>
+    <string name="rendering_attr_natureReserves_description">Приказ резервата природе, заштићених подручја и националних паркова.</string>
+    <string name="history_is_disabled_descr">Омогућите историју да бисте добили бржи приступ последњим коришћеним резултатима.</string>
+    <string name="clear_all_history">Обриши сву историју</string>
+    <string name="history_actions_descr">Можете да извезете историју у датотеку.</string>
+    <string name="rendering_attr_natureReserves_name">Природни резерват</string>
+    <string name="show_parameter_seekbar">Прикажи траку за тражење параметара</string>
+    <string name="clear_all_history_warning">Желите ли да обришете све уносе историје, укључујући претрагу, навигацију и историју маркера\?</string>
+    <string name="release_4_1">• Додата почетна подршка за Андроид Ауто
+\n
+\n • Ажурирање корисничког интерфејса за претрагу УТМ координата
+\n
+\n • Фаворити: додата могућност прегледа недавно коришћених икона
+\n
+\n • Планирање руте: користиће се изабрани профил након покретања
+\n
+\n • Поправљен Мапилари слој, додатак је сада подразумевано онемогућен
+\n
+\n • Додан екран за управљање целокупном историјом у апликацији
+\n
+\n • Оријентација карте се не ресетује након поновног покретања апликације
+\n
+\n • Побољшано приказивање маркера висине СРТМ
+\n
+\n • Исправљени арапски натписи мапа
+\n
+\n • Исправљени различити проблеми са рутирањем
+\n
+\n</string>
+    <string name="continue_on_phone">Наставите на мобилном уређају</string>
+    <string name="location_access_request_action">Одобри приступ</string>
+    <string name="is_disabled">%1$s је онемогућен</string>
+    <string name="history_preferences_descr">Можете да онемогућите бележење историје појединачно за сваки тип историје.</string>
+    <string name="shortcut_start_recording">Почни са снимањем</string>
+    <string name="map_markers_history">Историја маркера</string>
+    <string name="navigation_history">Историја навигације</string>
+    <string name="android_auto_map_placeholder_title">Мапа се приказује на екрану возила.</string>
+    <string name="android_auto_map_placeholder_descr">Прекините везу уређаја са Андроид Ауто-ом да бисте видели мапу у апликацији.</string>
+    <string name="android_auto_purchase_request_title">Купите ОсмАнд Про или Мапс+ да бисте користили ОсмАнд са Андроид Ауто-ом</string>
+    <string name="location_access_request_title">ОсмАнд-у је потребна дозвола за локацију ради навигације.</string>
+    <string name="location_access_request_result">Одобрено: %1$s Одбијено: %2$s</string>
+    <string name="included_categories">Укључене категорије</string>
+    <string name="shared_app_storage_description">Заједничка меморија више није доступна због промењеног приступа Андроид складишту.</string>
+    <string name="shared_storage_warning_title">Промене правила приступа складишту</string>
+    <string name="purchases_feature_desc_android_auto">Приказује ОсмАнд офлајн мапе и навигацију на екран вашег возила и интегрише се са контролама вашег возила.</string>
+    <string name="icon_group_nautical">Поморска</string>
+    <string name="transparent_status_bar_descr">Прикажи мапу испод статусне траке</string>
+    <string name="transparent_status_bar">Транспарентна статусна трака</string>
+    <string name="shared_string_details">Детаљи</string>
 </resources>
