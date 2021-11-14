@@ -1,6 +1,7 @@
 package net.osmand.plus.mapillary;
 
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,17 +12,13 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.map.TileSourceManager;
@@ -40,6 +37,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.fragment.app.FragmentManager;
 
 public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
@@ -266,6 +268,8 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             hideKeyboard();
         });
 
+        setupBottomEmptySpace(view, container);
+
         return view;
     }
 
@@ -288,6 +292,30 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
     private void changeButtonState(Button button, float alpha, boolean enabled) {
         button.setAlpha(alpha);
         button.setEnabled(enabled);
+    }
+
+    private void setupBottomEmptySpace(@NonNull View view, ViewGroup container) {
+        View bottomEmptySpace = view.findViewById(R.id.bottom_empty_space);
+        container.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+
+            @Override
+            public void onGlobalLayout() {
+                container.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                Activity activity = getActivity();
+                if (activity == null) {
+                    return;
+                }
+
+                int spaceHeight = AndroidUtils.getScreenHeight(activity) - container.getTop()
+                        - (view.getHeight() - bottomEmptySpace.getHeight())
+                        - AndroidUtils.getStatusBarHeight(activity);
+                if (spaceHeight > bottomEmptySpace.getHeight()) {
+                    ViewGroup.LayoutParams params = bottomEmptySpace.getLayoutParams();
+                    params.height = spaceHeight;
+                    bottomEmptySpace.setLayoutParams(params);;
+                }
+            }
+        });
     }
 
     public static void showInstance(@NonNull FragmentManager fragmentManager) {
