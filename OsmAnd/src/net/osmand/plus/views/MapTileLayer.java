@@ -66,7 +66,7 @@ public class MapTileLayer extends BaseMapLayer {
 		this.view = view;
 		settings = view.getSettings();
 		resourceManager = view.getApplication().getResourceManager();
-		parameterListener = change -> getApplication().runInUIThread(this::updateParameter);
+		parameterListener = change -> getApplication().runInUIThread(() -> updateParameter(change));
 
 		useSampling = Build.VERSION.SDK_INT < 28;
 
@@ -105,11 +105,21 @@ public class MapTileLayer extends BaseMapLayer {
 		if (map != null) {
 			ParameterType paramType = map.getParamType();
 			if (paramType != ParameterType.UNDEFINED) {
-				CommonPreference<Float> paramStepPref = getParamStepPref();
 				CommonPreference<Float> paramValuePref = getParamValuePref();
-				if (paramValuePref != null && paramStepPref != null) {
+				if (paramValuePref != null) {
+					updateParameter(paramValuePref.get());
+				}
+			}
+		}
+	}
+
+	public void updateParameter(float newValue) {
+		if (map != null) {
+			ParameterType paramType = map.getParamType();
+			if (paramType != ParameterType.UNDEFINED) {
+				CommonPreference<Float> paramStepPref = getParamStepPref();
+				if (paramStepPref != null) {
 					float step = paramStepPref.get();
-					float newValue = paramValuePref.get();
 					float currentValue = Float.NaN;
 					String param = map.getUrlParameter(TileSourceManager.PARAMETER_NAME);
 					if (!Algorithms.isEmpty(param)) {
@@ -121,16 +131,16 @@ public class MapTileLayer extends BaseMapLayer {
 					if (paramType == ParameterType.DATE) {
 						newValue += System.currentTimeMillis() / 1000f;
 					}
-					if (Float.isNaN(currentValue) || Math.abs(newValue - currentValue) >= step) {
+					if (Float.isNaN(currentValue) || Math.abs(newValue - currentValue) > 1) {
 						map.setUrlParameter(TileSourceManager.PARAMETER_NAME, "" + (long) newValue);
 						ResourceManager mgr = resourceManager;
 						mgr.clearCacheAndTiles(map);
+						getApplication().getOsmandMap().refreshMap();
 					}
 				}
 			}
 		}
 	}
-
 
 	public void setMapTileAdapter(MapTileAdapter mapTileAdapter) {
 		if (this.mapTileAdapter == mapTileAdapter) {
