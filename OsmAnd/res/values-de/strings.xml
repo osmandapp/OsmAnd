@@ -4446,4 +4446,5 @@
     <string name="icon_group_industrial">Industriell</string>
     <string name="rendering_attr_natureReserves_description">Naturreservate, Schutzgebiete und Nationalparks anzeigen.</string>
     <string name="not_enough_contributions_descr">Ein Minimum von %1$s Änderungen in den letzten zwei Monaten %2$s ist erforderlich, um Zugang zu unbegrenzten stündlichen Kartenaktualisierungen zu erhalten.</string>
+    <string name="show_parameter_seekbar">Parametersuchleiste anzeigen</string>
 </resources>
