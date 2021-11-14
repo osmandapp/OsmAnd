@@ -4509,4 +4509,5 @@
     <string name="shared_storage_migration">ترحيل التخزين المشترك</string>
     <string name="rendering_attr_natureReserves_description">عرض المحمية الطبيعية والمناطق المحمية والمتنزهات الوطنية.</string>
     <string name="not_enough_contributions_descr">الحد الأدنى من %1$s تغيير خلال فترة الشهرين الماضية %2$s مطلوب للحصول على تحديثات خرائط غير محدودة كل ساعة.</string>
+    <string name="show_parameter_seekbar">إظهار شريط البحث المتغير</string>
 </resources>
