@@ -2,6 +2,7 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -68,6 +69,12 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	private boolean compassUpdateAllowed = true;
 	protected boolean nightMode;
 
+	public interface OnDialogClosed{
+		void updateHistoryUI();
+	}
+
+	public OnDialogClosed mOnDialogClosed;
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -124,7 +131,10 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 		ImageView closeButton = appbar.findViewById(R.id.close_button);
 		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));
-		closeButton.setOnClickListener(v -> dismiss());
+		closeButton.setOnClickListener(v -> {
+			mOnDialogClosed.updateHistoryUI();
+			dismiss();
+		});
 
 		shareButton = appbar.findViewById(R.id.action_button_icon);
 		shareButton.setOnClickListener(v -> {
@@ -313,6 +323,16 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			locationProvider.removeLocationListener(this);
 			locationProvider.removeCompassListener(this);
 			locationProvider.addCompassListener(locationProvider.getNavigationInfo());
+		}
+	}
+
+	@Override
+	public void onAttach(@NonNull Context context) {
+		super.onAttach(context);
+		try {
+			mOnDialogClosed = (OnDialogClosed) getTargetFragment();
+		} catch (ClassCastException e){
+			e.printStackTrace();
 		}
 	}
 }
