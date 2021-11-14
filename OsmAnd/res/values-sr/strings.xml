@@ -4350,7 +4350,7 @@
 \n
 \nАпликација ће почети у новој фасцикли са Вашим подацима.</string>
     <string name="shared_storage_last_step">Моћи ћете да дефинишете ново складиште података пошто одаберете Дељено складиште.</string>
-    <string name="shared_storage_third_step">Дајте дозволу за приступање овој фасцикли. Без дозволе, OsmAnd не може да прекопира фајлове.</string>
+    <string name="shared_storage_third_step">Дајте дозволу за приступ овој фасцикли. Без дозволе, OsmAnd не може да прекопира фајлове.</string>
     <string name="shared_storage_first_step">Притисните „%1$s”.
 \nМенаџер фајлова отвара где треба да нађете и отворите osmand фасциклу.</string>
     <string name="shared_storage_second_step">Кликните „Користи ову фасциклу”.</string>
