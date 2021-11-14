@@ -4209,4 +4209,6 @@
     <string name="poi_faculty_nursing">Soins infirmiers</string>
     <string name="poi_faculty_economics">Économie</string>
     <string name="poi_faculty_education">Éducation</string>
+    <string name="poi_tool_hire">Location d\'outils</string>
+    <string name="poi_escape_game">Jeu d’évasion</string>
 </resources>

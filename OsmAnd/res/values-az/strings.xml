@@ -1462,7 +1462,7 @@
     <string name="map_markers_other">Digər işarələr</string>
     <string name="rendering_attr_hideUnderground_name">Yeraltı obyektlər</string>
     <string name="data_is_not_available">Məlumatlar mövcud deyil</string>
-    <string name="starting_point">Başlanğıc nöqtə</string>
+    <string name="starting_point">Başlanğıc nöqtəsi</string>
     <string name="rendering_attr_horseRoutes_name">At marşrutları</string>
     <string name="show_on_start_description">“Sönülü” birbaşa xəritə ekranını başladır.</string>
     <string name="osm_save_offline">Oflayn saxla</string>
@@ -2591,4 +2591,9 @@
     <string name="daynight_descr">Gecə və gündüz rejimi arasında keçidi tənzimləyin.</string>
     <string name="app_mode_enduro_motorcycle">Enduro motosikleti</string>
     <string name="shared_storage_warning_title">Saxlama giriş qaydalarına dəyişikliklər</string>
+    <string name="route_start_point">Başlanğıc nöqtəsi</string>
+    <string name="swap_two_places">%1$s və %2$sni dəyiş</string>
+    <string name="shared_string_swap">Dəyişdir</string>
+    <string name="previous_route">Əvvəlki marşrut</string>
+    <string name="add_start_point">Başlanğıc nöqtəsi seçin</string>
 </resources>

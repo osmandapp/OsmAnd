@@ -4398,4 +4398,34 @@
 \n
 \nSposta i dati dalla Memoria condivisa alla memoria disponibile oppure l\'app perderà l\'accesso a dati quali mappe offline, tracce GPX, ecc.</string>
     <string name="horseback_riding">A cavallo</string>
+    <string name="copying_file">Copia dei file %1$s</string>
+    <string name="storage_copied_files_size">Copiati %1$s file %2$s</string>
+    <string name="storage_copying_files_size">In copia %1$s file %2$s</string>
+    <string name="storage_found_files_size">Trovati %1$s file %2$s</string>
+    <string name="shared_storage_last_step">Puoi specificare una nuova archiviazione dei dati dopo aver scelto Archivio condiviso.</string>
+    <string name="shared_storage_migration_descr">A causa dei cambiamenti alle regole Android di accesso alla memoria, OsmAnd non può più utilizzare %1$s.
+\n
+\nDevi copiare tutti i tuoi dati nella nuova posizione di memorizzazione.</string>
+    <string name="shared_storage_second_step">Tocca \"Usa questa cartella\".</string>
+    <string name="folder_access_denied">È richiesto il permesso per accedere alla cartella selezionata.</string>
+    <string name="copying_completed">Copia completa</string>
+    <string name="shared_string_copy_to">Copia in</string>
+    <string name="start_copying">Copia iniziata</string>
+    <string name="skip_confirmation">Si, salta</string>
+    <string name="shared_storage_migration">Migrazione memoria condivisa</string>
+    <string name="shared_string_migration">Migrazione</string>
+    <string name="icon_group_education">Istruzione</string>
+    <string name="icon_group_industrial">Industriale</string>
+    <string name="rendering_attr_natureReserves_description">Mostra riserve naturali, aree protette e parchi naturali.</string>
+    <string name="shared_storage_third_step">concedi il permesso di accedere alla cartella. Senza il permesso OsmAnd non può copiare i file.</string>
+    <string name="files_remaining">File rimanenti: %1$s %2$s</string>
+    <string name="from_to_with_params">Da %1$s a %2$s</string>
+    <string name="progress_complete">%1$s completato</string>
+    <string name="storage_found_files_descr">Tocca “%1$s” per copiare %2$s file da “%3$s” a “%4$s”. Potrebbe richiedere tempo.</string>
+    <string name="shared_string_skip_warning">Sei sicuro di voler saltare la migrazione\? OsmAnd non ha più accesso ai tuoi file nell\'archiviazione condivisa.
+\n
+\nL\'applicazione partirà dalla nuova cartella con i tuoi dati.</string>
+    <string name="shared_storage">Memorizzazione condivisa</string>
+    <string name="shared_storage_first_step">Premi \"%1$s\".
+\nIl gestore di file apre dove necessito di cercare e apre la cartella OsmAnd.</string>
 </resources>

@@ -1267,8 +1267,8 @@
     <string name="continue_navigation">Reprendre le guidage</string>
     <string name="pause_navigation">Suspendre le guidage</string>
     <string name="rendering_attr_subwayMode_name">Lignes de métro</string>
-    <string name="rendering_attr_alpineHiking_name">Difficulté des chemins de randonnée (échelle CAS)</string>
-    <string name="rendering_attr_alpineHiking_description">Afficher la difficulté des chemins selon l\'échelle du CAS.</string>
+    <string name="rendering_attr_alpineHiking_name">Difficulté des sentiers de randonnée (CAS)</string>
+    <string name="rendering_attr_alpineHiking_description">Afficher la difficulté des sentiers de randonnée selon l\'échelle de cotation du CAS.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Itinéraires de randonnée</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Rendu des itinéraires de randonnée d\'après OSMC.</string>
     <string name="rendering_attr_coloredBuildings_name">Bâtiments colorés par type</string>
@@ -1334,7 +1334,7 @@
     <string name="shared_string_show">Afficher</string>
     <string name="configure_map">Paramétrer la carte</string>
     <string name="search_radius_proximity">Dans</string>
-    <string name="rendering_category_routes">Chemins</string>
+    <string name="rendering_category_routes">Itinéraires</string>
     <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
     <string name="rendering_attr_trolleybusRoutes_name">Lignes de trolleybus</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Lignes de chemin de fer</string>

@@ -4209,4 +4209,6 @@
     <string name="poi_faculty_law">Direito</string>
     <string name="poi_faculty_nursing">Enfermagem</string>
     <string name="poi_faculty_psychology">Psicologia</string>
+    <string name="poi_tool_hire">Aluguer de ferramentas</string>
+    <string name="poi_escape_game">Escapada do quarto (escape room)</string>
 </resources>
