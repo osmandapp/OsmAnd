@@ -11,7 +11,7 @@
 	Thx - Hardy
 -->
 
-
+    <string name="show_parameter_seekbar">Show parameter seekbar</string>
     <string name="display_groups_visibility_dialog_description">You can control groups visibility on the map. If track is hidden, all groups will be hidden too.</string>
     <string name="shared_string_hide_all">Hide all</string>
     <string name="files_remaining">Files remaining: %1$s %2$s</string>

@@ -4270,7 +4270,7 @@
     <string name="use_login_and_password">Ввести ім\'я користувача та пароль</string>
     <string name="available_until">Доступно до %1$s</string>
     <string name="enough_contributions_descr">Вітаємо, ви надали достатньо внесків OpenStreetMap і тепер можете насолоджуватися необмеженою кількістю оновлень мап OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Щоб отримати безкоштовні оновлення, зробіть мінімум %1$s змін, у сумі за останні два місяці %2$s</string>
+    <string name="not_enough_contributions_descr">Щоб отримати безплатні щогодинні оновлення, зробіть щонайменше %1$s змін за останні два місяці %2$s.</string>
     <string name="shared_string_contributions">Внески</string>
     <string name="contributions_may_calculate_with_delay">Обчислення внесків може тривати кілька годин.</string>
     <string name="map_updates_are_unavailable_yet">Оновлення мап досі недоступні. :-(</string>
@@ -4322,7 +4322,7 @@
     <string name="remove_group_from_markers">Вилучити групу зі списку позначок</string>
     <string name="start_point">Почати</string>
     <string name="mapillary_menu_filter_description_new">Добирати зображення за датою або типом. Працює лише в наближенні великим планом.</string>
-    <string name="service_is_not_available_please_try_later">Служба недоступна, будь ласка, спробуйте пізніше</string>
+    <string name="service_is_not_available_please_try_later">Служба недоступна, повторіть спробу пізніше.</string>
     <string name="shared_string_files">Файли</string>
     <string name="travel_route_types">Типи маршрутів</string>
     <string name="sample_wikivoyage">Приклад Вікімадрів</string>
@@ -4374,7 +4374,7 @@
 \n</string>
     <string name="android_auto_purchase_request_title">Придбати OsmAnd Pro або Maps+ для використання OsmAnd з Android Auto</string>
     <string name="continue_on_phone">Продовжити на мобільному пристрої</string>
-    <string name="location_access_request_title">OsmAnd потрібен доступ до місця розташування для навігації</string>
+    <string name="location_access_request_title">OsmAnd потрібен доступ до місця розташування для навігації.</string>
     <string name="android_auto_map_placeholder_title">Мапа показана на екрані автомобіля.</string>
     <string name="android_auto_map_placeholder_descr">Від\'єднайте пристрій від Android Auto, щоб переглянути мапу в застосунку.</string>
     <string name="location_access_request_action">Надати доступ</string>
@@ -4410,4 +4410,34 @@
     <string name="delete_history_items_descr">Ви впевнені, що хочете видалити вибрані елементи історії\?</string>
     <string name="delete_history_items">Видалити елементи історії %1$s\?</string>
     <string name="quick_action_toggle_preference">Перемикач для перемикання вибраного стану налаштувань.</string>
+    <string name="copying_file">Копіювання файлу %1$s</string>
+    <string name="from_to_with_params">З %1$s до %2$s</string>
+    <string name="progress_complete">%1$s завершено</string>
+    <string name="storage_found_files_descr">Торкніться «%1$s», щоб скопіювати файли %2$s з «%3$s» на «%4$s». Це може тривати деякий час.</string>
+    <string name="storage_copied_files_size">Скопійовано %1$s файлів %2$s</string>
+    <string name="storage_copying_files_size">Копіювання %1$s файлів %2$s</string>
+    <string name="storage_found_files_size">Знайдено %1$s файлів %2$s</string>
+    <string name="shared_storage_last_step">Ви зможете вказати нове сховище даних після вибору Спільного сховища.</string>
+    <string name="shared_storage_third_step">Надайте дозвіл на доступ до каталогу. Без цього дозволу OsmAnd не може копіювати файли.</string>
+    <string name="shared_storage_first_step">Натисніть «%1$s».
+\nВідкриється файловий менеджер, де потрібно знайти та відкрити каталог osmand.</string>
+    <string name="copying_completed">Копіювання завершено</string>
+    <string name="shared_string_copy_to">Копіювати до</string>
+    <string name="start_copying">Почати копіювання</string>
+    <string name="shared_string_migration">Переміщення</string>
+    <string name="folder_access_denied">Для доступу до вибраного каталогу потрібен дозвіл.</string>
+    <string name="skip_confirmation">Так, пропустити</string>
+    <string name="shared_storage_migration">Переміщення Спільного сховища</string>
+    <string name="icon_group_industrial">Промисловість</string>
+    <string name="shared_string_skip_warning">Ви впевнені, що хочете пропустити переміщення\? OsmAnd більше не має доступу до ваших файлів у спільній пам’яті.
+\n
+\nЗастосунок запуститься в новому каталозі з вашими даними.</string>
+    <string name="shared_storage">Спільне сховище</string>
+    <string name="files_remaining">Файлів лишилося: %1$s %2$s</string>
+    <string name="shared_storage_second_step">Натисніть «Використовувати цей каталог».</string>
+    <string name="shared_storage_migration_descr">Через зміни правил доступу до пам’яті в Android, OsmAnd більше не може використовувати %1$s.
+\n
+\nВам потрібно скопіювати всі свої дані в нове місце зберігання.</string>
+    <string name="icon_group_education">Освіта</string>
+    <string name="show_parameter_seekbar">Показати панель пошуку параметрів</string>
 </resources>

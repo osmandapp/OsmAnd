@@ -440,7 +440,7 @@ public class ResourceManager {
 		map.deleteTiles(new File(dirWithTiles, map.getName()).getAbsolutePath());
 		TilesCache<?> cache = getTilesCache(map);
 		if (cache != null) {
-			cache.clearTiles();
+			cache.clearAllTiles();
 		}
 	}
 

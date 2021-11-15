@@ -721,8 +721,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		dashboardOnMap.updateLocation(true, true, false);
 
+		boolean showStorageMigrationScreen = false;
 		if (getFragment(WhatsNewDialogFragment.TAG) == null || WhatsNewDialogFragment.wasNotShown()) {
 			if (getFragment(SharedStorageWarningFragment.TAG) == null && SharedStorageWarningFragment.dialogShowRequired(app)) {
+				showStorageMigrationScreen = true;
 				SecondSplashScreenFragment.SHOW = false;
 				SharedStorageWarningFragment.showInstance(this, true);
 			}
@@ -809,7 +811,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			showOsmAndWelcomeScreen = intent.getBooleanExtra(FirstUsageWelcomeFragment.SHOW_OSMAND_WELCOME_SCREEN, true);
 		}
 		boolean showWelcomeScreen = ((app.getAppInitializer().isFirstTime() && Version.isDeveloperVersion(app)) || !app.getResourceManager().isAnyMapInstalled())
-				&& FirstUsageWelcomeFragment.SHOW && settings.SHOW_OSMAND_WELCOME_SCREEN.get() && showOsmAndWelcomeScreen;
+				&& FirstUsageWelcomeFragment.SHOW && settings.SHOW_OSMAND_WELCOME_SCREEN.get()
+				&& showOsmAndWelcomeScreen && !showStorageMigrationScreen;
 
 		if (!showWelcomeScreen && !permissionDone && !app.getAppInitializer().isFirstTime()) {
 			if (!permissionAsked) {
