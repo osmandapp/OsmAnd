@@ -49,12 +49,12 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
-	protected View appbar;
 
 	protected final List<Object> items = new ArrayList<>();
 	protected final List<Object> selectedItems = new ArrayList<>();
 	protected final Map<Integer, List<?>> itemsGroups = new HashMap<>();
 
+	protected View appbar;
 	protected View deleteButton;
 	protected View selectAllButton;
 	protected ImageView shareButton;
@@ -75,6 +75,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		settings = app.getSettings();
 		nightMode = !app.getSettings().isLightContent();
 		updateHistoryItems();
+
 	}
 
 	@Nullable
@@ -124,10 +125,6 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		ImageView closeButton = appbar.findViewById(R.id.close_button);
 		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));
 		closeButton.setOnClickListener(v -> {
-			Fragment fragment = getTargetFragment();
-			if (fragment instanceof OnPreferenceChanged) {
-				((OnPreferenceChanged) fragment).onPreferenceChanged(settings.SEARCH_HISTORY.getId());
-			}
 			dismiss();
 		});
 
@@ -220,13 +217,10 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	public void onItemSelected(Object item, boolean selected) {
 		if (selected) {
 			selectedItems.add(item);
-			setupToolbar(appbar);
 		} else {
 			selectedItems.remove(item);
-			if (selectedItems.size() == 0) {
-				setupToolbar(appbar);
-			}
 		}
+		updateToolbarSwitch(appbar);
 		updateButtonsState();
 	}
 
@@ -237,7 +231,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		} else {
 			selectedItems.removeAll(items);
 		}
-		setupToolbar(appbar);
+		updateToolbarSwitch(appbar);
 		updateButtonsState();
 	}
 
@@ -247,6 +241,10 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		updateHistoryItems();
 		updateButtonsState();
 		adapter.notifyDataSetChanged();
+		Fragment fragment = getTargetFragment();
+		if (fragment instanceof OnPreferenceChanged) {
+			((OnPreferenceChanged) fragment).onPreferenceChanged(settings.SEARCH_HISTORY.getId());
+		}
 	}
 
 	@Override
