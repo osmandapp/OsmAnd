@@ -96,8 +96,9 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		listView = view.findViewById(android.R.id.list);
 		listView.setOnChildClickListener(this);
 
+		List<GpxDisplayGroup> displayGroups = getOriginalGroups();
 		adapter.setFilterResults(null);
-		adapter.synchronizeGroups(getOriginalGroups());
+		adapter.synchronizeGroups(displayGroups);
 		if (listView.getAdapter() == null) {
 			listView.setAdapter(adapter);
 		}
@@ -120,6 +121,15 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 
 	public void setSelectedGroup(GpxDisplayGroup selectedGroup) {
 		this.selectedGroup = selectedGroup;
+		onSelectedGroupChanged();
+	}
+
+	private void onSelectedGroupChanged() {
+		if (selectedGroup != null) {
+			scrollToGroup(selectedGroup);
+		} else {
+			scrollToInitialPosition();
+		}
 	}
 
 	public void updateGroups() {
@@ -127,10 +137,16 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		selectedGroups.clear();
 	}
 
-	public void moveToSelectedGroup() {
-		int index = adapter.getGroupIndex(selectedGroup);
+	private void scrollToGroup(@NonNull GpxDisplayGroup group) {
+		int index = adapter.getGroupIndex(group);
 		if (index >= 0) {
 			listView.setSelectedGroup(index);
+		}
+	}
+
+	private void scrollToInitialPosition() {
+		if (listView.getCount() > 0) {
+			listView.setSelectedGroup(0);
 		}
 	}
 
@@ -496,8 +512,14 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 			return row;
 		}
 
-		public int getGroupIndex(GpxDisplayGroup group) {
-			return groups.indexOf(group);
+		public int getGroupIndex(@NonNull GpxDisplayGroup group) {
+			String name = group.getName();
+			for (GpxDisplayGroup g : groups) {
+				if (Algorithms.objectEquals(name, g.getName())) {
+					return groups.indexOf(g);
+				}
+			}
+			return -1;
 		}
 
 		private void setGroupSelection(List<GpxDisplayItem> items, int groupPosition, boolean select) {
@@ -563,7 +585,7 @@ public class TrackPointsCard extends MapBaseCard implements OnChildClickListener
 		protected void publishResults(CharSequence constraint, FilterResults results) {
 			synchronized (adapter) {
 				adapter.setFilterResults((Set<?>) results.values);
-				adapter.synchronizeGroups(getDisplayGroups());
+				adapter.synchronizeGroups(getOriginalGroups());
 			}
 			adapter.notifyDataSetChanged();
 			expandAllGroups();

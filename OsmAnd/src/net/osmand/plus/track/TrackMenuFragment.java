@@ -1098,7 +1098,6 @@ public class TrackMenuFragment extends ContextMenuScrollFragment implements Card
 			GpxDisplayGroup group = groupsCard.getSelectedGroup();
 			if (pointsCard != null) {
 				pointsCard.setSelectedGroup(group);
-				pointsCard.moveToSelectedGroup();
 				if (group != null) {
 					fitSelectedPointsGroupOnMap(group);
 				} else {
