@@ -81,7 +81,7 @@ public enum ProfileIcons {
 	}
 
 	public static String getResStringByResId(int resId) {
-		for ( ProfileIcons pi : values()) {
+		for (ProfileIcons pi : values()) {
 			if (pi.resId == resId) {
 				return pi.resStringId;
 			}

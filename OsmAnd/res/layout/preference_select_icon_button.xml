@@ -11,7 +11,6 @@
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:id="@+id/outlineRect"
-			android:contentDescription="@string/add_new_category"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			app:srcCompat="@drawable/bg_select_icon_button_outline" />

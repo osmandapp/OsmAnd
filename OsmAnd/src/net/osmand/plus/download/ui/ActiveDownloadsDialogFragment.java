@@ -37,8 +37,6 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 		adapter.refreshAllData();
 	}
 
-	;
-
 	@Override
 	public void downloadHasFinished() {
 		adapter.refreshAllData();
@@ -47,9 +45,6 @@ public class ActiveDownloadsDialogFragment extends DialogFragment implements Dow
 	public void downloadInProgress() {
 		adapter.notifyDataSetChanged();
 	}
-
-	;
-
 
 	DownloadActivity getDownloadActivity() {
 		return (DownloadActivity) getActivity();

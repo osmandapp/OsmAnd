@@ -167,18 +167,16 @@ public class ItemViewHolder {
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		nameTextView.setText(text);
-
 		rightImageButton.setAccessibilityDelegate(new View.AccessibilityDelegate() {
 			public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
 				super.onInitializeAccessibilityNodeInfo(host, info);
-				info.setContentDescription(context.getString(R.string.download) + text);
+				info.setContentDescription(context.getString(R.string.shared_string_download) + text);
 				info.addAction(new AccessibilityNodeInfo.AccessibilityAction(
-						AccessibilityNodeInfo.ACTION_CLICK, context.getString(R.string.download)
+						AccessibilityNodeInfo.ACTION_CLICK, context.getString(R.string.shared_string_download)
 				));
 				info.setEnabled(host.isEnabled());
 			}
 		});
-
 
 		if (!disabled) {
 			nameTextView.setTextColor(textColorPrimary);

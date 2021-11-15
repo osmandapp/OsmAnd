@@ -9,7 +9,7 @@
 
 	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/outlineRect"
-		android:contentDescription="@string/favourites_folder"
+		android:contentDescription="@string/add_to_group"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		app:srcCompat="@drawable/bg_select_group_button_outline" />
