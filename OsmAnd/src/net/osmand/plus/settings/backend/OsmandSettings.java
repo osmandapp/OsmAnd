@@ -1764,6 +1764,8 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> MAP_TRANSPARENCY = new IntPreference(this, "map_transparency", 255).makeProfile().cache();
 
+	public final CommonPreference<Boolean> SHOW_MAP_LAYER_PARAMETER = new BooleanPreference(this, "show_map_layer_parameter", false).makeProfile().cache();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference(this, "map_tile_sources",
 			TileSourceManager.getMapnikSource().getName()).makeProfile();
@@ -1928,8 +1930,8 @@ public class OsmandSettings {
 		return map;
 	}
 
-	public final OsmandPreference<Boolean> SHARED_STORAGE_WARNING_DIALOG_SHOWN = new BooleanPreference(this,
-			"shared_storage_warning_dialog_shown", false).makeGlobal();
+	public final OsmandPreference<Boolean> SHARED_STORAGE_MIGRATION_DIALOG_SHOWN = new BooleanPreference(this,
+			"shared_storage_migration_dialog_shown", false).makeGlobal();
 
 	public static final String EXTERNAL_STORAGE_DIR = "external_storage_dir"; //$NON-NLS-1$
 

@@ -4193,4 +4193,20 @@
     <string name="poi_heating_radiator">散熱器</string>
     <string name="poi_heating_fireplace">壁爐</string>
     <string name="poi_fridge_no">否</string>
+    <string name="poi_faculty_aerospace">航太</string>
+    <string name="poi_faculty_architecture">建築</string>
+    <string name="poi_faculty_arts">藝術</string>
+    <string name="poi_faculty_biology">生物</string>
+    <string name="poi_faculty_economics">經濟</string>
+    <string name="poi_faculty_education">教育</string>
+    <string name="poi_faculty_engineering">工程</string>
+    <string name="poi_faculty_geography">地理</string>
+    <string name="poi_faculty_law">法律</string>
+    <string name="poi_faculty_mathematics">數學</string>
+    <string name="poi_faculty_nursing">護理</string>
+    <string name="poi_faculty_psychology">心理</string>
+    <string name="poi_faculty_filter">學院</string>
+    <string name="poi_faculty_chemistry">化學</string>
+    <string name="poi_faculty_communication">通訊</string>
+    <string name="poi_faculty_medicine">醫學</string>
 </resources>

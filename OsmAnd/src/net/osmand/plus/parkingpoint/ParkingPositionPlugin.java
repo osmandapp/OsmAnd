@@ -1,6 +1,8 @@
 package net.osmand.plus.parkingpoint;
 
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -29,8 +31,6 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.settings.backend.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
@@ -38,17 +38,17 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.quickaction.QuickActionType;
 import net.osmand.plus.settings.backend.ApplicationMode;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.layers.MapInfoLayer;
 import net.osmand.plus.views.mapwidgets.widgets.TextInfoWidget;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 
 /**
  * 
@@ -584,9 +584,11 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		String startTime = getFormattedTime(getStartParkingTime());
 		if (getParkingType()) {
 			parkingStartDesc.append(ctx.getString(R.string.osmand_parking_position_name));
-			parkingStartDesc.append(", ");
-			parkingStartDesc.append(ctx.getString(R.string.parked_at));
-			parkingStartDesc.append(" ").append(startTime);
+			if (getStartParkingTime() > 0) {
+				parkingStartDesc.append(", ");
+				parkingStartDesc.append(ctx.getString(R.string.parked_at));
+				parkingStartDesc.append(" ").append(startTime);
+			}
 		} else {
 			parkingStartDesc.append(ctx.getString(R.string.osmand_parking_position_description_add_time));
 			parkingStartDesc.append(" ");

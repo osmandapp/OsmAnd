@@ -1,13 +1,5 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
-import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
-import static net.osmand.GPXUtilities.log;
-import static net.osmand.data.FavouritePoint.BackgroundType;
-import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
-import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -82,6 +74,14 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
+
+import static net.osmand.GPXUtilities.DEFAULT_ICON_NAME;
+import static net.osmand.GPXUtilities.log;
+import static net.osmand.data.FavouritePoint.BackgroundType;
+import static net.osmand.data.FavouritePoint.DEFAULT_BACKGROUND_TYPE;
+import static net.osmand.data.FavouritePoint.DEFAULT_UI_ICON_ID;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.isPersonalCategoryDisplayName;
 
 public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implements ColorPickerListener, CardListener {
 
@@ -161,7 +161,7 @@ public abstract class PointEditorFragmentNew extends BaseOsmAndFragment implemen
 				nightMode ? R.color.app_bar_color_dark : R.color.list_background_color_light));
 		toolbar.setTitle(getToolbarTitle());
 		Drawable icBack = app.getUIUtilities().getIcon(AndroidUtils.getNavigationIconResId(app),
-				ColorUtilities.getActiveButtonsAndLinksTextColorId(nightMode));
+				nightMode ? R.color.active_buttons_and_links_text_dark : R.color.description_font_and_bottom_sheet_icons);
 		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {

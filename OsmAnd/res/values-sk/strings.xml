@@ -375,7 +375,7 @@
     <string name="build_installed">Zostava {0} nainštalovaná ({1}).</string>
     <string name="downloading_build">Sťahuje sa zostava…</string>
     <string name="install_selected_build">Nainštalovať OsmAnd - {0} z {1} {2} MB ?</string>
-    <string name="loading_builds_failed">Prijímanie zoznamu zostáv OsmAndu zlyhalo</string>
+    <string name="loading_builds_failed">Nepodarilo sa získať zoznam zostavení OsmAndu</string>
     <string name="loading_builds">Načítavajú sa zostavy OsmAndu…</string>
     <string name="select_build_to_install">Vyberte zostavu OsmAndu na nainštalovanie</string>
     <string name="contribution_activity">Nainštalovať verziu</string>
@@ -835,7 +835,7 @@
     <string name="zxing_barcode_scanner_not_found">Aplikácia na čítanie čiarových kódov ZXing Barcode Scanner nie je nainštalovaná. Nájsť v Google Play?</string>
     <string name="rendering_attr_showRoadMaps_description">Vyberte, kedy zobraziť mapy ciest:</string>
     <string name="safe_mode">Bezpečný režim</string>
-    <string name="safe_mode_description">Spustenie aplikácie v bezpečnom režime (namiesto natívneho kódu sa použije pomalší kód pre Android).</string>
+    <string name="safe_mode_description">Spustiť aplikáciu v (pomalšom) bezpečnom režime.</string>
     <string name="background_service_is_enabled_question">Služba v pozadí je stále spustená. Zastaviť tu tiež?</string>
     <string name="native_library_not_running">Aplikácia je spustená v bezpečnom režime (vypnete ho v \"Nastaveniach\").</string>
     <string name="download_roads_only_maps">Mapa ciest</string>
@@ -1720,7 +1720,7 @@
     <string name="first_usage_item_description">Ako sťahovať mapy, urobiť základné nastavenia.</string>
     <string name="navigation_item_description">Nastaviť navigáciu.</string>
     <string name="faq_item">Otázky</string>
-    <string name="faq_item_description">Často kladené otázky</string>
+    <string name="faq_item_description">Často kladené otázky.</string>
     <string name="map_viewing_item">Prezeranie mapy</string>
     <string name="search_on_the_map_item">Hľadanie na mape</string>
     <string name="planning_trip_item">Plánovanie výletu</string>
@@ -3101,7 +3101,7 @@
     <string name="get_discount_title">Získajte %1$d %2$s pri zľave %3$s.</string>
     <string name="get_discount_first_part">%1$s za prvé %2$s</string>
     <string name="get_discount_first_few_part">%1$s za prvé %2$s</string>
-    <string name="get_discount_second_part">potom %1$s</string>
+    <string name="get_discount_second_part">Potom %1$s</string>
     <string name="cancel_subscription">Zrušiť predplatné</string>
     <string name="price_and_discount">%1$s • Ušetrite %2$s</string>
     <string name="day">Deň</string>
@@ -3415,9 +3415,9 @@
     <string name="please_provide_profile_name_message">Prosím zadajte názov pre profil</string>
     <string name="open_settings">Otvoriť nastavenia</string>
     <string name="plugin_disabled">Modul vypnutý</string>
-    <string name="plugin_disabled_descr">Tento modul je samostatnou aplikáciou a budete ho musieť samostatne odstrániť, ak ho už nebudete chcieť používať.
+    <string name="plugin_disabled_descr">Tento modul je samostatnou aplikáciou. Jeho vypnutie ho neodstráni.
 \n
-\nModul zostane v zariadení aj po odstránení OsmAndu.</string>
+\nMôžete ho odinštalovať v aplikáciách Androidu.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="shared_string_routing">Navigácia</string>
@@ -4261,15 +4261,14 @@
     <string name="promo_subscription">Propagačné predplatné</string>
     <string name="on_hold_since">Pozastavené od %1$s</string>
     <string name="active_till">Aktívne do %1$s</string>
-    <string name="track_has_no_needed_data">Stopa neobsahuje potrebné údaje.</string>
-    <string name="not_enough_contributions_descr">Vyžaduje sa aspoň %1$s príspevkov do OpenStreetMap za posledných %2$s dní.</string>
+    <string name="track_has_no_needed_data">V stope chýbajú potrebné údaje.</string>
     <string name="shared_string_contributions">Príspevky</string>
     <string name="contributions_may_calculate_with_delay">Výpočet príspevkov môže trvať niekoľko hodín.</string>
     <string name="map_updates_are_unavailable_yet">Aktualizácie máp ešte nie sú dostupné :-(</string>
     <string name="connect_track_points_as">Spojiť body trasy</string>
     <string name="pro_features">Pokročilé (Pro) funkcie</string>
     <string name="purchases_feature_desc_pro_widgets">Získajte prístup k pokročilým (Pro) funkciám OsmAnd: Vyfarbenie trás a ďalšie.</string>
-    <string name="option_available_only_in_osmand_pro">Voľba je dostupná v predplatnom OsmAnd Pro.</string>
+    <string name="option_available_only_in_osmand_pro">Dostupné v predplatnom OsmAnd Pro.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Preskúmajte predplatné OsmAnd a nájdite to vhodné pre vás.</string>
     <string name="routes_color_by_type">Vyfarbiť trasy podľa…</string>
     <string name="shared_string_relation">Relácia</string>
@@ -4292,33 +4291,33 @@
     <string name="backup_error_no_subscription">Neexistuje žiadne predplatné</string>
     <string name="map_updates_for_mappers">Aktualizácie máp pre maperov</string>
     <string name="benefits_for_contributors">Výhody pre aktívnych prispievateľov do OSM</string>
-    <string name="benefits_for_contributors_primary_descr">Môžete mať nárok na neobmedzené hodinové aktualizácie máp ak ste aktívnym prispievateľom do OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">Aktívni prispievatelia do OpenStreetMap.org môžu mať nárok na neobmedzené hodinové aktualizácie máp.</string>
     <string name="benefits_for_contributors_secondary_descr">Prihláste sa do OpenStreetMap, aby ste zistili, či máte nárok na neobmedzené mesačné a hodinové aktualizácie máp.</string>
     <string name="use_login_and_password">Použiť prihlasovacie meno a heslo</string>
     <string name="available_until">Dostupné do %1$s</string>
     <string name="enough_contributions_descr">Gratulujeme, vykonali ste dostatok príspevkov do OpenStreetMap a teraz môžete využiť neobmedzené aktualizácie máp v OsmAnd!</string>
     <string name="purchases_restored">Nákupy obnovené</string>
-    <string name="grey_color_undefined">Sivá farba je použitá pre časti bez údajov.</string>
+    <string name="grey_color_undefined">Časti bez údajov sú sivou farbou.</string>
     <string name="osm_live_payment_subscription_management_amz">Platba je stiahnutá z vášho účtu Amazon pri potvrdení nákupu.
 \n
 \nObnovuje sa automaticky ak nie je zrušená pred zvoleným intervalom predĺženia.
 \n
 \nSpravujte alebo zrušte kedykoľvek vaše predplatné vo vašich nastaveniach Amazon.</string>
     <string name="cancel_anytime_in_amazon_app">Zrušte kedykoľvek v aplikácii Amazon</string>
-    <string name="amz_manage_subscription_descr">Pre správu vášho predplatného použite aplikáciu Amazon na zariadení, alebo otvorte stránku Amazon.com s vaším profilom.</string>
+    <string name="amz_manage_subscription_descr">Spravujte vaše predplatné pomocou aplikácie Amazon alebo na stránke Amazon.</string>
     <string name="empty_category_name">Prázdny názov kategórie</string>
-    <string name="no_activity_for_intent">Nenašli sa vhodné aplikácie na vykonanie tejto akcie</string>
+    <string name="no_activity_for_intent">Nainštalujte aplikáciu, ktorá môže vykonať túto akciu.</string>
     <string name="no_items_of_type_message">Nemáte žiadne položky tohto typu</string>
-    <string name="routeInfo_tracktype_description">Zafarbenie trasy alebo stopy podľa vlastností zloženia jej povrchu. Obyčajne sa aplikuje na cesty, kde hlavná cestná sieť pozostáva z nespevnených ciest.</string>
-    <string name="routeInfo_winter_ice_road_description">Zafarbenie trasy alebo stopy podľa zimnej klasifikácie, ktorá je použiteľná len v zime.</string>
-    <string name="routeInfo_smoothness_description">Poskytuje klasifikačnú schému podľa fyzickej použiteľnosti cesty pre kolesové vozidlá, najmä vzhľadom na pravidelnosť/rovnosť povrchu.</string>
-    <string name="routeInfo_surface_description">Poskytuje ďalšiu informáciu o fyzickom povrchu ciest/chodníkov.</string>
-    <string name="routeInfo_roadClass_description">Zafarbenie trasy alebo stopy podľa klasifikácie cesty.</string>
+    <string name="routeInfo_tracktype_description">Zafarbiť čiaru trasy alebo stopy podľa zloženia jej povrchu. Obyčajne sa používa keď cestná sieť pozostáva najmä z nespevnených ciest.</string>
+    <string name="routeInfo_winter_ice_road_description">Zafarbiť čiaru trasy alebo stopy podľa jej zimnej klasifikácie.</string>
+    <string name="routeInfo_smoothness_description">Klasifikácia manévrovateľnosti ciest/chodníkov pre kolesové vozidlá, najmä vzhľadom na pravidelnosť/rovnosť povrchu.</string>
+    <string name="routeInfo_surface_description">Poskytuje informáciu o fyzickom povrchu ciest/chodníkov.</string>
+    <string name="routeInfo_roadClass_description">Zafarbiť čiaru trasy alebo stopy podľa klasifikácie cesty.</string>
     <string name="add_group_to_markers">Pridať skupinu do zoznamu značiek</string>
     <string name="remove_group_from_markers">Odstrániť skupinu zo zoznamu značiek</string>
     <string name="start_point">Štart</string>
     <string name="mapillary_menu_filter_description_new">Filtrovať obrázky podľa dátumu alebo typu. Aktívne len pri vysokom priblížení.</string>
-    <string name="service_is_not_available_please_try_later">Služba nie je dostupná, skúste prosím neskôr</string>
+    <string name="service_is_not_available_please_try_later">Služba nie je dostupná. Prosím skúste neskôr.</string>
     <string name="shared_string_files">Súbory</string>
     <string name="travel_route_types">Typy trás</string>
     <string name="sample_wikivoyage">Ukážka Wikivoyage</string>
@@ -4339,12 +4338,11 @@
     <string name="upload_gpx_description_hint">Ak necháte prázdne, názvy stôp budú použité ako popis. Zadaný popis bude aplikovaný na každú stopu.</string>
     <string name="icon_group_nautical">Námorné</string>
     <string name="shared_storage_warning_title">Zmeny v pravidlách prístupu k úložisku</string>
-    <string name="internal_app_storage_description">Interné úložisko, skryté pred používateľom a inými aplikáciami, kde nikto okrem OsmAnd nezíska vaše údaje</string>
+    <string name="internal_app_storage_description">Interné úložisko, skryté pred všetkými používateľmi a inými aplikáciami, kde len OsmAnd môže použiť vaše údaje.</string>
     <string name="shared_string_details">Podrobnosti</string>
     <string name="shared_app_storage_description">Zdieľaná pamäť už nie je dostupná kvôli zmenám prístupu k úložisku v Androide.</string>
-    <string name="rendering_attr_noNatureReserves_description">Skryť prírodné rezervácie, chránené oblasti a národné parky.</string>
-    <string name="purchases_feature_desc_android_auto">Mapy a navigácia OsmAnd na obrazovke vášho vozidla. Integrujte pohodlne do ovládania vášho vozidla.</string>
-    <string name="rendering_attr_noNatureReserves_name">Prírodná rezervácia</string>
+    <string name="purchases_feature_desc_android_auto">Prináša mapy a navigáciu OsmAnd na obrazovku vášho vozidla a zapojí sa do ovládania vášho vozidla.</string>
+    <string name="rendering_attr_natureReserves_name">Prírodné rezervácie</string>
     <string name="shared_string_articles">Články</string>
     <string name="included_categories">Zahrnuté kategórie</string>
     <string name="release_4_1">• Prvotná podpora pre Android Auto
@@ -4363,26 +4361,24 @@
 \n
 \n • Vylepšené vykreslenie výškovej značky SRTM
 \n
-\n • Opravené zobrazenie arabčiny na mape
+\n • Opravené zobrazenie arabských názvov na mape
 \n
 \n • Opravené rôzne problémy výpočtu trasy
 \n
 \n</string>
-    <string name="search_history_is_disabled_descr">Zapnúť históriu vyhľadávania môžete v Nastaveniach</string>
-    <string name="shared_storage_warning_description">Od novembra 2021 OsmAnd 4.2 stratí prístup k zdieľanému úložisku, kvôli zmenám prístupových pravidiel v systéme Android.
+    <string name="search_history_is_disabled_descr">Zapnúť históriu vyhľadávania môžete v nastaveniach.</string>
+    <string name="shared_storage_warning_description">Kvôli zmenám prístupových pravidiel v systéme Android, stratí od novembra 2021 OsmAnd 4.2 prístup k zdieľanému úložisku.
 \n
-\nProsím zmente úložisko zo zdieľaného na iné dostupné úložisko. Ak to nebude vykonané, aplikácia stratí prístup k vašim údajom: mapám, GPX stopám a všetkému ostatnému.</string>
-    <string name="markers_history_is_disabled_descr">Zapnite históriu pre získanie zoznamu navštívených mapových značiek.</string>
+\nProsím zmeňte úložisko zo zdieľaného na iné dostupné úložisko, inak aplikácia stratí prístup k vašim údajom, ako mapám, GPX stopám atď.</string>
+    <string name="markers_history_is_disabled_descr">Zapnite históriu pre pamätanie zoznamu navštívených mapových značiek.</string>
     <string name="history_is_disabled_descr">Zapnite históriu pre získanie rýchlejšieho prístupu k posledným výsledkom.</string>
-    <string name="clear_all_history_warning">Naozaj chcete vymazať všetky histórie v aplikácii\?
-\n
-\nHistória vyhľadávania, navigácie a značiek bude vymazaná.</string>
-    <string name="shortcut_navigate_to_home">Navigovať domov</string>
+    <string name="clear_all_history_warning">Vymazať všetky histórie v aplikácii vrátane vyhľadávania, navigácie a značiek\?</string>
+    <string name="shortcut_navigate_to_home">Navigovať do \'Domov\'</string>
     <string name="navigation_history">História navigácie</string>
     <string name="android_auto_map_placeholder_title">Mapa je zobrazená na obrazovke vozidla.</string>
     <string name="android_auto_map_placeholder_descr">Odpojte zariadenie od Android Auto, aby ste zobrazili mapu v aplikácii.</string>
     <string name="android_auto_purchase_request_title">Kúpte si OsmAnd Pro alebo Mapy+, ak chcete použiť OsmAnd s Android Auto</string>
-    <string name="continue_on_phone">Pokračovať na telefóne</string>
+    <string name="continue_on_phone">Pokračovať na mobilnom zariadení</string>
     <string name="location_access_request_action">Povoliť prístup</string>
     <string name="is_disabled">%1$s je vypnuté</string>
     <string name="clear_all_history">Vymazať celú históriu</string>
@@ -4391,9 +4387,52 @@
     <string name="history_preferences_descr">Históriu môžete vypnúť pre jednotlivé typy činností.</string>
     <string name="shortcut_start_recording">Spustiť záznam</string>
     <string name="shortcut_navigate_to">Navigovať do…</string>
-    <string name="shortcut_navigate_to_work">Navigovať do práce</string>
-    <string name="location_access_request_title">Pre navigáciu potrebuje OsmAnd prístup k polohe</string>
+    <string name="shortcut_navigate_to_work">Navigovať do \'Práca\'</string>
+    <string name="location_access_request_title">Pre navigáciu potrebuje OsmAnd povolenie na prístup k polohe.</string>
     <string name="location_access_request_result">Povolené: %1$s Zamietnuté: %2$s</string>
     <string name="transparent_status_bar_descr">Zobraziť mapu pod stavovým riadkom</string>
     <string name="transparent_status_bar">Priehľadný stavový riadok</string>
+    <string name="shared_string_travelbooks">Cestovné denníky</string>
+    <string name="safe_settings">Bezpečné</string>
+    <string name="display_route_tracks_as_poi">Zobraziť stopy ako body záujmu</string>
+    <string name="approx_safe_mode">Bezpečné aproximácie GPX</string>
+    <string name="use_external_timestamps">Použiť externé časové značky</string>
+    <string name="use_external_timestamps_description">Použiť časové značky online navigačnej služby pre úpravu odhadovaného času a priemernej rýchlosti</string>
+    <string name="no_plugins_enabled">Nemáte zapnuté žiadne zásuvné moduly. Zoznam dostupných modulov môžete nájsť v \'Menu\' → \'Zásuvné moduly\'.</string>
+    <string name="display_route_tracks">Zobraziť stopy</string>
+    <string name="approx_safe_mode_description">Vykonať aproximácie GPX pomocou pomalšieho kódu pre Android namiesto natívneho kódu.</string>
+    <string name="delete_history_items_descr">Naozaj chcete vymazať zvolené položky histórie\?</string>
+    <string name="quick_action_toggle_preference">Prepínač stavu zvoleného nastavenia.</string>
+    <string name="delete_history_items">Vymazať %1$s položiek histórie\?</string>
+    <string name="from_to_with_params">Z %1$s do %2$s</string>
+    <string name="progress_complete">%1$s hotovo</string>
+    <string name="storage_copying_files_size">Kopíruje sa %1$s súborov %2$s</string>
+    <string name="storage_found_files_size">Nájdených %1$s súborov %2$s</string>
+    <string name="shared_storage_first_step">Stlačte \"%1$s\".
+\nOtvorí sa správca súborov, v ktorom vyhľadajte priečinok osmand.</string>
+    <string name="copying_completed">Kopírovanie dokončené</string>
+    <string name="shared_string_copy_to">Kopírovať do</string>
+    <string name="icon_group_industrial">Priemysel</string>
+    <string name="start_copying">Začať kopírovanie</string>
+    <string name="storage_found_files_descr">Stlačte “%1$s” pre skopírovanie %2$s súborov z “%3$s” do “%4$s”. Môže to chvíľu trvať.</string>
+    <string name="shared_storage_third_step">Povoľte prístup k priečinku. Bez tohto povolenia nemôže OsmAnd skopírovať súbory.</string>
+    <string name="files_remaining">Zostávajúce súbory: %1$s %2$s</string>
+    <string name="storage_copied_files_size">Skopírovaných %1$s súborov %2$s</string>
+    <string name="copying_file">Kopíruje sa súbor %1$s</string>
+    <string name="shared_string_skip_warning">Naozaj chcete preskočiť migráciu\? OsmAnd už nemá prístup k vašim súborom v zdieľanom úložisku.
+\n
+\nAplikácia sa spustí v novom priečinku s vašimi údajmi.</string>
+    <string name="shared_storage_last_step">Po zvolení zdieľaného úložiska budete môcť zadať nové úložisko.</string>
+    <string name="folder_access_denied">Na prístup k zvolenému priečinku je potrebné povolenie.</string>
+    <string name="skip_confirmation">Áno, preskočiť</string>
+    <string name="shared_storage">Zdieľané úložisko</string>
+    <string name="shared_storage_migration_descr">Kvôli zmenám pravidiel prístupu k úložisku v Androide už OsmAnd nemôže ďalej používať %1$s.
+\n
+\nMusíte skopírovať všetky vaše údaje do nového úložného miesta.</string>
+    <string name="shared_storage_migration">Migrácia zdieľaného úložiska</string>
+    <string name="icon_group_education">Vzdelávanie</string>
+    <string name="shared_storage_second_step">Stlačte \"Použiť tento priečinok\".</string>
+    <string name="shared_string_migration">Migrácia</string>
+    <string name="rendering_attr_natureReserves_description">Zobraziť prírodné rezervácie, chránené oblasti a národné parky.</string>
+    <string name="not_enough_contributions_descr">Vyžaduje sa aspoň %1$s zmien za posledné 2 mesiace %2$s, aby ste získali neobmedzené hodinové aktualizácie máp.</string>
 </resources>

@@ -1432,7 +1432,7 @@
     <string name="local_index_action_do">%2$s obyekti %1$smək üzrəsiniz. Davam edilsin?</string>
     <string name="local_indexes_cat_backup">Qeyri-aktiv edilmiş</string>
     <string name="ttsvoice">TTS səsi</string>
-    <string name="internet_connection_required_for_online_route">Onlayn naviqasiya xidməti seçildi, amma internet bağlantısı yoxdur.</string>
+    <string name="internet_connection_required_for_online_route">Onlayn naviqasiya oflayn rejimdə işləmir.</string>
     <string name="gpx_option_destination_point">Hazırkı təyinat nöqtəsini istifadə et</string>
     <string name="home">Alət paneli</string>
     <string name="dahboard_options_dialog_title">Alət panelini tənzimlə</string>
@@ -1462,7 +1462,7 @@
     <string name="map_markers_other">Digər işarələr</string>
     <string name="rendering_attr_hideUnderground_name">Yeraltı obyektlər</string>
     <string name="data_is_not_available">Məlumatlar mövcud deyil</string>
-    <string name="starting_point">Başlanğıc nöqtə</string>
+    <string name="starting_point">Başlanğıc nöqtəsi</string>
     <string name="rendering_attr_horseRoutes_name">At marşrutları</string>
     <string name="show_on_start_description">“Sönülü” birbaşa xəritə ekranını başladır.</string>
     <string name="osm_save_offline">Oflayn saxla</string>
@@ -1832,7 +1832,7 @@
     <string name="first_intermediate_dest_description">İlk dayanacaq əlavə edir</string>
     <string name="subsequent_dest_description">Təyinat nöqtəsini yuxarı daşı və yarat</string>
     <string name="empty_state_av_notes">Qeydlər yaradın!</string>
-    <string name="empty_state_av_notes_desc">Widget və ya kontekst menyusunu istifadə edərək xəritədəki hər nöqtəyə səs, video və ya şəkil qeydi əlavə edin.</string>
+    <string name="empty_state_av_notes_desc">Widget-lər və ya kontekst menyularını istifadə edərək xəritədəki istənilən nöqtəyə səs, video və ya şəkil qeydləri əlavə edin.</string>
     <string name="import_gpx_file_description">Favoritlər və ya GPX faylı kimi idxal edilə bilər.</string>
     <string name="plan_route_no_markers_toast">Bu funksiyanı istifadə etmək üçün ən azı bir işarə əlavə etməlisiniz.</string>
     <string name="osn_modify_dialog_error">Qeyd dəyişdirilə bilmədi.</string>
@@ -2186,10 +2186,10 @@
     <string name="backup_do_not_have_any">Hələ onlayn nüsxəniz yoxdur.</string>
     <string name="backup_data_removed">Bütün məlumatlar silindi.</string>
     <string name="shared_string_details">Detallar</string>
-    <string name="continue_on_phone">Telefonda davam et</string>
+    <string name="continue_on_phone">Mobil cihazda davam et</string>
     <string name="shared_string_articles">Məqalələr</string>
     <string name="pro_features">Pro xüsusiyyətləri</string>
-    <string name="shared_app_storage_description">Android-də saxlama giriş qaydalarında dəyişiklik edildiyinə görə paylaşılan yaddaş artıq mövcud deyil.</string>
+    <string name="shared_app_storage_description">Dəyişilən Android yaddaş girişinə görə paylaşılan yaddaş artıq mövcud deyil.</string>
     <string name="use_login_and_password">İstifadəçi adı və şifrə istifadə et</string>
     <string name="backup_deleted_all_data_descr">Bütün məlumatlarınız OsmAnd Cloud-dan uğurla silindi.</string>
     <string name="android_auto_purchase_request_title">OsmAnd-ı Android Auto ilə istifadə etmək üçün OsmAnd Pro və ya Maps+ alın</string>
@@ -2198,7 +2198,7 @@
     <string name="no_activity_for_intent">Bu fəaliyyəti yerinə yetirmək üçün uyğun proqram tapılmadı</string>
     <string name="empty_category_name">Boş kateqoriya adı</string>
     <string name="cancel_anytime_in_amazon_app">İstənilən vaxt Amazon App-da ləğv edin</string>
-    <string name="grey_color_undefined">Məlumat olmayan hissələr üçün boz rəng istifadə olunur.</string>
+    <string name="grey_color_undefined">Məlumat olmayan hissələr boz rəngdədir.</string>
     <string name="purchases_restored">Alışlar bərpa edildi</string>
     <string name="connect_track_points_as">Marşrut nöqtələrini birləşdir</string>
     <string name="shared_string_purchased">Alındı</string>
@@ -2348,9 +2348,9 @@
     <string name="added_profiles_descr">Qoşma tərəfindən əlavə edilən profillər</string>
     <string name="shared_string_turn_off">Söndür</string>
     <string name="shared_string_sec">san</string>
-    <string name="shared_storage_warning_description">2021-ci ilin noyabr ayından etibarən OsmAnd 4.2 Android-də saxlama giriş qaydalarının dəyişdirilməsi səbəbindən Paylaşılan yaddaşa girişi itirəcək.
+    <string name="shared_storage_warning_description">Yeni Android qaydalarına görə, 2021-ci ilin noyabr ayından etibarən OsmAnd 4.2 Paylaşılan yaddaşa girişi itirəcək.
 \n
-\nXahiş edirik, saxlamanı Paylaşılan yaddaşdan mövcud yaddaşa dəyişdirin, bu edilmədikdə proqram məlumatlarınıza girişi itirəcək: oflayn xəritələr, GPX izləri və digər hər şey.</string>
+\nZəhmət olmasa, məlumat qovluğunu Paylaşılan yaddaşdan mövcud yaddaşa köçürün, əks halda proqram oflayn xəritələr, GPX izləri və s. kimi məlumatlarınıza girişi itirəcək.</string>
     <string name="setting_supported_by_style">Bu parametr “%1$s” xəritə stili tərəfindən təmin edilib</string>
     <string name="is_disabled">%1$s sönülüdür</string>
     <string name="navigation_history">Naviqasiya tarixçəsi</string>
@@ -2590,4 +2590,40 @@
     <string name="rendering_value_browse_map_name">Xəritəyə bax</string>
     <string name="daynight_descr">Gecə və gündüz rejimi arasında keçidi tənzimləyin.</string>
     <string name="app_mode_enduro_motorcycle">Enduro motosikleti</string>
+    <string name="shared_storage_warning_title">Saxlama giriş qaydalarına dəyişikliklər</string>
+    <string name="route_start_point">Başlanğıc nöqtəsi</string>
+    <string name="swap_two_places">%1$s və %2$sni dəyiş</string>
+    <string name="shared_string_swap">Dəyişdir</string>
+    <string name="previous_route">Əvvəlki marşrut</string>
+    <string name="add_start_point">Başlanğıc nöqtəsi seçin</string>
+    <string name="route_line_use_gradient_coloring">Marşrut xətti yüksəklik yamacı ilə rənglənir.</string>
+    <string name="shared_string_min_height">Min. yüksəklik</string>
+    <string name="plan_a_route">Marşrut planlaşdır</string>
+    <string name="set_working_days_to_continue">Davam etmək üçün iş günləri təyin edin</string>
+    <string name="speed_cameras_removed_descr">Bu cihazda sürət kameraları yoxdur.</string>
+    <string name="routing_attr_length_name">Uzunluq limiti</string>
+    <string name="default_screen_timeout">Standart ekran fasiləsi</string>
+    <string name="uninstall_speed_cameras">Sürət kameralarını sil</string>
+    <string name="keep_screen_off">Ekranı sönülü saxla</string>
+    <string name="keep_screen_on">Ekranı yanılı saxla</string>
+    <string name="language_and_output">Dil və çıxış</string>
+    <string name="turn_screen_on">Ekranı yandır</string>
+    <string name="map_during_navigation">Naviqasiya zamanı xəritə</string>
+    <string name="skip_confirmation">Bəli, keç</string>
+    <string name="route_line_use_map_style_color">Xəritə stilinin (%1$s) standart rəngindən istifadə et.</string>
+    <string name="shared_string_route_line">Marşrut xətti</string>
+    <string name="customize_route_line">Marşrut xəttini fərdiləşdir</string>
+    <string name="routing_profile_broutrer">BRouter (oflayn)</string>
+    <string name="route_line_use_map_style_width">Xəritə stilinin (%1$s) standart genişliyindən istifadə et.</string>
+    <string name="screen_timeout_descr">“%1$s” aktivdirsə, fəaliyyət vaxtı ondan asılı olacaq.</string>
+    <string name="output">Çıxış</string>
+    <string name="track_show_start_finish_icons">Başlama və bitmə ikonlarını göstər</string>
+    <string name="route_between_points">Nöqtələr arasında marşrut</string>
+    <string name="speed_cameras_restart_descr">Bütün sürət kamerası məlumatlarını silmək üçün proqramı yenidən başladın.</string>
+    <string name="route_parameters_info">Seçilmiş “%1$s” profilində marşrut parametrləri.</string>
+    <string name="map_during_navigation_info">Naviqasiya zamanı xəritə</string>
+    <string name="select_track_width">En seçin</string>
+    <string name="please_provide_point_name_error">Zəhmət olmasa, nöqtə üçün ad verin</string>
+    <string name="shared_string_night_map">Gecə xəritəsi</string>
+    <string name="shared_string_max_height">Maks. yüksəklik</string>
 </resources>

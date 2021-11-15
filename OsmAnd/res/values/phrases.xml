@@ -4706,4 +4706,8 @@
 	<string name="poi_faculty_nursing">Nursing</string>
 	<string name="poi_faculty_psychology">Psychology</string>
 
+	<string name="poi_tool_hire">Tool hire</string>
+
+	<string name="poi_escape_game">Escape game</string>
+
 </resources>

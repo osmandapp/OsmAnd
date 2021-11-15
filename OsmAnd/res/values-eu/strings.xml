@@ -4072,7 +4072,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="use_login_and_password">Erabili erabiltzaile izena eta pasahitza</string>
     <string name="available_until">Erabilgarri %1$s arte</string>
     <string name="enough_contributions_descr">Zorionak, OpenStreetMapen nahikoa ekarpen egin dituzu eta mugarik gabeko mapen eguneraketaz baliatu ahal izango duzu.</string>
-    <string name="not_enough_contributions_descr">"Gutxienez %1$s mapa ekarpen egin behar dituzu OpenStreetMapen azken  %2$s egunetan."</string>
     <string name="shared_string_contributions">Ekarpenak</string>
     <string name="contributions_may_calculate_with_delay">Ekarpenen inplementazioa zenbait orduz atzeratu daitezke.</string>
     <string name="map_updates_are_unavailable_yet">Mapen eguneraketak oraindik ez daude erabilgarri :-(</string>

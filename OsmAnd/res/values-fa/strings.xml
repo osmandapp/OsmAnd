@@ -4321,7 +4321,6 @@
     <string name="benefits_for_contributors_secondary_descr">به حساب اوپن‌استریت‌مپ خود وارد شوید تا ببینید آیا شرایط دریافت روزآمدسازی‌های نامحدود ماهانه و ساعتی را دارید.</string>
     <string name="available_until">در دسترس تا %1$s</string>
     <string name="enough_contributions_descr">تبریک، شما به میزان کافی در اوپن‌استریت‌مپ مشارکت کرده‌اید و اکنون می‌توانید از روزآمدسازی‌های نامحدود نقشه در OsmAnd لذت ببرید!</string>
-    <string name="not_enough_contributions_descr">حداقل %1$s مشارکت در اوپن‌استریت‌مپ به‌مدت %2$s روز لازم است.</string>
     <string name="shared_string_contributions">مشارکت‌ها</string>
     <string name="contributions_may_calculate_with_delay">محاسبهٔ مشارکت‌ها ممکن است چندین ساعت زمان ببرد.</string>
     <string name="map_updates_are_unavailable_yet">روزآمدسازه‌های نقشه هنوز در دسترس نیست :-(</string>

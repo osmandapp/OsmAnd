@@ -210,7 +210,7 @@
     <string name="osmand_privacy_policy">ОсмАнд политика приватности</string>
     <string name="telegram_privacy_policy">Политика приватности Телеграма</string>
     <string name="shared_string_accept">Прихвати</string>
-    <string name="privacy_policy_agree">Кликом на „Настави“ прихватате услове политике приватности Телеграма и ОсмАнда.</string>
+    <string name="privacy_policy_agree">Кликом на „Настави“ прихватате услове политике приватности Телеграма и OsmAnd-а.</string>
     <string name="privacy_policy_telegram_client">ОсмАнд пратилац је један од клијената који користе отворену платформу Телеграм. Ваши контакти могу да користе било који други Телеграм клијент.</string>
     <string name="privacy_policy_use_telegram">Телеграм (апликација за размену порука) користи се за повезивање и комуникацију са људима.</string>
     <string name="shared_string_telegram">Телеграм</string>

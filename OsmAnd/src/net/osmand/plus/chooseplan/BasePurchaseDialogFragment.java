@@ -1,6 +1,5 @@
 package net.osmand.plus.chooseplan;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.Drawable;
@@ -56,15 +55,26 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	private int lastKnownToolbarOffset;
 
 	public enum ButtonBackground {
+
 		ROUNDED(R.drawable.rectangle_rounded),
 		ROUNDED_SMALL(R.drawable.rectangle_rounded_small),
 		ROUNDED_LARGE(R.drawable.rectangle_rounded_large);
+
+		public int drawableId;
 
 		ButtonBackground(int drawableId) {
 			this.drawableId = drawableId;
 		}
 
-		public int drawableId;
+		public int getRippleId(boolean nightMode) {
+			if (this == ROUNDED) {
+				return nightMode ? R.drawable.ripple_solid_dark_6dp : R.drawable.ripple_solid_light_6dp;
+			} else if (this == ROUNDED_SMALL) {
+				return nightMode ? R.drawable.ripple_solid_dark_3dp : R.drawable.ripple_solid_light_3dp;
+			} else {
+				return nightMode ? R.drawable.ripple_solid_dark_9dp : R.drawable.ripple_solid_light_9dp;
+			}
+		}
 	}
 
 	@ColorRes
@@ -238,28 +248,20 @@ public abstract class BasePurchaseDialogFragment extends BaseOsmAndDialogFragmen
 	}
 
 	protected void setupRoundedBackground(@NonNull View view, @NonNull Drawable normal,
-										  @ColorInt int color, ButtonBackground background) {
-		Drawable selected = createRoundedDrawable(ColorUtilities.getColorWithAlpha(color, 0.5f), background);
-		setupRoundedBackground(view, normal, selected);
-	}
-
-	protected void setupRoundedBackground(@NonNull View view, @NonNull Drawable normal, @NonNull Drawable selected) {
-		Drawable background;
+	                                      @ColorInt int color, ButtonBackground background) {
+		Drawable drawable;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			background = UiUtilities.getLayeredIcon(normal, getRippleDrawable());
+			Drawable selected = AppCompatResources.getDrawable(app, background.getRippleId(nightMode));
+			drawable = UiUtilities.getLayeredIcon(normal, selected);
 		} else {
-			background = AndroidUtils.createPressedStateListDrawable(normal, selected);
+			Drawable selected = createRoundedDrawable(ColorUtilities.getColorWithAlpha(color, 0.5f), background);
+			drawable = AndroidUtils.createPressedStateListDrawable(normal, selected);
 		}
-		AndroidUtils.setBackground(view, background);
+		AndroidUtils.setBackground(view, drawable);
 	}
 
 	protected Drawable getActiveStrokeDrawable() {
 		return app.getUIUtilities().getIcon(nightMode ? R.drawable.btn_background_stroked_active_dark : R.drawable.btn_background_stroked_active_light);
-	}
-
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
-	protected Drawable getRippleDrawable() {
-		return AppCompatResources.getDrawable(app, nightMode ? R.drawable.purchase_button_ripple_dark : R.drawable.purchase_button_ripple_light);
 	}
 
 	protected Drawable createRoundedDrawable(@ColorInt int color, ButtonBackground background) {

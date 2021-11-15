@@ -1537,7 +1537,7 @@
     <string name="lang_hr">Hırvatça</string>
     <string name="lang_cs">Çekçe</string>
     <string name="lang_da">Danca</string>
-    <string name="lang_nl">Flemenkçe</string>
+    <string name="lang_nl">Felemenkçe</string>
     <string name="lang_fi">Fince</string>
     <string name="lang_fr">Fransızca</string>
     <string name="lang_ka">Gürcüce</string>
@@ -4297,7 +4297,6 @@
     <string name="use_login_and_password">Kullanıcı adı ve parola kullan</string>
     <string name="available_until">%1$s tarihine kadar kullanılabilir</string>
     <string name="enough_contributions_descr">Tebrikler, OpenStreetMap\'e yeterince katkıda bulundunuz ve artık sınırsız OsmAnd harita güncellemesinin keyfini çıkarabilirsiniz!</string>
-    <string name="not_enough_contributions_descr">OpenStreetMap\'a en az %1$s katkıda bulunma (%2$s gün içinde) gereklidir.</string>
     <string name="shared_string_contributions">Katkıda bulunmalar</string>
     <string name="contributions_may_calculate_with_delay">Katkıda bulunmaların hesaplanması birkaç saat sürebilir.</string>
     <string name="map_updates_are_unavailable_yet">Henüz harita güncellemeleri yok. :-(</string>

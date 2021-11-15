@@ -1,16 +1,11 @@
 package net.osmand.plus.dialogs;
 
+import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
+
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-
-import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.Version;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +13,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import static net.osmand.plus.AppInitializer.LATEST_CHANGES_URL;
+import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.datastorage.SharedStorageWarningFragment;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 public class WhatsNewDialogFragment extends DialogFragment {
 
@@ -63,8 +64,8 @@ public class WhatsNewDialogFragment extends DialogFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = requireMyApplication();
-			if (SharedStorageWarningBottomSheet.dialogShowRequired(app)) {
-				SharedStorageWarningBottomSheet.showInstance(mapActivity, true);
+			if (SharedStorageWarningFragment.dialogShowRequired(app)) {
+				SharedStorageWarningFragment.showInstance(mapActivity, true);
 			}
 		}
 	}

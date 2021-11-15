@@ -4208,7 +4208,6 @@
     <string name="online_maps_required_descr">Því miður gat OsmAnd ekki fundið hentuga leið miðað við stillingarnar þínar.
 \n
 \nMögulega er einhverjum kortum ekki hlaðið inn, þú getur keyrt nettengdar prófanir fyrir nauðsynleg kort.</string>
-    <string name="not_enough_contributions_descr">Það þarf allavega %1$s OpenStreetMap-framlög innan %2$s daga.</string>
     <string name="contributions_may_calculate_with_delay">Útreikningur á framlögum getur tekið marga klukkutíma.</string>
     <string name="purchases_feature_desc_pro_widgets">Fáðu aðgang að ítarlegum OsmAnd Pro eiginleikum:.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Skoðaðu áskriftarleiðir OsmAnd til að finna einhverja sem hentar þér.</string>
@@ -4291,8 +4290,7 @@
     <string name="routing_attr_only_permitted_streets_name">Sérstaklega leyfðar götur</string>
     <string name="search_title">Leit að: %1$s</string>
     <string name="sample_wikivoyage">Prófaðu Wikivoyage</string>
-    <string name="rendering_attr_noNatureReserves_description">Fela náttúruverndarsvæði, friðlönd og þjóðgarða.</string>
-    <string name="rendering_attr_noNatureReserves_name">Náttúruverndarsvæði</string>
+    <string name="rendering_attr_natureReserves_name">Náttúruverndarsvæði</string>
     <string name="icon_group_nautical">Sjótengt</string>
     <string name="included_categories">Innifaldir flokkar</string>
     <string name="shared_string_details">Nánar</string>

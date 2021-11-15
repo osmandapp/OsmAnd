@@ -5,7 +5,7 @@
         android:right="1dp"
         android:top="1dp">
         <shape android:shape="rectangle">
-            <corners android:radius="@dimen/context_menu_padding_margin_tiny" />
+            <corners android:radius="@dimen/radius_small" />
             <solid android:color="@color/purchase_sc_discount" />
         </shape>
     </item>

@@ -3998,7 +3998,7 @@
     <string name="poi_authentication_app">Autenticación con aplicación</string>
     <string name="poi_authentication_chip_card">Autenticación vía tarjeta con chip</string>
     <string name="poi_authentication_contactless">Autenticación sin contacto</string>
-    <string name="poi_access_scooter">Acceso en motoneta</string>
+    <string name="poi_access_scooter">Acceso en escúter (motoneta)</string>
     <string name="poi_access_bicycle">Acceso en bicicleta</string>
     <string name="poi_access_motorcar">Acceso en automóvil</string>
     <string name="poi_shelter_yes">Sí</string>
@@ -4058,8 +4058,8 @@
     <string name="poi_beauty_salon_cosmetics">Cosméticos</string>
     <string name="poi_beauty_salon_spa">Spa</string>
     <string name="poi_beauty_salon_skin_care">Cuidado de la piel</string>
-    <string name="poi_beauty_salon_waxing">Depilación</string>
-    <string name="poi_beauty_salon_hair_removal">Depilación</string>
+    <string name="poi_beauty_salon_waxing">Depilación con cera</string>
+    <string name="poi_beauty_salon_hair_removal">Depilación del vello</string>
     <string name="poi_beauty_salon_aesthetic">Estético</string>
     <string name="poi_beauty_salon_massage">Masaje</string>
     <string name="poi_beauty_salon_eyelash">Pestañas</string>
@@ -4193,4 +4193,22 @@
     <string name="poi_generator_type_boiler">Tipo de generador: caldera</string>
     <string name="poi_heating_district_heating">Calefacción urbana</string>
     <string name="poi_heating_radiator">Radiador</string>
+    <string name="poi_faculty_filter">Facultad</string>
+    <string name="poi_faculty_aerospace">Aeroespacial</string>
+    <string name="poi_faculty_education">Educación</string>
+    <string name="poi_faculty_biology">Biología</string>
+    <string name="poi_faculty_communication">Comunicación</string>
+    <string name="poi_faculty_economics">Ciencias económicas</string>
+    <string name="poi_faculty_engineering">Ingenieria</string>
+    <string name="poi_faculty_geography">Geografía</string>
+    <string name="poi_faculty_law">Leyes</string>
+    <string name="poi_faculty_psychology">Psicología</string>
+    <string name="poi_faculty_mathematics">Matemáticas</string>
+    <string name="poi_faculty_nursing">Enfermería</string>
+    <string name="poi_faculty_medicine">Medicina</string>
+    <string name="poi_faculty_architecture">Arquitectura</string>
+    <string name="poi_faculty_arts">Artes</string>
+    <string name="poi_faculty_chemistry">Química</string>
+    <string name="poi_tool_hire">Alquiler de herramientas</string>
+    <string name="poi_escape_game">Juego de escape</string>
 </resources>

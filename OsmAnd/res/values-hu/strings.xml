@@ -4264,7 +4264,6 @@
     <string name="benefits_for_contributors_primary_descr">Korlátlan óránkénti térképfrissítésre lehet jogosult, ha aktívan hozzájárul az OpenStreetMap.org-hoz.</string>
     <string name="benefits_for_contributors_secondary_descr">Jelentkezzen be az OpenStreetMapre, hogy ellenőrizze, jogosult-e korlátlan havi és óránkénti térképfrissítésre.</string>
     <string name="enough_contributions_descr">Gratulálunk, elegendő szerkesztést végzett az OpenStreetMapen, így mostantól korlátlanul élvezheti az OsmAnd térképfrissítéseit!</string>
-    <string name="not_enough_contributions_descr">%2$s napon belül legalább %1$s OpenStreetMap-szerkesztés szükséges.</string>
     <string name="shared_string_contributions">Szerkesztések</string>
     <string name="contributions_may_calculate_with_delay">A szerkesztések kiszámítása több órát is igénybe vehet.</string>
     <string name="map_updates_are_unavailable_yet">Még nem érhető el térképfrissítés :-(</string>
@@ -4339,10 +4338,9 @@
     <string name="internal_app_storage_description">Belső tárhely (elrejtve a felhasználó és más alkalmazások elől), így az OsmAnd-on kívül senki sem férhet hozzá az adataihoz</string>
     <string name="shared_storage_warning_title">Változások a tárhely-hozzáférési szabályokban</string>
     <string name="purchases_feature_desc_android_auto">OsmAnd offline térképek és navigáció az autója képernyőjén. Kényelmesen integrálható a jármű kezelőszerveivel.</string>
-    <string name="rendering_attr_noNatureReserves_description">Természetvédelmi területek, védett területek és nemzeti parkok elrejtése.</string>
     <string name="shared_string_details">Részletek</string>
     <string name="shared_app_storage_description">A megosztott memória már nem érhető el az Android tárhely-hozzáférési szabályainak változásai miatt.</string>
-    <string name="rendering_attr_noNatureReserves_name">Természetvédelmi terület</string>
+    <string name="rendering_attr_natureReserves_name">Természetvédelmi terület</string>
     <string name="shared_string_articles">Cikkek</string>
     <string name="included_categories">Tartalmazott kategóriák</string>
     <string name="release_4_1">- Android Auto kezdeti támogatás
@@ -4367,15 +4365,13 @@
 \n
 \n</string>
     <string name="android_auto_purchase_request_title">Ha az OsmAndot az Android Autóval kívánja használni, vásárolja meg az OsmAnd Pro vagy a Maps+ alkalmazást</string>
-    <string name="continue_on_phone">Folytatás a telefonon</string>
+    <string name="continue_on_phone">Folytatás a mobileszközön</string>
     <string name="location_access_request_title">Navigáláshoz az OsmAndnak hozzá kell férnie a helymeghatározáshoz</string>
     <string name="android_auto_map_placeholder_title">A térkép megjelenik a jármű képernyőjén.</string>
     <string name="android_auto_map_placeholder_descr">A térképnek az alkalmazásban történő megjelenítéséhez válassza le a készüléket az Android Auto rendszerről.</string>
     <string name="location_access_request_action">Hozzáférés engedélyezése</string>
     <string name="location_access_request_result">Jóváhagyva: %1$s Elutasítva: %2$s</string>
-    <string name="clear_all_history_warning">Biztosan törli az alkalmazás összes előzményét\?
-\n
-\nA keresési, navigációs és térképjelölő-előelőzmények is törlődni fognak.</string>
+    <string name="clear_all_history_warning">Törli az alkalmazás összes előzményét, köztük a keresési, navigációs és jelölőelőzményeket is\?</string>
     <string name="clear_all_history">Az összes előzmény törlése</string>
     <string name="history_actions_descr">Az előzményeket exportálhatja egy fájlba.</string>
     <string name="map_markers_history">Térképjelölők előzményei</string>
@@ -4385,22 +4381,25 @@
     <string name="shortcut_navigate_to">Navigálás ide:</string>
     <string name="transparent_status_bar_descr">Térkép megjelenítése az állapotsor alatt</string>
     <string name="transparent_status_bar">Átlátszó állapotsor</string>
-    <string name="search_history_is_disabled_descr">A keresési előzményeket a Beállításokban engedélyezheti</string>
-    <string name="markers_history_is_disabled_descr">A meglátogatott térképjelölők listájának lekérdezéséhez engedélyezze az előzményeket.</string>
-    <string name="shared_storage_warning_description">2021 novemberétől az OsmAnd 4.2 elveszíti a hozzáférést a megosztott tárhelyhez, az Android megváltozott tárhely-hozzáférési szabályai miatt.
+    <string name="search_history_is_disabled_descr">A keresési előzményeket a beállításokban engedélyezheti</string>
+    <string name="markers_history_is_disabled_descr">A meglátogatott térképjelölők listájának megjegyzéséhez engedélyezze az előzményeket.</string>
+    <string name="shared_storage_warning_description">Az Android új szabályai miatt 2021 novemberétől az OsmAnd 4.2 elveszíti a hozzáférést a megosztott tárhelyhez.
 \n
-\nKérjük, módosítsa a tárhelyet Megosztott tárhelyről elérhető tárhelyre. Ha ez nem történik meg, az alkalmazás elveszíti a hozzáférést az adataihoz, köztük az offline térképekhez, a GPX-nyomvonalakhoz és minden máshoz.</string>
-    <string name="shortcut_navigate_to_work">Navigálás a munkahelyemre</string>
-    <string name="history_is_disabled_descr">A legutóbb felhasznált keresési találatok eléréséhez engedélyezze az előzményeket.</string>
+\nKérjük, helyezze át az adatmappát Megosztott tárhelyből az elérhető tárhelybe. E nélkül az alkalmazás elveszíti a hozzáférést az adataihoz, például az offline térképekhez, a GPX-nyomvonalakhoz stb.</string>
+    <string name="shortcut_navigate_to_work">Navigálás ide: Munkahely</string>
+    <string name="history_is_disabled_descr">A legutóbb használt keresési találatok gyorsabb eléréséhez engedélyezze az előzményeket.</string>
     <string name="is_disabled">%1$s le van tiltva</string>
-    <string name="shortcut_navigate_to_home">Navigálás haza</string>
+    <string name="shortcut_navigate_to_home">Navigálás ide: Otthon</string>
     <string name="approx_safe_mode">Biztonságos GPX-közelítés</string>
     <string name="safe_settings">Biztonságos</string>
     <string name="use_external_timestamps">Az online útvonaltervező időbélyegzőinek használata a becsült idő és az átlagsebesség beállításához</string>
     <string name="display_route_tracks">Nyomvonalak megjelenítése</string>
     <string name="shared_string_travelbooks">Útikönyv</string>
-    <string name="approx_safe_mode_description">A GPX-közelítés a lassabb Androidot használja a natív kód helyett.</string>
+    <string name="approx_safe_mode_description">GPX-közelítés végrehajtása az Android használatával (lassabb, mint a natív kód).</string>
     <string name="use_external_timestamps_description">Az online útvonaltervező időbélyegzőinek használata a becsült idő és átlagsebesség beállításához</string>
-    <string name="no_plugins_enabled">Nincs engedélyezett bővítmény. Az összes elérhető bővítmény felsorolását megtalálja a Menü &gt; Bővítmények menüpontban.</string>
+    <string name="no_plugins_enabled">Nincs engedélyezett bővítmény. Az elérhető bővítmények felsorolását megtalálja a Menü → Bővítmények menüpontban.</string>
     <string name="display_route_tracks_as_poi">Nyomvonalak megjelenítése érdekes pontként (POI-ként)</string>
+    <string name="quick_action_toggle_preference">A kijelölt preferenciaállapot átváltására szolgáló kapcsoló.</string>
+    <string name="delete_history_items_descr">Biztosan törölni szeretné a kijelölt előzményeket\?</string>
+    <string name="delete_history_items">%1$s előzmény törlése\?</string>
 </resources>

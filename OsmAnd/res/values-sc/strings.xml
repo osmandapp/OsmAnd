@@ -304,7 +304,7 @@
     <string name="voice_stream_music">Àudio mèdios/navigatzione</string>
     <string name="rendering_attr_showRoadMaps_description">Issèbera cando ammustrare mapas cun sos caminos ebbia:</string>
     <string name="rendering_attr_showRoadMaps_name">Mapas cun caminos ebbia</string>
-    <string name="safe_mode_description">Allue s’aplicatzione in modalidade segura (impreende Android, prus lentu, imbetzes de su còdighe nativu).</string>
+    <string name="safe_mode_description">Allughe s’aplicatzione in modalidade segura (prus lenta).</string>
     <string name="safe_mode">Modalidade segura</string>
     <string name="native_library_not_running">S’aplicatzione est traballende in modalidade segura (la podes istudade in sas \'Impostatziones\').</string>
     <string name="background_service_is_enabled_question">Su servitziu OsmAnd de isfundu est galu in esecutzione. Boles firmare fintzas custu?</string>
@@ -967,7 +967,7 @@
     <string name="install_selected_build">Installare OsmAnd - {0} de {1} {2} MB ?</string>
     <string name="auth_failed">Autorizatzione fallida</string>
     <string name="failed_op">fallidu</string>
-    <string name="loading_builds_failed">Carrigamentu elencu de sas versiones de OsmAnd fallidu</string>
+    <string name="loading_builds_failed">Carrigamentu de s\'elencu de sas versiones de OsmAnd fallidu</string>
     <string name="loading_builds">Carrigamentu versiones OsmAnd…</string>
     <string name="select_build_to_install">Ischerta sa versione de OsmAnd de installare</string>
     <string name="voice_is_not_available_title">Ischerta unu pachete pro sas indicatziones vocales</string>
@@ -4242,7 +4242,7 @@
     <string name="shared_string_progress">Progressu</string>
     <string name="backup_do_not_have_any">Non tenes galu una còpia de seguresa in lìnia.</string>
     <string name="backup_dont_have_any_descr">Pranìfica còpias de seguresa automàticas pro non pèrdere mai sos datos tuos.</string>
-    <string name="track_has_no_needed_data">Sa rasta non tenet sos datos netzessàrios.</string>
+    <string name="track_has_no_needed_data">Sa rasta non tenet sos datos currispondentes.</string>
     <string name="enter_verification_code">Inserta sa crae a impreu sìngulu</string>
     <string name="backup_error_user_is_already_registered">Custu indiritzu de posta l\'impreat giai un\'àteru contu</string>
     <string name="release_4_0">• Còpias de seguresa in sa nue
@@ -4269,11 +4269,11 @@
     <string name="shared_string_relation">Relatzione</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Colora sas àndalas in base a su colore locale individuale issoro (si bi sunt in OpenStreetMap) e a su sìmbulu de sos caminos de escursionismu.</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Colora in base a sa retza de apartenèntzia.</string>
-    <string name="benefits_for_contributors_primary_descr">Diat pòdere èssere idòneu a retzire agiornamentos de sa mapa chene lìmites cada ora si ses unu contribuidore ativu a OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_primary_descr">Sos contribuidores ativos a OpenStreetMap.org diant pòdere èssere idòneos a retzire agiornamentos de sa mapa chene lìmites cada ora.</string>
     <string name="pro_features">Funtzionalidades avantzadas</string>
     <string name="purchases_restored">Còmporas ripristinadas</string>
-    <string name="grey_color_undefined">Su colore murru est impreadu pro sas partes chene datos.</string>
-    <string name="option_available_only_in_osmand_pro">Custa optzione est a disponimentu comente parte de s\'abbonamentu a OsmAnd Pro.</string>
+    <string name="grey_color_undefined">Sas partes chene datos sunt in colore murru.</string>
+    <string name="option_available_only_in_osmand_pro">A disponimentu comente parte de s\'abbonamentu a OsmAnd Pro.</string>
     <string name="purchases_feature_desc_pro_widgets">Otene s\'atzessu a sas funtzionalidades avantzadas de OsmAnd: colorimentu de sas àndalas e àteru.</string>
     <string name="explore_osmnad_plans_to_find_suitable">Esplora sos pranos de OsmAnd pro nde agatare unu adatu pro tene.</string>
     <string name="routes_color_by_type">Colora sas àndalas in base a…</string>
@@ -4298,7 +4298,6 @@
     <string name="use_login_and_password">Imprea unu nùmene impreadore e una crae de intrada</string>
     <string name="available_until">A disponimentu finas a su %1$s</string>
     <string name="enough_contributions_descr">Bene meda, as fatu contributziones bastantes a OpenStreetMap e como ti podes godire agiornamentos chene lìmites de sas mapas de OsmAnd!</string>
-    <string name="not_enough_contributions_descr">Serbint a su nessi %1$s contributziones a OpenStreetMap in sas ùrtimas %2$s dies.</string>
     <string name="shared_string_contributions">Contributziones</string>
     <string name="contributions_may_calculate_with_delay">Su càrculu de sas contributziones diat pòdere durare unas cantas oras.</string>
     <string name="map_updates_are_unavailable_yet">Non bi sunt galu agiornamentos a disponimentu pro sas mapas :-(</string>
@@ -4309,23 +4308,23 @@
 \n
 \nAmministra o annulla sos abbonamentos tuos dae sas impostatziones de Amazon tuas in cale si siat momentu.</string>
     <string name="cancel_anytime_in_amazon_app">Annulla·lu in cale si siat momentu dae s\'aplicatzione de Amazon</string>
-    <string name="amz_manage_subscription_descr">Pro gestire sos abbonamentos imprea s\'aplicatzione de Amazon in su dispositivu o aberi su situ Amazon.com cun su profilu tuo.</string>
+    <string name="amz_manage_subscription_descr">Gesti sos abbonamentos impreende s\'aplicatzione de Amazon o su situ web de Amazon.</string>
     <string name="empty_category_name">Nùmene de sa categoria bòidu</string>
-    <string name="no_activity_for_intent">Non s\'est agatada peruna aplicatzione pro fàghere custa atzione</string>
+    <string name="no_activity_for_intent">Installa un\'aplicatzione chi potzat fàghere custa atzione.</string>
     <string name="no_items_of_type_message">Non tenes perunu elementu de custa genia</string>
     <string name="routeInfo_tracktype_description">Colorimentu de un\'àndala o de una lìnia de rasta sighende sas cunditziones de sos caminos basadas in sa cumpositzione de sa superfìtzie issoro. Aplicada de sòlitu a sos caminos in ue sa retza de caminos printzipale cunsistet in caminos chene asfaltu.</string>
-    <string name="routeInfo_winter_ice_road_description">Colorimentu de s\'àndala o sa lìnia de sa rasta sighende sa classificatzione de su caminu ierrile chi si podet impreare in s\'ierru ebbia.</string>
-    <string name="routeInfo_roadClass_description">Colorimentu de s\'àndala o sa lìnia de sa rasta sighende sa classificatzione de su caminu.</string>
+    <string name="routeInfo_winter_ice_road_description">Colora s\'àndala o sa lìnia de sa rasta sighende sa classificatzione de su caminu ierrile suo.</string>
+    <string name="routeInfo_roadClass_description">Colora s\'àndala o sa lìnia de sa rasta sighende sa classificatzione de su caminu.</string>
     <string name="routeInfo_smoothness_description">Frunit un\'ischema de classificatzione chi pertocat a s\'usabilidade fìsica de unu caminu pro veìculos a rodas, mescamente pro su chi pertocat a sa regularidade e a sa pranaridade de sas superfìtzies.</string>
-    <string name="routeInfo_surface_description">Fruni informatziones in prus in subra de sa superfìtzie fìsica de sos caminos e de sas camineras pro andare a pee.</string>
+    <string name="routeInfo_surface_description">Fruni informatziones in subra de sa superfìtzie fìsica de sos caminos e de sas camineras pro andare a pee.</string>
     <string name="add_group_to_markers">Annanghe unu grupu a sa lista de marcadores</string>
     <string name="remove_group_from_markers">Boga su grupu dae sa lista de marcadores</string>
     <string name="start_point">Incumintza</string>
     <string name="mapillary_menu_filter_description_new">Filtra sas immàgines pro data o casta. Ativu petzi a pustis de s\'ismanniamentu.</string>
-    <string name="service_is_not_available_please_try_later">Su servìtziu no est a disponimentu. Torra a proare prus a tardu</string>
+    <string name="service_is_not_available_please_try_later">Su servìtziu no a disponimentu. Torra a proare prus a tardu.</string>
     <string name="shared_string_files">Documentos</string>
     <string name="travel_route_types">Castas de àndalas</string>
-    <string name="sample_wikivoyage">Esèmpiu Wikivoyage</string>
+    <string name="sample_wikivoyage">Esèmpiu de Wikivoyage</string>
     <string name="shared_string_mini">mini</string>
     <string name="horseback_riding">Ecuitatzione</string>
     <string name="routing_attr_prefer_horse_routes_description">Preferi sas àndalas pro andare a caddu</string>
@@ -4342,13 +4341,12 @@
     <string name="search_title">Chirca: %1$s</string>
     <string name="exit_pan_mode_descr">Incarca in Ischerta pro essire dae sa modalidade panoràmica</string>
     <string name="icon_group_nautical">Nàutica</string>
-    <string name="rendering_attr_noNatureReserves_description">Cua sas riservas naturales, sas àreas amparadas e sos parcos natzionales.</string>
     <string name="shared_app_storage_description">Sa memòria cumpartzida no est prus a disponimentu pro neghe de modìficas a sas règulas de atzessu a s\'archiviatzione in Android.</string>
-    <string name="internal_app_storage_description">Memòria interna, cuada a s\'impreadore e a sas àteras aplicatziones, in manera chi nemos francu OsmAnd potzat atzèdere a sos datos tuos</string>
+    <string name="internal_app_storage_description">Memòria interna, cuada a s\'impreadore e a sas àteras aplicatziones, in manera chi nemos francu OsmAnd potzat atzèdere a sos datos tuos.</string>
     <string name="shared_storage_warning_title">Modìficas a sas règulas de atzessu a sa memòria</string>
-    <string name="purchases_feature_desc_android_auto">Mapas non in lìnia e navigatzione de OsmAnd in s\'ischermu de su veìculu tuo. S\'ìntegrat in manera discansosa cun sos controllos de su veìculu tuo.</string>
+    <string name="purchases_feature_desc_android_auto">Batit sas mapas non in lìnia e sa navigatzione de OsmAnd a s\'ischermu de su veìculu tuo e s\'ìntegrat in manera discansosa cun sos controllos de su veìculu tuo.</string>
     <string name="shared_string_details">Minujas</string>
-    <string name="rendering_attr_noNatureReserves_name">Riserva naturale</string>
+    <string name="rendering_attr_natureReserves_name">Riserva naturale</string>
     <string name="included_categories">Categorias incluidas</string>
     <string name="shared_string_articles">Artìculos</string>
     <string name="release_4_1">• Annanghidura de unu suportu de incumintzu pro Android Auto
@@ -4367,23 +4365,23 @@
 \n
 \n • Renderizatzione de sos marcadores de artària SRTM megiorada
 \n
-\n • Visualizatzione de s\'àrabu in sa mapa megiorada
+\n • Legendas de sas cartas in àrabu acontzadas
 \n
 \n • Medas problemas de càrculu de s\'àndala risoltos
 \n
 \n</string>
-    <string name="location_access_request_title">OsmAnd tenet bisòngiu de s\'atzessu a sa positzione pro pòdere navigare</string>
+    <string name="location_access_request_title">OsmAnd tenet bisòngiu de s\'atzessu a sa positzione pro pòdere navigare.</string>
     <string name="location_access_request_action">Fruni s\'atzessu</string>
     <string name="location_access_request_result">Aprovadu: %1$s Negadu: %2$s</string>
-    <string name="continue_on_phone">Sighi in su telèfonu</string>
+    <string name="continue_on_phone">Sighi in su dispositivu mòbile</string>
     <string name="android_auto_map_placeholder_title">Sa mapa est ammustrada in s\'ischermu de su veìculu.</string>
     <string name="android_auto_map_placeholder_descr">Istaca su dispositivu tuo dae Android Auto pro bìdere sa mapa in s\'aplicatzione.</string>
     <string name="android_auto_purchase_request_title">Còmpora OsmAnd Pro o Maps+ pro impreare OsmAnd cun Android Auto</string>
     <string name="shared_string_travelbooks">Libros de biàgiu</string>
     <string name="use_external_timestamps">Imprea sas marcas temporales esternas</string>
     <string name="no_plugins_enabled">Non tenes estensiones abilitadas. Podes agatare sa lista de totu sas estensiones a disponimentu in Menù – Estensiones.</string>
-    <string name="search_history_is_disabled_descr">Podes abilitare sa cronologia de chirca in sas impostatziones</string>
-    <string name="markers_history_is_disabled_descr">Abìlita sa cronologia pro otènnere una lista de sos marcadores de mapa bisitados.</string>
+    <string name="search_history_is_disabled_descr">Podes abilitare sa cronologia de chirca in sas impostatziones.</string>
+    <string name="markers_history_is_disabled_descr">Abìlita sa cronologia pro registrare una lista de sos marcadores de mapa bisitados.</string>
     <string name="history_is_disabled_descr">Abìlita sa cronologia pro otènnere un\'atzessu prus lestru a sos ùrtimos resurtados impreados.</string>
     <string name="is_disabled">%1$s est disabilitadu</string>
     <string name="clear_all_history">Isbòida totu sa cronologia</string>
@@ -4396,17 +4394,18 @@
     <string name="transparent_status_bar_descr">Ammustra sa apa in suta de sa barra de istadu</string>
     <string name="transparent_status_bar">Barra de istadu trasparente</string>
     <string name="display_route_tracks">Ammustra sas rastas</string>
-    <string name="clear_all_history_warning">Ses seguru de chèrrere isboidare totu sa cronologia de s\'aplicatzione\?
-\n
-\nSas cronologias de chirca, de navigatzione e de sos marcadores s\'ant a isboidare.</string>
+    <string name="clear_all_history_warning">Isboidare totu sa cronologia de s\'aplicatzione chi incluit sas cronologias de chirca, de navigatzione e de sos marcadores\?</string>
     <string name="history_preferences_descr">Podes disabilitare sa registratzione de sa cronologia in manera individuale pro cada genia de cronologia.</string>
     <string name="safe_settings">Seguru</string>
-    <string name="approx_safe_mode">Aprossimatzione segura de sos gpx</string>
-    <string name="approx_safe_mode_description">Faghe s\'aprossimatzione de sos gpx impreende Android (chi est prus lentu) in logu de su còdighe nativu.</string>
-    <string name="shortcut_navigate_to_home">Nàviga cara a domo</string>
-    <string name="shortcut_navigate_to_work">Nàviga cara a traballu</string>
-    <string name="shared_storage_warning_description">A partire dae santandria/onniasantu 2021 OsmAnd 4.2 at a p+rdere s\'atzessu a sa memòria cumpartzida, pro neghe de sas modìficas a sas règulas de atzessu de Android.
+    <string name="approx_safe_mode">Aprossimatzione segura de sos GPX</string>
+    <string name="approx_safe_mode_description">Faghe s\'aprossimatzione de sos GPX impreende Android (chi est prus lentu) in logu de su còdighe nativu.</string>
+    <string name="shortcut_navigate_to_home">Nàviga cara a \'Domo\'</string>
+    <string name="shortcut_navigate_to_work">Nàviga cara a \'Traballu\'</string>
+    <string name="shared_storage_warning_description">ro neghe de sas modìficas a sas règulas de atzessu de Android, a partire dae santandria/onniasantu 2021, OsmAnd 4.2 at a pèrdere s\'atzessu a sa memòria cumpartzida.
 \n
-\nPro preghere muda sa memòria de archiviatzione dae sa memòria cumpartzida a sa memòria a disponimentu. Si non l\'as a fàghere s\'aplicatzione at a pèrdere s\'atzessu a sos datos tuos: datos chi incluint sas mapas non in lìnia, sas rastas GPX e totu su restu.</string>
+\nPro praghere move sa memòria de archiviatzione dae sa memòria cumpartzida a sa memòria a disponimentu. Si non l\'as a fàghere s\'aplicatzione at a pèrdere s\'atzessu a sos datos tuos: datos chi incluint sas mapas non in lìnia, sas rastas GPX etz.</string>
     <string name="display_route_tracks_as_poi">Ammustra sas rastas comente PDI</string>
+    <string name="delete_history_items_descr">Ses seguru de chèrrere iscantzellare sos elementos de sa cronologia ischertados\?</string>
+    <string name="delete_history_items">Iscantzellare %1$s elementos de sa cronologia\?</string>
+    <string name="quick_action_toggle_preference">Unu butone pro colare dae un\'istadu de sa preferèntzia a s\'àteru.</string>
 </resources>

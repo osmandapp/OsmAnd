@@ -12,6 +12,7 @@ import androidx.appcompat.view.ContextThemeWrapper;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
@@ -87,7 +88,12 @@ public class TracksCard extends MapBaseCard {
 				break;
 			}
 			View v = inflater.inflate(R.layout.gpx_track_item, tracks, false);
-			GpxUiHelper.updateGpxInfoView(v, item.title, item.info, getDataItem(item.info), false, app);
+			GpxDataItem dataItem = getDataItem(item.info);
+			GPXTrackAnalysis analysis = null;
+			if (dataItem != null) {
+				analysis = dataItem.getAnalysis();
+			}
+			GpxUiHelper.updateGpxInfoView(v, item.title, item.info, analysis, app);
 
 			View div = v.findViewById(R.id.divider);
 			LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(div.getLayoutParams().width, div.getLayoutParams().height);

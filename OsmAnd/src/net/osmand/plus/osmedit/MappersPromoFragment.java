@@ -1,6 +1,9 @@
 package net.osmand.plus.osmedit;
 
+import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
+
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -20,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.chooseplan.BasePurchaseDialogFragment;
 import net.osmand.plus.chooseplan.OsmAndFeature;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -29,8 +34,6 @@ import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static net.osmand.plus.osmedit.OsmEditingFragment.OSM_LOGIN_DATA;
 
 public class MappersPromoFragment extends BasePurchaseDialogFragment {
 
@@ -66,8 +69,8 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater,
-							 @Nullable ViewGroup container,
-							 @Nullable Bundle savedInstanceState) {
+	                         @Nullable ViewGroup container,
+	                         @Nullable Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		listContainer = mainView.findViewById(R.id.list_container);
 
@@ -157,8 +160,16 @@ public class MappersPromoFragment extends BasePurchaseDialogFragment {
 
 	private void setupButtonBackground(@NonNull View button, @ColorInt int normalColor, @ColorInt int pressedColor) {
 		Drawable normal = createRoundedDrawable(normalColor, ButtonBackground.ROUNDED_SMALL);
-		Drawable pressed = createRoundedDrawable(pressedColor, ButtonBackground.ROUNDED_SMALL);
-		setupRoundedBackground(button, normal, pressed);
+
+		Drawable background;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			Drawable pressed = AppCompatResources.getDrawable(app, ButtonBackground.ROUNDED_SMALL.getRippleId(nightMode));
+			background = UiUtilities.getLayeredIcon(normal, pressed);
+		} else {
+			Drawable pressed = createRoundedDrawable(pressedColor, ButtonBackground.ROUNDED_SMALL);
+			background = AndroidUtils.createPressedStateListDrawable(normal, pressed);
+		}
+		AndroidUtils.setBackground(button, background);
 	}
 
 	@Override

@@ -7,7 +7,7 @@
 	   1. To not produce duplicate strings (check by name if a string already exists)
 	   2. Every apostrophe (quote) is preceded by a backslash.
 	   3. If you modify the English strings file, please add new strings at the top of the file, this makes periodic reviews before releases easier.
-	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributing-to-osmand/translating-osmand
+	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
 
@@ -23,6 +23,31 @@
     <string name="save_as_copy">Save as copy</string>
     <string name="gps_filter_actions_description">OsmAnd applying changes to the track without saving it to the file. You can save changes manually.</string>
     <string name="shared_string_gps_filter">GPS filter</string>
+    <string name="show_parameter_seekbar">Show parameter seekbar</string>
+    <string name="files_remaining">Files remaining: %1$s %2$s</string>
+    <string name="copying_file">Copying file %1$s</string>
+    <string name="from_to_with_params">From %1$s to %2$s</string>
+    <string name="progress_complete">%1$s complete</string>
+    <string name="storage_found_files_descr">Tap “%1$s” to copy %2$s files from “%3$s” to “%4$s”. It may take some time.</string>
+    <string name="storage_copied_files_size">Copied %1$s files %2$s</string>
+    <string name="storage_copying_files_size">Copying %1$s files %2$s</string>
+    <string name="storage_found_files_size">Found %1$s files %2$s</string>
+    <string name="shared_string_skip_warning">Are you sure you want to skip the migration? OsmAnd no longer has access to your files in Shared storage.\n\nThe application will start in the new folder with your data.</string>
+    <string name="shared_storage_last_step">You will be able to specify a new data storage after selecting Shared storage.</string>
+    <string name="shared_storage_third_step">Give permission to access the folder. Without this permission OsmAnd cannot copy files.</string>
+    <string name="shared_storage_first_step">Press \"%1$s\".\nThe file manager opens where you need to find and open the osmand folder.</string>
+    <string name="shared_storage_migration_descr">Due to changes for storage access rules in Android, OsmAnd can no longer use %1$s.\n\nYou need to copy all your data, to the new storage location.</string>
+    <string name="shared_storage_second_step">Click \"Use this folder\".</string>
+    <string name="folder_access_denied">Permission is required to access selected folder.</string>
+    <string name="copying_completed">Copying completed</string>
+    <string name="shared_string_copy_to">Copy to</string>
+    <string name="start_copying">Start copying</string>
+    <string name="skip_confirmation">Yes, skip</string>
+    <string name="shared_storage">Shared storage</string>
+    <string name="shared_storage_migration">Shared storage migration</string>
+    <string name="shared_string_migration">Migration</string>
+    <string name="icon_group_education">Education</string>
+    <string name="icon_group_industrial">Industrial</string>
     <string name="delete_history_items_descr">Are you sure you want to delete selected history items?</string>
     <string name="delete_history_items">Delete %1$s history items?</string>
     <string name="quick_action_toggle_preference">A toggle to switch selected preference state.</string>
@@ -30,17 +55,17 @@
     <string name="display_route_tracks_as_poi">Display tracks as POI</string>
     <string name="shared_string_travelbooks">Travelbooks</string>
     <string name="safe_settings">Safe</string>
-    <string name="approx_safe_mode">Safe gpx approximation</string>
-    <string name="approx_safe_mode_description">Do gpx approximation using slower Android instead of native code.</string>
+    <string name="approx_safe_mode">Safe GPX approximation</string>
+    <string name="approx_safe_mode_description">Perform the GPX approximation using slower Android instead of native code.</string>
     <string name="use_external_timestamps">Use external timestamps</string>
     <string name="use_external_timestamps_description">Use online router\'s timestamps to adjust estimated time and average speed</string>
-    <string name="no_plugins_enabled">You have no plugins enabled. You can find list of all available plugins in Menu – Plugins.</string>
-    <string name="shared_storage_warning_description">Starting November 2021 OsmAnd 4.2 will lose access to Shared storage, due to changed storage access rules in Android.\n\nPlease change the storage from Shared storage to available storage, if this is not done the app will lose access to your data: including offline maps, GPX tracks and everything else.</string>
-    <string name="search_history_is_disabled_descr">You can enable search history in Settings</string>
-    <string name="markers_history_is_disabled_descr">Enable history to get list of visited map markers.</string>
-    <string name="history_is_disabled_descr">Enable history to get quicker access to last used results.</string>
+    <string name="no_plugins_enabled">You have no plugins enabled. You can find a list of available plugins under \'Menu\' → \'Plugins\'.</string>
+    <string name="shared_storage_warning_description">Due to new Android rules, starting November 2021 OsmAnd 4.2 will lose access to Shared storage.\n\nPlease move the data folder from Shared storage to available storage, otherwise the app will lose access to your data like offline maps, GPX tracks, etc.</string>
+    <string name="search_history_is_disabled_descr">You can enable the search history in the settings.</string>
+    <string name="markers_history_is_disabled_descr">Enable the history to remember a list of visited map markers.</string>
+    <string name="history_is_disabled_descr">Enable the history to get quicker access to the last used results.</string>
     <string name="is_disabled">%1$s is disabled</string>
-    <string name="clear_all_history_warning">Are you sure you want to clear all history in the app?\n\nThe search, navigation and marker history will be cleared.</string>
+    <string name="clear_all_history_warning">Clear all app history entries including search, navigation, and marker history?</string>
     <string name="clear_all_history">Clear all history</string>
     <string name="history_actions_descr">You can export history into a file.</string>
     <string name="map_markers_history">Map markers history</string>
@@ -48,14 +73,14 @@
     <string name="history_preferences_descr">You can disable history logging individually for each history type.</string>
     <string name="shortcut_start_recording">Start Recording</string>
     <string name="shortcut_navigate_to">Navigate To…</string>
-    <string name="shortcut_navigate_to_work">Navigate to Work</string>
-    <string name="shortcut_navigate_to_home">Navigate to Home</string>
+    <string name="shortcut_navigate_to_work">Navigate to \'Work\'</string>
+    <string name="shortcut_navigate_to_home">Navigate to \'Home\'</string>
     <string name="android_auto_map_placeholder_title">The map is displayed on the vehicle screen.</string>
     <string name="android_auto_map_placeholder_descr">Disconnect your device from Android Auto to view the map in the app.</string>
     <string name="android_auto_purchase_request_title">Purchase OsmAnd Pro or Maps+ to use OsmAnd with Android Auto</string>
-    <string name="continue_on_phone">Continue on Phone</string>
-    <string name="location_access_request_title">OsmAnd needs access to location in order to navigate</string>
-    <string name="location_access_request_action">Grant Access</string>
+    <string name="continue_on_phone">Continue on the mobile device</string>
+    <string name="location_access_request_title">OsmAnd needs Location permission to navigate.</string>
+    <string name="location_access_request_action">Grant access</string>
     <string name="location_access_request_result">Approved: %1$s Rejected: %2$s</string>
     <string name="shared_string_articles">Articles</string>
     <string name="included_categories">Included categories</string>
@@ -68,14 +93,14 @@
     • Added screen to manage all history in the app\n\n
     • Map orientation is not reset after restarting the app\n\n
     • Improved SRTM height marker rendering\n\n
-    • Fixed Arabic display on the map \n\n
+    • Fixed Arabic map captions\n\n
     • Fixed different routing issues\n\n
     </string>
     <string name="shared_string_details">Details</string>
-    <string name="shared_app_storage_description">Shared memory is no longer available due to changes in the storage access rules in Android.</string>
-    <string name="internal_app_storage_description">Internal storage, hidden from user and other apps, so no one except OsmAnd can’t get access to your data</string>
-    <string name="shared_storage_warning_title">Changes in storage access rules</string>
-    <string name="purchases_feature_desc_android_auto">OsmAnd offline maps and navigation on the screen of your vehicle. Integrate conveniently with your vehicle\'s controls.</string>
+    <string name="shared_app_storage_description">Shared memory is no longer available due to changed Android storage access.</string>
+    <string name="internal_app_storage_description">Internal storage, hidden from all users and other apps, so only OsmAnd can access your data.</string>
+    <string name="shared_storage_warning_title">Changes to storage access rules</string>
+    <string name="purchases_feature_desc_android_auto">Brings OsmAnd offline maps and navigation to your vehicle screen and integrates with your vehicle\'s controls.</string>
     <string name="icon_group_nautical">Nautical</string>
     <string name="transparent_status_bar_descr">Display map under status bar</string>
     <string name="transparent_status_bar">Transparent status bar</string>
@@ -94,38 +119,38 @@
     <string name="routing_attr_prefer_horse_routes_description">Prefer horse routes</string>
     <string name="horseback_riding">Horseback riding</string>
     <string name="shared_string_mini">mini</string>
-    <string name="sample_wikivoyage">Sample Wikivoyage</string>
+    <string name="sample_wikivoyage">Wikivoyage example</string>
     <string name="travel_route_types">Route types</string>
     <string name="shared_string_files">Files</string>
-    <string name="service_is_not_available_please_try_later">Service is not available, please try later</string>
+    <string name="service_is_not_available_please_try_later">Service unavailable. Please try again later.</string>
     <string name="mapillary_menu_filter_description_new">Filter images by date or by type. Only active in closeup zoom.</string>
     <string name="start_point">Start</string>
-    <string name="remove_group_from_markers">Remove group from markers list</string>
-    <string name="add_group_to_markers">Add group to markers list</string>
-    <string name="routeInfo_roadClass_description">Colouring the route or track line according to road classification.</string>
-    <string name="routeInfo_surface_description">Provide additional information about the physical surface of roads/footpaths.</string>
-    <string name="routeInfo_smoothness_description">Provides a classification scheme regarding the physical usability of a way for wheeled vehicles, particularly regarding surface regularity/flatness.</string>
-    <string name="routeInfo_winter_ice_road_description">Coloring the route or track line according to the winter road classification that is only usable during the winter.</string>
-    <string name="routeInfo_tracktype_description">Coloring a route or track line according to the condition of the roads based on their surface composition. Typically applied to roads where the main road network consists of unpaved roads.</string>
-    <string name="no_items_of_type_message">You do not have any items of this type</string>
-    <string name="no_activity_for_intent">No suitable applications to perform this action were found</string>
+    <string name="remove_group_from_markers">Remove group from marker list</string>
+    <string name="add_group_to_markers">Add group to marker list</string>
+    <string name="routeInfo_roadClass_description">Color the route or track line by road classification.</string>
+    <string name="routeInfo_surface_description">Provide road/footpath physical surface info.</string>
+    <string name="routeInfo_smoothness_description">Road/footpath maneuverability classification for wheeled vehicles, in particular regarding surface regularity/flatness.</string>
+    <string name="routeInfo_winter_ice_road_description">Color the route or track line by its winter road classification.</string>
+    <string name="routeInfo_tracktype_description">Color the route or track line by its surface composition. Typically apply when the road network is largely unpaved.</string>
+    <string name="no_items_of_type_message">You have no items of this type</string>
+    <string name="no_activity_for_intent">Install an app that can perform this action.</string>
     <string name="empty_category_name">Empty category name</string>
-    <string name="amz_manage_subscription_descr">To manage your subscription use the Amazon App on the device or open the Amazon.com website under your profile.</string>
-    <string name="cancel_anytime_in_amazon_app">Cancel it anytime in Amazon App</string>
+    <string name="amz_manage_subscription_descr">Manage your subscription using the Amazon app or the Amazon website.</string>
+    <string name="cancel_anytime_in_amazon_app">Cancel it anytime via the Amazon app</string>
     <string name="osm_live_payment_subscription_management_amz">Payment is charged from your Amazon account when confirming the purchase.\n\nIt renews unless cancelled before the selected renewal period.\n\nManage or cancel your subscriptions from your Amazon settings at any time.</string>
-    <string name="grey_color_undefined">Grey color is used for parts without data.</string>
+    <string name="grey_color_undefined">Parts without data are gray.</string>
     <string name="purchases_restored">Purchases restored</string>
     <string name="pro_features">Pro features</string>
     <string name="connect_track_points_as">Сonnect route points</string>
     <string name="map_updates_are_unavailable_yet">Map updates are not yet available. :-(</string>
-    <string name="contributions_may_calculate_with_delay">Calculating the contributions may take several hours.</string>
+    <string name="contributions_may_calculate_with_delay">Calculating contributions may take several hours.</string>
     <string name="shared_string_contributions">Contributions</string>
-    <string name="not_enough_contributions_descr">At least %1$s OpenStreetMap contributions within %2$s days are required.</string>
-    <string name="enough_contributions_descr">Congratulations, you have provided enough contributions to OpenStreetMap and can now enjoy unlimited OsmAnd map updates!</string>
+    <string name="not_enough_contributions_descr">A minimum of %1$s changes over last two-month period %2$s is required to get access for unlimited hourly map updates.</string>
+    <string name="enough_contributions_descr">Congratulations, you have provided enough OpenStreetMap contributions and can now enjoy unlimited OsmAnd map updates!</string>
     <string name="available_until">Available until %1$s</string>
     <string name="use_login_and_password">Use username and password</string>
-    <string name="benefits_for_contributors_secondary_descr">Sign in to OpenStreetMap to check if you are eligible for unlimited monthly &amp; hourly map updates.</string>
-    <string name="benefits_for_contributors_primary_descr">You may be entitled to unlimited hourly map updates if you are an active contributor to OpenStreetMap.org.</string>
+    <string name="benefits_for_contributors_secondary_descr">Sign in to OpenStreetMap to check if you are eligible for unlimited monthly and hourly map updates.</string>
+    <string name="benefits_for_contributors_primary_descr">Active contributors to OpenStreetMap.org may be entitled to unlimited hourly map updates.</string>
     <string name="benefits_for_contributors">Benefits for active OSM contributors</string>
     <string name="map_updates_for_mappers">Map updates for mappers</string>
     <string name="backup_error_no_subscription">No subscription present</string>
@@ -137,7 +162,7 @@
     <string name="direct_line_maps_required_descr">Route calculation is taking longer than usual. \n\nMaybe some maps are not loaded.</string>
     <string name="setting_supported_by_style">This setting is provided by map style \'%1$s\'</string>
     <string name="travel_routes">Travel routes</string>
-    <string name="walking_route_osmc_description">Color routes according to their individual local color (if present on OpenStreetMap) and type (international, regional, local).</string>
+    <string name="walking_route_osmc_description">Color routes by their individual local color (if present on OpenStreetMap) and type (international, regional, local).</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_description">Color routes according to their node network type (international, regional, local).</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_description">Color by network affiliation.</string>
     <string name="rendering_value_walkingRoutesOSMC_description">Color routes according to their individual local color (if present on OpenStreetMap) and hiking shield symbol.</string>
@@ -145,8 +170,8 @@
     <string name="routes_color_by_type">Color routes by…</string>
     <string name="explore_osmnad_plans_to_find_suitable">Explore OsmAnd Plans to find one suitable for you.</string>
     <string name="purchases_feature_desc_pro_widgets">Get access to OsmAnd Pro features: Route coloring and more.</string>
-    <string name="option_available_only_in_osmand_pro">The option is available as part of OsmAnd Pro subscription.</string>
-    <string name="track_has_no_needed_data">The track does not contain needed data.</string>
+    <string name="option_available_only_in_osmand_pro">Available as part of the OsmAnd Pro subscription.</string>
+    <string name="track_has_no_needed_data">The track is missing the respective data.</string>
     <string name="promo_subscription">Promo subscription</string>
     <string name="active_till">Active till %1$s</string>
     <string name="on_hold_since">On hold since %1$s</string>
@@ -357,8 +382,8 @@
     <string name="select_another_colorization">Please select another type of coloring.</string>
     <string name="track_has_no_speed">The track does not contain speed data.</string>
     <string name="track_has_no_altitude">The track does not contain altitude data.</string>
-    <string name="rendering_attr_noNatureReserves_name">Nature reserve</string>
-    <string name="rendering_attr_noNatureReserves_description">Hide nature reserve, protected areas, and national parks.</string>
+    <string name="rendering_attr_natureReserves_name">Nature reserve</string>
+    <string name="rendering_attr_natureReserves_description">Show nature reserve, protected areas, and national parks.</string>
     <string name="shared_string_interval">Interval</string>
     <string name="quick_action_show_hide_title">Show/hide</string>
     <string name="copy_poi_name">Copy POI name</string>
@@ -922,7 +947,7 @@
     <string name="no_recalculation_setting">No recalculation</string>
     <string name="open_settings">Open settings</string>
     <string name="plugin_disabled">Plugin off</string>
-    <string name="plugin_disabled_descr">This plugin is a separate app, you will need to remove it separately if you no longer plan to use it.\n\nThe plugin will remain on the device after removing OsmAnd.</string>
+    <string name="plugin_disabled_descr">This plugin is a separate app, disabling it does not remove it.\n\nIt can be uninstalled in the Android \'Apps\' setting.</string>
     <string name="shared_string_menu">Menu</string>
     <string name="ltr_or_rtl_triple_combine_via_dash">%1$s — %2$s — %3$s</string>
     <string name="route_recalculation_dist_title">Minimal distance to recalculate route</string>
@@ -3210,7 +3235,7 @@
     <string name="search_villages_and_postcodes">Search for more villages/postcodes</string>
     <string name="rendering_attr_showRoadMaps_description">Choose when to display roads-only maps:</string>
     <string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
-    <string name="safe_mode_description">Run the app in safe mode (using slower Android instead of native code).</string>
+    <string name="safe_mode_description">Run the app in (slower) safe mode.</string>
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The app is running in safe mode (turn it off in \'Settings\').</string>
     <string name="close_changeset">Close changeset</string>
@@ -3888,7 +3913,7 @@
     <string name="build_installed">Build {0} was installed ({1}).</string>
     <string name="downloading_build">Downloading build…</string>
     <string name="install_selected_build">Install OsmAnd - {0} of {1} {2} MB ?</string>
-    <string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
+    <string name="loading_builds_failed">Could not retrieve the list of OsmAnd builds</string>
     <string name="loading_builds">Loading OsmAnd builds…</string>
     <string name="select_build_to_install">Select the OsmAnd build to install</string>
     <string name="gps_status_app_not_found">GPS status app not installed. Search in market?</string>

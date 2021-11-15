@@ -8,7 +8,6 @@ import net.osmand.binary.StringBundleXmlWriter;
 import net.osmand.data.QuadRect;
 import net.osmand.router.RouteColorize.ColorizationType;
 import net.osmand.util.Algorithms;
-
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -63,14 +62,19 @@ public class GPXUtilities {
 	public static final int TRAVEL_GPX_CONVERT_MULT_1 = 2;
 	public static final int TRAVEL_GPX_CONVERT_MULT_2 = 5;
 
-	public final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
-	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
+	private static final SimpleDateFormat GPX_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+	private static final SimpleDateFormat GPX_TIME_FORMAT_MILLIS = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
 
-	private final static NumberFormat latLonFormat = new DecimalFormat("0.00#####", new DecimalFormatSymbols(
-			new Locale("EN", "US")));
+	static {
+		GPX_TIME_FORMAT.setTimeZone(TimeZone.getTimeZone("UTC"));
+		GPX_TIME_FORMAT_MILLIS.setTimeZone(TimeZone.getTimeZone("UTC"));
+	}
+
+	private final static NumberFormat LAT_LON_FORMAT = new DecimalFormat("0.00#####",
+			new DecimalFormatSymbols(new Locale("EN", "US")));
 	// speed, ele, hdop
-	private final static NumberFormat decimalFormat = new DecimalFormat("#.#", new DecimalFormatSymbols(
-			new Locale("EN", "US")));
+	private final static NumberFormat DECIMAL_FORMAT = new DecimalFormat("#.#",
+			new DecimalFormatSymbols(new Locale("EN", "US")));
 
 	public static final int RADIUS_DIVIDER = 5000;
 	public static final double PRIME_MERIDIAN = 179.999991234;
@@ -1396,8 +1400,8 @@ public class GPXUtilities {
 
 		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category,
 		                      int color, String iconName, String backgroundType) {
-			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
-			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
+			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
+			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
 			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
 			pt.name = name;
 			pt.category = category;
@@ -1420,8 +1424,8 @@ public class GPXUtilities {
 		}
 
 		public WptPt addRtePt(double lat, double lon, long time, String description, String name, String category, int color) {
-			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
-			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
+			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
+			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
 			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
 			pt.name = name;
 			pt.category = category;
@@ -1516,8 +1520,8 @@ public class GPXUtilities {
 		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category,
 		                        int color, String iconName, String backgroundType) {
 			int index = points.indexOf(pt);
-			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
-			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
+			double latAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lat));
+			double lonAdjusted = Double.parseDouble(LAT_LON_FORMAT.format(lon));
 			pt.lat = latAdjusted;
 			pt.lon = lonAdjusted;
 			pt.time = time;
@@ -1913,8 +1917,6 @@ public class GPXUtilities {
 			progress.startWork(file.getItemsToWriteSize());
 		}
 		try {
-			SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
-			format.setTimeZone(TimeZone.getTimeZone("UTC"));
 			XmlSerializer serializer = PlatformUtil.newSerializer();
 			serializer.setOutput(output);
 			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true); //$NON-NLS-1$
@@ -1930,10 +1932,10 @@ public class GPXUtilities {
 			serializer.attribute(null, "xsi:schemaLocation",
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
-			writeMetadata(serializer, file, format, progress);
-			writePoints(serializer, file, format, progress);
-			writeRoutes(serializer, file, format, progress);
-			writeTracks(serializer, file, format, progress);
+			writeMetadata(serializer, file, progress);
+			writePoints(serializer, file, progress);
+			writeRoutes(serializer, file, progress);
+			writeTracks(serializer, file, progress);
 			writeExtensions(serializer, file, progress);
 
 			serializer.endTag(null, "gpx"); //$NON-NLS-1$
@@ -1946,7 +1948,7 @@ public class GPXUtilities {
 		return null;
 	}
 
-	private static void writeMetadata(XmlSerializer serializer, GPXFile file, SimpleDateFormat format, IProgress progress) throws IOException {
+	private static void writeMetadata(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
 		String trackName = file.metadata != null ? file.metadata.name : getFilename(file.path);
 		serializer.startTag(null, "metadata");
 		writeNotNullText(serializer, "name", trackName);
@@ -1964,7 +1966,7 @@ public class GPXUtilities {
 			}
 			writeNotNullTextWithAttribute(serializer, "link", "href", file.metadata.link);
 			if (file.metadata.time != 0) {
-				writeNotNullText(serializer, "time", format.format(new Date(file.metadata.time)));
+				writeNotNullText(serializer, "time", GPX_TIME_FORMAT.format(new Date(file.metadata.time)));
 			}
 			writeNotNullText(serializer, "keywords", file.metadata.keywords);
 			if (file.metadata.bounds != null) {
@@ -1978,15 +1980,15 @@ public class GPXUtilities {
 		serializer.endTag(null, "metadata");
 	}
 
-	private static void writePoints(XmlSerializer serializer, GPXFile file, SimpleDateFormat format, IProgress progress) throws IOException {
+	private static void writePoints(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
 		for (WptPt l : file.points) {
 			serializer.startTag(null, "wpt"); //$NON-NLS-1$
-			writeWpt(format, serializer, l, progress);
+			writeWpt(serializer, l, progress);
 			serializer.endTag(null, "wpt"); //$NON-NLS-1$
 		}
 	}
 
-	private static void writeRoutes(XmlSerializer serializer, GPXFile file, SimpleDateFormat format, IProgress progress) throws IOException {
+	private static void writeRoutes(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
 		for (Route route : file.routes) {
 			serializer.startTag(null, "rte"); //$NON-NLS-1$
 			writeNotNullText(serializer, "name", route.name);
@@ -1996,7 +1998,7 @@ public class GPXUtilities {
 				boolean artificial = Math.abs(p.lon) == PRIME_MERIDIAN;
 				if (!artificial) {
 					serializer.startTag(null, "rtept"); //$NON-NLS-1$
-					writeWpt(format, serializer, p, progress);
+					writeWpt(serializer, p, progress);
 					serializer.endTag(null, "rtept"); //$NON-NLS-1$
 				}
 			}
@@ -2005,7 +2007,7 @@ public class GPXUtilities {
 		}
 	}
 
-	private static void writeTracks(XmlSerializer serializer, GPXFile file, SimpleDateFormat format, IProgress progress) throws IOException {
+	private static void writeTracks(XmlSerializer serializer, GPXFile file, IProgress progress) throws IOException {
 		for (Track track : file.tracks) {
 			if (!track.generalTrack) {
 				serializer.startTag(null, "trk"); //$NON-NLS-1$
@@ -2018,7 +2020,7 @@ public class GPXUtilities {
 						boolean artificial = Math.abs(p.lon) == PRIME_MERIDIAN;
 						if (!artificial) {
 							serializer.startTag(null, "trkpt"); //$NON-NLS-1$
-							writeWpt(format, serializer, p, progress);
+							writeWpt(serializer, p, progress);
 							serializer.endTag(null, "trkpt"); //$NON-NLS-1$
 						}
 					}
@@ -2108,15 +2110,15 @@ public class GPXUtilities {
 		}
 	}
 
-	private static void writeWpt(SimpleDateFormat format, XmlSerializer serializer, WptPt p, IProgress progress) throws IOException {
-		serializer.attribute(null, "lat", latLonFormat.format(p.lat)); //$NON-NLS-1$ //$NON-NLS-2$
-		serializer.attribute(null, "lon", latLonFormat.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
+	private static void writeWpt(XmlSerializer serializer, WptPt p, IProgress progress) throws IOException {
+		serializer.attribute(null, "lat", LAT_LON_FORMAT.format(p.lat)); //$NON-NLS-1$ //$NON-NLS-2$
+		serializer.attribute(null, "lon", LAT_LON_FORMAT.format(p.lon)); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (!Double.isNaN(p.ele)) {
-			writeNotNullText(serializer, "ele", decimalFormat.format(p.ele));
+			writeNotNullText(serializer, "ele", DECIMAL_FORMAT.format(p.ele));
 		}
 		if (p.time != 0) {
-			writeNotNullText(serializer, "time", format.format(new Date(p.time)));
+			writeNotNullText(serializer, "time", GPX_TIME_FORMAT.format(new Date(p.time)));
 		}
 		writeNotNullText(serializer, "name", p.name);
 		writeNotNullText(serializer, "desc", p.desc);
@@ -2126,10 +2128,10 @@ public class GPXUtilities {
 			writeNotNullText(serializer, "cmt", p.comment);
 		}
 		if (!Double.isNaN(p.hdop)) {
-			writeNotNullText(serializer, "hdop", decimalFormat.format(p.hdop));
+			writeNotNullText(serializer, "hdop", DECIMAL_FORMAT.format(p.hdop));
 		}
 		if (p.speed > 0) {
-			p.getExtensionsToWrite().put("speed", decimalFormat.format(p.speed));
+			p.getExtensionsToWrite().put("speed", DECIMAL_FORMAT.format(p.speed));
 		}
 		if (!Float.isNaN(p.heading)) {
 			p.getExtensionsToWrite().put("heading", String.valueOf(Math.round(p.heading)));
@@ -2175,10 +2177,10 @@ public class GPXUtilities {
 
 	private static void writeBounds(XmlSerializer serializer, Bounds bounds) throws IOException {
 		serializer.startTag(null, "bounds");
-		serializer.attribute(null, "minlat", latLonFormat.format(bounds.minlat));
-		serializer.attribute(null, "minlon", latLonFormat.format(bounds.minlon));
-		serializer.attribute(null, "maxlat", latLonFormat.format(bounds.maxlat));
-		serializer.attribute(null, "maxlon", latLonFormat.format(bounds.maxlon));
+		serializer.attribute(null, "minlat", LAT_LON_FORMAT.format(bounds.minlat));
+		serializer.attribute(null, "minlon", LAT_LON_FORMAT.format(bounds.minlon));
+		serializer.attribute(null, "maxlat", LAT_LON_FORMAT.format(bounds.maxlat));
+		serializer.attribute(null, "maxlon", LAT_LON_FORMAT.format(bounds.maxlon));
 		serializer.endTag(null, "bounds");
 	}
 
@@ -2248,7 +2250,15 @@ public class GPXUtilities {
 		return result;
 	}
 
-	private static long parseTime(String text,SimpleDateFormat format,SimpleDateFormat formatMillis) {
+	public static String formatTime(long time) {
+		return GPX_TIME_FORMAT.format(new Date(time));
+	}
+
+	public static long parseTime(String text) {
+		return parseTime(text, GPX_TIME_FORMAT, GPX_TIME_FORMAT_MILLIS);
+	}
+
+	public static long parseTime(String text, SimpleDateFormat format, SimpleDateFormat formatMillis) {
 		long time = 0;
 		if (text != null) {
 			try {
@@ -2295,10 +2305,6 @@ public class GPXUtilities {
 
 	public static GPXFile loadGPXFile(InputStream stream, GPXExtensionsReader extensionsReader) {
 		GPXFile gpxFile = new GPXFile(null);
-		SimpleDateFormat format = new SimpleDateFormat(GPX_TIME_FORMAT, Locale.US);
-		format.setTimeZone(TimeZone.getTimeZone("UTC"));
-		SimpleDateFormat formatMillis = new SimpleDateFormat(GPX_TIME_FORMAT_MILLIS, Locale.US);
-		formatMillis.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(getUTF8Reader(stream));
@@ -2426,7 +2432,7 @@ public class GPXUtilities {
 							}
 							if (tag.equals("time")) {
 								String text = readText(parser, "time");
-								((Metadata) parse).time = parseTime(text, format, formatMillis);
+								((Metadata) parse).time = parseTime(text);
 							}
 							if (tag.equals("keywords")) {
 								((Metadata) parse).keywords = readText(parser, "keywords");
@@ -2559,7 +2565,7 @@ public class GPXUtilities {
 								}
 							} else if (tag.equals("time")) {
 								String text = readText(parser, "time");
-								((WptPt) parse).time = parseTime(text, format, formatMillis);
+								((WptPt) parse).time = parseTime(text);
 							}
 						}
 					}

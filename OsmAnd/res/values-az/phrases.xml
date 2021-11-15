@@ -183,4 +183,10 @@
     <string name="poi_drinking_water_refill">İçməli su doldurma</string>
     <string name="poi_traffic_signals_arrow">Ox</string>
     <string name="poi_personal_transport">Şəxsi nəqliyyat</string>
+    <string name="poi_bus_station">Avtobus stansiyası</string>
+    <string name="poi_public_transport_station">İctimai nəqliyyat stansiyası</string>
+    <string name="poi_telescope_type_radio">Radio</string>
+    <string name="poi_tennis">Tennis</string>
+    <string name="poi_tram_stop">Tramvay dayanacağı</string>
+    <string name="poi_takeaway_filter_yes">Bəli</string>
 </resources>

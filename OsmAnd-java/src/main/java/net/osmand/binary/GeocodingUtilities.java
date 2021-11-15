@@ -146,6 +146,7 @@ public class GeocodingUtilities {
 		List<GeocodingResult> lst = new ArrayList<GeocodingUtilities.GeocodingResult>();
 		List<RouteSegmentPoint> listR = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		// we allow duplications to search in both files for boundary regions 
+		// here we use same code as for normal routing, so we take into account current profile and sort by priority & distance
 		rp.findRouteSegment(lat, lon, ctx, listR, false, true);
 		double distSquare = 0;
 		Map<String, List<RouteRegion>> streetNames = new HashMap<>();

@@ -262,8 +262,8 @@ public class RoutingOptionsHelper {
 							tg.navigateToPoint(new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude()), false, -1);
 							update = true;
 						}
-						if (pointToStart == null
-								|| MapUtils.getDistance(pointToStart.point,
+						if (pointToStart != null
+								&& MapUtils.getDistance(pointToStart.point,
 								new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude())) < 10) {
 							tg.setStartPoint(new LatLon(firstLoc.getLatitude(), firstLoc.getLongitude()), false, null);
 							update = true;

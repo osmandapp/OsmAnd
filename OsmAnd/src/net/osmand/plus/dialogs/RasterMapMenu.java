@@ -6,19 +6,22 @@ import android.widget.ArrayAdapter;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
+import net.osmand.map.ITileSource;
+import net.osmand.map.ParameterType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
-import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.rastermaps.LayerTransparencySeekbarMode;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.OnMapSelectedCallback;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin.RasterMapType;
+import net.osmand.plus.settings.backend.CommonPreference;
+import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.views.MapLayers;
+import net.osmand.plus.views.MapTileLayer;
 
 
 public class RasterMapMenu {
@@ -109,28 +112,41 @@ public class RasterMapMenu {
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter,
 											  final int itemId, final int pos, final boolean isChecked, int[] viewCoordinates) {
 				if (itemId == toggleActionStringId) {
-					app.runInUIThread(new Runnable() {
-						@Override
-						public void run() {
-							plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
-							mapActivity.refreshMapComplete();
-						}
+					app.runInUIThread(() -> {
+						plugin.toggleUnderlayState(mapActivity, type, onMapSelectedCallback);
+						mapActivity.refreshMapComplete();
 					});
 				} else if (itemId == R.string.show_polygons) {
 					hidePolygonsPref.set(!isChecked);
 					hideWaterPolygonsPref.set(!isChecked);
 					mapActivity.refreshMapComplete();
 				} else if (itemId == R.string.show_transparency_seekbar) {
+					updateTransparencyBarVisibility(isChecked);
+				} else if (itemId == R.string.show_parameter_seekbar) {
 					if (isChecked) {
-						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);
-						mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
-					} else // if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == currentMapTypeSeekbarMode)
-					{
-						settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OFF);
-						mapLayers.getMapControlsLayer().hideTransparencyBar();
+						settings.SHOW_MAP_LAYER_PARAMETER.set(true);
+						MapTileLayer overlayLayer = plugin.getOverlayLayer();
+						if (overlayLayer != null) {
+							mapLayers.getMapControlsLayer().showParameterBar(overlayLayer);
+						}
+					} else {
+						settings.SHOW_MAP_LAYER_PARAMETER.set(false);
+						mapLayers.getMapControlsLayer().hideParameterBar();
+						updateTransparencyBarVisibility(isSeekbarVisible(app, RasterMapType.OVERLAY));
 					}
 				}
 				return false;
+			}
+
+			private void updateTransparencyBarVisibility(boolean visible) {
+				if (visible) {
+					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(currentMapTypeSeekbarMode);
+					mapLayers.getMapControlsLayer().showTransparencyBar(mapTransparencyPreference);
+				} else // if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == currentMapTypeSeekbarMode)
+				{
+					settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.set(LayerTransparencySeekbarMode.OFF);
+					mapLayers.getMapControlsLayer().hideTransparencyBar();
+				}
 			}
 		};
 
@@ -179,6 +195,14 @@ public class RasterMapMenu {
 					.hideDivider(true)
 					.setListener(l)
 					.setSelected(transparencySwitchState).createItem());
+			ITileSource oveplayMap = plugin.getOverlayLayer().getMap();
+			if (type == RasterMapType.OVERLAY && oveplayMap != null && oveplayMap.getParamType() != ParameterType.UNDEFINED) {
+				contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+						.setTitleId(R.string.show_parameter_seekbar, mapActivity)
+						.hideDivider(true)
+						.setListener(l)
+						.setSelected(settings.SHOW_MAP_LAYER_PARAMETER.get()).createItem());
+			}
 		}
 	}
 
