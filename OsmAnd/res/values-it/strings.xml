@@ -4428,4 +4428,5 @@
     <string name="shared_storage">Memorizzazione condivisa</string>
     <string name="shared_storage_first_step">Premi \"%1$s\".
 \nIl gestore di file apre dove necessito di cercare e apre la cartella OsmAnd.</string>
+    <string name="show_parameter_seekbar">Mostra la barra di ricerca dei parametri</string>
 </resources>
