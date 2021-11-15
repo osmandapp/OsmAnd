@@ -766,8 +766,4 @@ public class UiUtilities {
 		}
 		return spannable;
 	}
-
-	public static void showSnackBar(View view, String message){
-		Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
-	}
 }

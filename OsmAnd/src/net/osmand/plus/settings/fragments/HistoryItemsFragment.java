@@ -2,7 +2,6 @@ package net.osmand.plus.settings.fragments;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 
-import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,7 +49,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
-	private View view;
+	protected View appbar;
 
 	protected final List<Object> items = new ArrayList<>();
 	protected final List<Object> selectedItems = new ArrayList<>();
@@ -61,19 +61,12 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected HistoryAdapter adapter;
 	protected RecyclerView recyclerView;
 	protected View warningCard;
-	protected boolean isHistoryItemsSelected = true;
 
 	private Float heading;
 	private Location location;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 	protected boolean nightMode;
-
-	public interface OnDialogClosed{
-		void updateHistoryUI();
-	}
-
-	public OnDialogClosed mOnDialogClosed;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -88,8 +81,9 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) requireActivity();
-		view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.history_preferences_fragment, container, false);
+		View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.history_preferences_fragment, container, false);
 
+		appbar = view.findViewById(R.id.appbar);
 		recyclerView = view.findViewById(R.id.list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(mapActivity));
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -125,23 +119,23 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		selectedItems.clear();
 	}
 
-	protected void setupToolbar(@NonNull View view) {
-		View appbar = view.findViewById(R.id.appbar);
+	protected void setupToolbar(@NonNull View appbar) {
 		ViewCompat.setElevation(appbar, 5.0f);
-
 		ImageView closeButton = appbar.findViewById(R.id.close_button);
 		closeButton.setImageDrawable(getIcon(R.drawable.ic_action_close));
 		closeButton.setOnClickListener(v -> {
-			mOnDialogClosed.updateHistoryUI();
+			Fragment fragment = getTargetFragment();
+			if (fragment instanceof OnPreferenceChanged) {
+				((OnPreferenceChanged) fragment).onPreferenceChanged(settings.SEARCH_HISTORY.getId());
+			}
 			dismiss();
 		});
 
 		shareButton = appbar.findViewById(R.id.action_button_icon);
 		shareButton.setOnClickListener(v -> {
-			if(isHistoryItemsSelected){
-				app.showShortToastMessage(getString(R.string.export_history_no_items_selected_warning));
-			}
-			else {
+			if (selectedItems.isEmpty()) {
+				app.showShortToastMessage(getString(R.string.no_items_selected_warning));
+			} else {
 				shareItems();
 			}
 		});
@@ -151,7 +145,7 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	protected void updateToolbarSwitch(@NonNull View view) {
 		boolean checked = isHistoryEnabled();
 
-		if (checked && !isHistoryItemsSelected) {
+		if (checked && !selectedItems.isEmpty()) {
 			shareButton.setImageDrawable(getIcon(R.drawable.ic_action_upload));
 		} else {
 			int color = ContextCompat.getColor(app, R.color.active_buttons_and_links_text_light);
@@ -226,13 +220,11 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	public void onItemSelected(Object item, boolean selected) {
 		if (selected) {
 			selectedItems.add(item);
-			isHistoryItemsSelected = false;
-			setupToolbar(view);
+			setupToolbar(appbar);
 		} else {
 			selectedItems.remove(item);
-			if (selectedItems.size() == 0){
-				isHistoryItemsSelected = true;
-				setupToolbar(view);
+			if (selectedItems.size() == 0) {
+				setupToolbar(appbar);
 			}
 		}
 		updateButtonsState();
@@ -242,12 +234,10 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 	public void onCategorySelected(List<Object> items, boolean selected) {
 		if (selected) {
 			selectedItems.addAll(items);
-			isHistoryItemsSelected = false;
 		} else {
 			selectedItems.removeAll(items);
-			isHistoryItemsSelected = true;
 		}
-		setupToolbar(view);
+		setupToolbar(appbar);
 		updateButtonsState();
 	}
 
@@ -323,16 +313,6 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 			locationProvider.removeLocationListener(this);
 			locationProvider.removeCompassListener(this);
 			locationProvider.addCompassListener(locationProvider.getNavigationInfo());
-		}
-	}
-
-	@Override
-	public void onAttach(@NonNull Context context) {
-		super.onAttach(context);
-		try {
-			mOnDialogClosed = (OnDialogClosed) getTargetFragment();
-		} catch (ClassCastException e){
-			e.printStackTrace();
 		}
 	}
 }
