@@ -111,7 +111,7 @@
     <string name="sharing_status">Estado da partilha</string>
     <string name="location_sharing_status">Partilha: %1$s</string>
     <string name="shared_string_enabled">Ativado</string>
-    <string name="no_gps_connection">Sem conexão GPS</string>
+    <string name="no_gps_connection">Sem ligação ao GPS</string>
     <string name="no_internet_connection">Sem ligação à Internet</string>
     <string name="shared_string_disable">Desativar</string>
     <string name="shared_string_save">Guardar</string>

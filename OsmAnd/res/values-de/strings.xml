@@ -4415,4 +4415,36 @@
     <string name="delete_history_items">%1$s Verlaufseinträge löschen\?</string>
     <string name="quick_action_toggle_preference">Eine Möglichkeit zum Umschalten des ausgewählten Präferenzstatus.</string>
     <string name="delete_history_items_descr">Sicher, dass Sie die ausgewählten Verlaufseinträge löschen möchten\?</string>
+    <string name="copying_file">Kopieren der Datei %1$s</string>
+    <string name="from_to_with_params">Von %1$s nach %2$s</string>
+    <string name="progress_complete">%1$s abgeschlossen</string>
+    <string name="storage_found_files_descr">Tippen Sie auf \"%1$s\", um %2$s Dateien von \"%3$s\" nach \"%4$s\" zu kopieren. Dies kann einige Zeit dauern.</string>
+    <string name="storage_copied_files_size">%1$s Dateien %2$s kopiert</string>
+    <string name="storage_copying_files_size">Kopieren von %1$s Dateien %2$s</string>
+    <string name="storage_found_files_size">%1$s Dateien %2$s gefunden</string>
+    <string name="shared_storage_last_step">Sie können einen neuen Datenspeicher angeben, nachdem Sie den gemeinsamen Speicher ausgewählt haben.</string>
+    <string name="shared_storage_third_step">Erteilen Sie die Erlaubnis zum Zugriff auf den Ordner. Ohne diese Erlaubnis kann OsmAnd keine Dateien kopieren.</string>
+    <string name="shared_storage_first_step">Drücken Sie \"%1$s\".
+\nEs öffnet sich der Dateimanager, in dem Sie den Ordner osmand finden und öffnen müssen.</string>
+    <string name="shared_storage_migration_descr">Aufgrund von Änderungen bei den Speicherzugriffsregeln in Android kann OsmAnd nicht mehr %1$s verwenden.
+\n
+\nSie müssen alle Ihre Daten an den neuen Speicherort kopieren.</string>
+    <string name="shared_storage_second_step">Klicken Sie auf \"Diesen Ordner verwenden\".</string>
+    <string name="folder_access_denied">Für den Zugriff auf den ausgewählten Ordner ist eine Berechtigung erforderlich.</string>
+    <string name="copying_completed">Kopiervorgang abgeschlossen</string>
+    <string name="skip_confirmation">Ja, überspringen</string>
+    <string name="shared_storage">Gemeinsamer Speicher</string>
+    <string name="shared_storage_migration">Migration des gemeinsamen Speichers</string>
+    <string name="shared_string_migration">Migration</string>
+    <string name="icon_group_education">Bildung</string>
+    <string name="start_copying">Kopieren starten</string>
+    <string name="files_remaining">Verbleibende Dateien: %1$s %2$s</string>
+    <string name="shared_string_skip_warning">Sind Sie sicher, dass Sie die Migration überspringen wollen\? OsmAnd hat keinen Zugriff mehr auf Ihre Dateien im gemeinsamen Speicher.
+\n
+\nDie Anwendung wird in dem neuen Ordner mit Ihren Daten gestartet.</string>
+    <string name="shared_string_copy_to">Kopieren nach</string>
+    <string name="icon_group_industrial">Industriell</string>
+    <string name="rendering_attr_natureReserves_description">Naturreservate, Schutzgebiete und Nationalparks anzeigen.</string>
+    <string name="not_enough_contributions_descr">Ein Minimum von %1$s Änderungen in den letzten zwei Monaten %2$s ist erforderlich, um Zugang zu unbegrenzten stündlichen Kartenaktualisierungen zu erhalten.</string>
+    <string name="show_parameter_seekbar">Parametersuchleiste anzeigen</string>
 </resources>

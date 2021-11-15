@@ -4072,4 +4072,8 @@
     <string name="poi_faculty_medicine">Медицина</string>
     <string name="poi_faculty_nursing">Уход</string>
     <string name="poi_faculty_psychology">Психология</string>
+    <string name="poi_coffee_filter">Кофе</string>
+    <string name="poi_tobacco_filter">Табак</string>
+    <string name="poi_butcher_type">Основной вид мяса</string>
+    <string name="poi_ice_cream_filter">Мороженое</string>
 </resources>

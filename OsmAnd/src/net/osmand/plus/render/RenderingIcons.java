@@ -7,10 +7,13 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.Amenity;
+import net.osmand.osm.PoiType;
 import net.osmand.plus.R;
 import net.osmand.plus.R.drawable;
 
@@ -107,12 +110,22 @@ public class RenderingIcons {
 				&& bitmapData[2] == 8 && bitmapData[3] == 0;
 	}
 
+	@Nullable
+	public static String getIconNameForAmenity(@NonNull Amenity amenity) {
+		PoiType poiType = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		if (poiType == null) {
+			return null;
+		} else if (RenderingIcons.containsSmallIcon(poiType.getIconKeyName())) {
+			return poiType.getIconKeyName();
+		} else if (RenderingIcons.containsSmallIcon(poiType.getOsmTag() + "_" + poiType.getOsmValue())) {
+			return poiType.getOsmTag() + "_" + poiType.getOsmValue();
+		}
+		return null;
+	}
+
 	public static int getBigIconResourceId(String s) {
 		Integer i = bigIcons.get(s);
-		if (i == null) {
-			return 0;
-		}
-		return i;
+		return i == null ? 0 : i;
 	}
 	
 	public static Drawable getBigIcon(Context ctx, String s) {
@@ -179,11 +192,7 @@ public class RenderingIcons {
 		return null;
 	}
 
-	public static int getBigIconId(String iconName) {
-		return getResId("mx_" + iconName);
-	}
-
-	public static Integer getResId(String id) {
+	public static Integer getResId(@NonNull String id) {
 		if (id.startsWith("mx_")) {
 			return bigIcons.get(id.substring(3));
 		} else if (id.startsWith("h_")) {

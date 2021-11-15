@@ -118,6 +118,15 @@ public class TrackDisplayHelper {
 	}
 
 	@NonNull
+	public List<GpxDisplayGroup> getPointsOriginalGroups() {
+		GpxDisplayItemType[] filterTypes = new GpxDisplayItemType[] {
+				GpxDisplayItemType.TRACK_POINTS,
+				GpxDisplayItemType.TRACK_ROUTE_POINTS
+		};
+		return getOriginalGroups(filterTypes);
+	}
+
+	@NonNull
 	public List<GpxDisplayGroup> getOriginalGroups(GpxDisplayItemType[] filterTypes) {
 		return filterGroups(false, filterTypes);
 	}

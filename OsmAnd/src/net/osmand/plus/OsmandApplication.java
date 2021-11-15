@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.settings.backend.OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -18,6 +19,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Build.VERSION;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
@@ -210,6 +212,12 @@ public class OsmandApplication extends MultiDexApplication {
 			osmandSettings.initExternalStorageDirectory();
 		}
 		externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
+		boolean sharedStorage = Algorithms.objectEquals(osmandSettings.getDefaultInternalStorage(), externalStorageDirectory);
+		if (VERSION.SDK_INT >= 30 && sharedStorage) {
+			String dir = osmandSettings.getInternalAppPath().getAbsolutePath();
+			osmandSettings.setExternalStorageDirectory(EXTERNAL_STORAGE_TYPE_INTERNAL_FILE, dir);
+			externalStorageDirectory = osmandSettings.getExternalStorageDirectory();
+		}
 		if (!FileUtils.isWritable(externalStorageDirectory)) {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();

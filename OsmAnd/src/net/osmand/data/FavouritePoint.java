@@ -185,7 +185,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public void setIconIdFromName(String iconName) {
-		this.iconId = RenderingIcons.getBigIconId(iconName);
+		this.iconId = RenderingIcons.getBigIconResourceId(iconName);
 	}
 
 	public boolean isSpecialPoint() {
