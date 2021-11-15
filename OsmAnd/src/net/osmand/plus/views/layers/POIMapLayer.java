@@ -1,10 +1,5 @@
 package net.osmand.plus.views.layers;
 
-import static net.osmand.AndroidUtils.dpToPx;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
-import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
-import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -21,11 +16,6 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
@@ -36,7 +26,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.osm.PoiType;
 import net.osmand.plus.ColorUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -66,6 +55,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+
+import static net.osmand.AndroidUtils.dpToPx;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE;
+import static net.osmand.osm.MapPoiTypes.ROUTE_ARTICLE_POINT;
+import static net.osmand.osm.MapPoiTypes.ROUTE_TRACK;
 
 public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 		MapTextProvider<Amenity>, IRouteInformationListener, OnFileVisibilityChangeListener {
@@ -383,14 +382,7 @@ public class POIMapLayer extends OsmandMapLayer implements IContextMenuProvider,
 					if (tileBox.containsPoint(x, y, iconSize)) {
 						String id = o.getGpxIcon();
 						if (id == null) {
-							PoiType st = o.getType().getPoiTypeByKeyName(o.getSubType());
-							if (st != null) {
-								if (RenderingIcons.containsSmallIcon(st.getIconKeyName())) {
-									id = st.getIconKeyName();
-								} else if (RenderingIcons.containsSmallIcon(st.getOsmTag() + "_" + st.getOsmValue())) {
-									id = st.getOsmTag() + "_" + st.getOsmValue();
-								}
-							}
+							id = RenderingIcons.getIconNameForAmenity(o);
 						}
 						if (id != null) {
 							PointImageDrawable pointImageDrawable = PointImageDrawable.getOrCreate(
