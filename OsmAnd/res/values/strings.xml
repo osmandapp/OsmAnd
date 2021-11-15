@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_memory">Memory</string>
+    <string name="memory_allocated_for_routing_ds">Higher memory value speeds up the calculation of long routes (more than 500 km), but may affect the performance of other applications.\nDoes not affect calculation speed of short routes.</string>
+    <string name="memory_allocated_for_routing">Memory allocated for Routing</string>
     <string name="show_parameter_seekbar">Show parameter seekbar</string>
     <string name="display_groups_visibility_dialog_description">You can control groups visibility on the map. If track is hidden, all groups will be hidden too.</string>
     <string name="shared_string_hide_all">Hide all</string>

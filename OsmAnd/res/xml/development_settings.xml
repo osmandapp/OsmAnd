@@ -102,6 +102,13 @@
 		android:title="@string/info_button" />
 
 	<Preference
+		android:key="memory_allocated_for_routing"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/memory_allocated_for_routing"
+		android:summary="256 mb"/>
+
+	<Preference
 		android:key="global_app_allocated_memory"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Debug;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 import net.osmand.plus.OsmAndLocationSimulation;
@@ -24,6 +25,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
+	private static final String MEMORY_ALLOCATED_FOR_ROUTING = "memory_allocated_for_routing";
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 
@@ -60,6 +62,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
 
+		setupMemoryAllocatedForRoutingPref();
 		setupGlobalAppAllocatedMemoryPref();
 		setupNativeAppAllocatedMemoryPref();
 		setupAgpsDataDownloadedPref();
@@ -142,6 +145,17 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		logcatBuffer.setIconSpaceReserved(false);
 	}
 
+	private void setupMemoryAllocatedForRoutingPref() {
+		Preference preference = findPreference(MEMORY_ALLOCATED_FOR_ROUTING);
+		int value = settings.MEMORY_ALLOCATED_FOR_ROUTING.get();
+		String description = getString(
+				R.string.ltr_or_rtl_combine_via_slash,
+				String.valueOf(value),
+				"MB");
+		preference.setSummary(description);
+		preference.setIconSpaceReserved(false);
+	}
+
 	private void setupGlobalAppAllocatedMemoryPref() {
 		long javaAvailMem = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024L);
 		long javaTotal = Runtime.getRuntime().totalMemory() / (1024 * 1024L);
@@ -214,8 +228,23 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 				preference.setSummary(getAgpsDataDownloadedSummary());
 			}
 			return true;
+		} else if (MEMORY_ALLOCATED_FOR_ROUTING.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				AllocatedRoutingMemoryBottomSheet.showInstance(getFragmentManager(), preference.getKey(), this, getSelectedAppMode());
+			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
+		if (prefId.equals(MEMORY_ALLOCATED_FOR_ROUTING)) {
+			applyPreference(MEMORY_ALLOCATED_FOR_ROUTING, applyToAllProfiles, newValue);
+			setupMemoryAllocatedForRoutingPref();
+		} else {
+			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
+		}
 	}
 
 	@Override
