@@ -75,7 +75,6 @@ public abstract class HistoryItemsFragment extends BaseOsmAndDialogFragment impl
 		settings = app.getSettings();
 		nightMode = !app.getSettings().isLightContent();
 		updateHistoryItems();
-
 	}
 
 	@Nullable
