@@ -61,7 +61,11 @@ public class RouteResultPreparationTest {
         RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
         Map<String, String> params = new LinkedHashMap<String, String>();
         params.put("car", "true");
-        RoutingConfiguration config = builder.build("car", RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, params);
+        RoutingMemoryLimits memoryLimit = new RoutingMemoryLimits(
+                RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
+                RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT
+        );
+        RoutingConfiguration config = builder.build("car", memoryLimit, params);
         BinaryMapIndexReader[] binaryMapIndexReaders = {new BinaryMapIndexReader(raf, fl)};
         ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
                 RoutePlannerFrontEnd.RouteCalculationMode.NORMAL);

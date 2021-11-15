@@ -18,6 +18,7 @@ import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
 import net.osmand.router.RoutingContext;
 import net.osmand.util.MapUtils;
 
@@ -138,11 +139,15 @@ public class CurrentPositionHelper {
 			for (BinaryMapReaderResource rep : checkReaders) {
 				rs[i++] = rep.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
 			}
-			RoutingConfiguration cfg = app.getRoutingConfigForMode(am).build(p, 10,
+			RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(
+					10,
+					app.getSettings().MEMORY_ALLOCATED_FOR_ROUTING.get()
+			);
+			RoutingConfiguration cfg = app.getRoutingConfigForMode(am).build(p, memoryLimits,
 					new HashMap<String, String>());
 			cfg.routeCalculationTime = System.currentTimeMillis();
 			ctx = new RoutePlannerFrontEnd().buildRoutingContext(cfg, null, rs);
-			RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build("geocoding", 10,
+			RoutingConfiguration defCfg = app.getDefaultRoutingConfig().build("geocoding", memoryLimits,
 					new HashMap<String, String>());
 			defCtx = new RoutePlannerFrontEnd().buildRoutingContext(defCfg, null, rs);
 		} else {

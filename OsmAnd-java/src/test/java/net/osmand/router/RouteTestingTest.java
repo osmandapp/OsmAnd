@@ -1,5 +1,17 @@
 package net.osmand.router;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.router.RoutingConfiguration.RoutingMemoryLimits;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,16 +23,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeSet;
-
-import net.osmand.binary.BinaryMapIndexReader;
-
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 @RunWith(Parameterized.class)
 public class RouteTestingTest {
@@ -80,8 +82,12 @@ public class RouteTestingTest {
 					continue;
 				}
 			}
+			RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(
+					RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3,
+					RoutingConfiguration.DEFAULT_NATIVE_MEMORY_LIMIT
+			);
 			RoutingConfiguration config = builder.build(params.containsKey("vehicle") ? params.get("vehicle") : "car",
-					RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, params);
+					memoryLimits, params);
 
 			config.planRoadDirection = planRoadDirection;
 			RoutingContext ctx = fe.buildRoutingContext(config, null, binaryMapIndexReaders,
