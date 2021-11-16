@@ -10,7 +10,11 @@
 	- For wording and consistency, please note https://docs.osmand.net/en/main@latest/development/contributions/translating-osmand
 	Thx - Hardy
 -->
-
+    <string name="fold_unfold">fold/unfold</string>
+    <string name="app_profile_type">App profile type</string>
+    <string name="map_marker_options">Map marker options</string>
+    <string name="add_to_group">Add to group</string>
+    <string name="app_modes_options">Choose App modes</string>
     <string name="no_items_selected_warning">Please select at least one item</string>
     <string name="show_parameter_seekbar">Show parameter seekbar</string>
     <string name="display_groups_visibility_dialog_description">You can control groups visibility on the map. If track is hidden, all groups will be hidden too.</string>
@@ -4455,5 +4459,6 @@
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
     <string name="voice_prompts_timetable">Voice prompts times</string>
+
 
 </resources>

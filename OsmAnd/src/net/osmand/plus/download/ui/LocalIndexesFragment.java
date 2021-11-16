@@ -54,7 +54,6 @@ import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.SrtmDownloadItem;
@@ -1055,6 +1054,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 				descriptionTextView.setText(builder.toString());
 				checkbox.setVisibility(selectionMode ? View.VISIBLE : View.GONE);
+				checkbox.setContentDescription(getNameToDisplay(child));
 				if (selectionMode) {
 					icon.setVisibility(View.GONE);
 					options.setVisibility(View.GONE);
