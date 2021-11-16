@@ -188,7 +188,7 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 		MemoryInfo mi = new MemoryInfo();
 		ActivityManager activityManager = (ActivityManager) activity.getSystemService(ACTIVITY_SERVICE);
 		activityManager.getMemoryInfo(mi);
-		double availableMb = (double) mi.availMem / BYTES_IN_MB;
+		double availableMb = (double) mi.totalMem / BYTES_IN_MB;
 		return (float) availableMb / 2;
 	}
 
