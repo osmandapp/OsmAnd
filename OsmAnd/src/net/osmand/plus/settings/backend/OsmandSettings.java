@@ -1,11 +1,6 @@
 package net.osmand.plus.settings.backend;
 
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
-import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -89,6 +84,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONFIGURE_MAP_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ACTIONS;
+import static net.osmand.plus.routing.TransportRoutingHelper.PUBLIC_TRANSPORT_KEY;
 
 public class OsmandSettings {
 
@@ -917,7 +917,7 @@ public class OsmandSettings {
 			return super.setValue(prefs, val);
 		}
 
-		protected DrivingRegion getDefaultValue() {
+		public DrivingRegion getDefaultValue() {
 			return DrivingRegion.getDrivingRegionByLocale();
 		}
 
@@ -927,7 +927,7 @@ public class OsmandSettings {
 	// cache of metrics constants as they are used very often
 	public final EnumStringPreference<MetricsConstants> METRIC_SYSTEM = (EnumStringPreference<MetricsConstants>) new EnumStringPreference<MetricsConstants>(this,
 			"default_metric_system", MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.values()) {
-		protected MetricsConstants getDefaultValue() {
+		public MetricsConstants getDefaultValue() {
 			return DRIVING_REGION.get().defMetrics;
 		}
 
@@ -1187,7 +1187,7 @@ public class OsmandSettings {
 	public final OsmandPreference<String> MAP_PREFERRED_LOCALE = new StringPreference(this, "map_preferred_locale", "").makeGlobal().makeShared().cache();
 	public final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES = new BooleanPreference(this, "map_transliterate_names", false) {
 
-		protected Boolean getDefaultValue() {
+		public Boolean getDefaultValue() {
 			return usingEnglishNames();
 		}
 
@@ -1324,7 +1324,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> DELAY_TO_START_NAVIGATION = new IntPreference(this, "delay_to_start_navigation", -1) {
 
-		protected Integer getDefaultValue() {
+		public Integer getDefaultValue() {
 			if (DEFAULT_APPLICATION_MODE.get().isDerivedRoutingFrom(ApplicationMode.CAR)) {
 				return 10;
 			}
@@ -1374,7 +1374,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> SHOW_SAVED_TRACK_REMEMBER = new BooleanPreference(this, "show_saved_track_remember", false) {
 		@Override
-		protected Boolean getDefaultValue() {
+		public Boolean getDefaultValue() {
 			for (SelectedGpxFile selectedGpxFile : ctx.getSelectedGpxHelper().getSelectedGPXFiles()) {
 				if (!selectedGpxFile.isShowCurrentTrack()) {
 					return true;
@@ -2888,6 +2888,9 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Long> AGPS_DATA_LAST_TIME_DOWNLOADED =
 			new LongPreference(this, "agps_data_downloaded", 0).makeGlobal();
+
+	public final CommonPreference<Integer> MEMORY_ALLOCATED_FOR_ROUTING =
+			new IntPreference(this, "memory_allocated_for_routing", 256).makeGlobal();
 
 	// Live Updates
 	public final OsmandPreference<Boolean> IS_LIVE_UPDATES_ON =

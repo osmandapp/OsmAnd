@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.os.Debug;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 
 import net.osmand.plus.OsmAndLocationSimulation;
@@ -60,6 +61,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		Preference info = findPreference("info");
 		info.setIconSpaceReserved(false);
 
+		setupMemoryAllocatedForRoutingPref();
 		setupGlobalAppAllocatedMemoryPref();
 		setupNativeAppAllocatedMemoryPref();
 		setupAgpsDataDownloadedPref();
@@ -142,6 +144,17 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 		logcatBuffer.setIconSpaceReserved(false);
 	}
 
+	private void setupMemoryAllocatedForRoutingPref() {
+		Preference preference = findPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId());
+		int value = settings.MEMORY_ALLOCATED_FOR_ROUTING.get();
+		String description = getString(
+				R.string.ltr_or_rtl_combine_via_slash,
+				String.valueOf(value),
+				"MB");
+		preference.setSummary(description);
+		preference.setIconSpaceReserved(false);
+	}
+
 	private void setupGlobalAppAllocatedMemoryPref() {
 		long javaAvailMem = (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / (1024 * 1024L);
 		long javaTotal = Runtime.getRuntime().totalMemory() / (1024 * 1024L);
@@ -214,8 +227,23 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 				preference.setSummary(getAgpsDataDownloadedSummary());
 			}
 			return true;
+		} else if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				AllocatedRoutingMemoryBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
+			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
+		if (prefId.equals(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId())) {
+			applyPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId(), applyToAllProfiles, newValue);
+			setupMemoryAllocatedForRoutingPref();
+		} else {
+			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);
+		}
 	}
 
 	@Override

@@ -160,7 +160,7 @@ public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		return defaultValues != null && defaultValues.containsKey(mode);
 	}
 
-	protected T getDefaultValue() {
+	public T getDefaultValue() {
 		return getProfileDefaultValue(settings.APPLICATION_MODE.get());
 	}
 
