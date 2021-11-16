@@ -143,6 +143,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Stri
 		return error;
 	}
 
+	@NonNull
 	private IProgress getCopyProgress(@NonNull String fileName, @Nullable CopyFilesListener filesListener) {
 		return new AbstractProgress() {
 
@@ -158,6 +159,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Stri
 		};
 	}
 
+	@Nullable
 	private String getFileName(@NonNull Uri uri, @Nullable String fileName) {
 		String path = uri.getLastPathSegment();
 		if (path != null) {
@@ -169,6 +171,7 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, Stri
 		return fileName;
 	}
 
+	@NonNull
 	private CopyFilesListener getCopyFilesListener(long size) {
 		return new CopyFilesListener() {
 

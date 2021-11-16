@@ -12,7 +12,7 @@ import net.osmand.plus.OsmandApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-class DocumentFilesCollectTask extends AsyncTask<Void, Void, String> {
+class DocumentFilesCollectTask extends AsyncTask<Void, Void, Void> {
 
 	private final DocumentFile folderFile;
 	private final List<DocumentFile> documentFiles = new ArrayList<>();
@@ -27,24 +27,24 @@ class DocumentFilesCollectTask extends AsyncTask<Void, Void, String> {
 	@Override
 	protected void onPreExecute() {
 		if (listener != null) {
-			listener.onFileCopyStarted();
+			listener.onFilesCollectingStarted();
 		}
 	}
 
 	@Override
-	protected String doInBackground(Void... voids) {
+	protected Void doInBackground(Void... voids) {
 		collectFiles(folderFile, documentFiles, filesSize);
 		return null;
 	}
 
 	@Override
-	protected void onPostExecute(String error) {
+	protected void onPostExecute(Void result) {
 		if (listener != null) {
-			listener.onFileCopyFinished(folderFile, documentFiles, filesSize[0]);
+			listener.onFilesCollectingFinished(folderFile, documentFiles, filesSize[0]);
 		}
 	}
 
-	private void collectFiles(DocumentFile documentFile, List<DocumentFile> documentFiles, long[] size) {
+	private void collectFiles(@NonNull DocumentFile documentFile, @NonNull List<DocumentFile> documentFiles, long[] size) {
 		if (isCancelled()) {
 			return;
 		}
@@ -64,9 +64,9 @@ class DocumentFilesCollectTask extends AsyncTask<Void, Void, String> {
 
 	public interface FilesCollectListener {
 
-		void onFileCopyStarted();
+		void onFilesCollectingStarted();
 
-		void onFileCopyFinished(DocumentFile folder, List<DocumentFile> files, long size);
+		void onFilesCollectingFinished(@NonNull DocumentFile folder, @NonNull List<DocumentFile> files, long size);
 
 	}
 }

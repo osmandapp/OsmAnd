@@ -3,7 +3,6 @@ package net.osmand.plus.settings.datastorage;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -43,6 +42,8 @@ import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SharedStorageWarningFragment extends BaseOsmAndFragment implements OnConfirmMigrationSkipListener, OnDismissDialogFragmentListener, FilesCollectListener {
 
@@ -53,6 +54,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	private OsmandApplication app;
 	private DataStorageHelper storageHelper;
 	private DocumentFilesCollectTask collectTask;
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	private DocumentFile folderFile;
 	private List<DocumentFile> documentFiles = new ArrayList<>();
@@ -235,7 +237,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
 					StorageMigrationAsyncTask copyFilesTask = new StorageMigrationAsyncTask(activity, documentFiles, filesSize, usedOnMap);
-					copyFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					copyFilesTask.executeOnExecutor(singleThreadExecutor);
 					dismiss();
 				}
 			});
@@ -284,12 +286,12 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	}
 
 	@Override
-	public void onFileCopyStarted() {
+	public void onFilesCollectingStarted() {
 		updateContent();
 	}
 
 	@Override
-	public void onFileCopyFinished(DocumentFile folder, List<DocumentFile> files, long size) {
+	public void onFilesCollectingFinished(@NonNull DocumentFile folder, @NonNull List<DocumentFile> files, long size) {
 		filesSize = size;
 		folderFile = folder;
 		documentFiles = files;
@@ -313,7 +315,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	}
 
 	private void stopCollectFilesTask() {
-		if (collectTask != null && collectTask.getStatus() == AsyncTask.Status.RUNNING) {
+		if (collectTask != null) {
 			collectTask.cancel(false);
 		}
 	}
@@ -321,7 +323,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	private void updateSelectedFolderFiles(@NonNull Uri uri) {
 		stopCollectFilesTask();
 		collectTask = new DocumentFilesCollectTask(app, uri, this);
-		collectTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		collectTask.executeOnExecutor(singleThreadExecutor);
 	}
 
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {
