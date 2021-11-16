@@ -39,6 +39,8 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 
 	public static final String TAG = AllocatedRoutingMemoryBottomSheet.class.getSimpleName();
 
+	private static final int BYTES_IN_MB = 1024 * 1024;
+
 	private OsmandApplication app;
 
 	private Integer[] range;
@@ -186,7 +188,7 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 		MemoryInfo mi = new MemoryInfo();
 		ActivityManager activityManager = (ActivityManager) activity.getSystemService(ACTIVITY_SERVICE);
 		activityManager.getMemoryInfo(mi);
-		double availableMb = (double) mi.availMem / 0x100000L;
+		double availableMb = (double) mi.availMem / BYTES_IN_MB;
 		return (float) availableMb / 2;
 	}
 
