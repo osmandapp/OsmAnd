@@ -2,8 +2,10 @@ package net.osmand.plus.settings.datastorage;
 
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.documentfile.provider.DocumentFile;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -12,6 +14,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.settings.backend.backup.AbstractProgress;
 import net.osmand.util.Algorithms;
 
@@ -19,31 +22,35 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Void> {
+class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Map<String, String>> {
 
 	public final static Log log = PlatformUtil.getLog(StorageMigrationAsyncTask.class);
 
 	private final OsmandApplication app;
 	private final List<DocumentFile> documentFiles;
 	private final WeakReference<FragmentActivity> activityRef;
-	private StorageMigrationListener listener;
+	private StorageMigrationListener migrationListener;
 
-	private final long filesSize;
-	private final boolean usedOnMap;
-	private int generalProgress;
+	protected int generalProgress;
+	protected final long filesSize;
+	protected final boolean usedOnMap;
 
-	public StorageMigrationAsyncTask(@NonNull FragmentActivity activity, @NonNull List<DocumentFile> documentFiles, boolean usedOnMap) {
+	public StorageMigrationAsyncTask(@NonNull FragmentActivity activity,
+	                                 @NonNull List<DocumentFile> documentFiles,
+	                                 long filesSize,
+	                                 boolean usedOnMap) {
+		activityRef = new WeakReference<>(activity);
 		this.app = (OsmandApplication) activity.getApplication();
 		this.usedOnMap = usedOnMap;
+		this.filesSize = filesSize;
 		this.documentFiles = documentFiles;
-		filesSize = getFilesSize(documentFiles);
-		activityRef = new WeakReference<>(activity);
 	}
 
 	@Override
@@ -51,90 +58,115 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Void> {
 		FragmentActivity activity = activityRef.get();
 		if (AndroidUtils.isActivityNotDestroyed(activity)) {
 			FragmentManager manager = activity.getSupportFragmentManager();
-			listener = StorageMigrationFragment.showInstance(manager, documentFiles, usedOnMap);
+			migrationListener = StorageMigrationFragment.showInstance(manager, generalProgress,
+					documentFiles.size(), filesSize, usedOnMap);
 		}
 	}
 
 	@Override
-	protected Void doInBackground(Void... params) {
+	protected Map<String, String> doInBackground(Void... params) {
+		Map<String, String> errors = new HashMap<>();
 		CopyFilesListener copyFilesListener = getCopyFilesListener(filesSize / 1024);
-		List<DocumentFile> remainingFiles = new ArrayList<>(documentFiles);
-		for (DocumentFile file : documentFiles) {
-			copyFile(file, copyFilesListener);
-			remainingFiles.remove(file);
-			publishProgress(remainingFiles);
+
+		long remainingSize = filesSize;
+		for (int i = 0; i < documentFiles.size(); i++) {
+			DocumentFile file = documentFiles.get(i);
+			remainingSize -= file.length();
+
+			Uri uri = file.getUri();
+			String fileName = getFileName(uri, file.getName());
+			String error = copyFile(uri, fileName, copyFilesListener);
+			if (error == null) {
+				file.delete();
+			} else {
+				errors.put(fileName, error);
+			}
+			publishProgress(new Pair<>(documentFiles.size() - i, remainingSize));
 		}
-		return null;
+		return errors;
 	}
 
 	@Override
 	protected void onProgressUpdate(Object... values) {
-		if (listener != null) {
+		if (migrationListener != null) {
 			for (Object object : values) {
 				if (object instanceof String) {
-					listener.onFileCopyStarted((String) object);
+					migrationListener.onFileCopyStarted((String) object);
 				} else if (object instanceof Integer) {
 					generalProgress = (Integer) object;
-					listener.onFilesCopyProgress(generalProgress);
-				} else if (object instanceof List) {
-					List<DocumentFile> remainingFiles = (List<DocumentFile>) object;
-					listener.onRemainingFilesUpdate(remainingFiles);
+					migrationListener.onFilesCopyProgress(generalProgress);
+				} else if (object instanceof Pair) {
+					migrationListener.onRemainingFilesUpdate((Pair<Integer, Long>) object);
 				}
 			}
 		}
 	}
 
 	@Override
-	protected void onPostExecute(Void aVoid) {
-		if (listener != null) {
-			listener.onFilesCopyFinished();
+	protected void onPostExecute(Map<String, String> errors) {
+		if (migrationListener != null) {
+			migrationListener.onFilesCopyFinished(errors);
 		}
 	}
 
-	private void copyFile(@NonNull DocumentFile documentFile, CopyFilesListener uploadListener) {
+	@Nullable
+	private String copyFile(@NonNull Uri uri, @NonNull String fileName, @Nullable CopyFilesListener filesListener) {
+		String error = null;
+		InputStream stream = null;
+		OutputStream outputStream = null;
 		try {
-			Uri childUri = documentFile.getUri();
-			String name = documentFile.getName();
-			String fileName = name;
-			String path = documentFile.getUri().getLastPathSegment();
-			if (path != null) {
-				int ps = path.indexOf("/");
-				if (ps != -1 && ps < path.length() - 1) {
-					fileName = path.substring(ps + 1);
+			if (filesListener != null) {
+				filesListener.onFileCopyStarted(fileName);
+			}
+			File destFile = app.getAppPath(fileName);
+			if (destFile.exists()) {
+				error = app.getString(R.string.file_with_name_already_exists);
+			} else {
+				File dir = destFile.getParentFile();
+				if (dir != null) {
+					dir.mkdirs();
+				}
+				stream = app.getContentResolver().openInputStream(uri);
+				if (stream != null) {
+					outputStream = new FileOutputStream(destFile);
+					IProgress progress = getCopyProgress(fileName, filesListener);
+					Algorithms.streamCopy(stream, outputStream, progress, 1024);
 				}
 			}
-			File testDir = new File(app.getAppPath(null), fileName);
-			File parentFile = testDir.getParentFile();
-			if (parentFile != null) {
-				parentFile.mkdirs();
-			}
-			InputStream stream = app.getContentResolver().openInputStream(childUri);
-			FileOutputStream outputStream = new FileOutputStream(testDir);
-
-			IProgress progress = new AbstractProgress() {
-
-				private int progress = 0;
-
-				@Override
-				public void startWork(int work) {
-					uploadListener.onFileCopyStarted(name);
-				}
-
-				@Override
-				public void progress(int deltaWork) {
-					progress += deltaWork;
-					uploadListener.onFileCopyProgress(name, progress, deltaWork);
-				}
-			};
-			progress.startWork((int) documentFile.length() / 1024);
-
-			Algorithms.streamCopy(stream, outputStream, progress, 1024);
-			stream.close();
-			outputStream.close();
-			documentFile.delete();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			log.error(e);
+			error = e.getMessage();
+		} finally {
+			Algorithms.closeStream(stream);
+			Algorithms.closeStream(outputStream);
 		}
+		return error;
+	}
+
+	private IProgress getCopyProgress(@NonNull String fileName, @Nullable CopyFilesListener filesListener) {
+		return new AbstractProgress() {
+
+			private int progress = 0;
+
+			@Override
+			public void progress(int deltaWork) {
+				if (filesListener != null) {
+					progress += deltaWork;
+					filesListener.onFileCopyProgress(fileName, progress, deltaWork);
+				}
+			}
+		};
+	}
+
+	private String getFileName(@NonNull Uri uri, @Nullable String fileName) {
+		String path = uri.getLastPathSegment();
+		if (path != null) {
+			int ps = path.indexOf("/");
+			if (ps != -1 && ps < path.length() - 1) {
+				return path.substring(ps + 1);
+			}
+		}
+		return fileName;
 	}
 
 	private CopyFilesListener getCopyFilesListener(long size) {
@@ -159,14 +191,6 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Void> {
 		};
 	}
 
-	public static long getFilesSize(@NonNull List<DocumentFile> documentFiles) {
-		long size = 0;
-		for (DocumentFile file : documentFiles) {
-			size += file.length();
-		}
-		return size;
-	}
-
 	public interface CopyFilesListener {
 		void onFileCopyStarted(@NonNull String fileName);
 
@@ -175,13 +199,13 @@ class StorageMigrationAsyncTask extends AsyncTask<Void, Object, Void> {
 
 	public interface StorageMigrationListener {
 
-		void onFileCopyStarted(String fileName);
+		void onFileCopyStarted(@NonNull String path);
 
 		void onFilesCopyProgress(int progress);
 
-		void onFilesCopyFinished();
+		void onFilesCopyFinished(@NonNull Map<String, String> errors);
 
-		void onRemainingFilesUpdate(List<DocumentFile> remainingFiles);
+		void onRemainingFilesUpdate(@NonNull Pair<Integer, Long> pair);
 
 	}
 }

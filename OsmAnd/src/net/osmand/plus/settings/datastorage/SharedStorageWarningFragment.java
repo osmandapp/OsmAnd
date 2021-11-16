@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -20,19 +19,22 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.documentfile.provider.DocumentFile;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ColorUtilities;
+import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
-import net.osmand.plus.settings.backend.OsmandSettings;
+import net.osmand.plus.settings.datastorage.DocumentFilesCollectTask.FilesCollectListener;
 import net.osmand.plus.settings.datastorage.SkipMigrationBottomSheet.OnConfirmMigrationSkipListener;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
@@ -40,23 +42,24 @@ import net.osmand.util.Algorithms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SharedStorageWarningFragment extends BaseOsmAndFragment implements OnConfirmMigrationSkipListener {
+public class SharedStorageWarningFragment extends BaseOsmAndFragment implements OnConfirmMigrationSkipListener, OnDismissDialogFragmentListener, FilesCollectListener {
 
 	public static final String TAG = SharedStorageWarningFragment.class.getSimpleName();
 
-	private static final String USED_ON_MAP_KEY = "used_on_map";
-	private static final String FOLDER_URI_KEY = "folder_uri_key";
 	private static final int FOLDER_ACCESS_REQUEST = 1009;
 
 	private OsmandApplication app;
 	private DataStorageHelper storageHelper;
+	private DocumentFilesCollectTask collectTask;
 
-	private Uri folderUri;
 	private DocumentFile folderFile;
-	private final List<DocumentFile> documentFiles = new ArrayList<>();
+	private List<DocumentFile> documentFiles = new ArrayList<>();
+	private long filesSize;
 
+	private View mainView;
 	private View stepsContainer;
 	private View foldersContainer;
+	private View progressContainer;
 	private View buttonsContainer;
 
 	private boolean nightMode;
@@ -72,11 +75,6 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		super.onCreate(savedInstanceState);
 		app = requireMyApplication();
 		storageHelper = new DataStorageHelper(app);
-
-		if (savedInstanceState != null) {
-			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
-			updateSelectedFolderFiles(savedInstanceState.getParcelable(FOLDER_URI_KEY));
-		}
 		nightMode = isNightMode(usedOnMap);
 
 		FragmentActivity activity = requireMyActivity();
@@ -91,24 +89,30 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		LayoutInflater themedInflater = UiUtilities.getInflater(requireContext(), nightMode);
-		View view = themedInflater.inflate(R.layout.shared_storage_warning, container, false);
-		ViewCompat.setNestedScrollingEnabled(view.findViewById(R.id.list), true);
-		AndroidUtils.addStatusBarPadding21v(view.getContext(), view);
+		mainView = themedInflater.inflate(R.layout.shared_storage_warning, container, false);
 
-		stepsContainer = view.findViewById(R.id.steps_container);
-		foldersContainer = view.findViewById(R.id.migration_folders);
-		buttonsContainer = view.findViewById(R.id.control_buttons);
+		stepsContainer = mainView.findViewById(R.id.steps_container);
+		foldersContainer = mainView.findViewById(R.id.migration_folders);
+		progressContainer = mainView.findViewById(R.id.progress_container);
+		buttonsContainer = mainView.findViewById(R.id.control_buttons);
 
-		setupToolbar(view);
-		setupButtons();
-		setupMigrationSteps();
-		setupMigrationFolders();
+		setupToolbar();
+		updateContent();
+		AndroidUtils.addStatusBarPadding21v(mainView.getContext(), mainView);
+		ViewCompat.setNestedScrollingEnabled(mainView.findViewById(R.id.list), true);
 
-		return view;
+		return mainView;
 	}
 
-	private void setupToolbar(@NonNull View view) {
-		Toolbar toolbar = view.findViewById(R.id.toolbar);
+	private void updateContent() {
+		setupButtons();
+		setupProgress();
+		setupMigrationSteps();
+		setupMigrationFolders();
+	}
+
+	private void setupToolbar() {
+		Toolbar toolbar = mainView.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getIcon(AndroidUtils.getNavigationIconResId(app)));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(v -> showSkipMigrationDialog());
@@ -122,14 +126,10 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	}
 
 	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
-		outState.putParcelable(FOLDER_URI_KEY, folderUri);
-	}
-
-	@Override
 	public void onMigrationSkipConfirmed() {
+		if (collectingFiles()) {
+			stopCollectFilesTask();
+		}
 		dismiss();
 	}
 
@@ -154,7 +154,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 			TextView firstStep = stepsContainer.findViewById(R.id.shared_storage_first_step);
 			firstStep.setText(getString(R.string.shared_storage_first_step, getString(R.string.shared_string_continue)));
 		}
-		AndroidUiHelper.updateVisibility(stepsContainer, folderFile == null);
+		AndroidUiHelper.updateVisibility(stepsContainer, folderFile == null && !collectingFiles());
 	}
 
 	private void setupMigrationFolders() {
@@ -164,7 +164,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 			setupFoundFilesSize(foldersContainer);
 			setupFoundFilesDescr(foldersContainer);
 		}
-		AndroidUiHelper.updateVisibility(foldersContainer, folderFile != null);
+		AndroidUiHelper.updateVisibility(foldersContainer, folderFile != null && !collectingFiles());
 	}
 
 	private void setupFolderTo(@NonNull View view) {
@@ -181,11 +181,20 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), 0, storageName.length(), 0);
 		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getActiveColor(app, nightMode)), 0, storageName.length(), 0);
 		summary.setText(spannable);
+
+		View selectableItem = container.findViewById(R.id.selectable_list_item);
+		selectableItem.setOnClickListener(v -> {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				DataStoragePlaceDialogFragment.showInstance(activity.getSupportFragmentManager(), false);
+			}
+		});
+		AndroidUtils.setBackground(selectableItem, UiUtilities.getSelectableDrawable(app));
 	}
 
 	private void setupFoundFilesSize(@NonNull View view) {
 		String amount = String.valueOf(documentFiles.size());
-		String formattedSize = "(" + AndroidUtils.formatSize(app, StorageMigrationAsyncTask.getFilesSize(documentFiles)) + ")";
+		String formattedSize = "(" + AndroidUtils.formatSize(app, filesSize) + ")";
 		String warning = getString(R.string.storage_found_files_size, amount, formattedSize);
 
 		SpannableString spannable = new SpannableString(warning);
@@ -223,7 +232,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 			skipButton.setOnClickListener(v -> {
 				FragmentActivity activity = getActivity();
 				if (activity != null) {
-					StorageMigrationAsyncTask copyFilesTask = new StorageMigrationAsyncTask(activity, documentFiles, usedOnMap);
+					StorageMigrationAsyncTask copyFilesTask = new StorageMigrationAsyncTask(activity, documentFiles, filesSize, usedOnMap);
 					copyFilesTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					dismiss();
 				}
@@ -243,22 +252,48 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		AndroidUiHelper.updateVisibility(rightButton, !folderSelected);
 		AndroidUiHelper.updateVisibility(buttonsShadow, !folderSelected);
 		AndroidUiHelper.updateVisibility(buttonsDivider, !folderSelected);
+		AndroidUiHelper.updateVisibility(buttonsContainer, !collectingFiles());
+	}
+
+	private void setupProgress() {
+		boolean collectingFiles = collectingFiles();
+		AndroidUiHelper.updateVisibility(progressContainer, collectingFiles);
+		mainView.setBackgroundColor(collectingFiles ? ColorUtilities.getActivityBgColor(app, nightMode)
+				: ColorUtilities.getListBgColor(app, nightMode));
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		if (requestCode == FOLDER_ACCESS_REQUEST) {
-			if (resultCode == Activity.RESULT_OK && data != null) {
+			if (resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
 				updateSelectedFolderFiles(data.getData());
-				setupButtons();
-				setupMigrationSteps();
-				setupMigrationFolders();
 			} else {
 				app.showShortToastMessage(R.string.folder_access_denied);
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);
 		}
+	}
+
+	@Override
+	public void onDismissDialogFragment(DialogFragment dialogFragment) {
+		storageHelper = new DataStorageHelper(app);
+		updateContent();
+	}
+
+	@Override
+	public void onFileCopyStarted() {
+		updateContent();
+	}
+
+	@Override
+	public void onFileCopyFinished(DocumentFile folder, List<DocumentFile> files, long size) {
+		filesSize = size;
+		folderFile = folder;
+		documentFiles = files;
+		collectTask = null;
+
+		updateContent();
 	}
 
 	private void dismiss() {
@@ -271,31 +306,24 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		}
 	}
 
-	private void updateSelectedFolderFiles(Uri uri) {
-		if (uri != null) {
-			folderUri = uri;
-			folderFile = DocumentFile.fromTreeUri(app, folderUri);
-			if (folderFile != null) {
-				collectFiles(folderFile, documentFiles);
-			}
+	private boolean collectingFiles() {
+		return collectTask != null;
+	}
+
+	private void stopCollectFilesTask() {
+		if (collectTask != null && collectTask.getStatus() == AsyncTask.Status.RUNNING) {
+			collectTask.cancel(false);
 		}
 	}
 
-	private void collectFiles(DocumentFile documentFile, List<DocumentFile> documentFiles) {
-		if (documentFile.isDirectory()) {
-			DocumentFile[] files = documentFile.listFiles();
-			for (DocumentFile file : files) {
-				collectFiles(file, documentFiles);
-			}
-		} else {
-			documentFiles.add(documentFile);
-		}
+	private void updateSelectedFolderFiles(@NonNull Uri uri) {
+		stopCollectFilesTask();
+		collectTask = new DocumentFilesCollectTask(app, uri, this);
+		collectTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		return VERSION.SDK_INT >= 30 && settings.getDefaultInternalStorage().exists()
-				&& !settings.SHARED_STORAGE_MIGRATION_DIALOG_SHOWN.get();
+		return true;
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, boolean usedOnMap) {
@@ -306,6 +334,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 
 			SharedStorageWarningFragment fragment = new SharedStorageWarningFragment();
 			fragment.usedOnMap = usedOnMap;
+			fragment.setRetainInstance(true);
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, TAG)
 					.commitAllowingStateLoss();
