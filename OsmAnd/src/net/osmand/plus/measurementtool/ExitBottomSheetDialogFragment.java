@@ -18,6 +18,7 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 	public static final int REQUEST_CODE = 1001;
 	public static final int SAVE_RESULT_CODE = 2;
 	public static final int EXIT_RESULT_CODE = 3;
+	public static final String DESCRIPTION = "description";
 
 	public static final String TAG = ExitBottomSheetDialogFragment.class.getSimpleName();
 
@@ -26,7 +27,7 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 
 		if (getArguments() != null) {
 			items.add(new ShortDescriptionItem.Builder()
-					.setDescription(getArguments().getString("description"))
+					.setDescription(getArguments().getString(DESCRIPTION))
 					.setTitle(getString(R.string.exit_without_saving))
 					.setLayoutId(R.layout.bottom_sheet_item_list_title_with_descr)
 					.create());
@@ -82,7 +83,7 @@ public class ExitBottomSheetDialogFragment extends MenuBottomSheetDialogFragment
 		if (!fragmentManager.isStateSaved()) {
 			ExitBottomSheetDialogFragment fragment = new ExitBottomSheetDialogFragment();
 			Bundle bundle = new Bundle();
-			bundle.putString("description", description);
+			bundle.putString(DESCRIPTION, description);
 			fragment.setArguments(bundle);
 			fragment.setTargetFragment(targetFragment, REQUEST_CODE);
 			fragment.show(fragmentManager, TAG);
