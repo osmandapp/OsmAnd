@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -34,6 +35,7 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.download.ui.DataStoragePlaceDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.datastorage.DocumentFilesCollectTask.FilesCollectListener;
 import net.osmand.plus.settings.datastorage.SkipMigrationBottomSheet.OnConfirmMigrationSkipListener;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
@@ -323,7 +325,9 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 	}
 
 	public static boolean dialogShowRequired(@NonNull OsmandApplication app) {
-		return true;
+		OsmandSettings settings = app.getSettings();
+		return Build.VERSION.SDK_INT >= 30 && settings.getDefaultInternalStorage().exists()
+				&& !settings.SHARED_STORAGE_MIGRATION_DIALOG_SHOWN.get();
 	}
 
 	public static void showInstance(@NonNull FragmentActivity activity, boolean usedOnMap) {
