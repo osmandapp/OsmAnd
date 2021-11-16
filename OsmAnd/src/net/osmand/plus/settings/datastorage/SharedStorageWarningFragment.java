@@ -190,7 +190,7 @@ public class SharedStorageWarningFragment extends BaseOsmAndFragment implements 
 		selectableItem.setOnClickListener(v -> {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
-				DataStoragePlaceDialogFragment.showInstance(activity.getSupportFragmentManager(), false);
+				DataStoragePlaceDialogFragment.showInstance(activity.getSupportFragmentManager(), this, false);
 			}
 		});
 		AndroidUtils.setBackground(selectableItem, UiUtilities.getSelectableDrawable(app));

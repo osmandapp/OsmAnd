@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import net.osmand.AndroidUtils;
@@ -106,6 +107,10 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		if (activity instanceof OnDismissDialogFragmentListener) {
 			((OnDismissDialogFragmentListener) activity).onDismissDialogFragment(this);
 		}
+		Fragment target = getTargetFragment();
+		if (target instanceof OnDismissDialogFragmentListener) {
+			((OnDismissDialogFragmentListener) target).onDismissDialogFragment(this);
+		}
 	}
 
 	private void setupStorageItems(@NonNull View view, @NonNull LayoutInflater inflater) {
@@ -185,12 +190,13 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		new ReloadData(getActivity(), app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
-	public static void showInstance(FragmentManager fragmentManager, boolean storageReadOnly) {
+	public static void showInstance(@NonNull FragmentManager fragmentManager, @Nullable Fragment target, boolean storageReadOnly) {
 		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			DataStoragePlaceDialogFragment fragment = new DataStoragePlaceDialogFragment();
 			Bundle args = new Bundle();
 			args.putBoolean(STORAGE_READONLY_KEY, storageReadOnly);
 			fragment.setArguments(args);
+			fragment.setTargetFragment(target, 0);
 			fragmentManager.beginTransaction()
 					.add(fragment, TAG)
 					.commitAllowingStateLoss();
