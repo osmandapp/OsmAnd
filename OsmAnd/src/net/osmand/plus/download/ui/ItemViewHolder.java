@@ -22,7 +22,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
+import net.osmand.access.AccessibilityAssistant;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.plus.OsmandApplication;
@@ -167,11 +169,13 @@ public class ItemViewHolder {
 		}
 		String text = (!Algorithms.isEmpty(cityName) && !cityName.equals(name) ? cityName + "\n" : "") + name;
 		nameTextView.setText(text);
-		rightImageButton.setAccessibilityDelegate(new View.AccessibilityDelegate() {
-			public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+		ViewCompat.setAccessibilityDelegate(rightImageButton, new AccessibilityAssistant(context){
+
+			@Override
+			public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
 				super.onInitializeAccessibilityNodeInfo(host, info);
-				info.setContentDescription(context.getString(R.string.shared_string_download) + text);
-				info.addAction(new AccessibilityNodeInfo.AccessibilityAction(
+				info.setContentDescription(context.getString(R.string.shared_string_download) + nameTextView.getText());
+				info.addAction(new AccessibilityNodeInfoCompat.AccessibilityActionCompat(
 						AccessibilityNodeInfo.ACTION_CLICK, context.getString(R.string.shared_string_download)
 				));
 				info.setEnabled(host.isEnabled());
