@@ -91,7 +91,6 @@ public class SearchHistorySettingsFragment extends HistoryItemsFragment {
 			settings.SEARCH_HISTORY.set(checked);
 			updateToolbarSwitch(toolbarContainer);
 			updateDisabledItems();
-
 			Fragment target = getTargetFragment();
 			if (target instanceof OnPreferenceChanged) {
 				((OnPreferenceChanged) target).onPreferenceChanged(settings.SEARCH_HISTORY.getId());
