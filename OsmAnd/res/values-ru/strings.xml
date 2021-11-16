@@ -4450,4 +4450,12 @@
     <string name="reading_files">Чтение файлов…</string>
     <string name="shared_string_hide_all">Скрыть все</string>
     <string name="add_to_group">Добавить в группу</string>
+    <string name="fold_unfold">свернуть/развернуть</string>
+    <string name="memory_allocated_for_routing_ds">Более высокий объем памяти ускоряет расчет длинных маршрутов (более 500 км), но может повлиять на производительность других приложений. Не влияет на скорость расчета коротких маршрутов.</string>
+    <string name="memory_allocated_for_routing">Выделение памяти для маршрутизации</string>
+    <string name="no_items_selected_warning">Выберите хотя бы один элемент</string>
+    <string name="display_groups_visibility_dialog_description">Вы можете управлять видимостью групп на карте. Если трек скрыт, все группы также будут скрыты.</string>
+    <string name="map_marker_options">Параметры маркеров карты</string>
+    <string name="app_profile_type">Тип профиля приложения</string>
+    <string name="migration_files_present">%1$d файлов (%2$s) присутствуют в выбранном местоположении «%3$s».</string>
 </resources>
