@@ -11,6 +11,9 @@
 	Thx - Hardy
 -->
 
+    <string name="shared_string_memory">Memory</string>
+    <string name="memory_allocated_for_routing_ds">Higher memory value speeds up the calculation of long routes (more than 500 km), but may affect the performance of other applications.\nDoes not affect calculation speed of short routes.</string>
+    <string name="memory_allocated_for_routing">Memory allocated for Routing</string>
     <string name="reading_files">Reading files…</string>
     <string name="no_items_selected_warning">Please select at least one item</string>
     <string name="show_parameter_seekbar">Show parameter seekbar</string>
