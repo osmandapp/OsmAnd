@@ -819,7 +819,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (app.isExternalStorageDirectoryReadOnly()
 						&& fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
 					if (DownloadActivity.hasPermissionToWriteExternalStorage(this)) {
-						DataStoragePlaceDialogFragment.showInstance(fragmentManager, true);
+						DataStoragePlaceDialogFragment.showInstance(fragmentManager, null, true);
 					} else {
 						ActivityCompat.requestPermissions(this,
 								new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -830,7 +830,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (permissionGranted) {
 					restartApp();
 				} else if (fragmentManager.findFragmentByTag(DataStoragePlaceDialogFragment.TAG) == null) {
-					DataStoragePlaceDialogFragment.showInstance(fragmentManager, true);
+					DataStoragePlaceDialogFragment.showInstance(fragmentManager, null, true);
 				}
 				permissionAsked = false;
 				permissionGranted = false;
