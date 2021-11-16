@@ -106,7 +106,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
 		android:title="@string/memory_allocated_for_routing"
-		android:summary="256 mb"/>
+		tools:summary="256 MB"/>
 
 	<Preference
 		android:key="global_app_allocated_memory"

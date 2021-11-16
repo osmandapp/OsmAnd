@@ -25,7 +25,6 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	private static final String SIMULATE_INITIAL_STARTUP = "simulate_initial_startup";
 	private static final String SIMULATE_YOUR_LOCATION = "simulate_your_location";
 	private static final String AGPS_DATA_DOWNLOADED = "agps_data_downloaded";
-	private static final String MEMORY_ALLOCATED_FOR_ROUTING = "memory_allocated_for_routing";
 
 	private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 
@@ -146,7 +145,7 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupMemoryAllocatedForRoutingPref() {
-		Preference preference = findPreference(MEMORY_ALLOCATED_FOR_ROUTING);
+		Preference preference = findPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId());
 		int value = settings.MEMORY_ALLOCATED_FOR_ROUTING.get();
 		String description = getString(
 				R.string.ltr_or_rtl_combine_via_slash,
@@ -228,10 +227,10 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 				preference.setSummary(getAgpsDataDownloadedSummary());
 			}
 			return true;
-		} else if (MEMORY_ALLOCATED_FOR_ROUTING.equals(prefId)) {
+		} else if (settings.MEMORY_ALLOCATED_FOR_ROUTING.getId().equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				AllocatedRoutingMemoryBottomSheet.showInstance(getFragmentManager(), preference.getKey(), this, getSelectedAppMode());
+				AllocatedRoutingMemoryBottomSheet.showInstance(fragmentManager, preference.getKey(), this, getSelectedAppMode());
 			}
 		}
 		return super.onPreferenceClick(preference);
@@ -239,8 +238,8 @@ public class DevelopmentSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public void onApplyPreferenceChange(String prefId, boolean applyToAllProfiles, Object newValue) {
-		if (prefId.equals(MEMORY_ALLOCATED_FOR_ROUTING)) {
-			applyPreference(MEMORY_ALLOCATED_FOR_ROUTING, applyToAllProfiles, newValue);
+		if (prefId.equals(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId())) {
+			applyPreference(settings.MEMORY_ALLOCATED_FOR_ROUTING.getId(), applyToAllProfiles, newValue);
 			setupMemoryAllocatedForRoutingPref();
 		} else {
 			super.onApplyPreferenceChange(prefId, applyToAllProfiles, newValue);

@@ -139,10 +139,7 @@ public class CurrentPositionHelper {
 			for (BinaryMapReaderResource rep : checkReaders) {
 				rs[i++] = rep.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
 			}
-			RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(
-					10,
-					app.getSettings().MEMORY_ALLOCATED_FOR_ROUTING.get()
-			);
+			RoutingMemoryLimits memoryLimits = new RoutingMemoryLimits(10, 10);
 			RoutingConfiguration cfg = app.getRoutingConfigForMode(am).build(p, memoryLimits,
 					new HashMap<String, String>());
 			cfg.routeCalculationTime = System.currentTimeMillis();

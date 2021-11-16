@@ -27,7 +27,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.backend.ApplicationMode;
 import net.osmand.plus.settings.backend.CommonPreference;
-import net.osmand.plus.settings.backend.OsmandSettings;
 import net.osmand.plus.settings.bottomsheets.BasePreferenceBottomSheet;
 import net.osmand.plus.settings.fragments.BaseSettingsFragment;
 
@@ -41,7 +40,6 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	public static final String TAG = AllocatedRoutingMemoryBottomSheet.class.getSimpleName();
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
 
 	private Integer[] range;
 	private int minValue;
@@ -58,8 +56,7 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		app = requiredMyApplication();
-		settings = app.getSettings();
-		preference = settings.MEMORY_ALLOCATED_FOR_ROUTING;
+		preference = app.getSettings().MEMORY_ALLOCATED_FOR_ROUTING;
 		initData();
 	}
 
@@ -206,23 +203,19 @@ public class AllocatedRoutingMemoryBottomSheet extends BasePreferenceBottomSheet
 		return initialValue != currentValue;
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager,
-	                                   @NonNull String key,
-	                                   @NonNull Fragment target,
-	                                   @Nullable ApplicationMode appMode) {
-		try {
+	public static void showInstance(@NonNull FragmentManager fragmentManager,
+	                                @NonNull String key,
+	                                @NonNull Fragment target,
+	                                @Nullable ApplicationMode appMode) {
+		if (AndroidUtils.isFragmentCanBeAdded(fragmentManager, TAG)) {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
-
 			AllocatedRoutingMemoryBottomSheet fragment = new AllocatedRoutingMemoryBottomSheet();
 			fragment.setArguments(args);
 			fragment.setUsedOnMap(false);
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
 		}
 	}
 
