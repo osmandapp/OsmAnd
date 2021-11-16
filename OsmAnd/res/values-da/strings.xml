@@ -4447,4 +4447,18 @@
     <string name="rendering_attr_natureReserves_description">Vis naturreservater, beskyttede områder og nationalparker.</string>
     <string name="not_enough_contributions_descr">Der kræves mindst %1$s ændringer i løbet af de sidste to måneder %2$s for at få adgang til ubegrænsede kortopdateringer hver time.</string>
     <string name="show_parameter_seekbar">Vis parameter-søgefelt</string>
+    <string name="app_profile_type">App-profiltype</string>
+    <string name="map_marker_options">Indstillinger for kortmarkør</string>
+    <string name="add_to_group">Tilføj til gruppe</string>
+    <string name="shared_string_memory">Hukommelse</string>
+    <string name="memory_allocated_for_routing">Hukommelse tildelt ruteberegning</string>
+    <string name="reading_files">Læser filer…</string>
+    <string name="no_items_selected_warning">Vælg venligst mindst ét element</string>
+    <string name="display_groups_visibility_dialog_description">Du kan regulere gruppers synlighed på kortet. Hvis spor er skjult, vil alle grupper også være skjult.</string>
+    <string name="shared_string_hide_all">Skjul alle</string>
+    <string name="app_modes_options">Vælg App-tilstande</string>
+    <string name="memory_allocated_for_routing_ds">En højere hukommelsesværdi fremskynder beregningen af lange ruter (mere end 500 km), men kan påvirke andre applikationers ydeevne.
+\nHar ingen indflydelse på beregningshastigheden for korte ruter.</string>
+    <string name="fold_unfold">fold/fold ud</string>
+    <string name="migration_files_present">Der findes %1$d-filer (%2$s) på den valgte placering \'%3$s\'.</string>
 </resources>
