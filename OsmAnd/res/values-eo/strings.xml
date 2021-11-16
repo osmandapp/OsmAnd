@@ -35,7 +35,7 @@
     <string name="local_indexes_cat_wiki">Vikipedio</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
-    <string name="show_transparency_seekbar">Montri travideblan serĉbreton</string>
+    <string name="show_transparency_seekbar">Montri ŝovilon de travideblo</string>
     <string name="download_files_error_not_enough_space">Mankas spaco!
 \nPostulas {3} MB provizore kaj {1} MB daŭre.
 \n(Nur {2} MB disponeblaj.)</string>

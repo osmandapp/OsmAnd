@@ -4405,9 +4405,9 @@
 \n</string>
     <string name="from_to_with_params">De %1$s vers %2$s</string>
     <string name="progress_complete">%1$s terminé</string>
-    <string name="storage_copied_files_size">%1$s fichiers copiés sur %2$s</string>
-    <string name="storage_copying_files_size">Copie de %1$s fichiers sur %2$s</string>
-    <string name="storage_found_files_size">%1$s fichiers trouvés sur %2$s</string>
+    <string name="storage_copied_files_size">%1$s fichiers copiés pour %2$s</string>
+    <string name="storage_copying_files_size">Copie de %1$s fichiers pour %2$s</string>
+    <string name="storage_found_files_size">%1$s fichiers trouvés pour %2$s</string>
     <string name="storage_found_files_descr">Appuyez sur « %1$s » pour copier %2$s fichiers de « %3$s » vers « %4$s ». Cette opération peut prendre un peu de temps.</string>
     <string name="shared_string_skip_warning">Souhaitez-vous vraiment ignorer la migration \? OsmAnd ne peut plus accéder à vos fichiers dans le stockage partagé.
 \n
