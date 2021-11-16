@@ -52,8 +52,10 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 	private ProgressBar progressBar;
 
 	private int filesCount;
-	private int generalProgress;
 	private long filesSize;
+	private long remainingSize;
+	private int remainingCount;
+	private int generalProgress;
 	private boolean copyFinished;
 
 	private boolean nightMode;
@@ -171,6 +173,20 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 	private void setupRemainingFiles() {
 		remainingFiles = mainView.findViewById(R.id.remaining_files);
+
+		String amount = String.valueOf(remainingCount);
+		String formattedSize = "(" + AndroidUtils.formatSize(app, remainingSize) + ")";
+		String warning = getString(R.string.files_remaining, amount, formattedSize);
+
+		SpannableString spannable = new SpannableString(warning);
+		int index = warning.indexOf(amount);
+		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + amount.length(), 0);
+		index = warning.indexOf(formattedSize);
+		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
+
+		TextView title = remainingFiles.findViewById(android.R.id.title);
+		title.setText(spannable);
+
 		AndroidUiHelper.updateVisibility(remainingFiles, !copyFinished);
 		AndroidUiHelper.updateVisibility(remainingFiles.findViewById(android.R.id.icon), false);
 	}
@@ -199,18 +215,9 @@ public class StorageMigrationFragment extends BaseOsmAndDialogFragment implement
 
 	@Override
 	public void onRemainingFilesUpdate(@NonNull Pair<Integer, Long> pair) {
-		String amount = String.valueOf(pair.first);
-		String formattedSize = "(" + AndroidUtils.formatSize(app, pair.second) + ")";
-		String warning = getString(R.string.files_remaining, amount, formattedSize);
-
-		SpannableString spannable = new SpannableString(warning);
-		int index = warning.indexOf(amount);
-		spannable.setSpan(new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), index, index + amount.length(), 0);
-		index = warning.indexOf(formattedSize);
-		spannable.setSpan(new ForegroundColorSpan(ColorUtilities.getSecondaryTextColor(app, nightMode)), index, index + formattedSize.length(), 0);
-
-		TextView title = remainingFiles.findViewById(android.R.id.title);
-		title.setText(spannable);
+		remainingSize = pair.second;
+		remainingCount = pair.first;
+		setupRemainingFiles();
 	}
 
 	@Override
